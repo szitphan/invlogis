@@ -1,0 +1,76 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Users/szit/Desktop/szit/AI/Projects/dispatch-management/.codex/hooks/block-push.sh'"
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/scripts/token-track/token-skill-hook.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Users/szit/Desktop/szit/AI/Projects/dispatch-management/.codex/hooks/auto-changelog.sh'"
+          },
+          {
+            "type": "command",
+            "command": "'/Users/szit/Desktop/szit/AI/Projects/dispatch-management/.codex/hooks/status-transition.sh'"
+          },
+          {
+            "type": "command",
+            "command": "'/Users/szit/Desktop/szit/AI/Projects/dispatch-management/.codex/hooks/post-edit-stale.sh'"
+          },
+          {
+            "type": "command",
+            "command": "'/Users/szit/Desktop/szit/AI/Projects/dispatch-management/.codex/hooks/kg-refresh.sh'"
+          }
+        ]
+      },
+      {
+        "matcher": "Skill",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/scripts/token-track/token-skill-hook.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Users/szit/Desktop/szit/AI/Projects/dispatch-management/.codex/hooks/session-init.sh'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/scripts/token-track/token-turn-summary.py"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -13,3 +13,9 @@
 # Env / secrets
 .env
 .env.*
+
+# Generated / runtime
+__pycache__/
+*.pyc
+docs/_shared/kg/.dirty
+.claude/token-tracking/
