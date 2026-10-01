@@ -1,0 +1,34 @@
+# Roster cho /delegate — khai báo công cụ AI ngoài trên máy này.
+# Dò lại khi cài/gỡ CLI: bảo Claude "check & update roster".
+# Kiểm tra lần cuối: 2026-10-02 (gọi thử thật từng lệnh).
+
+quota_source:
+  state_json: ""            # không có nguồn đo quota -> bỏ qua bước check quota
+
+routing:
+  reserve_percent: 10
+  unknown_quota: allow      # chưa đo được quota -> vẫn coi là dùng được
+
+launchers:
+  - name: codex
+    provider: codex
+    quota_window: weekly
+    enabled: true           # codex-cli 0.159.3, login ChatGPT — gọi thử OK, -m gpt-5.6-terra OK
+    models: [gpt-5.6-terra, gpt-5.6-sol, gpt-5.6-luna]
+
+  - name: gemini
+    provider: gemini
+    quota_window: daily
+    enabled: false          # 0.62.0 — login oauth-personal bị từ chối (IneligibleTierError). Thử đăng nhập bằng GEMINI_API_KEY rồi bật lại
+    role: review-only
+    # gọi headless cần thêm --skip-trust (hoặc env GEMINI_CLI_TRUST_WORKSPACE=true)
+
+  - name: claude
+    provider: claude
+    quota_window: fiveHour
+    enabled: false          # chính là phiên Claude Code đang chạy -> không tự gọi lại
+
+  - name: claude-2
+    provider: claude
+    quota_window: fiveHour
+    enabled: false          # đổi thành true sau khi tạo wrapper ~/.local/bin/claude-2 + /login tài khoản thứ hai
