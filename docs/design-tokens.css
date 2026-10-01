@@ -1,0 +1,352 @@
+/* ==========================================================================
+ Astryx — design tokens (CSS)
+ Sinh từ docs/design.md · nguồn: Figma "Astryx Library (Community)" (FifpyOMpZk9OP8qyNzbRVJ)
+ Trích: 2026-09-27. KHÔNG sửa lệch design.md — đổi token thì sửa cả hai cùng lượt.
+ Light = mặc định (:root). Dark = [data-theme="dark"].
+ ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  /* ---- Color · Neutral Light ---- */
+  --color-accent: #262626;
+  --color-accent-muted: #f1f1f1;
+  --color-on-accent: #ffffff;
+  --color-neutral: #0000000f;
+  --color-background-surface: #ffffff;
+  --color-background-body: #f1f1f1;
+  --color-overlay: #00000080;
+  --color-overlay-hover: #0000000d;
+  --color-overlay-pressed: #0000001a;
+  --color-background-muted: #f1f1f1;
+  --color-text-primary: #171717;
+  --color-text-secondary: #737373;
+  --color-text-disabled: #a3a3a3;
+  --color-text-accent: #262626;
+  --color-text-on-dark: #ffffff;
+  --color-text-on-light: #171717;
+  --color-icon-accent: #262626;
+  --color-icon-primary: #171717;
+  --color-icon-secondary: #737373;
+  --color-icon-disabled: #a3a3a3;
+  --color-surface-card: #ffffff;
+  --color-surface-popover: #ffffff;
+  --color-success: #007004;
+  --color-success-muted: #c5e5c0;
+  --color-on-success: #ffffff;
+  --color-error: #a50c25;
+  --color-error-muted: #facecb;
+  --color-on-error: #ffffff;
+  --color-warning: #745b00;
+  --color-warning-muted: #f8da9d;
+  --color-on-warning: #171717;
+  --color-border-default: #00000014;
+  --color-border-emphasized: #d4d4d4;
+  --color-skeleton: #ebebeb;
+  --color-blue-bg: #c4ddfb;
+  --color-blue-border: #b1c9e7;
+  --color-blue-icon: #00458c;
+  --color-blue-text: #00458c;
+  --color-cyan-bg: #a3e0ef;
+  --color-cyan-border: #91d3e3;
+  --color-cyan-icon: #00505f;
+  --color-cyan-text: #00505f;
+  --color-gray-bg: #e5e5e5;
+  --color-gray-border: #d4d4d4;
+  --color-gray-icon: #525252;
+  --color-gray-text: #262626;
+  --color-green-bg: #c5e5c0;
+  --color-green-border: #b2d1ac;
+  --color-green-icon: #0c5700;
+  --color-green-text: #0c5700;
+  --color-orange-bg: #fad0b5;
+  --color-orange-border: #e6bda2;
+  --color-orange-icon: #6e3500;
+  --color-orange-text: #6e3500;
+  --color-pink-bg: #fccadc;
+  --color-pink-border: #e7b7c8;
+  --color-pink-icon: #83004b;
+  --color-pink-text: #83004b;
+  --color-purple-bg: #eccef3;
+  --color-purple-border: #d8bbdf;
+  --color-purple-icon: #700084;
+  --color-purple-text: #700084;
+  --color-red-bg: #facecb;
+  --color-red-border: #e6bab8;
+  --color-red-icon: #89001a;
+  --color-red-text: #89001a;
+  --color-teal-bg: #a5e3d6;
+  --color-teal-border: #94d6c8;
+  --color-teal-icon: #005348;
+  --color-teal-text: #005348;
+  --color-yellow-bg: #f8da9d;
+  --color-yellow-border: #e4c279;
+  --color-yellow-icon: #584400;
+  --color-yellow-text: #584400;
+  --color-syntax-keyword: #700084;
+  --color-syntax-string: #005600;
+  --color-syntax-comment: #737373;
+  --color-syntax-number: #6e3500;
+  --color-syntax-function: #00458c;
+  --color-syntax-type: #700084;
+  --color-syntax-variable: #171717;
+  --color-syntax-operator: #737373;
+  --color-syntax-constant: #6e3500;
+  --color-syntax-tag: #89001a;
+  --color-syntax-attribute: #584400;
+  --color-syntax-property: #005348;
+  --color-syntax-punctuation: #a3a3a3;
+  --color-badge-info-bg: #0074e2;
+  --color-badge-success-bg: #198100;
+  --color-badge-warning-bg: #ffce2f;
+  --color-badge-error-bg: #e33f4a;
+  --color-badge-on-vivid: #ffffff;
+  --color-elevation-shadow: #0000001a;
+  --color-elevation-shadow-strong: #0000001a;
+  --color-shadow: #0000001a;      /* bóng cột dính của Table */
+  --color-tint-hover: #000000;    /* chỉ dùng trong color-mix */
+  --color-progress-accent: #0074e2;
+  --color-progress-success: #198100;
+  --color-progress-warning: #ffce2f;
+  --color-progress-error: #e33f4a;
+  --color-input-ring-focus: #f1f1f1;
+  --color-input-ring-hover: #d4d4d44d;
+  --color-input-ring-success: #1981004d;
+  --color-input-ring-warning: #ffce2f4d;
+  --color-input-ring-error: #e33f4a4d;
+  --color-background-inverted: #0a1317;
+  --color-error-inverted: #aa071e;
+  --color-track: #ccd3db;
+
+  /* ---- Typography ---- */
+  --font-body: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: "Cal Sans", var(--font-body);  /* Cal Sans chỉ có Regular */
+  --font-code: "JetBrains Mono", ui-monospace, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-size-4xs: 6px;
+  --font-size-3xs: 7px;
+  --font-size-2xs: 8px;
+  --font-size-xs: 10px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-lg: 17px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 29px;
+  --font-size-4xl: 35px;
+  --font-size-5xl: 42px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-heading-1: 32px;
+  --line-height-heading-2: 28px;
+  --line-height-heading-3: 24px;
+  --line-height-heading-4: 20px;
+  --line-height-heading-5: 20px;
+  --line-height-heading-6: 16px;
+  --line-height-body: 20px;
+  --line-height-large: 24px;
+  --line-height-label: 20px;
+  --line-height-code: 20px;
+  --line-height-supporting: 20px;
+  --line-height-display-1: 52px;
+  --line-height-display-2: 44px;
+  --line-height-display-3: 36px;
+
+  /* ---- Spacing (base 4px) ---- */
+  --spacing-0: 0px;
+  --spacing-half: 2px;
+  --spacing-1: 4px;
+  --spacing-1-half: 6px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-11: 44px;
+  --spacing-12: 48px;
+
+  /* ---- Size ---- */
+  --size-element-small: 28px;
+  --size-element-medium: 32px;
+  --size-element-large: 36px;
+  --border-width: 1px;
+
+  /* ---- Radius ---- */
+  --radius-none: 0px;
+  --radius-inner: 6px;
+  --radius-element: 10px;
+  --radius-container: 12px;
+  --radius-page: 28px;
+  --radius-full: 9999px;
+
+  /* ---- Elevation ---- */
+  /* Theo code Neutral (neutralTheme.ts); Dark ghi đè ở [data-theme="dark"] */
+  --elevation-low: 0 2px 4px #0000000d, 0 4px 8px #0000001a;
+  --elevation-medium: 0 2px 4px #0000000d, 0 4px 12px #0000001a;
+  --elevation-high: 0 4px 6px #0000001a, 0 12px 24px #00000026;
+  --ring-focus: inset 0 0 0 3px var(--color-input-ring-focus);
+  --ring-hover: inset 0 0 0 3px var(--color-input-ring-hover);
+  --ring-success: inset 0 0 0 3px var(--color-input-ring-success);
+  --ring-warning: inset 0 0 0 3px var(--color-input-ring-warning);
+  --ring-error: inset 0 0 0 3px var(--color-input-ring-error);
+
+  /* ---- Motion (theme Neutral) ---- */
+  --duration-fast-min: 95ms;
+  --duration-fast: 125ms;
+  --duration-fast-max: 165ms;
+  --duration-medium-min: 225ms;
+  --duration-medium: 300ms;
+  --duration-medium-max: 400ms;
+  --duration-slow-min: 525ms;
+  --duration-slow: 700ms;
+  --duration-slow-max: 935ms;
+  --ease-standard: cubic-bezier(0.24, 1, 0.4, 1);
+
+  /* ---- Component (không có biến Figma riêng) ---- */
+  --toast-bg: #1c2024;  /* mã cứng trong Figma */
+  --disabled-opacity: 0.5;
+}
+
+[data-theme="dark"] {
+  /* ---- Color · Neutral Dark ---- */
+  --color-accent: #ebebeb;
+  --color-accent-muted: #262626;
+  --color-on-accent: #171717;
+  --color-neutral: #ffffff1a;
+  --color-background-surface: #262626;
+  --color-background-body: #1b1b1b;
+  --color-overlay: #000000cc;
+  --color-overlay-hover: #ffffff0d;
+  --color-overlay-pressed: #ffffff1a;
+  --color-background-muted: #1b1b1b;
+  --color-text-primary: #fafafa;
+  --color-text-secondary: #a3a3a3;
+  --color-text-disabled: #525252;
+  --color-text-accent: #ebebeb;
+  --color-text-on-dark: #ffffff;
+  --color-text-on-light: #171717;
+  --color-icon-accent: #ebebeb;
+  --color-icon-primary: #fafafa;
+  --color-icon-secondary: #a3a3a3;
+  --color-icon-disabled: #525252;
+  --color-surface-card: #1b1b1b;
+  --color-surface-popover: #1b1b1b;
+  --color-success: #9fe59b;
+  --color-success-muted: #84c9803d;
+  --color-on-success: #171717;
+  --color-error: #ffc6c1;
+  --color-error-muted: #ff9e973d;
+  --color-on-error: #171717;
+  --color-warning: #fdcf4f;
+  --color-warning-muted: #deb4333d;
+  --color-on-warning: #171717;
+  --color-border-default: #ffffff1a;
+  --color-border-emphasized: #525252;
+  --color-skeleton: #525252;
+  --color-blue-bg: #9eb7ff;
+  --color-blue-border: #6d9cfe;
+  --color-blue-icon: #9eb7ff;
+  --color-blue-text: #c7d3ff;
+  --color-cyan-bg: #83c2d4;
+  --color-cyan-border: #67a7b8;
+  --color-cyan-icon: #83c2d4;
+  --color-cyan-text: #9edef0;
+  --color-gray-bg: #ffffff;
+  --color-gray-border: #262626;
+  --color-gray-icon: #a3a3a3;
+  --color-gray-text: #e5e5e5;
+  --color-green-bg: #84c980;
+  --color-green-border: #69ad67;
+  --color-green-icon: #84c980;
+  --color-green-text: #9fe59b;
+  --color-orange-bg: #ffa258;
+  --color-orange-border: #e2883e;
+  --color-orange-icon: #ffa258;
+  --color-orange-text: #ffc9a2;
+  --color-pink-bg: #ff99c3;
+  --color-pink-border: #f273aa;
+  --color-pink-icon: #ff99c3;
+  --color-pink-text: #ffc3da;
+  --color-purple-bg: #f297ff;
+  --color-purple-border: #dd74f0;
+  --color-purple-icon: #f297ff;
+  --color-purple-text: #fac1ff;
+  --color-red-bg: #ff9e97;
+  --color-red-border: #ff6f6c;
+  --color-red-icon: #ff9e97;
+  --color-red-text: #ffc6c1;
+  --color-teal-bg: #7ec6b8;
+  --color-teal-border: #63ab9d;
+  --color-teal-icon: #7ec6b8;
+  --color-teal-text: #99e2d3;
+  --color-yellow-bg: #deb433;
+  --color-yellow-border: #c0990e;
+  --color-yellow-icon: #deb433;
+  --color-yellow-text: #fdcf4f;
+  --color-syntax-keyword: #efa8ff;
+  --color-syntax-string: #a6d2a2;
+  --color-syntax-comment: #a3a3a3;
+  --color-syntax-number: #ffb37f;
+  --color-syntax-function: #a0caff;
+  --color-syntax-type: #efa8ff;
+  --color-syntax-variable: #e5e5e5;
+  --color-syntax-operator: #a3a3a3;
+  --color-syntax-constant: #ffb37f;
+  --color-syntax-tag: #ffaeaa;
+  --color-syntax-attribute: #eec12f;
+  --color-syntax-property: #83dac9;
+  --color-syntax-punctuation: #525252;
+  --color-badge-info-bg: #6d9cfe;
+  --color-badge-success-bg: #64af4c;
+  --color-badge-warning-bg: #ffce2f;
+  --color-badge-error-bg: #ff705d;
+  --color-badge-on-vivid: #171717;
+  --color-elevation-shadow: #0000001a; /* biến Figma; --elevation-* không dùng */
+  --color-elevation-shadow-strong: #0000001a; /* biến Figma; --elevation-* không dùng */
+  --color-shadow: #0000004d;
+  --color-tint-hover: #ffffff;
+  --color-progress-accent: #0074e2;
+  --color-progress-success: #198100;
+  --color-progress-warning: #ffce2f;
+  --color-progress-error: #e33f4a;
+  --color-input-ring-focus: #262626;
+  --color-input-ring-hover: #5252524d; /* alpha giả định = Light, chưa xác minh */
+  --color-input-ring-success: #1981004d; /* alpha giả định = Light, chưa xác minh */
+  --color-input-ring-warning: #ffce2f4d; /* alpha giả định = Light, chưa xác minh */
+  --color-input-ring-error: #e33f4a4d; /* alpha giả định = Light, chưa xác minh */
+  --color-background-inverted: #ffffff;
+  --color-error-inverted: #e3193b;
+  --color-track: #5a5e66;
+  --elevation-low: 0 2px 4px #00000040, 0 4px 8px #00000066, inset 0 0 0 1px #ffffff14;
+  --elevation-medium: 0 2px 4px #00000059, 0 4px 12px #00000080, inset 0 0 0 1px #ffffff1f;
+  --elevation-high: 0 4px 6px #00000080, 0 12px 24px #000000b3, inset 0 0 0 1px #ffffff26;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast-min: 0s; --duration-fast: 0s; --duration-fast-max: 0s;
+    --duration-medium-min: 0s; --duration-medium: 0s; --duration-medium-max: 0s;
+    --duration-slow-min: 0s; --duration-slow: 0s; --duration-slow-max: 0s;
+  }
+}
+
+/* ---- Text styles (khớp Figma text styles) ---- */
+.text-display-1 { font-family: var(--font-heading); font-size: 42px; font-weight: 400; line-height: 52px; letter-spacing: 0; }
+.text-display-2 { font-family: var(--font-heading); font-size: 35px; font-weight: 400; line-height: 44px; letter-spacing: 0; }
+.text-display-3 { font-family: var(--font-heading); font-size: 29px; font-weight: 400; line-height: 36px; letter-spacing: 0; }
+.text-heading-1 { font-family: var(--font-heading); font-size: 24px; font-weight: 400; line-height: 32px; letter-spacing: 0; }
+.text-heading-2 { font-family: var(--font-heading); font-size: 20px; font-weight: 400; line-height: 28px; letter-spacing: 0; }
+.text-heading-3 { font-family: var(--font-heading); font-size: 17px; font-weight: 400; line-height: 24px; letter-spacing: 0; }
+.text-heading-4 { font-family: var(--font-body); font-size: 14px; font-weight: 700; line-height: 20px; letter-spacing: 0; }
+.text-heading-5 { font-family: var(--font-body); font-size: 12px; font-weight: 600; line-height: 20px; letter-spacing: 0; }
+.text-heading-6 { font-family: var(--font-body); font-size: 10px; font-weight: 600; line-height: 16px; letter-spacing: 0; }
+.text-large { font-family: var(--font-body); font-size: 17px; font-weight: 600; line-height: 24px; letter-spacing: 0; }
+.text-body { font-family: var(--font-body); font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0; }
+.text-label { font-family: var(--font-body); font-size: 14px; font-weight: 500; line-height: 20px; letter-spacing: 0; }
+.text-supporting { font-family: var(--font-body); font-size: 12px; font-weight: 400; line-height: 20px; letter-spacing: 0; }
+.text-code { font-family: var(--font-code); font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0; }

@@ -1,0 +1,743 @@
+{
+ "_note": "Máy sinh từ Figma 'Astryx Library (Community)', quét lại ngày 2026-10-01. Gồm COMPONENT_SET và COMPONENT đứng riêng (defaultVariant null) để figma.getLibraryComponent(key) khi file dự án dùng Astryx qua thư viện đã publish. Key đổi nếu thư viện được publish từ một bản duplicate khác → sinh lại.",
+ "source_file": "FifpyOMpZk9OP8qyNzbRVJ",
+ "componentSets": {
+  ".ContextMenuItem": {
+   "key": "efeb06cfc23db421b55a491bfc24297acbb35a81",
+   "page": "Action",
+   "defaultVariant": "Variant=Default"
+  },
+  "Action / ButtonGroup": {
+   "key": "c166e6397f9b6d640ce5220140e41a053c08f29e",
+   "page": "Action",
+   "defaultVariant": "Orientation=Horizontal, Size=MD"
+  },
+  "Button": {
+   "key": "a3c6bd41a2457fb8b232e86efabdab094540fce2",
+   "page": "Action",
+   "defaultVariant": "Variant=Primary, Size=SM, State=Rest, Type=Default, Elevation=none"
+  },
+  "Button / ToggleButton": {
+   "key": "478fffed99b0e73951b982daa8718a6d8d3da06e",
+   "page": "Action",
+   "defaultVariant": "size = md, isPressed = false, isIconOnly = false"
+  },
+  "DropdownMenu": {
+   "key": "27b9341faaff9cbfdce420e4499d1a93dd8a5bad",
+   "page": "Action",
+   "defaultVariant": "State=Closed, Size=sm, Trigger=Label"
+  },
+  "DropdownMenu / DropdownMenuCheckboxItem": {
+   "key": "853ce5a762662afcf2b8d7ec60d04873b9b2a6d0",
+   "page": "Action",
+   "defaultVariant": "Checked=false"
+  },
+  "DropdownMenu / DropdownMenuItem": {
+   "key": "8adb9ade5161f87886f7bf38e05499d11adeccc5",
+   "page": "Action",
+   "defaultVariant": "State=Rest, hasIcon=true"
+  },
+  "DropdownMenu / DropdownMenuRadioItem": {
+   "key": "e247e8b50c9a3d7815d2091be5e904a39b22d558",
+   "page": "Action",
+   "defaultVariant": "Selected=false"
+  },
+  "Link": {
+   "key": "52d515ce570cd9edb8ea50ee7bb628f16fc3c989",
+   "page": "Action",
+   "defaultVariant": "Color=active, State=Default, Underline=No, External=No"
+  },
+  "MoreMenu": {
+   "key": "30a028438fe9fcd1482021c6096185d3d26e11f1",
+   "page": "Action",
+   "defaultVariant": "Variant=Ghost, Size=SM, State=Rest"
+  },
+  "SegmentedControl": {
+   "key": "4342dda956fcaa570a3a17c9c055fd658ac47558",
+   "page": "Action",
+   "defaultVariant": "Size=SM, State=Default, Content=Text"
+  },
+  "SegmentedControl / SegmentedControlItem": {
+   "key": "1b79fe56884e7674e412e08c189fdcbfb2a9513f",
+   "page": "Action",
+   "defaultVariant": "Size=SM, State=Default, Content=Text"
+  },
+  "Toolbar": {
+   "key": "6c4db81d177b6b7761dbb5bc75397e9ca7756d36",
+   "page": "Action",
+   "defaultVariant": "Layout=Start + End, Density=Default, Variant=Transparent"
+  },
+  "Chat / ChatComposer": {
+   "key": "e1b58aa60d4362df1a1f586098f3b6f1f2ac0c0e",
+   "page": "Chat",
+   "defaultVariant": "state = empty"
+  },
+  "Chat / ChatComposerDrawer": {
+   "key": "a7ad3155b1af25f69204b5b26bc3b7d1894976ce",
+   "page": "Chat",
+   "defaultVariant": "State=Expanded"
+  },
+  "Chat / ChatComposerInput": {
+   "key": "d0aaaa7ecf5ad355805947cf07e2ee5150b47a39",
+   "page": "Chat",
+   "defaultVariant": "state = empty"
+  },
+  "Chat / ChatComposerTokenElement": {
+   "key": "4e649045437d05ae9267a094b62fb159ee4d3fbe",
+   "page": "Chat",
+   "defaultVariant": "Type=Mention"
+  },
+  "Chat / ChatDictationButton": {
+   "key": "c855c46cd0a45df0e788f5f9de604c237134575d",
+   "page": "Chat",
+   "defaultVariant": "state=idle, size=sm"
+  },
+  "Chat / ChatLayoutScrollButton": {
+   "key": "7822814544a112587f4f6a15d8118d52ae2e310f",
+   "page": "Chat",
+   "defaultVariant": "State=Collapsed"
+  },
+  "Chat / ChatMessage": {
+   "key": "169823138c129d6404653b3cf0915b27599b356b",
+   "page": "Chat",
+   "defaultVariant": "sender = assistant"
+  },
+  "Chat / ChatMessageBubble": {
+   "key": "c97ee7dc011f39a22eae1f5ef34ba8d4a4b24135",
+   "page": "Chat",
+   "defaultVariant": "sender = assistant, variant = filled"
+  },
+  "Chat / ChatMessageMetadata": {
+   "key": "449de76bfe56338261bfd2954767d150a0d9b8db",
+   "page": "Chat",
+   "defaultVariant": "status = none"
+  },
+  "Chat / ChatSendButton": {
+   "key": "000d98d294d8863b858a58cba8e0ef496b95dfac",
+   "page": "Chat",
+   "defaultVariant": "State=send, Size=sm"
+  },
+  "Chat / ChatSystemMessage": {
+   "key": "71858e88756f1a2ac1df4b12e47166f7ab7efba7",
+   "page": "Chat",
+   "defaultVariant": "variant = default"
+  },
+  "Chat / ChatToolCalls": {
+   "key": "e98c3d811edd2cb85bad7e74a0e51a62e24a78e5",
+   "page": "Chat",
+   "defaultVariant": "status = pending, state = collapsed"
+  },
+  "Card": {
+   "key": "1642e3cb9daa4b71f8ec6f93a6ed35ac0b8d6742",
+   "page": "Container",
+   "defaultVariant": "Padding=none, Elevation=none"
+  },
+  "ClickableCard": {
+   "key": "2845562d0df74e408c340269938cca7b8c7d342a",
+   "page": "Container",
+   "defaultVariant": "State=Rest, Elevation=none"
+  },
+  "Collapsible": {
+   "key": "456e400ffb8077bc750872967f543224c8cddf17",
+   "page": "Container",
+   "defaultVariant": "State=Collapsed"
+  },
+  "SelectableCard": {
+   "key": "bd8d5ad771578ca9f40292a100ce6ebd3aeefed5",
+   "page": "Container",
+   "defaultVariant": "Selected=false, State=rest, Elevation=none"
+  },
+  "Avatar": {
+   "key": "ef7bf337e10c68efcf106ab809976b0b313e4f66",
+   "page": "Content",
+   "defaultVariant": "Size=xsm, Content=Image",
+   "note": "Thư viện có set Avatar thứ hai (eb5fdb28…, Size=Tiny…Large) chỉ để trưng bày, không dùng"
+  },
+  "Avatar / AvatarStatusDot": {
+   "key": "719cf0a592d5f394d22baceb370db395bf1e277d",
+   "page": "Content",
+   "defaultVariant": "Variant=Positive, Size Tier=Small"
+  },
+  "Citation": {
+   "key": "3c0bcde3ff85dccac10cb457a67d515a538c56df",
+   "page": "Content",
+   "defaultVariant": "Variant=Label, Icon=No"
+  },
+  "Code": {
+   "key": "aea2ff52db0f4be71875ed4005991e79d0a3e352",
+   "page": "Content",
+   "defaultVariant": "Color=Primary, Size=inherit"
+  },
+  "CodeBlock": {
+   "key": "6f0aa326dc35781f2ab39f15cf685efba90c4f18",
+   "page": "Content",
+   "defaultVariant": "size = md"
+  },
+  "EmptyState": {
+   "key": "2ed8da6af63a56a6eb0cbd379d554577dbb80f72",
+   "page": "Content",
+   "defaultVariant": "Size=Default"
+  },
+  "Heading": {
+   "key": "f4d17fce76eb8fa98bed27746987cece1a8d1a09",
+   "page": "Content",
+   "defaultVariant": "Level=1"
+  },
+  "Kbd": {
+   "key": "a9e8c6533ef1cf946f600070cdccfefb091da5e9",
+   "page": "Content",
+   "defaultVariant": "Keys=Single"
+  },
+  "Markdown": {
+   "key": "a09e954d1bbce63ed4d913e0f268025491b87583",
+   "page": "Content",
+   "defaultVariant": "density = default"
+  },
+  "Text": {
+   "key": "f24161f416c07b7a8772365ba090462a01781717",
+   "page": "Content",
+   "defaultVariant": "Truncation=none"
+  },
+  "Thumbnail": {
+   "key": "63d3d0cbf426d8a74f2d37fc3e46cf82df734f79",
+   "page": "Content",
+   "defaultVariant": "State=Image"
+  },
+  "Timestamp": {
+   "key": "9b39449d36be94b761cc9672102c20a0c3cd7e71",
+   "page": "Content",
+   "defaultVariant": "Format=Relative, Color=Primary"
+  },
+  "Token": {
+   "key": "358659a7174aa015394d721b617c314072198c52",
+   "page": "Content",
+   "defaultVariant": "Color=Default, Size=SM, State=Default"
+  },
+  "Calendar": {
+   "key": "f2b6cb484af7445d036ff4483ab63ce0e56976df",
+   "page": "Form Controls",
+   "defaultVariant": "Mode=Single, Number Of Months=1"
+  },
+  "Calendar / .CalendarDay": {
+   "key": "a4d2bd49578a5c3cf932b1ede87148bc45c82dd0",
+   "page": "Form Controls",
+   "defaultVariant": "State=Default"
+  },
+  "Checkbox / CheckboxInput": {
+   "key": "ca31c90bfbc96eda12a8e06951a0c4583679d581",
+   "page": "Form Controls",
+   "defaultVariant": "Value=Unchecked, Size=sm, State=Default"
+  },
+  "Checkbox / CheckboxList": {
+   "key": "79d97007247737f995a2b9b4761da56d48f665d3",
+   "page": "Form Controls",
+   "defaultVariant": "Orientation=Vertical, Size=sm"
+  },
+  "Checkbox / CheckboxListItem": {
+   "key": "6210ae5e768b35853f3da5d5f51945d5c8c03fb7",
+   "page": "Form Controls",
+   "defaultVariant": "State=Default, Selected=true, Size=sm, Description=true"
+  },
+  "DateInput": {
+   "key": "328e7d063afcb89ae4994bb45d767ae7db61522f",
+   "page": "Form Controls",
+   "defaultVariant": "state=rest, size=sm"
+  },
+  "DateRangeInput": {
+   "key": "f49cc728e29665635ad5d6a2377376e1bfe8d630",
+   "page": "Form Controls",
+   "defaultVariant": "state=rest, size=sm"
+  },
+  "DateTimeInput": {
+   "key": "9da8ca34d171f3c9053db816421a50b44eddb9b8",
+   "page": "Form Controls",
+   "defaultVariant": "state=rest, size=sm"
+  },
+  "Field": {
+   "key": "d2615b2c51776d0b2fdb2f1bf6b214b73ee745dd",
+   "page": "Form Controls",
+   "defaultVariant": "status = none"
+  },
+  "Field / .FieldLabel": {
+   "key": "cfa596c162adbd7b200385303c744d3815d05257",
+   "page": "Form Controls",
+   "defaultVariant": "Indicator=Default"
+  },
+  "FileInput": {
+   "key": "571bb6b0e90b86cd217ddeb3eec9febcd6667d0b",
+   "page": "Form Controls",
+   "defaultVariant": "mode=input, state=rest"
+  },
+  "InputGroup": {
+   "key": "1ca211fa0859e6f4e2a568e315a79457ac18fa39",
+   "page": "Form Controls",
+   "defaultVariant": "state=rest, size=sm"
+  },
+  "NumberInput": {
+   "key": "48dd9c66ff138ab6cd2d78bcb034bcda526071e0",
+   "page": "Form Controls",
+   "defaultVariant": "state=rest, size=sm"
+  },
+  "PowerSearch / Popover": {
+   "key": "fad41c46e6801893676cf56390939bb4c952675d",
+   "page": "Form Controls",
+   "defaultVariant": "Mode=Fields"
+  },
+  "PowerSearch / Trigger": {
+   "key": "24f2c7a0d276193fcb70ce637fdd5684c10be5c1",
+   "page": "Form Controls",
+   "defaultVariant": "State=Rest, Content=Placeholder"
+  },
+  "Radio / RadioList": {
+   "key": "68ca000540eef3a3428af915327f65ee5096f94d",
+   "page": "Form Controls",
+   "defaultVariant": "Orientation=Vertical, Size=sm"
+  },
+  "Radio / RadioListItem": {
+   "key": "4afdae92f35c452b2a863477fc217e66cf9e126d",
+   "page": "Form Controls",
+   "defaultVariant": "State=Default, Selected=true, Size=sm, Description=true"
+  },
+  "Selector": {
+   "key": "887eea1f8cdfccfbdc2c67e7965775a6ab2489a5",
+   "page": "Form Controls",
+   "defaultVariant": "state=rest, size=sm"
+  },
+  "Selector / MultiSelector": {
+   "key": "0b4566646ff9769254faf3bb1b443b11a78d4920",
+   "page": "Form Controls",
+   "defaultVariant": "Size=Small, State=Rest, Display=Placeholder, Status=None"
+  },
+  "Slider": {
+   "key": "5ac919b5fab4a8bb67ea3114caf0f5da806a18bf",
+   "page": "Form Controls",
+   "defaultVariant": "state=rest, type=single"
+  },
+  "Switch": {
+   "key": "3a0ea1d1a6943eca30960ef7fcbcee2bdbf8065c",
+   "page": "Form Controls",
+   "defaultVariant": "State=off, Label Position=end"
+  },
+  "TextArea": {
+   "key": "bb5aff66a272afd20a72eb4a84acef68fa199235",
+   "page": "Form Controls",
+   "defaultVariant": "state=rest, size=sm"
+  },
+  "TextInput": {
+   "key": "ebf6698279211cd4e3514d9fb8f74c94a2285bdd",
+   "page": "Form Controls",
+   "defaultVariant": "state=rest, size=sm"
+  },
+  "TimeInput": {
+   "key": "fff277abfbdca51176f2dc59f9d56f6de5a2630f",
+   "page": "Form Controls",
+   "defaultVariant": "state=rest, size=sm"
+  },
+  "Tokenizer": {
+   "key": "27e7a41df6049130627bf3dd572abf8994435ceb",
+   "page": "Form Controls",
+   "defaultVariant": "state=rest, size=sm"
+  },
+  "Typeahead": {
+   "key": "451de0a264d90c56295704a886a74cac4b7eba38",
+   "page": "Form Controls",
+   "defaultVariant": "state=rest, size=sm"
+  },
+  "Badge": {
+   "key": "9e7dae2c033711b7638b016c00dae7b03f8e7779",
+   "page": "Feedback & Status",
+   "defaultVariant": "Variant=Neutral, Shape=Pill"
+  },
+  "Banner": {
+   "key": "553e133d93a5d6dfb94ca9eaf3526bfeb4bbcc63",
+   "page": "Feedback & Status",
+   "defaultVariant": "Status=info, Container=card"
+  },
+  "ProgressBar": {
+   "key": "8ea329b67d935cd23605375ee9d6e7a04cff6de9",
+   "page": "Feedback & Status",
+   "defaultVariant": "Variant=accent, Mode=Determinate"
+  },
+  "Skeleton": {
+   "key": "ac55d98c8267a1b30bbd9bac8c6da2e15938907e",
+   "page": "Feedback & Status",
+   "defaultVariant": "Radius=none"
+  },
+  "Spinner": {
+   "key": "7c69ca6e2da4f6f473eab91d6adf7b3734152c6c",
+   "page": "Feedback & Status",
+   "defaultVariant": "Size=xl, Shade=default, Label=true"
+  },
+  "StatusDot": {
+   "key": "0c0326e074328e30ff0784e7db73dcb54a9c6d2d",
+   "page": "Feedback & Status",
+   "defaultVariant": "Variant=positive, isPulsing=false"
+  },
+  "AppShell": {
+   "key": "73d6c3df86ab95c16411a3bf1c159210bd866923",
+   "page": "Layout",
+   "defaultVariant": "Variant=Elevated, Nav Layout=TopNav + SideNav"
+  },
+  "AspectRatio": {
+   "key": "b0733534725a4e4b74916e5ae7ead08a96dca077",
+   "page": "Layout",
+   "defaultVariant": "Ratio=1:1"
+  },
+  "Divider": {
+   "key": "84c3aa8c758c7711b7661c46c400f667649c2a65",
+   "page": "Layout",
+   "defaultVariant": "Orientation=horizontal, Variant=subtle, Label=false"
+  },
+  "Layout / FormLayout": {
+   "key": "534e8ea916a0e0123525819cbcab8ebb8ec0cff1",
+   "page": "Layout",
+   "defaultVariant": "Direction=Horizontal"
+  },
+  "Layout / Section": {
+   "key": "0a25d891d63cf783cfe1bbbd2227db94b0e63134",
+   "page": "Layout",
+   "defaultVariant": "Variant=section"
+  },
+  "ResizeHandle": {
+   "key": "7723c0a89c87ce9919408324e3495ae95127aee1",
+   "page": "Layout",
+   "defaultVariant": "Direction=Horizontal, State=Default, Pill Placement=Center"
+  },
+  ".OutlineItem": {
+   "key": "a74dd5b2b7b73e92c14e28d389a4718e736e1465",
+   "page": "Navigation",
+   "defaultVariant": "State=Rest, Density=Default, Level=1"
+  },
+  "Breadcrumbs": {
+   "key": "12b859dd91cca133364b6b5262132a7cf38e14ae",
+   "page": "Navigation",
+   "defaultVariant": "Variant=Default, Icons=false"
+  },
+  "Breadcrumbs / BreadcrumbItem": {
+   "key": "e9f72703c58d3df31fd349118360f722842bd523",
+   "page": "Navigation",
+   "defaultVariant": "Type=Link, Variant=Default, State=Rest, Separator=Chevron"
+  },
+  "Navigation / .MobileNavToggle": {
+   "key": "70c9b073d477023833477d972fc819916b36c609",
+   "page": "Navigation",
+   "defaultVariant": "State=Rest"
+  },
+  "Navigation / .SideNavCollapseButton": {
+   "key": "59e88e9c9db3a6edf0ab59137b468f0c713b8f5e",
+   "page": "Navigation",
+   "defaultVariant": "State=Expanded"
+  },
+  "Navigation / .SideNavHeading": {
+   "key": "741f3fe664582af3807ef70cc24bc55b4ba1cc75",
+   "page": "Navigation",
+   "defaultVariant": "State=Default"
+  },
+  "Navigation / .SideNavItem": {
+   "key": "5aac2a77e4ac12b70641db4a2b5d7e0710256774",
+   "page": "Navigation",
+   "defaultVariant": "State=Default, Size=md"
+  },
+  "Navigation / .TopNavItem": {
+   "key": "05fa1ce88bb17a3b222684f3cb7ab6c1a860dbd6",
+   "page": "Navigation",
+   "defaultVariant": "state = default, Size = md, isIconOnly = false"
+  },
+  "Navigation / .TopNavMegaMenuItem": {
+   "key": "0432b1ced65dc3596e2d65913d065dcf6f66b303",
+   "page": "Navigation",
+   "defaultVariant": "State=Rest"
+  },
+  "Navigation / MobileNav": {
+   "key": "ac6f8c03bf645aadc03b9b6284ed1afd5ad5582e",
+   "page": "Navigation",
+   "defaultVariant": "Side=Start, Header=True"
+  },
+  "Navigation / SideNav": {
+   "key": "121c1c0de09c808546a9d79ef7e49242aa01554f",
+   "page": "Navigation",
+   "defaultVariant": "State=Expanded"
+  },
+  "Navigation / TopNavMegaMenu": {
+   "key": "ef71cbe53a34c1924dbb997e43608cf8400ccbac",
+   "page": "Navigation",
+   "defaultVariant": "State=Closed"
+  },
+  "Navigation / TopNavMenu": {
+   "key": "41e80449cfd480d3a56c67fcdc19dd9ca79b2265",
+   "page": "Navigation",
+   "defaultVariant": "State = Closed"
+  },
+  "Pagination": {
+   "key": "57c2cd6dd6f3a45112ae2b03073770ddf7f06928",
+   "page": "Navigation",
+   "defaultVariant": "Variant=Pages, Size=md"
+  },
+  "Tabs / .Tab": {
+   "key": "139daf5ab1dcd56692e473b0ae54a242eca818c9",
+   "page": "Navigation",
+   "defaultVariant": "size = md, state = default"
+  },
+  "Tabs / TabList": {
+   "key": "b02f7981a084cff839287eb80dccc4506a5d0d20",
+   "page": "Navigation",
+   "defaultVariant": "size = md, hasDivider = false"
+  },
+  ".CommandPaletteItem": {
+   "key": "ced5558e3788953f7d88cb98357ef5f25544f824",
+   "page": "Overlay",
+   "defaultVariant": "State=Rest"
+  },
+  "Dialog": {
+   "key": "b81c6dec2f42f50b0f171ae8588cc94a4c914230",
+   "page": "Overlay",
+   "defaultVariant": "Variant=Standard"
+  },
+  "Overlay": {
+   "key": "90482da57ba8bdb3f575e990b7858d3549dfb405",
+   "page": "Overlay",
+   "defaultVariant": "Scrim = dark, Align = end"
+  },
+  "Toast": {
+   "key": "78c97f8974518800cb5df0fb69d063f51dd2eba0",
+   "page": "Overlay",
+   "defaultVariant": "type = default"
+  },
+  "Item": {
+   "key": "a16cf86a194c6216add1d51ac8127c53b25c51d6",
+   "page": "Table & List",
+   "defaultVariant": "Density=Compact, Align=Center"
+  },
+  "List / .ListItem": {
+   "key": "9157127dd713abf136e1d46e809ea14f179668ab",
+   "page": "Table & List",
+   "defaultVariant": "Density=Compact, State=Default"
+  },
+  "MetadataList": {
+   "key": "c8206c3bee3321d6533394930c27b9dc25e98b89",
+   "page": "Table & List",
+   "defaultVariant": "Orientation=Vertical, Label Position=Start, Columns=Single"
+  },
+  "MetadataList / MetadataListItem": {
+   "key": "9770b10f2348f7eb1e1b5f41ebf354b77c85da19",
+   "page": "Table & List",
+   "defaultVariant": "Layout=Inline"
+  },
+  "OverflowList": {
+   "key": "30143648dcb344ddb618446ba02e83e9862f3ed8",
+   "page": "Table & List",
+   "defaultVariant": "State=All Visible, Collapse From=End"
+  },
+  "TableCell": {
+   "key": "f79901d53e17443b1b8faeea76c8bda05f17889a",
+   "page": "Table & List",
+   "defaultVariant": "Density=Compact, State=Default"
+  },
+  "TableHeaderCell": {
+   "key": "1eff92492e2335b4636c56725eac9f6d8915f218",
+   "page": "Table & List",
+   "defaultVariant": "Density=Compact, Sort=None"
+  },
+  "TreeList": {
+   "key": "03ef4269c00586bc397dbfa2c1dd5f776c5acf4a",
+   "page": "Table & List",
+   "defaultVariant": "variant=lineGuides"
+  },
+  "TreeList / .TreeListItem": {
+   "key": "6cae7a9c82bb5dcf892e85b9c40e705fa1861aa2",
+   "page": "Table & List",
+   "defaultVariant": "Node=Expanded, State=Default"
+  },
+  "Icon": {
+   "key": "78dcafbd94c83f9f4ddf714ff144f36345f9b514",
+   "page": "Icons",
+   "defaultVariant": null
+  },
+  "Stepper / Step": {
+   "key": "177748f265a56ccbd8ecb1bc30aade218fcc016c",
+   "page": "Navigation",
+   "defaultVariant": "Orientation=Horizontal, Progress=Completed, Indicator=Auto",
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/Stepper (0.6.3), không phải bản chính thức"
+  },
+  "Stepper": {
+   "key": "b681c7fa12ffaee7f6eb16c802a0ba492f49bd52",
+   "page": "Navigation",
+   "defaultVariant": "Orientation=Horizontal",
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/Stepper (0.6.3), không phải bản chính thức"
+  },
+  "AlertDialog": {
+   "key": "1fadff0787254ef0ac96635709232be4110c9f3e",
+   "page": "Overlay",
+   "defaultVariant": "Action=Destructive, Layout=Default",
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/AlertDialog (0.6.3), không phải bản chính thức"
+  },
+  "AvatarGroup": {
+   "key": "a5863cbf5491e79bca993a75c4e4e4c2721d3654",
+   "page": "Content",
+   "defaultVariant": "Size=xsm",
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/AvatarGroup (0.6.3), không phải bản chính thức"
+  },
+  "ComplexSelector": {
+   "key": "8298b2544928a7be2d4bd2e0ec0f6f2daf3d56f2",
+   "page": "Form Controls",
+   "defaultVariant": "Variant=Input, State=Closed",
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/ComplexSelector (0.6.3), không phải bản chính thức"
+  },
+  "Timer": {
+   "key": "ace5e29c7680b9627df4faaffa1559ca73f032c6",
+   "page": "Content",
+   "defaultVariant": "Format=Elapsed, Color=Secondary",
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/Timer (0.6.3), không phải bản chính thức"
+  },
+  "BottomSheet": {
+   "key": "1ce08702066395ae982e237fd48b41faef30d50a",
+   "page": "Overlay",
+   "defaultVariant": "Height=Hug",
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/BottomSheet (0.6.3), không phải bản chính thức"
+  },
+  "BottomSheet / .Content · Mẫu": {
+   "key": "acf7ddb871f12b76860eb38b7c1d01520304d875",
+   "page": "Overlay",
+   "defaultVariant": null,
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/BottomSheet (0.6.3), không phải bản chính thức"
+  },
+  "ComplexSelector / .Popover": {
+   "key": "6657c7eb4ba4581dd58fbbd98b90e21a9e2e6837",
+   "page": "Form Controls",
+   "defaultVariant": null,
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/Popover (0.6.3), không phải bản chính thức"
+  },
+  "ComplexSelector / .Popover Content": {
+   "key": "b7188a1a8713090d775196aa2510776a0982a146",
+   "page": "Form Controls",
+   "defaultVariant": null,
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/Popover (0.6.3), không phải bản chính thức"
+  },
+  "BottomSheet / .Content · Hành động": {
+   "key": "7735af84c1d3b7d02a6efe4b6d31cb228b5867e8",
+   "page": "Overlay",
+   "defaultVariant": null,
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/BottomSheet (0.6.3), không phải bản chính thức",
+   "note": "Nội dung danh sách hành động (DropdownMenuItem), cho DropdownMenu/MoreMenu presentation=\"bottom-sheet\""
+  },
+  "BottomSheet / .Content · Chọn một": {
+   "key": "ce12a283982007920b8b6fba72e86e8577183cf7",
+   "page": "Overlay",
+   "defaultVariant": null,
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/BottomSheet (0.6.3), không phải bản chính thức",
+   "note": "Nội dung chọn một (RadioListItem), cho Selector trên mobile"
+  },
+  "BottomSheet / .Content · Chọn nhiều": {
+   "key": "646bb3202c1780a83352da2a2f1b65f6af89714c",
+   "page": "Overlay",
+   "defaultVariant": null,
+   "source": "Dựng lại từ code facebook/astryx packages/core/src/BottomSheet (0.6.3), không phải bản chính thức",
+   "note": "Nội dung chọn nhiều (CheckboxListItem), cho MultiSelector trên mobile"
+  },
+  "Blockquote": {
+   "key": "067f26a4111edf5f5c929ae7a10201b244d29804",
+   "page": "Content",
+   "defaultVariant": null
+  },
+  "HoverCard": {
+   "key": "5d98bcf3748e90e96e1ef165469a7a40b61e7289",
+   "page": "Overlay",
+   "defaultVariant": null
+  },
+  "Lightbox": {
+   "key": "11d2925aa9a81d6e0e024fce44b96e0d0bc639ba",
+   "page": "Overlay",
+   "defaultVariant": null
+  },
+  "Popover": {
+   "key": "693f5652d5146cfb9bc940bc61e0693d92a7efc6",
+   "page": "Overlay",
+   "defaultVariant": null
+  },
+  "Tooltip": {
+   "key": "5dfa057785452d84abba1e1c91d079594ab64bce",
+   "page": "Overlay",
+   "defaultVariant": null
+  },
+  "Navigation / TopNav": {
+   "key": "3ffd90a9674482d22c6bf4cd0f86b057e5f2d22b",
+   "page": "Navigation",
+   "defaultVariant": null
+  },
+  "Navigation / TopNavHeading": {
+   "key": "89adcef4419dac97ac8abe98084302963227d2d7",
+   "page": "Navigation",
+   "defaultVariant": null
+  },
+  "Navigation / .TopNavMegaMenuFeaturedCard": {
+   "key": "f7de461fbd728f196deaaa0e3b90a24622341dc4",
+   "page": "Navigation",
+   "defaultVariant": null
+  },
+  "DropdownMenu / DropdownMenuRadioGroup": {
+   "key": "a03b7b26c346d4ce5e0a1950c20394cf1029131a",
+   "page": "Action",
+   "defaultVariant": null
+  },
+  "ContextMenu": {
+   "key": "536468c7b53894ddeaac908e93e7a04037be2831",
+   "page": "Action",
+   "defaultVariant": null
+  },
+  "Chat / ChatLayout": {
+   "key": "9843669d29a787e405a65ccf8e3f571cd84e20ac",
+   "page": "Chat",
+   "defaultVariant": null
+  },
+  "Chat / ChatMessageList": {
+   "key": "ac50298f0156d79bd0d28c3f170245242716bc1d",
+   "page": "Chat",
+   "defaultVariant": null
+  },
+  "Chat / ChatTokenizedText": {
+   "key": "13cc7d03bd25a034a6919ccaeed3525f41313700",
+   "page": "Chat",
+   "defaultVariant": null
+  },
+  "Carousel": {
+   "key": "3ffb600df22233350f171712553168d0a16facf4",
+   "page": "Container",
+   "defaultVariant": null
+  },
+  "InputGroupText": {
+   "key": "dc19d71947387f68c921b770134eb03117aaa388",
+   "page": "Form Controls",
+   "defaultVariant": null
+  },
+  "Outline": {
+   "key": "7c9887ad40c0b764c5a198ba254df5353dfef456",
+   "page": "Navigation",
+   "defaultVariant": null
+  },
+  "Navigation / .SideNavSection": {
+   "key": "2e28adb86d4eb4489cb04f4f594aeaede3c14bf1",
+   "page": "Navigation",
+   "defaultVariant": null
+  },
+  "CommandPalette": {
+   "key": "fdd3c97924c288d487e5135422bd25252b6c161b",
+   "page": "Overlay",
+   "defaultVariant": null
+  },
+  ".CommandPaletteEmpty": {
+   "key": "ddd35a3f50eded77de26ab40c5160ac93815eef1",
+   "page": "Overlay",
+   "defaultVariant": null
+  },
+  "List": {
+   "key": "d58b4a924589f16602de6b112d5828828756def2",
+   "page": "Table & List",
+   "defaultVariant": null
+  },
+  ".TreeRail": {
+   "key": "4da3597f7eb227614af92f9640d293fdcbc3ec13",
+   "page": "Table & List",
+   "defaultVariant": null
+  }
+ }
+}

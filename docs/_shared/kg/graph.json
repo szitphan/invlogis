@@ -1,0 +1,1514 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "extractor_version": "1.0.0",
+    "generated_at": "1970-01-01T00:00:00.000Z",
+    "root": "docs",
+    "node_count": 48,
+    "edge_count": 65,
+    "coverage": {
+      "docs_total": 10,
+      "docs_parsed": 7,
+      "unparsed_docs": [
+        {
+          "path": "docs/ba-crosswalk.md",
+          "reason": "no-frontmatter-and-no-known-shape"
+        },
+        {
+          "path": "docs/components.md",
+          "reason": "no-frontmatter-and-no-known-shape"
+        },
+        {
+          "path": "docs/setup-figma.md",
+          "reason": "no-frontmatter-and-no-known-shape"
+        }
+      ],
+      "unresolved_refs": [],
+      "uncataloged_content": [],
+      "partial_parse_docs": [],
+      "notes": [
+        ".claude/state/atlassian/sync-state.yaml vắng — bỏ qua nguồn Jira/Confluence canonical"
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "key": "E-common-001",
+      "type": "error",
+      "subtype": null,
+      "feature": "common",
+      "title": "E-common-001",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 172
+      },
+      "props": {
+        "kind": "Inline",
+        "khi_nao": "Trường bắt buộc bỏ trống khi submit",
+        "cau_hien_thi": "\"Nhập [tên trường].\" · Select: \"Chọn [tên trường].\"",
+        "quy_tac": "GR-01, GR-02"
+      }
+    },
+    {
+      "key": "E-common-002",
+      "type": "error",
+      "subtype": null,
+      "feature": "common",
+      "title": "E-common-002",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 173
+      },
+      "props": {
+        "kind": "Inline",
+        "khi_nao": "Tiêu đề vượt 50 ký tự",
+        "cau_hien_thi": "\"Tối đa 50 ký tự.\"",
+        "quy_tac": "GR-01"
+      }
+    },
+    {
+      "key": "E-common-003",
+      "type": "error",
+      "subtype": null,
+      "feature": "common",
+      "title": "E-common-003",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 174
+      },
+      "props": {
+        "kind": "Inline",
+        "khi_nao": "Ngày sai định dạng",
+        "cau_hien_thi": "\"Hãy nhập ngày tháng theo định dạng: dd/mm/yyyy\"",
+        "quy_tac": "GR-03"
+      }
+    },
+    {
+      "key": "E-common-004",
+      "type": "error",
+      "subtype": null,
+      "feature": "common",
+      "title": "E-common-004",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 175
+      },
+      "props": {
+        "kind": "Inline",
+        "khi_nao": "Email sai định dạng",
+        "cau_hien_thi": "\"Email không đúng định dạng.\"",
+        "quy_tac": "GR-07"
+      }
+    },
+    {
+      "key": "E-common-005",
+      "type": "error",
+      "subtype": null,
+      "feature": "common",
+      "title": "E-common-005",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 176
+      },
+      "props": {
+        "kind": "Inline",
+        "khi_nao": "SĐT sai định dạng",
+        "cau_hien_thi": "\"Số điện thoại không đúng định dạng.\"",
+        "quy_tac": "GR-08"
+      }
+    },
+    {
+      "key": "E-common-006",
+      "type": "error",
+      "subtype": null,
+      "feature": "common",
+      "title": "E-common-006",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 177
+      },
+      "props": {
+        "kind": "Inline",
+        "khi_nao": "File sai định dạng",
+        "cau_hien_thi": "\"File không đúng định dạng.\"",
+        "quy_tac": "CMP-10"
+      }
+    },
+    {
+      "key": "E-common-007",
+      "type": "error",
+      "subtype": null,
+      "feature": "common",
+      "title": "E-common-007",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 178
+      },
+      "props": {
+        "kind": "Inline",
+        "khi_nao": "File vượt dung lượng",
+        "cau_hien_thi": "\"Dung lượng file tối đa 250MB.\"",
+        "quy_tac": "CMP-10"
+      }
+    },
+    {
+      "key": "E-common-008",
+      "type": "error",
+      "subtype": null,
+      "feature": "common",
+      "title": "E-common-008",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 179
+      },
+      "props": {
+        "kind": "Toast",
+        "khi_nao": "Lỗi hệ thống / API / timeout",
+        "cau_hien_thi": "\"Đã xảy ra lỗi. Thử lại sau.\"",
+        "quy_tac": "GR-15 Loại 3"
+      }
+    },
+    {
+      "key": "E-common-009",
+      "type": "error",
+      "subtype": null,
+      "feature": "common",
+      "title": "E-common-009",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 180
+      },
+      "props": {
+        "kind": "Toast",
+        "khi_nao": "Mất kết nối mạng",
+        "cau_hien_thi": "\"Mất kết nối. Kiểm tra mạng và thử lại.\"",
+        "quy_tac": "GR-15 Loại 3"
+      }
+    },
+    {
+      "key": "E-common-010",
+      "type": "error",
+      "subtype": null,
+      "feature": "common",
+      "title": "E-common-010",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 181
+      },
+      "props": {
+        "kind": "Toast",
+        "khi_nao": "Phiên đăng nhập hết hạn",
+        "cau_hien_thi": "\"Phiên làm việc đã hết hạn. Đăng nhập lại.\"",
+        "quy_tac": "GR-15 Loại 3"
+      }
+    },
+    {
+      "key": "docs/_shared/conventions.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "UI Common Rules (GR) + lỗi dùng chung (E-common)",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 11
+      },
+      "props": {
+        "doc_type": "shared-conventions"
+      }
+    },
+    {
+      "key": "docs/_shared/definitions.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Definitions",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 10
+      },
+      "props": {
+        "doc_type": "shared-definitions"
+      }
+    },
+    {
+      "key": "docs/_shared/operating-environment.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Operating Environment",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/operating-environment.md",
+        "line": 11
+      },
+      "props": {
+        "doc_type": "shared-environment"
+      }
+    },
+    {
+      "key": "docs/_shared/project-profile.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Project Profile",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/project-profile.md",
+        "line": 12
+      },
+      "props": {
+        "doc_type": "project-profile"
+      }
+    },
+    {
+      "key": "docs/_shared/screen-patterns.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "UI Common Components (CMP)",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 12
+      },
+      "props": {
+        "doc_type": "shared-screen-patterns"
+      }
+    },
+    {
+      "key": "docs/_shared/system-overview.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "System Overview",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/system-overview.md",
+        "line": 9
+      },
+      "props": {
+        "doc_type": "shared-system-overview"
+      }
+    },
+    {
+      "key": "docs/ba-crosswalk.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Crosswalk: Control type (BA) → component Astryx",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "docs/ba-crosswalk.md",
+        "line": 1
+      },
+      "props": {
+        "doc_type": "unknown"
+      }
+    },
+    {
+      "key": "docs/components.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Components: Hướng dẫn chọn và dùng (Astryx)",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "docs/components.md",
+        "line": 1
+      },
+      "props": {
+        "doc_type": "unknown"
+      }
+    },
+    {
+      "key": "docs/design.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Astryx — Design System",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "docs/design.md",
+        "line": 292
+      },
+      "props": {
+        "doc_type": "unknown"
+      }
+    },
+    {
+      "key": "docs/setup-figma.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Setup Figma cho dự án mới: dùng design system Astryx",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "docs/setup-figma.md",
+        "line": 1
+      },
+      "props": {
+        "doc_type": "unknown"
+      }
+    },
+    {
+      "key": "term:bao-cao-su-co",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Báo cáo sự cố",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 97
+      },
+      "props": {
+        "description": "Báo hỏng hóc phương tiện do lái xe gửi từ App Lái xe; xưởng xác nhận hoặc từ chối, rồi lập báo giá chẩn đoán."
+      }
+    },
+    {
+      "key": "term:bao-gia",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Báo giá",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 102
+      },
+      "props": {
+        "description": "Chứng từ báo chi phí sửa chữa/bán phụ tùng trước khi làm. Báo giá chẩn đoán là báo giá lập sau khi xác nhận báo cáo sự cố, xác định nơi sửa (xưởng nhà / xưởng ngoài)."
+      }
+    },
+    {
+      "key": "term:barem",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Barem",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 122
+      },
+      "props": {
+        "aliases": [
+          "dầu"
+        ],
+        "description": "Bảng quy đổi chiều cao mức dầu trong bồn sang lượng dầu (lít) của 1 cây dầu nội bộ, upload dạng file khi tạo cây dầu."
+      }
+    },
+    {
+      "key": "term:boi-thuong-thiet-hai",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Bồi thường thiệt hại",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 142
+      },
+      "props": {
+        "description": "Đề nghị bồi thường khi có thất thoát: trả tiền chưa nhận đủ HHDV, chuyển kho chênh lệch số lượng, làm hỏng/mất phụ tùng trong lệnh sửa chữa."
+      }
+    },
+    {
+      "key": "term:cay-dau",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Cây dầu",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 42
+      },
+      "props": {
+        "description": "Điểm cấp nhiên liệu. Cây dầu nội bộ là cây dầu của Delta, được quản lý như 1 cơ sở (có sensor đo mức dầu, barem, dung tích, ngưỡng). Cây dầu mua ngoài của đối tác thì nghiệp vụ gắn vào \"Ngoài cơ sở\"."
+      }
+    },
+    {
+      "key": "term:ccdc",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "CCDC",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 57
+      },
+      "props": {
+        "aliases": [
+          "Công cụ dụng cụ"
+        ],
+        "description": "Danh mục công cụ, dụng cụ của xưởng; xuất kho riêng bằng mục đích \"Xuất CCDC\"."
+      }
+    },
+    {
+      "key": "term:chi-nhanh",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Chi nhánh",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 17
+      },
+      "props": {
+        "description": "Đơn vị vận hành độc lập về dữ liệu: cùng bộ chức năng nhưng dữ liệu tách hẳn. Người ở chi nhánh A không thấy dữ liệu chi nhánh B dù cùng quyền."
+      }
+    },
+    {
+      "key": "term:chi-phi-cap-1",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Chi phí cấp 1",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 67
+      },
+      "props": {
+        "aliases": [
+          "Chi phí cấp 2"
+        ],
+        "description": "Danh mục phân loại chi phí 2 tầng: chi phí cấp 2 thuộc 1 chi phí cấp 1."
+      }
+    },
+    {
+      "key": "term:co-so",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Cơ sở",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 22
+      },
+      "props": {
+        "description": "Đơn vị vật lý trực thuộc 1 chi nhánh, chỉ có ở module tổ chức theo cơ sở (Xưởng, Cây dầu). Dữ liệu quản lý riêng theo từng cơ sở. Module nào chia cơ sở là cố định theo nghiệp vụ, không cấu hình."
+      }
+    },
+    {
+      "key": "term:de-xuat-cap-moi",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Đề xuất cấp mới",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 147
+      },
+      "props": {
+        "description": "Yêu cầu tạo bản ghi danh mục mới (DVKT, PTVT, CCDC, lốp, ắc quy, nhà cung cấp, khách hàng DK05, chi phí…). Bản ghi chỉ chính thức và có mã sau khi được phê duyệt."
+      }
+    },
+    {
+      "key": "term:dinh-muc-nhien-lieu",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Định mức nhiên liệu",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 117
+      },
+      "props": {
+        "description": "Mức tiêu hao nhiên liệu khoán cho từng phương tiện, phân loại theo tải trọng hàng hoá hoặc không theo tải trọng; có yêu cầu định mức cần phê duyệt và cập nhật mức tiêu hao thực tế."
+      }
+    },
+    {
+      "key": "term:don-mua-hhdv",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Đơn mua HHDV",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 112
+      },
+      "props": {
+        "description": "Đơn đặt mua hàng hoá/dịch vụ từ nhà cung cấp HHDV, duyệt 2 lần."
+      }
+    },
+    {
+      "key": "term:dvkt",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "DVKT",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 62
+      },
+      "props": {
+        "aliases": [
+          "Dịch vụ kỹ thuật"
+        ],
+        "description": "Danh mục dịch vụ sửa chữa/kỹ thuật được chuẩn hoá (có mã riêng theo loại phương tiện), dùng khi lập báo giá và lệnh sửa chữa."
+      }
+    },
+    {
+      "key": "term:gttt",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "GTTT",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 137
+      },
+      "props": {
+        "aliases": [
+          "Giá trị thanh toán"
+        ],
+        "description": "Tổng tiền phải thanh toán của 1 chứng từ, sau chiết khấu."
+      }
+    },
+    {
+      "key": "term:hhdv",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "HHDV",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 47
+      },
+      "props": {
+        "aliases": [
+          "Hàng hoá dịch vụ"
+        ],
+        "description": "Gọi chung hàng hoá và dịch vụ Delta mua vào hoặc bán ra. Xuất hiện trong tên Đơn mua HHDV, Nhà cung cấp HHDV, Thanh toán bán HHDV."
+      }
+    },
+    {
+      "key": "term:ke-hoach-mua-dau",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Kế hoạch mua dầu",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 127
+      },
+      "props": {
+        "aliases": [
+          "Phiếu cấp dầu",
+          "Phiếu nhập dầu"
+        ],
+        "description": "Chuỗi nghiệp vụ dầu: lập kế hoạch mua → đơn mua dầu → nhập dầu vào cây dầu (từ nhà cung cấp hoặc phương tiện) → cấp dầu cho phương tiện. Phiếu cấp dầu tại cây dầu đối tác do nhân viên đối tác ghi nhận trên Portal."
+      }
+    },
+    {
+      "key": "term:khach-hang-dk05",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Khách hàng DK05",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 82
+      },
+      "props": {
+        "description": "Khách hàng đã đăng ký trong danh mục (pháp nhân hoặc cá nhân, có MST/CCCD), mua phụ tùng hoặc dịch vụ sửa chữa của Delta; có phương thức thanh toán trả trước hoặc trả sau. Phân biệt với khách hàng lẻ — không có trong danh mục, luôn thanh toán trả trước."
+      }
+    },
+    {
+      "key": "term:lenh-sua-chua",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Lệnh sửa chữa",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 107
+      },
+      "props": {
+        "description": "Chứng từ thực hiện sửa chữa sau khi báo giá được duyệt. Loại: sửa chữa xe Delta/khách hàng, thay lốp, thay ắc quy, phục hồi phụ tùng hỏng. Chốt lệnh = ghi nhận số lượng thực dùng/hỏng/thừa và giờ công khi kết thúc."
+      }
+    },
+    {
+      "key": "term:ngoai-co-so",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Ngoài cơ sở",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 27
+      },
+      "props": {
+        "description": "Cơ sở đặc biệt hệ thống tạo sẵn cho mỗi chi nhánh, gán tự động cho nghiệp vụ phát sinh ngoài mọi cơ sở nội bộ (vd cấp dầu tại cây dầu mua ngoài của đối tác, hoá đơn lẻ). Không tạo/sửa/xoá được; cần phân quyền riêng mới thấy."
+      }
+    },
+    {
+      "key": "term:nha-cung-cap-hhdv",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Nhà cung cấp HHDV",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 77
+      },
+      "props": {
+        "description": "Đơn vị bán hàng hoá/dịch vụ cho Delta, gồm cả xưởng ngoài. Có phương thức thanh toán trả trước hoặc trả sau."
+      }
+    },
+    {
+      "key": "term:phan-luong",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Phân luồng",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 92
+      },
+      "props": {
+        "description": "Trường hợp nghiệp vụ của 1 chứng từ, quyết định các bước và trường hiển thị. Vd báo giá: Sửa xe / Bán phụ tùng; lệnh sửa chữa: Sửa chữa xe / Phục hồi phụ tùng hỏng; đơn mua HHDV: Mua hàng hoá / Mua dịch vụ / Mua dịch vụ có phương tiện / Mua dịch vụ sửa chữa ngoài / Mua dịch vụ sửa chữa phụ tùng hỏng ở xưởng ngoài."
+      }
+    },
+    {
+      "key": "term:phu-tung-hong",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Phụ tùng hỏng",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 72
+      },
+      "props": {
+        "description": "Phụ tùng thay ra từ phương tiện, đưa vào xưởng để phục hồi. Phục hồi thành công thì nhập kho lại; thất bại thì chuyển sang rác thải chờ thanh lý."
+      }
+    },
+    {
+      "key": "term:phuong-tien",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Phương tiện",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 87
+      },
+      "props": {
+        "description": "Xe của Delta (đầu kéo, xe tải, sơ mi-rơ mooc…) hoặc xe của khách hàng mang tới sửa. Hiển thị dạng \"[Mã PT] - [Tên PT]\"."
+      }
+    },
+    {
+      "key": "term:ptvt",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "PTVT",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 52
+      },
+      "props": {
+        "aliases": [
+          "Phụ tùng vật tư"
+        ],
+        "description": "Danh mục phụ tùng và vật tư dùng cho sửa chữa phương tiện, tách riêng với Lốp và Ắc quy. Trong báo giá \"PTVT còn lại\" là phụ tùng không thuộc Lốp/Ắc quy."
+      }
+    },
+    {
+      "key": "term:tat-ca-co-so",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Tất cả cơ sở",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 32
+      },
+      "props": {
+        "description": "Chế độ xem tổng hợp mọi cơ sở trong chi nhánh mà người dùng được phân quyền (gồm cả \"Ngoài cơ sở\"). Danh sách có thêm cột Cơ sở; Tạo mới ở chế độ này phải chọn 1 cơ sở trước."
+      }
+    },
+    {
+      "key": "term:thanh-toan-tra-truoc",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Thanh toán trả trước",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 132
+      },
+      "props": {
+        "aliases": [
+          "trả sau"
+        ],
+        "description": "Hai phương thức thanh toán với nhà cung cấp hoặc khách hàng. Trả trước: lập đề nghị thanh toán cho từng đơn. Trả sau: gom vào bảng công nợ theo tháng rồi chốt công nợ (chốt được nhiều lần) và ghi nhận thanh toán."
+      }
+    },
+    {
+      "key": "term:thu-hoi",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Thu hồi",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 152
+      },
+      "props": {
+        "description": "Người tạo rút lại yêu cầu đang chờ phê duyệt. Nếu thu hồi và phê duyệt xảy ra cùng lúc, hệ thống ưu tiên thu hồi."
+      }
+    },
+    {
+      "key": "term:xuong",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Xưởng",
+      "status": null,
+      "updated": "2026-10-01",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 37
+      },
+      "props": {
+        "description": "Cơ sở sửa chữa của Delta (xưởng nhà). Phân biệt với xưởng ngoài — xưởng của nhà cung cấp HHDV mà Delta thuê sửa."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "E-common-001",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 172
+      }
+    },
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "E-common-002",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 173
+      }
+    },
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "E-common-003",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 174
+      }
+    },
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "E-common-004",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 175
+      }
+    },
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "E-common-005",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 176
+      }
+    },
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "E-common-006",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 177
+      }
+    },
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "E-common-007",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 178
+      }
+    },
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "E-common-008",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 179
+      }
+    },
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "E-common-009",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 180
+      }
+    },
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "E-common-010",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 181
+      }
+    },
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "docs/_shared/docs-input/Website-common-rules.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 8
+      }
+    },
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "docs/_shared/screen-patterns.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "docs/_shared/conventions.md",
+      "to": "docs/design.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/conventions.md",
+        "line": 6
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:bao-cao-su-co",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 97
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:bao-gia",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 102
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:barem",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 122
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:boi-thuong-thiet-hai",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 142
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:cay-dau",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 42
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:ccdc",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 57
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:chi-nhanh",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 17
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:chi-phi-cap-1",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 67
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:co-so",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 22
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:de-xuat-cap-moi",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 147
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:dinh-muc-nhien-lieu",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 117
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:don-mua-hhdv",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 112
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:dvkt",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 62
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:gttt",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 137
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:hhdv",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 47
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:ke-hoach-mua-dau",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 127
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:khach-hang-dk05",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 82
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:lenh-sua-chua",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 107
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:ngoai-co-so",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 27
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:nha-cung-cap-hhdv",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 77
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:phan-luong",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 92
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:phu-tung-hong",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 72
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:phuong-tien",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 87
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:ptvt",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 52
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:tat-ca-co-so",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 32
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:thanh-toan-tra-truoc",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 132
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:thu-hoi",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 152
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:xuong",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 37
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "docs/_shared/docs-input/lg-export.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 6
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "docs/_shared/system-overview.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "docs/_shared/operating-environment.md",
+      "to": "docs/_shared/docs-input/lg-export.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/operating-environment.md",
+        "line": 6
+      }
+    },
+    {
+      "from": "docs/_shared/operating-environment.md",
+      "to": "docs/_shared/system-overview.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/operating-environment.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "docs/_shared/operating-environment.md",
+      "to": "docs/design.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/operating-environment.md",
+        "line": 8
+      }
+    },
+    {
+      "from": "docs/_shared/project-profile.md",
+      "to": "docs/_shared/definitions.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/project-profile.md",
+        "line": 8
+      }
+    },
+    {
+      "from": "docs/_shared/project-profile.md",
+      "to": "docs/_shared/docs-input/lg-export.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/project-profile.md",
+        "line": 6
+      }
+    },
+    {
+      "from": "docs/_shared/project-profile.md",
+      "to": "docs/_shared/operating-environment.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/project-profile.md",
+        "line": 9
+      }
+    },
+    {
+      "from": "docs/_shared/project-profile.md",
+      "to": "docs/_shared/system-overview.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/project-profile.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "E-common-006",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 228
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "E-common-007",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 229
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "E-common-008",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 58
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "E-common-009",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 58
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "E-common-010",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 58
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "docs/_shared/conventions.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 8
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "docs/_shared/docs-input/Website-common-rules.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 9
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "docs/_shared/images/cmp-01.png",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 52
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "docs/_shared/images/cmp-02.png",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 71
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "docs/_shared/images/cmp-03.png",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 104
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "docs/_shared/images/cmp-04.png",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 123
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "docs/_shared/images/cmp-08.png",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 188
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "docs/components.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "docs/_shared/screen-patterns.md",
+      "to": "docs/design.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/screen-patterns.md",
+        "line": 6
+      }
+    },
+    {
+      "from": "docs/_shared/system-overview.md",
+      "to": "docs/_shared/docs-input/lg-export.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/system-overview.md",
+        "line": 6
+      }
+    }
+  ]
+}
