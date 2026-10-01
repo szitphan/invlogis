@@ -3,12 +3,12 @@ type: shared-system-overview
 status: draft
 updated: 2026-10-01
 links:
-  - docs-input/lg-export.md
+  - docs-input/srs-cu/lg-srs-export.md
 ---
 # System Overview
 
 Bức tranh tổng của hệ thống: ai dùng, gồm những module nào, tổ chức dữ liệu ra sao và nối với dịch
-vụ ngoài nào. Nguồn: tài liệu SRS LG (`docs-input/lg-export.md`, bản export 2026-10). Chi tiết từng
+vụ ngoài nào. Nguồn: tài liệu SRS LG (`docs-input/srs-cu/lg-srs-export.md`, bản export 2026-10). Chi tiết từng
 feature nằm ở `docs/{feature}/`.
 
 ## Actors

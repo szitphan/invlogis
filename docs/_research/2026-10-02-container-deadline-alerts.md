@@ -4,9 +4,9 @@ keyword: "cảnh báo mốc SI/CY/DEM/DET"
 status: draft
 updated: 2026-10-02
 links:
-  - docs-input/Giao_nhan_container_2.md
-  - docs-input/Quy_trinh_dieu_phoi.md
-  - docs-input/Quy_trinh_cung_cap_dich_vu_tong_quat.md
+  - docs-input/sop/sop-giao-nhan-container.md
+  - docs-input/sop/sop-dieu-phoi.md
+  - docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md
 ---
 
 # Cảnh báo mốc SI / CY / DEM / DET
@@ -124,7 +124,7 @@ Nhu cầu biết sớm lô sắp trễ mốc là có thật trên quy trình, v�
 
 ## Nguồn
 
-1) SOP Giao nhận container, Mục 4 — `docs-input/Giao_nhan_container_2.md` — 2026-08-21
+1) SOP Giao nhận container, Mục 4 — `docs-input/sop/sop-giao-nhan-container.md` — 2026-08-21
 2) Dockflow — Demurrage tracking — [https://dockflow.com/platform/demurrage-tracking/](https://dockflow.com/platform/demurrage-tracking/) — 2026-10-02
 3) BuyCo — Detention and Demurrage — [https://buyco.co/container-shipping-solutions/demurrage-and-detention/](https://buyco.co/container-shipping-solutions/demurrage-and-detention/) — 2026-10-02
 4) BuyCo — Best D&D management software — [https://buyco.co/blog/productivity/best-detention-demurrage-management-software/](https://buyco.co/blog/productivity/best-detention-demurrage-management-software/) — 2026-10-02

@@ -3,13 +3,13 @@ type: shared-definitions
 status: draft
 updated: 2026-10-01
 links:
-  - docs-input/lg-export.md
+  - docs-input/srs-cu/lg-srs-export.md
   - docs/_shared/system-overview.md
 ---
 
 # Definitions
 
-Thuật ngữ nghiệp vụ dùng chung toàn dự án. Nguồn: tài liệu SRS LG (`docs-input/lg-export.md`).
+Thuật ngữ nghiệp vụ dùng chung toàn dự án. Nguồn: tài liệu SRS LG (`docs-input/srs-cu/lg-srs-export.md`).
 Tổ chức dữ liệu Công ty → Chi nhánh → Cơ sở xem [[docs/_shared/system-overview.md|System Overview]] › Tổ chức dữ liệu.
 
 ## Glossary

@@ -33,6 +33,10 @@
           {
             "type": "command",
             "command": ".claude/hooks/session-init.sh"
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/intake-sync.sh session"
           }
         ]
       }
@@ -86,6 +90,10 @@
           {
             "type": "command",
             "command": ".claude/hooks/kg-refresh.sh"
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/intake-sync.sh edit"
           }
         ]
       },
@@ -95,6 +103,16 @@
           {
             "type": "command",
             "command": ".claude/scripts/token-track/token-skill-hook.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/intake-sync.sh prompt"
           }
         ]
       }

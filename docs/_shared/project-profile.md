@@ -3,7 +3,7 @@ type: project-profile
 status: draft
 updated: 2026-10-01
 links:
-  - docs-input/lg-export.md
+  - docs-input/srs-cu/lg-srs-export.md
   - docs/_shared/system-overview.md
   - docs/_shared/definitions.md
   - docs/_shared/operating-environment.md
@@ -38,4 +38,4 @@ Danh sách tác nhân chuẩn kèm tên gọi cần tránh: [[docs/_shared/defin
 |---|---|---|---|
 | "DK05" trong "Khách hàng DK05" nghĩa là gì? | Tạm thời chưa giải thích; dùng nguyên tên | 2026-10-01 | /update-overview |
 | Gọi hành động rút lại yêu cầu chờ duyệt là gì? | Thống nhất "Thu hồi" mọi luồng (không dùng "Huỷ đề xuất") | 2026-10-01 | /update-overview |
-| Tài liệu nguồn của dự án? | SRS LG — `docs-input/lg-export.md` (bản v2.0; mục `[not done]` chưa chốt) | 2026-10-01 | /update-overview |
+| Tài liệu nguồn của dự án? | SRS LG — `docs-input/srs-cu/lg-srs-export.md` (bản v2.0; mục `[not done]` chưa chốt) | 2026-10-01 | /update-overview |

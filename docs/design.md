@@ -761,7 +761,7 @@ Mọi field dùng chung giải phẫu **Field**: *nhãn* (`{typography.label}`, 
 
 ### Phân trang danh sách (theo SC-04, 29/09/2026)
 
-Nguồn: `Website-common-rules.md` SC-04 (phân trang) và 2.17 (nhóm dữ liệu). Component: **`Pagination`**
+Nguồn: `web-common-rules.md` SC-04 (phân trang) và 2.17 (nhóm dữ liệu). Component: **`Pagination`**
 (trang Navigation) · Variant = **Pages** / Count / Compact / Dots / None · Size = md / sm ·
 `Has Prev`, `Has Next`, `Show Page Size Selector` · slot `Pages`. Hướng dẫn chung của component:
 `docs/components.md` § Pagination.
@@ -795,7 +795,7 @@ Nguồn: `Website-common-rules.md` SC-04 (phân trang) và 2.17 (nhóm dữ li�
 
 ### Quy tắc bảng danh sách (theo 2.9, 2.14, 2.16–2.20, SC-07 — 01/10/2026)
 
-Nguồn: `Website-common-rules.md`. Áp dụng cho mọi bảng danh sách (mẫu P1). Cột/trường cụ thể (cột
+Nguồn: `web-common-rules.md`. Áp dụng cho mọi bảng danh sách (mẫu P1). Cột/trường cụ thể (cột
 nào tìm, nhóm, lọc được; action nào có ở trạng thái nào) do từng UC định nghĩa.
 
 | Quy tắc | Chuẩn |
@@ -913,7 +913,7 @@ ChatMessage / ChatMessageBubble (assistant/user; filled/ghost) · ChatMessageMet
 
 ## Components - innvie logis (không có trong thư viện Astryx)
 
-Đối chiếu với `Website-common-rules.md`, 5 mẫu dưới đây **không có** trong thư viện Figma/code
+Đối chiếu với `web-common-rules.md`, 5 mẫu dưới đây **không có** trong thư viện Figma/code
 Astryx — ghép từ các component có sẵn. **Cả 5 đã dựng thành Figma component thật** (quyết định 29/09/2026,
 xem từng mục). Mẫu ghép mới sau này (nếu có): khi vẽ, dùng đúng instance
 của từng component thành phần, **không tạo Figma component mới** cho cả khối. Nếu sau này phát hiện
@@ -1145,7 +1145,7 @@ Code đã có: plugin `columnSettings` của Table (ẩn/hiện, thứ tự, `is
 ### Activity Log (theo SC-08, component thật 29/09/2026)
 
 Lịch sử thay đổi trạng thái và hành động trên **một bản ghi**, mở từ màn chi tiết. Nguồn:
-`Website-common-rules.md` SC-08. Code Astryx không có Timeline/Activity nên dựng riêng; cấu trúc
+`web-common-rules.md` SC-08. Code Astryx không có Timeline/Activity nên dựng riêng; cấu trúc
 mỗi mốc theo `TimelineSection` của mẫu P7 (Avatar → tên đậm + nội dung → thời gian).
 
 **Nút mở** = `Activity Log / Trigger`: góc trên phải header màn chi tiết/drawer, **ngoài cùng bên phải**,
@@ -1320,7 +1320,7 @@ Anh và kiểu Mỹ, chỉ để tham khảo bố cục. Khi vẽ màn, chữ v�
 * **Thứ tự nút:** chính trước, phụ sau (từ trái sang): `[Lưu] [Hủy]` (Primary rồi Ghost). Trên header: phụ bên trái, chính ngoài cùng bên phải ("Nhập lại kho" · "Sửa").
 * **Placeholder** là ví dụ định dạng ("ten@congty.vn", "0901 234 567"), không thay cho nhãn.
 * **Trường bắt buộc:** dấu `*` sau nhãn (FieldLabel Indicator=Required); trường không bắt buộc ghi "(không bắt buộc)".
-* **Giá trị rỗng** trong bảng theo loại trường (`Website-common-rules.md` 2.10, chốt 01/10/2026):
+* **Giá trị rỗng** trong bảng theo loại trường (`web-common-rules.md` 2.10, chốt 01/10/2026):
   cột Ghi chú → để trống hẳn · ID/Mã → `N/A` · mọi cột khác → `-`.
 * **Đếm** đặt cạnh tiêu đề bằng Badge Neutral nhỏ ("Bảng công việc 7", "Đang xử lý 3").
 * Chữ tiếng Việt thường dài hơn tiếng Anh khoảng 20–30%. Nhãn nút, tab, cột bảng phải để chỗ co giãn, không cố định bề rộng theo chữ tiếng Anh của mẫu.
@@ -1334,7 +1334,7 @@ Cấu trúc câu cho copy ĐỘNG (đổi theo tình huống, khác nhãn tĩnh 
 * **Tông giọng chung:** ngôi "bạn", câu ngắn, động từ đứng đầu cho hành động, không đùa cợt, không "Vui lòng" rườm rà. Áp dụng cho mọi dòng dưới.
 * **Xác nhận hành động phá hủy** (Dialog — Confirmation): tiêu đề `"<Động từ> <đối tượng>?"` + nội dung nói rõ hậu quả/có hoàn tác được không + nút ghi đúng hành động (Destructive) thay "OK"/"Hủy" chung.
   Ví dụ: "Xóa yêu cầu #1024? Yêu cầu và lịch sử xử lý sẽ mất, không thể hoàn tác." → `[Xóa yêu cầu] [Hủy]`
-* **Xác nhận hành động khác** (Dialog — Confirmation, theo SC-03 `Website-common-rules.md`): 4 mẫu cố định,
+* **Xác nhận hành động khác** (Dialog — Confirmation, theo SC-03 `web-common-rules.md`): 4 mẫu cố định,
   ưu tiên dùng tên bản ghi nếu có, không có tên thì dùng mã, không có cả hai thì bỏ qua phần đó.
   - Thu hồi: "Thu hồi yêu cầu?" · "Bạn đang thu hồi [tên feature] **[tên/mã]**. Yêu cầu sẽ trở về trạng thái Bản nháp." → `[Thu hồi] [Hủy]`
   - Phê duyệt: "Xác nhận phê duyệt?" · "Bạn đang phê duyệt [tên feature] **[tên/mã]**." → `[Phê duyệt] [Hủy]`
@@ -1345,7 +1345,7 @@ Cấu trúc câu cho copy ĐỘNG (đổi theo tình huống, khác nhãn tĩnh 
     (Trình duyệt có thể thay bằng câu mặc định của nó; không vẽ màn này trong Figma.)
 * **Lỗi kiểm tra trường** (cấp field, khác Banner/Toast): nói đúng trường nào sai + cách sửa, câu ngắn dưới field, không lộ mã lỗi kỹ thuật.
   Ví dụ: "Số điện thoại phải có 10 số" thay vì "Lỗi 422: invalid_format".
-* **Lỗi xung đột nghiệp vụ** (Dialog — Popup Error, theo mục 2.15 Loại 2 của `Website-common-rules.md`,
+* **Lỗi xung đột nghiệp vụ** (Dialog — Popup Error, theo mục 2.15 Loại 2 của `web-common-rules.md`,
   khác Dialog xác nhận ở trên): dùng khi lỗi chỉ phát hiện được SAU KHI submit, do đối chiếu dữ liệu
   hoặc ràng buộc nghiệp vụ ở server (trùng mã, vượt hạn mức, xung đột dữ liệu...) — không thuộc về
   một trường cụ thể nên không báo inline được. Tiêu đề lỗi (màu error) + mô tả chi tiết + nút Đóng,
@@ -1381,7 +1381,7 @@ kỹ thuật → Toast error (xem Copy động).
 | Email sai định dạng | Phải có `@`. Câu lỗi: "Email không đúng định dạng." |
 | Select | Single: chọn 1. Multi: giá trị hiện dạng tag trong ô. Danh sách từ server: tìm gần đúng khi gõ |
 
-* Câu lỗi theo tông giọng của Copy động (không "Vui lòng"), không lấy nguyên văn `Website-common-rules.md`.
+* Câu lỗi theo tông giọng của Copy động (không "Vui lòng"), không lấy nguyên văn `web-common-rules.md`.
 
 ### Ngày giờ
 
@@ -1405,7 +1405,7 @@ Dùng component **Timestamp** và chọn Format phù hợp. Giờ luôn là **24
 
 ### Số và tiền tệ
 
-Theo `Website-common-rules.md` (mục 2.4, 2.5) — **đổi từ chuẩn vi-VN sang chuẩn dự án dưới đây**
+Theo `web-common-rules.md` (mục 2.4, 2.5) — **đổi từ chuẩn vi-VN sang chuẩn dự án dưới đây**
 (quyết định 29/09/2026), thay cho định dạng dấu chấm/phẩy trước đó.
 
 * **Số:** dấu phẩy `,` ngăn hàng nghìn, dấu chấm `.` thập phân: `1,234,567` · `12.5`.
@@ -1551,7 +1551,7 @@ SideNav → MobileNav; bảng nhiều cột → List/Item; form 2 cột → 1 c�
 * **KG-02:** quy trình áp lại sửa của dự án sau mỗi lần đồng bộ Astryx: `docs/setup-figma.md` § 5.1.
 * **KG-22:** giá trị rỗng theo loại trường (Ghi chú trống · ID/Mã `N/A` · còn lại `-`).
 * **KG-09:** bề rộng khung/cột đo từ node Figma của mẫu, thay số ước lượng từ ảnh (xem Grid & Container).
-* **KG-18, KG-19, KG-24:** kiểm tra dữ liệu nhập, câu lỗi ngày/email, giới hạn ký tự (xem *Nhập liệu và kiểm tra*); rời trang có dữ liệu chưa lưu dùng confirm gốc của trình duyệt (xem Copy động). Theo `Website-common-rules.md` 2.1–2.3, 2.7, 2.13.
+* **KG-18, KG-19, KG-24:** kiểm tra dữ liệu nhập, câu lỗi ngày/email, giới hạn ký tự (xem *Nhập liệu và kiểm tra*); rời trang có dữ liệu chưa lưu dùng confirm gốc của trình duyệt (xem Copy động). Theo `web-common-rules.md` 2.1–2.3, 2.7, 2.13.
 * **KG-20:** làm tròn số/USD 2 số lẻ nửa lên, VND luôn lên hàng đơn vị (xem Số và tiền tệ, 2.6).
 * **KG-21, KG-25, KG-26, KG-27:** tìm kiếm, căn lề, freeze, nhóm, sắp xếp, export, lọc theo cột, cột action (xem *Quy tắc bảng danh sách*).
 * **KG-12:** sửa trong ô bảng theo ngữ cảnh (danh sách click-to-edit, lưu từng ô; form luôn là input, lưu cùng form); lỗi ô detached: viền + icon + Tooltip, Banner khi Submit (xem § Sửa trong bảng). Figma: `Sửa trong bảng / Editable Cell`.

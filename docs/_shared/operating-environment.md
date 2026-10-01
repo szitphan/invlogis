@@ -3,7 +3,7 @@ type: shared-environment
 status: draft
 updated: 2026-10-01
 links:
-  - docs-input/lg-export.md
+  - docs-input/srs-cu/lg-srs-export.md
   - docs/_shared/system-overview.md
   - docs/design.md
 ---
@@ -11,7 +11,7 @@ links:
 # Operating Environment
 
 Môi trường vận hành chung: nền tảng, người dùng, ngôn ngữ và bộ yêu cầu phi chức năng nền mà mọi
-feature kế thừa. Nguồn: tài liệu SRS LG (`docs-input/lg-export.md` — NFR mục 6, UC02.03.01).
+feature kế thừa. Nguồn: tài liệu SRS LG (`docs-input/srs-cu/lg-srs-export.md` — NFR mục 6, UC02.03.01).
 
 ## Target Platforms
 

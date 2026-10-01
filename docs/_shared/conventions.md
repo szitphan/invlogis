@@ -5,7 +5,7 @@ updated: 2026-10-01
 links:
   - docs/design.md
   - docs/_shared/screen-patterns.md
-  - docs-input/Website-common-rules.md
+  - docs-input/ui-common/web/web-common-rules.md
 ---
 
 # UI Common Rules (GR) + lỗi dùng chung (E-common)

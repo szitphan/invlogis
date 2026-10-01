@@ -4,9 +4,9 @@ keyword: "biên bản giao hàng điện tử"
 status: draft
 updated: 2026-10-02
 links:
-  - docs-input/Giao_nhan_container_2.md
-  - docs-input/Quy_trinh_dieu_phoi.md
-  - docs-input/doc.md
+  - docs-input/sop/sop-giao-nhan-container.md
+  - docs-input/sop/sop-dieu-phoi.md
+  - docs-input/sop/sop-ban-do-kien-thuc.md
   - docs/_research/2026-10-02-container-deadline-alerts.md
 ---
 
@@ -120,8 +120,8 @@ Nhu cầu vẫn dựa trên SOP chứ chưa đo bằng số liệu thiệt hại
 
 ## Nguồn
 
-1) SOP Giao nhận container, Mục 3 và Mục 5 — `docs-input/Giao_nhan_container_2.md` — 2026-08-21
-2) SOP Điều phối, các bước chụp ảnh và tải biên bản lên Lệnh vận tải — `docs-input/Quy_trinh_dieu_phoi.md`
+1) SOP Giao nhận container, Mục 3 và Mục 5 — `docs-input/sop/sop-giao-nhan-container.md` — 2026-08-21
+2) SOP Điều phối, các bước chụp ảnh và tải biên bản lên Lệnh vận tải — `docs-input/sop/sop-dieu-phoi.md`
 3) Abivin — Bằng chứng giao hàng điện tử — [https://www.abivin.com/vi/blog/it-truyen-thong-7/bang-chung-giao-hang-dien-tu-epod-la-gi-1745](https://www.abivin.com/vi/blog/it-truyen-thong-7/bang-chung-giao-hang-dien-tu-epod-la-gi-1745) — 2026-10-02
 4) Abivin vRoute — [https://www.abivin.com/vroute](https://www.abivin.com/vroute) — 2026-10-02
 5) CETA — Danh sách chức năng — [https://help.ceta.vn/kb/uncategorized/danh-sach-chuc-nang-giai-phap-ceta/](https://help.ceta.vn/kb/uncategorized/danh-sach-chuc-nang-giai-phap-ceta/) — 2026-10-02

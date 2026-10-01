@@ -37,7 +37,7 @@ Toast xuất hiện góc trên phải màn hình, tự động ẩn sau 3 giây.
 
 Hệ thống thông báo in-app, hiển thị qua icon 🔔 trên header.
 
-![image-20260429-085332.png](Website-common-rules-images/image-20260429-085332.png)
+![image-20260429-085332.png](images/image-20260429-085332.png)
 
 | **Trạng thái thông báo** | **Trạng thái thông báo** | **Trạng thái thông báo** |
 | --- | --- | --- |
@@ -86,15 +86,15 @@ Modal xác nhận trước khi thực hiện hành động quan trọng hoặc k
 
 Các hành động bắt buộc dùng SC-03: Xoá, Thu hồi, Phê duyệt, Từ chối, Huỷ form (khi có dữ liệu chưa lưu).
 
-![image-20260426-154518.png](Website-common-rules-images/image-20260426-154518.png)
+![image-20260426-154518.png](images/image-20260426-154518.png)
 
-![image-20260426-154903.png](Website-common-rules-images/image-20260426-154903.png)
+![image-20260426-154903.png](images/image-20260426-154903.png)
 
-![image-20260426-155113.png](Website-common-rules-images/image-20260426-155113.png)
+![image-20260426-155113.png](images/image-20260426-155113.png)
 
-![image-20260426-155246.png](Website-common-rules-images/image-20260426-155246.png)
+![image-20260426-155246.png](images/image-20260426-155246.png)
 
-![image-20260426-155315.png](Website-common-rules-images/image-20260426-155315.png)
+![image-20260426-155315.png](images/image-20260426-155315.png)
 
 |  | **Action** | **Tiêu đề** | **Nội dung** |
 | --- | --- | --- | --- |
@@ -112,7 +112,7 @@ Các hành động bắt buộc dùng SC-03: Xoá, Thu hồi, Phê duyệt, Từ
 
 Thanh phân trang chuẩn dùng ở cuối tất cả màn hình danh sách.
 
-![image-20260426-144754.png](Website-common-rules-images/image-20260426-144754.png)
+![image-20260426-144754.png](images/image-20260426-144754.png)
 
 |  | **Thành phần** | **Control** | **Mô tả** |
 | --- | --- | --- | --- |
@@ -127,7 +127,7 @@ Thanh phân trang chuẩn dùng ở cuối tất cả màn hình danh sách.
 
 Drawer slide-in từ phải, chứa các bộ lọc nâng cao cho màn hình danh sách. Các trường lọc cụ thể được định nghĩa trong từng UC.
 
-![image-20260429-080928.png](Website-common-rules-images/image-20260429-080928.png)
+![image-20260429-080928.png](images/image-20260429-080928.png)
 
 |  | **Thành phần** | **Control** | **Mô tả** |
 | --- | --- | --- | --- |
@@ -143,7 +143,7 @@ Drawer slide-in từ phải, chứa các bộ lọc nâng cao cho màn hình dan
 
 Panel/Dropdown cho phép người dùng bật/tắt và sắp xếp thứ tự cột trong bảng danh sách. Cấu hình được lưu theo từng người dùng.
 
-![image-20250226-085052.png](Website-common-rules-images/image-20250226-085052.png)
+![image-20250226-085052.png](images/image-20250226-085052.png)
 
 |  | **Thành phần** | **Control** | **Mô tả** |
 | --- | --- | --- | --- |
@@ -158,7 +158,7 @@ Panel/Dropdown cho phép người dùng bật/tắt và sắp xếp thứ tự c
 
 Pattern chuẩn cho cột action cuối mỗi hàng trong bảng danh sách.
 
-![image-20260426-145007.png](Website-common-rules-images/image-20260426-145007.png)
+![image-20260426-145007.png](images/image-20260426-145007.png)
 
 |  | **Thành phần** | **Control** | **Mô tả** |
 | --- | --- | --- | --- |
@@ -174,19 +174,19 @@ Pattern chuẩn cho cột action cuối mỗi hàng trong bảng danh sách.
 
 Popover/Panel hiển thị lịch sử thay đổi trạng thái và hành động trên bản ghi. Trigger bằng icon 🕐 ở góc trên phải màn hình chi tiết/drawer.
 
-![image-20260429-081529.png](Website-common-rules-images/image-20260429-081529.png)
+![image-20260429-081529.png](images/image-20260429-081529.png)
 
 | **Thành phần** | **Control** | **Mô tả** |
 | --- | --- | --- |
-| Icon trigger | Icon / Button | Icon ![image-20260422-090114.png](Website-common-rules-images/image-20260422-090114.png) góc trên phải ở mỗi màn hình xem thông tin chi tiết.<br>Click → mở panel lịch sử. |
+| Icon trigger | Icon / Button | Icon ![image-20260422-090114.png](images/image-20260422-090114.png) góc trên phải ở mỗi màn hình xem thông tin chi tiết.<br>Click → mở panel lịch sử. |
 | Mỗi mốc lịch sử | Label | Hiển thị:<br>[Avatar] [Tên tài khoản] [Ngày thực hiện dd/mm/yyyy] [Icon] [Nội dung hành động] [Lý do: ...] ← chỉ hiển thị khi có lý do (Từ chối) |
 | Sắp xếp | — | Mới nhất hiển thị trên cùng. |
 
 **Nội dung và icon theo hành động:**
 
-![image-20260601-103319.png](Website-common-rules-images/image-20260601-103319.png)
+![image-20260601-103319.png](images/image-20260601-103319.png)
 
-![image-20260429-081550.png](Website-common-rules-images/image-20260429-081550.png)
+![image-20260429-081550.png](images/image-20260429-081550.png)
 
 | **Hành động** | **Icon** | **Nội dung hiển thị** |
 | --- | --- | --- |
@@ -213,7 +213,7 @@ Xem thêm ở [UC00.00.02](https://deltavn.atlassian.net/wiki/spaces/LG/pages/13
 
 Component upload file dùng chung cho các màn hình cần đính kèm chứng từ, tài liệu.màn
 
-![image-20260426-160117.png](Website-common-rules-images/image-20260426-160117.png)
+![image-20260426-160117.png](images/image-20260426-160117.png)
 
 | **Thành phần** | **Control** | **Mô tả** |
 | --- | --- | --- |
@@ -236,9 +236,9 @@ Component upload file dùng chung cho các màn hình cần đính kèm chứng 
 
 Sidebar menu cố định bên trái màn hình, là điểm truy cập chính đến tất cả module và tính năng trong hệ thống.
 
-![image-20260426-161249.png](Website-common-rules-images/image-20260426-161249.png)
+![image-20260426-161249.png](images/image-20260426-161249.png)
 
-![image-20260426-161622.png](Website-common-rules-images/image-20260426-161622.png)
+![image-20260426-161622.png](images/image-20260426-161622.png)
 
 | **Xưởng** | **Cây dầu** | **Danh mục** |
 | --- | --- | --- |
@@ -427,7 +427,7 @@ Hệ thống có **3 loại error message** phân biệt rõ theo nguồn gốc 
 
 ## 2.16 Freeze cột trong bảng danh sách
 
-![image-20260426-150406.png](Website-common-rules-images/image-20260426-150406.png)
+![image-20260426-150406.png](images/image-20260426-150406.png)
 
 | **Quy tắc** | **Mô tả** |
 | --- | --- |
@@ -470,7 +470,7 @@ Cho phép xuất bảng danh sách dưới dạng file PDF / Excel.
 
 Nội dung file được xuất sẽ bao gồm toàn bộ bảng (sau khi áp dụng bộ lọc, nhóm, tuỳ chỉnh,…) của toàn bộ các trang được trải ra.
 
-![Screenshot 2025-02-26 at 15.48.51.png](Website-common-rules-images/Screenshot_2025-02-26_at_15.48.51.png)
+![Screenshot 2025-02-26 at 15.48.51.png](images/Screenshot_2025-02-26_at_15.48.51.png)
 
 ## 2.20 — Filter by keyword
 
@@ -486,8 +486,8 @@ Nếu là các trường **chọn giá trị**, hiển thị dropdown để filt
 
 Nếu là các trường **date time**, hiển thị date range picker để chọn from - to. Date range picker chỉ chọn dd/mm/yyyy chứ không chọn giờ.
 
-![image-20250529-053901.png](Website-common-rules-images/image-20250529-053901.png)
+![image-20250529-053901.png](images/image-20250529-053901.png)
 
 Nếu là các trường **số/tiền/phần trăm**, hiển thị 2 ô textbox min - max để người dùng nhập.
 
-![image-20250529-054009.png](Website-common-rules-images/image-20250529-054009.png)
+![image-20250529-054009.png](images/image-20250529-054009.png)

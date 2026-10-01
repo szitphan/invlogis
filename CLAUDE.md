@@ -10,6 +10,7 @@
 | `.claude/agents/` | Specialized review personas (`@senior-ba`, `@uxui-reviewer`, ...) — Phase 4+ |
 | `.claude/hooks/` | Auto-changelog, session-init, status-transition (Phase 4+), post-edit-stale (Phase 6+) |
 | `.claude/rules/` | Naming, status lifecycle, changelog, approval-gate, agent conventions, __diagram-correctness__ (gate "vẽ đúng" cho 11 skill diagram) |
+| `docs-input/` | Tài liệu khách gửi. Sổ nguồn `README.md` + backlog `docs/_shared/backlog.md` tự đồng bộ (`_scripts/intake-sync.py`, rule `backlog.md`) |
 | `_templates/` | Note templates referenced by skills |
 
 ## Folder structure‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
@@ -263,6 +264,7 @@ __Hooks (auto-fire on PostToolUse Write/Edit):__
 - `status-transition.sh` — print suggestion khi `status:` field thay đổi.
 - `post-edit-stale.sh` — reverse-graph scan `links:` → mark downstream `status: stale` + log `_shared/staleness.md`.
 - `session-init.sh` (SessionStart) — print dashboard counts.
+- `intake-sync.sh` (SessionStart/UserPromptSubmit/PostToolUse) — đăng ký nguồn mới trong `docs-input/`, tự đóng task backlog theo điều kiện "Xong khi".
 
 > Hook `auto-commit.sh` đã xóa (2026-07-06) — commit git thực hiện thủ công theo nhu cầu.
 

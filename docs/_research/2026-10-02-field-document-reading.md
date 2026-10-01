@@ -4,9 +4,9 @@ keyword: "đọc chứng từ hiện trường bằng ảnh chụp"
 status: draft
 updated: 2026-10-02
 links:
-  - docs-input/Giao_nhan_container_2.md
-  - docs-input/Quy_trinh_dieu_phoi.md
-  - docs-input/Quy_trinh_cung_cap_dich_vu_tong_quat.md
+  - docs-input/sop/sop-giao-nhan-container.md
+  - docs-input/sop/sop-dieu-phoi.md
+  - docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md
   - docs/_research/2026-10-02-container-deadline-alerts.md
   - docs/_research/2026-10-02-eport-integration.md
   - docs/_research/2026-10-02-electronic-delivery-record.md
@@ -123,9 +123,9 @@ Nhu cầu "chụp là xong" là có thật trên quy trình và đã được SO
 
 ## Nguồn
 
-1) SOP Giao nhận container, Mục 1, 3, 6 — `docs-input/Giao_nhan_container_2.md` — 2026-08-21
-2) SOP Điều phối, node AI đọc số container và số tờ khai — `docs-input/Quy_trinh_dieu_phoi.md`
-3) SOP Cung cấp dịch vụ tổng quát, trợ lý AI đọc chứng từ định danh — `docs-input/Quy_trinh_cung_cap_dich_vu_tong_quat.md`
+1) SOP Giao nhận container, Mục 1, 3, 6 — `docs-input/sop/sop-giao-nhan-container.md` — 2026-08-21
+2) SOP Điều phối, node AI đọc số container và số tờ khai — `docs-input/sop/sop-dieu-phoi.md`
+3) SOP Cung cấp dịch vụ tổng quát, trợ lý AI đọc chứng từ định danh — `docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md`
 4) FPT.AI — Số hoá bộ chứng từ xuất nhập khẩu — [https://fpt.ai/vi/bai-viet/so-hoa-bo-chung-tu-xuat-nhap-khau-voi-fptai-reader/](https://fpt.ai/vi/bai-viet/so-hoa-bo-chung-tu-xuat-nhap-khau-voi-fptai-reader/) — 2026-10-02
 5) FPT.AI — Hướng dẫn Reader — [https://docs.fpt.ai/docs/vi/vision/documentation/reader-guide/](https://docs.fpt.ai/docs/vi/vision/documentation/reader-guide/) — 2026-10-02
 6) VNPT SmartReader — [https://vnptai.io/ldp/smartreader/vi](https://vnptai.io/ldp/smartreader/vi) — 2026-10-02

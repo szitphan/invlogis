@@ -21,7 +21,7 @@ Các component dùng chung toàn hệ thống. Các UC chỉ cần gọi theo m�
 
 ## MSC-01 — In-app Notification
 
-![image-20260518-020444.png](Application-common-rules-images/image-20260518-020444.png)
+![image-20260518-020444.png](images/image-20260518-020444.png)
 
 Notification hiển thị trong notification center của app.
 
@@ -40,15 +40,15 @@ Badge số đếm trên icon chuông.
 
 ## MSC-02 — Confirm Popup
 
-![image-20260518-020630.png](Application-common-rules-images/image-20260518-020630.png)
+![image-20260518-020630.png](images/image-20260518-020630.png)
 
-![image-20260518-020644.png](Application-common-rules-images/image-20260518-020644.png)
+![image-20260518-020644.png](images/image-20260518-020644.png)
 
-![image-20260518-020658.png](Application-common-rules-images/image-20260518-020658.png)
+![image-20260518-020658.png](images/image-20260518-020658.png)
 
-![image-20260518-020734.png](Application-common-rules-images/image-20260518-020734.png)
+![image-20260518-020734.png](images/image-20260518-020734.png)
 
-![image-20260518-020746.png](Application-common-rules-images/image-20260518-020746.png)
+![image-20260518-020746.png](images/image-20260518-020746.png)
 
 Popup xác nhận trước khi thực hiện hành động quan trọng hoặc không thể hoàn tác.
 
@@ -75,7 +75,7 @@ Popup xác nhận trước khi thực hiện hành động quan trọng hoặc k
 
 ## MSC-03 — Filter Bottom Sheet
 
-![image-20260518-020836.png](Application-common-rules-images/image-20260518-020836.png)
+![image-20260518-020836.png](images/image-20260518-020836.png)
 
 Bottom Sheet bộ lọc nâng cao.
 
@@ -92,7 +92,7 @@ Bottom Sheet bộ lọc nâng cao.
 
 ## MSC-04 — Action Sheet
 
-![image-20260518-021018.png](Application-common-rules-images/image-20260518-021018.png)
+![image-20260518-021018.png](images/image-20260518-021018.png)
 
 Bottom Sheet danh sách action từ 1 item. Tương ứng với Action Matrix (SC-07) trên web.
 
@@ -108,7 +108,7 @@ Bottom Sheet danh sách action từ 1 item. Tương ứng với Action Matrix (S
 
 ## MSC-05 — Activity Log
 
-![image-20260518-021106.png](Application-common-rules-images/image-20260518-021106.png)
+![image-20260518-021106.png](images/image-20260518-021106.png)
 
 | **Thành phần** | **Control** | **Mô tả** |
 | --- | --- | --- |
@@ -120,7 +120,7 @@ Bottom Sheet danh sách action từ 1 item. Tương ứng với Action Matrix (S
 
 ## MSC-06 — Stepper Header
 
-![image-20260515-050224.png](Application-common-rules-images/image-20260515-050224.png)
+![image-20260515-050224.png](images/image-20260515-050224.png)
 
 Header thanh tiến trình cho màn hình có luồng nghiệp vụ nhiều bước.
 
@@ -137,7 +137,7 @@ Xem thêm ở [UC00.00.02](https://deltavn.atlassian.net/wiki/spaces/LG/pages/13
 
 ## MSC-07 — File Upload
 
-![image-20260515-050507.png](Application-common-rules-images/image-20260515-050507.png)
+![image-20260515-050507.png](images/image-20260515-050507.png)
 
 | **Thành phần** | **Control** | **Mô tả** |
 | --- | --- | --- |
@@ -153,7 +153,7 @@ Xem thêm ở [UC00.00.02](https://deltavn.atlassian.net/wiki/spaces/LG/pages/13
 
 ## MSC-08 — Bottom Navigation
 
-![image-20260518-021148.png](Application-common-rules-images/image-20260518-021148.png)
+![image-20260518-021148.png](images/image-20260518-021148.png)
 
 Thanh điều hướng chính cố định phía dưới màn hình.
 
@@ -169,7 +169,7 @@ Thanh điều hướng chính cố định phía dưới màn hình.
 
 ## MSC-09 — Empty State
 
-![image-20260518-021240.png](Application-common-rules-images/image-20260518-021240.png)
+![image-20260518-021240.png](images/image-20260518-021240.png)
 
 | **Thành phần** | **Control** | **Mô tả** |
 | --- | --- | --- |
@@ -192,7 +192,7 @@ Thanh điều hướng chính cố định phía dưới màn hình.
 
 ## MSC-11 — Popcon Thành công (Success Bottom Sheet)
 
-![image-20260518-052906.png](Application-common-rules-images/image-20260518-052906.png)
+![image-20260518-052906.png](images/image-20260518-052906.png)
 
 Bottom Sheet chặn toàn bộ flow, yêu cầu người dùng hiện tại chủ động chọn bước tiếp theo sau khi hoàn tất một hành động quan trọng.
 
@@ -388,7 +388,7 @@ BE vs FE check trả lỗi
 
 BE vs FE check trả thế nào
 
-![image-20260518-021646.png](Application-common-rules-images/image-20260518-021646.png)
+![image-20260518-021646.png](images/image-20260518-021646.png)
 
 | **Trạng thái** | **Hiển thị** |
 | --- | --- |
@@ -400,11 +400,11 @@ BE vs FE check trả thế nào
 
 ## 2.18 Popup messages đặc biệt
 
-![image-20260518-021333.png](Application-common-rules-images/image-20260518-021333.png)
+![image-20260518-021333.png](images/image-20260518-021333.png)
 
-![image-20260518-021603.png](Application-common-rules-images/image-20260518-021603.png)
+![image-20260518-021603.png](images/image-20260518-021603.png)
 
-![image-20260518-021627.png](Application-common-rules-images/image-20260518-021627.png)
+![image-20260518-021627.png](images/image-20260518-021627.png)
 
 Các Bottom Sheet bắt buộc dùng *(MSC-03)* với backdrop không dismiss.
 

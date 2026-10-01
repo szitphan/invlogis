@@ -6,7 +6,7 @@ links:
   - docs/design.md
   - docs/components.md
   - docs/_shared/conventions.md
-  - docs-input/Website-common-rules.md
+  - docs-input/ui-common/web/web-common-rules.md
 ---
 
 # UI Common Components (CMP)
