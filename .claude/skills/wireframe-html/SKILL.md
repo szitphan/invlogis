@@ -391,7 +391,7 @@ Collision: trùng slug → suffix `-2`.
 
 ## Workflow tiếp theo
 
-* **`/figma <feature> [<screen-slug>]`** — vẽ Figma từ ASCII (`/wireframe-ascii` bắt buộc chạy trước cho `/figma`; nếu chưa có, `/figma` refuse).
+* **`/figma-screen <màn hoặc tính năng>`** — vẽ màn lên Figma, đọc ASCII + bảng 5 cột nếu có (thiếu thì hỏi chạy `/wireframe-ascii` trước).
 * **`/prototype-html <feature>`** — HTML clickable prototype có màu sắc + JS navigation (hi-fi).
 
 ## References

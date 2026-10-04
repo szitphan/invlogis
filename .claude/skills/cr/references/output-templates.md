@@ -134,7 +134,7 @@ Skill tự quay lại L2 diff cho các dòng `⬜` — KHÔNG hỏi user "có mu
 
 | Edited file | Recommend rebuild |
 |---|---|‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
-| `ascii-wireframe/{flow-slug}.md` | `/figma {feature} {screen-slug}` (nếu `{feature}-wireframe-index.md` cột Figma có URL cũ) + `/preview {feature}` |
+| `ascii-wireframe/{flow-slug}.md` | `/figma-screen {screen-slug} của {feature}` (nếu `{feature}-wireframe-index.md` cột Figma có URL cũ) + `/preview {feature}` |
 | `ascii-wireframe/{feature}-wireframe-index.md` | `/preview {feature}` |
 | `srs/{spec,flows,states,erd,userflow}.md` | `/preview {feature}` (edit `userflow.md` → cân nhắc gọi lại `/wireframe-ascii {feature}` + `/wireframe-html {feature}` — tự vào update mode — nếu flow-slug/screen list đổi) |
 | `usecases/uc-*.md` hoặc `{feature}-usecase-index.md` | `/preview {feature}` |
@@ -148,7 +148,7 @@ Skill tự quay lại L2 diff cho các dòng `⬜` — KHÔNG hỏi user "có mu
 
 | Artifact | Lệnh regen | Trạng thái |
 |---|---|---|
-| Figma frame `login` | `/figma login` | ⏳ pending |
+| Figma frame `login` | `/figma-screen login` | ⏳ pending |
 | Preview HTML | `/preview authentication` | ⏳ pending |
 | Export PDF (2026-05-21) | `/export authentication pdf` | ⏳ pending |
 ```
@@ -159,7 +159,7 @@ Khi user chạy regen sau này, update cột "Trạng thái" → `✅ done {date
 
 ```
 📌 Artifacts cần rebuild (đã log vào CR-{id} Mục "Artifacts to rebuild"):
-   1. /figma login
+   1. /figma-screen login
    2. /preview authentication
    3. /export authentication pdf
 

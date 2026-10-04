@@ -57,7 +57,7 @@ Các skill này cần artifact upstream (SRS/FR/UC/US/screen) làm NGUỒN THẬ
    * `/usecase-diagram` cần `srs/{feature}-spec.md` HOẶC `usecases/{feature}-usecase-index.md` → route `/srs` hoặc `/usecase`. (`/usecase` KHÔNG còn ở nhóm B — xem ghi chú 2-mode ở trên.)
    * `/userstory` cần `srs/{feature}-spec.md` (FR) → route `/srs`.
    * `/ac` cần `us-*.md` (story) → route `/userstory`.
-   * `/figma`, `/prototype-html` cần ASCII screen trong `ascii-wireframe/{flow-slug}.md` → route `/user-flow` + `/wireframe-ascii`.
+   * `/prototype-html` (mode ASCII) cần ASCII screen trong `ascii-wireframe/{flow-slug}.md` → route `/user-flow` + `/wireframe-ascii`.
    * `/jira` cần `userstories/us-*.md` → route `/userstory`.
    * `/confluence`, `/export`, `/preview` cần ≥1 doc feature (thường `srs/{feature}-spec.md`) → route `/srs`.
    * `/reverse-preview` cần bộ reverse `docs/_reverse/{feature}/{feature}-reverse-spec.md` → route `/code-to-srs` (từ code) hoặc `/reverse-doc` (từ tài liệu). KHÔNG dùng feature chính `docs/{feature}/`.

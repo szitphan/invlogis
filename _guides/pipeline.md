@@ -146,7 +146,6 @@ design**: validation, mã lỗi, wording, điều hướng nằm ở đây.
 | 🟢 có Mục 3.6 | Usability bằng AI (bước 7.5) — `@usability-reviewer`, `/figma-screen` tự gọi khi vẽ trọn 1 flow | userflow Mục 3.5 + 3.6 + màn Figma của flow | finding: tác vụ kẹt ở đâu, số bước thực / tiêu chí, heuristic Nielsen | Không (báo cáo trong chat) |
 | ⚪ | `/prototype-html` ✅ | userflow + design-tokens.css + **ASCII hoặc frame Figma** (mode Figma: khớp màn ↔ artboard theo `screenId`, frame trạng thái gộp vào màn, hành vi vẫn lấy từ bảng 5 cột/SRS) | `html-design/{feature}-prototype.html` (chạy như app thật + lớp góp ý) | file trong repo |
 | ⚪ | `/figma-demo` · `/figma-userflow` · `/figma-sitemap` · `/figma-persona` · `/figma-journey` ✅ | mô tả / màn đã vẽ | demo tự chạy, sơ đồ trên Figma | — |
-| ⚪ (cũ) | `/figma` ✅ ⚠️ | ASCII + wireframe-index | frame trên Figma | Có |
 
 ### 8 · Bàn giao & duy trì
 
@@ -289,7 +288,7 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | ~~P-07~~ ✅ | 6↔7 | (Đã xử lý 2026-10-04: userflow repo là nguồn duy nhất, `screenId` = `[#]` Mục 2 + hậu tố; bản Figma lệch → báo, repo thắng) 2 nguồn userflow: repo và trên Figma (`/figma-screen` lấy thứ tự màn từ Figma) | Flow sống 2 nơi, dễ lệch |
 | ~~P-08~~ ✅ | 7 | (Đã xử lý 2026-10-04: Bước 1.4 đọc CMP/GR, dùng component ở dòng Figma của CMP) `/figma-screen` không gọi CMP/GR | Màn hi-fi có thể lệch quy tắc chung. **Xác nhận 2026-10-04:** thiếu phân trang (CMP-04), thiếu bộ đếm (GR-01), nút [Huỷ][Xác nhận] ngược design.md, cột số/ngày căn trái |
 | ~~P-09~~ ✅ | 6↔7 | (Đã xử lý bằng D-01) D-01 chưa áp: `ba-conventions.md` Mục 7, `/user-flow`, `/wireframe-html`, `/prototype-html`, `/figma`, 2 template HTML vẫn ghi desktop 1024 | Wireframe và Figma lệch bề rộng |
-| P-10 | 7 | `/figma` (cũ) và `/figma-screen` trùng vai | Gọi nhầm skill |
+| ~~P-10~~ ✅ | 7 | (Đã xử lý 2026-10-04: xoá `/figma`, mọi tham chiếu chuyển sang `/figma-screen`) `/figma` (cũ) và `/figma-screen` trùng vai | Gọi nhầm skill |
 | P-11 | 7 | `/figma-component` dùng connector Figma chính thức, chưa được cấp quyền | Chưa chạy được |
 | P-12 | 7 | Tham chiếu tới file không có: `_guides/workflow-figma-screen.md`, `design/design-backlog.md` | Known Gaps của `/figma-component` không có chỗ ghi |
 | P-13 | 0→7 | App Lái xe là mobile, nhưng CMP/GR mobile chưa có (BL-001) và design.md chỉ có chuẩn desktop | Mọi màn mobile đều "chưa có chuẩn" |
@@ -304,7 +303,7 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | P-22 | — | Không ghi lại skill nào cài từ kit nào, bản nào | Lẫn bản (đã gặp: 2 bản Reqwise khác license) |
 | P-23 | 7.5 | Usability chỉ có đánh giá bằng AI (`@usability-reviewer`), **không có test với người dùng thật** — chấp nhận tạm (2026-10-04) | Mù với thói quen nghề nghiệp, áp lực ca làm thật, cách người dùng hiểu nhầm chữ. Khi có người test → thêm kế hoạch test + tổng hợp kết quả |
 | P-24 | 7 | `/figma-screen` đã sửa trực tiếp trong `.claude/skills/` (bước 6.7, 6.8, đọc bảng 5 cột, ghi link, chia lệnh khi timeout) — chủ ý: sửa repo trước, chạy ổn mới đưa về kit `kits/figma-skills/custom/` (D-09) | Cài lại `/figma-screen` từ kit lúc này sẽ mất các sửa đó |
-| P-25 | 3 | `/brainstorm` đặt wording lỗi không đối chiếu *Content & Formatting* của design.md và bảng E-common | Test 2026-10-04: E-1/E-2 dùng "Vui lòng" (design.md cấm), E-3 trùng nghĩa E-common-009 nhưng khác câu — lỗi lan xuống SRS và màn |
+| ~~P-25~~ ✅ | 3 | (Đã xử lý 2026-10-04: Section 5 đọc *Copy động* + E-common trước khi viết wording) `/brainstorm` đặt wording lỗi không đối chiếu *Content & Formatting* của design.md và bảng E-common | Test 2026-10-04: E-1/E-2 dùng "Vui lòng" (design.md cấm), E-3 trùng nghĩa E-common-009 nhưng khác câu — lỗi lan xuống SRS và màn |
 | P-26 | 3→7 | 9 sửa lỗi ngày 2026-10-04 mới kiểm cú pháp, chưa chạy lại trên feature thật | Có thể còn lỗi khi chạy thật — đóng khi xong BL-029, BL-030 |
 
 ## 8. Luồng mục tiêu (đề xuất, chưa chốt)
@@ -341,11 +340,11 @@ Việc cần làm, theo thứ tự:
 3. ~~Sửa `/figma-screen`~~ — xong trong repo 2026-10-04 (D-09); đưa về kit sau khi chạy thật ổn (P-24).
 4. Thêm review độc lập cho `/brainstorm`, `/usecase`, wireframe chạy riêng, `/state` + `/erd`
    (P-15 → P-17, P-19).
-5. Bỏ `/figma` cũ (P-10).
-6. Cài skill còn thiếu từ kit ai4ba (`/prd`, `/urd`, `/prd-epic`, `/ac`, `/reverse-doc`) hoặc gỡ
+5. ~~Bỏ `/figma` cũ (P-10)~~ — xong 2026-10-04.
+6. ⏸ Tạm hoãn (2026-10-04): xử lý từng skill khi dùng tới mà gặp lỗi. Cài skill còn thiếu từ kit ai4ba (`/prd`, `/urd`, `/prd-epic`, `/ac`, `/reverse-doc`) hoặc gỡ
    tham chiếu (P-01 → P-04).
 7. Chuyển CMP/GR mobile (BL-001) và bổ sung chuẩn mobile vào design.md trước khi vẽ App Lái xe (P-13).
 8. Cấp quyền connector Figma cho `/figma-component`, tạo file ghi Known Gaps (P-11, P-12).
 9. ~~Script đồng bộ bản Codex~~ (xong 2026-10-04, `_scripts/codex-sync.py`) + manifest nguồn kit; cập nhật CLAUDE.md + AGENTS.md (P-14, P-21, P-22).
-10. Cho `/brainstorm` đọc *Content & Formatting* + E-common khi viết wording (P-25).
+10. ~~Cho `/brainstorm` đọc *Content & Formatting* + E-common khi viết wording (P-25)~~ — xong 2026-10-04.
 11. Chạy luồng UX trên 1 feature thật để xác nhận các sửa ngày 2026-10-04 (P-26, BL-029, BL-030).

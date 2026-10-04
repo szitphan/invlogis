@@ -19,7 +19,7 @@ links:
 __Status values:__ `draft` / `in-review` / `revisions` / `approved` / `shipped` / `archived`.
 
 __Designs columns:__
-* __Figma__: URL frame trên Figma (output của `/figma`). `—` nếu chưa có.
+* __Figma__: URL frame trên Figma (output của `/figma-screen`). `—` nếu chưa có.
 * __HTML prototype__: link tới `{{feature}}-prototype.html#{slug}` (output của `/prototype-html`). `—` nếu chưa có.‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 * __HTML wireframe__: link tới `html-wireframe/{flow-slug}.html` (output của `/wireframe-html`, độc lập với ASCII). `—` nếu chưa có.
 

@@ -69,7 +69,7 @@ Expand raw idea thành structured brainstorm board qua interview __độ sâu th
   * Mục 6.1 Decision Points: mỗi điểm = 1 câu hỏi YES/NO, ID `D1, D2…` để tham chiếu chéo; phủ mọi điểm rẽ nhánh chính.
   * Edge case gom chung ở mục edge (rỗng, đồng thời, timeout, mất mạng, validate lỗi…), KHÔNG tách section riêng.
   * Validation: định dạng, độ dài, bắt buộc, duy nhất, ràng buộc nghiệp vụ. Giới hạn: số liệu cụ thể ("5 lần/phút", "24 giờ"), KHÔNG viết "phù hợp".
-  * Wording: chữ trong dấu nháy = chuỗi user thấy y nguyên, tiếng Việt tự nhiên; mã lỗi map sang Error Matrix ở `/srs`.
+  * Wording: chữ trong dấu nháy = chuỗi user thấy y nguyên, theo tông giọng *Copy động* của design.md; lỗi trùng nghĩa dùng `E-common-NNN`; mã lỗi map sang Error Matrix ở `/srs`.
   * Giả định: điều đang coi là đúng, cần kiểm trước khi spec.
   * Rủi ro: rủi ro **nghiệp vụ** (adoption, đối tác, compliance, quy trình, timeline, dữ liệu), KHÔNG bug/hạ tầng; hậu quả viết bằng từ kinh doanh (mất khách, mất doanh thu, trễ launch…), KHÔNG "API chậm".
   * Success metrics: gợi ý đo được, chốt chính thức ở URD/BRD.
@@ -209,6 +209,11 @@ __Section 4 — Detailed Flow Deep Dive__ (chỉ chạy nếu complexity signal 
 
 > Push: "Rate limit bao nhiêu/phút?" → "Lockout sau bao nhiêu fail?" → "Câu error chính xác là gì?". Vague vẫn vague → TBD + flag OQ.
 > Wording chia 3 nhóm khi synthesize: error / success / info — KHÔNG dồn 1 bảng chung.
+> **Trước khi viết wording** (đề xuất hoặc ghi lại câu user nói): đọc `design/design.md` mục
+> *Content & Formatting › Copy động* (tông giọng, cấm "Vui lòng", mẫu câu lỗi/xác nhận/rỗng/toast) +
+> bảng *Lỗi dùng chung (E-common)* trong `design/ui-common/conventions.md`. Lỗi trùng nghĩa E-common →
+> ghi `E-common-NNN`, KHÔNG viết câu mới. Câu user đưa lệch tông giọng → giữ câu user, đề xuất bản
+> sửa cạnh bên cho user chọn. Chưa có 2 file → báo 1 dòng, viết như cũ.
 
 ### Section 6 — System Context (business-level only, KHÔNG technical)
 1) Cần lưu thêm loại thông tin nghiệp vụ nào (vd "device list", "login history", "subscription status") — chỉ liệt kê __thông tin gì__, KHÔNG hỏi DB schema / table name?
@@ -337,6 +342,8 @@ Skill KHÔNG mặc định Deep. Sau khi chấm scope × completeness (Phase A.6
 - @../../rules/resolve-oqs.md
 - @../../rules/changelog.md
 - @../../../_templates/brainstorm.md
+- @../../../design/design.md (Content & Formatting › Copy động — tông giọng wording)
+- @../../rules/ui-common-rules-components.md (E-common — lỗi dùng chung)
 - @./references/example-brainstorm.md‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 

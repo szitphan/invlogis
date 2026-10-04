@@ -52,7 +52,7 @@ node .claude/skills/kg/engine/kg-viewer.mjs                     # sinh kg-viewer
 * ❌ Bỏ qua mục "Phải Read tay" vì "graph đã đủ".
 * ❌ Thấy shortlist ngắn bất thường mà không kiểm `Độ phủ:` — graph thiếu-phủ trông y hệt đầy-đủ.
 * ❌ Cache output kg qua nhiều lượt edit (hook + lazy rebuild lo freshness, cứ gọi lại — build <1s).
-* ❌ Skill nhóm B (render/đọc-nội-dung: export/userguide/preview/figma/prototype...) cắt phần đọc prose để "tiết kiệm" — đọc là sản phẩm.
+* ❌ Skill nhóm B (render/đọc-nội-dung: export/userguide/preview/figma-screen/prototype...) cắt phần đọc prose để "tiết kiệm" — đọc là sản phẩm.
 * ❌ Dùng `history`/`asof` (temporal, opt-in) trong luồng current-state thường — chúng đọc `graph-history.json` RIÊNG, CHỈ gọi khi user hỏi rõ về lịch sử/diễn tiến. Đừng nạp lịch sử vào việc chỉ cần trạng thái hiện tại.
 * ❌ Dùng `asof`/`history` before/after preview làm nguồn kết luận nội dung — preview là trích đoạn (`is_preview`); nội dung nguyên văn dùng `asof --show` (git) hoặc đọc file thật.
 

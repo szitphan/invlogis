@@ -12,7 +12,7 @@
 | `/usecase` | Bước/Extension gọi CMP/GR; cột Errors dùng E-common |
 | `/user-flow` | Nhận diện màn/nhánh do CMP sinh ra (confirm, lỗi Loại 2, rỗng) |
 | `/wireframe-ascii`, `/wireframe-html`, `/prototype-html` | Cột Description: `Xem CMP-xx` / `Theo GR-xx` + phần UC phải khai báo |
-| `/figma` | Dùng đúng component ghi ở dòng **Figma** của CMP; cập nhật node + ảnh cache |
+| `/figma-screen` | Dùng đúng component ghi ở dòng **Figma** của CMP; cập nhật node + ảnh cache |
 | `/sequence` | Nhánh lỗi dùng mã E-common thay vì tự đặt mã |
 | `uxui-reviewer` | Tiêu chí review Mục 9 |
 
@@ -75,7 +75,7 @@ có lý do · (d) lỗi trùng nghĩa đã dùng E-common · (e) không chép l�
 ## 10. Ảnh và Figma
 
 Dòng **Figma** mỗi CMP: component Astryx / component dự án · node mẫu trong file dự án · ảnh cache
-`design/ui-common/images/cmp-NN.png`. `/figma` khi vẽ CMP: dùng đúng component đó; có node mới thì đề xuất
+`design/ui-common/images/cmp-NN.png`. `/figma-screen` khi vẽ CMP: dùng đúng component đó; có node mới thì đề xuất
 cập nhật dòng Figma + chụp ảnh (Figma MCP `get_screenshot`) qua L2.
 
 ## 11. Thứ tự ưu tiên

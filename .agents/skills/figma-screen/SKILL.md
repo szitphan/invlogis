@@ -79,7 +79,7 @@ Không hỏi user những gì đọc được.
    userflow repo (thiếu/thừa màn, sai thứ tự) → báo user, **repo thắng**, đề nghị cập nhật bản Figma
    bằng `/figma-userflow`.
 
-## Bước 2 — hỏi user (theo cách hỏi của `/figma` bên BA-Kit)
+## Bước 2 — hỏi user
 
 Chỉ hỏi phần user **chưa nói rõ** và phần nguồn (Bước 1) không trả lời được. Hỏi bằng
 `AskUserQuestion`, gộp các câu còn lại vào **một lượt**, rồi trình kế hoạch và chờ `Y`.

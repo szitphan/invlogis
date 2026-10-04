@@ -1,6 +1,6 @@
 ---
 name: wireframe-ascii
-description: Dùng khi cần vẽ ASCII wireframe cho các flow của 1 feature, gộp nhiều màn hình theo flow trong 1 file. Cần `srs/{feature}-userflow.md` trước. Muốn fidelity cao hơn thì dùng `/wireframe-html`, `/figma` hoặc `/prototype-html`.
+description: Dùng khi cần vẽ ASCII wireframe cho các flow của 1 feature, gộp nhiều màn hình theo flow trong 1 file. Cần `srs/{feature}-userflow.md` trước. Muốn fidelity cao hơn thì dùng `/wireframe-html`, `/figma-screen` hoặc `/prototype-html`.
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Task, AskUserQuestion
 user-invocable: true
 argument-hint: "<feature> [--flow <flow-slug>]"
@@ -13,11 +13,11 @@ argument-hint: "<feature> [--flow <flow-slug>]"
 
 ## Goal‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-Tạo hoặc cập nhật __ASCII wireframe__ cho các flow của 1 feature — 1 file/flow chứa N màn hình, chia flow theo `docs/{feature}/srs/{feature}-userflow.md`. **`ascii-wireframe/{flow-slug}.md`** là single source layout ASCII (`/figma` + `/prototype-html` đọc ASCII này làm contract layout để render higher fidelity).
+Tạo hoặc cập nhật __ASCII wireframe__ cho các flow của 1 feature — 1 file/flow chứa N màn hình, chia flow theo `docs/{feature}/srs/{feature}-userflow.md`. **`ascii-wireframe/{flow-slug}.md`** là single source layout ASCII (`/figma-screen` + `/prototype-html` đọc ASCII này làm contract layout để render higher fidelity).
 
 __Thang fidelity 3 bậc__ (ghi rõ để không collapse thành 1 skill): `/wireframe-ascii` (lo-fi, chat-native — duyệt cấu trúc nhanh) → `/wireframe-html` (lo-fi B&W, layout-accurate — xem tỉ lệ/lưới thật trong khung device) → `/prototype-html` (hi-fi, design tokens + JS nav — stakeholder click-through). ASCII và HTML __cùng 1 bậc lo-fi, 2 renderer__ của cùng 1 screen (khác nhau: ascii duyệt nhanh trong chat/PR/diff; html kiểm tỉ lệ thật) — KHÔNG phải 2 bậc. Cùng dùng __1 bảng mô tả 5 cột__; cái chạy __trước__ cho 1 screen là nguồn element cho cái chạy __sau__ (Phase B.5), tránh suy luận 2 lần lệch nhau.
 
-ASCII là contract layout bắt buộc cho `/figma` + `/prototype-html` (2 skill đó đọc ASCII làm layout). KHÔNG có ASCII = `/figma` + `/prototype-html` refuse.
+ASCII là contract layout: **bắt buộc** cho `/prototype-html` mode ASCII (không có thì refuse); `/figma-screen` đọc ASCII + bảng 5 cột nếu có, thiếu thì hỏi chạy `/wireframe-ascii` trước hay vẽ thẳng từ SRS.
 
 ## Constraints‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -234,7 +234,7 @@ Với mỗi flow, với mỗi screen trong flow đó:
 
 Sau ASCII OK:
 * **`/wireframe-html <feature>`** — renderer ngang hàng, xem tỉ lệ/lưới thật trong khung device (B&W).
-* **`/figma <feature> [<screen-slug>]`** — vẽ thật lên Figma qua figma-ui-mcp, tuân design tokens từ `design/design.md`.
+* **`/figma-screen <màn hoặc tính năng>`** — vẽ màn thật lên Figma theo `design/design.md`, bám bảng 5 cột + CMP/GR, ghi link về wireframe-index.
 * **`/prototype-html <feature>`** — build HTML clickable prototype multi-screen self-contained (hi-fi, design tokens + JS nav).
 
 ## References
@@ -251,7 +251,6 @@ Sau ASCII OK:
 * @./references/example-ascii.txt
 * @../user-flow/SKILL.md (nguồn chia flow — chạy trước nếu chưa có)
 * @../wireframe-html/SKILL.md (renderer ngang hàng — đọc lại nếu đã chạy trước, xem Phase B.5)
-* @../figma/SKILL.md (Figma builder qua MCP)
 * @../prototype-html/SKILL.md (HTML clickable multi-screen, hi-fi)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 

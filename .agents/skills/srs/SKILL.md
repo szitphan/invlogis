@@ -263,7 +263,7 @@ Legacy SRS (Phase 1): !`ls docs/srs/ 2>/dev/null | head -10`
     Sửa gì gọi lại đúng skill (file đã tồn tại tự vào update mode):
        /sequence · /activity · /activity-swimlane · /erd · /state · /usecase
        /user-flow · /wireframe-ascii · /wireframe-html · /userstory · /ac
-       /figma {feature} [<screen>] · /prototype-html {feature}
+       /figma-screen {feature} · /prototype-html {feature}
 
     Review (Phase G): @{agents} soi · {N} auto-fixed · {M} 🔶 quyết định thay anh (xem dưới).
     🔶 Quyết định thay user — review lại:

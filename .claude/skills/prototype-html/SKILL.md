@@ -382,7 +382,6 @@ Reference trong `{feature}-wireframe-index.md` cột `HTML prototype` dạng `{f
 - @../user-flow/SKILL.md (nguồn primary_device + chia flow — read at runtime)
 - @../wireframe-ascii/SKILL.md (nguồn bảng mô tả 5 cột)
 - @../wireframe-html/SKILL.md (renderer ngang hàng B&W — mô hình vỏ điều hướng tham chiếu)
-- @../figma/SKILL.md (Figma builder qua MCP)
 - @../figma-screen/SKILL.md (quy ước tên artboard `{screenId}-{web|mob} · {slug}` + hậu tố trạng thái — nguồn khớp màn ở mode Figma)
 - @../../../design/ba-crosswalk.md + @../../../design/components.md (tên component Figma → loại control, mode Figma)
 - @../../agents/uxui-reviewer.md (post-write UX review)
