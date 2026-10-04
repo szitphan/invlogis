@@ -73,8 +73,8 @@ không phải đầu vào bắt buộc.
 |---|---|---|---|---|
 | 🟢 | Bối cảnh dự án | `docs/_shared/project-profile.md` | brainstorm, brd, srs, discover | Có domain + người dùng (từ SRS cũ LG). Thiếu bối cảnh điều vận + đối thủ (BL-008). Skill tự hỏi khi thiếu |
 | 🟡 | Thuật ngữ, môi trường, kiến trúc | `definitions.md`, `operating-environment.md`, `system-overview.md` | mọi skill BA | Có |
-| 🟡 có UI | Quy tắc giao diện chung | `design/ui-common/conventions.md` (20 GR + E-common) | srs, usecase, wireframe, figma | Bản **web** |
-| 🟡 có UI | Component dùng chung | `design/ui-common/screen-patterns.md` (11 CMP) | như trên | Bản **web**; bản **mobile** chưa chuyển (BL-001) |
+| 🟡 có UI | Quy tắc giao diện chung | `design/ui-common/conventions.md` (26 GR + 12 E-common) | srs, usecase, wireframe, figma | Web + khối **Mobile**; GR-21…26 chỉ app (BL-001 xong 2026-10-04) |
+| 🟡 có UI | Component dùng chung | `design/ui-common/screen-patterns.md` (12 CMP) | như trên | Web + khối **Mobile**; CMP-12 chỉ app. Mobile chưa có node Figma / ảnh |
 | 🟢 cho hi-fi | Design system | `design/design.md`, `design-tokens.css`, `components.md`, `ba-crosswalk.md`, `figma-library-keys.json` | wireframe (bố cục), figma-*, prototype | Có; chỉ chuẩn **desktop 1920×1080** |
 | 🟡 1 lần | Setup file Figma | `design/setup-figma.md` | người, trước lần vẽ đầu | Có |
 
@@ -255,7 +255,7 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 
 | Giai đoạn | Trạng thái |
 |---|---|
-| 0 · Nền | Có bản web; thiếu CMP/GR mobile (BL-001), thiếu bối cảnh điều vận trong profile (BL-008) |
+| 0 · Nền | Có CMP/GR web + mobile; design.md chưa có chuẩn mobile (P-13), thiếu bối cảnh điều vận trong profile (BL-008) |
 | 1 · Nguồn | 22 nguồn đã vào sổ; 15 chưa feed; VETC scan chưa gõ lại chữ (BL-006) |
 | 2 · Khám phá | 4 báo cáo `/discover` |
 | 3 · Feature | Chờ hoàn thiện pipeline; brainstorm điều phối dở vòng 1 (BL-005) |
@@ -291,7 +291,7 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | ~~P-10~~ ✅ | 7 | (Đã xử lý 2026-10-04: xoá `/figma`, mọi tham chiếu chuyển sang `/figma-screen`) `/figma` (cũ) và `/figma-screen` trùng vai | Gọi nhầm skill |
 | P-11 | 7 | `/figma-component` dùng connector Figma chính thức, chưa được cấp quyền | Chưa chạy được |
 | P-12 | 7 | Tham chiếu tới file không có: `_guides/workflow-figma-screen.md`, `design/design-backlog.md` | Known Gaps của `/figma-component` không có chỗ ghi |
-| P-13 | 0→7 | App Lái xe là mobile, nhưng CMP/GR mobile chưa có (BL-001) và design.md chỉ có chuẩn desktop | Mọi màn mobile đều "chưa có chuẩn" |
+| P-13 | 0→7 | App Lái xe là mobile. CMP/GR mobile đã có (BL-001 xong 2026-10-04), còn: design.md chỉ có chuẩn desktop (spec M1–M4 chưa node Figma), Bottom Navigation của app khác spec M1 (hamburger) và Astryx chưa có component | Màn mobile vẫn ghi "chưa có chuẩn" phần bố cục |
 | P-14 | — | CLAUDE.md / AGENTS.md liệt kê skill chưa cài, chưa có skill Figma mới | Tài liệu điều hướng sai |
 | P-15 | 3 | `/brainstorm` chỉ có tự kiểm, không có agent review (R-1) | Là gốc của mọi thứ phía sau — thiếu actor, sai phạm vi, bỏ sót edge case ở đây lan xuống SRS, UC, màn hình |
 | P-16 | 5 | `/usecase` không có agent review khi chạy riêng (R-2) | UC thiếu nhánh rẽ / nhánh lỗi không ai bắt; UC lại là nguồn của userflow và story |
@@ -343,7 +343,7 @@ Việc cần làm, theo thứ tự:
 5. ~~Bỏ `/figma` cũ (P-10)~~ — xong 2026-10-04.
 6. ⏸ Tạm hoãn (2026-10-04): xử lý từng skill khi dùng tới mà gặp lỗi. Cài skill còn thiếu từ kit ai4ba (`/prd`, `/urd`, `/prd-epic`, `/ac`, `/reverse-doc`) hoặc gỡ
    tham chiếu (P-01 → P-04).
-7. Chuyển CMP/GR mobile (BL-001) và bổ sung chuẩn mobile vào design.md trước khi vẽ App Lái xe (P-13).
+7. ~~Chuyển CMP/GR mobile (BL-001)~~ — xong 2026-10-04. Còn: bổ sung chuẩn mobile vào design.md (node M1–M4, chốt Bottom Navigation) trước khi vẽ App Lái xe (P-13).
 8. Cấp quyền connector Figma cho `/figma-component`, tạo file ghi Known Gaps (P-11, P-12).
 9. ~~Script đồng bộ bản Codex~~ (xong 2026-10-04, `_scripts/codex-sync.py`) + manifest nguồn kit; cập nhật CLAUDE.md + AGENTS.md (P-14, P-21, P-22).
 10. ~~Cho `/brainstorm` đọc *Content & Formatting* + E-common khi viết wording (P-25)~~ — xong 2026-10-04.

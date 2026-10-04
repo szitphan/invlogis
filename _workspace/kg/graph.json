@@ -4,8 +4,8 @@
     "extractor_version": "1.0.0",
     "generated_at": "1970-01-01T00:00:00.000Z",
     "root": "docs",
-    "node_count": 52,
-    "edge_count": 87,
+    "node_count": 54,
+    "edge_count": 91,
     "coverage": {
       "docs_total": 14,
       "docs_parsed": 11,
@@ -39,10 +39,10 @@
       "feature": "common",
       "title": "E-common-001",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-04",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 172
+        "line": 243
       },
       "props": {
         "kind": "Inline",
@@ -58,10 +58,10 @@
       "feature": "common",
       "title": "E-common-002",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-04",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 173
+        "line": 244
       },
       "props": {
         "kind": "Inline",
@@ -77,10 +77,10 @@
       "feature": "common",
       "title": "E-common-003",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-04",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 174
+        "line": 245
       },
       "props": {
         "kind": "Inline",
@@ -96,10 +96,10 @@
       "feature": "common",
       "title": "E-common-004",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-04",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 175
+        "line": 246
       },
       "props": {
         "kind": "Inline",
@@ -115,10 +115,10 @@
       "feature": "common",
       "title": "E-common-005",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-04",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 176
+        "line": 247
       },
       "props": {
         "kind": "Inline",
@@ -134,10 +134,10 @@
       "feature": "common",
       "title": "E-common-006",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-04",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 177
+        "line": 248
       },
       "props": {
         "kind": "Inline",
@@ -153,10 +153,10 @@
       "feature": "common",
       "title": "E-common-007",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-04",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 178
+        "line": 249
       },
       "props": {
         "kind": "Inline",
@@ -172,10 +172,10 @@
       "feature": "common",
       "title": "E-common-008",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-04",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 179
+        "line": 250
       },
       "props": {
         "kind": "Toast",
@@ -191,10 +191,10 @@
       "feature": "common",
       "title": "E-common-009",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-04",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 180
+        "line": 251
       },
       "props": {
         "kind": "Toast",
@@ -210,16 +210,54 @@
       "feature": "common",
       "title": "E-common-010",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-04",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 181
+        "line": 252
       },
       "props": {
-        "kind": "Toast",
+        "kind": "Toast (web) · Popup chặn (app)",
         "khi_nao": "Phiên đăng nhập hết hạn",
         "cau_hien_thi": "\"Phiên làm việc đã hết hạn. Đăng nhập lại.\"",
-        "quy_tac": "GR-15 Loại 3"
+        "quy_tac": "GR-15 Loại 3 · GR-26"
+      }
+    },
+    {
+      "key": "E-common-011",
+      "type": "error",
+      "subtype": null,
+      "feature": "common",
+      "title": "E-common-011",
+      "status": "draft",
+      "updated": "2026-10-04",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 253
+      },
+      "props": {
+        "kind": "Popup chặn (app)",
+        "khi_nao": "Mở màn không có quyền xem",
+        "cau_hien_thi": "\"Bạn không có quyền xem thông tin này. Liên hệ quản trị viên để được cấp quyền.\"",
+        "quy_tac": "GR-26"
+      }
+    },
+    {
+      "key": "E-common-012",
+      "type": "error",
+      "subtype": null,
+      "feature": "common",
+      "title": "E-common-012",
+      "status": "draft",
+      "updated": "2026-10-04",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 254
+      },
+      "props": {
+        "kind": "Popup chặn (app)",
+        "khi_nao": "Quyền tài khoản vừa thay đổi",
+        "cau_hien_thi": "\"Quyền của tài khoản vừa thay đổi. Tải lại để áp dụng.\"",
+        "quy_tac": "GR-26"
       }
     },
     {
@@ -293,10 +331,10 @@
       "feature": null,
       "title": "UI Common Rules (GR) + lỗi dùng chung (E-common)",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-04",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 11
+        "line": 12
       },
       "props": {
         "doc_type": "shared-conventions"
@@ -309,10 +347,10 @@
       "feature": null,
       "title": "UI Common Components (CMP)",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-04",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 12
+        "line": 13
       },
       "props": {
         "doc_type": "shared-screen-patterns"
@@ -947,7 +985,7 @@
       "provenance": "table",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 172
+        "line": 243
       }
     },
     {
@@ -957,7 +995,7 @@
       "provenance": "table",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 173
+        "line": 244
       }
     },
     {
@@ -967,7 +1005,7 @@
       "provenance": "table",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 174
+        "line": 245
       }
     },
     {
@@ -977,7 +1015,7 @@
       "provenance": "table",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 175
+        "line": 246
       }
     },
     {
@@ -987,7 +1025,7 @@
       "provenance": "table",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 176
+        "line": 247
       }
     },
     {
@@ -997,7 +1035,7 @@
       "provenance": "table",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 177
+        "line": 248
       }
     },
     {
@@ -1007,7 +1045,7 @@
       "provenance": "table",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 178
+        "line": 249
       }
     },
     {
@@ -1017,7 +1055,7 @@
       "provenance": "table",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 179
+        "line": 250
       }
     },
     {
@@ -1027,7 +1065,7 @@
       "provenance": "table",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 180
+        "line": 251
       }
     },
     {
@@ -1037,7 +1075,27 @@
       "provenance": "table",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 181
+        "line": 252
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-011",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 253
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-012",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 254
       }
     },
     {
@@ -1062,6 +1120,16 @@
     },
     {
       "from": "design/ui-common/conventions.md",
+      "to": "docs-input/ui-common/app/app-common-rules.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 9
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
       "to": "docs-input/ui-common/web/web-common-rules.md",
       "type": "REFERENCES",
       "provenance": "declared",
@@ -1077,7 +1145,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 228
+        "line": 318
       }
     },
     {
@@ -1087,7 +1155,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 229
+        "line": 319
       }
     },
     {
@@ -1097,7 +1165,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 58
+        "line": 70
       }
     },
     {
@@ -1107,7 +1175,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 58
+        "line": 70
       }
     },
     {
@@ -1117,7 +1185,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 58
+        "line": 70
       }
     },
     {
@@ -1157,7 +1225,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 52
+        "line": 64
       }
     },
     {
@@ -1167,7 +1235,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 71
+        "line": 90
       }
     },
     {
@@ -1177,7 +1245,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 104
+        "line": 131
       }
     },
     {
@@ -1187,7 +1255,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 123
+        "line": 169
       }
     },
     {
@@ -1197,7 +1265,17 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 188
+        "line": 263
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "docs-input/ui-common/app/app-common-rules.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 10
       }
     },
     {

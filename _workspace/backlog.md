@@ -1,7 +1,7 @@
 ---
 type: backlog
 status: draft
-updated: 2026-10-02
+updated: 2026-10-04
 links:
   - docs-input/README.md
 ---
@@ -14,7 +14,6 @@ links:
 
 | ID | Việc | Nguồn | Xong khi | Trạng thái | Tạo | Xong | Bằng chứng |
 |---|---|---|---|---|---|---|---|
-| BL-001 | Chuyển app common rules (MSC-01…11 + 18 quy tắc) sang CMP/GR mobile qua `/update-overview` | `ui-common/app/` | `grep:design/ui-common/screen-patterns.md:MSC-11` | ⬜ | 2026-10-02 |  |  |
 | BL-002 | Cài skill `/reverse-doc` + `/reverse-preview` từ kit ai4ba | `srs-cu/` | `exists:.claude/skills/reverse-doc/SKILL.md` | ⬜ | 2026-10-02 |  |  |
 | BL-003 | Reverse SRS cũ LG sang bộ SRS chuẩn (`/reverse-doc`) | `srs-cu/` | `grep:docs/_reverse/*/*-reverse-spec.md:lg-srs-export` | ⬜ | 2026-10-02 |  |  |
 | BL-004 | Tạo SRS mới từ bộ reverse LG (`/srs`) | `srs-cu/` | `grep:docs/*/srs/*-spec.md:docs/_reverse/` | ⬜ | 2026-10-02 |  |  |
@@ -48,4 +47,5 @@ links:
 
 | ID | Việc | Nguồn | Xong khi | Trạng thái | Tạo | Xong | Bằng chứng |
 |---|---|---|---|---|---|---|---|
+| BL-001 | Chuyển app common rules (MSC-01…11 + 18 quy tắc) sang CMP/GR mobile qua `/update-overview` | `ui-common/app/` | `grep:design/ui-common/screen-patterns.md:MSC-11` | ✅ | 2026-10-02 | 2026-10-04 | `design/ui-common/screen-patterns.md` |
 | BL-024 | Xếp nhóm + đặt tên, rồi đọc và feed SRC-23 vào brainstorm/feature | `sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | `fed:sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | ✅ | 2026-10-02 | 2026-10-02 | bản cập nhật, đã gộp vào SRC-01 (`sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md`) |
