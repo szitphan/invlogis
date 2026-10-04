@@ -3,7 +3,8 @@
 #
 # Khi file X được Edit, scan reverse-graph:
 #   - Tìm mọi doc Y có `links:` flat list chứa path X.
-#   - Mark Y's status → stale (nếu Y chưa stale/archived).
+#   - Mark Y's status → stale (nếu Y chưa stale/archived), lưu status cũ vào
+#     `status_prev:` để `/status restore` trả về đúng status trước đó.
 #   - Append entry (kèm lý do) vào _workspace/staleness.md — reason CHỈ sống ở log,
 #     KHÔNG ghi field stale_reason vào frontmatter (đã bỏ field này 2026-07-11).
 #
@@ -103,13 +104,14 @@ while IFS= read -r CANDIDATE; do
 
     REASON="upstream changed: $REL_FILE on $DATE by $SKILL"
     TMP="${CANDIDATE}.stale.tmp"
-    awk '
+    awk -v prev="$STATUS" '
         BEGIN { in_fm=0 }
         /^---[[:space:]]*$/ {
             if (NR == 1) { in_fm=1; print; next }
             if (in_fm) { in_fm=0; print; next }
         }
-        in_fm && /^status:/ { print "status: stale"; next }
+        in_fm && /^status:/ { print "status: stale"; print "status_prev: " prev; next }
+        in_fm && /^status_prev:/ { next }
         in_fm && /^stale_reason:/ { next }
         { print }
     ' "$CANDIDATE" > "$TMP" && mv "$TMP" "$CANDIDATE"
