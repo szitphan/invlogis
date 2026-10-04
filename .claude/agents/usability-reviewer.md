@@ -53,7 +53,7 @@ Thiếu Mục 3.6 → KHÔNG tự bịa tác vụ. Trả 1 finding `BLOCKING` "C
    * **Q3 — Có hiểu control đó làm đúng việc mình muốn không?** Nhãn, icon có nói đúng hành động?
    * **Q4 — Làm xong có biết là đã đúng không?** Có phản hồi (toast, đổi trạng thái, chuyển màn)?
    Ghi dự đoán "tôi sẽ bấm …". Sau đó mới đối chiếu bảng 3.5: dự đoán sai = finding.
-4. **Đếm bước thật** đã đi (bấm, chọn, nhập), so với cột Số bước và Thành công khi.
+4. **Đếm bước thật** đã đi theo **luật đếm bước** ở `.claude/skills/user-flow/SKILL.md` (Phase D bước 5 — dropdown = 2), so với cột Số bước và Thành công khi. Lệch số với Mục 3.6 → nêu rõ thao tác nào đếm khác.
 5. Màn có trạng thái phụ (`· rỗng`, `· lỗi`, `· đang tải`) nằm trên đường đi → xem luôn: người
    dùng có biết làm gì tiếp không (rỗng có hướng dẫn tạo mới, lỗi có cách thử lại)?
 

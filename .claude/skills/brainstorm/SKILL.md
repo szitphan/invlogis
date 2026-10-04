@@ -63,6 +63,16 @@ Expand raw idea thành structured brainstorm board qua interview __độ sâu th
 - __L1 cho BA, không cho dev__ — L1 plan preview dùng prose tự nhiên với từ nghiệp vụ ("luồng", "bảng", "hình minh họa"). KHÔNG dùng bảng `# | path | action`, KHÔNG dùng flag tag, KHÔNG dùng technical jargon. User là IT-BA — họ cần biết "doc sẽ có gì mới về nghiệp vụ" chứ không phải "structural metadata".
 - __Re-asking là red flag__ — user đã trả lời mà skill hỏi lại = mất uy tín + lãng phí thời gian. Continuation mode (existing brainstorm file): MUST Read full file trước khi hỏi, mark câu nào đã có answer trong doc, chỉ hỏi gap. Trong cùng session: track answers theo section, đừng quên.
 - __Skill phục vụ IT-BA, không phải dev__ — nếu user feedback "câu hỏi quá technical" / "đây là BA chứ không phải code", re-frame ngay sang business language. Câu hỏi có chữ "DB column", "function name", "JWT", "endpoint", "schema", "SDK" là red flag — refactor về "lưu thông tin gì?", "system làm gì?", "login session bao lâu?", "dịch vụ nào?". Quyết định kỹ thuật để dành `/srs` + dev/architect.
+- __Viết từng section (luật chuyển từ template — template chỉ giữ khung):__
+  * Mục 1 Idea Seed: chép nguyên văn input của user. Mục 2 Context: bối cảnh, vì sao làm lúc này, feature liên quan, tín hiệu thị trường.
+  * Mục 5 Core Flows: đủ các flow chính, mỗi flow độc lập, flow phức tạp có ASCII riêng.
+  * Mục 6.1 Decision Points: mỗi điểm = 1 câu hỏi YES/NO, ID `D1, D2…` để tham chiếu chéo; phủ mọi điểm rẽ nhánh chính.
+  * Edge case gom chung ở mục edge (rỗng, đồng thời, timeout, mất mạng, validate lỗi…), KHÔNG tách section riêng.
+  * Validation: định dạng, độ dài, bắt buộc, duy nhất, ràng buộc nghiệp vụ. Giới hạn: số liệu cụ thể ("5 lần/phút", "24 giờ"), KHÔNG viết "phù hợp".
+  * Wording: chữ trong dấu nháy = chuỗi user thấy y nguyên, tiếng Việt tự nhiên; mã lỗi map sang Error Matrix ở `/srs`.
+  * Giả định: điều đang coi là đúng, cần kiểm trước khi spec.
+  * Rủi ro: rủi ro **nghiệp vụ** (adoption, đối tác, compliance, quy trình, timeline, dữ liệu), KHÔNG bug/hạ tầng; hậu quả viết bằng từ kinh doanh (mất khách, mất doanh thu, trễ launch…), KHÔNG "API chậm".
+  * Success metrics: gợi ý đo được, chốt chính thức ở URD/BRD.
 
 ## Inputs
 

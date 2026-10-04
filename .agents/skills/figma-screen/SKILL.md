@@ -186,7 +186,19 @@ User nhờ "kiểm tra setup" → chạy đúng bảng ở mục 3 của `design
 
 ## Bước 4 — vẽ
 
-Một lời gọi `figma_write` cho mỗi màn (hoặc mỗi trạng thái), theo thứ tự dưới đây.
+Mỗi màn (hoặc trạng thái) vẽ bằng **vài lời gọi `figma_write` nhỏ**, không dồn cả cây vào 1 lệnh:
+artboard + khung trang (mục 1-2) là 1 lời gọi, rồi mỗi vùng nội dung (header, bộ lọc, bảng, panel…)
+1 lời gọi riêng. Ghi `nodeId` artboard và từng vùng vào `state` để lời gọi sau bám vào.
+
+**Khi lời gọi timeout hoặc lỗi giữa chừng — KHÔNG gọi lại ngay.** Plugin có thể đã ghi một phần lên
+canvas (nhất là khi cửa sổ Figma chạy nền, plugin chậm hẳn):
+1. `figma_read` op `get_page_model` trên trang đích, xem node nào của lời gọi đó đã có.
+2. Có phần dở → xoá phần dở rồi vẽ lại vùng đó, hoặc vẽ tiếp từ chỗ dừng. KHÔNG tạo đè thành bản trùng.
+3. Artboard đã vẽ trước đó biến mất → báo user ngay, không lặng lẽ vẽ lại.
+4. Timeout lặp lại ≥ 2 lần → nhắc user đưa cửa sổ Figma ra trước (plugin chạy nền bị trình duyệt
+   hãm tốc), rồi chia vùng nhỏ hơn nữa.
+
+Thứ tự dựng:
 
 1. **Artboard**: kích thước theo thiết bị đã chốt. Tên chứa `screenId` **kèm hậu tố thiết bị** như
    một token nguyên vẹn, ví dụ `"3.1-web · danh-sach-chuyen"`, để userflow nối được (`linkScreens`).

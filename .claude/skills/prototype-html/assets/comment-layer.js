@@ -1949,11 +1949,15 @@
     showBlockDialog(isAdmin ? 'admin' : 'user', shareLinkError);
   } else if (!Remote.on) {
     // 2) Chưa cấu hình kho: admin phải điền; reviewer thì link thiếu thông tin
-    //    (KHÔNG chặn nếu chủ ý dùng offline — nhận biết bằng biến CMT_LOCAL_ONLY)
-    if (!window.CMT_LOCAL_ONLY) {
+    //    KHÔNG chặn khi: chủ ý offline (CMT_LOCAL_ONLY) hoặc mở file trực tiếp (file://) —
+    //    người dựng đang xem trên máy, chưa đẩy web → chạy chỉ-lưu-máy.
+    var localOnly = window.CMT_LOCAL_ONLY || location.protocol === 'file:';
+    if (!localOnly) {
       setCommentingBlocked(true, 'Chưa kết nối kho góp ý');
       showBlockDialog(isAdmin ? 'admin' : 'user',
         isAdmin ? 'Chưa nhập Bin ID và Mã truy cập.' : 'Link không kèm thông tin kho góp ý.');
+    } else {
+      toast('Góp ý đang lưu trên máy này. Đẩy web rồi nối kho chung để cả nhóm thấy nhau.');
     }
   } else {
     // 3) Có cấu hình → KIỂM THẬT với máy chủ (key sai/hết hạn/bin không tồn tại vẫn bắt được)
@@ -2029,9 +2033,6 @@
     });
   }
 
-  // Lần đầu vào (chưa có comment nào + chưa có tên) → chào hỏi tên ngay.
-  // Nếu đã từng dùng (có comment hoặc đã có tên) thì không làm phiền.
-  if (!lastAuthor() && cmt.list.length === 0) {
-    setTimeout(function () { ensureIdentity(); }, 400);
-  }
+  // Tên người góp ý chỉ hỏi khi bắt đầu góp ý lần đầu (xem nút bật chế độ góp ý) —
+  // KHÔNG hỏi lúc mở trang: người chỉ xem demo không bị chặn.
 })();

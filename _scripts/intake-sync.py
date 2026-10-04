@@ -26,6 +26,8 @@ STATE = f"{INPUT}/.intake-state.json"
 BACKLOG = "_workspace/backlog.md"
 TODAY = date.today().isoformat()
 SKIP_REF = re.compile(r"^_workspace/")
+# Feature nháp/test (folder bắt đầu "zz-") KHÔNG được làm bằng chứng đóng task hay feed nguồn.
+SCRATCH = re.compile(r"(^|/)zz-")
 GROUPS = {"sop": "SOP & giải pháp", "danh-muc": "Danh mục", "tich-hop": "Tích hợp ngoài",
           "chung-tu-mau": "Chứng từ mẫu", "du-lieu-mau": "Dữ liệu mẫu", "ui-common": "UI common",
           "srs-cu": "SRS cũ"}
@@ -137,7 +139,7 @@ def scan_refs(paths):
           glob.glob(os.path.join(ROOT, "design/**/*.md"), recursive=True)
     for md in sorted(mds):
         rel = nfc(os.path.relpath(md, ROOT))
-        if SKIP_REF.search(rel):
+        if SKIP_REF.search(rel) or SCRATCH.search(rel):
             continue
         txt = rd(rel)
         for p in paths:
@@ -180,11 +182,14 @@ def check(cond, fed):
         kind, _, arg = part.partition(":")
         ok, hit = False, ""
         if kind == "exists":
-            m = sorted(glob.glob(os.path.join(ROOT, arg), recursive=True))
+            m = [f for f in sorted(glob.glob(os.path.join(ROOT, arg), recursive=True))
+                 if not SCRATCH.search(nfc(os.path.relpath(f, ROOT)))]
             ok, hit = bool(m), (nfc(os.path.relpath(m[0], ROOT)) if m else "")
         elif kind == "grep":
             g, _, rx = arg.partition(":")
             for f in sorted(glob.glob(os.path.join(ROOT, g), recursive=True)):
+                if SCRATCH.search(nfc(os.path.relpath(f, ROOT))):
+                    continue
                 try:
                     if re.search(rx, rd(os.path.relpath(f, ROOT))):
                         ok, hit = True, nfc(os.path.relpath(f, ROOT))

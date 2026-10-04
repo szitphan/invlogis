@@ -179,7 +179,12 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
 3. **Resolve nguồn dựng màn** (bảng "2 nguồn dựng màn" ở Goal + mục Inputs).
    - **ASCII:** check `docs/{feature}/ascii-wireframe/{feature}-wireframe-index.md`. Thiếu → refuse + route `/user-flow` + `/wireframe-ascii` (bảng mô tả 5 cột là nguồn nội dung màn). Per `feature-bootstrap.md` nhóm B.
    - **Figma:** ASCII không bắt buộc (đọc nếu có — vẫn là nguồn hành vi ưu tiên). Làm tiếp bước 3a-3c.
-3a. **Kết nối Figma.** Đọc qua Figma MCP chính thức bằng link (`get_metadata` trên node page/frame user đưa) — không cần plugin. Lỗi quyền/link sai → báo + dừng, KHÔNG rơi về mode ASCII im lặng (hỏi user muốn dựng theo ASCII không). Plugin Reqwise đang kết nối (`figma_status`) thì đọc thêm `figma_read` op `get_page_model` để lấy userflow + mũi tên trên Figma (bổ sung nav graph Phase D).
+3a. **Kết nối Figma.** Đọc qua Figma MCP chính thức (`get_metadata` trên node page/frame) — không cần plugin. Lấy `fileKey` + node theo thứ tự, dừng ở nguồn đầu tiên có:
+   1. Link user đưa (`figma.com/design/{fileKey}/...?node-id={id}`).
+   2. Cột `Figma` trong `{feature}-wireframe-index.md`.
+   3. Plugin Reqwise đang kết nối: `figma_status` cho tên file + page đang mở (page id lấy qua `figma_read`), nhưng KHÔNG có `fileKey` → lấy `fileKey` từ link node trong `design/ui-common/screen-patterns.md` (dòng **Figma** của CMP), đối chiếu tên file trong link với `fileName` plugin trả về; lệch → hỏi user.
+   4. Không có nguồn nào → hỏi user link (1 câu).
+   Báo 1 dòng nguồn đã dùng (vd "fileKey lấy từ ui-common, page `X` từ plugin"). Lỗi quyền/link sai → báo + dừng, KHÔNG rơi về mode ASCII im lặng (hỏi user muốn dựng theo ASCII không). Plugin đang kết nối thì đọc thêm `figma_read` op `get_page_model` để lấy userflow + mũi tên trên Figma (bổ sung nav graph Phase D).
 3b. **Lập bảng khớp màn ↔ artboard.** Từ `get_metadata`, liệt kê artboard top-level → tách `screenId`, hậu tố thiết bị, `slug`, hậu tố trạng thái (`· rỗng`/`· đang tải`/`· lỗi`/...). Khớp với danh sách màn `userflow.md` Mục 2-3 theo luật ở Constraints. Kết quả 4 nhóm: **khớp** (màn → 1 artboard chính + N artboard trạng thái) · **màn chưa có frame** (dùng ASCII nếu có, đánh dấu "chưa có frame Figma"; không có ASCII → hỏi bỏ màn hay dừng) · **artboard thừa** (không thuộc màn nào — liệt kê, bỏ qua) · **mơ hồ** (khớp >1 → hỏi). Có nhóm mơ hồ hoặc màn thiếu cả frame lẫn ASCII → hỏi user 1 lượt gộp (AskUserQuestion) trước khi đi tiếp.
 3c. Ghi nhớ `fileKey` + `nodeId` từng artboard chính — dùng cho Phase C-Figma, link "Xem trong Figma" (bước 21) và Phase H.
 4. **Resolve device (single-source):** `userflow.md` frontmatter `primary_device` → mobile 375 / tablet 768 / desktop 1920. Thiếu → hỏi user 1 câu (per `ba-conventions.md` Mục 7), rồi gợi ý ghi ngược userflow. Mode Figma: đề xuất từ kích thước artboard; lệch `primary_device` → hỏi (xem Constraints).
@@ -263,7 +268,7 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
 
 24. **Gắn `data-cmt` cho element chính** (nâng độ bền neo, gần như miễn phí vì skill đã biết tên từng element từ bảng 5 cột): thêm `data-cmt="{screen}.{field}"` vào input/button/link chính trong `{{SCREENS}}` — vd `data-cmt="login.email"`, `data-cmt="login.submit"`. Element không có `data-cmt` vẫn góp ý được (module tự dò bằng selector + chữ ký nội dung), nhưng có thì neo chắc hơn khi DOM vẽ lại.
 
-25. **KHÔNG cấu hình sẵn Bin ID/Key trong file.** Người dựng tự mở `#admin` để nhập sau khi đẩy web (xem `references/HUONG-DAN-LUU-CHUNG.md` trong folder skill này). Chưa nhập thì góp ý vẫn chạy ở chế độ chỉ-lưu-máy.
+25. **KHÔNG cấu hình sẵn Bin ID/Key trong file.** Người dựng tự mở `#admin` để nhập sau khi đẩy web (xem `references/HUONG-DAN-LUU-CHUNG.md` trong folder skill này). Chưa nhập: mở bằng `file://` → góp ý chạy chỉ-lưu-máy (không chặn); mở qua web → khoá góp ý + hộp nhắc nối kho (tránh reviewer góp ý mà không ai thấy). Muốn ép offline cả trên web → đặt `window.CMT_LOCAL_ONLY = true` trước khi nạp lớp góp ý.
 
 ### Phase G — Side effects + L1 + Write
 
@@ -291,7 +296,10 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
     node -e 'const s=require("fs").readFileSync(process.argv[1],"utf8");const m=s.match(/\p{Extended_Pictographic}/gu);if(m){console.log("EMOJI:",[...new Set(m)]);process.exit(1)}' <file>
     ```
     Còn match → thay bằng SVG `<symbol>`/unicode geometric rồi mới report.
-26. **Verify FUNCTIONAL bằng harness (BẮT BUỘC — không chỉ render tĩnh).** Prototype "chạy như app thật" → phải drive luồng chính end-to-end, không chỉ check DOM load. Nếu có Chrome (vd `~/.puppeteer-cache/chrome/*/`), tạo file test tạm = prototype + `<script>` chèn trước `</body>` gọi các hàm luồng chính (tạo entity → thêm con → lưu → chuyển màn → kiểm `store.state`), ghi kết quả vào `document.title`, chạy `chrome --headless --dump-dom` đọc title. Assertion tối thiểu:
+26. **Verify FUNCTIONAL bằng harness (BẮT BUỘC — không chỉ render tĩnh).** Prototype "chạy như app thật" → phải drive luồng chính end-to-end, không chỉ check DOM load. **Dùng Playwright** (cài 1 lần trong scratchpad: `npm i playwright && npx playwright install chromium-headless-shell`): script `.mjs` mở `file://{prototype}`, chặn request font/CDN ngoài (`page.route`) để không treo, gọi các hàm luồng chính qua `page.evaluate` (tạo entity → thêm con → lưu → chuyển màn → kiểm `store.state`), mỗi bước có timeout, in PASS/FAIL từng assertion + lỗi console. KHÔNG sửa file prototype thật để test.
+    - KHÔNG dùng `chrome --headless --dump-dom`: không có timeout từng bước, không chặn được mạng → treo khi trang tải font CDN hoặc có hộp thoại chờ người dùng.
+    - Không cài được Playwright (không mạng/không npm) → xem dòng "KHÔNG có trình duyệt" cuối bước này.
+    Assertion tối thiểu:
     - Tạo entity mới → xuất hiện trong `store.state` list + persist localStorage.
     - Thêm con vào entity CÓ SẴN → cập nhật đúng entity đích (KHÔNG tạo trùng).
     - Entity rỗng → empty-state, KHÔNG mượn demo data khác.
@@ -304,8 +312,8 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
     - **Lỗi chỉ xuất hiện sau touched/submit:** gõ dở dang vào field còn pristine (vd mới gõ 3/16 số thẻ) → KHÔNG bật lỗi; blur field đó hoặc bấm submit mới bật lỗi nếu vẫn invalid; sửa lại đúng → lỗi tắt ngay trên `input` tiếp theo mà không cần blur lại.
     - **Dropdown/select value≠label (nguyên tắc 8):** grep mọi `<option value="([a-z0-9_-]+)"[^>]*>\1<` (text hiển thị trùng y hệt attribute `value`) trong file — có match là FAIL, đổi text hiển thị sang nhãn nghiệp vụ tiếng Việt, giữ nguyên `value`.
     - Reset → xoá localStorage + về default.
-    Có FAIL → tự sửa rồi chạy lại. KHÔNG có Chrome → tối thiểu `new Function(scriptBody)` check JS syntax + đọc kỹ từng hàm luồng chính bằng mắt. Xoá file test tạm sau verify.
-26b. **Đối chiếu với Figma (chỉ mode Figma).** Chụp từng màn của prototype bằng Chrome headless (`--screenshot --window-size={device_w},{device_h}`, mở thẳng `{file}#{slug}` — template route theo `location.hash`) ở trạng thái mặc định, đặt cạnh `get_screenshot` của artboard chính tương ứng → đọc cả 2 ảnh, liệt kê chỗ lệch theo 4 loại: **thiếu/thừa element** · **sai thứ tự/vị trí vùng** · **sai component/biến thể** · **sai chữ**. Lệch do tài liệu thắng Figma có chủ đích (luật xung đột) → KHÔNG tính là lỗi, chỉ ghi chú. Lệch còn lại → tự sửa rồi chụp lại (tối đa 2 vòng). Report ghi rõ: **đây là so bằng mắt AI, không phải so pixel** — khoảng cách/màu lệch nhỏ có thể lọt. Không có Chrome → ghi `Đối chiếu Figma: SKIPPED (không có Chrome)`, KHÔNG in PASS.
+    Có FAIL → tự sửa rồi chạy lại. KHÔNG có trình duyệt (Playwright không cài được) → tối thiểu `new Function(scriptBody)` check JS syntax + đọc kỹ từng hàm luồng chính bằng mắt, report ghi `Harness: SKIPPED (không có trình duyệt)` — KHÔNG in PASS. Xoá script test tạm sau verify.
+26b. **Đối chiếu với Figma (chỉ mode Figma).** Chụp từng màn của prototype bằng Playwright (`page.setViewportSize({device_w, device_h})`, mở thẳng `{file}#{slug}` — template route theo `location.hash`, `page.screenshot`) ở trạng thái mặc định, đặt cạnh `get_screenshot` của artboard chính tương ứng → đọc cả 2 ảnh, liệt kê chỗ lệch theo 4 loại: **thiếu/thừa element** · **sai thứ tự/vị trí vùng** · **sai component/biến thể** · **sai chữ**. Lệch do tài liệu thắng Figma có chủ đích (luật xung đột) → KHÔNG tính là lỗi, chỉ ghi chú. Lệch còn lại → tự sửa rồi chụp lại (tối đa 2 vòng). Report ghi rõ: **đây là so bằng mắt AI, không phải so pixel** — khoảng cách/màu lệch nhỏ có thể lọt. Không có trình duyệt → ghi `Đối chiếu Figma: SKIPPED (không có trình duyệt)`, KHÔNG in PASS.
 27. **Skip review nếu user nói "khỏi cần review, làm luôn"** — đi thẳng output. (Gate emoji + verify functional bước 26 VẪN chạy — chỉ skip vòng @uxui-reviewer.)
 28. **Spawn `@uxui-reviewer`** (Task) với target file vừa write + references (bảng 5 cột trong `ascii-wireframe/{flow-slug}.md` + `{feature}-wireframe-index.md`). Focus:
     - State coverage: mỗi màn có loading/empty/error/success?
@@ -320,7 +328,7 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
     - Flow consistency: nav dead-end? Cross-screen drift?
     - Severity per `.claude/rules/review-format.md`.
 28. **Auto-fix mặc định** (per `feedback_review_auto_run` — review auto-run + tự fix HẾT, user chỉ xem output cuối). KHÔNG hỏi user pick từng finding:
-    - **BLOCKING + WARNING** → skill tự regen affected sections của HTML (giữ 1 file, verify lại: JS syntax + emoji gate + Chrome headless nếu có). Tối đa 2 vòng (fix → re-review); vòng 2 vẫn còn BLOCKING → ghi rõ điểm tồn đọng vào report.
+    - **BLOCKING + WARNING** → skill tự regen affected sections của HTML (giữ 1 file, verify lại: JS syntax + emoji gate + harness Playwright nếu có). Tối đa 2 vòng (fix → re-review); vòng 2 vẫn còn BLOCKING → ghi rõ điểm tồn đọng vào report.
     - **Quyết định nghiệp vụ** (cần chọn phương án UX/nghiệp vụ chưa có nguồn) → skill tự chọn phương án hợp lý + **đánh dấu 🔶 trong report cuối** để user biết chỗ đã tự quyết (user override sau nếu muốn). KHÔNG chặn tiến độ hỏi từng cái.
     - **SUGGESTION** → cân nhắc, áp nếu rẻ + rõ; không thì liệt kê trong report.
     - Set env `CLAUDE_SKILL_NAME=/prototype-html` trước mỗi fix (hook ghi changelog.md; đây là phase review nội bộ của skill này).

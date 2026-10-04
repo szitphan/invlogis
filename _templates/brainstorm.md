@@ -12,13 +12,9 @@ links: {{links}}
 
 {{seed}}
 
-*Raw input từ user — câu/đoạn description gốc.*
-
 ## 2. Context‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 {{context}}
-
-*Background, why now, related features, market signal.*
 
 ## 3. User Types (preliminary)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -63,8 +59,6 @@ links: {{links}}
 {{ascii_flow_2}}
 ```
 
-*Liệt kê đủ flows chính (vd: signup, login, forgot password, logout, OAuth, ...). Mỗi flow độc lập, có ASCII riêng nếu phức tạp.*
-
 ## 6. System Behavior Deep Dive
 
 ### 6.1 Decision Points
@@ -72,8 +66,6 @@ links: {{links}}
 | ID | Flow | Khi nào | YES (nhánh đồng ý) | NO (nhánh từ chối) |
 |---|---|---|---|---|
 | D1 | {{flow_name}} | {{condition}} | {{yes_action}} | {{no_action}} |
-
-*Mỗi decision point = 1 câu hỏi YES/NO trong flow. ID `D1, D2…` để cross-ref. Capture tất cả branching điểm chính (validate email tồn tại, captcha trigger, lockout, OAuth callback…).*
 
 ### 6.2 Scenario Matrix (nếu `has_multi_role` / ≥2 input states)
 
@@ -106,8 +98,6 @@ links: {{links}}
 
 {{edge_cases}}
 
-*Edge cases gom chung ở đây — KHÔNG tách section riêng. Bao gồm: empty state, concurrent, timeout, network down, validation fail, không thuộc các matrix trên.*
-
 ## 7. Validation, Limits & Wording‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 ### 7.1 Validation rules
@@ -116,15 +106,11 @@ links: {{links}}
 |---|---|
 | {{field}} | {{validation_rule}} |
 
-*Format, độ dài, required, unique, ràng buộc nghiệp vụ.*
-
 ### 7.2 Limits & Quotas (exact values)
 
 | Tham số | Giá trị | Window | Behavior khi vượt |
 |---|---|---|---|
 | {{limit_name}} | {{value}} | {{window}} | {{action}} |
-
-*BẮT BUỘC số liệu cụ thể (vd "5 lần/phút", "24 giờ"), KHÔNG viết "rate limit phù hợp".*
 
 ### 7.3 Wording samples (exact strings)
 
@@ -146,13 +132,9 @@ links: {{links}}
 |---|---|
 | {{info_case}} | "{{exact_string}}" |
 
-*Wording trong dấu nháy = exact string user sẽ thấy. Tiếng Việt natural, KHÔNG dịch máy. Code map sang error matrix ở `/srs`.*
-
 ## 8. Assumptions
 
 {{assumptions}}
-
-*Giả định đang dùng — cần verify trước khi spec. Vd: "Email là unique identifier", "Region: global", "Mobile + Web share backend".*
 
 ## 9. Risks
 
@@ -160,21 +142,9 @@ links: {{links}}
 |--------|----------|-------------------|-----------|
 | {{risk}} | thường / thỉnh thoảng / hiếm | {{impact_business}} | {{mitigation}} |
 
-*Rủi ro nghiệp vụ — KHÔNG phải bug/infra. Ví dụ loại:*
-- *Adoption: "User không hiểu flow mới → conversion giảm"*
-- *Vendor: "Đối tác thanh toán đổi phí → vượt budget"*
-- *Compliance: "Chưa đủ document cho audit PCI"*
-- *Process: "Team CSKH chưa được train flow refund"*
-- *Timeline: "Legal review T&C chậm → trễ launch"*
-- *Data: "Dữ liệu user cũ thiếu phone → OTP fail khi migrate"*
-
-*Hậu quả nghiệp vụ viết bằng từ business: mất khách / mất doanh thu / complaint tăng / delay launch / vi phạm hợp đồng. KHÔNG viết "API chậm", "DB lock".*
-
 ## 10. Success Criteria (preliminary)
 
 {{success_criteria}}
-
-*Measurable hint — chốt formal ở URD/BRD. Vd: "Signup conversion rate ≥ X%", "Time-to-first-login < Y giây".*
 
 ## 11. Open Questions
 
@@ -188,7 +158,6 @@ Sau brainstorm này (sau khi BA approve):
 - `/urd {{feature}}` — capture user perspective
 - `/brd {{feature}}` — business case
 - `/prd {{feature}}` — product scope‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
-
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->
 <sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền hoangphan.blog</sub>

@@ -12,6 +12,7 @@
 | File trong `docs-input/` đổi tên/chuyển chỗ (cùng nội dung) | Đổi đường dẫn trong sổ + task | như trên |
 | Doc trong `docs/{feature}/` trỏ tới nguồn `⬜` | Nguồn → `✅ đã feed`, task feed tự đóng | như trên |
 | Điều kiện cột **Xong khi** thoả | Task → `✅`, ghi ngày + bằng chứng, chuyển sang mục Đã xong | như trên |
+| File trong folder `zz-*` (feature nháp/test) | Bỏ qua — không đóng task, không đánh dấu feed | như trên |
 
 Hook in `[intake-sync] + nguồn mới …` vào đầu lượt → đọc nguồn đó theo memory "ingest-new-client-docs",
 xếp nhóm + đặt tên theo quy ước trong `docs-input/README.md` (sổ tự nhận đổi chỗ).

@@ -146,8 +146,9 @@
     }
     /* SEMANTIC token — component CHỈ dùng cái này. 3 block bắt buộc (default+light+dark). */
     {{THEME_SEMANTIC}}
-    /* mọi phần tử mang data-theme lấy nền/chữ từ semantic token */
-    [data-theme] { background-color: var(--bg); color: var(--ink); }
+    /* mọi phần tử mang data-theme lấy nền/chữ từ semantic token — TRỪ <dialog>: openModal() gắn
+       data-theme lên dialog chỉ để token chảy xuống .modal; dialog phải giữ nền trong suốt. */
+    [data-theme]:not(dialog) { background-color: var(--bg); color: var(--ink); }
 
     /* MODAL base (BẤT BIẾN) — reset '* { margin:0 }' ở trên XOÁ margin:auto mặc định
        của <dialog> → dialog rơi về góc trái-trên. Bắt buộc set lại margin:auto để căn giữa. */
