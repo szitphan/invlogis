@@ -41,6 +41,8 @@ links:
 | BL-026 | Rà lại `docs/_research/2026-10-02-electronic-delivery-record.md` theo thay đổi SRC-01 (SOP giao nhận bản 18/9: số mục mới, nội dung đổi) | `sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | `grep:docs/_research/2026-10-02-electronic-delivery-record.md:_changes/2026-10-02-giao-nhan-hang-hoa` | ⬜ | 2026-10-02 |  |  |
 | BL-027 | Rà lại `docs/_research/2026-10-02-eport-integration.md` theo thay đổi SRC-01 (SOP giao nhận bản 18/9: số mục mới, nội dung đổi) | `sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | `grep:docs/_research/2026-10-02-eport-integration.md:_changes/2026-10-02-giao-nhan-hang-hoa` | ⬜ | 2026-10-02 |  |  |
 | BL-028 | Rà lại `docs/_research/2026-10-02-field-document-reading.md` theo thay đổi SRC-01 (SOP giao nhận bản 18/9: số mục mới, nội dung đổi) | `sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | `grep:docs/_research/2026-10-02-field-document-reading.md:_changes/2026-10-02-giao-nhan-hang-hoa` | ⬜ | 2026-10-02 |  |  |
+| BL-029 | Chạy thử `/prototype-html <feature> <link Figma>` trên 1 flow thật, sửa skill theo kết quả (khớp artboard 3b, lệch Figma↔tài liệu, đối chiếu ảnh 26b) | `.claude/skills/prototype-html/` | `grep:docs/*/html-design/*-prototype.html:data-figma-node` | ⬜ | 2026-10-04 |  |  |
+| BL-030 | Chạy thử luồng usability AI trên 1 feature thật: `/brainstorm` (bảng 3.1) → `/user-flow` (Mục 3.6) → `/figma-screen` gọi `@usability-reviewer`; sửa skill/agent theo kết quả | `.claude/agents/usability-reviewer.md` | `grep:docs/*/srs/*-userflow.md:^## 3\.6\. Tác vụ chính` | ⬜ | 2026-10-04 |  |  |
 
 ## Đã xong
 

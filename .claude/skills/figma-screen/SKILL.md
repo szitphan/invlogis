@@ -1,7 +1,7 @@
 ---
 name: figma-screen
 description: Vẽ màn hình giao diện (UI) lên Figma theo đúng design system của dự án — đề xuất 3 phương án bố cục (1 theo mẫu có sẵn trong design/design.md + 2 độc lập) để user chọn, dùng component thật (instance), gắn token theo tên, vẽ đủ trạng thái rỗng/đang tải/lỗi, rồi tự kiểm trước khi trình. Dùng khi ai đó nói "vẽ màn", "dựng màn hình", "vẽ UI", "mock up màn", "làm giao diện cho <tính năng>" trên Figma.
-allowed-tools: Read, Glob, Grep, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write
+allowed-tools: Read, Glob, Grep, Task, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write
 user-invocable: true
 argument-hint: "<màn hoặc tính năng cần vẽ> [@nguồn: srs, states, userflow]"
 ---
@@ -241,6 +241,13 @@ Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một
    - (d) form **không trải hết bề rộng** desktop;
    - (e) mỗi component đã dùng không vi phạm dòng **Không nên** nào của nó trong `design/components.md`.
 6. Một `figma_read screenshot` cho mỗi màn chính ở cuối, để user xem.
+7. **Usability (AI):** vẽ xong **trọn một flow** (đủ màn của flow đó theo `userflow.md` Mục 3) và
+   `userflow.md` có **Mục 3.6 Tác vụ chính** chạm flow này → gọi `@usability-reviewer` (Task) với
+   userflow + bảng `screenId · slug · nodeId` của flow (kèm artboard trạng thái). Agent đi từng tác
+   vụ theo cognitive walkthrough + rà heuristic Nielsen, chỉ trả finding, không tự sửa. `BLOCKING`
+   không đổi nghiệp vụ → sửa màn rồi gọi lại (tối đa 2 vòng); cần đổi nghiệp vụ → ghi "cần `/cr`",
+   không tự sửa. Chưa trọn flow (chế độ Nhanh, vài màn lẻ) hoặc thiếu Mục 3.6 → KHÔNG gọi, ghi rõ
+   lý do ở báo cáo (`Usability (AI): SKIPPED — …`), không in PASS.
 
 ## Bước 7 — báo đã vẽ gì
 
@@ -252,6 +259,7 @@ Ngắn, theo mẫu:
 2.2-web · chi-tiet-don    P7 · bình thường / lỗi tải
 
 Máy đã kiểm: layout 0 lỗi · a11y 0 lỗi mới (2 ngoại lệ đã biết) · DS compliance 1.00
+Usability (AI, chưa có người dùng thật): 3 tác vụ · 1 vượt tiêu chí bước · 0 blocking / 2 warning | SKIPPED — <lý do>
 Máy KHÔNG kiểm: <xem dưới, kèm mức ưu tiên [Cao]/[Trung]/[Thấp]>
 Chưa có chuẩn trong design.md: <liệt kê chỗ vẽ tạm, hoặc "không">
 Chế độ: <Nhanh — không vẽ trạng thái phụ | Đầy đủ>

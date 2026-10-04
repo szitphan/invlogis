@@ -157,6 +157,7 @@ __Section 2 — Users & Access__
 2) Gating: cần subscription/verified/role gì để truy cập?
 3) Entry point: user vào feature qua đâu (menu, button, deep link, notification)?
 4) Số lượng user dự kiến (giúp size capacity + cost)?
+5) Mỗi vai trò **thường làm việc gì trong tính năng này, bao nhiêu lần** (mỗi ca / mỗi ngày / mỗi tuần / hiếm)? Việc nào **làm sai hoặc làm chậm thì hậu quả nặng nhất**? → ghi bảng `3.1 Tác vụ chính` (tần suất + mức quan trọng). Đây là nguồn để `/user-flow` dựng Mục 3.6 và để màn ưu tiên đúng việc làm nhiều nhất. User chưa biết tần suất → ghi `?` + OQ, KHÔNG tự đoán.
 
 __Section 3 — Core Flow (Happy Path)__
 1) Walk-through từng bước: user làm gì → system làm gì → user thấy gì (success state)?

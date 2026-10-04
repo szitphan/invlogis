@@ -97,7 +97,7 @@ Công cụ: `/update-overview` (sửa 6 file `_shared`), `/kg` (đồ thị liê
 
 | Mức | Bước | Skill | Vào | Ra |
 |---|---|---|---|---|
-| 🟢 | Phỏng vấn, sinh feature + function | `/brainstorm` ✅ | ý tưởng / `@nguồn` / research | `docs/{feature}/brainstorms/{idea}.md` (user, capability P0-P2, luồng chính, edge case, wording, OQ) |
+| 🟢 | Phỏng vấn, sinh feature + function | `/brainstorm` ✅ | ý tưởng / `@nguồn` / research | `docs/{feature}/brainstorms/{idea}.md` (user, **tác vụ chính + tần suất + mức quan trọng**, capability P0-P2, luồng chính, edge case, wording, OQ) |
 | ⚪ | Lý do kinh doanh | `/brd` ✅ | brainstorm | `{feature}-brd.md` |
 | ⚪ | Nhu cầu người dùng / đặc tả epic | `/urd` ❌ · `/prd-epic` ❌ | brainstorm | `{feature}-urd.md`, `{feature}-prd.md` |
 
@@ -128,7 +128,7 @@ Công cụ: `/update-overview` (sửa 6 file `_shared`), `/kg` (đồ thị liê
 
 | Mức | Bước | Skill | Vào | Ra |
 |---|---|---|---|---|
-| 🟢 có UI | Chia luồng | `/user-flow` ✅ | spec / UC | `srs/{feature}-userflow.md`: luồng chính + lỗi + biên, chia flow, `primary_device` |
+| 🟢 có UI | Chia luồng | `/user-flow` ✅ | spec / UC | `srs/{feature}-userflow.md`: luồng chính + lỗi + biên, chia flow, `primary_device`, **Mục 3.6 Tác vụ chính** (đường đi, số bước, tiêu chí thành công — lấy từ brainstorm 3.1) |
 | 🟢 có UI | Phác màn | `/wireframe-ascii` ✅ | userflow + spec + UC + CMP/GR + design.md (bố cục) | `ascii-wireframe/{flow}.md` (màn + bảng mô tả 5 cột) + `{feature}-wireframe-index.md` |
 | ⚪ | Wireframe HTML | `/wireframe-html` ✅ | userflow (+ ASCII) | `html-wireframe/{flow}.html` |
 
@@ -142,6 +142,7 @@ design**: validation, mã lỗi, wording, điều hướng nằm ở đây.
 | 🟢 | `/figma-screen` ✅ ⚠️ | design.md, components.md, srs, states, userflow **trên Figma** | artboard trên Figma (3 phương án bố cục, instance thật, token, đủ trạng thái) | Không (chỉ quyền đọc) |
 | 🟡 thiếu component | `/figma-component` ✅ ⚠️ | spec component trong design.md | component set trên Figma; cập nhật spec trong design.md | Có (design.md) |
 | 🟡 1 lần | `/figma-design-system` ✅ | design.md | token + component set trên Figma | — |
+| 🟢 có Mục 3.6 | Usability bằng AI (bước 7.5) — `@usability-reviewer`, `/figma-screen` tự gọi khi vẽ trọn 1 flow | userflow Mục 3.5 + 3.6 + màn Figma của flow | finding: tác vụ kẹt ở đâu, số bước thực / tiêu chí, heuristic Nielsen | Không (báo cáo trong chat) |
 | ⚪ | `/prototype-html` ✅ | userflow + ASCII + design-tokens.css | `html-design/{feature}-prototype.html` | file trong repo |
 | ⚪ | `/figma-demo` · `/figma-userflow` · `/figma-sitemap` · `/figma-persona` · `/figma-journey` ✅ | mô tả / màn đã vẽ | demo tự chạy, sơ đồ trên Figma | — |
 | ⚪ (cũ) | `/figma` ✅ ⚠️ | ASCII + wireframe-index | frame trên Figma | Có |
@@ -186,6 +187,7 @@ thành BLOCKING. Lỗi an toàn (câu chữ, nhất quán nội bộ) skill tự
 | `/user-flow` Phase E.5 | `flow-reviewer` | thiếu nhánh, dead-end, thiếu màn, case happy/error/edge, chia flow sai | Luôn, trước HARD STOP, tối đa 2 vòng |
 | `/sequence`, `/activity` | `diagram-reviewer` | thiếu actor/lane, bỏ sót nhánh lỗi so với danh sách sự kiện, dead-end, gateway thiếu nhánh | Chỉ khi phức tạp (vd ≥ 3 nhánh lỗi, ≥ 4 bên, lồng ≥ 2 tầng, có callback/timeout) |
 | `/prototype-html` | `@uxui-reviewer` | trạng thái, luồng, khớp bảng mô tả 5 cột | Mặc định; bỏ nếu user nói "khỏi review" |
+| `/figma-screen` Bước 6.7 | `@usability-reviewer` | đóng vai người dùng: đi từng tác vụ Mục 3.6 theo cognitive walkthrough (từng màn một), đếm bước so tiêu chí, rà 10 heuristic Nielsen. **AI đánh giá, không có người dùng thật** | Khi vẽ trọn 1 flow và userflow có Mục 3.6; ngược lại báo SKIPPED |
 | `/gap` | `@flow-reviewer` (+ `@senior-ba` khi ≥ 8 UC) | đọc prose toàn feature tìm luồng thiếu mà máy không thấy | Luôn |
 | `/cr` | `@change-tracker` | thay đổi chạm doc / FR / story / AC nào, thứ tự sửa | Luôn khi phân tích |
 | | `@gap-analyst` | FR mồ côi, thiếu AC, mã lỗi cũ, link gãy sau thay đổi | |
@@ -289,8 +291,10 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | P-18 | 7 | `/figma-screen`, `/figma-component` tự ghi "[Cao] màn có khớp nghiệp vụ không — máy không kiểm" nhưng không có agent nào kiểm phần đó (R-4) | Màn hi-fi sạch audit kỹ thuật nhưng có thể sai nghiệp vụ (sai nhãn, thiếu trường, sai số liệu so với spec) |
 | P-19 | 5 | `/state`, `/erd` chỉ có linter (R-5) | Trạng thái / quan hệ sai nghiệp vụ vẫn qua vì linter chỉ kiểm ngữ pháp |
 | ~~P-20~~ ✅ | — | (Đã xử lý bằng D-04, D-05) Cấu trúc thư mục trộn đầu vào với đầu ra: design system ở gốc `docs/`; `docs/_shared/` trộn tri thức dự án + chuẩn UI + log máy; tài liệu quy trình nằm trong `docs/` | Khó phân biệt đâu là chuẩn để đọc, đâu là sản phẩm, đâu là log (D-04, D-05) |
-| P-21 | — | Bản Codex chép tay: `AGENTS.md` ghi sai đường dẫn `.Codex/skills`; `.agents/skills/` lệch bản gốc và thiếu 16 mục Figma; `.codex/agents` thiếu `feature-researcher` | Codex chạy trên bộ skill cũ/thiếu |
+| ~~P-21~~ ✅ | — | (Đã xử lý 2026-10-04: `_scripts/codex-sync.py` sinh bản Codex từ `.claude/` + `CLAUDE.md`, `--check` để phát hiện lệch) Bản Codex chép tay: `AGENTS.md` ghi sai đường dẫn `.Codex/skills`; `.agents/skills/` lệch bản gốc và thiếu 16 mục Figma; `.codex/agents` thiếu `feature-researcher` | Codex chạy trên bộ skill cũ/thiếu |
 | P-22 | — | Không ghi lại skill nào cài từ kit nào, bản nào | Lẫn bản (đã gặp: 2 bản Reqwise khác license) |
+| P-23 | 7.5 | Usability chỉ có đánh giá bằng AI (`@usability-reviewer`), **không có test với người dùng thật** — chấp nhận tạm (2026-10-04) | Mù với thói quen nghề nghiệp, áp lực ca làm thật, cách người dùng hiểu nhầm chữ. Khi có người test → thêm kế hoạch test + tổng hợp kết quả |
+| P-24 | 7.5 | `@usability-reviewer` được gọi từ `/figma-screen` sửa trực tiếp trong `.claude/skills/`; nguồn kit `kits/figma-skills/custom/` không có trong repo | Cài lại `/figma-screen` từ kit sẽ mất bước 6.7 |
 
 ## 8. Luồng mục tiêu (đề xuất, chưa chốt)
 
@@ -314,6 +318,8 @@ docs-input ─/intake─► nguồn .md
      │   [máy: layout · a11y · DS compliance] [uxui-reviewer P-18]
      │   └─ /figma-component khi thiếu component
      ▼
+7.5 usability bằng AI [usability-reviewer] — tác vụ Mục 3.6, từ brainstorm 3.1
+     ▼
 /userstory + /ac ─► /gap [flow-reviewer] ─► bàn giao ─► /cr [change-tracker · gap-analyst]
 ```
 
@@ -331,4 +337,4 @@ Việc cần làm, theo thứ tự:
    tham chiếu (P-01 → P-04).
 7. Chuyển CMP/GR mobile (BL-001) và bổ sung chuẩn mobile vào design.md trước khi vẽ App Lái xe (P-13).
 8. Cấp quyền connector Figma cho `/figma-component`, tạo file ghi Known Gaps (P-11, P-12).
-9. Script đồng bộ bản Codex + manifest nguồn kit; cập nhật CLAUDE.md + AGENTS.md (P-14, P-21, P-22).
+9. ~~Script đồng bộ bản Codex~~ (xong 2026-10-04, `_scripts/codex-sync.py`) + manifest nguồn kit; cập nhật CLAUDE.md + AGENTS.md (P-14, P-21, P-22).

@@ -152,7 +152,7 @@ Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). S�
 
 | Nguồn | Path | Trích gì |
 |-------|------|----------|
-| Brainstorm (ưu tiên 1) | `docs/{feature}/brainstorms/*.md` | Core flows, scenario matrix, state transitions, decision points, error cases, giá trị cụ thể |
+| Brainstorm (ưu tiên 1) | `docs/{feature}/brainstorms/*.md` | Core flows, scenario matrix, state transitions, decision points, error cases, giá trị cụ thể, **bảng `3.1 Tác vụ chính`** (vai trò · tác vụ · tần suất · mức quan trọng) |
 | URD (ưu tiên 2) | `docs/{feature}/{feature}-urd.md` | Personas, user needs, user journeys, success criteria |
 | PRD/SRS (nếu có) | `docs/{feature}/{feature}-prd.md`, `docs/{feature}/srs/{feature}-spec.md` | Capabilities, FR, screens đã định nghĩa |
 
@@ -164,6 +164,7 @@ Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). S�
 1) Skill tóm tắt **hiểu biết hiện tại** về tính năng (2-4 dòng): mục tiêu, actor, luồng chính, nhánh nghi ngờ.
 2) Liệt kê **điểm chưa rõ** thành numbered list. Hỏi tối đa 5-7 câu/vòng, **1 vòng một**, chờ trả lời. Câu hỏi bằng **ngôn ngữ nghiệp vụ** (IT-BA framing).
 3) Loop tới khi đủ rõ HOẶC user nói "đủ rồi" → phần chưa trả lời ghi vào Open Questions, KHÔNG bịa nội dung.
+4) **Tác vụ chính (nguồn cho Mục 3.6):** brainstorm đã có bảng `3.1 Tác vụ chính` → dùng luôn, KHÔNG hỏi lại. Thiếu bảng, hoặc tác vụ còn `?` tần suất / thiếu mức quan trọng → gộp vào vòng hỏi này: "Mỗi vai trò làm việc gì nhiều nhất, bao nhiêu lần mỗi ca/ngày? Việc nào làm sai/chậm thì hậu quả nặng nhất?". Tiêu chí thành công từng tác vụ (vd "≤ 3 bước", "không rời màn danh sách") → đề xuất từ luồng đã dựng, user xác nhận. User không biết → ghi `?` + OQ, KHÔNG đoán.
 
 ### Phase D — Sinh màn hình + chia flow + user flow mermaid
 
@@ -177,6 +178,7 @@ Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). S�
    Dùng style class riêng cho từng loại case (xem Mục "Mermaid user flow convention").
    **QUOTE PHÒNG THỦ khi compose (bắt buộc — tránh "Invalid mermaid syntax"):** bọc `"..."` MỌI node label và MỌI edge label chứa ký tự đặc biệt (`≥ ≤ + / ? & ( ) :`). Vd `d1{"Kiểm tra<br/>email/password"}` và `A -->|"fail ≥3 lần"| B`. Mặc định quote hết cho chắc — quote thừa vô hại. Đây là nguồn lỗi phổ biến nhất mà `mmdc` (Phase F.5) lại **tha**, nên phải phòng ngừa lúc viết, không dựa verify để phát hiện. Chi tiết: `diagram-selection.md` Mục "Mermaid syntax safety".
 4) **Bảng chuyển màn (Mục 3.5)**: rút từ mermaid Mục 1 thành bảng `Từ màn [#] → Đến màn [#] | Trigger | Điều kiện`, phủ cả nhánh happy/error/edge. Đây là nguồn DUY NHẤT cho `/wireframe-html` + `/prototype-html` nối điều hướng (edge NAVIGATES_TO) — đừng để 3 nơi tự suy lại. Mỗi cạnh trong flowchart = 1 dòng bảng.
+5) **Tác vụ chính (Mục 3.6)**: mỗi tác vụ 1 dòng — vai trò · tần suất · mức quan trọng (từ Phase C bước 4) · đường đi trên màn `[#] → [#] → …` theo bảng 3.5 (đường happy ngắn nhất) · số bước (đếm thao tác người dùng: bấm, chọn, nhập — KHÔNG đếm màn) · tiêu chí thành công. Đây là danh sách tác vụ `@usability-reviewer` đi qua ở `/figma-screen`, và là căn cứ để màn ưu tiên đúng việc làm nhiều nhất. Tác vụ tần suất cao mà số bước vượt tiêu chí → nêu ngay ở HARD STOP, không đợi tới lúc vẽ.
 
 ### Phase E — Duyệt nội dung flow (không phải L3 mermaid render)
 
@@ -198,6 +200,9 @@ Danh sách màn hình ({N}):
 Chia flow ({M} flow):
   - {flow-slug-1}: gồm {màn a, b, c}
   - {flow-slug-2}: gồm {màn d, e}
+
+Tác vụ chính ({K}):
+  - {tác vụ} · {vai trò} · {tần suất} · {mức quan trọng}: {[#] → [#] → [#]} = {n} bước (tiêu chí: {…}) {⚠ vượt tiêu chí nếu có}
 
 Đồng ý / Sửa: <mô tả thay đổi> / Hủy:
 ```
@@ -397,6 +402,12 @@ flow_hash: "{sha256 8 ký tự đầu của nội dung Mục 1 tại lúc user g
 | Nhập email [1] | Nhập OTP [2] | Submit email | email tồn tại |
 | Nhập email [1] | (giữ nguyên) [1] | Submit email | email không tồn tại → báo lỗi |
 | Nhập OTP [2] | Đặt mật khẩu [3] | Submit OTP | OTP đúng, còn hạn |
+
+## 3.6. Tác vụ chính
+
+| Tác vụ | Vai trò | Tần suất | Mức quan trọng | Đường đi | Số bước | Thành công khi |
+|--------|---------|----------|----------------|----------|---------|----------------|
+| Đặt lại mật khẩu | Khách | hiếm | cao | [1] → [2] → [3] → [4] | 5 | xong trong 1 phiên, không phải liên hệ hỗ trợ |
 
 ## 4. Open Questions
 
