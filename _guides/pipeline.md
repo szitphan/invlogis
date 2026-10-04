@@ -305,6 +305,7 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | P-24 | 7 | `/figma-screen` đã sửa trực tiếp trong `.claude/skills/` (bước 6.7, 6.8, đọc bảng 5 cột, ghi link, chia lệnh khi timeout) — chủ ý: sửa repo trước, chạy ổn mới đưa về kit `kits/figma-skills/custom/` (D-09) | Cài lại `/figma-screen` từ kit lúc này sẽ mất các sửa đó |
 | ~~P-25~~ ✅ | 3 | (Đã xử lý 2026-10-04: Section 5 đọc *Copy động* + E-common trước khi viết wording) `/brainstorm` đặt wording lỗi không đối chiếu *Content & Formatting* của design.md và bảng E-common | Test 2026-10-04: E-1/E-2 dùng "Vui lòng" (design.md cấm), E-3 trùng nghĩa E-common-009 nhưng khác câu — lỗi lan xuống SRS và màn |
 | P-26 | 3→7 | 9 sửa lỗi ngày 2026-10-04 mới kiểm cú pháp, chưa chạy lại trên feature thật | Có thể còn lỗi khi chạy thật — đóng khi xong BL-029, BL-030 |
+| P-27 | 2→5 | `/object-map` (ORCA) là skill mới viết trong repo 2026-10-04, kit chưa có; `diagram-gates-selftest.sh` + `scripts/fixtures/` lấy lại từ kit `ai4ba-skills/claude-code` và đã thêm khối object-map. Chưa nối vào `/user-flow`, `/srs`, `/wireframe-*`, `/erd`, `kg-build` | Chưa chạy thật trên dự án; khi port về kit phải mang theo skill + khối selftest + 5 file rule/CLAUDE.md đã sửa |
 
 ## 8. Luồng mục tiêu (đề xuất, chưa chốt)
 

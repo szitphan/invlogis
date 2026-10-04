@@ -63,10 +63,11 @@ Kèm theo: **input tuỳ chọn làm tầng kiểm bị skip thì phải NÓI RA
 | Cấu trúc luồng PlantUML | `skills/activity-swimlane/puml-activity-lint.mjs` | `/activity-swimlane` | `if`/`endif` cân, có `start`+`stop`, nhánh có nhãn, đủ lane |
 | Mermaid 3 tầng | `scripts/mermaid-verify.mjs` | `/sequence` `/activity` `/state` `/erd` `/user-flow` | cú pháp + nhãn an toàn + **ngữ nghĩa** (state mồ côi/thiếu terminal, ERD entity ma/quan hệ không FK, sequence lifeline chưa khai, flowchart quyết định thiếu nhánh/nhánh cụt) |
 | Đối chiếu 3 bản ERD | `scripts/erd-consistency.mjs` | `/erd` `/d2-erd` `/dbdiagram` | drift giữa Mermaid (canonical) ↔ D2 ↔ DBML — loại lỗi mà linter đơn-file KHÔNG thể thấy |
+| Bản đồ đối tượng ORCA | `skills/object-map/object-map-lint.mjs` | `/object-map` | tham chiếu đối tượng/vai trò/OQ, mã OBJ, enum bản số + hiện ở, Mục 0 khớp bảng quan hệ (máy sinh); cảnh báo mồ côi / thiếu hành động kết thúc |
 | IR nghiệp vụ BPMN | `skills/bpmn/engine/bpmn-semcheck.mjs` | `/bpmn` | structural (id trùng, 1 start, gateway có nhãn, tới được end) + coverage đối chiếu nguồn |
 
 **Fixtures** (test hồi quy — sửa linter xong phải chạy lại):
-`skills/usecase-diagram/fixtures/` · `skills/activity-swimlane/fixtures/` · `scripts/fixtures/`
+`skills/usecase-diagram/fixtures/` · `skills/activity-swimlane/fixtures/` · `skills/object-map/fixtures/` · `scripts/fixtures/`
 (mermaid: cặp `mermaid-valid-flow.md` phải PASS + `mermaid-escaped-quot.md` phải FAIL).
 Mỗi bộ có file **phải PASS** và file **phải FAIL**. Đừng "sửa" file FAIL cho nó pass.
 

@@ -37,6 +37,7 @@
 └── docs/
     ├── _shared/                       ← project-level shared
     │   ├── project-profile.md         ← bối cảnh dự án tích lũy (domain/thuật ngữ user/đối thủ/compliance) — skill thiếu thông tin thì hỏi rồi ghi vào đây, skill sau reuse (rule project-profile.md)
+    │   ├── object-map.md              ← bản đồ đối tượng ORCA cấp dự án (output /object-map); feature delta ở docs/{feature}/{feature}-object-map.md
     │   ├── definitions.md
     │   ├── operating-environment.md
     │   ├── conventions.md
@@ -149,9 +150,10 @@ __Product planning phase (project-level — TRÊN /brainstorm):__
 |-------|---------|
 | `/prd [<mô tả>\|@<file>]` | __PRD cấp sản phẩm__ (project-level). Interview level sản phẩm (6 nhóm: Vision/Users/Value/Features/Scope/Metrics) → bóc tách __Feature Map__ (mỗi feature đúng altitude để brainstorm riêng). Output project-level `docs/_product/prd.md`. Đánh dấu cột Chi tiết hóa bằng lời (vd "đánh dấu payment đã chi tiết") — skill tự hiểu, không cần flag. Đã tồn tại → tự vào update mode. Khác `/prd-epic` (đặc tả 1 feature). |
 | `/roadmap` | Đọc Feature Map → xếp ưu tiên (MoSCoW → RICE-lite → dependency) → phân đợt __Now/Next/Later__ hoặc nói "chia theo quý" (không nói rõ → skill hỏi). Output project-level `docs/_product/roadmap.md`. |
+| `/object-map [--project\|<feature>]` | __Bản đồ đối tượng ORCA__ — đối tượng nghiệp vụ (`OBJ-{slug}`), quan hệ, hành động theo __vai trò nghiệp vụ__, thuộc tính (mức hiển thị Thẻ/Danh sách/Chi tiết) + đề xuất thẻ dùng chung. 2 checkpoint HITL; Mục 0 sơ đồ máy sinh từ bảng quan hệ; gate `object-map-lint.mjs`. Cấp dự án → `docs/_shared/object-map.md`; cấp feature (chỉ delta) → `docs/{feature}/{feature}-object-map.md`. Làm xương sống cho `/user-flow`, `/srs`, `/wireframe-*`, `/erd`. |
 | `/discover [<chủ đề>]` | __Điều tra 1 ý tưởng/chủ đề còn phân vân__ trước khi cam kết brainstorm. Làm rõ mục tiêu (hỏi khi mơ hồ) → __opportunity/JTBD__ (job người dùng mình, có bằng chứng nhu cầu không) → đối thủ giải job đó thế nào (spawn `@feature-researcher`; domain + đối thủ đọc từ `docs/_shared/project-profile.md`) → __RICE-lite__ (sorting aid) → khuyến nghị __build/skip/adjust__ + 1-3 phương án feature cỡ-brainstorm. Output `docs/_research/{date}-{slug}.md`. 2 checkpoint HITL. Verdict đứng CUỐI, sau evidence có nhãn [F]/[I]/[R]. KHÔNG bóc Feature Map (việc `/prd`), KHÔNG vẽ flow (việc `/brainstorm`). |
 
-> __Luồng:__ `/prd` (PRD sản phẩm: danh sách tính năng + luồng tổng quan) → `/roadmap` (xếp đợt) → `/discover <chủ đề>` (điều tra 1 dòng Feature Map còn phân vân → build/skip + scope thô) → `/brainstorm <slug>` (đào sâu từng feature; nhận scope thô từ discover làm seed; tự mark `✅ đã chi tiết` ngược lên Feature Map qua L2 diff) → `/urd /brd /prd-epic /srs ...`.
+> __Luồng:__ `/prd` (PRD sản phẩm: danh sách tính năng + luồng tổng quan) → `/object-map` (bản đồ đối tượng cấp dự án) → `/roadmap` (xếp đợt) → `/discover <chủ đề>` (điều tra 1 dòng Feature Map còn phân vân → build/skip + scope thô) → `/brainstorm <slug>` (đào sâu từng feature; nhận scope thô từ discover làm seed; tự mark `✅ đã chi tiết` ngược lên Feature Map qua L2 diff) → `/urd /brd /prd-epic /srs ...`.
 
 __Specification phase:__
 
@@ -265,6 +267,7 @@ __Gate "vẽ ĐÚNG" cho họ diagram__ (rule: `.claude/rules/diagram-correctnes
 | Cấu trúc luồng PlantUML | `.claude/skills/activity-swimlane/puml-activity-lint.mjs` | `/activity-swimlane` — `if`/`endif` cân, có `start`+`stop`, nhánh có nhãn |
 | Mermaid 3 tầng | `.claude/scripts/mermaid-verify.mjs` | `/sequence` `/activity` `/state` `/erd` `/user-flow` — thêm tầng __ngữ nghĩa__: state mồ côi/thiếu terminal, ERD entity ma + quan hệ không FK, sequence lifeline chưa khai, flowchart quyết định thiếu nhánh/nhánh cụt |
 | Đối chiếu 3 bản ERD | `.claude/scripts/erd-consistency.mjs` | `/erd` (canonical) ↔ `/d2-erd` ↔ `/dbdiagram` — bắt drift mà linter đơn-file mù |
+| Bản đồ đối tượng ORCA | `.claude/skills/object-map/object-map-lint.mjs` | `/object-map` — tham chiếu đối tượng/vai trò/OQ, mã OBJ, Mục 0 khớp bảng quan hệ |
 | IR nghiệp vụ BPMN | `.claude/skills/bpmn/engine/bpmn-semcheck.mjs` | `/bpmn` — id trùng, đúng 1 start, gateway có nhãn, tới được end (đều hard-fail) |
 
 Chạy lại toàn bộ sau khi sửa gate: `bash .claude/scripts/diagram-gates-selftest.sh` (kiểm 2 chiều: chặn cái sai + không chặn oan cái đúng).

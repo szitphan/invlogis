@@ -23,6 +23,8 @@
 |----------|------|
 | Product PRD (project-level) | `docs/_product/prd.md` (singleton, KHÔNG prefix feature — dưới `_product/` như `_shared/`). Output của `/prd`. |
 | Roadmap (project-level) | `docs/_product/roadmap.md` (singleton). Output của `/roadmap`. |
+| Object map (project-level) | `docs/_shared/object-map.md` (singleton). Output của `/object-map`. |
+| Object map (feature delta) | `docs/{feature}/{feature}-object-map.md` — chỉ phần feature thêm/chạm; đối tượng cấp dự án tham chiếu theo tên. Output của `/object-map <feature>`. |
 | URD | `docs/{feature}/{feature}-urd.md` |
 | BRD | `docs/{feature}/{feature}-brd.md` |
 | PRD | `docs/{feature}/{feature}-prd.md` |
@@ -143,6 +145,7 @@ Recommended optional fields:
 | `urd` / `brd` / `prd` | per-feature requirements docs (`docs/{feature}/{feature}-{urd,brd,prd}.md`) |
 | `prd-product` | `docs/_product/prd.md` (project-level PRD singleton: pitch/problem/users/value/goals/themes/Feature Map/metrics/constraints/risks/OQ). Frontmatter tối giản `type`/`status`/`updated`/`links` (không `feature` — project-level). Output của `/prd`. |
 | `roadmap` | `docs/_product/roadmap.md` (project-level singleton: Prioritization RICE-lite + Now/Next/Later hoặc theo quý + Dependency Map). Frontmatter `type`/`status`/`updated`/`format`/`links`. Output của `/roadmap`. |
+| `object-map` | `docs/_shared/object-map.md` + `docs/{feature}/{feature}-object-map.md` (bản đồ đối tượng ORCA: vai trò nghiệp vụ, đối tượng `OBJ-{slug}`, quan hệ, hành động, thuộc tính; Mục 0 mermaid máy sinh). Frontmatter `type`/`feature` (chỉ bản feature)/`status`/`updated`/`links`. Output của `/object-map`. |
 | `brainstorm` | `docs/{feature}/brainstorms/*.md` |
 | `reverse-srs` | `docs/_reverse/{feature}/{feature}-reverse-spec.md` (SRS tái lập từ nguồn — khung 12 Mục ĐẦY ĐỦ giống `srs` + Mục 0 provenance + cột Nguồn/Nhãn mỗi bảng). FULL frontmatter + `confidence_summary`. **status: draft cứng** (reverse KHÔNG bao giờ approved). Output của `/reverse-doc`. Kèm `reverse-sources.md` + `reverse-gaps.md` (zero-frontmatter) cùng folder. |
 | `reverse-srs-flows` | `docs/_reverse/{feature}/srs/{feature}-reverse-flows.md` (Sequence + Activity mermaid mỗi flow + nhãn nguồn/flow). Slim frontmatter (type/feature/updated). Output của `/reverse-doc`. |
@@ -200,6 +203,7 @@ Mọi ID trong frontmatter `links:` hoặc body phải tuân format dưới. For
 | Use Case | `UC-{slug}` | `UC-checkout` | Per-feature folder, slug human-readable |
 | Acceptance Criterion | `AC-{NNN}` | `AC-001` | Per-user-story (scope trong file `us-{NNN}.md`) |
 | Change Request | `CR-{YYYYMMDD}-{NNN}` | `CR-20260512-001` | Project-wide (`docs/cr/`) |
+| Object | `OBJ-{slug}` | `OBJ-don-hang` | Toàn vault — khai ở `docs/_shared/object-map.md` hoặc `{feature}-object-map.md`, không trùng |
 
 ### Rules
 
