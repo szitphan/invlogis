@@ -1,10 +1,10 @@
 ---
 type: research
 keyword: "kết nối ePort tự động"
-status: draft
+status: in-review
 updated: 2026-10-02
 links:
-  - docs-input/sop/sop-giao-nhan-container.md
+  - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md
   - docs-input/sop/sop-dieu-phoi.md
   - docs-input/danh-muc/danh-muc-dia-diem-hang-tau.md
   - docs-input/sop/sop-ban-do-kien-thuc.md
@@ -119,7 +119,7 @@ Nhu cầu là có thật, nhưng con đường kết nối chưa tồn tại: kh
 
 ## Nguồn
 
-1) SOP Giao nhận container, Mục 1–2 — `docs-input/sop/sop-giao-nhan-container.md` — 2026-08-21
+1) SOP Giao nhận container, Mục 1–2 — `docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` — 2026-08-21
 2) Danh mục cảng, bãi, kho và hãng tàu — `docs-input/danh-muc/danh-muc-dia-diem-hang-tau.md` — 2026-09-15
 3) IRTech — Giải pháp cảng điện tử ePort — [https://irtech.com.vn/giai-phap-cang-dien-tu-eport/](https://irtech.com.vn/giai-phap-cang-dien-tu-eport/) — 2026-10-02
 4) Thanh Niên — Tân Cảng Sài Gòn ra mắt ứng dụng SNP ePort — [https://thanhnien.vn/tan-cang-sai-gon-ra-mat-ung-dung-di-dong-snp-eport-1851488821.htm](https://thanhnien.vn/tan-cang-sai-gon-ra-mat-ung-dung-di-dong-snp-eport-1851488821.htm) — 2026-10-02

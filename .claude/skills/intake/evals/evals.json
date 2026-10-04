@@ -1,0 +1,32 @@
+{
+ "skill_name": "intake",
+ "evals": [
+  {
+   "id": 1,
+   "name": "eval-1-update-giao-nhan",
+   "prompt": "khách vừa gửi file Giao nhận hàng hóa_Sep 18 2026.docx, tôi thả vào docs-input rồi. xử lý giúp tôi: chuyển sang md đủ nội dung, đặt tên xếp vào đúng chỗ. hình như nó là bản mới của sop giao nhận container cũ thì báo tôi khác gì rồi cập nhật",
+   "expected_output": "Nhận ra là bản cập nhật của sop/sop-giao-nhan-container.md; hỏi đổi tên → sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md; số mục đúng như Word hiện (I–IV, 2.1, 3.1.1 — cấp con isLgl là số Ả Rập); .md đủ nội dung gồm 5 đính kèm, mỗi cái ghi 'Trùng với …', 3 PDF scan đọc lại theo ảnh; ảnh nhúng chỉ trích vào images/ + link; báo cáo thay đổi trong _changes/; file gốc vào source/; sổ nguồn gộp SRC-23 vào SRC-01; sửa link cũ trong docs/.",
+   "files": [
+    "docs-input/Giao nhận hàng hóa_Sep 18 2026.docx"
+   ]
+  },
+  {
+   "id": 2,
+   "name": "eval-2-scan-ma-vach-xuat",
+   "prompt": "chuyển giúp bộ scan mã vạch hàng xuất docs-input/chung-tu-mau/ma-vach-hang-xuat.pdf sang md đủ nội dung, xếp theo quy ước nhé",
+   "expected_output": "Thư mục chung-tu-mau/{slug}/ có .md (3 chứng từ đọc lại theo ảnh trang, đủ số tờ khai/HĐ/AWB/tổng tiền, sửa lỗi OCR), images/ trang, source/ chứa pdf; pdf cũ được chuyển đi; dòng sổ SRC-17 trỏ sang .md.",
+   "files": [
+    "docs-input/chung-tu-mau/ma-vach-hang-xuat.pdf"
+   ]
+  },
+  {
+   "id": 3,
+   "name": "eval-3-update-docx-ngoai-repo",
+   "prompt": "khách gửi bản sửa quy trình điều vận, file ở {INPUTS}/Quy trinh dieu van v2 (sua).docx. kiểm tra xem khác gì bản cũ đã có rồi cập nhật vào docs-input",
+   "expected_output": "Nhận ra bản cũ sop/quy-trinh-dieu-van-2026-09-01; báo đủ 6 thay đổi (30%→25%, 15→10 phút, thêm vai trò Kế toán, 2→4 giờ, ngoại lệ thêm chuyến liên tỉnh, thêm mục 4 Báo cáo); ghi đè cùng đường dẫn, dòng Phiên bản trong header; báo cáo trong _changes/. Bản gốc v1 chuyển vào source/cu/ giữ nguyên tên file.",
+   "files": [
+    "inputs/Quy trinh dieu van v2 (sua).docx"
+   ]
+  }
+ ]
+}

@@ -1,10 +1,10 @@
 ---
 type: research
 keyword: "cảnh báo mốc SI/CY/DEM/DET"
-status: draft
+status: in-review
 updated: 2026-10-02
 links:
-  - docs-input/sop/sop-giao-nhan-container.md
+  - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md
   - docs-input/sop/sop-dieu-phoi.md
   - docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md
 ---
@@ -75,7 +75,12 @@ Bốn mốc theo SOP:
 
 **Lưu ý:**
 * **Thông tin cần lưu:** bốn mốc của từng lô/container kèm nguồn chứng từ và người xác nhận; trạng thái của mốc (đã xác nhận / chờ xác minh); người phụ trách xử lý; trạng thái xử lý cảnh báo; nhóm nguyên nhân khi quá hạn; lịch sử sửa mốc.
-* **Rủi ro trải nghiệm:** mốc ghi sai thì mọi cảnh báo sau đều sai, cảnh báo sai nhiều sẽ làm điều vận mất niềm tin và bỏ qua cả cảnh báo đúng. Bắt CS nhập đủ bốn mốc ngay khi tạo lô là không thực tế — mốc DEM/DET có thể chưa có lúc nhận Booking Note.
+* **Rủi ro trải nghiệm:** mốc ghi sai thì mọi cảnh báo sau đều sai, cảnh báo sai nhiều sẽ làm điều vận mất niềm tin và bỏ qua cả cảnh báo đúng.
+* **Mốc theo loại lô, không đủ bốn mốc cho mọi lô:** lô xuất có SI và CY (trên Booking Note), lô nhập có DEM và DET (trên Lệnh giao hàng). SOP yêu cầu "ghi đủ bốn mốc, không để trống" thì lô nào cũng trống hai ô. Riêng DET, lúc nhận Lệnh giao hàng mới biết số ngày miễn phí; ngày hết hạn chỉ có khi lấy container (giờ trên Phiếu EIR), nên để hệ thống tự tính thay vì CS ghi tay.
+* **Lấy mốc sớm hơn chứng từ, ghi là "dự kiến":**
+  * SI, CY: khi nhận đặt xe, xin khách số booking, hãng tàu, tàu và chuyến để tra hạn trên lịch tàu của hãng hoặc lịch closing của cảng; nhờ khách CC Delta khi hãng gửi xác nhận booking.
+  * DEM: lấy ngày tàu dự kiến cập trong Thông báo hàng đến (có trước Lệnh giao hàng) cộng với số ngày miễn phí khách cung cấp lúc nhận đơn (thoả thuận riêng giữa khách và hãng).
+  * Mốc dự kiến đổi khi tàu trễ hoặc hãng đổi giờ closing → CS đối chiếu và chuyển sang "đã xác nhận" khi Booking Note hoặc Lệnh giao hàng về.
 * **Phụ thuộc:** gắn với lệnh vận tải của mảng điều phối; mốc DET cần giờ trên Phiếu EIR nhận container thật (liên quan chủ đề chụp và đọc chứng từ, kết nối ePort).
 * **Chi phí dữ liệu:** nếu cần bảng ngày miễn phí DEM/DET theo hãng tàu thì phải có người duy trì khi hãng đổi chính sách.
 
@@ -119,12 +124,14 @@ Nhu cầu biết sớm lô sắp trễ mốc là có thật trên quy trình, v�
 * [ ] SOP có dòng "Cái này không cần" ngay sau yêu cầu lập bảng ngày miễn phí DEM/DET theo hãng tàu — là bỏ yêu cầu này, hay ghi chú còn sót từ bản nháp?
 * [ ] Khi cảnh báo leo thang thì báo cho ai (trưởng điều vận, quản lý CS)?
 * [ ] Đo bằng bảng kế hoạch trong bao lâu thì đủ để quyết định đưa vào phần mềm?
+* [ ] Thực tế CS nhận Booking Note, Thông báo hàng đến và Lệnh giao hàng trễ bao lâu so với lúc nhận đơn? (thời điểm "Thông báo hàng đến trước khi tàu cập 1–3 ngày" là thông lệ ngành, chưa xác minh với Delta)
+* [ ] Khách có sẵn sàng cung cấp số booking/tàu/chuyến (hàng xuất) hoặc số ngày miễn phí DEM/DET (hàng nhập) ngay khi đặt xe không?
 
 ***
 
 ## Nguồn
 
-1) SOP Giao nhận container, Mục 4 — `docs-input/sop/sop-giao-nhan-container.md` — 2026-08-21
+1) SOP Giao nhận container, Mục 4 — `docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` — 2026-08-21
 2) Dockflow — Demurrage tracking — [https://dockflow.com/platform/demurrage-tracking/](https://dockflow.com/platform/demurrage-tracking/) — 2026-10-02
 3) BuyCo — Detention and Demurrage — [https://buyco.co/container-shipping-solutions/demurrage-and-detention/](https://buyco.co/container-shipping-solutions/demurrage-and-detention/) — 2026-10-02
 4) BuyCo — Best D&D management software — [https://buyco.co/blog/productivity/best-detention-demurrage-management-software/](https://buyco.co/blog/productivity/best-detention-demurrage-management-software/) — 2026-10-02

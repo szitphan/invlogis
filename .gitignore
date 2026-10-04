@@ -19,3 +19,6 @@ __pycache__/
 *.pyc
 docs/_shared/kg/.dirty
 .claude/token-tracking/
+
+# /intake staging (bản nháp trước khi duyệt)
+docs-input/.staging/

@@ -37,7 +37,13 @@ links:
 | BL-021 | Đọc và feed SRC-17 vào brainstorm/feature | `chung-tu-mau/ma-vach-hang-xuat.pdf` | `fed:chung-tu-mau/ma-vach-hang-xuat.pdf` | ⬜ | 2026-10-02 |  |  |
 | BL-022 | Đọc và feed SRC-18 vào brainstorm/feature | `du-lieu-mau/thong-ke-chi-phi-chung-tu-cbt.md` | `fed:du-lieu-mau/thong-ke-chi-phi-chung-tu-cbt.md` | ⬜ | 2026-10-02 |  |  |
 | BL-023 | Đọc và feed SRC-19 vào brainstorm/feature | `du-lieu-mau/eport-cargo-tracking-vi-du.md` | `fed:du-lieu-mau/eport-cargo-tracking-vi-du.md` | ⬜ | 2026-10-02 |  |  |
+| BL-025 | Rà lại `docs/_research/2026-10-02-container-deadline-alerts.md` theo thay đổi SRC-01 (SOP giao nhận bản 18/9: số mục mới, nội dung đổi) | `sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | `grep:docs/_research/2026-10-02-container-deadline-alerts.md:_changes/2026-10-02-giao-nhan-hang-hoa` | ⬜ | 2026-10-02 |  |  |
+| BL-026 | Rà lại `docs/_research/2026-10-02-electronic-delivery-record.md` theo thay đổi SRC-01 (SOP giao nhận bản 18/9: số mục mới, nội dung đổi) | `sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | `grep:docs/_research/2026-10-02-electronic-delivery-record.md:_changes/2026-10-02-giao-nhan-hang-hoa` | ⬜ | 2026-10-02 |  |  |
+| BL-027 | Rà lại `docs/_research/2026-10-02-eport-integration.md` theo thay đổi SRC-01 (SOP giao nhận bản 18/9: số mục mới, nội dung đổi) | `sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | `grep:docs/_research/2026-10-02-eport-integration.md:_changes/2026-10-02-giao-nhan-hang-hoa` | ⬜ | 2026-10-02 |  |  |
+| BL-028 | Rà lại `docs/_research/2026-10-02-field-document-reading.md` theo thay đổi SRC-01 (SOP giao nhận bản 18/9: số mục mới, nội dung đổi) | `sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | `grep:docs/_research/2026-10-02-field-document-reading.md:_changes/2026-10-02-giao-nhan-hang-hoa` | ⬜ | 2026-10-02 |  |  |
 
 ## Đã xong
 
-_Chưa có._
+| ID | Việc | Nguồn | Xong khi | Trạng thái | Tạo | Xong | Bằng chứng |
+|---|---|---|---|---|---|---|---|
+| BL-024 | Xếp nhóm + đặt tên, rồi đọc và feed SRC-23 vào brainstorm/feature | `sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | `fed:sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | ✅ | 2026-10-02 | 2026-10-02 | bản cập nhật, đã gộp vào SRC-01 (`sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md`) |

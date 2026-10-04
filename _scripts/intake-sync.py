@@ -67,17 +67,39 @@ def unq(s):
 
 
 # ---------- 1. nguồn trong docs-input ----------
+SKIP_DIRS = ("images", "source")  # ảnh đi kèm + bản gốc (docx/pdf/xlsx) của tài liệu đã chuyển sang .md
+
+
 def list_sources():
-    """Tài liệu = mọi file trừ README/state, trừ ảnh nằm trong folder images/ (ảnh đi kèm tài liệu)."""
+    """Tài liệu = mọi file trừ README/state, trừ images/ + source/ (đi kèm tài liệu) và thư mục `_*`/`.*`
+    (vd `_changes/` báo cáo thay đổi phiên bản, `.staging/` của /intake)."""
     out = []
     for dp, dns, fns in os.walk(os.path.join(ROOT, INPUT)):
-        dns[:] = [d for d in dns if not d.startswith(".") and d != "images"]
+        dns[:] = [d for d in dns if not d.startswith((".", "_")) and d not in SKIP_DIRS]
         for fn in fns:
             rel = nfc(os.path.relpath(os.path.join(dp, fn), os.path.join(ROOT, INPUT)))
             if fn.startswith(".") or rel in ("README.md",):
                 continue
             out.append(rel)
     return sorted(out)
+
+
+def list_originals():
+    """{hash bản gốc trong <doc>/source/: đường dẫn .md của tài liệu đó} — để nhận ra file thô đã được
+    /intake chuyển sang .md (file thô biến mất khỏi chỗ cũ, bản sao nằm trong source/)."""
+    out = {}
+    for src_dir in glob.glob(os.path.join(ROOT, INPUT, "**", "source"), recursive=True):
+        doc_dir = os.path.dirname(src_dir)
+        mds = sorted(glob.glob(os.path.join(doc_dir, "*.md")))
+        own = os.path.join(doc_dir, os.path.basename(doc_dir) + ".md")
+        md = own if os.path.exists(own) else (mds[0] if mds else None)
+        if not md:
+            continue
+        for fn in os.listdir(src_dir):
+            if not fn.startswith(".") and os.path.isfile(os.path.join(src_dir, fn)):
+                rel = nfc(os.path.relpath(os.path.join(src_dir, fn), ROOT))
+                out[sha(rel)] = nfc(os.path.relpath(md, os.path.join(ROOT, INPUT)))
+    return out
 
 
 REG_HEAD = ["Mã", "File", "Nhóm", "Feed brainstorm", "Dùng ở (tự động)", "Việc mở (tự động)", "Ngày nhận", "Ghi chú"]
@@ -188,18 +210,29 @@ def main():
     rows, pre, post = load_registry()
 
     # đổi tên / chuyển chỗ: dòng sổ mất file + file mới cùng hash
-    renames = {}
+    renames, merged = {}, {}
     known = {unq(r["File"]) for r in rows}
     fresh = [p for p in srcs if p not in known]
-    for r in rows:
+    originals = list_originals()
+    for r in list(rows):
         p = unq(r["File"])
         if p not in hashes:
             h = state.get(p)
             new = next((q for q in fresh if hashes[q] == h), None) if h else None
-            if new:
+            conv = originals.get(h) if h and not new else None  # file thô đã được /intake chuyển sang .md
+            owner = next((x for x in rows if x is not r and unq(x["File"]) == conv), None) if conv else None
+            if owner:  # là bản cập nhật của tài liệu đã có → gộp vào mã cũ
+                rows.remove(r)
+                merged[p] = (conv, owner["Mã"])
+                log.append(f"⤳ {r['Mã']} ({p}) là bản cập nhật của {owner['Mã']} — gộp vào `{conv}`")
+            elif new or conv:
+                new = new or conv
                 r["File"] = f"`{new}`"
                 renames[p] = new
-                fresh.remove(new)
+                if r["Nhóm"] == "Chưa phân loại" and "/" in new:
+                    r["Nhóm"] = GROUPS.get(new.split("/")[0], r["Nhóm"])
+                if new in fresh:
+                    fresh.remove(new)
                 log.append(f"↪ đổi chỗ nguồn {r['Mã']}: {p} → {new}")
             elif not r["Ghi chú"].startswith("❌"):
                 r["Ghi chú"] = "❌ không thấy file — " + r["Ghi chú"]
@@ -227,6 +260,15 @@ def main():
     items, head = load_backlog()
     for i in items:  # nguồn đổi chỗ → đổi đường dẫn trong task theo
         for old, new in renames.items():
+            for k in ("Nguồn", "Xong khi"):
+                i[k] = i[k].replace(old, new)
+            if f"`{new}`" in i["Nguồn"] and "/" in new:  # đã xếp chỗ → bỏ vế "xếp nhóm" khỏi tên task
+                i["Việc"] = i["Việc"].replace("Xếp nhóm + đặt tên, rồi đọc và feed", "Đọc và feed")
+        for old, (new, code) in merged.items():  # bản cập nhật đã gộp → task feed của nó thừa
+            if unq(i["Xong khi"]) == f"fed:{old}" and not i["Trạng thái"].startswith("✅"):
+                i["Trạng thái"], i["Xong"] = "✅", TODAY
+                i["Bằng chứng"] = f"bản cập nhật, đã gộp vào {code} (`{new}`)"
+                log.append(f"✅ {i['ID']} đóng — gộp vào {code}")
             for k in ("Nguồn", "Xong khi"):
                 i[k] = i[k].replace(old, new)
     have_feed_task = {unq(i["Xong khi"])[4:] for i in items if unq(i["Xong khi"]).startswith("fed:")}

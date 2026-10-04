@@ -1,0 +1,8 @@
+pymupdf
+pymupdf4llm
+mammoth
+markdownify
+openpyxl
+python-pptx
+xlrd
+olefile
