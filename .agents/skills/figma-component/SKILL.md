@@ -224,7 +224,7 @@ Chưa có chuẩn trong design.md: <…>
 
 Rồi cập nhật spec của component trong `design.md` (bảng: tên set, key, biến thể/thuộc tính, dựng
 từ gì; các quyết định mới; Known Gaps theo Iteration Guide — dòng `KG-nn` trong `design.md` + hàng chi
-tiết trong `design/design-backlog.md`) — qua approval gate. Quyết định mới lặp lại ở ≥ 2 spec → đề xuất
+tiết ghi ngay tại dòng đó, không có file backlog riêng) — qua approval gate. Quyết định mới lặp lại ở ≥ 2 spec → đề xuất
 đưa lên *Quy ước chung của component dự án*.
 
 ## Constraints
@@ -252,7 +252,6 @@ Known Gaps thì hỏi hoặc ghi "chưa có chuẩn trong design.md".
 - `design/design.md`: spec component, token, § Tên trong Figma, States, Content & Formatting,
   Accessibility, Responsive, Known Gaps, Quy ước chung của component dự án. Ví dụ spec đầy đủ:
   § Notification Center.
-- `design/design-backlog.md`: chi tiết Known Gaps (người phụ trách, ngày hẹn) — không cần đọc khi dựng.
 - `design/components.md`: Usage / Nên / Không nên của component thành phần.
 - `design/setup-figma.md`: khi file đích chưa có thư viện.
 - `skill://figma/figma-use/SKILL.md`, `skill://figma/figma-generate-library/SKILL.md`: luật Plugin API

@@ -54,8 +54,7 @@ Không hỏi user những gì đọc được.
      Behavior.
    * Không đọc Overview, Colors, Typography Hierarchy, Elevation, Shapes: token gắn theo tên (tên ở
      § Tên trong Figma). Đoạn đã đọc có "xem §…" → đọc luôn đoạn đó.
-   * Chi tiết Known Gap cần người phụ trách/ngày hẹn nằm ở `design/design-backlog.md` — không cần đọc
-     khi vẽ.
+   * Chi tiết từng Known Gap nằm ngay tại dòng `KG-nn` trong § Known Gaps (không có file backlog riêng).
    Có `design/components.md` thì đọc **Bảng chọn nhanh**, rồi đọc mục riêng của từng component định
    dùng (Usage, Nên/Không nên, Examples). File dài, nên không đọc toàn văn.
 3. Tìm nguồn nghiệp vụ trong `docs/{feature}/` (Glob), đọc theo thứ tự ưu tiên:
@@ -374,4 +373,3 @@ Do's and Don'ts làm tiêu chí tự kiểm trước khi trình.
 - `design/setup-figma.md`: setup file Figma cho dự án mới (Cách A thư viện / Cách B bản sao) và bảng kiểm tra setup.
 - `design/figma-library-keys.json`: key component set để nạp từ thư viện đã publish (Cách A). Máy sinh, không sửa tay.
 - `figma_docs(section="api" | "recipes" | "rules" | "userflow")`: cú pháp công cụ.
-- `_guides/workflow-figma-screen.md`: bản tổng quan 1 trang cho người review (không phải bản agent thực thi); chi tiết chỉ nằm ở file này. Đổi số bước, luật cứng hoặc danh sách "máy không kiểm" → cập nhật file đó cùng lượt.
