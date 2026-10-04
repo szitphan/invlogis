@@ -140,7 +140,7 @@ design**: validation, mã lỗi, wording, điều hướng nằm ở đây.
 
 | Mức | Skill | Vào | Ra | Ghi lại về repo? |
 |---|---|---|---|---|
-| 🟢 | `/figma-screen` ✅ ⚠️ | design.md, components.md, srs, states, userflow **trên Figma** | artboard trên Figma (3 phương án bố cục, instance thật, token, đủ trạng thái) | Không (chỉ quyền đọc) |
+| 🟢 | `/figma-screen` ✅ | design.md, components.md, **userflow repo**, **ASCII + bảng 5 cột**, CMP/GR, srs, states | artboard trên Figma (3 phương án bố cục, instance thật, token, đủ trạng thái, bám bảng 5 cột) | Có — chỉ cột `Figma` của wireframe-index (L2) |
 | 🟡 thiếu component | `/figma-component` ✅ ⚠️ | spec component trong design.md | component set trên Figma; cập nhật spec trong design.md | Có (design.md) |
 | 🟡 1 lần | `/figma-design-system` ✅ | design.md | token + component set trên Figma | — |
 | 🟢 có Mục 3.6 | Usability bằng AI (bước 7.5) — `@usability-reviewer`, `/figma-screen` tự gọi khi vẽ trọn 1 flow | userflow Mục 3.5 + 3.6 + màn Figma của flow | finding: tác vụ kẹt ở đâu, số bước thực / tiêu chí, heuristic Nielsen | Không (báo cáo trong chat) |
@@ -189,6 +189,7 @@ thành BLOCKING. Lỗi an toàn (câu chữ, nhất quán nội bộ) skill tự
 | `/sequence`, `/activity` | `diagram-reviewer` | thiếu actor/lane, bỏ sót nhánh lỗi so với danh sách sự kiện, dead-end, gateway thiếu nhánh | Chỉ khi phức tạp (vd ≥ 3 nhánh lỗi, ≥ 4 bên, lồng ≥ 2 tầng, có callback/timeout) |
 | `/prototype-html` | `@uxui-reviewer` | trạng thái, luồng, khớp bảng mô tả 5 cột | Mặc định; bỏ nếu user nói "khỏi review" |
 | `/figma-screen` Bước 6.7 | `@usability-reviewer` | đóng vai người dùng: đi từng tác vụ Mục 3.6 theo cognitive walkthrough (từng màn một), đếm bước so tiêu chí, rà 10 heuristic Nielsen. **AI đánh giá, không có người dùng thật** | Khi vẽ trọn 1 flow và userflow có Mục 3.6; ngược lại báo SKIPPED |
+| `/figma-screen` Bước 6.8 | `@uxui-reviewer` | màn Figma ↔ bảng 5 cột: thiếu row, wording lệch nguyên văn, sai trạng thái mặc định, CMP/GR | Khi có bảng 5 cột; ngược lại báo SKIPPED |
 | `/gap` | `@flow-reviewer` (+ `@senior-ba` khi ≥ 8 UC) | đọc prose toàn feature tìm luồng thiếu mà máy không thấy | Luôn |
 | `/cr` | `@change-tracker` | thay đổi chạm doc / FR / story / AC nào, thứ tự sửa | Luôn khi phân tích |
 | | `@gap-analyst` | FR mồ côi, thiếu AC, mã lỗi cũ, link gãy sau thay đổi | |
@@ -230,7 +231,7 @@ chỉ agent hoặc người kiểm.
 | R-1 | `/brainstorm` | chỉ tự kiểm | P-15 |
 | R-2 | `/usecase` | không có (trừ khi chạy qua `/srs` Phase G) | P-16 |
 | R-3 | `/wireframe-ascii`, `/wireframe-html` chạy riêng | chỉ tự kiểm; `@uxui-reviewer` chỉ chạy khi đi qua `/srs` Tầng 3 | P-17 |
-| R-4 | `/figma-screen`, `/figma-component` | máy audit + tự kiểm | P-18 |
+| R-4 | `/figma-component` | máy audit + tự kiểm (`/figma-screen` đã có `@uxui-reviewer` từ 2026-10-04) | P-18 |
 | R-5 | `/state`, `/erd` | chỉ linter | P-19 |
 
 ## 4. Cơ chế xuyên suốt
@@ -273,6 +274,7 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | D-06 | 2026-10-04 | Thử pipeline bằng **feature nháp `zz-*`**, xoá sau khi xong; máy không lấy nháp làm bằng chứng | Đã áp (`intake-sync.py`, rule backlog) |
 | D-07 | 2026-10-04 | Kiểm prototype trên trình duyệt bằng **Playwright**, không dùng `chrome --dump-dom` (treo khi có font CDN/hộp thoại) | Đã áp (`/prototype-html` bước 26, 26b) |
 | D-08 | 2026-10-04 | **Luật đếm bước** chung cho `/user-flow` và `@usability-reviewer`: dropdown/date picker = 2, bấm/nhập/tick/xác nhận = 1, cuộn/chờ = 0 | Đã áp |
+| D-09 | 2026-10-04 | Sửa skill **trong repo trước**, chạy ổn trong dự án rồi mới đưa về kit | Đã áp (`/figma-screen`) |
 
 ## 7. Chỗ đứt và vấn đề
 
@@ -282,10 +284,10 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | P-02 | 3 | `/urd`, `/prd-epic` chưa cài, nhưng `/brainstorm` và `/srs` vẫn gợi ý (6 và 4 skill nhắc tới) | Gợi ý bước tiếp không chạy được |
 | P-03 | 1→4 | `/reverse-doc` chưa cài (BL-002) | SRS cũ LG chưa thành bộ SRS chuẩn (BL-003, BL-004) |
 | P-04 | 8 | `/ac` chưa cài; `/srs` Tầng 4 hứa "+AC" | Story không có AC |
-| P-05 | 6→7 | `/figma-screen` không đọc ASCII + bảng mô tả 5 cột | Validation, mã lỗi, wording, điều hướng không sang Figma. **Xác nhận 2026-10-04:** màn nháp thiếu bộ đếm ký tự ô lý do, nút Duyệt bật sẵn dù chưa chọn đủ, đếm hiện dạng chữ thay Badge |
-| P-06 | 7 | `/figma-screen` không ghi link Figma về `{feature}-wireframe-index.md` | Mất truy vết repo ↔ Figma |
-| P-07 | 6↔7 | 2 nguồn userflow: repo và trên Figma (`/figma-screen` lấy thứ tự màn từ Figma) | Flow sống 2 nơi, dễ lệch |
-| P-08 | 7 | `/figma-screen` không gọi CMP/GR | Màn hi-fi có thể lệch quy tắc chung. **Xác nhận 2026-10-04:** thiếu phân trang (CMP-04), thiếu bộ đếm (GR-01), nút [Huỷ][Xác nhận] ngược design.md, cột số/ngày căn trái |
+| ~~P-05~~ ✅ | 6→7 | (Đã xử lý 2026-10-04: Bước 1.3 đọc ASCII + bảng 5 cột, Bước 4 mục 8 vẽ bám bảng, tự kiểm (f) N/N) `/figma-screen` không đọc ASCII + bảng mô tả 5 cột | Validation, mã lỗi, wording, điều hướng không sang Figma. **Xác nhận 2026-10-04:** màn nháp thiếu bộ đếm ký tự ô lý do, nút Duyệt bật sẵn dù chưa chọn đủ, đếm hiện dạng chữ thay Badge |
+| ~~P-06~~ ✅ | 7 | (Đã xử lý 2026-10-04: Bước 7 ghi cột `Figma` qua L2) `/figma-screen` không ghi link Figma về `{feature}-wireframe-index.md` | Mất truy vết repo ↔ Figma |
+| ~~P-07~~ ✅ | 6↔7 | (Đã xử lý 2026-10-04: userflow repo là nguồn duy nhất, `screenId` = `[#]` Mục 2 + hậu tố; bản Figma lệch → báo, repo thắng) 2 nguồn userflow: repo và trên Figma (`/figma-screen` lấy thứ tự màn từ Figma) | Flow sống 2 nơi, dễ lệch |
+| ~~P-08~~ ✅ | 7 | (Đã xử lý 2026-10-04: Bước 1.4 đọc CMP/GR, dùng component ở dòng Figma của CMP) `/figma-screen` không gọi CMP/GR | Màn hi-fi có thể lệch quy tắc chung. **Xác nhận 2026-10-04:** thiếu phân trang (CMP-04), thiếu bộ đếm (GR-01), nút [Huỷ][Xác nhận] ngược design.md, cột số/ngày căn trái |
 | ~~P-09~~ ✅ | 6↔7 | (Đã xử lý bằng D-01) D-01 chưa áp: `ba-conventions.md` Mục 7, `/user-flow`, `/wireframe-html`, `/prototype-html`, `/figma`, 2 template HTML vẫn ghi desktop 1024 | Wireframe và Figma lệch bề rộng |
 | P-10 | 7 | `/figma` (cũ) và `/figma-screen` trùng vai | Gọi nhầm skill |
 | P-11 | 7 | `/figma-component` dùng connector Figma chính thức, chưa được cấp quyền | Chưa chạy được |
@@ -295,13 +297,13 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | P-15 | 3 | `/brainstorm` chỉ có tự kiểm, không có agent review (R-1) | Là gốc của mọi thứ phía sau — thiếu actor, sai phạm vi, bỏ sót edge case ở đây lan xuống SRS, UC, màn hình |
 | P-16 | 5 | `/usecase` không có agent review khi chạy riêng (R-2) | UC thiếu nhánh rẽ / nhánh lỗi không ai bắt; UC lại là nguồn của userflow và story |
 | P-17 | 6 | `/wireframe-ascii`, `/wireframe-html` chạy riêng không có agent review; `@uxui-reviewer` chỉ chạy khi đi qua `/srs` Tầng 3 (R-3) | Bảng mô tả 5 cột (hợp đồng BA↔design) thiếu trạng thái, sai wording, lệch CMP/GR mà không ai soát |
-| P-18 | 7 | `/figma-screen`, `/figma-component` tự ghi "[Cao] màn có khớp nghiệp vụ không — máy không kiểm" nhưng không có agent nào kiểm phần đó (R-4) | Màn hi-fi sạch audit kỹ thuật nhưng có thể sai nghiệp vụ (sai nhãn, thiếu trường, sai số liệu so với spec) |
+| P-18 | 7 | `/figma-component` tự ghi "[Cao] màn có khớp nghiệp vụ không — máy không kiểm" nhưng không có agent kiểm (R-4); `/figma-screen` đã có `@uxui-reviewer` (2026-10-04) | Màn hi-fi sạch audit kỹ thuật nhưng có thể sai nghiệp vụ (sai nhãn, thiếu trường, sai số liệu so với spec) |
 | P-19 | 5 | `/state`, `/erd` chỉ có linter (R-5) | Trạng thái / quan hệ sai nghiệp vụ vẫn qua vì linter chỉ kiểm ngữ pháp |
 | ~~P-20~~ ✅ | — | (Đã xử lý bằng D-04, D-05) Cấu trúc thư mục trộn đầu vào với đầu ra: design system ở gốc `docs/`; `docs/_shared/` trộn tri thức dự án + chuẩn UI + log máy; tài liệu quy trình nằm trong `docs/` | Khó phân biệt đâu là chuẩn để đọc, đâu là sản phẩm, đâu là log (D-04, D-05) |
 | ~~P-21~~ ✅ | — | (Đã xử lý 2026-10-04: `_scripts/codex-sync.py` sinh bản Codex từ `.claude/` + `CLAUDE.md`, `--check` để phát hiện lệch) Bản Codex chép tay: `AGENTS.md` ghi sai đường dẫn `.Codex/skills`; `.agents/skills/` lệch bản gốc và thiếu 16 mục Figma; `.codex/agents` thiếu `feature-researcher` | Codex chạy trên bộ skill cũ/thiếu |
 | P-22 | — | Không ghi lại skill nào cài từ kit nào, bản nào | Lẫn bản (đã gặp: 2 bản Reqwise khác license) |
 | P-23 | 7.5 | Usability chỉ có đánh giá bằng AI (`@usability-reviewer`), **không có test với người dùng thật** — chấp nhận tạm (2026-10-04) | Mù với thói quen nghề nghiệp, áp lực ca làm thật, cách người dùng hiểu nhầm chữ. Khi có người test → thêm kế hoạch test + tổng hợp kết quả |
-| P-24 | 7.5 | `@usability-reviewer` được gọi từ `/figma-screen` sửa trực tiếp trong `.claude/skills/`; nguồn kit `kits/figma-skills/custom/` không có trong repo | Cài lại `/figma-screen` từ kit sẽ mất bước 6.7 |
+| P-24 | 7 | `/figma-screen` đã sửa trực tiếp trong `.claude/skills/` (bước 6.7, 6.8, đọc bảng 5 cột, ghi link, chia lệnh khi timeout) — chủ ý: sửa repo trước, chạy ổn mới đưa về kit `kits/figma-skills/custom/` (D-09) | Cài lại `/figma-screen` từ kit lúc này sẽ mất các sửa đó |
 | P-25 | 3 | `/brainstorm` đặt wording lỗi không đối chiếu *Content & Formatting* của design.md và bảng E-common | Test 2026-10-04: E-1/E-2 dùng "Vui lòng" (design.md cấm), E-3 trùng nghĩa E-common-009 nhưng khác câu — lỗi lan xuống SRS và màn |
 | P-26 | 3→7 | 9 sửa lỗi ngày 2026-10-04 mới kiểm cú pháp, chưa chạy lại trên feature thật | Có thể còn lỗi khi chạy thật — đóng khi xong BL-029, BL-030 |
 
@@ -336,9 +338,7 @@ Việc cần làm, theo thứ tự:
 
 1. ~~Áp D-01 + D-03 (P-09)~~ — xong 2026-10-04.
 2. ~~Áp D-04 + D-05 (P-20)~~ — xong 2026-10-04.
-3. Sửa `/figma-screen` trong `kits/figma-skills/custom/` rồi cài lại: đọc ASCII + bảng mô tả, gọi
-   CMP/GR, lấy thứ tự màn từ userflow repo, ghi link về wireframe-index, thêm `@uxui-reviewer`
-   (P-05 → P-08, P-18).
+3. ~~Sửa `/figma-screen`~~ — xong trong repo 2026-10-04 (D-09); đưa về kit sau khi chạy thật ổn (P-24).
 4. Thêm review độc lập cho `/brainstorm`, `/usecase`, wireframe chạy riêng, `/state` + `/erd`
    (P-15 → P-17, P-19).
 5. Bỏ `/figma` cũ (P-10).

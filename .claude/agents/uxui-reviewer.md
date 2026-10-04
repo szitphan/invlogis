@@ -1,7 +1,7 @@
 ---
 name: uxui-reviewer
 description: Senior UX/UI reviewer. Reviews screen specs for state coverage (loading/empty/error/success/edge), flow consistency, adherence to shared screen patterns. Agent hỏi "what does this look like when it fails?"
-tools: Read, Grep, Glob
+tools: Read, Grep, Glob, mcp__reqwise-figma__figma_read, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__get_metadata
 model: sonnet
 ---
 
@@ -20,6 +20,15 @@ model: sonnet
 3) __Flow coherence.__ Screens trong 1 flow file có match đúng thứ tự + case coverage đã khai trong `srs/{feature}-userflow.md` Mục 1/3? Orphan screens (không thuộc flow nào) hoặc dangling flows (flow khai báo nhưng screen chưa có block)?
 4) __Wireframe linkage.__ Mục 1 (Wireframe ASCII) có tồn tại + khớp mọi state nhắc tới trong Mục 2? Không có wireframe → flag.
 5) __Screen description table sanity.__ Bảng "Screen description" __5 cột__ `# | Items | Control type | Data type | Description` — mỗi element có đủ 5 cột; `Control type` đúng loại control (Textbox/Button/Link/Label/Checkbox/Radio/Dropdown/...); `Data type` đúng hành vi (Text/Click/Check/Select/ReadOnly) và KHÔNG lẫn với Control type; cột Description liệt kê đủ state (empty/filled/error/...) khi element có nhiều state + tham chiếu đúng BR/error code khi áp dụng? Element nào xuất hiện trong wireframe nhưng thiếu row (hoặc row có nhưng không thấy trong wireframe — orphan)? __Cấm emoji trong khung ASCII__ (làm lệch viền) — flag nếu thấy. Bảng còn dạng cũ 4 cột (`Element | Mô tả | Trạng thái | Quy tắc` hoặc `Items | Data type | Description`) → flag WARNING đề nghị chuyển 5 cột.
+6) __Màn Figma ↔ bảng 5 cột__ (khi được gọi từ `/figma-screen`, kèm bảng `screenId · slug · nodeId`).
+   Mỗi màn: đọc cây node + chữ (`figma_read`), xem 1 screenshot, đối chiếu bảng 5 cột của màn đó:
+   * Row nào **không có element** trên màn (hoặc element không có row — thừa)?
+   * Nhãn / placeholder / wording lỗi có **khớp nguyên văn** cột Description?
+   * **Trạng thái mặc định** đúng Description chưa (vd nút phải vô hiệu khi chưa đủ điều kiện)?
+   * `Xem CMP-xx` đã dùng đúng component ở dòng Figma của CMP? `Theo GR-xx` đã áp (bộ đếm, căn cột,
+     thứ tự nút…)? Lỗi đúng loại GR-15 (Inline/Popup/Toast)?
+   * Đủ artboard trạng thái theo chế độ (Đầy đủ: rỗng/đang tải/lỗi; Nhanh: user đã bỏ — không flag)?
+   Chỉ trả finding kèm `screenId` + tên layer, không tự sửa. Không chấm thẩm mỹ (việc của designer).
 
 ## Severity rubric‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -28,12 +37,15 @@ model: sonnet
 - Element xuất hiện trong wireframe (Mục 1) nhưng không có row tương ứng trong bảng Screen Description (Mục 2), hoặc ngược lại (row mô tả element không tồn tại trong wireframe).
 - Screen flow có dead-end (no exit path).
 - No wireframe AND no description of layout.
+- (Figma) Row bảng 5 cột không có trên màn; wording lỗi/nhãn hành động lệch nguyên văn; trạng thái
+  mặc định sai làm đổi hành vi (nút bật khi đáng lẽ vô hiệu).
 
 ### WARNING‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 - Empty state described vaguely ("show empty list") without CTA.
 - Loading state not specified.
 - Field validation missing cho non-obvious cases (max length, format).
 - Inconsistent terminology (vd "Save" button 1 screen, "Submit" similar).
+- (Figma) Lệch GR (căn cột, thứ tự nút, thiếu bộ đếm); dùng component khác dòng Figma của CMP.
 
 ### SUGGESTION
 - Focus management on form errors.‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍

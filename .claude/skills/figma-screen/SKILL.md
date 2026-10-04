@@ -1,7 +1,7 @@
 ---
 name: figma-screen
 description: Vẽ màn hình giao diện (UI) lên Figma theo đúng design system của dự án — đề xuất 3 phương án bố cục (1 theo mẫu có sẵn trong design/design.md + 2 độc lập) để user chọn, dùng component thật (instance), gắn token theo tên, vẽ đủ trạng thái rỗng/đang tải/lỗi, rồi tự kiểm trước khi trình. Dùng khi ai đó nói "vẽ màn", "dựng màn hình", "vẽ UI", "mock up màn", "làm giao diện cho <tính năng>" trên Figma.
-allowed-tools: Read, Glob, Grep, Task, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write
+allowed-tools: Read, Glob, Grep, Edit, Task, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write
 user-invocable: true
 argument-hint: "<màn hoặc tính năng cần vẽ> [@nguồn: srs, states, userflow]"
 ---
@@ -58,10 +58,26 @@ Không hỏi user những gì đọc được.
      khi vẽ.
    Có `design/components.md` thì đọc **Bảng chọn nhanh**, rồi đọc mục riêng của từng component định
    dùng (Usage, Nên/Không nên, Examples). File dài, nên không đọc toàn văn.
-3. Tìm nguồn nghiệp vụ trong workspace (Glob): `srs/{feature}*.md`, `srs/{feature}-states.md`,
-   file user tag bằng `@`. Có nguồn thì **dẫn xuất từ nguồn**, chỉ hỏi phần nguồn bỏ trống.
-4. `figma_read` op `get_page_model` trên trang đích: đã có **userflow** thì thứ tự màn, tên màn
-   và `screenId` lấy từ đó. Đã có màn cùng tên thì đây là **sửa**, không phải vẽ mới (xem Bước 5).
+3. Tìm nguồn nghiệp vụ trong `docs/{feature}/` (Glob), đọc theo thứ tự ưu tiên:
+   * **`srs/{feature}-userflow.md`** — nguồn DUY NHẤT cho danh sách màn, chia flow, chuyển màn
+     (Mục 2, 3, 3.5) và tác vụ chính (Mục 3.6). `screenId` = cột `[#]` Mục 2 + hậu tố thiết bị
+     (`[#]` = 3, Desktop → `3-web`).
+   * **`ascii-wireframe/{flow-slug}.md`** + `{feature}-wireframe-index.md` — bố cục ASCII và
+     **bảng mô tả 5 cột** của từng màn. Bảng 5 cột là **hợp đồng BA ↔ design**: element nào, control
+     gì, validation, trạng thái, wording, mã lỗi, điều hướng. Đọc hết bảng của mọi màn sẽ vẽ.
+   * `srs/{feature}-spec.md` (FR/BR/Error Matrix), `srs/{feature}-states.md`, `usecases/uc-*.md`,
+     file user tag bằng `@`.
+   Có nguồn thì **dẫn xuất từ nguồn**, chỉ hỏi phần nguồn bỏ trống. Thiếu ASCII cho màn sẽ vẽ →
+   báo 1 dòng và hỏi: chạy `/wireframe-ascii` trước (đề xuất), hay vẽ thẳng từ SRS (ghi
+   "không có bảng 5 cột" trong báo cáo).
+4. **UI Common Rules & Components** (theo `.claude/rules/ui-common-rules-components.md`): đọc bảng
+   mục lục `design/ui-common/screen-patterns.md` (CMP) + `conventions.md` (GR, E-common); bảng 5 cột
+   ghi `Xem CMP-xx` / `Theo GR-xx` nào thì đọc mục đó. CMP có dòng **Figma** → dùng đúng component +
+   node mẫu ghi ở đó.
+5. `figma_read` op `get_page_model` trên trang đích. Đã có màn cùng `screenId` thì đây là **sửa**,
+   không phải vẽ mới (xem Bước 5). Userflow trên Figma (nếu có) chỉ là bản minh hoạ: lệch với
+   userflow repo (thiếu/thừa màn, sai thứ tự) → báo user, **repo thắng**, đề nghị cập nhật bản Figma
+   bằng `/figma-userflow`.
 
 ## Bước 2 — hỏi user (theo cách hỏi của `/figma` bên BA-Kit)
 
@@ -74,8 +90,8 @@ Chỉ hỏi phần user **chưa nói rõ** và phần nguồn (Bước 1) không
 * Input nói **cả tính năng / cả luồng** → hỏi 1 câu: "Vẽ {tính năng}: chỉ trạng thái chính mỗi
   màn (**Nhanh**), hay vẽ **Đầy đủ** kèm trạng thái rỗng / đang tải / lỗi và nút đang xử lý /
   vô hiệu? (nên chọn Đầy đủ nếu có form hoặc validation phức tạp)".
-* Input chỉ có **tên tính năng**, không rõ màn → hỏi gộp 1 lần: liệt kê các màn (lấy từ userflow
-  trên Figma, hoặc SRS), hỏi "Vẽ hết hay chọn vài màn? Vẽ hết thì cần đủ trạng thái hay chỉ
+* Input chỉ có **tên tính năng**, không rõ màn → hỏi gộp 1 lần: liệt kê các màn (lấy từ `srs/{feature}-userflow.md`
+  Mục 2-3), hỏi "Vẽ hết hay chọn vài màn? Vẽ hết thì cần đủ trạng thái hay chỉ
   trạng thái chính?".
 
 Chế độ **Đầy đủ**:
@@ -223,6 +239,17 @@ Thứ tự dựng:
 6. **Lớp phủ**: dialog/drawer dùng `figma.overlay({...})` cho scrim, **không** dùng frame bán trong suốt.
 7. Đặt tên layer theo **việc nó làm** ("Nút duyệt đơn", "Ô tìm đơn hàng"), không để "Frame 12".
    `a11y_audit` dựa vào tên layer để nhận diện control.
+8. **Bám bảng 5 cột** (khi có — Bước 1.3). Bảng là hợp đồng, không phải gợi ý:
+   * Mỗi row → 1 element trên màn, đúng `Control type` (tra `design/ba-crosswalk.md` → component).
+     Không bỏ row; row không vẽ được → ghi lý do trong báo cáo.
+   * Nhãn, placeholder, wording lỗi lấy **nguyên văn** từ cột Description.
+   * Trạng thái mặc định theo Description (vd "vô hiệu tới khi chọn đủ tài xế + xe" → artboard chính
+     vẽ nút ở trạng thái vô hiệu; bản bật thuộc artboard trạng thái nếu chế độ Đầy đủ).
+   * `Xem CMP-xx` → component + node mẫu ở dòng **Figma** của CMP, điền phần "UC phải khai báo".
+     `Theo GR-xx` → áp quy tắc đó (bộ đếm ký tự, căn cột số/ngày, thứ tự nút…).
+   * Lỗi vẽ đúng loại GR-15 ghi trong bảng (Inline / Popup / Toast) ở artboard lỗi đại diện.
+   * Thấy nên khác bảng (đổi chữ, bỏ/thêm element) → vẫn vẽ theo bảng, ghi vào báo cáo mục
+     "Đề xuất đổi so với bảng 5 cột" cho user quyết (đổi thật thì qua `/cr`).
 
 ## Bước 5 — sửa màn đã có
 
@@ -251,7 +278,9 @@ Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một
    - (b) trạng thái có **chữ/icon**, không chỉ màu;
    - (c) có đủ **rỗng / đang tải / lỗi** cho mọi vùng dữ liệu (hoặc user đã bỏ, gồm chế độ Nhanh);
    - (d) form **không trải hết bề rộng** desktop;
-   - (e) mỗi component đã dùng không vi phạm dòng **Không nên** nào của nó trong `design/components.md`.
+   - (e) mỗi component đã dùng không vi phạm dòng **Không nên** nào của nó trong `design/components.md`;
+   - (f) **phủ bảng 5 cột**: đếm row có element tương ứng trên màn (theo tên layer, mục 7 Bước 4) —
+     phải N/N; thiếu thì vẽ bổ sung hoặc ghi lý do.
 6. Một `figma_read screenshot` cho mỗi màn chính ở cuối, để user xem.
 7. **Usability (AI):** vẽ xong **trọn một flow** (đủ màn của flow đó theo `userflow.md` Mục 3) và
    `userflow.md` có **Mục 3.6 Tác vụ chính** chạm flow này → gọi `@usability-reviewer` (Task) với
@@ -260,6 +289,11 @@ Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một
    không đổi nghiệp vụ → sửa màn rồi gọi lại (tối đa 2 vòng); cần đổi nghiệp vụ → ghi "cần `/cr`",
    không tự sửa. Chưa trọn flow (chế độ Nhanh, vài màn lẻ) hoặc thiếu Mục 3.6 → KHÔNG gọi, ghi rõ
    lý do ở báo cáo (`Usability (AI): SKIPPED — …`), không in PASS.
+8. **Khớp đặc tả (agent):** có bảng 5 cột → gọi `@uxui-reviewer` (Task) với bảng
+   `screenId · slug · nodeId` + đường dẫn file ASCII của các màn vừa vẽ/sửa. `BLOCKING` → sửa màn rồi
+   gọi lại (tối đa 2 vòng); vẫn còn → ghi vào báo cáo. Không có bảng 5 cột → `Khớp đặc tả: SKIPPED —
+   không có bảng 5 cột`, không in PASS. Chạy trước mục 7 nếu cả hai cùng chạy (sửa đặc tả trước, rồi
+   mới đi tác vụ).
 
 ## Bước 7 — báo đã vẽ gì
 
@@ -271,11 +305,23 @@ Ngắn, theo mẫu:
 2.2-web · chi-tiet-don    P7 · bình thường / lỗi tải
 
 Máy đã kiểm: layout 0 lỗi · a11y 0 lỗi mới (2 ngoại lệ đã biết) · DS compliance 1.00
+Bảng 5 cột: 2.1-web 12/12 · 2.2-web 9/9 row có trên màn | không có bảng 5 cột — vẽ từ SRS
+Đề xuất đổi so với bảng 5 cột: <liệt kê, hoặc "không">
+Khớp đặc tả (@uxui-reviewer): 0 blocking / 1 warning | SKIPPED — <lý do>
 Usability (AI, chưa có người dùng thật): 3 tác vụ · 1 vượt tiêu chí bước · 0 blocking / 2 warning | SKIPPED — <lý do>
 Máy KHÔNG kiểm: <xem dưới, kèm mức ưu tiên [Cao]/[Trung]/[Thấp]>
 Chưa có chuẩn trong design.md: <liệt kê chỗ vẽ tạm, hoặc "không">
 Chế độ: <Nhanh — không vẽ trạng thái phụ | Đầy đủ>
+Link Figma: đã ghi {n} màn vào {feature}-wireframe-index.md | Chưa ghi: <lý do>
 ```
+
+**Ghi link về repo.** Có `docs/{feature}/ascii-wireframe/{feature}-wireframe-index.md` → điền cột
+`Figma` của từng màn vừa vẽ/sửa (khớp dòng theo `Slug` — `screenId` ra `Slug` qua userflow Mục 2):
+`[{screenId}](https://www.figma.com/design/{fileKey}/?node-id={nodeId, ":" đổi thành "-"})`, cập nhật
+cột `Updated`. `fileKey`: plugin không trả → lấy từ link node trong `design/ui-common/screen-patterns.md`
+(dòng **Figma** của CMP), đối chiếu tên file với `figma_status`; lệch hoặc không có → hỏi user link.
+Chỉ sửa đúng 2 cột đó, qua **L2 diff** (`approval-gate.md`). Chưa có index (chưa chạy
+`/wireframe-ascii`) → không tạo mới, ghi 1 dòng "Chưa ghi link: chưa có wireframe-index" trong báo cáo.
 
 ## Những gì máy KHÔNG kiểm
 
@@ -283,7 +329,8 @@ Nói rõ với user, đừng gộp vào một chữ "PASS". Mỗi mục kèm m�
 biết xử lý cái nào trước — mức chỉ là gợi ý chung, tuỳ nghiệp vụ cụ thể mà đổi:
 
 * **[Cao] Màn có khớp nghiệp vụ không.** Audit sạch nghĩa là vẽ đúng kỹ thuật và đúng hệ thống, chứ chưa
-  nói gì về việc cột "Tổng tiền" có nên nằm đó hay không.
+  nói gì về việc cột "Tổng tiền" có nên nằm đó hay không. `@uxui-reviewer` đối chiếu với
+  bảng 5 cột (mục 8 Bước 6), nhưng đó là AI đọc, chỉ bắt được cái bảng có ghi — bảng sai thì màn sai theo.
 * **[Cao] Có thiếu màn/nhánh không.** Chỉ userflow mới lộ ra điều này. Không có flow thì nói thẳng là
   chưa kiểm được.
 * **[Trung] Nhãn và dữ liệu mẫu có đúng không.** "Duyệt trong 24 giờ" là một khẳng định về hệ thống; nếu
@@ -304,6 +351,9 @@ biết xử lý cái nào trước — mức chỉ là gợi ý chung, tuỳ ngh
 * **Không vẽ lên trang component của thư viện**, và không sửa component chính (main component).
 * **Không bịa nội dung nghiệp vụ**: nhãn trạng thái, tên trường, quy tắc phải lấy từ nguồn. Nguồn
   thiếu thì hỏi.
+* **Không bỏ row hay đổi wording của bảng 5 cột im lặng.** Muốn khác thì vẽ theo bảng + ghi đề xuất.
+* **Chỉ ghi repo ở đúng 1 chỗ**: cột `Figma` + `Updated` của `{feature}-wireframe-index.md`, qua L2.
+  Không sửa SRS, userflow, ASCII hay bảng 5 cột — muốn đổi thì đề xuất, user chạy skill tương ứng.
 * **Không lặng lẽ bỏ màn/trạng thái** user đã yêu cầu. Không vẽ được thì nói màn nào và vì sao.
 * **Thiết bị luôn hỏi user**. `design.md` chỉ đề xuất.
 
