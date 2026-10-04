@@ -88,12 +88,12 @@ Feature folders: !`ls -d docs/*/ 2>/dev/null | xargs -I{} basename {} | grep -vE
 
 3) **Đọc bổ sung tối thiểu** (chỉ những gì KG/data model không tính vì cần đọc sâu body):
    * Doc title: H1 đầu tiên mỗi file (cho card kanban + drill-down).
-   * Stale chain tree: parse `docs/_shared/staleness.md` (nếu có) → cây upstream→downstream cho section Stale.
+   * Stale chain tree: parse `_workspace/staleness.md` (nếu có) → cây upstream→downstream cho section Stale.
    * KHÔNG nhân đôi counts/coverage/orphans/stale đã lấy từ KG.
 
 3) **Đọc bổ sung tối thiểu** (chỉ những gì engine KHÔNG tính vì cần đọc sâu body):
    * Doc title: H1 đầu tiên mỗi file (cho card kanban + drill-down). Engine chỉ có path.
-   * Stale chain tree: parse `docs/_shared/staleness.md` (nếu có) → cây upstream→downstream cho section Stale.‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+   * Stale chain tree: parse `_workspace/staleness.md` (nếu có) → cây upstream→downstream cho section Stale.‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
    * KHÔNG nhân đôi coverage/pipeline/health — đã có từ JSON.
 
 4) **Compose HTML** — sections theo thứ tự QUAN TRỌNG GIẢM DẦN (kết luận trên, bằng chứng dưới):
@@ -132,7 +132,7 @@ Feature folders: !`ls -d docs/*/ 2>/dev/null | xargs -I{} basename {} | grep -vE
 
 HTML double-click mở browser. **Data inline trong file**; riêng ECharts (charts) + List.js (filter/sort) nạp qua **CDN** — cần mạng lần đầu.
 
-Số liệu lấy từ KG (`docs/_shared/kg/graph.json`) + `_scripts/workspace-status.py` — skill KHÔNG tự tính tay.
+Số liệu lấy từ KG (`_workspace/kg/graph.json`) + `_scripts/workspace-status.py` — skill KHÔNG tự tính tay.
 
 ## Metric definitions (để render đúng, không bịa)
 

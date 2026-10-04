@@ -63,15 +63,15 @@ Per [review-format.md](../rules/review-format.md).
 
 - Target screen block (trong `docs/{feature}/ascii-wireframe/{flow-slug}.md` — screens gộp theo flow)
 - Sibling screens (other blocks cùng file `{flow-slug}.md`, hoặc other flow files cùng `docs/{feature}/ascii-wireframe/`)
-- @docs/_shared/screen-patterns.md
-- @docs/_shared/conventions.md
+- @design/ui-common/screen-patterns.md
+- @design/ui-common/conventions.md
 - @.claude/rules/ui-common-rules-components.md
 - @docs/{feature}/srs/{feature}-userflow.md (nguồn chia flow + happy/error/edge case coverage)
 - @docs/{feature}/srs/{feature}-flows.md (Screen Flow section — sequence/activity kỹ thuật, khác userflow.md)
 - Wireframe (block `## Screen: {slug}` trong `docs/{feature}/ascii-wireframe/{flow-slug}.md`, sub-section Wireframe ASCII)
 - @docs/{feature}/srs/{feature}-spec.md Mục 5 Error Matrix (verify error states link tới error codes)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 - @.claude/rules/design-system.md (nếu dự án đã cài kit design system)
-- @docs/design.md: các mục States, Components, Accessibility, Do's and Don'ts làm tiêu chí review (đọc theo mục, đúng cách rule quy định). Thiếu design.md thì review theo tiêu chí lo-fi và ghi 1 dòng \"chưa áp design system\".
+- @design/design.md: các mục States, Components, Accessibility, Do's and Don'ts làm tiêu chí review (đọc theo mục, đúng cách rule quy định). Thiếu design.md thì review theo tiêu chí lo-fi và ghi 1 dòng \"chưa áp design system\".
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->

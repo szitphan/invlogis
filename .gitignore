@@ -17,7 +17,8 @@
 # Generated / runtime
 __pycache__/
 *.pyc
-docs/_shared/kg/.dirty
+_workspace/kg/.dirty
+_workspace/.status-state/
 .claude/token-tracking/
 
 # /intake staging (bản nháp trước khi duyệt)

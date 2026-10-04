@@ -3,18 +3,18 @@ type: shared-screen-patterns
 status: draft
 updated: 2026-10-01
 links:
-  - docs/design.md
-  - docs/components.md
-  - docs/_shared/conventions.md
+  - design/design.md
+  - design/components.md
+  - design/ui-common/conventions.md
   - docs-input/ui-common/web/web-common-rules.md
 ---
 
 # UI Common Components (CMP)
 
 Component dùng chung toàn hệ thống web. UC/màn gọi theo mã: `Xem CMP-xx — {tên}`, rồi chỉ điền phần
-**UC phải khai báo** của CMP đó. Quy tắc nhập liệu, định dạng, bảng ở [[docs/_shared/conventions.md|Quy tắc chung (GR)]].
+**UC phải khai báo** của CMP đó. Quy tắc nhập liệu, định dạng, bảng ở [[design/ui-common/conventions.md|Quy tắc chung (GR)]].
 
-Màu, cỡ, khoảng cách, câu chữ lấy theo `docs/design.md` (Content & Formatting › Copy động). File này
+Màu, cỡ, khoảng cách, câu chữ lấy theo `design/design.md` (Content & Formatting › Copy động). File này
 không chứa wording cố định; chỗ nào có câu mẫu là trỏ về design.md.
 
 | Mã | Tên | Dùng khi | Nguồn gốc |
@@ -31,9 +31,9 @@ không chứa wording cố định; chỗ nào có câu mẫu là trỏ về des
 | CMP-10 | File Upload | Đính kèm chứng từ, tài liệu | SC-10 |
 | CMP-11 | Sidebar Menu | Điều hướng giữa module/feature | SC-13 |
 
-Mỗi CMP có dòng **Figma**: component trong thư viện Astryx (tên set theo `docs/figma-library-keys.json`)
+Mỗi CMP có dòng **Figma**: component trong thư viện Astryx (tên set theo `design/figma-library-keys.json`)
 hoặc component dự án (mục *Components - innvie logis* của design.md), node mẫu trong file Figma dự án
-`FifpyOMpZk9OP8qyNzbRVJ`, và ảnh cache `docs/_shared/images/cmp-NN.png` (chụp qua Figma MCP). Dòng
+`FifpyOMpZk9OP8qyNzbRVJ`, và ảnh cache `design/ui-common/images/cmp-NN.png` (chụp qua Figma MCP). Dòng
 **design.md** liệt kê mục design.md chứa chi tiết (tách bằng `;`) — `_scripts/ui-common-expand.py` đọc
 dòng này để chép nguyên văn vào Phụ lục A của SRS.
 

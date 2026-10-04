@@ -30,7 +30,7 @@ Danh sách tác nhân chuẩn kèm tên gọi cần tránh: [[docs/_shared/defin
 
 - Vận hành tại Việt Nam, nhiều chi nhánh (vd Hà Nội, TP.HCM). (2026-10-01)
 - Giao diện: Tiếng Việt (mặc định) và Tiếng Anh. Không hỗ trợ Tiếng Nhật. (2026-10-01)
-- Câu chữ giao diện theo `docs/design.md` (Copy động), không dùng "Vui lòng". (2026-10-01)
+- Câu chữ giao diện theo `design/design.md` (Copy động), không dùng "Vui lòng". (2026-10-01)
 
 ## Ghi chú khác
 

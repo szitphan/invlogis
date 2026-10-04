@@ -4,9 +4,9 @@ status: draft
 updated: 2026-10-04
 links:
   - CLAUDE.md
-  - docs/design.md
-  - docs/setup-figma.md
-  - docs/_shared/backlog.md
+  - design/design.md
+  - design/setup-figma.md
+  - _workspace/backlog.md
   - docs-input/README.md
 ---
 
@@ -72,10 +72,10 @@ không phải đầu vào bắt buộc.
 |---|---|---|---|---|
 | 🟢 | Bối cảnh dự án | `docs/_shared/project-profile.md` | brainstorm, brd, srs, discover | Có domain + người dùng (từ SRS cũ LG). Thiếu bối cảnh điều vận + đối thủ (BL-008). Skill tự hỏi khi thiếu |
 | 🟡 | Thuật ngữ, môi trường, kiến trúc | `definitions.md`, `operating-environment.md`, `system-overview.md` | mọi skill BA | Có |
-| 🟡 có UI | Quy tắc giao diện chung | `docs/_shared/conventions.md` (20 GR + E-common) | srs, usecase, wireframe, figma | Bản **web** |
-| 🟡 có UI | Component dùng chung | `docs/_shared/screen-patterns.md` (11 CMP) | như trên | Bản **web**; bản **mobile** chưa chuyển (BL-001) |
-| 🟢 cho hi-fi | Design system | `docs/design.md`, `design-tokens.css`, `components.md`, `ba-crosswalk.md`, `figma-library-keys.json` | wireframe (bố cục), figma-*, prototype | Có; chỉ chuẩn **desktop 1920×1080** |
-| 🟡 1 lần | Setup file Figma | `docs/setup-figma.md` | người, trước lần vẽ đầu | Có |
+| 🟡 có UI | Quy tắc giao diện chung | `design/ui-common/conventions.md` (20 GR + E-common) | srs, usecase, wireframe, figma | Bản **web** |
+| 🟡 có UI | Component dùng chung | `design/ui-common/screen-patterns.md` (11 CMP) | như trên | Bản **web**; bản **mobile** chưa chuyển (BL-001) |
+| 🟢 cho hi-fi | Design system | `design/design.md`, `design-tokens.css`, `components.md`, `ba-crosswalk.md`, `figma-library-keys.json` | wireframe (bố cục), figma-*, prototype | Có; chỉ chuẩn **desktop 1920×1080** |
+| 🟡 1 lần | Setup file Figma | `design/setup-figma.md` | người, trước lần vẽ đầu | Có |
 
 Công cụ: `/update-overview` (sửa 6 file `_shared`), `/kg` (đồ thị liên kết).
 
@@ -84,7 +84,7 @@ Công cụ: `/update-overview` (sửa 6 file `_shared`), `/kg` (đồ thị liê
 | Mức | Bước | Skill / máy | Vào | Ra |
 |---|---|---|---|---|
 | 🟡 có tài liệu khách | Chuyển tài liệu | `/intake` ✅ | docx/pdf/xlsx/pptx/ảnh | `docs-input/{nhóm}/{slug}/` (`.md` + `images/` + `source/`); bản mới của tài liệu cũ → báo cáo `docs-input/_changes/` |
-| 🟢 tự động | Đăng ký + theo dõi | `_scripts/intake-sync.py` (hook) | file trong `docs-input/` | sổ nguồn `docs-input/README.md` (SRC-NN) + task `docs/_shared/backlog.md` (BL-NNN) |
+| 🟢 tự động | Đăng ký + theo dõi | `_scripts/intake-sync.py` (hook) | file trong `docs-input/` | sổ nguồn `docs-input/README.md` (SRC-NN) + task `_workspace/backlog.md` (BL-NNN) |
 
 ### 2 · Khám phá
 
@@ -234,7 +234,7 @@ chỉ agent hoặc người kiểm.
 | Cơ chế | Làm gì | Ở đâu |
 |---|---|---|
 | Duyệt L1 / L2 / L3 | xem kế hoạch / xem diff / sửa nhiều vòng trước khi ghi | `.claude/rules/approval-gate.md` |
-| Changelog | 1 dòng mỗi lần ghi file | hook `auto-changelog.sh` → `docs/_shared/changelog.md` |
+| Changelog | 1 dòng mỗi lần ghi file | hook `auto-changelog.sh` → `_workspace/changelog.md` |
 | Lan truyền "cũ" | sửa upstream → đánh dấu downstream `stale` theo `links:` | hook `post-edit-stale.sh` → `staleness.md` |
 | Câu hỏi mở | sau mỗi doc: gom OQ của mình + kế thừa từ upstream, giải từng câu, lan sửa xuống doc liên quan | `.claude/rules/resolve-oqs.md` |
 | Backlog | task tự thêm/tự đóng theo điều kiện máy kiểm được | `intake-sync.py` → `backlog.md` |
@@ -259,11 +259,11 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 
 | # | Ngày | Quyết định | Áp dụng |
 |---|---|---|---|
-| D-01 | 2026-10-04 | Desktop dùng **1920×1080** cho mọi bậc (wireframe, prototype, Figma) | Chưa áp — rule + skill BA-Kit còn 1024 (P-09) |
+| D-01 | 2026-10-04 | Desktop dùng **1920×1080** cho mọi bậc (wireframe, prototype, Figma) | Đã áp 2026-10-04 (commit `bed9b46`) |
 | D-02 | 2026-10-04 | Feature/function hình thành khi brainstorm; Feature Map là tổng hợp ngược, không bắt buộc có trước | Đã phản ánh ở Mục 1-2 |
-| D-03 | 2026-10-04 | Wireframe HTML desktop xếp **1 màn mỗi hàng** (mobile/tablet giữ nhiều màn mỗi hàng) | Chưa áp, đi cùng D-01 |
-| D-04 | 2026-10-04 | Chuẩn thiết kế (design system + CMP/GR) chuyển ra **`design/`** ở gốc repo, tách khỏi `docs/` | Chưa áp |
-| D-05 | 2026-10-04 | Log máy (changelog, staleness, backlog, kg) chuyển sang **`_workspace/`** | Chưa áp |
+| D-03 | 2026-10-04 | Wireframe HTML desktop xếp **1 màn mỗi hàng** (mobile/tablet giữ nhiều màn mỗi hàng) | Đã áp 2026-10-04 — đo thật: khung 1920px ở cửa sổ 1440, xếp dọc |
+| D-04 | 2026-10-04 | Chuẩn thiết kế (design system + CMP/GR) chuyển ra **`design/`** ở gốc repo, tách khỏi `docs/` | Đã áp 2026-10-04 — chạy lại `_scripts/relayout.py` sau mỗi lần cài kit |
+| D-05 | 2026-10-04 | Log máy (changelog, staleness, backlog, kg) chuyển sang **`_workspace/`** | Đã áp 2026-10-04 |
 
 ## 7. Chỗ đứt và vấn đề
 
@@ -277,10 +277,10 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | P-06 | 7 | `/figma-screen` không ghi link Figma về `{feature}-wireframe-index.md` | Mất truy vết repo ↔ Figma |
 | P-07 | 6↔7 | 2 nguồn userflow: repo và trên Figma (`/figma-screen` lấy thứ tự màn từ Figma) | Flow sống 2 nơi, dễ lệch |
 | P-08 | 7 | `/figma-screen` không gọi CMP/GR | Màn hi-fi có thể lệch quy tắc chung |
-| P-09 | 6↔7 | D-01 chưa áp: `ba-conventions.md` Mục 7, `/user-flow`, `/wireframe-html`, `/prototype-html`, `/figma`, 2 template HTML vẫn ghi desktop 1024 | Wireframe và Figma lệch bề rộng |
+| ~~P-09~~ ✅ | 6↔7 | (Đã xử lý bằng D-01) D-01 chưa áp: `ba-conventions.md` Mục 7, `/user-flow`, `/wireframe-html`, `/prototype-html`, `/figma`, 2 template HTML vẫn ghi desktop 1024 | Wireframe và Figma lệch bề rộng |
 | P-10 | 7 | `/figma` (cũ) và `/figma-screen` trùng vai | Gọi nhầm skill |
 | P-11 | 7 | `/figma-component` dùng connector Figma chính thức, chưa được cấp quyền | Chưa chạy được |
-| P-12 | 7 | Tham chiếu tới file không có: `docs/workflow-figma-screen.md`, `docs/design-backlog.md` | Known Gaps của `/figma-component` không có chỗ ghi |
+| P-12 | 7 | Tham chiếu tới file không có: `_guides/workflow-figma-screen.md`, `design/design-backlog.md` | Known Gaps của `/figma-component` không có chỗ ghi |
 | P-13 | 0→7 | App Lái xe là mobile, nhưng CMP/GR mobile chưa có (BL-001) và design.md chỉ có chuẩn desktop | Mọi màn mobile đều "chưa có chuẩn" |
 | P-14 | — | CLAUDE.md / AGENTS.md liệt kê skill chưa cài, chưa có skill Figma mới | Tài liệu điều hướng sai |
 | P-15 | 3 | `/brainstorm` chỉ có tự kiểm, không có agent review (R-1) | Là gốc của mọi thứ phía sau — thiếu actor, sai phạm vi, bỏ sót edge case ở đây lan xuống SRS, UC, màn hình |
@@ -288,7 +288,7 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | P-17 | 6 | `/wireframe-ascii`, `/wireframe-html` chạy riêng không có agent review; `@uxui-reviewer` chỉ chạy khi đi qua `/srs` Tầng 3 (R-3) | Bảng mô tả 5 cột (hợp đồng BA↔design) thiếu trạng thái, sai wording, lệch CMP/GR mà không ai soát |
 | P-18 | 7 | `/figma-screen`, `/figma-component` tự ghi "[Cao] màn có khớp nghiệp vụ không — máy không kiểm" nhưng không có agent nào kiểm phần đó (R-4) | Màn hi-fi sạch audit kỹ thuật nhưng có thể sai nghiệp vụ (sai nhãn, thiếu trường, sai số liệu so với spec) |
 | P-19 | 5 | `/state`, `/erd` chỉ có linter (R-5) | Trạng thái / quan hệ sai nghiệp vụ vẫn qua vì linter chỉ kiểm ngữ pháp |
-| P-20 | — | Cấu trúc thư mục trộn đầu vào với đầu ra: design system ở gốc `docs/`; `docs/_shared/` trộn tri thức dự án + chuẩn UI + log máy; tài liệu quy trình nằm trong `docs/` | Khó phân biệt đâu là chuẩn để đọc, đâu là sản phẩm, đâu là log (D-04, D-05) |
+| ~~P-20~~ ✅ | — | (Đã xử lý bằng D-04, D-05) Cấu trúc thư mục trộn đầu vào với đầu ra: design system ở gốc `docs/`; `docs/_shared/` trộn tri thức dự án + chuẩn UI + log máy; tài liệu quy trình nằm trong `docs/` | Khó phân biệt đâu là chuẩn để đọc, đâu là sản phẩm, đâu là log (D-04, D-05) |
 | P-21 | — | Bản Codex chép tay: `AGENTS.md` ghi sai đường dẫn `.Codex/skills`; `.agents/skills/` lệch bản gốc và thiếu 16 mục Figma; `.codex/agents` thiếu `feature-researcher` | Codex chạy trên bộ skill cũ/thiếu |
 | P-22 | — | Không ghi lại skill nào cài từ kit nào, bản nào | Lẫn bản (đã gặp: 2 bản Reqwise khác license) |
 
@@ -319,8 +319,8 @@ docs-input ─/intake─► nguồn .md
 
 Việc cần làm, theo thứ tự:
 
-1. Áp D-01 + D-03: desktop 1024 → 1920, wireframe HTML desktop 1 màn mỗi hàng (P-09).
-2. Áp D-04 + D-05: dời `design/` và `_workspace/`, sửa mọi tham chiếu + hook + script (P-20).
+1. ~~Áp D-01 + D-03 (P-09)~~ — xong 2026-10-04.
+2. ~~Áp D-04 + D-05 (P-20)~~ — xong 2026-10-04.
 3. Sửa `/figma-screen` trong `kits/figma-skills/custom/` rồi cài lại: đọc ASCII + bảng mô tả, gọi
    CMP/GR, lấy thứ tự màn từ userflow repo, ghi link về wireframe-index, thêm `@uxui-reviewer`
    (P-05 → P-08, P-18).

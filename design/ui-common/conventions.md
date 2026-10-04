@@ -3,8 +3,8 @@ type: shared-conventions
 status: draft
 updated: 2026-10-01
 links:
-  - docs/design.md
-  - docs/_shared/screen-patterns.md
+  - design/design.md
+  - design/ui-common/screen-patterns.md
   - docs-input/ui-common/web/web-common-rules.md
 ---
 
@@ -12,9 +12,9 @@ links:
 
 Quy tắc giao diện chung toàn hệ thống web. UC/màn gọi theo mã `Theo GR-xx`, chỉ điền phần **UC phải
 khai báo**; khác quy tắc chung thì ghi override + lý do. Component dùng chung ở
-[[docs/_shared/screen-patterns.md|UI Common Components (CMP)]].
+[[design/ui-common/screen-patterns.md|UI Common Components (CMP)]].
 
-Câu chữ (lỗi, xác nhận, rỗng, toast) theo `docs/design.md` › Content & Formatting › Copy động: ngôi
+Câu chữ (lỗi, xác nhận, rỗng, toast) theo `design/design.md` › Content & Formatting › Copy động: ngôi
 "bạn", câu ngắn, không "Vui lòng". Định dạng hiển thị chi tiết đã có ở design.md — GR trỏ về mục đó.
 
 | Mã | Quy tắc | Chi tiết ở design.md | Nguồn gốc |

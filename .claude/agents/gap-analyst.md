@@ -19,8 +19,8 @@ model: opus
 2) Check every changed FR có downstream US/AC coverage.
 3) Check every changed AC maps back to FR + screen/error.
 4) Look for stale references to old terminology, enum values, status names, removed flows.
-5) Identify missing activity-log/CR source attribution (đối chiếu `docs/_shared/changelog.md`).
-6) **Stale chain awareness** — check `status: stale` + cascade từ `docs/_shared/staleness.md`.
+5) Identify missing activity-log/CR source attribution (đối chiếu `_workspace/changelog.md`).
+6) **Stale chain awareness** — check `status: stale` + cascade từ `_workspace/staleness.md`.
 
 ## Severity rubric‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -60,7 +60,7 @@ Per `review-format.md` v1 strictly. Summary + findings by severity.
 - @docs/{feature}/userstories/ (US/AC scope)
 - @docs/{feature}/usecases/
 - @docs/_shared/traceability.md
-- @docs/_shared/staleness.md (recent stale propagation)
+- @_workspace/staleness.md (recent stale propagation)
 - @docs/cr/ (open CRs)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 

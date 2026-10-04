@@ -43,7 +43,7 @@ Build 1 file `{feature}-prototype.html` self-contained, double-click mở browse
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `docs/_shared/screen-patterns.md` (CMP) + `docs/_shared/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
+- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 - **L1 approval** trước Write. File đã tồn tại → L2 diff trước overwrite.
 - **KHÔNG `context: fork`** — skill có nhánh HITL (hỏi device khi userflow thiếu `primary_device`, review apply loop). Fork mất kênh hỏi-đáp → prompt bị auto-skip (per `feedback_fork_no_hitl`). Phân tích nặng vẫn delegate qua Task sub-agent, không fork toàn skill.
 - **Output chính**: `docs/{feature}/html-design/{feature}-prototype.html` (self-contained). Side-effect: update `{feature}-wireframe-index.md` cột HTML prototype (Phase G).
@@ -53,13 +53,13 @@ Build 1 file `{feature}-prototype.html` self-contained, double-click mở browse
 - **2 lớp CSS tách biệt:**
   - VỎ chrome (`--chrome-*`, `.proto-fab`, `.proto-panel`) — neutral B&W, **KHÔNG** đọc token app (`--bg`/`--ink`). `body` nền = chrome neutral (`#f4f4f4`).
   - APP (`.proto-app`, `[data-screen]`) — design tokens 2 lớp (raw palette → semantic), theme per-section.
-- **Design tokens 2 lớp từ `docs/design.md`:**
+- **Design tokens 2 lớp từ `design/design.md`:**
   - **Raw palette** (`--palette-*`) copy hex từ design.md, khai báo 1 lần. **CẤM bịa hex ngoài palette** — thiếu màu thì thêm vào bảng palette trước, không viết hex rời.
   - **Semantic** (`--bg`/`--surface`/`--ink`/`--focus-ring`...) — component CHỈ dùng cái này. Bắt buộc định nghĩa CẢ 3 block: `:root` (default) + `[data-theme="light"]` + `[data-theme="dark"]` — thiếu `[data-theme="light"]` thì section light lồng trong dark kế thừa nhầm dark.
   - `color-scheme: light|dark` mỗi theme (scrollbar/input/datepicker native tự đổi màu).
   - `--focus-ring` semantic RIÊNG mỗi theme, lấy từ token accent của design.md (vd Astryx: light `#262626`, dark `#ebebeb`). Kiểm tương phản ≥ 3:1 với nền của từng theme.
-  - **Thiếu `docs/design.md` → DỪNG**, không dùng bảng màu dự phòng, không lấy `design.md` mẫu của dự án/kit khác làm mặc định. Route: cài kit design system hoặc `/wireframe-html` (lo-fi B&W). Per `../../rules/design-system.md`.
-- **Design system** — đọc TOÀN BỘ `docs/design.md`; màu/chữ/khoảng cách lấy qua `docs/design-tokens.css`. Per @../../rules/design-system.md.
+  - **Thiếu `design/design.md` → DỪNG**, không dùng bảng màu dự phòng, không lấy `design.md` mẫu của dự án/kit khác làm mặc định. Route: cài kit design system hoặc `/wireframe-html` (lo-fi B&W). Per `../../rules/design-system.md`.
+- **Design system** — đọc TOÀN BỘ `design/design.md`; màu/chữ/khoảng cách lấy qua `design/design-tokens.css`. Per @../../rules/design-system.md.
 - **Theme per-section theo ngữ cảnh màn (skill tự chọn, KHÔNG hỏi):**
   - Transactional (form, list, học/luyện, cài đặt, account, checkout) → `data-theme="light"`.
   - Marketing/hero/onboarding/landing → `data-theme="dark"`.
@@ -145,13 +145,13 @@ Mode không-góp-ý dùng khi prototype chỉ để trình chiếu/demo, không 
 Today: !`date +%Y-%m-%d`
 Features có userflow (nguồn chia flow): !`for d in docs/*/srs/*-userflow.md; do [ -f "$d" ] && dirname "$d" | xargs dirname | xargs basename; done 2>/dev/null | head -20`
 Features có ascii-wireframe: !`for d in docs/*/ascii-wireframe/*-wireframe-index.md; do [ -f "$d" ] && dirname "$d" | xargs dirname | xargs basename; done 2>/dev/null | head -20`
-design.md exists: !`test -f docs/design.md && echo "OK" || echo "MISSING → DỪNG (cần cài kit design system)"`
+design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → DỪNG (cần cài kit design system)"`
 
 ## Approach
 
 ### Phase A — Setup + validate nguồn chia flow‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-0. **Check `docs/design.md`.** Thiếu → DỪNG, báo thiếu design system + route cài kit hoặc `/wireframe-html` (per `../../rules/design-system.md`).
+0. **Check `design/design.md`.** Thiếu → DỪNG, báo thiếu design system + route cài kit hoặc `/wireframe-html` (per `../../rules/design-system.md`).
 1. **Resolve feature.** Validate `docs/{feature}/` tồn tại.
 2. **Check `srs/{feature}-userflow.md`** (nguồn TOC + sơ đồ luồng + chia flow):
    - Tồn tại + duyệt → Read Mục 2 (danh sách màn + mục đích) + Mục 3 (chia flow: flow-slug + screens/flow + cases phủ happy/error/edge).
@@ -161,7 +161,7 @@ design.md exists: !`test -f docs/design.md && echo "OK" || echo "MISSING → D�
 
 ### Phase B — Design system extraction (token 2 lớp)
 
-5. **Read toàn bộ `docs/design.md` + `docs/design-tokens.css`.** Raw palette `--palette-*` = đúng các token trong khối YAML / design-tokens.css (giữ nguyên tên key), KHÔNG tự đặt nhóm màu ngoài file.
+5. **Read toàn bộ `design/design.md` + `design/design-tokens.css`.** Raw palette `--palette-*` = đúng các token trong khối YAML / design-tokens.css (giữ nguyên tên key), KHÔNG tự đặt nhóm màu ngoài file.
 6. **Build 3 block semantic token** (`{{THEME_SEMANTIC}}`):
    - `:root` default = light (transactional).
    - `[data-theme="light"]` (BẮT BUỘC — chống kế thừa nhầm) + `color-scheme: light` + `--focus-ring` xanh/xám.
@@ -327,7 +327,7 @@ Reference trong `{feature}-wireframe-index.md` cột `HTML prototype` dạng `{f
 - @../../rules/changelog.md
 - @../../rules/ba-conventions.md
 - @../../rules/design-system.md (cài từ kit design system — nguồn token, luật bố cục, Known Gaps)
-- @../../../docs/design.md (design tokens source — read at runtime)
+- @../../../design/design.md (design tokens source — read at runtime)
 - @../user-flow/SKILL.md (nguồn primary_device + chia flow — read at runtime)
 - @../wireframe-ascii/SKILL.md (nguồn bảng mô tả 5 cột)
 - @../wireframe-html/SKILL.md (renderer ngang hàng B&W — mô hình vỏ điều hướng tham chiếu)

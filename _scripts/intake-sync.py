@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Đồng bộ sổ nguồn docs-input/README.md + backlog docs/_shared/backlog.md.
+"""Đồng bộ sổ nguồn docs-input/README.md + backlog _workspace/backlog.md.
 
 Chạy tự động qua hook (SessionStart, UserPromptSubmit, PostToolUse Write|Edit). Việc làm:
   1. Quét docs-input/ → nguồn mới tự vào sổ (⬜ chưa feed) + tự sinh task "feed".
@@ -23,9 +23,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INPUT = "docs-input"
 REG = f"{INPUT}/README.md"
 STATE = f"{INPUT}/.intake-state.json"
-BACKLOG = "docs/_shared/backlog.md"
+BACKLOG = "_workspace/backlog.md"
 TODAY = date.today().isoformat()
-SKIP_REF = re.compile(r"^docs/_shared/(changelog|staleness|backlog)\.md$|^docs/_shared/kg/")
+SKIP_REF = re.compile(r"^_workspace/")
 GROUPS = {"sop": "SOP & giải pháp", "danh-muc": "Danh mục", "tich-hop": "Tích hợp ngoài",
           "chung-tu-mau": "Chứng từ mẫu", "du-lieu-mau": "Dữ liệu mẫu", "ui-common": "UI common",
           "srs-cu": "SRS cũ"}
@@ -133,7 +133,9 @@ def load_registry():
 # ---------- 2. tham chiếu trong docs/ ----------
 def scan_refs(paths):
     refs = {p: [] for p in paths}
-    for md in sorted(glob.glob(os.path.join(ROOT, "docs/**/*.md"), recursive=True)):
+    mds = glob.glob(os.path.join(ROOT, "docs/**/*.md"), recursive=True) + \
+          glob.glob(os.path.join(ROOT, "design/**/*.md"), recursive=True)
+    for md in sorted(mds):
         rel = nfc(os.path.relpath(md, ROOT))
         if SKIP_REF.search(rel):
             continue

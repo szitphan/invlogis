@@ -77,7 +77,7 @@ User chọn `Y` hoặc `<ids>` → loop từng OQ targeted:
    * **`không cần` / `OOS`** → mark `[~]`, note "out of scope".
    * **`không biết` / `hỏi sau`** → giữ `[ ]`, không retry trong session này.
 3) **Side-effect detection (within current doc)** — propose L2 diff cho section chịu ảnh hưởng của OQ answer. Xem Step 3.5 mapping.
-4) Nếu OQ inherited từ upstream → skill **update cả upstream doc** (mark `[x]`/`[~]` + thêm note "resolved via /{current_skill}"). L2 diff cho mỗi upstream edit. Set `CLAUDE_CHANGELOG_NOTE` trước mỗi edit — hook tự ghi sự kiện vào `docs/_shared/changelog.md`.
+4) Nếu OQ inherited từ upstream → skill **update cả upstream doc** (mark `[x]`/`[~]` + thêm note "resolved via /{current_skill}"). L2 diff cho mỗi upstream edit. Set `CLAUDE_CHANGELOG_NOTE` trước mỗi edit — hook tự ghi sự kiện vào `_workspace/changelog.md`.
 
 ## Step 3.5 — Cascade scan (CRITICAL — đừng skip)
 
@@ -148,7 +148,7 @@ Sau đó loop L2 diff per item, user Y/n mỗi cái.
 
 ### 3.5.5 — Activity log cascade
 
-Mỗi doc bị update (hiện tại + upstream + downstream) → 1 dòng riêng trong `docs/_shared/changelog.md` (hook tự ghi khi skill set env note trước edit):
+Mỗi doc bị update (hiện tại + upstream + downstream) → 1 dòng riêng trong `_workspace/changelog.md` (hook tự ghi khi skill set env note trước edit):
 
 ```
 {date} | /{current_skill} | {@author} | {file-path} | cascade từ OQ-{id} resolved: {section list} updated

@@ -17,7 +17,7 @@ Tạo Mermaid `sequenceDiagram` block cho 1 flow trong 1 feature. **Output duy n
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `docs/_shared/screen-patterns.md` (CMP) + `docs/_shared/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
+- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 * **1 output cố định** — `docs/{feature}/srs/{feature}-flows.md` append mode. KHÔNG flag `--uc`, `--standalone`, `--system-flow`. Quá nhiều flow → user split manually.
 * **KHÔNG L3 iterate** — mermaid không render được trong chat. Đi thẳng L1 plan → Write. User review rendered diagram từ file (IDE/Obsidian/GitHub) → muốn sửa thì gọi lại skill và nói cần đổi gì (skill tự vào update mode + L2 diff).
 * **L1 approval** trước Write.
@@ -100,7 +100,7 @@ In-progress features: !`for d in docs/*/srs/*-spec.md; do grep -l "status: draft
    \`\`\`
    ```
    > **ID full-form bắt buộc** trong 3 dòng Related — luôn `FR-{feature}-NNN` / `E-{feature}-NNN`, KHÔNG short-form `FR-001` (nguồn edge cho KG; short-form gây feature-ma + mất trace).
-9) **Activity log** — set env `CLAUDE_SKILL_NAME=/sequence` + `CLAUDE_CHANGELOG_NOTE` (note: `added {flow-title} sequence`) TRƯỚC khi Write — hook append vào `docs/_shared/changelog.md` (không phụ thuộc spec.md tồn tại hay chưa, không còn routing/fallback). Update flows.md `updated: {date}`.
+9) **Activity log** — set env `CLAUDE_SKILL_NAME=/sequence` + `CLAUDE_CHANGELOG_NOTE` (note: `added {flow-title} sequence`) TRƯỚC khi Write — hook append vào `_workspace/changelog.md` (không phụ thuộc spec.md tồn tại hay chưa, không còn routing/fallback). Update flows.md `updated: {date}`.
 9.5. **Render-verify (BẮT BUỘC, chạy ngay sau Write)** — `node .claude/scripts/mermaid-verify.mjs --file docs/{feature}/srs/{feature}-flows.md`. Mermaid không render trong chat (đây là lý do skip L3), nên đây là cách duy nhất bắt lỗi cú pháp TRƯỚC khi báo "xong" thay vì để user tự phát hiện khi mở IDE.
    * Script chạy **3 tầng, báo tách riêng**: cú pháp compile · nhãn an toàn renderer · **ngữ nghĩa**.
      Tầng ngữ nghĩa cho sequence bắt: **lifeline chưa khai báo mà đã gửi/nhận message** (**error** —
@@ -137,7 +137,7 @@ In-progress features: !`for d in docs/*/srs/*-spec.md; do grep -l "status: draft
 
 `docs/{feature}/srs/{feature}-flows.md` — **append 1 section** `## Flow: {title}` với mermaid `sequenceDiagram` inline. File dùng CHUNG với `/activity` (mỗi flow 1 section, không tách file). Slim frontmatter (`type: srs-flows` / `feature` / `updated`).
 
-Hook tự ghi 1 dòng vào `docs/_shared/changelog.md`.
+Hook tự ghi 1 dòng vào `_workspace/changelog.md`.
 
 ## Mermaid syntax reference (Claude composes, KHÔNG paste cứng)
 

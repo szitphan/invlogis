@@ -45,7 +45,7 @@ Doc tập trung business goal, current/future state, scope, stakeholder, busines
 - **Risk là business-facing** — impact/likelihood/mitigation ở mức nghiệp vụ-vận hành; không mô tả technical mitigation.
 - **Vietnamese-first** — auto-detect từ source; user yêu cầu tiếng Anh thì override.
 - **Frontmatter tối giản** — chỉ `type`, `feature`, `status`, `updated`, `links`.
-- **Activity log tập trung** — resolve `@author` theo `ba-conventions.md`; trước mỗi Write/Edit set `CLAUDE_SKILL_NAME`, `CLAUDE_CHANGELOG_NOTE`, `CLAUDE_CHANGELOG_AUTHOR`; hook là writer duy nhất của `docs/_shared/changelog.md`. Skill không ghi history vào doc.
+- **Activity log tập trung** — resolve `@author` theo `ba-conventions.md`; trước mỗi Write/Edit set `CLAUDE_SKILL_NAME`, `CLAUDE_CHANGELOG_NOTE`, `CLAUDE_CHANGELOG_AUTHOR`; hook là writer duy nhất của `_workspace/changelog.md`. Skill không ghi history vào doc.
 - **Auto-review + auto-fix mặc định** — user nói “khỏi review” mới skip.
 
 ### Pitfalls — easy to get wrong‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
@@ -139,7 +139,7 @@ Features: !`ls -d docs/*/ 2>/dev/null | xargs -I{} basename {} | head -20`
 
 ID feature-prefixed: `BO-{feature}-NN` (objective), `BR-{feature}-NNN` (business rule).
 
-Hook tự ghi 1 dòng vào `docs/_shared/changelog.md`.
+Hook tự ghi 1 dòng vào `_workspace/changelog.md`.
 
 ## Quality checklist
 

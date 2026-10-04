@@ -66,7 +66,7 @@ Khi multiple agents review cùng 1 doc:
 
 ## Output location
 
-Phase review aggregate findings rồi __tự fix__ (safe áp thẳng, business decision đánh 🔶 cho user review sau — theo memory `feedback_review_auto_run`). Sự kiện review ghi vào `docs/_shared/changelog.md` (KHÔNG ghi gì vào doc — set env note trước edit, hook lo):
+Phase review aggregate findings rồi __tự fix__ (safe áp thẳng, business decision đánh 🔶 cho user review sau — theo memory `feedback_review_auto_run`). Sự kiện review ghi vào `_workspace/changelog.md` (KHÔNG ghi gì vào doc — set env note trước edit, hook lo):
 
 ```
 2026-05-12 | /srs | @ba | docs/payment/srs/payment-spec.md | reviewed by @senior-ba, @qa-reviewer: 1 blocking applied, 2 warnings ack

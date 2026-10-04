@@ -1,7 +1,7 @@
 # UI Common Rules & Components — gọi theo mã, UC chỉ mô tả phần riêng
 
 > Rule chung cho MỌI skill viết hoặc review đặc tả màn hình / use case / lỗi. Mỗi skill đã nối MUST
-> reference file này trong Constraints + References. Nội dung cụ thể sống ở `docs/_shared/`, KHÔNG
+> reference file này trong Constraints + References. Nội dung cụ thể sống ở `design/ui-common/`, KHÔNG
 > chép vào `.claude/`.
 
 ## 1. Phạm vi
@@ -20,8 +20,8 @@
 
 | File | Chứa | Mã |
 |---|---|---|
-| `docs/_shared/screen-patterns.md` | Component dùng chung (bảng 5 cột, Figma, UC phải khai báo) | `CMP-01…` |
-| `docs/_shared/conventions.md` | Quy tắc giao diện chung + bảng lỗi dùng chung | `GR-01…`, `E-common-NNN` |
+| `design/ui-common/screen-patterns.md` | Component dùng chung (bảng 5 cột, Figma, UC phải khai báo) | `CMP-01…` |
+| `design/ui-common/conventions.md` | Quy tắc giao diện chung + bảng lỗi dùng chung | `GR-01…`, `E-common-NNN` |
 
 Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components — mô tả đầy đủ trong UC" và chạy
 như cũ. KHÔNG tự sinh nội dung CMP/GR.
@@ -75,12 +75,12 @@ có lý do · (d) lỗi trùng nghĩa đã dùng E-common · (e) không chép l�
 ## 10. Ảnh và Figma
 
 Dòng **Figma** mỗi CMP: component Astryx / component dự án · node mẫu trong file dự án · ảnh cache
-`docs/_shared/images/cmp-NN.png`. `/figma` khi vẽ CMP: dùng đúng component đó; có node mới thì đề xuất
+`design/ui-common/images/cmp-NN.png`. `/figma` khi vẽ CMP: dùng đúng component đó; có node mới thì đề xuất
 cập nhật dòng Figma + chụp ảnh (Figma MCP `get_screenshot`) qua L2.
 
 ## 11. Thứ tự ưu tiên
 
-`docs/design.md` (token, component, câu chữ) **>** CMP/GR **>** override trong UC (phải có lý do).
+`design/design.md` (token, component, câu chữ) **>** CMP/GR **>** override trong UC (phải có lý do).
 CMP/GR lệch design.md → design.md thắng, đề xuất sửa CMP/GR.
 
 ## 12. Phụ lục A trong SRS cuối (chép nguyên văn bằng máy)

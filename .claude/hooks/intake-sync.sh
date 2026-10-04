@@ -1,5 +1,5 @@
 #!/bin/bash
-# Đồng bộ sổ nguồn docs-input/README.md + backlog docs/_shared/backlog.md.
+# Đồng bộ sổ nguồn docs-input/README.md + backlog _workspace/backlog.md.
 # Dùng: intake-sync.sh session   (SessionStart — in task đang mở)
 #       intake-sync.sh prompt    (UserPromptSubmit — chỉ in khi có thay đổi, vd file mới thả vào docs-input)
 #       intake-sync.sh edit      (PostToolUse Write|Edit — im lặng trừ khi có thay đổi)

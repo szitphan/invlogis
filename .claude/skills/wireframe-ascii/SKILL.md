@@ -23,7 +23,7 @@ ASCII là contract layout bắt buộc cho `/figma` + `/prototype-html` (2 skill
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `docs/_shared/screen-patterns.md` (CMP) + `docs/_shared/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
+- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 * **Cần `srs/{feature}-userflow.md` trước.** Chưa tồn tại → skill tự gọi `/user-flow <feature>` (Phase A.5), KHÔNG tự bịa cách chia flow riêng.
 * __1 file/flow__ — `docs/{feature}/ascii-wireframe/{flow-slug}.md`, chứa N screen block. KHÔNG còn 1-file-1-screen.
 * __L3 iterate__ trong chat (standalone mode), gom theo flow (1 lần render cả flow), max 3 vòng/flow. Trong `/srs` chain mode: skip L3, write bản đầu.
@@ -234,7 +234,7 @@ Với mỗi flow, với mỗi screen trong flow đó:
 
 Sau ASCII OK:
 * **`/wireframe-html <feature>`** — renderer ngang hàng, xem tỉ lệ/lưới thật trong khung device (B&W).
-* **`/figma <feature> [<screen-slug>]`** — vẽ thật lên Figma qua figma-ui-mcp, tuân design tokens từ `docs/design.md`.
+* **`/figma <feature> [<screen-slug>]`** — vẽ thật lên Figma qua figma-ui-mcp, tuân design tokens từ `design/design.md`.
 * **`/prototype-html <feature>`** — build HTML clickable prototype multi-screen self-contained (hi-fi, design tokens + JS nav).
 
 ## References

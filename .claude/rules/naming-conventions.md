@@ -122,7 +122,7 @@ Recommended optional fields:
 - `priority`: P0 / P1 / P2
 - `version`: semver (e.g. `0.1.0`)
 
-**Các field ĐÃ BỎ (không thêm lại):** `lang`/`tags`/`stale_reason` (diet đợt 1, 2026-07-11); `created` (git biết), `owner` (người thực hiện ghi per-event trong `docs/_shared/changelog.md`), `changelog` (lịch sử sống ở `changelog.md` — xem `.claude/rules/changelog.md`) — diet đợt 2, 2026-07-12.
+**Các field ĐÃ BỎ (không thêm lại):** `lang`/`tags`/`stale_reason` (diet đợt 1, 2026-07-11); `created` (git biết), `owner` (người thực hiện ghi per-event trong `_workspace/changelog.md`), `changelog` (lịch sử sống ở `changelog.md` — xem `.claude/rules/changelog.md`) — diet đợt 2, 2026-07-12.
 
 ## Doc type values
 

@@ -96,7 +96,7 @@ Features có flows.md: !`for d in docs/*/srs/*-flows.md; do [ -f "$d" ] && echo 
    ```
    > **ID full-form bắt buộc** trong 3 dòng Related — luôn `FR-{feature}-NNN` / `E-{feature}-NNN`, KHÔNG short-form `FR-001` (nguồn edge cho KG; short-form gây feature-ma + mất trace).
 8) **Gọi lại với slug trùng** (update mode tự động) → L2 diff cho section đó.
-9) **Activity log** — set env `CLAUDE_SKILL_NAME=/activity` + `CLAUDE_CHANGELOG_NOTE` (note: `added {process-title} activity diagram`) TRƯỚC khi Write — hook append vào `docs/_shared/changelog.md` (không phụ thuộc spec.md tồn tại hay chưa, không còn routing/fallback). Update flows.md `updated: {date}`.
+9) **Activity log** — set env `CLAUDE_SKILL_NAME=/activity` + `CLAUDE_CHANGELOG_NOTE` (note: `added {process-title} activity diagram`) TRƯỚC khi Write — hook append vào `_workspace/changelog.md` (không phụ thuộc spec.md tồn tại hay chưa, không còn routing/fallback). Update flows.md `updated: {date}`.
 9.5. **Render-verify (BẮT BUỘC, chạy ngay sau Write)** — `node .Codex/scripts/mermaid-verify.mjs --file docs/{feature}/srs/{feature}-flows.md`. Mermaid không render trong chat (đây là lý do skip L3), nên đây là cách duy nhất bắt lỗi cú pháp TRƯỚC khi báo "xong" thay vì để user tự phát hiện khi mở IDE.
    - Script chạy **3 tầng, báo tách riêng**: cú pháp compile · nhãn an toàn renderer · **ngữ nghĩa**.
    - Tầng ngữ nghĩa **chưa phủ flowchart** (mới có state/erd/sequence) → với activity, phần dưới đây
@@ -134,7 +134,7 @@ Features có flows.md: !`for d in docs/*/srs/*-flows.md; do [ -f "$d" ] && echo 
 
 `docs/{feature}/srs/{feature}-flows.md` — **append 1 section** `## Flow: {title}` với mermaid `flowchart` inline. File dùng CHUNG với `/sequence`. Slim frontmatter (`type: srs-flows` / `feature` / `updated`).
 
-Hook tự ghi 1 dòng vào `docs/_shared/changelog.md`.
+Hook tự ghi 1 dòng vào `_workspace/changelog.md`.
 
 ## Mermaid syntax reference
 

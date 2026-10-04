@@ -6,7 +6,7 @@
 > **Chỉ dịch**, không thêm ý. Component nào Astryx không có Nên/Không nên thì ghi rõ là không có.
 > Trích ngày 27/09/2026: 99 component, 452 example.
 
-**Vai trò.** `docs/design.md` vẫn là nguồn chuẩn cho token, bố cục và luật vẽ. File này bổ sung phần
+**Vai trò.** `design/design.md` vẫn là nguồn chuẩn cho token, bố cục và luật vẽ. File này bổ sung phần
 *chọn component nào* và *dùng thế nào cho đúng*. Nếu hai file lệch nhau thì `design.md` thắng, và
 ghi chỗ lệch vào Known Gaps.
 
@@ -15,7 +15,7 @@ ghi chỗ lệch vào Known Gaps.
 2. Đọc mục của component đó. **Nên / Không nên** là tiêu chí loại: gặp một dòng *Không nên* khớp
    tình huống thì chuyển sang component được chỉ tới trong dòng đó.
 3. Chọn **Example** gần nhất làm mẫu dựng. Tên example giữ nguyên tiếng Anh để tra ngược mã nguồn.
-4. Dòng **Figma** cho biết component set để `instantiate` (tên trong `docs/figma-library-keys.json`).
+4. Dòng **Figma** cho biết component set để `instantiate` (tên trong `design/figma-library-keys.json`).
    Các prop code (`presentation`, `xstyle`, `renderCell`…) chỉ áp khi viết code; khi vẽ Figma, bỏ
    qua phần kỹ thuật và giữ ý về hành vi.
 
@@ -2851,7 +2851,7 @@ bảng và không có Block.
 - ❌ Bật mọi plugin cùng lúc. Chỉ thêm tính năng tình huống cần để giao diện tập trung.
 - ❌ Bỏ width ở cột nhiều chữ; không có proportional() tường minh thì chúng không có tối thiểu và có thể bị ép gần bằng 0 trên di động.
 
-**Quy tắc dự án** (ở `docs/design.md`, thắng file này nếu lệch): § Quy tắc bảng danh sách · § Sửa trong bảng
+**Quy tắc dự án** (ở `design/design.md`, thắng file này nếu lệch): § Quy tắc bảng danh sách · § Sửa trong bảng
 (sửa trong ô, báo lỗi ô) · § Phân trang danh sách · § Bộ lọc nâng cao · § Tuỳ chỉnh cột.
 
 **Examples**

@@ -596,7 +596,7 @@ def build_intro_section(vault: Path) -> str:
     sources = [
         ("Definitions / Glossary", "definitions.md"),
         ("Operating Environment", "operating-environment.md"),
-        ("Conventions", "conventions.md"),
+        ("Conventions", "../../design/ui-common/conventions.md"),
         ("System Overview", "system-overview.md"),
     ]
     parts = []
@@ -604,7 +604,7 @@ def build_intro_section(vault: Path) -> str:
         text = read_optional(shared / fname)
         if not text:
             continue
-        body = clean_shared_body(text, shared)
+        body = clean_shared_body(text, (shared / fname).parent)
         if not body:          # toàn placeholder → bỏ hẳn doc này khỏi preview
             continue
         # Glossary (definitions.md): list term → BẢNG cho dễ đọc.

@@ -2,7 +2,7 @@
 
 Tra ngược từ cột **Control type** của bảng Screen description (`# | Items | Control type | Data type |
 Description`) sang component ứng viên. Bảng này chỉ để **tìm ứng viên**: chọn cuối cùng theo mục của
-component trong `docs/components.md` (Nên/Không nên), tên set Figma theo `docs/figma-library-keys.json`.
+component trong `design/components.md` (Nên/Không nên), tên set Figma theo `design/figma-library-keys.json`.
 Lệch với `components.md` thì `components.md` thắng; lệch với `design.md` thì `design.md` thắng.
 
 ## Bảng tra

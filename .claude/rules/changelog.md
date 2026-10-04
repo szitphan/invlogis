@@ -6,7 +6,7 @@ paths:
 
 # Changelog Convention‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-> Lịch sử thay đổi của TOÀN BỘ vault sống ở **một file duy nhất**: `docs/_shared/changelog.md` (append-only, **bảng Markdown**). Doc KHÔNG mang `changelog:` trong frontmatter. Không còn routing table, không còn prefix, không còn echo 1 sự kiện vào nhiều file.
+> Lịch sử thay đổi của TOÀN BỘ vault sống ở **một file duy nhất**: `_workspace/changelog.md` (append-only, **bảng Markdown**). Doc KHÔNG mang `changelog:` trong frontmatter. Không còn routing table, không còn prefix, không còn echo 1 sự kiện vào nhiều file.
 
 ## Vì sao 1 log tập trung‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -66,9 +66,9 @@ Hook skip (không log):
 
 ## Đọc lịch sử
 
-* Mở thẳng `docs/_shared/changelog.md` trong Obsidian/GitHub — render thành bảng, sort/scan bằng mắt được.
-* Lịch sử 1 feature: `grep "docs/payment/" docs/_shared/changelog.md`
-* Lịch sử 1 file: `grep "docs/payment/srs/payment-spec.md" docs/_shared/changelog.md`
+* Mở thẳng `_workspace/changelog.md` trong Obsidian/GitHub — render thành bảng, sort/scan bằng mắt được.
+* Lịch sử 1 feature: `grep "docs/payment/" _workspace/changelog.md`
+* Lịch sử 1 file: `grep "docs/payment/srs/payment-spec.md" _workspace/changelog.md`
 * Stakeholder-facing: `/export` render section "Lịch sử thay đổi" từ log (lọc theo feature) khi cần — KHÔNG nhét lịch sử vào doc.
 * `/dashboard`, KG engine ingest log như event stream (cùng cách đọc `staleness.md`).
 

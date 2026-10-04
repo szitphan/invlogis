@@ -23,7 +23,7 @@ Output `docs/{feature}/srs/{feature}-userflow.md` là **nguồn chia flow DUY NH
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `docs/_shared/screen-patterns.md` (CMP) + `docs/_shared/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
+- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 * **HARD STOP sau khi flow được duyệt.** Skill này CHỈ dừng ở user flow — KHÔNG vẽ wireframe (đó là việc của `/wireframe-ascii` hoặc `/wireframe-html`, gọi riêng hoặc qua `/srs`).
 * **Hỏi khi không rõ — KHÔNG đoán.** Mọi điểm mơ hồ (luồng, điều kiện, giá trị cụ thể, case lỗi) phải hỏi user ngay trong chat (numbered list, 1 vòng/lần, chờ trả lời) trước khi đưa vào flow. Áp dụng `resolve-oqs` tinh thần: thà ghi Open Question còn hơn bịa.
 * **Upstream priority**: brainstorm > URD > PRD/SRS > tự suy luận. Soft gate — thiếu vẫn proceed bằng suy luận + clarify.
@@ -73,7 +73,7 @@ Features đã có userflow.md: !`for d in docs/*/srs/*-userflow.md; do [ -f "$d"
 docs/{feature}/srs/{feature}-userflow.md
 ```
 
-Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). Sự kiện ghi vào `docs/_shared/changelog.md` qua hook (set env note trước Write — không phụ thuộc spec.md).
+Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). Sự kiện ghi vào `_workspace/changelog.md` qua hook (set env note trước Write — không phụ thuộc spec.md).
 
 ## Runtime flow (skill chạy thế nào)
 
@@ -405,7 +405,7 @@ flow_hash: "{sha256 8 ký tự đầu của nội dung Mục 1 tại lúc user g
 (Trống nếu nghiệp vụ đã rõ hết.)
 ```
 
-> **KHÔNG có section Changelog trong file.** Lịch sử thay đổi sống ở `docs/_shared/changelog.md` tập trung (hook `auto-changelog.sh` là writer duy nhất) — set env `CLAUDE_CHANGELOG_NOTE` trước Write.
+> **KHÔNG có section Changelog trong file.** Lịch sử thay đổi sống ở `_workspace/changelog.md` tập trung (hook `auto-changelog.sh` là writer duy nhất) — set env `CLAUDE_CHANGELOG_NOTE` trước Write.
 
 ## References
 

@@ -294,7 +294,7 @@ components:
 > Tài liệu này được trích từ file Figma **Astryx Library (Community)**, gồm biến (variables),
 > text/effect style, 111 component set và 33 màn mẫu trên trang *Templates*. Đây là **nguồn chuẩn
 > duy nhất** cho mọi skill vẽ màn trong workspace (xem `.claude/rules/design-system.md`).
-> Bản CSS của cùng bộ token nằm ở `docs/design-tokens.css`.
+> Bản CSS của cùng bộ token nằm ở `design/design-tokens.css`.
 
 ## Overview
 
@@ -640,7 +640,7 @@ biến thể đầu bảng, **không** phải cỡ MD. Luôn đặt thuộc tín
 Tất cả là COMPONENT_SET, có biến thể theo trục. Tên thuộc tính đúng như Figma
 (để `setProperties` khi vẽ). **MD là cỡ mặc định** cho mọi control.
 
-> **Chọn component nào, dùng thế nào:** xem `docs/components.md`. File đó có Usage, Nên/Không nên và
+> **Chọn component nào, dùng thế nào:** xem `design/components.md`. File đó có Usage, Nên/Không nên và
 > Examples của 99 component, dịch từ Astryx và chia theo 11 section của astryx.atmeta.com. Mục này
 > chỉ giữ tên thuộc tính trong Figma.
 
@@ -764,7 +764,7 @@ Mọi field dùng chung giải phẫu **Field**: *nhãn* (`{typography.label}`, 
 Nguồn: `web-common-rules.md` SC-04 (phân trang) và 2.17 (nhóm dữ liệu). Component: **`Pagination`**
 (trang Navigation) · Variant = **Pages** / Count / Compact / Dots / None · Size = md / sm ·
 `Has Prev`, `Has Next`, `Show Page Size Selector` · slot `Pages`. Hướng dẫn chung của component:
-`docs/components.md` § Pagination.
+`design/components.md` § Pagination.
 
 **Theo SC-04 (đã chốt):**
 
@@ -1517,13 +1517,13 @@ SideNav → MobileNav; bảng nhiều cột → List/Item; form 2 cột → 1 c�
 
 ## Iteration Guide
 
-1. Sửa token: sửa **khối YAML đầu file này và `docs/design-tokens.css` cùng lượt**, qua approval gate.
+1. Sửa token: sửa **khối YAML đầu file này và `design/design-tokens.css` cùng lượt**, qua approval gate.
 2. Thêm mẫu bố cục: thêm dòng vào bảng *Mẫu bố cục* (mã P/M tiếp theo, node Figma, khi nào dùng).
 3. Thêm component: chỉ thêm khi Astryx (code `@astryxdesign/core`) đã có. Ghi đúng tên và trục biến thể của Figma.
 4. Thêm trạng thái nghiệp vụ: gán vào một nhóm trong *Ánh xạ trạng thái nghiệp vụ*, không tạo nhóm màu mới.
 5. Trong văn bản, luôn tham chiếu token dạng `{colors.x}`, `{typography.x}`, `{rounded.x}`, `{spacing.x}`.
 6. Known Gap mới / đóng: sửa dòng `KG-nn` ở § Known Gaps (ghi đủ chi tiết ngay tại đó); đóng thì chuyển sang "Đã quyết định" kèm ngày; mã KG không đánh số lại.
-7. Dự án mới: setup file Figma theo `docs/setup-figma.md` (thư viện hay bản sao) trước khi vẽ màn đầu tiên.
+7. Dự án mới: setup file Figma theo `design/setup-figma.md` (thư viện hay bản sao) trước khi vẽ màn đầu tiên.
 8. Thư viện Figma được agent đồng bộ theo code. Khi Figma đổi thì trích lại (reqwise `get_design_system_kit`, Figma MCP `get_variable_defs`) và cập nhật file này.
 
 ## Known Gaps
@@ -1548,7 +1548,7 @@ SideNav → MobileNav; bảng nhiều cột → List/Item; form 2 cột → 1 c�
 * **KG-19 (phần số điện thoại):** giữ `+84`.
 * **Alpha Dark + elevation:** lấy theo code Neutral (`neutralTheme.ts`): `neutral` và `border-default` trắng 10%, `overlay` đen 80%, `*-muted` alpha 24%; elevation đổi giá trị cả Light và Dark (thêm `elevation-dark`). Figma đã sửa theo (KG-28).
 * **KG-01, KG-05, KG-07, KG-28 (Figma):** gắn lại `Font Size/*`, `Line Height/*` cho 13 text style; `Radius/None` = 0; Toast gắn biến theo code (`background-inverted` / `error-inverted`); effect style Elevation theo code + bộ Dark qua biến `Effects/Elevation *`.
-* **KG-02:** quy trình áp lại sửa của dự án sau mỗi lần đồng bộ Astryx: `docs/setup-figma.md` § 5.1.
+* **KG-02:** quy trình áp lại sửa của dự án sau mỗi lần đồng bộ Astryx: `design/setup-figma.md` § 5.1.
 * **KG-22:** giá trị rỗng theo loại trường (Ghi chú trống · ID/Mã `N/A` · còn lại `-`).
 * **KG-09:** bề rộng khung/cột đo từ node Figma của mẫu, thay số ước lượng từ ảnh (xem Grid & Container).
 * **KG-18, KG-19, KG-24:** kiểm tra dữ liệu nhập, câu lỗi ngày/email, giới hạn ký tự (xem *Nhập liệu và kiểm tra*); rời trang có dữ liệu chưa lưu dùng confirm gốc của trình duyệt (xem Copy động). Theo `web-common-rules.md` 2.1–2.3, 2.7, 2.13.

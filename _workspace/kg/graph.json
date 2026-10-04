@@ -4,22 +4,22 @@
     "extractor_version": "1.0.0",
     "generated_at": "1970-01-01T00:00:00.000Z",
     "root": "docs",
-    "node_count": 54,
-    "edge_count": 93,
+    "node_count": 52,
+    "edge_count": 87,
     "coverage": {
-      "docs_total": 16,
-      "docs_parsed": 13,
+      "docs_total": 14,
+      "docs_parsed": 11,
       "unparsed_docs": [
         {
-          "path": "docs/ba-crosswalk.md",
+          "path": "design/ba-crosswalk.md",
           "reason": "no-frontmatter-and-no-known-shape"
         },
         {
-          "path": "docs/components.md",
+          "path": "design/components.md",
           "reason": "no-frontmatter-and-no-known-shape"
         },
         {
-          "path": "docs/setup-figma.md",
+          "path": "design/setup-figma.md",
           "reason": "no-frontmatter-and-no-known-shape"
         }
       ],
@@ -41,7 +41,7 @@
       "status": "draft",
       "updated": "2026-10-01",
       "source": {
-        "file": "docs/_shared/conventions.md",
+        "file": "design/ui-common/conventions.md",
         "line": 172
       },
       "props": {
@@ -60,7 +60,7 @@
       "status": "draft",
       "updated": "2026-10-01",
       "source": {
-        "file": "docs/_shared/conventions.md",
+        "file": "design/ui-common/conventions.md",
         "line": 173
       },
       "props": {
@@ -79,7 +79,7 @@
       "status": "draft",
       "updated": "2026-10-01",
       "source": {
-        "file": "docs/_shared/conventions.md",
+        "file": "design/ui-common/conventions.md",
         "line": 174
       },
       "props": {
@@ -98,7 +98,7 @@
       "status": "draft",
       "updated": "2026-10-01",
       "source": {
-        "file": "docs/_shared/conventions.md",
+        "file": "design/ui-common/conventions.md",
         "line": 175
       },
       "props": {
@@ -117,7 +117,7 @@
       "status": "draft",
       "updated": "2026-10-01",
       "source": {
-        "file": "docs/_shared/conventions.md",
+        "file": "design/ui-common/conventions.md",
         "line": 176
       },
       "props": {
@@ -136,7 +136,7 @@
       "status": "draft",
       "updated": "2026-10-01",
       "source": {
-        "file": "docs/_shared/conventions.md",
+        "file": "design/ui-common/conventions.md",
         "line": 177
       },
       "props": {
@@ -155,7 +155,7 @@
       "status": "draft",
       "updated": "2026-10-01",
       "source": {
-        "file": "docs/_shared/conventions.md",
+        "file": "design/ui-common/conventions.md",
         "line": 178
       },
       "props": {
@@ -174,7 +174,7 @@
       "status": "draft",
       "updated": "2026-10-01",
       "source": {
-        "file": "docs/_shared/conventions.md",
+        "file": "design/ui-common/conventions.md",
         "line": 179
       },
       "props": {
@@ -193,7 +193,7 @@
       "status": "draft",
       "updated": "2026-10-01",
       "source": {
-        "file": "docs/_shared/conventions.md",
+        "file": "design/ui-common/conventions.md",
         "line": 180
       },
       "props": {
@@ -212,7 +212,7 @@
       "status": "draft",
       "updated": "2026-10-01",
       "source": {
-        "file": "docs/_shared/conventions.md",
+        "file": "design/ui-common/conventions.md",
         "line": 181
       },
       "props": {
@@ -220,6 +220,102 @@
         "khi_nao": "Phiên đăng nhập hết hạn",
         "cau_hien_thi": "\"Phiên làm việc đã hết hạn. Đăng nhập lại.\"",
         "quy_tac": "GR-15 Loại 3"
+      }
+    },
+    {
+      "key": "design/ba-crosswalk.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Crosswalk: Control type (BA) → component Astryx",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "design/ba-crosswalk.md",
+        "line": 1
+      },
+      "props": {
+        "doc_type": "unknown"
+      }
+    },
+    {
+      "key": "design/components.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Components: Hướng dẫn chọn và dùng (Astryx)",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "design/components.md",
+        "line": 1
+      },
+      "props": {
+        "doc_type": "unknown"
+      }
+    },
+    {
+      "key": "design/design.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Astryx — Design System",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "design/design.md",
+        "line": 292
+      },
+      "props": {
+        "doc_type": "unknown"
+      }
+    },
+    {
+      "key": "design/setup-figma.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Setup Figma cho dự án mới: dùng design system Astryx",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "design/setup-figma.md",
+        "line": 1
+      },
+      "props": {
+        "doc_type": "unknown"
+      }
+    },
+    {
+      "key": "design/ui-common/conventions.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "UI Common Rules (GR) + lỗi dùng chung (E-common)",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 11
+      },
+      "props": {
+        "doc_type": "shared-conventions"
+      }
+    },
+    {
+      "key": "design/ui-common/screen-patterns.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "UI Common Components (CMP)",
+      "status": "draft",
+      "updated": "2026-10-01",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 12
+      },
+      "props": {
+        "doc_type": "shared-screen-patterns"
       }
     },
     {
@@ -303,38 +399,6 @@
       }
     },
     {
-      "key": "docs/_shared/backlog.md",
-      "type": "doc",
-      "subtype": null,
-      "feature": null,
-      "title": "Backlog",
-      "status": "draft",
-      "updated": "2026-10-02",
-      "source": {
-        "file": "docs/_shared/backlog.md",
-        "line": 9
-      },
-      "props": {
-        "doc_type": "backlog"
-      }
-    },
-    {
-      "key": "docs/_shared/conventions.md",
-      "type": "doc",
-      "subtype": null,
-      "feature": null,
-      "title": "UI Common Rules (GR) + lỗi dùng chung (E-common)",
-      "status": "draft",
-      "updated": "2026-10-01",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 11
-      },
-      "props": {
-        "doc_type": "shared-conventions"
-      }
-    },
-    {
       "key": "docs/_shared/definitions.md",
       "type": "doc",
       "subtype": null,
@@ -383,22 +447,6 @@
       }
     },
     {
-      "key": "docs/_shared/screen-patterns.md",
-      "type": "doc",
-      "subtype": null,
-      "feature": null,
-      "title": "UI Common Components (CMP)",
-      "status": "draft",
-      "updated": "2026-10-01",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 12
-      },
-      "props": {
-        "doc_type": "shared-screen-patterns"
-      }
-    },
-    {
       "key": "docs/_shared/system-overview.md",
       "type": "doc",
       "subtype": null,
@@ -412,90 +460,6 @@
       },
       "props": {
         "doc_type": "shared-system-overview"
-      }
-    },
-    {
-      "key": "docs/ba-crosswalk.md",
-      "type": "doc",
-      "subtype": null,
-      "feature": null,
-      "title": "Crosswalk: Control type (BA) → component Astryx",
-      "status": null,
-      "updated": null,
-      "source": {
-        "file": "docs/ba-crosswalk.md",
-        "line": 1
-      },
-      "props": {
-        "doc_type": "unknown"
-      }
-    },
-    {
-      "key": "docs/components.md",
-      "type": "doc",
-      "subtype": null,
-      "feature": null,
-      "title": "Components: Hướng dẫn chọn và dùng (Astryx)",
-      "status": null,
-      "updated": null,
-      "source": {
-        "file": "docs/components.md",
-        "line": 1
-      },
-      "props": {
-        "doc_type": "unknown"
-      }
-    },
-    {
-      "key": "docs/design.md",
-      "type": "doc",
-      "subtype": null,
-      "feature": null,
-      "title": "Astryx — Design System",
-      "status": null,
-      "updated": null,
-      "source": {
-        "file": "docs/design.md",
-        "line": 292
-      },
-      "props": {
-        "doc_type": "unknown"
-      }
-    },
-    {
-      "key": "docs/pipeline.md",
-      "type": "doc",
-      "subtype": null,
-      "feature": null,
-      "title": "Pipeline: từ con số 0 → BA → Design",
-      "status": "draft",
-      "updated": "2026-10-04",
-      "source": {
-        "file": "docs/pipeline.md",
-        "line": 13
-      },
-      "props": {
-        "doc_type": "pipeline",
-        "authors": [
-          "szitphan"
-        ],
-        "last_activity": "2026-10-04"
-      }
-    },
-    {
-      "key": "docs/setup-figma.md",
-      "type": "doc",
-      "subtype": null,
-      "feature": null,
-      "title": "Setup Figma cho dự án mới: dùng design system Astryx",
-      "status": null,
-      "updated": null,
-      "source": {
-        "file": "docs/setup-figma.md",
-        "line": 1
-      },
-      "props": {
-        "doc_type": "unknown"
       }
     },
     {
@@ -977,8 +941,278 @@
   ],
   "edges": [
     {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-001",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 172
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-002",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 173
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-003",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 174
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-004",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 175
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-005",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 176
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-006",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 177
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-007",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 178
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-008",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 179
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-009",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 180
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-010",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 181
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "design/design.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 6
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "design/ui-common/screen-patterns.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "docs-input/ui-common/web/web-common-rules.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 8
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "E-common-006",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 228
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "E-common-007",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 229
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "E-common-008",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 58
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "E-common-009",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 58
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "E-common-010",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 58
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "design/components.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "design/design.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 6
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "design/ui-common/conventions.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 8
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "design/ui-common/images/cmp-01.png",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 52
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "design/ui-common/images/cmp-02.png",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 71
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "design/ui-common/images/cmp-03.png",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 104
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "design/ui-common/images/cmp-04.png",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 123
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "design/ui-common/images/cmp-08.png",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 188
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "docs-input/ui-common/web/web-common-rules.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 9
+      }
+    },
+    {
       "from": "docs/_research/2026-10-02-container-deadline-alerts.md",
-      "to": "docs/_research/docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md",
+      "to": "docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
@@ -988,7 +1222,7 @@
     },
     {
       "from": "docs/_research/2026-10-02-container-deadline-alerts.md",
-      "to": "docs/_research/docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md",
+      "to": "docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
@@ -998,7 +1232,7 @@
     },
     {
       "from": "docs/_research/2026-10-02-container-deadline-alerts.md",
-      "to": "docs/_research/docs-input/sop/sop-dieu-phoi.md",
+      "to": "docs-input/sop/sop-dieu-phoi.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
@@ -1012,7 +1246,7 @@
       "type": "STALE_IMPACTS",
       "provenance": "declared",
       "source": {
-        "file": "docs/_shared/staleness.md",
+        "file": "_workspace/staleness.md",
         "line": 9
       },
       "props": {
@@ -1026,7 +1260,7 @@
       "type": "STALE_IMPACTS",
       "provenance": "declared",
       "source": {
-        "file": "docs/_shared/staleness.md",
+        "file": "_workspace/staleness.md",
         "line": 8
       },
       "props": {
@@ -1040,12 +1274,42 @@
       "type": "STALE_IMPACTS",
       "provenance": "declared",
       "source": {
-        "file": "docs/_shared/staleness.md",
+        "file": "_workspace/staleness.md",
         "line": 7
       },
       "props": {
         "date": "2026-10-02",
         "reason": "upstream changed: docs/research/2026-10-02-container-deadline-alerts.md on 2026-10-02 by manual"
+      }
+    },
+    {
+      "from": "docs/_research/2026-10-02-electronic-delivery-record.md",
+      "to": "docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_research/2026-10-02-electronic-delivery-record.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "docs/_research/2026-10-02-electronic-delivery-record.md",
+      "to": "docs-input/sop/sop-ban-do-kien-thuc.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_research/2026-10-02-electronic-delivery-record.md",
+        "line": 9
+      }
+    },
+    {
+      "from": "docs/_research/2026-10-02-electronic-delivery-record.md",
+      "to": "docs-input/sop/sop-dieu-phoi.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_research/2026-10-02-electronic-delivery-record.md",
+        "line": 8
       }
     },
     {
@@ -1059,32 +1323,42 @@
       }
     },
     {
-      "from": "docs/_research/2026-10-02-electronic-delivery-record.md",
-      "to": "docs/_research/docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md",
+      "from": "docs/_research/2026-10-02-eport-integration.md",
+      "to": "docs-input/danh-muc/danh-muc-dia-diem-hang-tau.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
-        "file": "docs/_research/2026-10-02-electronic-delivery-record.md",
-        "line": 7
-      }
-    },
-    {
-      "from": "docs/_research/2026-10-02-electronic-delivery-record.md",
-      "to": "docs/_research/docs-input/sop/sop-ban-do-kien-thuc.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_research/2026-10-02-electronic-delivery-record.md",
+        "file": "docs/_research/2026-10-02-eport-integration.md",
         "line": 9
       }
     },
     {
-      "from": "docs/_research/2026-10-02-electronic-delivery-record.md",
-      "to": "docs/_research/docs-input/sop/sop-dieu-phoi.md",
+      "from": "docs/_research/2026-10-02-eport-integration.md",
+      "to": "docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
-        "file": "docs/_research/2026-10-02-electronic-delivery-record.md",
+        "file": "docs/_research/2026-10-02-eport-integration.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "docs/_research/2026-10-02-eport-integration.md",
+      "to": "docs-input/sop/sop-ban-do-kien-thuc.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_research/2026-10-02-eport-integration.md",
+        "line": 10
+      }
+    },
+    {
+      "from": "docs/_research/2026-10-02-eport-integration.md",
+      "to": "docs-input/sop/sop-dieu-phoi.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_research/2026-10-02-eport-integration.md",
         "line": 8
       }
     },
@@ -1109,42 +1383,32 @@
       }
     },
     {
-      "from": "docs/_research/2026-10-02-eport-integration.md",
-      "to": "docs/_research/docs-input/danh-muc/danh-muc-dia-diem-hang-tau.md",
+      "from": "docs/_research/2026-10-02-field-document-reading.md",
+      "to": "docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
-        "file": "docs/_research/2026-10-02-eport-integration.md",
-        "line": 9
-      }
-    },
-    {
-      "from": "docs/_research/2026-10-02-eport-integration.md",
-      "to": "docs/_research/docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_research/2026-10-02-eport-integration.md",
+        "file": "docs/_research/2026-10-02-field-document-reading.md",
         "line": 7
       }
     },
     {
-      "from": "docs/_research/2026-10-02-eport-integration.md",
-      "to": "docs/_research/docs-input/sop/sop-ban-do-kien-thuc.md",
+      "from": "docs/_research/2026-10-02-field-document-reading.md",
+      "to": "docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
-        "file": "docs/_research/2026-10-02-eport-integration.md",
-        "line": 10
+        "file": "docs/_research/2026-10-02-field-document-reading.md",
+        "line": 9
       }
     },
     {
-      "from": "docs/_research/2026-10-02-eport-integration.md",
-      "to": "docs/_research/docs-input/sop/sop-dieu-phoi.md",
+      "from": "docs/_research/2026-10-02-field-document-reading.md",
+      "to": "docs-input/sop/sop-dieu-phoi.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
-        "file": "docs/_research/2026-10-02-eport-integration.md",
+        "file": "docs/_research/2026-10-02-field-document-reading.md",
         "line": 8
       }
     },
@@ -1176,176 +1440,6 @@
       "source": {
         "file": "docs/_research/2026-10-02-field-document-reading.md",
         "line": 11
-      }
-    },
-    {
-      "from": "docs/_research/2026-10-02-field-document-reading.md",
-      "to": "docs/_research/docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_research/2026-10-02-field-document-reading.md",
-        "line": 7
-      }
-    },
-    {
-      "from": "docs/_research/2026-10-02-field-document-reading.md",
-      "to": "docs/_research/docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_research/2026-10-02-field-document-reading.md",
-        "line": 9
-      }
-    },
-    {
-      "from": "docs/_research/2026-10-02-field-document-reading.md",
-      "to": "docs/_research/docs-input/sop/sop-dieu-phoi.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_research/2026-10-02-field-document-reading.md",
-        "line": 8
-      }
-    },
-    {
-      "from": "docs/_shared/backlog.md",
-      "to": "docs/_shared/docs-input/README.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_shared/backlog.md",
-        "line": 6
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "E-common-001",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 172
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "E-common-002",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 173
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "E-common-003",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 174
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "E-common-004",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 175
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "E-common-005",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 176
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "E-common-006",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 177
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "E-common-007",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 178
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "E-common-008",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 179
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "E-common-009",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 180
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "E-common-010",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 181
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "docs/_shared/docs-input/ui-common/web/web-common-rules.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 8
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "docs/_shared/screen-patterns.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 7
-      }
-    },
-    {
-      "from": "docs/_shared/conventions.md",
-      "to": "docs/design.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_shared/conventions.md",
-        "line": 6
       }
     },
     {
@@ -1630,7 +1724,7 @@
     },
     {
       "from": "docs/_shared/definitions.md",
-      "to": "docs/_shared/docs-input/srs-cu/lg-srs-export.md",
+      "to": "docs-input/srs-cu/lg-srs-export.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
@@ -1650,7 +1744,17 @@
     },
     {
       "from": "docs/_shared/operating-environment.md",
-      "to": "docs/_shared/docs-input/srs-cu/lg-srs-export.md",
+      "to": "design/design.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/operating-environment.md",
+        "line": 8
+      }
+    },
+    {
+      "from": "docs/_shared/operating-environment.md",
+      "to": "docs-input/srs-cu/lg-srs-export.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
@@ -1669,13 +1773,13 @@
       }
     },
     {
-      "from": "docs/_shared/operating-environment.md",
-      "to": "docs/design.md",
+      "from": "docs/_shared/project-profile.md",
+      "to": "docs-input/srs-cu/lg-srs-export.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
-        "file": "docs/_shared/operating-environment.md",
-        "line": 8
+        "file": "docs/_shared/project-profile.md",
+        "line": 6
       }
     },
     {
@@ -1686,16 +1790,6 @@
       "source": {
         "file": "docs/_shared/project-profile.md",
         "line": 8
-      }
-    },
-    {
-      "from": "docs/_shared/project-profile.md",
-      "to": "docs/_shared/docs-input/srs-cu/lg-srs-export.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_shared/project-profile.md",
-        "line": 6
       }
     },
     {
@@ -1719,203 +1813,13 @@
       }
     },
     {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "E-common-006",
-      "type": "REFERENCES",
-      "provenance": "heuristic",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 228
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "E-common-007",
-      "type": "REFERENCES",
-      "provenance": "heuristic",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 229
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "E-common-008",
-      "type": "REFERENCES",
-      "provenance": "heuristic",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 58
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "E-common-009",
-      "type": "REFERENCES",
-      "provenance": "heuristic",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 58
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "E-common-010",
-      "type": "REFERENCES",
-      "provenance": "heuristic",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 58
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "docs/_shared/conventions.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 8
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "docs/_shared/docs-input/ui-common/web/web-common-rules.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 9
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "docs/_shared/images/cmp-01.png",
-      "type": "REFERENCES",
-      "provenance": "heuristic",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 52
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "docs/_shared/images/cmp-02.png",
-      "type": "REFERENCES",
-      "provenance": "heuristic",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 71
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "docs/_shared/images/cmp-03.png",
-      "type": "REFERENCES",
-      "provenance": "heuristic",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 104
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "docs/_shared/images/cmp-04.png",
-      "type": "REFERENCES",
-      "provenance": "heuristic",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 123
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "docs/_shared/images/cmp-08.png",
-      "type": "REFERENCES",
-      "provenance": "heuristic",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 188
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "docs/components.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 7
-      }
-    },
-    {
-      "from": "docs/_shared/screen-patterns.md",
-      "to": "docs/design.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/_shared/screen-patterns.md",
-        "line": 6
-      }
-    },
-    {
       "from": "docs/_shared/system-overview.md",
-      "to": "docs/_shared/docs-input/srs-cu/lg-srs-export.md",
+      "to": "docs-input/srs-cu/lg-srs-export.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/system-overview.md",
         "line": 6
-      }
-    },
-    {
-      "from": "docs/pipeline.md",
-      "to": "docs/CLAUDE.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/pipeline.md",
-        "line": 6
-      }
-    },
-    {
-      "from": "docs/pipeline.md",
-      "to": "docs/_shared/backlog.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/pipeline.md",
-        "line": 9
-      }
-    },
-    {
-      "from": "docs/pipeline.md",
-      "to": "docs/design.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/pipeline.md",
-        "line": 7
-      }
-    },
-    {
-      "from": "docs/pipeline.md",
-      "to": "docs/docs-input/README.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/pipeline.md",
-        "line": 10
-      }
-    },
-    {
-      "from": "docs/pipeline.md",
-      "to": "docs/setup-figma.md",
-      "type": "REFERENCES",
-      "provenance": "declared",
-      "source": {
-        "file": "docs/pipeline.md",
-        "line": 8
       }
     }
   ]

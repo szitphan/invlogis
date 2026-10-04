@@ -3,8 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 
-const DEFAULT_GRAPH = 'docs/_shared/kg/graph.json';
-const DEFAULT_OUT = 'docs/_shared/kg/kg-viewer.html';
+const DEFAULT_GRAPH = '_workspace/kg/graph.json';
+const DEFAULT_OUT = '_workspace/kg/kg-viewer.html';
 
 function fail(message) {
   console.error('KG-ERROR: ' + message + ' — chạy kg-build.mjs trước');
@@ -24,7 +24,7 @@ function parseArgs(argv) {
       options[arg.slice(2)] = value;
       i += 1;
     } else if (arg === '--help' || arg === '-h') {
-      console.log('node kg-viewer.mjs [--graph docs/_shared/kg/graph.json] [--out docs/_shared/kg/kg-viewer.html]');
+      console.log('node kg-viewer.mjs [--graph _workspace/kg/graph.json] [--out _workspace/kg/kg-viewer.html]');
       process.exit(0);
     } else {
       fail('tham số không hợp lệ: ' + arg);

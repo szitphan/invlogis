@@ -32,7 +32,7 @@ __Thang fidelity 3 bậc:__ `/wireframe-ascii` (lo-fi chat-native) → `/wirefra
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `docs/_shared/screen-patterns.md` (CMP) + `docs/_shared/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
+- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 * **Cần `srs/{feature}-userflow.md` trước.** Chưa tồn tại/chưa duyệt → skill tự gọi `/user-flow <feature>` (Phase A), KHÔNG tự chia flow riêng.
 * __Confirm device size với user TRƯỚC khi vẽ (Phase A bước 4)__ — Mobile 375 / Tablet 768 / Desktop 1920 / Responsive. Đề xuất sẵn từ `primary_device`/design.md nhưng KHÔNG tự chốt im lặng (device là quyết định thiết kế).
 * __L1 plan preview__ trước khi write bất kỳ file.
@@ -102,7 +102,7 @@ Sau generate: cập nhật `docs/{feature}/ascii-wireframe/{feature}-wireframe-i
    * Chưa tồn tại hoặc chưa duyệt → **tự động gọi `/user-flow <feature>`** trước khi tiếp tục. Skill này KHÔNG tự chia flow riêng.
 3. Nếu `--flow <slug>`: chỉ xử lý flow đó (phải khớp 1 flow-slug trong userflow.md Mục 3).
 4. __Confirm device size với user (BẮT BUỘC — KHÔNG tự chốt im lặng).__ Device quyết định bề rộng khung → là quyết định thiết kế, phải để user chốt trước khi vẽ:
-   * Đề xuất sẵn 1 device từ nguồn (ưu tiên `userflow.md` `primary_device`; thiếu thì suy từ `docs/design.md` Breakpoints/Max-width) để user chỉ cần xác nhận.
+   * Đề xuất sẵn 1 device từ nguồn (ưu tiên `userflow.md` `primary_device`; thiếu thì suy từ `design/design.md` Breakpoints/Max-width) để user chỉ cần xác nhận.
    * Hỏi qua AskUserQuestion: __Mobile 375 / Tablet 768 / Desktop 1920 / Responsive (nhiều breakpoint)__ — option đề xuất để đầu + note "(đề xuất — từ {nguồn})".
    * User chọn khác → dùng lựa chọn của user. Nếu userflow chưa có `primary_device` → sau khi user chốt, gợi ý ghi ngược vào userflow frontmatter (để lần sau + `/prototype-html` dùng chung).
    * KHÔNG suy 1 device rồi vẽ luôn không hỏi — kể cả khi design.md rõ ràng.
@@ -292,7 +292,7 @@ Nếu `docs/{feature}/ascii-wireframe/{feature}-wireframe-index.md` tồn tại 
 
 ### Phase I — Activity log
 
-Trước Write set env `CLAUDE_SKILL_NAME=/wireframe-html` + `CLAUDE_CHANGELOG_AUTHOR={@author}` + `CLAUDE_CHANGELOG_NOTE=[all] generated {N} flows: {slug-1}, {slug-2}, ...` (≤80 ký tự). Hook ghép cả dòng vào `docs/_shared/changelog.md`:
+Trước Write set env `CLAUDE_SKILL_NAME=/wireframe-html` + `CLAUDE_CHANGELOG_AUTHOR={@author}` + `CLAUDE_CHANGELOG_NOTE=[all] generated {N} flows: {slug-1}, {slug-2}, ...` (≤80 ký tự). Hook ghép cả dòng vào `_workspace/changelog.md`:
 
 ```
 {date} | /wireframe-html | {@author} | {file-path} | [all] generated {N} flows: ...

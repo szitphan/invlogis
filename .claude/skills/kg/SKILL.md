@@ -11,16 +11,16 @@ argument-hint: "build [--verify] | verify | viewer | explore <ID> | impact <ID> 
 
 ## Goal‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-Engine deterministic biên dịch toàn vault → `docs/_shared/kg/graph.json` (nodes + typed edges + provenance + coverage), kèm CLI query trả markdown gọn cho agent/skill dùng. Vai trò trong pipeline: **graph THU HẸP tập file phải Read — KHÔNG THAY việc đọc prose** (contract Mục 3.4bis, `docs/reports/2026-07-13-knowledge-graph-plan.md`).
+Engine deterministic biên dịch toàn vault → `_workspace/kg/graph.json` (nodes + typed edges + provenance + coverage), kèm CLI query trả markdown gọn cho agent/skill dùng. Vai trò trong pipeline: **graph THU HẸP tập file phải Read — KHÔNG THAY việc đọc prose** (contract Mục 3.4bis, `docs/reports/2026-07-13-knowledge-graph-plan.md`).
 
 Engine ở `.claude/skills/kg/engine/` (zero-dep, Node 18+): `kg-build.mjs` + `kg-query.mjs` + `kg-viewer.mjs` + `SCHEMA.md` (contract graph.json) + **`kg-history.mjs` + `SCHEMA-history.md`** (temporal — xem dưới) + **`kg-selftest.mjs` + `test-fixtures/`** — bộ regression test trên feature giả `smart-notification` viết 100% format canonical (137 golden assertions: node/edge từng loại, gap cố ý coverage phải bắt, dangling cố ý verify phải báo, temporal T1/T2/T3 gồm nhánh git thật). Sửa engine/template xong PHẢI chạy: `node .claude/skills/kg/engine/kg-selftest.mjs`.
 
-**Temporal (lịch sử tài liệu nghiệp vụ) — TÁCH file riêng, opt-in.** `kg-history.mjs` ghi `docs/_shared/kg/graph-history.json` RIÊNG (KHÔNG nhập vào graph.json chính) để luồng current-state (`/gap`/`/cr`/`/srs`...) không đọc thêm dữ liệu quá khứ. 3 tầng: T1 `change_event`+`CHANGED` (từ changelog.md — ai/khi/skill/note đổi doc), T2 `change_request`+`AMENDS` (CR nào sửa requirement nào + before/after preview), T3 `revision`+`REVISION_OF`/`SUPERSEDES` (chuỗi bản requirement theo thời gian, git-blob-ref — as-of query). Query `history`/`asof` chỉ đọc file này, lazy-rebuild khi cũ hơn graph.json. Contract: `SCHEMA-history.md`.
+**Temporal (lịch sử tài liệu nghiệp vụ) — TÁCH file riêng, opt-in.** `kg-history.mjs` ghi `_workspace/kg/graph-history.json` RIÊNG (KHÔNG nhập vào graph.json chính) để luồng current-state (`/gap`/`/cr`/`/srs`...) không đọc thêm dữ liệu quá khứ. 3 tầng: T1 `change_event`+`CHANGED` (từ changelog.md — ai/khi/skill/note đổi doc), T2 `change_request`+`AMENDS` (CR nào sửa requirement nào + before/after preview), T3 `revision`+`REVISION_OF`/`SUPERSEDES` (chuỗi bản requirement theo thời gian, git-blob-ref — as-of query). Query `history`/`asof` chỉ đọc file này, lazy-rebuild khi cũ hơn graph.json. Contract: `SCHEMA-history.md`.
 
 ## Commands‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 ```bash
-# Build (ghi docs/_shared/kg/graph.json — file DERIVED, không sửa tay)
+# Build (ghi _workspace/kg/graph.json — file DERIVED, không sửa tay)
 node .claude/skills/kg/engine/kg-build.mjs [--verify] [--strict] [--quiet] [--no-timestamp]
 
 # Query (bình thường chỉ đọc graph.json; graph dirty/vắng → tự lazy-rebuild từ docs rồi trả lời)
@@ -42,7 +42,7 @@ node .claude/skills/kg/engine/kg-query.mjs cypher > kg.cypher                   
 
 # Temporal build (ghi graph-history.json RIÊNG — opt-in, KHÔNG đụng graph.json chính)
 node .claude/skills/kg/engine/kg-history.mjs [--no-timestamp] [--quiet]             # history/asof tự lazy-rebuild khi cũ hơn graph.json
-node .claude/skills/kg/engine/kg-viewer.mjs                                         # sinh docs/_shared/kg/kg-viewer.html — XEM GRAPH DẠNG HÌNH (tự chứa, double-click mở)
+node .claude/skills/kg/engine/kg-viewer.mjs                                         # sinh _workspace/kg/kg-viewer.html — XEM GRAPH DẠNG HÌNH (tự chứa, double-click mở)
 ```
 
 ## Approach‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
@@ -57,8 +57,8 @@ node .claude/skills/kg/engine/kg-viewer.mjs                                     
 
 | File | Sinh bởi | Ghi chú |
 |---|---|---|
-| `docs/_shared/kg/graph.json` | `kg-build.mjs` | Nodes + typed edges + provenance + coverage |
-| `docs/_shared/kg/graph-history.json` | `kg-history.mjs` | Temporal (opt-in) — TÁCH riêng, luồng current-state không đọc |
+| `_workspace/kg/graph.json` | `kg-build.mjs` | Nodes + typed edges + provenance + coverage |
+| `_workspace/kg/graph-history.json` | `kg-history.mjs` | Temporal (opt-in) — TÁCH riêng, luồng current-state không đọc |
 | `kg-viewer.html` | `kg-viewer.mjs` | Viewer tự chứa, xem graph dạng hình |
 | `kg.cypher` | `kg-query.mjs cypher` | Export Neo4j (chỉ khi user yêu cầu) |
 
@@ -73,7 +73,7 @@ Skill **KHÔNG sửa file `.md` nào trong vault** — chỉ đọc để build 
 - `⚠ còn N mục — chạy với --all` xuất hiện → consumer BẮT BUỘC chạy lại với `--all` lấy đủ danh sách trước khi Read.
 - `KG-ERROR` (exit 2) → graph không dùng được: quay về đọc trực tiếp (Read/grep), KHÔNG suy diễn từ kết quả một phần.
 - `graph.json` là DERIVED — không sửa tay, không review nội dung nó như doc; xóa là build lại được.
-- Engine KHÔNG ghi/đổi bất kỳ doc nào trong `docs/` ngoài `docs/_shared/kg/graph.json`.
+- Engine KHÔNG ghi/đổi bất kỳ doc nào trong `docs/` ngoài `_workspace/kg/graph.json`.
 
 ### Pitfalls — easy to get wrong
 

@@ -50,7 +50,7 @@ if [ -d "$PROJECT_PATH/docs/cr" ]; then
 fi
 
 # Stale propagations (v2.0 Phase 6)
-STALE_LOG="$PROJECT_PATH/docs/_shared/staleness.md"
+STALE_LOG="$PROJECT_PATH/_workspace/staleness.md"
 if [ -f "$STALE_LOG" ]; then
     CUTOFF=$(date -v-7d +%Y-%m-%d 2>/dev/null || date -d "7 days ago" +%Y-%m-%d 2>/dev/null || echo "1970-01-01")
     # Bảng Markdown: | ngày | upstream | downstream | lý do | → ngày là field 2

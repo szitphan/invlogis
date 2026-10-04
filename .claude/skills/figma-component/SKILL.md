@@ -1,6 +1,6 @@
 ---
 name: figma-component
-description: Tạo hoặc cập nhật MỘT component bất kỳ của dự án trên Figma (vd Notification Center, Bộ lọc nâng cao, Tuỳ chỉnh cột, thẻ KPI, dòng lịch sử…) — ghép từ instance thật của thư viện đang có, gắn token của dự án, có biến thể + thuộc tính dùng lại được, đủ trạng thái, Desktop/Mobile, kiểm chữ dài — theo spec trong docs/design.md. Dùng khi ai đó nói "tạo component", "dựng component <tên>", "biến mẫu ghép này thành component", "thêm biến thể/trạng thái cho component", "làm lại component cho file mới". Không dùng để dựng cả design system (dùng /figma-design-system) hay vẽ màn (dùng /figma-screen).
+description: Tạo hoặc cập nhật MỘT component bất kỳ của dự án trên Figma (vd Notification Center, Bộ lọc nâng cao, Tuỳ chỉnh cột, thẻ KPI, dòng lịch sử…) — ghép từ instance thật của thư viện đang có, gắn token của dự án, có biến thể + thuộc tính dùng lại được, đủ trạng thái, Desktop/Mobile, kiểm chữ dài — theo spec trong design/design.md. Dùng khi ai đó nói "tạo component", "dựng component <tên>", "biến mẫu ghép này thành component", "thêm biến thể/trạng thái cho component", "làm lại component cho file mới". Không dùng để dựng cả design system (dùng /figma-design-system) hay vẽ màn (dùng /figma-screen).
 allowed-tools: Read, Glob, Grep, Edit, AskUserQuestion, mcp__claude_ai_Figma__use_figma, mcp__claude_ai_Figma__get_figma_skill, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__get_libraries, mcp__claude_ai_Figma__search_design_system, mcp__reqwise-figma__figma_status
 user-invocable: true
 argument-hint: "<tên component> [link file Figma] [desktop|mobile|cả hai] [@spec/srs]"
@@ -25,13 +25,13 @@ thể nào, cái gì là thuộc tính — quyết sai thì người dùng phả
 
 ## Luật quyết định thành bại
 
-* **`docs/design.md` là nguồn duy nhất.** Đọc lại từ file mỗi lần chạy, **theo mục** (Bước 1.2).
+* **`design/design.md` là nguồn duy nhất.** Đọc lại từ file mỗi lần chạy, **theo mục** (Bước 1.2).
   Skill này không chứa giá trị nào của dự án (màu, câu mẫu, bề rộng, tên trạng thái…).
 * **Không có spec thì không dựng.** Component phải có mục spec trong `design.md` (thường ở
   § Components - <dự án>). Chưa có → Bước 2 phỏng vấn để viết spec, trình user duyệt, ghi vào
   `design.md` (approval gate), rồi mới dựng.
 * **Không tạo component khi thư viện đã có cái tương đương** (Don't của `design.md`). Kiểm thư viện
-  Figma + `docs/components.md` trước; nghi ngờ thì kiểm code thư viện (vd repo Astryx).
+  Figma + `design/components.md` trước; nghi ngờ thì kiểm code thư viện (vd repo Astryx).
 * Tôn trọng quyết định "mẫu ghép" hay "component thật" đã ghi trong `design.md`. Muốn đổi → hỏi user
   và sửa quy định trong `design.md` cùng lượt.
 
@@ -39,7 +39,7 @@ thể nào, cái gì là thuộc tính — quyết sai thì người dùng phả
 
 1. Nạp luật Plugin API: `get_figma_skill("skill://figma/figma-use/SKILL.md")` và
    `skill://figma/figma-generate-library/SKILL.md` (bắt buộc trước mọi `use_figma`).
-2. Đọc `docs/design.md` theo mục (cách đọc: `.claude/rules/design-system.md` § Nguồn duy nhất):
+2. Đọc `design/design.md` theo mục (cách đọc: `.claude/rules/design-system.md` § Nguồn duy nhất):
    * `Grep -n "^## \|^### "` lấy mục lục; Read từng mục bằng offset/limit.
    * **Luôn đọc:** Typography › Principles, Tên trong Figma, Do's and Don'ts, Iteration Guide,
      Known Gaps.
@@ -51,7 +51,7 @@ thể nào, cái gì là thuộc tính — quyết sai thì người dùng phả
      đề xuất bố cục ví dụ *Trong ngữ cảnh*.
    * Không đọc Colors, Typography Hierarchy, Elevation, Shapes: giá trị gắn qua biến/style Figma theo
      tên. Đoạn đã đọc có "xem §…" → đọc luôn đoạn đó.
-3. `docs/components.md`: đọc mục của **từng component thành phần** định dùng (Usage, Nên/Không nên).
+3. `design/components.md`: đọc mục của **từng component thành phần** định dùng (Usage, Nên/Không nên).
 4. Nguồn nghiệp vụ (Glob): `srs/*`, file user tag `@`, tài liệu quy tắc chung của dự án được
    `design.md` dẫn tới. Có nguồn thì dẫn xuất nội dung mẫu từ đó.
 
@@ -103,7 +103,7 @@ Chia component theo **nguyên tử → phân tử → khối chứa** (dựng t�
   `getLocalTextStylesAsync()`, `getLocalEffectStylesAsync()`; không đoán id.
 * Component cùng tên đã có → **cập nhật** (Bước 8), không dựng bản thứ hai.
 * Không có thư viện cục bộ → `get_libraries` → `search_design_system`. Vẫn không có → **dừng**,
-  chỉ user `docs/setup-figma.md`.
+  chỉ user `design/setup-figma.md`.
 * Thử nhanh những chỗ chưa chắc (vd đặt node vào slot được không) bằng một lệnh thử có **tự dọn**.
 
 ## Bước 5 — hỏi phần còn lại, trình kế hoạch, chờ `Y`
@@ -224,7 +224,7 @@ Chưa có chuẩn trong design.md: <…>
 
 Rồi cập nhật spec của component trong `design.md` (bảng: tên set, key, biến thể/thuộc tính, dựng
 từ gì; các quyết định mới; Known Gaps theo Iteration Guide — dòng `KG-nn` trong `design.md` + hàng chi
-tiết trong `docs/design-backlog.md`) — qua approval gate. Quyết định mới lặp lại ở ≥ 2 spec → đề xuất
+tiết trong `design/design-backlog.md`) — qua approval gate. Quyết định mới lặp lại ở ≥ 2 spec → đề xuất
 đưa lên *Quy ước chung của component dự án*.
 
 ## Constraints
@@ -242,19 +242,19 @@ tiết trong `docs/design-backlog.md`) — qua approval gate. Quyết định m�
 
 ### Tuân thủ rule workspace
 
-Skill này là "skill vẽ" theo nghĩa của `.claude/rules/design-system.md`: đọc `docs/design.md` theo
+Skill này là "skill vẽ" theo nghĩa của `.claude/rules/design-system.md`: đọc `design/design.md` theo
 mục (mục lục + mục luôn đọc + mục của `/figma-component` trong bảng của rule), tuân theo *Luật khi sinh màn*, dùng Do's and Don'ts làm tiêu chí tự kiểm, đụng
 Known Gaps thì hỏi hoặc ghi "chưa có chuẩn trong design.md".
 
 ## References
 
 - Rule workspace `.claude/rules/design-system.md`.
-- `docs/design.md`: spec component, token, § Tên trong Figma, States, Content & Formatting,
+- `design/design.md`: spec component, token, § Tên trong Figma, States, Content & Formatting,
   Accessibility, Responsive, Known Gaps, Quy ước chung của component dự án. Ví dụ spec đầy đủ:
   § Notification Center.
-- `docs/design-backlog.md`: chi tiết Known Gaps (người phụ trách, ngày hẹn) — không cần đọc khi dựng.
-- `docs/components.md`: Usage / Nên / Không nên của component thành phần.
-- `docs/setup-figma.md`: khi file đích chưa có thư viện.
+- `design/design-backlog.md`: chi tiết Known Gaps (người phụ trách, ngày hẹn) — không cần đọc khi dựng.
+- `design/components.md`: Usage / Nên / Không nên của component thành phần.
+- `design/setup-figma.md`: khi file đích chưa có thư viện.
 - `skill://figma/figma-use/SKILL.md`, `skill://figma/figma-generate-library/SKILL.md`: luật Plugin API
   và quy trình dựng component.
 - `/figma-design-system` (dựng cả bộ DS), `/figma-screen` (vẽ màn dùng component này).

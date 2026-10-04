@@ -37,7 +37,7 @@ Auto-scaffold file mới với frontmatter v2; add/edit entries thủ công (nó
 - **IT-BA framing** — KHÔNG hỏi tech detail (DB schema, SDK, endpoint); chỉ business language.
 - **Section Architecture (target `system`) = quyết định thiết kế** — hỏi user mermaid inline HAY D2 `.svg` đứng riêng (Step 5.1), KHÔNG tự chọn. Nhánh D2 skill **tự viết source `.d2`** (không gọi `/d2-architect` — tránh vòng phụ thuộc vì skill đó đọc ngược `system-overview.md`).
 - **No-re-ask** — scan file hiện tại trước khi hỏi; KHÔNG hỏi lại entry đã có. Section Architecture đã có mermaid/D2 + user không yêu cầu đổi → giữ nguyên engine cũ, không hỏi lại.
-- **Activity log** — trước Write/Edit set đủ env `CLAUDE_SKILL_NAME=/update-overview` + `CLAUDE_CHANGELOG_AUTHOR={@author}` + `CLAUDE_CHANGELOG_NOTE` (≤80 ký tự, mô tả `[{target}] {action}`); hook ghép cả dòng vào `docs/_shared/changelog.md` (per `@.Codex/rules/changelog.md`).
+- **Activity log** — trước Write/Edit set đủ env `CLAUDE_SKILL_NAME=/update-overview` + `CLAUDE_CHANGELOG_AUTHOR={@author}` + `CLAUDE_CHANGELOG_NOTE` (≤80 ký tự, mô tả `[{target}] {action}`); hook ghép cả dòng vào `_workspace/changelog.md` (per `@.Codex/rules/changelog.md`).
 - **Dedupe** — `extract` mode loại candidate đã có trong file hiện tại.
 - **KG trong `--extract` chỉ chọn file, KHÔNG thay scan** — dùng `kg counts`/`kg facts <feature>` để thu hẹp danh sách file đáng scan trước; thuật ngữ, wording và candidate cuối cùng LUÔN rút từ prose đã Read theo Step 4. Nếu output có `⚠ còn N mục — chạy với --all` thì chạy lại query đó với `--all`; nếu có `Phải Read tay (ngoài graph)` thì Read các file đó. `KG-ERROR` hoặc exit ≠ 0 → bỏ shortlist KG và chạy nguyên flow prose-scan cũ trên toàn bộ nguồn trong bảng Step 4.
 
@@ -208,9 +208,9 @@ Ghi vào `docs/_shared/` — **project-level, dùng chung mọi feature**. Mỗi
 |---|---|
 | `definitions` | `docs/_shared/definitions.md` |
 | `env` | `docs/_shared/operating-environment.md` |
-| `conventions` | `docs/_shared/conventions.md` |
+| `conventions` | `design/ui-common/conventions.md` |
 | `system` | `docs/_shared/system-overview.md` |
-| `patterns` | `docs/_shared/screen-patterns.md` |
+| `patterns` | `design/ui-common/screen-patterns.md` |
 | `profile` | `docs/_shared/project-profile.md` |
 
 Target `system` có thể kèm sơ đồ kiến trúc — **hỏi user chọn** (Step 5.1), KHÔNG tự quyết:

@@ -1,7 +1,7 @@
 #!/bin/bash
 # KG dirty-flag hook (Phase 2 KG plan Mục 3.5)
 #
-# Khi doc trong docs/ được Write/Edit → touch cờ docs/_shared/kg/.dirty.
+# Khi doc trong docs/ được Write/Edit → touch cờ _workspace/kg/.dirty.
 # kg-query.mjs thấy cờ → tự rebuild graph trước khi trả lời (lazy rebuild, <1s).
 # Hook KHÔNG tự build (giữ hook nhanh + không đệ quy khi build ghi graph.json).
 
@@ -19,13 +19,13 @@ fi
 # Chỉ quan tâm nguồn KG ingest — MIRROR walk scope của kg-build.mjs:
 # docs/**.md + bpmn *.ir.json (mọi độ sâu) + dbdiagram *.dbml + sync-state.yaml.
 case "$FILE" in
-    *docs/_shared/kg/*) exit 0 ;;  # graph.json/.dirty tự ghi — tránh đệ quy
+    *_workspace/kg/*) exit 0 ;;  # graph.json/.dirty tự ghi — tránh đệ quy
     *docs/exports/*|*docs/inbox/*|*docs/reports/*|*docs/_regen-sample/*|*docs/guides/*) exit 0 ;;
-    *docs/*.md|*docs/*bpmn/*.ir.json|*docs/*/dbdiagram/*.dbml|*.claude/state/atlassian/sync-state.yaml) ;;
+    *docs/*.md|*design/*.md|*docs/*bpmn/*.ir.json|*docs/*/dbdiagram/*.dbml|*.claude/state/atlassian/sync-state.yaml) ;;
     *) exit 0 ;;
 esac
 
 PROJECT_PATH="${PROJECT_PATH:-$(pwd)}"
-mkdir -p "$PROJECT_PATH/docs/_shared/kg"
-touch "$PROJECT_PATH/docs/_shared/kg/.dirty"
+mkdir -p "$PROJECT_PATH/_workspace/kg"
+touch "$PROJECT_PATH/_workspace/kg/.dirty"
 exit 0

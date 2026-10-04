@@ -125,7 +125,7 @@ Features có bpmn/: !`for d in docs/*/bpmn/*-bpmn-index.md; do [ -f "$d" ] && di
    - Tạo/cập nhật `bpmn/{feature}-bpmn-index.md`.
 7) **Gọi lại với slug trùng** (update mode tự động) → L2 diff cho `{slug}.ir.json`, rồi rerun `... bpmn-build.mjs --dir docs/{feature}/bpmn` (layout regen tự động).
 8) **Verify** (BẮT BUỘC): `node .claude/skills/bpmn/engine/bpmn-build.mjs --dir docs/{feature}/bpmn --verify` → semcheck + layout sạch. Có lỗi structural → sửa IR. Coverage warning → đối chiếu nguồn. KHÔNG báo thành công khi còn ✗.
-9) **Activity log** — trước Write set env `CLAUDE_SKILL_NAME=/bpmn` + `CLAUDE_CHANGELOG_AUTHOR={@author}` + `CLAUDE_CHANGELOG_NOTE=added BPMN {title} ({N} lanes, phủ {a}/{b} branch)` (≤80 ký tự); hook ghép cả dòng vào `docs/_shared/changelog.md`.
+9) **Activity log** — trước Write set env `CLAUDE_SKILL_NAME=/bpmn` + `CLAUDE_CHANGELOG_AUTHOR={@author}` + `CLAUDE_CHANGELOG_NOTE=added BPMN {title} ({N} lanes, phủ {a}/{b} branch)` (≤80 ký tự); hook ghép cả dòng vào `_workspace/changelog.md`.
 10) **Output report:**
     ```
     ✅ BPMN created: docs/{feature}/bpmn/{slug}.bpmn (chuẩn OMG, swimlane)
@@ -148,7 +148,7 @@ Features có bpmn/: !`for d in docs/*/bpmn/*-bpmn-index.md; do [ -f "$d" ] && di
 | `docs/{feature}/bpmn/{feature}-bpmn-editor.html` | Editor kéo-thả bpmn-js, dropdown đa-process |
 | `docs/{feature}/bpmn/{feature}-bpmn-index.md` | Master metadata (`type: bpmn-index`) + bảng process |
 
-AI **chỉ sinh IR**; toạ độ/layout do engine `.claude/skills/bpmn/engine/` dựng. Hook tự ghi `docs/_shared/changelog.md`.
+AI **chỉ sinh IR**; toạ độ/layout do engine `.claude/skills/bpmn/engine/` dựng. Hook tự ghi `_workspace/changelog.md`.
 
 ## IR schema (AI sinh đúng format này)
 

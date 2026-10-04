@@ -114,7 +114,7 @@ function cleanTitle(value) {
 function parseArgs(argv) {
   const result = {
     dir: "docs",
-    out: "docs/_shared/kg/graph.json",
+    out: "_workspace/kg/graph.json",
     verify: false,
     quiet: false,
     noTimestamp: true,   // MẶC ĐỊNH deterministic (epoch) — graph.json/viewer commit không churn; --timestamp để opt-in giờ thật
@@ -198,6 +198,18 @@ function walkScope(dirAbs) {
   }
 
   visit(dirAbs);
+  // Chuẩn thiết kế + UI common (CMP/GR/E-common) sống ở design/ ngoài docs/ (D-04)
+  // — vẫn ingest như doc cấp dự án để E-common-NNN không thành broken ref.
+  const designAbs = path.resolve(dirAbs, "..", "design");
+  if (fs.existsSync(designAbs)) {
+    (function visitDesign(current) {
+      for (const entry of fs.readdirSync(current, { withFileTypes: true }).sort((a, b) => compareText(a.name, b.name))) {
+        const abs = path.join(current, entry.name);
+        if (entry.isDirectory()) visitDesign(abs);
+        else if (entry.isFile() && entry.name.endsWith(".md")) files.push({ abs, kind: "markdown" });
+      }
+    })(designAbs);
+  }
   return files;
 }
 
@@ -1072,7 +1084,8 @@ class GraphBuilder {
       target.startsWith(`${this.dirRel}/`)
     ) {
       resolved = path.posix.normalize(target);
-    } else if (target.startsWith("docs/")) {
+    } else if (/^(?:docs|design|docs-input|_guides|_workspace)\//.test(target)) {
+      // đường dẫn từ gốc repo (bố cục D-04/D-05: design/, docs-input/, _guides/, _workspace/)
       resolved = path.posix.normalize(target);
     } else {
       resolved = path.posix.normalize(
@@ -2162,11 +2175,11 @@ class GraphBuilder {
 
   // Parse bảng định nghĩa FR/NFR/BR/E/BO/CAP theo header-map.
   parseDefinitionTables(record) {
-    // Lỗi dùng chung E-common sống ở docs/_shared/conventions.md (project-level, feature null)
+    // Lỗi dùng chung E-common sống ở design/ui-common/conventions.md (project-level, feature null)
     // → gắn pseudo-feature "common" để E-common-NNN thành node thật, không thành broken ref.
     const defFeature =
       record.feature ||
-      (/\/_shared\/conventions\.md$/i.test(record.file) ? "common" : null);
+      (/(^|\/)(_shared|ui-common)\/conventions\.md$/i.test(record.file) ? "common" : null);
     for (const table of this.tablesOf(record)) {
       if (!table.canonical.includes("id")) continue;
 
@@ -4966,7 +4979,7 @@ class GraphBuilder {
 
   // Parse changelog.md (bảng Markdown 5 cột) để enrich authors + last_activity.
   parseActivityLog() {
-    const abs = path.join(this.dirAbs, "_shared", "changelog.md");
+    const abs = path.join(this.dirAbs, "..", "_workspace", "changelog.md");
     if (!fs.existsSync(abs)) return;
 
     const lines = fs.readFileSync(abs, "utf8").split(/\r?\n/);
@@ -5015,7 +5028,7 @@ class GraphBuilder {
   // lý do) thành STALE_IMPACTS. Vẫn nhận dạng .log cũ "src -> dst | reason:"
   // để đọc được file di sản chưa migrate.
   parseStalenessLog() {
-    const abs = path.join(this.dirAbs, "_shared", "staleness.md");
+    const abs = path.join(this.dirAbs, "..", "_workspace", "staleness.md");
     if (!fs.existsSync(abs)) return;
 
     const file = this.repoPath(abs);

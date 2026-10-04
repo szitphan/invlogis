@@ -8,8 +8,8 @@ import path from 'node:path';
 import process from 'node:process';
 
 const CAP = 40;
-const DEFAULT_GRAPH = 'docs/_shared/kg/graph.json';
-const DEFAULT_HISTORY_GRAPH = 'docs/_shared/kg/graph-history.json';
+const DEFAULT_GRAPH = '_workspace/kg/graph.json';
+const DEFAULT_HISTORY_GRAPH = '_workspace/kg/graph-history.json';
 
 function die(message, code = 1) {
   console.error(message);
@@ -641,7 +641,7 @@ function gitChangedFiles(opts) {
 // (kg-build.mjs): CHỈ .md (bất kỳ); .dbml chỉ {feature}/dbdiagram/{feature}.dbml;
 // .ir/.src.json chỉ khi path có segment 'bpmn'. + EXCLUDED_DIRS trên segment top-level
 // dưới docs/. KHÔNG loại "dot-segment" (builder không loại dir ẩn — file vô-nghĩa như
-// docs/_shared/.status-state/abc123 tự rớt vì không khớp ext).
+// _workspace/.status-state/abc123 tự rớt vì không khớp ext).
 // KHÔNG tính .spec.ts: builder KHÔNG walk file .spec.ts như nguồn (node e2e_spec sinh
 // TỪ LINK trong e2e-index; .spec.ts là auto-gen, không phải nguồn) — review vòng 4 M3.
 const KG_EXCLUDE_SEG = new Set(['exports', 'inbox', 'reports', '_regen-sample', 'guides']);

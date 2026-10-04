@@ -1,5 +1,5 @@
 #!/bin/bash
-# Append 1 dòng sự kiện vào docs/_shared/changelog.md sau mỗi Write/Edit doc file.
+# Append 1 dòng sự kiện vào _workspace/changelog.md sau mỗi Write/Edit doc file.
 #
 # Contract (per .claude/rules/changelog.md): lịch sử thay đổi sống ở MỘT file
 # append-only duy nhất — KHÔNG ghi changelog: vào frontmatter, KHÔNG routing
@@ -29,7 +29,7 @@ PROJECT_PATH="${PROJECT_PATH:-$(pwd)}"
 FILE="${FILE#$PROJECT_PATH/}"
 
 [ "${AUTO_CHANGELOG:-true}" != "true" ] && exit 0
-[[ ! "$FILE" =~ ^docs/.+\.md$ ]] && exit 0
+[[ ! "$FILE" =~ ^(docs|design)/.+\.md$ ]] && exit 0
 [[ "$FILE" =~ feature-list\.md$ ]] && exit 0
 [[ "$FILE" =~ README\.md$ ]] && exit 0
 [[ "$FILE" =~ /_shared/ ]] && exit 0
@@ -51,7 +51,7 @@ SKILL="$(escape_cell "$SKILL")"
 NOTE="$(escape_cell "$NOTE")"
 AUTHOR="$(escape_cell "$AUTHOR")"
 
-LOG="$PROJECT_PATH/docs/_shared/changelog.md"
+LOG="$PROJECT_PATH/_workspace/changelog.md"
 mkdir -p "$(dirname "$LOG")"
 
 # Bootstrap header khi file chưa tồn tại (hoặc rỗng) — bảng cần header + separator

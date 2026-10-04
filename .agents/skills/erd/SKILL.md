@@ -80,7 +80,7 @@ Features có ERD: !`for d in docs/*/srs/*-erd.md; do [ -f "$d" ] && grep -l "erD
 6) **L1 approval** plan table — show path + tóm tắt entity/relationship count. **KHÔNG L3 iterate trong chat** — mermaid không render được trong chat, review từ rendered file hiệu quả hơn.
 7) **Write** từ `_templates/diagram-erd.md` (slim frontmatter `type: srs-erd`/`feature`/`updated`). Fill `mermaid_code`, `entity_descriptions`, `notes`.
 8) **Update mode (file đã tồn tại)** → L2 diff. Update `updated: {date}`.
-9) **Activity log** — set env `CLAUDE_SKILL_NAME=/erd` + `CLAUDE_CHANGELOG_NOTE` (note: `{N} entities, {M} relationships — {note}`) TRƯỚC khi Write — hook append vào `docs/_shared/changelog.md` (không phụ thuộc spec.md tồn tại hay chưa, không còn routing/fallback). Update erd.md `updated: {date}`.
+9) **Activity log** — set env `CLAUDE_SKILL_NAME=/erd` + `CLAUDE_CHANGELOG_NOTE` (note: `{N} entities, {M} relationships — {note}`) TRƯỚC khi Write — hook append vào `_workspace/changelog.md` (không phụ thuộc spec.md tồn tại hay chưa, không còn routing/fallback). Update erd.md `updated: {date}`.
 9.5. **Render-verify + TỰ XEM ẢNH (BẮT BUỘC, chạy ngay sau Write)** — `node .Codex/scripts/mermaid-verify.mjs --file docs/{feature}/srs/{feature}-erd.md --png <scratchpad>/erd-review`. Cờ `--png` vừa compile-check vừa xuất ảnh PNG mỗi block để skill **tự Read xem hình**. Mermaid không render trong chat (đây là lý do skip L3), nên đây là cách duy nhất bắt lỗi TRƯỚC khi báo "xong".
    - Script chạy **3 tầng, báo tách riêng**: cú pháp compile · nhãn an toàn renderer · **ngữ nghĩa**.
      Tầng ngữ nghĩa cho ERD bắt: **entity ma** (tên trong quan hệ nhưng không có khối thuộc tính —
@@ -116,7 +116,7 @@ Features có ERD: !`for d in docs/*/srs/*-erd.md; do [ -f "$d" ] && grep -l "erD
 
 `docs/{feature}/srs/{feature}-erd.md` — Mermaid `erDiagram`. Slim frontmatter (`type: srs-erd` / `feature` / `updated`), ghi từ `_templates/diagram-erd.md`.
 
-Hook `auto-changelog.sh` tự ghi 1 dòng vào `docs/_shared/changelog.md`.
+Hook `auto-changelog.sh` tự ghi 1 dòng vào `_workspace/changelog.md`.
 
 ## Mermaid syntax reference
 

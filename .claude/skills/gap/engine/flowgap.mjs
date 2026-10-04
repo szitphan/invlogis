@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const DEFAULT_GRAPH_PATH = 'docs/_shared/kg/graph.json';
+const DEFAULT_GRAPH_PATH = '_workspace/kg/graph.json';
 
 const REVERSE_PAIRS = [
   {

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Sinh Phụ lục A (UI Common Rules & Components) cho SRS spec — chép NGUYÊN VĂN từ nguồn.
 
-Nguồn: docs/_shared/screen-patterns.md (CMP), docs/_shared/conventions.md (GR + E-common),
-docs/design.md (mục được CMP/GR trỏ tới qua dòng `- **design.md:** A; B`).
+Nguồn: design/ui-common/screen-patterns.md (CMP), design/ui-common/conventions.md (GR + E-common),
+design/design.md (mục được CMP/GR trỏ tới qua dòng `- **design.md:** A; B`).
 Mã lấy từ spec (ngoài vùng phụ lục): CMP-NN, GR-NN, E-common-NNN.
 
   python3 _scripts/ui-common-expand.py <spec.md>           # in khối phụ lục ra stdout
@@ -17,9 +17,9 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SP = ROOT / "docs/_shared/screen-patterns.md"
-CV = ROOT / "docs/_shared/conventions.md"
-DS = ROOT / "docs/design.md"
+SP = ROOT / "design/ui-common/screen-patterns.md"
+CV = ROOT / "design/ui-common/conventions.md"
+DS = ROOT / "design/design.md"
 BEGIN = "<!-- ui-common:begin"
 END = "<!-- ui-common:end -->"
 HEADING = "## Phụ lục A — UI Common Rules & Components áp dụng"
@@ -85,12 +85,12 @@ def build(spec_path):
     cmp_, gr, err = codes_in(outside_block(spec))
     sp, cv, ds = (read(p) for p in (SP, CV, DS))
     if not sp or not cv:
-        return None, "Chưa có UI Common Rules & Components (docs/_shared/screen-patterns.md / conventions.md)"
+        return None, "Chưa có UI Common Rules & Components (design/ui-common/screen-patterns.md / conventions.md)"
 
     sp_secs = {k.split(" ")[0]: v for k, v in sections(sp, 2).items() if k.startswith("CMP-")}
     cv_secs = {k.split(" ")[0]: v for k, v in sections(cv, 3).items() if k.startswith("GR-")}
     ds_secs = sections(ds, 3)
-    rel_img = "../../_shared/images/"  # spec ở docs/{feature}/srs/
+    rel_img = "../../../design/ui-common/images/"  # spec ở docs/{feature}/srs/
 
     out, missing, wanted = [], [], []
 
@@ -109,7 +109,7 @@ def build(spec_path):
             line, body = sp_secs[key]
             title = next(k for k in sections(sp, 2) if k.startswith(key))
             body = body.replace("](images/", "](" + rel_img)
-            out.append(f"#### {title}\n\n_Nguồn: `docs/_shared/screen-patterns.md:{line}`_\n\n{demote(body, 2)}\n")
+            out.append(f"#### {title}\n\n_Nguồn: `design/ui-common/screen-patterns.md:{line}`_\n\n{demote(body, 2)}\n")
             add_refs(body)
     if gr:
         out.append("### A.2 Quy tắc giao diện chung (GR)\n")
@@ -120,7 +120,7 @@ def build(spec_path):
                 continue
             line, body = cv_secs[key]
             title = next(k for k in sections(cv, 3) if k.startswith(key))
-            out.append(f"#### {title}\n\n_Nguồn: `docs/_shared/conventions.md:{line}`_\n\n{demote(body, 1)}\n")
+            out.append(f"#### {title}\n\n_Nguồn: `design/ui-common/conventions.md:{line}`_\n\n{demote(body, 1)}\n")
             add_refs(body)
     if wanted:
         out.append("### A.3 Chi tiết từ design system\n")
@@ -130,7 +130,7 @@ def build(spec_path):
                 missing.append(f"design.md › {ref}")
                 continue
             line, body = ds_secs[hit]
-            out.append(f"#### {hit}\n\n_Nguồn: `docs/design.md:{line}`_\n\n{demote(body, 2)}\n")
+            out.append(f"#### {hit}\n\n_Nguồn: `design/design.md:{line}`_\n\n{demote(body, 2)}\n")
     if err:
         rows = {}
         for row in cv.split("\n"):

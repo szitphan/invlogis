@@ -29,9 +29,9 @@ if (!fs.existsSync(fixtureDocs)) {
 // Sandbox tạm: copy fixture vào temp để build không đụng vault thật.
 const work = fs.mkdtempSync(path.join(os.tmpdir(), "kg-selftest-"));
 fs.cpSync(fixtureDocs, path.join(work, "docs"), { recursive: true });
-fs.mkdirSync(path.join(work, "docs", "_shared", "kg"), { recursive: true });
+fs.mkdirSync(path.join(work, "_workspace", "kg"), { recursive: true });
 
-const graphPath = path.join(work, "docs", "_shared", "kg", "graph.json");
+const graphPath = path.join(work, "_workspace", "kg", "graph.json");
 const run = (script, args) =>
   execFileSync(process.execPath, [path.join(engineDir, script), ...args], {
     cwd: work,
@@ -234,7 +234,7 @@ ok("impact FR-002 kéo CHK-003 (chuỗi test)", impact2.includes("CHK-smart-noti
 ok("impact có Shortlist + Độ phủ", impact.includes("Shortlist file cần Read") && impact.includes("Độ phủ:"));
 
 // ── 7. T1 temporal: graph-history.json (change_event stream) ────────────────
-const historyPath = path.join(work, "docs", "_shared", "kg", "graph-history.json");
+const historyPath = path.join(work, "_workspace", "kg", "graph-history.json");
 run("kg-history.mjs", ["--dir", "docs", "--graph", graphPath, "--out", historyPath, "--no-timestamp", "--quiet"]);
 const h1 = fs.readFileSync(historyPath, "utf8");
 run("kg-history.mjs", ["--dir", "docs", "--graph", graphPath, "--out", historyPath, "--no-timestamp", "--quiet"]);

@@ -127,7 +127,7 @@ Features có US: !`for d in docs/*/userstories/; do [ -d "$d" ] && dirname "$d" 
 | `docs/{feature}/userstories/us-{NNN}.md` | Nội dung story — **zero frontmatter**, prose sections (AC inline) |
 | `docs/{feature}/userstories/{feature}-story-index.md` | Master metadata + bảng Stories (ID/persona/FR/screens/priority/status/jira-key) |
 
-Status + priority + jira key sống ở **index**, KHÔNG ở file us. Hook tự ghi `docs/_shared/changelog.md`.
+Status + priority + jira key sống ở **index**, KHÔNG ở file us. Hook tự ghi `_workspace/changelog.md`.
 
 ## References
 

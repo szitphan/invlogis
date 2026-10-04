@@ -32,7 +32,7 @@ PROJECT_PATH="${PROJECT_PATH:-$(pwd)}"
 ABS_FILE=$(cd "$(dirname "$FILE")" 2>/dev/null && pwd)/$(basename "$FILE")
 REL_FILE="${ABS_FILE#$PROJECT_PATH/}"
 HASH=$(echo "$REL_FILE" | shasum 2>/dev/null | awk '{print $1}' | head -c 16)
-STATE_DIR="$PROJECT_PATH/docs/_shared/.status-state"
+STATE_DIR="$PROJECT_PATH/_workspace/.status-state"
 mkdir -p "$STATE_DIR"
 STATE_FILE="$STATE_DIR/$HASH"
 

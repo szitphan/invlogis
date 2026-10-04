@@ -8,15 +8,15 @@
 
 | File | Vai trò |
 |---|---|
-| `docs/design.md` | **Nguồn chuẩn.** Token (khối YAML đầu file) + quy tắc dùng (thân file). |
-| `docs/design-tokens.css` | Bản CSS của cùng bộ token, cho prototype và code. Sinh theo `design.md`, không sửa lệch. |
-| `docs/components.md` | Chọn component nào + dùng thế nào (Usage, Nên/Không nên, Examples, tên set Figma). Lệch với `design.md` thì `design.md` thắng. |
-| `docs/ba-crosswalk.md` | Tra ngược từ **Control type** trong bảng Screen description của BA sang component ứng viên. Chỉ để tra, không thay `components.md`. |
-| `docs/figma-library-keys.json` | Key component set của thư viện Figma (máy sinh). Dùng để instantiate, không sửa tay. |
+| `design/design.md` | **Nguồn chuẩn.** Token (khối YAML đầu file) + quy tắc dùng (thân file). |
+| `design/design-tokens.css` | Bản CSS của cùng bộ token, cho prototype và code. Sinh theo `design.md`, không sửa lệch. |
+| `design/components.md` | Chọn component nào + dùng thế nào (Usage, Nên/Không nên, Examples, tên set Figma). Lệch với `design.md` thì `design.md` thắng. |
+| `design/ba-crosswalk.md` | Tra ngược từ **Control type** trong bảng Screen description của BA sang component ứng viên. Chỉ để tra, không thay `components.md`. |
+| `design/figma-library-keys.json` | Key component set của thư viện Figma (máy sinh). Dùng để instantiate, không sửa tay. |
 
-- Chưa có `docs/design.md`:
+- Chưa có `design/design.md`:
   * Skill **lo-fi** (`/wireframe-ascii`, `/wireframe-html`, `/user-flow`, `/srs`) chạy như cũ, báo 1 dòng
-    "Chưa có docs/design.md — chạy lo-fi, không áp design system".
+    "Chưa có design/design.md — chạy lo-fi, không áp design system".
   * Skill **vẽ Figma** (`/figma-*`) **dừng**, báo thiếu design system và chỉ cách cài kit.
     KHÔNG dùng bảng màu dự phòng, KHÔNG lấy file `design.md` mẫu của dự án/bộ kit khác làm mặc định.
 - Có → **đọc theo mục**, đọc lại từ file mỗi lần chạy. Không trích từ trí nhớ phiên trước (file có
@@ -34,7 +34,7 @@
   5. Bảng ghi **Toàn bộ** → Read toàn văn.
 - Thêm quy định áp chung cho mọi skill vào `design.md` → đặt trong một mục "luôn đọc" ở bước 2, hoặc
   thêm mục mới vào danh sách đó cùng lượt. Nếu không, skill đọc theo mục sẽ âm thầm bỏ sót.
-- Nội dung cụ thể (màu, cỡ, tên sản phẩm, mẫu bố cục) chỉ sống trong `docs/design.md`,
+- Nội dung cụ thể (màu, cỡ, tên sản phẩm, mẫu bố cục) chỉ sống trong `design/design.md`,
   KHÔNG chép vào `.claude/` (đúng tinh thần `project-profile.md`).
 
 ## Mỗi loại skill đọc phần nào
@@ -43,8 +43,8 @@
 |---|---|---|
 | `/srs` (chọn device), `/user-flow` | Responsive Behavior (Breakpoints, thiết bị chính), Layout (mẫu bố cục) | Màu, chữ |
 | `/wireframe-ascii`, `/wireframe-html` (lo-fi B&W) | Layout (mẫu bố cục P/M, Grid & Container, Whitespace), States (đủ trạng thái rỗng/đang tải/lỗi, ánh xạ trạng thái nghiệp vụ → **nhãn chữ**), Components (chọn đúng loại control, thứ tự nút, 1 nút chính/nhóm), Content & Formatting, Do's and Don'ts phần bố cục | **Toàn bộ màu, bóng, font** — B&W strict của skill vẫn thắng |
-| `/prototype-html`, code | Toàn bộ; màu/chữ/khoảng cách qua `docs/design-tokens.css` | — |
-| `/figma-design-system` | `source:"design_md"`, `learn:{path:"<abs>/docs/design.md"}` | — |
+| `/prototype-html`, code | Toàn bộ; màu/chữ/khoảng cách qua `design/design-tokens.css` | — |
+| `/figma-design-system` | `source:"design_md"`, `learn:{path:"<abs>/design/design.md"}` | — |
 | `/figma-screen` (và `/figma-*` vẽ màn) | Layout (toàn bộ: Spacing, Grid & Container, Mẫu bố cục P/M, Whitespace); phần đầu *Components* tới hết quy ước "Web và Mobile" + mục `###` của nhóm component sẽ dùng; *Phân trang danh sách* nếu màn có danh sách; trong *Components - <dự án>*: *Quy ước chung* + spec của component dự án có trên màn; States; Content & Formatting; Accessibility (ngoại lệ đã chấp nhận, cho a11y_audit); Responsive Behavior. Overview / Colors / Typography Hierarchy / Elevation / Shapes không cần đọc: token gắn theo tên (§ Tên trong Figma) | — |
 | `/figma-component` | Trong *Components - <dự án>*: mục *Quy ước chung của component dự án* + spec đang dựng (spec khác chỉ đọc khi quy ước dẫn tới hoặc cần làm mẫu khuôn); phần đầu *Components* tới hết quy ước "Web và Mobile"; States; Content & Formatting; Accessibility; Responsive Behavior; *Phân trang danh sách* nếu component có danh sách; Layout khi đề xuất bố cục ví dụ *Trong ngữ cảnh*. Colors / Typography Hierarchy / Elevation / Shapes không cần đọc: giá trị gắn qua biến và style Figma theo tên | — |
 | `uxui-reviewer` | States, Components, Accessibility, Do's and Don'ts — làm tiêu chí review | — |
@@ -82,13 +82,13 @@
 
 ## Sửa design system
 
-- Đổi token → sửa khối YAML đầu `docs/design.md` **và** `docs/design-tokens.css` cùng lượt.
+- Đổi token → sửa khối YAML đầu `design/design.md` **và** `design/design-tokens.css` cùng lượt.
 - Thêm mẫu bố cục / component / trạng thái → thêm vào đúng mục trong `design.md` (theo
   Iteration Guide của file đó), không ghi rải trong wireframe hay spec.
 - Mọi sửa qua approval gate (L1, L2) như doc khác.
 
 ## Tóm tắt 1 dòng
 
-> **`docs/design.md` là nguồn duy nhất, đọc theo mục (mục lục + mục luôn đọc + mục của skill) · wireframe B&W chỉ lấy bố cục/trạng thái/component, không lấy màu ·
+> **`design/design.md` là nguồn duy nhất, đọc theo mục (mục lục + mục luôn đọc + mục của skill) · wireframe B&W chỉ lấy bố cục/trạng thái/component, không lấy màu ·
 > bố cục: 3 phương án (1 theo mẫu có sẵn + 2 độc lập) để user chọn · Known Gaps thì hỏi, không bịa ·
 > component: crosswalk → components.md → keys, thiếu thì ghi gap · hi-fi thiếu design.md thì dừng, không fallback.**

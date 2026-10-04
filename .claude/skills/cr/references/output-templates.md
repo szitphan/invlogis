@@ -175,7 +175,7 @@ Reply:
 Per `rules/changelog.md` v2.6 routing, file phụ trợ KHÔNG có changelog riêng. Skill PHẢI in tổng kết cuối session để user xác nhận routing đã thực sự ghi:
 
 ```
-📝 Activity log (docs/_shared/changelog.md — hook ghi 1 dòng/file đã edit):
+📝 Activity log (_workspace/changelog.md — hook ghi 1 dòng/file đã edit):
    ✅ docs/authentication/authentication-urd.md                    → 1 dòng
    ✅ docs/authentication/srs/authentication-spec.md               → 1 dòng
    ✅ docs/authentication/usecases/uc-github-auth.md               → 1 dòng

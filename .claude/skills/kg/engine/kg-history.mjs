@@ -37,8 +37,8 @@ function stripQuotes(value) {
 function parseArgs(argv) {
   const result = {
     dir: "docs",
-    graph: "docs/_shared/kg/graph.json",
-    out: "docs/_shared/kg/graph-history.json",
+    graph: "_workspace/kg/graph.json",
+    out: "_workspace/kg/graph-history.json",
     noTimestamp: false,
     quiet: false,
   };
@@ -865,10 +865,10 @@ function buildRevisions(rootAbs, requirementSourceFile, amendsEdges, reqKeys) {
 function buildHistory(options, rootAbs, graphNodeKeys, reqKeys, requirementSourceFile) {
   const dirAbs = path.resolve(rootAbs, options.dir);
   const dirRel = toPosix(path.relative(rootAbs, dirAbs)) || ".";
-  const activityAbs = path.join(dirAbs, "_shared", "changelog.md");
+  const activityAbs = path.join(dirAbs, "..", "_workspace", "changelog.md");
   const activityFile =
     toPosix(path.relative(rootAbs, activityAbs)) ||
-    `${dirRel}/_shared/changelog.md`;
+    "_workspace/changelog.md";
 
   const activity = readActivityLines(activityAbs);
   const nodes = [];

@@ -1,6 +1,6 @@
 # KG History — Schema Contract v2‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-> `kg-history.mjs` đọc `docs/_shared/changelog.md`, các CR record đã apply trong `docs/cr/CR-*.md`, git history của file chứa requirement, và node key trong `graph.json`. Sau đó ghi history graph riêng tại `docs/_shared/kg/graph-history.json`. **File này KHÔNG thay đổi hoặc nhập dữ liệu temporal vào `graph.json`** — luồng nghiệp vụ current-state không đọc thêm dữ liệu quá khứ (opt-in temporal).
+> `kg-history.mjs` đọc `_workspace/changelog.md`, các CR record đã apply trong `docs/cr/CR-*.md`, git history của file chứa requirement, và node key trong `graph.json`. Sau đó ghi history graph riêng tại `_workspace/kg/graph-history.json`. **File này KHÔNG thay đổi hoặc nhập dữ liệu temporal vào `graph.json`** — luồng nghiệp vụ current-state không đọc thêm dữ liệu quá khứ (opt-in temporal).
 
 ## graph-history.json schema‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -141,7 +141,7 @@ Thiếu `changelog.md` / thư mục `docs/cr` / git là HỢP LỆ (nguồn opti
 ## CLI contract
 
 ```text
-node kg-history.mjs [--dir docs] [--graph docs/_shared/kg/graph.json] [--out docs/_shared/kg/graph-history.json] [--no-timestamp] [--quiet]
+node kg-history.mjs [--dir docs] [--graph _workspace/kg/graph.json] [--out _workspace/kg/graph-history.json] [--no-timestamp] [--quiet]
 ```
 
 - `--out` KHÔNG được trùng `--graph` (chống ghi đè graph.json chính) → exit 2.

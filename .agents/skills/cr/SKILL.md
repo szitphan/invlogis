@@ -63,7 +63,7 @@ Bước được đánh số liên tục 1→21 xuyên suốt 5 phase (không l�
 * **Auto-resolve stale** sau apply (docs reconciled set `status: revisions`, hết stale).
 * **CR ID** format `CR-{YYYYMMDD}-{NNN}` 3-digit, sequential, race-mitigated via mktemp lock.
 * **Cross-feature awareness** — scan ID references (`FR-{other}-NNN`, shared entity) trong proposed change + impacted docs body. Nếu đụng ≥2 features → prompt expand scope, apply loop bao trùm cả 2.
-* **Activity log per `rules/changelog.md`** — mỗi file edit = 1 dòng trong `docs/_shared/changelog.md` (hook ghi khi đã set env note; note nêu rõ thay đổi gì, vd "sửa field email screen login"). LƯU Ý cascade: sửa `srs/{feature}-userflow.md` có thể cascade sang cả `ascii-wireframe/` và `html-wireframe/` (2 hệ đọc chung nguồn chia flow), scan cả 2 khi assess impact. **BẮT BUỘC in Activity Log Summary cuối session (bước 19)** để user verify sự kiện đã thực sự ghi (visibility check).
+* **Activity log per `rules/changelog.md`** — mỗi file edit = 1 dòng trong `_workspace/changelog.md` (hook ghi khi đã set env note; note nêu rõ thay đổi gì, vd "sửa field email screen login"). LƯU Ý cascade: sửa `srs/{feature}-userflow.md` có thể cascade sang cả `ascii-wireframe/` và `html-wireframe/` (2 hệ đọc chung nguồn chia flow), scan cả 2 khi assess impact. **BẮT BUỘC in Activity Log Summary cuối session (bước 19)** để user verify sự kiện đã thực sự ghi (visibility check).
 * **Before/after capture** — sau apply, **thay nội dung placeholder** section `## Applied Changes ({date})` trong CR record (template đã có sẵn heading — append = trùng heading) với per-file before/after snippet (5-10 dòng context). Đủ audit "trước/sau" không cần git blame.
 * **Downstream artifacts log** — điền section `## Artifacts to rebuild` (cũng thay placeholder) liệt kê Figma/preview/export cần regen (KHÔNG auto-run, chỉ log + prompt user).
 * **Rollback KHÔNG dùng `git checkout -- <file>`** — lệnh này trả về HEAD chứ không phải trạng thái trước apply → nuốt thay đổi chưa commit của user (cùng lý do `approval-gate.md` cấm mô hình Write-rồi-rollback). Dùng reverse patch qua L2 diff từ `## Applied Changes`. Xem `rules/change-request.md` § Rollback.
@@ -146,7 +146,7 @@ Open CRs: !`ls docs/cr/CR-*.md 2>/dev/null | while read f; do grep -q "^status: 
 
 5) **Dùng Knowledge Graph chọn shortlist, sau đó Read prose + value-sweep bắt buộc:**
    * Resolve một hoặc nhiều ID/node seed từ change description hoặc doc/section đã xác định ở Phase 1. KHÔNG đoán ID; nếu không resolve chắc chắn được seed → dùng fallback đọc-trực-tiếp CŨ bên dưới.
-   * Nếu `docs/_shared/kg/graph.json` chưa tồn tại → build đúng 1 lần bằng:
+   * Nếu `_workspace/kg/graph.json` chưa tồn tại → build đúng 1 lần bằng:
      `node .Codex/skills/kg/engine/kg-build.mjs`
    * Với MỖI seed, chạy:
      `node .Codex/skills/kg/engine/kg-query.mjs impact <ID> --depth 3`

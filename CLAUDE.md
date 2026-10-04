@@ -1,5 +1,5 @@
 # Dispatch Management — BA Workspace‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
-> Mọi doc per-feature dưới `docs/{feature}/`. URD/BRD/PRD/SRS đều scope feature (không còn singleton). File tên-cố-định mang prefix `{feature}-` (vd `{feature}-spec.md`) — tránh trùng basename giữa features. Frontmatter tối giản: `type`/`feature`/`status`/`updated`/`links` (KHÔNG created/owner/changelog). Lịch sử thay đổi sống ở `docs/_shared/changelog.md` (1 log tập trung).
+> Mọi doc per-feature dưới `docs/{feature}/`. URD/BRD/PRD/SRS đều scope feature (không còn singleton). File tên-cố-định mang prefix `{feature}-` (vd `{feature}-spec.md`) — tránh trùng basename giữa features. Frontmatter tối giản: `type`/`feature`/`status`/`updated`/`links` (KHÔNG created/owner/changelog). Lịch sử thay đổi sống ở `_workspace/changelog.md` (1 log tập trung).
 
 ## What lives here‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -10,7 +10,7 @@
 | `.claude/agents/` | Specialized review personas (`@senior-ba`, `@uxui-reviewer`, ...) — Phase 4+ |
 | `.claude/hooks/` | Auto-changelog, session-init, status-transition (Phase 4+), post-edit-stale (Phase 6+) |
 | `.claude/rules/` | Naming, status lifecycle, changelog, approval-gate, agent conventions, __diagram-correctness__ (gate "vẽ đúng" cho 11 skill diagram) |
-| `docs-input/` | Tài liệu khách gửi. Sổ nguồn `README.md` + backlog `docs/_shared/backlog.md` tự đồng bộ (`_scripts/intake-sync.py`, rule `backlog.md`) |
+| `docs-input/` | Tài liệu khách gửi. Sổ nguồn `README.md` + backlog `_workspace/backlog.md` tự đồng bộ (`_scripts/intake-sync.py`, rule `backlog.md`) |
 | `_templates/` | Note templates referenced by skills |
 
 ## Folder structure‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
@@ -65,7 +65,7 @@
     │   ├── ascii-wireframe/              ← Screen content (gộp theo flow) + master metadata index. Output /wireframe-ascii, đọc srs/{feature}-userflow.md để chia flow
     │   │   ├── {feature}-wireframe-index.md  ← Master metadata: status/thuộc-flow/links/designs+used-by table cho TOÀN BỘ screens
     │   │   └── {flow-slug}.md         ← Zero frontmatter, gộp N screens/flow — mỗi screen 1 block `## Screen: {slug}` với 2 sub-section (Wireframe ASCII / Screen description table 4 cols, `• `+`<br>` format)
-    │   ├── html-design/{feature}-prototype.html ← Clickable HTML prototype self-contained, CHẠY NHƯ APP THẬT (state-driven, persist localStorage) + menu điều hướng NỔI (TOC + sơ đồ luồng, KHÔNG sidebar/iframe) + design tokens 2 lớp theme per-section + lớp GÓP Ý ghim-lên-element (mặc định có; `no-comment` để tắt) (output /prototype-html, đọc docs/design.md + primary_device từ userflow + chia flow từ userflow Mục 3)
+    │   ├── html-design/{feature}-prototype.html ← Clickable HTML prototype self-contained, CHẠY NHƯ APP THẬT (state-driven, persist localStorage) + menu điều hướng NỔI (TOC + sơ đồ luồng, KHÔNG sidebar/iframe) + design tokens 2 lớp theme per-section + lớp GÓP Ý ghim-lên-element (mặc định có; `no-comment` để tắt) (output /prototype-html, đọc design/design.md + primary_device từ userflow + chia flow từ userflow Mục 3)
 │   ├── html-wireframe/            ← HTML wireframe B&W per flow (output của /wireframe-html, đọc srs/{feature}-userflow.md; renderer ngang hàng /wireframe-ascii, đọc lại screen của nhau nếu đã tồn tại)
 │   │   ├── {feature}-wireframe-html-index.md  ← Master index: bảng Flows (file/screens/status)
 │   │   └── {flow-slug}.html       ← 1 file per flow, screens grid 3/row, HTML element thật, B&W
@@ -111,7 +111,7 @@ See `.claude/rules/status-lifecycle.md` for details.
 
 ## Changelog convention‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-Lịch sử thay đổi TOÀN vault sống ở __một file duy nhất__: `docs/_shared/changelog.md` — __bảng Markdown__ append-only, hook `auto-changelog.sh` là writer duy nhất. Doc KHÔNG mang `changelog:` frontmatter.
+Lịch sử thay đổi TOÀN vault sống ở __một file duy nhất__: `_workspace/changelog.md` — __bảng Markdown__ append-only, hook `auto-changelog.sh` là writer duy nhất. Doc KHÔNG mang `changelog:` frontmatter.
 
 ```markdown
 | Ngày | Skill | Người | File | Ghi chú |
@@ -120,7 +120,7 @@ Lịch sử thay đổi TOÀN vault sống ở __một file duy nhất__: `docs/
 | 2026-07-13 | /cr | @ba | `docs/payment/srs/payment-spec.md` | applied CR-20260713-001 |
 ```
 
-1 dòng bảng = 1 sự kiện, append cuối file. Skill set env `CLAUDE_SKILL_NAME`/`CLAUDE_CHANGELOG_NOTE`/`CLAUDE_CHANGELOG_AUTHOR` trước Write/Edit; hook append (tự escape `|` trong Ghi chú, tự dựng header khi file chưa có). Lịch sử 1 feature = `grep "docs/{feature}/" docs/_shared/changelog.md`. See `.claude/rules/changelog.md`.
+1 dòng bảng = 1 sự kiện, append cuối file. Skill set env `CLAUDE_SKILL_NAME`/`CLAUDE_CHANGELOG_NOTE`/`CLAUDE_CHANGELOG_AUTHOR` trước Write/Edit; hook append (tự escape `|` trong Ghi chú, tự dựng header khi file chưa có). Lịch sử 1 feature = `grep "docs/{feature}/" _workspace/changelog.md`. See `.claude/rules/changelog.md`.
 
 ## Approval gate (HITL)
 
@@ -168,8 +168,8 @@ __Specification phase:__
 | `/user-flow <feature\|mô tả>` | Nghiệp vụ → user flow mermaid (happy/error/edge) + chia flow (flow-slug + screens/mỗi flow) → @flow-reviewer review → HARD STOP user confirm. Output cố định `srs/{feature}-userflow.md`. __Chạy TRƯỚC__ `/wireframe-ascii` và `/wireframe-html` — nguồn chia flow DUY NHẤT dùng chung cho cả 2 |
 | `/wireframe-ascii <feature> [--flow <slug>]` | ASCII wireframe gộp theo flow (lo-fi, KHÔNG emoji trong khung → viền không lệch), đọc `srs/{feature}-userflow.md` (tự chạy `/user-flow` nếu chưa có). Output `ascii-wireframe/{flow-slug}.md` (1 file/flow, N screen/file) + bảng mô tả 5 cột `# / Items / Control type / Data type / Description` (dùng chung html/prototype) |
 | `/wireframe-html <feature> [--flow <slug>]` | HTML wireframe B&W per flow, grid 3 screens/row, render element HTML thật. Đọc `srs/{feature}-userflow.md`; renderer ngang hàng `/wireframe-ascii` — đọc lại screen ASCII đã có làm nguồn element nếu tồn tại, không thì tự suy luận từ tài liệu nghiệp vụ. Output `html-wireframe/{flow}.html` + `{feature}-wireframe-html-index.md`, bảng mô tả 5 cột |
-| `/figma <feature>` (hỏi tiếp muốn vẽ gì) hoặc `/figma <screen> --feature <slug>` (đủ ý, khỏi hỏi) | Vẽ thật lên Figma qua figma-ui-mcp; tuân design tokens `docs/design.md`. 2 chế độ chọn bằng câu hỏi tự nhiên (không flag): Nhanh (1 vài màn, base state) hoặc Đầy đủ (cả feature, kèm state/error variant + component reuse, tối đa 5 screens/hàng). Hard gate: kết nối Figma plugin + ASCII đã fill + chốt device size (Mục 7) |
-| `/prototype-html <feature> [no-comment]` | Clickable HTML prototype multi-screen (hi-fi — bậc cao nhất thang fidelity) __chạy như app thật__: state-driven (render từ store, hành động đổi state thật) + persist localStorage + menu điều hướng NỔI (TOC + sơ đồ luồng, KHÔNG iframe vì app share 1 store) + design tokens 2 lớp (raw palette → semantic, theme per-section transactional=light/marketing=dark) + vỏ chrome neutral tách khỏi app. __Kèm lớp GÓP Ý ghim-lên-element kiểu Figma (mặc định BẬT)__: pin bám element qua 4 tầng neo (data-cmt → id → selector+chữ ký → dò nội dung), lưu chung qua jsonbin để cả nhóm thấy nhau, phân vai admin (`#admin`, thấy Cài đặt + copy link mời) vs reviewer (chỉ góp ý, xoá/copy của mình). Thêm `no-comment` → bản trình chiếu thuần. Cần userflow (chia flow) + ASCII (bảng 5 cột) + `docs/design.md`. Template `_templates/prototype-html-template.html` · lớp góp ý `.claude/skills/prototype-html/assets/comment-layer.js` |
+| `/figma <feature>` (hỏi tiếp muốn vẽ gì) hoặc `/figma <screen> --feature <slug>` (đủ ý, khỏi hỏi) | Vẽ thật lên Figma qua figma-ui-mcp; tuân design tokens `design/design.md`. 2 chế độ chọn bằng câu hỏi tự nhiên (không flag): Nhanh (1 vài màn, base state) hoặc Đầy đủ (cả feature, kèm state/error variant + component reuse, tối đa 5 screens/hàng). Hard gate: kết nối Figma plugin + ASCII đã fill + chốt device size (Mục 7) |
+| `/prototype-html <feature> [no-comment]` | Clickable HTML prototype multi-screen (hi-fi — bậc cao nhất thang fidelity) __chạy như app thật__: state-driven (render từ store, hành động đổi state thật) + persist localStorage + menu điều hướng NỔI (TOC + sơ đồ luồng, KHÔNG iframe vì app share 1 store) + design tokens 2 lớp (raw palette → semantic, theme per-section transactional=light/marketing=dark) + vỏ chrome neutral tách khỏi app. __Kèm lớp GÓP Ý ghim-lên-element kiểu Figma (mặc định BẬT)__: pin bám element qua 4 tầng neo (data-cmt → id → selector+chữ ký → dò nội dung), lưu chung qua jsonbin để cả nhóm thấy nhau, phân vai admin (`#admin`, thấy Cài đặt + copy link mời) vs reviewer (chỉ góp ý, xoá/copy của mình). Thêm `no-comment` → bản trình chiếu thuần. Cần userflow (chia flow) + ASCII (bảng 5 cột) + `design/design.md`. Template `_templates/prototype-html-template.html` · lớp góp ý `.claude/skills/prototype-html/assets/comment-layer.js` |
 | `/prototype-next <feature>` | Prototype __chạy được bằng Next.js__ — sinh code thật vào `prototype/` (App Router + Tailwind v4 + shadcn), tự build + tự sửa lỗi + tự chạy local + __tự smoke-test luồng__, rồi báo URL. __App shell đầy đủ__ (sidebar/topbar/user menu + route guard client-side) + luồng đúng SRS + dữ liệu mẫu + __Demo Toolbar nổi 4 khối__ (ép lỗi theo mã `E-{feature}-NNN` · nhảy màn theo flow · tài khoản mẫu 1 chạm · reset + độ trễ giả). "Backend giả" = __zustand persist localStorage__ (`skipHydration`), KHÔNG BE/DB/API/MSW. __Kiến trúc máy-làm-phần-tất-định__: 4 engine ở `.claude/skills/prototype-next/engine/` — `proto-extract` (bóc Error Matrix + wording/FR/BR/entity/state/element từ __KG__, sinh sẵn `errors.ts`+`types.ts`, cảnh báo stale + format bảng lạ, KHÔNG im lặng trả rỗng) · `proto-scaffold` (chép boilerplate) · `proto-build` (build + tự sửa lỗi cơ học, dừng khi lỗi lặp lần 2, in `PROTO_URL`) · `proto-smoke` (Playwright kiểm __4 mức tách bạch__: trang tải · element có mặt · luồng đi đúng · __nhánh lỗi đúng wording__ — build xanh KHÔNG phải verify). AI chỉ đọc userflow + use case + design.md. Update mode qua `.demo-manifest.json`. Chỉ ghi trong `prototype/`. Khác `/prototype-html` (1 file HTML gửi kèm được, có lớp góp ý) |
 
 > **`/intake [<file|thư mục>...]`** — tài liệu khách gửi (docx/pdf/xlsx/pptx/ảnh scan) → `.md` __đủ nội dung__ (giữ số mục Word, chép đủ file đính kèm kèm "Trùng với …", trang scan đọc lại theo ảnh; ảnh nhúng chỉ trích vào `images/` + link) + `source/` (bản gốc) → đặt tên + xếp vào `docs-input/{nhóm}/{slug}/`. Bản mới của tài liệu cũ → báo thay đổi nghiệp vụ, user đồng ý mới ghi đè cùng đường dẫn (bản gốc cũ vào `source/cu/`, báo cáo `docs-input/_changes/`). Làm trong `docs-input/.staging/` trước L1. Script ở `.claude/skills/intake/scripts/` (convert/verify/match/diff); sổ nguồn + backlog tự theo qua `_scripts/intake-sync.py`. Không tham số = quét file mới trong `docs-input/`.
@@ -262,7 +262,7 @@ Chạy lại toàn bộ sau khi sửa gate: `bash .claude/scripts/diagram-gates-
 
 __Hooks (auto-fire on PostToolUse Write/Edit):__
 
-- `auto-changelog.sh` — append 1 dòng sự kiện vào `docs/_shared/changelog.md` (writer duy nhất, dedupe dòng trùng).
+- `auto-changelog.sh` — append 1 dòng sự kiện vào `_workspace/changelog.md` (writer duy nhất, dedupe dòng trùng).
 - `status-transition.sh` — print suggestion khi `status:` field thay đổi.
 - `post-edit-stale.sh` — reverse-graph scan `links:` → mark downstream `status: stale` + log `_shared/staleness.md`.
 - `session-init.sh` (SessionStart) — print dashboard counts.
@@ -284,7 +284,7 @@ __Pattern toàn pipeline:__
 - __Wikilinks__: `[[docs/payment/srs/spec|Payment SRS]]` — full path từ vault root, Obsidian + GitHub render
 - __Dates__: ISO `YYYY-MM-DD`
 - __Mermaid diagrams__: inline ` ```mermaid ` blocks
-- __Frontmatter__: YAML tối giản — doc per-feature có `type`, `feature`, `status`, `updated`, `links` (flat list). KHÔNG có `created`/`owner`/`changelog` (diet 2026-07-12 — lịch sử + tác giả sống ở `docs/_shared/changelog.md`)
+- __Frontmatter__: YAML tối giản — doc per-feature có `type`, `feature`, `status`, `updated`, `links` (flat list). KHÔNG có `created`/`owner`/`changelog` (diet 2026-07-12 — lịch sử + tác giả sống ở `_workspace/changelog.md`)
 - __IDs feature-prefixed__ cho cross-aggregate: `FR-{feature}-NNN`, `NFR-{feature}-NNN`, `BR-{feature}-NNN`, `E-{feature}-NNN`, `BO-{feature}-NN`, `CAP-{feature}-NN`. US/AC scope qua path (no feature prefix in ID). See `.claude/rules/naming-conventions.md` Mục ID conventions.
 - __Language__: Vietnamese-first; tiếng Anh cũng support; auto-detect từ seed.
 

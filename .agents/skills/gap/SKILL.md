@@ -93,10 +93,10 @@ Suy phase từ artifact có thật trong feature, KHÔNG so mọi feature với 
 
 2) **Đảm bảo graph tươi RỒI chạy engine** (nguồn không-bịa, chạy trước để định hướng):
    ```bash
-   # graph.json thiếu HOẶC docs/_shared/kg/.dirty tồn tại → build lại trước.
+   # graph.json thiếu HOẶC _workspace/kg/.dirty tồn tại → build lại trước.
    # KHÔNG chạy engine trên graph cũ: tài liệu vừa thêm luồng mở khóa mà graph
    # chưa cập nhật → báo gap giả, hoặc im lặng giả (đã có mà graph chưa thấy).
-   [ -f docs/_shared/kg/graph.json ] && [ ! -f docs/_shared/kg/.dirty ] || node .Codex/skills/kg/engine/kg-build.mjs
+   [ -f _workspace/kg/graph.json ] && [ ! -f _workspace/kg/.dirty ] || node .Codex/skills/kg/engine/kg-build.mjs
    node .Codex/skills/gap/engine/flowgap.mjs {feature}
    ```
    * Engine trả 3 nhóm kèm **cột `Mức`** (đã render sẵn trong markdown, KHÔNG cần `--json`): **A. STATE-GAP** (dead-end · unreachable · no-exit-path), **B. REVERSE-PAIR-GAP**, **C. CRUD-GAP**.

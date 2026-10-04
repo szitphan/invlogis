@@ -5,7 +5,7 @@ updated: 2026-10-01
 links:
   - docs-input/srs-cu/lg-srs-export.md
   - docs/_shared/system-overview.md
-  - docs/design.md
+  - design/design.md
 ---
 
 # Operating Environment

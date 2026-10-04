@@ -16,7 +16,7 @@
   {{DEVICE_W}}    → 375 | 768 | (desktop: bỏ frame — xem CSS .proto-stage[data-device="desktop"])
   {{DEVICE_H}}    → 812 (mobile) | 1024 (tablet) | — (desktop)
   {{FLOW_COUNT}} · {{SCREEN_COUNT}}
-  {{RAW_PALETTE}} → khối biến --palette-* copy hex TỪ docs/design.md (raw, chỉ khai báo 1 lần)
+  {{RAW_PALETTE}} → khối biến --palette-* copy hex TỪ design/design.md (raw, chỉ khai báo 1 lần)
   {{THEME_SEMANTIC}} → 3 block :root(default) + [data-theme="light"] + [data-theme="dark"] map semantic token
   {{APP_COMPONENT_CSS}} → CSS component của app (chỉ dùng semantic token var(--bg)/var(--ink)/... — KHÔNG hex rời)
   {{ICON_SPRITE}} → <symbol> SVG stroke inline (KHÔNG emoji)
@@ -140,7 +140,7 @@
       pointer-events: none; opacity: 0.75; }
 
     /* ══════════ LỚP 2: APP (design tokens — CHỈ lớp này có màu) ══════════ */
-    /* RAW PALETTE — copy hex từ docs/design.md, SỬA CHỈ ở đây */
+    /* RAW PALETTE — copy hex từ design/design.md, SỬA CHỈ ở đây */
     :root {
       {{RAW_PALETTE}}
     }

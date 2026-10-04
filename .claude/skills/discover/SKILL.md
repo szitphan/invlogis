@@ -84,7 +84,7 @@ Từ "Người dùng" trong heading thay bằng thuật ngữ profile nếu có 
   Collision cùng date+slug → suffix `-v2`.
 * __Vietnamese-first__ default, auto-detect từ chủ đề/nội dung. Muốn tiếng Anh thì nói "viết bằng tiếng Anh".
 * __Frontmatter tối giản__ (`type`/`status`/`keyword`/`updated`/`links` — KHÔNG `created`/`owner`/`changelog`).
-  Lịch sử qua `docs/_shared/changelog.md` (hook ghi). Per naming-conventions + changelog rule.
+  Lịch sử qua `_workspace/changelog.md` (hook ghi). Per naming-conventions + changelog rule.
 * __No-re-ask rule__ — user đã trả lời trong session / trong file đã tồn tại → không hỏi lại. Per ba-conventions Mục 2.
 * __KG chỉ định tuyến Project match, KHÔNG thay evidence prose__ — ở Pha B2, KG tìm candidate feature/brainstorm liên quan theo concept trước; kết luận match và context 2-3 dòng LUÔN đến từ grep + prose đã Read. Nếu output có `⚠ còn N mục — chạy với --all` thì chạy lại query với `--all`; nếu có `Phải Read tay (ngoài graph)` thì Read các file đó. `KG-ERROR` hoặc exit ≠ 0 → bỏ kết quả KG và giữ nguyên flow grep + Read cũ.
 * __Bỏ qua web research__ — user nói "đừng search web" / "khỏi cần competitor" → skip Pha C, output chỉ

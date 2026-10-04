@@ -11,7 +11,7 @@
 
 ## 1. Author resolution (cho activity log)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-> Frontmatter KHÔNG còn field `owner` (diet 2026-07-12) — "ai làm" ghi per-event ở cột @author của `docs/_shared/changelog.md`.
+> Frontmatter KHÔNG còn field `owner` (diet 2026-07-12) — "ai làm" ghi per-event ở cột @author của `_workspace/changelog.md`.
 
 - Resolve @author từ memory `user-identity.md` (key `current_user`).
 - Nếu memory chưa có → đọc `git config user.name` + `git config user.email` → ask user confirm @handle (vd `@an.nguyen` từ `an.nguyen@example.com`) → save vào memory. KHÔNG hardcode handle sẵn — mỗi người dùng 1 handle riêng, luôn hỏi rồi lưu.
@@ -96,7 +96,7 @@ __Gọn — KHÔNG dài dòng thừa:__ giữ đủ 6 lớp nhưng wording súc 
 > Áp cho `/wireframe-ascii`, `/wireframe-html`, `/prototype-html`. Device size (mobile 375 / tablet 768 / desktop 1920 / responsive) quyết định bề rộng khung + cách xếp layout — là __quyết định thiết kế__, KHÔNG được tự đoán im lặng (đúng tinh thần `approval-gate.md`: không auto-pick dù "có vẻ rõ").
 
 - __Luôn hỏi user device__ ở đầu skill (trước khi vẽ), qua AskUserQuestion 4 lựa chọn: Mobile 375 / Tablet 768 / Desktop 1920 / Responsive.
-- __Đề xuất sẵn 1 device__ để user chỉ cần xác nhận nhanh: ưu tiên `srs/{feature}-userflow.md` frontmatter `primary_device`; thiếu thì suy từ `docs/design.md` (Breakpoints / Max content width). Đặt option đề xuất lên đầu + note "(đề xuất — từ {nguồn})".
+- __Đề xuất sẵn 1 device__ để user chỉ cần xác nhận nhanh: ưu tiên `srs/{feature}-userflow.md` frontmatter `primary_device`; thiếu thì suy từ `design/design.md` (Breakpoints / Max content width). Đặt option đề xuất lên đầu + note "(đề xuất — từ {nguồn})".
 - __KHÔNG suy 1 device rồi vẽ luôn__ — kể cả khi design.md rõ ràng. Suy được chỉ để *đề xuất*, không để *tự chốt*.
 - User chốt device mà `userflow.md` chưa có `primary_device` → gợi ý ghi ngược vào userflow frontmatter (single-source, để `/wireframe-html` + `/prototype-html` + lần sau dùng chung, không hỏi lại — no-re-ask).
 - `responsive` chỉ dùng khi user chọn rõ VÀ renderer thực sự sinh nhiều breakpoint; KHÔNG gắn nhãn responsive rỗng.

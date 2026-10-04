@@ -1,6 +1,6 @@
 # Backlog — task tự thêm, tự đóng
 
-> Rule chung cho MỌI skill và mọi lượt làm việc. Nguồn: `docs/_shared/backlog.md` (task) +
+> Rule chung cho MỌI skill và mọi lượt làm việc. Nguồn: `_workspace/backlog.md` (task) +
 > `docs-input/README.md` (sổ nguồn). Máy làm phần tất định (`_scripts/intake-sync.py`, hook); rule này
 > phủ phần máy không tự biết: task phát sinh từ hội thoại.
 

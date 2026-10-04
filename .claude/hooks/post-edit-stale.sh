@@ -4,7 +4,7 @@
 # Khi file X được Edit, scan reverse-graph:
 #   - Tìm mọi doc Y có `links:` flat list chứa path X.
 #   - Mark Y's status → stale (nếu Y chưa stale/archived).
-#   - Append entry (kèm lý do) vào docs/_shared/staleness.md — reason CHỈ sống ở log,
+#   - Append entry (kèm lý do) vào _workspace/staleness.md — reason CHỈ sống ở log,
 #     KHÔNG ghi field stale_reason vào frontmatter (đã bỏ field này 2026-07-11).
 #
 # Format: bảng Markdown 4 cột, 1 dòng = 1 lần lan stale:
@@ -45,7 +45,7 @@ REL_FILE="${FILE#$PROJECT_PATH/}"
 
 DATE=$(date +%Y-%m-%d)
 SKILL="${CLAUDE_SKILL_NAME:-manual}"
-LOG="$PROJECT_PATH/docs/_shared/staleness.md"
+LOG="$PROJECT_PATH/_workspace/staleness.md"
 mkdir -p "$(dirname "$LOG")"
 
 # Bootstrap header khi file chưa tồn tại (hoặc rỗng) — bảng cần header + separator.
@@ -120,7 +120,7 @@ while IFS= read -r CANDIDATE; do
 done < <(find "$PROJECT_PATH/docs" -name "*.md" -type f 2>/dev/null | grep -v "/exports/" | grep -v "/inbox/" | grep -v "/docs/cr/" | grep -v "/_reverse/")
 
 if [ "$PROPAGATED" -gt 0 ]; then
-    echo "  ↳ stale propagated to $PROPAGATED downstream doc(s). Check docs/_shared/staleness.md."
+    echo "  ↳ stale propagated to $PROPAGATED downstream doc(s). Check _workspace/staleness.md."
 fi
 
 exit 0

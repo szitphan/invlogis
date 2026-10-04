@@ -1,6 +1,6 @@
 # KG Engine — Schema Contract v1 (hợp đồng chung cho kg-build.mjs + kg-query.mjs)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-> 2 module giao tiếp DUY NHẤT qua `docs/_shared/kg/graph.json` theo schema này. Zero-dependency (chỉ node built-ins: fs/path/process/child_process/url — KHÔNG npm). Node ≥18, ESM `.mjs`. kg-query bình thường CHỈ đọc graph.json; khi graph dirty/vắng nó tự spawn kg-build (lazy rebuild) rồi mới trả lời.
+> 2 module giao tiếp DUY NHẤT qua `_workspace/kg/graph.json` theo schema này. Zero-dependency (chỉ node built-ins: fs/path/process/child_process/url — KHÔNG npm). Node ≥18, ESM `.mjs`. kg-query bình thường CHỈ đọc graph.json; khi graph dirty/vắng nó tự spawn kg-build (lazy rebuild) rồi mới trả lời.
 
 ## graph.json schema‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -125,7 +125,7 @@
 ## CLI contract
 
 ```
-node kg-build.mjs [--dir docs] [--out docs/_shared/kg/graph.json] [--verify] [--strict] [--quiet] [--no-timestamp]
+node kg-build.mjs [--dir docs] [--out _workspace/kg/graph.json] [--verify] [--strict] [--quiet] [--no-timestamp]
   exit 0 = build OK; --verify và có finding ✗ → exit 1 (in bảng finding); lỗi IO/parse chết người → exit 2
   Finding ✗: dangling-ref (ID refer không định nghĩa) · uncataloged-content · dangling-doc-ref (edge→path .md không tồn tại trên disk)
   Finding ⚠ (chỉ fail với --strict): unparsed-doc · error-double-book (E dùng chung nhiều UC là HỢP LỆ — chỉ nhắc kiểm) · dangling-doc-ref ngoài-scope
@@ -135,7 +135,7 @@ node kg-query.mjs <explore|impact|tour|coverage|facts|trace|neighbors|orphans|co
   impact --staged | --unstaged | --since <ref>: seed reverse-closure từ git diff thay vì 1 ID gõ tay. Phạm vi: staged=index (diff --cached); unstaged=working-tree (diff) + untracked (ls-files --others); --staged --unstaged=UNION cả 2; --since=<ref>..HEAD. Chạy từ repo-root (-C root, độc lập cwd); --name-status -z (path thô không C-quote, lấy cả old+new khi rename). Chỉ file KG ingest như NGUỒN — MIRROR walk-scope kg-build: .md (bất kỳ); .dbml chỉ {feature}/dbdiagram/{feature}.dbml; .ir/.src.json chỉ trong dir bpmn; bỏ exports/inbox/reports/_regen-sample/guides (KHÔNG lọc theo dir ẩn — builder không lọc). .spec.ts KHÔNG tính (auto-gen, không phải nguồn). docs/ ingest được nhưng không map node → "Read tay" (fold vào footer cuối); còn lại → outOfScope. Seed doc-node = LÁ (không nở), artifact-node nở; explicit `impact <doc-path>` thì doc-root VẪN nở. --since loại trừ --staged/--unstaged; mọi mode loại trừ ID positional. KHÔNG phải git repo / <ref> sai → KG-ERROR exit 2. Giới hạn có-chủ-đích: file bị XÓA (status D) khi graph đã rebuild-không-còn-node của nó → vào "Read tay" (không nở downstream — node/edge đã biến mất khỏi graph current-state; truy vết lịch sử là việc của temporal `history`, KHÔNG fail-loud vì xóa hợp lệ không được làm hỏng cả query).
 ```
 
-Walk scope: `docs/**/*.md` + `docs/{feature}/dbdiagram/{feature}.dbml` + `docs/**/bpmn/*.ir.json` + `docs/**/bpmn/*.src.json` + `.claude/state/atlassian/sync-state.yaml` (VẮNG → skip + note coverage). `.src.json` cùng basename enrich `bpmn_process`: `branches[]` → `props.branches`; `actors[]` → actor node + edge `REFERENCES` (KHÔNG lưu vào props); `errors[]` → edge `RAISES` (E-code declared / title-match heuristic — xem mục Edge types). **Exclude dirs:** `docs/exports`, `docs/inbox`, `docs/reports`, `docs/_regen-sample` (bản copy sample → ID trùng), `docs/guides`. Ingest thêm event stream: `docs/_shared/changelog.md` (enrich doc props: authors, last_activity) + `docs/_shared/staleness.md` (edge STALE_IMPACTS).‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+Walk scope: `docs/**/*.md` + `docs/{feature}/dbdiagram/{feature}.dbml` + `docs/**/bpmn/*.ir.json` + `docs/**/bpmn/*.src.json` + `.claude/state/atlassian/sync-state.yaml` (VẮNG → skip + note coverage). `.src.json` cùng basename enrich `bpmn_process`: `branches[]` → `props.branches`; `actors[]` → actor node + edge `REFERENCES` (KHÔNG lưu vào props); `errors[]` → edge `RAISES` (E-code declared / title-match heuristic — xem mục Edge types). **Exclude dirs:** `docs/exports`, `docs/inbox`, `docs/reports`, `docs/_regen-sample` (bản copy sample → ID trùng), `docs/guides`. Ingest thêm event stream: `_workspace/changelog.md` (enrich doc props: authors, last_activity) + `_workspace/staleness.md` (edge STALE_IMPACTS).‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->

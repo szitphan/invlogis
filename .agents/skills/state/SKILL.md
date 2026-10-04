@@ -106,7 +106,7 @@ Features có states.md: !`for d in docs/*/srs/*-states.md; do [ -f "$d" ] && ech
    ```
    > **ID full-form bắt buộc** trong dòng Related — luôn `BR-{feature}-NNN`, KHÔNG short-form `BR-001` (nguồn edge cho KG; short-form gây feature-ma + mất trace). **Related entity** viết CamelCase khớp ERD.
 8) **Gọi lại với entity trùng** (update mode tự động) → L2 diff cho section đó.
-9) **Activity log** — set env `CLAUDE_SKILL_NAME=/state` + `CLAUDE_CHANGELOG_NOTE` (note: `added/updated {Entity} state diagram`) TRƯỚC khi Write — hook append vào `docs/_shared/changelog.md` (không phụ thuộc spec.md tồn tại hay chưa, không còn routing/fallback). Update states.md `updated: {date}`.
+9) **Activity log** — set env `CLAUDE_SKILL_NAME=/state` + `CLAUDE_CHANGELOG_NOTE` (note: `added/updated {Entity} state diagram`) TRƯỚC khi Write — hook append vào `_workspace/changelog.md` (không phụ thuộc spec.md tồn tại hay chưa, không còn routing/fallback). Update states.md `updated: {date}`.
 9.5. **Render-verify + TỰ XEM ẢNH (BẮT BUỘC, chạy ngay sau Write)** — `node .Codex/scripts/mermaid-verify.mjs --file docs/{feature}/srs/{feature}-states.md --png <scratchpad>/state-review`. Cờ `--png` vừa compile-check vừa xuất ảnh PNG mỗi block để skill **tự Read xem hình**. Mermaid không render trong chat (đây là lý do skip L3), nên đây là cách duy nhất bắt lỗi TRƯỚC khi báo "xong" thay vì để user tự phát hiện khi mở IDE.
    * Script chạy **3 tầng, báo tách riêng**: cú pháp compile · nhãn an toàn renderer · **ngữ nghĩa**.
      Tầng ngữ nghĩa cho state bắt: thiếu `[*] -->` khởi đầu (**error**), state không tới được từ
@@ -140,7 +140,7 @@ Features có states.md: !`for d in docs/*/srs/*-states.md; do [ -f "$d" ] && ech
 
 `docs/{feature}/srs/{feature}-states.md` — **append 1 section** `## State: {Entity}` với mermaid `stateDiagram-v2`. 1 file gộp mọi entity của feature. Slim frontmatter (`type: srs-states` / `feature` / `updated`).
 
-Hook tự ghi 1 dòng vào `docs/_shared/changelog.md`.
+Hook tự ghi 1 dòng vào `_workspace/changelog.md`.
 
 ## Mermaid syntax reference
 

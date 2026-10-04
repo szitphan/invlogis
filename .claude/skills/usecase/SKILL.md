@@ -23,7 +23,7 @@ Generate use-case docs **theo chuẩn Cockburn (fully-dressed)**: mỗi UC = **1
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `docs/_shared/screen-patterns.md` (CMP) + `docs/_shared/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
+- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 - **L1 approval** trước Write.
 - **L2 diff** khi file đã tồn tại — update mode tự động, không cần flag.
 - **Auto-detect upstream + confirm** — scan SRS FR + screens (downstream mode).
@@ -185,7 +185,7 @@ Existing UCs: !`ls docs/*/usecases/uc-*.md 2>/dev/null | head -20`
 | `docs/{feature}/usecases/uc-{slug}.md` | Use case fully-dressed Cockburn — **zero frontmatter** |
 | `docs/{feature}/usecases/{feature}-usecase-index.md` | Master metadata + bảng `## Use cases` = ma trận truy vết UC↔FR↔Screen↔Error↔OQ |
 
-Diagram KHÔNG embed trong UC — thuộc `srs/{feature}-flows.md` / `{feature}-states.md`. Hook tự ghi `docs/_shared/changelog.md`.
+Diagram KHÔNG embed trong UC — thuộc `srs/{feature}-flows.md` / `{feature}-states.md`. Hook tự ghi `_workspace/changelog.md`.
 
 ## References
 

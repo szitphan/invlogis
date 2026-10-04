@@ -26,10 +26,10 @@ gói miễn phí, hoặc cần bắt đầu ngay.
    ```
    .claude/skills/                  ← 12 skill của Kit + figma-screen/
    .claude/rules/design-system.md   ← rule dùng design system
-   docs/design.md                   ← nguồn chuẩn
-   docs/design-tokens.css
-   docs/figma-library-keys.json     ← chỉ cần cho Cách A
-   docs/setup-figma.md              ← file này
+   design/design.md                   ← nguồn chuẩn
+   design/design-tokens.css
+   design/figma-library-keys.json     ← chỉ cần cho Cách A
+   design/setup-figma.md              ← file này
    ```
 4. Nếu có bản cập nhật, lấy file Astryx trên Figma Community vào **Drafts** hoặc project của team
    (nút *Open in Figma*). Tài liệu `design.md` được trích từ bản đang dùng:
@@ -139,7 +139,7 @@ Desktop, Tablet, Responsive dùng `-web`; Mobile 375 dùng `-mob`. Userflow nố
 
 Mở Claude Code trong thư mục dự án, mở file dự án trên Figma, chạy plugin Reqwise, rồi nói:
 
-> *Kiểm tra setup Figma cho /figma-screen theo docs/setup-figma.md mục 3.*
+> *Kiểm tra setup Figma cho /figma-screen theo design/setup-figma.md mục 3.*
 
 Claude sẽ tạo một frame tạm ở góc xa canvas, thử 4 việc dưới đây rồi **xóa frame đó**:
 
@@ -157,7 +157,7 @@ Claude sẽ tạo một frame tạm ở góc xa canvas, thử 4 việc dưới �
 * Vẽ màn: `/figma-screen <màn hoặc tính năng>`.
 * Chưa có userflow cho luồng nhiều màn: chạy `/figma-userflow` trước.
 * Không sửa component chính trong file dự án. Muốn đổi component thì đổi ở thư viện (Cách A) hoặc
-  ghi đề xuất vào `docs/design.md` (Iteration Guide), qua duyệt, rồi mới sửa.
+  ghi đề xuất vào `design/design.md` (Iteration Guide), qua duyệt, rồi mới sửa.
 
 ## 5. Khi Astryx có bản mới
 
@@ -165,7 +165,7 @@ Claude sẽ tạo một frame tạm ở góc xa canvas, thử 4 việc dưới �
 |---|---|
 | Cách A | Cập nhật file thư viện, rồi **Publish** lại. Ở file dự án: Assets, bấm **Update** khi Figma báo có cập nhật |
 | Cách B | Duplicate bản Astryx mới, rồi chép các trang module (nhóm `SCREENS`), trang `Sitemap & Flows` và `Archive` từ file cũ sang (copy/paste frame). Instance dán sang **chưa chắc** tự trỏ vào component của file mới; phải kiểm từng loại và swap tay nếu cần. Việc này tốn công, nên dự án dài hơi thì nên chọn Cách A ngay từ đầu |
-| Cả hai | Trích lại token vào `docs/design.md` và `docs/design-tokens.css` cùng lượt, qua duyệt. Nếu dùng file Astryx khác, nhờ Claude sinh lại `docs/figma-library-keys.json` (đọc `get_design_system_kit` của file thư viện) |
+| Cả hai | Trích lại token vào `design/design.md` và `design/design-tokens.css` cùng lượt, qua duyệt. Nếu dùng file Astryx khác, nhờ Claude sinh lại `design/figma-library-keys.json` (đọc `get_design_system_kit` của file thư viện) |
 
 ### 5.1 Áp lại các sửa của dự án sau khi đồng bộ
 

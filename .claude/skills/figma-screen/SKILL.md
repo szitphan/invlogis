@@ -1,6 +1,6 @@
 ---
 name: figma-screen
-description: Vẽ màn hình giao diện (UI) lên Figma theo đúng design system của dự án — đề xuất 3 phương án bố cục (1 theo mẫu có sẵn trong docs/design.md + 2 độc lập) để user chọn, dùng component thật (instance), gắn token theo tên, vẽ đủ trạng thái rỗng/đang tải/lỗi, rồi tự kiểm trước khi trình. Dùng khi ai đó nói "vẽ màn", "dựng màn hình", "vẽ UI", "mock up màn", "làm giao diện cho <tính năng>" trên Figma.
+description: Vẽ màn hình giao diện (UI) lên Figma theo đúng design system của dự án — đề xuất 3 phương án bố cục (1 theo mẫu có sẵn trong design/design.md + 2 độc lập) để user chọn, dùng component thật (instance), gắn token theo tên, vẽ đủ trạng thái rỗng/đang tải/lỗi, rồi tự kiểm trước khi trình. Dùng khi ai đó nói "vẽ màn", "dựng màn hình", "vẽ UI", "mock up màn", "làm giao diện cho <tính năng>" trên Figma.
 allowed-tools: Read, Glob, Grep, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write
 user-invocable: true
 argument-hint: "<màn hoặc tính năng cần vẽ> [@nguồn: srs, states, userflow]"
@@ -29,11 +29,11 @@ lại cả màn.
 
 ## Luật quyết định thành bại
 
-**`docs/design.md` là nguồn duy nhất.** Đọc lại từ file mỗi lần chạy, **theo mục** như rule workspace
+**`design/design.md` là nguồn duy nhất.** Đọc lại từ file mỗi lần chạy, **theo mục** như rule workspace
 quy định (Bước 1.2), không trích từ trí nhớ phiên trước (file có thể đã đổi). Mọi giá trị cụ thể (màu, cỡ, mẫu bố cục, tên component, tên biến
 Figma, định dạng ngày/tiền) lấy từ đó. Skill này **không** chứa giá trị nào của dự án.
 
-Chưa có `docs/design.md` → báo 1 dòng "Chưa có docs/design.md — dùng mặc định của skill", rồi
+Chưa có `design/design.md` → báo 1 dòng "Chưa có design/design.md — dùng mặc định của skill", rồi
 đọc `figma_rules` (token/component đang có trong file) và `figma_docs(section="style")` làm mặc
 định. **Không** tự bịa design system.
 
@@ -42,7 +42,7 @@ Chưa có `docs/design.md` → báo 1 dòng "Chưa có docs/design.md — dùng 
 Không hỏi user những gì đọc được.
 
 1. `figma_status` → xác nhận plugin, file, trang đang mở.
-2. Đọc `docs/design.md` theo mục (cách đọc: `.claude/rules/design-system.md` § Nguồn duy nhất) —
+2. Đọc `design/design.md` theo mục (cách đọc: `.claude/rules/design-system.md` § Nguồn duy nhất) —
    file dài, đọc thừa làm chậm và đẩy phần cần dùng ra khỏi tầm chú ý:
    * `Grep -n "^## \|^### "` lấy mục lục; Read từng mục bằng offset/limit.
    * **Luôn đọc:** Typography › Principles, Tên trong Figma, Do's and Don'ts, Iteration Guide,
@@ -54,9 +54,9 @@ Không hỏi user những gì đọc được.
      Behavior.
    * Không đọc Overview, Colors, Typography Hierarchy, Elevation, Shapes: token gắn theo tên (tên ở
      § Tên trong Figma). Đoạn đã đọc có "xem §…" → đọc luôn đoạn đó.
-   * Chi tiết Known Gap cần người phụ trách/ngày hẹn nằm ở `docs/design-backlog.md` — không cần đọc
+   * Chi tiết Known Gap cần người phụ trách/ngày hẹn nằm ở `design/design-backlog.md` — không cần đọc
      khi vẽ.
-   Có `docs/components.md` thì đọc **Bảng chọn nhanh**, rồi đọc mục riêng của từng component định
+   Có `design/components.md` thì đọc **Bảng chọn nhanh**, rồi đọc mục riêng của từng component định
    dùng (Usage, Nên/Không nên, Examples). File dài, nên không đọc toàn văn.
 3. Tìm nguồn nghiệp vụ trong workspace (Glob): `srs/{feature}*.md`, `srs/{feature}-states.md`,
    file user tag bằng `@`. Có nguồn thì **dẫn xuất từ nguồn**, chỉ hỏi phần nguồn bỏ trống.
@@ -130,7 +130,7 @@ Luồng 1 — Duyệt đơn: 2.1-web danh-sach-don → 2.2-web chi-tiet-don
 2.2-web · chi-tiet-don    Mẫu P7 · nút chính [Duyệt]
 Khung: Desktop 1920×1080
 Nơi vẽ: trang "02 · Đơn hàng" › F01 · Duyệt đơn › Web
-Token/component: docs/design.md (Astryx), instance thư viện
+Token/component: design/design.md (Astryx), instance thư viện
 Trạng thái phụ: không vẽ (chế độ Nhanh)
 Chưa có chuẩn: (không)
 Apply? (Y / sửa / chọn màn cụ thể)
@@ -147,7 +147,7 @@ Lỗi đại diện: 2.2-web banner lỗi tải; ghi chú liệt kê các lỗi 
 Trạng thái nghiệp vụ → nhóm: Nháp→Neutral · Chờ duyệt→Warning · Đã duyệt→Success · Từ chối→Error
 Khung: Desktop 1920×1080
 Nơi vẽ: trang "02 · Đơn hàng" › F01 · Duyệt đơn › Web
-Token/component: docs/design.md (Astryx), instance thư viện
+Token/component: design/design.md (Astryx), instance thư viện
 Chưa có chuẩn: (không)
 Apply? (Y / sửa / chọn luồng cụ thể)
 ```
@@ -157,7 +157,7 @@ giả định trong một đoạn để user sửa một lần.
 
 ## Bước 3 — chốt nơi vẽ
 
-Component phải là **instance thật**. File dự án được setup theo `docs/setup-figma.md`, theo một
+Component phải là **instance thật**. File dự án được setup theo `design/setup-figma.md`, theo một
 trong hai cách: **A** (bật thư viện đã publish) hoặc **B** (file dự án là bản sao của file thư viện).
 Nhận diện cách đang dùng trước khi vẽ:
 
@@ -167,11 +167,11 @@ return local;
 ```
 
 * **Tìm thấy trong file (Cách B)** → dùng `figma.instantiate("<Tên>")` như Bước 4.
-* **Không thấy trong file** → có thể là Cách A. Read `docs/figma-library-keys.json`, lấy key của
+* **Không thấy trong file** → có thể là Cách A. Read `design/figma-library-keys.json`, lấy key của
   component cần dùng, rồi `figma.getLibraryComponent(key)` và instantiate theo **id** trả về. Nạp
   mỗi component một lần, lưu id vào `state` để dùng lại trong phiên.
 * **Không có key, hoặc `getLibraryComponent` lỗi** → file chưa setup. **Dừng**, chỉ user đọc
-  `docs/setup-figma.md` và chạy mục 3 (Kiểm tra setup). Chỉ vẽ khung tự dựng bằng token khi user
+  `design/setup-figma.md` và chạy mục 3 (Kiểm tra setup). Chỉ vẽ khung tự dựng bằng token khi user
   đồng ý rõ ràng, và phải ghi "không dùng component thư viện" trong báo cáo.
 
 Nơi đặt màn: **trang module** `NN · <Module>`, trong Section feature `Fxx · <tên feature>`, rồi vào
@@ -179,9 +179,9 @@ Section con `Web` hoặc `Mobile` theo thiết bị đã chốt. Section chưa c
 module thì hỏi user** trước khi tạo (`figma.createPage`), đặt trong nhóm `SCREENS`, tên thụt 5 dấu
 cách (`"     06 · <Module>"`); tìm trang theo tên thì `trim()` trước khi so. Không tạo trang riêng cho
 từng feature. **Không bao giờ** vẽ lên các trang nhóm DESIGN SYSTEMS (component của thư viện),
-Sandbox hay Archive. Quy ước đầy đủ: mục *Cấu trúc trang file dự án* của `docs/setup-figma.md`.
+Sandbox hay Archive. Quy ước đầy đủ: mục *Cấu trúc trang file dự án* của `design/setup-figma.md`.
 
-User nhờ "kiểm tra setup" → chạy đúng bảng ở mục 3 của `docs/setup-figma.md` trên một frame tạm
+User nhờ "kiểm tra setup" → chạy đúng bảng ở mục 3 của `design/setup-figma.md` trên một frame tạm
 ở góc xa canvas, báo đạt/trượt từng dòng, rồi **xóa frame tạm**.
 
 ## Bước 4 — vẽ
@@ -239,7 +239,7 @@ Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một
    - (b) trạng thái có **chữ/icon**, không chỉ màu;
    - (c) có đủ **rỗng / đang tải / lỗi** cho mọi vùng dữ liệu (hoặc user đã bỏ, gồm chế độ Nhanh);
    - (d) form **không trải hết bề rộng** desktop;
-   - (e) mỗi component đã dùng không vi phạm dòng **Không nên** nào của nó trong `docs/components.md`.
+   - (e) mỗi component đã dùng không vi phạm dòng **Không nên** nào của nó trong `design/components.md`.
 6. Một `figma_read screenshot` cho mỗi màn chính ở cuối, để user xem.
 
 ## Bước 7 — báo đã vẽ gì
@@ -290,7 +290,7 @@ biết xử lý cái nào trước — mức chỉ là gợi ý chung, tuỳ ngh
 ### Tuân thủ rule workspace
 
 Skill này là một "skill vẽ màn" theo nghĩa của rule `design-system.md` (thư mục `.claude/rules/`
-của workspace): đọc `docs/design.md` theo mục (mục lục + mục luôn đọc + mục của `/figma-screen` trong bảng của rule),
+của workspace): đọc `design/design.md` theo mục (mục lục + mục luôn đọc + mục của `/figma-screen` trong bảng của rule),
 tuân theo năm *Luật khi sinh màn*, và dùng
 Do's and Don'ts làm tiêu chí tự kiểm trước khi trình.
 
@@ -298,10 +298,10 @@ Do's and Don'ts làm tiêu chí tự kiểm trước khi trình.
 
 - `../reqwise-diagram-rules.md` § 5: cổng kết nối Figma.
 - Rule workspace `.claude/rules/design-system.md`: design system là nguồn chung cho mọi skill vẽ màn.
-- `docs/design.md`: token, mẫu bố cục, component, trạng thái, định dạng nội dung, Known Gaps.
-- `docs/components.md`: chọn component theo nhu cầu, cùng Usage, Nên/Không nên và Examples của từng component (dịch từ Astryx, chia theo section).
-- `docs/design-tokens.css`: cùng bộ token, dạng CSS (cho prototype/code, không dùng khi vẽ Figma).
-- `docs/setup-figma.md`: setup file Figma cho dự án mới (Cách A thư viện / Cách B bản sao) và bảng kiểm tra setup.
-- `docs/figma-library-keys.json`: key component set để nạp từ thư viện đã publish (Cách A). Máy sinh, không sửa tay.
+- `design/design.md`: token, mẫu bố cục, component, trạng thái, định dạng nội dung, Known Gaps.
+- `design/components.md`: chọn component theo nhu cầu, cùng Usage, Nên/Không nên và Examples của từng component (dịch từ Astryx, chia theo section).
+- `design/design-tokens.css`: cùng bộ token, dạng CSS (cho prototype/code, không dùng khi vẽ Figma).
+- `design/setup-figma.md`: setup file Figma cho dự án mới (Cách A thư viện / Cách B bản sao) và bảng kiểm tra setup.
+- `design/figma-library-keys.json`: key component set để nạp từ thư viện đã publish (Cách A). Máy sinh, không sửa tay.
 - `figma_docs(section="api" | "recipes" | "rules" | "userflow")`: cú pháp công cụ.
-- `docs/workflow-figma-screen.md`: bản tổng quan 1 trang cho người review (không phải bản agent thực thi); chi tiết chỉ nằm ở file này. Đổi số bước, luật cứng hoặc danh sách "máy không kiểm" → cập nhật file đó cùng lượt.
+- `_guides/workflow-figma-screen.md`: bản tổng quan 1 trang cho người review (không phải bản agent thực thi); chi tiết chỉ nằm ở file này. Đổi số bước, luật cứng hoặc danh sách "máy không kiểm" → cập nhật file đó cùng lượt.
