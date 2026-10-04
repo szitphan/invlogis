@@ -21,7 +21,7 @@ Quản lý 6 file shared ở `docs/_shared/`:
 | `conventions` | `conventions.md` | UI Common Rules (GR-xx) + lỗi dùng chung E-common |
 | `system` | `system-overview.md` | High-level architecture, feature map, integrations, data flow |
 | `patterns` | `screen-patterns.md` | UI Common Components (CMP-xx) |
-| `profile` | `project-profile.md` | Bối cảnh dự án tích lũy: domain, thuật ngữ gọi người dùng, đối thủ, thị trường, compliance — kho hỏi-1-lần-dùng-mọi-skill (per `@.Codex/rules/project-profile.md`; đường chính là skill tự hỏi lazy, target này để xem/sửa chủ động) |
+| `profile` | `project-profile.md` | Bối cảnh dự án tích lũy: domain, thuật ngữ gọi người dùng, đối thủ, thị trường, compliance — kho hỏi-1-lần-dùng-mọi-skill (per `@.claude/rules/project-profile.md`; đường chính là skill tự hỏi lazy, target này để xem/sửa chủ động) |
 
 Auto-scaffold file mới với frontmatter v2; add/edit entries thủ công (nói bằng lời entry muốn thêm) hoặc auto-extract từ feature docs; set env note (hook ghi changelog.md) đúng convention.
 
@@ -31,13 +31,13 @@ Auto-scaffold file mới với frontmatter v2; add/edit entries thủ công (nó
 
 - **Project-level scope** — file output KHÔNG có `feature:` frontmatter.
 - **KHÔNG có upstream chain** → bỏ Phase E (resolve OQs).
-- **Approval gate L1/L2 bắt buộc** — per `@.Codex/rules/approval-gate.md`.
-- **KG usage** — per `@.Codex/rules/kg-usage.md` (graph chọn file, prose kết luận).
-- **@author resolution (cho activity log)** — resolve @handle từ memory `user_identity.md` (per `@.Codex/rules/ba-conventions.md`). KHÔNG set field owner vào frontmatter (đã diet 2026-07-12).
+- **Approval gate L1/L2 bắt buộc** — per `@.claude/rules/approval-gate.md`.
+- **KG usage** — per `@.claude/rules/kg-usage.md` (graph chọn file, prose kết luận).
+- **@author resolution (cho activity log)** — resolve @handle từ memory `user_identity.md` (per `@.claude/rules/ba-conventions.md`). KHÔNG set field owner vào frontmatter (đã diet 2026-07-12).
 - **IT-BA framing** — KHÔNG hỏi tech detail (DB schema, SDK, endpoint); chỉ business language.
 - **Section Architecture (target `system`) = quyết định thiết kế** — hỏi user mermaid inline HAY D2 `.svg` đứng riêng (Step 5.1), KHÔNG tự chọn. Nhánh D2 skill **tự viết source `.d2`** (không gọi `/d2-architect` — tránh vòng phụ thuộc vì skill đó đọc ngược `system-overview.md`).
 - **No-re-ask** — scan file hiện tại trước khi hỏi; KHÔNG hỏi lại entry đã có. Section Architecture đã có mermaid/D2 + user không yêu cầu đổi → giữ nguyên engine cũ, không hỏi lại.
-- **Activity log** — trước Write/Edit set đủ env `CLAUDE_SKILL_NAME=/update-overview` + `CLAUDE_CHANGELOG_AUTHOR={@author}` + `CLAUDE_CHANGELOG_NOTE` (≤80 ký tự, mô tả `[{target}] {action}`); hook ghép cả dòng vào `_workspace/changelog.md` (per `@.Codex/rules/changelog.md`).
+- **Activity log** — trước Write/Edit set đủ env `CLAUDE_SKILL_NAME=/update-overview` + `CLAUDE_CHANGELOG_AUTHOR={@author}` + `CLAUDE_CHANGELOG_NOTE` (≤80 ký tự, mô tả `[{target}] {action}`); hook ghép cả dòng vào `_workspace/changelog.md` (per `@.claude/rules/changelog.md`).
 - **Dedupe** — `extract` mode loại candidate đã có trong file hiện tại.
 - **KG trong `--extract` chỉ chọn file, KHÔNG thay scan** — dùng `kg counts`/`kg facts <feature>` để thu hẹp danh sách file đáng scan trước; thuật ngữ, wording và candidate cuối cùng LUÔN rút từ prose đã Read theo Step 4. Nếu output có `⚠ còn N mục — chạy với --all` thì chạy lại query đó với `--all`; nếu có `Phải Read tay (ngoài graph)` thì Read các file đó. `KG-ERROR` hoặc exit ≠ 0 → bỏ shortlist KG và chạy nguyên flow prose-scan cũ trên toàn bộ nguồn trong bảng Step 4.
 
@@ -124,8 +124,8 @@ Frontmatter `type:` values:
 
 1) **Chọn shortlist bằng KG trước, không extract term từ KG:**
    ```bash
-   node .Codex/skills/kg/engine/kg-query.mjs counts --all
-   node .Codex/skills/kg/engine/kg-query.mjs facts <feature> --all
+   node .claude/skills/kg/engine/kg-query.mjs counts --all
+   node .claude/skills/kg/engine/kg-query.mjs facts <feature> --all
    ```
    - Dùng `counts` để kiểm tra scope cấu trúc; chạy `facts <feature>` cho từng feature trong scope hiện có để lấy union của `Shortlist file cần Read` và `Phải Read tay (ngoài graph)`.
    - KG chỉ quyết định **file nào ưu tiên scan trước**; không dùng title/ID/facts để suy ra term, definition, convention hay pattern.
@@ -178,7 +178,7 @@ Hỏi gọn (AskUserQuestion 2 lựa chọn, đặt mermaid lên đầu làm m�
 - Ghi thẳng vào `system-overview.md` section Architecture. Không tạo file phụ.
 
 **Nhánh B — D2 `.svg` đứng riêng:**‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
-- **KHÔNG gọi `/d2-architect`** để tránh vòng phụ thuộc (`/d2-architect` đọc chính `system-overview.md` làm nguồn — xem Pitfalls "vòng phụ thuộc"). Thay vào đó `/update-overview` **tự viết source `.d2`** (công thức nested-container: `direction: down`, actor `shape: person`, DB `shape: cylinder`, cụm ngoài `style.stroke-dash: 3`, QUOTE nhãn có ký tự `/ | ( ) :`) rồi render qua `.Codex/skills/d2-activity/render.sh`.
+- **KHÔNG gọi `/d2-architect`** để tránh vòng phụ thuộc (`/d2-architect` đọc chính `system-overview.md` làm nguồn — xem Pitfalls "vòng phụ thuộc"). Thay vào đó `/update-overview` **tự viết source `.d2`** (công thức nested-container: `direction: down`, actor `shape: person`, DB `shape: cylinder`, cụm ngoài `style.stroke-dash: 3`, QUOTE nhãn có ký tự `/ | ( ) :`) rồi render qua `.claude/skills/d2-activity/render.sh`.
 - Đích: `docs/_shared/system-overview.d2` + `.svg` (cùng folder `_shared/`, KHÔNG per-feature).
 - D2 chưa cài → báo user 1 dòng install, **fallback về nhánh A** (mermaid) để không chặn regen.
 - Render fail → sửa (thường thiếu quote nhãn), tối đa 2 lần; vẫn fail → fallback mermaid + báo user.
@@ -293,7 +293,7 @@ Hook stale-propagation KHÔNG áp cho `docs/_shared/` (underscore filtered).
 
 Scaffold theo `_templates/project-profile.md` (Domain / Người dùng & thuật ngữ / Đối thủ / Ghi chú
 khác — mỗi mục kèm ngày). Nội dung do user trả lời tích lũy — target này chủ yếu để xem/sửa/bổ sung
-chủ động; đường chính là các skill tự hỏi lazy per `@.Codex/rules/project-profile.md`.
+chủ động; đường chính là các skill tự hỏi lazy per `@.claude/rules/project-profile.md`.
 
 ### system-overview.md
 
@@ -394,14 +394,14 @@ _Ảnh: {biến thể} — node [{id}]({link Figma}), xuất PNG 2x._
 
 ## References
 
-- @.Codex/rules/project-profile.md (target `profile` + cơ chế hỏi-khi-thiếu)
-- @.Codex/rules/approval-gate.md
-- @.Codex/rules/changelog.md
-- @.Codex/rules/ba-conventions.md
-- @.Codex/rules/naming-conventions.md
-- @.Codex/rules/status-lifecycle.md
-- @.Codex/rules/diagram-selection.md (mermaid syntax safety cho nhánh A; định vị architecture diagram)
-- @.Codex/skills/d2-activity/render.sh (render source `.d2` cho nhánh B)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+- @.claude/rules/project-profile.md (target `profile` + cơ chế hỏi-khi-thiếu)
+- @.claude/rules/approval-gate.md
+- @.claude/rules/changelog.md
+- @.claude/rules/ba-conventions.md
+- @.claude/rules/naming-conventions.md
+- @.claude/rules/status-lifecycle.md
+- @.claude/rules/diagram-selection.md (mermaid syntax safety cho nhánh A; định vị architecture diagram)
+- @.claude/skills/d2-activity/render.sh (render source `.d2` cho nhánh B)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->

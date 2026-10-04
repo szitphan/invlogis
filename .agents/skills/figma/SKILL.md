@@ -27,7 +27,7 @@ Convert ASCII wireframe spec thành Figma frames hoàn chỉnh với đúng desi
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
+- **UI Common Rules & Components** (per `../../../.claude/rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 * **HARD GATE kết nối**: phải xác nhận đường ghi tới Figma thông trước khi làm bất kỳ việc gì khác (xem Phase 0). Lưu ý `figma_status.pluginConnected` CHỈ đáng tin khi `mode: "leader"` — ở `mode: "follower"` nó luôn `false` bất kể plugin có chạy hay không (xem Phase 0 bước 3). KHÔNG tự ý thử workaround khác.
 * **Feature chưa tồn tại HOẶC chưa có `ascii-wireframe/` nào → REFUSE + route `/user-flow` + `/wireframe-ascii`** (per `feature-bootstrap.md` nhóm B) — không có ASCII screen thật thì không có gì để vẽ, tự bịa layout sẽ sai. KHÔNG tự tạo feature. Chi tiết + wording refuse: Phase 1 bước 1.
 * **HARD GATE ASCII**: mỗi screen định vẽ phải có block ASCII thật — thiếu thì skip screen đó + warn (chi tiết Phase 1 bước 4).
@@ -40,14 +40,14 @@ Convert ASCII wireframe spec thành Figma frames hoàn chỉnh với đúng desi
 * **Multi-tab: pin `sessionId`** — `figma_status` trả `sessions[]`; có ≥2 file connected → hỏi user file nào rồi pin `sessionId` mọi call figma (không thì op rơi non-deterministic).
 * **KHÔNG dùng emoji làm icon** — `figma.searchIcons(query)` chọn tên trước (rẻ, resolve alias `visibility→eye`), rồi `figma.loadIcon(name)` (default library lucide). Bảng tên: `references/drawing-patterns.md` § Icon Names.
 * **KHÔNG tạo page mới** nếu Figma plan Starter (giới hạn 3 pages). Dùng page hiện tại.
-* **Design system bắt buộc từ bộ file Astryx đã cài vào dự án** (per `../../rules/design-system.md`): `design/design.md` (token + luật vẽ), `design/components.md` (chọn/dùng component), `design/figma-library-keys.json` (component set để instantiate), `design/ba-crosswalk.md` (Control type BA → component ứng viên). **Thiếu `design/design.md` → DỪNG vẽ hi-fi**, KHÔNG dùng bảng màu dự phòng nào, KHÔNG lấy `design.md` mẫu của dự án/kit khác làm mặc định. Route: cài kit design system (xem `setup-figma.md` của kit) hoặc dùng `/wireframe-html` cho bản lo-fi B&W.
+* **Design system bắt buộc từ bộ file Astryx đã cài vào dự án** (per `../../../.claude/rules/design-system.md`): `design/design.md` (token + luật vẽ), `design/components.md` (chọn/dùng component), `design/figma-library-keys.json` (component set để instantiate), `design/ba-crosswalk.md` (Control type BA → component ứng viên). **Thiếu `design/design.md` → DỪNG vẽ hi-fi**, KHÔNG dùng bảng màu dự phòng nào, KHÔNG lấy `design.md` mẫu của dự án/kit khác làm mặc định. Route: cài kit design system (xem `setup-figma.md` của kit) hoặc dùng `/wireframe-html` cho bản lo-fi B&W.
 * **Component theo catalog, KHÔNG tự chế**: mỗi element → tra `ba-crosswalk.md` lấy ứng viên → đọc mục component đó trong `components.md` (Nên/Không nên là tiêu chí loại) → lấy tên component set trong `figma-library-keys.json` để instantiate. Không tìm được component hợp lệ, hoặc tên trong `components.md` không có trong keys → ghi gap vào báo cáo + cột Description ("chưa có chuẩn trong design.md"), KHÔNG tự dựng component thay thế im lặng.
 * **Component dùng chung, hành vi theo feature**: component chỉ cho *khung* (anatomy, biến thể, state, a11y); *dữ liệu và hành vi* (field nào, giá trị mặc định, toán tử, phụ thuộc giữa field, rỗng/lỗi, áp dụng/xoá) lấy từ SRS + bảng Screen description của feature. Thiếu thông tin hành vi → hỏi user hoặc ghi OQ, KHÔNG suy từ component mẫu của dự án khác.
 * **Component-first (cả 2 chế độ)**: element có component trong catalog → instantiate theo bảng map Phase 3. Element KHÔNG có trong catalog nhưng lặp lại nhiều màn (chế độ Đầy đủ) → gọi `figma.findOrCreateComponent(name, spec, {dryRun:true})` — trả `decision: "reuse"|"create"` + `score`/`reason` (minh bạch). Reuse → `figma.instantiate(nameOrQuery, {parentId, props})`, KHÔNG vẽ lại từ đầu.
 * **L1 approval** trước khi bắt đầu vẽ (danh sách screens + states dự kiến nếu chế độ Đầy đủ + layout grid + figma page target).
 * **`layout_audit` verify** sau mỗi screen/frame nhóm — đọc `summary.issues` (overflow/clipping/text-truncated là dữ liệu, không phải phán đoán mắt). Có issue → fix ngay trước khi sang cái tiếp theo. Screenshot chỉ chụp 1 lần cuối cho user xem, KHÔNG dùng làm cách verify chính.
 * **Cập nhật `{feature}-wireframe-index.md` cột Figma** sau khi vẽ xong.
-* **BA conventions** per `../../rules/ba-conventions.md`. **Approval gate** per `../../rules/approval-gate.md`.
+* **BA conventions** per `../../../.claude/rules/ba-conventions.md`. **Approval gate** per `../../../.claude/rules/approval-gate.md`.
 
 ### Pitfalls — easy to get wrong‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -155,11 +155,11 @@ Với mỗi screen trong danh sách:
 10) **Kiểm bộ file design system** (dòng *Design system* ở Context). `design/design.md` MISSING → **DỪNG**, báo:
     ```
     Chưa thể vẽ hi-fi cho {feature} — dự án chưa cài design system (thiếu design/design.md).
-    → Cài kit design system vào dự án (docs/ + .Codex/rules/design-system.md), rồi gõ lại /figma.
+    → Cài kit design system vào dự án (docs/ + .claude/rules/design-system.md), rồi gõ lại /figma.
     → Cần bản nháp ngay: /wireframe-html {feature} (lo-fi B&W, không cần design system).
     ```
     KHÔNG dùng bảng màu dự phòng, KHÔNG sinh token tạm. `components.md` / `figma-library-keys.json` / `ba-crosswalk.md` thiếu → vẫn vẽ được nhưng báo rõ ở L1 phần nào không kiểm được (vd "Không có keys — không đối chiếu được tên component set").
-11) Đọc `design/design.md` **theo mục** đúng cách `../../rules/design-system.md` quy định (mục lục → mục luôn đọc, gồm *Tên trong Figma* → mục của `/figma-screen`). Token gắn **theo tên Figma** (bảng *Tên trong Figma*), KHÔNG chép giá trị hex vào `setupTokens` khi file đã có biến của thư viện.
+11) Đọc `design/design.md` **theo mục** đúng cách `../../../.claude/rules/design-system.md` quy định (mục lục → mục luôn đọc, gồm *Tên trong Figma* → mục của `/figma-screen`). Token gắn **theo tên Figma** (bảng *Tên trong Figma*), KHÔNG chép giá trị hex vào `setupTokens` khi file đã có biến của thư viện.
 12) **Map element → component** cho từng dòng bảng Screen description:
     * Tra `design/ba-crosswalk.md` theo cột **Control type** (+ Data type/Description khi crosswalk ghi điều kiện) → danh sách ứng viên.
     * Đọc mục ứng viên trong `design/components.md` (Grep `^## {Tên}` rồi Read offset/limit, không đọc toàn file) → áp *Nên/Không nên*, chọn Example gần nhất.
@@ -265,14 +265,14 @@ Nguồn element: bảng 5 cột trong `ascii-wireframe/{flow-slug}.md`; token + 
 
 ## References
 
-- @.Codex/rules/ui-common-rules-components.md
+- @.claude/rules/ui-common-rules-components.md
 * @references/drawing-patterns.md (token setup, mọi element pattern, sandbox rules, icon names, critical bugs — đọc trước Phase 5)
-* @../../rules/approval-gate.md
-* @../../rules/ba-conventions.md
-* @../../rules/naming-conventions.md
-* @../../rules/feature-bootstrap.md
-* @../../rules/changelog.md
-* @../../rules/design-system.md (cài từ kit design system — đọc design.md theo mục, luật bố cục, Known Gaps)
+* @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/ba-conventions.md
+* @../../../.claude/rules/naming-conventions.md
+* @../../../.claude/rules/feature-bootstrap.md
+* @../../../.claude/rules/changelog.md
+* @../../../.claude/rules/design-system.md (cài từ kit design system — đọc design.md theo mục, luật bố cục, Known Gaps)
 * `design/components.md`, `design/ba-crosswalk.md`, `design/figma-library-keys.json` (cài từ kit design system — Phase 3)
 * @../wireframe-html/SKILL.md (html-wireframe format — tham khảo flow/grouping ở chế độ Đầy đủ, không lấy style)
 * figma_docs (rules + layout + api + tokens + icons + recipes) — load tại Phase 0, nguồn API sự thật cuối cùng

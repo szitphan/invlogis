@@ -27,7 +27,7 @@ Produce mermaid `stateDiagram-v2` cho 1 entity của feature, capture: states + 
   * Nếu không có → clarifying questions. User muốn dùng nguồn khác → tag `@file` hoặc dán nội dung trong câu chat.
 * **Invalid transitions explicit** — table riêng trong section liệt kê transitions KHÔNG được phép.
 * **Vietnamese-first** trong description/notes, auto-detect từ seed. Muốn tiếng Anh thì nói "viết bằng tiếng Anh". Mermaid syntax keywords giữ English.
-* **Per @../../rules/diagram-selection.md** — entity ≥3 states trước proceed; <3 → warn "bảng đủ, có cần diagram?".
+* **Per @../../../.claude/rules/diagram-selection.md** — entity ≥3 states trước proceed; <3 → warn "bảng đủ, có cần diagram?".
 * **states.md không tồn tại** → tạo mới với header skeleton.
 
 ### Pitfalls — easy to get wrong‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
@@ -107,7 +107,7 @@ Features có states.md: !`for d in docs/*/srs/*-states.md; do [ -f "$d" ] && ech
    > **ID full-form bắt buộc** trong dòng Related — luôn `BR-{feature}-NNN`, KHÔNG short-form `BR-001` (nguồn edge cho KG; short-form gây feature-ma + mất trace). **Related entity** viết CamelCase khớp ERD.
 8) **Gọi lại với entity trùng** (update mode tự động) → L2 diff cho section đó.
 9) **Activity log** — set env `CLAUDE_SKILL_NAME=/state` + `CLAUDE_CHANGELOG_NOTE` (note: `added/updated {Entity} state diagram`) TRƯỚC khi Write — hook append vào `_workspace/changelog.md` (không phụ thuộc spec.md tồn tại hay chưa, không còn routing/fallback). Update states.md `updated: {date}`.
-9.5. **Render-verify + TỰ XEM ẢNH (BẮT BUỘC, chạy ngay sau Write)** — `node .Codex/scripts/mermaid-verify.mjs --file docs/{feature}/srs/{feature}-states.md --png <scratchpad>/state-review`. Cờ `--png` vừa compile-check vừa xuất ảnh PNG mỗi block để skill **tự Read xem hình**. Mermaid không render trong chat (đây là lý do skip L3), nên đây là cách duy nhất bắt lỗi TRƯỚC khi báo "xong" thay vì để user tự phát hiện khi mở IDE.
+9.5. **Render-verify + TỰ XEM ẢNH (BẮT BUỘC, chạy ngay sau Write)** — `node .claude/scripts/mermaid-verify.mjs --file docs/{feature}/srs/{feature}-states.md --png <scratchpad>/state-review`. Cờ `--png` vừa compile-check vừa xuất ảnh PNG mỗi block để skill **tự Read xem hình**. Mermaid không render trong chat (đây là lý do skip L3), nên đây là cách duy nhất bắt lỗi TRƯỚC khi báo "xong" thay vì để user tự phát hiện khi mở IDE.
    * Script chạy **3 tầng, báo tách riêng**: cú pháp compile · nhãn an toàn renderer · **ngữ nghĩa**.
      Tầng ngữ nghĩa cho state bắt: thiếu `[*] -->` khởi đầu (**error**), state không tới được từ
      `[*]` (**error**), dấu `;` trong nhãn transition (**error** — mermaid cắt thành node rác),
@@ -161,15 +161,15 @@ stateDiagram-v2
 
 ## References
 
-* @../../rules/ba-conventions.md
-* @../../rules/approval-gate.md
-* @../../rules/naming-conventions.md
-* @../../rules/changelog.md
-* @../../rules/diagram-selection.md
-* @../../rules/diagram-correctness.md
-* @../../rules/feature-bootstrap.md
+* @../../../.claude/rules/ba-conventions.md
+* @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/naming-conventions.md
+* @../../../.claude/rules/changelog.md
+* @../../../.claude/rules/diagram-selection.md
+* @../../../.claude/rules/diagram-correctness.md
+* @../../../.claude/rules/feature-bootstrap.md
 * @../../../_templates/diagram-state.md
-* @../../scripts/mermaid-verify.mjs (render-verify sau Write — bước 9.5)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+* @../../../.claude/scripts/mermaid-verify.mjs (render-verify sau Write — bước 9.5)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->

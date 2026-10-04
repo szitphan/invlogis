@@ -63,14 +63,14 @@ docs-input/_changes/{YYYY-MM-DD}-{slug}.md   ← chỉ khi là bản cập nhậ
   phải ảnh) chỉ có trong `_raw.txt` → vẫn chép vào .md, vì không ảnh nào giữ chữ đó.
 - **File đính kèm trùng tài liệu đã có: vẫn chép đủ nội dung** vào mục `## Đính kèm`, kèm dòng
   `> Trùng với …` (user đã chốt 2026-10-02: tài liệu phải tự đủ, không bắt người đọc nhảy file).
-- **Approval gate** (@.Codex/rules/approval-gate.md): làm mọi thứ trong `docs-input/.staging/` trước;
+- **Approval gate** (@.claude/rules/approval-gate.md): làm mọi thứ trong `docs-input/.staging/` trước;
   chỉ ghi vào chỗ thật sau L1. Bản cập nhật → báo thay đổi (đóng vai L2) và chờ user đồng ý rồi mới
-  ghi đè. Sửa link trong `docs/` → L2. L1 viết bằng lời nghiệp vụ theo @.Codex/rules/ba-conventions.md Mục 5.
+  ghi đè. Sửa link trong `docs/` → L2. L1 viết bằng lời nghiệp vụ theo @.claude/rules/ba-conventions.md Mục 5.
 - **Không tự quyết "đây là bản mới của X"** và **không tự đổi tên tài liệu cũ** — `match.py` chỉ gợi
   ý; luôn hỏi user.
 - **Không xoá bản gốc cũ** — chuyển vào `source/cu/`. docs-input không phải lúc nào cũng có git, và
   bản gốc cũ là thứ duy nhất để diff lại khi cần.
-- **Không tự hạ ✅ trong sổ, không sửa cột tự động** của README (@.Codex/rules/backlog.md). Cột
+- **Không tự hạ ✅ trong sổ, không sửa cột tự động** của README (@.claude/rules/backlog.md). Cột
   "Ghi chú" sửa được — ghi 1 câu về cách chuyển (vd "docx 14 trang, 9 ảnh nhúng; 2 trang scan đã đọc lại").
 - **Không sửa nội dung tài liệu nghiệp vụ trong `docs/`** ngoài việc đổi đường dẫn khi đổi tên. Đối
   chiếu nội dung mới vào research/brainstorm là việc của lượt sau (thêm task backlog, bước 9).
@@ -98,7 +98,7 @@ docs-input/_changes/{YYYY-MM-DD}-{slug}.md   ← chỉ khi là bản cập nhậ
 
 ## Approach
 
-Script nằm ở `.Codex/skills/intake/scripts/` (gọi tắt `$S`). Mỗi tài liệu 1 thư mục staging
+Script nằm ở `.claude/skills/intake/scripts/` (gọi tắt `$S`). Mỗi tài liệu 1 thư mục staging
 `docs-input/.staging/{slug-tạm}/`.
 
 ### 1. Xác định đầu vào
@@ -123,7 +123,7 @@ scan → OCR), xlsx/xlsm/xls/csv, pptx, ảnh png/jpg/heic/tiff. Output in `_rep
 **cảnh báo** — đọc kỹ, mỗi cảnh báo là 1 việc ở bước 3. Thoát mã 3 = thiếu thư viện (cài theo lệnh
 in ra); mã 2 = định dạng chưa hỗ trợ → báo user.
 
-### 3. Hoàn thiện bản .md (phần việc của Codex)
+### 3. Hoàn thiện bản .md (phần việc của Claude)
 
 Đọc toàn bộ bản nháp, rồi:
 1. **Ảnh**:
@@ -146,7 +146,7 @@ in ra); mã 2 = định dạng chưa hỗ trợ → báo user.
 4. **File đính kèm nhúng** (Word nhúng PDF/Excel/Word — hiện dưới dạng icon): script đã tách vào
    `source/{slug}-dinh-kem-NN.ext`, chuyển nội dung vào mục `## Đính kèm` cuối tài liệu, thay icon
    bằng dòng 📎, và tự dò trùng với docs-input (ghi `> Trùng với …` — y hệt theo hash, hoặc gần như
-   trùng theo nội dung). Việc của Codex: đặt tiêu đề thật cho từng `### Đính kèm NN — …` theo nội
+   trùng theo nội dung). Việc của Claude: đặt tiêu đề thật cho từng `### Đính kèm NN — …` theo nội
    dung (vd "Danh sách hàng đủ điều kiện qua KVGS — mẫu mã vạch hàng nhập"), sửa OCR như ý 1; với
    "gần như trùng" thì nêu khác ở đâu (vd "bản đính kèm nhiều hơn 3 dòng kho CFS") trong dòng Trùng với.
 
@@ -225,7 +225,7 @@ khác biệt định dạng nếu nó che mất thay đổi thật.
 ### 8. Ghi
 
 Sau khi user đồng ý. Trước Edit/Write file trong `docs/`, set `CLAUDE_SKILL_NAME=/intake`,
-`CLAUDE_CHANGELOG_NOTE`, `CLAUDE_CHANGELOG_AUTHOR` (@.Codex/rules/changelog.md).
+`CLAUDE_CHANGELOG_NOTE`, `CLAUDE_CHANGELOG_AUTHOR` (@.claude/rules/changelog.md).
 
 **Tài liệu mới:**
 1. `mv` staging → `docs-input/{nhóm}/{slug}/` (bỏ `_raw.txt`, `_raw_ocr.txt`, `_report.json`).
@@ -263,10 +263,10 @@ Sau khi user đồng ý. Trước Edit/Write file trong `docs/`, set `CLAUDE_SKI
 
 ## References
 
-- @.Codex/rules/approval-gate.md — L1/L2 trước khi ghi
-- @.Codex/rules/ba-conventions.md — Mục 5 (L1 bằng lời nghiệp vụ), Mục 2 (không hỏi lại)
-- @.Codex/rules/backlog.md — sổ nguồn + task tự đóng, điều kiện Xong khi
-- @.Codex/rules/naming-conventions.md — slug kebab-case ASCII
-- @.Codex/rules/changelog.md — env trước khi sửa file trong docs/
+- @.claude/rules/approval-gate.md — L1/L2 trước khi ghi
+- @.claude/rules/ba-conventions.md — Mục 5 (L1 bằng lời nghiệp vụ), Mục 2 (không hỏi lại)
+- @.claude/rules/backlog.md — sổ nguồn + task tự đóng, điều kiện Xong khi
+- @.claude/rules/naming-conventions.md — slug kebab-case ASCII
+- @.claude/rules/changelog.md — env trước khi sửa file trong docs/
 - `_scripts/intake-sync.py` — đồng bộ sổ nguồn (nhận `source/`, gộp bản cập nhật, bỏ qua `_*`/`.*`)
 - `$S/convert.py` (+ `docx_numbering.py`, `ocr.swift`) · `$S/verify.py` · `$S/match.py` · `$S/diff.py`

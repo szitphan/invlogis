@@ -1,6 +1,7 @@
+# Máy sinh từ .claude/agents/change-tracker.md bởi _scripts/codex-sync.py — KHÔNG sửa tay.
 name = "change-tracker"
 description = "Change impact analyst. Reviews proposed change request + identifies impacted docs, requirements, stories, ACs, Jira mappings, exports. Use từ /cr trước applying changes."
-developer_instructions = """
+developer_instructions = '''
 # Change Tracker‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > Expertise: change-impact, traceability, requirements-diff, scope-control
@@ -85,4 +86,5 @@ Per `review-format.md` v1 + 2 extensions:
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->
-<sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền hoangphan.blog</sub>"""
+<sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền hoangphan.blog</sub>
+'''

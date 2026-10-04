@@ -190,7 +190,7 @@ stop
 ### Bước 2 — Render + tự verify
 
 ```bash
-.Codex/skills/activity-swimlane/render.sh docs/{feature}/srs/{feature}-{slug}-swimlane.puml --png
+.claude/skills/activity-swimlane/render.sh docs/{feature}/srs/{feature}-{slug}-swimlane.puml --png
 # fail → đọc lỗi (HTTP hoặc "Syntax Error" trong SVG), sửa source, chạy lại.
 # PASS → Read file .png, tự soi (checklist bước 7). Lỗi hiển thị → sửa .puml, re-render.
 ```
@@ -250,13 +250,13 @@ Cần sửa? /activity-swimlane "<thay đổi>" --feature {feature} (skill tự 
 
 ## References
 
-* @../../rules/ba-conventions.md
-* @../../rules/approval-gate.md
-* @../../rules/naming-conventions.md
-* @../../rules/changelog.md
-* @../../rules/diagram-selection.md
-* @../../rules/diagram-correctness.md
-* @../../rules/feature-bootstrap.md
+* @../../../.claude/rules/ba-conventions.md
+* @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/naming-conventions.md
+* @../../../.claude/rules/changelog.md
+* @../../../.claude/rules/diagram-selection.md
+* @../../../.claude/rules/diagram-correctness.md
+* @../../../.claude/rules/feature-bootstrap.md
 * @./render.sh (render qua plantuml.com — bước 7)
 * @./plantuml_encode.py (encode PlantUML text → URL, dùng bởi render.sh)
 * @./references/example-movie-booking.puml (mẫu chuẩn đã verify: 2 lane, 3 loop retry dùng `repeat while` + `backward:`, mọi nhánh tới stop — tham chiếu cách viết loop có bước xử lý giữa chừng)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍

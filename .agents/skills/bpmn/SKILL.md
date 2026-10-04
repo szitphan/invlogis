@@ -13,7 +13,7 @@ argument-hint: "\"<mô tả quy trình>\" [--feature <slug>]"
 
 Sinh BPMN 2.0 cho 1 quy trình nghiệp vụ đa vai trò, **chạy là vẽ đúng + đúng nghiệp vụ**.
 
-**ENGINE dùng chung ở `.Codex/skills/bpmn/engine/`** (KHÔNG copy vào mỗi feature). Chứa `bpmn-build.mjs` + `bpmn-layout-*.mjs` + `bpmn-semcheck.mjs` + `_viewer_template.html` + `node_modules` (cài 1 lần). Gọi trỏ vào feature qua `--dir docs/{feature}/bpmn`.
+**ENGINE dùng chung ở `.claude/skills/bpmn/engine/`** (KHÔNG copy vào mỗi feature). Chứa `bpmn-build.mjs` + `bpmn-layout-*.mjs` + `bpmn-semcheck.mjs` + `_viewer_template.html` + `node_modules` (cài 1 lần). Gọi trỏ vào feature qua `--dir docs/{feature}/bpmn`.
 
 **OUTPUT per-feature** trong `docs/{feature}/bpmn/` — CHỈ 3-5 file nghiệp vụ (không có engine/deps):
 
@@ -121,10 +121,10 @@ Features có bpmn/: !`for d in docs/*/bpmn/*-bpmn-index.md; do [ -f "$d" ] && di
 6) **Write** sau khi user Y:
    - Tạo `docs/{feature}/bpmn/` (chỉ chứa OUTPUT — KHÔNG copy engine vào feature nữa).
    - Write `{slug}.ir.json` + `{slug}.src.json`.
-   - Chạy engine CHUNG trỏ vào feature: `node .Codex/skills/bpmn/engine/bpmn-build.mjs --dir docs/{feature}/bpmn` → semcheck + layout → `{slug}.bpmn` + rebuild `{feature}-bpmn-editor.html` (trong feature dir).
+   - Chạy engine CHUNG trỏ vào feature: `node .claude/skills/bpmn/engine/bpmn-build.mjs --dir docs/{feature}/bpmn` → semcheck + layout → `{slug}.bpmn` + rebuild `{feature}-bpmn-editor.html` (trong feature dir).
    - Tạo/cập nhật `bpmn/{feature}-bpmn-index.md`.
 7) **Gọi lại với slug trùng** (update mode tự động) → L2 diff cho `{slug}.ir.json`, rồi rerun `... bpmn-build.mjs --dir docs/{feature}/bpmn` (layout regen tự động).
-8) **Verify** (BẮT BUỘC): `node .Codex/skills/bpmn/engine/bpmn-build.mjs --dir docs/{feature}/bpmn --verify` → semcheck + layout sạch. Có lỗi structural → sửa IR. Coverage warning → đối chiếu nguồn. KHÔNG báo thành công khi còn ✗.
+8) **Verify** (BẮT BUỘC): `node .claude/skills/bpmn/engine/bpmn-build.mjs --dir docs/{feature}/bpmn --verify` → semcheck + layout sạch. Có lỗi structural → sửa IR. Coverage warning → đối chiếu nguồn. KHÔNG báo thành công khi còn ✗.
 9) **Activity log** — trước Write set env `CLAUDE_SKILL_NAME=/bpmn` + `CLAUDE_CHANGELOG_AUTHOR={@author}` + `CLAUDE_CHANGELOG_NOTE=added BPMN {title} ({N} lanes, phủ {a}/{b} branch)` (≤80 ký tự); hook ghép cả dòng vào `_workspace/changelog.md`.
 10) **Output report:**
     ```
@@ -148,7 +148,7 @@ Features có bpmn/: !`for d in docs/*/bpmn/*-bpmn-index.md; do [ -f "$d" ] && di
 | `docs/{feature}/bpmn/{feature}-bpmn-editor.html` | Editor kéo-thả bpmn-js, dropdown đa-process |
 | `docs/{feature}/bpmn/{feature}-bpmn-index.md` | Master metadata (`type: bpmn-index`) + bảng process |
 
-AI **chỉ sinh IR**; toạ độ/layout do engine `.Codex/skills/bpmn/engine/` dựng. Hook tự ghi `_workspace/changelog.md`.
+AI **chỉ sinh IR**; toạ độ/layout do engine `.claude/skills/bpmn/engine/` dựng. Hook tự ghi `_workspace/changelog.md`.
 
 ## IR schema (AI sinh đúng format này)
 
@@ -202,13 +202,13 @@ Loop (revise→draft) hợp lệ — reverse-BFS đi qua nhánh thoát của gat
 
 ## References
 
-- @../../rules/ba-conventions.md
-- @../../rules/approval-gate.md
-- @../../rules/naming-conventions.md
-- @../../rules/changelog.md
-- @../../rules/diagram-selection.md
-- @../../rules/diagram-correctness.md
-- @../../rules/feature-bootstrap.md
+- @../../../.claude/rules/ba-conventions.md
+- @../../../.claude/rules/approval-gate.md
+- @../../../.claude/rules/naming-conventions.md
+- @../../../.claude/rules/changelog.md
+- @../../../.claude/rules/diagram-selection.md
+- @../../../.claude/rules/diagram-correctness.md
+- @../../../.claude/rules/feature-bootstrap.md
 - @../../../_templates/diagram-bpmn.md‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 

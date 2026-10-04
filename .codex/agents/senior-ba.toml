@@ -1,6 +1,7 @@
+# Máy sinh từ .claude/agents/senior-ba.md bởi _scripts/codex-sync.py — KHÔNG sửa tay.
 name = "senior-ba"
-description = 'Senior Business Analyst với 8+ năm enterprise software/fintech/SaaS. Reviews for completeness, edge case coverage, requirement clarity, ambiguity. Agent bắt "but what if" scenarios.'
-developer_instructions = """
+description = "Senior Business Analyst với 8+ năm enterprise software/fintech/SaaS. Reviews for completeness, edge case coverage, requirement clarity, ambiguity. Agent bắt \"but what if\" scenarios."
+developer_instructions = '''
 # Senior BA Reviewer‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > Expertise: completeness, edge-cases, requirement-clarity, ambiguity-detection
@@ -56,18 +57,19 @@ developer_instructions = """
 
 ## Output format
 
-Per [review-format.md](../rules/review-format.md). Summary first, findings by severity.
+Per [review-format.md](../../.claude/rules/review-format.md). Summary first, findings by severity.
 
 ## Reference materials
 
 * Target doc
-* @.Codex/rules/changelog.md
-* @.Codex/rules/naming-conventions.md
-* @.Codex/rules/status-lifecycle.md
+* @.claude/rules/changelog.md
+* @.claude/rules/naming-conventions.md
+* @.claude/rules/status-lifecycle.md
 * @docs/{feature}/srs/{feature}-spec.md (cross-section consistency khi reviewing flows/screens)
 * @docs/{feature}/srs/{feature}-flows.md
 * Same-feature siblings (peek screens/* cho inconsistencies)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->
-<sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền ai4ba.com</sub>"""
+<sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền ai4ba.com</sub>
+'''

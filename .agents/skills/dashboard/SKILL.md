@@ -73,9 +73,9 @@ Feature folders: !`ls -d docs/*/ 2>/dev/null | xargs -I{} basename {} | grep -vE
 
 2) **Lấy metric cấu trúc từ KG trước**, rồi ghép vào data model dashboard hiện tại để **không đổi format `dashboard.html`**:
    ```bash
-   node .Codex/skills/kg/engine/kg-query.mjs counts [--feature <slug>] --all
-   node .Codex/skills/kg/engine/kg-query.mjs coverage <feature> --all
-   node .Codex/skills/kg/engine/kg-query.mjs orphans [--feature <slug>] --all
+   node .claude/skills/kg/engine/kg-query.mjs counts [--feature <slug>] --all
+   node .claude/skills/kg/engine/kg-query.mjs coverage <feature> --all
+   node .claude/skills/kg/engine/kg-query.mjs orphans [--feature <slug>] --all
    ```
    * No-arg: chạy `counts` + `orphans` toàn workspace, rồi `coverage <feature>` cho từng feature trong scope. Có `<feature>`: truyền cùng scope vào `counts`/`orphans` và chỉ chạy coverage của feature đó.
    * `counts` là nguồn chính cho node/count; riêng stale lấy dòng **`Doc status=stale (stale_docs)`** (engine tách stale-DOC khỏi stale-node-artifact — dashboard/health đo theo đơn vị doc, KHÔNG dùng dòng "Node status=stale mọi loại"); `coverage` là nguồn chính cho FR/US/UC coverage và danh sách mã gap; `orphans` là nguồn chính cho node/doc mồ côi. Chuẩn hóa các output này vào các field dashboard đang dùng, không đổi section, path hay HTML format.
@@ -201,12 +201,12 @@ document.documentElement.setAttribute('data-theme',n);localStorage.setItem('ba-t
 
 ## References
 
-* @../../rules/kg-usage.md (KG: nguồn số liệu counts/coverage/orphans — fallback workspace-status.py)
-* @../../rules/naming-conventions.md
-* @../../rules/status-lifecycle.md
-* @../../rules/delivery-readiness.md
-* @../../rules/approval-gate.md
-* @../../rules/feature-bootstrap.md
+* @../../../.claude/rules/kg-usage.md (KG: nguồn số liệu counts/coverage/orphans — fallback workspace-status.py)
+* @../../../.claude/rules/naming-conventions.md
+* @../../../.claude/rules/status-lifecycle.md
+* @../../../.claude/rules/delivery-readiness.md
+* @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/feature-bootstrap.md
 * @../kg/SKILL.md (KG là nguồn chính cho counts/coverage/orphans/stale; graph chỉ chọn/đếm cấu trúc, không thay prose)
 * @../../../_scripts/workspace-status.py (nguồn bổ sung pipeline/freshness/quality/action_items và fallback flow cũ khi `KG-ERROR`/exit ≠ 0)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 

@@ -16,7 +16,7 @@ Cho 1 chủ đề/ý tưởng tính năng còn phân vân, output 1 file researc
 định có nên đưa tính năng này vào sản phẩm của mình không** (build / skip / build-có-điều-chỉnh),
 và nếu build thì __gợi ý 1-3 phương án feature cỡ "một-lần-brainstorm"__ để đi tiếp `/brainstorm`.
 Domain + đối thủ + thuật ngữ gọi người dùng của dự án đọc từ `docs/_shared/project-profile.md`
-(per `.Codex/rules/project-profile.md`) — thiếu thì hỏi ở Pha A2 rồi đề xuất ghi vào profile.
+(per `.claude/rules/project-profile.md`) — thiếu thì hỏi ở Pha A2 rồi đề xuất ghi vào profile.
 
 Report viết theo thứ tự: __bằng chứng trước, kết luận sau__. 5 mục (doc thuần Việt, xem Pha D văn phong).
 Từ "Người dùng" trong heading thay bằng thuật ngữ profile nếu có (Học viên/Khách hàng/Tài xế...):
@@ -30,7 +30,7 @@ Từ "Người dùng" trong heading thay bằng thuật ngữ profile nếu có 
 > __Verdict Mục 4 phải qua phản biện đa góc nhìn__ (Pha C2 mới): trước khi chốt nên làm/không,
 > skill chia việc cho các CLI ngoài (qua `/delegate`) đóng 3 vai đối lập — __ủng-hộ-build__ (cơ
 > hội/giá trị), __phản-đối__ (rủi ro/không đáng), __khả-thi__ (công sức/chi phí/phụ thuộc) — cho
-> tranh luận 1 vòng, rồi Codex làm arbiter chốt verdict. Tránh verdict thiên vị theo hướng
+> tranh luận 1 vòng, rồi Claude làm arbiter chốt verdict. Tránh verdict thiên vị theo hướng
 > research ban đầu. Mục 4 ghi thêm 1 đoạn "Các góc nhìn đã cân nhắc" (đồng thuận + điểm còn lệch).
 
 > __Không phải chỉ soi đối thủ.__ Mục 1 (nhu cầu người dùng mình) đứng TRƯỚC Mục 2 (đối thủ) — tránh
@@ -56,7 +56,7 @@ Từ "Người dùng" trong heading thay bằng thuật ngữ profile nếu có 
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-* __Thông tin cấp dự án đọc + ghi vào profile__ — domain sản phẩm, đối thủ/benchmark, thuật ngữ gọi người dùng cuối: đọc `docs/_shared/project-profile.md` ở Pha 0; thiếu → hỏi ở Pha A2/CHECKPOINT 1 rồi đề xuất ghi vào profile (bảng đối thủ đã chốt + thuật ngữ) để lần sau khỏi tìm lại. KHÔNG hardcode domain nào trong skill. Per @.Codex/rules/project-profile.md.
+* __Thông tin cấp dự án đọc + ghi vào profile__ — domain sản phẩm, đối thủ/benchmark, thuật ngữ gọi người dùng cuối: đọc `docs/_shared/project-profile.md` ở Pha 0; thiếu → hỏi ở Pha A2/CHECKPOINT 1 rồi đề xuất ghi vào profile (bảng đối thủ đã chốt + thuật ngữ) để lần sau khỏi tìm lại. KHÔNG hardcode domain nào trong skill. Per @.claude/rules/project-profile.md.
 * __Pha làm rõ input (mới) — hỏi khi input mơ hồ.__ Chủ đề mơ hồ về ý định (vd "streak gamification"
   có thể là xem-đối-thủ / quyết-build-skip / tìm-ý-tưởng) → hỏi 1-3 câu làm rõ TRƯỚC khi research
   (xem Pha A2). Input đã rõ ý định + scope → bỏ qua (no-re-ask). KHÔNG đoán bừa mục tiêu rồi chạy.
@@ -64,11 +64,11 @@ Từ "Người dùng" trong heading thay bằng thuật ngữ profile nếu có 
   competitors + columns), user duyệt trước khi spawn agent. KHÔNG tự chạy agent khi chưa approve.
 * __Debate đa góc nhìn trước verdict (mặc định, tắt bằng lời)__ — sau research (Pha C), skill chạy
   Pha C2: chia việc cho **3 CLI ngoài qua `/delegate`** đóng 3 vai đối lập (build-advocate / skeptic /
-  feasibility), debate 1 vòng, Codex arbiter chốt verdict (per delegate Chế độ C — debate + arbiter).
+  feasibility), debate 1 vòng, Claude arbiter chốt verdict (per delegate Chế độ C — debate + arbiter).
   Số lượt delegate được báo trước ở CHECKPOINT 1 (manager tax). __Skip khi:__ user nói "khỏi debate" /
   "đừng hỏi agent khác", HOẶC mục tiêu chỉ "(b) tham khảo đối thủ", HOẶC user đã "đừng search web" (không
   đủ evidence để debate có ý nghĩa) → verdict do 1 mình skill lập luận, flag rõ "chưa qua phản biện đa
-  góc nhìn". KHÔNG đẩy việc arbiter/chốt ra CLI — Codex giữ vai người chốt cuối.
+  góc nhìn". KHÔNG đẩy việc arbiter/chốt ra CLI — Claude giữ vai người chốt cuối.
 * __CHECKPOINT 2 bắt buộc__ — dừng sau Pha C2 (debate), preview Executive Summary + bảng rút gọn +
   khuyến nghị (kèm đoạn "Các góc nhìn đã cân nhắc") + phương án trong chat. User confirm mới ghi file.
   Điều chỉnh tối đa 2 vòng nếu user "sửa: ...".
@@ -102,7 +102,7 @@ Từ "Người dùng" trong heading thay bằng thuật ngữ profile nếu có 
 * ❌ Đặt verdict TRƯỚC evidence — verdict phải ở Mục 5, sau opportunity + đối thủ
 * ❌ Để RICE-lite điểm số tự quyết build/skip — nó là sorting aid; verdict là quyết định người-lập-luận
 * ❌ Chốt verdict một mình không qua phản biện (khi debate không bị tắt) — dễ thiên vị hướng research ban đầu
-* ❌ Đẩy việc arbiter/chốt cuối ra CLI — Codex giữ vai người chốt; CLI chỉ đóng vai tranh luận
+* ❌ Đẩy việc arbiter/chốt cuối ra CLI — Claude giữ vai người chốt; CLI chỉ đóng vai tranh luận
 * ❌ Dán raw output CLI hoặc nhãn `[F]/[I]` vào đoạn "Các góc nhìn đã cân nhắc" — phải viết lại thuần Việt, ngắn
 * ❌ Giả vờ đã debate khi CLI lỗi/hết quota — phải flag "phản biện chưa hoàn tất"
 * ❌ Bịa số ROI/retention feature chưa build — ghi [Estimated] / "no public data"
@@ -150,7 +150,7 @@ Existing features: !`ls -d docs/*/ 2>/dev/null | xargs -I{} basename {} | grep -
 3) __Load project context:__ đọc `docs/_shared/project-profile.md` (Domain + Đối thủ + Thuật ngữ —
    per `project-profile.md` rule) + `docs/_product/prd.md` (Vision/target users/JTBD/monetization +
    Feature Map để gợi ý feature liên quan). Thiếu → fallback `docs/_shared/system-overview.md` /
-   `AGENTS.md`. Vẫn không có domain/target audience/monetization → ghi nhận thiếu, sẽ hỏi ở Pha A2
+   `CLAUDE.md`. Vẫn không có domain/target audience/monetization → ghi nhận thiếu, sẽ hỏi ở Pha A2
    (KHÔNG grep rỗng rồi đoán) và cuối skill đề xuất ghi câu trả lời vào profile.
 4) __Derive keyword slug__ — kebab-case ASCII max 40. Transliterate tiếng Việt. __Detect language.__
 
@@ -194,9 +194,9 @@ __B1 — Opportunity framing:__ từ JTBD nháp (A1) + câu trả lời (A2), d�
 __B2 — Project match:__ dùng KG để tìm candidate feature/brainstorm liên quan theo concept __TRƯỚC__, sau đó vẫn grep + Read prose làm lưới quét bổ sung và là evidence cuối:
 
 ```bash
-node .Codex/skills/kg/engine/kg-query.mjs facts <feature> --all
-node .Codex/skills/kg/engine/kg-query.mjs explore <feature-or-ID> --all
-node .Codex/skills/kg/engine/kg-query.mjs neighbors <path> --all
+node .claude/skills/kg/engine/kg-query.mjs facts <feature> --all
+node .claude/skills/kg/engine/kg-query.mjs explore <feature-or-ID> --all
+node .claude/skills/kg/engine/kg-query.mjs neighbors <path> --all
 ```
 
 * Dùng `facts <feature>` cho các feature trong `Existing features` để đối chiếu keyword/synonym với ID/title/path; với candidate trùng concept hoặc `--feature` user đã nêu, dùng `explore` để xem quan hệ gần và `neighbors <path>` để mở rộng sang feature/brainstorm liên quan.
@@ -263,7 +263,7 @@ Scale effort theo bảng `references/playbook.md`. Parallel 2 agent nếu chủ 
 > thẳng CHECKPOINT 2 với verdict do 1 mình skill lập luận + flag "chưa qua phản biện đa góc nhìn".
 
 Mục đích: verdict build/skip KHÔNG do một mình skill lập luận (dễ thiên vị theo hướng research ban
-đầu). Chia việc cho __3 CLI ngoài, mỗi CLI 1 vai đối lập__, cho tranh luận, Codex làm arbiter chốt.
+đầu). Chia việc cho __3 CLI ngoài, mỗi CLI 1 vai đối lập__, cho tranh luận, Claude làm arbiter chốt.
 Chạy qua **`/delegate` Chế độ C (debate + arbiter)** — KHÔNG tự viết launcher, gọi skill delegate.
 
 __C2.1 — Dựng verdict nháp (nội bộ, không tốn quota):__ từ Pha A+B+C, skill soạn 1 verdict nháp
@@ -278,17 +278,17 @@ Mục 3 + verdict nháp) nhưng __prompt đóng vai khác nhau__:
 |---|---|---|
 | __Ủng hộ build__ | codex (terra) | Nêu lý do MẠNH NHẤT nên làm: cơ hội, giá trị cho người dùng/sản phẩm, chi phí bỏ lỡ. Chỉ dùng evidence đã có; suy đoán ghi rõ. |
 | __Phản đối (skeptic)__ | codex acc khác | Nêu lý do MẠNH NHẤT KHÔNG nên làm / chưa nên: bằng chứng nhu cầu yếu, rủi ro, giải pháp rẻ hơn, table-stakes giả. |
-| __Khả thi & chi phí__ | Codex (hoặc codex) | Xét công sức, phụ thuộc, dữ liệu cần lưu, cạm bẫy vận hành (Mục 3). Ước lượng ghi `[Estimated]`. |
+| __Khả thi & chi phí__ | claude (hoặc codex) | Xét công sức, phụ thuộc, dữ liệu cần lưu, cạm bẫy vận hành (Mục 3). Ước lượng ghi `[Estimated]`. |
 
 > Context relay qua scratchpad theo cơ chế delegate. Codex stateless → chèn gói context thẳng vào
 > prompt. Mỗi vai kết bằng: **lập trường (build/skip/adjust) + 2-4 luận điểm có nhãn `[F]/[I]` + độ tin**.
 
-__C2.3 — Phát hiện lệch + rebuttal (tối đa 1 vòng):__ Codex đọc 3 output.
+__C2.3 — Phát hiện lệch + rebuttal (tối đa 1 vòng):__ Claude đọc 3 output.
 * 3 vai __hội tụ__ (cùng lập trường, chỉ khác nhấn mạnh) → bỏ rebuttal, sang C2.4.
 * Có __bất đồng thực chất__ (build vs skip lệch nhau) → 1 vòng rebuttal: đưa lập luận đối phương cho
   vai bất đồng "phản biện hoặc điều chỉnh" (per delegate Chế độ C bước 2). Ghi lại diễn tiến.
 
-__C2.4 — Codex arbiter chốt (KHÔNG đẩy ra CLI):__ Codex đọc 3 lập luận + rebuttal, tự chốt verdict
+__C2.4 — Claude arbiter chốt (KHÔNG đẩy ra CLI):__ Claude đọc 3 lập luận + rebuttal, tự chốt verdict
 cuối — cân opportunity + evidence strength + strategic fit + dependency (RICE-lite chỉ là sorting aid,
 không tự quyết). Verdict lệch với đa số vai → ghi rõ vì sao (arbiter có quyền override, đánh dấu 🔶).
 
@@ -402,20 +402,20 @@ KHÔNG bóc Feature Map (việc `/prd`), KHÔNG vẽ flow (việc `/brainstorm`)
 
 ## References
 
-* @.Codex/rules/project-profile.md (domain/đối thủ/thuật ngữ — hỏi khi thiếu, ghi lại, reuse)
-* @.Codex/rules/approval-gate.md
-* @.Codex/rules/kg-usage.md (KG định tuyến Project match — grep + prose vẫn là evidence)
-* @.Codex/rules/ba-conventions.md
-* @.Codex/rules/naming-conventions.md
-* @.Codex/rules/changelog.md
-* @.Codex/rules/feature-bootstrap.md
-* @.Codex/agents/feature-researcher.md
-* @.Codex/skills/delegate/SKILL.md  (Pha C2 — debate 3 góc nhìn qua Chế độ C: debate + arbiter)
+* @.claude/rules/project-profile.md (domain/đối thủ/thuật ngữ — hỏi khi thiếu, ghi lại, reuse)
+* @.claude/rules/approval-gate.md
+* @.claude/rules/kg-usage.md (KG định tuyến Project match — grep + prose vẫn là evidence)
+* @.claude/rules/ba-conventions.md
+* @.claude/rules/naming-conventions.md
+* @.claude/rules/changelog.md
+* @.claude/rules/feature-bootstrap.md
+* @.claude/agents/feature-researcher.md
+* @.claude/skills/delegate/SKILL.md  (Pha C2 — debate 3 góc nhìn qua Chế độ C: debate + arbiter)
 * @docs/_product/prd.md
-* @.Codex/skills/discover/references/playbook.md
-* @.Codex/skills/discover/references/comparison-columns.md
-* @.Codex/skills/discover/references/example-competitors.md (cách phân khúc + format bảng đối thủ + chọn cột đặc thù theo domain)
-* @.Codex/skills/discover/templates/report-template.md‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+* @.claude/skills/discover/references/playbook.md
+* @.claude/skills/discover/references/comparison-columns.md
+* @.claude/skills/discover/references/example-competitors.md (cách phân khúc + format bảng đối thủ + chọn cột đặc thù theo domain)
+* @.claude/skills/discover/templates/report-template.md‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->

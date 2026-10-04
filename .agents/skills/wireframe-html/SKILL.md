@@ -32,7 +32,7 @@ __Thang fidelity 3 bậc:__ `/wireframe-ascii` (lo-fi chat-native) → `/wirefra
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
+- **UI Common Rules & Components** (per `../../../.claude/rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 * **Cần `srs/{feature}-userflow.md` trước.** Chưa tồn tại/chưa duyệt → skill tự gọi `/user-flow <feature>` (Phase A), KHÔNG tự chia flow riêng.
 * __Confirm device size với user TRƯỚC khi vẽ (Phase A bước 4)__ — Mobile 375 / Tablet 768 / Desktop 1920 / Responsive. Đề xuất sẵn từ `primary_device`/design.md nhưng KHÔNG tự chốt im lặng (device là quyết định thiết kế).
 * __L1 plan preview__ trước khi write bất kỳ file.
@@ -46,7 +46,7 @@ __Thang fidelity 3 bậc:__ `/wireframe-ascii` (lo-fi chat-native) → `/wirefra
 * __Self-contained HTML__: không có external CSS/JS dependencies. Inline tất.
 * __Cross-flow screens__: flow B bắt đầu từ màn hình thuộc flow A → bao gồm màn hình đó, nhãn `[chung]`.
 * __Vietnamese-first__ labels. User nói "viết bằng tiếng Anh" để switch.
-* __BA conventions__ — L1 prose preview, no-re-ask rule, IT-BA framing. Per @../../rules/ba-conventions.md.
+* __BA conventions__ — L1 prose preview, no-re-ask rule, IT-BA framing. Per @../../../.claude/rules/ba-conventions.md.
 
 ### Pitfalls — easy to get wrong‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -109,7 +109,7 @@ Sau generate: cập nhật `docs/{feature}/ascii-wireframe/{feature}-wireframe-i
 
 ### Phase B — Read Upstream Docs
 
-* __KG chọn nguồn trước (rẻ hơn scan):__ chạy `node .Codex/skills/kg/engine/kg-query.mjs facts {feature}` và `node .Codex/skills/kg/engine/kg-query.mjs neighbors <doc-path>` khi có doc mốc để lấy danh sách candidate/coverage cho FR/UC/E nguồn của screen, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.Codex/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
+* __KG chọn nguồn trước (rẻ hơn scan):__ chạy `node .claude/skills/kg/engine/kg-query.mjs facts {feature}` và `node .claude/skills/kg/engine/kg-query.mjs neighbors <doc-path>` khi có doc mốc để lấy danh sách candidate/coverage cho FR/UC/E nguồn của screen, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.claude/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
 
 Đọc song song các file sau (optional — warn nếu thiếu, không abort):
 
@@ -396,15 +396,15 @@ Collision: trùng slug → suffix `-2`.
 
 ## References
 
-- @.Codex/rules/ui-common-rules-components.md
+- @.claude/rules/ui-common-rules-components.md
 * @../../../_templates/wireframe-html-template.html (template chuẩn per-flow — CSS B&W + skeleton + mẫu screens)
 * @../../../_templates/wireframe-html-nav-template.html (template index điều hướng — sidebar TOC + flow map + iframe, Phase G.5)
-* @../../rules/approval-gate.md
-* @../../rules/kg-usage.md
-* @../../rules/naming-conventions.md
-* @../../rules/changelog.md
-* @../../rules/feature-bootstrap.md
-* @../../rules/ba-conventions.md
+* @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/kg-usage.md
+* @../../../.claude/rules/naming-conventions.md
+* @../../../.claude/rules/changelog.md
+* @../../../.claude/rules/feature-bootstrap.md
+* @../../../.claude/rules/ba-conventions.md
 * @../user-flow/SKILL.md (nguồn chia flow — chạy trước nếu chưa có)
 * @../wireframe-ascii/SKILL.md (renderer ngang hàng — đọc lại nếu đã chạy trước, xem Phase B.5)
 * @../prototype-html/SKILL.md (high-fidelity HTML clickable)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍

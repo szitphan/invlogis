@@ -81,7 +81,7 @@ Features có ERD: !`for d in docs/*/srs/*-erd.md; do [ -f "$d" ] && grep -l "erD
 7) **Write** từ `_templates/diagram-erd.md` (slim frontmatter `type: srs-erd`/`feature`/`updated`). Fill `mermaid_code`, `entity_descriptions`, `notes`.
 8) **Update mode (file đã tồn tại)** → L2 diff. Update `updated: {date}`.
 9) **Activity log** — set env `CLAUDE_SKILL_NAME=/erd` + `CLAUDE_CHANGELOG_NOTE` (note: `{N} entities, {M} relationships — {note}`) TRƯỚC khi Write — hook append vào `_workspace/changelog.md` (không phụ thuộc spec.md tồn tại hay chưa, không còn routing/fallback). Update erd.md `updated: {date}`.
-9.5. **Render-verify + TỰ XEM ẢNH (BẮT BUỘC, chạy ngay sau Write)** — `node .Codex/scripts/mermaid-verify.mjs --file docs/{feature}/srs/{feature}-erd.md --png <scratchpad>/erd-review`. Cờ `--png` vừa compile-check vừa xuất ảnh PNG mỗi block để skill **tự Read xem hình**. Mermaid không render trong chat (đây là lý do skip L3), nên đây là cách duy nhất bắt lỗi TRƯỚC khi báo "xong".
+9.5. **Render-verify + TỰ XEM ẢNH (BẮT BUỘC, chạy ngay sau Write)** — `node .claude/scripts/mermaid-verify.mjs --file docs/{feature}/srs/{feature}-erd.md --png <scratchpad>/erd-review`. Cờ `--png` vừa compile-check vừa xuất ảnh PNG mỗi block để skill **tự Read xem hình**. Mermaid không render trong chat (đây là lý do skip L3), nên đây là cách duy nhất bắt lỗi TRƯỚC khi báo "xong".
    - Script chạy **3 tầng, báo tách riêng**: cú pháp compile · nhãn an toàn renderer · **ngữ nghĩa**.
      Tầng ngữ nghĩa cho ERD bắt: **entity ma** (tên trong quan hệ nhưng không có khối thuộc tính —
      typo làm mermaid vẽ box rỗng, **error**); **quan hệ không có FK chống lưng** (**cảnh báo**);
@@ -100,7 +100,7 @@ Features có ERD: !`for d in docs/*/srs/*-erd.md; do [ -f "$d" ] && grep -l "erD
      - Lỗi bất kỳ → sửa .md, re-render + re-xem. Tối đa 2 vòng.
    - **Vẫn fail sau 2 lần** → báo user rõ lỗi cụ thể + đoạn mermaid, gợi ý paste mermaid.live để debug tay. KHÔNG âm thầm để file lỗi/xấu mà báo "xong" bình thường.
 9.6. **Nếu feature ĐÃ có bản phái sinh** (`d2-erd/{feature}.d2` hoặc `dbdiagram/{feature}.dbml`) —
-   chạy `node .Codex/scripts/erd-consistency.mjs --feature {slug}`. File này là **canonical**, nên
+   chạy `node .claude/scripts/erd-consistency.mjs --feature {slug}`. File này là **canonical**, nên
    mỗi lần sửa nó là các bản kia thành lỗi thời. Có lệch → báo user + đề xuất chạy lại `/d2-erd`
    và/hoặc `/dbdiagram`. Chưa có bản phái sinh → script tự báo "không có gì lệch", bỏ qua.
 10) **Output report:**
@@ -164,16 +164,16 @@ erDiagram
 
 ## References
 
-- @../../rules/ba-conventions.md
-- @../../rules/approval-gate.md
-- @../../rules/naming-conventions.md
-- @../../rules/changelog.md
-- @../../rules/diagram-selection.md
-- @../../rules/diagram-correctness.md
-- @../../rules/feature-bootstrap.md
+- @../../../.claude/rules/ba-conventions.md
+- @../../../.claude/rules/approval-gate.md
+- @../../../.claude/rules/naming-conventions.md
+- @../../../.claude/rules/changelog.md
+- @../../../.claude/rules/diagram-selection.md
+- @../../../.claude/rules/diagram-correctness.md
+- @../../../.claude/rules/feature-bootstrap.md
 - @../../../_templates/diagram-erd.md
 - @./references/example-erd.md
-- @../../scripts/mermaid-verify.mjs (render-verify sau Write — bước 9.5)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+- @../../../.claude/scripts/mermaid-verify.mjs (render-verify sau Write — bước 9.5)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->

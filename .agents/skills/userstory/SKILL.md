@@ -24,7 +24,7 @@ Mọi metadata không lặp lại per-file. 2 loại file:
 | `userstories/{feature}-story-index.md` | **Master**: frontmatter đầy đủ + bảng Stories (ID/title/persona/FR/screens/priority/**status**/**jira key**/updated) cho toàn bộ stories | FULL (`type: userstory-index`) |
 | `userstories/us-{NNN}.md` | **Content**: prose sections (User Story / Context / Linked Requirements / AC inline / UI refs / Error refs / Dependencies / OQs) | **ZERO** frontmatter |
 
-Per-story `status`, `priority`, `jira key` sống ở **bảng index**, KHÔNG ở file us. Url + pushed_at của Jira sống ở `.Codex/state/atlassian/sync-state.yaml` (canonical — thay `docs/_shared/jira-map.md` cũ đã migrate/xóa). Changelog của mọi story route về `{feature}-story-index.md` với prefix `[us-NNN]`.
+Per-story `status`, `priority`, `jira key` sống ở **bảng index**, KHÔNG ở file us. Url + pushed_at của Jira sống ở `.claude/state/atlassian/sync-state.yaml` (canonical — thay `docs/_shared/jira-map.md` cũ đã migrate/xóa). Changelog của mọi story route về `{feature}-story-index.md` với prefix `[us-NNN]`.
 
 ## Constraints‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -39,7 +39,7 @@ Per-story `status`, `priority`, `jira key` sống ở **bảng index**, KHÔNG �
 * **Vietnamese-first**.
 * **Index frontmatter đầy đủ** (`type: userstory-index`); us files **zero frontmatter**.
 * **Jira key idempotency** đọc từ cột Jira của bảng `{feature}-story-index.md` (KHÔNG còn `jira:` object trên file us). Update mode KHÔNG đụng cột Jira (do `/jira` quản lý).
-* **BA conventions** (must follow) — Owner resolution từ memory `user-identity`, no-re-ask rule, IT-BA framing, Vietnamese typography, L1 prose preview. Per @../../rules/ba-conventions.md.
+* **BA conventions** (must follow) — Owner resolution từ memory `user-identity`, no-re-ask rule, IT-BA framing, Vietnamese typography, L1 prose preview. Per @../../../.claude/rules/ba-conventions.md.
 
 ### Pitfalls — easy to get wrong
 
@@ -83,7 +83,7 @@ Features có US: !`for d in docs/*/userstories/; do [ -d "$d" ] && dirname "$d" 
    * **Feature/`srs/{feature}-spec.md` KHÔNG tồn tại** (feature chưa có, hoặc arg gõ sai) → **REFUSE tường minh + route**: "Chưa thể chạy `/userstory` cho `{feature}` — thiếu `srs/{feature}-spec.md` (cần FR để split story). Feature hiện có: {list}. Chạy `/srs {feature}` trước để tạo FR, rồi quay lại." KHÔNG tự tạo feature.
    * **`srs/{feature}-spec.md` tồn tại** nhưng `status: draft/in-review` → soft gate warn + proceed (có FR thật để làm, chỉ chưa approved — flag mỗi story "built from draft SRS").
 2. **Read** SRS spec + flows + screens + UCs nếu present.
-   * **KG chọn nguồn trước (rẻ hơn scan):** chạy `node .Codex/skills/kg/engine/kg-query.mjs coverage {feature}` và `node .Codex/skills/kg/engine/kg-query.mjs facts {feature}` để lấy danh sách candidate/coverage, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.Codex/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
+   * **KG chọn nguồn trước (rẻ hơn scan):** chạy `node .claude/skills/kg/engine/kg-query.mjs coverage {feature}` và `node .claude/skills/kg/engine/kg-query.mjs facts {feature}` để lấy danh sách candidate/coverage, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.claude/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
 3. **Story split strategy (default = vertical slice):**
    * **Default `outcome`:** 1 story = 1 smallest end-to-end business outcome (user hoàn thành 1 việc có giá trị quan sát được). Ưu tiên patterns SPIDR/workflow-step/rule-variation — chia theo **hành vi nghiệp vụ**, KHÔNG theo tầng UI/API/DB.
    * Tín hiệu phụ (chỉ gợi ý chỗ cắt, KHÔNG phải trục chính, user có thể override inline ở L1):
@@ -131,13 +131,13 @@ Status + priority + jira key sống ở **index**, KHÔNG ở file us. Hook tự
 
 ## References
 
-* @../../rules/ba-conventions.md
-* @../../rules/approval-gate.md
-* @../../rules/kg-usage.md
-* @../../rules/naming-conventions.md
-* @../../rules/feature-bootstrap.md
-* @../../rules/delivery-readiness.md
-* @../../rules/changelog.md
+* @../../../.claude/rules/ba-conventions.md
+* @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/kg-usage.md
+* @../../../.claude/rules/naming-conventions.md
+* @../../../.claude/rules/feature-bootstrap.md
+* @../../../.claude/rules/delivery-readiness.md
+* @../../../.claude/rules/changelog.md
 * @../../../_templates/user-story-index.md
 * @../../../_templates/user-story.md
 * @../../../_templates/ac-block.md‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍

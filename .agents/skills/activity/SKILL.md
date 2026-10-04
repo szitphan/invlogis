@@ -26,7 +26,7 @@ Produce mermaid `flowchart` cho 1 business process — show decisions, parallels
 - **Direction tự chọn theo độ phức tạp** — mặc định TB (top-bottom); process nhiều lane/rộng thì tự chuyển LR. User muốn ngang thì nói "vẽ theo chiều ngang" trong câu lệnh hoặc câu trả lời.
 - **`--feature` optional** — auto-detect từ ngữ cảnh/feature đang làm dở; mơ hồ mới hỏi bằng picker. **Feature chưa tồn tại + arg là mô tả quy trình → tự derive slug + tạo feature** (điểm-vào, xem `feature-bootstrap.md` nhóm A). KHÔNG bắt qua `/brainstorm` trước.
 - **Vietnamese-first** trong labels (mermaid hỗ trợ Unicode); syntax keywords English.
-- **Per @../../rules/diagram-selection.md** — check process có ≥3 decisions hoặc có parallel; nếu đơn giản tuyến tính → suggest `/sequence`.
+- **Per @../../../.claude/rules/diagram-selection.md** — check process có ≥3 decisions hoặc có parallel; nếu đơn giản tuyến tính → suggest `/sequence`.
 - **flows.md không tồn tại** → tạo mới với frontmatter + heading trần `# {Feature} — Flows` (KHÔNG câu intro/blockquote meta), rồi section `## Flow:` đầu.
 - **Đừng tự chốt lane từ heuristic** — bước 3.5 bắt buộc hỏi user xác nhận danh sách vai trò detect được trước khi generate, vì scan từ khoá dễ bỏ sót actor bị ẩn/ngụ ý trong câu văn.
 
@@ -97,7 +97,7 @@ Features có flows.md: !`for d in docs/*/srs/*-flows.md; do [ -f "$d" ] && echo 
    > **ID full-form bắt buộc** trong 3 dòng Related — luôn `FR-{feature}-NNN` / `E-{feature}-NNN`, KHÔNG short-form `FR-001` (nguồn edge cho KG; short-form gây feature-ma + mất trace).
 8) **Gọi lại với slug trùng** (update mode tự động) → L2 diff cho section đó.
 9) **Activity log** — set env `CLAUDE_SKILL_NAME=/activity` + `CLAUDE_CHANGELOG_NOTE` (note: `added {process-title} activity diagram`) TRƯỚC khi Write — hook append vào `_workspace/changelog.md` (không phụ thuộc spec.md tồn tại hay chưa, không còn routing/fallback). Update flows.md `updated: {date}`.
-9.5. **Render-verify (BẮT BUỘC, chạy ngay sau Write)** — `node .Codex/scripts/mermaid-verify.mjs --file docs/{feature}/srs/{feature}-flows.md`. Mermaid không render trong chat (đây là lý do skip L3), nên đây là cách duy nhất bắt lỗi cú pháp TRƯỚC khi báo "xong" thay vì để user tự phát hiện khi mở IDE.
+9.5. **Render-verify (BẮT BUỘC, chạy ngay sau Write)** — `node .claude/scripts/mermaid-verify.mjs --file docs/{feature}/srs/{feature}-flows.md`. Mermaid không render trong chat (đây là lý do skip L3), nên đây là cách duy nhất bắt lỗi cú pháp TRƯỚC khi báo "xong" thay vì để user tự phát hiện khi mở IDE.
    - Script chạy **3 tầng, báo tách riêng**: cú pháp compile · nhãn an toàn renderer · **ngữ nghĩa**.
    - Tầng ngữ nghĩa **chưa phủ flowchart** (mới có state/erd/sequence) → với activity, phần dưới đây
      vẫn phải **tự soi bằng mắt trên ảnh**, đừng coi "3 tầng PASS" là diagram đúng luồng:
@@ -174,16 +174,16 @@ flowchart TB
 
 ## References
 
-- @../../rules/ba-conventions.md
-- @../../rules/approval-gate.md
-- @../../rules/naming-conventions.md
-- @../../rules/changelog.md
-- @../../rules/diagram-selection.md
-- @../../rules/diagram-correctness.md
-- @../../rules/feature-bootstrap.md
+- @../../../.claude/rules/ba-conventions.md
+- @../../../.claude/rules/approval-gate.md
+- @../../../.claude/rules/naming-conventions.md
+- @../../../.claude/rules/changelog.md
+- @../../../.claude/rules/diagram-selection.md
+- @../../../.claude/rules/diagram-correctness.md
+- @../../../.claude/rules/feature-bootstrap.md
 - @../../../_templates/diagram-activity.md
-- @../../scripts/mermaid-verify.mjs (render-verify sau Write — bước 9.5)
-- @../../agents/diagram-reviewer.md (Diagram_Reviewer — review coverage khi vượt ngưỡng phức tạp, bước 9.7)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+- @../../../.claude/scripts/mermaid-verify.mjs (render-verify sau Write — bước 9.5)
+- @../../../.claude/agents/diagram-reviewer.md (Diagram_Reviewer — review coverage khi vượt ngưỡng phức tạp, bước 9.7)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->

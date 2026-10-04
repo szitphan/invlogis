@@ -101,7 +101,7 @@ User gọi /dbdiagram --feature X   (hoặc /dbdiagram "<mô tả data model>")
 4. L1 plan preview (prose: N table, M quan hệ). User Y → tiếp
    ▼
 5. Write {feature}.dbml → dbml2sql regen {feature}.sql (validate fail → sửa, tối đa 2 lần)
-5.5. **Đối chiếu canonical (BẮT BUỘC)** — `node .Codex/scripts/erd-consistency.mjs --feature {slug}`.
+5.5. **Đối chiếu canonical (BẮT BUỘC)** — `node .claude/scripts/erd-consistency.mjs --feature {slug}`.
    So table + quan hệ (Ref) của bản DBML vừa sinh với **canonical `srs/{feature}-erd.md`** (nguồn
    khai ở bước 1). `dbml2sql` PASS chỉ nghĩa là DBML đúng cú pháp, KHÔNG nghĩa là cùng data model
    với bản Mermaid/D2 — 3 file mỗi cái tự hợp lệ vẫn có thể mô tả 3 model khác nhau.
@@ -202,13 +202,13 @@ Cần sửa?   /dbdiagram --feature {feature} (skill tự vào update mode)
 
 ## References
 
-* @../../rules/ba-conventions.md
-* @../../rules/approval-gate.md
-* @../../rules/naming-conventions.md
-* @../../rules/changelog.md
-* @../../rules/diagram-selection.md
-* @../../rules/diagram-correctness.md
-* @../../rules/feature-bootstrap.md
+* @../../../.claude/rules/ba-conventions.md
+* @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/naming-conventions.md
+* @../../../.claude/rules/changelog.md
+* @../../../.claude/rules/diagram-selection.md
+* @../../../.claude/rules/diagram-correctness.md
+* @../../../.claude/rules/feature-bootstrap.md
 * @./references/example-dbdiagram.dbml (mẫu chuẩn đã validate qua dbml2sql)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 

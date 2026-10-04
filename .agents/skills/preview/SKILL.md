@@ -158,9 +158,9 @@ Bundle mọi file `.md` của feature vào 1 HTML: nested TOC + mermaid render +
 
 ## References
 
-* @../../rules/approval-gate.md
-* @../../rules/naming-conventions.md
-* @../../rules/feature-bootstrap.md
+* @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/naming-conventions.md
+* @../../../.claude/rules/feature-bootstrap.md
 * @../../../_scripts/build-preview.py
 * @../../../_scripts/_viewer_wrapper.py
 * @../export/SKILL.md (cùng shared wrapper, content khác — stakeholder package)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍

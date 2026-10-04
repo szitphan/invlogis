@@ -1,10 +1,10 @@
 ---
 name: prototype-html
-description: Dùng khi cần dựng prototype HTML clickable đa màn hình cho 1 feature, chạy như app thật (state-driven, lưu localStorage) kèm lớp góp ý ghim lên element. Bậc fidelity cao nhất trong họ wireframe. Cần userflow + ASCII wireframe + design.md.
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Task
+description: Dùng khi cần dựng prototype HTML clickable đa màn hình cho 1 feature, chạy như app thật (state-driven, lưu localStorage) kèm lớp góp ý ghim lên element — dựng từ ASCII wireframe hoặc từ frame Figma đã vẽ. Cần userflow + design.md.
+allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Task, AskUserQuestion, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__get_design_context, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__get_variable_defs, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_read
 user-invocable: true
 disable-model-invocation: true
-argument-hint: "<feature> [no-comment]"
+argument-hint: "<feature> [<link Figma>] [no-comment]"
 ---
 <!-- Licensed to test.innvie@gmail.com — Order 56EB8MCXD -->
 
@@ -39,15 +39,29 @@ Build 1 file `{feature}-prototype.html` self-contained, double-click mở browse
 
 **Bậc cao nhất thang fidelity:** `/wireframe-ascii` (lo-fi chat-native) → `/wireframe-html` (lo-fi B&W, khung device) → `/prototype-html` (hi-fi — bậc NÀY). Prototype đọc **cùng bảng mô tả 5 cột** (nguồn nội dung màn) làm single-source, KHÔNG re-infer màn ASCII/HTML đã tả.
 
+**2 nguồn dựng màn:**
+
+| Nguồn | Khi nào | Giao diện (bố cục, component, chữ tĩnh, icon) | Hành vi (validation, lỗi, điều hướng, rule) |
+|---|---|---|---|
+| **ASCII** (mặc định) | Không có dấu hiệu Figma | Bảng 5 cột + `design.md` | Bảng 5 cột |
+| **Figma** | User đưa link Figma, nói "theo Figma/dựng từ Figma", hoặc cột `Figma` trong `{feature}-wireframe-index.md` đã có link | **Frame Figma** — thắng bảng ASCII | Bảng 5 cột → `srs/{feature}-spec.md` + `uc-*.md` (Figma không chứa logic) |
+
+Cả 2 nguồn đều: chia flow theo `userflow.md` Mục 3, token theo `design.md`, chạy như app thật (nguyên tắc 1-8). Mode Figma KHÔNG phải slideshow ảnh frame — frame chỉ thay nguồn giao diện, logic vẫn render từ `store.state`.
+
 ## Constraints‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
+- **UI Common Rules & Components** (per `../../../.claude/rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 - **L1 approval** trước Write. File đã tồn tại → L2 diff trước overwrite.
 - **KHÔNG `context: fork`** — skill có nhánh HITL (hỏi device khi userflow thiếu `primary_device`, review apply loop). Fork mất kênh hỏi-đáp → prompt bị auto-skip (per `feedback_fork_no_hitl`). Phân tích nặng vẫn delegate qua Task sub-agent, không fork toàn skill.
 - **Output chính**: `docs/{feature}/html-design/{feature}-prototype.html` (self-contained). Side-effect: update `{feature}-wireframe-index.md` cột HTML prototype (Phase G).
 - **Cần `srs/{feature}-userflow.md`** (nguồn TOC + sơ đồ luồng + chia flow). Chưa có/chưa duyệt → gọi `/user-flow <feature>` trước (giống `/wireframe-html`), KHÔNG tự chia flow riêng.
+- **Mode Figma — khớp màn ↔ artboard bằng `screenId`, KHÔNG đoán.** Artboard do `/figma-screen` đặt tên `"{screenId}-{web|mob} · {slug}"` (vd `3.1-web · danh-sach-chuyen`). Khớp theo token `screenId` nguyên vẹn kèm hậu tố thiết bị (`3.1-web` KHÔNG khớp `3.10-web` hay `3.1-mob`); không có `screenId` thì khớp theo `slug`. Màn không khớp hoặc khớp > 1 artboard → liệt kê + hỏi user, KHÔNG tự chọn.
+- **Mode Figma — frame trạng thái KHÔNG thành màn riêng.** Artboard hậu tố `· rỗng` / `· đang tải` / `· lỗi` (và các hậu tố trạng thái khác cùng `screenId`) là **cách hiển thị** của cùng 1 `<section data-screen>`, render theo `store.state`: list rỗng → bản rỗng; đang submit → bản đang tải; lỗi → bật qua panel nổi "Bước ngoài màn hình (mô phỏng)" (nguyên tắc 4). Ngoại lệ duy nhất: trạng thái loại trừ đã được userflow tách thành màn riêng (`ba-conventions.md` Mục 8) thì giữ màn riêng.
+- **Mode Figma — xung đột chữ:** chữ tĩnh trên frame lệch wording trong bảng 5 cột / SRS (nhãn, tiêu đề, thông báo lỗi) → dùng bản **Figma**, KHÔNG sửa im lặng, liệt kê từng chỗ lệch ở mục "Lệch Figma ↔ tài liệu" trong report để user quyết. Không áp cho validation/rule — Figma không có logic, rule luôn lấy từ tài liệu.
+- **Mode Figma — giá trị hardcode trên frame** (màu/cỡ chữ/khoảng cách không gắn biến) → map về token gần nhất trong `design-tokens.css`, ghi danh sách vào report. KHÔNG thêm hex rời vào prototype (giữ luật raw palette).
+- **Mode Figma — thiếu nguồn hành vi:** màn có frame nhưng không có bảng 5 cột → hành vi lấy từ `srs/{feature}-spec.md` + `uc-*.md`. Không có cả hai cho 1 field (validation, lỗi, điều hướng) → hỏi user hoặc ghi rõ "chưa có nguồn" trong report, KHÔNG bịa rule (per `ba-conventions.md` Mục 6).
 - **Self-contained** — single HTML file, inline CSS + JS. **KHÔNG iframe** (app chia sẻ 1 store JS — iframe cắt state, tạo deck ở flow A không thấy ở flow B). App = 1 document, nhiều `<section data-screen>`, vỏ chrome nổi lên bằng CSS scope. CDN chỉ cho fonts nếu cần, KHÔNG framework.
 - **No emoji** — dùng inline SVG stroke (`stroke="currentColor"`, tự ăn theo theme) hoặc Unicode geometric (✓ ✕ ⚠ ℹ ▾ ←). Gate self-check bắt buộc (Phase H) quét cả UTF-8 thô.
 - **2 lớp CSS tách biệt:**
@@ -58,15 +72,15 @@ Build 1 file `{feature}-prototype.html` self-contained, double-click mở browse
   - **Semantic** (`--bg`/`--surface`/`--ink`/`--focus-ring`...) — component CHỈ dùng cái này. Bắt buộc định nghĩa CẢ 3 block: `:root` (default) + `[data-theme="light"]` + `[data-theme="dark"]` — thiếu `[data-theme="light"]` thì section light lồng trong dark kế thừa nhầm dark.
   - `color-scheme: light|dark` mỗi theme (scrollbar/input/datepicker native tự đổi màu).
   - `--focus-ring` semantic RIÊNG mỗi theme, lấy từ token accent của design.md (vd Astryx: light `#262626`, dark `#ebebeb`). Kiểm tương phản ≥ 3:1 với nền của từng theme.
-  - **Thiếu `design/design.md` → DỪNG**, không dùng bảng màu dự phòng, không lấy `design.md` mẫu của dự án/kit khác làm mặc định. Route: cài kit design system hoặc `/wireframe-html` (lo-fi B&W). Per `../../rules/design-system.md`.
-- **Design system** — đọc TOÀN BỘ `design/design.md`; màu/chữ/khoảng cách lấy qua `design/design-tokens.css`. Per @../../rules/design-system.md.
+  - **Thiếu `design/design.md` → DỪNG**, không dùng bảng màu dự phòng, không lấy `design.md` mẫu của dự án/kit khác làm mặc định. Route: cài kit design system hoặc `/wireframe-html` (lo-fi B&W). Per `../../../.claude/rules/design-system.md`.
+- **Design system** — đọc TOÀN BỘ `design/design.md`; màu/chữ/khoảng cách lấy qua `design/design-tokens.css`. Per @../../../.claude/rules/design-system.md.
 - **Theme per-section theo ngữ cảnh màn (skill tự chọn, KHÔNG hỏi):**
   - Transactional (form, list, học/luyện, cài đặt, account, checkout) → `data-theme="light"`.
   - Marketing/hero/onboarding/landing → `data-theme="dark"`.
   - English learning app = transactional → default light. Dẫn xuất từ design.md "multi-theme", không cứng.
   - **Modal/dialog top-layer PHẢI đồng bộ theme** từ màn active khi mở (`openModal()`), nếu không lấy theme body → chói/lệch tông.
   - **Modal PHẢI căn giữa** — `dialog { margin: auto }` bắt buộc. Reset `* { margin:0 }` xoá `margin:auto` mặc định của `<dialog>` → dialog rơi về **góc trái-trên**. Luôn set lại (template đã có khối MODAL base).
-- **Device = `primary_device` từ `srs/{feature}-userflow.md`** (single-source, giống `/wireframe-html`). Thiếu field → hỏi user 1 câu (Mobile 375 / Tablet 768 / Desktop 1920) per `ba-conventions.md` Mục 7, rồi gợi ý ghi ngược vào userflow.
+- **Device = `primary_device` từ `srs/{feature}-userflow.md`** (single-source, giống `/wireframe-html`). Thiếu field → hỏi user 1 câu (Mobile 375 / Tablet 768 / Desktop 1920) per `ba-conventions.md` Mục 7, rồi gợi ý ghi ngược vào userflow. Mode Figma: kích thước artboard (`-web` → 1920, `-mob` → 375) là nguồn **đề xuất**; lệch `primary_device` → nêu rõ cả hai trong câu hỏi, user chốt.
   - `mobile` → `.proto-app` width 375, có phone-frame. `tablet` → 768. `desktop` → full-width max 1920, KHÔNG phone-frame.
 - **Frame co giãn, KHÔNG vỡ khi viewport hẹp:**
   - Width `min(--device-w, 100%)` — **KHÔNG `100vw`** (tính cả scrollbar → tràn ngang, scrollbar kép).
@@ -85,7 +99,7 @@ Build 1 file `{feature}-prototype.html` self-contained, double-click mở browse
   - Thanh công cụ góp ý đặt **góc dưới-TRÁI** (không đè FAB điều hướng ở góc phải) và có **2 trạng thái**: mở rộng (mặc định desktop ≥720px — 1 chạm là thêm góp ý) / thu gọn về 1 nút tròn (mặc định mobile). User đổi được, nhớ theo file.
   - Không tự điền Bin ID/Key vào file; người dựng nhập sau qua `#admin`.
   - Element chính nên có `data-cmt="{screen}.{field}"` để neo bền hơn.
-- **BA conventions** — Owner resolution, no-re-ask, IT-BA framing (KHÔNG hỏi tech CSS/framework), Vietnamese typography, L1 prose preview. Per @../../rules/ba-conventions.md.
+- **BA conventions** — Owner resolution, no-re-ask, IT-BA framing (KHÔNG hỏi tech CSS/framework), Vietnamese typography, L1 prose preview. Per @../../../.claude/rules/ba-conventions.md.
 
 ### Pitfalls — easy to get wrong‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -118,6 +132,9 @@ Build 1 file `{feature}-prototype.html` self-contained, double-click mở browse
 - **Existing prototype.html** — tự update mode (L2 diff).
 - **Privacy** — localStorage demo only; demo-notice: "Demo — dữ liệu lưu local, không gửi đâu"; KHÔNG persist field nhạy cảm.
 - **Demo data non-deterministic** — KHÔNG `Date.now()`/`random()`, hardcode ngày cố định (stakeholder review nhất quán).
+- **Mode Figma thành slideshow ảnh** — sai: chèn screenshot frame làm `<img>` hoặc vẽ cứng từng frame trạng thái thành màn riêng nối bằng nút "tiếp". Đúng: dựng HTML element thật theo cấu trúc frame, trạng thái render từ `store.state` (xem Constraints "frame trạng thái KHÔNG thành màn riêng"). Ảnh Figma chỉ dùng để đối chiếu ở Phase H, không nhúng vào file.
+- **Mode Figma: chép nguyên code `get_design_context`** — output của Figma MCP là React + Tailwind tham khảo, kèm class/giá trị tuyệt đối. KHÔNG dán thẳng: đọc để lấy cấu trúc (vùng, thứ tự, component, chữ, kích thước), rồi viết lại bằng class + semantic token của template (prototype tự chứa, không framework).
+- **Mode Figma: đọc frame bằng ảnh thay vì cấu trúc** — screenshot che mất tên component, biến token, chữ bị cắt. Luôn đọc `get_design_context`/`get_metadata` trước; screenshot chỉ để nhìn tổng thể và đối chiếu.
 - **Thanh góp ý: phải CÓ CẢ mở-rộng lẫn thu-gọn, không chọn cứng 1 kiểu.** Hai lần sai đã gặp: (a) bày 6 nút ngang ở đáy → mobile chiếm hết bề ngang, che nội dung; (b) sửa thành luôn-thu-gọn 1 nút tròn → desktop phải bấm 2 lần mới thêm được góp ý, rườm rà. Đúng: **desktop (≥720px) mở rộng sẵn** (nút "Thêm góp ý" bấm 1 phát là ghim, kèm nút danh sách + "..." + mũi tên thu gọn); **mobile thu gọn** về 1 nút tròn 44px; user bấm mũi tên đổi qua lại và **lựa chọn được nhớ theo từng file**. Badge số góp ý + chấm trạng thái đồng bộ nằm ngay trên nút tròn. Đặt góc dưới-**trái** vì FAB điều hướng của prototype đã chiếm góc phải.
 - **Chèn lớp góp ý bằng replace `</body>` đầu tiên** — sai: nội dung module có thể chứa chuỗi đó trong comment/CSS, dẫn tới chèn vào giữa `<script>` khác làm vỡ file (đã xảy ra). Luôn dùng `rfind` (thẻ đóng CUỐI).
 - **Bản nháp rỗng bị đẩy lên máy chủ** — bug thực tế làm **mất chữ của mọi người**: comment vừa tạo (chưa gõ) đã sync lên, lần kéo sau bản rỗng tràn về ghi đè nội dung thật → danh sách toàn "(trống)". Module hiện chặn 4 lớp; nếu sửa module thì giữ nguyên các lớp đó.
@@ -125,13 +142,16 @@ Build 1 file `{feature}-prototype.html` self-contained, double-click mở browse
 ## Inputs
 
 ```
-/prototype-html <feature>              # MẶC ĐỊNH: kèm lớp góp ý (comment)
-/prototype-html <feature> no-comment   # bản trình chiếu thuần, KHÔNG có góp ý
+/prototype-html <feature>                       # MẶC ĐỊNH: nguồn ASCII, kèm lớp góp ý (comment)
+/prototype-html <feature> <link Figma>          # nguồn Figma (link file/page/frame)
+/prototype-html <feature> no-comment            # bản trình chiếu thuần, KHÔNG có góp ý
 ```
 
 Feature slug bắt buộc. File tồn tại → overwrite qua L2 diff. Review default-on (Phase H). Muốn bỏ review làm nhanh, nói "khỏi cần review, làm luôn".
 
-**2 mode (nhận diện bằng lời, không cần đúng cú pháp cờ):**
+**Nguồn dựng màn** (ASCII / Figma) nhận diện theo bảng "2 nguồn dựng màn" ở Goal. Có dấu hiệu Figma nhưng không có link (vd chỉ nói "theo Figma", cột `Figma` trống) → hỏi link 1 câu. Cột `Figma` có link nhưng user không nhắc → hỏi xác nhận "Dựng theo frame Figma đã có hay theo ASCII?" (KHÔNG tự chọn).
+
+**2 mode góp ý (nhận diện bằng lời, không cần đúng cú pháp cờ):**
 
 | Mode | Khi nào | Kết quả |
 |---|---|---|
@@ -151,13 +171,18 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
 
 ### Phase A — Setup + validate nguồn chia flow‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-0. **Check `design/design.md`.** Thiếu → DỪNG, báo thiếu design system + route cài kit hoặc `/wireframe-html` (per `../../rules/design-system.md`).
+0. **Check `design/design.md`.** Thiếu → DỪNG, báo thiếu design system + route cài kit hoặc `/wireframe-html` (per `../../../.claude/rules/design-system.md`).
 1. **Resolve feature.** Validate `docs/{feature}/` tồn tại.
 2. **Check `srs/{feature}-userflow.md`** (nguồn TOC + sơ đồ luồng + chia flow):
    - Tồn tại + duyệt → Read Mục 2 (danh sách màn + mục đích) + Mục 3 (chia flow: flow-slug + screens/flow + cases phủ happy/error/edge).
    - Chưa có/chưa duyệt → **tự gọi `/user-flow <feature>`** trước. KHÔNG tự chia flow.
-3. **Check ASCII wireframe** `docs/{feature}/ascii-wireframe/{feature}-wireframe-index.md`. Thiếu → refuse + route `/user-flow` + `/wireframe-ascii` (bảng mô tả 5 cột là nguồn nội dung màn). Per `feature-bootstrap.md` nhóm B.
-4. **Resolve device (single-source):** `userflow.md` frontmatter `primary_device` → mobile 375 / tablet 768 / desktop 1920. Thiếu → hỏi user 1 câu (per `ba-conventions.md` Mục 7), rồi gợi ý ghi ngược userflow.
+3. **Resolve nguồn dựng màn** (bảng "2 nguồn dựng màn" ở Goal + mục Inputs).
+   - **ASCII:** check `docs/{feature}/ascii-wireframe/{feature}-wireframe-index.md`. Thiếu → refuse + route `/user-flow` + `/wireframe-ascii` (bảng mô tả 5 cột là nguồn nội dung màn). Per `feature-bootstrap.md` nhóm B.
+   - **Figma:** ASCII không bắt buộc (đọc nếu có — vẫn là nguồn hành vi ưu tiên). Làm tiếp bước 3a-3c.
+3a. **Kết nối Figma.** Đọc qua Figma MCP chính thức bằng link (`get_metadata` trên node page/frame user đưa) — không cần plugin. Lỗi quyền/link sai → báo + dừng, KHÔNG rơi về mode ASCII im lặng (hỏi user muốn dựng theo ASCII không). Plugin Reqwise đang kết nối (`figma_status`) thì đọc thêm `figma_read` op `get_page_model` để lấy userflow + mũi tên trên Figma (bổ sung nav graph Phase D).
+3b. **Lập bảng khớp màn ↔ artboard.** Từ `get_metadata`, liệt kê artboard top-level → tách `screenId`, hậu tố thiết bị, `slug`, hậu tố trạng thái (`· rỗng`/`· đang tải`/`· lỗi`/...). Khớp với danh sách màn `userflow.md` Mục 2-3 theo luật ở Constraints. Kết quả 4 nhóm: **khớp** (màn → 1 artboard chính + N artboard trạng thái) · **màn chưa có frame** (dùng ASCII nếu có, đánh dấu "chưa có frame Figma"; không có ASCII → hỏi bỏ màn hay dừng) · **artboard thừa** (không thuộc màn nào — liệt kê, bỏ qua) · **mơ hồ** (khớp >1 → hỏi). Có nhóm mơ hồ hoặc màn thiếu cả frame lẫn ASCII → hỏi user 1 lượt gộp (AskUserQuestion) trước khi đi tiếp.
+3c. Ghi nhớ `fileKey` + `nodeId` từng artboard chính — dùng cho Phase C-Figma, link "Xem trong Figma" (bước 21) và Phase H.
+4. **Resolve device (single-source):** `userflow.md` frontmatter `primary_device` → mobile 375 / tablet 768 / desktop 1920. Thiếu → hỏi user 1 câu (per `ba-conventions.md` Mục 7), rồi gợi ý ghi ngược userflow. Mode Figma: đề xuất từ kích thước artboard; lệch `primary_device` → hỏi (xem Constraints).
 
 ### Phase B — Design system extraction (token 2 lớp)
 
@@ -174,19 +199,27 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
    - Tra `{feature}-wireframe-index.md` → biết screen thuộc `{flow-slug}.md` nào + title/subtitle (section `## Descriptions`).
    - Read `ascii-wireframe/{flow-slug}.md` block `## Screen: {slug}` → bảng mô tả **5 cột** (`# / Items / Control type / Data type / Description`). **Single-source:** dùng thẳng (Description đã sâu 6 lớp — error wording, states, validation, edge). KHÔNG re-infer.
    - Extract per row: control type, required, placeholder, default, error code + wording, navigation target, validation rule (business-language). **Mã `E-{feature}-NNN`/`FR-{feature}-NNN` trong bảng mô tả là metadata truy vết cho BA/dev đọc tài liệu — KHÔNG render vào banner/text hiển thị trong `<section data-screen>`.** UI thật chỉ hiện đúng **wording** (câu thông báo) đúng như cột Description; mã ID chỉ được phép xuất hiện trong JS comment (`// E-authentication-003`) hoặc report, không trong chuỗi hiển thị cho user.
-9. **Quyết định theme mỗi screen** theo ngữ cảnh (transactional→light, marketing→dark).
+9. **Quyết định theme mỗi screen** theo ngữ cảnh (transactional→light, marketing→dark). Mode Figma: theme theo mode biến của frame (Light/Dark) nếu đọc được, không thì theo ngữ cảnh như trên.
+
+### Phase C-Figma — Trích giao diện từ frame (chỉ mode Figma; chạy SAU bước 8 để có sẵn hành vi)
+
+9a. **Mỗi màn đã khớp**, đọc artboard chính bằng `get_design_context` (cấu trúc + chữ + component + biến) và `get_screenshot` (nhìn tổng thể). Frame lớn/cắt → `get_metadata` để lấy cây node rồi đọc từng vùng. Đọc `get_variable_defs` 1 lần để có bảng biến Figma → tên token.
+9b. **Rút ra cho mỗi màn:** vùng bố cục + thứ tự (header, thanh lọc, bảng, rail, footer…), kích thước khung chính, component dùng ở mỗi vị trí (tên instance thư viện), chữ tĩnh (tiêu đề, nhãn, placeholder, nút, cột bảng), icon (tên icon thư viện → SVG cùng bộ), dữ liệu mẫu trên frame (dùng làm seed cho `DEMO`). KHÔNG chép code React/Tailwind của `get_design_context` (xem Pitfalls).
+9c. **Ghép với hành vi (bước 8):** mỗi element trên frame → tìm row tương ứng trong bảng 5 cột (theo tên/nhãn). Ra 3 nhóm: **khớp** (UI từ Figma + hành vi từ row) · **chỉ có trên Figma** (hành vi lấy từ SRS/UC; không có → "chưa có nguồn" trong report) · **chỉ có trong bảng 5 cột** (element tài liệu mô tả mà frame không vẽ → KHÔNG tự thêm vào UI; liệt kê ở mục "Lệch Figma ↔ tài liệu"). Chữ lệch wording → theo luật xung đột chữ ở Constraints.
+9d. **Frame trạng thái** (`· rỗng`/`· đang tải`/`· lỗi`…) cùng `screenId`: đọc phần KHÁC với artboard chính (empty state, skeleton, banner lỗi) → thành nhánh render trong `renderScreen(slug)` theo `store.state`. Màn không có frame trạng thái nào → vẫn phải có loading/empty/error theo nguyên tắc 5 + `design.md` States (dựng theo component thư viện, ghi "trạng thái không có frame Figma" trong report).
+9e. **Token:** biến Figma gắn theo tên → CSS var cùng tên trong `design-tokens.css`. Giá trị hardcode → token gần nhất + ghi report (Constraints).
 
 ### Phase D — Navigation graph + demo data + state model
 
-10. **Nav graph** {from, trigger, to, condition} từ: Description column ("Success → redirect {X}", "Click → {Y}") → UC `uc-*.md` branches → fallback linear order.
-11. **Demo data (`DEMO`)** — 1 object gom mọi nội dung giả (deck/card/số liệu), deterministic. Rút số thật từ SRS/brainstorm nếu có, không thì đặt giá trị hợp lý cố định.
+10. **Nav graph** {from, trigger, to, condition} từ: Description column ("Success → redirect {X}", "Click → {Y}") → UC `uc-*.md` branches → (mode Figma) prototype connections của frame + mũi tên userflow trên Figma nếu đọc được → fallback linear order. Nguồn mâu thuẫn nhau về đích của 1 trigger → theo tài liệu, ghi report.
+11. **Demo data (`DEMO`)** — 1 object gom mọi nội dung giả (deck/card/số liệu), deterministic. Rút số thật từ SRS/brainstorm nếu có; mode Figma ưu tiên dữ liệu mẫu trên frame (để prototype trông giống thiết kế); không có thì đặt giá trị hợp lý cố định.
 12. **State model (`DEFAULT_STATE`)** — hydrate TỪ `DEMO` (`decks: structuredClone(DEMO.decks)`...). Liệt kê state có nghĩa demo cần persist (decks, cards, activeTab, session progress).
 13. **Default screen** = màn đầu Mục 3 (hoặc entry-point UC).
 14. **Xác định `ENTRY_SCREENS`** — mỗi flow, màn đầu tiên nơi user NHẬP MỚI dữ liệu mỗi lần ghé (login, signup, forgot-password, dạng tương tự) → thêm slug vào `ENTRY_SCREENS`. Màn nhận dữ liệu/token TỪ màn trước trong flow (verify-sent đọc `pendingEmail`, reset-password đọc token) → KHÔNG thuộc `ENTRY_SCREENS` dù là màn "vào từ ngoài" (link email) — context đó phải giữ.
 
 ### Phase E — Component mapping
 
-15. **Map bảng 5 cột → HTML component** (dùng semantic token, KHÔNG hex rời):
+15. **Map bảng 5 cột → HTML component** (dùng semantic token, KHÔNG hex rời). Mode Figma: map theo **component trên frame** (tên instance → loại control theo `design/ba-crosswalk.md` / `components.md`), bảng dưới chỉ là đích HTML; kích thước/biến thể (size, variant) giữ đúng frame:
 
 | Control type | HTML output | Class |
 |---|---|---|
@@ -210,13 +243,13 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
 18. **Fill placeholders:** `{{LANG}}` `{{FEATURE}}` `{{FEATURE_TITLE}}` `{{DEVICE}}` `{{DEVICE_W}}` `{{DEVICE_H}}` `{{FLOW_COUNT}}` `{{SCREEN_COUNT}}` `{{RAW_PALETTE}}` `{{THEME_SEMANTIC}}` `{{APP_COMPONENT_CSS}}` `{{ICON_SPRITE}}` `{{SCREENS}}` `{{DEMO_DATA}}` `{{DEFAULT_STATE}}` `{{APP_LOGIC}}` `{{DEFAULT_SCREEN}}` `{{SCREEN_LIST}}`.
 19. **`{{SCREENS}}`:** mỗi screen 1 `<section data-screen="{slug}" data-theme="light|dark">`, nội dung render được từ `store.state` (list/detail đọc state, không cứng).
 20. **`{{APP_LOGIC}}`:** hàm `renderScreen(slug)` render mỗi màn từ `store.state`; các hành động (tạo deck, thêm thẻ, rate) đổi `store.state` + `store.save()` + re-render. Điều hướng có điều kiện (validate). Modal mở qua `openModal()`. Mỗi hàm submit (`doLogin`/`doSignup`/...) theo mẫu: disable nút + label loading → `setTimeout(..., 600)` → xử lý kết quả + khôi phục nút. Khai báo `const ENTRY_SCREENS = [...]` (bước 14) + hàm `clearFormInputs(slug)` (reset input/checkbox trong `[data-screen="{slug}"]` về rỗng + ẩn banner/error, gỡ marker touched/submitted + `aria-invalid="false"` — nguyên tắc 7) — `showScreen()` (khung template) gọi hàm này trước `renderScreen()` khi `slug` thuộc `ENTRY_SCREENS`. Field có canonical format dùng helper template `digitsOnly`/`formatCardNumber`/`formatCardExpiry` trong handler `input`, và `markFieldTouched`/`setFieldError` trong handler `blur` + tại thời điểm submit validate toàn form.
-21. **`{{TOC}}` + `{{FLOWMAP}}`** (vào panel nổi) từ `userflow.md` Mục 3 — theo mẫu cuối template. `data-goto="{slug}"` click → `goto()` + đóng panel. Node class happy/edge/error theo cột "Cases phủ".
+21. **`{{TOC}}` + `{{FLOWMAP}}`** (vào panel nổi) từ `userflow.md` Mục 3 — theo mẫu cuối template. `data-goto="{slug}"` click → `goto()` + đóng panel. Node class happy/edge/error theo cột "Cases phủ". Mode Figma: mỗi màn trong TOC có thêm link nhỏ "Xem trong Figma" (`https://www.figma.com/design/{fileKey}/?node-id={nodeId}`, mở tab mới, style chrome neutral) + gắn `data-figma-node="{nodeId}"` lên `<section data-screen>`; màn dựng từ ASCII ghi "chưa có frame".
 
 ### Phase F.2 — Nhúng lớp GÓP Ý (bỏ qua nếu mode `no-comment`)
 
 22. **Mode không-góp-ý** → bỏ qua phase này. File ra sạch, không có dấu vết comment.
 
-23. **Mode có góp ý (mặc định):** đọc `.Codex/skills/prototype-html/assets/comment-layer.js` rồi chèn **nguyên văn** vào ngay trước thẻ đóng `</body>` **cuối cùng**:
+23. **Mode có góp ý (mặc định):** đọc `.claude/skills/prototype-html/assets/comment-layer.js` rồi chèn **nguyên văn** vào ngay trước thẻ đóng `</body>` **cuối cùng**:
     ```html
       <!-- COMMENT LAYER -->
       <script>
@@ -238,7 +271,8 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
 23. **L1 approval preview:**
     ```
     [/prototype-html] Sẽ build interactive HTML prototype cho {feature}:
-      Device:      {mobile 375|tablet 768|desktop 1920}  (từ userflow primary_device)
+      Nguồn màn:   {ASCII | Figma — {K}/{S} màn có frame, {T} frame trạng thái gộp vào màn, {A} màn dựng từ ASCII}
+      Device:      {mobile 375|tablet 768|desktop 1920}  (từ userflow primary_device | artboard Figma)
       Theme:       {N} màn light (transactional) · {M} màn dark (marketing)  — tokens từ design.md
       Screens:     {S} màn · {E} nav edges · state-driven (render từ store)
       Điều hướng:  menu nổi góc dưới-phải (TOC + sơ đồ luồng {F} flow)
@@ -271,6 +305,7 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
     - **Dropdown/select value≠label (nguyên tắc 8):** grep mọi `<option value="([a-z0-9_-]+)"[^>]*>\1<` (text hiển thị trùng y hệt attribute `value`) trong file — có match là FAIL, đổi text hiển thị sang nhãn nghiệp vụ tiếng Việt, giữ nguyên `value`.
     - Reset → xoá localStorage + về default.
     Có FAIL → tự sửa rồi chạy lại. KHÔNG có Chrome → tối thiểu `new Function(scriptBody)` check JS syntax + đọc kỹ từng hàm luồng chính bằng mắt. Xoá file test tạm sau verify.
+26b. **Đối chiếu với Figma (chỉ mode Figma).** Chụp từng màn của prototype bằng Chrome headless (`--screenshot --window-size={device_w},{device_h}`, mở thẳng `{file}#{slug}` — template route theo `location.hash`) ở trạng thái mặc định, đặt cạnh `get_screenshot` của artboard chính tương ứng → đọc cả 2 ảnh, liệt kê chỗ lệch theo 4 loại: **thiếu/thừa element** · **sai thứ tự/vị trí vùng** · **sai component/biến thể** · **sai chữ**. Lệch do tài liệu thắng Figma có chủ đích (luật xung đột) → KHÔNG tính là lỗi, chỉ ghi chú. Lệch còn lại → tự sửa rồi chụp lại (tối đa 2 vòng). Report ghi rõ: **đây là so bằng mắt AI, không phải so pixel** — khoảng cách/màu lệch nhỏ có thể lọt. Không có Chrome → ghi `Đối chiếu Figma: SKIPPED (không có Chrome)`, KHÔNG in PASS.
 27. **Skip review nếu user nói "khỏi cần review, làm luôn"** — đi thẳng output. (Gate emoji + verify functional bước 26 VẪN chạy — chỉ skip vòng @uxui-reviewer.)
 28. **Spawn `@uxui-reviewer`** (Task) với target file vừa write + references (bảng 5 cột trong `ascii-wireframe/{flow-slug}.md` + `{feature}-wireframe-index.md`). Focus:
     - State coverage: mỗi màn có loading/empty/error/success?
@@ -283,7 +318,7 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
     - **Theme:** section light/dark đúng ngữ cảnh? modal đồng bộ theme? focus-ring hợp WCAG?
     - **Vỏ tách app:** chrome neutral không dính token app? khung device căn giữa? menu nổi bật/tắt OK?
     - Flow consistency: nav dead-end? Cross-screen drift?
-    - Severity per `.Codex/rules/review-format.md`.
+    - Severity per `.claude/rules/review-format.md`.
 28. **Auto-fix mặc định** (per `feedback_review_auto_run` — review auto-run + tự fix HẾT, user chỉ xem output cuối). KHÔNG hỏi user pick từng finding:
     - **BLOCKING + WARNING** → skill tự regen affected sections của HTML (giữ 1 file, verify lại: JS syntax + emoji gate + Chrome headless nếu có). Tối đa 2 vòng (fix → re-review); vòng 2 vẫn còn BLOCKING → ghi rõ điểm tồn đọng vào report.
     - **Quyết định nghiệp vụ** (cần chọn phương án UX/nghiệp vụ chưa có nguồn) → skill tự chọn phương án hợp lý + **đánh dấu 🔶 trong report cuối** để user biết chỗ đã tự quyết (user override sau nếu muốn). KHÔNG chặn tiến độ hỏi từng cái.
@@ -297,6 +332,14 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
        Theme: {N} light / {M} dark (tokens design.md)
        Điều hướng: menu nổi (TOC + sơ đồ luồng {F} flow)
        Emoji gate: PASS | UX review: {N} blocking / {M} warning ({applied} applied)
+       (mode Figma) Nguồn: {K} màn từ frame · {A} màn từ ASCII (chưa có frame) · {X} artboard thừa bỏ qua
+       (mode Figma) Đối chiếu Figma (mắt AI, không phải pixel): {còn L chỗ lệch | SKIPPED — lý do}
+
+    Lệch Figma ↔ tài liệu (user quyết, skill KHÔNG tự sửa nguồn):
+      - {màn} · {element}: Figma "{chữ trên frame}" ↔ {bảng 5 cột|SRS} "{wording}"
+      - {màn} · {element}: có trong tài liệu, frame chưa vẽ
+    Giá trị hardcode trên frame đã map về token: {danh sách | không có}
+    Hành vi chưa có nguồn: {màn · element | không có}
 
     Mở browser: double-click file → done (không server).
     Demo flow:
@@ -316,24 +359,26 @@ Reference trong `{feature}-wireframe-index.md` cột `HTML prototype` dạng `{f
 
 ## References
 
-- @.Codex/rules/ui-common-rules-components.md
+- @.claude/rules/ui-common-rules-components.md
 - @../../../_templates/prototype-html-template.html (template chuẩn — stage + FAB/panel + token 2 lớp + store + reset)
 - @assets/comment-layer.js (lớp góp ý ghim-lên-element — chèn nguyên văn cuối `<body>` khi mode có góp ý)
 - @references/HUONG-DAN-LUU-CHUNG.md (nối kho chung jsonbin — cho người không phải dev)
 - @references/HUONG-DAN-DAY-LEN-WEB.md (đẩy lên GitHub Pages/Netlify: đẩy file gì, thứ tự cấu hình)
-- @../../rules/feature-bootstrap.md
-- @../../rules/approval-gate.md
-- @../../rules/naming-conventions.md
-- @../../rules/changelog.md
-- @../../rules/ba-conventions.md
-- @../../rules/design-system.md (cài từ kit design system — nguồn token, luật bố cục, Known Gaps)
+- @../../../.claude/rules/feature-bootstrap.md
+- @../../../.claude/rules/approval-gate.md
+- @../../../.claude/rules/naming-conventions.md
+- @../../../.claude/rules/changelog.md
+- @../../../.claude/rules/ba-conventions.md
+- @../../../.claude/rules/design-system.md (cài từ kit design system — nguồn token, luật bố cục, Known Gaps)
 - @../../../design/design.md (design tokens source — read at runtime)
 - @../user-flow/SKILL.md (nguồn primary_device + chia flow — read at runtime)
 - @../wireframe-ascii/SKILL.md (nguồn bảng mô tả 5 cột)
 - @../wireframe-html/SKILL.md (renderer ngang hàng B&W — mô hình vỏ điều hướng tham chiếu)
 - @../figma/SKILL.md (Figma builder qua MCP)
-- @../../agents/uxui-reviewer.md (post-write UX review)
-- @../../rules/review-format.md (severity rubric)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+- @../figma-screen/SKILL.md (quy ước tên artboard `{screenId}-{web|mob} · {slug}` + hậu tố trạng thái — nguồn khớp màn ở mode Figma)
+- @../../../design/ba-crosswalk.md + @../../../design/components.md (tên component Figma → loại control, mode Figma)
+- @../../../.claude/agents/uxui-reviewer.md (post-write UX review)
+- @../../../.claude/rules/review-format.md (severity rubric)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->

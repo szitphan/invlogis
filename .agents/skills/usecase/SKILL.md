@@ -23,7 +23,7 @@ Generate use-case docs **theo chuẩn Cockburn (fully-dressed)**: mỗi UC = **1
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
+- **UI Common Rules & Components** (per `../../../.claude/rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 - **L1 approval** trước Write.
 - **L2 diff** khi file đã tồn tại — update mode tự động, không cần flag.
 - **Auto-detect upstream + confirm** — scan SRS FR + screens (downstream mode).
@@ -42,7 +42,7 @@ Generate use-case docs **theo chuẩn Cockburn (fully-dressed)**: mỗi UC = **1
 - **Vietnamese-first**.
 - **Zero-frontmatter cho UC files** — `uc-*.md` KHÔNG có frontmatter. Metadata + status tập trung ở `usecases/{feature}-usecase-index.md`.
 - **Auto-create `{feature}-usecase-index.md`** nếu chưa có (từ `_templates/usecase-index.md`). Mọi run update row trong bảng `## Use cases` + set env note (hook ghi changelog.md) với prefix `[uc-{slug}]`. KHÔNG còn file traceability riêng.
-- **BA conventions** (must follow) — Owner resolution từ memory `user-identity`, no-re-ask rule, IT-BA framing, Vietnamese typography, L1 prose preview. Per @../../rules/ba-conventions.md.
+- **BA conventions** (must follow) — Owner resolution từ memory `user-identity`, no-re-ask rule, IT-BA framing, Vietnamese typography, L1 prose preview. Per @../../../.claude/rules/ba-conventions.md.
 
 ### Pitfalls — easy to get wrong‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -105,7 +105,7 @@ Existing UCs: !`ls docs/*/usecases/uc-*.md 2>/dev/null | head -20`
    - **`srs/{feature}-spec.md` tồn tại → DOWNSTREAM mode.** Trích FR làm nguồn. `status: draft/in-review` → soft gate warn + proceed (xem `delivery-readiness.md`).
    - **`srs/{feature}-spec.md` KHÔNG tồn tại → DISCOVERY mode** (use case = elicitation sớm, viết trước SRS). Feature folder chưa có (arg gõ sai / feature mới) → phân biệt: 1 từ kebab lạ → hỏi "feature mới hay gõ nhầm? {list}"; mô tả/prose → derive slug + tạo folder (per nhóm A). Feature có folder + upstream (brainstorm/URD) nhưng chưa SRS → discovery, dùng upstream làm seed.
 2) **Read nguồn theo mode.** Downstream: SRS FR + flows + screens. Discovery: brainstorm/URD/PRD nếu có (seed), else phỏng vấn từ đầu.
-   - **KG chọn nguồn trước (rẻ hơn scan):** chạy `node .Codex/skills/kg/engine/kg-query.mjs facts {feature}` và `node .Codex/skills/kg/engine/kg-query.mjs coverage {feature}` khi có SRS để lấy danh sách candidate/coverage, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.Codex/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
+   - **KG chọn nguồn trước (rẻ hơn scan):** chạy `node .claude/skills/kg/engine/kg-query.mjs facts {feature}` và `node .claude/skills/kg/engine/kg-query.mjs coverage {feature}` khi có SRS để lấy danh sách candidate/coverage, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.claude/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
 3) **Identify candidate user goals + classify goal level** (KHÔNG map máy móc FR→UC):
    - **Downstream:** đọc SRS FR + PRD capabilities + flows → tổng hợp thành **user goal** (actor muốn đạt gì, 1 phiên). 1 goal gom nhiều FR liên quan.
    - **Discovery:** phỏng vấn (hoặc đọc brainstorm/URD) để lấy actor + goal + main flow + nhánh lỗi. Hỏi business language (IT-BA framing) — ai làm, muốn đạt gì, các bước, khi lỗi thì sao. KHÔNG hỏi DB/API/SDK.
@@ -140,7 +140,7 @@ Existing UCs: !`ls docs/*/usecases/uc-*.md 2>/dev/null | head -20`
     - Set env trước mỗi UC Write (hook ghi changelog.md): `CLAUDE_SKILL_NAME=/usecase` + `CLAUDE_CHANGELOG_AUTHOR={@author}` + `CLAUDE_CHANGELOG_NOTE={note}` (≤80 ký tự). Hook ghép cả dòng.
     - Update frontmatter `updated: {date}`. OQ ref chỉ trỏ OQ đang mở ở SRS, KHÔNG tạo OQ mới ở đây.
 11) **Optional side-updates (best-effort, KHÔNG chặn việc viết UC)** — nếu screen source tồn tại: update cột "Used by functions" trong `ascii-wireframe/{feature}-wireframe-index.md` (reverse link `{uc-slug}`, L2 diff). OQ mới phát hiện khi viết UC → **downstream:** đề xuất thêm vào `srs/{feature}-spec.md` (L2 diff); **discovery:** giữ tạm ở cột OQ-ref index (chưa có SRS). Đây là side-effect thêm giá trị, KHÔNG phải điều kiện để UC hợp lệ — thiếu screen index thì skip + note, không refuse.
-12) **Phase E — Resolve OQs** per @../../rules/resolve-oqs.md (downstream mode). OQ canonical ở `srs/{feature}-spec.md`; bảng index chỉ trỏ ref. KHÔNG ghi OQ vào UC file (Related Requirements chỉ là links FR/BR, không phải OQ). **Discovery mode (chưa có SRS):** OQ chưa có nơi canonical để ghi → giữ OQ dưới dạng note ở cột OQ-ref bảng index (`discovery: {câu hỏi}`) + nêu trong Output report để chuyển sang `/srs`. KHÔNG chạy cascade scan (chưa có downstream doc).
+12) **Phase E — Resolve OQs** per @../../../.claude/rules/resolve-oqs.md (downstream mode). OQ canonical ở `srs/{feature}-spec.md`; bảng index chỉ trỏ ref. KHÔNG ghi OQ vào UC file (Related Requirements chỉ là links FR/BR, không phải OQ). **Discovery mode (chưa có SRS):** OQ chưa có nơi canonical để ghi → giữ OQ dưới dạng note ở cột OQ-ref bảng index (`discovery: {câu hỏi}`) + nêu trong Output report để chuyển sang `/srs`. KHÔNG chạy cascade scan (chưa có downstream doc).
 13) **Output report:**
 
     **Downstream mode (có SRS):**
@@ -189,16 +189,16 @@ Diagram KHÔNG embed trong UC — thuộc `srs/{feature}-flows.md` / `{feature}-
 
 ## References
 
-- @.Codex/rules/ui-common-rules-components.md
-- @../../rules/ba-conventions.md
-- @../../rules/approval-gate.md
-- @../../rules/kg-usage.md
-- @../../rules/naming-conventions.md
-- @../../rules/feature-bootstrap.md
-- @../../rules/delivery-readiness.md
-- @../../rules/changelog.md
-- @../../rules/diagram-selection.md
-- @../../rules/resolve-oqs.md
+- @.claude/rules/ui-common-rules-components.md
+- @../../../.claude/rules/ba-conventions.md
+- @../../../.claude/rules/approval-gate.md
+- @../../../.claude/rules/kg-usage.md
+- @../../../.claude/rules/naming-conventions.md
+- @../../../.claude/rules/feature-bootstrap.md
+- @../../../.claude/rules/delivery-readiness.md
+- @../../../.claude/rules/changelog.md
+- @../../../.claude/rules/diagram-selection.md
+- @../../../.claude/rules/resolve-oqs.md
 - @../sequence/SKILL.md
 - @../activity/SKILL.md
 - @../state/SKILL.md

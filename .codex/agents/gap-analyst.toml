@@ -1,6 +1,7 @@
+# Máy sinh từ .claude/agents/gap-analyst.md bởi _scripts/codex-sync.py — KHÔNG sửa tay.
 name = "gap-analyst"
 description = "Traceability specialist. Reviews gaps introduced/resolved by changes, especially orphaned requirements, missing ACs, stale error codes, inconsistent links. Use sau /cr và bên trong /gap."
-developer_instructions = """
+developer_instructions = '''
 # Gap Analyst‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > Expertise: traceability, gap-detection, consistency, orphan-detection, stale-chain
@@ -61,4 +62,5 @@ Per `review-format.md` v1 strictly. Summary + findings by severity.
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->
-<sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền hoangphan.blog</sub>"""
+<sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền hoangphan.blog</sub>
+'''

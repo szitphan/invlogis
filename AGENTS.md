@@ -1,3 +1,10 @@
+> **Bản cho Codex — máy sinh từ `CLAUDE.md` bởi `_scripts/codex-sync.py`. KHÔNG sửa tay file này.**
+> Skill của Codex nằm ở `.agents/skills/` (bản sao của `.claude/skills/`), agent ở `.codex/agents/*.toml`
+> (bản chuyển của `.claude/agents/*.md`). Rules, hooks, scripts, templates dùng chung — đường dẫn
+> `.claude/rules/...`, `.claude/scripts/...` bên dưới là file thật, đọc trực tiếp.
+> Muốn đổi skill/agent/hướng dẫn: sửa bản trong `.claude/` hoặc `CLAUDE.md`, rồi chạy
+> `python3 _scripts/codex-sync.py`.
+
 # Dispatch Management — BA Workspace‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 > Mọi doc per-feature dưới `docs/{feature}/`. URD/BRD/PRD/SRS đều scope feature (không còn singleton). File tên-cố-định mang prefix `{feature}-` (vd `{feature}-spec.md`) — tránh trùng basename giữa features. Frontmatter tối giản: `type`/`feature`/`status`/`updated`/`links` (KHÔNG created/owner/changelog). Lịch sử thay đổi sống ở `_workspace/changelog.md` (1 log tập trung).
 
@@ -6,20 +13,21 @@
 | Path | Purpose |
 |------|---------|
 | `docs/` | All BA deliverables (URD, BRD, PRD, SRS, user stories, use cases, meetings, wireframes, exports) |
-| `.Codex/skills/` | User-invocable `/commands` (`/prd`, `/urd`, `/brd`, `/prd-epic`, `/srs`, `/sequence`, `/erd`, `/user-flow`, `/wireframe-ascii`, ...) |
-| `.Codex/agents/` | Specialized review personas (`@senior-ba`, `@uxui-reviewer`, ...) — Phase 4+ |
-| `.Codex/hooks/` | Auto-changelog, session-init, status-transition (Phase 4+), post-edit-stale (Phase 6+) |
-| `.Codex/rules/` | Naming, status lifecycle, changelog, approval-gate, agent conventions, __diagram-correctness__ (gate "vẽ đúng" cho 11 skill diagram) |
+| `.claude/skills/` | User-invocable `/commands` (`/prd`, `/urd`, `/brd`, `/prd-epic`, `/srs`, `/sequence`, `/erd`, `/user-flow`, `/wireframe-ascii`, ...) |
+| `.claude/agents/` | Specialized review personas (`@senior-ba`, `@uxui-reviewer`, ...) — Phase 4+ |
+| `.claude/hooks/` | Auto-changelog, session-init, status-transition (Phase 4+), post-edit-stale (Phase 6+) |
+| `.claude/rules/` | Naming, status lifecycle, changelog, approval-gate, agent conventions, __diagram-correctness__ (gate "vẽ đúng" cho 11 skill diagram) |
+| `docs-input/` | Tài liệu khách gửi. Sổ nguồn `README.md` + backlog `_workspace/backlog.md` tự đồng bộ (`_scripts/intake-sync.py`, rule `backlog.md`) |
 | `_templates/` | Note templates referenced by skills |
 
 ## Folder structure‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 ```
 {project-root}/
-├── AGENTS.md
+├── CLAUDE.md
 ├── README.md
 ├── .gitignore
-├── .Codex/
+├── .claude/
 │   ├── settings.json
 │   ├── hooks/         (session-init, auto-changelog, status-transition, post-edit-stale)
 │   ├── rules/         (naming-conventions, status-lifecycle, changelog, approval-gate, agent-conventions, review-format)
@@ -68,14 +76,14 @@
 │   ├── html-wireframe/            ← HTML wireframe B&W per flow (output của /wireframe-html, đọc srs/{feature}-userflow.md; renderer ngang hàng /wireframe-ascii, đọc lại screen của nhau nếu đã tồn tại)
 │   │   ├── {feature}-wireframe-html-index.md  ← Master index: bảng Flows (file/screens/status)
 │   │   └── {flow-slug}.html       ← 1 file per flow, screens grid 3/row, HTML element thật, B&W
-│   ├── bpmn/                      ← BPMN output per-feature (CHỈ output, engine ở .Codex/skills/bpmn/engine/)
+│   ├── bpmn/                      ← BPMN output per-feature (CHỈ output, engine ở .claude/skills/bpmn/engine/)
 │   │   ├── {feature}-bpmn-index.md  ← Master metadata + bảng process (lanes/gateways)
 │   │   ├── {process}.ir.json      ← IR nghiệp vụ AI sinh (lanes/nodes/flows). Source of intent. Sửa cái này khi gọi lại /bpmn (tự vào update mode)
 │   │   ├── {process}.src.json     ← Source facts (actors/branches/errors trích UC) để semcheck đối chiếu
 │   │   ├── {process}.bpmn         ← XML chuẩn OMG (engine sinh từ IR). Import Camunda/Bizagi/draw.io
 │   │   └── {feature}-bpmn-editor.html  ← Editor kéo-thả bpmn-js modeler (sửa như bpmn.io + Tải/Lưu .bpmn), dropdown đa-process
-│   │   # Engine (dùng chung mọi feature) ở .Codex/skills/bpmn/engine/: bpmn-build.mjs + bpmn-layout-{auto,elk}.mjs + bpmn-semcheck.mjs + _viewer_template.html + node_modules
-│   │   # Chạy: node .Codex/skills/bpmn/engine/bpmn-build.mjs --dir docs/{feature}/bpmn [--verify]
+│   │   # Engine (dùng chung mọi feature) ở .claude/skills/bpmn/engine/: bpmn-build.mjs + bpmn-layout-{auto,elk}.mjs + bpmn-semcheck.mjs + _viewer_template.html + node_modules
+│   │   # Chạy: node .claude/skills/bpmn/engine/bpmn-build.mjs --dir docs/{feature}/bpmn [--verify]
     │   └── userstories/              ← Index pattern giống usecases/ascii-wireframe
     │   │   ├── {feature}-story-index.md  ← Master metadata + status/priority/jira-key  + Stories table
     │   │   └── us-{NNN}.md            ← Zero frontmatter, prose sections (AC inline). Phase 5
@@ -106,7 +114,7 @@ draft → in-review → revisions → approved → shipped
 | `* → approved` | Xem tổng hợp qua `/dashboard` (KHÔNG còn `docs/feature-list.md`) |
 | `* → shipped` | (future) Trigger `@gap-analyst` consistency check |
 
-See `.Codex/rules/status-lifecycle.md` for details.
+See `.claude/rules/status-lifecycle.md` for details.
 
 ## Changelog convention‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -119,11 +127,11 @@ Lịch sử thay đổi TOÀN vault sống ở __một file duy nhất__: `_work
 | 2026-07-13 | /cr | @ba | `docs/payment/srs/payment-spec.md` | applied CR-20260713-001 |
 ```
 
-1 dòng bảng = 1 sự kiện, append cuối file. Skill set env `CLAUDE_SKILL_NAME`/`CLAUDE_CHANGELOG_NOTE`/`CLAUDE_CHANGELOG_AUTHOR` trước Write/Edit; hook append (tự escape `|` trong Ghi chú, tự dựng header khi file chưa có). Lịch sử 1 feature = `grep "docs/{feature}/" _workspace/changelog.md`. See `.Codex/rules/changelog.md`.
+1 dòng bảng = 1 sự kiện, append cuối file. Skill set env `CLAUDE_SKILL_NAME`/`CLAUDE_CHANGELOG_NOTE`/`CLAUDE_CHANGELOG_AUTHOR` trước Write/Edit; hook append (tự escape `|` trong Ghi chú, tự dựng header khi file chưa có). Lịch sử 1 feature = `grep "docs/{feature}/" _workspace/changelog.md`. See `.claude/rules/changelog.md`.
 
 ## Approval gate (HITL)
 
-Mọi skill phải tuân `.Codex/rules/approval-gate.md`:
+Mọi skill phải tuân `.claude/rules/approval-gate.md`:
 
 - __L1 Plan preview__ trước Write/Edit ≥1 file: show table `path | action | summary`, user Y/n/select.
 - __L2 Diff confirm__ trước Edit file đã tồn tại: show unified diff, user Y/n/edit-prompt.
@@ -133,7 +141,7 @@ Skill KHÔNG được auto-pick file im lặng. KHÔNG được skip L1 với c�
 
 ## Skills shipped
 
-> __55 skill user-invocable__ (`/command`) trong `.Codex/skills/` (mỗi skill = 1 folder chứa `SKILL.md`). Ngoài ra có vài __reference skill__ không phải `/command` (nạp bởi skill khác, `user-invocable: false`) — vd `stacks-reference`, `code-explorer` (dùng bởi `/code-to-srs`). Nguồn sự thật là các file `SKILL.md` — bảng dưới là tra-nhanh, giữ đồng bộ khi thêm/bớt skill. Đếm folder: `ls -d .Codex/skills/*/ | wc -l` (gồm cả reference skill — hiện 57). Đếm user-invocable: `grep -l "user-invocable: true" .Codex/skills/*/SKILL.md | wc -l`.
+> __55 skill user-invocable__ (`/command`) trong `.claude/skills/` (mỗi skill = 1 folder chứa `SKILL.md`). Ngoài ra có vài __reference skill__ không phải `/command` (nạp bởi skill khác, `user-invocable: false`) — vd `stacks-reference`, `code-explorer` (dùng bởi `/code-to-srs`). Nguồn sự thật là các file `SKILL.md` — bảng dưới là tra-nhanh, giữ đồng bộ khi thêm/bớt skill. Đếm folder: `ls -d .claude/skills/*/ | wc -l` (gồm cả reference skill — hiện 57). Đếm user-invocable: `grep -l "user-invocable: true" .claude/skills/*/SKILL.md | wc -l`.
 
 __Product planning phase (project-level — TRÊN /brainstorm):__
 
@@ -156,7 +164,7 @@ __Specification phase:__
 | `/sequence "<desc>" --feature <slug>` | Sequence diagram, output cố định `srs/{feature}-flows.md` |
 | `/activity "<desc>" --feature <slug>` | Activity/flowchart diagram (Mermaid), output cố định `srs/{feature}-flows.md` (cùng file sequence) |
 | `/activity-swimlane "<desc>" --feature <slug>` | Activity diagram __swimlane THẬT__ (PlantUML `\|Lane\|`) cho quy trình đa vai trò nhiều cross-lane — lane thẳng cột cố định, node nhảy lane theo actor. Source `.puml`+`.svg` trong `srs/`, nhúng ảnh vào `srs/{feature}-flows.md`. Render qua plantuml.com. Khác `/activity` (Mermaid subgraph giả), `/d2-activity` (D2 đẹp nhưng lane xô lệch khi nhiều cross-edge), `/bpmn` (chuẩn OMG) |
-| `/bpmn "<desc quy trình>" --feature <slug>` | BPMN 2.0 chuẩn OMG cho quy trình đa vai trò. Kiến trúc 2 lớp: AI đọc UC/SRS → sinh IR JSON nghiệp vụ (`{slug}.ir.json` + `.src.json`) → semcheck (kiểm phủ actor/branch/error) → engine layout tự động (swimlane + routing tránh đè) → `bpmn/{process}.bpmn` (XML chuẩn OMG, import Camunda/Bizagi/draw.io) + `{feature}-bpmn-editor.html` (kéo-thả sửa như bpmn.io). Engine dùng chung ở `.Codex/skills/bpmn/engine/`. AI KHÔNG viết XML/toạ độ — chỉ sinh IR đúng nghiệp vụ. Khác `/activity` (Mermaid) — xem `diagram-selection.md` |
+| `/bpmn "<desc quy trình>" --feature <slug>` | BPMN 2.0 chuẩn OMG cho quy trình đa vai trò. Kiến trúc 2 lớp: AI đọc UC/SRS → sinh IR JSON nghiệp vụ (`{slug}.ir.json` + `.src.json`) → semcheck (kiểm phủ actor/branch/error) → engine layout tự động (swimlane + routing tránh đè) → `bpmn/{process}.bpmn` (XML chuẩn OMG, import Camunda/Bizagi/draw.io) + `{feature}-bpmn-editor.html` (kéo-thả sửa như bpmn.io). Engine dùng chung ở `.claude/skills/bpmn/engine/`. AI KHÔNG viết XML/toạ độ — chỉ sinh IR đúng nghiệp vụ. Khác `/activity` (Mermaid) — xem `diagram-selection.md` |
 | `/state <entity> --feature <slug>` | State diagram, output cố định `srs/{feature}-states.md` |
 | `/erd --feature <slug>` | Mermaid ERD, output cố định `srs/{feature}-erd.md` (per-feature only) |
 | `/dbdiagram --feature <slug>` | Schema database DBML (`.dbml` import dbdiagram.io/dbdocs.io + `.sql` export). Tầng gần dev nhất họ ERD — kiểu DB thật + enum + index. Output `dbdiagram/{feature}.dbml`. Khác `/erd` (Mermaid inline, type gọn) + `/d2-erd` (D2 hình đẹp) |
@@ -168,16 +176,18 @@ __Specification phase:__
 | `/wireframe-ascii <feature> [--flow <slug>]` | ASCII wireframe gộp theo flow (lo-fi, KHÔNG emoji trong khung → viền không lệch), đọc `srs/{feature}-userflow.md` (tự chạy `/user-flow` nếu chưa có). Output `ascii-wireframe/{flow-slug}.md` (1 file/flow, N screen/file) + bảng mô tả 5 cột `# / Items / Control type / Data type / Description` (dùng chung html/prototype) |
 | `/wireframe-html <feature> [--flow <slug>]` | HTML wireframe B&W per flow, grid 3 screens/row, render element HTML thật. Đọc `srs/{feature}-userflow.md`; renderer ngang hàng `/wireframe-ascii` — đọc lại screen ASCII đã có làm nguồn element nếu tồn tại, không thì tự suy luận từ tài liệu nghiệp vụ. Output `html-wireframe/{flow}.html` + `{feature}-wireframe-html-index.md`, bảng mô tả 5 cột |
 | `/figma <feature>` (hỏi tiếp muốn vẽ gì) hoặc `/figma <screen> --feature <slug>` (đủ ý, khỏi hỏi) | Vẽ thật lên Figma qua figma-ui-mcp; tuân design tokens `design/design.md`. 2 chế độ chọn bằng câu hỏi tự nhiên (không flag): Nhanh (1 vài màn, base state) hoặc Đầy đủ (cả feature, kèm state/error variant + component reuse, tối đa 5 screens/hàng). Hard gate: kết nối Figma plugin + ASCII đã fill + chốt device size (Mục 7) |
-| `/prototype-html <feature> [no-comment]` | Clickable HTML prototype multi-screen (hi-fi — bậc cao nhất thang fidelity) __chạy như app thật__: state-driven (render từ store, hành động đổi state thật) + persist localStorage + menu điều hướng NỔI (TOC + sơ đồ luồng, KHÔNG iframe vì app share 1 store) + design tokens 2 lớp (raw palette → semantic, theme per-section transactional=light/marketing=dark) + vỏ chrome neutral tách khỏi app. __Kèm lớp GÓP Ý ghim-lên-element kiểu Figma (mặc định BẬT)__: pin bám element qua 4 tầng neo (data-cmt → id → selector+chữ ký → dò nội dung), lưu chung qua jsonbin để cả nhóm thấy nhau, phân vai admin (`#admin`, thấy Cài đặt + copy link mời) vs reviewer (chỉ góp ý, xoá/copy của mình). Thêm `no-comment` → bản trình chiếu thuần. Cần userflow (chia flow) + ASCII (bảng 5 cột) + `design/design.md`. Template `_templates/prototype-html-template.html` · lớp góp ý `.Codex/skills/prototype-html/assets/comment-layer.js` |
-| `/prototype-next <feature>` | Prototype __chạy được bằng Next.js__ — sinh code thật vào `prototype/` (App Router + Tailwind v4 + shadcn), tự build + tự sửa lỗi + tự chạy local + __tự smoke-test luồng__, rồi báo URL. __App shell đầy đủ__ (sidebar/topbar/user menu + route guard client-side) + luồng đúng SRS + dữ liệu mẫu + __Demo Toolbar nổi 4 khối__ (ép lỗi theo mã `E-{feature}-NNN` · nhảy màn theo flow · tài khoản mẫu 1 chạm · reset + độ trễ giả). "Backend giả" = __zustand persist localStorage__ (`skipHydration`), KHÔNG BE/DB/API/MSW. __Kiến trúc máy-làm-phần-tất-định__: 4 engine ở `.Codex/skills/prototype-next/engine/` — `proto-extract` (bóc Error Matrix + wording/FR/BR/entity/state/element từ __KG__, sinh sẵn `errors.ts`+`types.ts`, cảnh báo stale + format bảng lạ, KHÔNG im lặng trả rỗng) · `proto-scaffold` (chép boilerplate) · `proto-build` (build + tự sửa lỗi cơ học, dừng khi lỗi lặp lần 2, in `PROTO_URL`) · `proto-smoke` (Playwright kiểm __4 mức tách bạch__: trang tải · element có mặt · luồng đi đúng · __nhánh lỗi đúng wording__ — build xanh KHÔNG phải verify). AI chỉ đọc userflow + use case + design.md. Update mode qua `.demo-manifest.json`. Chỉ ghi trong `prototype/`. Khác `/prototype-html` (1 file HTML gửi kèm được, có lớp góp ý) |
+| `/prototype-html <feature> [<link Figma>] [no-comment]` | Clickable HTML prototype multi-screen (hi-fi — bậc cao nhất thang fidelity) __chạy như app thật__: state-driven (render từ store, hành động đổi state thật) + persist localStorage + menu điều hướng NỔI (TOC + sơ đồ luồng, KHÔNG iframe vì app share 1 store) + design tokens 2 lớp (raw palette → semantic, theme per-section transactional=light/marketing=dark) + vỏ chrome neutral tách khỏi app. __Kèm lớp GÓP Ý ghim-lên-element kiểu Figma (mặc định BẬT)__: pin bám element qua 4 tầng neo (data-cmt → id → selector+chữ ký → dò nội dung), lưu chung qua jsonbin để cả nhóm thấy nhau, phân vai admin (`#admin`, thấy Cài đặt + copy link mời) vs reviewer (chỉ góp ý, xoá/copy của mình). Thêm `no-comment` → bản trình chiếu thuần. __Dựng từ ASCII (bảng 5 cột) hoặc từ frame Figma__ (giao diện theo frame, hành vi theo bảng 5 cột/SRS, frame trạng thái gộp vào màn, đối chiếu ảnh với Figma). Cần userflow (chia flow) + `design/design.md` + ASCII hoặc link Figma. Template `_templates/prototype-html-template.html` · lớp góp ý `.claude/skills/prototype-html/assets/comment-layer.js` |
+| `/prototype-next <feature>` | Prototype __chạy được bằng Next.js__ — sinh code thật vào `prototype/` (App Router + Tailwind v4 + shadcn), tự build + tự sửa lỗi + tự chạy local + __tự smoke-test luồng__, rồi báo URL. __App shell đầy đủ__ (sidebar/topbar/user menu + route guard client-side) + luồng đúng SRS + dữ liệu mẫu + __Demo Toolbar nổi 4 khối__ (ép lỗi theo mã `E-{feature}-NNN` · nhảy màn theo flow · tài khoản mẫu 1 chạm · reset + độ trễ giả). "Backend giả" = __zustand persist localStorage__ (`skipHydration`), KHÔNG BE/DB/API/MSW. __Kiến trúc máy-làm-phần-tất-định__: 4 engine ở `.claude/skills/prototype-next/engine/` — `proto-extract` (bóc Error Matrix + wording/FR/BR/entity/state/element từ __KG__, sinh sẵn `errors.ts`+`types.ts`, cảnh báo stale + format bảng lạ, KHÔNG im lặng trả rỗng) · `proto-scaffold` (chép boilerplate) · `proto-build` (build + tự sửa lỗi cơ học, dừng khi lỗi lặp lần 2, in `PROTO_URL`) · `proto-smoke` (Playwright kiểm __4 mức tách bạch__: trang tải · element có mặt · luồng đi đúng · __nhánh lỗi đúng wording__ — build xanh KHÔNG phải verify). AI chỉ đọc userflow + use case + design.md. Update mode qua `.demo-manifest.json`. Chỉ ghi trong `prototype/`. Khác `/prototype-html` (1 file HTML gửi kèm được, có lớp góp ý) |
 
-__Capture (Phase 1-2 — not in template yet):__ `/meet`, `/brainstorm`, `/reverse-doc`, `/code-to-srs`, `/reverse-preview`. `/reverse-doc` tái lập __BỘ SRS chuẩn per-feature__ từ nhiều nguồn rời (docx/pdf/ảnh) → gom theo feature → mỗi feature 1 bộ 3 file trong `docs/_reverse/{feature}/`: `{feature}-reverse-spec.md` (SRS 12 Mục + cột Nguồn/Nhãn + Mục 0 provenance, `status: draft` cứng) + `reverse-sources.md` + `reverse-gaps.md` (OQ/Gap/Conflict). Kiến trúc orchestrator + sub-agent read-only per-feature, chạy 1 mạch Phase A→G (NGUỒN = proof, KHÔNG hỏi lại user — chưa rõ → OQ). DỪNG ở output, route `/srs` để hình thức hoá (giữ nhãn confidence). Thay `/legacy` + `/documentation` cũ (đã xóa).
+> **`/intake [<file|thư mục>...]`** — tài liệu khách gửi (docx/pdf/xlsx/pptx/ảnh scan) → `.md` __đủ nội dung__ (giữ số mục Word, chép đủ file đính kèm kèm "Trùng với …", trang scan đọc lại theo ảnh; ảnh nhúng chỉ trích vào `images/` + link) + `source/` (bản gốc) → đặt tên + xếp vào `docs-input/{nhóm}/{slug}/`. Bản mới của tài liệu cũ → báo thay đổi nghiệp vụ, user đồng ý mới ghi đè cùng đường dẫn (bản gốc cũ vào `source/cu/`, báo cáo `docs-input/_changes/`). Làm trong `docs-input/.staging/` trước L1. Script ở `.claude/skills/intake/scripts/` (convert/verify/match/diff); sổ nguồn + backlog tự theo qua `_scripts/intake-sync.py`. Không tham số = quét file mới trong `docs-input/`.
+
+__Capture (Phase 1-2 — not in template yet):__ `/meet`, `/brainstorm`, `/intake`, `/reverse-doc`, `/code-to-srs`, `/reverse-preview`. `/reverse-doc` tái lập __BỘ SRS chuẩn per-feature__ từ nhiều nguồn rời (docx/pdf/ảnh) → gom theo feature → mỗi feature 1 bộ 3 file trong `docs/_reverse/{feature}/`: `{feature}-reverse-spec.md` (SRS 12 Mục + cột Nguồn/Nhãn + Mục 0 provenance, `status: draft` cứng) + `reverse-sources.md` + `reverse-gaps.md` (OQ/Gap/Conflict). Kiến trúc orchestrator + sub-agent read-only per-feature, chạy 1 mạch Phase A→G (NGUỒN = proof, KHÔNG hỏi lại user — chưa rõ → OQ). DỪNG ở output, route `/srs` để hình thức hoá (giữ nhãn confidence). Thay `/legacy` + `/documentation` cũ (đã xóa).
 
 > **`/reverse-preview <feature>`** — HTML viewer cho bộ SRS tái lập (output `/code-to-srs` hoặc `/reverse-doc` trong `docs/_reverse/{feature}/`). Self-contained, mở bằng browser (nested TOC + mermaid zoom). NHẤN MẠNH đặc thù reverse: __giữ cột Nhãn ✅/🔵/🟡__ (khác `/preview` strip nhãn) + __banner confidence__ + __section Gaps/OQ nổi bật__ + **nhúng `_evidence.md`** (chỉ code-to-srs có). Engine `_scripts/build-reverse-preview.py` tái dùng `_viewer_wrapper.py` (chung chrome với `/preview`+`/export`). Output `{feature}-reverse-preview.html`. Nhóm B — feature chưa có bộ reverse → refuse + route `/code-to-srs`|`/reverse-doc`.
 
 > **`/code-to-srs` = anh em code-first của `/reverse-doc`.** Cùng đích + cùng hạ tầng (template reverse-srs-*, sub-agent read-only, phase-gate, nhãn 3-claim, provenance, ghi `docs/_reverse/{feature}/`, route `/srs`), khác __DUY NHẤT ở nguồn__: `/reverse-doc` đọc tài liệu (docx/pdf/ảnh), `/code-to-srs` đọc __SOURCE CODE__ (route/controller/service/model/validator/guard/migration). Kích hoạt `/code-to-srs <repo-path>`. Điểm đặc thù: __nhãn bất đối xứng__ — cái code KHẲNG ĐỊNH (validator/constant/guard) = ✅ + cite `file:line`; cái code KHÔNG NÓI (vì sao/cho ai/mục tiêu nghiệp vụ/priority) = 🟡 Inferred + OQ. Giữ IT-BA framing: endpoint/function/bảng chỉ ở cột Nguồn (provenance), KHÔNG phơi ra Mục FR/BR; KHÔNG sinh api-reference.md/data-models.md kỹ thuật (entity đi vào ERD nghiệp vụ). __3 nguồn code đặc thù__ (`stacks-reference` R1/R2/R3): __test__ (bóc boundary/edge/rule-ngược — active ✅ cite test:line / skip 🟡 + gaps, KHÔNG chạy test), __i18n catalog__ (resolve mã khóa → wording lỗi thật), __dead-code/flag__ (route no-caller/`@Deprecated`/`if(false)` → 🟡 + OQ + negative-search). __Repo lớn__: Phase A route-first + GATE-SCOPE (in bảng feature + WARN + hỏi user chọn subset khi >~25 feature/>~1500 file/đa-repo; feature chưa chọn = `deferred`, resumable). Sinh thêm **`_evidence.md`/feature** (truy vết code→luồng, §Cross-repo hops = "điểm nghiệp vụ liên quan luồng nào", cite full-repo-path). Engine đọc-code: reference skill `stacks-reference` (recipe bóc fact theo stack Next/Nest/Supabase/Express/Django/FastAPI/Spring/Laravel/Go) + `code-explorer` (map + cluster feature nghiệp vụ bằng bằng-chứng-gọi-chéo-repo).
 
-__Integration (tích hợp API — họ 7 skill):__ quy trình đưa API đối tác/nội bộ vào app đang chạy + test (own/3rd/mixed) qua Bruno. Thứ tự + rule chung: `.Codex/rules/api-integration.md`. Explainer: `explain-skills/api-workflow.md` (bảng quy trình) + `api-family.md` (mối liên quan).
+__Integration (tích hợp API — họ 7 skill):__ quy trình đưa API đối tác/nội bộ vào app đang chạy + test (own/3rd/mixed) qua Bruno. Thứ tự + rule chung: `.claude/rules/api-integration.md`. Explainer: `explain-skills/api-workflow.md` (bảng quy trình) + `api-family.md` (mối liên quan).
 
 | Slash | Purpose |
 |-------|---------|
@@ -206,10 +216,10 @@ __Delivery (Phase 5):__
 | `/usecase <feature>` | Generate use cases (Cockburn fully-dressed). 2 mode: __discovery__ (chưa có SRS — viết use case elicitation để khám phá nghiệp vụ, rồi route `/srs`) hoặc __downstream__ (có SRS — trích FR, điền traceability). Tự chọn mode theo SRS có tồn tại. |
 | `/userstory [<feature>]` | Per-feature user stories, ID `US-NNN`, soft gate SRS chưa approved |
 | `/ac [<feature>]` | Generate/repair/review AC, ID `AC-NNN` per-story, L2 diff |
-| `/jira <feature> [--push\|--pull\|--reconcile] \| import <KEY>` | __Đồng bộ 2 chiều__ vault ↔ Jira. No-cờ = inspect drift/conflict (an toàn). Push (chỉ-local-đổi) · pull (chỉ-remote-đổi, status/AC/comment) · reconcile (cả-2-đổi, 5 lựa chọn) · import (epic/story lạ → nháp). Remote preflight chống ghi đè, 3-way compare, HARD GATE stale. Mapping GỘP ở `.Codex/state/atlassian/sync-state.yaml`. Xem `.Codex/rules/atlassian-sync.md` |
+| `/jira <feature> [--push\|--pull\|--reconcile] \| import <KEY>` | __Đồng bộ 2 chiều__ vault ↔ Jira. No-cờ = inspect drift/conflict (an toàn). Push (chỉ-local-đổi) · pull (chỉ-remote-đổi, status/AC/comment) · reconcile (cả-2-đổi, 5 lựa chọn) · import (epic/story lạ → nháp). Remote preflight chống ghi đè, 3-way compare, HARD GATE stale. Mapping GỘP ở `.claude/state/atlassian/sync-state.yaml`. Xem `.claude/rules/atlassian-sync.md` |
 | `/confluence <feature> [--push\|--pull\|--reconcile] \| import <page>` | __Đồng bộ 2 chiều__ vault ↔ Confluence. Cùng mô hình `/jira` nhưng adapter Confluence (page body + page tree). Preflight bằng __content-hash bản vừa fetch__ (KHÔNG dựa version — MCP có thể không expose; version chỉ là hint). Comment → feedback inbox; page __xóa__ → tombstone, page __move__ (còn id) → cập nhật parent KHÔNG tombstone; vùng opaque (macro/attachment) chặn push tới khi BA chọn authoritative. Mermaid render theo định dạng tool THẬT nhận (html-macro/ADF, chi tiết `references/mermaid-adf.md`). Chia sync-state CHUNG với `/jira` |
 | `/export <feature> [pdf\|docx\|html]` | Local stakeholder package 1 feature; định dạng nói bằng lời hoặc positional (gộp từ export-docx/html/pdf) |
-| `/userguide [<feature> ...]` | __Cẩm nang vận hành__ (operator/end-user manual). Hỏi __viết luồng gì__ + __cập nhật vào cẩm nang gốc hay tách riêng__ + để user input/confirm danh sách luồng (tự dò từ userflow nếu có). Đọc ngược `docs/{feature}/` → mục lục __Diátaxis__ → `@manual-reviewer` gate → __HARD STOP__ chờ `tiếp` → hỏi audience/giọng/độ-chi-tiết → viết từng trang → (tùy chọn) __auto-chụp ảnh thật__ đánh số callout (Playwright, engine `.Codex/skills/userguide/engine/`). Output gọn: **1 file `{feature}-userguide.html` lộ ra** (docs-style light-only) + __folder bundle__ `{feature}-userguide/` (index/data/pages/images). Forward-terminal → `/export`. Main, report-first, KHÔNG fork. |
+| `/userguide [<feature> ...]` | __Cẩm nang vận hành__ (operator/end-user manual). Hỏi __viết luồng gì__ + __cập nhật vào cẩm nang gốc hay tách riêng__ + để user input/confirm danh sách luồng (tự dò từ userflow nếu có). Đọc ngược `docs/{feature}/` → mục lục __Diátaxis__ → `@manual-reviewer` gate → __HARD STOP__ chờ `tiếp` → hỏi audience/giọng/độ-chi-tiết → viết từng trang → (tùy chọn) __auto-chụp ảnh thật__ đánh số callout (Playwright, engine `.claude/skills/userguide/engine/`). Output gọn: **1 file `{feature}-userguide.html` lộ ra** (docs-style light-only) + __folder bundle__ `{feature}-userguide/` (index/data/pages/images). Forward-terminal → `/export`. Main, report-first, KHÔNG fork. |
 
 **Testing (UI/browser lane — song song họ API `/api-test`):**
 
@@ -217,7 +227,7 @@ __Delivery (Phase 5):__
 |-------|---------|
 | `/test-checklist <feature>` | Outline scenario cần test (chưa data chi tiết) để review TRƯỚC khi viết test case đầy đủ. 🟢/🟡/🔴. Output `test/checklist/{feature}-checklist-index.md` + `## Coverage` per-obligation. Khác `/ac` (Given/When/Then per story) và `/api-test` (bảng request data thật) |
 | `/test-cases <feature>` | Sinh test case chi tiết __1:1 atomic__ từ checklist gần nhất (bắt buộc có `/test-checklist` trước). Output `test/testcases/{feature}-testcase-index.md`. Là spec chạy được — nguồn cho `/playwright-gen` |
-| `/playwright-gen <feature> [--run]` | Codegen script Playwright (`.spec.ts`) chạy được từ test case UI (`/test-cases`) → chạy test. Tầng UI/browser (khác `/api-test` Bruno tầng API). Engine `.Codex/scripts/playwright-gen.mjs`. Codegen 1 lần ra artifact bền, KHÔNG phải AI chạy test mỗi lần. Output `test/e2e/{feature}-e2e-index.md` + `specs/{scope}.spec.ts` |
+| `/playwright-gen <feature> [--run]` | Codegen script Playwright (`.spec.ts`) chạy được từ test case UI (`/test-cases`) → chạy test. Tầng UI/browser (khác `/api-test` Bruno tầng API). Engine `.claude/scripts/playwright-gen.mjs`. Codegen 1 lần ra artifact bền, KHÔNG phải AI chạy test mỗi lần. Output `test/e2e/{feature}-e2e-index.md` + `specs/{scope}.spec.ts` |
 
 __Maintenance (Phase 6):__
 
@@ -226,8 +236,8 @@ __Maintenance (Phase 6):__
 | `/cr "<change>" --feature <slug>` | Unified change workflow: analyze impact → smart verdict (direct-edit-ok vs formal CR) → L2 diff apply loop → auto-run `/gap`. Subcommands `/cr list\|show\|close\|reject <cr-id>` quản lý records cũ. Merged former `/impact`. |
 | `/dashboard [<feature>]` | HTML dashboard self-contained: kanban theo status + __coverage/traceability thật__ (FR↔US↔AC↔test, FR chưa phủ, US mồ côi, UC chưa test) + __pipeline funnel__ (mỗi feature đi tới đâu URD→…→test, % hoàn thành) + __chỉ số chất lượng/rủi ro__ (freshness 0-100/doc, review quá hạn, OQ tồn đọng) + action items ưu tiên + stale chain + open CRs. Charts ECharts, filter/sort List.js, dark mode. Nguồn số liệu deterministic từ `_scripts/workspace-status.py`. (Thay `/health` console — đã bỏ 2026-07-13.) |
 | `/update-overview [<target>] [--extract\|--add]` | Manage 6 project-level shared docs trong `docs/_shared/` (definitions/env/conventions/system/patterns/__profile__). Manual add hoặc auto-extract từ feature docs. Target `profile` = xem/sửa chủ động `project-profile.md` (đường chính là skill tự hỏi lazy per rule `project-profile.md`) |
-| `/delegate` | Chia việc sang CLI AI khác (Codex/Gemini...) để san tải quota: check quota → chọn model theo việc (dài→Codex, ngắn→Codex) → điều phối đa vòng (decompose, review→fix, debate→arbiter). Gọi `/delegate`, hoặc khi user nhắc @codex/@gemini / "ý kiến thứ hai". Không đụng vault. Xem `.Codex/rules/agent-conventions.md` |
-| `/kg <command> [<arg>]` | Build/query/verify Knowledge Graph của vault — chọn shortlist file phải đọc (`impact`/`coverage`/`neighbors`), thống kê cấu trúc (`facts`/`counts`), kiểm chất lượng liên kết (`--verify`). Hạ tầng cho `/gap` `/cr` `/dashboard` — KHÔNG thay việc đọc prose (contract 3.4bis, xem `.Codex/rules/kg-usage.md`) |
+| `/delegate` | Chia việc sang CLI AI khác (Codex/Gemini...) để san tải quota: check quota → chọn model theo việc (dài→Claude, ngắn→Codex) → điều phối đa vòng (decompose, review→fix, debate→arbiter). Gọi `/delegate`, hoặc khi user nhắc @codex/@gemini / "ý kiến thứ hai". Không đụng vault. Xem `.claude/rules/agent-conventions.md` |
+| `/kg <command> [<arg>]` | Build/query/verify Knowledge Graph của vault — chọn shortlist file phải đọc (`impact`/`coverage`/`neighbors`), thống kê cấu trúc (`facts`/`counts`), kiểm chất lượng liên kết (`--verify`). Hạ tầng cho `/gap` `/cr` `/dashboard` — KHÔNG thay việc đọc prose (contract 3.4bis, xem `.claude/rules/kg-usage.md`) |
 
 __Agents:__
 
@@ -241,21 +251,22 @@ __Agents:__
 | `@tech-reviewer` | 4 | Feasibility, performance, security |
 | `@change-tracker` | 6 | CR impact analysis, apply order |
 | `@gap-analyst` | 6 | Traceability, stale chain detection |
+| `usability-reviewer` (Usability_Reviewer) | — | Đóng vai người dùng: đi từng tác vụ chính (`userflow.md` Mục 3.6) qua màn Figma theo cognitive walkthrough + rà heuristic Nielsen. `/figma-screen` gọi khi vẽ trọn 1 flow. AI đánh giá, không thay người dùng thật |
 | `flow-reviewer` (UX_Reviewer) | — | Review user flow + case coverage (happy/error/edge) + chia flow cho `/user-flow`, trước khi ghi `userflow.md` (chạy trước cả `/wireframe-ascii` và `/wireframe-html`) |
 
-__Gate "vẽ ĐÚNG" cho họ diagram__ (rule: `.Codex/rules/diagram-correctness.md`):
+__Gate "vẽ ĐÚNG" cho họ diagram__ (rule: `.claude/rules/diagram-correctness.md`):
 
 > Diagram sai ngữ pháp vẫn render ra ảnh đẹp + exit 0 — nên "có ra ảnh" KHÔNG phải verify. Mỗi skill diagram có gate chặn TRƯỚC khi output thành file người ta tin được. Báo cáo tách __4 mức__: cú pháp · an toàn renderer · ngữ pháp/cấu trúc · __nghiệp vụ (máy không kiểm được, phải tự soi)__.
 
 | Gate | File | Phủ skill |
 |---|---|---|
-| Ngữ pháp UML use case | `.Codex/skills/usecase-diagram/puml-usecase-lint.mjs` | `/usecase-diagram` — association phải `--`, `..>` chỉ UC↔UC, nhãn đúng `<<include>>`/`<<extend>>`, ngữ pháp đóng + cảnh báo sai hướng |
-| Cấu trúc luồng PlantUML | `.Codex/skills/activity-swimlane/puml-activity-lint.mjs` | `/activity-swimlane` — `if`/`endif` cân, có `start`+`stop`, nhánh có nhãn |
-| Mermaid 3 tầng | `.Codex/scripts/mermaid-verify.mjs` | `/sequence` `/activity` `/state` `/erd` `/user-flow` — thêm tầng __ngữ nghĩa__: state mồ côi/thiếu terminal, ERD entity ma + quan hệ không FK, sequence lifeline chưa khai, flowchart quyết định thiếu nhánh/nhánh cụt |
-| Đối chiếu 3 bản ERD | `.Codex/scripts/erd-consistency.mjs` | `/erd` (canonical) ↔ `/d2-erd` ↔ `/dbdiagram` — bắt drift mà linter đơn-file mù |
-| IR nghiệp vụ BPMN | `.Codex/skills/bpmn/engine/bpmn-semcheck.mjs` | `/bpmn` — id trùng, đúng 1 start, gateway có nhãn, tới được end (đều hard-fail) |
+| Ngữ pháp UML use case | `.claude/skills/usecase-diagram/puml-usecase-lint.mjs` | `/usecase-diagram` — association phải `--`, `..>` chỉ UC↔UC, nhãn đúng `<<include>>`/`<<extend>>`, ngữ pháp đóng + cảnh báo sai hướng |
+| Cấu trúc luồng PlantUML | `.claude/skills/activity-swimlane/puml-activity-lint.mjs` | `/activity-swimlane` — `if`/`endif` cân, có `start`+`stop`, nhánh có nhãn |
+| Mermaid 3 tầng | `.claude/scripts/mermaid-verify.mjs` | `/sequence` `/activity` `/state` `/erd` `/user-flow` — thêm tầng __ngữ nghĩa__: state mồ côi/thiếu terminal, ERD entity ma + quan hệ không FK, sequence lifeline chưa khai, flowchart quyết định thiếu nhánh/nhánh cụt |
+| Đối chiếu 3 bản ERD | `.claude/scripts/erd-consistency.mjs` | `/erd` (canonical) ↔ `/d2-erd` ↔ `/dbdiagram` — bắt drift mà linter đơn-file mù |
+| IR nghiệp vụ BPMN | `.claude/skills/bpmn/engine/bpmn-semcheck.mjs` | `/bpmn` — id trùng, đúng 1 start, gateway có nhãn, tới được end (đều hard-fail) |
 
-Chạy lại toàn bộ sau khi sửa gate: `bash .Codex/scripts/diagram-gates-selftest.sh` (kiểm 2 chiều: chặn cái sai + không chặn oan cái đúng).
+Chạy lại toàn bộ sau khi sửa gate: `bash .claude/scripts/diagram-gates-selftest.sh` (kiểm 2 chiều: chặn cái sai + không chặn oan cái đúng).
 
 __Hooks (auto-fire on PostToolUse Write/Edit):__
 
@@ -263,6 +274,7 @@ __Hooks (auto-fire on PostToolUse Write/Edit):__
 - `status-transition.sh` — print suggestion khi `status:` field thay đổi.
 - `post-edit-stale.sh` — reverse-graph scan `links:` → mark downstream `status: stale` + log `_shared/staleness.md`.
 - `session-init.sh` (SessionStart) — print dashboard counts.
+- `intake-sync.sh` (SessionStart/UserPromptSubmit/PostToolUse) — đăng ký nguồn mới trong `docs-input/`, tự đóng task backlog theo điều kiện "Xong khi".
 
 > Hook `auto-commit.sh` đã xóa (2026-07-06) — commit git thực hiện thủ công theo nhu cầu.
 
@@ -281,13 +293,14 @@ __Pattern toàn pipeline:__
 - __Dates__: ISO `YYYY-MM-DD`
 - __Mermaid diagrams__: inline ` ```mermaid ` blocks
 - __Frontmatter__: YAML tối giản — doc per-feature có `type`, `feature`, `status`, `updated`, `links` (flat list). KHÔNG có `created`/`owner`/`changelog` (diet 2026-07-12 — lịch sử + tác giả sống ở `_workspace/changelog.md`)
-- __IDs feature-prefixed__ cho cross-aggregate: `FR-{feature}-NNN`, `NFR-{feature}-NNN`, `BR-{feature}-NNN`, `E-{feature}-NNN`, `BO-{feature}-NN`, `CAP-{feature}-NN`. US/AC scope qua path (no feature prefix in ID). See `.Codex/rules/naming-conventions.md` Mục ID conventions.
+- __IDs feature-prefixed__ cho cross-aggregate: `FR-{feature}-NNN`, `NFR-{feature}-NNN`, `BR-{feature}-NNN`, `E-{feature}-NNN`, `BO-{feature}-NN`, `CAP-{feature}-NN`. US/AC scope qua path (no feature prefix in ID). See `.claude/rules/naming-conventions.md` Mục ID conventions.
+- __Bản Codex__ (`.agents/skills/`, `.codex/agents/*.toml`, `AGENTS.md`) là máy sinh — KHÔNG sửa tay. Sửa `.claude/skills|agents` hoặc `CLAUDE.md` rồi chạy `python3 _scripts/codex-sync.py` (`--check` để kiểm lệch) trước khi commit.
 - __Language__: Vietnamese-first; tiếng Anh cũng support; auto-detect từ seed.
 
-## How Codex uses this
+## How Claude Code uses this
 
-1) Session start: `.Codex/hooks/session-init.sh` → set `$TODAY`, `$PROJECT_NAME`, in status counts (stale items, open CRs, stuck reviews >7d).
-2) User invokes skill (vd `/urd payment`) → Codex đọc `.Codex/skills/urd/SKILL.md` → tuân Goal + Constraints (Hard rules / Pitfalls) + Approach.
+1) Session start: `.claude/hooks/session-init.sh` → set `$TODAY`, `$PROJECT_NAME`, in status counts (stale items, open CRs, stuck reviews >7d).
+2) User invokes skill (vd `/urd payment`) → Claude đọc `.claude/skills/urd/SKILL.md` → tuân Goal + Constraints (Hard rules / Pitfalls) + Approach.
 3) Skill scan upstream candidates, ask user pick, ask clarifying questions (numbered list, wait reply).
 4) Skill synthesize content → __L1 plan preview__ → user Y/n/select → Write file with frontmatter chuẩn (hook ghi changelog.md).
 5) Sau Write/Edit, hooks chạy: `auto-changelog.sh` (fallback), `status-transition.sh`, `post-edit-stale.sh` (Phase 6). Commit git làm thủ công (không còn auto-commit).
@@ -304,8 +317,8 @@ git init && git add . && git commit -m "Initial vault from ba-vault-template"
 
 # 3. (Optional) Open in Obsidian: File → Open vault → select project root
 
-# 4. Open in Codex
-Codex
+# 4. Open in Claude Code
+claude
 
 # 5. Capture idea hoặc start với requirements
 > /brainstorm user-login            # capture raw idea (Phase 1-2)

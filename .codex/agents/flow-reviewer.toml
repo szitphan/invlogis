@@ -1,6 +1,7 @@
+# Máy sinh từ .claude/agents/flow-reviewer.md bởi _scripts/codex-sync.py — KHÔNG sửa tay.
 name = "flow-reviewer"
-description = 'UX flow reviewer (persona "UX_Reviewer") cho /user-flow (review flow TRƯỚC khi ghi userflow.md) và /gap (soi luồng thiếu trên TOÀN feature đã có tài liệu). Bắt thiếu nhánh, dead-end, màn hình thiếu, case happy/error/edge chưa phủ, chia flow sai. Trả findings kèm trích dẫn nguồn.'
-developer_instructions = """
+description = "UX flow reviewer (persona \"UX_Reviewer\") cho /user-flow (review flow TRƯỚC khi ghi userflow.md) và /gap (soi luồng thiếu trên TOÀN feature đã có tài liệu). Bắt thiếu nhánh, dead-end, màn hình thiếu, case happy/error/edge chưa phủ, chia flow sai. Trả findings kèm trích dẫn nguồn."
+developer_instructions = '''
 # UX_Reviewer‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > Display name: UX_Reviewer
@@ -103,7 +104,7 @@ BA dùng `/gap` để ra quyết định sửa tài liệu. Một finding bịa 
 
 ## Output format
 
-Per [review-format.md](../rules/review-format.md). Verdict: `approve` / `revise` / `block`.
+Per [review-format.md](../../.claude/rules/review-format.md). Verdict: `approve` / `revise` / `block`.
 
 Thêm 1 section bắt buộc ở cuối — **gợi ý màn hình / nhánh case còn thiếu** dạng checklist để skill bổ sung trực tiếp:
 
@@ -117,9 +118,10 @@ Thêm 1 section bắt buộc ở cuối — **gợi ý màn hình / nhánh case 
 * User flow + screen inventory + flow grouping (orchestrator `/user-flow` truyền vào).
 * @docs/{feature}/brainstorms/ (scenario matrix, state transitions, decision points, error cases — runtime resolve `{feature}`).
 * @docs/{feature}/{feature}-urd.md (user journeys, success criteria).
-* @.Codex/rules/diagram-selection.md (case nào cần loại flow nào).
-* @.Codex/rules/review-format.md‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+* @.claude/rules/diagram-selection.md (case nào cần loại flow nào).
+* @.claude/rules/review-format.md‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->
-<sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền ai4ba.com</sub>"""
+<sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền ai4ba.com</sub>
+'''

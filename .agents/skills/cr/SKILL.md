@@ -147,9 +147,9 @@ Open CRs: !`ls docs/cr/CR-*.md 2>/dev/null | while read f; do grep -q "^status: 
 5) **Dùng Knowledge Graph chọn shortlist, sau đó Read prose + value-sweep bắt buộc:**
    * Resolve một hoặc nhiều ID/node seed từ change description hoặc doc/section đã xác định ở Phase 1. KHÔNG đoán ID; nếu không resolve chắc chắn được seed → dùng fallback đọc-trực-tiếp CŨ bên dưới.
    * Nếu `_workspace/kg/graph.json` chưa tồn tại → build đúng 1 lần bằng:
-     `node .Codex/skills/kg/engine/kg-build.mjs`
+     `node .claude/skills/kg/engine/kg-build.mjs`
    * Với MỖI seed, chạy:
-     `node .Codex/skills/kg/engine/kg-query.mjs impact <ID> --depth 3`
+     `node .claude/skills/kg/engine/kg-query.mjs impact <ID> --depth 3`
    * Kiểm tra exit code + output của từng lệnh. Output có `⚠ còn N mục` → BẮT BUỘC chạy lại đúng query đó với `--all`, rồi mới union kết quả.
    * Union mọi path trong shortlist của tất cả query + mọi path ở mục `### Phải Read tay (ngoài graph)` + traceability + jira-map (nếu có).
    * Read đầy đủ prose MỌI file trong tập union. Facts/edge/status từ graph chỉ dùng chọn file và đếm cấu trúc; KHÔNG dùng làm căn cứ cho impact conclusion, wording hoặc proposed CR diff.
@@ -308,16 +308,16 @@ Render CR record content (read-only, gồm cả impact assessment vì self-conta
 ## References
 
 * @references/output-templates.md (mẫu output/message đầy đủ cho từng bước — tách ra để phần trên dễ đọc)
-* @../../rules/change-request.md
-* @../../rules/approval-gate.md
-* @../../rules/ba-conventions.md (Mục 2 no-re-ask — áp cho intake gate bước 4.5; Mục 3 IT-BA framing cho câu hỏi clarify)
-* @../../rules/kg-usage.md (quy tắc dùng Knowledge Graph — graph chọn file, prose kết luận)
-* @../../rules/delivery-readiness.md
-* @../../rules/review-format.md
-* @../../rules/naming-conventions.md
-* @../../rules/changelog.md
-* @../../agents/change-tracker.md
-* @../../agents/gap-analyst.md
+* @../../../.claude/rules/change-request.md
+* @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/ba-conventions.md (Mục 2 no-re-ask — áp cho intake gate bước 4.5; Mục 3 IT-BA framing cho câu hỏi clarify)
+* @../../../.claude/rules/kg-usage.md (quy tắc dùng Knowledge Graph — graph chọn file, prose kết luận)
+* @../../../.claude/rules/delivery-readiness.md
+* @../../../.claude/rules/review-format.md
+* @../../../.claude/rules/naming-conventions.md
+* @../../../.claude/rules/changelog.md
+* @../../../.claude/agents/change-tracker.md
+* @../../../.claude/agents/gap-analyst.md
 * @../../../_templates/change-request.md  *(self-contained: gồm Impact Matrix 6 chiều + Detailed Impact + Rollback Plan — không còn tách impact-report.md riêng)*‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 

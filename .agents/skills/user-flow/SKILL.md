@@ -23,7 +23,7 @@ Output `docs/{feature}/srs/{feature}-userflow.md` là **nguồn chia flow DUY NH
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
+- **UI Common Rules & Components** (per `../../../.claude/rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 * **HARD STOP sau khi flow được duyệt.** Skill này CHỈ dừng ở user flow — KHÔNG vẽ wireframe (đó là việc của `/wireframe-ascii` hoặc `/wireframe-html`, gọi riêng hoặc qua `/srs`).
 * **Hỏi khi không rõ — KHÔNG đoán.** Mọi điểm mơ hồ (luồng, điều kiện, giá trị cụ thể, case lỗi) phải hỏi user ngay trong chat (numbered list, 1 vòng/lần, chờ trả lời) trước khi đưa vào flow. Áp dụng `resolve-oqs` tinh thần: thà ghi Open Question còn hơn bịa.
 * **Upstream priority**: brainstorm > URD > PRD/SRS > tự suy luận. Soft gate — thiếu vẫn proceed bằng suy luận + clarify.
@@ -32,8 +32,8 @@ Output `docs/{feature}/srs/{feature}-userflow.md` là **nguồn chia flow DUY NH
 * **L1 plan preview** trước khi Write file.
 * **L2 diff** khi file đã tồn tại (chạy lại tự động vào update mode).
 * **Vietnamese-first** labels + prose. User nói "viết bằng tiếng Anh" để switch.
-* **BA conventions** (must follow) — Owner resolution, no-re-ask rule, IT-BA framing (KHÔNG hỏi DB/API/framework), Vietnamese typography ("Mục N" không dùng §), L1 prose preview. Per @../../rules/ba-conventions.md.
-* **Mermaid syntax safety** — theo @../../rules/diagram-selection.md Mục "Mermaid syntax safety". Quan trọng nhất: **QUOTE PHÒNG THỦ** — bọc `"..."` mọi node label + edge label chứa ký tự đặc biệt (`≥ ≤ + / ? & ( ) :`), vd `d1{"...email/password"}`, `A -->|"fail ≥3 lần"| B` (nguồn lỗi "Invalid mermaid syntax" #1, và `mmdc` verify LẠI tha nên phải phòng khi viết). Không HTML entity `&amp;` trong label, không `"..."` lồng, `<br/>` cho newline.
+* **BA conventions** (must follow) — Owner resolution, no-re-ask rule, IT-BA framing (KHÔNG hỏi DB/API/framework), Vietnamese typography ("Mục N" không dùng §), L1 prose preview. Per @../../../.claude/rules/ba-conventions.md.
+* **Mermaid syntax safety** — theo @../../../.claude/rules/diagram-selection.md Mục "Mermaid syntax safety". Quan trọng nhất: **QUOTE PHÒNG THỦ** — bọc `"..."` mọi node label + edge label chứa ký tự đặc biệt (`≥ ≤ + / ? & ( ) :`), vd `d1{"...email/password"}`, `A -->|"fail ≥3 lần"| B` (nguồn lỗi "Invalid mermaid syntax" #1, và `mmdc` verify LẠI tha nên phải phòng khi viết). Không HTML entity `&amp;` trong label, không `"..."` lồng, `<br/>` cho newline.
 * **Render-verify mermaid BẮT BUỘC sau Write** (Phase F.5) — chạy `mermaid-verify.mjs`, fail thì tự sửa ≤2 lần. KHÔNG báo "xong" khi mermaid chưa compile OK. Script kiểm **3 tầng** (cú pháp · nhãn an toàn renderer · **ngữ nghĩa luồng**); tầng ngữ nghĩa bắt đúng thứ user-flow hay sai: **node quyết định thiếu nhánh** (error), **nhánh không có nhãn điều kiện** (error), **nhánh cụt / node không ai trỏ tới** (cảnh báo). Cảnh báo nhánh cụt phải tự xét — trạng thái tạm (vd "Khóa tài khoản 24h") BẮT BUỘC có đường ra, đối chiếu `srs/{feature}-states.md` xem state tương ứng có transition thoát không.
 
 ### Pitfalls — easy to get wrong‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
@@ -148,11 +148,11 @@ Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). S�
 ### Phase B — Đọc upstream nghiệp vụ
 
 Đọc theo thứ tự ưu tiên (dừng khi đủ ngữ cảnh, nhưng nên đọc thêm nếu có):
-* **KG chọn nguồn trước (rẻ hơn scan):** chạy `node .Codex/skills/kg/engine/kg-query.mjs facts {feature}` và `node .Codex/skills/kg/engine/kg-query.mjs neighbors <doc-path>` khi có doc mốc để lấy danh sách candidate/coverage, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.Codex/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
+* **KG chọn nguồn trước (rẻ hơn scan):** chạy `node .claude/skills/kg/engine/kg-query.mjs facts {feature}` và `node .claude/skills/kg/engine/kg-query.mjs neighbors <doc-path>` khi có doc mốc để lấy danh sách candidate/coverage, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.claude/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
 
 | Nguồn | Path | Trích gì |
 |-------|------|----------|
-| Brainstorm (ưu tiên 1) | `docs/{feature}/brainstorms/*.md` | Core flows, scenario matrix, state transitions, decision points, error cases, giá trị cụ thể |
+| Brainstorm (ưu tiên 1) | `docs/{feature}/brainstorms/*.md` | Core flows, scenario matrix, state transitions, decision points, error cases, giá trị cụ thể, **bảng `3.1 Tác vụ chính`** (vai trò · tác vụ · tần suất · mức quan trọng) |
 | URD (ưu tiên 2) | `docs/{feature}/{feature}-urd.md` | Personas, user needs, user journeys, success criteria |
 | PRD/SRS (nếu có) | `docs/{feature}/{feature}-prd.md`, `docs/{feature}/srs/{feature}-spec.md` | Capabilities, FR, screens đã định nghĩa |
 
@@ -164,6 +164,7 @@ Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). S�
 1) Skill tóm tắt **hiểu biết hiện tại** về tính năng (2-4 dòng): mục tiêu, actor, luồng chính, nhánh nghi ngờ.
 2) Liệt kê **điểm chưa rõ** thành numbered list. Hỏi tối đa 5-7 câu/vòng, **1 vòng một**, chờ trả lời. Câu hỏi bằng **ngôn ngữ nghiệp vụ** (IT-BA framing).
 3) Loop tới khi đủ rõ HOẶC user nói "đủ rồi" → phần chưa trả lời ghi vào Open Questions, KHÔNG bịa nội dung.
+4) **Tác vụ chính (nguồn cho Mục 3.6):** brainstorm đã có bảng `3.1 Tác vụ chính` → dùng luôn, KHÔNG hỏi lại. Thiếu bảng, hoặc tác vụ còn `?` tần suất / thiếu mức quan trọng → gộp vào vòng hỏi này: "Mỗi vai trò làm việc gì nhiều nhất, bao nhiêu lần mỗi ca/ngày? Việc nào làm sai/chậm thì hậu quả nặng nhất?". Tiêu chí thành công từng tác vụ (vd "≤ 3 bước", "không rời màn danh sách") → đề xuất từ luồng đã dựng, user xác nhận. User không biết → ghi `?` + OQ, KHÔNG đoán.
 
 ### Phase D — Sinh màn hình + chia flow + user flow mermaid
 
@@ -177,6 +178,7 @@ Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). S�
    Dùng style class riêng cho từng loại case (xem Mục "Mermaid user flow convention").
    **QUOTE PHÒNG THỦ khi compose (bắt buộc — tránh "Invalid mermaid syntax"):** bọc `"..."` MỌI node label và MỌI edge label chứa ký tự đặc biệt (`≥ ≤ + / ? & ( ) :`). Vd `d1{"Kiểm tra<br/>email/password"}` và `A -->|"fail ≥3 lần"| B`. Mặc định quote hết cho chắc — quote thừa vô hại. Đây là nguồn lỗi phổ biến nhất mà `mmdc` (Phase F.5) lại **tha**, nên phải phòng ngừa lúc viết, không dựa verify để phát hiện. Chi tiết: `diagram-selection.md` Mục "Mermaid syntax safety".
 4) **Bảng chuyển màn (Mục 3.5)**: rút từ mermaid Mục 1 thành bảng `Từ màn [#] → Đến màn [#] | Trigger | Điều kiện`, phủ cả nhánh happy/error/edge. Đây là nguồn DUY NHẤT cho `/wireframe-html` + `/prototype-html` nối điều hướng (edge NAVIGATES_TO) — đừng để 3 nơi tự suy lại. Mỗi cạnh trong flowchart = 1 dòng bảng.
+5) **Tác vụ chính (Mục 3.6)**: mỗi tác vụ 1 dòng — vai trò · tần suất · mức quan trọng (từ Phase C bước 4) · đường đi trên màn `[#] → [#] → …` theo bảng 3.5 (đường happy ngắn nhất) · số bước (đếm thao tác người dùng: bấm, chọn, nhập — KHÔNG đếm màn) · tiêu chí thành công. Đây là danh sách tác vụ `@usability-reviewer` đi qua ở `/figma-screen`, và là căn cứ để màn ưu tiên đúng việc làm nhiều nhất. Tác vụ tần suất cao mà số bước vượt tiêu chí → nêu ngay ở HARD STOP, không đợi tới lúc vẽ.
 
 ### Phase E — Duyệt nội dung flow (không phải L3 mermaid render)
 
@@ -198,6 +200,9 @@ Danh sách màn hình ({N}):
 Chia flow ({M} flow):
   - {flow-slug-1}: gồm {màn a, b, c}
   - {flow-slug-2}: gồm {màn d, e}
+
+Tác vụ chính ({K}):
+  - {tác vụ} · {vai trò} · {tần suất} · {mức quan trọng}: {[#] → [#] → [#]} = {n} bước (tiêu chí: {…}) {⚠ vượt tiêu chí nếu có}
 
 Đồng ý / Sửa: <mô tả thay đổi> / Hủy:
 ```
@@ -277,7 +282,7 @@ Set env `CLAUDE_CHANGELOG_NOTE` trước Write — hook ghi changelog.md (không
 Flow tổng là mermaid `flowchart` — KHÔNG render trong chat (lý do skip L3), nên đây là cách DUY NHẤT bắt lỗi cú pháp TRƯỚC khi báo "xong", thay vì để user tự phát hiện khi mở IDE/GitHub/Obsidian.
 
 ```bash
-node .Codex/scripts/mermaid-verify.mjs --file docs/{feature}/srs/{feature}-userflow.md
+node .claude/scripts/mermaid-verify.mjs --file docs/{feature}/srs/{feature}-userflow.md
 ```
 
 Script chạy **3 lớp**: (1) lint cú pháp-strict (quote phòng thủ — bắt cái `mmdc` tha mà GitHub/Obsidian crash), (2) compile qua `mmdc`, (3) lint NGHĨA (state mồ côi/thiếu `[*]`, entity ma trong ERD, lifeline chưa khai). **Exit code 0 = qua cả 3.**
@@ -398,6 +403,12 @@ flow_hash: "{sha256 8 ký tự đầu của nội dung Mục 1 tại lúc user g
 | Nhập email [1] | (giữ nguyên) [1] | Submit email | email không tồn tại → báo lỗi |
 | Nhập OTP [2] | Đặt mật khẩu [3] | Submit OTP | OTP đúng, còn hạn |
 
+## 3.6. Tác vụ chính
+
+| Tác vụ | Vai trò | Tần suất | Mức quan trọng | Đường đi | Số bước | Thành công khi |
+|--------|---------|----------|----------------|----------|---------|----------------|
+| Đặt lại mật khẩu | Khách | hiếm | cao | [1] → [2] → [3] → [4] | 5 | xong trong 1 phiên, không phải liên hệ hỗ trợ |
+
 ## 4. Open Questions
 
 - [ ] OQ-1: {câu hỏi nghiệp vụ chưa chốt}
@@ -409,17 +420,17 @@ flow_hash: "{sha256 8 ký tự đầu của nội dung Mục 1 tại lúc user g
 
 ## References
 
-- @.Codex/rules/ui-common-rules-components.md
-* @../../rules/approval-gate.md
-* @../../rules/kg-usage.md
-* @../../rules/naming-conventions.md
-* @../../rules/feature-bootstrap.md
-* @../../rules/ba-conventions.md
-* @../../rules/resolve-oqs.md (chỉ áp dụng TINH THẦN "thà ghi Open Question còn hơn bịa" — user-flow là điểm-vào sớm, KHÔNG chạy Phase resolve-OQ đầy đủ; resolve OQ là việc của `/urd` `/srs` sau)
-* @../../rules/diagram-selection.md
-* @../../rules/review-format.md (findings format UX_Reviewer dùng)
-* @../../scripts/mermaid-verify.mjs (render-verify sau Write — Phase F.5)
-* @../../agents/flow-reviewer.md (UX_Reviewer — review flow ở Phase E.5)
+- @.claude/rules/ui-common-rules-components.md
+* @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/kg-usage.md
+* @../../../.claude/rules/naming-conventions.md
+* @../../../.claude/rules/feature-bootstrap.md
+* @../../../.claude/rules/ba-conventions.md
+* @../../../.claude/rules/resolve-oqs.md (chỉ áp dụng TINH THẦN "thà ghi Open Question còn hơn bịa" — user-flow là điểm-vào sớm, KHÔNG chạy Phase resolve-OQ đầy đủ; resolve OQ là việc của `/urd` `/srs` sau)
+* @../../../.claude/rules/diagram-selection.md
+* @../../../.claude/rules/review-format.md (findings format UX_Reviewer dùng)
+* @../../../.claude/scripts/mermaid-verify.mjs (render-verify sau Write — Phase F.5)
+* @../../../.claude/agents/flow-reviewer.md (UX_Reviewer — review flow ở Phase E.5)
 * @../wireframe-ascii/SKILL.md (đọc userflow.md để chia flow)
 * @../wireframe-html/SKILL.md (đọc userflow.md để chia flow)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 

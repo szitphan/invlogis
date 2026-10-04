@@ -23,7 +23,7 @@ Expand raw idea thành structured brainstorm board qua interview __độ sâu th
 - __Auto-derive feature slug từ idea content__ — KHÔNG bắt user nhập. Đề xuất trong L1, user override được.
 - __Auto-derive idea slug__ — semantic slug từ idea topic. Fallback `idea-{NNN}`. Collision → suffix `-v2`.
 - __Idea input free-form__ — text trực tiếp HOẶC `@<file-path>` tag.
-- __Thông tin cấp dự án đọc + ghi vào profile__ — domain sản phẩm, thuật ngữ gọi người dùng cuối, compliance (hay chạm ở phần user + rủi ro): đọc `docs/_shared/project-profile.md` trước khi hỏi; thiếu thì hỏi rồi đề xuất ghi vào profile để skill sau khỏi hỏi lại. Per @../../rules/project-profile.md.
+- __Thông tin cấp dự án đọc + ghi vào profile__ — domain sản phẩm, thuật ngữ gọi người dùng cuối, compliance (hay chạm ở phần user + rủi ro): đọc `docs/_shared/project-profile.md` trước khi hỏi; thiếu thì hỏi rồi đề xuất ghi vào profile để skill sau khỏi hỏi lại. Per @../../../.claude/rules/project-profile.md.
 - __Interview hỏi từng section một__ — KHÔNG dồn batch 10 câu. Wait reply giữa các section. User có thể skip section bất kỳ → fill `<!-- TBD: ... -->`.
 - __Mandatory artifacts theo complexity__ (auto-detect):
   - __ASCII flow diagram__ — bắt buộc nếu detect: external API/redirect (OAuth, payment, webhook), branching ≥2 paths, async/background job.
@@ -157,6 +157,7 @@ __Section 2 — Users & Access__
 2) Gating: cần subscription/verified/role gì để truy cập?
 3) Entry point: user vào feature qua đâu (menu, button, deep link, notification)?
 4) Số lượng user dự kiến (giúp size capacity + cost)?
+5) Mỗi vai trò **thường làm việc gì trong tính năng này, bao nhiêu lần** (mỗi ca / mỗi ngày / mỗi tuần / hiếm)? Việc nào **làm sai hoặc làm chậm thì hậu quả nặng nhất**? → ghi bảng `3.1 Tác vụ chính` (tần suất + mức quan trọng). Đây là nguồn để `/user-flow` dựng Mục 3.6 và để màn ưu tiên đúng việc làm nhiều nhất. User chưa biết tần suất → ghi `?` + OQ, KHÔNG tự đoán.
 
 __Section 3 — Core Flow (Happy Path)__
 1) Walk-through từng bước: user làm gì → system làm gì → user thấy gì (success state)?
@@ -270,7 +271,7 @@ __Section 4 — Detailed Flow Deep Dive__ (chỉ chạy nếu complexity signal 
        Mode: deep | Sections: 13 | OQs: {N} | Quality gate: {pass|partial}
     ```
 
-13) __Phase E — Resolve Open Questions (PRIORITY gate trước downstream)__ — per @../../rules/resolve-oqs.md. Brainstorm là gốc → chỉ có own OQs (Mục 12), không inherit. Collect → prompt Y/skip/ids → loop 1-by-1 → side-effect L2 diff cho Assumptions/Risks/Capabilities nếu OQ tác động → activity log (hook).
+13) __Phase E — Resolve Open Questions (PRIORITY gate trước downstream)__ — per @../../../.claude/rules/resolve-oqs.md. Brainstorm là gốc → chỉ có own OQs (Mục 12), không inherit. Collect → prompt Y/skip/ids → loop 1-by-1 → side-effect L2 diff cho Assumptions/Risks/Capabilities nếu OQ tác động → activity log (hook).
 
 13b. __Phase E2 — Mark "đã chi tiết hóa" ngược lên PRD sản phẩm__ — sau khi brainstorm write xong:
     - Check `docs/_product/prd.md` tồn tại. Không có → skip phase này (không phải dự án nào cũng có PRD cấp sản phẩm).
@@ -317,14 +318,14 @@ Skill KHÔNG mặc định Deep. Sau khi chấm scope × completeness (Phase A.6
 
 ## References
 
-- @../../rules/feature-bootstrap.md
-- @../../rules/ba-conventions.md
-- @../../rules/project-profile.md
-- @../../rules/approval-gate.md
-- @../../rules/naming-conventions.md
-- @../../rules/keyword-detection.md
-- @../../rules/resolve-oqs.md
-- @../../rules/changelog.md
+- @../../../.claude/rules/feature-bootstrap.md
+- @../../../.claude/rules/ba-conventions.md
+- @../../../.claude/rules/project-profile.md
+- @../../../.claude/rules/approval-gate.md
+- @../../../.claude/rules/naming-conventions.md
+- @../../../.claude/rules/keyword-detection.md
+- @../../../.claude/rules/resolve-oqs.md
+- @../../../.claude/rules/changelog.md
 - @../../../_templates/brainstorm.md
 - @./references/example-brainstorm.md‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 

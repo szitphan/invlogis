@@ -23,7 +23,7 @@ ASCII là contract layout bắt buộc cho `/figma` + `/prototype-html` (2 skill
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-- **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
+- **UI Common Rules & Components** (per `../../../.claude/rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 * **Cần `srs/{feature}-userflow.md` trước.** Chưa tồn tại → skill tự gọi `/user-flow <feature>` (Phase A.5), KHÔNG tự bịa cách chia flow riêng.
 * __1 file/flow__ — `docs/{feature}/ascii-wireframe/{flow-slug}.md`, chứa N screen block. KHÔNG còn 1-file-1-screen.
 * __L3 iterate__ trong chat (standalone mode), gom theo flow (1 lần render cả flow), max 3 vòng/flow. Trong `/srs` chain mode: skip L3, write bản đầu.
@@ -36,7 +36,7 @@ ASCII là contract layout bắt buộc cho `/figma` + `/prototype-html` (2 skill
 * __Wireframe "unpolished by design"__ — ASCII là lo-fi, mục đích duyệt CẤU TRÚC nhanh, KHÔNG cần trông đẹp/thật. Đừng thêm màu/chi tiết thừa.
 * __CẤM emoji bên trong khung ASCII__ — emoji (`👁 🔊 🎉 ⭐ →`) render 2 cột hiển thị nhưng thường bị pad theo 1 ký tự → viền lệch cột (đo thật: frame lệch 2-5 cột). Icon dùng token ASCII 1 cột (xem "Glyph convention"). Emoji CHỈ được dùng ở prose/nhãn NGOÀI viền (cột Description), nơi không cần thẳng cột.
 * __Vietnamese-first__ trong labels; user nói "viết bằng tiếng Anh" thì labels EN.
-* __BA conventions__ (must follow) — Owner resolution, no-re-ask rule, IT-BA framing, Vietnamese typography, L1 prose preview. Per @../../rules/ba-conventions.md.
+* __BA conventions__ (must follow) — Owner resolution, no-re-ask rule, IT-BA framing, Vietnamese typography, L1 prose preview. Per @../../../.claude/rules/ba-conventions.md.
 
 ### Pitfalls — easy to get wrong‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -102,7 +102,7 @@ Mỗi `{flow-slug}.md` gồm N block `## Screen: {screen-slug} — {tên}`, mỗ
 
 ### Phase B — Resolve flow list
 
-* __KG chọn nguồn trước (rẻ hơn scan):__ chạy `node .Codex/skills/kg/engine/kg-query.mjs facts {feature}` và `node .Codex/skills/kg/engine/kg-query.mjs neighbors <doc-path>` khi có doc mốc để lấy danh sách candidate/coverage cho FR/UC/E nguồn của screen, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.Codex/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
+* __KG chọn nguồn trước (rẻ hơn scan):__ chạy `node .claude/skills/kg/engine/kg-query.mjs facts {feature}` và `node .claude/skills/kg/engine/kg-query.mjs neighbors <doc-path>` khi có doc mốc để lấy danh sách candidate/coverage cho FR/UC/E nguồn của screen, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.claude/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
 
 1. Đọc `srs/{feature}-userflow.md` Mục 2 (danh sách màn hình) + Mục 3 (danh sách flow) → xác định N flow, mỗi flow gồm những screen-slug nào theo thứ tự.
 2. Screen MD flow đã tồn tại (`ascii-wireframe/{flow-slug}.md`) → Read, dùng làm base cho update mode.
@@ -239,13 +239,13 @@ Sau ASCII OK:
 
 ## References
 
-- @.Codex/rules/ui-common-rules-components.md
-* @../../rules/approval-gate.md
-* @../../rules/kg-usage.md
-* @../../rules/naming-conventions.md
-* @../../rules/changelog.md
-* @../../rules/ba-conventions.md
-* @../../rules/feature-bootstrap.md
+- @.claude/rules/ui-common-rules-components.md
+* @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/kg-usage.md
+* @../../../.claude/rules/naming-conventions.md
+* @../../../.claude/rules/changelog.md
+* @../../../.claude/rules/ba-conventions.md
+* @../../../.claude/rules/feature-bootstrap.md
 * @../../../_templates/srs-screen.md
 * @../../../_templates/srs-screen-index.md
 * @./references/example-ascii.txt

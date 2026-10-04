@@ -31,7 +31,7 @@ Thứ tự report phản ánh đúng thứ tự đó:
 * **Hai nguồn, hai vai — KHÔNG trộn:**
   * **Engine `flowgap.mjs`** = thuật toán xác định trên graph → chắc ở phần topology (dead-end/reachability), nhưng phần khớp-chữ (reverse-pair/CRUD) vẫn có false-positive nên chỉ là *ứng viên* (xem Chống bịa mục 5). Chỉ thấy cái đã vẽ thành state machine.
   * **`@flow-reviewer`** = đọc prose (UC/userflow/screen) → thấy nhánh nghiệp vụ ngoài state machine, nhưng phải trích được câu gốc làm bằng chứng.
-* **Quy tắc vàng KG** — graph để CHỌN file + đếm cấu trúc; mọi kết luận nội dung LUÔN dựa trên prose đã Read (`@../../rules/kg-usage.md`).
+* **Quy tắc vàng KG** — graph để CHỌN file + đếm cấu trúc; mọi kết luận nội dung LUÔN dựa trên prose đã Read (`@../../../.claude/rules/kg-usage.md`).
 * **CHỐNG BỊA (quan trọng nhất)** — xem Mục "Chống bịa" dưới. Mọi finding phải kèm evidence `file:line`. Không có evidence → không được in.
 * **Lifecycle-aware** — phân biệt *chưa tới bước* (im lặng) / *thiếu thật* (blocking) / *mâu thuẫn* (blocking). Xem Mục "Ba nhãn".
 * **L1 approval** trước Write.
@@ -96,8 +96,8 @@ Suy phase từ artifact có thật trong feature, KHÔNG so mọi feature với 
    # graph.json thiếu HOẶC _workspace/kg/.dirty tồn tại → build lại trước.
    # KHÔNG chạy engine trên graph cũ: tài liệu vừa thêm luồng mở khóa mà graph
    # chưa cập nhật → báo gap giả, hoặc im lặng giả (đã có mà graph chưa thấy).
-   [ -f _workspace/kg/graph.json ] && [ ! -f _workspace/kg/.dirty ] || node .Codex/skills/kg/engine/kg-build.mjs
-   node .Codex/skills/gap/engine/flowgap.mjs {feature}
+   [ -f _workspace/kg/graph.json ] && [ ! -f _workspace/kg/.dirty ] || node .claude/skills/kg/engine/kg-build.mjs
+   node .claude/skills/gap/engine/flowgap.mjs {feature}
    ```
    * Engine trả 3 nhóm kèm **cột `Mức`** (đã render sẵn trong markdown, KHÔNG cần `--json`): **A. STATE-GAP** (dead-end · unreachable · no-exit-path), **B. REVERSE-PAIR-GAP**, **C. CRUD-GAP**.
    * **Cột `Mức` quyết định cách trình bày:** `mạnh` (dead-end thật, kẹt-không-tới-terminal) → đầu Mục 1. `yếu` (tên gợi ý kết thúc tự nhiên) → cuối, ghi "nhiều khả năng đúng". Engine đã tự sắp mạnh→yếu.
@@ -142,11 +142,11 @@ Output **chính** là báo cáo luồng-nghiệp-vụ-còn-thiếu trả **trong
 ## References
 
 * @engine/flowgap.mjs (3 thuật toán xác định: state-gap · reverse-pair · CRUD)
-* @../../agents/flow-reviewer.md (đọc prose bắt nhánh/case thiếu)
-* @../../rules/kg-usage.md (graph chọn file, prose kết luận)
-* @../../rules/approval-gate.md
-* @../../rules/naming-conventions.md (ID conventions)
-* @../../rules/changelog.md‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+* @../../../.claude/agents/flow-reviewer.md (đọc prose bắt nhánh/case thiếu)
+* @../../../.claude/rules/kg-usage.md (graph chọn file, prose kết luận)
+* @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/naming-conventions.md (ID conventions)
+* @../../../.claude/rules/changelog.md‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->

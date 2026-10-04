@@ -35,7 +35,7 @@ Mermaid __không có cú pháp use-case-diagram gốc__ — bản trước dùng
 - __KHÔNG L3 iterate__ — PlantUML không render trong chat. User review từ `.svg`, muốn sửa thì gọi lại skill và nói cần đổi gì.
 - **`--feature` optional** — auto-detect từ ngữ cảnh/feature đang làm dở; mơ hồ mới hỏi bằng picker.
 - **Feature chưa tồn tại HOẶC thiếu cả `usecases/{feature}-usecase-index.md` lẫn `srs/{feature}-spec.md` → REFUSE + route `/usecase` hoặc `/srs`** (per `feature-bootstrap.md` nhóm B) — không có actor/UC nguồn thật thì diagram tự bịa sẽ sai. __Có ≥1 trong 2 nguồn (kể cả chưa approved) → proceed.__
-- **Render qua `render.sh`** (dùng chung script trong `.Codex/skills/usecase-diagram/`) — KHÔNG tự gọi curl/encode trực tiếp trong skill logic, script lo hết.
+- **Render qua `render.sh`** (dùng chung script trong `.claude/skills/usecase-diagram/`) — KHÔNG tự gọi curl/encode trực tiếp trong skill logic, script lo hết.
 - __Compile phải PASS__ (HTTP 200 + SVG hợp lệ, không phải trang lỗi) trước khi báo xong.
 - __System boundary BẮT BUỘC__ — mọi use case nằm trong 1 rectangle `rectangle "System: {feature}" { ... }` (hoặc package tên feature); actor ở ngoài. Diagram thiếu boundary = thiếu scope.
 - __Package theo domain/subsystem THẬT, KHÔNG theo ngưỡng số__ — chỉ chia package khi có domain con thật (vd "User-facing" / "Admin" / "Integration"). KHÔNG dùng ngưỡng cơ học ">7-8 UC" (đếm số không phải lý do chia nhóm). Ít domain → 1 boundary duy nhất là đủ.
@@ -46,7 +46,7 @@ Mermaid __không có cú pháp use-case-diagram gốc__ — bản trước dùng
   - `docs/{feature}/{feature}-urd.md` Mục 2 User Types.
   - `docs/{feature}/srs/{feature}-spec.md` actor mentions.
 - __Vietnamese-first__ labels, auto-detect từ ngữ cảnh feature. Muốn tiếng Anh thì nói "viết bằng tiếng Anh". PlantUML syntax giữ English.
-- __Per__ @../../rules/diagram-selection.md — nếu feature chỉ 1 actor + 1 use case → warn "overkill, có thể skip".
+- __Per__ @../../../.claude/rules/diagram-selection.md — nếu feature chỉ 1 actor + 1 use case → warn "overkill, có thể skip".
 - **Ảnh + bảng nhúng vào `{feature}-usecase-index.md`** (section `## Diagram / Actors / Relationships`), KHÔNG tạo file `.md` wrapper riêng.
 - __Render qua server công khai (plantuml.com)__ — nội dung diagram gửi qua internet mỗi lần render. Cần offline/không muốn gửi data ra ngoài → cài Java (`brew install openjdk`) + tải `plantuml.jar` (plantuml.com/download), rồi tự đổi `render.sh` sang gọi `java -jar plantuml.jar` local thay vì HTTP. Skill hiện tại KHÔNG tự làm việc này — chỉ báo gotcha cho user tự quyết.
 
@@ -114,7 +114,7 @@ Features có sẵn: !`ls -d docs/*/ 2>/dev/null | xargs -I{} basename {} | head 
      Đối chiếu Main Success Scenario (include) / Extensions (extend) của `uc-*.md`.
    - Đếm relationship (`..>` + `--|>`) = số row bảng Relationships sẽ ghi vào index; mỗi row
      phải có Rationale từ UC text. Cạnh không có rationale → XÓA cạnh, không giữ lại.
-   - Chạy `node .Codex/skills/usecase-diagram/puml-usecase-lint.mjs <file.puml>` nếu file đã ghi.
+   - Chạy `node .claude/skills/usecase-diagram/puml-usecase-lint.mjs <file.puml>` nếu file đã ghi.
      `render.sh` cũng tự chạy lint này và __DỪNG không render__ nếu fail — nhưng tự soi trước thì
      đỡ mất vòng fix.
 8) __L1 plan preview__ — prose BA-friendly: "Em sẽ vẽ use case diagram cho {feature} với N actors + M use cases (system boundary + {K} package nếu có domain) + J relationships có rationale. Apply? (Y / sửa)". Kèm __ma trận relationship__ để user thấy hướng: mỗi dòng `{loại} | {từ} | {tới} | {rationale}` — không chỉ đếm số lượng.
@@ -235,13 +235,13 @@ __Conventions:__
 
 ## References
 
-- @../../rules/ba-conventions.md
-- @../../rules/approval-gate.md
-- @../../rules/naming-conventions.md
-- @../../rules/feature-bootstrap.md
-- @../../rules/changelog.md
-- @../../rules/diagram-selection.md
-- @../../rules/diagram-correctness.md
+- @../../../.claude/rules/ba-conventions.md
+- @../../../.claude/rules/approval-gate.md
+- @../../../.claude/rules/naming-conventions.md
+- @../../../.claude/rules/feature-bootstrap.md
+- @../../../.claude/rules/changelog.md
+- @../../../.claude/rules/diagram-selection.md
+- @../../../.claude/rules/diagram-correctness.md
 - @../../../_templates/usecase-index.md (ảnh + bảng Actors/Relationships nhúng vào đây, KHÔNG còn file wrapper riêng)
 - @./render.sh (gate ngữ pháp → compile .puml → .svg qua plantuml.com; DỪNG nếu lint fail)
 - @./plantuml_encode.py (PlantUML text-encoding, dùng bởi render.sh)

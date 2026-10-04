@@ -155,10 +155,10 @@ Chỉ ghi file local — KHÔNG tự upload đi đâu.
 
 ## References
 
-- @../../rules/approval-gate.md
-- @../../rules/naming-conventions.md
-- @../../rules/feature-bootstrap.md
-- @../../rules/delivery-readiness.md
+- @../../../.claude/rules/approval-gate.md
+- @../../../.claude/rules/naming-conventions.md
+- @../../../.claude/rules/feature-bootstrap.md
+- @../../../.claude/rules/delivery-readiness.md
 - @../../../_scripts/build-export.py
 - @../preview/SKILL.md (viewer nội bộ regen tại chỗ — KHÁC /export: preview không đóng dấu ngày, không cho stakeholder)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 

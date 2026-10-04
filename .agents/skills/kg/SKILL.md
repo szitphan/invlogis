@@ -13,7 +13,7 @@ argument-hint: "build [--verify] | verify | viewer | explore <ID> | impact <ID> 
 
 Engine deterministic biên dịch toàn vault → `_workspace/kg/graph.json` (nodes + typed edges + provenance + coverage), kèm CLI query trả markdown gọn cho agent/skill dùng. Vai trò trong pipeline: **graph THU HẸP tập file phải Read — KHÔNG THAY việc đọc prose** (contract Mục 3.4bis, `docs/reports/2026-07-13-knowledge-graph-plan.md`).
 
-Engine ở `.Codex/skills/kg/engine/` (zero-dep, Node 18+): `kg-build.mjs` + `kg-query.mjs` + `kg-viewer.mjs` + `SCHEMA.md` (contract graph.json) + **`kg-history.mjs` + `SCHEMA-history.md`** (temporal — xem dưới) + **`kg-selftest.mjs` + `test-fixtures/`** — bộ regression test trên feature giả `smart-notification` viết 100% format canonical (137 golden assertions: node/edge từng loại, gap cố ý coverage phải bắt, dangling cố ý verify phải báo, temporal T1/T2/T3 gồm nhánh git thật). Sửa engine/template xong PHẢI chạy: `node .Codex/skills/kg/engine/kg-selftest.mjs`.
+Engine ở `.claude/skills/kg/engine/` (zero-dep, Node 18+): `kg-build.mjs` + `kg-query.mjs` + `kg-viewer.mjs` + `SCHEMA.md` (contract graph.json) + **`kg-history.mjs` + `SCHEMA-history.md`** (temporal — xem dưới) + **`kg-selftest.mjs` + `test-fixtures/`** — bộ regression test trên feature giả `smart-notification` viết 100% format canonical (137 golden assertions: node/edge từng loại, gap cố ý coverage phải bắt, dangling cố ý verify phải báo, temporal T1/T2/T3 gồm nhánh git thật). Sửa engine/template xong PHẢI chạy: `node .claude/skills/kg/engine/kg-selftest.mjs`.
 
 **Temporal (lịch sử tài liệu nghiệp vụ) — TÁCH file riêng, opt-in.** `kg-history.mjs` ghi `_workspace/kg/graph-history.json` RIÊNG (KHÔNG nhập vào graph.json chính) để luồng current-state (`/gap`/`/cr`/`/srs`...) không đọc thêm dữ liệu quá khứ. 3 tầng: T1 `change_event`+`CHANGED` (từ changelog.md — ai/khi/skill/note đổi doc), T2 `change_request`+`AMENDS` (CR nào sửa requirement nào + before/after preview), T3 `revision`+`REVISION_OF`/`SUPERSEDES` (chuỗi bản requirement theo thời gian, git-blob-ref — as-of query). Query `history`/`asof` chỉ đọc file này, lazy-rebuild khi cũ hơn graph.json. Contract: `SCHEMA-history.md`.
 
@@ -21,28 +21,28 @@ Engine ở `.Codex/skills/kg/engine/` (zero-dep, Node 18+): `kg-build.mjs` + `kg
 
 ```bash
 # Build (ghi _workspace/kg/graph.json — file DERIVED, không sửa tay)
-node .Codex/skills/kg/engine/kg-build.mjs [--verify] [--strict] [--quiet] [--no-timestamp]
+node .claude/skills/kg/engine/kg-build.mjs [--verify] [--strict] [--quiet] [--no-timestamp]
 
 # Query (bình thường chỉ đọc graph.json; graph dirty/vắng → tự lazy-rebuild từ docs rồi trả lời)
-node .Codex/skills/kg/engine/kg-query.mjs explore FR-authentication-011
-node .Codex/skills/kg/engine/kg-query.mjs impact FR-authentication-011 --depth 3   # → Shortlist file cần Read (cho /cr)
-node .Codex/skills/kg/engine/kg-query.mjs impact --staged                          # → seed từ git diff --cached (BA vừa Edit → lan tới đâu, trước /cr)
-node .Codex/skills/kg/engine/kg-query.mjs impact --since main                      # → so nhánh gốc: mọi file docs/ đổi → impact union
-node .Codex/skills/kg/engine/kg-query.mjs tour authentication                      # → lộ trình đọc tài liệu theo phụ thuộc (onboarding feature)
-node .Codex/skills/kg/engine/kg-query.mjs coverage authentication                  # anti-join FR/UC/E/screen (cho /gap)
-node .Codex/skills/kg/engine/kg-query.mjs facts authentication                     # cấu trúc cô đọng (định tuyến)
-node .Codex/skills/kg/engine/kg-query.mjs trace authentication                     # dump TOÀN BỘ edge + broken refs (ma trận /gap)
-node .Codex/skills/kg/engine/kg-query.mjs neighbors docs/{feature}/srs/{feature}-spec.md  # 1-hop (cho phase review)
-node .Codex/skills/kg/engine/kg-query.mjs orphans | counts [--feature X]           # /dashboard, banner
-node .Codex/skills/kg/engine/kg-query.mjs crud <entity>|--feature X               # ma trận UC×entity (nguồn: CRUD matrix format mới)
-node .Codex/skills/kg/engine/kg-query.mjs suspect [--feature X]                    # edge trace có dependency đổi SAU dependent (theo updated)
-node .Codex/skills/kg/engine/kg-query.mjs history docs/authentication/srs/spec.md  # → TEMPORAL: doc/requirement này đổi mấy lần (event) + CR nào sửa (AMENDS)
-node .Codex/skills/kg/engine/kg-query.mjs asof BR-authentication-002 2026-06-15 --show  # → TEMPORAL: bản requirement hiệu lực lúc {date}; --show lấy nội dung nguyên văn qua git
-node .Codex/skills/kg/engine/kg-query.mjs cypher > kg.cypher                       # export Neo4j visualization (derived, 1 chiều)
+node .claude/skills/kg/engine/kg-query.mjs explore FR-authentication-011
+node .claude/skills/kg/engine/kg-query.mjs impact FR-authentication-011 --depth 3   # → Shortlist file cần Read (cho /cr)
+node .claude/skills/kg/engine/kg-query.mjs impact --staged                          # → seed từ git diff --cached (BA vừa Edit → lan tới đâu, trước /cr)
+node .claude/skills/kg/engine/kg-query.mjs impact --since main                      # → so nhánh gốc: mọi file docs/ đổi → impact union
+node .claude/skills/kg/engine/kg-query.mjs tour authentication                      # → lộ trình đọc tài liệu theo phụ thuộc (onboarding feature)
+node .claude/skills/kg/engine/kg-query.mjs coverage authentication                  # anti-join FR/UC/E/screen (cho /gap)
+node .claude/skills/kg/engine/kg-query.mjs facts authentication                     # cấu trúc cô đọng (định tuyến)
+node .claude/skills/kg/engine/kg-query.mjs trace authentication                     # dump TOÀN BỘ edge + broken refs (ma trận /gap)
+node .claude/skills/kg/engine/kg-query.mjs neighbors docs/{feature}/srs/{feature}-spec.md  # 1-hop (cho phase review)
+node .claude/skills/kg/engine/kg-query.mjs orphans | counts [--feature X]           # /dashboard, banner
+node .claude/skills/kg/engine/kg-query.mjs crud <entity>|--feature X               # ma trận UC×entity (nguồn: CRUD matrix format mới)
+node .claude/skills/kg/engine/kg-query.mjs suspect [--feature X]                    # edge trace có dependency đổi SAU dependent (theo updated)
+node .claude/skills/kg/engine/kg-query.mjs history docs/authentication/srs/spec.md  # → TEMPORAL: doc/requirement này đổi mấy lần (event) + CR nào sửa (AMENDS)
+node .claude/skills/kg/engine/kg-query.mjs asof BR-authentication-002 2026-06-15 --show  # → TEMPORAL: bản requirement hiệu lực lúc {date}; --show lấy nội dung nguyên văn qua git
+node .claude/skills/kg/engine/kg-query.mjs cypher > kg.cypher                       # export Neo4j visualization (derived, 1 chiều)
 
 # Temporal build (ghi graph-history.json RIÊNG — opt-in, KHÔNG đụng graph.json chính)
-node .Codex/skills/kg/engine/kg-history.mjs [--no-timestamp] [--quiet]             # history/asof tự lazy-rebuild khi cũ hơn graph.json
-node .Codex/skills/kg/engine/kg-viewer.mjs                                         # sinh _workspace/kg/kg-viewer.html — XEM GRAPH DẠNG HÌNH (tự chứa, double-click mở)
+node .claude/skills/kg/engine/kg-history.mjs [--no-timestamp] [--quiet]             # history/asof tự lazy-rebuild khi cũ hơn graph.json
+node .claude/skills/kg/engine/kg-viewer.mjs                                         # sinh _workspace/kg/kg-viewer.html — XEM GRAPH DẠNG HÌNH (tự chứa, double-click mở)
 ```
 
 ## Approach‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
@@ -83,8 +83,8 @@ Skill **KHÔNG sửa file `.md` nào trong vault** — chỉ đọc để build 
 
 References:
 - `docs/reports/2026-07-13-knowledge-graph-plan.md` (Mục 3 thiết kế + 3.4bis contract giữ-context)
-- `.Codex/skills/kg/engine/SCHEMA.md` (contract graph.json)
-- @.Codex/rules/approval-gate.md
+- `.claude/skills/kg/engine/SCHEMA.md` (contract graph.json)
+- @.claude/rules/approval-gate.md
 
 ## Semantics của `impact` (đã chốt qua review 3 vòng)
 

@@ -3,31 +3,31 @@ name: delegate
 description: Dùng khi cần chia việc sang CLI AI khác để san tải quota — check quota, chọn model theo việc, điều phối đa vòng (decompose, review→fix, debate). `/delegate` hoặc khi user nhắc @codex/@gemini, "ý kiến thứ hai".
 allowed-tools: Bash, Read, Write
 user-invocable: true
-argument-hint: "[codex|Codex|gemini|all] \"<yêu cầu>\""
+argument-hint: "[codex|claude|gemini|all] \"<yêu cầu>\""
 ---
 <!-- Licensed to test.innvie@gmail.com — Order 56EB8MCXD -->
 
 # /delegate — Điều phối việc cho CLI AI khác‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > __Cần cấu hình trước khi dùng:__ skill gọi CLI AI __khác__ đã cài trên máy bạn
-> (Codex CLI, Codex tài khoản khác, Gemini CLI...). Khai chúng ở
-> `.Codex/state/delegate-roster.yaml` — mở file đó xem hướng dẫn ngay đầu file, hoặc
-> bảo Codex *"check & update roster"* để tự dò. Chưa cài CLI nào thì skill này chưa
+> (Codex CLI, Claude Code tài khoản khác, Gemini CLI...). Khai chúng ở
+> `.claude/state/delegate-roster.yaml` — mở file đó xem hướng dẫn ngay đầu file, hoặc
+> bảo Claude *"check & update roster"* để tự dò. Chưa cài CLI nào thì skill này chưa
 > dùng được (mọi skill khác vẫn chạy bình thường — `/delegate` là tuỳ chọn).
 >
-> Đặt ở `.Codex/skills/delegate/` (theo repo) hoặc `~/.Codex/skills/delegate/`
+> Đặt ở `.claude/skills/delegate/` (theo repo) hoặc `~/.claude/skills/delegate/`
 > (global, mọi dự án) đều được — skill không phụ thuộc file nào của repo.
 
 ## Goal‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-Codex phiên chính là __kiến trúc sư + điều phối viên__. CLI ngoài
-(codex/Codex/gemini) là __thợ san tải__ — đẩy việc nặng/bulk/song song ra ngoài,
+Claude phiên chính là __kiến trúc sư + điều phối viên__. CLI ngoài
+(codex/claude/gemini) là __thợ san tải__ — đẩy việc nặng/bulk/song song ra ngoài,
 giữ quota phiên chính cho việc nghĩ + chốt. 4 chế độ:
 
 1. __Route thẳng__ — việc nhỏ/rõ: gọi 1 CLI 1 phát.
-2. __Decompose + route__ — việc lớn/mơ hồ: Codex nghiên cứu context, tách sub-task, route mỗi phần.
+2. __Decompose + route__ — việc lớn/mơ hồ: Claude nghiên cứu context, tách sub-task, route mỗi phần.
 3. __Review→fix loop__ — làm(CLI) → review(Gemini) → fix → review lại, có trần.
-4. __Debate + arbiter__ — 2 CLI bất đồng → phản biện 1 vòng → Codex chốt.
+4. __Debate + arbiter__ — 2 CLI bất đồng → phản biện 1 vòng → Claude chốt.
 
 Trước MỖI lượt gọi: (1) __check quota nếu đo được__ (Bước 1 — tuỳ chọn, phần lớn CLI
 không có API báo quota) → chọn tài khoản còn nhiều nhất, cân đều; (2) **chọn model
@@ -35,7 +35,7 @@ theo loại việc** (Bước 2) → việc dễ dùng model rẻ.
 
 ### Nguyên tắc phân việc (trục quyết định số 1 — user chốt)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-> Áp TRƯỚC bảng Routing chi tiết. Khớp đặc tính model: Codex quản context rộng tốt,
+> Áp TRƯỚC bảng Routing chi tiết. Khớp đặc tính model: Claude quản context rộng tốt,
 > Codex/GPT-Sol soi edge-case tốt trên phạm vi hẹp.
 
 - __Task DÀI__ (đọc nhiều file/rule, ngữ cảnh rộng, refactor xuyên module) → __Claude__.
@@ -45,22 +45,22 @@ theo loại việc** (Bước 2) → việc dễ dùng model rẻ.
 - __Research 2 pha:__ thu-thập thông tin __có sẵn trong repo/máy__ (grep/đọc file) → __Codex__ (rẻ);
   thu-thập __từ web__ (tra internet/URL) → __Claude__ (Codex sandbox KHÔNG có network); __kết luận/tổng hợp__ → __Claude__.
 - __Cài đặt / setup / môi trường__ → __Gemini hoặc Codex__ (thao tác theo bước); nhưng __hướng dẫn cần CHI TIẾT/giải thích__ → __Claude__.
-- __Viết (doc/nội dung)__ → __Claude hoặc Codex__ tùy: cần văn phong/mạch lạc/ngữ cảnh rộng → Codex; cần bám khuôn mẫu/ngắn gọn → Codex.
+- __Viết (doc/nội dung)__ → __Claude hoặc Codex__ tùy: cần văn phong/mạch lạc/ngữ cảnh rộng → Claude; cần bám khuôn mẫu/ngắn gọn → Codex.
 
-> Cheat-sheet: **Dài/nghĩ/thẩm mỹ/plan/hướng-dẫn-chi-tiết/websearch/kết-luận → Codex ·
+> Cheat-sheet: **Dài/nghĩ/thẩm mỹ/plan/hướng-dẫn-chi-tiết/websearch/kết-luận → Claude ·
 > Ngắn/chính xác/test/script/đào-repo/setup → Codex · Setup nhẹ → Gemini/Codex · Review → Gemini.**
 
 ## Khi nào dùng‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 User gõ `/delegate ...`, nhắc "@codex/@gemini", "hỏi Codex xem", "nhờ gemini review",
 "ý kiến thứ hai", "hỏi cả 2", hoặc muốn đẩy việc nặng ra ngoài tiết kiệm quota.
-KHÔNG dùng khi user không nhắc agent khác — tự làm bằng chính Codex.
+KHÔNG dùng khi user không nhắc agent khác — tự làm bằng chính Claude.
 
 ## Roster — nguồn là file config, KHÔNG hardcode account‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-Danh sách CLI + chính sách sống ở **`.Codex/state/delegate-roster.yaml`** (repo) —
+Danh sách CLI + chính sách sống ở **`.claude/state/delegate-roster.yaml`** (repo) —
 Read file này đầu mỗi lần chạy để biết mục nào `enabled`. Mỗi mục là **một lệnh có
-thật trong PATH**: có thể là CLI cài thẳng (`codex`, `Codex`, `gemini` — trường hợp
+thật trong PATH**: có thể là CLI cài thẳng (`codex`, `claude`, `gemini` — trường hợp
 phổ biến nhất), hoặc wrapper đa-tài-khoản do user tự tạo (tự set `CODEX_HOME`/
 `CLAUDE_CONFIG_DIR` rồi exec binary gốc). Roster chưa có / rỗng / không mục nào
 `enabled` → báo user "chưa cấu hình roster delegate" + hướng dẫn khai, KHÔNG đoán lệnh.
@@ -68,14 +68,14 @@ phổ biến nhất), hoặc wrapper đa-tài-khoản do user tự tạo (tự s
 | Nhóm | Lệnh (theo roster) | Dùng cho | Ghi chú |
 |---|---|---|---|
 | Codex CLI (GPT-5.x) | `codex` (hoặc wrapper `codex-*`) | coding, refactor, bugfix, test, bulk, đào-repo | sandbox KHÔNG network |
-| Codex | `Codex` (hoặc wrapper `Codex-*`) | research/websearch, plan, UI, tài liệu, kết-luận, tóm tắt | có network |
+| Claude Code | `claude` (hoặc wrapper `claude-*`) | research/websearch, plan, UI, tài liệu, kết-luận, tóm tắt | có network |
 | Gemini CLI | `gemini` (hoặc wrapper) | __CHỈ review + trả feedback__ | role `review-only` trong roster |
 
 > __KHÔNG hardcode tên lệnh trong skill.__ Mọi tên lệnh đọc từ roster. Máy mỗi người
 > khác nhau (1 tài khoản hay nhiều, có wrapper hay không) — skill không được giả định.
 >
-> __Bỏ qua tài khoản đang chạy phiên chính này.__ Nếu roster chỉ khai đúng `Codex`
-> trần mà đó cũng là phiên đang chạy → nhóm Codex coi như trống, route sang nhóm khác
+> __Bỏ qua tài khoản đang chạy phiên chính này.__ Nếu roster chỉ khai đúng `claude`
+> trần mà đó cũng là phiên đang chạy → nhóm Claude coi như trống, route sang nhóm khác
 > + nói rõ cho user (KHÔNG tự gọi lại chính mình).
 >
 > __Cờ per-launcher trong roster:__ `enabled: false` → bỏ hẳn. `no_model_override: true`
@@ -91,8 +91,8 @@ phổ biến nhất), hoặc wrapper đa-tài-khoản do user tự tạo (tự s
 
 Khi user bảo "check & update roster" (hoặc CLI trên máy đổi):
 
-1. __Dò CLI thật có trong PATH:__ `command -v codex Codex gemini` (+ `ls ~/.local/bin`
-   lọc `codex-*`, `Codex-*`, `gemini-*` nếu thư mục đó tồn tại — chỗ chứa wrapper
+1. __Dò CLI thật có trong PATH:__ `command -v codex claude gemini` (+ `ls ~/.local/bin`
+   lọc `codex-*`, `claude-*`, `gemini-*` nếu thư mục đó tồn tại — chỗ chứa wrapper
    đa-tài-khoản phổ biến, KHÔNG bắt buộc phải có).
 2. **Đối chiếu `delegate-roster.yaml`** → báo __thiếu__ (có trên máy, chưa khai) /
    __thừa__ (đã khai, máy không có).
@@ -107,7 +107,7 @@ Khi user bảo "check & update roster" (hoặc CLI trên máy đổi):
 > chối chạy skill.
 
 Có nguồn đo → mốc giờ __UTC__, cửa sổ theo `quota_window` trong roster (codex →
-`weekly`, Codex → `fiveHour`). Cơ chế: đọc từng mục `enabled` → nếu tên trỏ tới
+`weekly`, claude → `fiveHour`). Cơ chế: đọc từng mục `enabled` → nếu tên trỏ tới
 wrapper trong `~/.local/bin` thì đọc text file đó (KHÔNG source) lấy `CODEX_HOME`/
 `CLAUDE_CONFIG_DIR` → basename = account id → tra file JSON quota. Không resolve
 được → in `unknown`, xử theo `routing.unknown_quota` (mặc định `allow`).
@@ -117,8 +117,8 @@ python3 - <<'PY'
 import json, datetime, os, re, shutil
 HOME=os.path.expanduser("~")
 ROSTER=next((p for p in (
-    os.path.join(os.getcwd(),".Codex/state/delegate-roster.yaml"),
-    f"{HOME}/.Codex/state/delegate-roster.yaml") if os.path.exists(p)), "")
+    os.path.join(os.getcwd(),".claude/state/delegate-roster.yaml"),
+    f"{HOME}/.claude/state/delegate-roster.yaml") if os.path.exists(p)), "")
 BIN=f"{HOME}/.local/bin"
 
 if not ROSTER:
@@ -182,7 +182,7 @@ for name,prov,win in avail:
 PY
 ```
 
-__Luật chọn:__ trong mỗi nhóm (codex-* hoặc Codex-*) lấy account % còn cao nhất.
+__Luật chọn:__ trong mỗi nhóm (codex-* hoặc claude-*) lấy account % còn cao nhất.
 Áp chính sách `routing` trong roster: **loại account đang chạy phiên chính · quota
 ≥ (100% − reserve_percent) · unknown_quota** (không resolve được / chưa đo → KHÔNG
 coi là sẵn sàng, không route vào). Bị 429/rate-limit → retry 1 lần với account kế
@@ -214,20 +214,20 @@ __Routing nhanh (theo loại việc):__
 
 | Loại việc | Chọn | Model |
 |---|---|---|‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
-| Kiến trúc / plan / chia việc / kết-luận tổng hợp | Codex | opus |
-| Backend/refactor ngữ cảnh rộng (task DÀI) | Codex | opus/sonnet |
+| Kiến trúc / plan / chia việc / kết-luận tổng hợp | claude | opus |
+| Backend/refactor ngữ cảnh rộng (task DÀI) | claude | opus/sonnet |
 | Backend atomic, edge-case (task NGẮN) | codex | sol |
 | Bugfix nhanh, coding hàng ngày | codex | terra |
-| UI / component / design system / thẩm mỹ | Codex | sonnet/fable |
+| UI / component / design system / thẩm mỹ | claude | sonnet/fable |
 | Test checklist / test case / script E2E | codex | terra/sol |
-| Research — thu-thập từ WEB | Codex (+WebSearch) | sonnet |
+| Research — thu-thập từ WEB | claude (+WebSearch) | sonnet |
 | Research — thu-thập từ REPO/máy (grep/đọc file) | codex | terra/luna |
 | Cài đặt / setup / môi trường | gemini hoặc codex | — / terra |
-| Hướng dẫn CHI TIẾT / tài liệu chỉn chu | Codex | opus |
-| Tóm tắt / phân loại / format bulk | Codex/codex | haiku / luna |
+| Hướng dẫn CHI TIẾT / tài liệu chỉn chu | claude | opus |
+| Tóm tắt / phân loại / format bulk | claude/codex | haiku / luna |
 | Review / second-opinion | gemini (chính) · codex-terra (phụ) | — |
 
-> ⚠️ Codex KHÔNG có network — mọi việc cần internet (websearch, đọc URL) phải Codex.
+> ⚠️ Codex KHÔNG có network — mọi việc cần internet (websearch, đọc URL) phải claude.
 > Task phức tạp/dễ thiếu case → LUÔN kèm review chéo (Chế độ B), người làm ≠ người review.
 
 ## Bước 3 — Cú pháp gọi
@@ -235,15 +235,15 @@ __Routing nhanh (theo loại việc):__
 Prompt build vào biến shell, truyền qua stdin/argument (tránh injection).
 Timeout Bash 180000–300000ms.
 
-> `<codex>` / `<Codex>` / `<gemini>` dưới đây là __tên lệnh lấy từ roster__, KHÔNG
+> `<codex>` / `<claude>` / `<gemini>` dưới đây là __tên lệnh lấy từ roster__, KHÔNG
 > phải chuỗi cố định — có thể là `codex` trần hoặc wrapper `codex-a` tuỳ máy user.
 
 ```bash
 # Codex — sandbox read-only bắt buộc (nâng workspace-write phải hỏi user trước)
 printf '%s' "$PROMPT" | <codex> exec --sandbox read-only -C "$(pwd)" -m gpt-5.6-terra -
 
-# Codex — research/websearch phải thêm --allowedTools
-printf '%s' "$PROMPT" | <Codex> -p --model sonnet --allowedTools "WebSearch,WebFetch"
+# Claude — research/websearch phải thêm --allowedTools
+printf '%s' "$PROMPT" | <claude> -p --model sonnet --allowedTools "WebSearch,WebFetch"
 
 # Gemini — review only. Prompt là VALUE của -p, KHÔNG dùng `--`
 <gemini> -p "$PROMPT" --model "Gemini 3.1 Pro (High)"
@@ -251,7 +251,7 @@ printf '%s' "$PROMPT" | <Codex> -p --model sonnet --allowedTools "WebSearch,WebF
 
 - Codex không có network → context/file cần thiết chèn thẳng vào `$PROMPT`.
 - Hạ effort codex: `-c model_reasoning_effort="medium"`. Đọc dir ngoài cwd hoặc
-  file relay: `--add-dir <path>` (Codex + gemini).
+  file relay: `--add-dir <path>` (claude + gemini).
 - Gemini: prompt truyền qua `-p "<prompt>"` (KHÔNG `-- "$PROMPT"` — nó hiểu prompt là
   value của `-p/--print`). Từ chối tên model → chạy lệnh liệt kê model của CLI đó xem
   tên đúng, hoặc bỏ `--model` dùng mặc định. Không có TTY vẫn chạy (redirect /dev/null).
@@ -270,38 +270,38 @@ tới xong/max → hết quota thì dừng báo**.
 
 ### Relay context (nền chung mọi loop)
 
-CLI ngoài __stateless__ — Codex là cầu nối duy nhất, không CLI nào tự gọi CLI
+CLI ngoài __stateless__ — Claude là cầu nối duy nhất, không CLI nào tự gọi CLI
 khác. Truyền context qua __file scratchpad__ `<scratchpad>/delegate-<slug>/`
-(Write `round-N-*.md`): Codex ghi input cần thiết → gọi CLI (`--add-dir` cho
-Codex/gemini, hoặc chèn nội dung vào `$PROMPT` cho codex) → Read output → trích phần
-cần → ghi file lượt kế. Codex giữ "sổ điều phối" trong đầu, chỉ đẩy ra CLI phần
+(Write `round-N-*.md`): Claude ghi input cần thiết → gọi CLI (`--add-dir` cho
+claude/gemini, hoặc chèn nội dung vào `$PROMPT` cho codex) → Read output → trích phần
+cần → ghi file lượt kế. Claude giữ "sổ điều phối" trong đầu, chỉ đẩy ra CLI phần
 nó CẦN cho lượt đó.
 
 ### Chế độ A — Decompose + route
 
-1. __Nghiên cứu context__ — Codex tự đọc repo/file liên quan (không tốn quota CLI).
-2. __Decompose__ — tách sub-task rõ ràng, ghi rõ phần Codex tự làm (nghĩ/chốt/việc
+1. __Nghiên cứu context__ — Claude tự đọc repo/file liên quan (không tốn quota CLI).
+2. __Decompose__ — tách sub-task rõ ràng, ghi rõ phần Claude tự làm (nghĩ/chốt/việc
    nhẹ) vs phần đẩy CLI (nặng/bulk/song song).
 3. __Route__ — khớp mỗi sub-task-đẩy-ra với CLI theo bảng Routing. Độc lập → chạy
    song song (nhiều Bash cùng response); phụ thuộc → tuần tự, relay qua file.
 4. __L1 plan__ → user Y.
-5. __Thực thi__ — mỗi lượt check quota + cân account. Codex tự tổng hợp đáp án cuối
+5. __Thực thi__ — mỗi lượt check quota + cân account. Claude tự tổng hợp đáp án cuối
    (không để CLI merge).
 
 > Đừng đẩy bước nghĩ/chốt/tổng hợp ra CLI trừ khi user yêu cầu — đó là việc rẻ nhất
 > giữ ở phiên chính.
 
 __Architect/Editor (coding lớn):__ tách __đề xuất cách làm__ (prose/pseudocode —
-Codex tự làm hoặc codex-sol) → __gate user xem__ → __áp thành code__ (codex-terra/
-luna). Mặc định Codex giữ vai đề xuất, đẩy áp code ra codex.
+Claude tự làm hoặc codex-sol) → __gate user xem__ → __áp thành code__ (codex-terra/
+luna). Mặc định Claude giữ vai đề xuất, đẩy áp code ra codex.
 
 ### Chế độ B — Review→fix loop (trần cứng 3 vòng)
 
 > __Bật mặc định__ cho task __phức tạp / dài / dễ thiếu case__ (không cần user yêu cầu):
 > đề xuất Chế độ B ngay ở L1. Chọn __người review khác agent với người làm__ (tránh
-> thiên vị) — vd làm codex → review gemini, hoặc làm Codex → review codex.
+> thiên vị) — vd làm codex → review gemini, hoặc làm claude → review codex.
 
-1. __Vòng 0 — làm:__ 1 CLI (hoặc Codex) tạo output. Ghi `round-0-work.md`.
+1. __Vòng 0 — làm:__ 1 CLI (hoặc Claude) tạo output. Ghi `round-0-work.md`.
 2. __Review:__ đẩy output cho CLI review (Gemini — hoặc CLI khác, nên khác agent với fixer để
    tránh thiên vị). Reviewer kết bằng sentinel: dòng đầu `ĐẠT` (không còn góp ý
    actionable) hoặc `CÒN LỖI:` + danh sách góp ý sửa được. Ghi `round-N-review.md`.
@@ -316,9 +316,9 @@ Kích hoạt khi fanout/second-opinion ra __2 kết luận lệch nhau thật__ 
 khác wording).
 
 1. __Phát hiện lệch__ — chỉ khác wording → bỏ debate, tổng hợp bình thường.
-2. __Rebuttal 1 vòng__ — Codex ghi lập luận B ra file, gọi A "đọc lập luận đối
+2. __Rebuttal 1 vòng__ — Claude ghi lập luận B ra file, gọi A "đọc lập luận đối
    phương, phản biện hoặc điều chỉnh"; đối xứng cho B. Ghi `round-1-rebuttal-{a,b}.md`.
-3. __Hội tụ?__ đồng thuận sau rebuttal → Codex xác nhận kết luận chung, khỏi
+3. __Hội tụ?__ đồng thuận sau rebuttal → Claude xác nhận kết luận chung, khỏi
    arbiter. Vẫn lệch → __Claude làm arbiter__: đọc cả 2, đưa khuyến nghị chốt đánh
    dấu 🔶 (user override được). KHÔNG đẩy phân xử ra CLI.
 4. __Báo user__ — 2 quan điểm gốc + diễn tiến rebuttal + kết luận. Không giả vờ
@@ -356,7 +356,7 @@ gọi Bash song song trong 1 response → tổng hợp mỗi agent 1 section
   roster trống/thiếu (báo user khai roster rồi dừng).
 - Check quota __khi có nguồn đo__ (`quota_source` trong roster); không có thì bỏ qua,
   KHÔNG lấy đó làm lý do từ chối chạy. Luôn truyền model tường minh; cân đều tài khoản.
-- Codex là orchestrator/arbiter — không đẩy việc nghĩ/chốt/tổng hợp/phân xử ra
+- Claude là orchestrator/arbiter — không đẩy việc nghĩ/chốt/tổng hợp/phân xử ra
   CLI trừ khi user yêu cầu. Gemini chỉ review.
 - Trần cứng: review→fix 3 vòng, debate 1 vòng rebuttal. Không đệ quy vô hạn.
 - CLI stateless → relay qua file scratchpad, KHÔNG để CLI tự gọi CLI khác.
@@ -372,7 +372,7 @@ số vòng + trạng thái dừng (PASS / hết-max-còn-tồn). Debate: 2 quan 
 (đồng thuận / 🔶 arbiter). Tóm tắt nếu >200 dòng. Lỗi (binary thiếu, timeout,
 rate-limit) → báo rõ đã thử account nào, không giả vờ có kết quả.
 
-> L1 plan preview theo convention approval-gate của Codex — bản này tự chứa,
+> L1 plan preview theo convention approval-gate của Claude Code — bản này tự chứa,
 > không tham chiếu rule file của project nào.‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 

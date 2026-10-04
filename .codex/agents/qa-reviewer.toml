@@ -1,6 +1,7 @@
+# Máy sinh từ .claude/agents/qa-reviewer.md bởi _scripts/codex-sync.py — KHÔNG sửa tay.
 name = "qa-reviewer"
-description = 'QA Lead reviewer. Reviews acceptance criteria for testability, test coverage gaps, missing scenarios. Agent convert spec into "would I be able to test this?"'
-developer_instructions = """
+description = "QA Lead reviewer. Reviews acceptance criteria for testability, test coverage gaps, missing scenarios. Agent convert spec into \"would I be able to test this?"
+developer_instructions = '''
 # QA Lead Reviewer‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > Expertise: testability, test-coverage, ac-quality
@@ -51,7 +52,7 @@ developer_instructions = """
 
 ## Output format
 
-Per [review-format.md](../rules/review-format.md).
+Per [review-format.md](../../.claude/rules/review-format.md).
 
 ## Reference materials
 
@@ -62,4 +63,5 @@ Per [review-format.md](../rules/review-format.md).
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->
-<sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền hoangphan.blog</sub>"""
+<sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền hoangphan.blog</sub>
+'''

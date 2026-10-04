@@ -27,7 +27,7 @@ Doc tập trung business goal, current/future state, scope, stakeholder, busines
 - **L2 diff khi file đã tồn tại** — update mode tự động, preserve user edits, chỉ sửa phần có facts mới.
 - **Auto-detect upstream + confirm** — list ưu tiên `{feature}-urd.md > brainstorms/* > docs/_product/prd.md`; user chọn number/skip/path. Không auto-pick.
 - **Read-before-ask bắt buộc** — đọc full existing BRD và mọi nguồn đã chọn, lập coverage nội bộ rồi chỉ hỏi phần `missing/conflicting`. Không hỏi lại facts đã có.
-- **Thông tin cấp dự án đọc + ghi vào profile** — domain, thị trường, mô hình kinh doanh, compliance áp dụng (hay xuất hiện ở Business Scope/Risks): đọc `docs/_shared/project-profile.md` trước; thiếu thì hỏi rồi đề xuất ghi vào profile. Per @../../rules/project-profile.md.
+- **Thông tin cấp dự án đọc + ghi vào profile** — domain, thị trường, mô hình kinh doanh, compliance áp dụng (hay xuất hiện ở Business Scope/Risks): đọc `docs/_shared/project-profile.md` trước; thiếu thì hỏi rồi đề xuất ghi vào profile. Per @../../../.claude/rules/project-profile.md.
 - **BRD chạy độc lập** — thiếu URD/brainstorm là soft gate; hỏi đúng business context còn thiếu, không bắt chạy skill upstream.
 - **Đúng tầng BRD:**
   - Giữ: business problem/objective, current & future state, gap, business scope, stakeholders & stakeholder requirements, high-level business requirements, business rules, assumptions/constraints/dependencies, risks, success measures, cost-benefit định tính.
@@ -83,7 +83,7 @@ Features: !`ls -d docs/*/ 2>/dev/null | xargs -I{} basename {} | head -20`
 2) **Resolve author** cho activity log; không đưa author vào frontmatter.
 3) **Read existing first.** Nếu `docs/{feature}/{feature}-brd.md` tồn tại, đọc toàn bộ và báo update mode.
 4) **Detect sources.** Scan `docs/{feature}/{feature}-urd.md`, `docs/{feature}/brainstorms/*.md`, `docs/_product/prd.md` và user-tagged source; list để user chọn rồi đọc full selected sources.
-   - **KG chọn nguồn trước (rẻ hơn scan):** chạy `node .Codex/skills/kg/engine/kg-query.mjs facts {feature}` và `node .Codex/skills/kg/engine/kg-query.mjs neighbors <doc-path>` khi có doc mốc để lấy danh sách candidate/coverage, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.Codex/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
+   - **KG chọn nguồn trước (rẻ hơn scan):** chạy `node .claude/skills/kg/engine/kg-query.mjs facts {feature}` và `node .claude/skills/kg/engine/kg-query.mjs neighbors <doc-path>` khi có doc mốc để lấy danh sách candidate/coverage, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.claude/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
 5) **Build coverage map nội bộ** với trạng thái `known / inferable / missing / conflicting`:
    - business problem, baseline, business impact;
    - opportunity/why-now, strategic alignment;
@@ -157,18 +157,18 @@ Reviewer phải lần theo được:
 
 ## References
 
-- @../../rules/feature-bootstrap.md
-- @../../rules/ba-conventions.md
-- @../../rules/project-profile.md
-- @../../rules/approval-gate.md
-- @../../rules/kg-usage.md
-- @../../rules/naming-conventions.md
-- @../../rules/changelog.md
-- @../../rules/resolve-oqs.md
-- @../../rules/review-format.md
-- @../../agents/senior-ba.md
-- @../../agents/po-reviewer.md
-- @../../agents/pm-reviewer.md
+- @../../../.claude/rules/feature-bootstrap.md
+- @../../../.claude/rules/ba-conventions.md
+- @../../../.claude/rules/project-profile.md
+- @../../../.claude/rules/approval-gate.md
+- @../../../.claude/rules/kg-usage.md
+- @../../../.claude/rules/naming-conventions.md
+- @../../../.claude/rules/changelog.md
+- @../../../.claude/rules/resolve-oqs.md
+- @../../../.claude/rules/review-format.md
+- @../../../.claude/agents/senior-ba.md
+- @../../../.claude/agents/po-reviewer.md
+- @../../../.claude/agents/pm-reviewer.md
 - @../../../_templates/brd.md
 - @./references/example-brd.md‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
