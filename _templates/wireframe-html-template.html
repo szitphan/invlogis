@@ -15,7 +15,7 @@
   {{FLOW_DESC}}         → 1 câu mô tả flow (từ brainstorm / UC)
   {{DEVICE}}            → "mobile" | "tablet" | "desktop" — LẤY TỪ srs/{feature}-userflow.md
                           frontmatter (primary_device). Quyết định bề rộng frame thật
-                          (375 / 768 / 1024px). Thiếu → "mobile" (mobile-first).
+                          (375 / 768 / 1920px). Thiếu → "mobile" (mobile-first).
   {{SCREENS}}           → các khối .wf-screen (mỗi screen 1 frame ở bề rộng device),
                           TỰ WRAP xuống dòng — KHÔNG ép 3/row, KHÔNG mũi tên giữa screen
                           (thứ tự đọc trái→phải, trên→dưới là đủ).
@@ -64,12 +64,13 @@
     .wf-row-divider { display: none; } /* không còn chia row cứng — wrap tự nhiên */
 
     /* SCREEN WRAPPER — bề rộng = device thật, KHÔNG phải 33% trừu tượng.
-       data-device trên .wf-page quyết định: mobile 375 / tablet 768 / desktop 1440.
+       data-device trên .wf-page quyết định: mobile 375 / tablet 768 / desktop 1920 (1 màn/hàng).
        Frame giữ tỉ lệ thật của thiết bị → không còn "size sai / trông giả". */
     .wf-screen { flex: 0 0 auto; }
     .wf-page[data-device="mobile"]  .wf-screen { width: 375px; }
     .wf-page[data-device="tablet"]  .wf-screen { width: 768px; }
-    .wf-page[data-device="desktop"] .wf-screen { width: 1024px; max-width: 100%; }
+    .wf-page[data-device="desktop"] .wf-screen { width: 1920px; }
+    .wf-page[data-device="desktop"] .wf-rows { flex-direction: column; } /* desktop: 1 màn/hàng */
     .wf-page:not([data-device]) .wf-screen { width: 375px; } /* fallback mobile-first */
     .wf-device-tag { display: inline-block; font-size: 10px; color: #555; border: 1px solid #ccc; border-radius: 3px; padding: 1px 6px; margin-bottom: 6px; }
     .wf-step-badge {
@@ -243,12 +244,12 @@
   MẪU {{SCREENS}} — skill sinh 1 khối .wf-screen cho MỖI màn hình.
   Các .wf-screen nằm chung trong .wf-rows (flex-wrap) → TỰ xuống dòng
   theo bề rộng device. KHÔNG ép 3/row, KHÔNG mũi tên giữa screen.
-  Frame rộng đúng device (375/768/1024) nhờ data-device trên .wf-page.
+  Frame rộng đúng device (375/768/1920) nhờ data-device trên .wf-page.
   ════════════════════════════════════════════════════════════════
 
   <div class="wf-screen" id="s{n}">   <!-- id="s{n}" BẮT BUỘC: đích deep-link từ index điều hướng -->
     <div class="wf-step-badge">{n}</div>
-    <div class="wf-device-tag">{{DEVICE}} · {375|768|1024}px</div>
+    <div class="wf-device-tag">{{DEVICE}} · {375|768|1920}px</div>
     <div class="wf-screen-frame">
       <div class="wf-screen-bar">
         <div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div>

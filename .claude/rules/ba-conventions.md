@@ -93,9 +93,9 @@ __Gọn — KHÔNG dài dòng thừa:__ giữ đủ 6 lớp nhưng wording súc 
 
 ## 7. Confirm device size TRƯỚC khi vẽ wireframe/prototype
 
-> Áp cho `/wireframe-ascii`, `/wireframe-html`, `/prototype-html`. Device size (mobile 375 / tablet 768 / desktop 1024 / responsive) quyết định bề rộng khung + cách xếp layout — là __quyết định thiết kế__, KHÔNG được tự đoán im lặng (đúng tinh thần `approval-gate.md`: không auto-pick dù "có vẻ rõ").
+> Áp cho `/wireframe-ascii`, `/wireframe-html`, `/prototype-html`. Device size (mobile 375 / tablet 768 / desktop 1920 / responsive) quyết định bề rộng khung + cách xếp layout — là __quyết định thiết kế__, KHÔNG được tự đoán im lặng (đúng tinh thần `approval-gate.md`: không auto-pick dù "có vẻ rõ").
 
-- __Luôn hỏi user device__ ở đầu skill (trước khi vẽ), qua AskUserQuestion 4 lựa chọn: Mobile 375 / Tablet 768 / Desktop 1024 / Responsive.
+- __Luôn hỏi user device__ ở đầu skill (trước khi vẽ), qua AskUserQuestion 4 lựa chọn: Mobile 375 / Tablet 768 / Desktop 1920 / Responsive.
 - __Đề xuất sẵn 1 device__ để user chỉ cần xác nhận nhanh: ưu tiên `srs/{feature}-userflow.md` frontmatter `primary_device`; thiếu thì suy từ `docs/design.md` (Breakpoints / Max content width). Đặt option đề xuất lên đầu + note "(đề xuất — từ {nguồn})".
 - __KHÔNG suy 1 device rồi vẽ luôn__ — kể cả khi design.md rõ ràng. Suy được chỉ để *đề xuất*, không để *tự chốt*.
 - User chốt device mà `userflow.md` chưa có `primary_device` → gợi ý ghi ngược vào userflow frontmatter (single-source, để `/wireframe-html` + `/prototype-html` + lần sau dùng chung, không hỏi lại — no-re-ask).
@@ -106,7 +106,7 @@ __Gọn — KHÔNG dài dòng thừa:__ giữ đủ 6 lớp nhưng wording súc 
 > Áp cho `/wireframe-ascii`, `/wireframe-html`, `/prototype-html`.
 
 - __State loại trừ nhau → tách screen riêng, KHÔNG nhồi chung 1 khung.__ Nếu 1 màn có ≥2 kết quả chỉ 1 hiện tùy điều kiện (vd verify-result: thành công / hết-hạn; payment-result: success / fail; OTP: nhập / hết-hạn) → render __mỗi state 1 screen__ (slug `{screen}-{state}`, vd `verify-email-success` + `verify-email-expired`). KHÔNG vẽ 2 khối side-by-side trong 1 khung (đọc nhầm là "màn có cả 2"). Chỉ chung 1 khung khi các phần __cùng hiện đồng thời__. Userflow gộp chung → đề xuất tách + hỏi user.
-- __Form/auth/dialog KHÔNG trải rộng hết khung desktop.__ Content dạng form (login/signup/forgot/modal) phải nằm trong __1 box căn giữa hẹp__ (~380-460px), input/nút full-width TRONG box đó — KHÔNG kéo dài full 1024px (trông sai, không giống màn thật). HTML: `<div class="wf-form">`. ASCII: vẽ khung form hẹp căn giữa trong khung device rộng, KHÔNG cho field chạm 2 mép. Full-content screen (dashboard/list/table) thì trải thẳng, không cần box.
+- __Form/auth/dialog KHÔNG trải rộng hết khung desktop.__ Content dạng form (login/signup/forgot/modal) phải nằm trong __1 box căn giữa hẹp__ (~380-460px), input/nút full-width TRONG box đó — KHÔNG kéo dài full 1920px (trông sai, không giống màn thật). HTML: `<div class="wf-form">`. ASCII: vẽ khung form hẹp căn giữa trong khung device rộng, KHÔNG cho field chạm 2 mép. Full-content screen (dashboard/list/table) thì trải thẳng, không cần box.
 
 ## 9. `description` của SKILL.md — ngắn, đủ định tuyến, KHÔNG giải thích
 

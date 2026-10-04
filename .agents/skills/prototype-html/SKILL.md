@@ -66,8 +66,8 @@ Build 1 file `{feature}-prototype.html` self-contained, double-click mở browse
   - English learning app = transactional → default light. Dẫn xuất từ design.md "multi-theme", không cứng.
   - **Modal/dialog top-layer PHẢI đồng bộ theme** từ màn active khi mở (`openModal()`), nếu không lấy theme body → chói/lệch tông.
   - **Modal PHẢI căn giữa** — `dialog { margin: auto }` bắt buộc. Reset `* { margin:0 }` xoá `margin:auto` mặc định của `<dialog>` → dialog rơi về **góc trái-trên**. Luôn set lại (template đã có khối MODAL base).
-- **Device = `primary_device` từ `srs/{feature}-userflow.md`** (single-source, giống `/wireframe-html`). Thiếu field → hỏi user 1 câu (Mobile 375 / Tablet 768 / Desktop 1024) per `ba-conventions.md` Mục 7, rồi gợi ý ghi ngược vào userflow.
-  - `mobile` → `.proto-app` width 375, có phone-frame. `tablet` → 768. `desktop` → full-width max 1024, KHÔNG phone-frame.
+- **Device = `primary_device` từ `srs/{feature}-userflow.md`** (single-source, giống `/wireframe-html`). Thiếu field → hỏi user 1 câu (Mobile 375 / Tablet 768 / Desktop 1920) per `ba-conventions.md` Mục 7, rồi gợi ý ghi ngược vào userflow.
+  - `mobile` → `.proto-app` width 375, có phone-frame. `tablet` → 768. `desktop` → full-width max 1920, KHÔNG phone-frame.
 - **Frame co giãn, KHÔNG vỡ khi viewport hẹp:**
   - Width `min(--device-w, 100%)` — **KHÔNG `100vw`** (tính cả scrollbar → tràn ngang, scrollbar kép).
   - Chiều cao `min(--device-h, calc(100vh - 64px))` + `overflow-y:auto` bên trong — **KHÔNG `aspect-ratio`** trên khung cuộn (nội dung dài ép khung dài thượt hoặc double scrollbar).
@@ -157,7 +157,7 @@ design.md exists: !`test -f docs/design.md && echo "OK" || echo "MISSING → D�
    - Tồn tại + duyệt → Read Mục 2 (danh sách màn + mục đích) + Mục 3 (chia flow: flow-slug + screens/flow + cases phủ happy/error/edge).
    - Chưa có/chưa duyệt → **tự gọi `/user-flow <feature>`** trước. KHÔNG tự chia flow.
 3. **Check ASCII wireframe** `docs/{feature}/ascii-wireframe/{feature}-wireframe-index.md`. Thiếu → refuse + route `/user-flow` + `/wireframe-ascii` (bảng mô tả 5 cột là nguồn nội dung màn). Per `feature-bootstrap.md` nhóm B.
-4. **Resolve device (single-source):** `userflow.md` frontmatter `primary_device` → mobile 375 / tablet 768 / desktop 1024. Thiếu → hỏi user 1 câu (per `ba-conventions.md` Mục 7), rồi gợi ý ghi ngược userflow.
+4. **Resolve device (single-source):** `userflow.md` frontmatter `primary_device` → mobile 375 / tablet 768 / desktop 1920. Thiếu → hỏi user 1 câu (per `ba-conventions.md` Mục 7), rồi gợi ý ghi ngược userflow.
 
 ### Phase B — Design system extraction (token 2 lớp)
 
@@ -238,7 +238,7 @@ design.md exists: !`test -f docs/design.md && echo "OK" || echo "MISSING → D�
 23. **L1 approval preview:**
     ```
     [/prototype-html] Sẽ build interactive HTML prototype cho {feature}:
-      Device:      {mobile 375|tablet 768|desktop 1024}  (từ userflow primary_device)
+      Device:      {mobile 375|tablet 768|desktop 1920}  (từ userflow primary_device)
       Theme:       {N} màn light (transactional) · {M} màn dark (marketing)  — tokens từ design.md
       Screens:     {S} màn · {E} nav edges · state-driven (render từ store)
       Điều hướng:  menu nổi góc dưới-phải (TOC + sơ đồ luồng {F} flow)

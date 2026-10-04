@@ -167,7 +167,7 @@ Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). S�
 
 ### Phase D — Sinh màn hình + chia flow + user flow mermaid
 
-0) **Primary device** (hỏi 1 câu ở Phase C nếu chưa rõ): feature này chủ yếu chạy trên **mobile (375px)**, **tablet (768px)** hay **desktop (1024px+)**? Đây là nguồn DUY NHẤT cho `/wireframe-html` + `/prototype-html` render đúng bề rộng khung. Không rõ → default `mobile` (mobile-first). Ghi vào frontmatter `primary_device`.
+0) **Primary device** (hỏi 1 câu ở Phase C nếu chưa rõ): feature này chủ yếu chạy trên **mobile (375px)**, **tablet (768px)** hay **desktop (1920px)**? Đây là nguồn DUY NHẤT cho `/wireframe-html` + `/prototype-html` render đúng bề rộng khung. Không rõ → default `mobile` (mobile-first). Ghi vào frontmatter `primary_device`.
 1) **Danh sách màn hình dự kiến**: mỗi màn 1 dòng (slug + mục đích 1 câu). Bao gồm màn trạng thái (success, error page, empty, loading nếu cần).‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 2) **Chia flow**: skill TỰ nhóm các màn cùng một mục tiêu nghiệp vụ thành 1 flow (vd `forgot-password-flow` = màn nhập email → OTP → đặt mật khẩu mới → thành công). Mỗi flow có 1 `flow-slug`. User duyệt cách chia này ở HARD STOP — đây là quyết định quan trọng vì `/wireframe-ascii` + `/wireframe-html` sẽ tạo 1 file/flow theo đúng cách chia này.
 3) **User flow mermaid tổng**: `flowchart TD` (hoặc `TB`) thể hiện tương tác giữa màn hình, phủ **đủ 3 loại case**:
@@ -185,7 +185,7 @@ Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). S�
 ```
 [/user-flow] Preview user flow — Phiên bản 1:
 
-Primary device: {mobile 375 / tablet 768 / desktop 1024}
+Primary device: {mobile 375 / tablet 768 / desktop 1920}
 
 Luồng chính (happy): {A} → {B} → {C} → Thành công
 Nhánh error: {điểm rẽ} → {error case 1}, {error case 2}
@@ -255,7 +255,7 @@ Theo `ba-conventions.md` Mục 5 (prose, không bảng tag dày):
 ```
 Em sẽ tạo file `docs/{feature}/srs/{feature}-userflow.md`:
 
-**Primary device:** {mobile 375 / tablet 768 / desktop 1024} (dùng cho wireframe/prototype render đúng khung).
+**Primary device:** {mobile 375 / tablet 768 / desktop 1920} (dùng cho wireframe/prototype render đúng khung).
 
 **User flow tổng:** {N} màn hình, chia {M} flow, phủ happy/error/edge.
 
@@ -354,7 +354,7 @@ flowchart TD
 type: srs-userflow
 feature: {feature}
 updated: {date}
-primary_device: mobile          # mobile (375) | tablet (768) | desktop (1024) — nguồn bề rộng khung cho /wireframe-html + /prototype-html
+primary_device: mobile          # mobile (375) | tablet (768) | desktop (1920) — nguồn bề rộng khung cho /wireframe-html + /prototype-html
 stage: flow-approved
 flow_approved_at: {date}
 flow_hash: "{sha256 8 ký tự đầu của nội dung Mục 1 tại lúc user gõ 'chốt' ở HARD STOP}"

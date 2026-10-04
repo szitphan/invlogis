@@ -14,7 +14,7 @@ argument-hint: "<feature> [--flow <flow-slug>]"
 
 ## Goal‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-Sinh __HTML wireframe file__ (B&W, không màu sắc) cho từng luồng của 1 feature. Mỗi flow = 1 HTML file tự-contained. Mỗi screen render trong __khung có bề rộng device thật__ (mobile 375 / tablet 768 / desktop 1024px — lấy từ `srs/{feature}-userflow.md` frontmatter `primary_device`), các screen __tự wrap__ xuống dòng theo bề rộng device (KHÔNG ép 3/row). Mỗi screen render __HTML element thật__ — `<input>`, `<button>`, `<a>`, `<label>`... không dùng `<pre>` ASCII.
+Sinh __HTML wireframe file__ (B&W, không màu sắc) cho từng luồng của 1 feature. Mỗi flow = 1 HTML file tự-contained. Mỗi screen render trong __khung có bề rộng device thật__ (mobile 375 / tablet 768 / desktop 1920px — lấy từ `srs/{feature}-userflow.md` frontmatter `primary_device`), các screen __tự wrap__ xuống dòng theo bề rộng device (KHÔNG ép 3/row). Mỗi screen render __HTML element thật__ — `<input>`, `<button>`, `<a>`, `<label>`... không dùng `<pre>` ASCII.
 
 > __Vì sao khung device thật:__ card "33% chiều ngang" cũ làm mobile login và desktop dashboard cùng size → trông giả, sai tỉ lệ. Render đúng bề rộng device cho tỉ lệ thật.
 
@@ -34,7 +34,7 @@ __Thang fidelity 3 bậc:__ `/wireframe-ascii` (lo-fi chat-native) → `/wirefra
 
 - **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `docs/_shared/screen-patterns.md` (CMP) + `docs/_shared/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 * **Cần `srs/{feature}-userflow.md` trước.** Chưa tồn tại/chưa duyệt → skill tự gọi `/user-flow <feature>` (Phase A), KHÔNG tự chia flow riêng.
-* __Confirm device size với user TRƯỚC khi vẽ (Phase A bước 4)__ — Mobile 375 / Tablet 768 / Desktop 1024 / Responsive. Đề xuất sẵn từ `primary_device`/design.md nhưng KHÔNG tự chốt im lặng (device là quyết định thiết kế).
+* __Confirm device size với user TRƯỚC khi vẽ (Phase A bước 4)__ — Mobile 375 / Tablet 768 / Desktop 1920 / Responsive. Đề xuất sẵn từ `primary_device`/design.md nhưng KHÔNG tự chốt im lặng (device là quyết định thiết kế).
 * __L1 plan preview__ trước khi write bất kỳ file.
 * **Cửa-vào `{feature}-wireframe.html` LUÔN sinh (Phase G.5) — bất kể số flow.** Đây là file duy nhất có sidebar TOC (flow → screen) + flow map + iframe; thiếu nó = mất mục lục, người xem phải mở tay từng flow → output CHƯA hoàn tất. KHÔNG bỏ qua với cớ "ít flow". `{feature}-wireframe-html-index.md` (markdown) KHÔNG thay thế được. Phải xuất hiện trong L1 plan và trong Output report.
 * **Mỗi file flow rời PHẢI có breadcrumb "← Mục lục wireframe" trỏ về `{feature}-wireframe.html`** (template đã có sẵn). Lý do: người xem mở thẳng 1 file flow (vd `forgot-password.html`) sẽ cụt, không biết đường về TOC, tưởng "mất mục lục". Breadcrumb tự ẩn khi file được load trong iframe của cửa-vào (JS `window.self!==window.top` → class `in-iframe`), chỉ hiện khi mở trực tiếp. Output report PHẢI nói rõ "mở `{feature}-wireframe.html` (cửa-vào có mục lục), KHÔNG mở file flow rời".
@@ -54,7 +54,7 @@ __Thang fidelity 3 bậc:__ `/wireframe-ascii` (lo-fi chat-native) → `/wirefra
 * __Đọc lại ASCII wireframe nếu đã có__ (Phase B.5) — tránh 2 skill tự suy luận field/validation độc lập rồi lệch nhau. Cùng schema 5 cột nên dùng thẳng, KHÔNG cần map; màn ASCII đã tả thì KHÔNG re-infer (single-source).
 * __Screen thiếu thông tin từ nghiệp vụ__ → render placeholder `<p class="hint-text">[Chưa có đủ thông tin nghiệp vụ]</p>`, đồng thời hỏi user theo Phase F.5 Gap check.
 * __Modal elements__ (suy luận từ nghiệp vụ có bước xác nhận/dialog) → gom vào `<div class="modal-box">`.
-* __Form KHÔNG trải rộng hết khung desktop.__ Screen dạng form/auth/dialog (login, signup, forgot-password, modal) → bọc field+nút trong `<div class="wf-form">` (box căn giữa, max-width ~380px) để input/nút full-width TRONG box đó, KHÔNG kéo dài full 1024px của khung desktop (trông sai, không giống màn thật). Full-content screen (dashboard/list/table) thì render thẳng, không cần `.wf-form`. Trên mobile 375 thì `.wf-form` tự = gần full width. Thêm class `.wf-form.card` nếu muốn viền box rõ.
+* __Form KHÔNG trải rộng hết khung desktop.__ Screen dạng form/auth/dialog (login, signup, forgot-password, modal) → bọc field+nút trong `<div class="wf-form">` (box căn giữa, max-width ~380px) để input/nút full-width TRONG box đó, KHÔNG kéo dài full 1920px của khung desktop (trông sai, không giống màn thật). Full-content screen (dashboard/list/table) thì render thẳng, không cần `.wf-form`. Trên mobile 375 thì `.wf-form` tự = gần full width. Thêm class `.wf-form.card` nếu muốn viền box rõ.
 * __State loại trừ nhau → TÁCH SCREEN RIÊNG, KHÔNG side-by-side.__ Nếu 1 màn có ≥2 kết quả loại trừ (chỉ 1 hiện tùy điều kiện — vd verify-email-result: thành công / hết-hạn, payment-result: success / fail) → render **mỗi state 1 `.wf-screen` riêng** (vd `verify-email-success`, `verify-email-expired`), KHÔNG nhồi 2 div cạnh nhau trong 1 khung (gây hiểu nhầm "màn có cả 2"). Ghi rõ trong screen-slug. Chỉ dùng chung 1 khung khi các phần __cùng hiện đồng thời__ (không loại trừ). Nếu `userflow.md` gộp chung 1 screen → note đề xuất tách + hỏi user, hoặc tách ngầm với slug `{screen}-{state}`.
 * __Google button__: detect khi nghiệp vụ mention "Google" hoặc "OAuth" → render `.btn-google`.
 * __Divider "hoặc"__: khi nghiệp vụ có 2 phương thức song song (vd đăng nhập email hoặc Google) → render `<div class="divider"><span>hoặc</span></div>`.
@@ -103,7 +103,7 @@ Sau generate: cập nhật `docs/{feature}/ascii-wireframe/{feature}-wireframe-i
 3. Nếu `--flow <slug>`: chỉ xử lý flow đó (phải khớp 1 flow-slug trong userflow.md Mục 3).
 4. __Confirm device size với user (BẮT BUỘC — KHÔNG tự chốt im lặng).__ Device quyết định bề rộng khung → là quyết định thiết kế, phải để user chốt trước khi vẽ:
    * Đề xuất sẵn 1 device từ nguồn (ưu tiên `userflow.md` `primary_device`; thiếu thì suy từ `docs/design.md` Breakpoints/Max-width) để user chỉ cần xác nhận.
-   * Hỏi qua AskUserQuestion: __Mobile 375 / Tablet 768 / Desktop 1024 / Responsive (nhiều breakpoint)__ — option đề xuất để đầu + note "(đề xuất — từ {nguồn})".
+   * Hỏi qua AskUserQuestion: __Mobile 375 / Tablet 768 / Desktop 1920 / Responsive (nhiều breakpoint)__ — option đề xuất để đầu + note "(đề xuất — từ {nguồn})".
    * User chọn khác → dùng lựa chọn của user. Nếu userflow chưa có `primary_device` → sau khi user chốt, gợi ý ghi ngược vào userflow frontmatter (để lần sau + `/prototype-html` dùng chung).
    * KHÔNG suy 1 device rồi vẽ luôn không hỏi — kể cả khi design.md rõ ràng.
 
@@ -150,7 +150,7 @@ Em sẽ tạo {N} file HTML wireframe trong `docs/{feature}/html-wireframe/`:
 
   1. {flow-name} → {flow-slug}.html
      Screens: {slug-1} → {slug-2} → {slug-3} → {slug-4}
-     Device: {mobile 375 / tablet 768 / desktop 1024} · {N} màn hình (tự wrap)
+     Device: {mobile 375 / tablet 768 / desktop 1920} · {N} màn hình (desktop 1 màn/hàng, còn lại tự wrap)
   ...
 
   Cộng thêm: {feature}-wireframe.html (index điều hướng — mở cái này) + {feature}-wireframe-html-index.md (metadata).
@@ -365,15 +365,15 @@ Trong Phase F, mỗi flow:
    | `{{FLOW_SLUG}}` | kebab-case slug |
    | `{{SCREEN_COUNT}}` | số màn hình trong flow |
    | `{{DATE}}` | ISO date |
-   | `{{DEVICE}}` | `mobile` / `tablet` / `desktop` — từ `srs/{feature}-userflow.md` frontmatter `primary_device` (thiếu → `mobile`). Quyết định bề rộng frame (375/768/1024). |
+   | `{{DEVICE}}` | `mobile` / `tablet` / `desktop` — từ `srs/{feature}-userflow.md` frontmatter `primary_device` (thiếu → `mobile`). Quyết định bề rộng frame (375/768/1920). |
    | `{{FLOW_DESC}}` | 1 câu mô tả flow (brainstorm / UC) |
    | `{{SCREENS}}` | các `.wf-screen` (mỗi screen 1 frame bề rộng device, tự wrap) — mẫu nằm cuối template |
    | `{{DESC_TABLE}}` | các `<tr>` bảng mô tả 5 cột, chia theo Screen N — xem Phase F.5 + mẫu cuối template |
 
 3. __Render element bên trong mỗi screen__ từ Mục 2 Screen description (xem "Element Mapping" trên).
 4. __Bất biến__: B&W strict (chỉ `#000 #fff #f0f0f0 #888 #ccc`), self-contained (inline hết), frame rộng đúng device (`data-device`), screens tự wrap (KHÔNG ép 3/row, KHÔNG mũi tên giữa screen), icon = token chữ/SVG (KHÔNG emoji). KHÔNG tự bịa class/màu ngoài template.
-   * **TUYỆT ĐỐI KHÔNG sửa rule `.wf-page[data-device="desktop"] .wf-screen { width: 1024px }`** (và mobile 375 / tablet 768) — copy Y NGUYÊN từ template. Bug thực tế (demo authentication): flow nhiều màn (3-4) bị AI đổi thành `width: calc((1400px-32px)/3)` để nhét 3 màn/hàng → mỗi "màn desktop" render ~456px, dán nhãn 1024 nhưng bé như mobile (SAI HẲN). Màn desktop PHẢI rộng 1024px THẬT rồi __tự wrap xuống dòng__ khi hết ngang (flow 4 màn → trang cao xuống, KHÔNG bóp ngang). 1 device = 1 width cố định, KHÔNG chia theo số màn.
-   * __Verify sau khi sinh (BẮT BUỘC nếu có Chrome):__ đo `getBoundingClientRect().width` của `.wf-screen` ở window rộng (vd 1440) — desktop phải ~1024, KHÔNG ~456/480. Lệch = đã bịa width, sửa về template.
+   * **TUYỆT ĐỐI KHÔNG sửa rule `.wf-page[data-device="desktop"] .wf-screen { width: 1920px }` + `.wf-rows { flex-direction: column }` (desktop 1 màn/hàng)** (và mobile 375 / tablet 768) — copy Y NGUYÊN từ template. Bug thực tế (demo authentication): flow nhiều màn (3-4) bị AI đổi thành `width: calc((1400px-32px)/3)` để nhét 3 màn/hàng → mỗi "màn desktop" render ~456px, dán nhãn 1024 nhưng bé như mobile (SAI HẲN). Màn desktop PHẢI rộng 1920px THẬT, xếp 1 màn/hàng (trang cuộn ngang trên màn nhỏ hơn) rồi __tự wrap xuống dòng__ khi hết ngang (flow 4 màn → trang cao xuống, KHÔNG bóp ngang). 1 device = 1 width cố định, KHÔNG chia theo số màn.
+   * __Verify sau khi sinh (BẮT BUỘC nếu có Chrome):__ đo `getBoundingClientRect().width` của `.wf-screen` ở window rộng (vd 1440) — desktop phải ~1920 (KHÔNG bị co theo cửa sổ), KHÔNG ~456/480. Lệch = đã bịa width, sửa về template.
 5. __Write__ `docs/{feature}/html-wireframe/{flow-slug}.html`.
 
 > Cần đổi diện mạo wireframe (spacing, font, class mới) → sửa __template file__, KHÔNG sửa trong skill — mọi flow tự kế thừa.
