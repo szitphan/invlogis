@@ -120,6 +120,7 @@ Với mỗi screen chưa có ASCII: check `docs/{feature}/html-wireframe/{flow-s
 Với mỗi flow, với mỗi screen trong flow đó:
 
 1. __Thu thập element + nghiệp vụ SÂU__ — ưu tiên nguồn Phase B.5 nếu có; nếu không, đọc **`srs/{feature}-spec.md` (FR/BR/NFR/Error Matrix) + `uc-*.md` (branches)** + brainstorm/URD/PRD để rút mô tả sâu (số liệu, mã ID, wording error THẬT). Đây là nguồn chính cho cột Description đủ 6 lớp (xem `ba-conventions.md` Mục 6). Thiếu nguồn (chưa có SRS) → __hỏi user bổ sung__ validation/error/states từng field một (no-re-ask), KHÔNG bịa.
+   **Bản đồ đối tượng (khi có `{feature}-object-map.md` / `_shared/object-map.md`):** màn danh sách/thẻ/chi tiết của 1 đối tượng lấy Items theo cột "Hiện ở" (Thẻ / Danh sách / Chi tiết) của Mục 4; thuộc tính có "Lọc" → bộ lọc (CMP-05), có "Sắp" → cột sắp được; nút hành động lấy từ Mục 3, chỉ hiện cho vai trò được làm (ghi điều kiện quyền ở Description). Thuộc tính màn cần mà map không có → vẫn vẽ, ghi "chưa có trong object map" ở Description.
 2. __Generate ASCII art__ từ element vừa xác định:
    * Default layout phù hợp purpose (form vertical, list table, detail card, dashboard grid).
    * Width theo device đã chốt ở Phase A: mobile ~44-48 cột, tablet ~60, desktop ~68-72 cột. __Mọi dòng viền cùng bề rộng__ (đếm ký tự, mỗi ký tự Latin/Việt = 1 cột; KHÔNG chèn emoji trong khung vì emoji = 2 cột hiển thị làm lệch viền).

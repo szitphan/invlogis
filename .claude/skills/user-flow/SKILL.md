@@ -155,6 +155,7 @@ Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). S�
 | Brainstorm (ưu tiên 1) | `docs/{feature}/brainstorms/*.md` | Core flows, scenario matrix, state transitions, decision points, error cases, giá trị cụ thể, **bảng `3.1 Tác vụ chính`** (vai trò · tác vụ · tần suất · mức quan trọng) |
 | URD (ưu tiên 2) | `docs/{feature}/{feature}-urd.md` | Personas, user needs, user journeys, success criteria |
 | PRD/SRS (nếu có) | `docs/{feature}/{feature}-prd.md`, `docs/{feature}/srs/{feature}-spec.md` | Capabilities, FR, screens đã định nghĩa |
+| Bản đồ đối tượng (nếu có) | `docs/{feature}/{feature}-object-map.md` + `docs/_shared/object-map.md` | Đối tượng feature chạm tới (→ màn danh sách/chi tiết), quan hệ có cột "Đi được từ màn chi tiết" (→ cạnh chuyển màn giữa 2 màn chi tiết), hành động theo vai trò (→ nút, nhánh theo quyền) |
 
 * Có upstream → trích nghiệp vụ, KHÔNG hỏi lại cái đã có (no-re-ask).
 * Thiếu hết → **suy luận mode**: skill tự dựng giả định nghiệp vụ từ tên/mô tả tính năng, rồi Phase C hỏi xác nhận giả định.
@@ -178,6 +179,7 @@ Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). S�
    Dùng style class riêng cho từng loại case (xem Mục "Mermaid user flow convention").
    **QUOTE PHÒNG THỦ khi compose (bắt buộc — tránh "Invalid mermaid syntax"):** bọc `"..."` MỌI node label và MỌI edge label chứa ký tự đặc biệt (`≥ ≤ + / ? & ( ) :`). Vd `d1{"Kiểm tra<br/>email/password"}` và `A -->|"fail ≥3 lần"| B`. Mặc định quote hết cho chắc — quote thừa vô hại. Đây là nguồn lỗi phổ biến nhất mà `mmdc` (Phase F.5) lại **tha**, nên phải phòng ngừa lúc viết, không dựa verify để phát hiện. Chi tiết: `diagram-selection.md` Mục "Mermaid syntax safety".
 4) **Bảng chuyển màn (Mục 3.5)**: rút từ mermaid Mục 1 thành bảng `Từ màn [#] → Đến màn [#] | Trigger | Điều kiện`, phủ cả nhánh happy/error/edge. Đây là nguồn DUY NHẤT cho `/wireframe-html` + `/prototype-html` nối điều hướng (edge NAVIGATES_TO) — đừng để 3 nơi tự suy lại. Mỗi cạnh trong flowchart = 1 dòng bảng.
+4b) **Đối chiếu bản đồ đối tượng (khi có):** mỗi quan hệ ghi "2 chiều" hoặc "{Từ} → {Tới}" mà cả 2 đối tượng có màn chi tiết trong feature → phải có cạnh tương ứng ở Mục 3.5, hoặc ghi lý do bỏ vào Open Questions. Hành động trên đối tượng mà không có màn/nút nào thực hiện → báo ở HARD STOP. KHÔNG sửa object map — lệch thì đề xuất `/object-map {feature}`.
 5) **Tác vụ chính (Mục 3.6)**: mỗi tác vụ 1 dòng — vai trò · tần suất · mức quan trọng (từ Phase C bước 4) · đường đi trên màn `[#] → [#] → …` theo bảng 3.5 (đường happy ngắn nhất) · số bước (đếm theo **luật đếm bước** dưới, KHÔNG đếm màn) · tiêu chí thành công. Đây là danh sách tác vụ `@usability-reviewer` đi qua ở `/figma-screen`, và là căn cứ để màn ưu tiên đúng việc làm nhiều nhất. Tác vụ tần suất cao mà số bước vượt tiêu chí → nêu ngay ở HARD STOP, không đợi tới lúc vẽ.
    **Luật đếm bước** (dùng chung với `@usability-reviewer` — 2 bên phải ra cùng con số):
 

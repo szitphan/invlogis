@@ -43,6 +43,7 @@ links:
 | BL-029 | Chạy thử `/prototype-html <feature> <link Figma>` trên 1 flow thật, sửa skill theo kết quả (khớp artboard 3b, lệch Figma↔tài liệu, đối chiếu ảnh 26b) | `.claude/skills/prototype-html/` | `grep:docs/*/html-design/*-prototype.html:data-figma-node` | ⬜ | 2026-10-04 |  |  |
 | BL-030 | Chạy thử luồng usability AI trên 1 feature thật: `/brainstorm` (bảng 3.1) → `/user-flow` (Mục 3.6) → `/figma-screen` gọi `@usability-reviewer`; sửa skill/agent theo kết quả | `.claude/agents/usability-reviewer.md` | `grep:docs/*/srs/*-userflow.md:^## 3\.6\. Tác vụ chính` | ⬜ | 2026-10-04 |  |  |
 | BL-031 | Đưa 4 đề xuất thẻ dùng chung (Mục 5 bản đồ đối tượng: Phương tiện, Nhà cung cấp, dòng mặt hàng, thẻ chứng từ) thành CMP qua `/update-overview patterns`, làm khi bắt đầu vẽ màn | `docs/_shared/object-map.md` | `grep:design/ui-common/screen-patterns.md:Ô chọn Nhà cung cấp` | ⬜ | 2026-10-05 |  |  |
+| BL-032 | Sửa fixture KG (`skills/kg/engine/test-fixtures/`) cho khớp engine hiện tại — đang 112 pass / 25 fail, hỏng sẵn cả ở kit | `_guides/pipeline.md` P-28 | `manual` | ⬜ | 2026-10-05 |  |  |
 
 ## Đã xong
 

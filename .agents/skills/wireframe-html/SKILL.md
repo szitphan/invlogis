@@ -121,6 +121,7 @@ Sau generate: cập nhật `docs/{feature}/ascii-wireframe/{feature}-wireframe-i
 | `docs/{feature}/srs/{feature}-spec.md` | FR/NFR/Business Rules — validation cụ thể cho field |
 | `docs/{feature}/usecases/{feature}-usecase-index.md` (nếu có) | Bảng UCs — bổ sung ngữ cảnh nghiệp vụ, KHÔNG dùng để chia flow (đã có userflow.md) |
 | `docs/{feature}/ascii-wireframe/{flow-slug}.md` (nếu tồn tại) | Nguồn element ưu tiên cho screen đã có ASCII — xem Phase B.5 |
+| `docs/{feature}/{feature}-object-map.md` + `docs/_shared/object-map.md` (nếu có) | Thuộc tính theo mức hiển thị (Thẻ/Danh sách/Chi tiết), lọc/sắp, hành động theo vai trò — nguồn Items + nút cho bảng 5 cột (Phase F.5) |
 
 ### Phase C — Identify Flows
 
@@ -183,6 +184,8 @@ __Cấu trúc bảng__ (đúng theo mẫu tham khảo của user — 5 cột):
 | 1 | {Tên field/element} | {Loại control} | {Loại data} | {Mô tả nghiệp vụ + validation đầy đủ} |
 
 Table chia theo screen — mỗi screen mở đầu bằng 1 hàng full-width `Screen {N}: {screen title}`, rồi các field của screen đó đánh số lại từ 1.
+
+**Bản đồ đối tượng (khi có `{feature}-object-map.md` / `_shared/object-map.md`):** màn danh sách/thẻ/chi tiết của 1 đối tượng lấy Items theo cột "Hiện ở" (Thẻ / Danh sách / Chi tiết) của Mục 4; thuộc tính có "Lọc" → bộ lọc (CMP-05), có "Sắp" → cột sắp được; nút hành động lấy từ Mục 3, chỉ hiện cho vai trò được làm (ghi điều kiện quyền ở Description). Thuộc tính màn cần mà map không có → vẫn vẽ, ghi "chưa có trong object map" ở Description.
 
 **1. Xác định `Control type`** (map từ Mục 2 "Element" + Mục 1 ASCII layout):
 

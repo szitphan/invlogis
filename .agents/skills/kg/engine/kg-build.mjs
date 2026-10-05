@@ -1493,6 +1493,79 @@ class GraphBuilder {
     }
   }
 
+  // Bản đồ đối tượng ORCA (output /object-map): `docs/_shared/object-map.md` cấp dự án +
+  // `docs/{feature}/{feature}-object-map.md` delta. 2 lượt: lượt 1 tạo node OBJ-… từ
+  // Mục 1 MỌI file, lượt 2 nối quan hệ Mục 2 — để file feature trỏ được sang đối tượng
+  // cấp dự án theo TÊN (bảng quan hệ ghi tên, không ghi mã).
+  objectMapTables(record, heading) {
+    return this.tablesOf(record).filter((table) =>
+      foldText(table.heading).replace(/[^a-z0-9]+/g, " ").trim().startsWith(heading)
+    );
+  }
+
+  parseObjectMapObjects(record) {
+    if (!this.objectByTitle) this.objectByTitle = new Map();
+    for (const table of this.objectMapTables(record, "1 doi tuong")) {
+      for (const row of table.rows) {
+        const id = cleanCell(row.values.ma || "");
+        if (!/^OBJ-[a-z0-9-]+$/.test(id)) continue;
+        const title = cleanCell(row.values.title || "") || id;
+        const source = this.source(record.file, row.line);
+        this.addNode({
+          key: id,
+          type: "object",
+          subtype: null,
+          feature: record.feature || null,
+          title,
+          status: null,
+          updated: null,
+          source,
+          props: { subsystem: cleanCell(row.values.subsystem || "") },
+        });
+        this.objectByTitle.set(foldText(title), id);
+        this.addEdge({
+          from: record.nodeKey,
+          to: id,
+          type: "CONTAINS",
+          provenance: "table",
+          source,
+        });
+      }
+    }
+  }
+
+  parseObjectMapRelations(record) {
+    const lookup = this.objectByTitle || new Map();
+    let yielded = false;
+    for (const table of this.objectMapTables(record, "2 quan he")) {
+      for (const row of table.rows) {
+        const from = lookup.get(foldText(cleanCell(row.values.from || "")));
+        const to = lookup.get(foldText(cleanCell(row.values.toi || row.values.to || "")));
+        if (!from || !to) {
+          this.notePartialParse(
+            record.file,
+            `dòng ${row.line}: quan hệ trỏ tới đối tượng chưa khai ở Mục 1`
+          );
+          continue;
+        }
+        this.addEdge({
+          from,
+          to,
+          type: "RELATES_TO",
+          provenance: "table",
+          source: this.source(record.file, row.line),
+          props: {
+            label: cleanCell(row.values.quan_he || ""),
+            cardinality: cleanCell(row.values.ban_so || ""),
+          },
+        });
+        yielded = true;
+      }
+    }
+    // Map mới có Mục 1 chưa có quan hệ là hợp lệ — không coi là format lệch.
+    if (!yielded) this.yieldWaiver = "object-map chưa có quan hệ";
+  }
+
   findIndex(feature, kind) {
     const patterns = {
       usecase: /usecase-index/i,
@@ -1568,6 +1641,7 @@ class GraphBuilder {
       "parseApiTests",
       "parseE2eIndex",
       "parseApiMap",
+      "parseObjectMapObjects",
     ]);
     const nodesBefore = this.nodes.size;
     const edgesBefore = this.edges.size;
@@ -5219,6 +5293,13 @@ class GraphBuilder {
       this.runParser(record, this.parseDefinitionTables);
       this.runParser(record, this.parseOpenQuestions);
     }
+
+    const objectMaps = this.records.filter(
+      (record) =>
+        String(record.frontmatter.data.type || "").toLowerCase() === "object-map"
+    );
+    for (const record of objectMaps) this.runParser(record, this.parseObjectMapObjects);
+    for (const record of objectMaps) this.runParser(record, this.parseObjectMapRelations);
 
     for (const record of this.records) {
       const type = String(record.frontmatter.data.type || "").toLowerCase();

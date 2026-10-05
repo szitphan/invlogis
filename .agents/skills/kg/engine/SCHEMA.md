@@ -73,6 +73,7 @@
 | render_artifact | `render:{feature}/{screen-slug}/{kind}`, với `kind ∈ figma \| prototype \| wireframe-html` | `render:authentication/login/prototype` |
 | flow | `flow:{feature}/{slug}` | `flow:authentication/google-oauth` |
 | entity | `entity:{feature}/{CanonicalName}` (CamelCase; alias UPPER_SNAKE map về cùng node) | `entity:authentication/Account` |
+| object | `OBJ-{slug}` (mã toàn vault, khai ở bản đồ đối tượng ORCA) | `OBJ-lenh-sua-chua` |
 | state machine / state | `state:{entity-key}#…` | `state:authentication/Account#locked` |
 | actor | `actor:{canonical-lowercase}` | `actor:learner` |
 | feature | `feature:{slug}` | `feature:authentication` |
@@ -85,7 +86,7 @@
 
 ## Node types (enum)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-`feature | doc | requirement | error | bo | cap | use_case | user_story | acceptance_criterion | screen | render_artifact | flow | entity | state_machine | state | bpmn_process | db_schema | open_question | decision | raid_item | action_item | term | change_request | jira_issue | confluence_page | research | test_checklist_item | api_checklist_item | test_case | e2e_spec | api_field | actor | external_service`
+`feature | doc | requirement | error | bo | cap | use_case | user_story | acceptance_criterion | screen | render_artifact | flow | entity | object | state_machine | state | bpmn_process | db_schema | open_question | decision | raid_item | action_item | term | change_request | jira_issue | confluence_page | research | test_checklist_item | api_checklist_item | test_case | e2e_spec | api_field | actor | external_service`
 
 ## Edge types (enum) — nguồn xem spec parse dưới‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -99,7 +100,7 @@
 - `AUTOMATES`: e2e_spec→CHK khi bảng Test cases trong e2e-index map CHK-ID tới file `.spec.ts`; target luôn là CHK key toàn cục, không suy đoán path testcase.
 - `DEPENDS_ON`: feature→feature từ cột `Phụ thuộc` trong Product PRD Feature Map hoặc bảng ưu tiên Roadmap. Dependency không match slug/tên trong cùng bảng vẫn tạo feature node `planned=true`, slugify từ cell và ghi coverage note.
 - `RENDERS`: render_artifact→screen từ các cột `Figma` / `HTML prototype` / `HTML wireframe` trong screen index; render_artifact→screen và, khi resolve được, →flow từ bảng `Flows` trong `*-wireframe-html-index.md`. Provenance luôn `table`.
-- `RELATES_TO`: entity↔entity từ mermaid erDiagram (props.cardinality giữ nguyên ký hiệu `||--o{`, props.label).
+- `RELATES_TO`: entity↔entity từ mermaid erDiagram (props.cardinality giữ nguyên ký hiệu `||--o{`, props.label). Cũng dùng cho object↔object từ bảng Mục 2 của `type: object-map` (props.label = tên quan hệ, props.cardinality = bản số `1–n`); quan hệ ghi TÊN đối tượng nên build 2 lượt: lượt 1 tạo node từ Mục 1 mọi file object-map, lượt 2 nối.
 - `OPERATES_ON`: UC→entity, props.ops = "CRUD" subset (từ CRUD matrix — chỉ có ở docs format mới).
 - `SAME_AS`: db_schema→entity cho mỗi DBML table sau khi chuẩn hóa tên qua `entityCanonical`; target entity có thể chưa resolve.
 - `INFORMS`: research→feature khi body research nhắc nguyên feature slug; provenance `heuristic`.

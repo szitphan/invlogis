@@ -9,6 +9,7 @@ Flow (v2.7 — shared wrapper):
   2. Compose 1 large MD content:
        1. Tổng quan nhanh (summary at-a-glance — counts + ID list parse từ srs/spec.md)
        2. Giới thiệu & Mô tả chung (từ docs/_shared/: system-overview/definitions/conventions/operating-env)
+       2b. Bản đồ đối tượng (docs/{feature}/{feature}-object-map.md + docs/_shared/object-map.md, có file mới hiện)
        3. SRS Spec (full) · 4. ERD · 5. Flows · 6. States · 7. Functions (inline screens) · 8. Screens · 9. Designs · 10. Open Questions.
   3. Pass MD content qua shared _viewer_wrapper.build_viewer_html() → nested TOC + mermaid zoom modal.
   4. Write docs/{feature}/{feature}-preview.html.
@@ -622,6 +623,25 @@ def build_intro_section(vault: Path) -> str:
     return "\n\n---\n\n".join(parts)
 
 
+def build_object_map_section(vault: Path, feature_dir: Path, feature: str) -> str:
+    """Bản đồ đối tượng (output /object-map): phần delta của feature (nếu có) + bản đồ cấp dự án.
+    Sơ đồ Mục 0 là mermaid → viewer render được. Không có file nào → trả "" để bỏ hẳn mục."""
+    sources = [
+        (f"Phần bổ sung của {feature}", feature_dir / f"{feature}-object-map.md"),
+        ("Bản đồ cấp dự án", vault / "docs" / "_shared" / "object-map.md"),
+    ]
+    parts = []
+    for heading, path in sources:
+        text = read_optional(path)
+        if not text:
+            continue
+        body = strip_frontmatter(text)
+        body = re.sub(r"\A\s*# [^\n]*\n", "", body)          # bỏ H1 của file
+        body = re.sub(r"^(#{2,5})([ \t])", r"\1##\2", body, flags=re.MULTILINE)
+        parts.append(f"### {heading}\n\n{body.strip()}")
+    return "\n\n---\n\n".join(parts)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("feature", help="feature slug")
@@ -666,6 +686,7 @@ def main():
 
     # 2. Giới thiệu & Mô tả chung (từ docs/_shared/ — project-level shared docs).
     intro_block = build_intro_section(vault)
+    object_map_block = build_object_map_section(vault, feature_dir, feature)
 
     # 3. SRS Spec
     spec_body = extract_open_questions(strip_frontmatter(spec), "SRS Spec", open_questions) \
@@ -741,6 +762,10 @@ def main():
     sections = [
         ("Tổng quan nhanh", summary_block, False, None),
         ("Giới thiệu & Mô tả chung", intro_block, False, None),
+    ]
+    if object_map_block:
+        sections.append(("Bản đồ đối tượng", object_map_block, False, "sec-object-map"))
+    sections += [
         ("SRS Spec", spec_body, True, "sec-spec"),
         ("ERD", erd_body, True, "sec-erd"),
     ]
@@ -782,7 +807,9 @@ def main():
 
     size_kb = out_path.stat().st_size / 1024
     print(f"✅ Preview generated: {out_path}")
-    print(f"   Sections: tổng-quan-nhanh · giới-thiệu(_shared) · spec"
+    print(f"   Sections: tổng-quan-nhanh · giới-thiệu(_shared)"
+          + (" · bản-đồ-đối-tượng" if object_map_block else "")
+          + " · spec"
           + (" (flows inline ở mục Flows)" if flows_inlined else "")
           + " · erd"
           + (" · flows" if (flows_body and not flows_inlined) else "")

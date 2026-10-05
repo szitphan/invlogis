@@ -156,6 +156,7 @@ Legacy SRS (Phase 1): !`ls docs/srs/ 2>/dev/null | head -10`
 > Nguyên tắc: agent làm việc trước, anh sửa sau — KHÔNG bắt anh khai từ đầu.
 
 7. **Đọc hết upstream** đã pick → dựng **bản nháp**: scope 1 dòng + FR list (derive từ PRD capabilities) + NFR/BR/error sơ bộ suy được. **Chỗ mơ hồ nhỏ chưa suy được → chèn `[NEEDS CLARIFICATION: ...]` inline, KHÔNG đoán bừa** (xem Constraint marker). EARS: FR/Error nên viết theo mẫu **When…/If…then…** khi mô tả hành vi theo sự kiện/lỗi (xem Pitfalls — EARS) — đọc tự nhiên + test 1:1.
+   **Bản đồ đối tượng (khi có `{feature}-object-map.md` / `_shared/object-map.md`):** mỗi dòng Mục 3 (hành động theo vai trò) của đối tượng feature chạm tới → ≥1 FR, vai trò ghi vào FR (phân quyền); đối tượng + thuộc tính → seed Mục Data Entities (giữ nguyên tên đối tượng); cột "Đổi trạng thái" → seed BR chuyển trạng thái. Dòng 🟡 trong map → giữ thành `[NEEDS CLARIFICATION]`, KHÔNG coi là đã chốt.
 8. **Trình bản nháp + hỏi gap Tầng 1:**
    - Scope + FR: "Em bóc {N} FR từ PRD, anh xem thiếu/thừa gì?" (KHÔNG bắt anh liệt kê lại).
    - NFR (outcome nghiệp vụ): thời gian khách chờ · giờ vận hành cần khả dụng · lượng giao dịch cao điểm · dữ liệu nhạy cảm + ai xem + giữ bao lâu · mức chấp nhận mất dữ liệu. Chưa chốt → `TBD — owner — deadline`.
@@ -169,7 +170,7 @@ Legacy SRS (Phase 1): !`ls docs/srs/ 2>/dev/null | head -10`
 
 ### Phase C — Tầng 1: Core spec
 
-10. **Self-verify** — FR phủ hết capability PRD (`Done when`)? BR có link Implements FR? Error đủ cho FR quan trọng? Success Criteria đo được?
+10. **Self-verify** — FR phủ hết capability PRD (`Done when`)? BR có link Implements FR? Error đủ cho FR quan trọng? Success Criteria đo được? Hành động nào trong object map (đối tượng của feature) chưa có FR?
 11. **Approval L1** — preview `spec.md`:
     ```
     1 | docs/{feature}/srs/{feature}-spec.md | create | {N} FR, {M} NFR, {K} BR, {E} errors, {S} success criteria
