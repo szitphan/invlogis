@@ -61,14 +61,24 @@ Không hỏi user những gì đọc được.
    * **`srs/{feature}-userflow.md`** — nguồn DUY NHẤT cho danh sách màn, chia flow, chuyển màn
      (Mục 2, 3, 3.5) và tác vụ chính (Mục 3.6). `screenId` = cột `[#]` Mục 2 + hậu tố thiết bị
      (`[#]` = 3, Desktop → `3-web`).
-   * **`ascii-wireframe/{flow-slug}.md`** + `{feature}-wireframe-index.md` — bố cục ASCII và
-     **bảng mô tả 5 cột** của từng màn. Bảng 5 cột là **hợp đồng BA ↔ design**: element nào, control
-     gì, validation, trạng thái, wording, mã lỗi, điều hướng. Đọc hết bảng của mọi màn sẽ vẽ.
+   * **Wireframe + bảng mô tả 5 cột** của từng màn. Bảng 5 cột là **hợp đồng BA ↔ design**: element
+     nào, control gì, validation, trạng thái, wording, mã lỗi, điều hướng. Đọc hết bảng của mọi màn sẽ
+     vẽ. Hai renderer ngang hàng, cùng schema 5 cột — màn có ở renderer nào thì đọc renderer đó:
+     - **HTML** — `html-wireframe/{flow-slug}.html` + `{feature}-wireframe-html-index.md`. Bố cục =
+       khối `<div class="wf-screen" id="s{n}">`; bảng = `<table class="wf-desc-table">`, phân đoạn
+       theo hàng `wf-desc-screen-header` "Screen N: …". `n`/`N` là thứ tự màn trong flow → ra `Slug`
+       qua cột "Screens (theo thứ tự)" của index (đối chiếu userflow Mục 3). Dùng cho màn phức tạp.
+     - **ASCII** — `ascii-wireframe/{flow-slug}.md` + `{feature}-wireframe-index.md`, block
+       `## Screen: {slug}`.
+     Màn có ở **cả hai** → bảng HTML làm nguồn chính (`/wireframe-html` đã lấy ASCII làm nguồn rồi bổ
+     sung); hai bảng lệch nhau (row, wording, mã lỗi) → liệt kê chỗ lệch, hỏi user bản nào đúng, KHÔNG
+     tự chọn im lặng.
    * `srs/{feature}-spec.md` (FR/BR/Error Matrix), `srs/{feature}-states.md`, `usecases/uc-*.md`,
      file user tag bằng `@`.
-   Có nguồn thì **dẫn xuất từ nguồn**, chỉ hỏi phần nguồn bỏ trống. Thiếu ASCII cho màn sẽ vẽ →
-   báo 1 dòng và hỏi: chạy `/wireframe-ascii` trước (đề xuất), hay vẽ thẳng từ SRS (ghi
-   "không có bảng 5 cột" trong báo cáo).
+   Có nguồn thì **dẫn xuất từ nguồn**, chỉ hỏi phần nguồn bỏ trống. Màn sẽ vẽ chưa có wireframe ở
+   renderer nào → báo 1 dòng và hỏi: chạy `/wireframe-html` trước (đề xuất cho màn phức tạp) hoặc
+   `/wireframe-ascii` (màn đơn giản), hay vẽ thẳng từ SRS (ghi "không có bảng 5 cột" trong báo cáo —
+   mất bước khớp đặc tả mục 8 Bước 6 và không ghi được link Figma về repo).
 4. **UI Common Rules & Components** (theo `.claude/rules/ui-common-rules-components.md`): đọc bảng
    mục lục `design/ui-common/screen-patterns.md` (CMP) + `conventions.md` (GR, E-common); bảng 5 cột
    ghi `Xem CMP-xx` / `Theo GR-xx` nào thì đọc mục đó. CMP có dòng **Figma** → dùng đúng component +
@@ -289,7 +299,8 @@ Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một
    không tự sửa. Chưa trọn flow (chế độ Nhanh, vài màn lẻ) hoặc thiếu Mục 3.6 → KHÔNG gọi, ghi rõ
    lý do ở báo cáo (`Usability (AI): SKIPPED — …`), không in PASS.
 8. **Khớp đặc tả (agent):** có bảng 5 cột → gọi `@uxui-reviewer` (Task) với bảng
-   `screenId · slug · nodeId` + đường dẫn file ASCII của các màn vừa vẽ/sửa. `BLOCKING` → sửa màn rồi
+   `screenId · slug · nodeId` + đường dẫn file wireframe đã dùng làm nguồn (HTML: file flow + "Screen N"
+   của từng màn; ASCII: file flow + `## Screen: {slug}`) của các màn vừa vẽ/sửa. `BLOCKING` → sửa màn rồi
    gọi lại (tối đa 2 vòng); vẫn còn → ghi vào báo cáo. Không có bảng 5 cột → `Khớp đặc tả: SKIPPED —
    không có bảng 5 cột`, không in PASS. Chạy trước mục 7 nếu cả hai cùng chạy (sửa đặc tả trước, rồi
    mới đi tác vụ).
@@ -304,23 +315,31 @@ Ngắn, theo mẫu:
 2.2-web · chi-tiet-don    P7 · bình thường / lỗi tải
 
 Máy đã kiểm: layout 0 lỗi · a11y 0 lỗi mới (2 ngoại lệ đã biết) · DS compliance 1.00
-Bảng 5 cột: 2.1-web 12/12 · 2.2-web 9/9 row có trên màn | không có bảng 5 cột — vẽ từ SRS
+Bảng 5 cột (nguồn: HTML | ASCII): 2.1-web 12/12 · 2.2-web 9/9 row có trên màn | không có bảng 5 cột — vẽ từ SRS
 Đề xuất đổi so với bảng 5 cột: <liệt kê, hoặc "không">
 Khớp đặc tả (@uxui-reviewer): 0 blocking / 1 warning | SKIPPED — <lý do>
 Usability (AI, chưa có người dùng thật): 3 tác vụ · 1 vượt tiêu chí bước · 0 blocking / 2 warning | SKIPPED — <lý do>
 Máy KHÔNG kiểm: <xem dưới, kèm mức ưu tiên [Cao]/[Trung]/[Thấp]>
 Chưa có chuẩn trong design.md: <liệt kê chỗ vẽ tạm, hoặc "không">
 Chế độ: <Nhanh — không vẽ trạng thái phụ | Đầy đủ>
-Link Figma: đã ghi {n} màn vào {feature}-wireframe-index.md | Chưa ghi: <lý do>
+Link Figma: đã ghi {n} màn vào {feature}-wireframe-html-index.md / {feature}-wireframe-index.md | Chưa ghi: <lý do>
 ```
 
-**Ghi link về repo.** Có `docs/{feature}/ascii-wireframe/{feature}-wireframe-index.md` → điền cột
-`Figma` của từng màn vừa vẽ/sửa (khớp dòng theo `Slug` — `screenId` ra `Slug` qua userflow Mục 2):
-`[{screenId}](https://www.figma.com/design/{fileKey}/?node-id={nodeId, ":" đổi thành "-"})`, cập nhật
-cột `Updated`. `fileKey`: plugin không trả → lấy từ link node trong `design/ui-common/screen-patterns.md`
-(dòng **Figma** của CMP), đối chiếu tên file với `figma_status`; lệch hoặc không có → hỏi user link.
-Chỉ sửa đúng 2 cột đó, qua **L2 diff** (`approval-gate.md`). Chưa có index (chưa chạy
-`/wireframe-ascii`) → không tạo mới, ghi 1 dòng "Chưa ghi link: chưa có wireframe-index" trong báo cáo.
+**Ghi link về repo.** Link màn: `[{screenId}](https://www.figma.com/design/{fileKey}/?node-id={nodeId,
+":" đổi thành "-"})`. `fileKey`: plugin không trả → lấy từ link node trong
+`design/ui-common/screen-patterns.md` (dòng **Figma** của CMP), đối chiếu tên file với `figma_status`;
+lệch hoặc không có → hỏi user link. Ghi vào **mọi wireframe index đang có** của feature (gộp 1 L2 diff):
+
+* `html-wireframe/{feature}-wireframe-html-index.md` — bảng Flows, 1 dòng/flow: điền cột `Figma` của
+  dòng flow chứa màn, dạng danh sách `[3-web](…) · [4-web](…)` theo thứ tự màn; màn đã có link thì thay
+  link cũ, giữ link của màn khác. Index cũ chưa có cột `Figma` → thêm cột trước `Status` trong cùng
+  L2 diff. Cập nhật cột `Updated` của dòng đó.
+* `ascii-wireframe/{feature}-wireframe-index.md` — bảng Screens, 1 dòng/màn: điền cột `Figma` (khớp
+  dòng theo `Slug` — `screenId` ra `Slug` qua userflow Mục 2) + cột `Updated`.
+
+Chỉ sửa đúng cột `Figma` + `Updated`, qua **L2 diff** (`approval-gate.md`). Chưa có index nào (chưa
+chạy `/wireframe-html` hay `/wireframe-ascii`) → không tạo mới, ghi 1 dòng "Chưa ghi link: chưa có
+wireframe index" trong báo cáo.
 
 ## Những gì máy KHÔNG kiểm
 
@@ -351,8 +370,9 @@ biết xử lý cái nào trước — mức chỉ là gợi ý chung, tuỳ ngh
 * **Không bịa nội dung nghiệp vụ**: nhãn trạng thái, tên trường, quy tắc phải lấy từ nguồn. Nguồn
   thiếu thì hỏi.
 * **Không bỏ row hay đổi wording của bảng 5 cột im lặng.** Muốn khác thì vẽ theo bảng + ghi đề xuất.
-* **Chỉ ghi repo ở đúng 1 chỗ**: cột `Figma` + `Updated` của `{feature}-wireframe-index.md`, qua L2.
-  Không sửa SRS, userflow, ASCII hay bảng 5 cột — muốn đổi thì đề xuất, user chạy skill tương ứng.
+* **Chỉ ghi repo ở cột `Figma` + `Updated` của wireframe index** (`{feature}-wireframe-html-index.md`
+  và/hoặc `{feature}-wireframe-index.md`), qua L2. Không sửa SRS, userflow, file wireframe HTML/ASCII
+  hay bảng 5 cột — muốn đổi thì đề xuất, user chạy skill tương ứng.
 * **Không lặng lẽ bỏ màn/trạng thái** user đã yêu cầu. Không vẽ được thì nói màn nào và vì sao.
 * **Thiết bị luôn hỏi user**. `design.md` chỉ đề xuất.
 

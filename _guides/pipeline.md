@@ -43,8 +43,10 @@ flowchart TD
     SRS ==> MOD["5 · Tầng 2<br>UC · flows · state · ERD"]
     MOD ==> UF["6 · /user-flow<br>HARD STOP duyệt"]
     UF ==> WA["/wireframe-ascii<br>bố cục + bảng mô tả 5 cột"]
-    UF --> WH["/wireframe-html"]
+    UF --> WH["/wireframe-html<br>màn phức tạp · bảng mô tả 5 cột"]
     WA ==> FS["7 · /figma-screen ⚠️<br>màn hi-fi trên Figma"]
+    WH ==> FS
+    UF -.->|"vẽ thẳng từ SRS: mất khớp đặc tả + link"| FS
     FS --> FC["/figma-component<br>khi thiếu component"]
     WA --> PH["/prototype-html<br>/figma-demo"]
     FS --> PH
@@ -54,11 +56,11 @@ flowchart TD
     Done --> CR["/cr khi có thay đổi"]
 
     classDef opt stroke-dasharray: 5 5
-    class DIS,FM,BRD,WH,FC,PH,CR opt
+    class DIS,FM,BRD,FC,PH,CR opt
 ```
 
 **Một câu:** tài liệu khách → `/intake` → `/brainstorm` (feature và function hình thành tại đây) →
-`/srs` (spec → mô hình) → `/user-flow` → `/wireframe-ascii` → `/figma-screen` → `/userstory` →
+`/srs` (spec → mô hình) → `/user-flow` → `/wireframe-html` (màn phức tạp) hoặc `/wireframe-ascii` (màn đơn giản) → `/figma-screen` → `/userstory` →
 `/gap` → bàn giao; `/cr` cho mọi thay đổi sau đó.
 
 **Feature không có sẵn từ đầu.** Mỗi lần `/brainstorm` chạy, skill tự đặt slug và tạo
@@ -282,6 +284,7 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | D-07 | 2026-10-04 | Kiểm prototype trên trình duyệt bằng **Playwright**, không dùng `chrome --dump-dom` (treo khi có font CDN/hộp thoại) | Đã áp (`/prototype-html` bước 26, 26b) |
 | D-08 | 2026-10-04 | **Luật đếm bước** chung cho `/user-flow` và `@usability-reviewer`: dropdown/date picker = 2, bấm/nhập/tick/xác nhận = 1, cuộn/chờ = 0 | Đã áp |
 | D-09 | 2026-10-04 | Sửa skill **trong repo trước**, chạy ổn trong dự án rồi mới đưa về kit | Đã áp (`/figma-screen`) |
+| D-10 | 2026-10-05 | `/figma-screen` nhận **wireframe HTML ngang hàng ASCII** làm nguồn bảng 5 cột (ASCII không tả được màn phức tạp). Có cả hai → HTML làm nguồn chính, lệch thì hỏi. Link Figma ghi về cột `Figma` (mới) của `{feature}-wireframe-html-index.md` | Đã áp, chưa chạy thật |
 
 ## 7. Chỗ đứt và vấn đề
 
@@ -310,7 +313,7 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | ~~P-21~~ ✅ | — | (Đã xử lý 2026-10-04: `_scripts/codex-sync.py` sinh bản Codex từ `.claude/` + `CLAUDE.md`, `--check` để phát hiện lệch) Bản Codex chép tay: `AGENTS.md` ghi sai đường dẫn `.Codex/skills`; `.agents/skills/` lệch bản gốc và thiếu 16 mục Figma; `.codex/agents` thiếu `feature-researcher` | Codex chạy trên bộ skill cũ/thiếu |
 | P-22 | — | Không ghi lại skill nào cài từ kit nào, bản nào | Lẫn bản (đã gặp: 2 bản Reqwise khác license) |
 | P-23 | 7.5 | Usability chỉ có đánh giá bằng AI (`@usability-reviewer`), **không có test với người dùng thật** — chấp nhận tạm (2026-10-04) | Mù với thói quen nghề nghiệp, áp lực ca làm thật, cách người dùng hiểu nhầm chữ. Khi có người test → thêm kế hoạch test + tổng hợp kết quả |
-| P-24 | 7 | `/figma-screen` đã sửa trực tiếp trong `.claude/skills/` (bước 6.7, 6.8, đọc bảng 5 cột, ghi link, chia lệnh khi timeout) — chủ ý: sửa repo trước, chạy ổn mới đưa về kit `kits/figma-skills/custom/` (D-09) | Cài lại `/figma-screen` từ kit lúc này sẽ mất các sửa đó. Cùng tình trạng (2026-10-05): `/brainstorm` bước 8b, `/wireframe-ascii` D.5, `/wireframe-html` F.6, `/usecase` 8b, `/userstory` 4b, `senior-ba.md` target `use-case`, `review-format.md` mục review độc lập — chưa có trong kit ai4ba |
+| P-24 | 7 | `/figma-screen` đã sửa trực tiếp trong `.claude/skills/` (bước 6.7, 6.8, đọc bảng 5 cột, ghi link, chia lệnh khi timeout) — chủ ý: sửa repo trước, chạy ổn mới đưa về kit `kits/figma-skills/custom/` (D-09) | Cài lại `/figma-screen` từ kit lúc này sẽ mất các sửa đó. Cùng tình trạng (2026-10-05): `/brainstorm` bước 8b, `/wireframe-ascii` D.5, `/wireframe-html` F.6, `/usecase` 8b, `/userstory` 4b, `senior-ba.md` target `use-case`, `review-format.md` mục review độc lập, `/figma-screen` đọc wireframe HTML + cột `Figma` ở index `/wireframe-html` (D-10) — chưa có trong kit ai4ba |
 | ~~P-25~~ ✅ | 3 | (Đã xử lý 2026-10-04: Section 5 đọc *Copy động* + E-common trước khi viết wording) `/brainstorm` đặt wording lỗi không đối chiếu *Content & Formatting* của design.md và bảng E-common | Test 2026-10-04: E-1/E-2 dùng "Vui lòng" (design.md cấm), E-3 trùng nghĩa E-common-009 nhưng khác câu — lỗi lan xuống SRS và màn |
 | P-26 | 3→7 | 9 sửa lỗi ngày 2026-10-04 mới kiểm cú pháp, chưa chạy lại trên feature thật | Có thể còn lỗi khi chạy thật — đóng khi xong BL-029, BL-030 |
 | P-27 | 2→5 | `/object-map` (ORCA) là skill mới viết trong repo 2026-10-04, kit chưa có; `diagram-gates-selftest.sh` + `scripts/fixtures/` lấy lại từ kit `ai4ba-skills/claude-code` và đã thêm khối object-map. Đã chạy lần đầu cấp dự án (`docs/_shared/object-map.md`, 2026-10-05) và nối vào `/user-flow`, `/srs`, `/wireframe-ascii`, `/wireframe-html`, `/erd`, `kg-build` (node `object` + RELATES_TO), `/preview` | Các skill đọc map chưa chạy trên feature thật; khi port về kit phải mang theo skill + khối selftest + rule/CLAUDE.md + 5 SKILL.md + `kg-build.mjs` + `build-preview.py` đã sửa |
@@ -331,10 +334,10 @@ docs-input ─/intake─► nguồn .md
 /user-flow [flow-reviewer, HARD STOP]  ── repo là nguồn flow DUY NHẤT
      │
      ▼
-/wireframe-ascii 1920 [uxui-reviewer]  ── bảng mô tả 5 cột = hợp đồng BA↔design
+/wireframe-html | /wireframe-ascii 1920 [uxui-reviewer]  ── bảng mô tả 5 cột = hợp đồng BA↔design
      │
      ▼
-/figma-screen 1920 (đọc ASCII + bảng mô tả + CMP/GR, ghi link về wireframe-index)
+/figma-screen 1920 (đọc wireframe HTML/ASCII + bảng mô tả + CMP/GR, ghi link về wireframe index)
      │   [máy: layout · a11y · DS compliance] [uxui-reviewer P-18]
      │   └─ /figma-component khi thiếu component
      ▼

@@ -74,6 +74,7 @@ Per [review-format.md](../rules/review-format.md).
 ## Reference materials
 
 - Target screen block (trong `docs/{feature}/ascii-wireframe/{flow-slug}.md` — screens gộp theo flow)
+- Hoặc wireframe HTML: `docs/{feature}/html-wireframe/{flow-slug}.html` — bố cục khối `wf-screen id="s{n}"`, bảng 5 cột `wf-desc-table` phân đoạn "Screen N: …" (cùng schema với ASCII; khi gọi từ `/figma-screen` có thể là nguồn chính)
 - Sibling screens (other blocks cùng file `{flow-slug}.md`, hoặc other flow files cùng `docs/{feature}/ascii-wireframe/`)
 - @design/ui-common/screen-patterns.md
 - @design/ui-common/conventions.md

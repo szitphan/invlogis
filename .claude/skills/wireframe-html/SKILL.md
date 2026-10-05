@@ -274,9 +274,11 @@ links:
 
 ## Flows
 
-| # | Flow | File | Screens (theo thứ tự) | Status | Updated |
-|---|------|------|-----------------------|--------|---------|
-| 1 | {flow-name} | [{flow-slug}.html]({flow-slug}.html) | {slug-1} → {slug-2} → ... | draft | {date} |
+| # | Flow | File | Screens (theo thứ tự) | Figma | Status | Updated |
+|---|------|------|-----------------------|-------|--------|---------|
+| 1 | {flow-name} | [{flow-slug}.html]({flow-slug}.html) | {slug-1} → {slug-2} → ... | | draft | {date} |
+
+(Cột `Figma` để trống khi sinh — `/figma-screen` điền link từng màn `[3-web](…) · [4-web](…)` sau khi vẽ. Update mode: giữ nguyên giá trị cột này.)
 
 **Status:** `draft` / `reviewed` / `approved`.
 
@@ -409,7 +411,7 @@ Collision: trùng slug → suffix `-2`.
 
 ## Workflow tiếp theo
 
-* **`/figma-screen <màn hoặc tính năng>`** — vẽ màn lên Figma, đọc ASCII + bảng 5 cột nếu có (thiếu thì hỏi chạy `/wireframe-ascii` trước).
+* **`/figma-screen <màn hoặc tính năng>`** — vẽ màn lên Figma, đọc wireframe HTML (hoặc ASCII) + bảng 5 cột làm hợp đồng, ghi link Figma về cột `Figma` của `{feature}-wireframe-html-index.md`.
 * **`/prototype-html <feature>`** — HTML clickable prototype có màu sắc + JS navigation (hi-fi).
 
 ## References
