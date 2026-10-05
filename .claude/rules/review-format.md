@@ -8,6 +8,8 @@ paths:
   - ".claude/skills/brainstorm/**"
   - ".claude/skills/wireframe-ascii/**"
   - ".claude/skills/wireframe-html/**"
+  - ".claude/skills/usecase/**"
+  - ".claude/skills/userstory/**"
 ---
 
 # Review Finding Format‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
@@ -77,7 +79,8 @@ Phase review aggregate findings rồi __tự fix__ (safe áp thẳng, business d
 
 ## Review độc lập khi skill chạy riêng
 
-> Áp cho skill sinh doc ngoài chuỗi `/srs`: hiện là `/brainstorm`, `/wireframe-ascii`, `/wireframe-html`.
+> Áp cho skill sinh doc ngoài chuỗi `/srs`: hiện là `/brainstorm`, `/usecase`, `/userstory`, `/wireframe-ascii`,
+> `/wireframe-html`.
 > Lý do: skill vừa hỏi vừa tự chấm, nên tự kiểm chỉ thấy doc **đủ phần**, không thấy doc **sai nghiệp vụ**
 > (thiếu vai, lấn phạm vi, thiếu nhánh lỗi, lệch đặc tả). Agent đọc nguồn độc lập để đối chiếu.
 

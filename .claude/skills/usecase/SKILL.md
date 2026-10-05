@@ -1,7 +1,7 @@
 ---
 name: usecase
 description: Dùng khi cần viết use case (chuẩn Cockburn fully-dressed) cho 1 feature — mô tả actor, pre-condition, kết quả mong đợi dạng business black-box. Chạy được TRƯỚC SRS (discovery/elicitation — viết use case để khám phá nghiệp vụ) hoặc SAU SRS (downstream — trích FR, điền traceability).
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Agent
 user-invocable: true
 argument-hint: "<feature> [--from-fr <fr-id>] [--all]"
 ---
@@ -25,6 +25,7 @@ Generate use-case docs **theo chuẩn Cockburn (fully-dressed)**: mỗi UC = **1
 
 - **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 - **L1 approval** trước Write.
+- **Review độc lập trước Write** (bước 8b) theo `review-format.md` Mục "Review độc lập khi skill chạy riêng" — finding nghiệp vụ thành câu hỏi cho user, KHÔNG tự quyết; bỏ qua thì in `Review: SKIPPED — {lý do}`.
 - **L2 diff** khi file đã tồn tại — update mode tự động, không cần flag.
 - **Auto-detect upstream + confirm** — scan SRS FR + screens (downstream mode).
 - **2 mode theo nguồn có sẵn (per `feature-bootstrap.md` nhóm A — điểm vào, KHÔNG refuse):**
@@ -134,6 +135,14 @@ Existing UCs: !`ls docs/*/usecases/uc-*.md 2>/dev/null | head -20`
    - **Extensions** — `{step}{letter}` gắn bước, mỗi nhánh: condition + response + continuation (resume bước N / end với guarantee). Downstream: error nhắc mã `E-{feature}-NNN` (wording ở Error Matrix). Discovery: mô tả nhánh lỗi bằng lời (chưa có mã) + đánh OQ "cần định nghĩa error code khi chạy /srs" — KHÔNG bịa mã `E-*`.
    - **Related Requirements** — 1 mục ngắn. Downstream: stable links FR/BR quyết định hành vi UC (để review độc lập). Discovery: ghi "discovered — chưa có FR; sẽ liên kết khi chạy /srs" + liệt kê nguồn thật đã có (brainstorm/URD nếu có).
    - **Evidence-based**: mỗi fact = **sourced** (trích FR/BR) / **derived** (suy luận, ghi rõ) / **open question**. KHÔNG tự đặt số nghiệp vụ (timeout/threshold/retention) — thiếu thì OQ, không "best practice" lấp. Derived KHÔNG giả làm sourced.
+8b) **Review độc lập** (per `review-format.md` Mục "Review độc lập khi skill chạy riêng") — sau khi viết nháp mọi UC đã chọn, TRƯỚC khi Write. Gọi `@senior-ba` qua Agent tool, prompt gồm nháp UC đầy đủ + đường dẫn nguồn để Read: `srs/{feature}-spec.md` (downstream) hoặc brainstorm/URD/SOP đã dùng (discovery), `docs/_shared/definitions.md` (Actor Registry), `srs/{feature}-flows.md` / `-states.md` nếu có.
+   - **Thiếu nhánh rẽ / nhánh lỗi:** xếp loại từng bước Main Success Scenario — nhập liệu / chờ người / gọi hệ thống ngoài / tài nguyên có hạn / nhiều người cùng thao tác / đổi trạng thái — rồi hỏi câu cố định theo loại (dữ liệu sai/thiếu? quá hạn không ai làm? hệ thống ngoài lỗi/chậm? hết tài nguyên? hai người cùng sửa? chuyển trạng thái không hợp lệ?). Bước có rủi ro mà không có Extension = finding. Mỗi Extension phải kết thúc rõ: quay lại bước nào, hoặc kết thúc kèm Minimal Guarantee.
+   - **Vai:** Primary Actor khớp Actor Registry + actor của FR; câu bị động phải nói ai làm.
+   - **Phủ (downstream):** FR P0 không thuộc bước nào của UC nào = thiếu; mã lỗi ở Extensions phải có trong Error Matrix, và lỗi Error Matrix gắn FR của UC phải xuất hiện ở Extensions.
+   - **Đúng chuẩn:** sea-level, Trigger ≠ Precondition, Guarantees kiểm được.
+   - **Discovery:** đối chiếu brainstorm/SOP thay cho FR; số nghiệp vụ không nguồn → OQ, không xếp BLOCKING.
+   - Lỗi cơ học (mã lỗi, link FR, format bước) tự sửa; finding nghiệp vụ → 1 lượt câu hỏi đánh số cho user, tối đa 2 vòng. In `Review (@senior-ba): N chặn · M cảnh báo · K đã tự sửa · J chờ anh quyết`.
+   - Trong `/srs` chain mode (Tầng 2): SKIP (Phase G đã có `@senior-ba`), in `Review: SKIPPED — chạy trong /srs`. User nói "khỏi review" → SKIP.
 9) **File đã tồn tại** → tự động vào update mode: **semantic diff** (L2 per file, merge info mới, preserve manual edit — KHÔNG regenerate toàn file). (Bỏ mâu thuẫn "skip nếu không xác nhận" cũ — update mode luôn show L2 diff, user Y/n mỗi file.)
 10) **Update `{feature}-usecase-index.md`** (metadata + ma trận truy vết — 1 bảng duy nhất) — **core, luôn làm**:
     - Insert/update 1 row bảng `## Use cases` per UC với **đủ cột**: slug, **level**, status, actor, covers FR, screens (link `[[../ascii-wireframe/{flow-slug}#{screen-slug}]]`), **errors** (`E-{feature}-NNN` UC có thể kích hoạt — đối chiếu Extensions với Error Matrix `srs/{feature}-spec.md` Mục 5), **OQ ref** (`spec.md#OQ-N` nếu có, else `—`), priority, updated. **Discovery mode:** cột covers-FR + errors để `—` (chưa có SRS/Error Matrix), OQ-ref ghi `discovery: {câu hỏi}` nếu có OQ else `—`, status `draft`. Sau khi chạy `/srs` + reconcile, gọi lại `/usecase` (update mode) sẽ điền covers-FR/errors + chuyển OQ sang `spec.md#OQ-N`.
@@ -192,6 +201,8 @@ Diagram KHÔNG embed trong UC — thuộc `srs/{feature}-flows.md` / `{feature}-
 - @.claude/rules/ui-common-rules-components.md
 - @../../rules/ba-conventions.md
 - @../../rules/approval-gate.md
+- @../../rules/review-format.md (Mục Review độc lập khi skill chạy riêng — bước 8b)
+- @../../agents/senior-ba.md
 - @../../rules/kg-usage.md
 - @../../rules/naming-conventions.md
 - @../../rules/feature-bootstrap.md

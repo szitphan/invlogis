@@ -182,6 +182,8 @@ thành BLOCKING. Lỗi an toàn (câu chữ, nhất quán nội bộ) skill tự
 | `/brainstorm` bước 8b | `@senior-ba` | thiếu vai (so cột TRÁCH NHIỆM của SOP với Mục 3 + Mục 5, câu bị động phải có ai làm/ai nhận); thiếu nhánh lỗi (xếp loại từng bước Mục 5 × câu hỏi cố định, ô chưa có ở 6.1/6.5/7.3) | Trước L1. Deep/Targeted/Shallow: cả 2 agent · Confirm-only: chỉ `@senior-ba` · Micro: SKIPPED |
 | | `@po-reviewer` | phạm vi: truy vết 2 chiều Mục 4 ↔ mục tiêu Mục 1–2 / chỉ số Mục 10, đối chiếu phạm vi áp dụng của SOP (việc của quy trình khác = lấn) | |
 | `/wireframe-ascii` D.5, `/wireframe-html` F.6 | `@uxui-reviewer` | bảng 5 cột ↔ SRS/UC/userflow: đủ trạng thái rỗng/lỗi/đang tải, wording nguyên văn, mã lỗi tồn tại, CMP/GR + override có lý do, số liệu có nguồn | Khi chạy riêng, mỗi flow 1 lần trước khi ghi; trong `/srs` SKIPPED (Phase G đã soát) |
+| `/usecase` bước 8b | `@senior-ba` | thiếu Extension (xếp loại bước × câu hỏi cố định), Extension không kết thúc rõ, actor lệch Actor Registry, FR P0 không thuộc UC nào, mã lỗi lệch Error Matrix, sea-level/Trigger/Guarantees | Khi chạy riêng, trước Write; trong `/srs` SKIPPED |
+| `/userstory` bước 4b | `@qa-reviewer` | story test được không, FR P0 / mã lỗi chưa có story, story quá to hoặc là việc kỹ thuật trá hình, nhãn fact có nguồn thật | Khi chạy riêng, trước L1; trong `/srs` SKIPPED |
 | `/srs` Phase G | `@senior-ba` | đủ, edge case, mơ hồ, actor khai đủ | Luôn |
 | | `@qa-reviewer` | FR/NFR test được không (có điều kiện đạt), Error Matrix phủ mọi FR P0, Success Criteria đo được | Luôn |
 | | `@tech-reviewer` | NFR khả thi, giải pháp kỹ thuật lọt vào SRS | Luôn |
@@ -233,7 +235,8 @@ Cơ chế chung khi thêm review cho skill chạy riêng: `.claude/rules/review-
 | # | Bước | Hiện có | Vấn đề |
 |---|---|---|---|
 | ~~R-1~~ ✅ | `/brainstorm` | (Đã xử lý 2026-10-05: bước 8b `@senior-ba` + `@po-reviewer`) chỉ tự kiểm | P-15 |
-| R-2 | `/usecase` | không có (trừ khi chạy qua `/srs` Phase G) | P-16 |
+| ~~R-2~~ ✅ | `/usecase` | (Đã xử lý 2026-10-05: bước 8b `@senior-ba`) không có (trừ khi chạy qua `/srs` Phase G) | P-16 |
+| ~~R-6~~ ✅ | `/userstory` chạy riêng | (Đã xử lý 2026-10-05: bước 4b `@qa-reviewer`) chỉ tự kiểm DoR + INVEST | — |
 | ~~R-3~~ ✅ | `/wireframe-ascii`, `/wireframe-html` chạy riêng | (Đã xử lý 2026-10-05: Phase D.5 / F.6 `@uxui-reviewer`) chỉ tự kiểm; `@uxui-reviewer` chỉ chạy khi đi qua `/srs` Tầng 3 | P-17 |
 | R-4 | `/figma-component` | máy audit + tự kiểm (`/figma-screen` đã có `@uxui-reviewer` từ 2026-10-04) | P-18 |
 | R-5 | `/state`, `/erd` | chỉ linter | P-19 |
@@ -299,7 +302,7 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | P-13 | 0→7 | Delta Super App là mobile. CMP/GR mobile đã có (BL-001 xong 2026-10-04), còn: design.md chỉ có chuẩn desktop (spec M1–M4 chưa node Figma), Bottom Navigation của app khác spec M1 (hamburger) và Astryx chưa có component | Màn mobile vẫn ghi "chưa có chuẩn" phần bố cục |
 | P-14 | — | CLAUDE.md / AGENTS.md liệt kê skill chưa cài, chưa có skill Figma mới | Tài liệu điều hướng sai |
 | ~~P-15~~ ✅ | 3 | (Đã xử lý 2026-10-05: R-1, chưa chạy thật — thử trên BL-005) `/brainstorm` chỉ có tự kiểm, không có agent review (R-1) | Là gốc của mọi thứ phía sau — thiếu actor, sai phạm vi, bỏ sót edge case ở đây lan xuống SRS, UC, màn hình |
-| P-16 | 5 | `/usecase` không có agent review khi chạy riêng (R-2) | UC thiếu nhánh rẽ / nhánh lỗi không ai bắt; UC lại là nguồn của userflow và story |
+| ~~P-16~~ ✅ | 5 | (Đã xử lý 2026-10-05: R-2, chưa chạy thật) `/usecase` không có agent review khi chạy riêng (R-2) | UC thiếu nhánh rẽ / nhánh lỗi không ai bắt; UC lại là nguồn của userflow và story |
 | ~~P-17~~ ✅ | 6 | (Đã xử lý 2026-10-05: R-3, chưa chạy thật) `/wireframe-ascii`, `/wireframe-html` chạy riêng không có agent review; `@uxui-reviewer` chỉ chạy khi đi qua `/srs` Tầng 3 (R-3) | Bảng mô tả 5 cột (hợp đồng BA↔design) thiếu trạng thái, sai wording, lệch CMP/GR mà không ai soát |
 | P-18 | 7 | `/figma-component` tự ghi "[Cao] màn có khớp nghiệp vụ không — máy không kiểm" nhưng không có agent kiểm (R-4); `/figma-screen` đã có `@uxui-reviewer` (2026-10-04) | Màn hi-fi sạch audit kỹ thuật nhưng có thể sai nghiệp vụ (sai nhãn, thiếu trường, sai số liệu so với spec) |
 | P-19 | 5 | `/state`, `/erd` chỉ có linter (R-5) | Trạng thái / quan hệ sai nghiệp vụ vẫn qua vì linter chỉ kiểm ngữ pháp |
@@ -307,7 +310,7 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | ~~P-21~~ ✅ | — | (Đã xử lý 2026-10-04: `_scripts/codex-sync.py` sinh bản Codex từ `.claude/` + `CLAUDE.md`, `--check` để phát hiện lệch) Bản Codex chép tay: `AGENTS.md` ghi sai đường dẫn `.Codex/skills`; `.agents/skills/` lệch bản gốc và thiếu 16 mục Figma; `.codex/agents` thiếu `feature-researcher` | Codex chạy trên bộ skill cũ/thiếu |
 | P-22 | — | Không ghi lại skill nào cài từ kit nào, bản nào | Lẫn bản (đã gặp: 2 bản Reqwise khác license) |
 | P-23 | 7.5 | Usability chỉ có đánh giá bằng AI (`@usability-reviewer`), **không có test với người dùng thật** — chấp nhận tạm (2026-10-04) | Mù với thói quen nghề nghiệp, áp lực ca làm thật, cách người dùng hiểu nhầm chữ. Khi có người test → thêm kế hoạch test + tổng hợp kết quả |
-| P-24 | 7 | `/figma-screen` đã sửa trực tiếp trong `.claude/skills/` (bước 6.7, 6.8, đọc bảng 5 cột, ghi link, chia lệnh khi timeout) — chủ ý: sửa repo trước, chạy ổn mới đưa về kit `kits/figma-skills/custom/` (D-09) | Cài lại `/figma-screen` từ kit lúc này sẽ mất các sửa đó. Cùng tình trạng (2026-10-05): `/brainstorm` bước 8b, `/wireframe-ascii` D.5, `/wireframe-html` F.6, `review-format.md` mục review độc lập — chưa có trong kit ai4ba |
+| P-24 | 7 | `/figma-screen` đã sửa trực tiếp trong `.claude/skills/` (bước 6.7, 6.8, đọc bảng 5 cột, ghi link, chia lệnh khi timeout) — chủ ý: sửa repo trước, chạy ổn mới đưa về kit `kits/figma-skills/custom/` (D-09) | Cài lại `/figma-screen` từ kit lúc này sẽ mất các sửa đó. Cùng tình trạng (2026-10-05): `/brainstorm` bước 8b, `/wireframe-ascii` D.5, `/wireframe-html` F.6, `/usecase` 8b, `/userstory` 4b, `senior-ba.md` target `use-case`, `review-format.md` mục review độc lập — chưa có trong kit ai4ba |
 | ~~P-25~~ ✅ | 3 | (Đã xử lý 2026-10-04: Section 5 đọc *Copy động* + E-common trước khi viết wording) `/brainstorm` đặt wording lỗi không đối chiếu *Content & Formatting* của design.md và bảng E-common | Test 2026-10-04: E-1/E-2 dùng "Vui lòng" (design.md cấm), E-3 trùng nghĩa E-common-009 nhưng khác câu — lỗi lan xuống SRS và màn |
 | P-26 | 3→7 | 9 sửa lỗi ngày 2026-10-04 mới kiểm cú pháp, chưa chạy lại trên feature thật | Có thể còn lỗi khi chạy thật — đóng khi xong BL-029, BL-030 |
 | P-27 | 2→5 | `/object-map` (ORCA) là skill mới viết trong repo 2026-10-04, kit chưa có; `diagram-gates-selftest.sh` + `scripts/fixtures/` lấy lại từ kit `ai4ba-skills/claude-code` và đã thêm khối object-map. Đã chạy lần đầu cấp dự án (`docs/_shared/object-map.md`, 2026-10-05) và nối vào `/user-flow`, `/srs`, `/wireframe-ascii`, `/wireframe-html`, `/erd`, `kg-build` (node `object` + RELATES_TO), `/preview` | Các skill đọc map chưa chạy trên feature thật; khi port về kit phải mang theo skill + khối selftest + rule/CLAUDE.md + 5 SKILL.md + `kg-build.mjs` + `build-preview.py` đã sửa |
@@ -322,7 +325,7 @@ docs-input ─/intake─► nguồn .md
 /brainstorm [senior-ba · po] ─► (⚪ /brd) ─► /srs Tầng 1 [senior-ba · qa · tech]
      │                       └─► Feature Map cập nhật ngược
      ▼
-/srs Tầng 2: UC [+review P-16] · state · flows · ERD [linter + review P-19]
+/srs Tầng 2: UC [senior-ba] · state · flows · ERD [linter + review P-19]
      │
      ▼
 /user-flow [flow-reviewer, HARD STOP]  ── repo là nguồn flow DUY NHẤT
@@ -347,7 +350,7 @@ Việc cần làm, theo thứ tự:
 3. ~~Sửa `/figma-screen`~~ — xong trong repo 2026-10-04 (D-09); đưa về kit sau khi chạy thật ổn (P-24).
 4. Thêm review độc lập cho `/brainstorm`, `/usecase`, wireframe chạy riêng, `/state` + `/erd`
    (P-15 → P-17, P-19). Đợt 1 xong 2026-10-05: rule chung trong `review-format.md` + `/brainstorm` (P-15)
-   + wireframe (P-17); còn thử thật trên BL-005. Đợt 2: `/usecase` (P-16), `/userstory` `@qa-reviewer`.
+   + wireframe (P-17); còn thử thật trên BL-005. Đợt 2 xong 2026-10-05: `/usecase` (P-16), `/userstory` `@qa-reviewer` (R-6).
    Đợt 3: `/state` + `/erd` (P-19), `/figma-component` (P-18).
 5. ~~Bỏ `/figma` cũ (P-10)~~ — xong 2026-10-04.
 6. ⏸ Tạm hoãn (2026-10-04): xử lý từng skill khi dùng tới mà gặp lỗi. Cài skill còn thiếu từ kit ai4ba (`/prd`, `/urd`, `/prd-epic`, `/ac`, `/reverse-doc`) hoặc gỡ

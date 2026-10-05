@@ -1,7 +1,7 @@
 ---
 name: userstory
 description: Dùng khi cần sinh user story sẵn sàng đưa vào backlog từ FR/use case/screen của SRS. `/userstory <feature>` hoặc `/userstory` (chọn feature).
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Agent
 user-invocable: true
 argument-hint: "[<feature>]"
 ---
@@ -31,6 +31,7 @@ Per-story `status`, `priority`, `jira key` sống ở **bảng index**, KHÔNG �
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 * **L1 approval** trước batch Write.
+* **Review độc lập trước L1** (bước 4b) theo `review-format.md` Mục "Review độc lập khi skill chạy riêng" — finding nghiệp vụ thành câu hỏi cho user, KHÔNG tự quyết; bỏ qua thì in `Review: SKIPPED — {lý do}`.
 * **L2 diff khi file đã tồn tại** — update mode tự động (cả `{feature}-story-index.md` + us files).
 * **Feature/SRS chưa tồn tại → REFUSE + route `/srs`** (per `feature-bootstrap.md` nhóm B) — không có FR thật thì không split được story, tự bịa sẽ sai; **SRS tồn tại nhưng chưa approved → soft gate warn + proceed**.
 * **Story ID `US-{NNN}`** (path scope feature, ID không cần prefix).
@@ -96,6 +97,13 @@ Features có US: !`for d in docs/*/userstories/; do [ -d "$d" ] && dirname "$d" 
    * **DoR nhẹ**: actor + outcome rõ · business value/lý do ưu tiên rõ · scope + ngoài-scope rõ · dependency/assumption/risk nhận diện.
    * **FR mơ hồ / thiếu value / dependency chưa rõ / không estimate được → KHÔNG cứ thế split.** Sinh story nháp + đánh dấu **Open Question** (trả về refinement), gắn note nguồn "cần làm rõ trước dev". Đừng bịa actor/threshold/permission để lấp khoảng trống — đánh OQ.
    * Phân biệt 3 loại nội dung khi viết: **fact từ spec / suy luận hợp lý / open question** (per Pitfalls guardrail).
+4b. **Review độc lập** (per `review-format.md` Mục "Review độc lập khi skill chạy riêng") — sau self-check bước 4, trước preview. Gọi `@qa-reviewer` qua Agent tool, prompt gồm story nháp đầy đủ + đường dẫn nguồn để Read: `srs/{feature}-spec.md`, `usecases/uc-*.md`, `srs/{feature}-userflow.md` nếu có, kèm output `kg coverage {feature}` (danh sách FR/E chưa phủ — chỉ để chọn, agent vẫn đọc prose).
+   * **Test được không:** mỗi story có kết quả đạt/không đạt quan sát được; từ mơ hồ ("nhanh", "dễ dùng", "phù hợp") = finding.
+   * **Phủ:** FR P0 và mã lỗi `E-{feature}-NNN` / `E-common-NNN` chưa có story nào nhận = thiếu.
+   * **Cỡ story:** 1 story ôm nhiều outcome → tách; story chỉ là việc kỹ thuật trá hình → gộp vào outcome hoặc đánh enabler.
+   * **Nguồn:** chỗ ghi "fact" phải trích đúng FR/BR; suy luận không được giả làm fact.
+   * Lỗi cơ học (ID FR sai, nhãn nguồn sai) tự sửa; finding nghiệp vụ (tách/gộp story, thêm story phủ FR) → 1 lượt câu hỏi đánh số cho user, tối đa 2 vòng. Dòng `Review (@qa-reviewer): …` đưa vào L1 bước 7.
+   * Trong `/srs` chain mode (Tầng 4): SKIP (Phase G đã có `@qa-reviewer`), in `Review: SKIPPED — chạy trong /srs`. User nói "khỏi review" → SKIP.
 5. **Numbering** — scan bảng `{feature}-story-index.md` + glob `docs/{feature}/userstories/us-*.md`, find max NNN, continue.
 6. **Preview table** (thêm cột Nguồn để lộ fact vs suy-luận):
    ```
@@ -133,6 +141,8 @@ Status + priority + jira key sống ở **index**, KHÔNG ở file us. Hook tự
 
 * @../../rules/ba-conventions.md
 * @../../rules/approval-gate.md
+* @../../rules/review-format.md (Mục Review độc lập khi skill chạy riêng — bước 4b)
+* @../../agents/qa-reviewer.md
 * @../../rules/kg-usage.md
 * @../../rules/naming-conventions.md
 * @../../rules/feature-bootstrap.md
