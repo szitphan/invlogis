@@ -1,7 +1,7 @@
 ---
 type: shared-definitions
 status: draft
-updated: 2026-10-01
+updated: 2026-10-05
 links:
   - docs-input/srs-cu/lg-srs-export.md
   - docs/_shared/system-overview.md
@@ -85,7 +85,7 @@ Khách hàng đã đăng ký trong danh mục (pháp nhân hoặc cá nhân, có
 **Aliases:** —
 
 ### Phương tiện
-Xe của Delta (đầu kéo, xe tải, sơ mi-rơ mooc…) hoặc xe của khách hàng mang tới sửa. Hiển thị dạng "[Mã PT] - [Tên PT]".
+Xe của Delta (đầu kéo, xe tải, sơ mi-rơ mooc…). Hiển thị dạng "[Mã PT] - [Tên PT]". Xe khách hàng mang tới sửa là đối tượng riêng, xem **Xe của khách hàng**.
 **Appears in:** Quản lý phương tiện, Sửa chữa, Báo cáo sự cố, Cấp dầu
 **Aliases:** PT, xe (viết "PT" chỉ dùng cho phương tiện, không dùng cho phụ tùng)
 
@@ -153,6 +153,41 @@ Yêu cầu tạo bản ghi danh mục mới (DVKT, PTVT, CCDC, lốp, ắc quy, 
 Người tạo rút lại yêu cầu đang chờ phê duyệt. Nếu thu hồi và phê duyệt xảy ra cùng lúc, hệ thống ưu tiên thu hồi.
 **Appears in:** mọi luồng có phê duyệt
 **Aliases:** huỷ đề xuất, huỷ yêu cầu (tránh dùng) — mọi luồng gọi thống nhất là "Thu hồi"
+
+### Xe của khách hàng
+Xe của khách hàng DK05 mang tới xưởng sửa. Quản lý như 1 danh mục: tạo bằng đề xuất cấp mới, có mã sau khi được duyệt. Tách khỏi **Phương tiện** (xe của Delta).
+**Appears in:** Danh mục, Báo giá, Sửa chữa
+**Aliases:** xe KH, xe khách
+
+### Nhân viên
+Người của Delta được quản lý trong hệ thống (lái xe, thợ kỹ thuật, nhân viên văn phòng). Tạo bằng đề xuất cấp mới nhân viên; dùng cho phân công lệnh sửa chữa, bàn giao phương tiện, xin nghỉ.
+**Appears in:** Nhân sự, Sửa chữa, Quản lý phương tiện
+**Aliases:** NV
+
+### Tài khoản
+Tài khoản đăng nhập hệ thống. Gắn nhóm quyền (quyết định chức năng được dùng) và danh sách chi nhánh được truy cập; chỉ tài khoản đang hoạt động mới đăng nhập được.
+**Appears in:** Administration, mọi module (đăng nhập, phân quyền)
+**Aliases:** TK, tài khoản người dùng
+
+### Phiếu nhập kho
+Chứng từ nhập hàng vào kho xưởng: hàng mua về, hàng luân chuyển giữa kho, phụ tùng hỏng đã phục hồi. Tạo dạng yêu cầu nhập kho, phải được phê duyệt mới ghi nhận tồn kho.
+**Appears in:** Kho, Mua hàng, Sửa chữa, Bồi thường
+**Aliases:** yêu cầu nhập kho, phiếu nhập
+
+### Phiếu xuất kho
+Chứng từ xuất hàng khỏi kho xưởng (vd xuất phụ tùng cho lệnh sửa chữa, xuất CCDC), phê duyệt 2 lần.
+**Appears in:** Kho, Sửa chữa
+**Aliases:** yêu cầu xuất kho, phiếu xuất
+
+### Bàn giao phương tiện
+Yêu cầu giao 1 phương tiện cho nhân viên (thường là lái xe) hoặc thu hồi phương tiện về. Bàn giao và thu hồi là 2 loại của cùng 1 chứng từ, đều phải phê duyệt và ký biên bản.
+**Appears in:** Quản lý phương tiện, App Lái xe
+**Aliases:** bàn giao PT, thu hồi phương tiện (loại thu hồi)
+
+### Đơn mua dầu
+Đơn đặt mua dầu (PO) sinh từ kế hoạch mua dầu đã duyệt. Khi dầu về, tạo phiếu nhập dầu theo đơn (trường hợp nhập từ nhà cung cấp).
+**Appears in:** Cây dầu
+**Aliases:** PO dầu
 
 ## Actor Registry
 

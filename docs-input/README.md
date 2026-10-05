@@ -29,5 +29,5 @@
 | SRC-19 | `du-lieu-mau/eport-cargo-tracking-vi-du.md` | Dữ liệu mẫu | ⬜ chưa feed | — | BL-023 | 2026-10-01 | Chuyển từ xlsx (đã xoá bản gốc, còn trong git) |
 | SRC-20 | `ui-common/web/web-common-rules.md` | UI common | ➖ | `design/ui-common/conventions.md`<br>`design/ui-common/screen-patterns.md` | — | 2026-10-01 | Đã chuyển đủ: SC-01…11 → CMP-01…11, mục 2.1…2.20 → GR-01…20. 40 ảnh (21 đang dùng) |
 | SRC-21 | `ui-common/app/app-common-rules.md` | UI common | ➖ | `design/ui-common/conventions.md`<br>`design/ui-common/screen-patterns.md` | — | 2026-10-01 | Chưa chuyển (MSC-01…11 + 18 quy tắc). 21 ảnh (18 đang dùng) |
-| SRC-22 | `srs-cu/lg-srs-export.md` | SRS cũ | ➖ | `docs/_shared/definitions.md`<br>`docs/_shared/operating-environment.md`<br>`docs/_shared/project-profile.md`<br>`docs/_shared/system-overview.md` | BL-002, BL-003, BL-004 | 2026-10-01 | SRS cũ LG, 2.610 trang. Mới trích một phần vào `_shared`; chưa reverse |
+| SRC-22 | `srs-cu/lg-srs-export.md` | SRS cũ | ➖ | `docs/_shared/definitions.md`<br>`docs/_shared/object-map.md`<br>`docs/_shared/operating-environment.md`<br>`docs/_shared/project-profile.md`<br>`docs/_shared/system-overview.md` | BL-002, BL-003, BL-004 | 2026-10-01 | SRS cũ LG, 2.610 trang. Mới trích một phần vào `_shared`; chưa reverse |
 
