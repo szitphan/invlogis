@@ -40,17 +40,18 @@ Việc đang mở và việc kế tiếp: `_workspace/backlog.md`. Lịch sử t
 
 ## Cách làm việc
 
-Tài liệu được sinh và cập nhật qua các lệnh `/…` trong Claude Code. Mọi lệnh đều trình kế hoạch và diff để duyệt trước khi ghi file. Thứ tự thường dùng:
+Tài liệu được sinh và cập nhật qua các lệnh `/…` trong Claude Code. Mọi lệnh đều trình kế hoạch và diff để duyệt trước khi ghi file. Một số lệnh (`/brainstorm`, `/usecase`, `/userstory`, các lệnh wireframe) còn tự gọi agent review độc lập trước khi trình: lỗi hình thức được sửa luôn, chỗ cần quyết định nghiệp vụ được hỏi lại thành câu hỏi đánh số. Thứ tự thường dùng:
 
 ```
 /intake          tài liệu khách gửi → docs-input/
-/object-map      bản đồ đối tượng nghiệp vụ
+/object-map      bản đồ đối tượng nghiệp vụ — đầu vào cho use case, state, màn hình, kiểm thiếu luồng
 /discover        điều tra 1 ý tưởng còn phân vân
 /brainstorm      đào sâu 1 feature
-/srs             đặc tả yêu cầu, rồi use case, ERD, flow
+/srs             đặc tả yêu cầu, rồi use case, ERD, state, flow
 /user-flow       luồng màn hình, trước khi vẽ wireframe
 /wireframe-ascii, /wireframe-html, /figma-screen
 /userstory, /ac  backlog giao dev
+/gap             kiểm feature còn thiếu luồng nghiệp vụ nào
 ```
 
 Danh sách lệnh đầy đủ và quy ước (đặt tên, frontmatter, trạng thái tài liệu) ở `CLAUDE.md`. Quy trình chi tiết ở `_guides/pipeline.md`.
