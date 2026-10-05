@@ -18,8 +18,7 @@ feature kế thừa. Nguồn: tài liệu SRS LG (`docs-input/srs-cu/lg-srs-expo
 | Kênh | Hỗ trợ | Ghi chú |
 |---|---|---|
 | Website | Trình duyệt **Chrome**; hệ điều hành Windows, macOS, Linux | Kênh chính. Màn mẫu thiết kế cho desktop 1920×1080 (design.md › Breakpoints) |
-| Ứng dụng di động | **iOS** và **Android** | Dùng cho một số nghiệp vụ theo quyền nền tảng Mobile (vd Đơn mua HHDV, Lịch nhắc) |
-| Portal đối tác | Website | Riêng cho nhân viên đối tác cây dầu — nghiệp vụ Cấp dầu |
+| Ứng dụng di động | **iOS** và **Android** | Delta Super App — dùng chung cho nhân viên Delta và nhân viên đối tác cây dầu, theo quyền nền tảng Mobile (vd Đơn mua HHDV, Lịch nhắc, Cấp dầu) |
 
 - Tích hợp với phần mềm ERP khác: **Delta ERP**.
 
@@ -27,7 +26,7 @@ feature kế thừa. Nguồn: tài liệu SRS LG (`docs-input/srs-cu/lg-srs-expo
 
 - Primary: nhân viên nội bộ Delta — quyền tuỳ theo phân quyền (xem [[docs/_shared/system-overview.md|System Overview]] › Actors).
 - Admin: full quyền.
-- Secondary: nhân viên đối tác cây dầu (Portal).
+- Secondary: nhân viên đối tác cây dầu (Delta Super App).
 
 ## Regions & Languages
 

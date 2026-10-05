@@ -13,9 +13,9 @@ feature nằm ở `docs/{feature}/`.
 
 ## Actors
 
-- **Nhân viên nội bộ Delta** — thấy và làm được gì **tuỳ theo phân quyền** (nhóm quyền, quyền chức năng theo nền tảng, phạm vi chi nhánh / cơ sở). Dùng Website, và Mobile cho một số nghiệp vụ. Trong luồng phê duyệt đóng vai *người tạo* (tạo, thu hồi, xoá yêu cầu của mình) hoặc *người có quyền phê duyệt* (phê duyệt / từ chối).
+- **Nhân viên nội bộ Delta** — thấy và làm được gì **tuỳ theo phân quyền** (nhóm quyền, quyền chức năng theo nền tảng, phạm vi chi nhánh / cơ sở). Dùng Website, và Delta Super App (mobile) cho một số nghiệp vụ. Trong luồng phê duyệt đóng vai *người tạo* (tạo, thu hồi, xoá yêu cầu của mình) hoặc *người có quyền phê duyệt* (phê duyệt / từ chối).
 - **Admin** — **full quyền** trên toàn hệ thống, gồm quản lý tài khoản, nhóm quyền và phân quyền tài khoản (Module Administration).
-- **Nhân viên đối tác cây dầu** — dùng Portal riêng cho nghiệp vụ Cấp dầu: xem phiếu cấp dầu, ghi nhận bơm dầu, xuất hoá đơn, chốt phiếu.
+- **Nhân viên đối tác cây dầu** — dùng Delta Super App (Partner Portal cũ đã gộp vào app, hiện chỉ có mobile) cho nghiệp vụ Cấp dầu: xem phiếu cấp dầu, ghi nhận bơm dầu, xuất hoá đơn, chốt phiếu.
 
 ## Tổ chức dữ liệu
 
@@ -35,13 +35,13 @@ feature nằm ở `docs/{feature}/`.
 
 | Module                     | Nhóm năng lực                                                                                                                                                                                                                                                 | Nền tảng                             |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| Dùng chung                | Tài khoản cá nhân (đăng nhập, quên / đổi mật khẩu), màn Home chọn phạm vi, lưu nháp, thanh tiến trình nghiệp vụ, tạo nghiệp vụ tiếp theo, export / import, thao tác hàng loạt, thông báo, lịch sử hoạt động, đổi ngôn ngữ | Website, Mobile                        |
-| 1 — Xưởng               | Danh mục của xưởng · Quản lý tài sản (tồn kho, tồn xưởng, rác thải) · Nghiệp vụ xưởng (mua HHDV, báo giá, nhập / xuất kho, sửa chữa, báo cáo sự cố) · Thanh toán · Dashboard · Báo cáo                                       | Website, Mobile (một phần)           |
-| 2 — Cây dầu             | Nghiệp vụ cây dầu (mua, nhập, cấp dầu) · Thanh toán trả sau · Danh mục bổ sung (cây dầu mua ngoài) · Dashboard                                                                                                                                  | Website, Portal đối tác (cấp dầu) |
+| Dùng chung                | Tài khoản cá nhân (đăng nhập, quên / đổi mật khẩu), màn Home chọn phạm vi, lưu nháp, thanh tiến trình nghiệp vụ, tạo nghiệp vụ tiếp theo, export / import, thao tác hàng loạt, thông báo, lịch sử hoạt động, đổi ngôn ngữ | Website, Delta Super App               |
+| 1 — Xưởng               | Danh mục của xưởng · Quản lý tài sản (tồn kho, tồn xưởng, rác thải) · Nghiệp vụ xưởng (mua HHDV, báo giá, nhập / xuất kho, sửa chữa, báo cáo sự cố) · Thanh toán · Dashboard · Báo cáo                                       | Website, Delta Super App (một phần)  |
+| 2 — Cây dầu             | Nghiệp vụ cây dầu (mua, nhập, cấp dầu) · Thanh toán trả sau · Danh mục bổ sung (cây dầu mua ngoài) · Dashboard                                                                                                                                  | Website, Delta Super App (đối tác: cấp dầu) |
 | 3 — Administration        | Quản lý tài khoản, nhóm quyền, phân quyền tài khoản                                                                                                                                                                                                    | Website                                |
 | 4 — Nhân sự             | Quản trị nhân viên (cấp mới, xin nghỉ)                                                                                                                                                                                                                    | Website                                |
 | 5 — Danh mục             | Danh mục dùng chung cấp chi nhánh: phương tiện (bàn giao, thu hồi, định mức nhiên liệu), xưởng, cây dầu nội bộ                                                                                                                               | Website                                |
-| 6 — Quản trị hệ thống | Lịch nhắc · Trợ giúp (FAQs, hướng dẫn sử dụng)                                                                                                                                                                                                         | Website, Mobile (lịch nhắc)          |
+| 6 — Quản trị hệ thống | Lịch nhắc · Trợ giúp (FAQs, hướng dẫn sử dụng)                                                                                                                                                                                                         | Website, Delta Super App (lịch nhắc) |
 
 ## Feature Map
 
@@ -80,8 +80,7 @@ graph TB
   end
   subgraph Kenh[Kênh truy cập]
     Web[Website]
-    Mob[Mobile]
-    Portal[Portal đối tác]
+    Mob[Delta Super App - mobile]
   end
   subgraph HeThong["Hệ thống - theo Chi nhánh, Cơ sở"]
     Chung["Dùng chung<br/>tài khoản, Home, thông báo,<br/>lịch sử, export, import"]
@@ -99,10 +98,9 @@ graph TB
   NV --> Web
   NV --> Mob
   AD --> Web
-  DT --> Portal
+  DT --> Mob
   Web --> Chung
   Mob --> Chung
-  Portal --> M2
   Chung --> M1
   Chung --> M2
   Chung --> M3

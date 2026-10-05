@@ -9,7 +9,7 @@ Hệ thống mới (Delta 3.0 / Delta MIS giai đoạn 1) gồm hai mảng:
 - **Điều phối vận tải**: nhận đơn, điều xe, theo dõi chuyến, giao nhận container, chứng từ hiện trường. Thiết kế đích (to-be) lấy từ các SOP Delta gửi.
 - **Vận hành nội bộ** (kế thừa hệ thống cũ, SRS LG): xưởng sửa chữa, kho phụ tùng, mua hàng hoá dịch vụ, thanh toán và công nợ, quản lý phương tiện, nghiệp vụ cây dầu.
 
-Người dùng gồm nhân viên nội bộ Delta (Website), lái xe và nhân viên hiện trường (App Lái xe, một super app dùng chung cho nhiều bên), nhân viên đối tác cây dầu (Portal). Quyền truy cập cấp theo chức năng, không theo vai trò cố định. Dữ liệu tổ chức theo Công ty → Chi nhánh → Cơ sở.
+Người dùng gồm nhân viên nội bộ Delta (Website), lái xe, nhân viên hiện trường và nhân viên đối tác cây dầu (Delta Super App — app mobile dùng chung cho nhiều bên; Partner Portal cũ đã gộp vào). Quyền truy cập cấp theo chức năng, không theo vai trò cố định. Dữ liệu tổ chức theo Công ty → Chi nhánh → Cơ sở.
 
 ## Đang ở đâu
 

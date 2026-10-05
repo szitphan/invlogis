@@ -2,6 +2,8 @@
 type: research
 keyword: "đọc chứng từ hiện trường bằng ảnh chụp"
 status: in-review
+status_changed: 2026-10-05
+status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-02
 links:
   - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md
@@ -76,7 +78,7 @@ SOP đã chọn cách "AI đọc, người xác nhận, thống kê lần phải
 **Lưu ý:**
 * **Thông tin cần lưu:** ảnh gốc đủ nét; giá trị máy đọc và giá trị người xác nhận của từng ô; ai xác nhận, lúc nào; ô nào bị sửa (để thống kê); với hoá đơn: khớp hoá đơn điện tử với khoản lái xe đã trả.
 * **Rủi ro trải nghiệm:** nếu phải sửa nhiều, bước xác nhận còn chậm hơn nhập tay; ảnh bị nén khi tải lên làm khó đọc.
-* **Phụ thuộc:** App Lái xe (chụp đủ nét, giữ độ phân giải); Lệnh vận tải; MISA và tài khoản cổng thuế của Delta; cảnh báo mốc (nơi dùng giờ EIR đã xác nhận).
+* **Phụ thuộc:** Delta Super App (chụp đủ nét, giữ độ phân giải); Lệnh vận tải; MISA và tài khoản cổng thuế của Delta; cảnh báo mốc (nơi dùng giờ EIR đã xác nhận).
 * **Chi phí vận hành:** theo số ảnh mỗi tháng — chưa tính được vì chưa có khối lượng.
 
 **Đừng mắc mấy lỗi này:**
@@ -103,7 +105,7 @@ Nhu cầu "chụp là xong" là có thật trên quy trình và đã được SO
 
 **Các phần đề xuất làm (mỗi phần đủ gọn để brainstorm riêng):**
 
-1) **Đọc Phiếu EIR trên App Lái xe** — chụp đủ nét; đọc giờ, số container, số chì; tự kiểm số container; người xác nhận có ảnh bên cạnh; thống kê lần phải sửa; giờ đã xác nhận đưa vào cảnh báo mốc.
+1) **Đọc Phiếu EIR trên Delta Super App** — chụp đủ nét; đọc giờ, số container, số chì; tự kiểm số container; người xác nhận có ảnh bên cạnh; thống kê lần phải sửa; giờ đã xác nhận đưa vào cảnh báo mốc.
 2) **Hoá đơn và phiếu thu lái xe** — hoá đơn điện tử lấy qua MISA và tự khớp với khoản lái xe đã trả; phiếu thu giấy chụp rồi nhập tay có hỗ trợ.
 3) **Đọc phiếu cân** — để bản sau, xem lại khi có kết quả thử EIR.
 

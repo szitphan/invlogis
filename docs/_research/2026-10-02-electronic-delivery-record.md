@@ -18,7 +18,7 @@ links:
 
 ## Tóm tắt
 
-Hiện lái xe lập biên bản giấy 2 bản, ký với khách rồi chụp ảnh gửi nhóm Zalo; SOP điều phối mới chuyển sang chụp ảnh và tải lên Lệnh vận tải qua App. Biên bản là căn cứ đối chiếu công nợ và quy trách nhiệm khi có bất thường, nhưng ảnh chụp tờ giấy không cho dữ liệu có cấu trúc và không có gì bảo đảm lái xe đã ghi bất thường trước khi rời điểm. Ký trên máy lái xe kèm ảnh, giờ và vị trí đã là cách làm phổ biến ở các phần mềm được xem; nhưng không ai công bố biên bản theo đúng mục container trong SOP (số chì, tình trạng chì), chặn hoàn tất khi chưa ghi bất thường, hay lối thoát khi khách từ chối ký điện tử. Khuyến nghị: làm phần ghi nhận giao hàng có cấu trúc trên App Lái xe trước, chạy thử phần khách ký điện tử sau.
+Hiện lái xe lập biên bản giấy 2 bản, ký với khách rồi chụp ảnh gửi nhóm Zalo; SOP điều phối mới chuyển sang chụp ảnh và tải lên Lệnh vận tải qua App. Biên bản là căn cứ đối chiếu công nợ và quy trách nhiệm khi có bất thường, nhưng ảnh chụp tờ giấy không cho dữ liệu có cấu trúc và không có gì bảo đảm lái xe đã ghi bất thường trước khi rời điểm. Ký trên máy lái xe kèm ảnh, giờ và vị trí đã là cách làm phổ biến ở các phần mềm được xem; nhưng không ai công bố biên bản theo đúng mục container trong SOP (số chì, tình trạng chì), chặn hoàn tất khi chưa ghi bất thường, hay lối thoát khi khách từ chối ký điện tử. Khuyến nghị: làm phần ghi nhận giao hàng có cấu trúc trên Delta Super App trước, chạy thử phần khách ký điện tử sau.
 
 ***
 
@@ -65,12 +65,12 @@ Hiện lái xe lập biên bản giấy 2 bản, ký với khách rồi chụp �
 
 ## 3. Nếu làm thì lưu ý gì
 
-**Cách làm đề xuất:** Làm phần ghi nhận giao hàng có cấu trúc trên App Lái xe cùng lúc với Lệnh vận tải; phần khách ký điện tử chạy thử sau với nhóm khách đã đồng ý.
+**Cách làm đề xuất:** Làm phần ghi nhận giao hàng có cấu trúc trên Delta Super App cùng lúc với Lệnh vận tải; phần khách ký điện tử chạy thử sau với nhóm khách đã đồng ý.
 
 **Lưu ý:**
 * **Thông tin cần lưu:** các mục theo mẫu biên bản SOP (ngày giờ, địa điểm, khách, số container, số chì, tình trạng chì, biển số, lái xe, số lượng và tình trạng hàng); có hay không bất thường kèm mô tả và ảnh; ảnh biên bản giấy đã ký; chữ ký và tên người ký phía khách (phần B); giờ, vị trí ghi nhận; lý do khi khách không ký điện tử; trạng thái đã đồng bộ hay chưa.
 * **Rủi ro trải nghiệm:** bắt quá nhiều thao tác tại điểm giao làm lái xe mất thời gian hoặc nhập qua loa; kho, nhà máy hay mất sóng; người ký phía khách thường là thủ kho hoặc bảo vệ nên mã OTP gửi điện thoại có thể không hợp.
-* **Phụ thuộc:** Lệnh vận tải của mảng điều phối (để tự điền số container, chì, biển số, lái xe); App Lái xe đang có; điều khoản hợp đồng với khách (cho phần B).
+* **Phụ thuộc:** Lệnh vận tải của mảng điều phối (để tự điền số container, chì, biển số, lái xe); Delta Super App đang có; điều khoản hợp đồng với khách (cho phần B).
 * **Chi phí duy trì:** lưu trữ ảnh lâu dài; cập nhật mẫu biên bản khi SOP đổi.
 
 **Đừng mắc mấy lỗi này:**
@@ -89,7 +89,7 @@ Hiện lái xe lập biên bản giấy 2 bản, ký với khách rồi chụp �
 
 Nhu cầu ghi nhận giao nhận và bất thường đúng lúc là yêu cầu cứng của SOP, và các phần mềm được xem chưa ai công bố đúng phần Delta cần: mục container và chì, bắt buộc ghi bất thường, lối thoát khi khách không ký. Điểm mấu chốt là phần giá trị lớn nhất không phụ thuộc vào việc khách có chấp nhận chữ ký điện tử — nên làm ngay được, còn phần khách ký thì chạy thử:
 
-* **Phần A — làm cùng mảng điều phối:** ghi nhận giao hàng có cấu trúc trên App Lái xe, tự điền từ Lệnh vận tải, bắt buộc chọn có/không bất thường và chụp ảnh chì, hàng trước khi được hoàn tất, đính kèm ảnh biên bản giấy đã ký, dùng được khi mất sóng.
+* **Phần A — làm cùng mảng điều phối:** ghi nhận giao hàng có cấu trúc trên Delta Super App, tự điền từ Lệnh vận tải, bắt buộc chọn có/không bất thường và chụp ảnh chì, hàng trước khi được hoàn tất, đính kèm ảnh biên bản giấy đã ký, dùng được khi mất sóng.
 * **Phần B — chạy thử với khách đã đồng ý:** khách ký trên máy lái xe, khoá biên bản sau khi ký; đo tỷ lệ ký và từ chối; chỉ bỏ hẳn giấy khi đã có điều khoản trong hợp đồng.
 
 Nhu cầu vẫn dựa trên SOP chứ chưa đo bằng số liệu thiệt hại.
@@ -102,11 +102,11 @@ Nhu cầu vẫn dựa trên SOP chứ chưa đo bằng số liệu thiệt hại
 
 **Các phần đề xuất làm (mỗi phần đủ gọn để brainstorm riêng):**
 
-1) **Ghi nhận giao hàng trên App Lái xe** — mục theo mẫu biên bản SOP, tự điền từ Lệnh vận tải, bắt buộc ghi bất thường và ảnh trước khi hoàn tất, đính kèm ảnh biên bản giấy, dùng được khi mất sóng; điều vận thấy ngay khi lái xe hoàn tất hoặc báo bất thường.
+1) **Ghi nhận giao hàng trên Delta Super App** — mục theo mẫu biên bản SOP, tự điền từ Lệnh vận tải, bắt buộc ghi bất thường và ảnh trước khi hoàn tất, đính kèm ảnh biên bản giấy, dùng được khi mất sóng; điều vận thấy ngay khi lái xe hoàn tất hoặc báo bất thường.
 2) **Khách ký điện tử (chạy thử)** — khách ký trên máy lái xe, khoá sau khi ký, ghi lý do khi khách từ chối, gửi bản PDF cho khách.
 
 **Việc cần làm:**
-* [ ] Khi brainstorm mảng điều phối, đưa phần 1 vào phạm vi App Lái xe gắn với Lệnh vận tải.
+* [ ] Khi brainstorm mảng điều phối, đưa phần 1 vào phạm vi Delta Super App gắn với Lệnh vận tải.
 * [ ] Hỏi một vài khách thường xuyên xem có chấp nhận biên bản điện tử không, và ai là người ký phía khách.
 * [ ] Nhờ pháp chế hoặc luật sư xem điều khoản chấp nhận biên bản điện tử trong hợp đồng.
 

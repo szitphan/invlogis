@@ -2,6 +2,8 @@
 type: research
 keyword: "kết nối ePort tự động"
 status: in-review
+status_changed: 2026-10-05
+status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-02
 links:
   - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md
@@ -14,7 +16,7 @@ links:
 
 # Kết nối ePort tự động
 
-> **Khuyến nghị: KHÔNG LÀM kết nối ePort lúc này — chỉ làm 2 việc thử nhỏ.** Không cảng nào công bố kênh kết nối cho đơn vị vận tải, còn cách cho máy đăng nhập hộ thì rủi ro lớn; giờ thật cho cảnh báo mốc và công nợ nên lấy từ App Lái xe và đọc ảnh EIR, cách này phủ được cả nơi không có ePort.
+> **Khuyến nghị: KHÔNG LÀM kết nối ePort lúc này — chỉ làm 2 việc thử nhỏ.** Không cảng nào công bố kênh kết nối cho đơn vị vận tải, còn cách cho máy đăng nhập hộ thì rủi ro lớn; giờ thật cho cảnh báo mốc và công nợ nên lấy từ Delta Super App và đọc ảnh EIR, cách này phủ được cả nơi không có ePort.
 
 ***
 
@@ -62,7 +64,7 @@ CS hiện đăng nhập từng ePort của từng cảng, depot để làm lện
 
 ## 3. Nếu làm thì lưu ý gì
 
-**Cách làm đề xuất:** Không kết nối máy với máy ở giai đoạn này. Gom việc và giấy tờ cho CS trong phần mềm; lấy giờ thật từ App Lái xe và đọc ảnh EIR; thử dữ liệu theo dõi container ở quy mô nhỏ.
+**Cách làm đề xuất:** Không kết nối máy với máy ở giai đoạn này. Gom việc và giấy tờ cho CS trong phần mềm; lấy giờ thật từ Delta Super App và đọc ảnh EIR; thử dữ liệu theo dõi container ở quy mô nhỏ.
 
 | Phần | Tự động được hôm nay? | Kết luận |
 |---|---|---|
@@ -73,7 +75,7 @@ CS hiện đăng nhập từng ePort của từng cảng, depot để làm lện
 **Lưu ý:**
 * **Thông tin cần lưu:** cảng, depot có ePort hay không và kênh nào; lệnh và EIR gắn với Lệnh vận tải; nguồn của từng mốc giờ (EIR, dữ liệu hãng tàu, lái xe nhập) để không trộn lẫn.
 * **Rủi ro vận hành:** tài khoản ePort gắn với thanh toán tiền thật — bị khoá là cả công ty ngừng làm lệnh ở cảng đó; cảng đổi quy trình, giao diện thường xuyên (Tân Vũ bắt buộc cổng tự động từ 5/2023, HICT từ 6/2025).
-* **Phụ thuộc:** App Lái xe, việc đọc ảnh chứng từ, Lệnh vận tải của mảng điều phối; sự đồng ý của từng cảng nếu muốn kết nối chính thức.
+* **Phụ thuộc:** Delta Super App, việc đọc ảnh chứng từ, Lệnh vận tải của mảng điều phối; sự đồng ý của từng cảng nếu muốn kết nối chính thức.
 * **Chi phí dữ liệu:** dịch vụ theo dõi container tính theo gói năm; chỉ mua sau khi thử với dữ liệu thật.
 
 **Đừng mắc mấy lỗi này:**
@@ -90,7 +92,7 @@ CS hiện đăng nhập từng ePort của từng cảng, depot để làm lện
 
 **Kết luận: KHÔNG LÀM kết nối ePort lúc này — chỉ làm 2 việc thử nhỏ.**
 
-Nhu cầu là có thật, nhưng con đường kết nối chưa tồn tại: không cảng nào công bố kênh cho đơn vị vận tải, việc làm lệnh tự động chỉ có thể làm bằng cách cho máy đăng nhập hộ — rủi ro lớn hơn lợi ích khi chưa biết số lượt theo cảng. Phần giá trị thật (giờ thật cho cảnh báo mốc, công nợ) lấy được bằng App Lái xe và đọc ảnh EIR, và cách này phủ cả 74 depot và các kho không có ePort. Hai việc nên làm ngay vì rẻ: thử dữ liệu theo dõi container với 10 container thật, và đo số lượt theo cảng để xin kênh chính thức ở 2–3 cảng làm nhiều nhất.
+Nhu cầu là có thật, nhưng con đường kết nối chưa tồn tại: không cảng nào công bố kênh cho đơn vị vận tải, việc làm lệnh tự động chỉ có thể làm bằng cách cho máy đăng nhập hộ — rủi ro lớn hơn lợi ích khi chưa biết số lượt theo cảng. Phần giá trị thật (giờ thật cho cảnh báo mốc, công nợ) lấy được bằng Delta Super App và đọc ảnh EIR, và cách này phủ cả 74 depot và các kho không có ePort. Hai việc nên làm ngay vì rẻ: thử dữ liệu theo dõi container với 10 container thật, và đo số lượt theo cảng để xin kênh chính thức ở 2–3 cảng làm nhiều nhất.
 
 **Các góc nhìn đã cân nhắc:** Ba góc nhìn ủng hộ, phản đối và khả thi đều đồng ý không cho máy đăng nhập hộ để làm lệnh, chỉ thử hẹp phần trạng thái container với lô thật trước khi mua dịch vụ, và lấy EIR do lái xe chụp làm nguồn chính cho giờ thật. Góc nhìn ủng hộ thấy giá trị lớn ở việc gom các ePort rời rạc về một chỗ — ý này được giữ ở mức gom việc và giấy tờ cho CS, không ở mức kết nối máy. Góc nhìn phản đối nhấn mạnh chưa có số lượt theo cảng, nên bước đầu tiên là đo.
 

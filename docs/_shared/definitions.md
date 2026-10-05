@@ -95,7 +95,7 @@ Trường hợp nghiệp vụ của 1 chứng từ, quyết định các bước
 **Aliases:** luồng, trường hợp
 
 ### Báo cáo sự cố
-Báo hỏng hóc phương tiện do lái xe gửi từ App Lái xe; xưởng xác nhận hoặc từ chối, rồi lập báo giá chẩn đoán.
+Báo hỏng hóc phương tiện do lái xe gửi từ Delta Super App; xưởng xác nhận hoặc từ chối, rồi lập báo giá chẩn đoán.
 **Appears in:** Sửa chữa
 **Aliases:** yêu cầu sửa chữa (từ lái xe)
 
@@ -125,7 +125,7 @@ Bảng quy đổi chiều cao mức dầu trong bồn sang lượng dầu (lít)
 **Aliases:** —
 
 ### Kế hoạch mua dầu / Phiếu nhập dầu / Phiếu cấp dầu
-Chuỗi nghiệp vụ dầu: lập kế hoạch mua → đơn mua dầu → nhập dầu vào cây dầu (từ nhà cung cấp hoặc phương tiện) → cấp dầu cho phương tiện. Phiếu cấp dầu tại cây dầu đối tác do nhân viên đối tác ghi nhận trên Portal.
+Chuỗi nghiệp vụ dầu: lập kế hoạch mua → đơn mua dầu → nhập dầu vào cây dầu (từ nhà cung cấp hoặc phương tiện) → cấp dầu cho phương tiện. Phiếu cấp dầu tại cây dầu đối tác do nhân viên đối tác ghi nhận trên Delta Super App.
 **Appears in:** Cây dầu, Thanh toán trả sau
 **Aliases:** —
 
@@ -181,8 +181,13 @@ Chứng từ xuất hàng khỏi kho xưởng (vd xuất phụ tùng cho lệnh 
 
 ### Bàn giao phương tiện
 Yêu cầu giao 1 phương tiện cho nhân viên (thường là lái xe) hoặc thu hồi phương tiện về. Bàn giao và thu hồi là 2 loại của cùng 1 chứng từ, đều phải phê duyệt và ký biên bản.
-**Appears in:** Quản lý phương tiện, App Lái xe
+**Appears in:** Quản lý phương tiện, Delta Super App
 **Aliases:** bàn giao PT, thu hồi phương tiện (loại thu hồi)
+
+### Delta Super App
+Ứng dụng di động dùng chung cho nhân viên nội bộ Delta (lái xe, hiện trường...) và nhân viên đối tác cây dầu. Ai thấy chức năng nào tuỳ phân quyền. Partner Portal của đối tác cây dầu đã gộp vào app này; hiện chỉ có bản mobile.
+**Appears in:** Sửa chữa, Mua hàng, Quản lý phương tiện, Cây dầu
+**Aliases:** App Lái xe, ALX, Partner Portal, Portal đối tác (tên cũ, tránh dùng)
 
 ### Đơn mua dầu
 Đơn đặt mua dầu (PO) sinh từ kế hoạch mua dầu đã duyệt. Khi dầu về, tạo phiếu nhập dầu theo đơn (trường hợp nhập từ nhà cung cấp).
@@ -194,9 +199,9 @@ Yêu cầu giao 1 phương tiện cho nhân viên (thường là lái xe) hoặc
 | Canonical | Loại | Aliases (tránh dùng) | Mô tả ngắn |
 |---|---|---|---|
 | Nhân viên nội bộ Delta | primary | Người dùng phần mềm xưởng, người dùng PM Xưởng, người tạo, người phê duyệt | Nhân viên Delta; thấy và làm gì tuỳ phân quyền |
-| Lái xe | primary | ALX, người dùng app Lái xe | Nhân viên nội bộ Delta dùng App Lái xe (Mobile); làm được gì tuỳ phân quyền (vd báo cáo sự cố, nghiệm thu, nhận/trả phương tiện) |
+| Lái xe | primary | ALX, người dùng app Lái xe | Nhân viên nội bộ Delta dùng Delta Super App; làm được gì tuỳ phân quyền (vd báo cáo sự cố, nghiệm thu, nhận/trả phương tiện) |
 | Admin | primary | Quản trị viên | Toàn quyền, quản lý tài khoản và phân quyền |
-| Nhân viên đối tác cây dầu | secondary | đối tác, nhân viên cây dầu đối tác | Dùng Portal ghi nhận bơm dầu, xuất hoá đơn, chốt phiếu cấp dầu |
+| Nhân viên đối tác cây dầu | secondary | đối tác, nhân viên cây dầu đối tác | Dùng Delta Super App ghi nhận bơm dầu, xuất hoá đơn, chốt phiếu cấp dầu |
 | Hệ thống | system | Backend, Server, BE | Xử lý nghiệp vụ phía sau, sinh mã, gửi thông báo |
 | Sensor iGAS | external | Igas, IGAS | Thiết bị đo mức dầu tại cây dầu nội bộ |
 | Delta ERP | external | ERP | Phần mềm ERP tích hợp |

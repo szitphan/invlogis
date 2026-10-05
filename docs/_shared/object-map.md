@@ -247,8 +247,8 @@ flowchart LR
 | Khoản mục chi phí | Đề xuất cấp mới | Cố vấn dịch vụ | Website | — → Chờ phê duyệt | lg-srs-export.md:5271 |
 | Khoản mục chi phí | Thu hồi | Cố vấn dịch vụ | Website | Chờ phê duyệt → Đã huỷ | lg-srs-export.md:5271 |
 | Khoản mục chi phí | Phê duyệt / Từ chối | 🟡 chưa rõ | Website | Chờ phê duyệt → Đã phê duyệt / Đã từ chối | 🟡 Suy luận · OQ-1 |
-| Báo cáo sự cố | Gửi | Lái xe | App Lái xe | — → Đang chờ xử lý | definitions.md:98 |
-| Báo cáo sự cố | Thu hồi | Lái xe | App Lái xe | Đang chờ xử lý → Đã thu hồi | lg-srs-export.md:18665 |
+| Báo cáo sự cố | Gửi | Lái xe | Delta Super App | — → Đang chờ xử lý | definitions.md:98 |
+| Báo cáo sự cố | Thu hồi | Lái xe | Delta Super App | Đang chờ xử lý → Đã thu hồi | lg-srs-export.md:18665 |
 | Báo cáo sự cố | Xác nhận / Từ chối | Cố vấn dịch vụ | Website | Đang chờ xử lý → Đã xác nhận / Đã từ chối | lg-srs-export.md:218 |
 | Báo giá | Tạo mới | Cố vấn dịch vụ | Website | — → Chờ phê duyệt | lg-srs-export.md:14243 |
 | Báo giá | Thu hồi | Cố vấn dịch vụ | Website | Chờ phê duyệt → Đã huỷ | lg-srs-export.md:14243 |
@@ -256,13 +256,13 @@ flowchart LR
 | Báo giá | Xác nhận / Từ chối xác nhận | 🟡 chưa rõ | Website | Chờ xác nhận → Đã xác nhận | 🟡 Suy luận · OQ-7 |
 | Lệnh sửa chữa | Tạo mới | Cố vấn dịch vụ | Website | — → Đang sửa chữa | lg-srs-export.md:16975 |
 | Lệnh sửa chữa | Chốt lệnh | Cố vấn dịch vụ | Website | Đang sửa chữa → Đã chốt lệnh | lg-srs-export.md:3060 |
-| Lệnh sửa chữa | Nghiệm thu / Từ chối nghiệm thu | Lái xe | App Lái xe | Đã chốt lệnh → Đã nghiệm thu / Từ chối nghiệm thu | lg-srs-export.md:16975 |
+| Lệnh sửa chữa | Nghiệm thu / Từ chối nghiệm thu | Lái xe | Delta Super App | Đã chốt lệnh → Đã nghiệm thu / Từ chối nghiệm thu | lg-srs-export.md:16975 |
 | Đơn mua HHDV | Tạo mới | Cố vấn dịch vụ | Website | — → Chờ phê duyệt | lg-srs-export.md:13171 |
-| Đơn mua HHDV | Tạo mới | Lái xe | App Lái xe | — → Chờ phê duyệt | lg-srs-export.md:3058 |
+| Đơn mua HHDV | Tạo mới | Lái xe | Delta Super App | — → Chờ phê duyệt | lg-srs-export.md:3058 |
 | Đơn mua HHDV | Thu hồi | Cố vấn dịch vụ | Website | Chờ phê duyệt → Đã huỷ | lg-srs-export.md:13171 |
 | Đơn mua HHDV | Phê duyệt / Từ chối lần 1 | Giám đốc xưởng | Website | Chờ phê duyệt → Đã phê duyệt - lần 1 / Đã từ chối | lg-srs-export.md:13171 |
 | Đơn mua HHDV | Phê duyệt / Từ chối lần 2 | Giám đốc xưởng | Website | Đã phê duyệt - lần 1 → Đã phê duyệt - lần 2 / Chờ nghiệm thu / Đã từ chối | lg-srs-export.md:13171 |
-| Đơn mua HHDV | Nghiệm thu / Từ chối nghiệm thu | Lái xe | App Lái xe | Chờ nghiệm thu → Đã nghiệm thu / Từ chối nghiệm thu | lg-srs-export.md:3058 |
+| Đơn mua HHDV | Nghiệm thu / Từ chối nghiệm thu | Lái xe | Delta Super App | Chờ nghiệm thu → Đã nghiệm thu / Từ chối nghiệm thu | lg-srs-export.md:3058 |
 | Phiếu nhập kho | Tạo yêu cầu | Cố vấn dịch vụ | Website | — → Chờ phê duyệt | lg-srs-export.md:15484 |
 | Phiếu nhập kho | Thu hồi | Cố vấn dịch vụ | Website | Chờ phê duyệt → Đã huỷ | lg-srs-export.md:15484 |
 | Phiếu nhập kho | Phê duyệt / Từ chối | Giám đốc xưởng | Website | Chờ phê duyệt → Đã phê duyệt / Đã từ chối | lg-srs-export.md:15484 |
@@ -284,10 +284,10 @@ flowchart LR
 | Kế hoạch mua dầu | Phê duyệt / Từ chối | Giám đốc xưởng | Website | Chờ phê duyệt → Đã phê duyệt / Đã từ chối | lg-srs-export.md:23416 |
 | Đơn mua dầu | Huỷ đơn | Cố vấn dịch vụ | Website | Đang chờ giao → Đã huỷ | lg-srs-export.md:24031 |
 | Phiếu nhập dầu | Tạo phiếu | Cố vấn dịch vụ | Website | — | lg-srs-export.md:285 |
-| Phiếu nhập dầu | Tạo yêu cầu (dGas) | Lái xe | App Lái xe | — | lg-srs-export.md:3058 |
+| Phiếu nhập dầu | Tạo yêu cầu (dGas) | Lái xe | Delta Super App | — | lg-srs-export.md:3058 |
 | Phiếu nhập dầu | Phê duyệt | Giám đốc xưởng | Website | — | lg-srs-export.md:285 |
-| Phiếu cấp dầu | Ghi nhận bơm dầu | Nhân viên đối tác cây dầu | Portal | — | system-overview.md:18 |
-| Phiếu cấp dầu | Chốt phiếu | Nhân viên đối tác cây dầu | Portal | — | system-overview.md:18 |
+| Phiếu cấp dầu | Ghi nhận bơm dầu | Nhân viên đối tác cây dầu | Delta Super App | — | system-overview.md:18 |
+| Phiếu cấp dầu | Chốt phiếu | Nhân viên đối tác cây dầu | Delta Super App | — | system-overview.md:18 |
 | Phiếu cấp dầu | Phê duyệt / Từ chối | Giám đốc xưởng | Website | — | lg-srs-export.md:291 |
 | Bàn giao phương tiện | Tạo yêu cầu | Cố vấn dịch vụ | Website | — → Chờ phê duyệt | lg-srs-export.md:29893 |
 | Bàn giao phương tiện | Thu hồi | Cố vấn dịch vụ | Website | Chờ phê duyệt → Đã huỷ | lg-srs-export.md:29893 |

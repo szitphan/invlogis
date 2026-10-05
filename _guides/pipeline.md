@@ -291,7 +291,7 @@ nào — đây là chủ ý, không phải chậm tiến độ.
 | ~~P-10~~ ✅ | 7 | (Đã xử lý 2026-10-04: xoá `/figma`, mọi tham chiếu chuyển sang `/figma-screen`) `/figma` (cũ) và `/figma-screen` trùng vai | Gọi nhầm skill |
 | ~~P-11~~ ✅ | 7 | (Đã xử lý 2026-10-04: connector đã kết nối, tài khoản TinPB ghế Full team innvie, đọc được file dự án; quyền ghi xác nhận ở lần chạy đầu) `/figma-component` dùng connector Figma chính thức, chưa được cấp quyền | Chưa chạy được |
 | ~~P-12~~ ✅ | 7 | (Đã xử lý 2026-10-04: bỏ 2 tham chiếu; Known Gaps ghi tại dòng `KG-nn` trong design.md, không có file backlog riêng) Tham chiếu tới file không có: `_guides/workflow-figma-screen.md`, `design/design-backlog.md` | Known Gaps của `/figma-component` không có chỗ ghi |
-| P-13 | 0→7 | App Lái xe là mobile. CMP/GR mobile đã có (BL-001 xong 2026-10-04), còn: design.md chỉ có chuẩn desktop (spec M1–M4 chưa node Figma), Bottom Navigation của app khác spec M1 (hamburger) và Astryx chưa có component | Màn mobile vẫn ghi "chưa có chuẩn" phần bố cục |
+| P-13 | 0→7 | Delta Super App là mobile. CMP/GR mobile đã có (BL-001 xong 2026-10-04), còn: design.md chỉ có chuẩn desktop (spec M1–M4 chưa node Figma), Bottom Navigation của app khác spec M1 (hamburger) và Astryx chưa có component | Màn mobile vẫn ghi "chưa có chuẩn" phần bố cục |
 | P-14 | — | CLAUDE.md / AGENTS.md liệt kê skill chưa cài, chưa có skill Figma mới | Tài liệu điều hướng sai |
 | P-15 | 3 | `/brainstorm` chỉ có tự kiểm, không có agent review (R-1) | Là gốc của mọi thứ phía sau — thiếu actor, sai phạm vi, bỏ sót edge case ở đây lan xuống SRS, UC, màn hình |
 | P-16 | 5 | `/usecase` không có agent review khi chạy riêng (R-2) | UC thiếu nhánh rẽ / nhánh lỗi không ai bắt; UC lại là nguồn của userflow và story |
@@ -345,7 +345,7 @@ Việc cần làm, theo thứ tự:
 5. ~~Bỏ `/figma` cũ (P-10)~~ — xong 2026-10-04.
 6. ⏸ Tạm hoãn (2026-10-04): xử lý từng skill khi dùng tới mà gặp lỗi. Cài skill còn thiếu từ kit ai4ba (`/prd`, `/urd`, `/prd-epic`, `/ac`, `/reverse-doc`) hoặc gỡ
    tham chiếu (P-01 → P-04).
-7. ~~Chuyển CMP/GR mobile (BL-001)~~ — xong 2026-10-04. Còn: bổ sung chuẩn mobile vào design.md (node M1–M4, chốt Bottom Navigation) trước khi vẽ App Lái xe (P-13).
+7. ~~Chuyển CMP/GR mobile (BL-001)~~ — xong 2026-10-04. Còn: bổ sung chuẩn mobile vào design.md (node M1–M4, chốt Bottom Navigation) trước khi vẽ Delta Super App (P-13).
 8. ~~Cấp quyền connector Figma cho `/figma-component`, xử lý tham chiếu Known Gaps (P-11, P-12)~~ — xong 2026-10-04.
 9. ~~Script đồng bộ bản Codex~~ (xong 2026-10-04, `_scripts/codex-sync.py`) + manifest nguồn kit; cập nhật CLAUDE.md + AGENTS.md (P-14, P-21, P-22).
 10. ~~Cho `/brainstorm` đọc *Content & Formatting* + E-common khi viết wording (P-25)~~ — xong 2026-10-04.

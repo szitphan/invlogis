@@ -1,7 +1,7 @@
 ---
 type: project-profile
 status: draft
-updated: 2026-10-01
+updated: 2026-10-05
 links:
   - docs-input/srs-cu/lg-srs-export.md
   - docs/_shared/system-overview.md
@@ -20,9 +20,9 @@ Hệ thống quản lý vận hành nội bộ cho Delta — doanh nghiệp vậ
 | Nhóm user | Gọi là gì trong doc | Ghi chú | Ngày |
 |---|---|---|---|
 | Nhân viên Delta dùng Website | Nhân viên nội bộ Delta | Làm được gì tuỳ phân quyền (nhóm quyền, nền tảng, phạm vi chi nhánh/cơ sở) | 2026-10-01 |
-| Nhân viên Delta dùng App Lái xe | Lái xe | Vẫn là nhân viên nội bộ Delta, quyền theo phân quyền | 2026-10-01 |
+| Nhân viên Delta dùng Delta Super App | Lái xe | Vẫn là nhân viên nội bộ Delta, quyền theo phân quyền. Delta Super App là tên mới của App Lái xe | 2026-10-05 |
 | Quản trị hệ thống | Admin | Toàn quyền | 2026-10-01 |
-| Nhân viên của đối tác cây dầu | Nhân viên đối tác cây dầu | Dùng Portal, nghiệp vụ Cấp dầu | 2026-10-01 |
+| Nhân viên của đối tác cây dầu | Nhân viên đối tác cây dầu | Dùng Delta Super App (Partner Portal cũ đã gộp vào, hiện chỉ có mobile), nghiệp vụ Cấp dầu | 2026-10-05 |
 
 Danh sách tác nhân chuẩn kèm tên gọi cần tránh: [[docs/_shared/definitions.md|Definitions]] › Actor Registry.
 
