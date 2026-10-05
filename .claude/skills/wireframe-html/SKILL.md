@@ -1,7 +1,7 @@
 ---
 name: wireframe-html
 description: Dùng khi cần tạo wireframe HTML đen trắng cho các flow của 1 feature, render element HTML thật thay vì ASCII. Cần `srs/{feature}-userflow.md` trước.
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Task, AskUserQuestion
+allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Task, Agent, AskUserQuestion
 user-invocable: true
 disable-model-invocation: true
 argument-hint: "<feature> [--flow <flow-slug>]"
@@ -171,6 +171,7 @@ Với mỗi flow được duyệt:
 6. **Sinh `{{SCREENS}}`**: mỗi screen 1 khối `<div class="wf-screen" id="s{n}">` (n = thứ tự screen từ 1 — BẮT BUỘC có `id` để index Phase G.5 deep-link tới), frame rộng đúng device, đặt liền nhau trong `.wf-rows` — __tự wrap__, KHÔNG ép 3/row, KHÔNG mũi tên giữa screen.
 7. __Render HTML__ từ `_templates/wireframe-html-template.html` (xem Mục "HTML Template" — thay placeholder + fill `{{SCREENS}}`).
 8. **Fill `{{DESC_TABLE}}`** — xem Phase F.5 ngay dưới, chạy TRƯỚC khi Write.
+8b. __Review độc lập__ — Phase F.6, chạy TRƯỚC khi Write.
 9. __Write__ `docs/{feature}/html-wireframe/{flow-slug}.html`.
 
 ### Phase F.5 — Bảng mô tả màn hình (5 cột)
@@ -236,6 +237,20 @@ Field "{tên field}" (screen {slug}) có giới hạn "{rule hiện có}" nhưng
 Chỉ sau khi user trả lời (hoặc explicit nói "bỏ qua, giữ nguyên mô tả hiện có") mới viết Description hoàn chỉnh + tiếp tục Phase F bước 7.
 
 __5. Format HTML của bảng__ — dùng `<table class="wf-desc-table">` (xem template), 1 bảng cho cả flow, `<tr class="wf-desc-screen-header">` cho hàng phân đoạn `Screen N: {title}`.
+
+### Phase F.6 — Review độc lập (per `review-format.md` Mục "Review độc lập khi skill chạy riêng")
+
+Chạy sau F.5 (bảng 5 cột đã đủ), trước Write bước F-9, mỗi flow 1 lần (gọi agent qua Agent tool).
+
+   - `@uxui-reviewer` đối chiếu bảng 5 cột ↔ `srs/{feature}-spec.md` + `usecases/uc-*.md` + `srs/{feature}-userflow.md` + `design/ui-common/`:
+     * Đủ trạng thái rỗng / lỗi / đang tải / không có quyền cho màn có dữ liệu hoặc thao tác (nguồn có mà màn thiếu = finding).
+     * Wording lỗi/thành công khớp **nguyên văn** nguồn; mã `E-{feature}-NNN` / `E-common-NNN` đúng và tồn tại.
+     * Element khớp CMP/GR đã gọi mã, đủ phần "UC phải khai báo"; override có lý do (`ui-common-rules-components.md` Mục 9).
+     * Validation/số liệu trong Description có nguồn (BR/FR), không bịa.
+   - Prompt gồm nội dung flow vừa dựng (chưa ghi file) + đường dẫn nguồn trên để agent Read.
+   - Lỗi cơ học (mã, wording lệch nguyên văn, thiếu `Xem CMP-xx`) → tự sửa; finding nghiệp vụ (thêm màn/trạng thái, rule) → câu hỏi đánh số cho user, KHÔNG tự quyết. Tối đa 2 vòng.
+   - In dòng `Review (@uxui-reviewer): N chặn · M cảnh báo · K đã tự sửa · J chờ anh quyết`.
+   - Trong `/srs` chain mode: SKIP (Phase G của `/srs` đã gọi `@uxui-reviewer`), in `Review: SKIPPED — chạy trong /srs`. User nói "khỏi review" → SKIP.
 
 ### Phase G — Write {feature}-wireframe-html-index.md
 
@@ -403,6 +418,8 @@ Collision: trùng slug → suffix `-2`.
 * @../../../_templates/wireframe-html-template.html (template chuẩn per-flow — CSS B&W + skeleton + mẫu screens)
 * @../../../_templates/wireframe-html-nav-template.html (template index điều hướng — sidebar TOC + flow map + iframe, Phase G.5)
 * @../../rules/approval-gate.md
+* @../../rules/review-format.md (Mục Review độc lập khi skill chạy riêng — Phase F.6)
+* @../../agents/uxui-reviewer.md
 * @../../rules/kg-usage.md
 * @../../rules/naming-conventions.md
 * @../../rules/changelog.md

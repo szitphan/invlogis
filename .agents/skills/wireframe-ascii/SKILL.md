@@ -1,7 +1,7 @@
 ---
 name: wireframe-ascii
 description: Dùng khi cần vẽ ASCII wireframe cho các flow của 1 feature, gộp nhiều màn hình theo flow trong 1 file. Cần `srs/{feature}-userflow.md` trước. Muốn fidelity cao hơn thì dùng `/wireframe-html`, `/figma-screen` hoặc `/prototype-html`.
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Task, AskUserQuestion
+allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Task, Agent, AskUserQuestion
 user-invocable: true
 argument-hint: "<feature> [--flow <flow-slug>]"
 ---
@@ -152,6 +152,20 @@ Với mỗi flow, với mỗi screen trong flow đó:
 * Max 3 vòng/flow. Vòng 3 ép chốt.
 * Trong `/srs` chain mode: SKIP L3, write bản đầu thẳng.
 
+### Phase D.5 — Review độc lập (per `review-format.md` Mục "Review độc lập khi skill chạy riêng")
+
+Chạy sau khi user "Đồng ý" ở L3, trước L1, mỗi flow 1 lần (gọi agent qua Agent tool).
+
+   - `@uxui-reviewer` đối chiếu bảng 5 cột ↔ `srs/{feature}-spec.md` + `usecases/uc-*.md` + `srs/{feature}-userflow.md` + `design/ui-common/`:
+     * Đủ trạng thái rỗng / lỗi / đang tải / không có quyền cho màn có dữ liệu hoặc thao tác (nguồn có mà màn thiếu = finding).
+     * Wording lỗi/thành công khớp **nguyên văn** nguồn; mã `E-{feature}-NNN` / `E-common-NNN` đúng và tồn tại.
+     * Element khớp CMP/GR đã gọi mã, đủ phần "UC phải khai báo"; override có lý do (`ui-common-rules-components.md` Mục 9).
+     * Validation/số liệu trong Description có nguồn (BR/FR), không bịa.
+   - Prompt gồm nội dung flow vừa dựng (chưa ghi file) + đường dẫn nguồn trên để agent Read.
+   - Lỗi cơ học (mã, wording lệch nguyên văn, thiếu `Xem CMP-xx`) → tự sửa; finding nghiệp vụ (thêm màn/trạng thái, rule) → câu hỏi đánh số cho user, KHÔNG tự quyết. Tối đa 2 vòng.
+   - In dòng `Review (@uxui-reviewer): N chặn · M cảnh báo · K đã tự sửa · J chờ anh quyết`.
+   - Trong `/srs` chain mode: SKIP (Phase G của `/srs` đã gọi `@uxui-reviewer`), in `Review: SKIPPED — chạy trong /srs`. User nói "khỏi review" → SKIP.
+
 ### Phase E — L1 approve + Write
 
 1. __L1__ preview path + action theo flow (không phải theo từng screen riêng lẻ):
@@ -242,6 +256,8 @@ Sau ASCII OK:
 
 - @.claude/rules/ui-common-rules-components.md
 * @../../../.claude/rules/approval-gate.md
+* @../../../.claude/rules/review-format.md (Mục Review độc lập khi skill chạy riêng — Phase D.5)
+* @../../../.claude/agents/uxui-reviewer.md
 * @../../../.claude/rules/kg-usage.md
 * @../../../.claude/rules/naming-conventions.md
 * @../../../.claude/rules/changelog.md

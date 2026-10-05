@@ -1,7 +1,7 @@
 ---
 name: brainstorm
 description: Dùng khi cần ghi lại 1 ý tưởng thô rồi phỏng vấn làm rõ trước khi viết URD/PRD. `/brainstorm <mô tả ý tưởng>` hoặc `/brainstorm @<file>`.
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep
+allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Agent
 user-invocable: true
 argument-hint: "<idea text> | @<file-path> | (empty for interactive)"
 ---
@@ -19,6 +19,7 @@ Expand raw idea thành structured brainstorm board qua interview __độ sâu th
 
 - __L1 approval__ trước Write — bao gồm confirm feature slug + idea slug do skill auto-derive.
 - __L3 iterate__ cho ASCII flow diagram + mermaid diagrams (max 3 vòng per `_rules/approval-gate.md`).
+- __Review độc lập trước L1__ (bước 8b) theo `review-format.md` Mục "Review độc lập khi skill chạy riêng" — finding nghiệp vụ thành câu hỏi cho user, KHÔNG tự quyết; bỏ qua thì in `Review: SKIPPED — {lý do}`.
 - __Per-feature path__ — `docs/{feature}/brainstorms/{idea-slug}.md`.
 - __Auto-derive feature slug từ idea content__ — KHÔNG bắt user nhập. Đề xuất trong L1, user override được.
 - __Auto-derive idea slug__ — semantic slug từ idea topic. Fallback `idea-{NNN}`. Collision → suffix `-v2`.
@@ -255,6 +256,13 @@ __Section 4 — Detailed Flow Deep Dive__ (chỉ chạy nếu complexity signal 
    - [ ] Open questions có ID `OQ-1, OQ-2, ...`.
    - Fail check → in checklist gap + đề xuất "hỏi thêm Q-X" trước proceed. User pick "proceed anyway with TBD" được.
    - __Chế độ Micro / Shallow / Confirm-only__: quality gate KHÔNG cảnh báo nặng — TBD là CỐ Ý (đã làm gọn). Chỉ liệt kê gọn "còn TBD: {…}" trong L1 và đẩy vào Open Questions, KHÔNG chặn/không giục hỏi thêm. Gate đầy đủ chỉ áp cho Deep / Targeted deep.
+8b) __Review độc lập__ (per `review-format.md` Mục "Review độc lập khi skill chạy riêng") — gọi agent qua Agent tool, chạy song song. Prompt gồm __bản nháp đầy đủ__ (chưa ghi file) + đường dẫn nguồn để agent Read: nguồn đã dùng ở Phase A (vd SOP trong `docs-input/sop/`), `docs/_shared/project-profile.md`, `docs/_shared/definitions.md`, `docs/_product/prd.md` (nếu có), brainstorm khác cùng feature.
+   - `@senior-ba` — 2 việc:
+     * __Thiếu vai:__ lập danh sách vai trong nguồn (vd cột TRÁCH NHIỆM của SOP) → so với vai ở Mục 3 và các bước Mục 5. Câu bị động ("được duyệt", "gửi thông báo") phải nói ai làm, ai nhận.
+     * __Thiếu nhánh lỗi:__ xếp loại từng bước Mục 5 — nhập liệu / chờ người / gọi hệ thống ngoài / tài nguyên có hạn / nhiều người cùng thao tác / đổi trạng thái — rồi hỏi câu cố định theo loại: dữ liệu sai/thiếu? quá hạn không ai làm? hệ thống ngoài lỗi/chậm? hết tài nguyên? hai người cùng sửa? chuyển trạng thái không hợp lệ? Câu chưa có trả lời ở Mục 6.1 / 6.5 / 7.3 = finding.
+   - `@po-reviewer` — __Phạm vi:__ truy vết 2 chiều Mục 4 capabilities ↔ mục tiêu Mục 1–2 / chỉ số Mục 10 (capability không phục vụ mục tiêu nào = lấn; mục tiêu không có capability = thiếu). Đối chiếu "ngoài phạm vi" + phạm vi áp dụng của SOP — việc thuộc quy trình khác = lấn phạm vi.
+   - __Theo chế độ:__ Deep / Targeted deep / Shallow → cả 2 agent · Confirm-only → chỉ `@senior-ba` · Micro → SKIPPED (trừ khi user nói "review").
+   - __Kết quả:__ lỗi cơ học tự sửa vào nháp; finding nghiệp vụ → 1 lượt câu hỏi đánh số cho user, trả lời xong cập nhật nháp (tối đa 2 vòng). Dòng `Review (...)` đưa vào L1 bước 9.
 
 ### Phase D — Approval + Write
 
@@ -337,6 +345,8 @@ Skill KHÔNG mặc định Deep. Sau khi chấm scope × completeness (Phase A.6
 - @../../../.claude/rules/ba-conventions.md
 - @../../../.claude/rules/project-profile.md
 - @../../../.claude/rules/approval-gate.md
+- @../../../.claude/rules/review-format.md (Mục Review độc lập khi skill chạy riêng — bước 8b)
+- @../../../.claude/agents/senior-ba.md · @../../../.claude/agents/po-reviewer.md
 - @../../../.claude/rules/naming-conventions.md
 - @../../../.claude/rules/keyword-detection.md
 - @../../../.claude/rules/resolve-oqs.md

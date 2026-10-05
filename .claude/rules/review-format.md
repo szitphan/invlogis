@@ -5,6 +5,9 @@ paths:
   - ".claude/skills/brd/**"
   - ".claude/skills/prd-epic/**"
   - ".claude/skills/srs/**"
+  - ".claude/skills/brainstorm/**"
+  - ".claude/skills/wireframe-ascii/**"
+  - ".claude/skills/wireframe-html/**"
 ---
 
 # Review Finding Format‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
@@ -71,6 +74,31 @@ Phase review aggregate findings rồi __tự fix__ (safe áp thẳng, business d
 ```
 2026-05-12 | /srs | @ba | docs/payment/srs/payment-spec.md | reviewed by @senior-ba, @qa-reviewer: 1 blocking applied, 2 warnings ack
 ```
+
+## Review độc lập khi skill chạy riêng
+
+> Áp cho skill sinh doc ngoài chuỗi `/srs`: hiện là `/brainstorm`, `/wireframe-ascii`, `/wireframe-html`.
+> Lý do: skill vừa hỏi vừa tự chấm, nên tự kiểm chỉ thấy doc **đủ phần**, không thấy doc **sai nghiệp vụ**
+> (thiếu vai, lấn phạm vi, thiếu nhánh lỗi, lệch đặc tả). Agent đọc nguồn độc lập để đối chiếu.
+
+1. **Khi chạy:** sau bước tự kiểm của skill, trước khi ghi file đích. Doc chưa có trên đĩa → truyền
+   **bản nháp đầy đủ** trong prompt + danh sách đường dẫn nguồn để agent Read đối chiếu.
+2. **Bỏ qua khi:** gọi từ `/srs` (Phase G đã soát cả tầng) · user nói "khỏi review" · trường hợp skill tự
+   nêu (vd chế độ Micro). Bỏ qua vẫn in `Review: SKIPPED — {lý do}`, không bỏ im lặng.
+3. **Agent:** read-only, finding theo *Finding anatomy* ở trên; Location ghi `Mục N` của bản nháp, kèm
+   **nguồn đối chiếu** `file:dòng`.
+4. **Mức nặng theo bằng chứng:** BLOCKING chỉ khi trích được nguồn mâu thuẫn hoặc nguồn có mà nháp thiếu.
+   Suy luận không có nguồn → tối đa WARNING. Văn phong, trình bày → SUGGESTION.
+5. **Xử lý:**
+   * Lỗi cơ học (mã ID, định dạng, wording lệch nguyên văn nguồn, mã lỗi sai) → skill tự sửa.
+   * Finding chạm quyết định nghiệp vụ (thêm/bớt vai, phạm vi, rule, số liệu) → gom thành câu hỏi đánh số
+     cho user, KHÔNG tự quyết. User trả lời hoặc "giữ nguyên" từng câu.
+   * Tối đa 2 vòng; vòng 2 chỉ soát phần vừa sửa. Mỗi agent tối đa ~8 finding, nặng trước.
+6. **Báo:** 1 dòng trong L1 / báo cáo cuối:
+   `Review (@a, @b): N chặn · M cảnh báo · K đã tự sửa · J chờ anh quyết` + "AI đối chiếu với nguồn trong
+   vault — chưa thay người duyệt" (mức 4 theo `diagram-correctness.md` Mục 2).
+7. **Khác Phase G của `/srs`:** `/srs` tự fix + đánh 🔶 để user xem sau (Mục *Output location*). Skill chạy
+   riêng hỏi ngay vì user đang có mặt và doc còn ở bản nháp.
 
 ## Tools agent CAN'T use directly
 
