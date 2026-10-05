@@ -24,6 +24,7 @@ Produce mermaid `stateDiagram-v2` cho 1 entity của feature, capture: states + 
 * **Auto-detect states** từ:
   * `docs/{feature}/brainstorms/*.md` Mục 6.3 State Transitions table.
   * `docs/{feature}/srs/{feature}-spec.md` Mục 4 Business Rules nếu mention state transition.
+  * Bản đồ đối tượng `docs/{feature}/{feature}-object-map.md` / `docs/_shared/object-map.md` Mục 3 cột "Đổi trạng thái" (xem Approach bước 2).
   * Nếu không có → clarifying questions. User muốn dùng nguồn khác → tag `@file` hoặc dán nội dung trong câu chat.
 * **Invalid transitions explicit** — table riêng trong section liệt kê transitions KHÔNG được phép.
 * **Vietnamese-first** trong description/notes, auto-detect từ seed. Muốn tiếng Anh thì nói "viết bằng tiếng Anh". Mermaid syntax keywords giữ English.
@@ -68,6 +69,7 @@ Features có states.md: !`for d in docs/*/srs/*-states.md; do [ -f "$d" ] && ech
 2) **Auto-detect existing state info:**
    * Read `docs/{feature}/brainstorms/*.md` Mục 6.3 — pull rows liên quan entity.
    * Read `docs/{feature}/srs/{feature}-spec.md` Mục 4 — pull BR liên quan state.
+   * **Bản đồ đối tượng (khi có `{feature}-object-map.md` / `_shared/object-map.md`):** tìm đối tượng ứng với entity (theo tên hoặc mã `OBJ-…` ở Mục 1), lấy mọi dòng Mục 3 của đối tượng đó có cột "Đổi trạng thái" khác `—`. Mỗi dòng `A → B` = 1 transition, trigger = Hành động (kèm Vai trò nếu giúp phân biệt); `— → B` = state khởi đầu (`[*] --> B`); `A → B / C` = 2 transition cùng trigger cặp (vd Phê duyệt / Từ chối). **Giữ nguyên văn nhãn trạng thái** của map — `object-map-lint` R8 đối chiếu tên trạng thái map ↔ `*-states.md`, viết khác là lệch. Ô 🟡 → hỏi user hoặc ghi chú "chưa chốt — OQ-n của object map", KHÔNG coi là đã chốt. Map và brainstorm/spec mâu thuẫn → liệt kê chỗ lệch, hỏi user bản nào đúng; KHÔNG sửa map (lệch thì đề xuất `/object-map {feature}`).
    * Có nguồn → dùng, không hỏi lại cái đã có (no-re-ask).
    * **Không có nguồn (feature mới hoặc cũ thiếu brainstorm/spec)** → **phỏng vấn ĐÚNG PHẠM VI state cần** (per `feature-bootstrap.md` nhóm A bước 3), hỏi gom 1 batch business-language (KHÔNG hỏi DB/SDK): **entity nào** (nếu chưa rõ) · **các trạng thái** entity đi qua · **trigger** mỗi transition (sự kiện/hành động nào chuyển trạng thái) · **transition cấm** (từ trạng thái nào KHÔNG được quay về đâu). KHÔNG bịa — thiếu ý nào hỏi ý đó. Làm rõ đủ để vẽ đúng, không lan man toàn diện như `/brainstorm`.
    * **Mô tả mơ hồ dù có nguồn** (vd brainstorm/spec chỉ nhắc chung chung "có nhiều trạng thái" mà không liệt kê rõ) → **PHẢI hỏi clarifying trước khi generate**, KHÔNG tự suy đoán trạng thái/trigger. Câu hỏi tối thiểu: "Entity có những trạng thái nào?", "Trigger chuyển trạng thái là gì?".
@@ -127,6 +129,7 @@ Features có states.md: !`for d in docs/*/srs/*-states.md; do [ -f "$d" ] && ech
    * **Đủ** → tiếp bước 10, report thêm dòng "Coverage: {N}/{N} states, {M}/{M} transitions".
    * **Thiếu** (vd 1 state không xuất hiện, hoặc 1 transition thiếu trigger) → tự bổ sung vào section vừa ghi, verify lại 9.5 rồi 9.6. Tối đa 2 lần tự sửa.
    * **Vẫn thiếu sau 2 lần** → báo user rõ state/transition nào chưa thể hiện được. KHÔNG âm thầm báo "xong" khi coverage chưa đủ.
+   * **Có object map** → chạy thêm `node .claude/skills/object-map/object-map-lint.mjs {file object map} --states docs/{feature}/srs` và đọc các dòng R8: trạng thái map có mà diagram không có (hoặc viết khác) → sửa diagram nếu là lỗi chính tả, còn lệch nghiệp vụ thì báo ở Output report, KHÔNG sửa map.
 10) **Output report:**
     ```
     ✅ State diagram appended: docs/{feature}/srs/{feature}-states.md → ## State: {Entity}
@@ -169,7 +172,8 @@ stateDiagram-v2
 * @../../rules/diagram-correctness.md
 * @../../rules/feature-bootstrap.md
 * @../../../_templates/diagram-state.md
-* @../../scripts/mermaid-verify.mjs (render-verify sau Write — bước 9.5)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+* @../../scripts/mermaid-verify.mjs (render-verify sau Write — bước 9.5)
+* @../object-map/SKILL.md (bản đồ đối tượng — nguồn transition từ cột "Đổi trạng thái", bước 2) + `../object-map/object-map-lint.mjs` (R8 đối chiếu tên trạng thái, bước 9.6)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->

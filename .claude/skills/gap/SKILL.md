@@ -107,8 +107,16 @@ Suy phase từ artifact có thật trong feature, KHÔNG so mọi feature với 
    * `kg-query.mjs facts {feature}` + `coverage {feature}` → chọn shortlist file (`⚠ còn N mục` → chạy lại `--all`; đọc hết mục `### Phải Read tay`).
    * Read **đầy đủ** UC (`usecases/uc-*.md`) + SRS spec (`srs/{feature}-spec.md` **hoặc** `srs/spec.md` — demo cũ dùng tên trần; đọc file nào tồn tại) + userflow + screen. **In rõ danh sách file đã Read** để BA thấy độ phủ.
 
+3b) **Đối chiếu bản đồ đối tượng (khi có `{feature}-object-map.md` / `docs/_shared/object-map.md`)** — map là bản khai "có A" độc lập với tài liệu feature, nên soi được hành động tài liệu quên mà state machine chưa vẽ:
+   * Đối tượng feature chạm tới = mọi đối tượng trong file feature + đối tượng cấp dự án có tên xuất hiện trong prose đã Read ở bước 3.
+   * **Hành động chưa phủ:** mỗi dòng Mục 3 của các đối tượng đó → grep (tên hành động + biến thể) trong FR / UC / userflow / screen. Không thấy ở đâu → finding, kèm dòng map (`file:line`) làm vế "có A" và danh sách file đã grep làm vế "không thấy B" (đúng Chống bịa mục 2).
+   * **Thiếu chiều ngược / kết thúc:** đối tượng có hành động tạo mà map không có hành động kết thúc (huỷ, thu hồi, ngừng, xoá…) — chạy `node .claude/skills/object-map/object-map-lint.mjs {file map}` và lấy các dòng cảnh báo R5. Đây là lỗ ở chính map, ghi kèm gợi ý `/object-map {feature}`.
+   * **Đi lại giữa màn:** quan hệ có cột "Đi được từ màn chi tiết" mà userflow không có cạnh tương ứng → finding (chỉ khi cả 2 đối tượng có màn chi tiết trong feature).
+   * Dòng map có ô 🟡 → KHÔNG tính là "có A"; in riêng nhóm *cần xác nhận* nếu đáng nêu. Không có map → in 1 dòng `Object map: SKIPPED — chưa có`, không bỏ im lặng.
+   * KHÔNG sửa map và KHÔNG sửa tài liệu feature — chỉ báo, BA quyết.
+
 4) **Spawn `@flow-reviewer`** qua Task tool trên **toàn feature** (không chỉ userflow.md):
-   * Input: prose đã Read ở bước 3 + output engine bước 2 (để nó không lặp lại cái đã có).
+   * Input: prose đã Read ở bước 3 + output engine bước 2 + findings bước 3b (để nó không lặp lại cái đã có).
    * Hỏi đúng việc: *nhánh error/edge nào có trong Error Matrix mà không màn nào hiển thị? UC nào có extension không ai xử lý? Màn nào vào được mà không có đường ra? Cặp hành động nào thiếu chiều về mà state machine không mô tả?*
    * Bắt buộc: mỗi finding **trích câu gốc + file:line**. Không trích được → loại.
    * Feature phức tạp (≥8 UC) → spawn thêm `@senior-ba` (góc edge case) song song.
@@ -121,7 +129,7 @@ Suy phase từ artifact có thật trong feature, KHÔNG so mọi feature với 
 
 8) **L1 approval** → **Write** `docs/_shared/traceability.md` (append/replace section `## Feature: {feature}`, giữ nguyên feature khác).
 
-9) **Output summary** — *"{N} luồng nghi thiếu ({M} mức mạnh), {K} nhánh chưa phủ, {L} liên kết ID thiếu"*. Gợi ý `/cr "<mô tả>"` để sửa cái BA xác nhận là gap thật.
+9) **Output summary** — *"{N} luồng nghi thiếu ({M} mức mạnh), {K} nhánh chưa phủ, {O} hành động trong object map chưa phủ, {L} liên kết ID thiếu"*. Gợi ý `/cr "<mô tả>"` để sửa cái BA xác nhận là gap thật.
 
 ## Approach — mode `--product` (tách biệt hoàn toàn)
 
@@ -143,6 +151,7 @@ Output **chính** là báo cáo luồng-nghiệp-vụ-còn-thiếu trả **trong
 
 * @engine/flowgap.mjs (3 thuật toán xác định: state-gap · reverse-pair · CRUD)
 * @../../agents/flow-reviewer.md (đọc prose bắt nhánh/case thiếu)
+* @../object-map/SKILL.md + `../object-map/object-map-lint.mjs` (bản đồ đối tượng — hành động/quan hệ khai sẵn làm vế "có A", bước 3b)
 * @../../rules/kg-usage.md (graph chọn file, prose kết luận)
 * @../../rules/approval-gate.md
 * @../../rules/naming-conventions.md (ID conventions)

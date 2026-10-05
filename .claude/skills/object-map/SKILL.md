@@ -24,7 +24,8 @@ Objects → Relationships → CTAs → Attributes, cộng vòng Representation �
 | Phạm vi | Đối tượng cốt lõi xuyên feature, đủ các bảng | Chỉ **delta**: đối tượng mới, quan hệ/hành động/thuộc tính feature thêm hoặc chạm tới |
 
 Output là đầu vào cho `/user-flow` (đường điều hướng giữa màn chi tiết), `/srs` (FR + phân quyền),
-`/wireframe-*` / `/figma-screen` (Items + mức hiển thị), `/erd` / `/state` (seed entity, transition),
+`/usecase` (ứng viên goal + actor + trạng thái trước/sau), `/wireframe-*` / `/figma-screen` (Items + mức
+hiển thị), `/erd` / `/state` (seed entity, transition),
 `/gap` (hành động thiếu chiều ngược). Skill này KHÔNG thay `/erd`: không có khoá, FK, kiểu dữ liệu.
 
 ## Constraints (must follow)

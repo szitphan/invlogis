@@ -106,6 +106,7 @@ Existing UCs: !`ls docs/*/usecases/uc-*.md 2>/dev/null | head -20`
    - **`srs/{feature}-spec.md` tồn tại → DOWNSTREAM mode.** Trích FR làm nguồn. `status: draft/in-review` → soft gate warn + proceed (xem `delivery-readiness.md`).
    - **`srs/{feature}-spec.md` KHÔNG tồn tại → DISCOVERY mode** (use case = elicitation sớm, viết trước SRS). Feature folder chưa có (arg gõ sai / feature mới) → phân biệt: 1 từ kebab lạ → hỏi "feature mới hay gõ nhầm? {list}"; mô tả/prose → derive slug + tạo folder (per nhóm A). Feature có folder + upstream (brainstorm/URD) nhưng chưa SRS → discovery, dùng upstream làm seed.
 2) **Read nguồn theo mode.** Downstream: SRS FR + flows + screens. Discovery: brainstorm/URD/PRD nếu có (seed), else phỏng vấn từ đầu.
+   - **Bản đồ đối tượng (khi có `{feature}-object-map.md` / `_shared/object-map.md`, cả 2 mode):** đọc bảng Vai trò nghiệp vụ + Mục 3 (hành động theo vai trò) của các đối tượng feature chạm tới. Mỗi dòng Mục 3 = 1 ứng viên goal (chưa phải UC — vẫn qua goal-level gate bước 3); Vai trò → Primary Actor (đối chiếu cột "Thuộc actor" với Actor Registry); "Đổi trạng thái" `A → B` → trạng thái A vào Preconditions, trạng thái B vào Success Guarantee (giữ nguyên nhãn). Hành động cặp (Phê duyệt / Từ chối) → thường 1 UC, nhánh còn lại thành Extension. Ô 🟡 (vai trò/trạng thái chưa rõ) → OQ, KHÔNG coi là đã chốt. Discovery mode: map thay phần lớn câu hỏi "ai làm gì" — chỉ phỏng vấn phần map không có (bước, nhánh lỗi, số nghiệp vụ).
    - **KG chọn nguồn trước (rẻ hơn scan):** chạy `node .claude/skills/kg/engine/kg-query.mjs facts {feature}` và `node .claude/skills/kg/engine/kg-query.mjs coverage {feature}` khi có SRS để lấy danh sách candidate/coverage, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.claude/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
 3) **Identify candidate user goals + classify goal level** (KHÔNG map máy móc FR→UC):
    - **Downstream:** đọc SRS FR + PRD capabilities + flows → tổng hợp thành **user goal** (actor muốn đạt gì, 1 phiên). 1 goal gom nhiều FR liên quan.
@@ -141,6 +142,7 @@ Existing UCs: !`ls docs/*/usecases/uc-*.md 2>/dev/null | head -20`
    - **Phủ (downstream):** FR P0 không thuộc bước nào của UC nào = thiếu; mã lỗi ở Extensions phải có trong Error Matrix, và lỗi Error Matrix gắn FR của UC phải xuất hiện ở Extensions.
    - **Đúng chuẩn:** sea-level, Trigger ≠ Precondition, Guarantees kiểm được.
    - **Discovery:** đối chiếu brainstorm/SOP thay cho FR; số nghiệp vụ không nguồn → OQ, không xếp BLOCKING.
+   - **Phủ object map (khi có):** dòng Mục 3 của đối tượng feature chạm tới mà không nằm ở UC nào (UC riêng, bước, hoặc Extension) = cảnh báo; Primary Actor khác Vai trò ghi trong map = cảnh báo. KHÔNG sửa map — lệch thì đề xuất `/object-map {feature}`.
    - Lỗi cơ học (mã lỗi, link FR, format bước) tự sửa; finding nghiệp vụ → 1 lượt câu hỏi đánh số cho user, tối đa 2 vòng. In `Review (@senior-ba): N chặn · M cảnh báo · K đã tự sửa · J chờ anh quyết`.
    - Trong `/srs` chain mode (Tầng 2): SKIP (Phase G đã có `@senior-ba`), in `Review: SKIPPED — chạy trong /srs`. User nói "khỏi review" → SKIP.
 9) **File đã tồn tại** → tự động vào update mode: **semantic diff** (L2 per file, merge info mới, preserve manual edit — KHÔNG regenerate toàn file). (Bỏ mâu thuẫn "skip nếu không xác nhận" cũ — update mode luôn show L2 diff, user Y/n mỗi file.)
@@ -214,7 +216,8 @@ Diagram KHÔNG embed trong UC — thuộc `srs/{feature}-flows.md` / `{feature}-
 - @../activity/SKILL.md
 - @../state/SKILL.md
 - @../../../_templates/usecase.md
-- @../../../_templates/usecase-index.md‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+- @../../../_templates/usecase-index.md
+- @../object-map/SKILL.md (bản đồ đối tượng — nguồn ứng viên goal + actor + trạng thái trước/sau, bước 2)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->

@@ -75,6 +75,17 @@ Không hỏi user những gì đọc được.
      tự chọn im lặng.
    * `srs/{feature}-spec.md` (FR/BR/Error Matrix), `srs/{feature}-states.md`, `usecases/uc-*.md`,
      file user tag bằng `@`.
+   * **Bản đồ đối tượng** `{feature}-object-map.md` + `docs/_shared/object-map.md` (nếu có) — nguồn
+     **phụ**, bảng 5 cột vẫn là hợp đồng. Dùng cho màn danh sách/thẻ/chi tiết của một đối tượng:
+     - Không có bảng 5 cột (vẽ thẳng từ SRS) → Items lấy theo cột "Hiện ở" (Thẻ / Danh sách / Chi
+       tiết) Mục 4; "Lọc"/"Sắp" → bộ lọc (CMP-05) / cột sắp được; nút lấy từ Mục 3, chỉ cho vai trò
+       được làm.
+     - Có bảng 5 cột → đối chiếu: thuộc tính mức Thẻ/Danh sách mà bảng thiếu, nút cho vai trò không có
+       quyền theo Mục 3 → **vẫn vẽ theo bảng**, ghi vào báo cáo mục "Đề xuất đổi so với bảng 5 cột".
+     - Đối tượng có dòng ở Mục 5 (đề xuất hiển thị dùng chung) → thẻ/dòng danh sách của đối tượng đó
+       vẽ giống nhau trên mọi màn (cùng instance nếu đã có component dự án; chưa có thì ghi gợi ý
+       `/figma-component` trong báo cáo, không tự dựng component).
+     KHÔNG sửa object map — lệch thì đề xuất `/object-map {feature}`.
    Có nguồn thì **dẫn xuất từ nguồn**, chỉ hỏi phần nguồn bỏ trống. Màn sẽ vẽ chưa có wireframe ở
    renderer nào → báo 1 dòng và hỏi: chạy `/wireframe-html` trước (đề xuất cho màn phức tạp) hoặc
    `/wireframe-ascii` (màn đơn giản), hay vẽ thẳng từ SRS (ghi "không có bảng 5 cột" trong báo cáo —
@@ -317,6 +328,7 @@ Ngắn, theo mẫu:
 Máy đã kiểm: layout 0 lỗi · a11y 0 lỗi mới (2 ngoại lệ đã biết) · DS compliance 1.00
 Bảng 5 cột (nguồn: HTML | ASCII): 2.1-web 12/12 · 2.2-web 9/9 row có trên màn | không có bảng 5 cột — vẽ từ SRS
 Đề xuất đổi so với bảng 5 cột: <liệt kê, hoặc "không">
+Object map: <n chỗ lệch bảng 5 cột (đã ghi ở Đề xuất đổi) · thẻ dùng chung: … | không có object map>
 Khớp đặc tả (@uxui-reviewer): 0 blocking / 1 warning | SKIPPED — <lý do>
 Usability (AI, chưa có người dùng thật): 3 tác vụ · 1 vượt tiêu chí bước · 0 blocking / 2 warning | SKIPPED — <lý do>
 Máy KHÔNG kiểm: <xem dưới, kèm mức ưu tiên [Cao]/[Trung]/[Thấp]>
@@ -391,5 +403,6 @@ Do's and Don'ts làm tiêu chí tự kiểm trước khi trình.
 - `design/components.md`: chọn component theo nhu cầu, cùng Usage, Nên/Không nên và Examples của từng component (dịch từ Astryx, chia theo section).
 - `design/design-tokens.css`: cùng bộ token, dạng CSS (cho prototype/code, không dùng khi vẽ Figma).
 - `design/setup-figma.md`: setup file Figma cho dự án mới (Cách A thư viện / Cách B bản sao) và bảng kiểm tra setup.
+- `docs/_shared/object-map.md` + `docs/{feature}/{feature}-object-map.md` (output `/object-map`): thuộc tính theo mức hiển thị, hành động theo vai trò, thẻ dùng chung — nguồn phụ Bước 1.3.
 - `design/figma-library-keys.json`: key component set để nạp từ thư viện đã publish (Cách A). Máy sinh, không sửa tay.
 - `figma_docs(section="api" | "recipes" | "rules" | "userflow")`: cú pháp công cụ.
