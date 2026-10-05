@@ -30,4 +30,5 @@
 | SRC-20 | `ui-common/web/web-common-rules.md` | UI common | ➖ | `design/ui-common/conventions.md`<br>`design/ui-common/screen-patterns.md` | — | 2026-10-01 | Đã chuyển đủ: SC-01…11 → CMP-01…11, mục 2.1…2.20 → GR-01…20. 40 ảnh (21 đang dùng) |
 | SRC-21 | `ui-common/app/app-common-rules.md` | UI common | ➖ | `design/ui-common/conventions.md`<br>`design/ui-common/screen-patterns.md` | — | 2026-10-01 | Chưa chuyển (MSC-01…11 + 18 quy tắc). 21 ảnh (18 đang dùng) |
 | SRC-22 | `srs-cu/lg-srs-export.md` | SRS cũ | ➖ | `docs/_shared/definitions.md`<br>`docs/_shared/object-map.md`<br>`docs/_shared/operating-environment.md`<br>`docs/_shared/project-profile.md`<br>`docs/_shared/system-overview.md` | BL-002, BL-003, BL-004 | 2026-10-01 | SRS cũ LG, 2.610 trang. Mới trích một phần vào `_shared`; chưa reverse |
+| SRC-23 | `srs-cu/srs-mobile/srs-mobile.md` | SRS cũ | ➖ | — | BL-002, BL-003, BL-004, BL-033 | 2026-10-05 | SRS ERP Delta 3.0 Mobile, PDF 277 trang, 298 bảng dựng lại, 341 ảnh; 8 trang mockup giữ ảnh. Phần [v2.0] là bản đầy đủ của `ui-common/app/app-common-rules.md`; bản mobile song song SRS web LG (SRC-22) |
 

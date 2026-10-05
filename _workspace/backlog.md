@@ -1,7 +1,7 @@
 ---
 type: backlog
 status: draft
-updated: 2026-10-04
+updated: 2026-10-05
 links:
   - docs-input/README.md
 ---
@@ -44,6 +44,7 @@ links:
 | BL-030 | Chạy thử luồng usability AI trên 1 feature thật: `/brainstorm` (bảng 3.1) → `/user-flow` (Mục 3.6) → `/figma-screen` gọi `@usability-reviewer`; sửa skill/agent theo kết quả | `.claude/agents/usability-reviewer.md` | `grep:docs/*/srs/*-userflow.md:^## 3\.6\. Tác vụ chính` | ⬜ | 2026-10-04 |  |  |
 | BL-031 | Đưa 4 đề xuất thẻ dùng chung (Mục 5 bản đồ đối tượng: Phương tiện, Nhà cung cấp, dòng mặt hàng, thẻ chứng từ) thành CMP qua `/update-overview patterns`, làm khi bắt đầu vẽ màn | `docs/_shared/object-map.md` | `grep:design/ui-common/screen-patterns.md:Ô chọn Nhà cung cấp` | ⬜ | 2026-10-05 |  |  |
 | BL-032 | Sửa fixture KG (`skills/kg/engine/test-fixtures/`) cho khớp engine hiện tại — đang 112 pass / 25 fail, hỏng sẵn cả ở kit | `_guides/pipeline.md` P-28 | `manual` | ⬜ | 2026-10-05 |  |  |
+| BL-033 | Reverse SRS mobile (feature cũ đang phát triển) sang bộ SRS chuẩn (`/reverse-doc`) | `srs-cu/srs-mobile/srs-mobile.md` | `grep:docs/_reverse/*/*-reverse-spec.md:srs-mobile` | ⬜ | 2026-10-05 |  |  |
 
 ## Đã xong
 
