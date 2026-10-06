@@ -47,6 +47,10 @@ Output gồm 2 file cạnh nhau: `deck.md` (nguồn, sửa được, diff git đ
 - **Không bịa nội dung.** Câu hỏi lấy từ nguồn thật. Phương án, bối cảnh, số liệu phải có gốc (tài liệu,
   SOP, hiện trạng khách đã nói); gốc ghi trong notes. Không có cơ sở thì bỏ phương án (slide thành câu
   hỏi mở với ô trả lời) và không đặt `recommend`. Xem `recipe-open-questions.md` mục "Phương án — chống bịa".
+- **Mỗi slide `oq` có dòng `**Tài liệu:**` cho khách đọc lại** — tên tài liệu như khách gọi (kèm ngày bản) +
+  số mục và tên mục theo bản gốc của khách. KHÔNG ghi đường dẫn, số dòng của bản `.md` nội bộ (lint chặn), KHÔNG
+  dẫn tài liệu do đội tự viết. Câu không có tài liệu gốc → `**Tài liệu:** chưa có trong tài liệu {khách} gửi`.
+  Thiếu dòng này → lint cảnh báo (`DOC_LABEL` trong `build-deck.py`).
 - **Lời của khách, không phải lời đội.** Câu hỏi viết lại bằng thuật ngữ nghiệp vụ (đọc
   `docs/_shared/project-profile.md` mục "Người dùng & thuật ngữ" theo `project-profile.md`); không hỏi
   khách về DB/API/kỹ thuật (IT-BA framing, `ba-conventions.md` Mục 3).
@@ -173,10 +177,19 @@ Chrome (verify): !`ls ~/Library/Caches/ms-playwright/chromium_headless_shell-*/c
 15. Xem ảnh `--shots` của slide bìa, slide Hướng dẫn (`async`), 1–2 slide `oq` và slide Tổng kết (Read PNG) để tự soi trước khi
     giao: chữ đè, thẻ lệch, nhãn đề xuất sai chỗ. Đây là phần "Mức 4" máy không kiểm.
 16. `open <deck.html>` để user xem.
+17. User cần **bản PDF đọc nhanh** (gửi kèm để khách lướt qua, in, xem trên điện thoại) → build thêm `--pdf`:
+    ra `{…}-deck.pdf` cạnh file HTML, mỗi slide 1 trang, BỎ slide hướng dẫn + tổng kết + thanh nút trả lời
+    (`?pdf` trong template); bản `async` có dòng "trả lời trong file HTML gửi kèm" ở bìa. Build kiểm số trang
+    khớp — lệch là FAIL. PDF chỉ để đọc; câu trả lời vẫn đi qua file HTML.
 
 ### Phase G — `/deck import <file-ket-qua.md>` (sau buổi họp)
 
 17. Read file kết quả (frontmatter `type: deck-result`, `deck: <đường dẫn deck.md>`) + deck.md gốc.
+    `async` còn có dạng **thư trả lời** khách dán vào email/Zalo (nút "Copy để dán vào email"): khối
+    `Câu N. {câu hỏi}` + `Trả lời: …` + `Ý kiến thêm: …`, ký tên cuối thư. User dán vào chat hoặc lưu
+    thành file → ghép theo **số thứ tự câu hỏi `oq` trong deck + đối chiếu nguyên văn câu hỏi**; lệch
+    (khách sửa chữ, thiếu câu) → báo từng câu, hỏi user, không đoán. Thư không có frontmatter → hỏi user
+    deck nào (đề xuất theo tên bộ câu hỏi ở câu mở đầu thư).
     Kiểm tra mọi `Mã` trong bảng có trong deck. Lệch → báo, không đoán. Cột `Nguồn` trống (file `async`
     không mang đường dẫn nội bộ) → lấy `src` từ slide cùng `id` trong deck.md.
     `delivery: async` có thể về **nhiều file** (mỗi người trả lời 1 file, frontmatter `respondent`): nhận
@@ -200,8 +213,10 @@ Chrome (verify): !`ls ~/Library/Caches/ms-playwright/chromium_headless_shell-*/c
 |---|---|
 | `docs/meetings/decks/{YYYY-MM-DD}-{meeting-slug}-{slug}-deck.md` | Nguồn slide (`type: meeting-deck`). `meeting-slug`: `oq` cho kịch bản open-questions |
 | `docs/meetings/decks/{…}-deck.html` | Bản trình chiếu, máy sinh, 1 file, chạy offline |
+| `docs/meetings/decks/{…}-deck.pdf` | Bản đọc nhanh (chỉ khi build `--pdf`), máy sinh — không trả lời được |
 | `{…}-ket-qua.md` | Kết quả họp (`meeting`), **user tải từ trình duyệt** (vào thư mục Downloads) — input cho `/deck import` |
 | `{…}-tra-loi.md` | Câu trả lời (`async`), **khách tải rồi gửi lại** qua email/Zalo — input cho `/deck import` |
+| Thư trả lời (dán) | `async`: khách bấm "Copy để dán vào email" → thư viết thường, đánh số câu (có in đậm khi dán vào Gmail/Outlook) — cũng là input cho `/deck import` |
 | `docs/meetings/{YYYY-MM-DD}-oq-{slug}.md` | Biên bản (chỉ khi `/deck import`) |
 
 **Báo cáo cuối** — in tách 4 mức như build-deck.py in ra (cú pháp · lint · hiển thị · nghiệp vụ chưa

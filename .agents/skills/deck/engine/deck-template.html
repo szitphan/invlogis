@@ -60,6 +60,7 @@ a { color: var(--d-hl-text); }
 .ctx p:last-child { margin: 0; }
 .lab { font-size: 20px; line-height: 1.4; margin: 0 0 10px; }
 .lab b { color: var(--d-muted); font-weight: 600; }
+.lab.srcdoc { font-size: 16px; color: var(--d-muted); margin-top: -4px; }
 
 /* layout: title */
 .l-title { justify-content: center; background: var(--d-accent); color: var(--d-on-accent); }
@@ -85,7 +86,7 @@ body.branded .brand-logo, body.branded .brand-mark { display: block; }
 body.branded .l-section, body.branded .l-end { background: var(--d-accent); color: var(--d-on-accent); }
 body.branded .l-section .foot, body.branded .l-end .foot { color: var(--d-on-accent); opacity: .6; }
 body.branded .l-title .bar, body.branded .l-section .bar, body.branded .l-end .bar { display: none; }
-body.branded .l-title h1 { max-width: 760px; }
+body.branded .l-title h1, body.branded .l-title p { max-width: 760px; }
 body.branded .l-title, body.branded .l-section, body.branded .l-end { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 .l-title > .brand-mark { position: absolute; right: 80px; top: 50%; transform: translateY(-50%); width: 300px; height: 297px; background-image: var(--brand-mark-on-primary); background-position: right center; }
 .l-section > .brand-mark { position: absolute; right: 72px; top: 56px; width: 130px; height: 129px; background-image: var(--brand-mark-on-primary); background-position: right top; }
@@ -128,7 +129,10 @@ body.branded .l-title, body.branded .l-section, body.branded .l-end { -webkit-pr
 .recap th { text-align: left; color: var(--d-muted); font-weight: 600; border-bottom: 2px solid var(--d-border); padding: 6px 8px; }
 .recap td { border-bottom: 1px solid var(--d-border); padding: 7px 8px; vertical-align: top; }
 .recap td.st { white-space: nowrap; font-weight: 600; }
-.recap .wrapr { flex: 1; overflow: hidden; }
+.recap a.qlink { color: inherit; text-decoration: none; cursor: pointer; }
+.recap a.qlink:hover { color: var(--d-accent); }
+.wrapr { flex: 1; min-height: 0; overflow: auto; }
+.recap thead th { position: sticky; top: 0; background: var(--d-surface); z-index: 1; }
 .tools { display: flex; gap: 10px; margin-top: 12px; }
 .tools button { font: 600 16px var(--d-font); padding: 8px 16px; border-radius: 8px; border: 1px solid var(--d-accent); background: var(--d-accent); color: var(--d-on-accent); cursor: pointer; }
 .tools button.sec { background: var(--d-surface); color: var(--d-text); border-color: var(--d-border); }
@@ -180,6 +184,9 @@ body.presenter #pv { display: grid; grid-template-columns: 1.6fr 1fr; grid-templ
 #pv .slide { display: flex; width: 1280px; height: 720px; top: 0; left: 0; transform-origin: top left; pointer-events: none; }
 
 /* ---- in ra PDF: mỗi slide 1 trang ---- */
+body.pdfview .decide, body.pdfview .chip { display: none !important; }
+body.pdfview .slide .foot > span:last-child { visibility: visible !important; }
+.pdfnote { margin-top: 28px; font-size: 18px; opacity: .8; }
 @media print {
   @page { size: 1280px 720px; margin: 0; }
   body { background: #fff; overflow: visible; }
@@ -210,6 +217,21 @@ body.presenter #pv { display: grid; grid-template-columns: 1.6fr 1fr; grid-templ
 (function () {
   'use strict';
   var D = JSON.parse(document.getElementById('deck-data').textContent);
+  /* ?pdf — bản đọc nhanh (in PDF): bỏ trang chỉ dùng được trên trình duyệt, đánh lại số trang */
+  if (new URLSearchParams(location.search).has('pdf')) {
+    document.body.classList.add('pdfview');
+    Array.prototype.forEach.call(document.querySelectorAll('#stage > .l-guide, #stage > .l-recap'), function (el) { el.remove(); });
+    var keep = document.querySelectorAll('#stage > .slide');
+    Array.prototype.forEach.call(keep, function (el, i) {
+      var pg = el.querySelector('.foot > span:last-child'); if (pg) pg.textContent = (i + 1) + ' / ' + keep.length;
+    });
+    var tf = document.querySelector('#stage > .l-title .fit');
+    if (tf && D.delivery === 'async') {
+      var p = document.createElement('p'); p.className = 'pdfnote';
+      p.textContent = 'Bản PDF để đọc nhanh. Anh/chị trả lời trong file HTML gửi kèm.';
+      tf.appendChild(p);
+    }
+  }
   var slides = Array.prototype.slice.call(document.querySelectorAll('#stage > .slide'));
   var N = slides.length;
   var qs = new URLSearchParams(location.search);
@@ -282,7 +304,7 @@ body.presenter #pv { display: grid; grid-template-columns: 1.6fr 1fr; grid-templ
       var rows = recapRows(), done = 0, def = 0;
       tb.innerHTML = rows.map(function (r) {
         if (r.a.choice === 'defer') def++; else if (r.a.choice) done++;
-        return '<tr><td>' + r.n + '</td><td>' + esc(r.o.question) + '</td><td class="st">' +
+        return '<tr><td>' + r.n + '</td><td><a class="qlink" href="#/' + (r.i + 1) + '" data-go="' + r.i + '" title="Mở câu hỏi ' + r.n + '">' + esc(r.o.question) + '</a></td><td class="st">' +
           (r.label ? esc(r.label) : '<span style="color:var(--d-muted)">' + (ASYNC ? 'Chưa trả lời' : 'Chưa chốt') + '</span>') + '</td><td>' + esc(r.a.note || '') + '</td></tr>';
       }).join('');
       var sum = el.querySelector('.sum');
@@ -334,13 +356,73 @@ body.presenter #pv { display: grid; grid-template-columns: 1.6fr 1fr; grid-templ
     a.href = u; a.download = D.resultName; document.body.appendChild(a); a.click();
     setTimeout(function () { URL.revokeObjectURL(u); a.remove(); }, 500);
   }
+  /* async: bản Copy là thư trả lời đọc được (dán vào email/Zalo), không phải .md.
+     Đánh số "Câu N" theo thứ tự trong deck + nguyên văn câu hỏi → /deck import ghép lại được. */
+  function dmy(iso) { var m = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '/' + m[2] + '/' + m[1] : String(iso || ''); }
+  function todayDmy() { var d = new Date(), p = function (x) { return String(x).padStart(2, '0'); }; return p(d.getDate()) + '/' + p(d.getMonth() + 1) + '/' + d.getFullYear(); }
+  function replyParts() {
+    var rows = recapRows(), done = 0, def = 0;
+    rows.forEach(function (r) { if (r.a.choice === 'defer') def++; else if (r.a.choice) done++; });
+    var who = (mem.respondent || '').trim();
+    return {
+      rows: rows, who: who,
+      intro: 'Gửi anh/chị câu trả lời cho bộ câu hỏi "' + D.title + '"' + (D.date ? ' nhận ngày ' + dmy(D.date) : '') + '.',
+      tally: 'Đã trả lời ' + done + '/' + rows.length + ' câu' + (def ? ', ' + def + ' câu cần trao đổi thêm' : '') +
+        (rows.length - done - def ? ', ' + (rows.length - done - def) + ' câu chưa trả lời' : '') + '.',
+      sign: (who || '') + (D.client ? (who ? ' — ' : '') + D.client : '') + ' · ' + todayDmy()
+    };
+  }
+  function replyText() {
+    var P = replyParts(), L = ['Chào anh/chị,', '', P.intro, P.tally, ''];
+    P.rows.forEach(function (r) {
+      L.push('Câu ' + r.n + '. ' + r.o.question);
+      L.push('   Trả lời: ' + (r.label || 'Chưa trả lời'));
+      if ((r.a.note || '').trim()) L.push('   Ý kiến thêm: ' + r.a.note.trim().replace(/\n+/g, ' '));
+      L.push('');
+    });
+    L.push('Trân trọng,'); L.push(P.sign);
+    return L.join('\n');
+  }
+  function replyHtml() {
+    var P = replyParts(), H = [];
+    H.push('<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#222">');
+    H.push('<p>Chào anh/chị,</p><p>' + esc(P.intro) + '<br>' + esc(P.tally) + '</p>');
+    P.rows.forEach(function (r) {
+      var ans = r.label ? esc(r.label) : '<span style="color:#888">Chưa trả lời</span>';
+      if (r.a.choice === 'defer') ans = '<span style="color:#8a6100">' + esc(r.label) + '</span>';
+      H.push('<p style="margin:0 0 12px"><b>Câu ' + r.n + '. ' + esc(r.o.question) + '</b><br>Trả lời: <b>' + ans + '</b>' +
+        ((r.a.note || '').trim() ? '<br>Ý kiến thêm: ' + esc(r.a.note.trim()) : '') + '</p>');
+    });
+    H.push('<p>Trân trọng,<br>' + esc(P.sign) + '</p></div>');
+    return H.join('');
+  }
   function copyMd(btn) {
     if (needName()) return;
-    var t = minutesMd();
-    var done = function () { if (btn) { var o = btn.textContent; btn.textContent = 'Đã copy'; setTimeout(function () { btn.textContent = o; }, 1500); } };
-    if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, function () { prompt('Copy nội dung:', t); });
-    else prompt('Copy nội dung:', t);
+    var t = ASYNC ? replyText() : minutesMd();
+    var done = function () { if (btn) { var o = btn.textContent; btn.textContent = 'Đã copy — dán vào email'; setTimeout(function () { btn.textContent = o; }, 2000); } };
+    var legacy = function () {
+      // file:// hoặc trình duyệt cũ: chọn vùng HTML ẩn rồi copy → vẫn giữ in đậm khi dán
+      try {
+        var box = document.createElement('div'); box.contentEditable = 'true';
+        box.style.cssText = 'position:fixed;left:-9999px;top:0;white-space:normal';
+        if (ASYNC) box.innerHTML = replyHtml(); else box.textContent = t;
+        document.body.appendChild(box);
+        var rg = document.createRange(); rg.selectNodeContents(box);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rg);
+        var ok = document.execCommand('copy'); sel.removeAllRanges(); box.remove();
+        if (ok) return done();
+      } catch (e) {}
+      prompt('Copy nội dung:', t);
+    };
+    if (ASYNC && navigator.clipboard && window.ClipboardItem) {
+      navigator.clipboard.write([new ClipboardItem({
+        'text/html': new Blob([replyHtml()], { type: 'text/html' }),
+        'text/plain': new Blob([t], { type: 'text/plain' })
+      })]).then(done, legacy);
+    } else if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, legacy);
+    else legacy();
   }
+  window.__deckReply = function () { return { text: replyText(), html: replyHtml() }; };  // để verify
   function resetAll() {
     if (!confirm(ASYNC ? 'Xoá toàn bộ câu trả lời đã ghi để làm lại từ đầu?' : 'Xoá toàn bộ quyết định đã ghi trong buổi họp này?')) return;
     mem.answers = {}; save();
@@ -363,6 +445,10 @@ body.presenter #pv { display: grid; grid-template-columns: 1.6fr 1fr; grid-templ
     var t = el.querySelector('[data-act="download"]'); if (t) t.addEventListener('click', download);
     t = el.querySelector('[data-act="copy"]'); if (t) t.addEventListener('click', function () { copyMd(this); });
     t = el.querySelector('[data-act="reset"]'); if (t) t.addEventListener('click', resetAll);
+    if (el.classList.contains('l-recap')) el.addEventListener('click', function (e) {
+      var q = e.target.closest && e.target.closest('[data-go]'); if (!q) return;
+      e.preventDefault(); go(parseInt(q.getAttribute('data-go'), 10));
+    });
     t = el.querySelector('.who'); if (t) t.addEventListener('input', function () { mem.respondent = this.value; this.classList.remove('need'); save(); });
   });
   paintRecap();

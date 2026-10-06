@@ -48,6 +48,8 @@ Khác cách viết so với họp:
 
 > {Bối cảnh 1–2 câu: hiện trạng / vì sao đang treo. Có số liệu thì nêu số}
 
+**Tài liệu:** {Tên tài liệu khách gửi (ngày bản)}, mục {số} {tên mục} — hoặc "chưa có trong tài liệu {khách} gửi"
+
 ### A. {Tên phương án ngắn}
 {1 dòng mô tả nếu tên chưa đủ rõ}
 + {ưu điểm nhìn từ phía khách}

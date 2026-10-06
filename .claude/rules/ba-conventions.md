@@ -140,6 +140,22 @@ __Kiểm nhanh:__ cắt xong tự hỏi *"còn phân biệt được skill này 
 đủ ngắn. Mỗi chi tiết định cắt phải đã tồn tại trong thân SKILL.md hoặc rule liên quan; nếu chỉ nằm ở
 description thì __chuyển vào chỗ đúng trước__, rồi mới cắt.‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
+## 10. Câu hỏi mở ghi kèm nguồn khách
+
+> Áp cho mọi skill ghi câu hỏi mở (`/brainstorm`, `/urd`, `/brd`, `/prd-epic`, `/srs`, `/object-map`,
+> `/reverse-doc`, `/code-to-srs`). Câu hỏi mở cuối cùng sẽ được hỏi khách (`/deck`), nên khách phải tự
+> mở lại được đúng chỗ trong tài liệu của họ.
+
+- Câu hỏi mở phát sinh từ tài liệu khách gửi (`docs-input/`) ghi __2 lớp nguồn__:
+  * __Nguồn nội bộ__ (cho đội): `file.md:dòng` như hiện nay.
+  * __Nguồn khách__: tên tài liệu như khách gọi + ngày bản + số mục, tên mục theo bản gốc
+    (vd "Giao nhận hàng hoá (18/9/2026), mục 3.1.3 Giao nhận container với hãng tàu"). KHÔNG đường dẫn, KHÔNG số dòng.
+- Câu không xuất phát từ tài liệu khách → "Nguồn khách: chưa có trong tài liệu khách gửi".
+- KHÔNG dẫn tài liệu do đội tự viết (bản tóm tắt, bộ kiến thức, báo cáo `/discover`) làm nguồn khách.
+- Cách ghi: bảng câu hỏi mở thêm cột `Nguồn khách`; dạng checklist thêm `— Nguồn khách: …` cuối dòng.
+- Tên + ngày bản tài liệu: lấy dòng `> Nguồn:` đầu file trong `docs-input/` (do `/intake` ghi). File cũ chưa có
+  dòng này → hỏi user tên khách gọi, đề xuất ghi vào cột Ghi chú của `docs-input/README.md`.
+
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->
 <sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền hoangphan.blog</sub>

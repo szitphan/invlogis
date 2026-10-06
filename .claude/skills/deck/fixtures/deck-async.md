@@ -36,6 +36,8 @@ Mở đầu 2 phút. Nhắc khách: hôm nay cần quyết, không cần trình 
 
 > Hiện mọi yêu cầu hoàn tiền đều qua quản lý. Giờ cao điểm có ngày tồn hơn 40 yêu cầu chờ duyệt.
 
+**Tài liệu:** Quy trình hoàn tiền (bản 01/09/2026), mục 3.2
+
 ### A. Duyệt tất cả
 + Kiểm soát chặt
 - Khách chờ lâu giờ cao điểm
@@ -61,6 +63,8 @@ Ngưỡng do khách đề xuất
 
 <!-- layout: oq; id: OQ-2; src: docs/refund/srs/refund-spec.md; group: Thông báo; time: 5 -->
 ## Khách có cần nhận thông báo khi yêu cầu hoàn tiền bị từ chối không, qua kênh nào?
+
+**Tài liệu:** chưa có trong tài liệu khách gửi
 
 ::: notes
 Câu mở — chưa có phương án, để khách tự trả lời.

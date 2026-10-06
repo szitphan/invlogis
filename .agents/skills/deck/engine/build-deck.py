@@ -57,6 +57,7 @@ INTERNAL_PATH = re.compile(r"\bdocs(?:-input)?/[\w./-]*|\b[\w-]+\.md\b")
 SLIDE_SEP = re.compile(r"^-{3,}\s*$")
 DIRECTIVE = re.compile(r"^<!--\s*(.*?)\s*-->\s*$")
 OPTION_H = re.compile(r"^###\s+([A-Z])[.)]\s*(.+)$")
+DOC_LABEL = "Tài liệu"  # dòng nguồn cho khách: tên tài liệu khách gửi + mục, không đường dẫn
 LABELED = re.compile(r"^\*\*([^*]{1,40}?):\*\*\s*(.*)$")
 
 
@@ -279,6 +280,9 @@ def lint(fm, slides):
                 oq_ids[oid] = n
             if not s["dir"].get("src"):
                 warns.append(f"{tag}: thiếu `src:` — /deck import không biết cập nhật về file nào")
+            if not any(a.lower() == DOC_LABEL.lower() for a, _ in s["labeled"]):
+                warns.append(f"{tag}: thiếu dòng `**{DOC_LABEL}:**` — khách không biết đọc lại ở tài liệu nào của họ"
+                             f" (câu không có tài liệu gốc thì ghi `**Tài liệu:** chưa có trong tài liệu {fm.get('client') or 'khách'} gửi`)")
         if lay == "recap":
             has_recap = True
         if s["dir"].get("time"):
@@ -307,7 +311,7 @@ def guide_slide(fm, has_open_q):
         + ("; câu không có phương án thì gõ câu trả lời vào ô lớn" if has_open_q else ""),
         "Câu trả lời tự lưu — đóng file rồi mở lại vẫn còn, miễn là **cùng máy, cùng trình duyệt**",
         f"Trang **Tổng kết** ở cuối: ghi tên người trả lời, bấm **Tải câu trả lời** rồi gửi file vừa tải cho {who}{by}. "
-        "Không gửi được file thì bấm **Copy** và dán vào email",
+        "Hoặc bấm **Copy để dán vào email** rồi dán thẳng vào email/Zalo — nội dung đã soạn sẵn thành thư trả lời",
     ]
     return {"n": 0, "dir": {"layout": "guide"}, "h1": None, "h2": "Hướng dẫn trả lời", "ctx": [], "labeled": [],
             "items": steps, "paras": [], "options": [], "notes": [], "order": ["li"] * len(steps), "layout": "guide"}
@@ -345,7 +349,8 @@ def render_flow(s):
             out.append(f'<div class="ctx"><p>{inline(s["ctx"][i_ctx])}</p></div>'); i_ctx += 1
         elif kind == "lab":
             a, b = s["labeled"][i_lab]; i_lab += 1
-            out.append(f'<p class="lab"><b>{inline(a)}:</b> {inline(b)}</p>')
+            cls = "lab srcdoc" if a.lower() == DOC_LABEL.lower() else "lab"
+            out.append(f'<p class="{cls}"><b>{inline(a)}:</b> {inline(b)}</p>')
         elif kind == "li":
             pending_li.append(s["items"][i_li]); i_li += 1
         elif kind == "p":
@@ -410,7 +415,7 @@ def render_slide(s, fm, oq_pos, oq_total, n_total):
         parts.append(render_flow(s))
         if asy:
             parts.append('<div class="tools"><input class="who" type="text" placeholder="Họ tên người trả lời">'
-                         '<button data-act="download">Tải câu trả lời</button><button class="sec" data-act="copy">Copy</button>'
+                         '<button data-act="download">Tải câu trả lời</button><button class="sec" data-act="copy">Copy để dán vào email</button>'
                          '<button class="sec" data-act="reset">Xoá câu trả lời</button></div>')
         else:
             parts.append('<div class="tools"><button data-act="download">Tải kết quả (.md)</button><button class="sec" data-act="copy">Copy</button><button class="sec" data-act="reset">Xoá để chạy lại</button></div>')
@@ -614,6 +619,25 @@ def chrome_args(chrome, prof):
     return a
 
 
+def export_pdf(out_path, pdf_path):
+    """In HTML (?pdf) ra PDF bằng Chrome headless — mỗi slide 1 trang. Trả (số trang | None, ghi chú)."""
+    chrome = find_chrome()
+    if not chrome:
+        return None, "Không tìm thấy Chrome — KHÔNG xuất được PDF"
+    url = "file://" + os.path.abspath(out_path) + "?pdf=1"
+    with tempfile.TemporaryDirectory() as prof:
+        cmd = chrome_args(chrome, prof) + ["--virtual-time-budget=3000", "--no-pdf-header-footer",
+                                           f"--print-to-pdf={os.path.abspath(pdf_path)}", url]
+        try:
+            subprocess.run(cmd, capture_output=True, timeout=120)
+        except subprocess.TimeoutExpired:
+            return None, f"Chrome treo quá 120s ({os.path.basename(chrome)})"
+    if not os.path.exists(pdf_path):
+        return None, "Chrome không ghi ra file PDF"
+    data = open(pdf_path, "rb").read()
+    return len(re.findall(rb"/Type\s*/Page[^s]", data)), ""
+
+
 def verify(out_path, n_slides, shots_dir=None):
     chrome = find_chrome()
     if not chrome:
@@ -651,6 +675,8 @@ def main():
     ap.add_argument("--verify", action="store_true", help="đo tràn chữ từng slide bằng Chrome headless")
     ap.add_argument("--shots", help="chụp PNG từng slide vào thư mục này (kèm --verify)")
     ap.add_argument("--force", action="store_true", help="vẫn ghi HTML dù lint lỗi")
+    ap.add_argument("--pdf", nargs="?", const="", metavar="PATH",
+                    help="xuất thêm PDF bản đọc nhanh (bỏ hướng dẫn/tổng kết/nút trả lời); mặc định cạnh file HTML")
     a = ap.parse_args()
 
     try:
@@ -712,6 +738,19 @@ def main():
                 print(f"  Ảnh chụp:                       {a.shots}/slide-NN.png")
     else:
         print("  Mức 3 — Hiển thị (Chrome):      SKIPPED (chạy kèm --verify để đo tràn chữ)")
+    if a.pdf is not None:
+        pdf_path = a.pdf or re.sub(r"\.html$", "", out) + ".pdf"
+        n_skip = sum(1 for s in slides if s["layout"] == "recap") + (1 if asy else 0)
+        pages, note = export_pdf(out, pdf_path)
+        if pages is None:
+            print(f"  PDF đọc nhanh:                  FAIL — {note}")
+            bad = True
+        else:
+            want = n_out - n_skip
+            ok = pages == want
+            print(f"  PDF đọc nhanh:                  {'PASS' if ok else 'FAIL'} — {pdf_path} ({pages} trang"
+                  f"{'' if ok else f', cần {want}'}; bỏ hướng dẫn, tổng kết, nút trả lời)")
+            bad = bad or not ok
     print("  Mức 4 — Nghiệp vụ:              CHƯA được máy kiểm — câu hỏi/phương án/đề xuất phải khớp nguồn, BA tự soi")
     sys.exit(1 if bad else 0)
 

@@ -61,6 +61,7 @@ Dòng phụ
 | `## …` | Tiêu đề slide. Với `oq`: **câu hỏi** |
 | `> …` | Khối bối cảnh (nền xám, viền trái) |
 | `**Nhãn:** nội dung` | Dòng có nhãn, vd `**Ảnh hưởng:** …` |
+| `**Tài liệu:** …` | Dòng nguồn cho khách (chữ nhỏ, xám): tên tài liệu khách gửi + ngày bản + số mục, tên mục. Đặt ngay sau `>` bối cảnh |
 | `- …` / `1. …` | Gạch đầu dòng |
 | dòng thường | Đoạn văn |
 | `### A. Tên phương án` | Mở một thẻ phương án (chỉ `oq`). Chữ cái A–D |
@@ -82,7 +83,7 @@ Thẻ phương án kết thúc khi gặp `### ` khác, `## `, `> ` hoặc `**Nh�
 | `goal` / `agenda` / `bullets` | Mục tiêu họp, agenda, bước tiếp theo | Cùng một khung, khác tên để đọc file dễ hơn |
 | `section` | Ngăn nhóm chủ đề | Chữ lớn giữa slide |
 | `oq` | Một câu hỏi mở | Có phương án → các thẻ bấm được để chốt. Không có phương án → ô trả lời lớn |
-| `recap` | Tổng kết | Bảng tự điền từ quyết định ghi trong buổi họp + nút Tải/Copy/Xoá |
+| `recap` | Tổng kết | Bảng tự điền từ quyết định ghi trong buổi họp (bấm vào câu hỏi để mở lại đúng slide câu đó) + nút Tải/Copy/Xoá |
 | `end` | Kết | Căn giữa |
 
 ## Hình thức (`delivery`)
@@ -96,6 +97,7 @@ Thẻ phương án kết thúc khi gặp `### ` khác, `## `, `> ` hoặc `**Nh�
 | Slide `recap` | Tải kết quả (.md) | Ô **Họ tên người trả lời** (bắt buộc trước khi tải/copy) + Tải câu trả lời |
 | Nhúng vào HTML | Ghi chú, `src`, `refs`, `recommend`, `time` | **Chỉ `id`** — ghi chú/nguồn/refs/time KHÔNG nhúng (khách mở mã nguồn là đọc được). Phím P tắt |
 | File xuất | `{…}-ket-qua.md` | `{…}-tra-loi.md`, frontmatter thêm `delivery`, `client`, `respondent`; cột Nguồn để trống |
+| Nút Copy | Chép nguyên `.md` kết quả | Chép **thư trả lời** đọc được: "Chào anh/chị" · tóm tắt số câu · `Câu N. …` / `Trả lời:` / `Ý kiến thêm:` · ký tên. Có cả bản HTML (in đậm khi dán vào email) và bản chữ thường (Zalo) |
 
 Lint riêng `async`: thiếu slide `recap` → **lỗi** (khách không có nút gửi lại); `reply_by` sai định dạng → lỗi;
 thiếu `reply_to` → cảnh báo (slide hướng dẫn ghi "gửi lại cho người đã gửi file này").
@@ -139,7 +141,7 @@ nội dung có logo nhỏ ở chân trang. Logo được nhúng base64 vào HTML
 | id | Hai slide `oq` trùng `id` |
 | Brand | `brand:` khai tên không có trong `design/brand/`, hoặc thiếu file logo ghi trong `brand.yml` |
 
-Cảnh báo (vẫn build): thiếu `id` / `src` trên `oq`, có `oq` mà không có `recap`, chỉ 1 phương án, thiếu
+Cảnh báo (vẫn build): thiếu `id` / `src` / dòng `**Tài liệu:**` trên `oq`, có `oq` mà không có `recap`, chỉ 1 phương án, thiếu
 field frontmatter.
 
 Mã nội bộ và đường dẫn chỉ được nằm trong directive hoặc `::: notes`. Đó là nơi BA cần thấy khi trả lời
