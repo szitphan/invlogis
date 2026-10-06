@@ -517,8 +517,8 @@ Chưa có mẫu **M (mobile)**. Xem Responsive Behavior và Known Gaps.
 
 | Mã | Mẫu | Khi nào dùng | Cấu trúc | Node Figma |
 | --- | --- | --- | --- | --- |
-| **M1** | Shell mobile | Khung ứng dụng trên mobile, thay S1/S2/S3 | `AppShell` Nav Layout=Content Only + `MobileNavToggle` (hamburger) mở `MobileNav` (drawer) | Chưa dựng — ráp từ component có sẵn |
-| **M2** | Danh sách mobile | Thay P1 trên màn hẹp | Header (heading-1 + nút chính dạng icon phải) → ô tìm full-width →`List`/`ListItem` Balanced (thay bảng nhiều cột) → nút thêm mới cố định đáy nếu cần | Chưa dựng |
+| **M1** | Shell mobile | Khung ứng dụng trên mobile, thay S1/S2/S3 — chỉ cho 4 màn gốc | `Device / Frame` → Body cuộn cao hết vùng Content (764), nội dung chạy **dưới** `Bottom Navigation` nổi; Body chừa đệm đáy 92 (= chiều cao thanh) để mục cuối không bị che. Màn con dùng M3/M4 (ẩn thanh). Không dùng hamburger/`MobileNav` (chốt 06/10/2026) | `Example/Shell Mobile` — Templates › Shell (`5383:7822`) |
+| **M2** | Danh sách mobile | Thay P1 trên màn hẹp | Header (heading-1 + icon Tìm — chạm mở ô tìm full-width thay hàng tiêu đề) → `Tabs` trạng thái có đếm (cuộn ngang khi nhiều) → mỗi bản ghi 1 `Card`: dòng 1 mã + `Badge` trạng thái, 2–3 dòng `MetadataList` (thay bảng nhiều cột; không dồn hết cột của P1) → chạm thẻ mở M4. **2 biến thể tạo mới:** (a) **Màn gốc** — trong M1, nút [+] dạng icon ở header, có `Bottom Navigation`; (b) **Màn con** — ← quay lại ở header, ẩn thanh, nút "Tạo mới" rộng hết cố định đáy (thumb zone). Trạng thái: có dữ liệu / rỗng / đang tải (`Skeleton` dạng thẻ) / lọc không ra (chốt 06/10/2026). Thẻ dùng `Card` **Elevation=none** — biến thể có bóng của thư viện không có slot Content | `Example/List Mobile` — Templates › Table: Màn gốc (`5389:46482`) · Màn con (`5390:7575`) · Rỗng (`5390:7961`) · Đang tải (`5390:8192`) · Lọc không ra (`5390:8447`) |
 | **M3** | Form mobile | Thay P2/P3 trên màn hẹp | Tiêu đề heading-1 → field xếp 1 cột (bỏ 2 cột) → nút gửi cố định đáy (thumb zone) → control chọn dùng`presentation="adaptive"` (mở `BottomSheet` thay popover) | Chưa dựng |
 | **M4** | Chi tiết mobile | Thay P7 trên màn hẹp | Back + heading-1 + hàng meta →`Tabs` thay rail phải (rail dời vào 1 tab riêng, theo Collapsing Strategy) → hành động chính cố định đáy | Chưa dựng |
 
@@ -666,7 +666,7 @@ thị* (xem *Responsive Behavior*). Vì vậy trên Figma, **không dựng compo
 cho mọi component. Thay vào đó mỗi example được bày theo **hàng ghép cặp**:
 
 * Khung examples tên `Examples · Web | Mobile`, trên cùng là hàng nhãn cột `WEB — Desktop` (1320) |
-  `MOBILE — App (390px)` (454), cách nhau 24px.
+  `MOBILE — App (375px)` (454), cách nhau 24px.
 * Mỗi example là một hàng `Row · <tên example>` (auto-layout ngang). Ô trái `Web / Block — …` là
   Block gốc, ô phải `Mobile / Block — …` cùng tiêu đề. Cả hai ô đặt chiều cao **Fill** để luôn bằng nhau.
 * Block vốn đã so sánh cả hai nền tảng (vd *Dialog — Adaptive presentation*) để một hàng trải hết bề
@@ -1275,6 +1275,85 @@ danh sách đang sửa / lỗi ô + Tooltip / bảng dòng hàng trong form bấ
   xuống dòng. Ghi chú dài hơn 1 dòng → không sửa trong ô, mở màn/Dialog của bản ghi.
 * Density: chỉ dựng Balanced (36). Bảng Compact (28) không cho sửa trong ô.
 
+### Device Frame (khung thiết bị mobile, 06/10/2026)
+
+Khung nền cho mọi màn mobile (mẫu M1–M4, khung "Mobile" của component dự án, màn `-mob`). Chỉ vẽ phần
+của hệ điều hành; không phải control, không có hành vi.
+
+| Set | Biến thể / thuộc tính | Dựng từ |
+| --- | --- | --- |
+| `Device / Status Bar` | Tone = Default / Inverted · TEXT `Time` | Theo file app DELTA ERP 3.0 (`hH32r7V3CaQ4UepOZq5pay`, node `414:8182`): giờ SF Pro Semibold 15; glyph sóng 4 cột, wifi, pin dựng lại bằng vector, màu gắn biến; Dynamic Island 126×37 đen, cách đỉnh 11 |
+| `Device / Home Indicator` | Tone = Default / Inverted | Thanh 134×5, `Radius/Full` |
+| `Device / Frame` | Không biến thể · SLOT `Content` | Status Bar + Content + Home Indicator |
+
+* **Kích thước:** mọi màn mobile dùng khung **393×852 (iPhone 14 Pro)** — đổi từ 375×812 ngày 06/10/2026.
+  Status bar cao 54 có Dynamic Island ở giữa; giờ căn giữa vùng trái, cụm sóng/wifi/pin căn giữa vùng phải.
+  Vùng Home indicator cao 34 (thanh cách đáy 8). Slot Content 393×764, không đè lên hai vùng an toàn.
+  Các khung 390×844 dựng trước đó (BottomSheet, Notification Center, Activity Log, M4 thử) chuyển dần sang 393.
+* Dynamic Island là phần cứng: đen cứng `#000` ở cả Light/Dark, không gắn biến.
+* **Tone:** Default = `Text/Primary` / `Icon/Primary` (tự đổi theo mode Light/Dark). Inverted =
+  `Text/On Dark` cho cả chữ và icon — dùng khi phần trên/dưới màn có nền tối, ảnh, hoặc đang mở scrim.
+  Đổi tone: chọn instance Status Bar / Home Indicator trong Frame (đã expose) → Tone.
+* **Nền khung:** `Core/Background Body`; màn cần nền khác thì đổi fill trên instance.
+* Luôn hiện cả Status bar và Home indicator (chốt 06/10/2026); màn ảnh toàn màn hình cần ẩn thì detach.
+* Giờ cố định "9:41", SF Pro Semibold 15 (font hệ thống iOS, không phải text style của dự án). Máy không
+  cài SF Pro thì Figma báo thiếu font — cài SF Pro từ Apple Developer.
+* Glyph ở tone Inverted gắn `Text/On Dark` vì chưa có biến `Icon/On Dark`.
+* Home indicator giữ bản dự án (gắn biến), cùng số đo với file app.
+* **Figma:** trang Layout, khung `Device Frame · innvie` (`5370:5589`) gồm Master Components và
+  Trạng thái & ví dụ (Light · Dark · Inverted trên nền tối · Có nội dung trong slot). `Device / Status Bar`
+  `5370:5625` · `Device / Home Indicator` `5370:5643` · `Device / Frame` `5371:3063`. Hai set Status Bar /
+  Home Indicator có nền xám ở trang Master để thấy được bản Inverted; nền này không theo vào instance.
+
+### Bottom Navigation (CMP-11 Mobile, 06/10/2026)
+
+Điều hướng chính của mẫu M1 trên mobile, thay hamburger + `MobileNav`. Astryx không có component này nên
+dựng thành component dự án.
+
+| Set | Biến thể / thuộc tính | Dựng từ |
+| --- | --- | --- |
+| `Bottom Navigation / Tab` | State = Rest / Selected · TEXT `Label` (ẩn, làm nhãn truy cập) · INSTANCE_SWAP `Icon` · BOOLEAN `Has Badge` | Icon 24; `Badge` Info Pill |
+| `Bottom Navigation / Scan` | State = Rest / Pressed | Tròn 56, nền `Core/Accent`, icon `icon/scan-qr-code` 24 `Core/On Accent`, `Elevation/Medium`; đặt giữa cột thứ 3, căn giữa dọc thanh |
+| `Bottom Navigation` | Selected = Trang chủ / Lịch nhắc / Thông báo / Tài khoản | Thanh nổi: 4 Tab + Scan giữa |
+
+* **Bố cục:** thanh nổi rộng 361 (lề 16 hai bên, khung 393), cao 64, bo `{rounded.page}`, nền `Core/Background Surface`,
+  `Elevation/Medium`; nổi đè lên nội dung ở đáy slot Content của `Device / Frame` (mép dưới thanh cách vùng
+  Home indicator 8), nội dung màn gốc cuộn dưới thanh và chừa đệm đáy 92 (xem M1). Chia 5 cột
+  bằng nhau: **Trang chủ · Lịch nhắc · [Quét] · Thông báo · Tài khoản**; nút Quét tròn 56 **nằm trong thanh,
+  căn giữa dọc** (lùi vào 4 như khối nền tab), không nhô lên — 06/10/2026, khi bỏ nhãn tab.
+* **Tab — chỉ icon, không hiện chữ** (chốt 06/10/2026, sau khi so với bản icon + nhãn). Nhãn vẫn khai trong
+  `Label` và ẩn đi, dùng làm nhãn truy cập cho trình đọc màn hình. Rest = `Icon/Secondary`. Selected = khối nền
+  `Core/Neutral` + `Icon/Primary`, nhận ra bằng cả nền lẫn màu. Không dùng `Accent Muted` vì trùng nền thanh
+  ở Dark. Cả cột bấm được (cao 64, đạt ≥ 44).
+* **Khối nền đồng tâm với thanh:** khối lùi vào 4 so với mép thanh (đệm dọc của Tab `Spacing/1` = đệm ngang của
+  Bar), rộng hết cột (68), cao 56, bo **24 = 28 (`{rounded.page}` của thanh) − 4**. Không có biến bán kính 24
+  nên để giá trị cứng. Đổi bo hoặc đệm của thanh thì tính lại theo công thức này.
+* **Màu icon khi thay icon:** icon thay qua `Icon` giữ màu gốc (`Icon/Primary`), không tự theo State → mỗi Tab
+  trong thanh gắn màu icon tường minh theo State (đã gắn cho 4 biến thể). Cùng lưu ý cho `Button` Primary thay
+  `Icon Source`: gắn icon `Core/On Accent`, nếu không icon tối trên nền tối.
+* **Icon:** Trang chủ `icon/house` · Lịch nhắc `icon/calendar-clock` · Thông báo `icon/bell` · Tài khoản
+  `icon/circle-user`.
+* **Badge** trên tab Thông báo: chỉ đếm việc cần xử lý, tối đa `9+` (CMP-02), `Badge` Info.
+* **Nút Quét:** chỉ icon, nhãn truy cập "Quét mã QR"; mở màn quét bằng camera.
+* **Nhãn tab** (không hiện, chỉ để trình đọc màn hình): Trang chủ · Lịch nhắc · Thông báo · Tài khoản.
+* **Khi nào thanh hiện, khi nào ẩn:**
+  * Thanh **chỉ hiện ở 4 màn gốc** — màn đầu tiên khi chạm mỗi tab (Trang chủ, Lịch nhắc, Thông báo, Tài khoản).
+  * Khi **đi sâu vào màn con** (vd từ Thông báo chạm 1 thông báo → màn chi tiết; từ Trang chủ chạm
+    "Tạo mới" → form), thanh **ẩn**, nút Quét ẩn theo.
+  * Màn con có nút **←** góc trên trái để quay lại; về màn gốc thì thanh hiện lại, đúng tab lúc rời đi.
+  * Đáy màn con dành cho **hành động chính của màn đó**, cố định đáy (dễ chạm bằng ngón cái): form (M3) →
+    nút **Gửi**/**Lưu** rộng hết màn; chi tiết (M4) → hành động chính của bản ghi (vd **Xác nhận**). Màn con
+    không có hành động → đáy để trống, chỉ còn Home indicator.
+  * Lý do: không có hai thanh chồng nhau ở đáy; không chạm nhầm sang tab khác khi đang nhập dở form (rời
+    form có dữ liệu chưa lưu theo GR-13); nhường chỗ cho nội dung màn con.
+  * Màn con cần quét (vd quét mã trong form) tự đặt nút quét riêng trong màn, không dựa vào nút Quét của thanh.
+* Chạm lại tab đang chọn → cuộn danh sách về đầu (đề xuất).
+* **UC phải khai báo:** feature mở từ tab nào / màn nào; quét xong đi tới màn nào.
+* **Figma:** trang Layout, khung `Bottom Navigation · innvie` (`5377:5655`) gồm Master Components và
+  Trạng thái & ví dụ (Trang chủ · Lịch nhắc · Thông báo badge 9+ · Tài khoản Dark · Quét đang nhấn, đặt
+  trong `Device / Frame`). `Bottom Navigation / Tab` `5377:5693` · `Bottom Navigation / Scan` `5377:5715`
+  · `Bottom Navigation` `5381:3341`. Tab và Scan trong thanh đã expose (bật/tắt badge, Scan Pressed).
+
 ## States
 
 ### Trạng thái giao diện: mọi màn phải có đủ
@@ -1513,7 +1592,7 @@ Control 28/32/36px, nhỏ hơn 44px. Xem mục Accessibility.
 
 ### Collapsing Strategy (định hướng, chưa có chuẩn)
 
-SideNav → MobileNav; bảng nhiều cột → List/Item; form 2 cột → 1 cột; rail phải của P7 → dời xuống dưới hoặc vào Tab. Các quy tắc này **chưa có chuẩn** trong Figma, nên khi vẽ mobile phải ghi "chưa có chuẩn trong design.md". Đã có spec cụ thể ở *Mẫu bố cục (M = mobile)* (Layout, mượn nguyên tắc lưới 8pt/thumb zone/tối đa 4 cỡ chữ từ `mobile-app-ui-design`); Figma node cho M1–M4 vẫn chưa dựng.
+SideNav → Bottom Navigation (§ Bottom Navigation); bảng nhiều cột → List/Item; form 2 cột → 1 cột; rail phải của P7 → dời xuống dưới hoặc vào Tab. Các quy tắc này **chưa có chuẩn** trong Figma, nên khi vẽ mobile phải ghi "chưa có chuẩn trong design.md". Đã có spec cụ thể ở *Mẫu bố cục (M = mobile)* (Layout, mượn nguyên tắc lưới 8pt/thumb zone/tối đa 4 cỡ chữ từ `mobile-app-ui-design`); Figma node: M1, M2 đã dựng; M3, M4 chưa.
 
 ## Iteration Guide
 
@@ -1569,7 +1648,10 @@ SideNav → MobileNav; bảng nhiều cột → List/Item; form 2 cột → 1 c�
 > bịa giá trị — hỏi user, hoặc vẽ theo quy định hiện có và ghi "chưa có chuẩn trong design.md".
 
 **Mobile**
-* KG-03 · Breakpoint, lưới cột, mẫu mobile: spec M1–M4 đã có (29/09/2026) nhưng chưa dựng node Figma → vẽ mobile ghi "chưa có chuẩn trong design.md — theo spec M, chưa có node Figma".
+* KG-03 · Breakpoint, lưới cột, mẫu mobile: spec M1–M4 đã có (29/09/2026). Khung nền `Device / Frame`
+  393×852 (iPhone 14 Pro) đã dựng (06/10/2026, `5371:3063`); M1 (`5383:7822`) và M2 (5 khung `Example/List Mobile`) đã
+  dựng; M3–M4 chưa dựng node Figma → vẽ
+  mobile dùng `Device / Frame` và ghi "chưa có chuẩn trong design.md — theo spec M, chưa có node Figma".
 
 **Component dự án chờ xác nhận / duyệt** — spec trong § Components - innvie logis là bản hiện hành
 * KG-29 · EmptyState có hình minh hoạ đang thử (01/10/2026, trang 🧪 Sandbox): set `Illustration / Empty State` (`5277:1598`) Scene = Chưa có dữ liệu / Không có kết quả / Lỗi mạng / Không có quyền × Source = Tự vẽ / unDraw, 200×150, màu gắn biến `Color`; set `EmptyState / Illustrated` (`5281:48386`) bọc `EmptyState` Default rộng 480, hình trong slot Icon, 1 Button MD trong slot Actions; 4 màn ví dụ nhân bản từ 4.1 (y=4300). Cần quyết: (1) giữ nguồn Tự vẽ hay unDraw (license unDraw: thương mại, không cần ghi nguồn, cấm phân phối lại thành bộ); (2) cỡ hình 200×150, bề rộng 480; (3) câu chữ + nút cho Không có quyền / 404; (4) bóng unDraw đen 10% chưa gắn biến; (5) dùng hình ở mọi trạng thái rỗng hay chỉ khối lớn/toàn trang (Compact giữ icon); (6) ghi spec vào § Components và § States. Khi vẽ: tạm dùng `EmptyState` icon như § States; muốn dùng bản có hình thì ghi "chưa có chuẩn trong design.md — KG-29".

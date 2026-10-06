@@ -51,9 +51,9 @@ CMP-05 Bộ lọc nâng cao và CMP-06 Tuỳ chỉnh cột: đã có node nhưng
 popover tách khỏi ngữ cảnh) — cần chọn/dựng khung chụp riêng rồi gắn lại ảnh.
 
 **Việc còn mở — Mobile (2026-10-04):** bố cục mobile chưa có chuẩn trong design.md (KG-03, spec M chưa
-có node Figma) → mọi khối Mobile và CMP-12 chưa có node, chưa có ảnh. CMP-11 Bottom Navigation khác spec
-M1 của design.md (hamburger + MobileNav) và Astryx chưa có component tương ứng — cần chốt rồi cập nhật
-M1. CMP-05 Mobile cao tối đa 85% chưa có biến thể BottomSheet tương ứng (Capped 62% / Tall 92%).
+có node Figma; khung nền `Device / Frame` 393×852 (iPhone 14 Pro) có từ 06/10/2026) → mọi khối Mobile và CMP-12 chưa có
+node, chưa có ảnh. CMP-11 Mobile: chốt Bottom Navigation 4 tab + nút Quét giữa là điều hướng của M1
+(06/10/2026), dựng thành component dự án. CMP-05 Mobile cao tối đa 85% chưa có biến thể BottomSheet tương ứng (Capped 62% / Tall 92%).
 
 ---
 
@@ -353,15 +353,17 @@ Cấu trúc menu theo phân quyền role: người dùng chỉ thấy module đ�
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
-| 1 | Thanh điều hướng | — | — | • Cố định đáy, phía trên vùng an toàn của máy |
-| 2 | Tab | Button | Click | • 4 tab, mỗi tab icon + nhãn ngắn: Trang chủ · Lịch nhắc · Thông báo · Tài khoản |
-| 3 | Tab đang chọn | — | — | • Icon + nhãn nổi bật; tab khác màu nhạt |
+| 1 | Thanh điều hướng | — | — | • Thanh nổi cố định đáy, phía trên vùng an toàn của máy<br>• Chỉ hiện ở 4 màn gốc; màn con ẩn thanh, đáy dành cho hành động chính của màn |
+| 2 | Tab | Button | Click | • 4 tab chỉ icon (không hiện chữ), nhãn truy cập: Trang chủ · Lịch nhắc · Thông báo · Tài khoản |
+| 3 | Tab đang chọn | — | — | • Khối nền đồng tâm với thanh + icon đậm; tab khác icon nhạt<br>• Chạm lại → cuộn về đầu |
 | 4 | Badge | Badge | ReadOnly | • Trên tab Thông báo, tối đa `9+` (theo CMP-02) |
+| 5 | Nút Quét | Button | Click | • Tròn, giữa thanh, nhô lên trên mép; chỉ icon, nhãn truy cập "Quét mã QR"<br>• Mở màn quét bằng camera |
 
-- Khác spec M1 của design.md (hamburger + `MobileNav`); Astryx chưa có component Bottom Navigation —
-  chưa có chuẩn trong design.md.
-- **Figma:** chưa gắn.
-- **UC phải khai báo:** feature mở từ tab nào / màn nào.
+- Là điều hướng của mẫu M1 (design.md › Bottom Navigation, chốt 06/10/2026). Astryx chưa có component
+  này → component dự án.
+- **Figma:** component dự án `Bottom Navigation` · node mẫu: [5381:3341](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=5381-3341) · ảnh: chưa gắn
+- **design.md:** Bottom Navigation
+- **UC phải khai báo:** feature mở từ tab nào / màn nào; quét xong đi tới màn nào.
 
 ## CMP-12 — Success Bottom Sheet
 
