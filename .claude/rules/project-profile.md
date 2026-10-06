@@ -90,6 +90,7 @@ Constraints + References của chính nó** (kiểm được bằng `grep -l pro
 | `/userguide` | thuật ngữ người dùng, audience đề xuất, domain |
 | `/roadmap` | thuật ngữ người dùng (Reach), domain |
 | `/object-map` | domain, thuật ngữ người dùng, cách gọi hành động (vd "Thu hồi") |
+| `/deck` | thuật ngữ gọi người dùng (viết lại câu hỏi theo lời khách) |
 | `/update-overview` | quản lý trực tiếp file profile (target `profile`) |
 
 Skill khác cần thông tin cấp dự án → nối thêm theo đúng mẫu trên (1 dòng Constraint + 1 dòng

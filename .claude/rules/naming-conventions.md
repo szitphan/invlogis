@@ -84,6 +84,8 @@
 | Doc-drift report (toàn hệ) | `docs/reports/doc-drift/{YYYY-MM-DD}-product-code-drift.md` — cùng type, output của `/doc-drift --all` (mọi feature + toàn mạng integration + sơ đồ phụ thuộc). |
 | Atlassian sync-state (mapping GỘP Jira+Confluence) | `.claude/state/atlassian/sync-state.yaml` (config + mapping + watermark/hash, 1 entry/artifact, key `mappings.jira`/`mappings.confluence`) + `base/*.json` (snapshot 3-way) + `locks/`. **Thay hẳn** `docs/_shared/jira-map.md` + `confluence-map.md` cũ (đã migrate + xóa). Output của `/jira` + `/confluence`. Xem `.claude/rules/atlassian-sync.md`. |
 | Meeting | `docs/meetings/YYYY-MM-DD-{type}-{slug}.md` (project-level). Decisions/blockers/action items sống dưới dạng table TRONG file này — KHÔNG có file riêng cho decision/blocker. |
+| Brand (thương hiệu đơn vị trình bày) | `design/brand/{slug}/brand.yml` (màu primary/on-primary/accent + tên file logo/mark) + `logo-*.png`, `mark-*.png` nền trong suốt + `source/` (file gốc user gửi). Dùng bởi `/deck` (frontmatter `brand:`). |
+| Meeting deck (slide họp khách) | `docs/meetings/decks/YYYY-MM-DD-{meeting-slug}-{slug}-deck.md` (nguồn, `type: meeting-deck`) + `.html` cùng tên (máy sinh bởi `.claude/skills/deck/engine/build-deck.py`, KHÔNG sửa tay). `meeting-slug`: `oq` = chốt câu hỏi mở. Kết quả họp user tải từ trình duyệt (`{…}-ket-qua.md`, `type: deck-result`) là input của `/deck import`. Output của `/deck`. |
 | Inbox capture | `docs/inbox/YYYY-MM-DD-{slug}.md` (project-level) |
 | Change Request | `docs/cr/CR-{YYYYMMDD}-{NNN}.md` (project-level) |
 | Impact assessment | **Section trong CR record** (`docs/cr/CR-*.md` — Impact Matrix + Detailed Impact + Rollback Plan). KHÔNG còn file `docs/impacts/` riêng — 1 CR = 1 file self-contained. |
@@ -183,6 +185,8 @@ Recommended optional fields:
 | `api-tests` | `docs/{feature}/test/api/api-tests.md` (bảng TC Bruno). Output của `/api-test`. |
 | `api-readiness` | `docs/{feature}/integration/api-readiness.md` (go-live gate + go/no-go). Output của `/api-readiness`. |
 | `meeting` | `docs/meetings/*.md` |
+| `meeting-deck` | `docs/meetings/decks/*-deck.md` (nguồn slide họp khách: frontmatter `type/meeting/feature?/title/client/date/duration/status/updated/links`, slide ngăn bằng `---`). Output của `/deck`. |
+| `deck-result` | File kết quả họp tải từ deck HTML (bảng Mã/Nguồn/Câu hỏi/Quyết định/Ghi chú/Lúc). Không lưu trong vault — input tạm của `/deck import`. |
 | `inbox` | `docs/inbox/*.md` |
 
 ## ID conventions (cross-doc references)
