@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sổ tay nghiệp vụ Delta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mục lục dính bên trái (màn rộng) + một cột đọc ~ 70 ký tự; sơ đồ dựng bằng HTML/CSS để co giãn theo màn. */
+:root {
+  --bg: #eef2f4;
+  --paper: #ffffff;
+  --ink: #15222c;
+  --muted: #56666f;
+  --line: #d3dce1;
+  --accent: #e3a21a;      /* vàng cần cẩu cảng — chỉ dùng để tô, không dùng cho chữ */
+  --accent-ink: #8a5a00;
+  --accent-soft: #fbf0d6;
+  --sea: #1d6a86;
+  --sea-soft: #e1eff5;
+  --warn: #b3261e;
+  --warn-soft: #fbe7e5;
+  --r-cs: #2f6fb3;  --r-cs-soft: #e3eefa;
+  --r-ht: #2e8a5a;  --r-ht-soft: #e2f3ea;
+  --r-dv: #8a4fb0;  --r-dv-soft: #f1e8f8;
+  --r-lx: #b5651d;  --r-lx-soft: #fbeee2;
+  --r-sys: #5d6b75; --r-sys-soft: #eceff1;
+  --f-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --f-body: "Be Vietnam Pro", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d151b; --paper: #142029; --ink: #e5edf1; --muted: #9caeb8; --line: #283a46;
+    --accent: #f0b43c; --accent-ink: #f0b43c; --accent-soft: #33290f;
+    --sea: #62b6d4; --sea-soft: #12303c; --warn: #ff8a80; --warn-soft: #3a1714;
+    --r-cs: #7fb2ec; --r-cs-soft: #16293d; --r-ht: #74c99b; --r-ht-soft: #13301f;
+    --r-dv: #c79be6; --r-dv-soft: #2a1d36; --r-lx: #eaa167; --r-lx-soft: #36230f;
+    --r-sys: #a7b4bd; --r-sys-soft: #1f2a31;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d151b; --paper: #142029; --ink: #e5edf1; --muted: #9caeb8; --line: #283a46;
+  --accent: #f0b43c; --accent-ink: #f0b43c; --accent-soft: #33290f;
+  --sea: #62b6d4; --sea-soft: #12303c; --warn: #ff8a80; --warn-soft: #3a1714;
+  --r-cs: #7fb2ec; --r-cs-soft: #16293d; --r-ht: #74c99b; --r-ht-soft: #13301f;
+  --r-dv: #c79be6; --r-dv-soft: #2a1d36; --r-lx: #eaa167; --r-lx-soft: #36230f;
+  --r-sys: #a7b4bd; --r-sys-soft: #1f2a31;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 16px; line-height: 1.65;
+  padding-inline: 16px; padding-block: 0 64px;
+}
+a { color: var(--sea); }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+code, .mono { font-family: var(--f-mono); font-size: .88em; }
+
+.shell { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 32px; }
+@media (min-width: 1000px) { .shell { grid-template-columns: 230px minmax(0, 1fr); } }
+
+/* Mục lục */
+.toc { font-size: 14px; }
+.toc details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; margin-top: 16px; }
+.toc summary { cursor: pointer; font-weight: 600; }
+.toc ol { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 2px; }
+.toc a { color: var(--muted); text-decoration: none; display: block; padding: 3px 0; }
+.toc a:hover { color: var(--ink); }
+.toc .n { font-family: var(--f-mono); font-size: 12px; color: var(--accent-ink); display: inline-block; width: 26px; }
+@media (min-width: 1000px) {
+  .toc { position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; max-height: 100vh; overflow-y: auto; padding-block: 24px; }
+  .toc details { border: 0; background: transparent; padding: 0; margin: 0; }
+  .toc summary { list-style: none; font-family: var(--f-display); text-transform: uppercase; letter-spacing: .08em; font-size: 13px; color: var(--muted); pointer-events: none; }
+  .toc summary::-webkit-details-marker { display: none; }
+}
+
+main { min-width: 0; max-width: 760px; }
+
+/* Đầu trang */
+.hero { padding-block: 40px 28px; border-bottom: 3px solid var(--ink); margin-bottom: 8px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); }
+.hero h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(40px, 7vw, 64px); line-height: 1; margin: 10px 0 14px; text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; }
+.hero p { margin: 0; max-width: 62ch; color: var(--muted); font-size: 17px; }
+.marking { display: inline-flex; gap: 0; margin-top: 18px; font-family: var(--f-mono); font-size: 13px; border: 2px solid var(--ink); }
+.marking span { padding: 4px 10px; }
+.marking span + span { border-left: 2px solid var(--ink); }
+.marking b { color: var(--accent-ink); }
+
+section { padding-top: 44px; }
+h2 { font-family: var(--f-display); font-weight: 700; font-size: 32px; line-height: 1.1; margin: 0 0 6px; text-transform: uppercase; text-wrap: balance; display: flex; gap: 12px; align-items: baseline; }
+h2 .n { font-family: var(--f-mono); font-size: 14px; font-weight: 500; color: var(--paper); background: var(--ink); padding: 2px 7px; border-radius: 3px; flex: none; transform: translateY(-4px); }
+h3 { font-size: 18px; margin: 28px 0 8px; text-wrap: balance; }
+.lead { color: var(--muted); margin: 0 0 18px; max-width: 65ch; }
+p { max-width: 68ch; }
+
+/* Hộp "hiểu nhanh" */
+.analogy { background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 16px 0; }
+.analogy b:first-child { font-family: var(--f-display); text-transform: uppercase; letter-spacing: .06em; font-size: 14px; color: var(--accent-ink); display: block; margin-bottom: 2px; }
+.analogy p { margin: 4px 0 0; }
+.note { background: var(--sea-soft); border-radius: 6px; padding: 10px 14px; margin: 16px 0; font-size: 15px; }
+.warnbox { background: var(--warn-soft); border-radius: 6px; padding: 10px 14px; margin: 16px 0; font-size: 15px; }
+.warnbox b:first-child { color: var(--warn); }
+.src { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+/* Bảng */
+.tbl { overflow-x: auto; margin: 14px 0; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+th { font-family: var(--f-display); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; font-size: 13px; color: var(--muted); background: var(--bg); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.k { font-weight: 600; white-space: nowrap; }
+
+/* Thẻ */
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin: 14px 0; }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+.card h4 { margin: 0 0 4px; font-size: 16px; }
+.card .like { font-size: 13.5px; color: var(--accent-ink); margin: 0 0 6px; }
+.card p { margin: 0; font-size: 14.5px; }
+.card ul { margin: 6px 0 0; padding-left: 18px; font-size: 14.5px; }
+.group-label { font-family: var(--f-display); text-transform: uppercase; letter-spacing: .08em; font-size: 14px; color: var(--muted); margin: 22px 0 -4px; }
+
+/* Chip vai trò */
+.chip { display: inline-block; font-size: 12.5px; font-weight: 600; padding: 1px 8px; border-radius: 999px; white-space: nowrap; border: 1px solid currentColor; }
+.cs { color: var(--r-cs); background: var(--r-cs-soft); }
+.ht { color: var(--r-ht); background: var(--r-ht-soft); }
+.dv { color: var(--r-dv); background: var(--r-dv-soft); }
+.lx { color: var(--r-lx); background: var(--r-lx-soft); }
+.sys { color: var(--r-sys); background: var(--r-sys-soft); }
+.doc { display: inline-block; font-family: var(--f-mono); font-size: 12px; padding: 1px 6px; border: 1px dashed var(--muted); border-radius: 3px; color: var(--ink); background: var(--paper); white-space: nowrap; }
+
+.role-card { border-top: 4px solid currentColor; }
+.role-card h4 { color: inherit; }
+.role-card > * { color: var(--ink); }
+.role-card h4 { color: currentColor; }
+.role-card.cs { color: var(--r-cs); background: var(--paper); }
+.role-card.ht { color: var(--r-ht); background: var(--paper); }
+.role-card.dv { color: var(--r-dv); background: var(--paper); }
+.role-card.lx { color: var(--r-lx); background: var(--paper); }
+.role-card.sys { color: var(--r-sys); background: var(--paper); }
+.role-card dl { margin: 8px 0 0; display: grid; gap: 6px; font-size: 14px; }
+.role-card dt { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.role-card dd { margin: 0; }
+
+/* Vòng đời container */
+.loop { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 16px 0; }
+.stop { flex: 1 1 150px; min-width: 0; background: var(--paper); border: 2px solid var(--ink); padding: 10px 12px; position: relative; }
+.stop .place { font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: 18px; line-height: 1.1; }
+.stop .what { font-size: 13.5px; margin: 4px 0 6px; }
+.stop .docs { display: flex; flex-wrap: wrap; gap: 4px; }
+.stop.box-empty { border-style: dashed; }
+.arrow { flex: 0 0 34px; display: flex; align-items: center; justify-content: center; font-family: var(--f-mono); color: var(--muted); font-size: 20px; }
+.box-legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--muted); }
+.box-legend span::before { content: ""; display: inline-block; width: 18px; height: 11px; border: 2px solid var(--ink); margin-right: 6px; vertical-align: -1px; }
+.box-legend span.e::before { border-style: dashed; }
+@media (max-width: 640px) {
+  .loop { flex-direction: column; }
+  .arrow { flex-basis: 26px; transform: rotate(90deg); }
+}
+
+/* Ba tờ phiếu */
+.objects { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 18px 0; }
+@media (min-width: 700px) { .objects { grid-template-columns: 1fr 40px 1fr 40px 1fr; align-items: stretch; } }
+.obj { background: var(--paper); border: 1px solid var(--line); border-radius: 4px; padding: 14px; box-shadow: 4px 4px 0 var(--line); min-width: 0; }
+.obj .code { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.obj h4 { font-family: var(--f-display); text-transform: uppercase; font-size: 22px; margin: 2px 0 6px; line-height: 1; }
+.obj p { font-size: 14px; margin: 0; }
+.obj .like { font-size: 13px; color: var(--accent-ink); margin-top: 8px; }
+.link2 { display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: var(--f-mono); font-size: 12px; color: var(--muted); text-align: center; line-height: 1.2; }
+.link2 b { font-size: 18px; color: var(--ink); }
+
+/* Dòng chảy 4 quy trình */
+.pipe { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin: 16px 0; counter-reset: p; }
+.pipe .proc { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; min-width: 0; }
+.pipe .proc.focus { border: 2px solid var(--accent); background: var(--accent-soft); }
+.pipe .abbr { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.pipe h4 { margin: 2px 0 4px; font-size: 15px; }
+.pipe p { margin: 0; font-size: 13.5px; }
+.pipe .state { margin-top: 8px; font-size: 12px; }
+.tag { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 0 6px; border-radius: 3px; text-transform: uppercase; letter-spacing: .04em; }
+.tag.ok { background: var(--r-ht-soft); color: var(--r-ht); }
+.tag.miss { background: var(--warn-soft); color: var(--warn); }
+
+/* Hành trình từng bước */
+.steps { list-style: none; margin: 16px 0; padding: 0; counter-reset: s; display: grid; gap: 0; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.steps li::before { content: counter(s); font-family: var(--f-display); font-weight: 700; font-size: 22px; line-height: 1; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--ink); border-radius: 50%; }
+.steps .who { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 3px; }
+.steps .who .where { font-size: 13px; color: var(--muted); }
+.steps p { margin: 0; font-size: 15px; }
+.steps .out { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 13px; color: var(--muted); }
+.steps .state { font-family: var(--f-mono); font-size: 12px; color: var(--sea); }
+
+/* Đồng hồ mốc */
+.clock { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin: 14px 0; overflow-x: auto; }
+.clock h4 { margin: 0 0 10px; font-size: 15px; }
+.track { position: relative; min-width: 560px; height: 118px; }
+.track .bar { position: absolute; left: 0; right: 0; top: 54px; height: 6px; background: var(--line); border-radius: 3px; }
+.track .span { position: absolute; top: 50px; height: 14px; border-radius: 3px; }
+.track .span.free { background: var(--r-ht-soft); border: 1px solid var(--r-ht); }
+.track .span.fee { background: var(--warn-soft); border: 1px solid var(--warn); }
+.track .mk { position: absolute; top: 0; transform: translateX(-50%); text-align: center; font-size: 12px; width: 120px; }
+.track .mk .lbl { font-weight: 600; line-height: 1.2; }
+.track .mk .tick { width: 2px; height: 30px; background: var(--ink); margin: 4px auto 0; }
+.track .mk.dl .tick { background: var(--warn); }
+.track .mk.dl .lbl { color: var(--warn); }
+.track .bottom { position: absolute; top: 74px; transform: translateX(-50%); font-size: 12px; color: var(--muted); width: 140px; text-align: center; line-height: 1.25; }
+
+/* Ma trận 6 trường hợp */
+.matrix { display: grid; grid-template-columns: minmax(110px, .7fr) 1fr 1fr; gap: 6px; margin: 14px 0; font-size: 14px; }
+.matrix > div { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; min-width: 0; }
+.matrix .hd { background: transparent; border: 0; font-family: var(--f-display); text-transform: uppercase; letter-spacing: .04em; font-size: 14px; color: var(--muted); padding: 4px; display: flex; align-items: end; }
+.matrix .rh { background: var(--ink); color: var(--paper); border-color: var(--ink); font-weight: 600; }
+.matrix .th { font-family: var(--f-mono); font-size: 11.5px; color: var(--accent-ink); display: block; }
+@media (max-width: 560px) { .matrix { grid-template-columns: 1fr; } .matrix .hd.blank { display: none; } }
+
+.pain { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.pain .l { font-family: var(--f-display); font-weight: 700; font-size: 24px; color: var(--warn); line-height: 1; }
+.pain p { margin: 0; font-size: 15px; }
+
+dl.gloss { display: grid; grid-template-columns: minmax(110px, 160px) minmax(0, 1fr); gap: 0; margin: 14px 0; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+dl.gloss dt, dl.gloss dd { padding: 8px 12px; border-bottom: 1px solid var(--line); margin: 0; font-size: 14.5px; }
+dl.gloss dt { font-weight: 600; font-family: var(--f-mono); font-size: 13.5px; }
+dl.gloss dd small { color: var(--muted); }
+@media (max-width: 520px) { dl.gloss { grid-template-columns: 1fr; } dl.gloss dt { border-bottom: 0; padding-bottom: 0; } }
+
+footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="shell">
+
+<nav class="toc" aria-label="Mục lục">
+  <details open>
+    <summary>Mục lục</summary>
+    <ol>
+      <li><a href="#delta"><span class="n">01</span>Delta làm nghề gì</a></li>
+      <li><a href="#cac-ben"><span class="n">02</span>Các bên bên ngoài</a></li>
+      <li><a href="#container"><span class="n">03</span>Vòng đời 1 container</a></li>
+      <li><a href="#moc"><span class="n">04</span>Bốn chiếc đồng hồ</a></li>
+      <li><a href="#ba-to-phieu"><span class="n">05</span>JobID → Yêu cầu → Lệnh</a></li>
+      <li><a href="#quy-trinh"><span class="n">06</span>Bốn quy trình nội bộ</a></li>
+      <li><a href="#vai-tro"><span class="n">07</span>Ai làm gì trong Delta</a></li>
+      <li><a href="#hanh-trinh"><span class="n">08</span>Theo chân 1 lô hàng</a></li>
+      <li><a href="#chon-vo"><span class="n">09</span>Sáu cách lấy vỏ</a></li>
+      <li><a href="#loai-hang"><span class="n">10</span>Các loại hàng khác</a></li>
+      <li><a href="#chung-tu"><span class="n">11</span>Chứng từ theo thứ tự</a></li>
+      <li><a href="#tien"><span class="n">12</span>Tiền đi theo việc</a></li>
+      <li><a href="#su-co"><span class="n">13</span>Khi có sự cố</a></li>
+      <li><a href="#he-thong"><span class="n">14</span>Phần mềm xung quanh</a></li>
+      <li><a href="#noi-dau"><span class="n">15</span>Năm nỗi đau hiện tại</a></li>
+      <li><a href="#chua-ro"><span class="n">16</span>Những gì chưa rõ</a></li>
+      <li><a href="#tu-dien"><span class="n">17</span>Từ điển bỏ túi</a></li>
+    </ol>
+  </details>
+</nav>
+
+<main>
+
+<header class="hero">
+  <div class="eyebrow">Sổ tay cho người mới · Mảng Điều phối</div>
+  <h1>Một lô hàng đi qua Delta như thế nào</h1>
+  <p>Trang này nối các tài liệu rời rạc khách gửi thành một câu chuyện liền mạch: hàng đi từ đâu đến đâu, ai cầm giấy gì, đồng hồ nào đang chạy, và tiền đi theo việc ra sao. Không cần biết trước gì về logistics. Đọc lần lượt từ trên xuống mất khoảng 25 phút.</p>
+  <div class="marking" aria-label="Thông tin tài liệu"><span>DELTA</span><span>SOP 18/9 · 24/9 · 1/10/2026</span><span><b>Bản tổng hợp</b> 06/10/2026</span></div>
+</header>
+
+<!-- 01 -->
+<section id="delta">
+  <h2><span class="n">01</span>Delta làm nghề gì</h2>
+  <p class="lead">Delta là công ty vận tải và giao nhận. Khách là các nhà máy, công ty thương mại và công ty logistics cần đưa hàng ra cảng để xuất khẩu, hoặc lấy hàng nhập về kho.</p>
+  <div class="analogy"><b>Hiểu nhanh</b>
+    <p>Hình dung Delta như một <b>đội xe tải kèm đội chạy giấy tờ</b>. Hãng tàu chở hàng qua biển, còn Delta lo đoạn đường bộ hai đầu: từ kho khách ra cảng và từ cảng về kho khách. Muốn chạy được đoạn đó, Delta phải làm đủ thủ tục ở cảng, ở bãi container và với hải quan.</p>
+  </div>
+  <p>Delta bán bốn nhóm dịch vụ: vận tải, khai báo hải quan, thủ tục chuyên ngành (kiểm dịch, giấy phép…) và dịch vụ giá trị gia tăng (bốc xếp, nâng hạ…). Delta có điểm hoạt động ở Hà Nội, Hải Phòng, TP HCM và một bãi xe ở Lạng Sơn cho hàng đi Trung Quốc.</p>
+  <p>Delta đang xây phần mềm quản lý mới (<b>Delta 3.0 / Delta MIS</b>) để thay bản Delta 2.0 hiện tại. Người dùng sẽ làm việc qua <b>Delta Super App</b>: một app chung cho nhân viên Delta lẫn nhân viên đối tác/khách, có cả bản web và mobile. <b>Điều phối</b> là chức năng nằm giữa phần mềm này, thay cho chức năng "Phân công công việc" của Delta 2.0.</p>
+  <p class="src">Nguồn: sop-cung-cap-dich-vu-tong-quat.md (Mục đích) · sop-dieu-phoi.md:295-320 · giao-nhan-hang-hoa.md:292</p>
+</section>
+
+<!-- 02 -->
+<section id="cac-ben">
+  <h2><span class="n">02</span>Các bên bên ngoài Delta</h2>
+  <p class="lead">Một lô hàng chạm tới khá nhiều đơn vị. Nhớ được mỗi bên "giống cái gì" là đọc SOP dễ hơn hẳn.</p>
+
+  <div class="group-label">Người có hàng</div>
+  <div class="grid">
+    <div class="card"><h4>Khách hàng (chủ hàng)</h4><p class="like">Người gửi hoặc người nhận bưu kiện</p><p>Nhà máy, công ty thương mại. Mỗi khách có một <span class="mono">mã DK05</span> (mã khách) chứa hạn mức nợ và thông tin viết hoá đơn.</p></div>
+    <div class="card"><h4>Khách 3PL</h4><p class="like">Công ty logistics thuê lại Delta</p><p>Công ty logistics có nhiều khách con. Mã DK05 của họ có quan hệ mẹ–con với các khách con.</p></div>
+  </div>
+
+  <div class="group-label">Người chở chặng dài</div>
+  <div class="grid">
+    <div class="card"><h4>Hãng tàu</h4><p class="like">Hãng xe khách đường dài, kiêm chủ của thùng container</p><p>Chở container qua biển. Cấp Booking Note (hàng xuất), Lệnh giao hàng (hàng nhập), quy định các mốc thời gian và phí phạt.</p></div>
+    <div class="card"><h4>Hãng hàng không</h4><p class="like">Như hãng tàu nhưng đi máy bay</p><p>Chở hàng air. Vận đơn hàng không có số gồm 3 số mã hãng + 8 số.</p></div>
+    <div class="card"><h4>Đại lý / NVOCC / co-loader</h4><p class="like">Người bán lại chỗ trên tàu</p><p>Không có tàu nhưng nhận chở hàng, rồi thuê lại hãng tàu. Hàng đi qua họ có 2 vận đơn và cần "lệnh nối". Co-loader là người gom hàng lẻ.</p></div>
+    <div class="card"><h4>Ratraco</h4><p class="like">Vừa là "hãng tàu hoả", vừa là khách của Delta</p><p>Công ty vận tải đường sắt. Họ chạy tàu giữa các ga, rồi thuê Delta chở container từ ga đến kho khách.</p></div>
+  </div>
+
+  <div class="group-label">Nơi giao nhận hàng</div>
+  <div class="grid">
+    <div class="card"><h4>Cảng</h4><p class="like">Bến xe — nơi tàu thật sự đỗ</p><p>Nơi giao container có hàng: lấy hàng nhập, hạ hàng xuất. Cũng nhận và trả vỏ rỗng.</p></div>
+    <div class="card"><h4>Bãi (depot)</h4><p class="like">Bãi gửi thùng rỗng</p><p>Tàu không vào. Chủ yếu để lấy vỏ rỗng đi đóng hàng và trả vỏ rỗng sau khi dỡ hàng.</p></div>
+    <div class="card"><h4>Kho CFS</h4><p class="like">Trạm chia chọn hàng lẻ</p><p>Nơi hàng của nhiều chủ được đóng ghép vào một container, hoặc rút ra chia lại. Có hải quan giám sát.</p></div>
+    <div class="card"><h4>Kho hàng không</h4><p class="like">Kho ở sân bay, chạy 24/7</p><p>Nội Bài có NCTS, ALSC, ACSV. Tân Sơn Nhất có TCS, SCSC. Đi nhầm kho là phải xếp hàng lại từ đầu.</p></div>
+    <div class="card"><h4>Cửa khẩu</h4><p class="like">Cổng biên giới đường bộ</p><p>Nơi hàng CBT qua lại Trung Quốc, Lào, Campuchia.</p></div>
+    <div class="card"><h4>Ga đường sắt</h4><p class="like">Bến tàu hoả chở container</p><p>Delta đang làm ở Đông Anh, Yên Viên, Trảng Bom, Sóng Thần.</p></div>
+  </div>
+
+  <div class="group-label">Nhà nước và hệ thống</div>
+  <div class="grid">
+    <div class="card"><h4>Hải quan</h4><p class="like">Trạm kiểm soát giấy phép hàng hoá</p><p>Hàng xuất nhập khẩu phải có tờ khai. Hải quan "thanh lý" tờ khai thì hàng mới được ra khỏi khu vực giám sát.</p></div>
+    <div class="card"><h4>ePort</h4><p class="like">App đặt lịch và trả tiền của cảng</p><p>Hệ thống điện tử của cảng/bãi: làm lệnh, trả phí, lấy phiếu EIR online. Không phải cảng nào cũng có.</p></div>
+  </div>
+  <p class="src">Nguồn: giao-nhan-hang-hoa.md:41-321 · sop-ban-do-kien-thuc.md:145-205</p>
+</section>
+
+<!-- 03 -->
+<section id="container">
+  <h2><span class="n">03</span>Vòng đời một container</h2>
+  <p class="lead">Đây là phần quan trọng nhất để hiểu mọi thứ phía sau. Container không thuộc về khách mà thuộc về hãng tàu, khách chỉ "mượn". Vì vậy luôn có hai chiều: lấy thùng ra và trả thùng về.</p>
+
+  <div class="analogy"><b>Hiểu nhanh</b>
+    <p>Giống thuê một chiếc xe máy ở bãi giữ xe: mỗi lần lấy xe hay gửi xe, bạn nhận một tờ biên nhận ghi giờ và tình trạng xe. Tờ biên nhận đó trong ngành gọi là <b>phiếu EIR</b> (dân trong nghề gọi là "phơi"). Nó vừa là bằng chứng thùng có móp méo không, vừa là căn cứ tính tiền khi giữ thùng quá hạn.</p>
+  </div>
+
+  <h3>Hàng xuất khẩu (đưa hàng ra cảng để lên tàu)</h3>
+  <div class="loop" role="list">
+    <div class="stop box-empty" role="listitem"><div class="place">Bãi</div><p class="what">Lấy <b>vỏ rỗng</b> theo Booking Note. Chọn vỏ sạch, không thủng. Nhận <b>chì</b> (kẹp niêm phong).</p><div class="docs"><span class="doc">Lệnh nâng vỏ</span><span class="doc">EIR ①</span></div></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="stop" role="listitem"><div class="place">Kho khách</div><p class="what">Khách đóng hàng vào thùng, kẹp chì, cân xe để biết tổng trọng lượng.</p><div class="docs"><span class="doc">Phiếu xuất kho</span><span class="doc">Phiếu cân → VGM</span><span class="doc">Biên bản giao hàng</span></div></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="stop" role="listitem"><div class="place">Cảng</div><p class="what">Hạ container hàng xuống cảng, <b>trước hạn CY</b>, chờ xếp lên tàu.</p><div class="docs"><span class="doc">Lệnh hạ hàng</span><span class="doc">EIR ②</span></div></div>
+  </div>
+
+  <h3>Hàng nhập khẩu (lấy hàng từ cảng về)</h3>
+  <div class="loop" role="list">
+    <div class="stop" role="listitem"><div class="place">Cảng</div><p class="what">Lấy container có hàng. Cần đủ 3 thứ: lệnh giao hàng của hãng tàu, hải quan đã thanh lý tờ khai, đã trả phí nâng.</p><div class="docs"><span class="doc">eDO</span><span class="doc">Lệnh nâng hàng</span><span class="doc">EIR ③</span></div></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="stop" role="listitem"><div class="place">Kho khách</div><p class="what">Mở chì, dỡ hàng, hai bên ký nhận số lượng và tình trạng hàng.</p><div class="docs"><span class="doc">Biên bản giao hàng</span></div></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="stop box-empty" role="listitem"><div class="place">Bãi</div><p class="what">Trả <b>vỏ rỗng</b> đúng nơi hãng tàu chỉ định. Đồng hồ DET dừng ở đây.</p><div class="docs"><span class="doc">Lệnh hạ vỏ</span><span class="doc">EIR ④</span></div></div>
+  </div>
+  <div class="box-legend"><span>Container có hàng</span><span class="e">Vỏ rỗng</span></div>
+
+  <div class="note"><b>Vì sao Lệnh hạ vỏ thường làm riêng từng container?</b> Một vận đơn có thể gồm thùng 20 feet, 40 feet và 40 feet cao (HC), mỗi loại hãng tàu bắt trả ở một bãi khác nhau. Khách cũng hay nhận hàng rải nhiều ngày, nên các phiếu EIR không về cùng lúc.</div>
+
+  <h3>Lệnh nâng, lệnh hạ là gì</h3>
+  <p>Cảng và bãi không cho xe vào lấy hay trả thùng tuỳ tiện. Mỗi lần nâng thùng lên xe hay hạ thùng xuống đều cần một "lệnh" do cảng/bãi phát hành sau khi đã trả phí. Có 4 loại lệnh, khớp với 4 chặng ở trên:</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Lệnh</th><th>Dùng khi</th><th>Cần có trước</th><th>Ai làm</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Nâng vỏ rỗng</td><td>Lấy vỏ đi đóng hàng xuất</td><td>Booking Note ghi nơi lấy vỏ (hoặc email hãng tàu)</td><td>CS, hiện trường hoặc lái xe, tuỳ bãi</td></tr>
+      <tr><td class="k">Hạ hàng</td><td>Trả container hàng xuất về cảng</td><td>Booking Note, phí hạ, khai VGM trên ePort</td><td>CS (cảng có ePort) hoặc lái xe (không ePort)</td></tr>
+      <tr><td class="k">Nâng hàng</td><td>Lấy container hàng nhập</td><td>eDO, hải quan thanh lý tờ khai, phí nâng</td><td>CS trên ePort, không có ePort thì hiện trường</td></tr>
+      <tr><td class="k">Hạ vỏ rỗng</td><td>Trả vỏ sau khi dỡ hàng nhập</td><td>EIR lúc lấy hàng, lệnh giao hàng, email nơi trả vỏ</td><td>CS hoặc lái xe</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Nguồn: giao-nhan-hang-hoa.md:81-119, 333-398</p>
+</section>
+
+<!-- 04 -->
+<section id="moc">
+  <h2><span class="n">04</span>Bốn chiếc đồng hồ đang chạy</h2>
+  <p class="lead">Với hàng container, luôn có bốn hạn chót quyết định lô hàng có kịp tàu không và có bị phạt tiền không. Chúng được ghi trên Booking Note hoặc Lệnh giao hàng.</p>
+
+  <div class="clock">
+    <h4>Hàng xuất: hai hạn phải kịp</h4>
+    <div class="track" aria-hidden="true">
+      <div class="bar"></div>
+      <div class="mk" style="left:6%"><div class="lbl">Nhận Booking</div><div class="tick"></div></div>
+      <div class="mk dl" style="left:55%"><div class="lbl">SI</div><div class="tick"></div></div>
+      <div class="mk dl" style="left:80%"><div class="lbl">CY (cut-off)</div><div class="tick"></div></div>
+      <div class="mk" style="left:95%"><div class="lbl">Tàu chạy</div><div class="tick"></div></div>
+      <div class="bottom" style="left:55%">Báo trước 24 giờ</div>
+      <div class="bottom" style="left:80%">Báo trước 12 giờ</div>
+    </div>
+    <div class="tbl"><table><tbody>
+      <tr><td class="k">SI</td><td>Hạn nộp chi tiết lô hàng cho hãng tàu để in vận đơn. Delta phải báo cho khách <b>số container và số chì</b> trước hạn này. Trễ thì bị phí sửa vận đơn, có khi phải chuyển sang chuyến tàu sau.</td></tr>
+      <tr><td class="k">CY</td><td>Hạn hạ container hàng vào cảng. Tính bằng giờ ghi trên phiếu EIR lúc hạ. Trễ là <b>rớt tàu</b>, mất phí lưu bãi và phí đổi Booking Note.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <div class="clock">
+    <h4>Hàng nhập: hai khoảng miễn phí</h4>
+    <div class="track" aria-hidden="true">
+      <div class="bar"></div>
+      <div class="span free" style="left:5%; width:30%"></div>
+      <div class="span free" style="left:42%; width:34%"></div>
+      <div class="span fee" style="left:76%; width:14%"></div>
+      <div class="mk" style="left:5%"><div class="lbl">Tàu cập cảng</div><div class="tick"></div></div>
+      <div class="mk" style="left:42%"><div class="lbl">Lấy hàng (EIR ③)</div><div class="tick"></div></div>
+      <div class="mk dl" style="left:76%"><div class="lbl">Hết ngày miễn phí</div><div class="tick"></div></div>
+      <div class="mk" style="left:92%"><div class="lbl">Trả vỏ (EIR ④)</div><div class="tick"></div></div>
+      <div class="bottom" style="left:20%">DEM: thùng nằm ở cảng</div>
+      <div class="bottom" style="left:59%">DET: thùng ở ngoài cảng</div>
+      <div class="bottom" style="left:84%">Bắt đầu tính phí</div>
+    </div>
+    <div class="tbl"><table><tbody>
+      <tr><td class="k">DEM</td><td>Số ngày container hàng được nằm miễn phí trong cảng, tính từ khi tàu cập. Quá hạn mới lấy hàng thì mất phí lưu container. Báo trước 2 ngày.</td></tr>
+      <tr><td class="k">DET</td><td>Số ngày được giữ thùng ở ngoài cảng, tính từ giờ trên EIR lúc lấy hàng đến lúc trả vỏ đúng nơi hãng chỉ định. Báo trước 2 ngày. Mỗi hãng tàu cho số ngày khác nhau.</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <div class="analogy"><b>Hiểu nhanh</b><p>DEM và DET giống tiền phạt trả sách thư viện muộn: được mượn miễn phí một số ngày, quá hạn thì tính tiền theo ngày. DEM là sách còn nằm ở thư viện mà bạn chưa đến lấy. DET là sách đã mang về nhà mà chưa trả.</p></div>
+
+  <p><b>Quy định khi sắp trễ:</b> phải báo khách và hãng tàu <b>bằng văn bản</b>, không gọi điện. Khi đã trễ, bắt buộc ghi nguyên nhân thuộc 1 trong 3 nhóm để biết ai trả tiền phạt:</p>
+  <div class="grid">
+    <div class="card"><h4>1. Do khách</h4><p>Khách giao hàng hoặc giao chứng từ chậm.</p></div>
+    <div class="card"><h4>2. Do Delta</h4><p>Điều xe chậm, xe hỏng.</p></div>
+    <div class="card"><h4>3. Do bên thứ ba</h4><p>Cảng, hải quan, hãng tàu.</p></div>
+  </div>
+
+  <h3>Các loại hàng khác cũng có đồng hồ riêng</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Loại hàng</th><th>Hạn chót</th><th>Phí khi để lâu</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Hàng lẻ (CFS)</td><td>Cut-off kho CFS, sớm hơn CY 1–2 ngày</td><td>Phí lưu kho theo ngày sau thời gian miễn phí của kho</td></tr>
+      <tr><td class="k">Hàng air</td><td>Cut-off tính bằng giờ, thường 4–6 giờ trước giờ bay</td><td>Phí lưu kho. Miễn phí rất ngắn nên dễ phát sinh nhất</td></tr>
+      <tr><td class="k">Đường sắt</td><td>Hầu như không có mốc gắt</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Nguồn: giao-nhan-hang-hoa.md:164-225, 400-418, 869-872</p>
+</section>
+
+<!-- 05 -->
+<section id="ba-to-phieu">
+  <h2><span class="n">05</span>Ba tờ phiếu bên trong Delta</h2>
+  <p class="lead">Ở trên là thế giới bên ngoài. Bên trong Delta, mỗi lô hàng được theo dõi bằng ba đối tượng nối tiếp nhau. Nắm được ba cái này là nắm được xương sống của phần mềm.</p>
+
+  <div class="objects">
+    <div class="obj"><div class="code">J01…J12</div><h4>JobID</h4><p>Hồ sơ của <b>một lô hàng</b>: khách là ai, dịch vụ gì, chứng từ gì, thu bao nhiêu, chi bao nhiêu. Tạo từ chứng từ khách gửi (Booking Note, vận đơn…).</p><p class="like">Như bìa hồ sơ của một đơn hàng</p></div>
+    <div class="link2" aria-hidden="true"><b>⇄</b>1 → nhiều</div>
+    <div class="obj"><div class="code">JobID00 · JobID01…99</div><h4>Yêu cầu vận tải</h4><p>Phiếu báo <b>"đã xong thủ tục, cần xe"</b>. Chỉ sinh ra khi việc ở cảng/kho đã đủ để xe chạy được.</p><p class="like">Như phiếu đặt xe gửi sang đội xe</p></div>
+    <div class="link2" aria-hidden="true"><b>⇄</b>thường 1 → 1</div>
+    <div class="obj"><div class="code">Lệnh</div><h4>Lệnh vận tải</h4><p>Một <b>chuyến xe cụ thể</b>: xe nào, lái xe nào, đi đường nào. Lái xe chụp chứng từ, cập nhật lên lệnh.</p><p class="like">Như lệnh điều xe giao cho tài xế</p></div>
+  </div>
+
+  <p><b>Dữ liệu chạy hai chiều.</b> Thông tin đi xuôi từ JobID xuống Lệnh để lái xe biết phải làm gì. Ảnh EIR, biên bản, chi phí mà lái xe đưa lên Lệnh lại chạy ngược về JobID để tính tiền với khách. Điều phối chính là "đường ống" chuyển dữ liệu hai chiều đó. Bản thân Điều phối không lưu dữ liệu: Lệnh chốt xong thì JobID rời khỏi danh sách điều phối.</p>
+
+  <div class="note"><b>Ví dụ quan hệ 1 → nhiều:</b> Booking Note 3 container thành 1 JobID <span class="mono">J01</span>, sinh 3 Yêu cầu vận tải (mỗi container 1 yêu cầu), rồi thành 3 Lệnh. Ngược lại, hàng lẻ nhỏ có thể gộp nhiều Yêu cầu vào 1 Lệnh, còn hàng khối lớn thì 1 Yêu cầu tách ra nhiều Lệnh.</div>
+
+  <h3>Trạng thái của JobID</h3>
+  <p>Chờ xử lý → Đã tạo Yêu cầu vận tải → Đã thực hiện Lệnh vận tải. Trạng thái "Hoàn thành dịch vụ" là lúc doanh thu và chi phí được ghi vào kỳ kế toán.</p>
+
+  <h3>12 loại JobID</h3>
+  <p>Mã JobID cho biết lô hàng thuộc loại nào. Loại quyết định chứng từ dùng để tạo hồ sơ và luồng đi tiếp.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Mã</th><th>Loại</th><th>Tạo từ chứng từ</th><th>Đi qua thủ tục cảng/kho?</th></tr></thead>
+    <tbody>
+      <tr><td class="k mono">J01</td><td>Xuất nguyên container (FCL)</td><td>Booking Note</td><td>Có</td></tr>
+      <tr><td class="k mono">J02</td><td>Xuất hàng lẻ (CFS)</td><td>Booking Note</td><td>Có</td></tr>
+      <tr><td class="k mono">J03</td><td>Xuất hàng air</td><td>Booking Note</td><td>Có</td></tr>
+      <tr><td class="k mono">J04</td><td>Nhập nguyên container (FCL)</td><td>Vận đơn + Giấy báo hàng đến</td><td>Có</td></tr>
+      <tr><td class="k mono">J05</td><td>Nhập hàng lẻ (CFS)</td><td>Vận đơn + Giấy báo hàng đến</td><td>Có</td></tr>
+      <tr><td class="k mono">J06</td><td>Nhập hàng air</td><td>Vận đơn + Giấy báo hàng đến</td><td>Có</td></tr>
+      <tr><td class="k mono">J07</td><td>Hàng CBT (qua biên giới đường bộ)</td><td>Biên bản giao nhận</td><td>Phần lớn không</td></tr>
+      <tr><td class="k mono">J08</td><td>Đóng hàng đường sắt</td><td>Kế hoạch chạy hàng</td><td>Không</td></tr>
+      <tr><td class="k mono">J09</td><td>Trả hàng đường sắt</td><td>Kế hoạch chạy hàng</td><td>Không</td></tr>
+      <tr><td class="k mono">J10</td><td>Milkrun (xe đi vòng gom hàng theo lịch)</td><td>Kế hoạch chạy hàng</td><td>Không</td></tr>
+      <tr><td class="k mono">J11</td><td>Xe thuê bao (thuê xe theo ngày)</td><td>Biên bản giao nhận, mỗi ngày 1 JobID</td><td>Không</td></tr>
+      <tr><td class="k mono">J12</td><td>Dịch vụ giá trị gia tăng</td><td>Không có</td><td>Không qua Điều phối</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Nguồn: sop-dieu-phoi.md:300-330 · sop-ban-do-kien-thuc.md:94-139</p>
+</section>
+
+<!-- 06 -->
+<section id="quy-trinh">
+  <h2><span class="n">06</span>Bốn quy trình nội bộ</h2>
+  <p class="lead">Khách viết SOP theo 4 bộ quy trình nối nhau. Điều phối là quy trình thứ hai, nằm giữa phần "nhận đơn" và phần "chạy xe".</p>
+  <div class="pipe">
+    <div class="proc"><div class="abbr">QTCCDV</div><h4>Cung cấp dịch vụ tổng quát</h4><p>Tạo và duyệt JobID, ghi doanh thu/chi phí, công nợ, hoá đơn.</p><div class="state"><span class="tag ok">Có SOP</span></div></div>
+    <div class="proc focus"><div class="abbr">QTĐP</div><h4>Điều phối</h4><p>Làm thủ tục ở cảng/bãi/kho, chia việc cho CS, hiện trường, lái xe, rồi tạo Yêu cầu vận tải.</p><div class="state"><span class="tag ok">Có SOP</span></div></div>
+    <div class="proc"><div class="abbr">QTĐV</div><h4>Điều vận</h4><p>Lập Lệnh vận tải: chọn xe, lái xe, cung đường. Theo dõi chuyến.</p><div class="state"><span class="tag miss">Chưa có tài liệu</span></div></div>
+    <div class="proc"><div class="abbr">QTTT</div><h4>Quản lý quỹ và thanh toán</h4><p>Tạm ứng, chi trả hộ, thanh toán nhà cung cấp.</p><div class="state"><span class="tag miss">Chưa phát triển</span></div></div>
+  </div>
+
+  <h3>Sau khi tạo JobID, hồ sơ đi đâu</h3>
+  <p>Phần mềm đọc phạm vi dịch vụ khai lúc tạo JobID rồi đưa hồ sơ vào 1 trong 3 hướng:</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Trường hợp</th><th>Đi đâu</th><th>Ví dụ</th></tr></thead>
+    <tbody>
+      <tr><td>Có vận tải và có thủ tục ở cảng/kho/hải quan</td><td><b>Điều phối</b>, làm thủ tục rồi mới tạo Yêu cầu vận tải</td><td>J01–J06</td></tr>
+      <tr><td>Có vận tải nhưng không cần thủ tục</td><td>Tạo thẳng Yêu cầu vận tải, chờ điều vận lập Lệnh</td><td>J08–J11, phần lớn J07</td></tr>
+      <tr><td>Có phần việc thuê ngoài</td><td>Quy trình mua ngoài dịch vụ</td><td>Thuê khai hải quan ở cửa khẩu</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Tạo và duyệt JobID</h3>
+  <p>CS (hoặc điều vận, với J07–J11) chụp chứng từ khách gửi lên. <b>Trợ lý AI</b> đọc chứng từ và điền sẵn thông tin. Người tạo kiểm lại, sửa chỗ sai (chỗ sửa dùng để dạy lại AI), ghi số container thực nhận, ghi thoả thuận riêng với khách. Sau đó JobID được duyệt theo 2 điều kiện: khách <b>không có nợ quá hạn</b>, và nếu khách có hạn mức thì tổng nợ cộng chi phí đang làm dở phải nhỏ hơn hạn mức.</p>
+  <p class="src">Nguồn: sop-cung-cap-dich-vu-tong-quat.md:1176-1290 · sop-dieu-phoi.md:300-330</p>
+</section>
+
+<!-- 07 -->
+<section id="vai-tro">
+  <h2><span class="n">07</span>Ai làm gì trong Delta</h2>
+  <p class="lead">Màu của mỗi vai trò dưới đây được dùng lại ở phần "Theo chân 1 lô hàng". Lưu ý: phần mềm sẽ phân quyền theo chức năng (quyền lái xe, quyền hiện trường…), nhưng khi mô tả luồng ta vẫn gọi theo vai trò nghiệp vụ.</p>
+  <div class="grid">
+    <div class="card role-card cs"><h4>CS (chăm sóc khách hàng)</h4>
+      <dl><dt>Ở đâu</dt><dd>Văn phòng</dd>
+      <dt>Làm gì</dt><dd>Nhận chứng từ từ khách, tạo JobID, khai đủ thông tin. Làm lệnh trên ePort. Trả tiền lấy lệnh giao hàng cho hàng nhập. Ghi 4 mốc lên bảng kế hoạch.</dd>
+      <dt>Tiền</dt><dd>Mặc định giữ quyền thanh toán chi phí của JobID.</dd></dl></div>
+    <div class="card role-card ht"><h4>Cán bộ quản lý hiện trường</h4>
+      <dl><dt>Ở đâu</dt><dd>Văn phòng / hiện trường</dd>
+      <dt>Làm gì</dt><dd>Giao việc trên phần mềm cho nhân viên hiện trường hoặc lái xe. Phân người trực ngoài giờ (17h30–8h).</dd>
+      <dt>Tiền</dt><dd>Giao việc là bước chuyển quyền thanh toán sang người được giao.</dd></dl></div>
+    <div class="card role-card ht"><h4>Nhân viên hiện trường</h4>
+      <dl><dt>Ở đâu</dt><dd>Ở cảng, bãi, kho CFS, kho hàng không</dd>
+      <dt>Làm gì</dt><dd>Chọn vỏ, làm lệnh tại chỗ, thanh lý tờ khai, kiểm đếm hàng, lấy phiếu nhập kho/phiếu cân/phiếu xuất kho.</dd>
+      <dt>Tiền</dt><dd>Trả phí tại cảng/kho cho JobID được giao.</dd></dl></div>
+    <div class="card role-card dv"><h4>Điều vận</h4>
+      <dl><dt>Ở đâu</dt><dd>Văn phòng</dd>
+      <dt>Làm gì</dt><dd>Lập Lệnh vận tải: chọn xe, lái xe, cung đường. Giao chì và giấy tờ cho lái xe. Rà các mốc mỗi ngày và cảnh báo. Xử lý khi lái xe báo sự cố.</dd>
+      <dt>Tiền</dt><dd>Lập Lệnh là chuyển quyền thanh toán cho lái xe.</dd></dl></div>
+    <div class="card role-card lx"><h4>Lái xe</h4>
+      <dl><dt>Ở đâu</dt><dd>Trên đường, ở cảng, bãi, kho khách</dd>
+      <dt>Làm gì</dt><dd>Lấy và trả container, nhận phiếu EIR, lập biên bản với khách, chụp ảnh chứng từ đưa lên Lệnh. Có thể tự làm lệnh ở cảng không có ePort.</dd>
+      <dt>Tiền</dt><dd>Tự trả phí tại chỗ, nộp hoá đơn/phiếu thu về để được hoàn.</dd></dl></div>
+    <div class="card role-card sys"><h4>Kế toán, thủ quỹ, cán bộ quản lý</h4>
+      <dl><dt>Làm gì</dt><dd>Kế toán chuyển khoản khoản lớn, đối chiếu công nợ, xuất hoá đơn. Cán bộ quản lý duyệt các trường hợp bất thường (ví dụ thông tin viết hoá đơn khác thường).</dd></dl></div>
+    <div class="card role-card sys"><h4>Trợ lý AI</h4>
+      <dl><dt>Làm gì</dt><dd>Đọc chứng từ để tạo JobID, đọc số tờ khai, đọc số container từ ảnh. Người dùng luôn xác nhận hoặc sửa lại.</dd></dl></div>
+    <div class="card role-card sys"><h4>Đại diện khách hàng</h4>
+      <dl><dt>Làm gì</dt><dd>Giao chứng từ, xác nhận biên bản giao hàng, xem tình trạng lô hàng. Sẽ dùng chung Delta Super App.</dd></dl></div>
+  </div>
+
+  <h3>Năm quy tắc vàng xuyên suốt</h3>
+  <div class="tbl"><table><tbody>
+    <tr><td class="k">Không tự giao việc</td><td>Mọi việc phải được giao trên phần mềm. Lý do: quyền thanh toán, khối lượng việc và KPI đều tính theo việc được giao.</td></tr>
+    <tr><td class="k">Tiền đi theo việc</td><td>Ai được giao việc thì người đó có quyền trả chi phí của việc đó. CS muốn nhường việc cho hiện trường thì phải bấm chuyển trên phần mềm, không thì quyền trả tiền vẫn nằm ở CS.</td></tr>
+    <tr><td class="k">Lỗi phải có hệ quả</td><td>Có lệnh nâng/hạ mà thiếu chi phí trên JobID thì không lập được bảng kê với khách.</td></tr>
+    <tr><td class="k">Thiếu việc thì không chốt</td><td>Còn bước nào chưa xong thì lái xe không chốt được Lệnh, điều vận và quản lý không duyệt được.</td></tr>
+    <tr><td class="k">Dừng lại, chụp, báo</td><td>Gặp bất thường thì lái xe dừng, chụp ảnh, báo điều vận, không tự quyết. Đã rời cảng/kho khách mà chưa ghi nhận thì Delta chịu toàn bộ trách nhiệm.</td></tr>
+  </tbody></table></div>
+  <p class="src">Nguồn: sop-dieu-phoi.md:395-421 · giao-nhan-hang-hoa.md:428 · sop-ban-do-kien-thuc.md:327-398</p>
+</section>
+
+<!-- 08 -->
+<section id="hanh-trinh">
+  <h2><span class="n">08</span>Theo chân một lô hàng</h2>
+  <p class="lead">Ví dụ minh hoạ (không phải dữ liệu thật): một nhà máy may ở Bắc Ninh xuất 2 container 40 feet áo sơ mi, hạ ở cảng Hải Phòng. Đây là luồng <b>FCL xuất (J01)</b>, luồng phức tạp nhất.</p>
+  <ol class="steps">
+    <li><div><div class="who"><span class="chip sys">Khách</span><span class="chip cs">CS</span><span class="where">Văn phòng</span></div>
+      <p>Khách gửi Booking Note 2 container. CS chụp lên app, trợ lý AI đọc và điền sẵn. CS kiểm lại, khai thêm giờ khách muốn đóng hàng, bãi lấy vỏ, cảng hạ hàng, tờ khai hải quan kèm mã QR. CS ghi 2 mốc SI và CY lên bảng kế hoạch.</p>
+      <div class="out">Sinh ra <span class="doc">JobID J01</span><span class="state">Chờ xử lý</span></div></div></li>
+    <li><div><div class="who"><span class="chip sys">Phần mềm</span></div>
+      <p>Phần mềm xem bãi lấy vỏ có ePort không, có bắt xe phải đến mới được chọn vỏ không, rồi chia việc theo 1 trong 6 trường hợp (xem phần 09).</p></div></li>
+    <li><div><div class="who"><span class="chip cs">CS</span><span class="chip ht">Quản lý hiện trường</span><span class="chip ht">Hiện trường</span><span class="where">Bãi container</span></div>
+      <p>Giả sử bãi cho chọn vỏ trước và không có ePort. Quản lý giao việc cho một nhân viên hiện trường. Người này ra bãi chọn 2 vỏ sạch, chụp số container (AI đọc số, người xác nhận), trả tiền nâng vỏ, nhận chì, xin bãi đóng dấu xác nhận lên Booking Note.</p>
+      <div class="out">Sinh ra <span class="doc">Lệnh nâng vỏ</span><span class="doc">Booking có số cont + chì</span></div></div></li>
+    <li><div><div class="who"><span class="chip sys">Phần mềm</span></div>
+      <p>Chọn đủ vỏ thì phần mềm tạo 2 Yêu cầu vận tải, mỗi container một yêu cầu.</p>
+      <div class="out">Sinh ra <span class="doc">YCVT ×2</span><span class="state">Đã tạo Yêu cầu vận tải</span></div></div></li>
+    <li><div><div class="who"><span class="chip dv">Điều vận</span><span class="where">Văn phòng</span></div>
+      <p>Điều vận lập 2 Lệnh vận tải, chọn 2 xe và 2 lái xe, giao chì và bản sao Booking Note có dấu.</p>
+      <div class="out">Sinh ra <span class="doc">Lệnh vận tải ×2</span></div></div></li>
+    <li><div><div class="who"><span class="chip lx">Lái xe</span><span class="where">Bãi → nhà máy</span></div>
+      <p>Lái xe lấy vỏ ở bãi, nhận phiếu EIR ①, kéo về nhà máy. Nhà máy đóng hàng, kẹp chì, cân xe. Lái xe chụp phiếu xuất kho, phiếu cân, lập biên bản giao hàng có chữ ký hai bên, chụp 4 mặt container.</p>
+      <div class="out">Sinh ra <span class="doc">EIR ①</span><span class="doc">Phiếu cân → VGM</span><span class="doc">Biên bản giao hàng</span></div></div></li>
+    <li><div><div class="who"><span class="chip cs">CS</span><span class="chip lx">Lái xe</span><span class="where">Cảng Hải Phòng</span></div>
+      <p>Cảng có ePort nên CS khai trọng lượng theo VGM, trả phí hạ, làm Lệnh hạ hàng. Lái xe hạ container trước hạn CY, nhận EIR ②. CS báo khách số container và số chì trước hạn SI.</p>
+      <div class="out">Sinh ra <span class="doc">Lệnh hạ hàng</span><span class="doc">EIR ②</span></div></div></li>
+    <li><div><div class="who"><span class="chip lx">Lái xe</span><span class="chip dv">Điều vận</span><span class="chip sys">Phần mềm</span></div>
+      <p>Lái xe chốt Lệnh (phần mềm chặn nếu còn thiếu chứng từ hoặc chi phí). Điều vận và quản lý duyệt. Chứng từ và chi phí chạy ngược về JobID.</p>
+      <div class="out"><span class="state">Đã thực hiện Lệnh vận tải</span></div></div></li>
+    <li><div><div class="who"><span class="chip sys">Kế toán</span><span class="chip cs">CS</span></div>
+      <p>Đủ doanh thu và chi phí trên JobID thì lập bảng kê gửi khách, xuất hoá đơn qua MISA, theo dõi công nợ.</p>
+      <div class="out">Sinh ra <span class="doc">Bảng kê</span><span class="doc">Hoá đơn</span></div></div></li>
+  </ol>
+
+  <h3>Luồng FCL nhập (J04) khác ở đâu</h3>
+  <ul>
+    <li>CS phải <b>trả tiền cho hãng tàu</b> trước để lấy lệnh giao hàng (eDO), có khi phải đóng cược vỏ container.</li>
+    <li>Cảng có ePort thì CS đổi eDO thành Lệnh nâng hàng cho cả vận đơn. Cảng không có ePort thì giao hiện trường đi làm. Một số cảng có ePort vẫn bắt hiện trường đến thanh lý tờ khai trực tiếp.</li>
+    <li>Yêu cầu vận tải chỉ sinh ra khi <b>đủ Lệnh nâng cho mọi container</b> trên vận đơn.</li>
+    <li>Đồng hồ là DEM và DET thay cho SI và CY. Hạn của eDO và hạn trả vỏ được ghi lên JobID để theo dõi.</li>
+    <li>Sau khi dỡ hàng ở kho khách, lái xe còn phải trả vỏ rỗng về đúng bãi. Đây là chặng hay bị quên nhất.</li>
+  </ul>
+  <p class="src">Nguồn: sop-dieu-phoi.md:647 trở đi (Mục 5.1, 5.4) · giao-nhan-hang-hoa.md:366-398</p>
+</section>
+
+<!-- 09 -->
+<section id="chon-vo">
+  <h2><span class="n">09</span>Sáu cách lấy vỏ rỗng</h2>
+  <p class="lead">Vì sao FCL xuất phức tạp nhất? Vì mỗi bãi có luật riêng. SOP chia theo 2 câu hỏi về bãi cấp vỏ, ra 6 trường hợp. Câu hỏi đầu: bãi có bắt xe phải có mặt mới cho chọn vỏ không.</p>
+  <div class="matrix">
+    <div class="hd blank"></div>
+    <div class="hd">Bãi có ePort</div>
+    <div class="hd">Bãi không có ePort</div>
+    <div class="rh">Phải có xe mới được chọn vỏ</div>
+    <div><span class="th">TH1</span>CS làm "lệnh khống" (lệnh không ghi số container) trên ePort. Yêu cầu vận tải tạo ngay, <b>lái xe tự chọn vỏ</b> tại bãi.<br><span class="th">TH2</span>CS không làm, chuyển cho quản lý hiện trường giao việc.</div>
+    <div><span class="th">TH3</span><b>Lái xe tự làm lệnh</b>, tự chọn vỏ, tự trả tiền ở bãi. Yêu cầu vận tải tạo ngay.</div>
+    <div class="rh">Được chọn vỏ trước</div>
+    <div><span class="th">TH4</span>CS làm lệnh nâng vỏ trên ePort, rồi quản lý giao hiện trường đi chọn vỏ.<br><span class="th">TH5</span>CS không làm, chuyển thẳng cho quản lý hiện trường.</div>
+    <div><span class="th">TH6</span><b>Hiện trường ra bãi</b> chọn vỏ trực tiếp rồi mới làm lệnh.</div>
+  </div>
+  <div class="note">Nếu chọn được ít vỏ hơn số trên Booking Note (vỏ xấu, bãi hết vỏ), khách chọn 1 trong 3 cách: chốt số đã chọn được, chờ chọn đủ (tính thêm thời gian lưu xe), hoặc đổi sang Booking Note khác. SOP yêu cầu phần mềm ghi ngược số container thực tế về JobID.</div>
+  <p>Ngoài ra, có một kiểu bãi SOP chưa biết phân loại thế nào: có ePort nhưng hiện trường vẫn phải xuống thanh lý tờ khai trực tiếp. Brainstorm đã chốt thêm thuộc tính này vào danh mục cảng/bãi.</p>
+  <p class="src">Nguồn: sop-dieu-phoi.md:770-830, 1476-1484 · giao-nhan-hang-hoa.md:366-386, 468-482</p>
+</section>
+
+<!-- 10 -->
+<section id="loai-hang">
+  <h2><span class="n">10</span>Các loại hàng khác</h2>
+  <p class="lead">Container nguyên (FCL) là trường hợp chuẩn. Bốn loại dưới đây có cùng khung nhưng khác nơi giao nhận, đơn vị tính và giấy tờ.</p>
+  <div class="grid">
+    <div class="card"><h4>Hàng lẻ (LCL / CFS) · J02, J05</h4><p class="like">Gửi chung một thùng với nhiều chủ hàng khác</p>
+      <ul><li>Tính theo số kiện, kg và khối (CBM). Cước lấy theo khối hoặc trọng lượng quy đổi, cái nào lớn hơn.</li>
+      <li>Có 2 vận đơn: hãng tàu cấp cho co-loader, co-loader cấp cho khách.</li>
+      <li>Giao nhận ở kho CFS. Hiện trường kiểm đếm, ký <b>tally sheet</b>, là căn cứ duy nhất khi hàng thiếu hoặc vỡ.</li>
+      <li>Lỗi hay gặp nhất: đi nhầm kho. Phải đọc kỹ tên kho trên D/O.</li>
+      <li>Không có DEM/DET, thay bằng phí lưu kho.</li></ul></div>
+    <div class="card"><h4>Hàng air · J03, J06</h4><p class="like">Như hàng lẻ nhưng ở sân bay, theo giờ</p>
+      <ul><li>Kho sân bay chạy 24/7 theo lịch bay, không theo giờ hành chính.</li>
+      <li>Hàng hay về làm nhiều chuyến bay (split). Phải kiểm số kiện thực tế đã về.</li>
+      <li>Hàng xuất: lấy <b>phiếu cân</b> của kho. Hàng nhập: lấy phiếu xuất kho.</li>
+      <li><b>Mã vạch</b> (danh sách hàng đủ điều kiện qua khu giám sát) bản gốc phải về CS rồi giao khách. Có khách lấy đó làm căn cứ trả tiền.</li>
+      <li>Ở Nội Bài, lệnh giao hàng có 3 kiểu: giấy, eDO cấp cho khách, eDO gửi thẳng kho.</li></ul></div>
+    <div class="card"><h4>Hàng CBT · J07</h4><p class="like">Xe chạy thẳng qua biên giới đường bộ</p>
+      <ul><li>Tuyến chính: Thái Lan/Việt Nam sang Trung Quốc (sầu riêng), Trung Quốc–Campuchia, hàng nội địa Bắc–Nam.</li>
+      <li>Hàng nóng (hàng thường), hàng lạnh (hoa quả, thuỷ sản), hàng thương mại điện tử.</li>
+      <li>Hàng lạnh: lái xe gửi ảnh có định vị và nhiệt độ 3–4 lần/ngày, không được tự chỉnh nhiệt, không được tắt máy phát.</li>
+      <li>Chi ngoài định mức phải báo và được duyệt <b>trước</b> khi chi.</li>
+      <li>Khách hay đổi pháp nhân trả tiền sau khi đã chạy, nên mã khách cần quan hệ mẹ–con.</li>
+      <li>Luôn tìm "hàng đối ứng" chiều về để xe không chạy rỗng.</li></ul></div>
+    <div class="card"><h4>Đường sắt Ratraco · J08, J09</h4><p class="like">Đoạn ngắn giữa ga tàu hoả và kho khách</p>
+      <ul><li>Ratraco là khách, thuê Delta chở container 40/45 feet (khoảng 30 tấn) giữa ga và kho.</li>
+      <li>Hàng nội địa nên không có hải quan, gần như không có mốc gắt.</li>
+      <li>3 bước: lập kế hoạch chạy hàng, giao nhận tại ga, giao nhận với khách.</li>
+      <li>Chụp ảnh container và chì ở mỗi lần giao nhận làm căn cứ trách nhiệm.</li>
+      <li>Doanh thu chốt 2 kỳ mỗi tháng.</li></ul></div>
+  </div>
+  <p class="src">Nguồn: giao-nhan-hang-hoa.md:121-321, 498-1006</p>
+</section>
+
+<!-- 11 -->
+<section id="chung-tu">
+  <h2><span class="n">11</span>Chứng từ theo thứ tự xuất hiện</h2>
+  <p class="lead">Phần lớn công việc thực chất là đưa đúng tờ giấy đến đúng người đúng lúc. Bảng xếp theo thứ tự thường gặp trong một lô hàng container.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Chứng từ</th><th>Ai phát hành</th><th>Để làm gì</th><th>Ai cầm / chụp</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Booking Note</td><td>Hãng tàu</td><td>Xác nhận đặt chỗ hàng xuất. Ghi nơi lấy vỏ, nơi hạ hàng, hạn SI/CY. Là căn cứ tạo JobID xuất.</td><td>Khách gửi CS</td></tr>
+      <tr><td class="k">Vận đơn (B/L, AWB)</td><td>Hãng tàu / hãng bay / đại lý</td><td>"Hợp đồng chở hàng". Căn cứ tạo JobID nhập (kèm Giấy báo hàng đến).</td><td>Khách gửi CS</td></tr>
+      <tr><td class="k">Tờ khai hải quan + QR</td><td>Hải quan</td><td>Chứng minh hàng đã khai báo. QR dùng để thanh lý.</td><td>CS đưa lên JobID</td></tr>
+      <tr><td class="k">D/O, eDO</td><td>Hãng tàu / đại lý</td><td>Lệnh cho phép lấy hàng nhập. Ghi hạn DEM/DET, tên kho.</td><td>CS (trả phí để lấy)</td></tr>
+      <tr><td class="k">Lệnh nâng / hạ</td><td>Cảng, bãi</td><td>Cho phép nâng hoặc hạ thùng (xem phần 03).</td><td>CS, hiện trường hoặc lái xe</td></tr>
+      <tr><td class="k">Phiếu EIR ("phơi")</td><td>Cảng, bãi</td><td>Biên nhận mỗi lần giao nhận thùng: giờ và tình trạng thùng.</td><td>Lái xe chụp, hoặc lấy trên ePort</td></tr>
+      <tr><td class="k">Chì (seal)</td><td>Bãi cấp vỏ</td><td>Niêm phong container hàng xuất. Số chì phải khớp chứng từ.</td><td>Hiện trường → điều vận → lái xe</td></tr>
+      <tr><td class="k">Phiếu cân, VGM</td><td>Khách / trạm cân</td><td>Tổng trọng lượng hàng + vỏ. Bắt buộc để hạ hàng xuất.</td><td>Lái xe chụp, CS khai lên ePort</td></tr>
+      <tr><td class="k">Biên bản giao hàng</td><td>Lái xe + khách</td><td>Xác nhận giao nhận với khách, ghi bất thường. Căn cứ đòi tiền khách.</td><td>Lái xe chụp gửi ngay</td></tr>
+      <tr><td class="k">Phiếu nhập/xuất kho, tally</td><td>Kho CFS / kho air</td><td>Số kiện, kg, khối thực đo. Thay số ước tính để tính cước.</td><td>Hiện trường</td></tr>
+      <tr><td class="k">Hoá đơn, phiếu thu</td><td>Cảng, bãi, kho, hãng tàu</td><td>Chứng minh đã trả phí để được hoàn tiền và tính lại cho khách.</td><td>Người trả tiền nộp về</td></tr>
+      <tr><td class="k">Bảng kê, hoá đơn Delta</td><td>Delta</td><td>Đòi tiền khách: cước dịch vụ + các khoản trả hộ.</td><td>Kế toán / CS</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Nguồn: sop-ban-do-kien-thuc.md:158-175 · giao-nhan-hang-hoa.md:45-225, 388-398</p>
+</section>
+
+<!-- 12 -->
+<section id="tien">
+  <h2><span class="n">12</span>Tiền đi theo việc</h2>
+  <p class="lead">Mỗi việc ở cảng hay trên đường đều kéo theo một khoản tiền. Phần mềm phải gắn khoản tiền đó vào đúng Lệnh và đúng JobID, nếu không Delta sẽ thu thiếu tiền khách.</p>
+  <div class="grid">
+    <div class="card"><h4>Chi phí trả hộ</h4><p class="like">Trả thay khách rồi thu lại</p><p>Phí nâng hạ, phí lấy lệnh giao hàng, phí lưu kho… Có hoá đơn ghi tên khách. Delta trả trước rồi tính lại cho khách. Mã phí nhóm 03xx.</p></div>
+    <div class="card"><h4>Chi phí mua ngoài</h4><p class="like">Thuê bên khác làm một phần việc</p><p>Thuê khai hải quan, thuê xe ngoài, thuê bốc xếp. Là giá vốn tạo ra doanh thu. Mã phí nhóm 02xx.</p></div>
+    <div class="card"><h4>Chi phí định mức không hoá đơn</h4><p class="like">Tiền "bồi dưỡng" theo khung có sẵn</p><p>Tiền chọn vỏ, tiền cho lái xe nâng, phí bến bãi không hoá đơn, phụ cấp cửa khẩu. Tính theo định mức, có khoản tính vào thu nhập chịu thuế của lái xe.</p></div>
+  </div>
+  <h3>Ai trả và trả bằng gì</h3>
+  <ul>
+    <li><b>CS hoặc hiện trường:</b> hoá đơn dưới 5 triệu thì ứng tiền mặt cá nhân. Trên 5 triệu thì tạm ứng chuyển khoản hoặc nhờ kế toán chuyển.</li>
+    <li><b>Lái xe:</b> tự trả tại chỗ, nộp hoá đơn hoặc phiếu thu cho điều vận để được hoàn tiền.</li>
+    <li>Ví dụ dễ thất thoát: lái xe trả vỏ xấu sau khi đã trả tiền nâng. Tiền được bãi hoàn sau 7 ngày vào tài khoản người làm lệnh, hiện chưa ai theo dõi.</li>
+  </ul>
+  <div class="note"><b>Hướng mới khách đề xuất (tài liệu 1/10/2026):</b> mỗi tháng có khoảng <b>7.000 hoá đơn trả hộ</b>. Khách muốn bỏ quỹ tiền mặt tạm ứng: nhân viên hoặc lái xe tạo yêu cầu thanh toán ngay từ JobID hoặc từ Lệnh, trả bằng QR hoặc lệnh chuyển khoản qua ngân hàng (MB, VCB, TPBank), chủ tài khoản duyệt bằng OTP. Có hạn mức theo người, ví dụ quản lý hiện trường 30 triệu/ngày, 10 triệu/lệnh.</div>
+  <h3>Doanh thu</h3>
+  <p>Khi JobID đủ doanh thu và chi phí, kế toán lập bảng kê gửi khách, xuất hoá đơn điện tử qua MISA. Nếu một JobID có nhiều chi nhánh cùng làm, lợi nhuận được chia nội bộ giữa các chi nhánh (cách chia chưa chốt).</p>
+  <p class="src">Nguồn: sop-ban-do-kien-thuc.md:290-325 · giao-nhan-hang-hoa.md:462, 491-496 · hoa-don-tra-ho-2026-10-01.md</p>
+</section>
+
+<!-- 13 -->
+<section id="su-co">
+  <h2><span class="n">13</span>Khi có sự cố</h2>
+  <p class="lead">Nguyên tắc chung: lái xe dừng lại, chụp ảnh, báo điều vận, không tự quyết. Ghi nhận ngay tại chỗ thì còn quy được trách nhiệm cho cảng hoặc khách. Rời đi rồi mới báo thì Delta chịu.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Tình huống</th><th>Phải làm</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Vỏ container móp, thủng, bẩn</td><td>Yêu cầu bãi đổi vỏ khác trước khi nhận. Nhận rồi mới báo thì Delta chịu phí vệ sinh, sửa chữa. Có bãi thu phí đổi vỏ (THT: 120.000đ/lần).</td></tr>
+      <tr><td class="k">Cảng từ chối cho hạ hàng</td><td>Giữ nguyên container, chụp thông báo từ chối, báo điều vận. Thường do sai số chì, sai Booking Note, quá giờ CY.</td></tr>
+      <tr><td class="k">Chì đứt hoặc mất trên đường</td><td>Dừng ở chỗ an toàn, chụp ảnh, báo ngay. Không tự kẹp chì khác.</td></tr>
+      <tr><td class="k">Hàng thiếu, hỏng ở kho khách</td><td>Ghi rõ lên biên bản, chụp ảnh. Không ký khi khách chưa ghi nhận.</td></tr>
+      <tr><td class="k">Xe hỏng, phải đổi xe</td><td>Báo ngay để điều xe thay và tính lại thời gian so với hạn. Cập nhật biển số và tên lái xe mới lên chứng từ.</td></tr>
+      <tr><td class="k">Hạ vỏ sai nơi</td><td>Nghi ngờ thì hỏi trước khi hạ. Lỡ hạ sai thì chụp EIR, báo ngay. Bên gây ra chịu chi phí chuyển vỏ.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Nguồn: giao-nhan-hang-hoa.md:426-482</p>
+</section>
+
+<!-- 14 -->
+<section id="he-thong">
+  <h2><span class="n">14</span>Phần mềm xung quanh</h2>
+  <p class="lead">Delta MIS nằm giữa, các hệ thống khác bao quanh. Hiện đa số vẫn là thao tác tay rồi tải file lên.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Hệ thống</th><th>Dùng để</th><th>Hiện trạng</th></tr></thead>
+    <tbody>
+      <tr><td class="k">ePort của cảng</td><td>Làm lệnh, trả phí, lấy EIR, xem vị trí container</td><td>Làm tay trên web từng cảng. Brainstorm chốt chưa kết nối máy</td></tr>
+      <tr><td class="k">Hải quan</td><td>Tờ khai, thanh lý</td><td>Tải tờ khai + QR lên JobID</td></tr>
+      <tr><td class="k">Hãng tàu, đại lý</td><td>eDO, Booking Note, nơi trả vỏ</td><td>Qua email</td></tr>
+      <tr><td class="k">MISA</td><td>Xuất hoá đơn điện tử</td><td>Có mô tả kết nối tự động chiều phát hành</td></tr>
+      <tr><td class="k">Ngân hàng</td><td>Chuyển khoản, đối chiếu tiền về</td><td>Đang đề xuất (MB, VCB, TPBank)</td></tr>
+      <tr><td class="k">GPS + cảm biến dầu (EUP)</td><td>Biết xe đang ở đâu, đã đến nơi chưa, giờ đến dự kiến, kẹt xe, nổ máy chờ, đổ/hút dầu, qua trạm thu phí</td><td>Đề xuất 30/9: tự cập nhật trạng thái Lệnh theo vị trí xe</td></tr>
+      <tr><td class="k">Zalo</td><td>Gửi ảnh biên bản, báo nhiệt độ, trao đổi</td><td>Đang dùng khắp nơi. Super App sẽ thay dần</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Nguồn: sop-ban-do-kien-thuc.md:400-416 · du-lieu-van-hanh-xe-2026-09-30.md · docs/_research/2026-10-02-eport-integration.md</p>
+</section>
+
+<!-- 15 -->
+<section id="noi-dau">
+  <h2><span class="n">15</span>Năm nỗi đau hiện tại</h2>
+  <p class="lead">Đây là lý do làm Điều phối, đã chốt ở Phần 1 của buổi brainstorm. Đọc xong các phần trên sẽ thấy mỗi nỗi đau nằm ở đâu trong luồng.</p>
+  <div class="pain"><span class="l">a</span><p><b>Nhập lại nhiều lần.</b> Cùng số container, số chì, giờ EIR được gõ lại ở JobID, bảng kế hoạch, Lệnh, bảng kê.</p></div>
+  <div class="pain"><span class="l">b</span><p><b>Giao việc qua điện thoại, Zalo.</b> Không biết ai đang giữ việc, nên quyền trả tiền và KPI không khớp với thực tế.</p></div>
+  <div class="pain"><span class="l">c</span><p><b>Không thấy trước các mốc</b> SI, CY, DEM, DET nên bị phạt (phần 04).</p></div>
+  <div class="pain"><span class="l">d</span><p><b>Chứng từ giấy về chậm</b> (EIR, biên bản, phiếu cân) nên chốt Lệnh và tính tiền chậm.</p></div>
+  <div class="pain"><span class="l">e</span><p><b>Chi phí ghi chưa đủ, chưa rõ</b>, nên thu thiếu của khách hoặc không hoàn được cho nhân viên (phần 12).</p></div>
+  <p class="src">Nguồn: ghi chép brainstorm Điều phối, Phần 1 (chưa ghi vào docs/)</p>
+</section>
+
+<!-- 16 -->
+<section id="chua-ro">
+  <h2><span class="n">16</span>Những gì chưa rõ</h2>
+  <p class="lead">Tài liệu khách gửi còn những chỗ trống dưới đây. Đọc thấy mâu thuẫn hay thiếu thì nhiều khả năng là do những chỗ này chứ không phải do mình hiểu sai.</p>
+  <div class="warnbox"><b>Thiếu lớn nhất:</b> chưa có tài liệu Quy trình điều vận (QTĐV), nên chưa biết trạng thái của Lệnh vận tải, cách gộp Yêu cầu vào Lệnh, cách lái xe chọn vỏ. Hàng CBT và đường sắt đi thẳng vào điều vận, nên hiện chỉ dựa được vào SOP Giao nhận hàng hoá 18/9.</div>
+  <ul>
+    <li>Phụ lục bảng thông tin JobID và định mức chi phí còn trống.</li>
+    <li>Quy trình quỹ và thanh toán (QTTT) chưa viết.</li>
+    <li>Cách chia lợi nhuận giữa các chi nhánh chưa chốt.</li>
+    <li>Quy mô: chưa có số JobID/ngày, số lái xe, số CS theo chi nhánh. Số đầu tiên có được là khoảng 7.000 hoá đơn trả hộ/tháng.</li>
+    <li>"CBT" và "DK05" SOP không viết đầy đủ nghĩa.</li>
+    <li>Một số chỗ SOP ghi "sẽ phát triển trong quá trình BA", ví dụ đổi Booking Note sau khi đã có Lệnh.</li>
+  </ul>
+  <p>Danh sách câu hỏi mở đầy đủ (OQ-1 đến OQ-25) nằm trong ghi chép brainstorm Điều phối.</p>
+</section>
+
+<!-- 17 -->
+<section id="tu-dien">
+  <h2><span class="n">17</span>Từ điển bỏ túi</h2>
+  <p class="lead">Giải nghĩa bằng lời thường. Bản đầy đủ kèm tên tiếng Anh ở sop-ban-do-kien-thuc.md.</p>
+  <dl class="gloss">
+    <dt>FCL</dt><dd>Hàng nguyên container: một chủ hàng thuê nguyên một thùng.</dd>
+    <dt>LCL</dt><dd>Hàng lẻ: hàng ít, gửi chung thùng với chủ khác.</dd>
+    <dt>CFS</dt><dd>Kho gom và chia hàng lẻ.</dd>
+    <dt>20' / 40' / 40'HC</dt><dd>Cỡ container: dài 20 feet, 40 feet, và 40 feet loại cao.</dd>
+    <dt>Vỏ</dt><dd>Container rỗng.</dd>
+    <dt>Chì (seal)</dt><dd>Kẹp niêm phong có số, chứng minh thùng chưa bị mở.</dd>
+    <dt>Mooc</dt><dd>Rơ-moóc, phần kéo phía sau đầu xe để đặt container.</dd>
+    <dt>Booking Note</dt><dd>Xác nhận đặt chỗ trên tàu cho hàng xuất.</dd>
+    <dt>B/L, AWB</dt><dd>Vận đơn đường biển, vận đơn hàng không.</dd>
+    <dt>MB/L, HB/L</dt><dd>Vận đơn của hãng tàu thật, và vận đơn của người bán lại chỗ (NVOCC).</dd>
+    <dt>D/O, eDO</dt><dd>Lệnh giao hàng (giấy hoặc điện tử) cho phép lấy hàng nhập.</dd>
+    <dt>Lệnh nối</dt><dd>Hai lệnh giao hàng nối nhau khi hàng đi qua NVOCC.</dd>
+    <dt>EIR, "phơi"</dt><dd>Biên nhận giao nhận container: giờ và tình trạng thùng.</dd>
+    <dt>Lệnh khống</dt><dd>Lệnh nâng vỏ không ghi số container, để lái xe tự chọn vỏ tại bãi.</dd>
+    <dt>VGM</dt><dd>Tổng trọng lượng container đã xác nhận (hàng + vỏ).</dd>
+    <dt>SI</dt><dd>Hạn nộp chi tiết lô hàng cho hãng tàu.</dd>
+    <dt>CY, cut-off</dt><dd>Hạn hạ container hàng xuất vào cảng.</dd>
+    <dt>DEM</dt><dd>Phí khi container hàng nhập nằm trong cảng quá hạn miễn phí.</dd>
+    <dt>DET</dt><dd>Phí khi giữ container ngoài cảng quá hạn miễn phí.</dd>
+    <dt>Local charges, THC</dt><dd>Các khoản phí tại cảng đến khách phải trả để lấy lệnh giao hàng.</dd>
+    <dt>Thanh lý tờ khai</dt><dd>Hải quan xác nhận cho hàng ra khỏi khu vực giám sát.</dd>
+    <dt>Tally sheet</dt><dd>Biên bản kiểm đếm số kiện và tình trạng kiện ở kho.</dd>
+    <dt>Mã vạch (air)</dt><dd>Danh sách hàng đủ điều kiện qua khu vực giám sát, bản gốc phải giao khách.</dd>
+    <dt>Split</dt><dd>Một lô hàng air về làm nhiều chuyến bay.</dd>
+    <dt>CBM</dt><dd>Mét khối, đơn vị tính thể tích hàng lẻ.</dd>
+    <dt>NVOCC, co-loader</dt><dd>Người nhận chở hàng mà không có tàu; người gom hàng lẻ.</dd>
+    <dt>3PL</dt><dd>Công ty logistics thuê lại Delta, có nhiều khách con.</dd>
+    <dt>CBT</dt><dd>Hàng chạy xe qua biên giới đường bộ. <small>SOP không viết đầy đủ tên.</small></dd>
+    <dt>Container swap</dt><dd>Đổi container tại điểm giao: giao thùng này, nhận thùng kia.</dd>
+    <dt>Trans-loading</dt><dd>Rút hàng từ thùng này đóng sang thùng khác.</dd>
+    <dt>Milkrun</dt><dd>Xe chạy vòng theo lịch cố định để gom hàng nhiều điểm.</dd>
+    <dt>Hàng đối ứng</dt><dd>Hàng chiều về, để xe không chạy rỗng.</dd>
+    <dt>DK05</dt><dd>Mã khách hàng trong hệ thống Delta. <small>Ý nghĩa ký hiệu chưa rõ.</small></dd>
+    <dt>JobID</dt><dd>Hồ sơ của một lô hàng trong Delta.</dd>
+    <dt>YCVT</dt><dd>Yêu cầu vận tải: phiếu báo đã đủ thủ tục, cần xe.</dd>
+    <dt>Lệnh vận tải</dt><dd>Một chuyến xe cụ thể với xe và lái xe.</dd>
+    <dt>Bảng kê</dt><dd>Danh sách các khoản thu của một JobID gửi khách để đòi tiền.</dd>
+    <dt>Trả hộ</dt><dd>Khoản Delta trả thay khách rồi thu lại.</dd>
+    <dt>Định mức</dt><dd>Mức chi có sẵn cho từng việc, không cần hoá đơn.</dd>
+  </dl>
+</section>
+
+<footer>
+  Tổng hợp từ tài liệu khách gửi trong <code>docs-input/</code>: SOP Giao nhận hàng hoá (18/9/2026), SOP Điều phối, SOP Cung cấp dịch vụ tổng quát (24/9/2026), Bộ kiến thức nghiệp vụ (26/9/2026), Dữ liệu vận hành xe (30/9/2026), Hoá đơn trả hộ (1/10/2026). Ví dụ ở phần 08 là minh hoạ. Đây là tài liệu đọc hiểu, không thay cho SOP gốc.
+</footer>
+
+</main>
+</div>
+</body>
+</html>
