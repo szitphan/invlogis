@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Lab · Mobile surfaces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---------- Trang lab (vỏ ngoài, không phải giao diện sản phẩm) ---------- */
+:root{--lab-bg:#e9e9ec;--lab-ink:#18181b;--lab-muted:#6b6b73;--lab-line:#d6d6dc;--lab-card:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--lab-bg:#141416;--lab-ink:#ececf0;--lab-muted:#a0a0aa;--lab-line:#2c2c31;--lab-card:#1d1d20}}
+:root[data-theme="dark"]{--lab-bg:#141416;--lab-ink:#ececf0;--lab-muted:#a0a0aa;--lab-line:#2c2c31;--lab-card:#1d1d20}
+*{box-sizing:border-box}
+body{margin:0;background:var(--lab-bg);color:var(--lab-ink);font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.top{position:sticky;top:0;z-index:20;background:var(--lab-bg);border-bottom:1px solid var(--lab-line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.top h1{font-size:15px;margin:0 8px 0 0}
+.ctl{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--lab-muted)}
+.ctl .opts{display:flex;background:var(--lab-card);border:1px solid var(--lab-line);border-radius:999px;padding:2px}
+.ctl button{font:inherit;font-size:12px;border:0;background:none;color:var(--lab-ink);padding:5px 10px;border-radius:999px;cursor:pointer}
+.ctl button.on{background:var(--lab-ink);color:var(--lab-bg)}
+.export{margin-left:auto;font:inherit;font-size:12px;border:0;background:var(--lab-ink);color:var(--lab-bg);padding:7px 12px;border-radius:999px;cursor:pointer}
+main{max-width:1240px;margin:0 auto;padding:16px}
+.intro{background:var(--lab-card);border:1px solid var(--lab-line);border-radius:14px;padding:16px;margin-bottom:20px}
+.intro h2{font-size:15px;margin:0 0 8px}
+.intro table{border-collapse:collapse;width:100%;font-size:13px}
+.intro th,.intro td{text-align:left;vertical-align:top;padding:6px 8px;border-top:1px solid var(--lab-line)}
+.intro th{font-weight:600;white-space:nowrap}
+.screen{margin:28px 0 36px}
+.screen>h2{font-size:17px;margin:0 0 2px}
+.screen>.sub{color:var(--lab-muted);margin:0 0 14px;font-size:13px}
+.row{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
+.col{width:360px;max-width:100%}
+.col .cap{font-weight:600;font-size:13px;margin:0 0 6px}
+.col .cap small{display:block;font-weight:400;color:var(--lab-muted)}
+.col ul{margin:8px 0 0;padding-left:18px;font-size:12.5px;color:var(--lab-muted)}
+.col ul li.p::marker{content:"+ "}.col ul li.m::marker{content:"− "}
+.vote{background:var(--lab-card);border:1px solid var(--lab-line);border-radius:12px;padding:12px;margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.vote b{font-size:13px}
+.vote .opts button{font:inherit;font-size:12px;border:1px solid var(--lab-line);background:none;color:var(--lab-ink);padding:5px 12px;border-radius:999px;cursor:pointer;margin-right:4px}
+.vote .opts button.on{background:var(--lab-ink);color:var(--lab-bg);border-color:var(--lab-ink)}
+.vote input{flex:1;min-width:220px;font:inherit;font-size:13px;border:1px solid var(--lab-line);border-radius:8px;padding:7px 10px;background:var(--lab-bg);color:var(--lab-ink)}
+.claude{font-size:12.5px;color:var(--lab-muted);margin:10px 0 0}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--lab-ink);color:var(--lab-bg);padding:8px 14px;border-radius:8px;display:none;z-index:30}
+
+/* ---------- Thương hiệu (ô thay được) ---------- */
+body.b-neutral{--primary:#121214;--on-primary:#fff;--hero-bg:linear-gradient(140deg,#0e0e10 0%,#1c1c21 55%,#2a2a31 100%);--glow:rgba(255,255,255,.10);--accent:#121214;--accent-soft:#ececef}
+body.b-innvie{--primary:#0036B5;--on-primary:#fff;--hero-bg:linear-gradient(140deg,#001a5e 0%,#0036B5 60%,#0a63e0 100%);--glow:rgba(0,253,230,.22);--accent:#0036B5;--accent-soft:#e6edfb}
+body.b-delta{--primary:#2E7449;--on-primary:#fff;--hero-bg:linear-gradient(140deg,#0f2a1b 0%,#1f5235 55%,#2E7449 100%);--glow:rgba(57,153,95,.35);--accent:#2E7449;--accent-soft:#e6f2ea}
+
+/* ---------- 3 kiểu nền ---------- */
+.s-a{--page:#f1f1f3;--card:#ffffff;--well:#f4f4f6;--card-bd:transparent;--card-sh:none;--tab:#ffffff;--btn2:#ffffff;--seg-on:#ffffff;--seg-sh:0 1px 2px rgba(0,0,0,.08)}
+.s-b{--page:#ffffff;--card:#f3f3f5;--well:#ffffff;--card-bd:transparent;--card-sh:none;--tab:#f3f3f5;--btn2:#f1f1f3;--seg-on:#e6e6eb;--seg-sh:none}
+.s-c{--page:#ffffff;--card:#ffffff;--well:#f4f4f6;--card-bd:#ececf0;--card-sh:0 1px 2px rgba(16,16,20,.04);--tab:#f4f4f6;--btn2:#f1f1f3;--seg-on:#ffffff;--seg-sh:0 1px 2px rgba(0,0,0,.08)}
+
+/* ---------- Giao diện sản phẩm (bên trong khung máy) ---------- */
+.phone{--ink:#121214;--ink-2:#5c5c66;--ink-3:#9a9aa4;--line:#e8e8ec;
+  position:relative;width:360px;max-width:100%;height:760px;border-radius:46px;border:9px solid #0b0b0d;background:var(--page);overflow:hidden;box-shadow:0 20px 40px -20px rgba(0,0,0,.35);color:var(--ink);font-size:15px;line-height:1.4}
+.scr{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:0 16px 120px;scrollbar-width:none}
+.scr::-webkit-scrollbar{display:none}
+.sb{display:flex;justify-content:space-between;align-items:center;height:46px;padding:0 10px 0 16px;font-weight:600;font-size:15px}
+.sb svg{margin-left:5px}
+.homebar{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);width:120px;height:5px;border-radius:3px;background:#121214;z-index:6}
+.ic{flex:none;display:block}
+.muted{color:var(--ink-3);font-size:13px}
+.ib{width:42px;height:42px;border-radius:50%;border:0;background:var(--card);color:var(--ink);display:grid;place-items:center;position:relative;flex:none;box-shadow:var(--card-sh);outline:1px solid var(--card-bd)}
+.ib.dot::after{content:"";position:absolute;top:10px;right:11px;width:8px;height:8px;border-radius:50%;background:#e5484d;border:2px solid var(--card)}
+
+/* đầu màn gốc */
+.hdr{display:flex;align-items:center;gap:10px;margin:6px 0 16px}
+.ava{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#d9d9de,#b9b9c2);display:grid;place-items:center;font-weight:600;font-size:14px;color:#3a3a42;flex:none}
+.who{flex:1;min-width:0}.who .t2{font-size:13px;color:var(--ink-2)}.who .t1{font-size:17px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* đầu màn con */
+.chdr{display:flex;align-items:center;gap:8px;margin:6px 0 14px}
+.chdr .ct{flex:1;text-align:center;font-size:17px;font-weight:600}
+.step{font-size:13px;font-weight:600;color:var(--ink-2);background:var(--card);padding:6px 12px;border-radius:999px;outline:1px solid var(--card-bd)}
+.big-t{font-size:28px;font-weight:700;letter-spacing:-.02em;margin:2px 0 2px}
+.big-s{color:var(--ink-2);font-size:14px;margin:0 0 14px}
+
+/* khối nhấn (hero) */
+.hero{position:relative;overflow:hidden;border-radius:26px;padding:18px;background:var(--hero-bg);color:#fff;margin-bottom:14px}
+.hero .glow{position:absolute;width:260px;height:260px;right:-90px;top:-120px;border-radius:50%;background:radial-gradient(circle,var(--glow),transparent 70%);pointer-events:none}
+.hero .h-lbl{font-size:13px;opacity:.7}
+.hero .h-num{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.hero .h-sub{font-size:13px;opacity:.75}
+.hero .h-act{display:flex;gap:8px;margin-top:16px}
+.hb{flex:1;height:46px;border-radius:999px;border:0;background:#fff;color:#121214;font:inherit;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px}
+.hb.ghost{background:rgba(255,255,255,.14);color:#fff}
+.hero .bar{height:6px;border-radius:3px;background:rgba(255,255,255,.18);margin-top:12px;overflow:hidden}.hero .bar i{display:block;height:100%;background:#fff;border-radius:3px}
+body.hero-off .hero{background:var(--card);color:var(--ink);box-shadow:var(--card-sh);outline:1px solid var(--card-bd)}
+body.hero-off .hero .glow{display:none}
+body.hero-off .hb{background:var(--well);color:var(--ink)}
+body.hero-off .hb.pri-in{background:var(--primary);color:var(--on-primary)}
+body.hero-off .hb.ghost{background:var(--well);color:var(--ink)}
+body.hero-off .hero .bar{background:var(--well)}body.hero-off .hero .bar i{background:var(--primary)}
+
+/* thẻ + khối */
+.card{background:var(--card);border-radius:22px;padding:16px;margin-bottom:12px;box-shadow:var(--card-sh);outline:1px solid var(--card-bd);outline-offset:-1px}
+.sec{display:flex;align-items:baseline;justify-content:space-between;margin:20px 2px 10px}
+.sec h3{font-size:17px;font-weight:600;margin:0}
+.sec a{font-size:13px;color:var(--ink-2);text-decoration:none}
+.lbl{font-size:12.5px;color:var(--ink-3)}
+.code{font-weight:600;font-size:15px}
+.ttl{font-size:16px;font-weight:600;margin:8px 0 10px;line-height:1.35}
+.rowtop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+
+/* trạng thái — tách khỏi màu thương hiệu, luôn có icon + chữ */
+.pill{display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px 0 8px;border-radius:999px;font-size:12.5px;font-weight:600;white-space:nowrap;flex:none}
+.st-wait{background:#fff3dc;color:#8a5300}
+.st-doing{background:#efeafe;color:#5536c4}
+.st-accept{background:#e2f5f4;color:#0b6b64}
+.st-done{background:#e8f5ec;color:#1b7542}
+.st-bad{background:#fdecec;color:#b42318}
+
+/* thẻ lệnh */
+.oc-top{display:flex;align-items:center;gap:8px}
+.oc-ic{width:34px;height:34px;border-radius:50%;background:var(--well);display:grid;place-items:center;flex:none}
+.oc-top .code{flex:1;min-width:0}
+.kvw{background:var(--well);border-radius:16px;padding:10px 12px;display:grid;gap:7px;font-size:14px}
+.kvw>div{display:flex;align-items:center;gap:8px;color:var(--ink-2);min-width:0}
+.kvw b{color:var(--ink);font-weight:600}
+.kvw span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.warn{display:flex;align-items:center;gap:8px;margin-top:10px;padding:9px 12px;border-radius:14px;font-size:13.5px;font-weight:500}
+.warn.r{background:#fdecec;color:#b42318}.warn.y{background:#fff3dc;color:#8a5300}
+.oc-foot{display:flex;align-items:center;gap:12px;margin-top:12px}
+.seg4{flex:1;display:flex;gap:4px}.seg4 i{flex:1;height:5px;border-radius:3px;background:var(--well)}
+.s-b .seg4 i{background:#dedee4}
+.seg4 i.on{background:var(--ink)}
+.mini{font-size:13px;color:var(--ink-2);white-space:nowrap}
+
+/* stepper */
+.stp{display:flex;align-items:flex-start;margin:6px 0 2px}
+.stp .st{flex:1;position:relative;font-size:12px;min-width:0}
+.stp .st:not(:last-child)::after{content:"";position:absolute;top:11px;left:26px;right:4px;height:2px;border-radius:2px;background:currentColor;opacity:.18}
+.stp .st.done:not(:last-child)::after{opacity:1}
+.stp .dotc{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;border:2px solid currentColor;opacity:.3;margin-bottom:6px}
+.stp .done .dotc{opacity:1;background:currentColor}
+.stp .done .dotc svg{color:var(--stp-bg,#fff)}
+.stp .cur .dotc{opacity:1}
+.stp .cur .dotc::after{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.stp .nm{font-weight:600;white-space:nowrap}
+.stp .tm{opacity:.6;font-size:11.5px}
+.card .stp{--stp-bg:var(--card)}
+.hero .stp{--stp-bg:#121214}
+body.b-innvie .hero .stp{--stp-bg:#0036B5}body.b-delta .hero .stp{--stp-bg:#1f5235}
+body.hero-off .hero .stp{--stp-bg:var(--card)}
+
+/* lối tắt */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center;font-size:12.5px;color:var(--ink-2)}
+.g4 .sci{width:52px;height:52px;border-radius:18px;background:var(--well);display:grid;place-items:center;margin:0 auto 6px;color:var(--ink)}
+/* KPI */
+.kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.kpi .card{margin:0;padding:14px}
+.kpi .n{font-size:24px;font-weight:700;letter-spacing:-.02em;margin:10px 0 0;font-variant-numeric:tabular-nums}
+.kpi .l{font-size:13px;color:var(--ink-2)}
+.kpi .oc-ic{width:36px;height:36px}
+.kpi .red{color:#b42318}
+
+/* danh sách gọn */
+.lr{display:flex;align-items:center;gap:10px;padding:10px 0}
+.lr+.lr{border-top:1px solid var(--line)}
+.s-b .lr+.lr{border-top-color:#e2e2e7}
+.lr .tx{flex:1;min-width:0}.lr .tx b{display:block;font-weight:600;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lr .tx span{font-size:13px;color:var(--ink-3)}
+
+/* tab trạng thái */
+.tabs{display:flex;gap:8px;overflow-x:auto;margin:0 -16px 14px;padding:0 16px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;height:38px;padding:0 14px;border-radius:999px;background:var(--tab);font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px;outline:1px solid var(--card-bd);outline-offset:-1px}
+.tab em{font-style:normal;color:var(--ink-3);font-size:13px}
+.tab.on{background:var(--ink);color:#fff;outline:0}.tab.on em{color:rgba(255,255,255,.6)}
+.search{display:flex;align-items:center;gap:8px;height:48px;border-radius:999px;background:var(--card);padding:0 6px 0 16px;color:var(--ink-3);margin-bottom:12px;outline:1px solid var(--card-bd);outline-offset:-1px}
+.s-c .search{background:var(--well);outline:0}
+.search span{flex:1}
+.search .fb{width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center}
+
+/* chi tiết */
+.kv{display:grid;gap:0}
+.kv>div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;font-size:14.5px}
+.kv>div+div{border-top:1px solid var(--line)}
+.s-b .kv>div+div{border-top-color:#e2e2e7}
+.kv span{color:var(--ink-2)}.kv b{font-weight:600;text-align:right}
+.kv a{color:var(--accent);font-weight:600;text-decoration:none}
+.items>div{display:flex;gap:10px;padding:9px 0;font-size:14.5px}
+.items>div span:first-child{flex:1}
+.items .q{color:var(--ink-3);width:38px;text-align:center}
+.items .p{width:92px;text-align:right;font-variant-numeric:tabular-nums}
+.items .tot{border-top:1px dashed #cfcfd6;margin-top:6px;padding-top:12px;font-weight:700;font-size:16px}
+.person{display:flex;align-items:center;gap:12px}
+.person .tx{flex:1}.person .tx b{display:block;font-weight:600}.person .tx span{font-size:13px;color:var(--ink-3)}
+.person .ib{background:var(--well);outline:0;box-shadow:none}
+.person .ib.pri{background:var(--primary);color:var(--on-primary)}
+.tl>div{display:grid;grid-template-columns:62px 18px 1fr;gap:8px;font-size:13.5px;position:relative;padding-bottom:14px}
+.tl .t{color:var(--ink);font-weight:600}.tl .t small{display:block;font-weight:400;color:var(--ink-3);font-size:11.5px}
+.tl .d{width:18px;height:18px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;margin-top:1px;z-index:1}
+.tl>div:not(:last-child)::before{content:"";position:absolute;left:79px;top:20px;bottom:0;border-left:1.5px dashed #c9c9d1}
+.tl .x{color:var(--ink-2)}
+
+/* form */
+.fg{background:var(--card);border-radius:22px;padding:16px;margin-bottom:12px;box-shadow:var(--card-sh);outline:1px solid var(--card-bd);outline-offset:-1px}
+.s-c .fg{background:none;padding:0 0 4px;box-shadow:none;outline:0;margin-bottom:18px}
+.fl{font-size:13.5px;font-weight:500;color:var(--ink-2);margin:0 0 7px}
+.fl+.fi,.fi+.fl{margin-top:0}
+.fi{display:flex;align-items:center;gap:10px;height:52px;border-radius:16px;background:var(--well);padding:0 14px;font-size:15px;margin-bottom:14px}
+.fi:last-child{margin-bottom:0}
+.fi span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fi .ph{color:var(--ink-3)}
+.fi.ta{height:auto;min-height:92px;align-items:flex-start;padding:12px 14px;line-height:1.45}
+.fh{font-size:12.5px;color:var(--ink-3);margin:-8px 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{height:38px;padding:0 14px;border-radius:999px;background:var(--well);display:flex;align-items:center;gap:6px;font-size:14px}
+.chip.on{background:var(--primary);color:var(--on-primary)}
+.segc{display:flex;background:var(--well);border-radius:999px;padding:4px;margin-bottom:14px}
+.s-b .segc{background:#fff}
+.segc div{flex:1;text-align:center;height:38px;line-height:38px;border-radius:999px;font-size:14px;color:var(--ink-2)}
+.segc div.on{background:var(--seg-on);color:var(--ink);font-weight:600;box-shadow:var(--seg-sh)}
+.sw{display:flex;align-items:center;justify-content:space-between;font-size:15px}
+.sw i{width:50px;height:30px;border-radius:999px;background:var(--primary);position:relative}
+.sw i::after{content:"";position:absolute;right:3px;top:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.ph3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ph3>div{aspect-ratio:1;border-radius:16px;background:var(--well);display:grid;place-items:center;color:var(--ink-3)}
+.ph3 .img{background:linear-gradient(135deg,#c9cbd1,#9fa3ad);color:#fff}
+.link{color:var(--accent);font-weight:600;font-size:13.5px;display:inline-flex;align-items:center;gap:4px;margin:-6px 0 14px}
+
+/* chân màn con */
+.foot{position:absolute;left:0;right:0;bottom:0;padding:22px 16px 26px;background:linear-gradient(to bottom,transparent,var(--page) 30%);display:flex;gap:10px;z-index:5}
+.btn{height:54px;border-radius:999px;border:0;font:inherit;font-size:15.5px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;flex:1}
+.btn.pri{background:var(--primary);color:var(--on-primary)}
+.btn.sec{margin:0;background:var(--btn2);color:var(--ink);outline:1px solid var(--card-bd);outline-offset:-1px}
+.btn.sm{height:42px;font-size:14px}
+.btnrow{display:flex;gap:8px;margin-top:12px}
+
+/* thanh điều hướng dưới (chỉ màn gốc) */
+.bn{position:absolute;left:12px;right:12px;bottom:22px;height:64px;border-radius:32px;display:flex;align-items:center;padding:4px;gap:2px;z-index:5}
+.bn .t{flex:1;height:56px;border-radius:24px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13.5px;font-weight:600}
+.bn .scan{width:52px;height:52px;flex:none;border-radius:50%;display:grid;place-items:center;margin:0 2px}
+.bn.icon{background:#fff;box-shadow:0 8px 24px -8px rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.04)}
+.bn.icon .t{color:#8b8b95}.bn.icon .t.on{background:#efeff2;color:#121214}
+.bn.icon .scan{background:var(--primary);color:var(--on-primary)}
+.bn.label{background:#121214;box-shadow:0 10px 24px -8px rgba(0,0,0,.45)}
+body.b-innvie .bn.label{background:#001f6b}body.b-delta .bn.label{background:#173d27}
+.bn.label .t{color:rgba(255,255,255,.62);flex:0 0 52px}
+.bn.label .t.on{flex:1;background:#fff;color:#121214}
+.bn.label .scan{background:rgba(255,255,255,.14);color:#fff}
+</style>
+</head>
+<body class="b-neutral">
+<div class="top">
+  <h1>UI Lab · Mobile</h1>
+  <div class="ctl">Thương hiệu <div class="opts" data-k="brand"><button data-v="neutral">Trung tính</button><button data-v="innvie">Innvie</button><button data-v="delta">Delta</button></div></div>
+  <div class="ctl">Khối nhấn tối <div class="opts" data-k="hero"><button data-v="on">Bật</button><button data-v="off">Tắt</button></div></div>
+  <div class="ctl">Thanh dưới <div class="opts" data-k="nav"><button data-v="icon">Chỉ icon (đã chốt 06/10)</button><button data-v="label">Tab có chữ</button></div></div>
+  <div class="ctl">Vai trò ở Home <div class="opts" data-k="role"><button data-v="driver">Lái xe</button><button data-v="tech">Kỹ thuật</button><button data-v="mgr">Quản lý</button></div></div>
+  <button class="export" id="export">Copy lựa chọn gửi Claude</button>
+</div>
+<main>
+  <section class="intro">
+    <h2>3 kiểu nền đang so — đánh giá sơ bộ của Claude</h2>
+    <table>
+      <tr><th>A · Nền xám, khối trắng</th><td>Phân lớp rõ nhất: thẻ tự "nổi" mà không cần bóng (u02, u06, u08). Danh sách nhiều thẻ dễ quét. Đổi lại có 3 tầng màu (nền xám → thẻ trắng → ô xám bên trong), màn nhiều khối dễ lổn nhổn nếu khoảng cách không đều.</td></tr>
+      <tr><th>B · Nền trắng, khối xám</th><td>Nhẹ, ít tương phản, đi với khối nhấn tối thì "huyền bí" nhất. Ô nhập trắng trên khối xám trông tinh (u10, u11). Rủi ro: khối xám lớn dễ trông như bị vô hiệu hoá, thẻ danh sách kém nổi, khó biết khối nào bấm được.</td></tr>
+      <tr><th>C · Tất cả trắng, điểm xám</th><td>Thoáng và sang nhất; xám chỉ dùng cho ô nhập, chip, khối thông tin nên nhấn đúng chỗ. Đổi thương hiệu đẹp nhất vì nền trung tính hoàn toàn. Phải dựa vào viền mảnh để tách thẻ; danh sách dài dễ "trôi".</td></tr>
+      <tr><th>Gợi ý ban đầu</th><td>Thường không chọn 1 kiểu cho mọi màn: <b>A cho màn nhiều thẻ</b> (Home, Danh sách) và <b>C cho màn đọc/nhập</b> (Chi tiết, Form) là cách nhiều app fintech đang làm. Bạn chọn theo từng màn bên dưới, mình gom lại thành quy tắc.</td></tr>
+    </table>
+    <p class="claude">Dữ liệu trên màn là dữ liệu mẫu để xem bố cục, không phải đặc tả. Màu trạng thái (vàng/tím/xanh ngọc/xanh lá/đỏ) cố ý tách khỏi màu thương hiệu — thử Delta để thấy "Đã nghiệm thu" (xanh lá) và nút chính (xanh lá) đứng cạnh nhau ra sao.</p>
+  </section>
+  <div id="screens"></div>
+</main>
+<div class="toast" id="toast"></div>
+<script>
+const P={
+home:"M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z",
+cal:"M8 2v4M16 2v4M3 9h18M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM12 13v3l2 1",
+scan:"M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2M7 12h10",
+bell:"M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0",
+user:"M20 21a8 8 0 0 0-16 0M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10z",
+search:"M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3",
+filter:"M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1M15 4v4M9 10v4M17 16v4",
+plus:"M12 5v14M5 12h14",chev:"M9 6l6 6-6 6",down:"M6 9l6 6 6-6",back:"M19 12H5M12 19l-7-7 7-7",
+more:"M6 12h.01M12 12h.01M18 12h.01",x:"M18 6 6 18M6 6l12 12",
+wrench:"M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z",
+truck:"M3 6h11v10H3zM14 9h4l3 3v4h-7M7.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM17.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z",
+alert:"M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z",
+camera:"M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+pin:"M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z",
+clock:"M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2",check:"M5 12l5 5L20 7",
+phone:"M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z",
+msg:"M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z",
+file:"M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h6",
+fuel:"M3 22V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v17M3 22h12M3 10h12M15 13h2a2 2 0 0 1 2 2v3a1.5 1.5 0 0 0 3 0V9l-3-3",
+clip:"M9 3h6v3H9zM15 4.5h2a2 2 0 0 1 2 2V19a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2h2M9 13l2 2 4-4",
+copy:"M9 9h11v11H9zM5 15H4V4h11v1",image:"M3 5h18v14H3zM3 16l5-5 4 4 3-3 6 6M15 9h.01",
+receipt:"M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2zM9 8h6M9 12h6",chart:"M4 20V10M10 20V4M16 20v-7M22 20H2",
+box:"M21 8 12 3 3 8v8l9 5 9-5zM3 8l9 5 9-5M12 13v8",up:"M7 17 17 7M8 7h9v9"};
+const I=(n,s=20,w=1.8)=>`<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"><path d="${P[n]}"/></svg>`;
+const SB=`<div class="sb"><span>9:41</span><span style="display:flex;align-items:center"><svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="currentColor"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="currentColor"/></svg><svg width="16" height="11" viewBox="0 0 16 11"><path d="M8 10.5 10.3 8a3.3 3.3 0 0 0-4.6 0zM3.6 5.8a6.3 6.3 0 0 1 8.8 0l1.4-1.4a8.3 8.3 0 0 0-11.6 0zM.8 3a10.3 10.3 0 0 1 14.4 0l1.4-1.4A12.3 12.3 0 0 0-.6 1.6z" fill="currentColor"/></svg><svg width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="17" height="8" rx="2" fill="currentColor"/><rect x="23.5" y="4" width="1.5" height="4" rx=".75" fill="currentColor" opacity=".4"/></svg></span></div>`;
+
+const ST={wait:["st-wait","Chờ sửa","clock"],doing:["st-doing","Đang sửa","wrench"],accept:["st-accept","Chờ nghiệm thu","clip"],done:["st-done","Đã nghiệm thu","check"],bad:["st-bad","Từ chối nghiệm thu","x"],quote:["st-wait","Đang báo giá","receipt"]};
+const pill=k=>`<span class="pill ${ST[k][0]}">${I(ST[k][2],14,2)}${ST[k][1]}</span>`;
+const seg4=n=>`<div class="seg4">${[0,1,2,3].map(i=>`<i class="${i<n?"on":""}"></i>`).join("")}</div>`;
+const stepper=(n,times)=>{const L=["Báo sự cố","Báo giá","Sửa chữa","Nghiệm thu"];
+  return `<div class="stp">${L.map((l,i)=>`<div class="st ${i<n?"done":i===n?"cur":""}"><div class="dotc">${i<n?I("check",13,3):""}</div><div class="nm">${l}</div><div class="tm">${times[i]||"&nbsp;"}</div></div>`).join("")}</div>`};
+
+const ORD=[
+ {code:"LSC-0921",ago:"2 giờ",st:"doing",n:3,title:"Thay má phanh trước, kiểm tra hệ thống phanh",plate:"30E-789.01",model:"Hyundai HD320",place:"Xưởng nhà · Hà Đông",tech:"Nguyễn Văn Bình",due:"Hạn 08/10"},
+ {code:"LSC-0918",ago:"hôm qua",st:"wait",n:2,title:"Thay 2 lốp sau",plate:"29C-456.78",model:"Isuzu QKR",place:"Xưởng nhà · Hà Đông",tech:"Trần Minh Đức",due:"Hạn 05/10",over:"Quá hạn 1 ngày"},
+ {code:"LSC-0915",ago:"3 ngày",st:"accept",n:3,title:"Sửa điều hoà cabin",plate:"29H-123.45",model:"Hino FG 15T",place:"Xưởng ngoài · Gara Minh Phát",tech:"Lê Quang Huy",due:"Xong 05/10"},
+ {code:"LSC-0909",ago:"5 ngày",st:"done",n:4,title:"Thay ắc quy",plate:"29H-555.12",model:"Hino 300",place:"Xưởng nhà · Hà Đông",tech:"Nguyễn Văn Bình",due:"04/10"},
+ {code:"LSC-0907",ago:"6 ngày",st:"bad",n:3,title:"Phục hồi bơm cao áp",plate:"30F-222.90",model:"Hyundai HD210",place:"Xưởng ngoài · Cơ khí Thành Công",tech:"Lê Quang Huy",due:"03/10",over:"Lái xe từ chối: còn rò dầu",warnY:true},
+];
+const orderCard=o=>`<div class="card">
+  <div class="oc-top"><div class="oc-ic">${I("wrench",17)}</div><div class="code">${o.code} <span class="muted">· ${o.ago}</span></div>${pill(o.st)}</div>
+  <div class="ttl">${o.title}</div>
+  <div class="kvw"><div>${I("truck",16)}<b>${o.plate}</b><span>${o.model}</span></div><div>${I("pin",16)}<span>${o.place}</span></div><div>${I("user",16)}<span>${o.tech}</span></div></div>
+  ${o.over?`<div class="warn ${o.warnY?"y":"r"}">${I("alert",16)}${o.over}</div>`:""}
+  <div class="oc-foot">${seg4(o.n)}<span class="mini">${o.due}</span></div></div>`;
+const shortcuts=items=>`<div class="sec"><h3>Lối tắt</h3><a>Tuỳ chỉnh</a></div><div class="card"><div class="g4">${items.map(([ic,l])=>`<div><div class="sci">${I(ic,22)}</div>${l}</div>`).join("")}</div></div>`;
+
+function home(role){
+  const H={
+   driver:{ini:"PH",hi:"Chào buổi sáng",name:"Phạm Văn Hùng",
+    hero:`<div class="h-lbl">Xe đang nhận</div><div class="h-num">30E-789.01</div><div class="h-sub">Hyundai HD320 · Km 182.430 · đăng kiểm còn 23 ngày</div>
+      <div class="h-act"><button class="hb pri-in">${I("alert",18)}Báo sự cố</button><button class="hb ghost">${I("clip",18)}Kiểm tra xe</button></div>`,
+    body:`<div class="sec"><h3>Theo dõi sự cố</h3><a>Xem tất cả</a></div>
+      <div class="card"><div class="rowtop"><div><div class="lbl">Báo cáo sự cố</div><div class="code">BCSC-0412</div></div>${pill("quote")}</div>
+      <div class="ttl">Phanh kêu, rung khi phanh gấp</div>${stepper(1,["06/10 07:12","đang làm"])}</div>
+      <div class="sec"><h3>Chờ bạn nghiệm thu</h3><a>1</a></div>
+      <div class="card"><div class="oc-top"><div class="oc-ic">${I("wrench",17)}</div><div class="code">LSC-0915</div>${pill("accept")}</div>
+      <div class="ttl">Sửa điều hoà cabin</div><div class="kvw"><div>${I("pin",16)}<span>Gara Minh Phát · xong 05/10 16:40</span></div></div>
+      <div class="btnrow"><button class="btn sec sm">Từ chối</button><button class="btn pri sm">Nghiệm thu</button></div></div>`
+      +shortcuts([["alert","Báo sự cố"],["clip","Kiểm tra xe"],["fuel","Cấp dầu"],["wrench","Lệnh sửa"]])},
+   tech:{ini:"NB",hi:"Xưởng Hà Đông",name:"Nguyễn Văn Bình",
+    hero:`<div class="h-lbl">Việc hôm nay</div><div class="h-num">5 lệnh</div><div class="h-sub">2 đang sửa · 3 chờ sửa · đã chốt 1/5</div><div class="bar"><i style="width:20%"></i></div>
+      <div class="h-act"><button class="hb pri-in">${I("plus",18)}Nhận lệnh</button><button class="hb ghost">${I("check",18)}Chốt lệnh</button></div>`,
+    body:`<div class="sec"><h3>Đang làm</h3><a>2</a></div>
+      <div class="card"><div class="oc-top"><div class="oc-ic">${I("wrench",17)}</div><div class="code">LSC-0921</div>${pill("doing")}</div>
+      <div class="ttl">Thay má phanh trước, kiểm tra hệ thống phanh</div>
+      <div class="kvw"><div>${I("truck",16)}<b>30E-789.01</b><span>Hyundai HD320</span></div><div>${I("clock",16)}<span>Đã làm 1 giờ 20 phút · hạn 08/10</span></div></div>
+      <div class="btnrow"><button class="btn sec sm">${I("box",16)}Xuất phụ tùng</button><button class="btn pri sm">Chốt lệnh</button></div></div>
+      <div class="sec"><h3>Tiếp theo</h3><a>Xem tất cả</a></div>
+      <div class="card" style="padding:6px 16px">
+        <div class="lr"><div class="oc-ic">${I("wrench",17)}</div><div class="tx"><b>Thay 2 lốp sau</b><span>LSC-0918 · 29C-456.78</span></div>${pill("wait")}</div>
+        <div class="lr"><div class="oc-ic">${I("wrench",17)}</div><div class="tx"><b>Bảo dưỡng 40.000 km</b><span>LSC-0924 · 29H-881.20</span></div>${pill("wait")}</div></div>`
+      +shortcuts([["wrench","Lệnh sửa"],["box","Phụ tùng"],["alert","Sự cố"],["cal","Lịch nhắc"]])},
+   mgr:{ini:"LT",hi:"Quản lý đội xe",name:"Lê Thị Thu",
+    hero:`<div class="h-lbl">Xe đang sửa</div><div class="h-num">12 <span style="font-size:15px;font-weight:600;opacity:.8">↑3 so với hôm qua</span></div><div class="h-sub">Đội 60 xe · 48 xe sẵn sàng</div>
+      <div class="h-act"><button class="hb pri-in">${I("plus",18)}Tạo lệnh</button><button class="hb ghost">${I("receipt",18)}Duyệt báo giá · 3</button></div>`,
+    body:`<div class="kpi">
+      <div class="card"><div class="oc-ic">${I("alert",18)}</div><div class="n red">2</div><div class="l">Lệnh quá hạn</div></div>
+      <div class="card"><div class="oc-ic">${I("clip",18)}</div><div class="n">4</div><div class="l">Chờ nghiệm thu</div></div>
+      <div class="card"><div class="oc-ic">${I("chart",18)}</div><div class="n">186,4 tr</div><div class="l">Chi phí sửa tháng 10</div></div>
+      <div class="card"><div class="oc-ic">${I("truck",18)}</div><div class="n">80%</div><div class="l">Xe sẵn sàng</div></div></div>
+      <div class="sec"><h3>Cảnh báo</h3><a>Xem tất cả</a></div>
+      <div class="card" style="padding:6px 16px">
+        <div class="lr"><div class="oc-ic" style="background:#fdecec;color:#b42318">${I("alert",17)}</div><div class="tx"><b>LSC-0918 quá hạn 1 ngày</b><span>Thay 2 lốp sau · 29C-456.78</span></div>${I("chev",18)}</div>
+        <div class="lr"><div class="oc-ic" style="background:#fff3dc;color:#8a5300">${I("cal",17)}</div><div class="tx"><b>Đăng kiểm hết hạn trong 5 ngày</b><span>29C-456.78 · Isuzu QKR</span></div>${I("chev",18)}</div>
+        <div class="lr"><div class="oc-ic" style="background:#fff3dc;color:#8a5300">${I("receipt",17)}</div><div class="tx"><b>3 báo giá chờ duyệt</b><span>Tổng 12,6 tr</span></div>${I("chev",18)}</div></div>`
+      +shortcuts([["wrench","Lệnh sửa"],["receipt","Báo giá"],["truck","Phương tiện"],["chart","Báo cáo"]])}
+  }[role];
+  return {body:`<div class="hdr"><div class="ava">${H.ini}</div><div class="who"><div class="t2">${H.hi}</div><div class="t1">${H.name}</div></div><button class="ib">${I("search")}</button><button class="ib dot">${I("bell")}</button></div>
+    <div class="hero"><div class="glow"></div>${H.hero}</div>${H.body}`,overlay:"nav"};
+}
+function nav(mode){
+  const t=[["home","Trang chủ"],["cal","Lịch nhắc"],null,["bell","Thông báo"],["user","Tài khoản"]];
+  return `<div class="bn ${mode}">${t.map((x,i)=>x?`<div class="t ${i===0?"on":""}">${I(x[0],22)}${mode==="label"&&i===0?x[1]:""}</div>`:`<div class="scan">${I("scan",22)}</div>`).join("")}</div>`;
+}
+function list(){
+  return {body:`<div class="chdr"><button class="ib">${I("back")}</button><div class="ct"></div><button class="ib">${I("more")}</button></div>
+    <div class="big-t">Lệnh sửa chữa</div><div class="big-s">24 lệnh · cập nhật 09:40</div>
+    <div class="search">${I("search",19)}<span>Tìm mã lệnh, biển số…</span><div class="fb">${I("filter",17)}</div></div>
+    <div class="tabs"><div class="tab on">Tất cả <em>24</em></div><div class="tab">Chờ sửa <em>6</em></div><div class="tab">Đang sửa <em>8</em></div><div class="tab">Chờ nghiệm thu <em>3</em></div><div class="tab">Hoàn thành <em>7</em></div></div>
+    ${ORD.map(orderCard).join("")}`,
+    overlay:`<div class="foot"><button class="btn pri">${I("plus",19)}Tạo lệnh sửa chữa</button></div>`};
+}
+function detail(){
+  return {body:`<div class="chdr"><button class="ib">${I("back")}</button><div class="ct">Chi tiết lệnh</div><button class="ib">${I("more")}</button></div>
+    <div class="rowtop" style="align-items:center;margin-top:4px"><div style="display:flex;align-items:center;gap:6px;color:var(--ink-2);font-weight:500">${I("file",17)}LSC-0921 ${I("copy",15)}</div>${pill("doing")}</div>
+    <div class="big-t" style="font-size:24px;margin-top:8px">Thay má phanh trước, kiểm tra hệ thống phanh</div>
+    <div class="big-s">${"30E-789.01 · Hyundai HD320"}</div>
+    <div class="hero"><div class="glow"></div><div class="h-lbl">Chi phí dự kiến</div><div class="h-num">4.850.000 ₫</div><div class="h-sub">Theo báo giá BG-0388 · đã duyệt 05/10</div>
+      <div style="margin-top:16px">${stepper(2,["06/10 07:12","05/10 15:30","đang sửa"])}</div></div>
+    <div class="card"><div class="kv">
+      <div><span>Loại lệnh</span><b>Sửa chữa xe Delta</b></div>
+      <div><span>Nơi sửa</span><b>Xưởng nhà · Hà Đông</b></div>
+      <div><span>Ngày tạo</span><b>05/10/2026 16:02</b></div>
+      <div><span>Hạn hoàn thành</span><b>08/10/2026</b></div>
+      <div><span>Báo cáo sự cố gốc</span><a>BCSC-0412</a></div></div></div>
+    <div class="card"><div style="font-weight:600;font-size:16px;margin-bottom:4px">Hạng mục</div><div class="items">
+      <div><span>Má phanh trước</span><span class="q">×2</span><span class="p">2.400.000</span></div>
+      <div><span>Dầu phanh DOT4</span><span class="q">×1</span><span class="p">350.000</span></div>
+      <div><span>Đĩa phanh (láng)</span><span class="q">×2</span><span class="p">900.000</span></div>
+      <div><span>Công thay, kiểm tra</span><span class="q">3 giờ</span><span class="p">1.200.000</span></div>
+      <div class="tot"><span>Tổng</span><span class="p" style="width:auto">4.850.000 ₫</span></div></div></div>
+    <div class="card"><div class="person"><div class="ava">NB</div><div class="tx"><b>Nguyễn Văn Bình</b><span>Kỹ thuật viên phụ trách</span></div><button class="ib">${I("msg",19)}</button><button class="ib pri">${I("phone",19)}</button></div></div>
+    <div class="sec"><h3>Lịch sử</h3><a>Xem tất cả</a></div>
+    <div class="card"><div class="tl">
+      <div><div class="t">09:15<small>06/10</small></div><div class="d">${I("check",11,3)}</div><div class="x">Nguyễn Văn Bình bắt đầu sửa, xuất 2 má phanh từ kho xưởng.</div></div>
+      <div><div class="t">16:02<small>05/10</small></div><div class="d">${I("check",11,3)}</div><div class="x">Lê Thị Thu tạo lệnh từ báo giá BG-0388.</div></div>
+      <div><div class="t">15:30<small>05/10</small></div><div class="d">${I("check",11,3)}</div><div class="x">Báo giá BG-0388 được duyệt.</div></div></div></div>`,
+    overlay:`<div class="foot"><button class="btn sec">${I("camera",19)}Thêm ảnh</button><button class="btn pri">Chốt lệnh</button></div>`};
+}
+function form(){
+  return {body:`<div class="chdr"><button class="ib">${I("x")}</button><div class="ct">Báo cáo sự cố</div><span class="step">1/2</span></div>
+    <div class="big-t" style="font-size:24px">Xe gặp vấn đề gì?</div><div class="big-s">Báo cáo gửi tới đội kỹ thuật và quản lý đội xe.</div>
+    <div class="fg"><div class="fl">Phương tiện</div><div class="fi">${I("truck",19)}<span><b>30E-789.01</b> · Hyundai HD320</span>${I("down",18)}</div>
+      <div class="fl">Km hiện tại</div><div class="fi"><span>182.430</span><span class="muted" style="flex:none">km</span></div></div>
+    <div class="fg"><div class="fl">Loại sự cố</div><div class="chips"><div class="chip on">${I("check",15,2.4)}Phanh</div><div class="chip">Lốp</div><div class="chip">Động cơ</div><div class="chip">Điện</div><div class="chip">Điều hoà</div><div class="chip">Thân vỏ</div><div class="chip">Khác</div></div>
+      <div class="fl">Mức độ</div><div class="segc"><div>Nhẹ</div><div class="on">Trung bình</div><div>Nghiêm trọng</div></div>
+      <div class="sw"><span>Xe còn chạy được</span><i></i></div></div>
+    <div class="fg"><div class="fl">Vị trí hiện tại</div><div class="fi">${I("pin",19)}<span>QL1A, Thường Tín, Hà Nội</span></div><div class="link">${I("scan",15)}Dùng vị trí hiện tại</div>
+      <div class="fl">Mô tả</div><div class="fi ta">Phanh kêu rít và rung vô lăng khi phanh gấp, từ sáng nay.</div></div>
+    <div class="fg"><div class="fl">Ảnh, video <span class="muted">· 2/10</span></div><div class="ph3"><div>${I("camera",24)}</div><div class="img">${I("image",22)}</div><div class="img">${I("image",22)}</div></div></div>`,
+    overlay:`<div class="foot"><button class="btn sec">Lưu nháp</button><button class="btn pri">Tiếp tục</button></div>`};
+}
+
+const SURF=[["a","A · Nền xám, khối trắng"],["b","B · Nền trắng, khối xám"],["c","C · Tất cả trắng, điểm xám"]];
+const SCREENS=[
+ {k:"home",name:"Home",sub:"Màn gốc của tab Trang chủ. Đổi vai trò ở thanh trên để xem cùng khung với 3 bộ quyền.",fn:()=>home(S.role),
+  note:"Home có nhiều khối khác loại (khối nhấn, thẻ, lối tắt) nên A phân lớp rõ nhất; C dễ thành 1 mặt phẳng trắng nếu không có khối nhấn tối."},
+ {k:"list",name:"Danh sách lệnh sửa chữa",sub:"Màn con mở từ Home. Thẻ lệnh: mã + trạng thái, tiêu đề, khối thông tin xe/nơi sửa/người làm, thanh 4 bước, cảnh báo.",fn:list,
+  note:"Danh sách nhiều thẻ là chỗ A mạnh nhất. B làm thẻ xám chồng ô trắng bên trong — để ý có bị nặng không."},
+ {k:"detail",name:"Chi tiết lệnh sửa chữa",sub:"Tiêu đề + số tiền lớn kiểu hoá đơn (u02), stepper (u01), khối thông tin, hạng mục, người phụ trách, lịch sử.",fn:detail,
+  note:"Màn đọc dài: C thoáng nhất; A giữ được nhịp khối. Thử tắt khối nhấn tối để xem số tiền đứng một mình trên nền có đủ nổi không."},
+ {k:"form",name:"Form tạo báo cáo sự cố",sub:"Bước 1/2. Ô nhập nền xám không viền, chip chọn loại, segmented mức độ, switch, ảnh (u10, u11).",fn:form,
+  note:"Ở C mình bỏ hẳn khung nhóm, chỉ còn ô nhập xám trên nền trắng — đây là kiểu của u10/u11."},
+];
+const KEY="uilab-mobile-v1";
+let S={brand:"neutral",hero:"on",nav:"icon",role:"driver",pick:{},note:{}};
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const PROS={a:[["p","Thẻ tự nổi, không cần bóng"],["m","3 tầng màu khi có ô xám trong thẻ"]],b:[["p","Nhẹ, đi với khối tối rất 'huyền bí'"],["m","Khối xám lớn dễ giống bị vô hiệu"]],c:[["p","Thoáng, đổi thương hiệu đẹp nhất"],["m","Tách thẻ chỉ bằng viền mảnh"]]};
+
+function render(){
+  document.body.className=`b-${S.brand}${S.hero==="off"?" hero-off":""}`;
+  document.querySelectorAll(".opts[data-k]").forEach(o=>o.querySelectorAll("button").forEach(b=>b.classList.toggle("on",S[o.dataset.k]===b.dataset.v)));
+  document.getElementById("screens").innerHTML=SCREENS.map(sc=>{
+    const r=sc.fn(),ov=r.overlay==="nav"?nav(S.nav):r.overlay;
+    return `<section class="screen"><h2>${sc.name}</h2><p class="sub">${sc.sub}</p><div class="row">${SURF.map(([s,l])=>`
+      <div class="col"><div class="cap">${l}</div><div class="phone s-${s}"><div class="scr">${SB}${r.body}</div>${ov}<div class="homebar"></div></div>
+      <ul>${PROS[s].map(([c,t])=>`<li class="${c}">${t}</li>`).join("")}</ul></div>`).join("")}</div>
+      <div class="vote"><b>Bạn chọn cho màn này:</b><div class="opts" data-pick="${sc.k}">${["a","b","c"].map(v=>`<button data-v="${v}" class="${S.pick[sc.k]===v?"on":""}">${v.toUpperCase()}</button>`).join("")}</div>
+      <input data-note="${sc.k}" placeholder="Thích / không thích gì ở màn này…" value="${(S.note[sc.k]||"").replace(/"/g,"&quot;")}"></div>
+      <p class="claude">Claude: ${sc.note}</p></section>`}).join("");
+}
+document.querySelector(".top").addEventListener("click",e=>{const b=e.target.closest(".opts[data-k] button");if(!b)return;S[b.parentElement.dataset.k]=b.dataset.v;save();render()});
+document.getElementById("screens").addEventListener("click",e=>{const b=e.target.closest(".opts[data-pick] button");if(!b)return;const k=b.parentElement.dataset.pick;S.pick[k]=S.pick[k]===b.dataset.v?"":b.dataset.v;save();b.parentElement.querySelectorAll("button").forEach(x=>x.classList.toggle("on",S.pick[k]===x.dataset.v))});
+document.getElementById("screens").addEventListener("input",e=>{const k=e.target.dataset.note;if(!k)return;S.note[k]=e.target.value;save()});
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",1800)}
+document.getElementById("export").onclick=()=>{
+  const L=["# Chọn kiểu nền mobile","",`- Thương hiệu đang xem: ${S.brand} · khối nhấn tối: ${S.hero} · thanh dưới: ${S.nav}`,""];
+  SCREENS.forEach(sc=>L.push(`- ${sc.name}: ${S.pick[sc.k]?S.pick[sc.k].toUpperCase():"chưa chọn"}${S.note[sc.k]?" — "+S.note[sc.k]:""}`));
+  const txt=L.join("\n");
+  (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast("Đã copy — dán vào chat"),()=>prompt("Copy đoạn này:",txt));
+};
+render();
+</script>
+</body>
+</html>

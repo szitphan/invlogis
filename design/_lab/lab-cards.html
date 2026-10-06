@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Lab · Card family</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab-kit.css">
+</head>
+<body class="b-neutral">
+<div class="lab-top">
+  <h1>UI Lab · Họ thẻ</h1>
+  <div class="lab-ctl">Thương hiệu <div class="lab-opts" data-k="brand"><button data-v="neutral">Trung tính</button><button data-v="innvie">Innvie</button><button data-v="delta">Delta</button></div></div>
+  <div class="lab-ctl">Nền xem thẻ <div class="lab-opts" data-k="surf"><button data-v="a">A · xám</button><button data-v="c">C · trắng</button></div></div>
+  <div class="lab-ctl">Khối nhấn tối ở Home <div class="lab-opts" data-k="hero"><button data-v="off">Tắt</button><button data-v="on">Bật</button></div></div>
+  <div class="lab-ctl">Vai trò <div class="lab-opts" data-k="role"><button data-v="driver">Lái xe</button><button data-v="tech">Kỹ thuật</button><button data-v="mgr">Quản lý</button></div></div>
+  <button class="lab-export" id="export">Copy góp ý gửi Claude</button>
+</div>
+<main class="lab-main">
+  <section class="lab-box">
+    <h2>10 loại thẻ dùng chung, rồi ráp thành Home (nền A) và Danh sách (nền C)</h2>
+    <p>Mỗi thẻ ghi: khi nào dùng, gồm những phần nào, lấy ý từ ref nào. Cùng một bộ thước đo cho mọi thẻ: bo ngoài 22, bo trong 16, đệm 16, nút viên thuốc 52 / 42, chữ 13,5 · 15 · 17 · 24.</p>
+    <p class="lab-muted">Dữ liệu mẫu để xem bố cục. Trang dùng bộ style chung <code>lab-kit.css</code> và đã qua tự kiểm chữ đè / tràn khung.</p>
+  </section>
+  <div id="specs"></div>
+  <h2 class="lab-h2">Ráp vào màn</h2>
+  <p class="lab-sub">Home theo nền A (bạn chọn), Danh sách lệnh theo nền C. Đổi vai trò ở thanh trên để xem Home của 3 bộ quyền.</p>
+  <div class="lab-row" id="screens"></div>
+</main>
+<div class="lab-toast" id="lab-toast"></div>
+<script src="lab-kit.js"></script>
+<script>
+const ORD=[
+ {code:"LSC-0921",ago:"2 giờ",st:"doing",n:3,title:"Thay má phanh trước, kiểm tra hệ thống phanh",plate:"30E-789.01",model:"Hyundai HD320",place:"Xưởng nhà · Hà Đông",tech:"Nguyễn Văn Bình",due:"Hạn 08/10"},
+ {code:"LSC-0918",ago:"hôm qua",st:"wait",n:2,title:"Thay 2 lốp sau",plate:"29C-456.78",model:"Isuzu QKR",place:"Xưởng nhà · Hà Đông",tech:"Trần Minh Đức",due:"Hạn 05/10",strip:["r","Quá hạn 1 ngày"]},
+ {code:"LSC-0915",ago:"3 ngày",st:"accept",n:3,title:"Sửa điều hoà cabin",plate:"29H-123.45",model:"Hino FG 15T",place:"Xưởng ngoài · Gara Minh Phát",tech:"Lê Quang Huy",due:"Xong 05/10"},
+ {code:"LSC-0909",ago:"5 ngày",st:"done",n:4,title:"Thay ắc quy",plate:"29H-555.12",model:"Hino 300",place:"Xưởng nhà · Hà Đông",tech:"Nguyễn Văn Bình",due:"Xong 04/10"},
+ {code:"LSC-0907",ago:"6 ngày",st:"bad",n:3,title:"Phục hồi bơm cao áp",plate:"30F-222.90",model:"Hyundai HD210",place:"Xưởng ngoài · Cơ khí Thành Công",tech:"Lê Quang Huy",due:"03/10",strip:["y","Lái xe từ chối: còn rò dầu"]},
+];
+/* ---------- 10 loại thẻ ---------- */
+const C={
+ rec:o=>`<div class="k-card"><div class="k-rec-h"><div class="k-icc">${I("wrench",17)}</div><div class="code">${o.code}</div>${pill(o.st)}</div>
+   <div class="k-veh"><div class="k-icc">${I("truck",18)}</div><div class="tx"><b>${o.plate}</b><span>${o.model}</span></div></div>
+   <div class="k-meta"><div>${I("pin",16)}<span>${o.place}</span></div><div>${I("user",16)}<span>${o.tech}</span></div></div>
+   ${o.strip?`<div class="k-strip ${o.strip[0]}">${I("alert",16)}${o.strip[1]}</div>`:""}</div>`,
+ rows:(list,title)=>`<div class="k-card tight">${list.map(o=>`<div class="k-row"><div class="k-icc">${I(o.ic||"wrench",17)}</div><div class="tx"><b>${o.title}</b><span>${o.sub}</span></div>${o.right||I("chev",18)}</div>`).join("")}</div>`,
+ track:()=>`<div class="k-card"><div class="k-rec-h"><div class="k-icc">${I("alert",17)}</div><div class="code">BCSC-0412</div>${pill("quote")}</div>
+   <div class="k-rec-t">Phanh kêu, rung khi phanh gấp</div>${stepper(1,["06/10 07:12","đang làm"])}</div>`,
+ kpis:()=>`<div class="k-stats">
+   <div class="k-stat"><div class="l">Xe đang sửa</div><div class="v"><span class="n">12</span><span class="d">↑ 3</span></div></div>
+   <div class="k-stat"><div class="l">${I("alert",14,2)}Lệnh quá hạn</div><div class="v"><span class="n r">2</span></div></div>
+   <div class="k-stat"><div class="l">Chờ nghiệm thu</div><div class="v"><span class="n">4</span></div></div>
+   <div class="k-stat"><div class="l">Chi phí sửa T10</div><div class="v"><span class="n">186,4 tr</span><span class="d">↓ 8%</span></div></div></div>`,
+ alerts:()=>C.rows([
+   {ic:"alert",title:"LSC-0918 quá hạn 1 ngày",sub:"Thay 2 lốp sau · 29C-456.78"},
+   {ic:"cal",title:"Đăng kiểm hết hạn trong 5 ngày",sub:"29C-456.78 · Isuzu QKR"},
+   {ic:"receipt",title:"3 báo giá chờ duyệt",sub:"Tổng 12,6 tr"}]).replace(/<div class="k-icc">(<svg[^]*?alert)/,'<div class="k-icc r">$1').replace(/<div class="k-icc">(<svg[^]*?M8 2v4)/,'<div class="k-icc y">$1').replace(/<div class="k-icc">(<svg[^]*?M5 3h14)/,'<div class="k-icc y">$1'),
+ asset:(drv)=>`<div class="k-card k-asset"><div class="k-rec-h"><div class="k-icc lg">${I("truck",20)}</div><div class="code">${drv?"30E-789.01":"29C-456.78"}<div class="k-cap" style="font-weight:400">${drv?"Hyundai HD320":"Isuzu QKR"}</div></div>${pill(drv?"run":"fix")}</div>
+   <div class="k-meta inline" style="margin:12px 0"><div>${I("pin",16)}<span>${drv?"QL1A, Thường Tín":"Xưởng nhà · Hà Đông"}</span></div><div>${I("gauge",16)}<span>182.430 km</span></div></div>
+   ${drv?"":`<div class="k-strip y" style="margin-bottom:12px">${I("alert",16)}Đăng kiểm hết hạn trong 5 ngày</div>`}
+   <div class="k-chips"><span class="k-chip">${I("fuel",15)}62%</span><span class="k-chip">${I("shield",15)}${drv?"ĐK còn 23 ngày":"ĐK còn 5 ngày"}</span><button class="k-ib well end" aria-label="Chi tiết xe">${I("chev",18)}</button></div></div>`,
+ event:(t,ti,s,chip)=>`<div class="k-card k-event"><span class="time">${t}</span><button class="k-ib ink go" aria-label="Mở việc">${I("up",18)}</button>
+   <div class="t">${ti}</div><div class="s">${s}</div><div class="bot"><span class="k-chip">${chip}</span></div></div>`,
+ summary:(edit)=>`<div class="k-card"><div class="k-rec-h" style="margin-bottom:4px"><div class="code" style="font-size:16px">Hạng mục</div>${edit?`<button class="k-btn sec sm" style="height:32px;padding:0 12px;font-size:13px">Sửa</button>`:""}</div>
+   <div class="k-kv"><div><span>Má phanh trước ×2</span><b class="k-num">2.400.000</b></div><div><span>Dầu phanh DOT4 ×1</span><b class="k-num">350.000</b></div><div><span>Láng đĩa phanh ×2</span><b class="k-num">900.000</b></div><div><span>Công · 3 giờ</span><b class="k-num">1.200.000</b></div><div class="tot"><span>Tổng</span><b class="k-num">4.850.000 ₫</b></div></div></div>`,
+ person:()=>`<div class="k-card"><div class="k-person"><div class="k-ava">NB</div><div class="tx"><b>Nguyễn Văn Bình</b><span>Kỹ thuật viên phụ trách</span></div><button class="k-ib well" aria-label="Nhắn tin">${I("msg",19)}</button><button class="k-ib pri" aria-label="Gọi">${I("phone",19)}</button></div></div>`,
+ short4:(items)=>`<div class="k-card"><div class="k-g4">${items.map(([ic,l])=>`<div><div class="sq">${I(ic,22)}</div>${l}</div>`).join("")}</div></div>`,
+ tiles:(items)=>`<div class="k-g2" style="margin-bottom:12px">${items.map(([ic,l])=>`<div class="k-tile"><div class="k-icc">${I(ic,18)}</div>${l}</div>`).join("")}</div>`,
+ hero:(lb,n,s,b1,b2)=>`<div class="k-hero"><div class="glow"></div><div class="lb">${lb}</div><div class="n">${n}</div><div class="s">${s}</div>
+   <div class="k-btns"><button class="k-btn on-hero">${b1}</button><button class="k-btn on-hero-2">${b2}</button></div></div>`,
+};
+const SPECS=[
+ {n:"1. Thẻ bản ghi",w:"Mỗi bản ghi trong danh sách có trạng thái (lệnh sửa chữa, báo giá, đơn mua).",a:["Đầu: icon tròn · mã · trạng thái","Thẻ con xám: xe (biển số + loại xe)","Dòng thông tin có icon: nơi sửa, người phụ trách","Dải cảnh báo (khi có)"],r:"u06 Shipments, u01 thẻ đang theo dõi",h:()=>C.rec(ORD[1])},
+ {n:"2. Hàng danh sách",w:"Danh sách gọn trong 1 thẻ: việc tiếp theo, hoạt động gần đây, cài đặt.",a:["Icon tròn","2 dòng: tiêu đề đậm + phụ xám","Bên phải: trạng thái, giá trị hoặc mũi tên"],r:"Revolut 08, u05 danh sách hoá đơn",h:()=>C.rows([{title:"Thay 2 lốp sau",sub:"LSC-0918 · 29C-456.78",right:pill("wait")},{title:"Bảo dưỡng 40.000 km",sub:"LSC-0924 · 29H-881.20",right:pill("wait")},{ic:"receipt",title:"Báo giá BG-0391",sub:"Gara Minh Phát",right:`<div class="val k-num">3.200.000<small>chờ duyệt</small></div>`}])},
+ {n:"3. Thẻ theo dõi tiến trình",w:"Một việc đang đi qua nhiều bước mà người dùng chờ kết quả (sự cố mình báo, lệnh mình tạo).",a:["Đầu: icon tròn · mã · trạng thái","Tiêu đề","Stepper 4 bước, chữ căn giữa dưới từng chấm"],r:"u01 Current Tracking",h:()=>C.track()},
+ {n:"4. Ô số liệu (KPI)",w:"Home của quản lý, dashboard. 1 thẻ chia 4 ô bằng đường kẻ mảnh, gọn chiều cao.",a:["Nhãn 1 dòng (ô cảnh báo có icon)","Số lớn + biến động nhỏ cạnh số","Ô cảnh báo: số đỏ"],r:"u06 Dashboard, Lark 07",h:()=>C.kpis()},
+ {n:"5. Thẻ cảnh báo",w:"Việc cần xử lý ngay, xếp theo mức. Màu chỉ ở icon tròn, chữ vẫn đen.",a:["Icon tròn đỏ / vàng theo mức","Tiêu đề nói rõ chuyện gì","Phụ: đối tượng liên quan","Mũi tên mở chi tiết"],r:"u06 Critical Alerts",h:()=>C.alerts()},
+ {n:"6. Thẻ phương tiện",w:"Xe đang nhận (lái xe), danh sách xe (quản lý). Đối tượng có vị trí và chỉ số.",a:["Icon xe lớn · biển số + loại xe/người lái · trạng thái xe","Vị trí · km trên 1 dòng","Dải cảnh báo (khi có)","Chip chỉ số + nút mũi tên mở chi tiết"],r:"u06 Fleet",h:()=>C.asset(false)},
+ {n:"7. Thẻ việc theo giờ",w:"Việc có khung giờ: lịch sửa của kỹ thuật viên, lịch nhắc.",a:["Chip giờ viền mảnh","Tiêu đề lớn đậm","Phụ xám","Nút tròn đen mở việc","Chip phụ dưới"],r:"u13",h:()=>C.event("08:00 – 10:30","Thay má phanh trước","30E-789.01 · Khoang 2","LSC-0921")},
+ {n:"8. Khối tóm tắt tiền",w:"Hạng mục + tổng ở chi tiết lệnh, báo giá, màn Xem lại.",a:["Tiêu đề + Sửa (khi cho phép)","Cặp nhãn trái – số phải, số canh cột","Kẻ đứt + Tổng đậm"],r:"u08 Order Summary, u02",h:()=>C.summary(true)},
+ {n:"9. Thẻ người liên hệ",w:"Người phụ trách ở chi tiết lệnh, sự cố.",a:["Ảnh đại diện","Tên + vai trò","Nhắn tin (xám) + Gọi (nút chính)"],r:"u01 Contact Rider",h:()=>C.person()},
+ {n:"10. Lối tắt",w:"Hành động theo quyền ở Home. 4 ô nhỏ trong 1 thẻ, hoặc ô lớn 2×2 khi chỉ có ít hành động.",a:["Ô icon bo 18","Nhãn 1–2 từ","Biến thể ô lớn: icon + nhãn đậm"],r:"Fleetio Shortcuts, u05",h:()=>C.short4([["alert","Báo sự cố"],["clip","Kiểm tra xe"],["fuel","Cấp dầu"],["wrench","Lệnh sửa"]])+C.tiles([["alert","Báo sự cố"],["clip","Kiểm tra xe"]])},
+];
+/* ---------- Ráp màn ---------- */
+function home(role,hero){
+  const hdr=(ini,t2,t1)=>`<div class="k-hdr"><div class="k-ava">${ini}</div><div class="k-who"><div class="t2">${t2}</div><div class="t1">${t1}</div></div><button class="k-ib" aria-label="Tìm">${I("search")}</button><button class="k-ib dot" aria-label="Thông báo, có mới">${I("bell")}</button></div>`;
+  const sec=(t,a)=>`<div class="k-sec"><h3>${t}</h3><a>${a||"Xem tất cả"}</a></div>`;
+  if(role==="driver")return hdr("PH","Chào buổi sáng","Phạm Văn Hùng")
+    +(hero?C.hero("Xe đang nhận","30E-789.01","Hyundai HD320 · Km 182.430","Báo sự cố","Kiểm tra xe"):C.asset(true))
+    +sec("Theo dõi sự cố")+C.track()
+    +sec("Chờ bạn nghiệm thu","1")+`<div class="k-card"><div class="k-rec-h"><div class="k-icc">${I("wrench",17)}</div><div class="code">LSC-0915</div>${pill("accept")}</div><div class="k-rec-t">Sửa điều hoà cabin</div><div class="k-well k-meta"><div>${I("pin",16)}<span>Gara Minh Phát · xong 05/10 16:40</span></div></div><div class="k-btns" style="margin-top:12px"><button class="k-btn sec sm">Từ chối</button><button class="k-btn pri sm">Nghiệm thu</button></div></div>`
+    +sec("Lối tắt","Tuỳ chỉnh")+C.short4([["alert","Báo sự cố"],["clip","Kiểm tra xe"],["fuel","Cấp dầu"],["wrench","Lệnh sửa"]]);
+  if(role==="tech")return hdr("NB","Xưởng Hà Đông","Nguyễn Văn Bình")
+    +(hero?C.hero("Việc hôm nay","5 lệnh","2 đang sửa · 3 chờ sửa","Nhận lệnh","Chốt lệnh"):"")
+    +sec("Việc hôm nay","5")+C.event("08:00 – 10:30","Thay má phanh trước","30E-789.01 · Khoang 2","Đang sửa · 1 giờ 20 phút")+C.event("13:30 – 15:00","Thay 2 lốp sau","29C-456.78 · Khoang 1","Chờ sửa · quá hạn 1 ngày")
+    +sec("Tiếp theo")+C.rows([{title:"Bảo dưỡng 40.000 km",sub:"LSC-0924 · 29H-881.20",right:pill("wait")},{title:"Thay lọc gió",sub:"LSC-0925 · 30E-111.02",right:pill("wait")}])
+    +sec("Lối tắt","Tuỳ chỉnh")+C.short4([["wrench","Lệnh sửa"],["box","Phụ tùng"],["alert","Sự cố"],["cal","Lịch nhắc"]]);
+  return hdr("LT","Quản lý đội xe","Lê Thị Thu")
+    +(hero?C.hero("Xe đang sửa","12","Đội 60 xe · 48 xe sẵn sàng","Tạo lệnh","Duyệt báo giá · 3"):"")
+    +C.kpis()+sec("Cần xử lý")+C.alerts()
+    +sec("Xe cần chú ý")+C.asset(false)
+    +sec("Lối tắt","Tuỳ chỉnh")+C.short4([["wrench","Lệnh sửa"],["receipt","Báo giá"],["truck","Phương tiện"],["chart","Báo cáo"]]);
+}
+function list(){
+  return `<div class="k-chdr"><button class="k-ib plain" aria-label="Quay lại">${I("back")}</button></div>
+    <div class="k-h1" style="margin-bottom:14px">Lệnh sửa chữa</div>
+    <div class="k-search">${I("search",19)}<span>Tìm mã lệnh, biển số…</span><button class="k-ib ink" aria-label="Lọc">${I("filter",17)}</button></div>
+    <div class="k-tabs"><div class="k-tab on">Tất cả <em>24</em></div><div class="k-tab">Chờ sửa <em>6</em></div><div class="k-tab">Đang sửa <em>8</em></div><div class="k-tab">Chờ nghiệm thu <em>3</em></div><div class="k-tab">Hoàn thành <em>7</em></div></div>
+    ${ORD.map(C.rec).join("")}`;
+}
+const S=labStore("uilab-cards-v2",{brand:"neutral",surf:"c",hero:"off",role:"driver",note:{}});
+function render(){
+  document.body.className="b-"+S.brand;
+  document.getElementById("specs").innerHTML=SPECS.map((s,i)=>`<div class="lab-spec"><div><h3>${s.n}</h3><p class="when">${s.w}</p><ul>${s.a.map(x=>`<li>${x}</li>`).join("")}</ul><div class="ref">Ý từ: ${s.r}</div>
+    <input class="lab-note" data-note="c${i+1}" placeholder="Góp ý thẻ ${i+1}…" value="${(S.note["c"+(i+1)]||"").replace(/"/g,"&quot;")}"></div>
+    <div class="k lab-stage s-${S.surf}" data-check="${s.n}"><div class="k-phone" style="height:auto;border:0;border-radius:0;box-shadow:none;background:none;overflow:visible;width:auto"><div class="k-scr" style="position:static;padding:0;overflow:visible">${s.h()}</div></div></div></div>`).join("");
+  const roleName={driver:"Lái xe",tech:"Kỹ thuật",mgr:"Quản lý"}[S.role];
+  document.getElementById("screens").innerHTML=`
+    <div class="lab-col" data-check="Home"><div class="lab-cap">Home · ${roleName}<small>nền A · thanh dưới chỉ icon</small></div>${phone("a",home(S.role,S.hero==="on"),navBar())}
+      <input class="lab-note" data-note="home" placeholder="Góp ý Home…" value="${(S.note.home||"").replace(/"/g,"&quot;")}"></div>
+    <div class="lab-col" data-check="List"><div class="lab-cap">Danh sách lệnh sửa chữa<small>nền C · màn con</small></div>${phone("c",list(),`<div class="k-foot"><button class="k-btn pri">${I("plus",19)}Tạo lệnh sửa chữa</button></div>`)}
+      <input class="lab-note" data-note="list" placeholder="Góp ý Danh sách…" value="${(S.note.list||"").replace(/"/g,"&quot;")}"></div>`;
+}
+render();labBindOpts(S,render);
+document.addEventListener("input",e=>{const k=e.target.dataset.note;if(!k)return;S.note[k]=e.target.value;S.save()});
+document.getElementById("export").onclick=()=>{
+  const L=["# Góp ý họ thẻ","",`- Đang xem: ${S.brand} · nền thẻ ${S.surf.toUpperCase()} · khối nhấn ${S.hero}`];
+  SPECS.forEach((s,i)=>{if(S.note["c"+(i+1)])L.push(`- ${s.n}: ${S.note["c"+(i+1)]}`)});
+  if(S.note.home)L.push(`- Home: ${S.note.home}`);if(S.note.list)L.push(`- Danh sách: ${S.note.list}`);
+  labCopy(L.join("\n"));
+};
+</script>
+</body>
+</html>

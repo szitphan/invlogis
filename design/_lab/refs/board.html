@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Lab · Reference board</title>
+<style>
+  :root{--bg:#f6f6f4;--surface:#fff;--text:#1b1b1a;--muted:#6b6b66;--line:#e4e3de;--like:#1f8a4c;--dislike:#c43d2f;--chip:#efeee9}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#151514;--surface:#1f1f1d;--text:#efeee9;--muted:#a3a29b;--line:#33332f;--chip:#2a2a27}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif}
+  header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  header h1{font-size:16px;margin:0;flex:1;min-width:200px}
+  header .hint{color:var(--muted);font-size:12px;width:100%}
+  button{font:inherit;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:8px;padding:6px 10px;cursor:pointer}
+  button.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+  main{max-width:1400px;margin:0 auto;padding:16px}
+  .app{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
+  .app h2{font-size:16px;margin:0 0 2px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .app h2 small{color:var(--muted);font-weight:400;font-size:12px}
+  .why{color:var(--muted);margin:0 0 10px}
+  .dna{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 16px;margin:0 0 12px;font-size:13px}
+  .dna div b{font-weight:600}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .tag{background:var(--chip);border-radius:999px;padding:2px 8px;font-size:12px}
+  .strip{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
+  .shot{flex:0 0 auto;width:190px}
+  .shot img{width:190px;height:auto;border-radius:8px;border:1px solid var(--line);cursor:zoom-in;display:block}
+  .shot .bar{display:flex;gap:4px;margin-top:6px}
+  .shot .bar button{flex:1;padding:4px 0}
+  .shot.like img{outline:3px solid var(--like)}
+  .shot.dislike img{outline:3px solid var(--dislike);opacity:.55}
+  .shot.like .b-like{background:var(--like);color:#fff;border-color:var(--like)}
+  .shot.dislike .b-dis{background:var(--dislike);color:#fff;border-color:var(--dislike)}
+  .shot textarea{width:100%;margin-top:4px;font:inherit;font-size:12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--text);padding:4px;resize:vertical;min-height:34px}
+  .appnote{width:100%;margin-top:10px;font:inherit;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);padding:6px;min-height:40px}
+  details.dropped{color:var(--muted)}
+  details.dropped summary{cursor:pointer;margin:8px 0 12px}
+  .zoom{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;z-index:10;cursor:zoom-out}
+  .zoom img{max-height:94vh;max-width:94vw;border-radius:8px}
+  .toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:8px 14px;border-radius:8px;display:none}
+  .shot.wide{width:300px}.shot.wide img{width:300px}
+  @media (max-width:600px){.shot,.shot img{width:150px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>UI Lab · Reference mobile <span id="count" style="color:var(--muted);font-weight:400"></span></h1>
+  <button class="primary" id="export">Copy kết quả gửi Claude</button>
+  <button id="reset">Xoá chấm</button>
+  <div class="hint">Mỗi ảnh: 👍 thích / 👎 không thích, ghi 1 câu "vì sao" nếu có. Bấm ảnh để phóng to. Xong bấm "Copy kết quả" rồi dán vào chat. Kết quả lưu trong trình duyệt này.</div>
+</header>
+<main id="list"></main>
+<div class="zoom" id="zoom"><img alt=""></div>
+<div class="toast" id="toast"></div>
+<script>
+const APPS = [
+ {slug:"fleetio-go",name:"Fleetio Go",ext:"png",n:5,cat:"Đội xe · bảo trì",keep:true,
+  why:"Gần nghiệp vụ nhất: home có lối tắt, lệnh sửa (work order) chi tiết, kiểm tra xe Pass/Fail.",
+  tags:["Home","Chi tiết lệnh","Form / kiểm tra"],
+  dna:{"Màu":"Nền sáng, xanh lá chỉ ở 1 nút chính (Start Work)","Mật độ":"Vừa, kiểu danh sách nhóm iOS","Chữ":"Hệ thống, tiêu đề khối đậm","Bo góc":"Nhỏ (6–8)","Độ nổi":"Phẳng, phân khối bằng nền xám","Bố cục":"Home: lưới lối tắt 2×2 + danh sách gần đây","Thẻ/hàng":"Hàng có icon + chevron, ảnh thumbnail xe","Đổi thương hiệu":"Dễ — màu chỉ ở CTA"}},
+ {slug:"upkeep",name:"UpKeep",ext:"jpg",n:5,cat:"CMMS · lệnh việc",keep:true,
+  why:"Home = 4 nút tròn + bảng đếm lệnh theo trạng thái; chi tiết lệnh có ảnh, trạng thái dạng dropdown.",
+  tags:["Home","Danh sách lệnh","Chi tiết lệnh"],
+  dna:{"Màu":"Sáng, xanh dương ở nút Scan + link","Mật độ":"Vừa","Chữ":"Hệ thống, tiêu đề lớn đậm ở chi tiết","Bo góc":"Vừa (8)","Độ nổi":"Viền mảnh","Bố cục":"Home: hàng hành động nhanh + bảng đếm theo trạng thái","Thẻ/hàng":"Vạch màu trái theo trạng thái + số đếm","Đổi thương hiệu":"Dễ"}},
+ {slug:"maintainx",name:"MaintainX",ext:"png",n:6,cat:"CMMS · lệnh việc",keep:true,
+  why:"Danh sách lệnh dày thông tin (ảnh, người yêu cầu, mã, trạng thái, ưu tiên); chi tiết có tab + bình luận.",
+  tags:["Danh sách lệnh","Chi tiết lệnh"],
+  dna:{"Màu":"Xanh dương sáng, pill trạng thái nhiều màu","Mật độ":"Dày","Chữ":"Hệ thống, cỡ nhỏ","Bo góc":"Nhỏ","Độ nổi":"Phẳng, FAB nổi","Bố cục":"Danh sách + nút tạo mới nổi","Thẻ/hàng":"Ảnh trái, 3 dòng, pill trạng thái + ưu tiên phải","Đổi thương hiệu":"Trung bình — màu trạng thái nhiều"}},
+ {slug:"samsara-driver",name:"Samsara Driver",ext:"jpg",n:10,cat:"Lái xe",keep:true,
+  why:"Home lái xe: tên + xe + hàng hành động nhanh, số liệu dạng vòng; kiểm tra xe OK/NO nút to; thanh điều hướng nổi.",
+  tags:["Home","Form / kiểm tra","Hộp thư"],
+  dna:{"Màu":"Nền tối, xanh dương ở nút chính, đỏ cho lỗi","Mật độ":"Vừa, nút to cho người đang lái","Chữ":"Số lớn đậm","Bo góc":"Vừa–lớn","Độ nổi":"Khối nền tối chồng lớp","Bố cục":"Header người + xe → hàng icon → khối số liệu → việc","Thẻ/hàng":"Khối bo tròn trên nền tối","Đổi thương hiệu":"Trung bình — phụ thuộc nền tối"}},
+ {slug:"grab-driver",name:"Grab Driver",ext:"jpg",n:5,cat:"Lái xe · VN quen",keep:true,
+  why:"Người dùng Việt quen sẵn: bản đồ + bảng dưới có hàng hành động nhanh, thẻ thu nhập, danh sách an toàn.",
+  tags:["Home","Form"],
+  dna:{"Màu":"Trắng + xanh thương hiệu ở trạng thái online","Mật độ":"Thưa, chữ to","Chữ":"Hệ thống, tiêu đề lớn","Bo góc":"Vừa","Độ nổi":"Bảng dưới nổi trên bản đồ","Bố cục":"Bản đồ trên, bảng hành động dưới","Thẻ/hàng":"Hàng icon tròn + nhãn nhỏ","Đổi thương hiệu":"Dễ"}},
+ {slug:"lark",name:"Lark",ext:"jpg",n:7,cat:"Super app làm việc",keep:true,
+  why:"Super app: lưới ứng dụng con, phê duyệt có timeline, dashboard số liệu trên mobile.",
+  tags:["Home","Chi tiết lệnh (timeline)","Dashboard"],
+  dna:{"Màu":"Sáng, nền xanh nhạt, icon app nhiều màu","Mật độ":"Vừa–dày","Chữ":"Hệ thống","Bo góc":"Vừa","Độ nổi":"Thẻ trắng trên nền nhạt","Bố cục":"Lưới app / timeline dọc / thẻ KPI","Thẻ/hàng":"Timeline có avatar + pill trạng thái","Đổi thương hiệu":"Trung bình — icon app nhiều màu"}},
+ {slug:"linear",name:"Linear",ext:"jpg",n:6,cat:"Chuẩn độ tinh",keep:true,
+  why:"Mốc chất lượng: phân cấp chữ, hàng chip thuộc tính ở chi tiết, thanh điều hướng nổi tách nút tìm.",
+  tags:["Danh sách","Chi tiết lệnh","Form tạo"],
+  dna:{"Màu":"Tối, gần như đơn sắc, màu chỉ ở icon trạng thái","Mật độ":"Dày nhưng thoáng","Chữ":"Phân cấp rõ, xám nhiều bậc","Bo góc":"Lớn, viên thuốc","Độ nổi":"Thanh nổi mờ","Bố cục":"Tiêu đề → chip thuộc tính → mô tả → hoạt động","Thẻ/hàng":"Hàng không viền, avatar + 2 dòng","Đổi thương hiệu":"Rất dễ"}},
+ {slug:"things3",name:"Things 3",ext:"jpg",n:8,cat:"Chuẩn độ tinh",keep:true,
+  why:"Màn Today / Upcoming: nhóm việc theo ngày, khoảng trắng, chữ — mốc cho cảm giác 'bình tĩnh'.",
+  tags:["Home","Danh sách"],
+  dna:{"Màu":"Trắng, mỗi nhóm 1 icon màu","Mật độ":"Thưa","Chữ":"Tiêu đề lớn đậm, phụ xám","Bo góc":"Vừa","Độ nổi":"Gần như không","Bố cục":"Tiêu đề lớn → nhóm theo mốc thời gian","Thẻ/hàng":"Checkbox + 2 dòng, không viền","Đổi thương hiệu":"Rất dễ"}},
+ {slug:"todoist",name:"Todoist",ext:"jpg",n:7,cat:"Danh sách việc",keep:true,
+  why:"Menu home dạng danh sách có số đếm; tạo việc nhanh với chip thuộc tính; nền ấm.",
+  tags:["Home","Form tạo"],
+  dna:{"Màu":"Sáng, đỏ thương hiệu, nền ấm","Mật độ":"Vừa","Chữ":"Hệ thống","Bo góc":"Lớn","Độ nổi":"Thẻ nhóm trắng","Bố cục":"Danh sách nhóm","Thẻ/hàng":"Chip ưu tiên/ngày nhỏ dưới tiêu đề","Đổi thương hiệu":"Dễ"}},
+ {slug:"revolut",name:"Revolut",ext:"jpg",n:8,cat:"Home xếp khối",keep:true,
+  why:"Số lớn + hàng nút tròn hành động + danh sách nhóm trong thẻ — công thức home rất rõ.",
+  tags:["Home","Dashboard"],
+  dna:{"Màu":"Tối/ảnh, gần đơn sắc","Mật độ":"Thưa","Chữ":"Số rất lớn, nhãn nhỏ","Bo góc":"Lớn","Độ nổi":"Kính mờ","Bố cục":"Số chính → nút tròn → danh sách","Thẻ/hàng":"Thẻ nhóm bo lớn","Đổi thương hiệu":"Dễ ở cấu trúc, khó ở chất liệu"}},
+ {slug:"monzo",name:"Monzo",ext:"jpg",n:8,cat:"Home xếp khối",keep:true,
+  why:"Home sáng: thẻ tóm tắt đầu + chip hành động + danh sách hoạt động.",
+  tags:["Home"],
+  dna:{"Màu":"Sáng, coral thương hiệu ở thẻ đầu","Mật độ":"Vừa","Chữ":"Hệ thống","Bo góc":"Lớn","Độ nổi":"Thẻ nổi nhẹ","Bố cục":"Thẻ tóm tắt → hoạt động","Thẻ/hàng":"Logo tròn + 2 dòng + số phải","Đổi thương hiệu":"Dễ"}},
+ {slug:"teams",name:"Microsoft Teams",ext:"png",n:9,cat:"Super app làm việc",keep:true,
+  why:"Home dạng danh sách nhóm có icon + badge số; lịch có thẻ sự kiện vạch trái.",
+  tags:["Home","Danh sách"],
+  dna:{"Màu":"Sáng, tím thương hiệu ở badge/nút","Mật độ":"Vừa","Chữ":"Hệ thống","Bo góc":"Vừa","Độ nổi":"Phẳng","Bố cục":"Danh sách nhóm","Thẻ/hàng":"Icon vuông bo + tên + badge đếm","Đổi thương hiệu":"Dễ"}},
+];
+const USER = {slug:"user",name:"Ref của bạn",cat:"12 ảnh bạn gửi",
+  why:"Mỗi ảnh ghi 👍/👎 và 1 câu: OK ở chỗ nào (nút, thẻ, nền, form, điều hướng, cách trình bày thông tin…).",
+  tags:["Home","Danh sách","Chi tiết","Form","Điều hướng"],
+  files:["u01-logistics-home-detail.png","u02-invoice-detail.png","u03-funica-flows.png","u04-wallet-sheet.png","u05.png","u06.png","u08.png","u09.png","u10.png","u11.png","u12.png","u13.png"],
+  caps:["Giao hàng: Home + Chi tiết (stepper, timeline)","Chi tiết hoá đơn: số lớn, thẻ trắng trên nền xám","Bộ màn đen trắng, nút đen viên thuốc","Sheet: ô dữ liệu nhóm nền xám","Home fintech đầu màn xanh + sheet xác nhận","Logistics/fleet: Dashboard, Shipments, Fleet, Tin nhắn","Thanh toán: thẻ trắng + sheet thêm thẻ","Sheet thêm địa chỉ, nhãn nổi trong ô","Form trong sheet: segmented, chip, switch","Luồng 4 bước, ô nhập nền xám","Form gạch chân, nút vàng","Home thẻ sự kiện + thanh điều hướng đen"]};
+const DROPPED = [
+ {slug:"jobber",name:"Jobber",why:"Ảnh store chủ yếu là ảnh người thật, gần như không thấy UI."},
+ {slug:"housecall-pro",name:"Housecall Pro",why:"UI cũ, chữ nhỏ, không có gì hơn MaintainX/UpKeep."},
+ {slug:"be",name:"be",why:"Ảnh quảng cáo tiêu dùng, che gần hết màn."},
+ {slug:"be-driver",name:"BE Driver",why:"Ảnh store là bản mẫu chung, không phải app thật của be."},
+];
+const KEY="uilab-refs-v1";
+let S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const pad=n=>String(n).padStart(2,"0");
+const list=document.getElementById("list");
+function shotFiles(a){return a.files?a.files.map(f=>`${a.slug}/${f}`):[...Array(a.n)].map((_,i)=>`mobile/${a.slug}/${pad(i+1)}.${a.ext}`)}
+function shotId(f){return f.replace(/^mobile\//,"").replace(/\.[a-z]+$/,"")}
+function render(){
+  list.innerHTML="";
+  [USER,...APPS].forEach(a=>{
+    const el=document.createElement("section");el.className="app";
+    const dna=Object.entries(a.dna||{}).map(([k,v])=>`<div><b>${k}:</b> ${v}</div>`).join("");
+    const shots=shotFiles(a).map((f,i)=>{
+      const id=shotId(f),st=S[id]||{};
+      return `<div class="shot ${a.files?"wide":""} ${st.v||""}" data-id="${id}">
+        <img loading="lazy" src="${f}" alt="${a.name} ${i+1}">${a.caps?`<div style="font-size:12px;color:var(--muted);margin-top:4px">${a.caps[i]}</div>`:""}
+        <div class="bar"><button class="b-like" data-v="like">👍</button><button class="b-dis" data-v="dislike">👎</button></div>
+        <textarea placeholder="vì sao…">${st.note||""}</textarea></div>`}).join("");
+    el.innerHTML=`<h2>${a.name}<small>${a.cat}</small></h2><p class="why">${a.why}</p>
+      <div class="tags">${a.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+      <div class="dna">${dna}</div><div class="strip">${shots}</div>
+      <textarea class="appnote" data-app="${a.slug}" placeholder="Nhận xét chung về ${a.name} (tuỳ chọn)">${(S["app:"+a.slug]||{}).note||""}</textarea>`;
+    list.appendChild(el);
+  });
+  const d=document.createElement("details");d.className="dropped";
+  d.innerHTML=`<summary>Đã loại ${DROPPED.length} app (ảnh store không dùng được)</summary>`+DROPPED.map(x=>`<div>• <b>${x.name}</b> — ${x.why}</div>`).join("");
+  list.appendChild(d);
+  count();
+}
+function count(){const v=Object.entries(S).filter(([k,x])=>!k.startsWith("app:")&&x.v).length;document.getElementById("count").textContent=`· đã chấm ${v} ảnh`}
+list.addEventListener("click",e=>{
+  const b=e.target.closest("button[data-v]");
+  if(b){const s=b.closest(".shot"),id=s.dataset.id;S[id]=S[id]||{};S[id].v=S[id].v===b.dataset.v?"":b.dataset.v;s.classList.remove("like","dislike");if(S[id].v)s.classList.add(S[id].v);save();count();return}
+  if(e.target.tagName==="IMG"){const z=document.getElementById("zoom");z.querySelector("img").src=e.target.src;z.style.display="flex"}
+});
+list.addEventListener("input",e=>{
+  const t=e.target;if(t.tagName!=="TEXTAREA")return;
+  const k=t.dataset.app?"app:"+t.dataset.app:t.closest(".shot").dataset.id;S[k]=S[k]||{};S[k].note=t.value;save();
+});
+document.getElementById("zoom").onclick=e=>e.currentTarget.style.display="none";
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",1800)}
+document.getElementById("export").onclick=()=>{
+  const L=["# Chấm reference mobile",""];
+  [USER,...APPS].forEach(a=>{
+    const rows=shotFiles(a).map(f=>{const id=shotId(f),s=S[id];return s&&(s.v||s.note)?`- ${id} ${s.v==="like"?"👍":s.v==="dislike"?"👎":"·"} ${s.note||""}`:null}).filter(Boolean);
+    const an=(S["app:"+a.slug]||{}).note;
+    if(rows.length||an){L.push(`## ${a.name}`);if(an)L.push(`> ${an}`);L.push(...rows,"")}
+  });
+  const txt=L.join("\n");
+  (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast("Đã copy — dán vào chat"),()=>{prompt("Copy đoạn này:",txt)});
+};
+document.getElementById("reset").onclick=()=>{if(confirm("Xoá toàn bộ chấm?")){S={};save();render()}};
+render();
+</script>
+</body>
+</html>

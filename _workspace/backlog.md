@@ -43,6 +43,7 @@ links:
 | BL-031 | Đưa 4 đề xuất thẻ dùng chung (Mục 5 bản đồ đối tượng: Phương tiện, Nhà cung cấp, dòng mặt hàng, thẻ chứng từ) thành CMP qua `/update-overview patterns`, làm khi bắt đầu vẽ màn | `docs/_shared/object-map.md` | `grep:design/ui-common/screen-patterns.md:Ô chọn Nhà cung cấp` | ⬜ | 2026-10-05 |  |  |
 | BL-032 | Sửa fixture KG (`skills/kg/engine/test-fixtures/`) cho khớp engine hiện tại — đang 112 pass / 25 fail, hỏng sẵn cả ở kit | `_guides/pipeline.md` P-28 | `manual` | ⬜ | 2026-10-05 |  |  |
 | BL-033 | Reverse SRS mobile (feature cũ đang phát triển) sang bộ SRS chuẩn (`/reverse-doc`) | `srs-cu/srs-mobile/srs-mobile.md` | `grep:docs/_reverse/*/*-reverse-spec.md:srs-mobile` | ⬜ | 2026-10-05 |  |  |
+| BL-034 | Căn chỉnh lỗi hiển thị + đồng nhất cách thể hiện ở lab form báo cáo sự cố (chuyển sang bộ style chung) | `design/_lab/lab-form-incident.html` | `grep:design/_lab/lab-form-incident.html:lab-kit.css` | ⬜ | 2026-10-06 |  |  |
 
 ## Đã xong
 

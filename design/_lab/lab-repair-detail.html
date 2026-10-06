@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chi tiết lệnh sửa chữa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab-kit.css">
+<style>
+/* Tiêu đề Cal Sans — theo lượt thử Figma 07/10 (Lab/H1–H3). Chưa đưa vào lab-kit.css. */
+.k-h1,.k-h2,.k-sec h3,.k-chdr .ct,.d-sh-t{font-family:"Cal Sans",Inter,sans-serif;font-weight:400;letter-spacing:0}
+
+/* ---------- Riêng màn chi tiết ---------- */
+.k-ib.bd{background:var(--card);box-shadow:inset 0 0 0 1px var(--rule)}
+.d-top{display:flex;align-items:center;gap:10px;margin:6px 0 14px}
+.d-top .sp{flex:1}
+.d-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 4px}
+.d-title .k-h1{margin:0}
+.d-lead{font-size:var(--fs-sm);color:var(--ink-2);margin:0 0 14px}
+
+.d-prog{cursor:pointer}
+.d-prog .hd{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;margin-bottom:8px}
+.d-prog .hd .t2{margin-left:auto;color:var(--ink-3);font-size:12.5px;font-weight:400}
+.d-prog .hd .k-ic{transition:transform .15s}
+.d-prog.open .hd .k-ic{transform:rotate(180deg)}
+.d-prog .nx{font-size:12.5px;color:var(--ink-3);margin-top:8px}
+.d-steps{margin-top:12px;border-top:1px solid var(--rule);padding-top:4px}
+.d-steps>div{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:14px}
+.d-steps .dot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--well);color:var(--ink-3);font-size:11.5px;font-weight:600}
+.d-steps .done .dot{background:var(--ink);color:#fff}
+.d-steps .cur .dot{box-shadow:inset 0 0 0 2px var(--ink);background:var(--card);color:var(--ink)}
+.d-steps .nm{flex:1}.d-steps .todo .nm{color:var(--ink-3)}
+.d-steps .tm{font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+.d-steps a{font-size:13px;font-weight:600;color:var(--accent);white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
+
+.d-seg{display:flex;background:var(--well);border-radius:var(--r-pill);padding:4px;margin:4px 0 14px}
+.d-seg button{flex:1;height:38px;border:0;border-radius:var(--r-pill);background:none;font:inherit;font-size:14px;font-weight:500;color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.d-seg button.on{background:var(--card);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(16,16,20,.08)}
+.d-seg.sm button{height:32px;font-size:13px}
+.d-seg em{font-style:normal;color:var(--ink-3);font-weight:500}
+
+.d-ctitle{font-size:15px;font-weight:600;margin:0 0 4px}
+.d-desc{font-size:14.5px;line-height:1.5;margin:6px 0 0}
+.d-desc-l{font-size:13px;color:var(--ink-2);margin-top:12px}
+.d-link{display:inline-flex;align-items:center;gap:4px;font-size:13.5px;font-weight:600;color:var(--accent);margin-top:10px;cursor:pointer}
+.k-veh b{white-space:nowrap}
+.k-veh .odo{height:32px;padding:0 12px 0 10px;border-radius:var(--r-pill);background:var(--card);display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:500;white-space:nowrap;flex:none}
+
+.d-item{background:var(--card);border-radius:var(--r-inner);box-shadow:inset 0 0 0 1px var(--rule);margin-bottom:10px;overflow:hidden}
+.d-item .h{display:flex;align-items:center;gap:10px;padding:12px 12px 12px 14px;cursor:pointer}
+.d-item .h .tx{flex:1}.d-item .h b{display:block;font-weight:600;font-size:14.5px;line-height:1.3}
+.d-item .h span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.d-item .h .v{font-weight:600;font-size:14.5px;white-space:nowrap;text-align:right}
+.d-item .h .v small{display:block;font-weight:400;font-size:12px;color:var(--ink-3)}
+.d-item .h>.k-ic{color:var(--ink-3);transition:transform .15s}
+.d-item.open .h>.k-ic{transform:rotate(180deg)}
+.d-item .b{display:none;padding:0 14px 12px}
+.d-item.open .b{display:block}
+.d-item .b .k-kv>div{padding:8px 0;font-size:14px}
+.d-item .b .k-kv>div:first-child{border-top:1px solid var(--rule)}
+.d-sub{font-size:13px;color:var(--ink-2);margin:2px 2px 10px;display:flex;align-items:center}
+.d-sub a{margin-left:auto;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:4px;cursor:pointer}
+
+.d-foot{position:absolute;left:0;right:0;bottom:0;padding:12px 16px 26px;background:var(--card);box-shadow:0 -1px 0 var(--rule);z-index:5}
+.d-foot .tot{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;font-size:14px;color:var(--ink-2)}
+.d-foot .tot b{font-size:19px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.d-foot.only{padding-bottom:30px}.d-foot.only .tot{margin:0}
+
+.d-sheet{position:absolute;inset:0;z-index:8;background:#0a0a0e6b;display:flex;flex-direction:column;justify-content:flex-end}
+.d-sheet .pn{background:var(--card);border-radius:28px 28px 0 0;padding:8px 16px 30px;max-height:88%;overflow-y:auto;scrollbar-width:none}
+.d-sheet .hb{width:40px;height:5px;border-radius:3px;background:#d6d6dc;margin:0 auto 10px}
+.d-sh-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.d-sh-t{flex:1;font-size:var(--fs-h3)}
+.d-sh-p{font-size:14px;color:var(--ink-2);margin:0 0 16px;line-height:1.5}
+.d-sh-ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;margin:6px 0 12px}
+.d-field{border-radius:var(--r-inner);background:var(--well);padding:10px 14px;margin-bottom:16px}
+.d-field label{display:block;font-size:12.5px;color:var(--ink-2)}
+.d-field textarea{width:100%;border:0;background:none;font:inherit;font-size:15px;resize:none;outline:none;padding:2px 0 0;color:var(--ink)}
+.d-field .cnt{text-align:right;font-size:12px;color:var(--ink-3)}
+.k-btn.dng{background:#b42318;color:#fff}
+.d-serial{border-radius:var(--r-inner);background:var(--well);padding:4px 14px;margin-bottom:10px}
+.d-serial .k-kv>div{font-size:14px;padding:9px 0}
+.d-log>div{display:flex;gap:12px;padding:10px 0}
+.d-log .ln{display:flex;flex-direction:column;align-items:center}
+.d-log .ln i{width:10px;height:10px;border-radius:50%;background:var(--ink);margin-top:5px}
+.d-log .ln u{flex:1;width:2px;background:var(--rule);margin-top:4px;text-decoration:none}
+.d-log>div:last-child .ln u{display:none}
+.d-log .tx{flex:1;font-size:14px}.d-log .tx b{font-weight:600}
+.d-log .tx span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.d-log .tx q{display:block;font-size:13.5px;color:var(--ink-2);margin-top:4px;quotes:none}
+.d-toast{position:absolute;left:16px;right:16px;bottom:120px;z-index:9;background:var(--ink);color:#fff;border-radius:16px;padding:12px 14px;display:flex;gap:10px;align-items:center;font-size:14px}
+</style>
+</head>
+<body class="b-neutral">
+<div class="lab-top">
+  <h1>UI Lab · Chi tiết lệnh sửa chữa</h1>
+  <div class="lab-ctl">Thương hiệu <div class="lab-opts" data-k="brand"><button data-v="neutral">Trung tính</button><button data-v="innvie">Innvie</button><button data-v="delta">Delta</button></div></div>
+  <div class="lab-ctl">Nền <div class="lab-opts" data-k="surf"><button data-v="c">C · trắng</button><button data-v="a">A · xám</button></div></div>
+  <button class="lab-export" id="export">Copy góp ý gửi Claude</button>
+</div>
+<main class="lab-main">
+  <section class="lab-box">
+    <h2>Màn chi tiết lệnh sửa chữa trên app lái xe: xem, nghiệm thu, từ chối nghiệm thu</h2>
+    <p>Mở từ thẻ trong màn Danh sách lệnh. Nội dung theo UC03.01.02 và UC03.01.03 trong SRS ERP Delta 3.0 Mobile (mục 3.1 Thông tin lệnh sửa chữa; 3.1–3.4 Nghiệm thu / Từ chối), dựng lại theo style lab: thẻ v2, thanh 4 đoạn, nút back tròn có viền, tiêu đề Cal Sans.</p>
+    <p class="lab-muted">Mỗi máy bấm được: mở/đóng tiến trình, đổi tab, mở hàng hoá, Xem serial, Lịch sử, Từ chối, Nghiệm thu. Dữ liệu mẫu. Thêm <code>#check</code> vào URL để tự kiểm chữ đè / tràn khung.</p>
+  </section>
+  <div class="lab-row" id="screens"></div>
+  <section class="lab-box" style="margin-top:24px">
+    <h2>Chỗ lab khác SRS khách — cần chốt</h2>
+    <ul class="lab-muted" style="margin:0;padding-left:18px;font-size:13px">
+      <li>Tên 4 bước tiến trình: SRS ghi <i>Báo cáo sự cố · Chẩn đoán · Sửa chữa · Xuất kho</i>; lab dùng <i>Báo sự cố · Báo giá · Sửa chữa · Nghiệm thu</i> cho khớp thẻ tiến trình ở Home lái xe.</li>
+      <li>Nhãn trạng thái: SRS dùng <i>Đã chốt lệnh</i> (lái xe thấy nút Nghiệm thu); lab hiển thị <i>Chờ nghiệm thu</i> cho đúng việc lái xe cần làm.</li>
+      <li>Tab Chi tiết: SRS chia Hàng hoá / Dịch vụ, trong Hàng hoá có Thay ra / Lắp vào; lab giữ cấu trúc, mặc định mở Lắp vào vì đó là phần có tiền.</li>
+      <li>Lý do từ chối: SRS để không bắt buộc; lab giữ không bắt buộc nhưng gợi ý nhập.</li>
+    </ul>
+  </section>
+</main>
+<div class="lab-toast" id="lab-toast"></div>
+<script src="lab-kit.js"></script>
+<script>
+P.hist="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5M12 7v5l3 2";P.link="M7 17 17 7M8 7h9v9";P.swap="M7 4v16M3 8l4-4 4 4M17 20V4M13 16l4 4 4-4";
+const fmt=n=>n.toLocaleString("vi-VN");
+const O={code:"LSC-0915",flow:"Sửa xe",title:"Sửa điều hoà cabin",plate:"29H-123.45",model:"Hino FG 15T",odo:"241.880 km",
+ place:"Xưởng ngoài · Gara Minh Phát",tech:["LQH","Lê Quang Huy","NV0231 · Kỹ thuật viên phụ trách"],
+ time:"04/10 08:15 – 05/10 16:40",bc:"BCSC-0398",
+ desc:"Điều hoà cabin không mát, quạt dàn lạnh kêu to khi bật mức 3.",note:"Đã nạp lại gas và thay quạt dàn lạnh. Lái xe chạy thử 10 phút trước khi nhận xe.",
+ steps:[["Báo sự cố","03/10 18:20","BCSC-0398"],["Báo giá","04/10 07:40"],["Sửa chữa","05/10 16:40","LSC-0915"],["Nghiệm thu",""]],
+ inP:[["PTVT-1182","Gas lạnh R134a","kg",1.2,450000,[]],["PTVT-0457","Lọc ga điều hoà","Cái",1,380000,[]],["PTVT-2210","Quạt dàn lạnh 24V","Cái",1,1650000,[["QDL24-88213","Denso","Bảo hành 6 tháng"]]]],
+ outP:[["PTVT-0457","Lọc ga điều hoà (cũ)","Cái",1,0,[]],["PTVT-2210","Quạt dàn lạnh 24V (cũ)","Cái",1,0,[["QDL24-51077","Denso","Cháy cuộn dây, trả về kho hỏng"]]]],
+ svc:[["DVKT-014","Vệ sinh dàn lạnh","Lần",1,350000],["DVKT-031","Công thay quạt dàn lạnh","Giờ",1.5,300000]],
+ log:[["Lê Quang Huy","05/10 16:40","Đã chốt lệnh sửa chữa"],["Lê Quang Huy","04/10 08:15","Đã tạo lệnh sửa chữa"]]};
+const sum=a=>a.reduce((s,x)=>s+x[3]*x[4],0);
+const TOTAL=sum(O.inP)+sum(O.svc);
+
+/* status: accept | done | bad ; tab: chung | ct ; part: in | out ; kind: hh | dv ; sheet: null|serial:i|ok|no|log */
+const PH=[
+ {cap:"1 · Tab Chung",sm:"Chờ nghiệm thu · tiến trình đang đóng",st:{status:"accept",tab:"chung",prog:false}},
+ {cap:"2 · Tiến trình mở",sm:"Bấm vào thanh để xem 4 bước; bước có mã là link",st:{status:"accept",tab:"chung",prog:true}},
+ {cap:"3 · Tab Chi tiết · Lắp vào",sm:"Hàng hoá lắp vào xe, có thành tiền",st:{status:"accept",tab:"ct",kind:"hh",part:"in",open:2}},
+ {cap:"4 · Tab Chi tiết · Thay ra",sm:"Hàng tháo khỏi xe, không có tiền",st:{status:"accept",tab:"ct",kind:"hh",part:"out",open:1}},
+ {cap:"5 · Tab Chi tiết · Dịch vụ",sm:"Dịch vụ xưởng làm cho lệnh",st:{status:"accept",tab:"ct",kind:"dv"}},
+ {cap:"6 · Sheet Serial",sm:"Từ “Xem serial” ở 1 hàng hoá",st:{status:"accept",tab:"ct",kind:"hh",part:"in",open:2,sheet:"serial:2"}},
+ {cap:"7 · Xác nhận nghiệm thu",sm:"Sheet xác nhận, không cần nhập",st:{status:"accept",tab:"chung",sheet:"ok"}},
+ {cap:"8 · Từ chối nghiệm thu",sm:"Lý do không bắt buộc (theo SRS)",st:{status:"accept",tab:"chung",sheet:"no"}},
+ {cap:"9 · Đã nghiệm thu",sm:"Sau khi xác nhận · hết nút hành động",st:{status:"done",tab:"chung",toast:"Đã nghiệm thu lệnh LSC-0915"}},
+ {cap:"10 · Từ chối nghiệm thu",sm:"Hiện lý do · chờ xưởng cập nhật chốt lệnh",st:{status:"bad",tab:"chung"}},
+ {cap:"11 · Lịch sử hoạt động",sm:"Từ nút đồng hồ trên đầu màn",st:{status:"accept",tab:"chung",sheet:"log"}},
+];
+
+function body(s){
+ const stIdx=s.status==="accept"?3:4;
+ const seg4=`<div class="k-seg">${[0,1,2,3].map(i=>`<i class="${i<stIdx?"on":""}"${i===3&&s.status==="accept"?' style="background:var(--ink-3)"':i===3&&s.status==="bad"?' style="background:#b42318"':""}></i>`).join("")}</div>`;
+ const stepLbl=s.status==="accept"?"Bước 4/4 · Nghiệm thu":s.status==="done"?"Hoàn thành · 4/4":"Bước 4/4 · Bị từ chối";
+ const steps=`<div class="d-steps">${O.steps.map((x,i)=>{const cls=i<3||s.status==="done"?"done":"cur";
+   return `<div class="${cls}"><div class="dot">${cls==="done"?I("check",12,3):i+1}</div><div class="nm">${x[0]}</div>${x[2]&&x[2]!==O.code?`<a>${x[2]} ${I("link",13,2)}</a>`:`<span class="tm">${i===3?(s.status==="done"?"07/10 09:02":s.status==="bad"?"07/10 09:05":"đang chờ bạn"):x[1]}</span>`}</div>`}).join("")}</div>`;
+ const prog=`<div class="k-card d-prog ${s.prog?"open":""}" data-a="prog"><div class="hd">${stepLbl}<span class="t2">${s.status==="accept"?"Chốt 05/10 16:40":"07/10"}</span>${I("down",16)}</div>${seg4}
+   ${s.prog?steps:`<div class="nx">${s.status==="accept"?"Xưởng đã sửa xong. Kiểm tra xe rồi nghiệm thu.":s.status==="done"?"Lệnh đã đóng.":"Chờ xưởng cập nhật chốt lệnh."}</div>`}</div>`;
+ const pillK=s.status==="accept"?"accept":s.status;
+ const head=`<div class="d-top"><button class="k-ib bd" aria-label="Quay lại">${I("back")}</button><div class="sp"></div><button class="k-ib bd" aria-label="Lịch sử hoạt động" data-a="sheet:log">${I("hist",19)}</button></div>
+  <div class="d-title"><div class="k-h1">${O.code}</div>${pill(pillK)}</div><p class="d-lead">${O.title} · ${O.flow}</p>
+  ${s.status==="bad"?`<div class="k-strip y" style="margin-bottom:12px">${I("alert",16)}<span>Bạn đã từ chối: còn kêu ở quạt dàn lạnh khi bật mức 3</span></div>`:""}
+  ${prog}
+  <div class="d-seg" role="tablist"><button class="${s.tab==="chung"?"on":""}" data-a="tab:chung">Chung</button><button class="${s.tab==="ct"?"on":""}" data-a="tab:ct">Chi tiết sửa chữa</button></div>`;
+ let main="";
+ if(s.tab==="chung"){
+  main=`<div class="k-card"><div class="d-ctitle">Phương tiện</div>
+     <div class="k-veh" style="margin-bottom:0"><div class="k-icc">${I("truck",18)}</div><div class="tx"><b>${O.plate}</b><span>${O.model}</span></div><span class="odo">${I("gauge",15)}${O.odo}</span></div>
+     <div class="d-desc-l">Mô tả sự cố</div><p class="d-desc">${O.desc}</p>
+     <a class="d-link">${I("alert",15)}Xem báo cáo sự cố ${O.bc}</a></div>
+   <div class="k-card"><div class="d-ctitle">Thông tin sửa chữa</div><div class="k-kv">
+     <div><span>Mã lệnh</span><b>${O.code}</b></div><div><span>Phân luồng</span><b>${O.flow}</b></div>
+     <div><span>Nơi sửa</span><b>${O.place.split(" · ")[1]}</b></div><div><span>Thời gian sửa</span><b>${O.time}</b></div></div>
+     <div class="d-desc-l">Ghi chú của xưởng</div><p class="d-desc">${O.note}</p></div>
+   <div class="k-card"><div class="k-person"><div class="k-ava">${O.tech[0]}</div><div class="tx"><b>${O.tech[1]}</b><span>${O.tech[2]}</span></div><button class="k-ib well" aria-label="Nhắn tin">${I("msg",19)}</button><button class="k-ib pri" aria-label="Gọi">${I("phone",19)}</button></div></div>`;
+ }else{
+  const kindSeg=`<div class="d-seg sm"><button class="${s.kind==="hh"?"on":""}" data-a="kind:hh">Hàng hoá <em>${O.inP.length}</em></button><button class="${s.kind==="dv"?"on":""}" data-a="kind:dv">Dịch vụ <em>${O.svc.length}</em></button></div>`;
+  if(s.kind==="dv"){
+   main=kindSeg+`<div class="k-card tight">${O.svc.map(x=>`<div class="k-row"><div class="k-icc">${I("wrench",17)}</div><div class="tx"><b>${x[1]}</b><span>${x[0]} · ${String(x[3]).replace(".",",")} ${x[2].toLowerCase()}</span></div><div class="val k-num">${fmt(x[3]*x[4])}<small>đ</small></div></div>`).join("")}</div>`;
+  }else{
+   const list=s.part==="in"?O.inP:O.outP;
+   main=kindSeg+`<div class="d-sub">${s.part==="in"?"Lắp vào xe":"Thay ra khỏi xe"} (${list.length})<a data-a="part:${s.part==="in"?"out":"in"}">${I("swap",14,2)}${s.part==="in"?"Xem hàng thay ra":"Xem hàng lắp vào"}</a></div>`
+    +list.map((x,i)=>`<div class="d-item ${s.open===i?"open":""}"><div class="h" data-a="open:${i}"><div class="k-icc">${I("box",17)}</div><div class="tx"><b>${x[1]}</b><span>${x[0]}</span></div>${s.part==="in"?`<div class="v k-num">${fmt(x[3]*x[4])}<small>đ</small></div>`:`<div class="v">${String(x[3]).replace(".",",")}<small>${x[2]}</small></div>`}${I("down",16)}</div>
+      <div class="b"><div class="k-kv"><div><span>Đơn vị tính</span><b>${x[2]}</b></div><div><span>Số lượng</span><b>${String(x[3]).replace(".",",")}</b></div>${s.part==="in"?`<div><span>Đơn giá</span><b class="k-num">${fmt(x[4])}</b></div>`:""}</div>
+      ${x[5].length?`<a class="d-link" data-a="sheet:serial:${i}">Xem serial (${x[5].length}) ${I("chev",14,2)}</a>`:`<div class="k-cap" style="margin-top:8px">Không quản lý serial</div>`}</div></div>`).join("");
+  }
+ }
+ const foot=s.status==="accept"
+  ?`<div class="d-foot" data-layer><div class="tot">Tổng giá trị sửa chữa<b class="k-num">${fmt(TOTAL)} ₫</b></div><div class="k-btns"><button class="k-btn sec" style="box-shadow:inset 0 0 0 1px var(--rule)" data-a="sheet:no">Từ chối</button><button class="k-btn pri" data-a="sheet:ok">Nghiệm thu</button></div></div>`
+  :`<div class="d-foot only" data-layer><div class="tot">Tổng giá trị sửa chữa<b class="k-num">${fmt(TOTAL)} ₫</b></div></div>`;
+ let sheet="";
+ if(s.sheet){
+  const [k,arg]=s.sheet.split(":");
+  const close=`<button class="k-ib well" aria-label="Đóng" data-a="close" style="width:36px;height:36px">${I("x",17)}</button>`;
+  if(k==="serial"){const it=O[s.part==="in"?"inP":"outP"][+arg];
+   sheet=`<div class="d-sh-h"><div class="d-sh-t">${it[1]}</div>${close}</div><p class="d-sh-p" style="margin-top:-8px">${it[0]} · ${it[5].length} serial</p>`+it[5].map(r=>`<div class="d-serial"><div class="k-kv"><div><span>Serial</span><b>${r[0]}</b></div><div><span>Nhà sản xuất</span><b>${r[1]}</b></div><div><span>Lưu ý</span><b>${r[2]}</b></div></div></div>`).join("");}
+  if(k==="ok")sheet=`<div class="d-sh-ic" style="background:#e8f5ec;color:#1b7542">${I("check",24,2.2)}</div><div class="d-sh-t" style="font-size:22px;margin-bottom:6px">Nghiệm thu lệnh ${O.code}?</div>
+   <p class="d-sh-p">Bạn xác nhận xe ${O.plate} đã được sửa xong theo lệnh, tổng giá trị <b>${fmt(TOTAL)} ₫</b>. Sau khi nghiệm thu, lệnh sẽ đóng và không sửa được nữa.</p>
+   <div class="k-btns"><button class="k-btn sec" style="box-shadow:inset 0 0 0 1px var(--rule)" data-a="close">Huỷ bỏ</button><button class="k-btn pri" data-a="do:done">Xác nhận</button></div>`;
+  if(k==="no")sheet=`<div class="d-sh-ic" style="background:#fdecec;color:#b42318">${I("x",24,2.2)}</div><div class="d-sh-t" style="font-size:22px;margin-bottom:6px">Từ chối nghiệm thu?</div>
+   <p class="d-sh-p">Xưởng sẽ nhận thông báo và cập nhật lại lệnh. Ghi rõ chỗ chưa đạt để xưởng sửa đúng.</p>
+   <div class="d-field"><label>Lý do từ chối (không bắt buộc)</label><textarea rows="3" maxlength="500">Còn kêu ở quạt dàn lạnh khi bật mức 3</textarea><div class="cnt">38/500</div></div>
+   <div class="k-btns"><button class="k-btn sec" style="box-shadow:inset 0 0 0 1px var(--rule)" data-a="close">Huỷ bỏ</button><button class="k-btn dng" data-a="do:bad">Từ chối</button></div>`;
+  if(k==="log"){const L=[...(s.status==="done"?[["Phạm Văn Hùng","07/10 09:02","Đã nghiệm thu lệnh sửa chữa"]]:s.status==="bad"?[["Phạm Văn Hùng","07/10 09:05","Đã từ chối nghiệm thu lệnh sửa chữa","Còn kêu ở quạt dàn lạnh khi bật mức 3"]]:[]),...O.log];
+   sheet=`<div class="d-sh-h"><div class="d-sh-t">Lịch sử hoạt động</div>${close}</div><div class="d-log">${L.map(x=>`<div><div class="ln"><i></i><u></u></div><div class="tx"><b>${x[0]}</b> · ${x[2]}<span>${x[1].replace(" ","/2026 ")}</span>${x[3]?`<q>Lý do: ${x[3]}</q>`:""}</div></div>`).join("")}</div>`;}
+  sheet=`<div class="d-sheet" data-layer data-a="close-bg"><div class="pn"><div class="hb"></div>${sheet}</div></div>`;
+ }
+ const toast=s.toast?`<div class="d-toast" data-layer>${I("check",18,2.2)}${s.toast}</div>`:"";
+ return phone(S.surf,head+main,foot+sheet+toast);
+}
+
+const S=labStore("uilab-repair-detail",{brand:"neutral",surf:"c",note:{}});
+const live=PH.map(p=>Object.assign({kind:"hh",part:"in",open:-1,prog:false,sheet:null},p.st));
+function drawOne(i){document.querySelector(`[data-ph="${i}"] .slot`).innerHTML=body(live[i])}
+function render(){
+ document.body.className="b-"+S.brand;
+ document.getElementById("screens").innerHTML=PH.map((p,i)=>`<div class="lab-col" data-ph="${i}" data-check="${p.cap}"><div class="lab-cap">${p.cap}<small>${p.sm}</small></div><div class="slot"></div>
+   <input class="lab-note" data-note="p${i+1}" placeholder="Góp ý màn ${i+1}…" value="${(S.note["p"+(i+1)]||"").replace(/"/g,"&quot;")}"></div>`).join("");
+ PH.forEach((_,i)=>drawOne(i));
+}
+document.addEventListener("click",e=>{
+ const col=e.target.closest("[data-ph]");if(!col)return;const el=e.target.closest("[data-a]");if(!el)return;
+ const i=+col.dataset.ph,s=live[i],a=el.dataset.a;
+ if(a==="close-bg"&&e.target!==el)return;
+ const [k,v,w]=a.split(":");
+ if(k==="prog")s.prog=!s.prog;
+ else if(k==="tab"){s.tab=v;s.sheet=null}
+ else if(k==="kind")s.kind=v;
+ else if(k==="part"){s.part=v;s.open=-1}
+ else if(k==="open")s.open=s.open===+v?-1:+v;
+ else if(k==="sheet")s.sheet=w!==undefined?v+":"+w:v;
+ else if(k==="close"||k==="close-bg")s.sheet=null;
+ else if(k==="do"){s.status=v;s.sheet=null;s.toast=v==="done"?"Đã nghiệm thu lệnh "+O.code:"Đã gửi từ chối cho xưởng"}
+ else return;
+ if(k!=="do")s.toast=null;
+ drawOne(i);
+});
+render();labBindOpts(S,render);
+document.addEventListener("input",e=>{const k=e.target.dataset.note;if(!k)return;S.note[k]=e.target.value;S.save()});
+document.getElementById("export").onclick=()=>{
+ const L=["# Góp ý màn chi tiết lệnh sửa chữa","",`- Đang xem: ${S.brand} · nền ${S.surf.toUpperCase()}`];
+ PH.forEach((p,i)=>{if(S.note["p"+(i+1)])L.push(`- ${p.cap}: ${S.note["p"+(i+1)]}`)});
+ labCopy(L.join("\n"));
+};
+</script>
+</body>
+</html>
