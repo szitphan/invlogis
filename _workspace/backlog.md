@@ -1,7 +1,7 @@
 ---
 type: backlog
 status: draft
-updated: 2026-10-06
+updated: 2026-10-07
 links:
   - docs-input/README.md
 ---
@@ -17,11 +17,10 @@ links:
 | BL-002 | Cài skill `/reverse-doc` + `/reverse-preview` từ kit ai4ba | `srs-cu/` | `exists:.claude/skills/reverse-doc/SKILL.md` | ⬜ | 2026-10-02 |  |  |
 | BL-003 | Reverse SRS cũ LG sang bộ SRS chuẩn (`/reverse-doc`) | `srs-cu/` | `grep:docs/_reverse/*/*-reverse-spec.md:lg-srs-export` | ⬜ | 2026-10-02 |  |  |
 | BL-004 | Tạo SRS mới từ bộ reverse LG (`/srs`) | `srs-cu/` | `grep:docs/*/srs/*-spec.md:docs/_reverse/` | ⬜ | 2026-10-02 |  |  |
-| BL-005 | Chốt brainstorm điều phối (đang chờ trả lời vòng 1) | `sop/` | `exists:docs/dispatch-coordination/brainstorms/*.md` | ⬜ | 2026-10-02 |  |  |
+| BL-005 | Chốt brainstorm điều phối (checkpoint 07/10 đã ghi, còn Mục 6.2–6.4, 7, 9, 10) | `sop/` | `grep:docs/dispatch-coordination/brainstorms/dispatch-coordination.md:^status: approved` | ⬜ | 2026-10-02 |  |  |
 | BL-006 | Gõ lại chữ công văn VETC từ ảnh scan 7 trang | `tich-hop/vetc-api-cong-van-2026-09-02/` | `!grep:docs-input/tich-hop/vetc-api-cong-van-2026-09-02/*.md:Không trích xuất được` | ⬜ | 2026-10-02 |  |  |
 | BL-007 | Đối chiếu EUP (19/09) với Dữ liệu vận hành xe (30/09): bản sau thay thế hay bổ sung | `sop/eup-dieu-van-2026-09-19/` | `manual` | ⬜ | 2026-10-02 |  |  |
 | BL-008 | Ghi bối cảnh điều vận + vai trò + đối thủ vào project-profile (từ 4 báo cáo discover) | — | `grep:docs/_shared/project-profile.md:Terminal49` | ⬜ | 2026-10-02 |  |  |
-| BL-009 | Đọc và feed SRC-05 vào brainstorm/feature | `sop/eup-dieu-van-2026-09-19/eup-dieu-van-2026-09-19.md` | `fed:sop/eup-dieu-van-2026-09-19/eup-dieu-van-2026-09-19.md` | ⬜ | 2026-10-02 |  |  |
 | BL-012 | Đọc và feed SRC-08 vào brainstorm/feature | `danh-muc/danh-muc-dia-diem-hang-tau.md` | `fed:danh-muc/danh-muc-dia-diem-hang-tau.md` | ⬜ | 2026-10-02 |  |  |
 | BL-013 | Đọc và feed SRC-09 vào brainstorm/feature | `tich-hop/vetc-api-cong-van-2026-09-02/vetc-api-cong-van-2026-09-02.md` | `fed:tich-hop/vetc-api-cong-van-2026-09-02/vetc-api-cong-van-2026-09-02.md` | ⬜ | 2026-10-02 |  |  |
 | BL-014 | Đọc và feed SRC-10 vào brainstorm/feature | `tich-hop/ecus-api-yeu-cau-2025-10-26/ecus-api-yeu-cau-2025-10-26.md` | `fed:tich-hop/ecus-api-yeu-cau-2025-10-26/ecus-api-yeu-cau-2025-10-26.md` | ⬜ | 2026-10-02 |  |  |
@@ -49,6 +48,7 @@ links:
 
 | ID | Việc | Nguồn | Xong khi | Trạng thái | Tạo | Xong | Bằng chứng |
 |---|---|---|---|---|---|---|---|
+| BL-009 | Đọc và feed SRC-05 vào brainstorm/feature | `sop/eup-dieu-van-2026-09-19/eup-dieu-van-2026-09-19.md` | `fed:sop/eup-dieu-van-2026-09-19/eup-dieu-van-2026-09-19.md` | ✅ | 2026-10-02 | 2026-10-07 | sổ nguồn: sop/eup-dieu-van-2026-09-19/eup-dieu-van-2026-09-19.md ✅ |
 | BL-010 | Đọc và feed SRC-06 vào brainstorm/feature | `sop/du-lieu-van-hanh-xe-2026-09-30/du-lieu-van-hanh-xe-2026-09-30.md` | `fed:sop/du-lieu-van-hanh-xe-2026-09-30/du-lieu-van-hanh-xe-2026-09-30.md` | ✅ | 2026-10-02 | 2026-10-06 | sổ nguồn: sop/du-lieu-van-hanh-xe-2026-09-30/du-lieu-van-hanh-xe-2026-09-30.md ✅ |
 | BL-011 | Đọc và feed SRC-07 vào brainstorm/feature | `sop/hoa-don-tra-ho-2026-10-01/hoa-don-tra-ho-2026-10-01.md` | `fed:sop/hoa-don-tra-ho-2026-10-01/hoa-don-tra-ho-2026-10-01.md` | ✅ | 2026-10-02 | 2026-10-06 | sổ nguồn: sop/hoa-don-tra-ho-2026-10-01/hoa-don-tra-ho-2026-10-01.md ✅ |
 | BL-001 | Chuyển app common rules (MSC-01…11 + 18 quy tắc) sang CMP/GR mobile qua `/update-overview` | `ui-common/app/` | `grep:design/ui-common/screen-patterns.md:MSC-11` | ✅ | 2026-10-02 | 2026-10-04 | `design/ui-common/screen-patterns.md` |
