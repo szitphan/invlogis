@@ -139,7 +139,7 @@ P.edit='<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4
 P.copy='<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>';
 P.ext='<path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>';
 P.tag='<path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r=".5"/>';
-P.group='<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="18" height="7" rx="1"/>';
+P.group='<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M21 9H3"/><path d="M21 15H3"/>';
 const sp=(pts,c,w=84,h=30)=>{const mx=Math.max(...pts),mn=Math.min(...pts);return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}"><path d="${pts.map((v,i)=>`${i?"L":"M"}${(i/(pts.length-1))*w} ${h-3-((v-mn)/(mx-mn||1))*(h-6)}`).join(" ")}" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`};
 const kpiCards=(a)=>`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;position:relative">${a?an(2,-12,-10):""}${[["Lệnh hôm nay","14",["up","+3"],"file",[6,8,7,9,11,10,14],"so với hôm qua"],["Đang chạy","5",["up","+1"],"truck",[3,4,4,5,6,5,5],"trên 18 xe"],["Cần xử lý","2",["dn","+1"],"alert",[1,3,2,1,2,1,2],"1 từ chối · 1 trễ"],["Xe rảnh","3",["",""],"ware",[5,4,4,3,2,3,3],"gần Đình Vũ: 2"]].map((k,i)=>{const ac=i===0;
   return `<div class="card" style="padding:14px 16px;${ac?"background:var(--p);border-color:var(--p);color:var(--on-p)":""}"><div class="row"><span style="width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:${ac?"rgba(255,255,255,.14)":"var(--well)"}">${I(k[3],"s")}</span><span style="font-size:12.5px;font-weight:500;${ac?"opacity:.8":"color:var(--ink2)"}">${k[0]}</span></div>
@@ -317,7 +317,7 @@ function toolV(v,a){
   const view=`<span class="row" style="gap:6px">${ibt("sort","Sắp xếp")}${ibt("group","Nhóm")}${ibt("sliders","Tuỳ chỉnh cột")}</span>`;
   const chips=`${chipF("Loại hàng","FCL nhập")}${chipF("Ngày","Hôm nay")}<span style="font-size:12.5px;color:var(--pt);font-weight:600;white-space:nowrap">Xoá tất cả</span>`;
   const A=(n,x,y)=>a?an(n,x,y):"";
-  if(S.sq==="ds"){ /* góp ý 12/10: chọn B 2 hàng; Tuỳ chỉnh cột + Nhóm = nút ghost có chữ như bản draft JobID (dispatch-coordination-prototype) */
+  if(S.sq==="ds"){ /* góp ý 12/10: chọn B 2 hàng; Tuỳ chỉnh cột + Nhóm = nút ghost có chữ như bản draft JobID (service-delivery-prototype) */
     const gb=(ic,t)=>`<span class="btn ghost">${I(ic,"s")}${t}</span>`;
     return `<div style="margin-top:14px;display:flex;flex-direction:column;gap:8px;position:relative"><div class="row" style="gap:8px">${A(1,-14,-8)}${srch("flex:1;")}<span style="position:relative">${A(2,-8,-12)}${fbtn}</span><span style="position:relative" class="row">${A(4,-8,-12)}${gb("sliders","Tuỳ chỉnh cột")}${gb("group","Nhóm")}</span></div>
      <div class="row" style="gap:8px;position:relative">${A(3,-14,-6)}${chips}<span class="faint" style="font-size:12px;margin-left:auto">128 kết quả</span></div></div>`;

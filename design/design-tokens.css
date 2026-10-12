@@ -83,6 +83,21 @@
   --color-yellow-border: #e4c279;
   --color-yellow-icon: #584400;
   --color-yellow-text: #584400;
+  /* ---- Chip trạng thái dự án (theo lab, 12/10/2026) ---- */
+  --color-status-chip-gray-bg: #f1f1f1;
+  --color-status-chip-gray-fg: #525252;
+  --color-status-chip-blue-bg: #e7effd;
+  --color-status-chip-blue-fg: #1f4fb8;
+  --color-status-chip-teal-bg: #e2f5f4;
+  --color-status-chip-teal-fg: #0b6b64;
+  --color-status-chip-purple-bg: #efeafe;
+  --color-status-chip-purple-fg: #5536c4;
+  --color-status-chip-yellow-bg: #fff3dc;
+  --color-status-chip-yellow-fg: #8a5300;
+  --color-status-chip-green-bg: #e8f5ec;
+  --color-status-chip-green-fg: #1b7542;
+  --color-status-chip-red-bg: #fdecec;
+  --color-status-chip-red-fg: #b42318;
   --color-syntax-keyword: #700084;
   --color-syntax-string: #005600;
   --color-syntax-comment: #737373;
@@ -288,6 +303,21 @@
   --color-yellow-border: #c0990e;
   --color-yellow-icon: #deb433;
   --color-yellow-text: #fdcf4f;
+  /* ---- Chip trạng thái dự án · dark ---- */
+  --color-status-chip-gray-bg: #52525252;
+  --color-status-chip-gray-fg: #e5e5e5;
+  --color-status-chip-blue-bg: #1f4fb852;
+  --color-status-chip-blue-fg: #c7d3ff;
+  --color-status-chip-teal-bg: #0b6b6452;
+  --color-status-chip-teal-fg: #99e2d3;
+  --color-status-chip-purple-bg: #5536c452;
+  --color-status-chip-purple-fg: #cbbcff;
+  --color-status-chip-yellow-bg: #8a530052;
+  --color-status-chip-yellow-fg: #fdcf4f;
+  --color-status-chip-green-bg: #1b754252;
+  --color-status-chip-green-fg: #9fe59b;
+  --color-status-chip-red-bg: #b4231852;
+  --color-status-chip-red-fg: #ffc6c1;
   --color-syntax-keyword: #efa8ff;
   --color-syntax-string: #a6d2a2;
   --color-syntax-comment: #a3a3a3;

@@ -124,7 +124,7 @@ User chốt: lượt 3 dời sang Section bản cũ (chưa xoá) · Lab/H1 H2 H3
 
 Nguồn nội dung: wireframe `order-run-flow` màn 2 (order-detail-mobile), bản nháp 07/10. Wireframe chỉ cấp nội dung (dữ liệu, hành động, trạng thái, lỗi); bố cục và control là thử nghiệm của lab. Lab không sửa ngược wireframe — chỗ khác ghi ở khung "cần chốt" cuối trang lab.
 
-8 máy: Lệnh mới giao · Từ chối (sheet B + chip lý do) · Đã nhận chưa có GPS (Bắt đầu) · Đang thực hiện · Thiếu ảnh E-dispatch-003 · Đồng bộ lỗi · Bị trả lại · Đã chốt chờ duyệt. Chờ chấm.
+8 máy: Lệnh mới giao · Từ chối (sheet B + chip lý do) · Đã nhận chưa có GPS (Bắt đầu) · Đang thực hiện · Thiếu ảnh E-transport-dispatch-002 · Đồng bộ lỗi · Bị trả lại · Đã chốt chờ duyệt. Chờ chấm.
 
 ## Hình phương tiện (09/10/2026) — `lab-vehicles.html` + `lab-vehicles.js`
 
@@ -320,7 +320,7 @@ Nguồn: repo `facebook/astryx`, nhánh main, đọc 12/10/2026.
 |---|---|---|
 | 1 Khung trang | Bên phải thiếu đổi chi nhánh | Thêm ô "Chi nhánh …" (icon ghim + mũi tên) ở thanh trên, trước chuông — như `Dropdown_Xuong` topbar ERP. User chọn **giữ cả hai** (thanh trên + chân menu) |
 | 2 Danh sách | Mã Lệnh dùng font code | `.mono` = JetBrains Mono 13, màu chữ chính |
-| 2 | Tuỳ chỉnh cột + Nhóm như bản draft điều phối, không phải icon button | Nút ghost có icon + chữ "Tuỳ chỉnh cột", "Nhóm" (theo `docs/dispatch-coordination/html-design/dispatch-coordination-prototype.html`, toolbar jobid-list) |
+| 2 | Tuỳ chỉnh cột + Nhóm như bản draft điều phối, không phải icon button | Nút ghost có icon + chữ "Tuỳ chỉnh cột", "Nhóm" (theo `docs/service-delivery/html-design/service-delivery-prototype.html`, toolbar jobid-list) |
 | 2 | Badge tab chưa giống Astryx | Badge Neutral pill: cao 20, đệm 0 8, bo full, nền đen 6%, chữ 12 |
 | 2 | Đầu bảng xám | Nền đầu bảng #F1F1F1 |
 | 2 | Phân trang: X/trang sang trái, bỏ "Hiển thị 1–…/tổng" | Ô 50 / trang bên trái, số trang bên phải, bỏ nhãn tổng → **lệch design.md vừa ghi (KG-30)**, cần sửa |
@@ -342,3 +342,11 @@ Nguồn: repo `facebook/astryx`, nhánh main, đọc 12/10/2026.
 - Figma Section 5479:19466: 26 chip trạng thái ở 3 frame danh sách đổi sang pill nền nhạt token categorical + icon lucide 12; 2 frame desktop thay thanh công cụ bằng "Toolbar · 2 hàng (B)" (1920 `5508:17128`, 1440 `5508:17158`); phân trang bỏ nhãn, ô số dòng sang trái; sửa icon tìm kiếm bị méo (9 chỗ, nét cán kính lúp lệch vào trong vòng).
 - Xử lý nốt (12/10): icon Nhóm đổi sang lucide `layers` · mobile thêm "Hàng 2 · chip + kết quả" (`5508:17245`): chip + "Xoá tất cả" cuộn ngang, "128 kết quả" cố định bên phải · gắn biến DS cho màu + bo góc ở 6 frame (~810 thuộc tính: chữ → Text/*, icon → Icon/*, nền → Core/*, viền → Border/*, chip → họ categorical, bo → Radius/*).
 - Còn chưa gắn: text style (cỡ 14/12 khớp nhiều style, cần chọn tay), nền #171717 (badge số, nút chính — DS Core/Accent là #262626), bo 4/8/14 và xám #8F8F8F ngoài thang DS.
+- Gắn nốt (12/10, user duyệt): kiểu chữ DS cho ~450 lớp chữ (nút/tab/menu → Label · nhãn nhóm/đầu bảng/chip → Heading 5 · tiêu đề → Heading 1 · mã Lệnh → Code · còn lại Body/Supporting; cỡ 13/14,5 về 14) · nền #171717 → Core/Accent · xám #8F8F8F bỏ: mã Lệnh → Text/Primary, icon nhỏ → Icon/Secondary, chữ phụ → Text/Secondary · bo 9/5/8/14 → Radius Element/Full/Container · ô tick → instance `Checkbox / CheckboxInput` sm Unchecked, tắt Label (23 chỗ) · #FAFAFA → Background Surface.
+- Còn: 8 số lớn thẻ số (chờ chốt thẻ số).
+- User chốt 12/10: nhãn nhóm menu ("ĐIỀU PHỐI", "ĐỘI XE", "BÁO CÁO") và đầu cột bảng **giữ viết hoa** như bản trước (đã revert nhãn nhóm, màu #8F8F8F như cũ). Lệch design.md Typography › Principles (cấm viết hoa toàn bộ) → cần ghi ngoại lệ vào design.md.
+- 12/10 (tiếp): chip trạng thái + icon **theo lab** (user chốt). design.md: bảng 7 sắc chip (§ Ánh xạ trạng thái nghiệp vụ), quy chuẩn icon (§ Iconography: Lucide nét 1.8, cỡ 16/14, bảng icon theo hành động), ngoại lệ viết hoa nhãn nhóm menu + đầu cột bảng. Token `status-chip-<sắc>-bg|fg` ở YAML design.md + `design-tokens.css` + biến Figma `Status Chip/<Sắc>/Background|Foreground` (mode Dark: nền = màu chữ 20%, chữ = categorical-text dark — tự suy, chưa duyệt) → KG-31 đóng. 26 chip đã gắn biến. Nét icon 235 icon = cỡ×1.8/24.
+- Còn: 88 icon cỡ 15 (thanh trên, nút icon) chưa về 16; icon "Nhóm" lab không có → tạm `layers`; thẻ số chờ chốt.
+- 12/10 (tiếp 2): chip tối = phương án B (biến `Status Chip/*` mode Neutral Dark) · thư viện icon Figma nét 1.333 → 1.2 (1.694 vector), bộ `Icon` nét theo cỡ 0.9/1.2/1.5/1.8 · 227 icon tự vẽ ở section Sandbox → instance `icon/<lucide>` (map: panel→panel-left, dash→layout-dashboard, board→square-kanban, brief→briefcase, alert→triangle-alert, train→tram-front, cal→calendar, chart→chart-column, down/right/left→chevron-*, export→upload, arrowr→arrow-right, refresh→refresh-cw, more→ellipsis, filter→list-filter) · icon Nhóm = `rows-3` · 82 IconButton 30 → 32 · mobile "n kết quả" thành dòng riêng căn trái trên danh sách thẻ · dấu cộng nút Lập Lệnh (3 frame) gắn lại `Core/On Accent` (trước gắn Icon/Primary trùng nền đen).
+- a11y còn: số đếm tab 4.2:1 (cần 4.5) · nhãn nhóm menu #8F8F8F 3.23:1 (giữ theo user chốt 12/10).
+- Còn: thẻ số 2a chờ chốt (8 số lớn chưa gắn style) · frame còn ghi "Cơ sở Hải Phòng" (Delta không có chi nhánh HP).

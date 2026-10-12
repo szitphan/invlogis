@@ -114,6 +114,21 @@ colors:            # Mode "Neutral Light" (mặc định). Dark ở khối color
   yellow-border: "#e4c279"
   yellow-icon: "#584400"
   yellow-text: "#584400"
+  # Chip trạng thái của dự án (theo lab, chốt 12/10/2026) — § Ánh xạ trạng thái nghiệp vụ
+  status-chip-gray-bg: "#f1f1f1"
+  status-chip-gray-fg: "#525252"
+  status-chip-blue-bg: "#e7effd"
+  status-chip-blue-fg: "#1f4fb8"
+  status-chip-teal-bg: "#e2f5f4"
+  status-chip-teal-fg: "#0b6b64"
+  status-chip-purple-bg: "#efeafe"
+  status-chip-purple-fg: "#5536c4"
+  status-chip-yellow-bg: "#fff3dc"
+  status-chip-yellow-fg: "#8a5300"
+  status-chip-green-bg: "#e8f5ec"
+  status-chip-green-fg: "#1b7542"
+  status-chip-red-bg: "#fdecec"
+  status-chip-red-fg: "#b42318"
   # Syntax (CodeBlock)
   syntax-keyword: "#700084"
   syntax-string: "#005600"
@@ -186,6 +201,21 @@ colors-dark:       # Mode "Neutral Dark". Alpha theo code Neutral (neutralTheme.
   yellow-text: "#fdcf4f"
   gray-bg: "#ffffff"
   gray-text: "#e5e5e5"
+  # Chip trạng thái dự án — dark: nền = màu chữ light 20%, chữ = categorical-text dark
+  status-chip-gray-bg: "#52525252"
+  status-chip-gray-fg: "#e5e5e5"
+  status-chip-blue-bg: "#1f4fb852"
+  status-chip-blue-fg: "#c7d3ff"
+  status-chip-teal-bg: "#0b6b6452"
+  status-chip-teal-fg: "#99e2d3"
+  status-chip-purple-bg: "#5536c452"
+  status-chip-purple-fg: "#cbbcff"
+  status-chip-yellow-bg: "#8a530052"
+  status-chip-yellow-fg: "#fdcf4f"
+  status-chip-green-bg: "#1b754252"
+  status-chip-green-fg: "#9fe59b"
+  status-chip-red-bg: "#b4231852"
+  status-chip-red-fg: "#ffc6c1"
   # Các họ categorical còn lại (cyan/orange/pink/purple/teal) và border/icon: xem design-tokens.css
 
 typography:
@@ -396,7 +426,7 @@ trang *Foundation → Color* công bố, dùng khi đối chiếu với code `@a
 Mười họ màu: **Blue, Cyan, Gray, Green, Orange, Pink, Purple, Red, Teal, Yellow**. Mỗi họ có 4 vai
 trò `-bg` / `-border` / `-icon` / `-text` (giá trị ở YAML). Dùng cho **Token** (tag),
 **Badge** biến thể màu, cột "Breed" trong Searchable Table, và biểu đồ. **Không** dùng họ Red/Green
-để thay cho Status — ngoại lệ duy nhất: chip trạng thái nền nhạt theo bảng § Ánh xạ trạng thái nghiệp vụ. Status có token riêng và có nghĩa cố định.
+để thay cho Status. Status có token riêng và có nghĩa cố định.
 
 ### Syntax
 
@@ -438,6 +468,8 @@ tag, attribute, property, punctuation) chỉ dùng trong **CodeBlock / Code / Ma
 * Chỉ có một cỡ chữ đọc chính là 14px. 12px (supporting) dành cho thông tin phụ, không dùng cho nội dung chính.
 * Trọng số có 4 bậc token: 400 / 500 / 600 / 700 (`Font Weight/Normal…Bold`).
 * Letter-spacing luôn bằng 0, không viết hoa toàn bộ (textCase ORIGINAL). Ngoại lệ thấy trong mẫu: badge "LIMITED EDITION", "CURRENT SESSION".
+  Ngoại lệ của dự án (chốt 12/10/2026): **nhãn nhóm menu** ("ĐIỀU PHỐI", "ĐỘI XE") và **tên cột đầu bảng**
+  ("MÃ LỆNH", "TRẠNG THÁI") viết hoa, Heading 5 (12/600). Lý do: đây là nhãn phân vùng, không phải chữ đọc liền mạch.
 
 ## Layout
 
@@ -594,7 +626,24 @@ khi ghi chú prototype hoặc spec cho dev thì dùng tên token dưới đây.
 
 ### Iconography & Imagery
 
-* Icon theo bộ **Lucide** (tên `icon/…`), 4 cỡ: xsm 12 · sm 16 · md 20 · lg 24px. Màu theo token `icon-*`.
+* Icon theo bộ **Lucide**. Figma: component `icon/<tên>` ở trang Icons (cỡ gốc 16) và bộ `Icon` giữ 4 cỡ của DS: xsm 12 · sm 16 · md 20 · lg 24. Màu theo token `icon-*`.
+* **Quy chuẩn icon của dự án (chốt 12/10/2026, theo lab `design/_lab/lab-web-kit.css` `.ic`) — áp cho cả thư viện Figma lẫn màn vẽ:**
+
+  | Thuộc tính | Quy định |
+  | --- | --- |
+  | Kiểu | Lucide nét (outline), không tô; đầu nét + góc nét bo tròn |
+  | Độ dày nét | **1.8** trên khung 24 → nét = cỡ × 1.8 / 24: 12 ≈ 0.9 · 14 ≈ 1.05 · 16 = 1.2 · 18 = 1.35 · 20 = 1.5 · 24 = 1.8. Riêng icon trong chip trạng thái: **2** trên khung 24 (14px ≈ 1.17) |
+  | Trên Figma | Luôn là instance `icon/<tên>` của thư viện, không vẽ SVG rời. Cỡ 14/18 = instance resize rồi đặt lại nét theo công thức trên |
+  | Cỡ 16 (mặc định) | Mục menu trái, nút icon ở thanh trên, nút ⋯ và icon thao tác trong bảng |
+  | Cỡ 14 | Trong nút có chữ, ô nhập/ô tìm, ô chọn, chip lọc, chip trạng thái, phân trang, mũi tên tuyến, chevron |
+  | Cỡ 18 | Hiếm — icon đứng riêng cần nổi hơn chữ 14 |
+  | Màu | Theo màu chữ cạnh nó; icon phụ (chevron ô chọn, mũi tên tuyến, icon trong ô tìm) dùng `{colors.icon-secondary}` |
+  | Vùng bấm nút icon | 32 (nhỏ 28), icon căn giữa |
+
+  Icon theo hành động dùng lại trong mọi feature: Lập/Thêm `plus` · Xuất file `upload` · Bộ lọc `list-filter` ·
+  Tuỳ chỉnh cột `sliders-vertical` · Nhóm `rows-3` · Lịch sử `history` · Giao lại `refresh-cw` · Theo dõi `eye` ·
+  Duyệt `check` · Gọi lái xe `phone` · Thêm thao tác `ellipsis` · Đóng/Xoá chip `x` · Tìm `search` · Thông báo
+  `bell` · Cơ sở `warehouse` · Địa điểm `map-pin`.
 * Avatar: 5 cỡ `xsm/sm/md/lg/xl` (20/24/36/48/128px), nội dung Image/Initials/Icon, chấm trạng thái bật bằng BOOLEAN `Status`. Avatar chữ tắt dùng nền `{colors.neutral}`.
 * Ảnh trong card/product bo `{rounded.container}`, thumbnail đang chọn có viền 2px `{colors.accent}`.
 
@@ -1109,7 +1158,7 @@ trên bảng (chọn cột / sửa điều kiện / không có kết quả), 3 m
 | Chip điều kiện | `Token` SM (mobile MD) trong slot `Filters`, `Removable` bật | `Label` = `[Cột]: [giá trị 1]`, phần `+n` đặt trong `End Content` của Token (để không bị cắt); rộng tối đa 260px, nhãn 1 dòng cắt "…"; khoảng: `Ngày tạo: 01/09 – 30/09/2026`, `Tổng tiền: 1,000,000 – 10,000,000 đ`. Bấm chip → Value Editor của điều kiện đó; × trên chip → xoá điều kiện |
 | Chọn cột | `PowerSearch / Popover` Mode = Fields | Danh sách cột được phép lọc (định nghĩa trong UC), thứ tự trái → phải của bảng kể cả cột ẩn, icon theo loại dữ liệu |
 | Sửa giá trị | `PowerSearch / Popover` Mode = Value Editor, slot `Content` = **`Bộ lọc nâng cao / .Value Editor`** | Xem bảng dưới |
-| Số kết quả | Chữ `{typography.supporting}`, màu `{colors.text-secondary}`, cuối hàng 2 | "128 kết quả" — là tổng duy nhất của danh sách (phân trang không lặp lại) |
+| Số kết quả | Chữ `{typography.supporting}`, màu `{colors.text-secondary}`, cuối hàng 2. **Mobile:** dòng riêng căn trái, ngay trên danh sách thẻ (luôn hiện, kể cả khi chưa lọc); hàng chip cuộn ngang dùng đủ bề ngang | "128 kết quả" — là tổng duy nhất của danh sách (phân trang không lặp lại) |
 | Không có kết quả | Bảng hiện `EmptyState` "Không có kết quả phù hợp" / "Thử bỏ bớt điều kiện lọc." + Button Secondary "Xoá bộ lọc" | **Không** có nút Tạo mới (tách khỏi "chưa có dữ liệu", xem Known Gaps 2.12) |
 
 **`Bộ lọc nâng cao / .Value Editor`** (key `a4b66118…`, 8 biến thể Platform × Type; nội dung đặt vào Value Editor) — theo bố cục của
@@ -1419,20 +1468,32 @@ dựng thành component dự án.
 Gán mỗi trạng thái nghiệp vụ vào **một nhóm** dưới đây. **Nhãn lấy nguyên văn từ `srs/{feature}-states.md`**,
 không lấy từ bảng này. Luôn có **chữ** đi kèm màu (Badge Pill có nhãn, hoặc StatusDot + nhãn).
 
-**Chip trạng thái trong bảng, thẻ, đầu trang chi tiết (chốt 12/10/2026, giống app mobile):** `Badge`
-Shape = Pill, nền **nhạt** họ categorical (`-bg` + chữ `-text`, icon `-icon`), **icon thay chấm** đứng
-trước nhãn. Chữ Inter `{typography.supporting}` đậm 600, không kế thừa font tiêu đề. Nền *vivid*
-(Variant Info/Success/Warning/Error) chỉ dùng cho số đếm, cảnh báo nổi bật — không dùng cho cột trạng thái.
-Một feature có nhiều trạng thái "đang xử lý" thì tách họ màu để phân biệt bước (bảng dưới, cột *Họ
-categorical*); icon do feature chọn theo nghĩa trạng thái và ghi trong UC.
+**Chip trạng thái trong bảng, thẻ, đầu trang chi tiết (chốt 12/10/2026, theo lab `design/_lab/lab-web-kit.css` `.stp`):**
+viên thuốc cao 24, đệm trái 8 / phải 10, bo tròn hẳn, **icon 14 (nét 2) thay chấm** đứng trước nhãn, cách 4.
+Chữ Inter 12 đậm 600 (Heading 5), không kế thừa font tiêu đề. Màu là **bảng màu trạng thái của dự án** dưới
+đây (nền rất nhạt + chữ/icon đậm cùng tông) — không dùng nền *vivid* của Badge, không dùng họ categorical.
+Icon do feature chọn theo nghĩa trạng thái và ghi trong UC; ví dụ dưới là trạng thái Lệnh vận tải.
 
-| Nhóm | Badge Variant | StatusDot | Họ categorical (chip nền nhạt) | Ví dụ trong mẫu Astryx |
+| Sắc | Nền | Chữ + icon | Dùng cho nhóm | Ví dụ (Lệnh vận tải) |
 | --- | --- | --- | --- | --- |
-| Chưa bắt đầu / nháp / tồn đọng | Neutral | neutral | Gray | Backlog, To-do |
-| Đang xử lý | Info | info | Blue → Teal → Purple (theo thứ tự bước) | In Progress |
-| Chờ / cần chú ý / chờ duyệt | Warning | warning | Yellow | Unfulfilled, In review, Needs attention |
-| Hoàn tất / thành công | Success | positive | Green | Done, Paid |
-| Lỗi / từ chối / hủy / nghiêm trọng | Error | negative | Red | (High priority) |
+| Xám | `#F1F1F1` | `#525252` | Chưa bắt đầu / nháp | Đã lập · `pen-line` |
+| Xanh dương | `#E7EFFD` | `#1F4FB8` | Đang xử lý — bước 1 | Đã giao lái xe · `truck` |
+| Xanh ngọc | `#E2F5F4` | `#0B6B64` | Đang xử lý — bước 2 | Lái xe đã nhận · `check` |
+| Tím | `#EFEAFE` | `#5536C4` | Đang xử lý — bước 3 | Đang thực hiện · `navigation` |
+| Vàng | `#FFF3DC` | `#8A5300` | Chờ / cần chú ý / chờ duyệt | Lái xe đã chốt · `clock` |
+| Xanh lá | `#E8F5EC` | `#1B7542` | Hoàn tất | Đã duyệt · `check-check` |
+| Đỏ | `#FDECEC` | `#B42318` | Lỗi / từ chối / huỷ | Huỷ · `circle-x` |
+
+Token: `{colors.status-chip-<sắc>-bg|fg}` (CSS `--color-status-chip-<sắc>-bg|fg`; Figma `Status Chip/<Sắc>/Background|Foreground`, có cả mode Dark).
+Mode Dark (duyệt 12/10/2026): nền = màu chữ bản sáng với độ đậm 32% (hex `…52`), chữ = sắc sáng của cùng họ; riêng Tím dùng `#CBBCFF` (purple-text của DS ngả hồng, lệch họ tím). Chữ đạt 7,4–11:1 trên nền thẻ và nền trang.
+
+| Nhóm | Badge Variant | StatusDot | Ví dụ trong mẫu Astryx |
+| --- | --- | --- | --- |
+| Chưa bắt đầu / nháp / tồn đọng | Neutral | neutral | Backlog, To-do |
+| Đang xử lý | Info | info | In Progress |
+| Chờ / cần chú ý / chờ duyệt | Warning | warning | Unfulfilled, In review, Needs attention |
+| Hoàn tất / thành công | Success | positive | Done, Paid |
+| Lỗi / từ chối / hủy / nghiêm trọng | Error | negative | (High priority) |
 
 * Mức ưu tiên (Low/Medium/High) và phân loại **không** phải trạng thái. Dùng Badge màu categorical (Teal/Yellow/Red) hoặc Token.
 * Trong wireframe B&W: chỉ ghi **nhãn chữ** của trạng thái (ví dụ `[Badge: Chờ duyệt]`), không tô màu.
@@ -1728,7 +1789,9 @@ Chốt Lab ↔ DS (18 mục, `design/_lab/refs/notes.md` mục "Kết quả ch�
   (KG-30 cũ "Hiển thị x–y / tổng" bỏ, không cần hỏi khách).
 * **Thanh công cụ danh sách:** 2 hàng — tìm · Bộ lọc · Tuỳ chỉnh cột · Nhóm / chip · Xoá tất cả · n kết quả
   (xem § Bộ lọc nâng cao).
-* **Chip trạng thái:** Badge pill nền nhạt categorical + icon thay chấm (xem § Ánh xạ trạng thái nghiệp vụ).
+* **Chip trạng thái:** theo lab — pill cao 24, icon 14 thay chấm, bảng màu trạng thái riêng của dự án (xem § Ánh xạ
+  trạng thái nghiệp vụ). KG-31 đóng cùng ngày: đã có token YAML + CSS + biến Figma (dark: nền = màu chữ 20%).
+* **Icon:** quy chuẩn theo lab — Lucide nét 1.8, cỡ 16 / 14, bảng icon theo hành động (xem § Iconography & Imagery).
 
 ### Còn mở — khi vẽ gặp thì làm gì
 

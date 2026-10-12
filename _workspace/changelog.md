@@ -109,3 +109,4 @@
 | 2026-10-12 | /status | szitphan | `docs/meetings/2026-10-10-oq-dispatch-coordination.md` | status stale → draft (restore sau review upstream) |
 | 2026-10-12 | manual | szitphan | `docs/meetings/2026-10-09-client-dispatch-field-issues.md` | manual edit |
 | 2026-10-12 | /status | szitphan | `docs/dispatch-coordination/brainstorms/dispatch-coordination.md` | status stale → draft (restore sau review upstream) |
+| 2026-10-12 | manual | @szitphan | `design/design.md` | chip tối B (nền 32%, tím #cbbcff), Iconography 1 chuẩn nét 1.8/24, Nhóm rows-3, mobile số kết quả dòng riêng |
