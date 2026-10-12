@@ -86,9 +86,9 @@ links: {{links}}
 
 ## 8. Business Rules
 
-| ID | Business Rule | Rationale |
-|----|---------------|-----------|
-| BR-{{feature}}-01 | {{business_rule}} | {{rationale}} |
+| ID | Business Rule | Tầng | Rationale |
+|----|---------------|------|-----------|
+| BR-{{feature}}-01 | {{business_rule}} | {{layer}} | {{rationale}} |
 
 ## 9. Cost-Benefit (định tính)
 

@@ -20,9 +20,9 @@ links: {{links}}
 
 ## 3. Functional Requirements (FR)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-| ID | Title | Description | Priority | Verify by | Source |
-|----|-------|-------------|----------|-----------|--------|
-| FR-{{feature}}-001 | {{title}} | {{desc}} | P0/P1/P2 | demo/test/kiểm tra/phân tích | PRD Mục 4 |
+| ID | Title | Description | Priority | Tầng | Verify by | Source |
+|----|-------|-------------|----------|------|-----------|--------|
+| FR-{{feature}}-001 | {{title}} | {{desc}} | P0/P1/P2 | {{layer}} | demo/test/kiểm tra/phân tích | PRD Mục 4 |
 
 ## 4. Non-Functional Requirements (NFR)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -32,9 +32,9 @@ links: {{links}}
 
 ## 5. Business Rules
 
-| ID | Rule | Trigger | Implements FR | Source |
-|----|------|---------|---------------|--------|
-| BR-{{feature}}-001 | {{rule}} | {{trigger}} | FR-{{feature}}-NNN | BRD Mục X / PRD Mục X |
+| ID | Rule | Tầng | Trigger | Implements FR | Source |
+|----|------|------|---------|---------------|--------|
+| BR-{{feature}}-001 | {{rule}} | {{layer}} | {{trigger}} | FR-{{feature}}-NNN | BRD Mục X / PRD Mục X |
 
 ## 6. Error Matrix
 

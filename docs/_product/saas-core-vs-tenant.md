@@ -1,6 +1,8 @@
 ---
 type: product-strategy
 status: draft
+status_changed: 2026-10-12
+status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-12
 links:
   - docs/_shared/project-profile.md
@@ -120,7 +122,7 @@ Cột "Nếu viết cứng" ghi điều sẽ chặn bán cho khách khác.
 | Quy tắc (theo Delta) | Tầng | Cách tổng quát hoá | Nếu viết cứng |
 |---|---|---|---|
 | GPS và cảm biến dầu EUP | Kết nối thay được | Lõi định nghĩa "nhà cung cấp GPS"; EUP là kết nối đầu tiên | Khách dùng Vietmap, Bình Anh, Adsun… không dùng được |
-| VETC là nguồn chuẩn toạ độ và chi phí khi lệch Vietmap | Cấu hình (thứ tự ưu tiên nguồn) | — | — |
+| VETC là nguồn chuẩn toạ độ và chi phí khi lệch Vietmap | Lõi (chốt 2026-10-12) | VETC là nguồn chuẩn cho mọi khách | — |
 | Vé đường bộ 3 loại; vé tránh trạm trả vào lương lái xe | Lõi (phân loại vé) + Riêng Delta (chính sách lương) | Lõi chỉ phân loại và chuyển dữ liệu; chính sách lương là cấu hình hoặc nằm ngoài sản phẩm | Lương là chính sách nội bộ, khác mỗi khách |
 | Tài khoản VETC tự nạp qua Vietcombank (dưới 15/5 triệu thì nạp lên 150/50 triệu) | Riêng Delta | Cấu hình ngưỡng nạp + kết nối ngân hàng của khách | — |
 | MISA lấy hoá đơn điện tử | Kết nối thay được | Lõi định nghĩa "nhà cung cấp hoá đơn điện tử, phần mềm kế toán"; MISA là kết nối đầu tiên | Khách dùng FAST, Bravo, Viettel… không dùng được |
@@ -181,7 +183,9 @@ Mỗi yêu cầu mới (của Delta hay khách sau) trả lời 3 câu trước 
 | Chỉ đúng một nhóm khách | Gói mở rộng |
 | Không câu nào | Riêng Delta |
 
-**Ghi vào tài liệu:** thêm nhãn tầng `[Lõi]` / `[Cấu hình]` / `[Gói: tên gói]` / `[Delta]` cạnh nhãn nguồn `[SOP to-be]` / `[SOP+]` / `[Mới]` đang dùng trong brainstorm; SRS mới thêm cột "Tầng" ở bảng FR và BR. Như vậy khi review, ai cũng thấy ngay quy tắc nào khoá vào Delta.
+**Ghi vào tài liệu:** thêm nhãn tầng `[Lõi]` / `[Cấu hình]` / `[Gói: tên gói]` / `[Riêng Delta]` cạnh nhãn nguồn `[SOP to-be]` / `[SOP+]` / `[Mới]` đang dùng trong brainstorm; SRS mới thêm cột "Tầng" ở bảng FR và BR. Như vậy khi review, ai cũng thấy ngay quy tắc nào khoá vào Delta.
+
+Con số chính sách không viết thẳng vào quy tắc mà gọi qua mã `P-…` trong [[docs/_product/tenant-parameters|bảng tham số tenant]]. Cách gắn nhãn, gate và lint: `.claude/rules/saas-layer.md`, kiểm bằng `python3 _scripts/saas-layer-lint.py <file>`.
 
 ## 7. Việc cần quyết trước khi viết SRS mới
 

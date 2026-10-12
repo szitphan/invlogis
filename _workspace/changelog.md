@@ -82,3 +82,30 @@
 | 2026-10-12 | /brainstorm | @szitphan | `docs/dispatch-coordination/brainstorms/dispatch-coordination.md` | cập nhật theo Delta trả lời vòng 1: cột Trả lời Mục 11, phạm vi CBT/đường sắt, B2/B3b/B4/B5/E1/E3/E8, thêm B7, E9 |
 | 2026-10-12 | /brainstorm | @szitphan | `docs/meetings/2026-10-10-oq-dispatch-coordination.md` | ghi xác nhận 12/10: VT = chi nhánh Vận Tải, không có Hải Phòng; ký nhận làm cả điện tử và giấy |
 | 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/usecases/cross-process-flow-usecase-index.md` | điền cột Screens 4 UC theo wireframe HTML |
+| 2026-10-12 | /figma-screen | @szitphan | `design/design.md` | ngoại lệ viết hoa: nhãn nhóm menu + tên cột đầu bảng |
+| 2026-10-12 | /figma-screen | @szitphan | `design/design.md` | chip trạng thái + quy chuẩn icon theo lab, KG-31 |
+| 2026-10-12 | /figma-screen | @szitphan | `design/design.md` | token chip trạng thái dự án (status-chip-*), đóng KG-31 |
+| 2026-10-12 | manual | @szitphan | `docs/_product/tenant-parameters.md` | tạo bảng tham số tenant (18 tham số Điều phối) + rule saas-layer + lint |
+| 2026-10-12 | manual | @szitphan | `docs/_product/saas-core-vs-tenant.md` | Mục 6: nhãn [Riêng Delta], trỏ rule saas-layer + bảng tham số |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/srs/cross-process-flow-spec.md` | Mục 12: thêm OQ-3..OQ-31 từ review Phase G |
+| 2026-10-12 | manual | @szitphan | `docs/dispatch-coordination/brainstorms/dispatch-coordination.md` | BL-057: gắn nhãn tầng SaaS 45 dòng Mục 4, con số sang mã P (Mục 4, 7.1, 7.2) |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/srs/cross-process-flow-flows.md` | Phase G sửa an toàn: hỏi cây trước khi ghi nhận gửi |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/srs/cross-process-flow-states.md` | Phase G sửa an toàn: thêm lối [*] → Đang triển khai cho nhánh phát sinh |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/srs/cross-process-flow-spec.md` | Phase G sửa an toàn: FR-004 bước công nợ không có Đã thu hồi/từ chối |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/usecases/uc-xem-quy-trinh-cua-ban-ghi.md` | Phase G sửa an toàn: bỏ precondition mâu thuẫn nhánh 2a |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/usecases/uc-cap-nhat-quy-trinh-theo-ban-ghi.md` | Phase G sửa an toàn: Related thêm BR-007, BR-008 |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/html-wireframe/cross-process-flow-wireframe-html-index.md` | Phase G sửa an toàn: tra cứu [11]-[14] chip/số kết quả/dữ liệu mẫu, Data type Popup/Panel/Sheet |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/srs/cross-process-flow-spec.md` | cascade userflow OQ-2: FR-011 chỉ web |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/usecases/uc-xem-quy-trinh-cua-ban-ghi.md` | cascade userflow OQ-2: 6d3 app không có nút mở bảng công nợ |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/cross-process-flow-object-map.md` | cascade userflow OQ-2: Mở bảng công nợ chỉ Website |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/srs/cross-process-flow-spec.md` | NFR-003: banner cập nhật tối đa 2 giây |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/html-wireframe/cross-process-flow-wireframe-html-index.md` | NFR-003 2 giây vào [10], [14], [24] |
+| 2026-10-12 | manual | szitphan | `docs/dispatch-coordination/brainstorms/dispatch-coordination.md` | manual edit |
+| 2026-10-12 | /status | szitphan | `docs/_product/srs-v2-change-log.md` | status stale → draft (restore sau review upstream) |
+| 2026-10-12 | /status | szitphan | `docs/_product/saas-core-vs-tenant.md` | status stale → draft (restore sau review upstream) |
+| 2026-10-12 | /status | szitphan | `docs/_product/tenant-parameters.md` | status stale → draft (restore sau review upstream) |
+| 2026-10-12 | /status | szitphan | `docs/dispatch-coordination/ascii-wireframe/dispatch-coordination-wireframe-index.md` | status stale → draft (restore sau review upstream) |
+| 2026-10-12 | /status | szitphan | `docs/dispatch-coordination/html-wireframe/dispatch-coordination-wireframe-html-index.md` | status stale → draft (restore sau review upstream) |
+| 2026-10-12 | /status | szitphan | `docs/meetings/2026-10-10-oq-dispatch-coordination.md` | status stale → draft (restore sau review upstream) |
+| 2026-10-12 | manual | szitphan | `docs/meetings/2026-10-09-client-dispatch-field-issues.md` | manual edit |
+| 2026-10-12 | /status | szitphan | `docs/dispatch-coordination/brainstorms/dispatch-coordination.md` | status stale → draft (restore sau review upstream) |

@@ -52,6 +52,7 @@ Bước được đánh số liên tục 1→21 xuyên suốt 5 phase (không l�
 * **Không bao giờ chạy `context: fork`** (xem Goal). Skill ở main conversation để gate là thật.
 * **Quy tắc vàng KG** — Graph để CHỌN file + đếm cấu trúc; mọi kết luận nội dung/conflict/CR-diff LUÔN dựa trên prose đã Read, KHÔNG dựa facts.
 * **L1 approval** trước Write CR file (1 file duy nhất).
+* **Phân tầng SaaS** — mỗi yêu cầu thêm/đổi quy tắc trả lời 3 câu xếp tầng vào bảng "Xếp tầng SaaS" ở Mục 4 của CR trước khi apply; khách từ chối tính năng → đề xuất tham số tắt, không xoá; con số mới đi qua mã `P-…` (thêm dòng `docs/_product/tenant-parameters.md` vào Impacted Docs). Profile không ghi bán cho nhiều khách → bỏ qua, báo 1 dòng. Per @../../rules/saas-layer.md.
 * **L2 diff per doc** trong apply loop. KHÔNG skip L2 dù change nhỏ.
 * **Gate áp cho MỌI Edit, gồm cả thao tác hậu-apply.** `approval-gate.md` bắt L2 trước mọi Edit file đã tồn tại — không có ngoại lệ "chỉ là metadata": đổi `stale → revisions` (gộp vào L2 của chính doc đó, bước 13), cập nhật CR record (gom 1 lượt L1+L2, bước 14/17), `close`/`reject` (L2). Skill KHÔNG được tự cho mình quyền ghi lén những thứ này.
 * **`status` phản ánh đúng thực tế, không dùng sai nghĩa.** Report đã ghi → `impact-assessed` với MỌI verdict (`proposed` nghĩa là *chưa* assess — giữ nó cho direct-edit-ok khiến `/dashboard` báo P0 "chưa assess" oan). Apply loop bắt đầu → `partially-applied`. Chỉ `applied` khi checklist sạch `⬜`.
@@ -310,6 +311,7 @@ Render CR record content (read-only, gồm cả impact assessment vì self-conta
 * @references/output-templates.md (mẫu output/message đầy đủ cho từng bước — tách ra để phần trên dễ đọc)
 * @../../rules/change-request.md
 * @../../rules/approval-gate.md
+* @../../rules/saas-layer.md
 * @../../rules/ba-conventions.md (Mục 2 no-re-ask — áp cho intake gate bước 4.5; Mục 3 IT-BA framing cho câu hỏi clarify)
 * @../../rules/kg-usage.md (quy tắc dùng Knowledge Graph — graph chọn file, prose kết luận)
 * @../../rules/delivery-readiness.md

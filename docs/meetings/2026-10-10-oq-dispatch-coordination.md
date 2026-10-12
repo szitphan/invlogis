@@ -1,6 +1,8 @@
 ---
 type: meeting
 status: draft
+status_changed: 2026-10-12
+status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-12
 links:
   - docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md

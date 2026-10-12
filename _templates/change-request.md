@@ -36,6 +36,15 @@ jira_keys: []
 
 {{proposed_change}}
 
+**Xếp tầng SaaS**
+
+| Câu hỏi | Trả lời |
+|---|---|
+| Có ít nhất 2 doanh nghiệp cùng ngành cần đúng quy tắc này? | {{layer_q1}} |
+| Viết được quy tắc không cần con số, tên riêng của khách? | {{layer_q2}} |
+| Khách khác muốn ngược lại thì tắt hoặc đổi được mà không sửa code? | {{layer_q3}} |
+| Tầng | {{layer}} |
+
 ## 5. Impact Matrix (6 chiều)
 
 | Chiều | Mức | Ghi chú |

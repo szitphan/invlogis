@@ -28,6 +28,7 @@ Doc tập trung business goal, current/future state, scope, stakeholder, busines
 - **Auto-detect upstream + confirm** — list ưu tiên `{feature}-urd.md > brainstorms/* > docs/_product/prd.md`; user chọn number/skip/path. Không auto-pick.
 - **Read-before-ask bắt buộc** — đọc full existing BRD và mọi nguồn đã chọn, lập coverage nội bộ rồi chỉ hỏi phần `missing/conflicting`. Không hỏi lại facts đã có.
 - **Thông tin cấp dự án đọc + ghi vào profile** — domain, thị trường, mô hình kinh doanh, compliance áp dụng (hay xuất hiện ở Business Scope/Risks): đọc `docs/_shared/project-profile.md` trước; thiếu thì hỏi rồi đề xuất ghi vào profile. Per @../../rules/project-profile.md.
+- **Phân tầng SaaS** — bảng Business Rules (Mục 8) có cột "Tầng" (`[Lõi]` / `[Cấu hình]` / `[Gói: …]` / `[Riêng {khách}]`), kế thừa nhãn từ brainstorm; con số chính sách ghi mã `P-…` trong `docs/_product/tenant-parameters.md` kèm giá trị khách. chạy `python3 _scripts/saas-layer-lint.py <bản nháp>` trước L1, FAIL thì sửa trước khi trình, báo cáo tách 4 mức. Profile không ghi bán cho nhiều khách → bỏ qua, báo 1 dòng. Per @../../rules/saas-layer.md.
 - **BRD chạy độc lập** — thiếu URD/brainstorm là soft gate; hỏi đúng business context còn thiếu, không bắt chạy skill upstream.
 - **Đúng tầng BRD:**
   - Giữ: business problem/objective, current & future state, gap, business scope, stakeholders & stakeholder requirements, high-level business requirements, business rules, assumptions/constraints/dependencies, risks, success measures, cost-benefit định tính.
@@ -160,6 +161,7 @@ Reviewer phải lần theo được:
 - @../../rules/feature-bootstrap.md
 - @../../rules/ba-conventions.md
 - @../../rules/project-profile.md
+- @../../rules/saas-layer.md
 - @../../rules/approval-gate.md
 - @../../rules/kg-usage.md
 - @../../rules/naming-conventions.md

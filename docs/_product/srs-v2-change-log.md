@@ -1,6 +1,8 @@
 ---
 type: change-log
 status: draft
+status_changed: 2026-10-12
+status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-12
 jira_key:
 links:

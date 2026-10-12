@@ -25,6 +25,7 @@ Expand raw idea thành structured brainstorm board qua interview __độ sâu th
 - __Auto-derive idea slug__ — semantic slug từ idea topic. Fallback `idea-{NNN}`. Collision → suffix `-v2`.
 - __Idea input free-form__ — text trực tiếp HOẶC `@<file-path>` tag.
 - __Thông tin cấp dự án đọc + ghi vào profile__ — domain sản phẩm, thuật ngữ gọi người dùng cuối, compliance (hay chạm ở phần user + rủi ro): đọc `docs/_shared/project-profile.md` trước khi hỏi; thiếu thì hỏi rồi đề xuất ghi vào profile để skill sau khỏi hỏi lại. Per @../../../.claude/rules/project-profile.md.
+- __Phân tầng SaaS__ — mỗi dòng tính năng Mục 4 mang nhãn tầng ngay sau nhãn nguồn (`- B7 [SOP+] [Gói: Đa chi nhánh] …`); con số chính sách, danh sách lựa chọn, tính năng bật/tắt ghi mã `P-…` kèm giá trị khách, cả trong bảng 7.2; mã chưa có trong `docs/_product/tenant-parameters.md` thì đề xuất thêm dòng trong cùng L1. Khách từ chối tính năng → tham số tắt, không xoá. chạy `python3 _scripts/saas-layer-lint.py <bản nháp>` trước L1, FAIL thì sửa trước khi trình, báo cáo tách 4 mức. Profile không ghi bán cho nhiều khách → bỏ qua, báo 1 dòng. Per @../../../.claude/rules/saas-layer.md.
 - __Interview hỏi từng section một__ — KHÔNG dồn batch 10 câu. Wait reply giữa các section. User có thể skip section bất kỳ → fill `<!-- TBD: ... -->`.
 - __Mandatory artifacts theo complexity__ (auto-detect):
   - __ASCII flow diagram__ — bắt buộc nếu detect: external API/redirect (OAuth, payment, webhook), branching ≥2 paths, async/background job.
@@ -344,6 +345,7 @@ Skill KHÔNG mặc định Deep. Sau khi chấm scope × completeness (Phase A.6
 - @../../../.claude/rules/feature-bootstrap.md
 - @../../../.claude/rules/ba-conventions.md
 - @../../../.claude/rules/project-profile.md
+- @../../../.claude/rules/saas-layer.md
 - @../../../.claude/rules/approval-gate.md
 - @../../../.claude/rules/review-format.md (Mục Review độc lập khi skill chạy riêng — bước 8b)
 - @../../../.claude/agents/senior-ba.md · @../../../.claude/agents/po-reviewer.md

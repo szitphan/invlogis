@@ -63,6 +63,7 @@ Chạy /srs cho {feature} tới đâu?
 - **Front-load gaps, KHÔNG front-load toàn bộ** — agent ĐỌC upstream (PRD/URD/BRD/brainstorm) TRƯỚC, dựng bản nháp scope + FR, rồi chỉ hỏi anh xác nhận/bổ sung **chỗ còn thiếu**. KHÔNG bắt anh liệt kê lại từ đầu thứ upstream đã có (no-re-ask, `ba-conventions.md` Mục 2).
 - **`spec.md` = source of truth SAU Phase C — chặn re-read upstream** — đọc upstream (PRD/URD/BRD) là chi phí **1 lần** ở Phase B. Từ Tầng 2 trở đi (UC/ERD/flows/user-flow/story), nguồn là `spec.md` vừa chốt (đã trong context) + đúng artifact tầng đó sinh — **KHÔNG re-open PRD/URD/BRD raw** mỗi tầng. Chọn nguồn để đọc thì ưu tiên KG (`kg facts`/`kg neighbors`) shortlist trước, rồi Read đúng file cần (per `kg-usage.md`).
 - **Thông tin cấp dự án đọc + ghi vào profile** — compliance áp dụng, thị trường/ngôn ngữ, thuật ngữ gọi người dùng cuối (chạm nhiều ở NFR bảo mật/riêng tư + wording lỗi): đọc `docs/_shared/project-profile.md` ở Phase B cùng upstream; thiếu mà cần cho NFR thì hỏi rồi đề xuất ghi vào profile. Per @../../../.claude/rules/project-profile.md.
+- **Phân tầng SaaS** — bảng FR (Mục 3) và BR (Mục 5) có cột "Tầng", kế thừa nhãn từ brainstorm/BRD; FR/BR mới tự xếp theo 3 câu hỏi của rule và nêu ở L1. Con số chính sách, danh sách, bật/tắt ghi mã `P-…` kèm giá trị khách, không viết số trần vào FR/BR/NFR. chạy `python3 _scripts/saas-layer-lint.py <bản nháp>` trước L1, FAIL thì sửa trước khi trình, báo cáo tách 4 mức (chạy trên `{feature}-spec.md` nháp). Profile không ghi bán cho nhiều khách → bỏ qua, báo 1 dòng. Per @../../../.claude/rules/saas-layer.md.
 - **NFR hỏi bằng outcome nghiệp vụ, KHÔNG hỏi ngôn ngữ dev** — "khách chờ tối đa mấy giây?", "giờ vận hành nào cần khả dụng?", "lượng giao dịch giờ cao điểm?", "dữ liệu nào nhạy cảm, ai được xem, giữ bao lâu?". KHÔNG hỏi "encrypt at-rest?", "isolation level?", "thuật toán hash?". Giá trị nghiệp vụ chưa chốt → ghi `TBD — owner — deadline`, KHÔNG tự đặt số.
 - **Ranh giới nội dung SRS-cho-BA (xem Pitfalls — Tầng nội dung)** — SRS chỉ chứa requirement nghiệp vụ + ràng buộc đã-được-phê-duyệt (có source/owner). KHÔNG chứa quyết định solution design (nền tảng, thuật toán, endpoint, cấu trúc dữ liệu vật lý, SDK). Những cái đó thuộc dev/architect.
 - **Stop-on-stuck = structured result + preflight zero-write** — nếu 1 phần thiếu info nghiệp vụ không tự suy được, KHÔNG bịa, KHÔNG ghi file dở. Trả về structured result `NEEDS_INPUT` (xem Mục "Stop-on-stuck") → `/srs` gom câu hỏi hỏi anh 1 batch → chạy lại phần đó với answer. Preflight: kiểm đủ input TRƯỚC khi generate; thiếu → zero-write.
@@ -325,6 +326,7 @@ KHÔNG `NEEDS_INPUT` (non-blocking, tự xử):
 
 - @../../../.claude/rules/ba-conventions.md
 - @../../../.claude/rules/project-profile.md
+- @../../../.claude/rules/saas-layer.md
 - @../../../.claude/rules/approval-gate.md
 - @../../../.claude/rules/kg-usage.md
 - @../../../.claude/rules/naming-conventions.md

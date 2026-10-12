@@ -25,6 +25,7 @@ Generate use-case docs **theo chuẩn Cockburn (fully-dressed)**: mỗi UC = **1
 
 - **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 - **L1 approval** trước Write.
+- **Phân tầng SaaS** — con số, danh sách, bật/tắt nghiệp vụ trong bước UC ghi mã `P-…` kèm giá trị khách (vd "dưới `P-nguong-tam-ung` (Delta: 5.000.000 ₫)"), không chép số trần từ SOP; nhánh chỉ chạy khi tham số bật thì ghi điều kiện theo mã P. Profile không ghi bán cho nhiều khách → bỏ qua, báo 1 dòng. Per @../../rules/saas-layer.md.
 - **Review độc lập trước Write** (bước 8b) theo `review-format.md` Mục "Review độc lập khi skill chạy riêng" — finding nghiệp vụ thành câu hỏi cho user, KHÔNG tự quyết; bỏ qua thì in `Review: SKIPPED — {lý do}`.
 - **L2 diff** khi file đã tồn tại — update mode tự động, không cần flag.
 - **Auto-detect upstream + confirm** — scan SRS FR + screens (downstream mode).
@@ -203,6 +204,7 @@ Diagram KHÔNG embed trong UC — thuộc `srs/{feature}-flows.md` / `{feature}-
 - @.claude/rules/ui-common-rules-components.md
 - @../../rules/ba-conventions.md
 - @../../rules/approval-gate.md
+- @../../rules/saas-layer.md
 - @../../rules/review-format.md (Mục Review độc lập khi skill chạy riêng — bước 8b)
 - @../../agents/senior-ba.md
 - @../../rules/kg-usage.md
