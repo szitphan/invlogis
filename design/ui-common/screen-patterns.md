@@ -1,13 +1,15 @@
 ---
 type: shared-screen-patterns
 status: draft
-updated: 2026-10-04
+updated: 2026-10-12
 links:
   - design/design.md
   - design/components.md
   - design/ui-common/conventions.md
   - docs-input/ui-common/web/web-common-rules.md
   - docs-input/ui-common/app/app-common-rules.md
+  - docs/cross-process-flow/brainstorms/cross-process-flow.md
+  - design/_lab/lab-progress.html
 ---
 
 # UI Common Components (CMP)
@@ -29,7 +31,7 @@ không chứa wording cố định; chỗ nào có câu mẫu là trỏ về des
 | CMP-06 | Column Customizer | Bật/tắt, sắp thứ tự cột bảng danh sách — chỉ web | SC-06 |
 | CMP-07 | Action Matrix / Action Sheet | Hành động trên từng bản ghi của danh sách | SC-07 · MSC-04 |
 | CMP-08 | Activity Log | Lịch sử hành động trên màn chi tiết/drawer | SC-08 · MSC-05 |
-| CMP-09 | Stepper | Luồng nghiệp vụ nhiều bước liên tiếp | SC-09 · MSC-06 |
+| CMP-09 | Cross Process Flow (Liên quy trình) | Bản ghi thuộc một quy trình nhiều nghiệp vụ — xem cả quy trình dạng cây từ màn chi tiết | SC-09 · MSC-06 · lab-progress (12/10/2026) |
 | CMP-10 | File Upload | Đính kèm chứng từ, tài liệu | SC-10 · MSC-07 |
 | CMP-11 | Sidebar Menu / Bottom Navigation | Điều hướng chính giữa module/feature | SC-13 · MSC-08 |
 | CMP-12 | Success Bottom Sheet | Chỉ app: sau hành động quan trọng, buộc người dùng chọn bước tiếp theo | MSC-11 |
@@ -44,8 +46,8 @@ hoặc component dự án (mục *Components - innvie logis* của design.md), n
 **design.md** liệt kê mục design.md chứa chi tiết (tách bằng `;`) — `_scripts/ui-common-expand.py` đọc
 dòng này để chép nguyên văn vào Phụ lục A của SRS.
 
-**Việc còn mở (2026-10-01):** CMP-07 cần dựng component dự án Action Matrix · CMP-09 Stepper nghiệp vụ
-cần component riêng · CMP-10 File Upload và CMP-11 Sidebar bản thư viện chưa đạt yêu cầu. Bốn mục này
+**Việc còn mở (2026-10-01):** CMP-07 cần dựng component dự án Action Matrix · CMP-09 Cross Process Flow
+cần component dự án dạng cây · CMP-10 File Upload và CMP-11 Sidebar bản thư viện chưa đạt yêu cầu. Bốn mục này
 đang tạm dùng component Astryx, chưa có ảnh.
 CMP-05 Bộ lọc nâng cao và CMP-06 Tuỳ chỉnh cột: đã có node nhưng ảnh chụp UI chưa đủ rõ (chip co chữ,
 popover tách khỏi ngữ cảnh) — cần chọn/dựng khung chụp riêng rồi gắn lại ảnh.
@@ -145,22 +147,32 @@ _Ảnh: Destructive, Default — node [5046:66967](https://www.figma.com/design/
 
 ### Mobile
 
-Confirm Popup giữa màn, cùng bộ hành động bắt buộc và cùng câu chữ như web.
+Bottom sheet xác nhận (kéo lên từ đáy màn), cùng bộ hành động bắt buộc và cùng câu chữ như web.
+Mẫu: `design/_lab/lab-confirm.html` phương án B (chốt 09/10/2026).
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
+| 0 | Tay nắm | — | — | • Thanh ngang trên đỉnh sheet; vuốt xuống = Huỷ, trừ các trường hợp ở hàng 8 |
 | 1 | Icon hành động | Icon | ReadOnly | • Tông theo loại: phá huỷ / xác nhận / cảnh báo (design.md › Ánh xạ trạng thái nghiệp vụ); luôn đi kèm tiêu đề, không chỉ dựa vào màu |
 | 2 | Tiêu đề | Label | ReadOnly | • Căn giữa, chữ đậm |
 | 3 | Nội dung | Label | ReadOnly | • Như web; tên/mã bản ghi in đậm |
-| 4 | Nút xác nhận | Button | Click | • Full width; phá huỷ dùng biến thể destructive |
-| 5 | Nút huỷ | Button | Click | • Full width, outlined/ghost |
-| 6 | Nền mờ | — | — | • Chạm ngoài = Huỷ; **không** đóng với hành động không hoàn tác được (Xoá) và với popup chặn GR-26 |
+| 4 | Trường lý do | Chip + Text area | Select + Text | • Chỉ khi hành động cần lý do (vd Từ chối): chip lý do nhanh + ô ghi thêm; danh sách chip và bắt buộc hay không do UC khai |
+| 5 | Nút xác nhận | Button | Click | • Full width, đứng trên; phá huỷ dùng biến thể destructive<br>• Loading khi đang gửi |
+| 6 | Nút huỷ | Button | Click | • Full width, ghost, đứng dưới<br>• Huỷ form (GR-13): đảo vai — "Tiếp tục chỉnh sửa" là nút chính, "Bỏ thay đổi" là nút chữ đỏ |
+| 7 | Nền mờ | — | — | • Chạm ngoài = Huỷ |
+| 8 | Khoá đóng | — | — | • **Không** đóng bằng chạm ngoài / vuốt xuống với hành động không hoàn tác được (Xoá) và với popup chặn GR-26 |
+
+**Biến thể Vuốt để xác nhận** — cho hành động quan trọng cần chắc chắn người dùng cố ý (mẫu: `lab-confirm.html`
+phương án E). Cùng sheet trên, thay nút xác nhận (hàng 5) bằng thanh vuốt "Vuốt để [động từ]": kéo hết thanh
+mới gửi, thả giữa chừng thì trượt về; phá huỷ dùng tông destructive. Thêm nút đóng (X) góc phải; nút huỷ giữ ở dưới.
+Trình đọc màn hình / bàn phím: thanh vuốt kích hoạt được bằng Enter/Space.
+- **UC phải khai báo thêm:** hành động nào dùng biến thể vuốt. Không khai → dùng sheet nút bấm thường.
 
 - Thêm trường hợp chỉ app có — **Chuyển site** (chạm bản ghi thuộc site khác): "Chuyển sang [Tên site]?" ·
   "Trang sẽ tải lại theo site mới." → `[Chuyển site] [Huỷ]`. Câu gốc app 2.18: "Bạn đang chuyển sang
   [Tên site]. Trang sẽ được tải lại theo site mới."
 - Back / vuốt back khi form có dữ liệu chưa lưu: GR-13 (Mobile).
-- **Figma:** chưa gắn (Astryx `AlertDialog` trên khung 390 — chưa có chuẩn trong design.md).
+- **Figma:** chưa có node Figma cho sheet xác nhận — chưa có chuẩn trong design.md (mẫu ở lab, chờ vẽ lại).
 
 ## CMP-04 — Pagination
 
@@ -284,23 +296,56 @@ Từ chối (`✕`, "Đã từ chối phê duyệt [tên feature]") · Thu hồi
 - Timeline dọc, mới nhất trên cùng, nội dung mốc như web.
 - **Figma:** `Activity Log / Panel` Platform = Mobile (khung [5160:3295](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=5160-3295)).
 
-## CMP-09 — Stepper
+## CMP-09 — Cross Process Flow (Liên quy trình)
 
-Thanh tiến trình đầu màn cho luồng nghiệp vụ nhiều bước liên tiếp.
+Xem cả quy trình nhiều nghiệp vụ dạng cây từ màn chi tiết của bất kỳ bản ghi nào trong quy trình: bước
+chính, nhánh phát sinh, ngã rẽ chưa chốt, bước thuộc module khác, bước công nợ. Phần nghiệp vụ (lưu
+nguồn, trạng thái bước và quy trình, mã quy trình, quyền xem) ở feature
+[[docs/cross-process-flow/brainstorms/cross-process-flow.md|cross-process-flow]]; mục này giữ phần hiển thị.
+Chỉ dùng cho quy trình nhiều nghiệp vụ. Vòng đời của 1 bản ghi dùng nhãn trạng thái + CMP-08, không dùng CMP-09.
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
-| 1 | Bước | Label | Click | • Trạng thái: đã xong / hiện tại / chưa tới<br>• Click bước đã xong → chuyển sang màn nghiệp vụ của bước đó (nếu có quyền) |
+| 1 | Dòng quy trình | Row | Click | • Web: đầu màn chi tiết · Mobile: thẻ quy trình<br>• Tên luồng · thanh tiến độ · "Xong x/y bước · n nhánh phát sinh" · "Bước trước: …" (bước chính) hoặc "Phát sinh từ: …" (nhánh phát sinh)<br>• Bản ghi không thuộc quy trình, hoặc luồng độc lập chưa có nhánh → không hiện (R11)<br>• Tải lỗi → "Không tải được quy trình." + Thử lại; màn chi tiết vẫn dùng bình thường |
+| 2 | Sơ đồ | Popup (web) · Sheet (mobile) | Click | • Mở từ màn chi tiết: chọn sẵn bước "Ở đây" · mở từ danh sách Quy trình: chưa chọn bước nào<br>• Mặc định vừa khung; zoom 40–250%, kéo, nút vừa khung<br>• Card tóm tắt góc trên trái: thanh tiến độ + số bước theo trạng thái<br>• Đang tải: "Đang tải sơ đồ…" · lỗi: E-common-008 / E-common-009 + Thử lại · dữ liệu đổi: Theo GR-27 |
+| 3 | Thẻ bước | Card | Click | • Icon nghiệp vụ · tên bước · mã chứng từ (`N/A` khi chưa tạo) · trạng thái của bản ghi (R7)<br>• Nhãn Phát sinh góc trên trái (R16) · ghim "Ở đây" góc trên phải (R10) · nhãn module khi khác module đang mở (R9)<br>• Bước chính chưa tới: viền đứt + "Chưa tạo" (R5)<br>• Chọn → viền màu + mở panel (#6) |
+| 4 | Đường nối | Line | ReadOnly | • Nét liền: đã tạo · nét đứt: chưa tạo · vệt sáng chạy theo chiều đi khi bước đích Đang triển khai, tắt khi người dùng bật giảm chuyển động (R15)<br>• Trên đường chỉ có nhãn điều kiện của bước chính, 1 dòng, viết cho người dùng đọc (R16, R17)<br>• Nhiều bước trước cùng vào 1 bước: mỗi đường 1 cửa vào, chip "Điều kiện x/y" trên đường nguồn (R1) |
+| 5 | Nút ngã rẽ | Card | Click | • "Chưa xác định …" khi bước sau phụ thuộc lựa chọn chưa có; panel liệt kê các hướng có thể đi (R6) |
+| 6 | Panel chi tiết bước | Panel (web) · Sheet (mobile) | — | • Web: rộng 300px, nổi đè cột phải; nội dung dài thì cuộn<br>• Đầu panel: tên, mã, trạng thái, nhãn Ở đây / Phát sinh / module; nhánh phát sinh có thêm lý do phát sinh (không ghi mã TH)<br>• Lịch sử hoạt động: 5 dòng mới nhất, Theo CMP-08 + link "Xem tất cả" mở màn chi tiết<br>• Bước chưa tạo: "Chưa có hoạt động. Bước này chưa được tạo."<br>• Không có quyền xem bước: ẩn lịch sử + nút, hiện E-common-011 tại chỗ. Override GR-26: hiện trong panel thay vì popup chặn — lý do: chỉ 1 bước không xem được, không chặn cả màn |
+| 7 | Nút mở | Button | Click | • "Mở màn hình chi tiết", ghim đáy panel. Web: mở cùng tab, đóng popup (Back trình duyệt về màn cũ, popup không mở lại) · Mobile: đẩy màn mới<br>• Bước công nợ: "Mở bảng công nợ", lọc theo nhà cung cấp + khoảng thời gian của bảng công nợ (R8)<br>• Bản ghi vừa bị thu quyền: popup chặn E-common-011 theo GR-26 |
 
-- **Figma:** tạm Astryx `Stepper` + `Stepper / Step` · node: [5045:66913](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=5045-66913) · **chưa chuẩn — xử lý sau:** Stepper nghiệp vụ phức tạp hơn bản thư viện, cần dựng component dự án · ảnh: chưa gắn
+**Quy tắc vẽ:**
+
+| Mã | Quy tắc |
+|---|---|
+| R1 | Vẽ theo nguồn, không theo thứ tự thời gian: mỗi bước nối về đúng bản ghi tạo ra nó. Bước cần nhiều bước trước cùng xong thì nối từ tất cả các bước đó về 1 nút. Nhánh không bắt buộc chỉ nối vào bước sau khi bước sau thật sự chờ nhánh đó. |
+| R2 | Nhánh phát sinh có nhãn Phát sinh trên thẻ, viền liền như bước khác. Lý do phát sinh chỉ ghi ở panel; kiểu đường không dùng để báo phát sinh. |
+| R3 | Nhánh phát sinh sinh tiếp bước khác thì nối vào chính nhánh đó (vd Nhập kho dư → Bồi thường). |
+| R4 | Mỗi bản ghi là 1 bước, không gộp. Nhiều phiếu cùng loại cùng nguồn là các bước anh em cùng tên, phân biệt bằng mã; không ghi "lần 1, lần 2". |
+| R5 | Nhánh phát sinh chỉ hiện khi điều kiện đã xảy ra. Bước chính chưa tới vẫn hiện, ghi "Chưa tạo". |
+| R6 | Bước sau phụ thuộc lựa chọn chưa có → 1 nút ngã rẽ "Chưa xác định …". |
+| R7 | Thẻ ghi trạng thái của bản ghi, màu theo nhóm: xong · đang chờ/đang làm · từ chối · chưa tạo, luôn kèm icon (✓ · đồng hồ · ▶ · ✕ · vòng đứt). 4 trạng thái bước chỉ quyết định icon và màu đường nối. Bước bị từ chối không làm mất nhánh con đã có. |
+| R8 | Bước thanh toán trả sau ghi "Công nợ [Tên nhà cung cấp]", mở bảng công nợ đã lọc. |
+| R9 | Bước thuộc module khác gắn nhãn module (vd Cây dầu). |
+| R10 | Bước của màn đang mở có ghim "Ở đây"; đường từ gốc tới bước đó tô đậm. Viền màu chỉ dành cho bước đang chọn. |
+| R11 | Luồng độc lập chưa có nhánh thì không hiện dòng quy trình; có nhánh đầu tiên thì bản ghi gốc là nút đầu cây. |
+| R12 | Dòng tóm tắt: "Xong x/y bước · n nhánh phát sinh". |
+| R13 | Nút tạo nghiệp vụ tiếp theo đặt ở vùng hành động đầu trang, không đặt trên sơ đồ. |
+| R14 | Dàn sơ đồ: cột = bậc (bước đứng sau bước trước xa nhất của nó); bước chính giữ hàng bước trước, nhánh xuống hàng trống kế tiếp; đường chỉ vuông góc, không cắt qua thẻ; nhãn ở giữa đường. |
+| R15 | Đường nối vào bước Đang triển khai là nét liền có vệt sáng chạy; nét đứt chỉ cho bước chưa tạo. |
+| R16 | Nhãn Phát sinh gắn cố định góc trên trái thẻ, đối xứng ghim "Ở đây" góc trên phải; không đặt nhãn trên đường. |
+| R17 | Khe giữa 2 cột = nhãn dài nhất trên đường + 16px mỗi bên, tối thiểu 64px; khe giữa 2 hàng 32px. Nhãn điều kiện 1 dòng, mục tiêu ≤40 ký tự, không cắt chữ; góc rẽ cách bước trước 16px. Cây trên 20 bước vẫn vẽ, mặc định vừa khung. |
+
+- **Figma:** chưa có — Astryx `Stepper` chỉ vẽ được dạng thẳng, cần dựng component dự án dạng cây · node: chưa gắn · ảnh: chưa gắn. Mẫu tương tác: `design/_lab/lab-progress.html`.
 - **design.md:** —
-- **UC phải khai báo:** danh sách bước + thứ tự; điều kiện hoàn thành mỗi bước; bước nào được click quay lại.
+- **UC phải khai báo:** bảng liên quy trình của nghiệp vụ (bước · tạo từ · trigger · trường hợp phát sinh · điều kiện · 1 hay nhiều bản ghi · cho thu hồi/xoá khi đã có bước con · cho xoá), câu chữ viết cho người dùng đọc; tên luồng; tên bước + icon nghiệp vụ; màn chi tiết đích của mỗi bước.
 
 ### Mobile
 
-- Thanh bước cố định đầu màn, ngay dưới thanh điều hướng. Bước hiện tại nổi bật + chữ đậm · bước đã qua
-  icon ✓ · bước chưa tới màu nhạt — luôn có icon/chữ, không chỉ dựa vào màu. Tên bước dưới icon.
-- Chạm bước để chuyển, cùng điều kiện như web.
+- Thẻ quy trình trên màn chi tiết: tên quy trình là chính, dòng tóm tắt là phụ.
+- Sheet: card tóm tắt như web + cây rẽ nhánh dọc, thẻ cùng dạng web; vuốt ngang khi cây rộng hơn màn.
+- Panel bước: không nền màu, pill trạng thái có viền, nhãn đặt bên phải.
+- "Mở màn hình chi tiết" đẩy màn mới; Back về màn trước, sheet đã đóng.
 - **Figma:** chưa gắn.
 
 ## CMP-10 — File Upload

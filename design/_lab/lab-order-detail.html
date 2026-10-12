@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lệnh của lái xe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab-kit.css">
+<style>
+.k-h1,.k-h2,.k-sec h3,.d-sh-t,.o-next .nm{font-family:Manrope,Inter,sans-serif;letter-spacing:-.02em}
+
+/* ---------- Đầu màn (giống lab-repair-detail) ---------- */
+.k-ib.bd{background:var(--card);box-shadow:inset 0 0 0 1px var(--rule)}
+.d-top{display:flex;align-items:center;gap:10px;margin:6px 0 14px}
+.d-top .sp{flex:1}
+.d-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 4px}
+.d-title .k-h1{margin:0}
+.d-lead{font-size:var(--fs-sm);color:var(--ink-2);margin:0 0 14px}
+.k-pill.blue{background:#e7effd;color:#1f4fb8}
+
+/* ---------- Dải báo (bị trả lại / đồng bộ) ---------- */
+.o-strip{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border-radius:16px;font-size:13.5px;line-height:1.4;margin-bottom:10px}
+.o-strip .k-ic{margin-top:1px}
+.o-strip b{font-weight:600}
+.o-strip span{display:block;font-size:12.5px;opacity:.8;margin-top:2px}
+.o-strip.y{background:#fff3dc;color:#7a4a00}
+.o-strip.g{background:var(--well);color:var(--ink-2)}
+.o-strip.r{background:#fdecec;color:#b42318}
+.o-strip .act{margin-left:auto;font-weight:600;white-space:nowrap;align-self:center;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- Thẻ chính: điểm tiếp theo ---------- */
+.o-next .lbl{font-size:12.5px;color:var(--ink-3);font-weight:500;display:flex;align-items:center;gap:6px}
+.o-next .nm{font-size:21px;font-weight:700;margin:6px 0 2px;line-height:1.2}
+.o-next .ad{font-size:13.5px;color:var(--ink-2)}
+.o-next .need{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 14px}
+.o-next .need .k-chip{height:30px;font-size:12.5px;padding:0 10px}
+.o-next .need .k-chip.miss{background:#fff3dc;color:#7a4a00}
+.o-next .need .k-chip.ok{background:#e8f5ec;color:#1b7542}
+
+/* ---------- Lộ trình (stepper dọc) ---------- */
+.o-route>div{display:flex;gap:12px;cursor:pointer}
+.o-route .ln{display:flex;flex-direction:column;align-items:center;width:24px;flex:none}
+.o-route .dc{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:11.5px;font-weight:700;background:var(--well);color:var(--ink-3);flex:none}
+.o-route .done .dc{background:var(--ink);color:#fff}
+.o-route .cur .dc{background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.o-route .ln u{flex:1;width:2px;background:var(--rule);margin:4px 0;text-decoration:none;min-height:14px}
+.o-route .done .ln u{background:var(--ink)}
+.o-route>div:last-child .ln u{display:none}
+.o-route .tx{flex:1;padding:2px 0 16px}
+.o-route .tx b{display:block;font-weight:600;font-size:14.5px;line-height:1.3}
+.o-route .tx span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.o-route .rt{font-size:12.5px;color:var(--ink-2);white-space:nowrap;padding-top:3px;text-align:right}
+.o-route .rt.miss{color:#8a5300;font-weight:600}
+
+/* ---------- Ô hành động ---------- */
+.o-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.o-act{background:var(--well);border-radius:var(--r-inner);padding:12px;display:flex;flex-direction:column;gap:10px;cursor:pointer;border:0;font:inherit;text-align:left;color:var(--ink)}
+.o-act .k-icc{background:var(--card);width:34px;height:34px}
+.o-act b{font-size:14px;font-weight:600;line-height:1.25}
+.o-act span{font-size:12px;color:var(--ink-3);margin-top:-6px}
+.o-act span.w{color:#8a5300;font-weight:600}
+
+/* ---------- Chi phí ---------- */
+.o-cost .k-row .tx b{font-size:14px}
+.o-cost .k-pill{height:22px;font-size:11.5px;padding:0 8px 0 6px}
+
+/* ---------- Chân màn + sheet + toast ---------- */
+.d-foot{position:absolute;left:0;right:0;bottom:0;padding:12px 16px 26px;background:var(--card);box-shadow:0 -1px 0 var(--rule);z-index:5}
+.d-foot .hint{font-size:12.5px;color:var(--ink-3);text-align:center;margin:0 0 10px}
+.d-foot .wait{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:var(--r-pill);background:var(--well);color:var(--ink-2);font-weight:600;font-size:14.5px}
+.k-btn.dng{background:#b42318;color:#fff}
+.d-sheet{position:absolute;inset:0;z-index:8;background:#0a0a0e6b;display:flex;flex-direction:column;justify-content:flex-end}
+.d-sheet .pn{background:var(--card);border-radius:28px 28px 0 0;padding:8px 16px 30px;max-height:88%;overflow-y:auto;scrollbar-width:none}
+.d-sheet .hb{width:40px;height:5px;border-radius:3px;background:#d6d6dc;margin:0 auto 10px}
+.d-sh-t{font-size:22px;font-weight:700;margin-bottom:6px}
+.d-sh-p{font-size:14px;color:var(--ink-2);margin:0 0 16px;line-height:1.5}
+.d-sh-ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;margin:6px 0 12px}
+.d-field{border-radius:var(--r-inner);background:var(--well);padding:10px 14px;margin-bottom:16px}
+.d-field label{display:block;font-size:12.5px;color:var(--ink-2)}
+.d-field textarea{width:100%;border:0;background:none;font:inherit;font-size:15px;resize:none;outline:none;padding:2px 0 0;color:var(--ink)}
+.o-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.o-chips .k-chip{border:0;font-family:inherit;color:var(--ink);cursor:pointer}
+.o-chips .k-chip.on{background:var(--ink);color:#fff}
+.o-miss{background:var(--well);border-radius:var(--r-inner);padding:4px 14px;margin-bottom:16px}
+.o-miss>div{display:flex;align-items:center;gap:10px;padding:10px 0;font-size:14px}
+.o-miss>div+div{border-top:1px solid var(--rule)}
+.o-miss .k-ic{color:#8a5300}
+.d-toast{position:absolute;left:16px;right:16px;bottom:120px;z-index:9;background:var(--ink);color:#fff;border-radius:16px;padding:12px 14px;display:flex;gap:10px;align-items:center;font-size:14px}
+</style>
+</head>
+<body class="b-neutral">
+<div class="lab-top">
+  <h1>UI Lab · Lệnh của lái xe</h1>
+  <div class="lab-ctl">Thương hiệu <div class="lab-opts" data-k="brand"><button data-v="neutral">Trung tính</button><button data-v="innvie">Innvie</button><button data-v="delta">Delta</button></div></div>
+  <div class="lab-ctl">Nền <div class="lab-opts" data-k="surf"><button data-v="c">C · trắng</button><button data-v="a">A · xám</button></div></div>
+  <button class="lab-export" id="export">Copy góp ý gửi Claude</button>
+</div>
+<main class="lab-main">
+  <section class="lab-box">
+    <h2>Màn [21] Lệnh của lái xe (dispatch-coordination): nhận Lệnh, đi từng điểm, ghi chi phí, chốt Lệnh</h2>
+    <p>Nội dung theo wireframe <code>docs/dispatch-coordination/html-wireframe/order-run-flow.html</code> màn 2 <b>bản nháp 07/10/2026</b> (bảng mô tả ở <code>ascii-wireframe/order-run-flow.md</code> › order-detail-mobile). Wireframe chỉ cấp <i>nội dung</i>; bố cục, control, thẻ là thử nghiệm của lab.</p>
+    <p class="lab-muted">Mỗi máy bấm được: Nhận/Từ chối, chọn lý do, Bắt đầu, Chốt Lệnh, Thử lại đồng bộ, Sang điểm tiếp. Dữ liệu mẫu. Thêm <code>#check</code> vào URL để tự kiểm chữ đè / tràn khung.</p>
+  </section>
+  <div class="lab-row" id="screens"></div>
+  <section class="lab-box" style="margin-top:24px">
+    <h2>Chỗ lab khác wireframe hoặc chưa có nguồn — cần chốt</h2>
+    <ul class="lab-muted" style="margin:0;padding-left:18px;font-size:13px">
+      <li><b>Thẻ "Điểm tiếp theo"</b> đặt trên cùng, lộ trình đầy đủ xếp dưới. Wireframe chỉ có danh sách điểm ngang hàng nhau.</li>
+      <li><b>Từ chối Lệnh</b>: wireframe là màn riêng [22]; lab dùng sheet B (đã chốt cho xác nhận ngày 09/10) với chip lý do. Danh sách lý do lấy đúng từ wireframe [22]: Xe hỏng · Lái xe ốm hoặc bận · Trùng Lệnh khác · Khác.</li>
+      <li><b>Sang điểm tiếp khi thiếu ảnh</b> (E-dispatch-003): wireframe là popup giữa màn; lab dùng sheet B dạng lỗi + danh sách ảnh còn thiếu.</li>
+      <li><b>Điểm và số ảnh bắt buộc</b> theo loại hàng còn là câu hỏi mở OQ-47 — số "ảnh 0/2", tên góc chụp là dữ liệu mẫu.</li>
+      <li><b>Nhập nhiệt độ</b> chỉ có với hàng lạnh; chu kỳ nhắc còn mở (OQ-43). Lệnh mẫu tự đặt là hàng lạnh 2–8°C để thấy ô này.</li>
+      <li><b>Nhãn chi phí</b> (Trong định mức · Chờ duyệt · Đã duyệt · Bị từ chối) là nhãn đề xuất trong wireframe, chưa chốt với khách.</li>
+      <li><b>Câu "Đồng bộ lỗi" + Thử lại</b> là câu đề xuất của wireframe, chưa có trong tài liệu khách.</li>
+      <li><b>Bị trả lại</b>: lab hiện cả lý do và việc cần làm ngay ("Chụp biên bản"); wireframe chỉ hiện lý do + người, giờ.</li>
+    </ul>
+  </section>
+</main>
+<div class="lab-toast" id="lab-toast"></div>
+<script src="lab-kit.js"></script>
+<script>
+P.thermo=P.thermo||"M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z";
+P.cloud=P.cloud||"M17.5 19H9a7 7 0 1 1 6.7-9h1.8a4.5 4.5 0 1 1 0 9z";
+P.retry=P.retry||"M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5";
+P.nav=P.nav||"M3 11 22 2l-9 19-2-8z";
+P.hist=P.hist||"M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5M12 7v5l3 2";
+P.wallet=P.wallet||"M3 7a2 2 0 0 1 2-2h13v4M3 7v11a2 2 0 0 0 2 2h15V9H5a2 2 0 0 1-2-2zM16 14h.01";
+
+const O={code:"LVT-0456",plate:"15C-456.78",kind:"Air nhập · hàng lạnh 2–8°C",job:"JB-0124",
+ pts:[{nm:"TCS Nội Bài",ad:"Sân bay Nội Bài, Sóc Sơn",task:"Nhận hàng",need:["Đuôi xe","Phiếu xuất kho"],arr:"09:40"},
+      {nm:"Kho Hải Long",ad:"KCN Nam Sách, Hải Dương",task:"Giao hàng",need:["Đuôi xe","Hàng đã dỡ","Biên bản giao hàng"],eta:"dự kiến 12:30"}],
+ cost:[["Phí kho TCS","350.000 ₫","idle","Trong định mức"],["Phí bốc xếp","600.000 ₫","wait","Chờ duyệt"]],
+ reasons:["Xe hỏng","Lái xe ốm hoặc bận","Trùng Lệnh khác","Khác"]};
+
+/* status: giao (Đã giao lái xe) · nhan (Lái xe đã nhận, chưa có GPS khởi hành) · chay (Đang thực hiện) · chot (Lái xe đã chốt)
+   at: số điểm đã đến; shot: số ảnh đã chụp ở điểm đang tới; sync: null|wait|err; back: bị trả lại; sheet: null|reject|miss|close */
+const PH=[
+ {cap:"1 · Lệnh mới giao",sm:"Đã giao lái xe · Nhận là nút chính, Từ chối phụ",st:{status:"giao",at:0,shot:0}},
+ {cap:"2 · Từ chối Lệnh",sm:"Sheet B + chip lý do (wireframe: màn riêng [22])",st:{status:"giao",at:0,shot:0,sheet:"reject",why:"Xe hỏng"}},
+ {cap:"3 · Đã nhận, chưa có GPS",sm:"GPS chưa ghi khởi hành → lái xe bấm Bắt đầu",st:{status:"nhan",at:0,shot:0}},
+ {cap:"4 · Đang thực hiện",sm:"Đã qua điểm 1, đang tới Kho Hải Long",st:{status:"chay",at:1,shot:0}},
+ {cap:"5 · Thiếu ảnh khi sang điểm",sm:"E-dispatch-003 · sheet lỗi + ảnh còn thiếu",st:{status:"chay",at:1,shot:1,sheet:"miss"}},
+ {cap:"6 · Mất sóng · đồng bộ lỗi",sm:"Ảnh giữ trên máy; Thử lại ngay trên dải báo",st:{status:"chay",at:2,shot:3,sync:"err"}},
+ {cap:"7 · Bị trả lại",sm:"Điều vận trả Lệnh · lý do + việc cần làm ngay",st:{status:"chay",at:2,shot:2,back:true}},
+ {cap:"8 · Đã chốt, chờ duyệt",sm:"Hết nút hành động · nhãn Chờ duyệt",st:{status:"chot",at:2,shot:3}},
+];
+const STL={giao:["blue","Đã giao lái xe","truck"],nhan:["accept","Lái xe đã nhận","check"],chay:["doing","Đang thực hiện","nav"],chot:["wait","Lái xe đã chốt","clock"]};
+const spill=k=>`<span class="k-pill ${STL[k][0]}">${I(STL[k][2],14,2)}${STL[k][1]}</span>`;
+const cpill=(k,t)=>`<span class="k-pill ${k}">${t}</span>`;
+
+function body(s){
+ const done=s.status!=="giao"&&s.status!=="nhan";
+ const cur=Math.min(s.at,O.pts.length-1), p=O.pts[cur], need=p.need.length;
+ const shot=s.at>=O.pts.length?need:s.shot;
+ const head=`<div class="d-top"><button class="k-ib bd" aria-label="Quay lại">${I("back")}</button><div class="sp"></div><button class="k-ib bd" aria-label="Lịch sử Lệnh">${I("hist",19)}</button></div>
+  <div class="d-title"><div class="k-h1">${O.code}</div>${spill(s.status)}</div><p class="d-lead">${[O.plate,O.kind,O.job].map(x=>`<span style="white-space:nowrap">${x}</span>`).join(" · ")}</p>`;
+ let strips="";
+ if(s.back)strips+=`<div class="o-strip y">${I("alert",17)}<div><b>Bị trả lại: thiếu ảnh biên bản giao hàng</b><span>Minh Đỗ · 07/10 15:20</span></div><a class="act">Chụp</a></div>`;
+ if(s.sync==="wait")strips+=`<div class="o-strip g">${I("cloud",17)}<div><b>Chờ đồng bộ</b><span>Ảnh sẽ gửi khi có mạng.</span></div></div>`;
+ if(s.sync==="err")strips+=`<div class="o-strip r">${I("cloud",17)}<div><b>Đồng bộ lỗi · 3 ảnh chưa gửi</b><span>Ảnh vẫn lưu trên máy.</span></div><a class="act" data-a="retry">Thử lại</a></div>`;
+
+ /* Thẻ chính: điểm tiếp theo / điểm đầu tiên */
+ const lastDone=s.at>=O.pts.length;
+ const nxt=lastDone?`<div class="k-card o-next"><div class="lbl">${I("check",14,2.2)}Đã qua đủ ${O.pts.length} điểm</div><div class="nm">Sẵn sàng chốt Lệnh</div><div class="ad">Kiểm lại chứng từ rồi bấm Chốt Lệnh.</div></div>`
+  :`<div class="k-card o-next"><div class="lbl">${I("pin",14,2)}${s.status==="giao"?"Điểm đầu tiên":"Điểm tiếp theo"} · ${cur+1}/${O.pts.length}</div>
+   <div class="nm">${p.nm}</div><div class="ad">${p.task} · ${p.ad}</div>
+   <div class="need">${p.need.map((n,i)=>`<span class="k-chip ${done&&i<shot?"ok":done?"miss":""}">${done&&i<shot?I("check",13,2.4):I("camera",13,2)}${n}</span>`).join("")}</div>
+   ${done?`<div class="k-btns"><button class="k-btn sec sm">${I("nav",16)}Chỉ đường</button><button class="k-btn pri sm" data-a="sheet:miss">${I("camera",16)}Chụp · ${shot}/${need}</button></div>`
+     :`<button class="k-btn sec sm full">${I("nav",16)}Xem đường đi</button>`}</div>`;
+
+ const route=`<div class="k-sec"><h3>Lộ trình</h3><a>${O.pts.length} điểm</a></div><div class="k-card"><div class="o-route">${O.pts.map((x,i)=>{
+   const cls=i<s.at?"done":i===s.at&&done?"cur":"";
+   const rt=i<s.at?`Đã đến ${x.arr||"11:55"}`:x.eta?x.eta:"";
+   const ph=i<s.at?`ảnh ${x.need.length}/${x.need.length}`:i===s.at&&done?`ảnh ${shot}/${x.need.length}`:`ảnh 0/${x.need.length}`;
+   return `<div class="${cls}"><div class="ln"><div class="dc">${cls==="done"?I("check",12,3):i+1}</div><u></u></div><div class="tx"><b>${x.nm}</b><span>${x.task} · ${ph}</span></div><div class="rt ${i===s.at&&done&&shot<x.need.length?"miss":""}">${rt}</div></div>`}).join("")}</div></div>`;
+
+ const acts=done||s.status==="chot"?`<div class="k-sec"><h3>Việc trên Lệnh</h3></div><div class="o-acts">
+   <button class="o-act"><div class="k-icc">${I("thermo",17)}</div><b>Nhập nhiệt độ</b><span class="${s.status==="chay"?"w":""}">${s.status==="chay"?"Đến hạn ghi lúc 12:00":"Đã ghi 4 lần"}</span></button>
+   <button class="o-act"><div class="k-icc">${I("receipt",17)}</div><b>Ghi chi phí</b><span>${O.cost.length} khoản</span></button>
+   <button class="o-act"><div class="k-icc">${I("wallet",17)}</div><b>Yêu cầu thanh toán</b><span>Chưa có</span></button>
+   <button class="o-act"><div class="k-icc">${I("file",17)}</div><b>Biên bản giao hàng</b><span class="${s.at>=1&&shot<need?"w":""}">${s.status==="chot"?"Khách đã ký":"Làm tại điểm giao"}</span></button></div>`:"";
+
+ const cost=done||s.status==="chot"?`<div class="k-sec"><h3>Chi phí</h3><a>950.000 ₫</a></div><div class="k-card tight o-cost">${O.cost.map(c=>`<div class="k-row"><div class="tx"><b>${c[0]}</b><span>${c[1]}</span></div>${cpill(c[2],c[3])}</div>`).join("")}</div>`:"";
+
+ const info=s.status==="giao"||s.status==="nhan"?`<div class="k-card"><div class="k-kv">
+   <div><span>Nhận trước</span><b>07/10 13:00</b></div><div><span>Hàng</span><b>12 kiện · 1,8 tấn</b></div><div><span>Điều vận</span><b>Minh Đỗ</b></div></div></div>${route}`:route;
+
+ const main=strips+nxt+info+acts+cost;
+
+ let foot="";
+ if(s.status==="giao")foot=`<div class="d-foot" data-layer><div class="k-btns"><button class="k-btn sec" style="box-shadow:inset 0 0 0 1px var(--rule)" data-a="sheet:reject">Từ chối</button><button class="k-btn pri" data-a="do:nhan">Nhận Lệnh</button></div></div>`;
+ else if(s.status==="nhan")foot=`<div class="d-foot" data-layer><p class="hint">Chưa nhận được tín hiệu GPS khởi hành</p><button class="k-btn pri full" data-a="do:chay">${I("nav",18)}Bắt đầu chạy</button></div>`;
+ else if(s.status==="chay")foot=`<div class="d-foot" data-layer><button class="k-btn pri full" data-a="sheet:close">Chốt Lệnh</button></div>`;
+ else foot=`<div class="d-foot" data-layer><div class="wait">${I("clock",18)}Chờ điều vận duyệt</div></div>`;
+
+ let sheet="";
+ if(s.sheet==="reject")sheet=`<div class="d-sh-ic" style="background:#fdecec;color:#b42318">${I("x",24,2.2)}</div><div class="d-sh-t">Từ chối Lệnh ${O.code}?</div>
+   <p class="d-sh-p">TCS Nội Bài → Kho Hải Long. Lệnh sẽ về điều vận để giao lại.</p>
+   <div class="o-chips">${O.reasons.map(r=>`<button class="k-chip ${s.why===r?"on":""}" data-a="why:${r}">${r}</button>`).join("")}</div>
+   <div class="d-field"><label>Ghi chú${s.why==="Khác"?" (bắt buộc)":""}</label><textarea rows="2" maxlength="500" placeholder="Ghi thêm cho điều vận"></textarea></div>
+   <div class="k-btns"><button class="k-btn sec" style="box-shadow:inset 0 0 0 1px var(--rule)" data-a="close">Quay lại</button><button class="k-btn dng" data-a="do:rejected">Gửi từ chối</button></div>`;
+ if(s.sheet==="miss"){const left=p.need.slice(s.shot);
+  sheet=`<div class="d-sh-ic" style="background:#fff3dc;color:#8a5300">${I("camera",24,2)}</div><div class="d-sh-t">Chưa chụp đủ ảnh</div>
+   <p class="d-sh-p">Còn thiếu ảnh tại ${p.nm}:</p><div class="o-miss">${left.map(n=>`<div>${I("camera",16,2)}${n}</div>`).join("")}</div>
+   <div class="k-btns"><button class="k-btn sec" style="box-shadow:inset 0 0 0 1px var(--rule)" data-a="close">Đóng</button><button class="k-btn pri" data-a="close">Chụp</button></div>`;}
+ if(s.sheet==="close")sheet=s.at>=O.pts.length&&!s.back
+  ?`<div class="d-sh-ic" style="background:#e8f5ec;color:#1b7542">${I("check",24,2.2)}</div><div class="d-sh-t">Chốt Lệnh ${O.code}?</div>
+   <p class="d-sh-p">Đủ ảnh ${O.pts.length} điểm, biên bản giao hàng, nhật ký nhiệt. Sau khi chốt, Lệnh chờ điều vận duyệt.</p>
+   <div class="k-btns"><button class="k-btn sec" style="box-shadow:inset 0 0 0 1px var(--rule)" data-a="close">Huỷ bỏ</button><button class="k-btn pri" data-a="do:chot">Chốt</button></div>`
+  :`<div class="d-sh-ic" style="background:#fdecec;color:#b42318">${I("alert",24,2)}</div><div class="d-sh-t">Chưa chốt được Lệnh</div>
+   <p class="d-sh-p">Còn thiếu:</p><div class="o-miss"><div>${I("file",16,2)}Biên bản giao hàng</div><div>${I("receipt",16,2)}Chứng từ chi phí nâng hạ</div></div>
+   <div class="k-btns"><button class="k-btn sec" style="box-shadow:inset 0 0 0 1px var(--rule)" data-a="close">Đóng</button><button class="k-btn pri" data-a="close">Bổ sung</button></div>`;
+ if(sheet)sheet=`<div class="d-sheet" data-layer data-a="close-bg"><div class="pn"><div class="hb"></div>${sheet}</div></div>`;
+ const toast=s.toast?`<div class="d-toast" data-layer>${I("check",18,2.2)}${s.toast}</div>`:"";
+ return phone(S.surf,head+main,foot+sheet+toast);
+}
+
+const S=labStore("uilab-order-detail",{brand:"neutral",surf:"c",note:{}});
+const live=PH.map(p=>Object.assign({sheet:null,sync:null,back:false},p.st));
+function drawOne(i){document.querySelector(`[data-ph="${i}"] .slot`).innerHTML=body(live[i])}
+function render(){
+ document.body.className="b-"+S.brand;
+ document.getElementById("screens").innerHTML=PH.map((p,i)=>`<div class="lab-col" data-ph="${i}" data-check="${p.cap}"><div class="lab-cap">${p.cap}<small>${p.sm}</small></div><div class="slot"></div>
+   <input class="lab-note" data-note="p${i+1}" placeholder="Góp ý màn ${i+1}…" value="${(S.note["p"+(i+1)]||"").replace(/"/g,"&quot;")}"></div>`).join("");
+ PH.forEach((_,i)=>drawOne(i));
+}
+document.addEventListener("click",e=>{
+ const col=e.target.closest("[data-ph]");if(!col)return;const el=e.target.closest("[data-a]");if(!el)return;
+ const i=+col.dataset.ph,s=live[i],a=el.dataset.a;
+ if(a==="close-bg"&&e.target!==el)return;
+ const k=a.slice(0,a.indexOf(":")<0?a.length:a.indexOf(":")),v=a.slice(k.length+1);
+ s.toast=null;
+ if(k==="sheet")s.sheet=v;
+ else if(k==="close"||k==="close-bg")s.sheet=null;
+ else if(k==="why")s.why=v;
+ else if(k==="retry"){s.sync=null;s.toast="Đã gửi 3 ảnh"}
+ else if(k==="do"){s.sheet=null;
+  if(v==="nhan")s.status="nhan",s.toast="Đã nhận Lệnh "+O.code;
+  else if(v==="chay")s.status="chay",s.toast="Đã bắt đầu chạy";
+  else if(v==="chot")s.status="chot",s.toast="Đã chốt Lệnh";
+  else if(v==="rejected")s.toast="Đã gửi từ chối cho điều vận";}
+ else return;
+ drawOne(i);
+});
+render();labBindOpts(S,render);
+document.addEventListener("input",e=>{const k=e.target.dataset.note;if(!k)return;S.note[k]=e.target.value;S.save()});
+document.getElementById("export").onclick=()=>{
+ const L=["# Góp ý màn Lệnh của lái xe (lab-order-detail)","",`- Đang xem: ${S.brand} · nền ${S.surf.toUpperCase()}`];
+ PH.forEach((p,i)=>{if(S.note["p"+(i+1)])L.push(`- ${p.cap}: ${S.note["p"+(i+1)]}`)});
+ labCopy(L.join("\n"));
+};
+</script>
+<script src="lab-font.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapping sơ đồ lốp</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1f1f3;--card:#fff;--ink:#121214;--ink2:#5c5c66;--ink3:#93939d;--line:#e3e3e8;--well:#f4f4f6;
+  --steer:#2f6db5;--load:#121214;--spare:#8a5300;--ok:#1b7542;--ok-bg:#e8f5ec;--warn:#8a5300;--warn-bg:#fff3dc;--bad:#b42318;--bad-bg:#fdecec}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#141416;--card:#1d1d20;--ink:#ececf0;--ink2:#b4b4bc;--ink3:#8a8a94;--line:#2c2c31;--well:#26262a;--load:#ececf0;--steer:#7fb0f0}}
+:root[data-theme="dark"]{--bg:#141416;--card:#1d1d20;--ink:#ececf0;--ink2:#b4b4bc;--ink3:#8a8a94;--line:#2c2c31;--well:#26262a;--load:#ececf0;--steer:#7fb0f0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1500px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:20px;margin:0 0 4px}h2{font-size:17px;margin:26px 0 6px}
+.sub{color:var(--ink2);margin:0 0 14px;font-size:13px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px;color:var(--ink2);align-items:center}
+.sw{display:inline-block;width:12px;height:18px;border-radius:3px;vertical-align:middle;margin-right:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.lay{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column}
+.lay .id{font-size:12px;color:var(--ink3);font-weight:600}
+.lay .t{font-weight:700;font-size:15px;margin:2px 0}
+.lay .g{font-size:12.5px;color:var(--ink2)}
+.lay svg{display:block;margin:10px auto 6px;max-width:100%}
+.lay .meta{font-size:12.5px;color:var(--ink2);display:flex;gap:12px;flex-wrap:wrap}
+.lay .used{margin-top:8px;font-size:12.5px}
+.lay .used b{font-weight:600}
+.lay details{margin-top:8px;font-size:12.5px}
+.lay details table{width:100%;border-collapse:collapse;margin-top:6px}
+.lay details td,.lay details th{padding:3px 4px;border-bottom:1px solid var(--line);text-align:left}
+.lay details th{color:var(--ink3);font-weight:600}
+.flag{font-size:12px;color:var(--bad);margin-top:6px}
+.wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px}
+table.map{border-collapse:collapse;width:100%;min-width:1240px}
+table.map th{text-align:left;font-size:12px;color:var(--ink3);font-weight:600;padding:10px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--card)}
+table.map td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr.grp td{background:var(--well);font-weight:700;font-size:13px}
+.pic{width:130px;height:66px;background:var(--well);border-radius:10px;display:flex;align-items:center;justify-content:center;padding:4px}
+.pic img{width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.st{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.st.ok{background:var(--ok-bg);color:var(--ok)}.st.ask{background:var(--warn-bg);color:var(--warn)}.st.none{background:var(--well);color:var(--ink2)}
+.note{font-size:12.5px;color:var(--ink2)}
+.mini svg{display:block}
+.zoom{border:0;background:none;padding:0;cursor:zoom-in;border-radius:8px}
+.zoom:hover{background:var(--well)}
+.dlg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:20;padding:16px}
+.dlg.on{display:flex}
+.dlg .in{background:var(--card);border-radius:16px;padding:16px 18px;max-height:92vh;overflow:auto;text-align:center}
+.dlg .in b{display:block;margin-bottom:6px}
+.dlg button{font:inherit;border:0;background:var(--ink);color:var(--card);border-radius:999px;padding:7px 14px;margin-top:8px;cursor:pointer}
+.rv{display:flex;flex-direction:column;gap:6px;min-width:190px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-size:12px}
+.seg span{padding:0 8px;color:var(--ink3);display:flex;align-items:center;background:var(--well)}
+.seg button{font:inherit;font-size:12px;border:0;background:var(--card);color:var(--ink2);padding:5px 10px;cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on.y{background:var(--ok-bg);color:var(--ok);font-weight:700}
+.seg button.on.n{background:var(--bad-bg);color:var(--bad);font-weight:700}
+.rv select,.rv textarea{font:inherit;font-size:12.5px;border:1px solid var(--line);border-radius:8px;padding:5px 8px;background:var(--card);color:var(--ink);width:100%}
+.rv textarea{min-height:34px;resize:vertical}
+tr.done td{background:color-mix(in srgb,var(--ok-bg) 35%,transparent)}
+tr.bad td{background:color-mix(in srgb,var(--bad-bg) 45%,transparent)}
+.rbar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:12px;font-size:13px}
+.rbar b{font-weight:700}.rbar .sp{flex:1}
+.rbar button{font:inherit;font-size:12.5px;border:0;border-radius:999px;padding:7px 13px;cursor:pointer;background:var(--ink);color:var(--card)}
+.rbar button.sec{background:var(--well);color:var(--ink)}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--card);padding:8px 14px;border-radius:8px;display:none;z-index:9}
+ol.iss{margin:0;padding-left:20px}ol.iss li{margin:4px 0}
+</style>
+</head>
+<body>
+<main>
+  <h1>Mapping sơ đồ lốp ↔ tên phương tiện</h1>
+  <p class="sub">Nguồn: <code>(innvie-Delta) PM Xưởng &amp; App Lái xe - Sơ đồ lốp - 20250401 (1).xlsx</code>, sheet "Sơ đồ lốp - updated" — 11 kiểu sơ đồ + 3 loại không có lốp. Sơ đồ dưới đây <b>máy vẽ thẳng từ dữ liệu file</b> (số trong lốp = cột STT), nên chỗ nào file ghi lệch sẽ lộ ra trên hình. Danh mục tên xe: bảng SRS cũ LG (39 tên).</p>
+  <div class="box legend">
+    <span>Nhìn từ trên, <b>đầu xe hướng lên</b>, <b>bên lái = bên trái</b> (xe tay lái thuận)</span>
+    <span><span class="sw" style="background:var(--steer)"></span>Lốp lái</span>
+    <span><span class="sw" style="background:var(--load)"></span>Lốp tải (kép: trong/ngoài)</span>
+    <span><span class="sw" style="background:none;border:2px dashed var(--spare)"></span>Lốp dự phòng</span>
+    <span><span class="st ok">Chắc</span> theo cấu hình phổ biến của dòng xe</span>
+    <span><span class="st ask">Cần xác nhận</span> số trục/cầu chưa chắc với đội xe</span>
+  </div>
+
+  <h2>1 · Bảng map 39 tên phương tiện → kiểu sơ đồ lốp</h2>
+  <div class="rbar" id="rbar"></div>
+  <div class="wrap"><table class="map" id="map"></table></div>
+
+  <h2>2 · 11 kiểu sơ đồ lốp trong file</h2>
+  <div class="grid" id="lays"></div>
+
+  <h2>3 · Điểm lệch trong file cần chốt với khách</h2>
+  <div class="box"><ol class="iss" id="iss"></ol></div>
+</main>
+<div class="dlg" id="dlg" role="dialog" aria-modal="true"><div class="in" id="dlgin"></div></div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const L=[{"group": "Đầu kéo container", "name": "Đầu kéo 2 cầu sau (1 dí 2 cầu tải)", "row": 4, "tyres": [{"stt": 1, "name": "Lốp lái bên lái trục 1", "part": "Trước", "axle": "1", "side": "Bên lái", "kind": "Lốp lái", "pos": "N/A", "row": 4}, {"stt": 2, "name": "Lốp lái bên phụ trục 1", "part": "Trước", "axle": "1", "side": "Bên phụ", "kind": "Lốp lái", "pos": "N/A", "row": 5}, {"stt": 3, "name": "Lốp lái trong bên lái trục 2", "part": "Trước", "axle": "2", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 6}, {"stt": 4, "name": "Lốp tải ngoài bên lái trục 2", "part": "Trước", "axle": "2", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 7}, {"stt": 5, "name": "Lốp tải trong bên phụ trục 2", "part": "Trước", "axle": "2", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 8}, {"stt": 6, "name": "Lốp tải ngoài bên phụ trục 2", "part": "Trước", "axle": "2", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 9}, {"stt": 7, "name": "Lốp tải trong bên lái trục 3", "part": "Trước", "axle": "3", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 10}, {"stt": 8, "name": "Lốp tải ngoài bên lái trục 3", "part": "Trước", "axle": "3", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 11}, {"stt": 9, "name": "Lốp tải trong bên phụ trục 3", "part": "Trước", "axle": "3", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 12}, {"stt": 10, "name": "Lốp tải ngoài bên phụ trục 3", "part": "Trước", "axle": "3", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 13}, {"stt": 11, "name": "Lốp dự phòng", "part": "Trước", "axle": "N/A", "side": "N/A", "kind": "Lốp dự phòng", "pos": "N/A", "row": 14}]}, {"group": "Đầu kéo container", "name": "Đầu kéo 1 cầu sau (1 dí 1 cầu tải)", "row": 15, "tyres": [{"stt": 1, "name": "Lốp lái bên lái trục 1", "part": "Trước", "axle": "1", "side": "Bên lái", "kind": "Lốp lái/đơn", "pos": "N/A", "row": 15}, {"stt": 2, "name": "Lốp lái bên phụ trục 1", "part": "Trước", "axle": "1", "side": "Bên phụ", "kind": "Lốp lái/đơn", "pos": "N/A", "row": 16}, {"stt": 3, "name": "Lốp lái trong bên lái trục 2", "part": "Trước", "axle": "2", "side": "Bên lái", "kind": "Lốp tải/kép", "pos": "Lốp trong", "row": 17}, {"stt": 4, "name": "Lốp tải ngoài bên lái trục 2", "part": "Trước", "axle": "2", "side": "Bên lái", "kind": "Lốp tải/kép", "pos": "Lốp ngoài", "row": 18}, {"stt": 5, "name": "Lốp tải trong bên phụ trục 2", "part": "Trước", "axle": "2", "side": "Bên phụ", "kind": "Lốp tải/kép", "pos": "Lốp trong", "row": 19}, {"stt": 6, "name": "Lốp tải ngoài bên phụ trục 2", "part": "Trước", "axle": "2", "side": "Bên phụ", "kind": "Lốp tải/kép", "pos": "Lốp ngoài", "row": 20}, {"stt": 7, "name": "Lốp dự phòng", "part": "Trước", "axle": "N/A", "side": "N/A", "kind": "Lốp dự phòng", "pos": "N/A", "row": 21}]}, {"group": "Xe tải thùng", "name": "Xe tải hai trục (1 dí 1 cầu tải)", "row": 22, "tyres": [{"stt": 1, "name": "Lốp lái bên lái trục 1", "part": "Trước", "axle": "1", "side": "Bên lái", "kind": "Lốp lái", "pos": "N/A", "row": 22}, {"stt": 2, "name": "Lốp lái bên phụ trục 1", "part": "Trước", "axle": "1", "side": "phụ", "kind": "Lốp lái", "pos": "N/A", "row": 23}, {"stt": 3, "name": "Lốp lái trong bên lái trục 2", "part": "Sau", "axle": "2", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 24}, {"stt": 4, "name": "Lốp tải ngoài bên lái trục 2", "part": "Sau", "axle": "2", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 25}, {"stt": 5, "name": "Lốp tải trong bên phụ trục 2", "part": "Sau", "axle": "2", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 26}, {"stt": 6, "name": "Lốp tải ngoài bên phụ trục 2", "part": "Sau", "axle": "2", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 27}, {"stt": 7, "name": "Lốp dự phòng", "part": "Trước", "axle": "N/A", "side": "N/A", "kind": "Lốp dự phòng", "pos": "N/A", "row": 28}]}, {"group": "Xe tải thùng", "name": "Xe tải ba trục (1 dí 2 cầu tải)", "row": 29, "tyres": [{"stt": 1, "name": "Lốp lái bên lái trục 1", "part": "Trước", "axle": "1", "side": "Bên lái", "kind": "Lốp lái", "pos": "N/A", "row": 29}, {"stt": 2, "name": "Lốp lái bên phụ trục 1", "part": "Trước", "axle": "1", "side": "phụ", "kind": "Lốp lái", "pos": "N/A", "row": 30}, {"stt": 3, "name": "Lốp lái trong bên lái trục 2", "part": "Sau", "axle": "2", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 31}, {"stt": 4, "name": "Lốp tải ngoài bên lái trục 2", "part": "Sau", "axle": "2", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 32}, {"stt": 5, "name": "Lốp tải trong bên phụ trục 2", "part": "Sau", "axle": "2", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 33}, {"stt": 6, "name": "Lốp tải ngoài bên phụ trục 2", "part": "Sau", "axle": "2", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 34}, {"stt": 7, "name": "Lốp tải trong bên lái trục 3", "part": "Sau", "axle": "3", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 35}, {"stt": 8, "name": "Lốp tải ngoài bên lái trục 3", "part": "Sau", "axle": "3", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 36}, {"stt": 9, "name": "Lốp tải trong bên phụ trục 3", "part": "Sau", "axle": "3", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 37}, {"stt": 10, "name": "Lốp tải ngoài bên phụ trục 3", "part": "Sau", "axle": "3", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 38}, {"stt": 11, "name": "Lốp dự phòng", "part": "Trước", "axle": "N/A", "side": "N/A", "kind": "Lốp dự phòng", "pos": "N/A", "row": 39}]}, {"group": "Xe tải thùng", "name": "Xe tải ba trục (2 dí 1 cầu tải)", "row": 40, "tyres": [{"stt": 1, "name": "Lốp lái bên lái trục 1", "part": "Trước", "axle": "1", "side": "Bên lái", "kind": "Lốp lái", "pos": "N/A", "row": 40}, {"stt": 2, "name": "Lốp lái bên phụ trục 1", "part": "Trước", "axle": "1", "side": "phụ", "kind": "Lốp lái", "pos": "N/A", "row": 41}, {"stt": 3, "name": "Lốp lái bên lái trục 2", "part": "Trước", "axle": "2", "side": "Bên lái", "kind": "Lốp lái", "pos": "N/A", "row": 42}, {"stt": 4, "name": "Lốp lái bên phụ trục 2", "part": "Trước", "axle": "2", "side": "phụ", "kind": "Lốp lái", "pos": "N/A", "row": 43}, {"stt": 5, "name": "Lốp tải trong bên lái trục 3", "part": "Sau", "axle": "3", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 44}, {"stt": 6, "name": "Lốp tải ngoài bên lái trục 3", "part": "Sau", "axle": "3", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 45}, {"stt": 7, "name": "Lốp tải trong bên phụ trục 3", "part": "Sau", "axle": "3", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 46}, {"stt": 8, "name": "Lốp tải ngoài bên phụ trục 3", "part": "Sau", "axle": "3", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 47}, {"stt": 9, "name": "Lốp dự phòng", "part": "Trước", "axle": "N/A", "side": "N/A", "kind": "Lốp dự phòng", "pos": "N/A", "row": 48}]}, {"group": "Xe tải thùng", "name": "Xe tải bốn trục (2 dí 2 cầu tải)", "row": 49, "tyres": [{"stt": 1, "name": "Lốp lái bên lái trục 1", "part": "Trước", "axle": "1", "side": "Bên lái", "kind": "Lốp lái", "pos": "N/A", "row": 49}, {"stt": 2, "name": "Lốp lái bên phụ trục 1", "part": "Trước", "axle": "1", "side": "phụ", "kind": "Lốp lái", "pos": "N/A", "row": 50}, {"stt": 3, "name": "Lốp lái bên lái trục 2", "part": "Trước", "axle": "2", "side": "Bên lái", "kind": "Lốp lái", "pos": "N/A", "row": 51}, {"stt": 4, "name": "Lốp lái bên phụ trục 2", "part": "Trước", "axle": "2", "side": "phụ", "kind": "Lốp lái", "pos": "N/A", "row": 52}, {"stt": 5, "name": "Lốp tải trong bên lái trục 3", "part": "Sau", "axle": "3", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 53}, {"stt": 6, "name": "Lốp tải ngoài bên lái trục 3", "part": "Sau", "axle": "3", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 54}, {"stt": 7, "name": "Lốp tải trong bên phụ trục 3", "part": "Sau", "axle": "3", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 55}, {"stt": 8, "name": "Lốp tải ngoài bên phụ trục 3", "part": "Sau", "axle": "3", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 56}, {"stt": 9, "name": "Lốp tải trong bên lái trục 4", "part": "Sau", "axle": "4", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 57}, {"stt": 10, "name": "Lốp tải ngoài bên lái trục 4", "part": "Sau", "axle": "4", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 58}, {"stt": 11, "name": "Lốp tải trong bên phụ trục 4", "part": "Sau", "axle": "4", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 59}, {"stt": 12, "name": "Lốp tải ngoài bên phụ trục 4", "part": "Sau", "axle": "4", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 60}, {"stt": 13, "name": "Lốp dự phòng", "part": "Trước", "axle": "N/A", "side": "N/A", "kind": "Lốp dự phòng", "pos": "N/A", "row": 61}]}, {"group": "Xe tải thùng", "name": "Xe tải bốn trục (2 dí 2 cầu tải)", "row": 62, "tyres": [{"stt": 1, "name": "Lốp lái bên lái trục 1", "part": "Trước", "axle": "1", "side": "Bên lái", "kind": "Lốp lái", "pos": "N/A", "row": 62}, {"stt": 2, "name": "Lốp lái bên phụ trục 1", "part": "Trước", "axle": "1", "side": "phụ", "kind": "Lốp lái", "pos": "N/A", "row": 63}, {"stt": 3, "name": "Lốp lái bên lái trục 2", "part": "Trước", "axle": "2", "side": "Bên lái", "kind": "Lốp lái", "pos": "N/A", "row": 64}, {"stt": 4, "name": "Lốp lái bên phụ trục 2", "part": "Trước", "axle": "2", "side": "phụ", "kind": "Lốp lái", "pos": "N/A", "row": 65}, {"stt": 5, "name": "Lốp tải trong bên lái trục 3", "part": "Sau", "axle": "3", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 66}, {"stt": 6, "name": "Lốp tải ngoài bên lái trục 3", "part": "Sau", "axle": "3", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 67}, {"stt": 7, "name": "Lốp tải trong bên phụ trục 3", "part": "Sau", "axle": "3", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 68}, {"stt": 8, "name": "Lốp tải ngoài bên phụ trục 3", "part": "Sau", "axle": "3", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 69}, {"stt": 9, "name": "Lốp tải trong bên lái trục 4", "part": "Sau", "axle": "4", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 70}, {"stt": 10, "name": "Lốp tải ngoài bên lái trục 4", "part": "Sau", "axle": "4", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 71}, {"stt": 11, "name": "Lốp tải trong bên phụ trục 4", "part": "Sau", "axle": "4", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 72}, {"stt": 12, "name": "Lốp tải ngoài bên phụ trục 4", "part": "Sau", "axle": "4", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 73}, {"stt": 13, "name": "Lốp tải trong bên lái trục 5", "part": "Sau", "axle": "5", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 74}, {"stt": 14, "name": "Lốp tải ngoài bên lái trục 5", "part": "Sau", "axle": "5", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 75}, {"stt": 15, "name": "Lốp tải trong bên phụ trục 5", "part": "Sau", "axle": "5", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 76}, {"stt": 16, "name": "Lốp tải ngoài bên phụ trục 5", "part": "Sau", "axle": "5", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 77}, {"stt": 17, "name": "Lốp dự phòng", "part": "Trước", "axle": "N/A", "side": "N/A", "kind": "Lốp dự phòng", "pos": "N/A", "row": 78}]}, {"group": "Sơ mi-Rơ mooc", "name": "Sơ mi-Rơ mooc 2 giàn (2 cầu tải)", "row": 79, "tyres": [{"stt": 1, "name": "Lốp lái trong bên lái trục 1", "part": "Sau", "axle": "1", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 79}, {"stt": 2, "name": "Lốp tải ngoài bên lái trục 1", "part": "Sau", "axle": "1", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 80}, {"stt": 3, "name": "Lốp tải trong bên phụ trục 1", "part": "Sau", "axle": "1", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 81}, {"stt": 4, "name": "Lốp tải ngoài bên phụ trục 1", "part": "Sau", "axle": "1", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 82}, {"stt": 5, "name": "Lốp tải trong bên lái trục 2", "part": "Sau", "axle": "2", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 83}, {"stt": 6, "name": "Lốp tải ngoài bên lái trục 2", "part": "Sau", "axle": "2", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 84}, {"stt": 7, "name": "Lốp tải trong bên phụ trục 2", "part": "Sau", "axle": "2", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 85}, {"stt": 8, "name": "Lốp tải ngoài bên phụ trục 2", "part": "Sau", "axle": "2", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 86}, {"stt": 9, "name": "Lốp dự phòng", "part": "Sau", "axle": "N/A", "side": "N/A", "kind": "Lốp dự phòng", "pos": "N/A", "row": 87}]}, {"group": "Sơ mi-Rơ mooc", "name": "Sơ mi-Rơ mooc 3 giàn (3 cầu tải)", "row": 88, "tyres": [{"stt": 1, "name": "Lốp lái trong bên lái trục 1", "part": "Sau", "axle": "1", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 88}, {"stt": 2, "name": "Lốp tải ngoài bên lái trục 1", "part": "Sau", "axle": "1", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 89}, {"stt": 3, "name": "Lốp tải trong bên phụ trục 1", "part": "Sau", "axle": "1", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 90}, {"stt": 4, "name": "Lốp tải ngoài bên phụ trục 1", "part": "Sau", "axle": "1", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 91}, {"stt": 5, "name": "Lốp tải trong bên lái trục 2", "part": "Sau", "axle": "2", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 92}, {"stt": 6, "name": "Lốp tải ngoài bên lái trục 2", "part": "Sau", "axle": "2", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 93}, {"stt": 7, "name": "Lốp tải trong bên phụ trục 2", "part": "Sau", "axle": "2", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 94}, {"stt": 8, "name": "Lốp tải ngoài bên phụ trục 2", "part": "Sau", "axle": "2", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 95}, {"stt": 9, "name": "Lốp tải trong bên lái trục 3", "part": "Sau", "axle": "3", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp trong", "row": 96}, {"stt": 10, "name": "Lốp tải ngoài bên lái trục 3", "part": "Sau", "axle": "3", "side": "Bên lái", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 97}, {"stt": 11, "name": "Lốp tải trong bên phụ trục 3", "part": "Sau", "axle": "3", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp trong", "row": 98}, {"stt": 12, "name": "Lốp tải ngoài bên phụ trục 3", "part": "Sau", "axle": "3", "side": "Bên phụ", "kind": "Lốp tải", "pos": "Lốp ngoài", "row": 99}, {"stt": 13, "name": "Lốp dự phòng", "part": "Sau", "axle": "N/A", "side": "N/A", "kind": "Lốp dự phòng", "pos": "N/A", "row": 100}]}, {"group": "Xe nâng diesel", "name": "Xe nâng diesel", "row": 101, "tyres": [{"stt": 1, "name": "Lốp lái bên lái trục 1", "part": "N/A", "axle": "1", "side": "Bên lái", "kind": "Lốp lái", "pos": "N/A", "row": 101}, {"stt": 2, "name": "Lốp lái bên phụ trục 1", "part": "N/A", "axle": "1", "side": "Bên phụ", "kind": "Lốp lái", "pos": "N/A", "row": 102}, {"stt": 3, "name": "Lốp lái bên lái trục 2", "part": "N/A", "axle": "2", "side": "Bên lái", "kind": "Lốp lái", "pos": "N/A", "row": 103}, {"stt": 4, "name": "Lốp lái bên phụ trục 2", "part": "N/A", "axle": "2", "side": "Bên phụ", "kind": "Lốp lái", "pos": "N/A", "row": 104}]}, {"group": "Xe nâng điện", "name": "Xe nâng điện", "row": 105, "tyres": [{"stt": 1, "name": "Lốp lái bên lái trục 1", "part": "N/A", "axle": "1", "side": "Bên lái", "kind": "Lốp lái", "pos": "N/A", "row": 105}, {"stt": 2, "name": "Lốp lái bên phụ trục 1", "part": "N/A", "axle": "1", "side": "Bên phụ", "kind": "Lốp lái", "pos": "N/A", "row": 106}, {"stt": 3, "name": "Lốp lái trục 2", "part": "N/A", "axle": "2", "side": "N/A", "kind": "Lốp lái", "pos": "N/A", "row": 107}]}, {"group": "DC container", "name": "Không có lốp", "row": 108, "tyres": []}, {"group": "Reefer container", "name": "Không có lốp", "row": 109, "tyres": []}, {"group": "Máy phát điện", "name": "Không có lốp", "row": 110, "tyres": []}]
+;
+const TYPE={"":"N/A","01":"Sơ mi-Rơ mooc","02":"Đầu kéo container","03":"Xe tải thùng","04":"Xe nâng diesel","05":"Xe nâng điện","06":"DC container","07":"Reefer container","08":"Máy phát điện","09":"Trạm bơm dầu"};
+/* [mã PT, mã loại, tên SRS, ảnh, kiểu sơ đồ (số thứ tự 1-11 | "none" | "?"), trạng thái ok|ask|none, ghi chú] */
+const V=[
+ ["00","","Phương tiện chưa xác định","—","none","none","Chưa gán xe — không hiện sơ đồ"],
+ ["01","01","Mooc 20ft","n01",8,"ok","Duyệt 09/10: đúng kiểu 8 (2 trục)"],
+ ["02","01","Mooc 40ft 2 giàn","t01",8,"ok","2 giàn = 2 trục (xương hoặc sàn)"],
+ ["03","01","Mooc 40ft 3 giàn","n03",9,"ok",""],
+ ["04","01","Mooc 45ft","n04",9,"ok","Mooc 45ft thẳng 3 trục"],
+ ["05","02","Đầu kéo Maz","n05",2,"ok","Duyệt 09/10: MAZ của đội là đầu kéo 1 cầu (4x2) — ảnh 6x4 hiện tại sai, sẽ sinh lại"],
+ ["06","02","Đầu kéo Maxxforce","n06",1,"ok","International ProStar 6x4"],
+ ["07","02","Đầu kéo Hino 700","t02",1,"ok","Duyệt 09/10: 6x4 — đúng"],
+ ["08","02","Đầu kéo Cascadia","n08",1,"ok","Freightliner Cascadia 6x4"],
+ ["09","02","Đầu kéo Chenglong H7 385PS","n09",1,"ok","H7 385PS bản 6x4"],
+ ["10","03","Xe tải AC990","n10",5,"ok","Duyệt 09/10: 3 trục, 2 dí 1 cầu tải — ảnh 2 trục hiện tại sai, sẽ sinh ảnh riêng"],
+ ["11","03","Xe tải AC820","g-truck-l",3,"ok","2 trục"],
+ ["12","03","Xe tải TMT","n12",3,"ok","7–8 tấn, 2 trục"],
+ ["13","03","Xe tải Ollin 700A","n29",3,"ok",""],
+ ["14","03","Xe tải Isuzu NQR75L","t03",3,"ok",""],
+ ["15","03","Xe tải Ollin 450","n29",3,"ok",""],
+ ["16","03","Xe Isuzu NQR66P","t03",3,"ok",""],
+ ["17","03","Xe Hyundai HD72","n17",3,"ok",""],
+ ["18","03","Xe Olin 250","n29",3,"ok",""],
+ ["19","03","Xe Kia Frontier K165","g-kia",3,"ok","Bánh sau kép nhỏ"],
+ ["20","03","Xe Isuzu QKR 55H","g-truck-s",3,"ok",""],
+ ["21","03","Xe Kia Frontier 140","g-kia",3,"ok",""],
+ ["22","03","Xe Kia K2700","g-kia",3,"ok",""],
+ ["23","03","Xe Isuzu NLR55","g-truck-s",3,"ok","Duyệt 09/10: đúng kiểu 3"],
+ ["24","03","Xe tải Kia K3000","g-kia",3,"ok",""],
+ ["25","03","Xe tải Dongfeng B180","n25",3,"ok","2 trục"],
+ ["26","03","Xe tải Auman C240","n26",4,"ok","Duyệt 09/10: 1 dí 2 cầu — đúng"],
+ ["27","03","Xe tải Chenglong M3 - 2024","n27",3,"ok","2 trục"],
+ ["28","03","Xe tải Chenglong H5 - 2024","n28",6,"ok","Duyệt 09/10: 4 trục, 2 dí 2 cầu — ảnh 3 trục hiện tại sai, sẽ sinh lại"],
+ ["29","03","Xe tải Ollin 700","n29",3,"ok",""],
+ ["30","03","Xe tải Isuzu QKR 210","g-truck-s",3,"ok",""],
+ ["31","04","Xe nâng Toyota 2.5T","t04",10,"ok",""],
+ ["32","05","Xe nâng Komatsu FB15RL-15 1.5T","t05",11,"ok","Reach truck: 2 bánh tải trước + 1 bánh lái sau — khớp 3 lốp"],
+ ["33","06","Container thường","t06","none","none","Không có lốp (theo file)"],
+ ["34","07","Container lạnh","t07","none","none","Không có lốp (theo file)"],
+ ["35","08","Máy phát điện 25 KVA","t08","none","none","Không có lốp (theo file)"],
+ ["36","08","Máy phát điện 44 KVA (HP)","t08","none","none","Không có lốp (theo file)"],
+ ["37","08","Máy phát điện 45 KVA (BN)","t08","none","none","Không có lốp (theo file)"],
+ ["38","09","Trạm bơm dầu","t09","none","none","Duyệt 09/10: trạm bơm = trụ bơm + téc chứa + container 20ft bảo vệ → không lốp; ảnh cột bơm đơn lẻ sai, sẽ sinh lại"]];
+const ISS=[
+ "Dòng 62–78: tên là “Xe tải bốn trục (2 dí 2 cầu tải)” — trùng tên với dòng 49–61 nhưng dữ liệu có <b>5 trục, 17 lốp</b> (2 trục lái + 3 trục tải). Có phải “Xe tải năm trục (2 dí 3 cầu tải)”?",
+ "Tên vị trí ghi “<b>Lốp lái trong</b> bên lái trục 2/1” nhưng cột Loại lốp là <b>Lốp tải</b> (dòng 6, 31, 79, 88). Nên là “Lốp tải trong”.",
+ "Đầu kéo (dòng 4–21): cột “Phần” ghi <b>Trước</b> cho cả trục sau; xe tải ghi Trước/Sau đúng. Lốp dự phòng: xe ghi Trước, mooc ghi Sau.",
+ "Cột “Vị trí lốp #1”: lúc ghi “Bên phụ”, lúc ghi “<b>phụ</b>” (dòng 23, 30, 41, 43, 50, 52, 63, 65) — cần thống nhất.",
+ "Đầu kéo 1 cầu sau dùng loại lốp “Lốp lái/đơn”, “Lốp tải/kép”; các kiểu khác dùng “Lốp lái”, “Lốp tải” — cần thống nhất danh mục loại lốp.",
+ "Xe nâng diesel: cả 2 trục ghi “Lốp lái”. Thực tế trục trước là trục tải (dẫn động), trục sau là trục lái.",
+ "<b>Trạm bơm dầu</b> (mã loại 09) không có trong file — user xác nhận 09/10: trạm = trụ bơm + téc + container 20ft bảo vệ, không lốp. Nên bổ sung dòng “Không có lốp” vào file.",
+ "Sau duyệt 09/10: kiểu 2 = MAZ, kiểu 5 = AC990, kiểu 6 = Chenglong H5. Chỉ còn <b>kiểu 7 (5 trục, 17 lốp)</b> chưa có xe nào — giữ hay bỏ?",
+];
+/* ảnh: bản gửi đi nhúng sẵn IMGS (data URI); bản trên máy đọc từ assets/ */
+const IMGSRC=k=>(window.IMGS&&IMGS[k])||`assets/vehicles/b-ai/${k}-q.png`;
+/* ---- vẽ sơ đồ ---- */
+function draw(lay,scale=1){
+  const T=lay.tyres; if(!T.length) return "";
+  const axles=[...new Set(T.filter(t=>t.axle!=="N/A").map(t=>+t.axle))].sort((a,b)=>a-b);
+  const trailer=/mooc/i.test(lay.group), fork=/nâng/i.test(lay.group);
+  const W=200,gapA=fork?70:46; let y0=trailer?120:40;
+  // trục tải dồn về phía sau; trục lái ở trước
+  const isSteer=a=>T.some(t=>+t.axle===a&&/lái/i.test(t.kind));
+  const ys={};let y=y0,prev=null;
+  axles.forEach(a=>{ if(prev!==null){ y+= (isSteer(prev)!==isSteer(a)&&!fork)?(trailer?gapA:110):gapA } ys[a]=y; prev=a });
+  const H=y+(trailer?50:60)+ (T.some(t=>t.axle==="N/A")?40:0);
+  const cx=W/2, body=70;
+  let s=`<svg width="${W*scale}" height="${H*scale}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Sơ đồ lốp ${lay.name}">`;
+  // thân
+  const top=trailer?20:10, bot=y+28;
+  s+= trailer?`<rect x="${cx-body/2}" y="${top}" width="${body}" height="${bot-top}" rx="6" fill="var(--well)" stroke="var(--line)"/><circle cx="${cx}" cy="${top+22}" r="5" fill="var(--ink3)"/><text x="${cx}" y="${top+42}" font-size="9" text-anchor="middle" fill="var(--ink3)">chốt kéo</text>`
+           : `<rect x="${cx-body/2}" y="${top}" width="${body}" height="${bot-top}" rx="8" fill="var(--well)" stroke="var(--line)"/><rect x="${cx-body/2}" y="${top}" width="${body}" height="${fork?24:30}" rx="8" fill="var(--line)"/><text x="${cx}" y="${top+(fork?15:19)}" font-size="9" text-anchor="middle" fill="var(--ink2)">ĐẦU</text>`;
+  s+=`<text x="8" y="${top+10}" font-size="9" fill="var(--ink3)">bên lái</text><text x="${W-8}" y="${top+10}" font-size="9" text-anchor="end" fill="var(--ink3)">bên phụ</text>`;
+  axles.forEach(a=>{
+    const yy=ys[a]; s+=`<line x1="${cx-body/2-4}" y1="${yy}" x2="${cx+body/2+4}" y2="${yy}" stroke="var(--ink3)" stroke-width="3"/><text x="${cx}" y="${yy+13}" font-size="9" text-anchor="middle" fill="var(--ink3)">trục ${a}</text>`;
+    T.filter(t=>+t.axle===a).forEach(t=>{
+      const left=/lái/i.test(t.side), center=t.side==="N/A";
+      const outer=/ngoài/i.test(t.pos), inner=/trong/i.test(t.pos);
+      const tw=16,th=30, off=center?0:(body/2+6+(outer?tw+3:0)+(inner||outer?0:0));
+      const x=center?cx-tw/2:(left?cx-off-tw:cx+off);
+      const steer=/lái/i.test(t.kind);
+      s+=`<rect x="${x}" y="${yy-th/2}" width="${tw}" height="${th}" rx="3" fill="${steer?"var(--steer)":"var(--load)"}"/><text x="${x+tw/2}" y="${yy+4}" font-size="10" font-weight="700" text-anchor="middle" fill="var(--card)">${t.stt}</text>`;
+    });
+  });
+  T.filter(t=>t.axle==="N/A").forEach((t,i)=>{
+    const x=cx-12+i*30, yy=H-30;
+    s+=`<circle cx="${x+12}" cy="${yy}" r="13" fill="none" stroke="var(--spare)" stroke-width="2" stroke-dasharray="4 3"/><text x="${x+12}" y="${yy+4}" font-size="10" font-weight="700" text-anchor="middle" fill="var(--spare)">${t.stt}</text><text x="${x+30}" y="${yy+4}" font-size="9" fill="var(--ink3)">dự phòng</text>`;
+  });
+  return s+`</svg>`;
+}
+const used=i=>V.filter(v=>v[4]===i+1);
+document.getElementById("lays").innerHTML=L.filter(l=>l.tyres.length).map((l,i)=>{
+  const u=used(i);
+  const axles=[...new Set(l.tyres.filter(t=>t.axle!=="N/A").map(t=>t.axle))].length, spare=l.tyres.filter(t=>t.axle==="N/A").length;
+  return `<div class="lay"><div class="id">Kiểu ${i+1} · file dòng ${l.row}</div><div class="t">${l.name}</div><div class="g">${l.group}</div>
+   ${draw(l)}
+   <div class="meta"><span>${axles} trục</span><span>${l.tyres.length-spare} lốp${spare?" + "+spare+" dự phòng":""}</span></div>
+   <div class="used">${u.length?`<b>Dùng cho:</b> ${u.map(v=>v[0]+" "+v[2]).join(" · ")}`:`<span style="color:var(--bad)">Chưa có tên xe nào map vào</span>`}</div>
+   <details><summary>Danh sách vị trí lốp theo file</summary><table><tr><th>STT</th><th>Tên</th><th>Trục</th><th>Bên</th><th>Loại</th><th>Trong/ngoài</th></tr>
+   ${l.tyres.map(t=>`<tr><td>${t.stt}</td><td>${t.name}</td><td>${t.axle}</td><td>${t.side}</td><td>${t.kind}</td><td>${t.pos}</td></tr>`).join("")}</table></details></div>`}).join("");
+/* ---- duyệt: lưu trên trình duyệt (localStorage), copy/tải .md gửi Claude ---- */
+const KEY="tyre-map-review-v1";let RV={};try{RV=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(RV))}catch(e){}};
+const LAYS=L.filter(l=>l.tyres.length);
+const layName=x=>x==="none"?"Không có lốp":x==="?"?"Chưa có trong file":`Kiểu ${x} · ${LAYS[x-1].name}`;
+function rowCls(c){const r=RV[c]||{};return r.img==="n"||r.tyre==="n"?"bad":(r.img==="y"&&r.tyre==="y")?"done":""}
+function seg(c,f,lab){const v=(RV[c]||{})[f];return `<div class="seg"><span>${lab}</span><button data-c="${c}" data-f="${f}" data-v="y" class="y ${v==="y"?"on":""}" aria-pressed="${v==="y"}">Đúng</button><button data-c="${c}" data-f="${f}" data-v="n" class="n ${v==="n"?"on":""}" aria-pressed="${v==="n"}">Sai</button></div>`}
+function review(v){const c=v[0],r=RV[c]||{};
+  const opts=[...LAYS.map((l,i)=>[i+1,`Kiểu ${i+1} · ${l.name}`]),["none","Không có lốp"],["new","Kiểu khác — ghi chú"]];
+  return `<div class="rv">${v[3]==="—"?"":seg(c,"img","Ảnh")}${seg(c,"tyre","Sơ đồ")}
+   ${r.tyre==="n"?`<select data-c="${c}" data-f="fix" aria-label="Kiểu sơ đồ đúng cho ${v[2]}"><option value="">— Kiểu sơ đồ đúng là… —</option>${opts.map(([k,t])=>`<option value="${k}" ${String(r.fix)===String(k)?"selected":""}>${t}</option>`).join("")}</select>`:""}
+   <textarea data-c="${c}" data-f="note" placeholder="Ghi chú…" aria-label="Ghi chú ${v[2]}">${(r.note||"").replace(/</g,"&lt;")}</textarea></div>`}
+function bar(){
+  const n=V.length,cnt=f=>V.filter(v=>(RV[v[0]]||{})[f]).length,bad=f=>V.filter(v=>(RV[v[0]]||{})[f]==="n").length;
+  const imgN=V.filter(v=>v[3]!=="—").length;
+  document.getElementById("rbar").innerHTML=`<span>Ảnh: <b>${cnt("img")}/${imgN}</b> đã duyệt · <b style="color:var(--bad)">${bad("img")}</b> sai</span>
+   <span>Sơ đồ: <b>${cnt("tyre")}/${n}</b> đã duyệt · <b style="color:var(--bad)">${bad("tyre")}</b> sai</span><span>Ghi chú: <b>${cnt("note")}</b></span>
+   <span class="sp"></span><button id="cp">Copy góp ý gửi Claude</button><button class="sec" id="dl">Tải file .md</button><button class="sec" id="rs">Xoá duyệt</button>`}
+function exportMd(){
+  const L2=["# Góp ý mapping sơ đồ lốp","",`Ngày: ${new Date().toLocaleDateString("vi-VN")}`,"","| Mã PT | Tên | Ảnh | Sơ đồ đang map | Sơ đồ | Sơ đồ đúng | Ghi chú |","|---|---|---|---|---|---|---|"];
+  const t=x=>x==="y"?"Đúng":x==="n"?"Sai":"—";
+  V.forEach(v=>{const r=RV[v[0]]||{};if(!r.img&&!r.tyre&&!r.note)return;
+    L2.push(`| ${v[0]} | ${v[2]} | ${t(r.img)} | ${layName(v[4])} | ${t(r.tyre)} | ${r.fix?(r.fix==="new"?"Kiểu khác":layName(r.fix==="none"?"none":+r.fix)):""} | ${(r.note||"").replace(/\n/g," ").replace(/\|/g,"/")} |`)});
+  const un=V.filter(v=>!(RV[v[0]]||{}).tyre).map(v=>v[0]);
+  if(un.length)L2.push("",`Chưa duyệt sơ đồ: ${un.join(", ")}`);
+  return L2.join("\n")}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",1800)}
+function renderMap(){
+let last=null,h=`<tr><th>Mã PT</th><th>Tên phương tiện (SRS)</th><th>Ảnh</th><th>Kiểu sơ đồ lốp</th><th>Sơ đồ</th><th>Trạng thái</th><th>Ghi chú</th><th>Duyệt của bạn</th></tr>`;
+V.forEach(v=>{
+  if(v[1]!==last){last=v[1];h+=`<tr class="grp"><td colspan="8">${v[1]?"Mã loại "+v[1]+" · ":""}${TYPE[v[1]]}</td></tr>`}
+  const lay=typeof v[4]==="number"?L.filter(l=>l.tyres.length)[v[4]-1]:null;
+  h+=`<tr data-code="${v[0]}" class="${rowCls(v[0])}"><td><b>${v[0]}</b></td><td><b>${v[2]}</b></td><td>${v[3]==="—"?"":`<div class="pic"><img src="${IMGSRC(v[3])}" alt="${v[2]}" loading="lazy"></div>`}</td>
+   <td>${lay?`<b>Kiểu ${v[4]}</b><br><span class="note">${lay.name} · ${lay.tyres.length} vị trí</span>`:v[4]==="none"?`<span class="note">Không có lốp</span>`:`<span class="note">Chưa có trong file</span>`}</td>
+   <td class="mini">${lay?`<button class="zoom" data-lay="${v[4]}" aria-label="Phóng to sơ đồ ${lay.name}">${draw(lay,0.8)}</button>`:""}</td>
+   <td><span class="st ${v[5]}">${{ok:"Chắc",ask:"Cần xác nhận",none:"Không lốp"}[v[5]]}</span></td><td class="note">${v[6]}</td><td>${review(v)}</td></tr>`});
+document.getElementById("map").innerHTML=h;bar()}
+renderMap();
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button[data-f]");
+  if(b){const c=b.dataset.c,f=b.dataset.f;RV[c]=RV[c]||{};RV[c][f]=RV[c][f]===b.dataset.v?undefined:b.dataset.v;if(f==="tyre"&&RV[c].tyre!=="n")delete RV[c].fix;save();renderMap();return}
+  if(e.target.id==="cp"){const t=exportMd();(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast("Đã copy — dán vào chat"),()=>prompt("Copy đoạn này:",t))}
+  if(e.target.id==="dl"){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([exportMd()],{type:"text/markdown"}));a.download="gop-y-so-do-lop.md";a.click()}
+  if(e.target.id==="rs"&&confirm("Xoá toàn bộ duyệt và ghi chú?")){RV={};save();renderMap()}});
+document.addEventListener("click",e=>{const z=e.target.closest(".zoom");const d=document.getElementById("dlg");
+  if(z){const l=LAYS[+z.dataset.lay-1];document.getElementById("dlgin").innerHTML=`<b>Kiểu ${z.dataset.lay} · ${l.name}</b>${draw(l,1.8)}<br><button id="dlgx">Đóng</button>`;d.classList.add("on");return}
+  if(e.target.id==="dlgx"||e.target===d)d.classList.remove("on")});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("dlg").classList.remove("on")});
+document.addEventListener("change",e=>{const el=e.target.closest("select[data-f]");if(!el)return;const c=el.dataset.c;RV[c]=RV[c]||{};RV[c].fix=el.value;save();bar()});
+document.addEventListener("input",e=>{const el=e.target.closest("textarea[data-f]");if(!el)return;const c=el.dataset.c;RV[c]=RV[c]||{};RV[c].note=el.value;save();bar()});
+document.getElementById("iss").innerHTML=ISS.map(x=>`<li>${x}</li>`).join("");
+</script>
+</body>
+</html>

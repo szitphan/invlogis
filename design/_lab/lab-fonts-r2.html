@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab — Geist vs Manrope</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist:wght@500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f4f6;--ink:#121214;--ink2:#5c5c66;--ink3:#93939d;--card:#fff;--rule:#ececf0;--well:#f4f4f6;--primary:#121214;--hero:linear-gradient(140deg,#0e0e10 0%,#1c1c21 55%,#2a2a31 100%)}
+body.innvie{--primary:#0036B5;--hero:linear-gradient(140deg,#001a5e 0%,#0036B5 60%,#0a63e0 100%)}
+body.delta{--primary:#2E7449;--hero:linear-gradient(140deg,#0f2a1b 0%,#1f5235 55%,#2E7449 100%)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.top{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:12px 16px;background:rgba(244,244,246,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.top h1{font-size:15px;margin:0}
+.ctl{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink2)}
+.seg{display:flex;background:#e7e7ea;border-radius:999px;padding:2px}
+.seg button{font:inherit;font-size:12px;border:0;background:none;color:var(--ink);padding:5px 11px;border-radius:999px;cursor:pointer}
+.seg button.on{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.wrap{max-width:1100px;margin:0 auto;padding:16px 16px 60px}
+.links{background:var(--card);border:1px solid var(--rule);border-radius:18px;padding:14px 16px;margin-bottom:16px;font-size:13px}
+.links b{display:block;margin-bottom:6px}
+.links a{display:inline-block;margin:2px 6px 2px 0;padding:5px 11px;border-radius:999px;background:var(--well);color:var(--ink);text-decoration:none}
+.row{margin-bottom:14px}
+.rl{font-size:12px;color:var(--ink3);margin:0 0 6px 2px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:760px){.pair{grid-template-columns:1fr}}
+.c{background:var(--card);border:1px solid var(--rule);border-radius:20px;padding:14px 16px;min-width:0}
+.c .fn{font:600 11px Inter,sans-serif;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px}
+.c[data-f="g"]{--hf:"Geist",Inter,sans-serif}
+.c[data-f="m"]{--hf:"Manrope",Inter,sans-serif}
+.h{font-family:var(--hf);letter-spacing:-.02em;margin:0}
+.w5{font-weight:500}.w6{font-weight:600}.w7{font-weight:700}.w8{font-weight:800}
+.ladder .h{margin:0 0 6px}
+.hero{background:var(--hero);color:#fff;border-radius:22px;padding:16px}
+.hero .l{font-size:12.5px;opacity:.72;margin:0}
+.hero .s{font-size:13px;opacity:.8;margin:0}
+.kpi{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);border-radius:18px;overflow:hidden}
+.kpi div{padding:12px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.kpi div:nth-child(2n){border-right:0}.kpi div:nth-child(n+3){border-bottom:0}
+.kpi span{display:block;font-size:12.5px;color:var(--ink2)}
+.tab{font-variant-numeric:tabular-nums}
+.col{display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-size:17px}
+.tbl{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.item{display:flex;gap:12px;align-items:center;background:var(--well);border-radius:16px;padding:12px;margin-top:8px}
+.ic{width:38px;height:38px;border-radius:12px;background:var(--primary);flex:none}
+.is{font-size:13px;color:var(--ink2);margin:0}
+.hdr{display:flex;align-items:center;gap:10px;height:44px}
+.hdr i{width:36px;height:36px;border-radius:50%;background:var(--well);flex:none}
+.hdr .h{flex:1;text-align:center;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{height:52px;border-radius:999px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15.5px;margin-top:10px}
+.note{width:100%;margin-top:4px;font:inherit;font-size:13px;border:1px solid var(--rule);border-radius:10px;padding:8px 10px;background:var(--card)}
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>Lab · Vòng 2 · Geist vs Manrope</h1>
+  <div class="ctl">Thương hiệu <div class="seg" id="b"><button data-v="" class="on">Trung tính</button><button data-v="innvie">Innvie</button><button data-v="delta">Delta</button></div></div>
+  <div class="ctl">Số lớn <div class="seg" id="n"><button data-v="h" class="on">Font tiêu đề</button><button data-v="i">Inter</button></div></div>
+</div>
+<div class="wrap">
+  <div class="links"><b>Xem trên màn thật — mọi trang lab giờ có nút “Tiêu đề” nổi góc dưới trái để đổi Geist ⇄ Manrope ⇄ Cal Sans tại chỗ</b>
+    <a href="lab-mobile.html">Home (đa vai trò)</a><a href="lab-cards.html">Bộ thẻ + Danh sách</a><a href="lab-repair-detail.html">Chi tiết lệnh sửa chữa</a><a href="lab-form-incident.html">Form báo sự cố</a><a href="lab-confirm.html">Xác nhận</a>
+  </div>
+  <div id="rows"></div>
+</div>
+<script>
+const R=[
+ ["Thang độ đậm — H1 28px ở 500 / 600 / 700 / 800",()=>`<div class="ladder">${[5,6,7,8].map(w=>`<p class="h w${w}" style="font-size:28px;line-height:1.15">${w}00 · Lệnh sửa chữa</p>`).join("")}</div>`],
+ ["Tiêu đề màn + phân cấp H1 / H2 / H3 (700 / 700 / 600)",()=>`<p class="is">Chào buổi sáng, anh Đức</p><p class="h w7" style="font-size:28px;line-height:1.15;margin:2px 0 10px">Lệnh sửa chữa đang chờ bạn</p><p class="h w7" style="font-size:24px;line-height:1.2;margin:0 0 6px">Xe 51C-482.19 đang được kiểm tra</p><p class="h w6" style="font-size:17px">Chờ bạn nghiệm thu</p>`],
+ ["Khối nhấn tối — số tiền lớn 32px",()=>`<div class="hero"><p class="l">Chi phí ước tính tháng này</p><p class="h w7 tab num" style="font-size:32px;line-height:1.15;margin:4px 0 2px">1.248.500.000 ₫</p><p class="s">Tăng 12% so với tháng trước</p></div>`],
+ ["Thẻ KPI 4 ô — số 26px",()=>`<div class="kpi">${[["Xe đang chạy","128"],["Chờ sửa","17"],["Quá hạn bảo dưỡng","4"],["Tỷ lệ sẵn sàng","96,8%"]].map(([l,v])=>`<div><span>${l}</span><p class="h w7 tab num" style="font-size:26px;line-height:1.1;margin-top:4px">${v}</p></div>`).join("")}</div>`],
+ ["Chữ số thẳng cột (tabular) — biển số, giờ, tiền",()=>`<div class="tbl"><div class="col h w6" style="align-items:flex-start">${["51C-482.19","29H-110.08","61A-777.41","50E-306.92"].map(x=>`<span>${x}</span>`).join("")}</div><div class="col h w6 tab">${["09:40","11:05","14:18","17:30"].map(x=>`<span>${x}</span>`).join("")}</div><div class="col h w6 tab num">${["1.200.000 ₫","48.750.000 ₫","860.000 ₫","11.111.000 ₫"].map(x=>`<span>${x}</span>`).join("")}</div></div>`],
+ ["Tên dòng trong danh sách 15px / 600 + tiêu đề thanh trên 17px",()=>`<div class="hdr"><i></i><p class="h w6">Chi tiết lệnh LSC-0241</p><i></i></div><div class="item"><div class="ic"></div><div><p class="h w6" style="font-size:15px;line-height:1.3">Thay lốp sau — Gara Quận 7</p><p class="is">Hoàn tất lúc 09:40 · 3 hạng mục</p></div></div><div class="item"><div class="ic"></div><div><p class="h w6" style="font-size:15px;line-height:1.3">Điều phối xe đầu kéo về kho Đồng Nai</p><p class="is">Tài xế: Nguyễn Văn Hữu</p></div></div>`],
+ ["Tiêu đề dài xuống 2–3 dòng (22px / 700)",()=>`<p class="h w7" style="font-size:22px;line-height:1.25">Đề nghị phê duyệt chi phí phát sinh thay cụm phanh và kiểm định lại hệ thống điện cho xe đầu kéo</p>`],
+ ["Dấu chồng + chữ in hoa (dễ lỗi nhất)",()=>`<p class="h w7" style="font-size:24px;line-height:1.4">Quyết định · Kiểm định ẫ ẩ ặ ỗ ờ ữ ỹ</p><p class="h w7" style="font-size:24px;line-height:1.4">ĐỔI TRẠNG THÁI · Ẫ Ổ Ữ Ỹ Ặ</p>`],
+ ["Đứng cạnh body Inter + nút chính",()=>`<p class="h w7" style="font-size:20px;line-height:1.25">Báo sự cố mới</p><p style="margin:4px 0 0;color:var(--ink2)">Mô tả ngắn tình trạng xe, chụp ảnh hiện trường. Kỹ thuật viên sẽ liên hệ trong 15 phút.</p><div class="btn h w6" style="letter-spacing:0">Gửi báo cáo</div>`],
+];
+document.getElementById("rows").innerHTML=R.map(([t,f],i)=>`<div class="row"><p class="rl">${i+1}. ${t}</p><div class="pair">
+<div class="c" data-f="g"><p class="fn">Geist</p>${f()}</div><div class="c" data-f="m"><p class="fn">Manrope</p>${f()}</div></div></div>`).join("");
+function seg(id,fn){const el=document.getElementById(id);el.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;el.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));fn(b.dataset.v)})}
+seg("b",v=>document.body.className=v);
+seg("n",v=>document.querySelectorAll(".num").forEach(e=>e.style.fontFamily=v==="i"?"Inter,sans-serif":""));
+</script>
+</body>
+</html>

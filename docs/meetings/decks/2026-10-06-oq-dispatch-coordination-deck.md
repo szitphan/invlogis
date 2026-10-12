@@ -8,15 +8,15 @@ client: Delta
 date: 2026-10-06
 footer: Câu hỏi cần xác nhận — Điều phối
 brand: innvie
-status: draft
-updated: 2026-10-06
+status: shipped
+updated: 2026-10-10
 links:
   - docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md
   - docs-input/sop/sop-dieu-phoi.md
   - docs-input/sop/sop-ban-do-kien-thuc.md
   - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md
-  - docs-input/sop/hoa-don-tra-ho-2026-10-01/hoa-don-tra-ho-2026-10-01.md
-  - docs-input/sop/du-lieu-van-hanh-xe-2026-09-30/du-lieu-van-hanh-xe-2026-09-30.md
+  - docs-input/sop/quan-ly-hoa-don-sim/quan-ly-hoa-don-sim.md
+  - docs-input/sop/vis-du-lieu-van-hanh-xe/vis-du-lieu-van-hanh-xe.md
   - docs/_shared/project-profile.md
 ---
 
@@ -26,7 +26,7 @@ links:
 
 ::: notes
 - Bản gửi khách tự trả lời (delivery: async) — ghi chú KHÔNG có trong file HTML gửi đi.
-- Nguồn câu hỏi: brainstorm Điều phối (chưa ghi vào vault) — ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md mục "Câu hỏi mở" (OQ-1…OQ-34).
+- Nguồn câu hỏi: brainstorm Điều phối (chưa ghi vào vault) — ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md mục "Câu hỏi mở" (OQ-1…OQ-34).
 - Bỏ: OQ-2 (đã đóng), OQ-14 (gộp OQ-18), OQ-15 (SOP 18/9 đã có link bản đồ 4 ga, GNHH:308-312).
 - Khi import: đưa câu trả lời vào file brainstorm lúc viết `docs/dispatch-coordination/brainstorms/`.
 - Chưa có reply_to / reply_by — user chưa cung cấp.
@@ -58,7 +58,7 @@ links:
 
 ---
 
-<!-- layout: oq; id: OQ-16; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Phạm vi và tổ chức -->
+<!-- layout: oq; id: OQ-16; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Phạm vi và tổ chức -->
 ## Khi chi nhánh khác làm việc cho một JobID, phần mềm ghi nhận thế nào?
 
 > Quy trình cung cấp dịch vụ đã nêu 2 trường hợp giao dịch nội bộ giữa chi nhánh nhưng chưa nói thao tác trên phần mềm.
@@ -84,7 +84,7 @@ Làm toàn bộ: chi nhánh đó tự tạo JobID. Làm một phần: nhận gia
 
 ---
 
-<!-- layout: oq; id: OQ-4; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Phạm vi và tổ chức -->
+<!-- layout: oq; id: OQ-4; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Phạm vi và tổ chức -->
 ## Chia lợi nhuận giữa các chi nhánh theo cách nào?
 
 > Quy trình cung cấp dịch vụ nêu 3 cách, chọn tuỳ dữ liệu phần mềm đáp ứng, nhưng chưa chọn cách nào.
@@ -114,7 +114,7 @@ Chi nhánh ghi doanh thu trả cho chi nhánh làm dịch vụ
 
 ---
 
-<!-- layout: oq; id: OQ-12; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Phạm vi và tổ chức -->
+<!-- layout: oq; id: OQ-12; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Phạm vi và tổ chức -->
 ## Hàng CBT và đường sắt: dùng tạm SOP Giao nhận hàng hoá 18/9 trong lúc chờ quy trình điều vận?
 
 > Hàng CBT và đường sắt đi thẳng từ yêu cầu vận tải sang Lệnh. Phần này thuộc quy trình điều vận, Delta chưa gửi tài liệu.
@@ -140,7 +140,7 @@ Bổ sung khi có quy trình điều vận
 
 ---
 
-<!-- layout: oq; id: OQ-9; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Phạm vi và tổ chức -->
+<!-- layout: oq; id: OQ-9; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Phạm vi và tổ chức -->
 ## JobID hàng đường sắt cần những thông tin nhận diện nào?
 
 > SOP ghi giao nhận tại ga đơn giản hơn cảng, không theo dõi giờ lấy/trả vỏ, nên "cần xem xét lại thông tin định danh" của JobID này. Nhờ liệt kê thông tin cần có, ví dụ: số kế hoạch Ratraco, số container, ga, khách.
@@ -155,7 +155,7 @@ Bổ sung khi có quy trình điều vận
 
 ---
 
-<!-- layout: oq; id: OQ-18; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Phạm vi và tổ chức -->
+<!-- layout: oq; id: OQ-18; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Phạm vi và tổ chức -->
 ## Quản lý vỏ container (vỏ của Delta hoặc của khách, sửa chữa vỏ) có thuộc phần Điều phối không?
 
 > Vỏ container đổi qua lại giữa Delta, khách và bãi, có khi phải sửa. Chưa rõ phần nào của phần mềm theo dõi việc này.
@@ -179,7 +179,7 @@ Bổ sung khi có quy trình điều vận
 
 ---
 
-<!-- layout: oq; id: OQ-17; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Phạm vi và tổ chức -->
+<!-- layout: oq; id: OQ-17; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Phạm vi và tổ chức -->
 ## Quy mô từng chi nhánh hiện nay là bao nhiêu?
 
 > Nhờ ghi cho Hà Nội, Hải Phòng, TP.HCM, Lạng Sơn: số JobID mỗi ngày, số lái xe, nhân viên hiện trường, CS, điều vận. Số đội đã biết: khoảng 7.000 hoá đơn trả hộ mỗi tháng; TP.HCM có khoảng 16 xe chạy hàng đường sắt.
@@ -189,12 +189,12 @@ Bổ sung khi có quy trình điều vận
 **Ảnh hưởng:** thiết kế danh sách việc, cảnh báo và tốc độ phần mềm
 
 ::: notes
-- Nguồn: OQ-17. 7.000 HĐ trả hộ/tháng: hoa-don-tra-ho-2026-10-01.md; 16 xe rail HCM (Bình Thung 5 + Trảng Bom 11): GNHH 3.5.2.
+- Nguồn: OQ-17. 7.000 HĐ trả hộ/tháng: quan-ly-hoa-don-sim.md; 16 xe rail HCM (Bình Thung 5 + Trảng Bom 11): GNHH 3.5.2.
 :::
 
 ---
 
-<!-- layout: oq; id: OQ-21; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Phạm vi và tổ chức -->
+<!-- layout: oq; id: OQ-21; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Phạm vi và tổ chức -->
 ## Delta làm nhiều nhất ở những cảng và depot nào?
 
 > Nhờ ghi 5–10 cảng/depot làm nhiều nhất, nếu được thì kèm số lượt mỗi tháng. Đội dùng danh sách này để ưu tiên danh sách việc theo cảng cho CS.
@@ -214,7 +214,7 @@ Bổ sung khi có quy trình điều vận
 
 ---
 
-<!-- layout: oq; id: OQ-25; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Hiện trường và giao việc -->
+<!-- layout: oq; id: OQ-25; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Hiện trường và giao việc -->
 ## CS chuyển việc làm Lệnh nâng vỏ cho hiện trường: danh sách lý do dưới đây đã đủ chưa?
 
 > Thay nút "Từ chối" bằng "Chuyển cho hiện trường", quyền thanh toán tự chuyển theo.
@@ -240,7 +240,7 @@ Bãi yêu cầu có xe mới chọn vỏ · Ngoài giờ làm việc · ePort l�
 
 ---
 
-<!-- layout: oq; id: OQ-26; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Hiện trường và giao việc -->
+<!-- layout: oq; id: OQ-26; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Hiện trường và giao việc -->
 ## Lịch trực ngoài giờ (17h30–8h) xếp theo cách nào?
 
 > SOP: quản lý phân công nhân viên hiện trường trực theo ngày; người trực được tự giao việc làm Lệnh nâng hạ.
@@ -265,7 +265,7 @@ Phần mềm tự xếp, quản lý chỉnh khi cần
 
 ---
 
-<!-- layout: oq; id: OQ-27; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Hiện trường và giao việc -->
+<!-- layout: oq; id: OQ-27; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Hiện trường và giao việc -->
 ## Gộp giao việc làm Lệnh hạ vỏ rỗng theo vận đơn và nơi hạ được không?
 
 > SOP làm Lệnh hạ vỏ cho từng container vì một vận đơn có thể hạ nhiều bãi và khách nhận hàng nhiều ngày.
@@ -291,7 +291,7 @@ Mỗi container vẫn 1 Lệnh hạ; theo dõi đã làm mấy/tổng số
 
 ---
 
-<!-- layout: oq; id: OQ-19; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Hiện trường và giao việc -->
+<!-- layout: oq; id: OQ-19; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Hiện trường và giao việc -->
 ## Khi đặt xe, khách có báo trước số booking, tàu hoặc số ngày miễn phí lưu container không?
 
 > Hiện các mốc hạn chỉ ghi khi có Booking Note (hàng xuất) hoặc Lệnh giao hàng (hàng nhập). Có sớm hơn thì cảnh báo được sớm hơn.
@@ -317,7 +317,7 @@ Mốc chỉ ghi khi có chứng từ
 
 ---
 
-<!-- layout: oq; id: OQ-20; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; recommend: B; group: Hiện trường và giao việc -->
+<!-- layout: oq; id: OQ-20; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; recommend: B; group: Hiện trường và giao việc -->
 ## Khách có chấp nhận ký nhận hàng trên điện thoại của lái xe không?
 **Tài liệu:** chưa có trong tài liệu Delta gửi
 
@@ -344,7 +344,7 @@ Chạy thử với khách đồng ý
 
 ---
 
-<!-- layout: oq; id: OQ-34; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Hiện trường và giao việc -->
+<!-- layout: oq; id: OQ-34; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Hiện trường và giao việc -->
 ## Container quá hạn vì kẹt xe hoặc sự cố đường thì xếp vào nguyên nhân nào?
 
 > SOP có 3 nhóm nguyên nhân quá hạn: khách giao chậm, Delta điều xe chậm hoặc xe hỏng, bên thứ ba. Hàng air có thêm nhóm khách quan.
@@ -374,7 +374,7 @@ Dữ liệu kẹt xe từ GPS gắn làm bằng chứng
 
 ---
 
-<!-- layout: oq; id: OQ-29; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Chi phí và thanh toán -->
+<!-- layout: oq; id: OQ-29; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Chi phí và thanh toán -->
 ## Khi khách đồng ý khoản chi ngoài định mức, lưu bằng chứng bằng cách nào?
 
 > Lái xe phải xin điều vận trước khi chi; điều vận xác nhận với khách. Cách này sẽ áp cho mọi loại hàng.
@@ -405,7 +405,7 @@ Dữ liệu kẹt xe từ GPS gắn làm bằng chứng
 
 ---
 
-<!-- layout: oq; id: OQ-28; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Chi phí và thanh toán -->
+<!-- layout: oq; id: OQ-28; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Chi phí và thanh toán -->
 ## Từ chối nhận vỏ đã trả tiền nâng: ai xác nhận đã nhận tiền hoàn?
 
 > Bãi hoàn tiền nâng sau 7 ngày, về tài khoản người làm Lệnh nâng vỏ. Phần mềm sẽ theo dõi khoản chờ hoàn và cảnh báo khi quá hạn.
@@ -430,7 +430,7 @@ Dữ liệu kẹt xe từ GPS gắn làm bằng chứng
 
 ---
 
-<!-- layout: oq; id: OQ-30; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; recommend: C; group: Chi phí và thanh toán -->
+<!-- layout: oq; id: OQ-30; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; recommend: C; group: Chi phí và thanh toán -->
 ## Đường sắt: chuyến chưa có đơn giá, giá xác định lần đầu dùng thế nào?
 
 > Chuyến chưa có giá trong phụ lục hợp đồng thì người ghi nhận hỏi người phụ trách giá. Phần mềm sẽ gắn cờ "Chưa có đơn giá".
@@ -460,7 +460,7 @@ Chờ ký phụ lục mới
 
 ---
 
-<!-- layout: oq; id: OQ-32; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; recommend: B; group: Chi phí và thanh toán -->
+<!-- layout: oq; id: OQ-32; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; recommend: B; group: Chi phí và thanh toán -->
 ## Khoản chi hộ Ratraco: bước trả tiền lại cho lái xe làm thế nào?
 
 > Hiện có 5 bước: lái xe chi, điều vận lập bảng kê, CS làm thanh toán, quản lý duyệt, thủ quỹ trả lái xe.
@@ -480,12 +480,12 @@ Theo cách thanh toán trả hộ qua ngân hàng
 **Vì sao đề xuất B:** khớp mục tiêu bỏ quỹ tiền mặt trong tài liệu hoá đơn trả hộ 01/10
 
 ::: notes
-- Nguồn: OQ-32; E4. GNHH:984-987; SRC-07 hoa-don-tra-ho-2026-10-01.md (UNC qua API MB/VCB/TPBank).
+- Nguồn: OQ-32; E4. GNHH:984-987; SRC-07 quan-ly-hoa-don-sim.md (UNC qua API MB/VCB/TPBank).
 :::
 
 ---
 
-<!-- layout: oq; id: OQ-33; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Chi phí và thanh toán -->
+<!-- layout: oq; id: OQ-33; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Chi phí và thanh toán -->
 ## Phí lưu xe quá 72 giờ và phí chạy máy phát: phần mềm có tự tính không?
 
 > Hàng CBT miễn phí 72 giờ lưu xe khi đóng hàng và khi trả hàng ở cửa khẩu; máy phát chạy lạnh thu theo thời gian thực tế.
@@ -512,7 +512,7 @@ Theo cách thanh toán trả hộ qua ngân hàng
 
 ---
 
-<!-- layout: oq; id: OQ-6; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Chi phí và thanh toán -->
+<!-- layout: oq; id: OQ-6; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Chi phí và thanh toán -->
 ## Khách từ chối trả khoản trả hộ do lỗi nhân viên Delta: xử lý thế nào?
 
 > Quy trình cung cấp dịch vụ ghi tăng chi phí trên JobID và nêu có thể phát sinh bồi thường nội bộ, nhưng chưa có cách ghi nhận.
@@ -541,7 +541,7 @@ Quản lý duyệt khoản bồi thường cho người gây lỗi
 
 ---
 
-<!-- layout: oq; id: OQ-23; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Kế toán và tài liệu -->
+<!-- layout: oq; id: OQ-23; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Kế toán và tài liệu -->
 ## Phần mềm MISA của Delta có lấy được hoá đơn đầu vào không?
 
 > Đội định lấy hoá đơn điện tử từ MISA thay vì đọc ảnh; không khớp thì chụp và nhập tay.
@@ -561,7 +561,7 @@ Quản lý duyệt khoản bồi thường cho người gây lỗi
 
 ---
 
-<!-- layout: oq; id: OQ-31; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Kế toán và tài liệu -->
+<!-- layout: oq; id: OQ-31; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Kế toán và tài liệu -->
 ## Các loại phí hiện trường được hạch toán thế nào theo từng địa điểm?
 
 > Với đường sắt, SOP đã có: thu nhập chịu thuế lái xe (trả kỳ lương), chi hộ (thu lại khách), trả hộ, chi phí vận hành. Nhờ bổ sung quy tắc cho các tuyến và loại hàng khác.
@@ -576,7 +576,7 @@ Quản lý duyệt khoản bồi thường cho người gây lỗi
 
 ---
 
-<!-- layout: oq; id: OQ-10; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Kế toán và tài liệu -->
+<!-- layout: oq; id: OQ-10; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Kế toán và tài liệu -->
 ## Khoản chi hộ bốc xếp cho Ratraco không có hoá đơn đầu vào được hạch toán thế nào?
 
 > Delta không có hoá đơn đầu vào nhưng phải xuất hoá đơn cho Ratraco. SOP ghi cần làm việc với Ratraco về thuế nếu khoản này phát sinh nhiều.
@@ -591,7 +591,7 @@ Quản lý duyệt khoản bồi thường cho người gây lỗi
 
 ---
 
-<!-- layout: oq; id: OQ-11; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Kế toán và tài liệu -->
+<!-- layout: oq; id: OQ-11; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; recommend: A; group: Kế toán và tài liệu -->
 ## Hàng CBT xuất hoá đơn cho bên thứ ba được uỷ quyền: chấp nhận lệch giữa báo cáo quản trị và báo cáo thuế?
 
 > Doanh thu quản trị ghi theo khách chính, hoá đơn xuất cho bên thanh toán được uỷ quyền.
@@ -615,7 +615,7 @@ Quản lý duyệt khoản bồi thường cho người gây lỗi
 
 ---
 
-<!-- layout: oq; id: OQ-3; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-dispatch-management/drafts/brainstorm-dispatch-interview.md; group: Kế toán và tài liệu -->
+<!-- layout: oq; id: OQ-3; src: ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md; group: Kế toán và tài liệu -->
 ## Anh/chị gửi giúp các tài liệu sau được không, dự kiến khi nào?
 **Tài liệu:** Giao nhận hàng hoá (18/9/2026), mục 3.1.4 (phần ý kiến Trasas)
 

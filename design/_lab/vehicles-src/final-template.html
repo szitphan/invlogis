@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ảnh phương tiện — bản chốt</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1f1f3;--card:#fff;--ink:#121214;--ink2:#5c5c66;--ink3:#93939d;--line:#e3e3e8;--well:#f4f4f6;--acc:#121214;--chip:#efeff2}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#141416;--card:#1d1d20;--ink:#ececf0;--ink2:#b4b4bc;--ink3:#8a8a94;--line:#2c2c31;--well:#2a2a2f;--acc:#ececf0;--chip:#2a2a2f}}
+:root[data-theme="dark"]{--bg:#141416;--card:#1d1d20;--ink:#ececf0;--ink2:#b4b4bc;--ink3:#8a8a94;--line:#2c2c31;--well:#2a2a2f;--acc:#ececf0;--chip:#2a2a2f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1440px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:18px;margin:30px 0 6px}
+.sub{color:var(--ink2);margin:0 0 14px;font-size:13px;max-width:980px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.top{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:12px;font-size:13px}
+.top nav{display:flex;gap:6px;flex-wrap:wrap}
+.top a{color:var(--ink);text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:12.5px}
+.opt{display:flex;gap:6px;align-items:center;color:var(--ink2)}
+.seg{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:2px}
+.seg button{font:inherit;font-size:12.5px;border:0;background:none;color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer}
+.seg button.on{background:var(--acc);color:var(--card)}
+select{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:999px;padding:5px 10px;background:var(--card);color:var(--ink)}
+.flipL .fl{transform:scaleX(-1)}
+/* bảng danh mục */
+.wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:1080px}
+th{text-align:left;font-size:12px;color:var(--ink3);font-weight:600;padding:10px;border-bottom:1px solid var(--line)}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr.grp td{background:var(--well);font-weight:700;font-size:13px}
+.pic{background:var(--well);border-radius:12px;display:flex;align-items:flex-end;justify-content:center;padding:6px;overflow:hidden}
+.pic img{display:block;max-width:100%;max-height:100%;object-fit:contain}
+.pic.q{width:200px;height:120px}.pic.s{width:260px;height:96px}
+.ph{color:var(--ink3);font-size:12px;align-items:center;text-align:center}
+.key{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink3)}
+.note{font-size:12.5px;color:var(--ink2)}
+.chip{display:inline-block;background:var(--chip);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600}
+/* dàn tỉ lệ thật */
+.line{display:flex;align-items:flex-end;gap:18px;overflow-x:auto;padding:10px 4px 4px;border-bottom:2px solid var(--line)}
+.line .it{flex:none;text-align:center;font-size:11.5px;color:var(--ink2)}
+.line .it img{display:block;margin:0 auto 4px}
+.scale{font-size:12px;color:var(--ink3);margin:6px 0 16px}
+/* tổ hợp */
+.mx{display:grid;grid-template-columns:170px repeat(6,minmax(180px,1fr));gap:8px;min-width:1300px}
+.mx .h{font-size:12px;color:var(--ink3);font-weight:600;padding:4px}
+.mx .rl{font-weight:600;font-size:13px;padding:6px 4px}
+.cell{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;min-height:92px;display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer}
+.cell:hover,.cell.on{border-color:var(--ink)}
+.cell.na{background:none;border-style:dashed;cursor:default;align-items:center;justify-content:center;color:var(--ink3);font-size:12px}
+.cmp{position:relative;margin:0 auto}
+.cmp img{position:absolute;display:block}
+.det{display:grid;grid-template-columns:minmax(0,1fr) 220px 300px;gap:16px;align-items:end}
+.det .lb{font-size:12px;color:var(--ink3);margin-top:6px}
+.qcard{background:var(--well);border-radius:14px;padding:10px;position:relative}
+.qcard .tag{position:absolute;left:10px;top:10px}
+@media (max-width:900px){.det{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Ảnh phương tiện — bản chốt</h1>
+  <p class="sub">Quy chuẩn (refs/vehicle-shot-spec.md): mỗi phương tiện 2 mặt cắt — <b>3/4 trước</b> (~35°, đầu xe sang phải) và <b>ngang vuông góc</b>; ảnh nhìn từ trên cho marker. Cabin trắng trung lập, container trắng, không bóng, nền trong suốt. Ảnh lưu cắt sát + kích thước thật (m) → hiển thị cùng tỉ lệ. Quay sang trái bằng CSS (nút "Hướng"). Danh mục: bảng SRS cũ LG (39 tên). Tổ hợp kéo: tạm gác, làm sau.</p>
+  <div class="top">
+    <nav><a href="#cat">Danh mục 39 tên</a><a href="#line">Tỉ lệ thật</a></nav>
+    <div class="opt">Hướng <div class="seg" id="dir"><button data-v="R" class="on">Phải</button><button data-v="L">Trái (lật CSS)</button></div></div>
+  </div>
+
+  <h2 id="cat">1 · Danh mục 39 tên phương tiện</h2>
+  <div class="wrap"><table id="tcat"></table></div>
+
+  <h2 id="line">2 · Dàn xe theo tỉ lệ thật (mặt ngang)</h2>
+  <p class="sub">Cùng một tỉ lệ px/m, đáy bánh thẳng hàng. Dùng để thấy tương quan kích thước giữa các xe.</p>
+  <div class="box" id="lines"></div>
+
+</main>
+<script>
+const D=__DATA__;
+const TYPE={"":"N/A","01":"Sơ mi-Rơ mooc","02":"Đầu kéo container","03":"Xe tải thùng","04":"Xe nâng diesel","05":"Xe nâng điện","06":"DC container","07":"Reefer container","08":"Máy phát điện","09":"Trạm bơm dầu"};
+const SRC=k=>D.src[k], has=k=>k in D.src, asp=k=>D.aspect[k]||0.4, L=k=>D.sizes[k][0];
+const img=(k,cls="")=>has(k)?`<img class="fl ${cls}" src="${SRC(k)}" alt="${k}" loading="lazy">`:`<span class="ph">chưa có ${k}</span>`;
+/* ---- 1. danh mục ---- */
+let last=null,h=`<tr><th>Mã PT</th><th>Tên phương tiện (SRS)</th><th>3/4 trước</th><th>Mặt ngang</th><th>Sơ đồ lốp</th><th>Dài × cao (m)</th></tr>`;
+D.names.forEach(([c,t,n,k,ty])=>{
+  if(t!==last){last=t;h+=`<tr class="grp"><td colspan="6">${t?"Mã loại "+t+" · ":""}${TYPE[t]}</td></tr>`}
+  h+=`<tr><td><b>${c}</b></td><td><b>${n}</b>${k?`<div class="key">${k}</div>`:""}</td>
+   <td>${k?`<div class="pic q">${img(k+"-q")}</div>`:`<div class="pic q ph">Chưa gán xe</div>`}</td>
+   <td>${k?`<div class="pic s">${img(k+"-s")}</div>`:""}</td>
+   <td class="note">${ty?`<span class="chip">Kiểu ${ty}</span><br>${D.tyre[ty]}`:"Không có lốp"}</td>
+   <td class="note">${k&&D.sizes[k]?D.sizes[k].map(v=>String(v).replace(".",",")).join(" × "):"—"}</td></tr>`;
+  if(c==="02"&&has("g-mooc-san-q"))h+=`<tr><td class="note">02 · biến thể</td><td><b>Mooc sàn 40ft 2 giàn</b><div class="key">g-mooc-san</div></td><td><div class="pic q">${img("g-mooc-san-q")}</div></td><td><div class="pic s">${img("g-mooc-san-s")}</div></td><td class="note"><span class="chip">Kiểu 8</span><br>${D.tyre[8]}</td><td class="note">${D.sizes["g-mooc-san"].join(" × ").replace(/\./g,",")}</td></tr>`;
+});
+document.getElementById("tcat").innerHTML=h;
+/* ---- 2. tỉ lệ thật ---- */
+const PPM=16, GROUPS=[["Đầu kéo",["t02","n05","n06","n08","n09"]],["Xe tải",["g-kia","g-truck-s","n29","t03","n17","n12","g-truck-l","n25","n27","n10","n26","n28"]],["Sơ mi rơ mooc",["n01","t01","g-mooc-san","n03","n04"]],["Container · xe nâng · thiết bị",["t06","c40","c45","t07","t04","t05","t08","t09"]]];
+const NM=Object.fromEntries(D.names.filter(n=>n[3]).map(n=>[n[3],n[2]]));Object.assign(NM,{"g-mooc-san":"Mooc sàn 40ft","c40":"Container 40ft","c45":"Container 45ft","g-kia":"Kia Frontier","g-truck-s":"Isuzu tải nhẹ","g-truck-l":"Auman 2 trục"});
+document.getElementById("lines").innerHTML=GROUPS.map(([g,ks])=>`<b>${g}</b><div class="line">${ks.filter(k=>D.sizes[k]).map(k=>`<div class="it">${has(k+"-s")?`<img class="fl" src="${SRC(k+"-s")}" alt="${k}" style="width:${L(k)*PPM}px">`:`<div style="width:${L(k)*PPM}px;height:20px;border:1px dashed var(--line)"></div>`}${NM[k]||k}<br>${String(L(k)).replace(".",",")} m</div>`).join("")}</div>`).join("")+`<div class="scale">Tỉ lệ: ${PPM} px = 1 m · vạch đáy = mặt đất</div>`;
+document.addEventListener("click",e=>{const b=e.target.closest("#dir button");if(b){document.body.classList.toggle("flipL",b.dataset.v==="L");document.querySelectorAll("#dir button").forEach(x=>x.classList.toggle("on",x===b))}});
+</script>
+</body>
+</html>

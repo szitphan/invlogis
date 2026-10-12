@@ -1,0 +1,4 @@
+# Mô hình 3D có thể là hàng mua/giấy phép riêng — không đưa lên git. Ảnh gốc AI chỉ để soát.
+models/*.glb
+models/*.gltf
+raw/

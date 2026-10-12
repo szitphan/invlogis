@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Lab · Reference web</title>
+<style>
+  :root{--bg:#f6f6f4;--surface:#fff;--text:#1b1b1a;--muted:#6b6b66;--line:#e4e3de;--like:#1f8a4c;--dislike:#c43d2f;--chip:#efeee9}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#151514;--surface:#1f1f1d;--text:#efeee9;--muted:#a3a29b;--line:#33332f;--chip:#2a2a27}}
+  :root[data-theme="dark"]{--bg:#151514;--surface:#1f1f1d;--text:#efeee9;--muted:#a3a29b;--line:#33332f;--chip:#2a2a27}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif}
+  header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px;display:flex;gap:10px 12px;align-items:center;flex-wrap:wrap}
+  header h1{font-size:16px;margin:0;flex:1;min-width:200px}
+  header .hint{color:var(--muted);font-size:12px;width:100%;margin:0}
+  button{font:inherit;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:8px;padding:6px 10px;cursor:pointer}
+  button.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+  .filters{display:flex;gap:6px;flex-wrap:wrap;width:100%}
+  .filters button{border-radius:999px;padding:4px 12px;font-size:12px}
+  .filters button.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+  main{max-width:1400px;margin:0 auto;padding:16px}
+  .intro{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:16px}
+  .intro h2{font-size:15px;margin:0 0 6px}
+  .intro ul{margin:0;padding-left:18px;color:var(--muted);font-size:13px}
+  .app{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
+  .app h2{font-size:16px;margin:0 0 2px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .app h2 small{color:var(--muted);font-weight:400;font-size:12px}
+  .why{color:var(--muted);margin:0 0 10px}
+  .dna{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:4px 16px;margin:0 0 12px;font-size:13px}
+  .dna div b{font-weight:600}
+  .strip{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px}
+  .shot{flex:0 0 auto;width:340px}
+  .shot img{width:340px;aspect-ratio:16/10;object-fit:cover;object-position:top left;border-radius:8px;border:1px solid var(--line);cursor:zoom-in;display:block;background:var(--chip)}
+  .shot .cap{font-size:12px;color:var(--muted);margin-top:6px;min-height:54px}
+  .shot .cap .tg{display:inline-block;background:var(--chip);color:var(--text);border-radius:999px;padding:0 7px;margin-right:4px;font-size:11px}
+  .shot .bar{display:flex;gap:4px;margin-top:6px}
+  .shot .bar button{flex:1;padding:4px 0}
+  .shot.like img{outline:3px solid var(--like)}
+  .shot.dislike img{outline:3px solid var(--dislike);opacity:.55}
+  .shot.like .b-like{background:var(--like);color:#fff;border-color:var(--like)}
+  .shot.dislike .b-dis{background:var(--dislike);color:#fff;border-color:var(--dislike)}
+  .shot textarea{width:100%;margin-top:4px;font:inherit;font-size:12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--text);padding:4px;resize:vertical;min-height:34px}
+  .shot.hide{display:none}
+  .app.hide{display:none}
+  .appnote{width:100%;margin-top:10px;font:inherit;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);padding:6px;min-height:40px}
+  details.dropped{color:var(--muted)}
+  details.dropped summary{cursor:pointer;margin:8px 0 12px}
+  .zoom{position:fixed;inset:0;background:#000d;display:none;align-items:center;justify-content:center;z-index:10;cursor:zoom-out;padding:16px}
+  .zoom img{max-height:94vh;max-width:96vw;border-radius:8px}
+  .toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:8px 14px;border-radius:8px;display:none;z-index:11}
+  @media (max-width:600px){.shot,.shot img{width:260px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>UI Lab · Reference web <span id="count" style="color:var(--muted);font-weight:400"></span></h1>
+  <button class="primary" id="export">Copy kết quả gửi Claude</button>
+  <button id="reset">Xoá chấm</button>
+  <div class="filters" id="filters"></div>
+  <p class="hint">Mỗi ảnh: 👍 thích / 👎 không thích, ghi 1 câu "vì sao" nếu có. Bấm ảnh để xem đủ màn. Lọc theo loại màn ở hàng nút trên. Xong bấm "Copy kết quả" rồi dán vào chat. Kết quả lưu trong trình duyệt này.</p>
+</header>
+<main>
+  <section class="intro">
+    <h2>Chấm để chốt 5 việc của bản web</h2>
+    <ul>
+      <li><b>Khung trang</b> — menu trái (Mercury, Attio, Tremor) hay thanh ngang (Deputy, Vercel); nền trang trắng hay xám.</li>
+      <li><b>Danh sách</b> — bảng dày kiểu Tremor, bảng thoáng có số tổng đầu bảng kiểu Mercury, hay kanban kiểu Linear/Attio.</li>
+      <li><b>Chi tiết</b> — ngăn kéo bên phải giữ bảng phía sau (Mercury), chia đôi danh sách–chi tiết (Mercury Cards), hay trang riêng có cột thuộc tính (Linear, Attio).</li>
+      <li><b>Dashboard</b> — ô KPI lớn (Mercury Invoicing), lưới thẻ số liệu có biểu đồ nhỏ (Tremor), hay biểu đồ chính + khối cần duyệt (Ramp).</li>
+      <li><b>Form tạo lệnh</b> — toàn màn từng bước có màn Xem lại (Mercury Send), form + xem trước bên phải (Stripe, Mercury hoá đơn), hay hộp thoại gọn (Linear, Attio).</li>
+    </ul>
+  </section>
+  <div id="list"></div>
+</main>
+<div class="zoom" id="zoom"><img alt=""></div>
+<div class="toast" id="toast"></div>
+<script>
+const TYPES={khung:"Khung trang",ds:"Danh sách",ct:"Chi tiết",db:"Dashboard",form:"Form",hop:"Hộp thoại"};
+const APPS=[
+ {slug:"mercury",name:"Mercury",cat:"Ngân hàng doanh nghiệp · demo thật có dữ liệu",
+  why:"Gần hướng fintech đã chốt ở mobile nhất: nút viên thuốc, nền trắng, số tiền lớn, chip trạng thái nhạt. Chụp từ demo công khai nên mọi màn có dữ liệu thật.",
+  dna:{"Màu":"Trắng, 1 màu chính (tím xanh) chỉ ở nút chính + mục đang chọn","Mật độ":"Thoáng, hàng bảng cao ~48px","Chữ":"Sans tròn, số tiền có phần lẻ nhỏ hơn","Bo góc":"Nút viên thuốc, thẻ bo 12","Khung trang":"Menu trái nền xám nhạt + thanh tìm kiếm trên","Chi tiết":"Ngăn kéo phải, bảng vẫn thấy phía sau","Form":"Toàn màn, stepper dọc trái, nút đáy Back/Next","Đổi thương hiệu":"Dễ — màu chỉ ở nút chính"},
+  shots:[
+   ["Home: lời chào, hàng nút viên thuốc (Send, Transfer…), thẻ số dư có biểu đồ, lưới thẻ tóm tắt",["db","khung"]],
+   ["Giao dịch: 3 số tổng đầu bảng, bộ lọc dạng nút viên thuốc, avatar chữ cái, chip Failed",["ds"]],
+   ["Chi tiết giao dịch mở ngăn kéo phải, bảng vẫn ở sau: số tiền lớn, mốc thời gian, phân loại sửa tại chỗ, bình luận",["ct"]],
+   ["Thẻ: bảng bên trái + chi tiết thẻ ngay bên phải (danh sách–chi tiết)",["ds","ct"]],
+   ["Hoá đơn: 3 ô KPI lớn (Quá hạn đổi màu) trên bảng, chip trạng thái",["db","ds"]],
+   ["Thanh toán: tab có đếm (Cần duyệt 7), bảng gọn, chip Quá hạn",["ds"]],
+   ["Việc cần làm: danh sách việc chờ duyệt, mỗi hàng có icon theo loại",["ds"]],
+   ["Tài khoản: số dư lớn + bảng tài khoản có cột quy tắc tự động",["ds"]],
+   ["Chuyển tiền bước 1: form toàn màn (ẩn menu), tải hoá đơn hoặc chọn người nhận gần đây",["form"]],
+   ["Bước Người nhận: stepper dọc trái, khối thông tin nền xám, nút Go back/Next viên thuốc ở đáy",["form"]],
+   ["Bước Số tiền: ô tiền, chọn tài khoản dạng thẻ, ngày gửi, switch lặp lại",["form"]],
+   ["Bước Xem lại: thẻ tóm tắt số tiền + chip Đã lên lịch, khối nhãn–giá trị, nút chính cuối",["form"]],
+   ["Tạo hoá đơn: chia đôi — lựa chọn dạng thẻ radio bên trái, xem trước hoá đơn bên phải",["form"]]]},
+ {slug:"tremor",name:"Tremor Dashboard",cat:"Mẫu dashboard SaaS · demo thật",
+  why:"Mẫu dashboard trung tính, dày dữ liệu: hợp để so mật độ bảng và cách xếp thẻ số liệu.",
+  dna:{"Màu":"Trắng/xám, tím chỉ ở biểu đồ + mục đang chọn","Mật độ":"Dày — hàng bảng ~34px","Chữ":"Sans nhỏ 13px, số liệu đậm","Bo góc":"Nhỏ (6)","Khung trang":"Menu trái có lối tắt + hồ sơ ở đáy","Bảng":"Chip trạng thái, cột thanh mini, bộ lọc nút viền nét đứt","Đổi thương hiệu":"Dễ"},
+  shots:[
+   ["Tổng quan: thanh tiến độ hạn mức + lưới thẻ số liệu có biểu đồ đường nhỏ, chip % tăng/giảm",["db"]],
+   ["Chi tiết: bảng dày, chip Live/Inactive/Archived, cột thanh mini, bộ lọc nét đứt",["ds"]],
+   ["Giao dịch (bản Insights): bảng giao dịch, chip Approved, menu trái gọn",["ds","khung"]],
+   ["Cài đặt chung: form cài đặt 1 cột",["form"]]]},
+ {slug:"stripe",name:"Stripe",cat:"Thanh toán · ảnh SaaSUI (tài khoản thử)",
+  why:"Mẫu chuẩn cho form tạo chứng từ: nhập bên trái, xem trước kết quả bên phải — giống form tạo lệnh có tổng tiền.",
+  dna:{"Màu":"Trắng, tím ở nút chính + link","Mật độ":"Vừa","Bo góc":"Nhỏ (4–6)","Khung trang":"Menu trái chữ, thanh trên có tìm kiếm","Form":"Toàn màn, 2 cột nhập + xem trước, nút chính góc trên phải","Đổi thương hiệu":"Dễ"},
+  shots:[
+   ["Tạo hoá đơn: form trái + xem trước PDF bên phải, tab PDF/Email/Trang thanh toán",["form"]],
+   ["Cùng màn, đổi sang xem trước trang thanh toán của khách",["form"]],
+   ["Tạo báo giá: form 1 cột dài, bảng sản phẩm nằm trong form, tooltip hướng dẫn",["form"]],
+   ["Tạo gói định kỳ: form + cột Tóm tắt bên phải",["form"]],
+   ["Menu điều hướng mở rộng: nhóm có icon màu + mô tả ngắn",["khung"]],
+   ["Cài đặt: lưới mục có icon + mô tả",["khung"]],
+   ["Hộp thoại thêm sản phẩm chồng lên form, có xem trước giá",["hop","form"]],
+   ["Danh sách gói: tab trạng thái, banner hướng dẫn tối màu, trạng thái rỗng",["ds"]]]},
+ {slug:"linear",name:"Linear",cat:"Quản lý việc · trang chủ + ảnh SaaSUI",
+  why:"Chuẩn cho trang chi tiết có cột thuộc tính bên phải và hộp thoại tạo nhanh. Bản tối lấy từ trang chủ, bản sáng từ tài khoản thử.",
+  dna:{"Màu":"Đơn sắc, rất ít màu, chấm màu ở trạng thái/nhãn","Mật độ":"Dày, chữ nhỏ","Bo góc":"Nhỏ","Khung trang":"Menu trái nhiều tầng, không thanh trên","Chi tiết":"Nội dung + lịch sử giữa, cột thuộc tính phải","Form":"Hộp thoại 1 dòng tiêu đề lớn + hàng chip thuộc tính","Đổi thương hiệu":"Khó — bản sắc nằm ở sự đơn sắc"},
+  shots:[
+   ["Chi tiết việc (tối): mô tả + hoạt động bên trái, cột thuộc tính bên phải (trạng thái, ưu tiên, người, nhãn)",["ct"]],
+   ["Kanban theo trạng thái, thẻ có mã + nhãn màu",["ds"]],
+   ["Chi tiết dự án (sáng): cột thuộc tính, mốc có tiến độ",["ct"]],
+   ["Hộp thoại tạo dự án: tiêu đề lớn, hàng chip thuộc tính bên dưới",["hop","form"]],
+   ["Hộp thoại xác nhận xoá nhỏ giữa màn",["hop"]],
+   ["Menu bộ lọc dạng danh sách lệnh",["ds"]]]},
+ {slug:"ramp",name:"Ramp",cat:"Chi tiêu doanh nghiệp · cắt từ trang chủ",
+  why:"Fintech vận hành: có khối \"cần bạn duyệt\" ngay trên dashboard và bảng phân loại sửa trong ô.",
+  dna:{"Màu":"Trắng kem, nút chính màu chanh nổi bật, xanh lá cho Duyệt","Mật độ":"Vừa","Bo góc":"Nhỏ","Dashboard":"1 biểu đồ chính lớn + thẻ duyệt bên cạnh","Đổi thương hiệu":"Vừa — màu chanh là bản sắc"},
+  shots:[
+   ["Báo cáo: biểu đồ vùng nhiều lớp + tooltip, nút chính màu chanh, thẻ duyệt hoá đơn",["db"]],
+   ["Bảng phân loại kế toán: logo đối tác, chọn danh mục ngay trong ô, tab Cần xem lại",["ds"]],
+   ["Tiền & kho quỹ: số dư lớn + mục \"Cần bạn duyệt\"",["db"]]]},
+ {slug:"attio",name:"Attio",cat:"CRM · ảnh SaaSUI (tài khoản thử)",
+  why:"Bảng/kanban tuỳ biến và trang bản ghi có cột chi tiết phải — giống hồ sơ xe/tài xế.",
+  dna:{"Màu":"Trắng, xanh dương ở nút chính, chip màu ở trạng thái","Mật độ":"Vừa-dày","Bo góc":"Vừa (8)","Khung trang":"Menu trái + thanh trên có view settings","Chi tiết":"Tab hoạt động giữa, cột Record details phải","Đổi thương hiệu":"Dễ"},
+  shots:[
+   ["Kanban pipeline theo cột trạng thái",["ds"]],
+   ["Chi tiết bản ghi: tab hoạt động/email/file giữa, cột thông tin bản ghi bên phải",["ct"]],
+   ["Hộp thoại tạo việc: chọn ngày nhanh (Hôm nay / Mai / Tuần sau)",["hop","form"]],
+   ["Cài đặt thuộc tính: bảng tên + kiểu dữ liệu",["khung"]],
+   ["Menu tuỳ chỉnh view: nhóm theo, cột hiển thị",["ds"]]]},
+ {slug:"deputy",name:"Deputy",cat:"Xếp ca nhân sự · ảnh SaaSUI — gần điều phối nhất",
+  why:"Lịch xếp ca theo người × ngày giống lịch điều phối xe/tài xế; có tạo ca trên lịch và duyệt chấm công kèm bản đồ. Giao diện cũ hơn — chấm để lấy cách tổ chức, không lấy style.",
+  dna:{"Màu":"Trắng, tím đậm ở nút chính, nhiều màu phụ","Mật độ":"Dày","Bo góc":"Nhỏ","Khung trang":"Thanh menu ngang trên cùng, không menu trái","Đổi thương hiệu":"Vừa"},
+  shots:[
+   ["Lịch xếp ca: người/khu vực theo hàng, ngày theo cột",["ds"]],
+   ["Hộp thoại tạo ca ngay trên lịch: ai, khu vực, giờ bắt đầu/kết thúc, nghỉ",["hop","form"]],
+   ["Duyệt chấm công: form + bản đồ vị trí + nút Duyệt nổi bật",["ct"]],
+   ["Hộp thoại bản đồ địa điểm",["hop"]]]},
+ {slug:"gusto",name:"Gusto",cat:"Lương & nhân sự · ảnh SaaSUI",
+  why:"Form nghiệp vụ dài chia bước, có cách báo lỗi tổng + lỗi tại ô.",
+  dna:{"Màu":"Trắng, xanh ngọc ở nút chính, chữ tiêu đề có chân","Mật độ":"Thoáng","Bo góc":"Nhỏ","Form":"Stepper ngang, 1 cột hẹp","Đổi thương hiệu":"Vừa — font tiêu đề là bản sắc"},
+  shots:[
+   ["Chọn loại bằng 2 thẻ lớn có hình",["form"]],
+   ["Form theo bước (stepper ngang) + báo lỗi tổng đầu form + lỗi tại ô",["form"]],
+   ["Form 1 cột: tên, mô tả, radio có/không",["form"]],
+   ["Bảng tài liệu có trạng thái kèm icon",["ds"]]]},
+ {slug:"baremetrics",name:"Baremetrics",cat:"Số liệu doanh thu · ảnh SaaSUI",
+  why:"Trang chi tiết có đầu màn tối chứa số liệu chính — 1 cách làm \"thẻ nhấn\" cho bản web.",
+  dna:{"Màu":"Trắng, xanh dương, đầu màn tối","Mật độ":"Vừa","Bo góc":"Nhỏ","Khung trang":"Thanh icon hẹp bên trái","Đổi thương hiệu":"Dễ"},
+  shots:[
+   ["Chi tiết khách: đầu màn tối có số liệu, khối thuộc tính + timeline",["ct"]],
+   ["Dự báo: số lớn + biểu đồ đường",["db"]],
+   ["Bảng phân tích theo tháng",["ds"]]]},
+];
+const DROPPED=[
+ {name:"Onfleet",why:"Gần nghiệp vụ điều phối nhất nhưng ảnh trên trang chủ bị nghiêng phối cảnh, không đọc được; không có demo công khai."},
+ {name:"Twenty CRM, Plane",why:"Demo bắt đăng nhập."},
+ {name:"Vercel",why:"Ảnh SaaSUI là tài khoản trống, gần như toàn màn rỗng."},
+ {name:"Airwallex, Revolut Business",why:"Trang chủ chụp ra trắng (nội dung chạy theo cuộn), không có demo."},
+ {name:"Ảnh marketing Mercury/Ramp/Attio",why:"Chủ yếu ảnh người và hình minh hoạ, không phải màn sản phẩm."},
+];
+const KEY="uilab-refs-web-v1";
+let S={},F="all";
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const pad=n=>String(n).padStart(2,"0");
+const list=document.getElementById("list");
+function render(){
+  list.innerHTML="";
+  APPS.forEach(a=>{
+    const el=document.createElement("section");el.className="app";
+    const dna=Object.entries(a.dna).map(([k,v])=>`<div><b>${k}:</b> ${v}</div>`).join("");
+    const shots=a.shots.map(([cap,t],i)=>{
+      const id=`${a.slug}/${pad(i+1)}`,st=S[id]||{};
+      return `<div class="shot ${st.v||""}" data-id="${id}" data-t="${t.join(" ")}">
+        <img loading="lazy" src="web/${id}.jpg" alt="${a.name} ${i+1}: ${cap}">
+        <div class="cap"><b>${pad(i+1)}</b> ${t.map(x=>`<span class="tg">${TYPES[x]}</span>`).join("")}<br>${cap}</div>
+        <div class="bar"><button class="b-like" data-v="like" aria-label="Thích">👍</button><button class="b-dis" data-v="dislike" aria-label="Không thích">👎</button></div>
+        <textarea placeholder="vì sao…">${st.note||""}</textarea></div>`}).join("");
+    el.innerHTML=`<h2>${a.name}<small>${a.cat}</small></h2><p class="why">${a.why}</p>
+      <div class="dna">${dna}</div><div class="strip">${shots}</div>
+      <textarea class="appnote" data-app="${a.slug}" placeholder="Nhận xét chung về ${a.name} (tuỳ chọn)">${(S["app:"+a.slug]||{}).note||""}</textarea>`;
+    list.appendChild(el);
+  });
+  const d=document.createElement("details");d.className="dropped";
+  d.innerHTML=`<summary>Đã loại ${DROPPED.length} nguồn</summary>`+DROPPED.map(x=>`<div>• <b>${x.name}</b> — ${x.why}</div>`).join("");
+  list.appendChild(d);
+  filter();count();
+}
+function filters(){
+  const f=document.getElementById("filters"),n=t=>APPS.reduce((s,a)=>s+a.shots.filter(x=>t==="all"||x[1].includes(t)).length,0);
+  f.innerHTML=[["all","Tất cả"],...Object.entries(TYPES)].map(([k,v])=>`<button data-f="${k}" class="${k===F?"on":""}">${v} · ${n(k)}</button>`).join("");
+  f.onclick=e=>{const b=e.target.closest("button");if(!b)return;F=b.dataset.f;filters();filter()};
+}
+function filter(){
+  list.querySelectorAll(".app").forEach(app=>{let any=0;
+    app.querySelectorAll(".shot").forEach(s=>{const ok=F==="all"||s.dataset.t.split(" ").includes(F);s.classList.toggle("hide",!ok);any+=ok});
+    app.classList.toggle("hide",!any)});
+}
+function count(){const v=Object.entries(S).filter(([k,x])=>!k.startsWith("app:")&&x.v).length,t=APPS.reduce((s,a)=>s+a.shots.length,0);document.getElementById("count").textContent=`· đã chấm ${v}/${t} ảnh`}
+list.addEventListener("click",e=>{
+  const b=e.target.closest("button[data-v]");
+  if(b){const s=b.closest(".shot"),id=s.dataset.id;S[id]=S[id]||{};S[id].v=S[id].v===b.dataset.v?"":b.dataset.v;s.classList.remove("like","dislike");if(S[id].v)s.classList.add(S[id].v);save();count();return}
+  if(e.target.tagName==="IMG"){const z=document.getElementById("zoom");z.querySelector("img").src=e.target.src;z.style.display="flex"}
+});
+list.addEventListener("input",e=>{
+  const t=e.target;if(t.tagName!=="TEXTAREA")return;
+  const k=t.dataset.app?"app:"+t.dataset.app:t.closest(".shot").dataset.id;S[k]=S[k]||{};S[k].note=t.value;save();
+});
+document.getElementById("zoom").onclick=e=>e.currentTarget.style.display="none";
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",1800)}
+document.getElementById("export").onclick=()=>{
+  const L=["# Chấm reference web",""];
+  APPS.forEach(a=>{
+    const rows=a.shots.map(([cap,t],i)=>{const id=`${a.slug}/${pad(i+1)}`,s=S[id];return s&&(s.v||s.note)?`- ${id} ${s.v==="like"?"👍":s.v==="dislike"?"👎":"·"} [${t.map(x=>TYPES[x]).join(", ")}] ${s.note||""}`:null}).filter(Boolean);
+    const an=(S["app:"+a.slug]||{}).note;
+    if(rows.length||an){L.push(`## ${a.name}`);if(an)L.push(`> ${an}`);L.push(...rows,"")}
+  });
+  const txt=L.join("\n");
+  (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast("Đã copy — dán vào chat"),()=>{prompt("Copy đoạn này:",txt)});
+};
+document.getElementById("reset").onclick=()=>{if(confirm("Xoá toàn bộ chấm?")){S={};save();render()}};
+filters();render();
+</script>
+</body>
+</html>

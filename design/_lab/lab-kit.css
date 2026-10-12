@@ -48,7 +48,7 @@ body{margin:0;background:var(--lab-bg);color:var(--lab-ink);font:14px/1.5 Inter,
 .s-c{--page:#ffffff;--card:#ffffff;--well:#f4f4f6;--card-bd:#ececf0;--card-sh:0 1px 2px rgba(16,16,20,.04);--btn2:#f1f1f3;--tab:#f4f4f6;--rule:#ececf0}
 
 /* ---------- Thang chung ---------- */
-.k{--ink:#121214;--ink-2:#5c5c66;--ink-3:#93939d;
+.k{--ink:#121214;--ink-2:#5c5c66;--ink-3:#6b6b75;
    --r-card:22px;--r-inner:16px;--r-pill:999px;
    --fs-cap:12.5px;--fs-sm:13.5px;--fs-body:15px;--fs-h3:17px;--fs-h2:24px;--fs-h1:28px;--fs-num:30px;
    --h-btn:52px;--h-btn-sm:42px;--h-field:52px;--h-chip:36px;--h-ib:42px;

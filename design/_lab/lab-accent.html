@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Lab · Thẻ nhấn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab-kit.css">
+<style>
+/* Thẻ nhấn — màu ĐẶC, không gradient/glow/kính mờ. Nhấn bằng: khối màu, cỡ chữ, cấu trúc. */
+.ac{border-radius:var(--r-card);padding:18px;margin-bottom:12px;position:relative}
+.ac .lb{font-size:13px;opacity:.72}
+.ac .big{font-size:32px;font-weight:700;letter-spacing:-.02em;line-height:1.15;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.ac .sub{font-size:13.5px;opacity:.78}
+.ac .k-btns{margin-top:16px}.ac .k-btn{height:46px;font-size:14.5px}
+.ac .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+/* A đặc màu chính */
+.ac-a{background:var(--primary);color:var(--on-primary)}
+.ac-a .b2{background:rgba(255,255,255,.14);color:#fff}
+/* B mực + 1 điểm màu */
+.ac-b{background:#121214;color:#fff}
+.ac-b .dot{width:8px;height:8px;border-radius:50%;background:#7c5cff;display:inline-block;margin-right:6px}
+.b-innvie .ac-b .dot,.b-delta .ac-b .dot{background:var(--primary);box-shadow:0 0 0 2px #fff}
+.ac-b .seg{display:flex;gap:4px;margin-top:14px}.ac-b .seg i{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.16)}.ac-b .seg i.on{background:#fff}
+.ac-b .stp{display:flex;justify-content:space-between;font-size:12px;margin-top:6px;opacity:.6}.ac-b .stp b{opacity:1;color:#fff;font-weight:600}
+.ac-b .tm{font-size:13px;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.1);padding:4px 10px;border-radius:999px}
+/* C trắng + vạch màu trái */
+.ac-c{background:var(--card);box-shadow:var(--card-sh),inset 0 0 0 1px var(--card-bd);padding-left:22px;overflow:hidden}
+.ac-c::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--primary)}
+.ac-c .lb{opacity:1;color:var(--ink-2)}
+.ac-c .sub{opacity:1;color:var(--ink-2)}
+/* D tô nhạt */
+.ac-d{background:var(--accent-soft);color:var(--ink)}
+.ac-d .lb{opacity:1;color:var(--ink-2)}
+.ac-d .big{color:var(--accent)}
+.ac-d .bar{height:8px;border-radius:4px;background:rgba(18,18,20,.08);margin:14px 0 6px;overflow:hidden}.ac-d .bar i{display:block;height:100%;background:var(--accent);border-radius:4px}
+.ac-d .sub{opacity:1;color:var(--ink-2)}
+/* E tách đôi kiểu vé */
+.ac-e{padding:0;background:var(--card);box-shadow:var(--card-sh),inset 0 0 0 1px var(--card-bd);overflow:hidden}
+.ac-e .top{background:var(--primary);color:var(--on-primary);padding:18px 18px 20px}
+.ac-e .cut{position:relative;height:0;border-top:2px dashed var(--rule);margin:0 18px}
+.ac-e .cut::before,.ac-e .cut::after{content:"";position:absolute;top:-11px;width:20px;height:20px;border-radius:50%;background:var(--page)}
+.ac-e .cut::before{left:-28px}.ac-e .cut::after{right:-28px}
+.ac-e .bot{padding:14px 18px 18px}
+.ac-e .kv{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;font-size:13px;color:var(--ink-2)}.ac-e .kv b{display:block;color:var(--ink);font-size:14.5px;font-weight:600;margin-top:1px}
+/* F chữ lớn, không nền màu */
+.ac-f{background:var(--card);box-shadow:var(--card-sh),inset 0 0 0 1px var(--card-bd)}
+.ac-f .lb{opacity:1;color:var(--ink-2)}
+.ac-f .huge{font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1.05;margin:8px 0 6px;font-variant-numeric:tabular-nums}
+.ac-f .huge small{font-size:20px;font-weight:600;color:var(--ink-3);margin-left:4px;letter-spacing:0}
+.ac-f .chg{display:inline-flex;height:24px;align-items:center;padding:0 9px;border-radius:999px;background:#fdecec;color:#b42318;font-size:12.5px;font-weight:600}
+.ac-f .cols{display:grid;grid-template-columns:repeat(3,1fr);margin-top:16px;border-top:1px solid var(--rule)}
+.ac-f .cols div{padding:12px 0 0 12px;border-left:1px solid var(--rule);font-size:12.5px;color:var(--ink-2)}.ac-f .cols div:first-child{padding-left:0;border-left:0}
+.ac-f .cols b{display:block;font-size:17px;color:var(--ink);font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+/* G biển số thật */
+.ac-g{background:#121214;color:#fff}
+.b-innvie .ac-g,.b-delta .ac-g{background:var(--primary)}
+.plate{display:inline-flex;flex-direction:column;align-items:center;background:#fff;color:#121214;border:2.5px solid #121214;box-shadow:0 0 0 2px #fff;border-radius:7px;padding:4px 14px 5px;margin:10px 0 12px;font-weight:700;letter-spacing:.02em;line-height:1.1}
+.plate .p1{font-size:17px}.plate .p2{font-size:24px;font-variant-numeric:tabular-nums}
+.ac-g .chips{display:flex;gap:8px;flex-wrap:wrap}.ac-g .chips span{font-size:12.5px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.12)}
+.ac-g .b2{background:rgba(255,255,255,.14);color:#fff}
+/* H viền đậm */
+.ac-h{background:var(--card);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.ac-h .lb{opacity:1;color:var(--ink-2)}
+.ac-h .t{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:6px 0 2px;line-height:1.3}
+.ac-h .sub{opacity:1;color:var(--ink-2)}
+.ac-h .k-stp{margin-top:14px}
+</style>
+</head>
+<body class="b-neutral">
+<div class="lab-top">
+  <h1>UI Lab · Thẻ nhấn</h1>
+  <div class="lab-ctl">Thương hiệu <div class="lab-opts" data-k="brand"><button data-v="neutral">Trung tính</button><button data-v="innvie">Innvie</button><button data-v="delta">Delta</button></div></div>
+  <div class="lab-ctl">Nền <div class="lab-opts" data-k="surf"><button data-v="a">A · xám</button><button data-v="c">C · trắng</button></div></div>
+  <button class="lab-export" id="export">Copy góp ý gửi Claude</button>
+</div>
+<main class="lab-main">
+  <section class="lab-box">
+    <h2>8 kiểu thẻ nhấn: màu đặc, không gradient</h2>
+    <p>Thẻ nhấn là khối đầu tiên mắt chạm vào ở Home, mỗi màn tối đa 1 khối. Bỏ hẳn gradient, quầng sáng, kính mờ và icon trang trí. Thẻ nổi bật nhờ một trong bốn cách: <b>khối màu đặc</b>, <b>cỡ chữ</b>, <b>cấu trúc</b> (vé, vạch, viền) hoặc <b>vật thật của nghiệp vụ</b> (biển số).</p>
+    <p class="lab-muted">Dữ liệu mẫu. Đổi thương hiệu để xem màu chính Innvie/Delta. Tiêu đề và số lớn dùng Manrope (nút “Tiêu đề” ở góc dưới trái).</p>
+  </section>
+  <div id="specs"></div>
+</main>
+<div class="lab-toast" id="lab-toast"></div>
+<script src="lab-kit.js"></script>
+<script>
+const SPECS=[
+ {n:"A · Khối màu chính đặc",w:"Thay khối tối có gradient hiện tại. Lái xe: xe đang nhận.",a:["Nền = màu chính thương hiệu, đặc 100%","Nút trắng + nút trong suốt 14%, không viền","Rủi ro: thương hiệu trung tính thì A gần như B"],
+  h:()=>`<div class="ac ac-a"><div class="lb">Xe đang nhận</div><div class="big">30E-789.01</div><div class="sub">Hyundai HD320 · 182.430 km · đăng kiểm còn 23 ngày</div>
+  <div class="k-btns"><button class="k-btn on-hero">${I("alert",18)}Báo sự cố</button><button class="k-btn b2">${I("clip",18)}Kiểm tra xe</button></div></div>`},
+ {n:"B · Nền mực + một điểm màu",w:"Kỹ thuật viên: việc đang làm, có tiến độ và đồng hồ.",a:["Nền mực #121214 cố định, không theo thương hiệu","Màu chỉ ở 1 chỗ: chấm trạng thái","Thanh 4 đoạn + tên bước ngay dưới, đồng hồ dạng viên thuốc"],
+  h:()=>`<div class="ac ac-b"><div class="row"><div class="lb" style="opacity:1"><span class="dot"></span>Đang sửa · LSC-0921</div><span class="tm">1:20:14</span></div>
+  <div class="big" style="font-size:24px;margin-top:10px">Thay má phanh trước</div><div class="sub">30E-789.01 · Khoang 2 · Xưởng Hà Đông</div>
+  <div class="seg"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><div class="stp"><span>Báo sự cố</span><span>Báo giá</span><b>Sửa chữa</b><span>Nghiệm thu</span></div>
+  <div class="k-btns"><button class="k-btn on-hero">${I("check",18)}Báo xong</button><button class="k-btn on-hero-2">${I("camera",18)}Chụp ảnh</button></div></div>`},
+ {n:"C · Thẻ trắng + vạch màu trái",w:"Quản lý: việc chờ mình quyết. Nhấn nhẹ, hợp màn đã nhiều màu.",a:["Thẻ trắng như thẻ thường, chỉ thêm vạch 5px màu chính","Nút chính màu chính, nút phụ nền xám","Nhẹ nhất trong 8 kiểu; trên nền C (trắng) dễ chìm"],
+  h:()=>`<div class="ac ac-c"><div class="lb">Chờ bạn duyệt</div><div class="big">3 báo giá</div><div class="sub">Tổng 12.600.000 ₫ · cũ nhất gửi 2 ngày trước</div>
+  <div class="k-btns"><button class="k-btn pri">Duyệt ngay</button><button class="k-btn sec">Xem từng báo giá</button></div></div>`},
+ {n:"D · Tô nhạt màu chính",w:"Thông tin cần chú ý nhưng không khẩn: bảo dưỡng sắp tới, hạn mức.",a:["Nền = màu chính nhạt, số lớn = màu chính","Thanh tiến độ đặc, không bo gradient","Không có nút chính: chạm cả thẻ để mở"],
+  h:()=>`<div class="ac ac-d"><div class="row"><div class="lb">Bảo dưỡng định kỳ 40.000 km</div>${I("chev",18)}</div><div class="big">còn 1.570 km</div>
+  <div class="bar"><i style="width:84%"></i></div><div class="sub">Đã chạy 38.430 / 40.000 km · dự kiến 14/10</div></div>`},
+ {n:"E · Vé tách đôi",w:"Lệnh điều phối / chuyến được giao: phần trên là “cái gì”, phần dưới là “chi tiết + hành động”.",a:["Nửa trên màu chính đặc, nửa dưới trắng","Đường cắt nét đứt + 2 khuyết tròn như cuống vé","Hợp nghiệp vụ điều phối; đừng dùng cho số liệu"],
+  h:()=>`<div class="ac ac-e"><div class="top"><div class="lb">Chuyến được giao · ĐP-1043</div><div class="big" style="font-size:26px">Kho Đồng Nai → Cảng Cát Lái</div><div class="sub">Khởi hành 13:30 hôm nay · 42 km</div></div>
+  <div class="cut"></div><div class="bot"><div class="kv"><div>Xe<b>51C-482.19</b></div><div>Rơ-moóc<b>51R-110.08</b></div><div>Hàng<b>2 cont 40'</b></div><div>Nhận lệnh trước<b>12:45</b></div></div>
+  <div class="k-btns"><button class="k-btn pri">Nhận chuyến</button></div></div></div>`},
+ {n:"F · Chữ lớn, không nền màu",w:"Quản lý: một con số chính của tháng. Nhấn bằng cỡ chữ.",a:["Thẻ trắng, số 44px, đơn vị nhỏ màu xám","Một chip so sánh duy nhất, màu theo tốt/xấu","3 cột phụ kẻ mảnh, không icon"],
+  h:()=>`<div class="ac ac-f"><div class="row"><div class="lb">Chi phí sửa chữa tháng 10</div><span class="chg">+12% so với T9</span></div><div class="huge">124,8<small>triệu ₫</small></div>
+  <div class="cols"><div>Lệnh xong<b>38</b></div><div>Đang sửa<b>8</b></div><div>Xe sẵn sàng<b>96,8%</b></div></div></div>`},
+ {n:"G · Biển số thật",w:"Lái xe: xe đang nhận. Lấy vật thật của nghiệp vụ làm điểm nhấn.",a:["Biển số vẽ như biển thật: nền trắng, viền đen, 2 dòng","Nền mực (trung tính) hoặc màu chính (Innvie/Delta)","Chip thông tin thay cho dòng phụ dài"],
+  h:()=>`<div class="ac ac-g"><div class="lb">Xe đang nhận · Hyundai HD320</div><div class="plate"><span class="p1">30E</span><span class="p2">789.01</span></div>
+  <div class="chips"><span>182.430 km</span><span>Nhiên liệu 62%</span><span>Đăng kiểm còn 23 ngày</span></div>
+  <div class="k-btns"><button class="k-btn on-hero">${I("alert",18)}Báo sự cố</button><button class="k-btn b2">${I("clip",18)}Kiểm tra xe</button></div></div>`},
+ {n:"H · Viền đậm",w:"Việc cần chính mình hành động: nghiệm thu, ký xác nhận.",a:["Thẻ trắng, viền mực 1,5px, không bóng","Stepper mực như thẻ theo dõi","Nút Từ chối (phụ) + Nghiệm thu (chính)"],
+  h:()=>`<div class="ac ac-h"><div class="row"><div class="lb">LSC-0915 · cần bạn xác nhận</div>${pill("accept")}</div><div class="t">Sửa điều hoà cabin</div><div class="sub">29H-123.45 · Gara Minh Phát · xong 09:40</div>
+  ${stepper(3,["02/10","03/10","05/10",""])}
+  <div class="k-btns"><button class="k-btn sec">Từ chối</button><button class="k-btn pri">Nghiệm thu</button></div></div>`},
+];
+const S=labStore("uilab-accent-v1",{brand:"neutral",surf:"a",note:{}});
+function render(){
+  document.body.className="b-"+S.brand;
+  document.getElementById("specs").innerHTML=SPECS.map((s,i)=>`<div class="lab-spec"><div><h3>${s.n}</h3><p class="when">${s.w}</p><ul>${s.a.map(x=>`<li>${x}</li>`).join("")}</ul>
+    <input class="lab-note" data-note="${i}" placeholder="Góp ý ${s.n.split(" · ")[0]}… (giữ / bỏ / sửa gì)" value="${(S.note[i]||"").replace(/"/g,"&quot;")}"></div>
+    <div class="k lab-stage s-${S.surf}" data-check="${s.n}"><div class="k-phone" style="height:auto;border:0;border-radius:0;box-shadow:none;background:none;overflow:visible;width:auto"><div class="k-scr" style="position:static;padding:0;overflow:visible">${s.h()}</div></div></div></div>`).join("");
+}
+render();labBindOpts(S,render);
+document.addEventListener("input",e=>{const k=e.target.dataset.note;if(k===undefined)return;S.note[k]=e.target.value;S.save()});
+document.getElementById("export").onclick=()=>{
+  const L=["# Góp ý thẻ nhấn","",`- Đang xem: ${S.brand} · nền ${S.surf.toUpperCase()}`];
+  SPECS.forEach((s,i)=>{if(S.note[i])L.push(`- ${s.n}: ${S.note[i]}`)});
+  labCopy(L.join("\n"));
+};
+</script>
+<script src="lab-font.js"></script>
+</body>
+</html>

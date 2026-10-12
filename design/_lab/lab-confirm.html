@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Lab · Confirm mobile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab-kit.css">
+<style>
+/* ---------- Riêng trang này: lớp phủ xác nhận ---------- */
+.k{--danger:#d92d20;--danger-soft:#fdecec;--ok:#067647;--ok-soft:#e7f6ee;--warn:#8a5300;--warn-soft:#fff3dc}
+.k-btn.dng{background:var(--danger);color:#fff}
+.k-btn.ghost{background:none;color:var(--ink)}
+.k-btn[disabled]{opacity:.45}
+.k-btn .spin{width:18px;height:18px;border-radius:50%;border:2.5px solid currentColor;border-right-color:transparent;animation:kspin .7s linear infinite}
+@keyframes kspin{to{transform:rotate(360deg)}}
+.cf-scrim{position:absolute;inset:0;background:rgba(10,10,14,.42);z-index:7;animation:kfade .18s ease-out}
+.cf-scrim.blur{backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+@keyframes kfade{from{opacity:0}}
+@keyframes kup{from{transform:translateY(40px);opacity:0}}
+@keyframes kpop{from{transform:translate(-50%,-50%) scale(.94);opacity:0}}
+.cf-ico{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;margin:0 auto 14px}
+.cf-ico.dng{background:var(--danger-soft);color:var(--danger)}
+.cf-ico.ok{background:var(--ok-soft);color:var(--ok)}
+.cf-ico.warn{background:var(--warn-soft);color:var(--warn)}
+.cf-ico.neu{background:var(--well);color:var(--ink)}
+.cf-t{font-size:19px;font-weight:700;letter-spacing:-.01em;line-height:1.3;margin:0 0 6px}
+.cf-b{font-size:14.5px;color:var(--ink-2);line-height:1.45;margin:0}
+.cf-b b{color:var(--ink);font-weight:600}
+.cf-stack{display:flex;flex-direction:column;gap:8px;margin-top:20px}
+/* A — popup giữa màn */
+.cf-pop{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:calc(100% - 40px);background:#fff;border-radius:28px;padding:24px 20px 16px;text-align:center;z-index:8;animation:kpop .2s ease-out}
+/* B, C — bottom sheet */
+.cf-sheet{position:absolute;left:8px;right:8px;bottom:8px;background:#fff;border-radius:34px;padding:8px 20px 22px;z-index:8;animation:kup .22s ease-out;max-height:calc(100% - 60px);overflow-y:auto;scrollbar-width:none}
+.cf-sheet .hd{width:40px;height:5px;border-radius:3px;background:#d6d6dc;margin:0 auto 14px}
+.cf-sheet.center{text-align:center}
+.cf-sheet .x{position:absolute;right:14px;top:14px}
+.cf-sum{background:var(--well);border-radius:var(--r-inner);padding:4px 14px;margin-top:16px;text-align:left}
+.cf-sum>div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;font-size:14px}
+.cf-sum>div+div{border-top:1px solid #e6e6ea}
+.cf-sum span{color:var(--ink-2);flex:none}.cf-sum b{font-weight:600;text-align:right}
+.cf-cons{display:flex;gap:10px;align-items:flex-start;margin-top:12px;padding:10px 12px;border-radius:14px;font-size:13.5px;text-align:left}
+.cf-cons.dng{background:var(--danger-soft);color:#b42318}.cf-cons.warn{background:var(--warn-soft);color:var(--warn)}
+.cf-cons svg{flex:none;margin-top:1px}
+.cf-lbl{display:flex;justify-content:space-between;font-size:13.5px;font-weight:600;margin:16px 0 8px;text-align:left}
+.cf-lbl em{font-style:normal;font-weight:500;color:var(--ink-3)}
+.cf-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.cf-chips .k-chip{height:34px;font-size:13px;cursor:pointer;border:0;font-family:inherit;color:var(--ink)}
+.cf-chips .k-chip.on{background:var(--ink);color:#fff}
+.cf-ta{width:100%;min-height:76px;border:0;border-radius:var(--r-inner);background:var(--well);padding:12px 14px;font:inherit;font-size:14.5px;resize:none;color:var(--ink)}
+.cf-ta:focus{outline:2px solid var(--ink);outline-offset:0}
+/* D — action sheet */
+.cf-as{position:absolute;left:8px;right:8px;bottom:8px;z-index:8;animation:kup .22s ease-out;display:flex;flex-direction:column;gap:8px}
+.cf-as .grp{background:#fff;border-radius:26px;overflow:hidden}
+.cf-as .ttl{padding:16px 20px 12px;text-align:center;font-size:13px;color:var(--ink-2);line-height:1.4;border-bottom:1px solid var(--rule)}
+.cf-as .ttl b{display:block;color:var(--ink);font-size:14px;margin-bottom:2px}
+.cf-as .it{display:flex;align-items:center;justify-content:center;gap:8px;height:56px;font-size:16px;font-weight:500;width:100%;border:0;background:none;font-family:inherit;color:var(--ink);cursor:pointer}
+.cf-as .it+.it{border-top:1px solid var(--rule)}
+.cf-as .it.dng{color:var(--danger);font-weight:600}
+.cf-as .it.cancel{font-weight:600}
+/* E — vuốt để xác nhận */
+.cf-slide{position:relative;height:60px;border-radius:999px;background:var(--well);margin-top:20px;overflow:hidden;user-select:none;touch-action:none}
+.cf-slide .fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:var(--primary);opacity:.12;width:60px}
+.cf-slide.dng .fill{background:var(--danger)}
+.cf-slide .lb{position:absolute;inset:0;display:grid;place-items:center;font-size:15px;font-weight:600;color:var(--ink-2);padding-left:44px}
+.cf-slide .kn{position:absolute;left:5px;top:5px;width:50px;height:50px;border-radius:50%;background:var(--primary);color:var(--on-primary);display:grid;place-items:center;cursor:grab;z-index:2}
+.cf-slide.dng .kn{background:var(--danger);color:#fff}
+.cf-slide.done .lb{color:var(--ink)}
+/* F — hoàn tác */
+.cf-snack{position:absolute;left:12px;right:12px;bottom:28px;background:#18181b;color:#fff;border-radius:20px;padding:6px 6px 6px 16px;display:flex;align-items:center;gap:10px;z-index:8;animation:kup .22s ease-out;font-size:14px}
+.cf-snack.up{bottom:100px}
+.cf-snack .tx{flex:1;line-height:1.35;padding:6px 0}
+.cf-snack .tx span{display:block;color:#a8a8b3;font-size:12.5px}
+.cf-snack button{height:40px;border:0;border-radius:999px;background:rgba(255,255,255,.14);color:#fff;font:inherit;font-weight:600;padding:0 14px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.cf-snack .bar{position:absolute;left:16px;right:16px;bottom:3px;height:2px;border-radius:2px;background:rgba(255,255,255,.18);overflow:hidden}
+.cf-snack .bar i{display:block;height:100%;background:#fff;animation:kbar 5s linear forwards}
+@keyframes kbar{from{width:100%}to{width:0}}
+/* G — xác nhận tại chỗ */
+.cf-inline{margin-top:4px}
+.cf-inline .k-btn{transition:all .2s}
+.cf-inline .ask{background:var(--danger-soft);border-radius:var(--r-card);padding:14px;animation:kfade .2s}
+.cf-inline .ask p{margin:0 0 12px;font-size:14px;color:#7a1a12;line-height:1.4}
+.k-toast{position:absolute;left:50%;top:56px;transform:translateX(-50%);background:#18181b;color:#fff;border-radius:999px;padding:9px 16px 9px 12px;display:flex;gap:8px;align-items:center;font-size:14px;font-weight:500;white-space:nowrap;z-index:9;animation:kfade .2s}
+.k-toast svg{color:#4ade80}
+/* nền màn phía sau */
+.bg-act{position:absolute;left:0;right:0;bottom:0;padding:12px 16px 26px;background:#fff;border-top:1px solid var(--rule);display:flex;gap:10px;z-index:5}
+.bg-act .k-btn{flex:1}
+/* Lab */
+.fit{border-collapse:collapse;width:100%;font-size:13px;margin-top:6px}
+.fit th,.fit td{padding:7px 8px;border-top:1px solid var(--lab-line);text-align:center;vertical-align:top}
+.fit th:first-child,.fit td:first-child{text-align:left}
+.fit td.y{color:#067647;font-weight:700}.fit td.n{color:var(--lab-muted)}.fit td.m{color:#b54708;font-weight:600}
+.fit tr.cur td,.fit tr.cur th{background:rgba(127,127,140,.10)}
+.opt-h{display:flex;align-items:baseline;gap:8px;margin:0 0 4px}
+.opt-h b{font-size:15px}
+.badge{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--lab-bg);color:var(--lab-muted);border:1px solid var(--lab-line)}
+.badge.y{color:#067647;border-color:#a6dfbf}.badge.m{color:#b54708;border-color:#f5c98b}.badge.n{color:#b42318;border-color:#f3b4ae}
+.col-ul{margin:8px 0 0;padding-left:18px;font-size:12.5px;color:var(--lab-muted)}
+.col-ul li.p::marker{content:"+ ";color:#067647}.col-ul li.m::marker{content:"− ";color:#b42318}
+.reopen{font:inherit;font-size:12px;border:1px solid var(--lab-line);background:var(--lab-card);color:var(--lab-ink);padding:4px 10px;border-radius:999px;cursor:pointer;margin-left:auto}
+.vote{display:flex;gap:4px;margin-top:8px}
+.vote button{font:inherit;font-size:12px;border:1px solid var(--lab-line);background:var(--lab-card);color:var(--lab-ink);padding:4px 10px;border-radius:999px;cursor:pointer}
+.vote button.on{background:var(--lab-ink);color:var(--lab-bg)}
+</style>
+</head>
+<body class="b-neutral">
+<div class="lab-top">
+  <h1>UI Lab · Confirm mobile</h1>
+  <div class="lab-ctl">Tình huống <div class="lab-opts" data-k="sc"><button data-v="del">Xoá</button><button data-v="appr">Phê duyệt</button><button data-v="rej">Từ chối + lý do</button><button data-v="discard">Huỷ form</button><button data-v="site">Chuyển site</button></div></div>
+  <div class="lab-ctl">Thương hiệu <div class="lab-opts" data-k="brand"><button data-v="neutral">Trung tính</button><button data-v="innvie">Innvie</button><button data-v="delta">Delta</button></div></div>
+  <button class="lab-export" id="export">Copy góp ý gửi Claude</button>
+</div>
+<main class="lab-main">
+  <section class="lab-box">
+    <h2>7 cách xác nhận hành động trên mobile — so với chuẩn hiện tại (CMP-03 Mobile = popup giữa màn)</h2>
+    <p>Mỗi phương án vẽ trên cùng một màn chi tiết lệnh sửa, cùng câu chữ theo design.md › Copy động. Đổi <b>Tình huống</b> ở thanh trên để xem phương án hợp với loại hành động nào. Bấm nút xác nhận để xem trạng thái đang gửi → xong; nút <i>Mở lại</i> để xem lại.</p>
+    <p class="lab-muted">Không phải chọn 1 cho tất cả: thường giữ 1 mặc định + 1–2 biến thể cho trường hợp đặc biệt. Bảng dưới là gợi ý của Claude, bạn sửa theo ý.</p>
+    <table class="fit" id="fit"></table>
+  </section>
+  <div class="lab-row" id="opts"></div>
+</main>
+<div class="lab-toast" id="lab-toast"></div>
+<script src="lab-kit.js"></script>
+<script>
+/* ---------- Câu chữ theo tình huống (design.md › Copy động) ---------- */
+const SC={
+ del:{n:"Xoá",tone:"dng",ic:"x",t:"Xoá lệnh sửa LSC-0921?",b:"Lệnh <b>LSC-0921</b> và lịch sử xử lý sẽ mất, không thể hoàn tác.",ok:"Xoá lệnh",no:"Huỷ",undo:true,lock:true,
+   cons:"Không thể hoàn tác",done:"Đã xoá lệnh LSC-0921"},
+ appr:{n:"Phê duyệt",tone:"ok",ic:"check",t:"Xác nhận phê duyệt?",b:"Bạn đang phê duyệt báo giá <b>BG-0412</b>.",ok:"Phê duyệt",no:"Huỷ",
+   sum:[["Lệnh","LSC-0921"],["Xưởng","Gara Minh Phát"],["Tổng báo giá","4.850.000 đ"]],done:"Đã phê duyệt BG-0412"},
+ rej:{n:"Từ chối",tone:"warn",ic:"alert",t:"Từ chối báo giá?",b:"Bạn đang từ chối báo giá <b>BG-0412</b>.",ok:"Từ chối",no:"Huỷ",reason:true,
+   chips:["Giá cao","Thiếu hạng mục","Sai phụ tùng","Khác"],done:"Đã từ chối BG-0412"},
+ discard:{n:"Huỷ form",tone:"warn",ic:"alert",t:"Huỷ bản ghi?",b:"Bạn có dữ liệu chưa được lưu. Nếu rời khỏi trang, toàn bộ thông tin sẽ bị mất.",ok:"Huỷ",no:"Tiếp tục chỉnh sửa",swap:true,done:"Đã huỷ bản nháp"},
+ site:{n:"Chuyển site",tone:"neu",ic:"pin",t:"Chuyển sang Xưởng Long Biên?",b:"Trang sẽ tải lại theo site mới.",ok:"Chuyển site",no:"Huỷ",done:"Đã chuyển sang Xưởng Long Biên"}
+};
+/* ---------- Phương án ---------- */
+const OPT=[
+ {k:"A",n:"Popup giữa màn",tag:"Chuẩn hiện tại",fit:{del:"y",appr:"y",rej:"m",discard:"y",site:"y"},
+  w:"Mặc định cho mọi xác nhận ngắn. Đã có trong CMP-03 Mobile.",
+  p:["Quen thuộc, giống web → 1 câu chữ, 1 luật","Gọn, dễ làm"],m:["Nút nằm giữa màn, xa ngón cái","Chật khi thêm trường lý do (bàn phím đẩy lên che)"]},
+ {k:"B",n:"Bottom sheet gọn",tag:"Đề xuất mặc định",fit:{del:"y",appr:"y",rej:"m",discard:"y",site:"y"},
+  w:"Thay A làm mặc định trên mobile: cùng nội dung, chuyển xuống đáy màn theo kiểu sheet u04.",
+  p:["Nút trong vùng ngón cái","Đồng bộ với các sheet khác của app (lọc, chọn)","Câu chữ giữ nguyên như web"],m:["Dễ bị vuốt xuống đóng → cần khoá vuốt khi Xoá"]},
+ {k:"C",n:"Sheet có tóm tắt / lý do",tag:"Cho hành động có dữ liệu",fit:{del:"y",appr:"y",rej:"y",discard:"n",site:"n"},
+  w:"Khi người dùng cần xem lại cái mình sắp duyệt (số tiền, xưởng) hoặc phải nhập lý do. Chip lý do nhanh + ô ghi thêm.",
+  p:["Duyệt mà thấy số tiền ngay, khỏi mở lại chi tiết","Lý do chọn bằng chip, gõ ít","Hệ quả có khối màu riêng, không chỉ chữ"],m:["Cao hơn — chỉ dùng khi có dữ liệu thật để tóm tắt","Danh sách lý do nhanh phải do UC khai"]},
+ {k:"D",n:"Action sheet",tag:"Khi bấm từ menu ⋯",fit:{del:"y",appr:"n",rej:"n",discard:"y",site:"m"},
+  w:"Hành động đến từ menu ⋯ hoặc nút back: một danh sách lựa chọn + Huỷ tách riêng (kiểu iOS).",
+  p:["Nhẹ nhất, quen tay trên điện thoại","Hợp 'Huỷ form' khi bấm back: Bỏ thay đổi / Lưu nháp / Tiếp tục"],m:["Ít chỗ cho hệ quả dài","Không hợp hành động cần nút chính nổi bật (Phê duyệt)"]},
+ {k:"E",n:"Vuốt để xác nhận",tag:"Hành động nặng",fit:{del:"m",appr:"y",rej:"n",discard:"n",site:"n"},
+  w:"Hành động không lùi được và hay bị bấm nhầm khi đang di chuyển: chốt lệnh, xác nhận giao, phê duyệt tiền lớn.",
+  p:["Không thể bấm nhầm bằng một chạm","Hợp lái xe/kỹ thuật thao tác một tay ngoài hiện trường"],m:["Chậm hơn, phiền nếu dùng cho việc nhẹ","Cần nút thay thế cho trợ năng (đọc màn hình)"]},
+ {k:"F",n:"Làm luôn + Hoàn tác",tag:"Thay cho hỏi lại",fit:{del:"m",appr:"n",rej:"n",discard:"y",site:"n"},
+  w:"Hành động khôi phục được (lưu trữ, gỡ khỏi danh sách, xoá nháp): làm ngay, hiện thanh Hoàn tác 5 giây — không hỏi.",
+  p:["Nhanh nhất, không chặn luồng","Ít mỏi vì không hỏi đi hỏi lại"],m:["Chỉ dùng khi hệ thống thật sự hoàn tác được","Xoá vĩnh viễn thì KHÔNG dùng — trái CMP-03 (Xoá bắt buộc xác nhận)"]},
+ {k:"G",n:"Xác nhận tại chỗ",tag:"Trong thẻ / dòng",fit:{del:"y",appr:"m",rej:"n",discard:"n",site:"n"},
+  w:"Nút bung thành khối hỏi ngay trong thẻ, không phủ cả màn. Hợp xoá 1 mục nhỏ trong danh sách dài (ảnh, hạng mục, phụ tùng).",
+  p:["Không mất ngữ cảnh — vẫn thấy các mục xung quanh","Xoá nhiều mục liên tiếp nhanh"],m:["Không dùng cho hành động cấp cả bản ghi","Dễ bị bỏ sót nếu thẻ nằm ngoài tầm nhìn"]},
+];
+const BADGE={y:["y","Hợp"],m:["m","Được, có điều kiện"],n:["n","Không hợp"]};
+const S=labStore("uilab-confirm-v1",{sc:"del",brand:"neutral",note:{},vote:{}});
+const PS={}; // trạng thái từng điện thoại: open | sending | done
+/* ---------- Màn nền ---------- */
+function backdrop(o){
+  const s=SC[S.sc];
+  const items=o.k==="G"?inlineList(s):`<div class="k-card"><div class="k-rec-h"><div class="k-icc">${I("wrench",17)}</div><div class="code">LSC-0921</div>${pill("doing")}</div>
+      <div class="k-rec-t">Thay má phanh trước, kiểm tra hệ thống phanh</div>${stepper(2,["06/10","07/10","đang làm"])}</div>
+     <div class="k-card"><div class="k-kv"><div><span>Xe</span><b>30E-789.01</b></div><div><span>Xưởng</span><b>Gara Minh Phát</b></div><div><span>Báo giá</span><b>BG-0412 · 4.850.000 đ</b></div></div></div>`;
+  const title=S.sc==="discard"?"Báo sự cố mới":S.sc==="site"?"LSC-1102 · Long Biên":"Chi tiết lệnh";
+  return `<div class="k-chdr"><button class="k-ib plain" aria-label="Quay lại">${I("back")}</button><div class="ct">${title}</div><button class="k-ib well" aria-label="Thêm">${I("more")}</button></div>${items}`;
+}
+function bgActions(){
+  const s=SC[S.sc];
+  if(S.sc==="appr"||S.sc==="rej")return `<div class="bg-act" data-layer="bg"><button class="k-btn sec">Từ chối</button><button class="k-btn pri">Phê duyệt</button></div>`;
+  if(S.sc==="discard")return `<div class="bg-act" data-layer="bg"><button class="k-btn sec">Huỷ</button><button class="k-btn pri">Gửi báo cáo</button></div>`;
+  return "";
+}
+/* ---------- Nút ---------- */
+function okBtn(o,s,cls="full"){
+  const st=PS[o.k];const t=s.tone==="dng"?"dng":"pri";
+  return `<button class="k-btn ${t} ${cls}" data-ok="${o.k}" ${st==="sending"?"disabled":""}>${st==="sending"?`<span class="spin"></span>Đang xử lý…`:s.ok}</button>`;
+}
+const noBtn=(o,s,cls="sec full")=>`<button class="k-btn ${cls}" data-no="${o.k}">${s.no}</button>`;
+function btnStack(o,s){
+  // Huỷ form: hành động an toàn (Tiếp tục chỉnh sửa) đứng trên, nút phá đứng dưới dạng chữ đỏ
+  if(s.swap)return `<div class="cf-stack"><button class="k-btn pri full" data-no="${o.k}">${s.no}</button><button class="k-btn ghost full" style="color:var(--danger)" data-ok="${o.k}">${PS[o.k]==="sending"?`<span class="spin"></span>`:"Bỏ thay đổi"}</button></div>`;
+  return `<div class="cf-stack">${okBtn(o,s)}${noBtn(o,s,"ghost full")}</div>`;
+}
+const ico=s=>`<div class="cf-ico ${s.tone}">${I(s.ic,26,2.2)}</div>`;
+function reason(o,s){
+  if(!s.reason)return "";
+  const sel=(S.note["_r"+o.k]||"");
+  return `<div class="cf-lbl">Lý do từ chối<em>Bắt buộc</em></div>
+    <div class="cf-chips">${s.chips.map(c=>`<button class="k-chip ${sel===c?"on":""}" data-chip="${o.k}" data-v="${c}">${c}</button>`).join("")}</div>
+    <textarea class="cf-ta" placeholder="Ghi thêm cho xưởng (không bắt buộc)…"></textarea>`;
+}
+/* ---------- Lớp phủ theo phương án ---------- */
+const OV={
+ A:(o,s)=>`<div class="cf-scrim" data-layer="ov"></div><div class="cf-pop" data-layer="ov" role="alertdialog" aria-modal="true">${ico(s)}<p class="cf-t">${s.t}</p><p class="cf-b">${s.b}</p>${s.reason?`<div style="text-align:left">${reason(o,s)}</div>`:""}${btnStack(o,s)}</div>`,
+ B:(o,s)=>`<div class="cf-scrim" data-layer="ov"></div><div class="cf-sheet center" data-layer="ov" role="alertdialog" aria-modal="true"><div class="hd"></div>${ico(s)}<p class="cf-t">${s.t}</p><p class="cf-b">${s.b}</p>${s.reason?`<div style="text-align:left">${reason(o,s)}</div>`:""}${btnStack(o,s)}</div>`,
+ C:(o,s)=>{
+   const sum=s.sum||[["Lệnh","LSC-0921"],["Xe","30E-789.01"],["Báo giá","BG-0412 · 4.850.000 đ"]];
+   const cons=s.cons?`<div class="cf-cons dng">${I("alert",16,2)}<span><b>${s.cons}.</b> Lịch sử xử lý và ảnh đính kèm cũng bị xoá.</span></div>`:
+     S.sc==="appr"?`<div class="cf-cons warn">${I("alert",16,2)}<span>Xưởng nhận lệnh sửa ngay sau khi duyệt.</span></div>`:
+     S.sc==="rej"?`<div class="cf-cons warn">${I("alert",16,2)}<span>Xưởng nhận lý do và phải gửi lại báo giá.</span></div>`:"";
+   return `<div class="cf-scrim" data-layer="ov"></div><div class="cf-sheet" data-layer="ov" role="alertdialog" aria-modal="true"><div class="hd"></div>
+   <div style="display:flex;gap:12px;align-items:center"><div class="cf-ico ${s.tone}" style="margin:0;width:44px;height:44px">${I(s.ic,22,2.2)}</div><p class="cf-t" style="margin:0;flex:1">${s.t}</p></div>
+   <div class="cf-sum">${sum.map(r=>`<div><span>${r[0]}</span><b>${r[1]}</b></div>`).join("")}</div>${cons}${reason(o,s)}
+   <div class="k-btns" style="margin-top:20px">${noBtn(o,s,"sec")}${okBtn(o,s,"")}</div></div>`},
+ D:(o,s)=>{
+   const items=S.sc==="discard"?[["Bỏ thay đổi","dng","ok"],["Lưu nháp","","no"]]:S.sc==="site"?[["Chuyển sang Xưởng Long Biên","","ok"]]:[[s.ok,s.tone==="dng"?"dng":"","ok"]];
+   const ttl=S.sc==="discard"?`<b>Bạn có dữ liệu chưa lưu</b>Rời màn này sẽ mất toàn bộ thông tin đã nhập.`:`<b>${s.t}</b>${s.b.replace(/<\/?b>/g,"")}`;
+   return `<div class="cf-scrim" data-layer="ov"></div><div class="cf-as" data-layer="ov" role="alertdialog" aria-modal="true"><div class="grp"><div class="ttl">${ttl}</div>${items.map(i=>`<button class="it ${i[1]}" data-${i[2]}="${o.k}">${PS[o.k]==="sending"&&i[2]==="ok"?`<span class="spin" style="width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:kspin .7s linear infinite"></span>`:""}${i[0]}</button>`).join("")}</div>
+   <div class="grp"><button class="it cancel" data-no="${o.k}">${S.sc==="discard"?"Tiếp tục chỉnh sửa":"Huỷ"}</button></div></div>`},
+ E:(o,s)=>`<div class="cf-scrim" data-layer="ov"></div><div class="cf-sheet center" data-layer="ov" role="alertdialog" aria-modal="true"><button class="k-ib well x" data-no="${o.k}" aria-label="Đóng">${I("x",18)}</button><div class="hd"></div>${ico(s)}<p class="cf-t">${s.t}</p><p class="cf-b">${s.b}</p>
+   ${S.sc==="appr"?`<div class="cf-sum" style="text-align:left"><div><span>Tổng báo giá</span><b>4.850.000 đ</b></div></div>`:""}
+   <div class="cf-slide ${s.tone==="dng"?"dng":""}" data-slide="${o.k}"><div class="fill"></div><div class="lb">${PS[o.k]==="sending"?"Đang xử lý…":"Vuốt để "+s.ok.toLowerCase()}</div><div class="kn" aria-label="Vuốt để ${s.ok.toLowerCase()}" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">${PS[o.k]==="sending"?`<span class="spin" style="width:18px;height:18px;border-radius:50%;border:2.5px solid currentColor;border-right-color:transparent;animation:kspin .7s linear infinite"></span>`:I("chev",22,2.4)}</div></div>
+   <button class="k-btn ghost full" style="margin-top:8px" data-no="${o.k}">${s.no}</button></div>`,
+ F:(o,s)=>`<div class="cf-snack${bgActions()?" up":""}" data-layer="ov" role="status"><div class="k-icc" style="background:rgba(255,255,255,.12);color:#fff;width:32px;height:32px">${I("check",16,2.4)}</div><div class="tx">${s.done.replace("Đã xoá lệnh","Đã chuyển vào thùng rác")}<span>${S.sc==="del"?"Tự xoá hẳn sau 30 ngày":"Hoàn tác được trong 5 giây"}</span></div><button data-no="${o.k}">${I("back",16,2)}Hoàn tác</button><div class="bar"><i></i></div></div>`,
+ G:()=>""
+};
+function inlineList(s){
+  const open=PS.G==="open"||PS.G==="sending";
+  const rows=[["Má phanh trước (bộ)","2 × 650.000 đ"],["Dầu phanh DOT4","1 × 180.000 đ"],["Công thay + kiểm tra","1.200.000 đ"]];
+  return `<div class="k-card"><div class="k-sec" style="margin:0 0 6px"><h3>Hạng mục báo giá</h3></div>
+   ${rows.map((r,i)=>`<div class="k-row"><div class="k-icc">${I("box",17)}</div><div class="tx"><b>${r[0]}</b><span>${r[1]}</span></div>${i===1?"":`<button class="k-ib well" aria-label="Xoá hạng mục" style="width:36px;height:36px">${I("x",16)}</button>`}</div>
+   ${i===1?`<div class="cf-inline">${open?`<div class="ask"><p><b>Xoá "${r[0]}" khỏi báo giá?</b><br>Tổng báo giá giảm 180.000 đ.</p><div class="k-btns"><button class="k-btn sec sm" data-no="G">Giữ lại</button><button class="k-btn dng sm" data-ok="G" ${PS.G==="sending"?"disabled":""}>${PS.G==="sending"?`<span class="spin"></span>`:"Xoá hạng mục"}</button></div></div>`:PS.G==="done"?"":`<button class="k-btn sec sm full" style="color:var(--danger)" data-reopen="G">${I("x",16,2)}Xoá hạng mục này</button>`}</div>`:""}`).join("")}
+   </div>`;
+}
+/* ---------- Ráp ---------- */
+function phoneFor(o){
+  const s=SC[S.sc];const st=PS[o.k]||(PS[o.k]="open");
+  let ov="";
+  if(o.k==="G"){ov=st==="done"?`<div class="k-toast">${I("check",16,2.4)}Đã xoá hạng mục</div>`:"";}
+  else if(o.k==="F"){ov=st==="done"?`<div class="k-toast">${I("check",16,2.4)}Đã hoàn tác</div>`:OV.F(o,s);}
+  else if(st==="done")ov=`<div class="k-toast">${I("check",16,2.4)}${s.done}</div>`;
+  else ov=OV[o.k](o,s);
+  return phone("c",backdrop(o),bgActions()+ov);
+}
+function render(){
+  document.body.className="b-"+S.brand;
+  const sc=S.sc;
+  document.getElementById("fit").innerHTML=`<tr><th>Phương án</th>${Object.keys(SC).map(k=>`<th>${SC[k].n}</th>`).join("")}</tr>`+
+    OPT.map(o=>`<tr><th>${o.k} · ${o.n}</th>${Object.keys(SC).map(k=>`<td class="${o.fit[k]}" style="${k===sc?"background:rgba(127,127,140,.12)":""}">${{y:"✓",m:"△",n:"—"}[o.fit[k]]}</td>`).join("")}</tr>`).join("")+
+    `<tr><td colspan="6" class="lab-muted" style="text-align:left">✓ hợp · △ được nhưng có điều kiện · — không nên. Cột đang tô = tình huống đang xem.</td></tr>`;
+  document.getElementById("opts").innerHTML=OPT.map(o=>{const b=BADGE[o.fit[sc]];const v=S.vote[o.k]||"";
+    return `<div class="lab-col" data-check="${o.k}">
+     <div class="opt-h"><b>${o.k} · ${o.n}</b><span class="badge">${o.tag}</span></div>
+     <div class="opt-h"><span class="badge ${b[0]}">${SC[sc].n}: ${b[1]}</span><button class="reopen" data-reopen="${o.k}">Mở lại</button></div>
+     <p class="lab-muted" style="margin:4px 0 10px">${o.w}</p>
+     ${phoneFor(o)}
+     <ul class="col-ul">${o.p.map(x=>`<li class="p">${x}</li>`).join("")}${o.m.map(x=>`<li class="m">${x}</li>`).join("")}</ul>
+     <div class="vote" data-vote="${o.k}">${["Giữ","Có thể","Bỏ"].map(x=>`<button class="${v===x?"on":""}">${x}</button>`).join("")}</div>
+     <input class="lab-note" data-note="${o.k}" placeholder="Góp ý phương án ${o.k}…" value="${(S.note[o.k]||"").replace(/"/g,"&quot;")}"></div>`}).join("");
+  bindSlides();
+}
+/* ---------- Tương tác ---------- */
+function send(k){PS[k]="sending";render();setTimeout(()=>{PS[k]="done";render()},900)}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-ok],[data-no],[data-reopen],[data-chip],.vote button");if(!t)return;
+  if(t.matches(".vote button")){const k=t.parentElement.dataset.vote;S.vote[k]=S.vote[k]===t.textContent?"":t.textContent;S.save();render();return}
+  if(t.dataset.chip){const k="_r"+t.dataset.chip;S.note[k]=S.note[k]===t.dataset.v?"":t.dataset.v;S.save();render();return}
+  if(t.dataset.reopen){PS[t.dataset.reopen]="open";render();return}
+  if(t.dataset.ok){const k=t.dataset.ok;if(SC[S.sc].reason&&!S.note["_r"+k]){labToast("Chọn lý do trước khi từ chối");return}send(k);return}
+  if(t.dataset.no){const k=t.dataset.no;PS[k]=k==="F"?"done":"closed";render();
+    if(PS[k]==="closed")setTimeout(()=>{if(PS[k]==="closed"){PS[k]="open";render()}},1200)}
+});
+/* Chạm nền mờ: đóng, trừ Xoá (CMP-03 Mobile hàng 6) */
+document.addEventListener("click",e=>{if(!e.target.classList.contains("cf-scrim"))return;
+  if(SC[S.sc].lock){labToast("Xoá không đóng khi chạm ra ngoài (CMP-03)");return}
+  const k=e.target.closest("[data-check]").dataset.check;PS[k]="closed";render();setTimeout(()=>{PS[k]="open";render()},1200)});
+function bindSlides(){
+  document.querySelectorAll("[data-slide]").forEach(sl=>{
+    const kn=sl.querySelector(".kn"),fill=sl.querySelector(".fill");let x0=null,max=0;
+    const set=x=>{kn.style.transform=`translateX(${x}px)`;fill.style.width=(x+60)+"px";kn.setAttribute("aria-valuenow",Math.round(x/max*100))};
+    kn.addEventListener("pointerdown",e=>{x0=e.clientX;max=sl.clientWidth-60;kn.setPointerCapture(e.pointerId)});
+    kn.addEventListener("pointermove",e=>{if(x0===null)return;set(Math.max(0,Math.min(max,e.clientX-x0)))});
+    kn.addEventListener("pointerup",e=>{if(x0===null)return;const d=e.clientX-x0;x0=null;
+      if(d>=max*.9){set(max);sl.classList.add("done");send(sl.dataset.slide)}else{kn.style.transition="transform .2s";set(0);setTimeout(()=>kn.style.transition="",220)}});
+    kn.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();send(sl.dataset.slide)}});
+  });
+}
+document.addEventListener("input",e=>{const k=e.target.dataset.note;if(!k)return;S.note[k]=e.target.value;S.save()});
+document.getElementById("export").onclick=()=>{
+  const L=["Góp ý UI Lab · Confirm mobile (design/_lab/lab-confirm.html):"];
+  OPT.forEach(o=>{const v=S.vote[o.k],n=S.note[o.k];if(v||n)L.push(`- ${o.k} ${o.n}: ${v?"["+v+"] ":""}${n||""}`)});
+  if(L.length===1)L.push("- (chưa có góp ý)");labCopy(L.join("\n"));
+};
+render();labBindOpts(S,()=>{Object.keys(PS).forEach(k=>delete PS[k]);render()});
+</script>
+<script src="lab-font.js"></script>
+</body>
+</html>

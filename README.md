@@ -1,4 +1,4 @@
-# Dispatch Management — BA Workspace
+# Invlogis — BA Workspace
 
 Không gian làm việc phân tích nghiệp vụ (BA) cho hệ thống quản lý vận hành của **Delta**, doanh nghiệp vận tải có đội đầu kéo, xe tải và sơ mi-rơ mooc. Repo chứa tài liệu yêu cầu, không chứa mã nguồn sản phẩm.
 

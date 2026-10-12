@@ -1,10 +1,11 @@
 ---
 type: shared-definitions
 status: draft
-updated: 2026-10-05
+updated: 2026-10-12
 links:
   - docs-input/srs-cu/lg-srs-export.md
   - docs/_shared/system-overview.md
+  - docs/cross-process-flow/brainstorms/cross-process-flow.md
 ---
 
 # Definitions
@@ -193,6 +194,26 @@ Yêu cầu giao 1 phương tiện cho nhân viên (thường là lái xe) hoặc
 Đơn đặt mua dầu (PO) sinh từ kế hoạch mua dầu đã duyệt. Khi dầu về, tạo phiếu nhập dầu theo đơn (trường hợp nhập từ nhà cung cấp).
 **Appears in:** Cây dầu
 **Aliases:** PO dầu
+
+### Quy trình
+Chuỗi nghiệp vụ nối nhau, bắt đầu từ một bản ghi gốc (vd báo giá → sửa chữa → xuất kho → thanh toán). Từ màn chi tiết của bất kỳ bản ghi nào trong chuỗi đều xem được cả cây. Mã `QT-[Mã chi nhánh]-[XXXX]`. Trạng thái do hệ thống tự tính: Đang triển khai · Đã dừng · Đã hoàn thành. Mỗi bản ghi thuộc đúng 1 quy trình. Phân biệt với *Liên quy trình*: đó là tên tính năng (CMP-09 Cross Process Flow) dùng để hiển thị Quy trình.
+**Appears in:** Liên quy trình, Xưởng, Cây dầu, Liên module, Điều phối
+**Aliases:** quy trình lớn, thanh tiến trình (tên trong SRS LG, tránh dùng)
+
+### Bước quy trình
+Một nút trên cây quy trình, ứng với tối đa 1 bản ghi nghiệp vụ (vd 1 phiếu xuất kho). Bước chưa có bản ghi thì hiện "Chưa tạo". Bước có 4 trạng thái: Chưa triển khai · Đang triển khai · Đã thu hồi/từ chối · Đã hoàn thành. Có 5 loại bước: bước chính, nhánh phát sinh, ngã rẽ chưa chốt, bước công nợ, bước liên module.
+**Appears in:** Liên quy trình, mọi nghiệp vụ có bảng liên quy trình
+**Aliases:** step (SRS LG)
+
+### Nhánh phát sinh
+Bước nằm ngoài luồng chính, chỉ sinh ra khi bản ghi trước gặp một điều kiện (vd lệnh sửa chữa còn dư phụ tùng thì sinh phiếu nhập kho). Nhánh phát sinh bị từ chối không làm quy trình chuyển sang Đã dừng.
+**Appears in:** Liên quy trình, Sửa chữa, Kho, Bồi thường
+**Aliases:** trường hợp phát sinh; TH1/TH2… (mã của SRS LG, không hiện trên giao diện)
+
+### Bảng liên quy trình
+Bảng mỗi nghiệp vụ khai trong SRS của mình, gồm: bước nào tạo từ bước nào, trigger, trường hợp phát sinh, điều kiện, 1 hay nhiều bản ghi, có cho thu hồi/xoá khi đã có bước con không, có cho xoá không. Cây quy trình và nút tạo nghiệp vụ tiếp theo đều đọc từ bảng này. Câu chữ viết cho người dùng đọc.
+**Appears in:** Liên quy trình, SRS của mọi nghiệp vụ thuộc quy trình
+**Aliases:** bảng phát sinh (SRS LG UC00.00.02)
 
 ## Actor Registry
 

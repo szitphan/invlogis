@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab — Font tiêu đề</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Manrope:wght@500;600;700&family=Geist:wght@500;600;700&family=Inter+Tight:wght@500;600;700&family=Mona+Sans:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f4f6;--ink:#121214;--ink2:#5c5c66;--ink3:#93939d;--card:#fff;--rule:#ececf0;--well:#f4f4f6;--primary:#121214;--hero:linear-gradient(140deg,#0e0e10 0%,#1c1c21 55%,#2a2a31 100%)}
+body.innvie{--primary:#0036B5;--hero:linear-gradient(140deg,#001a5e 0%,#0036B5 60%,#0a63e0 100%)}
+body.delta{--primary:#2E7449;--hero:linear-gradient(140deg,#0f2a1b 0%,#1f5235 55%,#2E7449 100%)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.top{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:12px 16px;background:rgba(244,244,246,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.top h1{font-size:15px;margin:0}
+.ctl{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink2)}
+.seg{display:flex;background:#e7e7ea;border-radius:999px;padding:2px}
+.seg button{font:inherit;font-size:12px;border:0;background:none;color:var(--ink);padding:5px 11px;border-radius:999px;cursor:pointer}
+.seg button.on{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;padding:20px 16px 60px;max-width:1500px;margin:0 auto}
+.cell{background:var(--card);border-radius:24px;padding:18px 16px 16px;border:1px solid var(--rule)}
+.meta{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:2px}
+.meta b{font-size:13px}
+.tag{font-size:11px;padding:2px 8px;border-radius:999px;background:var(--well);color:var(--ink2);white-space:nowrap}
+.tag.base{background:#fdecec;color:#a12a2a}
+.why{font-size:12.5px;color:var(--ink2);margin:0 0 14px;min-height:38px}
+/* mẫu màn */
+.h{font-family:var(--hf);font-weight:var(--hw);letter-spacing:var(--ls)}
+.greet{font-size:13px;color:var(--ink2);margin:0}
+.h1{font-size:28px;line-height:1.15;margin:2px 0 14px}
+.hero{background:var(--hero);color:#fff;border-radius:22px;padding:16px;margin-bottom:16px}
+.hero .lbl{font-size:12.5px;opacity:.72;margin:0}
+.hero .num{font-size:30px;line-height:1.1;margin:4px 0 2px}
+.hero .sub{font-size:13px;opacity:.8;margin:0}
+.h2{font-size:22px;line-height:1.2;margin:0 0 4px}
+.h3{font-size:17px;line-height:1.3;margin:16px 0 8px}
+.item{display:flex;gap:12px;align-items:center;background:var(--well);border-radius:16px;padding:12px;margin-bottom:8px}
+.ic{width:38px;height:38px;border-radius:12px;background:var(--primary);flex:none}
+.it{font-family:var(--hf);font-weight:var(--hw);letter-spacing:var(--ls);font-size:15px;margin:0;line-height:1.3}
+.is{font-size:13px;color:var(--ink2);margin:0}
+.stress{margin-top:14px;padding-top:12px;border-top:1px dashed var(--rule)}
+.stress .h{font-size:21px;line-height:1.35;margin:0}
+.stress .s2{font-size:15px;margin:4px 0 0;color:var(--ink2)}
+.zoom{font-size:44px!important;line-height:1.25!important}
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>Lab · Font tiêu đề mobile</h1>
+  <div class="ctl">Độ đậm <div class="seg" id="w"><button data-v="600" class="on">600</button><button data-v="700">700</button></div></div>
+  <div class="ctl">Thương hiệu <div class="seg" id="b"><button data-v="" class="on">Trung tính</button><button data-v="innvie">Innvie</button><button data-v="delta">Delta</button></div></div>
+  <div class="ctl">Phóng dấu <div class="seg" id="z"><button data-v="0" class="on">Tắt</button><button data-v="1">Bật</button></div></div>
+</div>
+<div class="grid" id="g"></div>
+<script>
+const F=[
+ ["Cal Sans","Cal Sans","base","Bản đang dùng — nét tròn, dày, chỉ có Regular. Cảm giác “startup/điệu”.",0,true],
+ ["Be Vietnam Pro","Be Vietnam Pro","Khuyên dùng","Thiết kế riêng cho tiếng Việt, dấu đặt chuẩn nhất. Grotesk gọn, đứng đắn, hợp sản phẩm doanh nghiệp.","-0.015em"],
+ ["Plus Jakarta Sans","Plus Jakarta Sans","Khuyên dùng","Hình học mềm, rất “fintech hiện đại”, ở 600–700 vẫn sang. Gần chất app ngân hàng số.","-0.02em"],
+ ["Manrope","Manrope","Đáng thử","Bán hình học, chữ hơi rộng, số đẹp — hợp thẻ KPI, số tiền. Trẻ hơn Be Vietnam Pro một chút.","-0.02em"],
+ ["Geist","Geist","Đáng thử","Kiểu Vercel: kỹ thuật, sắc, tối giản. Hiện đại nhất trong nhóm, hơi lạnh.","-0.025em"],
+ ["Inter Tight","Inter Tight","An toàn","Inter khít hơn cho tiêu đề — đồng bộ tuyệt đối với body Inter, rủi ro thấp nhất nhưng ít cá tính.","-0.02em"],
+ ["Mona Sans","Mona Sans","Đáng thử","Kiểu GitHub: grotesk chắc, hơi rộng, cá tính vừa phải, rất “product”.","-0.015em"],
+ ["IBM Plex Sans","IBM Plex Sans","Corporate","Đậm chất doanh nghiệp/ngân hàng, nghiêm túc. Có thể hơi cứng cho app mobile.","-0.01em"],
+ ["Space Grotesk","Space Grotesk","Cá tính","Techy, chữ số đặc trưng. Thú vị nhưng kém “business” — để so sánh biên.","-0.02em"],
+];
+const g=document.getElementById('g');
+g.innerHTML=F.map(([n,fam,tag,why,ls,base])=>`
+<div class="cell" style="--hf:'${fam}',Inter,sans-serif;--ls:${ls||0};--hw:var(--hw0)" data-base="${base?1:0}">
+  <div class="meta"><b>${n}</b><span class="tag ${base?'base':''}">${tag}</span></div>
+  <p class="why">${why}</p>
+  <p class="greet">Chào buổi sáng, anh Đức</p>
+  <h2 class="h h1">Lệnh sửa chữa đang chờ bạn</h2>
+  <div class="hero"><p class="lbl">Chi phí ước tính tháng này</p><p class="h num">1.248.500.000 ₫</p><p class="sub">Tăng 12% so với tháng trước</p></div>
+  <h3 class="h h2">Xe 51C-482.19 đang được kiểm tra</h3>
+  <h4 class="h h3">Chờ bạn nghiệm thu</h4>
+  <div class="item"><div class="ic"></div><div><p class="it">Thay lốp sau — Gara Quận 7</p><p class="is">Hoàn tất lúc 09:40 · 3 hạng mục</p></div></div>
+  <div class="item"><div class="ic"></div><div><p class="it">Điều phối xe đầu kéo về kho Đồng Nai</p><p class="is">Tài xế: Nguyễn Văn Hữu</p></div></div>
+  <div class="stress"><p class="h st">Quyết định điều phối · Kiểm định ẫ ẩ ặ ỗ ờ ữ ỹ</p><p class="h s2">ĐỔI TRẠNG THÁI · Ẫ Ổ Ữ Ỹ Ặ · Hướng dẫn</p></div>
+</div>`).join('');
+function seg(id,fn){const el=document.getElementById(id);el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;el.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));fn(b.dataset.v)});}
+function setW(v){document.body.style.setProperty('--hw0',v);document.querySelectorAll('[data-base="1"]').forEach(c=>c.style.setProperty('--hw','400'));}
+setW('600');
+seg('w',setW);
+seg('b',v=>{document.body.className=v});
+seg('z',v=>document.querySelectorAll('.stress .st').forEach(e=>e.classList.toggle('zoom',v==='1')));
+</script>
+</body>
+</html>

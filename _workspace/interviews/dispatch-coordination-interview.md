@@ -260,3 +260,30 @@ User trả lời nhóm A:
 - OQ-40 (hỏi khách): SOP 5.4.2.4 (:1409) ghi "Sau khi nhân viên CS upload đủ Lệnh nâng hàng" trong bước của nhân viên hiện trường — là hiện trường upload (lỗi chép) hay CS phải upload lại?
 - 4e sơ đồ luồng chính v1 (chat 07/10): user OK thứ tự + người làm. JobID không đạt điều kiện nợ quá hạn/hạn mức → DỪNG HẲN, chờ khách thanh toán (không có duyệt ngoại lệ). OQ-40 tạm hiểu: hiện trường upload, vẫn hỏi khách xác nhận.
 - User muốn doc có CẢ 2 loại: sơ đồ tổng + sơ đồ con từng luồng (FCL X/N, LCL X, air X/N, CFS N, CBT, rail). Đang trình v2.
+
+## Checkpoint (2026-10-07)
+- Commit 44c09c3 + tag `checkpoint/dispatch-brainstorm-v1` trên main: brainstorm `docs/dispatch-coordination/brainstorms/dispatch-coordination.md` (draft) + bản chép ghi chép này.
+- User chọn làm TIẾP MỌI THỨ (brainstorm còn lại + userflow + wireframe) trên nhánh `draft/dispatch-downstream`. Bỏ nhánh = quay về đúng checkpoint 07/10, mất cả phần brainstorm làm thêm (user đã đồng ý).
+- Từ đây ghi chép cập nhật vào file này trong repo; bản ở thư mục handoff không dùng nữa.
+- Đang chờ: duyệt sơ đồ v2 (vòng 2/3) — sơ đồ tổng + 8 sơ đồ con (Mục 5 file brainstorm).
+- 2026-10-07 user ĐỒNG Ý sơ đồ v2 (tổng + 8 sơ đồ con), gồm: gom 6 TH FCL xuất thành 4 nhánh + (B); thứ tự CBT, đường sắt; khách thanh toán xong JobID đi tiếp (bỏ khỏi Assumptions khi sửa file).
+- Tiếp: 4c trạng thái. Căn cứ SOP: JobID Chờ xử lý → Đã tạo YCVT → Đã thực hiện Lệnh vận tải (sop-dieu-phoi:463-480) + Hoàn thành dịch vụ (QTCCDV:886-892); YCVT Đã được tạo → Đã lập Lệnh → Đã thực hiện Lệnh (sop-dieu-phoi:508-520), điều vận khai số xe/Lệnh, trừ lùi (:455-457); không huỷ được JobID sau phân luồng, cần quy trình sửa JobID theo Booking Note mới (:389). Lệnh vận tải: SOP không định nghĩa (QTĐV thiếu, OQ-1).
+- 2026-10-07 user OK toàn bộ trạng thái (4c):
+  - JobID: Chờ duyệt → (Dừng - chờ khách thanh toán ↔) → Chờ xử lý → Đã tạo YCVT → Đã thực hiện Lệnh vận tải → Hoàn thành dịch vụ. Huỷ chỉ khi chưa phân luồng; sau đó chỉ sửa (đổi Booking Note, giảm số cont).
+  - YCVT: Đã được tạo → Đã lập Lệnh → Đã thực hiện Lệnh; hiện "đã lập x/n Lệnh".
+  - Lệnh: Đã lập → Đã giao lái xe → Lái xe đã nhận → Đang thực hiện → Lái xe đã chốt → Đã duyệt. Lái xe được từ chối (về Đã lập). Huỷ trước khi lái xe nhận. Duyệt trả lại → Đang thực hiện.
+  - Cảnh báo mốc: Mới → Đã có người nhận → Đã xử lý (bắt chọn nguyên nhân); quá hạn → Đã leo thang.
+  - Chứng từ gốc: Đang ở hiện trường → CS đã nhận → Đã giao khách.
+- Tiếp: 4d giao dịch bị ngắt.
+- 2026-10-07 user OK bảng 4d (10 tình huống: mất sóng lưu máy + giờ theo lúc chụp + nhãn "Chờ đồng bộ"; AI không đọc được → nhập tay + đánh dấu thủ công; GPS mất → bấm tay + ảnh định vị; MISA chưa trả → cờ; 2 điều vận cùng lập → người lưu trước được; 2 người cùng xử lý → ai nhận trước giữ; người được giao từ chối/quá lâu → về quản lý; JobID dừng công nợ không tự huỷ; D/O đổi kho → cập nhật + báo; sửa JobID → YCVT/Lệnh dư chưa giao tự huỷ, đã giao báo điều vận). Không cho số → 2 OQ:
+- OQ-41 (hỏi khách): Người được giao việc hiện trường bao lâu không bấm nhận thì việc tự quay về cán bộ quản lý giao lại?
+- OQ-42 (hỏi khách): JobID dừng vì nợ quá hạn/vượt hạn mức có cần nhắc CS sau một số ngày không? Bao nhiêu ngày, nhắc ai?
+- Tiếp: 4f scenario matrix.
+- 2026-10-07 user OK ma trận 4f (17 dòng: JobID/YCVT/Lệnh/Cảnh báo/Chứng từ gốc — ai đổi, điều kiện, kết quả). Chốt thêm: Lái xe đã nhận → Đang thực hiện tự theo GPS khởi hành, không GPS thì lái xe bấm "Bắt đầu"; duyệt Lệnh: điều vận HOẶC cán bộ quản lý, 1 người là đủ. → PHẦN 4 XONG. Tiếp: Phần 5 validation/limits/wording.
+- 2026-10-07 user OK Phần 5: quy tắc kiểm tra 5.1 (số container ISO 6346; số tờ khai 12 chữ số; số kiện đã về ≤ tổng; VGM/kiện/CBM/kg > 0 + người chụp xác nhận; nhiệt độ 1 số thập phân, cho âm; khoản chi bắt buộc loại phí + số tiền > 0 + ảnh + có/không HĐ; số xe YCVT ≥ 1; 5 loại lý do bắt buộc); lỗi E-dispatch-001…009 (001 Inline, 002–009 Popup) + E-common-008/009; câu xác nhận huỷ Lệnh/JobID, thành công, thông tin như bản chat 07/10. Chu kỳ nhắc nhiệt: user không có số → OQ-43.
+- OQ-43 (hỏi khách): Chu kỳ nhắc nhập nhật ký nhiệt độ mặc định cho từng loại hàng lạnh là bao nhiêu? SOP GNHH chỉ có sầu riêng 3–4 giờ/lần, hàng lạnh khác 3–4 lần/ngày.
+- → PHẦN 5 XONG. Tiếp: Phần 6 bối cảnh hệ thống.
+- 2026-10-07 user OK Phần 6 (bản chat 07/10): 6.1 thông tin lưu trên JobID/Lệnh/lịch sử/danh mục; 6.2 dịch vụ ngoài (EUP GPS, Google Maps, MISA, AI đọc chứng từ, email; ePort không kết nối; ngân hàng = feature riêng); 6.3 thông báo đẩy theo vai trò (khách chờ OQ-38); 6.4 việc tự chạy (đếm mốc + leo thang, nhắc nhiệt, hạn 7 ngày, lưu xe 72h, shipment list kỳ 25/cuối tháng, thu việc quá lâu chờ OQ-41); 6.5 tức thời: giờ đến GPS, cảnh báo quá mốc, giao việc mới. → PHẦN 6 XONG. Tiếp: Phần 7 rủi ro + tiêu chí thành công.
+- 2026-10-07 user OK Phần 7: 5 rủi ro (Zalo/không dùng app; thiếu dữ liệu nền; AI đọc sai; thiếu tài liệu khách; GPS gián đoạn) + 5 tiêu chí thành công gắn pain a–e, chưa có số → OQ-44.
+- OQ-44 (hỏi khách): Số hiện trạng và mục tiêu cho 5 tiêu chí: tỉ lệ trường tự điền; tỉ lệ việc hiện trường giao/nhận trên app; số lần + tiền phạt lưu cont/lưu vỏ/lưu xe mỗi tháng; thời gian từ xe xong việc tới duyệt Lệnh; tỉ lệ Lệnh duyệt đủ chi phí.
+- → PHỎNG VẤN BRAINSTORM XONG ĐỦ 7 PHẦN. Brainstorm file chưa cập nhật Phần 4–7 (đang là bản checkpoint). User yêu cầu chạy /user-flow.

@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Lab · Bản đồ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab-kit.css">
+<style>
+/* ---------- Riêng trang này: bản đồ ---------- */
+.k{--run:#12b76a;--stop:#f79009;--lost:#98a2b3;--late:#f04438;--jam:#f79009;--dev:#e5484d;--gps:#2f80ed}
+/* Nền bản đồ: 2 kiểu. Màu chỉ dành cho dữ liệu (tuyến, xe, cảnh báo) — nền luôn trung tính */
+.mp{position:absolute;inset:0;overflow:hidden;background:var(--land);touch-action:none;
+  --rt:var(--primary);--rt-on:#fff}
+.mp.light{--land:#eef0f3;--zone:#e3e5ea;--park:#dfece3;--water:#cfdff0;--road:#fff;--case:#dadde3;--hw:#fff;--hwcase:#c8cdd5;--lbl:#868b95;--lbl-h:#fff}
+.mp.dark{--land:#15171b;--zone:#1c1f24;--park:#15211a;--water:#0d1b2a;--road:#262930;--case:#1d1f24;--hw:#30343c;--hwcase:#1d1f24;--lbl:#6c717c;--lbl-h:#15171b}
+body.b-neutral .mp.dark{--rt:#f2f2f4;--rt-on:#121214}
+body.b-innvie .mp.dark{--rt:#5b8cff}
+body.b-delta .mp.dark{--rt:#45b87a}
+.mp>svg:not(.pin){position:absolute;left:0;top:0}
+.mp .r-case{fill:none;stroke:var(--case);stroke-linecap:round;stroke-linejoin:round}
+.mp .r-road{fill:none;stroke:var(--road);stroke-linecap:round;stroke-linejoin:round}
+.mp .r-hwc{fill:none;stroke:var(--hwcase);stroke-linecap:round;stroke-linejoin:round}
+.mp .r-hw{fill:none;stroke:var(--hw);stroke-linecap:round;stroke-linejoin:round}
+.mp .w{fill:none;stroke:var(--water);stroke-linecap:round}
+.mp .zn{fill:var(--zone)}.mp .pk{fill:var(--park)}
+.mp text{fill:var(--lbl);font-family:Inter,sans-serif;paint-order:stroke;stroke:var(--lbl-h);stroke-width:3px;stroke-linejoin:round}
+.mp text.area{font-weight:600;letter-spacing:.12em}
+.mp text.wl{fill:#6f93bd;font-style:italic;stroke:none}
+.mp.dark text.wl{fill:#3d5f84}
+/* Lớp tuyến */
+.rt-done{fill:none;stroke:var(--rt);stroke-linecap:round;stroke-linejoin:round}
+.rt-halo{fill:none;stroke:var(--land);stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.rt-left{fill:none;stroke:var(--rt);stroke-linecap:round;stroke-linejoin:round;opacity:.55}
+.rt-plan{fill:none;stroke:var(--lbl);stroke-linecap:round;stroke-linejoin:round;opacity:.8}
+.rt-jam{fill:none;stroke:var(--jam);stroke-linecap:round}
+.rt-dev{fill:none;stroke:var(--dev);stroke-linecap:round;stroke-linejoin:round}
+.rt-geo{fill:color-mix(in srgb,var(--rt) 9%,transparent);stroke:var(--rt);stroke-dasharray:4 4}
+.rt-eta{fill:none;stroke:var(--ink-2);stroke-dasharray:2 5;stroke-linecap:round}
+.mp.dark .rt-eta{stroke:#a0a6b2}
+/* Lớp điểm (HTML, cỡ cố định theo px, không co giãn theo zoom) */
+.mk{position:absolute;transform:translate(-50%,-50%);z-index:2}
+.mk-stop{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;background:#fff;color:var(--ink);box-shadow:0 0 0 2px var(--ink-3),0 2px 6px rgba(0,0,0,.18)}
+.mk-stop.done{background:var(--rt);color:var(--rt-on);box-shadow:0 0 0 2.5px #fff,0 2px 6px rgba(0,0,0,.2)}
+.mk-stop.next{background:var(--ink);color:#fff;box-shadow:0 0 0 2.5px #fff,0 0 0 8px color-mix(in srgb,var(--ink) 16%,transparent),0 2px 8px rgba(0,0,0,.25)}
+.mp.dark .mk-stop.next{background:#fff;color:#121214;box-shadow:0 0 0 2.5px #121214,0 0 0 8px rgba(255,255,255,.18)}
+.mk-stop .bd{position:absolute;top:-5px;right:-6px;width:16px;height:16px;border-radius:50%;background:var(--late);color:#fff;font-size:11px;display:grid;place-items:center;box-shadow:0 0 0 2px #fff}
+.mk-lb{position:absolute;top:50%;transform:translateY(-50%);background:#fff;border-radius:12px;padding:5px 9px;box-shadow:0 2px 10px rgba(16,16,20,.14);white-space:nowrap;line-height:1.25;font-size:12px;color:var(--ink)}
+.mk-lb.r{left:calc(100% + 8px)}.mk-lb.l{right:calc(100% + 8px)}
+.mk-lb.t{top:auto;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%)}
+.mk-lb.b{top:calc(100% + 8px);left:50%;transform:translateX(-50%)}
+.mk-lb b{font-weight:600;display:block;font-size:12.5px}
+.mk-lb span{color:var(--ink-2)}.mk-lb .lt{color:var(--late);font-weight:600}
+.mk-truck{width:34px;height:34px;border-radius:12px;background:var(--ink);color:#fff;display:grid;place-items:center;box-shadow:0 0 0 2px #fff,0 3px 8px rgba(0,0,0,.25);position:relative}
+.mp.dark .mk-truck{box-shadow:0 0 0 2px #2b2e35,0 3px 8px rgba(0,0,0,.5)}
+.mk-truck .hd{position:absolute;inset:-11px;pointer-events:none}
+.mk-truck .hd::before{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);border:5px solid transparent;border-bottom:7px solid var(--ink);border-top:0}
+.mk-truck .dt{position:absolute;right:-4px;bottom:-4px;width:12px;height:12px;border-radius:50%;border:2.5px solid #fff;background:var(--run)}
+.mk-truck.stop .dt{background:var(--stop)}.mk-truck.late .dt{background:var(--late)}
+.mk-truck.lost{background:#fff;color:var(--lost);box-shadow:0 0 0 2px var(--lost) inset,0 2px 6px rgba(0,0,0,.15)}
+.mk-truck.lost .dt{background:var(--lost)}.mk-truck.lost .hd{display:none}
+.mk-truck.sel{transform:scale(1.15);box-shadow:0 0 0 2.5px #fff,0 0 0 9px color-mix(in srgb,var(--rt) 28%,transparent),0 4px 10px rgba(0,0,0,.3);background:var(--rt);color:var(--rt-on)}
+.mk-truck.sel .hd::before{border-bottom-color:var(--rt)}
+.mk-truck.fade{opacity:.4;transform:scale(.8)}
+.mk-poi{width:26px;height:26px;border-radius:50%;background:#fff;color:var(--ink-2);display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.mk-poi.fuel{background:var(--accent-soft);color:var(--accent)}
+.mk-cl{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.mk-cl i{width:32px;height:32px;border-radius:50%;background:#fff;color:var(--ink);font-style:normal;font-weight:700;font-size:14px;display:grid;place-items:center}
+.mk-chip{background:#fff;border-radius:999px;padding:3px 9px;font-size:11.5px;font-weight:600;white-space:nowrap;box-shadow:0 2px 8px rgba(16,16,20,.16);display:inline-flex;align-items:center;gap:4px}
+.mk-chip.jam{color:#b54708}.mk-chip.dev{color:#b42318}.mk-chip.eta{background:var(--ink);color:#fff}
+.mk-chip.eta.best{background:var(--rt);color:var(--rt-on)}
+.mk-me{width:16px;height:16px;border-radius:50%;background:var(--gps);box-shadow:0 0 0 3px #fff,0 0 0 26px rgba(47,128,237,.14),0 2px 6px rgba(0,0,0,.3)}
+.mk-target{width:38px;height:38px;border-radius:50%;background:var(--rt);color:var(--rt-on);display:grid;place-items:center;box-shadow:0 0 0 3px #fff,0 0 0 12px color-mix(in srgb,var(--rt) 20%,transparent),0 4px 10px rgba(0,0,0,.3)}
+.pin{position:absolute;left:50%;transform:translate(-50%,-100%);z-index:4;pointer-events:none;filter:drop-shadow(0 6px 6px rgba(0,0,0,.25))}
+.pin-dot{position:absolute;left:50%;width:8px;height:4px;border-radius:50%;background:rgba(0,0,0,.35);transform:translate(-50%,-50%);z-index:3}
+/* Mảnh nổi trên bản đồ (mobile) */
+.mp-sb{position:absolute;left:0;right:0;top:0;z-index:6;color:var(--ink)}
+.mp-sb.dk{color:#fff}
+.mp-top{position:absolute;left:12px;right:12px;top:50px;display:flex;align-items:center;gap:8px;z-index:6}
+.fab{width:44px;height:44px;border-radius:50%;background:#fff;border:0;display:grid;place-items:center;color:var(--ink);box-shadow:0 2px 10px rgba(16,16,20,.16);flex:none}
+.fchip{height:44px;border-radius:999px;background:#fff;box-shadow:0 2px 10px rgba(16,16,20,.16);display:flex;align-items:center;gap:8px;padding:0 14px 0 6px;font-weight:600;font-size:14px;min-width:0;flex:1}
+.fchip .ic{width:32px;height:32px;border-radius:50%;background:var(--well);display:grid;place-items:center;flex:none}
+.fchip small{display:block;font-weight:500;font-size:12px;color:var(--ink-2)}
+.fchip .tx{min-width:0;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fsearch{flex:1;height:48px;border-radius:999px;background:#fff;box-shadow:0 2px 10px rgba(16,16,20,.16);display:flex;align-items:center;gap:8px;padding:0 16px;color:var(--ink-3);font-size:14.5px}
+.mp-side{position:absolute;right:12px;display:flex;flex-direction:column;gap:8px;z-index:6}
+/* Bottom sheet */
+.mp-sh{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:30px 30px 0 0;padding:8px 16px 30px;z-index:7;box-shadow:0 -10px 30px rgba(16,16,20,.12)}
+.mp-sh .hdl{width:40px;height:5px;border-radius:3px;background:#d6d6dc;margin:0 auto 12px}
+.sh-cap{font-size:12.5px;color:var(--ink-3);font-weight:500;margin:0 0 2px}
+.sh-t{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:0 0 12px;line-height:1.25}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);background:var(--well);border-radius:16px;padding:10px 4px;margin-bottom:10px}
+.trio>div{text-align:center;padding:0 4px}.trio>div+div{border-left:1px solid #e3e3e8}
+.trio b{display:block;font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}.trio span{font-size:11.5px;color:var(--ink-2)}
+.trio .lt b{color:var(--late)}
+.strip{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:14px;font-size:13px;line-height:1.4;margin-bottom:12px}
+.strip.warn{background:#fff3dc;color:#7a4a00}.strip.bad{background:#fdecec;color:#9f1c14}
+.strip svg{flex:none;margin-top:1px}
+.strip b{font-weight:600}
+.row2{display:flex;gap:10px}.row2 .k-btn{flex:1}
+.k-btn.sec{background:var(--btn2);color:var(--ink)}
+.hint{font-size:12px;color:var(--ink-3);text-align:center;margin:10px 0 0}
+.who{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.who .av{width:44px;height:44px;border-radius:14px;background:var(--well);display:grid;place-items:center;flex:none}
+.who .t1{font-weight:600;font-size:15.5px}.who .t2{font-size:13px;color:var(--ink-2)}
+.who .grow{flex:1;min-width:0}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-2);margin-bottom:12px}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--run);box-shadow:0 0 0 4px rgba(18,183,106,.18)}
+/* Stepper ngang căn giữa (theo góp ý vòng 1) */
+.stp{display:flex;margin:4px 0 14px}
+.stp .s{flex:1;text-align:center;position:relative}
+.stp .s::before{content:"";position:absolute;top:11px;left:-50%;right:50%;height:2px;background:#e3e3e8}
+.stp .s:first-child::before{display:none}
+.stp .s.done::before,.stp .s.cur::before{background:var(--ink)}
+.stp .d{width:24px;height:24px;border-radius:50%;margin:0 auto 6px;display:grid;place-items:center;background:#fff;box-shadow:0 0 0 2px #d6d6dc;position:relative;font-size:12px;font-weight:700;color:var(--ink-3)}
+.stp .done .d{background:var(--ink);color:#fff;box-shadow:none}
+.stp .cur .d{background:#fff;color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.stp .n{font-size:12.5px;font-weight:600}.stp .tm{font-size:11.5px;color:var(--ink-2)}
+.stp .tm.lt{color:var(--late);font-weight:600}
+/* Xem lại hành trình */
+.rp-time{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.rp-time .big{font-size:30px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
+.rp-time .grow{flex:1;min-width:0}
+.rp-time .cap{font-size:12.5px;color:var(--ink-2)}
+.rp-play{width:52px;height:52px;border-radius:50%;background:var(--primary);color:var(--on-primary);border:0;display:grid;place-items:center;flex:none;cursor:pointer}
+.rp-spd{height:36px;border-radius:999px;border:0;background:var(--well);font:inherit;font-weight:600;font-size:13px;padding:0 12px;cursor:pointer;color:var(--ink)}
+.rp-track{position:relative;height:34px;margin:4px 0 10px}
+.rp-track input{position:absolute;left:0;right:0;top:9px;width:100%;margin:0;-webkit-appearance:none;appearance:none;height:16px;background:transparent;z-index:2;cursor:pointer}
+.rp-track input::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--ink) var(--p,0%),#e3e3e8 var(--p,0%))}
+.rp-track input::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px var(--ink),0 2px 6px rgba(0,0,0,.2);margin-top:-8px}
+.rp-track input::-moz-range-track{height:6px;border-radius:3px;background:#e3e3e8}
+.rp-track input::-moz-range-progress{height:6px;border-radius:3px;background:var(--ink)}
+.rp-track input::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid var(--ink)}
+.rp-tick{position:absolute;top:0;width:8px;height:8px;border-radius:50%;transform:translateX(-50%);background:var(--ink-3)}
+.rp-tick.st{background:var(--ink)}.rp-tick.jam{background:var(--jam)}.rp-tick.dev{background:var(--dev)}.rp-tick.toll{background:var(--ink-2)}
+.rp-ax{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3);margin-top:-6px;margin-bottom:12px}
+.rp-ev{display:flex;gap:12px;align-items:center;background:var(--well);border-radius:16px;padding:12px}
+.rp-ev .ic{width:38px;height:38px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+.rp-ev .t1{font-weight:600;font-size:14px}.rp-ev .t2{font-size:12.5px;color:var(--ink-2)}
+.loc-row{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+/* ---------- Web ---------- */
+.w-wrap{overflow-x:auto;padding-bottom:6px}
+.w-frame{width:1180px;height:680px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--lab-line);display:flex;flex-direction:column;box-shadow:0 20px 40px -24px rgba(0,0,0,.3)}
+.w-bar{height:36px;flex:none;background:#f4f4f6;border-bottom:1px solid #e6e6ea;display:flex;align-items:center;gap:6px;padding:0 14px}
+.w-bar i{width:11px;height:11px;border-radius:50%;background:#dcdce1}
+.w-bar span{margin-left:14px;font-size:12px;color:#8a8a93;background:#fff;border-radius:6px;padding:3px 12px}
+.w-app{flex:1;display:flex;min-height:0}
+.w-rail{width:64px;flex:none;border-right:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 0;background:#fff}
+.w-rail a{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:var(--ink-3)}
+.w-rail a.on{background:var(--well);color:var(--ink)}
+.w-rail .lg{width:34px;height:34px;border-radius:10px;background:var(--primary);margin-bottom:10px}
+.w-pane{flex:none;display:flex;flex-direction:column;min-height:0;background:#fff}
+.w-pane.l{border-right:1px solid var(--rule)}.w-pane.r{border-left:1px solid var(--rule)}
+.w-ph{padding:16px 16px 10px}
+.w-ph h3{font-size:20px;font-weight:700;letter-spacing:-.01em;margin:0 0 10px}
+.w-search{height:42px;border-radius:999px;background:var(--well);display:flex;align-items:center;gap:8px;padding:0 14px;color:var(--ink-3);font-size:14px;margin-bottom:10px}
+.w-chips{display:flex;gap:6px;flex-wrap:wrap}
+.w-chips .k-chip{height:32px;font-size:12.5px;padding:0 10px}
+.w-chips .k-chip.on{background:var(--ink);color:#fff}
+.w-chips .k-chip i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.w-list{flex:1;overflow:auto;padding:4px 8px 12px}
+.w-it{display:flex;gap:12px;align-items:center;padding:10px;border-radius:14px}
+.w-it.on{background:var(--well)}
+.w-it .av{width:40px;height:40px;border-radius:12px;background:var(--well);display:grid;place-items:center;flex:none;position:relative}
+.w-it.on .av{background:#fff}
+.w-it .av .dt{position:absolute;right:-3px;bottom:-3px;width:11px;height:11px;border-radius:50%;border:2px solid #fff}
+.w-it .grow{flex:1;min-width:0}
+.w-it .t1{font-weight:600;font-size:14px;display:flex;justify-content:space-between;gap:8px}
+.w-it .t1 em{font-style:normal;font-weight:500;font-size:12px;color:var(--ink-3)}
+.w-it .t2{font-size:12.5px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.w-it .t2 .lt{color:var(--late);font-weight:600}
+.w-map{position:relative;flex:1;min-width:0}
+.w-ctl{position:absolute;right:14px;top:14px;display:flex;flex-direction:column;gap:8px;z-index:6}
+.w-ctl .grp{background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(16,16,20,.16);overflow:hidden;display:flex;flex-direction:column}
+.w-ctl .grp b{width:40px;height:40px;display:grid;place-items:center;color:var(--ink)}
+.w-ctl .grp b+b{border-top:1px solid var(--rule)}
+.w-seg{position:absolute;left:14px;top:14px;z-index:6;display:flex;background:#fff;border-radius:999px;padding:3px;box-shadow:0 2px 10px rgba(16,16,20,.16);font-size:13px;font-weight:600}
+.w-seg span{padding:7px 14px;border-radius:999px;color:var(--ink-2)}
+.w-seg span.on{background:var(--ink);color:#fff}
+.w-legend{position:absolute;left:14px;bottom:14px;z-index:6;background:#fff;border-radius:16px;box-shadow:0 2px 10px rgba(16,16,20,.16);padding:10px 14px;font-size:12px;display:grid;grid-template-columns:auto auto;gap:6px 16px}
+.w-legend div{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.w-legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.w-legend s{width:18px;height:0;border-top:3px solid;display:inline-block}
+.w-pop{position:absolute;z-index:8;width:300px;background:#fff;border-radius:20px;padding:14px;box-shadow:0 10px 30px rgba(16,16,20,.22)}
+.w-pop .who{margin-bottom:10px}
+.w-pop .kv{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-top:1px solid var(--rule)}
+.w-pop .kv span{color:var(--ink-2)}.w-pop .kv .lt{color:var(--late)}
+.w-pop .row2{margin-top:10px}.w-pop .k-btn{height:40px;font-size:14px}
+.w-hd{padding:14px 20px 0;border-bottom:1px solid var(--rule);flex:none}
+.w-hd .tt{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.w-hd h3{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:0}
+.w-hd .sub{font-size:13px;color:var(--ink-2)}
+.w-tabs{display:flex;gap:22px;font-size:14px;font-weight:600;color:var(--ink-3)}
+.w-tabs span{padding-bottom:10px}.w-tabs span.on{color:var(--ink);box-shadow:inset 0 -2px 0 var(--ink)}
+.w-sec{padding:16px 18px 4px}
+.w-sec h4{font-size:15px;font-weight:600;margin:0 0 10px}
+.tl{position:relative;padding-left:34px}
+.tl .it{position:relative;padding-bottom:16px}
+.tl .it::before{content:"";position:absolute;left:-22px;top:26px;bottom:-2px;width:2px;background:#e3e3e8}
+.tl .it:last-child::before{display:none}
+.tl .it.done::before{background:var(--ink)}
+.tl .n{position:absolute;left:-34px;top:0;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:#fff;box-shadow:0 0 0 2px #d6d6dc;color:var(--ink-3)}
+.tl .done .n{background:var(--ink);color:#fff;box-shadow:none}
+.tl .cur .n{box-shadow:0 0 0 2px var(--ink);color:var(--ink)}
+.tl .t1{font-weight:600;font-size:14px}.tl .t2{font-size:12.5px;color:var(--ink-2)}
+.tl .tms{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.tag{font-size:12px;font-weight:600;padding:3px 8px;border-radius:8px;background:var(--well);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.tag.ok{background:#e8f5ec;color:#1b7542}.tag.wn{background:#fff3dc;color:#8a5300}.tag.bd{background:#fdecec;color:#b42318}
+.gps{border-radius:14px;background:var(--well);padding:2px 12px;margin-bottom:12px}
+.gps>div{display:flex;gap:10px;padding:10px 0;font-size:13px}
+.gps>div+div{border-top:1px solid #e3e3e8}
+.gps .ic{width:30px;height:30px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+.gps b{font-weight:600;display:block;font-size:13.5px}.gps span{color:var(--ink-2)}
+.cand{border-radius:18px;box-shadow:inset 0 0 0 1px var(--rule);padding:12px;margin:0 12px 10px}
+.cand.best{box-shadow:inset 0 0 0 2px var(--ink)}
+.cand .who{margin-bottom:8px}
+.cand .rk{width:26px;height:26px;border-radius:50%;background:var(--well);display:grid;place-items:center;font-weight:700;font-size:13px;flex:none}
+.cand.best .rk{background:var(--ink);color:#fff}
+.cand .why{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.cand .k-btn{height:38px;font-size:14px;width:100%}
+.job{margin:0 12px 12px;padding:12px;border-radius:16px;background:var(--well);font-size:13px}
+.job b{display:block;font-size:14.5px}
+/* ---------- Ký hiệu ---------- */
+.lg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.lg-it{border-radius:12px;overflow:hidden;border:1px solid var(--lab-line);background:var(--lab-card)}
+.lg-tile{position:relative;height:74px}
+.lg-tile .mk{left:50%;top:50%}
+.lg-cap{padding:7px 10px 9px;font-size:12px;line-height:1.35}
+.lg-cap b{display:block;font-size:12.5px}
+.lg-cap span{color:var(--lab-muted)}
+.lg-grp{font-size:12px;font-weight:600;color:var(--lab-muted);margin:14px 0 6px;text-transform:none}
+/* Lab */
+.vote{display:flex;gap:4px;margin-top:8px}
+.vote button{font:inherit;font-size:12px;border:1px solid var(--lab-line);background:var(--lab-card);color:var(--lab-ink);padding:4px 10px;border-radius:999px;cursor:pointer}
+.vote button.on{background:var(--lab-ink);color:var(--lab-bg)}
+.lab-col.w{width:auto;max-width:100%}
+.why-ul{margin:6px 0 0;padding-left:18px;font-size:12.5px;color:var(--lab-muted)}
+.princ{margin:4px 0 0;padding-left:18px}
+.princ li{margin-bottom:4px}
+</style>
+</head>
+<body class="b-neutral">
+<div class="lab-top">
+  <h1>UI Lab · Bản đồ</h1>
+  <div class="lab-ctl">Nền bản đồ <div class="lab-opts" data-k="theme"><button data-v="light">Sáng</button><button data-v="dark">Tối</button></div></div>
+  <div class="lab-ctl">Thương hiệu <div class="lab-opts" data-k="brand"><button data-v="neutral">Trung tính</button><button data-v="innvie">Innvie</button><button data-v="delta">Delta</button></div></div>
+  <button class="lab-export" id="export">Copy góp ý gửi Claude</button>
+</div>
+<main class="lab-main">
+  <section class="lab-box">
+    <h2>Đề xuất UI bản đồ cho điều phối vận tải — mobile trước, web sau</h2>
+    <p>Mọi màn dùng chung <b>một cung đường mẫu</b> của Lệnh LVT-1042: lấy vỏ ở ICD Phước Long → đóng hàng ở kho khách KCN Sóng Thần → hạ hàng ở Cảng Cát Lái, có kẹt xe, trạm thu phí, đi khác tuyến và vùng đến của cảng. Bản đồ nền là hình minh hoạ, không phải bản đồ thật.</p>
+    <ol class="princ">
+      <li><b>Nền trung tính, màu chỉ dành cho dữ liệu.</b> Nền xám nhạt (hoặc tối), đường trắng, không màu thương hiệu trên nền — để tuyến, xe và cảnh báo nổi lên. Khi lên thật: Google Maps (khách đã dùng) với bộ style tuỳ chỉnh theo 2 nền này.</li>
+      <li><b>3 lớp, đọc từ dưới lên:</b> nền → tuyến (đã đi liền, còn lại mờ, kế hoạch nét đứt, kẹt xe cam, lệch tuyến đỏ) → điểm (điểm dừng đánh số, xe, trạm, cụm).</li>
+      <li><b>Trạng thái không chỉ bằng màu:</b> điểm dừng có số / dấu tích / dấu chấm than; xe mất GPS có viền rỗng; tuyến kế hoạch dùng nét đứt.</li>
+      <li><b>Điểm có cỡ cố định</b> khi phóng to/thu nhỏ; xa quá thì gom thành cụm (vòng màu cho tỉ lệ trạng thái).</li>
+      <li><b>Mobile:</b> bản đồ toàn màn + bottom sheet (thông tin chính, 1 nút chính). <b>Web:</b> danh sách bên trái ↔ bản đồ, chọn bên này thì bên kia sáng theo.</li>
+    </ol>
+  </section>
+
+  <section class="lab-box">
+    <h2>Bộ ký hiệu</h2>
+    <div id="legend" class="k s-c" style="font-size:inherit"></div>
+  </section>
+
+  <h2 class="lab-h2">Mobile</h2>
+  <p class="lab-sub">M3 kéo được thanh thời gian / bấm phát; M4 kéo được bản đồ, ghim đứng giữa.</p>
+  <div class="lab-row" id="mob"></div>
+
+  <h2 class="lab-h2">Web</h2>
+  <p class="lab-sub">Khung 1180 px. Trên màn hẹp thì cuộn ngang trong khung.</p>
+  <div id="web"></div>
+</main>
+<div class="lab-toast" id="lab-toast"></div>
+<svg width="0" height="0" style="position:absolute"><path id="rp-full" d="M720,240 L720,180 L600,180 L600,250 L330,150 L318,118 L330,150 L600,250 L760,320 L880,375 L888,410"/></svg>
+<script src="lab-kit.js"></script>
+<script>
+Object.assign(P,{
+  ticket:"M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4zM10 6v12",
+  layers:"M12 3 2 8l10 5 10-5zM2 13l10 5 10-5M2 17.5l10 5 10-5",
+  locate:"M12 2v3M12 19v3M2 12h3M19 12h3M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z",
+  nav:"M3 11l19-9-9 19-2-8z",play:"M7 4v16l13-8z",pause:"M7 4h3v16H7zM14 4h3v16h-3z",minus:"M5 12h14",
+  flag:"M4 22V4M4 4h12l-2 4 2 4H4",route:"M6 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6 15V9a4 4 0 0 1 4-4h6M18 9v6a4 4 0 0 1-4 4H8",
+  list:"M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01",map:"M9 4 3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"
+});
+
+/* ---------- Dữ liệu chung (toạ độ "thế giới" 1000 × 700) ---------- */
+const HW="M60,50 L330,150 L600,250 L760,320 L1000,430";
+const ROADS=["M600,0 L600,700","M600,180 L1000,180","M720,180 L720,250 L690,289","M318,0 L318,150 L290,700",
+  "M0,330 L600,330","M0,520 L1000,560","M150,0 L150,700","M450,0 L450,330","M800,180 L800,330","M888,375 L888,445","M0,640 L1000,660","M600,430 L1000,480"];
+const RIVER="M440,-20 C470,140 420,230 520,330 C600,410 740,420 820,440 C900,460 950,500 1010,520";
+const L1_PLAN="M720,240 L720,250 L690,289 L600,250 L330,150 L318,118";
+const L1_ACT_DEV="M720,240 L720,180 L600,180 L600,250";
+const L1_ACT_REST="M600,250 L330,150 L318,118";
+const L2_DONE="M318,118 L330,150 L520,220";
+const L2_LEFT="M520,220 L600,250 L760,320 L880,375 L888,410";
+const JAM="M400,176 L460,198";
+const PT={icd:[720,240],kho:[318,118],port:[888,410],truck:[520,220],toll:[650,272],fuel:[452,186],shop:[200,420]};
+
+/* ---------- Vẽ bản đồ nền ---------- */
+function view(o){const s=o.z,tx=o.w*(o.fx??.5)-o.cx*s,ty=o.h*(o.fy??.5)-o.cy*s;return Object.assign({},o,{s,tx,ty,p:(x,y)=>[tx+x*s,ty+y*s]})}
+function base(v){
+  const s=v.s,k=Math.min(1.7,Math.max(.75,s)),fs=n=>(n/s).toFixed(2);
+  const ln=(d,c,w)=>`<path d="${d}" class="${c}" stroke-width="${w}" vector-effect="non-scaling-stroke"/>`;
+  const tx=(x,y,t,cls,size,rot)=>`<text x="${x}" y="${y}" class="${cls||""}" font-size="${fs(size)}" text-anchor="middle"${rot?` transform="rotate(${rot} ${x} ${y})"`:""} stroke-width="${fs(3)}">${t}</text>`;
+  let g=`<rect x="-500" y="-500" width="2000" height="1700" fill="var(--land)"/>
+  <rect class="pk" x="80" y="380" width="140" height="90" rx="14"/><rect class="pk" x="470" y="470" width="110" height="70" rx="14"/>
+  <rect class="zn" x="250" y="72" width="120" height="58" rx="8"/><rect class="zn" x="690" y="205" width="72" height="45" rx="8"/><rect class="zn" x="835" y="386" width="120" height="54" rx="8"/>
+  <path d="${RIVER}" class="w" stroke-width="22"/>`;
+  if(s>1.5){ // chi tiết bãi container khi phóng to
+    for(let r=0;r<4;r++)for(let c=0;c<6;c++)g+=`<rect x="${842+c*18}" y="${405+r*8}" width="14" height="5" rx="1" fill="var(--case)"/>`;
+  }
+  ROADS.forEach(d=>g+=ln(d,"r-case",5.5*k));ROADS.forEach(d=>g+=ln(d,"r-road",3.5*k));
+  g+=ln(HW,"r-hwc",9*k)+ln(HW,"r-hw",6.5*k);
+  g+=tx(170,240,"DĨ AN","area",10.5)+tx(800,110,"THỦ ĐỨC","area",10.5)+tx(300,600,"BÌNH THẠNH","area",10.5)+tx(540,372,"Sông Sài Gòn","wl",11,38);
+  g+=tx(150,80,"Xa lộ Hà Nội","",10.5,20.3)+tx(612,600,"Vành đai 2","",10.5,90)+tx(905,174,"Đường số 9","",10.5);
+  g+=tx(310,66,"KCN Sóng Thần","",10)+(v.noPort?"":`<text x="828" y="420" font-size="${fs(10)}" text-anchor="end" stroke-width="${fs(3)}">Cảng Cát Lái</text>`)+tx(726,200,"ICD Phước Long","",10);
+  if(s>1.5)g+=tx(852,384,"Cổng A","",10)+tx(918,384,"Cổng B","",10);
+  return g;
+}
+const R=(d,c,w,ex="")=>`<path d="${d}" class="${c}" stroke-width="${w}" vector-effect="non-scaling-stroke" ${ex}/>`;
+function mapSVG(v,layers=""){return `<svg width="${v.w}" height="${v.h}"><g transform="translate(${v.tx.toFixed(2)} ${v.ty.toFixed(2)}) scale(${v.s})">${base(v)}${layers}</g></svg>`}
+const at=(v,[x,y],html,cls="",st="")=>{const [a,b]=v.p(x,y);return `<div class="mk ${cls}" style="left:${a.toFixed(1)}px;top:${b.toFixed(1)}px;${st}">${html}</div>`};
+/* Ký hiệu */
+const stop=(n,st="",late=false,lb="")=>`<div class="mk-stop ${st}">${st==="done"?I("check",14,3):n}${late?`<span class="bd">!</span>`:""}${lb}</div>`;
+const lbl=(side,t,sub)=>`<div class="mk-lb ${side}"><b>${t}</b>${sub?`<span>${sub}</span>`:""}</div>`;
+const truck=(st="run",deg=0,ex="")=>`<div class="mk-truck ${st}">${I("truck",18,2)}<div class="hd" style="transform:rotate(${deg}deg)"></div><span class="dt"></span>${ex}</div>`;
+const poi=(ic,cls="")=>`<div class="mk-poi ${cls}">${I(ic,14,2)}</div>`;
+const clus=(n,run,stp)=>`<div class="mk-cl" style="background:conic-gradient(var(--run) 0 ${run}%,var(--stop) ${run}% ${run+stp}%,var(--late) ${run+stp}% 100%)"><i>${n}</i></div>`;
+const chip=(cls,t,ic)=>`<div class="mk-chip ${cls}">${ic?I(ic,12,2.2):""}${t}</div>`;
+/* Các lớp tuyến của Lệnh đang chạy */
+const routeLive=(opt={})=>
+  (opt.plan?R(L1_PLAN,"rt-plan",3,'stroke-dasharray="2 7"'):"")+
+  R(L1_ACT_DEV+" L330,150 L318,118","rt-halo",9)+R(L2_DONE,"rt-halo",9)+
+  (opt.dev?R(L1_ACT_DEV,"rt-dev",5)+R(L1_ACT_REST,"rt-done",5):R(L1_ACT_DEV+" L330,150 L318,118","rt-done",5))+
+  R(L2_DONE,"rt-done",5)+R(JAM,"rt-jam",5)+
+  R(L2_LEFT,"rt-left",5,'stroke-dasharray="1 9"');
+
+/* ---------- Ký hiệu (legend) ---------- */
+function legend(th){
+  const tile=(inner,b,s)=>`<div class="lg-it"><div class="lg-tile mp ${th}">${inner}</div><div class="lg-cap"><b>${b}</b><span>${s}</span></div></div>`;
+  const C=h=>`<div class="mk">${h}</div>`;
+  const line=(cls,ex="")=>`<svg width="150" height="74" style="position:absolute;inset:0"><path d="M20,48 C60,20 90,60 130,26" class="${cls}" stroke-width="5" ${ex}/></svg>`;
+  const grp=(t,items)=>`<div class="lg-grp">${t}</div><div class="lg-grid">${items.join("")}</div>`;
+  return grp("Điểm dừng trên Lệnh",[
+      tile(C(stop(3)),"Chưa tới","Số = thứ tự trên Lệnh"),
+      tile(C(stop(2,"next")),"Điểm tiếp theo","Đậm + quầng, chỉ 1 điểm"),
+      tile(C(stop(1,"done")),"Đã qua","Màu tuyến + dấu tích"),
+      tile(C(stop(3,"",true)),"Có nguy cơ trễ mốc","Chấm than đỏ — kèm chữ ở thẻ")])+
+    grp("Xe",[
+      tile(C(truck("run",60)),"Đang chạy","Mũi nhọn = hướng đi"),
+      tile(C(truck("stop",0)),"Dừng / đỗ","Chấm cam"),
+      tile(C(truck("late",60)),"Đang chạy, trễ mốc","Chấm đỏ"),
+      tile(C(truck("lost",0)),"Mất GPS","Viền rỗng, không hướng — vị trí cuối"),
+      tile(C(truck("sel",60)),"Đang chọn","Màu tuyến + quầng"),
+      tile(C(clus(12,60,30)),"Cụm xe","Vòng màu = tỉ lệ chạy / dừng / trễ")])+
+    grp("Điểm cố định",[
+      tile(C(poi("ticket")),"Trạm thu phí","Vé trạm lấy từ GPS"),
+      tile(C(poi("fuel","fuel")),"Trạm dầu đối tác","Màu nhấn thương hiệu"),
+      tile(C(poi("wrench")),"Xưởng sửa chữa",""),
+      tile(C(`<div class="mk-me"></div>`),"Vị trí điện thoại","Quầng = sai số")])+
+    grp("Tuyến",[
+      tile(line("rt-done"),"Đã đi","Nét liền, màu tuyến"),
+      tile(line("rt-left",'stroke-dasharray="1 9" stroke-linecap="round"'),"Còn lại","Chấm mờ"),
+      tile(line("rt-plan",'stroke-dasharray="2 7" stroke-width="3"'),"Kế hoạch","Nét đứt xám — so với thực tế"),
+      tile(line("rt-jam"),"Kẹt xe","Cam + nhãn số phút"),
+      tile(line("rt-dev"),"Đi khác tuyến","Đỏ + nhãn km lệch"),
+      tile(`<svg width="150" height="74" style="position:absolute;inset:0"><circle cx="75" cy="37" r="26" class="rt-geo"/></svg>`+C(stop(3,"next")),"Vùng đến","GPS vào vùng → tự đánh dấu “đã đến”")]);
+}
+
+/* ---------- Mobile ---------- */
+const W=342,H=742;
+const phoneM=(id,th,inner)=>`<div class="k k-phone s-c" data-check="${id}"><div class="k-scr" style="padding:0;overflow:hidden"><div class="mp ${th}" id="mp-${id}" data-layer="map">${inner.map}</div><div class="mp-sb ${th==="dark"?"dk":""}">${SB}</div>${inner.over}</div><div class="k-homebar"></div></div>`;
+
+function M1(th){ // Lái xe — đang chạy Lệnh
+  const v=view({w:W,h:H,cx:704,cy:318,z:.74,fy:.3,noPort:1});
+  const map=mapSVG(v,routeLive()+`<circle cx="888" cy="410" r="32" class="rt-geo" vector-effect="non-scaling-stroke"/>`)+
+    at(v,PT.toll,poi("ticket"))+
+    at(v,PT.port,stop(3,"next",false,lbl("l","Cảng Cát Lái","Hạ hàng")))+
+    at(v,PT.truck,truck("run",68));
+  const over=`<div class="mp-top" data-layer="top"><button class="fab" aria-label="Quay lại">${I("back",20)}</button>
+    <div class="fchip"><span class="ic">${I("box",16)}</span><span class="tx">LVT-1042<small>Đang chạy · chặng 2/2</small></span></div>
+    <button class="fab" aria-label="Lớp bản đồ">${I("layers",20)}</button></div>
+    <div class="mp-side" data-layer="side" style="bottom:378px"><button class="fab" aria-label="Về vị trí xe">${I("locate",20)}</button></div>
+    <div class="mp-sh" data-layer="sheet"><div class="hdl"></div>
+      <p class="sh-cap">Điểm tiếp theo · 3/3</p>
+      <p class="sh-t">Hạ hàng tại Cảng Cát Lái</p>
+      <div class="trio"><div><b>11:20</b><span>Đến dự kiến</span></div><div><b>18 km</b><span>Còn lại</span></div><div class="lt"><b>11:00</b><span>Mốc hạ hàng</span></div></div>
+      <div class="strip warn">${I("alert",16,2)}<span><b>Kẹt xe 18 phút</b> trên Xa lộ Hà Nội — đã tự ghi làm bằng chứng cho Lệnh.</span></div>
+      <div class="row2"><button class="k-btn sec">${I("nav",18)}Chỉ đường</button><button class="k-btn pri">${I("check",18,2.4)}Đã đến</button></div>
+      <p class="hint">Xe vào vùng cảng (300 m) thì tự đánh dấu “đã đến”.</p>
+    </div>`;
+  return phoneM("M1",th,{map,over});
+}
+function M2(th){ // Điều vận — theo dõi 1 Lệnh
+  const v=view({w:W,h:H,cx:595,cy:262,z:.5,fy:.3});
+  const map=mapSVG(v,routeLive())+
+    at(v,PT.toll,poi("ticket"))+
+    at(v,PT.icd,stop(1,"done"))+at(v,PT.kho,stop(2,"done"))+at(v,PT.port,stop(3,"",true))+
+    at(v,PT.truck,truck("late",68))+at(v,[430,187],chip("jam","18′","clock"),"","transform:translate(-50%,-150%)");
+  const over=`<div class="mp-top" data-layer="top"><button class="fab" aria-label="Quay lại">${I("back",20)}</button>
+    <div class="fchip"><span class="ic">${I("box",16)}</span><span class="tx">LVT-1042<small>Bãi ICD → Kho → Cảng</small></span></div>
+    <button class="fab" aria-label="Thêm">${I("more",20)}</button></div>
+    <div class="mp-sh" data-layer="sheet"><div class="hdl"></div>
+      <div class="who"><div class="av">${I("truck",22)}</div><div class="grow"><div class="t1">51C-123.45</div><div class="t2">Nguyễn Văn Bình · Đầu kéo</div></div><button class="k-ib well" aria-label="Gọi">${I("phone",18)}</button></div>
+      <div class="live"><i></i>Đang chạy 42 km/h · cập nhật 10:31</div>
+      <div class="stp"><div class="s done"><div class="d">${I("check",12,3)}</div><div class="n">Lấy vỏ</div><div class="tm">07:42</div></div>
+        <div class="s done"><div class="d">${I("check",12,3)}</div><div class="n">Đóng hàng</div><div class="tm">09:15</div></div>
+        <div class="s cur"><div class="d">3</div><div class="n">Hạ hàng</div><div class="tm lt">~11:20</div></div></div>
+      <div class="strip bad">${I("alert",16,2)}<span><b>Có thể trễ mốc hạ hàng 11:00</b> khoảng 20 phút — do kẹt xe 18 phút.</span></div>
+      <div class="row2"><button class="k-btn sec">Xem hành trình</button><button class="k-btn pri">Báo khách</button></div>
+    </div>`;
+  return phoneM("M2",th,{map,over});
+}
+/* M3 — Xem lại hành trình (Lệnh đã xong) */
+const RP={v:null,min:462,max:684,
+  key:[[462,0],[470,0],[555,572],[595,572],[608,680.7],[626,744.7],[641,948.7],[684,1237]],
+  ev:[[462,"st","Lấy vỏ · ICD Phước Long","07:42 · đúng mốc","check"],[475,"dev","Đi khác tuyến kế hoạch","+1,4 km so với tuyến Google Maps","route"],
+      [555,"st","Đến kho khách KCN Sóng Thần","09:15 · trễ 15 phút","flag"],[608,"jam","Kẹt xe Xa lộ Hà Nội","10:08–10:26 · 18 phút","clock"],
+      [641,"toll","Qua trạm thu phí Xa lộ HN","10:41 · vé 40.000 đ","ticket"],[684,"st","Hạ hàng · Cảng Cát Lái","11:24 · trễ 24 phút","check"]]};
+const hm=m=>`${String(Math.floor(m/60)).padStart(2,"0")}:${String(Math.round(m%60)).padStart(2,"0")}`;
+function M3(th){
+  const v=RP.v=view({w:W,h:H,cx:595,cy:262,z:.5,fy:.3});
+  const full=document.getElementById("rp-full").getAttribute("d");
+  const map=mapSVG(v,R(full,"rt-left",5,'stroke-dasharray="1 9"')+`<polyline id="rp-prog" class="rt-done" stroke-width="5" vector-effect="non-scaling-stroke" points=""/>`)+
+    at(v,PT.icd,stop(1,"done"))+at(v,PT.kho,stop(2,"done"))+at(v,PT.port,stop(3,"done"))+at(v,PT.toll,poi("ticket"))+
+    `<div class="mk" id="rp-truck">${truck("run",0)}</div>`;
+  const ticks=RP.ev.map(e=>`<span class="rp-tick ${e[1]}" style="left:${(e[0]-RP.min)/(RP.max-RP.min)*100}%"></span>`).join("");
+  const over=`<div class="mp-top" data-layer="top"><button class="fab" aria-label="Quay lại">${I("back",20)}</button>
+    <div class="fchip"><span class="ic">${I("clock",16)}</span><span class="tx">Xem lại hành trình<small>LVT-0987 · 08/10</small></span></div></div>
+    <div class="mp-sh" data-layer="sheet"><div class="hdl"></div>
+      <div class="rp-time"><button class="rp-play" id="rp-play" aria-label="Phát">${I("play",20)}</button><div class="grow"><div class="big" id="rp-clock">07:42</div><div class="cap">51C-123.45 · Nguyễn Văn Bình</div></div><button class="rp-spd" id="rp-spd">8×</button></div>
+      <div class="rp-track">${ticks}<input type="range" id="rp-in" min="${RP.min}" max="${RP.max}" step="1" value="${RP.min}" aria-label="Thời điểm"></div>
+      <div class="rp-ax"><span>07:42</span><span>09:00</span><span>10:00</span><span>11:24</span></div>
+      <div class="rp-ev" id="rp-ev"></div>
+    </div>`;
+  return phoneM("M3",th,{map,over});
+}
+function rpSet(m){
+  const k=RP.key;let L=0;for(let i=1;i<k.length;i++){if(m<=k[i][0]){const a=k[i-1],b=k[i];L=a[1]+(b[1]-a[1])*((m-a[0])/(b[0]-a[0]||1));break}L=k[i][1]}
+  const path=document.getElementById("rp-full"),v=RP.v;if(!v)return;
+  const pts=[];for(let l=0;l<L;l+=4){const q=path.getPointAtLength(l);pts.push(q.x+","+q.y)}
+  const q=path.getPointAtLength(L),q2=path.getPointAtLength(Math.min(L+3,path.getTotalLength())),q0=path.getPointAtLength(Math.max(L-3,0));
+  pts.push(q.x+","+q.y);
+  const pg=document.getElementById("rp-prog");if(pg)pg.setAttribute("points",pts.join(" "));
+  const [x,y]=v.p(q.x,q.y),tk=document.getElementById("rp-truck");
+  if(tk){tk.style.left=x+"px";tk.style.top=y+"px";const deg=Math.atan2(q2.x-q0.x,-(q2.y-q0.y))*180/Math.PI;tk.querySelector(".hd").style.transform=`rotate(${deg}deg)`;
+    const moving=!RP.key.some((a,i)=>i&&a[1]===RP.key[i-1][1]&&m>RP.key[i-1][0]&&m<a[0]);tk.firstElementChild.className="mk-truck "+(moving?"run":"stop")}
+  document.getElementById("rp-clock").textContent=hm(m);
+  const inp=document.getElementById("rp-in");inp.value=m;inp.style.setProperty("--p",((m-RP.min)/(RP.max-RP.min)*100)+"%");
+  let e=RP.ev[0];RP.ev.forEach(x=>{if(x[0]<=m+0.5)e=x});
+  document.getElementById("rp-ev").innerHTML=`<span class="ic">${I(e[4],18,2)}</span><div><div class="t1">${e[2]}</div><div class="t2">${e[3]}</div></div>`;
+}
+/* M4 — Chọn vị trí (bấm tay khi mất GPS, báo sự cố) */
+const PK={cx:902,cy:400,gps:[874,396]};
+function M4map(th){
+  const v=view({w:W,h:H,cx:PK.cx,cy:PK.cy,z:2.2,fy:.36});
+  return mapSVG(v,`<circle cx="888" cy="410" r="32" class="rt-geo" vector-effect="non-scaling-stroke"/>`)+at(v,PK.gps,`<div class="mk-me"></div>`)+
+    `<div class="pin-dot" style="top:${H*.36}px"></div><svg class="pin" style="top:${H*.36}px" width="34" height="44" viewBox="0 0 34 44"><path d="M17 43C17 43 32 27 32 16A15 15 0 1 0 2 16C2 27 17 43 17 43Z" fill="var(--ink)"/><circle cx="17" cy="16" r="6" fill="#fff"/></svg>`;
+}
+function M4place(){
+  const inPort=PK.cx>835&&PK.cx<955&&PK.cy>386&&PK.cy<440;
+  const d=Math.round(Math.hypot(PK.cx-PK.gps[0],PK.cy-PK.gps[1])*10/5)*5;
+  return [inPort?(PK.cx>890?"Cổng B · Cảng Cát Lái":"Cổng A · Cảng Cát Lái"):"Ngoài vùng cảng",inPort?"Nguyễn Thị Định, Cát Lái, TP Thủ Đức":"Không thuộc điểm nào trên Lệnh",d,inPort];
+}
+function M4sheet(){const [t,a,d,ok]=M4place();
+  return `<div class="hdl"></div><p class="sh-cap">Vị trí đã ghim</p><p class="sh-t" style="margin-bottom:4px">${t}</p>
+    <p class="k-lead" style="margin-bottom:12px">${a}</p>
+    <div class="loc-row"><span class="k-chip">${I("locate",14)}Cách GPS điện thoại ~${d} m</span><span class="k-chip">${ok?I("check",14,2.4)+"Trong vùng đến":I("alert",14,2)+"Ngoài vùng đến"}</span></div>
+    <div class="strip warn">${I("camera",16,2)}<span>GPS xe đang mất tín hiệu. Vị trí này gắn vào <b>ảnh định vị “Đã đến”</b> để điều vận đối chiếu.</span></div>
+    <button class="k-btn pri" style="width:100%">Xác nhận vị trí</button>`}
+function M4(th){
+  const over=`<div class="mp-top" data-layer="top"><button class="fab" aria-label="Quay lại">${I("back",20)}</button><div class="fsearch">${I("search",18)}Tìm địa chỉ, cảng, kho…</div></div>
+    <div class="mp-side" data-layer="side" style="bottom:356px"><button class="fab" aria-label="Về vị trí của tôi">${I("locate",20)}</button></div>
+    <div class="mp-sh" data-layer="sheet" id="m4sh">${M4sheet()}</div>`;
+  return phoneM("M4",th,{map:M4map(th),over});
+}
+function bindM4(th){
+  const el=document.getElementById("mp-M4");if(!el)return;let st=null;
+  el.addEventListener("pointerdown",e=>{st=[e.clientX,e.clientY,PK.cx,PK.cy];el.setPointerCapture(e.pointerId)});
+  el.addEventListener("pointermove",e=>{if(!st)return;PK.cx=st[2]-(e.clientX-st[0])/2.2;PK.cy=st[3]-(e.clientY-st[1])/2.2;el.innerHTML=M4map(th)});
+  el.addEventListener("pointerup",()=>{st=null;document.getElementById("m4sh").innerHTML=M4sheet()});
+}
+
+/* ---------- Web ---------- */
+const rail=on=>`<div class="w-rail"><div class="lg"></div>${[["home"],["map"],["box"],["truck"],["chart"],["bell"]].map((x,i)=>`<a class="${i===on?"on":""}">${I(x[0],20)}</a>`).join("")}</div>`;
+const frame=(url,body)=>`<div class="w-wrap"><div class="k s-c w-frame"><div class="w-bar"><i></i><i></i><i></i><span>${url}</span></div><div class="w-app">${body}</div></div></div>`;
+const FLEET=[[180,94,"run",200,"51C-201.33"],[250,120,"run",20,"51C-554.10"],[700,294,"stop",0,"51C-332.08"],[820,348,"run",114,"51D-778.12"],
+  [600,90,"run",180,"51C-640.25"],[600,470,"run",0,"51C-119.47"],[600,600,"stop",0,"51C-902.66"],[680,180,"run",90,"51C-415.90"],[900,180,"late",270,"51C-287.31"],
+  [318,40,"run",180,"51C-733.02"],[305,420,"lost",0,"51C-061.54"],[150,300,"stop",0,"51C-448.19"],[300,532,"run",90,"51C-810.77"]];
+const dot={run:"var(--run)",stop:"var(--stop)",late:"var(--late)",lost:"var(--lost)"};
+function W1(th){
+  const v=view({w:776,h:644,cx:560,cy:330,z:.85});
+  const map=mapSVG(v,R(L2_LEFT,"rt-halo",9)+R(L2_LEFT,"rt-left",5,'stroke-dasharray="1 9"'))+
+    FLEET.map(f=>at(v,[f[0],f[1]],truck(f[2],f[3]))).join("")+
+    at(v,[892,416],clus(8,25,63))+at(v,[728,226],clus(5,40,60))+
+    at(v,PT.fuel,poi("fuel","fuel"))+at(v,PT.shop,poi("wrench"))+
+    at(v,PT.truck,truck("sel",68));
+  const [px,py]=v.p(...PT.truck);
+  const list=[["51C-123.45","Nguyễn Văn Bình","late","LVT-1042 · Xa lộ Hà Nội · 42 km/h","<span class='lt'>Trễ mốc ~20′</span>",1],
+    ["51D-778.12","Trần Minh Tú","run","LVT-1047 · Cảng Cát Lái · 18 km/h",""],["51C-287.31","Lê Hoàng Nam","late","LVT-1039 · Đường số 9 · 35 km/h","<span class='lt'>Trễ mốc 12′</span>"],
+    ["51C-332.08","Phạm Quốc Huy","stop","LVT-1044 · ICD Phước Long · dừng 25′",""],["51C-061.54","Đỗ Văn Lâm","lost","Mất GPS 14′ · vị trí cuối QL1K",""],
+    ["51C-640.25","Võ Thành Đạt","run","LVT-1050 · Vành đai 2 · 51 km/h",""],["51C-415.90","Bùi Anh Tuấn","run","Rỗng · Đường số 9 · 38 km/h",""]];
+  const body=rail(1)+`<div class="w-pane l" style="width:340px"><div class="w-ph"><h3>Đội xe</h3><div class="w-search">${I("search",16)}Biển số, lái xe, Lệnh…</div>
+    <div class="w-chips"><span class="k-chip on">Tất cả 34</span><span class="k-chip"><i style="background:var(--run)"></i>Chạy 18</span><span class="k-chip"><i style="background:var(--stop)"></i>Dừng 11</span><span class="k-chip"><i style="background:var(--late)"></i>Trễ 3</span><span class="k-chip"><i style="background:var(--lost)"></i>Mất GPS 2</span></div></div>
+    <div class="w-list">${list.map(r=>`<div class="w-it ${r[5]?"on":""}"><div class="av">${I("truck",20)}<span class="dt" style="background:${dot[r[2]]}"></span></div><div class="grow"><div class="t1">${r[0]}<em>${r[1]}</em></div><div class="t2">${r[3]}</div>${r[4]?`<div class="t2">${r[4]}</div>`:""}</div></div>`).join("")}</div></div>
+    <div class="w-map"><div class="mp ${th}">${map}
+      <div class="w-pop" style="left:${px-120}px;top:${py+34}px"><div class="who"><div class="av">${I("truck",20)}</div><div class="grow"><div class="t1">51C-123.45</div><div class="t2">Nguyễn Văn Bình</div></div><span class="k-pill bad">${I("alert",13,2)}Trễ mốc</span></div>
+        <div class="kv"><span>Lệnh</span><b>LVT-1042 · Hạ hàng Cát Lái</b></div><div class="kv"><span>Đến dự kiến</span><b class="lt">11:20 (mốc 11:00)</b></div><div class="kv"><span>Cập nhật</span><b>10:31 · 42 km/h</b></div>
+        <div class="row2"><button class="k-btn sec">Gọi</button><button class="k-btn pri">Xem Lệnh</button></div></div>
+      <div class="w-seg"><span class="on">Xe</span><span>Lệnh</span><span>Điểm</span></div>
+      <div class="w-ctl"><div class="grp"><b>${I("plus",18)}</b><b>${I("minus",18)}</b></div><div class="grp"><b>${I("locate",18)}</b></div><div class="grp"><b>${I("layers",18)}</b></div></div>
+      <div class="w-legend"><div><i style="background:var(--run)"></i>Đang chạy</div><div><i style="background:var(--stop)"></i>Dừng</div><div><i style="background:var(--late)"></i>Trễ mốc</div><div><i style="background:var(--lost)"></i>Mất GPS</div></div>
+    </div></div>`;
+  return frame("dispatch.app/ban-do",body);
+}
+function W2(th){
+  const v=view({w:736,h:534,cx:600,cy:262,z:1});
+  const map=mapSVG(v,routeLive({plan:true,dev:true})+`<circle cx="888" cy="410" r="32" class="rt-geo" vector-effect="non-scaling-stroke"/>`)+
+    at(v,PT.toll,poi("ticket"))+at(v,PT.fuel,poi("fuel","fuel"))+
+    at(v,PT.icd,stop(1,"done",false,lbl("r","Lấy vỏ · ICD Phước Long","07:42")))+
+    at(v,PT.kho,stop(2,"done",false,lbl("r","Đóng hàng · Kho khách","09:15 <span class='lt'>+15′</span>")))+
+    at(v,PT.port,stop(3,"",true,lbl("l","Hạ hàng · Cảng Cát Lái","dự kiến 11:20 <span class='lt'>+20′</span>")))+
+    at(v,[430,187],chip("jam","Kẹt 18′","clock"),"","transform:translate(-50%,-160%)")+
+    at(v,[660,180],chip("dev","Khác tuyến +1,4 km","route"),"","transform:translate(-50%,-160%)")+
+    at(v,PT.truck,truck("late",68));
+  const body=rail(2)+`<div style="flex:1;display:flex;flex-direction:column;min-width:0">
+    <div class="w-hd"><div class="tt">${I("back",20)}<h3>LVT-1042</h3><span class="k-pill run" style="background:#e8f5ec;color:#1b7542">${I("truck",13,2)}Đang chạy</span><span class="sub">· 51C-123.45 · Nguyễn Văn Bình · JobID FCL-0915</span></div>
+      <div class="w-tabs"><span>Thông tin</span><span class="on">Hành trình</span><span>Chi phí</span><span>Chứng từ</span><span>Lịch sử</span></div></div>
+    <div style="flex:1;display:flex;min-height:0"><div class="w-map"><div class="mp ${th}">${map}
+      <div class="w-seg"><span class="on">Thực tế</span><span>Kế hoạch</span><span>Cả hai</span></div>
+      <div class="w-ctl"><div class="grp"><b>${I("plus",18)}</b><b>${I("minus",18)}</b></div><div class="grp"><b>${I("clock",18)}</b></div></div>
+      <div class="w-legend"><div><s style="border-color:var(--rt)"></s>Đã đi</div><div><s style="border-color:var(--lbl);border-top-style:dashed"></s>Kế hoạch</div><div><s style="border-color:var(--jam)"></s>Kẹt xe</div><div><s style="border-color:var(--dev)"></s>Khác tuyến</div></div>
+    </div></div>
+    <div class="w-pane r" style="width:380px;overflow:auto">
+      <div class="w-sec"><h4>Mốc trên Lệnh</h4><div class="tl">
+        <div class="it done"><span class="n">${I("check",12,3)}</span><div class="t1">Lấy vỏ · ICD Phước Long</div><div class="t2">GPS tự đánh dấu đã đến</div><div class="tms"><span class="tag">Mốc 07:30</span><span class="tag">Thực tế 07:42</span><span class="tag wn">+12′</span></div></div>
+        <div class="it done"><span class="n">${I("check",12,3)}</span><div class="t1">Đóng hàng · Kho khách KCN Sóng Thần</div><div class="t2">GPS tự đánh dấu đã đến</div><div class="tms"><span class="tag">Mốc 09:00</span><span class="tag">Thực tế 09:15</span><span class="tag wn">+15′</span></div></div>
+        <div class="it cur"><span class="n">3</span><div class="t1">Hạ hàng · Cảng Cát Lái</div><div class="t2">Còn 18 km</div><div class="tms"><span class="tag">Mốc 11:00</span><span class="tag">Dự kiến 11:20</span><span class="tag bd">Trễ ~20′</span></div></div>
+      </div></div>
+      <div class="w-sec"><h4>Ghi nhận từ GPS</h4><div class="gps">
+        <div><span class="ic" style="color:var(--jam)">${I("clock",15,2)}</span><div><b>Kẹt xe 18 phút</b><span>Xa lộ Hà Nội · 10:08–10:26 · đã gắn làm bằng chứng cho cảnh báo trễ mốc</span></div></div>
+        <div><span class="ic" style="color:var(--dev)">${I("route",15,2)}</span><div><b>Đi khác tuyến chặng 1</b><span>+1,4 km so với tuyến kế hoạch · không qua trạm</span></div></div>
+        <div><span class="ic">${I("ticket",15,2)}</span><div><b>Trạm thu phí Xa lộ HN</b><span>Chưa qua · dự kiến 10:41</span></div></div>
+      </div></div>
+    </div></div></div>`;
+  return frame("dispatch.app/lenh/LVT-1042/hanh-trinh",body);
+}
+function W3(th){
+  const v=view({w:756,h:644,cx:760,cy:330,z:1.3});
+  const T=PT.port,C=[[820,348,"9′",1],[900,180,"14′"],[600,470,"22′"]];
+  const lines=C.map(c=>R(`M${c[0]},${c[1]} L${T[0]},${T[1]}`,"rt-eta",2.5)).join("");
+  const map=mapSVG(v,`<circle cx="${T[0]}" cy="${T[1]}" r="190" fill="color-mix(in srgb,var(--rt) 5%,transparent)" stroke="var(--rt)" stroke-dasharray="3 6" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`+lines)+
+    [[700,294,"stop"],[680,180,"run"],[600,90,"run"],[520,220,"late"],[318,40,"run"]].map(f=>at(v,[f[0],f[1]],truck(f[2],0),"","opacity:.38")).join("")+
+    C.map(c=>at(v,[(c[0]+T[0])/2,(c[1]+T[1])/2],chip("eta"+(c[3]?" best":""),c[2]))).join("")+
+    C.map((c,i)=>at(v,[c[0],c[1]],truck(i===0?"sel":i===1?"stop":"run",i===0?114:0))).join("")+
+    at(v,T,`<div class="mk-target">${I("flag",18,2)}</div>`)+
+    at(v,[T[0],T[1]+190],chip("","Bán kính 5 km"),"","transform:translate(-50%,-140%)");
+  const cand=[["51D-778.12","Trần Minh Tú","3,2 km · ~9 phút",["Sắp xong LVT-1047","Trong ca đến 18:00","Đủ tải 40′"],1],
+    ["51C-287.31","Lê Hoàng Nam","6,8 km · ~14 phút",["Đang rảnh","Trong ca","Đủ tải 40′"]],
+    ["51C-119.47","Ngô Trí Dũng","9,5 km · ~22 phút",["Đang ôm 1 việc","Hết ca 15:00"]]];
+  const body=rail(1)+`<div class="w-map"><div class="mp ${th}">${map}
+      <div class="w-ctl"><div class="grp"><b>${I("plus",18)}</b><b>${I("minus",18)}</b></div></div></div></div>
+    <div class="w-pane r" style="width:360px"><div class="w-ph"><h3>Gợi ý xe</h3></div>
+      <div class="job"><span class="k-cap">YCVT-2281 · cần xe lúc 13:30</span><b>Nhận cont nhập tại Cảng Cát Lái</b>1 × 40′ HC · giao kho khách Bình Dương</div>
+      <div class="w-list" style="padding:0">${cand.map((c,i)=>`<div class="cand ${c[4]?"best":""}"><div class="who"><span class="rk">${i+1}</span><div class="grow"><div class="t1" style="font-size:14.5px">${c[0]} · ${c[1]}</div><div class="t2">${c[2]}</div></div></div>
+        <div class="why">${c[3].map(w=>`<span class="tag">${w}</span>`).join("")}</div><button class="k-btn ${c[4]?"pri":"sec"}">Giao xe này</button></div>`).join("")}
+      <p class="lab-muted" style="padding:0 16px;font-size:12px;color:var(--ink-3)">Phần mềm chỉ gợi ý; điều vận bấm chọn.</p></div></div>`;
+  return frame("dispatch.app/ycvt/YCVT-2281/giao-xe",body);
+}
+
+/* ---------- Lab ---------- */
+const OPT=[
+ {k:"M1",n:"Lái xe · Đang chạy Lệnh",fn:M1,m:1,w:["Bản đồ toàn màn, sheet giữ điểm tiếp theo + 1 nút chính “Đã đến”","Mốc trễ hiện bằng số + chữ, không chỉ màu","“Chỉ đường” mở Google Maps — app không tự dẫn đường"]},
+ {k:"M2",n:"Điều vận · Theo dõi 1 Lệnh",fn:M2,m:1,w:["Toàn cung đường đánh số 1-2-3, stepper mốc ở sheet","Cảnh báo trễ mốc kèm nguyên nhân (kẹt xe từ GPS)"]},
+ {k:"M3",n:"Xem lại hành trình",fn:M3,m:1,w:["Kéo thanh thời gian, xe chạy theo; chấm trên thanh = sự kiện","Dùng khi đối soát vé trạm, kẹt xe, khiếu nại trễ"]},
+ {k:"M4",n:"Ghim vị trí tay",fn:M4,m:1,w:["Ghim đứng giữa, kéo bản đồ để chỉnh","Dùng khi GPS mất tín hiệu, báo sự cố, ảnh định vị"]},
+ {k:"W1",n:"Web · Bản đồ đội xe",fn:W1,w:["Danh sách ↔ bản đồ đồng bộ; lọc theo trạng thái có số đếm","Bấm xe: thẻ nổi + hiện đoạn đường còn lại; xa thì gom cụm"]},
+ {k:"W2",n:"Web · Chi tiết Lệnh › Hành trình",fn:W2,w:["So tuyến thực tế với kế hoạch (nét đứt), chỗ lệch tô đỏ","Cột phải: mốc kế hoạch / thực tế / chênh + dữ liệu GPS làm bằng chứng"]},
+ {k:"W3",n:"Web · Gợi ý xe gần nhất",fn:W3,w:["Theo SOP+ B3a: 2–3 xe gợi ý có thời gian tới + lý do","Xe khác mờ đi; điều vận vẫn bấm chọn"]}
+];
+const S=labStore("uilab-map",{brand:"neutral",theme:"light",vote:{},note:{}});
+if(typeof S.vote!=="object")S.vote={};if(typeof S.note!=="object")S.note={};
+function card(o){
+  const vt=["Ưng","Sửa","Bỏ"].map(x=>`<button data-vote="${o.k}" data-v="${x}" class="${S.vote[o.k]===x?"on":""}">${x}</button>`).join("");
+  return `<p class="lab-cap">${o.k} · ${o.n}</p>${o.fn(S.theme)}<ul class="why-ul">${o.w.map(x=>`<li>${x}</li>`).join("")}</ul>
+    <div class="vote">${vt}</div><input class="lab-note" data-note="${o.k}" placeholder="Góp ý ${o.k}…" value="${(S.note[o.k]||"").replace(/"/g,"&quot;")}">`;
+}
+function render(){
+  document.body.className="b-"+S.brand;
+  document.getElementById("legend").innerHTML=legend(S.theme);
+  document.getElementById("mob").innerHTML=OPT.filter(o=>o.m).map(o=>`<div class="lab-col">${card(o)}</div>`).join("");
+  document.getElementById("web").innerHTML=OPT.filter(o=>!o.m).map(o=>`<div class="lab-box">${card(o)}</div>`).join("");
+  rpSet(RP.min+93);bindM4(S.theme);
+}
+let timer=null,spd=8;
+document.addEventListener("input",e=>{
+  if(e.target.id==="rp-in"){rpSet(+e.target.value);return}
+  const k=e.target.dataset.note;if(!k)return;S.note[k]=e.target.value;S.save()});
+document.addEventListener("click",e=>{
+  const vb=e.target.closest("[data-vote]");
+  if(vb){const k=vb.dataset.vote;S.vote[k]=S.vote[k]===vb.dataset.v?"":vb.dataset.v;S.save();vb.parentElement.querySelectorAll("button").forEach(b=>b.classList.toggle("on",S.vote[k]===b.dataset.v));return}
+  if(e.target.closest("#rp-spd")){spd=spd===8?16:spd===16?4:8;e.target.closest("#rp-spd").textContent=spd+"×";return}
+  const pb=e.target.closest("#rp-play");
+  if(pb){if(timer){clearInterval(timer);timer=null;pb.innerHTML=I("play",20);return}
+    let m=+document.getElementById("rp-in").value;if(m>=RP.max)m=RP.min;pb.innerHTML=I("pause",20);
+    timer=setInterval(()=>{m+=spd/8;if(m>=RP.max){m=RP.max;clearInterval(timer);timer=null;const b=document.getElementById("rp-play");if(b)b.innerHTML=I("play",20)}rpSet(m)},60)}
+});
+document.getElementById("export").onclick=()=>{
+  const L=["Góp ý UI Lab · Bản đồ (design/_lab/lab-map.html), nền "+S.theme+", thương hiệu "+S.brand+":"];
+  OPT.forEach(o=>{const v=S.vote[o.k],n=S.note[o.k];if(v||n)L.push(`- ${o.k} ${o.n}: ${v?"["+v+"] ":""}${n||""}`)});
+  if(L.length===1)L.push("- (chưa có góp ý)");labCopy(L.join("\n"));
+};
+render();labBindOpts(S,()=>{if(timer){clearInterval(timer);timer=null}render()});
+</script>
+<script src="lab-font.js"></script>
+</body>
+</html>

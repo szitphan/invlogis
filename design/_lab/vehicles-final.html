@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ảnh phương tiện — bản chốt</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1f1f3;--card:#fff;--ink:#121214;--ink2:#5c5c66;--ink3:#93939d;--line:#e3e3e8;--well:#f4f4f6;--acc:#121214;--chip:#efeff2}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#141416;--card:#1d1d20;--ink:#ececf0;--ink2:#b4b4bc;--ink3:#8a8a94;--line:#2c2c31;--well:#2a2a2f;--acc:#ececf0;--chip:#2a2a2f}}
+:root[data-theme="dark"]{--bg:#141416;--card:#1d1d20;--ink:#ececf0;--ink2:#b4b4bc;--ink3:#8a8a94;--line:#2c2c31;--well:#2a2a2f;--acc:#ececf0;--chip:#2a2a2f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1440px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:18px;margin:30px 0 6px}
+.sub{color:var(--ink2);margin:0 0 14px;font-size:13px;max-width:980px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.top{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:12px;font-size:13px}
+.top nav{display:flex;gap:6px;flex-wrap:wrap}
+.top a{color:var(--ink);text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:12.5px}
+.opt{display:flex;gap:6px;align-items:center;color:var(--ink2)}
+.seg{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:2px}
+.seg button{font:inherit;font-size:12.5px;border:0;background:none;color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer}
+.seg button.on{background:var(--acc);color:var(--card)}
+select{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:999px;padding:5px 10px;background:var(--card);color:var(--ink)}
+.flipL .fl{transform:scaleX(-1)}
+/* bảng danh mục */
+.wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:1080px}
+th{text-align:left;font-size:12px;color:var(--ink3);font-weight:600;padding:10px;border-bottom:1px solid var(--line)}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr.grp td{background:var(--well);font-weight:700;font-size:13px}
+.pic{background:var(--well);border-radius:12px;display:flex;align-items:flex-end;justify-content:center;padding:6px;overflow:hidden}
+.pic img{display:block;max-width:100%;max-height:100%;object-fit:contain}
+.pic.q{width:200px;height:120px}.pic.s{width:260px;height:96px}
+.ph{color:var(--ink3);font-size:12px;align-items:center;text-align:center}
+.key{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink3)}
+.note{font-size:12.5px;color:var(--ink2)}
+.chip{display:inline-block;background:var(--chip);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600}
+/* dàn tỉ lệ thật */
+.line{display:flex;align-items:flex-end;gap:18px;overflow-x:auto;padding:10px 4px 4px;border-bottom:2px solid var(--line)}
+.line .it{flex:none;text-align:center;font-size:11.5px;color:var(--ink2)}
+.line .it img{display:block;margin:0 auto 4px}
+.scale{font-size:12px;color:var(--ink3);margin:6px 0 16px}
+/* tổ hợp */
+.mx{display:grid;grid-template-columns:170px repeat(6,minmax(180px,1fr));gap:8px;min-width:1300px}
+.mx .h{font-size:12px;color:var(--ink3);font-weight:600;padding:4px}
+.mx .rl{font-weight:600;font-size:13px;padding:6px 4px}
+.cell{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;min-height:92px;display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer}
+.cell:hover,.cell.on{border-color:var(--ink)}
+.cell.na{background:none;border-style:dashed;cursor:default;align-items:center;justify-content:center;color:var(--ink3);font-size:12px}
+.cmp{position:relative;margin:0 auto}
+.cmp img{position:absolute;display:block}
+.det{display:grid;grid-template-columns:minmax(0,1fr) 220px 300px;gap:16px;align-items:end}
+.det .lb{font-size:12px;color:var(--ink3);margin-top:6px}
+.qcard{background:var(--well);border-radius:14px;padding:10px;position:relative}
+.qcard .tag{position:absolute;left:10px;top:10px}
+@media (max-width:900px){.det{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Ảnh phương tiện — bản chốt</h1>
+  <p class="sub">Quy chuẩn (refs/vehicle-shot-spec.md): mỗi phương tiện 2 mặt cắt — <b>3/4 trước</b> (~35°, đầu xe sang phải) và <b>ngang vuông góc</b>; ảnh nhìn từ trên cho marker. Cabin trắng trung lập, container trắng, không bóng, nền trong suốt. Ảnh lưu cắt sát + kích thước thật (m) → hiển thị cùng tỉ lệ. Quay sang trái bằng CSS (nút "Hướng"). Danh mục: bảng SRS cũ LG (39 tên). Tổ hợp kéo: tạm gác, làm sau.</p>
+  <div class="top">
+    <nav><a href="#cat">Danh mục 39 tên</a><a href="#line">Tỉ lệ thật</a></nav>
+    <div class="opt">Hướng <div class="seg" id="dir"><button data-v="R" class="on">Phải</button><button data-v="L">Trái (lật CSS)</button></div></div>
+  </div>
+
+  <h2 id="cat">1 · Danh mục 39 tên phương tiện</h2>
+  <div class="wrap"><table id="tcat"></table></div>
+
+  <h2 id="line">2 · Dàn xe theo tỉ lệ thật (mặt ngang)</h2>
+  <p class="sub">Cùng một tỉ lệ px/m, đáy bánh thẳng hàng. Dùng để thấy tương quan kích thước giữa các xe.</p>
+  <div class="box" id="lines"></div>
+
+</main>
+<script>
+const D={"names": [["00", "", "Phương tiện chưa xác định", null, null], ["01", "01", "Mooc 20ft", "n01", 8], ["02", "01", "Mooc 40ft 2 giàn", "t01", 8], ["03", "01", "Mooc 40ft 3 giàn", "n03", 9], ["04", "01", "Mooc 45ft", "n04", 9], ["05", "02", "Đầu kéo Maz", "n05", 2], ["06", "02", "Đầu kéo Maxxforce", "n06", 1], ["07", "02", "Đầu kéo Hino 700", "t02", 1], ["08", "02", "Đầu kéo Cascadia", "n08", 1], ["09", "02", "Đầu kéo Chenglong H7 385PS", "n09", 1], ["10", "03", "Xe tải AC990", "n10", 5], ["11", "03", "Xe tải AC820", "g-truck-l", 3], ["12", "03", "Xe tải TMT", "n12", 3], ["13", "03", "Xe tải Ollin 700A", "n29", 3], ["14", "03", "Xe tải Isuzu NQR75L", "t03", 3], ["15", "03", "Xe tải Ollin 450", "n29", 3], ["16", "03", "Xe Isuzu NQR66P", "t03", 3], ["17", "03", "Xe Hyundai HD72", "n17", 3], ["18", "03", "Xe Olin 250", "n29", 3], ["19", "03", "Xe Kia Frontier K165", "g-kia", 3], ["20", "03", "Xe Isuzu QKR 55H", "g-truck-s", 3], ["21", "03", "Xe Kia Frontier 140", "g-kia", 3], ["22", "03", "Xe Kia K2700", "g-kia", 3], ["23", "03", "Xe Isuzu NLR55", "g-truck-s", 3], ["24", "03", "Xe tải Kia K3000", "g-kia", 3], ["25", "03", "Xe tải Dongfeng B180", "n25", 3], ["26", "03", "Xe tải Auman C240", "n26", 4], ["27", "03", "Xe tải Chenglong M3 - 2024", "n27", 3], ["28", "03", "Xe tải Chenglong H5 - 2024", "n28", 6], ["29", "03", "Xe tải Ollin 700", "n29", 3], ["30", "03", "Xe tải Isuzu QKR 210", "g-truck-s", 3], ["31", "04", "Xe nâng Toyota 2.5T", "t04", 10], ["32", "05", "Xe nâng Komatsu FB15RL-15 1.5T", "t05", 11], ["33", "06", "Container thường", "t06", null], ["34", "07", "Container lạnh", "t07", null], ["35", "08", "Máy phát điện 25 KVA", "t08", null], ["36", "08", "Máy phát điện 44 KVA (HP)", "t08", null], ["37", "08", "Máy phát điện 45 KVA (BN)", "t08", null], ["38", "09", "Trạm bơm dầu", "t09", null]], "tyre": {"1": "Đầu kéo 2 cầu sau (1 dí 2 cầu tải)", "2": "Đầu kéo 1 cầu sau (1 dí 1 cầu tải)", "3": "Xe tải hai trục (1 dí 1 cầu tải)", "4": "Xe tải ba trục (1 dí 2 cầu tải)", "5": "Xe tải ba trục (2 dí 1 cầu tải)", "6": "Xe tải bốn trục (2 dí 2 cầu tải)", "8": "Sơ mi-Rơ mooc 2 giàn", "9": "Sơ mi-Rơ mooc 3 giàn", "10": "Xe nâng diesel", "11": "Xe nâng điện"}, "sizes": {"_note": "Kích thước thật (mét) dài × cao của từng ảnh, dùng hiển thị tỉ lệ thật. Số tròn theo thông số phổ biến của dòng xe — ước lượng, không phải số đăng kiểm.", "t01": [12.4, 1.5], "n01": [6.4, 1.5], "n03": [12.4, 1.5], "n04": [13.9, 1.5], "g-mooc-san": [12.4, 1.6], "t02": [7.0, 3.9], "n05": [6.0, 3.8], "n06": [7.6, 4.0], "n08": [7.8, 4.1], "n09": [7.0, 3.9], "g-truck-s": [5.0, 2.9], "g-kia": [5.2, 2.7], "t03": [7.0, 3.2], "n17": [6.7, 3.1], "n29": [6.8, 3.2], "g-truck-l": [9.6, 3.6], "n12": [9.2, 3.6], "n25": [9.6, 3.7], "n26": [11.5, 3.8], "n27": [9.8, 3.8], "t04": [3.6, 2.2], "t05": [2.4, 2.3], "t06": [6.06, 2.59], "t07": [13.7, 2.9], "t08": [2.0, 1.4], "t09": [6.06, 2.59], "combo": [16.5, 4.1], "combo-0": [16.5, 3.9], "combo-2": [16.5, 4.1], "combo-40": [16.5, 4.1], "combo-45": [18.0, 4.3], "c40": [12.19, 2.59], "c45": [13.72, 2.9], "n10": [10.5, 3.7], "n28": [12.0, 3.9]}, "aspect": {"c40-q": 0.5569, "c40-s": 0.319, "c40-top": 2.1597, "c45-q": 0.4823, "c45-s": 0.4275, "c45-top": 2.1304, "g-kia-q": 0.6221, "g-kia-s": 0.4075, "g-mooc-san-q": 0.3359, "g-mooc-san-s": 0.2189, "g-mooc-san-top": 4.4903, "g-truck-l-q": 0.5936, "g-truck-l-s": 0.4143, "g-truck-s": 0.6704, "g-truck-s-q": 0.6691, "g-truck-s-s": 0.4095, "n01-q": 0.5581, "n01-s": 0.1593, "n01-top": 3.3527, "n03-q": 0.3046, "n03-s": 0.1462, "n03-top": 3.9024, "n04-q": 0.2541, "n04-s": 0.1538, "n04-top": 4.3152, "n05-q": 0.617, "n05-s": 0.5836, "n05-top": 1.3187, "n06-q": 0.6207, "n06-s": 0.4591, "n06-top": 2.0388, "n08-q": 0.5996, "n08-s": 0.5074, "n08-top": 2.2623, "n09-q": 0.6555, "n09-s": 0.5377, "n09-top": 2.05, "n10-q": 0.554, "n10-s": 0.3725, "n12-q": 0.6107, "n12-s": 0.4135, "n17-q": 0.6651, "n17-s": 0.4365, "n25-q": 0.5667, "n25-s": 0.4098, "n26-q": 0.5407, "n26-s": 0.4044, "n27-q": 0.6078, "n27-s": 0.3858, "n28-q": 0.5856, "n28-s": 0.386, "n29-q": 0.6117, "n29-s": 0.3787, "t01-q": 0.2839, "t01-s": 0.1765, "t01-top": 3.6078, "t02-q": 0.683, "t02-s": 0.5082, "t02-top": 2.5072, "t03-q": 0.6087, "t03-s": 0.4092, "t03-top": 2.3504, "t04-q": 0.7048, "t04-s": 0.5952, "t04-top": 2.959, "t05-q": 0.9376, "t05-s": 0.6949, "t06-q": 0.5616, "t06-s": 0.4008, "t06-top": 2.0447, "t07-q": 0.4722, "t07-s": 0.3265, "t07-top": 3.4193, "t08-q": 0.7294, "t08-s": 0.5477, "t09-q": 0.5583, "t09-s": 0.3992}, "src": {"c40-q": "assets/vehicles/b-ai/c40-q.png", "c40-s": "assets/vehicles/b-ai/c40-s.png", "c40-top": "assets/vehicles/b-ai/c40-top.png", "c45-q": "assets/vehicles/b-ai/c45-q.png", "c45-s": "assets/vehicles/b-ai/c45-s.png", "c45-top": "assets/vehicles/b-ai/c45-top.png", "g-kia-q": "assets/vehicles/b-ai/g-kia-q.png", "g-kia-s": "assets/vehicles/b-ai/g-kia-s.png", "g-mooc-san-q": "assets/vehicles/b-ai/g-mooc-san-q.png", "g-mooc-san-s": "assets/vehicles/b-ai/g-mooc-san-s.png", "g-mooc-san-top": "assets/vehicles/b-ai/g-mooc-san-top.png", "g-truck-l-q": "assets/vehicles/b-ai/g-truck-l-q.png", "g-truck-l-s": "assets/vehicles/b-ai/g-truck-l-s.png", "g-truck-s": "assets/vehicles/b-ai/g-truck-s.png", "g-truck-s-q": "assets/vehicles/b-ai/g-truck-s-q.png", "g-truck-s-s": "assets/vehicles/b-ai/g-truck-s-s.png", "n01-q": "assets/vehicles/b-ai/n01-q.png", "n01-s": "assets/vehicles/b-ai/n01-s.png", "n01-top": "assets/vehicles/b-ai/n01-top.png", "n03-q": "assets/vehicles/b-ai/n03-q.png", "n03-s": "assets/vehicles/b-ai/n03-s.png", "n03-top": "assets/vehicles/b-ai/n03-top.png", "n04-q": "assets/vehicles/b-ai/n04-q.png", "n04-s": "assets/vehicles/b-ai/n04-s.png", "n04-top": "assets/vehicles/b-ai/n04-top.png", "n05-q": "assets/vehicles/b-ai/n05-q.png", "n05-s": "assets/vehicles/b-ai/n05-s.png", "n05-top": "assets/vehicles/b-ai/n05-top.png", "n06-q": "assets/vehicles/b-ai/n06-q.png", "n06-s": "assets/vehicles/b-ai/n06-s.png", "n06-top": "assets/vehicles/b-ai/n06-top.png", "n08-q": "assets/vehicles/b-ai/n08-q.png", "n08-s": "assets/vehicles/b-ai/n08-s.png", "n08-top": "assets/vehicles/b-ai/n08-top.png", "n09-q": "assets/vehicles/b-ai/n09-q.png", "n09-s": "assets/vehicles/b-ai/n09-s.png", "n09-top": "assets/vehicles/b-ai/n09-top.png", "n10-q": "assets/vehicles/b-ai/n10-q.png", "n10-s": "assets/vehicles/b-ai/n10-s.png", "n12-q": "assets/vehicles/b-ai/n12-q.png", "n12-s": "assets/vehicles/b-ai/n12-s.png", "n17-q": "assets/vehicles/b-ai/n17-q.png", "n17-s": "assets/vehicles/b-ai/n17-s.png", "n25-q": "assets/vehicles/b-ai/n25-q.png", "n25-s": "assets/vehicles/b-ai/n25-s.png", "n26-q": "assets/vehicles/b-ai/n26-q.png", "n26-s": "assets/vehicles/b-ai/n26-s.png", "n27-q": "assets/vehicles/b-ai/n27-q.png", "n27-s": "assets/vehicles/b-ai/n27-s.png", "n28-q": "assets/vehicles/b-ai/n28-q.png", "n28-s": "assets/vehicles/b-ai/n28-s.png", "n29-q": "assets/vehicles/b-ai/n29-q.png", "n29-s": "assets/vehicles/b-ai/n29-s.png", "t01-q": "assets/vehicles/b-ai/t01-q.png", "t01-s": "assets/vehicles/b-ai/t01-s.png", "t01-top": "assets/vehicles/b-ai/t01-top.png", "t02-q": "assets/vehicles/b-ai/t02-q.png", "t02-s": "assets/vehicles/b-ai/t02-s.png", "t02-top": "assets/vehicles/b-ai/t02-top.png", "t03-q": "assets/vehicles/b-ai/t03-q.png", "t03-s": "assets/vehicles/b-ai/t03-s.png", "t03-top": "assets/vehicles/b-ai/t03-top.png", "t04-q": "assets/vehicles/b-ai/t04-q.png", "t04-s": "assets/vehicles/b-ai/t04-s.png", "t04-top": "assets/vehicles/b-ai/t04-top.png", "t05-q": "assets/vehicles/b-ai/t05-q.png", "t05-s": "assets/vehicles/b-ai/t05-s.png", "t06-q": "assets/vehicles/b-ai/t06-q.png", "t06-s": "assets/vehicles/b-ai/t06-s.png", "t06-top": "assets/vehicles/b-ai/t06-top.png", "t07-q": "assets/vehicles/b-ai/t07-q.png", "t07-s": "assets/vehicles/b-ai/t07-s.png", "t07-top": "assets/vehicles/b-ai/t07-top.png", "t08-q": "assets/vehicles/b-ai/t08-q.png", "t08-s": "assets/vehicles/b-ai/t08-s.png", "t09-q": "assets/vehicles/b-ai/t09-q.png", "t09-s": "assets/vehicles/b-ai/t09-s.png"}};
+const TYPE={"":"N/A","01":"Sơ mi-Rơ mooc","02":"Đầu kéo container","03":"Xe tải thùng","04":"Xe nâng diesel","05":"Xe nâng điện","06":"DC container","07":"Reefer container","08":"Máy phát điện","09":"Trạm bơm dầu"};
+const SRC=k=>D.src[k], has=k=>k in D.src, asp=k=>D.aspect[k]||0.4, L=k=>D.sizes[k][0];
+const img=(k,cls="")=>has(k)?`<img class="fl ${cls}" src="${SRC(k)}" alt="${k}" loading="lazy">`:`<span class="ph">chưa có ${k}</span>`;
+/* ---- 1. danh mục ---- */
+let last=null,h=`<tr><th>Mã PT</th><th>Tên phương tiện (SRS)</th><th>3/4 trước</th><th>Mặt ngang</th><th>Sơ đồ lốp</th><th>Dài × cao (m)</th></tr>`;
+D.names.forEach(([c,t,n,k,ty])=>{
+  if(t!==last){last=t;h+=`<tr class="grp"><td colspan="6">${t?"Mã loại "+t+" · ":""}${TYPE[t]}</td></tr>`}
+  h+=`<tr><td><b>${c}</b></td><td><b>${n}</b>${k?`<div class="key">${k}</div>`:""}</td>
+   <td>${k?`<div class="pic q">${img(k+"-q")}</div>`:`<div class="pic q ph">Chưa gán xe</div>`}</td>
+   <td>${k?`<div class="pic s">${img(k+"-s")}</div>`:""}</td>
+   <td class="note">${ty?`<span class="chip">Kiểu ${ty}</span><br>${D.tyre[ty]}`:"Không có lốp"}</td>
+   <td class="note">${k&&D.sizes[k]?D.sizes[k].map(v=>String(v).replace(".",",")).join(" × "):"—"}</td></tr>`;
+  if(c==="02"&&has("g-mooc-san-q"))h+=`<tr><td class="note">02 · biến thể</td><td><b>Mooc sàn 40ft 2 giàn</b><div class="key">g-mooc-san</div></td><td><div class="pic q">${img("g-mooc-san-q")}</div></td><td><div class="pic s">${img("g-mooc-san-s")}</div></td><td class="note"><span class="chip">Kiểu 8</span><br>${D.tyre[8]}</td><td class="note">${D.sizes["g-mooc-san"].join(" × ").replace(/\./g,",")}</td></tr>`;
+});
+document.getElementById("tcat").innerHTML=h;
+/* ---- 2. tỉ lệ thật ---- */
+const PPM=16, GROUPS=[["Đầu kéo",["t02","n05","n06","n08","n09"]],["Xe tải",["g-kia","g-truck-s","n29","t03","n17","n12","g-truck-l","n25","n27","n10","n26","n28"]],["Sơ mi rơ mooc",["n01","t01","g-mooc-san","n03","n04"]],["Container · xe nâng · thiết bị",["t06","c40","c45","t07","t04","t05","t08","t09"]]];
+const NM=Object.fromEntries(D.names.filter(n=>n[3]).map(n=>[n[3],n[2]]));Object.assign(NM,{"g-mooc-san":"Mooc sàn 40ft","c40":"Container 40ft","c45":"Container 45ft","g-kia":"Kia Frontier","g-truck-s":"Isuzu tải nhẹ","g-truck-l":"Auman 2 trục"});
+document.getElementById("lines").innerHTML=GROUPS.map(([g,ks])=>`<b>${g}</b><div class="line">${ks.filter(k=>D.sizes[k]).map(k=>`<div class="it">${has(k+"-s")?`<img class="fl" src="${SRC(k+"-s")}" alt="${k}" style="width:${L(k)*PPM}px">`:`<div style="width:${L(k)*PPM}px;height:20px;border:1px dashed var(--line)"></div>`}${NM[k]||k}<br>${String(L(k)).replace(".",",")} m</div>`).join("")}</div>`).join("")+`<div class="scale">Tỉ lệ: ${PPM} px = 1 m · vạch đáy = mặt đất</div>`;
+document.addEventListener("click",e=>{const b=e.target.closest("#dir button");if(b){document.body.classList.toggle("flipL",b.dataset.v==="L");document.querySelectorAll("#dir button").forEach(x=>x.classList.toggle("on",x===b))}});
+</script>
+</body>
+</html>

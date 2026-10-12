@@ -1,7 +1,7 @@
 ---
 type: project-profile
 status: draft
-updated: 2026-10-05
+updated: 2026-10-12
 links:
   - docs-input/srs-cu/lg-srs-export.md
   - docs/_shared/system-overview.md
@@ -28,9 +28,14 @@ Danh sách tác nhân chuẩn kèm tên gọi cần tránh: [[docs/_shared/defin
 
 ## Thị trường & ngôn ngữ
 
-- Vận hành tại Việt Nam, nhiều chi nhánh (vd Hà Nội, TP.HCM). (2026-10-01)
+- Vận hành tại Việt Nam. Chi nhánh Delta: Hà Nội, Vận Tải (VT), Bắc Ninh (BN), Hải Dương (HD, sẽ giải thể do sáp nhập tỉnh), TP.HCM; không có chi nhánh Hải Phòng. Bốn chi nhánh HN, VT, BN, HD gộp lại gấp 3–4 lần TP.HCM về sản lượng, doanh thu. (2026-10-12)
+- Quy mô Delta: ~110.000 lô hàng/năm (= số Lệnh vận tải), ~50.000 tờ khai/năm (= số JobID J01–J06), tăng 2 con số mỗi năm. (2026-10-12)
 - Giao diện: Tiếng Việt (mặc định) và Tiếng Anh. Không hỗ trợ Tiếng Nhật. (2026-10-01)
 - Câu chữ giao diện theo `design/design.md` (Copy động), không dùng "Vui lòng". (2026-10-01)
+
+## Mô hình kinh doanh
+
+Đang làm theo hợp đồng outsource cho Delta. Định hướng từ 2026-10-12: phát triển thành sản phẩm SaaS logistics bán cho nhiều doanh nghiệp, Delta là khách đầu tiên. Quy tắc riêng Delta không viết vào lõi — xem [[docs/_product/saas-core-vs-tenant.md|Lõi SaaS và phần riêng Delta]]. (2026-10-12)
 
 ## Ghi chú khác
 

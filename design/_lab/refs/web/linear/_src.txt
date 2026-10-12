@@ -1,0 +1,6 @@
+01 crop/l-detail cắt từ trang chủ
+02 crop/l-board cắt từ trang chủ
+03 out/linear/10 https://cdn.sanity.io/images/alowdh95/production/ea9cc2d95ac626278efde7cc9edb7bf2c2c9e451-1729x1081.png
+04 out/linear/08 https://cdn.sanity.io/images/alowdh95/production/857117f52ba77c81c0584e653081409cf7eb2cd5-1729x1081.png
+05 out/linear/06 https://cdn.sanity.io/images/alowdh95/production/7a54ca5f954787575fbe9aaaab68bb08d5f97c95-1729x1081.png
+06 out/linear/04 https://cdn.sanity.io/images/alowdh95/production/b2218da9002866aabd1037ad09f3069dda54c20a-1729x1081.png

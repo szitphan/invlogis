@@ -4,12 +4,28 @@
     "extractor_version": "1.0.0",
     "generated_at": "1970-01-01T00:00:00.000Z",
     "root": "docs",
-    "node_count": 92,
-    "edge_count": 182,
+    "node_count": 109,
+    "edge_count": 250,
     "coverage": {
-      "docs_total": 15,
-      "docs_parsed": 12,
+      "docs_total": 26,
+      "docs_parsed": 19,
       "unparsed_docs": [
+        {
+          "path": "design/_lab/refs/notes.md",
+          "reason": "no-frontmatter-and-no-known-shape"
+        },
+        {
+          "path": "design/_lab/refs/vehicle-final-plan.md",
+          "reason": "no-frontmatter-and-no-known-shape"
+        },
+        {
+          "path": "design/_lab/refs/vehicle-refs.md",
+          "reason": "no-frontmatter-and-no-known-shape"
+        },
+        {
+          "path": "design/_lab/refs/vehicle-shot-spec.md",
+          "reason": "no-frontmatter-and-no-known-shape"
+        },
         {
           "path": "design/ba-crosswalk.md",
           "reason": "no-frontmatter-and-no-known-shape"
@@ -23,11 +39,58 @@
           "reason": "no-frontmatter-and-no-known-shape"
         }
       ],
-      "unresolved_refs": [],
+      "unresolved_refs": [
+        {
+          "ref": "E-cross-process-flow-001",
+          "source": {
+            "file": "docs/_product/srs-v2-change-log.md",
+            "line": 82
+          }
+        },
+        {
+          "ref": "E-cross-process-flow-002",
+          "source": {
+            "file": "docs/_product/srs-v2-change-log.md",
+            "line": 82
+          }
+        },
+        {
+          "ref": "E-dispatch-003",
+          "source": {
+            "file": "design/_lab/refs/notes.md",
+            "line": 127
+          }
+        },
+        {
+          "ref": "E-dispatch-007",
+          "source": {
+            "file": "docs/_product/srs-v2-change-log.md",
+            "line": 94
+          }
+        },
+        {
+          "ref": "E-dispatch-008",
+          "source": {
+            "file": "docs/_product/srs-v2-change-log.md",
+            "line": 110
+          }
+        }
+      ],
       "uncataloged_content": [],
-      "partial_parse_docs": [],
+      "partial_parse_docs": [
+        {
+          "path": "docs/meetings/2026-10-09-client-dispatch-field-issues.md",
+          "reason": "parseMeeting trích được 0 item — format lệch?"
+        },
+        {
+          "path": "docs/meetings/2026-10-10-oq-dispatch-coordination.md",
+          "reason": "parseMeeting trích được 0 item — format lệch?"
+        }
+      ],
       "notes": [
-        ".claude/state/atlassian/sync-state.yaml vắng — bỏ qua nguồn Jira/Confluence canonical"
+        ".claude/state/atlassian/sync-state.yaml vắng — bỏ qua nguồn Jira/Confluence canonical",
+        "docs/meetings/2026-10-09-client-dispatch-field-issues.md: shape parseMeeting trích được 0 item — format lệch?",
+        "docs/meetings/2026-10-10-oq-dispatch-coordination.md: shape parseMeeting trích được 0 item — format lệch?"
       ]
     }
   },
@@ -39,10 +102,10 @@
       "feature": "common",
       "title": "E-common-001",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 243
+        "line": 251
       },
       "props": {
         "kind": "Inline",
@@ -58,10 +121,10 @@
       "feature": "common",
       "title": "E-common-002",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 244
+        "line": 252
       },
       "props": {
         "kind": "Inline",
@@ -77,10 +140,10 @@
       "feature": "common",
       "title": "E-common-003",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 245
+        "line": 253
       },
       "props": {
         "kind": "Inline",
@@ -96,10 +159,10 @@
       "feature": "common",
       "title": "E-common-004",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 246
+        "line": 254
       },
       "props": {
         "kind": "Inline",
@@ -115,10 +178,10 @@
       "feature": "common",
       "title": "E-common-005",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 247
+        "line": 255
       },
       "props": {
         "kind": "Inline",
@@ -134,10 +197,10 @@
       "feature": "common",
       "title": "E-common-006",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 248
+        "line": 256
       },
       "props": {
         "kind": "Inline",
@@ -153,10 +216,10 @@
       "feature": "common",
       "title": "E-common-007",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 249
+        "line": 257
       },
       "props": {
         "kind": "Inline",
@@ -172,10 +235,10 @@
       "feature": "common",
       "title": "E-common-008",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 250
+        "line": 258
       },
       "props": {
         "kind": "Toast",
@@ -191,10 +254,10 @@
       "feature": "common",
       "title": "E-common-009",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 251
+        "line": 259
       },
       "props": {
         "kind": "Toast",
@@ -210,10 +273,10 @@
       "feature": "common",
       "title": "E-common-010",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 252
+        "line": 260
       },
       "props": {
         "kind": "Toast (web) · Popup chặn (app)",
@@ -229,10 +292,10 @@
       "feature": "common",
       "title": "E-common-011",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 253
+        "line": 261
       },
       "props": {
         "kind": "Popup chặn (app)",
@@ -248,10 +311,10 @@
       "feature": "common",
       "title": "E-common-012",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
-        "line": 254
+        "line": 262
       },
       "props": {
         "kind": "Popup chặn (app)",
@@ -741,6 +804,70 @@
       }
     },
     {
+      "key": "design/_lab/refs/notes.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Reference — ghi nhận",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "design/_lab/refs/notes.md",
+        "line": 1
+      },
+      "props": {
+        "doc_type": "unknown"
+      }
+    },
+    {
+      "key": "design/_lab/refs/vehicle-final-plan.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Bản kế hoạch sinh ảnh cuối — chạy 1 lần sau khi duyệt",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "design/_lab/refs/vehicle-final-plan.md",
+        "line": 1
+      },
+      "props": {
+        "doc_type": "unknown"
+      }
+    },
+    {
+      "key": "design/_lab/refs/vehicle-refs.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Tra cứu 39 tên phương tiện (SRS cũ LG) — đặc điểm nhận dạng để tinh chỉnh ảnh",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "design/_lab/refs/vehicle-refs.md",
+        "line": 1
+      },
+      "props": {
+        "doc_type": "unknown"
+      }
+    },
+    {
+      "key": "design/_lab/refs/vehicle-shot-spec.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Quy chuẩn ảnh phương tiện — 2 mặt cắt, 1 hướng, 1 góc, 1 khung",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "design/_lab/refs/vehicle-shot-spec.md",
+        "line": 1
+      },
+      "props": {
+        "doc_type": "unknown"
+      }
+    },
+    {
       "key": "design/ba-crosswalk.md",
       "type": "doc",
       "subtype": null,
@@ -785,7 +912,12 @@
         "line": 292
       },
       "props": {
-        "doc_type": "unknown"
+        "doc_type": "unknown",
+        "authors": [
+          "@szitphan",
+          "szitphan"
+        ],
+        "last_activity": "2026-10-12"
       }
     },
     {
@@ -811,13 +943,18 @@
       "feature": null,
       "title": "UI Common Rules (GR) + lỗi dùng chung (E-common)",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/conventions.md",
         "line": 12
       },
       "props": {
-        "doc_type": "shared-conventions"
+        "doc_type": "shared-conventions",
+        "authors": [
+          "@szitphan",
+          "szitphan"
+        ],
+        "last_activity": "2026-10-12"
       }
     },
     {
@@ -827,13 +964,58 @@
       "feature": null,
       "title": "UI Common Components (CMP)",
       "status": "draft",
-      "updated": "2026-10-04",
+      "updated": "2026-10-12",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 13
+        "line": 15
       },
       "props": {
-        "doc_type": "shared-screen-patterns"
+        "doc_type": "shared-screen-patterns",
+        "authors": [
+          "@szitphan"
+        ],
+        "last_activity": "2026-10-12"
+      }
+    },
+    {
+      "key": "docs/_product/saas-core-vs-tenant.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Lõi SaaS và phần riêng Delta — phân loại quy tắc để bán cho khách khác",
+      "status": "draft",
+      "updated": "2026-10-12",
+      "source": {
+        "file": "docs/_product/saas-core-vs-tenant.md",
+        "line": 16
+      },
+      "props": {
+        "doc_type": "product-strategy",
+        "authors": [
+          "@szitphan",
+          "szitphan"
+        ],
+        "last_activity": "2026-10-12"
+      }
+    },
+    {
+      "key": "docs/_product/srs-v2-change-log.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Thay đổi so với SRS v2.0 (LG) — story Jira",
+      "status": "draft",
+      "updated": "2026-10-12",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 22
+      },
+      "props": {
+        "doc_type": "change-log",
+        "authors": [
+          "@szitphan"
+        ],
+        "last_activity": "2026-10-12"
       }
     },
     {
@@ -871,9 +1053,10 @@
       "props": {
         "doc_type": "research",
         "authors": [
+          "@szitphan",
           "szitphan"
         ],
-        "last_activity": "2026-10-02"
+        "last_activity": "2026-10-05"
       }
     },
     {
@@ -886,14 +1069,15 @@
       "updated": "2026-10-02",
       "source": {
         "file": "docs/_research/2026-10-02-eport-integration.md",
-        "line": 15
+        "line": 17
       },
       "props": {
         "doc_type": "research",
         "authors": [
+          "@szitphan",
           "szitphan"
         ],
-        "last_activity": "2026-10-02"
+        "last_activity": "2026-10-05"
       }
     },
     {
@@ -906,14 +1090,15 @@
       "updated": "2026-10-02",
       "source": {
         "file": "docs/_research/2026-10-02-field-document-reading.md",
-        "line": 15
+        "line": 17
       },
       "props": {
         "doc_type": "research",
         "authors": [
+          "@szitphan",
           "szitphan"
         ],
-        "last_activity": "2026-10-02"
+        "last_activity": "2026-10-05"
       }
     },
     {
@@ -923,10 +1108,10 @@
       "feature": null,
       "title": "Definitions",
       "status": "draft",
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 10
+        "line": 11
       },
       "props": {
         "doc_type": "shared-definitions"
@@ -971,7 +1156,7 @@
       "feature": null,
       "title": "Project Profile",
       "status": "draft",
-      "updated": "2026-10-01",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/project-profile.md",
         "line": 12
@@ -997,19 +1182,150 @@
       }
     },
     {
+      "key": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": "dispatch-coordination",
+      "title": "Điều phối — JobID, Yêu cầu vận tải, Lệnh vận tải liền mạch",
+      "status": "draft",
+      "updated": "2026-10-07",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 22
+      },
+      "props": {
+        "doc_type": "brainstorm",
+        "authors": [
+          "@szitphan"
+        ],
+        "last_activity": "2026-10-12"
+      }
+    },
+    {
+      "key": "docs/meetings/2026-10-09-client-dispatch-field-issues.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Gặp khách — các vấn đề điều phối vận tải thực tế",
+      "status": "processed",
+      "updated": "2026-10-09",
+      "source": {
+        "file": "docs/meetings/2026-10-09-client-dispatch-field-issues.md",
+        "line": 10
+      },
+      "props": {
+        "doc_type": "meeting",
+        "authors": [
+          "szitphan"
+        ],
+        "last_activity": "2026-10-09"
+      }
+    },
+    {
+      "key": "docs/meetings/2026-10-10-oq-dispatch-coordination.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Ghi nhận trả lời — Câu hỏi cần xác nhận, Điều phối (vòng 1)",
+      "status": "draft",
+      "updated": "2026-10-12",
+      "source": {
+        "file": "docs/meetings/2026-10-10-oq-dispatch-coordination.md",
+        "line": 10
+      },
+      "props": {
+        "doc_type": "meeting",
+        "authors": [
+          "@szitphan"
+        ],
+        "last_activity": "2026-10-12"
+      }
+    },
+    {
+      "key": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": "dispatch-coordination",
+      "title": "Câu hỏi cần xác nhận",
+      "status": "shipped",
+      "updated": "2026-10-10",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+        "line": 24
+      },
+      "props": {
+        "doc_type": "meeting-deck",
+        "authors": [
+          "@szitphan",
+          "szitphan"
+        ],
+        "last_activity": "2026-10-11"
+      }
+    },
+    {
+      "key": "docs/meetings/decks/2026-10-06-oq-object-map-deck.md",
+      "type": "doc",
+      "subtype": null,
+      "feature": null,
+      "title": "Câu hỏi cần xác nhận",
+      "status": "draft",
+      "updated": "2026-10-06",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-object-map-deck.md",
+        "line": 19
+      },
+      "props": {
+        "doc_type": "meeting-deck",
+        "authors": [
+          "szitphan"
+        ],
+        "last_activity": "2026-10-06"
+      }
+    },
+    {
+      "key": "feature:dispatch-coordination",
+      "type": "feature",
+      "subtype": null,
+      "feature": "dispatch-coordination",
+      "title": "dispatch-coordination",
+      "status": null,
+      "updated": null,
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 1
+      },
+      "props": {}
+    },
+    {
       "key": "term:ban-giao-phuong-tien",
       "type": "term",
       "subtype": null,
       "feature": null,
       "title": "Bàn giao phương tiện",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 182
+        "line": 183
       },
       "props": {
         "description": "Yêu cầu giao 1 phương tiện cho nhân viên (thường là lái xe) hoặc thu hồi phương tiện về. Bàn giao và thu hồi là 2 loại của cùng 1 chứng từ, đều phải phê duyệt và ký biên bản."
+      }
+    },
+    {
+      "key": "term:bang-lien-quy-trinh",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Bảng liên quy trình",
+      "status": null,
+      "updated": "2026-10-12",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 213
+      },
+      "props": {
+        "description": "Bảng mỗi nghiệp vụ khai trong SRS của mình, gồm: bước nào tạo từ bước nào, trigger, trường hợp phát sinh, điều kiện, 1 hay nhiều bản ghi, có cho thu hồi/xoá khi đã có bước con không, có cho xoá không. Cây quy trình và nút tạo nghiệp vụ tiếp theo đều đọc từ bảng này. Câu chữ viết cho người dùng đọc."
       }
     },
     {
@@ -1019,13 +1335,13 @@
       "feature": null,
       "title": "Báo cáo sự cố",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 97
+        "line": 98
       },
       "props": {
-        "description": "Báo hỏng hóc phương tiện do lái xe gửi từ App Lái xe; xưởng xác nhận hoặc từ chối, rồi lập báo giá chẩn đoán."
+        "description": "Báo hỏng hóc phương tiện do lái xe gửi từ Delta Super App; xưởng xác nhận hoặc từ chối, rồi lập báo giá chẩn đoán."
       }
     },
     {
@@ -1035,10 +1351,10 @@
       "feature": null,
       "title": "Báo giá",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 102
+        "line": 103
       },
       "props": {
         "description": "Chứng từ báo chi phí sửa chữa/bán phụ tùng trước khi làm. Báo giá chẩn đoán là báo giá lập sau khi xác nhận báo cáo sự cố, xác định nơi sửa (xưởng nhà / xưởng ngoài)."
@@ -1051,10 +1367,10 @@
       "feature": null,
       "title": "Barem",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 122
+        "line": 123
       },
       "props": {
         "aliases": [
@@ -1070,13 +1386,29 @@
       "feature": null,
       "title": "Bồi thường thiệt hại",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 142
+        "line": 143
       },
       "props": {
         "description": "Đề nghị bồi thường khi có thất thoát: trả tiền chưa nhận đủ HHDV, chuyển kho chênh lệch số lượng, làm hỏng/mất phụ tùng trong lệnh sửa chữa."
+      }
+    },
+    {
+      "key": "term:buoc-quy-trinh",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Bước quy trình",
+      "status": null,
+      "updated": "2026-10-12",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 203
+      },
+      "props": {
+        "description": "Một nút trên cây quy trình, ứng với tối đa 1 bản ghi nghiệp vụ (vd 1 phiếu xuất kho). Bước chưa có bản ghi thì hiện \"Chưa tạo\". Bước có 4 trạng thái: Chưa triển khai · Đang triển khai · Đã thu hồi/từ chối · Đã hoàn thành. Có 5 loại bước: bước chính, nhánh phát sinh, ngã rẽ chưa chốt, bước công nợ, bước liên module."
       }
     },
     {
@@ -1086,10 +1418,10 @@
       "feature": null,
       "title": "Cây dầu",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 42
+        "line": 43
       },
       "props": {
         "description": "Điểm cấp nhiên liệu. Cây dầu nội bộ là cây dầu của Delta, được quản lý như 1 cơ sở (có sensor đo mức dầu, barem, dung tích, ngưỡng). Cây dầu mua ngoài của đối tác thì nghiệp vụ gắn vào \"Ngoài cơ sở\"."
@@ -1102,10 +1434,10 @@
       "feature": null,
       "title": "CCDC",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 57
+        "line": 58
       },
       "props": {
         "aliases": [
@@ -1121,10 +1453,10 @@
       "feature": null,
       "title": "Chi nhánh",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 17
+        "line": 18
       },
       "props": {
         "description": "Đơn vị vận hành độc lập về dữ liệu: cùng bộ chức năng nhưng dữ liệu tách hẳn. Người ở chi nhánh A không thấy dữ liệu chi nhánh B dù cùng quyền."
@@ -1137,10 +1469,10 @@
       "feature": null,
       "title": "Chi phí cấp 1",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 67
+        "line": 68
       },
       "props": {
         "aliases": [
@@ -1156,10 +1488,10 @@
       "feature": null,
       "title": "Cơ sở",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 22
+        "line": 23
       },
       "props": {
         "description": "Đơn vị vật lý trực thuộc 1 chi nhánh, chỉ có ở module tổ chức theo cơ sở (Xưởng, Cây dầu). Dữ liệu quản lý riêng theo từng cơ sở. Module nào chia cơ sở là cố định theo nghiệp vụ, không cấu hình."
@@ -1172,13 +1504,29 @@
       "feature": null,
       "title": "Đề xuất cấp mới",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 147
+        "line": 148
       },
       "props": {
         "description": "Yêu cầu tạo bản ghi danh mục mới (DVKT, PTVT, CCDC, lốp, ắc quy, nhà cung cấp, khách hàng DK05, chi phí…). Bản ghi chỉ chính thức và có mã sau khi được phê duyệt."
+      }
+    },
+    {
+      "key": "term:delta-super-app",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Delta Super App",
+      "status": null,
+      "updated": "2026-10-12",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 188
+      },
+      "props": {
+        "description": "Ứng dụng di động dùng chung cho nhân viên nội bộ Delta (lái xe, hiện trường...) và nhân viên đối tác cây dầu. Ai thấy chức năng nào tuỳ phân quyền. Partner Portal của đối tác cây dầu đã gộp vào app này; hiện chỉ có bản mobile."
       }
     },
     {
@@ -1188,10 +1536,10 @@
       "feature": null,
       "title": "Định mức nhiên liệu",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 117
+        "line": 118
       },
       "props": {
         "description": "Mức tiêu hao nhiên liệu khoán cho từng phương tiện, phân loại theo tải trọng hàng hoá hoặc không theo tải trọng; có yêu cầu định mức cần phê duyệt và cập nhật mức tiêu hao thực tế."
@@ -1204,10 +1552,10 @@
       "feature": null,
       "title": "Đơn mua dầu",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 187
+        "line": 193
       },
       "props": {
         "description": "Đơn đặt mua dầu (PO) sinh từ kế hoạch mua dầu đã duyệt. Khi dầu về, tạo phiếu nhập dầu theo đơn (trường hợp nhập từ nhà cung cấp)."
@@ -1220,10 +1568,10 @@
       "feature": null,
       "title": "Đơn mua HHDV",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 112
+        "line": 113
       },
       "props": {
         "description": "Đơn đặt mua hàng hoá/dịch vụ từ nhà cung cấp HHDV, duyệt 2 lần."
@@ -1236,10 +1584,10 @@
       "feature": null,
       "title": "DVKT",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 62
+        "line": 63
       },
       "props": {
         "aliases": [
@@ -1255,10 +1603,10 @@
       "feature": null,
       "title": "GTTT",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 137
+        "line": 138
       },
       "props": {
         "aliases": [
@@ -1274,10 +1622,10 @@
       "feature": null,
       "title": "HHDV",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 47
+        "line": 48
       },
       "props": {
         "aliases": [
@@ -1293,17 +1641,17 @@
       "feature": null,
       "title": "Kế hoạch mua dầu",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 127
+        "line": 128
       },
       "props": {
         "aliases": [
           "Phiếu cấp dầu",
           "Phiếu nhập dầu"
         ],
-        "description": "Chuỗi nghiệp vụ dầu: lập kế hoạch mua → đơn mua dầu → nhập dầu vào cây dầu (từ nhà cung cấp hoặc phương tiện) → cấp dầu cho phương tiện. Phiếu cấp dầu tại cây dầu đối tác do nhân viên đối tác ghi nhận trên Portal."
+        "description": "Chuỗi nghiệp vụ dầu: lập kế hoạch mua → đơn mua dầu → nhập dầu vào cây dầu (từ nhà cung cấp hoặc phương tiện) → cấp dầu cho phương tiện. Phiếu cấp dầu tại cây dầu đối tác do nhân viên đối tác ghi nhận trên Delta Super App."
       }
     },
     {
@@ -1313,10 +1661,10 @@
       "feature": null,
       "title": "Khách hàng DK05",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 82
+        "line": 83
       },
       "props": {
         "description": "Khách hàng đã đăng ký trong danh mục (pháp nhân hoặc cá nhân, có MST/CCCD), mua phụ tùng hoặc dịch vụ sửa chữa của Delta; có phương thức thanh toán trả trước hoặc trả sau. Phân biệt với khách hàng lẻ — không có trong danh mục, luôn thanh toán trả trước."
@@ -1329,10 +1677,10 @@
       "feature": null,
       "title": "Lệnh sửa chữa",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 107
+        "line": 108
       },
       "props": {
         "description": "Chứng từ thực hiện sửa chữa sau khi báo giá được duyệt. Loại: sửa chữa xe Delta/khách hàng, thay lốp, thay ắc quy, phục hồi phụ tùng hỏng. Chốt lệnh = ghi nhận số lượng thực dùng/hỏng/thừa và giờ công khi kết thúc."
@@ -1345,10 +1693,10 @@
       "feature": null,
       "title": "Ngoài cơ sở",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 27
+        "line": 28
       },
       "props": {
         "description": "Cơ sở đặc biệt hệ thống tạo sẵn cho mỗi chi nhánh, gán tự động cho nghiệp vụ phát sinh ngoài mọi cơ sở nội bộ (vd cấp dầu tại cây dầu mua ngoài của đối tác, hoá đơn lẻ). Không tạo/sửa/xoá được; cần phân quyền riêng mới thấy."
@@ -1361,10 +1709,10 @@
       "feature": null,
       "title": "Nhà cung cấp HHDV",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 77
+        "line": 78
       },
       "props": {
         "description": "Đơn vị bán hàng hoá/dịch vụ cho Delta, gồm cả xưởng ngoài. Có phương thức thanh toán trả trước hoặc trả sau."
@@ -1377,13 +1725,29 @@
       "feature": null,
       "title": "Nhân viên",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 162
+        "line": 163
       },
       "props": {
         "description": "Người của Delta được quản lý trong hệ thống (lái xe, thợ kỹ thuật, nhân viên văn phòng). Tạo bằng đề xuất cấp mới nhân viên; dùng cho phân công lệnh sửa chữa, bàn giao phương tiện, xin nghỉ."
+      }
+    },
+    {
+      "key": "term:nhanh-phat-sinh",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Nhánh phát sinh",
+      "status": null,
+      "updated": "2026-10-12",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 208
+      },
+      "props": {
+        "description": "Bước nằm ngoài luồng chính, chỉ sinh ra khi bản ghi trước gặp một điều kiện (vd lệnh sửa chữa còn dư phụ tùng thì sinh phiếu nhập kho). Nhánh phát sinh bị từ chối không làm quy trình chuyển sang Đã dừng."
       }
     },
     {
@@ -1393,10 +1757,10 @@
       "feature": null,
       "title": "Phân luồng",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 92
+        "line": 93
       },
       "props": {
         "description": "Trường hợp nghiệp vụ của 1 chứng từ, quyết định các bước và trường hiển thị. Vd báo giá: Sửa xe / Bán phụ tùng; lệnh sửa chữa: Sửa chữa xe / Phục hồi phụ tùng hỏng; đơn mua HHDV: Mua hàng hoá / Mua dịch vụ / Mua dịch vụ có phương tiện / Mua dịch vụ sửa chữa ngoài / Mua dịch vụ sửa chữa phụ tùng hỏng ở xưởng ngoài."
@@ -1409,10 +1773,10 @@
       "feature": null,
       "title": "Phiếu nhập kho",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 172
+        "line": 173
       },
       "props": {
         "description": "Chứng từ nhập hàng vào kho xưởng: hàng mua về, hàng luân chuyển giữa kho, phụ tùng hỏng đã phục hồi. Tạo dạng yêu cầu nhập kho, phải được phê duyệt mới ghi nhận tồn kho."
@@ -1425,10 +1789,10 @@
       "feature": null,
       "title": "Phiếu xuất kho",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 177
+        "line": 178
       },
       "props": {
         "description": "Chứng từ xuất hàng khỏi kho xưởng (vd xuất phụ tùng cho lệnh sửa chữa, xuất CCDC), phê duyệt 2 lần."
@@ -1441,10 +1805,10 @@
       "feature": null,
       "title": "Phụ tùng hỏng",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 72
+        "line": 73
       },
       "props": {
         "description": "Phụ tùng thay ra từ phương tiện, đưa vào xưởng để phục hồi. Phục hồi thành công thì nhập kho lại; thất bại thì chuyển sang rác thải chờ thanh lý."
@@ -1457,10 +1821,10 @@
       "feature": null,
       "title": "Phương tiện",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 87
+        "line": 88
       },
       "props": {
         "description": "Xe của Delta (đầu kéo, xe tải, sơ mi-rơ mooc…). Hiển thị dạng \"[Mã PT] - [Tên PT]\". Xe khách hàng mang tới sửa là đối tượng riêng, xem Xe của khách hàng."
@@ -1473,10 +1837,10 @@
       "feature": null,
       "title": "PTVT",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 52
+        "line": 53
       },
       "props": {
         "aliases": [
@@ -1486,16 +1850,32 @@
       }
     },
     {
+      "key": "term:quy-trinh",
+      "type": "term",
+      "subtype": null,
+      "feature": null,
+      "title": "Quy trình",
+      "status": null,
+      "updated": "2026-10-12",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 198
+      },
+      "props": {
+        "description": "Chuỗi nghiệp vụ nối nhau, bắt đầu từ một bản ghi gốc (vd báo giá → sửa chữa → xuất kho → thanh toán). Từ màn chi tiết của bất kỳ bản ghi nào trong chuỗi đều xem được cả cây. Mã QT-[Mã chi nhánh]-[XXXX]. Trạng thái do hệ thống tự tính: Đang triển khai · Đã dừng · Đã hoàn thành. Mỗi bản ghi thuộc đúng 1 quy trình. Phân biệt với Liên quy trình: đó là tên tính năng (CMP-09 Cross Process Flow) dùng để hiển thị Quy trình."
+      }
+    },
+    {
       "key": "term:tai-khoan",
       "type": "term",
       "subtype": null,
       "feature": null,
       "title": "Tài khoản",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 167
+        "line": 168
       },
       "props": {
         "description": "Tài khoản đăng nhập hệ thống. Gắn nhóm quyền (quyết định chức năng được dùng) và danh sách chi nhánh được truy cập; chỉ tài khoản đang hoạt động mới đăng nhập được."
@@ -1508,10 +1888,10 @@
       "feature": null,
       "title": "Tất cả cơ sở",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 32
+        "line": 33
       },
       "props": {
         "description": "Chế độ xem tổng hợp mọi cơ sở trong chi nhánh mà người dùng được phân quyền (gồm cả \"Ngoài cơ sở\"). Danh sách có thêm cột Cơ sở; Tạo mới ở chế độ này phải chọn 1 cơ sở trước."
@@ -1524,10 +1904,10 @@
       "feature": null,
       "title": "Thanh toán trả trước",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 132
+        "line": 133
       },
       "props": {
         "aliases": [
@@ -1543,10 +1923,10 @@
       "feature": null,
       "title": "Thu hồi",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 152
+        "line": 153
       },
       "props": {
         "description": "Người tạo rút lại yêu cầu đang chờ phê duyệt. Nếu thu hồi và phê duyệt xảy ra cùng lúc, hệ thống ưu tiên thu hồi."
@@ -1559,10 +1939,10 @@
       "feature": null,
       "title": "Xe của khách hàng",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 157
+        "line": 158
       },
       "props": {
         "description": "Xe của khách hàng DK05 mang tới xưởng sửa. Quản lý như 1 danh mục: tạo bằng đề xuất cấp mới, có mã sau khi được duyệt. Tách khỏi Phương tiện (xe của Delta)."
@@ -1575,10 +1955,10 @@
       "feature": null,
       "title": "Xưởng",
       "status": null,
-      "updated": "2026-10-05",
+      "updated": "2026-10-12",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 37
+        "line": 38
       },
       "props": {
         "description": "Cơ sở sửa chữa của Delta (xưởng nhà). Phân biệt với xưởng ngoài — xưởng của nhà cung cấp HHDV mà Delta thuê sửa."
@@ -2287,88 +2667,18 @@
       }
     },
     {
+      "from": "design/_lab/refs/notes.md",
+      "to": "E-dispatch-003",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "design/_lab/refs/notes.md",
+        "line": 127
+      }
+    },
+    {
       "from": "design/ui-common/conventions.md",
       "to": "E-common-001",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "design/ui-common/conventions.md",
-        "line": 243
-      }
-    },
-    {
-      "from": "design/ui-common/conventions.md",
-      "to": "E-common-002",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "design/ui-common/conventions.md",
-        "line": 244
-      }
-    },
-    {
-      "from": "design/ui-common/conventions.md",
-      "to": "E-common-003",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "design/ui-common/conventions.md",
-        "line": 245
-      }
-    },
-    {
-      "from": "design/ui-common/conventions.md",
-      "to": "E-common-004",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "design/ui-common/conventions.md",
-        "line": 246
-      }
-    },
-    {
-      "from": "design/ui-common/conventions.md",
-      "to": "E-common-005",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "design/ui-common/conventions.md",
-        "line": 247
-      }
-    },
-    {
-      "from": "design/ui-common/conventions.md",
-      "to": "E-common-006",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "design/ui-common/conventions.md",
-        "line": 248
-      }
-    },
-    {
-      "from": "design/ui-common/conventions.md",
-      "to": "E-common-007",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "design/ui-common/conventions.md",
-        "line": 249
-      }
-    },
-    {
-      "from": "design/ui-common/conventions.md",
-      "to": "E-common-008",
-      "type": "CONTAINS",
-      "provenance": "table",
-      "source": {
-        "file": "design/ui-common/conventions.md",
-        "line": 250
-      }
-    },
-    {
-      "from": "design/ui-common/conventions.md",
-      "to": "E-common-009",
       "type": "CONTAINS",
       "provenance": "table",
       "source": {
@@ -2378,7 +2688,7 @@
     },
     {
       "from": "design/ui-common/conventions.md",
-      "to": "E-common-010",
+      "to": "E-common-002",
       "type": "CONTAINS",
       "provenance": "table",
       "source": {
@@ -2388,7 +2698,7 @@
     },
     {
       "from": "design/ui-common/conventions.md",
-      "to": "E-common-011",
+      "to": "E-common-003",
       "type": "CONTAINS",
       "provenance": "table",
       "source": {
@@ -2398,12 +2708,92 @@
     },
     {
       "from": "design/ui-common/conventions.md",
-      "to": "E-common-012",
+      "to": "E-common-004",
       "type": "CONTAINS",
       "provenance": "table",
       "source": {
         "file": "design/ui-common/conventions.md",
         "line": 254
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-005",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 255
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-006",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 256
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-007",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 257
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-008",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 258
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-009",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 259
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-010",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 260
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-011",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 261
+      }
+    },
+    {
+      "from": "design/ui-common/conventions.md",
+      "to": "E-common-012",
+      "type": "CONTAINS",
+      "provenance": "table",
+      "source": {
+        "file": "design/ui-common/conventions.md",
+        "line": 262
       }
     },
     {
@@ -2453,7 +2843,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 318
+        "line": 363
       }
     },
     {
@@ -2463,7 +2853,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 319
+        "line": 364
       }
     },
     {
@@ -2473,7 +2863,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 70
+        "line": 72
       }
     },
     {
@@ -2483,7 +2873,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 70
+        "line": 72
       }
     },
     {
@@ -2493,7 +2883,27 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 70
+        "line": 72
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "E-common-011",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 314
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "design/_lab/lab-progress.html",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 12
       }
     },
     {
@@ -2533,7 +2943,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 64
+        "line": 66
       }
     },
     {
@@ -2543,7 +2953,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 90
+        "line": 92
       }
     },
     {
@@ -2553,7 +2963,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 131
+        "line": 133
       }
     },
     {
@@ -2563,7 +2973,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 169
+        "line": 181
       }
     },
     {
@@ -2573,7 +2983,7 @@
       "provenance": "heuristic",
       "source": {
         "file": "design/ui-common/screen-patterns.md",
-        "line": 263
+        "line": 275
       }
     },
     {
@@ -2594,6 +3004,276 @@
       "source": {
         "file": "design/ui-common/screen-patterns.md",
         "line": 9
+      }
+    },
+    {
+      "from": "design/ui-common/screen-patterns.md",
+      "to": "docs/cross-process-flow/brainstorms/cross-process-flow.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "design/ui-common/screen-patterns.md",
+        "line": 11
+      }
+    },
+    {
+      "from": "docs/_product/saas-core-vs-tenant.md",
+      "to": "docs-input/srs-cu/lg-srs-export.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/saas-core-vs-tenant.md",
+        "line": 8
+      }
+    },
+    {
+      "from": "docs/_product/saas-core-vs-tenant.md",
+      "to": "docs/_product/srs-v2-change-log.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/saas-core-vs-tenant.md",
+        "line": 13
+      }
+    },
+    {
+      "from": "docs/_product/saas-core-vs-tenant.md",
+      "to": "docs/_shared/project-profile.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/saas-core-vs-tenant.md",
+        "line": 6
+      }
+    },
+    {
+      "from": "docs/_product/saas-core-vs-tenant.md",
+      "to": "docs/_shared/system-overview.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/saas-core-vs-tenant.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "docs/_product/saas-core-vs-tenant.md",
+      "to": "docs/cross-process-flow/srs/cross-process-flow-spec.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/saas-core-vs-tenant.md",
+        "line": 10
+      }
+    },
+    {
+      "from": "docs/_product/saas-core-vs-tenant.md",
+      "to": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/saas-core-vs-tenant.md",
+        "line": 9
+      }
+    },
+    {
+      "from": "docs/_product/saas-core-vs-tenant.md",
+      "to": "docs/meetings/2026-10-09-client-dispatch-field-issues.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/saas-core-vs-tenant.md",
+        "line": 11
+      }
+    },
+    {
+      "from": "docs/_product/saas-core-vs-tenant.md",
+      "to": "docs/meetings/2026-10-10-oq-dispatch-coordination.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/saas-core-vs-tenant.md",
+        "line": 12
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "E-common-001",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 72
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "E-cross-process-flow-001",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 82
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "E-cross-process-flow-002",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 82
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "E-dispatch-007",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 94
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "E-dispatch-008",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 110
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "design/design.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 9
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "design/ui-common/conventions.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 10
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "design/ui-common/screen-patterns.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 11
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "docs-input/srs-cu/lg-srs-export.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "docs-input/srs-cu/srs-mobile/srs-mobile.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 8
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "docs/_shared/definitions.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 12
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "docs/_shared/operating-environment.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 13
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "docs/cross-process-flow/brainstorms/cross-process-flow.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 14
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "docs/cross-process-flow/srs/cross-process-flow-spec.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 15
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 16
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "docs/meetings/2026-10-09-client-dispatch-field-issues.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 17
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "docs/meetings/2026-10-10-oq-dispatch-coordination.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 18
+      }
+    },
+    {
+      "from": "docs/_product/srs-v2-change-log.md",
+      "to": "docs/meetings/decks/2026-10-06-oq-object-map-deck.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_product/srs-v2-change-log.md",
+        "line": 19
       }
     },
     {
@@ -2709,13 +3389,27 @@
       }
     },
     {
+      "from": "docs/_research/2026-10-02-electronic-delivery-record.md",
+      "to": "docs/_research/2026-10-02-eport-integration.md",
+      "type": "STALE_IMPACTS",
+      "provenance": "declared",
+      "source": {
+        "file": "_workspace/staleness.md",
+        "line": 11
+      },
+      "props": {
+        "date": "2026-10-05",
+        "reason": "upstream changed: docs/research/2026-10-02-electronic-delivery-record.md on 2026-10-05 by manual"
+      }
+    },
+    {
       "from": "docs/_research/2026-10-02-eport-integration.md",
       "to": "docs-input/danh-muc/danh-muc-dia-diem-hang-tau.md",
       "type": "REFERENCES",
       "provenance": "declared",
       "source": {
         "file": "docs/_research/2026-10-02-eport-integration.md",
-        "line": 9
+        "line": 11
       }
     },
     {
@@ -2725,7 +3419,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_research/2026-10-02-eport-integration.md",
-        "line": 7
+        "line": 9
       }
     },
     {
@@ -2735,7 +3429,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_research/2026-10-02-eport-integration.md",
-        "line": 10
+        "line": 12
       }
     },
     {
@@ -2745,7 +3439,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_research/2026-10-02-eport-integration.md",
-        "line": 8
+        "line": 10
       }
     },
     {
@@ -2755,7 +3449,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_research/2026-10-02-eport-integration.md",
-        "line": 11
+        "line": 13
       }
     },
     {
@@ -2765,7 +3459,21 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_research/2026-10-02-eport-integration.md",
-        "line": 12
+        "line": 14
+      }
+    },
+    {
+      "from": "docs/_research/2026-10-02-eport-integration.md",
+      "to": "docs/_research/2026-10-02-field-document-reading.md",
+      "type": "STALE_IMPACTS",
+      "provenance": "declared",
+      "source": {
+        "file": "_workspace/staleness.md",
+        "line": 10
+      },
+      "props": {
+        "date": "2026-10-05",
+        "reason": "upstream changed: docs/research/2026-10-02-eport-integration.md on 2026-10-05 by manual"
       }
     },
     {
@@ -2775,7 +3483,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_research/2026-10-02-field-document-reading.md",
-        "line": 7
+        "line": 9
       }
     },
     {
@@ -2785,7 +3493,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_research/2026-10-02-field-document-reading.md",
-        "line": 9
+        "line": 11
       }
     },
     {
@@ -2795,7 +3503,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_research/2026-10-02-field-document-reading.md",
-        "line": 8
+        "line": 10
       }
     },
     {
@@ -2805,7 +3513,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_research/2026-10-02-field-document-reading.md",
-        "line": 10
+        "line": 12
       }
     },
     {
@@ -2815,7 +3523,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_research/2026-10-02-field-document-reading.md",
-        "line": 12
+        "line": 14
       }
     },
     {
@@ -2825,7 +3533,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_research/2026-10-02-field-document-reading.md",
-        "line": 11
+        "line": 13
       }
     },
     {
@@ -2835,7 +3543,17 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 182
+        "line": 183
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:bang-lien-quy-trinh",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 213
       }
     },
     {
@@ -2845,7 +3563,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 97
+        "line": 98
       }
     },
     {
@@ -2855,7 +3573,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 102
+        "line": 103
       }
     },
     {
@@ -2865,7 +3583,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 122
+        "line": 123
       }
     },
     {
@@ -2875,7 +3593,17 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 142
+        "line": 143
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:buoc-quy-trinh",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 203
       }
     },
     {
@@ -2885,7 +3613,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 42
+        "line": 43
       }
     },
     {
@@ -2895,7 +3623,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 57
+        "line": 58
       }
     },
     {
@@ -2905,7 +3633,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 17
+        "line": 18
       }
     },
     {
@@ -2915,7 +3643,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 67
+        "line": 68
       }
     },
     {
@@ -2925,7 +3653,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 22
+        "line": 23
       }
     },
     {
@@ -2935,7 +3663,17 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 147
+        "line": 148
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:delta-super-app",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 188
       }
     },
     {
@@ -2945,7 +3683,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 117
+        "line": 118
       }
     },
     {
@@ -2955,7 +3693,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 187
+        "line": 193
       }
     },
     {
@@ -2965,7 +3703,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 112
+        "line": 113
       }
     },
     {
@@ -2975,7 +3713,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 62
+        "line": 63
       }
     },
     {
@@ -2985,7 +3723,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 137
+        "line": 138
       }
     },
     {
@@ -2995,7 +3733,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 47
+        "line": 48
       }
     },
     {
@@ -3005,7 +3743,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 127
+        "line": 128
       }
     },
     {
@@ -3015,7 +3753,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 82
+        "line": 83
       }
     },
     {
@@ -3025,7 +3763,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 107
+        "line": 108
       }
     },
     {
@@ -3035,7 +3773,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 27
+        "line": 28
       }
     },
     {
@@ -3045,7 +3783,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 77
+        "line": 78
       }
     },
     {
@@ -3055,7 +3793,17 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 162
+        "line": 163
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:nhanh-phat-sinh",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 208
       }
     },
     {
@@ -3065,7 +3813,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 92
+        "line": 93
       }
     },
     {
@@ -3075,7 +3823,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 172
+        "line": 173
       }
     },
     {
@@ -3085,7 +3833,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 177
+        "line": 178
       }
     },
     {
@@ -3095,7 +3843,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 72
+        "line": 73
       }
     },
     {
@@ -3105,7 +3853,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 87
+        "line": 88
       }
     },
     {
@@ -3115,7 +3863,17 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 52
+        "line": 53
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "term:quy-trinh",
+      "type": "CATALOGS",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 198
       }
     },
     {
@@ -3125,7 +3883,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 167
+        "line": 168
       }
     },
     {
@@ -3135,7 +3893,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 32
+        "line": 33
       }
     },
     {
@@ -3145,7 +3903,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 132
+        "line": 133
       }
     },
     {
@@ -3155,7 +3913,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 152
+        "line": 153
       }
     },
     {
@@ -3165,7 +3923,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 157
+        "line": 158
       }
     },
     {
@@ -3175,7 +3933,7 @@
       "provenance": "declared",
       "source": {
         "file": "docs/_shared/definitions.md",
-        "line": 37
+        "line": 38
       }
     },
     {
@@ -3196,6 +3954,16 @@
       "source": {
         "file": "docs/_shared/definitions.md",
         "line": 7
+      }
+    },
+    {
+      "from": "docs/_shared/definitions.md",
+      "to": "docs/cross-process-flow/brainstorms/cross-process-flow.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/_shared/definitions.md",
+        "line": 8
       }
     },
     {
@@ -3580,6 +4348,16 @@
     },
     {
       "from": "docs/_shared/project-profile.md",
+      "to": "docs/_product/saas-core-vs-tenant.md",
+      "type": "REFERENCES",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/_shared/project-profile.md",
+        "line": 38
+      }
+    },
+    {
+      "from": "docs/_shared/project-profile.md",
       "to": "docs/_shared/definitions.md",
       "type": "REFERENCES",
       "provenance": "declared",
@@ -3616,6 +4394,296 @@
       "source": {
         "file": "docs/_shared/system-overview.md",
         "line": 6
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs-input/sop/du-lieu-van-hanh-xe-2026-09-30/du-lieu-van-hanh-xe-2026-09-30.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 11
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs-input/sop/eup-dieu-van-2026-09-19/eup-dieu-van-2026-09-19.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 12
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 9
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs-input/sop/hoa-don-tra-ho-2026-10-01/hoa-don-tra-ho-2026-10-01.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 10
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs-input/sop/sop-ban-do-kien-thuc.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 13
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 8
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs-input/sop/sop-dieu-phoi.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs/_research/2026-10-02-container-deadline-alerts.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 14
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs/_research/2026-10-02-electronic-delivery-record.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 15
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs/_research/2026-10-02-eport-integration.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 16
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs/_research/2026-10-02-field-document-reading.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 17
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs/_shared/project-profile.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 18
+      }
+    },
+    {
+      "from": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "to": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 19
+      }
+    },
+    {
+      "from": "docs/meetings/2026-10-09-client-dispatch-field-issues.md",
+      "to": "_workspace/backlog.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/2026-10-09-client-dispatch-field-issues.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "docs/meetings/2026-10-09-client-dispatch-field-issues.md",
+      "to": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/2026-10-09-client-dispatch-field-issues.md",
+        "line": 6
+      }
+    },
+    {
+      "from": "docs/meetings/2026-10-10-oq-dispatch-coordination.md",
+      "to": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/2026-10-10-oq-dispatch-coordination.md",
+        "line": 7
+      }
+    },
+    {
+      "from": "docs/meetings/2026-10-10-oq-dispatch-coordination.md",
+      "to": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/2026-10-10-oq-dispatch-coordination.md",
+        "line": 6
+      }
+    },
+    {
+      "from": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+      "to": "docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+        "line": 17
+      }
+    },
+    {
+      "from": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+      "to": "docs-input/sop/quan-ly-hoa-don-sim/quan-ly-hoa-don-sim.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+        "line": 18
+      }
+    },
+    {
+      "from": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+      "to": "docs-input/sop/sop-ban-do-kien-thuc.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+        "line": 16
+      }
+    },
+    {
+      "from": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+      "to": "docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+        "line": 14
+      }
+    },
+    {
+      "from": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+      "to": "docs-input/sop/sop-dieu-phoi.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+        "line": 15
+      }
+    },
+    {
+      "from": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+      "to": "docs-input/sop/vis-du-lieu-van-hanh-xe/vis-du-lieu-van-hanh-xe.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+        "line": 19
+      }
+    },
+    {
+      "from": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+      "to": "docs/_shared/project-profile.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+        "line": 20
+      }
+    },
+    {
+      "from": "docs/meetings/decks/2026-10-06-oq-object-map-deck.md",
+      "to": "docs-input/srs-cu/lg-srs-export.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-object-map-deck.md",
+        "line": 14
+      }
+    },
+    {
+      "from": "docs/meetings/decks/2026-10-06-oq-object-map-deck.md",
+      "to": "docs/_shared/object-map.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-object-map-deck.md",
+        "line": 13
+      }
+    },
+    {
+      "from": "docs/meetings/decks/2026-10-06-oq-object-map-deck.md",
+      "to": "docs/_shared/project-profile.md",
+      "type": "REFERENCES",
+      "provenance": "declared",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-object-map-deck.md",
+        "line": 15
+      }
+    },
+    {
+      "from": "feature:dispatch-coordination",
+      "to": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+      "type": "CONTAINS",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/dispatch-coordination/brainstorms/dispatch-coordination.md",
+        "line": 1
+      }
+    },
+    {
+      "from": "feature:dispatch-coordination",
+      "to": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+      "type": "CONTAINS",
+      "provenance": "heuristic",
+      "source": {
+        "file": "docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md",
+        "line": 1
       }
     }
   ]

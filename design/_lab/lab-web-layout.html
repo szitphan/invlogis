@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Khung xương web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+/* ===================== Vỏ trang lab ===================== */
+:root{--lab-bg:#e9e9ec;--lab-ink:#18181b;--lab-muted:#6b6b73;--lab-line:#d6d6dc;--lab-card:#fff;--an:#d6336c}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--lab-bg:#141416;--lab-ink:#ececf0;--lab-muted:#a0a0aa;--lab-line:#2c2c31;--lab-card:#1d1d20}}
+:root[data-theme="dark"]{--lab-bg:#141416;--lab-ink:#ececf0;--lab-muted:#a0a0aa;--lab-line:#2c2c31;--lab-card:#1d1d20}
+*{box-sizing:border-box}
+body{margin:0;background:var(--lab-bg);color:var(--lab-ink);font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.lab-top{position:sticky;top:0;z-index:20;background:var(--lab-bg);border-bottom:1px solid var(--lab-line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.lab-top h1{font-size:15px;margin:0 6px 0 0}
+.lab-ctl{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--lab-muted)}
+.lab-opts{display:flex;background:var(--lab-card);border:1px solid var(--lab-line);border-radius:999px;padding:2px;flex-wrap:wrap}
+.lab-opts button{font:inherit;font-size:12px;border:0;background:none;color:var(--lab-ink);padding:5px 10px;border-radius:999px;cursor:pointer}
+.lab-opts button.on{background:var(--lab-ink);color:var(--lab-bg)}
+.lab-export{margin-left:auto;font:inherit;font-size:12px;border:0;background:var(--lab-ink);color:var(--lab-bg);padding:7px 12px;border-radius:999px;cursor:pointer}
+.lab-nav{display:flex;gap:6px;flex-wrap:wrap;width:100%}
+.lab-nav a{font-size:12px;color:var(--lab-ink);text-decoration:none;border:1px solid var(--lab-line);border-radius:999px;padding:3px 10px;background:var(--lab-card)}
+.lab-main{max-width:1320px;margin:0 auto;padding:16px}
+.lab-box{background:var(--lab-card);border:1px solid var(--lab-line);border-radius:14px;padding:14px 16px;margin-bottom:18px}
+.lab-box h2{font-size:15px;margin:0 0 6px}
+.lab-box ul{margin:0;padding-left:18px;color:var(--lab-muted);font-size:13px}
+.screen{margin:34px 0 8px;scroll-margin-top:110px}
+.screen>h2{font-size:18px;margin:0 0 2px}
+.screen>.sub{color:var(--lab-muted);margin:0 0 12px;font-size:13px}
+.vtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.vtabs button{font:inherit;font-size:13px;border:1px solid var(--lab-line);background:var(--lab-card);color:var(--lab-ink);padding:6px 14px;border-radius:999px;cursor:pointer}
+.vtabs button b{margin-right:4px}
+.vtabs button.on{background:var(--lab-ink);color:var(--lab-bg);border-color:var(--lab-ink)}
+.stage{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 18px 40px -24px rgba(0,0,0,.45);border:1px solid var(--lab-line);background:#fff}
+.stage .zoom-btn{position:absolute;right:10px;bottom:10px;z-index:5;font:inherit;font-size:12px;border:0;background:rgba(18,18,20,.85);color:#fff;padding:6px 11px;border-radius:999px;cursor:pointer}
+.scaler{transform-origin:0 0;width:1280px;height:800px}
+.rules{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px;background:var(--lab-card);border:1px solid var(--lab-line);border-radius:12px;overflow:hidden}
+.rules th,.rules td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--lab-line);vertical-align:top}
+.rules th{font-size:12px;color:var(--lab-muted);font-weight:500}
+.rules td:first-child{width:36px}.rules td:nth-child(2){width:200px;font-weight:600}
+.rules tr:last-child td{border-bottom:0}
+.rules .n{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--an);color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center}
+.rules .open{color:#b45309;font-weight:500}
+.note{margin:10px 2px 0;font-size:12.5px;color:var(--lab-muted)}
+.vote{background:var(--lab-card);border:1px solid var(--lab-line);border-radius:12px;padding:10px 12px;margin-top:12px;display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.vote b{font-size:13px}
+.vote .opts button{font:inherit;font-size:12px;border:1px solid var(--lab-line);background:none;color:var(--lab-ink);padding:5px 12px;border-radius:999px;cursor:pointer;margin:2px 4px 2px 0}
+.vote .opts button.on{background:var(--lab-ink);color:var(--lab-bg);border-color:var(--lab-ink)}
+.vote input{flex:1;min-width:200px;font:inherit;font-size:13px;border:1px solid var(--lab-line);border-radius:8px;padding:7px 10px;background:var(--lab-bg);color:var(--lab-ink)}
+.full{position:fixed;inset:0;z-index:50;background:rgba(10,10,12,.82);display:none;overflow:auto;padding:24px}
+.full.on{display:block}
+.full .fbar{position:sticky;top:0;display:flex;justify-content:flex-end;margin-bottom:10px;z-index:2}
+.full .fbar button{font:inherit;font-size:13px;border:0;background:#fff;color:#111;padding:7px 14px;border-radius:999px;cursor:pointer}
+.full .holder{width:1280px;margin:0 auto;border-radius:12px;overflow:hidden}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--lab-ink);color:var(--lab-bg);padding:8px 14px;border-radius:8px;display:none;z-index:60}
+/* chú thích đánh số trên khung (không phải giao diện sản phẩm) */
+.an{position:absolute;z-index:30;width:22px;height:22px;border-radius:50%;background:var(--an);color:#fff;font:700 11.5px/22px Inter,sans-serif;text-align:center;font-style:normal;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(0,0,0,.25);pointer-events:none}
+.az{outline:2px dashed color-mix(in srgb,var(--an) 70%,transparent);outline-offset:2px}
+body.no-an .an{display:none}body.no-an .az{outline:0}
+</style>
+<link rel="stylesheet" href="lab-web-kit.css">
+<style>
+/* khối giữ chỗ — chỉ để thấy bố cục */
+.sk{height:9px;border-radius:999px;background:#ececf1}
+.sk.d{background:#e2e2e8}
+.blk{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;position:relative}
+.blk-h{display:flex;align-items:center;gap:8px;height:48px;padding:0 16px}
+.blk-h h3{margin:0;font:700 14.5px Manrope,Inter,sans-serif;letter-spacing:-.01em}
+.blk-h .lnk{margin-left:auto;font-size:12.5px;font-weight:600;color:var(--pt);display:inline-flex;gap:4px;align-items:center}
+.blk-b{padding:4px 16px 16px;display:flex;flex-direction:column;gap:10px}
+.tag{font-size:11px;font-weight:600;color:var(--ink3);background:var(--well);border-radius:6px;padding:1px 6px;margin-left:6px}
+/* hiển thị trường */
+.fg{display:grid;gap:16px 24px}
+.fg .f .l{font-size:12px;color:var(--ink3);margin-bottom:3px}
+.fg .f .v{font-size:13.5px;color:var(--ink);font-weight:500}
+.fg .f.wide{grid-column:1/-1}
+.fr{display:grid;grid-template-columns:150px 1fr;font-size:13.5px}
+.fr>div{padding:9px 0;border-bottom:1px solid var(--line)}
+.fr>div:nth-child(odd){color:var(--ink3)}.fr>div:nth-child(even){font-weight:500}
+.ft{display:grid;gap:8px}
+.ft .f{background:var(--well);border-radius:10px;padding:10px 12px}
+.ft .f .l{font-size:11.5px;color:var(--ink3)}.ft .f .v{font-size:13.5px;font-weight:600;margin-top:2px}
+.ft .f.wide{grid-column:1/-1}
+.lk{color:var(--pt);font-weight:600}
+.tbl.u th{text-transform:uppercase;letter-spacing:.05em;font-size:11px;font-weight:600;color:var(--ink3)}
+.empty{color:var(--ink3);font-weight:400}
+</style>
+</head>
+<body class="b-neutral">
+<div class="lab-top">
+  <h1>UI Lab · Khung xương web</h1>
+  <div class="lab-ctl">Thương hiệu <div class="lab-opts" data-k="brand"><button data-v="neutral">Trung tính</button><button data-v="innvie">Innvie</button><button data-v="delta">Delta</button></div></div>
+  <div class="lab-ctl">Kiểu <div class="lab-opts" data-k="sq"><button data-v="ds">Theo DS (chốt 12/10)</button><button data-v="round">Lab tròn (cũ)</button><button data-v="sq">Lab vuông (cũ)</button></div></div>
+  <div class="lab-ctl">Chú thích <div class="lab-opts" data-k="an"><button data-v="on">Hiện</button><button data-v="off">Ẩn</button></div></div>
+  <button class="lab-export" id="export">Copy kết quả gửi Claude</button>
+  <nav class="lab-nav" id="nav"></nav>
+</div>
+<main class="lab-main">
+  <section class="lab-box">
+    <h2>Khung xương — điểm khởi đầu cho mọi màn web</h2>
+    <ul>
+      <li>Trang này định nghĩa <b>bố cục chung</b>: vùng nào nằm đâu, tab đặt đâu, hành động chung và riêng đặt đâu, màn chi tiết chia khối theo tỉ lệ nào, trường thông tin hiện thế nào. Nội dung chỉ để tiêu đề, phần thân là thanh xám giữ chỗ — chi tiết từng nghiệp vụ làm sau khi nghiệp vụ rõ.</li>
+      <li>Đã chốt từ vòng trước: khung trang B (trắng 2 tầng), danh sách B (dải số + tab đếm + bảng bo góc), dashboard B. Phần còn mở có phương án để chọn; phần là luật thì chọn "Đồng ý" hoặc ghi chỗ cần sửa.</li>
+      <li>Số tròn màu hồng là chú thích, khớp với cột # trong bảng luật bên dưới mỗi khung. Tắt ở nút "Chú thích".</li>
+    </ul>
+  </section>
+  <div id="screens"></div>
+</main>
+<div class="full" id="full"><div class="fbar"><button id="fullClose">Đóng (Esc)</button></div><div class="holder" id="fullHolder"></div></div>
+<div class="toast" id="toast"></div>
+<script src="lab-web-kit.js"></script>
+<script>
+SHELL="E";
+const head=(t,sub,act,back)=>`<div class="pg-h"><div class="grow">${back?`<div class="back">${I("left","s")}${back}</div>`:""}<h1>${t}</h1>${sub?`<div class="sub">${sub}</div>`:""}</div><div class="row">${act||""}</div></div>`;
+const an=(n,x,y)=>`<i class="an" style="left:${x}px;top:${y}px">${n}</i>`;
+const sk=(w,d)=>`<div class="sk ${d?"d":""}" style="width:${w}"></div>`;
+const lines=(n,ws)=>Array.from({length:n},(_,i)=>sk((ws||["92%","78%","85%","60%"])[i%4])).join("");
+const blk=(t,{h,act,body,an:a,cnt,style}={})=>`<div class="blk" style="${h?`height:${h}px;`:""}${style||""}">${a||""}<div class="blk-h"><h3>${t}</h3>${cnt?`<span class="tabs" style="border:0"><span class="n">${cnt}</span></span>`:""}${act?`<span class="lnk">${act}</span>`:""}</div><div class="blk-b">${body||lines(4)}</div></div>`;
+const TABS=["Tổng quan","Hành trình","Ảnh theo điểm","Nhiệt độ","Chi phí","Chứng từ"],TC=["","","2/4","","2","1"];
+const tabsRow=(on=0)=>`<div class="tabs">${TABS.map((t,i)=>`<span class="${i===on?"on":""}">${t}${TC[i]?` <span class="n">${TC[i]}</span>`:""}</span>`).join("")}</div>`;
+const detHeader=(a)=>`<div style="position:relative">${a?an(1,-14,-6):""}<div class="back">${I("left","s")}Lệnh vận tải</div>
+  <div class="pg-h"><div class="grow"><h1>LVT-0456 <span style="vertical-align:4px;margin-left:6px">${st("chay")}</span></h1><div class="sub">15C-456.78 · Tú Lê · TCS Nội Bài → Kho Hải Long · JB-0124-00</div></div>
+   <div class="row" style="position:relative">${a?an(2,-14,-14):""}<span class="btn">${I("hist","s")}Lịch sử</span><span class="btn icon">${I("more")}</span><span class="btn pri">${I("check","s")}Nút chính theo trạng thái</span></div></div></div>`;
+const banner=(a)=>`<div style="position:relative;margin-top:14px">${a?an(3,-14,-8):""}<div class="banner amb">${I("alert","s")}<div><b>Khu báo hiệu:</b> cảnh báo, kết quả vừa xử lý, lý do bị trả lại — chỉ hiện khi có.</div></div></div>`;
+const summary=(a,n)=>`<div class="card" style="display:grid;grid-template-columns:repeat(4,1fr);margin-top:14px;position:relative">${a?an(n||4,-12,-10):""}${["Số chính 1","Số chính 2","Số chính 3","Số chính 4"].map((k,i)=>`<div style="padding:13px 18px;${i?"border-left:1px solid var(--line)":""}"><div class="lbl">${k}</div><div class="num" style="font-size:20px;font-weight:700;margin:2px 0">${["11:30","2/4","420.000 đ","28 km"][i]}</div>${sk("60%")}</div>`).join("")}</div>`;
+
+/* ---------- 1. Khung trang ---------- */
+function T1(col){
+  SHELL=col?"Ec":"E";
+  const body=`<div class="pg"><div style="position:relative">${an(5,-14,-8)}${head("Tiêu đề trang","Dòng phụ: số lượng, cơ sở, thời điểm",`<span class="btn">Hành động phụ</span><span class="btn pri">${I("plus","s")}Hành động chính</span>`)}</div>
+   <div style="margin-top:18px;display:flex;flex-direction:column;gap:14px">${blk("Vùng nội dung",{h:220,body:lines(6)})}${blk("Vùng nội dung",{h:220,body:lines(6)})}</div></div>`;
+  const h=shell("list","Trang hiện tại",body);SHELL="E";
+  return `<div style="position:relative">${h}${an(1,col?44:206,8)}${an(2,col?44:206,96)}${an(3,col?44:206,712)}${an(4,col?66:244,10)}${an(6,1170,10)}</div>`;
+}
+/* ---------- 2. Trang danh sách (vòng 2) ---------- */
+P.edit='<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>';
+P.copy='<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>';
+P.ext='<path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>';
+P.tag='<path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r=".5"/>';
+P.group='<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="18" height="7" rx="1"/>';
+const sp=(pts,c,w=84,h=30)=>{const mx=Math.max(...pts),mn=Math.min(...pts);return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}"><path d="${pts.map((v,i)=>`${i?"L":"M"}${(i/(pts.length-1))*w} ${h-3-((v-mn)/(mx-mn||1))*(h-6)}`).join(" ")}" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`};
+const kpiCards=(a)=>`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;position:relative">${a?an(2,-12,-10):""}${[["Lệnh hôm nay","14",["up","+3"],"file",[6,8,7,9,11,10,14],"so với hôm qua"],["Đang chạy","5",["up","+1"],"truck",[3,4,4,5,6,5,5],"trên 18 xe"],["Cần xử lý","2",["dn","+1"],"alert",[1,3,2,1,2,1,2],"1 từ chối · 1 trễ"],["Xe rảnh","3",["",""],"ware",[5,4,4,3,2,3,3],"gần Đình Vũ: 2"]].map((k,i)=>{const ac=i===0;
+  return `<div class="card" style="padding:14px 16px;${ac?"background:var(--p);border-color:var(--p);color:var(--on-p)":""}"><div class="row"><span style="width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:${ac?"rgba(255,255,255,.14)":"var(--well)"}">${I(k[3],"s")}</span><span style="font-size:12.5px;font-weight:500;${ac?"opacity:.8":"color:var(--ink2)"}">${k[0]}</span></div>
+   <div class="row" style="align-items:flex-end;margin-top:10px"><div class="grow"><div class="num" style="font-size:30px;font-weight:800;line-height:1">${k[1]}</div><div class="row" style="margin-top:8px;gap:6px">${k[2][0]?`<span class="delta ${k[2][0]}" style="${ac?"background:rgba(255,255,255,.16);color:#fff":""}">${k[2][1]}</span>`:""}<span style="font-size:12px;${ac?"opacity:.7":"color:var(--ink3)"}">${k[5]}</span></div></div>${sp(k[4],ac?"rgba(255,255,255,.85)":"var(--p)")}</div></div>`}).join("")}</div>`;
+const toolbar=(a)=>`<div style="position:relative;margin-top:14px;display:flex;flex-direction:column;gap:10px">${a?an(4,-14,-6):""}
+  <div class="row" style="gap:8px"><div class="inp grow" style="height:38px">${I("search","s faint")}<span class="faint">Tìm mã Lệnh, biển số, lái xe, JobID</span></div><span class="btn">${I("sliders","s")}Tuỳ chỉnh cột</span><span class="btn">${I("group","s")}Nhóm</span></div>
+  <div class="row" style="gap:8px"><span class="btn sm">${I("filter","s")}Bộ lọc <b class="num" style="background:var(--ink);color:#fff;border-radius:999px;padding:0 6px;font-size:11px">2</b></span><span class="pill" style="height:28px">Loại hàng: <b>FCL nhập</b>${I("x","s")}</span><span class="pill" style="height:28px">Ngày: <b>Hôm nay</b>${I("x","s")}</span><span style="font-size:12.5px;color:var(--pt);font-weight:600">Xoá bộ lọc</span></div></div>`;
+const QA={lap:"Giao lại",chay:"Theo dõi",chot:"Duyệt"};
+const rowsT=(sel,dis,hov)=>ORD.slice(0,7).map((o,i)=>{const s=sel&&sel.includes(i),d=dis===i,h=hov===i;
+  return `<tr class="${s||h?"sel":""}"><td style="width:34px;position:relative"><span class="cb ${s?"on":""}" style="${d?"background:var(--well);border-color:#e1e1e6":""}"></span>${d?`<div class="pop" style="position:absolute;left:28px;top:-34px;padding:6px 10px;font-size:12px;white-space:nowrap;border-radius:8px;background:#17171a;color:#fff">Bản ghi không có hành động này</div>`:""}</td>
+   <td class="mono">${o.id}</td><td>${st(o.s)}</td><td><div class="row" style="gap:6px">${o.from}${I("arrowr","s faint")}${o.to}</div></td><td>${o.car}</td><td class="ctr num">${o.time}</td><td class="right num">${["—","350.000","420.000","—","1.250.000","420.000","380.000"][i]}</td>
+   <td class="right" style="width:180px"><span class="row" style="gap:4px;justify-content:flex-end">${h?`<span class="btn icon sm ghost">${I("phone","s")}</span><span class="btn icon sm ghost">${I("pin","s")}</span>`:""}${QA[o.s]?`<span class="btn sm">${QA[o.s]}</span>`:""}<span class="btn icon sm ghost">${I("more")}</span></span></td></tr>`}).join("");
+const tHead=(ind)=>`<thead><tr style="background:var(--th,var(--sub))"><th><span class="cb ${ind?"mix":""}" title="${ind?"Đã chọn một phần — bấm để chọn cả trang":""}"></span></th><th>Mã Lệnh</th><th>Trạng thái</th><th>Tuyến</th><th>Xe</th><th class="ctr">Giờ hẹn</th><th class="right">Chi phí (đ)</th><th class="right">Thao tác</th></tr></thead>`;
+const pagerOld=(a)=>`<div class="row" style="height:46px;padding:0 14px;border-top:1px solid var(--line);font-size:12.5px;position:relative">${a?an(8,-12,12):""}<span class="faint grow">Hiển thị 1–50 / 128 Lệnh</span><span class="inp" style="height:30px;width:auto;padding:0 10px;font-size:12.5px;border-radius:8px">50 / trang${I("down","s faint")}</span><span class="btn icon sm ghost">${I("left","s")}</span><span class="btn sm" style="background:var(--ink);border-color:var(--ink);color:#fff">1</span><span class="btn sm ghost">2</span><span class="btn sm ghost">3</span><span class="faint">…</span><span class="btn sm ghost">6</span><span class="btn icon sm ghost">${I("right","s")}</span></div>`;
+const pager=(a)=>S.sq!=="ds"?pagerOld(a):`<div class="row" style="height:48px;padding:0 16px;border-top:1px solid var(--line);font-size:14px;position:relative">${a?an(8,-12,14):""}<span class="inp" style="width:auto;padding:0 10px;gap:6px">50 / trang${I("down","s faint")}</span><span class="grow"></span><span class="btn icon sm ghost">${I("left","s")}</span><span class="btn sm pri" style="min-width:28px;justify-content:center">1</span><span class="btn sm ghost">2</span><span class="btn sm ghost">3</span><span class="faint">…</span><span class="btn sm ghost">6</span><span class="btn icon sm ghost">${I("right","s")}</span></div>`;
+function OLD_T2(){
+  const body=`<div class="pg">
+   <div style="position:relative">${an(1,-14,-8)}${head("Lệnh vận tải","Cơ sở Hải Phòng · 128 Lệnh",`<span class="btn">${I("export","s")}Xuất Excel</span><span class="btn pri">${I("plus","s")}Lập Lệnh</span>`)}</div>
+   ${kpiCards(1)}
+   <div style="position:relative;margin-top:16px">${an(3,-14,-6)}<div class="tabs"><span class="on">Tất cả <span class="n">128</span></span><span>Chờ giao <span class="n">3</span></span><span>Đang chạy <span class="n">5</span></span><span>Chờ duyệt <span class="n">1</span></span><span>Đã duyệt <span class="n">96</span></span><span>Huỷ <span class="n">2</span></span></div></div>
+   ${toolbar(1)}
+   <div class="grp" style="margin:12px 0 0;position:relative">${an(6,-12,-10)}<table class="tbl u">${tHead()}<tbody>${rowsT(null,-1,2)}</tbody></table>${pager(1)}<span style="position:absolute;right:150px;top:100px">${an(7,0,0)}</span></div></div>`;
+  return shell("list","Lệnh vận tải",body);
+}
+function OLD_T2sel(){
+  const body=`<div class="pg">${head("Lệnh vận tải","Cơ sở Hải Phòng · 128 Lệnh",`<span class="btn">${I("export","s")}Xuất Excel</span><span class="btn pri">${I("plus","s")}Lập Lệnh</span>`)}
+   <div class="tabs" style="margin-top:16px"><span class="on">Tất cả <span class="n">128</span></span><span>Chờ giao <span class="n">3</span></span><span>Đang chạy <span class="n">5</span></span><span>Chờ duyệt <span class="n">1</span></span></div>
+   ${toolbar(0)}
+   <div class="grp" style="margin:12px 0 0;position:relative"><table class="tbl u">${tHead(1)}<tbody>${rowsT([0,1,5],4,-1)}</tbody></table>${pager(0)}<span style="position:absolute;left:14px;top:205px">${an(11,0,0)}</span></div>
+   <div class="pop" style="position:absolute;right:28px;top:330px;width:232px;padding:6px">${an(10,-12,-10)}${[["eye","Xem chi tiết"],["phone","Gọi lái xe"],["pin","Xem trên bản đồ"],["copy","Sao chép mã"],["hist","Lịch sử"]].map((t,i)=>`<div class="row" style="height:34px;padding:0 10px;border-radius:8px;font-size:13px;gap:10px;${i===0?"background:var(--sub)":""}">${I(t[0],"s muted")}${t[1]}</div>`).join("")}<div style="height:1px;background:var(--line);margin:4px 0"></div><div class="row" style="height:34px;padding:0 10px;font-size:13px;gap:10px;color:#b42318">${I("x","s")}Huỷ Lệnh</div></div>
+   <div style="position:absolute;left:50%;transform:translateX(-50%);bottom:22px;display:flex;align-items:center;gap:10px;background:#17171a;color:#fff;border-radius:14px;padding:8px 8px 8px 16px;box-shadow:0 16px 40px -10px rgba(0,0,0,.45);white-space:nowrap">${an(9,-12,-10)}
+    <b style="font-size:13px">3 đã chọn</b><span style="font-size:12.5px;color:#b9c4ff;opacity:.9">Chọn tất cả 128</span><span style="width:1px;height:22px;background:rgba(255,255,255,.2)"></span>
+    <span class="btn sm" style="background:rgba(255,255,255,.1);border-color:transparent;color:#fff">${I("export","s")}Xuất Excel</span><span class="btn sm" style="background:rgba(255,255,255,.1);border-color:transparent;color:#fff">${I("refresh","s")}Giao lại</span><span class="btn sm" style="background:rgba(239,68,68,.18);border-color:transparent;color:#ffb4ad">${I("x","s")}Huỷ Lệnh</span>
+    <span style="width:1px;height:22px;background:rgba(255,255,255,.2)"></span><span style="font-size:12.5px;opacity:.75">Bỏ chọn</span><span class="btn icon sm" style="background:transparent;border-color:transparent;color:#fff">${I("x","s")}</span></div></div>`;
+  return shell("list","Lệnh vận tải",body);
+}
+/* ---------- 3. Trang chi tiết — vị trí tab ---------- */
+function T3(v){
+  const body2=`<div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:14px;margin-top:16px">
+    <div style="display:flex;flex-direction:column;gap:14px">${blk("Khối thông tin chính",{h:170,act:"Sửa"})}${blk("Khối thông tin",{h:150})}</div>
+    <div style="display:flex;flex-direction:column;gap:14px">${blk("Khối phụ",{h:140})}${blk("Hoạt động",{h:180})}</div></div>`;
+  if(v==="A") return shell("list","LVT-0456",`<div class="pg">${detHeader(1)}${banner(1)}${summary(1)}<div style="position:relative;margin-top:18px">${an(5,-14,-6)}${tabsRow()}</div>${body2}</div>`);
+  if(v==="B") return shell("list","LVT-0456",`<div class="pg">${detHeader(1)}<div style="position:relative;margin-top:16px">${an(5,-14,-6)}${tabsRow()}</div>${banner(1)}${summary(1)}${body2}</div>`);
+  const nav=["Tổng quan","Hành trình","Ảnh theo điểm","Nhiệt độ","Chi phí","Chứng từ"];
+  return shell("list","LVT-0456",`<div class="pg">${detHeader(1)}${banner(1)}
+   <div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:24px;margin-top:16px">
+    <div style="position:relative">${an(5,-14,-8)}${nav.map((t,i)=>`<div class="nv" style="height:32px;${i===0?"background:var(--ps);color:var(--pt);font-weight:600":""}">${t}${TC[i]?`<span class="bd g">${TC[i]}</span>`:""}</div>`).join("")}</div>
+    <div style="display:flex;flex-direction:column;gap:14px">${summary(1,4).replace('margin-top:14px','margin-top:0')}${blk("Tổng quan",{h:150,act:"Sửa"})}${blk("Hành trình",{h:150})}${blk("Ảnh theo điểm",{h:120})}</div></div></div>`);
+}
+/* ---------- 4. Nút của khối (8 : 4) ---------- */
+const fieldsSk=`<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px 24px">${Array.from({length:4},()=>`<div>${sk("38%",1)}<div style="height:6px"></div>${sk("70%")}</div>`).join("")}</div>`;
+const tblSk=(addRow)=>`<div class="grp" style="margin:0"><table class="tbl u"><thead><tr style="background:var(--sub)"><th>Hàng hoá</th><th class="right">SL</th><th class="right">CBM</th><th></th></tr></thead><tbody>${[1,2].map(()=>`<tr><td>${sk("60%")}</td><td class="right num">4</td><td class="right num">2.1</td><td class="right faint">${I("more")}</td></tr>`).join("")}${addRow?`<tr><td colspan="4" style="color:var(--pt);font-weight:600;font-size:13px">${I("plus","s")} Thêm hàng hoá</td></tr>`:""}</tbody></table></div>`;
+const ib=(ic,tip)=>`<span class="btn icon sm" style="background:var(--well);border-color:var(--well);position:relative">${I(ic,"s")}${tip?`<span style="position:absolute;top:34px;right:0;background:#17171a;color:#fff;font-size:11.5px;padding:4px 8px;border-radius:6px;white-space:nowrap;z-index:3">${tip}</span>`:""}</span>`;
+function T4(v){
+  const top=`<div class="pg">${detHeader(0)}${summary(0)}<div style="margin-top:18px">${tabsRow()}</div>`;
+  const H=(t,acts,body,st)=>`<div class="blk" style="${st||""}"><div class="blk-h"><h3>${t}</h3><span class="row" style="margin-left:auto;gap:6px">${acts||""}</span></div><div class="blk-b">${body}</div></div>`;
+  let L,R;
+  if(v==="A"){L=H("Thông tin chung",`<span class="lnk" style="position:relative">${an(1,-26,-6)}${I("edit","s")}Sửa</span>`,fieldsSk)+H("Hàng hoá",`<span class="lnk">${I("plus","s")}Thêm</span>`,tblSk());R=H("Người & thời điểm","",lines(3))+H("Hoạt động",`<span class="lnk">Xem tất cả</span>`,lines(4));}
+  if(v==="B"){L=H("Thông tin chung",`<span style="position:relative">${an(1,-12,-12)}</span>${ib("edit","Sửa thông tin chung")}${ib("more")}`,fieldsSk)+H("Hàng hoá",`${ib("plus")}${ib("more")}`,tblSk());R=H("Người & thời điểm","",lines(3))+H("Hoạt động",ib("ext"),lines(4));}
+  if(v==="C"){L=H("Thông tin chung",`<span style="position:relative">${an(1,-12,-12)}</span><span class="btn sm">${I("edit","s")}Sửa</span><span class="btn icon sm">${I("more")}</span>`,fieldsSk,"border-color:var(--line2);box-shadow:0 6px 18px -8px rgba(16,16,28,.18)")+H("Hàng hoá","",tblSk());R=H("Người & thời điểm","",lines(3))+H("Hoạt động","",lines(4));}
+  if(v==="D"){const fe=`<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px 24px"><div><div class="lbl">Loại hàng</div><div style="font-weight:500">Air nhập · 10 kiện</div></div>
+     <div style="position:relative">${an(1,-14,-8)}<div class="lbl">Ưu tiên</div><div class="row" style="gap:6px"><div class="inp focus" style="height:34px;flex:1">Gấp${I("down","s faint")}</div><span class="btn icon sm pri">${I("check","s")}</span><span class="btn icon sm">${I("x","s")}</span></div></div>
+     <div style="background:var(--sub);border-radius:8px;margin:-6px;padding:6px"><div class="lbl">Khách hàng</div><div class="row" style="font-weight:500">Công ty TNHH Hải Long<span style="margin-left:auto" class="faint">${I("edit","s")}</span></div></div><div><div class="lbl">Ghi chú nội bộ</div><div class="faint">—</div></div></div>`;
+    L=H("Thông tin chung","",fe)+H("Hàng hoá","",`<div style="position:relative">${an(2,-14,40)}${tblSk(1)}</div>`);R=H("Người & thời điểm","",lines(3))+H("Hoạt động","",lines(4));}
+  return shell("list","LVT-0456",top+`<div style="display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:14px;margin-top:16px"><div style="display:flex;flex-direction:column;gap:14px">${L}</div><div style="display:flex;flex-direction:column;gap:14px">${R}</div></div></div>`);
+}
+function T4map(){
+  const top=`<div class="pg" style="padding-bottom:0">${detHeader(0)}<div style="margin-top:16px">${tabsRow(1)}</div></div>`;
+  const map=`<svg viewBox="0 0 600 520" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"><rect width="600" height="520" fill="#eef0ec"/><path d="M0 420 C160 380 260 460 380 410 S560 340 600 350 L600 520 0 520Z" fill="#dfe8ef"/><g stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round"><path d="M-10 120 L240 170 L420 150 L620 220"/><path d="M160 -10 L200 230 L170 530"/><path d="M430 -10 L420 150 L470 530"/></g><path d="M110 110 L240 170 L420 150 L500 300" stroke="var(--p)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="110" cy="110" r="9" fill="var(--p)" stroke="#fff" stroke-width="3"/><circle cx="500" cy="300" r="9" fill="#fff" stroke="var(--p)" stroke-width="4"/><circle cx="420" cy="150" r="11" fill="var(--p)" stroke="#fff" stroke-width="3"/></svg>`;
+  return shell("list","LVT-0456",top+`<div style="display:grid;grid-template-columns:minmax(0,1fr) 380px;height:560px;border-top:1px solid var(--line);margin-top:0">
+    <div style="position:relative;overflow:hidden">${map}${an(1,14,14)}<div class="row" style="position:absolute;right:12px;top:12px;gap:6px;flex-direction:column"><span class="btn icon sm">${I("plus","s")}</span><span class="btn icon sm">${I("minus","s")}</span></div>
+     <div class="row" style="position:absolute;left:12px;bottom:12px;gap:6px;position:absolute">${an(2,-10,-26)}<span class="pill">Chú giải</span><span class="pill">Lớp bản đồ</span></div></div>
+    <div style="border-left:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:14px;position:relative">${an(3,-12,8)}${blk("Mốc trên Lệnh",{h:250})}${blk("Ghi nhận từ GPS",{h:200})}</div></div>`);
+}
+function T4sub(){
+  const top=`<div class="pg">${detHeader(0)}<div style="margin-top:16px">${tabsRow(4)}</div>`;
+  const rows=[1,2,3].map(()=>`<tr><td>${sk("70%")}</td><td>${sk("50%")}</td><td class="right num">350.000</td><td>${st("duyet","Đã duyệt")}</td><td class="faint right">${I("more")}</td></tr>`).join("");
+  return shell("list","LVT-0456",top+`<div style="display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:14px;margin-top:16px">
+    <div class="blk" style="position:relative">${an(4,-12,-10)}<div class="blk-h"><h3>Chi phí trên Lệnh</h3><span class="tabs" style="border:0"><span class="n">3</span></span><span class="lnk">${I("plus","s")}Thêm chi phí</span></div>
+      <div style="padding:0 16px 16px"><div class="grp" style="margin:0"><table class="tbl"><thead><tr style="background:var(--sub)"><th>Khoản</th><th>Người ghi</th><th class="right">Số tiền</th><th>Trạng thái</th><th></th></tr></thead><tbody>${rows}</tbody></table></div></div></div>
+    <div style="display:flex;flex-direction:column;gap:14px;position:relative">${an(5,-12,-10)}${blk("Tổng hợp",{h:150})}${blk("Định mức tuyến",{h:120})}</div></div></div>`);
+}
+/* ---------- 6. Trường thông tin — nhãn trên, lưới 12 cột co giãn theo độ dài ---------- */
+const F=(span,l,v,extra)=>`<div class="f" style="grid-column:span ${span};${extra||""}"><div class="l">${l}</div><div class="v">${v}</div></div>`;
+const objRef=(tile,name,sub,open)=>`<div class="row" style="gap:10px;border:1px solid ${open?"var(--p)":"var(--line)"};border-radius:10px;padding:7px 10px;${open?"box-shadow:0 0 0 3px var(--ps)":""}"><span style="width:30px;height:30px;border-radius:8px;background:var(--well);display:flex;align-items:center;justify-content:center;flex:none;font:700 11px Manrope">${tile}</span><div class="grow" style="min-width:0"><div class="ell" style="font-weight:600">${name}</div><div class="ell faint" style="font-size:12px;font-weight:400">${sub}</div></div>${I("right","s faint")}</div>`;
+function OLD_T5(){
+  const g=`<div class="fg" style="grid-template-columns:repeat(12,1fr);gap:18px 20px;position:relative">
+    ${F(3,"Mã Lệnh",`<span class="row" style="gap:6px">LVT-0456<span class="faint">${I("copy","s")}</span></span>`)}${F(3,"Trạng thái",st("chay"))}${F(3,"Ngày lập",`11/10/2026 08:42 <span class="faint" style="font-weight:400">· 2 giờ trước</span>`)}${F(3,"Ưu tiên",'<span class="flag red">Gấp</span>')}
+    ${F(6,`Khách hàng ${an(2,-30,-8).replace('class="an"','class="an" ')}`,objRef("HL","Công ty TNHH Hải Long","MST 0201234567 · Khách hàng DK05",1),"position:relative")}
+    ${F(6,"JobID",`<span class="row" style="gap:6px"><span class="lk">JB-0124-00</span>${I("ext","s faint")}</span><div class="faint" style="font-size:12px;font-weight:400;margin-top:2px">Air nhập · 10 kiện · 4.1 CBM</div>`,"position:relative")}
+    ${F(6,"Xe",objRef(I("truck","s"),"15C-456.78","Đầu kéo · 2.5 tấn · Đang chạy"))}
+    ${F(6,"Lái xe",`<div class="row" style="gap:10px;border:1px solid var(--line);border-radius:10px;padding:7px 10px"><span class="av l a1">TL</span><div class="grow"><div style="font-weight:600">Tú Lê</div><div class="faint" style="font-size:12px;font-weight:400">0912 345 678</div></div><span class="btn icon sm" style="background:var(--well);border-color:var(--well)">${I("phone","s")}</span></div>`)}
+    ${F(12,"Tuyến",`<span class="row" style="gap:6px;flex-wrap:wrap">TCS Nội Bài${I("arrowr","s faint")}QL5${I("arrowr","s faint")}Kho Hải Long, KCN Đình Vũ <span class="faint" style="font-weight:400">· 28 km · 55 phút</span></span>`)}
+    ${F(6,"Nhãn",`<span class="row" style="gap:6px"><span class="flag gry">${I("tag","s")}Hàng dễ vỡ</span><span class="flag gry">Giao trước 12:00</span><span class="flag gry">+1</span></span>`)}
+    ${F(6,"Chứng từ",`<span class="row" style="gap:6px"><span class="flag gry">${I("file","s")}Phiếu xuất TCS.pdf</span><span class="flag gry">${I("file","s")}EIR.jpg</span></span>`)}
+    ${F(12,"Ghi chú",`<div style="background:var(--sub);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-weight:400;color:var(--ink2);line-height:1.5">Hàng dễ vỡ, giao trước 12:00. Liên hệ thủ kho anh Minh 0903 111 222 khi tới cổng KCN. Xe vào cổng số 2, không đỗ trên đường nội bộ.</div>`,"position:relative")}
+    <span style="position:absolute;left:-14px;top:-8px">${an(1,0,0)}</span><span style="position:absolute;left:-14px;bottom:24px">${an(4,0,0)}</span><span style="position:absolute;left:49%;top:76px">${an(3,0,0)}</span></div>
+   <div class="pop" style="position:absolute;left:24px;top:190px;width:330px;padding:14px;z-index:4">${an(5,-12,-10)}<div class="row"><span style="width:36px;height:36px;border-radius:9px;background:var(--well);display:flex;align-items:center;justify-content:center;font:700 12px Manrope">HL</span><div class="grow"><div style="font-weight:700">Công ty TNHH Hải Long</div><div class="faint" style="font-size:12px">Khách hàng DK05</div></div></div>
+    <div class="kv" style="grid-template-columns:110px 1fr;margin:12px 0;font-size:12.5px"><span>MST</span><span>0201234567</span><span>Địa chỉ</span><span>KCN Đình Vũ, Hải Phòng</span><span>Liên hệ</span><span>Chị Lan · 0904 222 333</span><span>Lệnh tháng này</span><span>18</span></div>
+    <div class="row"><span class="lk" style="font-size:12.5px">Mở danh mục khách hàng</span>${I("ext","s faint")}</div></div>`;
+  return shell("list","LVT-0456",`<div class="pg">${detHeader(0)}<div style="margin-top:16px">${tabsRow()}</div>
+   <div style="display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:14px;margin-top:16px">
+    <div class="blk" style="position:relative;overflow:visible"><div class="blk-h"><h3>Thông tin chung</h3><span class="lnk">${I("edit","s")}Sửa</span></div><div class="blk-b" style="padding-top:8px;position:relative">${g}</div></div>
+    <div style="display:flex;flex-direction:column;gap:14px">${blk("Người & thời điểm",{h:150})}${blk("Hoạt động",{h:200})}</div></div></div>`);
+}
+/* ---------- 6. Thứ bậc hành động ---------- */
+function OLD_T6(){
+  const rows=[1,2,3].map((_,i)=>`<tr><td>${sk("70%")}</td><td>${sk("50%")}</td><td class="right num">350.000</td><td class="faint right" style="position:relative">${i===0?an(5,8,-8):""}${I("more")}</td></tr>`).join("");
+  return shell("list","LVT-0456",`<div class="pg">${detHeader(0)}
+   <div style="margin-top:16px">${tabsRow()}</div>
+   <div style="display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:14px;margin-top:16px">
+    <div style="display:flex;flex-direction:column;gap:14px">
+     <div class="blk"><div class="blk-h"><h3>Thông tin chung</h3><span class="lnk" style="position:relative">${an(3,-26,-6)}Sửa</span></div><div class="blk-b">${lines(3)}</div></div>
+     <div class="blk"><div class="blk-h"><h3>Chi phí</h3><span class="lnk" style="position:relative">${an(4,-26,-6)}${I("plus","s")}Thêm</span></div><div style="padding:0 16px 16px"><div class="grp" style="margin:0"><table class="tbl"><tbody>${rows}</tbody></table></div></div></div></div>
+    <div style="display:flex;flex-direction:column;gap:14px">${blk("Hoạt động",{h:150})}
+     <div class="pop" style="position:relative;width:240px;padding:6px;align-self:flex-end">${an(6,-12,-10)}<div class="faint" style="font-size:11.5px;padding:6px 10px">Menu ⋯ của trang</div>${["Sửa Lệnh","Sao chép","Xuất PDF"].map(t=>`<div class="row" style="height:34px;padding:0 10px;font-size:13px">${t}</div>`).join("")}<div style="height:1px;background:var(--line);margin:4px 0"></div><div class="row" style="height:34px;padding:0 10px;font-size:13px;color:#b42318">Huỷ Lệnh</div></div></div></div></div>`).replace('<span class="btn pri">','<span class="btn pri" style="position:relative">'+an(2,-10,-14)).replace('<span class="btn">'+I("hist","s"),'<span class="btn" style="position:relative">'+an(1,-10,-14)+I("hist","s"));
+}
+/* ---------- 7. Form dài theo bước ---------- */
+const STEPS=["Thông tin chung","Xe và lái xe","Tuyến","Kiểm tra"];
+const fld=(l,w,req,val)=>`<div class="fld"><label>${l}${req?" <i>*</i>":""}</label><div class="inp" style="${w?`width:${w}`:""}">${val||`<span class="faint">${sk("40%")}</span>`}</div></div>`;
+const stepBody=`<div style="display:flex;flex-direction:column;gap:18px">
+   <div><h2 class="h" style="margin:0;font-size:19px">Xe và lái xe</h2><div class="faint" style="font-size:13px;margin-top:2px">Dòng mô tả ngắn của bước (tuỳ chọn)</div></div>
+   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">${fld("Trường bắt buộc","",1)}${fld("Trường bắt buộc","",1)}${fld("Trường","")}${fld("Trường","")}</div>
+   <div class="fld"><label>Chọn bằng thẻ khi cần so sánh</label><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">${[1,0,0].map(o=>`<div class="pick ${o?"on":""}"><span class="radio"></span><div class="grow">${sk("70%",1)}<div style="height:6px"></div>${sk("50%")}</div></div>`).join("")}</div></div>
+   ${fld("Ghi chú","",0)}</div>`;
+const foot=(l,r)=>`<div class="row" style="position:absolute;left:0;right:0;bottom:0;height:64px;padding:0 28px;background:var(--surf);border-top:1px solid var(--line);gap:10px">${l}<span style="margin-left:auto"></span>${r}</div>`;
+function T7(v){
+  if(v==="A") return shell("board","Lập Lệnh",`<div style="position:relative;height:100%"><div class="pg">${head("Lập Lệnh vận tải","Dòng phụ: nguồn dữ liệu đầu vào","",'Theo dõi xếp xe')}
+    <div class="row" style="margin-top:18px;gap:0;position:relative">${an(1,-14,-8)}${STEPS.map((s,i)=>`<div class="row grow" style="gap:8px"><span style="width:24px;height:24px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:700 12px Manrope;${i<1?"background:var(--p);color:#fff":i===1?"border:2px solid var(--p);color:var(--pt)":"border:1.5px solid #d4d4da;color:var(--ink3)"}">${i<1?`<svg class="ic" style="width:12px;height:12px;stroke-width:3" viewBox="0 0 24 24">${P.check}</svg>`:i+1}</span><span style="font-size:13px;font-weight:${i<=1?600:400};color:${i<=1?"var(--ink)":"var(--ink3)"};white-space:nowrap">${s}</span>${i<3?`<span style="flex:1;height:2px;margin:0 12px;background:${i<1?"var(--p)":"var(--line2)"}"></span>`:""}</div>`).join("")}</div>
+    <div style="max-width:720px;margin:28px auto 0;position:relative">${an(2,-30,0)}${stepBody}</div></div>
+    ${foot(`<span style="position:relative">${an(3,-20,-12)}</span><span class="btn">${I("left","s")}Quay lại</span>`,`<span class="faint" style="font-size:12.5px">Bước 2/4</span><span class="btn ghost">Lưu nháp</span><span class="btn pri">Tiếp tục${I("right","s")}</span>`)}</div>`);
+  if(v==="B") return shell("board","Lập Lệnh",`<div style="position:relative;height:100%"><div class="pg">${head("Lập Lệnh vận tải","Dòng phụ: nguồn dữ liệu đầu vào","",'Theo dõi xếp xe')}</div>
+    <div style="display:grid;grid-template-columns:220px minmax(0,680px);gap:40px;padding:22px 28px 0">
+     <div style="position:relative">${an(1,-14,-8)}${STEPS.map((s,i)=>`<div class="row" style="align-items:flex-start;padding:9px 10px;border-radius:10px;${i===1?"background:var(--ps)":""}"><span style="width:22px;height:22px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:700 11px Manrope;${i<1?"background:var(--p);color:#fff":i===1?"border:2px solid var(--p);color:var(--pt)":"border:1.5px solid #d4d4da;color:var(--ink3)"}">${i<1?`<svg class="ic" style="width:11px;height:11px;stroke-width:3" viewBox="0 0 24 24">${P.check}</svg>`:i+1}</span><div><div style="font-size:13px;font-weight:${i<=1?600:400};color:${i<=1?"var(--ink)":"var(--ink3)"}">${s}</div>${i<1?`<div class="faint" style="font-size:12px">Tóm tắt điều đã nhập</div>`:""}</div></div>`).join("")}</div>
+     <div style="position:relative">${an(2,-30,0)}${stepBody}</div></div>
+    ${foot(`<span class="btn">${I("left","s")}Quay lại</span>`,`<span class="faint" style="font-size:12.5px">Bước 2/4</span><span class="btn ghost">Lưu nháp</span><span class="btn pri">Tiếp tục${I("right","s")}</span>`)}<div style="position:absolute;left:14px;bottom:40px">${an(3,0,0)}</div></div>`);
+  const sec=(t,rows)=>`<div class="blk"><div class="blk-h"><h3>${t}</h3><span class="lnk">Sửa</span></div><div class="blk-b"><div class="fr">${rows.map(r=>`<div>${r}</div><div>${sk("55%",1)}</div>`).join("")}</div></div></div>`;
+  return shell("board","Lập Lệnh",`<div style="position:relative;height:100%"><div class="pg">${head("Lập Lệnh vận tải","Bước 4/4 · Kiểm tra trước khi lưu","",'Theo dõi xếp xe')}
+    <div style="max-width:720px;margin:20px auto 0;display:flex;flex-direction:column;gap:14px;position:relative">${an(1,-30,0)}
+     <div class="card" style="padding:16px 18px"><div class="lbl">Tóm tắt</div><div class="row" style="margin-top:4px"><span class="num" style="font-size:22px;font-weight:700">LVT mới · 2 YCVT</span><span class="st c-lap" style="margin-left:auto">Sẽ ở: Đã giao lái xe</span></div></div>
+     ${sec("Thông tin chung",["Trường","Trường"])}${sec("Xe và lái xe",["Trường","Trường"])}</div></div>
+    ${foot(`<span class="btn">${I("left","s")}Quay lại</span>`,`<span class="btn ghost">Lưu nháp</span><span class="btn pri">${I("check","s")}Lưu Lệnh</span>`)}</div>`);
+}
+/* ---------- 8. Hộp thoại ---------- */
+function T8(){
+  return shell("list","Lệnh vận tải",`<div style="position:relative;height:100%"><div class="pg">${head("Lệnh vận tải","Nền là trang đang làm, mờ đi",`<span class="btn pri">${I("plus","s")}Lập Lệnh</span>`)}<div style="margin-top:16px;display:flex;flex-direction:column;gap:14px">${blk("Nội dung trang",{h:240})}${blk("Nội dung trang",{h:200})}</div></div>
+   <div class="dim"></div>
+   <div class="pop" style="left:70px;top:90px;width:480px">${an(1,-12,-10)}<div class="row" style="padding:18px 22px 4px"><div class="grow"><div class="h" style="font-weight:700;font-size:18px">Hộp thoại xử lý nhỏ · 480</div><div class="faint" style="font-size:12.5px">Dòng phụ: đối tượng đang xử lý</div></div><span class="btn icon sm ghost">${I("x")}</span></div>
+    <div style="padding:12px 22px;display:flex;flex-direction:column;gap:14px">${fld("Trường bắt buộc","",1)}${fld("Trường bắt buộc","",1)}${fld("Ghi chú","")}</div>
+    <div class="row" style="padding:12px 22px 18px;justify-content:flex-end"><span class="btn">Huỷ</span><span class="btn pri">Hành động</span></div></div>
+   <div class="pop" style="left:580px;top:200px;width:400px">${an(2,-12,-10)}<div style="padding:20px 22px 6px"><div class="h" style="font-weight:700;font-size:17px">Huỷ Lệnh LVT-0459?</div><div class="muted" style="font-size:13px;margin-top:6px">Câu hệ quả ngắn: điều gì sẽ xảy ra sau khi xác nhận.</div></div>
+    <div class="row" style="padding:14px 22px 18px;justify-content:flex-end"><span class="btn">Quay lại</span><span class="btn" style="background:#b42318;border-color:#b42318;color:#fff">Huỷ Lệnh</span></div></div></div>`);
+}
+
+/* ===== Vòng 3 ===== */
+P.check2='<path d="M20 6 9 17l-5-5"/>';P.undo='<path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/>';P.ban='<circle cx="12" cy="12" r="9"/><path d="m5.7 5.7 12.6 12.6"/>';
+/* Thẻ số — 3 kiểu */
+const KP=[["Lệnh hôm nay","14","+3","up","so với hôm qua",14,20],["Đang chạy","5","+1","up","trên 18 xe",5,18],["Cần xử lý","2","+1","dn","1 từ chối · 1 trễ",2,0],["Xe rảnh","3","","","gần Đình Vũ: 2",3,18]];
+const KPI_IC=["file","truck","alert","pin"];
+function kpiV(v){
+  if(v==="G") return "";
+  if(v==="D") return `<div class="card" style="display:flex;margin-top:16px">${KP.map((k,i)=>`<div class="row" style="flex:1;height:52px;padding:0 16px;gap:10px;${i?"border-left:1px solid var(--line)":""}"><span style="font-size:13px;color:var(--ink2)">${k[0]}</span><span class="num" style="margin-left:auto;font-size:20px;font-weight:700;${i===2?"color:#a50c25":""}">${k[1]}</span></div>`).join("")}</div>`;
+  if(v==="E") return `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px">${KP.map((k,i)=>{const on=i===2;return `<div class="card" style="padding:14px 16px;cursor:pointer;${on?"border:2px solid var(--p);padding:13px 15px;background:var(--ps)":""}"><div class="row"><span style="font-size:13px;color:var(--ink2);font-weight:500">${k[0]}</span><span class="faint" style="margin-left:auto;font-size:12px">${on?"Đang lọc ✕":"Bấm để lọc"}</span></div><div class="num" style="font-size:26px;font-weight:700;margin-top:6px;${i===2?"color:#a50c25":""}">${k[1]}</div><div class="faint" style="font-size:12px">${k[4]}</div></div>`}).join("")}</div>`;
+  if(v==="F") return `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px">${KP.map((k,i)=>`<div class="card" style="padding:14px 16px"><div class="row"><span style="width:30px;height:30px;border-radius:50%;background:var(--well);display:flex;align-items:center;justify-content:center;${i===2?"background:#fdecec;color:#a50c25":""}">${I(KPI_IC[i],"s")}</span><span style="font-size:13px;color:var(--ink2);font-weight:500">${k[0]}</span></div><div class="row" style="align-items:flex-end;margin-top:10px"><div class="grow"><div class="num" style="font-size:26px;font-weight:700;line-height:1">${k[1]}</div><div class="row" style="margin-top:8px;gap:6px">${k[2]?`<span class="delta ${k[3]}">${k[2]}</span>`:""}<span class="faint" style="font-size:12px">${k[4]}</span></div></div>${sp([3,5,4,6,5,7,6,8].map(x=>x+i),i===2?"#a50c25":"#737373",72,28)}</div></div>`).join("")}</div>`;
+  if(v==="A") return `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px">${KP.map((k,i)=>`<div class="card" style="padding:16px 18px"><div style="font-size:12.5px;color:var(--ink2);font-weight:500">${k[0]}</div><div class="num" style="font-size:30px;font-weight:700;line-height:1.15;margin-top:6px;${i===2?"color:#b42318":""}">${k[1]}</div><div class="faint" style="font-size:12px;margin-top:2px">${k[4]}</div></div>`).join("")}</div>`;
+  if(v==="B") return `<div class="card" style="display:grid;grid-template-columns:repeat(4,1fr);margin-top:16px">${KP.map((k,i)=>`<div style="padding:14px 18px;${i?"border-left:1px solid var(--line)":""}"><div class="row"><span style="font-size:12.5px;color:var(--ink2);font-weight:500">${k[0]}</span><span class="faint" style="margin-left:auto">${I("more","s")}</span></div><div class="row" style="margin-top:8px;align-items:baseline"><span class="num" style="font-size:28px;font-weight:700">${k[1]}</span>${k[2]?`<span class="row" style="gap:3px;font-size:12px;font-weight:600;margin-left:8px;color:${k[3]==="up"?"#15803d":"#b42318"}">${I(k[3]==="up"?"arrowur":"down","s")}${k[2]}</span>`:""}</div><div class="faint" style="font-size:12px">${k[4]}</div></div>`).join("")}</div>`;
+  return `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px">${KP.map((k,i)=>`<div class="card" style="padding:14px 16px"><div class="row"><span style="font-size:12.5px;color:var(--ink2);font-weight:500">${k[0]}</span>${k[2]?`<span class="delta ${k[3]}" style="margin-left:auto">${k[2]}</span>`:""}</div><div class="row" style="margin-top:8px;align-items:baseline;gap:4px"><span class="num" style="font-size:26px;font-weight:700">${k[1]}</span>${k[6]?`<span class="faint" style="font-size:13px">/ ${k[6]}</span>`:""}</div>${k[6]?`<div class="bar" style="margin:10px 0 6px"><i style="width:${k[5]/k[6]*100}%"></i></div>`:`<div style="height:22px"></div>`}<div class="faint" style="font-size:12px">${k[4]}</div></div>`).join("")}</div>`;
+}
+/* Thanh công cụ — 2 cách xếp, cùng bộ thành phần */
+const chipF=(f,v)=>`<span class="row fchip" style="white-space:nowrap;flex:none;height:30px;border:1px solid var(--line2);border-radius:8px;overflow:hidden;font-size:12.5px;gap:0"><span style="padding:0 8px;color:var(--ink3);background:var(--sub);height:100%;display:flex;align-items:center">${f}</span><span style="padding:0 6px 0 8px;font-weight:600">${v}</span><span class="faint" style="padding-right:8px">${I("x","s")}</span></span>`;
+const ibt=(ic,t)=>`<span class="btn icon sm" title="${t}">${I(ic,"s")}</span>`;
+function toolV(v,a){
+  const srch=(w)=>`<div class="inp" style="height:32px;${w}border:1px solid var(--line2);background:var(--surf)">${I("search","s faint")}<span class="faint" style="font-size:12.5px">Tìm mã Lệnh, biển số, lái xe…</span></div>`;
+  const fbtn=`<span class="btn sm" style="height:32px">${I("filter","s")}Bộ lọc<b style="background:var(--ink);color:#fff;border-radius:999px;padding:0 6px;font-size:11px;margin-left:2px">2</b></span>`;
+  const view=`<span class="row" style="gap:6px">${ibt("sort","Sắp xếp")}${ibt("group","Nhóm")}${ibt("sliders","Tuỳ chỉnh cột")}</span>`;
+  const chips=`${chipF("Loại hàng","FCL nhập")}${chipF("Ngày","Hôm nay")}<span style="font-size:12.5px;color:var(--pt);font-weight:600;white-space:nowrap">Xoá tất cả</span>`;
+  const A=(n,x,y)=>a?an(n,x,y):"";
+  if(S.sq==="ds"){ /* góp ý 12/10: chọn B 2 hàng; Tuỳ chỉnh cột + Nhóm = nút ghost có chữ như bản draft JobID (dispatch-coordination-prototype) */
+    const gb=(ic,t)=>`<span class="btn ghost">${I(ic,"s")}${t}</span>`;
+    return `<div style="margin-top:14px;display:flex;flex-direction:column;gap:8px;position:relative"><div class="row" style="gap:8px">${A(1,-14,-8)}${srch("flex:1;")}<span style="position:relative">${A(2,-8,-12)}${fbtn}</span><span style="position:relative" class="row">${A(4,-8,-12)}${gb("sliders","Tuỳ chỉnh cột")}${gb("group","Nhóm")}</span></div>
+     <div class="row" style="gap:8px;position:relative">${A(3,-14,-6)}${chips}<span class="faint" style="font-size:12px;margin-left:auto">128 kết quả</span></div></div>`;
+  }
+  if(v==="A") return `<div class="row" style="margin-top:14px;gap:8px;position:relative">${A(1,-14,-8)}${srch("width:250px;flex:none;")}<span style="position:relative">${A(2,-8,-12)}${fbtn}</span><span class="row" style="gap:8px;position:relative">${A(3,-8,-12)}${chips}</span><span style="margin-left:auto;position:relative" class="row">${A(4,-8,-12)}<span class="faint" style="font-size:12.5px;margin-right:6px;white-space:nowrap">128 kết quả</span>${view}</span></div>`;
+  return `<div style="margin-top:14px;display:flex;flex-direction:column;gap:8px;position:relative"><div class="row" style="gap:8px">${A(1,-14,-8)}${srch("flex:1;")}<span style="position:relative">${A(2,-8,-12)}${fbtn}</span><span style="position:relative" class="row">${A(4,-8,-12)}${view}</span></div>
+   <div class="row" style="gap:8px;position:relative">${A(3,-14,-6)}${chips}<span class="faint" style="font-size:12.5px;margin-left:auto">128 kết quả</span></div></div>`;
+}
+/* Cột thao tác: chỉ icon */
+const QI={lap:["refresh","Giao lại"],chay:["eye","Theo dõi"],chot:["check","Duyệt"]};
+const rowsI=(sel,dis,tip)=>ORD.slice(0,7).map((o,i)=>{const s=sel&&sel.includes(i),d=dis===i,q=QI[o.s];
+  return `<tr class="${s?"sel":""}"><td style="width:34px;position:relative"><span class="cb ${s?"on":""}" style="${d?"background:var(--well);border-color:#e1e1e6":""}"></span>${d?`<div class="pop" style="position:absolute;left:28px;top:-34px;padding:6px 10px;font-size:12px;white-space:nowrap;border-radius:8px;background:#17171a;color:#fff">Bản ghi không có hành động này</div>`:""}</td>
+   <td class="mono">${o.id}</td><td>${st(o.s)}</td><td><div class="row" style="gap:6px">${o.from}${I("arrowr","s faint")}${o.to}</div></td><td>${o.car}</td><td class="ctr num">${o.time}</td><td class="right num">${["—","350.000","420.000","—","1.250.000","420.000","380.000"][i]}</td>
+   <td class="right" style="width:120px"><span class="row" style="gap:2px;justify-content:flex-end">${q?`<span class="btn icon sm ghost" style="position:relative;color:var(--pt)">${I(q[0],"s")}${tip===i?`<span style="position:absolute;bottom:32px;right:-10px;background:#17171a;color:#fff;font-size:11.5px;padding:4px 8px;border-radius:6px;white-space:nowrap;font-weight:500">${q[1]}</span>`:""}</span>`:`<span style="width:28px"></span>`}<span class="btn icon sm ghost">${I("phone","s")}</span><span class="btn icon sm ghost">${I("more")}</span></span></td></tr>`}).join("");
+function T2(){
+  const body=`<div class="pg"><div style="position:relative">${an(1,-14,-8)}${head("Lệnh vận tải","Cơ sở Hải Phòng · 128 Lệnh",`<span class="btn">${I("export","s")}Xuất Excel</span><span class="btn pri">${I("plus","s")}Lập Lệnh</span>`)}</div>
+   <div style="position:relative">${an(2,-12,6)}${kpiV(S.cur.kpi||"A")}</div>
+   <div style="position:relative;margin-top:16px">${an(3,-14,-6)}<div class="tabs"><span class="on">Tất cả <span class="n">128</span></span><span>Chờ giao <span class="n">3</span></span><span>Đang chạy <span class="n">5</span></span><span>Chờ duyệt <span class="n">1</span></span><span>Đã duyệt <span class="n">96</span></span><span>Huỷ <span class="n">2</span></span></div></div>
+   <div style="position:relative">${an(4,-14,6)}${toolV(S.cur.tool||"A",0)}</div>
+   <div class="grp" style="margin:12px 0 0;position:relative">${an(6,-12,-10)}<table class="tbl u">${tHead()}<tbody>${rowsI(null,-1,0)}</tbody></table>${pager(1)}<span style="position:absolute;right:56px;top:6px">${an(7,0,0)}</span></div></div>`;
+  return shell("list","Lệnh vận tải",body);
+}
+/* Thanh chọn nhiều — theo Figma ERP "Tick chọn (opt1)" node 7801:9397 / Bulk action 7801:10228 */
+P.selall='<path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M4 13v1M4 17v2a1 1 0 0 0 1 1h2M11 4h2"/><path d="m13 13 7 3-3 1-1 3z"/>';
+function bulkBar(n,acts){
+  const sep=`<span style="width:1px;height:24px;background:rgba(255,255,255,.24);flex:none"></span>`;
+  const b=(ic,t,hov)=>`<span class="row" style="gap:8px;height:28px;padding:0 6px;border-radius:4px;font-size:14px;${hov?"background:#505356":""}">${I(ic,"s")}${t}</span>`;
+  return `<div style="position:absolute;left:50%;transform:translateX(-50%);bottom:32px;width:min(750px,calc(100% - 48px));height:48px;box-sizing:border-box;display:flex;align-items:center;gap:20px;padding:0 16px;background:#3c4043;color:#fff;border-radius:8px;box-shadow:0 12px 32px -8px rgba(0,0,0,.35);white-space:nowrap">${an(9,-12,-10)}
+    <span class="row" style="gap:8px;font-size:14px"><span class="num" style="min-width:17px;height:20px;padding:0 4px;box-sizing:border-box;border-radius:4px;background:#505356;font-size:12px;display:flex;align-items:center;justify-content:center">${n}</span>Đã chọn</span>
+    ${b("selall","Chọn tất cả")}${sep}
+    <span class="row" style="gap:12px">${acts.map(a=>b(a[0],a[1],a[2])).join("")}</span>
+    <span style="margin-left:auto" class="row">${sep}<span title="Bỏ chọn" style="margin-left:20px;display:flex">${I("x")}</span></span></div>`;
+}
+function T2sel(){
+  const body=`<div class="pg">${head("Lệnh vận tải","Cơ sở Hải Phòng · 128 Lệnh",`<span class="btn">${I("export","s")}Xuất Excel</span><span class="btn pri">${I("plus","s")}Lập Lệnh</span>`)}
+   <div class="tabs" style="margin-top:16px"><span class="on">Tất cả <span class="n">128</span></span><span>Chờ giao <span class="n">3</span></span><span>Đang chạy <span class="n">5</span></span><span>Chờ duyệt <span class="n">1</span></span></div>
+   ${toolV(S.cur.tool||"A",0)}
+   <div class="grp" style="margin:12px 0 0;position:relative"><table class="tbl u">${tHead(1)}<tbody>${rowsI([0,1,5],4,-1)}</tbody></table>${pager(0)}<span style="position:absolute;left:14px;top:205px">${an(11,0,0)}</span></div>
+   <div class="pop" style="position:absolute;right:28px;top:300px;width:232px;padding:6px">${an(10,-12,-10)}${[["eye","Xem chi tiết"],["phone","Gọi lái xe"],["pin","Xem trên bản đồ"],["copy","Sao chép mã"],["hist","Lịch sử"]].map((t,i)=>`<div class="row" style="height:34px;padding:0 10px;border-radius:8px;font-size:13px;gap:10px;${i===0?"background:var(--sub)":""}">${I(t[0],"s muted")}${t[1]}</div>`).join("")}<div style="height:1px;background:var(--line);margin:4px 0"></div><div class="row" style="height:34px;padding:0 10px;font-size:13px;gap:10px;color:#b42318">${I("x","s")}Huỷ Lệnh</div></div>
+   ${bulkBar(3,[["refresh","Giao lại",1],["export","Xuất Excel"],["x","Huỷ Lệnh"]])}</div>`;
+  return shell("list","Lệnh vận tải",body);
+}
+function Tkpi(v){S.cur.kpi=v;return shell("list","Lệnh vận tải",`<div class="pg">${head("Lệnh vận tải","Cơ sở Hải Phòng · 128 Lệnh",`<span class="btn">${I("export","s")}Xuất Excel</span><span class="btn pri">${I("plus","s")}Lập Lệnh</span>`)}${kpiV(v)}<div class="tabs" style="margin-top:16px"><span class="on">Tất cả <span class="n">128</span></span><span>Chờ giao <span class="n">3</span></span><span>Đang chạy <span class="n">5</span></span></div>${toolV(S.cur.tool||"A",0)}<div class="grp" style="margin:12px 0 0"><table class="tbl u">${tHead()}<tbody>${rowsI(null,-1,-1)}</tbody></table></div></div>`)}
+function Ttool(v){S.cur.tool=v;return shell("list","Lệnh vận tải",`<div class="pg">${head("Lệnh vận tải","Cơ sở Hải Phòng · 128 Lệnh",`<span class="btn">${I("export","s")}Xuất Excel</span><span class="btn pri">${I("plus","s")}Lập Lệnh</span>`)}<div class="tabs" style="margin-top:16px"><span class="on">Tất cả <span class="n">128</span></span><span>Chờ giao <span class="n">3</span></span><span>Đang chạy <span class="n">5</span></span></div>${toolV(v,1)}
+  <div class="pop" style="position:absolute;z-index:8;left:${v==="A"?"300":"700"}px;top:${v==="A"?"200":"196"}px;width:300px;padding:12px">${an(5,-12,-10)}<div class="h" style="font-weight:700;font-size:14px;margin-bottom:8px">Bộ lọc</div>${[["Loại hàng","FCL nhập"],["Ngày","Hôm nay"],["Lái xe","Tất cả"],["Tuyến","Tất cả"]].map(f=>`<div class="fld" style="margin-bottom:8px"><label>${f[0]}</label><div class="inp" style="height:34px">${f[1]}${I("down","s faint")}</div></div>`).join("")}<div class="row" style="justify-content:flex-end;margin-top:4px"><span class="btn sm ghost">Đặt lại</span><span class="btn sm pri">Áp dụng</span></div></div>
+  <div class="grp" style="margin:12px 0 0"><table class="tbl u">${tHead()}<tbody>${rowsI(null,-1,-1)}</tbody></table></div></div>`)}
+/* Mục 6 — luật sắp xếp trường */
+const FX=(span,l,v,sz)=>`<div class="f" style="grid-column:span ${span}"><div class="l">${l}${sz?` <span class="tag" style="font-size:10px">${sz}</span>`:""}</div><div class="v">${v}</div></div>`;
+function T5(){
+  const grid=(rows,label)=>`<div style="position:relative;margin-top:6px"><div style="position:absolute;inset:-4px 0;display:grid;grid-template-columns:repeat(12,1fr);gap:0 20px;pointer-events:none" class="gridov">${Array.from({length:12},()=>`<i style="background:rgba(214,51,108,.05);border-left:1px dashed rgba(214,51,108,.25);border-right:1px dashed rgba(214,51,108,.25)"></i>`).join("")}</div>
+    <div class="fg" style="grid-template-columns:repeat(12,1fr);gap:16px 20px;position:relative">${rows}</div></div>`;
+  const sub=(t,n)=>`<div class="row" style="margin-top:16px;position:relative">${n?an(n,-14,-4):""}<span style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)">${t}</span><span style="flex:1;height:1px;background:var(--line);margin-left:8px"></span></div>`;
+  const g1=grid(FX(3,"Mã Lệnh",`LVT-0456 <span class="faint">${I("copy","s")}</span>`,"S")+FX(3,"Trạng thái",st("chay"),"S")+FX(3,"Ngày lập","11/10 08:42","S")+FX(3,"Ưu tiên",'<span class="flag red">Gấp</span>',"S"));
+  const g2=grid(FX(6,"Khách hàng",objRef("HL","Công ty TNHH Hải Long","MST 0201234567 · DK05"),"M")+FX(6,"JobID",objRef(I("brief","s"),"JB-0124-00","Air nhập · 10 kiện · 4.1 CBM"),"M")+FX(6,"Xe",objRef(I("truck","s"),"15C-456.78","Đầu kéo · 2.5 tấn"),"M")+FX(6,"Lái xe",objRef("TL","Tú Lê","0912 345 678"),"M"));
+  const g3=grid(FX(12,"Tuyến",`TCS Nội Bài → QL5 → Kho Hải Long, KCN Đình Vũ <span class="faint" style="font-weight:400">· 28 km</span>`,"L")+FX(6,"Nhãn",`<span class="row" style="gap:6px"><span class="flag gry">Hàng dễ vỡ</span><span class="flag gry">Giao trước 12:00</span></span>`,"M")+FX(6,"Chứng từ",`<span class="row" style="gap:6px"><span class="flag gry">${I("file","s")}Phiếu xuất.pdf</span><span class="flag gry">+1</span></span>`,"M")+FX(12,"Ghi chú",`<div style="background:var(--sub);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-weight:400;color:var(--ink2)">Hàng dễ vỡ, giao trước 12:00. Liên hệ thủ kho anh Minh 0903 111 222 khi tới cổng KCN.</div>`,"L"));
+  return shell("list","LVT-0456",`<div class="pg">${detHeader(0)}<div style="margin-top:16px">${tabsRow()}</div>
+   <div style="display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:14px;margin-top:16px">
+    <div class="blk"><div class="blk-h"><h3>Thông tin chung</h3><span class="lnk">${I("edit","s")}Sửa</span></div><div class="blk-b" style="padding-top:0">${sub("Nhận diện · 4 × S",1)}${g1}${sub("Đối tượng liên quan · 2 × M mỗi hàng",2)}${g2}${sub("Hành trình & ghi chú · L, 2 × M, L",3)}${g3}</div></div>
+    <div style="display:flex;flex-direction:column;gap:14px;position:relative">${an(4,-12,-10)}<div class="blk"><div class="blk-h"><h3>Người & thời điểm</h3></div><div class="blk-b"><div class="fg" style="grid-template-columns:1fr;gap:12px">${FX(12,"Người lập","Thảo Nguyễn · 11/10 08:42")}${FX(12,"Cập nhật gần nhất","Tú Lê · 10:40")}</div></div></div>${blk("Hoạt động",{h:180})}</div></div></div>`);
+}
+/* Mục 7 — thứ bậc + phê duyệt / từ chối / thu hồi */
+const MENU=(items,a)=>`<div class="pop" style="position:absolute;right:28px;top:118px;width:236px;padding:6px;z-index:6">${a?an(a,-12,-10):""}${items.map(t=>t==="-"?`<div style="height:1px;background:var(--line);margin:4px 0"></div>`:`<div class="row" style="height:34px;padding:0 10px;border-radius:8px;font-size:13px;gap:10px;${t[2]?"color:#b42318":""}">${I(t[0],"s "+(t[2]?"":"muted"))}${t[1]}</div>`).join("")}</div>`;
+const hdr7=(chip,acts,banner)=>`<div style="position:relative"><div class="back">${I("left","s")}Lệnh vận tải</div><div class="pg-h"><div class="grow"><h1>LVT-0450 <span style="vertical-align:4px;margin-left:6px">${chip}</span></h1><div class="sub">15C-202.19 · Minh Trần · Kho Hải Long → Cảng Lạch Huyện · JB-0115-01</div></div><div class="row">${acts}</div></div></div>${banner||""}`;
+const body7=`<div style="margin-top:16px">${tabsRow()}</div><div style="display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:14px;margin-top:16px"><div style="display:flex;flex-direction:column;gap:14px">${blk("Thông tin chung",{h:150,act:I("edit","s")+"Sửa"})}${blk("Chi phí",{h:150,act:I("plus","s")+"Thêm"})}</div><div style="display:flex;flex-direction:column;gap:14px">${blk("Hoạt động",{h:200})}</div></div>`;
+function T6(v){
+  const base=`<span class="btn">${I("hist","s")}Lịch sử</span><span class="btn icon" style="position:relative">${I("more")}</span>`;
+  if(v==="1") return shell("list","LVT-0450",`<div class="pg">${hdr7(st("chot","Chờ duyệt"),`<span style="position:relative">${an(1,-10,-14)}</span>${base}<span style="position:relative">${an(2,-10,-14)}<span class="btn des">${I("x","s")}Từ chối</span></span><span style="position:relative">${an(3,-10,-14)}<span class="btn pri">${I("check","s")}Phê duyệt</span></span>`)}${body7}</div>${MENU([["edit","Sửa Lệnh"],["copy","Sao chép"],["export","Xuất PDF"],"-",["x","Huỷ Lệnh",1]],4)}`);
+  if(v==="2") return shell("list","LVT-0450",`<div style="position:relative;height:100%"><div class="pg">${hdr7(st("chot","Chờ duyệt"),`${base}<span class="btn des">${I("x","s")}Từ chối</span><span class="btn pri">${I("check","s")}Phê duyệt</span>`)}${body7}</div><div class="dim"></div>
+   <div class="pop" style="left:50%;top:110px;transform:translateX(-50%);width:480px">${an(5,-12,-10)}<div style="padding:20px 22px 6px"><div class="h" style="font-weight:700;font-size:18px">Từ chối LVT-0450?</div><div class="muted" style="font-size:13px;margin-top:4px">Lệnh trả về lái xe Minh Trần để sửa và chốt lại.</div></div>
+    <div style="padding:10px 22px;display:flex;flex-direction:column;gap:12px"><div class="fld"><label>Lý do <i>*</i></label><div class="row" style="gap:6px;flex-wrap:wrap">${["Sai chi phí","Thiếu ảnh","Sai km","Thiếu chứng từ","Khác"].map((r,i)=>`<span class="pill" style="height:30px;${i===0?"background:var(--ink);color:#fff;border-color:var(--ink)":""}">${r}</span>`).join("")}</div></div><div class="fld"><label>Ghi thêm</label><div class="inp" style="height:64px;align-items:flex-start;padding-top:10px"><span class="faint">Phí kho TCS 350.000 đ chưa có hoá đơn…</span></div></div></div>
+    <div class="row" style="padding:12px 22px 18px;justify-content:flex-end"><span class="btn">Quay lại</span><span class="btn des">Từ chối</span></div></div></div>`);
+  if(v==="3") return shell("list","LVT-0450",`<div class="pg">${hdr7(st("duyet","Đã duyệt"),base,`<div style="margin-top:14px;position:relative">${an(6,-14,-8)}<div class="banner" style="background:#ecf8f0;color:#14532d">${I("check","s")}<div>Đã phê duyệt bởi <b>Thảo Nguyễn</b> lúc 11/10 14:20. Chi phí đã chuyển kế toán.</div></div></div>`)}${body7}</div>${MENU([["edit","Sửa Lệnh"],["copy","Sao chép"],["export","Xuất PDF"],"-",["undo","Thu hồi phê duyệt",1]],7)}`);
+  return shell("list","LVT-0450",`<div class="pg">${hdr7(st("huy","Bị trả lại"),base,`<div style="margin-top:14px;position:relative">${an(8,-14,-8)}<div class="banner red">${I("alert","s")}<div><b>Thảo Nguyễn từ chối lúc 11/10 14:20 — Sai chi phí.</b> Phí kho TCS 350.000 đ chưa có hoá đơn. Bước tiếp theo: lái xe Minh Trần sửa và chốt lại, Lệnh quay về Chờ duyệt.</div></div></div>`)}${body7}</div>`);
+}
+
+/* ===================== Danh mục mẫu + luật ===================== */
+const SCREENS=[
+ {id:"khung",t:"1. Khung trang",sub:"Vòng 2: menu theo UI mới của lab (nhóm có tiêu đề nhỏ, mục có icon, mục đang chọn nền nhạt), CHỈ giữ chân menu module + cơ sở theo bản hiện tại. Header mỏng 44px. Vẫn là 1 menu, 2 trạng thái.",kind:"rule",v:[{k:"1",n:"Mở rộng",f:()=>T1(0)},{k:"2",n:"Thu gọn",f:()=>T1(1)}],
+  r:[["Logo + nút thu gọn","Logo + tên sản phẩm/module; nút thu gọn đổi menu 240 ↔ 64px, lưu theo người dùng. Thu gọn: chỉ icon, nhóm ngăn bằng vạch, rê chuột hiện tên."],["Mục menu","Nhóm theo module con, tiêu đề nhóm chữ hoa nhỏ màu xám. Mục: icon + tên, cao 34px; đang chọn nền nhạt màu chính + chữ đậm; số việc chờ badge đỏ. Không lồng cấp 2 trong nhóm."],["Chân menu (giữ bản hiện tại)","Thẻ: icon + tên module chữ hoa · cơ sở hiện tại + mũi tên khi được phân quyền nhiều cơ sở."],["Header · 44px","Trái: đường dẫn. Phải: tìm nhanh (icon) · chuông (chấm đỏ khi có chưa đọc) · ảnh tài khoản (bấm mở menu tài khoản). Không tên/vai trò để tiết kiệm chỗ.",1],["Đầu trang","Tiêu đề + dòng phụ; phải: nút phụ + 1 nút chính."],["Vùng nội dung","Nền trắng, lề 28px; form dài tối đa 720px."]]},
+ {id:"ds",t:"2. Trang danh sách",sub:"Vòng 3: thẻ số và thanh công cụ tách ra mục 2a, 2b để chọn kiểu (trang này hiện theo lựa chọn ở đó). Cột thao tác thống nhất chỉ dùng icon.",kind:"rule",v:[{k:"1",n:"Bình thường",f:T2},{k:"2",n:"Chọn nhiều + menu ⋯",f:T2sel}],
+  r:[["Đầu trang","Tiêu đề + dòng phụ (cơ sở, tổng số). Phải: nút phụ (Xuất Excel) + 1 nút chính."],["Thẻ số","Theo kiểu chọn ở mục 2a; tối đa 4."],["Tab trạng thái","Gạch dưới; số đếm là Badge Neutral pill (cao 20, nền đen 6%) theo Astryx."],["Thanh công cụ","Theo kiểu chọn ở mục 2b."],["Tuỳ chỉnh cột","Bảng Tuỳ chọn hiển thị (CMP-06), mở từ icon trong thanh công cụ."],["Bảng","Khung bo góc; đầu bảng chữ hoa nhỏ nền xám #F1F1F1. Mã Lệnh dùng font code (JetBrains Mono). Chip trạng thái kiểu mobile: pill nền nhạt + icon + chữ. Chữ, trạng thái căn trái; số, tiền căn phải; ngày giờ căn giữa (theo DS)."],["Cột thao tác","Chỉ icon, tối đa 3, luôn hiện: (1) việc chính theo trạng thái — icon màu chính (Giao lại, Theo dõi, Duyệt…), để trống chỗ khi không có · (2) thao tác nhanh chung (gọi lái xe) · (3) ⋯. Rê chuột vào icon hiện tên."],["Phân trang","Bên trái: ô số dòng mỗi trang 25/50/100; bên phải: trang đầu, hiện tại ±1, …, cuối. Không có nhãn \"Hiển thị x–y / tổng\" (góp ý 12/10)."],["Chọn nhiều","Thanh nổi giữa đáy, cách đáy 32, cao 48, rộng ≤750, nền tối #3C4043 bo 8 (theo Figma ERP Tick chọn opt1): [n] Đã chọn · Chọn tất cả | hành động chung (icon + chữ trắng, rê chuột nền #505356) (tối đa 3, thừa gom vào ⋯) | X bỏ chọn. \"Chọn tất cả\" = toàn bộ kết quả theo bộ lọc, không chỉ trang hiện tại. Dòng đã chọn tô nền nhạt; đầu bảng gạch ngang khi chọn một phần."],["Menu ⋯ của dòng","Mỗi mục có icon; mục nguy hiểm tách vạch, chữ đỏ."],["Checkbox bị khoá","Dòng không có hành động hàng loạt: khoá + tooltip. Đầu bảng gạch ngang khi chọn một phần."]]},
+ {id:"kpi",t:"2a. Thẻ số trên danh sách",sub:"Vòng 4 (12/10): A–C chưa ưng → thêm D gọn 1 dải · E bấm để lọc (thẻ Cần xử lý đang chọn) · F icon + xu hướng · G bỏ thẻ số (số đếm đã có ở tab).",kind:"opt",v:[{k:"A",n:"Ô rời, số lớn",f:()=>Tkpi("A")},{k:"B",n:"1 dải chia ô + mũi tên",f:()=>Tkpi("B")},{k:"C",n:"Số / tổng + thanh tiến độ",f:()=>Tkpi("C")},{k:"D",n:"Gọn 1 dải",f:()=>Tkpi("D")},{k:"E",n:"Bấm để lọc",f:()=>Tkpi("E")},{k:"F",n:"Icon + xu hướng",f:()=>Tkpi("F")},{k:"G",n:"Bỏ thẻ số",f:()=>Tkpi("G")}],
+  r:[["Luật chung","Nhãn trên · số lớn chữ Manrope · 1 dòng giải thích dưới. Màu chỉ dùng cho nghĩa (đỏ = cần xử lý, xanh/đỏ = tăng/giảm), không nền màu, không gradient, không icon trang trí. Bấm thẻ = lọc danh sách theo nhóm đó."]]},
+ {id:"tool",t:"2b. Thanh công cụ danh sách",sub:"Định nghĩa từng thành phần (số trên khung). Cùng bộ thành phần, 2 cách xếp: A 1 hàng · B 2 hàng (hàng chip chỉ hiện khi có điều kiện lọc).",kind:"opt",v:[{k:"A",n:"1 hàng",f:()=>Ttool("A")},{k:"B",n:"2 hàng",f:()=>Ttool("B")}],
+  r:[["Ô tìm","Cao 32px, viền mảnh nền trắng; chữ gợi ý nêu đúng các trường tìm được. Tìm khi gõ (trễ 300ms), có nút × để xoá."],["Nút Bộ lọc","Mở bảng lọc dạng popover (≤ 6 trường) hoặc ngăn kéo phải khi nhiều trường (SC-05). Số tròn đen = số điều kiện đang áp."],["Chip điều kiện","Dạng \"Trường | giá trị ×\": tên trường nền xám, giá trị đậm. Bấm chip mở lại đúng trường đó. Quá 3 chip thì \"+n\". \"Xoá tất cả\" cuối hàng."],["Nhóm hiển thị (phải)","Số kết quả · icon Sắp xếp · Nhóm · Tuỳ chỉnh cột (tooltip). Xuất file ở đầu trang, không ở đây."],["Bảng lọc","Nhãn trên, dropdown/ô nhập; Đặt lại · Áp dụng. Áp dụng xong chip hiện lên thanh công cụ."]]},
+ {id:"tab",t:"3. Trang chi tiết — đặt tab ở đâu",sub:"Chốt: A mặc định (dải số luôn thấy); B khi dải số chỉ có nghĩa ở tab Tổng quan. C bỏ.",kind:"rule",v:[{k:"A",n:"Tab dưới dải số · mặc định",f:()=>T3("A")},{k:"B",n:"Tab dưới tiêu đề · khi cần",f:()=>T3("B")}],
+  r:[["Đầu trang","Quay lại (tên danh sách) · mã + chip trạng thái · dòng phụ thông tin nhận diện."],["Hành động trang","Lịch sử + ⋯ + đúng 1 nút chính theo trạng thái; không có việc thì không có nút chính."],["Khu báo hiệu","Dưới đầu trang, chỉ hiện khi có: cảnh báo, lý do trả lại/từ chối, kết quả vừa xử lý."],["Dải số","≤ 4 số quan trọng của đối tượng."],["Tab","Mặc định A. Chọn B khi dải số chỉ phục vụ tab Tổng quan (các tab khác không cần nhìn số)."]]},
+ {id:"ratio",t:"4. Tab Tổng quan 8 : 4 — nút của từng khối",sub:"Chốt dùng A hoặc B theo số hành động của khối.",kind:"rule",v:[{k:"A",n:"Chữ + icon",f:()=>T4("A")},{k:"B",n:"Icon ô xám",f:()=>T4("B")}],
+  r:[["Khối có 1 hành động","A: chữ màu chính kèm icon (Sửa, Thêm, Xem tất cả) ở góc phải tiêu đề."],["Khối có ≥ 2 hành động","B: icon trong ô xám 28px, tooltip khi rê chuột; hành động phụ gom vào ⋯."],["Không trộn","Trong 1 khối chỉ dùng 1 kiểu; các khối khác nhau trên cùng trang được dùng kiểu khác nhau."]]},
+ {id:"tabkind",t:"5. Hai kiểu tab đặc biệt",sub:"Đã đồng ý tạm; chi tiết từng tab đặc biệt sửa theo từng trường hợp sau.",kind:"rule",v:[{k:"1",n:"Tab bản đồ",f:T4map},{k:"2",n:"Tab danh sách con",f:T4sub}],
+  r:[["Bản đồ","Tràn vùng nội dung, phóng to/thu nhỏ góc phải trên."],["Chú giải, lớp","Góc trái dưới bản đồ."],["Cột phải 380px","Mốc + ghi nhận GPS, cuộn riêng (lab-map W2)."],["Khối danh sách con","Tiêu đề + số đếm + Thêm; bảng bo góc; ⋯ ở dòng."],["Cột phụ","Tổng hợp của danh sách."]]},
+ {id:"field",t:"6. Trường thông tin — sắp xếp thế nào cho dễ nhìn",sub:"Trả lời câu hỏi \"thực tế xếp thế nào\": chia nhóm theo ý nghĩa, mỗi trường thuộc 1 trong 3 cỡ S / M / L, mỗi hàng cộng đủ 12 cột. Lưới hồng là 12 cột để thấy thẳng hàng (chỉ trong lab).",kind:"rule",v:[{k:"—",n:"Thông tin chung",f:T5}],
+  r:[["Chia nhóm","Mỗi khối chia nhóm nhỏ theo ý nghĩa, tiêu đề nhóm chữ hoa nhỏ + vạch: Nhận diện → Đối tượng liên quan → Hàng hoá/Hành trình → Ghi chú. Thứ tự đọc từ cái nhận diện bản ghi tới chi tiết."],["Cỡ trường","S = 3 cột: mã, trạng thái, ngày giờ, số, ưu tiên, có/không · M = 6 cột: đối tượng (khách hàng, xe, lái xe, mã liên kết), tên dài vừa, nhiều chip · L = 12 cột: địa chỉ, tuyến, mô tả, ghi chú."],["Xếp hàng","Mỗi hàng cộng đủ 12: 4 × S, 2 × S + 1 × M, 2 × M, hoặc 1 × L. Không để hàng hụt; thiếu thì dời trường cùng nhóm lên, không lấp bằng trường khác nhóm. Cột 3/6/9 thẳng hàng giữa các hàng."],["Cột phụ (4/12)","Chỉ 1 cột, trường xếp dọc: người & thời điểm, liên kết, hoạt động."],["Đối tượng","Thẻ viền mảnh: icon/ảnh + tên + 1 dòng phụ; bấm mở thẻ xem nhanh + Mở danh mục ↗ (vòng 2)."],["Ghi chú","Cuối khối, cỡ L, nền xám có viền."]]},
+ {id:"act",t:"7. Thứ bậc hành động + phê duyệt / từ chối / thu hồi",sub:"Đã đồng ý thứ bậc. Vòng 3: menu ⋯ có icon + thử 4 trạng thái của 1 Lệnh cần duyệt.",kind:"rule",v:[{k:"1",n:"Chờ duyệt",f:()=>T6("1")},{k:"2",n:"Từ chối · nhập lý do",f:()=>T6("2")},{k:"3",n:"Đã duyệt · thu hồi",f:()=>T6("3")},{k:"4",n:"Sau khi từ chối",f:()=>T6("4")}],
+  r:[["Hành động chung","Lịch sử + ⋯ luôn ở cùng chỗ."],["Từ chối","Button Destructive (nền đỏ, chữ trắng) + icon, đứng TRƯỚC Phê duyệt (góp ý 12/10)."],["Phê duyệt","Nút chính, ngoài cùng bên phải."],["Menu ⋯","Mỗi mục có icon; mục nguy hiểm tách vạch, chữ đỏ."],["Hộp từ chối","Lý do bắt buộc: chip lý do nhanh + ô ghi thêm; câu hệ quả nói rõ ai nhận lại. Nút Từ chối nền đỏ."],["Kết quả đã duyệt","Không còn nút chính; khu báo hiệu xanh: ai, lúc nào, điều gì xảy ra tiếp."],["Thu hồi","Chỉ nằm trong ⋯ (chữ đỏ, icon hoàn tác), luôn qua hộp xác nhận có lý do."],["Sau khi từ chối","Chip trạng thái đổi; khu báo hiệu đỏ: ai, lúc nào, lý do, bước tiếp theo."]]},
+ {id:"form",t:"8. Form dài — chia bước",sub:"Sửa lại: chốt A — thanh bước NGANG. Bước cuối luôn là Kiểm tra.",kind:"rule",v:[{k:"A",n:"Bước ngang",f:()=>T7("A")},{k:"R",n:"Bước Kiểm tra",f:()=>T7("R")}],
+  r:[["Thanh bước ngang","Trên đầu thân form, tên bước ngắn; bước xong có ✓, bấm để quay lại sửa; tối đa ~5 bước."],["Thân bước","1 cột tối đa 720px căn giữa; trường 2 cột khi ngắn; chọn bằng thẻ khi cần so sánh."],["Thanh đáy dính","Quay lại · Bước x/n · Lưu nháp · Tiếp tục (bước cuối: Lưu …). Lỗi hiện tại ô."]]},
+ {id:"dlg",t:"9. Hộp thoại",sub:"Để sau — chưa định nghĩa kỹ được lúc này. Giữ làm tham khảo.",kind:"rule",v:[{k:"—",n:"Tham khảo",f:T8}],
+  r:[["Hộp thoại xử lý","Tạm: ~480px cho việc nhỏ ≤ 5 trường.",1],["Hộp xác nhận","Tạm: ~400px, câu hỏi + hệ quả, nút nguy hiểm đỏ.",1]]},
+];
+
+/* ===================== Dựng trang + chấm ===================== */
+const KEY="uilab-web-layout-v3";let S={brand:"neutral",an:"on",sq:"ds",cur:{},vote:{}};
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){}
+if(!S.ds1212){S.sq="ds";S.ds1212=1}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+document.getElementById("nav").innerHTML=SCREENS.map(s=>`<a href="#s-${s.id}">${s.t.split(" — ")[0]}</a>`).join("");
+function build(){
+  const root=document.getElementById("screens");root.innerHTML="";
+  SCREENS.forEach(sc=>{
+    const k=S.cur[sc.id]||sc.v[0].k;const vt=S.vote[sc.id]||{};
+    const opts=sc.kind==="opt"?[...sc.v.filter(v=>v.k!=="R").map(v=>v.k),"Chưa ưng"]:["Đồng ý","Cần sửa"];
+    const el=document.createElement("section");el.className="screen";el.id="s-"+sc.id;
+    el.innerHTML=`<h2>${sc.t}</h2><p class="sub">${sc.sub}</p>
+      ${sc.v.length>1?`<div class="vtabs">${sc.v.map(v=>`<button data-k="${v.k}" class="${v.k===k?"on":""}"><b>${v.k}</b>${v.n}</button>`).join("")}</div>`:""}
+      <div class="stage"><div class="scaler"></div><button class="zoom-btn">Xem cỡ thật</button></div>
+      <table class="rules"><thead><tr><th>#</th><th>Vùng</th><th>Luật</th></tr></thead><tbody>${sc.r.map((r,i)=>`<tr><td><span class="n">${i+1}</span></td><td>${r[0]}</td><td class="${r[2]?"open":""}">${r[1]}</td></tr>`).join("")}</tbody></table>
+      <div class="vote"><b>${sc.kind==="opt"?"Chọn":"Luật này"}</b><span class="opts">${opts.map(o=>`<button data-o="${o}" class="${vt.o===o?"on":""}">${o}</button>`).join("")}</span><input placeholder="Giữ gì / sửa gì (tuỳ chọn)" value="${(vt.n||"").replace(/"/g,"&quot;")}"></div>`;
+    root.appendChild(el);
+    const paint=kk=>{const v=sc.v.find(x=>x.k===kk)||sc.v[0];SHELL="E";el.querySelector(".scaler").innerHTML=v.f();el.querySelectorAll(".vtabs button").forEach(b=>b.classList.toggle("on",b.dataset.k===kk));fit()};
+    paint(k);
+    const vt2=el.querySelector(".vtabs");if(vt2)vt2.onclick=e=>{const b=e.target.closest("button");if(!b)return;S.cur[sc.id]=b.dataset.k;save();paint(b.dataset.k)};
+    el.querySelector(".zoom-btn").onclick=()=>{document.getElementById("fullHolder").innerHTML=el.querySelector(".scaler").innerHTML;document.getElementById("full").classList.add("on")};
+    el.querySelector(".vote .opts").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.vote[sc.id]=S.vote[sc.id]||{};S.vote[sc.id].o=S.vote[sc.id].o===b.dataset.o?"":b.dataset.o;save();el.querySelectorAll(".vote .opts button").forEach(x=>x.classList.toggle("on",x.dataset.o===S.vote[sc.id].o))};
+    el.querySelector(".vote input").oninput=e=>{S.vote[sc.id]=S.vote[sc.id]||{};S.vote[sc.id].n=e.target.value;save()};
+  });
+  fit();
+}
+function fit(){document.querySelectorAll(".stage").forEach(s=>{const w=s.clientWidth,sc=w/1280;s.querySelector(".scaler").style.transform=`scale(${sc})`;s.style.height=(800*sc)+"px"})}
+addEventListener("resize",fit);
+function syncCtl(){document.body.className="b-"+S.brand+(S.an==="off"?" no-an":"")+(S.sq==="sq"?" sq":S.sq==="ds"?" ds":"");document.querySelectorAll(".lab-opts").forEach(g=>g.querySelectorAll("button").forEach(b=>b.classList.toggle("on",S[g.dataset.k]===b.dataset.v)))}
+document.querySelectorAll(".lab-opts").forEach(g=>g.onclick=e=>{const b=e.target.closest("button");if(!b)return;S[g.dataset.k]=b.dataset.v;save();syncCtl();if(g.dataset.k==="sq")build()});
+const closeFull=()=>document.getElementById("full").classList.remove("on");
+document.getElementById("fullClose").onclick=closeFull;addEventListener("keydown",e=>{if(e.key==="Escape")closeFull()});
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",1800)}
+document.getElementById("export").onclick=()=>{
+  const L=["# Chấm khung xương web",`Kiểu đang xem: ${S.sq==="ds"?"theo DS":S.sq==="sq"?"lab vuông":"lab tròn"} · thương hiệu: ${S.brand}`,""];
+  SCREENS.forEach(sc=>{const v=S.vote[sc.id]||{};if(v.o||v.n){const nm=sc.kind==="opt"&&v.o&&v.o!=="Chưa ưng"?" "+sc.v.find(x=>x.k===v.o).n:"";L.push(`- ${sc.t}: ${v.o||"·"}${nm}${v.n?" — "+v.n:""}`)}});
+  const txt=L.join("\n");(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast("Đã copy — dán vào chat"),()=>prompt("Copy đoạn này:",txt));
+};
+syncCtl();build();
+
+/* Tự kiểm #check — chữ lố khung / tràn thẻ */
+function labCheck(){
+  const out={escape:[],ellipsis:[]};
+  document.querySelectorAll(".screen").forEach(scr=>{const app=scr.querySelector(".app");if(!app)return;const A=app.getBoundingClientRect(),s=A.width/1280;
+    app.querySelectorAll("*").forEach(el=>{if(el.ownerSVGElement||el.tagName==="svg"||el.classList.contains("an"))return;const r=el.getBoundingClientRect();if(!r.width)return;
+      if(r.right>A.right+1)out.escape.push(`${scr.id}: <${el.className||el.tagName}> "${(el.textContent||"").trim().slice(0,40)}" lố ${Math.round((r.right-A.right)/s)}px`)});
+    app.querySelectorAll(".card,.blk,.pill,.btn,.inp,.st,.flag,.pick").forEach(b=>{if(b.scrollWidth>b.clientWidth+2&&getComputedStyle(b).overflow!=="hidden")out.escape.push(`${scr.id}: tràn <${b.className}> "${b.textContent.trim().slice(0,40)}"`)});});
+  const pre=document.createElement("pre");pre.id="labcheck";pre.textContent=JSON.stringify(out,null,1);document.body.appendChild(pre);return out;
+}
+if(location.hash==="#check")addEventListener("load",()=>setTimeout(labCheck,600));
+</script>
+</body>
+</html>

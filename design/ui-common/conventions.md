@@ -1,7 +1,7 @@
 ---
 type: shared-conventions
 status: draft
-updated: 2026-10-04
+updated: 2026-10-12
 links:
   - design/design.md
   - design/ui-common/screen-patterns.md
@@ -47,6 +47,7 @@ Câu chữ (lỗi, xác nhận, rỗng, toast) theo `design/design.md` › Conte
 | GR-24 | Điều hướng app | — | app 2.16 |
 | GR-25 | Trạng thái kết nối mạng | Copy động | app 2.17 |
 | GR-26 | Popup chặn | Copy động | app 2.18 |
+| GR-27 | Dữ liệu đã cũ | Copy động | cross-process-flow (12/10/2026) |
 
 ---
 
@@ -183,10 +184,17 @@ GR-14, GR-16…GR-20 chỉ áp web — app không có bảng nhiều cột (danh
 - **UC phải khai báo:** mỗi lỗi nghiệp vụ (`E-{feature}-NNN`) thuộc loại nào; lỗi Loại 2 có Thử lại không.
 - **Mobile:**
   - Loại 1: như web, chữ error + icon cảnh báo dưới trường.
-  - Loại 2: popup giữa màn cùng khung CMP-03 Mobile — icon lỗi + tiêu đề lỗi + mô tả + nút **Đóng** full width (thêm **Thử lại** nếu gửi lại được); chạm nền không đóng; đóng xong giữ nguyên form. Tài liệu app không có loại này — bổ sung 2026-10-04, chưa có chuẩn trong design.md.
+  - Loại 2: bottom sheet cùng khung CMP-03 Mobile — icon lỗi + tiêu đề lỗi + mô tả + nút **Đóng** full width; retry được thì **Thử lại** là nút chính đứng trên, **Đóng** ghost đứng dưới; khoá đóng như hàng 8 CMP-03 Mobile (chạm nền / vuốt xuống không đóng); đóng xong giữ nguyên form. Tài liệu app không có loại này — bổ sung 2026-10-04, chưa có chuẩn trong design.md.
   - Loại 3: toast CMP-01 (Mobile).
   - Không tải được dữ liệu cả màn: màn lỗi theo GR-12 (Mobile). Lỗi phiên/quyền: GR-26.
 - **design.md:** Copy động; Nhập liệu và kiểm tra
+
+### GR-27 — Dữ liệu đã cũ
+- Màn đang mở (danh sách, popup, sheet) mà dữ liệu vừa đổi ở nơi khác: hiện banner tông neutral đầu vùng nội dung "[Đối tượng] vừa có cập nhật." kèm nút **Tải lại**. Không tự tải lại, để người dùng không mất chỗ đang xem.
+- Bấm Tải lại: tải dữ liệu mới, giữ chỗ đang xem nếu còn (vd bước đang chọn, bộ lọc), rồi ẩn banner.
+- **UC phải khai báo:** màn nào áp dụng; từ thay cho [Đối tượng] (vd "Quy trình", "Danh sách"); giữ lại gì sau khi tải lại.
+- **Mobile:** dùng chung web; banner nằm ngay dưới header màn hoặc header sheet.
+- **design.md:** Copy động
 
 ## App (chỉ mobile)
 

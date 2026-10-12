@@ -72,7 +72,8 @@ function labCheck(){
     const scr=ph.querySelector(".k-scr");const R=scr.getBoundingClientRect();
     ph.querySelectorAll(".k-scr *").forEach(el=>{
       const r=el.getBoundingClientRect();if(!r.width)return;
-      if(el.closest(".k-tabs,.glow"))return;
+      if(el.closest(".k-tabs,.glow,.mp"))return; /* .mp = bản đồ, cắt mép là chủ ý */
+      if(el.ownerSVGElement)return; /* hình bên trong <svg> luôn bị viewBox cắt */
       if(r.right>R.right+1||r.left<R.left-1)out.escape.push(`${tag}: <${el.className||el.tagName}> "${txt(el)}" lố ${Math.round(Math.max(r.right-R.right,R.left-r.left))}px`);
       const cs=getComputedStyle(el);
       if(cs.textOverflow==="ellipsis"&&el.scrollWidth>el.clientWidth+1)out.ellipsis.push(`${tag}: "${txt(el)}"`);

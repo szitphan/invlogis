@@ -12,7 +12,7 @@ links:
 
 # Pipeline: từ con số 0 → BA → Design
 
-Bản đồ toàn bộ quy trình của workspace `dispatch-management`, đúng với những gì **đang cài thật**
+Bản đồ toàn bộ quy trình của workspace `invlogis`, đúng với những gì **đang cài thật**
 trong `.claude/skills/` ngày 2026-10-04. Dùng làm nền để cải tiến: mỗi bước ghi rõ mức bắt buộc,
 skill, đầu vào, đầu ra, ai review, máy kiểm gì, và chỗ đang đứt.
 

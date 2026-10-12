@@ -5,7 +5,7 @@
 > Muốn đổi skill/agent/hướng dẫn: sửa bản trong `.claude/` hoặc `CLAUDE.md`, rồi chạy
 > `python3 _scripts/codex-sync.py`.
 
-# Dispatch Management — BA Workspace‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+# Invlogis — BA Workspace‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 > Mọi doc per-feature dưới `docs/{feature}/`. URD/BRD/PRD/SRS đều scope feature (không còn singleton). File tên-cố-định mang prefix `{feature}-` (vd `{feature}-spec.md`) — tránh trùng basename giữa features. Frontmatter tối giản: `type`/`feature`/`status`/`updated`/`links` (KHÔNG created/owner/changelog). Lịch sử thay đổi sống ở `_workspace/changelog.md` (1 log tập trung).
 
 ## What lives here‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍

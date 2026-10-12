@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiến trình rẽ nhánh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap">
+<style>
+/* ===== Vỏ trang lab ===== */
+:root{--lab-bg:#e9e9ec;--lab-ink:#18181b;--lab-muted:#6b6b73;--lab-line:#d6d6dc;--lab-card:#fff;--lab-hi:#fff7d6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--lab-bg:#141416;--lab-ink:#ececf0;--lab-muted:#a0a0aa;--lab-line:#2c2c31;--lab-card:#1d1d20;--lab-hi:#3a3420}}
+:root[data-theme="dark"]{--lab-bg:#141416;--lab-ink:#ececf0;--lab-muted:#a0a0aa;--lab-line:#2c2c31;--lab-card:#1d1d20;--lab-hi:#3a3420}
+*{box-sizing:border-box}
+body{margin:0;background:var(--lab-bg);color:var(--lab-ink);font:14px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.lab-top{position:sticky;top:0;z-index:40;background:var(--lab-bg);border-bottom:1px solid var(--lab-line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.lab-top h1{font:700 15px Manrope,Inter,sans-serif;margin:0 6px 0 0}
+.lab-ctl{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--lab-muted);flex-wrap:wrap}
+.lab-opts{display:flex;background:var(--lab-card);border:1px solid var(--lab-line);border-radius:999px;padding:2px;flex-wrap:wrap}
+.lab-opts button{font:inherit;font-size:12px;border:0;background:none;color:var(--lab-ink);padding:5px 10px;border-radius:999px;cursor:pointer}
+.lab-opts button.on{background:var(--lab-ink);color:var(--lab-bg)}
+.lab-nav{display:flex;gap:6px;flex-wrap:wrap;width:100%}
+.lab-nav a{font-size:12px;color:var(--lab-ink);text-decoration:none;border:1px solid var(--lab-line);border-radius:999px;padding:3px 10px;background:var(--lab-card)}
+.lab-main{max-width:1320px;margin:0 auto;padding:16px}
+.lab-box{background:var(--lab-card);border:1px solid var(--lab-line);border-radius:14px;padding:16px 18px;margin-bottom:18px}
+.lab-muted{color:var(--lab-muted);font-size:13px}
+.sec{margin:34px 0 10px;scroll-margin-top:120px}
+.sec>h2{font:800 20px Manrope,Inter,sans-serif;margin:0 0 4px;letter-spacing:-.01em}
+.sec>p{margin:0 0 12px;color:var(--lab-muted);font-size:13.5px;max-width:920px}
+.tblw{overflow-x:auto}
+table.lt{width:100%;border-collapse:collapse;font-size:13px;min-width:760px}
+table.lt th{text-align:left;font-weight:600;font-size:12px;color:var(--lab-muted);padding:8px 10px;border-bottom:1px solid var(--lab-line);white-space:nowrap}
+table.lt td{padding:9px 10px;border-bottom:1px solid var(--lab-line);vertical-align:top}
+table.lt tr:last-child td{border-bottom:0}
+table.lt code{font-size:12px;background:var(--lab-bg);padding:1px 5px;border-radius:5px}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;border:1px solid var(--lab-line);white-space:nowrap}
+.tag.new{background:var(--lab-hi);border-color:#e6c74a}
+.pick{display:flex;gap:4px;flex-wrap:wrap}
+.pick button{font:inherit;font-size:12px;border:1px solid var(--lab-line);background:var(--lab-card);color:var(--lab-ink);padding:3px 9px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.pick button.on{background:var(--lab-ink);color:var(--lab-bg);border-color:var(--lab-ink)}
+.note-in{width:100%;margin-top:6px;font:inherit;font-size:12.5px;border:1px solid var(--lab-line);border-radius:8px;padding:5px 8px;background:var(--lab-card);color:var(--lab-ink)}
+.opt{background:var(--lab-card);border:1px solid var(--lab-line);border-radius:16px;padding:16px;margin-bottom:22px}
+.stage{overflow-x:auto;border-radius:12px;background:#dcdce1;padding:14px}
+.stage.mob{display:flex;justify-content:center}
+.stage-cap{font-size:12.5px;color:var(--lab-muted);margin:0 0 8px}
+.frames{display:flex;gap:22px;justify-content:center;flex-wrap:wrap}
+.fcap{text-align:center;font-size:12.5px;color:var(--lab-muted);margin-top:8px;max-width:393px}
+.copy-out{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospace;border:1px solid var(--lab-line);border-radius:10px;padding:10px;background:var(--lab-bg);color:var(--lab-ink)}
+.btn-lab{font:inherit;font-size:13px;border:0;background:var(--lab-ink);color:var(--lab-bg);padding:8px 14px;border-radius:999px;cursor:pointer}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px;color:var(--lab-muted);margin-top:10px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.audit{font-size:12.5px;margin-top:10px}.audit b.ok{color:#15803d}.audit b.bad{color:#b42318}
+
+/* ===== Giao diện sản phẩm ===== */
+body.b-neutral{--p:#18181b;--on-p:#fff;--ps:#f1f1f4}
+body.b-innvie{--p:#0036B5;--on-p:#fff;--ps:#e9eefb}
+body.b-delta{--p:#2E7449;--on-p:#fff;--ps:#e8f2ec}
+.app{--surf:#fff;--sub:#f8f8fa;--well:#f4f4f6;--line:#ececf0;--line2:#e2e2e7;--ink:#17171a;--ink2:#54545e;--ink3:#8e8e98;--red:#b42318;
+  color:var(--ink);font:13.5px/1.45 Inter,sans-serif;background:var(--surf);letter-spacing:-.003em;position:relative}
+.app *{box-sizing:border-box}
+.ic{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle}
+.ic.s{width:13px;height:13px}.ic.l{width:18px;height:18px}
+.row{display:flex;align-items:center;gap:8px}
+.grow{flex:1;min-width:0}
+.faint{color:var(--ink3)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;font-variant-numeric:tabular-nums;letter-spacing:0}
+.btn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--line2);background:var(--surf);color:var(--ink);font:500 13px Inter,sans-serif;white-space:nowrap;cursor:pointer}
+.btn.pri{background:var(--p);border-color:var(--p);color:var(--on-p)}
+.btn.sm{height:28px;padding:0 11px;font-size:12.5px}
+.btn.icon{width:34px;padding:0;justify-content:center}
+.btn.blk{width:100%;justify-content:center;height:46px;font-size:14.5px;font-weight:600}
+.obtn{width:100%;justify-content:center;height:40px;font-size:13.5px;font-weight:600;margin-top:12px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:14px}
+.sk{background:var(--well);border-radius:7px;height:10px}
+/* trạng thái: icon theo nhóm (✓ xong · đồng hồ chờ · ▶ đang làm · ✕ từ chối · vòng đứt chưa tạo) */
+.st{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 8px;border-radius:6px;font-size:12px;font-weight:500;white-space:nowrap;background:var(--c-bg);color:var(--c-tx)}
+.st::before{content:"";width:13px;height:13px;flex:none;background:var(--c-tx);-webkit-mask:var(--c-ic) center/contain no-repeat;mask:var(--c-ic) center/contain no-repeat}
+.st.bd{border-radius:999px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c-tx) 35%,transparent)}
+.c-lap{--c-bg:#f1f1f4;--c-tx:#4b4b55;--c-ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9' stroke-dasharray='3.2 3.2'/%3E%3C/svg%3E")}
+.c-chay{--c-bg:#fff4e2;--c-tx:#a5560a;--c-ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9.5'/%3E%3Cpath d='M10 8.5l5 3.5-5 3.5z' fill='black'/%3E%3C/svg%3E")}
+.c-cho{--c-bg:#ebf1ff;--c-tx:#1d4ed8;--c-ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9.5'/%3E%3Cpath d='M12 7.5V12l3 2'/%3E%3C/svg%3E")}
+.c-duyet{--c-bg:#e8f6ee;--c-tx:#15803d;--c-ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9.5'/%3E%3Cpath d='M8 12.5l2.8 2.8L16.5 9.5'/%3E%3C/svg%3E")}
+.c-huy{--c-bg:#fdeeee;--c-tx:#b42318;--c-ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9.5'/%3E%3Cpath d='M9 9l6 6M15 9l-6 6'/%3E%3C/svg%3E")}
+.rs{font-weight:500;color:var(--c-tx);white-space:nowrap}
+.ptag{display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:5px;font-size:10.5px;font-weight:600;border:1px dashed var(--ink3);color:var(--ink2);white-space:nowrap}
+.ptag2{display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:5px;font-size:10.5px;font-weight:600;background:#fff7ed;color:#c2410c;border:1px dashed #fdba74;white-space:nowrap}
+.mtag{display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:5px;font-size:10.5px;font-weight:600;background:#f2ecff;color:#6d28d9;white-space:nowrap}
+.vtag{display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:5px;font-size:10.5px;font-weight:600;background:var(--ps);color:var(--p);white-space:nowrap}
+/* icon nghiệp vụ + chấm trạng thái ở góc */
+.bi{position:relative;width:40px;height:40px;border-radius:10px;background:#f4f4f6;display:grid;place-items:center;color:#54545e;flex:none}
+.bi i{position:absolute;right:-3px;bottom:-3px;width:12px;height:12px;border-radius:50%;border:2px solid #fff}
+/* nhãn góc thẻ: Phát sinh trên trái (R16), Ở đây trên phải */
+.psb,.here{position:absolute;top:-10px;z-index:4;display:inline-flex;align-items:center;gap:3px;height:20px;border-radius:999px;font-size:10.5px;font-weight:600;white-space:nowrap;box-shadow:0 0 0 2px #f3f3f6}
+.psb{left:10px;padding:0 7px 0 5px;background:#fff7ed;color:#c2410c;border:1px dashed #fdba74}
+.here{right:-8px;padding:0 8px 0 6px;background:var(--p);color:var(--on-p)}
+.psb .ic,.here .ic{width:12px;height:12px;stroke-width:2.2}
+
+/* ---- sơ đồ ngang (web) ---- */
+.gwrap{position:relative}
+.gwrap svg.edges{position:absolute;inset:0;overflow:visible;pointer-events:none}
+.gn{position:absolute;background:var(--surf);border:1px solid var(--line2);border-radius:12px;cursor:pointer;display:flex;flex-direction:row;align-items:center;gap:10px;padding:14px;transition:opacity .15s,transform .15s,box-shadow .15s}
+.gn:hover{border-color:var(--ink3)}
+.gn.plan{border-style:dashed}.gn.fork{background:var(--sub)}
+.gn .gb{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+.gn .gb b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gn .id{font-size:12px;color:var(--ink2);white-space:nowrap}.gn .id.na{color:var(--ink3)}
+.gn .debt{display:flex;align-items:center;gap:4px;overflow:hidden;text-overflow:ellipsis}
+.gn .fst{flex:none;margin-left:auto;font-size:11.5px;padding:0 7px}
+.gn.sel{border:2px solid var(--p);box-shadow:0 0 0 4px color-mix(in srgb,var(--p) 20%,transparent),0 10px 24px rgba(0,0,0,.14);transform:translateY(-2px);z-index:3}
+.gwrap.has-sel .gn:not(.sel){opacity:.5}.gwrap.has-sel .gn:not(.sel):hover{opacity:.85}
+svg path.dimp{opacity:.25}
+svg path.run{stroke:#fff;stroke-opacity:.75;stroke-dasharray:10 70;animation:flow 1.6s linear infinite}
+@keyframes flow{from{stroke-dashoffset:80}to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){svg path.run{animation:none}}
+/* nhãn điều kiện trên đường: 1 dòng, không cắt chữ (R17) */
+.elab-c{position:absolute;z-index:2;display:flex;justify-content:center}
+.elab{display:inline-block;line-height:13px;padding:3px 8px;border-radius:999px;background:var(--surf);border:1px solid var(--line2);font-size:10.5px;font-weight:500;color:var(--ink2);white-space:nowrap}
+.elab.cnd{font-weight:600;cursor:pointer}.elab.cnd.ok{background:#e8f6ee;color:#15803d;border-color:#b7e2c6}
+.ctip{position:absolute;z-index:8;width:220px;background:var(--surf);border:1px solid var(--line2);border-radius:10px;box-shadow:0 10px 24px rgba(0,0,0,.14);padding:10px 12px;font-size:12px;display:flex;flex-direction:column;gap:6px;cursor:default}
+.ctip>div{display:flex;gap:6px;align-items:flex-start;color:var(--ink2)}.ctip>div.ok{color:var(--ink)}.ctip>div.ok .ic{color:#16a34a;flex:none;margin-top:1px}
+/* popup */
+.app.poponly{background:transparent}
+.modal{background:var(--surf);border-radius:16px;padding:18px 20px 20px;box-shadow:0 1px 3px rgba(0,0,0,.08);width:1132px}
+.modal-h{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.modal-h h3{margin:0;font:800 17px Manrope,sans-serif}
+.mgrid{position:relative}
+.mgraph{overflow:auto;padding:16px 12px 10px;background:#f3f3f6;border-radius:12px;cursor:grab}.mgraph.drag{cursor:grabbing;user-select:none}
+.zi{transform-origin:0 0}
+.zbar{position:absolute;left:12px;bottom:12px;z-index:5;display:flex;align-items:center;gap:4px;background:var(--surf);border:1px solid var(--line2);border-radius:999px;padding:3px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.zbar .btn{height:26px;border:0}.zbar .btn.icon{width:26px;font-size:15px}
+.zv{font-size:12px;min-width:40px;text-align:center;color:var(--ink2)}
+.lgc{position:absolute;top:12px;left:12px;z-index:5;background:var(--surf);border:1px solid var(--line2);border-radius:12px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.06);font-size:12px;display:flex;flex-direction:column;gap:5px}
+.lgbar{display:flex;height:6px;border-radius:3px;overflow:hidden;gap:2px;min-width:220px}.lgbar i{display:block;height:100%}
+.lgr{display:flex;flex-wrap:wrap;gap:4px 12px;color:var(--ink2);align-items:center}
+.lgr span{display:inline-flex;align-items:center;gap:5px}.lgr i{width:8px;height:8px;border-radius:50%;display:inline-block}.lgr b{color:var(--ink);font-weight:600}
+.mside{position:absolute;top:12px;right:12px;bottom:12px;width:300px;background:var(--surf);border:1px solid var(--line2);border-radius:12px;padding:14px;box-shadow:0 12px 32px rgba(0,0,0,.16);overflow:auto;z-index:6;display:flex;flex-direction:column}
+.mside>*{flex:none}
+/* góp ý 11/10: nút Mở chứng từ ghim đáy panel */
+.mside .obtn{margin-top:auto;position:sticky;bottom:0;box-shadow:0 -10px 0 var(--surf)}
+.mside .alog{margin-bottom:12px}
+.mside .xbtn{position:absolute;top:10px;right:10px;z-index:2}
+
+/* ---- panel chi tiết bước — kiểu C (chốt 12/10): đầu panel + lịch sử + Mở chứng từ ---- */
+.pbh{display:flex;align-items:center;gap:10px}
+.pbh .gb{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+.pbh .gb b{font:800 15px Manrope,sans-serif}
+.pbh .gb .id{font-size:12px;color:var(--ink2)}
+.pbh .pr{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none}
+.pB-top{margin:-14px -14px 0;padding:14px 14px 0;background:var(--sub);border-bottom:1px solid var(--line);border-radius:12px 12px 0 0}
+.pB-top .pbh{padding-right:34px}
+.ptg{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;padding-left:50px}
+.stband{display:flex;align-items:center;gap:8px;margin:12px -14px 0;padding:8px 14px;background:var(--c-bg);color:var(--c-tx);font-size:12.5px;border-top:1px solid var(--line)}
+.stband::before{content:"";width:16px;height:16px;flex:none;background:var(--c-tx);-webkit-mask:var(--c-ic) center/contain no-repeat;mask:var(--c-ic) center/contain no-repeat}
+.stband b{font-weight:600}.stband span{margin-left:auto;font-size:11.5px;opacity:.85}
+.pM-top{padding-bottom:12px;border-bottom:1px solid var(--line)}
+.dh{font-size:11px;font-weight:600;color:var(--ink3);margin:14px 0 8px}
+.rl{display:flex;align-items:center;gap:8px;padding:7px 0;border-top:1px solid var(--line);font-size:12.5px}
+/* lịch sử hoạt động — theo Dòng lịch sử 09/10 (Figma 5457:95404): icon tròn 28 theo hành động, tên người đậm, lý do khi từ chối */
+.alog>div{display:flex;gap:10px;position:relative;padding-bottom:14px}
+.alog>div:not(:last-child)::after{content:"";position:absolute;left:13.5px;top:30px;bottom:2px;width:1px;background:var(--line2)}
+.alog .li{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--well);color:var(--ink2)}
+.alog .li .ic{width:14px;height:14px;stroke-width:2}
+.alog .li.ok{background:#e8f6ee;color:#15803d}.alog .li.bad{background:#fdeeee;color:#b42318}
+.alog .tx{flex:1;min-width:0;font-size:12.5px;padding-top:4px}.alog .tx b{font-weight:600}
+.alog .tx .act{color:var(--ink2);margin-top:1px}
+.alog .tx span{display:block;font-size:11.5px;color:var(--ink3);margin-top:2px}
+.alog .tx q{display:block;margin-top:6px;padding:6px 9px;border-radius:8px;background:#fdeeee;color:var(--ink2);quotes:none;font-size:12px}
+
+/* ---- mobile ---- */
+.phone{width:393px;height:780px;border-radius:44px;background:#0d0d0f;padding:10px;flex:none;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.scr{width:100%;height:100%;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;background:#fff}
+.sb{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 26px 0 30px;font:600 14px Inter,sans-serif;flex:none}
+.nav{height:48px;display:flex;align-items:center;gap:6px;padding:0 10px;flex:none}
+.nav .t{flex:1;min-width:0;text-align:center}.nav .t b{display:block;font:700 15px Manrope,sans-serif}.nav .t span{font-size:11.5px;color:var(--ink3)}
+.mbody{flex:1;overflow:auto;padding:4px 16px 16px}
+.mfoot{flex:none;padding:10px 16px 26px;border-top:1px solid var(--line)}
+.msum{padding:12px 14px;margin-top:8px;cursor:pointer}
+.msum .r1{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--ink3)}
+.msum .mname{display:flex;align-items:center;gap:8px;margin-top:4px}.msum .mname b{font:800 16px Manrope,sans-serif;flex:1;min-width:0}
+.msum .msub{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--ink3)}
+.msum .msub .lgbar{min-width:0;width:84px;height:4px;flex:none}
+.msum .from{font-size:12.5px;color:var(--ink2);margin-top:8px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.dim-bg{position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:20}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:21;background:#fff;border-radius:22px 22px 0 0;padding:8px 16px 22px;max-height:86%;overflow:auto}
+.grab{width:38px;height:4px;border-radius:2px;background:var(--line2);margin:0 auto 10px}
+.sheet h4{margin:0 0 2px;font:800 17px Manrope,sans-serif}
+.sheet .sub{font-size:12.5px;color:var(--ink3);margin-bottom:12px}
+.back{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--ink2);margin:0 0 12px -4px;cursor:pointer}
+.mlgc{position:static;margin-bottom:10px;box-shadow:none}
+.mtree{background:#f3f3f6;border-radius:12px;padding:4px 0}
+.tscroll{overflow-x:auto;padding:12px 10px 6px}
+.tg2{position:relative}.tg2>svg{position:absolute;inset:0;overflow:visible}
+.tn{position:absolute;background:#fff;border:1px solid var(--line2);border-radius:12px;display:flex;align-items:center;gap:8px;padding:12px;cursor:pointer}
+.tn.plan{border-style:dashed}.tn.fork{background:var(--sub)}
+.tn .bi{width:32px;height:32px;border-radius:9px}.tn .bi .ic{width:16px;height:16px}.tn .bi i{width:10px;height:10px}
+.tn .gb{display:flex;flex-direction:column;gap:1px;min-width:0}
+.tn b{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tn .rs{font-size:10.5px;overflow:hidden;text-overflow:ellipsis}
+.tn .psb{top:-9px;left:6px;height:18px;font-size:10px}.tn .here{top:-9px;right:-6px;height:18px;font-size:10px}
+.tlab{position:absolute;transform:translate(-50%,-50%);z-index:2;white-space:nowrap;height:16px;line-height:14px;padding:0 6px;border-radius:999px;font-size:9.5px;font-weight:600;background:#fff;border:1px solid var(--line2);color:var(--ink2)}
+.tlab.cnd2.ok{background:#e8f6ee;color:#15803d;border-color:#b7e2c6}
+</style>
+</head>
+<body class="b-neutral">
+<div class="lab-top">
+  <h1>Tiến trình rẽ nhánh — bản chốt</h1>
+  <div class="lab-ctl">Kịch bản <div class="lab-opts" id="ctl-sc"></div></div>
+  <div class="lab-ctl">Màu <div class="lab-opts" id="ctl-br"></div></div>
+  <nav class="lab-nav"><a href="#chot-log">0. Đã chốt</a><a href="#mo-hinh">1. Mô hình nhánh</a><a href="#quy-tac">2. Quy tắc</a><a href="#web">3. Web</a><a href="#mobile">4. Mobile</a><a href="#tach">5. Tách nghĩa</a><a href="#chot">6. Phiếu chốt</a></nav>
+</div>
+<main class="lab-main">
+<section class="sec" id="chot-log">
+  <h2>0. Đã chốt (11–12/10/2026)</h2>
+  <div class="lab-box"><div class="tblw"><table class="lt" id="done"></table></div></div>
+</section>
+
+<section class="sec" id="mo-hinh">
+  <h2>1. Mô hình nhánh</h2>
+  <p>Quy trình là một cây: mỗi bước nối về đúng bước sinh ra nó, kèm lý do phát sinh.</p>
+  <div class="lab-box">
+    <div class="tblw"><table class="lt">
+      <tr><th>Thành phần</th><th>Nghĩa nghiệp vụ</th><th>Nguồn trong SRS cũ</th></tr>
+      <tr><td><b>Bước</b> (nút)</td><td>1 bản ghi nghiệp vụ: tên, mã, trạng thái. Nhiều phiếu cùng loại thì mỗi phiếu là 1 bước riêng, ghi lần 1, lần 2…</td><td>UC00.00.02 — Bước</td></tr>
+      <tr><td><b>Nguồn</b> (đường nối về bước cha)</td><td>Bước này tạo từ bản ghi nào, bằng hành động gì</td><td>Cột "Trigger phát sinh" · UC00.00.03</td></tr>
+      <tr><td><b>Bước chính</b></td><td>Bước có sẵn trong luồng, kể cả bước chỉ có khi thoả điều kiện</td><td>Cột "Step/feature ban đầu"</td></tr>
+      <tr><td><b>Nhánh phát sinh</b> — nhãn "Phát sinh" góc trên trái thẻ (R16)</td><td>Chỉ xuất hiện khi điều kiện đã xảy ra; lý do (mã TH + điều kiện) ở panel chi tiết</td><td>Cột "Trường hợp phát sinh"</td></tr>
+      <tr><td><b>Ngã rẽ chưa chốt</b> — hình thoi</td><td>Bước sau phụ thuộc 1 lựa chọn chưa có; chọn thì thấy các hướng có thể đi</td><td>"Báo giá chưa xác định nơi sửa → N/A"</td></tr>
+    </table></div>
+    <div class="legend" id="legend"></div>
+  </div>
+</section>
+
+<section class="sec" id="quy-tac">
+  <h2>2. Quy tắc chung</h2>
+  <p>Đã điền sẵn theo phiếu chốt của anh; R4 đã viết lại theo ghi chú.</p>
+  <div class="lab-box"><div class="tblw"><table class="lt" id="rules"></table></div><div class="audit" id="audit"></div></div>
+</section>
+
+<section class="sec" id="web">
+  <h2>3. Web — popup sơ đồ</h2>
+  <p>Mở từ dòng quy trình đầu màn chi tiết. Chọn 1 bước thì panel chi tiết (kiểu C) nổi bên phải; bấm ra ngoài để đóng; lăn chuột để zoom, kéo để di chuyển.</p>
+  <div id="web-final"></div>
+</section>
+
+<section class="sec" id="mobile">
+  <h2>4. Mobile — sheet sơ đồ</h2>
+  <p>3 khung là 3 trạng thái nối tiếp: màn chi tiết → sheet sơ đồ → chi tiết bước.</p>
+  <div id="mob-final"></div>
+</section>
+
+<section class="sec" id="tach">
+  <h2>5. Tách nghĩa CMP-09 (đã chốt 11/10)</h2>
+  <p>CMP-09 đổi tên thành <b>Liên quy trình</b>. 3 loại còn lại thôi dùng CMP-09.</p>
+  <div class="lab-box"><div class="tblw"><table class="lt">
+    <tr><th>Loại</th><th>Đang dùng ở</th><th>Đề xuất</th><th>Chọn</th></tr>
+    <tr><td><b>Quy trình nhiều nghiệp vụ</b></td><td>SRS cũ UC00.00.02 / UC00.01.02</td><td><b>CMP-09 — Liên quy trình</b>, vẽ dạng cây như bản chốt này</td><td><div class="pick" data-rule="T1"></div></td></tr>
+    <tr><td>Vòng đời 1 bản ghi</td><td><code>jobid-finish-flow</code> #3 (Đang ở hiện trường → CS đã nhận → Đã giao khách)</td><td>Không dùng CMP-09: nhãn trạng thái + Lịch sử (CMP-08)</td><td><div class="pick" data-rule="T2"></div></td></tr>
+    <tr><td>Form nhiều bước</td><td>Lab web — Lập Lệnh</td><td>Không dùng CMP-09: mẫu "Form theo bước"</td><td><div class="pick" data-rule="T3"></div></td></tr>
+    <tr><td>Danh sách việc phải làm</td><td><code>field-work-flow</code> #4 · <code>jobid-complete-flow</code> #11</td><td>Không dùng CMP-09: checklist</td><td><div class="pick" data-rule="T4"></div></td></tr>
+  </table></div></div>
+</section>
+
+<section class="sec" id="chot">
+  <h2>6. Phiếu chốt</h2>
+  <p>Lựa chọn được lưu trên trình duyệt này. Bấm "Sao chép kết quả" rồi dán lại cho em.</p>
+  <div class="lab-box">
+    <textarea class="copy-out" id="out" readonly></textarea>
+    <div class="row" style="margin-top:10px;gap:10px"><button class="btn-lab" id="copy">Sao chép kết quả</button><span class="lab-muted" id="copied"></span></div>
+  </div>
+</section>
+</main>
+
+<script>
+/* ===================== Icon ===================== */
+const IC={
+ check:'<path d="M5 12.5l4.2 4.2L19 7"/>', x:'<path d="M6 6l12 12M18 6L6 18"/>',
+ alert:'<path d="M12 3l9.5 17h-19z"/><path d="M12 10v4.5M12 17.5v.2"/>',
+ search:'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
+ wrench:'<path d="M14.5 6.5a4 4 0 0 0 5 5l-8.5 8.5a2.1 2.1 0 0 1-3-3l8.5-8.5a4 4 0 0 0-2-2z"/>',
+ box:'<path d="M4 8l8-4 8 4v8l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v8"/>',
+ cart:'<path d="M3 4h2.5l2.2 11h10.6l2-8H7"/><circle cx="9" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/>',
+ cash:'<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/>',
+ shield:'<path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/>',
+ fuel:'<path d="M5 20V5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v15M4 20h11M14 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3M7.5 8h4"/>',
+ q:'<path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17v.2"/>',
+ down:'<path d="M6 9l6 6 6-6"/>', up:'<path d="M6 15l6-6 6 6"/>', right:'<path d="M9 6l6 6-6 6"/>', left:'<path d="M15 6l-6 6 6 6"/>',
+ clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+ dots:'<circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/>',
+ ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v5H5V6h5"/>',
+ tree:'<circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="12" r="2"/><path d="M6 7v10M6 12h3a3 3 0 0 0 3-3V9M12 12h4"/>',
+ pin:'<path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/>',
+ plus:'<path d="M12 5v14M5 12h14"/>', send:'<path d="M4.5 12.5l15-8-5.5 15-2.6-6.4z"/>',
+ list:'<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
+ branch:'<circle cx="6" cy="5.5" r="2"/><circle cx="6" cy="18.5" r="2"/><circle cx="18" cy="8" r="2"/><path d="M6 7.5v9M18 10c0 4.5-6 3.5-10.6 7"/>'
+};
+const I=(n,c="")=>`<svg class="ic ${c}" viewBox="0 0 24 24">${IC[n]||""}</svg>`;
+
+/* ===================== Kịch bản (theo bảng phát sinh SRS cũ, dữ liệu mẫu) + quy tắc ===================== */
+const SC={
+ s1:{lbl:"Nhánh lồng nhau",name:"Sửa chữa xe khách hàng",full:"Sửa chữa xe khách hàng — khách DK05 trả trước",cases:"2 phiếu Xuất kho là 2 bước anh em; TH1 Bồi thường; TH2 Nhập kho dư sinh tiếp TH3 Bồi thường",
+  rec:{t:"Lệnh sửa chữa",id:"LSC-0930",st:"Đã chốt lệnh",c:"c-duyet",bc:"Xưởng / Lệnh sửa chữa"},view:"lsc",pri:"Tạo phiếu xuất kho",
+  nodes:[
+   {k:"bg",n:"Chẩn đoán",ic:"search",s:"done",main:1,recs:[{id:"BG-0140",st:"Đã phê duyệt",c:"c-duyet",t:"02/10 08:10"}]},
+   {k:"lsc",n:"Sửa chữa",ic:"wrench",s:"done",sub:"Đã chốt lệnh",from:"bg",main:1,trig:"Phê duyệt báo giá",recs:[{id:"LSC-0930",st:"Đã chốt lệnh",c:"c-duyet",t:"06/10 17:30"}]},
+   {k:"pxk1",n:"Xuất kho",ic:"box",s:"done",from:"lsc",main:1,trig:"Ấn Xuất kho trên Lệnh SC",recs:[{id:"PXK-0410",st:"Đã phê duyệt",c:"c-duyet",t:"03/10 09:00"}]},
+   {k:"pxk2",n:"Xuất kho",ic:"box",s:"done",from:"lsc",main:1,trig:"Ấn Xuất kho trên Lệnh SC",recs:[{id:"PXK-0415",st:"Đã phê duyệt",c:"c-duyet",t:"05/10 10:20"}]},
+   {k:"tt",n:"Thanh toán",ic:"cash",s:"doing",sub:"Chờ thanh toán",from:"lsc",join:["pxk1","pxk2"],main:1,trig:"Chốt lệnh SC, các phiếu xuất kho đã xong",cond:"Chốt lệnh SC · khách DK05 trả trước",recs:[{id:"TT-0160",st:"Chờ thanh toán",c:"c-cho",t:"06/10 17:31"}]},
+   {k:"bt1",n:"Bồi thường",ic:"shield",s:"doing",sub:"Chờ phê duyệt",from:"lsc",trig:"Chốt lệnh SC",cond:"TH1 · SL hỏng 1 > 0",recs:[{id:"BT-0031",st:"Chờ phê duyệt",c:"c-cho",t:"06/10 17:31"}]},
+   {k:"pnk",n:"Nhập kho",ic:"box",s:"done",from:"lsc",trig:"Chốt lệnh SC",cond:"TH2 · SL thừa 5 > 0",recs:[{id:"PNK-0095",st:"Đã phê duyệt",c:"c-duyet",t:"07/10 08:40",nt:"nhập 3/5"}]},
+   {k:"bt2",n:"Bồi thường",ic:"shield",s:"todo",from:"pnk",trig:"Phê duyệt nhập kho",cond:"TH3 · nhập 3 < chốt 5",recs:[]}
+  ]},
+ s2:{lbl:"Gốc độc lập",name:"Phục hồi phụ tùng hỏng",full:"Phục hồi phụ tùng hỏng — ban đầu là luồng độc lập",cases:"Gốc không có bước chính; mọi bước đều phát sinh; Mua HHDV ngoài sinh tiếp Thanh toán trả sau (công nợ)",
+  rec:{t:"Đơn mua HHDV",id:"DMH-0250",st:"Đã phê duyệt",c:"c-duyet",bc:"Xưởng / Mua HHDV"},view:"dmh",pri:"Thu hồi",
+  nodes:[
+   {k:"lsc",n:"Phục hồi",ic:"wrench",s:"doing",sub:"Đang sửa chữa",main:1,recs:[{id:"LSC-0921",st:"Đang sửa chữa",c:"c-chay",t:"04/10 13:00"}]},
+   {k:"pxk",n:"Xuất kho",ic:"box",s:"done",from:"lsc",trig:"Ấn Xuất kho",cond:"TH1 · xuất kho phục vụ sửa chữa",recs:[{id:"PXK-0420",st:"Đã phê duyệt",c:"c-duyet",t:"04/10 15:10"}]},
+   {k:"dmh",n:"Mua HHDV ngoài",ic:"cart",s:"done",from:"lsc",trig:"Ấn Mua HHDV ngoài",cond:"TH2 · thuê dịch vụ ngoài",recs:[{id:"DMH-0250",st:"Đã phê duyệt",c:"c-duyet",t:"05/10 09:30"}]},
+   {k:"tt",n:"Thanh toán",ic:"cash",s:"todo",from:"dmh",main:1,trig:"Phê duyệt lần 2 đơn mua",cond:"NCC trả sau",debt:"Gara Minh Phát",recs:[]}
+  ]},
+ s3:{lbl:"Ngã rẽ chưa chốt",name:"Sửa chữa xe Delta",full:"Sửa chữa xe Delta — có báo cáo sự cố, báo giá chưa duyệt",cases:"Báo giá chưa chốt nơi sửa nên bước sau là ngã rẽ: xưởng nhà hoặc xưởng ngoài",
+  rec:{t:"Báo giá chẩn đoán",id:"BG-0151",st:"Chờ phê duyệt",c:"c-cho",bc:"Xưởng / Báo giá"},view:"bg",pri:"Phê duyệt",
+  nodes:[
+   {k:"bcsc",n:"Sự cố",ic:"alert",s:"done",main:1,recs:[{id:"BCSC-0402",st:"Đã duyệt",c:"c-duyet",t:"08/10 06:50"}]},
+   {k:"bg",n:"Chẩn đoán",ic:"search",s:"doing",sub:"Chờ phê duyệt",from:"bcsc",main:1,trig:"Tạo báo cáo sự cố",cond:"Cách giải quyết = xưởng",recs:[{id:"BG-0151",st:"Chờ phê duyệt",c:"c-cho",t:"08/10 09:15"}]},
+   {k:"fk",n:"Chưa xác định",ic:"q",s:"fork",from:"bg",main:1,trig:"Phê duyệt báo giá",cond:"Tuỳ nơi sửa",recs:[],
+    opts:[["Xưởng nhà","Sửa chữa → Xuất kho"],["Xưởng ngoài","Mua HHDV → Thanh toán"]]}
+  ]},
+ s4:{lbl:"Từ chối + công nợ",name:"Sửa chữa xe Delta",full:"Sửa chữa xe Delta — xưởng ngoài, đơn mua bị từ chối",cases:"Ngã rẽ đã chốt (xưởng ngoài) · bước bị từ chối · bước là bảng công nợ",
+  rec:{t:"Đơn mua HHDV",id:"DMH-0231",st:"Đã từ chối",c:"c-huy",bc:"Xưởng / Mua HHDV"},view:"dmh",pri:"Sửa và gửi lại",
+  nodes:[
+   {k:"bcsc",n:"Sự cố",ic:"alert",s:"done",main:1,recs:[{id:"BCSC-0398",st:"Đã duyệt",c:"c-duyet",t:"03/10 18:20"}]},
+   {k:"bg",n:"Chẩn đoán",ic:"search",s:"done",from:"bcsc",main:1,trig:"Tạo báo cáo sự cố",recs:[{id:"BG-0131",st:"Đã phê duyệt",c:"c-duyet",t:"06/10 10:30"}]},
+   {k:"dmh",n:"Mua HHDV",ic:"cart",s:"rej",sub:"Đã từ chối",from:"bg",main:1,trig:"Phê duyệt báo giá",cond:"Nơi sửa = xưởng ngoài",recs:[{id:"DMH-0231",st:"Đã từ chối",c:"c-huy",t:"07/10 15:05"}]},
+   {k:"tt",n:"Thanh toán",ic:"cash",s:"todo",from:"dmh",main:1,trig:"Phê duyệt lần 2 đơn mua",cond:"NCC trả sau",debt:"Gara Minh Phát",recs:[]}
+  ]},
+ s5:{lbl:"Liên module",name:"Sửa chữa dùng dầu",full:"Sửa chữa dùng dầu — Xưởng + Cây dầu",cases:"Bước thuộc module khác (Cây dầu) phát sinh từ Lệnh SC",
+  rec:{t:"Lệnh sửa chữa",id:"LSC-0944",st:"Đang sửa chữa",c:"c-chay",bc:"Xưởng / Lệnh sửa chữa"},view:"lsc",pri:"Chốt lệnh",
+  nodes:[
+   {k:"bg",n:"Chẩn đoán",ic:"search",s:"done",main:1,recs:[{id:"BG-0160",st:"Đã phê duyệt",c:"c-duyet",t:"09/10 08:00"}]},
+   {k:"lsc",n:"Sửa chữa",ic:"wrench",s:"doing",sub:"Đang sửa chữa",from:"bg",main:1,trig:"Phê duyệt báo giá",recs:[{id:"LSC-0944",st:"Đang sửa chữa",c:"c-chay",t:"09/10 08:30"}]},
+   {k:"pxk",n:"Xuất kho",ic:"box",s:"doing",sub:"Chờ phê duyệt",from:"lsc",main:1,trig:"Ấn Xuất kho trên Lệnh SC",recs:[{id:"PXK-0431",st:"Chờ phê duyệt",c:"c-cho",t:"09/10 09:00"}]},
+   {k:"cd",n:"Cấp dầu",ic:"fuel",s:"done",from:"lsc",mod:"Cây dầu",trig:"Ấn Cấp dầu trên Lệnh SC",cond:"TH1 · dầu phục vụ sửa chữa (dGas 2)",recs:[{id:"CD-1022",st:"Đã hoàn thành",c:"c-duyet",t:"09/10 10:15"}]}
+  ]},
+ s6:{lbl:"Chưa phát sinh",name:"Phục hồi phụ tùng hỏng",full:"Phục hồi phụ tùng hỏng — chưa phát sinh gì",cases:"Luồng độc lập, chưa có nhánh nào (R11: không hiện)",independent:true,
+  rec:{t:"Lệnh sửa chữa",id:"LSC-0950",st:"Đang sửa chữa",c:"c-chay",bc:"Xưởng / Lệnh sửa chữa"},view:"lsc",pri:"Chốt lệnh",
+  nodes:[{k:"lsc",n:"Phục hồi",ic:"wrench",s:"doing",main:1,recs:[{id:"LSC-0950",st:"Đang sửa chữa",c:"c-chay",t:"10/10 07:00"}]}]}
+};
+
+/* ===================== Quy tắc chung ===================== */
+const RULES=[
+ {k:"R1",t:"Vẽ theo nguồn, không theo thứ tự",p:"Mỗi bản ghi lưu <b>nguồn</b> của nó: tạo từ bản ghi nào, bằng hành động nào. Sơ đồ nối mỗi bước về đúng nguồn, không xếp theo thời gian tạo. Bước chỉ tạo được khi <b>nhiều bước trước cùng xong</b> (Thanh toán sau mọi phiếu xuất kho + chốt lệnh SC) thì nối từ tất cả các bước đó về 1 nút. Ví dụ Thanh toán nối từ Lệnh SC (chốt lệnh) và từ mọi phiếu xuất kho. <b>Nhánh optional</b> chỉ nối vào bước sau khi bước sau thật sự cần nhánh đó xong, hoặc cần 1 hành động trên nhánh đó; không thì không nối.",src:"UC00.00.03 · UC00.01.02 · anh góp ý 11/10",rev:1},
+ {k:"R2",t:"Bước chính và nhánh phát sinh",p:"Nhánh phát sinh có <b>nhãn Phát sinh</b> gắn trên thẻ (vị trí theo R16), thẻ viền liền như bước khác (viền đứt chỉ cho bước chưa tạo); <b>lý do phát sinh</b> (mã TH + điều kiện) chỉ ghi ở panel chi tiết. Kiểu đường không dùng để báo phát sinh.",src:"Bảng phát sinh UC00.00.02 · anh góp ý 12/10",rev:1},
+ {k:"R3",t:"Nhánh sinh tiếp nhánh",p:"Bước phát sinh sinh tiếp bước khác (Nhập kho dư → Bồi thường TH3) thì nối vào chính bước đó.",src:"TH3 Sửa chữa xe khách hàng"},
+ {k:"R4",t:"Mỗi bản ghi là 1 bước",p:"Không gộp. Nhiều phiếu cùng loại, cùng nguồn (2 phiếu Xuất kho) là <b>các bước anh em</b> cùng tên, phân biệt bằng <b>mã chứng từ</b>; không ghi \"lần 1, lần 2\".",src:"Anh chốt 11/10 · bỏ lần 1/2 ngày 12/10",rev:1},
+ {k:"R5",t:"Chỉ vẽ cái đã xảy ra",p:"Nhánh phát sinh chỉ hiện khi điều kiện đã xảy ra. Bước chính chưa tới vẫn hiện, ghi \"Chưa tạo\".",src:"Bảng phát sinh · UC00.00.02"},
+ {k:"R6",t:"Ngã rẽ chưa chốt",p:"Bước sau phụ thuộc lựa chọn chưa có thì vẽ <b>1 nút ngã rẽ</b> \"Chưa xác định\", chọn vào thì thấy các hướng có thể đi.",src:"\"Báo giá chưa xác định nơi sửa → N/A\""},
+ {k:"R7",t:"Trạng thái trên thẻ = trạng thái bản ghi",p:"Thẻ ghi <b>trạng thái của bản ghi</b> (Đã chốt lệnh, Chờ thanh toán, Đã phê duyệt…), tô màu theo nhóm: xanh lá xong, xanh dương đang chờ/đang làm, đỏ từ chối, xám chưa tạo. 4 trạng thái bước (Chưa triển khai · Đang triển khai · Đã thu hồi/từ chối · Đã hoàn thành) chỉ quyết định icon, màu chấm và màu đường nối. Bước bị từ chối không làm mất nhánh con đã có.",src:"UC00.00.02 mục Trạng thái · anh góp ý 12/10",rev:1},
+ {k:"R8",t:"Bước là bảng công nợ",p:"Thanh toán trả sau ghi <b>Công nợ {NCC}</b>, mở bảng công nợ đã lọc theo NCC.",src:"UC00.00.02 lưu ý trả sau"},
+ {k:"R9",t:"Bước thuộc module khác",p:"Gắn nhãn module (vd <b>Cây dầu</b>); mở theo quy tắc xem qua liên kết.",src:"UC00.00.02 Liên module"},
+ {k:"R10",t:"Đang ở đây + đường về gốc",p:"Bước của màn đang mở có nhãn <b>Đang ở đây</b> (không viền riêng — viền màu dành cho bước đang chọn), đường từ gốc tới bước đó tô đậm. Dòng quy trình ở đầu trang ghi \"Bước trước: …\" nếu bản ghi là bước có sẵn, \"Phát sinh từ: …\" nếu là nhánh phát sinh.",src:"UC00.00.02 · anh góp ý 11/10",rev:1},
+ {k:"R11",t:"Luồng độc lập",p:"Chưa có nhánh nào thì không hiện dòng quy trình. Có nhánh đầu tiên thì bản ghi gốc là nút đầu cây.",src:"Phục hồi phụ tùng"},
+ {k:"R12",t:"Dòng tóm tắt",p:"\"Xong x/y bước · n nhánh phát sinh\".",src:"Mới"},
+ {k:"R14",t:"Cơ chế dàn sơ đồ",p:"<b>Cột = bậc</b>: bước ở cột sau bước trước xa nhất của nó, nên bước cùng bậc thẳng cột và bước cần nhiều bước trước luôn nằm sau tất cả. <b>Hàng</b>: bước chính giữ hàng của bước trước, nhánh xuống hàng trống kế tiếp. <b>Đường</b>: chỉ vuông góc, rẽ ngay sau bước trước; đường nhảy qua cột đi rãnh phía trên hàng, không cắt qua thẻ. <b>Nhãn</b> nằm trên đường, ở <b>giữa đường</b> (theo tổng chiều dài); điểm giữa rơi vào đoạn dọc hoặc đoạn đi chung với nhánh anh em thì dời về tâm đoạn ngang riêng gần nhất. Đường có nhãn chạy xuyên giữa các bước con thì chừa thêm nửa hàng để nhãn không sát thẻ. Sau khi dàn, máy tự kiểm đường cắt thẻ và thẻ chồng nhau (bảng dưới).",src:"Anh góp ý 11/10",rev:1},
+ {k:"R15",t:"Đường đang chạy",p:"Đường nối vào bước <b>Đang triển khai</b> là <b>nét liền</b>, có vệt sáng ngắn chạy theo chiều đi (nét đứt chỉ dành cho bước chưa tạo). Máy tắt hiệu ứng khi người dùng bật giảm chuyển động.",src:"Anh góp ý 11/10",rev:1},
+ {k:"R16",t:"Vị trí nhãn Phát sinh",p:"Nhãn <b>Phát sinh</b> (icon nhánh + chữ) gắn cố định ở <b>góc trên trái thẻ</b>, đè nửa lên mép thẻ — đối xứng ghim <b>Ở đây</b> ở góc trên phải. Không đặt nhãn trên đường: nhãn không bao giờ đè đường, đè nhãn điều kiện hay xê dịch theo độ dài đường; đọc được ở mọi mức zoom; web và mobile cùng 1 vị trí. Đường nối vào nhánh phát sinh vẽ như đường thường (màu theo trạng thái, R15). Trên đường chỉ còn nhãn <b>điều kiện</b> của bước chính.",src:"Anh góp ý 12/10",rev:1},
+ {k:"R17",t:"Khe giữa các bước",p:"Đường nối ngắn nhất có thể: <b>khe giữa 2 cột = nhãn dài nhất nằm trên đường + 16px mỗi bên</b>, tối thiểu 64px (sơ đồ không có nhãn thì các cột sát nhau ở 64px); <b>khe giữa 2 hàng 32px</b>. Nhãn điều kiện luôn 1 dòng, không cắt chữ, nên khe nới theo nhãn chứ nhãn không co theo khe. Góc rẽ cách bước trước 16px.",src:"Anh góp ý 12/10",rev:1},
+ {k:"R13",t:"Nút tạo nghiệp vụ tiếp theo",p:"Ở vùng hành động đầu trang (UC00.00.03), không đặt trên sơ đồ.",src:"UC00.00.03"}
+];
+const PRESET={R17:"Đồng ý",R16:"Đồng ý",R14:"Đồng ý",R15:"Đồng ý",T1:"Cần sửa",T2:"Đồng ý",T3:"Đồng ý",T4:"Đồng ý",R1:"Đồng ý",R2:"Đồng ý",R3:"Đồng ý",R4:"Đồng ý",R5:"Đồng ý",R6:"Đồng ý",R7:"Đồng ý",R8:"Đồng ý",R9:"Đồng ý",R10:"Đồng ý",R11:"Đồng ý",R12:"Đồng ý",R13:"Đồng ý"};
+
+
+/* ===================== Trạng thái ===================== */
+const KEY="uilab-progress-v6";
+const FR0=()=>({w:{modal:true,sel:"__view",z:0.72},m1:{sheet:false,sel:null},m2:{sheet:true,sel:null},m3:{sheet:true,sel:"__auto"}});
+let S={sc:"s1",br:"b-neutral",rules:{...PRESET},notes:{T1:"Liên quy trình"},F:FR0()};
+try{const sv=JSON.parse(localStorage.getItem(KEY)||"null");if(sv){S.sc=sv.sc||S.sc;S.br=sv.br||S.br;S.rules=sv.rules||S.rules;S.notes=sv.notes||{};}}catch(e){}
+try{const q=new URLSearchParams(location.search);if(q.get("sc")&&SC[q.get("sc")])S.sc=q.get("sc");}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify({sc:S.sc,br:S.br,rules:S.rules,notes:S.notes}))}catch(e){}};
+const resetFrames=()=>{S.F=FR0();};
+
+/* ===================== Mô hình cây ===================== */
+let C,N,KIDS,ROOT,ANC,JOIN;
+function build(){
+  C=SC[S.sc];N={};KIDS={};C.nodes.forEach(n=>{N[n.k]=n;KIDS[n.k]=[];});
+  C.nodes.forEach(n=>{if(n.from)KIDS[n.from].push(n.k);});
+  JOIN={};C.nodes.forEach(n=>(n.join||[]).forEach(j=>(JOIN[j]=JOIN[j]||[]).push(n.k)));
+  Object.values(KIDS).forEach(a=>a.sort((x,y)=>(N[y].main?1:0)-(N[x].main?1:0)));
+  ROOT=C.nodes.find(n=>!n.from).k;
+  ANC=new Set();let k=C.view;while(k){ANC.add(k);k=N[k].from;}
+  if(S.F.m3.sel==="__auto"){const b=C.nodes.find(n=>n.from&&!n.main)||C.nodes.find(n=>n.k!==C.view)||C.nodes[0];S.F.m3.sel=b.k;}
+}
+const branches=()=>C.nodes.filter(n=>n.from&&!n.main).length;
+const doneN=()=>C.nodes.filter(n=>n.s==="done").length;
+const stepN=()=>C.nodes.filter(n=>n.s!=="fork").length;
+const summary=()=>`Xong ${doneN()}/${stepN()} bước${branches()?` · ${branches()} nhánh phát sinh`:""}`;
+const lc=s=>s.charAt(0).toLowerCase()+s.slice(1);
+
+/* ===================== Mảnh dùng chung ===================== */
+const recTxt=n=>n.recs[0]?.st||(n.s==="fork"?"Chờ chốt nơi sửa":n.debt?"Công nợ":"Chưa tạo");
+const recC=n=>n.recs[0]?.c||"c-lap";
+/* góp ý 11/10: bước có sẵn ghi "Bước trước", chỉ nhánh phát sinh ghi "Phát sinh từ" */
+const ref=k=>`${N[k].n} ${N[k].recs[0]?.id||""}`.trim();
+/* góp ý 11/10: 1 bước có thể có nhiều bước trước (Thanh toán sau mọi phiếu xuất kho) — from = nhánh vẽ cây, join = các bước trước còn lại */
+const srcRef=n=>[...(n.join||[]),n.from].map(ref).join(", ");
+const fromTxt=(n,wrap=s=>`<b>${s}</b>`)=>!n.from?"Bản ghi gốc":n.main?`Bước trước: ${wrap(srcRef(n))}`:`<span class="ptag">Phát sinh</span> từ ${wrap(srcRef(n))}`;
+function idTxt(n,cls="id"){
+  if(n.s==="fork")return `<span class="${cls} na">${n.cond}</span>`;
+  if(n.debt)return `<span class="${cls} debt" title="Công nợ ${n.debt}">${I("list","s")}${n.debt}</span>`;
+  if(!n.recs.length)return `<span class="${cls} na">—</span>`;
+  return `<span class="${cls} mono">${n.recs[0].id}</span>`;
+};
+const tags=n=>`${n.mod?`<span class="mtag">${n.mod}</span>`:""}${n.main?"":'<span class="ptag2">Phát sinh</span>'}${n.k===C.view?'<span class="vtag">Đang ở đây</span>':""}`;
+const addH=(t,h)=>{const m=t.match(/(\d+)\/(\d+) (\d+):(\d+)/);if(!m)return t;let H=+m[3]+h,D=+m[1];if(H>=24){H-=24;D++;}return `${String(D).padStart(2,"0")}/${m[2]} ${String(H).padStart(2,"0")}:${m[4]}`;};
+function docPart(n){
+  if(n.opts)return `<div class="dh">Hướng có thể đi</div>`+n.opts.map(o=>`<div class="rl"><span class="dot fork" style="width:14px;height:14px"></span><b>${o[0]}</b><span class="grow faint">${o[1]}</span></div>`).join("")+`<div class="faint" style="font-size:12px;padding-top:6px">Chốt nơi sửa khi phê duyệt báo giá thì ngã rẽ thành nhánh thật.</div>`;
+  if(n.debt)return `<div class="dh">Chứng từ</div><div class="rl" style="border:0;padding-top:0">${I("list","s")}<span class="grow">Công nợ ${n.debt}</span><span class="st c-lap">Chưa đối soát</span></div><button class="btn pri obtn">Mở bảng công nợ ${I("ext","s")}</button>`;
+  if(!n.recs.length)return `<div class="dh">Chứng từ</div><div class="faint" style="font-size:12.5px">Chưa có bản ghi — tạo từ nút ở đầu trang của ${N[n.from].n}.</div>`;
+  const r=n.recs[0];
+  return `<div class="dh">Chứng từ</div><div class="rl" style="border:0;padding-top:0"><span class="mono" style="font-weight:600">${r.id}</span>${r.nt?`<span class="faint">${r.nt}</span>`:""}<span class="grow"></span><span class="st ${r.c}">${r.st}</span></div>`;
+}
+/* điều kiện để tạo bước có nhiều bước trước: mỗi bước trước phải xong + điều kiện nghiệp vụ */
+function condList(n){
+  /* góp ý 12/10: chip nằm trên đường từ bước nguồn (Sửa chữa) → chỉ liệt kê điều kiện CỦA ĐƯỜNG ĐÓ
+     (vd Chốt lệnh SC + Khách DK05 trả trước). Các phiếu Xuất kho là bước trước riêng (đường riêng), không thuộc chip này. */
+  if(preds(n).length<2||!n.cond)return [];
+  return n.cond.split(" · ").map(c=>{const t=c.charAt(0).toUpperCase()+c.slice(1);
+    return /chốt lệnh/i.test(c)?{t,sub:ref(n.from),ok:N[n.from].s==="done"}:{t,ok:true};});
+}
+const SCOL={done:"#16a34a",doing:"#3b82f6",rej:"#ef4444",todo:"#a1a1aa",fork:"#a1a1aa"};
+const bi=n=>`<span class="bi">${n.s==="fork"?I("q","l"):I(n.ic,"l")}<i style="background:${SCOL[n.s]}"></i></span>`;
+
+/* ===================== Panel chi tiết bước — kiểu C (chốt 12/10) =====================
+   Đầu panel · Lịch sử hoạt động · nút Mở chứng từ ở cuối. Nguồn, điều kiện đã thấy trên sơ đồ nên không lặp lại.
+   Web: đầu nền nhạt, nhãn Đang ở đây / Phát sinh dưới tên, dải trạng thái (chốt D).
+   Mobile: không dùng phần màu; trạng thái pill có viền + nhãn bên phải tên. */
+const PEO={"Cố vấn dịch vụ":"Trần Thu Hà","Quản đốc xưởng":"Phạm Văn Hùng","Kỹ thuật viên":"Lê Minh Tú","Hệ thống":"Hệ thống","Nhân viên cây dầu":"Đỗ Văn Nam","Lái xe":"Nguyễn Văn Bình","Điều phối":"Vũ Thị Lan"};
+const ACT={"Tạo":["plus","","Đã tạo mới"],"Gửi phê duyệt":["send","","Đã gửi phê duyệt"],"Phê duyệt":["check","ok","Đã phê duyệt"],"Từ chối":["x","bad","Đã từ chối phê duyệt"],
+ "Tạo lệnh":["plus","","Đã tạo lệnh"],"Bắt đầu sửa":["wrench","","Đã bắt đầu sửa"],"Chốt lệnh":["check","ok","Đã chốt lệnh"],"Tạo đề nghị thanh toán":["plus","","Đã tạo đề nghị thanh toán"],
+ "Hoàn thành":["check","ok","Đã hoàn thành"],"Báo sự cố":["alert","","Đã báo sự cố"],"Duyệt":["check","ok","Đã duyệt"]};
+const HIST={"Đã phê duyệt":[["Cố vấn dịch vụ","Tạo"],["Cố vấn dịch vụ","Gửi phê duyệt"],["Quản đốc xưởng","Phê duyệt"]],
+ "Chờ phê duyệt":[["Cố vấn dịch vụ","Tạo"],["Cố vấn dịch vụ","Gửi phê duyệt"]],
+ "Đã chốt lệnh":[["Quản đốc xưởng","Tạo lệnh"],["Kỹ thuật viên","Bắt đầu sửa"],["Quản đốc xưởng","Chốt lệnh"]],
+ "Đang sửa chữa":[["Quản đốc xưởng","Tạo lệnh"],["Kỹ thuật viên","Bắt đầu sửa"]],
+ "Chờ thanh toán":[["Hệ thống","Tạo đề nghị thanh toán"]],
+ "Đã từ chối":[["Cố vấn dịch vụ","Tạo"],["Cố vấn dịch vụ","Gửi phê duyệt"],["Quản đốc xưởng","Từ chối","Báo giá vượt hạn mức, cần chào lại giá"]],
+ "Đã hoàn thành":[["Nhân viên cây dầu","Tạo"],["Nhân viên cây dầu","Hoàn thành"]],
+ "Đã duyệt":[["Lái xe","Báo sự cố"],["Điều phối","Duyệt"]]};
+function activityLog(n){
+  const r=n.recs[0];
+  const ev=(HIST[r.st]||[["Hệ thống","Tạo"]]).map((e,i)=>({who:PEO[e[0]]||e[0],a:ACT[e[1]]||["plus","",e[1]],why:e[2],t:addH(r.t,i*2)})).reverse();
+  return `<div class="alog">${ev.map(e=>`<div><span class="li ${e.a[1]}">${I(e.a[0])}</span><div class="tx"><b>${e.who}</b><div class="act">${e.a[2]}</div><span class="mono">${e.t.replace(" ","/2026 ")}</span>${e.why?`<q>Lý do: ${e.why}</q>`:""}</div></div>`).join("")}</div>`;
+}
+const OBTN=`<button class="btn pri obtn">Mở chứng từ ${I("ext","s")}</button>`;
+function panelHead(n,mob){
+  const tg=mob?tags({...n,main:1}):tags(n),gb=`<div class="gb"><b>${n.n}</b>${idTxt(n,"id")}</div>`;
+  if(mob)return `<div class="pM-top"><div class="pbh">${bi(n)}${gb}<div class="pr"><span class="st bd ${recC(n)}">${recTxt(n)}</span>${tg?`<div class="row" style="gap:4px">${tg}</div>`:""}</div></div></div>`;
+  return `<div class="pB-top"><div class="pbh">${bi(n)}${gb}</div>${tg?`<div class="ptg">${tg}</div>`:""}<div class="stband ${recC(n)}"><b>${recTxt(n)}</b>${n.recs[0]?`<span class="mono">${n.recs[0].t}</span>`:""}</div></div>`;
+}
+function panel(n,fid){
+  const h=panelHead(n,fid[0]==="m");
+  if(!n.recs.length)return h+(n.debt||n.opts?docPart(n):`<div class="faint" style="font-size:12.5px;margin-top:12px">Chưa có hoạt động — bước chưa tạo.</div>`);
+  return h+`<div class="dh">Lịch sử hoạt động</div>${activityLog(n)}${OBTN}`;
+}
+
+/* ===================== Sơ đồ ngang (web popup) — thẻ F ===================== */
+const WS={F:{nodeW:290,nodeH:68,boxH:68,rowH:100,ay:34,oy:96,ox:0}};
+/* R17: khe giữa 2 cột = nhãn dài nhất trên đường + 16px mỗi bên, tối thiểu 64px (góp ý 11/10 "gần lại thêm xíu") */
+let _cv;const textW=t=>{_cv=_cv||document.createElement("canvas").getContext("2d");_cv.font="600 10.5px Inter, sans-serif";return _cv.measureText(t).width+18;};
+function colGap(){let m=0;C.nodes.forEach(n=>{const ps=preds(n);
+    if(ps.length===1&&n.main&&n.cond&&n.s!=="fork")m=Math.max(m,textW(n.cond));
+    if(ps.length>1){const cl=condList(n);if(cl.length)m=Math.max(m,textW(`✓ Điều kiện ${cl.length}/${cl.length}`));}});
+  return Math.max(64,Math.ceil(m)+32);}
+const preds=n=>[...(n.from?[n.from]:[]),...(n.join||[])];
+const ECOL={done:"#5bb97b",doing:"#3b82f6",rej:"#ef4444",todo:"#b4b4bd",fork:"#b4b4bd"};
+const edgeColor=(n,on)=>ECOL[n.s]||"#b4b4bd";
+const ord=n=>ANC.has(n.k)?2:n.main?1:0;
+function layoutH(){
+  const rank={};const rk=k=>rank[k]??(rank[k]=preds(N[k]).length?1+Math.max(...preds(N[k]).map(rk)):0);
+  C.nodes.forEach(n=>rk(n.k));
+  const y={};let next=0;
+  const kidsOf=k=>{const ks=KIDS[k].filter(c=>!N[c].join);const m=ks.filter(c=>N[c].main),b=ks.filter(c=>!N[c].main),h=Math.ceil(b.length/2);return [...b.slice(0,h),...m,...b.slice(h)];};
+  /* đường có nhãn đi xuyên giữa các bước con (vd Sửa chữa → Thanh toán) → chừa thêm khoảng ở giữa để nhãn không sát thẻ */
+  const lblThrough=k=>C.nodes.some(n=>n.join&&n.from===k&&n.cond);
+  const place=k=>{const ks=kidsOf(k);if(!ks.length){y[k]=next++;return;}
+    const mid=lblThrough(k)&&ks.length>1?Math.floor(ks.length/2):-1;
+    ks.forEach((c,i)=>{if(i===mid)next+=0.5;place(c);});y[k]=(y[ks[0]]+y[ks[ks.length-1]])/2;};
+  place(ROOT);
+  C.nodes.filter(n=>n.join).forEach(n=>{let v=preds(n).reduce((s,p)=>s+y[p],0)/preds(n).length;
+    const clash=v=>C.nodes.some(m=>m.k!==n.k&&y[m.k]!==undefined&&rank[m.k]===rank[n.k]&&Math.abs(y[m.k]-v)<1);
+    let d=0;while(clash(v+d))d=d>0?-d:-d+0.5;y[n.k]=v+d;});
+  const mn=Math.min(...Object.values(y));Object.keys(y).forEach(k=>y[k]-=mn);
+  const pos={};C.nodes.forEach(n=>pos[n.k]={d:rank[n.k],y:y[n.k]});
+  const vals=Object.values(pos);
+  return {pos,md:Math.max(...vals.map(p=>p.d)),my:Math.max(...vals.map(p=>p.y))};
+}
+function roundPath(pts,r=10){
+  let d=`M${pts[0][0]},${pts[0][1]}`;
+  for(let i=1;i<pts.length-1;i++){const [x0,y0]=pts[i-1],[x,y]=pts[i],[x2,y2]=pts[i+1];
+    const r1=Math.min(r,Math.abs(x-x0+y-y0)/2,Math.abs(x2-x+y2-y)/2);
+    const ax=x-Math.sign(x-x0)*r1,ay=y-Math.sign(y-y0)*r1,bx=x+Math.sign(x2-x)*r1,by=y+Math.sign(y2-y)*r1;
+    d+=` L${ax},${ay} Q${x},${y} ${bx},${by}`;}
+  const e=pts[pts.length-1];return d+` L${e[0]},${e[1]}`;
+}
+let LAYOUT_ISSUES=null;
+function graphH(fid,sel,ws){
+  const W=WS[ws],{nodeW,rowH,nodeH,ay,oy,ox}=W,colW=nodeW+colGap();
+  const L=layoutH();const P=k=>({x:ox+L.pos[k].d*colW,y:oy+L.pos[k].y*rowH});
+  const rects=C.nodes.map(n=>{const q=P(n.k);return {k:n.k,x1:q.x,x2:q.x+nodeW,y1:q.y,y2:q.y+nodeH};});
+  const hits=(pts,skip)=>{for(let i=1;i<pts.length;i++){const sx1=Math.min(pts[i-1][0],pts[i][0]),sx2=Math.max(pts[i-1][0],pts[i][0]),sy1=Math.min(pts[i-1][1],pts[i][1]),sy2=Math.max(pts[i-1][1],pts[i][1]);
+    for(const r of rects){if(skip.includes(r.k))continue;if(sx1<r.x2-1&&sx2>r.x1+1&&sy1<r.y2-1&&sy2>r.y1+1)return true;}}return false;};
+  const route=(p,n,ex,ey)=>{const a=P(p),x1=a.x+nodeW,y1=a.y+ay,t=x1+Math.round(Math.max(16,Math.min((colW-nodeW)*0.4,(colW-nodeW)-90))),skip=[p,n.k];
+    const c=[y1===ey?[[x1,y1],[ex,ey]]:[[x1,y1],[t,y1],[t,ey],[ex,ey]],[[x1,y1],[ex-12,y1],[ex-12,ey],[ex,ey]]];
+    for(const pts of c)if(!hits(pts,skip))return pts;
+    const top=Math.min(...rects.filter(r=>r.x1>x1&&r.x2<ex).map(r=>r.y1),y1)-12;
+    return [[x1,y1],[t,y1],[t,top],[ex-12,top],[ex-12,ey],[ex,ey]];};
+  let paths="",labs="",jns="";const segs=[];
+  const draw=(pts,n,p,arrow)=>{const on=ANC.has(n.k)&&ANC.has(p),col=edgeColor(n,on),run=n.s==="doing",plan=n.s==="todo"||n.s==="fork";
+    const touch=sel&&(n.k===sel||p===sel),dim=sel&&!touch;
+    paths+=`<path class="${dim?"dimp":""}" d="${roundPath(pts)}" fill="none" stroke="${col}" stroke-width="${touch?3:on?2.6:1.8}" ${plan&&!run?'stroke-dasharray="5 4"':""}/>`+(run?`<path class="run" d="${roundPath(pts)}" fill="none" stroke-width="${on?2.6:1.8}"/>`:"");
+    if(arrow&&false){const [x,y]=pts[pts.length-1];paths+=`<path d="M${x-6},${y-4} L${x},${y} L${x-6},${y+4}" fill="none" stroke="${col}" stroke-width="1.8"/>`;}
+    for(let i=1;i<pts.length;i++)segs.push({a:pts[i-1],b:pts[i],skip:[p,n.k]});};
+  /* R14 — đặt nhãn ở GIỮA đường (góp ý 12/10): lấy điểm giữa theo tổng chiều dài đường.
+     Điểm giữa rơi vào đoạn ngang riêng → đặt nhãn tại đó. Rơi vào đoạn dọc, hoặc đoạn đầu đi chung với nhánh anh em
+     (bước nguồn có >1 đường ra) → dời về tâm đoạn ngang riêng gần điểm giữa nhất. */
+  const outN=k=>[...KIDS[k],...(JOIN[k]||[])].length;
+  const midSpot=(pts,src)=>{const segs=[];let tot=0;for(let i=1;i<pts.length;i++){const [xa,ya]=pts[i-1],[xb,yb]=pts[i],l=Math.abs(xb-xa)+Math.abs(yb-ya);segs.push({i,xa,ya,xb,yb,l,s0:tot});tot+=l;}
+    const m=tot/2,shared=sg=>sg.i===1&&outN(src)>1&&pts.length>2;
+    const H=segs.filter(sg=>sg.ya===sg.yb&&sg.l>=48&&!shared(sg));if(!H.length)return null;
+    const hit=H.find(sg=>m>=sg.s0&&m<=sg.s0+sg.l);
+    if(hit){const x=Math.min(hit.xa,hit.xb)+(hit.xa<hit.xb?m-hit.s0:hit.l-(m-hit.s0));return {x,y:hit.ya,w:Math.min(170,hit.l-12)};}
+    const c=H.sort((a,b)=>Math.abs(a.s0+a.l/2-m)-Math.abs(b.s0+b.l/2-m))[0];return {x:Math.min(c.xa,c.xb)+c.l/2,y:c.ya,w:c.l-12};};
+  const label=(pts,txt,cls="",src=null,inner=null)=>{const sp=midSpot(pts,src);if(!sp)return;
+    labs+=`<div class="elab-c" style="left:${sp.x-sp.w/2}px;width:${sp.w}px;top:${sp.y}px;transform:translateY(-50%)">${inner||`<span class="elab ${cls}" title="${txt}">${txt}</span>`}</div>`;return sp;};
+  [...C.nodes].sort((x,y)=>ord(x)-ord(y)).forEach(n=>{const ps=preds(n);if(!ps.length)return;const b=P(n.k),by=b.y+ay;
+    if(ps.length>1){
+      /* góp ý 12/10: bỏ nút hợp — các đường nối thẳng vào thẻ, hội tụ ở cửa vào */
+      /* góp ý 12/10: mỗi đường vào 1 cửa riêng ở cạnh trái thẻ (cách nhau 14px, xếp theo vị trí bước trước) — không đi chung đoạn dọc, nét chạy không chồng thành nét liền */
+      const ord2=[...ps].sort((u,v)=>P(u).y-P(v).y);
+      let fromPts=null;ord2.forEach((p,i)=>{const off=(i-(ord2.length-1)/2)*14;const pts=route(p,n,b.x,by+off);draw(pts,n,p,p===n.from);if(p===n.from)fromPts=pts;});
+      /* góp ý 12/10: nhiều điều kiện khó theo dõi → 1 chip "x/y điều kiện" ở cửa vào, danh sách tick ở panel */
+      const cl=condList(n),ok=cl.filter(c=>c.ok).length;
+      if(cl.length&&fromPts){const open=(S.F[fid]||{}).cnd===n.k;
+        const chip=`<span class="elab cnd ${ok===cl.length?"ok":""}" data-a="cnd" data-f="${fid}" data-i="${n.k}">${ok===cl.length?"✓":"○"} Điều kiện ${ok}/${cl.length}</span>`;
+        const sp=label(fromPts,"","",n.from,chip);
+        if(open&&sp)labs+=`<div class="ctip" data-a="noop" style="left:${sp.x-110}px;top:${sp.y+16}px"><b>Điều kiện trên đường ${N[n.from].n} → ${n.n}</b>${cl.map(c=>`<div class="${c.ok?"ok":""}">${c.ok?I("check","s"):"○"}<span>${c.t}${c.sub?`<br><span class="mono faint">${c.sub}</span>`:""}</span></div>`).join("")}<div class="faint" style="margin-top:2px">Bước trước khác (đường riêng): ${preds(n).filter(p=>p!==n.from).map(ref).join(", ")}</div></div>`;}}
+    else{const pts=route(ps[0],n,b.x,by);draw(pts,n,ps[0],true);/* R16: nhãn Phát sinh nằm trên thẻ, không trên đường */if(n.main&&n.cond&&n.s!=="fork")label(pts,n.cond,"",ps[0]);}});
+  let cross=0;rects.forEach(r=>segs.forEach(s=>{if(s.skip.includes(r.k))return;const sx1=Math.min(s.a[0],s.b[0]),sx2=Math.max(s.a[0],s.b[0]),sy1=Math.min(s.a[1],s.b[1]),sy2=Math.max(s.a[1],s.b[1]);
+    if(sx1<r.x2-1&&sx2>r.x1+1&&sy1<r.y2-1&&sy2>r.y1+1)cross++;}));
+  let overlap=0;rects.forEach((a,i)=>rects.slice(i+1).forEach(b=>{if(a.x1<b.x2&&b.x1<a.x2&&a.y1<b.y2&&b.y1<a.y2)overlap++;}));
+  LAYOUT_ISSUES={cross,overlap};
+  const nodes=C.nodes.map(n=>{const p=P(n.k);
+    const cls=`${n.main?"":"branch"} ${n.s==="todo"?"plan":""} ${n.s==="fork"?"fork":""} ${n.k===C.view?"view":""} ${n.k===sel?"sel":""}`;
+    const da=`data-a="sel" data-f="${fid}" data-i="${n.k}" title="${n.n}${n.recs[0]?" "+n.recs[0].id:""} — ${recTxt(n)}"`;
+    const psb=n.main?"":`<span class="psb" title="Phát sinh — lý do xem ở chi tiết">${I("branch")}Phát sinh</span>`;
+    return `<div class="gn ${cls}" style="left:${p.x}px;top:${p.y}px;width:${nodeW}px;height:${nodeH}px" ${da}>${psb}${n.k===C.view?`<span class="here" title="Đang ở đây — bản ghi của màn đang mở">${I("pin")}Ở đây</span>`:""}${bi(n)}<div class="gb"><b>${n.n}</b>${idTxt(n)}</div><span class="st ${recC(n)} fst">${recTxt(n)}</span></div>`;}).join("");
+  const w=2*ox+L.md*colW+nodeW,h=oy+L.my*rowH+W.boxH+12;
+  return {w,html:`<div class="gwrap ${sel?"has-sel":""}" style="width:${w}px;height:${h}px"><svg class="edges" width="${w}" height="${h}">${paths}</svg>${labs}${jns}${nodes}</div>`,h};
+}
+function layoutAudit(){
+  const keep=S.sc,out=[];
+  Object.keys(SC).forEach(k=>{if(SC[k].independent){out.push({k,skip:1});return;}S.sc=k;build();graphH("audit",null,"F");out.push({k,...LAYOUT_ISSUES});});
+  S.sc=keep;build();return out;
+}
+
+/* ===================== Sơ đồ dọc (mobile sheet) ===================== */
+function graphTree(fid){
+  const L=layoutH(),nw=156,nh=56,cw=168,rh=100,ox=4,oy=12;
+  const P=k=>({x:ox+L.pos[k].y*cw,y:oy+L.pos[k].d*rh});
+  const W=ox*2+L.my*cw+nw,H=oy*2+L.md*rh+nh+6;let paths="",labs="";
+  const drawE=(pts,n,on)=>{const col=edgeColor(n,on),run=n.s==="doing",plan=n.s==="todo"||n.s==="fork";
+    paths+=`<path d="${roundPath(pts,8)}" fill="none" stroke="${col}" stroke-width="${on?2.4:1.7}" ${plan&&!run?'stroke-dasharray="5 4"':""}/>`+(run?`<path class="run" d="${roundPath(pts,8)}" fill="none" stroke-width="${on?2.4:1.7}"/>`:"");};
+  C.nodes.forEach(n=>{const ps=preds(n);if(!ps.length)return;const b=P(n.k);
+    const ord=[...ps].sort((u,v)=>P(u).x-P(v).x);
+    ord.forEach((p,i)=>{const a=P(p),off=ord.length>1?(i-(ord.length-1)/2)*12:0;
+      const sx=a.x+nw/2,sy=a.y+nh,ex=b.x+nw/2+off,ey=b.y,ym=ey-20;
+      const pts=Math.abs(sx-ex)<1?[[sx,sy],[ex,ey]]:[[sx,sy],[sx,ym],[ex,ym],[ex,ey]];
+      drawE(pts,n,ANC.has(n.k)&&ANC.has(p));
+      if(p===n.from&&ps.length>1){const cl=condList(n),ok=cl.filter(c=>c.ok).length;if(cl.length)labs+=`<span class="tlab cnd2 ${ok===cl.length?"ok":""}" style="left:${sx}px;top:${(sy+ey)/2}px">${ok===cl.length?"✓":"○"} ĐK ${ok}/${cl.length}</span>`;}
+    });});
+  const col={done:"#16a34a",doing:"#3b82f6",rej:"#ef4444",todo:"#a1a1aa",fork:"#a1a1aa"};
+  const nodes=C.nodes.map(n=>{const q=P(n.k);
+    /* góp ý 12/10: thẻ cây mobile lấy theo dạng thẻ F của web — icon nghiệp vụ trái, tên + trạng thái phải */
+    return `<div class="tn f ${n.s==="todo"?"plan":""} ${n.s==="fork"?"fork":""}" style="left:${q.x}px;top:${q.y}px;width:${nw}px;height:${nh}px" data-a="sel" data-f="${fid}" data-i="${n.k}">${n.main?"":`<span class="psb" title="Phát sinh">${I("branch")}Phát sinh</span>`}${n.k===C.view?`<span class="here">${I("pin")}Ở đây</span>`:""}${bi(n)}<div class="gb"><b>${n.n}</b><span class="rs ${recC(n)}">${recTxt(n)}</span></div></div>`;}).join("");
+  return `<div class="tscroll"><div class="tg2" style="width:${W}px;height:${H}px"><svg width="${W}" height="${H}">${paths}</svg>${labs}${nodes}</div></div>`;
+}
+
+/* ===================== Web — popup sơ đồ ===================== */
+/* card tóm tắt (góp ý 12/10 "làm dạng summary"): thanh tiến độ theo trạng thái + số bước mỗi trạng thái + số nhánh phát sinh; ký hiệu thu gọn, bấm "Ký hiệu" để mở */
+const legendCard=(fid)=>{const ln=(c,d,run)=>`<svg width="26" height="8"><path d="M1,4 H25" stroke="${c}" stroke-width="2" ${d?'stroke-dasharray="4 3"':""}/>${run?'<path class="run" d="M1,4 H25" stroke-width="2"/>':""}</svg>`;
+  const ST=[["done","#16a34a","xong"],["doing","#3b82f6","đang chờ/làm"],["rej","#ef4444","từ chối"],["todo","#a1a1aa","chưa tạo"]];
+  const steps=C.nodes.filter(n=>n.s!=="fork"),tot=steps.length,cnt=k=>steps.filter(n=>n.s===k).length,open=(S.F[fid]||{}).lg;
+  const bar=ST.map(([k,c])=>cnt(k)?`<i style="flex:${cnt(k)};background:${c}"></i>`:"").join("");
+  const nums=ST.filter(([k])=>cnt(k)).map(([k,c,t])=>`<span><i style="background:${c}"></i><b>${cnt(k)}</b> ${t}</span>`).join("");
+  const dt=c=>`<i style="background:${c}"></i>`;
+  /* góp ý 12/10: bỏ dòng "Xong x/y · n phát sinh" và nút Ký hiệu — card chỉ còn thanh tiến độ + số theo trạng thái */
+  return `<div class="lgc" data-a="noop"><div class="lgbar">${bar}</div><div class="lgr">${nums}</div></div>`;};
+/* góp ý 12/10 "có background chia rõ section, thiếu summary": thẻ tóm tắt riêng giữa đầu popup và sơ đồ */
+const progBar=()=>{const steps=C.nodes.filter(n=>n.s!=="fork");return ["done","doing","rej","todo"].map(k=>{const c=steps.filter(n=>n.s===k).length;return c?`<i style="flex:${c};background:${SCOL[k]}"></i>`:"";}).join("");};
+const zoomWrap=(fid,g)=>{const z=S.F[fid].z||1;return `<div class="zw" data-w="${g.w}" data-h="${g.h}" style="width:${g.w*z}px;height:${g.h*z}px"><div class="zi" style="transform:scale(${z})">${g.html}</div></div>`;};
+const zoomBar=fid=>`<div class="zbar" data-a="noop"><button class="btn icon sm" data-a="zoom" data-f="${fid}" data-v="out" title="Thu nhỏ">−</button><span class="zv">${Math.round((S.F[fid].z||1)*100)}%</span><button class="btn icon sm" data-a="zoom" data-f="${fid}" data-v="in" title="Phóng to">+</button><button class="btn sm" data-a="zoom" data-f="${fid}" data-v="fit">Vừa khung</button></div>`;
+function setZoom(m,fid,z,ax,ay){
+  z=Math.max(.4,Math.min(2.5,z));const f=S.F[fid],z0=f.z||1,zw=m.querySelector(".zw");if(!zw)return;
+  const px=(m.scrollLeft+ax)/z0,py=(m.scrollTop+ay)/z0;f.z=z;
+  zw.style.width=(+zw.dataset.w*z)+"px";zw.style.height=(+zw.dataset.h*z)+"px";zw.firstElementChild.style.transform=`scale(${z})`;
+  m.scrollLeft=px*z-ax;m.scrollTop=py*z-ay;const v=m.parentElement.querySelector(".zv");if(v)v.textContent=Math.round(z*100)+"%";}
+document.addEventListener("wheel",e=>{const m=e.target.closest(".mgraph");if(!m)return;e.preventDefault();
+  const r=m.getBoundingClientRect(),fid=m.dataset.f;setZoom(m,fid,(S.F[fid].z||1)*(e.deltaY<0?1.1:1/1.1),e.clientX-r.left,e.clientY-r.top);},{passive:false});
+let DRAG=null,DRAGGED=false;
+document.addEventListener("mousedown",e=>{const m=e.target.closest(".mgraph");if(!m||e.target.closest(".gn"))return;DRAG={m,x:e.clientX,y:e.clientY,sl:m.scrollLeft,st:m.scrollTop};DRAGGED=false;});
+document.addEventListener("mousemove",e=>{if(!DRAG)return;const dx=e.clientX-DRAG.x,dy=e.clientY-DRAG.y;if(Math.abs(dx)+Math.abs(dy)>3){DRAGGED=true;DRAG.m.classList.add("drag");}DRAG.m.scrollLeft=DRAG.sl-dx;DRAG.m.scrollTop=DRAG.st-dy;});
+document.addEventListener("mouseup",()=>{if(DRAG)DRAG.m.classList.remove("drag");DRAG=null;});
+function web(fid){
+  const f=S.F[fid];if(C.independent)return `<div class="lab-box lab-muted">Luồng độc lập chưa phát sinh nhánh — không hiện dòng quy trình, không có sơ đồ (R11).</div>`;
+  const sel=f.sel==="__view"?C.view:(f.sel&&N[f.sel]?f.sel:null),g=graphH(fid,sel,"F");
+  return `<div class="app poponly"><div class="modal"><div class="modal-h">${I("tree")}<h3>${C.name}</h3><span class="faint">Sơ đồ quy trình · ${C.full.replace(C.name+" — ","")}</span><span class="grow"></span><button class="btn icon sm">${I("x","s")}</button></div>
+    <div class="mgrid"><div class="mgraph" data-a="desel" data-f="${fid}" style="height:600px">${zoomWrap(fid,g)}</div>${zoomBar(fid)}${legendCard(fid)}${sel?`<div class="mside" data-a="noop"><button class="btn icon sm xbtn" data-a="desel" data-f="${fid}">${I("x","s")}</button>${panel(N[sel],fid)}</div>`:""}</div></div></div>`;
+}
+
+/* ===================== Mobile ===================== */
+function phone(fid){
+  const f=S.F[fid],r=C.rec,v=N[C.view];
+  const head=`<div class="sb"><span>9:41</span><span>●●● ▮</span></div><div class="nav"><button class="btn icon" style="border:0">${I("left","l")}</button><div class="t"><b>${r.t}</b><span class="mono">${r.id}</span></div><button class="btn icon" style="border:0">${I("clock","l")}</button></div>`;
+  /* tên quy trình là phần chính, tóm tắt là phần phụ */
+  const sum=C.independent?"":`<div class="card msum" data-a="open" data-f="${fid}"><div class="r1">${I("tree","s")} Quy trình</div><div class="mname"><b>${C.name}</b>${I("right")}</div><div class="msub"><span class="lgbar">${progBar()}</span>${summary()}</div><div class="from">${fromTxt(v)}</div></div>`;
+  const info=`<div class="card" style="padding:14px;margin-top:10px"><span class="st ${r.c}">${r.st}</span><div style="display:flex;flex-direction:column;gap:9px;margin-top:12px"><div class="sk" style="width:60%;height:12px;background:var(--line2)"></div><div class="sk" style="width:90%"></div><div class="sk" style="width:80%"></div></div></div>`;
+  let sheet="";
+  if(f.sheet&&!C.independent){
+    const inner=f.sel&&N[f.sel]
+      ?`<span class="back" data-a="back" data-f="${fid}">${I("left","s")} Sơ đồ quy trình</span>${panel(N[f.sel],fid)}`
+      :`<h4>Sơ đồ quy trình</h4><div class="sub">${C.name}</div>${legendCard("m").replace('class="lgc"','class="lgc mlgc"')}<div class="mtree">${graphTree(fid)}</div>`;
+    sheet=`<div class="dim-bg" data-a="close" data-f="${fid}"></div><div class="sheet" data-a="noop"><div class="grab"></div>${inner}<button class="btn blk" style="margin-top:14px" data-a="close" data-f="${fid}">Đóng</button></div>`;
+  }
+  return `<div class="phone"><div class="scr app">${head}<div class="mbody">${sum}${info}</div><div class="mfoot"><button class="btn pri blk">${C.pri}</button></div>${sheet}</div></div>`;
+}
+
+/* ===================== Render ===================== */
+const pickHtml=k=>["Đồng ý","Cần sửa"].map(o=>`<button class="${S.rules[k]===o?"on":""}" data-a="rule" data-r="${k}" data-v="${o}">${o}</button>`).join("");
+const noteHtml=k=>S.rules[k]==="Cần sửa"?`<input class="note-in" data-n="${k}" placeholder="Sửa thế nào?" value="${(S.notes[k]||"").replace(/"/g,"&quot;")}">`:"";
+function renderRules(){
+  document.getElementById("rules").innerHTML=`<tr><th style="width:44px">Mã</th><th style="width:200px">Nội dung</th><th>Quy tắc</th><th style="width:200px">Nguồn</th><th style="width:190px">Anh chọn</th></tr>`+
+   RULES.map(r=>`<tr><td><b>${r.k}</b></td><td><b>${r.t}</b>${r.rev?'<div style="margin-top:4px"><span class="tag new">đã sửa theo anh</span></div>':""}</td><td>${r.p}</td><td class="lab-muted">${r.src}</td><td><div class="pick">${pickHtml(r.k)}</div>${noteHtml(r.k)}</td></tr>`).join("");
+  document.querySelectorAll('.pick[data-rule]').forEach(el=>{const k=el.dataset.rule;el.innerHTML=pickHtml(k);const nx=el.nextElementSibling;if(nx&&nx.matches(".note-in"))nx.remove();el.insertAdjacentHTML("afterend",noteHtml(k));});
+}
+function renderOut(){
+  const L=["# Chốt tiến trình rẽ nhánh / CMP-09 Liên quy trình ("+new Date().toISOString().slice(0,10)+")",""];
+  DONE.forEach(x=>L.push(`- ${x[0]}: ${x[1]}`));L.push("");
+  const T={T1:"CMP-09 = quy trình nhiều nghiệp vụ, dạng cây",T2:"Vòng đời 1 bản ghi → nhãn + Lịch sử",T3:"Form nhiều bước → Form theo bước",T4:"Danh sách việc → checklist"};
+  Object.keys(T).forEach(k=>L.push(`- ${k} ${T[k]}: ${S.rules[k]||"(chưa chọn)"}${S.notes[k]?" — "+S.notes[k]:""}`));
+  RULES.forEach(r=>L.push(`- ${r.k} ${r.t}: ${S.rules[r.k]||"(chưa chọn)"}${S.notes[r.k]?" — "+S.notes[r.k]:""}`));
+  document.getElementById("out").value=L.join("\n");
+}
+/* bảng đã chốt — gộp các vòng góp ý 11–12/10 */
+const DONE=[
+ ["Web","Dòng quy trình đầu trang → popup sơ đồ cây tỏa (bước cha giữa, con tỏa trên/dưới), thẻ F: icon nghiệp vụ, tên, mã, trạng thái bản ghi bên phải; lề thẻ đều 14px"],
+ ["Mobile","Thẻ quy trình (tên quy trình là chính, tóm tắt là phụ) → sheet: card tóm tắt như web + cây rẽ nhánh dọc dùng thẻ dạng F, vuốt ngang khi rộng"],
+ ["Trạng thái","Trạng thái của bản ghi (R7), icon theo nhóm thay chấm: ✓ xong · đồng hồ chờ · ▶ đang làm · ✕ từ chối · vòng đứt chưa tạo"],
+ ["Phát sinh","Nhãn góc trên trái thẻ, đối xứng ghim Ở đây góc trên phải (R16); lý do phát sinh không hiện trên sơ đồ"],
+ ["Đường nối","Nét liền đã tạo · nét đứt chưa tạo · vệt sáng chạy = đang triển khai (R15); nhãn điều kiện 1 dòng; khe cột theo nhãn dài nhất (R17)"],
+ ["Nhiều bước trước","Thanh toán chờ chốt lệnh SC + mọi phiếu xuất kho: mỗi đường 1 cửa vào, chip Điều kiện x/y trên đường nguồn; giữ 2 đường Xuất kho → Thanh toán"],
+ ["Tóm tắt","Card nhỏ góc trên trái vùng sơ đồ: thanh tiến độ + số bước theo trạng thái"],
+ ["Panel chi tiết","Kiểu C: đầu panel + Lịch sử hoạt động + nút Mở chứng từ to ở cuối; nổi đè cột phải (chấp nhận). Web: đầu nền nhạt, nhãn dưới tên, dải trạng thái. Mobile: không màu nền, pill có viền + nhãn bên phải"],
+ ["Lịch sử hoạt động","Theo Dòng lịch sử 09/10: icon tròn theo hành động (phê duyệt nền xanh, từ chối nền đỏ + lý do), tên người đậm, mới nhất trên cùng"],
+ ["Đã bỏ","Thẻ A, phương án làn, nút hợp ◇+, nhãn Phát sinh trên đường, lần 1/2, panel kiểu A/B, thẻ tóm tắt riêng giữa popup"]];
+function legend(){
+  const ln=(c,d,run)=>`<svg width="34" height="10"><path d="M1,5 H33" stroke="${c}" stroke-width="2" ${d?'stroke-dasharray="5 4"':""}/>${run?'<path class="run" d="M1,5 H33" stroke-width="2"/>':""}</svg>`;
+  document.getElementById("legend").innerHTML=`<span>${ln("#5bb97b")} Đã tạo</span><span>${ln("#3b82f6",0,1)} Đang triển khai</span><span>${ln("#b4b4bd",1)} Chưa tạo</span><span><span class="ptag2">Phát sinh</span> nhánh phát sinh</span><span><span class="here" style="position:static">${I("pin")}Ở đây</span> bản ghi đang mở</span>`;
+}
+function render(){
+  document.body.className=S.br;build();
+  document.getElementById("ctl-sc").innerHTML=Object.entries(SC).map(([k,v])=>`<button class="${S.sc===k?"on":""}" data-a="sc" data-v="${k}" title="${v.cases}">${v.lbl}</button>`).join("");
+  document.getElementById("ctl-br").innerHTML=[["b-neutral","Trung tính"],["b-innvie","Innvie"],["b-delta","Delta"]].map(([k,l])=>`<button class="${S.br===k?"on":""}" data-a="br" data-v="${k}">${l}</button>`).join("");
+  document.getElementById("done").innerHTML=`<tr><th style="width:150px">Mục</th><th>Đã chốt</th></tr>`+DONE.map(x=>`<tr><td><b>${x[0]}</b></td><td>${x[1]}</td></tr>`).join("");
+  const note=`<div class="lab-box" style="padding:10px 14px;margin-bottom:14px"><b>Kịch bản:</b> ${C.full} — <span class="lab-muted">${C.cases}. Màn đang mở: ${C.rec.t} ${C.rec.id}. Dữ liệu mẫu.</span></div>`;
+  document.getElementById("web-final").innerHTML=note+`<div class="stage">${web("w")}</div>`;
+  document.getElementById("mob-final").innerHTML=note+`<div class="stage mob"><div class="frames">
+    <div>${phone("m1")}<div class="fcap">① Màn chi tiết — thẻ quy trình ở đầu nội dung</div></div>
+    <div>${phone("m2")}<div class="fcap">② Sheet sơ đồ — chạm 1 bước để xem chi tiết</div></div>
+    <div>${phone("m3")}<div class="fcap">③ Chi tiết bước trong sheet</div></div></div></div>`;
+  document.querySelectorAll(".tscroll").forEach(el=>{const h=el.querySelector(".here");if(h){const n=h.parentElement;el.scrollLeft=n.offsetLeft+n.offsetWidth/2-el.clientWidth/2+16;}});
+  const au=layoutAudit();
+  document.getElementById("audit").innerHTML="<b>Tự kiểm bố cục (R14), 6 kịch bản — đường cắt thẻ / thẻ chồng:</b> "+au.map(x=>x.skip?`${SC[x.k].lbl}: không vẽ (R11)`:`${SC[x.k].lbl}: <b class="${x.cross+x.overlap?"bad":"ok"}">${x.cross}/${x.overlap}</b>`).join(" · ");
+  legend();renderRules();renderOut();save();
+}
+document.addEventListener("click",e=>{
+  if(DRAGGED){DRAGGED=false;return;}
+  const t=e.target.closest("[data-a]");if(!t)return;
+  const a=t.dataset.a;if(a==="noop")return;const fid=t.dataset.f;const f=fid&&S.F[fid];
+  if(a==="sc"){S.sc=t.dataset.v;resetFrames();}
+  else if(a==="br")S.br=t.dataset.v;
+  else if(a==="open"){if(fid[0]==="w"){f.modal=true;f.sel=null;}else{f.sheet=true;f.sel=null;}}
+  else if(a==="close"){if(fid[0]==="w")f.modal=false;else{f.sheet=false;f.sel=null;}}
+  else if(a==="sel")f.sel=t.dataset.i;
+  else if(a==="back")f.sel=null;
+  else if(a==="desel"){f.sel=null;f.cnd=null;}
+  else if(a==="cnd")f.cnd=f.cnd===t.dataset.i?null:t.dataset.i;
+  else if(a==="zoom"){const m=t.closest(".mgrid").querySelector(".mgraph");const zw=m.querySelector(".zw");
+    if(t.dataset.v==="fit"){f.z=Math.min(1,(m.clientWidth-24)/+zw.dataset.w,(m.clientHeight-26)/+zw.dataset.h);m.scrollLeft=0;m.scrollTop=0;}
+    else{setZoom(m,fid,(f.z||1)*(t.dataset.v==="in"?1.2:1/1.2),m.clientWidth/2,m.clientHeight/2);return;}}
+  else if(a==="rule"){const r=t.dataset.r;S.rules[r]=S.rules[r]===t.dataset.v?undefined:t.dataset.v;}
+  render();
+});
+document.addEventListener("input",e=>{const n=e.target.dataset&&e.target.dataset.n;if(n){S.notes[n]=e.target.value;renderOut();save();}});
+document.getElementById("copy").addEventListener("click",async()=>{const v=document.getElementById("out").value;try{await navigator.clipboard.writeText(v);document.getElementById("copied").textContent="Đã sao chép."}catch(e){document.getElementById("out").select();document.getElementById("copied").textContent="Chọn sẵn — nhấn ⌘C."}});
+render();
+</script>
+</body>
+</html>

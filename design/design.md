@@ -396,7 +396,7 @@ trang *Foundation → Color* công bố, dùng khi đối chiếu với code `@a
 Mười họ màu: **Blue, Cyan, Gray, Green, Orange, Pink, Purple, Red, Teal, Yellow**. Mỗi họ có 4 vai
 trò `-bg` / `-border` / `-icon` / `-text` (giá trị ở YAML). Dùng cho **Token** (tag),
 **Badge** biến thể màu, cột "Breed" trong Searchable Table, và biểu đồ. **Không** dùng họ Red/Green
-để thay cho Status. Status có token riêng và có nghĩa cố định.
+để thay cho Status — ngoại lệ duy nhất: chip trạng thái nền nhạt theo bảng § Ánh xạ trạng thái nghiệp vụ. Status có token riêng và có nghĩa cố định.
 
 ### Syntax
 
@@ -466,6 +466,20 @@ của mẫu, không phải token: màn thật giữ đúng khung, chiều cao co
 | Login · split | Card 1000px, padding 32px | 2 cột 452px, cách 32px (form \| ảnh) | P6 |
 | Chat | Cột hội thoại 760px căn giữa | Panel tài liệu phải 640px (tùy chọn) | P12 |
 | Shell | SideNav 300px · TopNav cao 48px | Nội dung dưới TopNav max 1100px | S1, S2 |
+
+**Khung trang dự án (chốt 12/10/2026, thắng số của mẫu ở bảng trên).** Bảng trên là số đo mẫu
+Astryx, giữ để tham khảo. Màn thật của dự án dựng theo bảng này (nguồn: `design/_lab/refs/notes.md`
+mục "Kết quả chốt Lab ↔ DS", dòng 07–09).
+
+| Vùng | Quy tắc |
+| --- | --- |
+| Menu trái | 240px, nền surface; thu gọn 64px (chỉ icon). Chân menu: thẻ module + chọn cơ sở. Thay SideNav 300px |
+| Thanh trên | Cao 44px: nút thu/mở menu · đường dẫn · tìm · chuông · tài khoản. Thay TopNav 48px |
+| Lề nội dung | 24px mọi phía (thay 16px) |
+| Trang danh sách | Giãn hết bề rộng còn lại, không max-width |
+| Form | Thân form tối đa 720px, căn giữa |
+| Trang chi tiết | Tối đa 1440px, căn giữa |
+| Khi màn hẹp | Theo § Responsive Behavior › Breakpoints |
 
 ### Mẫu bố cục (P = desktop)
 
@@ -772,15 +786,18 @@ Nguồn: `web-common-rules.md` SC-04 (phân trang) và 2.17 (nhóm dữ liệu).
 | --- | --- |
 | Vị trí | Cuối **mọi** màn danh sách (mẫu P1 và danh sách khác), dưới nội dung nó điều khiển |
 | Số bản ghi/trang | `Show Page Size Selector` = bật · lựa chọn **25 / 50 / 100** · mặc định **50** |
-| Nhãn tổng | Dạng *"50 bản ghi trên 1 trang"*, cập nhật theo bộ lọc hiện tại |
+| Bố cục | **Trái:** ô số bản ghi/trang, chữ *"50 / trang"* · **Phải:** Trước · số trang · Sau. Không có nhãn tổng riêng — tổng số kết quả sau lọc hiện ở hàng 2 thanh công cụ (*"128 kết quả"*, § Bộ lọc nâng cao) |
 | Số trang | `Variant=Pages`: trang đầu, trang hiện tại ± 1, `…`, trang cuối |
 | Trước / Sau | Icon `<` / `>`; vô hiệu (Disabled) ở trang đầu / trang cuối |
 | Nhóm dữ liệu | Phân trang theo **nhóm** (mỗi nhóm = 1 đơn vị). Nhóm đầu mở sẵn tối đa 10 bản ghi con; > 10 thì nút **"Xem thêm"** cuối nhóm, mỗi lần thêm 10 |
 
+* **Khác SC-04 — nhãn tổng (chốt 12/10/2026):** SC-04 ghi nhãn *"50 bản ghi trên 1 trang"*. Bỏ nhãn
+  này: ô chọn *"50 / trang"* đã nói đúng thông tin đó, đặt nhãn cạnh ô là lặp. Tổng số bản ghi sau lọc
+  đã có ở thanh công cụ nên phân trang không nhắc lại. Các phần khác của SC-04 giữ nguyên.
 * **Khác SC-04 (chốt 01/10/2026):** SC-04 ghi "trang hiện tại highlight màu xanh lá". Theme Neutral không có màu xanh lá
   cho điều hướng (xem Don't: không thêm màu brand), nên dùng trạng thái chọn sẵn có của `Pagination`
   (`{colors.accent}`).
-* Chỉ có 1 trang thì vẫn hiện nhãn tổng + bộ chọn số bản ghi, nhưng ẩn số trang và nút Trước/Sau
+* Chỉ có 1 trang thì vẫn hiện bộ chọn số bản ghi, nhưng ẩn số trang và nút Trước/Sau
   (khớp "Không nên" của components.md: không phân trang khi mọi mục vừa một trang).
 
 **Phần SC-04 chưa nói (chốt 01/10/2026, KG-17):**
@@ -1075,18 +1092,24 @@ Module (Xưởng / Nhân sự / Điều vận…) chỉ là thông tin phụ ở
 > cập nhật sau mỗi điều kiện được xác nhận. Lý do: drawer che bảng, giấu điều kiện sau khi đóng, bắt mở
 > lại cả khối để sửa một điều kiện; thư viện đã có `PowerSearch` làm đúng việc này.
 
-**Không tạo component vỏ** — dùng `PowerSearch / Trigger` + `PowerSearch / Popover` của thư viện
+> **Thanh công cụ 2 hàng (chốt 12/10/2026, thay `PowerSearch / Trigger` 1 ô):** ô tìm và nút Bộ lọc tách
+> riêng ở hàng 1, chip điều kiện xuống hàng 2. Lý do: nhóm điều khiển (tìm, lọc, cột, nhóm) luôn đứng
+> yên một chỗ dù có bao nhiêu chip; chip dài không đẩy nút sang dòng khác. Popover chọn cột / sửa giá
+> trị vẫn dùng của thư viện.
+
+**Không tạo component vỏ** — dùng `PowerSearch / Popover` của thư viện
 (Form Controls; hướng dẫn: `components.md` § Power Search). Chỉ thêm nội dung sửa giá trị của dự án.
 Figma: trang Overlay, khung `BoLocNangCao · innvie` (node `5176:9303`), khung `Trạng thái · instances` có 3 cảnh
 trên bảng (chọn cột / sửa điều kiện / không có kết quả), 3 màn mobile và *Chữ dài · kiểm tra*.
 
 | Phần | Dùng | Ghi chú |
 | --- | --- | --- |
-| Thanh lọc | `PowerSearch / Trigger` (Content = With Filters, `Has Result Count`, `Has Clear`) | Đặt ở thanh công cụ trên bảng (mẫu P1), giãn hết chiều ngang, chừa icon button Tuỳ chỉnh cột bên phải (cách 8px, § Tuỳ chỉnh cột). Placeholder "Tìm hoặc thêm bộ lọc…" |
+| Thanh công cụ — hàng 1 | Ô tìm (`TextInput` có icon tìm, cao 32, giãn hết) · `Button` Secondary *"Bộ lọc"* + `Badge` Neutral đếm số điều kiện đang áp · `Button` Ghost có icon + chữ *"Tuỳ chỉnh cột"*, *"Nhóm"* | Cách nhau 8px. Placeholder nêu đúng các trường tìm được (vd *"Tìm mã Lệnh, biển số, lái xe…"*). Bấm *Bộ lọc* → `PowerSearch / Popover` Mode = Fields |
+| Thanh công cụ — hàng 2 | Chip điều kiện · *"Xoá tất cả"* (Button Ghost SM) · số kết quả căn phải | Cách hàng 1 8px. Chưa có điều kiện: hàng 2 chỉ còn số kết quả |
 | Chip điều kiện | `Token` SM (mobile MD) trong slot `Filters`, `Removable` bật | `Label` = `[Cột]: [giá trị 1]`, phần `+n` đặt trong `End Content` của Token (để không bị cắt); rộng tối đa 260px, nhãn 1 dòng cắt "…"; khoảng: `Ngày tạo: 01/09 – 30/09/2026`, `Tổng tiền: 1,000,000 – 10,000,000 đ`. Bấm chip → Value Editor của điều kiện đó; × trên chip → xoá điều kiện |
 | Chọn cột | `PowerSearch / Popover` Mode = Fields | Danh sách cột được phép lọc (định nghĩa trong UC), thứ tự trái → phải của bảng kể cả cột ẩn, icon theo loại dữ liệu |
 | Sửa giá trị | `PowerSearch / Popover` Mode = Value Editor, slot `Content` = **`Bộ lọc nâng cao / .Value Editor`** | Xem bảng dưới |
-| Số kết quả | `resultCount` của Trigger | "128 kết quả" |
+| Số kết quả | Chữ `{typography.supporting}`, màu `{colors.text-secondary}`, cuối hàng 2 | "128 kết quả" — là tổng duy nhất của danh sách (phân trang không lặp lại) |
 | Không có kết quả | Bảng hiện `EmptyState` "Không có kết quả phù hợp" / "Thử bỏ bớt điều kiện lọc." + Button Secondary "Xoá bộ lọc" | **Không** có nút Tạo mới (tách khỏi "chưa có dữ liệu", xem Known Gaps 2.12) |
 
 **`Bộ lọc nâng cao / .Value Editor`** (key `a4b66118…`, 8 biến thể Platform × Type; nội dung đặt vào Value Editor) — theo bố cục của
@@ -1100,10 +1123,10 @@ thư viện: [Cột] [Toán tử] [Giá trị] → chân `[Huỷ]` Secondary SM 
 | Khoảng số | Số / tiền / % | trong khoảng | 2 `NumberInput` "Từ" – "Đến" (suffix `đ` cho tiền) |
 
 * "Áp dụng" xác nhận **một** điều kiện (thành chip), bảng tải lại ngay, về trang 1. Không có nút Áp dụng
-  chung. "Xoá tất cả" = nút `clear` của Trigger.
-* Nhập chữ tự do vào ô = tìm theo từ khoá (mã, tên…), không tạo chip.
-* **Mobile** (bố cục chưa có chuẩn trong design.md — theo spec M2): Trigger full-width; chip xuống dưới ô
-  tìm, cuộn ngang; bấm "+ Lọc" hoặc chip → `BottomSheet` chứa Fields / Value Editor (bản Mobile: control
+  chung. "Xoá tất cả" xoá mọi chip, không xoá từ khoá trong ô tìm.
+* Gõ vào ô tìm = tìm theo từ khoá (mã, tên…), không tạo chip.
+* **Mobile** (bố cục chưa có chuẩn trong design.md — theo spec M2): ô tìm full-width + icon button Bộ lọc
+  (kèm số điều kiện); chip xuống dưới ô tìm, cuộn ngang; bấm Bộ lọc hoặc chip → `BottomSheet` chứa Fields / Value Editor (bản Mobile: control
   LG xếp dọc, nút full-width, "Áp dụng" ở trên).
 * **Chữ dài:** chip giữ 1 dòng — giá trị dài cắt "…", phần `+n` không cắt; nhiều chip thì thanh tự xuống
   dòng (desktop) / cuộn ngang (mobile).
@@ -1112,8 +1135,8 @@ thư viện: [Cột] [Toán tử] [Giá trị] → chân `[Huỷ]` Secondary SM 
 ### Tuỳ chỉnh cột (theo SC-06, phương án chỉnh trên bảng — 29/09/2026)
 
 > **Khác SC-06 gốc — đã duyệt 01/10/2026:** không có panel. Ẩn / ghim / sắp xếp làm ngay
-> trên **tiêu đề cột**; đổi thứ tự bằng **kéo tiêu đề cột**; bật/tắt cột ở **icon button Tuỳ chỉnh cột** trên
-> thanh công cụ, bên phải thanh lọc (tham khảo column picker của Jira; icon vì là hành động phụ). Người dùng thấy kết quả ngay trên
+> trên **tiêu đề cột**; đổi thứ tự bằng **kéo tiêu đề cột**; bật/tắt cột ở nút **Tuỳ chỉnh cột** (Button Ghost có icon + chữ, chốt 12/10/2026)
+> ở hàng 1 thanh công cụ, sau nút Bộ lọc (tham khảo column picker của Jira). Người dùng thấy kết quả ngay trên
 > bảng, không có "Áp dụng"; "Đặt lại mặc định" nằm ở chân popover. Gọi là *tuỳ chỉnh* chứ không phải
 > *cột ẩn* vì đây là cấu hình riêng của từng người dùng.
 
@@ -1275,6 +1298,28 @@ danh sách đang sửa / lỗi ô + Tooltip / bảng dòng hàng trong form bấ
   xuống dòng. Ghi chú dài hơn 1 dòng → không sửa trong ô, mở màn/Dialog của bản ghi.
 * Density: chỉ dựng Balanced (36). Bảng Compact (28) không cho sửa trong ô.
 
+### Thanh chọn nhiều (theo Figma ERP, 12/10/2026)
+
+> Spec, **chưa dựng Figma component**. Mẫu chuẩn: file *DELTA ERP 3.0 | CÂY DẦU | WEB*, frame
+> "Tick chọn (opt1)" (`7801:9397`), thanh "Bulk action" (`7801:10228`). Ảnh: `design/_lab/refs/bulk/`.
+> Dựng từ: `Checkbox` (cột đầu bảng) · `Button` Ghost (hành động trên thanh) · `Tooltip` · `MoreMenu`.
+
+| Phần | Quy tắc |
+| --- | --- |
+| Khi hiện | Chọn ≥ 1 dòng; bỏ hết chọn → thanh ẩn |
+| Vị trí | Nổi giữa vùng nội dung (không tính menu trái), cách đáy 32px, nằm trên bảng |
+| Khung | Rộng 750px (co theo màn, chừa lề 24), cao 48, nền tối `#3C4043`, bo 8, đệm ngang 16, bóng nhẹ |
+| Trái | Ô số đếm (nền `#505356`, bo 4, chữ 12) + "Đã chọn" · icon + "Chọn tất cả" |
+| Giữa | Vạch đứng 24px · hành động chung: icon 20 + chữ trắng 14, cách nhau 24; rê chuột nền `#505356` bo 4 cao 28. Hành động nguy hiểm cũng chữ trắng (theo mẫu), xác nhận bằng CMP-03 |
+| Phải | Vạch đứng · X (bỏ chọn, thoát chế độ chọn) |
+| "Chọn tất cả" | Chọn **toàn bộ kết quả theo bộ lọc hiện tại**, không chỉ trang đang xem; số đếm hiện tổng đã chọn |
+| > 3 hành động | 3 hành động đầu trên thanh, phần còn lại gom vào `MoreMenu` (⋯) |
+| Bảng | Dòng chọn tô nền nhạt màu chính · đầu bảng gạch ngang khi chọn một phần · dòng không áp được hành động: checkbox khoá + Tooltip lý do |
+
+* Màu `#3C4043` / `#505356` lấy từ mẫu ERP, **chưa có token** — khi dựng component cần đối chiếu
+  `background-inverted` hoặc thêm token qua Iteration Guide.
+* UC chỉ khai: danh sách hành động chung (thứ tự, cái nào nguy hiểm) và điều kiện khoá dòng.
+
 ### Device Frame (khung thiết bị mobile, 06/10/2026)
 
 Khung nền cho mọi màn mobile (mẫu M1–M4, khung "Mobile" của component dự án, màn `-mob`). Chỉ vẽ phần
@@ -1374,13 +1419,20 @@ dựng thành component dự án.
 Gán mỗi trạng thái nghiệp vụ vào **một nhóm** dưới đây. **Nhãn lấy nguyên văn từ `srs/{feature}-states.md`**,
 không lấy từ bảng này. Luôn có **chữ** đi kèm màu (Badge Pill có nhãn, hoặc StatusDot + nhãn).
 
-| Nhóm | Badge Variant | StatusDot | Ví dụ trong mẫu Astryx |
-| --- | --- | --- | --- |
-| Chưa bắt đầu / nháp / tồn đọng | Neutral | neutral | Backlog, To-do |
-| Đang xử lý | Info | info | In Progress |
-| Chờ / cần chú ý / chờ duyệt | Warning | warning | Unfulfilled, In review, Needs attention |
-| Hoàn tất / thành công | Success | positive | Done, Paid |
-| Lỗi / từ chối / hủy / nghiêm trọng | Error | negative | (High priority) |
+**Chip trạng thái trong bảng, thẻ, đầu trang chi tiết (chốt 12/10/2026, giống app mobile):** `Badge`
+Shape = Pill, nền **nhạt** họ categorical (`-bg` + chữ `-text`, icon `-icon`), **icon thay chấm** đứng
+trước nhãn. Chữ Inter `{typography.supporting}` đậm 600, không kế thừa font tiêu đề. Nền *vivid*
+(Variant Info/Success/Warning/Error) chỉ dùng cho số đếm, cảnh báo nổi bật — không dùng cho cột trạng thái.
+Một feature có nhiều trạng thái "đang xử lý" thì tách họ màu để phân biệt bước (bảng dưới, cột *Họ
+categorical*); icon do feature chọn theo nghĩa trạng thái và ghi trong UC.
+
+| Nhóm | Badge Variant | StatusDot | Họ categorical (chip nền nhạt) | Ví dụ trong mẫu Astryx |
+| --- | --- | --- | --- | --- |
+| Chưa bắt đầu / nháp / tồn đọng | Neutral | neutral | Gray | Backlog, To-do |
+| Đang xử lý | Info | info | Blue → Teal → Purple (theo thứ tự bước) | In Progress |
+| Chờ / cần chú ý / chờ duyệt | Warning | warning | Yellow | Unfulfilled, In review, Needs attention |
+| Hoàn tất / thành công | Success | positive | Green | Done, Paid |
+| Lỗi / từ chối / hủy / nghiêm trọng | Error | negative | Red | (High priority) |
 
 * Mức ưu tiên (Low/Medium/High) và phân loại **không** phải trạng thái. Dùng Badge màu categorical (Teal/Yellow/Red) hoặc Token.
 * Trong wireframe B&W: chỉ ghi **nhãn chữ** của trạng thái (ví dụ `[Badge: Chờ duyệt]`), không tô màu.
@@ -1562,7 +1614,7 @@ chỉnh token. Reviewer không coi chúng là lỗi của màn. Chỉ báo lỗi
 
 ### Breakpoints
 
-**File Figma không định nghĩa breakpoint.** Mọi màn mẫu là desktop 1920×1080, và không có mẫu
+**File Figma không định nghĩa breakpoint** (bảng mốc của dự án ở cuối mục này). Mọi màn mẫu là desktop 1920×1080, và không có mẫu
 tablet/mobile. Những gì *thư viện có sẵn* cho màn nhỏ:
 
 * `MobileNav` (drawer) + `MobileNavToggle` (hamburger) thay SideNav/TopNav.
@@ -1582,6 +1634,24 @@ tablet/mobile. Những gì *thư viện có sẵn* cho màn nhỏ:
 * Ô nhập ngày giờ tự dùng picker cảm ứng/native trên thiết bị cảm ứng; trên iOS, chữ trong ô nhập
   được nâng tối thiểu 16px để tránh trình duyệt tự zoom.
 * Cách bày Web | Mobile trên Figma theo các hành vi này: xem *Components* → "Web và Mobile".
+
+**Bảng mốc của dự án (chốt 12/10/2026):** dùng nguyên bảng mặc định `DEFAULT_WIDTH_BREAKPOINTS`
+của Astryx (`packages/core/src/theme/themeAdaptations.ts`), không tự đặt mốc riêng. Mỗi mốc tính từ
+giá trị đó trở lên.
+
+| Mốc | sm | md | lg | xl | 2xl |
+| --- | --- | --- | --- | --- | --- |
+| Từ | 640 | 768 | 1024 | 1280 | 1536 |
+
+| Bề rộng | Khung trang | Khung vẽ Figma |
+| --- | --- | --- |
+| ≥ 1536 (2xl) | Menu 240 mở, thanh trên 44, lề 24 (§ Grid & Container › Khung trang dự án) | **1920** |
+| 1280–1535 (xl) | Như trên; nội dung co lại, trang chi tiết ≤ 1440 vừa khít | **1440** |
+| 768–1279 (md–lg) | Menu **tự thu gọn 64px** (cột icon); bấm nút thu/mở → menu 240 đè lên nội dung | không vẽ riêng |
+| < 768 | `AppShell` đổi sang `MobileNav` (mặc định `mobileNav.breakpoint = 'md'`, đúng 768 vẫn là layout rộng) + Bottom Navigation; bảng → thẻ | **393** (`Device / Frame`) |
+
+Menu, Selector chuyển bottom-sheet theo ngưỡng adaptive ở trên (≤ 768 *và* cảm ứng), độc lập với
+bảng mốc.
 
 **Quyết định (27/09/2026):** thiết bị chính để **đề xuất** là **Desktop web**, với bố cục dựng ở
 khung 1920×1080 theo các mẫu P. Vẫn phải hỏi user khi chọn device theo quy ước của workspace.
@@ -1642,13 +1712,31 @@ SideNav → Bottom Navigation (§ Bottom Navigation); bảng nhiều cột → L
 * **KG-15:** Activity Log dùng phương án A + B (khung `ActivityLog · innvie` `5160:3295`): A = `Activity Log / Latest` (Banner kết quả gần nhất dưới header), B = Body `State=Theo lượt` + `Activity Log / Round`. Đã có đồng ý của phụ trách SC-08, xác nhận nghiệp vụ/BE ("Gửi lại", mốc lượt, thời gian chờ) và designer review (gồm tương phản Description của Banner). Body `State=Có dữ liệu` giữ làm dự phòng.
 * **KG-16:** Notification Center khác SC-02 gốc, đã duyệt: nội dung 3 dòng (hành động · mã đậm · người + module), 3 nhóm (Cần xử lý / Kết quả / Để biết), badge chuông chỉ đếm việc cần xử lý, bỏ lý do từ chối và hạn xử lý, mobile là màn riêng, lỗi mạng dạng EmptyState, nền chưa đọc accent-muted. Tag "Đã xử lý" chuyển xuống dòng cuối, dưới Meta (Figma `Notification Center / Item` Status=Resolved). Danh sách hành động "Chờ…" do từng feature ghi theo bảng Hành động (xem § Notification Center).
 
+### Đã quyết định (12/10/2026)
+
+Chốt Lab ↔ DS (18 mục, `design/_lab/refs/notes.md` mục "Kết quả chốt Lab ↔ DS"):
+
+* **Khung trang:** menu 240 (thu gọn 64) + chân menu module/cơ sở, thanh trên 44, lề 24, form ≤ 720,
+  chi tiết ≤ 1440 (xem Grid & Container › Khung trang dự án).
+* **Breakpoint (KG-03 phần mốc):** bảng mặc định Astryx; 768–1279 menu tự thu gọn 64px; < 768 MobileNav
+  (xem Breakpoints).
+* **Nút / ô nhập / nút phụ:** giữ theo DS — bo `{rounded.element}` 10px, nút phụ đen 6%, ô nhập nền
+  trắng viền `{colors.border-emphasized}` (so 2 phương án trên Sandbox `5508:14821`).
+* **Font tiêu đề:** giữ Cal Sans · **cỡ chữ** 14/12 · **bo thẻ** 12 · **căn ngày giờ** giữa — theo DS.
+* **Thanh chọn nhiều:** spec mới (xem § Thanh chọn nhiều).
+* **Phân trang:** bỏ nhãn tổng; ô *"50 / trang"* bên trái, số trang bên phải; tổng số ở thanh công cụ
+  (KG-30 cũ "Hiển thị x–y / tổng" bỏ, không cần hỏi khách).
+* **Thanh công cụ danh sách:** 2 hàng — tìm · Bộ lọc · Tuỳ chỉnh cột · Nhóm / chip · Xoá tất cả · n kết quả
+  (xem § Bộ lọc nâng cao).
+* **Chip trạng thái:** Badge pill nền nhạt categorical + icon thay chấm (xem § Ánh xạ trạng thái nghiệp vụ).
+
 ### Còn mở — khi vẽ gặp thì làm gì
 
 > Mỗi mục ghi đủ chi tiết ngay tại đây (không còn file backlog riêng). Mặc định cho mọi mục: không
 > bịa giá trị — hỏi user, hoặc vẽ theo quy định hiện có và ghi "chưa có chuẩn trong design.md".
 
 **Mobile**
-* KG-03 · Breakpoint, lưới cột, mẫu mobile: spec M1–M4 đã có (29/09/2026). Khung nền `Device / Frame`
+* KG-03 · Lưới cột, mẫu mobile (mốc breakpoint đã chốt 12/10/2026): spec M1–M4 đã có (29/09/2026). Khung nền `Device / Frame`
   393×852 (iPhone 14 Pro) đã dựng (06/10/2026, `5371:3063`); M1 (`5383:7822`) và M2 (5 khung `Example/List Mobile`) đã
   dựng; M3–M4 chưa dựng node Figma → vẽ
   mobile dùng `Device / Frame` và ghi "chưa có chuẩn trong design.md — theo spec M, chưa có node Figma".

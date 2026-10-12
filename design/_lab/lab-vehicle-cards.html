@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UI Lab · Thẻ phương tiện</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lab-kit.css">
+<style>
+/* ---------- khung trang lab ---------- */
+.vc-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,375px));gap:18px;align-items:start;margin-bottom:14px}
+.vc-col{display:flex;flex-direction:column;gap:6px;min-width:0}
+.vc-lb{font-size:12px;color:var(--lab-muted);display:flex;gap:6px;align-items:center}
+.vc-lb b{color:var(--lab-ink);font-weight:600}
+.vc-stage{background:var(--page);border-radius:18px;padding:14px;width:100%}
+.vc-stage .k-card{margin:0}
+.vc-web{overflow-x:auto;margin-bottom:14px}
+.vc-web .vc-stage{min-width:980px;padding:20px;border-radius:20px}
+.vc-dev{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--lab-muted);margin:16px 0 8px}
+.vc-spec{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;font-size:13px}
+.vc-spec div{color:var(--lab-muted)}.vc-spec b{color:var(--lab-ink);font-weight:600}
+.fixlist{margin:6px 0 0;padding-left:18px;font-size:13px;color:var(--lab-muted)}
+.fixlist b{color:var(--lab-ink);font-weight:600}
+@media (max-width:700px){.vc-spec{grid-template-columns:1fr}}
+
+/* ---------- khung ảnh xe: mọi ảnh vào khung cùng tỉ lệ ---------- */
+.vf{position:relative;overflow:hidden;width:100%;border-radius:var(--r-inner)}
+.vf.bg{background:var(--well)}
+.vf .vi{position:absolute;bottom:0}
+.vf.bg .vi{bottom:5%}
+.vf .vi.flip{transform:scaleX(-1)}
+.vf img{display:block;width:100%;height:auto}
+.cmb{position:relative;width:100%;aspect-ratio:16.8/4.1}
+.cmb img{position:absolute;bottom:0;height:auto}
+
+/* ---------- chữ chung ---------- */
+.pl{font-family:Manrope,Inter,sans-serif;font-weight:700;font-size:17px;letter-spacing:.01em;white-space:nowrap}
+.pl.sm{font-size:15px}.pl.lg{font-size:22px}
+.ty{font-size:13.5px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ty.st{color:var(--ink);font-weight:600}
+.grow{flex:1;min-width:0}
+.row{display:flex;align-items:center;gap:10px}
+.muted-chev{color:var(--ink-3);flex:none;display:grid;place-items:center}
+.loc{display:flex;align-items:center;gap:6px;font-size:13.5px;color:var(--ink-2);min-width:0}
+.loc .k-ic{color:var(--ink-3);flex:none}
+.loc span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.loc .upd{color:var(--ink-3);flex:none}
+.fuel-bar{height:4px;border-radius:2px;background:var(--rule);margin-top:6px;overflow:hidden}
+.fuel-bar i{display:block;height:100%;background:var(--ink);border-radius:2px}
+.fuel-bar.low i{background:#b42318}
+.low-t{color:#b42318;display:inline-flex;align-items:center;gap:3px}.low-t .k-ic{flex:none}
+
+/* ---------- lái xe ---------- */
+.av{width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--card);display:grid;place-items:center;font-weight:700;font-size:13px;flex:none}
+.av.none{background:none;box-shadow:inset 0 0 0 1.5px var(--ink-3);color:var(--ink-3)}
+.av.lg{width:44px;height:44px;font-size:14px}
+.av.sq{border-radius:14px;width:48px;height:48px;font-size:15px}
+.av.sm{width:28px;height:28px;font-size:11px}
+.drv{display:flex;align-items:center;gap:10px;background:var(--well);border-radius:var(--r-inner);padding:8px 8px 8px 10px}
+.drv .tx{flex:1;min-width:0}.drv .n{font-weight:600;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drv .s{font-size:12.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drv .k-ib{width:44px;height:44px;background:var(--card)}
+.drv.none .n{font-weight:500;color:var(--ink-2)}
+.mini-btn{height:32px;border:0;border-radius:999px;padding:0 12px;font:inherit;font-size:13px;font-weight:600;background:var(--primary);color:var(--on-primary);flex:none;cursor:pointer}
+.drv-inline{font-size:13px;color:var(--ink-2);display:flex;align-items:center;gap:6px;min-width:0}
+.drv-inline .k-ic{color:var(--ink-3);flex:none}
+.drv-inline b{font-weight:400;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drv-inline.none{color:var(--ink-3)}
+.drv-inline.none span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drv-cell{display:flex;align-items:center;gap:8px;min-width:0;font-size:13.5px}
+.drv-cell b{font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drv-cell.none{color:var(--ink-3)}
+
+/* ---------- 1 · dòng gọn ---------- */
+.m1{display:flex;gap:12px;align-items:center;padding:12px 14px 12px 12px}
+.m1 .th{width:84px;flex:none}
+.m1 .r1{display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.m1 .r1 .k-pill{margin-left:auto}
+.m1 .body{display:flex;flex-direction:column;gap:3px}
+.wt{padding:6px 18px}
+.wt-r{display:grid;grid-template-columns:84px 120px minmax(0,1.3fr) minmax(0,1.2fr) minmax(0,1.3fr) 150px 120px 18px;gap:16px;align-items:center;padding:10px 0;border-top:1px solid var(--rule)}
+.wt-r:first-child{border-top:0}
+.wt-h{font-size:12px;color:var(--ink-3);font-weight:600;padding:10px 0 6px}
+.wt-r .ty{color:var(--ink)}
+
+/* ---------- 2 · ảnh lớn ---------- */
+.m2 .hd{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.m2 .fw{position:relative;margin-bottom:12px}
+.m2 .fw .k-pill{position:absolute;left:10px;top:10px;z-index:1}
+.m2 .loc{margin-bottom:10px}
+.ms{display:grid;grid-template-columns:1fr 1fr;background:var(--well);border-radius:var(--r-inner);margin-bottom:10px}
+.ms>div{padding:10px 14px}
+.ms>div+div{box-shadow:inset 1px 0 0 var(--rule)}
+.ms .c{font-size:12px;color:var(--ink-3);display:flex;align-items:center;gap:5px}
+.ms .n{font-weight:700;font-size:15px;margin-top:2px;font-family:Manrope,Inter,sans-serif}
+
+/* ---------- 3 · lái xe là chính ---------- */
+.m3 .who{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.m3 .who .nm{font-weight:600;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m3 .veh{display:flex;align-items:center;gap:12px;background:var(--well);border-radius:var(--r-inner);padding:10px 12px 10px 10px}
+.m3 .veh .th{width:96px;flex:none}
+.m3 .veh .vf.bg{background:var(--card)}
+.w3{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.5fr) 120px 110px;gap:20px;align-items:center;padding:14px 18px}
+.w3+.w3{margin-top:10px!important}
+.w3 .veh{display:flex;align-items:center;gap:12px;padding-left:20px;box-shadow:inset 1px 0 0 var(--rule)}
+.w3 .veh .th{width:110px;flex:none}
+.k-btn.xs{height:36px;font-size:13.5px;padding:0 14px;background:var(--well);color:var(--ink);box-shadow:none}
+
+/* ---------- 4 · chọn xe ---------- */
+.m4 .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.m4 .head b{font-size:15px}
+.opt{display:block;border-radius:18px;padding:12px 14px;background:var(--card);box-shadow:inset 0 0 0 1.5px var(--rule);cursor:pointer}
+.opt+.opt{margin-top:10px}
+.opt.on{box-shadow:inset 0 0 0 2px var(--ink)}
+.opt.off{cursor:not-allowed}.opt.off .dim{opacity:.5}
+.opt .r1{display:flex;align-items:center;gap:10px}
+.opt .r1 .k-pill{margin-left:auto}
+.opt .r2{display:flex;align-items:center;gap:12px;margin:10px 0}
+.opt .r2 .th{width:96px;flex:none}
+.opt .r3{border-top:1px solid var(--rule);padding-top:10px}
+.rd{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--ink-3);flex:none}
+.opt.on .rd{box-shadow:inset 0 0 0 7px var(--ink)}
+.lockt{font-size:11px;font-weight:600;color:#1b7542;background:#e8f5ec;border-radius:999px;padding:1px 8px;margin-left:2px}
+/* mẫu 4 — vòng 4: danh sách nhóm (không hộp viền từng xe), chỉ biển số đậm, trạng thái = chấm màu + chữ thường */
+.olist{margin:0 -6px}
+.orow{display:flex;gap:12px;align-items:center;padding:10px 8px;border-radius:16px;cursor:pointer;position:relative}
+.orow+.orow::before{content:"";position:absolute;left:84px;right:8px;top:0;height:1px;background:var(--rule)}
+.orow.on{background:var(--well)}
+.orow.on::before,.orow.on+.orow::before{display:none}
+.orow .th{width:64px;flex:none}
+.orow .grow{display:flex;flex-direction:column;gap:1px}
+.o-pl{font-family:Manrope,Inter,sans-serif;font-weight:700;font-size:17px;white-space:nowrap}
+.o-r1{display:flex;align-items:center;gap:8px;min-width:0}
+.o-ln{font-size:13px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:5px;min-width:0}
+.o-ln .k-ic{flex:none;color:var(--ink-3)}
+.o-ln span{overflow:hidden;text-overflow:ellipsis}
+.sdot{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:500;white-space:nowrap}
+.sdot i{width:7px;height:7px;border-radius:50%;background:currentColor}
+.sdot.accept{color:#0b6b64}.sdot.doing{color:#5536c4}.sdot.bad{color:#b42318}.sdot.wait{color:#8a5300}
+.rd2{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--ink-3);flex:none;display:grid;place-items:center;color:var(--card)}
+.on>.rd2,.on .rd2{background:var(--ink);box-shadow:none}
+.orow.off,.ocard.off{cursor:not-allowed}
+.orow.off .th,.orow.off .o-pl,.orow.off .o-ln.m,.ocard.off .th,.ocard.off .o-pl,.ocard.off .o-ln.m{opacity:.45}
+.orow.off .rd2,.ocard.off .rd2{opacity:.35}
+.ocard{display:flex;flex-direction:column;gap:2px;padding:12px 14px 14px;border-radius:18px;background:var(--card);box-shadow:inset 0 0 0 1.5px var(--rule);cursor:pointer;position:relative}
+.ocard.on{box-shadow:inset 0 0 0 2px var(--ink)}
+.ocard .th{margin-bottom:10px}
+.ocard .rd2{position:absolute;right:12px;top:12px}
+.o-r1 .k-pill{margin-left:auto}
+.o-ln.d{gap:5px}
+.orow .th{position:relative}
+.ck{position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:var(--ink);color:var(--card);display:grid;place-items:center;box-shadow:0 0 0 2px var(--well);z-index:1}
+.orow.on{box-shadow:inset 0 0 0 1.5px var(--ink)}
+/* 4B — thẻ trượt ngang */
+.ocar{display:flex;gap:10px;overflow-x:auto;margin:0 -16px;padding:2px 16px 6px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.ocar::-webkit-scrollbar{display:none}
+.ocar .ocard{flex:0 0 168px;scroll-snap-align:start;padding:6px 6px 12px}
+.ocar .ocard .th{margin-bottom:8px;position:relative}
+.ocar .ocard .o-r1,.ocar .ocard .o-ln{padding:0 6px}
+.ocar .ocard .rd2{right:12px;top:12px;z-index:2;background:var(--card)}
+.ocar .ocard.on .rd2{background:var(--ink)}
+.stc{position:absolute;left:6px;top:6px;z-index:1}
+.w4{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.w4 .opt+.opt{margin-top:0}
+.w4 .opt .r2{flex-direction:column;align-items:stretch;gap:8px}
+.w4 .opt .r2 .th{width:100%}
+
+/* ---------- 5 · tổ hợp ---------- */
+.m5 .hd{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.m5 .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.m5 .pair .cap{font-size:12px;color:var(--ink-2);margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m5 .pair .cap b,.m5 .ccap b{color:var(--ink);font-weight:600}
+.m5 .ccap{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--ink-2);margin-top:6px}
+.w5{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:center;padding:18px}
+.kv2{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:13.5px;margin-bottom:12px}
+.kv2 span{color:var(--ink-3)}.kv2 b{font-weight:600}
+
+/* ---------- 6 · nhấn tối ---------- */
+.m6{background:var(--hero-bg);color:#fff;border-radius:var(--r-card);padding:16px;position:relative;overflow:hidden}
+.m6 .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.m6 .lb{font-size:12.5px;color:rgba(255,255,255,.6)}
+.m6 .pl{color:#fff}.m6 .ty{color:rgba(255,255,255,.72)}
+.m6 .art{margin:8px 0 10px}
+.m6 .art img{filter:drop-shadow(0 10px 14px rgba(0,0,0,.45))}
+.m6 .loc{color:rgba(255,255,255,.8);margin-bottom:8px}.m6 .loc .k-ic{color:rgba(255,255,255,.5)}
+.m6 .ms{background:rgba(255,255,255,.08)}
+.m6 .ms>div+div{box-shadow:inset 1px 0 0 rgba(255,255,255,.12)}
+.m6 .ms .c{color:rgba(255,255,255,.55)}
+.m6 .fuel-bar{background:rgba(255,255,255,.15)}.m6 .fuel-bar i{background:#fff}
+.m6 .drv{background:rgba(255,255,255,.1)}
+.m6 .drv .av{background:#fff;color:#121214}
+.m6 .drv .n{color:#fff}.m6 .drv .s{color:rgba(255,255,255,.6)}
+.m6 .drv .k-ib{background:#fff;color:#121214}
+.m6 .drv.none .av{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5);color:rgba(255,255,255,.6);background:none}
+.m6 .drv.none .n{color:rgba(255,255,255,.75)}
+.m6 .mini-btn{background:#fff;color:#121214}
+.m6 .k-pill,.m7 .k-pill{background:rgba(255,255,255,.14);color:#fff}
+.w6{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:28px;align-items:center;padding:22px}
+.w6+.w6{margin-top:14px}
+.w6 .art{margin:0;justify-self:center;width:100%;max-width:480px}
+
+/* ---------- 7 · hero lệnh đang chạy (ảnh tràn mép) ---------- */
+.m7{position:relative;overflow:hidden;background:var(--hero-bg);color:#fff;border-radius:var(--r-card);padding:16px;min-height:236px;display:flex;flex-direction:column}
+.m7 .tx{position:relative;z-index:1;width:52%}
+.m7 .code{font-family:Manrope,Inter,sans-serif;font-weight:800;font-size:24px;margin:12px 0 6px}
+.m7 .route{display:flex;gap:6px;align-items:center;font-size:13px;color:rgba(255,255,255,.85);margin-bottom:6px;min-width:0}
+.m7 .route span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m7 .route .k-ic{flex:none;margin-top:1px;color:rgba(255,255,255,.55)}
+.m7 .eta{margin-top:10px;font-size:13.5px;color:rgba(255,255,255,.75)}
+.m7 .eta b{color:#fff;font-size:18px;font-weight:700;margin-left:6px;font-family:Manrope,Inter,sans-serif}
+.m7 .art{position:absolute;right:0;bottom:78px;width:50%}
+.m7 .ft7{margin-top:auto;padding-top:10px;border-top:1px solid rgba(255,255,255,.12);position:relative;z-index:1}
+.m7 .art img{filter:drop-shadow(0 12px 14px rgba(0,0,0,.45))}
+.m7 .drvl{font-size:12.5px;color:rgba(255,255,255,.65);display:flex;gap:6px;align-items:center;white-space:nowrap}
+.m7 .drvl b{color:#fff;font-weight:600}
+.w7{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.w7 .m7{min-height:248px;padding:20px}
+.w7 .m7 .tx{width:52%}
+.w7 .m7 .art{width:48%;bottom:82px}
+.w7 .m7 .tx{width:40%}
+.w7 .m7 .art{width:56%;bottom:72px}
+.w7 .m7 .art.bleed{right:-14%;width:64%}
+
+/* ---------- 8 · thẻ đang hoạt động (key–value + lái xe + 3 nút) ---------- */
+.m8 .hd{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.m8 .hd .th{width:64px;flex:none}
+.m8 .in{background:var(--well);border-radius:var(--r-inner);padding:4px 12px}
+.kv .r{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;font-size:13.5px}
+.kv .r span{display:flex;align-items:center;gap:8px;color:var(--ink-2);white-space:nowrap}
+.kv .r span .k-ic{color:var(--ink-3)}
+.kv .r b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m8 .sep{height:1px;background:var(--rule);margin:2px 0}
+.m8 .dr{display:flex;align-items:center;gap:8px;padding:12px 0}
+.m8 .dr .btns{display:flex;gap:6px;flex:none}
+.m8 .dr .n{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m8 .dr .s{font-size:12.5px;color:var(--ink-3)}
+.m8 .dr .k-ib{width:32px;height:32px;background:var(--card)}
+.m8 .dr .k-ib.on{background:var(--ink);color:var(--card)}
+.w8{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* ---------- 9 · lái xe trên, ảnh giữa, chân xám có nút ---------- */
+.m9 .hd{display:flex;align-items:center;gap:12px}
+.m9 .hd .nm{font-weight:700;font-size:16.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m9 .hd .sub{font-size:12.5px;color:var(--ink-3);letter-spacing:.02em}
+.m9 .chip{flex:none;background:var(--well);border-radius:12px;padding:6px 10px;font-size:13px;font-weight:600}
+.m9 .chip.low{color:#b42318;background:#fdecec;display:inline-flex;align-items:center;gap:4px}
+.m9 .art{margin:10px 0 8px}
+.m9 .ft{display:flex;align-items:center;gap:12px;background:var(--well);border-radius:var(--r-inner);padding:12px 12px 12px 16px}
+.m9 .ft .md{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m9 .ft .mtx{display:flex;align-items:center;gap:5px;font-size:12.5px;color:var(--ink-2);margin-top:3px;white-space:nowrap;overflow:hidden}
+.m9 .ft .mtx .k-ic{flex:none;color:var(--ink-3)}
+.cta{height:44px;border:0;border-radius:14px;padding:0 16px;font:inherit;font-size:14px;font-weight:700;background:var(--primary);color:var(--on-primary);flex:none;cursor:pointer}
+.cta.sec{background:var(--card);color:var(--ink)}
+.wg3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+.wg3 .k-card{margin:0}
+</style>
+</head>
+<body class="b-neutral">
+<div class="lab-top">
+  <h1>UI Lab · Thẻ phương tiện</h1>
+  <div class="lab-ctl">Thiết bị <div class="lab-opts" data-k="dev"><button data-v="both">Cả 2</button><button data-v="m">Mobile</button><button data-v="w">Web</button></div></div>
+  <div class="lab-ctl">Góc ảnh <div class="lab-opts" data-k="ang"><button data-v="both">Cả 2</button><button data-v="q">Nghiêng 3/4</button><button data-v="s">Ngang</button></div></div>
+  <div class="lab-ctl">Lái xe <div class="lab-opts" data-k="drv"><button data-v="on">Đã gán</button><button data-v="off">Chưa gán</button></div></div>
+  <div class="lab-ctl">Nền sau ảnh <div class="lab-opts" data-k="bg"><button data-v="off">Không</button><button data-v="on">Có</button></div></div>
+  <div class="lab-ctl">Nền trang <div class="lab-opts" data-k="surf"><button data-v="a">A · xám</button><button data-v="c">C · trắng</button></div></div>
+</div>
+<main class="lab-main proto-app"><section data-screen="vehicle-cards" class="active">
+  <section class="lab-box">
+    <h2>Thẻ phương tiện · 2 góc ảnh · mobile và web</h2>
+    <p>Xe mẫu: <b>xe tải Isuzu NQR75L</b>, <b>đầu kéo Hino 700 kéo mooc 40ft</b>, thêm <b>Ollin 700 đang bảo dưỡng</b> cho trường hợp không khả dụng. Góp ý: bấm nút tròn góc dưới trái → chỉ vào đúng chi tiết muốn góp ý.</p>
+    <p class="lab-muted" style="margin-top:8px">Vòng 6 (11/10):</p>
+    <ul class="fixlist">
+      <li><b>Mẫu 4:</b> trạng thái về lại dạng nhãn có icon như các mẫu khác; biển số to hơn (17px); dòng phụ chỉ còn tên lái xe (có icon người), xe không khả dụng ghi hạn "tới 12/10".</li>
+      <li><b>Mẫu 1:</b> dòng xe thêm icon xe tải cho khớp với dòng lái xe.</li>
+    </ul>
+    <p class="lab-muted" style="margin-top:8px">Vòng 5 (11/10):</p>
+    <ul class="fixlist">
+      <li><b>Mẫu 1:</b> chỉ biển số in đậm; dòng xe và tên lái xe chữ thường xám.</li>
+      <li><b>Mẫu 4 mobile:</b> 2 phương án mới — A dòng gọn (dấu tích ở góc ảnh, bỏ nút tròn), B thẻ nhỏ trượt ngang. Chữ rút còn biển số + "tải trọng · lái xe" (bỏ tên dòng xe — ảnh đã cho biết loại xe). Trạng thái sang phải (A) hoặc góc trên trái ảnh (B).</li>
+      <li><b>Mẫu 7 web:</b> ảnh xe to hơn và lấn vào giữa thẻ, hết khoảng trống giữa.</li>
+      <li><b>Mẫu 6:</b> đầu xe đã quay sang trái từ vòng 3 — giữ nguyên.</li>
+    </ul>
+    <p class="lab-muted" style="margin-top:8px">Vòng 4 (11/10):</p>
+    <ul class="fixlist">
+      <li><b>Mẫu 4</b> đổi hẳn sang danh sách nhóm (không hộp viền từng xe): chỉ biển số in đậm, trạng thái là chấm màu + chữ thường, dòng xe và lái xe chữ thường xám, nút chọn bên phải.</li>
+      <li><b>Mẫu 7 web, góc nghiêng:</b> đẩy xe ra mép phải thêm, thẻ che nhiều đuôi xe hơn.</li>
+    </ul>
+    <p class="lab-muted" style="margin-top:8px">Vòng 3 (11/10):</p>
+    <ul class="fixlist">
+      <li><b>Bỏ tạm mẫu 3, 5, 8.</b> Tổ hợp đầu kéo + mooc (mẫu 5) làm sau. Các mẫu còn lại giữ số cũ để khớp góp ý.</li>
+      <li><b>Trạng thái về góc phải trên</b>; chỉ ghim lên ảnh khi ảnh đứng đầu thẻ. Bỏ thanh mức nhiên liệu.</li>
+      <li><b>Mẫu 4</b> chốt góc nghiêng 3/4; mobile làm lại thành dòng gọn có dấu tích, lái xe gộp vào khối chữ (không tách tầng riêng).</li>
+      <li><b>Mẫu 6</b> chốt góc ngang, đầu xe quay sang trái.</li>
+      <li><b>Mẫu 7</b>: tuyến đường xuống chân thẻ cùng xe + lái xe; web góc nghiêng cho thẻ che bớt đuôi xe.</li>
+    </ul>
+    <p class="lab-muted" style="margin-top:8px">Vòng 2 (11/10):</p>
+    <ul class="fixlist">
+      <li><b>Mọi ảnh vào khung cùng tỉ lệ</b> trong 1 mẫu, không theo chiều cao thật hay góc nghiêng/ngang. Nền sau ảnh mặc định bỏ (bật lại ở thanh trên để so).</li>
+      <li><b>Dòng gọn lấy nửa trước xe</b> (đầu xe), phần đuôi bị cắt bởi mép khung.</li>
+      <li><b>Bỏ nút mũi tên tròn</b> ở thẻ ảnh lớn: cả thẻ bấm được, chỉ còn mũi tên mờ cạnh biển số.</li>
+      <li><b>ODO + nhiên liệu chung 1 cụm</b>, vị trí tách thành dòng riêng.</li>
+      <li><b>Thẻ chọn xe</b> chia 3 tầng: chọn + biển số + trạng thái · ảnh + dòng xe + tải trọng · lái xe — không còn chữ bị che.</li>
+      <li><b>Thêm mẫu 7, 8, 9</b> theo 2 ảnh tham khảo. Mọi mẫu có cả bản mobile và web.</li>
+    </ul>
+  </section>
+  <div id="out"></div>
+</section></main>
+<script src="assets/vehicles/manifest.js"></script>
+<script>
+const P={alert:"M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z",pin:"M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21zM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z",
+gauge:"M12 14l4-4M3.5 17a9 9 0 1 1 17 0",phone:"M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z",
+chev:"M9 6l6 6-6 6",user:"M20 21a8 8 0 0 0-16 0M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10z",
+box:"M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8",clock:"M12 7v5l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z",
+wrench:"M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z",
+check:"M5 12l5 5 9-10",msg:"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
+locate:"M12 2v3M12 19v3M2 12h3M19 12h3M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z",
+fuel:"M3 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18M3 22h12M6 7h6M15 10h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V9l-3-3",
+route:"M6 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM8 17h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7",
+truck:"M3 6h11v10H3zM14 9h4l3 3v4h-7M7.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM17.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"};
+const I=(n,s=16,w=1.9)=>`<svg class="k-ic" aria-hidden="true" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"><path d="${P[n]}"/></svg>`;
+const A=k=>(window.VEH_ASSETS&&VEH_ASSETS["b-ai"][k])||`assets/vehicles/b-ai/${k}.png`;
+
+/* tỉ lệ cao/rộng của ảnh gốc (đo từ file PNG) — để đặt ảnh vào khung cùng tỉ lệ */
+const ASP={"t03-q":.6087,"t03-s":.4092,"t02-q":.683,"t02-s":.5082,"t01-q":.2839,"t01-s":.1765,"n29-q":.6117,"n29-s":.3787};
+const CMB_L=12.4,CMB_T=7.0,CMB_O=2.6,CMB_W=CMB_L+CMB_T-CMB_O,CMB_ASP=4.1/CMB_W;
+
+const V=[
+ {key:"t03",plate:"15C-128.46",model:"Isuzu NQR75L",type:"Xe tải Isuzu NQR75L",sub:"5,5 tấn · thùng kín 6,2 m",cap:"5,5 tấn",st:["accept","Sẵn sàng"],
+  loc:"Bãi Đình Vũ, Hải An",upd:"5 phút",odo:"84.215 km",fuel:62,
+  drv:{n:"Nguyễn Văn Hùng",i:"NH",ph:"0912 345 678"},
+  job:{code:"LV-1031",from:"Kho Nam Đình Vũ",to:"Cảng Lạch Huyện",eta:"16:20",left:"24 km",st:["wait","Chờ xuất phát"]}},
+ {key:"t02",trail:"t01",plate:"15C-207.91",trailPlate:"15R-031.27",model:"Hino 700",type:"Đầu kéo Hino 700",trailType:"Mooc 40ft 2 giàn",sub:"Đầu kéo 2 cầu · mooc 40ft",cap:"cont 40ft",st:["doing","Đang chạy"],
+  loc:"QL5 · Km 62, Hải Dương",upd:"1 phút",odo:"312.840 km",fuel:41,
+  drv:{n:"Trần Đức Mạnh",i:"TM",ph:"0987 112 334"},
+  job:{code:"LV-1024",from:"Cảng Đình Vũ",to:"KCN VSIP Hải Dương",eta:"15:40",left:"38 km",st:["doing","Đang chạy"]}},
+ {key:"n29",plate:"15C-099.12",model:"Thaco Ollin 700",type:"Xe tải Ollin 700",sub:"7 tấn · thùng mui bạt 6,2 m",cap:"7 tấn",st:["bad","Bảo dưỡng"],
+  loc:"Xưởng Delta, An Dương",upd:"2 giờ",odo:"158.302 km",fuel:18,drv:null,reason:"Bảo dưỡng tới 12/10",until:"tới 12/10"}
+];
+const S={surf:"a",drv:"on",ang:"both",dev:"both",bg:"off"};
+try{const o=JSON.parse(localStorage.getItem("uilab-vc2")||"{}");Object.keys(S).forEach(k=>{if(o[k])S[k]=o[k]})}catch(e){}
+
+/* ---------- khung ảnh: mọi ảnh vào khung tỉ lệ r (cao/rộng) ----------
+   fit  = đủ xe, căn giữa, chừa khoảng thở
+   crop = phóng tới tối đa 2× bề rộng khung, giữ đầu xe (bên phải), cắt đuôi
+   flip = lật ngang (đầu xe quay trái) — dùng cho hero để đuôi xe tràn ra mép phải */
+function art(v,a){
+  if(v.trail&&a==="s")return {asp:CMB_ASP,html:`<div class="cmb"><img src="${A(v.trail+"-s")}" alt="${v.trailType}" style="left:0;bottom:3%;width:${CMB_L/CMB_W*100}%"><img src="${A(v.key+"-s")}" alt="${v.type}" style="right:0;width:${CMB_T/CMB_W*100}%"></div>`};
+  const k=`${v.key}-${a}`;return {asp:ASP[k],html:`<img src="${A(k)}" alt="${v.type}">`};
+}
+function frame(v,a,o={}){
+  const r=o.r||.56,mode=o.mode||"fit",bg=o.bg!==undefined?o.bg:S.bg==="on";
+  const {asp,html}=o.only?{asp:ASP[o.only],html:`<img src="${A(o.only)}" alt="">`}:art(v,a);
+  let w,pos;
+  if(mode==="crop"){w=Math.min(2,r*.94/asp);pos=o.flip?"left:0":"right:0"}
+  else{w=Math.min(1,r*.86/asp);pos=`left:${(1-w)/2*100}%`}
+  return `<div class="vf ${bg?"bg":""}" style="aspect-ratio:1/${r}"><div class="vi ${o.flip?"flip":""}" style="width:${w*100}%;${pos}">${html}</div></div>`;
+}
+
+const hasDrv=v=>S.drv==="on"&&v.drv;
+const pill=st=>`<span class="k-pill ${st[0]}">${I({doing:"clock",bad:"wrench",wait:"clock"}[st[0]]||"check",14,2.2)}${st[1]}</span>`;
+const fuelLow=v=>v.fuel<25;
+const fuelTx=v=>fuelLow(v)?`<span class="low-t">${I("alert",13,2.2)}${v.fuel}%</span>`:`${v.fuel}%`;
+function drvRow(v){
+  if(hasDrv(v))return `<div class="drv"><div class="av">${v.drv.i}</div><div class="tx"><div class="n">${v.drv.n}</div><div class="s">Lái xe chính · ${v.drv.ph}</div></div><button class="k-ib" aria-label="Gọi lái xe">${I("phone",16)}</button></div>`;
+  if(v.reason)return `<div class="drv none"><div class="av none">${I("wrench",15)}</div><div class="tx"><div class="n">${v.reason}</div></div></div>`;
+  return `<div class="drv none"><div class="av none">${I("user",16)}</div><div class="tx"><div class="n">Chưa gán lái xe</div></div><button class="mini-btn">Gán</button></div>`;
+}
+const drvInline=v=>hasDrv(v)?`<div class="drv-inline">${I("user",14)}<b>${v.drv.n}</b></div>`
+  :v.reason?`<div class="drv-inline none">${I("wrench",14)}<span>${v.reason}</span></div>`
+  :`<div class="drv-inline none">${I("user",14)}<span>Chưa gán lái xe</span></div>`;
+const drvCell=v=>hasDrv(v)?`<div class="drv-cell"><div class="av sm">${v.drv.i}</div><b>${v.drv.n}</b></div>`:`<div class="drv-cell none">${I("user",14)}${v.reason?"—":"Chưa gán"}</div>`;
+const typeLine=v=>v.trail?`${v.type} + mooc 40ft`:v.type;
+const metrics=v=>`<div class="ms"><div><div class="c">${I("gauge",13)}ODO</div><div class="n">${v.odo}</div></div><div><div class="c">${I("fuel",13)}Nhiên liệu</div><div class="n">${fuelTx(v)}</div></div></div>`;
+const locLine=v=>`<div class="loc">${I("pin",15)}<span>${v.loc}</span><span class="upd">· ${v.upd} trước</span></div>`;
+
+/* Vòng 3: bỏ tạm mẫu 3 (lái xe là chính), 5 (tổ hợp — làm sau), 8 (xe đang hoạt động). Giữ số cũ để khớp góp ý.
+   angs = góc ảnh đã chốt cho mẫu đó (bỏ qua nút "Góc ảnh"). single = mobile vẽ 1 khung chứa cả danh sách. */
+const T=[
+ {id:"m1",name:"1 · Dòng danh sách gọn",use:"Danh sách xe dài (đội xe, chọn nhanh). Ảnh chỉ lấy nửa đầu xe để nhận dạng loại xe, chữ là chính.",
+  parts:"Ảnh nửa đầu xe · biển số · trạng thái (phải trên) · dòng xe · lái xe",web:"Thành bảng: thêm cột vị trí, ODO · dầu; bấm cả dòng để mở chi tiết.",
+  m:(v,a)=>`<div class="k-card m1"><div class="th">${frame(v,a,{r:.75,mode:"crop"})}</div><div class="body grow">
+   <div class="r1"><span class="pl sm">${v.plate}</span>${pill(v.st)}</div><div class="drv-inline">${I("truck",14)}<span class="ty">${typeLine(v)}</span></div>${drvInline(v)}</div></div>`,
+  w:a=>`<div class="k-card wt"><div class="wt-r wt-h"><span></span><span>Biển số</span><span>Loại xe</span><span>Lái xe</span><span>Vị trí</span><span>ODO · dầu</span><span>Trạng thái</span><span></span></div>
+   ${V.map(v=>`<div class="wt-r"><div>${frame(v,a,{r:.62,mode:"crop"})}</div><div class="pl sm">${v.plate}</div><div class="ty">${typeLine(v)}</div>${drvCell(v)}<div class="ty">${v.loc}</div><div class="ty">${v.odo} · ${fuelTx(v)}</div><div>${pill(v.st)}</div><div class="muted-chev">${I("chev",16)}</div></div>`).join("")}</div>`},
+
+ {id:"m2",name:"2 · Thẻ ảnh lớn",use:"Danh sách xe dạng lưới/thẻ, hoặc đầu màn chi tiết xe. Cả thẻ bấm được. Trạng thái ở góc phải trên — chỉ ghim lên ảnh khi ảnh đứng đầu thẻ.",
+  parts:"Biển số + dòng xe + trạng thái (phải trên) · ảnh · vị trí (dòng riêng) · cụm ODO + nhiên liệu · lái xe",web:"Lưới 3 cột, cùng thẻ mobile.",
+  m:(v,a)=>m2(v,a),w:a=>`<div class="wg3">${V.map(v=>m2(v,a)).join("")}</div>`},
+
+ {id:"m4",name:"4 · Thẻ chọn xe (khi phân xe cho lệnh)",angs:["q"],single:true,
+  use:"Bước chọn phương tiện trong luồng điều phối (thường nằm trong bottom sheet). Vòng 5: 2 phương án mobile mới để chọn; chữ rút còn 2 dòng (tải trọng · lái xe), trạng thái sang phải.",
+  parts:"A: ảnh nửa đầu xe (dấu tích ở góc ảnh khi chọn) · biển số + trạng thái bên phải · tên lái xe. B: thẻ nhỏ trượt ngang, trạng thái góc trên trái ảnh, nút chọn góc trên phải",web:"Lưới 3 thẻ chọn, ảnh nằm trên; trạng thái bên phải biển số.",
+  mv:[["A · Dòng gọn",a=>`<div class="k-card m4"><div class="head"><b>Chọn phương tiện</b><span class="k-cap">2 / 3 khả dụng</span></div><div class="olist">${V.map((x,i)=>optRow(x,a,i===0)).join("")}</div></div>`],
+      ["B · Thẻ trượt ngang",a=>`<div class="k-card m4"><div class="head"><b>Chọn phương tiện</b><span class="k-cap">2 / 3 khả dụng</span></div><div class="ocar">${V.map((x,i)=>optSlide(x,a,i===0)).join("")}</div></div>`]],
+  w:a=>`<div class="k-card m4"><div class="head"><b>Chọn phương tiện</b><span class="k-cap">2 / 3 khả dụng</span></div><div class="w4">${V.map((x,i)=>optCard(x,a,i===0)).join("")}</div></div>`},
+
+ {id:"m6",name:"6 · Thẻ nhấn tối \"Xe của tôi\"",angs:["s"],use:"Đầu Home của lái xe (1 xe đang nhận) hoặc thẻ nổi bật trên màn điều phối. Dùng 1 thẻ/màn. Chốt ảnh ngang, đầu xe quay sang trái.",
+  parts:"Nhãn · biển số lớn · trạng thái (phải trên) · ảnh nổi · vị trí · cụm ODO + nhiên liệu · lái xe",web:"Băng ngang: chữ + chỉ số bên trái, ảnh lớn bên phải.",
+  m:(v,a)=>`<div class="m6"><div class="top"><div class="grow"><div class="lb">Phương tiện đang nhận</div><div class="pl lg">${v.plate}</div><div class="ty">${typeLine(v)}</div></div>${pill(v.st)}</div>
+   <div class="art">${frame(v,a,{r:.5,bg:false,flip:true})}</div>${locLine(v)}${metrics(v)}${drvRow(v)}</div>`,
+  w:a=>V.slice(0,2).map(v=>`<div class="m6 w6"><div><div class="top" style="margin-bottom:12px"><div class="grow"><div class="lb">Phương tiện đang nhận</div><div class="pl lg">${v.plate}</div><div class="ty">${typeLine(v)}</div></div>${pill(v.st)}</div>${locLine(v)}${metrics(v)}${drvRow(v)}</div><div class="art">${frame(v,a,{r:.5,bg:false,flip:true})}</div></div>`).join("")},
+
+ {id:"m7",name:"7 · Hero lệnh đang chạy (ảnh tràn mép)",use:"Theo ảnh tham khảo 1 (\"Current Shipment\"): đầu Home, 1 lệnh đang chạy nổi bật. Xe lật quay vào trong, đuôi xe bị mép phải thẻ che bớt.",list:[0,1],
+  parts:"Trạng thái lệnh · mã lệnh lớn · giờ dự kiến tới · ảnh xe tràn mép · chân thẻ: tuyến + xe + lái xe",web:"2 thẻ hero cạnh nhau (khi có nhiều lệnh đang chạy).",
+  m:(v,a)=>m7(v,a),w:a=>`<div class="w7">${V.slice(0,2).map(v=>m7(v,a,true)).join("")}</div>`},
+
+ {id:"m9",name:"9 · Lái xe trên, ảnh giữa, chân xám có nút",use:"Theo ảnh tham khảo 2: chọn xe/lái xe dạng thẻ lớn, ảnh xe không nền là trọng tâm, hành động chính ở chân thẻ.",
+  parts:"Lái xe (ảnh vuông bo, tên, biển số) + chip nhiên liệu · ảnh xe không nền · chân xám: dòng xe + vị trí + nút chính",web:"Lưới 3 cột, cùng thẻ mobile.",
+  m:(v,a)=>m9(v,a),w:a=>`<div class="wg3">${V.map(v=>m9(v,a)).join("")}</div>`}
+];
+
+function m2(v,a){return `<div class="k-card m2"><div class="hd"><div class="grow"><div class="pl">${v.plate}${v.trail?` <span class="ty" style="display:inline">+ ${v.trailPlate}</span>`:""}</div><div class="ty">${typeLine(v)}</div></div>${pill(v.st)}</div>
+ <div class="fw">${frame(v,a,{r:.5})}</div>${locLine(v)}${metrics(v)}${drvRow(v)}</div>`}
+const sdot=st=>`<span class="sdot ${st[0]}"><i></i>${st[1]}</span>`;
+const rd2=on=>`<span class="rd2">${on?I("check",13,3):""}</span>`;
+const who=v=>v.reason?v.until:hasDrv(v)?v.drv.n:"Chưa gán lái xe";
+const whoLn=v=>`<div class="o-ln d">${I(v.reason?"wrench":"user",13)}<span>${who(v)}</span></div>`;
+const oInfo=v=>`<div class="o-r1"><span class="o-pl">${v.plate}</span>${pill(v.st)}</div>${whoLn(v)}`;
+const oInfo3=v=>`<div class="o-r1"><span class="o-pl">${v.plate}</span></div>${whoLn(v)}`;
+function optRow(v,a,on){const off=!!v.reason;return `<div class="orow ${on?"on":""} ${off?"off":""}"><div class="th">${on?`<span class="ck">${I("check",12,3)}</span>`:""}${frame(v,a,{r:.75,mode:"crop"})}</div><div class="grow">${oInfo(v)}</div></div>`}
+function optSlide(v,a,on){const off=!!v.reason;return `<div class="ocard ${on?"on":""} ${off?"off":""}">${rd2(on)}<div class="th"><span class="stc">${pill(v.st)}</span>${frame(v,a,{r:.62,bg:true})}</div>${oInfo3(v)}</div>`}
+function optCard(v,a,on){const off=!!v.reason;return `<div class="ocard ${on?"on":""} ${off?"off":""}">${rd2(on)}<div class="th">${frame(v,a,{r:.42})}</div>${oInfo(v)}</div>`}
+function m7(v,a,web){const j=v.job,bleed=web&&a==="q";return `<div class="m7"><div class="tx">${pill(j.st)}<div class="code">${j.code}</div><div class="eta">Dự kiến tới<b>${j.eta}</b></div></div>
+ <div class="art ${bleed?"bleed":""}">${frame(v,a,{r:bleed?.5:web?.5:.78,mode:"crop",flip:true,bg:false})}</div>
+ <div class="ft7"><div class="route">${I("pin",14)}<span>${j.from} → ${j.to}</span></div><div class="drvl">${I("truck",14)}<b>${v.plate}</b><span>·</span><span>${hasDrv(v)?v.drv.n:"Chưa gán lái xe"}</span></div></div></div>`}
+function m9(v,a){const on=hasDrv(v),off=!!v.reason;return `<div class="k-card m9"><div class="hd">${on?`<div class="av sq">${v.drv.i}</div>`:`<div class="av sq none">${I(off?"wrench":"user",20)}</div>`}
+ <div class="grow"><div class="nm">${on?v.drv.n:off?"Không khả dụng":"Chưa gán lái xe"}</div><div class="sub">${v.plate}</div></div><span class="chip ${fuelLow(v)?"low":""}">${fuelLow(v)?I("alert",13,2.2):""}${v.fuel}% dầu</span></div>
+ <div class="art">${frame(v,a,{r:.5,bg:false})}</div>
+ <div class="ft"><div class="grow"><div class="md">${v.model}${v.trail?" + mooc":""}</div><div class="mtx">${off?I("wrench",13)+v.reason:I("pin",13)+v.loc}</div></div>
+ ${off?`<button class="cta sec">Xem lịch</button>`:`<button class="cta">${on?"Giao lệnh":"Gán lái xe"}</button>`}</div></div>`}
+
+/* Gắn data-cmt cho TỪNG chi tiết trong thẻ → lớp góp ý ghim đúng chi tiết được bấm
+   (lớp góp ý chọn element gần nhất có data-cmt). Tên đọc được + đánh số khi trùng. */
+const NAMES=[
+ [".k-pill","trang-thai"],[".pl","bien-so"],[".ty","phu-de"],[".loc","vi-tri"],[".loc span","chu-vi-tri"],[".upd","cap-nhat"],
+ [".vf","khung-anh"],[".vi","anh"],["img","anh-xe"],[".cmb","anh-ghep"],[".th","o-anh"],
+ [".ms","cum-odo-dau"],[".ms>div","o-chi-so"],[".ms .c","nhan-chi-so"],[".ms .n","so"],[".fuel-bar","thanh-dau"],
+ [".drv","khoi-lai-xe"],[".drv-inline","lai-xe-1-dong"],[".drv-cell","o-lai-xe"],[".av","anh-dai-dien"],[".drv .n,.m8 .dr .n,.m3 .nm,.m9 .nm","ten-lai-xe"],[".drv .s,.m8 .dr .s","vai-tro-sdt"],
+ [".k-ib","nut-tron"],[".mini-btn","nut-gan"],[".cta","nut-chinh"],[".k-btn","nut"],[".muted-chev","mui-ten"],
+ [".who","dong-lai-xe"],[".veh","the-con-xe"],[".opt,.orow,.ocard","lua-chon-xe"],[".rd2","nut-chon"],[".sdot","trang-thai"],[".o-pl","bien-so"],[".o-ln","dong-thong-tin"],[".olist,.ocar","danh-sach"],[".ck","dau-tich"],[".stc","o-trang-thai"],[".rd","nut-chon"],[".head","tieu-de-khoi"],[".k-cap","dem-so"],
+ [".pair","cap-anh"],[".cap","chu-thich-anh"],[".ccap","chu-thich-ghep"],[".kv2","bang-thong-tin"],
+ [".kv .r","dong-thong-tin"],[".kv .r span","nhan"],[".kv .r b","gia-tri"],[".in","khoi-xam"],[".sep","duong-ke"],[".dr","dong-lai-xe"],
+ [".code","ma-lenh"],[".ft7","chan-the"],[".btns","nhom-nut"],[".route","tuyen"],[".eta","gio-toi"],[".drvl","xe-lai-xe"],[".art","anh-noi"],[".lb","nhan"],
+ [".chip","chip"],[".ft","chan-the"],[".md","dong-xe"],[".mtx","dong-phu"],[".sub","bien-so-nho"],
+ [".wt-h","tieu-de-bang"],[".wt-r","dong-bang"],[".hd,.top","dau-the"],[".body","noi-dung"]
+];
+function tagDetails(){
+  document.querySelectorAll(".vc-stage[data-cmt]").forEach(st=>{
+    const base=st.dataset.cmt,cnt={};
+    st.querySelectorAll("*").forEach(el=>{
+      if(el.closest("svg"))return;                       // icon → để nút/chữ chứa nó nhận
+      let n=null;for(const [q,nm] of NAMES){if(el.matches(q))n=nm}   // khớp sau cùng = cụ thể nhất
+      if(!n)n=el.matches(".k-card,.m6,.m7")?"the":el.tagName.toLowerCase()==="span"&&el.textContent.trim()?"chu":el.tagName.toLowerCase();
+      cnt[n]=(cnt[n]||0)+1;
+      el.dataset.cmt=`${base}.${n}${cnt[n]>1?"-"+cnt[n]:""}`;
+    });
+  });
+}
+
+function render(){
+  const angs=S.ang==="both"?["q","s"]:[S.ang];
+  const an={q:"Nghiêng 3/4",s:"Ngang"};
+  const stage=(cmt,html)=>`<div class="vc-stage k s-${S.surf}" data-cmt="${cmt}">${html}</div>`;
+  document.getElementById("out").innerHTML=T.map(t=>{
+    const ta=t.angs||angs,lock=t.angs?` <span class="lockt">đã chốt</span>`:"";
+    let h=`<h2 class="lab-h2" data-cmt="${t.id}.title">${t.name}</h2><p class="lab-sub">${t.use}</p>`;
+    if(S.dev!=="w"){
+      h+=`<div class="vc-dev">Mobile · 375</div>`;
+      if(t.mv)h+=`<div class="vc-row">${t.mv.map(([lb,fn],i)=>`<div class="vc-col"><div class="vc-lb"><b>${lb}</b></div>${stage(`${t.id}.m.${"ab"[i]}`,fn(ta[0]))}</div>`).join("")}</div>`;
+      else if(t.single)h+=`<div class="vc-row">${ta.map(a=>`<div class="vc-col"><div class="vc-lb"><b>${an[a]}</b>${lock}</div>${stage(`${t.id}.m.list.${a}`,t.m(null,a))}</div>`).join("")}</div>`;
+      else (t.list||[0,1]).forEach(vi=>{const v=V[vi];
+        h+=`<div class="vc-row">${ta.map(a=>`<div class="vc-col"><div class="vc-lb"><b>${an[a]}</b>${lock}· ${v.trail?"Đầu kéo + mooc":"Xe tải"}</div>${stage(`${t.id}.m.${v.key}.${a}`,t.m(v,a))}</div>`).join("")}</div>`;
+      });
+    }
+    if(S.dev!=="m"){
+      h+=`<div class="vc-dev">Web · desktop</div>`;
+      ta.forEach(a=>{h+=`<div class="vc-lb" style="margin-bottom:6px"><b>${an[a]}</b>${lock}</div><div class="vc-web">${stage(`${t.id}.w.${a}`,t.w(a))}</div>`});
+    }
+    return h+`<div class="lab-box" style="margin-top:4px;padding:12px 16px"><div class="vc-spec"><div><b>Gồm:</b> ${t.parts}</div><div><b>Web:</b> ${t.web}</div></div></div>`;
+  }).join("");
+  tagDetails();
+  document.querySelectorAll(".lab-opts").forEach(g=>g.querySelectorAll("button").forEach(b=>b.classList.toggle("on",S[g.dataset.k]===b.dataset.v)));
+}
+document.querySelectorAll(".lab-opts").forEach(g=>g.addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;S[g.dataset.k]=b.dataset.v;
+  try{localStorage.setItem("uilab-vc2",JSON.stringify(S))}catch(err){}
+  render();
+}));
+render();
+</script>
+<script>window.CMT_FEATURE="lab-vehicle-cards";</script>
+<!-- COMMENT LAYER — dùng chung nguồn với /prototype-html -->
+<script src="../../.claude/skills/prototype-html/assets/comment-layer.js"></script>
+</body>
+</html>

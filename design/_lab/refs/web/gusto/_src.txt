@@ -1,0 +1,4 @@
+01 out/gusto/09 https://cdn.sanity.io/images/alowdh95/production/b8b1418a43d97518cdc8e65af3b5eaef92959455-2008x1080.jpg
+02 out/gusto/10 https://cdn.sanity.io/images/alowdh95/production/1d19287dc4661635a0b6fc35f8c8931afb4d28ea-2008x1080.jpg
+03 out/gusto/05 https://cdn.sanity.io/images/alowdh95/production/a1eae1f8382fa64b06cb1c6b39329d1213b042e1-2008x1080.jpg
+04 out/gusto/06 https://cdn.sanity.io/images/alowdh95/production/4aa1e8df083ce274aecb4edc208f2df9419991fa-2008x1080.jpg

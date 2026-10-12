@@ -1,0 +1,3 @@
+01 out/baremetrics/11 https://cdn.sanity.io/images/alowdh95/production/02c4f15f151a0c7a553fc180b41c4cfa6a126268-2008x1080.jpg
+02 out/baremetrics/14 https://cdn.sanity.io/images/alowdh95/production/a51757d70716aea4ee37e7c708e3385e6c8192f6-2008x1080.jpg
+03 out/baremetrics/07 https://cdn.sanity.io/images/alowdh95/production/d32b7c92027032bd99595548de1c0e683ce03198-2008x1080.jpg

@@ -1,0 +1,258 @@
+<title>Chốt Lab ↔ Design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
+<style>
+/* Bố cục: 1 cột hồ sơ quyết định — đầu trang tóm tắt tiến độ, mỗi hạng mục là 1 thẻ: so sánh 2 bên · đề xuất · chọn · ghi chú */
+:root{
+  --bg:#f4f4f6; --surface:#ffffff; --sunk:#f8f8fa; --line:#e6e6eb; --ink:#17171a; --ink2:#54545e; --ink3:#8a8a95;
+  --accent:#2f4fae; --accent-soft:#eaeefb; --on-accent:#ffffff;
+  --c-bg:#fdeeee; --c-tx:#b42318; --w-bg:#fff4e2; --w-tx:#9a4f08; --g-bg:#ebf1ff; --g-tx:#1d4ed8; --ok-bg:#e8f6ee; --ok-tx:#15803d;
+  --font-display:"Manrope","Inter",system-ui,sans-serif; --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121215; --surface:#1b1b1f; --sunk:#16161a; --line:#2c2c33; --ink:#ececf1; --ink2:#b4b4bf; --ink3:#83838f;
+  --accent:#8fa7ff; --accent-soft:#232a45; --on-accent:#0f1222;
+  --c-bg:#3a1a19; --c-tx:#ffb4ab; --w-bg:#3a2a14; --w-tx:#f5c27a; --g-bg:#1c2741; --g-tx:#9ab8ff; --ok-bg:#16301f; --ok-tx:#86d9a4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121215; --surface:#1b1b1f; --sunk:#16161a; --line:#2c2c33; --ink:#ececf1; --ink2:#b4b4bf; --ink3:#83838f;
+  --accent:#8fa7ff; --accent-soft:#232a45; --on-accent:#0f1222;
+  --c-bg:#3a1a19; --c-tx:#ffb4ab; --w-bg:#3a2a14; --w-tx:#f5c27a; --g-bg:#1c2741; --g-tx:#9ab8ff; --ok-bg:#16301f; --ok-tx:#86d9a4; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:14px/1.55 var(--font-body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:flex;flex-direction:column;gap:18px}
+h1{font:800 26px/1.2 var(--font-display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.lede{color:var(--ink2);margin:6px 0 0;max-width:68ch}
+.lede a{color:var(--accent)}
+.summary{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
+.prog{flex:1;min-width:220px}
+.prog .n{font:700 22px var(--font-display);font-variant-numeric:tabular-nums}
+.prog .n span{color:var(--ink3);font-size:15px;font-weight:600}
+.bar{height:6px;border-radius:999px;background:var(--sunk);border:1px solid var(--line);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.tally{display:flex;gap:16px;font-size:12.5px;color:var(--ink2);flex-wrap:wrap}
+.tally b{font-variant-numeric:tabular-nums;color:var(--ink)}
+.bulk{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);border-radius:10px;padding:8px 14px;cursor:pointer}
+.bulk.armed{background:var(--surface);color:var(--accent)}
+.bulk:disabled{opacity:.45;cursor:default}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filters button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:var(--surface);color:var(--ink2);border-radius:999px;padding:4px 11px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.notice{border-radius:10px;padding:10px 14px;font-size:13px;background:var(--w-bg);color:var(--w-tx)}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:12px}
+.item.done{border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}
+.ih{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.num{font:700 12px var(--font-display);color:var(--ink3);font-variant-numeric:tabular-nums;width:22px}
+.ih h2{font:700 16px var(--font-display);margin:0;letter-spacing:-.01em}
+.lvl{font-size:11.5px;font-weight:600;border-radius:6px;padding:2px 8px}
+.lvl.c{background:var(--c-bg);color:var(--c-tx)}.lvl.w{background:var(--w-bg);color:var(--w-tx)}.lvl.g{background:var(--g-bg);color:var(--g-tx)}.lvl.ok{background:var(--ok-bg);color:var(--ok-tx)}
+.state{margin-left:auto;font-size:12px;color:var(--ink3)}
+.state.set{color:var(--accent);font-weight:600}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cmp>div{background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.cmp .k{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:3px}
+.prop{border-left:3px solid var(--accent);padding:2px 0 2px 12px;display:grid;gap:3px}
+.prop .t{font-weight:600}
+.prop .t em{font-style:normal;color:var(--accent)}
+.prop .why,.prop .todo{color:var(--ink2);font-size:13px}
+.prop .todo b{color:var(--ink);font-weight:600}
+.pick{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pick button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:9px;padding:6px 12px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.pick button .rec{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);border-radius:5px;padding:1px 5px}
+.pick button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.pick button[aria-pressed="true"] .rec{background:rgba(255,255,255,.18);color:var(--on-accent)}
+.pick button:disabled{opacity:.5;cursor:default}
+textarea{width:100%;font:inherit;font-size:13px;color:var(--ink);background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:8px 10px;min-height:38px;resize:vertical}
+button:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.item.match .cmp{opacity:.85}
+/* Mẫu UI thu nhỏ: luôn vẽ trên nền sáng như giao diện thật (màu cố định có chủ ý, nền tự đặt) */
+.demo{margin-top:10px;background:#ffffff;color:#17171a;border:1px solid #e6e6eb;border-radius:10px;padding:12px;font:13px/1.4 "Inter",system-ui,sans-serif;display:flex;flex-wrap:wrap;gap:8px;align-items:center;overflow-x:auto}
+.demo.col{flex-direction:column;align-items:stretch}
+.demo .cap{font-size:11px;color:#8a8a95;width:100%}
+.d-btn{display:inline-flex;align-items:center;gap:6px;font:500 13px "Inter",sans-serif;white-space:nowrap;padding:0 12px}
+.d-pri{background:#18181b;color:#fff}
+.d-in{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 10px;border:1px solid #d4d4d4;background:#fff;color:#8a8a95;font-size:12.5px;white-space:nowrap}
+.d-sw{display:inline-flex;flex-direction:column;gap:3px;font-size:10.5px;color:#54545e;align-items:center}
+.d-sw i{display:block;width:34px;height:24px;border-radius:6px;border:1px solid rgba(0,0,0,.08)}
+.d-card{background:#fff;border:1px solid #e4e4e8;padding:10px 12px;min-width:120px}
+.d-chip{display:inline-flex;align-items:center;gap:5px;font:500 12px "Inter",sans-serif;padding:2px 8px;white-space:nowrap}
+.d-chip b{width:6px;height:6px;border-radius:50%;display:inline-block}
+.d-nav{width:100%;display:flex;border:1px solid #e4e4e8;border-radius:8px;overflow:hidden;height:120px}
+.d-nav .s{padding:8px;display:flex;flex-direction:column;gap:3px;font-size:11px;color:#54545e}
+.d-nav .s .on{background:#ececf0;color:#17171a;font-weight:600;border-radius:6px;padding:3px 6px}
+.d-nav .s .it{padding:3px 6px}
+.d-nav .s span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.d-nav .s .g{font-size:9.5px;letter-spacing:.06em;color:#8a8a95;font-weight:600;padding:5px 6px 1px}
+.d-nav .s .ft{margin-top:auto;border:1px solid #e4e4e8;border-radius:6px;padding:4px 6px;font-size:10px}
+.d-nav .m{flex:1;background:#fff;padding:8px;font-size:10.5px;color:#8a8a95}
+.d-bar{width:100%;display:flex;align-items:center;gap:8px;border-bottom:1px solid #e4e4e8;padding:0 10px;font-size:12px;color:#8a8a95}
+.d-av{width:22px;height:22px;border-radius:50%;background:#e7ecfb;color:#2f4fae;font:600 9px "Inter";display:inline-flex;align-items:center;justify-content:center}
+.d-frame{width:100%;height:96px;display:flex;border:1px solid #e4e4e8;border-radius:8px;overflow:hidden;background:#fff}
+.d-frame .sd{width:48px;background:#f1f1f1;border-right:1px solid #e4e4e8}
+.d-frame .ct{flex:1;position:relative}
+.d-frame .zone{position:absolute;top:10px;bottom:10px;background:repeating-linear-gradient(135deg,#eef1fb 0 6px,#f6f8fd 6px 12px);border:1px dashed #9aaae0;border-radius:4px;font-size:10px;color:#2f4fae;display:flex;align-items:center;justify-content:center}
+.d-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.d-tbl th{font-size:10.5px;color:#8a8a95;font-weight:600;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #e4e4e8;padding:5px 8px;background:#f8f8fa}
+.d-tbl td{border-bottom:1px solid #f0f0f3;padding:6px 8px}
+.d-ib{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;border-radius:6px;color:#54545e}
+.d-pg{width:100%;display:flex;align-items:center;gap:6px;font-size:12px;color:#8a8a95}
+.d-pg .cur{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:600}
+.d-bulk{display:inline-flex;align-items:center;gap:8px;background:#17171a;color:#fff;border-radius:10px;padding:6px 6px 6px 12px;font-size:12px;white-space:nowrap}
+.d-bulk span.b{background:rgba(255,255,255,.12);border-radius:6px;padding:3px 8px}
+.d-none{width:100%;border:1.5px dashed #c9c9d1;border-radius:8px;padding:14px;text-align:center;color:#8a8a95;font-size:12px}
+.d-bp{display:flex;align-items:flex-end;gap:10px;width:100%}
+.d-bp div{border:1.5px solid #9a9aa5;border-radius:4px;display:flex;align-items:flex-end;justify-content:center;font-size:10px;color:#54545e;padding-bottom:3px;background:#fafafb}
+.d-tabs{display:flex;gap:16px;border-bottom:1px solid #e4e4e8;font-size:12.5px;width:100%}
+.d-tabs span{padding-bottom:7px;color:#54545e}.d-tabs span.on{color:#17171a;font-weight:600;box-shadow:inset 0 -2px 0 #262626}
+.prop .demo{margin-top:6px}
+
+@media (max-width:640px){.cmp{grid-template-columns:1fr}.state{margin-left:0;width:100%}}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Chốt Lab ↔ Design system</h1>
+    <p class="lede">18 hạng mục lệch giữa bản lab web (khung xương, 11/10/2026) và design system hiện tại trong <code>design/design.md</code>. Mỗi dòng có mẫu UI thu nhỏ của 2 bên và đề xuất của Claude. Bấm chọn phương án — chọn đề xuất là đồng ý — và ghi chú nếu cần. Khung minh hoạ nằm trên Figma: <a href="https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=5479-19466" target="_blank" rel="noopener">Section Lab web · Khung xương</a>.</p>
+  </header>
+
+  <section class="summary" aria-label="Tiến độ">
+    <div class="prog"><div class="n" id="pn">0 <span>/ 16 đã chốt</span></div><div class="bar"><i id="pb"></i></div></div>
+    <div class="tally"><span>Theo DS <b id="t-ds">0</b></span><span>Theo lab <b id="t-lab">0</b></span><span>Kết hợp / khác <b id="t-mix">0</b></span></div>
+    <button class="bulk" id="bulk" type="button">Đồng ý mọi đề xuất còn lại</button>
+  </section>
+
+  <div class="filters" role="group" aria-label="Lọc">
+    <button type="button" data-f="all" aria-pressed="true">Tất cả</button>
+    <button type="button" data-f="open" aria-pressed="false">Chưa chốt</button>
+    <button type="button" data-f="c" aria-pressed="false">Conflict</button>
+    <button type="button" data-f="w" aria-pressed="false">Lệch nhẹ</button>
+    <button type="button" data-f="g" aria-pressed="false">DS chưa có</button>
+  </div>
+
+  <div class="notice" id="offline" hidden>Đang kết nối kho lưu… Nếu thông báo này không mất, lựa chọn sẽ không được lưu (cần mở trang trên claude.ai và đăng nhập).</div>
+
+  <main id="list" style="display:flex;flex-direction:column;gap:12px"></main>
+</div>
+
+<script>
+const LV={c:"Conflict",w:"Lệch nhẹ",g:"DS chưa có",ok:"Khớp"};
+const OPT={ds:"Theo DS",lab:"Theo lab",mix:"Kết hợp / khác"};
+const ITEMS=[
+ {id:"r01",n:"Font tiêu đề",lv:"c",ds:"Cal Sans Regular — heading 24 / 20 / 17, chỉ 1 độ đậm",lab:"Manrope Bold — tiêu đề trang 22, tiêu đề khối 14.5 (chốt ở lab 09/10)",p:"lab",why:"Cal Sans bị chê \"điệu\" ở vòng font; Manrope có đủ dấu tiếng Việt và nhiều độ đậm, hợp màn dữ liệu dày.",todo:"Sửa Typography trong design.md + text style Figma heading-1…3 sang Manrope 700."},
+ {id:"r02",n:"Màu chữ, nền, viền",lv:"w",ds:"Chữ #171717 · #737373 · nền body #f1f1f1 · viền đen 8%",lab:"#17171a · #54545e · #8e8e98 · viền #ececf0 · nền phụ #f4f4f6",p:"ds",why:"Khác biệt nhỏ, không đáng tạo bảng màu thứ hai. Lab chỉ cần thêm 1 mức chữ phụ thứ ba cho mã, thời gian.",todo:"Map màu lab về token DS; thêm <b>text-tertiary</b> nếu cần."},
+ {id:"r03",n:"Bo góc nút và ô nhập",lv:"c",ds:"element 10px",lab:"Viên thuốc (999) — đã chốt cho mobile",p:"mix",why:"Web dày dữ liệu, nút cạnh bảng nhìn chắc hơn với bo 10 (bản \"Vuông\" anh xem gần đây). Mobile giữ viên thuốc như đã chốt.",todo:"Web dùng 10px theo DS; ghi rõ ngoại lệ mobile trong design.md."},
+ {id:"r04",n:"Bo góc thẻ",lv:"w",ds:"container 12px",lab:"14px",p:"ds",why:"Chênh 2px, không đáng giữ riêng.",todo:"Lab đổi về 12px."},
+ {id:"r05",n:"Nút phụ",lv:"c",ds:"Secondary: nền đen 6%, không viền, cao 32",lab:"Nền trắng + viền 1px, cao 34",p:"ds",why:"Dùng lại Button Secondary của thư viện, không phải tạo biến thể mới; nền xám vẫn đọc rõ trên nền trắng.",todo:"Lab đổi nút phụ sang Secondary, cao 32."},
+ {id:"r06",n:"Chip trạng thái",lv:"c",ds:"Badge pill cao 20, nền vivid hoặc categorical",lab:"Nền nhạt + chấm màu, bo 6",p:"mix",why:"Màu vivid quá đậm khi cả cột bảng đều có chip. Dùng Badge categorical (nền nhạt -bg, chữ -text) của DS, thêm chấm StatusDot — không tạo component mới.",todo:"Ánh xạ 7 trạng thái Lệnh sang màu categorical; Badge pill + Dot."},
+ {id:"r07",n:"Menu trái",lv:"c",ds:"SideNav 300px nền body xám; chưa có chân menu module + cơ sở",lab:"240px nền trắng + viền; nhóm có tiêu đề; chân menu module + cơ sở",p:"lab",why:"300px chiếm 21% màn laptop 1440. Chân menu là yêu cầu CMP-11 mà thư viện chưa đáp ứng.",todo:"SideNav 240px; chân menu thành component dự án; cập nhật CMP-11."},
+ {id:"r08",n:"Thanh trên",lv:"w",ds:"TopNav cao 48",lab:"Header 44: đường dẫn · tìm · chuông · ảnh tài khoản",p:"ds",why:"Chênh 4px; dùng TopNav thư viện, giữ nội dung gọn như lab.",todo:"Cao 48, nội dung theo lab."},
+ {id:"r09",n:"Lề nội dung",lv:"c",ds:"P1 full-width lề 16; shell S1 nội dung tối đa 1100",lab:"Lề 28, giãn hết bề ngang",p:"mix",why:"Lề 16 sát menu, khó đọc; giới hạn 1100 phí màn 1920 cho bảng. Đề xuất lề 24, trang danh sách giãn hết, form tối đa 720, chi tiết tối đa 1440.",todo:"Ghi vào Grid & Container của design.md."},
+ {id:"r10",n:"Cỡ chữ",lv:"c",ds:"body / label 14 · supporting 12",lab:"13–13.5 · nhãn 12.5",p:"ds",why:"14 dễ đọc hơn trên màn văn phòng, khớp text style có sẵn.",todo:"Lab đổi về 14 / 12."},
+ {id:"r11",n:"Thanh lọc",lv:"c",ds:"PowerSearch: 1 ô gộp tìm + chip \"[Cột]: giá trị\" + số kết quả; Tuỳ chỉnh cột bên phải (duyệt 01/10)",lab:"Ô tìm riêng + nút Bộ lọc + chip 2 màu + Sắp xếp / Nhóm / Tuỳ chỉnh cột",p:"mix",why:"Giữ PowerSearch đã duyệt. Bỏ icon Sắp xếp vì DS sắp xếp bằng bấm tiêu đề cột (2.18); giữ Nhóm + Tuỳ chỉnh cột bên phải.",todo:"Mục 2b của lab theo PowerSearch; cập nhật luật thanh công cụ."},
+ {id:"r12",n:"Căn cột ngày giờ",lv:"c",ds:"Ngày giờ căn giữa (2.14)",lab:"Giờ hẹn căn phải",p:"ds",why:"Đã là quy tắc chung của khách.",todo:"Lab đổi giờ sang căn giữa."},
+ {id:"r13",n:"Cột thao tác",lv:"ok",ds:"≤ 2 icon + ⋯, không hiện action vô hiệu (SC-07)",lab:"Việc chính theo trạng thái + gọi + ⋯",match:1},
+ {id:"r14",n:"Phân trang",lv:"w",ds:"Nhãn \"50 bản ghi trên 1 trang\"; trang hiện tại xanh lá (SC-04)",lab:"\"Hiển thị 1–50 / 128 Lệnh\"; trang hiện tại đen",p:"ds",why:"Nhãn theo quy tắc khách; màu trang hiện tại lấy token accent để đổi theo thương hiệu.",todo:"Lab đổi nhãn; màu theo accent."},
+ {id:"r15",n:"Thẻ số (KPI)",lv:"g",ds:"Chưa có component",lab:"4 thẻ số trên danh sách (kiểu chọn ở mục 2a)",p:"lab",why:"Nhiều màn danh sách và dashboard cần; không có sẵn trong thư viện.",todo:"Thêm component dự án \"Thẻ số\" sau khi chốt kiểu 2a."},
+ {id:"r16",n:"Thanh chọn nhiều",lv:"g",ds:"Chưa có",lab:"Thanh nổi ở đáy theo UC00.00.11 (SRS cũ)",p:"lab",why:"Là pattern đã định nghĩa trong SRS cũ, áp cho mọi danh sách có hành động hàng loạt.",todo:"Thêm component dự án + ghi vào design.md."},
+ {id:"r17",n:"Breakpoint",lv:"g",ds:"Chỉ mẫu 1920; thư viện có MobileNav, SideNav Collapsed",lab:"1920 / 1440 / 390 — mobile: menu ngăn kéo, thẻ thay bảng, thẻ số 2×2",p:"lab",why:"Người dùng thật dùng laptop 1440 và điện thoại; cần luật chuyển đổi rõ.",todo:"Ghi 3 breakpoint + cách chuyển vào Responsive Behavior."},
+ {id:"r18",n:"Tab",lv:"ok",ds:"Chữ semibold + thanh accent",lab:"Giống",match:1},
+];
+const SV={s:'<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',x:'<path d="M18 6 6 18M6 6l12 12"/>',f:'<path d="M3 5h18M6 12h12M10 19h4"/>',m:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',ph:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>',e:'<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',c:'<rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/>',g:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="18" height="7" rx="1"/>',so:'<path d="m3 16 4 4 4-4M7 20V4M21 8l-4-4-4 4M17 4v16"/>',b:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>'};
+const sv=(k,s=14,c="currentColor")=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${SV[k]}</svg>`;
+const btn=(t,r,pri,sec)=>`<span class="d-btn ${pri?"d-pri":""}" style="height:${sec==="lab"?34:32}px;border-radius:${r}px;${sec==="ds"?"background:rgba(0,0,0,.06);":""}${sec==="lab"?"background:#fff;border:1px solid #e2e2e7;":""}">${t}</span>`;
+const sw=(c,l)=>`<span class="d-sw"><i style="background:${c}"></i>${l}</span>`;
+const chip=(t,bg,tx,dot,r)=>`<span class="d-chip" style="background:${bg};color:${tx};border-radius:${r}px;${r>=99?"height:20px;":""}">${dot?`<b style="background:${dot}"></b>`:""}${t}</span>`;
+const nav=(w,bg,lab)=>`<div class="d-nav"><div class="s" style="width:${w}px;flex:none;background:${bg};${lab?"border-right:1px solid #e4e4e8":""}">${lab?'<span class="g">ĐIỀU PHỐI</span>':""}<span class="it">Theo dõi xếp xe</span><span class="on">Lệnh vận tải</span><span class="it">JobID</span>${lab?'<span class="ft"><b>ĐIỀU PHỐI</b><br>Hải Phòng ▾</span>':'<span class="it">Cảnh báo hạn</span>'}</div><div class="m">Nội dung — menu ${lab?"240":"300"}px chiếm ${lab?"17":"21"}% màn 1440 (vẽ tỉ lệ 1:2)</div></div>`;
+const hbar=(h,full)=>`<div class="d-bar" style="height:${h}px">${full?"Điều phối › <b style=\"color:#17171a;font-weight:500\">Lệnh vận tải</b>":"<b style=\"color:#17171a\">Logo</b> · Menu"}<span style="margin-left:auto;display:inline-flex;gap:8px;align-items:center">${sv("s",14)}${sv("b",14)}<span class="d-av">TN</span></span><span style="font-size:10px">cao ${h}</span></div>`;
+const frame=(l,r,lab)=>`<div class="d-frame"><div class="sd"></div><div class="ct"><div class="zone" style="left:${l}px;right:${r}px">${lab}</div></div></div>`;
+const tblAlign=(al)=>`<table class="d-tbl"><thead><tr><th style="text-align:left">Mã</th><th style="text-align:${al}">Giờ hẹn</th><th style="text-align:right">Chi phí (đ)</th></tr></thead><tbody>${[["LVT-0456","11:30","420.000"],["LVT-0452","10:45","380.000"]].map(r=>`<tr><td>${r[0]}</td><td style="text-align:${al}">${r[1]}</td><td style="text-align:right">${r[2]}</td></tr>`).join("")}</tbody></table>`;
+const kpi=`<div class="d-card" style="border-radius:12px"><div style="font-size:11.5px;color:#54545e;font-weight:500">Lệnh hôm nay</div><div style="font:700 24px Manrope,sans-serif">14</div><div style="font-size:11px;color:#8a8a95">so với hôm qua +3</div></div><div class="d-card" style="border-radius:12px"><div style="font-size:11.5px;color:#54545e;font-weight:500">Cần xử lý</div><div style="font:700 24px Manrope,sans-serif;color:#b42318">2</div><div style="font-size:11px;color:#8a8a95">1 từ chối · 1 trễ</div></div>`;
+const V={
+ r01:{ds:`<div class="demo col"><div style="font:400 24px/1.3 'Cal Sans','Inter',sans-serif">Lệnh vận tải</div><div style="font:400 17px 'Cal Sans','Inter',sans-serif">Thông tin chung</div><span class="cap">Cal Sans 400 · 24 / 17</span></div>`,
+      lab:`<div class="demo col"><div style="font:700 22px/1.3 Manrope,sans-serif;letter-spacing:-.02em">Lệnh vận tải</div><div style="font:700 14.5px Manrope,sans-serif">Thông tin chung</div><span class="cap">Manrope 700 · 22 / 14.5</span></div>`},
+ r02:{ds:`<div class="demo">${sw("#171717","chữ")}${sw("#737373","chữ phụ")}${sw("#a3a3a3","mờ")}${sw("#f1f1f1","nền")}${sw("rgba(0,0,0,.08)","viền")}</div>`,
+      lab:`<div class="demo">${sw("#17171a","chữ")}${sw("#54545e","phụ 1")}${sw("#8e8e98","phụ 2")}${sw("#f4f4f6","nền")}${sw("#ececf0","viền")}</div>`},
+ r03:{ds:`<div class="demo">${btn("Lập Lệnh",10,1)}<span class="d-in" style="border-radius:10px">${sv("s",13)}Tìm…</span><span class="cap">bo 10px</span></div>`,
+      lab:`<div class="demo">${btn("Lập Lệnh",999,1)}<span class="d-in" style="border-radius:10px">${sv("s",13)}Tìm…</span><span class="cap">viên thuốc</span></div>`,
+      p:`<div class="demo">${btn("Lập Lệnh",10,1)}<span class="cap" style="width:auto">web</span><span style="width:16px"></span>${btn("Nhận Lệnh",999,1)}<span class="cap" style="width:auto">mobile</span></div>`},
+ r04:{ds:`<div class="demo"><div class="d-card" style="border-radius:12px">Thẻ · bo 12</div></div>`,lab:`<div class="demo"><div class="d-card" style="border-radius:14px">Thẻ · bo 14</div></div>`},
+ r05:{ds:`<div class="demo">${btn("Xuất Excel",10,0,"ds")}${btn("Lập Lệnh",10,1)}<span class="cap">Secondary: nền đen 6%, cao 32</span></div>`,
+      lab:`<div class="demo">${btn("Xuất Excel",999,0,"lab")}${btn("Lập Lệnh",999,1)}<span class="cap">nền trắng + viền, cao 34</span></div>`},
+ r06:{ds:`<div class="demo">${chip("Đã lập","#e5e5e5","#262626",0,99)}${chip("Đang thực hiện","#ffce2f","#171717",0,99)}${chip("Đã duyệt","#198100","#fff",0,99)}<span class="cap">Badge pill, nền vivid</span></div>`,
+      lab:`<div class="demo">${chip("Đã lập","#f1f1f4","#4b4b55","#9a9aa5",6)}${chip("Đang thực hiện","#fff4e2","#a5560a","#f59e0b",6)}${chip("Đã duyệt","#e8f6ee","#15803d","#22c55e",6)}<span class="cap">nền nhạt + chấm, bo 6</span></div>`,
+      p:`<div class="demo">${chip("Đã lập","#e5e5e5","#262626","#737373",99)}${chip("Đang thực hiện","#f8da9d","#745b00","#c99a00",99)}${chip("Đã duyệt","#c5e5c0","#0c5700","#198100",99)}<span class="cap">Badge pill + màu nhạt categorical của DS + chấm</span></div>`},
+ r07:{ds:`<div class="demo">${nav(150,"#f1f1f1",0)}</div>`,lab:`<div class="demo">${nav(120,"#fff",1)}</div>`},
+ r08:{ds:`<div class="demo" style="padding:0">${hbar(48,0)}</div>`,lab:`<div class="demo" style="padding:0">${hbar(44,1)}</div>`},
+ r09:{ds:`<div class="demo">${frame(16,60,"lề 16 · tối đa 1100")}</div>`,lab:`<div class="demo">${frame(28,28,"lề 28 · giãn hết")}</div>`,
+      p:`<div class="demo">${frame(24,24,"lề 24 · danh sách giãn hết · form ≤ 720 · chi tiết ≤ 1440")}</div>`},
+ r10:{ds:`<div class="demo col"><div style="font-size:14px">Kho CFS Đình Vũ → Kho An Phát · 15C-999.00</div><div style="font-size:12px;color:#737373">Cập nhật 10:42 · supporting 12</div><span class="cap">body 14</span></div>`,
+      lab:`<div class="demo col"><div style="font-size:13px">Kho CFS Đình Vũ → Kho An Phát · 15C-999.00</div><div style="font-size:12px;color:#8e8e98">Cập nhật 10:42 · 12</div><span class="cap">body 13</span></div>`},
+ r11:{ds:`<div class="demo"><span class="d-in" style="border-radius:10px;flex:1;min-width:260px;gap:6px">${sv("s",13)}${chip("Loại hàng: FCL nhập ✕","#f1f1f1","#17171a",0,6)}${chip("Ngày: Hôm nay ✕","#f1f1f1","#17171a",0,6)}<span>Tìm hoặc thêm bộ lọc…</span><span style="margin-left:auto">128 kết quả</span></span><span class="d-ib">${sv("c",15)}</span><span class="cap">PowerSearch — 1 ô gộp</span></div>`,
+      lab:`<div class="demo"><span class="d-in" style="border-radius:10px;width:150px">${sv("s",13)}Tìm…</span><span class="d-btn" style="height:30px;border:1px solid #e2e2e7;border-radius:999px">${sv("f",13)}Bộ lọc <b style="background:#17171a;color:#fff;border-radius:9px;padding:0 5px;font-size:10px">2</b></span>${chip("<span style='color:#8a8a95'>Loại hàng</span> FCL nhập","#fff","#17171a",0,8)}<span style="margin-left:auto;font-size:11.5px;color:#8a8a95">128 kết quả</span><span class="d-ib">${sv("so",15)}</span><span class="d-ib">${sv("g",15)}</span><span class="d-ib">${sv("c",15)}</span></div>`,
+      p:`<div class="demo"><span class="d-in" style="border-radius:10px;flex:1;min-width:240px;gap:6px">${sv("s",13)}${chip("Loại hàng: FCL nhập ✕","#f1f1f1","#17171a",0,6)}<span>Tìm hoặc thêm bộ lọc…</span><span style="margin-left:auto">128 kết quả</span></span><span class="d-ib">${sv("g",15)}</span><span class="d-ib">${sv("c",15)}</span><span class="cap">PowerSearch + Nhóm + Tuỳ chỉnh cột; sắp xếp bấm tiêu đề cột</span></div>`},
+ r12:{ds:`<div class="demo">${tblAlign("center")}</div>`,lab:`<div class="demo">${tblAlign("right")}</div>`},
+ r13:{ds:`<div class="demo"><span class="d-ib">${sv("e",15)}</span><span class="d-ib">${sv("ph",15)}</span><span class="d-ib">${sv("m",15)}</span><span class="cap">≤ 2 icon + ⋯</span></div>`,lab:`<div class="demo"><span class="d-ib" style="color:#17171a">${sv("e",15)}</span><span class="d-ib">${sv("ph",15)}</span><span class="d-ib">${sv("m",15)}</span><span class="cap">việc chính + gọi + ⋯</span></div>`},
+ r14:{ds:`<div class="demo"><div class="d-pg"><span>50 bản ghi trên 1 trang</span><span style="margin-left:auto">‹</span><span class="cur" style="background:#198100">1</span><span>2</span><span>…</span><span>6</span><span>›</span></div></div>`,
+      lab:`<div class="demo"><div class="d-pg"><span>Hiển thị 1–50 / 128 Lệnh</span><span style="margin-left:auto">50 / trang ▾</span><span>‹</span><span class="cur" style="background:#17171a">1</span><span>2</span><span>…</span><span>6</span><span>›</span></div></div>`},
+ r15:{ds:`<div class="demo"><div class="d-none">Chưa có component thẻ số</div></div>`,lab:`<div class="demo">${kpi}</div>`},
+ r16:{ds:`<div class="demo"><div class="d-none">Chưa có thanh chọn nhiều</div></div>`,lab:`<div class="demo"><span class="d-bulk"><b>3 đã chọn</b><span style="color:#b9c4ff">Chọn tất cả 128</span><span class="b">Xuất Excel</span><span class="b">Giao lại</span><span class="b" style="color:#ffb4ad">Huỷ Lệnh</span><span style="opacity:.7">Bỏ chọn</span></span></div>`},
+ r17:{ds:`<div class="demo"><div class="d-bp"><div style="width:192px;height:108px">1920</div></div></div>`,lab:`<div class="demo"><div class="d-bp"><div style="width:192px;height:108px">1920</div><div style="width:144px;height:90px">1440</div><div style="width:39px;height:84px">390</div></div></div>`},
+ r18:{ds:`<div class="demo"><div class="d-tabs"><span class="on">Tất cả</span><span>Chờ giao</span><span>Đang chạy</span></div></div>`,lab:`<div class="demo"><div class="d-tabs"><span class="on">Tất cả</span><span>Chờ giao</span><span>Đang chạy</span></div></div>`},
+};
+
+const DEC={};let db=null,ready=false,filter="all";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=iso=>{try{const d=new Date(iso);return d.toLocaleString("vi-VN",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}catch(e){return ""}};
+
+function render(){
+  const ae=document.activeElement,aid=ae&&ae.id,ss=ae&&ae.selectionStart,se=ae&&ae.selectionEnd;
+  const list=$("#list");list.innerHTML="";
+  ITEMS.forEach((it,i)=>{
+    const d=DEC[it.id];const open=!it.match&&!d;
+    if(filter==="open"&&!open)return;
+    if(["c","w","g"].includes(filter)&&it.lv!==filter)return;
+    const el=document.createElement("article");el.className="item"+(d?" done":"")+(it.match?" match":"");el.id=it.id;
+    let html=`<div class="ih"><span class="num">${String(i+1).padStart(2,"0")}</span><h2>${esc(it.n)}</h2><span class="lvl ${it.lv}">${LV[it.lv]}</span>
+      <span class="state ${d?"set":""}">${it.match?"Không cần quyết":d?`Đã chốt: ${OPT[d.choice]}${d.at?" · "+fmt(d.at):""}`:"Chưa chốt"}</span></div>
+      <div class="cmp"><div><div class="k">Design system hiện tại</div>${esc(it.ds)}${(V[it.id]||{}).ds||""}</div><div><div class="k">Bản lab</div>${esc(it.lab)}${(V[it.id]||{}).lab||""}</div></div>`;
+    if(!it.match){
+      html+=`<div class="prop"><div class="t">Đề xuất: <em>${OPT[it.p]}</em></div><div class="why">${esc(it.why)}</div>${(V[it.id]||{}).p||""}<div class="todo">Việc phải sửa: ${it.todo}</div></div>
+      <div class="pick" role="group" aria-label="Chọn phương án">${Object.keys(OPT).map(k=>`<button type="button" id="${it.id}-${k}" data-id="${it.id}" data-c="${k}" aria-pressed="${d&&d.choice===k}" ${ready?"":"disabled"}>${OPT[k]}${k===it.p?'<span class="rec">Đề xuất</span>':""}</button>`).join("")}</div>
+      <textarea id="${it.id}-note" data-note="${it.id}" placeholder="Ghi chú — bắt buộc khi chọn khác đề xuất" ${ready?"":"disabled"}>${esc(d&&d.note||"")}</textarea>`;
+    }
+    el.innerHTML=html;list.appendChild(el);
+  });
+  const need=ITEMS.filter(x=>!x.match),done=need.filter(x=>DEC[x.id]);
+  $("#pn").innerHTML=`${done.length} <span>/ ${need.length} đã chốt</span>`;$("#pb").style.width=(done.length/need.length*100)+"%";
+  ["ds","lab","mix"].forEach(k=>$("#t-"+k).textContent=done.filter(x=>DEC[x.id].choice===k).length);
+  const left=need.length-done.length;const b=$("#bulk");b.disabled=!ready||left===0;
+  if(!b.classList.contains("armed"))b.textContent=left?`Đồng ý ${left} đề xuất còn lại`:"Đã chốt hết";
+  if(aid){const n=document.getElementById(aid);if(n){n.focus();if(n.tagName==="TEXTAREA"&&ss!=null){try{n.setSelectionRange(ss,se)}catch(e){}}}}
+}
+async function save(id,choice,note){
+  if(!db)return;const prev=DEC[id]||{};
+  const body={choice:choice??prev.choice,note:note??prev.note??"",at:new Date().toISOString()};
+  if(!body.choice)return;
+  DEC[id]=body;render();
+  try{await db.collection("decisions").doc(id).set(body)}catch(e){$("#offline").hidden=false;$("#offline").textContent="Không lưu được lựa chọn: "+(e&&e.message||"lỗi kết nối")+". Thử lại sau."}
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".pick button");if(b){save(b.dataset.id,b.dataset.c,null);return}
+  const f=e.target.closest(".filters button");if(f){filter=f.dataset.f;document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",x===f));render();return}
+});
+const timers={};
+document.addEventListener("input",e=>{const id=e.target.dataset&&e.target.dataset.note;if(!id)return;clearTimeout(timers[id]);const v=e.target.value;
+  timers[id]=setTimeout(()=>{if(DEC[id])save(id,null,v);else{const it=ITEMS.find(x=>x.id===id);save(id,it.p,v)}},700)});
+$("#bulk").addEventListener("click",async()=>{const b=$("#bulk");const left=ITEMS.filter(x=>!x.match&&!DEC[x.id]);
+  if(!b.classList.contains("armed")){b.classList.add("armed");b.textContent=`Bấm lần nữa để chốt ${left.length} dòng theo đề xuất`;setTimeout(()=>{b.classList.remove("armed");render()},5000);return}
+  b.classList.remove("armed");b.disabled=true;for(const it of left){await save(it.id,it.p,null)}render()});
+
+render();$("#offline").hidden=false;
+(async()=>{
+  db=await window.claude?.use?.("db");
+  if(!db){$("#offline").textContent="Không mở được kho lưu ở chế độ xem này — lựa chọn sẽ không được lưu. Mở trang trên claude.ai khi đã đăng nhập.";return}
+  db.collection("decisions").onSnapshot(snap=>{snap.docs.forEach(s=>{if(s.exists)DEC[s.id]=s.data()});ready=true;$("#offline").hidden=true;render()},
+    err=>{$("#offline").hidden=false;$("#offline").textContent="Mất kết nối kho lưu: "+(err&&err.message||"")+". Lựa chọn mới có thể chưa được lưu."});
+})();
+</script>

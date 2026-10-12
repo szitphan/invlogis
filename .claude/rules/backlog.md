@@ -10,7 +10,7 @@
 |---|---|---|
 | File mới trong `docs-input/` | Thêm dòng sổ `⬜ chưa feed` + task `BL-NNN` "Đọc và feed" | Đầu phiên, mỗi lượt user gửi tin, sau mỗi Write/Edit |
 | File trong `docs-input/` đổi tên/chuyển chỗ (cùng nội dung) | Đổi đường dẫn trong sổ + task | như trên |
-| Doc trong `docs/{feature}/` trỏ tới nguồn `⬜` | Nguồn → `✅ đã feed`, task feed tự đóng | như trên |
+| Doc trong `docs/{feature}/` trỏ tới nguồn `⬜` | Nguồn → `✅ đã feed`, task feed tự đóng. Nguồn đã thay bản mới (dòng `> Phiên bản: … (nhận YYYY-MM-DD)`) chỉ tính doc có `updated:` từ ngày đó trở đi | như trên |
 | Điều kiện cột **Xong khi** thoả | Task → `✅`, ghi ngày + bằng chứng, chuyển sang mục Đã xong | như trên |
 | File trong folder `zz-*` (feature nháp/test) | Bỏ qua — không đóng task, không đánh dấu feed | như trên |
 

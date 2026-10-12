@@ -1,0 +1,4 @@
+01 out/deputy/16 https://cdn.sanity.io/images/alowdh95/production/736b307251e817d3458226f806e673fa207f303c-1310x720.jpg
+02 out/deputy/13 https://cdn.sanity.io/images/alowdh95/production/01ba5432a77c26e53f3ca25c3b367d6018516be4-1310x720.jpg
+03 out/deputy/04 https://cdn.sanity.io/images/alowdh95/production/f160a31a0f0e6396d5b086263022652963e1f7f4-1310x720.jpg
+04 out/deputy/02 https://cdn.sanity.io/images/alowdh95/production/ae0acac3078d2a0d1edccecaed62ee5f6f061dff-1310x720.jpg

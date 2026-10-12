@@ -77,6 +77,8 @@ const foot=()=>H("Chân màn",{width:393,primaryAxisSizingMode:"FIXED",paddingLe
    danh-sach-lenh 5446:13827: 3 thẻ thêm dòng "Hạn dd/10", xe xuống cuối.
    Home quản lý 5446:13654 KHÔNG còn trên canvas.
    Bài học: move(insertAt) trong cùng parent về cuối có thể không ăn → dời node kia lên thay vì dời node này xuống. */
+/* ---- 09/10 chốt font tiêu đề Manrope (thay Cal Sans), khớp lab-font.js: Lab/H1 Bold 28/34 · H2 Bold 24/30 · H3 SemiBold 17/22,
+   Lab/Event Bold 19 · Stat Bold 22 · Hero num Bold 32 · Title SemiBold 16 — giãn chữ -2%. Body/Meta/Row… giữ Inter. */
 /* ---- 07/10 thử font: Lab/H1 28/34 · H2 24/30 · H3 17/22 → Cal Sans Regular, letterSpacing 0 (trước: Inter Bold, -2%).
    Hoàn tác: setupTextStyles([{name:"Lab/H1",fontFamily:"Inter",fontStyle:"Bold",fontSize:28,lineHeight:32,letterSpacing:-2%}…]).
    Danh sách lệnh: bỏ dòng Hạn, odo = chip gauge nền card cao 32 trong Thẻ con · xe; nút back tròn có viền; CTA "Sửa chữa". */

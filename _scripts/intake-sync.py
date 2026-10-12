@@ -5,7 +5,8 @@ Chạy tự động qua hook (SessionStart, UserPromptSubmit, PostToolUse Write|
   1. Quét docs-input/ → nguồn mới tự vào sổ (⬜ chưa feed) + tự sinh task "feed".
      Nguồn bị đổi tên/chuyển chỗ (cùng nội dung) → tự cập nhật đường dẫn trong sổ.
   2. Quét docs/**/*.md → cột "Dùng ở" của sổ; doc feature (docs/{feature}/...) trỏ tới nguồn
-     → tự nâng ⬜ thành ✅ (không bao giờ tự hạ ✅ do người ghi tay).
+     → tự nâng ⬜ thành ✅ (không bao giờ tự hạ ✅ do người ghi tay). Nguồn đã thay bản mới (dòng
+     `> Phiên bản: … (nhận YYYY-MM-DD)`) chỉ tính doc có `updated:` từ ngày nhận bản đó trở đi.
   3. Chấm điều kiện "Xong khi" của từng task → tự đóng task, ghi ngày + bằng chứng.
 
 Cú pháp "Xong khi" (nhiều điều kiện nối bằng `&&`, thêm `!` phía trước để phủ định):
@@ -153,6 +154,24 @@ def is_feature_doc(rel):
     return len(parts) >= 3 and not parts[1].startswith("_")
 
 
+VERSION = re.compile(r"^> Phiên bản:.*?\(nhận (\d{4}-\d{2}-\d{2})\)", re.M)
+
+
+def version_since(p):
+    """Ngày nhận bản hiện hành (dòng `> Phiên bản:` đầu tiên do /intake ghi khi thay bản mới), hoặc None.
+    Doc trỏ tới nguồn nhưng cập nhật trước ngày này mới chỉ đọc bản cũ — không tính là đã feed."""
+    full = f"{INPUT}/{p}"
+    if not p.endswith(".md") or not os.path.exists(os.path.join(ROOT, full)):
+        return None
+    m = VERSION.search(rd(full))
+    return m.group(1) if m else None
+
+
+def doc_updated(rel):
+    m = re.search(r"^updated:\s*(\d{4}-\d{2}-\d{2})", rd(rel), re.M)
+    return m.group(1) if m else ""
+
+
 # ---------- 3. backlog ----------
 BL_HEAD = ["ID", "Việc", "Nguồn", "Xong khi", "Trạng thái", "Tạo", "Xong", "Bằng chứng"]
 
@@ -258,7 +277,9 @@ def main():
         p = unq(r["File"])
         used = refs.get(p, [])
         r["Dùng ở (tự động)"] = "<br>".join(f"`{u}`" for u in used) or "—"
-        if r["Feed brainstorm"].startswith("⬜") and any(is_feature_doc(u) for u in used):
+        since = version_since(p)
+        if r["Feed brainstorm"].startswith("⬜") and any(
+                is_feature_doc(u) and (not since or doc_updated(u) >= since) for u in used):
             r["Feed brainstorm"] = "✅ đã feed"
             log.append(f"✅ {r['Mã']} đã feed ({p})")
     fed = {unq(r["File"]): r["Feed brainstorm"].startswith("✅") for r in rows}
