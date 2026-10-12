@@ -1,3 +1,25 @@
+---
+paths:
+  - "docs/**/srs/**"
+  - "docs/**/usecases/**"
+  - "docs/**/bpmn/**"
+  - "docs/**/d2/**"
+  - "docs/**/d2-erd/**"
+  - "docs/**/d2-architect/**"
+  - "docs/**/dbdiagram/**"
+  - ".claude/skills/sequence/**"
+  - ".claude/skills/activity/**"
+  - ".claude/skills/activity-swimlane/**"
+  - ".claude/skills/state/**"
+  - ".claude/skills/erd/**"
+  - ".claude/skills/dbdiagram/**"
+  - ".claude/skills/bpmn/**"
+  - ".claude/skills/usecase-diagram/**"
+  - ".claude/skills/user-flow/**"
+  - ".claude/skills/object-map/**"
+  - ".claude/scripts/**"
+---
+
 # Diagram Correctness — vẽ ĐÚNG, không chỉ vẽ ĐẸP‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > Rule chung cho **mọi skill sinh diagram** (`/usecase-diagram`, `/sequence`, `/activity`,

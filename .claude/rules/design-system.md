@@ -1,3 +1,19 @@
+---
+paths:
+  - "design/**"
+  - "prototype/**"
+  - "docs/**/ascii-wireframe/**"
+  - "docs/**/html-wireframe/**"
+  - "docs/**/html-design/**"
+  - ".claude/skills/wireframe-*/**"
+  - ".claude/skills/prototype-*/**"
+  - ".claude/skills/figma-*/**"
+  - ".claude/skills/user-flow/**"
+  - ".claude/skills/srs/**"
+  - ".claude/agents/uxui-reviewer.md"
+  - ".claude/agents/usability-reviewer.md"
+---
+
 # Design System — nguồn thiết kế chung cho skill sinh giao diện
 
 > Rule chung cho MỌI skill vẽ hoặc review màn hình (`/srs` phần UX, `/user-flow`, `/wireframe-ascii`,

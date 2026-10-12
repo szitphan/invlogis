@@ -1,3 +1,9 @@
+---
+paths:
+  - "docs/**"
+  - ".claude/skills/**"
+---
+
 # Feature Bootstrap — xử lý khi input chưa khớp feature nào‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > Rule chung cho MỌI skill có input dạng `<feature>` hoặc mô tả nghiệp vụ. Trả lời câu hỏi: **user gõ skill với 1 luồng/mô tả bất ngờ mà `docs/{feature}/` chưa tồn tại thì làm gì?** Mục đích: không skill nào bế tắc mềm (soft-gate warn im lặng) hoặc improvise ngoài thiết kế. Mỗi skill MUST reference file này trong Constraints + References nếu nhận input feature.

@@ -1,3 +1,21 @@
+---
+paths:
+  - "design/ui-common/**"
+  - "docs/**/srs/**"
+  - "docs/**/usecases/**"
+  - "docs/**/ascii-wireframe/**"
+  - "docs/**/html-wireframe/**"
+  - "docs/**/html-design/**"
+  - ".claude/skills/srs/**"
+  - ".claude/skills/usecase/**"
+  - ".claude/skills/user-flow/**"
+  - ".claude/skills/sequence/**"
+  - ".claude/skills/wireframe-*/**"
+  - ".claude/skills/prototype-*/**"
+  - ".claude/skills/figma-screen/**"
+  - ".claude/agents/uxui-reviewer.md"
+---
+
 # UI Common Rules & Components — gọi theo mã, UC chỉ mô tả phần riêng
 
 > Rule chung cho MỌI skill viết hoặc review đặc tả màn hình / use case / lỗi. Mỗi skill đã nối MUST

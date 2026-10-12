@@ -1,3 +1,10 @@
+---
+paths:
+  - "docs/**"
+  - ".claude/skills/**"
+  - ".claude/agents/**"
+---
+
 # Project Profile — hỏi khi thiếu, ghi lại, tái dùng‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > Rule chung cho MỌI skill cần **thông tin cấp dự án** (domain sản phẩm, thuật ngữ gọi người dùng,

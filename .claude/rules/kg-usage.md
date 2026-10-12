@@ -1,3 +1,9 @@
+---
+paths:
+  - ".claude/skills/**"
+  - "_workspace/kg/**"
+---
+
 # KG Usage — rule chung cho skill dùng Knowledge Graph‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > Rule chung cho MỌI skill cần __chọn file / dựng ma trận ID / đếm trạng thái / detect upstream__ trên vault. Engine: `.claude/skills/kg/engine/` (xem `.claude/skills/kg/SKILL.md`). Skill nhóm A (đọc-rộng-để-chọn) MUST reference file này trong Constraints + References; skill nhóm B/C không cần (đọc-để-render là bản chất, không cắt).
