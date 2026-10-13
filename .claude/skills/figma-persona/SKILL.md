@@ -315,9 +315,9 @@ Level 4, in this kind, is nearly all of the value:
 - whether the `primary` is primary because of evidence or because of who was in the room;
 - whether the people you left out are the ones who would have paid.
 
-Put these in front of a human. `figma_docs(section="persona")` has the full field reference.
+Put these in front of a human. `figma_docs(section="persona", level="cheat")` has the field reference; the full section only when a finding needs explaining.
 The set is how the conversation starts; deciding whose problem to solve is the deliverable.‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
 
-<!-- wm:aca59f6017c1910577c791eb8337d44e -->
+<!-- wm:10031a355241b873619b88f1cbdef99a -->
 <sub>Tài liệu thuộc bộ AI4BA Reqwise Figma MCP — bản quyền ai4ba.com</sub>

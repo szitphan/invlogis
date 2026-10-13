@@ -212,7 +212,7 @@ table.lt tr:last-child td{border-bottom:0}
 </section>
 
 <section class="sec" id="s7"><h2>7 · Form xếp tổ hợp (điều vận)</h2>
-<p>Chọn đầu kéo → mooc → cấu hình → từng vị trí. Cấu hình bị chặn thì gạch, cảnh báo/cần hỏi có dấu. Số container kiểm chữ số cuối ISO 6346 (E-dispatch-001). Thử nhập số sai, đổi mooc 20ft rồi chọn 1×40.</p>
+<p>Chọn đầu kéo → mooc → cấu hình → từng vị trí. Cấu hình bị chặn thì gạch, cảnh báo/cần hỏi có dấu. Số container kiểm chữ số cuối ISO 6346 (E-shipment-coordination-001). Thử nhập số sai, đổi mooc 20ft rồi chọn 1×40.</p>
 <div class="lab-box"><div class="stage"><div class="web ui" id="builder"></div></div>
 <div class="vote" data-q="q_builder"><b>Form:</b><div class="pick"></div><input class="note-in" placeholder="Ghi chú"></div></div>
 </section>
@@ -320,7 +320,7 @@ function check(c){
   if(c.mo){const r=S.rules[c.mo][c.cfg];
     if(r[0]!=="ok")out.push([r[0],`${MO[c.mo].name} · ${CFG.find(x=>x[0]===c.cfg)[1]}: ${r[1]||LV[r[0]][0]}`]);}
   else if(c.cfg!=="empty")out.push(["no","Chưa có mooc thì không xếp được container"]);
-  (c.slots||[]).forEach((s,i)=>{if(s.no&&!isoOk(s.no))out.push(["no",`Vị trí ${i+1}: Số container không đúng. Kiểm tra lại chữ số cuối. (E-dispatch-001)`])});
+  (c.slots||[]).forEach((s,i)=>{if(s.no&&!isoOk(s.no))out.push(["no",`Vị trí ${i+1}: Số container không đúng. Kiểm tra lại chữ số cuối. (E-shipment-coordination-001)`])});
   if(c.planMo&&c.planMo!==c.mo)out.push(["warn",`Lệnh lập với ${MO[c.planMo].name} ${c.planMop}, xe đang móc ${MO[c.mo].name} ${c.mop}`]);
   if((c.slots||[]).some(s=>s.reefer))out.push(["oq","Container lạnh: nguồn điện là máy phát gắn rời (mã PT 35–37) hay máy phát tích hợp? Ghi ở đâu trên Lệnh?"]);
   if(c.cfg==="2x20"&&c.slots.every(s=>s.st==="hang"))out.push(["warn","2×20 đều có hàng: tổng VGM so với tải mooc (chưa có trong danh mục mooc)"]);

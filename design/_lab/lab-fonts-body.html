@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab — Font chữ thường</title>
+<!-- Vòng 3 (12/10/2026): font chữ thường (body/label/bảng). Inter (DS hiện tại) so với SF Pro, Open Sans, Lato.
+     Tiêu đề mặc định Cal Sans theo chốt r01; nút "Tiêu đề" đổi sang cùng font để xem SF Pro Display. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&family=Lato:wght@400;700&family=Cal+Sans&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f4f6;--ink:#121214;--ink2:#5c5c66;--ink3:#93939d;--card:#fff;--rule:#ececf0;--well:#f4f4f6;--primary:#121214;--line2:#d4d4d4}
+body.innvie{--primary:#0036B5}
+body.delta{--primary:#2E7449}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.top{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding:12px 16px;background:rgba(244,244,246,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.top h1{font-size:15px;margin:0}
+.ctl{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink2)}
+.seg{display:flex;background:#e7e7ea;border-radius:999px;padding:2px}
+.seg button{font:inherit;font-size:12px;border:0;background:none;color:var(--ink);padding:5px 11px;border-radius:999px;cursor:pointer}
+.seg button.on{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.wrap{max-width:1480px;margin:0 auto;padding:16px 16px 60px}
+.facts{background:var(--card);border:1px solid var(--rule);border-radius:16px;overflow:auto;margin-bottom:16px}
+.facts table{border-collapse:collapse;width:100%;font-size:13px;min-width:820px;table-layout:fixed}
+.facts th,.facts td{padding:9px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.facts tr:last-child td{border-bottom:0}
+.facts th{font-size:12px;color:var(--ink3);font-weight:500;background:#fafafb}
+.facts td:first-child{color:var(--ink2);width:170px}
+.ok{color:#1a7f37}.bad{color:#b42318;font-weight:600}.warn{color:#b45309}
+.row{margin-bottom:16px}
+.rl{font-size:12px;color:var(--ink3);margin:0 0 6px 2px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+body.two .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:900px){.grid,body.two .grid{grid-template-columns:1fr}}
+.c{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;min-width:0;font-family:var(--bf);font-size:14px;line-height:20px}
+.c .fn{font:600 11px Inter,sans-serif;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px;display:flex;justify-content:space-between}
+.c .fn i{font-style:normal;text-transform:none;letter-spacing:0;font-weight:500}
+.c[data-f="inter"]{--bf:Inter,sans-serif;--hd:Inter,sans-serif}
+.c[data-f="sf"]{--bf:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",system-ui,sans-serif;--hd:-apple-system,BlinkMacSystemFont,"SF Pro Display",system-ui,sans-serif}
+.c[data-f="open"]{--bf:"Open Sans",sans-serif;--hd:"Open Sans",sans-serif}
+.c[data-f="lato"]{--bf:Lato,sans-serif;--hd:Lato,sans-serif}
+.h{font-family:"Cal Sans",Inter,sans-serif;font-weight:400;margin:0}
+body.same .h{font-family:var(--hd);font-weight:700}
+p{margin:0}
+.sup{font-size:12px;line-height:20px;color:var(--ink2)}
+.lbl{font-weight:500}
+.w4{font-weight:400}.w5{font-weight:500}.w6{font-weight:600}.w7{font-weight:700}
+.tab{font-variant-numeric:tabular-nums}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{font-size:12px;font-weight:600;color:var(--ink3);text-align:left;padding:6px 6px;border-bottom:1px solid var(--rule);white-space:nowrap}
+.tbl td{padding:7px 6px;border-bottom:1px solid var(--rule);white-space:nowrap}
+.tbl .r{text-align:right}.tbl .m{text-align:center}
+.lk{color:var(--primary);font-weight:600}
+.badge{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:999px;font-size:12px;background:#e8f3ec;color:#1a7f37}
+.badge.o{background:#fdf1e3;color:#b45309}.badge.g{background:#eef0f3;color:#5c5c66}
+.inp{height:32px;border:1px solid var(--line2);border-radius:10px;display:flex;align-items:center;padding:0 10px;margin:4px 0}
+.btn{height:32px;border-radius:10px;display:inline-flex;align-items:center;padding:0 12px;font-weight:500;background:var(--primary);color:#fff;margin-right:6px}
+.btn.s{background:#0000000f;color:var(--ink)}
+.col{display:flex;flex-direction:column;gap:2px;align-items:flex-end}
+.nums{display:flex;justify-content:space-between;gap:10px}
+.mob{background:var(--well);border-radius:12px;padding:12px;margin-top:8px;font-size:15px;line-height:21px}
+.mob .s{font-size:13px;line-height:18px;color:var(--ink2)}
+.meta{font:500 11px Inter,sans-serif;color:var(--ink3);margin-top:8px}
+.note{margin:14px 2px 0;font-size:12.5px;color:var(--ink2)}
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>Lab · Vòng 3 · Font chữ thường</h1>
+  <div class="ctl">Tiêu đề <div class="seg" id="hd"><button data-v="" class="on">Cal Sans (theo DS)</button><button data-v="same">Cùng font cột</button></div></div>
+  <div class="ctl">Bố cục <div class="seg" id="lay"><button data-v="" class="on">4 cột</button><button data-v="two">2 cột (to hơn)</button></div></div>
+  <div class="ctl">Thương hiệu <div class="seg" id="b"><button data-v="" class="on">Trung tính</button><button data-v="innvie">Innvie</button><button data-v="delta">Delta</button></div></div>
+</div>
+<div class="wrap">
+  <div class="facts"><table>
+    <tr><th></th><th>Inter (DS hiện tại)</th><th>SF Pro (Text / Display)</th><th>Open Sans</th><th>Lato</th></tr>
+    <tr><td>Tiếng Việt</td><td class="ok">Có (Google Fonts có bộ vietnamese)</td><td class="ok">Có</td><td class="ok">Có (Google Fonts có bộ vietnamese)</td><td class="bad">Không — bản Google Fonts chỉ có latin + latin-ext. Chữ có dấu thanh (ạ ả ấ ờ ữ …) rơi về font hệ thống → lẫn 2 font trong 1 từ. Muốn dùng phải tự host Lato 2.0</td></tr>
+    <tr><td>Độ đậm có sẵn</td><td>100–900 (biến thiên)</td><td>Đủ 100–900</td><td>300–800 (biến thiên)</td><td class="bad">100 / 300 / 400 / 700 / 900 — thiếu 500 và 600. Nhãn 500 của DS hiển thị thành 400, tiêu đề 600 thành 700</td></tr>
+    <tr><td>Dùng trên web</td><td class="ok">Nhúng tự do (OFL)</td><td class="bad">Không nhúng được. Giấy phép Apple chỉ cho dùng trong app trên thiết bị Apple; web chỉ gọi được qua <code>-apple-system</code> → Windows ra Segoe UI, Android ra Roboto. Người dùng Windows sẽ không thấy SF Pro</td><td class="ok">Nhúng tự do (OFL)</td><td class="warn">Nhúng tự do (OFL), nhưng xem dòng tiếng Việt</td></tr>
+    <tr><td>App lái xe (mobile)</td><td>Phải đóng gói font vào app</td><td class="ok">iOS: font hệ thống sẵn. Android: không có, ra Roboto</td><td>Phải đóng gói</td><td>Phải đóng gói bản 2.0</td></tr>
+    <tr><td>Figma</td><td class="ok">Có sẵn</td><td class="warn">Phải cài font từ developer.apple.com trên máy từng người</td><td class="ok">Có sẵn</td><td class="warn">Có sẵn, nhưng bản trong Figma ≠ bản web (dấu tiếng Việt)</td></tr>
+    <tr><td>Độ rộng chữ (so Inter)</td><td id="w-inter">—</td><td id="w-sf">—</td><td id="w-open">—</td><td id="w-lato">—</td></tr>
+  </table></div>
+  <div id="rows"></div>
+  <p class="note">Ghi chú: cột SF Pro chỉ đúng khi mở trên máy Mac/iPhone; mở trên Windows sẽ thấy Segoe UI. Dòng "Độ rộng chữ" đo cùng đoạn câu tiếng Việt ở 14px — số càng lớn thì bảng chứa được càng ít cột trước khi phải cắt chữ.</p>
+</div>
+<script>
+const FONTS=[["inter","Inter","DS hiện tại"],["sf","SF Pro","chỉ Apple"],["open","Open Sans",""],["lato","Lato","Google Fonts"]];
+const SAMPLE="Điều phối xe đầu kéo về kho Hải Long, KCN Đình Vũ — giao trước 12:00";
+const R=[
+ ["Tiêu đề khối + đoạn body 14/20 + chữ phụ 12",()=>`<p class="h" style="font-size:20px;line-height:28px;margin-bottom:6px">Thông tin Lệnh vận tải</p><p>Hàng dễ vỡ, giao trước 12:00. Liên hệ thủ kho anh Minh khi tới cổng KCN. Xe vào cổng số 2, không đỗ trên đường nội bộ.</p><p class="sup" style="margin-top:4px">Cập nhật lúc 09:42 bởi Nguyễn Thị Hường · 2 giờ trước</p>`],
+ ["Độ đậm 400 / 500 / 600 / 700 ở 14px (DS dùng 400 body, 500 nhãn + nút, 600 tiêu đề cột)",()=>[4,5,6,7].map(w=>`<p class="w${w}">${w}00 · Xác nhận hoàn thành chuyến</p>`).join("")],
+ ["Dấu tiếng Việt chồng + chữ in hoa (dễ lỗi nhất)",()=>`<p style="font-size:16px;line-height:26px">Kiểm định ẫ ẩ ặ ỗ ờ ữ ỹ ợ ự ậ</p><p class="w6" style="font-size:16px;line-height:26px">ĐỔI TRẠNG THÁI · Ẫ Ổ Ữ Ỹ Ặ Ợ</p><p class="sup">Nguyễn Thị Hường · Trần Văn Đức · Lê Hữu Thượng</p>`],
+ ["Bảng danh sách web (14 / tiêu đề cột 12, 600)",()=>`<table class="tbl"><thead><tr><th>Mã Lệnh</th><th>Khách hàng</th><th class="m">Giờ</th><th class="r">Cước</th></tr></thead><tbody>${[["LVT-0456","Hải Long","09:40","1.200.000"],["LVT-0457","Minh Phú","11:05","48.750.000"],["LVT-0461","Đông Á","14:18","860.000"]].map(r=>`<tr><td class="lk">${r[0]}</td><td>${r[1]}</td><td class="m tab">${r[2]}</td><td class="r tab">${r[3]}</td></tr>`).join("")}</tbody></table>`],
+ ["Chữ số thẳng cột (tabular) — biển số, giờ, tiền",()=>`<div class="nums tab"><div class="col" style="align-items:flex-start">${["51C-482.19","29H-110.08","61A-777.41","50E-306.92"].map(x=>`<span>${x}</span>`).join("")}</div><div class="col">${["09:40","11:11","14:18","17:30"].map(x=>`<span>${x}</span>`).join("")}</div><div class="col">${["1.200.000 ₫","48.750.000 ₫","111.111 ₫","11.111.000 ₫"].map(x=>`<span>${x}</span>`).join("")}</div></div>`],
+ ["Ký tự dễ nhầm — mã, container, biển số",()=>`<p style="font-size:15px;line-height:24px">Il1| O0o rn·m 5S 8B</p><p class="tab">TCLU 1104567 · MSKU 0010118</p><p class="tab">JB-0124-00 · LVT-0011 · 30LD-1101</p>`],
+ ["Form: nhãn 500 + giá trị 400 + gợi ý 12 + nút 500",()=>`<p class="lbl">Lý do từ chối</p><div class="inp">Khách đổi giờ nhận hàng</div><p class="sup">Tối đa 200 ký tự, lái xe sẽ thấy lý do này</p><p class="lbl" style="margin-top:8px">Ngày giao</p><div class="inp tab">12/10/2026 14:30</div><div style="margin-top:10px"><span class="btn">Lưu thay đổi</span><span class="btn s">Huỷ</span></div>`],
+ ["Chip trạng thái + chữ nhỏ 12",()=>`<p><span class="badge">Đang chạy</span> <span class="badge o">Chờ duyệt chi</span> <span class="badge g">Đã huỷ</span></p><p class="sup" style="margin-top:8px">Hiển thị 1–50 / 128 Lệnh · Lọc: FCL nhập, Hôm nay</p>`],
+ ["Thẻ trên app lái xe (15 / 13)",()=>`<div class="mob"><p class="w6">Giao container 40HC — Kho Hải Long</p><p class="s">TCS Nội Bài → KCN Đình Vũ · 28 km · 55 phút</p></div><div class="mob"><p class="w6">Thanh toán phí nâng hạ chưa kê khai</p><p class="s">Còn 2 khoản · 1.450.000 ₫</p></div>`],
+ ["Tiêu đề lớn 24–29 (bật “Tiêu đề: Cùng font cột” để xem SF Pro Display / Open Sans / Lato làm tiêu đề)",()=>`<p class="h" style="font-size:29px;line-height:36px">Lệnh vận tải LVT-0456</p><p class="h" style="font-size:24px;line-height:32px;margin-top:6px">Đề nghị duyệt chi phí phát sinh ngoài định mức</p>`],
+];
+document.getElementById("rows").innerHTML=R.map(([t,f],i)=>`<div class="row"><p class="rl">${i+1}. ${t}</p><div class="grid">${FONTS.map(([k,n,s])=>`<div class="c" data-f="${k}"><p class="fn">${n}<i>${s}</i></p>${f()}</div>`).join("")}</div></div>`).join("");
+function seg(id,fn){const el=document.getElementById(id);el.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;el.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));fn(b.dataset.v)})}
+const cls={hd:"",lay:"",b:""};const set=()=>document.body.className=Object.values(cls).filter(Boolean).join(" ");
+["hd","lay","b"].forEach(k=>seg(k,v=>{cls[k]=v;set()}));
+// Đo độ rộng cùng một câu ở 14px cho từng font (sau khi font tải xong)
+document.fonts.ready.then(()=>{const cv=document.createElement("canvas").getContext("2d");const css={inter:"Inter",sf:'-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui',open:'"Open Sans"',lato:"Lato"};
+  const w={};for(const k in css){cv.font=`14px ${css[k]}`;w[k]=cv.measureText(SAMPLE).width}
+  for(const k in w){const p=Math.round((w[k]/w.inter-1)*100);document.getElementById("w-"+k).textContent=k==="inter"?`${Math.round(w[k])}px (mốc)`:`${Math.round(w[k])}px (${p>0?"+":""}${p}%)`}});
+</script>
+</body>
+</html>

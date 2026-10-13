@@ -343,5 +343,5 @@ Put these in front of a human. The map is how the conversation starts; the decis
 which trough to spend money on is the deliverable.‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
 
-<!-- wm:aca59f6017c1910577c791eb8337d44e -->
+<!-- wm:10031a355241b873619b88f1cbdef99a -->
 <sub>Tài liệu thuộc bộ AI4BA Reqwise Figma MCP — bản quyền hoangphan.blog</sub>

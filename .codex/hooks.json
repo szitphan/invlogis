@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "'/Users/szit/Desktop/szit/AI/Projects/dispatch-management/.codex/hooks/block-push.sh'"
+            "command": "'/Users/szit/Desktop/szit/AI/Projects/invlogis/.codex/hooks/block-push.sh'"
           }
         ]
       },
@@ -26,19 +26,19 @@
         "hooks": [
           {
             "type": "command",
-            "command": "'/Users/szit/Desktop/szit/AI/Projects/dispatch-management/.codex/hooks/auto-changelog.sh'"
+            "command": "'/Users/szit/Desktop/szit/AI/Projects/invlogis/.codex/hooks/auto-changelog.sh'"
           },
           {
             "type": "command",
-            "command": "'/Users/szit/Desktop/szit/AI/Projects/dispatch-management/.codex/hooks/status-transition.sh'"
+            "command": "'/Users/szit/Desktop/szit/AI/Projects/invlogis/.codex/hooks/status-transition.sh'"
           },
           {
             "type": "command",
-            "command": "'/Users/szit/Desktop/szit/AI/Projects/dispatch-management/.codex/hooks/post-edit-stale.sh'"
+            "command": "'/Users/szit/Desktop/szit/AI/Projects/invlogis/.codex/hooks/post-edit-stale.sh'"
           },
           {
             "type": "command",
-            "command": "'/Users/szit/Desktop/szit/AI/Projects/dispatch-management/.codex/hooks/kg-refresh.sh'"
+            "command": "'/Users/szit/Desktop/szit/AI/Projects/invlogis/.codex/hooks/kg-refresh.sh'"
           }
         ]
       },
@@ -57,7 +57,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "'/Users/szit/Desktop/szit/AI/Projects/dispatch-management/.codex/hooks/session-init.sh'"
+            "command": "'/Users/szit/Desktop/szit/AI/Projects/invlogis/.codex/hooks/session-init.sh'"
           }
         ]
       }

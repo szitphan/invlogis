@@ -73,5 +73,5 @@ short version, worth internalising before you use any of them:
 That last check is yours. The diagram is how you start the conversation that makes it true.‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
 
-<!-- wm:aca59f6017c1910577c791eb8337d44e -->
+<!-- wm:10031a355241b873619b88f1cbdef99a -->
 <sub>Tài liệu thuộc bộ AI4BA Reqwise Figma MCP — bản quyền ai4ba.com</sub>

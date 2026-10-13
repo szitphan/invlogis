@@ -126,3 +126,20 @@ function shell(active,crumb,body){
     <div class="main">${body}</div></div>`;
 }
 
+
+/* ---------- Brand theo khách (chốt 12/10 vòng 3) ----------
+   Hiện tại brand CHỈ thay logo (ô chữ cái / ảnh logo + tên app). Bộ màu và component khác chưa liên quan:
+   menu đang chọn, tab, link, nút chính… giữ trung tính. Khách khai 1 màu (P-mau-thuong-hieu); chữ trên ô logo
+   tự chọn trắng hoặc #171717 theo tương phản. */
+const BRAND={neutral:"#262626",innvie:"#0036B5",delta:"#2E7449"};
+const hex2rgb=h=>{h=h.replace("#","");return [0,2,4].map(i=>parseInt(h.substr(i,2),16)/255)};
+const lum=c=>{const l=c.map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*l[0]+.7152*l[1]+.0722*l[2]};
+const contrast=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
+function applyBrand(hex){
+  const st=document.body.style,K=["--p","--on-p","--ps","--pt"];
+  if(!hex){K.forEach(k=>st.removeProperty(k));return null}
+  const c=hex2rgb(hex),onBrand=contrast([1,1,1],c)>=contrast(hex2rgb("#171717"),c)?"#ffffff":"#171717";
+  st.setProperty("--p",hex);st.setProperty("--on-p",onBrand);          // chỉ logo dùng --p/--on-p
+  st.setProperty("--ps","#f1f1f1");st.setProperty("--pt","#262626");    // menu đang chọn, link… trung tính
+  return {brand:hex,onBrand};
+}

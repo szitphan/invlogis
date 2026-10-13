@@ -1,12 +1,15 @@
 ---
 type: meeting
-status: draft
+status: stale
+status_prev: draft
 status_changed: 2026-10-12
 status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-12
 links:
   - docs/meetings/decks/2026-10-06-oq-dispatch-coordination-deck.md
-  - docs/dispatch-coordination/brainstorms/dispatch-coordination.md
+  - docs/service-delivery/brainstorms/service-delivery.md
+  - docs/shipment-coordination/brainstorms/shipment-coordination.md
+  - docs/transport-dispatch/brainstorms/transport-dispatch.md
 ---
 
 # Ghi nhận trả lời — Câu hỏi cần xác nhận, Điều phối (vòng 1)

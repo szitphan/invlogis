@@ -139,6 +139,7 @@ Legacy SRS (Phase 1): !`ls docs/srs/ 2>/dev/null | head -10`
 3. **Validate + mode.** `srs/{feature}-spec.md` đã tồn tại → update mode (L2 diff), báo anh biết. Parse `--spec-only`.
 4. **Auto-detect upstream** — ưu tiên `{feature}-prd.md > {feature}-urd.md > {feature}-brd.md > brainstorms/`. List, anh pick combo.
    - **KG chọn nguồn trước (rẻ hơn scan):** chạy `node .claude/skills/kg/engine/kg-query.mjs facts {feature}` và `node .claude/skills/kg/engine/kg-query.mjs neighbors <doc-path>` khi có doc mốc để lấy danh sách candidate/coverage, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.claude/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
+4b. **Đối chiếu nguồn từng mục (soft gate)** — chạy `python3 _scripts/source-coverage.py {feature}`. Exit 1 → in danh sách mục ⬜/🔄/➡ còn mở + nguồn chưa có sổ, cảnh báo "spec sẽ thiếu nội dung tài liệu khách ở các mục này", hỏi anh: xử lý ở `/brainstorm` trước hay vẫn chạy (mục còn mở thành `[NEEDS CLARIFICATION]` trong bản nháp). Per `.claude/rules/source-coverage.md`.
 5. **Soft gate / bootstrap** — thiếu upstream + mô tả nghiệp vụ + feature mới → nhóm A (`feature-bootstrap.md`): derive slug, confirm L1.
 6. **HỎI MENU TẦNG** (Mục "Menu") — anh chọn số N hoặc `all`. Đây là điểm quyết định phạm vi phỏng vấn.
 6b. **In roadmap (progress model) — NGAY sau khi chốt tầng, TRƯỚC phỏng vấn.** BA cần biết trước "sẽ mất bao nhiêu bước" (chạy `[all]` thực tế là ~20-30 điểm tương tác qua 4 skill — đừng để BA tưởng "1 phát xong"). In 1 dòng sized theo pick, vd cho `[all]`:
@@ -327,6 +328,7 @@ KHÔNG `NEEDS_INPUT` (non-blocking, tự xử):
 - @../../rules/ba-conventions.md
 - @../../rules/project-profile.md
 - @../../rules/saas-layer.md
+- @../../rules/source-coverage.md
 - @../../rules/approval-gate.md
 - @../../rules/kg-usage.md
 - @../../rules/naming-conventions.md

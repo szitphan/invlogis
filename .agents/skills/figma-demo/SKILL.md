@@ -15,8 +15,9 @@ anything else: is the write path open?*): plugin connected, one window,
 The rest of that file is about diagrams; a demo reel is not one, so the steps
 below replace its drawing rules.
 
-Field tables and defaults: `figma_docs(section="demo")`. Read it once before
-your first build.
+Field tables and defaults: `figma_docs(section="demo", level="cheat")`. Read
+that once before your first build. The full section only when a finding needs
+explaining.
 
 ## Goal‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
@@ -330,5 +331,5 @@ A video file is a separate step, not a property of the reel: `figma_record`
 screen-records the reel playing. See Step 6.‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
 
-<!-- wm:aca59f6017c1910577c791eb8337d44e -->
+<!-- wm:10031a355241b873619b88f1cbdef99a -->
 <sub>Tài liệu thuộc bộ AI4BA Reqwise Figma MCP — bản quyền ai4ba.com</sub>

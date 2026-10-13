@@ -4,10 +4,14 @@
 Chạy tự động qua hook (SessionStart, UserPromptSubmit, PostToolUse Write|Edit). Việc làm:
   1. Quét docs-input/ → nguồn mới tự vào sổ (⬜ chưa feed) + tự sinh task "feed".
      Nguồn bị đổi tên/chuyển chỗ (cùng nội dung) → tự cập nhật đường dẫn trong sổ.
-  2. Quét docs/**/*.md → cột "Dùng ở" của sổ; doc feature (docs/{feature}/...) trỏ tới nguồn
-     → tự nâng ⬜ thành ✅ (không bao giờ tự hạ ✅ do người ghi tay). Nguồn đã thay bản mới (dòng
-     `> Phiên bản: … (nhận YYYY-MM-DD)`) chỉ tính doc có `updated:` từ ngày nhận bản đó trở đi.
-  3. Chấm điều kiện "Xong khi" của từng task → tự đóng task, ghi ngày + bằng chứng.
+  2. Quét docs/**/*.md → cột "Dùng ở" của sổ.
+  3. Cột Feed theo sổ đối chiếu từng mục `docs-input/_coverage/{slug}.md` (source-coverage.py):
+     ⬜ chưa feed · 🟡 đối chiếu n/m · ✅ đối chiếu m/m · ➖ (người ghi, không đụng). ✅ chỉ khi không còn
+     mục ⬜/🔄 và mọi ➡ trỏ feature đã có thư mục. Nguồn ✅ cũ chưa có sổ → 🟡.
+     Nguồn thay bản mới (dòng `> Phiên bản: … (nhận D)` mới hơn dòng `> Bản:` của sổ) → đọc bảng
+     "Tổng quan thay đổi" của báo cáo _changes: Thêm mới/Sửa → mục 🔄, Bỏ → ➖ "bỏ ở bản mới"; tạo
+     task rà lại. ➡ tới feature chưa có thư mục → task "Lập feature".
+  4. Chấm điều kiện "Xong khi" của từng task → tự đóng task, ghi ngày + bằng chứng.
 
 Cú pháp "Xong khi" (nhiều điều kiện nối bằng `&&`, thêm `!` phía trước để phủ định):
   exists:<glob>                 có ít nhất 1 file khớp glob (tính từ gốc repo)
@@ -17,10 +21,14 @@ Cú pháp "Xong khi" (nhiều điều kiện nối bằng `&&`, thêm `!` phía 
 
 Tuỳ chọn: --quiet (chỉ in khi có thay đổi) · --summary (in task đang mở) · --dry-run.
 """
-import glob, hashlib, json, os, re, sys, unicodedata
+import glob, hashlib, importlib.util, json, os, re, sys, unicodedata
 from datetime import date
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.environ.get("INTAKE_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_spec = importlib.util.spec_from_file_location(
+    "source_coverage", os.path.join(os.path.dirname(os.path.abspath(__file__)), "source-coverage.py"))
+cov = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(cov)
 INPUT = "docs-input"
 REG = f"{INPUT}/README.md"
 STATE = f"{INPUT}/.intake-state.json"
@@ -149,17 +157,12 @@ def scan_refs(paths):
     return refs
 
 
-def is_feature_doc(rel):
-    parts = rel.split("/")
-    return len(parts) >= 3 and not parts[1].startswith("_")
-
-
 VERSION = re.compile(r"^> Phiên bản:.*?\(nhận (\d{4}-\d{2}-\d{2})\)", re.M)
 
 
 def version_since(p):
     """Ngày nhận bản hiện hành (dòng `> Phiên bản:` đầu tiên do /intake ghi khi thay bản mới), hoặc None.
-    Doc trỏ tới nguồn nhưng cập nhật trước ngày này mới chỉ đọc bản cũ — không tính là đã feed."""
+    Mới hơn dòng `> Bản:` của sổ đối chiếu → sổ còn theo bản cũ, phải mở lại mục (reopen)."""
     full = f"{INPUT}/{p}"
     if not p.endswith(".md") or not os.path.exists(os.path.join(ROOT, full)):
         return None
@@ -167,9 +170,82 @@ def version_since(p):
     return m.group(1) if m else None
 
 
-def doc_updated(rel):
-    m = re.search(r"^updated:\s*(\d{4}-\d{2}-\d{2})", rd(rel), re.M)
-    return m.group(1) if m else ""
+CHANGES_LINK = re.compile(r"^> Phiên bản:.*?\(nhận (\d{4}-\d{2}-\d{2})\).*?\]\(([^)]*_changes/[^)]+\.md)\)", re.M)
+
+
+def change_overview(p, since):
+    """{'Thêm mới': [...], 'Sửa': [...], 'Bỏ': [...]} từ bảng "Tổng quan thay đổi" của báo cáo bản `since`,
+    hoặc None khi không tìm được báo cáo/bảng."""
+    m = next((m for m in CHANGES_LINK.finditer(rd(f"{INPUT}/{p}")) if m.group(1) == since), None)
+    if not m:
+        return None
+    rep_path = os.path.normpath(os.path.join(os.path.dirname(f"{INPUT}/{p}"), m.group(2)))
+    if not os.path.exists(os.path.join(ROOT, rep_path)):
+        return None
+    part = rd(rep_path).split("## Tổng quan thay đổi", 1)
+    if len(part) < 2:
+        return None
+    out = {}
+    for ln in part[1].split("\n## ")[0].split("\n"):
+        c = cells(ln) if ln.startswith("|") else []
+        if len(c) >= 3 and c[0] in ("Thêm mới", "Sửa", "Bỏ"):
+            out[c[0]] = [x.strip() for x in c[2].split("; ") if x.strip()]
+    return out or None
+
+
+def reopen(led, p, since, code, new_tasks):
+    """Nguồn có bản mới chưa đối chiếu: mở lại mục theo bảng Tổng quan thay đổi, ghi lại sổ, tạo task."""
+    ov = change_overview(p, since)
+    lines, rows = led["lines"], led["rows"]
+    doc_title = cov.norm_title(re.sub(r"^#\s*", "", next((l for l in rd(f"{INPUT}/{p}").split("\n")
+                                                           if l.startswith("# ")), "")))
+
+    def find(item):
+        num, title = cov.split_num(item.rstrip("."))
+        t = cov.norm_title(title)
+        return next((r for r in rows if cov.norm_title(cov.split_num(r["muc"])[1]) == t), None) or \
+            (next((r for r in rows if num and r["num"] == num), None))
+
+    def setrow(r, mark, note):
+        c = cells(lines[r["i"]]) + ["", "", "", ""]
+        was = f" (trước: {c[1]})" if c[1] and c[1] != mark else ""
+        c[1], c[3] = mark, (note + was + (" · " + c[3] if c[3] else "")).strip()
+        lines[r["i"]] = "| " + " | ".join(c[:4]) + " |"
+
+    added, n = [], 0
+    if ov is None:
+        log.append(f"⚠ {code}: bản {since} không có bảng 'Tổng quan thay đổi' — mở lại mọi mục đã xử lý")
+        for r in rows:
+            if r["mark"] and r["mark"] not in ("⬜", "➖"):
+                setrow(r, "🔄", f"bản {since}: rà lại")
+                n += 1
+    else:
+        for kind, mark in (("Thêm mới", "🔄"), ("Sửa", "🔄"), ("Bỏ", "➖")):
+            for item in ov.get(kind, []):
+                t = cov.norm_title(cov.split_num(item.rstrip("."))[1])
+                if t in ("mục lục", doc_title) or not t:
+                    continue
+                r = find(item)
+                note = f"bỏ ở bản {since}" if kind == "Bỏ" else f"{kind.lower()} ở bản {since}"
+                if r:
+                    if kind == "Bỏ" and r["mark"] == "➖":
+                        continue
+                    setrow(r, mark, note)
+                    n += 1
+                elif kind != "Bỏ":
+                    num, title = cov.split_num(item)
+                    added.append(f"| {(num + ' ' + title) if num else title} | 🔄 | | {note} |")
+                    n += 1
+    last = max([r["i"] for r in rows], default=None)
+    if added and last is not None:
+        lines[last + 1:last + 1] = added
+    txt = "\n".join(lines)
+    lab = re.search(rf"^> Phiên bản:\s*(.*?)\s*\(nhận {since}\)", rd(f"{INPUT}/{p}"), re.M)
+    txt = re.sub(r"^> Bản:.*$", f"> Bản: {lab.group(1) if lab else since} (nhận {since})", txt, count=1, flags=re.M)
+    wr(led["path"], txt)
+    log.append(f"🔄 {code}: bản {since} mở lại {n} mục trong `{led['path']}`")
+    new_tasks.append((f"Rà lại {code} theo bản {since}", f"`{INPUT}/{p}`", f"`!grep:{led['path']}:🔄`"))
+    return cov.load(led["path"], txt)  # dry-run không ghi file → tính trên nội dung trong bộ nhớ
 
 
 # ---------- 3. backlog ----------
@@ -271,17 +347,37 @@ def main():
         log.append(f"+ nguồn mới SRC-{nxt:02d}: {p}")
         nxt += 1
 
-    # tham chiếu + nâng feed
+    # tham chiếu
     refs = scan_refs([unq(r["File"]) for r in rows])
     for r in rows:
+        r["Dùng ở (tự động)"] = "<br>".join(f"`{u}`" for u in refs.get(unq(r["File"]), [])) or "—"
+
+    # feed theo sổ đối chiếu từng mục
+    leds = cov.all_ledgers()
+    new_tasks = []  # (việc, nguồn, xong khi)
+    for r in rows:
         p = unq(r["File"])
-        used = refs.get(p, [])
-        r["Dùng ở (tự động)"] = "<br>".join(f"`{u}`" for u in used) or "—"
-        since = version_since(p)
-        if r["Feed brainstorm"].startswith("⬜") and any(
-                is_feature_doc(u) and (not since or doc_updated(u) >= since) for u in used):
-            r["Feed brainstorm"] = "✅ đã feed"
-            log.append(f"✅ {r['Mã']} đã feed ({p})")
+        led = leds.get(p)
+        if led:
+            since = version_since(p)
+            if since and led["version"] and since > led["version"]:
+                led = reopen(led, p, since, r["Mã"], new_tasks)
+            done, total, opened, pend = cov.summary(led)
+            for f in pend:
+                new_tasks.append((f"Lập feature {f} (nhận mục từ {r['Mã']})", f"`{p}`",
+                                  f"`exists:docs/{f}/brainstorms/*.md`"))
+            bad = len(cov.problems(led))
+            new = f"✅ đối chiếu {done}/{total}" if not opened and not bad else \
+                f"🟡 đối chiếu {done}/{total}" + (f", {bad} dòng ghi sai" if bad else "")
+        elif r["Feed brainstorm"].startswith("➖"):
+            continue
+        elif r["Feed brainstorm"].startswith(("✅", "🟡")):
+            new = "🟡 chưa có sổ đối chiếu"
+        else:
+            new = "⬜ chưa feed"
+        if r["Feed brainstorm"] != new:
+            log.append(f"{new[0]} {r['Mã']} {new[2:]} ({p})")
+            r["Feed brainstorm"] = new
     fed = {unq(r["File"]): r["Feed brainstorm"].startswith("✅") for r in rows}
 
     # backlog
@@ -299,16 +395,30 @@ def main():
                 log.append(f"✅ {i['ID']} đóng — gộp vào {code}")
             for k in ("Nguồn", "Xong khi"):
                 i[k] = i[k].replace(old, new)
-    have_feed_task = {unq(i["Xong khi"])[4:] for i in items if unq(i["Xong khi"]).startswith("fed:")}
+    is_open = lambda i: not i["Trạng thái"].startswith("✅")
+    have_feed_task = {unq(i["Xong khi"])[4:] for i in items if unq(i["Xong khi"]).startswith("fed:") and is_open(i)}
     bn = max([int(i["ID"][3:]) for i in items] + [0]) + 1
     for r in rows:
         p = unq(r["File"])
-        if r["Feed brainstorm"].startswith("⬜") and p not in have_feed_task and p in hashes:
-            verb = "Xếp nhóm + đặt tên, rồi đọc và feed" if r["Nhóm"] == "Chưa phân loại" else "Đọc và feed"
-            items.append(dict(zip(BL_HEAD, [f"BL-{bn:03d}", f"{verb} {r['Mã']} vào brainstorm/feature",
-                                            f"`{p}`", f"`fed:{p}`", "⬜", TODAY, "", ""])))
-            log.append(f"+ task BL-{bn:03d}: feed {p}")
-            bn += 1
+        st = r["Feed brainstorm"]
+        if st.startswith(("⬜", "🟡")) and p not in have_feed_task and p in hashes:
+            if st.startswith("⬜"):
+                verb = "Xếp nhóm + đặt tên, rồi đọc và feed" if r["Nhóm"] == "Chưa phân loại" else "Đọc và feed"
+                what = f"{verb} {r['Mã']} vào brainstorm/feature (lập sổ đối chiếu)"
+            elif p in leds:
+                what = f"Hoàn tất sổ đối chiếu {r['Mã']} (còn mục chưa xử lý)"
+            else:
+                what = f"Lập sổ đối chiếu {r['Mã']} (bản cũ tính feed theo cả file)"
+            new_tasks.append((what, f"`{p}`", f"`fed:{p}`"))
+    have = {(i["Việc"], unq(i["Xong khi"])) for i in items if is_open(i)}
+    have_cond = {unq(i["Xong khi"]) for i in items if is_open(i)}
+    for what, src, cond in new_tasks:
+        if (what, unq(cond)) in have or unq(cond) in have_cond:
+            continue
+        items.append(dict(zip(BL_HEAD, [f"BL-{bn:03d}", what, src, cond, "⬜", TODAY, "", ""])))
+        have_cond.add(unq(cond))
+        log.append(f"+ task BL-{bn:03d}: {what}")
+        bn += 1
     for i in items:
         if i["Trạng thái"].startswith("✅"):
             continue

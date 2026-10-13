@@ -28,7 +28,7 @@ links:
 - Bản gửi khách tự trả lời (delivery: async) — ghi chú KHÔNG có trong file HTML gửi đi.
 - Nguồn câu hỏi: brainstorm Điều phối (chưa ghi vào vault) — ~/.claude/handoff/Users-szit-Desktop-szit-AI-Projects-invlogis/drafts/brainstorm-dispatch-interview.md mục "Câu hỏi mở" (OQ-1…OQ-34).
 - Bỏ: OQ-2 (đã đóng), OQ-14 (gộp OQ-18), OQ-15 (SOP 18/9 đã có link bản đồ 4 ga, GNHH:308-312).
-- Khi import: đưa câu trả lời vào file brainstorm lúc viết `docs/dispatch-coordination/brainstorms/`.
+- Khi import: đưa câu trả lời vào file brainstorm lúc viết 3 brainstorm `docs/service-delivery/brainstorms/`, `docs/shipment-coordination/brainstorms/`, `docs/transport-dispatch/brainstorms/` (tách 12/10 theo SOP).
 - Chưa có reply_to / reply_by — user chưa cung cấp.
 :::
 

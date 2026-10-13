@@ -129,6 +129,9 @@ colors:            # Mode "Neutral Light" (mặc định). Dark ở khối color
   status-chip-green-fg: "#1b7542"
   status-chip-red-bg: "#fdecec"
   status-chip-red-fg: "#b42318"
+  status-chip-orange-bg: "#fff7ed"   # nhãn Phát sinh (CMP-09, 12/10/2026)
+  status-chip-orange-fg: "#c2410c"
+  status-chip-orange-border: "#fdba74"
   # Syntax (CodeBlock)
   syntax-keyword: "#700084"
   syntax-string: "#005600"
@@ -216,6 +219,9 @@ colors-dark:       # Mode "Neutral Dark". Alpha theo code Neutral (neutralTheme.
   status-chip-green-fg: "#9fe59b"
   status-chip-red-bg: "#b4231852"
   status-chip-red-fg: "#ffc6c1"
+  status-chip-orange-bg: "#c2410c52"
+  status-chip-orange-fg: "#ffc9a2"
+  status-chip-orange-border: "#e2883e"
   # Các họ categorical còn lại (cyan/orange/pink/purple/teal) và border/icon: xem design-tokens.css
 
 typography:
@@ -236,6 +242,7 @@ typography:
   label:      { fontFamily: Inter, fontSize: 14px, fontWeight: 500, lineHeight: 20px, letterSpacing: 0 }
   supporting: { fontFamily: Inter, fontSize: 12px, fontWeight: 400, lineHeight: 20px, letterSpacing: 0 }
   code:       { fontFamily: JetBrains Mono, fontSize: 14px, fontWeight: 400, lineHeight: 20px, letterSpacing: 0 }
+  code-sm:    { fontFamily: JetBrains Mono, fontSize: 12px, fontWeight: 400, lineHeight: 16px, letterSpacing: 0 }   # mã nghiệp vụ trong thẻ/dòng/panel (12/10/2026)
 
 font-size-scale: { 4xs: 6px, 3xs: 7px, 2xs: 8px, xs: 10px, sm: 12px, base: 14px, lg: 17px, xl: 20px, 2xl: 24px, 3xl: 29px, 4xl: 35px, 5xl: 42px }
 
@@ -331,7 +338,8 @@ components:
 Astryx là một design system **đơn sắc, trung tính, mật độ vừa phải**, dành cho sản phẩm dạng
 công cụ/ứng dụng làm việc (bảng dữ liệu, form, cài đặt, chat AI, bảng Kanban). Theme mặc định
 *Neutral* **không có màu thương hiệu**: màu nhấn `{colors.accent}` (#262626) gần như đen, nên
-nút chính là khối than chì chữ trắng. Mọi độ nổi bật đến từ **tương phản sáng–tối và độ đậm chữ**,
+nút chính là khối than chì chữ trắng. Màu thương hiệu của từng khách **chỉ thay ô logo** (xem
+§ Đã quyết định › Thương hiệu theo khách). Mọi độ nổi bật đến từ **tương phản sáng–tối và độ đậm chữ**,
 không đến từ màu sắc.
 
 Màu chỉ xuất hiện khi mang nghĩa: **trạng thái** (success/warning/error), **nhãn phân loại**
@@ -349,7 +357,7 @@ nên spec nên gọi đúng tên component.
 
 **Đặc điểm chính:**
 
-* Đơn sắc: `{colors.accent}` (#262626) cho nút chính, tab đang chọn, focus ring. Không có màu brand.
+* Đơn sắc: `{colors.accent}` (#262626) cho nút chính, tab đang chọn, focus ring. Không có màu brand, trừ ô logo theo khách.
 * Hai tông nền: `{colors.background-body}` (#f1f1f1) cho nền trang/vùng rửa (*wash*), `{colors.background-surface}` (#fff) cho nội dung.
 * Nút phụ (Secondary) là **đen 6% trong suốt** (`{colors.neutral}`) chứ không phải nút viền, nên trông như "pill xám nhạt".
 * Hover và pressed là **lớp phủ** `{colors.overlay-hover}` (5%) / `{colors.overlay-pressed}` (10%) đặt lên nền sẵn có, không đổi màu nền.
@@ -441,6 +449,7 @@ tag, attribute, property, punctuation) chỉ dùng trong **CodeBlock / Code / Ma
 * **Inter**: mọi chữ còn lại (heading-4…6, body, label, supporting, large, số liệu). Stack dự phòng: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif`.
 * Thư viện Astryx gốc dùng **Figtree**. Dự án đổi sang Cal Sans + Inter ngày 27/09/2026 vì **Figtree thiếu dấu tiếng Việt**: "ẫ" bị hiển thị thành "ã" (mất dấu mũ). Cal Sans và Inter đã được kiểm hiển thị đủ dấu.
 * **JetBrains Mono**: `{typography.code}` (Code, CodeBlock, Kbd). Stack dự phòng: `ui-monospace, "SF Mono", Monaco, Consolas, monospace`.
+* **Mã nghiệp vụ** (mã lệnh, mã chứng từ, mã quy trình, `N/A` của mã trống) trong thẻ, dòng, panel: `{typography.code-sm}` 12/16 (Figma `Text/Code Small`) cho đồng nhất; mã không bao giờ cắt (chốt 12/10/2026).
 
 ### Hierarchy
 
@@ -469,7 +478,10 @@ tag, attribute, property, punctuation) chỉ dùng trong **CodeBlock / Code / Ma
 * Trọng số có 4 bậc token: 400 / 500 / 600 / 700 (`Font Weight/Normal…Bold`).
 * Letter-spacing luôn bằng 0, không viết hoa toàn bộ (textCase ORIGINAL). Ngoại lệ thấy trong mẫu: badge "LIMITED EDITION", "CURRENT SESSION".
   Ngoại lệ của dự án (chốt 12/10/2026): **nhãn nhóm menu** ("ĐIỀU PHỐI", "ĐỘI XE") và **tên cột đầu bảng**
-  ("MÃ LỆNH", "TRẠNG THÁI") viết hoa, Heading 5 (12/600). Lý do: đây là nhãn phân vùng, không phải chữ đọc liền mạch.
+  ("MÃ LỆNH", "TRẠNG THÁI") viết hoa. Lý do: đây là nhãn phân vùng, không phải chữ đọc liền mạch.
+  * Nhãn nhóm menu: Heading 5 (12/600), màu `{colors.text-secondary}`.
+  * Tên cột đầu bảng: Inter 12/16, đậm 500, màu `{colors.text-secondary}` (giảm nổi bật so với dữ liệu,
+    chốt 12/10 vòng 3), nền hàng đầu `{colors.background-muted}`.
 
 ## Layout
 
@@ -505,7 +517,7 @@ mục "Kết quả chốt Lab ↔ DS", dòng 07–09).
 
 | Vùng | Quy tắc |
 | --- | --- |
-| Menu trái | 240px, nền surface; thu gọn 64px (chỉ icon). Chân menu: thẻ module + chọn cơ sở. Thay SideNav 300px |
+| Menu trái | 240px, nền surface, viền phải 1px `{colors.border-default}`; thu gọn 64px (chỉ icon). Thay SideNav 300px. Nhịp theo lab (`.shE`): mục cao 34, cách nhau 2px; nhãn nhóm cách mục trên 16px, cách mục dưới 6px; logo cách mục đầu 12px. Chân menu: khung thẻ module + chọn cơ sở, viền `{colors.border-default}` bo 12, **không** kẻ vạch ngang phía trên chân menu |
 | Thanh trên | Cao 44px: nút thu/mở menu · đường dẫn · tìm · chuông · tài khoản. Thay TopNav 48px |
 | Lề nội dung | 24px mọi phía (thay 16px) |
 | Trang danh sách | Giãn hết bề rộng còn lại, không max-width |
@@ -693,7 +705,7 @@ biến thể đầu bảng, **không** phải cỡ MD. Luôn đặt thuộc tín
 * **Bảng bằng TableHeaderCell/TableCell**: đặt `Density: "Balanced"`, resize từng ô theo bề rộng cột, `setText` lên chữ "Column"/"Cell". Ô chứa Badge: ẩn chữ "Cell", đặt Badge vào slot `Content`. Hàng là frame ngang `itemSpacing: 0`. Tổng bề rộng cột = bề rộng thẻ − padding − **2px viền** (quên 2px thì cột cuối tràn).
 * **ProgressBar không có thuộc tính giá trị**: phần tô bị khóa ở khoảng 65% và không resize được trên instance. Muốn hiện đúng giá trị thì phải detach riêng thanh đó rồi resize `Fill` (token màu vẫn giữ). Đây là chưa có chuẩn, nên ghi vào báo cáo màn.
 * **Stepper**: dùng `Stepper / Step` (bổ sung từ code, xem mục *Bổ sung từ code*). Không tự dựng từ StatusDot + Divider nữa.
-* **`Core/Background Muted` cũng là #f1f1f1**: chữ secondary trên nền này chỉ đạt 4,2:1, giống nền body. Vùng có chữ phụ phải dùng nền surface + viền `Border/Default`.
+* **`Core/Background Muted` cũng là #f1f1f1**: chữ secondary trên nền này chỉ đạt 4,2:1, giống nền body. Vùng có chữ phụ phải dùng nền surface + viền `Border/Default`, **hoặc** giữ nền muted và đổi chữ phụ sang `Status Chip/Gray/Foreground` (#525252, ~7:1) — cách dùng ở đầu Panel bước CMP-09 (12/10/2026).
 * **Button State=Loading**: nhãn trong biến thể này tô `#000000` cứng (lỗi của thư viện), `auditDesignSystem` sẽ báo. Không sửa component chính.
 * Còn lại: đọc `componentProperties` trả về sau khi instantiate, rồi đặt mọi trục ảnh hưởng đến hiển thị.
 * **Lượt kiểm tự động không bắt được chữ mẫu còn sót.** Các lỗi trên chỉ lộ ra ở ảnh chụp, nên phải xem ảnh chụp trước khi báo xong.
@@ -757,6 +769,8 @@ không tự vẽ.
 * **Ghost**: trong suốt, chỉ có chữ. Hành động nhẹ ("Cancel", "Fulfill item", "Refund", "Log out").
 * **Destructive**: nền `{colors.error-muted}`, chữ `{colors.error}`. Xóa, vô hiệu hóa.
 * Hover: phủ `{colors.overlay-hover}` · Pressed: phủ `{colors.overlay-pressed}` · Focused: viền ngoài 2px `{colors.accent}` · Disabled: opacity 0.5 · Loading: spinner thay nội dung.
+* **Bo góc và cỡ theo nền tảng (chốt 12/10/2026):** web bo `{rounded.element}` 10px; mobile bo `{rounded.full}` (Figma `Radius/Full`), kể cả nút icon-only trên header sheet. Nút chính rộng hết sheet/màn trên mobile cao **40px** (Size=LG, ghi đè chiều cao; thư viện chỉ tới LG 36 — theo lab).
+* **Quay lại trong sheet:** sheet có bước con (vd Panel bước trong sheet sơ đồ) dùng `Button` Ghost LG, icon `chevron-left` + nhãn màn trước, bo `{rounded.full}`, đệm trái 0 cho thẳng lề nội dung, là dòng đầu của nội dung sheet. Sheet có bước con **không có header riêng, không X**; đóng bằng vuốt xuống / chạm nền.
 
 **`toggle-button`** · *Button / ToggleButton*: dạng ghost, `isPressed` phủ overlay-pressed và chữ semibold. Dùng cho thanh công cụ, chuyển chế độ xem.
 
@@ -1399,6 +1413,25 @@ của hệ điều hành; không phải control, không có hành vi.
   `5370:5625` · `Device / Home Indicator` `5370:5643` · `Device / Frame` `5371:3063`. Hai set Status Bar /
   Home Indicator có nền xám ở trang Master để thấy được bản Inverted; nền này không theo vào instance.
 
+### Khung trang web (CMP-11, component thật 12/10/2026)
+
+Menu trái + thanh trên cho mọi màn web, thay `AppShell` SideNav 300 của Astryx. Số đo khung: § Grid & Container ›
+Khung trang dự án; nội dung + hành vi: `design/ui-common/screen-patterns.md` § CMP-11. Figma: trang 00 · Chung ›
+khung `Khung trang · innvie` (`5596:129165`).
+
+| Component | Node | Biến thể / thuộc tính | Ghi chú |
+| --- | --- | --- | --- |
+| `Khung trang / .Mục menu` | `5596:129193` | Dạng Mở rộng / Thu gọn × Tương tác Thường / Rê chuột / Đang chọn · `Nhãn`, `Icon` (swap), `Có số đếm` | Mở rộng 216×34 (icon 16 + nhãn 14, đệm 10, khe 10, bo `{rounded.element}`); Thu gọn 40×34 chỉ icon, số đếm thành chấm, rê chuột hiện tooltip tên. Rê chuột: nền `{colors.overlay-hover}`; Đang chọn: nền `{colors.background-muted}`, chữ `{typography.label}`; cả hai chữ + icon primary. **Không vạch dọc.** Số đếm = `Badge` Info |
+| `Khung trang / .Nhóm menu` | `5596:129227` | `Tên nhóm` | Chữ hoa `{typography.supporting}` secondary; cách mục trên 16, mục dưới 6; ẩn khi thu gọn |
+| `Khung trang / .Chân menu` | `5596:129268` | Trường hợp Nhiều cơ sở / Một cơ sở / Không chia cơ sở / Thu gọn · `Module`, `Cơ sở`, `Icon module` (swap) | Thẻ viền `{colors.border-default}` bo `{rounded.container}`, đệm 8: ô icon module 32 + tên module, vạch, dòng cơ sở (pin + tên + chevron khi nhiều cơ sở). Không kẻ vạch phía trên chân menu |
+| `Khung trang / Menu trái` | `5596:129316` | Dạng Mở rộng 240 / Thu gọn 64 · `Tên đơn vị`, `Tên module`, `Chữ logo` | Nền surface, viền phải 1px, đệm 12, mục cách 2. Đầu: ô logo 30 (màu `P-mau-logo`) + tên đơn vị + module + nút thu gọn (Ghost icon-only). Chân menu ghim đáy. Mục và nhóm là instance — sửa nhãn, icon, số đếm, mục đang chọn trên instance; thêm/bớt theo module và phân quyền role |
+| `Khung trang / Thanh trên` | `5596:129536` | `Mục cha`, `Trang hiện tại`, `Có thông báo` | Cao 44, nền surface, vạch dưới 1px: đường dẫn (mục cha secondary › trang hiện tại primary) · tìm · chuông (chấm đỏ khi có việc cần xử lý, CMP-02) · avatar chữ tắt |
+
+* **Ghép màn:** khung ngang [Menu trái (STRETCH)][Vùng chính: Thanh trên (STRETCH) + Nội dung đệm 24, nền surface].
+  Danh sách giãn hết; chi tiết ≤ 1440, form ≤ 720, căn giữa. 768–1279 dùng Menu trái Thu gọn; < 768 dùng MobileNav.
+* **Chữ dài:** mọi chữ 1 dòng, code cắt "…" (Figma cắt cứng ở mép — KG-32); số đếm, chevron giữ bên phải.
+* **Icon mục menu:** feature khai trong UC (vị trí mục, module cha); mẫu theo lab — chưa có bảng icon theo module.
+
 ### Bottom Navigation (CMP-11 Mobile, 06/10/2026)
 
 Điều hướng chính của mẫu M1 trên mobile, thay hamburger + `MobileNav`. Astryx không có component này nên
@@ -1448,6 +1481,59 @@ dựng thành component dự án.
   trong `Device / Frame`). `Bottom Navigation / Tab` `5377:5693` · `Bottom Navigation / Scan` `5377:5715`
   · `Bottom Navigation` `5381:3341`. Tab và Scan trong thanh đã expose (bật/tắt badge, Scan Pressed).
 
+### Splash web (màn khởi động, chốt 12/10/2026)
+
+Màn hiện khi app web tải dữ liệu lần đầu (sau đăng nhập, mở tab mới). Logo khách đứng giữa, innvie ở chân.
+
+* **Khi nào hiện:** chỉ khi tải lâu hơn `duration-medium-max` (400ms); tải xong là tắt ngay, không chờ
+  hết chuyển động. Chuyển trang trong app không dùng splash (dùng `Skeleton`).
+* **Bố cục:** nền trắng #FFFFFF. Logo khách (`P-logo`) giữa màn, cao 72px, **căn theo tâm phần chữ**:
+  logo có ký hiệu lệch một phía (vd ® của Delta) thì bù vị trí để chữ vào giữa, ký hiệu nhô ra ngoài.
+  Chân màn cách đáy 40px: "Được phát triển bởi" 13px `{colors.text-secondary}` + logo innvie cao 26px,
+  **thẳng chân chữ** (baseline), không căn giữa theo khối logo.
+* **Không** có thanh tải, spinner hay dòng trạng thái — chuyển động của logo là tín hiệu đang tải.
+* **Chuyển động** (đường cong `{motion.ease-standard}`):
+  1. Logo hiện từ trái sang, mờ → nét, trượt 12px — 0,9s
+  2. Vệt sáng chéo lướt qua logo (chỉ thấy trên phần chữ) — 1,0s
+  3. Đứng yên ~0,9s
+  4. Logo phóng 115% quanh tâm chữ — 0,6s, cùng lúc nền trắng mờ dần lộ khung xương app (`Skeleton`
+     theo mẫu P1), rồi vào màn đầu.
+* **`prefers-reduced-motion: reduce`:** bỏ mọi chuyển động, logo hiện tĩnh, tải xong chuyển thẳng.
+* **Khách chưa có logo:** dùng mặc định của `P-logo` (chữ cái đầu tên khách trên ô `P-mau-logo`), cùng chuyển động.
+* **Logo nền trắng (jpg):** chỉ đặt trên nền trắng để không lộ khung ảnh; xin khách bản PNG/SVG nền trong.
+* **Figma:** Sandbox, luồng prototype "Splash web (Delta)": `5562:103807` → `5562:103813` → `5562:103819`
+  → `5562:103825` → màn Astryx `5521:94959` (~4,3s). Bản HTML chạy lặp 5s: artifact "Splash screen web"
+  (https://claude.ai/artifact/YCTegmuAHnhkw9UY5DgY7J). Logo gốc Delta: `design/brand/delta/delta-logo-goc.jpg`.
+
+### Cây quy trình (CMP-09, component thật 12/10/2026)
+
+Xem cả quy trình nhiều nghiệp vụ dạng cây. Nội dung, hành vi và quy tắc vẽ R1–R18: `design/ui-common/screen-patterns.md`
+§ CMP-09; mẫu tương tác `design/_lab/lab-progress.html`. Mục này giữ phần component. Figma: trang 00 · Chung ›
+khung `Cây quy trình · innvie` (`5570:106767`) › Master Components `5570:106770`, Trạng thái & ví dụ `5578:111232`.
+
+| Component | Node | Biến thể / thuộc tính | Ghi chú |
+| --- | --- | --- | --- |
+| `Chip trạng thái` | `5578:109819` | Sắc × 7 · `Nhãn` · `Icon` (swap) | Chuẩn chung (xem § Ánh xạ trạng thái nghiệp vụ) |
+| `Cây quy trình / Bước` | `5578:110094` | Nền tảng Desktop/Mobile × Trường hợp Có bản ghi/Chưa tạo/Ngã rẽ/Công nợ/Đã huỷ × Tương tác Thường/Rê chuột/Đang chọn · `Phát sinh`, `Ở đây` (boolean) · `Tên`, `Mã`, `Điều kiện`, `Nhà cung cấp`, `Icon nghiệp vụ` | Desktop 1 hàng, giãn 290–360 (Figma cố định 320): trái = icon 40 + chấm bước, tên + mã; phải = chip; khối chữ giãn, khe 12. Mobile 156×56: tên + chữ trạng thái màu, không chip, không mã |
+| `Cây quy trình / .Nhãn góc` | `5578:109857` | Loại = Phát sinh / Ở đây | Phát sinh: góc trên trái, nền `status-chip-orange-bg`, chữ/icon `-fg`, viền 1px nét đứt `-border`, cao 20, bo full, chữ Heading 6, icon nhánh 12. Ở đây: góc trên phải, nền `{colors.accent}`, chữ `{colors.on-accent}`, icon pin 12. Cả hai có vòng 2px màu nền vùng sơ đồ, đè nửa lên mép thẻ |
+| `Cây quy trình / Panel bước` | `5578:110668` | Nền tảng × Trạng thái Có bản ghi/Chưa tạo/Ngã rẽ/Công nợ/Không có quyền/Lịch sử lỗi/Đang tải/Đã huỷ · `Phát sinh`, `Có nhãn`, `Có module`, `Có lý do phát sinh` | Desktop 300: đầu nền `{colors.background-muted}` + dải trạng thái rộng hết (nền/chữ sắc chip); chữ phụ trên nền muted dùng `Status Chip/Gray/Foreground` cho đạt 4,5:1. Mobile: chip chuẩn phải tên, kẻ 1px `{colors.border-default}` dưới khối trạng thái. Đang tải = `Skeleton`; Lịch sử lỗi = `EmptyState` Compact wifi-off + Thử lại; Đã huỷ = dải/chip Đỏ + "Bản ghi của bước này đã bị xoá…", không nút mở. Tiêu đề khối 12px (Heading 5) |
+| `Cây quy trình / Tóm tắt` | `5570:108054` | — | Thanh tiến độ: mỗi bước 1 đơn vị bằng nhau, khe 2px giữa các nhóm (Xong · Đang chờ/làm · Từ chối · Chưa tạo), nhóm 0 bước thì ẩn. Mobile: rộng hết sheet |
+| `Cây quy trình / .Tooltip điều kiện` | `5584:114103` | — | Bấm chip "Điều kiện x/y" trên đường nguồn: rộng 220, neo dưới chip; mỗi điều kiện 1 dòng (✓ đã thoả / ○ chưa, kèm mã nguồn); dòng cuối "Bước trước khác (đường riêng): …" |
+| `.Nội dung sheet · Cây` / `· Panel bước` / `· Cây · Đang tải` / `· Cây · Lỗi tải` | `5584:113231` / `5584:113243` / `5584:114838` / `5584:115045` | — | Swap vào `BottomSheet › Content`: cây = Tall, panel bước = Hug, đang tải = Tall (skeleton GR-12), lỗi = Capped. Sheet cây: header tên quy trình + mã/tiến độ + X Ghost LG bo full. Sheet panel bước: không header, dòng đầu là nút quay lại "‹ Sơ đồ quy trình" của panel. Cây vuốt ngang, mép phải mờ 32px. Không có nút Đóng ở đáy |
+| Dòng, Nhãn đường, Thanh zoom, .Chấm bước, .Dòng lịch sử | trong Master Components | — | Theo screen-patterns CMP-09 |
+
+* **Đường nối (theo lab):** vuông góc, bo góc 10px, **không mũi tên**; góc rẽ cách bước trước 16px; mỗi đường vào 1
+  cửa riêng ở cạnh trái thẻ, cách nhau 14px theo thứ tự trên → dưới của bước trước. Nét 1.8px, đường từ gốc tới
+  bước của màn đang mở 2.6px, đường chạm bước đang chọn 3px, đường khác mờ 25% khi có bước đang chọn. Màu theo
+  trạng thái bước đích: đã tạo `Green/Icon` · đang triển khai `Blue/Icon` (+ vệt sáng chạy) · chưa tạo `Gray/Icon`
+  nét đứt 5/4.
+* **Dàn cây web:** cây toả — bước chính giữ hàng của bước trước, nhánh chia nửa trên/nửa dưới; thẻ 320, khe cột 64
+  (hoặc nhãn dài nhất + 32), khe hàng 32.
+* **Mã:** `{typography.code-sm}` (`Text/Code Small`), không cắt; thẻ giãn tới 360 để đủ chỗ.
+* **Cảnh ví dụ:** popup mở từ màn chi tiết (Ở đây + panel), mở từ danh sách (không chọn, tooltip điều kiện), bước
+  không có quyền, nhánh phát sinh có lý do, sơ đồ đang tải/lỗi (web + mobile), sheet cây + sheet panel bước, chữ dài.
+* **Giới hạn khi dựng bằng proxy (KG-32):** xem Known Gaps.
+
 ## States
 
 ### Trạng thái giao diện: mọi màn phải có đủ
@@ -1458,7 +1544,7 @@ dựng thành component dự án.
 | **Rỗng · lọc/tìm không ra** | `EmptyState`: "Không tìm thấy kết quả phù hợp" + nút **Xoá bộ lọc**. **Không** có Tạo mới (2.12) | — |
 | **Đang tải** | `Skeleton` giữ đúng hình khối nội dung; `Spinner` cho thao tác ngắn; Button State=Loading khi gửi; ProgressBar khi biết tiến độ | Shell Side/Top Nav: vùng nội dung skeleton |
 | **Lỗi field** | Field`state=error` + status message dưới field, chữ `{colors.error}` + ring error | — |
-| **Lỗi trang/khối** | `Banner` Status=error (có hành động thử lại ở End Content) | — |
+| **Lỗi trang/khối** | `Banner` Status=error (có hành động thử lại ở End Content). Khối dữ liệu tải lỗi trong panel/sheet (lịch sử hoạt động CMP-08/CMP-09, sơ đồ CMP-09): `EmptyState` icon `wifi-off` + câu theo E-common-008/009 + **Thử lại** (Compact trong khối nhỏ) | — |
 | **Thành công/xác nhận** | `Toast` (tạm thời) hoặc `Banner` success (bền) | — |
 | **Vô hiệu** | State=Disabled (opacity 0.5 cho nút; chữ`{colors.text-disabled}` cho field) | — |
 | **Đang chọn** | TableCell/ListItem/SideNavItem State=Selected; SelectableCard Selected | — |
@@ -1485,6 +1571,13 @@ Icon do feature chọn theo nghĩa trạng thái và ghi trong UC; ví dụ dư�
 | Đỏ | `#FDECEC` | `#B42318` | Lỗi / từ chối / huỷ | Huỷ · `circle-x` |
 
 Token: `{colors.status-chip-<sắc>-bg|fg}` (CSS `--color-status-chip-<sắc>-bg|fg`; Figma `Status Chip/<Sắc>/Background|Foreground`, có cả mode Dark).
+
+**Chuẩn chung (chốt 12/10/2026):** mọi chip trạng thái (bảng, thẻ, đầu trang chi tiết, panel) là instance
+component `Chip trạng thái` (Figma `5578:109819`): 7 biến thể `Sắc`, thuộc tính `Nhãn`, icon qua thuộc tính
+`Icon` (đổi icon xong phải gắn lại màu nét icon về `Status Chip/<Sắc>/Foreground`). Hai ngoại lệ đã duyệt, chỉ
+trong Cây quy trình (CMP-09): (1) dải trạng thái rộng hết đầu Panel bước desktop; (2) thẻ Bước mobile 156×56
+dùng **chữ trạng thái** màu `Foreground` thay chip. Sắc **Cam** (`status-chip-orange-*`, có thêm `-border`) chỉ
+dùng cho nhãn **Phát sinh** của CMP-09, không phải nhóm trạng thái.
 Mode Dark (duyệt 12/10/2026): nền = màu chữ bản sáng với độ đậm 32% (hex `…52`), chữ = sắc sáng của cùng họ; riêng Tím dùng `#CBBCFF` (purple-text của DS ngả hồng, lệch họ tím). Chữ đạt 7,4–11:1 trên nền thẻ và nền trang.
 
 | Nhóm | Badge Variant | StatusDot | Ví dụ trong mẫu Astryx |
@@ -1663,7 +1756,7 @@ chỉnh token. Reviewer không coi chúng là lỗi của màn. Chỉ báo lỗi
 
 ### Don't
 
-* Không thêm màu brand vào theme Neutral và không dùng 6 theme phụ của thư viện.
+* Không thêm màu brand vào theme Neutral và không dùng 6 theme phụ của thư viện. Ngoại lệ duy nhất: ô logo theo khách (`P-mau-logo`).
 * Không dùng họ categorical Red/Green thay cho Status, và không dùng Status cho tag phân loại.
 * Không cho form trải hết bề rộng desktop 1920px.
 * Không dùng bóng cho card thường. Bóng chỉ dành cho lớp nổi (dialog, toast, dropdown).
@@ -1786,12 +1879,21 @@ Chốt Lab ↔ DS (18 mục, `design/_lab/refs/notes.md` mục "Kết quả ch�
 * **Font tiêu đề:** giữ Cal Sans · **cỡ chữ** 14/12 · **bo thẻ** 12 · **căn ngày giờ** giữa — theo DS.
 * **Thanh chọn nhiều:** spec mới (xem § Thanh chọn nhiều).
 * **Phân trang:** bỏ nhãn tổng; ô *"50 / trang"* bên trái, số trang bên phải; tổng số ở thanh công cụ
-  (KG-30 cũ "Hiển thị x–y / tổng" bỏ, không cần hỏi khách).
+  (KG-30 cũ "Hiển thị x–y / tổng" bỏ, không cần hỏi khách). Phân trang nằm **trong** khung bảng, sát dòng
+  cuối: giữa dòng cuối và phân trang chỉ **1 vạch** `{colors.border-default}`, không khoảng hở.
+* **Thương hiệu theo khách (chốt 12/10 vòng 3):** khách khai logo (`P-logo`) và 1 màu logo (`P-mau-logo`).
+  Màu đó **chỉ** tô ô logo (góc menu, màn đăng nhập, splash mobile, splash web); chữ/ký hiệu trên ô tự chọn trắng hoặc
+  #171717 theo tương phản cao hơn. Bộ màu và mọi component khác **không** đổi theo khách: nút chính,
+  mục menu đang chọn, tab, link, checkbox, phân trang giữ `{colors.accent}` / trung tính; màu trạng thái
+  không bao giờ đổi. Lab thử: `design/_lab/lab-web-layout.html` kiểu "Theo DS", nút Thương hiệu.
 * **Thanh công cụ danh sách:** 2 hàng — tìm · Bộ lọc · Tuỳ chỉnh cột · Nhóm / chip · Xoá tất cả · n kết quả
   (xem § Bộ lọc nâng cao).
 * **Chip trạng thái:** theo lab — pill cao 24, icon 14 thay chấm, bảng màu trạng thái riêng của dự án (xem § Ánh xạ
   trạng thái nghiệp vụ). KG-31 đóng cùng ngày: đã có token YAML + CSS + biến Figma (dark: nền = màu chữ 20%).
 * **Icon:** quy chuẩn theo lab — Lucide nét 1.8, cỡ 16 / 14, bảng icon theo hành động (xem § Iconography & Imagery).
+* **Mã nghiệp vụ:** font code 12/16 (`{typography.code-sm}`, Figma `Text/Code Small`) cho đồng nhất; `Text/Code` 14 giữ cho Code/CodeBlock/Kbd.
+* **Nút mobile:** bo `{rounded.full}`; nút chính rộng hết cao 40 (theo lab); quay lại trong sheet = `Button` Ghost LG + chevron-left (xem § Action).
+* **Chip trạng thái chuẩn chung + nhãn Phát sinh cam** (token `status-chip-orange-*`), CMP-09 dựng thành component (xem § Cây quy trình).
 
 ### Còn mở — khi vẽ gặp thì làm gì
 
@@ -1806,3 +1908,9 @@ Chốt Lab ↔ DS (18 mục, `design/_lab/refs/notes.md` mục "Kết quả ch�
 
 **Component dự án chờ xác nhận / duyệt** — spec trong § Components - innvie logis là bản hiện hành
 * KG-29 · EmptyState có hình minh hoạ đang thử (01/10/2026, trang 🧪 Sandbox): set `Illustration / Empty State` (`5277:1598`) Scene = Chưa có dữ liệu / Không có kết quả / Lỗi mạng / Không có quyền × Source = Tự vẽ / unDraw, 200×150, màu gắn biến `Color`; set `EmptyState / Illustrated` (`5281:48386`) bọc `EmptyState` Default rộng 480, hình trong slot Icon, 1 Button MD trong slot Actions; 4 màn ví dụ nhân bản từ 4.1 (y=4300). Cần quyết: (1) giữ nguồn Tự vẽ hay unDraw (license unDraw: thương mại, không cần ghi nguồn, cấm phân phối lại thành bộ); (2) cỡ hình 200×150, bề rộng 480; (3) câu chữ + nút cho Không có quyền / 404; (4) bóng unDraw đen 10% chưa gắn biến; (5) dùng hình ở mọi trạng thái rỗng hay chỉ khối lớn/toàn trang (Compact giữ icon); (6) ghi spec vào § Components và § States. Khi vẽ: tạm dùng `EmptyState` icon như § States; muốn dùng bản có hình thì ghi "chưa có chuẩn trong design.md — KG-29".
+* KG-32 · Cây quy trình (CMP-09) và Khung trang web (CMP-11) dựng bằng proxy reqwise (12/10/2026), giới hạn đã biết — cắt chữ "…" của khung trang cũng cắt cứng ở mép: (1) không có min/max width →
+  thẻ Bước cố định 320 (code giãn 290–360); (2) không có ellipsis → dòng phụ (nhà cung cấp, điều kiện) bị cắt cứng
+  trên Figma, code cắt "…"; (3) không ghi được độ rộng lớp con của instance → thanh tiến độ dựng bằng đơn vị
+  `layoutGrow`; (4) thuộc tính TEXT dùng chung cả bộ biến thể → tên mặc định Ngã rẽ/Công nợ chỉ đặt được ở
+  instance; (5) gradient mờ mép phải cây mobile chưa gắn biến; (6) icon external-link trong nút 16 (gợi ý 14 còn
+  treo), chevron Dòng 14, "Xem sơ đồ" nên là Link/Button — chờ quyết.

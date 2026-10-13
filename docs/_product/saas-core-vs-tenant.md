@@ -1,6 +1,7 @@
 ---
 type: product-strategy
-status: draft
+status: stale
+status_prev: draft
 status_changed: 2026-10-12
 status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-12
@@ -8,7 +9,9 @@ links:
   - docs/_shared/project-profile.md
   - docs/_shared/system-overview.md
   - docs-input/srs-cu/lg-srs-export.md
-  - docs/dispatch-coordination/brainstorms/dispatch-coordination.md
+  - docs/service-delivery/brainstorms/service-delivery.md
+  - docs/shipment-coordination/brainstorms/shipment-coordination.md
+  - docs/transport-dispatch/brainstorms/transport-dispatch.md
   - docs/cross-process-flow/srs/cross-process-flow-spec.md
   - docs/meetings/2026-10-09-client-dispatch-field-issues.md
   - docs/meetings/2026-10-10-oq-dispatch-coordination.md
@@ -47,7 +50,7 @@ Cột "Nếu viết cứng" ghi điều sẽ chặn bán cho khách khác.
 | Bộ 5 vai trò mẫu | Cấu hình | Mẫu vai trò khởi tạo, khách sửa được | Vai trò không khớp chức danh khách |
 | Quyền gắn với việc (người được giao việc có quyền thanh toán của JobID đó) và quyền theo ca trực có bàn giao | Lõi (cơ chế) | Cơ chế "quyền có thời hạn, gắn bản ghi hoặc ca" | — |
 | Ca trực 17h30–8h, cán bộ quản lý hiện trường giao lịch | Cấu hình | Giờ ca, ai được giao lịch | Khách làm 3 ca hoặc 24/7 không dùng được |
-| Mã bản ghi có mã chi nhánh (`QT-[Mã chi nhánh]-[XXXX]`) | Cấu hình | Mẫu sinh mã theo khách | Khách đã có quy ước mã riêng (thường gặp khi chuyển từ phần mềm cũ) |
+| Mã bản ghi có mã chi nhánh (`QT-[Mã chi nhánh]-[YY]-[XXXX]`) | Cấu hình | Mẫu sinh mã theo khách (`P-mau-ma-quy-trinh`) | Khách đã có quy ước mã riêng (thường gặp khi chuyển từ phần mềm cũ) |
 | JobID / giao việc trái tuyến thì tự ghi nhận giao dịch nội bộ, tự hạch toán | Gói mở rộng "Đa chi nhánh, hạch toán nội bộ" | Bật khi khách có nhiều chi nhánh hạch toán riêng | Khách 1 pháp nhân, 1 chi nhánh bị sinh bút toán thừa |
 | Chia lợi nhuận liên chi nhánh 50/50 theo lãi gộp | Cấu hình (trong gói trên) | Công thức chia: tỷ lệ %, cơ sở chia (lãi gộp, doanh thu), thời điểm hạch toán | Mỗi khách một chính sách chia; viết cứng là sai với mọi khách khác |
 
@@ -134,7 +137,7 @@ Cột "Nếu viết cứng" ghi điều sẽ chặn bán cho khách khác.
 | Quy tắc (theo Delta) | Tầng | Cách tổng quát hoá | Nếu viết cứng |
 |---|---|---|---|
 | Tên app "Delta Super App", logo Delta | Cấu hình (gắn nhãn theo khách) | Một app chung chọn khách khi đăng nhập, hoặc mỗi khách một bản build mang tên riêng — cần quyết định (Mục 7) | Khách khác không chấp nhận app mang tên Delta |
-| Quy tắc giao diện GR, CMP, E-common; design system không gắn thương hiệu | Lõi + Cấu hình (màu chính, logo) | Đã đúng hướng: design system hiện không dùng màu thương hiệu | — |
+| Quy tắc giao diện GR, CMP, E-common; design system không gắn thương hiệu | Lõi + Cấu hình (logo, màu ô logo) | Thương hiệu khách chỉ thay ô logo (`P-logo`, `P-mau-logo`); bộ màu và component giữ trung tính, không đổi theo khách (chốt 12/10/2026) | — |
 | Tiếng Việt, Tiếng Anh | Lõi | — | — |
 | Câu chữ ngôi "bạn", không "Vui lòng" | Lõi | — | — |
 

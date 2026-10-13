@@ -63,6 +63,9 @@ score > done "hồ sơ đã duyệt"                # a lane-crossing edge says 
 reject ~> check "bổ sung giấy tờ"            # ~> = rework, routed outside the lanes
 ```
 
+A chain `s > check > enough` is one edge per hop; a label after it belongs to the last hop.
+Don't chain across a lane change or a decision branch — those hops need their own label.
+
 Kinds on the node line: `start` · `end` · `?` (decision) · `fork` · `join` · `event` ·
 `external`. Classes: `ok` · `err` · `edge`. Drop every `lane` line and the `<lane>:` prefixes
 for a single-owner process — same notation, no bands.
@@ -94,8 +97,8 @@ it; that is almost always a real hole, not a drawing shortcut.
   process. Ask what happens on rejection, on timeout, on missing documents.
 * **`cls: "error"`** on the rejection path and `"edge"` on the rare one makes a long diagram
   readable at a glance. Use them.
-* **A step dragged into another lane is REPORTED, not applied.** Whether the process changed
-  hands is the spec author's call — if it really did, re-run with the corrected `lane`.‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
+* **A step dragged into another lane is REPORTED, not applied.** Whether the process changed‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
+  hands is the spec author's call — if it really did, re-run with the corrected `lane`.
 
 ## Inputs
 
@@ -179,5 +182,5 @@ The last one is worth saying out loud: an activity diagram shows structure, not 
 the real problem is that step 4 waits three days, that fact belongs beside the diagram.‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
 
-<!-- wm:aca59f6017c1910577c791eb8337d44e -->
+<!-- wm:10031a355241b873619b88f1cbdef99a -->
 <sub>Tài liệu thuộc bộ AI4BA Reqwise Figma MCP — bản quyền ai4ba.com</sub>

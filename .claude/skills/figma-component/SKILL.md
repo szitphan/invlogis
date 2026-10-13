@@ -200,7 +200,12 @@ id dạng chuỗi.
 4. Do's and Don'ts của `design.md`: (a) ≤ 1 nút Primary mỗi nhóm; (b) trạng thái không chỉ dựa vào
    màu; (c) đủ rỗng / đang tải / lỗi; (e) không vi phạm "Không nên" của component thành phần.
 5. Không còn mã hex; tương phản chữ phụ trên nền nhấn — ghi lại nếu dưới AA.
-6. Sửa lỗi → chụp lại **chỉ phần đã sửa**.
+6. **Chip trạng thái:** component có trạng thái dùng instance `Chip trạng thái` (không tự vẽ pill); icon và chữ
+   đúng màu `Status Chip/<Sắc>/Foreground` (đổi icon qua thuộc tính `Icon` xong gắn lại màu nét, quét cả biến
+   thể gốc lẫn instance); mã nghiệp vụ dùng `Text/Code Small`; khung *Chữ dài* thử tên/nhãn dài nhất cho phép
+   (14 ký tự) + mã dài nhất. Component gắn với feature có `*-states.md` → chạy
+   `python3 _scripts/status-chip-lint.py <file states>`; FAIL thì báo, KHÔNG tự đổi nhãn nghiệp vụ.
+7. Sửa lỗi → chụp lại **chỉ phần đã sửa**.
 
 ## Bước 8 — cập nhật component đã có
 

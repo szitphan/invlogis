@@ -89,7 +89,7 @@ Không hỏi user những gì đọc được.
    Có nguồn thì **dẫn xuất từ nguồn**, chỉ hỏi phần nguồn bỏ trống. Màn sẽ vẽ chưa có wireframe ở
    renderer nào → báo 1 dòng và hỏi: chạy `/wireframe-html` trước (đề xuất cho màn phức tạp) hoặc
    `/wireframe-ascii` (màn đơn giản), hay vẽ thẳng từ SRS (ghi "không có bảng 5 cột" trong báo cáo —
-   mất bước khớp đặc tả mục 8 Bước 6 và không ghi được link Figma về repo).
+   mất bước khớp đặc tả mục 9 Bước 6 và không ghi được link Figma về repo).
 4. **UI Common Rules & Components** (theo `.claude/rules/ui-common-rules-components.md`): đọc bảng
    mục lục `design/ui-common/screen-patterns.md` (CMP) + `conventions.md` (GR, E-common); bảng 5 cột
    ghi `Xem CMP-xx` / `Theo GR-xx` nào thì đọc mục đó. CMP có dòng **Figma** → dùng đúng component +
@@ -301,19 +301,24 @@ Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một
    - (e) mỗi component đã dùng không vi phạm dòng **Không nên** nào của nó trong `design/components.md`;
    - (f) **phủ bảng 5 cột**: đếm row có element tương ứng trên màn (theo tên layer, mục 7 Bước 4) —
      phải N/N; thiếu thì vẽ bổ sung hoặc ghi lý do.
-6. Một `figma_read screenshot` cho mỗi màn chính ở cuối, để user xem.
-7. **Usability (AI):** vẽ xong **trọn một flow** (đủ màn của flow đó theo `userflow.md` Mục 3) và
+6. **Chip trạng thái:** mọi chip là instance `Chip trạng thái` (không tự vẽ pill); icon và chữ đúng màu
+   `Status Chip/<Sắc>/Foreground` (đổi icon qua thuộc tính `Icon` xong phải gắn lại màu nét); mã nghiệp vụ
+   dùng `Text/Code Small`; chip không đè tên/mã. Màn có trạng thái nghiệp vụ → chạy
+   `python3 _scripts/status-chip-lint.py docs/{feature}/srs/{feature}-states.md`; FAIL thì báo trong báo
+   cáo, KHÔNG tự đổi nhãn nghiệp vụ (nhãn lấy nguyên văn từ states.md).
+7. Một `figma_read screenshot` cho mỗi màn chính ở cuối, để user xem.
+8. **Usability (AI):** vẽ xong **trọn một flow** (đủ màn của flow đó theo `userflow.md` Mục 3) và
    `userflow.md` có **Mục 3.6 Tác vụ chính** chạm flow này → gọi `@usability-reviewer` (Task) với
    userflow + bảng `screenId · slug · nodeId` của flow (kèm artboard trạng thái). Agent đi từng tác
    vụ theo cognitive walkthrough + rà heuristic Nielsen, chỉ trả finding, không tự sửa. `BLOCKING`
    không đổi nghiệp vụ → sửa màn rồi gọi lại (tối đa 2 vòng); cần đổi nghiệp vụ → ghi "cần `/cr`",
    không tự sửa. Chưa trọn flow (chế độ Nhanh, vài màn lẻ) hoặc thiếu Mục 3.6 → KHÔNG gọi, ghi rõ
    lý do ở báo cáo (`Usability (AI): SKIPPED — …`), không in PASS.
-8. **Khớp đặc tả (agent):** có bảng 5 cột → gọi `@uxui-reviewer` (Task) với bảng
+9. **Khớp đặc tả (agent):** có bảng 5 cột → gọi `@uxui-reviewer` (Task) với bảng
    `screenId · slug · nodeId` + đường dẫn file wireframe đã dùng làm nguồn (HTML: file flow + "Screen N"
    của từng màn; ASCII: file flow + `## Screen: {slug}`) của các màn vừa vẽ/sửa. `BLOCKING` → sửa màn rồi
    gọi lại (tối đa 2 vòng); vẫn còn → ghi vào báo cáo. Không có bảng 5 cột → `Khớp đặc tả: SKIPPED —
-   không có bảng 5 cột`, không in PASS. Chạy trước mục 7 nếu cả hai cùng chạy (sửa đặc tả trước, rồi
+   không có bảng 5 cột`, không in PASS. Chạy trước mục 8 nếu cả hai cùng chạy (sửa đặc tả trước, rồi
    mới đi tác vụ).
 
 ## Bước 7 — báo đã vẽ gì
@@ -360,7 +365,7 @@ biết xử lý cái nào trước — mức chỉ là gợi ý chung, tuỳ ngh
 
 * **[Cao] Màn có khớp nghiệp vụ không.** Audit sạch nghĩa là vẽ đúng kỹ thuật và đúng hệ thống, chứ chưa
   nói gì về việc cột "Tổng tiền" có nên nằm đó hay không. `@uxui-reviewer` đối chiếu với
-  bảng 5 cột (mục 8 Bước 6), nhưng đó là AI đọc, chỉ bắt được cái bảng có ghi — bảng sai thì màn sai theo.
+  bảng 5 cột (mục 9 Bước 6), nhưng đó là AI đọc, chỉ bắt được cái bảng có ghi — bảng sai thì màn sai theo.
 * **[Cao] Có thiếu màn/nhánh không.** Chỉ userflow mới lộ ra điều này. Không có flow thì nói thẳng là
   chưa kiểm được.
 * **[Trung] Nhãn và dữ liệu mẫu có đúng không.** "Duyệt trong 24 giờ" là một khẳng định về hệ thống; nếu

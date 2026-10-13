@@ -26,6 +26,7 @@ Expand raw idea thành structured brainstorm board qua interview __độ sâu th
 - __Idea input free-form__ — text trực tiếp HOẶC `@<file-path>` tag.
 - __Thông tin cấp dự án đọc + ghi vào profile__ — domain sản phẩm, thuật ngữ gọi người dùng cuối, compliance (hay chạm ở phần user + rủi ro): đọc `docs/_shared/project-profile.md` trước khi hỏi; thiếu thì hỏi rồi đề xuất ghi vào profile để skill sau khỏi hỏi lại. Per @../../rules/project-profile.md.
 - __Phân tầng SaaS__ — mỗi dòng tính năng Mục 4 mang nhãn tầng ngay sau nhãn nguồn (`- B7 [SOP+] [Gói: Đa chi nhánh] …`); con số chính sách, danh sách lựa chọn, tính năng bật/tắt ghi mã `P-…` kèm giá trị khách, cả trong bảng 7.2; mã chưa có trong `docs/_product/tenant-parameters.md` thì đề xuất thêm dòng trong cùng L1. Khách từ chối tính năng → tham số tắt, không xoá. chạy `python3 _scripts/saas-layer-lint.py <bản nháp>` trước L1, FAIL thì sửa trước khi trình, báo cáo tách 4 mức. Profile không ghi bán cho nhiều khách → bỏ qua, báo 1 dòng. Per @../../rules/saas-layer.md.
+- __Đối chiếu nguồn từng mục__ — tài liệu khách được tính theo từng mục, không theo cả file. Đầu Phase A chạy `python3 _scripts/source-coverage.py <feature>` → mục ⬜/🔄 và mục ➡ giao cho feature thành danh sách cần hỏi/đưa vào. Khi ghi brainstorm, cập nhật sổ `docs-input/_coverage/{slug}.md` trong cùng L1: mục đã đưa vào → ✅ + Ở đâu (path + mã B/OQ); thuộc feature khác → ➡ {slug}; ngoài phạm vi → ➖ + lý do; hứa "sẽ đưa vào" mà chưa đưa → để ⬜, không đánh ✅. Gate exit 1 → KHÔNG chuyển status sang `in-review`/`approved`. Tách/gộp feature → chạy gate cho từng feature mới, đổi ➡ theo slug mới. Per @../../rules/source-coverage.md.
 - __Interview hỏi từng section một__ — KHÔNG dồn batch 10 câu. Wait reply giữa các section. User có thể skip section bất kỳ → fill `<!-- TBD: ... -->`.
 - __Mandatory artifacts theo complexity__ (auto-detect):
   - __ASCII flow diagram__ — bắt buộc nếu detect: external API/redirect (OAuth, payment, webhook), branching ≥2 paths, async/background job.
@@ -154,6 +155,10 @@ Existing features: !`ls -d docs/*/ 2>/dev/null | xargs -I{} basename {} | grep -
    - Gom `known_facts` = seed + mọi câu user đã nói trong session (+ existing brainstorm nếu continuation).
    - Map từng câu định hỏi ↔ known_facts. __Xóa__ câu đã có answer; câu thiếu 1 phần → rút thành follow-up đúng phần thiếu.
    - Trước khi hỏi, in ngắn "Em đã nắm: {…} · Còn thiếu: {…}" để user thấy skill KHÔNG hỏi lại đồ đã nói.
+8) __Đối chiếu nguồn từng mục__ (feature đã có hoặc seed trỏ tới `docs-input/`): chạy
+   `python3 _scripts/source-coverage.py <feature>`. Mục ⬜/🔄/➡ in ra gộp vào danh sách hỏi của Phase B
+   (đề xuất xử lý từng mục: đưa vào / feature khác / ngoài phạm vi / hỏi khách). Nguồn chưa có sổ → đọc
+   nguồn, lập sổ theo tiêu đề mục (rule source-coverage Mục 2) rồi mới hỏi. Không có nguồn nào → bỏ qua.
 
 ### Phase B — Interview (chế độ theo A.6; Deep = 7 sections one-at-a-time)
 
@@ -257,6 +262,7 @@ __Section 4 — Detailed Flow Deep Dive__ (chỉ chạy nếu complexity signal 
    - [ ] Open questions có ID `OQ-1, OQ-2, ...`.
    - Fail check → in checklist gap + đề xuất "hỏi thêm Q-X" trước proceed. User pick "proceed anyway with TBD" được.
    - __Chế độ Micro / Shallow / Confirm-only__: quality gate KHÔNG cảnh báo nặng — TBD là CỐ Ý (đã làm gọn). Chỉ liệt kê gọn "còn TBD: {…}" trong L1 và đẩy vào Open Questions, KHÔNG chặn/không giục hỏi thêm. Gate đầy đủ chỉ áp cho Deep / Targeted deep.
+   - __Sổ đối chiếu__: dựng phần sửa sổ `docs-input/_coverage/*.md` khớp với bản nháp (mỗi mục đã dùng → ✅ + Ở đâu). Chạy lại gate sau khi tính cả phần sửa này; còn mục mở → liệt kê trong L1 "Nguồn còn mở: {n} mục" (không chặn ghi draft, chặn đổi status).
 8b) __Review độc lập__ (per `review-format.md` Mục "Review độc lập khi skill chạy riêng") — gọi agent qua Agent tool, chạy song song. Prompt gồm __bản nháp đầy đủ__ (chưa ghi file) + đường dẫn nguồn để agent Read: nguồn đã dùng ở Phase A (vd SOP trong `docs-input/sop/`), `docs/_shared/project-profile.md`, `docs/_shared/definitions.md`, `docs/_product/prd.md` (nếu có), brainstorm khác cùng feature.
    - `@senior-ba` — 2 việc:
      * __Thiếu vai:__ lập danh sách vai trong nguồn (vd cột TRÁCH NHIỆM của SOP) → so với vai ở Mục 3 và các bước Mục 5. Câu bị động ("được duyệt", "gửi thông báo") phải nói ai làm, ai nhận.
@@ -346,6 +352,7 @@ Skill KHÔNG mặc định Deep. Sau khi chấm scope × completeness (Phase A.6
 - @../../rules/ba-conventions.md
 - @../../rules/project-profile.md
 - @../../rules/saas-layer.md
+- @../../rules/source-coverage.md
 - @../../rules/approval-gate.md
 - @../../rules/review-format.md (Mục Review độc lập khi skill chạy riêng — bước 8b)
 - @../../agents/senior-ba.md · @../../agents/po-reviewer.md

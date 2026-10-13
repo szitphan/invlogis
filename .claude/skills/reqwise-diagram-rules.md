@@ -20,16 +20,18 @@ nobody said**. Two rules follow:
 
 ## 1b. Reading the shape costs tokens too‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
-The tool definition already carries a one-line field list per property, so most of the time you
-can write the call without reading anything. When you do need the shape:
+This skill is the read. It already has the grammar and the DO/DON'T table, so do not also
+open `figma_docs` for the same kind before drawing. A second copy of the same lesson sits in
+the transcript and is paid for again on every later turn.
 
-- `figma_docs({ section: "<kind>", level: "cheat" })` — the call shape and the field tables,
-  roughly half the full section. Enough to write the call.
-- `figma_docs({ section: "<kind>" })` — the full section: the findings this kind reports, the
-  notation traps, the layout notes. Read it the first time you draw this kind, or when a
-  warning needs explaining.
+- Most calls need nothing else: the tool definition carries a one-line field list, and the
+  compact `text` lines are in this skill.
+- `figma_docs({ section: "<kind>", level: "cheat" })` — only when a line you need is not in
+  the skill. Call shape and field tables, a fraction of the full section.
+- `figma_docs({ section: "<kind>" })` — the findings, the notation traps, the layout notes.
+  Read it only to explain a warning the skill did not already answer.
 
-One read per kind per session, not one per diagram.
+One extra read per kind per session, and only when something is actually unexplained.
 
 ## 1c. Write the model in the COMPACT form‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
@@ -153,8 +155,8 @@ expensive part.
 - __A new frame is never drawn on top of existing work.__ If the spot you asked for is taken,
   the frame slides straight DOWN until it is clear, keeping your `x`, and a warning names what
   was in the way and where it went instead. So a forgotten `x`/`y` costs you a warning and a
-  scroll, not somebody's artwork hidden under a diagram. It is still worth placing the frame
-  yourself: sliding down is a safety net, not a layout.‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
+  scroll, not somebody's artwork hidden under a diagram. It is still worth placing the frame‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
+  yourself: sliding down is a safety net, not a layout.
 - Before the first draw, look at what is already there (`figma_read` op `get_design_context`,
   or `search_nodes` for existing `Userflow · ` / `Activity · ` / `ERD · ` / `Sequence · ` /
   `Sitemap · ` / `State · ` / `Use case · ` / `Journey · ` frames) and place the new one
@@ -336,5 +338,5 @@ you did about it**, and — separately — the explicit note that business truth
 machine-checked and is the reader's to confirm.‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
 
-<!-- wm:aca59f6017c1910577c791eb8337d44e -->
+<!-- wm:10031a355241b873619b88f1cbdef99a -->
 <sub>Tài liệu thuộc bộ AI4BA Reqwise Figma MCP — bản quyền hoangphan.blog</sub>

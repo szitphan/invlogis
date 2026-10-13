@@ -31,7 +31,7 @@ Câu chữ (lỗi, xác nhận, rỗng, toast) theo `design/design.md` › Conte
 | GR-08 | Số điện thoại | Thông tin liên hệ và địa chỉ | 2.8 · app 2.8 |
 | GR-09 | Thanh tìm kiếm | Quy tắc bảng danh sách | 2.9 · app 2.9 |
 | GR-10 | Trường không có thông tin | — | 2.10 · app 2.10 |
-| GR-11 | Sinh mã bản ghi | — | 2.11 · app 2.11 |
+| GR-11 | Sinh mã yêu cầu và mã bản ghi | — | 2.11 · app 2.11 · cross-process-flow (12/10/2026) |
 | GR-12 | Trạng thái rỗng / đang tải | States + Copy động | 2.12 · MSC-09, MSC-10 |
 | GR-13 | Dữ liệu chưa lưu | Copy động › Hộp xác nhận | 2.13 · app 2.13 |
 | GR-14 | Căn lề trong bảng | Quy tắc bảng danh sách | 2.14 (chỉ web) |
@@ -48,6 +48,7 @@ Câu chữ (lỗi, xác nhận, rỗng, toast) theo `design/design.md` › Conte
 | GR-25 | Trạng thái kết nối mạng | Copy động | app 2.17 |
 | GR-26 | Popup chặn | Copy động | app 2.18 |
 | GR-27 | Dữ liệu đã cũ | Copy động | cross-process-flow (12/10/2026) |
+| GR-28 | Không có quyền xem (web) | Copy động | cross-process-flow (12/10/2026) |
 
 ---
 
@@ -151,9 +152,14 @@ GR-14, GR-16…GR-20 chỉ áp web — app không có bảng nhiều cột (danh
 - **Mobile:** dùng chung web (tài liệu app ghi `--` — đã chốt `-`, 2026-10-04).
 - **design.md:** —
 
-### GR-11 — Sinh mã bản ghi
-- Sinh sau khi bản ghi được phê duyệt; trước đó nhận diện bằng người tạo, ngày tạo, trạng thái. Feature không có phê duyệt hoặc tạo tự động → sinh ngay khi tạo.
-- **UC phải khai báo:** thời điểm sinh nếu khác; prefix/format mã (theo tài liệu format mã của dự án).
+### GR-11 — Sinh mã yêu cầu và mã bản ghi
+- Bản ghi phải phê duyệt có 2 mã:
+  - **Mã yêu cầu** sinh ngay khi gửi duyệt lần đầu, dạng `YC-[Prefix]-[Định danh]-[4 số]` ([Định danh] giống mã bản ghi). Hiện khi bản ghi Chờ phê duyệt / Đã từ chối / Đã thu hồi. Sửa rồi gửi lại giữ nguyên mã yêu cầu.
+  - **Mã bản ghi** sinh khi được phê duyệt, dạng `[Prefix]-[Định danh]-[4 số]`. Từ lúc này hiện mã bản ghi; mã yêu cầu vẫn lưu kèm bản ghi.
+- Bản nháp chưa gửi chưa có mã; nhận diện bằng người tạo, ngày tạo, trạng thái.
+- Feature không có phê duyệt hoặc tạo tự động → chỉ có mã bản ghi, sinh ngay khi tạo.
+- Tìm theo mã: tìm được cả mã yêu cầu lẫn mã bản ghi.
+- **UC phải khai báo:** prefix + định danh (theo tài liệu format mã của dự án); thời điểm sinh nếu khác.
 - **Mobile:** dùng chung web.
 - **design.md:** —
 
@@ -194,6 +200,14 @@ GR-14, GR-16…GR-20 chỉ áp web — app không có bảng nhiều cột (danh
 - Bấm Tải lại: tải dữ liệu mới, giữ chỗ đang xem nếu còn (vd bước đang chọn, bộ lọc), rồi ẩn banner.
 - **UC phải khai báo:** màn nào áp dụng; từ thay cho [Đối tượng] (vd "Quy trình", "Danh sách"); giữ lại gì sau khi tải lại.
 - **Mobile:** dùng chung web; banner nằm ngay dưới header màn hoặc header sheet.
+- **design.md:** Copy động
+
+### GR-28 — Không có quyền xem (web)
+- Mở thẳng đường dẫn một trang không có quyền menu → vùng nội dung hiện `E-common-011` + nút **Về trang chủ**; header và menu trái vẫn hiện.
+- Bấm mở một bản ghi không có quyền xem → popup Loại 2 (GR-15) câu `E-common-011` + nút **Đóng**, ở lại màn đang xem.
+- Một khối trong màn (panel, tab) không có quyền xem → câu `E-common-011` tại chỗ thay nội dung khối; phần còn lại dùng bình thường.
+- **UC phải khai báo:** trường hợp nào áp dụng; quyền của nghiệp vụ nào quyết định.
+- **Mobile:** theo GR-26 (popup chặn, nút Quay lại).
 - **design.md:** Copy động
 
 ## App (chỉ mobile)
@@ -258,7 +272,7 @@ tên cây dầu.") vẫn là E-common-001 với `[tên trường]` điền cụ 
 | E-common-008 | Toast | Lỗi hệ thống / API / timeout | "Đã xảy ra lỗi. Thử lại sau." | GR-15 Loại 3 |
 | E-common-009 | Toast | Mất kết nối mạng | "Mất kết nối. Kiểm tra mạng và thử lại." | GR-15 Loại 3 |
 | E-common-010 | Toast (web) · Popup chặn (app) | Phiên đăng nhập hết hạn | "Phiên làm việc đã hết hạn. Đăng nhập lại." | GR-15 Loại 3 · GR-26 |
-| E-common-011 | Popup chặn (app) | Mở màn không có quyền xem | "Bạn không có quyền xem thông tin này. Liên hệ quản trị viên để được cấp quyền." | GR-26 |
+| E-common-011 | Tại chỗ / Popup Loại 2 (web) · Popup chặn (app) | Mở màn, bản ghi hoặc khối không có quyền xem | "Bạn không có quyền xem thông tin này. Liên hệ quản trị viên để được cấp quyền." | GR-28 · GR-26 |
 | E-common-012 | Popup chặn (app) | Quyền tài khoản vừa thay đổi | "Quyền của tài khoản vừa thay đổi. Tải lại để áp dụng." | GR-26 |
 
 Câu gốc tài liệu app (2.17, 2.18) đã viết lại theo design.md › Copy động (bỏ "Vui lòng"):

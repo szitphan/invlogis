@@ -209,7 +209,20 @@ hỏi lại khách (vd ghi chú "không cần" bị bỏ mà không rõ ý).}
 
 ## Chi tiết
 {output diff.py, hoặc so theo ý khi diff.py không ghép được mục}
+
+## Tổng quan thay đổi
+
+| Loại | Số mục | Mục |
+|---|---|---|
+| Thêm mới | {n} | {số mục + tên theo bản mới, tách "; "} |
+| Bỏ | {n} | {số mục + tên theo bản cũ, tách "; "} |
+| Sửa | {n} | {số mục + tên theo bản mới, tách "; "} |
+| Giữ nguyên | {n} | |
 ```
+
+Bảng **Tổng quan thay đổi** bắt buộc, đúng tên mục và đúng 3 nhãn Thêm mới / Bỏ / Sửa: `intake-sync.py`
+đọc bảng này để mở lại mục trong sổ đối chiếu `docs-input/_coverage/` (Thêm mới/Sửa → 🔄, Bỏ → ➖). Thiếu
+bảng → máy mở lại MỌI mục đã xử lý. Mục đổi số → ghi theo số bản mới và để bảng "Đổi số mục" nối số cũ.
 
 Tóm tắt nghiệp vụ là phần user đọc — viết bằng ngôn ngữ nghiệp vụ, không phải "dòng 12 đổi". Chỉ báo
 khác biệt định dạng nếu nó che mất thay đổi thật.
@@ -266,6 +279,7 @@ Sau khi user đồng ý. Trước Edit/Write file trong `docs/`, set `CLAUDE_SKI
 - @.claude/rules/approval-gate.md — L1/L2 trước khi ghi
 - @.claude/rules/ba-conventions.md — Mục 5 (L1 bằng lời nghiệp vụ), Mục 2 (không hỏi lại)
 - @.claude/rules/backlog.md — sổ nguồn + task tự đóng, điều kiện Xong khi
+- @.claude/rules/source-coverage.md — sổ đối chiếu từng mục; bản mới mở lại mục theo bảng Tổng quan thay đổi
 - @.claude/rules/naming-conventions.md — slug kebab-case ASCII
 - @.claude/rules/changelog.md — env trước khi sửa file trong docs/
 - `_scripts/intake-sync.py` — đồng bộ sổ nguồn (nhận `source/`, gộp bản cập nhật, bỏ qua `_*`/`.*`)

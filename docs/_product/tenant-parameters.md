@@ -1,13 +1,17 @@
 ---
 type: tenant-parameters
-status: draft
+status: stale
+status_prev: draft
 status_changed: 2026-10-12
 status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-12
 tenant_terms: [Delta, DK05, dGas, Nam Khánh, Phú Lợi, Pan Hải An]
 links:
   - docs/_product/saas-core-vs-tenant.md
-  - docs/dispatch-coordination/brainstorms/dispatch-coordination.md
+  - docs/service-delivery/brainstorms/service-delivery.md
+  - docs/shipment-coordination/brainstorms/shipment-coordination.md
+  - docs/transport-dispatch/brainstorms/transport-dispatch.md
+  - docs/cross-process-flow/srs/cross-process-flow-spec.md
 ---
 
 # Tham số theo khách
@@ -36,3 +40,6 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 | P-chu-ky-nhac-nhiet | Chu kỳ nhắc nhập nhật ký nhiệt độ, theo loại hàng lạnh | Số (giờ/lần, theo loại hàng) | Gói: Hàng lạnh | chưa chốt | chưa chốt (OQ-43) | Trưởng điều vận | Điều phối D2 | Giao nhận hàng hoá (18/9/2026) |
 | P-thoi-gian-cho-nhan-viec | Bao lâu không bấm nhận thì việc quay về cán bộ quản lý | Số (phút) | Cấu hình | chưa chốt | chưa chốt (OQ-41) | Admin khách | Điều phối 6.4 | — |
 | P-nhac-jobid-dung-cong-no | Sau bao lâu nhắc CS về JobID dừng vì công nợ | Số (ngày) | Cấu hình | chưa chốt | chưa chốt (OQ-42) | Admin khách | Điều phối 6.4 | — |
+| P-logo | Logo và tên app hiện ở góc menu, màn đăng nhập, splash mobile, splash web | Tệp logo + tên hiển thị | Cấu hình | chữ cái đầu tên khách trên ô vuông | Đã nhận logo gốc 12/10/2026 (`design/brand/delta/delta-logo-goc.jpg`, jpg nền trắng; chờ bản nền trong) | Admin khách | Khung trang (menu, đăng nhập, splash) | Chốt UI 12/10/2026 (design.md § Thương hiệu theo khách, § Splash web) |
+| P-mau-logo | Màu nền ô logo. Chỉ ô logo đổi màu; nút, menu, tab, link và màu trạng thái giữ trung tính | Mã màu | Cấu hình | #262626 | #2E7449 (theo lab, chưa xác nhận) | Admin khách | Khung trang (menu, đăng nhập) | Chốt UI 12/10/2026 (design.md § Thương hiệu theo khách) |
+| P-mau-ma-quy-trinh | Mẫu mã quy trình: tiền tố, thành phần (chi nhánh, năm), số chữ số, chu kỳ đánh lại số | Mẫu mã | Cấu hình | `QT-[Mã chi nhánh]-[YY]-[XXXX]`, đánh lại theo năm | `QT-[Mã chi nhánh]-[YY]-[XXXX]`, đánh lại theo năm | Admin khách | Liên quy trình BR-004 | Chốt 12/10/2026 (cross-process-flow OQ-10) |

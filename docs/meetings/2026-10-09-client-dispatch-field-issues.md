@@ -1,9 +1,12 @@
 ---
 type: meeting
-status: processed
+status: stale
+status_prev: processed
 updated: 2026-10-09
 links:
-  - docs/dispatch-coordination/brainstorms/dispatch-coordination.md
+  - docs/service-delivery/brainstorms/service-delivery.md
+  - docs/shipment-coordination/brainstorms/shipment-coordination.md
+  - docs/transport-dispatch/brainstorms/transport-dispatch.md
   - _workspace/backlog.md
 ---
 

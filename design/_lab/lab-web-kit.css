@@ -257,3 +257,15 @@ body.ds .app .grp{border-color:#d4d4d4}
 body.ds .app .grp .tbl thead th{border-bottom-color:#d4d4d4}
 /* Chip trạng thái nằm trong H1 (trang chi tiết) bị kế thừa Cal Sans → đậm hơn; khoá font Inter */
 .stp{font-family:Inter,sans-serif;letter-spacing:0;vertical-align:middle;line-height:1}
+/* Brand theo khách (chốt 12/10 vòng 3): brand chỉ thay logo (--p/--on-p, do applyBrand() đặt). Mọi điều khiển
+   khác dùng accent đen cố định — không đổi theo khách. */
+body.ds .app{--acc:#262626;--acc-muted:#f1f1f1;--acc-ink:#171717}
+body.ds .app .btn.pri{background:var(--acc);color:#fff}
+body.ds .app .tbl .cb.on,body.ds .app .tbl .cb.mix{background:var(--acc);border-color:var(--acc)}
+body.ds .app .tbl tr.sel td{background:#fafafa}
+body.ds .app .bar i{background:var(--acc)}
+body.ds .app .pick.on{border-color:var(--acc);box-shadow:0 0 0 3px #26262614}
+body.ds .app .pick.on .radio{border-color:var(--acc)}body.ds .app .pick.on .radio::after{background:var(--acc)}
+body.ds .app .tabs span.on{box-shadow:inset 0 -2px 0 #262626}
+body.ds .app.shD .sfootD .mod{color:var(--ink)}body.ds .app.shD .tile{background:var(--acc-muted);color:var(--ink)}
+body.ds .app .shE .e-it.on svg{color:var(--pt)}

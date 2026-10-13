@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cross-process-flow — Wireframe (điều hướng)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bar:#000; --line:#ccc; --muted:#777; --bg:#f4f4f4; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #000; background: var(--bg); height: 100vh; display: flex; }
+
+    /* SIDEBAR TOC */
+    .toc { width: 280px; flex-shrink: 0; background: #fff; border-right: 2px solid #000; height: 100vh; overflow-y: auto; padding: 18px 0; }
+    .toc-brand { padding: 0 18px 14px; border-bottom: 1px solid var(--line); }
+    .toc-feature { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+    .toc-title { font-size: 17px; font-weight: 800; margin-top: 2px; }
+    .toc-meta { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .toc-section { padding: 14px 18px 4px; font-size: 10px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); }
+    .toc a { display: block; padding: 7px 18px; font-size: 13px; color: #000; text-decoration: none; border-left: 3px solid transparent; cursor: pointer; }
+    .toc a:hover { background: #f4f4f4; }
+    .toc a.active { border-left-color: #000; background: #f0f0f0; font-weight: 700; }
+    .toc a.screen { padding-left: 34px; font-size: 12px; color: #444; }
+    .toc a.screen::before { content: "› "; color: var(--muted); }
+    .toc .flow-count { float: right; font-size: 10px; color: var(--muted); border: 1px solid var(--line); border-radius: 8px; padding: 0 6px; }
+
+    /* MAIN */
+    .main { flex: 1; height: 100vh; display: flex; flex-direction: column; }
+    .topbar { background: #fff; border-bottom: 1px solid var(--line); padding: 10px 18px; font-size: 13px; display: flex; align-items: center; gap: 12px; }
+    .topbar .crumb { font-weight: 700; }
+    .topbar .device { font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; }
+    .topbar .open-raw { margin-left: auto; font-size: 12px; text-decoration: underline; color: #000; }
+    .frame-wrap { flex: 1; overflow: hidden; background: var(--bg); }
+    iframe { width: 100%; height: 100%; border: 0; background: #fff; }
+
+    /* OVERVIEW (flow map, self-contained, no mermaid dep) */
+    .overview { height: 100%; overflow-y: auto; padding: 24px 28px; }
+    .overview h2 { font-size: 18px; margin-bottom: 4px; }
+    .overview .sub { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+    .legend { display: flex; gap: 16px; font-size: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .chip { width: 14px; height: 14px; border-radius: 3px; border: 1px solid #000; display: inline-block; }
+    .chip.happy { background: #fff; } .chip.edge { background: repeating-linear-gradient(45deg,#fff,#fff 3px,#ddd 3px,#ddd 6px); } .chip.error { background: #000; }
+    .flowmap { display: flex; flex-direction: column; gap: 22px; }
+    .flowgroup { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fff; }
+    .flowgroup h3 { font-size: 14px; margin-bottom: 3px; }
+    .flowgroup .cover { font-size: 11px; color: var(--muted); margin-bottom: 12px; }
+    .chain { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+    .node { border: 1.5px solid #000; border-radius: 6px; padding: 8px 12px; font-size: 12px; background: #fff; cursor: pointer; text-decoration: none; color: #000; }
+    .node:hover { background: #f0f0f0; }
+    .node.edge { background: repeating-linear-gradient(45deg,#fff,#fff 4px,#f0f0f0 4px,#f0f0f0 8px); }
+    .node.error { background: #000; color: #fff; }
+    .node .n { font-weight: 800; margin-right: 4px; }
+    .arrow { color: var(--muted); padding: 0 8px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <nav class="toc">
+    <div class="toc-brand">
+      <div class="toc-feature">cross-process-flow</div>
+      <div class="toc-title">Wireframe</div>
+      <div class="toc-meta">4 flow · 40 màn · desktop 1920 + mobile 393</div>
+    </div>
+
+    <a class="active" data-view="overview">▤ Tổng quan (user flow)</a>
+
+    <div class="toc-section">Flow 1 · Xem quy trình từ màn chi tiết <span class="flow-count">15</span></div>
+<a data-view="flow" data-src="xem-quy-trinh.html">Xem quy trình từ màn chi tiết (desktop 1920)</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="1">ban-ghi-dong-quy-trinh</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="2">ban-ghi-dong-quy-trinh-loi</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="3">so-do-o-day</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="4">so-do-dang-tai</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="5">so-do-loi</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="6">panel-buoc-chua-tao</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="7">panel-nga-re</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="8">panel-khong-quyen</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="9">panel-cong-no</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="10">so-do-du-lieu-cu</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="11">ban-ghi-dong-quy-trinh-dang-tai</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="12">panel-ban-ghi-truoc</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="13">panel-lich-su-loi</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="14">popup-khong-quyen-mo</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="15">popup-ban-ghi-da-xoa</a>
+<div class="toc-section">Flow 2 · Tra cứu danh sách Quy trình <span class="flow-count">9</span></div>
+<a data-view="flow" data-src="tra-cuu-quy-trinh.html">Tra cứu danh sách Quy trình (desktop 1920)</a>
+<a class="screen" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="1">danh-sach-quy-trinh</a>
+<a class="screen" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="2">danh-sach-rong</a>
+<a class="screen" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="3">danh-sach-dang-tai</a>
+<a class="screen" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="4">danh-sach-loi</a>
+<a class="screen" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="5">danh-sach-loc-khong-ra</a>
+<a class="screen" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="6">danh-sach-khong-quyen</a>
+<a class="screen" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="7">danh-sach-tim-khong-ra</a>
+<a class="screen" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="8">danh-sach-du-lieu-cu</a>
+<a class="screen" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="9">so-do-tu-danh-sach</a>
+<div class="toc-section">Flow 3 · Tạo nghiệp vụ tiếp theo, chặn thu hồi/xoá <span class="flow-count">4</span></div>
+<a data-view="flow" data-src="tao-nghiep-vu-tiep-theo.html">Tạo nghiệp vụ tiếp theo, chặn thu hồi/xoá (desktop 1920)</a>
+<a class="screen" data-view="flow" data-src="tao-nghiep-vu-tiep-theo.html" data-scroll="1">ban-ghi-moi-o-day</a>
+<a class="screen" data-view="flow" data-src="tao-nghiep-vu-tiep-theo.html" data-scroll="2">popup-buoc-da-co-yeu-cau</a>
+<a class="screen" data-view="flow" data-src="tao-nghiep-vu-tiep-theo.html" data-scroll="3">popup-da-co-buoc-con</a>
+<a class="screen" data-view="flow" data-src="tao-nghiep-vu-tiep-theo.html" data-scroll="4">popup-ban-ghi-nguon-thu-hoi</a>
+<div class="toc-section">Flow 4 · Xem quy trình trên Delta Super App <span class="flow-count">12</span></div>
+<a data-view="flow" data-src="xem-quy-trinh-mobile.html">Xem quy trình trên Delta Super App (mobile 393)</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="1">m-the-quy-trinh</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="2">m-the-quy-trinh-loi</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="3">m-sheet-so-do</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="4">m-sheet-so-do-dang-tai</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="5">m-sheet-so-do-loi</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="6">m-sheet-so-do-du-lieu-cu</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="7">m-sheet-buoc</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="8">m-sheet-buoc-chua-tao</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="9">m-sheet-nga-re</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="10">m-sheet-cong-no</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="11">m-sheet-buoc-khong-quyen</a>
+<a class="screen" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="12">m-the-quy-trinh-dang-tai</a>
+
+  </nav>
+
+  <div class="main">
+    <div class="topbar">
+      <span class="crumb" id="crumb">Tổng quan</span>
+      <span class="device" id="device">desktop 1920 + mobile 393</span>
+      <a class="open-raw" id="openRaw" href="#" target="_blank" style="display:none">Mở file gốc ↗</a>
+    </div>
+    <div class="frame-wrap">
+      <!-- OVERVIEW -->
+      <div class="overview" id="overview">
+        <h2>User flow tổng — cross-process-flow</h2>
+        <div class="sub">Sơ đồ điều hướng giữa các màn. Click 1 node để nhảy tới wireframe màn đó. Nguồn: <code>srs/cross-process-flow-userflow.md</code>.</div>
+        <div class="legend">
+          <span><i class="chip happy"></i> Màn chính (happy)</span>
+          <span><i class="chip edge"></i> Trạng thái biên (rỗng/loading)</span>
+          <span><i class="chip error"></i> Lỗi</span>
+        </div>
+        <div class="flowmap">
+          <div class="flowgroup"><h3>Flow 1 — Xem quy trình từ màn chi tiết</h3><div class="cover">desktop · 15 màn</div><div class="chain"><a class="node" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="1"><span class="n">1</span>ban-ghi-dong-quy-trinh</a><span class="arrow">→</span><a class="node error" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="2"><span class="n">2</span>ban-ghi-dong-quy-trinh-loi</a><span class="arrow">→</span><a class="node" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="3"><span class="n">3</span>so-do-o-day</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="4"><span class="n">4</span>so-do-dang-tai</a><span class="arrow">→</span><a class="node error" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="5"><span class="n">5</span>so-do-loi</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="6"><span class="n">6</span>panel-buoc-chua-tao</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="7"><span class="n">7</span>panel-nga-re</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="8"><span class="n">8</span>panel-khong-quyen</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="9"><span class="n">9</span>panel-cong-no</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="10"><span class="n">10</span>so-do-du-lieu-cu</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="11"><span class="n">11</span>ban-ghi-dong-quy-trinh-dang-tai</a><span class="arrow">→</span><a class="node" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="12"><span class="n">12</span>panel-ban-ghi-truoc</a><span class="arrow">→</span><a class="node error" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="13"><span class="n">13</span>panel-lich-su-loi</a><span class="arrow">→</span><a class="node error" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="14"><span class="n">14</span>popup-khong-quyen-mo</a><span class="arrow">→</span><a class="node error" data-view="flow" data-src="xem-quy-trinh.html" data-scroll="15"><span class="n">15</span>popup-ban-ghi-da-xoa</a></div></div>
+<div class="flowgroup"><h3>Flow 2 — Tra cứu danh sách Quy trình</h3><div class="cover">desktop · 9 màn</div><div class="chain"><a class="node" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="1"><span class="n">1</span>danh-sach-quy-trinh</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="2"><span class="n">2</span>danh-sach-rong</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="3"><span class="n">3</span>danh-sach-dang-tai</a><span class="arrow">→</span><a class="node error" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="4"><span class="n">4</span>danh-sach-loi</a><span class="arrow">→</span><a class="node" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="5"><span class="n">5</span>danh-sach-loc-khong-ra</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="6"><span class="n">6</span>danh-sach-khong-quyen</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="7"><span class="n">7</span>danh-sach-tim-khong-ra</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="8"><span class="n">8</span>danh-sach-du-lieu-cu</a><span class="arrow">→</span><a class="node" data-view="flow" data-src="tra-cuu-quy-trinh.html" data-scroll="9"><span class="n">9</span>so-do-tu-danh-sach</a></div></div>
+<div class="flowgroup"><h3>Flow 3 — Tạo nghiệp vụ tiếp theo, chặn thu hồi/xoá</h3><div class="cover">desktop · 4 màn</div><div class="chain"><a class="node" data-view="flow" data-src="tao-nghiep-vu-tiep-theo.html" data-scroll="1"><span class="n">1</span>ban-ghi-moi-o-day</a><span class="arrow">→</span><a class="node error" data-view="flow" data-src="tao-nghiep-vu-tiep-theo.html" data-scroll="2"><span class="n">2</span>popup-buoc-da-co-yeu-cau</a><span class="arrow">→</span><a class="node error" data-view="flow" data-src="tao-nghiep-vu-tiep-theo.html" data-scroll="3"><span class="n">3</span>popup-da-co-buoc-con</a><span class="arrow">→</span><a class="node error" data-view="flow" data-src="tao-nghiep-vu-tiep-theo.html" data-scroll="4"><span class="n">4</span>popup-ban-ghi-nguon-thu-hoi</a></div></div>
+<div class="flowgroup"><h3>Flow 4 — Xem quy trình trên Delta Super App</h3><div class="cover">mobile · 12 màn</div><div class="chain"><a class="node" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="1"><span class="n">1</span>m-the-quy-trinh</a><span class="arrow">→</span><a class="node error" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="2"><span class="n">2</span>m-the-quy-trinh-loi</a><span class="arrow">→</span><a class="node" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="3"><span class="n">3</span>m-sheet-so-do</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="4"><span class="n">4</span>m-sheet-so-do-dang-tai</a><span class="arrow">→</span><a class="node error" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="5"><span class="n">5</span>m-sheet-so-do-loi</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="6"><span class="n">6</span>m-sheet-so-do-du-lieu-cu</a><span class="arrow">→</span><a class="node" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="7"><span class="n">7</span>m-sheet-buoc</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="8"><span class="n">8</span>m-sheet-buoc-chua-tao</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="9"><span class="n">9</span>m-sheet-nga-re</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="10"><span class="n">10</span>m-sheet-cong-no</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="11"><span class="n">11</span>m-sheet-buoc-khong-quyen</a><span class="arrow">→</span><a class="node edge" data-view="flow" data-src="xem-quy-trinh-mobile.html" data-scroll="12"><span class="n">12</span>m-the-quy-trinh-dang-tai</a></div></div>
+
+        </div>
+      </div>
+      <!-- FLOW iframe -->
+      <iframe id="frame" style="display:none"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const overview = document.getElementById('overview');
+    const frame = document.getElementById('frame');
+    const crumb = document.getElementById('crumb');
+    const openRaw = document.getElementById('openRaw');
+    const links = document.querySelectorAll('[data-view]');
+
+    function setActive(el){
+      document.querySelectorAll('.toc a').forEach(a=>a.classList.remove('active'));
+      // highlight matching toc link
+      const match = [...document.querySelectorAll('.toc a')].find(a =>
+        a.dataset.view===el.dataset.view && a.dataset.src===el.dataset.src && (a.dataset.scroll||'')===(el.dataset.scroll||''));
+      (match || el.closest('.toc') && el).classList && (match||el).classList.add('active');
+    }
+
+    function show(el){
+      if(el.dataset.view==='overview'){
+        overview.style.display='block'; frame.style.display='none';
+        crumb.textContent='Tổng quan'; openRaw.style.display='none';
+        document.querySelectorAll('.toc a').forEach(a=>a.classList.remove('active'));
+        document.querySelector('.toc a[data-view="overview"]').classList.add('active');
+        return;
+      }
+      const src = el.dataset.src, scroll = el.dataset.scroll;
+      overview.style.display='none'; frame.style.display='block';
+      frame.src = scroll ? src + '#s' + scroll : src;
+      crumb.textContent = src.replace('.html','');
+      openRaw.style.display='inline'; openRaw.href = src;
+      // toc highlight
+      document.querySelectorAll('.toc a').forEach(a=>a.classList.remove('active'));
+      const tocMatch=[...document.querySelectorAll('.toc a')].find(a=>a.dataset.src===src && (a.dataset.scroll||'')===(scroll||''))
+                    || [...document.querySelectorAll('.toc a')].find(a=>a.dataset.src===src && !a.classList.contains('screen'));
+      if(tocMatch) tocMatch.classList.add('active');
+    }
+
+    links.forEach(el => el.addEventListener('click', e=>{ e.preventDefault(); show(el); }));
+    window.addEventListener('load', ()=>{ /* default overview */ });
+  </script>
+</body>
+</html>

@@ -98,8 +98,8 @@
 </div>
 <main class="lab-main">
   <section class="lab-box">
-    <h2>Màn [21] Lệnh của lái xe (dispatch-coordination): nhận Lệnh, đi từng điểm, ghi chi phí, chốt Lệnh</h2>
-    <p>Nội dung theo wireframe <code>docs/dispatch-coordination/html-wireframe/order-run-flow.html</code> màn 2 <b>bản nháp 07/10/2026</b> (bảng mô tả ở <code>ascii-wireframe/order-run-flow.md</code> › order-detail-mobile). Wireframe chỉ cấp <i>nội dung</i>; bố cục, control, thẻ là thử nghiệm của lab.</p>
+    <h2>Màn [21] Lệnh của lái xe (transport-dispatch): nhận Lệnh, đi từng điểm, ghi chi phí, chốt Lệnh</h2>
+    <p>Nội dung theo wireframe <code>docs/transport-dispatch/html-wireframe/order-run-flow.html</code> màn 2 <b>bản nháp 07/10/2026</b> (bảng mô tả ở <code>ascii-wireframe/order-run-flow.md</code> › order-detail-mobile). Wireframe chỉ cấp <i>nội dung</i>; bố cục, control, thẻ là thử nghiệm của lab.</p>
     <p class="lab-muted">Mỗi máy bấm được: Nhận/Từ chối, chọn lý do, Bắt đầu, Chốt Lệnh, Thử lại đồng bộ, Sang điểm tiếp. Dữ liệu mẫu. Thêm <code>#check</code> vào URL để tự kiểm chữ đè / tràn khung.</p>
   </section>
   <div class="lab-row" id="screens"></div>
@@ -108,7 +108,7 @@
     <ul class="lab-muted" style="margin:0;padding-left:18px;font-size:13px">
       <li><b>Thẻ "Điểm tiếp theo"</b> đặt trên cùng, lộ trình đầy đủ xếp dưới. Wireframe chỉ có danh sách điểm ngang hàng nhau.</li>
       <li><b>Từ chối Lệnh</b>: wireframe là màn riêng [22]; lab dùng sheet B (đã chốt cho xác nhận ngày 09/10) với chip lý do. Danh sách lý do lấy đúng từ wireframe [22]: Xe hỏng · Lái xe ốm hoặc bận · Trùng Lệnh khác · Khác.</li>
-      <li><b>Sang điểm tiếp khi thiếu ảnh</b> (E-dispatch-003): wireframe là popup giữa màn; lab dùng sheet B dạng lỗi + danh sách ảnh còn thiếu.</li>
+      <li><b>Sang điểm tiếp khi thiếu ảnh</b> (E-transport-dispatch-002): wireframe là popup giữa màn; lab dùng sheet B dạng lỗi + danh sách ảnh còn thiếu.</li>
       <li><b>Điểm và số ảnh bắt buộc</b> theo loại hàng còn là câu hỏi mở OQ-47 — số "ảnh 0/2", tên góc chụp là dữ liệu mẫu.</li>
       <li><b>Nhập nhiệt độ</b> chỉ có với hàng lạnh; chu kỳ nhắc còn mở (OQ-43). Lệnh mẫu tự đặt là hàng lạnh 2–8°C để thấy ô này.</li>
       <li><b>Nhãn chi phí</b> (Trong định mức · Chờ duyệt · Đã duyệt · Bị từ chối) là nhãn đề xuất trong wireframe, chưa chốt với khách.</li>
@@ -140,7 +140,7 @@ const PH=[
  {cap:"2 · Từ chối Lệnh",sm:"Sheet B + chip lý do (wireframe: màn riêng [22])",st:{status:"giao",at:0,shot:0,sheet:"reject",why:"Xe hỏng"}},
  {cap:"3 · Đã nhận, chưa có GPS",sm:"GPS chưa ghi khởi hành → lái xe bấm Bắt đầu",st:{status:"nhan",at:0,shot:0}},
  {cap:"4 · Đang thực hiện",sm:"Đã qua điểm 1, đang tới Kho Hải Long",st:{status:"chay",at:1,shot:0}},
- {cap:"5 · Thiếu ảnh khi sang điểm",sm:"E-dispatch-003 · sheet lỗi + ảnh còn thiếu",st:{status:"chay",at:1,shot:1,sheet:"miss"}},
+ {cap:"5 · Thiếu ảnh khi sang điểm",sm:"E-transport-dispatch-002 · sheet lỗi + ảnh còn thiếu",st:{status:"chay",at:1,shot:1,sheet:"miss"}},
  {cap:"6 · Mất sóng · đồng bộ lỗi",sm:"Ảnh giữ trên máy; Thử lại ngay trên dải báo",st:{status:"chay",at:2,shot:3,sync:"err"}},
  {cap:"7 · Bị trả lại",sm:"Điều vận trả Lệnh · lý do + việc cần làm ngay",st:{status:"chay",at:2,shot:2,back:true}},
  {cap:"8 · Đã chốt, chờ duyệt",sm:"Hết nút hành động · nhãn Chờ duyệt",st:{status:"chot",at:2,shot:3}},

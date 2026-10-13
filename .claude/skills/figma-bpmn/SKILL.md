@@ -18,8 +18,8 @@ Draw a process in the **OMG BPMN 2.0 standard notation** so that a reader who wa
 room can read it literally, and so that the file can be handed to a BPM tool.
 
 Output: one Figma frame `BPMN · <title>`, the process questions the diagram exposed, and —
-with `options.xml` — the same diagram as a `.bpmn` file that opens in Camunda Modeler, Bizagi,
-Signavio or draw.io.
+with `options.xml` — a `.bpmn` file written to the Desktop (`xmlPath` and `xmlBytes` come
+back; the XML text does not). It opens in Camunda Modeler, Bizagi, Signavio or draw.io.
 
 ## Choose this, or choose /figma-activity‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
@@ -106,7 +106,9 @@ notify >> cust "Xác nhận đã hoàn"
 
 `>` is a sequence flow and `>>` a message flow — one character apart, and deliberately not
 interchangeable, because that is the distinction the standard cares most about. `..` ties an
-annotation to what it comments on.
+annotation to what it comments on. A chain `s1 > check > gw` is one flow per hop; the label
+and `default` / `cond` after it belong to the last hop. A word after the arrows that is none of
+these is reported, not dropped.
 
 ### The element table — read this before writing a single node
 
@@ -123,8 +125,8 @@ annotation to what it comments on.
 | `script` | script task | the engine runs a script |
 | `sub` | sub-process | a block of work; add `expand` to draw its contents |
 | `call` | call activity | a process that lives elsewhere and is reused |
-| `esub` | event sub-process | an in-line handler. Triggered, never flowed into |
-| `?` `?+` `?o` `?e` `?*` | exclusive / parallel / inclusive / event-based / complex gateway | |‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
+| `esub` | event sub-process | an in-line handler. Triggered, never flowed into |‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
+| `?` `?+` `?o` `?e` `?*` | exclusive / parallel / inclusive / event-based / complex gateway | |
 | `data` `store` | data object / data store | what a step reads or writes |
 | `note` | text annotation | tie it with `..` |
 
@@ -222,9 +224,10 @@ who owns the process can tell you it is true.
 
 ## Read the reference
 
-`figma_docs(section="bpmn")` — the full field tables, the whole event matrix, the connector
-kinds, and what each finding means.‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
+The grammar in this skill is enough to draw. `figma_docs(section="bpmn", level="cheat")` is
+the field tables when a line here does not cover what you need to write. The full section —
+the event matrix and what each finding means — only when a warning needs explaining.‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
 
-<!-- wm:aca59f6017c1910577c791eb8337d44e -->
+<!-- wm:10031a355241b873619b88f1cbdef99a -->
 <sub>Tài liệu thuộc bộ AI4BA Reqwise Figma MCP — bản quyền hoangphan.blog</sub>

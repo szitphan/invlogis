@@ -110,3 +110,29 @@
 | 2026-10-12 | manual | szitphan | `docs/meetings/2026-10-09-client-dispatch-field-issues.md` | manual edit |
 | 2026-10-12 | /status | szitphan | `docs/dispatch-coordination/brainstorms/dispatch-coordination.md` | status stale → draft (restore sau review upstream) |
 | 2026-10-12 | manual | @szitphan | `design/design.md` | chip tối B (nền 32%, tím #cbbcff), Iconography 1 chuẩn nét 1.8/24, Nhóm rows-3, mobile số kết quả dòng riêng |
+| 2026-10-12 | manual | szitphan | `docs/service-delivery/brainstorms/service-delivery.md` | manual edit |
+| 2026-10-12 | manual | szitphan | `docs/shipment-coordination/brainstorms/shipment-coordination.md` | manual edit |
+| 2026-10-12 | manual | szitphan | `docs/transport-dispatch/brainstorms/transport-dispatch.md` | manual edit |
+| 2026-10-12 | manual | szitphan | `design/design.md` | manual edit |
+| 2026-10-12 | manual | szitphan | `docs/_product/tenant-parameters.md` | manual edit |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/srs/cross-process-flow-spec.md` | áp OQ-3..31 chốt 12/10: FR-022, NFR-009/010, BR-011/012, E-003/004 |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/srs/cross-process-flow-states.md` | OQ-4/13/14: Đã huỷ, bản ghi thay thế, Đã dừng chỉ luồng chính |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/srs/cross-process-flow-flows.md` | OQ-3/7/23/25/26: E-003, E-004, ghi nhận đồng thời, popup web Loại 2 |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/srs/cross-process-flow-erd.md` | OQ-4/9/10/29: Bước 1–n Bản ghi, mã yêu cầu, Đã thay thế, nhãn EN |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/cross-process-flow-object-map.md` | OQ-4/10/12/14/16: mã QT theo năm, Đã huỷ, Xuất danh sách, ứng với 1–n |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/usecases/uc-cap-nhat-quy-trinh-theo-ban-ghi.md` | áp OQ-3..31 chốt 12/10 vào extensions |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/usecases/uc-tao-nghiep-vu-tiep-theo.md` | áp OQ-3..31 chốt 12/10 vào extensions |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/usecases/uc-tra-cuu-quy-trinh.md` | áp OQ-3..31 chốt 12/10 vào extensions |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/usecases/uc-xem-quy-trinh-cua-ban-ghi.md` | áp OQ-3..31 chốt 12/10 vào extensions |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/usecases/cross-process-flow-usecase-index.md` | áp OQ-3..31 chốt 12/10 vào extensions |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/srs/cross-process-flow-spec.md` | thêm cột Tầng SaaS cho 22 FR + 12 BR; FR-001/BR-004 qua P-mau-ma-quy-trinh |
+| 2026-10-12 | /srs | @szitphan | `docs/_product/tenant-parameters.md` | thêm P-mau-ma-quy-trinh (Liên quy trình BR-004, OQ-10) |
+| 2026-10-12 | /srs | @szitphan | `docs/_product/saas-core-vs-tenant.md` | mã quy trình theo năm, trỏ P-mau-ma-quy-trinh |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/srs/cross-process-flow-userflow.md` | OQ-3..31 đợt 2: thêm màn [30]–[40] (đang tải, lỗi, E-003/E-004, không quyền, bản ghi trước), flow_hash 33e60cca |
+| 2026-10-12 | /srs | @szitphan | `docs/cross-process-flow/html-wireframe/cross-process-flow-wireframe-html-index.md` | sinh lại 4 flow HTML (40 màn): +11 màn [30]–[40], mã QT theo năm, mã yêu cầu, nhánh Đã huỷ, lỗi tại chỗ |
+| 2026-10-12 | /update-overview | @szitphan | `design/ui-common/conventions.md` | GR-11 mã yêu cầu + mã bản ghi (BL-063); thêm GR-28 không có quyền xem web, E-common-011 áp web (BL-064) |
+| 2026-10-12 | manual | szitphan | `design/ui-common/screen-patterns.md` | manual edit |
+| 2026-10-12 | manual | szitphan | `docs/cross-process-flow/srs/cross-process-flow-states.md` | manual edit |
+| 2026-10-13 | manual | szitphan | `design/design.md` | manual edit |
+| 2026-10-13 | manual | szitphan | `design/ui-common/screen-patterns.md` | manual edit |
+| 2026-10-13 | manual | szitphan | `docs/cross-process-flow/html-wireframe/cross-process-flow-wireframe-html-index.md` | manual edit |

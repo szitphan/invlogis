@@ -87,6 +87,18 @@ Hệ quả: B phải tự gánh trường lý do (Từ chối) vì C bị bỏ �
 - Khung trang Overlay `Confirm Sheet · innvie`; chữ dài ở 393 và 320.
 - Lệch thư viện cần ghi Known Gaps khi dựng: "Bỏ thay đổi" chữ đỏ (Astryx không có ghost đỏ) · vùng chạm nút < 44 nếu style vẫn là Astryx.
 
+## Font chữ thường — vòng 3 (12/10/2026, `lab-fonts-body.html`)
+
+Inter (DS hiện tại) so với SF Pro, Open Sans, Lato ở cỡ DS 14/12, 10 tình huống (body, độ đậm, dấu chồng, bảng, số thẳng cột, ký tự dễ nhầm, form, chip, thẻ mobile, tiêu đề lớn). Tiêu đề mặc định Cal Sans (r01), có nút đổi sang cùng font cột.
+
+| Font | Điểm chặn |
+|---|---|
+| SF Pro | Giấy phép Apple không cho nhúng web; web chỉ gọi `-apple-system` → Windows ra Segoe UI, Android ra Roboto. Figma phải cài tay |
+| Open Sans | Không có điểm chặn kỹ thuật (có tiếng Việt, 300–800). Rộng −2% so với Inter |
+| Lato | Bản Google Fonts không có bộ tiếng Việt (dấu thanh rơi về font hệ thống) và thiếu 500/600 → nhãn 500 = 400, 600 = 700. Phải tự host Lato 2.0 |
+
+Chờ user chấm.
+
 ## Thẻ nhấn không gradient (09/10/2026, `lab-accent.html`)
 
 8 kiểu chờ chấm: A khối màu chính đặc · B nền mực + 1 điểm màu · C trắng + vạch trái · D tô nhạt · E vé tách đôi · F chữ lớn · G biển số thật · H viền đậm. Luật: màu đặc, không gradient/glow/kính mờ/icon trang trí, tối đa 1 thẻ nhấn mỗi màn.

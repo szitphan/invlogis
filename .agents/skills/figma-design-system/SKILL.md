@@ -15,8 +15,9 @@ anything else: is the write path open?*): plugin connected, one window,
 The rest of that file is about diagrams; a design system is not one, so the
 steps below replace its drawing rules.
 
-Field tables and defaults: `figma_docs(section="designsystem")`. Read it once
-before your first plan.
+Field tables and defaults: `figma_docs(section="designsystem", level="cheat")`.
+Read that once before your first plan. The full section only when a finding
+needs explaining.
 
 ## The one rule that makes or breaks this‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
@@ -127,5 +128,5 @@ one; never invent it.
   does not restart a stale leader — `figma_status` first.‍​‌‌‌​​‌‌‌​‌‌‌‌​‌‌‌‌‌‌‌​​​​‌​​​‌​‌​​‌‌​‌​‌​‌‌​​​‌​​​‌‌‌​​​​​​‌‌​‌​‌‌​​​​‌‌​​​​​​‌​​​​​​​​‌‌‌‌​‌‌‌‌‌‌‌​​‌​​‌‌‌​​‌​​​​‌‌‌​‌‌‌‌‌​‌​​‍
 
 
-<!-- wm:aca59f6017c1910577c791eb8337d44e -->
+<!-- wm:10031a355241b873619b88f1cbdef99a -->
 <sub>Tài liệu thuộc bộ AI4BA Reqwise Figma MCP — bản quyền hoangphan.blog</sub>

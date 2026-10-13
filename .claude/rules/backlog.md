@@ -10,7 +10,9 @@
 |---|---|---|
 | File mới trong `docs-input/` | Thêm dòng sổ `⬜ chưa feed` + task `BL-NNN` "Đọc và feed" | Đầu phiên, mỗi lượt user gửi tin, sau mỗi Write/Edit |
 | File trong `docs-input/` đổi tên/chuyển chỗ (cùng nội dung) | Đổi đường dẫn trong sổ + task | như trên |
-| Doc trong `docs/{feature}/` trỏ tới nguồn `⬜` | Nguồn → `✅ đã feed`, task feed tự đóng. Nguồn đã thay bản mới (dòng `> Phiên bản: … (nhận YYYY-MM-DD)`) chỉ tính doc có `updated:` từ ngày đó trở đi | như trên |
+| Sổ đối chiếu `docs-input/_coverage/{slug}.md` đổi | Cột Feed theo từng mục: `⬜` / `🟡 đối chiếu n/m` / `✅ đối chiếu m/m`; ✅ thì task feed tự đóng. Nguồn ✅ cũ chưa có sổ → `🟡` + task "Lập sổ đối chiếu" (rule `source-coverage.md`) | như trên |
+| Nguồn thay bản mới (dòng `> Phiên bản:` mới hơn dòng `> Bản:` của sổ) | Mục Thêm mới/Sửa trong bảng *Tổng quan thay đổi* → `🔄`, mục Bỏ → `➖`; task "Rà lại SRC theo bản" | như trên |
+| Mục `➡ {feature}` mà feature chưa có thư mục | Task "Lập feature {feature}", Xong khi `exists:docs/{feature}/brainstorms/*.md` | như trên |
 | Điều kiện cột **Xong khi** thoả | Task → `✅`, ghi ngày + bằng chứng, chuyển sang mục Đã xong | như trên |
 | File trong folder `zz-*` (feature nháp/test) | Bỏ qua — không đóng task, không đánh dấu feed | như trên |
 
@@ -21,7 +23,8 @@ xếp nhóm + đặt tên theo quy ước trong `docs-input/README.md` (sổ t�
 
 1. **Thêm task** khi user nói "cần làm / để sau / nhớ xử lý X", hoặc skill kết thúc còn việc dở cấp dự án
    (bước tiếp theo đã hứa, câu hỏi mở chặn tiến độ, nguồn cần xử lý). KHÔNG thêm task cho OQ nghiệp vụ
-   nằm sẵn trong doc feature — OQ sống ở doc đó.
+   nằm sẵn trong doc feature — OQ sống ở doc đó. Hứa "sẽ đưa X vào {doc}" mà chưa đưa trong lượt này →
+   task với Xong khi `grep:{doc}:{từ khoá/mã của X}` (không dùng `manual`).
 2. **Mỗi task phải có cột Xong khi máy kiểm được** (`exists:` / `grep:` / `fed:`, `!` phủ định, `&&` nối),
    trỏ vào **output thật** của việc (file sinh ra, mã xuất hiện). Chỉ dùng `manual` khi việc là quyết định
    không để lại dấu vết file (vd chốt bản nào thay thế bản nào).
@@ -36,7 +39,8 @@ xếp nhóm + đặt tên theo quy ước trong `docs-input/README.md` (sổ t�
 
 - ❌ Task không có điều kiện Xong khi (hoặc `manual` cho việc có output file) → không bao giờ tự đóng.
 - ❌ Sửa tay cột *tự động* của sổ nguồn (Dùng ở / Việc mở) — lần chạy sau ghi đè.
-- ❌ Tự hạ `✅ đã feed` của sổ — trạng thái do người ghi là quyết định của user.
+- ❌ Sửa tay cột Feed của sổ nguồn (trừ `➖`) — máy tính theo sổ đối chiếu, lần chạy sau ghi đè.
+- ❌ Nói "sẽ đưa X vào brainstorm" rồi để đó — phải thành task có `grep:` trỏ vào doc đích, hoặc dòng ⬜ trong sổ đối chiếu.
 
 ## Tóm tắt 1 dòng
 
