@@ -24,6 +24,13 @@ if [ -z "$FILE" ] && [ ! -t 0 ]; then
     fi
 fi
 
+# Repo theo VỊ TRÍ FILE, không theo cwd — phiên ở main ghi vào worktree vẫn log/lan stale đúng repo (lib-root.sh)
+. "$(dirname "$0")/lib-root.sh"
+if [ -n "$FILE" ]; then
+    FILE="$(abs_phys "$FILE")"; _ROOT="$(root_of "$FILE")"
+    [ -n "$_ROOT" ] && PROJECT_PATH="$(cd "$_ROOT" && pwd -P)"
+fi
+
 # Claude Code có thể truyền absolute path — chuẩn hóa về path tương đối project root.
 PROJECT_PATH="${PROJECT_PATH:-$(pwd)}"
 FILE="${FILE#$PROJECT_PATH/}"
@@ -36,7 +43,7 @@ FILE="${FILE#$PROJECT_PATH/}"
 [[ "$FILE" =~ /exports/ ]] && exit 0
 [[ "$FILE" =~ /inbox/ ]] && exit 0
 [[ "$FILE" =~ /_runs/ ]] && exit 0   # run card /run-task: nhật ký chạy riêng, không log từng bước
-[ ! -f "$FILE" ] && exit 0
+[ ! -f "$PROJECT_PATH/$FILE" ] && exit 0
 
 DATE=$(date +%Y-%m-%d)
 SKILL="${CLAUDE_SKILL_NAME:-manual}"

@@ -15,6 +15,13 @@ if [ -z "$FILE" ] && [ ! -t 0 ]; then
         cat >/dev/null
     fi
 fi
+# Repo theo VỊ TRÍ FILE, không theo cwd — phiên ở main ghi vào worktree vẫn log/lan stale đúng repo (lib-root.sh)
+. "$(dirname "$0")/lib-root.sh"
+if [ -n "$FILE" ]; then
+    FILE="$(abs_phys "$FILE")"; _ROOT="$(root_of "$FILE")"
+    [ -n "$_ROOT" ] && PROJECT_PATH="$(cd "$_ROOT" && pwd -P)"
+fi
+
 [[ ! "$FILE" =~ docs/.+\.md$ ]] && exit 0
 [ ! -f "$FILE" ] && exit 0
 

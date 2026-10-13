@@ -16,6 +16,13 @@ if [ -z "$FILE" ] && [ ! -t 0 ]; then
     fi
 fi
 
+# Repo theo VỊ TRÍ FILE, không theo cwd — phiên ở main ghi vào worktree vẫn log/lan stale đúng repo (lib-root.sh)
+. "$(dirname "$0")/lib-root.sh"
+if [ -n "$FILE" ]; then
+    FILE="$(abs_phys "$FILE")"; _ROOT="$(root_of "$FILE")"
+    [ -n "$_ROOT" ] && PROJECT_PATH="$(cd "$_ROOT" && pwd -P)"
+fi
+
 # Chỉ quan tâm nguồn KG ingest — MIRROR walk scope của kg-build.mjs:
 # docs/**.md + bpmn *.ir.json (mọi độ sâu) + dbdiagram *.dbml + sync-state.yaml.
 case "$FILE" in
