@@ -487,7 +487,7 @@ Thiếu 1 điều kiện → chạy như bình thường, hỏi user.
 | 2.1 Màn nào, Nhanh/Đầy đủ · 2.4 chia đợt | Lấy từ run card (bước figma-screen + Mục 2). Card không ghi → Cửa 2 |
 | 2.2 Thiết bị | Card Mục 2 → `primary_device` trong `srs/{feature}-userflow.md`. Không có → Cửa 2 (HARD GATE vẫn giữ: không đoán) |
 | 2.3 Vẽ userflow trước? | Không hỏi; ghi vào card Mục 9 "điểm cần soi" nếu trang chưa có flow |
-| 2.3 Bố cục A/B/C | Soạn đủ 3 phương án như thường → gọi `@uxui-reviewer` chọn 1, đối chiếu với bản phác: `html-wireframe/{flow}.html` (ưu tiên) hoặc `ascii-wireframe/{flow}.md` + userflow (Mục 2 vùng/màn, Mục 3.6 tác vụ làm nhiều nhất phải nổi nhất). Ghi vào card Mục 9: phương án chọn, lý do, vì sao bỏ 2 phương án kia. Không có bản phác nào → vẫn chọn theo userflow, ghi "chọn khi chưa có bản phác" |
+| 2.3 Bố cục A/B/C | Soạn đủ 3 phương án như thường → gọi `@uxui-reviewer` chọn 1, đối chiếu với bản phác theo thứ tự nguồn của `.claude/rules/screen-source.md` Mục 2 (flow đã lên Figma: `screens/{flow}.md`; chưa: `html-wireframe/{flow}.html` rồi `ascii-wireframe/{flow}.md`) + userflow (Mục 2 vùng/màn, Mục 3.6 tác vụ làm nhiều nhất phải nổi nhất). Ghi vào card Mục 9: phương án chọn, lý do, vì sao bỏ 2 phương án kia. Không có bản phác nào → vẫn chọn theo userflow, ghi "chọn khi chưa có bản phác" |
 | 2.5 L1 `Y` | Run card thay; in tóm tắt kế hoạch vào Nhật ký card |
 | Finding reviewer đổi giao diện đã duyệt | KHÔNG tự sửa (memory keep-approved-look) → câu hỏi ở card Mục 6, Cửa 2 |
 
