@@ -1,9 +1,9 @@
 #!/bin/bash
-# Append 1 dòng sự kiện vào _workspace/changelog.md sau mỗi Write/Edit doc file.
+# Ghi 1 dòng sự kiện vào log toàn vault sau mỗi Write/Edit doc file.
 #
-# Contract (per .claude/rules/changelog.md): lịch sử thay đổi sống ở MỘT file
-# append-only duy nhất — KHÔNG ghi changelog: vào frontmatter, KHÔNG routing
-# file con → file cha (path của file được sửa chính là thông tin routing).
+# Contract (per .claude/rules/changelog.md): lịch sử thay đổi sống ở MỘT log
+# toàn vault — KHÔNG ghi changelog: vào frontmatter, KHÔNG routing file con → file cha.
+# Hook ghi vào file mảnh theo branch; _workspace/changelog.md dựng lại từ mảnh.
 #
 # Format: bảng Markdown 5 cột, 1 dòng = 1 sự kiện, append cuối file:
 #   | {date} | {skill} | {@author} | `{file-path}` | {note} |
@@ -51,27 +51,11 @@ SKILL="$(escape_cell "$SKILL")"
 NOTE="$(escape_cell "$NOTE")"
 AUTHOR="$(escape_cell "$AUTHOR")"
 
-LOG="$PROJECT_PATH/_workspace/changelog.md"
-mkdir -p "$(dirname "$LOG")"
-
-# Bootstrap header khi file chưa tồn tại (hoặc rỗng) — bảng cần header + separator
-# để Obsidian/GitHub render. Dùng >> nên an toàn nếu 2 hook chạy sát nhau.
-if [ ! -s "$LOG" ]; then
-    {
-        printf '%s\n\n' '# Changelog'
-        printf '%s\n' '> Lịch sử thay đổi toàn vault — append-only, mới nhất ở cuối. Writer duy nhất: hook `auto-changelog.sh`. Xem `.claude/rules/changelog.md`.'
-        printf '\n'
-        printf '%s\n' '| Ngày | Skill | Người | File | Ghi chú |'
-        printf '%s\n' '|---|---|---|---|---|'
-    } >> "$LOG"
-fi
-
 LINE="| $DATE | $SKILL | $AUTHOR | \`$FILE\` | $NOTE |"
 
-# Dedupe: bỏ qua nếu dòng giống hệt đã tồn tại (double-fire cùng note trong ngày).
-grep -qxF "$LINE" "$LOG" && exit 0
-
-# Append-only (O_APPEND — an toàn khi nhiều sub-agent Write song song).
-printf '%s\n' "$LINE" >> "$LOG"
+# Ghi vào file mảnh của branch hiện tại (_workspace/changelog.d/{ngày}--{branch}.md) rồi dựng lại
+# _workspace/changelog.md (file sinh ra, gitignore). Nhiều worktree ghi song song không xung đột.
+# logbook.py tự dedupe + append O_APPEND. Xem .claude/rules/changelog.md.
+python3 "$PROJECT_PATH/_scripts/logbook.py" add changelog "$LINE"
 
 exit 0

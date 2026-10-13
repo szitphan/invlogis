@@ -1,9 +1,3 @@
-# Changelog
-
-> Lịch sử thay đổi toàn vault — append-only, mới nhất ở cuối. Writer duy nhất: hook `auto-changelog.sh`. Xem `.claude/rules/changelog.md`.
-
-| Ngày | Skill | Người | File | Ghi chú |
-|---|---|---|---|---|
 | 2026-10-02 | manual | szitphan | `docs/_research/2026-10-02-container-deadline-alerts.md` | manual edit |
 | 2026-10-02 | manual | szitphan | `docs/_research/2026-10-02-electronic-delivery-record.md` | manual edit |
 | 2026-10-02 | manual | szitphan | `docs/_research/2026-10-02-eport-integration.md` | manual edit |
@@ -137,3 +131,4 @@
 | 2026-10-13 | manual | szitphan | `design/ui-common/screen-patterns.md` | manual edit |
 | 2026-10-13 | manual | szitphan | `docs/cross-process-flow/html-wireframe/cross-process-flow-wireframe-html-index.md` | manual edit |
 | 2026-10-13 | manual | szitphan | `design/setup-figma.md` | manual edit |
+| 2026-10-13 | manual | szitphan | `docs/_product/tenant-parameters.md` | manual edit |

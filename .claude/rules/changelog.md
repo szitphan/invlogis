@@ -7,6 +7,8 @@ paths:
 # Changelog Convention‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > Lịch sử thay đổi của TOÀN BỘ vault sống ở **một file duy nhất**: `_workspace/changelog.md` (append-only, **bảng Markdown**). Doc KHÔNG mang `changelog:` trong frontmatter. Không còn routing table, không còn prefix, không còn echo 1 sự kiện vào nhiều file.
+>
+> **Ghi theo mảnh (2026-10-13):** hook ghi vào `_workspace/changelog.d/{YYYY-MM-DD}--{branch}.md`; `_workspace/changelog.md` là **file sinh ra** (gitignore) do `_scripts/logbook.py` dựng lại từ các mảnh — để nhiều worktree ghi song song không xung đột. Đọc vẫn đọc file tổng như cũ. Xem `.claude/rules/worktree.md` Mục 3.
 
 ## Vì sao 1 log tập trung‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -48,7 +50,7 @@ Skill KHÔNG tự ghi changelog.md. Trước mỗi Write/Edit, skill set env var
 * `CLAUDE_CHANGELOG_NOTE` — note cho sự kiện
 * `CLAUDE_CHANGELOG_AUTHOR` — @handle (thường skill resolve 1 lần đầu session)
 
-Hook `auto-changelog.sh` (PostToolUse Write|Edit) đọc env + path vừa sửa → append 1 dòng bảng. Thiếu env → fallback `manual | {git user.name} | manual edit`. Một writer duy nhất = không race khi /srs chạy sub-agent song song (append-only O_APPEND an toàn).
+Hook `auto-changelog.sh` (PostToolUse Write|Edit) đọc env + path vừa sửa → append 1 dòng bảng vào mảnh của branch hiện tại, rồi dựng lại file tổng. Thiếu env → fallback `manual | {git user.name} | manual edit`. Một writer duy nhất = không race khi /srs chạy sub-agent song song (append-only O_APPEND an toàn).
 
 > **Vì sao bảng Markdown mà vẫn append được an toàn:** mỗi sự kiện vẫn là **đúng 1 dòng thêm vào cuối file** — không cần đọc-sửa-ghi lại, không cần chèn vào giữa. Bảng chỉ đổi cách trình bày, KHÔNG đổi mô hình ghi.‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 

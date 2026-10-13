@@ -34,6 +34,13 @@ if [ -z "$FILE" ] && [ ! -t 0 ]; then
     fi
 fi
 
+# UI Common Rules & Components (design/ui-common/) không có links: — lan stale theo mã
+# CMP/GR/E-common vừa đổi (băm từng mục). Xem _scripts/ui-common-stale.py.
+if [[ "$FILE" =~ design/ui-common/(screen-patterns|conventions)\.md$ ]]; then
+    python3 "${PROJECT_PATH:-$(pwd)}/_scripts/ui-common-stale.py" "$FILE"
+    exit 0
+fi
+
 [[ ! "$FILE" =~ docs/.+\.md$ ]] && exit 0
 [[ "$FILE" =~ /_shared/ ]] && exit 0
 [[ "$FILE" =~ /exports/ ]] && exit 0
@@ -46,19 +53,9 @@ REL_FILE="${FILE#$PROJECT_PATH/}"
 
 DATE=$(date +%Y-%m-%d)
 SKILL="${CLAUDE_SKILL_NAME:-manual}"
-LOG="$PROJECT_PATH/_workspace/staleness.md"
-mkdir -p "$(dirname "$LOG")"
-
-# Bootstrap header khi file chưa tồn tại (hoặc rỗng) — bảng cần header + separator.
-if [ ! -s "$LOG" ]; then
-    {
-        printf '%s\n\n' '# Staleness Log'
-        printf '%s\n' '> Lan truyền `status: stale` khi upstream đổi — append-only, mới nhất ở cuối. Writer duy nhất: hook `post-edit-stale.sh`.'
-        printf '\n'
-        printf '%s\n' '| Ngày | Upstream đổi | Downstream bị đánh stale | Lý do |'
-        printf '%s\n' '|---|---|---|---|'
-    } >> "$LOG"
-fi
+# Log staleness: ghi vào file mảnh theo branch (_workspace/staleness.d/), dựng lại
+# _workspace/staleness.md 1 lần cuối hook (file sinh ra, gitignore). Xem _scripts/logbook.py.
+STALE_ROWS=()
 
 PROPAGATED=0
 while IFS= read -r CANDIDATE; do
@@ -117,11 +114,14 @@ while IFS= read -r CANDIDATE; do
     ' "$CANDIDATE" > "$TMP" && mv "$TMP" "$CANDIDATE"
 
     PROPAGATED=$((PROPAGATED + 1))
-    printf '| %s | `%s` | `%s` | %s |\n' \
-        "$DATE" "$REL_FILE" "${CANDIDATE#$PROJECT_PATH/}" "$REASON" >> "$LOG"
+    STALE_ROWS+=("$(printf '| %s | `%s` | `%s` | %s |' \
+        "$DATE" "$REL_FILE" "${CANDIDATE#$PROJECT_PATH/}" "$REASON")")
 done < <(find "$PROJECT_PATH/docs" -name "*.md" -type f 2>/dev/null | grep -v "/exports/" | grep -v "/inbox/" | grep -v "/docs/cr/" | grep -v "/_reverse/")
 
 if [ "$PROPAGATED" -gt 0 ]; then
+    for ROW in "${STALE_ROWS[@]}"; do
+        python3 "$PROJECT_PATH/_scripts/logbook.py" add staleness "$ROW"
+    done
     echo "  ↳ stale propagated to $PROPAGATED downstream doc(s). Check _workspace/staleness.md."
 fi
 

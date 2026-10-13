@@ -1,9 +1,3 @@
-# Staleness Log
-
-> Lan truyền `status: stale` khi upstream đổi — append-only, mới nhất ở cuối. Writer duy nhất: hook `post-edit-stale.sh`.
-
-| Ngày | Upstream đổi | Downstream bị đánh stale | Lý do |
-|---|---|---|---|
 | 2026-10-02 | `docs/_research/2026-10-02-container-deadline-alerts.md` | `docs/_research/2026-10-02-field-document-reading.md` | upstream changed: docs/_research/2026-10-02-container-deadline-alerts.md on 2026-10-02 by manual |
 | 2026-10-02 | `docs/_research/2026-10-02-container-deadline-alerts.md` | `docs/_research/2026-10-02-eport-integration.md` | upstream changed: docs/_research/2026-10-02-container-deadline-alerts.md on 2026-10-02 by manual |
 | 2026-10-02 | `docs/_research/2026-10-02-container-deadline-alerts.md` | `docs/_research/2026-10-02-electronic-delivery-record.md` | upstream changed: docs/_research/2026-10-02-container-deadline-alerts.md on 2026-10-02 by manual |
@@ -40,3 +34,15 @@
 | 2026-10-12 | `docs/service-delivery/brainstorms/service-delivery.md` | `docs/service-delivery/html-wireframe/service-delivery-wireframe-html-index.md` | upstream changed: docs/service-delivery/brainstorms/service-delivery.md on 2026-10-12 by manual |
 | 2026-10-12 | `docs/service-delivery/brainstorms/service-delivery.md` | `docs/meetings/2026-10-09-client-dispatch-field-issues.md` | upstream changed: docs/service-delivery/brainstorms/service-delivery.md on 2026-10-12 by manual |
 | 2026-10-12 | `docs/service-delivery/brainstorms/service-delivery.md` | `docs/meetings/2026-10-10-oq-dispatch-coordination.md` | upstream changed: docs/service-delivery/brainstorms/service-delivery.md on 2026-10-12 by manual |
+| 2026-10-13 | `design/ui-common/screen-patterns.md` CMP-09 | `docs/_shared/definitions.md` | gọi CMP-09, mục CMP-09 vừa đổi (by manual) |
+| 2026-10-13 | `design/ui-common/screen-patterns.md` CMP-09 | `docs/cross-process-flow/brainstorms/cross-process-flow.md` | gọi CMP-09, mục CMP-09 vừa đổi (by manual) |
+| 2026-10-13 | `design/ui-common/screen-patterns.md` CMP-09 | `docs/cross-process-flow/cross-process-flow-object-map.md` | gọi CMP-09, mục CMP-09 vừa đổi (by manual) |
+| 2026-10-13 | `design/ui-common/screen-patterns.md` CMP-09 | `docs/cross-process-flow/html-wireframe/tao-nghiep-vu-tiep-theo.html` | gọi CMP-09 — wireframe HTML không có status, cần rà tay (by manual) |
+| 2026-10-13 | `design/ui-common/screen-patterns.md` CMP-09 | `docs/cross-process-flow/html-wireframe/tra-cuu-quy-trinh.html` | gọi CMP-09 — wireframe HTML không có status, cần rà tay (by manual) |
+| 2026-10-13 | `design/ui-common/screen-patterns.md` CMP-09 | `docs/cross-process-flow/html-wireframe/xem-quy-trinh-mobile.html` | gọi CMP-09 — wireframe HTML không có status, cần rà tay (by manual) |
+| 2026-10-13 | `design/ui-common/screen-patterns.md` CMP-09 | `docs/cross-process-flow/html-wireframe/xem-quy-trinh.html` | gọi CMP-09 — wireframe HTML không có status, cần rà tay (by manual) |
+| 2026-10-13 | `design/ui-common/screen-patterns.md` CMP-09 | `docs/cross-process-flow/srs/cross-process-flow-spec.md` | gọi CMP-09, mục CMP-09 vừa đổi (by manual) |
+| 2026-10-13 | `design/ui-common/screen-patterns.md` CMP-09 | `docs/cross-process-flow/html-wireframe/tao-nghiep-vu-tiep-theo.html` | gọi CMP-09 — wireframe HTML không có status, cần rà tay (by manual) |
+| 2026-10-13 | `design/ui-common/screen-patterns.md` CMP-09 | `docs/cross-process-flow/html-wireframe/tra-cuu-quy-trinh.html` | gọi CMP-09 — wireframe HTML không có status, cần rà tay (by manual) |
+| 2026-10-13 | `design/ui-common/screen-patterns.md` CMP-09 | `docs/cross-process-flow/html-wireframe/xem-quy-trinh-mobile.html` | gọi CMP-09 — wireframe HTML không có status, cần rà tay (by manual) |
+| 2026-10-13 | `design/ui-common/screen-patterns.md` CMP-09 | `docs/cross-process-flow/html-wireframe/xem-quy-trinh.html` | gọi CMP-09 — wireframe HTML không có status, cần rà tay (by manual) |

@@ -49,6 +49,10 @@ if [ -d "$PROJECT_PATH/docs/cr" ]; then
     fi
 fi
 
+# Log toàn vault là file sinh ra từ mảnh (_workspace/{changelog,staleness}.d/) — dựng lại
+# trước khi đọc, để worktree mới / sau merge luôn có bản đầy đủ.
+python3 "$PROJECT_PATH/_scripts/logbook.py" build 2>/dev/null || true
+
 # Stale propagations (v2.0 Phase 6)
 STALE_LOG="$PROJECT_PATH/_workspace/staleness.md"
 if [ -f "$STALE_LOG" ]; then

@@ -18,6 +18,10 @@
 __pycache__/
 *.pyc
 _workspace/kg/.dirty
+# File sinh ra — dựng lại tại chỗ, không commit để worktree song song không xung đột (.claude/rules/worktree.md)
+_workspace/changelog.md
+_workspace/staleness.md
+_workspace/kg/graph*.json
 _workspace/.status-state/
 .claude/token-tracking/
 

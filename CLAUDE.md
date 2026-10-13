@@ -31,7 +31,7 @@ docs/
 ├── meetings/ (+decks/) · inbox/ · cr/ · exports/ · userguide/ · reports/
 design/       design.md (nguồn design system) · design-tokens.css · ui-common/ · brand/ · _lab/
 docs-input/   tài liệu khách gửi (sổ nguồn README.md)
-_workspace/   changelog.md · backlog.md · kg/
+_workspace/   changelog.d/ (→ changelog.md sinh ra) · backlog.md · kg/
 prototype/    app Next.js (/prototype-next)
 ```
 
@@ -56,7 +56,7 @@ See `.claude/rules/status-lifecycle.md` for details.
 
 ## Changelog convention‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-Lịch sử thay đổi TOÀN vault sống ở __một file duy nhất__: `_workspace/changelog.md` — __bảng Markdown__ append-only, hook `auto-changelog.sh` là writer duy nhất. Doc KHÔNG mang `changelog:` frontmatter.
+Lịch sử thay đổi TOÀN vault đọc ở __một file duy nhất__: `_workspace/changelog.md` — __bảng Markdown__, hook `auto-changelog.sh` là writer duy nhất. Doc KHÔNG mang `changelog:` frontmatter. File tổng là __file sinh ra__ (gitignore): hook ghi mảnh `_workspace/changelog.d/{ngày}--{branch}.md`, `_scripts/logbook.py` dựng lại.
 
 ```markdown
 | Ngày | Skill | Người | File | Ghi chú |
@@ -89,6 +89,7 @@ __Quy tắc vận hành:__
 - No-arg = picker feature; auto-detect upstream + confirm, KHÔNG silent pick; thiếu upstream = soft gate (warn + proceed), trừ `/jira --push` (hard gate khi stale).
 - Diagram: "có ra ảnh" KHÔNG phải verify — gate theo `.claude/rules/diagram-correctness.md`; sửa gate xong chạy `bash .claude/scripts/diagram-gates-selftest.sh`.
 - Hooks: `auto-changelog.sh`, `status-transition.sh`, `post-edit-stale.sh`, `intake-sync.sh` (PostToolUse Write/Edit); `session-init.sh` (SessionStart). Commit git thủ công.
+- __Song song nhiều feature:__ 1 feature = 1 worktree (`_scripts/wt.sh new|sync|land|drop|list`, branch `feat/<slug>`, land = squash). Trong worktree chỉ sửa `docs/<feature>/**`; đồ dùng chung (`_shared`, `_product`, `design`, `.claude`, backlog) sửa trên `main` rồi `wt.sh sync`. Chi tiết: `.claude/rules/worktree.md`.
 
 ## Rule nạp theo vùng file
 
