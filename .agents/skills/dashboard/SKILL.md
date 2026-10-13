@@ -42,6 +42,8 @@ Trang có 5 tab (thứ tự = thứ tự quan trọng):
 * **Self-contained, không CDN** — CSS/JS inline, chạy offline.
 * **Read-only data scan** — KHÔNG edit doc nào.
 * **Làn "Chờ bạn"** — nguồn duy nhất là `_scripts/queue.py --json`; scope feature thì lọc theo `feature`.
+* **Luồng việc (gộp `/board` 14/10/2026)** — tab Luồng việc thay board cũ: 3 thao tác kéo (task `manual` Mở → Xong ·
+  card Chờ duyệt → Đang chạy · 🔍 Chờ duyệt land → Xong), kiểm lại với ảnh chụp mới trước khi áp, lệch → `rejected`.
 * **Kéo thả chỉ ở bản artifact, và chỉ tạo yêu cầu** — không gì ghi vào repo khi chưa qua `/dashboard sync` + L1 (duyệt 1 lần cả lô). Đổi status luôn qua engine `/status` (`dashboard-apply.py` gọi `status.py`): luồng hợp lệ, `restore` khi rời stale, upstream chưa duyệt → giữ `pending` chờ anh xác nhận. "Đã biết" (ẩn việc máy) và thẻ Review Figma chỉ lưu trong kho trang, không cần sync.
 * **`staleness.md` là file sinh** — xác nhận dòng log trỏ file đã xoá ghi vào `_workspace/stale-ack.md`, không sửa log.
 * **Link 2 chế độ** — mặc định `vscode://file/<path>:<dòng>` (file local, luôn mới nhất); nút "Mở bằng: GitHub" làm dự phòng (bản đã push). Nhớ lựa chọn trong localStorage.
@@ -119,12 +121,30 @@ Feature không tồn tại / vault rỗng → theo `feature-bootstrap.md` Nhóm 
 
 ### Sync — `/dashboard sync`
 
+> Gộp `/board` (14/10/2026): tab **Luồng việc** = dữ liệu `_scripts/board-snapshot.py`; thao tác kéo là yêu cầu
+> `board-move` trong cùng kho. **Kéo thẻ luồng việc = duyệt** (approval-gate.md › Chế độ chạy, worktree.md Mục 4) nên
+> `board-move` hợp lệ được áp ngay, không chờ L1; các loại khác (status, stale, backlog) vẫn qua L1 1 lần cả lô.
+> Chạy định kỳ: `/loop 5m /dashboard sync` ở checkout chính (thay `/loop 5m /board sync`).
+
 1) Đọc `artifact_url` từ `.claude/state/dashboard.json` (không có → báo "chưa publish, chạy `/dashboard`").
 2) `ArtifactData` `query` collection `requests`, `where state == pending` → ghi mảng JSON (mỗi phần tử = body + `id` = doc_id + `version`) ra file tạm.
-3) `python3 _scripts/dashboard-apply.py --check <file>` → in bảng làm **L1** (1 lần cho cả lô). Mục ⚠ upstream chưa duyệt: hỏi anh từng mục; đồng ý → thêm `"confirm_upstream": true` vào yêu cầu đó.
+3) `python3 _scripts/dashboard-apply.py --check <file>` → bảng kiểm. `board-move` hợp lệ (OK / ▶) đi thẳng bước 4;
+   phần còn lại là **L1** (1 lần cho cả lô). Mục ⚠ upstream chưa duyệt: hỏi anh từng mục; đồng ý → thêm `"confirm_upstream": true`.
+   Chạy trong `/loop` mà có mục cần L1 → chỉ áp `board-move`, giữ phần còn lại `pending`, báo 1 dòng "N yêu cầu chờ anh duyệt".
 4) Anh `Y` → `CLAUDE_CHANGELOG_AUTHOR=@<handle> python3 _scripts/dashboard-apply.py <file>` → JSON kết quả `{id, state, note}`.
+   Kết quả `state: "claude"` = việc Claude làm tiếp (quy trình chuyển từ `/board`):
+   - **Duyệt card + chạy** (card Chờ duyệt → Đang chạy): sửa card trong worktree (`approved: <hôm nay>`,
+     `run_state: running`, Nhật ký "duyệt qua dashboard"), `git -C <worktree> commit`, rồi mở Terminal:
+     `osascript -e 'tell application "Terminal" to do script "cd <abs worktree> && claude \"/run-task resume <card>\""'`
+     (thất bại → `applied` kèm note lệnh để anh tự chạy).
+   - **Duyệt land** (🔍 → Xong): như `/queue` làn 🔍 "duyệt" — chuyển frame Figma nháp nếu card có bước figma-screen
+     (Figma chưa kết nối → `rejected` "cần /queue khi mở Figma", không land nửa vời), `wt.sh land` → commit (tóm tắt
+     feature + attribution) → `wt.sh drop`. Push luôn do anh.
+   Làm xong → đổi state thành `applied` (hoặc `rejected` + lý do).
 5) `ArtifactData` `batch` cập nhật từng yêu cầu (`update` `state` + `note` + `appliedAt`, pin `if_version`).
-6) Chạy `intake-sync.py` (chuẩn hoá backlog nếu có dòng BL mới), build lại cả 2 bản và publish lại artifact (bước 4–5 Approach, không cần L1 thêm — đã gộp trong L1 sync).
+6) Chạy `intake-sync.py` (chuẩn hoá backlog nếu có dòng BL mới), build lại cả 2 bản. **Chỉ publish lại khi trang đổi**:
+   so `sha256` của `.claude/state/dashboard-artifact.html` với `published_sha` trong `.claude/state/dashboard.json`
+   (build tất định nên so được); khác → audit 0 FAIL → publish → ghi `published_sha` mới. Không đổi → im lặng (hợp `/loop`).
 7) Báo: số áp dụng / từ chối (kèm lý do) / còn chờ.
 
 ## Output

@@ -15,6 +15,9 @@ Loại yêu cầu:
   stale-review  {path}               thêm task BL "Rà lại {path}", Xong khi doc hết stale
   log-ack       {path, upstream}     dòng log stale trỏ file đã xoá → ghi _workspace/stale-ack.md (staleness.md là file sinh, không sửa)
   to-backlog    {title, done_when, source}  thêm task BL từ việc máy phát hiện
+  board-move    {item, from, to}     thẻ tab Luồng việc (gộp /board): kiểm lại với ảnh chụp mới (board-snapshot.py).
+                                     Task manual Mở → Xong: script đóng dòng backlog. Card → Đang chạy (duyệt + chạy) và
+                                     🔍 → Xong (duyệt land): trả state "claude" — Claude làm theo /dashboard SKILL mục Sync.
 
 "Đã biết" (ẩn việc máy) và di chuyển thẻ Review Figma chỉ sống trong kho của trang — không qua script này.
 Mọi đổi status đi qua `.claude/skills/status/engine/status.py` (luồng hợp lệ + changelog do engine lo).
@@ -76,6 +79,28 @@ def bl_row(n, task, source, cond):
     return f"| BL-{n:03d} | {esc(task)} | {esc(source)} | `{cond}` | ⬜ | {TODAY} |  |  |  |  |\n"
 
 
+def board_snapshot():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("bs", ROOT / "_scripts/board-snapshot.py")
+    bs = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bs)
+    return {i["id"]: i for i in bs.build()["items"]}
+
+
+def bl_close(task_id, note):
+    """Đóng task manual: Trạng thái ✅, Xong = hôm nay, Bằng chứng (rule backlog.md mục 3). intake-sync chuyển dòng sang Đã xong."""
+    lines = BACKLOG.read_text(encoding="utf-8").split("\n")
+    for i, ln in enumerate(lines):
+        if ln.startswith(f"| {task_id} |"):
+            c = [x.strip() for x in re.split(r"(?<!\\)\|", ln.strip())[1:-1]]
+            c += [""] * (10 - len(c))
+            c[4], c[6], c[7] = "✅", TODAY, note
+            lines[i] = "| " + " | ".join(c) + " |"
+            BACKLOG.write_text("\n".join(lines), encoding="utf-8")
+            return True
+    return False
+
+
 def acked():
     if not ACK.exists():
         return set()
@@ -123,6 +148,20 @@ def check_one(r, seen_ack):
         if (ROOT / path).exists():
             return False, "ghi stale-ack", "file vẫn còn — dùng reset stale cho doc"
         return True, "ghi stale-ack", f"← {r.get('upstream', '')}"
+    if t == "board-move":
+        snap = r.get("_snap") or {}
+        it = snap.get(r.get("item"))
+        if not it:
+            return False, "kéo thẻ", "thẻ không còn trong luồng việc (đã đóng hoặc đổi)"
+        if it["col"] != r.get("from"):
+            return False, "kéo thẻ", f"thẻ đã sang cột {it['col']} từ lúc kéo — kéo lại trên trang"
+        if r.get("to") not in it.get("moves", []):
+            return False, "kéo thẻ", f"không cho kéo {r.get('from')} → {r.get('to')}"
+        if it["kind"] == "task" and r["from"] == "open":
+            return True, "đóng task", it["title"][:60]
+        if it["kind"] == "run":
+            return "claude", "duyệt card + chạy", "Claude: sửa card (approved, run_state running), commit trong worktree, mở Terminal /run-task resume"
+        return "claude", "duyệt land", "Claude: làm như /queue làn 🔍 (Figma nháp nếu có → wt.sh land → commit → drop)"
     if t == "to-backlog":
         if not r.get("title") or not r.get("done_when"):
             return False, "thêm task BL", "thiếu tên việc hoặc điều kiện Xong khi"
@@ -141,17 +180,22 @@ def main():
     if isinstance(reqs, dict):
         reqs = reqs.get("requests", [])
     seen_ack = acked()
+    snap = board_snapshot() if any(r.get("type") == "board-move" for r in reqs) else {}
+    for r in reqs:
+        if r.get("type") == "board-move":
+            r["_snap"] = snap
     results = []
     for r in sorted(reqs, key=lambda x: (x.get("createdAt", ""), x.get("id", ""))):
         ok, change, note = check_one(r, seen_ack)
-        results.append({"id": r.get("id"), "type": r.get("type"), "path": r.get("path") or r.get("title", ""),
+        results.append({"id": r.get("id"), "type": r.get("type"), "path": r.get("path") or r.get("item") or r.get("title", ""),
                          "change": change, "ok": ok, "note": note, "req": r})
 
     if check:
         print("[/dashboard sync] Sẽ thực hiện:")
         print("  # | loại         | đích                                              | thay đổi           | kiểm")
         for i, x in enumerate(results, 1):
-            mark = "OK" if x["ok"] is True else "⚠ " + x["note"] if x["ok"] == "confirm" else "❌ " + x["note"]
+            mark = ("OK" if x["ok"] is True else "⚠ " + x["note"] if x["ok"] == "confirm"
+                    else "▶ " + x["note"] if x["ok"] == "claude" else "❌ " + x["note"])
             print(f"  {i} | {x['type']:<12} | {x['path'][:50]:<50} | {x['change'][:18]:<18} | {mark}")
         n_ok = sum(1 for x in results if x["ok"] is True)
         print(f"\n  {n_ok}/{len(results)} hợp lệ. Mục ❌ sẽ đánh dấu 'rejected' kèm lý do; mục ⚠ giữ 'pending' tới khi anh xác nhận.")
@@ -160,6 +204,9 @@ def main():
     out, n_bl, bl_rows, acks = [], bl_next(), [], []
     for x in results:
         r = x["req"]
+        if x["ok"] == "claude":  # việc cần Claude làm tiếp (duyệt card + chạy / duyệt land) — không đánh dấu xong ở đây
+            out.append({"id": x["id"], "state": "claude", "note": x["note"], "item": r.get("item"), "action": x["change"]})
+            continue
         if x["ok"] is not True:
             out.append({"id": x["id"], "state": "pending" if x["ok"] == "confirm" else "rejected", "note": x["note"]})
             continue
@@ -177,6 +224,9 @@ def main():
         elif t == "to-backlog":
             bl_rows.append(bl_row(n_bl, r["title"] + " (từ dashboard)", r.get("source") or "dashboard", r["done_when"]))
             code, msg, n_bl = 0, f"BL-{n_bl:03d}", n_bl + 1
+        elif t == "board-move":
+            ok_ = bl_close(r["item"], f"kéo trên dashboard {TODAY}")
+            code, msg = (0, "đã đóng task") if ok_ else (1, "không tìm thấy dòng backlog")
         elif t == "log-ack":
             acks.append(f"| {TODAY} | `{r['path']}` | `{r.get('upstream', '')}` |\n")
             code, msg = 0, "stale-ack"
@@ -189,6 +239,8 @@ def main():
             ACK.write_text(ACK_HEAD, encoding="utf-8")
         with ACK.open("a", encoding="utf-8") as f:
             f.writelines(acks)
+    for r in reqs:
+        r.pop("_snap", None)
     print(json.dumps(out, ensure_ascii=False, indent=1))
 
 

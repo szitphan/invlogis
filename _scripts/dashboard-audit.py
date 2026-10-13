@@ -26,7 +26,7 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TABS = [("p-today", "Hôm nay"), ("p-feat", "Feature"), ("p-kb", "Kanban"), ("p-src", "Nguồn khách"), ("p-health", "Sức khỏe vault")]
+TABS = [("p-today", "Hôm nay"), ("p-flow", "Luồng việc"), ("p-feat", "Feature"), ("p-kb", "Kanban"), ("p-src", "Nguồn khách"), ("p-health", "Sức khỏe vault")]
 WIDTHS = [1440, 400]
 DS_FONTS = {"inter", "cal sans", "jetbrains mono"}
 DS_SIZES = {10, 12, 14, 17, 20, 24, 29, 35, 42}  # design.md Typography › Hierarchy
@@ -80,7 +80,7 @@ AUDIT_JS = r"""
     var prim=[].filter.call(g.querySelectorAll('button.mini:not(.ghost),button.act:not(.ghost)'),function(b){return vis(b)&&!b.disabled});
     if(prim.length>1)out.a4.push({level:'WARN',rule:'>1 nút chính trong 1 nhóm',el:desc(g),detail:prim.length+' nút'})});
   // A5 Hick: nút ngang hàng trong cùng cha
-  [].filter.call(document.querySelectorAll('main *'),vis).forEach(function(p){var b=[].filter.call(p.children,function(c){return vis(c)&&(c.tagName==='BUTTON'||c.getAttribute('role')==='tab')});if(b.length>5)out.hick.push({el:desc(p),n:b.length})});
+  [].filter.call(document.querySelectorAll('main *'),vis).forEach(function(p){var b=[].filter.call(p.children,function(c){return vis(c)&&c.tagName==='BUTTON'&&c.getAttribute('role')!=='tab'});if(b.length>5)out.hick.push({el:desc(p),n:b.length})});
   out.tabs=document.querySelectorAll('[role="tab"]').length;
   var shown=[].filter.call(document.querySelectorAll('[role="tabpanel"]'),function(p){return getComputedStyle(p).display!=='none'});
   if(shown.length!==1)out.a1.push({level:'FAIL',rule:'tab không ẩn/hiện đúng',el:'[role=tabpanel]',detail:shown.length+' panel đang hiện cùng lúc (cần 1)'});

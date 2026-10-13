@@ -451,6 +451,25 @@ def figma_board(features):
     return cards
 
 
+BOARD_COLS = [("open", "Mở"), ("planned", "Card chờ duyệt"), ("running", "Đang chạy"), ("blocked", "Chặn"),
+              ("review", "Chờ duyệt land"), ("done", "Xong")]
+
+
+def board_items(feature_filter=None):
+    """Thẻ luồng việc (gộp từ /board 14/10/2026): cùng nguồn _scripts/board-snapshot.py (queue.py + backlog + run card).
+    Bỏ updated_at để build tất định."""
+    try:
+        spec = importlib.util.spec_from_file_location("bs", ROOT / "_scripts/board-snapshot.py")
+        bs = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(bs)
+        items = bs.build()["items"]
+    except Exception:
+        return []
+    if feature_filter:
+        items = [i for i in items if i.get("feature") == feature_filter]
+    return items
+
+
 def dashboard_state():
     try:
         return json.loads(read(ROOT / ".claude/state/dashboard.json") or "{}")
@@ -840,6 +859,7 @@ def build(feature_filter=None, light_mode=False):
                        [] if feature_filter else orphan_worktrees(), today, stale_log)
     history = {"points": [], "decks": []} if light_mode else oq_history(feature_filter, today=today)
     fboard = figma_board(features)
+    flow = board_items(feature_filter)
     spec_ = importlib.util.spec_from_file_location("st", ROOT / ".claude/skills/status/engine/status.py")
     try:
         st_mod = importlib.util.module_from_spec(spec_)
@@ -914,7 +934,7 @@ def build(feature_filter=None, light_mode=False):
         "unassigned": unassigned, "neck": neck if rows and block_count[neck] else None,
         "generated": today.isoformat(), "scope": feature_filter or "project", "root": str(ROOT),
         "verdict": verdict, "tiles": tiles, "lanes": lanes, "actions": actions, "work": work,
-        "sources": sources, "params": params, "history": history, "figma_board": fboard,
+        "sources": sources, "params": params, "history": history, "figma_board": fboard, "flow": flow,
         "transitions": transitions, "state": dashboard_state(),
         "features": rows, "kanban": kanban, "stale_docs": stale_docs, "stale_log": stale_log,
         "freshness": fresh, "quality": quality, "coverage": coverage,
@@ -1128,6 +1148,9 @@ details.howto p{margin:var(--spacing-1) 0 0;max-width:75ch}
   table.work td[data-l]::before{content:attr(data-l);display:block;font-size:12px;font-weight:var(--font-weight-medium);color:var(--color-text-secondary)}
   table.work tr.more-row{display:none}table.work.all tr.more-row{display:block}
 }
+.bcol .kbody{max-height:70vh;overflow-y:auto}
+.bcard .btitle{overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;font-weight:var(--font-weight-medium)}
+.bdetail{white-space:pre-wrap;font:12px/16px var(--font-body);margin:var(--spacing-1) 0 0;color:var(--color-text-primary)}
 .cempty{margin:0;padding:var(--spacing-3);text-align:center;font-size:12px;color:var(--color-text-primary)}
 .cnote{margin:0 var(--spacing-1);font-size:12px;color:var(--color-status-chip-yellow-fg)}
 """
@@ -1238,7 +1261,7 @@ AJS = r"""
   function moveDoc(c,to){var key='status:'+c.dataset.path,from=c.dataset.status;
     if(to===from){if(pending[key])dropReq(key);return}
     if(allowed(c).indexOf(to)<0){say('Không chuyển được "'+c.dataset.title+'" sang '+(NAME[to]||to)+'. '+(to==='stale'?'Cột Stale do hook tự đặt.':'Luồng hợp lệ: '+(allowed(c).map(function(x){return NAME[x]||x}).join(', ')||'không có')+'.'));
-      var el=document.querySelector('.kcol[data-col="'+to+'"]:not(.fcol)');if(el){el.classList.add('bad');setTimeout(function(){el.classList.remove('bad')},700)}return}
+      var el=document.querySelector('.kcol[data-col="'+to+'"]:not(.fcol):not(.bcol)');if(el){el.classList.add('bad');setTimeout(function(){el.classList.remove('bad')},700)}return}
     addReq(key,{type:'status',path:c.dataset.path,from:from,to:to,title:c.dataset.title});
     say('"'+c.dataset.title+'": '+(NAME[from]||from)+' → '+(NAME[to]||to)+'. Chờ /dashboard sync.')}
   function moveFig(c,to){if(!need())return;var id=c.dataset.fid;
@@ -1246,6 +1269,14 @@ AJS = r"""
     var o={col:to,reason:(fig[id]&&fig[id].reason)||'',at:new Date().toISOString()};fig[id]=o;paint();
     db.collection('figma').doc(id).set(o).catch(fail);
     if(to==='bo-qua'){var inp=c.querySelector('.reason input');if(inp)setTimeout(function(){inp.focus()},0)}}
+  var BNAME={open:'Mở',planned:'Card chờ duyệt',running:'Đang chạy',blocked:'Chặn',review:'Chờ duyệt land',done:'Xong'};
+  function bmoves(c){return (c.dataset.moves||'').split(',').filter(Boolean)}
+  function moveBoard(c,to){var key='board:'+c.dataset.bid,from=c.dataset.col;
+    if(to===from){if(pending[key])dropReq(key);return}
+    if(bmoves(c).indexOf(to)<0){say('Thẻ "'+c.dataset.title+'" không kéo sang '+(BNAME[to]||to)+' được.');
+      var el=document.querySelector('.bcol[data-col="'+to+'"]');if(el){el.classList.add('bad');setTimeout(function(){el.classList.remove('bad')},700)}return}
+    addReq(key,{type:'board-move',item:c.dataset.bid,from:from,to:to,title:c.dataset.title});
+    say('"'+c.dataset.title+'": '+(BNAME[from]||from)+' → '+(BNAME[to]||to)+'. Chờ /dashboard sync.')}
   function counts(){[].forEach.call(document.querySelectorAll('.kcol'),function(k){var n=k.querySelector('h3 .n'),b=k.querySelector('.kbody');if(n&&b)n.textContent=b.children.length})}
   function paint(){
     var n=Object.keys(pending).length,pe=document.getElementById('pending');
@@ -1253,12 +1284,18 @@ AJS = r"""
     [].forEach.call(document.querySelectorAll('.act'),function(b){var p=pending[b.dataset.key];b.disabled=!!p;b.textContent=p?'Chờ sync':b.dataset.label});
     [].forEach.call(document.querySelectorAll('.kcard[data-path]'),function(c){
       var p=pending['status:'+c.dataset.path],to=p?p.to:c.dataset.status;
-      var body=document.querySelector('.kcol[data-col="'+colOf(to)+'"]:not(.fcol) .kbody');
+      var body=document.querySelector('.kcol[data-col="'+colOf(to)+'"]:not(.fcol):not(.bcol) .kbody');
       if(body&&c.parentNode!==body)body.appendChild(c);
       var b=c.querySelector('.pend');if(b){b.hidden=!p;b.textContent=p?('→ '+(NAME[p.to]||p.to)+' · chờ sync'):''}
       var sel=c.querySelector('.kmove');if(sel){var cur=p?p.to:'';sel.innerHTML='';var o=document.createElement('option');o.value='';o.textContent=p?'Huỷ chuyển':'Chuyển sang…';sel.appendChild(o);
         allowed(c).forEach(function(v){var x=document.createElement('option');x.value=v;x.textContent=(c.dataset.status==='stale'&&v===c.dataset.prev?'Đã biết, reset → ':'')+(NAME[v]||v);if(v===cur)x.selected=true;sel.appendChild(x)});
         sel.hidden=!allowed(c).length}});
+    [].forEach.call(document.querySelectorAll('.bcard[data-bid]'),function(c){
+      var p=pending['board:'+c.dataset.bid],to=p?p.to:c.dataset.col;
+      var body=document.querySelector('.bcol[data-col="'+to+'"] .kbody');if(body&&c.parentNode!==body)body.appendChild(c);
+      var b=c.querySelector('.pend');if(b){b.hidden=!p;b.textContent=p?('→ '+(BNAME[p.to]||p.to)+' · chờ sync'):''}
+      var sel=c.querySelector('.bmove');if(sel){sel.innerHTML='';var o=document.createElement('option');o.value='';o.textContent=p?'Huỷ chuyển':'Chuyển sang…';sel.appendChild(o);
+        bmoves(c).forEach(function(v){var x=document.createElement('option');x.value=v;x.textContent=BNAME[v]||v;if(p&&p.to===v)x.selected=true;sel.appendChild(x)})}});
     [].forEach.call(document.querySelectorAll('[data-wid]'),function(li){var d=dismissed[hid(li.dataset.wid)];li.classList.toggle('dismissed',!!(d&&d.sig===li.dataset.sig))});
     var nd=document.querySelectorAll('.dismissed').length,t=document.getElementById('btn-dismissed');
     if(t){t.hidden=!nd;t.textContent=(document.body.classList.contains('show-dismissed')?'Ẩn ':'Hiện ')+nd+' việc đã ẩn'}
@@ -1275,17 +1312,19 @@ AJS = r"""
     var sd=e.target.closest&&e.target.closest('#btn-dismissed');if(sd){document.body.classList.toggle('show-dismissed');paint();return}
     var fbk=e.target.closest&&e.target.closest('.fback');if(fbk){var c=fbk.closest('.fcard');moveFig(c,c.dataset.col)}});
   document.addEventListener('change',function(e){
-    var s=e.target;if(s.classList.contains('kmove')){var c=s.closest('.kcard');moveDoc(c,s.value||c.dataset.status)}
+    var s=e.target;if(s.classList.contains('bmove')){var bc=s.closest('.bcard');moveBoard(bc,s.value||bc.dataset.col);return}
+    if(s.classList.contains('kmove')){var c=s.closest('.kcard');moveDoc(c,s.value||c.dataset.status)}
     else if(s.classList.contains('fmove')&&s.value){moveFig(s.closest('.fcard'),s.value)}
     else if(s.closest&&s.closest('.reason')){if(!need())return;var fc=s.closest('.fcard'),id=fc.dataset.fid,o=Object.assign({},fig[id]||{col:'bo-qua'},{reason:s.value,at:new Date().toISOString()});fig[id]=o;db.collection('figma').doc(id).set(o).catch(fail);say('Đã lưu lý do bỏ qua.')}});
   document.addEventListener('dragstart',function(e){var c=e.target.closest&&e.target.closest('.kcard[draggable="true"]');if(!c)return;
-    e.dataTransfer.setData('text/plain',c.dataset.fid?('fig:'+c.dataset.fid):('doc:'+c.dataset.path));e.dataTransfer.effectAllowed='move'});
+    e.dataTransfer.setData('text/plain',c.dataset.bid?('board:'+c.dataset.bid):c.dataset.fid?('fig:'+c.dataset.fid):('doc:'+c.dataset.path));e.dataTransfer.effectAllowed='move'});
   [].forEach.call(document.querySelectorAll('.kcol'),function(k){
     k.addEventListener('dragover',function(e){e.preventDefault();k.classList.add('over')});
     k.addEventListener('dragleave',function(){k.classList.remove('over')});
     k.addEventListener('drop',function(e){e.preventDefault();k.classList.remove('over');var v=e.dataTransfer.getData('text/plain')||'';
       if(v.indexOf('fig:')===0&&k.classList.contains('fcol')){var fc=document.querySelector('.fcard[data-fid="'+v.slice(4)+'"]');if(fc)moveFig(fc,k.dataset.col)}
-      else if(v.indexOf('doc:')===0&&!k.classList.contains('fcol')){var p=v.slice(4),c=[].filter.call(document.querySelectorAll('.kcard[data-path]'),function(x){return x.dataset.path===p})[0];if(c)moveDoc(c,k.dataset.col)}})});
+      else if(v.indexOf('board:')===0&&k.classList.contains('bcol')){var bid=v.slice(6),bc=[].filter.call(document.querySelectorAll('.bcard'),function(x){return x.dataset.bid===bid})[0];if(bc)moveBoard(bc,k.dataset.col)}
+      else if(v.indexOf('doc:')===0&&!k.classList.contains('fcol')&&!k.classList.contains('bcol')){var p=v.slice(4),c=[].filter.call(document.querySelectorAll('.kcard[data-path]'),function(x){return x.dataset.path===p})[0];if(c)moveDoc(c,k.dataset.col)}})});
   paint();
   if(window.claude&&window.claude.use){window.claude.use('db').then(function(d){
     if(!d){say('Chỉ xem: không kết nối được kho dữ liệu của trang.');return}
@@ -1322,6 +1361,7 @@ def render(m, artifact=False):
       '<button type="button" data-mode="gh" aria-pressed="false">GitHub</button></span></span></div></header>'
       '<div class="tabs" role="tablist" aria-label="Tab dashboard">'
       '<button role="tab" id="t-today" aria-selected="true" aria-controls="p-today">Hôm nay</button>'
+      '<button role="tab" id="t-flow" aria-selected="false" aria-controls="p-flow">Luồng việc</button>'
       '<button role="tab" id="t-feat" aria-selected="false" aria-controls="p-feat">Feature</button>'
       '<button role="tab" id="t-kb" aria-selected="false" aria-controls="p-kb">Kanban</button>'
       '<button role="tab" id="t-src" aria-selected="false" aria-controls="p-src">Nguồn khách</button>'
@@ -1423,6 +1463,36 @@ def render(m, artifact=False):
     if A:
         w('<button type="button" class="seg-btn" id="btn-dismissed" hidden></button>')
     w("</div></div>")
+
+    # Luồng việc (gộp /board): thẻ task / run card / worktree; chỉ thẻ có `moves` kéo được
+    flow = m.get("flow", [])
+    w('<div role="tabpanel" id="p-flow" aria-labelledby="t-flow" hidden>')
+    w('<p class="muted" style="margin:0;font-size:12px">' + (
+        "Kéo thẻ (hoặc chọn <i>Chuyển sang</i>): task <code>manual</code> Mở → Xong = đóng task · card Chờ duyệt → Đang chạy = "
+        "duyệt card và chạy <code>/run-task</code> · 🔍 Chờ duyệt land → Xong = duyệt land. Áp khi chạy <code>/dashboard sync</code>."
+        if A else f'Kéo thả trên <a href="{E(url)}" target="_blank" rel="noopener">bản artifact</a>; áp bằng <code>/dashboard sync</code>.' if url
+        else "Kéo thả trên bản artifact; áp bằng <code>/dashboard sync</code>.") + '</p>')
+    if not flow:
+        w('<p class="muted">Chưa đọc được luồng việc (queue.py / board-snapshot.py lỗi).</p>')
+    w('<div class="scroll"><div class="kb">')
+    bdot = {"open": "", "planned": "amber", "running": "blue", "blocked": "red", "review": "amber", "done": "green"}
+    for key, label in BOARD_COLS:
+        cs = [x for x in flow if x["col"] == key]
+        w(f'<div class="kcol bcol" data-col="{key}"><h3><span class="dot {bdot[key]}"></span>{E(label)} <span class="n">{len(cs)}</span></h3><div class="kbody">'
+          + ('<p class="cempty">Trống</p>' if not cs else ""))
+        for x in cs:
+            kind = {"task": ("BL" if x["id"].startswith("BL-") else "Task"), "run": "Run card", "worktree": "Worktree"}.get(x["kind"], x["kind"])
+            drag = bool(A and x.get("moves"))
+            w(f'<div class="kcard bcard" data-bid="{E(x["id"])}" data-col="{E(key)}" data-moves="{E(",".join(x.get("moves", [])))}" '
+              f'data-title="{E(x["title"][:120])}"' + (' draggable="true"' if drag else "") + '>'
+              f'<span class="frow"><span class="tag{"" if kind == "BL" else " tag-m"}">{E(x["id"] if kind == "BL" else kind)}</span>'
+              + (f'<span class="km mono">{E(x["feature"])}</span>' if x.get("feature") else "") + '</span>'
+              f'<span class="btitle">{E(x["title"])}</span><span class="km">{E(x.get("meta", ""))}</span>'
+              + (f'<details><summary>Chi tiết</summary><pre class="bdetail">{E(x.get("detail", ""))}</pre></details>' if x.get("detail") else "")
+              + ('<span class="pend" hidden></span><select class="bmove" aria-label="Chuyển thẻ sang cột"></select>' if drag else "")
+              + "</div>")
+        w("</div></div>")
+    w("</div></div></div>")
 
     # Feature
     w('<div role="tabpanel" id="p-feat" aria-labelledby="t-feat" hidden>')
