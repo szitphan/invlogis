@@ -13,7 +13,7 @@ paths:
 ## 1. Vòng đời 1 feature
 
 ```bash
-_scripts/wt.sh new  <feature>   # ../invlogis-wt/<feature> trên branch feat/<feature>, tách từ main
+_scripts/wt.sh new  <feature>   # .claude/worktrees/<feature> (gitignore) trên branch feat/<feature>, tách từ main
 # mở phiên Claude TẠI thư mục worktree đó, làm việc, commit trong worktree
 _scripts/wt.sh sync <feature>   # (tuỳ) kéo main mới nhất vào khi main có thay đổi dùng chung cần dùng
 _scripts/wt.sh ready <feature> "<tóm tắt>"   # báo xong → backlog có task 🔍 chờ duyệt (Mục 4)
@@ -25,8 +25,12 @@ _scripts/wt.sh list             # worktree nào còn commit / file chưa land
 
 - Land luôn là **squash** (giữ lịch sử `main` gọn, không kéo lịch sử nháp vào). Sync chiều main → feature
   dùng merge thường.
-- Script **không commit, không push**. Commit do người dùng hoặc Claude sau khi người dùng duyệt (Mục 4);
-  push luôn do người dùng (`block-push.sh`).
+- Script **không commit, không push**. Trong worktree `feat/*`, Claude được commit (mọi thứ bỏ được bằng
+  `drop`); trên `main` chỉ commit ở bước land đã được duyệt (Mục 4); push luôn do người dùng (`block-push.sh`).
+- Worktree nằm dưới `.claude/worktrees/` vì Claude Code chỉ cho agent chạy nền (`/run-task --bg`) vào worktree
+  ở đó. Phiên mới cho 1 feature: mở terminal tại thư mục đó, hoặc `/run-task` tự vào (`EnterWorktree`).
+- Muốn AI tự chạy cả chuỗi bước thay vì làm cùng từng bước: `/run-task <feature> "<mục tiêu>"` (run card +
+  chế độ chạy, `approval-gate.md`). Xem việc đang chờ mình: `/queue`.
 - Worktree tạo từ commit `main` gần nhất — thay đổi chưa commit ở `main` KHÔNG đi theo. Commit `main` trước.
 - Slug worktree = slug feature (`docs/{feature}/`). Việc không gắn feature (sửa skill, đợt dọn) dùng slug
   mô tả việc, vd `skill-figma-screen`.
@@ -44,7 +48,10 @@ _scripts/wt.sh list             # worktree nào còn commit / file chưa land
 | `docs/_shared/dashboard*.html` | ❌ | ✅ — dựng lại sau land |
 | Log mảnh `_workspace/{changelog,staleness}.d/` | ✅ (hook tự ghi) | ✅ |
 
-Feature cần sửa vùng ❌ → dừng, ghi vào báo cáo/task "cần sửa trên main: …". Sửa trên `main`, commit,
+Máy chặn: hook `worktree-guard.sh` (PreToolUse Write|Edit) từ chối mọi ghi ngoài `docs/<feature>/**` khi
+đang ở worktree feature (branch `feat/<slug>` có `docs/<slug>/`). Worktree không gắn feature không bị chặn.
+
+Feature cần sửa vùng ❌ → dừng, ghi vào run card Mục 7 / báo cáo "cần sửa trên main: …". Sửa trên `main`, commit,
 rồi `wt.sh sync <feature>`. KHÔNG sửa tạm trong worktree "rồi tính sau" — đó chính là xung đột khi land.
 
 > Ngoại lệ: hook `post-edit-stale.sh` có thể đánh `status: stale` doc downstream ở feature khác. Đây là

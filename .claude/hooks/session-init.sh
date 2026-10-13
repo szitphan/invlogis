@@ -92,5 +92,8 @@ if [ -d "$PROJECT_PATH/docs/inbox" ]; then
     fi
 fi
 
+# Việc chờ người dùng (duyệt land / câu hỏi chặn / run card) + việc AI đang chạy — _scripts/queue.py
+python3 "$PROJECT_PATH/_scripts/queue.py" --summary 2>/dev/null || true
+
 echo "═══════════════════════════════════════════════"
 echo ""

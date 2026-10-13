@@ -35,6 +35,7 @@ FILE="${FILE#$PROJECT_PATH/}"
 [[ "$FILE" =~ /_shared/ ]] && exit 0
 [[ "$FILE" =~ /exports/ ]] && exit 0
 [[ "$FILE" =~ /inbox/ ]] && exit 0
+[[ "$FILE" =~ /_runs/ ]] && exit 0   # run card /run-task: nhật ký chạy riêng, không log từng bước
 [ ! -f "$FILE" ] && exit 0
 
 DATE=$(date +%Y-%m-%d)

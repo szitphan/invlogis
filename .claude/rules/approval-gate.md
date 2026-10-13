@@ -146,6 +146,30 @@ Lý do bỏ mô hình "sub-agent Write thẳng rồi rollback nếu user từ ch
 
 `/srs` đã chuyển sang mô hình tuần tự này (L1 trước mỗi Write). Không skill nào được ghi file đích trước approval với cớ "chạy sub-agent song song".
 
+## Chế độ chạy (run mode) — 1 lần duyệt cho cả lần chạy
+
+`/run-task` cho AI tự chạy chuỗi skill. Khi đó **run card đã duyệt thay cho L1/L2/L3 của từng skill con** —
+người dùng đã duyệt kế hoạch, phạm vi ghi, quyết định nghiệp vụ và điều kiện dừng 1 lần (Cửa 1), và duyệt
+kết quả 1 lần trước khi land (Cửa 3, `.claude/rules/worktree.md` Mục 4).
+
+Hợp lệ **chỉ khi đủ cả 3** (thiếu 1 → quay về L1/L2/L3 bình thường):
+
+1. Phiên/agent đang ở worktree branch `feat/<feature>` (KHÔNG BAO GIỜ trên `main`).
+2. Có run card `docs/<feature>/_runs/*.md` với `approved:` có ngày và `run_state: running`.
+3. File sắp ghi nằm trong vùng ghi `docs/<feature>/**` (hook `worktree-guard.sh` chặn bằng máy).
+
+Trong chế độ chạy, skill con:
+
+- **L1/L2** → không chờ Y; in tóm tắt plan/diff vào Nhật ký của card rồi ghi.
+- **L3** (iterate) → thay bằng reviewer agent theo card; quá `max_rounds` → dừng.
+- **Câu hỏi cho người dùng** (AskUserQuestion, phỏng vấn, chọn phương án, confirm upstream) → tra
+  "Quyết định chốt sẵn" của card + tài liệu nguồn; không có → **dừng (Cửa 2)**, ghi câu hỏi vào card. KHÔNG đoán.
+- Mọi gate máy (lint, diagram gate, saas-layer) vẫn chạy đủ — chế độ chạy bỏ chờ người, không bỏ kiểm.
+
+Vì sao không phạm anti-pattern "bypass bằng env var": không có cờ nào bật được chế độ này. Điều kiện là
+trạng thái kiểm được (branch + card đã duyệt + vùng ghi), mọi thay đổi nằm trên branch riêng bỏ được bằng
+`wt.sh drop`, và không gì vào `main` khi người dùng chưa duyệt.
+
 ## Anti-patterns
 
 ❌ **KHÔNG** auto-pick file im lặng dù "có vẻ rõ ràng".
@@ -153,6 +177,7 @@ Lý do bỏ mô hình "sub-agent Write thẳng rồi rollback nếu user từ ch
 ❌ **KHÔNG** dùng L3 cho file write thuần (vd `/urd` text — không cần iterate, đi thẳng L1).
 ❌ **KHÔNG** skip L1 khi chỉ ghi 1 file ngắn.
 ❌ **KHÔNG** dùng env var `CLAUDE_AUTO_APPROVE` hoặc tương tự để bypass.
+❌ **KHÔNG** coi chế độ chạy là hợp lệ ngoài worktree `feat/*`, khi card chưa duyệt, hoặc để ghi ngoài `docs/<feature>/**`.
 
 ## Tóm tắt 1 dòng
 

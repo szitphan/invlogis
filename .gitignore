@@ -22,6 +22,7 @@ _workspace/kg/.dirty
 _workspace/changelog.md
 _workspace/staleness.md
 _workspace/kg/graph*.json
+.claude/worktrees/
 _workspace/.status-state/
 .claude/token-tracking/
 

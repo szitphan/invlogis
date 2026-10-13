@@ -20,7 +20,7 @@ fi
 # docs/**.md + bpmn *.ir.json (mọi độ sâu) + dbdiagram *.dbml + sync-state.yaml.
 case "$FILE" in
     *_workspace/kg/*) exit 0 ;;  # graph.json/.dirty tự ghi — tránh đệ quy
-    *docs/exports/*|*docs/inbox/*|*docs/reports/*|*docs/_regen-sample/*|*docs/guides/*) exit 0 ;;
+    *docs/*/_runs/*|*docs/exports/*|*docs/inbox/*|*docs/reports/*|*docs/_regen-sample/*|*docs/guides/*) exit 0 ;;
     *docs/*.md|*design/*.md|*docs/*bpmn/*.ir.json|*docs/*/dbdiagram/*.dbml|*.claude/state/atlassian/sync-state.yaml) ;;
     *) exit 0 ;;
 esac

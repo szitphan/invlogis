@@ -32,6 +32,7 @@ Nội dung trả lời 4 câu (theo thứ tự quan trọng giảm dần — cũ
 * **Output path theo scope** — project-wide: `docs/_shared/dashboard.html` (re-run overwrite). Per-feature: `docs/_shared/dashboard-{feature}.html` (path RIÊNG, KHÔNG đè bản project-wide, để `/dashboard <feature>` không xoá mất global view).
 * **Self-contained** — chỉ depend **ECharts** (1 CDN) cho charts + **List.js** (1 CDN) cho filter/sort bảng. Mọi data inline trong file. Chart.js đã bỏ (2026-07-13) — ECharts có sẵn native funnel + heatmap + graph mà Chart.js phải thêm plugin.
 * **Read-only data scan** — KHÔNG edit doc nào. Chỉ scan qua engine + đọc thêm 1 số marker body. L1 chỉ cho Write file HTML cuối.
+* **Làn "Chờ bạn"** — nguồn duy nhất là `_scripts/queue.py --json`; scope feature thì lọc theo `feature`/`branch`.
 * **Nguồn số liệu có phân vai** — `kg counts`/`kg coverage`/`kg orphans` là nguồn chính cho counts, coverage, orphan và stale; `_scripts/workspace-status.py` chỉ bổ sung pipeline/freshness/quality/action items cùng các metric KG chưa biểu diễn. Nếu bất kỳ query KG nào `KG-ERROR` hoặc exit ≠ 0, chạy lại flow cũ bằng `workspace-status.py` cho toàn bộ phần metric trùng lặp. KHÔNG suy diễn lại con số bằng prompt (tránh dashboard lệch với engine).
 * **Vietnamese-first UI** — labels/headers tiếng Việt; doc titles giữ ngôn ngữ gốc.
 * **Theme-aware** — dark mode toggle (CSS variables 2 tầng + localStorage + `prefers-color-scheme`).
@@ -100,6 +101,10 @@ Feature folders: !`ls -d docs/*/ 2>/dev/null | xargs -I{} basename {} | grep -vE
    1) **Header** mỏng — project · docs/feature/US/AC · timestamp · dark-mode toggle. KHÔNG nhồi stat bar dày ở đây (verdict lo việc "khỏe không").
    2) **Verdict banner** — icon lớn 🔴/🟡/🟢 + `health.verdict.title` + `summary`. Border trái màu theo level. Đây là dòng đầu user đọc.
    3) **4 đèn sức khỏe** — grid 4 thẻ từ `health.lights`: nhãn + `metric` to (màu theo `light`) + `detail`. Liếc phát biết mảng nào đỏ.
+   3b) **⏳ Chờ bạn** — từ `python3 _scripts/queue.py --json` (`lanes`), đặt NGAY sau 4 đèn: 4 làn 🔍 Chờ duyệt land ·
+       ⛔ Chặn, chờ trả lời · 📝 Card chờ duyệt · ⚙ Đang chạy. Mỗi mục 1 dòng (feature/task, tiến độ bước, số câu hỏi,
+       dòng nhật ký cuối) + lệnh `/queue <số>`. Làn rỗng hiện "—", cả 4 rỗng → 1 dòng "Không có việc nào chờ bạn".
+       Số liệu đọc thẳng JSON, KHÔNG tự đếm lại (cùng nguồn với `/queue` và dòng session-init).
    4) **⚡ Việc gấp nhất** — top 5-6 `action_items` (đã sort P0→): pill ưu tiên + mô tả + `code` lệnh chạy. Dư thì "… và N việc khác".
    5) **🚦 Tiến độ từng feature** — mỗi feature 1 hàng: tên + 8 ô giai đoạn (đậm=có artifact, nhạt=chưa) + % (màu theo ngưỡng). **Sort % tăng dần — feature yếu lên trước.** Đọc thẳng, KHÔNG cần chart.
    6) **🎯 Lỗ hổng truy vết** — mỗi feature 1 card: coverage% + thanh bar + liệt kê FR chưa phủ / US mồ côi / UC chưa test (mã thật). **Feature coverage thấp lên trước.**

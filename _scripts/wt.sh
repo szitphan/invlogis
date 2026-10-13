@@ -2,8 +2,8 @@
 # Worktree theo feature — chạy song song nhiều feature, mỗi feature 1 thư mục + 1 branch riêng.
 # Quy ước: .claude/rules/worktree.md
 #
-#   _scripts/wt.sh new  <slug>     tạo ../{repo}-wt/<slug> trên branch feat/<slug> (từ main)
-#   _scripts/wt.sh list            liệt kê worktree + số commit chưa land + file chưa commit
+#   _scripts/wt.sh new  <slug>     tạo .claude/worktrees/<slug> trên branch feat/<slug> (từ main)
+#   _scripts/wt.sh list            liệt kê worktree + trạng thái ready + commit/file chưa land
 #   _scripts/wt.sh sync <slug>     kéo main mới nhất vào feat/<slug> (merge thường, chạy trong worktree)
 #   _scripts/wt.sh ready <slug> "<tóm tắt>"   báo xong → backlog có task "🔍 chờ duyệt" land
 #   _scripts/wt.sh unready <slug>  rút lại báo xong (quay lại sửa tiếp)
@@ -16,8 +16,8 @@
 set -euo pipefail
 
 MAIN_DIR="$(git rev-parse --path-format=absolute --git-common-dir)"; MAIN_DIR="${MAIN_DIR%/.git}"
-REPO="$(basename "$MAIN_DIR")"
-WT_ROOT="$(dirname "$MAIN_DIR")/${REPO}-wt"
+# Worktree nằm trong repo (gitignore) — Claude Code chỉ cho agent chạy nền vào worktree dưới .claude/worktrees/.
+WT_ROOT="$MAIN_DIR/.claude/worktrees"
 
 die() { echo "wt: $*" >&2; exit 1; }
 need_slug() {
