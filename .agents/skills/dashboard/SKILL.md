@@ -50,7 +50,7 @@ Trang có 5 tab (thứ tự = thứ tự quan trọng):
 
 ### Pitfalls — easy to get wrong‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
-* **Verdict theo giai đoạn, DETERMINISTIC** — pha = giai đoạn xa nhất của số đông feature (khám phá / đặc tả & thiết kế / bàn giao); nút thắt = cột có nhiều ô chặn nhất. Feature chỉ bị chấm ở cột đã tới — feature đang brainstorm KHÔNG đỏ vì thiếu US.
+* **Verdict theo giai đoạn, DETERMINISTIC** — pha = giai đoạn xa nhất của số đông feature (khám phá / đặc tả & thiết kế / bàn giao); nút thắt = cột có nhiều ô chặn nhất. **Màu** = màu tệ nhất trong 5 ô Hôm nay (bỏ xám); có việc bị chặn chờ trả lời hoặc lint FAIL → đỏ. Feature chỉ bị chấm ở cột đã tới — feature đang brainstorm KHÔNG đỏ vì thiếu US.
 * **OQ mở ≠ mọi dòng OQ** — dòng `| OQ-n |` có ô cuối bắt đầu bằng *Đã chốt / Đóng / Bỏ* là đã đóng. Số "Câu hỏi mở" chỉ đếm phần còn lại.
 * **Độ tươi chỉ theo tuổi** — cờ stale có đèn/ô riêng; KHÔNG trộn (1 nguyên nhân đỏ 2 đèn).
 * **US/AC có FR mà chưa có US nào** = xám "0/N" (chưa tới), không phải đang làm.
@@ -128,8 +128,8 @@ Feature không tồn tại / vault rỗng → theo `feature-bootstrap.md` Nhóm 
 | Metric | Cách tính (trong `dashboard-build.py`) |
 |--------|------------------|
 | Ô trục tiến độ | `done` đậm = bước xong theo điều kiện máy · `part` nhạt + số = đang làm · `block` viền đỏ = đang giữ feature lại · `none` xám = chưa tới |
-| Nguồn | Mục sổ `docs-input/_coverage/*.md` thuộc feature (`➡ {feature}` hoặc path `docs/{feature}/` ở cột Ở đâu): `✅/tổng`; còn ⬜/⏳ nhạt · có 🔄 chặn · không mục nào xám |
-| Hàng việc · `priority_score` | Chặn 40 (task/việc nhắc feature đang có ô chặn; stale ở brainstorm/SRS) hoặc 25 (chặn 1 phần) + Hạn 25 (≤7 ngày) / 15 (≤14 ngày) từ cột **Hạn** backlog + Lan 4đ mỗi feature/doc nhắc tới (trần 20) + Tuổi 1đ/2 ngày (trần 15). Cột **Ưu tiên** backlog: `P0` luôn đầu, `để sau` luôn cuối. Việc máy: doc stale (gom theo feature), OQ mở chưa có task, lint FAIL, audit Figma Cao, nguồn 🔄, worktree không theo `feat/*`, việc engine (review kẹt, US thiếu AC…) |
+| Nguồn | Mục sổ `docs-input/_coverage/*.md` thuộc feature: chắc chắn khi `➡ {feature}` hoặc path `docs/{feature}/` ở cột Ở đâu (1 mục có thể thuộc nhiều feature); đoán khi mục còn ⏳/⬜ nhắc đúng 1 tên feature ở Ở đâu/Ghi chú. `✅/tổng`; còn ⬜/⏳ nhạt · có 🔄 chặn · không mục nào xám. Mục còn chờ không gắn được feature → dòng "N mục nguồn chưa gắn feature" (tab Feature) + cột "Chưa gắn feature" (tab Nguồn khách) |
+| Hàng việc · `priority_score` | Chặn 40 khi việc chạm **ô chặn chính** (ô viền đỏ đầu tiên) của feature, 25 khi chạm ô viền đỏ khác, 0 nếu không — "chạm" = đường dẫn file của ô hoặc từ khoá cột có trong nội dung việc + Xong khi (KHÔNG xét cột Nguồn; ô OQ chỉ theo từ khoá vì dùng chung file brainstorm) + Hạn 25 (≤7 ngày) / 15 (≤14 ngày) từ cột **Hạn** backlog + Lan 4đ mỗi feature/doc nhắc tới (trần 20) + Tuổi 1đ/2 ngày (trần 15). Cột **Ưu tiên** backlog: `P0` luôn đầu, `để sau` luôn cuối. Việc máy: doc stale (gom theo feature), OQ mở chưa có task, lint FAIL, audit Figma Cao, nguồn 🔄, worktree không theo `feat/*`, việc engine (review kẹt, US thiếu AC…) |
 | Tầng SaaS · Tham số P | FAIL/WARN `saas-layer-lint` cộng trên mọi spec · dòng `P-…` trong `docs/_product/tenant-parameters.md` có "chưa chốt" |
 | Brainstorm | `brainstorms/{feature}.md`: approved đậm · stale chặn · còn lại nhạt |
 | Chốt OQ | Số OQ mở trong mọi doc của feature; còn mở + đã có brainstorm = chặn |

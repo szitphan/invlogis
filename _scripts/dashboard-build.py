@@ -234,11 +234,11 @@ def parse_ledgers():
         if not h:
             continue
         rows = []
-        for line in text.split("\n"):
+        for ln, line in enumerate(text.split("\n"), 1):
             if not line.startswith("| ") or line.startswith("| Mục") or line.startswith("|---"):
                 continue
-            c = table_cells(line) + ["", ""]
-            rows.append({"muc": c[0], "result": c[1], "where": c[2]})
+            c = table_cells(line) + ["", "", ""]
+            rows.append({"muc": c[0], "result": c[1], "where": c[2], "note": c[3], "line": ln})
         out[h.group(2)] = {"name": h.group(1), "path": rel(p), "rows": rows}
     return out
 
@@ -264,18 +264,46 @@ def feed_ratio(feed):
     return (int(m.group(1)), int(m.group(2))) if m else None
 
 
-def source_cell(feature, ledgers):
-    """Cột Nguồn của trục tiến độ: mục sổ đối chiếu thuộc feature (➡ feature hoặc path docs/feature/)."""
+PENDING_MARKS = ("⏳", "⬜", "🔄")
+
+
+def row_feature(r, features):
+    """Feature của 1 mục sổ đối chiếu: `➡ f` / path docs/f/ (chắc chắn) hoặc mục còn chờ có nhắc tên f
+    ở cột Ở đâu/Ghi chú (đoán — chỉ khi đúng 1 feature được nhắc)."""
+    sure = [f for f in features if f"➡ {f}" in r["result"] or f"docs/{f}/" in r["where"]]
+    if sure:
+        return sure, "sure"  # 1 mục có thể thuộc nhiều feature — tính cho mỗi feature
+    if any(m in r["result"] for m in PENDING_MARKS):
+        hit = [f for f in features if f in r["where"] + " " + r["note"]]
+        if len(hit) == 1:
+            return hit, "guess"
+    return [], None
+
+
+def unassigned_rows(ledgers, features):
+    """Mục còn chờ (⏳/⬜/🔄) không gắn được feature nào — cần anh hoặc /intake ghi `➡ {feature}`."""
+    out = []
+    for src, led in sorted(ledgers.items()):
+        for r in led["rows"]:
+            if any(m in r["result"] for m in PENDING_MARKS) and "➡" not in r["result"] and not row_feature(r, features)[0]:
+                out.append({"src": src, "path": led["path"], "line": r["line"], "muc": r["muc"]})
+    return out
+
+
+def source_cell(feature, ledgers, features=()):
+    """Cột Nguồn của trục tiến độ: mục sổ đối chiếu thuộc feature (chắc chắn hoặc đoán qua tên feature)."""
     done = total = 0
     redo = pending = False
     first = None
+    feats = list(features) or [feature]
     for src, led in sorted(ledgers.items()):
         for r in led["rows"]:
-            mine = f"➡ {feature}" in r["result"] or f"docs/{feature}/" in r["where"]
+            mine = feature in row_feature(r, feats)[0]
             if not mine:
                 continue
             total += 1
-            first = first or led["path"]
+            if first is None or (("✅" not in r["result"]) and not first[2]):
+                first = (led["path"], r["line"], "✅" not in r["result"])
             if "✅" in r["result"]:
                 done += 1
             elif "🔄" in r["result"]:
@@ -285,7 +313,8 @@ def source_cell(feature, ledgers):
     if not total:
         return cell("none", "", note="chưa có mục sổ đối chiếu nào thuộc feature này")
     state = "block" if redo else "part" if pending else "done"
-    return cell(state, f"{done}/{total}", first, note="có mục 🔄 bản mới chưa rà" if redo else "")
+    return cell(state, f"{done}/{total}", first[0], first[1] if first[2] else None,
+                note="có mục 🔄 bản mới chưa rà" if redo else "")
 
 
 def parse_params():
@@ -445,10 +474,10 @@ def cell(state, text="", path=None, line=None, note=""):
     return {"state": state, "text": text, "path": path, "line": line, "note": note}
 
 
-def feature_row(feature, cov, oqs, lint, orphans, audit, ledgers):
+def feature_row(feature, cov, oqs, lint, orphans, audit, ledgers, features=()):
     base = ROOT / "docs" / feature
     st = {}
-    st["nguon"] = source_cell(feature, ledgers)
+    st["nguon"] = source_cell(feature, ledgers, features)
 
     bs = base / "brainstorms" / f"{feature}.md"
     if bs.exists():
@@ -606,6 +635,28 @@ def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today, s
     """Hàng việc chung: task BL đang mở + việc máy phát hiện, cùng 1 thang điểm. Ưu tiên tay thắng điểm.
     Mỗi việc có: why (vì sao có việc), done_when (máy kiểm) + done_text (câu đọc được), nơi mở (path + dòng + gợi ý)."""
     by_feat = {r["feature"]: r for r in rows}
+    STAGE_KW = {"nguon": r"SRC-\d|nguồn|feed|đối chiếu", "brainstorm": r"brainstorm", "oq": r"\bOQ\b|OQ-\d|câu hỏi|\bchốt",
+                "srs": r"-spec\b|\bSRS\b|\bFR-", "userflow": r"userflow|luồng", "figma": r"figma|\bmàn\b|wireframe|screen",
+                "usac": r"\bUS-\d|story|\bAC\b", "test": r"\btest"}
+
+    def blocking_for(blob, feats, paths=()):
+        """'full' nếu chạm ô chặn chính (ô đỏ đầu tiên) của 1 feature, 'part' nếu chạm ô đỏ khác, None nếu không."""
+        level = None
+        for f in feats:
+            r = by_feat.get(f)
+            if not r or not r["blocks"]:
+                continue
+            touched = set()
+            for k in r["blocks"]:
+                # Ô OQ trỏ cùng file với brainstorm → chỉ nhận theo từ khoá, không theo đường dẫn.
+                cp = r["stages"][k].get("path") if k != "oq" else None
+                if (cp and (cp in blob or cp in paths)) or re.search(STAGE_KW[k], blob, re.I):
+                    touched.add(k)
+            if r["blocks"][0] in touched:
+                return "full"
+            if touched:
+                level = "part"
+        return level
     up_of = {}
     for s_ in stale_log:
         up_of[s_["downstream"]] = s_
@@ -621,14 +672,15 @@ def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today, s
         if b["state"].startswith("✅"):
             continue
         blob = f'{b["task"]} {b["source"]} {b["done_when"]}'
-        feats = [f for f in by_feat if f in blob]
+        act_blob = f'{b["task"]} {b["done_when"]}'
+        feats = [f for f in by_feat if f in act_blob]  # feature việc tác động (không tính cột Nguồn)
         docs_n = len(set(re.findall(r"docs/[\w./-]+\.md", blob)))
         try:
             age = (today - date.fromisoformat(b["created"])).days
         except ValueError:
             age = 0
-        score, parts = priority_score("full" if any(by_feat[f]["blocks"] for f in feats) else None,
-                                      b["due"], today, len(feats) + docs_n, age)
+        # Chặn xét theo nội dung việc + điều kiện Xong khi, KHÔNG theo cột Nguồn (nguồn là nơi phát sinh, không phải nơi việc tác động).
+        score, parts = priority_score(blocking_for(act_blob, feats), b["due"], today, len(feats) + docs_n, age)
         doc = next(iter(re.findall(r"((?:docs|docs-input|_scripts|\.claude)/[\w./-]+\.\w+)", blob)), None)
         doc = doc if doc and "*" not in doc and (ROOT / doc).exists() else None
         src = re.sub(r"`", "", b["source"]).strip()
@@ -644,7 +696,7 @@ def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today, s
         groups.setdefault(d["feature"] or "_dự án", []).append(d)
     for f, ds in sorted(groups.items()):
         r = by_feat.get(f)
-        blocking = "full" if r and ({"brainstorm", "srs"} & set(r["blocks"])) else "part" if r else None
+        blocking = blocking_for("", [f], {d["path"] for d in ds}) if r else None
         age = max((d["days_since_update"] for d in ds if d["days_since_update"] >= 0), default=0)
         score, parts = priority_score(blocking, "", today, len(ds), age)
         label = f if f != "_dự án" else "Doc dự án (_shared, _product, meetings)"
@@ -659,14 +711,14 @@ def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today, s
     for r in rows:
         if r["open_oq"] and r["feature"] not in mentioned:
             o = r["stages"]["oq"]
-            score, parts = priority_score("full", "", today, r["open_oq"], 0)
+            score, parts = priority_score("full" if r["blocks"][:1] == ["oq"] else "part", "", today, r["open_oq"], 0)
             items.append(item("Máy", f"oq:{r['feature']}", f"{r['feature']}: {r['open_oq']} câu hỏi mở chưa có task theo dõi",
                               score, parts, "Câu hỏi mở đang chặn feature đi tiếp mà backlog chưa có task nào nhắc tới. "
                               "Chốt qua /deck hoặc hỏi khách.", f"!grep:docs/{r['feature']}/**/*.md:Còn mở",
                               o["path"], o["line"], "câu hỏi mở đầu tiên"))
         lint = r.get("lint") or {}
         if lint.get("fail"):
-            score, parts = priority_score("full", "", today, lint["fail"], 0)
+            score, parts = priority_score("full" if r["blocks"][:1] == ["srs"] else "part", "", today, lint["fail"], 0)
             items.append(item("Máy", f"lint:{r['feature']}", f"{r['feature']}: {lint['fail']} lỗi FAIL tầng SaaS", score, parts,
                               "Quy tắc thiếu nhãn tầng hoặc dùng mã P chưa có trong bảng tham số (saas-layer-lint).", "manual",
                               r["stages"]["srs"]["path"], r["stages"]["srs"]["line"], "dòng lỗi đầu tiên"))
@@ -676,7 +728,7 @@ def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today, s
                 age = (today - date.fromisoformat(a["date"])).days
             except ValueError:
                 age = 0
-            score, parts = priority_score("part", "", today, a["cao"], age)
+            score, parts = priority_score("full" if r["blocks"][:1] == ["figma"] else "part", "", today, a["cao"], age)
             cao = [x for x in audit_items(a["path"]) if x["level"] == "Cao"]
             what = re.sub(r"`", "", cao[0]["what"]) if cao else ""
             items.append(item("Máy", f"figma:{r['feature']}", f"Audit Figma {r['feature']}: {a['cao']} mục mức Cao", score, parts,
@@ -742,7 +794,8 @@ def build(feature_filter=None, light_mode=False):
         spec = ROOT / "docs" / f / "srs" / f"{f}-spec.md"
         uf = ROOT / "docs" / f / "srs" / f"{f}-userflow.md"
         rows.append(feature_row(f, coverage.get(f), scan_oq(f), lint_spec(spec),
-                                kg_userflow_orphans(f) if uf.exists() else None, latest_figma_audit(f), ledgers))
+                                kg_userflow_orphans(f) if uf.exists() else None, latest_figma_audit(f), ledgers,
+                                scan_features(None)))
     # Feature chậm nhất lên đầu: giai đoạn xa nhất thấp hơn trước, rồi ít ô xong hơn, rồi tên.
     rows.sort(key=lambda r: (r["furthest_idx"], r["done"], r["feature"]))
 
@@ -797,11 +850,12 @@ def build(feature_filter=None, light_mode=False):
     block_count = {k: sum(1 for r in rows if k in r["blocks"]) for k, _ in STAGES}
     neck = max([k for k, _ in STAGES], key=lambda k: (block_count[k], -[s for s, _ in STAGES].index(k)))
     lint_fail = sum((r["stages"]["srs"]["text"].count("FAIL") and 1) for r in rows)
+    unassigned = unassigned_rows(ledgers, scan_features(None))
     if not rows:
         verdict = {"level": "gray", "title": "Chưa có feature nào",
                    "summary": "Bắt đầu với /brainstorm hoặc /intake."}
     else:
-        level = "red" if (len(lanes.get("blocked", [])) or lint_fail) else "amber" if any(block_count.values()) or waiting else "green"
+        level = "pending"  # chấm sau khi có 5 ô: màu tệ nhất trong các ô (bỏ xám); có việc bị chặn chờ trả lời → đỏ
         neck_label = dict(STAGES)[neck]
         if block_count[neck]:
             if neck == "oq":
@@ -832,7 +886,14 @@ def build(feature_filter=None, light_mode=False):
          "sub": f"{len(open_bl)} task backlog · {len(work) - len(open_bl)} việc máy phát hiện", "path": "_workspace/backlog.md"},
     ]
 
+    if verdict["level"] == "pending":
+        order = {"red": 0, "amber": 1, "green": 2}
+        lights = [t["light"] for t in tiles if t["light"] in order]
+        worst = min(lights, key=lambda c: order[c]) if lights else "green"
+        verdict["level"] = "red" if (lanes.get("blocked") or lint_fail) else worst
+
     return {
+        "unassigned": unassigned,
         "generated": today.isoformat(), "scope": feature_filter or "project", "root": str(ROOT),
         "verdict": verdict, "tiles": tiles, "lanes": lanes, "actions": actions, "work": work,
         "sources": sources, "params": params, "history": history, "figma_board": fboard,
@@ -1184,6 +1245,15 @@ def render(m, artifact=False):
                 w(f'<span class="{cls}"{cls_title}>{t}</span>')
     w("</div></div>")
     w("<style>body.show-hidden #stages{--n:%d}</style>" % len(cols))
+    un = m.get("unassigned", [])
+    if un:
+        by_src = {}
+        for u in un:
+            by_src.setdefault(u["src"], []).append(u)
+        w(f'<p class="muted" style="margin:0;font-size:.82rem"><b>{len(un)} mục nguồn chưa gắn feature</b> (còn ⏳/⬜, chưa có <code>➡ feature</code> '
+          'nên không tính vào cột Nguồn của feature nào): '
+          + " · ".join(link(us[0]["path"], f'{E(src)} ({len(us)})', us[0]["line"]) for src, us in sorted(by_src.items()))
+          + '. Mục ⏳/⬜ có nhắc tên feature ở cột Ở đâu/Ghi chú được tính tạm cho feature đó.</p>')
     lint_rows = [(r["feature"], r["lint"], r["stages"]["srs"]) for r in m["features"] if r.get("lint")]
     n_fail = sum(l["fail"] for _, l, _ in lint_rows)
     n_warn = sum(l["warn"] for _, l, _ in lint_rows)
@@ -1293,13 +1363,18 @@ def render(m, artifact=False):
         if r:
             return (1, r[0] / r[1] if r[1] else 1, x["id"])
         return (0, 0, x["id"])
-    w('<div class="panel"><div class="scroll"><table><thead><tr><th>Mã</th><th>Tên</th><th>Nhóm</th><th>Đối chiếu</th><th>Feed</th></tr></thead><tbody>')
+    un_by = {}
+    for u in m.get("unassigned", []):
+        un_by.setdefault(u["src"], []).append(u)
+    w('<div class="panel"><div class="scroll"><table><thead><tr><th>Mã</th><th>Tên</th><th>Nhóm</th><th>Đối chiếu</th><th>Chưa gắn feature</th><th>Feed</th></tr></thead><tbody>')
     for x in sorted(srcs, key=src_key):
         r = x["ratio"]
         pct = int(100 * r[0] / r[1]) if r and r[1] else 0
         bar = (f'<div class="pbar"><i style="width:{pct}%"></i></div>' + link(x["ledger"], f"{r[0]}/{r[1]}", None, "num")) if r else ""
         w(f'<tr><td class="mono">{link("docs-input/" + x["file"], E(x["id"]))}</td><td>{E(x["name"])}</td>'
-          f'<td class="muted">{E(x["group"])}</td><td class="pcell">{bar}</td><td>{E(x["feed"].split(" ")[0])}</td></tr>')
+          f'<td class="muted">{E(x["group"])}</td><td class="pcell">{bar}</td>'
+          f'<td class="num">{link(un_by[x["id"]][0]["path"], str(len(un_by[x["id"]])) + " mục", un_by[x["id"]][0]["line"]) if x["id"] in un_by else ""}</td>'
+          f'<td>{E(x["feed"].split(" ")[0])}</td></tr>')
     w("</tbody></table></div></div></div>")
 
     # Sức khỏe
