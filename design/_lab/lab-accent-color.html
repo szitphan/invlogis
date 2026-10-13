@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Màu nhấn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="lab-web-kit.css">
+<style>
+/* ===================== Vỏ trang lab ===================== */
+:root{--lab-bg:#e9e9ec;--lab-ink:#18181b;--lab-muted:#6b6b73;--lab-line:#d6d6dc;--lab-card:#fff;--warn:#b42318}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--lab-bg:#141416;--lab-ink:#ececf0;--lab-muted:#a0a0aa;--lab-line:#2c2c31;--lab-card:#1d1d20;--warn:#f97066}}
+:root[data-theme="dark"]{--lab-bg:#141416;--lab-ink:#ececf0;--lab-muted:#a0a0aa;--lab-line:#2c2c31;--lab-card:#1d1d20;--warn:#f97066}
+*{box-sizing:border-box}
+body{margin:0;background:var(--lab-bg);color:var(--lab-ink);font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.lab-top{position:sticky;top:0;z-index:20;background:var(--lab-bg);border-bottom:1px solid var(--lab-line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.lab-top h1{font-size:15px;margin:0 6px 0 0}
+.lab-opts{display:flex;flex-wrap:wrap;gap:6px}
+.lab-opts button{font:inherit;font-size:12px;border:1px solid var(--lab-line);background:var(--lab-card);color:var(--lab-ink);padding:4px 10px 4px 6px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.lab-opts button i{width:14px;height:14px;border-radius:50%;display:inline-block}
+.lab-opts button.on{outline:2px solid var(--lab-ink);outline-offset:1px}
+.lab-opts .grp{font-size:11px;color:var(--lab-muted);align-self:center;margin-left:6px}
+.lab-export{margin-left:auto;font:inherit;font-size:12px;border:0;background:var(--lab-ink);color:var(--lab-bg);padding:7px 12px;border-radius:999px;cursor:pointer}
+.lab-main{max-width:1320px;margin:0 auto;padding:16px}
+.intro{background:var(--lab-card);border:1px solid var(--lab-line);border-radius:12px;padding:12px 16px;font-size:13px}
+.intro ul{margin:4px 0 0;padding-left:18px}
+h2.sec{font-size:15px;margin:22px 0 8px}
+.stage{border-radius:12px;overflow:hidden;border:1px solid var(--lab-line);background:#fff;box-shadow:0 18px 40px -24px rgba(0,0,0,.45)}
+.scaler{transform-origin:0 0;width:1280px;height:800px}
+.cmp{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.opt{background:var(--lab-card);border:1px solid var(--lab-line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.opt.pick{outline:2px solid var(--lab-ink)}
+.opt h3{margin:0;font-size:14px;display:flex;align-items:center;gap:8px}
+.opt h3 small{font:500 11px "JetBrains Mono",monospace;color:var(--lab-muted)}
+.opt .dir{font-size:11px;color:var(--lab-muted)}
+.mini{background:#fff;border:1px solid #ececf0;border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;color:#171717;font-size:13px}
+.mini .r{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.m-btn{height:30px;padding:0 12px;border-radius:10px;background:var(--acc);color:var(--on-acc);font-weight:500;display:inline-flex;align-items:center}
+.m-tab{padding:0 0 6px;box-shadow:inset 0 -2px 0 var(--acc);color:#171717;font-weight:600}
+.m-tab.off{box-shadow:none;color:#737373;font-weight:400}
+.m-nav{height:30px;padding:0 10px;border-radius:9px;background:var(--acc-soft);color:var(--acc-ink);font-weight:600;display:inline-flex;align-items:center}
+.m-cb{width:15px;height:15px;border-radius:4px;background:var(--acc);display:inline-block;position:relative}
+.m-cb::after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid var(--on-acc);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.m-inp{height:30px;border-radius:10px;border:1px solid var(--acc);box-shadow:0 0 0 3px var(--acc-ring);padding:0 10px;display:flex;align-items:center;color:#171717;flex:1;min-width:120px}
+.m-lnk{color:var(--acc-ink);text-decoration:underline;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.nums{font-size:12px;display:grid;grid-template-columns:1fr auto;gap:2px 10px}
+.nums b{font-variant-numeric:tabular-nums}
+.nums .bad{color:var(--warn);font-weight:600}
+.risk{font-size:12px;border-left:3px solid var(--warn);padding:2px 8px;color:var(--lab-ink)}
+.risk.ok{border-color:#16a34a}
+.vote{display:flex;gap:6px;align-items:center}
+.vote button{font:inherit;font-size:12px;border:1px solid var(--lab-line);background:var(--lab-card);color:var(--lab-ink);padding:4px 10px;border-radius:999px;cursor:pointer}
+.vote button.on{background:var(--lab-ink);color:var(--lab-bg)}
+.vote input{flex:1;min-width:0;font:inherit;font-size:12px;border:1px solid var(--lab-line);border-radius:8px;padding:4px 8px;background:var(--lab-card);color:var(--lab-ink)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--lab-ink);color:var(--lab-bg);padding:8px 14px;border-radius:999px;font-size:13px;display:none;z-index:50}
+
+/* ===================== Màu nhấn áp lên màn (chỗ design.md dùng {colors.accent}) ===================== */
+body.ds .app .btn.pri{background:var(--acc);color:var(--on-acc)}
+body.ds .app .shE .e-it.on{background:var(--acc-soft);color:var(--acc-ink)}
+body.ds .app .tabs span.on{box-shadow:inset 0 -2px 0 var(--acc);color:#171717}
+body.ds .app .tbl .cb.on,body.ds .app .tbl .cb.mix{background:var(--acc);border-color:var(--acc)}
+body.ds .app .tbl .cb.on::after{border-color:var(--on-acc)}
+body.ds .app .tbl tr.sel td{background:var(--acc-row)}
+body.ds .app .inp.focus{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-ring)}
+body.ds .app .bar i{background:var(--acc)}
+body.ds .app .lnk{color:var(--acc-ink);font-weight:500}
+.app .pgn{display:flex;align-items:center;gap:4px;padding:10px 12px;border-top:1px solid var(--line);font-size:13px;color:var(--ink2)}
+.app .pgn .pn{width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center}
+.app .pgn .pn.on{background:var(--acc);color:var(--on-acc);font-weight:600}
+</style>
+</head>
+<body class="ds b-neutral">
+<div class="lab-top">
+  <h1>Màu nhấn</h1>
+  <div class="lab-opts" id="opts"></div>
+  <button class="lab-export" id="export">Copy kết quả chấm</button>
+</div>
+<main class="lab-main">
+  <section class="intro">
+    <b>Thử màu nhấn thay than chì #262626.</b> Màu nhấn tô đúng các chỗ design.md dùng <code>{colors.accent}</code>: nút chính, mục menu đang chọn, gạch tab, checkbox, viền ô đang nhập, trang hiện tại, link, thanh tiến độ. Logo giữ theo DS.
+    <ul>
+      <li>Bấm màu ở thanh trên để đổi màn thật. Lưới bên dưới đặt mỗi màu cạnh 7 chip trạng thái — để thấy chỗ đụng nghĩa.</li>
+      <li>Số đo: chữ trắng trên nền màu (cần ≥ 4.5), màu làm chữ trên nền trắng (cần ≥ 4.5), độ sáng so với chip cùng họ màu (gần 1 = dễ nhầm với chip).</li>
+      <li>Chấm Chọn / Chưa ưng + ghi chú, rồi "Copy kết quả chấm" dán lại vào chat. Chưa đụng design.md, token, Figma.</li>
+    </ul>
+  </section>
+  <h2 class="sec" id="cur"></h2>
+  <div class="stage" id="stage"><div class="scaler" id="scaler"></div></div>
+  <h2 class="sec">So nhanh 7 màu</h2>
+  <div class="cmp" id="cmp"></div>
+</main>
+<div class="toast" id="toast"></div>
+<script src="lab-web-kit.js"></script>
+<script>
+SHELL="E";
+/* Ứng viên. chip = mã chip trạng thái gần nhất về sắc (để đo độ dễ nhầm). */
+const OPT=[
+ {k:"n0",dir:"Mốc hiện tại",n:"Than chì",h:"#262626",chip:null,risk:"Không đụng chip nào. Độ nổi đến từ tương phản sáng–tối (quyết định gốc).",ok:1},
+ {k:"m1",dir:"Mực có sắc nhẹ",n:"Xanh đá",h:"#1E293B",chip:"giao",risk:"Gần như than chì, ánh xanh rất nhẹ — an toàn, nhưng khác biệt ít.",ok:1},
+ {k:"m2",dir:"Mực có sắc nhẹ",n:"Navy",h:"#1E3A8A",chip:"giao",risk:"Rõ chất xanh mà vẫn tối; cạnh chip \"Đã giao lái xe\" (xanh dương) còn phân biệt được nhờ độ đậm.",ok:1},
+ {k:"s1",dir:"Sắc đậm cố định",n:"Chàm",h:"#4338CA",chip:"chay",risk:"Sáng gần bằng chữ chip tím/xanh dương — nút chính dễ đọc nhầm thành trạng thái."},
+ {k:"s2",dir:"Sắc đậm cố định",n:"Xanh dương",h:"#1F5BD6",chip:"giao",risk:"Trùng họ với chip \"Đã giao lái xe\" và màu thông tin (info) — phải đổi sắc chip nếu chọn."},
+ {k:"k1",dir:"Theo khách",n:"Delta",h:"#1B7B46",chip:"duyet",risk:"Gần như trùng màu chữ chip \"Đã duyệt\" (#1b7542). Nút chính, checkbox, trang hiện tại sẽ trông như trạng thái xong. Hợp làm màu ô logo, không hợp làm màu nhấn."},
+ {k:"k2",dir:"Theo khách",n:"Innvie",h:"#0036B5",chip:"giao",risk:"Cùng họ xanh dương với chip \"Đã giao\"; đậm hơn nên đỡ nhầm hơn Xanh dương. Lật quyết định 12/10 (màu khách chỉ tô logo)."},
+];
+/* Màu chữ chip DS theo kiểu hiển thị của kit (STI): Đang thực hiện = tím, Lái xe đã chốt = vàng */
+const CHIP_FG={lap:"#525252",giao:"#1f4fb8",nhan:"#0b6b64",chay:"#5536c4",chot:"#8a5300",duyet:"#1b7542",huy:"#b42318"};
+const mix=(h,a)=>{const c=hex2rgb(h).map(v=>Math.round((v*a+(1-a))*255));return "#"+c.map(v=>v.toString(16).padStart(2,"0")).join("")};
+const vars=o=>{const c=hex2rgb(o.h),on=contrast([1,1,1],c)>=contrast(hex2rgb("#171717"),c)?"#ffffff":"#171717";
+  return {"--acc":o.h,"--on-acc":on,"--acc-soft":o.k==="n0"?"#f1f1f1":mix(o.h,.09),"--acc-ink":o.h,"--acc-ring":o.h+"24","--acc-row":o.k==="n0"?"#fafafa":mix(o.h,.05)}};
+const setVars=(el,o)=>Object.entries(vars(o)).forEach(([k,v])=>el.style.setProperty(k,v));
+const nums=o=>{const c=hex2rgb(o.h),w=contrast([1,1,1],c),near=o.chip?contrast(c,hex2rgb(CHIP_FG[o.chip])):null;
+  return {w,near}};
+
+/* ---------- Màn thật: danh sách Lệnh vận tải ---------- */
+function screen(){
+  const rows=ORD.slice(0,9).map((o,i)=>`<tr class="${i===1||i===2?"sel":""}"><td><span class="cb ${i===1||i===2?"on":""}"></span></td><td><span class="mono" style="color:var(--ink)">${o.id}</span></td><td>${st(o.s)}</td><td>${o.car}</td><td>${drv(o)}</td><td class="muted">${o.from} → ${o.to}</td><td>${o.time}</td><td>${flag(o)}</td></tr>`).join("");
+  const body=`<div class="pg"><div class="pg-h"><div class="grow"><h1>Lệnh vận tải</h1><div class="sub">128 lệnh · Cơ sở Hải Phòng · cập nhật 09:42</div></div>
+     <div class="row"><span class="btn">${I("upload","s")}Xuất</span><span class="btn pri">${I("plus","s")}Lập Lệnh</span></div></div>
+   <div class="tabs" style="margin-top:16px"><span class="on">Tất cả <span class="n">128</span></span><span>Đã lập <span class="n">12</span></span><span>Đang thực hiện <span class="n">31</span></span><span>Chờ duyệt <span class="n">9</span></span><span>Đã duyệt <span class="n">74</span></span></div>
+   <div class="row" style="margin:14px 0 12px;gap:8px"><div class="inp focus" style="width:320px">${I("search","s faint")}LVT-045</div><span class="btn">${I("filter","s")}Bộ lọc</span><span class="btn ghost">Tuỳ chỉnh cột</span>
+     <span style="margin-left:auto" class="muted">2 đã chọn · <span class="lnk">Bỏ chọn</span></span></div>
+   <div class="card" style="overflow:hidden"><table class="tbl" style="width:100%"><thead><tr><th><span class="cb mix"></span></th><th>Mã lệnh</th><th>Trạng thái</th><th>Xe</th><th>Lái xe</th><th>Tuyến</th><th>Giờ</th><th></th></tr></thead><tbody>${rows}</tbody></table>
+     <div class="pgn"><span>50 / trang</span><span style="margin-left:auto" class="pn">${I("left","s")}</span><span class="pn on">1</span><span class="pn">2</span><span class="pn">3</span><span class="pn">${I("right","s")}</span></div></div>
+   <div class="row" style="margin-top:12px;gap:10px"><span class="lbl">Tiến độ giao trong ngày</span><div class="bar" style="width:240px"><i style="width:62%"></i></div><span class="muted">62%</span></div></div>`;
+  return shell("list","Lệnh vận tải",body);
+}
+
+/* ---------- Lưới so nhanh ---------- */
+const S={cur:"n0",vote:{}};
+try{Object.assign(S,JSON.parse(localStorage.getItem("lab-accent-color")||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem("lab-accent-color",JSON.stringify(S))}catch(e){}};
+function card(o){
+  const {w,near}=nums(o),v=S.vote[o.k]||{};
+  return `<div class="opt ${v.o==="Chọn"?"pick":""}" data-k="${o.k}" id="o-${o.k}">
+   <div><div class="dir">${o.dir}</div><h3><i style="width:14px;height:14px;border-radius:50%;background:${o.h};display:inline-block"></i>${o.n} <small>${o.h}</small></h3></div>
+   <div class="mini">
+     <div class="r"><span class="m-btn">Lập Lệnh</span><span class="m-nav">Lệnh vận tải</span><span class="m-cb"></span></div>
+     <div class="r"><span class="m-tab">Tất cả</span><span class="m-tab off">Đã lập</span><span class="m-tab off">Đã duyệt</span><span class="m-lnk">Bỏ chọn</span></div>
+     <div class="r"><span class="m-inp">LVT-045</span></div>
+     <div class="chips">${Object.keys(ST).map(k=>st(k)).join("")}</div>
+   </div>
+   <div class="nums"><span>Chữ trắng trên nền màu</span><b class="${w<4.5?"bad":""}">${w.toFixed(1)}:1</b>
+     <span>Màu làm chữ trên nền trắng</span><b class="${w<4.5?"bad":""}">${w.toFixed(1)}:1</b>
+     <span>So độ sáng với chip ${o.chip?`"${ST[o.chip]}"`:"—"}</span><b class="${near&&near<1.5?"bad":""}">${near?near.toFixed(2):"—"}</b></div>
+   <div class="risk ${o.ok?"ok":""}">${o.risk}</div>
+   <div class="vote"><button data-v="Chọn" class="${v.o==="Chọn"?"on":""}">Chọn</button><button data-v="Chưa ưng" class="${v.o==="Chưa ưng"?"on":""}">Chưa ưng</button><input placeholder="Ghi chú" value="${(v.n||"").replace(/"/g,"&quot;")}"></div>
+  </div>`;
+}
+function build(){
+  const o=OPT.find(x=>x.k===S.cur)||OPT[0];
+  document.getElementById("opts").innerHTML=OPT.map((x,i)=>`${i===0||x.dir!==OPT[i-1].dir?`<span class="grp">${x.dir}</span>`:""}<button data-k="${x.k}" class="${x.k===o.k?"on":""}"><i style="background:${x.h}"></i>${x.n}</button>`).join("");
+  document.getElementById("cur").textContent=`Màn thật — ${o.dir} · ${o.n} ${o.h}`;
+  const sc=document.getElementById("scaler");sc.innerHTML=screen();setVars(sc,o);
+  const cmp=document.getElementById("cmp");cmp.innerHTML=OPT.map(card).join("");
+  OPT.forEach(x=>setVars(document.getElementById("o-"+x.k),x));
+  fit();
+}
+function fit(){const st=document.getElementById("stage"),k=Math.min(1,st.clientWidth/1280);document.getElementById("scaler").style.transform=`scale(${k})`;st.style.height=(800*k)+"px"}
+addEventListener("resize",fit);
+document.getElementById("opts").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.cur=b.dataset.k;save();build()};
+document.getElementById("cmp").addEventListener("click",e=>{const b=e.target.closest(".vote button");if(!b)return;const k=b.closest(".opt").dataset.k;
+  S.vote[k]=S.vote[k]||{};S.vote[k].o=S.vote[k].o===b.dataset.v?"":b.dataset.v;save();build()});
+document.getElementById("cmp").addEventListener("change",e=>{if(e.target.tagName!=="INPUT")return;const k=e.target.closest(".opt").dataset.k;S.vote[k]=S.vote[k]||{};S.vote[k].n=e.target.value;save()});
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",1800)}
+document.getElementById("export").onclick=()=>{
+  const L=["# Chấm màu nhấn (lab-accent-color)",""];
+  OPT.forEach(o=>{const v=S.vote[o.k]||{};if(v.o||v.n)L.push(`- ${o.dir} · ${o.n} ${o.h}: ${v.o||"·"}${v.n?" — "+v.n:""}`)});
+  if(L.length===2)L.push("(chưa chấm màu nào)");
+  const txt=L.join("\n");(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast("Đã copy — dán vào chat"),()=>prompt("Copy đoạn này:",txt));
+};
+build();
+
+/* Tự kiểm #check — chữ lố khung / tràn thẻ */
+function labCheck(){
+  const out={escape:[],overflow:[]};
+  const app=document.querySelector("#scaler .app");if(app){const A=app.getBoundingClientRect(),s=A.width/1280;
+    app.querySelectorAll("*").forEach(el=>{if(el.ownerSVGElement||el.tagName==="svg")return;const r=el.getBoundingClientRect();if(!r.width)return;
+      if(r.right>A.right+1)out.escape.push(`<${el.className||el.tagName}> "${(el.textContent||"").trim().slice(0,40)}" lố ${Math.round((r.right-A.right)/s)}px`)});}
+  document.querySelectorAll(".opt,.mini,.m-btn,.m-nav,.btn,.inp,.stp,.st").forEach(b=>{if(b.scrollWidth>b.clientWidth+2&&getComputedStyle(b).overflow!=="hidden")out.overflow.push(`tràn <${b.className}> "${b.textContent.trim().slice(0,40)}"`)});
+  const pre=document.createElement("pre");pre.id="labcheck";pre.textContent=JSON.stringify(out,null,1);document.body.appendChild(pre);return out;
+}
+if(location.hash==="#check")addEventListener("load",()=>setTimeout(labCheck,600));
+</script>
+</body>
+</html>

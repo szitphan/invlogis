@@ -26,6 +26,7 @@ Mở đầu output bằng đúng 1 dòng: `Đánh giá bằng AI — chưa có n
 * Bảng artboard của flow: `screenId · slug · nodeId` (+ frame state/modal cùng nhóm: `Empty`, `Error`, `Approve order`…, kèm nodeId).
 * `docs/_shared/project-profile.md` mục người dùng (để nhập vai đúng: điều phối viên, tài xế, khách…).
 * `design/design.md` mục *Do's and Don'ts* + *States* + *Content & Formatting* (làm chuẩn so).
+* Báo cáo A5 (`_scripts/visual-audit.py`) nếu skill truyền — chỉ dùng mã `H1/H2/M1/M2`.
 
 Thiếu Mục 3.6 → KHÔNG tự bịa tác vụ. Trả 1 finding `BLOCKING` "Chưa có Tác vụ chính — chạy lại
 `/user-flow` để bổ sung" rồi chỉ làm Phần 2 (heuristic).
@@ -63,13 +64,17 @@ Chỉ báo điều KHÔNG trùng với việc `@uxui-reviewer` đã kiểm (đ�
 | H1 | Hiển thị trạng thái hệ thống | Người dùng có biết đang ở đâu, việc đang chạy tới đâu? |
 | H2 | Khớp với thế giới thật | Chữ là từ của người dùng (profile) hay từ hệ thống? Thứ tự theo cách họ làm việc? |
 | H3 | Quyền kiểm soát, tự do | Có huỷ, quay lại, hoàn tác thao tác lỡ tay không? |
-| H4 | Nhất quán | Cùng hành động có cùng nhãn/vị trí giữa các màn không? |
+| H4 | Nhất quán | Cùng hành động có cùng nhãn/vị trí giữa các màn không? **Jakob:** control và vị trí có giống app cùng loại người dùng đã quen (tìm ở trên, lưu ở cuối form, quay lại góc trái) không? |
 | H5 | Ngăn lỗi | Có chặn trước lỗi dễ mắc (xác nhận việc khó hoàn tác, vô hiệu nút khi chưa đủ)? |
 | H6 | Nhận biết thay vì nhớ | Có bắt người dùng nhớ thông tin từ màn trước không? |
 | H7 | Linh hoạt, hiệu quả | Tác vụ tần suất cao có lối tắt: thao tác hàng loạt, mặc định thông minh, lọc nhớ lại? |
 | H8 | Tối giản | Thông tin không cần cho tác vụ có đang tranh chỗ thông tin cần không? |
 | H9 | Giúp nhận ra và sửa lỗi | Thông báo lỗi có nói lỗi gì và làm gì tiếp? |
 | H10 | Trợ giúp | Chỗ khó có gợi ý tại chỗ không? |
+
+**Hick / Miller mức tác vụ:** mỗi WARN `H1/H2/M1/M2` của A5 nằm trên đường đi của tác vụ → xét số lựa
+chọn/field đó có làm người dùng chậm hoặc chọn sai **ở bước này** không. Giữ → finding; chấp nhận → ghi
+1 dòng lý do (vd bảng nhiều cột theo nghiệp vụ, có tuỳ chỉnh cột). Không đo lại số.
 
 ## Severity
 
@@ -108,12 +113,14 @@ không thay test với người dùng thật.
 
 * Thiếu trạng thái, sai CMP/GR, sai wording so với spec → `@uxui-reviewer`
 * Thiếu nhánh/màn trong luồng → `flow-reviewer`
-* Màu, token, tương phản, vùng chạm → audit máy của `/figma-screen` (`a11y_audit`, `auditDesignSystem`)
+* Màu, token, tương phản, vùng chạm → audit máy lớp 1 của `/figma-screen` (A1–A5, `.claude/rules/ui-review.md`)
+* Phân cấp thị giác, màu, nhịp khoảng cách, dễ đọc → `@visual-reviewer`
 * Giá trị kinh doanh, phạm vi → `@po-reviewer`
 
 ## Reference materials
 
 - @.claude/rules/review-format.md
+- @.claude/rules/ui-review.md
 - @.claude/rules/design-system.md (đọc design.md theo mục)
 - @design/design.md — *Do's and Don'ts*, *States*, *Content & Formatting*
 - @docs/_shared/project-profile.md — thuật ngữ + nhóm người dùng

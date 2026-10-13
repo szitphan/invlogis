@@ -3,7 +3,7 @@
 /* ===================== Giao diện sản phẩm (trong khung 1280×800) ===================== */
 body.b-neutral{--p:#18181b;--on-p:#fff;--ps:#f1f1f4;--pt:#18181b}
 body.b-innvie{--p:#0036B5;--on-p:#fff;--ps:#e9eefb;--pt:#0036B5}
-body.b-delta{--p:#2E7449;--on-p:#fff;--ps:#e8f2ec;--pt:#2E7449}
+body.b-delta{--p:#1B7B46;--on-p:#fff;--ps:#e8f2ec;--pt:#1B7B46}
 .app{--canvas:#f3f3f5;--surf:#fff;--sub:#f8f8fa;--well:#f4f4f6;--line:#ececf0;--line2:#e2e2e7;--ink:#17171a;--ink2:#54545e;--ink3:#8e8e98;
   --r:14px;--rs:9px;width:1280px;height:800px;overflow:hidden;position:relative;color:var(--ink);font:13.5px/1.45 Inter,sans-serif;background:var(--surf);letter-spacing:-.003em}
 .app *{box-sizing:border-box}

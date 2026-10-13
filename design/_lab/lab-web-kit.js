@@ -131,7 +131,7 @@ function shell(active,crumb,body){
    Hiện tại brand CHỈ thay logo (ô chữ cái / ảnh logo + tên app). Bộ màu và component khác chưa liên quan:
    menu đang chọn, tab, link, nút chính… giữ trung tính. Khách khai 1 màu (P-mau-thuong-hieu); chữ trên ô logo
    tự chọn trắng hoặc #171717 theo tương phản. */
-const BRAND={neutral:"#262626",innvie:"#0036B5",delta:"#2E7449"};
+const BRAND={neutral:"#262626",innvie:"#0036B5",delta:"#1B7B46"};
 const hex2rgb=h=>{h=h.replace("#","");return [0,2,4].map(i=>parseInt(h.substr(i,2),16)/255)};
 const lum=c=>{const l=c.map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*l[0]+.7152*l[1]+.0722*l[2]};
 const contrast=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};

@@ -41,7 +41,7 @@ body{margin:0;background:var(--lab-bg);color:var(--lab-ink);font:14px/1.5 Inter,
 /* ---------- Ô thương hiệu (đổi 4 biến là đổi thương hiệu) ---------- */
 .b-neutral{--primary:#121214;--on-primary:#fff;--accent:#121214;--accent-soft:#ececef;--hero-bg:linear-gradient(140deg,#0e0e10 0%,#1c1c21 55%,#2a2a31 100%);--glow:rgba(255,255,255,.10)}
 .b-innvie{--primary:#0036B5;--on-primary:#fff;--accent:#0036B5;--accent-soft:#e6edfb;--hero-bg:linear-gradient(140deg,#001a5e 0%,#0036B5 60%,#0a63e0 100%);--glow:rgba(0,253,230,.22)}
-.b-delta{--primary:#2E7449;--on-primary:#fff;--accent:#2E7449;--accent-soft:#e6f2ea;--hero-bg:linear-gradient(140deg,#0f2a1b 0%,#1f5235 55%,#2E7449 100%);--glow:rgba(57,153,95,.35)}
+.b-delta{--primary:#1B7B46;--on-primary:#fff;--accent:#1B7B46;--accent-soft:#e6f2ea;--hero-bg:linear-gradient(140deg,#0f2a1b 0%,#1f5235 55%,#1B7B46 100%);--glow:rgba(57,153,95,.35)}
 
 /* ---------- Kiểu nền (A: nền xám, thẻ trắng · C: tất cả trắng, điểm xám) ---------- */
 .s-a{--page:#f1f1f3;--card:#ffffff;--well:#f4f4f6;--card-bd:transparent;--card-sh:none;--btn2:#ffffff;--tab:#ffffff;--rule:#ececf0}

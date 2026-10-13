@@ -339,17 +339,20 @@ là dữ liệu, không phải lỗi cần ghi đè.
 
 ## Bước 6 — tự kiểm trước khi trình
 
-Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một lần** ở cuối.
+Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một lần** ở cuối. Hai lớp theo
+`.claude/rules/ui-review.md`: máy đo trước, reviewer chấm sau; mỗi luật đúng một chủ.
 
-1. `figma_read layout_audit` từng artboard: tràn, bị cắt, chữ bị cắt ba chấm. Sửa hết lỗi chặn.
-2. `figma_read a11y_audit`: tương phản, vùng chạm, control thiếu tên. Các ngoại lệ đã được chấp
+**Lớp 1 — audit máy** (FAIL sửa hết trước khi sang lớp 2)
+
+1. **A1** · `figma_read layout_audit` từng artboard: tràn, bị cắt, chữ bị cắt ba chấm. Sửa hết lỗi chặn.
+2. **A2** · `figma_read a11y_audit`: tương phản, vùng chạm, control thiếu tên. Các ngoại lệ đã được chấp
    nhận trong *Accessibility* của `design.md` thì **không** tính là lỗi, nhưng liệt kê là "đã biết".
-3. Gọi skill `accessibility-review` (WCAG 2.1 AA) làm lớp kiểm thứ hai ngay sau `a11y_audit`, trước
+3. **A2** · Gọi skill `accessibility-review` (WCAG 2.1 AA) làm lớp kiểm thứ hai ngay sau `a11y_audit`, trước
    khi báo cáo: bắt thêm lỗi mà audit số liệu của Kit chưa phủ (thứ tự focus, semantic HTML/ARIA,
    khả năng dùng bằng screen reader). Ghi kết quả gộp cùng mục "đã biết" của bước 2, không tách báo cáo riêng.
-4. `figma.auditDesignSystem(artboardId)`: mục tiêu `compliance` = 1.00. Mỗi giá trị `hardcoded`
+4. **A3** · `figma.auditDesignSystem(artboardId)`: mục tiêu `compliance` = 1.00. Mỗi giá trị `hardcoded`
    thì gắn lại token. Giá trị `off-system` thì hoặc đổi sang giá trị có token, hoặc ghi vào báo cáo.
-5. Tự rà **Do's and Don'ts** của `design.md` cho từng màn, tối thiểu:
+5. **A4** · Tự rà **Do's and Don'ts** của `design.md` cho từng màn, tối thiểu:
    - (a) mỗi nhóm hành động đúng **1 nút Primary**;
    - (b) trạng thái có **chữ/icon**, không chỉ màu;
    - (c) có đủ **rỗng / đang tải / lỗi** cho mọi vùng dữ liệu (hoặc user đã bỏ, gồm chế độ Nhanh);
@@ -360,25 +363,36 @@ Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một
    - (g) **bố cục canvas**: `figma_read get_page_model` trên Section: state cách 100, nhóm cách 400,
      mỗi nhóm có title, frame chính có `screenId`, frame state/modal tên tiếng Anh, không còn
      `Frame N`, không có dấu cách đầu tên frame (`design/setup-figma.md` › *Bố cục trong Section con*).
-6. **Chip trạng thái:** mọi chip là instance `Chip trạng thái` (không tự vẽ pill); icon và chữ đúng màu
+6. **A4** · **Chip trạng thái:** mọi chip là instance `Chip trạng thái` (không tự vẽ pill); icon và chữ đúng màu
    `Status Chip/<Sắc>/Foreground` (đổi icon qua thuộc tính `Icon` xong phải gắn lại màu nét); mã nghiệp vụ
    dùng `Text/Code Small`; chip không đè tên/mã. Màn có trạng thái nghiệp vụ → chạy
    `python3 _scripts/status-chip-lint.py docs/{feature}/srs/{feature}-states.md`; FAIL thì báo trong báo
    cáo, KHÔNG tự đổi nhãn nghiệp vụ (nhãn lấy nguyên văn từ states.md).
-7. Một `figma_read screenshot` cho mỗi màn chính ở cuối, để user xem.
-8. **Usability (AI):** vẽ xong **trọn một flow** (đủ màn của flow đó theo `userflow.md` Mục 3) và
-   `userflow.md` có **Mục 3.6 Tác vụ chính** chạm flow này → gọi `@usability-reviewer` (Task) với
-   userflow + bảng `screenId · slug · nodeId` của flow (kèm artboard trạng thái). Agent đi từng tác
-   vụ theo cognitive walkthrough + rà heuristic Nielsen, chỉ trả finding, không tự sửa. `BLOCKING`
-   không đổi nghiệp vụ → sửa màn rồi gọi lại (tối đa 2 vòng); cần đổi nghiệp vụ → ghi "cần `/cr`",
-   không tự sửa. Chưa trọn flow (chế độ Nhanh, vài màn lẻ) hoặc thiếu Mục 3.6 → KHÔNG gọi, ghi rõ
-   lý do ở báo cáo (`Usability (AI): SKIPPED — …`), không in PASS.
+7. **A5** · **Luật thị giác đo được:** mỗi artboard chính → `figma_read get_design_context`
+   `{nodeId, depth: 20, detail: "full"}`, lưu JSON vào scratchpad → `python3 _scripts/visual-audit.py
+   <file.json> [...]`. `FAIL` (chữ < 12px trên mobile) → sửa. `WARN` không tự sửa — giữ nguyên văn để
+   truyền cho reviewer ở lớp 2 (luật thị giác có ngoại lệ hợp lý; reviewer quyết giữ hay chấp nhận).
+   Tỷ lệ nhận diện < 80% → đọc lại vùng con và chạy lại với `--part <vùng.json>`; vẫn thấp → ghi rõ
+   trong báo cáo, không in PASS.
+8. Một `figma_read screenshot` cho mỗi màn chính ở cuối, để user xem.
+
+**Lớp 2 — reviewer** (gọi song song trong 1 lượt Task, chỉ đọc, chỉ trả finding). Sửa theo finding
+xong → chỉ gọi lại agent có `BLOCKING`, cho màn đã sửa (tối đa 2 vòng); vẫn còn → ghi vào báo cáo.
+Cần đổi nghiệp vụ → ghi "cần `/cr`", không tự sửa.
+
 9. **Khớp đặc tả (agent):** có bảng 5 cột → gọi `@uxui-reviewer` (Task) với bảng
    `screenId · slug · nodeId` + đường dẫn file wireframe đã dùng làm nguồn (HTML: file flow + "Screen N"
-   của từng màn; ASCII: file flow + `## Screen: {slug}`) của các màn vừa vẽ/sửa. `BLOCKING` → sửa màn rồi
-   gọi lại (tối đa 2 vòng); vẫn còn → ghi vào báo cáo. Không có bảng 5 cột → `Khớp đặc tả: SKIPPED —
-   không có bảng 5 cột`, không in PASS. Chạy trước mục 8 nếu cả hai cùng chạy (sửa đặc tả trước, rồi
-   mới đi tác vụ).
+   của từng màn; ASCII: file flow + `## Screen: {slug}`) của các màn vừa vẽ/sửa. Không có bảng 5 cột →
+   `Khớp đặc tả: SKIPPED — không có bảng 5 cột`, không in PASS.
+10. **Usability (AI):** vẽ xong **trọn một flow** (đủ màn của flow đó theo `userflow.md` Mục 3) và
+   `userflow.md` có **Mục 3.6 Tác vụ chính** chạm flow này → gọi `@usability-reviewer` (Task) với
+   userflow + bảng `screenId · slug · nodeId` của flow (kèm artboard trạng thái) + các WARN `H1/H2/M1/M2`
+   của A5. Agent đi từng tác vụ theo cognitive walkthrough + rà heuristic Nielsen. Chưa trọn flow (chế độ
+   Nhanh, vài màn lẻ) hoặc thiếu Mục 3.6 → KHÔNG gọi, ghi rõ lý do ở báo cáo
+   (`Usability (AI): SKIPPED — …`), không in PASS.
+11. **Thị giác (agent):** gọi `@visual-reviewer` (Task) với bảng `screenId · slug · nodeId` + báo cáo A5
+   của từng artboard. Agent chấm thứ tự mắt đọc, phân cấp màu, 60/30/10, nhóm và nhịp, dễ đọc, vị trí
+   nút; quyết giữ/chấp nhận từng WARN A5. Luôn gọi khi lớp 1 không còn FAIL.
 
 ## Bước 7 — báo đã vẽ gì
 
@@ -389,12 +403,13 @@ Ngắn, theo mẫu:
 2.1-web · danh-sach-don   P1 · default / Empty / Loading
 2.2-web · chi-tiet-don    P7 · default / Load error
 
-Máy đã kiểm: layout 0 lỗi · a11y 0 lỗi mới (2 ngoại lệ đã biết) · DS compliance 1.00
+Máy đã kiểm: layout 0 lỗi · a11y 0 lỗi mới (2 ngoại lệ đã biết) · DS compliance 1.00 · A5 thị giác 0 FAIL / 3 WARN (nhận diện 92%)
 Bảng 5 cột (nguồn: HTML | ASCII): 2.1-web 12/12 · 2.2-web 9/9 row có trên màn | không có bảng 5 cột — vẽ từ SRS
 Đề xuất đổi so với bảng 5 cột: <liệt kê, hoặc "không">
 Object map: <n chỗ lệch bảng 5 cột (đã ghi ở Đề xuất đổi) · thẻ dùng chung: … | không có object map>
 Khớp đặc tả (@uxui-reviewer): 0 blocking / 1 warning | SKIPPED — <lý do>
 Usability (AI, chưa có người dùng thật): 3 tác vụ · 1 vượt tiêu chí bước · 0 blocking / 2 warning | SKIPPED — <lý do>
+Thị giác (@visual-reviewer): 0 blocking / 2 warning · A5 đã xét 3 (giữ 1, chấp nhận 2) | SKIPPED — <lý do>
 Prototype: 24/31 chuyển màn đã nối · 5 hệ thống tự chuyển (lỗi — mở trực tiếp frame) · 2 ngoài feature · flow: UC-xem-quy-trinh-cua-ban-ghi · Xem quy trình của một bản ghi (Web), … | SKIPPED — <lý do>
 Máy KHÔNG kiểm: <xem dưới, kèm mức ưu tiên [Cao]/[Trung]/[Thấp]>
 Chưa có chuẩn trong design.md: <liệt kê chỗ vẽ tạm, hoặc "không">
@@ -430,7 +445,8 @@ biết xử lý cái nào trước — mức chỉ là gợi ý chung, tuỳ ngh
   chưa kiểm được.
 * **[Trung] Nhãn và dữ liệu mẫu có đúng không.** "Duyệt trong 24 giờ" là một khẳng định về hệ thống; nếu
   spec ghi 48 giờ thì màn đang nói sai.
-* **[Thấp] Thẩm mỹ và thứ bậc thị giác**: đó là việc của designer khi xem ảnh chụp.
+* **[Thấp] Thẩm mỹ**: `@visual-reviewer` chấm thứ bậc thị giác (mục 11 Bước 6) bằng AI đọc ảnh + số
+  liệu A5; gu thẩm mỹ vẫn là việc của designer khi xem ảnh chụp.
 
 ## Constraints
 
@@ -464,6 +480,7 @@ Do's and Don'ts làm tiêu chí tự kiểm trước khi trình.
 
 - `../reqwise-diagram-rules.md` § 5: cổng kết nối Figma.
 - Rule workspace `.claude/rules/design-system.md`: design system là nguồn chung cho mọi skill vẽ màn.
+- Rule workspace `.claude/rules/ui-review.md`: chia việc audit máy (A1–A5) và 3 reviewer, ngưỡng A5.
 - `design/design.md`: token, mẫu bố cục, component, trạng thái, định dạng nội dung, Known Gaps.
 - `design/components.md`: chọn component theo nhu cầu, cùng Usage, Nên/Không nên và Examples của từng component (dịch từ Astryx, chia theo section).
 - `design/design-tokens.css`: cùng bộ token, dạng CSS (cho prototype/code, không dùng khi vẽ Figma).

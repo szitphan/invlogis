@@ -314,7 +314,7 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
     - Reset → xoá localStorage + về default.
     Có FAIL → tự sửa rồi chạy lại. KHÔNG có trình duyệt (Playwright không cài được) → tối thiểu `new Function(scriptBody)` check JS syntax + đọc kỹ từng hàm luồng chính bằng mắt, report ghi `Harness: SKIPPED (không có trình duyệt)` — KHÔNG in PASS. Xoá script test tạm sau verify.
 26b. **Đối chiếu với Figma (chỉ mode Figma).** Chụp từng màn của prototype bằng Playwright (`page.setViewportSize({device_w, device_h})`, mở thẳng `{file}#{slug}` — template route theo `location.hash`, `page.screenshot`) ở trạng thái mặc định, đặt cạnh `get_screenshot` của artboard chính tương ứng → đọc cả 2 ảnh, liệt kê chỗ lệch theo 4 loại: **thiếu/thừa element** · **sai thứ tự/vị trí vùng** · **sai component/biến thể** · **sai chữ**. Lệch do tài liệu thắng Figma có chủ đích (luật xung đột) → KHÔNG tính là lỗi, chỉ ghi chú. Lệch còn lại → tự sửa rồi chụp lại (tối đa 2 vòng). Report ghi rõ: **đây là so bằng mắt AI, không phải so pixel** — khoảng cách/màu lệch nhỏ có thể lọt. Không có trình duyệt → ghi `Đối chiếu Figma: SKIPPED (không có trình duyệt)`, KHÔNG in PASS.
-27. **Skip review nếu user nói "khỏi cần review, làm luôn"** — đi thẳng output. (Gate emoji + verify functional bước 26 VẪN chạy — chỉ skip vòng @uxui-reviewer.)
+27. **Skip review nếu user nói "khỏi cần review, làm luôn"** — đi thẳng output. (Gate emoji + verify functional bước 26 VẪN chạy — chỉ skip vòng @uxui-reviewer + @visual-reviewer.)
 28. **Spawn `@uxui-reviewer`** (Task) với target file vừa write + references (bảng 5 cột trong `ascii-wireframe/{flow-slug}.md` + `{feature}-wireframe-index.md`). Focus:
     - State coverage: mỗi màn có loading/empty/error/success?
     - **Functional check:** hành động có đổi state thật + render lại? Reset có sạch RAM + hash?
@@ -327,6 +327,7 @@ design.md exists: !`test -f design/design.md && echo "OK" || echo "MISSING → D
     - **Vỏ tách app:** chrome neutral không dính token app? khung device căn giữa? menu nổi bật/tắt OK?
     - Flow consistency: nav dead-end? Cross-screen drift?
     - Severity per `.claude/rules/review-format.md`.
+28a. **Spawn `@visual-reviewer`** (Task, song song với `@uxui-reviewer`) với screenshot từng màn ở trạng thái mặc định (Playwright, cách chụp như 26b) + tên màn. Không có số liệu A5 (`visual-audit.py` chỉ đọc cây node Figma) — agent mở đầu bằng "Không có số liệu A5 — chấm bằng ảnh". Không có trình duyệt → `Thị giác: SKIPPED (không có trình duyệt)`, KHÔNG in PASS. Finding đi chung luồng auto-fix bên dưới. Phân công 2 agent: `.claude/rules/ui-review.md`.
 28. **Auto-fix mặc định** (per `feedback_review_auto_run` — review auto-run + tự fix HẾT, user chỉ xem output cuối). KHÔNG hỏi user pick từng finding:
     - **BLOCKING + WARNING** → skill tự regen affected sections của HTML (giữ 1 file, verify lại: JS syntax + emoji gate + harness Playwright nếu có). Tối đa 2 vòng (fix → re-review); vòng 2 vẫn còn BLOCKING → ghi rõ điểm tồn đọng vào report.
     - **Quyết định nghiệp vụ** (cần chọn phương án UX/nghiệp vụ chưa có nguồn) → skill tự chọn phương án hợp lý + **đánh dấu 🔶 trong report cuối** để user biết chỗ đã tự quyết (user override sau nếu muốn). KHÔNG chặn tiến độ hỏi từng cái.
@@ -385,6 +386,8 @@ Reference trong `{feature}-wireframe-index.md` cột `HTML prototype` dạng `{f
 - @../figma-screen/SKILL.md (quy ước tên frame chính `{screenId}-{web|mob} · {slug}` + khớp state/modal theo nhóm ở `design/setup-figma.md` — nguồn khớp màn ở mode Figma)
 - @../../../design/ba-crosswalk.md + @../../../design/components.md (tên component Figma → loại control, mode Figma)
 - @../../agents/uxui-reviewer.md (post-write UX review)
+- @../../agents/visual-reviewer.md (post-write thị giác)
+- @../../rules/ui-review.md (chia việc audit máy / reviewer)
 - @../../rules/review-format.md (severity rubric)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 

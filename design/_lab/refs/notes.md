@@ -362,3 +362,18 @@ Nguồn: repo `facebook/astryx`, nhánh main, đọc 12/10/2026.
 - 12/10 (tiếp 2): chip tối = phương án B (biến `Status Chip/*` mode Neutral Dark) · thư viện icon Figma nét 1.333 → 1.2 (1.694 vector), bộ `Icon` nét theo cỡ 0.9/1.2/1.5/1.8 · 227 icon tự vẽ ở section Sandbox → instance `icon/<lucide>` (map: panel→panel-left, dash→layout-dashboard, board→square-kanban, brief→briefcase, alert→triangle-alert, train→tram-front, cal→calendar, chart→chart-column, down/right/left→chevron-*, export→upload, arrowr→arrow-right, refresh→refresh-cw, more→ellipsis, filter→list-filter) · icon Nhóm = `rows-3` · 82 IconButton 30 → 32 · mobile "n kết quả" thành dòng riêng căn trái trên danh sách thẻ · dấu cộng nút Lập Lệnh (3 frame) gắn lại `Core/On Accent` (trước gắn Icon/Primary trùng nền đen).
 - a11y còn: số đếm tab 4.2:1 (cần 4.5) · nhãn nhóm menu #8F8F8F 3.23:1 (giữ theo user chốt 12/10).
 - Còn: thẻ số 2a chờ chốt (8 số lớn chưa gắn style) · frame còn ghi "Cơ sở Hải Phòng" (Delta không có chi nhánh HP).
+
+## Màu nhấn (13/10/2026, `lab-accent-color.html`) — chốt giữ than chì
+
+User muốn cân nhắc đổi màu nhấn thay than chì #262626 (lật quyết định 12/10 "bộ màu không đổi theo khách"). 7 ứng viên trên màn danh sách Lệnh vận tải (Theo DS), tô đúng chỗ design.md dùng `{colors.accent}`: nút chính, menu đang chọn, gạch tab, checkbox, viền ô đang nhập, trang hiện tại, link, thanh tiến độ.
+
+| Hướng | Màu | Chữ trắng trên nền | Rủi ro |
+|---|---|---|---|
+| Mốc | Than chì #262626 | 15.1:1 | Không đụng chip |
+| Mực có sắc nhẹ | Xanh đá #1E293B · Navy #1E3A8A | 14.6 · 10.4 | Navy còn phân biệt chip "Đã giao" nhờ độ đậm |
+| Sắc đậm cố định | Chàm #4338CA · Xanh dương #1F5BD6 | 7.9 · 6.0 | Trùng độ sáng chip tím (Đang thực hiện) / xanh dương (Đã giao) — phải đổi sắc chip |
+| Theo khách | Delta #1B7B46 (màu chốt 13/10) · Innvie #0036B5 | 5.3 · 9.6 | Delta gần như trùng chữ chip "Đã duyệt" (#1b7542, chênh sáng 1.08) — xanh lá = nghĩa "đã duyệt"; cần tham số `P-mau-nhan` + luật chặn màu trùng nghĩa trạng thái |
+
+Chốt xong → đề xuất sửa design.md (Colors, Đã quyết định › Thương hiệu theo khách), `design-tokens.css`, biến Figma `Core/Accent`, và (nếu theo khách) `docs/_product/tenant-parameters.md` — qua L2.
+
+**Chốt 13/10/2026 (user):** giữ màu nhấn hiện tại than chì `#262626`, chưa đổi sang brand khách Delta. Quyết định 12/10 giữ nguyên: màu khách (`P-mau-logo`, Delta #1B7B46) chỉ tô ô logo; design.md, token, Figma không đổi.

@@ -58,10 +58,14 @@ When reviewing, agent reads:
 | Product Owner | `po-reviewer` | 4 | Business value, scope creep, prioritization |
 | Product Manager | `pm-reviewer` | 4 | Cross-feature consistency, dependencies, timeline |
 | UI/UX | `uxui-reviewer` | 4 | Screen flows, states (loading/empty/error), consistency |
+| Usability | `usability-reviewer` | — | Đi tác vụ (cognitive walkthrough), Nielsen, Jakob, Hick/Miller mức tác vụ |
+| Visual | `visual-reviewer` | — | Phân cấp thị giác, màu 60/30/10, proximity + nhịp, dễ đọc, Fitts vị trí |
 | QA | `qa-reviewer` | 4 | AC testability, missing test cases, coverage |
 | Tech | `tech-reviewer` | 4 | Feasibility, performance, security implications |
 | Change Tracker | `change-tracker` | 6 | Impact analysis cho /cr |
 | Gap Analyst | `gap-analyst` | 6 | Traceability, orphaned reqs, stale chain |
+
+3 reviewer màn (`uxui` / `usability` / `visual`) chia việc với audit máy theo `.claude/rules/ui-review.md` — mỗi luật một chủ.
 
 ## Path conventions (placeholder resolution)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 

@@ -1,0 +1,147 @@
+{
+ "tree": {
+  "id": "root",
+  "name": "98-web · fixture-pass",
+  "type": "FRAME",
+  "x": 0,
+  "y": 0,
+  "w": 1440,
+  "h": 900,
+  "fill": "#ffffff",
+  "layoutMode": "VERTICAL",
+  "itemSpacing": 24,
+  "children": [
+   {
+    "id": "Tiêu đề",
+    "name": "Tiêu đề",
+    "type": "TEXT",
+    "x": 24,
+    "y": 0,
+    "w": 200,
+    "h": 20,
+    "fontSize": 24,
+    "characters": "x",
+    "fill": "#171717"
+   },
+   {
+    "id": "Nội dung",
+    "name": "Nội dung",
+    "type": "TEXT",
+    "x": 24,
+    "y": 40,
+    "w": 200,
+    "h": 20,
+    "fontSize": 14,
+    "characters": "x",
+    "fill": "#171717"
+   },
+   {
+    "id": "Phụ",
+    "name": "Phụ",
+    "type": "TEXT",
+    "x": 24,
+    "y": 64,
+    "w": 200,
+    "h": 20,
+    "fontSize": 12,
+    "characters": "x",
+    "fill": "#171717"
+   },
+   {
+    "id": "acts",
+    "name": "Hành động",
+    "type": "FRAME",
+    "x": 24,
+    "y": 20,
+    "w": 400,
+    "h": 32,
+    "layoutMode": "HORIZONTAL",
+    "itemSpacing": 8,
+    "children": [
+     {
+      "id": "Huỷ",
+      "name": "Huỷ",
+      "type": "INSTANCE",
+      "x": 0,
+      "y": 0,
+      "w": 80,
+      "h": 32,
+      "fill": "#ffffff",
+      "componentProperties": {
+       "Label#1": "Huỷ",
+       "Variant": "Secondary",
+       "Size": "LG"
+      }
+     },
+     {
+      "id": "Lưu",
+      "name": "Lưu",
+      "type": "INSTANCE",
+      "x": 88,
+      "y": 0,
+      "w": 80,
+      "h": 32,
+      "fill": "#262626",
+      "componentProperties": {
+       "Label#1": "Lưu",
+       "Variant": "Primary",
+       "Size": "LG"
+      }
+     }
+    ]
+   },
+   {
+    "id": "form",
+    "name": "Form",
+    "type": "FRAME",
+    "x": 24,
+    "y": 80,
+    "w": 752,
+    "h": 300,
+    "layoutMode": "VERTICAL",
+    "itemSpacing": 32,
+    "children": [
+     {
+      "id": "g1",
+      "name": "Nhóm 1",
+      "type": "FRAME",
+      "x": 0,
+      "y": 0,
+      "w": 752,
+      "h": 120,
+      "layoutMode": "VERTICAL",
+      "itemSpacing": 16,
+      "children": [
+       {
+        "id": "f1",
+        "name": "Field 1",
+        "type": "INSTANCE",
+        "x": 16,
+        "y": 0,
+        "w": 361,
+        "h": 44,
+        "componentProperties": {
+         "placeholder": "…",
+         "showLabel": true
+        }
+       },
+       {
+        "id": "f2",
+        "name": "Field 2",
+        "type": "INSTANCE",
+        "x": 16,
+        "y": 60,
+        "w": 361,
+        "h": 44,
+        "componentProperties": {
+         "placeholder": "…",
+         "showLabel": true
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

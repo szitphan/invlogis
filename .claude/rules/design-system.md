@@ -12,12 +12,13 @@ paths:
   - ".claude/skills/srs/**"
   - ".claude/agents/uxui-reviewer.md"
   - ".claude/agents/usability-reviewer.md"
+  - ".claude/agents/visual-reviewer.md"
 ---
 
 # Design System — nguồn thiết kế chung cho skill sinh giao diện
 
 > Rule chung cho MỌI skill vẽ hoặc review màn hình (`/srs` phần UX, `/user-flow`, `/wireframe-ascii`,
-> `/wireframe-html`, `/prototype-html`, `/figma-*` (gồm `/figma-component`), agent `uxui-reviewer`). Mỗi skill đã nối MUST
+> `/wireframe-html`, `/prototype-html`, `/figma-*` (gồm `/figma-component`), agent `uxui-reviewer`, `usability-reviewer`, `visual-reviewer`). Mỗi skill đã nối MUST
 > reference file này trong Constraints + References.
 
 ## Nguồn duy nhất
@@ -65,6 +66,7 @@ paths:
 | `/figma-screen` (và `/figma-*` vẽ màn) | Layout (toàn bộ: Spacing, Grid & Container, Mẫu bố cục P/M, Whitespace); phần đầu *Components* tới hết quy ước "Web và Mobile" + mục `###` của nhóm component sẽ dùng; *Phân trang danh sách* nếu màn có danh sách; trong *Components - <dự án>*: *Quy ước chung* + spec của component dự án có trên màn; States; Content & Formatting; Accessibility (ngoại lệ đã chấp nhận, cho a11y_audit); Responsive Behavior. Overview / Colors / Typography Hierarchy / Elevation / Shapes không cần đọc: token gắn theo tên (§ Tên trong Figma) | — |
 | `/figma-component` | Trong *Components - <dự án>*: mục *Quy ước chung của component dự án* + spec đang dựng (spec khác chỉ đọc khi quy ước dẫn tới hoặc cần làm mẫu khuôn); phần đầu *Components* tới hết quy ước "Web và Mobile"; States; Content & Formatting; Accessibility; Responsive Behavior; *Phân trang danh sách* nếu component có danh sách; Layout khi đề xuất bố cục ví dụ *Trong ngữ cảnh*. Colors / Typography Hierarchy / Elevation / Shapes không cần đọc: giá trị gắn qua biến và style Figma theo tên | — |
 | `uxui-reviewer` | States, Components, Accessibility, Do's and Don'ts — làm tiêu chí review | — |
+| `visual-reviewer` | Overview (đoạn đầu Colors), Typography › Hierarchy, Layout › Spacing System + Whitespace Philosophy + Mẫu bố cục M, Components › Feedback & Status, Do's and Don'ts — làm tiêu chí chấm thị giác | Token gắn đúng hay không (việc của audit máy) |
 
 ## Luật khi sinh màn
 

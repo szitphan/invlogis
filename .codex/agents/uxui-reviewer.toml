@@ -63,6 +63,9 @@ developer_instructions = '''
 - AC testability → `@qa-reviewer`
 - Implementation feasibility → `@tech-reviewer`
 - Business value → `@po-reviewer`
+- Phân cấp thị giác, màu, nhịp khoảng cách, dễ đọc → `@visual-reviewer`
+- Làm xong tác vụ, heuristic Nielsen, số bước → `@usability-reviewer`
+- Đo được bằng số (tương phản, vùng chạm, token, luật thị giác A5) → audit máy lớp 1 (`.claude/rules/ui-review.md`)
 
 ## Output format
 
@@ -81,6 +84,7 @@ Per [review-format.md](../../.claude/rules/review-format.md).
 - Wireframe (block `## Screen: {slug}` trong `docs/{feature}/ascii-wireframe/{flow-slug}.md`, sub-section Wireframe ASCII)
 - @docs/{feature}/srs/{feature}-spec.md Mục 5 Error Matrix (verify error states link tới error codes)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 - @.claude/rules/design-system.md (nếu dự án đã cài kit design system)
+- @.claude/rules/ui-review.md (chia việc giữa audit máy và 3 reviewer)
 - @design/design.md: các mục States, Components, Accessibility, Do's and Don'ts làm tiêu chí review (đọc theo mục, đúng cách rule quy định). Thiếu design.md thì review theo tiêu chí lo-fi và ghi 1 dòng \"chưa áp design system\".
 
 

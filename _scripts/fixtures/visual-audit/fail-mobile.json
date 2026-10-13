@@ -1,0 +1,552 @@
+{
+ "tree": {
+  "id": "root",
+  "name": "99-mob · fixture-fail",
+  "type": "FRAME",
+  "x": 0,
+  "y": 0,
+  "w": 393,
+  "h": 852,
+  "fill": "#ffffff",
+  "children": [
+   {
+    "id": "dev",
+    "name": "Device / Frame",
+    "type": "INSTANCE",
+    "x": 0,
+    "y": 0,
+    "w": 393,
+    "h": 852,
+    "fill": "#f1f1f1",
+    "mainComponent": {
+     "name": "Device / Frame"
+    },
+    "children": [
+     {
+      "id": "slot",
+      "name": "Content",
+      "type": "SLOT",
+      "x": 0,
+      "y": 0,
+      "w": 393,
+      "h": 852,
+      "layoutMode": "VERTICAL",
+      "itemSpacing": 16,
+      "padding": {
+       "l": 0,
+       "r": 0,
+       "t": 0,
+       "b": 0
+      },
+      "children": [
+       {
+        "id": "body",
+        "name": "Thân màn",
+        "type": "FRAME",
+        "x": 0,
+        "y": 0,
+        "w": 393,
+        "h": 852,
+        "layoutMode": "VERTICAL",
+        "itemSpacing": 8,
+        "padding": {
+         "l": 16,
+         "r": 16,
+         "t": 16,
+         "b": 16
+        },
+        "fill": "#ffffff",
+        "children": [
+         {
+          "id": "Tiêu đề",
+          "name": "Tiêu đề",
+          "type": "TEXT",
+          "x": 16,
+          "y": 16,
+          "w": 200,
+          "h": 20,
+          "fontSize": 24,
+          "characters": "x",
+          "fill": "#171717"
+         },
+         {
+          "id": "Phụ đề",
+          "name": "Phụ đề",
+          "type": "TEXT",
+          "x": 16,
+          "y": 44,
+          "w": 200,
+          "h": 20,
+          "fontSize": 17,
+          "characters": "x",
+          "fill": "#171717"
+         },
+         {
+          "id": "Ghi chú nhỏ",
+          "name": "Ghi chú nhỏ",
+          "type": "TEXT",
+          "x": 16,
+          "y": 70,
+          "w": 200,
+          "h": 20,
+          "fontSize": 10,
+          "characters": "x",
+          "fill": "#171717"
+         },
+         {
+          "id": "Đoạn dài",
+          "name": "Đoạn dài",
+          "type": "TEXT",
+          "x": 16,
+          "y": 90,
+          "w": 900,
+          "h": 60,
+          "fontSize": 15,
+          "characters": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "fill": "#171717"
+         },
+         {
+          "id": "tb",
+          "name": "Thanh hành động",
+          "type": "FRAME",
+          "x": 0,
+          "y": 60,
+          "w": 393,
+          "h": 44,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 4,
+          "children": [
+           {
+            "id": "Lưu",
+            "name": "Lưu",
+            "type": "INSTANCE",
+            "x": 0,
+            "y": 0,
+            "w": 60,
+            "h": 32,
+            "fill": "#262626",
+            "componentProperties": {
+             "Label#1": "Lưu",
+             "Variant": "Primary",
+             "Size": "LG"
+            }
+           },
+           {
+            "id": "Xoá",
+            "name": "Xoá",
+            "type": "INSTANCE",
+            "x": 64,
+            "y": 0,
+            "w": 60,
+            "h": 44,
+            "fill": "#ffffff",
+            "componentProperties": {
+             "Label#1": "Xoá",
+             "Variant": "Destructive",
+             "Size": "LG"
+            }
+           },
+           {
+            "id": "Phụ 0",
+            "name": "Phụ 0",
+            "type": "INSTANCE",
+            "x": 128,
+            "y": 0,
+            "w": 36,
+            "h": 44,
+            "fill": "#ffffff",
+            "componentProperties": {
+             "Label#1": "Phụ 0",
+             "Variant": "Secondary",
+             "Size": "LG"
+            }
+           },
+           {
+            "id": "Phụ 1",
+            "name": "Phụ 1",
+            "type": "INSTANCE",
+            "x": 168,
+            "y": 0,
+            "w": 36,
+            "h": 44,
+            "fill": "#ffffff",
+            "componentProperties": {
+             "Label#1": "Phụ 1",
+             "Variant": "Secondary",
+             "Size": "LG"
+            }
+           },
+           {
+            "id": "Phụ 2",
+            "name": "Phụ 2",
+            "type": "INSTANCE",
+            "x": 208,
+            "y": 0,
+            "w": 36,
+            "h": 44,
+            "fill": "#ffffff",
+            "componentProperties": {
+             "Label#1": "Phụ 2",
+             "Variant": "Secondary",
+             "Size": "LG"
+            }
+           },
+           {
+            "id": "Phụ 3",
+            "name": "Phụ 3",
+            "type": "INSTANCE",
+            "x": 248,
+            "y": 0,
+            "w": 36,
+            "h": 44,
+            "fill": "#ffffff",
+            "componentProperties": {
+             "Label#1": "Phụ 3",
+             "Variant": "Secondary",
+             "Size": "LG"
+            }
+           }
+          ]
+         },
+         {
+          "id": "bn",
+          "name": "Banner nhấn",
+          "type": "RECTANGLE",
+          "x": 0,
+          "y": 110,
+          "w": 393,
+          "h": 240,
+          "fill": "#1f4fb8"
+         },
+         {
+          "id": "form",
+          "name": "Form",
+          "type": "FRAME",
+          "x": 0,
+          "y": 200,
+          "w": 393,
+          "h": 420,
+          "layoutMode": "VERTICAL",
+          "itemSpacing": 8,
+          "padding": {
+           "l": 16,
+           "r": 16,
+           "t": 12,
+           "b": 12
+          },
+          "children": [
+           {
+            "id": "f0",
+            "name": "Field 0",
+            "type": "INSTANCE",
+            "x": 16,
+            "y": 0,
+            "w": 361,
+            "h": 44,
+            "componentProperties": {
+             "placeholder": "…",
+             "showLabel": true
+            }
+           },
+           {
+            "id": "f1",
+            "name": "Field 1",
+            "type": "INSTANCE",
+            "x": 16,
+            "y": 52,
+            "w": 361,
+            "h": 44,
+            "componentProperties": {
+             "placeholder": "…",
+             "showLabel": true
+            }
+           },
+           {
+            "id": "f2",
+            "name": "Field 2",
+            "type": "INSTANCE",
+            "x": 16,
+            "y": 104,
+            "w": 361,
+            "h": 44,
+            "componentProperties": {
+             "placeholder": "…",
+             "showLabel": true
+            }
+           },
+           {
+            "id": "f3",
+            "name": "Field 3",
+            "type": "INSTANCE",
+            "x": 16,
+            "y": 156,
+            "w": 361,
+            "h": 44,
+            "componentProperties": {
+             "placeholder": "…",
+             "showLabel": true
+            }
+           },
+           {
+            "id": "f4",
+            "name": "Field 4",
+            "type": "INSTANCE",
+            "x": 16,
+            "y": 208,
+            "w": 361,
+            "h": 44,
+            "componentProperties": {
+             "placeholder": "…",
+             "showLabel": true
+            }
+           },
+           {
+            "id": "f5",
+            "name": "Field 5",
+            "type": "INSTANCE",
+            "x": 16,
+            "y": 260,
+            "w": 361,
+            "h": 44,
+            "componentProperties": {
+             "placeholder": "…",
+             "showLabel": true
+            }
+           },
+           {
+            "id": "f6",
+            "name": "Field 6",
+            "type": "INSTANCE",
+            "x": 16,
+            "y": 312,
+            "w": 361,
+            "h": 44,
+            "componentProperties": {
+             "placeholder": "…",
+             "showLabel": true
+            }
+           },
+           {
+            "id": "f7",
+            "name": "Field 7",
+            "type": "INSTANCE",
+            "x": 16,
+            "y": 364,
+            "w": 361,
+            "h": 44,
+            "componentProperties": {
+             "placeholder": "…",
+             "showLabel": true
+            }
+           }
+          ]
+         },
+         {
+          "id": "grp",
+          "name": "Nhóm lỏng",
+          "type": "FRAME",
+          "x": 0,
+          "y": 630,
+          "w": 393,
+          "h": 60,
+          "layoutMode": "VERTICAL",
+          "itemSpacing": 8,
+          "padding": {
+           "l": 0,
+           "r": 0,
+           "t": 0,
+           "b": 0
+          },
+          "children": [
+           {
+            "id": "a",
+            "name": "a",
+            "type": "TEXT",
+            "x": 0,
+            "y": 0,
+            "w": 200,
+            "h": 20,
+            "fontSize": 14,
+            "characters": "x",
+            "fill": "#171717"
+           },
+           {
+            "id": "b",
+            "name": "b",
+            "type": "TEXT",
+            "x": 0,
+            "y": 28,
+            "w": 200,
+            "h": 20,
+            "fontSize": 14,
+            "characters": "x",
+            "fill": "#171717"
+           }
+          ]
+         },
+         {
+          "id": "d0",
+          "name": "Trang trí 0",
+          "type": "RECTANGLE",
+          "x": 0,
+          "y": 700,
+          "w": 20,
+          "h": 20,
+          "fill": "#e11d48"
+         },
+         {
+          "id": "d1",
+          "name": "Trang trí 1",
+          "type": "RECTANGLE",
+          "x": 20,
+          "y": 700,
+          "w": 20,
+          "h": 20,
+          "fill": "#16a34a"
+         },
+         {
+          "id": "d2",
+          "name": "Trang trí 2",
+          "type": "RECTANGLE",
+          "x": 40,
+          "y": 700,
+          "w": 20,
+          "h": 20,
+          "fill": "#f59e0b"
+         },
+         {
+          "id": "d3",
+          "name": "Trang trí 3",
+          "type": "RECTANGLE",
+          "x": 60,
+          "y": 700,
+          "w": 20,
+          "h": 20,
+          "fill": "#7c3aed"
+         },
+         {
+          "id": "tabs",
+          "name": "Tabs",
+          "type": "FRAME",
+          "x": 0,
+          "y": 760,
+          "w": 393,
+          "h": 40,
+          "layoutMode": "HORIZONTAL",
+          "itemSpacing": 0,
+          "children": [
+           {
+            "id": "t0",
+            "name": "Tab item 0",
+            "type": "INSTANCE",
+            "x": 0,
+            "y": 0,
+            "w": 48,
+            "h": 40,
+            "componentProperties": {
+             "Label#1": "T0",
+             "State": "Rest"
+            }
+           },
+           {
+            "id": "t1",
+            "name": "Tab item 1",
+            "type": "INSTANCE",
+            "x": 48,
+            "y": 0,
+            "w": 48,
+            "h": 40,
+            "componentProperties": {
+             "Label#1": "T1",
+             "State": "Rest"
+            }
+           },
+           {
+            "id": "t2",
+            "name": "Tab item 2",
+            "type": "INSTANCE",
+            "x": 96,
+            "y": 0,
+            "w": 48,
+            "h": 40,
+            "componentProperties": {
+             "Label#1": "T2",
+             "State": "Rest"
+            }
+           },
+           {
+            "id": "t3",
+            "name": "Tab item 3",
+            "type": "INSTANCE",
+            "x": 144,
+            "y": 0,
+            "w": 48,
+            "h": 40,
+            "componentProperties": {
+             "Label#1": "T3",
+             "State": "Rest"
+            }
+           },
+           {
+            "id": "t4",
+            "name": "Tab item 4",
+            "type": "INSTANCE",
+            "x": 192,
+            "y": 0,
+            "w": 48,
+            "h": 40,
+            "componentProperties": {
+             "Label#1": "T4",
+             "State": "Rest"
+            }
+           },
+           {
+            "id": "t5",
+            "name": "Tab item 5",
+            "type": "INSTANCE",
+            "x": 240,
+            "y": 0,
+            "w": 48,
+            "h": 40,
+            "componentProperties": {
+             "Label#1": "T5",
+             "State": "Rest"
+            }
+           },
+           {
+            "id": "t6",
+            "name": "Tab item 6",
+            "type": "INSTANCE",
+            "x": 288,
+            "y": 0,
+            "w": 48,
+            "h": 40,
+            "componentProperties": {
+             "Label#1": "T6",
+             "State": "Rest"
+            }
+           },
+           {
+            "id": "t7",
+            "name": "Tab item 7",
+            "type": "INSTANCE",
+            "x": 336,
+            "y": 0,
+            "w": 48,
+            "h": 40,
+            "componentProperties": {
+             "Label#1": "T7",
+             "State": "Rest"
+            }
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}
