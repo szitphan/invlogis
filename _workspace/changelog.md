@@ -136,3 +136,4 @@
 | 2026-10-13 | manual | szitphan | `design/design.md` | manual edit |
 | 2026-10-13 | manual | szitphan | `design/ui-common/screen-patterns.md` | manual edit |
 | 2026-10-13 | manual | szitphan | `docs/cross-process-flow/html-wireframe/cross-process-flow-wireframe-html-index.md` | manual edit |
+| 2026-10-13 | manual | szitphan | `design/setup-figma.md` | manual edit |

@@ -135,7 +135,9 @@ coi là thiếu ở mục tự kiểm (c).
   chọn đề xuất đặt đầu, gắn "(Đề xuất, theo {nguồn})".
 * Chọn thiết bị mà `design.md` chưa có chuẩn (Known Gaps) → nói rõ trước khi vẽ: vẽ tạm và ghi
   "chưa có chuẩn trong design.md".
-* Thiết bị đã chốt → cố định `frameW`/`frameH` cho mọi artboard, không dùng số của thiết bị khác.
+* Thiết bị đã chốt → cố định `frameW` cho mọi artboard, không dùng số của thiết bị khác. `frameH`
+  theo nội dung, tối thiểu bằng chiều cao thiết bị; riêng nhóm responsive cao cố định
+  (`design/setup-figma.md` › *Bố cục trong Section con*).
 * Userflow chưa ghi `primary_device` → gợi ý ghi vào để lần sau không hỏi lại.
 
 ### 2.3 Câu hỏi riêng của skill này (chỉ hỏi khi cần)
@@ -176,9 +178,9 @@ Chế độ Đầy đủ:
 
 ```
 Em sẽ vẽ "Quản lý đơn hàng" theo 1 luồng, tổng 2 màn + 3 trạng thái:
-Luồng 1 — Duyệt đơn (hàng 1):
-  2.1-web · danh-sach-don (có dữ liệu) → · rỗng → · đang tải
-  2.2-web · chi-tiet-don (bình thường) → · lỗi tải
+Luồng 1 — Duyệt đơn (mỗi màn một nhóm, state xếp dọc):
+  2.1-web · danh-sach-don (có dữ liệu) ↓ Empty ↓ Loading
+  2.2-web · chi-tiet-don (bình thường) ↓ Load error
 Lỗi đại diện: 2.2-web banner lỗi tải; ghi chú liệt kê các lỗi còn lại cùng kiểu banner
 Trạng thái nghiệp vụ → nhóm: Nháp→Neutral · Chờ duyệt→Warning · Đã duyệt→Success · Từ chối→Error
 Khung: Desktop 1920×1080
@@ -240,8 +242,11 @@ Thứ tự dựng:
    một token nguyên vẹn, ví dụ `"3.1-web · danh-sach-chuyen"`, để userflow nối được (`linkScreens`).
    Desktop, Tablet, Responsive dùng `-web`; Mobile 375 dùng `-mob`. `screenId` trong userflow phải
    ghi đủ hậu tố (`3.1-web`), vì ghi `3.1` sẽ khớp nhầm cả `3.1-mob` lẫn `3.10-web`.
-   Nền dùng token nền trang của `design.md`. Các trạng thái của cùng màn đặt **cạnh nhau trên một hàng**, tên có hậu tố
-   `· rỗng`, `· đang tải`, `· lỗi`.
+   Nền dùng token nền trang của `design.md`. Đặt frame theo *Bố cục trong Section con* của
+   `design/setup-figma.md`: mỗi màn một nhóm có thanh title; state xếp dọc dưới frame chính cách
+   100px; modal bên phải màn mở ra nó; các nhóm cách nhau 400px. Frame state và modal đặt **tên ngắn
+   tiếng Anh** (`Empty`, `Loading`, `Error`), không lặp `screenId`. Vẽ xong mà frame cao thêm thì canh
+   lại khoảng cách cả cột.
 2. **Khung trang**: dựng đúng cấu trúc của mẫu S/P đã chọn (vùng, thứ tự, cột, rail), bằng
    `children: [...]` trong một lần `create`. Frame bố cục dùng auto-layout, gap bằng `itemSpacing`
    gắn token spacing, không dùng spacer.
@@ -257,6 +262,8 @@ Thứ tự dựng:
    bảng *Ánh xạ trạng thái nghiệp vụ*. Dữ liệu mẫu: 5–8 hàng, giá trị đa dạng, có một giá trị dài
    để thử tràn chữ.
 6. **Lớp phủ**: dialog/drawer dùng `figma.overlay({...})` cho scrim, **không** dùng frame bán trong suốt.
+   Dialog/drawer vẽ trên **frame riêng bên phải màn mở ra nó** (cả màn + lớp phủ + modal), tên tiếng
+   Anh theo việc (`Approve order`). Dropdown, popover, menu vẽ ngay trong frame màn.
 7. Đặt tên layer theo **việc nó làm** ("Nút duyệt đơn", "Ô tìm đơn hàng"), không để "Frame 12".
    `a11y_audit` dựa vào tên layer để nhận diện control.
 8. **Bám bảng 5 cột** (khi có — Bước 1.3). Bảng là hợp đồng, không phải gợi ý:
@@ -300,7 +307,10 @@ Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một
    - (d) form **không trải hết bề rộng** desktop;
    - (e) mỗi component đã dùng không vi phạm dòng **Không nên** nào của nó trong `design/components.md`;
    - (f) **phủ bảng 5 cột**: đếm row có element tương ứng trên màn (theo tên layer, mục 7 Bước 4) —
-     phải N/N; thiếu thì vẽ bổ sung hoặc ghi lý do.
+     phải N/N; thiếu thì vẽ bổ sung hoặc ghi lý do;
+   - (g) **bố cục canvas**: `figma_read get_page_model` trên Section: state cách 100, nhóm cách 400,
+     mỗi nhóm có title, frame chính có `screenId`, frame state/modal tên tiếng Anh, không còn
+     `Frame N`, không có dấu cách đầu tên frame (`design/setup-figma.md` › *Bố cục trong Section con*).
 6. **Chip trạng thái:** mọi chip là instance `Chip trạng thái` (không tự vẽ pill); icon và chữ đúng màu
    `Status Chip/<Sắc>/Foreground` (đổi icon qua thuộc tính `Icon` xong phải gắn lại màu nét); mã nghiệp vụ
    dùng `Text/Code Small`; chip không đè tên/mã. Màn có trạng thái nghiệp vụ → chạy
@@ -327,8 +337,8 @@ Ngắn, theo mẫu:
 
 ```
 Đã vẽ: "02 · Đơn hàng" › F01 · Duyệt đơn › Web (file <tên>):
-2.1-web · danh-sach-don   P1 · có dữ liệu / rỗng / đang tải
-2.2-web · chi-tiet-don    P7 · bình thường / lỗi tải
+2.1-web · danh-sach-don   P1 · default / Empty / Loading
+2.2-web · chi-tiet-don    P7 · default / Load error
 
 Máy đã kiểm: layout 0 lỗi · a11y 0 lỗi mới (2 ngoại lệ đã biết) · DS compliance 1.00
 Bảng 5 cột (nguồn: HTML | ASCII): 2.1-web 12/12 · 2.2-web 9/9 row có trên màn | không có bảng 5 cột — vẽ từ SRS

@@ -126,9 +126,39 @@ Cách A không có nhóm DESIGN SYSTEMS trong file dự án: các trang đó n�
 **Bên trong một trang module:**
 * Mỗi feature là một Section `Fxx · <tên feature>`, ví dụ `F01 · Lập kế hoạch chuyến`.
 * Trong feature có hai Section con `Web` và `Mobile` (chỉ tạo phần có màn).
-* Mỗi màn một hàng; các trạng thái của màn xếp ngang trên hàng đó.
 * Trạng thái feature: tiền tố tên Section `🚧` (đang làm), `👀` (chờ duyệt); đã chốt thì bấm
   **Ready for dev** (Dev Mode). Sửa sau khi đã Ready, Figma tự đổi sang *Changed*.
+
+**Bố cục trong Section con:**
+* Mỗi màn là một **nhóm**, có thanh title rộng bằng cả nhóm, ghi `<screenId> · <slug> — States`.
+  Thanh title là text/rectangle, **không phải frame**, để `linkScreens` không khớp nhầm. Nhóm
+  responsive riêng có title `<screenId> · <slug> — Responsive`.
+* State của màn xếp **dọc** dưới frame chính, cách nhau 100px. State vẽ ở 1920, cao theo nội dung;
+  sửa nội dung xong thì canh lại khoảng cách cả cột, không để frame dính nhau hoặc cách lung tung.
+* Modal (dialog, confirm, form nhỏ) đặt **bên phải màn mở ra nó**, cách 100px. Frame modal là cả màn
+  có lớp phủ tối và modal ở trên. Nhiều modal nối tiếp sang phải; state của modal xếp dọc dưới modal.
+* Dropdown, popover, menu bám vào một phần tử nằm **bên trong** frame màn, không tách ra ngoài.
+* Nhóm responsive: 1920 và 1440 xếp ngang cách 100px, cùng cao cố định 1080, chỉ vẽ cho state mặc
+  định. Mobile 393 nằm ở Section con `Mobile`.
+
+| Thành phần | Vị trí |
+|---|---|
+| Nhóm đầu tiên | cách mép trái section 200px |
+| Title của nhóm | cách mép trên section 200px |
+| Frame đầu tiên của nhóm | cách mép trên section 352px (ngay dưới title) |
+| Frame kế tiếp cùng hàng (modal, breakpoint) | cách frame trước 100px |
+| Frame kế tiếp trong cột (state) | cách frame trên 100px |
+| Nhóm kế tiếp | cách mép phải nhóm trước **400px** |
+
+**Tên frame:**
+* Frame chính (đầu cột, state mặc định): `<screenId> · <slug>`, ví dụ `3.1-web · danh-sach-chuyen`.
+* Frame state và modal: tên ngắn **tiếng Anh**, viết hoa chữ đầu, 2–3 từ, nói đúng nó là gì:
+  `Empty`, `Loading`, `Error`, `Read-only`, `Approve order`. Không lặp `screenId`.
+* Không để `Frame 123`, `state 2`; không có dấu cách thừa đầu tên frame (tên trang module vẫn cố ý thụt).
+* **Frame thuộc màn nào:** theo nhóm. Frame không có `screenId` thuộc frame chính của nhóm chứa nó;
+  cùng cột với frame chính là state, bên phải là modal (cột dưới modal là state của modal). Skill đọc
+  frame (`/prototype-html`, `@usability-reviewer`) khớp theo luật này. Frame cũ còn hậu tố
+  `· rỗng` / `· đang tải` / `· lỗi` vẫn được nhận là state của `screenId` đó.
 
 **Mã màn:** `<số>-web` hoặc `<số>-mob`, ví dụ `3.1-web · danh-sach-chuyen`, `3.1-mob · danh-sach-chuyen`.
 Desktop, Tablet, Responsive dùng `-web`; Mobile 375 dùng `-mob`. Userflow nối màn theo **tên chứa**

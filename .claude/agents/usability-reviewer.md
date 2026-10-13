@@ -29,7 +29,7 @@ Mở đầu output bằng đúng 1 dòng: `Đánh giá bằng AI — chưa có n
 
 * `docs/{feature}/srs/{feature}-userflow.md` — **Mục 3.6 Tác vụ chính** (danh sách tác vụ, vai trò,
   tần suất, đường đi, số bước, tiêu chí) + **Mục 3.5** (chuyển màn) + Mục 2 (danh sách màn).
-* Bảng artboard của flow: `screenId · slug · nodeId` (+ artboard trạng thái `· rỗng`/`· lỗi`/…).
+* Bảng artboard của flow: `screenId · slug · nodeId` (+ frame state/modal cùng nhóm: `Empty`, `Error`, `Approve order`…, kèm nodeId).
 * `docs/_shared/project-profile.md` mục người dùng (để nhập vai đúng: điều phối viên, tài xế, khách…).
 * `design/design.md` mục *Do's and Don'ts* + *States* + *Content & Formatting* (làm chuẩn so).
 
@@ -54,7 +54,7 @@ Thiếu Mục 3.6 → KHÔNG tự bịa tác vụ. Trả 1 finding `BLOCKING` "C
    * **Q4 — Làm xong có biết là đã đúng không?** Có phản hồi (toast, đổi trạng thái, chuyển màn)?
    Ghi dự đoán "tôi sẽ bấm …". Sau đó mới đối chiếu bảng 3.5: dự đoán sai = finding.
 4. **Đếm bước thật** đã đi theo **luật đếm bước** ở `.claude/skills/user-flow/SKILL.md` (Phase D bước 5 — dropdown = 2), so với cột Số bước và Thành công khi. Lệch số với Mục 3.6 → nêu rõ thao tác nào đếm khác.
-5. Màn có trạng thái phụ (`· rỗng`, `· lỗi`, `· đang tải`) nằm trên đường đi → xem luôn: người
+5. Màn có state phụ (`Empty`, `Error`, `Loading`) hoặc modal nằm trên đường đi → xem luôn: người
    dùng có biết làm gì tiếp không (rỗng có hướng dẫn tạo mới, lỗi có cách thử lại)?
 
 Tự giác ở bước 2 là giới hạn của phương pháp — máy không ép được agent "không nhìn trước". Nếu đã
