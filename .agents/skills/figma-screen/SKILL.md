@@ -244,8 +244,9 @@ Thứ tự dựng:
    ghi đủ hậu tố (`3.1-web`), vì ghi `3.1` sẽ khớp nhầm cả `3.1-mob` lẫn `3.10-web`.
    Nền dùng token nền trang của `design.md`. Đặt frame theo *Bố cục trong Section con* của
    `design/setup-figma.md`: mỗi màn một nhóm có thanh title; state xếp dọc dưới frame chính cách
-   100px; modal bên phải màn mở ra nó; các nhóm cách nhau 400px. Frame state và modal đặt **tên ngắn
-   tiếng Anh** (`Empty`, `Loading`, `Error`), không lặp `screenId`. Vẽ xong mà frame cao thêm thì canh
+   100px; modal bên phải màn mở ra nó; các nhóm cách nhau 400px. Frame state và modal đặt **tên tiếng
+   Anh** theo *Tên frame* + bảng từ vựng của `design/setup-figma.md`: có `screenId` riêng trong
+   userflow → `30-web · Loading`; không có → `Loading`. Vẽ xong mà frame cao thêm thì canh
    lại khoảng cách cả cột.
 2. **Khung trang**: dựng đúng cấu trúc của mẫu S/P đã chọn (vùng, thứ tự, cột, rail), bằng
    `children: [...]` trong một lần `create`. Frame bố cục dùng auto-layout, gap bằng `itemSpacing`

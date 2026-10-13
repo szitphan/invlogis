@@ -132,7 +132,8 @@ Cách A không có nhóm DESIGN SYSTEMS trong file dự án: các trang đó n�
 **Bố cục trong Section con:**
 * Mỗi màn là một **nhóm**, có thanh title rộng bằng cả nhóm, ghi `<screenId> · <slug> — States`.
   Thanh title là text/rectangle, **không phải frame**, để `linkScreens` không khớp nhầm. Nhóm
-  responsive riêng có title `<screenId> · <slug> — Responsive`.
+  responsive riêng có title `<screenId> · <slug> — Responsive`. Popup mở từ nơi chưa vẽ (màn ngoài
+  feature) gom một nhóm riêng, title `Popups — mở từ <nơi mở>`.
 * State của màn xếp **dọc** dưới frame chính, cách nhau 100px. State vẽ ở 1920, cao theo nội dung;
   sửa nội dung xong thì canh lại khoảng cách cả cột, không để frame dính nhau hoặc cách lung tung.
 * Modal (dialog, confirm, form nhỏ) đặt **bên phải màn mở ra nó**, cách 100px. Frame modal là cả màn
@@ -152,13 +153,36 @@ Cách A không có nhóm DESIGN SYSTEMS trong file dự án: các trang đó n�
 
 **Tên frame:**
 * Frame chính (đầu cột, state mặc định): `<screenId> · <slug>`, ví dụ `3.1-web · danh-sach-chuyen`.
-* Frame state và modal: tên ngắn **tiếng Anh**, viết hoa chữ đầu, 2–3 từ, nói đúng nó là gì:
-  `Empty`, `Loading`, `Error`, `Read-only`, `Approve order`. Không lặp `screenId`.
+* Frame state và modal: tên ngắn **tiếng Anh**, viết hoa chữ đầu, 2–3 từ, lấy theo bảng từ vựng
+  dưới. Có `screenId` riêng trong userflow Mục 2 → `<screenId> · <tên tiếng Anh>` (vd `30-web · Loading`),
+  để `linkScreens` vẫn nối được. Không có số riêng → tên trơn (`Loading`).
 * Không để `Frame 123`, `state 2`; không có dấu cách thừa đầu tên frame (tên trang module vẫn cố ý thụt).
-* **Frame thuộc màn nào:** theo nhóm. Frame không có `screenId` thuộc frame chính của nhóm chứa nó;
-  cùng cột với frame chính là state, bên phải là modal (cột dưới modal là state của modal). Skill đọc
-  frame (`/prototype-html`, `@usability-reviewer`) khớp theo luật này. Frame cũ còn hậu tố
-  `· rỗng` / `· đang tải` / `· lỗi` vẫn được nhận là state của `screenId` đó.
+* **Frame thuộc màn nào:** theo nhóm. Frame chính là frame trên cùng của cột trái nhất trong nhóm.
+  Mọi frame khác trong nhóm, kể cả frame có `screenId` riêng, thuộc màn đó: cùng cột là state, bên
+  phải là modal (cột dưới modal là state của modal). Frame tên bắt đầu bằng `Ghi chú` / `Note` là ghi
+  chú, không tính là state. Skill đọc frame (`/prototype-html`, `@usability-reviewer`) khớp theo luật
+  này. Frame cũ còn hậu tố `· rỗng` / `· đang tải` / `· lỗi` vẫn được nhận là state của `screenId` đó.
+
+**Bảng từ vựng tên state.** Tình huống mới chưa có trong bảng thì đặt theo mẫu *Danh từ + tính chất*,
+rồi thêm một dòng vào bảng.
+
+| Tình huống | Tên |
+|---|---|
+| Đang tải | Loading |
+| Tải lỗi | Load error |
+| Một khối trong màn tải lỗi | `<Block> load error` (vd History load error) |
+| Rỗng, chưa có dữ liệu | Empty |
+| Tìm không ra | No search results |
+| Lọc không ra | No filter results |
+| Không có quyền xem | No permission |
+| Bị chặn khi mở | Open denied |
+| Banner dữ liệu vừa cập nhật | Update banner |
+| Chỉ xem | Read-only |
+| Đang sửa | Edit |
+| Đang gửi | Submitting |
+| Bản ghi đã xoá | Record deleted |
+| Modal | `<Đối tượng> <loại>`: Process diagram, Step sheet, Confirm delete |
+| Popup lỗi nghiệp vụ | Theo nguyên nhân: Step already requested, Source revoked |
 
 **Mã màn:** `<số>-web` hoặc `<số>-mob`, ví dụ `3.1-web · danh-sach-chuyen`, `3.1-mob · danh-sach-chuyen`.
 Desktop, Tablet, Responsive dùng `-web`; Mobile 375 dùng `-mob`. Userflow nối màn theo **tên chứa**
