@@ -894,8 +894,8 @@ def build(feature_filter=None, light_mode=False):
          "sub": " · ".join(f"{r['feature']} {r['open_oq']}" for r in sorted(rows, key=lambda r: -r["open_oq"]) if r["open_oq"]) or "không còn",
          "path": next((r["stages"]["oq"]["path"] for r in sorted(rows, key=lambda r: -r["open_oq"]) if r["open_oq"]), None),
          "line": next((r["stages"]["oq"]["line"] for r in sorted(rows, key=lambda r: -r["open_oq"]) if r["open_oq"]), None)},
-        {"key": "stale", "label": "Stale chờ xác nhận", "value": len(stale_docs) + len(dead_log),
-         "light": light(len(stale_docs), 0, 5), "sub": f"{len(stale_docs)} doc · {len(dead_log)} dòng log trỏ file đã xoá",
+        {"key": "stale", "label": "Doc stale", "value": len(stale_docs),
+         "light": light(len(stale_docs), 0, 5), "sub": f"+ {len(dead_log)} dòng log trỏ file đã xoá chờ xác nhận",
          "path": "_workspace/staleness.md"},
         {"key": "src", "label": "Nguồn chưa feed", "value": len(not_fed),
          "light": light(len(not_fed), 0, 5), "sub": f"trên {len(feedable)} nguồn cần feed (không tính {len(sources) - len(feedable)} nguồn tham khảo)",
@@ -1099,6 +1099,35 @@ footer{color:var(--color-text-secondary);font-size:12px}
 .stages .h .chip{margin-top:var(--spacing-1);text-transform:none}
 .cell.neckc{box-shadow:inset 0 0 0 2px var(--color-status-chip-red-fg)}
 .kcol.stale{background:var(--color-status-chip-yellow-bg)}
+/* Góp ý reviewer (đã duyệt 14/10): KPI thẳng hàng · thẻ Làm trước gọn · công thức thu gọn · nhịp vùng 32 */
+.kpis .tile{position:relative}
+.kpis .ktop .chip{position:absolute;top:var(--spacing-3);right:var(--spacing-3)}
+.kpis .ktop .lab{padding-right:112px;display:block}
+.kpi,.first3{margin-top:var(--spacing-4)}
+.fcard1 h3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.fcard1 .score{background:transparent;color:var(--color-text-primary);box-shadow:inset 0 0 0 1px var(--color-border-emphasized)}
+.fcard1.lead .score{background:var(--color-accent);color:var(--color-on-accent);box-shadow:none}
+.fcard1 .opens{display:flex;flex-wrap:wrap;gap:var(--spacing-2);align-items:center;margin-top:auto}
+a.openbtn{display:inline-flex;align-items:center;gap:var(--spacing-1);text-decoration:none;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.fcard1:not(.lead) a.openbtn{background:var(--color-neutral);color:var(--color-text-primary)}
+details.howto{font-size:12px}details.howto summary{cursor:pointer;color:var(--color-text-primary);font-weight:var(--font-weight-medium);width:max-content}
+details.howto p{margin:var(--spacing-1) 0 0;max-width:75ch}
+/* Điện thoại ≤640: bảng việc thành thẻ, KPI 2 cột, tab cuộn có mép mờ */
+@media (max-width:640px){
+  body{padding:0 var(--spacing-4)}
+  .kpis{grid-template-columns:1fr 1fr}
+  .kpis .ktop .chip{position:static;margin-top:var(--spacing-1)}
+  .kpis .ktop .lab{padding-right:0}
+  .tabs{-webkit-mask-image:linear-gradient(90deg,black 80%,transparent);mask-image:linear-gradient(90deg,black 80%,transparent)}
+  table.work{min-width:0}
+  table.work thead{display:none}
+  table.work,table.work tbody,table.work tr,table.work td{display:block;width:100%}
+  table.work tr{border:1px solid var(--color-border-emphasized);border-radius:var(--radius-container);padding:var(--spacing-3);margin-bottom:var(--spacing-2)}
+  table.work td{border:0;padding:2px 0}
+  table.work td.scol{width:auto;white-space:normal}
+  table.work td[data-l]::before{content:attr(data-l);display:block;font-size:12px;font-weight:var(--font-weight-medium);color:var(--color-text-secondary)}
+  table.work tr.more-row{display:none}table.work.all tr.more-row{display:block}
+}
 .cempty{margin:0;padding:var(--spacing-3);text-align:center;font-size:12px;color:var(--color-text-primary)}
 .cnote{margin:0 var(--spacing-1);font-size:12px;color:var(--color-status-chip-yellow-fg)}
 """
@@ -1157,6 +1186,7 @@ ICONS = {  # Lucide, nét 2 trên khung 24 (chip trạng thái)
     "circle-x": '<circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/>',
     "info": '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
     "circle-check": '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
+    "arrow-up-right": '<path d="M7 7h10v10"/><path d="M7 17 17 7"/>',
 }
 
 
@@ -1301,7 +1331,7 @@ def render(m, artifact=False):
     # Hôm nay
     w('<div role="tabpanel" id="p-today" aria-labelledby="t-today">')
     vic = {"red": "circle-x", "amber": "triangle-alert", "green": "circle-check"}.get(v["level"], "info")
-    w(f'<div class="verdict v-{v["level"]}" role="status">{ic(vic, 20)}<div><b>{E(v["title"])}</b><span class="muted">{E(v["summary"])}</span></div></div>')
+    w(f'<div class="verdict v-{v["level"]}" role="status">{ic(vic, 20)}<div><b>{E(v["title"])}</b></div></div>')
     # Dải KPI: ô tệ hơn xếp trước; số Cal Sans display-3; chip trạng thái + icon; ô đỏ viền accent.
     sev = {"red": 0, "amber": 1, "green": 2, "gray": 3}
     w('<section class="kpi" aria-label="Tóm tắt hôm nay"><h2>Tóm tắt hôm nay</h2><div class="tiles kpis">')
@@ -1336,11 +1366,12 @@ def render(m, artifact=False):
             attrs = f' data-wid="{E(x["id"])}" data-sig="{E(x["title"])}"' if x["kind"] == "Máy" else ""
             tag = f'<span class="tag{" tag-m" if x["kind"] == "Máy" else ""}">{E(x["id"] if x["kind"] == "BL" else "Máy")}</span>'
             parts = " · ".join(f"{k} {v}" for k, v in x["parts"].items() if v) or "0"
-            opens = []
-            if x["path"]:
-                opens.append(link(x["path"], E(where(x["path"], x["line"], x["hint"])), x["line"]))
-            if x.get("doc"):
-                opens.append(link(x["doc"], E(where(x["doc"], x.get("doc_line"), x.get("doc_hint", ""))), x.get("doc_line")))
+            # Nút "Mở" tới file cần sửa (tài liệu liên quan nếu có, không thì nơi việc nằm); backlog để link phụ.
+            main_p, main_l = (x["doc"], x.get("doc_line")) if x.get("doc") else (x["path"], x["line"])
+            sub_ = link(x["path"], E(where(x["path"], x["line"], x["hint"])), x["line"]) if x.get("doc") and x["path"] else ""
+            opens = [link(main_p, ic("arrow-up-right") + " Mở " + E(where(main_p, main_l)), main_l, "mini openbtn")] if main_p else []
+            if sub_:
+                opens.append(sub_)
             btns = ""
             if A and x["kind"] == "Máy":
                 btns = ('<span class="frow">' + act("Đưa vào backlog", f"bl:{x['id']}", {"type": "to-backlog", "title": x["title"],
@@ -1351,12 +1382,12 @@ def render(m, artifact=False):
               f'<span class="muted" style="font-size:12px">{E(parts)}</span></div>'
               f'<h3>{E(x["title"])}</h3><p class="muted">{E(x["why"])}</p>'
               f'<p><span class="lab">Xong khi</span> <span title="{E(x["done_when"])}">{E(x["done_text"]) or "—"}</span></p>'
-              f'<p class="opens">{" · ".join(opens)}</p>{btns}</article>')
+              f'<div class="opens">{" ".join(opens)}</div>{btns}</article>')
         w("</div></section>")
     w(f'<div class="panel"><h2>Hàng việc còn lại ({len(work) - min(3, len(work))}) · xếp theo điểm ưu tiên</h2>'
-      '<p class="muted" style="margin:2px 0 6px;font-size:12px">Điểm = Chặn 40/25 + Hạn 25/15 + Lan 4đ mỗi doc/feature (trần 20) + Tuổi 1đ/2 ngày (trần 15). '
+      '<details class="howto"><summary>Cách tính điểm</summary><p class="muted">Điểm = Chặn 40/25 + Hạn 25/15 + Lan 4đ mỗi doc/feature (trần 20) + Tuổi 1đ/2 ngày (trần 15). '
       'Cột <i>Ưu tiên</i> trong backlog: <code>P0</code> luôn lên đầu, <code>để sau</code> luôn xuống cuối. '
-      '<b>BL</b> = task trong backlog (tự đóng khi điều kiện Xong khi đúng) · <b>Máy</b> = việc dashboard tự phát hiện (tự hết khi tín hiệu hết).</p>')
+      '<b>BL</b> = task trong backlog (tự đóng khi điều kiện Xong khi đúng) · <b>Máy</b> = việc dashboard tự phát hiện (tự hết khi tín hiệu hết).</p></details>')
     if not rest:
         w('<p class="muted">Không còn việc nào khác.</p>')
     else:
@@ -1382,9 +1413,9 @@ def render(m, artifact=False):
                                                                  "done_when": x.get("done_when") or "manual", "source": "dashboard"}, A, "act mini")
                         + f'<button type="button" class="dismiss mini ghost" data-id="{E(x["id"])}" data-sig="{E(x["title"])}">Đã biết</button>')
             w(f'<tr class="{" ".join(cls)}"{attrs}><td class="num scol"><span class="score">{x["score"]}</span><br><small class="muted">{parts}</small></td>'
-              f'<td>{tag} {E(x["title"])}</td><td class="muted">{E(x["why"])}</td>'
-              f'<td title="{E(x["done_when"])}">{E(x["done_text"]) or "<span class=muted>—</span>"}</td>'
-              + (f'<td>{dm}</td>' if has_dm else '') + f'<td class="opens">{"<br>".join(opens) or "<span class=muted>—</span>"}</td>'
+              f'<td>{tag} {E(x["title"])}</td><td class="muted" data-l="Vì sao">{E(x["why"])}</td>'
+              f'<td data-l="Xong khi" title="{E(x["done_when"])}">{E(x["done_text"]) or "<span class=muted>—</span>"}</td>'
+              + (f'<td>{dm}</td>' if has_dm else '') + f'<td class="opens" data-l="Mở ở đâu">{"<br>".join(opens) or "<span class=muted>—</span>"}</td>'
               + (f'<td class="btns">{btns}</td>' if A else "") + "</tr>")
         w("</tbody></table></div>")
     if len(rest) > 10:
@@ -1577,7 +1608,7 @@ def render(m, artifact=False):
         up = (f'<span class="muted">← upstream </span>{link(s["upstream"], E(where(s["upstream"])))}<span class="muted"> đổi {E(s["date"])}</span>'
               if s and (ROOT / s["upstream"]).exists() else (f'<span class="muted">← {E(s["upstream"])} đổi {E(s["date"])}</span>' if s else ""))
         w(f'<li>{link(d["path"], E(d["path"]) + f" <span class=muted>· dòng {ln}</span>", ln)}{up}'
-          + act("Đã biết, reset", f"reset:{d['path']}", {"type": "stale-reset", "path": d["path"]}, A, "act mini")
+          + act("Đã biết, reset", f"reset:{d['path']}", {"type": "stale-reset", "path": d["path"]}, A, "act mini ghost")
           + act("Cần rà", f"review:{d['path']}", {"type": "stale-review", "path": d["path"]}, A, "act mini ghost") + "</li>")
     if not sd:
         w('<li class="muted">Không có doc stale.</li>')
@@ -1594,7 +1625,7 @@ def render(m, artifact=False):
             continue
         seen_dead.add(s["downstream"])
         w(f'<li><span class="mono">{E(s["downstream"])}</span><span class="muted">← {E(s["upstream"])} · {E(s["date"])}</span>'
-          + act("Đã biết, reset", f"ack:{s['downstream']}", {"type": "log-ack", "path": s["downstream"], "upstream": s["upstream"]}, A, "act mini")
+          + act("Đã biết, reset", f"ack:{s['downstream']}", {"type": "log-ack", "path": s["downstream"], "upstream": s["upstream"]}, A, "act mini ghost")
           + "</li>")
     w("</ul></div>")
     q = m["quality"]
