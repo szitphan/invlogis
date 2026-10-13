@@ -59,8 +59,8 @@ Không hỏi user những gì đọc được.
    dùng (Usage, Nên/Không nên, Examples). File dài, nên không đọc toàn văn.
 3. Tìm nguồn nghiệp vụ trong `docs/{feature}/` (Glob), đọc theo thứ tự ưu tiên:
    * **`srs/{feature}-userflow.md`** — nguồn DUY NHẤT cho danh sách màn, chia flow, chuyển màn
-     (Mục 2, 3, 3.5) và tác vụ chính (Mục 3.6). `screenId` = cột `[#]` Mục 2 + hậu tố thiết bị
-     (`[#]` = 3, Desktop → `3-web`).
+     (Mục 2, 3, 3.5) và tác vụ chính (Mục 3.6). `screenId` = cột `[#]` Mục 2 + ` · ` + thiết bị
+     (`[#]` = 1.1, Desktop → `1.1 · web`); slug + tên Việt cũng lấy ở Mục 2.
    * **Wireframe + bảng mô tả 5 cột** của từng màn. Bảng 5 cột là **hợp đồng BA ↔ design**: element
      nào, control gì, validation, trạng thái, wording, mã lỗi, điều hướng. Đọc hết bảng của mọi màn sẽ
      vẽ. Hai renderer ngang hàng, cùng schema 5 cột — màn có ở renderer nào thì đọc renderer đó:
@@ -163,9 +163,9 @@ Chế độ Nhanh:
 
 ```
 Em sẽ vẽ 2 màn cho "Quản lý đơn hàng" lên Figma:
-Luồng 1 — Duyệt đơn: 2.1-web danh-sach-don → 2.2-web chi-tiet-don
-2.1-web · danh-sach-don   Mẫu P1 · S1 Shell · Side Nav · nút chính [Tạo đơn]
-2.2-web · chi-tiet-don    Mẫu P7 · nút chính [Duyệt]
+Luồng 2 — Duyệt đơn: 2.1 · web order-list → 2.2 · web order-detail
+2.1 · web · order-list     Mẫu P1 · S1 Shell · Side Nav · nút chính [Tạo đơn]
+2.2 · web · order-detail   Mẫu P7 · nút chính [Duyệt]
 Khung: Desktop 1920×1080
 Nơi vẽ: trang "02 · Đơn hàng" › F01 · Duyệt đơn › Web
 Token/component: design/design.md (Astryx), instance thư viện
@@ -179,9 +179,9 @@ Chế độ Đầy đủ:
 ```
 Em sẽ vẽ "Quản lý đơn hàng" theo 1 luồng, tổng 2 màn + 3 trạng thái:
 Luồng 1 — Duyệt đơn (mỗi màn một nhóm, state xếp dọc):
-  2.1-web · danh-sach-don (có dữ liệu) ↓ Empty ↓ Loading
-  2.2-web · chi-tiet-don (bình thường) ↓ Load error
-Lỗi đại diện: 2.2-web banner lỗi tải; ghi chú liệt kê các lỗi còn lại cùng kiểu banner
+  2.1 · web · order-list (có dữ liệu) ↓ Empty ↓ Loading
+  2.2 · web · order-detail (bình thường) ↓ Load error
+Lỗi đại diện: 2.2 · web banner lỗi tải; ghi chú liệt kê các lỗi còn lại cùng kiểu banner
 Trạng thái nghiệp vụ → nhóm: Nháp→Neutral · Chờ duyệt→Warning · Đã duyệt→Success · Từ chối→Error
 Khung: Desktop 1920×1080
 Nơi vẽ: trang "02 · Đơn hàng" › F01 · Duyệt đơn › Web
@@ -239,15 +239,16 @@ canvas (nhất là khi cửa sổ Figma chạy nền, plugin chậm hẳn):
 
 Thứ tự dựng:
 
-1. **Artboard**: kích thước theo thiết bị đã chốt. Tên chứa `screenId` **kèm hậu tố thiết bị** như
-   một token nguyên vẹn, ví dụ `"3.1-web · danh-sach-chuyen"`, để userflow nối được (`linkScreens`).
-   Desktop, Tablet, Responsive dùng `-web`; Mobile 375 dùng `-mob`. `screenId` trong userflow phải
-   ghi đủ hậu tố (`3.1-web`), vì ghi `3.1` sẽ khớp nhầm cả `3.1-mob` lẫn `3.10-web`.
+1. **Artboard**: kích thước theo thiết bị đã chốt. Tên frame chính **3 phần** `<[#]> · <web|mob> · <slug>`,
+   ví dụ `"1.1 · web · process-line"`, để userflow nối được (`linkScreens`). Desktop, Tablet, Responsive
+   dùng `web`; Mobile dùng `mob`; web và mobile cùng màn chung số + slug. `screenId` trong userflow phải
+   ghi đủ thiết bị (`1.1 · web`), vì ghi `1.1` sẽ khớp nhầm cả bản `mob`.
    Nền dùng token nền trang của `design.md`. Đặt frame theo *Bố cục trong Section con* của
    `design/setup-figma.md`: mỗi màn một nhóm có thanh title; state xếp dọc dưới frame chính cách
-   100px; modal bên phải màn mở ra nó; các nhóm cách nhau 400px. Frame state và modal đặt **tên tiếng
-   Anh** theo *Tên frame* + bảng từ vựng của `design/setup-figma.md`: có `screenId` riêng trong
-   userflow → `30-web · Loading`; không có → `Loading`. Vẽ xong mà frame cao thêm thì canh
+   100px; modal bên phải màn mở ra nó; các nhóm cách nhau 400px. Title nhóm ghi
+   `<screenId> · <slug> — <tên Việt> — States`. Frame state và modal **4 phần**
+   `<screenId> · <slug> · <tên tiếng Anh>` theo *Tên frame* + bảng từ vựng của `design/setup-figma.md`
+   (vd `1.1 · web · process-line · Loading`); state có số riêng trong userflow là màn riêng, 3 phần. Vẽ xong mà frame cao thêm thì canh
    lại khoảng cách cả cột.
 2. **Khung trang**: dựng đúng cấu trúc của mẫu S/P đã chọn (vùng, thứ tự, cột, rail), bằng
    `children: [...]` trong một lần `create`. Frame bố cục dùng auto-layout, gap bằng `itemSpacing`
@@ -360,8 +361,16 @@ Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một
    - (e) mỗi component đã dùng không vi phạm dòng **Không nên** nào của nó trong `design/components.md`;
    - (f) **phủ bảng 5 cột**: đếm row có element tương ứng trên màn (theo tên layer, mục 7 Bước 4) —
      phải N/N; thiếu thì vẽ bổ sung hoặc ghi lý do;
+   - (f2) **phủ CMP đã gọi**: mỗi row `Xem CMP-xx` → mở bảng 5 cột của CMP đó trong
+     `design/ui-common/screen-patterns.md`, liệt kê row có tương tác/trạng thái (Click → tooltip, popover,
+     panel, đang tải/lỗi…) mà dữ liệu mẫu của màn có chỗ áp (vd chip "Điều kiện x/y" có trên sơ đồ → tooltip).
+     Row đó không có trong bảng feature và không có artboard → báo "CMP có, bảng 5 cột thiếu" trong mục
+     "Đề xuất đổi so với bảng 5 cột" (KHÔNG im lặng vì bảng không ghi). Bảng chỉ ghi `Xem CMP-xx` không có
+     nghĩa là đã phủ hết hành vi của CMP (sự cố 13/10/2026: tooltip chip Điều kiện CMP-09 #4 lọt khỏi
+     wireframe lẫn Figma);
    - (g) **bố cục canvas**: `figma_read get_page_model` trên Section: state cách 100, nhóm cách 400,
-     mỗi nhóm có title, frame chính có `screenId`, frame state/modal tên tiếng Anh, không còn
+     mỗi nhóm có title (kèm tên Việt), mọi frame bắt đầu `<screenId> · <slug>` (chính 3 phần, state/modal
+     4 phần với tên tiếng Anh), không còn
      `Frame N`, không có dấu cách đầu tên frame (`design/setup-figma.md` › *Bố cục trong Section con*).
 6. **A4** · **Chip trạng thái:** mọi chip là instance `Chip trạng thái` (không tự vẽ pill); icon và chữ đúng màu
    `Status Chip/<Sắc>/Foreground` (đổi icon qua thuộc tính `Icon` xong phải gắn lại màu nét); mã nghiệp vụ
@@ -400,11 +409,11 @@ Ngắn, theo mẫu:
 
 ```
 Đã vẽ: "02 · Đơn hàng" › F01 · Duyệt đơn › Web (file <tên>):
-2.1-web · danh-sach-don   P1 · default / Empty / Loading
-2.2-web · chi-tiet-don    P7 · default / Load error
+2.1 · web · order-list     P1 · default / Empty / Loading
+2.2 · web · order-detail   P7 · default / Load error
 
 Máy đã kiểm: layout 0 lỗi · a11y 0 lỗi mới (2 ngoại lệ đã biết) · DS compliance 1.00 · A5 thị giác 0 FAIL / 3 WARN (nhận diện 92%)
-Bảng 5 cột (nguồn: HTML | ASCII): 2.1-web 12/12 · 2.2-web 9/9 row có trên màn | không có bảng 5 cột — vẽ từ SRS
+Bảng 5 cột (nguồn: HTML | ASCII): 2.1 · web 12/12, 2.2 · web 9/9 row có trên màn | không có bảng 5 cột — vẽ từ SRS
 Đề xuất đổi so với bảng 5 cột: <liệt kê, hoặc "không">
 Object map: <n chỗ lệch bảng 5 cột (đã ghi ở Đề xuất đổi) · thẻ dùng chung: … | không có object map>
 Khớp đặc tả (@uxui-reviewer): 0 blocking / 1 warning | SKIPPED — <lý do>
@@ -423,7 +432,7 @@ Link Figma: đã ghi {n} màn vào {feature}-wireframe-html-index.md / {feature}
 lệch hoặc không có → hỏi user link. Ghi vào **mọi wireframe index đang có** của feature (gộp 1 L2 diff):
 
 * `html-wireframe/{feature}-wireframe-html-index.md` — bảng Flows, 1 dòng/flow: điền cột `Figma` của
-  dòng flow chứa màn, dạng danh sách `[3-web](…) · [4-web](…)` theo thứ tự màn; màn đã có link thì thay
+  dòng flow chứa màn, dạng danh sách `[1.1 · web](…) · [1.2 · web](…)` theo thứ tự màn; màn đã có link thì thay
   link cũ, giữ link của màn khác. Index cũ chưa có cột `Figma` → thêm cột trước `Status` trong cùng
   L2 diff. Cập nhật cột `Updated` của dòng đó.
 * `ascii-wireframe/{feature}-wireframe-index.md` — bảng Screens, 1 dòng/màn: điền cột `Figma` (khớp

@@ -1,7 +1,7 @@
 ---
 type: project-profile
 status: draft
-updated: 2026-10-12
+updated: 2026-10-13
 links:
   - docs-input/srs-cu/lg-srs-export.md
   - docs/_shared/system-overview.md
@@ -25,6 +25,13 @@ Hệ thống quản lý vận hành nội bộ cho Delta — doanh nghiệp vậ
 | Nhân viên của đối tác cây dầu | Nhân viên đối tác cây dầu | Dùng Delta Super App (Partner Portal cũ đã gộp vào, hiện chỉ có mobile), nghiệp vụ Cấp dầu | 2026-10-05 |
 
 Danh sách tác nhân chuẩn kèm tên gọi cần tránh: [[docs/_shared/definitions.md|Definitions]] › Actor Registry.
+
+## Các bên liên quan
+
+| Người | Bên | Vai trò | Phụ trách / ghi chú | Ngày |
+|---|---|---|---|---|
+| Chú Nghĩa | Delta | CEO | Project sponsor kiêm PO; người quyết định cuối về nghiệp vụ và SOP của dự án | 2026-10-13 |
+| Anh Đạt | Delta | Giám đốc xưởng | PO của dự án trước, làm module Xưởng và Cây dầu. Kênh trao đổi: nhóm Zalo "[Delta-Innvie] ERP Delta 3.0 - Kiểm thử & Vận hành" | 2026-10-13 |
 
 ## Thị trường & ngôn ngữ
 

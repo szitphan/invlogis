@@ -186,7 +186,22 @@ Hỏi gọn (AskUserQuestion 2 lựa chọn, đặt mermaid lên đầu làm m�
 
 ### Step 6 — Update activity log + status
 
+
 Set env `CLAUDE_CHANGELOG_NOTE` trước Write (hook ghi changelog.md). Update `updated:` field. Nếu status đang `draft` + nội dung đã dày (≥3 lần cập nhật trong changelog.md) → suggest user transition `in-review`.
+
+### Step 6.5 — Lan tác động (chỉ `patterns` / `conventions`)
+
+CMP/GR/E-common được gọi bằng mã trong SRS, use case, wireframe — không qua `links:`, nên sửa nguồn chung
+không tự lan. Sau Write, hook `post-edit-stale.sh` gọi `_scripts/ui-common-stale.py`: băm từng mục, tìm mã
+vừa đổi, đánh `stale` doc `.md` gọi mã đó và in danh sách wireframe `.html` (không có status) cần rà.
+Skill PHẢI đưa danh sách này vào báo cáo Step 7 — hook output không tự tới tay user. Không thấy output
+hook → chạy tay `python3 _scripts/ui-common-stale.py design/ui-common/{file}` (trước đó `--check` để xem).
+
+Với mỗi feature bị đụng, gợi ý chạy lại đúng skill:
+- wireframe `.html` gọi mã → `/wireframe-html {feature}` (update mode) — bảng 5 cột phải có row cho hành vi mới
+  của CMP (vd thêm tương tác, trạng thái), không chỉ dòng `Xem CMP-xx`.
+- màn Figma đã vẽ (cột Figma trong `{feature}-wireframe-html-index.md` có link) → `/figma-screen {feature}`.
+- spec/UC bị đánh stale → `/status restore` nếu không cần sửa, hoặc `/cr` nếu đổi nghiệp vụ.
 
 ### Step 7 — Final report
 
@@ -194,6 +209,11 @@ Set env `CLAUDE_CHANGELOG_NOTE` trước Write (hook ghi changelog.md). Update `
 ✅ Updated docs/_shared/{file}
    Entries added: {N}
    Total entries now: {total}
+
+Tác động (patterns/conventions): mã đổi {CMP-xx, GR-yy}
+   Doc đánh stale: {n} — {danh sách}
+   Wireframe cần rà: {feature}/{flow}.html ({mã}) · …
+   Màn Figma theo flow đó: {có/không} → /figma-screen {feature}
 
 Suggested next:
   - Reference từ feature docs: [[docs/_shared/{file}#{anchor}]]

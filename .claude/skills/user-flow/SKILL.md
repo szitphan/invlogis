@@ -170,8 +170,8 @@ Slim frontmatter (`type: srs-userflow`, `feature`, `updated` + state fields). S�
 ### Phase D — Sinh màn hình + chia flow + user flow mermaid
 
 0) **Primary device** (hỏi 1 câu ở Phase C nếu chưa rõ): feature này chủ yếu chạy trên **mobile (375px)**, **tablet (768px)** hay **desktop (1920px)**? Đây là nguồn DUY NHẤT cho `/wireframe-html` + `/prototype-html` render đúng bề rộng khung. Không rõ → default `mobile` (mobile-first). Ghi vào frontmatter `primary_device`.
-1) **Danh sách màn hình dự kiến**: mỗi màn 1 dòng (slug + mục đích 1 câu). Bao gồm màn trạng thái (success, error page, empty, loading nếu cần).‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
-2) **Chia flow**: skill TỰ nhóm các màn cùng một mục tiêu nghiệp vụ thành 1 flow (vd `forgot-password-flow` = màn nhập email → OTP → đặt mật khẩu mới → thành công). Mỗi flow có 1 `flow-slug`. User duyệt cách chia này ở HARD STOP — đây là quyết định quan trọng vì `/wireframe-ascii` + `/wireframe-html` sẽ tạo 1 file/flow theo đúng cách chia này.
+1) **Danh sách màn hình dự kiến**: mỗi màn 1 dòng (`[#]` + slug tiếng Anh + tên Việt + mục đích 1 câu), đặt số và slug theo `naming-conventions.md` mục *Màn hình & flow* (`[#]` = `{flow#}.{màn#}`, web và mobile cùng màn chung số + slug). Trạng thái hiện tại chỗ (đang tải, lỗi tải, rỗng…) ghi vào cột *Trạng thái* của màn gốc; chỉ tách thành màn riêng (có số riêng, slug `{gốc}-{trạng thái}`) khi nó có chuyển màn riêng ở Mục 3.5.‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+2) **Chia flow**: skill TỰ nhóm các màn cùng một mục tiêu nghiệp vụ thành 1 flow (vd `forgot-password-flow` = màn nhập email → OTP → đặt mật khẩu mới → thành công). Mỗi flow có 1 `flow-slug` tiếng Anh, không chứa đuôi file. User duyệt cách chia này ở HARD STOP — đây là quyết định quan trọng vì `/wireframe-ascii` + `/wireframe-html` sẽ tạo 1 file/flow theo đúng cách chia này.
 3) **User flow mermaid tổng**: `flowchart TD` (hoặc `TB`) thể hiện tương tác giữa màn hình, phủ **đủ 3 loại case**:
    * **Happy case** — luồng thành công chính.
    * **Error case** — sai input, lỗi hệ thống, sai OTP, hết hạn, vv.
@@ -207,7 +207,7 @@ Nhánh error: {điểm rẽ} → {error case 1}, {error case 2}
 Nhánh edge: {điểm rẽ} → {edge case 1}, {edge case 2}
 
 Danh sách màn hình ({N}):
-  1. {slug} — {mục đích}
+  {[#]} {slug} — {tên Việt}: {mục đích} (trạng thái: {Loading, Empty…})
   ...
 
 Chia flow ({M} flow):
@@ -392,19 +392,20 @@ flow_hash: "{sha256 8 ký tự đầu của nội dung Mục 1 tại lúc user g
 
 ## 2. Danh sách màn hình
 
-> Cột `Slug` = định danh máy-đọc DUY NHẤT của màn (khớp `## Screen: {slug}` bên wireframe + node KG). `[#]` chỉ để đối chiếu Mục 1/3.5.
+> Cột `Slug` = định danh máy-đọc DUY NHẤT của màn (khớp `## Screen: {slug}` bên wireframe + node KG). `[#]` đối chiếu Mục 1/3.5 và ghép `screenId` (`[#] · web|mob`). Số, slug, tên hiển thị theo `naming-conventions.md` mục *Màn hình & flow*.
 
-| [#] | Slug | Màn hình | Mục đích | Thuộc flow |
-|-----|------|----------|----------|------------|
-| 1 | forgot-email | Nhập email | Người dùng nhập email để nhận OTP | forgot-password-flow |
-| 2 | otp-input | Nhập OTP | Xác thực mã gửi qua email | forgot-password-flow |
-| ... | | | | |
+| [#] | Slug | Màn hình | Mục đích | Trạng thái | Thiết bị | Thuộc flow |
+|-----|------|----------|----------|------------|----------|------------|
+| 1.1 | forgot-email | Nhập email | Người dùng nhập email để nhận OTP | Submitting | web, mob | forgot-password |
+| 1.2 | otp-input | Nhập OTP | Xác thực mã gửi qua email | Loading | web, mob | forgot-password |
+| 1.3 | otp-input-expired | Mã OTP hết hạn | Báo hết hạn, cho gửi lại mã | — | web, mob | forgot-password |
+| ... | | | | | | |
 
 ## 3. Danh sách flow
 
-| Flow-slug | Tên flow | Màn hình gồm | Cases phủ |
-|-----------|----------|--------------|-----------|
-| forgot-password-flow | Quên mật khẩu | forgot-email → otp-input → reset-form → reset-done | happy, error (sai OTP), edge (hết hạn, email không tồn tại) |
+| Flow-slug | Tên flow | Thiết bị | Màn hình gồm | Cases phủ |
+|-----------|----------|----------|--------------|-----------|
+| forgot-password | Quên mật khẩu | web, mob | forgot-email → otp-input → reset-form → reset-done | happy, error (sai OTP), edge (hết hạn, email không tồn tại) |
 
 ## 3.5. Chuyển màn (transitions)
 
@@ -412,15 +413,17 @@ flow_hash: "{sha256 8 ký tự đầu của nội dung Mục 1 tại lúc user g
 
 | Từ màn [#] | Đến màn [#] | Trigger | Điều kiện |
 |-----------|------------|---------|-----------|
-| Nhập email [1] | Nhập OTP [2] | Submit email | email tồn tại |
-| Nhập email [1] | (giữ nguyên) [1] | Submit email | email không tồn tại → báo lỗi |
-| Nhập OTP [2] | Đặt mật khẩu [3] | Submit OTP | OTP đúng, còn hạn |
+| Nhập email [1.1] | Nhập OTP [1.2] | Submit email | email tồn tại |
+| Nhập email [1.1] | (giữ nguyên) [1.1] | Submit email | email không tồn tại → báo lỗi |
+| Nhập OTP [1.2] · Loading | Nhập OTP [1.2] | Tải xong | gửi mã thành công |
+| Nhập OTP [1.2] | Mã OTP hết hạn [1.3] | Submit OTP | OTP quá hạn |
+| Nhập OTP [1.2] | Đặt mật khẩu [1.4] | Submit OTP | OTP đúng, còn hạn |
 
 ## 3.6. Tác vụ chính
 
 | Tác vụ | Vai trò | Tần suất | Mức quan trọng | Đường đi | Số bước | Thành công khi |
 |--------|---------|----------|----------------|----------|---------|----------------|
-| Đặt lại mật khẩu | Khách | hiếm | cao | [1] → [2] → [3] → [4] | 5 | xong trong 1 phiên, không phải liên hệ hỗ trợ |
+| Đặt lại mật khẩu | Khách | hiếm | cao | [1.1] → [1.2] → [1.4] → [1.5] | 5 | xong trong 1 phiên, không phải liên hệ hỗ trợ |
 
 ## 4. Open Questions
 

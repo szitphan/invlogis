@@ -350,8 +350,11 @@ Chỉ dùng cho quy trình nhiều nghiệp vụ. Vòng đời của 1 bản ghi
 - Panel bước: `BottomSheet` Hug; không header riêng; dòng đầu là "‹ Sơ đồ quy trình" (`Button` Ghost LG +
   chevron-left, thẳng lề); không X, đóng bằng vuốt / chạm nền; chip chuẩn bên phải tên, kẻ 1px dưới khối trạng thái; nút chính rộng hết, cao 40, bo tròn hẳn.
 - "Mở màn hình chi tiết" đẩy màn mới; Back về màn trước, sheet đã đóng.
+- Chip "Điều kiện x/y" trên đường (R1): chạm → tooltip như web (mỗi điều kiện 1 dòng ✓ / ○ kèm mã nguồn +
+  "Bước trước khác (đường riêng): …"), neo dưới chip, rộng tối đa bằng vùng cây; chạm ra ngoài hoặc chạm lại chip
+  để đóng; không mở sheet bước.
 - **Figma:** `.Nội dung sheet · Cây` `5584:113231`, `· Panel bước` `5584:113243`, `· Cây · Đang tải` `5584:114838`,
-  `· Cây · Lỗi tải` `5584:115045`; ví dụ trong `Device / Frame`: `5578:111599`, `5578:111616`, `5584:115290`, `5584:115551`.
+  `· Cây · Lỗi tải` `5584:115045`; ví dụ trong `Device / Frame`: `5578:111599`, `5578:111616`, `5584:115290`, `5584:115551`, tooltip chip Điều kiện `5627:157359` (component `.Tooltip điều kiện` `5584:114103`; màn web mẫu `3-web · Condition tooltip` `5627:156590`).
 
 ## CMP-10 — File Upload
 

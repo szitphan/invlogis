@@ -44,7 +44,7 @@ Loops:
 - Sang `approved`/`shipped` khi có upstream (doc trong `links:` có status) chưa `approved`/`shipped` → **cảnh báo + hỏi user**, user đồng ý mới chuyển (không chặn cứng).
 - Đổi status không đổi `updated:` và không lan stale xuống downstream (không phải đổi nội dung).
 - Ngoài lifecycle: `_workspace/` (backlog, changelog, log máy), `docs/exports|inbox|_reverse`, doc có lifecycle riêng (CR, meeting).
-- Giới hạn hiện tại của hook stale: chỉ lan **1 tầng**; sửa file trong `docs/_shared/` hoặc ngoài `docs/` (vd `design/`) **không** lan. `/status impact <file>` cho thấy đủ các tầng + tầng nào hook không tự đánh.
+- Giới hạn hiện tại của hook stale: chỉ lan **1 tầng**; sửa file trong `docs/_shared/` hoặc ngoài `docs/` **không** lan — trừ `design/ui-common/screen-patterns.md` / `conventions.md`: hook gọi `_scripts/ui-common-stale.py`, băm từng mục CMP/GR/E-common, đánh stale doc `.md` gọi mã vừa đổi và in wireframe `.html` cần rà (mốc băm ở `_workspace/ui-common-hashes.json`). `/status impact <file>` cho thấy đủ các tầng + tầng nào hook không tự đánh.
 
 ## Transitions trigger automation‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 

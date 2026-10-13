@@ -1,0 +1,210 @@
+{
+ "CMP-01": {
+  "file": "design/ui-common/screen-patterns.md",
+  "hash": "077e32b40847"
+ },
+ "CMP-02": {
+  "file": "design/ui-common/screen-patterns.md",
+  "hash": "c9a7b1d749b5"
+ },
+ "CMP-03": {
+  "file": "design/ui-common/screen-patterns.md",
+  "hash": "00833636bedb"
+ },
+ "CMP-04": {
+  "file": "design/ui-common/screen-patterns.md",
+  "hash": "554a8be63896"
+ },
+ "CMP-05": {
+  "file": "design/ui-common/screen-patterns.md",
+  "hash": "2c73dd9a7068"
+ },
+ "CMP-06": {
+  "file": "design/ui-common/screen-patterns.md",
+  "hash": "c67349eccc41"
+ },
+ "CMP-07": {
+  "file": "design/ui-common/screen-patterns.md",
+  "hash": "0fc5770476d4"
+ },
+ "CMP-08": {
+  "file": "design/ui-common/screen-patterns.md",
+  "hash": "5d5e0b393c14"
+ },
+ "CMP-09": {
+  "file": "design/ui-common/screen-patterns.md",
+  "hash": "c8d138f8f3c3"
+ },
+ "CMP-10": {
+  "file": "design/ui-common/screen-patterns.md",
+  "hash": "66841242c516"
+ },
+ "CMP-11": {
+  "file": "design/ui-common/screen-patterns.md",
+  "hash": "d0adbf063eeb"
+ },
+ "CMP-12": {
+  "file": "design/ui-common/screen-patterns.md",
+  "hash": "b4ba40a0b9ae"
+ },
+ "E-common-001": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "7c5d323d0e53"
+ },
+ "E-common-002": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "23347c306a88"
+ },
+ "E-common-003": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "e2d2c0907258"
+ },
+ "E-common-004": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "9c3e444dc2f5"
+ },
+ "E-common-005": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "99113c428dc0"
+ },
+ "E-common-006": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "782822edb617"
+ },
+ "E-common-007": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "6035b79f27c9"
+ },
+ "E-common-008": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "c261fdd3acfb"
+ },
+ "E-common-009": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "04b612e683ad"
+ },
+ "E-common-010": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "a6949a88f1f8"
+ },
+ "E-common-011": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "34af606b2636"
+ },
+ "E-common-012": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "b11f6300808a"
+ },
+ "GR-01": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "19db3c81cbcc"
+ },
+ "GR-02": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "ff4ab620fef5"
+ },
+ "GR-03": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "023a6c16128e"
+ },
+ "GR-04": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "125a870ef404"
+ },
+ "GR-05": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "00b3eaf926f2"
+ },
+ "GR-06": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "7306aadec0f7"
+ },
+ "GR-07": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "990d5368a11c"
+ },
+ "GR-08": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "71ab676fa7ed"
+ },
+ "GR-09": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "2ceff957f7d6"
+ },
+ "GR-10": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "9b53a18a99fc"
+ },
+ "GR-11": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "3297b72b16ad"
+ },
+ "GR-12": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "348bb011276a"
+ },
+ "GR-13": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "5f5d6bcab339"
+ },
+ "GR-14": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "408d354cdcda"
+ },
+ "GR-15": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "4431994cc877"
+ },
+ "GR-16": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "f3ce4a4736ec"
+ },
+ "GR-17": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "dc1b9b09c30d"
+ },
+ "GR-18": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "be4646cb807a"
+ },
+ "GR-19": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "1ff9942fb9a6"
+ },
+ "GR-20": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "b98ec22283d0"
+ },
+ "GR-21": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "51f93ac54c53"
+ },
+ "GR-22": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "2c87bf1d6b4a"
+ },
+ "GR-23": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "2dc5ba39fdcc"
+ },
+ "GR-24": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "49258f4a63b6"
+ },
+ "GR-25": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "1790489b4846"
+ },
+ "GR-26": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "74ed1be17fd2"
+ },
+ "GR-27": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "497d1eac1fe9"
+ },
+ "GR-28": {
+  "file": "design/ui-common/conventions.md",
+  "hash": "353a1c28660d"
+ }
+}

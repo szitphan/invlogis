@@ -1,7 +1,8 @@
 ---
 type: srs
 feature: cross-process-flow
-status: draft
+status: stale
+status_prev: draft
 updated: 2026-10-12
 links:
   - docs/cross-process-flow/brainstorms/cross-process-flow.md
@@ -250,10 +251,10 @@ E-common dùng: E-common-008, E-common-009, E-common-011
 | ✅ OQ-17 | ⭐ Lái xe xem những quy trình nào? Có ẩn hẳn bước công nợ và bồi thường với Lái xe không? → **Chốt 12/10:** Theo phân quyền xem của từng nghiệp vụ, không giới hạn riêng Lái xe (FR-009) | Delta | chưa có trong tài liệu khách gửi |
 | ✅ OQ-18 | FR-009 quyền theo bản ghi của bước, NFR-004 quyền theo nghiệp vụ gốc — thống nhất 1 nguồn quyền. → **Chốt 12/10:** Quyền theo nghiệp vụ của từng bước; sửa NFR-004. Yêu cầu cấp quyền: BL-065 | BA | chưa có trong tài liệu khách gửi |
 | ✅ OQ-19 | Nhân viên nội bộ có dùng tính năng trên app không? (2 UC ghi "Website hoặc app", userflow ghi chỉ web; nếu có, app cần sheet lỗi E-001/E-002 + nút tạo nghiệp vụ tiếp theo) → **Chốt 12/10:** Có, tuỳ nghiệp vụ — cột "Có trên app" (BR-007, FR-012) | Delta | chưa có trong tài liệu khách gửi |
-| ✅ OQ-20 | Mở thẳng URL danh sách khi không có quyền thì báo gì? Panel không quyền [8] ẩn lý do phát sinh — xác nhận. → **Chốt 12/10:** Đường dẫn không quyền: E-common-011 + Về trang chủ (FR-019, BL-064); panel [8] giữ lý do phát sinh | BA | chưa có trong tài liệu khách gửi |
-| ✅ OQ-21 | Danh sách [11] chưa có màn đang tải và lỗi tải; lỗi chỉ báo toast 3 giây nên nút Thử lại mất theo. → **Chốt 12/10:** Skeleton khi tải; lỗi tải hiện khối lỗi + Thử lại thay toast (FR-015) | BA | chưa có trong tài liệu khách gửi |
-| ✅ OQ-22 | Dòng quy trình [1] và thẻ quy trình app [19] chưa có giữ chỗ khi tải; khối lịch sử trong panel chưa có trạng thái tải/lỗi/rỗng. → **Chốt 12/10:** Skeleton dòng/thẻ quy trình; lịch sử có tải/lỗi/rỗng (FR-005, FR-008) | BA | chưa có trong tài liệu khách gửi |
-| ✅ OQ-23 | Mở bản ghi đã bị xoá khi sơ đồ còn mở: chưa có mã lỗi. Popup sơ đồ lỗi [5] chưa có câu mô tả. → **Chốt 12/10:** Thêm E-004; popup lỗi [5] có tiêu đề + mô tả (FR-006, FR-010) | BA | chưa có trong tài liệu khách gửi |
+| ✅ OQ-20 | Mở thẳng URL danh sách khi không có quyền thì báo gì? Panel không quyền [1.5] ẩn lý do phát sinh — xác nhận. → **Chốt 12/10:** Đường dẫn không quyền: E-common-011 + Về trang chủ (FR-019, BL-064); panel [1.5] giữ lý do phát sinh | BA | chưa có trong tài liệu khách gửi |
+| ✅ OQ-21 | Danh sách [2.1] chưa có màn đang tải và lỗi tải; lỗi chỉ báo toast 3 giây nên nút Thử lại mất theo. → **Chốt 12/10:** Skeleton khi tải; lỗi tải hiện khối lỗi + Thử lại thay toast (FR-015) | BA | chưa có trong tài liệu khách gửi |
+| ✅ OQ-22 | Dòng quy trình [1.1] và thẻ quy trình app [1.1] chưa có giữ chỗ khi tải; khối lịch sử trong panel chưa có trạng thái tải/lỗi/rỗng. → **Chốt 12/10:** Skeleton dòng/thẻ quy trình; lịch sử có tải/lỗi/rỗng (FR-005, FR-008) | BA | chưa có trong tài liệu khách gửi |
+| ✅ OQ-23 | Mở bản ghi đã bị xoá khi sơ đồ còn mở: chưa có mã lỗi. Popup sơ đồ lỗi [1.2] · Load error chưa có câu mô tả. → **Chốt 12/10:** Thêm E-004; popup lỗi [1.2] · Load error có tiêu đề + mô tả (FR-006, FR-010) | BA | chưa có trong tài liệu khách gửi |
 | ✅ OQ-24 | Lọc ra 0 dòng khi ô tìm trống: cần câu riêng (câu hiện tại cần [mã]). → **Chốt 12/10:** "Không có quy trình phù hợp với bộ lọc." (FR-017) | BA | chưa có trong tài liệu khách gửi |
 | ✅ OQ-25 | App mở sơ đồ có tự mở sheet bước không (FR-006 và userflow ghi khác nhau)? Thu phóng app cần nút +/− hay chỉ 2 ngón? → **Chốt 12/10:** Không tự mở sheet bước; thu phóng chỉ bằng hai ngón (FR-006, FR-021) | BA | chưa có trong tài liệu khách gửi |
 | ✅ OQ-26 | GR-26 thuộc mục "chỉ App" nhưng spec dùng cho web; "Đang tải sơ đồ…" thay skeleton chưa có Override GR-12; cách ghi "chờ bao lâu" và tiêu đề popup E-001/E-002 chưa chuẩn. → **Chốt 12/10:** Web dùng popup Loại 2; Override GR-12 cho sơ đồ; chờ ghi phút/giờ/ngày; tiêu đề popup "Không thể …" | BA | chưa có trong tài liệu khách gửi |

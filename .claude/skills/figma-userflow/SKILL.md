@@ -87,7 +87,7 @@ backlog; marking a real screen as a state hides it. Decide deliberately.
 
 ### Pitfalls — easy to get wrong
 
-* **`screenId` is what links the flow to the artboards.** Set it (`"2.1"`, `"5.3"`) and
+* **`screenId` is what links the flow to the artboards.** Set it to the full screenId, number and device (`"2.1 · web"`, `"5.3 · mob"`), and
   `options.linkScreens: true` wires ON_CLICK → NAVIGATE from each box to the artboard whose
   name contains that id. Unmatched ids are __reported, never guessed__ — read that list.
 * **Name the prototype flow after the diagram.** When `linkScreens` is on, set a flow starting point

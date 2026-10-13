@@ -1,7 +1,8 @@
 ---
 type: object-map
 feature: cross-process-flow
-status: draft
+status: stale
+status_prev: draft
 updated: 2026-10-12
 links:
   - docs/_shared/object-map.md

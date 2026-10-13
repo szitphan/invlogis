@@ -130,9 +130,11 @@ Cách A không có nhóm DESIGN SYSTEMS trong file dự án: các trang đó n�
   **Ready for dev** (Dev Mode). Sửa sau khi đã Ready, Figma tự đổi sang *Changed*.
 
 **Bố cục trong Section con:**
-* Mỗi màn là một **nhóm**, có thanh title rộng bằng cả nhóm, ghi `<screenId> · <slug> — States`.
+* Mỗi màn là một **nhóm**, có thanh title rộng bằng cả nhóm, ghi
+  `<screenId> · <slug> — <tên Việt> — States` (tên Việt = cột *Màn hình* của userflow Mục 2), ví dụ
+  `1.1 · web · process-line — Màn chi tiết bản ghi có dòng quy trình — States`.
   Thanh title là text/rectangle, **không phải frame**, để `linkScreens` không khớp nhầm. Nhóm
-  responsive riêng có title `<screenId> · <slug> — Responsive`. Popup mở từ nơi chưa vẽ (màn ngoài
+  responsive riêng có title `<screenId> · <slug> — <tên Việt> — Responsive`. Popup mở từ nơi chưa vẽ (màn ngoài
   feature) gom một nhóm riêng, title `Popups — mở từ <nơi mở>`.
 * State của màn xếp **dọc** dưới frame chính, cách nhau 100px. State vẽ ở 1920, cao theo nội dung;
   sửa nội dung xong thì canh lại khoảng cách cả cột, không để frame dính nhau hoặc cách lung tung.
@@ -152,16 +154,23 @@ Cách A không có nhóm DESIGN SYSTEMS trong file dự án: các trang đó n�
 | Nhóm kế tiếp | cách mép phải nhóm trước **400px** |
 
 **Tên frame:**
-* Frame chính (đầu cột, state mặc định): `<screenId> · <slug>`, ví dụ `3.1-web · danh-sach-chuyen`.
-* Frame state và modal: tên ngắn **tiếng Anh**, viết hoa chữ đầu, 2–3 từ, lấy theo bảng từ vựng
-  dưới. Có `screenId` riêng trong userflow Mục 2 → `<screenId> · <tên tiếng Anh>` (vd `30-web · Loading`),
-  để `linkScreens` vẫn nối được. Không có số riêng → tên trơn (`Loading`).
+Mọi frame bắt đầu bằng `<screenId> · <slug>`. Các phần ngăn bằng ` · ` (có dấu cách hai bên); số,
+slug, tên Việt lấy từ userflow Mục 2 theo `.claude/rules/naming-conventions.md` mục *Màn hình & flow*.
+
+* Frame chính (đầu cột, state mặc định): **3 phần** `<[#]> · <web|mob> · <slug>`, ví dụ
+  `1.1 · web · process-line`.
+* Frame state và modal không có số riêng: **4 phần** `<screenId> · <slug> · <tên tiếng Anh>`, ví dụ
+  `1.1 · web · process-line · Loading`, `1.1 · web · process-line · Confirm delete`. Tên tiếng Anh viết
+  hoa chữ đầu, 2–3 từ, theo bảng từ vựng dưới.
+* State có số riêng trong userflow Mục 2 (có chuyển màn riêng ở Mục 3.5) là màn riêng: 3 phần với
+  số và slug của nó (`1.3 · web · process-line-error`), vẫn đặt trong nhóm của màn gốc.
 * Không để `Frame 123`, `state 2`; không có dấu cách thừa đầu tên frame (tên trang module vẫn cố ý thụt).
-* **Frame thuộc màn nào:** theo nhóm. Frame chính là frame trên cùng của cột trái nhất trong nhóm.
-  Mọi frame khác trong nhóm, kể cả frame có `screenId` riêng, thuộc màn đó: cùng cột là state, bên
-  phải là modal (cột dưới modal là state của modal). Frame tên bắt đầu bằng `Ghi chú` / `Note` là ghi
-  chú, không tính là state. Skill đọc frame (`/prototype-html`, `@usability-reviewer`) khớp theo luật
-  này. Frame cũ còn hậu tố `· rỗng` / `· đang tải` / `· lỗi` vẫn được nhận là state của `screenId` đó.
+* **Frame thuộc màn nào:** tách tên theo ` · `. Phần 1 là số, phần 2 là thiết bị, phần 3 là slug,
+  phần 4 (nếu có) là state/modal. So **từng phần**, không so chuỗi con (`1.1` không khớp `11.1`,
+  `1.10`). Vị trí trong nhóm dùng để kiểm chéo: frame chính trên cùng cột trái nhất, cùng cột là
+  state, bên phải là modal (cột dưới modal là state của modal). Frame tên bắt đầu bằng `Ghi chú` /
+  `Note` là ghi chú, không tính là state. Skill đọc frame (`/prototype-html`, `@usability-reviewer`)
+  khớp theo luật này.
 
 **Bảng từ vựng tên state.** Tình huống mới chưa có trong bảng thì đặt theo mẫu *Danh từ + tính chất*,
 rồi thêm một dòng vào bảng.
@@ -184,10 +193,10 @@ rồi thêm một dòng vào bảng.
 | Modal | `<Đối tượng> <loại>`: Process diagram, Step sheet, Confirm delete |
 | Popup lỗi nghiệp vụ | Theo nguyên nhân: Step already requested, Source revoked |
 
-**Mã màn:** `<số>-web` hoặc `<số>-mob`, ví dụ `3.1-web · danh-sach-chuyen`, `3.1-mob · danh-sach-chuyen`.
-Desktop, Tablet, Responsive dùng `-web`; Mobile 375 dùng `-mob`. Userflow nối màn theo **tên chứa**
-`screenId`, nên `screenId` trong userflow phải ghi đủ hậu tố (`3.1-web`); ghi `3.1` sẽ khớp nhầm cả
-`3.1-mob` và `3.10-web`.
+**Mã màn (`screenId`):** `<[#]> · web` hoặc `<[#]> · mob`, ví dụ `1.1 · web · process-line`,
+`1.1 · mob · process-line` (web và mobile cùng màn chung số + slug). Desktop, Tablet, Responsive dùng
+`web`; Mobile dùng `mob`. Userflow nối màn theo `screenId`, nên `screenId` phải ghi đủ thiết bị
+(`1.1 · web`); ghi `1.1` sẽ khớp nhầm cả bản `mob`.
 
 ## 3. Kiểm tra setup (cả hai cách)
 

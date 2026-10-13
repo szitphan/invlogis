@@ -246,6 +246,7 @@ Chạy sau F.5 (bảng 5 cột đã đủ), trước Write bước F-9, mỗi fl
      * Đủ trạng thái rỗng / lỗi / đang tải / không có quyền cho màn có dữ liệu hoặc thao tác (nguồn có mà màn thiếu = finding).
      * Wording lỗi/thành công khớp **nguyên văn** nguồn; mã `E-{feature}-NNN` / `E-common-NNN` đúng và tồn tại.
      * Element khớp CMP/GR đã gọi mã, đủ phần "UC phải khai báo"; override có lý do (`ui-common-rules-components.md` Mục 9).
+     * **Phủ hành vi CMP đã gọi:** mỗi `Xem CMP-xx` → đối chiếu từng row tương tác/trạng thái trong bảng 5 cột của CMP (Click mở tooltip/popover/panel, đang tải/lỗi…). Dữ liệu mẫu của màn có chỗ áp mà màn/bảng không có row (hoặc dữ liệu mẫu không có ca nào để thể hiện hành vi đó, vd CMP-09 R1 chip "Điều kiện x/y" khi không bước nào có ≥2 bước trước) = finding. Không chép phần chung — thêm row riêng nêu element + dữ liệu của feature + `Xem CMP-xx #n`.
      * Validation/số liệu trong Description có nguồn (BR/FR), không bịa.
    - Prompt gồm nội dung flow vừa dựng (chưa ghi file) + đường dẫn nguồn trên để agent Read.
    - Lỗi cơ học (mã, wording lệch nguyên văn, thiếu `Xem CMP-xx`) → tự sửa; finding nghiệp vụ (thêm màn/trạng thái, rule) → câu hỏi đánh số cho user, KHÔNG tự quyết. Tối đa 2 vòng.

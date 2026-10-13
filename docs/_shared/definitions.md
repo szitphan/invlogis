@@ -1,6 +1,7 @@
 ---
 type: shared-definitions
-status: draft
+status: stale
+status_prev: draft
 updated: 2026-10-12
 links:
   - docs-input/srs-cu/lg-srs-export.md

@@ -46,6 +46,23 @@ paths:
 >
 > **Ngoại lệ có chủ đích — họ API dùng BARE NAME**, không prefix: `integration/api-assess.md`, `api-summary.md`, `api-design.md`, `api-map.md`, `api-readiness.md` và `test/api/api-checklist.md`, `api-tests.md`. Lý do: folder `integration/` + `test/api/` đã nằm dưới `docs/{feature}/` nên path đã phân biệt đủ; thêm prefix chỉ làm dài tên. Xem bảng path ở trên + `.claude/rules/api-integration.md`.
 
+## Màn hình & flow
+
+> Áp cho userflow Mục 1–3.6, wireframe ASCII/HTML, prototype và frame Figma. Nguồn số + slug duy nhất: `srs/{feature}-userflow.md` Mục 2.
+
+| Thứ | Quy ước | Ví dụ |
+|---|---|---|
+| Số màn `[#]` | `{flow#}.{màn#}`: `flow#` = thứ tự flow ở userflow Mục 3, `màn#` = thứ tự màn trong flow. Màn dùng chung nhiều flow lấy số của flow đầu tiên chứa nó. Màn thêm sau lấy số kế tiếp trong flow; không đánh lại số đã dùng | `1.1`, `1.2`, `2.1` |
+| `screenId` | `{[#]} · {web\|mob}`, ngăn bằng ` · ` (có dấu cách hai bên). Desktop, Tablet, Responsive = `web`; Mobile = `mob` | `1.1 · web`, `1.1 · mob` |
+| Web ↔ mobile | Cùng một màn thì chung `[#]` và chung slug, chỉ khác thiết bị. Màn chỉ có trên mobile đánh số trong flow mobile | `1.1 · web` ↔ `1.1 · mob` |
+| Slug màn | Tiếng Anh, kebab-case, ASCII, ≤ 40 ký tự. Không tiền tố/hậu tố thiết bị (không `m-`) | `process-line` |
+| Slug flow | Tiếng Anh, kebab-case. Không chứa đuôi file (`/wireframe-html` tự thêm `.html` khi ghi file) | `view-process` |
+| Trạng thái có số riêng | Chỉ khi có chuyển màn riêng ở userflow Mục 3.5 (đi tới hoặc rời đi theo đường mà màn gốc không có) **và** có nội dung + hành động riêng (panel, popup chặn, màn mới). Chuyển *Tải xong / Thử lại / Tải lại / Xoá bộ lọc / Đóng* là vòng đời chuẩn của trạng thái, không tính. Slug `{slug gốc}-{trạng thái}` hoặc tên theo nội dung | `1.3` · `step-not-created` |
+| Trạng thái không có số riêng | Ghi ở cột *Trạng thái* của Mục 2 bằng tên tiếng Anh theo bảng từ vựng `design/setup-figma.md`. Mục 3.5 ghi `[1.1] · Loading` | `Loading, Load error, Empty` |
+| Tên hiển thị | Tiếng Việt: cột *Màn hình* (Mục 2), *Tên flow* (Mục 3), nhãn sơ đồ Mục 1, cột Từ màn/Đến màn Mục 3.5, SRS/UC/story (không dùng slug), thanh title nhóm trên Figma. Slug UC (`uc-…`) không thuộc quy ước này | Màn chi tiết bản ghi có dòng quy trình |
+
+Tên frame Figma (frame chính 3 phần, trạng thái/modal 4 phần, title nhóm): `design/setup-figma.md` mục *Tên frame*.
+
 ## Wikilinks‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 Format: `[[docs/payment/srs/payment-spec.md|Payment SRS]]`

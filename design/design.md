@@ -1735,6 +1735,17 @@ Tương phản được đo trên mode Light (dark ghi riêng):
 chỉnh token. Reviewer không coi chúng là lỗi của màn. Chỉ báo lỗi khi màn **dùng sai chỗ**, ví dụ
 đặt nội dung quan trọng bằng chữ secondary trên nền body (xem Don't).
 
+**Ngoại lệ đã biết cho `a11y_audit` (13/10/2026):** sau khi nối prototype, audit coi mọi node có
+`reactions` là control và đòi viền ≥ 3:1 (WCAG 1.4.11). Các trường hợp sau **không tính là lỗi**:
+* Nút X dạng icon (`Button` Type=Icon Only, Ghost/Secondary) ở header popup, panel, dialog, sheet — nhận diện
+  qua icon X (đạt tương phản), không thêm viền.
+* Nút có nhãn chữ Secondary / Destructive của thư viện (vd "Thử lại", "Thu hồi", "Xoá", "Đóng" ở chân dialog,
+  "Xoá bản nháp") — nền nhạt 1.14–1.42:1 so với surface, nhận diện qua nhãn chữ (đạt AA) và vị trí; giữ theo
+  Astryx như quyết định 27/09, không chỉnh token.
+* Artboard "đang tải" gắn "bấm để sang màn đã tải" — reaction chỉ để mô phỏng tải xong, không phải control.
+* Chip `Nhãn đường · Điều kiện` không thuộc ngoại lệ: đã thêm viền (`Status Chip/Green/Foreground` cho biến
+  thể đủ, `Gray/Icon` cho biến thể nền trắng — `Border/Emphasized` chỉ 1.48:1, không đủ).
+
 * **Không truyền nghĩa chỉ bằng màu:** trạng thái luôn có nhãn chữ; StatusDot phải đi kèm chữ.
 * **Focus nhìn thấy được:** nút, link, checkbox, switch có outline 2px accent (cách control một khe); field đổi viền sang accent 1px. Không được tắt, không vẽ focus chỉ bằng ring.
 * **Vùng chạm:** control 28/32/36px **nhỏ hơn 44px**. Trên thiết bị cảm ứng dùng Size=LG và giãn vùng bấm (padding hàng, cả hàng bấm được).

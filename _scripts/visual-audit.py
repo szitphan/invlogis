@@ -9,7 +9,7 @@ cả bảng trong rule. Luật cần mắt người (phân cấp màu, Jakob…)
 **một artboard**, lưu ra file. Toạ độ con tương đối với cha; gốc = artboard.
 
 Dùng:  python3 _scripts/visual-audit.py <screen.json> [--part <vùng.json> ...] [<screen2.json> ...] [--platform web|mobile]
-       (mặc định tự nhận: tên có "-mob" hoặc rộng ≤ 480 → mobile)
+       (mặc định tự nhận: tên có phần thiết bị "mob" (`1.1 · mob · …`, dạng cũ "-mob") hoặc rộng ≤ 480 → mobile)
 Thoát 1 khi có FAIL.
 
 Giới hạn (in ở cuối báo cáo, không giấu):
@@ -55,6 +55,12 @@ KEYS_HEADER = {"sortable", "resizable", "has filter"}
 KEYS_FIELD = {"placeholder", "showlabel", "descriptiontext", "statusmessage"}
 VARIANT_KEYS = ("variant", "kiểu", "loại", "type")
 BUTTON_VARIANTS = ("primary", "secondary", "ghost", "destructive", "tertiary", "danger")
+
+
+def _is_mob_name(name):
+    """Phần thứ 2 của tên frame là thiết bị (`1.1 · mob · slug`); dạng cũ `3-mob · slug`."""
+    parts = name.split(" · ")
+    return (len(parts) >= 2 and parts[1].strip() == "mob") or bool(re.match(r"^[\d.]+-mob\b", name))
 
 
 def names_of(n):
@@ -375,7 +381,7 @@ def main(argv):
             truncated = sum(1 for r in walk_raw(raw) if r.get("type") == "INSTANCE" and not r.get("mainComponent")
                             and not str(r.get("id", "")).startswith("I"))
         root = build(raw)
-        plat = platform or ("mobile" if re.search(r"-mob\b", raw.get("name", "")) or raw.get("w", 9999) <= 480 else "web")
+        plat = platform or ("mobile" if _is_mob_name(raw.get("name", "")) or raw.get("w", 9999) <= 480 else "web")
         res, rate, ninst = audit(root, plat)
         print(f"== {raw.get('name', f)} ({plat}, {raw.get('w', 0):g}×{raw.get('h', 0):g})")
         for lvl, code, lab, msg in sorted(res, key=lambda r: ("FAIL", "WARN", "INFO").index(r[0])):

@@ -104,7 +104,7 @@ thì ghi "cần `/cr`".
 Tác vụ ({K}):
 | Tác vụ | Tần suất | Bước (thực / tiêu chí) | Kết quả | Kẹt ở |
 |---|---|---|---|---|
-| … | mỗi ca | 4 / ≤3 | ⚠ vượt | 3.2-web · drawer gán xe — nút "Gán" nằm ngoài vùng nhìn |
+| … | mỗi ca | 4 / ≤3 | ⚠ vượt | 3.2 · web · assign-vehicle-drawer — nút "Gán" nằm ngoài vùng nhìn |
 
 Findings (theo review-format):
 - [BLOCKING] …
