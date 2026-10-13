@@ -57,17 +57,17 @@ SLIM_FRONTMATTER_TYPES = {
 }
 CONTENT_FILE_PATH_RE = re.compile(r"/(us-\d+|uc-[a-z0-9-]+)\.md$")
 
-# 5 cột kanban chuẩn (status-lifecycle.md). Map cả status "lạ" của vault demo cũ về cột gần
-# nhất để kanban không vỡ (stale không phải cột — nó là cờ overlay, doc stale vẫn nằm ở cột
-# lifecycle của nó nhưng gắn badge riêng).
-KANBAN_COLS = ["draft", "in-review", "revisions", "approved", "shipped"]
+# 5 cột kanban chuẩn (status-lifecycle.md) + cột Stale. Map cả status "lạ" của vault demo cũ về
+# cột gần nhất để kanban không vỡ. Stale có cột riêng (Dashboard v2, 2026-10-13): dồn vào Draft
+# làm kanban đếm sai — doc stale cần rà/reset, không phải "đang viết".
+KANBAN_COLS = ["draft", "in-review", "revisions", "approved", "shipped", "stale"]
 _STATUS_TO_COL = {
     "draft": "draft", "captured": "draft", "in-progress": "draft", "active": "draft",
     "in-review": "in-review", "review": "in-review",
     "revisions": "revisions",
     "approved": "approved", "done": "approved", "processed": "approved",
     "shipped": "shipped",
-    "stale": "draft",  # doc stale rơi về draft (cần làm lại) + gắn badge stale riêng
+    "stale": "stale",
 }
 
 
@@ -124,7 +124,7 @@ def scan_docs(vault: Path, feature_filter: str, today: date) -> list:
         if any(part in EXCLUDE_DIRS or part.startswith("_") for part in rel.parts[1:-1]):
             # cho phép docs/_shared, docs/_product đọc field cần (traceability) nhưng exclude khỏi
             # kanban/action-item scan chính — giữ đơn giản: skip mọi folder bắt đầu "_" trừ chính docs/
-            if not (len(rel.parts) >= 2 and rel.parts[1] in {"_shared", "_product"}):
+            if not (len(rel.parts) >= 2 and rel.parts[1] in {"_shared", "_product", "_research"}):
                 continue
         text = read_text(path)
         fm = parse_frontmatter(text)
@@ -470,7 +470,8 @@ def compute_pipeline(vault: Path, feature_filter: str) -> list:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def compute_freshness(docs: list) -> dict:
-    """Điểm 100 = mới toanh, giảm dần theo tuổi `updated`; stale flag phạt nặng.
+    """Điểm 100 = mới toanh, giảm dần theo tuổi `updated`. CHỈ theo tuổi — cờ stale có đèn riêng
+    ở compute_health (trước đây stale ép trần 20đ làm 1 nguyên nhân đỏ 2 đèn — Dashboard v2).
     Chỉ chấm doc có lifecycle (bỏ slim-frontmatter — chúng inherit từ file cha).
     """
     scored = []
@@ -484,8 +485,6 @@ def compute_freshness(docs: list) -> dict:
             # -1 điểm/ngày sau 7 ngày ân hạn, sàn 0
             age_penalty = max(0, n - 7)
             score = max(0, 100 - age_penalty)
-            if d["is_stale"]:
-                score = min(score, 20)  # stale flag ép trần 20
         scored.append({"path": d["path"], "feature": d["feature"],
                        "score": score, "days": n, "is_stale": d["is_stale"]})
     valid = [s["score"] for s in scored if s["score"] is not None]
@@ -564,8 +563,8 @@ def _light_inv(count, ok, warn):
     return "green" if count <= ok else "amber" if count <= warn else "red"
 
 
-def compute_health(coverage, pipeline, freshness, quality, action_items, open_crs):
-    """4 đèn + verdict. Mỗi đèn kèm `metric` (số thô) + `detail` (1 câu vì sao) để dashboard
+def compute_health(coverage, pipeline, freshness, quality, action_items, open_crs, n_stale=0):
+    """5 đèn + verdict. Mỗi đèn kèm `metric` (số thô) + `detail` (1 câu vì sao) để dashboard
     render thẳng, không diễn giải lại."""
     # 1. Coverage — TB % FR có US phủ (feature đã có FR)
     valid = [c["coverage_pct"] for c in coverage if c["coverage_pct"] is not None]
@@ -601,6 +600,10 @@ def compute_health(coverage, pipeline, freshness, quality, action_items, open_cr
         {"key": "risk", "label": "Rủi ro / việc gấp", "light": risk_light,
          "metric": str(risk_count),
          "detail": f"{n_p0} việc P0 · {len(open_crs)} CR treo · {n_overdue} review quá hạn"},
+        # 5. Stale — doc upstream đã đổi mà chưa rà (tách khỏi độ tươi).
+        {"key": "stale", "label": "Doc stale", "light": _light_inv(n_stale, 0, 5),
+         "metric": str(n_stale),
+         "detail": f"{n_stale} doc chờ rà theo upstream đã đổi" if n_stale else "Không có doc stale"},
     ]
 
     # Verdict tổng: đèn tệ nhất quyết định (red > amber > green).
@@ -644,7 +647,8 @@ def main():
     quality = compute_quality(vault, docs, args.feature)
     action_items = compute_action_items(docs, crs, stories, today)
     open_crs = [c for c in crs if c["status"] not in ("closed", "rejected")]
-    health = compute_health(coverage, pipeline, freshness, quality, action_items, open_crs)
+    health = compute_health(coverage, pipeline, freshness, quality, action_items, open_crs,
+                            n_stale=sum(1 for d in docs if d["is_stale"]))
 
     output = {
         "generated": today.isoformat(),
