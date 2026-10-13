@@ -86,7 +86,7 @@ Skill KHÔNG được auto-pick file im lặng. KHÔNG được skip L1 với c�
 
 ## Skills
 
-55 skill `/command` trong `.claude/skills/` (+ vài reference skill `user-invocable: false`). Nguồn sự thật là từng `SKILL.md`; bảng mô tả đầy đủ từng skill ở `_guides/claude-reference.md` mục "Skills shipped" — khi thêm/bớt skill, cập nhật bảng đó.
+68 skill `/command` trong `.claude/skills/` (+ vài reference skill `user-invocable: false`). Nguồn sự thật là từng `SKILL.md`; bảng mô tả đầy đủ từng skill ở `_guides/claude-reference.md` mục "Skills shipped" — khi thêm/bớt skill, cập nhật bảng đó.
 
 __Luồng chính:__ `/prd` → `/object-map` → `/roadmap` → `/discover` → `/brainstorm` → `/urd` `/brd` `/prd-epic` → `/srs` → `/user-flow` → `/wireframe-ascii` | `/wireframe-html` → `/figma-screen` / `/prototype-html` → `/usecase` `/userstory` `/ac` → `/test-checklist` → `/test-cases` → `/playwright-gen`. Thay đổi qua `/cr`. Tích hợp API theo họ `/api-*` (`.claude/rules/api-integration.md`). Tài liệu khách mới: `/intake`.
 
