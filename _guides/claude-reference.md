@@ -96,7 +96,7 @@ Phần chuyển nguyên văn ra từ `CLAUDE.md` (2026-10-12) để giảm ngữ
 
 ## Skills shipped
 
-> __71 skill user-invocable__ (`/command`) trong `.claude/skills/` (mỗi skill = 1 folder chứa `SKILL.md`). Ngoài ra có vài __reference skill__ không phải `/command` (nạp bởi skill khác, `user-invocable: false`) — vd `stacks-reference`, `code-explorer` (dùng bởi `/code-to-srs`). Nguồn sự thật là các file `SKILL.md` — bảng dưới là tra-nhanh, giữ đồng bộ khi thêm/bớt skill. Đếm folder: `ls -d .claude/skills/*/ | wc -l` (gồm cả reference skill — hiện 73). Đếm user-invocable: `grep -l "user-invocable: true" .claude/skills/*/SKILL.md | wc -l`.
+> __73 skill user-invocable__ (`/command`) trong `.claude/skills/` (mỗi skill = 1 folder chứa `SKILL.md`). Ngoài ra có vài __reference skill__ không phải `/command` (nạp bởi skill khác, `user-invocable: false`) — vd `stacks-reference`, `code-explorer` (dùng bởi `/code-to-srs`). Nguồn sự thật là các file `SKILL.md` — bảng dưới là tra-nhanh, giữ đồng bộ khi thêm/bớt skill. Đếm folder: `ls -d .claude/skills/*/ | wc -l` (gồm cả reference skill — hiện 75). Đếm user-invocable: `grep -l "user-invocable: true" .claude/skills/*/SKILL.md | wc -l`.
 
 __Product planning phase (project-level — TRÊN /brainstorm):__
 
@@ -214,6 +214,7 @@ __Maintenance (Phase 6):__
 | `/delegate` | Chia việc sang CLI AI khác (Codex/Gemini...) để san tải quota: check quota → chọn model theo việc (dài→Claude, ngắn→Codex) → điều phối đa vòng (decompose, review→fix, debate→arbiter). Gọi `/delegate`, hoặc khi user nhắc @codex/@gemini / "ý kiến thứ hai". Không đụng vault. Xem `.claude/rules/agent-conventions.md` |
 | `/run-task <feature> "<mục tiêu>" [--bg]` | Giao cho AI tự chạy 1 chuỗi bước tài liệu của 1 feature trong worktree `feat/<feature>`: Ready check → run card (người dùng duyệt 1 lần) → mỗi bước skill + gate + reviewer chéo + commit → chỉ dừng khi cần quyết định (Cửa 2) → xong thì `wt.sh ready` sinh task 🔍. Chế độ chạy: `approval-gate.md`; vùng ghi chặn bằng hook `worktree-guard.sh` |
 | `/queue [<số>]` | Việc đang chờ người dùng trong repo — 4 làn 🔍 chờ duyệt land · ⛔ chặn chờ trả lời · 📝 card chờ duyệt · ⚙ đang chạy (nguồn `_scripts/queue.py`) — chọn 1 việc để review/duyệt land, trả lời câu hỏi chặn hoặc duyệt card |
+| `/board publish \| sync` | Board kéo-thả (artifact Claude có db, mở trên điện thoại) cùng dữ liệu `/queue` + backlog. Kéo card sang Đang chạy = duyệt + mở Terminal chạy `/run-task resume`; kéo 🔍 sang Xong = duyệt land; đóng task `manual`. Repo là nguồn sự thật — board chỉ gửi yêu cầu, phiên điều phối `/loop 5m /board sync` áp vào repo |
 | `/kg <command> [<arg>]` | Build/query/verify Knowledge Graph của vault — chọn shortlist file phải đọc (`impact`/`coverage`/`neighbors`), thống kê cấu trúc (`facts`/`counts`), kiểm chất lượng liên kết (`--verify`). Hạ tầng cho `/gap` `/cr` `/dashboard` — KHÔNG thay việc đọc prose (contract 3.4bis, xem `.claude/rules/kg-usage.md`) |
 | `/preview [<feature>] [--out <path>]` | HTML viewer tổng hợp mọi tài liệu MD của 1 feature — mở thẳng bằng trình duyệt, không cần server. |
 

@@ -33,6 +33,7 @@ Nội dung trả lời 4 câu (theo thứ tự quan trọng giảm dần — cũ
 * **Self-contained** — chỉ depend **ECharts** (1 CDN) cho charts + **List.js** (1 CDN) cho filter/sort bảng. Mọi data inline trong file. Chart.js đã bỏ (2026-07-13) — ECharts có sẵn native funnel + heatmap + graph mà Chart.js phải thêm plugin.
 * **Read-only data scan** — KHÔNG edit doc nào. Chỉ scan qua engine + đọc thêm 1 số marker body. L1 chỉ cho Write file HTML cuối.
 * **Làn "Chờ bạn"** — nguồn duy nhất là `_scripts/queue.py --json`; scope feature thì lọc theo `feature`/`branch`.
+* **Kéo thả** — dashboard HTML tĩnh chỉ để xem. Đổi trạng thái bằng kéo thả (đóng task, duyệt card + chạy, duyệt land) nằm ở board artifact `/board` (cùng nguồn `queue.py`, qua `_scripts/board-snapshot.py`); dashboard ghi link board ở header nếu có `.claude/state/board.json`.
 * **Nguồn số liệu có phân vai** — `kg counts`/`kg coverage`/`kg orphans` là nguồn chính cho counts, coverage, orphan và stale; `_scripts/workspace-status.py` chỉ bổ sung pipeline/freshness/quality/action items cùng các metric KG chưa biểu diễn. Nếu bất kỳ query KG nào `KG-ERROR` hoặc exit ≠ 0, chạy lại flow cũ bằng `workspace-status.py` cho toàn bộ phần metric trùng lặp. KHÔNG suy diễn lại con số bằng prompt (tránh dashboard lệch với engine).
 * **Vietnamese-first UI** — labels/headers tiếng Việt; doc titles giữ ngôn ngữ gốc.
 * **Theme-aware** — dark mode toggle (CSS variables 2 tầng + localStorage + `prefers-color-scheme`).

@@ -94,6 +94,7 @@ Land là cửa duyệt cuối của 1 feature — **không bao giờ tự chạy
 | `✅` | Đã land + drop |
 
 - Không có task 🔍 tương ứng hoặc người dùng chưa nói duyệt → KHÔNG land, kể cả khi được nhờ "làm nốt".
+- Trên board (`/board`), kéo task 🔍 sang "Xong" = duyệt land (báo cáo hiện trên thẻ); phiên điều phối áp như bước 3.
 - Dashboard (BL-088) gom task 🔍 thành làn "Chờ bạn".
 
 ## Tóm tắt 1 dòng

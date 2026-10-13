@@ -1,0 +1,171 @@
+<title>Invlogis Bảng việc</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 6 cột kanban cuộn ngang trong khung riêng; trên điện thoại xếp dọc thành danh sách theo cột. */
+:root {
+  --bg: #f6f6f5; --surface: #ffffff; --fg: #171717; --muted: #6b6b6b; --line: #e3e3e1;
+  --accent: #1f4fd1; --accent-soft: #e6ecfb;
+  --ok: #007004; --ok-soft: #dcefd8; --warn: #745b00; --warn-soft: #f8eac4; --bad: #a3261b; --bad-soft: #f6dcd9;
+  --font-body: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121212; --surface: #1c1c1c; --fg: #f2f2f2; --muted: #a3a3a3; --line: #2e2e2e;
+  --accent: #7d9cff; --accent-soft: #1d2747;
+  --ok: #6fcf74; --ok-soft: #173a1a; --warn: #e8c45a; --warn-soft: #3a3115; --bad: #f08b80; --bad-soft: #3d1c19; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #1c1c1c; --fg: #f2f2f2; --muted: #a3a3a3; --line: #2e2e2e;
+  --accent: #7d9cff; --accent-soft: #1d2747;
+  --ok: #6fcf74; --ok-soft: #173a1a; --warn: #e8c45a; --warn-soft: #3a3115; --bad: #f08b80; --bad-soft: #3d1c19; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 14px; padding: 16px 16px; padding-block: 16px 32px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin-bottom: 12px; }
+h1 { font-size: 20px; font-weight: 600; margin: 0; text-wrap: balance; }
+.sub { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.pill { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+#note { margin: 0 0 12px; padding: 8px 12px; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; color: var(--muted); }
+.board { display: grid; grid-template-columns: repeat(6, minmax(220px, 1fr)); gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+.col { background: transparent; min-width: 0; display: flex; flex-direction: column; gap: 8px; border-radius: 10px; padding: 4px; }
+.col.drop-ok { outline: 2px dashed var(--accent); outline-offset: 2px; background: var(--accent-soft); }
+.col h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 4px 4px 2px; font-weight: 600; display: flex; justify-content: space-between; }
+.col h2 b { font-variant-numeric: tabular-nums; color: var(--fg); font-weight: 600; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.card[draggable="true"] { cursor: grab; border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+.card.pending { opacity: .6; }
+.top { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
+.id { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.feat { font-size: 11px; color: var(--accent); }
+.title { margin: 0; line-height: 1.4; overflow-wrap: anywhere; }
+.meta { font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+details summary { font-size: 12px; color: var(--muted); cursor: pointer; }
+details pre { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-body); font-size: 12px; margin: 6px 0 0; max-height: 280px; overflow-y: auto; }
+.acts { display: flex; flex-wrap: wrap; gap: 6px; }
+button { font: inherit; font-size: 12px; font-weight: 500; border-radius: 6px; padding: 5px 10px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+button.go { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+button:focus-visible, .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.confirm { border-top: 1px solid var(--line); padding-top: 8px; display: flex; flex-direction: column; gap: 6px; font-size: 12px; }
+.tag { font-size: 11px; padding: 1px 6px; border-radius: 4px; }
+.tag.wait { background: var(--warn-soft); color: var(--warn); }
+.tag.ok { background: var(--ok-soft); color: var(--ok); }
+.tag.bad { background: var(--bad-soft); color: var(--bad); }
+.empty { color: var(--muted); font-size: 12px; padding: 8px 4px; }
+#log { margin-top: 20px; max-width: 760px; }
+#log h2 { font-size: 13px; margin: 0 0 6px; }
+#log ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+#log li { display: flex; gap: 8px; flex-wrap: wrap; color: var(--muted); }
+@media (max-width: 720px) { .board { grid-template-columns: 1fr; overflow-x: visible; } }
+@media (prefers-reduced-motion: no-preference) { .card { transition: opacity .15s; } }
+</style>
+
+<header>
+  <h1>Bảng việc Invlogis</h1>
+  <span class="pill" id="waiting">Chờ bạn: —</span>
+  <span class="sub" id="updated">Đang tải…</span>
+</header>
+<p id="note" hidden></p>
+<main class="board" id="board"></main>
+<section id="log" hidden><h2>Yêu cầu gần đây</h2><ul id="loglist"></ul></section>
+
+<script>
+const COLS = [
+  ["open", "Mở"], ["planned", "Card chờ duyệt"], ["running", "Đang chạy"],
+  ["blocked", "Chặn, chờ trả lời"], ["review", "Chờ duyệt land"], ["done", "Xong"],
+];
+const ACTION = {
+  "open>done": ["Đóng task", "Đánh dấu task này đã xong trong backlog."],
+  "planned>running": ["▶ Duyệt card & chạy", "Duyệt run card (Cửa 1). Máy sẽ mở Terminal tại worktree và chạy /run-task."],
+  "review>done": ["Duyệt land", "Đưa thay đổi của feature vào main (land + commit + xoá worktree). Đọc báo cáo trước khi duyệt."],
+};
+let db = null, canWrite = true, uid = null, state = { items: [] }, pending = new Map(), confirmFor = null, dragId = null;
+const $ = (id) => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+function note(msg) { $("note").hidden = !msg; $("note").textContent = msg || ""; }
+
+function render() {
+  const items = state.items || [];
+  $("waiting").textContent = "Chờ bạn: " + (state.waiting_on_you ?? "—");
+  $("updated").textContent = state.updated_at ? "Ảnh chụp repo lúc " + state.updated_at : "Chưa có dữ liệu — chạy /board sync";
+  const board = $("board"); board.replaceChildren();
+  for (const [key, label] of COLS) {
+    const col = el("section", "col"); col.dataset.col = key;
+    const list = items.filter((i) => i.col === key);
+    const h = el("h2"); h.append(el("span", null, label), el("b", null, String(list.length))); col.append(h);
+    if (!list.length) col.append(el("div", "empty", key === "open" && !items.length ? "Board trống. Phiên điều phối sẽ đẩy thẻ lên sau lần /board sync đầu." : "—"));
+    for (const it of list) col.append(card(it));
+    col.addEventListener("dragover", (e) => { if (canDrop(dragId, key)) { e.preventDefault(); col.classList.add("drop-ok"); } });
+    col.addEventListener("dragleave", () => col.classList.remove("drop-ok"));
+    col.addEventListener("drop", (e) => { e.preventDefault(); col.classList.remove("drop-ok"); if (canDrop(dragId, key)) { confirmFor = { id: dragId, to: key }; render(); } });
+    board.append(col);
+  }
+}
+function find(id) { return (state.items || []).find((i) => i.id === id); }
+function canDrop(id, to) { const it = find(id); return !!it && canWrite && !pending.has(id) && (it.moves || []).includes(to); }
+
+function card(it) {
+  const c = el("article", "card"); c.tabIndex = 0;
+  const movable = canWrite && (it.moves || []).length && !pending.has(it.id);
+  if (movable) { c.draggable = true; c.addEventListener("dragstart", () => { dragId = it.id; }); c.addEventListener("dragend", () => { dragId = null; }); }
+  if (pending.has(it.id)) c.classList.add("pending");
+  const top = el("div", "top"); top.append(el("span", "id", it.id.replace(/^run:docs\/[^/]+\/_runs\//, "card ")));
+  if (it.feature) top.append(el("span", "feat", it.feature));
+  c.append(top, el("p", "title", it.title));
+  if (it.meta) c.append(el("div", "meta", it.meta));
+  if (it.detail) { const d = el("details"); d.append(el("summary", null, it.col === "review" ? "Báo cáo" : it.col === "blocked" ? "Câu hỏi chặn" : "Chi tiết"), el("pre", null, it.detail)); if (it.col === "review") d.open = false; c.append(d); }
+  if (pending.has(it.id)) c.append(el("span", "tag wait", "Đã gửi: " + (ACTION[pending.get(it.id)]?.[0] || "") + " — chờ phiên điều phối"));
+  else if (movable) {
+    const acts = el("div", "acts");
+    for (const to of it.moves) { const b = el("button", to === "running" || it.col === "review" ? "go" : "", ACTION[it.col + ">" + to]?.[0] || "Chuyển"); b.id = "mv-" + it.id + "-" + to; b.onclick = () => { confirmFor = { id: it.id, to }; render(); }; acts.append(b); }
+    c.append(acts);
+  }
+  if (confirmFor && confirmFor.id === it.id) {
+    const key = it.col + ">" + confirmFor.to, a = ACTION[key] || ["Chuyển", ""];
+    const box = el("div", "confirm"); box.append(el("div", null, a[1]));
+    const acts = el("div", "acts");
+    const ok = el("button", "go", "Xác nhận: " + a[0]); ok.id = "ok-" + it.id; ok.onclick = () => send(it, confirmFor.to);
+    const no = el("button", "", "Huỷ"); no.id = "no-" + it.id; no.onclick = () => { confirmFor = null; render(); };
+    acts.append(ok, no); box.append(acts); c.append(box);
+  }
+  return c;
+}
+
+async function send(it, to) {
+  confirmFor = null;
+  if (!db) return note("Không kết nối được kho dữ liệu của board — mở lại trang khi đã đăng nhập.");
+  pending.set(it.id, it.col + ">" + to); render();
+  try {
+    await db.collection("requests").add({ item: it.id, from: it.col, to, title: it.title, at: new Date().toISOString(), by: uid, status: "new" });
+    note("Đã gửi yêu cầu. Phiên điều phối (/board sync) sẽ áp vào repo trong lần chạy tới.");
+  } catch (e) {
+    pending.delete(it.id); render();
+    if (e && e.code === "invalid_argument") { canWrite = false; render(); note("Bạn chỉ có quyền xem board này."); }
+    else note("Chưa gửi được yêu cầu (" + (e && e.code || "lỗi") + "). Thử lại sau ít phút.");
+  }
+}
+
+function renderLog(docs) {
+  const ul = $("loglist"); ul.replaceChildren();
+  $("log").hidden = !docs.length;
+  for (const d of docs) {
+    const r = d.data(); const li = el("li");
+    const st = r.status === "done" ? ["ok", "đã áp"] : r.status === "rejected" ? ["bad", "từ chối"] : ["wait", "chờ"];
+    li.append(el("span", "tag " + st[0], st[1]), el("span", "id", (r.at || "").slice(0, 16).replace("T", " ")), el("span", null, (ACTION[r.from + ">" + r.to]?.[0] || r.to) + " · " + (r.title || r.item)));
+    if (r.note) li.append(el("span", null, "— " + r.note));
+    ul.append(li);
+  }
+}
+
+render();
+(async () => {
+  const claude = window.claude;
+  if (!claude || !claude.use) { note("Board chỉ chạy trong trình xem artifact của Claude."); return; }
+  const user = await claude.use("user");
+  if (user) { uid = await user.id(); const w = await user.can("data.write"); if (w === false) canWrite = false; }
+  db = await claude.use("db");
+  if (!db) { note("Không mở được kho dữ liệu của board (cần đăng nhập)."); return; }
+  db.doc("board/state").onSnapshot((s) => { state = s.exists ? s.data() : { items: [] }; for (const id of [...pending.keys()]) { if (!find(id) || !(find(id).moves || []).length) pending.delete(id); } render(); }, (e) => note("Mất kết nối dữ liệu board (" + e.code + "). Tải lại trang."));
+  db.collection("requests").orderBy("at", "desc").limit(12).onSnapshot((q) => {
+    for (const d of q.docs) { const r = d.data(); if (r.status === "new") pending.set(r.item, r.from + ">" + r.to); else if (pending.get(r.item) === r.from + ">" + r.to) pending.delete(r.item); }
+    renderLog(q.docs); render();
+  }, () => {});
+})();
+</script>

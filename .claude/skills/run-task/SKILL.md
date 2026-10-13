@@ -29,6 +29,10 @@ trạng thái + báo cáo** của lần chạy. Mọi thứ tiếp tục đượ
 - **Không đoán quyết định nghiệp vụ.** Skill con muốn hỏi người dùng (AskUserQuestion, câu hỏi phỏng vấn,
   "chọn 1 trong 3 phương án", confirm upstream) → tra card Mục 2 "Quyết định chốt sẵn" + nguồn đầu vào; có
   thì dùng và ghi nguồn vào Bằng chứng; không có → Cửa 2. Không có ngoại lệ "chuyện nhỏ".
+- **Bước Figma (`/figma-screen` …)** chạy theo mục "Chế độ chạy" của chính skill đó: card ghi sẵn màn,
+  chế độ, thiết bị; bố cục A/B/C do `@uxui-reviewer` chọn theo bản phác (html/ascii wireframe + userflow);
+  chỉ vẽ trang nháp `_run/<feature>`; giữ khoá `_scripts/figma-lock.sh` suốt bước, trả khoá cả khi dừng.
+  Card Mục 9 phải nêu phương án bố cục đã chọn + lý do để người dùng chọn lại ở Cửa 3 nếu muốn.
 - **Skill phỏng vấn không chạy tự động**: `/brainstorm`, `/deck`, `/discover`, phần phỏng vấn của
   `/urd` `/brd` `/prd-epic`, bước chọn phương án của `/figma-screen` — chỉ được đưa vào card khi mọi câu
   đã có ở Mục 2. Không chắc → để bước đó cho người dùng làm tay, ghi "ngoài phạm vi".

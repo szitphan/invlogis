@@ -477,12 +477,36 @@ biết xử lý cái nào trước — mức chỉ là gợi ý chung, tuỳ ngh
 * **[Thấp] Thẩm mỹ**: `@visual-reviewer` chấm thứ bậc thị giác (mục 11 Bước 6) bằng AI đọc ảnh + số
   liệu A5; gu thẩm mỹ vẫn là việc của designer khi xem ảnh chụp.
 
+## Chế độ chạy (`/run-task`)
+
+Chỉ khi đủ điều kiện chế độ chạy của `approval-gate.md` (worktree `feat/<feature>` + run card đã duyệt).
+Thiếu 1 điều kiện → chạy như bình thường, hỏi user.
+
+| Chỗ thường hỏi user | Trong chế độ chạy |
+|---|---|
+| 2.1 Màn nào, Nhanh/Đầy đủ · 2.4 chia đợt | Lấy từ run card (bước figma-screen + Mục 2). Card không ghi → Cửa 2 |
+| 2.2 Thiết bị | Card Mục 2 → `primary_device` trong `srs/{feature}-userflow.md`. Không có → Cửa 2 (HARD GATE vẫn giữ: không đoán) |
+| 2.3 Vẽ userflow trước? | Không hỏi; ghi vào card Mục 9 "điểm cần soi" nếu trang chưa có flow |
+| 2.3 Bố cục A/B/C | Soạn đủ 3 phương án như thường → gọi `@uxui-reviewer` chọn 1, đối chiếu với bản phác: `html-wireframe/{flow}.html` (ưu tiên) hoặc `ascii-wireframe/{flow}.md` + userflow (Mục 2 vùng/màn, Mục 3.6 tác vụ làm nhiều nhất phải nổi nhất). Ghi vào card Mục 9: phương án chọn, lý do, vì sao bỏ 2 phương án kia. Không có bản phác nào → vẫn chọn theo userflow, ghi "chọn khi chưa có bản phác" |
+| 2.5 L1 `Y` | Run card thay; in tóm tắt kế hoạch vào Nhật ký card |
+| Finding reviewer đổi giao diện đã duyệt | KHÔNG tự sửa (memory keep-approved-look) → câu hỏi ở card Mục 6, Cửa 2 |
+
+Thêm 3 luật riêng của chế độ chạy:
+
+* **Khoá Figma** — plugin chỉ 1 kết nối. Trước Bước 3: `_scripts/figma-lock.sh acquire <feature>`; đã có
+  người giữ → Cửa 2 "Figma đang bận ({ai}, từ {lúc})". Xong hoặc dừng (kể cả lỗi) → `figma-lock.sh release <feature>`.
+  `figma_status` báo chưa kết nối → release + Cửa 2 "mở Figma desktop + plugin".
+* **Chỉ vẽ trên trang nháp `_run/<feature>`** (tạo nếu chưa có). Figma không nằm trong git — `wt.sh drop`
+  không hoàn tác được, nên trang chính chỉ đổi sau khi user duyệt land (`/queue` chuyển frame sang trang chính).
+* Bước 6 (tự kiểm) + reviewer chạy đủ như thường; kết quả 4 mức ghi vào card, không chờ user đọc.
+
 ## Constraints
 
 ### Luật cứng: không được vi phạm
 
 * **Không vẽ khi user chưa chọn bố cục.** Luôn trình 3 phương án (A theo mẫu có sẵn + B, C độc lập)
-  và chờ user chọn. Phương án độc lập chỉ độc lập về khung trang: không tự đặt token, không vẽ lại
+  và chờ user chọn. Ngoại lệ duy nhất: **Chế độ chạy** (mục dưới) — `@uxui-reviewer` chọn thay, ghi lý do,
+  user chọn lại ở Cửa 3. Phương án độc lập chỉ độc lập về khung trang: không tự đặt token, không vẽ lại
   control ngoài thư viện.
 * **Không bịa giá trị ở Known Gaps.** Đụng chỗ `design.md` chưa có chuẩn (ví dụ mobile) thì hỏi,
   hoặc vẽ tạm và ghi rõ "chưa có chuẩn trong design.md" trong báo cáo và trong mô tả artboard.

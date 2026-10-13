@@ -155,7 +155,7 @@ kết quả 1 lần trước khi land (Cửa 3, `.claude/rules/worktree.md` Mụ
 Hợp lệ **chỉ khi đủ cả 3** (thiếu 1 → quay về L1/L2/L3 bình thường):
 
 1. Phiên/agent đang ở worktree branch `feat/<feature>` (KHÔNG BAO GIỜ trên `main`).
-2. Có run card `docs/<feature>/_runs/*.md` với `approved:` có ngày và `run_state: running`.
+2. Có run card `docs/<feature>/_runs/*.md` với `approved:` có ngày và `run_state: running`. Duyệt card = user `Y` ở Cửa 1 của `/run-task`/`/queue`, **hoặc kéo card sang "Đang chạy" trên board** (`/board`, user chốt 13/10).
 3. File sắp ghi nằm trong vùng ghi `docs/<feature>/**` (hook `worktree-guard.sh` chặn bằng máy).
 
 Trong chế độ chạy, skill con:
