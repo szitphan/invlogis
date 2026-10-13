@@ -187,6 +187,7 @@ Khung: Desktop 1920×1080
 Nơi vẽ: trang "02 · Đơn hàng" › F01 · Duyệt đơn › Web
 Token/component: design/design.md (Astryx), instance thư viện
 Chưa có chuẩn: (không)
+Prototype: nối theo userflow Mục 3.5 · flow: UC-xem-quy-trinh-cua-ban-ghi · Xem quy trình của một bản ghi (Web), …
 Apply? (Y / sửa / chọn luồng cụ thể)
 ```
 
@@ -279,6 +280,42 @@ Thứ tự dựng:
    * Thấy nên khác bảng (đổi chữ, bỏ/thêm element) → vẫn vẽ theo bảng, ghi vào báo cáo mục
      "Đề xuất đổi so với bảng 5 cột" cho user quyết (đổi thật thì qua `/cr`).
 
+## Bước 4b — nối prototype
+
+Chạy khi đã vẽ **trọn một flow** (đủ màn theo userflow Mục 3) ở chế độ Đầy đủ, hoặc khi user nhờ "nối
+prototype". Chế độ Nhanh hoặc vài màn lẻ thì không nối, ghi lý do trong báo cáo.
+
+**Nguồn nối:** userflow Mục 3.5, mỗi dòng (Từ màn → Đến màn, Trigger) là một liên kết. Frame tìm theo
+`screenId` trong tên (luật *Tên frame* của `design/setup-figma.md`). Không tự thêm liên kết mà Mục 3.5
+không có.
+
+**Cách nối theo loại trigger:**
+* Người dùng bấm, chọn, chạm (vd "Bấm Thử lại", "Chọn bước") → tìm control trong frame nguồn theo tên
+  layer (mục 7 Bước 4) hoặc theo chữ trên control, rồi `figma.setReactions` với `ON_CLICK` → `NAVIGATE`
+  tới frame đích, `transition: null`. Không thấy control, hoặc thấy hơn một → không đoán, ghi vào báo cáo.
+* Hệ thống tự chuyển ("Tải xong", "Mở màn"): chỉ nối **nhánh thành công** bằng `AFTER_TIMEOUT` 1 giây.
+  Mỗi frame tối đa một liên kết tự chuyển. Nhánh lỗi do hệ thống gây ra không có thao tác để bấm, nên
+  không nối; ghi "mở trực tiếp frame".
+* Sự kiện từ nơi khác ("Bước đổi ở nơi khác"), màn đích ngoài feature, màn chưa vẽ → không nối, ghi lý do.
+* Đường quay lại ("Đóng", "Thử lại") nối thẳng tới frame đích ghi trong Mục 3.5, không dùng `BACK`, để
+  chạy đúng dù vào từ đâu.
+
+**Flow đặt tên theo use case:**
+* Mỗi use case có màn thì có một flow (`figma.setFlowStartingPoints`). Tên flow là
+  `UC-<slug> · <tên use case>`: slug lấy ở `usecases/{feature}-usecase-index.md`, tên lấy ở dòng tiêu đề
+  `# Use Case: …` của `uc-<slug>.md`. Ví dụ `UC-tra-cuu-quy-trinh · Tra cứu quy trình trên danh sách`.
+* Màn bắt đầu flow là màn đầu tiên của use case: theo cột Đường đi của userflow Mục 3.6 nếu có, không có
+  thì lấy màn đầu tiên ở cột Screens của index.
+* Use case có màn ở cả web và app → mỗi thiết bị một flow, thêm hậu tố ` (Web)` / ` (App)`.
+* Không dùng `fromUserflow` vì cách đó đặt tên flow theo userflow, không theo use case. Chưa có use case
+  → đặt tên theo cột "Tên flow" của userflow Mục 3, ghi trong báo cáo "chưa có use case".
+
+**Không ghi đè tay:** control đã có liên kết mà khác Mục 3.5 thì hỏi user trước khi thay. Liên kết
+designer nối tay là dữ liệu, như Bước 5.
+
+**Kiểm:** `figma.getFlowStartingPoints` đọc lại tên flow và màn bắt đầu. Đếm số dòng Mục 3.5 đã nối trên
+tổng số, tách theo lý do bỏ qua.
+
 ## Bước 5 — sửa màn đã có
 
 Màn cùng `screenId`/tên đã tồn tại → **sửa tại chỗ**, không vẽ bản thứ hai. Quy trình:
@@ -347,6 +384,7 @@ Bảng 5 cột (nguồn: HTML | ASCII): 2.1-web 12/12 · 2.2-web 9/9 row có tr�
 Object map: <n chỗ lệch bảng 5 cột (đã ghi ở Đề xuất đổi) · thẻ dùng chung: … | không có object map>
 Khớp đặc tả (@uxui-reviewer): 0 blocking / 1 warning | SKIPPED — <lý do>
 Usability (AI, chưa có người dùng thật): 3 tác vụ · 1 vượt tiêu chí bước · 0 blocking / 2 warning | SKIPPED — <lý do>
+Prototype: 24/31 chuyển màn đã nối · 5 hệ thống tự chuyển (lỗi — mở trực tiếp frame) · 2 ngoài feature · flow: UC-xem-quy-trinh-cua-ban-ghi · Xem quy trình của một bản ghi (Web), … | SKIPPED — <lý do>
 Máy KHÔNG kiểm: <xem dưới, kèm mức ưu tiên [Cao]/[Trung]/[Thấp]>
 Chưa có chuẩn trong design.md: <liệt kê chỗ vẽ tạm, hoặc "không">
 Chế độ: <Nhanh — không vẽ trạng thái phụ | Đầy đủ>
