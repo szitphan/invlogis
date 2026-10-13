@@ -51,7 +51,7 @@ trạng thái + báo cáo** của lần chạy. Mọi thứ tiếp tục đượ
 
 - `<feature>` — slug có `docs/<feature>/`. Không có → dừng, gợi ý `/brainstorm`.
 - `"<mục tiêu>"` — kết quả muốn có.
-- `--bg` — chạy bằng agent nền (phiên chính rảnh). Mặc định fg (phiên hiện tại vào worktree).
+- `--bg` — chạy ở terminal riêng tại worktree (phiên chính rảnh). Mặc định fg (phiên hiện tại vào worktree).
 - `resume <card>` — chạy tiếp card `blocked` (đã trả lời Mục 6) hoặc `running` bị ngắt.
 - Không tham số → chạy `/queue` để chọn.
 
@@ -80,11 +80,11 @@ trạng thái + báo cáo** của lần chạy. Mọi thứ tiếp tục đượ
 ### B. Vào worktree
 
 - **fg**: `EnterWorktree(path: "<abs>/.claude/worktrees/<feature>")` rồi chạy C trong phiên này.
-- **bg**: `Agent(subagent_type: "general-purpose", run_in_background: true)`, prompt:
-  *"Chạy run card `<abs card path>` theo `.claude/skills/run-task/SKILL.md` phần C–E. Bước đầu tiên:
-  EnterWorktree(path: `<abs worktree>`). Không hỏi người dùng — mọi câu hỏi là Cửa 2. Trả về: run_state cuối,
-  số bước xong, câu hỏi chặn nếu có."* Báo người dùng 1 dòng rồi trả phiên. Khi agent báo xong → đọc card,
-  báo kết quả + `PushNotification` (Cửa 2/3).
+- **bg**: KHÔNG dùng agent nền (`Agent`) — đã thử 2026-10-13: agent khởi từ gốc repo bị từ chối
+  `EnterWorktree`; agent `isolation: "worktree"` bị khoá trong worktree riêng của nó, không ghi được vào
+  worktree feature. Thay vào đó in cho người dùng 1 lệnh để mở terminal mới tại worktree:
+  `cd <abs worktree> && claude "/run-task resume <card path tương đối>"` — phiên mới đó chạy C–E như fg.
+  Phiên chính trả lại cho người dùng ngay; tiến độ xem qua `/queue` (card ⚙ / ⛔ / 🔍).
 
 ### C. Vòng chạy (trong worktree)
 
