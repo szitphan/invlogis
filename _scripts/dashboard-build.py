@@ -950,7 +950,7 @@ CSS = """
 /* Dashboard theo design system Astryx (design/design.md). Token nhúng từ design/design-tokens.css lúc build
    (ds_tokens()); file này chỉ dùng biến --color-*, --font-*, --radius-*, --spacing-*, không mã màu cứng. */
 *{box-sizing:border-box}
-body{margin:0;background:var(--color-background-body);color:var(--color-text-primary);font:var(--font-weight-normal) 14px/20px var(--font-body);padding:0 var(--spacing-6)}
+body{margin:0;background:var(--color-background-surface);color:var(--color-text-primary);font:var(--font-weight-normal) 14px/20px var(--font-body);padding:0 var(--spacing-6)}
 .page{margin:0 auto;padding-block:var(--spacing-6) var(--spacing-12);display:flex;flex-direction:column;gap:var(--spacing-4)}
 a{color:var(--color-text-accent);text-decoration:underline;text-decoration-color:var(--color-border-emphasized);text-underline-offset:3px;transition:text-decoration-color var(--duration-fast) var(--ease-standard)}
 a:hover{text-decoration-color:currentColor}
