@@ -31,6 +31,7 @@ Tách nguyên văn từ `.claude/rules/naming-conventions.md` (2026-10-12) để
 | Screen index (master metadata) | `docs/{feature}/ascii-wireframe/{feature}-wireframe-index.md` — frontmatter chuẩn + table Screens (status/thuộc flow/used-by/designs Figma+HTML/updated) + section `## Descriptions` (H3 per screen, 1-2 câu purpose). **Single source of metadata + descriptions** cho mọi screens của feature. Tên file có prefix `{feature}` để phân biệt khi search/mở nhiều tab (Obsidian quick-switcher không còn ra 1 danh sách toàn `_index.md` trùng tên). |
 | Screen content (minimal, gộp theo flow) | `docs/{feature}/ascii-wireframe/{flow-slug}.md` — **zero frontmatter**, 1 file/flow chứa N screens (mỗi screen 1 block `## Screen: {screen-slug} — {tên}` với 2 sub-section: Wireframe ASCII / Screen description table **5 cột** `# / Items / Control type / Data type / Description`, format `• `+`<br>`). KHÔNG emoji trong khung ASCII (lệch viền). Chia flow theo `srs/{feature}-userflow.md`. Output của `/wireframe-ascii`. |
 | HTML mockup | `docs/{feature}/html-design/{screen-slug}.html` (folder riêng) — path lưu trong `{feature}-wireframe-index.md` cột `HTML`. |
+| Màn hình sau Figma | `docs/{feature}/screens/{flow-slug}.md` (zero frontmatter, block `## Screen: {slug} — {tên}` + `### Trạng thái:`, bảng 5 cột chép từ wireframe rồi do `/figma-sync` giữ) + `{feature}-screen-index.md` (type `screen-index`, bảng Flows có Status theo flow) + `images/{n-m}-{web\|mob}-{slug}.png` (ảnh Figma 2x, sau `--done`). Thay wireframe HTML/ASCII của flow đó. Rule `screen-source.md`. |
 | Figma frame URL | URL lưu trong `{feature}-wireframe-index.md` cột `Figma` (output của `/figma-screen`). KHÔNG file local. |
 | HTML prototype | `docs/{feature}/html-design/{feature}-prototype.html` (output của `/prototype-html`, multi-screen clickable, self-contained). Reference trong `{feature}-wireframe-index.md` cột `HTML prototype` dạng `{feature}-prototype.html#{slug}`. |
 | Next.js prototype (code chạy được) | `prototype/` — **KHÔNG nằm dưới `docs/`**. App Next.js dùng chung cho MỌI feature (cộng dồn, không per-feature). Code demo per-feature ở `prototype/src/app/(auth|app)/...` + `src/lib/demo/` (types/seed/store/rules/errors/simulate) + `src/components/demo/` (hydration-gate/auth-guard/demo-toolbar). Output của `/prototype-next`. Skill này **chỉ ghi trong `prototype/`**, không sinh file nào trong `docs/`. |
@@ -69,6 +70,7 @@ Tách nguyên văn từ `.claude/rules/naming-conventions.md` (2026-10-12) để
 | Traceability | `docs/_shared/traceability.md` (auto from /gap) |
 | Doc-drift report (per-feature) | `docs/reports/doc-drift/{YYYY-MM-DD}-{feature}-code-drift.md` — type `doc-drift-report`, so code dev ↔ docs chính thức `docs/{feature}/` → Pass/Missing/Mismatch/Extra/Unverifiable + integration liên feature, cite `file:line`. Read-only report (KHÔNG sửa docs/code). Output của `/doc-drift`. Snapshot theo `{repo}@{ref}` — dưới `docs/reports/` (KG loại khỏi walk-scope, không thành evidence nghiệp vụ). |
 | Doc-drift report (toàn hệ) | `docs/reports/doc-drift/{YYYY-MM-DD}-product-code-drift.md` — cùng type, output của `/doc-drift --all` (mọi feature + toàn mạng integration + sơ đồ phụ thuộc). |
+| Figma audit report | `docs/reports/figma-audit/{YYYY-MM-DD}-{feature}-figma-audit.md` — type `figma-audit-report`, output của `/figma-audit` (K1–K6 theo mức Cao/Trung/Thấp). Dưới `docs/reports/` nên KG không lấy làm bằng chứng nghiệp vụ. |
 | Atlassian sync-state (mapping GỘP Jira+Confluence) | `.claude/state/atlassian/sync-state.yaml` (config + mapping + watermark/hash, 1 entry/artifact, key `mappings.jira`/`mappings.confluence`) + `base/*.json` (snapshot 3-way) + `locks/`. **Thay hẳn** `docs/_shared/jira-map.md` + `confluence-map.md` cũ (đã migrate + xóa). Output của `/jira` + `/confluence`. Xem `.claude/rules/atlassian-sync.md`. |
 | Meeting | `docs/meetings/YYYY-MM-DD-{type}-{slug}.md` (project-level). Decisions/blockers/action items sống dưới dạng table TRONG file này — KHÔNG có file riêng cho decision/blocker. |
 | Brand (thương hiệu đơn vị trình bày) | `design/brand/{slug}/brand.yml` (màu primary/on-primary/accent + tên file logo/mark) + `logo-*.png`, `mark-*.png` nền trong suốt + `source/` (file gốc user gửi). Dùng bởi `/deck` (frontmatter `brand:`). |
@@ -127,6 +129,7 @@ Tách nguyên văn từ `.claude/rules/naming-conventions.md` (2026-10-12) để
 | `impact-report` | *(deprecated as standalone)* — impact assessment giờ là section trong `docs/cr/CR-*.md`. Type value giữ để classify content cũ nếu còn file legacy. |
 | `traceability` | `docs/_shared/traceability.md` |
 | `doc-drift-report` | `docs/reports/doc-drift/{YYYY-MM-DD}-{feature-or-product}-code-drift.md` (report so code dev ↔ docs BA, read-only, Pass/Missing/Mismatch/Extra/Unverifiable + integration). Frontmatter `type/feature/baseline/code_ref/updated`. Output của `/doc-drift`. |
+| `figma-audit-report` | `docs/reports/figma-audit/…` — frontmatter `type/feature/figma/updated`. Output của `/figma-audit`. |
 | ~~`jira-map`~~ / ~~`confluence-map`~~ | **Bỏ** — mapping GỘP vào `.claude/state/atlassian/sync-state.yaml` (YAML, không frontmatter). Không còn 2 file `.md` rời ở `docs/_shared/`. |
 | `export-package` | `docs/exports/*.md` |
 | `userguide-index` | `docs/userguide/{userguide|{feature}-userguide}/index.md` (master metadata cẩm nang + bảng Sections). Frontmatter `type/scope/audience/lang/status/updated/links`. Output của `/userguide`. |
@@ -142,6 +145,7 @@ Tách nguyên văn từ `.claude/rules/naming-conventions.md` (2026-10-12) để
 | `meeting-deck` | `docs/meetings/decks/*-deck.md` (nguồn slide họp khách: frontmatter `type/meeting/feature?/title/client/date/duration/status/updated/links`, slide ngăn bằng `---`). Output của `/deck`. |
 | `deck-result` | File kết quả họp tải từ deck HTML (bảng Mã/Nguồn/Câu hỏi/Quyết định/Ghi chú/Lúc). Không lưu trong vault — input tạm của `/deck import`. |
 | `inbox` | `docs/inbox/*.md` |
+| `run-card` | `docs/{feature}/_runs/{YYYY-MM-DD}-{slug}.md` — kế hoạch + trạng thái + báo cáo 1 lần chạy `/run-task` (khung `_templates/run-card.md`). Frontmatter riêng: `run_state` (KHÔNG `status:` — ngoài lifecycle doc), `mode`, `branch`, `worktree`, `approved`, `max_rounds`, `updated`. Hook changelog/KG bỏ qua `_runs/`. |
 
 
 

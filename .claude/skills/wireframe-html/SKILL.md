@@ -32,6 +32,7 @@ __Thang fidelity 3 bậc:__ `/wireframe-ascii` (lo-fi chat-native) → `/wirefra
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
+* **Flow đã lên Figma thì không sinh lại** (`.claude/rules/screen-source.md` Mục 2): flow có `docs/{feature}/screens/{flow}.md` → bỏ qua flow đó, báo 1 dòng "đã chuyển sang Figma — sửa trên Figma rồi `/figma-sync`". Đổi nghiệp vụ của màn → `/cr`. Không tạo lại file wireframe đã bị `/figma-sync` xoá.
 - **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 * **Cần `srs/{feature}-userflow.md` trước.** Chưa tồn tại/chưa duyệt → skill tự gọi `/user-flow <feature>` (Phase A), KHÔNG tự chia flow riêng.
 * __Confirm device size với user TRƯỚC khi vẽ (Phase A bước 4)__ — Mobile 375 / Tablet 768 / Desktop 1920 / Responsive. Đề xuất sẵn từ `primary_device`/design.md nhưng KHÔNG tự chốt im lặng (device là quyết định thiết kế).
@@ -417,6 +418,7 @@ Collision: trùng slug → suffix `-2`.
 
 ## References
 
+- `.claude/rules/screen-source.md` — bảng 5 cột sau Figma (`screens/`), thứ tự nguồn.
 - @.claude/rules/ui-common-rules-components.md
 * @../../../_templates/wireframe-html-template.html (template chuẩn per-flow — CSS B&W + skeleton + mẫu screens)
 * @../../../_templates/wireframe-html-nav-template.html (template index điều hướng — sidebar TOC + flow map + iframe, Phase G.5)

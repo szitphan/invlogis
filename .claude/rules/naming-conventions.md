@@ -33,7 +33,7 @@ paths:
 | Yêu cầu | `docs/{feature}/{feature}-{urd,brd,prd,object-map}.md` · `brainstorms/{idea}.md` |
 | SRS | `docs/{feature}/srs/{feature}-{spec,flows,states,erd,userflow}.md` |
 | Use case | `usecases/{feature}-usecase-index.md` + `uc-{slug}.md` + `{feature}-usecase-diagram.{puml,svg}` |
-| Màn hình | `ascii-wireframe/{feature}-wireframe-index.md` + `{flow-slug}.md` · `html-wireframe/{feature}-wireframe{.html,-html-index.md}` + `{flow-slug}.html` · `html-design/{feature}-prototype.html` |
+| Màn hình | `ascii-wireframe/{feature}-wireframe-index.md` + `{flow-slug}.md` · `html-wireframe/{feature}-wireframe{.html,-html-index.md}` + `{flow-slug}.html` · `html-design/{feature}-prototype.html` · sau Figma: `screens/{feature}-screen-index.md` + `{flow-slug}.md` + `images/{n-m}-{web\|mob}-{slug}.png` (`screen-source.md`) |
 | Story | `userstories/{feature}-story-index.md` + `us-{NNN}.md` |
 | Sơ đồ khác | `bpmn/` · `d2/` · `d2-erd/` · `d2-architect/` · `dbdiagram/` — mỗi folder có `{feature}-{domain}-index.md` |
 | API / test | `integration/api-*.md` · `test/api/` · `test/checklist/` · `test/testcases/` · `test/e2e/` |

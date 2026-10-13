@@ -46,6 +46,7 @@ Bước được đánh số liên tục 1→21 xuyên suốt 5 phase (không l�
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
+* **Bảng mô tả màn 5 cột — tra theo `.claude/rules/screen-source.md` Mục 2:** flow có `docs/{feature}/screens/{flow}.md` (đã lên Figma) thì đó là nguồn duy nhất, block `## Screen: {slug}` + `### Trạng thái:`; chưa có thì `html-wireframe/` rồi `ascii-wireframe/`.
 * **REPORT-FIRST HARD STOP (BẮT BUỘC, mọi verdict).** Skill PHẢI viết CR record (1 file self-contained, gồm Impact Matrix + detailed impact + rollback) ra file TRƯỚC, rồi DỪNG và đợi user đọc kỹ + xác nhận. **TUYỆT ĐỐI KHÔNG** Edit/Write bất kỳ doc feature nào (urd/brd/prd/srs/usecases/ascii-wireframe/userstories...) trong cùng turn viết report. Chặng apply là turn riêng, sau khi user gõ `apply`. Áp dụng cả `direct-edit-ok` — không có ngoại lệ "change nhỏ nên apply luôn".
 * **Clarify-first ở intake, không chỉ ở lúc phân tích (bước 4.5).** Mô tả change thiếu thông tin tối thiểu (đổi cái gì / từ gì sang gì / vì sao / ranh giới) → **hỏi TRƯỚC** khi tốn trọn vòng KG + Read prose + spawn `@change-tracker`/`@gap-analyst`. Gate bước 8 là **lưới thứ hai** cho cái chỉ lộ ra sau khi đọc docs, KHÔNG phải nơi bắt lỗi input.
 * **HITL chốt phương án khi mơ hồ (dùng AskUserQuestion).** Bất cứ khi nào trong luồng CR gặp quyết định mà skill phải ĐOÁN (nhiều phương án thiết kế, coherence conflict giữa file, scope ambiguous, wording/giá trị nghiệp vụ chưa rõ, có nên mở rộng cross-feature không) → DỪNG, dùng AskUserQuestion đặt câu hỏi cho user chốt, RỒI mới đi tiếp. KHÔNG tự chọn rồi apply.
@@ -308,6 +309,7 @@ Render CR record content (read-only, gồm cả impact assessment vì self-conta
 
 ## References
 
+- `.claude/rules/screen-source.md` — bảng 5 cột sau Figma (`screens/`), thứ tự nguồn.
 * @references/output-templates.md (mẫu output/message đầy đủ cho từng bước — tách ra để phần trên dễ đọc)
 * @../../../.claude/rules/change-request.md
 * @../../../.claude/rules/approval-gate.md

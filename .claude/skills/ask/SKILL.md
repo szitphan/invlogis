@@ -38,6 +38,7 @@ Trả lời __đúng một câu hỏi của IT-BA/PO__: *"nghiệp vụ này ĐA
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
+* **Bảng mô tả màn 5 cột — tra theo `.claude/rules/screen-source.md` Mục 2:** flow có `docs/{feature}/screens/{flow}.md` (đã lên Figma) thì đó là nguồn duy nhất, block `## Screen: {slug}` + `### Trạng thái:`; chưa có thì `html-wireframe/` rồi `ascii-wireframe/`.
 - __Read-only thuần__ — KHÔNG Write/Edit bất kỳ file nào. Miễn approval gate (L1/L2/L3) vì không ghi. `allowed-tools` không có Write/Edit — đúng chủ đích.
 - __Quy tắc vàng KG__ — graph để __CHỌN__ file + đếm cấu trúc; mọi kết luận nội dung __LUÔN dựa trên prose đã Read__ (`@../../rules/kg-usage.md`). Không bao giờ trả lời "hệ thống làm X" chỉ vì thấy edge/facts.
 - __CHỐNG BỊA (tối cao)__ — mỗi rule/số liệu/wording phải kèm evidence `file:line`. Không nhớ được số → đọc lại file, KHÔNG đoán. Không có nguồn cho 1 phần câu hỏi → nói thẳng "phần này chưa có trong tài liệu" + route skill sinh ra nó.
@@ -195,6 +196,7 @@ Không Write, không approval gate, không HARD STOP (trừ khi Phase A phải h
 
 ## References
 
+- `.claude/rules/screen-source.md` — bảng 5 cột sau Figma (`screens/`), thứ tự nguồn.
 - @../../rules/kg-usage.md
 - @../../rules/ba-conventions.md
 - @../../rules/feature-bootstrap.md

@@ -25,6 +25,7 @@ Workflow QC chuẩn:
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
+* **Bảng mô tả màn 5 cột — tra theo `.claude/rules/screen-source.md` Mục 2:** flow có `docs/{feature}/screens/{flow}.md` (đã lên Figma) thì đó là nguồn duy nhất, block `## Screen: {slug}` + `### Trạng thái:`; chưa có thì `html-wireframe/` rồi `ascii-wireframe/`.
 * **HARD GATE: phải có checklist matching scope.** Không có `docs/{feature}/test/checklist/checklist-{scope-slug}.md` → refuse + gợi ý chạy `/test-checklist` trước.
 * **Bám sát checklist 1:1** — mỗi item trong checklist gốc → đúng 1 TC. KHÔNG split (1 item thành 2 TC), KHÔNG gộp (2 item thành 1 TC), KHÔNG thêm TC không có trong checklist. Số TC = số checklist item.
 * **Mapping qua CHK-ID (trace key ổn định)** — mỗi TC bám 1 checklist item qua `CHK-{feature}-NNN`. `**Checklist:**` PHẢI bắt đầu bằng `CHK-{feature}-NNN` (+ nội dung item gốc làm anchor). `**Ref:**` **bắt buộc**, kế thừa nguyên list Ref của item (vd `FR-{feature}-003, E-{feature}-003`), else `—`. `STT` chỉ là số hiển thị, KHÔNG phải khóa trace.
@@ -398,6 +399,7 @@ Kích hoạt khi user **dán 1 block bắt đầu bằng `### FEEDBACK-PREVIEW �
 
 ## References
 
+- `.claude/rules/screen-source.md` — bảng 5 cột sau Figma (`screens/`), thứ tự nguồn.
 * @../../../.claude/rules/feature-bootstrap.md
 * @../../../.claude/rules/kg-usage.md
 * @../../../.claude/rules/ba-conventions.md

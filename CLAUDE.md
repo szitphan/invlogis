@@ -26,6 +26,7 @@ docs/
 │   ├── srs/           {feature}-spec|flows|states|erd|userflow.md
 │   ├── usecases/      {feature}-usecase-index.md (gồm ma trận truy vết) + uc-{slug}.md + diagram .puml/.svg
 │   ├── ascii-wireframe/ · html-wireframe/ · html-design/ (prototype HTML)
+│   ├── screens/       bảng 5 cột + ảnh Figma sau khi lên Figma (/figma-sync, thay wireframe)
 │   ├── userstories/   {feature}-story-index.md + us-{NNN}.md
 │   └── bpmn/ · d2*/ · dbdiagram/ · integration/ · test/
 ├── meetings/ (+decks/) · inbox/ · cr/ · exports/ · userguide/ · reports/
@@ -79,9 +80,9 @@ Skill KHÔNG được auto-pick file im lặng. KHÔNG được skip L1 với c�
 
 ## Skills
 
-68 skill `/command` trong `.claude/skills/` (+ vài reference skill `user-invocable: false`). Nguồn sự thật là từng `SKILL.md`; bảng mô tả đầy đủ từng skill ở `_guides/claude-reference.md` mục "Skills shipped" — khi thêm/bớt skill, cập nhật bảng đó.
+71 skill `/command` trong `.claude/skills/` (+ vài reference skill `user-invocable: false`). Nguồn sự thật là từng `SKILL.md`; bảng mô tả đầy đủ từng skill ở `_guides/claude-reference.md` mục "Skills shipped" — khi thêm/bớt skill, cập nhật bảng đó.
 
-__Luồng chính:__ `/prd` → `/object-map` → `/roadmap` → `/discover` → `/brainstorm` → `/urd` `/brd` `/prd-epic` → `/srs` → `/user-flow` → `/wireframe-ascii` | `/wireframe-html` → `/figma-screen` / `/prototype-html` → `/usecase` `/userstory` `/ac` → `/test-checklist` → `/test-cases` → `/playwright-gen`. Thay đổi qua `/cr`. Tích hợp API theo họ `/api-*` (`.claude/rules/api-integration.md`). Tài liệu khách mới: `/intake`.
+__Luồng chính:__ `/prd` → `/object-map` → `/roadmap` → `/discover` → `/brainstorm` → `/urd` `/brd` `/prd-epic` → `/srs` → `/user-flow` → `/wireframe-ascii` | `/wireframe-html` → `/figma-screen` / `/prototype-html` → `/usecase` `/userstory` `/ac` → `/test-checklist` → `/test-cases` → `/playwright-gen`. Figma sửa → `/figma-sync` (bảng 5 cột + userflow; `--done` đưa Figma vào SRS). Thay đổi qua `/cr`. Tích hợp API theo họ `/api-*` (`.claude/rules/api-integration.md`). Tài liệu khách mới: `/intake`.
 
 __Quy tắc vận hành:__
 
@@ -90,6 +91,7 @@ __Quy tắc vận hành:__
 - Diagram: "có ra ảnh" KHÔNG phải verify — gate theo `.claude/rules/diagram-correctness.md`; sửa gate xong chạy `bash .claude/scripts/diagram-gates-selftest.sh`.
 - Hooks: `auto-changelog.sh`, `status-transition.sh`, `post-edit-stale.sh`, `intake-sync.sh` (PostToolUse Write/Edit); `session-init.sh` (SessionStart). Commit git thủ công.
 - __Song song nhiều feature:__ 1 feature = 1 worktree (`_scripts/wt.sh new|sync|ready|land|drop|list`, branch `feat/<slug>`). Xong → `wt.sh ready` sinh task 🔍 trong backlog; land (squash) + drop CHỈ chạy sau khi người dùng review + duyệt task đó. Trong worktree chỉ sửa `docs/<feature>/**`; đồ dùng chung (`_shared`, `_product`, `design`, `.claude`, backlog) sửa trên `main` rồi `wt.sh sync`. Chi tiết: `.claude/rules/worktree.md`.
+- __AI tự chạy + hàng đợi:__ `/run-task <feature> "<mục tiêu>" [--bg]` — duyệt run card 1 lần, AI tự chạy chuỗi skill trong worktree (chế độ chạy: `approval-gate.md`), chỉ dừng khi cần bạn quyết. `/queue` = việc đang chờ bạn (duyệt land / câu hỏi chặn / card chờ duyệt / đang chạy), nguồn `_scripts/queue.py`.
 
 ## Rule nạp theo vùng file
 

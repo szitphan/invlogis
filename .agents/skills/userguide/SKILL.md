@@ -36,6 +36,7 @@ Khoảng trống đã xác nhận: skill documentation hiện có trên GitHub �
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
+* **Bảng mô tả màn 5 cột — tra theo `.claude/rules/screen-source.md` Mục 2:** flow có `docs/{feature}/screens/{flow}.md` (đã lên Figma) thì đó là nguồn duy nhất, block `## Screen: {slug}` + `### Trạng thái:`; chưa có thì `html-wireframe/` rồi `ascii-wireframe/`.
 - **2 giai đoạn, HARD STOP ở giữa.** GĐ1 dựng mục lục → in ra chat → DỪNG. GĐ2 (viết cẩm nang) CHỈ chạy sau khi user confirm (`tiếp`/`ok`/`Y`). KHÔNG tự nhảy thẳng sang viết. (Pattern report-first giống `/cr` — khớp memory `feedback_cr_report_first`.)
 - **KHÔNG ghi file outline RIÊNG ở GĐ1.** Mục lục GĐ1 chỉ in ra chat (bảng terse, 1 dòng/trang, delta-review gộp cột Ghi chú) — KHÔNG tạo `_outline.md` trung gian. Ngay khi user gõ `tiếp` (đầu GĐ2, Pha C.6), skill Write `{ug-index}` (artifact chính thức luôn có kế hoạch tạo) với outline đã duyệt + mọi trang `status: pending` — đây là state artifact chống mất outline nếu turn bị ngắt giữa GĐ2, KHÔNG phải file trung gian mới. Viết outline gọn: ít chữ nhất mà vẫn đủ nắm.
 - **@manual-reviewer gate (Pha C)** — BẮT BUỘC spawn agent review mục lục TRƯỚC HARD STOP. Skill nhận findings → chỉnh outline (bổ sung trang thiếu, đổi tiêu đề về task-based, tách trang trộn loại) → mới đưa user duyệt. Loop tối đa 2 vòng nếu còn BLOCKING. User vẫn là người chốt cuối ở HARD STOP.
@@ -323,6 +324,7 @@ Toàn sản phẩm → `userguide.html` + `userguide/`. Top-level `docs/userguid
 
 ## References
 
+- `.claude/rules/screen-source.md` — bảng 5 cột sau Figma (`screens/`), thứ tự nguồn.
 - @../../../.claude/rules/ba-conventions.md
 - @../../../.claude/rules/project-profile.md
 - @../../../.claude/rules/approval-gate.md

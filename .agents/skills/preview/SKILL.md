@@ -96,6 +96,7 @@ Build script: !`test -f _scripts/build-preview.py && test -f _scripts/_viewer_wr
 ### Phase C — Run helper script
 
 3b) **Kiểm Phụ lục A** — `python3 _scripts/ui-common-expand.py docs/{feature}/srs/{feature}-spec.md --check`. Exit 1/2 → cảnh báo phụ lục UI Common Rules & Components chưa khớp nguồn + đề nghị sinh lại (`--write` sau L2, per `ui-common-rules-components.md` Mục 12) trước khi build preview.
+3c) **Kiểm Phụ lục B** — có `docs/{feature}/screens/` → `python3 _scripts/screens-md.py appendix {feature} --check`; exit khác 0 → cảnh báo + đề nghị `/figma-sync {feature} --done` (per `.claude/rules/screen-source.md` Mục 8).
 4) **CHỈ chạy lệnh duy nhất:**
    ```bash
    python3 _scripts/build-preview.py {feature} [--out {path}]

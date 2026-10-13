@@ -302,14 +302,26 @@ def build_wireframes_block(feature_dir: Path) -> str:
     """
     ascii_dir = feature_dir / "ascii-wireframe"
     html_dir = feature_dir / "html-wireframe"
+    screens_dir = feature_dir / "screens"
     ascii_files = list_ordered(ascii_dir, "*.md",
                                exclude={p.name for p in ascii_dir.glob("*-index.md")}) if ascii_dir.is_dir() else []
-    if not ascii_files and not html_dir.is_dir():
+    screen_files = list_ordered(screens_dir, "*.md",
+                                exclude={p.name for p in screens_dir.glob("*-index.md")}) if screens_dir.is_dir() else []
+    html_only = [h for h in sorted(html_dir.glob("*.html"))
+                 if not h.name.endswith("-wireframe.html") and not (ascii_dir / f"{h.stem}.md").is_file()] \
+        if html_dir.is_dir() else []
+    if not ascii_files and not html_only and not screen_files:
         return ""
     parts = []
-    for af in ascii_files:
+    # Flow đã lên Figma (rule screen-source.md): ảnh Figma (nếu đã --done) + link + bảng 5 cột.
+    done = {sf.stem for sf in screen_files}
+    for sf in screen_files:
+        body = re.sub(r"\A\s*#\s+[^\n]+\n+", "", read_optional(sf)).strip()
+        body = inline_local_images(demote_headings(body, 2), screens_dir)
+        parts.append(f"### Flow: {sf.stem} (Figma)\n\n{body}")
+    for af in [f for f in ascii_files if f.stem not in done] + [h for h in html_only if h.stem not in done]:
         flow = af.stem
-        body = strip_frontmatter(read_optional(af))
+        body = strip_frontmatter(read_optional(af)) if af.suffix == ".md" else ""
         # Bỏ H1 tiêu đề file (## Flow: ... trùng) + changelog cuối.
         body = re.sub(r"\A\s*#\s+[^\n]+\n+", "", body)
         body = re.sub(r"(?ms)^##\s+Changelog\b.*\Z", "", body).strip()
@@ -330,7 +342,8 @@ def build_wireframes_block(feature_dir: Path) -> str:
             block = "\n".join(l.strip() for l in block.split("\n") if l.strip())
             chunk.append(f"\n**HTML wireframe (render):**\n\n{block}\n")
         # ASCII + bảng mô tả.
-        chunk.append(f"\n**ASCII wireframe + mô tả:**\n\n{body}")
+        if body:
+            chunk.append(f"\n**ASCII wireframe + mô tả:**\n\n{body}")
         parts.append("\n".join(chunk))
     if not parts:
         return ""

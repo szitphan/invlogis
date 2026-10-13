@@ -117,6 +117,7 @@ Tool check:
 ### Phase D — Run script
 
 4b. **Kiểm Phụ lục A** — `python3 _scripts/ui-common-expand.py docs/{feature}/srs/{feature}-spec.md --check`. Exit 1 (cũ) / 2 (thiếu) → cảnh báo "Phụ lục UI Common Rules & Components chưa khớp nguồn" + đề nghị sinh lại (`--write` sau L2, per `ui-common-rules-components.md` Mục 12) TRƯỚC khi xuất; user chọn bỏ qua thì ghi rõ trong report.
+4c. **Kiểm Phụ lục B (màn hình Figma)** — có `docs/{feature}/screens/` → `python3 _scripts/screens-md.py appendix {feature} --check`. Exit 1 (cũ / thiếu ảnh) / 2 (thiếu marker hoặc chưa flow nào `approved`) → cảnh báo + đề nghị `/figma-sync {feature} --done` hoặc sinh lại (`appendix --write`), per `.claude/rules/screen-source.md` Mục 8. Không có `screens/` → bỏ qua, báo 1 dòng.
 5. **Chạy:**
    ```bash
    python3 _scripts/build-export.py {feature} --format {pdf|docx|html}

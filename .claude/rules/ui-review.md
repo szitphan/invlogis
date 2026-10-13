@@ -35,6 +35,7 @@ loãng điểm nhấn không).
 | A3 | `figma.auditDesignSystem` | Màu/chữ/khoảng cách gắn token; giá trị off-system |
 | A4 | Do's & Don'ts tự rà + `status-chip-lint.py` | 1 Primary mỗi nhóm, trạng thái có chữ/icon, chip trạng thái |
 | A5 | `_scripts/visual-audit.py` | Luật thị giác đo được — Mục 2 |
+| A6 | `_scripts/figma-audit.py` (`/figma-audit`) | Nhất quán GIỮA nhiều màn đã vẽ: token, vai trò lệch giá trị, biến thể nút, icon (kể cả override), khối tự dựng, mã bản ghi dọc luồng |
 
 ### Lớp 2 — reviewer
 
@@ -88,6 +89,7 @@ và `fail-mobile.json` (exit 1, đủ mã F1 F2 F3 H1 H2 M1 P1 R1 R2 R3 S1 C1 C2
 | `/wireframe-ascii`, `/wireframe-html` | — | ✓ | — | — (lo-fi, chưa có màu) |
 | `/prototype-html` | A5 không chạy (script đọc JSON Figma) | ✓ | — | ✓ (chấm bằng ảnh, ghi "không có số liệu A5") |
 | `/figma-screen` | A1–A5 | ✓ | ✓ khi trọn flow + có Mục 3.6 | ✓ |
+| `/figma-audit` | A6 | — | — | — (chỉ máy đo; sửa theo mục user chọn) |
 
 ## 4. Báo cáo
 

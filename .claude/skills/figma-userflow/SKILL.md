@@ -1,7 +1,7 @@
 ---
 name: figma-userflow
 description: Draw a userflow on Figma — screens, decisions, labelled arrows, dashed return paths — when the open question is what the user sees next. Draw it BEFORE the screens, so the holes show up before anyone designs them.
-allowed-tools: Read, Glob, Grep, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_diagram, mcp__reqwise-figma__figma_write
+allowed-tools: Read, Glob, Grep, Edit, Write, Bash, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_diagram, mcp__reqwise-figma__figma_write, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__download_assets
 user-invocable: true
 argument-hint: "<the flow> [source file or @tag]"
 ---
@@ -182,6 +182,15 @@ Fix the model, re-dry-run, then draw.
 Mention the live behaviour: the flow is a working map, not a picture — **drag a box and every
 arrow follows it**, and dragging an arrow's end reconnects it. Stakeholders can rearrange it in
 the review meeting without breaking it.
+
+### Phase 5 — Sync back to the repo (this workspace)
+
+If the flow belongs to a feature with `docs/{feature}/srs/{feature}-userflow.md`, the drawing and the repo
+must agree. Run `/figma-sync {feature}` inline (read `.claude/skills/figma-sync/SKILL.md`, keep its L1/L2):
+boxes, states or links you added while drawing, or that a stakeholder rearranged in review, become proposed
+edits to userflow Mục 2 / 3.5 instead of a gap only the picture knows about. The repo userflow stays the
+source (`.claude/rules/screen-source.md` Mục 5); the user may decline, then say "Chưa sync tài liệu" in the
+report.
 
 ## What the machine does NOT check
 

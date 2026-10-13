@@ -37,6 +37,7 @@ flowchart TD
     n8["[1.5] Panel không có quyền<br/>E-common-011 tại chỗ, giữ lý do phát sinh"]
     n9["[1.6] Panel công nợ<br/>Công nợ tên NCC"]
     n10["[1.2] · Update banner Sơ đồ có banner<br/>Quy trình vừa có cập nhật"]
+    n35["[1.2] · Condition tooltip Tooltip điều kiện<br/>mỗi điều kiện 1 dòng ✓ / ○ + mã nguồn"]
     n30["[1.1] · Loading Dòng quy trình đang tải<br/>skeleton"]
     n31["[1.7] Panel bước có bản ghi trước<br/>+n bản ghi trước, khối Bản ghi trước đó"]
     n32["[1.2] · History load error Panel, lịch sử tải lỗi<br/>Không tải được lịch sử + Thử lại"]
@@ -74,6 +75,8 @@ flowchart TD
     n9 -->|"Mở bảng công nợ"| xc
     n3 -->|"Thông tin đang hiện đổi ở nơi khác"| n10
     n10 -.->|"Tải lại, giữ bước đang chọn"| n3
+    n3 -->|"Bấm chip Điều kiện x/y"| n35
+    n35 -.->|"Bấm ra ngoài"| n3
     n3 -->|"Mở màn hình chi tiết"| gone
     gone -->|"Đã bị xoá"| n34
     n34 -.->|"Tải lại sơ đồ"| n4
@@ -90,7 +93,7 @@ flowchart TD
     classDef edge fill:#fff3cd,stroke:#ffc107
     class n1,n3,n4,n30,xd happy
     class n2,n5,n32,n33,n34 error
-    class x0,n6,n7,n8,n9,n10,n31,xc edge
+    class x0,n6,n7,n8,n9,n10,n35,n31,xc edge
 ```
 
 ### Flow: search-process
@@ -268,7 +271,7 @@ flowchart TD
 | [#] | Slug | Màn hình | Mục đích | Trạng thái | Thiết bị | Thuộc flow |
 |-----|------|----------|----------|------------|----------|------------|
 | 1.1 | record-detail | Màn chi tiết bản ghi có dòng quy trình | Web: dòng quy trình đầu màn (tên luồng, tiến độ, "Xong x/y bước · n nhánh phát sinh", Bước trước / Phát sinh từ) + nút tạo tiếp theo + Thu hồi/Xoá ở vùng hành động. App: thẻ quy trình, tên luồng là chính, dòng tóm tắt là phụ | Loading (skeleton cao bằng dòng thật; app: theo hình thẻ, có shimmer) · Load error ("Không tải được quy trình." + Thử lại, màn chi tiết vẫn dùng được) | web, mob | view-process, view-process-mobile, create-next-step |
-| 1.2 | process-diagram | Sơ đồ quy trình — chọn sẵn Ở đây | Web: popup cây quy trình vừa khung, panel bước Ở đây mở (lịch sử 5 dòng + Mở màn hình chi tiết). App: sheet card tóm tắt + cây rẽ nhánh dọc, vuốt ngang khi cây rộng, không tự mở sheet bước | Loading ("Đang tải sơ đồ…") · Load error ("Không tải được sơ đồ." + E-common-008 / E-common-009 + Thử lại, tại chỗ thay toast) · Update banner ("Quy trình vừa có cập nhật." + Tải lại) · History load error (web: "Không tải được lịch sử." + Thử lại trong khối; đầu panel, nút mở vẫn dùng được) | web, mob | view-process, view-process-mobile |
+| 1.2 | process-diagram | Sơ đồ quy trình — chọn sẵn Ở đây | Web: popup cây quy trình vừa khung, panel bước Ở đây mở (lịch sử 5 dòng + Mở màn hình chi tiết). App: sheet card tóm tắt + cây rẽ nhánh dọc, vuốt ngang khi cây rộng, không tự mở sheet bước | Loading ("Đang tải sơ đồ…") · Load error ("Không tải được sơ đồ." + E-common-008 / E-common-009 + Thử lại, tại chỗ thay toast) · Update banner ("Quy trình vừa có cập nhật." + Tải lại) · History load error (web: "Không tải được lịch sử." + Thử lại trong khối; đầu panel, nút mở vẫn dùng được) · Condition tooltip (web: bấm chip "Điều kiện x/y" trên đường nối, Theo CMP-09 #4) | web, mob | view-process, view-process-mobile |
 | 1.3 | step-not-created | Bước chưa tạo | "Chưa có hoạt động. Bước này chưa được tạo." (web: panel; app: sheet) | — | web, mob | view-process, view-process-mobile |
 | 1.4 | branch-point | Ngã rẽ | "Chưa xác định …" + các hướng có thể đi | — | web, mob | view-process, view-process-mobile |
 | 1.5 | step-no-permission | Bước không có quyền | Đầu panel/sheet (kể cả lý do phát sinh) + E-common-011 tại chỗ; quyền theo nghiệp vụ của bước | — | web, mob | view-process, view-process-mobile |
@@ -320,6 +323,8 @@ Màn dùng chung: `record-detail` là điểm bắt đầu của `view-process`,
 | Panel công nợ [1.6] | (Bảng công nợ — SRS Thanh toán) | Bấm Mở bảng công nợ | Lọc theo NCC + khoảng thời gian bảng công nợ |
 | Popup sơ đồ Ở đây [1.2] | Sơ đồ có banner [1.2] · Update banner | Bước đổi ở nơi khác | Popup đang mở |
 | Sơ đồ có banner [1.2] · Update banner | Popup sơ đồ Ở đây [1.2] | Bấm Tải lại | Giữ bước đang chọn nếu còn |
+| Popup sơ đồ Ở đây [1.2] | Tooltip điều kiện [1.2] · Condition tooltip | Bấm chip "Điều kiện x/y" trên đường nối | Đường có nhiều bước trước cùng vào 1 bước (R1) |
+| Tooltip điều kiện [1.2] · Condition tooltip | Popup sơ đồ Ở đây [1.2] | Bấm ra ngoài tooltip | Giữ nguyên sơ đồ và bước đang chọn |
 | Popup sơ đồ Ở đây [1.2] | (Màn chi tiết bản ghi của bước — ngoài feature) | Bấm Mở màn hình chi tiết | Còn quyền; mở cùng tab, đóng popup |
 | Popup sơ đồ Ở đây [1.2] | Popup không có quyền mở [1.8] | Bấm Mở màn hình chi tiết | Bản ghi vừa bị thu quyền |
 | Popup không có quyền mở [1.8] | Popup sơ đồ Ở đây [1.2] | Bấm Đóng | — |

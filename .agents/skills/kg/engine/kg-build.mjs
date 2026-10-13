@@ -604,8 +604,8 @@ function inferKnownShape(rel, frontmatterType) {
     return "test_checklist_content";
   }
   if (
-    /\/ascii-wireframe\/[^/]+\.md$/.test(normalized) &&
-    !/-wireframe-index\.md$/.test(normalized)
+    /\/(?:ascii-wireframe|screens)\/[^/]+\.md$/.test(normalized) &&
+    !/-(?:wireframe|screen)-index\.md$/.test(normalized)
   ) {
     return "screen_content";
   }
@@ -1771,7 +1771,7 @@ class GraphBuilder {
     });
 
     if (
-      /\/(?:usecases\/uc-[^/]+|userstories\/us-\d+|ascii-wireframe\/(?![^/]*-index)[^/]+)\.md$/i.test(
+      /\/(?:usecases\/uc-[^/]+|userstories\/us-\d+|(?:ascii-wireframe|screens)\/(?![^/]*-index)[^/]+)\.md$/i.test(
         file
       )
     ) {

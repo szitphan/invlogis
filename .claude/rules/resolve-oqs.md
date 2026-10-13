@@ -208,4 +208,10 @@ Sau Write → **Collect OQs (own + inherited) → Prompt Y/skip/ids → Loop 1-b
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->
+
+## Nguồn bảng mô tả màn
+
+Flow có `docs/{feature}/screens/{flow}.md` (đã lên Figma) → đọc bảng 5 cột ở đó, không tìm trong `html-wireframe/`/`ascii-wireframe/` (đã bị xoá cho flow đó). Thứ tự nguồn: `.claude/rules/screen-source.md` Mục 2.
+
+
 <sub>Tài liệu thuộc bộ AI4BA BA-Kit — bản quyền hoangphan.blog</sub>

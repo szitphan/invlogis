@@ -165,7 +165,7 @@ Nguồn: [[docs/cross-process-flow/cross-process-flow-object-map.md|Bản đồ 
 | Đã dừng | Đang triển khai | Bước đó được gửi lại, có bản ghi thay thế, hoặc bản ghi bị xoá |
 | Đang triển khai | Đã hoàn thành | Mọi bước chính và nhánh phát sinh đã xong (không tính nhánh Đã huỷ) |
 
-## 10. Screens (tóm tắt — chi tiết ở html-wireframe/)
+## 10. Screens (tóm tắt — chi tiết ở screens/, Phụ lục B khi chốt)
 
 | Màn | Kênh | Mục đích | FR |
 |---|---|---|---|

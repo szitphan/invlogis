@@ -2,6 +2,8 @@
 type: usecase-index
 feature: cross-process-flow
 status: draft
+status_changed: 2026-10-13
+status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-12
 links:
   - docs/cross-process-flow/srs/cross-process-flow-spec.md

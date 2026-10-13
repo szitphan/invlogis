@@ -179,6 +179,7 @@ Legacy SRS (Phase 1): !`ls docs/srs/ 2>/dev/null | head -10`
     ```
     User Y → Write. n → abort.
 11b. **Phụ lục A — UI Common Rules & Components** (per `ui-common-rules-components.md` Mục 12) — sau khi spec có Mục 10 "Cấu hình UI Common Rules & Components", chạy `python3 _scripts/ui-common-expand.py docs/{feature}/srs/{feature}-spec.md` (in ra stdout) → show L2 diff vùng giữa marker `ui-common` → Y thì chạy lại với `--write`. KHÔNG tự viết/sửa tay nội dung phụ lục. Update mode: chạy `--check` ở Phase A; exit 1 (cũ) hoặc 2 (thiếu) → đề xuất sinh lại qua L2. Mục 10 đổi ở Phase G → sinh lại phụ lục trước Phase I.
+11c. **Phụ lục B — Màn hình (Figma)** (per `.claude/rules/screen-source.md` Mục 8) — feature có flow `approved` trong `screens/{feature}-screen-index.md` → Mục 10 Screens trỏ "chi tiết ở Phụ lục B" (không trỏ `html-wireframe/`); phụ lục do `/figma-sync --done` sinh bằng `_scripts/screens-md.py appendix`, `/srs` KHÔNG viết tay. Update mode: chạy `appendix {feature} --check` ở Phase A; khác 0 → đề xuất `/figma-sync {feature}` (Figma có thể đã đổi) rồi sinh lại.
 12. Chọn [1] / `--spec-only` → bỏ qua Tầng 2-4, nhảy thẳng **Phase G (auto-review) → H (OQ) → I (report)**.
 
 ### Phase D — Tầng 2: Models (nếu chọn ≥[2])

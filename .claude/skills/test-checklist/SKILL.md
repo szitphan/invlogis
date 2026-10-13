@@ -24,6 +24,7 @@ Workflow QC chuẩn skill này hỗ trợ:
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
+* **Bảng mô tả màn 5 cột — tra theo `.claude/rules/screen-source.md` Mục 2:** flow có `docs/{feature}/screens/{flow}.md` (đã lên Figma) thì đó là nguồn duy nhất, block `## Screen: {slug}` + `### Trạng thái:`; chưa có thì `html-wireframe/` rồi `ascii-wireframe/`.
 - __Output format CỐ ĐỊNH theo grammar CHK hiện hành__ — format này là contract cho parser (preview data.js) + `/test-cases` + KG. Format cũ `[priority] [Yes/No] N.` chỉ còn được parser đọc __backward-compat__ (docs demo di sản); skill __KHÔNG sinh mới__ theo format cũ.
   - **Grammar item — 1 dòng (KHÔNG có STT/`N.`):**
     ```
@@ -421,6 +422,7 @@ __Nguyên tắc BẮT BUỘC (report-first, HARD STOP — KHÔNG auto-apply):__
 
 ## References
 
+- `.claude/rules/screen-source.md` — bảng 5 cột sau Figma (`screens/`), thứ tự nguồn.
 - @../../rules/feature-bootstrap.md
 - @../../rules/ba-conventions.md
 - @../../rules/approval-gate.md

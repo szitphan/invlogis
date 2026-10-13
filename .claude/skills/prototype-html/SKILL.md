@@ -52,6 +52,7 @@ Cả 2 nguồn đều: chia flow theo `userflow.md` Mục 3, token theo `design.
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
+* **Bảng mô tả màn 5 cột — tra theo `.claude/rules/screen-source.md` Mục 2:** flow có `docs/{feature}/screens/{flow}.md` (đã lên Figma) thì đó là nguồn duy nhất, block `## Screen: {slug}` + `### Trạng thái:`; chưa có thì `html-wireframe/` rồi `ascii-wireframe/`.
 - **UI Common Rules & Components** (per `../../rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 - **L1 approval** trước Write. File đã tồn tại → L2 diff trước overwrite.
 - **KHÔNG `context: fork`** — skill có nhánh HITL (hỏi device khi userflow thiếu `primary_device`, review apply loop). Fork mất kênh hỏi-đáp → prompt bị auto-skip (per `feedback_fork_no_hitl`). Phân tích nặng vẫn delegate qua Task sub-agent, không fork toàn skill.
@@ -368,6 +369,7 @@ Reference trong `{feature}-wireframe-index.md` cột `HTML prototype` dạng `{f
 
 ## References
 
+- `.claude/rules/screen-source.md` — bảng 5 cột sau Figma (`screens/`), thứ tự nguồn.
 - @.claude/rules/ui-common-rules-components.md
 - @../../../_templates/prototype-html-template.html (template chuẩn — stage + FAB/panel + token 2 lớp + store + reset)
 - @assets/comment-layer.js (lớp góp ý ghim-lên-element — chèn nguyên văn cuối `<body>` khi mode có góp ý)

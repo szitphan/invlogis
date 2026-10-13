@@ -70,7 +70,11 @@ def compose_md(feature: str, vault: Path) -> tuple:
     uc_index_path = find_index_file(feature_dir / "usecases")
     uc_index = read_optional(uc_index_path) if uc_index_path else ""
     uc_diagram = read_optional(feature_dir / "usecases" / "diagram.md")
-    screen_index_path = find_index_file(feature_dir / "ascii-wireframe")
+    # Màn hình: screens/ (flow đã lên Figma, rule screen-source.md) thắng html-wireframe/ thắng ascii-wireframe/.
+    # Nội dung màn của flow approved đã nằm trong spec (Phụ lục B), ở đây chỉ lấy index để liệt kê.
+    screen_dir = next((feature_dir / d for d in ("screens", "html-wireframe", "ascii-wireframe")
+                       if find_index_file(feature_dir / d)), feature_dir / "ascii-wireframe")
+    screen_index_path = find_index_file(screen_dir)
     screen_index = read_optional(screen_index_path) if screen_index_path else ""
     brainstorm_files = list_glob(feature_dir / "brainstorms", "*.md")
     uc_files = list_glob(feature_dir / "usecases", "uc-*.md")
@@ -130,7 +134,7 @@ def compose_md(feature: str, vault: Path) -> tuple:
 
     # 2. Included Documents
     uc_index_label = f"usecases/{uc_index_path.name}" if uc_index_path else "usecases/_index.md"
-    screen_index_label = f"ascii-wireframe/{screen_index_path.name}" if screen_index_path else "ascii-wireframe/_index.md"
+    screen_index_label = f"{screen_dir.name}/{screen_index_path.name}" if screen_index_path else "ascii-wireframe/_index.md"
     included = []
     for label, val in [("urd.md", urd), ("brd.md", brd), ("prd.md", prd),
                        ("srs/spec.md", spec), ("srs/erd.md", erd),
@@ -142,6 +146,8 @@ def compose_md(feature: str, vault: Path) -> tuple:
             included.append(f"- `docs/{feature}/{label}`")
     for f in uc_files: included.append(f"- `docs/{feature}/usecases/{f.name}`")
     for f in screen_files: included.append(f"- `docs/{feature}/ascii-wireframe/{f.name}`")
+    for f in list_glob(feature_dir / "screens", "*.md", exclude={screen_index_path.name} if screen_index_path else set()):
+        included.append(f"- `docs/{feature}/screens/{f.name}`")
     if api_checklist: included.append(f"- `docs/{feature}/{'test/api' if (feature_dir / 'test' / 'api').is_dir() else 'integration'}/api-checklist.md`")
     if api_tests_path: included.append(f"- `docs/{api_tests_path.relative_to(vault / 'docs')}`")
     if api_map: included.append(f"- `docs/{feature}/{'integration' if (feature_dir / 'integration' / 'api-map.md').is_file() else 'test/api'}/api-map.md`")

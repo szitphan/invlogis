@@ -23,6 +23,7 @@ Generate use-case docs **theo chuẩn Cockburn (fully-dressed)**: mỗi UC = **1
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
+* **Bảng mô tả màn 5 cột — tra theo `.claude/rules/screen-source.md` Mục 2:** flow có `docs/{feature}/screens/{flow}.md` (đã lên Figma) thì đó là nguồn duy nhất, block `## Screen: {slug}` + `### Trạng thái:`; chưa có thì `html-wireframe/` rồi `ascii-wireframe/`.
 - **UI Common Rules & Components** (per `../../../.claude/rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 - **L1 approval** trước Write.
 - **Phân tầng SaaS** — con số, danh sách, bật/tắt nghiệp vụ trong bước UC ghi mã `P-…` kèm giá trị khách (vd "dưới `P-nguong-tam-ung` (Delta: 5.000.000 ₫)"), không chép số trần từ SOP; nhánh chỉ chạy khi tham số bật thì ghi điều kiện theo mã P. Profile không ghi bán cho nhiều khách → bỏ qua, báo 1 dòng. Per @../../../.claude/rules/saas-layer.md.
@@ -201,6 +202,7 @@ Diagram KHÔNG embed trong UC — thuộc `srs/{feature}-flows.md` / `{feature}-
 
 ## References
 
+- `.claude/rules/screen-source.md` — bảng 5 cột sau Figma (`screens/`), thứ tự nguồn.
 - @.claude/rules/ui-common-rules-components.md
 - @../../../.claude/rules/ba-conventions.md
 - @../../../.claude/rules/approval-gate.md

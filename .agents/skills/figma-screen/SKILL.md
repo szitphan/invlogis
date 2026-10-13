@@ -1,7 +1,7 @@
 ---
 name: figma-screen
 description: Vẽ màn hình giao diện (UI) lên Figma theo đúng design system của dự án — đề xuất 3 phương án bố cục (1 theo mẫu có sẵn trong design/design.md + 2 độc lập) để user chọn, dùng component thật (instance), gắn token theo tên, vẽ đủ trạng thái rỗng/đang tải/lỗi, rồi tự kiểm trước khi trình. Dùng khi ai đó nói "vẽ màn", "dựng màn hình", "vẽ UI", "mock up màn", "làm giao diện cho <tính năng>" trên Figma.
-allowed-tools: Read, Glob, Grep, Edit, Task, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write
+allowed-tools: Read, Glob, Grep, Edit, Write, Bash, Task, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__download_assets
 user-invocable: true
 argument-hint: "<màn hoặc tính năng cần vẽ> [@nguồn: srs, states, userflow]"
 ---
@@ -73,6 +73,9 @@ Không hỏi user những gì đọc được.
      Màn có ở **cả hai** → bảng HTML làm nguồn chính (`/wireframe-html` đã lấy ASCII làm nguồn rồi bổ
      sung); hai bảng lệch nhau (row, wording, mã lỗi) → liệt kê chỗ lệch, hỏi user bản nào đúng, KHÔNG
      tự chọn im lặng.
+     - **Flow đã lên Figma** — `screens/{flow-slug}.md` (block `## Screen: {slug}`, trạng thái ở
+       `### Trạng thái:`) là nguồn **duy nhất**, thắng cả HTML lẫn ASCII; wireframe cũ của flow đó đã bị
+       xoá (`.claude/rules/screen-source.md` Mục 2). Đây thường là lần sửa màn (Bước 5).
    * `srs/{feature}-spec.md` (FR/BR/Error Matrix), `srs/{feature}-states.md`, `usecases/uc-*.md`,
      file user tag bằng `@`.
    * **Bản đồ đối tượng** `{feature}-object-map.md` + `docs/_shared/object-map.md` (nếu có) — nguồn
@@ -423,7 +426,9 @@ Prototype: 24/31 chuyển màn đã nối · 5 hệ thống tự chuyển (lỗi
 Máy KHÔNG kiểm: <xem dưới, kèm mức ưu tiên [Cao]/[Trung]/[Thấp]>
 Chưa có chuẩn trong design.md: <liệt kê chỗ vẽ tạm, hoặc "không">
 Chế độ: <Nhanh — không vẽ trạng thái phụ | Đầy đủ>
-Link Figma: đã ghi {n} màn vào {feature}-wireframe-html-index.md / {feature}-wireframe-index.md | Chưa ghi: <lý do>
+Link Figma: đã ghi {n} màn vào {feature}-wireframe-html-index.md / {feature}-wireframe-index.md | qua /figma-sync | Chưa ghi: <lý do>
+Đồng bộ tài liệu (/figma-sync): <tóm tắt báo cáo của figma-sync> | Chưa sync tài liệu — <lý do>
+Task chốt: BL-NNN Chốt giao diện Figma {feature} · {flow} | đã có | chưa trọn flow
 ```
 
 **Ghi link về repo.** Link màn: `[{screenId}](https://www.figma.com/design/{fileKey}/?node-id={nodeId,
@@ -441,6 +446,21 @@ lệch hoặc không có → hỏi user link. Ghi vào **mọi wireframe index �
 Chỉ sửa đúng cột `Figma` + `Updated`, qua **L2 diff** (`approval-gate.md`). Chưa có index nào (chưa
 chạy `/wireframe-html` hay `/wireframe-ascii`) → không tạo mới, ghi 1 dòng "Chưa ghi link: chưa có
 wireframe index" trong báo cáo.
+
+Flow đã có `screens/{flow}.md` → không ghi link ở đây; `/figma-sync` (dưới) ghi link vào dòng **Figma** của
+từng màn + cột `Figma` của `screens/{feature}-screen-index.md`.
+
+**Đồng bộ ngược về tài liệu — luôn chạy sau khi vẽ hoặc sửa** (`.claude/rules/screen-source.md` Mục 5):
+gọi `/figma-sync {feature} --flow {flow}` **inline** (đọc `.claude/skills/figma-sync/SKILL.md`, chạy với
+L1/L2 của nó). Lần đầu của flow: chuyển bảng 5 cột sang `screens/{flow}.md`, xoá wireframe flow đó, chụp
+mốc. Lần sau: những gì đã vẽ khác bảng (mục "Đề xuất đổi so với bảng 5 cột") và chỉnh tay của designer
+(Bước 5) thành đề xuất sửa `screens/` + userflow thay vì chỉ nằm trong báo cáo chat. User từ chối → ghi
+"Chưa sync tài liệu" trong báo cáo, không ghi mốc.
+
+**Task chốt:** vẽ xong trọn một flow mà backlog chưa có task cùng flow → thêm (báo 1 dòng, `backlog.md`):
+`Chốt giao diện Figma {feature} · {flow}` · Xong khi
+`grep:docs/{feature}/screens/{feature}-screen-index.md:\({flow}\.md\).*approved`. User đóng task
+này (đổi ✅) hoặc nói "done" → `/figma-sync {feature} --done --flow {flow}`.
 
 ## Những gì máy KHÔNG kiểm
 
@@ -473,8 +493,8 @@ biết xử lý cái nào trước — mức chỉ là gợi ý chung, tuỳ ngh
   thiếu thì hỏi.
 * **Không bỏ row hay đổi wording của bảng 5 cột im lặng.** Muốn khác thì vẽ theo bảng + ghi đề xuất.
 * **Chỉ ghi repo ở cột `Figma` + `Updated` của wireframe index** (`{feature}-wireframe-html-index.md`
-  và/hoặc `{feature}-wireframe-index.md`), qua L2. Không sửa SRS, userflow, file wireframe HTML/ASCII
-  hay bảng 5 cột — muốn đổi thì đề xuất, user chạy skill tương ứng.
+  và/hoặc `{feature}-wireframe-index.md`), qua L2. Không tự sửa SRS, userflow, file wireframe HTML/ASCII
+  hay bảng 5 cột — mọi sửa tài liệu theo Figma đi qua `/figma-sync` (gọi inline ở Bước 7, có L1/L2 riêng).
 * **Không lặng lẽ bỏ màn/trạng thái** user đã yêu cầu. Không vẽ được thì nói màn nào và vì sao.
 * **Thiết bị luôn hỏi user**. `design.md` chỉ đề xuất.
 
@@ -496,4 +516,5 @@ Do's and Don'ts làm tiêu chí tự kiểm trước khi trình.
 - `design/setup-figma.md`: setup file Figma cho dự án mới (Cách A thư viện / Cách B bản sao) và bảng kiểm tra setup.
 - `docs/_shared/object-map.md` + `docs/{feature}/{feature}-object-map.md` (output `/object-map`): thuộc tính theo mức hiển thị, hành động theo vai trò, thẻ dùng chung — nguồn phụ Bước 1.3.
 - `design/figma-library-keys.json`: key component set để nạp từ thư viện đã publish (Cách A). Máy sinh, không sửa tay.
+- `.claude/rules/screen-source.md` + skill `/figma-sync`: bảng 5 cột sau Figma (`screens/`), mốc, đồng bộ ngược, chốt flow vào SRS.
 - `figma_docs(section="api" | "recipes" | "rules" | "userflow")`: cú pháp công cụ.

@@ -1,7 +1,7 @@
 ---
 name: figma-component
 description: Tạo hoặc cập nhật MỘT component bất kỳ của dự án trên Figma (vd Notification Center, Bộ lọc nâng cao, Tuỳ chỉnh cột, thẻ KPI, dòng lịch sử…) — ghép từ instance thật của thư viện đang có, gắn token của dự án, có biến thể + thuộc tính dùng lại được, đủ trạng thái, Desktop/Mobile, kiểm chữ dài — theo spec trong design/design.md. Dùng khi ai đó nói "tạo component", "dựng component <tên>", "biến mẫu ghép này thành component", "thêm biến thể/trạng thái cho component", "làm lại component cho file mới". Không dùng để dựng cả design system (dùng /figma-design-system) hay vẽ màn (dùng /figma-screen).
-allowed-tools: Read, Glob, Grep, Edit, Skill, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write, mcp__claude_ai_Figma__use_figma, mcp__claude_ai_Figma__get_figma_skill, mcp__claude_ai_Figma__get_libraries, mcp__claude_ai_Figma__search_design_system
+allowed-tools: Read, Glob, Grep, Edit, Write, Bash, Skill, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write, mcp__claude_ai_Figma__use_figma, mcp__claude_ai_Figma__get_figma_skill, mcp__claude_ai_Figma__get_libraries, mcp__claude_ai_Figma__search_design_system, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__download_assets
 user-invocable: true
 argument-hint: "<tên component> [link file Figma] [desktop|mobile|cả hai] [@spec/srs]"
 ---
@@ -314,6 +314,13 @@ Rồi cập nhật spec của component trong `design.md` (bảng: tên set, key
 từ gì; các quyết định mới; Known Gaps theo Iteration Guide — dòng `KG-nn` trong `design.md` + hàng chi
 tiết ghi ngay tại dòng đó, không có file backlog riêng) — qua approval gate. Quyết định mới lặp lại ở ≥ 2 spec → đề xuất
 đưa lên *Quy ước chung của component dự án*.
+
+**Màn của feature đổi theo** (Bước 8 sửa main component → instance trên màn đổi theo): từ
+`findInstances(setId, { scope: "document" })`, lấy frame màn có instance (tên `<[#]> · <web|mob> · <slug>`)
+→ feature + flow qua cột `Figma` của `screens/{feature}-screen-index.md` hoặc wireframe index. Đổi nhìn
+thấy được trên màn (chữ, phần tử thêm/bớt, trạng thái) → gọi `/figma-sync {feature} --flow {flow}` inline cho
+từng flow bị chạm (`.claude/rules/screen-source.md` Mục 5). Chỉ đổi hình (màu, bo, khoảng cách) → không gọi,
+ghi "màn bị chạm: n, chỉ đổi hình" trong báo cáo.
 
 ## Constraints
 

@@ -1,0 +1,191 @@
+[
+ {
+  "tree": {
+   "id": "1:1",
+   "name": "1.1 · web · demo",
+   "type": "FRAME",
+   "w": 1920,
+   "h": 1080,
+   "children": [
+    {
+     "id": "1:2",
+     "name": "Nội dung",
+     "type": "FRAME",
+     "itemSpacing": 16,
+     "padding": {
+      "l": 24,
+      "r": 24,
+      "t": 24,
+      "b": 24
+     },
+     "fill": "#ffffff",
+     "boundVariables": {
+      "fills": [
+       {
+        "type": "VARIABLE_ALIAS",
+        "id": "V:fills"
+       }
+      ],
+      "itemSpacing": {
+       "type": "VARIABLE_ALIAS",
+       "id": "V:itemSpacing"
+      },
+      "paddingLeft": {
+       "type": "VARIABLE_ALIAS",
+       "id": "V:paddingLeft"
+      }
+     },
+     "children": [
+      {
+       "id": "1:3",
+       "name": "Tiêu đề trang",
+       "type": "TEXT",
+       "characters": "Danh sách",
+       "fontSize": 24,
+       "fill": "#111",
+       "boundVariables": {
+        "fills": [
+         {
+          "type": "VARIABLE_ALIAS",
+          "id": "V:fills"
+         }
+        ],
+        "fontSize": {
+         "type": "VARIABLE_ALIAS",
+         "id": "V:fontSize"
+        }
+       }
+      },
+      {
+       "id": "1:4",
+       "name": "Hàng nút",
+       "type": "FRAME",
+       "children": [
+        {
+         "id": "1:5",
+         "name": "Button",
+         "type": "INSTANCE",
+         "mainComponent": {
+          "name": "Variant=Primary, Size=MD, State=Rest"
+         },
+         "children": [
+          {
+           "id": "I1:6",
+           "name": "Icon",
+           "type": "INSTANCE",
+           "w": 14,
+           "h": 14,
+           "mainComponent": {
+            "name": "icon/check"
+           },
+           "children": [
+            {
+             "id": "I1:6;v",
+             "name": "Vector",
+             "type": "VECTOR",
+             "w": 14,
+             "h": 14,
+             "strokeCount": 1,
+             "strokeWeight": 1.05,
+             "boundVariables": {
+              "strokes": [
+               {
+                "type": "VARIABLE_ALIAS",
+                "id": "V:s"
+               }
+              ]
+             }
+            }
+           ]
+          },
+          {
+           "id": "I1:5;t",
+           "name": "Label",
+           "type": "TEXT",
+           "characters": "Lưu",
+           "fontSize": 14,
+           "boundVariables": {
+            "fills": [
+             {
+              "type": "VARIABLE_ALIAS",
+              "id": "V:fills"
+             }
+            ],
+            "fontSize": {
+             "type": "VARIABLE_ALIAS",
+             "id": "V:fontSize"
+            }
+           },
+           "fill": "#fff"
+          }
+         ]
+        },
+        {
+         "id": "1:7",
+         "name": "Button",
+         "type": "INSTANCE",
+         "mainComponent": {
+          "name": "Variant=Secondary, Size=MD, State=Rest"
+         },
+         "children": [
+          {
+           "id": "I1:7;t",
+           "name": "Label",
+           "type": "TEXT",
+           "characters": "Huỷ",
+           "fontSize": 14,
+           "boundVariables": {
+            "fills": [
+             {
+              "type": "VARIABLE_ALIAS",
+              "id": "V:fills"
+             }
+            ],
+            "fontSize": {
+             "type": "VARIABLE_ALIAS",
+             "id": "V:fontSize"
+            }
+           },
+           "fill": "#fff"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tree": {
+   "id": "2:1",
+   "name": "1.1 · web · demo · Loading",
+   "type": "FRAME",
+   "w": 1920,
+   "h": 1080,
+   "children": [
+    {
+     "id": "2:3",
+     "name": "Tiêu đề trang",
+     "type": "TEXT",
+     "characters": "Danh sách",
+     "fontSize": 24,
+     "fill": "#111",
+     "boundVariables": {
+      "fills": [
+       {
+        "type": "VARIABLE_ALIAS",
+        "id": "V:fills"
+       }
+      ],
+      "fontSize": {
+       "type": "VARIABLE_ALIAS",
+       "id": "V:fontSize"
+      }
+     }
+    }
+   ]
+  }
+ }
+]

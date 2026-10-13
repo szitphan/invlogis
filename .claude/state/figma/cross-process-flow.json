@@ -1,0 +1,224 @@
+{
+ "fileKey": "FifpyOMpZk9OP8qyNzbRVJ",
+ "fileName": "[innvie] invlogis v0.3",
+ "page": "00 · Chung",
+ "pageId": "5506:14684",
+ "synced_at": "2026-10-13",
+ "level": "frame",
+ "notes": [
+  "Mốc mức frame (user chọn 2026-10-13): không có texts/rows — lần sync sau so chữ Figma trực tiếp với bảng screens/ khi sync flow đó",
+  "figma_read không trả reactions — kênh liên kết prototype chưa có mốc"
+ ],
+ "ignored": {
+  "5562:106617": "Splash · 1",
+  "5562:106625": "Splash · 2",
+  "5562:106633": "Splash · 3",
+  "5562:106641": "Splash · 4",
+  "5570:106767": "Cây quy trình · innvie",
+  "5596:129165": "Khung trang · innvie",
+  "5600:159931": "Ghi chú biến thể · 5600:158266",
+  "5600:159933": "Ghi chú biến thể · 5600:158620"
+ },
+ "screens": {
+  "1.1 · web": {
+   "nodeId": "5587:117888",
+   "slug": "record-detail",
+   "flows": [
+    "view-process"
+   ],
+   "frames": {
+    "Loading": "5587:118511",
+    "Load error": "5587:118875"
+   }
+  },
+  "1.2 · web": {
+   "nodeId": "5587:119271",
+   "slug": "process-diagram",
+   "flows": [
+    "view-process"
+   ],
+   "frames": {
+    "Loading": "5587:120011",
+    "Load error": "5587:120750",
+    "Update banner": "5587:121489",
+    "History load error": "5587:126054",
+    "Condition tooltip": "5627:156590"
+   }
+  },
+  "1.3 · web": {
+   "nodeId": "5587:122359",
+   "slug": "step-not-created",
+   "flows": [
+    "view-process"
+   ],
+   "frames": {}
+  },
+  "1.5 · web": {
+   "nodeId": "5587:123098",
+   "slug": "step-no-permission",
+   "flows": [
+    "view-process"
+   ],
+   "frames": {}
+  },
+  "1.6 · web": {
+   "nodeId": "5587:123837",
+   "slug": "debt-step",
+   "flows": [
+    "view-process"
+   ],
+   "frames": {}
+  },
+  "1.4 · web": {
+   "nodeId": "5587:124576",
+   "slug": "branch-point",
+   "flows": [
+    "view-process"
+   ],
+   "frames": {}
+  },
+  "1.7 · web": {
+   "nodeId": "5587:125315",
+   "slug": "step-previous-records",
+   "flows": [
+    "view-process"
+   ],
+   "frames": {}
+  },
+  "1.8 · web": {
+   "nodeId": "5587:127273",
+   "slug": "open-denied",
+   "flows": [
+    "view-process"
+   ],
+   "frames": {}
+  },
+  "1.9 · web": {
+   "nodeId": "5587:128058",
+   "slug": "record-deleted",
+   "flows": [
+    "view-process"
+   ],
+   "frames": {}
+  },
+  "3.1 · web": {
+   "nodeId": "5600:157912",
+   "slug": "new-record-detail",
+   "flows": [
+    "create-next-step"
+   ],
+   "frames": {}
+  },
+  "3.2 · web": {
+   "nodeId": "5600:158266",
+   "slug": "step-already-requested",
+   "flows": [
+    "create-next-step"
+   ],
+   "frames": {}
+  },
+  "3.4 · web": {
+   "nodeId": "5600:158620",
+   "slug": "has-child-step",
+   "flows": [
+    "create-next-step"
+   ],
+   "frames": {}
+  },
+  "3.3 · web": {
+   "nodeId": "5600:158974",
+   "slug": "source-revoked",
+   "flows": [
+    "create-next-step"
+   ],
+   "frames": {}
+  },
+  "2.1 · web": {
+   "nodeId": "5600:132884",
+   "slug": "process-list",
+   "flows": [
+    "search-process"
+   ],
+   "frames": {
+    "Loading": "5600:137717",
+    "Update banner": "5600:140138",
+    "Empty": "5600:144980",
+    "No search results": "5600:147401",
+    "No filter results": "5600:149822",
+    "Load error": "5600:152243",
+    "No permission": "5600:154664"
+   }
+  },
+  "2.2 · web": {
+   "nodeId": "5600:142559",
+   "slug": "list-process-diagram",
+   "flows": [
+    "search-process"
+   ],
+   "frames": {}
+  },
+  "1.1 · mob": {
+   "nodeId": "5600:159935",
+   "slug": "record-detail",
+   "flows": [
+    "view-process-mobile"
+   ],
+   "frames": {
+    "Loading": "5600:160508",
+    "Load error": "5600:160682"
+   }
+  },
+  "1.2 · mob": {
+   "nodeId": "5600:160887",
+   "slug": "process-diagram",
+   "flows": [
+    "view-process-mobile"
+   ],
+   "frames": {
+    "Loading": "5600:161816",
+    "Load error": "5600:161987",
+    "Update banner": "5600:162173"
+   }
+  },
+  "4.1 · mob": {
+   "nodeId": "5600:162600",
+   "slug": "step-sheet",
+   "flows": [
+    "view-process-mobile"
+   ],
+   "frames": {}
+  },
+  "1.3 · mob": {
+   "nodeId": "5600:163096",
+   "slug": "step-not-created",
+   "flows": [
+    "view-process-mobile"
+   ],
+   "frames": {}
+  },
+  "1.4 · mob": {
+   "nodeId": "5600:163629",
+   "slug": "branch-point",
+   "flows": [
+    "view-process-mobile"
+   ],
+   "frames": {}
+  },
+  "1.6 · mob": {
+   "nodeId": "5600:164169",
+   "slug": "debt-step",
+   "flows": [
+    "view-process-mobile"
+   ],
+   "frames": {}
+  },
+  "1.5 · mob": {
+   "nodeId": "5600:164723",
+   "slug": "step-no-permission",
+   "flows": [
+    "view-process-mobile"
+   ],
+   "frames": {}
+  }
+ }
+}

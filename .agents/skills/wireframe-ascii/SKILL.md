@@ -23,6 +23,7 @@ ASCII là contract layout: **bắt buộc** cho `/prototype-html` mode ASCII (kh
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
+* **Flow đã lên Figma thì không sinh lại** (`.claude/rules/screen-source.md` Mục 2): flow có `docs/{feature}/screens/{flow}.md` → bỏ qua flow đó, báo 1 dòng "đã chuyển sang Figma — sửa trên Figma rồi `/figma-sync`". Đổi nghiệp vụ của màn → `/cr`. Không tạo lại file wireframe đã bị `/figma-sync` xoá.
 - **UI Common Rules & Components** (per `../../../.claude/rules/ui-common-rules-components.md`) — đọc bảng mục lục `design/ui-common/screen-patterns.md` (CMP) + `design/ui-common/conventions.md` (GR, E-common). Element/bước khớp mã → ghi `Xem CMP-xx` / `Theo GR-xx` và CHỈ điền phần "UC phải khai báo"; override phải có lý do; lỗi trùng nghĩa dùng `E-common-NNN`. Chưa có 2 file → báo 1 dòng "Chưa có UI Common Rules & Components" rồi chạy như cũ.
 * **Cần `srs/{feature}-userflow.md` trước.** Chưa tồn tại → skill tự gọi `/user-flow <feature>` (Phase A.5), KHÔNG tự bịa cách chia flow riêng.
 * __1 file/flow__ — `docs/{feature}/ascii-wireframe/{flow-slug}.md`, chứa N screen block. KHÔNG còn 1-file-1-screen.
@@ -254,6 +255,7 @@ Sau ASCII OK:
 
 ## References
 
+- `.claude/rules/screen-source.md` — bảng 5 cột sau Figma (`screens/`), thứ tự nguồn.
 - @.claude/rules/ui-common-rules-components.md
 * @../../../.claude/rules/approval-gate.md
 * @../../../.claude/rules/review-format.md (Mục Review độc lập khi skill chạy riêng — Phase D.5)

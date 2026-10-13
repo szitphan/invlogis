@@ -479,6 +479,14 @@ def main():
             i["Trạng thái"], i["Xong"], i["Bằng chứng"] = "✅", TODAY, ev
             log.append(f"✅ {i['ID']} xong — {i['Việc']}")
 
+    # task "Chốt giao diện Figma {feature} · {flow}" user đóng tay mà flow chưa approved → nhắc chạy --done
+    # (rule .claude/rules/screen-source.md Mục 6). In mỗi lượt tới khi điều kiện thoả.
+    remind = []
+    for i in items:
+        m = re.match(r"Chốt giao diện Figma\s+(\S+)\s+·\s+(\S+)", i["Việc"])
+        if m and i["Trạng thái"].startswith("✅") and not check(i["Xong khi"], fed)[0]:
+            remind.append(f"{i['ID']} chốt tay — chạy /figma-sync {m.group(1)} --done --flow {m.group(2)}")
+
     # cột "Việc mở" của sổ
     open_items = [i for i in items if not i["Trạng thái"].startswith("✅")]
     for r in rows:
@@ -515,6 +523,8 @@ def main():
         print("[intake-sync] " + "\n[intake-sync] ".join(log))
     elif not QUIET:
         print("[intake-sync] không có thay đổi")
+    for r in remind:
+        print(f"[figma-sync] {r}")
     if "--summary" in args:
         print(f"  Backlog: {len(open_items)} task mở · {len(done)} đã xong ({BACKLOG})")
         for i in open_items[:5]:

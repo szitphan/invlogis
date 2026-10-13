@@ -30,6 +30,7 @@ Per-story `status`, `priority`, `jira key` sống ở **bảng index**, KHÔNG �
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
+* **Bảng mô tả màn 5 cột — tra theo `.claude/rules/screen-source.md` Mục 2:** flow có `docs/{feature}/screens/{flow}.md` (đã lên Figma) thì đó là nguồn duy nhất, block `## Screen: {slug}` + `### Trạng thái:`; chưa có thì `html-wireframe/` rồi `ascii-wireframe/`.
 * **L1 approval** trước batch Write.
 * **Phân tầng SaaS** — mỗi story có dòng `**Tầng:**` lấy từ cột Tầng của FR nguồn; FR chưa có tầng → ghi `chưa xếp` và nêu số story đó ở L1. Con số trong story/AC dùng mã `P-…` kèm giá trị khách. Profile không ghi bán cho nhiều khách → bỏ qua, báo 1 dòng. Per @../../../.claude/rules/saas-layer.md.
 * **Review độc lập trước L1** (bước 4b) theo `review-format.md` Mục "Review độc lập khi skill chạy riêng" — finding nghiệp vụ thành câu hỏi cho user, KHÔNG tự quyết; bỏ qua thì in `Review: SKIPPED — {lý do}`.
@@ -140,6 +141,7 @@ Status + priority + jira key sống ở **index**, KHÔNG ở file us. Hook tự
 
 ## References
 
+- `.claude/rules/screen-source.md` — bảng 5 cột sau Figma (`screens/`), thứ tự nguồn.
 * @../../../.claude/rules/ba-conventions.md
 * @../../../.claude/rules/approval-gate.md
 * @../../../.claude/rules/saas-layer.md

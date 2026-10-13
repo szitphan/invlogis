@@ -1,0 +1,385 @@
+[
+ {
+  "tree": {
+   "id": "3:1",
+   "name": "1.1 · web · demo",
+   "type": "FRAME",
+   "w": 1920,
+   "h": 1080,
+   "children": [
+    {
+     "id": "3:2",
+     "name": "Nội dung",
+     "type": "FRAME",
+     "itemSpacing": 16,
+     "fill": "#fafafa",
+     "children": [
+      {
+       "id": "3:3",
+       "name": "Tiêu đề trang",
+       "type": "TEXT",
+       "characters": "Đơn LSC-0930",
+       "fontSize": 24,
+       "fill": "#111",
+       "boundVariables": {
+        "fills": [
+         {
+          "type": "VARIABLE_ALIAS",
+          "id": "V:fills"
+         }
+        ],
+        "fontSize": {
+         "type": "VARIABLE_ALIAS",
+         "id": "V:fontSize"
+        }
+       }
+      },
+      {
+       "id": "3:4",
+       "name": "Hàng nút",
+       "type": "FRAME",
+       "children": [
+        {
+         "id": "3:5",
+         "name": "Button",
+         "type": "INSTANCE",
+         "mainComponent": {
+          "name": "Variant=Primary, Size=MD, State=Rest"
+         },
+         "children": [
+          {
+           "id": "I3:5;t",
+           "name": "Label",
+           "type": "TEXT",
+           "characters": "Lưu",
+           "fontSize": 14,
+           "boundVariables": {
+            "fills": [
+             {
+              "type": "VARIABLE_ALIAS",
+              "id": "V:fills"
+             }
+            ],
+            "fontSize": {
+             "type": "VARIABLE_ALIAS",
+             "id": "V:fontSize"
+            }
+           },
+           "fill": "#fff"
+          }
+         ]
+        },
+        {
+         "id": "3:6",
+         "name": "Button",
+         "type": "INSTANCE",
+         "mainComponent": {
+          "name": "Variant=Primary, Size=MD, State=Rest"
+         },
+         "children": [
+          {
+           "id": "I3:6;t",
+           "name": "Label",
+           "type": "TEXT",
+           "characters": "Gửi",
+           "fontSize": 14,
+           "boundVariables": {
+            "fills": [
+             {
+              "type": "VARIABLE_ALIAS",
+              "id": "V:fills"
+             }
+            ],
+            "fontSize": {
+             "type": "VARIABLE_ALIAS",
+             "id": "V:fontSize"
+            }
+           },
+           "fill": "#fff"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "id": "3:7",
+       "name": "Button",
+       "type": "INSTANCE",
+       "mainComponent": {
+        "name": "Variant=Primary, Size=MD, State=Rest"
+       },
+       "children": [
+        {
+         "id": "I3:7;t",
+         "name": "Label",
+         "type": "TEXT",
+         "characters": "Đóng",
+         "fontSize": 14,
+         "boundVariables": {
+          "fills": [
+           {
+            "type": "VARIABLE_ALIAS",
+            "id": "V:fills"
+           }
+          ],
+          "fontSize": {
+           "type": "VARIABLE_ALIAS",
+           "id": "V:fontSize"
+          }
+         },
+         "fill": "#fff"
+        }
+       ]
+      },
+      {
+       "id": "3:8",
+       "name": "Button",
+       "type": "INSTANCE",
+       "mainComponent": {
+        "name": "Variant=Ghost, Size=MD, State=Rest"
+       },
+       "children": [
+        {
+         "id": "I3:9",
+         "name": "Icon",
+         "type": "INSTANCE",
+         "w": 14,
+         "h": 14,
+         "mainComponent": {
+          "name": "icon/columns-3"
+         },
+         "children": [
+          {
+           "id": "I3:9;v",
+           "name": "Vector",
+           "type": "VECTOR",
+           "w": 14,
+           "h": 14,
+           "strokeCount": 1,
+           "strokeWeight": 1.05,
+           "boundVariables": {
+            "strokes": [
+             {
+              "type": "VARIABLE_ALIAS",
+              "id": "V:s"
+             }
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "id": "I3:8;t",
+         "name": "Label",
+         "type": "TEXT",
+         "characters": "Tuỳ chỉnh cột",
+         "fontSize": 14,
+         "boundVariables": {
+          "fills": [
+           {
+            "type": "VARIABLE_ALIAS",
+            "id": "V:fills"
+           }
+          ],
+          "fontSize": {
+           "type": "VARIABLE_ALIAS",
+           "id": "V:fontSize"
+          }
+         },
+         "fill": "#fff"
+        }
+       ]
+      },
+      {
+       "id": "I3:10",
+       "name": "Icon",
+       "type": "INSTANCE",
+       "w": 13,
+       "h": 13,
+       "mainComponent": {
+        "name": "icon/list"
+       },
+       "children": [
+        {
+         "id": "I3:10;v",
+         "name": "Vector",
+         "type": "VECTOR",
+         "w": 13,
+         "h": 13,
+         "strokeCount": 1,
+         "strokeWeight": 1.2,
+         "boundVariables": {
+          "strokes": [
+           {
+            "type": "VARIABLE_ALIAS",
+            "id": "V:s"
+           }
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "I3:11",
+       "name": "Icon",
+       "type": "INSTANCE",
+       "w": 18,
+       "h": 18,
+       "mainComponent": {
+        "name": "icon/search"
+       },
+       "children": [
+        {
+         "id": "I3:11;v",
+         "name": "Vector",
+         "type": "VECTOR",
+         "w": 18,
+         "h": 18,
+         "strokeCount": 1,
+         "strokeWeight": 1.2,
+         "boundVariables": {
+          "strokes": [
+           {
+            "type": "VARIABLE_ALIAS",
+            "id": "V:s"
+           }
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "3:12",
+       "name": "Vector",
+       "type": "VECTOR",
+       "strokeCount": 1
+      },
+      {
+       "id": "3:13",
+       "name": "BottomSheet",
+       "type": "FRAME"
+      },
+      {
+       "id": "I3:14",
+       "name": "BottomSheet",
+       "type": "INSTANCE",
+       "mainComponent": {
+        "name": "Size=Tall"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tree": {
+   "id": "4:1",
+   "name": "1.2 · web · demo-2",
+   "type": "FRAME",
+   "w": 1920,
+   "h": 1080,
+   "children": [
+    {
+     "id": "4:3",
+     "name": "Tiêu đề trang",
+     "type": "TEXT",
+     "characters": "Đơn LSC-0930",
+     "fontSize": 20,
+     "fill": "#111",
+     "boundVariables": {
+      "fills": [
+       {
+        "type": "VARIABLE_ALIAS",
+        "id": "V:fills"
+       }
+      ],
+      "fontSize": {
+       "type": "VARIABLE_ALIAS",
+       "id": "V:fontSize"
+      }
+     }
+    },
+    {
+     "id": "4:7",
+     "name": "Button",
+     "type": "INSTANCE",
+     "mainComponent": {
+      "name": "Variant=Secondary, Size=MD, State=Rest"
+     },
+     "children": [
+      {
+       "id": "I4:7;t",
+       "name": "Label",
+       "type": "TEXT",
+       "characters": "Đóng",
+       "fontSize": 14,
+       "boundVariables": {
+        "fills": [
+         {
+          "type": "VARIABLE_ALIAS",
+          "id": "V:fills"
+         }
+        ],
+        "fontSize": {
+         "type": "VARIABLE_ALIAS",
+         "id": "V:fontSize"
+        }
+       },
+       "fill": "#fff"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "tree": {
+   "id": "5:1",
+   "name": "1.3 · web · demo-3",
+   "type": "FRAME",
+   "w": 1920,
+   "h": 1080,
+   "children": [
+    {
+     "id": "5:3",
+     "name": "Mã",
+     "type": "TEXT",
+     "characters": "LSC-0999",
+     "fontSize": 14,
+     "boundVariables": {
+      "fills": [
+       {
+        "type": "VARIABLE_ALIAS",
+        "id": "V:fills"
+       }
+      ],
+      "fontSize": {
+       "type": "VARIABLE_ALIAS",
+       "id": "V:fontSize"
+      }
+     }
+    },
+    {
+     "id": "5:4",
+     "name": "Mã 2",
+     "type": "TEXT",
+     "characters": "LSC-0930",
+     "fontSize": 14,
+     "boundVariables": {
+      "fills": [
+       {
+        "type": "VARIABLE_ALIAS",
+        "id": "V:fills"
+       }
+      ],
+      "fontSize": {
+       "type": "VARIABLE_ALIAS",
+       "id": "V:fontSize"
+      }
+     }
+    }
+   ]
+  }
+ }
+]

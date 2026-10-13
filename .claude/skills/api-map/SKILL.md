@@ -21,6 +21,7 @@ Là tư duy traceability (họ hàng `/gap`) nhưng trace **field** thay vì FR�
 
 ### Hard rules — never violate‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
+* **Bảng mô tả màn 5 cột — tra theo `.claude/rules/screen-source.md` Mục 2:** flow có `docs/{feature}/screens/{flow}.md` (đã lên Figma) thì đó là nguồn duy nhất, block `## Screen: {slug}` + `### Trạng thái:`; chưa có thì `html-wireframe/` rồi `ascii-wireframe/`.
 * **1 output cố định** — `docs/{feature}/integration/api-map.md`. File đã tồn tại → tự động chuyển sang update mode (L2 diff), không refuse.
 * **Đọc nguồn, không bịa field** — mọi row phải truy về `api-summary.md` (API) + `srs/{feature}-erd.md` (system) + screen specs (UI) nếu có.
 * **Gap detection bắt buộc** — flag field API chưa có chỗ hiển thị + UI cần field API không cung cấp.
@@ -98,6 +99,7 @@ Hội tụ dưới `api-design.md` trước khi chốt `/api-checklist`. Hook t�
 
 ## References
 
+- `.claude/rules/screen-source.md` — bảng 5 cột sau Figma (`screens/`), thứ tự nguồn.
 * @../../rules/api-integration.md
 * @../../rules/approval-gate.md
 * @../../rules/feature-bootstrap.md
