@@ -22,6 +22,7 @@ Dùng:
 
 import argparse
 import glob
+import hashlib
 import html
 import importlib.util
 import json
@@ -29,7 +30,7 @@ import os
 import re
 import subprocess
 import sys
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -166,7 +167,8 @@ def parse_backlog():
     text = read(ROOT / "_workspace/backlog.md")
     sec = re.search(r"## Đang mở\n(.*?)(?:\n## |\Z)", text, re.S)
     rows = []
-    for line in (sec.group(1) if sec else "").split("\n"):
+    start = text[:sec.start(1)].count("\n") + 1 if sec else 0
+    for n, line in enumerate((sec.group(1) if sec else "").split("\n")):
         if not line.startswith("| BL-"):
             continue
         c = table_cells(line)
@@ -174,8 +176,43 @@ def parse_backlog():
             continue
         c += [""] * (10 - len(c))
         rows.append({"id": c[0], "task": c[1], "source": c[2], "done_when": c[3], "state": c[4], "created": c[5],
-                     "due": c[8], "manual": c[9]})
+                     "due": c[8], "manual": c[9], "line": start + n})
     return rows
+
+
+def line_of(path, pattern):
+    """Số dòng (1-based) đầu tiên khớp regex trong file; None nếu không có."""
+    for i, l in enumerate(read(ROOT / path).split("\n"), 1):
+        if re.search(pattern, l):
+            return i
+    return None
+
+
+def cond_text(cond):
+    """Dịch điều kiện Xong khi (cú pháp backlog) sang câu đọc được."""
+    cond = cond.strip().strip("`")
+    if not cond:
+        return ""
+    if cond == "manual":
+        return "Anh tự đóng (đổi Trạng thái thành ✅)"
+    out = []
+    for part in [x.strip() for x in cond.split("&&")]:
+        neg = part.startswith("!")
+        body = part[1:] if neg else part
+        kind, _, rest = body.partition(":")
+        if kind == "exists":
+            out.append(("chưa có" if neg else "có") + f" file {rest.split('/')[-1]}")
+        elif kind == "grep":
+            f_, _, rx = rest.partition(":")
+            rx_h = rx.replace("\\", "").replace("^", "").replace("$", "")
+            out.append(f"{f_.split('/')[-1]} " + ("hết" if neg else "có") + f" “{rx_h}”")
+        elif kind == "fed":
+            out.append(f"nguồn {rest} đối chiếu xong")
+        elif kind == "branch":
+            out.append(f"branch {rest} đã land (xoá)" if neg else f"có branch {rest}")
+        else:
+            out.append(part)
+    return " · và ".join(out)
 
 
 def parse_sources():
@@ -276,6 +313,115 @@ def orphan_worktrees():
     return res
 
 
+def stale_acked():
+    t = read(ROOT / "_workspace/stale-ack.md")
+    return set(re.findall(r"^\| \d{4}-\d{2}-\d{2} \| `([^`]+)` \|", t, re.M))
+
+
+def oq_history(only=None, weeks=8, today=None):
+    """OQ mở/đóng cuối mỗi tuần (Chủ nhật) từ lịch sử git + điểm hôm nay từ working tree.
+    Tất định theo trạng thái git. Buổi họp = file docs/meetings/decks/YYYY-MM-DD-*.md."""
+    today = today or date.today()
+    last_sun = today - timedelta(days=(today.weekday() + 1) % 7 or 7)
+    points = []
+
+    def count(lines):
+        o = c = 0
+        for ln in lines:
+            m = re.match(r"^(?:[^:]+:)?docs/([^/]+)/[^:]+:\d+:(\|.*)$", ln)
+            fd = m.group(1) if m else ""
+            # Lịch sử tính MỌI folder feature lúc đó (kể cả feature đã tách/đổi tên), trừ khi lọc 1 feature.
+            if not m or fd.startswith("_") or fd.startswith("zz-") or fd in META_DIRS or (only and fd != only):
+                continue
+            cells = [x for x in table_cells(m.group(2)) if x]
+            if not cells or not re.match(r"^OQ-\d+$", cells[0]):
+                continue
+            if OQ_CLOSED_RE.match(cells[-1] if len(cells) > 1 else ""):
+                c += 1
+            else:
+                o += 1
+        return o, c
+
+    for k in range(weeks - 1, -1, -1):
+        d = last_sun - timedelta(days=7 * k)
+        code, rev = run(["git", "rev-list", "-1", f"--before={d.isoformat()} 23:59:59", "HEAD"])
+        rev = rev.strip()
+        if code != 0 or not rev:
+            continue
+        code, out = run(["git", "grep", "-n", "-E", r"^\| *OQ-[0-9]+", rev, "--", "docs/*.md", "docs/**/*.md"])
+        o, c = count(out.splitlines()) if code in (0, 1) else (0, 0)
+        points.append({"date": d.isoformat(), "open": o, "closed": c})
+    code, out = run(["git", "grep", "-n", "--untracked", "-E", r"^\| *OQ-[0-9]+", "--", "docs/*.md", "docs/**/*.md"])
+    o, c = count(out.splitlines()) if code in (0, 1) else (0, 0)
+    points.append({"date": today.isoformat(), "open": o, "closed": c, "now": True})
+    decks = sorted({p.name[:10] for p in (ROOT / "docs/meetings/decks").glob("*.md") if re.match(r"\d{4}-\d{2}-\d{2}", p.name)})
+    return {"points": points, "decks": decks}
+
+
+def audit_items(path):
+    items, level = [], None
+    for ln, line in enumerate(read(ROOT / path).split("\n"), 1):
+        if line.startswith("## "):
+            h = re.match(r"^## Mức (Cao|Trung|Thấp)", line)
+            level = h.group(1) if h else None
+            continue
+        if level and line.startswith("| ") and not line.startswith("| Mã") and not line.startswith("|---"):
+            c = table_cells(line) + ["", ""]
+            items.append({"level": level, "code": c[0], "what": c[1], "where": c[2], "line": ln})
+    return items
+
+
+def figma_runs():
+    rows = []
+    for line in read(ROOT / "_workspace/figma-runs.md").split("\n"):
+        m = re.match(r"^\| (\d{4}-\d{2}-\d{2}) \d{2}:\d{2} \| ([^|]+?) \| ([^|]+?) \| (bắt đầu|xong) \|$", line)
+        if m:
+            rows.append({"date": m.group(1), "feature": m.group(2), "flow": m.group(3), "event": m.group(4)})
+    return rows
+
+
+def figma_board(features):
+    """Thẻ Review Figma: mục audit mới nhất mỗi feature. Cột do máy đặt:
+    Mới · Đang sửa (có /figma-screen đang chạy) · Chờ đo lại (đã chạy xong sau ngày audit) · Xong (audit trước có, audit mới không còn).
+    Kéo tay (Bỏ qua + lý do, hoặc chỉnh cột) lưu trong kho của trang artifact, đè lên cột máy."""
+    runs = figma_runs()
+    cards = []
+    for f in features:
+        files = sorted(glob.glob(str(ROOT / "docs/reports/figma-audit" / f"*-{f}-figma-audit.md")))
+        if not files:
+            continue
+        latest = rel(Path(files[-1]))
+        a_date = Path(files[-1]).name[:10]
+        state = {}
+        for r in runs:
+            if r["feature"] == f:
+                state[r["flow"]] = r
+        running = any(r["event"] == "bắt đầu" for r in state.values())
+        redone = any(r["event"] == "xong" and r["date"] >= a_date for r in state.values())
+        col = "dang-sua" if running else "cho-do-lai" if redone else "moi"
+        key = lambda it: hashlib.sha1(f"{f}|{it['code']}|{it['what'][:80]}".encode()).hexdigest()[:10]
+        cur = audit_items(latest)
+        cur_keys = {key(it) for it in cur}
+        for it in cur:
+            cards.append({"id": key(it), "feature": f, "col": col, "report": latest, "date": a_date, **it})
+        if len(files) > 1:
+            prev = rel(Path(files[-2]))
+            for it in audit_items(prev):
+                if key(it) not in cur_keys:
+                    cards.append({"id": key(it), "feature": f, "col": "xong", "report": prev,
+                                  "date": Path(files[-2]).name[:10], **it})
+    lv = {"Cao": 0, "Trung": 1, "Thấp": 2}
+    cards.sort(key=lambda c: (c["feature"], lv.get(c["level"], 9), c["code"], c["id"]))
+    return cards
+
+
+def dashboard_state():
+    try:
+        return json.loads(read(ROOT / ".claude/state/dashboard.json") or "{}")
+    except json.JSONDecodeError:
+        return {}
+
+
 def parse_staleness():
     rows = []
     for line in read(ROOT / "_workspace/staleness.md").split("\n"):
@@ -284,10 +430,12 @@ def parse_staleness():
         c = table_cells(line)
         if len(c) < 3:
             continue
-        up, down = c[1].strip("`"), c[2].strip("`")
+        bt = lambda x: (re.search(r"`([^`]+)`", x) or re.search(r"(\S+)", x) or [None, ""])[1]
+        up, down = bt(c[1]), bt(c[2])
         rows.append({"date": c[0], "upstream": up, "downstream": down,
                      "dead": not (ROOT / down).exists()})
-    return rows
+    ack = stale_acked()
+    return [r for r in rows if not (r["dead"] and r["downstream"] in ack)]
 
 
 # ─── trục tiến độ ───────────────────────────────────────────────────────────
@@ -454,13 +602,19 @@ def priority_score(blocking, due, today, spread, age_days):
     return sum(parts.values()), parts
 
 
-def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today):
-    """Hàng việc chung: task BL đang mở + việc máy phát hiện, cùng 1 thang điểm. Ưu tiên tay thắng điểm."""
+def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today, stale_log=()):
+    """Hàng việc chung: task BL đang mở + việc máy phát hiện, cùng 1 thang điểm. Ưu tiên tay thắng điểm.
+    Mỗi việc có: why (vì sao có việc), done_when (máy kiểm) + done_text (câu đọc được), nơi mở (path + dòng + gợi ý)."""
     by_feat = {r["feature"]: r for r in rows}
+    up_of = {}
+    for s_ in stale_log:
+        up_of[s_["downstream"]] = s_
 
-    def feat_block(f, first_only=False):
-        r = by_feat.get(f)
-        return bool(r and r["blocks"])
+    def item(kind, id_, title, score, parts, why, done_when, path=None, line=None, hint="",
+             doc=None, doc_line=None, doc_hint="", manual="", due=""):
+        return {"kind": kind, "id": id_, "title": title, "score": score, "parts": parts, "why": why,
+                "done_when": done_when, "done_text": cond_text(done_when), "path": path, "line": line,
+                "hint": hint, "doc": doc, "doc_line": doc_line, "doc_hint": doc_hint, "manual": manual, "due": due}
 
     items = []
     for b in backlog:
@@ -473,11 +627,16 @@ def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today):
             age = (today - date.fromisoformat(b["created"])).days
         except ValueError:
             age = 0
-        score, parts = priority_score("full" if any(feat_block(f) for f in feats) else None,
+        score, parts = priority_score("full" if any(by_feat[f]["blocks"] for f in feats) else None,
                                       b["due"], today, len(feats) + docs_n, age)
-        link_path = next(iter(re.findall(r"(docs/[\w./-]+\.md)", blob)), "_workspace/backlog.md")
-        items.append({"kind": "BL", "id": b["id"], "title": re.sub(r"`", "", b["task"])[:150], "score": score,
-                      "parts": parts, "manual": b["manual"], "path": link_path, "line": None, "due": b["due"]})
+        doc = next(iter(re.findall(r"((?:docs|docs-input|_scripts|\.claude)/[\w./-]+\.\w+)", blob)), None)
+        doc = doc if doc and "*" not in doc and (ROOT / doc).exists() else None
+        src = re.sub(r"`", "", b["source"]).strip()
+        why = " · ".join(x for x in [f"Nguồn: {src}" if src and src != "—" else "", f"mở từ {b['created']}" if b["created"] else "",
+                                     b["state"] if b["state"] not in ("⬜", "") else ""] if x)
+        items.append(item("BL", b["id"], re.sub(r"`", "", b["task"]), score, parts, why, b["done_when"],
+                          "_workspace/backlog.md", b["line"], f"dòng {b['id']}", doc, None, "tài liệu liên quan",
+                          b["manual"], b["due"]))
 
     # Máy: doc stale gom theo feature (project-level gom chung)
     groups = {}
@@ -488,23 +647,29 @@ def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today):
         blocking = "full" if r and ({"brainstorm", "srs"} & set(r["blocks"])) else "part" if r else None
         age = max((d["days_since_update"] for d in ds if d["days_since_update"] >= 0), default=0)
         score, parts = priority_score(blocking, "", today, len(ds), age)
-        label = f if f != "_dự án" else "doc dự án"
-        items.append({"kind": "Máy", "id": f"stale:{f}", "title": f"{label}: {len(ds)} doc stale chờ rà hoặc reset",
-                      "score": score, "parts": parts, "manual": "", "path": ds[0]["path"], "line": None, "due": ""})
+        label = f if f != "_dự án" else "Doc dự án (_shared, _product, meetings)"
+        ups = sorted({up_of[d["path"]]["upstream"].split("/")[-1] for d in ds if d["path"] in up_of})
+        why = (f"Upstream đổi ({', '.join(ups[:3])}{'…' if len(ups) > 3 else ''}) nên {len(ds)} doc bị đánh stale. "
+               "Rà từng doc: không cần sửa → reset (tab Sức khỏe), cần sửa → sửa rồi reset.")
+        items.append(item("Máy", f"stale:{f}", f"{label}: {len(ds)} doc stale chờ rà", score, parts, why,
+                          " && ".join(f"!grep:{d['path']}:^status: stale" for d in ds),
+                          ds[0]["path"], line_of(ds[0]["path"], r"^status:"), "dòng status (doc đầu tiên)"))
     # Máy: OQ mở của feature chưa có task BL nào nhắc tới
     mentioned = " ".join(f'{b["task"]} {b["source"]} {b["done_when"]}' for b in backlog if not b["state"].startswith("✅"))
     for r in rows:
         if r["open_oq"] and r["feature"] not in mentioned:
             o = r["stages"]["oq"]
             score, parts = priority_score("full", "", today, r["open_oq"], 0)
-            items.append({"kind": "Máy", "id": f"oq:{r['feature']}", "title": f"{r['feature']}: {r['open_oq']} câu hỏi mở chưa có task",
-                          "score": score, "parts": parts, "manual": "", "path": o["path"], "line": o["line"], "due": ""})
+            items.append(item("Máy", f"oq:{r['feature']}", f"{r['feature']}: {r['open_oq']} câu hỏi mở chưa có task theo dõi",
+                              score, parts, "Câu hỏi mở đang chặn feature đi tiếp mà backlog chưa có task nào nhắc tới. "
+                              "Chốt qua /deck hoặc hỏi khách.", f"!grep:docs/{r['feature']}/**/*.md:Còn mở",
+                              o["path"], o["line"], "câu hỏi mở đầu tiên"))
         lint = r.get("lint") or {}
         if lint.get("fail"):
             score, parts = priority_score("full", "", today, lint["fail"], 0)
-            items.append({"kind": "Máy", "id": f"lint:{r['feature']}", "title": f"{r['feature']}: {lint['fail']} lỗi FAIL tầng SaaS",
-                          "score": score, "parts": parts, "manual": "", "path": r["stages"]["srs"]["path"],
-                          "line": r["stages"]["srs"]["line"], "due": ""})
+            items.append(item("Máy", f"lint:{r['feature']}", f"{r['feature']}: {lint['fail']} lỗi FAIL tầng SaaS", score, parts,
+                              "Quy tắc thiếu nhãn tầng hoặc dùng mã P chưa có trong bảng tham số (saas-layer-lint).", "manual",
+                              r["stages"]["srs"]["path"], r["stages"]["srs"]["line"], "dòng lỗi đầu tiên"))
         a = r.get("audit")
         if a and a["cao"]:
             try:
@@ -512,20 +677,26 @@ def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today):
             except ValueError:
                 age = 0
             score, parts = priority_score("part", "", today, a["cao"], age)
-            items.append({"kind": "Máy", "id": f"figma:{r['feature']}", "title": f"Audit Figma {r['feature']}: {a['cao']} mục mức Cao",
-                          "score": score, "parts": parts, "manual": "", "path": a["path"], "line": None, "due": ""})
+            cao = [x for x in audit_items(a["path"]) if x["level"] == "Cao"]
+            what = re.sub(r"`", "", cao[0]["what"]) if cao else ""
+            items.append(item("Máy", f"figma:{r['feature']}", f"Audit Figma {r['feature']}: {a['cao']} mục mức Cao", score, parts,
+                              f"Audit {a['date']}: {what[:120]}. Sửa trên Figma rồi chạy lại /figma-audit.",
+                              f"grep:docs/reports/figma-audit/*-{r['feature']}-figma-audit.md:\\*\\*Cao 0 ",
+                              a["path"], cao[0]["line"] if cao else None, "mục mức Cao"))
     # Máy: nguồn có bản mới (🔄) chưa rà
     for src, led in sorted(ledgers.items()):
         n = sum(1 for x in led["rows"] if "🔄" in x["result"])
         if n:
             score, parts = priority_score(None, "", today, n, 0)
-            items.append({"kind": "Máy", "id": f"src:{src}", "title": f"{src} {led['name']}: {n} mục bản mới chưa rà",
-                          "score": score, "parts": parts, "manual": "", "path": led["path"], "line": None, "due": ""})
+            items.append(item("Máy", f"src:{src}", f"{src} {led['name']}: {n} mục bản mới chưa rà", score, parts,
+                              "Khách gửi bản mới; các mục đổi/thêm cần rà lại vào brainstorm.", f"!grep:{led['path']}:🔄",
+                              led["path"], line_of(led["path"], "🔄"), "mục 🔄 đầu tiên"))
     # Máy: worktree không có branch feat/*
     for w in worktrees:
         score, parts = priority_score(None, "", today, 0, 0)
-        items.append({"kind": "Máy", "id": f"wt:{w['branch']}", "title": f"Worktree {w['branch']} không theo feat/* (dọn bằng wt.sh drop)",
-                      "score": score, "parts": parts, "manual": "", "path": None, "line": None, "due": ""})
+        items.append(item("Máy", f"wt:{w['branch']}", f"Worktree {w['branch']} không theo feat/*", score, parts,
+                          f"Worktree ở {w['path'].split('/')[-1]} không thuộc quy ước feat/<feature>. Dọn bằng wt.sh drop nếu không dùng.",
+                          f"!branch:{w['branch']}"))
     # Máy: việc engine phát hiện (review kẹt, US thiếu AC, CR…)
     for a in actions:
         if "Stale" in a["title"]:
@@ -533,8 +704,18 @@ def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today):
         m = a["metric"]
         age = m.get("days_in_review") or m.get("days_since_update") or m.get("days_since_apply") or 0
         score, parts = priority_score(None, "", today, 1, age)
-        items.append({"kind": "Máy", "id": f"act:{a['target_path']}", "title": a["title"], "score": score,
-                      "parts": parts, "manual": "", "path": a["target_path"], "line": None, "due": ""})
+        st_ = re.search(r"^(Stuck review|US thiếu AC|Draft)", a["title"])
+        kind_ = st_.group(1) if st_ else ""
+        dw = (f"!grep:{a['target_path']}:^status: in-review" if kind_ == "Stuck review"
+              else f"grep:{a['target_path']}:AC-" if kind_ == "US thiếu AC" else "manual")
+        title = {"Stuck review": f"Review kẹt {age} ngày: {a['target_path'].split('/')[-1]}",
+                 "US thiếu AC": f"Story thiếu AC: {a['target_path'].split('/')[-1]}",
+                 "Draft": f"Draft {age} ngày chưa sửa: {a['target_path'].split('/')[-1]}"}.get(kind_, a["title"])
+        why = {"Stuck review": f"Doc ở in-review {age} ngày (quá 7). Duyệt (approved), trả về (revisions) hoặc về draft — kéo thẻ ở tab Kanban.",
+               "US thiếu AC": "Story chưa có tiêu chí chấp nhận. Chạy /ac.",
+               "Draft": "Draft lâu không sửa — còn cần không?"}.get(kind_, "Engine workspace-status phát hiện.")
+        items.append(item("Máy", f"act:{a['target_path']}", title, score, parts, why, dw,
+                          a["target_path"], line_of(a["target_path"], r"^status:"), "dòng status"))
 
     rank = lambda i: 0 if i["manual"].upper() == "P0" else 2 if i["manual"].lower() == "để sau" else 1
     items.sort(key=lambda i: (rank(i), -i["score"], i["kind"], i["id"]))
@@ -545,7 +726,7 @@ def light(n, ok, warn):
     return "green" if n <= ok else "amber" if n <= warn else "red"
 
 
-def build(feature_filter=None):
+def build(feature_filter=None, light_mode=False):
     today = date.today()
     ws = load_workspace_status()
     docs = ws.scan_docs(ROOT, feature_filter, today)
@@ -586,7 +767,16 @@ def build(feature_filter=None):
         s_["ratio"] = feed_ratio(s_["feed"])
         s_["ledger"] = ledgers.get(s_["id"], {}).get("path")
     work = build_queue(rows, backlog, stale_docs, actions, ledgers,
-                       [] if feature_filter else orphan_worktrees(), today)
+                       [] if feature_filter else orphan_worktrees(), today, stale_log)
+    history = {"points": [], "decks": []} if light_mode else oq_history(feature_filter, today=today)
+    fboard = figma_board(features)
+    spec_ = importlib.util.spec_from_file_location("st", ROOT / ".claude/skills/status/engine/status.py")
+    try:
+        st_mod = importlib.util.module_from_spec(spec_)
+        spec_.loader.exec_module(st_mod)
+        transitions = {k: sorted(v) for k, v in st_mod.TRANSITIONS.items()}
+    except Exception:
+        transitions = {}
 
     # Độ tươi chỉ theo tuổi (stale có đèn riêng) — workspace-status.compute_freshness đã tách.
     fresh = ws.compute_freshness(docs)
@@ -645,7 +835,8 @@ def build(feature_filter=None):
     return {
         "generated": today.isoformat(), "scope": feature_filter or "project", "root": str(ROOT),
         "verdict": verdict, "tiles": tiles, "lanes": lanes, "actions": actions, "work": work,
-        "sources": sources, "params": params,
+        "sources": sources, "params": params, "history": history, "figma_board": fboard,
+        "transitions": transitions, "state": dashboard_state(),
         "features": rows, "kanban": kanban, "stale_docs": stale_docs, "stale_log": stale_log,
         "freshness": fresh, "quality": quality, "coverage": coverage,
         "counts": {"docs_md": kanban["total"], "features": len(rows), "sources": len(sources),
@@ -663,9 +854,18 @@ def link(path, label, line=None, cls=""):
     if not path:
         return f'<span class="{cls}">{label}</span>'
     loc = f"vscode://file{ROOT}/{path}" + (f":{line}" if line else "")
-    gh = GITHUB + path + (f"#L{line}" if line else "")
+    # GitHub render .md bỏ qua #L → thêm ?plain=1 để mở mã nguồn, tô đúng dòng.
+    gh = GITHUB + path + (("?plain=1" if path.endswith(".md") else "") + f"#L{line}" if line else "")
     return (f'<a class="{cls}" href="{E(loc)}" data-local="{E(loc)}" data-gh="{E(gh)}" '
-            f'title="{E(path)}">{label}</a>')
+            f'title="{E(path + (f":{line}" if line else ""))}">{label}</a>')
+
+
+def where(path, line=None, hint=""):
+    """Nhãn nơi link tới: tên file · dòng N · gợi ý phần."""
+    if not path:
+        return ""
+    name = path.split("/")[-1]
+    return " · ".join(x for x in [name, f"dòng {line}" if line else "", hint] if x)
 
 
 CSS = """
@@ -725,14 +925,35 @@ footer{color:var(--muted);font-size:.78rem}
 .tag-m{background:var(--track);color:var(--warn)}
 .score{font-variant-numeric:tabular-nums;font-weight:700;min-width:2.2ch;text-align:right;color:var(--accent);cursor:help}
 ul.work li.more-row{display:none}ul.work.all li.more-row{display:flex}
+table.work tr.more-row{display:none}table.work.all tr.more-row{display:table-row}
+table.work{min-width:980px}table.work td{font-size:.82rem}table.work td.opens a{white-space:nowrap}
+table.work td.btns{white-space:nowrap}table.work td.btns .mini{display:block;margin:0 0 4px}
+tr.dismissed{display:none}body.show-dismissed tr.dismissed{display:table-row;opacity:.55}
 .seg-btn{margin-top:8px;font:inherit;font-size:.78rem;border:1px solid var(--line);background:var(--panel);color:var(--accent);padding:3px 10px;border-radius:6px;cursor:pointer}
 .pcell{display:flex;gap:8px;align-items:center;min-width:140px}
+.mini{font:inherit;font-size:.72rem;padding:1px 8px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--panel);cursor:pointer}
+.mini.ghost{background:none;color:var(--accent)}.mini:disabled{opacity:.6;cursor:default;border-style:dashed}
+.panel li .mini:first-of-type{margin-left:auto}
+li.dismissed{display:none!important}body.show-dismissed li.dismissed{display:flex!important;opacity:.55}
+.pendbar{font-size:.78rem;font-weight:600;color:var(--warn);border:1px dashed var(--warn);border-radius:6px;padding:2px 8px}
+.kb5{grid-template-columns:repeat(5,minmax(170px,1fr));min-width:900px}
+.kbody{display:flex;flex-direction:column;gap:6px;min-height:40px}
+.kcol.over{box-shadow:inset 0 0 0 2px var(--accent)}.kcol.bad{box-shadow:inset 0 0 0 2px var(--bad)}
+.kcard[draggable="true"]{cursor:grab}
+.kcard select{font:inherit;font-size:.7rem;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:4px;max-width:100%}
+.kcard .pend{color:var(--warn);font-weight:600;font-size:.7rem}
+.frow{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.reason{font-size:.72rem;display:flex;flex-direction:column;gap:2px}.reason input{font:inherit;font-size:.74rem;padding:2px 4px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--fg)}
+.hist{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;align-items:center;font-size:.78rem}
+.hb{display:flex;height:12px;background:var(--track);border-radius:3px;overflow:hidden}
+.hb .ho{background:var(--accent)}.hb .hc{background:color-mix(in srgb,var(--accent) 35%,var(--track))}
+.hl{color:var(--muted);white-space:nowrap}
 .pbar{flex:1;height:7px;background:var(--track);border-radius:4px;overflow:hidden;min-width:60px}.pbar i{display:block;height:100%;background:var(--accent)}
 """
 
 JS = """
 (function(){
-  var K='ba-dash-linkmode',mode='local';try{mode=localStorage.getItem(K)||'local'}catch(e){}
+  var K='ba-dash-linkmode',def=window.__DEFMODE||'local',mode=def;try{mode=localStorage.getItem(K)||def}catch(e){}
   function apply(){
     [].forEach.call(document.querySelectorAll('a[data-gh]'),function(a){
       if(mode==='gh'){a.href=a.getAttribute('data-gh');a.target='_blank';a.rel='noopener'}
@@ -743,7 +964,7 @@ JS = """
     var b=e.target.closest&&e.target.closest('[data-mode]');
     if(b){mode=b.getAttribute('data-mode');try{localStorage.setItem(K,mode)}catch(err){}apply();return}
     var mb=e.target.closest&&e.target.closest('#btn-more');
-    if(mb){var ul=document.querySelector('ul.work');var on=!ul.classList.contains('all');ul.classList.toggle('all',on);mb.setAttribute('aria-pressed',String(on));mb.textContent=on?'Thu gọn':mb.getAttribute('data-l')||mb.textContent;return}
+    if(mb){var ul=document.querySelector('.work');var on=!ul.classList.contains('all');ul.classList.toggle('all',on);mb.setAttribute('aria-pressed',String(on));mb.textContent=on?'Thu gọn':mb.getAttribute('data-l')||mb.textContent;return}
     var h=e.target.closest&&e.target.closest('#btn-hidden');
     if(h){var on=!document.body.classList.contains('show-hidden');document.body.classList.toggle('show-hidden',on);h.setAttribute('aria-pressed',String(on))}
   });
@@ -758,13 +979,109 @@ JS = """
 """
 
 
-def render(m):
+FIGMA_COLS = [("moi", "Mới"), ("dang-sua", "Đang sửa"), ("cho-do-lai", "Chờ đo lại"), ("xong", "Xong"), ("bo-qua", "Bỏ qua")]
+
+
+def act(label, key, req, A, cls="act"):
+    """Nút tạo yêu cầu (chỉ bản artifact). req lưu vào kho trang, /dashboard sync áp vào repo."""
+    if not A:
+        return ""
+    return (f'<button type="button" class="{cls}" data-key="{E(key)}" data-label="{E(label)}" '
+            f"data-req='{E(json.dumps(req, ensure_ascii=False))}'>{E(label)}</button>")
+
+
+AJS = r"""
+(function(){
+  var data=JSON.parse(document.getElementById('dash-data').textContent);
+  var db=null,pending={},dismissed={},fig={};
+  var COLS_DOC=['draft','in-review','revisions','approved','shipped','stale'];
+  var COLS_FIG=[['moi','Mới'],['dang-sua','Đang sửa'],['cho-do-lai','Chờ đo lại'],['xong','Xong'],['bo-qua','Bỏ qua']];
+  var NAME={'draft':'Draft','in-review':'In Review','revisions':'Revisions','approved':'Approved','shipped':'Shipped','stale':'Stale'};
+  function hid(s){var x=5381;for(var i=0;i<s.length;i++){x=((x*33)^s.charCodeAt(i))>>>0}return 'k'+x.toString(36)+s.length.toString(36)}
+  function say(t){var n=document.getElementById('sync-note');if(n)n.textContent=t}
+  function fail(e){say(e&&e.code==='invalid_argument'?'Không có quyền ghi vào trang này.':'Chưa lưu được, thử lại sau.')}
+  function need(){if(!db){say('Chưa kết nối kho dữ liệu của trang — thao tác tạm tắt.');return false}return true}
+  function addReq(key,req){if(!need())return;var body=Object.assign({},req,{key:key,state:'pending',createdAt:new Date().toISOString()});
+    pending[key]=body;paint();db.collection('requests').doc(hid(key)).set(body).catch(fail)}
+  function dropReq(key){if(!need())return;delete pending[key];paint();db.collection('requests').doc(hid(key)).delete().catch(fail)}
+  function allowed(c){var st=c.dataset.status,a=(data.transitions[st]||[]).slice();if(st==='stale'&&c.dataset.prev&&a.indexOf(c.dataset.prev)<0)a.unshift(c.dataset.prev);return a}
+  function colOf(st){return COLS_DOC.indexOf(st)>=0?st:'draft'}
+  function moveDoc(c,to){var key='status:'+c.dataset.path,from=c.dataset.status;
+    if(to===from){if(pending[key])dropReq(key);return}
+    if(allowed(c).indexOf(to)<0){say('Không chuyển được "'+c.dataset.title+'" sang '+(NAME[to]||to)+'. '+(to==='stale'?'Cột Stale do hook tự đặt.':'Luồng hợp lệ: '+(allowed(c).map(function(x){return NAME[x]||x}).join(', ')||'không có')+'.'));
+      var el=document.querySelector('.kcol[data-col="'+to+'"]:not(.fcol)');if(el){el.classList.add('bad');setTimeout(function(){el.classList.remove('bad')},700)}return}
+    addReq(key,{type:'status',path:c.dataset.path,from:from,to:to,title:c.dataset.title});
+    say('"'+c.dataset.title+'": '+(NAME[from]||from)+' → '+(NAME[to]||to)+'. Chờ /dashboard sync.')}
+  function moveFig(c,to){if(!need())return;var id=c.dataset.fid;
+    if(to===c.dataset.col){delete fig[id];paint();db.collection('figma').doc(id).delete().catch(fail);return}
+    var o={col:to,reason:(fig[id]&&fig[id].reason)||'',at:new Date().toISOString()};fig[id]=o;paint();
+    db.collection('figma').doc(id).set(o).catch(fail);
+    if(to==='bo-qua'){var inp=c.querySelector('.reason input');if(inp)setTimeout(function(){inp.focus()},0)}}
+  function counts(){[].forEach.call(document.querySelectorAll('.kcol'),function(k){var n=k.querySelector('h3 .n'),b=k.querySelector('.kbody');if(n&&b)n.textContent=b.children.length})}
+  function paint(){
+    var n=Object.keys(pending).length,pe=document.getElementById('pending');
+    if(pe){pe.hidden=!n;pe.textContent=n+' yêu cầu chờ /dashboard sync'}
+    [].forEach.call(document.querySelectorAll('.act'),function(b){var p=pending[b.dataset.key];b.disabled=!!p;b.textContent=p?'Chờ sync':b.dataset.label});
+    [].forEach.call(document.querySelectorAll('.kcard[data-path]'),function(c){
+      var p=pending['status:'+c.dataset.path],to=p?p.to:c.dataset.status;
+      var body=document.querySelector('.kcol[data-col="'+colOf(to)+'"]:not(.fcol) .kbody');
+      if(body&&c.parentNode!==body)body.appendChild(c);
+      var b=c.querySelector('.pend');if(b){b.hidden=!p;b.textContent=p?('→ '+(NAME[p.to]||p.to)+' · chờ sync'):''}
+      var sel=c.querySelector('.kmove');if(sel){var cur=p?p.to:'';sel.innerHTML='';var o=document.createElement('option');o.value='';o.textContent=p?'Huỷ chuyển':'Chuyển sang…';sel.appendChild(o);
+        allowed(c).forEach(function(v){var x=document.createElement('option');x.value=v;x.textContent=(c.dataset.status==='stale'&&v===c.dataset.prev?'Đã biết, reset → ':'')+(NAME[v]||v);if(v===cur)x.selected=true;sel.appendChild(x)});
+        sel.hidden=!allowed(c).length}});
+    [].forEach.call(document.querySelectorAll('[data-wid]'),function(li){var d=dismissed[hid(li.dataset.wid)];li.classList.toggle('dismissed',!!(d&&d.sig===li.dataset.sig))});
+    var nd=document.querySelectorAll('.dismissed').length,t=document.getElementById('btn-dismissed');
+    if(t){t.hidden=!nd;t.textContent=(document.body.classList.contains('show-dismissed')?'Ẩn ':'Hiện ')+nd+' việc đã ẩn'}
+    [].forEach.call(document.querySelectorAll('.fcard'),function(c){var o=fig[c.dataset.fid],col=o?o.col:c.dataset.col;
+      var body=document.querySelector('.fcol[data-col="'+col+'"] .kbody');if(body&&c.parentNode!==body)body.appendChild(c);
+      var r=c.querySelector('.reason');if(r){r.hidden=col!=='bo-qua';var inp=r.querySelector('input');if(inp&&document.activeElement!==inp)inp.value=(o&&o.reason)||''}
+      var bk=c.querySelector('.fback');if(bk)bk.hidden=!o;
+      var sel=c.querySelector('.fmove');if(sel){sel.innerHTML='';var o0=document.createElement('option');o0.value='';o0.textContent='Chuyển sang…';sel.appendChild(o0);
+        COLS_FIG.forEach(function(k){if(k[0]===col)return;var x=document.createElement('option');x.value=k[0];x.textContent=k[1];sel.appendChild(x)})}});
+    counts()}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.act');if(b&&!b.disabled){addReq(b.dataset.key,JSON.parse(b.dataset.req));return}
+    var d=e.target.closest&&e.target.closest('.dismiss');if(d){if(!need())return;var id=hid(d.dataset.id);dismissed[id]={sig:d.dataset.sig};paint();db.collection('dismissed').doc(id).set({id:d.dataset.id,sig:d.dataset.sig,at:new Date().toISOString()}).catch(fail);return}
+    var sd=e.target.closest&&e.target.closest('#btn-dismissed');if(sd){document.body.classList.toggle('show-dismissed');paint();return}
+    var fbk=e.target.closest&&e.target.closest('.fback');if(fbk){var c=fbk.closest('.fcard');moveFig(c,c.dataset.col)}});
+  document.addEventListener('change',function(e){
+    var s=e.target;if(s.classList.contains('kmove')){var c=s.closest('.kcard');moveDoc(c,s.value||c.dataset.status)}
+    else if(s.classList.contains('fmove')&&s.value){moveFig(s.closest('.fcard'),s.value)}
+    else if(s.closest&&s.closest('.reason')){if(!need())return;var fc=s.closest('.fcard'),id=fc.dataset.fid,o=Object.assign({},fig[id]||{col:'bo-qua'},{reason:s.value,at:new Date().toISOString()});fig[id]=o;db.collection('figma').doc(id).set(o).catch(fail);say('Đã lưu lý do bỏ qua.')}});
+  document.addEventListener('dragstart',function(e){var c=e.target.closest&&e.target.closest('.kcard[draggable="true"]');if(!c)return;
+    e.dataTransfer.setData('text/plain',c.dataset.fid?('fig:'+c.dataset.fid):('doc:'+c.dataset.path));e.dataTransfer.effectAllowed='move'});
+  [].forEach.call(document.querySelectorAll('.kcol'),function(k){
+    k.addEventListener('dragover',function(e){e.preventDefault();k.classList.add('over')});
+    k.addEventListener('dragleave',function(){k.classList.remove('over')});
+    k.addEventListener('drop',function(e){e.preventDefault();k.classList.remove('over');var v=e.dataTransfer.getData('text/plain')||'';
+      if(v.indexOf('fig:')===0&&k.classList.contains('fcol')){var fc=document.querySelector('.fcard[data-fid="'+v.slice(4)+'"]');if(fc)moveFig(fc,k.dataset.col)}
+      else if(v.indexOf('doc:')===0&&!k.classList.contains('fcol')){var p=v.slice(4),c=[].filter.call(document.querySelectorAll('.kcard[data-path]'),function(x){return x.dataset.path===p})[0];if(c)moveDoc(c,k.dataset.col)}})});
+  paint();
+  if(window.claude&&window.claude.use){window.claude.use('db').then(function(d){
+    if(!d){say('Chỉ xem: không kết nối được kho dữ liệu của trang.');return}
+    db=d;
+    db.collection('requests').where('state','==','pending').onSnapshot(function(sn){pending={};sn.docs.forEach(function(x){if(x.exists){var v=x.data();pending[v.key]=v}});paint()},function(){say('Mất kết nối kho dữ liệu.')});
+    db.collection('dismissed').onSnapshot(function(sn){dismissed={};sn.docs.forEach(function(x){if(x.exists)dismissed[x.id]=x.data()});paint()},function(){});
+    db.collection('figma').onSnapshot(function(sn){fig={};sn.docs.forEach(function(x){if(x.exists)fig[x.id]=x.data()});paint()},function(){});
+  },function(){say('Chỉ xem: không kết nối được kho dữ liệu của trang.')})}else{say('Chỉ xem: mở trên claude.ai để thao tác.')}
+})();
+"""
+
+
+def render(m, artifact=False):
+    A = artifact
     v = m["verdict"]
     out = []
     w = out.append
-    title = f"BA Dashboard — invlogis" + (f" · {m['scope']}" if m["scope"] != "project" else "")
-    w(f'<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">')
-    w(f"<title>{E(title)}</title><style>{CSS}</style></head><body><main class=\"page\">")
+    title = "Invlogis BA Dashboard" + (f" · {m['scope']}" if m["scope"] != "project" else "")
+    url = m.get("state", {}).get("artifact_url", "")
+    if A:
+        # Artifact: nội dung trang, không doctype/html/head/body (nền tảng tự bọc).
+        w(f'<title>{E(title)}</title><style>{CSS}</style><main class="page">')
+    else:
+        w(f'<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">')
+        w(f"<title>{E(title)}</title><style>{CSS}</style></head><body><main class=\"page\">")
     c = m["counts"]
     w('<div class="bar"><b>invlogis</b>'
       f'<span class="muted">{c["features"]} feature · {c["docs_md"]} doc · {c["sources"]} nguồn · {c["backlog_open"]} task · {m["generated"]}</span>'
@@ -777,7 +1094,10 @@ def render(m):
       '<button role="tab" id="t-kb" aria-selected="false" aria-controls="p-kb">Kanban</button>'
       '<button role="tab" id="t-src" aria-selected="false" aria-controls="p-src">Nguồn khách</button>'
       '<button role="tab" id="t-health" aria-selected="false" aria-controls="p-health">Sức khỏe vault</button>'
-      '</div></div>')
+      '</div>'
+      + ('<span class="pendbar" id="pending" hidden></span><span class="muted" id="sync-note" role="status" aria-live="polite"></span>' if A else
+         (f'<span class="muted">Thao tác (kéo thẻ, reset stale…): <a href="{E(url)}" target="_blank" rel="noopener">bản artifact</a></span>' if url else ""))
+      + '</div>')
 
     # Hôm nay
     w('<div role="tabpanel" id="p-today" aria-labelledby="t-today">')
@@ -800,22 +1120,42 @@ def render(m):
     w("</ul></div>")
     work = m["work"]
     w(f'<div class="panel"><h2>Hàng việc ({len(work)}) · xếp theo điểm ưu tiên</h2>'
-      '<p class="muted" style="margin:2px 0 0;font-size:.78rem">Điểm = Chặn 40/25 + Hạn 25/15 + Lan 4đ mỗi doc/feature (trần 20) + Tuổi 1đ/2 ngày (trần 15). '
-      'Cột <i>Ưu tiên</i> trong backlog: <code>P0</code> luôn lên đầu, <code>để sau</code> luôn xuống cuối.</p><ul class="work">')
+      '<p class="muted" style="margin:2px 0 6px;font-size:.78rem">Điểm = Chặn 40/25 + Hạn 25/15 + Lan 4đ mỗi doc/feature (trần 20) + Tuổi 1đ/2 ngày (trần 15). '
+      'Cột <i>Ưu tiên</i> trong backlog: <code>P0</code> luôn lên đầu, <code>để sau</code> luôn xuống cuối. '
+      '<b>BL</b> = task trong backlog (tự đóng khi điều kiện Xong khi đúng) · <b>Máy</b> = việc dashboard tự phát hiện (tự hết khi tín hiệu hết).</p>')
     if not work:
-        w('<li class="muted">Không có việc nào.</li>')
-    for i, x in enumerate(work):
-        tip = " + ".join(f"{k} {v}" for k, v in x["parts"].items()) + f" = {x['score']}"
-        extra = ' class="more-row"' if i >= 10 else ""
-        man = f'<span class="chip">{E(x["manual"])}</span>' if x["manual"] else ""
-        due = f'<span class="muted">hạn {E(x["due"])}</span>' if x["due"] else ""
-        label = f'{E(x["id"])} · {E(x["title"])}' if x["kind"] == "BL" else E(x["title"])
-        w(f'<li{extra}><span class="score" title="{E(tip)}">{x["score"]}</span>'
-          f'<span class="tag{" tag-m" if x["kind"] == "Máy" else ""}">{x["kind"]}</span>{man}'
-          f'{link(x["path"], label, x.get("line"))}{due}</li>')
-    w("</ul>")
+        w('<p class="muted">Không có việc nào.</p>')
+    else:
+        w('<div class="scroll"><table class="work"><thead><tr><th class="num">Điểm</th><th>Việc</th><th>Vì sao</th>'
+          '<th>Xong khi</th><th>Hạn · Ưu tiên</th><th>Mở ở đâu</th>' + ("<th></th>" if A else "") + '</tr></thead><tbody>')
+        for i, x in enumerate(work):
+            parts = " · ".join(f"{k} {v}" for k, v in x["parts"].items() if v) or "0"
+            cls = ["more-row"] if i >= 10 else []
+            attrs = ""
+            if x["kind"] == "Máy":
+                attrs = f' data-wid="{E(x["id"])}" data-sig="{E(x["title"])}"'
+            tag = f'<span class="tag{" tag-m" if x["kind"] == "Máy" else ""}">{E(x["id"] if x["kind"] == "BL" else "Máy")}</span>'
+            dm = " · ".join(v for v in [E(x["due"]) if x["due"] else "", f'<span class="chip">{E(x["manual"])}</span>' if x["manual"] else ""] if v) or '<span class="muted">—</span>'
+            opens = []
+            if x["path"]:
+                opens.append(link(x["path"], E(where(x["path"], x["line"], x["hint"])), x["line"]))
+            if x.get("doc"):
+                opens.append(link(x["doc"], E(where(x["doc"], x.get("doc_line"), x.get("doc_hint", ""))), x.get("doc_line")))
+            btns = ""
+            if A and x["kind"] == "Máy":
+                btns = (act("Đưa vào backlog", f"bl:{x['id']}", {"type": "to-backlog", "title": x["title"],
+                                                                 "done_when": x.get("done_when") or "manual", "source": "dashboard"}, A, "act mini")
+                        + f'<button type="button" class="dismiss mini ghost" data-id="{E(x["id"])}" data-sig="{E(x["title"])}">Đã biết</button>')
+            w(f'<tr class="{" ".join(cls)}"{attrs}><td class="num"><span class="score">{x["score"]}</span><br><small class="muted">{E(parts)}</small></td>'
+              f'<td>{tag} {E(x["title"])}</td><td class="muted">{E(x["why"])}</td>'
+              f'<td title="{E(x["done_when"])}">{E(x["done_text"]) or "<span class=muted>—</span>"}</td>'
+              f'<td>{dm}</td><td class="opens">{"<br>".join(opens) or "<span class=muted>—</span>"}</td>'
+              + (f'<td class="btns">{btns}</td>' if A else "") + "</tr>")
+        w("</tbody></table></div>")
     if len(work) > 10:
         w(f'<button type="button" class="seg-btn" id="btn-more" aria-pressed="false" data-l="Xem hết {len(work)} việc">Xem hết {len(work)} việc</button>')
+    if A:
+        w('<button type="button" class="seg-btn" id="btn-dismissed" hidden></button>')
     w("</div></div>")
 
     # Feature
@@ -866,6 +1206,25 @@ def render(m):
     else:
         w(f'<div class="tile"><span class="lab">Figma</span><span class="big">{n_screens} màn</span><span class="sub">chưa có audit</span></div>')
     w("</div>")
+    hist = m.get("history", {})
+    pts = hist.get("points", [])
+    if pts:
+        mx = max([p_["open"] + p_["closed"] for p_ in pts] + [1])
+        decks = hist.get("decks", [])
+        w('<div class="panel"><h2>Câu hỏi mở theo tuần</h2><p class="muted" style="margin:2px 0 6px;font-size:.78rem">'
+          'Cuối mỗi tuần (Chủ nhật) theo lịch sử git, dòng cuối là hôm nay. Thanh đậm = còn mở, nhạt = đã đóng. ◆ = tuần có buổi họp deck.</p>'
+          '<div class="hist">')
+        prev_d = None
+        for p_ in pts:
+            meet = [d for d in decks if (prev_d is None or d > prev_d) and d <= p_["date"]]
+            lab = ("hôm nay" if p_.get("now") else p_["date"][5:].replace("-", "/"))
+            w(f'<span class="hl">{E(lab)}{" ◆" if meet else ""}</span>'
+              f'<span class="hb" title="{p_["open"]} mở · {p_["closed"]} đã đóng'
+              + (f' · họp {", ".join(meet)}' if meet else "") + '">'
+              f'<i class="ho" style="width:{100 * p_["open"] / mx:.1f}%"></i><i class="hc" style="width:{100 * p_["closed"] / mx:.1f}%"></i></span>'
+              f'<span class="hn num">{p_["open"]} · {p_["closed"]}</span>')
+            prev_d = p_["date"]
+        w("</div></div>")
     oq_rows = [o for r in m["features"] for o in r["oq_rows"] if o["open"]]
     w(f'<div class="panel"><h2>Câu hỏi mở ({len(oq_rows)})</h2><div class="scroll"><table><thead><tr><th>Feature</th><th>Mã</th><th>Câu hỏi</th></tr></thead><tbody>')
     for o in oq_rows:
@@ -877,22 +1236,48 @@ def render(m):
     kb = m["kanban"]
     w('<div role="tabpanel" id="p-kb" aria-labelledby="t-kb" hidden>')
     n_child = sum(len(x["children"]) for x in kb["cards"])
-    w(f'<p class="muted" style="margin:0">{len(kb["cards"])} doc có status · {n_child} doc đi theo doc chỉ mục · {len(kb["loose"])} doc không thuộc nhóm nào. '
-      'Kéo thả để đổi status: đợt P2 (<code>/dashboard sync</code>).</p>')
+    how = ("Kéo thẻ hoặc chọn <i>Chuyển sang</i> → thành yêu cầu, áp vào repo khi chạy <code>/dashboard sync</code>."
+           if A else (f'Kéo thả đổi status trên <a href="{E(url)}" target="_blank" rel="noopener">bản artifact</a>.' if url
+                      else "Kéo thả đổi status trên bản artifact (publish bằng <code>/dashboard</code>)."))
+    w(f'<p class="muted" style="margin:0">{len(kb["cards"])} doc có status · {n_child} doc đi theo doc chỉ mục · {len(kb["loose"])} doc không thuộc nhóm nào. {how}</p>')
     w('<div class="scroll"><div class="kb">')
     for key, label in KANBAN:
         cs = [x for x in kb["cards"] if x["col"] == key]
-        w(f'<div class="kcol {key}"><h3>{E(label)} <span>{len(cs)}</span></h3>')
+        w(f'<div class="kcol {key}" data-col="{key}"><h3>{E(label)} <span class="n">{len(cs)}</span></h3><div class="kbody">')
         for x in cs:
             meta = " · ".join(s for s in [x["type"], x["feature"], x["updated"],
                                           f"trước: {x['prev']}" if key == "stale" and x["prev"] else ""] if s)
-            w(f'<div class="kcard">{link(x["path"], E(x["title"]))}<span class="km">{E(meta)}</span>')
+            dattr = (f' data-path="{E(x["path"])}" data-status="{E(x["status"])}" data-prev="{E(x["prev"])}" '
+                     f'data-title="{E(x["title"])}"' + (' draggable="true"' if A else ""))
+            w(f'<div class="kcard"{dattr}>{link(x["path"], E(x["title"]))}<span class="km">{E(meta)}</span>'
+              + ('<span class="pend" hidden></span><select class="kmove" aria-label="Chuyển sang cột"></select>' if A else ""))
             if x["children"]:
                 w(f'<details><summary>+{len(x["children"])} file đi kèm</summary>'
                   + "<br>".join(link(ch, E(ch.split("/")[-1])) for ch in x["children"]) + "</details>")
             w("</div>")
-        w("</div>")
+        w("</div></div>")
     w("</div></div>")
+    # Review Figma
+    fb = m.get("figma_board", [])
+    if fb:
+        w('<h2>Review Figma</h2><p class="muted" style="margin:0">Mục từ báo cáo audit mới nhất. Máy đặt cột: <code>/figma-screen</code> đang chạy → Đang sửa · chạy xong sau ngày audit → Chờ đo lại · '
+          'audit sau không còn → Xong. ' + ("Kéo tay để chỉnh; <i>Bỏ qua</i> cần ghi lý do. Lưu ngay trên trang, không cần sync." if A else "Chỉnh tay trên bản artifact.") + '</p>')
+        w('<div class="scroll"><div class="kb kb5">')
+        for key, label in FIGMA_COLS:
+            cs = [x for x in fb if x["col"] == key]
+            w(f'<div class="kcol fcol" data-col="{key}"><h3>{E(label)} <span class="n">{len(cs)}</span></h3><div class="kbody">')
+            for x in cs:
+                lv = {"Cao": "l-red", "Trung": "l-amber", "Thấp": "muted"}.get(x["level"], "")
+                w(f'<div class="kcard fcard" data-fid="{E(x["id"])}" data-col="{E(x["col"])}"' + (' draggable="true"' if A else "") + '>'
+                  f'<span class="km"><b class="{lv}">{E(x["level"])}</b> · {E(x["feature"])} · {E(x["code"])}</span>'
+                  f'<span>{E(re.sub(r"`", "", x["what"])[:160])}</span>'
+                  f'<span class="km">{link(x["report"], E(re.sub(r"`", "", x["where"])[:90]))}</span>'
+                  + ('<label class="reason" hidden>Lý do bỏ qua <input type="text" maxlength="200"></label>'
+                     '<span class="frow"><select class="fmove" aria-label="Chuyển sang cột"></select>'
+                     '<button type="button" class="fback mini ghost" hidden>Về cột máy</button></span>' if A else "")
+                  + "</div>")
+            w("</div></div>")
+        w("</div></div>")
     if kb["loose"]:
         w('<div class="panel"><h2>Doc không có status</h2><ul>' + "".join(f"<li>{link(p, E(p))}</li>" for p in kb["loose"]) + "</ul></div>")
     w("</div>")
@@ -926,16 +1311,27 @@ def render(m):
     w(f'<div class="panel"><h2>Doc stale ({len(sd)})</h2><ul>')
     for d in sd:
         s = last_up.get(d["path"])
-        why = f"← {s['upstream']} đổi {s['date']}" if s else ""
-        w(f'<li>{link(d["path"], E(d["path"]))}<span class="muted">{E(why)}</span></li>')
+        ln = line_of(d["path"], r"^status:")
+        up = (f'<span class="muted">← upstream </span>{link(s["upstream"], E(where(s["upstream"])))}<span class="muted"> đổi {E(s["date"])}</span>'
+              if s and (ROOT / s["upstream"]).exists() else (f'<span class="muted">← {E(s["upstream"])} đổi {E(s["date"])}</span>' if s else ""))
+        w(f'<li>{link(d["path"], E(d["path"]) + f" <span class=muted>· dòng {ln}</span>", ln)}{up}'
+          + act("Đã biết, reset", f"reset:{d['path']}", {"type": "stale-reset", "path": d["path"]}, A, "act mini")
+          + act("Cần rà", f"review:{d['path']}", {"type": "stale-review", "path": d["path"]}, A, "act mini ghost") + "</li>")
     if not sd:
         w('<li class="muted">Không có doc stale.</li>')
     w("</ul></div>")
     dead = [s for s in sl if s["dead"]]
     w(f'<div class="panel"><h2>Dòng log stale trỏ file đã xoá ({len(dead)}/{len(sl)})</h2>'
-      '<p class="muted" style="margin:4px 0 0">Nút "Đã biết, reset" sẽ có ở đợt P2 (<code>/dashboard sync</code>).</p><ul>')
+      + ('<p class="muted" style="margin:4px 0 0">File đích không còn nên không sửa được. Bấm "Đã biết, reset" để ghi vào <code>_workspace/stale-ack.md</code> khi chạy <code>/dashboard sync</code>.</p><ul>'
+         if A else '<p class="muted" style="margin:4px 0 0">Xác nhận reset trên bản artifact.</p><ul>'))
+    seen_dead = set()
     for s in dead:
-        w(f'<li><span class="mono">{E(s["downstream"])}</span><span class="muted">← {E(s["upstream"])} · {E(s["date"])}</span></li>')
+        if s["downstream"] in seen_dead:
+            continue
+        seen_dead.add(s["downstream"])
+        w(f'<li><span class="mono">{E(s["downstream"])}</span><span class="muted">← {E(s["upstream"])} · {E(s["date"])}</span>'
+          + act("Đã biết, reset", f"ack:{s['downstream']}", {"type": "log-ack", "path": s["downstream"], "upstream": s["upstream"]}, A, "act mini")
+          + "</li>")
     w("</ul></div>")
     q = m["quality"]
     crit = m["freshness"].get("critical", [])
@@ -954,7 +1350,13 @@ def render(m):
 
     scope_arg = "" if m["scope"] == "project" else f" {m['scope']}"
     w(f'<footer>Dựng lại: <code>/dashboard{E(scope_arg)}</code> hoặc <code>python3 _scripts/dashboard-build.py{E(" --feature " + m["scope"] if scope_arg else "")}</code> · {m["generated"]}</footer>')
-    w(f"</main><script>{JS}</script></body></html>")
+    if A:
+        data = {"transitions": m.get("transitions", {}), "generated": m["generated"]}
+        # Trong claude.ai link vscode:// thường bị chặn → bản artifact mặc định mở GitHub (đổi được bằng nút).
+        w(f'</main><script type="application/json" id="dash-data">{json.dumps(data, ensure_ascii=False)}</script>'
+          f"<script>window.__DEFMODE='gh'</script><script>{JS}</script><script>{AJS}</script>")
+    else:
+        w(f"</main><script>{JS}</script></body></html>")
     return "\n".join(out) + "\n"
 
 
@@ -964,9 +1366,29 @@ def main():
     ap.add_argument("--out", default=None)
     ap.add_argument("--json", action="store_true", help="in data model, không ghi file")
     ap.add_argument("--summary", action="store_true", help="in số liệu cho bảng L1, không ghi file")
+    ap.add_argument("--artifact", action="store_true",
+                    help="ghi bản artifact (có thao tác, không doctype) — mặc định .claude/state/dashboard-artifact.html")
+    ap.add_argument("--line", action="store_true", help="in 1 dòng cho session-init (nhanh, không đọc lịch sử git)")
     a = ap.parse_args()
 
+    if a.line:
+        m = build(a.feature, light_mode=True)
+        url = m.get("state", {}).get("artifact_url", "")
+        n = len(m["work"])
+        print(f"  📊 {m['verdict']['title']} · {n} việc — "
+              + (f"dashboard: {url} (có thao tác trên trang → /dashboard sync)" if url else "xem: /dashboard"))
+        return
     m = build(a.feature)
+    if a.artifact:
+        out = Path(a.out) if a.out else ROOT / ".claude/state" / (f"dashboard-artifact-{a.feature}.html" if a.feature else "dashboard-artifact.html")
+        page = render(m, artifact=True)
+        if a.summary:
+            print(f"Artifact: {out.relative_to(ROOT)} (~{len(page.encode()) // 1024} KB)")
+            return
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(page, encoding="utf-8")
+        print(f"Đã ghi {out} ({len(page.encode()) // 1024} KB)")
+        return
     out = Path(a.out) if a.out else ROOT / "docs/_shared" / (f"dashboard-{a.feature}.html" if a.feature else "dashboard.html")
     if a.json:
         print(json.dumps(m, ensure_ascii=False, indent=2, default=str))

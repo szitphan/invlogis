@@ -53,28 +53,9 @@ fi
 # trước khi đọc, để worktree mới / sau merge luôn có bản đầy đủ.
 python3 "$PROJECT_PATH/_scripts/logbook.py" build 2>/dev/null || true
 
-# Stale propagations (v2.0 Phase 6)
-STALE_LOG="$PROJECT_PATH/_workspace/staleness.md"
-if [ -f "$STALE_LOG" ]; then
-    CUTOFF=$(date -v-7d +%Y-%m-%d 2>/dev/null || date -d "7 days ago" +%Y-%m-%d 2>/dev/null || echo "1970-01-01")
-    # Bảng Markdown: | ngày | upstream | downstream | lý do | → ngày là field 2
-    # (field 1 rỗng do pipe biên). Chỉ đếm dòng có ngày ISO thật, bỏ header.
-    RECENT_STALE=$(awk -F'|' -v cutoff="$CUTOFF" '
-        { gsub(/^[[:space:]]+|[[:space:]]+$/, "", $2) }
-        $2 ~ /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/ && $2 >= cutoff
-    ' "$STALE_LOG" 2>/dev/null | wc -l | tr -d ' ')
-    if [ "$RECENT_STALE" -gt 0 ]; then
-        echo "  ⏰ Stale propagations (7d): $RECENT_STALE (run /dashboard để xem stale chain)"
-    fi
-fi
-
-# Current stale doc count (any path under docs/)
-STALE_DOCS=$(find "$PROJECT_PATH/docs" -name "*.md" -type f 2>/dev/null \
-    | grep -v "/exports/" | grep -v "/inbox/" \
-    | xargs grep -l "^status: stale" 2>/dev/null | wc -l | tr -d ' ')
-if [ "$STALE_DOCS" -gt 0 ]; then
-    echo "  ⏰ Stale docs: $STALE_DOCS (run /dashboard để xem detail)"
-fi
+# Dashboard: 1 dòng verdict theo giai đoạn + link bản artifact (thay 2 dòng đếm stale cũ — số stale
+# đếm cả dòng log trỏ file đã xoá nên nhiễu; dashboard tách doc stale / log đã xác nhận). Chậm/lỗi → bỏ qua.
+python3 "$PROJECT_PATH/_scripts/dashboard-build.py" --line 2>/dev/null || true
 
 # Open questions count (any unchecked TODO with "open question" or "OQ:" mark)
 if [ -d "$PROJECT_PATH/docs" ]; then

@@ -197,6 +197,10 @@ Apply? (Y / sửa / chọn luồng cụ thể)
 User nói "vẽ luôn đi" → dùng đề xuất mặc định, **trừ thiết bị** (vẫn phải chốt), và nói rõ các
 giả định trong một đoạn để user sửa một lần.
 
+User `Y` → ghi sổ lần chạy cho từng flow sẽ vẽ, để bảng Review Figma của `/dashboard` chuyển mục audit
+của feature sang **Đang sửa**: `python3 _scripts/figma-runs.py start <feature> <flow-slug>`
+(ghi `_workspace/figma-runs.md`; kết thúc ở Bước 7).
+
 ## Bước 3 — chốt nơi vẽ
 
 Component phải là **instance thật**. File dự án được setup theo `design/setup-figma.md`, theo một
@@ -407,6 +411,9 @@ Cần đổi nghiệp vụ → ghi "cần `/cr`", không tự sửa.
    nút; quyết giữ/chấp nhận từng WARN A5. Luôn gọi khi lớp 1 không còn FAIL.
 
 ## Bước 7 — báo đã vẽ gì
+
+Trước khi báo, đóng sổ lần chạy cho từng flow đã mở ở Bước 2.5 (kể cả khi dừng giữa chừng):
+`python3 _scripts/figma-runs.py done <feature> <flow-slug>` → mục audit sang **Chờ đo lại** trên `/dashboard`.
 
 Ngắn, theo mẫu:
 

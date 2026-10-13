@@ -16,6 +16,11 @@ Sinh 1 file HTML self-contained **đọc là hiểu liền**: mở lên biết n
 
 Toàn bộ số liệu VÀ HTML do **`_scripts/dashboard-build.py`** sinh tất định (cùng đầu vào → cùng file, chỉ ghi ngày). Claude không tự đếm, không tự ghép HTML: chạy script, duyệt L1, báo cáo. Thiết kế chốt ở đề xuất *Dashboard BA v2* (artifact https://claude.ai/artifact/631W9qLYmsCQ9z8Zyb7Cp7, 3 vòng phản hồi 2026-10-13); việc còn lại theo đợt ở backlog BL-097 (P0) · BL-098 (P1) · BL-099 (P2).
 
+Có **2 bản** cùng dữ liệu: bản local `docs/_shared/dashboard.html` (chỉ xem, link mở VS Code) và **bản artifact**
+trên claude.ai (link cố định ở `.claude/state/dashboard.json`) — có thao tác: kéo thẻ kanban, "Đã biết, reset" /
+"Cần rà" cho stale, "Đưa vào backlog" / "Đã biết" cho việc máy, kéo thẻ Review Figma. Thao tác thành **yêu cầu**
+trong kho của trang; `/dashboard sync` áp vào repo.
+
 Trang có 5 tab (thứ tự = thứ tự quan trọng):
 1) **Hôm nay** — verdict theo giai đoạn + 5 ô (Chờ bạn · Câu hỏi mở · Stale chờ xác nhận · Nguồn chưa feed · Hàng việc) + làn Chờ bạn + **hàng việc chung** (task backlog + việc máy phát hiện, xếp theo `priority_score`).
 2) **Feature** — trục tiến độ 8 cột Nguồn → Brainstorm → Chốt OQ → SRS → Userflow → Figma → US/AC → Test (+3 cột ẩn URD/BRD/PRD), ô Tầng SaaS · Tham số P chưa chốt · Figma, bảng OQ còn mở có link tới đúng dòng.
@@ -37,7 +42,8 @@ Trang có 5 tab (thứ tự = thứ tự quan trọng):
 * **Self-contained, không CDN** — CSS/JS inline, chạy offline.
 * **Read-only data scan** — KHÔNG edit doc nào.
 * **Làn "Chờ bạn"** — nguồn duy nhất là `_scripts/queue.py --json`; scope feature thì lọc theo `feature`.
-* **Kéo thả** — dashboard HTML tĩnh chỉ để xem. Đổi trạng thái bằng kéo thả (đóng task, duyệt card + chạy, duyệt land) nằm ở board artifact `/board` (cùng nguồn `queue.py`, qua `_scripts/board-snapshot.py`); dashboard ghi link board ở header nếu có `.claude/state/board.json`.
+* **Kéo thả chỉ ở bản artifact, và chỉ tạo yêu cầu** — không gì ghi vào repo khi chưa qua `/dashboard sync` + L1 (duyệt 1 lần cả lô). Đổi status luôn qua engine `/status` (`dashboard-apply.py` gọi `status.py`): luồng hợp lệ, `restore` khi rời stale, upstream chưa duyệt → giữ `pending` chờ anh xác nhận. "Đã biết" (ẩn việc máy) và thẻ Review Figma chỉ lưu trong kho trang, không cần sync.
+* **`staleness.md` là file sinh** — xác nhận dòng log trỏ file đã xoá ghi vào `_workspace/stale-ack.md`, không sửa log.
 * **Link 2 chế độ** — mặc định `vscode://file/<path>:<dòng>` (file local, luôn mới nhất); nút "Mở bằng: GitHub" làm dự phòng (bản đã push). Nhớ lựa chọn trong localStorage.
 * **Vietnamese-first UI** — labels/headers tiếng Việt; doc titles giữ ngôn ngữ gốc.
 * **Theme-aware** — token màu 2 tầng + `prefers-color-scheme` + `data-theme`.
@@ -63,6 +69,8 @@ Feature không tồn tại / vault rỗng → theo `feature-bootstrap.md` Nhóm 
 
 ## Approach
 
+> `/dashboard sync` → nhảy tới mục **Sync** bên dưới.
+
 1) **Resolve scope.** No-arg → project. `<feature>` → `--feature <slug>`.
 
 2) **Lấy số cho L1** (không ghi file):
@@ -76,6 +84,7 @@ Feature không tồn tại / vault rỗng → theo `feature-bootstrap.md` Nhóm 
    [/dashboard] Sẽ thực hiện:
      # | path                              | action | summary
      1 | docs/_shared/dashboard{-feature}.html | update | {verdict ngắn} · {N} OQ mở · {M} doc
+     2 | artifact {artifact_url | (mới)}   | update | bản có thao tác (chỉ scope project)
    Apply? (Y/n):
    ```
 
@@ -84,7 +93,26 @@ Feature không tồn tại / vault rỗng → theo `feature-bootstrap.md` Nhóm 
    python3 _scripts/dashboard-build.py [--feature <slug>]
    ```
 
-5) **Output report** — path + "mở bằng trình duyệt" + 3 điểm nổi bật lấy từ `--json` (verdict · ô có màu tệ nhất · cột trục tiến độ đang chặn nhiều feature nhất). Scope feature → nhắc "Xem global: `/dashboard`".
+5) **Bản artifact** (chỉ scope project):
+   ```bash
+   python3 _scripts/dashboard-build.py --artifact     # → .claude/state/dashboard-artifact.html
+   ```
+   Publish bằng tool Artifact. Có `artifact_url` trong `.claude/state/dashboard.json` → publish với `url` đó
+   (cập nhật tại chỗ, giữ kho yêu cầu; lần đầu trong phiên phải `action: read` url trước). Chưa có → publish mới
+   (`capabilities: {db: {}}`, `icon: "chart"`), rồi ghi `{"artifact_url": "<url>"}` vào `.claude/state/dashboard.json`.
+   Publish là hành động ra ngoài (trang riêng tư) — đã nằm trong L1 bước 3 (thêm 1 dòng `artifact | update`).
+
+6) **Output report** — path + link artifact + 3 điểm nổi bật lấy từ `--json` (verdict · ô có màu tệ nhất · cột trục tiến độ đang chặn nhiều feature nhất). Scope feature → nhắc "Xem global: `/dashboard`".
+
+### Sync — `/dashboard sync`
+
+1) Đọc `artifact_url` từ `.claude/state/dashboard.json` (không có → báo "chưa publish, chạy `/dashboard`").
+2) `ArtifactData` `query` collection `requests`, `where state == pending` → ghi mảng JSON (mỗi phần tử = body + `id` = doc_id + `version`) ra file tạm.
+3) `python3 _scripts/dashboard-apply.py --check <file>` → in bảng làm **L1** (1 lần cho cả lô). Mục ⚠ upstream chưa duyệt: hỏi anh từng mục; đồng ý → thêm `"confirm_upstream": true` vào yêu cầu đó.
+4) Anh `Y` → `CLAUDE_CHANGELOG_AUTHOR=@<handle> python3 _scripts/dashboard-apply.py <file>` → JSON kết quả `{id, state, note}`.
+5) `ArtifactData` `batch` cập nhật từng yêu cầu (`update` `state` + `note` + `appliedAt`, pin `if_version`).
+6) Chạy `intake-sync.py` (chuẩn hoá backlog nếu có dòng BL mới), build lại cả 2 bản và publish lại artifact (bước 4–5 Approach, không cần L1 thêm — đã gộp trong L1 sync).
+7) Báo: số áp dụng / từ chối (kèm lý do) / còn chờ.
 
 ## Output
 
@@ -111,10 +139,14 @@ Feature không tồn tại / vault rỗng → theo `feature-bootstrap.md` Nhóm 
 | US/AC · Test | Coverage FR↔US, UC có test (từ `workspace-status.py`); US mồ côi = chặn |
 | Stale chờ xác nhận | Doc `status: stale` + dòng `_workspace/staleness.md` có file đích không còn |
 | Độ tươi | 100 = mới; −1đ/ngày sau 7 ngày ân hạn; KHÔNG phạt stale |
+| Câu hỏi mở theo tuần | `git grep` bảng `\| OQ-n \|` tại commit cuối mỗi Chủ nhật (8 tuần, mọi folder feature lúc đó) + working tree hôm nay; ◆ = tuần có file `docs/meetings/decks/` |
+| Review Figma | Mục bảng "Mức Cao/Trung/Thấp" của audit mới nhất mỗi feature. Cột máy: Mới · Đang sửa (`_workspace/figma-runs.md` có "bắt đầu" chưa "xong") · Chờ đo lại ("xong" từ ngày audit trở đi) · Xong (audit trước có, audit mới không). Kéo tay lưu ở kho trang, đè cột máy |
 
 ## References
 
-* @../../../_scripts/dashboard-build.py (nguồn duy nhất: số liệu + HTML)
+* @../../../_scripts/dashboard-build.py (nguồn duy nhất: số liệu + HTML, `--artifact`, `--line`)
+* @../../../_scripts/dashboard-apply.py (`/dashboard sync`: kiểm + áp yêu cầu từ trang)
+* @../status/SKILL.md (engine đổi status mà dashboard-apply gọi)
 * @../../../.claude/rules/kg-usage.md (KG: node mồ côi userflow)
 * @../../../.claude/rules/naming-conventions.md
 * @../../../.claude/rules/status-lifecycle.md
