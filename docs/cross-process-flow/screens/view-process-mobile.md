@@ -15,7 +15,7 @@
 
 ### Trạng thái: Load error — App — thẻ quy trình tải lỗi
 
-- **Figma:** [1.1 · mob · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-160682)
+- **Figma:** [1.1 · mob · record-detail · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-160682)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -24,7 +24,7 @@
 
 ### Trạng thái: Loading — App — thẻ quy trình đang tải
 
-- **Figma:** [1.1 · mob · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-160508)
+- **Figma:** [1.1 · mob · record-detail · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-160508)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -44,7 +44,7 @@
 
 ### Trạng thái: Loading — App — sheet sơ đồ đang tải
 
-- **Figma:** [1.2 · mob · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-161816)
+- **Figma:** [1.2 · mob · process-diagram · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-161816)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -52,7 +52,7 @@
 
 ### Trạng thái: Load error — App — sheet sơ đồ lỗi
 
-- **Figma:** [1.2 · mob · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-161987)
+- **Figma:** [1.2 · mob · process-diagram · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-161987)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -61,7 +61,7 @@
 
 ### Trạng thái: Update banner — App — sheet sơ đồ có banner
 
-- **Figma:** [1.2 · mob · Update banner](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-162173)
+- **Figma:** [1.2 · mob · process-diagram · Update banner](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-162173)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|

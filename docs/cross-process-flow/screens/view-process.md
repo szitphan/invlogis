@@ -21,7 +21,7 @@
 
 ### Trạng thái: Load error — Dòng quy trình tải lỗi
 
-- **Figma:** [1.1 · web · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-118875)
+- **Figma:** [1.1 · web · record-detail · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-118875)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -30,7 +30,7 @@
 
 ### Trạng thái: Loading — Dòng quy trình đang tải
 
-- **Figma:** [1.1 · web · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-118511)
+- **Figma:** [1.1 · web · record-detail · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-118511)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -58,7 +58,7 @@
 
 ### Trạng thái: Loading — Popup sơ đồ đang tải
 
-- **Figma:** [1.2 · web · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-120011)
+- **Figma:** [1.2 · web · process-diagram · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-120011)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -67,7 +67,7 @@
 
 ### Trạng thái: Load error — Popup sơ đồ lỗi
 
-- **Figma:** [1.2 · web · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-120750)
+- **Figma:** [1.2 · web · process-diagram · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-120750)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -77,7 +77,7 @@
 
 ### Trạng thái: Update banner — Popup sơ đồ có banner cập nhật
 
-- **Figma:** [1.2 · web · Update banner](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-121489)
+- **Figma:** [1.2 · web · process-diagram · Update banner](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-121489)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -86,7 +86,7 @@
 
 ### Trạng thái: History load error — Panel — lịch sử tải lỗi
 
-- **Figma:** [1.2 · web · History load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-126054)
+- **Figma:** [1.2 · web · process-diagram · History load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-126054)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -95,7 +95,7 @@
 
 ### Trạng thái: Condition tooltip — Tooltip chip Điều kiện trên đường nối
 
-- **Figma:** [1.2 · web · Condition tooltip](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5627-156590)
+- **Figma:** [1.2 · web · process-diagram · Condition tooltip](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5627-156590)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|

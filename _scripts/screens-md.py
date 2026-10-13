@@ -227,8 +227,10 @@ def migrate(feature, flow, write):
         count.append((sid, len(b["rows"] or [])))
         for state, stitle, rows in b["states"]:
             ssid = f"{sid} · {state}"
+            label = f"{sid} · {slug} · {state}"   # = tên frame 4 phần trên Figma
+            url = links.get(label) or links.get(ssid)  # index cũ ghi nhãn thiếu slug
             out += [f"### Trạng thái: {state} — {stitle}", "",
-                    f"- **Figma:** " + (f"[{ssid}]({links[ssid]})" if ssid in links else "chưa gắn"), "",
+                    f"- **Figma:** " + (f"[{label}]({url})" if url else "chưa gắn"), "",
                     HEAD5] + [f"| {' | '.join(r)} |" for r in rows] + [""]
             count.append((ssid, len(rows)))
     md = "\n".join(out).rstrip() + "\n"

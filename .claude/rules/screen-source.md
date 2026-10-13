@@ -65,6 +65,8 @@ Trong `{flow-slug}.md`, mỗi màn:
 | # | Items | Control type | Data type | Description |
 
 ### Trạng thái: Loading — {tên Việt}                   ← frame 4 phần của màn đó
+
+- **Figma:** [1.1 · web · {slug} · Loading](…)        ← nhãn = tên frame 4 phần (có slug)
 ```
 
 - Block `## Screen:` giữ đúng mẫu ASCII để KG và các skill đã parse ASCII đọc được.
@@ -80,7 +82,7 @@ Trong `{flow-slug}.md`, mỗi màn:
 ```json
 { "fileKey": "…", "synced_at": "2026-10-13",
   "screens": { "1.1 · web": {
-      "nodeId": "5587:117888", "flow": "view-process", "frames": ["1.1 · web · Loading", "…"],
+      "nodeId": "5587:117888", "slug": "record-detail", "flows": ["view-process"], "frames": { "Loading": "5587:118511" },
       "rows": { "1": {"nodeId": "…", "text": "Dòng quy trình", "component": "Row"} },
       "texts": { "<nodeId>": "chữ hiển thị" },
       "reactions": [ {"from": "<nodeId>", "trigger": "ON_CLICK", "to": "1.2 · web"} ] } } }

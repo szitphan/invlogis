@@ -32,7 +32,7 @@
 
 ### Trạng thái: Empty — Danh sách rỗng
 
-- **Figma:** [2.1 · web · Empty](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-144980)
+- **Figma:** [2.1 · web · process-list · Empty](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-144980)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -41,7 +41,7 @@
 
 ### Trạng thái: Loading — Danh sách đang tải
 
-- **Figma:** [2.1 · web · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-137717)
+- **Figma:** [2.1 · web · process-list · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-137717)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -49,7 +49,7 @@
 
 ### Trạng thái: Load error — Danh sách tải lỗi
 
-- **Figma:** [2.1 · web · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-152243)
+- **Figma:** [2.1 · web · process-list · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-152243)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -58,7 +58,7 @@
 
 ### Trạng thái: No filter results — Lọc không ra kết quả
 
-- **Figma:** [2.1 · web · No filter results](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-149822)
+- **Figma:** [2.1 · web · process-list · No filter results](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-149822)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -67,7 +67,7 @@
 
 ### Trạng thái: No permission — Trang không có quyền
 
-- **Figma:** [2.1 · web · No permission](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-154664)
+- **Figma:** [2.1 · web · process-list · No permission](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-154664)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -76,7 +76,7 @@
 
 ### Trạng thái: No search results — Tìm không ra
 
-- **Figma:** [2.1 · web · No search results](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-147401)
+- **Figma:** [2.1 · web · process-list · No search results](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-147401)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -85,7 +85,7 @@
 
 ### Trạng thái: Update banner — Danh sách có banner cập nhật
 
-- **Figma:** [2.1 · web · Update banner](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-140138)
+- **Figma:** [2.1 · web · process-list · Update banner](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-140138)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
