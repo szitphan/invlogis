@@ -1,6 +1,7 @@
 ---
 type: shared-environment
-status: draft
+status: in-review
+status_changed: 2026-10-14
 updated: 2026-10-01
 links:
   - docs-input/srs-cu/lg-srs-export.md

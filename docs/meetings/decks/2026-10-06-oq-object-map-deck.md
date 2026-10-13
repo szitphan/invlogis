@@ -7,7 +7,8 @@ client: Delta
 date: 2026-10-06
 footer: Câu hỏi cần xác nhận
 brand: innvie
-status: draft
+status: in-review
+status_changed: 2026-10-14
 updated: 2026-10-06
 links:
   - docs/_shared/object-map.md

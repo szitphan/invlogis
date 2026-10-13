@@ -1,8 +1,9 @@
 ---
 type: object-map
 feature: cross-process-flow
-status: stale
-status_prev: draft
+status: draft
+status_changed: 2026-10-14
+status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-12
 links:
   - docs/_shared/object-map.md
