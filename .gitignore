@@ -32,3 +32,4 @@ docs-input/.staging/
 # Dashboard sinh bởi _scripts/dashboard-build.py — dựng lại bằng /dashboard, không commit (bản cũ trông như hiện hành)
 docs/_shared/dashboard*.html
 .claude/state/dashboard-artifact*.html
+.claude/state/dashboard-audit/

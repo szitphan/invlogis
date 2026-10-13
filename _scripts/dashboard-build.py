@@ -897,8 +897,9 @@ def build(feature_filter=None, light_mode=False):
         {"key": "stale", "label": "Stale chờ xác nhận", "value": len(stale_docs) + len(dead_log),
          "light": light(len(stale_docs), 0, 5), "sub": f"{len(stale_docs)} doc · {len(dead_log)} dòng log trỏ file đã xoá",
          "path": "_workspace/staleness.md"},
-        {"key": "src", "label": "Nguồn chưa feed", "value": f"{len(not_fed)}/{len(feedable)}",
-         "light": light(len(not_fed), 0, 5), "sub": "không tính nguồn ➖", "path": "docs-input/README.md"},
+        {"key": "src", "label": "Nguồn chưa feed", "value": len(not_fed),
+         "light": light(len(not_fed), 0, 5), "sub": f"trên {len(feedable)} nguồn cần feed (không tính {len(sources) - len(feedable)} nguồn tham khảo)",
+         "path": "docs-input/README.md"},
         {"key": "backlog", "label": "Hàng việc", "value": len(work), "light": "gray",
          "sub": f"{len(open_bl)} task backlog · {len(work) - len(open_bl)} việc máy phát hiện", "path": "_workspace/backlog.md"},
     ]
@@ -950,13 +951,14 @@ CSS = """
 /* Dashboard theo design system Astryx (design/design.md). Token nhúng từ design/design-tokens.css lúc build
    (ds_tokens()); file này chỉ dùng biến --color-*, --font-*, --radius-*, --spacing-*, không mã màu cứng. */
 *{box-sizing:border-box}
+[hidden]{display:none!important}  /* tabpanel/.pend/.reason dùng hidden; display:flex của class không được thắng */
 body{margin:0;background:var(--color-background-surface);color:var(--color-text-primary);font:var(--font-weight-normal) 14px/20px var(--font-body);padding:0 var(--spacing-6)}
 .page{margin:0 auto;padding-block:var(--spacing-6) var(--spacing-12);display:flex;flex-direction:column;gap:var(--spacing-4)}
 a{color:var(--color-text-accent);text-decoration:underline;text-decoration-color:var(--color-border-emphasized);text-underline-offset:3px;transition:text-decoration-color var(--duration-fast) var(--ease-standard)}
 a:hover{text-decoration-color:currentColor}
 a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
 code,.mono{font-family:var(--font-code);font-size:12px;line-height:16px}
-code{background:var(--color-neutral);padding:1px 4px;border-radius:var(--radius-inner)}
+code{background:var(--color-neutral);color:var(--color-text-primary);padding:1px 4px;border-radius:var(--radius-inner)}
 .muted{color:var(--color-text-secondary)}
 h2{font:var(--font-weight-normal) 17px/24px var(--font-heading);margin:0}
 small{font-size:12px}
@@ -967,8 +969,8 @@ small{font-size:12px}
 .head .tools{margin-left:auto;display:flex;flex-wrap:wrap;align-items:center;gap:var(--spacing-3)}
 .seg{display:inline-flex;align-items:center;gap:var(--spacing-2);font-size:12px;color:var(--color-text-secondary)}
 .seg .sc{display:inline-flex;background:var(--color-neutral);border-radius:var(--radius-element);padding:2px;gap:2px}
-.seg .sc button{font:var(--font-weight-medium) 12px/16px var(--font-body);height:24px;padding:0 var(--spacing-2);border:0;border-radius:8px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
-.seg .sc button[aria-pressed="true"]{background:var(--color-background-surface);color:var(--color-text-primary);box-shadow:var(--elevation-low)}
+.seg .sc button{font:var(--font-weight-normal) 12px/16px var(--font-body);height:24px;padding:0 var(--spacing-2);border:0;border-radius:8px;background:transparent;color:var(--color-text-primary);cursor:pointer}
+.seg .sc button[aria-pressed="true"]{background:var(--color-background-surface);color:var(--color-text-primary);font-weight:var(--font-weight-semibold);box-shadow:var(--elevation-low)}
 .tabs{display:flex;gap:var(--spacing-4);border-bottom:1px solid var(--color-border-default);overflow-x:auto}
 .tabs button{font:var(--font-weight-medium) 14px/20px var(--font-body);color:var(--color-text-secondary);background:none;border:0;padding:var(--spacing-2) 0;margin-bottom:-1px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
 .tabs button:hover{color:var(--color-text-primary)}
@@ -1041,7 +1043,7 @@ li.dismissed{display:none!important}body.show-dismissed li.dismissed{display:fle
 .stages{display:grid;grid-template-columns:170px repeat(var(--n),minmax(78px,1fr));gap:var(--spacing-1);font-size:12px;min-width:800px;align-items:stretch}
 .stages .h{color:var(--color-text-secondary);text-align:center;font-weight:var(--font-weight-medium);text-transform:uppercase;padding-bottom:var(--spacing-1)}
 .stages .f{font:var(--font-weight-medium) 12px/16px var(--font-code);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:6px 0}
-.cell{border-radius:var(--radius-inner);padding:6px 4px;text-align:center;font-variant-numeric:tabular-nums;background:transparent;border:1px dashed var(--color-border-emphasized);color:var(--color-text-disabled);text-decoration:none;min-height:28px}
+.cell{border-radius:var(--radius-inner);padding:6px 4px;text-align:center;font-variant-numeric:tabular-nums;background:transparent;border:1px dashed var(--color-border-emphasized);color:var(--color-text-secondary);text-decoration:none;min-height:28px}
 .cell.done{background:var(--color-accent);border-color:var(--color-accent);color:var(--color-on-accent);font-weight:var(--font-weight-semibold)}
 .cell.part{background:var(--color-neutral);border:1px solid transparent;color:var(--color-text-primary);font-weight:var(--font-weight-medium)}
 .cell.block{background:var(--color-status-chip-red-bg);border:1px solid transparent;color:var(--color-status-chip-red-fg);font-weight:var(--font-weight-semibold)}
@@ -1052,7 +1054,7 @@ a.cell:hover{box-shadow:inset 0 0 0 100px var(--color-overlay-hover)}
 .kb5{grid-template-columns:repeat(5,minmax(190px,1fr));min-width:980px}
 .kcol{background:var(--color-background-body);border-radius:var(--radius-container);padding:var(--spacing-2);display:flex;flex-direction:column;gap:var(--spacing-2);transition:box-shadow var(--duration-fast) var(--ease-standard)}
 .kcol h3{margin:var(--spacing-1) var(--spacing-1) 0;font:var(--font-weight-bold) 14px/20px var(--font-body);display:flex;align-items:center;gap:var(--spacing-2)}
-.kcol h3 .n{color:var(--color-text-secondary);font-weight:var(--font-weight-normal);margin-left:auto}
+.kcol h3 .n{color:var(--color-text-primary);font-weight:var(--font-weight-normal);margin-left:auto}
 .kbody{display:flex;flex-direction:column;gap:var(--spacing-2);min-height:48px}
 .kcard{background:var(--color-surface-card);border:1px solid var(--color-border-emphasized);border-radius:var(--radius-container);padding:var(--spacing-3);font-size:14px;display:flex;flex-direction:column;gap:var(--spacing-1);min-width:0}
 .kcard a{font-weight:var(--font-weight-medium);color:var(--color-text-primary);text-decoration:none;overflow-wrap:anywhere}.kcard a:hover{text-decoration:underline}
@@ -1097,6 +1099,7 @@ footer{color:var(--color-text-secondary);font-size:12px}
 .stages .h .chip{margin-top:var(--spacing-1);text-transform:none}
 .cell.neckc{box-shadow:inset 0 0 0 2px var(--color-status-chip-red-fg)}
 .kcol.stale{background:var(--color-status-chip-yellow-bg)}
+.cempty{margin:0;padding:var(--spacing-3);text-align:center;font-size:12px;color:var(--color-text-primary)}
 .cnote{margin:0 var(--spacing-1);font-size:12px;color:var(--color-status-chip-yellow-fg)}
 """
 
@@ -1351,14 +1354,15 @@ def render(m, artifact=False):
               f'<p class="opens">{" · ".join(opens)}</p>{btns}</article>')
         w("</div></section>")
     w(f'<div class="panel"><h2>Hàng việc còn lại ({len(work) - min(3, len(work))}) · xếp theo điểm ưu tiên</h2>'
-      '<p class="muted" style="margin:2px 0 6px;font-size:.78rem">Điểm = Chặn 40/25 + Hạn 25/15 + Lan 4đ mỗi doc/feature (trần 20) + Tuổi 1đ/2 ngày (trần 15). '
+      '<p class="muted" style="margin:2px 0 6px;font-size:12px">Điểm = Chặn 40/25 + Hạn 25/15 + Lan 4đ mỗi doc/feature (trần 20) + Tuổi 1đ/2 ngày (trần 15). '
       'Cột <i>Ưu tiên</i> trong backlog: <code>P0</code> luôn lên đầu, <code>để sau</code> luôn xuống cuối. '
       '<b>BL</b> = task trong backlog (tự đóng khi điều kiện Xong khi đúng) · <b>Máy</b> = việc dashboard tự phát hiện (tự hết khi tín hiệu hết).</p>')
     if not rest:
         w('<p class="muted">Không còn việc nào khác.</p>')
     else:
+        has_dm = any(x["due"] or x["manual"] for x in rest)  # cột Hạn · Ưu tiên toàn rỗng thì ẩn
         w('<div class="scroll"><table class="work"><thead><tr><th class="num">Điểm</th><th>Việc</th><th>Vì sao</th>'
-          '<th>Xong khi</th><th>Hạn · Ưu tiên</th><th>Mở ở đâu</th>' + ("<th></th>" if A else "") + '</tr></thead><tbody>')
+          '<th>Xong khi</th>' + ('<th>Hạn · Ưu tiên</th>' if has_dm else '') + '<th>Mở ở đâu</th>' + ("<th></th>" if A else "") + '</tr></thead><tbody>')
         for i, x in enumerate(rest):
             parts = "<br>".join(f"{k} {v}" for k, v in x["parts"].items() if v) or "0"
             cls = ["more-row"] if i >= 10 else []
@@ -1380,7 +1384,7 @@ def render(m, artifact=False):
             w(f'<tr class="{" ".join(cls)}"{attrs}><td class="num scol"><span class="score">{x["score"]}</span><br><small class="muted">{parts}</small></td>'
               f'<td>{tag} {E(x["title"])}</td><td class="muted">{E(x["why"])}</td>'
               f'<td title="{E(x["done_when"])}">{E(x["done_text"]) or "<span class=muted>—</span>"}</td>'
-              f'<td>{dm}</td><td class="opens">{"<br>".join(opens) or "<span class=muted>—</span>"}</td>'
+              + (f'<td>{dm}</td>' if has_dm else '') + f'<td class="opens">{"<br>".join(opens) or "<span class=muted>—</span>"}</td>'
               + (f'<td class="btns">{btns}</td>' if A else "") + "</tr>")
         w("</tbody></table></div>")
     if len(rest) > 10:
@@ -1422,7 +1426,7 @@ def render(m, artifact=False):
         by_src = {}
         for u in un:
             by_src.setdefault(u["src"], []).append(u)
-        w(f'<p class="muted" style="margin:0;font-size:.82rem"><b>{len(un)} mục nguồn chưa gắn feature</b> (còn ⏳/⬜, chưa có <code>➡ feature</code> '
+        w(f'<p class="muted" style="margin:0;font-size:12px"><b>{len(un)} mục nguồn chưa gắn feature</b> (còn ⏳/⬜, chưa có <code>➡ feature</code> '
           'nên không tính vào cột Nguồn của feature nào): '
           + " · ".join(link(us[0]["path"], f'{E(src)} ({len(us)})', us[0]["line"]) for src, us in sorted(by_src.items()))
           + '. Mục ⏳/⬜ có nhắc tên feature ở cột Ở đâu/Ghi chú được tính tạm cho feature đó.</p>')
@@ -1434,15 +1438,18 @@ def render(m, artifact=False):
     n_screens = sum(r.get("screens", 0) for r in m["features"])
     w('<div class="tiles">')
     first_lint = next(((s_["path"], s_["line"]) for _, l, s_ in lint_rows if l["fail"] or l["warn"]), (None, None))
-    inner = (f'<span class="lab">Tầng SaaS ↗</span><span class="big {"l-red" if n_fail else "l-amber" if n_warn else "l-green"}">'
+    sc = chip("red", "circle-x", "Cần xử lý") if n_fail else chip("yellow", "triangle-alert", "Cần chú ý") if n_warn else chip("green", "circle-check", "Ổn")
+    inner = (f'<span class="ktop"><span class="lab">Tầng SaaS ↗</span>{sc}</span><span class="big">'
              f'{n_fail} FAIL · {n_warn} WARN</span><span class="sub">saas-layer-lint trên {len(lint_rows)} spec</span>')
     w(link(first_lint[0], inner, first_lint[1], "tile") if first_lint[0] else f'<div class="tile">{inner}</div>')
-    inner = (f'<span class="lab">Tham số P chưa chốt ↗</span><span class="big {"l-amber" if p_open else "l-green"}">'
+    pc = chip("yellow", "triangle-alert", "Cần chú ý") if p_open else chip("green", "circle-check", "Ổn")
+    inner = (f'<span class="ktop"><span class="lab">Tham số P chưa chốt ↗</span>{pc}</span><span class="big">'
              f'{len(p_open)}/{len(m["params"])}</span><span class="sub">bảng tham số theo khách</span>')
     w(link("docs/_product/tenant-parameters.md", inner, None, "tile"))
     if audits:
         f_, a_ = sorted(audits, key=lambda x: x[1]["date"])[-1]
-        inner = (f'<span class="lab">Figma ↗</span><span class="big {"l-red" if a_["cao"] else "l-green"}">'
+        fc = chip("red", "circle-x", "Còn mục Cao") if a_["cao"] else chip("green", "circle-check", "Không còn Cao")
+        inner = (f'<span class="ktop"><span class="lab">Figma ↗</span>{fc}</span><span class="big">'
                  f'{a_["cao"]} · {a_["trung"]} · {a_["thap"]}</span><span class="sub">Cao · Trung · Thấp — audit {E(f_)} {E(a_["date"])} · {n_screens} màn</span>')
         w(link(a_["path"], inner, None, "tile"))
     else:
@@ -1453,7 +1460,7 @@ def render(m, artifact=False):
     if pts:
         mx = max([p_["open"] + p_["closed"] for p_ in pts] + [1])
         decks = hist.get("decks", [])
-        w('<div class="panel"><h2>Câu hỏi mở theo tuần</h2><p class="muted" style="margin:2px 0 6px;font-size:.78rem">'
+        w('<div class="panel"><h2>Câu hỏi mở theo tuần</h2><p class="muted" style="margin:2px 0 6px;font-size:12px">'
           'Cuối mỗi tuần (Chủ nhật) theo lịch sử git, dòng cuối là hôm nay. Thanh đậm = còn mở, nhạt = đã đóng. ◆ = tuần có buổi họp deck.</p>'
           '<div class="hist">')
         prev_d = None
@@ -1469,6 +1476,8 @@ def render(m, artifact=False):
         w("</div></div>")
     oq_rows = [o for r in m["features"] for o in r["oq_rows"] if o["open"]]
     w(f'<div class="panel"><h2>Câu hỏi mở ({len(oq_rows)})</h2><div class="scroll"><table><thead><tr><th>Feature</th><th>Mã</th><th>Câu hỏi</th></tr></thead><tbody>')
+    if not oq_rows:
+        w('<tr><td colspan="3" class="muted">Không còn câu hỏi mở nào.</td></tr>')
     for o in oq_rows:
         feat = o["path"].split("/")[1]
         w(f'<tr><td>{E(feat)}</td><td class="mono">{link(o["path"], E(o["id"]), o["line"])}</td><td>{E(o["question"][:160])}</td></tr>')
@@ -1485,9 +1494,10 @@ def render(m, artifact=False):
     w('<div class="scroll"><div class="kb">')
     for key, label in KANBAN:
         cs = [x for x in kb["cards"] if x["col"] == key]
+        empty_ = '<p class="cempty">Trống</p>' if not cs else ""
         dotc = {"draft": "", "in-review": "amber", "revisions": "red", "approved": "green", "shipped": "green", "stale": "amber"}.get(key, "")
         note = '<p class="cnote">Chờ rà: không cần sửa thì reset, cần sửa thì sửa rồi reset.</p>' if key == "stale" and cs else ""
-        w(f'<div class="kcol {key}" data-col="{key}"><h3><span class="dot {dotc}"></span>{E(label)} <span class="n">{len(cs)}</span></h3>{note}<div class="kbody">')
+        w(f'<div class="kcol {key}" data-col="{key}"><h3><span class="dot {dotc}"></span>{E(label)} <span class="n">{len(cs)}</span></h3>{note}<div class="kbody">{empty_}')
         for x in cs:
             meta = " · ".join(s for s in [x["type"], x["feature"], x["updated"],
                                           f"trước: {x['prev']}" if key == "stale" and x["prev"] else ""] if s)
@@ -1503,6 +1513,8 @@ def render(m, artifact=False):
     w("</div></div>")
     # Review Figma
     fb = m.get("figma_board", [])
+    if not fb:
+        w('<h2>Review Figma</h2><p class="muted" style="margin:0">Chưa có báo cáo audit Figma nào (<code>docs/reports/figma-audit/</code>). Chạy <code>/figma-audit</code> sau khi vẽ màn.</p>')
     if fb:
         w('<h2>Review Figma</h2><p class="muted" style="margin:0">Mục từ báo cáo audit mới nhất. Máy đặt cột: <code>/figma-screen</code> đang chạy → Đang sửa · chạy xong sau ngày audit → Chờ đo lại · '
           'audit sau không còn → Xong. ' + ("Kéo tay để chỉnh; <i>Bỏ qua</i> cần ghi lý do. Lưu ngay trên trang, không cần sync." if A else "Chỉnh tay trên bản artifact.") + '</p>')
@@ -1575,6 +1587,8 @@ def render(m, artifact=False):
       + ('<p class="muted" style="margin:4px 0 0">File đích không còn nên không sửa được. Bấm "Đã biết, reset" để ghi vào <code>_workspace/stale-ack.md</code> khi chạy <code>/dashboard sync</code>.</p><ul>'
          if A else '<p class="muted" style="margin:4px 0 0">Xác nhận reset trên bản artifact.</p><ul>'))
     seen_dead = set()
+    if not dead:
+        w('<li class="muted">Không có dòng log nào trỏ file đã xoá.</li>')
     for s in dead:
         if s["downstream"] in seen_dead:
             continue

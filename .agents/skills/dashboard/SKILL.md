@@ -93,6 +93,19 @@ Feature không tồn tại / vault rỗng → theo `feature-bootstrap.md` Nhóm 
    python3 _scripts/dashboard-build.py [--feature <slug>]
    ```
 
+4b) **Audit máy (lớp 1, như /figma-screen Bước 6)** — trước khi publish:
+   ```bash
+   python3 _scripts/dashboard-audit.py      # → .claude/state/dashboard-audit/report.md + ảnh 5 tab × 1440/400, sáng/tối
+   ```
+   A1 bố cục (cuộn ngang, tràn, chữ cắt, tab ẩn/hiện đúng) · A2 truy cập (tương phản AA, control thiếu tên, vùng chạm) ·
+   A3 design system (màu cứng, font, thang cỡ chữ) · A4 Do's & Don'ts · A5 số liệu thị giác. **FAIL → sửa
+   `dashboard-build.py` rồi chạy lại, không publish khi còn FAIL.** "Đã biết" = ngoại lệ trong design.md › Accessibility.
+
+   **`/dashboard --review`** (lớp 2, khi đổi giao diện): sau audit 0 FAIL, gọi song song `@uxui-reviewer`
+   (đủ trạng thái, khớp design.md), `@usability-reviewer` (walkthrough 4 tác vụ: hôm nay làm gì · stale xử lý
+   thế nào · feature kẹt ở đâu · nguồn nào chưa feed), `@visual-reviewer` (đọc A5 + ảnh). Chỉ đọc, chỉ trả finding.
+   Sửa lỗi/bổ sung trạng thái → sửa luôn; finding đổi giao diện user đã duyệt → hỏi trước (không tự áp).
+
 5) **Bản artifact** (chỉ scope project):
    ```bash
    python3 _scripts/dashboard-build.py --artifact     # → .claude/state/dashboard-artifact.html
@@ -145,6 +158,7 @@ Feature không tồn tại / vault rỗng → theo `feature-bootstrap.md` Nhóm 
 ## References
 
 * @../../../_scripts/dashboard-build.py (nguồn duy nhất: số liệu + HTML, `--artifact`, `--line`)
+* @../../../_scripts/dashboard-audit.py (lớp 1 máy đo: A1–A5 bằng Chromium headless)
 * @../../../_scripts/dashboard-apply.py (`/dashboard sync`: kiểm + áp yêu cầu từ trang)
 * @../status/SKILL.md (engine đổi status mà dashboard-apply gọi)
 * @../../../.claude/rules/kg-usage.md (KG: node mồ côi userflow)
