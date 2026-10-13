@@ -10,7 +10,8 @@ Flow (v2.7 — shared wrapper):
        1. Tổng quan nhanh (summary at-a-glance — counts + ID list parse từ srs/spec.md)
        2. Giới thiệu & Mô tả chung (từ docs/_shared/: system-overview/definitions/conventions/operating-env)
        2b. Bản đồ đối tượng (docs/{feature}/{feature}-object-map.md + docs/_shared/object-map.md, có file mới hiện)
-       3. SRS Spec (full) · 4. ERD · 5. Flows · 6. States · 7. Functions (inline screens) · 8. Screens · 9. Designs · 10. Open Questions.
+       3. SRS Spec (full, gồm Mục 10 màn Figma) · 4. ERD · 5. Flows · 6. States · 7. Functions (inline screens) ·
+       [chưa có screens/: Screens catalog · Wireframes · Designs] [có screens/: Màn đang vẽ (flow chưa chốt)] · Open Questions.
   3. Pass MD content qua shared _viewer_wrapper.build_viewer_html() → nested TOC + mermaid zoom modal.
   4. Write docs/{feature}/{feature}-preview.html.
 
@@ -289,6 +290,29 @@ def build_screens_catalog(screen_index_text: str) -> str:
     return "\n".join(out) + tail
 
 
+def approved_flows(screens_dir: Path) -> set:
+    """Stem file flow có Status `approved` trong screens/{feature}-screen-index.md."""
+    idx = next(iter(sorted(screens_dir.glob("*-screen-index.md"))), None) if screens_dir.is_dir() else None
+    if not idx:
+        return set()
+    out = set()
+    for line in idx.read_text(encoding="utf-8").splitlines():
+        m = re.search(r"\(([^)/]+)\.md\)", line)
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if m and "approved" in cells:
+            out.add(m.group(1))
+    return out
+
+
+def count_figma_screens(feature_dir: Path) -> int:
+    """Số `## Screen:` trong screens/*.md (flow đã lên Figma)."""
+    sdir = feature_dir / "screens"
+    if not sdir.is_dir():
+        return 0
+    return sum(len(re.findall(r"(?m)^## Screen: ", f.read_text(encoding="utf-8")))
+               for f in sdir.glob("*.md") if not f.name.endswith("-index.md"))
+
+
 def build_wireframes_block(feature_dir: Path) -> str:
     """Nhúng THẲNG nội dung wireframe vào preview, theo flow. 2 nguồn:
 
@@ -313,9 +337,13 @@ def build_wireframes_block(feature_dir: Path) -> str:
     if not ascii_files and not html_only and not screen_files:
         return ""
     parts = []
-    # Flow đã lên Figma (rule screen-source.md): ảnh Figma (nếu đã --done) + link + bảng 5 cột.
+    # Flow đã lên Figma (rule screen-source.md): flow `approved` đã nằm trong spec Mục 10 (máy sinh)
+    # → chỉ nhúng flow chưa chốt ở đây để không in 2 lần.
     done = {sf.stem for sf in screen_files}
+    approved = approved_flows(screens_dir)
     for sf in screen_files:
+        if sf.stem in approved:
+            continue
         body = re.sub(r"\A\s*#\s+[^\n]+\n+", "", read_optional(sf)).strip()
         body = inline_local_images(demote_headings(body, 2), screens_dir)
         parts.append(f"### Flow: {sf.stem} (Figma)\n\n{body}")
@@ -446,7 +474,7 @@ def _extract_id_title(headers: list, rows: list) -> list:
     return out
 
 
-def build_summary_section(spec: str, screen_index_text: str, feature: str) -> str:
+def build_summary_section(spec: str, screen_index_text: str, feature: str, feature_dir: Path = None) -> str:
     """Render 'Tổng quan nhanh' — counts line + ID list per type. Defensive: type nào
     không parse được → hiện '—', không crash."""
     if not spec:
@@ -463,7 +491,8 @@ def build_summary_section(spec: str, screen_index_text: str, feature: str) -> st
 
     # Screens: đếm từ bảng ## Screens của file index ascii-wireframe.
     screen_rows = parse_screens_table(screen_index_text) if screen_index_text else []
-    n_screens = len(screen_rows)
+    n_screens = count_figma_screens(feature_dir) if feature_dir else 0
+    n_screens = n_screens or len(screen_rows)
 
     fr = parsed.get("FR", [])
     # P0/P1/... breakdown nếu parse được priority.
@@ -695,7 +724,7 @@ def main():
     open_questions = []
 
     # 1. Tổng quan nhanh (summary at a glance — parse spec tables).
-    summary_block = build_summary_section(spec, screen_index_text, feature)
+    summary_block = build_summary_section(spec, screen_index_text, feature, feature_dir)
 
     # 2. Giới thiệu & Mô tả chung (từ docs/_shared/ — project-level shared docs).
     intro_block = build_intro_section(vault)
@@ -786,16 +815,17 @@ def main():
         sections.append(("System Flows", flows_body, True, "sec-flows"))
     if states_body:
         sections.append(("State Diagrams", states_body, True, "sec-states"))
-    sections += [
-        ("Functions", functions_block, True, "sec-functions"),
-        ("Screens (catalog)", screens_block, True, None),
-    ]
+    sections.append(("Functions", functions_block, True, "sec-functions"))
+    # Đã lên Figma (screens/): danh mục + chi tiết màn nằm trong spec Mục 10 (screen-source.md Mục 8)
+    # → không còn mục Screens (catalog) / Designs riêng; chỉ thêm flow chưa chốt.
+    if not (feature_dir / "screens").is_dir():
+        sections.append(("Screens (catalog)", screens_block, True, None))
     if wireframes_block:
-        sections.append(("Wireframes", wireframes_block, True, "sec-wireframes"))
-    sections += [
-        ("Designs", designs_block, False, None),
-        ("Open Questions (tổng hợp)", build_oq_section(open_questions), False, "sec-openq"),
-    ]
+        name = "Màn đang vẽ (chưa chốt)" if (feature_dir / "screens").is_dir() else "Wireframes"
+        sections.append((name, wireframes_block, True, "sec-wireframes"))
+    if not (feature_dir / "screens").is_dir():
+        sections.append(("Designs", designs_block, False, None))
+    sections.append(("Open Questions (tổng hợp)", build_oq_section(open_questions), False, "sec-openq"))
     # flows inline vào spec → link '#sec-flows' trỏ tới spec (chứa Flows). states tương tự nếu skip.
     have = {a for *_, a in sections if a}
     md_parts = [f"# {title} — SRS Preview\n",
@@ -827,7 +857,7 @@ def main():
           + " · erd"
           + (" · flows" if (flows_body and not flows_inlined) else "")
           + (f" · states" if states_body else "")
-          + f" · {len(uc_files)} functions · screens · designs · open-questions")
+          + f" · {len(uc_files)} functions · open-questions")
     print(f"   Size: {size_kb:.1f} KB")
     print(f"   Mở browser: double-click {out_path}")
 

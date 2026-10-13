@@ -6,6 +6,9 @@
 
 - **screenId:** 1.1 · web
 - **Figma:** [1.1 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-117888)
+- **Mô tả:** Màn chi tiết của bản ghi nghiệp vụ, có dòng quy trình ở đầu cho biết bản ghi đang ở bước nào; bấm dòng để mở sơ đồ, có nút tạo nghiệp vụ tiếp theo khi đạt điều kiện.
+
+![1.1 · web · record-detail](images/1-1-web-record-detail.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -40,6 +43,9 @@
 
 - **screenId:** 1.2 · web
 - **Figma:** [1.2 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-119271)
+- **Mô tả:** Popup sơ đồ cây quy trình mở từ màn chi tiết, chọn sẵn bước "Ở đây" và mở panel của bước đó.
+
+![1.2 · web · process-diagram](images/1-2-web-process-diagram.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -106,6 +112,9 @@
 
 - **screenId:** 1.3 · web
 - **Figma:** [1.3 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-122359)
+- **Mô tả:** Panel của bước chưa tạo bản ghi: mã N/A, nhãn "Chưa tạo", chưa có lịch sử.
+
+![1.3 · web · step-not-created](images/1-3-web-step-not-created.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -118,6 +127,9 @@
 
 - **screenId:** 1.4 · web
 - **Figma:** [1.4 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-124576)
+- **Mô tả:** Panel ngã rẽ: bước sau chưa xác định vì còn chờ một lựa chọn, liệt kê các hướng có thể đi.
+
+![1.4 · web · branch-point](images/1-4-web-branch-point.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -129,6 +141,9 @@
 
 - **screenId:** 1.5 · web
 - **Figma:** [1.5 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-123098)
+- **Mô tả:** Panel của bước người xem không có quyền: vẫn thấy tên, mã, trạng thái, ẩn chi tiết và hiện câu không có quyền.
+
+![1.5 · web · step-no-permission](images/1-5-web-step-no-permission.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -140,6 +155,9 @@
 
 - **screenId:** 1.6 · web
 - **Figma:** [1.6 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-123837)
+- **Mô tả:** Panel bước công nợ của nhà cung cấp, có trạng thái thanh toán và nút mở bảng công nợ.
+
+![1.6 · web · debt-step](images/1-6-web-debt-step.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -151,6 +169,9 @@
 
 - **screenId:** 1.7 · web
 - **Figma:** [1.7 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-125315)
+- **Mô tả:** Panel bước nhận bản ghi mới sau khi bản cũ bị từ chối/thu hồi: hiện bản ghi hiện hành kèm số bản ghi trước.
+
+![1.7 · web · step-previous-records](images/1-7-web-step-previous-records.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -162,6 +183,9 @@
 
 - **screenId:** 1.8 · web
 - **Figma:** [1.8 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-127273)
+- **Mô tả:** Popup báo không có quyền khi mở bản ghi vừa bị thu quyền xem.
+
+![1.8 · web · open-denied](images/1-8-web-open-denied.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -172,6 +196,9 @@
 
 - **screenId:** 1.9 · web
 - **Figma:** [1.9 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-128058)
+- **Mô tả:** Popup báo bản ghi đã bị xoá trong lúc sơ đồ đang mở.
+
+![1.9 · web · record-deleted](images/1-9-web-record-deleted.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|

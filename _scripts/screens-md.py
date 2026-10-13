@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
-"""Bảng mô tả màn (5 cột) sau khi đã có Figma: chuyển sang screens/{flow}.md + sinh Phụ lục B cho SRS.
+"""Bảng mô tả màn (5 cột) sau khi đã có Figma: chuyển sang screens/{flow}.md + sinh Mục 10 màn hình cho SRS.
 
 Vì sao: khi giao diện đã vẽ trên Figma, khung wireframe (HTML/ASCII) hết vai trò — hình là Figma, nhưng
 bảng 5 cột vẫn là hợp đồng BA ↔ design (Figma không chứa validation, mã lỗi). Bảng được chép NGUYÊN VĂN
-bằng máy sang .md để `/figma-sync` sửa từng row, và để SRS nhúng được (Phụ lục B). Rule:
+bằng máy sang .md để `/figma-sync` sửa từng row, và để SRS nhúng được (Mục 10). Rule:
 .claude/rules/screen-source.md.
 
   python3 _scripts/screens-md.py migrate <feature> <flow-slug>            # in bản .md ra stdout + đếm row
   python3 _scripts/screens-md.py migrate <feature> <flow-slug> --write    # ghi screens/{flow}.md + dòng index
-  python3 _scripts/screens-md.py appendix <feature>                       # in Phụ lục B ra stdout
-  python3 _scripts/screens-md.py appendix <feature> --write               # thay khối giữa 2 marker trong spec
+  python3 _scripts/screens-md.py appendix <feature>                       # in danh mục + chi tiết màn ra stdout
+  python3 _scripts/screens-md.py appendix <feature> --write               # thay 2 khối marker trong spec Mục 10
   python3 _scripts/screens-md.py appendix <feature> --check               # exit 0 khớp · 1 cũ/thiếu ảnh · 2 thiếu marker
 
 migrate KHÔNG xoá file wireframe nguồn — `/figma-sync` xoá sau khi user duyệt L1 (git rm).
-appendix chỉ lấy flow có Status `approved` trong screens/{feature}-screen-index.md.
+appendix sinh 2 khối trong Mục 10: danh mục màn (mọi flow, cột Used by = FR trích từ bảng 5 cột, Mô tả =
+dòng `- **Mô tả:**` của màn) và chi tiết màn (chỉ flow `approved`: ảnh + link + bảng 5 cột).
 """
 import re
 import sys
@@ -24,7 +25,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 BEGIN = "<!-- screens:begin"
 END = "<!-- screens:end -->"
-HEADING = "## Phụ lục B — Màn hình (giao diện Figma + bảng mô tả)"
+CAT_BEGIN = "<!-- screens-catalog:begin"
+CAT_END = "<!-- screens-catalog:end -->"
+CAT_HEAD = "| # | Slug | Màn | Status | Thuộc flow | Used by | Mô tả | Figma |\n|---|---|---|---|---|---|---|---|"
 HEAD5 = "| # | Items | Control type | Data type | Description |\n|---|---|---|---|---|"
 INDEX_HEAD = ["#", "Flow", "File", "Thiết bị", "Màn", "Figma", "Status", "Updated"]
 TODAY = date.today().isoformat()
@@ -285,21 +288,62 @@ def upsert_index(feature, flow, flow_row, sids, links):
     idx.write_text(text, encoding="utf-8")
 
 
-# ---------- appendix ----------
+# ---------- appendix (SRS Mục 10) ----------
+
+def _screen_blocks(body):
+    """`## Screen:` blocks của 1 file flow → list (slug, tên, khối text)."""
+    out = []
+    for b in re.split(r"(?m)^(?=## Screen: )", body)[1:]:
+        h = re.match(r"## Screen: (\S+) — (.+)", b)
+        if h:
+            out.append((h.group(1), h.group(2).strip(), b))
+    return out
+
+
+def _frs(feature, text):
+    """Mã FR nhắc trong khối màn (gồm dạng viết tắt "FR-{feature}-005, -006") → "FR-005" (feature
+    ngầm hiểu vì catalog nằm trong spec của feature)."""
+    found = set()
+    for m in re.finditer(rf"FR-{re.escape(feature)}-(\d+)((?:\s*(?:,|và)\s*-\d+)*)", text):
+        found.add(m.group(1))
+        found.update(re.findall(r"-(\d+)", m.group(2)))
+    return [f"FR-{n}" for n in sorted(found)]
+
+
+def build_catalog(feature, flows):
+    """Danh mục màn: 1 dòng/màn, mọi flow trong index (cả draft)."""
+    lines = CAT_HEAD.split("\n")
+    for r, fname, body in flows:
+        for slug, name, blk in _screen_blocks(body):
+            sid = re.search(r"\*\*screenId:\*\*\s*(.+)", blk)
+            fig = re.search(r"\*\*Figma:\*\*\s*(\[[^\]]+\]\([^)]+\))", blk)
+            desc = re.search(r"\*\*Mô tả:\*\*\s*(.+)", blk)
+            cells = [str(len(lines) - 1), f"`{slug}`",
+                     f"{sid.group(1).strip()} · {name}" if sid else name,
+                     r.get("Status", "").strip() or "—", Path(fname).stem,
+                     ", ".join(_frs(feature, blk)) or "—",
+                     desc.group(1).strip() if desc else "—", fig.group(1) if fig else "—"]
+            lines.append("| " + " | ".join(cells) + " |")
+    if len(lines) == 2:
+        return "_Chưa có màn Figma nào trong screens/._"
+    return "\n".join(lines)
+
 
 def build_appendix(feature):
+    """→ (khối catalog, khối chi tiết, problems). Chi tiết chỉ lấy flow `approved`."""
     sdir = ROOT / "docs" / feature / "screens"
     idx = read(sdir / f"{feature}-screen-index.md")
     if not idx:
-        return None, [f"Chưa có docs/{feature}/screens/{feature}-screen-index.md — chạy /figma-sync trước"]
-    parts, problems = [], []
+        return None, None, [f"Chưa có docs/{feature}/screens/{feature}-screen-index.md — chạy /figma-sync trước"]
+    flows, parts, problems = [], [], []
     for r in table_after(idx, r"^## Flows"):
-        if r.get("Status", "").strip() != "approved":
-            continue
         fm = re.search(r"\(([^)]+\.md)\)", r.get("File", ""))
         if not fm:
             continue
         body = read(sdir / fm.group(1))
+        flows.append((r, fm.group(1), body))
+        if r.get("Status", "").strip() != "approved":
+            continue
         for img in re.findall(r"!\[[^\]]*\]\((images/[^)]+)\)", body):
             if not (sdir / img).exists():
                 problems.append(f"thiếu ảnh {img}")
@@ -308,12 +352,21 @@ def build_appendix(feature):
         body = re.sub(r"^# .*\n", "", body, count=1)
         body = re.sub(r"^(#{2,5}) ", lambda m: "#" * (len(m.group(1)) + 2) + " ", body, flags=re.M)
         body = body.replace("](images/", "](../screens/images/")
-        parts.append(f"### B.{len(parts) + 1} {r.get('Flow', '')}\n\n_Nguồn: docs/{feature}/screens/{fm.group(1)}_\n\n{body.strip()}\n")
-    if not parts:
-        return None, ["Chưa có flow nào ở trạng thái approved trong screen-index"]
-    head = (f"{BEGIN} — máy sinh bởi _scripts/screens-md.py, KHÔNG sửa tay; sửa screens/*.md "
+        parts.append(f"### Màn hình flow: {r.get('Flow', '')}\n\n_Nguồn: docs/{feature}/screens/{fm.group(1)}_\n\n{body.strip()}\n")
+    note = (f"máy sinh bởi _scripts/screens-md.py, KHÔNG sửa tay; sửa screens/*.md "
             f"(qua /figma-sync) rồi chạy lại. Sinh {TODAY} -->")
-    return f"{head}\n\n" + "\n".join(parts) + f"\n{END}", problems
+    catalog = f"{CAT_BEGIN} — {note}\n\n{build_catalog(feature, flows)}\n\n{CAT_END}"
+    detail_body = "\n".join(parts) if parts else (
+        f"_Chưa chốt màn Figma nào — chạy `/figma-sync {feature} --done`._\n")
+    detail = f"{BEGIN} — {note}\n\n{detail_body}\n{END}"
+    return catalog, detail, problems
+
+
+def _swap(spec, begin, end, block):
+    i, j = spec.find(begin), spec.find(end)
+    if i == -1 or j == -1:
+        return None, None
+    return spec[i:j + len(end)], spec[:i] + block + spec[j + len(end):]
 
 
 def appendix(feature, mode):
@@ -322,33 +375,31 @@ def appendix(feature, mode):
     if not spec:
         print(f"Thiếu {spec_path.relative_to(ROOT)}")
         return 2
-    block, problems = build_appendix(feature)
-    if block is None:
+    catalog, detail, problems = build_appendix(feature)
+    if catalog is None:
         print("; ".join(problems))
         return 2
-    i, j = spec.find(BEGIN), spec.find(END)
+    old_c, new = _swap(spec, CAT_BEGIN, CAT_END, catalog)
+    old_d, new = _swap(new, BEGIN, END, detail) if new else (None, None)
     body = lambda b: b.split("\n", 1)[1] if b else ""
+    if mode in ("--check", "--write") and new is None:
+        print("Mục 10 thiếu marker screens-catalog / screens (xem _templates/srs-spec.md Mục 10) — thêm marker rồi --write")
+        return 2
     if mode == "--check":
-        if i == -1 or j == -1:
-            print("Thiếu Phụ lục B (marker screens) — chạy lại với --write")
-            return 2
         if problems:
-            print("Phụ lục B: " + "; ".join(problems))
+            print("Mục 10 màn hình: " + "; ".join(problems))
             return 1
-        if body(spec[i:j + len(END)]) == body(block):
-            print("Phụ lục B khớp screens/.")
+        if body(old_c) == body(catalog) and body(old_d) == body(detail):
+            print("Mục 10 màn hình khớp screens/.")
             return 0
-        print("Phụ lục B đã CŨ so với screens/ — chạy lại với --write")
+        print("Mục 10 màn hình đã CŨ so với screens/ — chạy lại với --write")
         return 1
     if mode == "--write":
-        if i != -1 and j != -1:
-            new = spec[:i] + block + spec[j + len(END):]
-        else:
-            new = spec.rstrip("\n") + f"\n\n{HEADING}\n\n{block}\n"
         spec_path.write_text(new, encoding="utf-8")
-        print(f"Đã ghi Phụ lục B vào {spec_path.relative_to(ROOT)}" + (f" — cảnh báo: {'; '.join(problems)}" if problems else ""))
+        print(f"Đã ghi danh mục + chi tiết màn vào Mục 10 của {spec_path.relative_to(ROOT)}"
+              + (f" — cảnh báo: {'; '.join(problems)}" if problems else ""))
         return 0
-    print(block)
+    print(catalog + "\n\n" + detail)
     if problems:
         print("Cảnh báo: " + "; ".join(problems), file=sys.stderr)
     return 0

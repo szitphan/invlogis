@@ -165,15 +165,38 @@ Nguồn: [[docs/cross-process-flow/cross-process-flow-object-map.md|Bản đồ 
 | Đã dừng | Đang triển khai | Bước đó được gửi lại, có bản ghi thay thế, hoặc bản ghi bị xoá |
 | Đang triển khai | Đã hoàn thành | Mọi bước chính và nhánh phát sinh đã xong (không tính nhánh Đã huỷ) |
 
-## 10. Screens (tóm tắt — chi tiết ở screens/, Phụ lục B khi chốt)
+## 10. Screens — Design (Figma)
 
-| Màn | Kênh | Mục đích | FR |
-|---|---|---|---|
-| Dòng quy trình (trên màn chi tiết bất kỳ) | Website | Tóm tắt quy trình, mở sơ đồ | 005 |
-| Popup sơ đồ + panel bước | Website | Xem cây, chọn bước, mở chi tiết / bảng công nợ | 006–011, 020 |
-| Danh sách Quy trình | Website | Theo dõi, lọc, tìm, xuất quy trình theo module | 015–020, 022 |
-| Thẻ quy trình (trên màn chi tiết) | Delta Super App | Như dòng quy trình | 005, 021 |
-| Sheet sơ đồ + sheet bước | Delta Super App | Như popup sơ đồ | 006–010, 021 |
+### Danh mục màn
+
+<!-- screens-catalog:begin — máy sinh bởi _scripts/screens-md.py, KHÔNG sửa tay; sửa screens/*.md (qua /figma-sync) rồi chạy lại. Sinh 2026-10-13 -->
+
+| # | Slug | Màn | Status | Thuộc flow | Used by | Mô tả | Figma |
+|---|---|---|---|---|---|---|---|
+| 1 | `record-detail` | 1.1 · web · Màn chi tiết bản ghi có dòng quy trình | approved | view-process | FR-001, FR-002, FR-005, FR-006, FR-012, FR-014 | Màn chi tiết của bản ghi nghiệp vụ, có dòng quy trình ở đầu cho biết bản ghi đang ở bước nào; bấm dòng để mở sơ đồ, có nút tạo nghiệp vụ tiếp theo khi đạt điều kiện. | [1.1 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-117888) |
+| 2 | `process-diagram` | 1.2 · web · Popup sơ đồ — chọn sẵn Ở đây | approved | view-process | FR-001, FR-002, FR-003, FR-005, FR-006, FR-007, FR-008, FR-009, FR-010, FR-020 | Popup sơ đồ cây quy trình mở từ màn chi tiết, chọn sẵn bước "Ở đây" và mở panel của bước đó. | [1.2 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-119271) |
+| 3 | `step-not-created` | 1.3 · web · Panel bước chưa tạo | approved | view-process | FR-008 | Panel của bước chưa tạo bản ghi: mã N/A, nhãn "Chưa tạo", chưa có lịch sử. | [1.3 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-122359) |
+| 4 | `branch-point` | 1.4 · web · Panel ngã rẽ | approved | view-process | FR-008 | Panel ngã rẽ: bước sau chưa xác định vì còn chờ một lựa chọn, liệt kê các hướng có thể đi. | [1.4 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-124576) |
+| 5 | `step-no-permission` | 1.5 · web · Panel không có quyền | approved | view-process | FR-004, FR-009 | Panel của bước người xem không có quyền: vẫn thấy tên, mã, trạng thái, ẩn chi tiết và hiện câu không có quyền. | [1.5 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-123098) |
+| 6 | `debt-step` | 1.6 · web · Panel công nợ | approved | view-process | FR-004, FR-011 | Panel bước công nợ của nhà cung cấp, có trạng thái thanh toán và nút mở bảng công nợ. | [1.6 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-123837) |
+| 7 | `step-previous-records` | 1.7 · web · Panel bước có bản ghi trước | approved | view-process | FR-008, FR-009 | Panel bước nhận bản ghi mới sau khi bản cũ bị từ chối/thu hồi: hiện bản ghi hiện hành kèm số bản ghi trước. | [1.7 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-125315) |
+| 8 | `open-denied` | 1.8 · web · Popup không có quyền mở bản ghi | approved | view-process | FR-010 | Popup báo không có quyền khi mở bản ghi vừa bị thu quyền xem. | [1.8 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-127273) |
+| 9 | `record-deleted` | 1.9 · web · Popup E-cross-process-flow-004 | approved | view-process | FR-010 | Popup báo bản ghi đã bị xoá trong lúc sơ đồ đang mở. | [1.9 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-128058) |
+| 10 | `process-list` | 2.1 · web · Danh sách Quy trình | approved | search-process | FR-001, FR-002, FR-003, FR-009, FR-015, FR-016, FR-017, FR-018, FR-019, FR-020, FR-022 | Danh sách Quy trình trong menu mỗi module: tìm theo mã, lọc, sắp xếp, tuỳ chỉnh cột và xuất file. | [2.1 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-132884) |
+| 11 | `list-process-diagram` | 2.2 · web · Popup sơ đồ trên danh sách | approved | search-process | FR-006, FR-018 | Popup sơ đồ mở từ danh sách: chưa chọn bước nào; chọn bước thì mở panel như khi mở từ màn chi tiết. | [2.2 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-142559) |
+| 12 | `new-record-detail` | 3.1 · web · Màn chi tiết bản ghi mới | approved | create-next-step | FR-003, FR-004, FR-013 | Màn chi tiết của bản ghi vừa tạo từ bước trước: dòng quy trình đã thêm bước mới và gắn "Ở đây". | [3.1 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-157912) |
+| 13 | `step-already-requested` | 3.2 · web · Popup E-cross-process-flow-001 | approved | create-next-step | FR-012, FR-013 | Popup chặn gửi vì bước chỉ nhận 1 bản ghi đã có yêu cầu khác đang chờ duyệt hoặc đã xong. | [3.2 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-158266) |
+| 14 | `has-child-step` | 3.4 · web · Popup E-cross-process-flow-002 | approved | create-next-step | FR-014 | Popup chặn thu hồi/xoá vì bản ghi đã sinh bước con. | [3.4 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-158620) |
+| 15 | `source-revoked` | 3.3 · web · Popup E-cross-process-flow-003 | approved | create-next-step | FR-003 | Popup báo không gửi được vì bản ghi nguồn vừa bị thu hồi; bản nháp được giữ. | [3.3 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-158974) |
+| 16 | `record-detail` | 1.1 · mob · App — màn chi tiết có thẻ quy trình | approved | view-process-mobile | FR-002, FR-005, FR-012, FR-021 | Màn chi tiết trên app, có thẻ quy trình (tên luồng, tiến độ, bước trước); chạm thẻ để mở sheet sơ đồ. | [1.1 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-159935) |
+| 17 | `process-diagram` | 1.2 · mob · App — sheet sơ đồ | approved | view-process-mobile | FR-001, FR-003, FR-006, FR-020, FR-021 | Sheet sơ đồ quy trình mở từ đáy, đánh dấu bước "Ở đây"; chạm bước để mở sheet bước. | [1.2 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-160887) |
+| 18 | `step-sheet` | 4.1 · mob · App — sheet bước | approved | view-process-mobile | FR-009, FR-010 | Sheet chi tiết một bước có bản ghi, chồng lên sheet sơ đồ: trạng thái, lịch sử và nút mở bản ghi. | [4.1 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-162600) |
+| 19 | `step-not-created` | 1.3 · mob · App — sheet bước chưa tạo | approved | view-process-mobile | — | Sheet bước chưa tạo: mã N/A, "Chưa tạo", không có lịch sử và nút. | [1.3 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-163096) |
+| 20 | `branch-point` | 1.4 · mob · App — sheet ngã rẽ | approved | view-process-mobile | — | Sheet ngã rẽ: điều kiện đang chờ và các hướng có thể đi. | [1.4 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-163629) |
+| 21 | `debt-step` | 1.6 · mob · App — sheet công nợ | approved | view-process-mobile | FR-004 | Sheet bước công nợ của nhà cung cấp; app không có nút mở bảng công nợ. | [1.6 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-164169) |
+| 22 | `step-no-permission` | 1.5 · mob · App — sheet bước không có quyền | approved | view-process-mobile | FR-004, FR-009 | Sheet bước người xem không có quyền: hiện câu không có quyền, ẩn lịch sử và nút. | [1.5 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-164723) |
+
+<!-- screens-catalog:end -->
 
 ### Cấu hình UI Common Rules & Components
 
@@ -197,6 +220,534 @@ Nguồn: [[docs/cross-process-flow/cross-process-flow-object-map.md|Bản đồ 
 | GR-19 — Export | Danh sách Quy trình | Có export, PDF + Excel (mặc định GR-19), theo quy định xuất danh sách chung của SRS cũ UC00.00.09 (FR-cross-process-flow-022); quyền: ai xem được menu Quy trình của module thì xuất được |
 
 E-common dùng: E-common-008, E-common-009, E-common-011
+
+<!-- screens:begin — máy sinh bởi _scripts/screens-md.py, KHÔNG sửa tay; sửa screens/*.md (qua /figma-sync) rồi chạy lại. Sinh 2026-10-13 -->
+
+### Màn hình flow: Xem quy trình từ màn chi tiết
+
+_Nguồn: docs/cross-process-flow/screens/view-process.md_
+
+> Flow `view-process` · thiết bị `web` · bảng chép từ `docs/cross-process-flow/html-wireframe/view-process.html` ngày 2026-10-13. Giao diện là frame Figma; bảng 5 cột là hợp đồng — sửa qua `/figma-sync` hoặc `/cr`.
+
+#### Screen: record-detail — Màn chi tiết bản ghi có dòng quy trình
+
+- **screenId:** 1.1 · web
+- **Figma:** [1.1 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-117888)
+- **Mô tả:** Màn chi tiết của bản ghi nghiệp vụ, có dòng quy trình ở đầu cho biết bản ghi đang ở bước nào; bấm dòng để mở sơ đồ, có nút tạo nghiệp vụ tiếp theo khi đạt điều kiện.
+
+![1.1 · web · record-detail](../screens/images/1-1-web-record-detail.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Dòng quy trình | Row | Click | • Xem CMP-09 — Cross Process Flow (#1 Dòng quy trình)<br>• Mục đích: cho người xem biết bản ghi đang ở đâu trong quy trình mà không mở từng phiếu; bấm để mở sơ đồ (FR-cross-process-flow-005, -006)<br>• Đặt đầu màn chi tiết, ngay dưới tiêu đề và vùng hành động<br>• Chỉ hiện khi bản ghi thuộc quy trình. Không thuộc quy trình, hoặc luồng độc lập chưa có nhánh → không hiện gì, màn chi tiết như cũ (D1, R11)<br>• Bấm bất kỳ chỗ nào trên dòng → popup sơ đồ đang tải [1.2] · Loading rồi popup sơ đồ [1.2]<br>• Không làm chậm màn chi tiết: màn hiện trước, dòng quy trình hiện trong tối đa 2 giây (NFR-cross-process-flow-002); đang tải → skeleton [1.1] · Loading; tải lỗi → [1.1] · Load error |
+| 2 | Tên luồng · mã quy trình | Label | ReadOnly | • Vd "Sửa chữa xe khách hàng · QT-HP-0012"<br>• Tên luồng khai trong bảng liên quy trình của nghiệp vụ (BR-cross-process-flow-007)<br>• Mã theo P-mau-ma-quy-trinh (Delta: QT-[Mã chi nhánh]-[YY]-[XXXX], đánh lại số đầu mỗi năm); quy trình tự tạo nên sinh ngay khi bản ghi gốc gửi thành công (FR-cross-process-flow-001)<br>• Giữ chi nhánh lúc tạo dù bản ghi chuyển chi nhánh sau đó; quy trình dựng từ dữ liệu cũ mang dãy QT-[Mã chi nhánh]-LG-[XXXX] (BR-cross-process-flow-004) |
+| 3 | Thanh tiến độ | Progress bar | ReadOnly | • Tỉ lệ bước đã xong trên tổng bước của cây (vd 5/8); tổng gồm bước chính kể cả Chưa tạo, ngã rẽ (tính 1 bước), nhánh phát sinh, bước công nợ — không tính nhánh Đã huỷ và bản ghi Đã thay thế (FR-cross-process-flow-005)<br>• Luôn đi kèm dòng tóm tắt bằng chữ, không chỉ báo bằng hình (NFR-cross-process-flow-005) |
+| 4 | Dòng tóm tắt | Label | ReadOnly | • "Xong x/y bước · n nhánh phát sinh" (R12)<br>• Nhánh phát sinh Đã huỷ (bản ghi bị xoá) không tính vào tiến độ, không chặn quy trình Đã hoàn thành (BR-cross-process-flow-003, -009) |
+| 5 | Bước trước / Phát sinh từ | Label | ReadOnly | • Bản ghi là bước chính: "Bước trước: {tên bước} {mã}"; là nhánh phát sinh: "Phát sinh từ: {tên bước} {mã}" (FR-cross-process-flow-005)<br>• Bản ghi là nút đầu cây: không có dòng này |
+| 6 | Xem sơ đồ › | Link | Click | • Cùng hành động với bấm dòng quy trình; giúp người dùng nhận ra dòng bấm được |
+| 7 | Nút tạo nghiệp vụ tiếp theo (vd "Tạo phiếu xuất kho") | Button | Click | • Ở vùng hành động đầu trang, không đặt trên sơ đồ (R13); là nút chính của nhóm<br>• Chỉ hiện khi bản ghi đạt hành động trigger theo bảng liên quy trình VÀ người xem có quyền tạo (D6, FR-cross-process-flow-012). Không đạt → không hiện nút<br>• Tên nút, form đích và thông tin mang sang form sau khai trong bảng liên quy trình của nghiệp vụ (BR-cross-process-flow-007)<br>• Bấm → form tạo mới đã điền sẵn thông tin mang từ bản ghi này (ngoài feature) — xem flow create-next-step |
+| 8 | Thu hồi / Xoá | Button | Click | • Hành động của nghiệp vụ, không thuộc feature<br>• Bản ghi đã sinh bước con → chặn bằng popup E-cross-process-flow-002 (FR-cross-process-flow-014) — màn [3.4]; hiện chưa nghiệp vụ nào cho thu hồi/xoá khi đã có bước con (spec Mục 11 — giả định) |
+| 9 | Lịch sử (icon đồng hồ) | Button | Click | • Xem CMP-08 — Activity Log của bản ghi đang mở; không thuộc feature, vẽ để đủ vùng hành động |
+
+##### Trạng thái: Load error — Dòng quy trình tải lỗi
+
+- **Figma:** [1.1 · web · record-detail · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-118875)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Thông báo lỗi tại chỗ dòng quy trình | Banner | ReadOnly | • "Không tải được quy trình." nằm đúng vị trí dòng quy trình (FR-cross-process-flow-005)<br>• Chỉ khối này lỗi; phần còn lại của màn chi tiết vẫn dùng bình thường (UC xem quy trình — Minimal Guarantee)<br>• Dùng Banner lỗi khối có Thử lại (design.md › Lỗi trang/khối), không dùng toast |
+| 2 | Thử lại | Button | Click | • Tải lại riêng dòng quy trình; được → [1.1], vẫn lỗi → giữ màn này<br>• Đang tải lại: nút ở trạng thái đang xử lý (design.md › Đang tải) |
+
+##### Trạng thái: Loading — Dòng quy trình đang tải
+
+- **Figma:** [1.1 · web · record-detail · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-118511)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Skeleton dòng quy trình | Skeleton | ReadOnly | • Theo GR-12: khung xám cao bằng dòng thật, không đẩy bố cục khi tải xong (FR-cross-process-flow-005)<br>• Màn chi tiết hiện trước, không chờ dòng quy trình (NFR-cross-process-flow-002); tải xong → [1.1], lỗi → [1.1] · Load error |
+
+#### Screen: process-diagram — Popup sơ đồ — chọn sẵn Ở đây
+
+- **screenId:** 1.2 · web
+- **Figma:** [1.2 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-119271)
+- **Mô tả:** Popup sơ đồ cây quy trình mở từ màn chi tiết, chọn sẵn bước "Ở đây" và mở panel của bước đó.
+
+![1.2 · web · process-diagram](../screens/images/1-2-web-process-diagram.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Popup sơ đồ | Popup | Click | • Xem CMP-09 (#2 Sơ đồ). Mở từ màn chi tiết: chọn sẵn bước "Ở đây" và mở panel bước đó (FR-cross-process-flow-006); app chỉ đánh dấu bước, không tự mở sheet bước<br>• Mặc định vừa khung; hiện đủ trong tối đa 2 giây với cây đến 20 bước, 3 giây với cây đến 50 bước (NFR-cross-process-flow-001); cây trên 20 bước vẫn vẽ đủ, vừa khung (NFR-cross-process-flow-006)<br>• Nền là màn chi tiết đang mở, làm mờ |
+| 2 | Tiêu đề popup | Label | ReadOnly | • "Quy trình {Tên luồng}" · mã quy trình · trạng thái quy trình: Đang triển khai / Đã dừng / Đã hoàn thành (FR-cross-process-flow-002), nhãn chữ |
+| 3 | Đóng × | Button | Click | • Đóng popup → về màn chi tiết [1.1] |
+| 4 | Card tóm tắt | Card | ReadOnly | • Góc trên trái vùng sơ đồ: "Xong x/y bước · n nhánh phát sinh" + thanh tiến độ + số bước theo trạng thái (CMP-09 #2) |
+| 5 | Thẻ bước | Card | Click | • Xem CMP-09 (#3 Thẻ bước): tên bước · mã · trạng thái của bản ghi kèm icon ✓ / đồng hồ / ▶ / ✕ / vòng đứt / ⊘ (R7)<br>• Mã: mã yêu cầu khi bản ghi chưa được duyệt (vd YC-BT-0034), mã bản ghi khi đã duyệt (vd PXK-0410); sửa rồi gửi lại giữ nguyên mã yêu cầu; N/A khi chưa tạo, Theo GR-10 (BR-cross-process-flow-012)<br>• Bước "1 bản ghi" có bản ghi Đã thay thế: thẻ hiện bản ghi hiện hành kèm "+n bản ghi trước" (vd Bồi thường YC-BT-0034) → panel [1.7] (BR-cross-process-flow-011)<br>• Nhánh phát sinh Đã huỷ (bản ghi bị xoá): viền đứt, tên gạch ngang, icon ⊘ + "Đã huỷ" (vd Mua HHDV YC-DMH-0071) (BR-cross-process-flow-009)<br>• Nhãn Phát sinh góc trên trái (R16), ghim "Ở đây" góc trên phải (R10), nhãn module khi bước thuộc module khác (R9)<br>• Mỗi bản ghi 1 thẻ; nhiều phiếu cùng loại cùng nguồn là các thẻ anh em cùng tên, phân biệt bằng mã (BR-cross-process-flow-008) — vd Xuất kho PXK-0410 và PXK-0415<br>• Ngã rẽ đã chốt hướng: thẻ ngã rẽ thành bước của hướng đã chọn, các hướng khác biến mất (FR-cross-process-flow-007)<br>• Mọi bước đều hiện tên, mã, trạng thái kể cả bước người xem không có quyền (FR-cross-process-flow-009)<br>• Chọn thẻ → viền đậm + panel đổi theo bước (màn [1.3]–[1.6], [1.7]) |
+| 6 | Đường nối + nhãn điều kiện | Line | ReadOnly | • Xem CMP-09 (#4): nét liền khi bước đích đã tạo, nét đứt khi chưa tạo; đường từ gốc tới "Ở đây" tô đậm (R10)<br>• Vệt sáng chạy theo chiều đi khi bước đích Đang triển khai, tắt khi thiết bị bật giảm chuyển động (R15, NFR-cross-process-flow-005)<br>• Nhãn điều kiện chỉ trên đường vào bước chính, 1 dòng, tối đa 40 ký tự (bắt buộc), lấy giá trị lúc phát sinh (R17, BR-cross-process-flow-005, -007) |
+| 7 | Thanh phóng to | Button | Click | • − · tỉ lệ hiện tại · + · Vừa khung; phóng 40–250%, kéo để di chuyển (FR-cross-process-flow-006) |
+| 8 | Panel bước | Panel | ReadOnly | • Xem CMP-09 (#6): rộng 300px, nổi đè cột phải; nội dung dài thì cuộn<br>• Đầu panel: tên, mã, trạng thái bản ghi, nhãn Ở đây / Phát sinh / module; nhánh phát sinh có thêm lý do phát sinh, viết cho người dùng đọc, không ghi mã TH (FR-cross-process-flow-008) |
+| 9 | Lịch sử hoạt động | List | ReadOnly | • Theo CMP-08: 5 dòng mới nhất, mới nhất trên cùng — tên tài khoản · ngày giờ dd/mm/yyyy hh:mm (GR-03) · icon · nội dung; dòng "Lý do: …" khi hành động có lý do<br>• Đang tải: skeleton 5 dòng · lỗi: "Không tải được lịch sử." + Thử lại trong khối → [1.2] · History load error · rỗng: "Chưa có hoạt động." (FR-cross-process-flow-008)<br>• CMP-08 khai báo: tên trong câu = tên nghiệp vụ của bước (vd "Lệnh sửa chữa"); tạm dùng bộ câu hiện hành của bản ghi (spec Mục 11 — giả định) |
+| 10 | Xem tất cả | Link | Click | • Mở màn chi tiết bản ghi của bước (CMP-09 #6) |
+| 11 | Mở màn hình chi tiết | Button | Click | • Nút chính duy nhất, ghim đáy panel (CMP-09 #7)<br>• Mở màn chi tiết bản ghi của bước cùng tab, đóng popup; Back trình duyệt về màn cũ, popup không mở lại (FR-cross-process-flow-010)<br>• Bản ghi vừa bị thu quyền: popup Loại 2 (GR-15) câu E-common-011 + Đóng, ở lại sơ đồ → [1.8] (GR-26 chỉ áp cho app)<br>• Bản ghi đã bị xoá trong lúc sơ đồ đang mở: popup E-cross-process-flow-004 + Tải lại sơ đồ → [1.9] |
+| 12 | Chip Điều kiện x/y | Chip | Click | • Xem CMP-09 #4 (R1): chip trên đường nguồn khi bước có ≥2 bước trước cùng phải xong — vd "Điều kiện 2/2" trên đường Sửa chữa LSC-0930 → Thanh toán TT-0160<br>• Bấm chip → tooltip "Điều kiện" neo dưới chip: mỗi điều kiện 1 dòng ✓ / ○ kèm mã nguồn ("Chốt lệnh SC · LSC-0930", "Khách DK05 trả trước") + "Bước trước khác (đường riêng): Xuất kho PXK-0410, PXK-0415"<br>• Bấm ra ngoài hoặc bấm lại chip để đóng; không đổi bước đang chọn, không mở panel |
+
+##### Trạng thái: Loading — Popup sơ đồ đang tải
+
+- **Figma:** [1.2 · web · process-diagram · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-120011)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Vùng sơ đồ đang tải | Label | ReadOnly | • Override GR-12: "Đang tải sơ đồ…" + khung xám theo hình thẻ bước thay skeleton theo bố cục thật — lý do: mỗi cây một hình, không dựng được skeleton đúng (spec Mục 10)<br>• Tiêu đề popup đã có tên luồng (lấy từ dòng quy trình)<br>• Tải xong → [1.2]; lỗi hệ thống hoặc mất mạng → [1.2] · Load error; mục tiêu tối đa 2 giây (NFR-cross-process-flow-001) |
+| 2 | Đóng × | Button | Click | • Huỷ tải, về màn chi tiết [1.1] |
+
+##### Trạng thái: Load error — Popup sơ đồ lỗi
+
+- **Figma:** [1.2 · web · process-diagram · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-120750)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Khối lỗi trong vùng sơ đồ | Label | ReadOnly | • Tiêu đề "Không tải được sơ đồ." + câu mô tả (FR-cross-process-flow-006)<br>• Lỗi hệ thống: E-common-008 "Đã xảy ra lỗi. Thử lại sau."<br>• Mất mạng: E-common-009 "Mất kết nối. Kiểm tra mạng và thử lại."<br>• Override GR-15: lỗi hiện tại chỗ trong popup kèm Thử lại thay toast Loại 3 — lý do: toast tự ẩn sau 3 giây làm mất nút Thử lại (spec Mục 10) |
+| 2 | Thử lại | Button | Click | • Dưới câu mô tả, giữa vùng sơ đồ; bấm → [1.2] · Loading tải lại |
+| 3 | Đóng × | Button | Click | • Về màn chi tiết [1.1] |
+
+##### Trạng thái: Update banner — Popup sơ đồ có banner cập nhật
+
+- **Figma:** [1.2 · web · process-diagram · Update banner](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-121489)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Banner cập nhật | Banner | ReadOnly | • Theo GR-27, [Đối tượng] = "Quy trình": "Quy trình vừa có cập nhật." đầu vùng nội dung popup (FR-cross-process-flow-020)<br>• Chỉ hiện khi thông tin đang hiện trên sơ đồ đổi ở nơi khác trong lúc popup đang mở; thay đổi không làm đổi thông tin đang hiện thì không báo; không tự tải lại để người dùng không mất chỗ đang xem<br>• Hiện banner tối đa 2 giây sau khi bản ghi đổi (NFR-cross-process-flow-003) |
+| 2 | Tải lại | Button | Click | • Tải cây mới, giữ bước đang chọn, rồi ẩn banner → [1.2] |
+
+##### Trạng thái: History load error — Panel — lịch sử tải lỗi
+
+- **Figma:** [1.2 · web · process-diagram · History load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-126054)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Khối lỗi lịch sử | Banner | ReadOnly | • "Không tải được lịch sử." + Thử lại ngay trong khối lịch sử (FR-cross-process-flow-008)<br>• Override GR-15: lỗi tại chỗ thay toast — lý do: toast tự ẩn làm mất Thử lại (spec Mục 10)<br>• Đầu panel và nút Mở màn hình chi tiết vẫn dùng được |
+| 2 | Thử lại | Button | Click | • Tải lại riêng khối lịch sử; được → [1.2] |
+
+##### Trạng thái: Condition tooltip — Tooltip chip Điều kiện trên đường nối
+
+- **Figma:** [1.2 · web · process-diagram · Condition tooltip](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5627-156590)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Chip "Điều kiện x/y" | Chip | Click | • Xem CMP-09 — Cross Process Flow (#4 Đường nối)<br>• Hiện trên đường nguồn khi nhiều bước trước cùng vào 1 bước (R1); bấm chip mở tooltip |
+| 2 | Tooltip điều kiện | Tooltip | ReadOnly | • Mỗi điều kiện của đường đó 1 dòng: ✓ đã đạt / ○ chưa đạt, kèm mã nguồn<br>• Dòng cuối "Bước trước khác (đường riêng): …"<br>• Bấm ra ngoài tooltip → đóng, giữ nguyên sơ đồ và bước đang chọn |
+
+#### Screen: step-not-created — Panel bước chưa tạo
+
+- **screenId:** 1.3 · web
+- **Figma:** [1.3 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-122359)
+- **Mô tả:** Panel của bước chưa tạo bản ghi: mã N/A, nhãn "Chưa tạo", chưa có lịch sử.
+
+![1.3 · web · step-not-created](../screens/images/1-3-web-step-not-created.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Thẻ bước chưa tạo | Card | Click | • Viền đứt + "Chưa tạo" + mã N/A (R5, GR-10)<br>• Nhánh phát sinh chỉ hiện khi điều kiện đã xảy ra; bước chính bị xoá bản ghi về "Chưa tạo" nét đứt, còn nhánh phát sinh bị xoá thì thành Đã huỷ (BR-cross-process-flow-009) |
+| 2 | Đầu panel | Label | ReadOnly | • Tên, mã N/A, trạng thái "Chưa tạo", nhãn Phát sinh, lý do phát sinh lấy giá trị lúc xảy ra (BR-cross-process-flow-005) |
+| 3 | Câu trạng thái | Label | ReadOnly | • "Chưa có hoạt động. Bước này chưa được tạo." (D2, FR-cross-process-flow-008)<br>• Không có lịch sử, không có nút mở |
+| 4 | Chọn bước khác | Card | Click | • Bấm thẻ khác trên sơ đồ → panel đổi theo bước đó |
+
+#### Screen: branch-point — Panel ngã rẽ
+
+- **screenId:** 1.4 · web
+- **Figma:** [1.4 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-124576)
+- **Mô tả:** Panel ngã rẽ: bước sau chưa xác định vì còn chờ một lựa chọn, liệt kê các hướng có thể đi.
+
+![1.4 · web · branch-point](../screens/images/1-4-web-branch-point.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Thẻ ngã rẽ | Card | Click | • Xem CMP-09 (#5 Nút ngã rẽ): "Chưa xác định …" khi bước sau phụ thuộc lựa chọn chưa có (R6); viền đứt |
+| 2 | Đầu panel | Label | ReadOnly | • Tên ngã rẽ + nhãn điều kiện (vd "Tuỳ nơi sửa") |
+| 3 | Các hướng có thể đi | List | ReadOnly | • Liệt kê từng hướng: lựa chọn → các bước sẽ sinh (D5, FR-cross-process-flow-008)<br>• Nội dung lấy từ bảng liên quy trình của nghiệp vụ (BR-cross-process-flow-007)<br>• Không có lịch sử, không có nút mở |
+
+#### Screen: step-no-permission — Panel không có quyền
+
+- **screenId:** 1.5 · web
+- **Figma:** [1.5 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-123098)
+- **Mô tả:** Panel của bước người xem không có quyền: vẫn thấy tên, mã, trạng thái, ẩn chi tiết và hiện câu không có quyền.
+
+![1.5 · web · step-no-permission](../screens/images/1-5-web-step-no-permission.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Thẻ bước | Card | Click | • Vẫn hiện tên, mã, trạng thái như bước khác (FR-cross-process-flow-009) |
+| 2 | Đầu panel | Label | ReadOnly | • Tên, mã, trạng thái, nhãn và lý do phát sinh — mọi người xem đều thấy (FR-cross-process-flow-009, OQ-20 chốt 12/10) |
+| 3 | Câu không có quyền | Label | ReadOnly | • E-common-011 "Bạn không có quyền xem thông tin này. Liên hệ quản trị viên để được cấp quyền." hiện tại chỗ trong panel<br>• Override GR-26: hiện trong panel thay vì popup chặn — lý do: chỉ 1 bước không xem được, không chặn cả màn (spec Mục 10)<br>• Ẩn lịch sử và nút mở (NFR-cross-process-flow-004); quyền tính theo phân quyền xem của nghiệp vụ ứng với bước đó, như nhau cho mọi người dùng kể cả Lái xe; bước thuộc module khác mà người xem có quyền thì mở bình thường |
+
+#### Screen: debt-step — Panel công nợ
+
+- **screenId:** 1.6 · web
+- **Figma:** [1.6 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-123837)
+- **Mô tả:** Panel bước công nợ của nhà cung cấp, có trạng thái thanh toán và nút mở bảng công nợ.
+
+![1.6 · web · debt-step](../screens/images/1-6-web-debt-step.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Thẻ công nợ | Card | Click | • "Công nợ {Tên nhà cung cấp}" (R8); mỗi cây trả sau có bước Thanh toán riêng trỏ tới bảng công nợ của nhà cung cấp (BR-cross-process-flow-006)<br>• Đang triển khai khi chốt công nợ lần đầu, Đã hoàn thành khi phần công nợ thuộc nghiệp vụ của luồng đã thanh toán, không chờ cả bảng (FR-cross-process-flow-004) |
+| 2 | Đầu panel | Label | ReadOnly | • Tên "Công nợ {Tên NCC}" + trạng thái bước<br>• Quy tắc bảng công nợ (hoàn thành khi nào, nhận thêm đơn không) thuộc SRS Thanh toán |
+| 3 | Mở bảng công nợ | Button | Click | • Thay "Mở màn hình chi tiết" (D4, FR-cross-process-flow-011)<br>• Mở bảng công nợ đã lọc theo nhà cung cấp + khoảng thời gian của bảng công nợ đó (R8)<br>• Chỉ có trên web — Delta Super App không có màn Bảng công nợ (OQ-2 chốt 12/10/2026) |
+
+#### Screen: step-previous-records — Panel bước có bản ghi trước
+
+- **screenId:** 1.7 · web
+- **Figma:** [1.7 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-125315)
+- **Mô tả:** Panel bước nhận bản ghi mới sau khi bản cũ bị từ chối/thu hồi: hiện bản ghi hiện hành kèm số bản ghi trước.
+
+![1.7 · web · step-previous-records](../screens/images/1-7-web-step-previous-records.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Thẻ bước có bản ghi trước | Card | Click | • Bước khai "1 bản ghi" nhận bản ghi mới sau khi bản cũ bị từ chối/thu hồi: thẻ hiện bản ghi hiện hành (YC-BT-0034) kèm "+1 bản ghi trước" (BR-cross-process-flow-011, OQ-4 phương án A)<br>• Trạng thái bước tính theo bản ghi hiện hành; bản cũ không tính vào tiến độ, không làm quy trình Đã dừng |
+| 2 | Khối Bản ghi trước đó | List | Click | • Dưới lịch sử: mỗi bản ghi 1 dòng — mã · nhãn Đã thay thế · ngày bị từ chối/thu hồi · Mở (FR-cross-process-flow-008)<br>• Mở → màn chi tiết bản ghi cũ, theo quyền như FR-cross-process-flow-009; không có quyền thì ẩn Mở<br>• Bản cũ bị xoá → bỏ khỏi khối, không đổi gì khác (BR-cross-process-flow-009)<br>• Sửa bản cũ rồi gửi lại bị chặn bằng E-cross-process-flow-001 (BR-cross-process-flow-011) |
+| 3 | Mở màn hình chi tiết | Button | Click | • Mở bản ghi hiện hành, như [1.2] |
+
+#### Screen: open-denied — Popup không có quyền mở bản ghi
+
+- **screenId:** 1.8 · web
+- **Figma:** [1.8 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-127273)
+- **Mô tả:** Popup báo không có quyền khi mở bản ghi vừa bị thu quyền xem.
+
+![1.8 · web · open-denied](../screens/images/1-8-web-open-denied.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Popup không có quyền | Popup | ReadOnly | • Bản ghi vừa bị thu quyền xem: popup Loại 2 (GR-15) câu E-common-011 "Bạn không có quyền xem thông tin này. Liên hệ quản trị viên để được cấp quyền." (FR-cross-process-flow-010)<br>• Web dùng popup Loại 2 vì GR-26 chỉ áp cho app; quy tắc web đang đề xuất thêm (BL-064) |
+| 2 | Đóng | Button | Click | • Đóng popup, ở lại sơ đồ [1.2] |
+
+#### Screen: record-deleted — Popup E-cross-process-flow-004
+
+- **screenId:** 1.9 · web
+- **Figma:** [1.9 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5587-128058)
+- **Mô tả:** Popup báo bản ghi đã bị xoá trong lúc sơ đồ đang mở.
+
+![1.9 · web · record-deleted](../screens/images/1-9-web-record-deleted.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Popup lỗi | Popup | ReadOnly | • E-cross-process-flow-004, GR-15 Loại 2: "Bản ghi [mã] đã bị xoá." (FR-cross-process-flow-010)<br>• Bản ghi bị xoá trong lúc sơ đồ đang mở; sơ đồ giữ nguyên tới khi tải lại |
+| 2 | Tải lại sơ đồ | Button | Click | • Nút chính: tải lại cây → [1.2] · Loading → [1.2]; bước chính thành "Chưa tạo", nhánh phát sinh thành Đã huỷ (BR-cross-process-flow-009) |
+| 3 | Đóng | Button | Click | • Đóng popup, ở lại sơ đồ như cũ |
+
+### Màn hình flow: Tra cứu danh sách Quy trình
+
+_Nguồn: docs/cross-process-flow/screens/search-process.md_
+
+> Flow `search-process` · thiết bị `web` · bảng chép từ `docs/cross-process-flow/html-wireframe/search-process.html` ngày 2026-10-13. Giao diện là frame Figma; bảng 5 cột là hợp đồng — sửa qua `/figma-sync` hoặc `/cr`.
+
+#### Screen: process-list — Danh sách Quy trình
+
+- **screenId:** 2.1 · web
+- **Figma:** [2.1 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-132884)
+- **Mô tả:** Danh sách Quy trình trong menu mỗi module: tìm theo mã, lọc, sắp xếp, tuỳ chỉnh cột và xuất file.
+
+![2.1 · web · process-list](../screens/images/2-1-web-process-list.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Menu {Module} › Quy trình | Menu | Click | • Xem CMP-11 — mục "Quy trình" trong menu mỗi module<br>• Chỉ hiện với người được Admin cấp quyền theo module (FR-cross-process-flow-019)<br>• Luồng liên module hiện ở danh sách của cả 2 module (FR-cross-process-flow-015)<br>• Chỉ gồm quy trình thuộc chi nhánh người dùng được phân quyền dữ liệu (FR-cross-process-flow-015)<br>• Đang tải → [2.1] · Loading; tải lỗi → khối lỗi [2.1] · Load error; không có quyền menu mà mở thẳng đường dẫn → [2.1] · No permission |
+| 2 | Ô tìm | Textbox | Text | • Theo GR-09: tìm được mã quy trình + mã của bất kỳ bản ghi trong cây; không tìm theo Luồng, Trạng thái, Chi nhánh (dùng bộ lọc)<br>• Tìm mã quy trình, mã yêu cầu hoặc mã bản ghi chứa chuỗi đã gõ ở bất kỳ vị trí nào (vd "0410" ra quy trình chứa PXK-0410), không phân biệt hoa thường, chạy sau khi ngừng gõ 0,3 giây; kết quả trong tối đa 1 giây (FR-cross-process-flow-016, NFR-cross-process-flow-009)<br>• Dưới 3 ký tự: chưa tìm, không báo lỗi (D7); không ra kết quả → [2.1] · No search results<br>• Placeholder "Tìm mã quy trình, mã yêu cầu, mã bản ghi…" (nêu đúng trường tìm được) |
+| 3 | Bộ lọc | Button | Click | • Xem CMP-05 — Filter Drawer. Trường lọc: Luồng (chọn nhiều) · Trạng thái (chọn nhiều) · Chi nhánh (chọn) · Cập nhật lần cuối (khoảng ngày, chỉ ngày) (FR-cross-process-flow-017, GR-20)<br>• Không có giá trị mặc định, không có phụ thuộc giữa các trường<br>• Badge trên nút = số điều kiện đang áp dụng |
+| 4 | Chip điều kiện lọc | Chip | Click | • Hàng 2 thanh công cụ: mỗi điều kiện 1 chip "[Cột]: [giá trị]"; bấm chip → sửa điều kiện, × → xoá điều kiện đó (CMP-05, design.md › Bộ lọc nâng cao) |
+| 5 | Xoá tất cả | Button | Click | • Xoá mọi chip, không xoá từ khoá trong ô tìm; chỉ hiện khi có điều kiện |
+| 6 | Số kết quả | Label | ReadOnly | • "n kết quả" căn phải hàng 2 — tổng duy nhất của danh sách sau tìm + lọc (design.md › Bộ lọc nâng cao) |
+| 7 | Tuỳ chỉnh cột | Button | Click | • Xem CMP-06: 10 cột theo thứ tự FR-cross-process-flow-015, hiện hết mặc định; cột khoá: Mã quy trình |
+| 8 | Xuất ▾ | Button | Click | • Theo GR-19, FR-cross-process-flow-022: PDF hoặc Excel đúng tập dữ liệu đang thấy (sau tìm, lọc, sắp, mọi trang) và đúng các cột đang hiện theo thứ tự đang cấu hình<br>• 1 dòng = 1 quy trình; khối thông tin phụ: Thời gian xuất · Người xuất · Tổng số dòng · Tiêu chí lọc; sheet "DS - Quy trình"; file Export_DanhSach_QuyTrinh_.xlsx; trang in nằm ngang<br>• Ai xem được menu Quy trình của module thì xuất được |
+| 9 | Cột Mã quy trình | Label | ReadOnly | • Theo P-mau-ma-quy-trinh (Delta: QT-[Mã chi nhánh]-[YY]-[XXXX]); quy trình dựng từ dữ liệu cũ: QT-[Mã chi nhánh]-LG-[XXXX], Cập nhật lần cuối = ngày chuyển dữ liệu (vd QT-HP-LG-0004)<br>• Cột khoá, không ẩn được |
+| 10 | Cột Luồng | Label | ReadOnly | • Tên luồng theo bảng liên quy trình |
+| 11 | Cột Bản ghi gốc | Label | ReadOnly | • Tên bước + mã của nút đầu cây |
+| 12 | Cột Phương tiện / khách hàng | Link | Click | • Bấm ô → màn chi tiết Phương tiện hoặc Xe của khách hàng (FR-cross-process-flow-018), ngoài feature<br>• Không có thông tin: "-" (GR-10) |
+| 13 | Cột Tiến độ | Label | ReadOnly | • "Xong x/y bước" |
+| 14 | Cột Nhánh phát sinh | Label | ReadOnly | • Số nhánh phát sinh, căn phải |
+| 15 | Cột Bước đang chờ | Label | ReadOnly | • Bước chờ lâu nhất: tên bước · trạng thái (lấy theo bản ghi) · chờ bao lâu; nhiều bước cùng chờ thì thêm dòng "+n bước khác" (FR-cross-process-flow-015)<br>• Chờ bao lâu tính riêng từng bước, từ lúc bước vào trạng thái hiện tại: "n phút" (dưới 1 giờ) · "n giờ" (dưới 24 giờ) · "n ngày"<br>• Quy trình Đã dừng: hiện bước của luồng chính bị từ chối/thu hồi; nhánh phát sinh bị từ chối không làm quy trình dừng nhưng vẫn hiện ở cột này kèm trạng thái (BR-cross-process-flow-002)<br>• Quy trình Đã hoàn thành: "-" (GR-10) |
+| 16 | Cột Trạng thái | Badge | ReadOnly | • Đang triển khai · Đã dừng · Đã hoàn thành (FR-cross-process-flow-002), nhãn chữ |
+| 17 | Cột Chi nhánh | Label | ReadOnly | • Chi nhánh lúc tạo quy trình (BR-cross-process-flow-004) |
+| 18 | Cột Cập nhật lần cuối | Label | ReadOnly | • dd/mm/yyyy hh:mm, căn giữa<br>• Override GR-18: mặc định sắp giảm dần theo cột này (thay thời gian tạo) — lý do: người theo dõi cần thấy quy trình vừa có biến động trước |
+| 19 | Dòng quy trình | Row | Click | • Bấm dòng (ngoài ô Phương tiện) → popup sơ đồ ngay trên danh sách, chưa chọn bước nào [2.2] (FR-cross-process-flow-018) |
+| 20 | Phân trang | Pagination | Click | • Xem CMP-04, mặc định: trái ô "50 / trang" (25 / 50 / 100), phải Trước · số trang · Sau; không có nhãn tổng (design.md › Phân trang, chốt 12/10/2026)<br>• Mẫu chỉ 46 kết quả nên có 1 trang; theo design.md 1 trang thì ẩn số trang và Trước/Sau — vẽ để minh hoạ vị trí |
+
+##### Trạng thái: Empty — Danh sách rỗng
+
+- **Figma:** [2.1 · web · process-list · Empty](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-144980)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Trạng thái rỗng | Label | ReadOnly | • Theo GR-12: "Chưa có quy trình nào." + "Quy trình tự tạo khi có bản ghi đầu tiên được gửi."<br>• Không có nút Tạo mới — quy trình chỉ tạo tự động (FR-cross-process-flow-001) |
+| 2 | Ô tìm, Bộ lọc, Xuất | Button | Click | • Vẫn hiện như màn [2.1] |
+
+##### Trạng thái: Loading — Danh sách đang tải
+
+- **Figma:** [2.1 · web · process-list · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-137717)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Skeleton bảng | Skeleton | ReadOnly | • Theo GR-12: skeleton theo 10 cột đang hiện (FR-cross-process-flow-015)<br>• Trang 50 dòng hiện trong tối đa 2 giây (NFR-cross-process-flow-009)<br>• Thanh công cụ và bộ lọc dùng được ngay; tải xong → [2.1] / [2.1] · Empty, lỗi → [2.1] · Load error |
+
+##### Trạng thái: Load error — Danh sách tải lỗi
+
+- **Figma:** [2.1 · web · process-list · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-152243)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Khối lỗi | Label | ReadOnly | • Thay vùng bảng: "Không tải được danh sách." + câu E-common-008 (FR-cross-process-flow-015)<br>• Override GR-15: khối lỗi tại chỗ thay toast — lý do: toast tự ẩn sau 3 giây làm mất nút Thử lại (spec Mục 10)<br>• Giữ thanh công cụ, ô tìm và chip lọc đang chọn |
+| 2 | Thử lại | Button | Click | • Tải lại với đúng ô tìm và bộ lọc đang chọn → [2.1] · Loading |
+
+##### Trạng thái: No filter results — Lọc không ra kết quả
+
+- **Figma:** [2.1 · web · process-list · No filter results](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-149822)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Trạng thái không có kết quả | Label | ReadOnly | • Ô tìm trống, bộ lọc ra 0 dòng: "Không có quy trình phù hợp với bộ lọc." (FR-cross-process-flow-017)<br>• Có từ khoá trong ô tìm → dùng câu của [2.1] · No search results<br>• Không có nút Tạo mới |
+| 2 | Xoá bộ lọc | Button | Click | • Xoá mọi điều kiện lọc → [2.1] |
+
+##### Trạng thái: No permission — Trang không có quyền
+
+- **Figma:** [2.1 · web · process-list · No permission](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-154664)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Nội dung không có quyền | Label | ReadOnly | • Người không có quyền menu Quy trình mở thẳng đường dẫn danh sách: vùng nội dung hiện câu E-common-011 "Bạn không có quyền xem thông tin này. Liên hệ quản trị viên để được cấp quyền." (FR-cross-process-flow-019)<br>• Menu bên trái không có mục Quy trình; quy tắc chung cho web đang đề xuất thêm (BL-064) |
+| 2 | Về trang chủ | Button | Click | • Về trang chủ của người dùng |
+
+##### Trạng thái: No search results — Tìm không ra
+
+- **Figma:** [2.1 · web · process-list · No search results](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-147401)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Trạng thái không có kết quả | Label | ReadOnly | • Theo GR-12: "Không tìm thấy quy trình chứa mã "[mã]"." — [mã] là chuỗi đang gõ<br>• Không có nút Tạo mới |
+| 2 | Xoá bộ lọc | Button | Click | • Xoá ô tìm và mọi điều kiện lọc → [2.1] (UC tra cứu 5a2) |
+
+##### Trạng thái: Update banner — Danh sách có banner cập nhật
+
+- **Figma:** [2.1 · web · process-list · Update banner](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-140138)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Banner cập nhật | Banner | ReadOnly | • Theo GR-27, [Đối tượng] = "Danh sách": "Danh sách vừa có cập nhật." đầu vùng nội dung (FR-cross-process-flow-020)<br>• Không tự tải lại; hiện banner tối đa 2 giây sau khi bản ghi đổi (NFR-cross-process-flow-003) |
+| 2 | Tải lại | Button | Click | • Tải dữ liệu mới, giữ ô tìm + bộ lọc + trang đang xem, rồi ẩn banner → [2.1] |
+
+#### Screen: list-process-diagram — Popup sơ đồ trên danh sách
+
+- **screenId:** 2.2 · web
+- **Figma:** [2.2 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-142559)
+- **Mô tả:** Popup sơ đồ mở từ danh sách: chưa chọn bước nào; chọn bước thì mở panel như khi mở từ màn chi tiết.
+
+![2.2 · web · list-process-diagram](../screens/images/2-2-web-list-process-diagram.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Popup sơ đồ | Popup | Click | • Như [1.2] nhưng mở từ danh sách: chưa chọn bước nào, panel đóng, không có ghim "Ở đây" (FR-cross-process-flow-006, -018)<br>• Chọn bước → panel như [1.2] (có bản ghi), [1.3] chưa tạo, [1.4] ngã rẽ, [1.5] không có quyền, [1.6] công nợ, [1.7] có bản ghi trước |
+| 2 | Đóng × | Button | Click | • Về danh sách [2.1], giữ ô tìm và bộ lọc |
+| 3 | Chip Điều kiện x/y | Chip | Click | • Như [1.2] (Xem CMP-09 #4): bấm chip → tooltip điều kiện neo dưới chip; popup vẫn chưa chọn bước nào |
+
+### Màn hình flow: Tạo nghiệp vụ tiếp theo, chặn thu hồi/xoá
+
+_Nguồn: docs/cross-process-flow/screens/create-next-step.md_
+
+> Flow `create-next-step` · thiết bị `web` · bảng chép từ `docs/cross-process-flow/html-wireframe/create-next-step.html` ngày 2026-10-13. Giao diện là frame Figma; bảng 5 cột là hợp đồng — sửa qua `/figma-sync` hoặc `/cr`.
+
+#### Screen: new-record-detail — Màn chi tiết bản ghi mới
+
+- **screenId:** 3.1 · web
+- **Figma:** [3.1 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-157912)
+- **Mô tả:** Màn chi tiết của bản ghi vừa tạo từ bước trước: dòng quy trình đã thêm bước mới và gắn "Ở đây".
+
+![3.1 · web · new-record-detail](../screens/images/3-1-web-new-record-detail.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Dòng quy trình | Row | Click | • Như [1.1]; bước mới gắn "Ở đây" khi người tạo vào màn chi tiết (FR-cross-process-flow-003)<br>• "Bước trước: Sửa chữa LSC-0930"; tóm tắt cập nhật số bước ("Xong 5/9 bước · 3 nhánh phát sinh")<br>• Ghi nhận gửi và thêm bước cùng thành công hoặc cùng không; cây không nhận thì bản ghi giữ nháp (FR-cross-process-flow-003) |
+| 2 | Thẻ bước mới trên sơ đồ | Card | Click | • Bản ghi gửi thành công → bước Đang triển khai nối về bản ghi tạo ra nó (R1, FR-cross-process-flow-003, -004)<br>• Bước khai "nhiều bản ghi" (Xuất kho): YC-PXK-0418 thành bước anh em thứ 3 cạnh PXK-0410, PXK-0415, không ghi "lần 1/2" (BR-cross-process-flow-008, FR-cross-process-flow-013) |
+| 3 | Trạng thái bản ghi | Badge | ReadOnly | • Trạng thái của nghiệp vụ (vd "Chờ phê duyệt")<br>• Chưa được duyệt nên tiêu đề và thẻ bước mang mã yêu cầu YC-PXK-0418; duyệt xong đổi sang mã bản ghi (BR-cross-process-flow-012) |
+| 4 | Toast gửi thành công | Toast | ReadOnly | • Theo toast của nghiệp vụ được tạo (CMP-01); liên quy trình không tự gửi thông báo (BR-cross-process-flow-010) |
+
+#### Screen: step-already-requested — Popup E-cross-process-flow-001
+
+- **screenId:** 3.2 · web
+- **Figma:** [3.2 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-158266)
+- **Mô tả:** Popup chặn gửi vì bước chỉ nhận 1 bản ghi đã có yêu cầu khác đang chờ duyệt hoặc đã xong.
+
+![3.2 · web · step-already-requested](../screens/images/3-2-web-step-already-requested.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Popup lỗi | Popup | ReadOnly | • E-cross-process-flow-001, GR-15 Loại 2 Popup, không có Thử lại (FR-cross-process-flow-013)<br>• Đang chờ: "Bước [Tên bước] đã có yêu cầu khác đang chờ phê duyệt. Chờ yêu cầu đó được xử lý rồi gửi lại." — [Tên bước] = bước khai "1 bản ghi" đang gửi<br>• Đã xong: "Bước [Tên bước] đã hoàn thành với [mã]. Không gửi thêm được."; gửi lại bản ghi Đã thay thế cũng chặn bằng lỗi này (BR-cross-process-flow-011)<br>• Hai người cùng gửi thì chỉ người gửi trước được nhận; bản cũ đang Đã thu hồi/từ chối thì không chặn — bản mới thay thế (xem [1.7])<br>• Tiêu đề popup "Không thể gửi"; app: sheet lỗi Loại 2 cùng nội dung (FR-cross-process-flow-012) |
+| 2 | Đóng | Button | Click | • Đóng popup, form giữ nguyên, bản nháp giữ lại (FR-cross-process-flow-013)<br>• Tải lại màn bản ghi trước thì nút tạo ẩn theo điều kiện của nghiệp vụ (UC tạo nghiệp vụ 5a2) |
+
+#### Screen: has-child-step — Popup E-cross-process-flow-002
+
+- **screenId:** 3.4 · web
+- **Figma:** [3.4 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-158620)
+- **Mô tả:** Popup chặn thu hồi/xoá vì bản ghi đã sinh bước con.
+
+![3.4 · web · has-child-step](../screens/images/3-4-web-has-child-step.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Popup lỗi | Popup | ReadOnly | • E-cross-process-flow-002, GR-15 Loại 2 Popup, không có Thử lại (FR-cross-process-flow-014)<br>• Thu hồi: "Không thể thu hồi vì đã có [Danh sách bước] tạo từ bản ghi này." · Xoá: tiêu đề "Không thể xoá", câu "Không thể xoá vì đã có [Danh sách bước] tạo từ bản ghi này."<br>• [Danh sách bước] = tối đa 2 bước kèm mã, thêm "và n bước khác" khi nhiều hơn (vd LSC-0930 có 5 bước con)<br>• Hiện chưa nghiệp vụ nào cho thu hồi/xoá khi đã có bước con (spec Mục 11 — giả định) |
+| 2 | Đóng | Button | Click | • Về màn chi tiết [1.1], bản ghi giữ nguyên trạng thái |
+
+#### Screen: source-revoked — Popup E-cross-process-flow-003
+
+- **screenId:** 3.3 · web
+- **Figma:** [3.3 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-158974)
+- **Mô tả:** Popup báo không gửi được vì bản ghi nguồn vừa bị thu hồi; bản nháp được giữ.
+
+![3.3 · web · source-revoked](../screens/images/3-3-web-source-revoked.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Popup lỗi | Popup | ReadOnly | • E-cross-process-flow-003, GR-15 Loại 2: bản ghi nguồn vừa bị thu hồi trong lúc gửi — thu hồi thắng (FR-cross-process-flow-003)<br>• Câu: "Không thể gửi vì [Tên bước] [mã] vừa bị thu hồi. Bản nháp đã được giữ."<br>• Bản ghi không được ghi nhận gửi, cây không đổi; app: sheet lỗi Loại 2 cùng nội dung |
+| 2 | Giữ bản nháp | Button | Click | • Nút chính: đóng popup, bản nháp giữ lại chờ bản ghi nguồn được gửi lại |
+| 3 | Xoá bản nháp | Button | Click | • Nút phụ kiểu nguy hiểm; Xem CMP-03 để xác nhận rồi xoá bản nháp |
+
+### Màn hình flow: Xem quy trình trên Delta Super App
+
+_Nguồn: docs/cross-process-flow/screens/view-process-mobile.md_
+
+> Flow `view-process-mobile` · thiết bị `mob` · bảng chép từ `docs/cross-process-flow/html-wireframe/view-process-mobile.html` ngày 2026-10-13. Giao diện là frame Figma; bảng 5 cột là hợp đồng — sửa qua `/figma-sync` hoặc `/cr`.
+
+#### Screen: record-detail — App — màn chi tiết có thẻ quy trình
+
+- **screenId:** 1.1 · mob
+- **Figma:** [1.1 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-159935)
+- **Mô tả:** Màn chi tiết trên app, có thẻ quy trình (tên luồng, tiến độ, bước trước); chạm thẻ để mở sheet sơ đồ.
+
+![1.1 · mob · record-detail](../screens/images/1-1-mob-record-detail.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Thẻ quy trình | Card | Click | • Xem CMP-09 Mobile: tên luồng là chính ("Sửa chữa xe Delta"), dòng tóm tắt là phụ: thanh tiến độ · "Xong x/y bước · n nhánh phát sinh" · "Bước trước / Phát sinh từ" (FR-cross-process-flow-005, -021)<br>• Không thuộc quy trình hoặc luồng độc lập chưa có nhánh → không có thẻ (D1)<br>• Chạm thẻ → sheet đang tải [1.2] · Loading rồi sheet sơ đồ [1.2]; tải lỗi → [1.1] · Load error<br>• Thẻ hiện trong tối đa 2 giây, không bắt màn chi tiết chờ (NFR-cross-process-flow-002); đang tải → skeleton thẻ [1.1] · Loading |
+| 2 | Header màn chi tiết | Header | Click | • ← quay lại · mã bản ghi · icon lịch sử Xem CMP-08 (Mobile); thuộc nghiệp vụ |
+| 3 | Nút tạo nghiệp vụ tiếp theo | Button | Click | • Chỉ có ở nghiệp vụ có màn trên app (cột "Có trên app" của bảng liên quy trình), cùng điều kiện D6 như web; nút cố định đáy (thumb zone) (FR-cross-process-flow-012)<br>• Lỗi E-cross-process-flow-001 / -003 khi gửi: sheet lỗi Loại 2 (GR-15 Mobile), nội dung như [3.2] / [3.3] |
+
+##### Trạng thái: Load error — App — thẻ quy trình tải lỗi
+
+- **Figma:** [1.1 · mob · record-detail · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-160682)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Thẻ lỗi | Banner | ReadOnly | • "Không tải được quy trình." thay chỗ thẻ quy trình; màn chi tiết vẫn dùng bình thường (FR-cross-process-flow-005) |
+| 2 | Thử lại | Button | Click | • Vùng chạm tối thiểu 44 (design.md › Touch Targets); được → [1.1] |
+
+##### Trạng thái: Loading — App — thẻ quy trình đang tải
+
+- **Figma:** [1.1 · mob · record-detail · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-160508)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Skeleton thẻ quy trình | Skeleton | ReadOnly | • Theo GR-12 (Mobile): skeleton theo hình thẻ thật, có shimmer; tải xong chuyển mờ sang thẻ [1.1] (FR-cross-process-flow-005)<br>• Màn chi tiết dùng được ngay; tải lỗi → [1.1] · Load error |
+
+#### Screen: process-diagram — App — sheet sơ đồ
+
+- **screenId:** 1.2 · mob
+- **Figma:** [1.2 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-160887)
+- **Mô tả:** Sheet sơ đồ quy trình mở từ đáy, đánh dấu bước "Ở đây"; chạm bước để mở sheet bước.
+
+![1.2 · mob · process-diagram](../screens/images/1-2-mob-process-diagram.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Sheet sơ đồ | BottomSheet | Click | • Xem CMP-09 Mobile: mở từ đáy, che gần hết màn; header tên luồng + mã + trạng thái quy trình + ×<br>• Vuốt xuống, chạm nền hoặc × → đóng, về [1.1] (conventions — BottomSheet)<br>• Hiện đủ trong tối đa 2 giây (NFR-cross-process-flow-001) |
+| 2 | Card tóm tắt | Card | ReadOnly | • Xem CMP-09 Mobile: thanh tiến độ + số bước theo trạng thái ("4 xong · 2 đang chờ/làm · 1 chưa tạo"); không lặp dòng "Xong x/y bước" (đã có ở thẻ [1.1]) |
+| 3 | Cây dọc | Tree | Click | • Cây rẽ nhánh dọc, thẻ cùng dạng web (R7, R16, R10); vuốt ngang khi cây rộng hơn màn (FR-cross-process-flow-021)<br>• Mở từ màn chi tiết: thẻ "Ở đây" được chọn sẵn (viền đậm) — sheet bước chưa tự mở để không che cây<br>• Chụm hai ngón để thu phóng, vuốt để kéo; không có nút thu phóng (FR-cross-process-flow-006, -021)<br>• Chạm thẻ → sheet bước [4.1], [1.3]–[1.6] |
+| 4 | Chip Điều kiện x/y | Chip | Click | • Xem CMP-09 Mobile: chạm chip trên đường → tooltip như web [1.2] (mỗi điều kiện 1 dòng ✓ / ○ kèm mã nguồn + "Bước trước khác (đường riêng): …"), neo dưới chip, rộng tối đa bằng vùng cây<br>• Chạm ra ngoài hoặc chạm lại chip để đóng; không mở sheet bước<br>• Cây mẫu LSC-0941 chưa có bước nào ≥2 bước trước cùng vào — chip chỉ hiện khi có |
+
+##### Trạng thái: Loading — App — sheet sơ đồ đang tải
+
+- **Figma:** [1.2 · mob · process-diagram · Loading](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-161816)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Sheet đang tải | BottomSheet | ReadOnly | • Theo GR-12 (Mobile): "Đang tải sơ đồ…" + khung xám theo hình thẻ<br>• Tải xong → [1.2]; lỗi → [1.2] · Load error |
+
+##### Trạng thái: Load error — App — sheet sơ đồ lỗi
+
+- **Figma:** [1.2 · mob · process-diagram · Load error](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-161987)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Khối lỗi trong sheet | Label | ReadOnly | • Tiêu đề "Không tải được sơ đồ." + câu E-common-008 "Đã xảy ra lỗi. Thử lại sau." hoặc E-common-009 "Mất kết nối. Kiểm tra mạng và thử lại." (FR-cross-process-flow-006)<br>• Override GR-15: lỗi tại chỗ thay toast (spec Mục 10) |
+| 2 | Thử lại | Button | Click | • Nút chính dưới câu mô tả; chạm → [1.2] · Loading |
+
+##### Trạng thái: Update banner — App — sheet sơ đồ có banner
+
+- **Figma:** [1.2 · mob · process-diagram · Update banner](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-162173)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Banner cập nhật | Banner | ReadOnly | • Theo GR-27 (Mobile): ngay dưới header sheet, "Quy trình vừa có cập nhật." (FR-cross-process-flow-020)<br>• Hiện banner tối đa 2 giây sau khi bản ghi đổi (NFR-cross-process-flow-003) |
+| 2 | Tải lại | Button | Click | • Tải lại cây, giữ bước đang chọn → [1.2] |
+
+#### Screen: step-sheet — App — sheet bước
+
+- **screenId:** 4.1 · mob
+- **Figma:** [4.1 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-162600)
+- **Mô tả:** Sheet chi tiết một bước có bản ghi, chồng lên sheet sơ đồ: trạng thái, lịch sử và nút mở bản ghi.
+
+![4.1 · mob · step-sheet](../screens/images/4-1-mob-step-sheet.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Sheet bước | BottomSheet | ReadOnly | • Chồng lên sheet sơ đồ; đầu sheet: tên, mã, pill trạng thái có viền, nhãn đặt bên phải, không nền màu (CMP-09 Mobile)<br>• Không header riêng, không ×: dòng đầu "‹ Sơ đồ quy trình" (Button Ghost LG) hoặc vuốt xuống / chạm nền → về sheet sơ đồ [1.2] (CMP-09 Mobile) |
+| 2 | Lịch sử hoạt động | List | ReadOnly | • Theo CMP-08: 5 dòng mới nhất + "Xem tất cả" (mẫu có 2 dòng vì bản ghi mới có 2 hoạt động) |
+| 3 | Mở màn hình chi tiết | Button | Click | • Nút chính full width cố định đáy; đẩy màn mới, Back về màn trước, sheet đã đóng (FR-cross-process-flow-010)<br>• Chỉ có nút khi app có màn chi tiết của loại bản ghi đó (hiện có Đơn mua HHDV, Lệnh sửa chữa, Báo cáo sự cố); loại khác: sheet vẫn có lịch sử, không có nút (FR-cross-process-flow-009)<br>• Bản ghi vừa bị thu quyền: Theo GR-26 popup chặn E-common-011 "Bạn không có quyền xem thông tin này. Liên hệ quản trị viên để được cấp quyền.", nút Quay lại về sheet sơ đồ<br>• Bản ghi đã bị xoá: sheet lỗi Loại 2 E-cross-process-flow-004 + Tải lại sơ đồ, nội dung như [1.9] |
+
+#### Screen: step-not-created — App — sheet bước chưa tạo
+
+- **screenId:** 1.3 · mob
+- **Figma:** [1.3 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-163096)
+- **Mô tả:** Sheet bước chưa tạo: mã N/A, "Chưa tạo", không có lịch sử và nút.
+
+![1.3 · mob · step-not-created](../screens/images/1-3-mob-step-not-created.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Sheet bước chưa tạo | BottomSheet | ReadOnly | • Mã N/A (GR-10), "Chưa tạo"; "Chưa có hoạt động. Bước này chưa được tạo." (D2)<br>• Không có lịch sử, không có nút |
+
+#### Screen: branch-point — App — sheet ngã rẽ
+
+- **screenId:** 1.4 · mob
+- **Figma:** [1.4 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-163629)
+- **Mô tả:** Sheet ngã rẽ: điều kiện đang chờ và các hướng có thể đi.
+
+![1.4 · mob · branch-point](../screens/images/1-4-mob-branch-point.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Sheet ngã rẽ | BottomSheet | ReadOnly | • Tên "Chưa xác định nơi sửa", dòng phụ = điều kiện ("Tuỳ nơi sửa"), chip chờ theo điều kiện khai ở bảng liên quy trình (Delta: "Chờ chọn gara", Vàng)<br>• Khối "Hướng có thể đi" lấy từ bảng liên quy trình (D5, R6) + câu "Chốt nơi sửa khi phê duyệt báo giá thì ngã rẽ thành nhánh thật."<br>• Không có lịch sử, không có nút |
+
+#### Screen: debt-step — App — sheet công nợ
+
+- **screenId:** 1.6 · mob
+- **Figma:** [1.6 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-164169)
+- **Mô tả:** Sheet bước công nợ của nhà cung cấp; app không có nút mở bảng công nợ.
+
+![1.6 · mob · debt-step](../screens/images/1-6-mob-debt-step.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Sheet công nợ | BottomSheet | ReadOnly | • Tên "Công nợ", dòng phụ tên NCC, chip trạng thái bước (R8, FR-cross-process-flow-004)<br>• Khối "Chứng từ": dòng "Công nợ {Tên NCC}" + chip "Chưa đối soát" (theo component CMP-09)<br>• KHÔNG có nút "Mở bảng công nợ" — Delta Super App không có màn Bảng công nợ (OQ-2 chốt 12/10/2026) |
+
+#### Screen: step-no-permission — App — sheet bước không có quyền
+
+- **screenId:** 1.5 · mob
+- **Figma:** [1.5 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-164723)
+- **Mô tả:** Sheet bước người xem không có quyền: hiện câu không có quyền, ẩn lịch sử và nút.
+
+![1.5 · mob · step-no-permission](../screens/images/1-5-mob-step-no-permission.png)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Sheet không có quyền | BottomSheet | ReadOnly | • E-common-011 "Bạn không có quyền xem thông tin này. Liên hệ quản trị viên để được cấp quyền." tại chỗ; ẩn lịch sử và nút (FR-cross-process-flow-009, NFR-cross-process-flow-004)<br>• Override GR-26 như web (spec Mục 10)<br>• Quyền theo phân quyền xem của nghiệp vụ ứng với bước, như nhau cho mọi người dùng kể cả Lái xe; lý do phát sinh vẫn hiện nếu có (FR-cross-process-flow-009) |
+
+<!-- screens:end -->
 
 ## 11. Constraints, Dependencies & Assumptions
 
@@ -267,9 +818,36 @@ E-common dùng: E-common-008, E-common-009, E-common-011
 
 ## Phụ lục A — UI Common Rules & Components áp dụng
 
-<!-- ui-common:begin — máy sinh bởi _scripts/ui-common-expand.py, KHÔNG sửa tay; sửa ở nguồn rồi chạy lại. Sinh 2026-10-12 -->
+<!-- ui-common:begin — máy sinh bởi _scripts/ui-common-expand.py, KHÔNG sửa tay; sửa ở nguồn rồi chạy lại. Sinh 2026-10-13 -->
 
 ### A.1 Component dùng chung (CMP)
+
+#### CMP-01 — Toast Notification
+
+_Nguồn: `design/ui-common/screen-patterns.md:62`_
+
+Thông báo ngắn góc trên phải, tự ẩn sau 3 giây, không chặn thao tác.
+
+![CMP-01](../../../design/ui-common/images/cmp-01.png)
+_Ảnh: Toast "Đã lưu thay đổi." — node [5080:2503](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=5080-2503), xuất PNG 2x._
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Toast thành công | Toast | ReadOnly | • Sau khi hành động hoàn tất<br>• Câu: mẫu "Đã {hành động}" theo design.md › Copy động › Toast; thêm `[Hoàn tác]` nếu đảo ngược được |
+| 2 | Toast lỗi | Toast | ReadOnly | • Chỉ cho lỗi kỹ thuật/hệ thống (GR-15 Loại 3) — `E-common-008..010`<br>• Lỗi của trường → inline; lỗi nghiệp vụ server → Popup Error (GR-15) |
+| 3 | Toast cảnh báo | Toast | ReadOnly | • Cảnh báo không chặn hành động |
+| 4 | Toast thông tin | Toast | ReadOnly | • Hướng dẫn hoặc trạng thái trung gian |
+
+- **Figma:** Astryx `Toast` · node: [172:56853](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=172-56853)
+- **design.md:** Copy động
+- **UC phải khai báo:** hành động nào có toast thành công + động từ dùng trong câu; hành động có `[Hoàn tác]` không.
+
+##### Mobile
+
+- Cùng 4 loại và câu chữ như web. Toast lỗi nền error cho lỗi không gắn với trường nào (lỗi server,
+  lỗi mạng — `E-common-008`, `E-common-009`).
+- Vị trí và thời gian hiện trên màn app: chưa có chuẩn trong design.md.
+- **Figma:** chưa gắn.
 
 #### CMP-02 — In-app Notification
 
@@ -482,11 +1060,11 @@ Chỉ dùng cho quy trình nhiều nghiệp vụ. Vòng đời của 1 bản ghi
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
 | 1 | Dòng quy trình | Row | Click | • Web: đầu màn chi tiết · Mobile: thẻ quy trình<br>• Tên luồng · thanh tiến độ · "Xong x/y bước · n nhánh phát sinh" · "Bước trước: …" (bước chính) hoặc "Phát sinh từ: …" (nhánh phát sinh)<br>• Bản ghi không thuộc quy trình, hoặc luồng độc lập chưa có nhánh → không hiện (R11)<br>• Tải lỗi → "Không tải được quy trình." + Thử lại; màn chi tiết vẫn dùng bình thường |
-| 2 | Sơ đồ | Popup (web) · Sheet (mobile) | Click | • Mở từ màn chi tiết: chọn sẵn bước "Ở đây" · mở từ danh sách Quy trình: chưa chọn bước nào<br>• Mặc định vừa khung; zoom 40–250%, kéo, nút vừa khung<br>• Card tóm tắt góc trên trái: thanh tiến độ + số bước theo trạng thái<br>• Đang tải: "Đang tải sơ đồ…" · lỗi: E-common-008 / E-common-009 + Thử lại · dữ liệu đổi: Theo GR-27 |
-| 3 | Thẻ bước | Card | Click | • Icon nghiệp vụ · tên bước · mã chứng từ (`N/A` khi chưa tạo) · trạng thái của bản ghi (R7)<br>• Nhãn Phát sinh góc trên trái (R16) · ghim "Ở đây" góc trên phải (R10) · nhãn module khi khác module đang mở (R9)<br>• Bước chính chưa tới: viền đứt + "Chưa tạo" (R5)<br>• Chọn → viền màu + mở panel (#6) |
-| 4 | Đường nối | Line | ReadOnly | • Nét liền: đã tạo · nét đứt: chưa tạo · vệt sáng chạy theo chiều đi khi bước đích Đang triển khai, tắt khi người dùng bật giảm chuyển động (R15)<br>• Trên đường chỉ có nhãn điều kiện của bước chính, 1 dòng, viết cho người dùng đọc (R16, R17)<br>• Nhiều bước trước cùng vào 1 bước: mỗi đường 1 cửa vào, chip "Điều kiện x/y" trên đường nguồn (R1) |
+| 2 | Sơ đồ | Popup (web) · Sheet (mobile) | Click | • Mở từ màn chi tiết: chọn sẵn bước "Ở đây" · mở từ danh sách Quy trình: chưa chọn bước nào<br>• Mặc định vừa khung; zoom 40–250%, kéo, nút vừa khung<br>• Card tóm tắt góc trên trái: thanh tiến độ + số bước theo trạng thái<br>• Đang tải: `Skeleton` theo hình khối thật (tóm tắt + thẻ cây, GR-12) + "Đang tải sơ đồ…" (giữ tên luồng, ẩn zoom/panel) · lỗi: `EmptyState` icon wifi-off "Không tải được sơ đồ." + câu E-common-008 / E-common-009 + Thử lại · dữ liệu đổi: Theo GR-27 |
+| 3 | Thẻ bước | Card | Click | • Icon nghiệp vụ · tên bước · mã chứng từ (`N/A` khi chưa tạo) · chip trạng thái của bản ghi (R7, R18)<br>• Nhãn Phát sinh góc trên trái (R16) · ghim "Ở đây" góc trên phải (R10)<br>• Bước chính chưa tới: viền đứt + "Chưa tạo" (R5)<br>• Chọn → viền màu + mở panel (#6) |
+| 4 | Đường nối | Line | ReadOnly | • Nét liền: đã tạo · nét đứt: chưa tạo · vệt sáng chạy theo chiều đi khi bước đích Đang triển khai, tắt khi người dùng bật giảm chuyển động (R15)<br>• Trên đường chỉ có nhãn điều kiện của bước chính, 1 dòng, viết cho người dùng đọc (R16, R17)<br>• Nhiều bước trước cùng vào 1 bước: mỗi đường 1 cửa vào, chip "Điều kiện x/y" trên đường nguồn (R1); bấm chip → tooltip: mỗi điều kiện của đường đó 1 dòng (✓ / ○, kèm mã nguồn) + "Bước trước khác (đường riêng): …"<br>• Đường vuông góc, bo góc 10px, không mũi tên |
 | 5 | Nút ngã rẽ | Card | Click | • "Chưa xác định …" khi bước sau phụ thuộc lựa chọn chưa có; panel liệt kê các hướng có thể đi (R6) |
-| 6 | Panel chi tiết bước | Panel (web) · Sheet (mobile) | — | • Web: rộng 300px, nổi đè cột phải; nội dung dài thì cuộn<br>• Đầu panel: tên, mã, trạng thái, nhãn Ở đây / Phát sinh / module; nhánh phát sinh có thêm lý do phát sinh (không ghi mã TH)<br>• Lịch sử hoạt động: 5 dòng mới nhất, Theo CMP-08 + link "Xem tất cả" mở màn chi tiết<br>• Bước chưa tạo: "Chưa có hoạt động. Bước này chưa được tạo."<br>• Không có quyền xem bước: ẩn lịch sử + nút, hiện E-common-011 tại chỗ. Override GR-26: hiện trong panel thay vì popup chặn — lý do: chỉ 1 bước không xem được, không chặn cả màn |
+| 6 | Panel chi tiết bước | Panel (web) · Sheet (mobile) | — | • Web: rộng 300px, nổi đè cột phải; nội dung dài thì cuộn<br>• Đầu panel: tên, mã, trạng thái, nhãn Phát sinh / module (R9); nhánh phát sinh có thêm lý do phát sinh (không ghi mã TH). Panel không có nhãn "Ở đây"<br>• Desktop: đầu nền muted + dải trạng thái rộng hết · Mobile: chip bên phải tên, kẻ 1px dưới khối trạng thái<br>• Lịch sử hoạt động: 5 dòng mới nhất, Theo CMP-08 + link "Xem tất cả" mở màn chi tiết · đang tải: `Skeleton` · tải lỗi: `EmptyState` Compact wifi-off + Thử lại<br>• Bước chưa tạo: "Chưa có hoạt động. Bước này chưa được tạo."<br>• Bước Đã huỷ: chip Đỏ "Đã huỷ" + "Bản ghi của bước này đã bị xoá. Nhánh không còn tính vào tiến độ quy trình.", không có nút mở<br>• Không có quyền xem bước: ẩn lịch sử + nút, hiện E-common-011 tại chỗ. Override GR-26: hiện trong panel thay vì popup chặn — lý do: chỉ 1 bước không xem được, không chặn cả màn |
 | 7 | Nút mở | Button | Click | • "Mở màn hình chi tiết", ghim đáy panel. Web: mở cùng tab, đóng popup (Back trình duyệt về màn cũ, popup không mở lại) · Mobile: đẩy màn mới<br>• Bước công nợ: "Mở bảng công nợ", lọc theo nhà cung cấp + khoảng thời gian của bảng công nợ (R8)<br>• Bản ghi vừa bị thu quyền: popup chặn E-common-011 theo GR-26 |
 
 **Quy tắc vẽ:**
@@ -499,10 +1077,10 @@ Chỉ dùng cho quy trình nhiều nghiệp vụ. Vòng đời của 1 bản ghi
 | R4 | Mỗi bản ghi là 1 bước, không gộp. Nhiều phiếu cùng loại cùng nguồn là các bước anh em cùng tên, phân biệt bằng mã; không ghi "lần 1, lần 2". |
 | R5 | Nhánh phát sinh chỉ hiện khi điều kiện đã xảy ra. Bước chính chưa tới vẫn hiện, ghi "Chưa tạo". |
 | R6 | Bước sau phụ thuộc lựa chọn chưa có → 1 nút ngã rẽ "Chưa xác định …". |
-| R7 | Thẻ ghi trạng thái của bản ghi, màu theo nhóm: xong · đang chờ/đang làm · từ chối · chưa tạo, luôn kèm icon (✓ · đồng hồ · ▶ · ✕ · vòng đứt). 4 trạng thái bước chỉ quyết định icon và màu đường nối. Bước bị từ chối không làm mất nhánh con đã có. |
+| R7 | Thẻ ghi trạng thái của bản ghi bằng `Chip trạng thái` chuẩn chung (sắc theo design.md § Ánh xạ trạng thái nghiệp vụ), luôn kèm icon. 4 trạng thái bước chỉ quyết định chấm bước và màu đường nối. Bước bị từ chối không làm mất nhánh con đã có. Thẻ mobile dùng chữ trạng thái màu thay chip (R18). |
 | R8 | Bước thanh toán trả sau ghi "Công nợ [Tên nhà cung cấp]", mở bảng công nợ đã lọc. |
-| R9 | Bước thuộc module khác gắn nhãn module (vd Cây dầu). |
-| R10 | Bước của màn đang mở có ghim "Ở đây"; đường từ gốc tới bước đó tô đậm. Viền màu chỉ dành cho bước đang chọn. |
+| R9 | Bước thuộc module khác gắn nhãn module (vd Cây dầu) **ở panel**, không đặt trên thẻ. |
+| R10 | Bước của màn đang mở có ghim "Ở đây" ở góc trên phải thẻ (trên sơ đồ, không có trong panel); đường từ gốc tới bước đó tô đậm. Mở từ màn chi tiết thì bước đó được chọn sẵn, panel mở. Viền màu chỉ dành cho bước đang chọn. |
 | R11 | Luồng độc lập chưa có nhánh thì không hiện dòng quy trình; có nhánh đầu tiên thì bản ghi gốc là nút đầu cây. |
 | R12 | Dòng tóm tắt: "Xong x/y bước · n nhánh phát sinh". |
 | R13 | Nút tạo nghiệp vụ tiếp theo đặt ở vùng hành động đầu trang, không đặt trên sơ đồ. |
@@ -510,22 +1088,30 @@ Chỉ dùng cho quy trình nhiều nghiệp vụ. Vòng đời của 1 bản ghi
 | R15 | Đường nối vào bước Đang triển khai là nét liền có vệt sáng chạy; nét đứt chỉ cho bước chưa tạo. |
 | R16 | Nhãn Phát sinh gắn cố định góc trên trái thẻ, đối xứng ghim "Ở đây" góc trên phải; không đặt nhãn trên đường. |
 | R17 | Khe giữa 2 cột = nhãn dài nhất trên đường + 16px mỗi bên, tối thiểu 64px; khe giữa 2 hàng 32px. Nhãn điều kiện 1 dòng, mục tiêu ≤40 ký tự, không cắt chữ; góc rẽ cách bước trước 16px. Cây trên 20 bước vẫn vẽ, mặc định vừa khung. |
+| R18 | Thẻ bước 1 hàng. Desktop giãn 290–360: trái = icon + tên + mã, phải = chip, khối chữ giãn, khe 12; thẻ giãn cho đủ mã. **Tên bước và nhãn trạng thái ≤ 14 ký tự.** Mã dùng font code 12/16, không cắt; dòng phụ (nhà cung cấp, điều kiện) 1 dòng, cắt "…". Mobile 156×56: tên + chữ trạng thái màu (không chip, không mã). Gate: `python3 _scripts/status-chip-lint.py` (nhãn trong `*-states.md`, cột Bước của bảng liên quy trình); đối tượng không bao giờ thành thẻ bước thì đánh dấu `<!-- chip-the-buoc: khong -->` dưới `## State:`. |
 
-- **Figma:** chưa có — Astryx `Stepper` chỉ vẽ được dạng thẳng, cần dựng component dự án dạng cây · node: chưa gắn · ảnh: chưa gắn. Mẫu tương tác: `design/_lab/lab-progress.html`.
-- **design.md:** —
+- **Figma:** component dự án (12/10/2026) — trang 00 · Chung › `Cây quy trình · innvie` `5570:106767`: `Cây quy trình / Bước` `5578:110094`, `/ Panel bước` `5578:110668`, `Chip trạng thái` `5578:109819`, `.Nhãn góc` `5578:109857`, `.Tooltip điều kiện` `5584:114103`, `/ Tóm tắt` `5570:108054`; cảnh ví dụ trong `5578:111232` (popup `5578:111234`) · ảnh: chưa gắn. Mẫu tương tác: `design/_lab/lab-progress.html`.
+- **design.md:** Cây quy trình (CMP-09, component thật 12/10/2026)
 - **UC phải khai báo:** bảng liên quy trình của nghiệp vụ (bước · tạo từ · trigger · trường hợp phát sinh · điều kiện · 1 hay nhiều bản ghi · cho thu hồi/xoá khi đã có bước con · cho xoá), câu chữ viết cho người dùng đọc; tên luồng; tên bước + icon nghiệp vụ; màn chi tiết đích của mỗi bước.
 
 ##### Mobile
 
 - Thẻ quy trình trên màn chi tiết: tên quy trình là chính, dòng tóm tắt là phụ.
-- Sheet: card tóm tắt như web + cây rẽ nhánh dọc, thẻ cùng dạng web; vuốt ngang khi cây rộng hơn màn.
-- Panel bước: không nền màu, pill trạng thái có viền, nhãn đặt bên phải.
+- Sheet: `BottomSheet` Tall; header tên quy trình + mã · tiến độ, nút đóng X (Ghost LG, bo tròn hẳn); card tóm tắt
+  rộng hết sheet; cây rẽ nhánh dọc, thẻ mobile 156×56; vuốt ngang khi cây rộng hơn màn, mép phải mờ 32px báo còn
+  cột. Không có nút Đóng ở đáy. Đang tải: sheet Tall (cao bằng sheet cây, không nháy khi tải xong), `Skeleton` khối tóm tắt + thẻ cây theo GR-12 + "Đang tải sơ đồ…". Lỗi tải: sheet Capped, EmptyState như web.
+- Panel bước: `BottomSheet` Hug; không header riêng; dòng đầu là "‹ Sơ đồ quy trình" (`Button` Ghost LG +
+  chevron-left, thẳng lề); không X, đóng bằng vuốt / chạm nền; chip chuẩn bên phải tên, kẻ 1px dưới khối trạng thái; nút chính rộng hết, cao 40, bo tròn hẳn.
 - "Mở màn hình chi tiết" đẩy màn mới; Back về màn trước, sheet đã đóng.
-- **Figma:** chưa gắn.
+- Chip "Điều kiện x/y" trên đường (R1): chạm → tooltip như web (mỗi điều kiện 1 dòng ✓ / ○ kèm mã nguồn +
+  "Bước trước khác (đường riêng): …"), neo dưới chip, rộng tối đa bằng vùng cây; chạm ra ngoài hoặc chạm lại chip
+  để đóng; không mở sheet bước.
+- **Figma:** `.Nội dung sheet · Cây` `5584:113231`, `· Panel bước` `5584:113243`, `· Cây · Đang tải` `5584:114838`,
+  `· Cây · Lỗi tải` `5584:115045`; ví dụ trong `Device / Frame`: `5578:111599`, `5578:111616`, `5584:115290`, `5584:115551`, tooltip chip Điều kiện `5627:157359` (component `.Tooltip điều kiện` `5584:114103`; màn web mẫu `3-web · Condition tooltip` `5627:156590`).
 
 #### CMP-11 — Sidebar Menu
 
-_Nguồn: `design/ui-common/screen-patterns.md:377`_
+_Nguồn: `design/ui-common/screen-patterns.md:385`_
 
 Menu cố định bên trái, điểm truy cập chính tới module/feature.
 
@@ -535,14 +1121,14 @@ Menu cố định bên trái, điểm truy cập chính tới module/feature.
 | 2 | Thu gọn | Button | Click | • Chỉ còn icon, hover hiện tooltip tên; trạng thái lưu theo người dùng |
 | 3 | Mục cấp 1 (module) | Button | Click | • Tên + icon; có submenu thì mũi tên mở/đóng; module chứa trang hiện tại tự mở |
 | 4 | Mục cấp 2 | Link | Click | • Thụt lề dưới module cha; điều hướng tới màn |
-| 5 | Trạng thái active | — | — | • Chỉ 1 mục active, nổi bật + vạch dọc trái |
+| 5 | Trạng thái active | — | — | • Chỉ 1 mục active: nền muted, chữ + icon primary (không vạch) |
 | 6 | Footer: tên module | Label | ReadOnly | • Module hiện tại |
 | 7 | Footer: tên cơ sở | Dropdown | Select | • Ẩn khi module không chia cơ sở<br>• 1 cơ sở: chỉ hiện tên, không mở được<br>• Nhiều cơ sở: chọn để chuyển sang cơ sở khác |
 
 Cấu trúc menu theo phân quyền role: người dùng chỉ thấy module được phép.
 
-- **Figma:** tạm Astryx `Navigation / SideNav` trong `AppShell` · node: [2401:17634](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=2401-17634) · **chưa chuẩn — xử lý sau:** chưa đạt yêu cầu CMP-11 (footer module/cơ sở, menu theo role) · ảnh: chưa gắn
-- **design.md:** —
+- **Figma:** component dự án `Khung trang / Menu trái` [5596:129316](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=5596-129316) + `Khung trang / Thanh trên` [5596:129536](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=5596-129536) (khung `5596:129165`) · ảnh: chưa gắn
+- **design.md:** Khung trang web (CMP-11, component thật 12/10/2026)
 - **UC phải khai báo:** vị trí mục menu của feature (module cha, cấp); role nào thấy; module có chia cơ sở không.
 
 ##### Mobile — Bottom Navigation
@@ -563,9 +1149,19 @@ Cấu trúc menu theo phân quyền role: người dùng chỉ thấy module đ�
 
 ### A.2 Quy tắc giao diện chung (GR)
 
+#### GR-03 — Date Picker + hiển thị ngày giờ
+
+_Nguồn: `design/ui-common/conventions.md:74`_
+
+- Gõ trực tiếp hoặc chọn từ lịch. Hiển thị `dd/mm/yyyy`, có giờ `dd/mm/yyyy hh:mm` (24 giờ). Các dạng khác (tương đối, khoảng ngày): design.md › Ngày giờ.
+- Sai định dạng → `E-common-003`.
+- **UC phải khai báo:** có giờ không; khoảng cho phép (vd không chọn ngày quá khứ) + lỗi riêng.
+- **Mobile:** mở bộ chọn ngày của hệ điều hành hoặc bánh xe cuộn tuỳ ngữ cảnh; định dạng và lỗi như web.
+- **design.md:** Ngày giờ
+
 #### GR-09 — Thanh tìm kiếm
 
-_Nguồn: `design/ui-common/conventions.md:112`_
+_Nguồn: `design/ui-common/conventions.md:113`_
 
 - Tìm gần đúng toàn bộ dữ liệu bảng. Chạy khi Enter hoặc rời ô; màn realtime debounce 300ms. Trường cố định (trạng thái, phân loại) không tìm được → tooltip liệt kê, dùng lọc thay thế.
 - **UC phải khai báo:** trường tìm được / không tìm được; có realtime không.
@@ -574,24 +1170,29 @@ _Nguồn: `design/ui-common/conventions.md:112`_
 
 #### GR-10 — Trường không có thông tin
 
-_Nguồn: `design/ui-common/conventions.md:149`_
+_Nguồn: `design/ui-common/conventions.md:150`_
 
 - Ghi chú: ẩn hẳn · ID/Mã: `N/A` · trường khác: `-`.
 - **Mobile:** dùng chung web (tài liệu app ghi `--` — đã chốt `-`, 2026-10-04).
 - **design.md:** —
 
-#### GR-11 — Sinh mã bản ghi
+#### GR-11 — Sinh mã yêu cầu và mã bản ghi
 
-_Nguồn: `design/ui-common/conventions.md:154`_
+_Nguồn: `design/ui-common/conventions.md:155`_
 
-- Sinh sau khi bản ghi được phê duyệt; trước đó nhận diện bằng người tạo, ngày tạo, trạng thái. Feature không có phê duyệt hoặc tạo tự động → sinh ngay khi tạo.
-- **UC phải khai báo:** thời điểm sinh nếu khác; prefix/format mã (theo tài liệu format mã của dự án).
+- Bản ghi phải phê duyệt có 2 mã:
+  - **Mã yêu cầu** sinh ngay khi gửi duyệt lần đầu, dạng `YC-[Prefix]-[Định danh]-[4 số]` ([Định danh] giống mã bản ghi). Hiện khi bản ghi Chờ phê duyệt / Đã từ chối / Đã thu hồi. Sửa rồi gửi lại giữ nguyên mã yêu cầu.
+  - **Mã bản ghi** sinh khi được phê duyệt, dạng `[Prefix]-[Định danh]-[4 số]`. Từ lúc này hiện mã bản ghi; mã yêu cầu vẫn lưu kèm bản ghi.
+- Bản nháp chưa gửi chưa có mã; nhận diện bằng người tạo, ngày tạo, trạng thái.
+- Feature không có phê duyệt hoặc tạo tự động → chỉ có mã bản ghi, sinh ngay khi tạo.
+- Tìm theo mã: tìm được cả mã yêu cầu lẫn mã bản ghi.
+- **UC phải khai báo:** prefix + định danh (theo tài liệu format mã của dự án); thời điểm sinh nếu khác.
 - **Mobile:** dùng chung web.
 - **design.md:** —
 
 #### GR-12 — Trạng thái rỗng / đang tải
 
-_Nguồn: `design/ui-common/conventions.md:160`_
+_Nguồn: `design/ui-common/conventions.md:166`_
 
 - Chưa có dữ liệu: hình + mô tả + nút Tạo mới (nếu có quyền).
 - Lọc không ra kết quả: thông báo không có kết quả + nút Xoá bộ lọc, không có Tạo mới.
@@ -602,7 +1203,7 @@ _Nguồn: `design/ui-common/conventions.md:160`_
 
 #### GR-15 — Phân loại thông báo lỗi
 
-_Nguồn: `design/ui-common/conventions.md:175`_
+_Nguồn: `design/ui-common/conventions.md:181`_
 
 | | Loại 1 — Inline | Loại 2 — Popup Error | Loại 3 — Toast Error |
 |---|---|---|---|
@@ -621,7 +1222,7 @@ _Nguồn: `design/ui-common/conventions.md:175`_
 
 #### GR-18 — Sắp xếp
 
-_Nguồn: `design/ui-common/conventions.md:132`_
+_Nguồn: `design/ui-common/conventions.md:133`_
 
 - Click tiêu đề cột: tăng → giảm → mặc định. Mỗi lúc 1 cột. Mặc định mới nhất trước (thời gian tạo giảm dần).
 - **UC phải khai báo:** sort mặc định nếu khác; cột không sort được (override + lý do).
@@ -629,7 +1230,7 @@ _Nguồn: `design/ui-common/conventions.md:132`_
 
 #### GR-19 — Export
 
-_Nguồn: `design/ui-common/conventions.md:137`_
+_Nguồn: `design/ui-common/conventions.md:138`_
 
 - Xuất PDF / Excel toàn bộ dữ liệu sau lọc, nhóm, tuỳ chỉnh cột, gồm mọi trang.
 - **UC phải khai báo:** có export không; định dạng nào; quyền.
@@ -637,7 +1238,7 @@ _Nguồn: `design/ui-common/conventions.md:137`_
 
 #### GR-20 — Lọc theo cột
 
-_Nguồn: `design/ui-common/conventions.md:142`_
+_Nguồn: `design/ui-common/conventions.md:143`_
 
 - Nhập giá trị/ID → ô tìm · chọn giá trị → dropdown · ngày → khoảng ngày (chỉ ngày, không giờ) · số/tiền/% → Từ – Đến. Cách trình bày: CMP-05.
 - **UC phải khai báo:** cột lọc được + kiểu lọc.
@@ -645,7 +1246,7 @@ _Nguồn: `design/ui-common/conventions.md:142`_
 
 #### GR-26 — Popup chặn
 
-_Nguồn: `design/ui-common/conventions.md:234`_
+_Nguồn: `design/ui-common/conventions.md:248`_
 
 - Popup cùng khung CMP-03 Mobile nhưng **không đóng** khi chạm nền hay vuốt xuống — chỉ đóng bằng nút.
 - Phiên hết hạn → `E-common-010`, nút **Đăng nhập lại** (duy nhất).
@@ -656,7 +1257,7 @@ _Nguồn: `design/ui-common/conventions.md:234`_
 
 #### GR-27 — Dữ liệu đã cũ
 
-_Nguồn: `design/ui-common/conventions.md:192`_
+_Nguồn: `design/ui-common/conventions.md:198`_
 
 - Màn đang mở (danh sách, popup, sheet) mà dữ liệu vừa đổi ở nơi khác: hiện banner tông neutral đầu vùng nội dung "[Đối tượng] vừa có cập nhật." kèm nút **Tải lại**. Không tự tải lại, để người dùng không mất chỗ đang xem.
 - Bấm Tải lại: tải dữ liệu mới, giữ chỗ đang xem nếu còn (vd bước đang chọn, bộ lọc), rồi ẩn banner.
@@ -666,9 +1267,48 @@ _Nguồn: `design/ui-common/conventions.md:192`_
 
 ### A.3 Chi tiết từ design system
 
+#### Copy động: lỗi, xác nhận, trạng thái rỗng, toast, loading
+
+_Nguồn: `design/design.md:1613`_
+
+Cấu trúc câu cho copy ĐỘNG (đổi theo tình huống, khác nhãn tĩnh ở trên) — gộp lại một chỗ theo khung
+`ux-copy` (CTA / Error / Empty state / Confirmation / Loading). Giọng và nhãn nút giữ đúng như Astryx
+đã dùng; các mục đánh dấu *(đã có)* chỉ gom lại từ `components.md` để nằm một chỗ, không đổi nội dung gốc.
+
+* **Tông giọng chung:** ngôi "bạn", câu ngắn, động từ đứng đầu cho hành động, không đùa cợt, không "Vui lòng" rườm rà. Áp dụng cho mọi dòng dưới.
+* **Xác nhận hành động phá hủy** (Dialog — Confirmation): tiêu đề `"<Động từ> <đối tượng>?"` + nội dung nói rõ hậu quả/có hoàn tác được không + nút ghi đúng hành động (Destructive) thay "OK"/"Hủy" chung.
+  Ví dụ: "Xóa yêu cầu #1024? Yêu cầu và lịch sử xử lý sẽ mất, không thể hoàn tác." → `[Xóa yêu cầu] [Hủy]`
+* **Xác nhận hành động khác** (Dialog — Confirmation, theo SC-03 `web-common-rules.md`): 4 mẫu cố định,
+  ưu tiên dùng tên bản ghi nếu có, không có tên thì dùng mã, không có cả hai thì bỏ qua phần đó.
+  - Thu hồi: "Thu hồi yêu cầu?" · "Bạn đang thu hồi [tên feature] **[tên/mã]**. Yêu cầu sẽ trở về trạng thái Bản nháp." → `[Thu hồi] [Hủy]`
+  - Phê duyệt: "Xác nhận phê duyệt?" · "Bạn đang phê duyệt [tên feature] **[tên/mã]**." → `[Phê duyệt] [Hủy]`
+  - Từ chối: "Từ chối yêu cầu?" · "Bạn đang từ chối [tên feature] **[tên/mã]**." → `[Từ chối] [Hủy]`
+  - Huỷ form (có dữ liệu chưa lưu): "Huỷ bản ghi?" · "Bạn có dữ liệu chưa được lưu. Nếu rời khỏi trang, toàn bộ thông tin sẽ bị mất." → `[Huỷ] [Tiếp tục chỉnh sửa]`
+  - Rời trang khi có dữ liệu chưa lưu (đóng tab, đóng trình duyệt, tải lại — theo 2.13): dùng hộp
+    confirm **gốc của trình duyệt**, không vẽ Dialog. Câu: "Bạn có muốn rời trang? Dữ liệu chưa lưu sẽ mất."
+    (Trình duyệt có thể thay bằng câu mặc định của nó; không vẽ màn này trong Figma.)
+* **Lỗi kiểm tra trường** (cấp field, khác Banner/Toast): nói đúng trường nào sai + cách sửa, câu ngắn dưới field, không lộ mã lỗi kỹ thuật.
+  Ví dụ: "Số điện thoại phải có 10 số" thay vì "Lỗi 422: invalid_format".
+* **Lỗi xung đột nghiệp vụ** (Dialog — Popup Error, theo mục 2.15 Loại 2 của `web-common-rules.md`,
+  khác Dialog xác nhận ở trên): dùng khi lỗi chỉ phát hiện được SAU KHI submit, do đối chiếu dữ liệu
+  hoặc ràng buộc nghiệp vụ ở server (trùng mã, vượt hạn mức, xung đột dữ liệu...) — không thuộc về
+  một trường cụ thể nên không báo inline được. Tiêu đề lỗi (màu error) + mô tả chi tiết + nút Đóng,
+  thêm nút Thử lại nếu hành động retry được. Không tự đóng; giữ nguyên form sau khi đóng để user
+  xem lại và điều chỉnh.
+  Ví dụ: "Nhà cung cấp này đã tồn tại trong hệ thống." · "Lượng đặt mua vượt quá hạn mức hợp đồng." ·
+  "Tên cây dầu đã được sử dụng. Vui lòng chọn tên khác."
+* **Trạng thái rỗng** *(đã có khung ở components.md, thêm câu Việt)*: tiêu đề nói rõ cái gì rỗng + vì sao + CTA cụ thể.
+  Ví dụ: "Chưa có đơn hàng nào. Tạo đơn đầu tiên để bắt đầu theo dõi." → `[Tạo đơn hàng]`
+* **Banner** *(đã có)* — xem `components.md` § Banner: tiêu đề ngắn, dễ lướt, không kể lể nguyên nhân.
+  Ví dụ: "Thanh toán thất bại" (không phải "Đã có sự cố khi xử lý khoản thanh toán gần nhất của bạn").
+* **Toast** *(đã có)* — xem `components.md` § Toast: vài từ xác nhận hành động; thêm `[Hoàn tác]` nếu đảo ngược được.
+  Ví dụ: "Đã lưu thay đổi" · "Đã xóa 3 mục [Hoàn tác]".
+* **Đang tải/xử lý:** mẫu "Đang <động từ>…", không dùng "Loading...".
+  Ví dụ: "Đang tải…" · "Đang lưu…" · "Đang xử lý…".
+
 #### Notification Center (theo SC-02, đã điều chỉnh 29/09/2026)
 
-_Nguồn: `design/design.md:1029`_
+_Nguồn: `design/design.md:1039`_
 
 > **Khác SC-02 gốc — đã duyệt 01/10/2026:** bỏ mẫu một câu
 > `[Module] · [Feature] — [Mã] vừa được/bị [hành động] bởi [Người]`, chuyển sang 3 dòng (hành động ·
@@ -780,48 +1420,9 @@ Module (Xưởng / Nhân sự / Điều vận…) chỉ là thông tin phụ ở
 * Đổi trạng thái: chọn lớp `Body` trong Panel → `State`.
 * **Cần nghiệp vụ xác nhận:** danh sách hành động "Chờ…" của từng feature.
 
-#### Copy động: lỗi, xác nhận, trạng thái rỗng, toast, loading
-
-_Nguồn: `design/design.md:1524`_
-
-Cấu trúc câu cho copy ĐỘNG (đổi theo tình huống, khác nhãn tĩnh ở trên) — gộp lại một chỗ theo khung
-`ux-copy` (CTA / Error / Empty state / Confirmation / Loading). Giọng và nhãn nút giữ đúng như Astryx
-đã dùng; các mục đánh dấu *(đã có)* chỉ gom lại từ `components.md` để nằm một chỗ, không đổi nội dung gốc.
-
-* **Tông giọng chung:** ngôi "bạn", câu ngắn, động từ đứng đầu cho hành động, không đùa cợt, không "Vui lòng" rườm rà. Áp dụng cho mọi dòng dưới.
-* **Xác nhận hành động phá hủy** (Dialog — Confirmation): tiêu đề `"<Động từ> <đối tượng>?"` + nội dung nói rõ hậu quả/có hoàn tác được không + nút ghi đúng hành động (Destructive) thay "OK"/"Hủy" chung.
-  Ví dụ: "Xóa yêu cầu #1024? Yêu cầu và lịch sử xử lý sẽ mất, không thể hoàn tác." → `[Xóa yêu cầu] [Hủy]`
-* **Xác nhận hành động khác** (Dialog — Confirmation, theo SC-03 `web-common-rules.md`): 4 mẫu cố định,
-  ưu tiên dùng tên bản ghi nếu có, không có tên thì dùng mã, không có cả hai thì bỏ qua phần đó.
-  - Thu hồi: "Thu hồi yêu cầu?" · "Bạn đang thu hồi [tên feature] **[tên/mã]**. Yêu cầu sẽ trở về trạng thái Bản nháp." → `[Thu hồi] [Hủy]`
-  - Phê duyệt: "Xác nhận phê duyệt?" · "Bạn đang phê duyệt [tên feature] **[tên/mã]**." → `[Phê duyệt] [Hủy]`
-  - Từ chối: "Từ chối yêu cầu?" · "Bạn đang từ chối [tên feature] **[tên/mã]**." → `[Từ chối] [Hủy]`
-  - Huỷ form (có dữ liệu chưa lưu): "Huỷ bản ghi?" · "Bạn có dữ liệu chưa được lưu. Nếu rời khỏi trang, toàn bộ thông tin sẽ bị mất." → `[Huỷ] [Tiếp tục chỉnh sửa]`
-  - Rời trang khi có dữ liệu chưa lưu (đóng tab, đóng trình duyệt, tải lại — theo 2.13): dùng hộp
-    confirm **gốc của trình duyệt**, không vẽ Dialog. Câu: "Bạn có muốn rời trang? Dữ liệu chưa lưu sẽ mất."
-    (Trình duyệt có thể thay bằng câu mặc định của nó; không vẽ màn này trong Figma.)
-* **Lỗi kiểm tra trường** (cấp field, khác Banner/Toast): nói đúng trường nào sai + cách sửa, câu ngắn dưới field, không lộ mã lỗi kỹ thuật.
-  Ví dụ: "Số điện thoại phải có 10 số" thay vì "Lỗi 422: invalid_format".
-* **Lỗi xung đột nghiệp vụ** (Dialog — Popup Error, theo mục 2.15 Loại 2 của `web-common-rules.md`,
-  khác Dialog xác nhận ở trên): dùng khi lỗi chỉ phát hiện được SAU KHI submit, do đối chiếu dữ liệu
-  hoặc ràng buộc nghiệp vụ ở server (trùng mã, vượt hạn mức, xung đột dữ liệu...) — không thuộc về
-  một trường cụ thể nên không báo inline được. Tiêu đề lỗi (màu error) + mô tả chi tiết + nút Đóng,
-  thêm nút Thử lại nếu hành động retry được. Không tự đóng; giữ nguyên form sau khi đóng để user
-  xem lại và điều chỉnh.
-  Ví dụ: "Nhà cung cấp này đã tồn tại trong hệ thống." · "Lượng đặt mua vượt quá hạn mức hợp đồng." ·
-  "Tên cây dầu đã được sử dụng. Vui lòng chọn tên khác."
-* **Trạng thái rỗng** *(đã có khung ở components.md, thêm câu Việt)*: tiêu đề nói rõ cái gì rỗng + vì sao + CTA cụ thể.
-  Ví dụ: "Chưa có đơn hàng nào. Tạo đơn đầu tiên để bắt đầu theo dõi." → `[Tạo đơn hàng]`
-* **Banner** *(đã có)* — xem `components.md` § Banner: tiêu đề ngắn, dễ lướt, không kể lể nguyên nhân.
-  Ví dụ: "Thanh toán thất bại" (không phải "Đã có sự cố khi xử lý khoản thanh toán gần nhất của bạn").
-* **Toast** *(đã có)* — xem `components.md` § Toast: vài từ xác nhận hành động; thêm `[Hoàn tác]` nếu đảo ngược được.
-  Ví dụ: "Đã lưu thay đổi" · "Đã xóa 3 mục [Hoàn tác]".
-* **Đang tải/xử lý:** mẫu "Đang <động từ>…", không dùng "Loading...".
-  Ví dụ: "Đang tải…" · "Đang lưu…" · "Đang xử lý…".
-
 #### Phân trang danh sách (theo SC-04, 29/09/2026)
 
-_Nguồn: `design/design.md:829`_
+_Nguồn: `design/design.md:839`_
 
 Nguồn: `web-common-rules.md` SC-04 (phân trang) và 2.17 (nhóm dữ liệu). Component: **`Pagination`**
 (trang Navigation) · Variant = **Pages** / Count / Compact / Dots / None · Size = md / sm ·
@@ -860,7 +1461,7 @@ Nguồn: `web-common-rules.md` SC-04 (phân trang) và 2.17 (nhóm dữ liệu).
 
 #### Bộ lọc nâng cao (theo SC-05 + 2.20, phương án thanh chip — 29/09/2026)
 
-_Nguồn: `design/design.md:1141`_
+_Nguồn: `design/design.md:1151`_
 
 > **Khác SC-05 gốc — đã duyệt 01/10/2026:** không dùng Drawer. Bộ lọc là **thanh chip
 > `PowerSearch`** ngay trên bảng: điều kiện luôn hiển thị, sửa từng điều kiện trong popover nhỏ, bảng
@@ -909,7 +1510,7 @@ thư viện: [Cột] [Toán tử] [Giá trị] → chân `[Huỷ]` Secondary SM 
 
 #### Tuỳ chỉnh cột (theo SC-06, phương án chỉnh trên bảng — 29/09/2026)
 
-_Nguồn: `design/design.md:1188`_
+_Nguồn: `design/design.md:1198`_
 
 > **Khác SC-06 gốc — đã duyệt 01/10/2026:** không có panel. Ẩn / ghim / sắp xếp làm ngay
 > trên **tiêu đề cột**; đổi thứ tự bằng **kéo tiêu đề cột**; bật/tắt cột ở nút **Tuỳ chỉnh cột** (Button Ghost có icon + chữ, chốt 12/10/2026)
@@ -944,7 +1545,7 @@ Code đã có: plugin `columnSettings` của Table (ẩn/hiện, thứ tự, `is
 
 #### Activity Log (theo SC-08, component thật 29/09/2026)
 
-_Nguồn: `design/design.md:1221`_
+_Nguồn: `design/design.md:1231`_
 
 Lịch sử thay đổi trạng thái và hành động trên **một bản ghi**, mở từ màn chi tiết. Nguồn:
 `web-common-rules.md` SC-08. Code Astryx không có Timeline/Activity nên dựng riêng; cấu trúc
@@ -1039,9 +1640,83 @@ duyệt cần **lý do lần trước** khi phiếu được gửi lại; ngư�
 Ví dụ: khung `Trạng thái · instances` → "Phương án A + B · trong màn chi tiết" (Desktop P7 + Banner +
 panel theo lượt · Mobile M4 + Banner · Mobile BottomSheet theo lượt) và "Chữ dài · A + B" (752 / 320px).
 
+#### Cây quy trình (CMP-09, component thật 12/10/2026)
+
+_Nguồn: `design/design.md:1508`_
+
+Xem cả quy trình nhiều nghiệp vụ dạng cây. Nội dung, hành vi và quy tắc vẽ R1–R18: `design/ui-common/screen-patterns.md`
+§ CMP-09; mẫu tương tác `design/_lab/lab-progress.html`. Mục này giữ phần component. Figma: trang 00 · Chung ›
+khung `Cây quy trình · innvie` (`5570:106767`) › Master Components `5570:106770`, Trạng thái & ví dụ `5578:111232`.
+
+| Component | Node | Biến thể / thuộc tính | Ghi chú |
+| --- | --- | --- | --- |
+| `Chip trạng thái` | `5578:109819` | Sắc × 7 · `Nhãn` · `Icon` (swap) | Chuẩn chung (xem § Ánh xạ trạng thái nghiệp vụ) |
+| `Cây quy trình / Bước` | `5578:110094` | Nền tảng Desktop/Mobile × Trường hợp Có bản ghi/Chưa tạo/Ngã rẽ/Công nợ/Đã huỷ × Tương tác Thường/Rê chuột/Đang chọn · `Phát sinh`, `Ở đây` (boolean) · `Tên`, `Mã`, `Điều kiện`, `Nhà cung cấp`, `Icon nghiệp vụ` | Desktop 1 hàng, giãn 290–360 (Figma cố định 320): trái = icon 40 + chấm bước, tên + mã; phải = chip; khối chữ giãn, khe 12. Mobile 156×56: tên + chữ trạng thái màu, không chip, không mã |
+| `Cây quy trình / .Nhãn góc` | `5578:109857` | Loại = Phát sinh / Ở đây | Phát sinh: góc trên trái, nền `status-chip-orange-bg`, chữ/icon `-fg`, viền 1px nét đứt `-border`, cao 20, bo full, chữ Heading 6, icon nhánh 12. Ở đây: góc trên phải, nền `{colors.accent}`, chữ `{colors.on-accent}`, icon pin 12. Cả hai có vòng 2px màu nền vùng sơ đồ, đè nửa lên mép thẻ |
+| `Cây quy trình / Panel bước` | `5578:110668` | Nền tảng × Trạng thái Có bản ghi/Chưa tạo/Ngã rẽ/Công nợ/Không có quyền/Lịch sử lỗi/Đang tải/Đã huỷ · `Phát sinh`, `Có nhãn`, `Có module`, `Có lý do phát sinh` | Desktop 300: đầu nền `{colors.background-muted}` + dải trạng thái rộng hết (nền/chữ sắc chip); chữ phụ trên nền muted dùng `Status Chip/Gray/Foreground` cho đạt 4,5:1. Mobile: chip chuẩn phải tên, kẻ 1px `{colors.border-default}` dưới khối trạng thái. Đang tải = `Skeleton`; Lịch sử lỗi = `EmptyState` Compact wifi-off + Thử lại; Đã huỷ = dải/chip Đỏ + "Bản ghi của bước này đã bị xoá…", không nút mở. Tiêu đề khối 12px (Heading 5) |
+| `Cây quy trình / Tóm tắt` | `5570:108054` | — | Thanh tiến độ: mỗi bước 1 đơn vị bằng nhau, khe 2px giữa các nhóm (Xong · Đang chờ/làm · Từ chối · Chưa tạo), nhóm 0 bước thì ẩn. Mobile: rộng hết sheet |
+| `Cây quy trình / .Tooltip điều kiện` | `5584:114103` | — | Bấm chip "Điều kiện x/y" trên đường nguồn: rộng 220, neo dưới chip; mỗi điều kiện 1 dòng (✓ đã thoả / ○ chưa, kèm mã nguồn); dòng cuối "Bước trước khác (đường riêng): …" |
+| `.Nội dung sheet · Cây` / `· Panel bước` / `· Cây · Đang tải` / `· Cây · Lỗi tải` | `5584:113231` / `5584:113243` / `5584:114838` / `5584:115045` | — | Swap vào `BottomSheet › Content`: cây = Tall, panel bước = Hug, đang tải = Tall (skeleton GR-12), lỗi = Capped. Sheet cây: header tên quy trình + mã/tiến độ + X Ghost LG bo full. Sheet panel bước: không header, dòng đầu là nút quay lại "‹ Sơ đồ quy trình" của panel. Cây vuốt ngang, mép phải mờ 32px. Không có nút Đóng ở đáy |
+| Dòng, Nhãn đường, Thanh zoom, .Chấm bước, .Dòng lịch sử | trong Master Components | — | Theo screen-patterns CMP-09 |
+
+* **Đường nối (theo lab):** vuông góc, bo góc 10px, **không mũi tên**; góc rẽ cách bước trước 16px; mỗi đường vào 1
+  cửa riêng ở cạnh trái thẻ, cách nhau 14px theo thứ tự trên → dưới của bước trước. Nét 1.8px, đường từ gốc tới
+  bước của màn đang mở 2.6px, đường chạm bước đang chọn 3px, đường khác mờ 25% khi có bước đang chọn. Màu theo
+  trạng thái bước đích: đã tạo `Green/Icon` · đang triển khai `Blue/Icon` (+ vệt sáng chạy) · chưa tạo `Gray/Icon`
+  nét đứt 5/4.
+* **Dàn cây web:** cây toả — bước chính giữ hàng của bước trước, nhánh chia nửa trên/nửa dưới; thẻ 320, khe cột 64
+  (hoặc nhãn dài nhất + 32), khe hàng 32.
+* **Mã:** `{typography.code-sm}` (`Text/Code Small`), không cắt; thẻ giãn tới 360 để đủ chỗ.
+* **Cảnh ví dụ:** popup mở từ màn chi tiết (Ở đây + panel), mở từ danh sách (không chọn, tooltip điều kiện), bước
+  không có quyền, nhánh phát sinh có lý do, sơ đồ đang tải/lỗi (web + mobile), sheet cây + sheet panel bước, chữ dài.
+* **Giới hạn khi dựng bằng proxy (KG-32):** xem Known Gaps.
+
+#### Khung trang web (CMP-11, component thật 12/10/2026)
+
+_Nguồn: `design/design.md:1416`_
+
+Menu trái + thanh trên cho mọi màn web, thay `AppShell` SideNav 300 của Astryx. Số đo khung: § Grid & Container ›
+Khung trang dự án; nội dung + hành vi: `design/ui-common/screen-patterns.md` § CMP-11. Figma: trang 00 · Chung ›
+khung `Khung trang · innvie` (`5596:129165`).
+
+| Component | Node | Biến thể / thuộc tính | Ghi chú |
+| --- | --- | --- | --- |
+| `Khung trang / .Mục menu` | `5596:129193` | Dạng Mở rộng / Thu gọn × Tương tác Thường / Rê chuột / Đang chọn · `Nhãn`, `Icon` (swap), `Có số đếm` | Mở rộng 216×34 (icon 16 + nhãn 14, đệm 10, khe 10, bo `{rounded.element}`); Thu gọn 40×34 chỉ icon, số đếm thành chấm, rê chuột hiện tooltip tên. Rê chuột: nền `{colors.overlay-hover}`; Đang chọn: nền `{colors.background-muted}`, chữ `{typography.label}`; cả hai chữ + icon primary. **Không vạch dọc.** Số đếm = `Badge` Info |
+| `Khung trang / .Nhóm menu` | `5596:129227` | `Tên nhóm` | Chữ hoa `{typography.supporting}` secondary; cách mục trên 16, mục dưới 6; ẩn khi thu gọn |
+| `Khung trang / .Chân menu` | `5596:129268` | Trường hợp Nhiều cơ sở / Một cơ sở / Không chia cơ sở / Thu gọn · `Module`, `Cơ sở`, `Icon module` (swap) | Thẻ viền `{colors.border-default}` bo `{rounded.container}`, đệm 8: ô icon module 32 + tên module, vạch, dòng cơ sở (pin + tên + chevron khi nhiều cơ sở). Không kẻ vạch phía trên chân menu |
+| `Khung trang / Menu trái` | `5596:129316` | Dạng Mở rộng 240 / Thu gọn 64 · `Tên đơn vị`, `Tên module`, `Chữ logo` | Nền surface, viền phải 1px, đệm 12, mục cách 2. Đầu: ô logo 30 (màu `P-mau-logo`) + tên đơn vị + module + nút thu gọn (Ghost icon-only). Chân menu ghim đáy. Mục và nhóm là instance — sửa nhãn, icon, số đếm, mục đang chọn trên instance; thêm/bớt theo module và phân quyền role |
+| `Khung trang / Thanh trên` | `5596:129536` | `Mục cha`, `Trang hiện tại`, `Có thông báo` | Cao 44, nền surface, vạch dưới 1px: đường dẫn (mục cha secondary › trang hiện tại primary) · tìm · chuông (chấm đỏ khi có việc cần xử lý, CMP-02) · avatar chữ tắt |
+
+* **Ghép màn:** khung ngang [Menu trái (STRETCH)][Vùng chính: Thanh trên (STRETCH) + Nội dung đệm 24, nền surface].
+  Danh sách giãn hết; chi tiết ≤ 1440, form ≤ 720, căn giữa. 768–1279 dùng Menu trái Thu gọn; < 768 dùng MobileNav.
+* **Chữ dài:** mọi chữ 1 dòng, code cắt "…" (Figma cắt cứng ở mép — KG-32); số đếm, chevron giữ bên phải.
+* **Icon mục menu:** feature khai trong UC (vị trí mục, module cha); mẫu theo lab — chưa có bảng icon theo module.
+
+#### Ngày giờ
+
+_Nguồn: `design/design.md:1671`_
+
+Dùng component **Timestamp** và chọn Format phù hợp. Giờ luôn là **24 giờ**.
+
+| Format | Hiển thị | Dùng khi |
+| --- | --- | --- |
+| Date | `03/07/2026` (dd/MM/yyyy) | Ngày trong bảng, form, hạn chót |
+| Date Time | `23/02/2026 09:12` | Nhật ký, lịch sử thao tác |
+| Time | `09:12` | Tin nhắn trong ngày |
+| Relative | `Vừa xong` · `5 phút trước` · `2 giờ trước` · `Hôm qua, 22:27` | Hoạt động gần đây (dưới 7 ngày); quá 7 ngày chuyển sang Date |
+| Ngày có thứ | `Thứ Hai, 03/07/2026` | Lịch, tiêu đề nhóm theo ngày |
+| Khoảng ngày | `01/07 – 15/07/2026` | DateRangeInput |
+
+* Ngày tháng dạng ngắn trong ô hẹp (thẻ Kanban, hạn): `Hạn 08/07`.
+* Không dùng tên tháng tiếng Anh ("Jul 3") và không dùng AM/PM.
+* **Quy định cho dev:** tự định dạng theo bảng trên, **không dùng đầu ra `Intl` mặc định** của
+  `Timestamp` (code ra `3 thg 7, 2026`, `9:12`, `bây giờ`… — lệch bảng). Ngưỡng Auto chuyển
+  Relative → ngày giờ là 7 ngày, khớp bảng. Rút gọn tiền (`tr đ`, `tỷ đ`) cũng là quy ước dự án,
+  không lấy từ code.
+
 #### Quy tắc bảng danh sách (theo 2.9, 2.14, 2.16–2.20, SC-07 — 01/10/2026)
 
-_Nguồn: `design/design.md:866`_
+_Nguồn: `design/design.md:876`_
 
 Nguồn: `web-common-rules.md`. Áp dụng cho mọi bảng danh sách (mẫu P1). Cột/trường cụ thể (cột
 nào tìm, nhóm, lọc được; action nào có ở trạng thái nào) do từng UC định nghĩa.
@@ -1061,7 +1736,7 @@ nào tìm, nhóm, lọc được; action nào có ở trạng thái nào) do t�
 
 #### Trạng thái giao diện: mọi màn phải có đủ
 
-_Nguồn: `design/design.md:1457`_
+_Nguồn: `design/design.md:1539`_
 
 | Trạng thái | Component dùng | Mẫu tham chiếu |
 | --- | --- | --- |
@@ -1069,14 +1744,14 @@ _Nguồn: `design/design.md:1457`_
 | **Rỗng · lọc/tìm không ra** | `EmptyState`: "Không tìm thấy kết quả phù hợp" + nút **Xoá bộ lọc**. **Không** có Tạo mới (2.12) | — |
 | **Đang tải** | `Skeleton` giữ đúng hình khối nội dung; `Spinner` cho thao tác ngắn; Button State=Loading khi gửi; ProgressBar khi biết tiến độ | Shell Side/Top Nav: vùng nội dung skeleton |
 | **Lỗi field** | Field`state=error` + status message dưới field, chữ `{colors.error}` + ring error | — |
-| **Lỗi trang/khối** | `Banner` Status=error (có hành động thử lại ở End Content) | — |
+| **Lỗi trang/khối** | `Banner` Status=error (có hành động thử lại ở End Content). Khối dữ liệu tải lỗi trong panel/sheet (lịch sử hoạt động CMP-08/CMP-09, sơ đồ CMP-09): `EmptyState` icon `wifi-off` + câu theo E-common-008/009 + **Thử lại** (Compact trong khối nhỏ) | — |
 | **Thành công/xác nhận** | `Toast` (tạm thời) hoặc `Banner` success (bền) | — |
 | **Vô hiệu** | State=Disabled (opacity 0.5 cho nút; chữ`{colors.text-disabled}` cho field) | — |
 | **Đang chọn** | TableCell/ListItem/SideNavItem State=Selected; SelectableCard Selected | — |
 
 #### Nhập liệu và kiểm tra (theo 2.1–2.3, 2.7, 2.15)
 
-_Nguồn: `design/design.md:1561`_
+_Nguồn: `design/design.md:1650`_
 
 Lỗi cấp field là **Inline Error** (2.15 Loại 1): viền field chuyển error + câu lỗi dưới field
 (Field `state=error`), tự ẩn khi giá trị hợp lệ. Lỗi server không gắn với field → Popup Error; lỗi
@@ -1103,6 +1778,7 @@ kỹ thuật → Toast error (xem Copy động).
 |---|---|---|---|---|
 | E-common-008 | Toast | Lỗi hệ thống / API / timeout | "Đã xảy ra lỗi. Thử lại sau." | GR-15 Loại 3 |
 | E-common-009 | Toast | Mất kết nối mạng | "Mất kết nối. Kiểm tra mạng và thử lại." | GR-15 Loại 3 |
-| E-common-011 | Popup chặn (app) | Mở màn không có quyền xem | "Bạn không có quyền xem thông tin này. Liên hệ quản trị viên để được cấp quyền." | GR-26 |
+| E-common-011 | Tại chỗ / Popup Loại 2 (web) · Popup chặn (app) | Mở màn, bản ghi hoặc khối không có quyền xem | "Bạn không có quyền xem thông tin này. Liên hệ quản trị viên để được cấp quyền." | GR-28 · GR-26 |
 
 <!-- ui-common:end -->
+

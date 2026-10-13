@@ -25,7 +25,7 @@ paths:
         ↓
 /figma-sync (lần đầu của flow)           chuyển bảng sang screens/{flow}.md (máy chép), xoá wireframe flow đó
         ↓   ← mỗi lần sửa trên Figma: /figma-sync đối chiếu mốc → sửa screens/{flow}.md + userflow
-/figma-sync --done                       ảnh PNG 2x → screens/images/, flow `approved`, SRS Phụ lục B
+/figma-sync --done                       ảnh PNG 2x → screens/images/, flow `approved`, SRS Mục 10
 ```
 
 ## 2. Nguồn bảng 5 cột — thứ tự ưu tiên
@@ -59,6 +59,7 @@ Trong `{flow-slug}.md`, mỗi màn:
 
 - **screenId:** 1.1 · web
 - **Figma:** [1.1 · web](https://www.figma.com/design/{fileKey}/?node-id=…)
+- **Mô tả:** {1–2 câu: màn này để làm gì, người dùng thấy khi nào}   ← cột Mô tả của danh mục SRS Mục 10
 
 ![1.1 · web · {slug}](images/1-1-web-{slug}.png)      ← chỉ sau --done
 
@@ -129,16 +130,26 @@ Gọi inline trong main thread (có HITL), KHÔNG Task sub-agent.
 
 Câu chữ mới trên Figma mà trùng nghĩa với E-common/CMP → vẫn ghi theo mã (`ui-common-rules-components.md`).
 
-## 8. SRS
+## 8. SRS — Mục 10 Screens là Design (Figma), không phụ lục riêng
 
-- Mục 10 Screens trỏ sang **Phụ lục B**, không trỏ `html-wireframe/`.
-- Phụ lục B nằm giữa marker `<!-- screens:begin -->` / `<!-- screens:end -->`, máy sinh bằng
-  `python3 _scripts/screens-md.py appendix <feature> --write` từ flow `approved`: ảnh Figma + link + bảng
-  5 cột chép nguyên văn. KHÔNG sửa tay, AI KHÔNG viết lại.
+Mục 10 `## 10. Screens — Design (Figma)` gồm 3 phần theo thứ tự (khung: `_templates/srs-spec.md`):
+
+| Phần | Nội dung | Ai viết |
+|---|---|---|
+| `### Danh mục màn` (marker `screens-catalog`) | 1 dòng/màn, mọi flow trong index: `# · Slug · Màn (screenId · tên) · Status (của flow) · Thuộc flow · Used by (FR-NNN trích từ bảng 5 cột của màn) · Mô tả (dòng **Mô tả:** của màn) · Figma` | Máy |
+| `### Cấu hình UI Common Rules & Components` | CMP/GR áp ở màn nào, override + lý do; E-common dùng | Người / `/srs` |
+| Khối marker `screens` | `### Màn hình flow: {tên}` cho mỗi flow `approved`: ảnh Figma + link + bảng 5 cột chép nguyên văn | Máy |
+
+- Hai khối máy sinh bằng 1 lệnh: `python3 _scripts/screens-md.py appendix <feature> --write`. KHÔNG sửa tay,
+  AI KHÔNG viết lại; sửa `screens/*.md` (qua `/figma-sync`) rồi chạy lại. Spec thiếu marker → lệnh exit 2,
+  thêm 2 cặp marker theo template (L2) rồi chạy lại.
+- Không còn "Phụ lục B" và không trỏ `html-wireframe/` / `ascii-wireframe/`.
+- Màn mới thiếu dòng **Mô tả:** → `/figma-sync` viết 1–2 câu từ bảng 5 cột (không cần duyệt riêng, user chốt 13/10).
 - `/export`, `/preview` chạy `appendix <feature> --check` trước khi xuất; cũ hoặc thiếu ảnh → cảnh báo.
+  Preview không có mục Screens/Wireframes/Designs riêng khi đã có `screens/` — chỉ thêm "Màn đang vẽ" cho flow chưa chốt.
 
 ## Tóm tắt 1 dòng
 
 > **Lên Figma rồi thì bảng 5 cột sống ở `screens/{flow}.md`, wireframe flow đó bị xoá · mọi skill đụng
 > Figma kết thúc bằng `/figma-sync` · chữ/element/trạng thái/luồng sửa thẳng qua L2, quy tắc nghiệp vụ qua
-> `/cr` · done (user nói hoặc đóng task backlog) → ảnh 2x + Phụ lục B máy sinh trong SRS.**
+> `/cr` · done (user nói hoặc đóng task backlog) → ảnh 2x + danh mục và chi tiết màn máy sinh trong SRS Mục 10.**

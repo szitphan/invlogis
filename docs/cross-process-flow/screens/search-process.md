@@ -6,6 +6,9 @@
 
 - **screenId:** 2.1 · web
 - **Figma:** [2.1 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-132884)
+- **Mô tả:** Danh sách Quy trình trong menu mỗi module: tìm theo mã, lọc, sắp xếp, tuỳ chỉnh cột và xuất file.
+
+![2.1 · web · process-list](images/2-1-web-process-list.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -96,6 +99,9 @@
 
 - **screenId:** 2.2 · web
 - **Figma:** [2.2 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-142559)
+- **Mô tả:** Popup sơ đồ mở từ danh sách: chưa chọn bước nào; chọn bước thì mở panel như khi mở từ màn chi tiết.
+
+![2.2 · web · list-process-diagram](images/2-2-web-list-process-diagram.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|

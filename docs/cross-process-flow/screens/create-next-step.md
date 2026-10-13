@@ -6,6 +6,9 @@
 
 - **screenId:** 3.1 · web
 - **Figma:** [3.1 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-157912)
+- **Mô tả:** Màn chi tiết của bản ghi vừa tạo từ bước trước: dòng quy trình đã thêm bước mới và gắn "Ở đây".
+
+![3.1 · web · new-record-detail](images/3-1-web-new-record-detail.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -18,6 +21,9 @@
 
 - **screenId:** 3.2 · web
 - **Figma:** [3.2 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-158266)
+- **Mô tả:** Popup chặn gửi vì bước chỉ nhận 1 bản ghi đã có yêu cầu khác đang chờ duyệt hoặc đã xong.
+
+![3.2 · web · step-already-requested](images/3-2-web-step-already-requested.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -28,6 +34,9 @@
 
 - **screenId:** 3.4 · web
 - **Figma:** [3.4 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-158620)
+- **Mô tả:** Popup chặn thu hồi/xoá vì bản ghi đã sinh bước con.
+
+![3.4 · web · has-child-step](images/3-4-web-has-child-step.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -38,6 +47,9 @@
 
 - **screenId:** 3.3 · web
 - **Figma:** [3.3 · web](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-158974)
+- **Mô tả:** Popup báo không gửi được vì bản ghi nguồn vừa bị thu hồi; bản nháp được giữ.
+
+![3.3 · web · source-revoked](images/3-3-web-source-revoked.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|

@@ -21,8 +21,8 @@ Generate `docs/{feature}/{feature}-preview.html` self-contained cho **active wor
 * ERD
 * State Diagrams (nếu có)
 * Functions với **inline screens** (wireframes group + tables group dưới mỗi UC Mục f). **Ưu tiên HTML wireframe** (`html-wireframe/{flow-slug}.html` — render device thật, đẹp hơn); không có/không trích được screen đó → **fallback ASCII** (`ascii-wireframe/{flow-slug}.md`). Mỗi screen gắn tag `HTML`/`ASCII` cho biết nguồn.
-* Screens catalog (slim — content đã embed trong UCs)
-* Designs table (Figma + HTML prototype links từ `{feature}-wireframe-index.md`)
+* Đã có `screens/` (Figma): danh mục + chi tiết màn nằm trong SRS Spec Mục 10 → KHÔNG có mục Screens catalog / Designs riêng; chỉ thêm mục "Màn đang vẽ (chưa chốt)" cho flow chưa `approved`
+* Chưa có `screens/`: Screens catalog (slim — content đã embed trong UCs) + Wireframes + Designs table (Figma + HTML prototype links từ `{feature}-wireframe-index.md`)
 
 Double-click HTML → browser file:// → render. KHÔNG cần server.
 
@@ -96,7 +96,7 @@ Build script: !`test -f _scripts/build-preview.py && test -f _scripts/_viewer_wr
 ### Phase C — Run helper script
 
 3b) **Kiểm Phụ lục A** — `python3 _scripts/ui-common-expand.py docs/{feature}/srs/{feature}-spec.md --check`. Exit 1/2 → cảnh báo phụ lục UI Common Rules & Components chưa khớp nguồn + đề nghị sinh lại (`--write` sau L2, per `ui-common-rules-components.md` Mục 12) trước khi build preview.
-3c) **Kiểm Phụ lục B** — có `docs/{feature}/screens/` → `python3 _scripts/screens-md.py appendix {feature} --check`; exit khác 0 → cảnh báo + đề nghị `/figma-sync {feature} --done` (per `.claude/rules/screen-source.md` Mục 8).
+3c) **Kiểm Mục 10 màn hình** — có `docs/{feature}/screens/` → `python3 _scripts/screens-md.py appendix {feature} --check`; exit khác 0 → cảnh báo + đề nghị `/figma-sync {feature} --done` (per `.claude/rules/screen-source.md` Mục 8).
 4) **CHỈ chạy lệnh duy nhất:**
    ```bash
    python3 _scripts/build-preview.py {feature} [--out {path}]

@@ -6,6 +6,9 @@
 
 - **screenId:** 1.1 · mob
 - **Figma:** [1.1 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-159935)
+- **Mô tả:** Màn chi tiết trên app, có thẻ quy trình (tên luồng, tiến độ, bước trước); chạm thẻ để mở sheet sơ đồ.
+
+![1.1 · mob · record-detail](images/1-1-mob-record-detail.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -34,6 +37,9 @@
 
 - **screenId:** 1.2 · mob
 - **Figma:** [1.2 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-160887)
+- **Mô tả:** Sheet sơ đồ quy trình mở từ đáy, đánh dấu bước "Ở đây"; chạm bước để mở sheet bước.
+
+![1.2 · mob · process-diagram](images/1-2-mob-process-diagram.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -72,6 +78,9 @@
 
 - **screenId:** 4.1 · mob
 - **Figma:** [4.1 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-162600)
+- **Mô tả:** Sheet chi tiết một bước có bản ghi, chồng lên sheet sơ đồ: trạng thái, lịch sử và nút mở bản ghi.
+
+![4.1 · mob · step-sheet](images/4-1-mob-step-sheet.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -83,6 +92,9 @@
 
 - **screenId:** 1.3 · mob
 - **Figma:** [1.3 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-163096)
+- **Mô tả:** Sheet bước chưa tạo: mã N/A, "Chưa tạo", không có lịch sử và nút.
+
+![1.3 · mob · step-not-created](images/1-3-mob-step-not-created.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -92,6 +104,9 @@
 
 - **screenId:** 1.4 · mob
 - **Figma:** [1.4 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-163629)
+- **Mô tả:** Sheet ngã rẽ: điều kiện đang chờ và các hướng có thể đi.
+
+![1.4 · mob · branch-point](images/1-4-mob-branch-point.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -101,6 +116,9 @@
 
 - **screenId:** 1.6 · mob
 - **Figma:** [1.6 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-164169)
+- **Mô tả:** Sheet bước công nợ của nhà cung cấp; app không có nút mở bảng công nợ.
+
+![1.6 · mob · debt-step](images/1-6-mob-debt-step.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
@@ -110,6 +128,9 @@
 
 - **screenId:** 1.5 · mob
 - **Figma:** [1.5 · mob](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=5600-164723)
+- **Mô tả:** Sheet bước người xem không có quyền: hiện câu không có quyền, ẩn lịch sử và nút.
+
+![1.5 · mob · step-no-permission](images/1-5-mob-step-no-permission.png)
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|

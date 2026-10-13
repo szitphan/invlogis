@@ -56,9 +56,12 @@ links: {{links}}
 
 {{flows_summary}}
 
-## 10. Screens (tóm tắt — chi tiết ở ascii-wireframe/)
+## 10. Screens — Design (Figma)
 
-{{screens_summary}}
+### Danh mục màn
+
+<!-- screens-catalog:begin — máy sinh bởi _scripts/screens-md.py (/figma-sync --done), KHÔNG sửa tay -->
+<!-- screens-catalog:end -->
 
 ### Cấu hình UI Common Rules & Components
 
@@ -67,6 +70,9 @@ links: {{links}}
 | {{cmp_gr_code}} | {{screens}} | {{declared_or_override}} |
 
 E-common dùng: {{e_common_used}}
+
+<!-- screens:begin — máy sinh bởi _scripts/screens-md.py (/figma-sync --done): ảnh Figma + bảng 5 cột theo flow, KHÔNG sửa tay -->
+<!-- screens:end -->
 
 ## 11. Constraints, Dependencies & Assumptions
 

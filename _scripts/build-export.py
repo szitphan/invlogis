@@ -71,7 +71,7 @@ def compose_md(feature: str, vault: Path) -> tuple:
     uc_index = read_optional(uc_index_path) if uc_index_path else ""
     uc_diagram = read_optional(feature_dir / "usecases" / "diagram.md")
     # Màn hình: screens/ (flow đã lên Figma, rule screen-source.md) thắng html-wireframe/ thắng ascii-wireframe/.
-    # Nội dung màn của flow approved đã nằm trong spec (Phụ lục B), ở đây chỉ lấy index để liệt kê.
+    # Màn của flow đã lên Figma nằm trong spec Mục 10 (danh mục + chi tiết, máy sinh); index screens/ không nhúng lại.
     screen_dir = next((feature_dir / d for d in ("screens", "html-wireframe", "ascii-wireframe")
                        if find_index_file(feature_dir / d)), feature_dir / "ascii-wireframe")
     screen_index_path = find_index_file(screen_dir)
@@ -214,7 +214,8 @@ def compose_md(feature: str, vault: Path) -> tuple:
     if erd: diag_parts.append('### <a id="sec-erd"></a>ERD\n\n' + demote_headings(strip_frontmatter(erd)))
     if flows: diag_parts.append('### <a id="sec-flows"></a>System Flows\n\n' + demote_headings(strip_frontmatter(flows)))
     if states: diag_parts.append('### <a id="sec-states"></a>State Diagrams\n\n' + demote_headings(strip_frontmatter(states)))
-    if screen_index:
+    # screens/ (Figma): danh mục + chi tiết màn đã nằm trong spec Mục 10 → không lặp index ở đây.
+    if screen_index and screen_dir.name != "screens":
         diag_parts.append(
             "### Screens Index\n\n" + demote_headings(strip_frontmatter(screen_index))
             + "\n\n> _Full content per screen embed inline trong UC Mục f._"
@@ -365,13 +366,19 @@ def prerender_mermaid(md_content: str, assets_dir: Path) -> tuple:
         mmd_path.write_text(code, encoding="utf-8")
         try:
             env = os.environ.copy()
-            # puppeteer cache dir for mmdc — default ~/.cache/puppeteer may be root-owned
-            env.setdefault("PUPPETEER_CACHE_DIR", str(Path.home() / ".puppeteer-cache"))
+            # puppeteer cache dir for mmdc — default ~/.cache/puppeteer may be root-owned.
+            # Chỉ ép sang ~/.puppeteer-cache khi cache mặc định không có: ép cứng làm mmdc mới
+            # tìm Chrome đúng bản của nó trong cache cũ → không thấy → cả 5 sơ đồ fail.
+            default_cache = Path.home() / ".cache" / "puppeteer"
+            if not (default_cache.is_dir() and os.access(default_cache, os.W_OK)):
+                env.setdefault("PUPPETEER_CACHE_DIR", str(Path.home() / ".puppeteer-cache"))
             result = subprocess.run(
                 # -s 3: scale ×3 → PNG nét cao, không nhòe khi in giấy / zoom trong Word.
                 # (mermaid-cli best practice — xem docs/reports/export-skill-review.md P0 #2.)
+                # Không truyền -w: mermaid-cli 12 bỏ cờ này (thay bằng --size = cạnh dài tối đa,
+                # nghĩa khác) → cả 5 sơ đồ fail. Kích thước tự nhiên × scale 3 chạy được mọi bản.
                 ["mmdc", "-i", str(mmd_path), "-o", str(png_path),
-                 "-w", "1400", "-s", "3", "-b", "white", "--theme", "default"],
+                 "-s", "3", "-b", "white", "--theme", "default"],
                 capture_output=True, text=True, timeout=60, env=env,
             )
             if result.returncode == 0 and png_path.exists():

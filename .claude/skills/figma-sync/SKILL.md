@@ -17,8 +17,8 @@ phân loại từng thay đổi, rồi đề xuất sửa đúng chỗ trong tà
 * userflow — `docs/{feature}/srs/{feature}-userflow.md` khi thêm màn hoặc đổi đường đi;
 * nháp `/cr` khi thay đổi chạm quy tắc nghiệp vụ.
 
-`--done` chốt một flow: xuất ảnh Figma, đánh dấu `approved`, sinh **Phụ lục B** trong SRS (ảnh + bảng 5 cột
-thay cho wireframe).
+`--done` chốt một flow: xuất ảnh Figma, đánh dấu `approved`, sinh lại **Mục 10 Screens** của SRS (danh mục màn
++ ảnh + bảng 5 cột, thay cho wireframe).
 
 Rule nền: `.claude/rules/screen-source.md` (vòng đời, định dạng `screens/`, mốc, bảng phân loại Mục 7).
 Đọc rule đó trước nếu chưa có trong ngữ cảnh.
@@ -137,9 +137,12 @@ chữ đổi không rõ là sản phẩm hay dữ liệu mẫu. Không hỏi l�
 3 chữ, 1 row mới"), `CLAUDE_CHANGELOG_AUTHOR` (memory `user-identity`). Chuyển bảng lần đầu:
 `python3 _scripts/screens-md.py migrate {feature} {flow} --write` rồi `git rm` wireframe cũ. Cuối cùng ghi mốc
 `.claude/state/figma/{feature}.json` (`mkdir -p .claude/state/figma` lần đầu).
+Màn chưa có dòng `- **Mô tả:**` (màn mới, hoặc chuyển bảng lần đầu) → tự viết 1–2 câu từ bảng 5 cột, đặt ngay
+sau dòng **Figma**; không cần duyệt riêng (user chốt 13/10), chỉ liệt kê trong báo cáo. Đây là cột Mô tả của
+danh mục màn SRS Mục 10 (rule `screen-source.md` Mục 8).
 
 Sửa userflow → hook stale tự đánh dấu tài liệu phía sau; nhắc `/figma-userflow` vẽ lại sơ đồ trên Figma nếu
-có. Sửa `screens/` của flow đã `approved` → flow về `draft` trong index, Phụ lục B cần sinh lại (báo).
+có. Sửa `screens/` của flow đã `approved` → flow về `draft` trong index, Mục 10 của SRS cần sinh lại (báo).
 
 ## Bước 6 — `--done`: chốt flow, đưa vào SRS
 
@@ -154,9 +157,10 @@ Không chạy `--done` khi còn xung đột hoặc row "cần bổ sung".
    có MCP chính thức → `figma_read export_node {nodeId, format: "PNG", scale: 2}`. Ảnh < 5KB hoặc lỗi → báo,
    không chèn.
 3. L1 gộp: thêm dòng ảnh `![{screenId} · {slug}](images/….png)` sau dòng **Figma** của mỗi màn, index cột
-   Status → `approved` + Updated, spec Mục 10 trỏ "Phụ lục B" (nếu còn trỏ `html-wireframe/`), sinh Phụ lục B
-   (`python3 _scripts/screens-md.py appendix {feature} --write`). L2 cho phần sửa spec Mục 10; Phụ lục B là
-   khối máy sinh nên chỉ báo số flow/màn.
+   Status → `approved` + Updated, sinh lại danh mục + chi tiết màn trong spec Mục 10
+   (`python3 _scripts/screens-md.py appendix {feature} --write`). Spec chưa có 2 cặp marker `screens-catalog` /
+   `screens` (spec cũ, còn bảng tay hoặc "Phụ lục B") → L2 đặt marker theo `_templates/srs-spec.md` Mục 10
+   trước; 2 khối máy sinh thì chỉ báo số flow/màn.
 4. Kiểm: `python3 _scripts/screens-md.py appendix {feature} --check` → exit 0. Khác 0 → báo nguyên văn.
 5. Task backlog "Chốt giao diện Figma {feature} · {flow}" tự đóng (Xong khi grep `approved`).
 
@@ -171,7 +175,7 @@ CR nháp: CR-20261013-002 — lịch sử 5 → 10 dòng | không có
 Chuyển bảng lần đầu: view-process 54/54 row, đã xoá html-wireframe/view-process.html
 Kênh liên kết prototype: đã đọc | không đọc được — <lý do>
 Frame không nhận ra: <liệt kê> | không có
-Done: view-process approved · 15 ảnh · Phụ lục B khớp | —
+Done: view-process approved · 15 ảnh · Mục 10 khớp | —
 Bước tiếp: /figma-userflow (sơ đồ Figma lệch Mục 3.5) · /cr CR-… · /figma-sync --done view-process
 ```
 
@@ -191,5 +195,5 @@ Bước tiếp: /figma-userflow (sơ đồ Figma lệch Mục 3.5) · /cr CR-…
 - `.claude/rules/naming-conventions.md` — screenId, slug, tên frame.
 - `.claude/rules/feature-bootstrap.md` — nhóm B.
 - `.claude/rules/backlog.md` — task "Chốt giao diện Figma".
-- `_scripts/screens-md.py` — `migrate`, `appendix`.
+- `_scripts/screens-md.py` — `migrate`, `appendix` (sinh Mục 10 Screens của SRS).
 - `design/setup-figma.md` › *Tên frame*; `design/ba-crosswalk.md` (control → component, tra ngược).
