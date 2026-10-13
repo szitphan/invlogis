@@ -195,8 +195,15 @@ def cond_text(cond):
         return ""
     if cond == "manual":
         return "Anh tự đóng (đổi Trạng thái thành ✅)"
+    parts_ = [x.strip() for x in cond.split("&&")]
+    # Nhiều điều kiện cùng mẫu (vd 5 doc hết "status: stale") → gộp 1 câu, đủ chi tiết ở tooltip.
+    sig = {re.sub(r"^(!?grep):[^:]+:", r"\1::", x) for x in parts_}
+    if len(parts_) > 2 and len(sig) == 1 and parts_[0].lstrip("!").startswith("grep:"):
+        neg = parts_[0].startswith("!")
+        rx = parts_[0].split(":", 2)[2].replace("\\", "").replace("^", "").replace("$", "")
+        return f"Cả {len(parts_)} file " + ("hết" if neg else "có") + f" “{rx}”"
     out = []
-    for part in [x.strip() for x in cond.split("&&")]:
+    for part in parts_:
         neg = part.startswith("!")
         body = part[1:] if neg else part
         kind, _, rest = body.partition(":")
@@ -930,86 +937,132 @@ def where(path, line=None, hint=""):
 
 
 CSS = """
-:root{--bg:#f4f6f6;--panel:#fff;--fg:#1d2a2c;--muted:#5d6e70;--line:#d9e1e1;--track:#e8eeee;
---accent:#0f6e74;--accent-soft:#dcefef;--ok:#2f7d46;--warn:#a86a00;--bad:#b4372f;--gray:#8a9799;
---f:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--m:ui-monospace,Menlo,Consolas,monospace}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121819;--panel:#1a2223;--fg:#dde6e6;--muted:#93a4a5;--line:#2c3a3b;--track:#243031;--accent:#5cc3c9;--accent-soft:#1c3638;--ok:#62c07f;--warn:#e0a63c;--bad:#ec7a70;--gray:#7b8a8b;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#121819;--panel:#1a2223;--fg:#dde6e6;--muted:#93a4a5;--line:#2c3a3b;--track:#243031;--accent:#5cc3c9;--accent-soft:#1c3638;--ok:#62c07f;--warn:#e0a63c;--bad:#ec7a70;--gray:#7b8a8b;color-scheme:dark}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--f);padding:0 16px}
-.page{max-width:1120px;margin:0 auto;padding-block:20px 48px;display:flex;flex-direction:column;gap:16px}
-a{color:var(--accent);text-underline-offset:2px}a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-code,.mono{font-family:var(--m);font-size:.85em}
-.bar{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
-.bar b{font-size:1rem}.muted{color:var(--muted)}
-.seg{display:inline-flex;gap:4px;align-items:center;font-size:.78rem}
-.seg button,.tabs button{font:inherit;font-size:.8rem;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:3px 10px;border-radius:6px;cursor:pointer}
-.seg button[aria-pressed="true"],.tabs button[aria-selected="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);font-weight:600}
-.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
-.verdict{background:var(--panel);border:1px solid var(--line);border-left:6px solid var(--gray);border-radius:8px;padding:12px 16px}
-.verdict b{display:block;font-size:1.05rem}.v-red{border-left-color:var(--bad)}.v-amber{border-left-color:var(--warn)}.v-green{border-left-color:var(--ok)}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
-.tile{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-width:0;color:inherit;text-decoration:none}
-a.tile:hover{border-color:var(--accent)}
-.tile .lab{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.tile .big{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
-.tile .sub{font-size:.78rem;color:var(--muted)}
-.l-red{color:var(--bad)}.l-amber{color:var(--warn)}.l-green{color:var(--ok)}.l-gray{color:var(--fg)}
-h2{font-size:1rem;margin:4px 0 0}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
-.panel ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
-.panel li{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;min-width:0}
+/* Dashboard theo design system Astryx (design/design.md). Token nhúng từ design/design-tokens.css lúc build
+   (ds_tokens()); file này chỉ dùng biến --color-*, --font-*, --radius-*, --spacing-*, không mã màu cứng. */
+*{box-sizing:border-box}
+body{margin:0;background:var(--color-background-body);color:var(--color-text-primary);font:var(--font-weight-normal) 14px/20px var(--font-body);padding:0 var(--spacing-6)}
+.page{margin:0 auto;padding-block:var(--spacing-6) var(--spacing-12);display:flex;flex-direction:column;gap:var(--spacing-4)}
+a{color:var(--color-text-accent);text-decoration:underline;text-decoration-color:var(--color-border-emphasized);text-underline-offset:3px;transition:text-decoration-color var(--duration-fast) var(--ease-standard)}
+a:hover{text-decoration-color:currentColor}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+code,.mono{font-family:var(--font-code);font-size:12px;line-height:16px}
+code{background:var(--color-neutral);padding:1px 4px;border-radius:var(--radius-inner)}
+.muted{color:var(--color-text-secondary)}
+h2{font:var(--font-weight-normal) 17px/24px var(--font-heading);margin:0}
+small{font-size:12px}
+/* Đầu trang: H1 + meta + công cụ, rồi Tabs */
+.head{display:flex;flex-wrap:wrap;align-items:center;gap:var(--spacing-2) var(--spacing-4)}
+.head h1{font:var(--font-weight-normal) 24px/32px var(--font-heading);margin:0}
+.head .meta{color:var(--color-text-secondary);font-size:12px}
+.head .tools{margin-left:auto;display:flex;flex-wrap:wrap;align-items:center;gap:var(--spacing-3)}
+.seg{display:inline-flex;align-items:center;gap:var(--spacing-2);font-size:12px;color:var(--color-text-secondary)}
+.seg .sc{display:inline-flex;background:var(--color-neutral);border-radius:var(--radius-element);padding:2px;gap:2px}
+.seg .sc button{font:var(--font-weight-medium) 12px/16px var(--font-body);height:24px;padding:0 var(--spacing-2);border:0;border-radius:8px;background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.seg .sc button[aria-pressed="true"]{background:var(--color-background-surface);color:var(--color-text-primary);box-shadow:var(--elevation-low)}
+.tabs{display:flex;gap:var(--spacing-4);border-bottom:1px solid var(--color-border-default);overflow-x:auto}
+.tabs button{font:var(--font-weight-medium) 14px/20px var(--font-body);color:var(--color-text-secondary);background:none;border:0;padding:var(--spacing-2) 0;margin-bottom:-1px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+.tabs button:hover{color:var(--color-text-primary)}
+.tabs button[aria-selected="true"]{color:var(--color-text-primary);font-weight:var(--font-weight-semibold);border-bottom-color:var(--color-accent)}
+[role="tabpanel"]{display:flex;flex-direction:column;gap:var(--spacing-4)}
+/* Banner (verdict) */
+.verdict{display:flex;gap:var(--spacing-3);align-items:flex-start;border-radius:var(--radius-container);padding:var(--spacing-3) var(--spacing-4);background:var(--color-background-surface);border:1px solid var(--color-border-emphasized)}
+.verdict svg{flex:none;margin-top:2px}
+.verdict b{display:block;font:var(--font-weight-semibold) 17px/24px var(--font-body)}
+.v-red{background:var(--color-error-muted);border-color:transparent}.v-red svg{color:var(--color-error)}
+.v-amber{background:var(--color-warning-muted);border-color:transparent}.v-amber svg{color:var(--color-warning)}
+.v-green{background:var(--color-success-muted);border-color:transparent}.v-green svg{color:var(--color-success)}
+.v-red .muted,.v-amber .muted,.v-green .muted{color:var(--color-text-primary)}
+/* Card (Outlined, không bóng) */
+.panel,.tile{background:var(--color-surface-card);border:1px solid var(--color-border-emphasized);border-radius:var(--radius-container);padding:var(--spacing-3) var(--spacing-4)}
+.panel{display:flex;flex-direction:column;gap:var(--spacing-2);min-width:0}
+.panel ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.panel li{display:flex;flex-wrap:wrap;gap:var(--spacing-1) var(--spacing-2);align-items:center;min-width:0;padding:var(--spacing-2) 0;border-top:1px solid var(--color-border-default)}
+.panel li:first-child{border-top:0}
 .panel li code{margin-left:auto}
-.chip{display:inline-block;font-size:.7rem;font-weight:600;padding:0 7px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
-.scroll{overflow-x:auto}
-.stages{display:grid;grid-template-columns:160px repeat(var(--n),minmax(70px,1fr));gap:3px;font-size:.76rem;min-width:760px}
-.stages .h{color:var(--muted);text-align:center}
-.stages .f{font-weight:600;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:4px 0}
-.cell{border-radius:4px;padding:4px 2px;text-align:center;font-variant-numeric:tabular-nums;background:var(--track);color:var(--muted);text-decoration:none;min-height:1.9em}
-.cell.done{background:var(--accent);color:var(--panel)}.cell.part{background:var(--accent-soft);color:var(--accent);font-weight:600}
-.cell.block{background:transparent;border:1px dashed var(--bad);color:var(--bad);font-weight:600}
-a.cell:hover{outline:1px solid var(--accent)}
-.hidden-col{display:none}body.show-hidden .hidden-col{display:block}
-.kb{display:grid;grid-template-columns:repeat(6,minmax(160px,1fr));gap:8px;min-width:1000px}
-.kcol{background:var(--track);border-radius:8px;padding:6px;display:flex;flex-direction:column;gap:6px}
-.kcol h3{margin:2px 4px;font-size:.8rem;display:flex;justify-content:space-between}.kcol h3 span{color:var(--muted);font-weight:400}
-.kcol.stale{background:color-mix(in srgb,var(--warn) 12%,var(--track))}
-.kcard{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font-size:.78rem;display:flex;flex-direction:column;gap:2px;min-width:0}
-.kcard a{font-weight:600;color:var(--fg);text-decoration:none;overflow-wrap:anywhere}.kcard a:hover{color:var(--accent);text-decoration:underline}
-.kcard .km{color:var(--muted);font-size:.7rem;overflow-wrap:anywhere}
-.kcard details{font-size:.7rem}.kcard details a{font-weight:400}
-table{border-collapse:collapse;width:100%;font-size:.84rem}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}tr:last-child td{border-bottom:none}
-.num{font-variant-numeric:tabular-nums}
-footer{color:var(--muted);font-size:.78rem}
-[role="tabpanel"]{display:flex;flex-direction:column;gap:12px}
-.tag{display:inline-block;font-family:var(--m);font-size:.68rem;font-weight:600;padding:0 6px;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
-.tag-m{background:var(--track);color:var(--warn)}
-.score{font-variant-numeric:tabular-nums;font-weight:700;min-width:2.2ch;text-align:right;color:var(--accent);cursor:help}
-ul.work li.more-row{display:none}ul.work.all li.more-row{display:flex}
-table.work tr.more-row{display:none}table.work.all tr.more-row{display:table-row}
-table.work{min-width:980px}table.work td{font-size:.82rem}table.work td.opens a{white-space:nowrap}
-table.work td.btns{white-space:nowrap}table.work td.btns .mini{display:block;margin:0 0 4px}
-tr.dismissed{display:none}body.show-dismissed tr.dismissed{display:table-row;opacity:.55}
-.seg-btn{margin-top:8px;font:inherit;font-size:.78rem;border:1px solid var(--line);background:var(--panel);color:var(--accent);padding:3px 10px;border-radius:6px;cursor:pointer}
-.pcell{display:flex;gap:8px;align-items:center;min-width:140px}
-.mini{font:inherit;font-size:.72rem;padding:1px 8px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--panel);cursor:pointer}
-.mini.ghost{background:none;color:var(--accent)}.mini:disabled{opacity:.6;cursor:default;border-style:dashed}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--spacing-3)}
+.tile{display:flex;flex-direction:column;gap:var(--spacing-1);min-width:0;color:inherit;text-decoration:none;transition:background-color var(--duration-fast) var(--ease-standard)}
+a.tile:hover{background-image:linear-gradient(var(--color-overlay-hover),var(--color-overlay-hover))}
+.tile .lab{font-size:12px;color:var(--color-text-secondary)}
+.tile .big{font:var(--font-weight-semibold) 24px/32px var(--font-body);font-variant-numeric:tabular-nums;color:var(--color-text-primary)}
+.tile .sub{font-size:12px;color:var(--color-text-secondary)}
+.tile .st{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:var(--font-weight-medium)}
+.dot{width:8px;height:8px;border-radius:var(--radius-full);display:inline-block;flex:none;background:var(--color-text-disabled)}
+.dot.red{background:var(--color-badge-error-bg,var(--color-error))}.dot.amber{background:var(--color-badge-warning-bg,var(--color-warning))}
+.dot.green{background:var(--color-badge-success-bg,var(--color-success))}.dot.blue{background:var(--color-badge-info-bg,var(--color-blue-icon))}
+.l-red,.l-amber,.l-green,.l-gray{color:var(--color-text-primary)}
+/* Chip trạng thái (bảng màu trạng thái dự án) */
+.chip{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 10px 0 8px;border-radius:var(--radius-full);font:var(--font-weight-semibold) 12px/16px var(--font-body);white-space:nowrap;background:var(--color-status-chip-gray-bg);color:var(--color-status-chip-gray-fg)}
+.chip svg{flex:none}
+.chip.gray{background:var(--color-status-chip-gray-bg);color:var(--color-status-chip-gray-fg)}
+.chip.blue{background:var(--color-status-chip-blue-bg);color:var(--color-status-chip-blue-fg)}
+.chip.yellow{background:var(--color-status-chip-yellow-bg);color:var(--color-status-chip-yellow-fg)}
+.chip.green{background:var(--color-status-chip-green-bg);color:var(--color-status-chip-green-fg)}
+.chip.red{background:var(--color-status-chip-red-bg);color:var(--color-status-chip-red-fg)}
+.chip.purple{background:var(--color-status-chip-purple-bg);color:var(--color-status-chip-purple-fg)}
+/* Badge phân loại (categorical) */
+.tag{display:inline-flex;align-items:center;height:20px;padding:0 var(--spacing-2);border-radius:var(--radius-full);font:var(--font-weight-medium) 12px/16px var(--font-code);white-space:nowrap;background:var(--color-blue-bg);color:var(--color-blue-text)}
+.tag-m{background:var(--color-orange-bg);color:var(--color-orange-text);font-family:var(--font-body)}
+.score{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:20px;padding:0 6px;border-radius:var(--radius-full);background:var(--color-neutral);font:var(--font-weight-semibold) 12px/16px var(--font-body);font-variant-numeric:tabular-nums;cursor:help}
+/* Nút: Primary (accent) · Secondary (neutral) — SM 28 */
+.mini,.seg-btn{font:var(--font-weight-medium) 12px/16px var(--font-body);height:28px;padding:0 var(--spacing-3);border-radius:var(--radius-element);border:0;cursor:pointer;background:var(--color-accent);color:var(--color-on-accent);white-space:nowrap;transition:box-shadow var(--duration-fast) var(--ease-standard)}
+.mini:hover,.seg-btn:hover{box-shadow:inset 0 0 0 100px var(--color-overlay-hover)}
+.mini:active,.seg-btn:active{box-shadow:inset 0 0 0 100px var(--color-overlay-pressed)}
+.mini.ghost,.seg-btn{background:var(--color-neutral);color:var(--color-text-primary)}
+.seg-btn{align-self:flex-start}
+.mini:disabled{background:var(--color-neutral);color:var(--color-text-disabled);cursor:default;box-shadow:none}
 .panel li .mini:first-of-type{margin-left:auto}
+.pendbar{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:var(--radius-full);font:var(--font-weight-semibold) 12px/16px var(--font-body);background:var(--color-status-chip-yellow-bg);color:var(--color-status-chip-yellow-fg)}
+/* Bảng */
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:var(--spacing-2) var(--spacing-3);border-bottom:1px solid var(--color-border-default);vertical-align:top}
+th{font:var(--font-weight-medium) 12px/16px var(--font-body);text-transform:uppercase;color:var(--color-text-secondary);background:var(--color-background-muted);white-space:nowrap}
+tbody tr:hover{background:var(--color-overlay-hover)}
+tr:last-child td{border-bottom:none}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+td.ctr{text-align:center}
+table.work tr.more-row{display:none}table.work.all tr.more-row{display:table-row}
+table.work{min-width:1040px}table.work td.scol{width:88px;white-space:nowrap}table.work td{font-size:14px}table.work td.muted{font-size:12px}
+table.work td.opens{font-size:12px}table.work td.opens a{white-space:nowrap}
+table.work td.btns{white-space:nowrap}table.work td.btns .mini{display:flex;align-items:center;margin:0 0 var(--spacing-1)}
+tr.dismissed{display:none}body.show-dismissed tr.dismissed{display:table-row;opacity:.55}
 li.dismissed{display:none!important}body.show-dismissed li.dismissed{display:flex!important;opacity:.55}
-.pendbar{font-size:.78rem;font-weight:600;color:var(--warn);border:1px dashed var(--warn);border-radius:6px;padding:2px 8px}
-.kb5{grid-template-columns:repeat(5,minmax(170px,1fr));min-width:900px}
-.kbody{display:flex;flex-direction:column;gap:6px;min-height:40px}
-.kcol.over{box-shadow:inset 0 0 0 2px var(--accent)}.kcol.bad{box-shadow:inset 0 0 0 2px var(--bad)}
+/* Trục tiến độ */
+.stages{display:grid;grid-template-columns:170px repeat(var(--n),minmax(78px,1fr));gap:var(--spacing-1);font-size:12px;min-width:800px;align-items:stretch}
+.stages .h{color:var(--color-text-secondary);text-align:center;font-weight:var(--font-weight-medium);text-transform:uppercase;padding-bottom:var(--spacing-1)}
+.stages .f{font:var(--font-weight-medium) 12px/16px var(--font-code);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:6px 0}
+.cell{border-radius:var(--radius-inner);padding:6px 4px;text-align:center;font-variant-numeric:tabular-nums;background:transparent;border:1px dashed var(--color-border-emphasized);color:var(--color-text-disabled);text-decoration:none;min-height:28px}
+.cell.done{background:var(--color-accent);border-color:var(--color-accent);color:var(--color-on-accent);font-weight:var(--font-weight-semibold)}
+.cell.part{background:var(--color-neutral);border:1px solid transparent;color:var(--color-text-primary);font-weight:var(--font-weight-medium)}
+.cell.block{background:var(--color-status-chip-red-bg);border:1px solid transparent;color:var(--color-status-chip-red-fg);font-weight:var(--font-weight-semibold)}
+a.cell:hover{box-shadow:inset 0 0 0 100px var(--color-overlay-hover)}
+.hidden-col{display:none}body.show-hidden .hidden-col{display:block}
+/* Kanban (P8) */
+.kb{display:grid;grid-template-columns:repeat(6,minmax(180px,1fr));gap:var(--spacing-3);min-width:1080px}
+.kb5{grid-template-columns:repeat(5,minmax(190px,1fr));min-width:980px}
+.kcol{background:var(--color-background-body);border-radius:var(--radius-container);padding:var(--spacing-2);display:flex;flex-direction:column;gap:var(--spacing-2);transition:box-shadow var(--duration-fast) var(--ease-standard)}
+.kcol h3{margin:var(--spacing-1) var(--spacing-1) 0;font:var(--font-weight-bold) 14px/20px var(--font-body);display:flex;align-items:center;gap:var(--spacing-2)}
+.kcol h3 .n{color:var(--color-text-secondary);font-weight:var(--font-weight-normal);margin-left:auto}
+.kbody{display:flex;flex-direction:column;gap:var(--spacing-2);min-height:48px}
+.kcard{background:var(--color-surface-card);border:1px solid var(--color-border-emphasized);border-radius:var(--radius-container);padding:var(--spacing-3);font-size:14px;display:flex;flex-direction:column;gap:var(--spacing-1);min-width:0}
+.kcard a{font-weight:var(--font-weight-medium);color:var(--color-text-primary);text-decoration:none;overflow-wrap:anywhere}.kcard a:hover{text-decoration:underline}
+.kcard .km{color:var(--color-text-secondary);font-size:12px;overflow-wrap:anywhere}
+.kcard details{font-size:12px}.kcard details a{font-weight:var(--font-weight-normal)}
 .kcard[draggable="true"]{cursor:grab}
-.kcard select{font:inherit;font-size:.7rem;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:4px;max-width:100%}
-.kcard .pend{color:var(--warn);font-weight:600;font-size:.7rem}
-.frow{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-.reason{font-size:.72rem;display:flex;flex-direction:column;gap:2px}.reason input{font:inherit;font-size:.74rem;padding:2px 4px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--fg)}
-.hist{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;align-items:center;font-size:.78rem}
-.hb{display:flex;height:12px;background:var(--track);border-radius:3px;overflow:hidden}
-.hb .ho{background:var(--accent)}.hb .hc{background:color-mix(in srgb,var(--accent) 35%,var(--track))}
-.hl{color:var(--muted);white-space:nowrap}
-.pbar{flex:1;height:7px;background:var(--track);border-radius:4px;overflow:hidden;min-width:60px}.pbar i{display:block;height:100%;background:var(--accent)}
+.kcard select{font:inherit;font-size:12px;height:28px;background:var(--color-background-surface);color:var(--color-text-primary);border:1px solid var(--color-border-emphasized);border-radius:var(--radius-element);max-width:100%;padding:0 var(--spacing-2)}
+.kcard .pend{align-self:flex-start}
+.kcol.over{box-shadow:inset 0 0 0 2px var(--color-accent)}.kcol.bad{box-shadow:inset 0 0 0 2px var(--color-error)}
+.frow{display:flex;gap:var(--spacing-1);flex-wrap:wrap;align-items:center}
+.reason{font-size:12px;display:flex;flex-direction:column;gap:var(--spacing-1)}
+.reason input{font:inherit;font-size:14px;height:32px;padding:0 var(--spacing-2);border:1px solid var(--color-border-emphasized);border-radius:var(--radius-element);background:var(--color-background-surface);color:var(--color-text-primary)}
+/* OQ theo tuần, thanh đối chiếu */
+.hist{display:grid;grid-template-columns:auto 1fr auto;gap:var(--spacing-2) var(--spacing-3);align-items:center;font-size:12px}
+.hb{display:flex;height:12px;background:var(--color-neutral);border-radius:var(--radius-full);overflow:hidden}
+.hb .ho{background:var(--color-accent)}.hb .hc{background:var(--color-border-emphasized)}
+.hl{color:var(--color-text-secondary);white-space:nowrap}
+.pcell{display:flex;gap:var(--spacing-2);align-items:center;min-width:150px}
+.pbar{flex:1;height:6px;background:var(--color-neutral);border-radius:var(--radius-full);overflow:hidden;min-width:60px}.pbar i{display:block;height:100%;background:var(--color-accent)}
+footer{color:var(--color-text-secondary);font-size:12px}
 """
 
 JS = """
@@ -1041,6 +1094,53 @@ JS = """
 
 
 FIGMA_COLS = [("moi", "Mới"), ("dang-sua", "Đang sửa"), ("cho-do-lai", "Chờ đo lại"), ("xong", "Xong"), ("bo-qua", "Bỏ qua")]
+
+
+def ds_tokens():
+    """Token Astryx từ design/design-tokens.css + khối dark theo prefers-color-scheme (file token chỉ có
+    [data-theme="dark"]). Thiếu file → trả rỗng, trang dùng màu trình duyệt (không bịa bảng màu)."""
+    css = read(ROOT / "design/design-tokens.css")
+    if not css:
+        return ""
+    m = re.search(r'\[data-theme="dark"\]\s*\{(.*?)\n\}', css, re.S)
+    dark = m.group(1) if m else ""
+    extra = (f'@media (prefers-color-scheme: dark){{:root:not([data-theme="light"]){{{dark}\n color-scheme:dark}}}}\n'
+             f'[data-theme="dark"]{{color-scheme:dark}}\n') if dark else ""
+    return css + "\n" + extra
+
+
+ICONS = {  # Lucide, nét 2 trên khung 24 (chip trạng thái)
+    "pen-line": '<path d="M12 20h9"/><path d="M16.4 3.6a2.1 2.1 0 0 1 3 3L7.4 18.6a2 2 0 0 1-.9.5l-2.9.8a.5.5 0 0 1-.6-.6l.8-2.9a2 2 0 0 1 .5-.9z"/>',
+    "clock": '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+    "rotate-ccw": '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+    "check": '<path d="M20 6 9 17l-5-5"/>',
+    "check-check": '<path d="M18 6 7 17l-5-5"/><path d="m22 10-7.5 7.5L13 16"/>',
+    "triangle-alert": '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+    "circle-x": '<circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/>',
+    "info": '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
+    "circle-check": '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
+}
+
+
+def ic(name, size=14):
+    return (f'<svg width="{size}" height="{size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+            f'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONS.get(name, "")}</svg>')
+
+
+DOC_CHIP = {"draft": ("gray", "pen-line", "Draft"), "in-review": ("yellow", "clock", "In review"),
+            "revisions": ("red", "rotate-ccw", "Revisions"), "approved": ("green", "check", "Approved"),
+            "shipped": ("green", "check-check", "Shipped"), "stale": ("yellow", "triangle-alert", "Stale")}
+LEVEL_CHIP = {"Cao": ("red", "circle-x"), "Trung": ("yellow", "triangle-alert"), "Thấp": ("gray", "info")}
+LIGHT_TXT = {"red": ("red", "Cần xử lý"), "amber": ("amber", "Cần chú ý"), "green": ("green", "Ổn"), "gray": ("", "")}
+
+
+def chip(sac, icon, label):
+    return f'<span class="chip {sac}">{ic(icon)}{E(label)}</span>'
+
+
+def doc_chip(status):
+    sac, icon, label = DOC_CHIP.get(status, ("gray", "pen-line", status))
+    return chip(sac, icon, label)
 
 
 def act(label, key, req, A, cls="act"):
@@ -1139,34 +1239,37 @@ def render(m, artifact=False):
     url = m.get("state", {}).get("artifact_url", "")
     if A:
         # Artifact: nội dung trang, không doctype/html/head/body (nền tảng tự bọc).
-        w(f'<title>{E(title)}</title><style>{CSS}</style><main class="page">')
+        w(f'<title>{E(title)}</title><style>{ds_tokens()}{CSS}</style><main class="page">')
     else:
         w(f'<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">')
-        w(f"<title>{E(title)}</title><style>{CSS}</style></head><body><main class=\"page\">")
+        w(f"<title>{E(title)}</title><style>{ds_tokens()}{CSS}</style></head><body><main class=\"page\">")
     c = m["counts"]
-    w('<div class="bar"><b>invlogis</b>'
-      f'<span class="muted">{c["features"]} feature · {c["docs_md"]} doc · {c["sources"]} nguồn · {c["backlog_open"]} task · {m["generated"]}</span>'
-      '<span class="seg" role="group" aria-label="Mở link bằng"><span class="muted">Mở bằng</span>'
+    w('<header class="head"><h1>BA Dashboard</h1>'
+      f'<span class="meta">invlogis · {c["features"]} feature · {c["docs_md"]} doc · {c["sources"]} nguồn · {c["backlog_open"]} task · {m["generated"]}</span>'
+      '<div class="tools">'
+      + ('<span class="pendbar" id="pending" hidden></span><span class="muted" id="sync-note" role="status" aria-live="polite" style="font-size:12px"></span>' if A else
+         (f'<span class="meta">Thao tác (kéo thẻ, reset stale…): <a href="{E(url)}" target="_blank" rel="noopener">bản artifact</a></span>' if url else ""))
+      + '<span class="seg" role="group" aria-label="Mở link bằng">Mở bằng<span class="sc">'
       '<button type="button" data-mode="local" aria-pressed="true">VS Code</button>'
-      '<button type="button" data-mode="gh" aria-pressed="false">GitHub</button></span>'
+      '<button type="button" data-mode="gh" aria-pressed="false">GitHub</button></span></span></div></header>'
       '<div class="tabs" role="tablist" aria-label="Tab dashboard">'
       '<button role="tab" id="t-today" aria-selected="true" aria-controls="p-today">Hôm nay</button>'
       '<button role="tab" id="t-feat" aria-selected="false" aria-controls="p-feat">Feature</button>'
       '<button role="tab" id="t-kb" aria-selected="false" aria-controls="p-kb">Kanban</button>'
       '<button role="tab" id="t-src" aria-selected="false" aria-controls="p-src">Nguồn khách</button>'
       '<button role="tab" id="t-health" aria-selected="false" aria-controls="p-health">Sức khỏe vault</button>'
-      '</div>'
-      + ('<span class="pendbar" id="pending" hidden></span><span class="muted" id="sync-note" role="status" aria-live="polite"></span>' if A else
-         (f'<span class="muted">Thao tác (kéo thẻ, reset stale…): <a href="{E(url)}" target="_blank" rel="noopener">bản artifact</a></span>' if url else ""))
-      + '</div>')
+      '</div>')
 
     # Hôm nay
     w('<div role="tabpanel" id="p-today" aria-labelledby="t-today">')
-    w(f'<div class="verdict v-{v["level"]}"><b>{E(v["title"])}</b><span class="muted">{E(v["summary"])}</span></div>')
+    vic = {"red": "circle-x", "amber": "triangle-alert", "green": "circle-check"}.get(v["level"], "info")
+    w(f'<div class="verdict v-{v["level"]}" role="status">{ic(vic, 20)}<div><b>{E(v["title"])}</b><span class="muted">{E(v["summary"])}</span></div></div>')
     w('<div class="tiles">')
     for t in m["tiles"]:
+        dc, dt = LIGHT_TXT.get(t["light"], ("", ""))
+        st = f'<span class="st"><span class="dot {dc}"></span>{dt}</span>' if dt else ""
         inner = (f'<span class="lab">{E(t["label"])}{" ↗" if t.get("path") else ""}</span>'
-                 f'<span class="big l-{t["light"]}">{E(str(t["value"]))}</span><span class="sub">{E(t["sub"])}</span>')
+                 f'<span class="big">{E(str(t["value"]))}</span>{st}<span class="sub">{E(t["sub"])}</span>')
         w(link(t.get("path"), inner, t.get("line"), "tile") if t.get("path") else f'<div class="tile">{inner}</div>')
     w("</div>")
     lanes = m["lanes"]
@@ -1190,7 +1293,7 @@ def render(m, artifact=False):
         w('<div class="scroll"><table class="work"><thead><tr><th class="num">Điểm</th><th>Việc</th><th>Vì sao</th>'
           '<th>Xong khi</th><th>Hạn · Ưu tiên</th><th>Mở ở đâu</th>' + ("<th></th>" if A else "") + '</tr></thead><tbody>')
         for i, x in enumerate(work):
-            parts = " · ".join(f"{k} {v}" for k, v in x["parts"].items() if v) or "0"
+            parts = "<br>".join(f"{k} {v}" for k, v in x["parts"].items() if v) or "0"
             cls = ["more-row"] if i >= 10 else []
             attrs = ""
             if x["kind"] == "Máy":
@@ -1207,7 +1310,7 @@ def render(m, artifact=False):
                 btns = (act("Đưa vào backlog", f"bl:{x['id']}", {"type": "to-backlog", "title": x["title"],
                                                                  "done_when": x.get("done_when") or "manual", "source": "dashboard"}, A, "act mini")
                         + f'<button type="button" class="dismiss mini ghost" data-id="{E(x["id"])}" data-sig="{E(x["title"])}">Đã biết</button>')
-            w(f'<tr class="{" ".join(cls)}"{attrs}><td class="num"><span class="score">{x["score"]}</span><br><small class="muted">{E(parts)}</small></td>'
+            w(f'<tr class="{" ".join(cls)}"{attrs}><td class="num scol"><span class="score">{x["score"]}</span><br><small class="muted">{parts}</small></td>'
               f'<td>{tag} {E(x["title"])}</td><td class="muted">{E(x["why"])}</td>'
               f'<td title="{E(x["done_when"])}">{E(x["done_text"]) or "<span class=muted>—</span>"}</td>'
               f'<td>{dm}</td><td class="opens">{"<br>".join(opens) or "<span class=muted>—</span>"}</td>'
@@ -1223,7 +1326,7 @@ def render(m, artifact=False):
     w('<div role="tabpanel" id="p-feat" aria-labelledby="t-feat" hidden>')
     w('<p class="muted" style="margin:0">Ô đậm = xong · ô nhạt = đang làm · viền đỏ = đang giữ feature lại · xám = chưa tới. '
       'Bấm ô để mở file. Feature chậm nhất lên đầu. '
-      '<button type="button" id="btn-hidden" class="seg" aria-pressed="false" style="border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--muted);cursor:pointer;font:inherit;font-size:.78rem;padding:2px 8px">Hiện cột ẩn URD/BRD/PRD</button></p>')
+      '<button type="button" id="btn-hidden" class="seg-btn" aria-pressed="false">Hiện cột ẩn URD/BRD/PRD</button></p>')
     cols = STAGES + HIDDEN_STAGES
     w(f'<div class="scroll"><div class="stages" style="--n:{len(STAGES)}" id="stages">')
     w("<span></span>" + "".join(f'<span class="h">{E(l)}</span>' for _, l in STAGES)
@@ -1313,13 +1416,14 @@ def render(m, artifact=False):
     w('<div class="scroll"><div class="kb">')
     for key, label in KANBAN:
         cs = [x for x in kb["cards"] if x["col"] == key]
-        w(f'<div class="kcol {key}" data-col="{key}"><h3>{E(label)} <span class="n">{len(cs)}</span></h3><div class="kbody">')
+        dotc = {"draft": "", "in-review": "amber", "revisions": "red", "approved": "green", "shipped": "green", "stale": "amber"}.get(key, "")
+        w(f'<div class="kcol {key}" data-col="{key}"><h3><span class="dot {dotc}"></span>{E(label)} <span class="n">{len(cs)}</span></h3><div class="kbody">')
         for x in cs:
             meta = " · ".join(s for s in [x["type"], x["feature"], x["updated"],
                                           f"trước: {x['prev']}" if key == "stale" and x["prev"] else ""] if s)
             dattr = (f' data-path="{E(x["path"])}" data-status="{E(x["status"])}" data-prev="{E(x["prev"])}" '
                      f'data-title="{E(x["title"])}"' + (' draggable="true"' if A else ""))
-            w(f'<div class="kcard"{dattr}>{link(x["path"], E(x["title"]))}<span class="km">{E(meta)}</span>'
+            w(f'<div class="kcard"{dattr}>{doc_chip(x["status"])}{link(x["path"], E(x["title"]))}<span class="km">{E(meta)}</span>'
               + ('<span class="pend" hidden></span><select class="kmove" aria-label="Chuyển sang cột"></select>' if A else ""))
             if x["children"]:
                 w(f'<details><summary>+{len(x["children"])} file đi kèm</summary>'
@@ -1335,11 +1439,12 @@ def render(m, artifact=False):
         w('<div class="scroll"><div class="kb kb5">')
         for key, label in FIGMA_COLS:
             cs = [x for x in fb if x["col"] == key]
-            w(f'<div class="kcol fcol" data-col="{key}"><h3>{E(label)} <span class="n">{len(cs)}</span></h3><div class="kbody">')
+            fdot = {"moi": "", "dang-sua": "blue", "cho-do-lai": "amber", "xong": "green", "bo-qua": ""}.get(key, "")
+            w(f'<div class="kcol fcol" data-col="{key}"><h3><span class="dot {fdot}"></span>{E(label)} <span class="n">{len(cs)}</span></h3><div class="kbody">')
             for x in cs:
-                lv = {"Cao": "l-red", "Trung": "l-amber", "Thấp": "muted"}.get(x["level"], "")
+                lsac, licon = LEVEL_CHIP.get(x["level"], ("gray", "info"))
                 w(f'<div class="kcard fcard" data-fid="{E(x["id"])}" data-col="{E(x["col"])}"' + (' draggable="true"' if A else "") + '>'
-                  f'<span class="km"><b class="{lv}">{E(x["level"])}</b> · {E(x["feature"])} · {E(x["code"])}</span>'
+                  f'<span class="frow">{chip(lsac, licon, x["level"])}<span class="km mono">{E(x["code"])} · {E(x["feature"])}</span></span>'
                   f'<span>{E(re.sub(r"`", "", x["what"])[:160])}</span>'
                   f'<span class="km">{link(x["report"], E(re.sub(r"`", "", x["where"])[:90]))}</span>'
                   + ('<label class="reason" hidden>Lý do bỏ qua <input type="text" maxlength="200"></label>'
