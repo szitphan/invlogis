@@ -1,8 +1,7 @@
 ---
 type: tenant-parameters
-status: stale
-status_prev: draft
-status_changed: 2026-10-12
+status: draft
+status_changed: 2026-10-14
 status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-12
 tenant_terms: [Delta, DK05, dGas, Nam Khánh, Phú Lợi, Pan Hải An]

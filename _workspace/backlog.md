@@ -1,7 +1,7 @@
 ---
 type: backlog
 status: draft
-updated: 2026-10-13
+updated: 2026-10-14
 links:
   - docs-input/README.md
 ---
@@ -38,7 +38,6 @@ links:
 | BL-027 | Rà lại`docs/_research/2026-10-02-eport-integration.md` theo thay đổi SRC-01 (SOP giao nhận bản 18/9: số mục mới, nội dung đổi) | `sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | `grep:docs/_research/2026-10-02-eport-integration.md:_changes/2026-10-02-giao-nhan-hang-hoa` | ⬜ | 2026-10-02 |  |  |  |  |
 | BL-028 | Rà lại`docs/_research/2026-10-02-field-document-reading.md` theo thay đổi SRC-01 (SOP giao nhận bản 18/9: số mục mới, nội dung đổi) | `sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md` | `grep:docs/_research/2026-10-02-field-document-reading.md:_changes/2026-10-02-giao-nhan-hang-hoa` | ⬜ | 2026-10-02 |  |  |  |  |
 | BL-029 | Chạy thử`/prototype-html <feature> <link Figma>` trên 1 flow thật, sửa skill theo kết quả (khớp artboard 3b, lệch Figma↔tài liệu, đối chiếu ảnh 26b) | `.claude/skills/prototype-html/` | `grep:docs/*/html-design/*-prototype.html:data-figma-node` | ⬜ | 2026-10-04 |  |  |  |  |
-| BL-030 | Chạy thử luồng usability AI trên 1 feature thật:`/brainstorm` (bảng 3.1) → `/user-flow` (Mục 3.6) → `/figma-screen` gọi `@usability-reviewer`; sửa skill/agent theo kết quả | `.claude/agents/usability-reviewer.md` | `grep:docs/*/srs/*-userflow.md:^## 3\.6\. Tác vụ chính` | ⬜ | 2026-10-04 |  |  |  |  |
 | BL-031 | Đưa 4 đề xuất thẻ dùng chung (Mục 5 bản đồ đối tượng: Phương tiện, Nhà cung cấp, dòng mặt hàng, thẻ chứng từ) thành CMP qua`/update-overview patterns`, làm khi bắt đầu vẽ màn | `docs/_shared/object-map.md` | `grep:design/ui-common/screen-patterns.md:Ô chọn Nhà cung cấp` | ⬜ | 2026-10-05 |  |  |  |  |
 | BL-032 | Sửa fixture KG (`skills/kg/engine/test-fixtures/`) cho khớp engine hiện tại — đang 112 pass / 25 fail, hỏng sẵn cả ở kit | `_guides/pipeline.md` P-28 | `manual` | ⬜ | 2026-10-05 |  |  |  |  |
 | BL-033 | Reverse SRS mobile (feature cũ đang phát triển) sang bộ SRS chuẩn (`/reverse-doc`) | `srs-cu/srs-mobile/srs-mobile.md` | `grep:docs/_reverse/*/*-reverse-spec.md:srs-mobile` | ⬜ | 2026-10-05 |  |  |  |  |
@@ -78,11 +77,16 @@ links:
 | BL-089 | Dashboard: hiện task "Chốt giao diện Figma {feature} · {flow}" (cùng làn "Chờ bạn" BL-088) và cho đổi trạng thái ngay trên dashboard (chuyển ✅ = chốt flow → hook nhắc `/figma-sync --done`), kèm cột flow nào đã `approved` / còn lệch Figma. Hiện phải sửa tay `_workspace/backlog.md` | hội thoại 2026-10-13 (rule `screen-source.md` Mục 6) | `grep:.claude/skills/dashboard/SKILL.md:Chốt giao diện Figma` | ⬜ | 2026-10-13 |  |  |  |  |
 | BL-095 | Dựng `/figma-component --scan`: tìm khối lặp (design_fingerprint) → đề xuất component + biến thể, chuẩn hoá tên, gắn style/biến; nhận K5 từ `/figma-audit` | hội thoại 13/10 (nhóm 4) | `grep:.claude/skills/figma-component/SKILL.md:--scan` | ⬜ | 2026-10-13 |  |  |  |  |
 | BL-096 | Dựng `/figma-handoff`: ghi chú trên Figma (frame `Ghi chú · …`) + `docs/{feature}/handoff/{feature}-handoff.md` từ userflow, `screens/`, SRS, states, design.md; điểm cần xác nhận gom từ OQ + `/figma-audit` | hội thoại 13/10 (nhóm 6) | `exists:.claude/skills/figma-handoff/SKILL.md` | ⬜ | 2026-10-13 |  |  |  |  |
+| BL-100 | Audit Figma cross-process-flow: 1 mục mức Cao (từ dashboard) | dashboard | `grep:docs/reports/figma-audit/*-cross-process-flow-figma-audit.md:\*\*Cao 0 ` | ⬜ | 2026-10-14 |  |  |  |  |
+| BL-101 | Doc dự án (_shared, _product, meetings): 6 doc stale chờ rà (từ dashboard) | dashboard | `!grep:docs/_product/saas-core-vs-tenant.md:^status: stale && !grep:docs/_product/srs-v2-change-log.md:^status: stale && !grep:docs/_product/tenant-parameters.md:^status: stale && !grep:docs/_shared/definitions.md:^status: stale && !grep:docs/meetings/2026-10-09-client-dispatch-field-issues.md:^status: stale && !grep:docs/meetings/2026-10-10-oq-dispatch-coordination.md:^status: stale` | ⬜ | 2026-10-14 |  |  |  |  |
+| BL-102 | Rà lại `docs/cross-process-flow/cross-process-flow-object-map.md` theo upstream đã đổi (từ dashboard) | dashboard | `!grep:docs/cross-process-flow/cross-process-flow-object-map.md:^status: stale` | ⬜ | 2026-10-14 |  |  |  |  |
+| BL-103 | Rà lại `docs/cross-process-flow/screens/cross-process-flow-screen-index.md` theo upstream đã đổi (từ dashboard) | dashboard | `!grep:docs/cross-process-flow/screens/cross-process-flow-screen-index.md:^status: stale` | ⬜ | 2026-10-14 |  |  |  |  |
 
 ## Đã xong
 
 | ID | Việc | Nguồn | Xong khi | Trạng thái | Tạo | Xong | Bằng chứng | Hạn | Ưu tiên |
 |---|---|---|---|---|---|---|---|---|---|
+| BL-030 | Chạy thử luồng usability AI trên 1 feature thật:`/brainstorm` (bảng 3.1) → `/user-flow` (Mục 3.6) → `/figma-screen` gọi `@usability-reviewer`; sửa skill/agent theo kết quả | `.claude/agents/usability-reviewer.md` | `grep:docs/*/srs/*-userflow.md:^## 3\.6\. Tác vụ chính` | ✅ | 2026-10-04 | 2026-10-14 | `docs/cross-process-flow/srs/cross-process-flow-userflow.md` |  |  |
 | BL-099 | Dashboard v2 đợt P2: publish artifact link cố định; `/dashboard sync` (kéo thẻ, reset stale, đưa vào backlog — duyệt 1 lần cả lô); bảng Review Figma + `/figma-screen` ghi `_workspace/figma-runs.md`; gitignore `dashboard.html`; OQ theo tuần; session-init 1 dòng verdict | hội thoại 2026-10-13 | `grep:.claude/skills/dashboard/SKILL.md:dashboard sync && grep:.claude/skills/figma-screen/SKILL.md:figma-runs\.md` | ✅ | 2026-10-13 | 2026-10-13 | `.claude/skills/dashboard/SKILL.md` · `.claude/skills/figma-screen/SKILL.md` |  |  |
 | BL-098 | Dashboard v2 đợt P1: hàng việc chung BL + Máy có điểm ưu tiên Chặn 40/Hạn 25/Lan 20/Tuổi 15; tab Nguồn khách (tên SRC, đối chiếu n/m); ô SaaS + Figma; cột Hạn trong backlog | hội thoại 2026-10-13 | `grep:_scripts/dashboard-build.py:_coverage && grep:_scripts/dashboard-build.py:def priority_score` | ✅ | 2026-10-13 | 2026-10-13 | `_scripts/dashboard-build.py` · `_scripts/dashboard-build.py` |  |  |
 | BL-097 | Dashboard v2 đợt P0: `dashboard-build.py` (trục 8 cột + 3 ẩn, verdict theo giai đoạn, kanban 6 cột đủ doc, link VS Code/GitHub, làn Chờ bạn); độ tươi tách stale; `/dashboard` gọi script — đề xuất https://claude.ai/artifact/631W9qLYmsCQ9z8Zyb7Cp7 | hội thoại 2026-10-13 | `exists:_scripts/dashboard-build.py && grep:.claude/skills/dashboard/SKILL.md:dashboard-build\.py` | ✅ | 2026-10-13 | 2026-10-13 | `_scripts/dashboard-build.py` · `.claude/skills/dashboard/SKILL.md` |  |  |

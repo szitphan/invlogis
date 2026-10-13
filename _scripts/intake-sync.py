@@ -17,7 +17,7 @@ Chạy tự động qua hook (SessionStart, UserPromptSubmit, PostToolUse Write|
 
 Cú pháp "Xong khi" (nhiều điều kiện nối bằng `&&`, thêm `!` phía trước để phủ định):
   exists:<glob>                 có ít nhất 1 file khớp glob (tính từ gốc repo)
-  grep:<glob>:<regex>           có file khớp glob chứa regex
+  grep:<glob>:<regex>           có file khớp glob chứa regex (`^`/`$` theo dòng)
   fed:<đường dẫn trong docs-input>   nguồn đó đang ✅ trong sổ
   branch:<tên branch>           branch local còn tồn tại (dùng `!branch:feat/x` → đóng khi đã drop)
   manual                        chỉ đóng bằng tay (đổi Trạng thái thành ✅)
@@ -315,7 +315,7 @@ def check(cond, fed):
                 if SCRATCH.search(nfc(os.path.relpath(f, ROOT))):
                     continue
                 try:
-                    if re.search(rx, rd(os.path.relpath(f, ROOT))):
+                    if re.search(rx, rd(os.path.relpath(f, ROOT)), re.M):
                         ok, hit = True, nfc(os.path.relpath(f, ROOT))
                         break
                 except (UnicodeDecodeError, IsADirectoryError):
