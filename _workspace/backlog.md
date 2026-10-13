@@ -74,6 +74,7 @@ links:
 | BL-077 | Lập feature payment-on-behalf (nhận mục từ SRC-07) | `sop/quan-ly-hoa-don-sim/quan-ly-hoa-don-sim.md` | `exists:docs/payment-on-behalf/brainstorms/*.md` | ⬜ | 2026-10-12 |  |  |
 | BL-078 | Bổ sung wireframe tao-nghiep-vu-tiep-theo: sơ đồ bước mới [16] (Ở đây), lỗi hệ thống khi gửi (E-common-008/009), confirm CMP-03 "Xoá bản nháp", row nút X 3 popup — rồi vẽ Figma | /figma-screen 13/10 (uxui-reviewer) | `grep:docs/cross-process-flow/html-wireframe/tao-nghiep-vu-tiep-theo.html:E-common-008` | ⬜ | 2026-10-13 |  |  |
 | BL-079 | Bổ sung wireframe + Figma xem-quy-trinh-mobile: artboard sau "Mở màn hình chi tiết" (thu quyền E-common-011, đã xoá E-cross-process-flow-004), bước Đã huỷ mobile; vùng chạm ≥44 (Thử lại, Xem tất cả, Quay lại); "Xem tất cả" [25] chưa có đích (cần /cr) | /figma-screen 13/10 (uxui-reviewer, usability-reviewer) | `grep:docs/cross-process-flow/html-wireframe/xem-quy-trinh-mobile.html:m-sheet-ban-ghi-da-xoa` | ⬜ | 2026-10-13 |  |  |
+| BL-084 | Thay ~46 chỗ "(chốt dd/mm)" trong `design/design.md`, `design/ui-common/*`, cross-process-flow spec/userflow, tenant-parameters, saas-core-vs-tenant bằng mã `(DEC-NNN)`; thêm lint (hoặc mức WARN trong script có sẵn) báo "chốt" không có mã DEC; bổ sung lý do cho các dòng "⚠ chưa ghi lý do" | `_workspace/decisions.md` · `.claude/rules/decision-log.md` | `!grep:design/design.md:\(chốt [0-9]+/[0-9]+` | ⬜ | 2026-10-13 |  |  |
 
 ## Đã xong
 
