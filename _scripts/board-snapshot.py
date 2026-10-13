@@ -94,6 +94,11 @@ def build():
                           "meta": f"{c['steps_done']}/{c['steps_total']} bước" + (f" · {c['open_questions']} câu hỏi" if key == "blocked" else "")
                                   + (f" · {c['last_log']}" if c["last_log"] else ""),
                           "moves": ["running"] if key == "planned" else []})
+    shown = {i["id"][3:] for i in items if i["kind"] == "worktree"} | {t["branch"] for t in d["lanes"]["review"]}
+    carded = {c["branch"] for k in ("blocked", "planned", "running") for c in d["lanes"][k] if c["path"]}
+    for br, w in wts.items():  # worktree trống (queue.py không tính là đang chạy) vẫn hiện ở cột Mở
+        if br not in shown and br not in carded and not w.get("ready"):
+            items.append(worktree_item({"feature": w["slug"], "branch": br}, w, md))
     rows = backlog_rows(md)
     done = []
     for r in rows:

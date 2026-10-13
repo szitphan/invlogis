@@ -141,7 +141,7 @@ def collect():
             lanes[c["run_state"]].append(c)
     carded = {c["branch"] for c in cs if c["run_state"] in ("running", "blocked", "planned", "review")}
     for w in wts:
-        if not w["ready"] and w["branch"] not in carded:  # worktree làm tay, không có run card
+        if not w["ready"] and w["branch"] not in carded and (w["ahead"] or w["dirty"]):  # worktree làm tay; worktree trống không tính là đang chạy
             lanes["running"].append({"path": "", "feature": w["slug"], "title": "(worktree không có run card — trống hoặc làm tay)",
                                      "branch": w["branch"], "run_state": "manual", "steps_done": 0,
                                      "steps_total": 0, "open_questions": 0,
