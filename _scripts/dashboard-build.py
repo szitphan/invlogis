@@ -781,6 +781,16 @@ def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today, s
     return items
 
 
+def oq_delta(history):
+    """So OQ mở hôm nay với mốc cuối tuần gần nhất trong lịch sử git: (chênh, ngày mốc) hoặc None."""
+    pts = history.get("points", [])
+    now = next((p for p in pts if p.get("now")), None)
+    prev = [p for p in pts if not p.get("now") and p["open"]]
+    if not now or not prev:
+        return None
+    return {"diff": now["open"] - prev[-1]["open"], "since": prev[-1]["date"]}
+
+
 def light(n, ok, warn):
     return "green" if n <= ok else "amber" if n <= warn else "red"
 
@@ -880,7 +890,7 @@ def build(feature_filter=None, light_mode=False):
     tiles = [
         {"key": "waiting", "label": "Chờ bạn", "value": waiting, "light": "green" if not waiting else "amber",
          "sub": f"{len(lanes.get('review', []))} duyệt land · {len(lanes.get('blocked', []))} chặn · {len(lanes.get('planned', []))} card"},
-        {"key": "oq", "label": "Câu hỏi mở", "value": open_oq, "light": light(open_oq, 0, 20),
+        {"key": "oq", "label": "Câu hỏi mở", "value": open_oq, "light": light(open_oq, 0, 20), "delta": oq_delta(history),
          "sub": " · ".join(f"{r['feature']} {r['open_oq']}" for r in sorted(rows, key=lambda r: -r["open_oq"]) if r["open_oq"]) or "không còn",
          "path": next((r["stages"]["oq"]["path"] for r in sorted(rows, key=lambda r: -r["open_oq"]) if r["open_oq"]), None),
          "line": next((r["stages"]["oq"]["line"] for r in sorted(rows, key=lambda r: -r["open_oq"]) if r["open_oq"]), None)},
@@ -900,7 +910,7 @@ def build(feature_filter=None, light_mode=False):
         verdict["level"] = "red" if (lanes.get("blocked") or lint_fail) else worst
 
     return {
-        "unassigned": unassigned,
+        "unassigned": unassigned, "neck": neck if rows and block_count[neck] else None,
         "generated": today.isoformat(), "scope": feature_filter or "project", "root": str(ROOT),
         "verdict": verdict, "tiles": tiles, "lanes": lanes, "actions": actions, "work": work,
         "sources": sources, "params": params, "history": history, "figma_board": fboard,
@@ -1063,6 +1073,31 @@ a.cell:hover{box-shadow:inset 0 0 0 100px var(--color-overlay-hover)}
 .pcell{display:flex;gap:var(--spacing-2);align-items:center;min-width:150px}
 .pbar{flex:1;height:6px;background:var(--color-neutral);border-radius:var(--radius-full);overflow:hidden;min-width:60px}.pbar i{display:block;height:100%;background:var(--color-accent)}
 footer{color:var(--color-text-secondary);font-size:12px}
+/* Nổi bật: dải KPI · Làm trước · nút thắt · cột Stale */
+.kpi,.first3{display:flex;flex-direction:column;gap:var(--spacing-3)}
+.kpis .tile{padding:var(--spacing-4);gap:var(--spacing-1)}
+.kpis .ktop{display:flex;align-items:center;justify-content:space-between;gap:var(--spacing-2);flex-wrap:wrap}
+.kpis .lab{font:var(--font-weight-medium) 14px/20px var(--font-body);color:var(--color-text-secondary)}
+.kpis .big{font:var(--font-weight-normal) 29px/36px var(--font-heading);font-variant-numeric:tabular-nums}
+.kpis .tile.sev-red{border-color:var(--color-accent)}
+.kpis .tile.sev-gray .big,.kpis .tile.sev-green .big{color:var(--color-text-primary)}
+.delta{font:var(--font-weight-semibold) 12px/16px var(--font-body)}
+.delta.down{color:var(--color-success)}.delta.up{color:var(--color-error)}
+.f3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--spacing-3)}
+.fcard1{background:var(--color-surface-card);border:1px solid var(--color-border-emphasized);border-radius:var(--radius-container);padding:var(--spacing-4);display:flex;flex-direction:column;gap:var(--spacing-2);min-width:0}
+.fcard1.lead{border:2px solid var(--color-accent);padding:calc(var(--spacing-4) - 1px)}
+.fcard1 h3{margin:0;font:var(--font-weight-semibold) 17px/24px var(--font-body)}
+.fcard1 p{margin:0;font-size:14px}.fcard1 p.muted{font-size:12px}
+.fcard1 .lab{font-size:12px;color:var(--color-text-secondary);font-weight:var(--font-weight-medium)}
+.fcard1 .opens{font-size:12px;overflow-wrap:anywhere}
+.fcard1 .score{background:var(--color-accent);color:var(--color-on-accent)}
+.rank{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:var(--radius-full);border:1px solid var(--color-border-emphasized);font:var(--font-weight-semibold) 12px/16px var(--font-body)}
+.fcard1.lead .rank{background:var(--color-accent);color:var(--color-on-accent);border-color:var(--color-accent)}
+.stages .h.neck{color:var(--color-text-primary);font-weight:var(--font-weight-bold)}
+.stages .h .chip{margin-top:var(--spacing-1);text-transform:none}
+.cell.neckc{box-shadow:inset 0 0 0 2px var(--color-status-chip-red-fg)}
+.kcol.stale{background:var(--color-status-chip-yellow-bg)}
+.cnote{margin:0 var(--spacing-1);font-size:12px;color:var(--color-status-chip-yellow-fg)}
 """
 
 JS = """
@@ -1264,35 +1299,67 @@ def render(m, artifact=False):
     w('<div role="tabpanel" id="p-today" aria-labelledby="t-today">')
     vic = {"red": "circle-x", "amber": "triangle-alert", "green": "circle-check"}.get(v["level"], "info")
     w(f'<div class="verdict v-{v["level"]}" role="status">{ic(vic, 20)}<div><b>{E(v["title"])}</b><span class="muted">{E(v["summary"])}</span></div></div>')
-    w('<div class="tiles">')
-    for t in m["tiles"]:
-        dc, dt = LIGHT_TXT.get(t["light"], ("", ""))
-        st = f'<span class="st"><span class="dot {dc}"></span>{dt}</span>' if dt else ""
-        inner = (f'<span class="lab">{E(t["label"])}{" ↗" if t.get("path") else ""}</span>'
-                 f'<span class="big">{E(str(t["value"]))}</span>{st}<span class="sub">{E(t["sub"])}</span>')
-        w(link(t.get("path"), inner, t.get("line"), "tile") if t.get("path") else f'<div class="tile">{inner}</div>')
-    w("</div>")
+    # Dải KPI: ô tệ hơn xếp trước; số Cal Sans display-3; chip trạng thái + icon; ô đỏ viền accent.
+    sev = {"red": 0, "amber": 1, "green": 2, "gray": 3}
+    w('<section class="kpi" aria-label="Tóm tắt hôm nay"><h2>Tóm tắt hôm nay</h2><div class="tiles kpis">')
+    for t in sorted(m["tiles"], key=lambda t: sev.get(t["light"], 3)):
+        kchip = {"red": chip("red", "circle-x", "Cần xử lý"), "amber": chip("yellow", "triangle-alert", "Cần chú ý"),
+                 "green": chip("green", "circle-check", "Ổn")}.get(t["light"], "")
+        d = t.get("delta")
+        dl = ""
+        if d and d["diff"]:
+            dl = (f'<span class="delta {"down" if d["diff"] < 0 else "up"}">{"↓" if d["diff"] < 0 else "↑"} {abs(d["diff"])} '
+                  f'so với {E(d["since"][8:])}/{E(d["since"][5:7])}</span>')
+        inner = (f'<span class="ktop"><span class="lab">{E(t["label"])}{" ↗" if t.get("path") else ""}</span>{kchip}</span>'
+                 f'<span class="big">{E(str(t["value"]))}</span>{dl}<span class="sub">{E(t["sub"])}</span>')
+        cls = f'tile sev-{t["light"]}'
+        w(link(t.get("path"), inner, t.get("line"), cls) if t.get("path") else f'<div class="{cls}">{inner}</div>')
+    w("</div></section>")
     lanes = m["lanes"]
     names = [("review", "Chờ duyệt land"), ("blocked", "Chặn, chờ trả lời"), ("planned", "Card chờ duyệt"), ("running", "Đang chạy")]
     items = [(n, x) for k, n in names for x in lanes.get(k, [])]
-    w('<div class="panel"><h2>Chờ bạn</h2><ul>')
-    if not items:
-        w('<li class="muted">Không có việc nào chờ bạn.</li>')
+    if items:  # trống → ô KPI "Chờ bạn 0" đã đủ, không chiếm chỗ
+        w('<div class="panel"><h2>Chờ bạn</h2><ul>')
     for i, (n, x) in enumerate(items, 1):
         steps = f"bước {x.get('steps_done', 0)}/{x.get('steps_total', 0)}" if x.get("steps_total") else ""
         w(f'<li><span class="chip">{E(n)}</span><b>{E(x.get("feature", ""))}</b><span class="muted">{E(x.get("title", ""))} {E(steps)} · {E(x.get("last_log", ""))}</span><code>/queue {i}</code></li>')
-    w("</ul></div>")
+    if items:
+        w("</ul></div>")
     work = m["work"]
-    w(f'<div class="panel"><h2>Hàng việc ({len(work)}) · xếp theo điểm ưu tiên</h2>'
+    top, rest = work[:3], work[3:]
+    if top:
+        w('<section class="first3" aria-label="Làm trước"><h2>Làm trước</h2><div class="f3">')
+        for i, x in enumerate(top, 1):
+            attrs = f' data-wid="{E(x["id"])}" data-sig="{E(x["title"])}"' if x["kind"] == "Máy" else ""
+            tag = f'<span class="tag{" tag-m" if x["kind"] == "Máy" else ""}">{E(x["id"] if x["kind"] == "BL" else "Máy")}</span>'
+            parts = " · ".join(f"{k} {v}" for k, v in x["parts"].items() if v) or "0"
+            opens = []
+            if x["path"]:
+                opens.append(link(x["path"], E(where(x["path"], x["line"], x["hint"])), x["line"]))
+            if x.get("doc"):
+                opens.append(link(x["doc"], E(where(x["doc"], x.get("doc_line"), x.get("doc_hint", ""))), x.get("doc_line")))
+            btns = ""
+            if A and x["kind"] == "Máy":
+                btns = ('<span class="frow">' + act("Đưa vào backlog", f"bl:{x['id']}", {"type": "to-backlog", "title": x["title"],
+                        "done_when": x.get("done_when") or "manual", "source": "dashboard"}, A, "act mini")
+                        + f'<button type="button" class="dismiss mini ghost" data-id="{E(x["id"])}" data-sig="{E(x["title"])}">Đã biết</button></span>')
+            w(f'<article class="fcard1{" lead" if i == 1 else ""}"{attrs}>'
+              f'<div class="frow"><span class="rank">{i}</span><span class="score" title="{E(parts)}">{x["score"]} điểm</span>{tag}'
+              f'<span class="muted" style="font-size:12px">{E(parts)}</span></div>'
+              f'<h3>{E(x["title"])}</h3><p class="muted">{E(x["why"])}</p>'
+              f'<p><span class="lab">Xong khi</span> <span title="{E(x["done_when"])}">{E(x["done_text"]) or "—"}</span></p>'
+              f'<p class="opens">{" · ".join(opens)}</p>{btns}</article>')
+        w("</div></section>")
+    w(f'<div class="panel"><h2>Hàng việc còn lại ({len(work) - min(3, len(work))}) · xếp theo điểm ưu tiên</h2>'
       '<p class="muted" style="margin:2px 0 6px;font-size:.78rem">Điểm = Chặn 40/25 + Hạn 25/15 + Lan 4đ mỗi doc/feature (trần 20) + Tuổi 1đ/2 ngày (trần 15). '
       'Cột <i>Ưu tiên</i> trong backlog: <code>P0</code> luôn lên đầu, <code>để sau</code> luôn xuống cuối. '
       '<b>BL</b> = task trong backlog (tự đóng khi điều kiện Xong khi đúng) · <b>Máy</b> = việc dashboard tự phát hiện (tự hết khi tín hiệu hết).</p>')
-    if not work:
-        w('<p class="muted">Không có việc nào.</p>')
+    if not rest:
+        w('<p class="muted">Không còn việc nào khác.</p>')
     else:
         w('<div class="scroll"><table class="work"><thead><tr><th class="num">Điểm</th><th>Việc</th><th>Vì sao</th>'
           '<th>Xong khi</th><th>Hạn · Ưu tiên</th><th>Mở ở đâu</th>' + ("<th></th>" if A else "") + '</tr></thead><tbody>')
-        for i, x in enumerate(work):
+        for i, x in enumerate(rest):
             parts = "<br>".join(f"{k} {v}" for k, v in x["parts"].items() if v) or "0"
             cls = ["more-row"] if i >= 10 else []
             attrs = ""
@@ -1316,8 +1383,8 @@ def render(m, artifact=False):
               f'<td>{dm}</td><td class="opens">{"<br>".join(opens) or "<span class=muted>—</span>"}</td>'
               + (f'<td class="btns">{btns}</td>' if A else "") + "</tr>")
         w("</tbody></table></div>")
-    if len(work) > 10:
-        w(f'<button type="button" class="seg-btn" id="btn-more" aria-pressed="false" data-l="Xem hết {len(work)} việc">Xem hết {len(work)} việc</button>')
+    if len(rest) > 10:
+        w(f'<button type="button" class="seg-btn" id="btn-more" aria-pressed="false" data-l="Xem hết {len(rest)} việc còn lại">Xem hết {len(rest)} việc còn lại</button>')
     if A:
         w('<button type="button" class="seg-btn" id="btn-dismissed" hidden></button>')
     w("</div></div>")
@@ -1329,14 +1396,16 @@ def render(m, artifact=False):
       '<button type="button" id="btn-hidden" class="seg-btn" aria-pressed="false">Hiện cột ẩn URD/BRD/PRD</button></p>')
     cols = STAGES + HIDDEN_STAGES
     w(f'<div class="scroll"><div class="stages" style="--n:{len(STAGES)}" id="stages">')
-    w("<span></span>" + "".join(f'<span class="h">{E(l)}</span>' for _, l in STAGES)
+    neck = m.get("neck")
+    w("<span></span>" + "".join(f'<span class="h{" neck" if k == neck else ""}">{E(l)}'
+                                + (f'<br>{chip("red", "triangle-alert", "Nút thắt")}' if k == neck else "") + '</span>' for k, l in STAGES)
       + "".join(f'<span class="h hidden-col">{E(l)}</span>' for _, l in HIDDEN_STAGES))
     for r in m["features"]:
         w(f'<span class="f" title="{E(r["feature"])}">{E(r["feature"])}</span>')
         for k, _ in cols:
             ce = r["stages"][k]
             hid = " hidden-col" if k in dict(HIDDEN_STAGES) else ""
-            cls = f'cell {ce["state"]}{hid}'
+            cls = f'cell {ce["state"]}{hid}' + (" neckc" if k == neck and ce["state"] == "block" else "")
             t = E(ce["text"])
             if ce.get("note"):
                 cls_title = f' title="{E(ce["note"])}"'
@@ -1417,7 +1486,8 @@ def render(m, artifact=False):
     for key, label in KANBAN:
         cs = [x for x in kb["cards"] if x["col"] == key]
         dotc = {"draft": "", "in-review": "amber", "revisions": "red", "approved": "green", "shipped": "green", "stale": "amber"}.get(key, "")
-        w(f'<div class="kcol {key}" data-col="{key}"><h3><span class="dot {dotc}"></span>{E(label)} <span class="n">{len(cs)}</span></h3><div class="kbody">')
+        note = '<p class="cnote">Chờ rà: không cần sửa thì reset, cần sửa thì sửa rồi reset.</p>' if key == "stale" and cs else ""
+        w(f'<div class="kcol {key}" data-col="{key}"><h3><span class="dot {dotc}"></span>{E(label)} <span class="n">{len(cs)}</span></h3>{note}<div class="kbody">')
         for x in cs:
             meta = " · ".join(s for s in [x["type"], x["feature"], x["updated"],
                                           f"trước: {x['prev']}" if key == "stale" and x["prev"] else ""] if s)
