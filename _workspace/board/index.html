@@ -127,6 +127,7 @@ function markCols(it) {
   }
 }
 function autoWhy(it) {
+  if (it.kind === "worktree") return "theo trạng thái git của worktree";
   if (it.col === "open") return "tự đóng khi điều kiện Xong khi thoả";
   if (it.col === "running") return "đang chạy";
   if (it.col === "blocked") return "trả lời qua /queue";
@@ -158,14 +159,14 @@ function card(it) {
     c.addEventListener("dragend", () => { dragId = null; document.body.classList.remove("dragging"); markCols(null); });
   }
   if (pending.has(it.id)) c.classList.add("pending");
-  const top = el("div", "top"); top.append(el("span", "id", it.id.replace(/^run:docs\/[^/]+\/_runs\//, "card ")));
+  const top = el("div", "top"); top.append(el("span", "id", it.id.replace(/^run:docs\/[^/]+\/_runs\//, "card ").replace(/^wt:feat\/.*/, "worktree")));
   if (it.feature) top.append(el("span", "feat", it.feature));
   const badge = movable
     ? el("span", "tag move", "⠿ Kéo được · " + it.moves.map((to) => ACTION[it.col + ">" + to]?.[0] || to).join(" / "))
     : el("span", "tag auto", (it.moves || []).length ? "Chỉ xem" : "Tự động · " + autoWhy(it));
   c.append(top, badge, el("p", "title", it.title));
   if (it.meta) c.append(el("div", "meta", it.meta));
-  if (it.detail) { const d = el("details"); d.append(el("summary", null, it.col === "review" ? "Báo cáo" : it.col === "blocked" ? "Câu hỏi chặn" : "Chi tiết"), el("pre", null, it.detail)); if (it.col === "review") d.open = false; c.append(d); }
+  if (it.detail) { const d = el("details"); d.append(el("summary", null, it.col === "review" ? "Báo cáo" : it.col === "blocked" ? "Câu hỏi chặn" : it.kind === "worktree" ? "Việc tiếp" : "Chi tiết"), el("pre", null, it.detail)); if (it.col === "review") d.open = false; c.append(d); }
   if (pending.has(it.id)) c.append(el("span", "tag wait", "Đã gửi: " + (ACTION[pending.get(it.id)]?.[0] || "") + " — chờ phiên điều phối"));
   else if (movable) {
     const acts = el("div", "acts");

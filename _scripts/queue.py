@@ -142,7 +142,7 @@ def collect():
     carded = {c["branch"] for c in cs if c["run_state"] in ("running", "blocked", "planned", "review")}
     for w in wts:
         if not w["ready"] and w["branch"] not in carded:  # worktree làm tay, không có run card
-            lanes["running"].append({"path": "", "feature": w["slug"], "title": "(làm tay, không có run card)",
+            lanes["running"].append({"path": "", "feature": w["slug"], "title": "(worktree không có run card — trống hoặc làm tay)",
                                      "branch": w["branch"], "run_state": "manual", "steps_done": 0,
                                      "steps_total": 0, "open_questions": 0,
                                      "last_log": f"{w['ahead']} commit · {w['dirty']} file chưa commit"})

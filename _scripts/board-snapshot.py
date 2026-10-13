@@ -53,9 +53,29 @@ def card_text(md, rel, num):
     return Q.section(txt, num).strip()[:DETAIL_MAX]
 
 
+def worktree_item(c, w, md):
+    """Worktree không có run card — nói rõ đang ở đâu và làm gì tiếp."""
+    slug, ahead, dirty = c["feature"], w.get("ahead", 0), w.get("dirty", 0)
+    rel = os.path.relpath(w.get("dir", ""), md) if w.get("dir") else f".claude/worktrees/{slug}"
+    if not ahead and not dirty:
+        col, title, meta = "open", f"Worktree {slug} trống — chưa bắt đầu", "0 commit · không có file sửa dở · chưa có run card"
+        nxt = (f"Việc tiếp:\n• Giao AI chạy: /run-task {slug} \"<mục tiêu>\"\n"
+               f"• Hoặc làm tay: mở terminal tại {rel} rồi chạy claude\n"
+               f"• Không cần nữa: _scripts/wt.sh drop {slug}")
+    elif not ahead:
+        col, title, meta = "running", f"Đang sửa tay trong worktree {slug}", f"{dirty} file chưa commit · chưa có run card"
+        nxt = f"Đang có người sửa tại {rel}. Xong thì commit trong worktree rồi _scripts/wt.sh ready {slug} \"<tóm tắt>\"."
+    else:
+        col, title, meta = "running", f"Worktree {slug}: {ahead} commit, chưa báo xong", f"{ahead} commit · {dirty} file chưa commit · chưa có run card"
+        nxt = f"Xong việc thì chạy _scripts/wt.sh ready {slug} \"<tóm tắt>\" — thẻ sẽ sang Chờ duyệt land."
+    return {"id": "wt:" + c["branch"], "kind": "worktree", "col": col, "title": title, "feature": slug,
+            "detail": nxt, "meta": meta, "moves": []}
+
+
 def build():
     d = Q.collect()
     md = d["main"]
+    wts = {w["branch"]: w for w in d["worktrees"]}
     items = []
     review_ids = {t["id"] for t in d["lanes"]["review"]}
     for t in d["lanes"]["review"]:
@@ -65,10 +85,8 @@ def build():
                       "meta": t["state"], "moves": ["done"]})
     for key in ("blocked", "planned", "running"):
         for c in d["lanes"][key]:
-            if not c["path"]:  # worktree làm tay
-                items.append({"id": "wt:" + c["branch"], "kind": "worktree", "col": "running",
-                              "title": c["title"], "feature": c["feature"], "detail": c["last_log"],
-                              "meta": "", "moves": []})
+            if not c["path"]:  # worktree không có run card
+                items.append(worktree_item(c, wts.get(c["branch"], {}), md))
                 continue
             detail = card_text(md, c["path"], 6) if key == "blocked" else card_text(md, c["path"], 1)
             items.append({"id": "run:" + c["path"], "kind": "run", "col": key, "title": c["title"],
