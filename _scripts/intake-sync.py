@@ -11,17 +11,20 @@ Chạy tự động qua hook (SessionStart, UserPromptSubmit, PostToolUse Write|
      Nguồn thay bản mới (dòng `> Phiên bản: … (nhận D)` mới hơn dòng `> Bản:` của sổ) → đọc bảng
      "Tổng quan thay đổi" của báo cáo _changes: Thêm mới/Sửa → mục 🔄, Bỏ → ➖ "bỏ ở bản mới"; tạo
      task rà lại. ➡ tới feature chưa có thư mục → task "Lập feature".
-  4. Chấm điều kiện "Xong khi" của từng task → tự đóng task, ghi ngày + bằng chứng.
+  4. Branch worktree đã báo sẵn sàng (`_scripts/wt.sh ready`) → task "🔍 chờ duyệt" land; có commit mới
+     sau khi báo → "🔍 ⚠"; branch bị drop → task tự đóng (.claude/rules/worktree.md Mục 4).
+  5. Chấm điều kiện "Xong khi" của từng task → tự đóng task, ghi ngày + bằng chứng.
 
 Cú pháp "Xong khi" (nhiều điều kiện nối bằng `&&`, thêm `!` phía trước để phủ định):
   exists:<glob>                 có ít nhất 1 file khớp glob (tính từ gốc repo)
   grep:<glob>:<regex>           có file khớp glob chứa regex
   fed:<đường dẫn trong docs-input>   nguồn đó đang ✅ trong sổ
+  branch:<tên branch>           branch local còn tồn tại (dùng `!branch:feat/x` → đóng khi đã drop)
   manual                        chỉ đóng bằng tay (đổi Trạng thái thành ✅)
 
 Tuỳ chọn: --quiet (chỉ in khi có thay đổi) · --summary (in task đang mở) · --dry-run.
 """
-import glob, hashlib, importlib.util, json, os, re, sys, unicodedata
+import glob, hashlib, importlib.util, json, os, re, subprocess, sys, unicodedata
 from datetime import date
 
 ROOT = os.environ.get("INTAKE_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -265,6 +268,30 @@ def load_backlog():
     return items, head
 
 
+def git(*a):
+    try:
+        r = subprocess.run(["git", "-C", ROOT, *a], capture_output=True, text=True, timeout=10)
+        return r.stdout.strip() if r.returncode == 0 else None
+    except Exception:
+        return None
+
+
+def ready_branches():
+    """Branch đã chạy `wt.sh ready`: [(branch, sha lúc báo, sha hiện tại, tóm tắt, ngày báo)]."""
+    out = git("config", "--get-regexp", r"^branch\..*\.wtready$") or ""
+    res = []
+    for ln in out.splitlines():
+        key, _, ready_sha = ln.partition(" ")
+        br = key[len("branch."):-len(".wtready")]
+        head = git("rev-parse", "--verify", "-q", f"refs/heads/{br}")
+        if not head:
+            continue
+        summ = (git("config", "--get", f"branch.{br}.wtsummary") or "").replace("|", "/")
+        at = git("config", "--get", f"branch.{br}.wtreadyat") or TODAY
+        res.append((br, ready_sha.strip(), head, summ, at))
+    return res
+
+
 def check(cond, fed):
     """Trả (đúng/sai, bằng chứng)."""
     cond = unq(cond)
@@ -294,6 +321,9 @@ def check(cond, fed):
         elif kind == "fed":
             ok = fed.get(arg, False)
             hit = f"sổ nguồn: {arg} ✅"
+        elif kind == "branch":
+            ok = git("rev-parse", "--verify", "-q", f"refs/heads/{arg}") is not None
+            hit = arg
         else:
             return False, ""
         if neg:
@@ -419,6 +449,28 @@ def main():
         have_cond.add(unq(cond))
         log.append(f"+ task BL-{bn:03d}: {what}")
         bn += 1
+    # task duyệt land: 1 task / branch đã báo ready, đóng khi branch bị drop
+    by_cond = {unq(i["Xong khi"]): i for i in items if is_open(i)}
+    ready = ready_branches()
+    ready_conds = {f"!branch:{r[0]}" for r in ready}
+    for cond, i in by_cond.items():  # đã rút ready (wt.sh unready) → không còn chờ duyệt
+        if (cond.startswith("!branch:") and cond not in ready_conds and i["Trạng thái"].startswith("🔍")
+                and git("rev-parse", "--verify", "-q", f"refs/heads/{cond[8:]}")):  # branch đã drop → để check() đóng
+            i["Trạng thái"] = "⬜ đang sửa lại"
+            log.append(f"~ {i['ID']}: ⬜ đang sửa lại")
+    for br, ready_sha, head, summ, at in ready:
+        cond = f"!branch:{br}"
+        st = "🔍 chờ duyệt" if head == ready_sha else "🔍 ⚠ có commit mới sau khi báo ready"
+        what = f"Duyệt + land `{br}`" + (f" — {summ}" if summ else "")
+        i = by_cond.get(cond)
+        if i is None:
+            items.append(dict(zip(BL_HEAD, [f"BL-{bn:03d}", what, f"`{br}`", f"`{cond}`", st, at, "", ""])))
+            log.append(f"+ task BL-{bn:03d}: {what} ({st})")
+            bn += 1
+        elif (i["Trạng thái"], i["Việc"]) != (st, what):
+            i["Trạng thái"], i["Việc"] = st, what
+            log.append(f"~ {i['ID']}: {st}")
+
     for i in items:
         if i["Trạng thái"].startswith("✅"):
             continue

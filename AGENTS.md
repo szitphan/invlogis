@@ -96,7 +96,7 @@ __Quy tắc vận hành:__
 - No-arg = picker feature; auto-detect upstream + confirm, KHÔNG silent pick; thiếu upstream = soft gate (warn + proceed), trừ `/jira --push` (hard gate khi stale).
 - Diagram: "có ra ảnh" KHÔNG phải verify — gate theo `.claude/rules/diagram-correctness.md`; sửa gate xong chạy `bash .claude/scripts/diagram-gates-selftest.sh`.
 - Hooks: `auto-changelog.sh`, `status-transition.sh`, `post-edit-stale.sh`, `intake-sync.sh` (PostToolUse Write/Edit); `session-init.sh` (SessionStart). Commit git thủ công.
-- __Song song nhiều feature:__ 1 feature = 1 worktree (`_scripts/wt.sh new|sync|land|drop|list`, branch `feat/<slug>`, land = squash). Trong worktree chỉ sửa `docs/<feature>/**`; đồ dùng chung (`_shared`, `_product`, `design`, `.claude`, backlog) sửa trên `main` rồi `wt.sh sync`. Chi tiết: `.claude/rules/worktree.md`.
+- __Song song nhiều feature:__ 1 feature = 1 worktree (`_scripts/wt.sh new|sync|ready|land|drop|list`, branch `feat/<slug>`). Xong → `wt.sh ready` sinh task 🔍 trong backlog; land (squash) + drop CHỈ chạy sau khi người dùng review + duyệt task đó. Trong worktree chỉ sửa `docs/<feature>/**`; đồ dùng chung (`_shared`, `_product`, `design`, `.claude`, backlog) sửa trên `main` rồi `wt.sh sync`. Chi tiết: `.claude/rules/worktree.md`.
 
 ## Rule nạp theo vùng file
 

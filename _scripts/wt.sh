@@ -5,10 +5,13 @@
 #   _scripts/wt.sh new  <slug>     tạo ../{repo}-wt/<slug> trên branch feat/<slug> (từ main)
 #   _scripts/wt.sh list            liệt kê worktree + số commit chưa land + file chưa commit
 #   _scripts/wt.sh sync <slug>     kéo main mới nhất vào feat/<slug> (merge thường, chạy trong worktree)
+#   _scripts/wt.sh ready <slug> "<tóm tắt>"   báo xong → backlog có task "🔍 chờ duyệt" land
+#   _scripts/wt.sh unready <slug>  rút lại báo xong (quay lại sửa tiếp)
 #   _scripts/wt.sh land <slug>     từ main: squash feat/<slug> vào index của main — KHÔNG tự commit
 #   _scripts/wt.sh drop <slug>     xoá worktree + branch (từ chối nếu còn thay đổi chưa land; --force để bỏ qua)
 #
 # Script không bao giờ commit hay push thay người dùng (commit thủ công, block-push.sh chặn push).
+# land/drop chỉ chạy sau khi người dùng duyệt task 🔍 trong backlog (.claude/rules/worktree.md Mục 4).
 
 set -euo pipefail
 
@@ -32,6 +35,11 @@ refresh() {
     if [ "$(git -C "$dir" rev-parse --abbrev-ref HEAD)" = "main" ] && [ -f "$dir/_scripts/intake-sync.py" ]; then
         (cd "$dir" && python3 _scripts/intake-sync.py --quiet) || true
     fi
+}
+# Làm tươi backlog trên checkout chính (backlog chỉ ghi trên main).
+sync_backlog() {
+    [ "$(git -C "$MAIN_DIR" rev-parse --abbrev-ref HEAD)" = "main" ] || return 0
+    (cd "$MAIN_DIR" && python3 _scripts/intake-sync.py --quiet) || true
 }
 # File branch đã đổi so với điểm tách khỏi main mà nội dung vẫn khác main → chưa land.
 unlanded() {
@@ -68,7 +76,11 @@ case "$cmd" in
         ahead="$(git -C "$MAIN_DIR" rev-list --count "main..$br" 2>/dev/null || echo ?)"
         dirty="$(git -C "$d" status --porcelain 2>/dev/null | wc -l | tr -d ' ')"
         pending="$(unlanded "$br" | grep -c . || true)"
-        printf '%-28s %s  · %s commit · %s file chưa commit · %s file chưa land\n' "$br" "$d" "$ahead" "$dirty" "$pending"
+        ready="$(git -C "$MAIN_DIR" config --get "branch.$br.wtready" || true)"
+        if [ -z "$ready" ]; then flag="đang làm"
+        elif [ "$ready" = "$(git -C "$MAIN_DIR" rev-parse "$br")" ]; then flag="🔍 chờ duyệt"
+        else flag="🔍 ⚠ commit mới sau ready"; fi
+        printf '%-28s %s  · %s · %s commit · %s file chưa commit · %s file chưa land\n' "$br" "$d" "$flag" "$ahead" "$dirty" "$pending"
     done
     ;;
   sync)
@@ -78,6 +90,25 @@ case "$cmd" in
     git -C "$dir" merge --no-edit main
     refresh "$dir"
     echo "✓ feat/$slug đã có main mới nhất"
+    ;;
+  ready)
+    need_slug "$slug"; dir="$WT_ROOT/$slug"; br="feat/$slug"
+    git -C "$MAIN_DIR" show-ref --quiet "refs/heads/$br" || die "không có branch $br"
+    [ ! -d "$dir" ] || [ -z "$(git -C "$dir" status --porcelain)" ] || die "worktree còn thay đổi chưa commit — commit trước khi báo ready"
+    [ -n "$(unlanded "$br")" ] || die "$br không có gì mới so với main — không có gì để duyệt"
+    summary="$(printf '%s' "${3:-}" | tr '\r\n|' '  /')"
+    git -C "$MAIN_DIR" config "branch.$br.wtready" "$(git -C "$MAIN_DIR" rev-parse "$br")"
+    git -C "$MAIN_DIR" config "branch.$br.wtsummary" "$summary"
+    git -C "$MAIN_DIR" config "branch.$br.wtreadyat" "$(date +%Y-%m-%d)"
+    sync_backlog
+    echo "✓ $br báo sẵn sàng — backlog có task 🔍 chờ duyệt. Người dùng duyệt xong mới land."
+    ;;
+  unready)
+    need_slug "$slug"; br="feat/$slug"
+    git -C "$MAIN_DIR" config --unset "branch.$br.wtready" || die "$br chưa báo ready"
+    git -C "$MAIN_DIR" config --unset "branch.$br.wtsummary" || true
+    git -C "$MAIN_DIR" config --unset "branch.$br.wtreadyat" || true
+    echo "✓ đã rút báo ready của $br (task backlog giữ nguyên, trạng thái ghi rõ khi intake-sync chạy)"
     ;;
   land)
     need_slug "$slug"; on_main_checkout
@@ -107,7 +138,8 @@ $left
     [ -d "$dir" ] && git -C "$MAIN_DIR" worktree remove ${3:+--force} "$dir"
     git -C "$MAIN_DIR" show-ref --quiet "refs/heads/$br" && git -C "$MAIN_DIR" branch -D "$br" >/dev/null
     git -C "$MAIN_DIR" worktree prune
+    sync_backlog
     echo "✓ đã xoá $dir + $br"
     ;;
-  *) sed -n '2,12p' "$0"; exit 1 ;;
+  *) sed -n '2,15p' "$0"; exit 1 ;;
 esac

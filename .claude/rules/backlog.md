@@ -14,6 +14,7 @@
 | Nguồn thay bản mới (dòng `> Phiên bản:` mới hơn dòng `> Bản:` của sổ) | Mục Thêm mới/Sửa trong bảng *Tổng quan thay đổi* → `🔄`, mục Bỏ → `➖`; task "Rà lại SRC theo bản" | như trên |
 | Mục `➡ {feature}` mà feature chưa có thư mục | Task "Lập feature {feature}", Xong khi `exists:docs/{feature}/brainstorms/*.md` | như trên |
 | Điều kiện cột **Xong khi** thoả | Task → `✅`, ghi ngày + bằng chứng, chuyển sang mục Đã xong | như trên |
+| Worktree báo xong (`_scripts/wt.sh ready`) | Task `🔍 chờ duyệt` "Duyệt + land feat/{feature}", Xong khi `!branch:feat/{feature}`; commit mới sau ready → `🔍 ⚠`; `unready` → `⬜ đang sửa lại`. Duyệt rồi mới land — `.claude/rules/worktree.md` Mục 4 | như trên |
 | File trong folder `zz-*` (feature nháp/test) | Bỏ qua — không đóng task, không đánh dấu feed | như trên |
 
 Hook in `[intake-sync] + nguồn mới …` vào đầu lượt → đọc nguồn đó theo memory "ingest-new-client-docs",
