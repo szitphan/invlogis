@@ -293,10 +293,14 @@ không có.
 * Người dùng bấm, chọn, chạm (vd "Bấm Thử lại", "Chọn bước") → tìm control trong frame nguồn theo tên
   layer (mục 7 Bước 4) hoặc theo chữ trên control, rồi `figma.setReactions` với `ON_CLICK` → `NAVIGATE`
   tới frame đích, `transition: null`. Không thấy control, hoặc thấy hơn một → không đoán, ghi vào báo cáo.
-* Hệ thống tự chuyển ("Tải xong", "Mở màn"): chỉ nối **nhánh thành công** bằng `AFTER_TIMEOUT` 1 giây.
+* Hệ thống tự chuyển ("Tải xong"): chỉ nối **nhánh thành công** bằng `AFTER_TIMEOUT` 1 giây.
   Mỗi frame tối đa một liên kết tự chuyển. Nhánh lỗi do hệ thống gây ra không có thao tác để bấm, nên
   không nối; ghi "mở trực tiếp frame".
 * Sự kiện từ nơi khác ("Bước đổi ở nơi khác"), màn đích ngoài feature, màn chưa vẽ → không nối, ghi lý do.
+* Dòng "Mở màn" là điểm vào của màn, không phải thao tác. Không nối, vì nối sẽ tạo vòng lặp (vd [1] tự
+  chuyển sang [30], rồi [30] tự chuyển về [1]). Màn bắt đầu flow đã thay vai trò này.
+* Một control dẫn tới nhiều đích tuỳ điều kiện (vd "Mở màn hình chi tiết" ra [33], [34] hoặc màn ngoài
+  feature): một control chỉ giữ được một liên kết click, nên không nối, ghi vào báo cáo kèm danh sách đích.
 * Đường quay lại ("Đóng", "Thử lại") nối thẳng tới frame đích ghi trong Mục 3.5, không dùng `BACK`, để
   chạy đúng dù vào từ đâu.
 
@@ -306,14 +310,21 @@ không có.
   `# Use Case: …` của `uc-<slug>.md`. Ví dụ `UC-tra-cuu-quy-trinh · Tra cứu quy trình trên danh sách`.
 * Màn bắt đầu flow là màn đầu tiên của use case: theo cột Đường đi của userflow Mục 3.6 nếu có, không có
   thì lấy màn đầu tiên ở cột Screens của index.
+* Màn đó đã là điểm bắt đầu của flow khác (Figma cho mỗi frame một flow) → lấy màn kế tiếp có vẽ trên
+  đường đi của use case, ghi trong báo cáo.
 * Use case có màn ở cả web và app → mỗi thiết bị một flow, thêm hậu tố ` (Web)` / ` (App)`.
 * Không dùng `fromUserflow` vì cách đó đặt tên flow theo userflow, không theo use case. Chưa có use case
   → đặt tên theo cột "Tên flow" của userflow Mục 3, ghi trong báo cáo "chưa có use case".
 
+**Flow của sơ đồ userflow:** flow bắt đầu ở một frame sơ đồ userflow (do `linkScreens` của
+`/figma-userflow`) mang tên `Userflow · <tiêu đề sơ đồ>`, bỏ chữ "Userflow ·" bị lặp nếu tiêu đề đã có.
+Gặp tên mặc định `Flow N` thì đổi bằng `figma.renameFlow`. Sơ đồ userflow có `linkScreens` mà chưa có
+flow thì thêm.
+
 **Không ghi đè tay:** control đã có liên kết mà khác Mục 3.5 thì hỏi user trước khi thay. Liên kết
 designer nối tay là dữ liệu, như Bước 5.
 
-**Kiểm:** `figma.getFlowStartingPoints` đọc lại tên flow và màn bắt đầu. Đếm số dòng Mục 3.5 đã nối trên
+**Kiểm:** `figma.getFlowStartingPoints` đọc lại tên flow và màn bắt đầu; không còn flow tên `Flow N`. Đếm số dòng Mục 3.5 đã nối trên
 tổng số, tách theo lý do bỏ qua.
 
 ## Bước 5 — sửa màn đã có

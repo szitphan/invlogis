@@ -90,6 +90,10 @@ backlog; marking a real screen as a state hides it. Decide deliberately.
 * **`screenId` is what links the flow to the artboards.** Set it (`"2.1"`, `"5.3"`) and
   `options.linkScreens: true` wires ON_CLICK → NAVIGATE from each box to the artboard whose
   name contains that id. Unmatched ids are __reported, never guessed__ — read that list.
+* **Name the prototype flow after the diagram.** When `linkScreens` is on, set a flow starting point
+  on the userflow frame with `figma.setFlowStartingPoints([{ nodeId: frameId, name: "Userflow · <title>" }])`,
+  without doubling "Userflow ·" if the title already has it. Never leave Figma's default `Flow N`: it
+  tells a reviewer nothing about where Present will take them.
 * __Two lines in a label__: the first is the title, a `\n` starts the detail line. Use it for
   the one fact that makes the box unambiguous ("ISBN field, 13 chars"), not a paragraph.
 * **`rankdir: "TB"` is the default** here and is usually right for a flow. `"LR"` suits a
