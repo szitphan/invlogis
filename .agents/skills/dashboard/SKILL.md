@@ -16,11 +16,12 @@ Sinh 1 file HTML self-contained **đọc là hiểu liền**: mở lên biết n
 
 Toàn bộ số liệu VÀ HTML do **`_scripts/dashboard-build.py`** sinh tất định (cùng đầu vào → cùng file, chỉ ghi ngày). Claude không tự đếm, không tự ghép HTML: chạy script, duyệt L1, báo cáo. Thiết kế chốt ở đề xuất *Dashboard BA v2* (artifact https://claude.ai/artifact/631W9qLYmsCQ9z8Zyb7Cp7, 3 vòng phản hồi 2026-10-13); việc còn lại theo đợt ở backlog BL-097 (P0) · BL-098 (P1) · BL-099 (P2).
 
-Trang có 4 tab (thứ tự = thứ tự quan trọng):
-1) **Hôm nay** — verdict theo giai đoạn + 5 ô (Chờ bạn · Câu hỏi mở · Stale chờ xác nhận · Nguồn chưa feed · Backlog mở) + làn Chờ bạn + việc máy phát hiện.
-2) **Feature** — trục tiến độ 8 cột Nguồn → Brainstorm → Chốt OQ → SRS → Userflow → Figma → US/AC → Test (+3 cột ẩn URD/BRD/PRD), bảng OQ còn mở có link tới đúng dòng.
+Trang có 5 tab (thứ tự = thứ tự quan trọng):
+1) **Hôm nay** — verdict theo giai đoạn + 5 ô (Chờ bạn · Câu hỏi mở · Stale chờ xác nhận · Nguồn chưa feed · Hàng việc) + làn Chờ bạn + **hàng việc chung** (task backlog + việc máy phát hiện, xếp theo `priority_score`).
+2) **Feature** — trục tiến độ 8 cột Nguồn → Brainstorm → Chốt OQ → SRS → Userflow → Figma → US/AC → Test (+3 cột ẩn URD/BRD/PRD), ô Tầng SaaS · Tham số P chưa chốt · Figma, bảng OQ còn mở có link tới đúng dòng.
 3) **Kanban** — 6 cột Draft · In Review · Revisions · Approved · Shipped · Stale; doc không có status đi theo doc chỉ mục cùng folder.
-4) **Sức khỏe vault** — doc stale kèm upstream gây ra, dòng log stale trỏ file đã xoá, độ tươi (chỉ theo tuổi), review quá hạn.
+4) **Nguồn khách** — mỗi SRC: tên, nhóm, thanh đối chiếu n/m (link sổ `_coverage/`), trạng thái feed; nguồn ít xử lý nhất lên đầu.
+5) **Sức khỏe vault** — doc stale kèm upstream gây ra, dòng log stale trỏ file đã xoá, độ tươi (chỉ theo tuổi), review quá hạn.
 
 > **Nguyên tắc report tốt (BẮT BUỘC theo):** kết luận lên trên, bằng chứng xuống dưới. Feature/việc **có vấn đề xếp trước**. Giữ mã thật (FR/OQ/BL) + lệnh chạy. Muốn đổi bố cục/logic → sửa `dashboard-build.py`, KHÔNG sửa HTML sinh ra.
 
@@ -99,7 +100,9 @@ Feature không tồn tại / vault rỗng → theo `feature-bootstrap.md` Nhóm 
 | Metric | Cách tính (trong `dashboard-build.py`) |
 |--------|------------------|
 | Ô trục tiến độ | `done` đậm = bước xong theo điều kiện máy · `part` nhạt + số = đang làm · `block` viền đỏ = đang giữ feature lại · `none` xám = chưa tới |
-| Nguồn | Tạm `?` — cần cột feature trong sổ đối chiếu `docs-input/_coverage/` (đợt P1) |
+| Nguồn | Mục sổ `docs-input/_coverage/*.md` thuộc feature (`➡ {feature}` hoặc path `docs/{feature}/` ở cột Ở đâu): `✅/tổng`; còn ⬜/⏳ nhạt · có 🔄 chặn · không mục nào xám |
+| Hàng việc · `priority_score` | Chặn 40 (task/việc nhắc feature đang có ô chặn; stale ở brainstorm/SRS) hoặc 25 (chặn 1 phần) + Hạn 25 (≤7 ngày) / 15 (≤14 ngày) từ cột **Hạn** backlog + Lan 4đ mỗi feature/doc nhắc tới (trần 20) + Tuổi 1đ/2 ngày (trần 15). Cột **Ưu tiên** backlog: `P0` luôn đầu, `để sau` luôn cuối. Việc máy: doc stale (gom theo feature), OQ mở chưa có task, lint FAIL, audit Figma Cao, nguồn 🔄, worktree không theo `feat/*`, việc engine (review kẹt, US thiếu AC…) |
+| Tầng SaaS · Tham số P | FAIL/WARN `saas-layer-lint` cộng trên mọi spec · dòng `P-…` trong `docs/_product/tenant-parameters.md` có "chưa chốt" |
 | Brainstorm | `brainstorms/{feature}.md`: approved đậm · stale chặn · còn lại nhạt |
 | Chốt OQ | Số OQ mở trong mọi doc của feature; còn mở + đã có brainstorm = chặn |
 | SRS | `srs/{feature}-spec.md`: số FR + FAIL/WARN `saas-layer-lint`; FAIL hoặc spec stale = chặn |

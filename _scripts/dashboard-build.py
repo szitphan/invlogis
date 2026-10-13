@@ -172,7 +172,9 @@ def parse_backlog():
         c = table_cells(line)
         if len(c) < 6:
             continue
-        rows.append({"id": c[0], "task": c[1], "source": c[2], "done_when": c[3], "state": c[4], "created": c[5]})
+        c += [""] * (10 - len(c))
+        rows.append({"id": c[0], "task": c[1], "source": c[2], "done_when": c[3], "state": c[4], "created": c[5],
+                     "due": c[8], "manual": c[9]})
     return rows
 
 
@@ -184,6 +186,94 @@ def parse_sources():
         c = table_cells(line)
         rows.append({"id": c[0], "file": c[1].strip("`"), "group": c[2], "feed": c[3]})
     return rows
+
+
+def parse_ledgers():
+    """Sổ đối chiếu docs-input/_coverage/*.md → {SRC-nn: {name, path, rows:[{muc, result, where}]}}."""
+    out = {}
+    for p in sorted((ROOT / "docs-input/_coverage").glob("*.md")):
+        text = read(p)
+        h = re.search(r"^#\s*Sổ đối chiếu:\s*(.+?)\s*\((SRC-\d+)\)", text, re.M)
+        if not h:
+            continue
+        rows = []
+        for line in text.split("\n"):
+            if not line.startswith("| ") or line.startswith("| Mục") or line.startswith("|---"):
+                continue
+            c = table_cells(line) + ["", ""]
+            rows.append({"muc": c[0], "result": c[1], "where": c[2]})
+        out[h.group(2)] = {"name": h.group(1), "path": rel(p), "rows": rows}
+    return out
+
+
+def source_name(src, ledgers):
+    """Tên hiển thị của nguồn: H1 file nguồn; H1 kiểu mục lục/in đậm → tên ở sổ đối chiếu; cuối cùng là tên file."""
+    led = ledgers.get(src["id"])
+    p = ROOT / "docs-input" / src["file"]
+    h1 = ""
+    if p.suffix == ".md" and p.exists():
+        m = re.search(r"^#\s+(.+)$", read(p), re.M)
+        h1 = m.group(1).strip() if m else ""
+    if h1 and not h1.startswith("**") and "MỤC LỤC" not in h1.upper():
+        return h1
+    if led:
+        return led["name"]
+    stem = Path(src["file"]).stem.replace("-", " ")
+    return stem[:1].upper() + stem[1:]
+
+
+def feed_ratio(feed):
+    m = re.search(r"(\d+)/(\d+)", feed)
+    return (int(m.group(1)), int(m.group(2))) if m else None
+
+
+def source_cell(feature, ledgers):
+    """Cột Nguồn của trục tiến độ: mục sổ đối chiếu thuộc feature (➡ feature hoặc path docs/feature/)."""
+    done = total = 0
+    redo = pending = False
+    first = None
+    for src, led in sorted(ledgers.items()):
+        for r in led["rows"]:
+            mine = f"➡ {feature}" in r["result"] or f"docs/{feature}/" in r["where"]
+            if not mine:
+                continue
+            total += 1
+            first = first or led["path"]
+            if "✅" in r["result"]:
+                done += 1
+            elif "🔄" in r["result"]:
+                redo = True
+            elif "➖" not in r["result"]:
+                pending = True
+    if not total:
+        return cell("none", "", note="chưa có mục sổ đối chiếu nào thuộc feature này")
+    state = "block" if redo else "part" if pending else "done"
+    return cell(state, f"{done}/{total}", first, note="có mục 🔄 bản mới chưa rà" if redo else "")
+
+
+def parse_params():
+    rows = []
+    for line in read(ROOT / "docs/_product/tenant-parameters.md").split("\n"):
+        if not re.match(r"^\|\s*P-", line):
+            continue
+        c = table_cells(line) + [""] * 9
+        rows.append({"code": c[0], "default": c[4], "tenant": c[5],
+                     "open": "chưa chốt" in (c[4] + " " + c[5]).lower()})
+    return rows
+
+
+def orphan_worktrees():
+    code, out = run(["git", "worktree", "list", "--porcelain"])
+    res = []
+    if code != 0:
+        return res
+    for blk in out.strip().split("\n\n"):
+        path = re.search(r"^worktree (.+)$", blk, re.M)
+        br = re.search(r"^branch refs/heads/(.+)$", blk, re.M)
+        b = br.group(1) if br else "(detached)"
+        if path and Path(path.group(1)) != ROOT and not b.startswith("feat/"):
+            res.append({"path": path.group(1), "branch": b})
+    return res
 
 
 def parse_staleness():
@@ -207,10 +297,10 @@ def cell(state, text="", path=None, line=None, note=""):
     return {"state": state, "text": text, "path": path, "line": line, "note": note}
 
 
-def feature_row(feature, cov, oqs, lint, orphans, audit):
+def feature_row(feature, cov, oqs, lint, orphans, audit, ledgers):
     base = ROOT / "docs" / feature
     st = {}
-    st["nguon"] = cell("part", "?", note="cần cột feature trong sổ đối chiếu nguồn (P1)")
+    st["nguon"] = source_cell(feature, ledgers)
 
     bs = base / "brainstorms" / f"{feature}.md"
     if bs.exists():
@@ -297,7 +387,8 @@ def feature_row(feature, cov, oqs, lint, orphans, audit):
     return {"feature": feature, "stages": st, "furthest": furthest,
             "furthest_idx": [k for k, _ in STAGES].index(furthest) if furthest else -1,
             "done": done_n, "blocks": [k for k, _ in STAGES if st[k]["state"] == "block"],
-            "open_oq": len(open_oq), "oq_rows": oqs}
+            "open_oq": len(open_oq), "oq_rows": oqs, "lint": lint, "audit": audit,
+            "screens": len(screens)}
 
 
 # ─── kanban ─────────────────────────────────────────────────────────────────
@@ -346,6 +437,110 @@ def build_kanban(feature_filter):
 
 # ─── tổng hợp ───────────────────────────────────────────────────────────────
 
+def priority_score(blocking, due, today, spread, age_days):
+    """Điểm ưu tiên 0–100 (Dashboard v2, đã duyệt): Chặn 40/25 · Hạn 25/15 · Lan 4đ/đơn vị trần 20 ·
+    Tuổi 1đ/2 ngày trần 15. Trả (tổng, bảng thành phần) để trang hiện cách tính."""
+    chan = {"full": 40, "part": 25}.get(blocking, 0)
+    han = 0
+    if due:
+        try:
+            left = (date.fromisoformat(due) - today).days
+            han = 25 if left <= 7 else 15 if left <= 14 else 0
+        except ValueError:
+            han = 0
+    lan = min(20, 4 * max(0, spread))
+    tuoi = min(15, max(0, age_days) // 2)
+    parts = {"Chặn": chan, "Hạn": han, "Lan": lan, "Tuổi": tuoi}
+    return sum(parts.values()), parts
+
+
+def build_queue(rows, backlog, stale_docs, actions, ledgers, worktrees, today):
+    """Hàng việc chung: task BL đang mở + việc máy phát hiện, cùng 1 thang điểm. Ưu tiên tay thắng điểm."""
+    by_feat = {r["feature"]: r for r in rows}
+
+    def feat_block(f, first_only=False):
+        r = by_feat.get(f)
+        return bool(r and r["blocks"])
+
+    items = []
+    for b in backlog:
+        if b["state"].startswith("✅"):
+            continue
+        blob = f'{b["task"]} {b["source"]} {b["done_when"]}'
+        feats = [f for f in by_feat if f in blob]
+        docs_n = len(set(re.findall(r"docs/[\w./-]+\.md", blob)))
+        try:
+            age = (today - date.fromisoformat(b["created"])).days
+        except ValueError:
+            age = 0
+        score, parts = priority_score("full" if any(feat_block(f) for f in feats) else None,
+                                      b["due"], today, len(feats) + docs_n, age)
+        link_path = next(iter(re.findall(r"(docs/[\w./-]+\.md)", blob)), "_workspace/backlog.md")
+        items.append({"kind": "BL", "id": b["id"], "title": re.sub(r"`", "", b["task"])[:150], "score": score,
+                      "parts": parts, "manual": b["manual"], "path": link_path, "line": None, "due": b["due"]})
+
+    # Máy: doc stale gom theo feature (project-level gom chung)
+    groups = {}
+    for d in stale_docs:
+        groups.setdefault(d["feature"] or "_dự án", []).append(d)
+    for f, ds in sorted(groups.items()):
+        r = by_feat.get(f)
+        blocking = "full" if r and ({"brainstorm", "srs"} & set(r["blocks"])) else "part" if r else None
+        age = max((d["days_since_update"] for d in ds if d["days_since_update"] >= 0), default=0)
+        score, parts = priority_score(blocking, "", today, len(ds), age)
+        label = f if f != "_dự án" else "doc dự án"
+        items.append({"kind": "Máy", "id": f"stale:{f}", "title": f"{label}: {len(ds)} doc stale chờ rà hoặc reset",
+                      "score": score, "parts": parts, "manual": "", "path": ds[0]["path"], "line": None, "due": ""})
+    # Máy: OQ mở của feature chưa có task BL nào nhắc tới
+    mentioned = " ".join(f'{b["task"]} {b["source"]} {b["done_when"]}' for b in backlog if not b["state"].startswith("✅"))
+    for r in rows:
+        if r["open_oq"] and r["feature"] not in mentioned:
+            o = r["stages"]["oq"]
+            score, parts = priority_score("full", "", today, r["open_oq"], 0)
+            items.append({"kind": "Máy", "id": f"oq:{r['feature']}", "title": f"{r['feature']}: {r['open_oq']} câu hỏi mở chưa có task",
+                          "score": score, "parts": parts, "manual": "", "path": o["path"], "line": o["line"], "due": ""})
+        lint = r.get("lint") or {}
+        if lint.get("fail"):
+            score, parts = priority_score("full", "", today, lint["fail"], 0)
+            items.append({"kind": "Máy", "id": f"lint:{r['feature']}", "title": f"{r['feature']}: {lint['fail']} lỗi FAIL tầng SaaS",
+                          "score": score, "parts": parts, "manual": "", "path": r["stages"]["srs"]["path"],
+                          "line": r["stages"]["srs"]["line"], "due": ""})
+        a = r.get("audit")
+        if a and a["cao"]:
+            try:
+                age = (today - date.fromisoformat(a["date"])).days
+            except ValueError:
+                age = 0
+            score, parts = priority_score("part", "", today, a["cao"], age)
+            items.append({"kind": "Máy", "id": f"figma:{r['feature']}", "title": f"Audit Figma {r['feature']}: {a['cao']} mục mức Cao",
+                          "score": score, "parts": parts, "manual": "", "path": a["path"], "line": None, "due": ""})
+    # Máy: nguồn có bản mới (🔄) chưa rà
+    for src, led in sorted(ledgers.items()):
+        n = sum(1 for x in led["rows"] if "🔄" in x["result"])
+        if n:
+            score, parts = priority_score(None, "", today, n, 0)
+            items.append({"kind": "Máy", "id": f"src:{src}", "title": f"{src} {led['name']}: {n} mục bản mới chưa rà",
+                          "score": score, "parts": parts, "manual": "", "path": led["path"], "line": None, "due": ""})
+    # Máy: worktree không có branch feat/*
+    for w in worktrees:
+        score, parts = priority_score(None, "", today, 0, 0)
+        items.append({"kind": "Máy", "id": f"wt:{w['branch']}", "title": f"Worktree {w['branch']} không theo feat/* (dọn bằng wt.sh drop)",
+                      "score": score, "parts": parts, "manual": "", "path": None, "line": None, "due": ""})
+    # Máy: việc engine phát hiện (review kẹt, US thiếu AC, CR…)
+    for a in actions:
+        if "Stale" in a["title"]:
+            continue  # đã gom ở nhóm stale
+        m = a["metric"]
+        age = m.get("days_in_review") or m.get("days_since_update") or m.get("days_since_apply") or 0
+        score, parts = priority_score(None, "", today, 1, age)
+        items.append({"kind": "Máy", "id": f"act:{a['target_path']}", "title": a["title"], "score": score,
+                      "parts": parts, "manual": "", "path": a["target_path"], "line": None, "due": ""})
+
+    rank = lambda i: 0 if i["manual"].upper() == "P0" else 2 if i["manual"].lower() == "để sau" else 1
+    items.sort(key=lambda i: (rank(i), -i["score"], i["kind"], i["id"]))
+    return items
+
+
 def light(n, ok, warn):
     return "green" if n <= ok else "amber" if n <= warn else "red"
 
@@ -360,12 +555,13 @@ def build(feature_filter=None):
     stories = ws.scan_user_stories(ROOT, feature_filter)
     actions = ws.compute_action_items(docs, crs, stories, today)
 
+    ledgers = parse_ledgers()
     rows = []
     for f in features:
         spec = ROOT / "docs" / f / "srs" / f"{f}-spec.md"
         uf = ROOT / "docs" / f / "srs" / f"{f}-userflow.md"
         rows.append(feature_row(f, coverage.get(f), scan_oq(f), lint_spec(spec),
-                                kg_userflow_orphans(f) if uf.exists() else None, latest_figma_audit(f)))
+                                kg_userflow_orphans(f) if uf.exists() else None, latest_figma_audit(f), ledgers))
     # Feature chậm nhất lên đầu: giai đoạn xa nhất thấp hơn trước, rồi ít ô xong hơn, rồi tên.
     rows.sort(key=lambda r: (r["furthest_idx"], r["done"], r["feature"]))
 
@@ -384,6 +580,13 @@ def build(feature_filter=None):
     stale_log = parse_staleness()
     stale_docs = sorted([d for d in docs if d.get("is_stale")], key=lambda d: d["path"])
     kanban = build_kanban(feature_filter)
+    params = parse_params()
+    for s_ in sources:
+        s_["name"] = source_name(s_, ledgers)
+        s_["ratio"] = feed_ratio(s_["feed"])
+        s_["ledger"] = ledgers.get(s_["id"], {}).get("path")
+    work = build_queue(rows, backlog, stale_docs, actions, ledgers,
+                       [] if feature_filter else orphan_worktrees(), today)
 
     # Độ tươi chỉ theo tuổi (stale có đèn riêng) — workspace-status.compute_freshness đã tách.
     fresh = ws.compute_freshness(docs)
@@ -435,13 +638,14 @@ def build(feature_filter=None):
          "path": "_workspace/staleness.md"},
         {"key": "src", "label": "Nguồn chưa feed", "value": f"{len(not_fed)}/{len(feedable)}",
          "light": light(len(not_fed), 0, 5), "sub": "không tính nguồn ➖", "path": "docs-input/README.md"},
-        {"key": "backlog", "label": "Backlog mở", "value": len(open_bl), "light": "gray",
-         "sub": "hàng việc chung + điểm ưu tiên: đợt P1", "path": "_workspace/backlog.md"},
+        {"key": "backlog", "label": "Hàng việc", "value": len(work), "light": "gray",
+         "sub": f"{len(open_bl)} task backlog · {len(work) - len(open_bl)} việc máy phát hiện", "path": "_workspace/backlog.md"},
     ]
 
     return {
         "generated": today.isoformat(), "scope": feature_filter or "project", "root": str(ROOT),
-        "verdict": verdict, "tiles": tiles, "lanes": lanes, "actions": actions,
+        "verdict": verdict, "tiles": tiles, "lanes": lanes, "actions": actions, "work": work,
+        "sources": sources, "params": params,
         "features": rows, "kanban": kanban, "stale_docs": stale_docs, "stale_log": stale_log,
         "freshness": fresh, "quality": quality, "coverage": coverage,
         "counts": {"docs_md": kanban["total"], "features": len(rows), "sources": len(sources),
@@ -517,6 +721,13 @@ th{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.
 .num{font-variant-numeric:tabular-nums}
 footer{color:var(--muted);font-size:.78rem}
 [role="tabpanel"]{display:flex;flex-direction:column;gap:12px}
+.tag{display:inline-block;font-family:var(--m);font-size:.68rem;font-weight:600;padding:0 6px;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
+.tag-m{background:var(--track);color:var(--warn)}
+.score{font-variant-numeric:tabular-nums;font-weight:700;min-width:2.2ch;text-align:right;color:var(--accent);cursor:help}
+ul.work li.more-row{display:none}ul.work.all li.more-row{display:flex}
+.seg-btn{margin-top:8px;font:inherit;font-size:.78rem;border:1px solid var(--line);background:var(--panel);color:var(--accent);padding:3px 10px;border-radius:6px;cursor:pointer}
+.pcell{display:flex;gap:8px;align-items:center;min-width:140px}
+.pbar{flex:1;height:7px;background:var(--track);border-radius:4px;overflow:hidden;min-width:60px}.pbar i{display:block;height:100%;background:var(--accent)}
 """
 
 JS = """
@@ -531,6 +742,8 @@ JS = """
   document.addEventListener('click',function(e){
     var b=e.target.closest&&e.target.closest('[data-mode]');
     if(b){mode=b.getAttribute('data-mode');try{localStorage.setItem(K,mode)}catch(err){}apply();return}
+    var mb=e.target.closest&&e.target.closest('#btn-more');
+    if(mb){var ul=document.querySelector('ul.work');var on=!ul.classList.contains('all');ul.classList.toggle('all',on);mb.setAttribute('aria-pressed',String(on));mb.textContent=on?'Thu gọn':mb.getAttribute('data-l')||mb.textContent;return}
     var h=e.target.closest&&e.target.closest('#btn-hidden');
     if(h){var on=!document.body.classList.contains('show-hidden');document.body.classList.toggle('show-hidden',on);h.setAttribute('aria-pressed',String(on))}
   });
@@ -562,6 +775,7 @@ def render(m):
       '<button role="tab" id="t-today" aria-selected="true" aria-controls="p-today">Hôm nay</button>'
       '<button role="tab" id="t-feat" aria-selected="false" aria-controls="p-feat">Feature</button>'
       '<button role="tab" id="t-kb" aria-selected="false" aria-controls="p-kb">Kanban</button>'
+      '<button role="tab" id="t-src" aria-selected="false" aria-controls="p-src">Nguồn khách</button>'
       '<button role="tab" id="t-health" aria-selected="false" aria-controls="p-health">Sức khỏe vault</button>'
       '</div></div>')
 
@@ -584,15 +798,25 @@ def render(m):
         steps = f"bước {x.get('steps_done', 0)}/{x.get('steps_total', 0)}" if x.get("steps_total") else ""
         w(f'<li><span class="chip">{E(n)}</span><b>{E(x.get("feature", ""))}</b><span class="muted">{E(x.get("title", ""))} {E(steps)} · {E(x.get("last_log", ""))}</span><code>/queue {i}</code></li>')
     w("</ul></div>")
-    acts = m["actions"]
-    w('<div class="panel"><h2>Việc máy phát hiện</h2><ul>')
-    if not acts:
-        w('<li class="muted">Không có. Hàng việc chung (backlog + máy, có điểm ưu tiên) sẽ thay khối này ở đợt P1.</li>')
-    for a in acts[:6]:
-        w(f'<li><span class="chip">{E(a["priority"])}</span>{link(a.get("target_path"), E(a["title"]))}</li>')
-    if len(acts) > 6:
-        w(f'<li class="muted">… và {len(acts) - 6} việc khác</li>')
-    w("</ul></div></div>")
+    work = m["work"]
+    w(f'<div class="panel"><h2>Hàng việc ({len(work)}) · xếp theo điểm ưu tiên</h2>'
+      '<p class="muted" style="margin:2px 0 0;font-size:.78rem">Điểm = Chặn 40/25 + Hạn 25/15 + Lan 4đ mỗi doc/feature (trần 20) + Tuổi 1đ/2 ngày (trần 15). '
+      'Cột <i>Ưu tiên</i> trong backlog: <code>P0</code> luôn lên đầu, <code>để sau</code> luôn xuống cuối.</p><ul class="work">')
+    if not work:
+        w('<li class="muted">Không có việc nào.</li>')
+    for i, x in enumerate(work):
+        tip = " + ".join(f"{k} {v}" for k, v in x["parts"].items()) + f" = {x['score']}"
+        extra = ' class="more-row"' if i >= 10 else ""
+        man = f'<span class="chip">{E(x["manual"])}</span>' if x["manual"] else ""
+        due = f'<span class="muted">hạn {E(x["due"])}</span>' if x["due"] else ""
+        label = f'{E(x["id"])} · {E(x["title"])}' if x["kind"] == "BL" else E(x["title"])
+        w(f'<li{extra}><span class="score" title="{E(tip)}">{x["score"]}</span>'
+          f'<span class="tag{" tag-m" if x["kind"] == "Máy" else ""}">{x["kind"]}</span>{man}'
+          f'{link(x["path"], label, x.get("line"))}{due}</li>')
+    w("</ul>")
+    if len(work) > 10:
+        w(f'<button type="button" class="seg-btn" id="btn-more" aria-pressed="false" data-l="Xem hết {len(work)} việc">Xem hết {len(work)} việc</button>')
+    w("</div></div>")
 
     # Feature
     w('<div role="tabpanel" id="p-feat" aria-labelledby="t-feat" hidden>')
@@ -620,6 +844,28 @@ def render(m):
                 w(f'<span class="{cls}"{cls_title}>{t}</span>')
     w("</div></div>")
     w("<style>body.show-hidden #stages{--n:%d}</style>" % len(cols))
+    lint_rows = [(r["feature"], r["lint"], r["stages"]["srs"]) for r in m["features"] if r.get("lint")]
+    n_fail = sum(l["fail"] for _, l, _ in lint_rows)
+    n_warn = sum(l["warn"] for _, l, _ in lint_rows)
+    p_open = [p for p in m["params"] if p["open"]]
+    audits = [(r["feature"], r["audit"]) for r in m["features"] if r.get("audit")]
+    n_screens = sum(r.get("screens", 0) for r in m["features"])
+    w('<div class="tiles">')
+    first_lint = next(((s_["path"], s_["line"]) for _, l, s_ in lint_rows if l["fail"] or l["warn"]), (None, None))
+    inner = (f'<span class="lab">Tầng SaaS ↗</span><span class="big {"l-red" if n_fail else "l-amber" if n_warn else "l-green"}">'
+             f'{n_fail} FAIL · {n_warn} WARN</span><span class="sub">saas-layer-lint trên {len(lint_rows)} spec</span>')
+    w(link(first_lint[0], inner, first_lint[1], "tile") if first_lint[0] else f'<div class="tile">{inner}</div>')
+    inner = (f'<span class="lab">Tham số P chưa chốt ↗</span><span class="big {"l-amber" if p_open else "l-green"}">'
+             f'{len(p_open)}/{len(m["params"])}</span><span class="sub">bảng tham số theo khách</span>')
+    w(link("docs/_product/tenant-parameters.md", inner, None, "tile"))
+    if audits:
+        f_, a_ = sorted(audits, key=lambda x: x[1]["date"])[-1]
+        inner = (f'<span class="lab">Figma ↗</span><span class="big {"l-red" if a_["cao"] else "l-green"}">'
+                 f'{a_["cao"]} · {a_["trung"]} · {a_["thap"]}</span><span class="sub">Cao · Trung · Thấp — audit {E(f_)} {E(a_["date"])} · {n_screens} màn</span>')
+        w(link(a_["path"], inner, None, "tile"))
+    else:
+        w(f'<div class="tile"><span class="lab">Figma</span><span class="big">{n_screens} màn</span><span class="sub">chưa có audit</span></div>')
+    w("</div>")
     oq_rows = [o for r in m["features"] for o in r["oq_rows"] if o["open"]]
     w(f'<div class="panel"><h2>Câu hỏi mở ({len(oq_rows)})</h2><div class="scroll"><table><thead><tr><th>Feature</th><th>Mã</th><th>Câu hỏi</th></tr></thead><tbody>')
     for o in oq_rows:
@@ -650,6 +896,26 @@ def render(m):
     if kb["loose"]:
         w('<div class="panel"><h2>Doc không có status</h2><ul>' + "".join(f"<li>{link(p, E(p))}</li>" for p in kb["loose"]) + "</ul></div>")
     w("</div>")
+
+    # Nguồn khách
+    srcs = m["sources"]
+    w('<div role="tabpanel" id="p-src" aria-labelledby="t-src" hidden>')
+    w('<p class="muted" style="margin:0">Thanh = mục đã đối chiếu / tổng mục (sổ <code>docs-input/_coverage/</code>). Nguồn ít được xử lý nhất lên đầu. Bấm mã để mở nguồn, bấm số để mở sổ đối chiếu.</p>')
+    def src_key(x):
+        r = x["ratio"]
+        if x["feed"].startswith("➖"):
+            return (3, 0, x["id"])
+        if r:
+            return (1, r[0] / r[1] if r[1] else 1, x["id"])
+        return (0, 0, x["id"])
+    w('<div class="panel"><div class="scroll"><table><thead><tr><th>Mã</th><th>Tên</th><th>Nhóm</th><th>Đối chiếu</th><th>Feed</th></tr></thead><tbody>')
+    for x in sorted(srcs, key=src_key):
+        r = x["ratio"]
+        pct = int(100 * r[0] / r[1]) if r and r[1] else 0
+        bar = (f'<div class="pbar"><i style="width:{pct}%"></i></div>' + link(x["ledger"], f"{r[0]}/{r[1]}", None, "num")) if r else ""
+        w(f'<tr><td class="mono">{link("docs-input/" + x["file"], E(x["id"]))}</td><td>{E(x["name"])}</td>'
+          f'<td class="muted">{E(x["group"])}</td><td class="pcell">{bar}</td><td>{E(x["feed"].split(" ")[0])}</td></tr>')
+    w("</tbody></table></div></div></div>")
 
     # Sức khỏe
     w('<div role="tabpanel" id="p-health" aria-labelledby="t-health" hidden>')

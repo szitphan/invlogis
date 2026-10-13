@@ -252,7 +252,9 @@ def reopen(led, p, since, code, new_tasks):
 
 
 # ---------- 3. backlog ----------
-BL_HEAD = ["ID", "Việc", "Nguồn", "Xong khi", "Trạng thái", "Tạo", "Xong", "Bằng chứng"]
+# Hạn (YYYY-MM-DD) + Ưu tiên (trống | P0 | để sau) thêm ở CUỐI để dòng cũ thiếu ô vẫn zip đúng vị trí;
+# /dashboard dùng 2 cột này cho priority_score (Dashboard v2 P1, 2026-10-13).
+BL_HEAD = ["ID", "Việc", "Nguồn", "Xong khi", "Trạng thái", "Tạo", "Xong", "Bằng chứng", "Hạn", "Ưu tiên"]
 
 
 def load_backlog():
@@ -445,7 +447,7 @@ def main():
     for what, src, cond in new_tasks:
         if (what, unq(cond)) in have or unq(cond) in have_cond:
             continue
-        items.append(dict(zip(BL_HEAD, [f"BL-{bn:03d}", what, src, cond, "⬜", TODAY, "", ""])))
+        items.append(dict(zip(BL_HEAD, [f"BL-{bn:03d}", what, src, cond, "⬜", TODAY, "", "", "", ""])))
         have_cond.add(unq(cond))
         log.append(f"+ task BL-{bn:03d}: {what}")
         bn += 1
@@ -464,7 +466,7 @@ def main():
         what = f"Duyệt + land `{br}`" + (f" — {summ}" if summ else "")
         i = by_cond.get(cond)
         if i is None:
-            items.append(dict(zip(BL_HEAD, [f"BL-{bn:03d}", what, f"`{br}`", f"`{cond}`", st, at, "", ""])))
+            items.append(dict(zip(BL_HEAD, [f"BL-{bn:03d}", what, f"`{br}`", f"`{cond}`", st, at, "", "", "", ""])))
             log.append(f"+ task BL-{bn:03d}: {what} ({st})")
             bn += 1
         elif (i["Trạng thái"], i["Việc"]) != (st, what):

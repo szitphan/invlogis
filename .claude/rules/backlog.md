@@ -29,6 +29,8 @@ xếp nhóm + đặt tên theo quy ước trong `docs-input/README.md` (sổ t�
 2. **Mỗi task phải có cột Xong khi máy kiểm được** (`exists:` / `grep:` / `fed:`, `!` phủ định, `&&` nối),
    trỏ vào **output thật** của việc (file sinh ra, mã xuất hiện). Chỉ dùng `manual` khi việc là quyết định
    không để lại dấu vết file (vd chốt bản nào thay thế bản nào).
+   Hai cột cuối tuỳ chọn: **Hạn** = ngày `YYYY-MM-DD` (có buổi họp/hạn khách); **Ưu tiên** = trống, `P0`
+   (luôn lên đầu hàng việc `/dashboard`) hoặc `để sau` (luôn xuống cuối). Còn lại xếp theo điểm ưu tiên.
 3. **Đóng task `manual`** khi việc đã xong trong hội thoại: đổi Trạng thái `✅` + Xong + Bằng chứng
    (1 câu: user chốt gì, ngày nào). Script tự chuyển dòng sang mục Đã xong.
 4. **Đổi tên/di chuyển file trong `docs-input/`**: cập nhật link trong `docs/` cùng lượt (L2); sổ + backlog
