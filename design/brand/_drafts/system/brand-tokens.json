@@ -1,0 +1,320 @@
+{
+  "$description": "Token thương hiệu Invlogis × innvie, hướng A · Lụa (DEC-072). KHÔNG thay design/design-tokens.css của sản phẩm (DEC-066). Cùng giá trị với brand-tokens.css. Token dẫn xuất chỉ có ở CSS: --brand-grain (SVG nhiễu), --brand-gradient-symbol/deep dạng chuỗi CSS ở đây, lớp thành phần .brand-silk/.brand-chip-glass/.brand-tag, --brand-line, --brand-focus-ring, --brand-tag-*.",
+  "color": {
+    "palette": {
+      "ink": {
+        "value": "#0E1442",
+        "name": "Mực chàm"
+      },
+      "night": {
+        "value": "#0B1033",
+        "name": "Chàm đêm"
+      },
+      "navy": {
+        "value": "#17206F",
+        "name": "Chàm đậm"
+      },
+      "cobalt": {
+        "value": "#2F43DB",
+        "name": "Cobalt"
+      },
+      "violet": {
+        "value": "#7B55FF",
+        "name": "Tím lụa"
+      },
+      "pink": {
+        "value": "#E24C9A",
+        "name": "Hồng lụa"
+      },
+      "coral": {
+        "value": "#FF7A59",
+        "name": "San hô"
+      },
+      "peri": {
+        "value": "#97A6FF",
+        "name": "Periwinkle"
+      },
+      "peri_light": {
+        "value": "#C4CDFF",
+        "name": "Periwinkle nhạt"
+      },
+      "peach": {
+        "value": "#FFD3C0",
+        "name": "Đào nhạt"
+      },
+      "amber": {
+        "value": "#FFB547",
+        "name": "Hổ phách"
+      },
+      "smoke": {
+        "value": "#E6EAF8",
+        "name": "Xanh khói"
+      },
+      "paper": {
+        "value": "#FAF8F4",
+        "name": "Giấy ấm"
+      },
+      "slate": {
+        "value": "#4A5380",
+        "name": "Xám chàm"
+      },
+      "white": {
+        "value": "#FFFFFF",
+        "name": "Trắng"
+      }
+    },
+    "role": {
+      "light": {
+        "primary": {
+          "value": "#2F43DB",
+          "role": "Chủ đạo (logo, nút, nhấn)"
+        },
+        "primary_hover": {
+          "value": "#2538BF",
+          "role": "Chủ đạo khi rê chuột"
+        },
+        "on_primary": {
+          "value": "#FFFFFF",
+          "role": "Chữ trên nền chủ đạo"
+        },
+        "bg": {
+          "value": "#FAF8F4",
+          "role": "Nền chính"
+        },
+        "surface": {
+          "value": "#FFFFFF",
+          "role": "Bề mặt (thẻ)"
+        },
+        "surface_2": {
+          "value": "#E6EAF8",
+          "role": "Bề mặt phụ"
+        },
+        "text": {
+          "value": "#0E1442",
+          "role": "Chữ chính"
+        },
+        "text_2": {
+          "value": "#4A5380",
+          "role": "Chữ phụ"
+        },
+        "border": {
+          "value": "rgba(14,20,66,0.14)",
+          "role": "Viền mảnh 1px"
+        },
+        "border_strong": {
+          "value": "rgba(14,20,66,0.28)",
+          "role": "Viền mảnh đậm"
+        },
+        "control_border": {
+          "value": "#6B7499",
+          "role": "Viền ô nhập, nút (không-chữ)"
+        },
+        "focus": {
+          "value": "#2F43DB",
+          "role": "Vòng focus"
+        },
+        "link": {
+          "value": "#2F43DB",
+          "role": "Liên kết"
+        }
+      },
+      "dark": {
+        "primary": {
+          "value": "#97A6FF",
+          "role": "Chủ đạo (logo, nút, nhấn)"
+        },
+        "primary_hover": {
+          "value": "#C4CDFF",
+          "role": "Chủ đạo khi rê chuột"
+        },
+        "on_primary": {
+          "value": "#0B1033",
+          "role": "Chữ trên nền chủ đạo"
+        },
+        "bg": {
+          "value": "#0B1033",
+          "role": "Nền chính"
+        },
+        "surface": {
+          "value": "#121A4A",
+          "role": "Bề mặt (thẻ)"
+        },
+        "surface_2": {
+          "value": "#17206F",
+          "role": "Bề mặt phụ"
+        },
+        "text": {
+          "value": "#F4F5FF",
+          "role": "Chữ chính"
+        },
+        "text_2": {
+          "value": "#9AA3C7",
+          "role": "Chữ phụ"
+        },
+        "border": {
+          "value": "rgba(255,255,255,0.14)",
+          "role": "Viền mảnh 1px"
+        },
+        "border_strong": {
+          "value": "rgba(255,255,255,0.28)",
+          "role": "Viền mảnh đậm"
+        },
+        "control_border": {
+          "value": "#8B93B8",
+          "role": "Viền ô nhập, nút (không-chữ)"
+        },
+        "focus": {
+          "value": "#C4CDFF",
+          "role": "Vòng focus"
+        },
+        "link": {
+          "value": "#97A6FF",
+          "role": "Liên kết"
+        }
+      }
+    }
+  },
+  "gradient": {
+    "campaign": {
+      "css": "linear-gradient(115deg, #0E1442 0%, #2F43DB 28%, #7B55FF 52%, #E24C9A 76%, #FF7A59 100%)",
+      "angle": "115deg",
+      "stops": [
+        {
+          "position": "0%",
+          "value": "#0E1442"
+        },
+        {
+          "position": "28%",
+          "value": "#2F43DB"
+        },
+        {
+          "position": "52%",
+          "value": "#7B55FF"
+        },
+        {
+          "position": "76%",
+          "value": "#E24C9A"
+        },
+        {
+          "position": "100%",
+          "value": "#FF7A59"
+        }
+      ],
+      "textZones": {
+        "whiteText": "0-56%",
+        "noText": "56-70%",
+        "darkText": "70-100%",
+        "onDeep": "#FFFFFF",
+        "onLight": "#0B1033"
+      },
+      "grain": {
+        "type": "feTurbulence fractalNoise",
+        "baseFrequency": 0.85,
+        "numOctaves": 2,
+        "opacity": 0.32,
+        "blend": "soft-light"
+      }
+    },
+    "deep": "linear-gradient(115deg, #0E1442 0%, #2F43DB 55%, #7B55FF 100%)",
+    "symbol": "linear-gradient(180deg, #97A6FF 0%, #2F43DB 45%, #17206F 100%)"
+  },
+  "glass": {
+    "dark": "rgba(11,16,51,0.78)",
+    "light": "rgba(250,248,244,0.88)",
+    "blur": "14px"
+  },
+  "typography": {
+    "family": {
+      "display": "Lexend",
+      "body": "Be Vietnam Pro",
+      "mono": "JetBrains Mono"
+    },
+    "weight": {
+      "light": 300,
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600
+    },
+    "lineHeight": {
+      "display": 1.08,
+      "heading": 1.2,
+      "body": 1.55,
+      "tight": 1.3
+    },
+    "tracking": {
+      "eyebrow": "0.14em",
+      "tag": "0.02em",
+      "logo": "0.025em"
+    },
+    "scale": {
+      "web": {
+        "display": "clamp(2.75rem, 7vw, 5.5rem)",
+        "h1": "clamp(2.25rem, 5vw, 3.5rem)",
+        "h2": "clamp(1.75rem, 3.4vw, 2.5rem)",
+        "h3": "1.375rem",
+        "lead": "1.25rem",
+        "body": "1.0625rem",
+        "small": "0.875rem",
+        "caption": "0.8125rem",
+        "eyebrow": "0.75rem"
+      },
+      "doc": {
+        "title": "32pt",
+        "h1": "22pt",
+        "h2": "16pt",
+        "h3": "13pt",
+        "body": "10.5pt",
+        "small": "9pt",
+        "caption": "8pt"
+      },
+      "deck": {
+        "cover": "104px",
+        "section": "54px",
+        "body": "30px",
+        "caption": "20px",
+        "eyebrow": "20px"
+      }
+    }
+  },
+  "radius": {
+    "xs": "6px",
+    "sm": "10px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "32px",
+    "pill": "999px"
+  },
+  "spacing": {
+    "s1": "4px",
+    "s2": "8px",
+    "s3": "12px",
+    "s4": "16px",
+    "s5": "24px",
+    "s6": "32px",
+    "s7": "48px",
+    "s8": "64px",
+    "s9": "96px"
+  },
+  "borderWidth": {
+    "hairline": "1px"
+  },
+  "shadow": {
+    "light": {
+      "sm": "0 1px 2px rgba(14,20,66,0.06), 0 1px 1px rgba(14,20,66,0.04)",
+      "md": "0 6px 20px rgba(14,20,66,0.08), 0 2px 6px rgba(14,20,66,0.05)",
+      "lg": "0 24px 60px rgba(14,20,66,0.16), 0 6px 16px rgba(14,20,66,0.08)"
+    },
+    "dark": {
+      "sm": "0 1px 2px rgba(0,0,0,0.4)",
+      "md": "0 6px 20px rgba(0,0,0,0.45)",
+      "lg": "0 24px 60px rgba(0,0,0,0.6)"
+    }
+  },
+  "docTag": {
+    "font": "500 12px JetBrains Mono",
+    "padding": "6px 12px",
+    "radius": "999px",
+    "border": "1px solid border-strong",
+    "letterSpacing": "0.02em"
+  }
+}

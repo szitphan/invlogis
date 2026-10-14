@@ -1,0 +1,193 @@
+/* ==========================================================================
+   Invlogis × innvie — TOKEN THƯƠNG HIỆU (hướng A · Lụa, DEC-072)
+   Dùng cho: tài liệu, bài trình bày, web marketing, mạng xã hội, trang quy chuẩn.
+   KHÔNG thay `design/design-tokens.css` của SẢN PHẨM (DEC-066): giao diện app
+   Invlogis vẫn lấy token từ design.md. Tiền tố `--brand-` để không đụng token sản phẩm.
+   Bản nháp trong design/brand/_drafts/system/ — chốt rồi mới đưa lên design/brand/.
+   Luật đặt chữ trên gradient: xem mục "Gradient" bên dưới và brand-guideline.html.
+   ========================================================================== */
+
+/* ---------- 1. Bảng màu gốc (không đổi theo sáng/tối) ---------- */
+:root {
+  --brand-c-ink: #0E1442;  /* Mực chàm */
+  --brand-c-night: #0B1033;  /* Chàm đêm */
+  --brand-c-navy: #17206F;  /* Chàm đậm */
+  --brand-c-cobalt: #2F43DB;  /* Cobalt */
+  --brand-c-violet: #7B55FF;  /* Tím lụa */
+  --brand-c-pink: #E24C9A;  /* Hồng lụa */
+  --brand-c-coral: #FF7A59;  /* San hô */
+  --brand-c-peri: #97A6FF;  /* Periwinkle */
+  --brand-c-peri-light: #C4CDFF;  /* Periwinkle nhạt */
+  --brand-c-peach: #FFD3C0;  /* Đào nhạt */
+  --brand-c-amber: #FFB547;  /* Hổ phách */
+  --brand-c-smoke: #E6EAF8;  /* Xanh khói */
+  --brand-c-paper: #FAF8F4;  /* Giấy ấm */
+  --brand-c-slate: #4A5380;  /* Xám chàm */
+  --brand-c-white: #FFFFFF;  /* Trắng */
+
+  /* ---------- 2. Vai trò màu — bản sáng (mặc định) ---------- */
+  --brand-primary: #2F43DB;
+  --brand-primary-hover: #2538BF;
+  --brand-on-primary: #FFFFFF;
+  --brand-bg: #FAF8F4;
+  --brand-surface: #FFFFFF;
+  --brand-surface-2: #E6EAF8;
+  --brand-text: #0E1442;
+  --brand-text-2: #4A5380;
+  --brand-border: rgba(14,20,66,0.14);
+  --brand-border-strong: rgba(14,20,66,0.28);
+  --brand-control-border: #6B7499;
+  --brand-focus: #2F43DB;
+  --brand-link: #2F43DB;
+  --brand-focus-ring: 0 0 0 3px rgba(47,67,219,0.35);
+
+  /* ---------- 3. Gradient chiến dịch ----------
+     Chữ trên gradient: đường 115°, đo theo vị trí dọc dải.
+       0–56%   vùng đậm   -> chữ trắng (>=4.5:1)
+       56–70%  vùng cấm   -> KHÔNG đặt chữ (không màu chữ nào đạt 4.5:1)
+       70–100% vùng sáng  -> chữ Chàm đêm #0B1033 (>=4.5:1)
+     Chữ nằm ngoài các vùng trên: đặt chip kính (--brand-glass-*) phía sau.
+     Hai phần ba diện tích gradient phải là xanh (ink/cobalt/violet). */
+  --brand-gradient-campaign: linear-gradient(115deg, #0E1442 0%, #2F43DB 28%, #7B55FF 52%, #E24C9A 76%, #FF7A59 100%);
+  --brand-gradient-deep: linear-gradient(115deg, #0E1442 0%, #2F43DB 55%, #7B55FF 100%);
+  --brand-gradient-symbol: linear-gradient(180deg, #97A6FF 0%, #2F43DB 45%, #17206F 100%);
+  --brand-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23n%29'/%3E%3C/svg%3E");
+  --brand-grain-opacity: 0.32;
+  --brand-grain-blend: soft-light;
+  --brand-zone-white-max: 56%;
+  --brand-zone-dead-min: 56%;
+  --brand-zone-dead-max: 70%;
+  --brand-zone-ink-min: 70%;
+  --brand-on-gradient-deep: #FFFFFF;
+  --brand-on-gradient-light: #0B1033;
+  --brand-glass-dark: rgba(11,16,51,0.78);   /* chip kính tối + chữ trắng: >=9:1 trên mọi màu gradient */
+  --brand-glass-light: rgba(250,248,244,0.88); /* chip kính sáng + chữ chàm đêm: >=12:1 */
+  --brand-glass-blur: 14px;
+
+  /* ---------- 4. Chữ ---------- */
+  --brand-font-display: "Lexend", "Be Vietnam Pro", system-ui, sans-serif;
+  --brand-font-body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --brand-font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --brand-weight-light: 300;
+  --brand-weight-regular: 400;
+  --brand-weight-medium: 500;
+  --brand-weight-semibold: 600;
+  --brand-leading-display: 1.08;
+  --brand-leading-heading: 1.2;
+  --brand-leading-body: 1.55;
+  --brand-leading-tight: 1.3;
+  --brand-tracking-eyebrow: 0.14em;
+  --brand-tracking-tag: 0.02em;
+  --brand-tracking-logo: 0.025em;
+  /* Thang cỡ — web */
+  --brand-fs-display: clamp(2.75rem, 7vw, 5.5rem);
+  --brand-fs-h1: clamp(2.25rem, 5vw, 3.5rem);
+  --brand-fs-h2: clamp(1.75rem, 3.4vw, 2.5rem);
+  --brand-fs-h3: 1.375rem;
+  --brand-fs-lead: 1.25rem;
+  --brand-fs-body: 1.0625rem;
+  --brand-fs-small: 0.875rem;
+  --brand-fs-caption: 0.8125rem;
+  --brand-fs-eyebrow: 0.75rem;
+  /* Thang cỡ — tài liệu Word/PDF (A4) */
+  --brand-doc-title: 32pt;
+  --brand-doc-h1: 22pt;
+  --brand-doc-h2: 16pt;
+  --brand-doc-h3: 13pt;
+  --brand-doc-body: 10.5pt;
+  --brand-doc-small: 9pt;
+  --brand-doc-caption: 8pt;
+  /* Thang cỡ — slide 1920×1080 */
+  --brand-deck-cover: 104px;
+  --brand-deck-section: 54px;
+  --brand-deck-body: 30px;
+  --brand-deck-caption: 20px;
+  --brand-deck-eyebrow: 20px;
+
+  /* ---------- 5. Hình khối ---------- */
+  --brand-radius-xs: 6px;
+  --brand-radius-sm: 10px;
+  --brand-radius-md: 16px;
+  --brand-radius-lg: 24px;
+  --brand-radius-xl: 32px;
+  --brand-radius-pill: 999px;
+  --brand-space-s1: 4px;
+  --brand-space-s2: 8px;
+  --brand-space-s3: 12px;
+  --brand-space-s4: 16px;
+  --brand-space-s5: 24px;
+  --brand-space-s6: 32px;
+  --brand-space-s7: 48px;
+  --brand-space-s8: 64px;
+  --brand-space-s9: 96px;
+  --brand-hairline: 1px;
+  --brand-line: var(--brand-hairline) solid var(--brand-border);
+  --brand-line-strong: var(--brand-hairline) solid var(--brand-border-strong);
+  --brand-shadow-sm: 0 1px 2px rgba(14,20,66,0.06), 0 1px 1px rgba(14,20,66,0.04);
+  --brand-shadow-md: 0 6px 20px rgba(14,20,66,0.08), 0 2px 6px rgba(14,20,66,0.05);
+  --brand-shadow-lg: 0 24px 60px rgba(14,20,66,0.16), 0 6px 16px rgba(14,20,66,0.08);
+
+  /* ---------- 6. Nhãn chứng từ: [eDO · đã đọc] ---------- */
+  --brand-tag-font: 500 0.75rem/1 var(--brand-font-mono);
+  --brand-tag-pad: 6px 12px;
+  --brand-tag-radius: var(--brand-radius-pill);
+  --brand-tag-border: var(--brand-hairline) solid var(--brand-border-strong);
+  --brand-tag-bg: transparent;
+  --brand-tag-color: var(--brand-text);
+}
+
+/* ---------- Bản tối ---------- */
+:root[data-theme="dark"] {
+  --brand-primary: #97A6FF;
+  --brand-primary-hover: #C4CDFF;
+  --brand-on-primary: #0B1033;
+  --brand-bg: #0B1033;
+  --brand-surface: #121A4A;
+  --brand-surface-2: #17206F;
+  --brand-text: #F4F5FF;
+  --brand-text-2: #9AA3C7;
+  --brand-border: rgba(255,255,255,0.14);
+  --brand-border-strong: rgba(255,255,255,0.28);
+  --brand-control-border: #8B93B8;
+  --brand-focus: #C4CDFF;
+  --brand-link: #97A6FF;
+  --brand-focus-ring: 0 0 0 3px rgba(151,166,255,0.45);
+  --brand-shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --brand-shadow-md: 0 6px 20px rgba(0,0,0,0.45);
+  --brand-shadow-lg: 0 24px 60px rgba(0,0,0,0.6);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --brand-primary: #97A6FF;
+    --brand-primary-hover: #C4CDFF;
+    --brand-on-primary: #0B1033;
+    --brand-bg: #0B1033;
+    --brand-surface: #121A4A;
+    --brand-surface-2: #17206F;
+    --brand-text: #F4F5FF;
+    --brand-text-2: #9AA3C7;
+    --brand-border: rgba(255,255,255,0.14);
+    --brand-border-strong: rgba(255,255,255,0.28);
+    --brand-control-border: #8B93B8;
+    --brand-focus: #C4CDFF;
+    --brand-link: #97A6FF;
+    --brand-focus-ring: 0 0 0 3px rgba(151,166,255,0.45);
+    --brand-shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+    --brand-shadow-md: 0 6px 20px rgba(0,0,0,0.45);
+    --brand-shadow-lg: 0 24px 60px rgba(0,0,0,0.6);
+  }
+}
+
+/* ---------- Thành phần mẫu dùng token ---------- */
+.brand-silk { position: relative; isolation: isolate; background: var(--brand-gradient-campaign); }
+.brand-silk::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: var(--brand-grain); background-size: 240px;
+  opacity: var(--brand-grain-opacity); mix-blend-mode: var(--brand-grain-blend); }
+.brand-chip-glass { background: var(--brand-glass-dark); color: #fff;
+  -webkit-backdrop-filter: blur(var(--brand-glass-blur)); backdrop-filter: blur(var(--brand-glass-blur));
+  border: var(--brand-hairline) solid rgba(255,255,255,0.18); border-radius: var(--brand-radius-md); }
+.brand-tag { display: inline-block; font: var(--brand-tag-font); letter-spacing: var(--brand-tracking-tag);
+  padding: var(--brand-tag-pad); border: var(--brand-tag-border); border-radius: var(--brand-tag-radius);
+  background: var(--brand-tag-bg); color: var(--brand-tag-color); }
+.brand-eyebrow { font: var(--brand-weight-regular) var(--brand-fs-eyebrow)/1 var(--brand-font-display);
+  letter-spacing: var(--brand-tracking-eyebrow); text-transform: uppercase; color: var(--brand-text-2); }

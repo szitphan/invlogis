@@ -1,0 +1,335 @@
+{
+ "n1-chamdem": {
+  "name": "Chàm đêm",
+  "kind": "neo",
+  "mode": "white",
+  "sizes": {
+   "1920x1080": {
+    "worst": "#26348E",
+    "fg": "#FFFFFF",
+    "ratio": 10.69,
+    "line": "#FFFFFF trên #26348E: 10.69:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1350": {
+    "worst": "#121945",
+    "fg": "#FFFFFF",
+    "ratio": 16.79,
+    "line": "#FFFFFF trên #121945: 16.79:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1080": {
+    "worst": "#141C4D",
+    "fg": "#FFFFFF",
+    "ratio": 16.12,
+    "line": "#FFFFFF trên #141C4D: 16.12:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1500x500": {
+    "worst": "#10173E",
+    "fg": "#FFFFFF",
+    "ratio": 17.3,
+    "line": "#FFFFFF trên #10173E: 17.30:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "2560x1440": {
+    "worst": "#26348F",
+    "fg": "#FFFFFF",
+    "ratio": 10.66,
+    "line": "#FFFFFF trên #26348F: 10.66:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   }
+  }
+ },
+ "n2-cobalt": {
+  "name": "Cobalt lụa",
+  "kind": "neo",
+  "mode": "white",
+  "sizes": {
+   "1920x1080": {
+    "worst": "#3A4DD4",
+    "fg": "#FFFFFF",
+    "ratio": 6.58,
+    "line": "#FFFFFF trên #3A4DD4: 6.58:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1350": {
+    "worst": "#3A4DD4",
+    "fg": "#FFFFFF",
+    "ratio": 6.58,
+    "line": "#FFFFFF trên #3A4DD4: 6.58:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1080": {
+    "worst": "#3A4DD4",
+    "fg": "#FFFFFF",
+    "ratio": 6.58,
+    "line": "#FFFFFF trên #3A4DD4: 6.58:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1500x500": {
+    "worst": "#3A4DD4",
+    "fg": "#FFFFFF",
+    "ratio": 6.58,
+    "line": "#FFFFFF trên #3A4DD4: 6.58:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "2560x1440": {
+    "worst": "#3A4DD4",
+    "fg": "#FFFFFF",
+    "ratio": 6.58,
+    "line": "#FFFFFF trên #3A4DD4: 6.58:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   }
+  }
+ },
+ "n3-chamtim": {
+  "name": "Chàm–tím",
+  "kind": "neo",
+  "mode": "white",
+  "sizes": {
+   "1920x1080": {
+    "worst": "#5445B7",
+    "fg": "#FFFFFF",
+    "ratio": 7.21,
+    "line": "#FFFFFF trên #5445B7: 7.21:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1350": {
+    "worst": "#1F2A76",
+    "fg": "#FFFFFF",
+    "ratio": 12.72,
+    "line": "#FFFFFF trên #1F2A76: 12.72:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1080": {
+    "worst": "#202A75",
+    "fg": "#FFFFFF",
+    "ratio": 12.73,
+    "line": "#FFFFFF trên #202A75: 12.73:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1500x500": {
+    "worst": "#202A76",
+    "fg": "#FFFFFF",
+    "ratio": 12.69,
+    "line": "#FFFFFF trên #202A76: 12.69:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "2560x1440": {
+    "worst": "#5445B6",
+    "fg": "#FFFFFF",
+    "ratio": 7.23,
+    "line": "#FFFFFF trên #5445B6: 7.23:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   }
+  }
+ },
+ "n4-periwinkle": {
+  "name": "Periwinkle sáng",
+  "kind": "neo",
+  "mode": "ink",
+  "sizes": {
+   "1920x1080": {
+    "worst": "#95A0E8",
+    "fg": "#0E1442",
+    "ratio": 7.07,
+    "line": "#0E1442 trên #95A0E8: 7.07:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1350": {
+    "worst": "#BFC7F1",
+    "fg": "#0E1442",
+    "ratio": 10.57,
+    "line": "#0E1442 trên #BFC7F1: 10.57:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1080": {
+    "worst": "#BFC7F1",
+    "fg": "#0E1442",
+    "ratio": 10.57,
+    "line": "#0E1442 trên #BFC7F1: 10.57:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1500x500": {
+    "worst": "#BFC7F1",
+    "fg": "#0E1442",
+    "ratio": 10.57,
+    "line": "#0E1442 trên #BFC7F1: 10.57:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "2560x1440": {
+    "worst": "#95A0E8",
+    "fg": "#0E1442",
+    "ratio": 7.07,
+    "line": "#0E1442 trên #95A0E8: 7.07:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   }
+  }
+ },
+ "n5-giay-lua": {
+  "name": "Giấy lụa",
+  "kind": "neo",
+  "mode": "ink",
+  "sizes": {
+   "1920x1080": {
+    "worst": "#D8DCEC",
+    "fg": "#0E1442",
+    "ratio": 12.83,
+    "line": "#0E1442 trên #D8DCEC: 12.83:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1350": {
+    "worst": "#DEE1EB",
+    "fg": "#0E1442",
+    "ratio": 13.43,
+    "line": "#0E1442 trên #DEE1EB: 13.43:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1080": {
+    "worst": "#DEE1EB",
+    "fg": "#0E1442",
+    "ratio": 13.43,
+    "line": "#0E1442 trên #DEE1EB: 13.43:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1500x500": {
+    "worst": "#DFE1EA",
+    "fg": "#0E1442",
+    "ratio": 13.44,
+    "line": "#0E1442 trên #DFE1EA: 13.44:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "2560x1440": {
+    "worst": "#D8DCEC",
+    "fg": "#0E1442",
+    "ratio": 12.83,
+    "line": "#0E1442 trên #D8DCEC: 12.83:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   }
+  }
+ },
+ "n6-muc-cobalt": {
+  "name": "Mực → cobalt",
+  "kind": "neo",
+  "mode": "white",
+  "sizes": {
+   "1920x1080": {
+    "worst": "#233083",
+    "fg": "#FFFFFF",
+    "ratio": 11.53,
+    "line": "#FFFFFF trên #233083: 11.53:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1350": {
+    "worst": "#1C266B",
+    "fg": "#FFFFFF",
+    "ratio": 13.65,
+    "line": "#FFFFFF trên #1C266B: 13.65:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1080": {
+    "worst": "#1C266B",
+    "fg": "#FFFFFF",
+    "ratio": 13.65,
+    "line": "#FFFFFF trên #1C266B: 13.65:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1500x500": {
+    "worst": "#1C266B",
+    "fg": "#FFFFFF",
+    "ratio": 13.65,
+    "line": "#FFFFFF trên #1C266B: 13.65:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "2560x1440": {
+    "worst": "#242F84",
+    "fg": "#FFFFFF",
+    "ratio": 11.57,
+    "line": "#FFFFFF trên #242F84: 11.57:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   }
+  }
+ },
+ "r1-tim-hong": {
+  "name": "Rực · Cobalt–tím–hồng",
+  "kind": "rực",
+  "mode": "white",
+  "sizes": {
+   "1920x1080": {
+    "worst": "#5848BD",
+    "fg": "#FFFFFF",
+    "ratio": 6.83,
+    "line": "#FFFFFF trên #5848BD: 6.83:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1350": {
+    "worst": "#2C3AA1",
+    "fg": "#FFFFFF",
+    "ratio": 9.43,
+    "line": "#FFFFFF trên #2C3AA1: 9.43:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1080": {
+    "worst": "#3040B1",
+    "fg": "#FFFFFF",
+    "ratio": 8.42,
+    "line": "#FFFFFF trên #3040B1: 8.42:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1500x500": {
+    "worst": "#202A76",
+    "fg": "#FFFFFF",
+    "ratio": 12.69,
+    "line": "#FFFFFF trên #202A76: 12.69:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "2560x1440": {
+    "worst": "#5848BD",
+    "fg": "#FFFFFF",
+    "ratio": 6.83,
+    "line": "#FFFFFF trên #5848BD: 6.83:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   }
+  }
+ },
+ "r2-lam-tim": {
+  "name": "Rực · Cobalt–lam–tím",
+  "kind": "rực",
+  "mode": "white",
+  "sizes": {
+   "1920x1080": {
+    "worst": "#2B6099",
+    "fg": "#FFFFFF",
+    "ratio": 6.49,
+    "line": "#FFFFFF trên #2B6099: 6.49:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1350": {
+    "worst": "#3A4DD4",
+    "fg": "#FFFFFF",
+    "ratio": 6.58,
+    "line": "#FFFFFF trên #3A4DD4: 6.58:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1080": {
+    "worst": "#3A4DD4",
+    "fg": "#FFFFFF",
+    "ratio": 6.58,
+    "line": "#FFFFFF trên #3A4DD4: 6.58:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1500x500": {
+    "worst": "#3A4DD4",
+    "fg": "#FFFFFF",
+    "ratio": 6.58,
+    "line": "#FFFFFF trên #3A4DD4: 6.58:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "2560x1440": {
+    "worst": "#2B6099",
+    "fg": "#FFFFFF",
+    "ratio": 6.49,
+    "line": "#FFFFFF trên #2B6099: 6.49:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   }
+  }
+ },
+ "r3-nang": {
+  "name": "Rực · Cobalt–đào–hổ phách",
+  "kind": "rực",
+  "mode": "white",
+  "sizes": {
+   "1920x1080": {
+    "worst": "#5562B4",
+    "fg": "#FFFFFF",
+    "ratio": 5.54,
+    "line": "#FFFFFF trên #5562B4: 5.54:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1350": {
+    "worst": "#3A4DD4",
+    "fg": "#FFFFFF",
+    "ratio": 6.58,
+    "line": "#FFFFFF trên #3A4DD4: 6.58:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1080x1080": {
+    "worst": "#3A4DD4",
+    "fg": "#FFFFFF",
+    "ratio": 6.58,
+    "line": "#FFFFFF trên #3A4DD4: 6.58:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "1500x500": {
+    "worst": "#3A4DD4",
+    "fg": "#FFFFFF",
+    "ratio": 6.58,
+    "line": "#FFFFFF trên #3A4DD4: 6.58:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   },
+   "2560x1440": {
+    "worst": "#5662B3",
+    "fg": "#FFFFFF",
+    "ratio": 5.54,
+    "line": "#FFFFFF trên #5662B3: 5.54:1 · chữ thường AA đạt · chữ lớn AA đạt"
+   }
+  }
+ }
+}

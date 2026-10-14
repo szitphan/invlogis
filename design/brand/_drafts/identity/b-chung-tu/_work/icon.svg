@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024"><defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B0E2B"/><stop offset=".6" stop-color="#1A2294"/><stop offset="1" stop-color="#3B4EF2"/></linearGradient>
+<radialGradient id="gl" cx=".68" cy=".3" r=".5"><stop offset="0" stop-color="#8B5CF6" stop-opacity=".75"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
+<radialGradient id="gl2" cx=".25" cy=".95" r=".5"><stop offset="0" stop-color="#F062B4" stop-opacity=".45"/><stop offset="1" stop-color="#F062B4" stop-opacity="0"/></radialGradient>
+<filter id="nz"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .8 0"/></filter>
+<defs><linearGradient id="aig" gradientUnits="userSpaceOnUse" x1="8.6" y1="54.1" x2="57.4" y2="15.9"><stop offset="0" stop-color="#A99CFF"/><stop offset=".55" stop-color="#8294FF"/><stop offset="1" stop-color="#A6C4FF"/></linearGradient><mask id="aimk" maskUnits="userSpaceOnUse" x="-10" y="-10" width="84" height="84"><rect x="-10" y="-10" width="84" height="84" fill="#fff"/><line x1="8.6" y1="54.1" x2="57.4" y2="15.9" stroke="#000" stroke-width="17.7" stroke-linecap="round"/></mask></defs></defs>
+<rect width="1024" height="1024" fill="url(#bg)"/><rect width="1024" height="1024" fill="url(#gl)"/><rect width="1024" height="1024" fill="url(#gl2)"/>
+<rect width="1024" height="1024" filter="url(#nz)" opacity=".16" style="mix-blend-mode:soft-light"/>
+<g transform="translate(172 172) scale(11)"><g mask="url(#aimk)"><path d="M10 10 Q10 3 17 3 L40 3 L54 17 L54 54 Q54 61 47 61 L17 61 Q10 61 10 54 Z" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/></g><line x1="8.6" y1="54.1" x2="57.4" y2="15.9" stroke="url(#aig)" stroke-width="12.5" stroke-linecap="round"/></g></svg>

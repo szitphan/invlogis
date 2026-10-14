@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quy chuẩn thương hiệu Invlogis</title>
+<meta name="description" content="Quy chuẩn thương hiệu Invlogis × innvie, hướng A · Lụa: logo, màu, chữ, gradient, giọng văn.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Lexend:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   Invlogis × innvie — TOKEN THƯƠNG HIỆU (hướng A · Lụa, DEC-072)
+   Dùng cho: tài liệu, bài trình bày, web marketing, mạng xã hội, trang quy chuẩn.
+   KHÔNG thay `design/design-tokens.css` của SẢN PHẨM (DEC-066): giao diện app
+   Invlogis vẫn lấy token từ design.md. Tiền tố `--brand-` để không đụng token sản phẩm.
+   Bản nháp trong design/brand/_drafts/system/ — chốt rồi mới đưa lên design/brand/.
+   Luật đặt chữ trên gradient: xem mục "Gradient" bên dưới và brand-guideline.html.
+   ========================================================================== */
+
+/* ---------- 1. Bảng màu gốc (không đổi theo sáng/tối) ---------- */
+:root {
+  --brand-c-ink: #0E1442;  /* Mực chàm */
+  --brand-c-night: #0B1033;  /* Chàm đêm */
+  --brand-c-navy: #17206F;  /* Chàm đậm */
+  --brand-c-cobalt: #2F43DB;  /* Cobalt */
+  --brand-c-violet: #7B55FF;  /* Tím lụa */
+  --brand-c-pink: #E24C9A;  /* Hồng lụa */
+  --brand-c-coral: #FF7A59;  /* San hô */
+  --brand-c-peri: #97A6FF;  /* Periwinkle */
+  --brand-c-peri-light: #C4CDFF;  /* Periwinkle nhạt */
+  --brand-c-peach: #FFD3C0;  /* Đào nhạt */
+  --brand-c-amber: #FFB547;  /* Hổ phách */
+  --brand-c-smoke: #E6EAF8;  /* Xanh khói */
+  --brand-c-paper: #FAF8F4;  /* Giấy ấm */
+  --brand-c-slate: #4A5380;  /* Xám chàm */
+  --brand-c-white: #FFFFFF;  /* Trắng */
+
+  /* ---------- 2. Vai trò màu — bản sáng (mặc định) ---------- */
+  --brand-primary: #2F43DB;
+  --brand-primary-hover: #2538BF;
+  --brand-on-primary: #FFFFFF;
+  --brand-bg: #FAF8F4;
+  --brand-surface: #FFFFFF;
+  --brand-surface-2: #E6EAF8;
+  --brand-text: #0E1442;
+  --brand-text-2: #4A5380;
+  --brand-border: rgba(14,20,66,0.14);
+  --brand-border-strong: rgba(14,20,66,0.28);
+  --brand-control-border: #6B7499;
+  --brand-focus: #2F43DB;
+  --brand-link: #2F43DB;
+  --brand-focus-ring: 0 0 0 3px rgba(47,67,219,0.35);
+
+  /* ---------- 3. Gradient chiến dịch ----------
+     Chữ trên gradient: đường 115°, đo theo vị trí dọc dải.
+       0–56%   vùng đậm   -> chữ trắng (>=4.5:1)
+       56–70%  vùng cấm   -> KHÔNG đặt chữ (không màu chữ nào đạt 4.5:1)
+       70–100% vùng sáng  -> chữ Chàm đêm #0B1033 (>=4.5:1)
+     Chữ nằm ngoài các vùng trên: đặt chip kính (--brand-glass-*) phía sau.
+     Hai phần ba diện tích gradient phải là xanh (ink/cobalt/violet). */
+  --brand-gradient-campaign: linear-gradient(115deg, #0E1442 0%, #2F43DB 28%, #7B55FF 52%, #E24C9A 76%, #FF7A59 100%);
+  --brand-gradient-deep: linear-gradient(115deg, #0E1442 0%, #2F43DB 55%, #7B55FF 100%);
+  --brand-gradient-symbol: linear-gradient(180deg, #97A6FF 0%, #2F43DB 45%, #17206F 100%);
+  --brand-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23n%29'/%3E%3C/svg%3E");
+  --brand-grain-opacity: 0.32;
+  --brand-grain-blend: soft-light;
+  --brand-zone-white-max: 56%;
+  --brand-zone-dead-min: 56%;
+  --brand-zone-dead-max: 70%;
+  --brand-zone-ink-min: 70%;
+  --brand-on-gradient-deep: #FFFFFF;
+  --brand-on-gradient-light: #0B1033;
+  --brand-glass-dark: rgba(11,16,51,0.78);   /* chip kính tối + chữ trắng: >=9:1 trên mọi màu gradient */
+  --brand-glass-light: rgba(250,248,244,0.88); /* chip kính sáng + chữ chàm đêm: >=12:1 */
+  --brand-glass-blur: 14px;
+
+  /* ---------- 4. Chữ ---------- */
+  --brand-font-display: "Lexend", "Be Vietnam Pro", system-ui, sans-serif;
+  --brand-font-body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --brand-font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --brand-weight-light: 300;
+  --brand-weight-regular: 400;
+  --brand-weight-medium: 500;
+  --brand-weight-semibold: 600;
+  --brand-leading-display: 1.08;
+  --brand-leading-heading: 1.2;
+  --brand-leading-body: 1.55;
+  --brand-leading-tight: 1.3;
+  --brand-tracking-eyebrow: 0.14em;
+  --brand-tracking-tag: 0.02em;
+  --brand-tracking-logo: 0.025em;
+  /* Thang cỡ — web */
+  --brand-fs-display: clamp(2.75rem, 7vw, 5.5rem);
+  --brand-fs-h1: clamp(2.25rem, 5vw, 3.5rem);
+  --brand-fs-h2: clamp(1.75rem, 3.4vw, 2.5rem);
+  --brand-fs-h3: 1.375rem;
+  --brand-fs-lead: 1.25rem;
+  --brand-fs-body: 1.0625rem;
+  --brand-fs-small: 0.875rem;
+  --brand-fs-caption: 0.8125rem;
+  --brand-fs-eyebrow: 0.75rem;
+  /* Thang cỡ — tài liệu Word/PDF (A4) */
+  --brand-doc-title: 32pt;
+  --brand-doc-h1: 22pt;
+  --brand-doc-h2: 16pt;
+  --brand-doc-h3: 13pt;
+  --brand-doc-body: 10.5pt;
+  --brand-doc-small: 9pt;
+  --brand-doc-caption: 8pt;
+  /* Thang cỡ — slide 1920×1080 */
+  --brand-deck-cover: 104px;
+  --brand-deck-section: 54px;
+  --brand-deck-body: 30px;
+  --brand-deck-caption: 20px;
+  --brand-deck-eyebrow: 20px;
+
+  /* ---------- 5. Hình khối ---------- */
+  --brand-radius-xs: 6px;
+  --brand-radius-sm: 10px;
+  --brand-radius-md: 16px;
+  --brand-radius-lg: 24px;
+  --brand-radius-xl: 32px;
+  --brand-radius-pill: 999px;
+  --brand-space-s1: 4px;
+  --brand-space-s2: 8px;
+  --brand-space-s3: 12px;
+  --brand-space-s4: 16px;
+  --brand-space-s5: 24px;
+  --brand-space-s6: 32px;
+  --brand-space-s7: 48px;
+  --brand-space-s8: 64px;
+  --brand-space-s9: 96px;
+  --brand-hairline: 1px;
+  --brand-line: var(--brand-hairline) solid var(--brand-border);
+  --brand-line-strong: var(--brand-hairline) solid var(--brand-border-strong);
+  --brand-shadow-sm: 0 1px 2px rgba(14,20,66,0.06), 0 1px 1px rgba(14,20,66,0.04);
+  --brand-shadow-md: 0 6px 20px rgba(14,20,66,0.08), 0 2px 6px rgba(14,20,66,0.05);
+  --brand-shadow-lg: 0 24px 60px rgba(14,20,66,0.16), 0 6px 16px rgba(14,20,66,0.08);
+
+  /* ---------- 6. Nhãn chứng từ: [eDO · đã đọc] ---------- */
+  --brand-tag-font: 500 0.75rem/1 var(--brand-font-mono);
+  --brand-tag-pad: 6px 12px;
+  --brand-tag-radius: var(--brand-radius-pill);
+  --brand-tag-border: var(--brand-hairline) solid var(--brand-border-strong);
+  --brand-tag-bg: transparent;
+  --brand-tag-color: var(--brand-text);
+}
+
+/* ---------- Bản tối ---------- */
+:root[data-theme="dark"] {
+  --brand-primary: #97A6FF;
+  --brand-primary-hover: #C4CDFF;
+  --brand-on-primary: #0B1033;
+  --brand-bg: #0B1033;
+  --brand-surface: #121A4A;
+  --brand-surface-2: #17206F;
+  --brand-text: #F4F5FF;
+  --brand-text-2: #9AA3C7;
+  --brand-border: rgba(255,255,255,0.14);
+  --brand-border-strong: rgba(255,255,255,0.28);
+  --brand-control-border: #8B93B8;
+  --brand-focus: #C4CDFF;
+  --brand-link: #97A6FF;
+  --brand-focus-ring: 0 0 0 3px rgba(151,166,255,0.45);
+  --brand-shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --brand-shadow-md: 0 6px 20px rgba(0,0,0,0.45);
+  --brand-shadow-lg: 0 24px 60px rgba(0,0,0,0.6);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --brand-primary: #97A6FF;
+    --brand-primary-hover: #C4CDFF;
+    --brand-on-primary: #0B1033;
+    --brand-bg: #0B1033;
+    --brand-surface: #121A4A;
+    --brand-surface-2: #17206F;
+    --brand-text: #F4F5FF;
+    --brand-text-2: #9AA3C7;
+    --brand-border: rgba(255,255,255,0.14);
+    --brand-border-strong: rgba(255,255,255,0.28);
+    --brand-control-border: #8B93B8;
+    --brand-focus: #C4CDFF;
+    --brand-link: #97A6FF;
+    --brand-focus-ring: 0 0 0 3px rgba(151,166,255,0.45);
+    --brand-shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+    --brand-shadow-md: 0 6px 20px rgba(0,0,0,0.45);
+    --brand-shadow-lg: 0 24px 60px rgba(0,0,0,0.6);
+  }
+}
+
+/* ---------- Thành phần mẫu dùng token ---------- */
+.brand-silk { position: relative; isolation: isolate; background: var(--brand-gradient-campaign); }
+.brand-silk::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: var(--brand-grain); background-size: 240px;
+  opacity: var(--brand-grain-opacity); mix-blend-mode: var(--brand-grain-blend); }
+.brand-chip-glass { background: var(--brand-glass-dark); color: #fff;
+  -webkit-backdrop-filter: blur(var(--brand-glass-blur)); backdrop-filter: blur(var(--brand-glass-blur));
+  border: var(--brand-hairline) solid rgba(255,255,255,0.18); border-radius: var(--brand-radius-md); }
+.brand-tag { display: inline-block; font: var(--brand-tag-font); letter-spacing: var(--brand-tracking-tag);
+  padding: var(--brand-tag-pad); border: var(--brand-tag-border); border-radius: var(--brand-tag-radius);
+  background: var(--brand-tag-bg); color: var(--brand-tag-color); }
+.brand-eyebrow { font: var(--brand-weight-regular) var(--brand-fs-eyebrow)/1 var(--brand-font-display);
+  letter-spacing: var(--brand-tracking-eyebrow); text-transform: uppercase; color: var(--brand-text-2); }
+
+
+/* ===== Trang quy chuẩn ===== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--brand-bg);color:var(--brand-text);font:var(--brand-weight-regular) var(--brand-fs-body)/var(--brand-leading-body) var(--brand-font-body);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--brand-link);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:none;box-shadow:var(--brand-focus-ring);border-radius:var(--brand-radius-xs)}
+h1,h2,h3,h4{font-family:var(--brand-font-display);font-weight:var(--brand-weight-light);line-height:var(--brand-leading-heading);margin:0 0 var(--brand-space-s3);letter-spacing:-0.005em}
+h2{font-size:var(--brand-fs-h2);margin-bottom:var(--brand-space-s4)}
+h3{font-size:var(--brand-fs-h3);font-weight:var(--brand-weight-regular);margin-top:var(--brand-space-s6)}
+h4{font-size:1.05rem;font-weight:var(--brand-weight-regular)}
+p{margin:0 0 var(--brand-space-s3);max-width:68ch}
+.wrap{width:min(1120px,100% - 32px);margin-inline:auto}
+section{padding:clamp(48px,8vw,96px) 0;border-top:var(--brand-line)}
+.eyebrow{font:var(--brand-weight-regular) var(--brand-fs-eyebrow)/1 var(--brand-font-display);letter-spacing:var(--brand-tracking-eyebrow);text-transform:uppercase;color:var(--brand-text-2);margin-bottom:var(--brand-space-s3)}
+.lead{font-size:var(--brand-fs-lead);color:var(--brand-text-2);max-width:60ch}
+.muted{color:var(--brand-text-2)}
+.small{font-size:var(--brand-fs-small)}
+code,.mono{font-family:var(--brand-font-mono);font-size:.86em}
+code{background:var(--brand-surface-2);padding:1px 6px;border-radius:var(--brand-radius-xs)}
+.grid{display:grid;gap:var(--brand-space-s4)}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))}
+.card{background:var(--brand-surface);border:var(--brand-line);border-radius:var(--brand-radius-lg);padding:var(--brand-space-s5);box-shadow:var(--brand-shadow-sm)}
+.card h4{margin-bottom:var(--brand-space-s2)}
+.card p:last-child{margin-bottom:0}
+.tag{display:inline-block;font:var(--brand-tag-font);letter-spacing:var(--brand-tracking-tag);padding:var(--brand-tag-pad);border:var(--brand-tag-border);border-radius:var(--brand-tag-radius);color:var(--brand-tag-color);background:var(--brand-tag-bg);white-space:nowrap}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:var(--brand-weight-medium) .95rem/1 var(--brand-font-body);border:0;border-radius:var(--brand-radius-pill);padding:12px 20px;background:var(--brand-primary);color:var(--brand-on-primary);cursor:pointer;min-height:44px}
+.btn:hover{background:var(--brand-primary-hover)}
+.btn.ghost{background:transparent;color:var(--brand-text);border:1px solid var(--brand-control-border)}
+.ok,.bad{display:inline-flex;gap:6px;align-items:center;font-size:.8rem;font-weight:500;padding:2px 10px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.ok{color:#0F6B3A}.bad{color:#B3261E}
+:root[data-theme=dark] .ok{color:#6FD7A0}:root[data-theme=dark] .bad{color:#FF9A92}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .ok{color:#6FD7A0}:root:not([data-theme=light]) .bad{color:#FF9A92}}
+.warn{display:inline-flex;font-size:.8rem;font-weight:500;padding:2px 10px;border-radius:999px;border:1px solid currentColor;color:#8A5A00;white-space:nowrap}
+:root[data-theme=dark] .warn{color:#FFC76B}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .warn{color:#FFC76B}}
+
+/* nav */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--brand-bg) 88%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:var(--brand-line)}
+.top .wrap{display:flex;align-items:center;gap:12px;height:56px}
+.top nav{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}
+.top nav::-webkit-scrollbar{display:none}
+.top nav a{white-space:nowrap;text-decoration:none;color:var(--brand-text-2);font-size:.85rem;padding:8px 10px;border-radius:999px}
+.top nav a:hover{background:var(--brand-surface-2);color:var(--brand-text)}
+.top .brandmini{height:20px;width:auto;flex:none}
+#theme{flex:none;font:500 .8rem var(--brand-font-body);background:transparent;color:var(--brand-text);border:1px solid var(--brand-control-border);border-radius:999px;padding:8px 14px;min-height:36px;cursor:pointer}
+
+/* silk */
+.silk{position:relative;isolation:isolate;overflow:hidden;border-radius:var(--brand-radius-xl)}
+.silk::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:var(--brand-grain);background-size:240px;opacity:var(--brand-grain-opacity);mix-blend-mode:var(--brand-grain-blend)}
+.silk-deep{background:var(--brand-gradient-deep)}
+.silk-full{background:var(--brand-gradient-campaign)}
+.silk-blob{background:
+ radial-gradient(60% 80% at 8% 8%, #2F43DB 0%, transparent 70%),
+ radial-gradient(40% 55% at 104% 106%, #FF7A59 0%, transparent 70%),
+ radial-gradient(35% 50% at 104% 55%, #E24C9A 0%, transparent 70%),
+ radial-gradient(45% 55% at 80% 6%, #7B55FF 0%, transparent 70%),#0E1442}
+.on-deep{color:var(--brand-on-gradient-deep)}
+.on-light{color:var(--brand-on-gradient-light)}
+.glass{background:var(--brand-glass-dark);color:#fff;-webkit-backdrop-filter:blur(var(--brand-glass-blur));backdrop-filter:blur(var(--brand-glass-blur));border:1px solid rgba(255,255,255,.18);border-radius:var(--brand-radius-md)}
+.glass-l{background:var(--brand-glass-light);color:#0B1033;-webkit-backdrop-filter:blur(var(--brand-glass-blur));backdrop-filter:blur(var(--brand-glass-blur));border:1px solid rgba(14,20,66,.12);border-radius:var(--brand-radius-md)}
+
+/* hero */
+.hero{padding:clamp(16px,3vw,32px) 0 0;border:0}
+.hero .silk{min-height:min(78vh,640px);padding:clamp(24px,5vw,64px);display:flex;flex-direction:column;justify-content:space-between}
+.hero h1{font-size:var(--brand-fs-display);line-height:var(--brand-leading-display);color:#fff;max-width:14ch;margin:0}
+.hero .sub{color:#fff;font-size:var(--brand-fs-lead);max-width:44ch;margin:16px 0 0}
+.hero .logo-h{height:clamp(28px,4vw,44px);width:auto}
+.hero .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-end}
+
+/* swatches */
+.sw{border:var(--brand-line);border-radius:var(--brand-radius-lg);overflow:hidden;background:var(--brand-surface)}
+.sw .chip{height:96px;display:flex;align-items:flex-end;padding:10px 14px;font:500 .85rem var(--brand-font-body)}
+.sw .meta{padding:12px 14px;font-size:.85rem}
+.sw .meta b{display:block;font-weight:500;font-size:.95rem}
+.sw .meta span{color:var(--brand-text-2)}
+.sw .meta .mono{display:block;color:var(--brand-text)}
+
+/* tables */
+.tw{overflow-x:auto;border:var(--brand-line);border-radius:var(--brand-radius-md);background:var(--brand-surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:560px}
+th,td{padding:10px 14px;text-align:left;vertical-align:top;border-bottom:var(--brand-line)}
+th{font-weight:500;color:var(--brand-text-2);font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;background:var(--brand-surface-2)}
+tr:last-child td{border-bottom:0}
+.aa{display:inline-block;min-width:3.2em;text-align:center;padding:2px 8px;border-radius:6px;font:500 .85rem var(--brand-font-display)}
+details{margin:12px 0}
+summary{cursor:pointer;font-weight:500;padding:10px 0}
+
+/* logo */
+.logobox{border:var(--brand-line);border-radius:var(--brand-radius-lg);background:#fff;display:flex;align-items:center;justify-content:center;padding:clamp(20px,4vw,36px);min-height:140px}
+.logobox{color:#0E1442}
+.logobox .glass-l img{height:30px;width:auto;max-width:none}
+.logobox.dark{background:#0B1033}
+.logobox img{max-height:64px;width:auto;max-width:100%}
+.logobox img.tall{max-height:96px}
+.fig{margin:0}
+.fig figcaption{font-size:.85rem;color:var(--brand-text-2);margin-top:8px}
+.safe{position:relative;display:inline-block;padding:var(--x,28px);background:repeating-linear-gradient(45deg,transparent 0 6px,rgba(47,67,219,.08) 6px 7px);outline:1px dashed #2F43DB}
+.safe .inner{outline:1px solid rgba(14,20,66,.35);background:#fff;display:block;line-height:0}
+.safe img{height:56px;width:auto}
+.safe i{position:absolute;font:500 11px var(--brand-font-mono);color:#2F43DB;background:#fff;padding:0 4px}
+.dont{position:relative}
+.dont .logobox{min-height:120px;overflow:hidden}
+.dont .x{position:absolute;top:10px;right:10px}
+.dont img{max-height:48px}
+
+/* gradient strip */
+.strip{height:84px;border-radius:var(--brand-radius-md);position:relative;background:var(--brand-gradient-campaign);margin-top:8px}
+.zones{display:grid;grid-template-columns:56fr 14fr 30fr;margin-top:8px;font-size:.78rem;text-align:center}
+.zones div{padding:8px 4px;border:1px solid var(--brand-border-strong);border-left-width:0}
+.zones div:first-child{border-left-width:1px;border-radius:10px 0 0 10px}
+.zones div:last-child{border-radius:0 10px 10px 0}
+.zones .dead{background:repeating-linear-gradient(45deg,transparent 0 5px,var(--brand-border) 5px 6px)}
+.demo{padding:clamp(20px,4vw,36px);min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px}
+.demo h4{font-size:1.6rem;margin:0}
+.demo p{margin:0;font-size:.95rem}
+.demo .lab{position:absolute;top:12px;left:12px}
+.demo-wrap{position:relative}
+
+/* type */
+.specimen{font-family:var(--brand-font-display);font-weight:300;font-size:clamp(2rem,6vw,4rem);line-height:1.08;margin:0 0 8px;overflow-wrap:anywhere}
+.scale-row{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:baseline;padding:14px 0;border-bottom:var(--brand-line)}
+.scale-row .k{font:400 .78rem var(--brand-font-mono);color:var(--brand-text-2)}
+.scale-row .s{overflow-wrap:anywhere}
+
+/* images */
+.docs{position:relative;height:100%;min-height:340px;padding:24px}
+.docc{position:absolute;width:min(62%,240px);padding:14px 16px;font-size:.8rem}
+.docc b{display:block;font:500 .82rem var(--brand-font-mono);margin-bottom:6px}
+.docc .ln{height:6px;border-radius:3px;background:currentColor;opacity:.2;margin:6px 0}
+.phone{width:min(210px,70%);aspect-ratio:9/18;border-radius:34px;border:6px solid #0B1033;background:var(--brand-bg);box-shadow:var(--brand-shadow-lg);padding:16px 12px;font-size:.62rem;overflow:hidden;color:var(--brand-text)}
+.phone .bar{height:6px;width:36%;background:#0B1033;border-radius:3px;margin:-6px auto 14px;opacity:.7}
+.phone .row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--brand-border)}
+.phone .pill{font:500 .55rem var(--brand-font-mono);border:1px solid var(--brand-border-strong);border-radius:999px;padding:1px 6px}
+.avoid li{margin:6px 0}
+
+/* voice */
+.say{border-left:3px solid var(--brand-primary);padding:4px 0 4px 16px;margin:12px 0;font-family:var(--brand-font-display);font-weight:300;font-size:1.25rem}
+
+/* lockup */
+.lockup{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 20px}
+.lockup .by{font:400 .8rem var(--brand-font-display);letter-spacing:.06em;color:var(--brand-text-2)}
+.lockup img{height:40px;width:auto}
+.lockup img.small{height:18px}
+
+/* samples */
+.sample{border-radius:var(--brand-radius-lg);overflow:hidden;border:var(--brand-line)}
+.s-social{aspect-ratio:1/1;padding:8%;display:flex;flex-direction:column;justify-content:space-between;border:0}
+.s-social h4{color:#fff;font-size:clamp(1.5rem,3.4vw,2.4rem);line-height:1.1;margin:0}
+.s-deck{aspect-ratio:16/9;background:#0B1033;color:#fff;padding:6%;display:flex;flex-direction:column;justify-content:space-between}
+.s-deck h4{font-size:clamp(1.2rem,2.8vw,2rem);margin:0;color:#fff}
+.s-mail{background:#fff;color:#0E1442;padding:20px;font-size:.85rem}
+.s-mail .sig{border-top:1px solid rgba(14,20,66,.14);margin-top:16px;padding-top:12px}
+.s-web{background:var(--brand-bg)}
+.s-web .h{padding:clamp(20px,4vw,40px)}
+
+footer{padding:48px 0 72px;color:var(--brand-text-2);font-size:.85rem;border-top:var(--brand-line)}
+@media (max-width:560px){.scale-row{grid-template-columns:1fr;gap:4px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* In PDF: A4 ngang, mỗi mục một trang mới, không cắt thẻ */
+@media print{
+  @page{size:A4 landscape;margin:10mm}
+  html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .top{position:static}
+  section{break-before:page}
+  section:first-of-type{break-before:auto}
+  .card,.logobox,.fig,.sw,.dont,.scale-row,table,tr,figure{break-inside:avoid}
+  h2,h3,h4,.eyebrow{break-after:avoid}
+}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="wrap">
+  <img src="../logo-final/invlogis-primary.svg" class="brandmini" alt="Invlogis" loading="lazy">
+  <nav aria-label="Mục lục">
+   <a href="#gioi-thieu">Giới thiệu</a><a href="#logo">Logo</a><a href="#mau">Màu</a><a href="#chu">Chữ</a><a href="#gradient">Gradient</a><a href="#chi-tiet">Chi tiết</a><a href="#hinh-anh">Hình ảnh</a><a href="#giong-van">Giọng văn</a><a href="#kien-truc">Kiến trúc</a><a href="#mau-ung-dung">Ứng dụng</a>
+  </nav>
+  <button id="theme" type="button" aria-label="Đổi giao diện sáng tối">Tự động</button>
+ </div>
+</header>
+
+<main>
+<div class="hero"><div class="wrap">
+ <div class="silk silk-blob">
+  <div class="logo-wrap"><img src="../logo-final/invlogis-reverse.svg" class="logo-h" alt="Invlogis" loading="lazy"></div>
+  <div>
+   <div class="eyebrow" style="color:#fff">Quy chuẩn thương hiệu · hướng A · Lụa</div>
+   <h1>Khai mở cách vận hành mới.</h1>
+   <p class="sub">Open a new way to operate.</p>
+  </div>
+  <div class="foot">
+   <span class="glass" style="padding:10px 16px;font:500 .8rem var(--brand-font-mono)">[bản nháp · 14/10/2026 · DEC-072]</span>
+   <span class="glass" style="padding:10px 16px;font-size:.85rem">Chữ trên nền đậm: trắng. Xem mục Gradient.</span>
+  </div>
+ </div>
+</div></div>
+
+<section id="gioi-thieu"><div class="wrap">
+ <div class="eyebrow">01 · Giới thiệu</div>
+ <h2>Chứng từ vào. Hồ sơ sẵn.</h2>
+ <p class="lead">Invlogis là nền tảng vận hành cho doanh nghiệp giao nhận, vận tải container ở Việt Nam: điều vận, xưởng, dầu, công nợ dùng chung một dữ liệu. Thương hiệu nói như một chuyên gia điềm tĩnh và hành động như một kỹ sư tiên phong.</p>
+ <div class="grid g2" style="margin-top:32px">
+  <div class="card"><h4>Tầm nhìn</h4><p><b>3–5 năm:</b> đưa logistics Việt Nam từ vận hành bằng kinh nghiệm sang vận hành bằng dữ liệu và AI agent, ngang chuẩn khu vực.</p><p><b>Dài hạn:</b> Invlogis trở thành chuẩn ngành logistics khu vực.</p></div>
+  <div class="card"><h4>Lời hứa mỗi ngày</h4><p>Invlogis hiểu thực tế cảng Việt: cảng, chứng từ, quy trình Việt Nam, thay vì phần mềm nước ngoài phải bẻ cho vừa.</p><p class="muted small">English: We know Vietnam's ports, document by document.</p></div>
+ </div>
+ <h3>Ba giá trị</h3>
+ <div class="grid g3">
+  <div class="card"><h4>Minh bạch</h4><p>Ai làm gì, lúc nào, tra lại được. Số liệu có phạm vi và có nguồn.</p></div>
+  <div class="card"><h4>Đáng tin cậy</h4><p>Nói ít mà chắc. Không hứa điều chưa có; người dùng duyệt trước khi lưu.</p></div>
+  <div class="card"><h4>Đổi mới</h4><p>Đi trước về AI nhưng có cơ sở. Kết quả nói trước, công nghệ là lý do làm được.</p></div>
+ </div>
+ <h3>Khẩu hiệu</h3>
+ <div class="card" style="margin-top:12px">
+  <div class="say" style="font-size:clamp(1.4rem,3vw,2rem)">Khai mở cách vận hành mới.</div>
+  <p class="muted" style="margin-top:-4px">Open a new way to operate. — khẩu hiệu chính, chốt DEC-072.</p>
+  <p class="small muted">Khẩu hiệu sản phẩm đi kèm khi cần nói cụ thể: "Chứng từ vào. Hồ sơ sẵn." / "Documents in. Records ready."</p>
+ </div>
+ <h3>Câu chuyện tên</h3>
+ <div class="grid g2">
+  <div class="card"><h4>innvie</h4><p><b>innovative + vietnamese</b>: sự sáng tạo và niềm tự hào Việt Nam, phát triển nhanh và mạnh mẽ, đặc biệt là thế hệ trẻ luôn hướng tới đổi mới.</p><p>Trong tiếng Na Uy, <i>innvie</i> mang hai nghĩa chúng tôi giữ cả hai: <b>cống hiến</b> (dedicate), đầu tư toàn tâm cho giải pháp tiên tiến; và <b>khánh thành, khai mở</b>, nghĩa của một khởi đầu mới.</p></div>
+  <div class="card"><h4>Invlogis</h4><p><b>innvie + logistics.</b> Cống hiến cho logistics Việt Nam, và khai mở một cách vận hành mới. Hai nghĩa này là lý do khẩu hiệu chính là lời mời bắt đầu, không phải lời khoe.</p><p class="small muted">Cách viết: logo dùng chữ thường (<span class="mono">invlogis</span>, <span class="mono">innvie</span>); trong câu văn viết hoa chữ đầu: Invlogis, innvie.</p></div>
+ </div>
+</div></section>
+
+<section id="logo"><div class="wrap">
+ <div class="eyebrow">02 · Logo</div>
+ <h2>Chữ thường, một nếp lụa.</h2>
+ <p class="lead">Logo chữ "invlogis" viết thường, chữ v chuyển màu từ mực chàm sang cobalt (trên nền tối: trắng sang periwinkle), bản đơn sắc để v một màu. Ký hiệu là một chữ "i" gấp từ dải lụa, dùng khi không đủ chỗ cho cả chữ. Logo bàn giao dạng nét vector, không phụ thuộc font.</p>
+ <h3>Biến thể</h3>
+ <div class="grid g2">
+  <figure class="fig"><div class="logobox"><img src="../logo-final/invlogis-primary.svg" alt="Invlogis, bản màu" loading="lazy"></div><figcaption><b>invlogis-primary</b> — mặc định trên nền sáng: giấy ấm, trắng, xanh khói.</figcaption></figure>
+  <figure class="fig"><div class="logobox dark"><img src="../logo-final/invlogis-reverse.svg" alt="Invlogis, bản đảo màu" loading="lazy"></div><figcaption><b>invlogis-reverse</b> — nền tối: Chàm đêm, Mực chàm, Chàm đậm, vùng tối của gradient.</figcaption></figure>
+  <figure class="fig"><div class="logobox"><img src="../logo-final/invlogis-mono-black.svg" alt="Invlogis, đen" loading="lazy"></div><figcaption><b>invlogis-mono-black</b> — in một màu, fax, đóng dấu, khắc.</figcaption></figure>
+  <figure class="fig"><div class="logobox" style="background:#2F43DB"><img src="../logo-final/invlogis-mono-white.svg" alt="Invlogis, trắng" loading="lazy"></div><figcaption><b>invlogis-mono-white</b> — nền cobalt, ảnh tối, vùng gradient sáng (chỗ gradient của chữ i bị chìm).</figcaption></figure>
+  <figure class="fig"><div class="logobox"><img src="../logo-final/invlogis-stacked.svg" class="tall" alt="Invlogis, xếp chồng" loading="lazy"></div><figcaption><b>invlogis-stacked</b> — khung vuông hoặc dọc: splash, bìa dọc.</figcaption></figure>
+  <figure class="fig"><div class="logobox"><img src="../logo-final/invlogis-tagline.svg" class="tall" alt="Invlogis kèm khẩu hiệu" loading="lazy"></div><figcaption><b>invlogis-tagline</b> (+ <span class="mono">-en</span>) — bìa deck, landing, banner ra mắt.</figcaption></figure>
+  <figure class="fig"><div class="logobox"><img src="../logo-final/invlogis-symbol.svg" class="tall" alt="Ký hiệu i" loading="lazy"></div><figcaption><b>invlogis-symbol</b> (+ reverse, mono) — ảnh đại diện, hình chìm, điểm nhấn; chỉ khi chữ "invlogis" đã xuất hiện gần đó.</figcaption></figure>
+  <figure class="fig"><div class="logobox"><img src="../logo-final/invlogis-by-innvie.svg" alt="Invlogis by innvie" loading="lazy"></div><figcaption><b>invlogis-by-innvie</b> (+ reverse) — chân trang web, trang cuối deck, hợp đồng, báo giá.</figcaption></figure>
+  <figure class="fig"><div class="logobox"><img src="../logo-final/innvie-logo.svg" alt="innvie" loading="lazy"></div><figcaption><b>innvie-logo</b> (+ mono) — chỉ cho pháp nhân: chữ ký, con dấu số, giấy tờ pháp lý.</figcaption></figure>
+ </div>
+ <p class="small muted">Cấu tạo: "invlogis" chữ thường, Lexend trọng lượng 340, giãn +20/1000 em, đã đổi sang nét vector. Chữ i đầu là ký hiệu lụa (thân cắt chéo 14°, chấm là mảnh lụa gấp); các chữ còn lại màu Mực chàm. Nguồn quy định: <code>logo-final/logo-spec.md</code>.</p>
+ <h3>Vùng an toàn và cỡ tối thiểu</h3>
+ <div class="grid g2">
+  <div class="card">
+   <p>Đơn vị <b>x = chiều cao chữ x</b> (khoảng 0,52 chiều cao toàn logo, từ đỉnh chấm i tới đáy đuôi g). Chừa trống ít nhất <b>1 x</b> ở cả bốn phía; thanh điều hướng chật thì tối thiểu 0,5 x. Không có chữ, hình hay mép khung nào lọt vào vùng này.</p>
+   <div style="padding:8px 0;overflow:auto"><span class="safe" style="--x:29px"><span class="inner"><img src="../logo-final/invlogis-primary.svg" alt="Vùng an toàn" loading="lazy"></span><i style="top:6px;left:50%">x</i><i style="bottom:6px;left:50%">x</i><i style="left:6px;top:50%">x</i><i style="right:6px;top:50%">x</i></span></div>
+  </div>
+  <div class="card">
+   <div class="tw"><table style="min-width:0">
+    <tr><th>Biến thể</th><th>Màn hình</th><th>In</th></tr>
+    <tr><td>Logo chữ</td><td>cao ≥ 20px (≈72px ngang); 16px chỉ khi bắt buộc</td><td>cao ≥ 6 mm (≈22 mm ngang)</td></tr>
+    <tr><td>Ký hiệu <span class="mono">invlogis-symbol</span></td><td>cao ≥ 48px; nhỏ hơn dùng bản favicon</td><td>cao ≥ 8 mm</td></tr>
+    <tr><td>Lockup "by innvie"</td><td>logo chính cao ≥ 48px</td><td>≥ 12 mm</td></tr>
+    <tr><td>Lockup có khẩu hiệu</td><td>logo chính cao ≥ 64px</td><td>≥ 16 mm</td></tr>
+   </table></div>
+   <p class="small muted" style="margin-top:12px">Số đo lấy từ <code>logo-spec.md</code> mục 2.</p>
+  </div>
+ </div>
+ <h3>Đúng và sai</h3>
+ <div class="grid g4">
+  <div class="dont"><span class="ok x">Đúng</span><div class="logobox"><img src="../logo-final/invlogis-primary.svg" alt="Đúng" loading="lazy"></div><p class="small">Nền sáng, màu gốc, đủ vùng an toàn.</p></div>
+  <div class="dont"><span class="ok x">Đúng</span><div class="logobox" style="background:var(--brand-gradient-campaign)"><span class="glass-l" style="padding:14px 18px;display:inline-flex"><img src="../logo-final/invlogis-primary.svg" alt="Trên thẻ nền giấy" loading="lazy"></span></div><p class="small">Trên gradient: đặt trong thẻ nền giấy/kính đậm, hoặc dùng <span class="mono">mono-white</span> ở vùng đậm.</p></div>
+  <div class="dont"><span class="bad x">Sai</span><div class="logobox"><img src="../logo-final/invlogis-primary.svg" style="transform:scaleX(1.5)" alt="Méo" loading="lazy"></div><p class="small">Kéo méo, nén, đổi tỉ lệ.</p></div>
+  <div class="dont"><span class="bad x">Sai</span><div class="logobox"><img src="../logo-final/invlogis-primary.svg" style="filter:hue-rotate(150deg) saturate(1.6)" alt="Đổi màu" loading="lazy"></div><p class="small">Đổi màu ngoài bảng; tô gradient chiến dịch lên chữ.</p></div>
+  <div class="dont"><span class="bad x">Sai</span><div class="logobox" style="background:var(--brand-gradient-campaign)"><img src="../logo-final/invlogis-primary.svg" alt="Nền gradient" loading="lazy"></div><p class="small">Bản màu đặt thẳng lên gradient: chữ chìm.</p></div>
+  <div class="dont"><span class="bad x">Sai</span><div class="logobox"><img src="../logo-final/invlogis-primary.svg" style="transform:rotate(-12deg)" alt="Xoay" loading="lazy"></div><p class="small">Xoay, nghiêng.</p></div>
+  <div class="dont"><span class="bad x">Sai</span><div class="logobox"><img src="../logo-final/invlogis-primary.svg" style="filter:drop-shadow(4px 6px 3px rgba(0,0,0,.6))" alt="Đổ bóng" loading="lazy"></div><p class="small">Đổ bóng, viền, phát sáng, 3D.</p></div>
+  <div class="dont"><span class="bad x">Sai</span><div class="logobox" style="gap:18px"><img src="../logo-final/invlogis-primary.svg" alt="Chữ" loading="lazy"><img src="../logo-final/invlogis-symbol-mono.svg" class="tall" alt="Ký hiệu" loading="lazy"></div><p class="small">Hai chữ i lụa cạnh nhau (logo cạnh ký hiệu): thành "hai vạch dọc".</p></div>
+  <div class="dont"><span class="bad x">Sai</span><div class="logobox"><span style="font:600 2rem var(--brand-font-body)">Invlogis</span></div><p class="small">Gõ lại logo bằng font, viết hoa chữ đầu.</p></div>
+  <div class="dont"><span class="bad x">Sai</span><div class="logobox" style="background:#E24C9A"><img src="../logo-final/invlogis-primary.svg" alt="Nền hồng" loading="lazy"></div><p class="small">Nền màu nóng hoặc ảnh rối làm mất tương phản.</p></div>
+  <div class="dont"><span class="bad x">Sai</span><div class="logobox"><span style="width:56px;height:56px;border-radius:50%;background:#2F43DB;display:inline-flex;align-items:center;justify-content:center;color:#fff;font:italic 600 1.6rem Georgia,serif">i</span></div><p class="small">Chữ i trắng trong hình tròn không có nền lụa: đọc thành biểu tượng ⓘ.</p></div>
+ </div>
+</div></section>
+
+<section id="mau"><div class="wrap">
+ <div class="eyebrow">03 · Màu</div>
+ <h2>Xanh cobalt ngả tím, trên giấy ấm.</h2>
+ <p class="lead">Cobalt (hue khoảng 233°) làm chủ đạo, né vùng azure 206–217° mà đối thủ đang đông. Nền là giấy ấm, không phải trắng lạnh. Sắc nóng chỉ xuất hiện trong gradient chiến dịch.</p>
+ <h3>Màu chủ đạo và trung tính</h3>
+ <div class="grid g4"><div class="sw"><div class="chip" style="background:#2F43DB;color:#FFFFFF;">Aa · 7.1:1</div><div class="meta"><b>Cobalt</b><span class="mono">#2F43DB</span><span>RGB 47, 67, 219</span><br><span>Chủ đạo: logo, nút, liên kết, nhấn</span></div></div><div class="sw"><div class="chip" style="background:#0E1442;color:#FFFFFF;">Aa · 17.5:1</div><div class="meta"><b>Mực chàm</b><span class="mono">#0E1442</span><span>RGB 14, 20, 66</span><br><span>Chữ chính, nền tối trung gian</span></div></div><div class="sw"><div class="chip" style="background:#0B1033;color:#FFFFFF;">Aa · 18.5:1</div><div class="meta"><b>Chàm đêm</b><span class="mono">#0B1033</span><span>RGB 11, 16, 51</span><br><span>Nền tối sâu, bìa slide, bản đảo màu</span></div></div><div class="sw"><div class="chip" style="background:#17206F;color:#FFFFFF;">Aa · 14.3:1</div><div class="meta"><b>Chàm đậm</b><span class="mono">#17206F</span><span>RGB 23, 32, 111</span><br><span>Đáy gradient ký hiệu</span></div></div><div class="sw"><div class="chip" style="background:#FAF8F4;color:#0B1033;border-bottom:1px solid var(--brand-border);">Aa · 17.4:1</div><div class="meta"><b>Giấy ấm</b><span class="mono">#FAF8F4</span><span>RGB 250, 248, 244</span><br><span>Nền chính</span></div></div><div class="sw"><div class="chip" style="background:#E6EAF8;color:#0B1033;border-bottom:1px solid var(--brand-border);">Aa · 15.4:1</div><div class="meta"><b>Xanh khói</b><span class="mono">#E6EAF8</span><span>RGB 230, 234, 248</span><br><span>Nền phụ, thẻ</span></div></div><div class="sw"><div class="chip" style="background:#FFFFFF;color:#0B1033;border-bottom:1px solid var(--brand-border);">Aa · 18.5:1</div><div class="meta"><b>Trắng</b><span class="mono">#FFFFFF</span><span>RGB 255, 255, 255</span><br><span>Bề mặt thẻ</span></div></div><div class="sw"><div class="chip" style="background:#4A5380;color:#FFFFFF;">Aa · 7.4:1</div><div class="meta"><b>Xám chàm</b><span class="mono">#4A5380</span><span>RGB 74, 83, 128</span><br><span>Chữ phụ</span></div></div></div>
+ <h3>Sắc của gradient chiến dịch</h3>
+ <div class="grid g4"><div class="sw"><div class="chip" style="background:#7B55FF;color:#FFFFFF;">Aa · 4.6:1</div><div class="meta"><b>Tím lụa</b><span class="mono">#7B55FF</span><span>RGB 123, 85, 255</span><br><span>Gradient: sắc giữa; chữ trắng đạt 4.58:1</span></div></div><div class="sw"><div class="chip" style="background:#E24C9A;color:#0B1033;">Aa · 5.0:1</div><div class="meta"><b>Hồng lụa</b><span class="mono">#E24C9A</span><span>RGB 226, 76, 154</span><br><span>Gradient: sắc ấm; chữ Chàm đêm</span></div></div><div class="sw"><div class="chip" style="background:#FF7A59;color:#0B1033;">Aa · 7.2:1</div><div class="meta"><b>San hô</b><span class="mono">#FF7A59</span><span>RGB 255, 122, 89</span><br><span>Gradient: đầu ấm; chữ Chàm đêm</span></div></div><div class="sw"><div class="chip" style="background:#97A6FF;color:#0B1033;">Aa · 8.1:1</div><div class="meta"><b>Periwinkle</b><span class="mono">#97A6FF</span><span>RGB 151, 166, 255</span><br><span>Đầu sáng ký hiệu; chữ trên nền tối</span></div></div><div class="sw"><div class="chip" style="background:#C4CDFF;color:#0B1033;">Aa · 11.9:1</div><div class="meta"><b>Periwinkle nhạt</b><span class="mono">#C4CDFF</span><span>RGB 196, 205, 255</span><br><span>Vệt sáng, chữ trên nền tối</span></div></div><div class="sw"><div class="chip" style="background:#FFD3C0;color:#0B1033;border-bottom:1px solid var(--brand-border);">Aa · 13.5:1</div><div class="meta"><b>Đào nhạt</b><span class="mono">#FFD3C0</span><span>RGB 255, 211, 192</span><br><span>Vệt sáng phụ</span></div></div><div class="sw"><div class="chip" style="background:#FFB547;color:#0B1033;">Aa · 10.5:1</div><div class="meta"><b>Hổ phách</b><span class="mono">#FFB547</span><span>RGB 255, 181, 71</span><br><span>Điểm nhấn nhỏ, tránh phủ lên navy</span></div></div></div>
+ <p class="small muted" style="margin-top:12px">Hai phần ba diện tích gradient phải là xanh (Mực chàm, Cobalt, Tím lụa). Hổ phách chỉ làm điểm nhấn nhỏ; phủ lên nền navy thì ra màu nâu bẩn.</p>
+ <h3>Vai trò trong token</h3>
+ <div class="tw"><table><thead><tr><th>Token</th><th>Vai trò</th><th>Sáng</th><th>Tối</th></tr></thead><tbody><tr><td><code>--brand-primary</code></td><td>Chủ đạo (logo, nút, nhấn)</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#2F43DB"></span><span class="mono">#2F43DB</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#97A6FF"></span><span class="mono">#97A6FF</span></td></tr><tr><td><code>--brand-primary-hover</code></td><td>Chủ đạo khi rê chuột</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#2538BF"></span><span class="mono">#2538BF</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#C4CDFF"></span><span class="mono">#C4CDFF</span></td></tr><tr><td><code>--brand-on-primary</code></td><td>Chữ trên nền chủ đạo</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#FFFFFF"></span><span class="mono">#FFFFFF</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#0B1033"></span><span class="mono">#0B1033</span></td></tr><tr><td><code>--brand-bg</code></td><td>Nền chính</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#FAF8F4"></span><span class="mono">#FAF8F4</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#0B1033"></span><span class="mono">#0B1033</span></td></tr><tr><td><code>--brand-surface</code></td><td>Bề mặt (thẻ)</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#FFFFFF"></span><span class="mono">#FFFFFF</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#121A4A"></span><span class="mono">#121A4A</span></td></tr><tr><td><code>--brand-surface-2</code></td><td>Bề mặt phụ</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#E6EAF8"></span><span class="mono">#E6EAF8</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#17206F"></span><span class="mono">#17206F</span></td></tr><tr><td><code>--brand-text</code></td><td>Chữ chính</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#0E1442"></span><span class="mono">#0E1442</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#F4F5FF"></span><span class="mono">#F4F5FF</span></td></tr><tr><td><code>--brand-text-2</code></td><td>Chữ phụ</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#4A5380"></span><span class="mono">#4A5380</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#9AA3C7"></span><span class="mono">#9AA3C7</span></td></tr><tr><td><code>--brand-border</code></td><td>Viền mảnh 1px</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:rgba(14,20,66,0.14)"></span><span class="mono">rgba(14,20,66,0.14)</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:rgba(255,255,255,0.14)"></span><span class="mono">rgba(255,255,255,0.14)</span></td></tr><tr><td><code>--brand-border-strong</code></td><td>Viền mảnh đậm</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:rgba(14,20,66,0.28)"></span><span class="mono">rgba(14,20,66,0.28)</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:rgba(255,255,255,0.28)"></span><span class="mono">rgba(255,255,255,0.28)</span></td></tr><tr><td><code>--brand-control-border</code></td><td>Viền ô nhập, nút (không-chữ)</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#6B7499"></span><span class="mono">#6B7499</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#8B93B8"></span><span class="mono">#8B93B8</span></td></tr><tr><td><code>--brand-focus</code></td><td>Vòng focus</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#2F43DB"></span><span class="mono">#2F43DB</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#C4CDFF"></span><span class="mono">#C4CDFF</span></td></tr><tr><td><code>--brand-link</code></td><td>Liên kết</td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#2F43DB"></span><span class="mono">#2F43DB</span></td><td><span style="display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--brand-border-strong);vertical-align:-2px;margin-right:6px;background:#97A6FF"></span><span class="mono">#97A6FF</span></td></tr></tbody></table></div>
+ <h3>Cặp chữ / nền: đạt và trượt</h3>
+ <p>Đo bằng <code>contrast.py</code>. Ngưỡng: chữ thường 4.5:1, chữ lớn (24px, hoặc 18.66px đậm) 3:1. Chữ "Aa" trong ô là mẫu thật của cặp đó.</p>
+ <details open><summary>Bản sáng (13 cặp)</summary><div class="tw"><table><thead><tr><th>Mẫu</th><th>Chữ / nền</th><th>Tỉ lệ</th><th>Kết quả</th><th>Ngữ cảnh</th></tr></thead><tbody><tr><td><span class="aa" style="color:#0E1442;background:#FAF8F4">Aa</span></td><td><span class="mono">#0E1442<br>#FAF8F4</span></td><td>16.53:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chính trên nền giấy</td></tr><tr><td><span class="aa" style="color:#0E1442;background:#FFFFFF">Aa</span></td><td><span class="mono">#0E1442<br>#FFFFFF</span></td><td>17.54:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chính trên thẻ</td></tr><tr><td><span class="aa" style="color:#0E1442;background:#E6EAF8">Aa</span></td><td><span class="mono">#0E1442<br>#E6EAF8</span></td><td>14.61:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chính trên bề mặt phụ</td></tr><tr><td><span class="aa" style="color:#4A5380;background:#FAF8F4">Aa</span></td><td><span class="mono">#4A5380<br>#FAF8F4</span></td><td>6.97:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ phụ trên nền giấy</td></tr><tr><td><span class="aa" style="color:#4A5380;background:#FFFFFF">Aa</span></td><td><span class="mono">#4A5380<br>#FFFFFF</span></td><td>7.39:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ phụ trên thẻ</td></tr><tr><td><span class="aa" style="color:#4A5380;background:#E6EAF8">Aa</span></td><td><span class="mono">#4A5380<br>#E6EAF8</span></td><td>6.16:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ phụ trên bề mặt phụ</td></tr><tr><td><span class="aa" style="color:#2F43DB;background:#FAF8F4">Aa</span></td><td><span class="mono">#2F43DB<br>#FAF8F4</span></td><td>6.72:1</td><td><span class="ok">Đạt AA</span></td><td>Liên kết, nhấn trên nền giấy</td></tr><tr><td><span class="aa" style="color:#2F43DB;background:#FFFFFF">Aa</span></td><td><span class="mono">#2F43DB<br>#FFFFFF</span></td><td>7.13:1</td><td><span class="ok">Đạt AA</span></td><td>Liên kết trên thẻ</td></tr><tr><td><span class="aa" style="color:#2F43DB;background:#E6EAF8">Aa</span></td><td><span class="mono">#2F43DB<br>#E6EAF8</span></td><td>5.94:1</td><td><span class="ok">Đạt AA</span></td><td>Liên kết trên bề mặt phụ</td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#2F43DB">Aa</span></td><td><span class="mono">#FFFFFF<br>#2F43DB</span></td><td>7.13:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ nút chủ đạo</td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#2538BF">Aa</span></td><td><span class="mono">#FFFFFF<br>#2538BF</span></td><td>8.76:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ nút chủ đạo khi rê chuột</td></tr><tr><td><span class="aa" style="color:#6B7499;background:#FAF8F4">Aa</span></td><td><span class="mono">#6B7499<br>#FAF8F4</span></td><td>4.32:1</td><td><span class="ok">Đạt ≥3:1 (không-chữ)</span></td><td>Viền ô nhập, nút (không-chữ, cần ≥3:1)</td></tr><tr><td><span class="aa" style="color:#8B93B8;background:#FAF8F4">Aa</span></td><td><span class="mono">#8B93B8<br>#FAF8F4</span></td><td>2.84:1</td><td><span class="bad">Trượt · cấm</span></td><td>Xám nhạt làm chữ phụ <span class="muted small">Không dùng làm chữ; chỉ cho đường trang trí</span></td></tr></tbody></table></div></details><details open><summary>Bản tối (8 cặp)</summary><div class="tw"><table><thead><tr><th>Mẫu</th><th>Chữ / nền</th><th>Tỉ lệ</th><th>Kết quả</th><th>Ngữ cảnh</th></tr></thead><tbody><tr><td><span class="aa" style="color:#F4F5FF;background:#0B1033">Aa</span></td><td><span class="mono">#F4F5FF<br>#0B1033</span></td><td>17.03:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chính trên nền tối</td></tr><tr><td><span class="aa" style="color:#F4F5FF;background:#121A4A">Aa</span></td><td><span class="mono">#F4F5FF<br>#121A4A</span></td><td>15.21:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chính trên thẻ tối</td></tr><tr><td><span class="aa" style="color:#9AA3C7;background:#0B1033">Aa</span></td><td><span class="mono">#9AA3C7<br>#0B1033</span></td><td>7.43:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ phụ trên nền tối</td></tr><tr><td><span class="aa" style="color:#9AA3C7;background:#121A4A">Aa</span></td><td><span class="mono">#9AA3C7<br>#121A4A</span></td><td>6.63:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ phụ trên thẻ tối</td></tr><tr><td><span class="aa" style="color:#97A6FF;background:#0B1033">Aa</span></td><td><span class="mono">#97A6FF<br>#0B1033</span></td><td>8.11:1</td><td><span class="ok">Đạt AA</span></td><td>Liên kết trên nền tối</td></tr><tr><td><span class="aa" style="color:#97A6FF;background:#121A4A">Aa</span></td><td><span class="mono">#97A6FF<br>#121A4A</span></td><td>7.24:1</td><td><span class="ok">Đạt AA</span></td><td>Liên kết trên thẻ tối</td></tr><tr><td><span class="aa" style="color:#0B1033;background:#97A6FF">Aa</span></td><td><span class="mono">#0B1033<br>#97A6FF</span></td><td>8.11:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ nút chủ đạo (bản tối)</td></tr><tr><td><span class="aa" style="color:#8B93B8;background:#0B1033">Aa</span></td><td><span class="mono">#8B93B8<br>#0B1033</span></td><td>6.13:1</td><td><span class="ok">Đạt ≥3:1 (không-chữ)</span></td><td>Viền ô nhập (không-chữ)</td></tr></tbody></table></div></details><details><summary>Chữ trên màu gradient (từng màu riêng) (15 cặp)</summary><div class="tw"><table><thead><tr><th>Mẫu</th><th>Chữ / nền</th><th>Tỉ lệ</th><th>Kết quả</th><th>Ngữ cảnh</th></tr></thead><tbody><tr><td><span class="aa" style="color:#FFFFFF;background:#2F43DB">Aa</span></td><td><span class="mono">#FFFFFF<br>#2F43DB</span></td><td>7.13:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ trắng trên Cobalt</td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#7B55FF">Aa</span></td><td><span class="mono">#FFFFFF<br>#7B55FF</span></td><td>4.58:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ trắng trên Tím lụa</td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#E24C9A">Aa</span></td><td><span class="mono">#FFFFFF<br>#E24C9A</span></td><td>3.66:1</td><td><span class="warn">Chỉ chữ lớn</span></td><td>Chữ trắng trên Hồng lụa <span class="muted small"> Chỉ tiêu đề ≥24px</span></td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#FF7A59">Aa</span></td><td><span class="mono">#FFFFFF<br>#FF7A59</span></td><td>2.57:1</td><td><span class="bad">Trượt · cấm</span></td><td>Chữ trắng trên San hô <span class="muted small">Cấm: dùng chữ mực chàm</span></td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#97A6FF">Aa</span></td><td><span class="mono">#FFFFFF<br>#97A6FF</span></td><td>2.28:1</td><td><span class="bad">Trượt · cấm</span></td><td>Chữ trắng trên Periwinkle <span class="muted small">Cấm: dùng chữ mực chàm</span></td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#C4CDFF">Aa</span></td><td><span class="mono">#FFFFFF<br>#C4CDFF</span></td><td>1.55:1</td><td><span class="bad">Trượt · cấm</span></td><td>Chữ trắng trên Periwinkle nhạt <span class="muted small">Cấm: dùng chữ mực chàm</span></td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#FFB547">Aa</span></td><td><span class="mono">#FFFFFF<br>#FFB547</span></td><td>1.76:1</td><td><span class="bad">Trượt · cấm</span></td><td>Chữ trắng trên Hổ phách <span class="muted small">Cấm: dùng chữ mực chàm</span></td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#FFD3C0">Aa</span></td><td><span class="mono">#FFFFFF<br>#FFD3C0</span></td><td>1.37:1</td><td><span class="bad">Trượt · cấm</span></td><td>Chữ trắng trên Đào nhạt <span class="muted small">Cấm: dùng chữ mực chàm</span></td></tr><tr><td><span class="aa" style="color:#0B1033;background:#E24C9A">Aa</span></td><td><span class="mono">#0B1033<br>#E24C9A</span></td><td>5.05:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chàm đêm trên Hồng lụa</td></tr><tr><td><span class="aa" style="color:#0B1033;background:#FF7A59">Aa</span></td><td><span class="mono">#0B1033<br>#FF7A59</span></td><td>7.20:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chàm đêm trên San hô</td></tr><tr><td><span class="aa" style="color:#0B1033;background:#97A6FF">Aa</span></td><td><span class="mono">#0B1033<br>#97A6FF</span></td><td>8.11:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chàm đêm trên Periwinkle</td></tr><tr><td><span class="aa" style="color:#0B1033;background:#C4CDFF">Aa</span></td><td><span class="mono">#0B1033<br>#C4CDFF</span></td><td>11.90:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chàm đêm trên Periwinkle nhạt</td></tr><tr><td><span class="aa" style="color:#0B1033;background:#FFB547">Aa</span></td><td><span class="mono">#0B1033<br>#FFB547</span></td><td>10.52:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chàm đêm trên Hổ phách</td></tr><tr><td><span class="aa" style="color:#0B1033;background:#FFD3C0">Aa</span></td><td><span class="mono">#0B1033<br>#FFD3C0</span></td><td>13.49:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chàm đêm trên Đào nhạt</td></tr><tr><td><span class="aa" style="color:#0B1033;background:#7B55FF">Aa</span></td><td><span class="mono">#0B1033<br>#7B55FF</span></td><td>4.04:1</td><td><span class="bad">Trượt · cấm</span></td><td>Chữ chàm đêm trên Tím lụa <span class="muted small">Cấm: dùng chữ trắng</span></td></tr></tbody></table></div></details><details><summary>Gradient chiến dịch, đo theo vị trí (đường 115°) (14 cặp)</summary><div class="tw"><table><thead><tr><th>Mẫu</th><th>Chữ / nền</th><th>Tỉ lệ</th><th>Kết quả</th><th>Ngữ cảnh</th></tr></thead><tbody><tr><td><span class="aa" style="color:#FFFFFF;background:#0E1442">Aa</span></td><td><span class="mono">#FFFFFF<br>#0E1442</span></td><td>17.54:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ trắng tại 0% (vùng chữ trắng)</td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#2F43DB">Aa</span></td><td><span class="mono">#FFFFFF<br>#2F43DB</span></td><td>7.13:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ trắng tại 28% (vùng chữ trắng)</td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#7B55FF">Aa</span></td><td><span class="mono">#FFFFFF<br>#7B55FF</span></td><td>4.58:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ trắng tại 52% (vùng chữ trắng)</td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#8C54EE">Aa</span></td><td><span class="mono">#FFFFFF<br>#8C54EE</span></td><td>4.55:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ trắng tại 56% (vùng chữ trắng)</td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#9D52DD">Aa</span></td><td><span class="mono">#FFFFFF<br>#9D52DD</span></td><td>4.48:1</td><td><span class="bad">Trượt · cấm</span></td><td>Chữ trắng tại 60% (vùng cấm chữ) <span class="muted small">Cấm: không đặt chữ ở 56–70%</span></td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#AE50CC">Aa</span></td><td><span class="mono">#FFFFFF<br>#AE50CC</span></td><td>4.36:1</td><td><span class="bad">Trượt · cấm</span></td><td>Chữ trắng tại 64% (vùng cấm chữ) <span class="muted small">Cấm: không đặt chữ ở 56–70%</span></td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#C04FBC">Aa</span></td><td><span class="mono">#FFFFFF<br>#C04FBC</span></td><td>4.13:1</td><td><span class="bad">Trượt · cấm</span></td><td>Chữ trắng tại 68% (vùng cấm chữ) <span class="muted small">Cấm: không đặt chữ ở 56–70%</span></td></tr><tr><td><span class="aa" style="color:#0B1033;background:#9D52DD">Aa</span></td><td><span class="mono">#0B1033<br>#9D52DD</span></td><td>4.12:1</td><td><span class="bad">Trượt · cấm</span></td><td>Chữ chàm đêm tại 60% (vùng cấm chữ) <span class="muted small">Cấm: không đặt chữ ở 56–70%</span></td></tr><tr><td><span class="aa" style="color:#0B1033;background:#AE50CC">Aa</span></td><td><span class="mono">#0B1033<br>#AE50CC</span></td><td>4.24:1</td><td><span class="bad">Trượt · cấm</span></td><td>Chữ chàm đêm tại 64% (vùng cấm chữ) <span class="muted small">Cấm: không đặt chữ ở 56–70%</span></td></tr><tr><td><span class="aa" style="color:#0B1033;background:#B750C4">Aa</span></td><td><span class="mono">#0B1033<br>#B750C4</span></td><td>4.36:1</td><td><span class="bad">Trượt · cấm</span></td><td>Chữ chàm đêm tại 66% (vùng cấm chữ) <span class="muted small">Cấm: không đặt chữ ở 56–70%</span></td></tr><tr><td><span class="aa" style="color:#0B1033;background:#C84EB3">Aa</span></td><td><span class="mono">#0B1033<br>#C84EB3</span></td><td>4.57:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chàm đêm tại 70% (vùng chữ tối)</td></tr><tr><td><span class="aa" style="color:#0B1033;background:#E24C9A">Aa</span></td><td><span class="mono">#0B1033<br>#E24C9A</span></td><td>5.05:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chàm đêm tại 76% (vùng chữ tối)</td></tr><tr><td><span class="aa" style="color:#0B1033;background:#F0637A">Aa</span></td><td><span class="mono">#0B1033<br>#F0637A</span></td><td>5.96:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chàm đêm tại 88% (vùng chữ tối)</td></tr><tr><td><span class="aa" style="color:#0B1033;background:#FF7A59">Aa</span></td><td><span class="mono">#0B1033<br>#FF7A59</span></td><td>7.20:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ chàm đêm tại 100% (vùng chữ tối)</td></tr></tbody></table></div></details><details><summary>Chip kính (lớp phủ sau chữ, đo ở nền xấu nhất) (7 cặp)</summary><div class="tw"><table><thead><tr><th>Mẫu</th><th>Chữ / nền</th><th>Tỉ lệ</th><th>Kết quả</th><th>Ngữ cảnh</th></tr></thead><tbody><tr><td><span class="aa" style="color:#FFFFFF;background:#414560">Aa</span></td><td><span class="mono">#FFFFFF<br>#414560</span></td><td>9.35:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ trắng trên chip kính tối (rgba(11,16,51,.78)) đặt trên trắng</td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#413B52">Aa</span></td><td><span class="mono">#FFFFFF<br>#413B52</span></td><td>10.65:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ trắng trên chip kính tối (rgba(11,16,51,.78)) đặt trên Đào nhạt</td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#413437">Aa</span></td><td><span class="mono">#FFFFFF<br>#413437</span></td><td>11.86:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ trắng trên chip kính tối (rgba(11,16,51,.78)) đặt trên Hổ phách</td></tr><tr><td><span class="aa" style="color:#FFFFFF;background:#41273B">Aa</span></td><td><span class="mono">#FFFFFF<br>#41273B</span></td><td>13.31:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ trắng trên chip kính tối (rgba(11,16,51,.78)) đặt trên San hô</td></tr><tr><td><span class="aa" style="color:#0E1442;background:#DEDDDF">Aa</span></td><td><span class="mono">#0E1442<br>#DEDDDF</span></td><td>12.96:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ mực chàm trên chip kính sáng (rgba(250,248,244,.88)) đặt trên Mực chàm</td></tr><tr><td><span class="aa" style="color:#0E1442;background:#E2E2F1">Aa</span></td><td><span class="mono">#0E1442<br>#E2E2F1</span></td><td>13.68:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ mực chàm trên chip kính sáng (rgba(250,248,244,.88)) đặt trên Cobalt</td></tr><tr><td><span class="aa" style="color:#0E1442;background:#EBE4F5">Aa</span></td><td><span class="mono">#0E1442<br>#EBE4F5</span></td><td>14.15:1</td><td><span class="ok">Đạt AA</span></td><td>Chữ mực chàm trên chip kính sáng (rgba(250,248,244,.88)) đặt trên Tím lụa</td></tr></tbody></table></div></details>
+ <p class="small muted">Bản đầy đủ: <code>contrast-report.md</code>.</p>
+</div></section>
+
+<section id="chu"><div class="wrap">
+ <div class="eyebrow">04 · Chữ</div>
+ <h2>Mảnh, thoáng, đủ dấu tiếng Việt.</h2>
+ <div class="grid g3">
+  <div class="card"><h4 style="font-family:var(--brand-font-display)">Lexend</h4><p class="small muted">300 · 400 · 600</p><p>Logo chữ, tiêu đề, số lớn, nhãn trên (eyebrow). Rộng, thoáng, nét mảnh.</p></div>
+  <div class="card"><h4>Be Vietnam Pro</h4><p class="small muted">400 · 500 · 600</p><p>Chữ thân, chú thích, giao diện. Thiết kế cho tiếng Việt, dấu rõ ở cỡ nhỏ.</p></div>
+  <div class="card"><h4 class="mono" style="font-family:var(--brand-font-mono)">JetBrains Mono</h4><p class="small muted">400 · 500</p><p>Nhãn chứng từ, mã, số liệu kỹ thuật. Cả ba font đều OFL, kiểm đủ glyph tiếng Việt.</p></div>
+ </div>
+ <h3>Thử dấu tiếng Việt</h3>
+ <p class="specimen">Chứng từ vào. Hồ sơ sẵn.</p>
+ <p style="font-family:var(--brand-font-display);font-size:1.3rem;font-weight:300;letter-spacing:.02em">ẮẰẲẴẶ ẤẦẨẪẬ ẾỀỂỄỆ ỐỒỔỖỘ ỚỜỞỠỢ ỨỪỬỮỰ ĐƯƠ · ắằẳẵặ ấầẩẫậ ếềểễệ ốồổỗộ ớờởỡợ ứừửữự đươ</p>
+ <p class="small muted">Lưu ý: chữ trong logo dựng bằng Lexend trọng lượng 340 (nét vector, không phụ thuộc font) để đủ chắc ở cỡ nhỏ; chữ trong tài liệu và web dùng 300 / 400 / 600.</p>
+ <p>Booking Note, eDO, EIR, phiếu cân và tờ khai có QR vào thẳng hồ sơ lô hàng. Bạn duyệt rồi lưu; dữ liệu đi tiếp sang điều vận, xưởng, dầu, công nợ.</p>
+ <h3>Thang cỡ</h3>
+ <div class="tw" style="padding:0 16px">
+  <div class="scale-row"><span class="k">display · web</span><span class="s" style="font:300 var(--brand-fs-display)/1.08 var(--brand-font-display)">Khai mở</span></div>
+  <div class="scale-row"><span class="k">h1 · web</span><span class="s" style="font:300 var(--brand-fs-h1)/1.2 var(--brand-font-display)">Đọc đúng từ tờ đầu tiên</span></div>
+  <div class="scale-row"><span class="k">h2</span><span class="s" style="font:300 var(--brand-fs-h2)/1.2 var(--brand-font-display)">Một dữ liệu cho cả vận hành</span></div>
+  <div class="scale-row"><span class="k">h3</span><span class="s" style="font:400 var(--brand-fs-h3)/1.3 var(--brand-font-display)">Làm cho thực tế cảng Việt</span></div>
+  <div class="scale-row"><span class="k">lead</span><span class="s" style="font:400 var(--brand-fs-lead)/1.5 var(--brand-font-body)">Điều vận, xưởng, dầu, công nợ dùng chung một dữ liệu.</span></div>
+  <div class="scale-row"><span class="k">body</span><span class="s">Chi phí và doanh thu gắn đúng lô, đúng đầu xe.</span></div>
+  <div class="scale-row"><span class="k">small / caption</span><span class="s small">Nền tảng đã vận hành thật tại một doanh nghiệp vận tải container khoảng 110.000 lô mỗi năm.</span></div>
+  <div class="scale-row"><span class="k">eyebrow</span><span class="s eyebrow" style="margin:0">Đọc chứng từ Việt</span></div>
+  <div class="scale-row"><span class="k">tag · mono</span><span class="s"><span class="tag">[Booking Note · đã đọc]</span></span></div>
+ </div>
+ <div class="tw" style="margin-top:24px"><table><thead><tr><th>Kiểu</th><th>Web</th><th>Tài liệu (A4)</th><th>Slide 1920</th><th>Độ đậm · dòng</th></tr></thead><tbody>
+  <tr><td>Tiêu đề trang</td><td>clamp 44–88px</td><td>32pt</td><td>104px</td><td>Lexend 300 · 1.08</td></tr>
+  <tr><td>Tiêu đề mục</td><td>clamp 28–40px</td><td>22pt (h1) · 16pt (h2)</td><td>54px</td><td>Lexend 300 · 1.2</td></tr>
+  <tr><td>Tiêu đề nhỏ</td><td>22px</td><td>13pt</td><td>36px</td><td>Lexend 400 · 1.3</td></tr>
+  <tr><td>Thân</td><td>17px</td><td>10.5pt</td><td>30px</td><td>Be Vietnam Pro 400 · 1.55</td></tr>
+  <tr><td>Chú thích</td><td>13–14px</td><td>8–9pt</td><td>20px</td><td>Be Vietnam Pro 400 · 1.4</td></tr>
+  <tr><td>Nhãn trên</td><td>12px hoa, +0.14em</td><td>8pt hoa</td><td>20px hoa</td><td>Lexend 400</td></tr>
+  <tr><td>Nhãn chứng từ</td><td>12px</td><td>8pt</td><td>18px</td><td>JetBrains Mono 500</td></tr>
+ </tbody></table></div>
+ <p class="small muted" style="margin-top:12px">Quy tắc: tiêu đề nhẹ (300) và rộng; không dùng đậm hơn 600. Không viết hoa toàn bộ tiêu đề; chỉ nhãn trên mới viết hoa. Thân chữ không nhỏ hơn 16px trên web, 10pt trong tài liệu.</p>
+</div></section>
+
+<section id="gradient"><div class="wrap">
+ <div class="eyebrow">05 · Gradient và chất liệu</div>
+ <h2>Lụa có hạt, và luật đặt chữ.</h2>
+ <p class="lead">Gradient chiến dịch dùng cho banner, ảnh ra mắt, bìa. Nó có hướng (115°), có hạt nhiễu (soft-light), neo về xanh. Vì sắc hồng, san hô, periwinkle rất sáng, chữ trắng đặt bừa lên sẽ trượt tương phản. Luật dưới đây là bắt buộc.</p>
+ <div class="strip silk-full silk" style="border-radius:var(--brand-radius-md)"></div>
+ <div class="zones" aria-label="Vùng đặt chữ">
+  <div><b>0–56%</b><br>chữ trắng</div><div class="dead"><b>56–70%</b><br>không chữ</div><div><b>70–100%</b><br>chữ Chàm đêm</div>
+ </div>
+ <h3>Luật vùng đặt chữ</h3>
+ <ol>
+  <li><b>Vùng đậm (0–56%, Mực chàm → Cobalt → Tím lụa): chữ trắng.</b> Tỉ lệ từ 4.55:1 đến 17.5:1, đạt cho cả chữ nhỏ.</li>
+  <li><b>Vùng cấm chữ (56–70%, Tím lụa → Hồng lụa):</b> không màu chữ nào đạt 4.5:1 (tối đa 4.5 với trắng, 4.4 với Chàm đêm). Không đặt chữ; chỉ đặt hình, logo ký hiệu, họa tiết.</li>
+  <li><b>Vùng sáng (70–100%, Hồng lụa → San hô): chữ Chàm đêm <code>#0B1033</code>.</b> Từ 4.57:1 đến 7.2:1. Chữ trắng bị cấm ở đây, kể cả tiêu đề; ngoại lệ duy nhất là tiêu đề ≥24px trên Hồng lụa (3.66:1).</li>
+  <li><b>Chữ phải vắt qua vùng cấm hoặc nằm trên ảnh gradient dạng vệt:</b> đặt chip kính phía sau. Chip kính tối + chữ trắng đo ≥9.3:1 trên mọi màu gradient; chip kính sáng + chữ Chàm đêm ≥12.9:1.</li>
+  <li><b>Gradient dạng vệt elip (không phải dải):</b> lấy mẫu màu dưới khung chữ, mọi điểm phải đạt 4.5:1 với màu chữ. Không chắc thì dùng chip kính.</li>
+  <li>Chữ nhỏ (dưới 24px) và số liệu luôn đặt trong vùng đậm hoặc chip kính. Không dùng chữ có viền, bóng chữ để "cứu" tương phản.</li>
+ </ol>
+ <h3>Minh họa</h3>
+ <div class="grid g2">
+  <div class="demo-wrap"><span class="tag lab" style="background:var(--brand-surface)">đạt · vùng đậm</span><div class="silk silk-deep on-deep demo"><h4 style="color:#fff">Chứng từ vào. Hồ sơ sẵn.</h4><p>Chữ trắng trên Cobalt → Tím lụa: 4.6 đến 7.1:1.</p></div></div>
+  <div class="demo-wrap"><span class="tag lab" style="background:var(--brand-surface)">đạt · vùng sáng</span><div class="silk on-light demo" style="background:linear-gradient(115deg,#E24C9A 0%,#FF7A59 100%)"><h4 style="color:#0B1033">Khai mở cách vận hành mới.</h4><p>Chữ Chàm đêm trên Hồng lụa → San hô: 5.05 đến 7.2:1.</p></div></div>
+  <div class="demo-wrap"><span class="tag lab" style="background:var(--brand-surface)">trượt · chữ trắng trên san hô</span><div class="silk demo" style="background:linear-gradient(115deg,#F56B6F 0%,#FF7A59 100%);color:#fff"><h4 style="color:#fff">Khai mở cách vận hành mới.</h4><p>2.57 đến 2.91:1. Khó đọc, cấm dùng.</p></div></div>
+  <div class="demo-wrap"><span class="tag lab" style="background:var(--brand-surface)">đạt · chip kính</span><div class="silk silk-full demo" style="justify-content:center"><div class="glass" style="padding:16px 20px;max-width:30ch"><b style="font:600 1.05rem var(--brand-font-body)">Booking Note đã được đọc</b><br><span style="font-size:.9rem">Chữ trắng trong chip kính tối: 9.3:1 trở lên.</span></div></div></div>
+ </div>
+ <h3>Hạt nhiễu và nền</h3>
+ <ul>
+  <li>Hạt: <code>feTurbulence</code> fractalNoise, tần số 0.85, 2 octave, phủ <code>soft-light</code> độ mờ 0.32 (token <code>--brand-grain</code>). Đừng phủ hạt lên chữ hoặc logo.</li>
+  <li>Cách dựng vệt: 3–4 elip dài xoay khoảng −31°, làm mờ 30–60px; đáy luôn là Mực chàm.</li>
+  <li>Nền trang tài liệu: Giấy ấm <code>#FAF8F4</code>; bề mặt thẻ: trắng; bề mặt phụ: Xanh khói. Không dùng trắng lạnh làm nền chính.</li>
+ </ul>
+</div></section>
+
+<section id="chi-tiet"><div class="wrap">
+ <div class="eyebrow">06 · Chi tiết giao diện</div>
+ <h2>Tinh tế ở đường kẻ mảnh.</h2>
+ <p class="lead">Gu "chi tiết UI": viền 1px, bo tròn, nhãn nhỏ viết bằng font mono trong ngoặc vuông. Những chi tiết này làm hình ảnh có cảm giác của một sản phẩm thật.</p>
+ <div class="grid g2" style="margin-top:24px">
+  <div class="card"><h4>Nhãn chứng từ</h4><p class="small muted">Pill viền mảnh, JetBrains Mono 500 12px, chữ trong ngoặc vuông, tên chứng từ giữ nguyên (eDO, EIR, Booking Note).</p>
+   <div class="tags"><span class="tag">[eDO · đã đọc]</span><span class="tag">[Booking Note]</span><span class="tag">[EIR · chờ duyệt]</span><span class="tag">[phiếu cân]</span><span class="tag">[ePort]</span></div></div>
+  <div class="card"><h4>Đường kẻ mảnh</h4><p class="small muted">1px, độ mờ 14% của Mực chàm (sáng) hoặc trắng (tối). Dùng ngăn mục, viền thẻ. Viền ô nhập dùng <code>--brand-control-border</code> để đạt 3:1.</p>
+   <div style="border-top:1px solid var(--brand-border);margin:16px 0"></div><div style="border-top:1px solid var(--brand-border-strong);margin:16px 0"></div></div>
+  <div class="card"><h4>Khung bo tròn viền mảnh</h4><p class="small muted">Bo 16–32px, viền 1px, bóng nhẹ. Không dùng bo vuông cứng hoặc viền dày.</p>
+   <div style="display:flex;gap:12px;flex-wrap:wrap"><div style="width:96px;height:64px;border:1px solid var(--brand-border-strong);border-radius:16px"></div><div style="width:96px;height:64px;border:1px solid var(--brand-border-strong);border-radius:24px;box-shadow:var(--brand-shadow-md)"></div><div style="width:96px;height:64px;border:1px solid var(--brand-border-strong);border-radius:32px;background:var(--brand-surface-2)"></div></div></div>
+  <div class="card"><h4>Kính mờ nổi</h4><p class="small muted">Chip kính trên nền gradient để chữ và icon nổi lên; luôn có viền sáng 1px.</p>
+   <div class="silk silk-full" style="padding:20px;border-radius:20px"><div class="glass" style="display:inline-flex;gap:10px;align-items:center;padding:10px 14px"><span class="tag" style="color:#fff;border-color:rgba(255,255,255,.45)">[eDO]</span><span style="font-size:.9rem">Đã đọc 12 trường</span></div></div></div>
+  <div class="card"><h4>Nút</h4><p class="small muted">Pill đầy (chủ đạo) và pill viền (phụ). Cao tối thiểu 44px. Vòng focus 3px.</p>
+   <div class="tags"><button class="btn" type="button">Đặt lịch xem</button><button class="btn ghost" type="button">Tìm hiểu thêm</button></div></div>
+  <div class="card"><h4>Bo góc và khoảng cách</h4><p class="small muted">Bo: 6 · 10 · 16 · 24 · 32 · pill. Khoảng cách: bậc 4px (4 8 12 16 24 32 48 64 96). Bóng: ba cấp, tông xanh chàm, không đen.</p></div>
+ </div>
+</div></section>
+
+<section id="hinh-anh"><div class="wrap">
+ <div class="eyebrow">07 · Hình ảnh</div>
+ <h2>Gradient và chứng từ. Sản phẩm trên thiết bị.</h2>
+ <div class="grid g2" style="margin-top:24px">
+  <figure class="fig">
+   <div class="silk silk-blob docs on-deep" style="min-height:340px">
+    <div class="docc glass" style="top:28px;left:24px;transform:rotate(-4deg)"><span class="tag" style="color:#fff;border-color:rgba(255,255,255,.4)">[Booking Note]</span><div class="ln"></div><div class="ln" style="width:70%"></div></div>
+    <div class="docc glass" style="top:104px;right:20px;transform:rotate(3deg)"><span class="tag" style="color:#fff;border-color:rgba(255,255,255,.4)">[eDO · đã đọc]</span><div class="ln"></div><div class="ln" style="width:55%"></div></div>
+    <div class="docc glass-l" style="bottom:28px;left:18%;transform:rotate(-1deg)"><b>Hồ sơ lô hàng</b><div class="ln"></div><div class="ln" style="width:80%"></div><div class="ln" style="width:40%"></div></div>
+   </div>
+   <figcaption><b>(a) Gradient + chứng từ.</b> Chứng từ thật bay vào, nhãn mono báo "đã đọc", hồ sơ hiện ra. Chữ chỉ nằm trong chip kính.</figcaption>
+  </figure>
+  <figure class="fig">
+   <div class="silk silk-full" style="min-height:340px;display:flex;align-items:center;justify-content:center;padding:24px">
+    <div class="phone"><div class="bar"></div><b style="font:600 .8rem var(--brand-font-body)">Lô hàng #A-0412</b><div class="row"><span>Booking Note</span><span class="pill">[đã đọc]</span></div><div class="row"><span>eDO</span><span class="pill">[chờ duyệt]</span></div><div class="row"><span>Phiếu cân</span><span class="pill">[đã đọc]</span></div><div class="row"><span>EIR</span><span class="pill">[chưa có]</span></div></div>
+   </div>
+   <figcaption><b>(b) Sản phẩm trên thiết bị.</b> Màn Invlogis trong khung điện thoại hoặc laptop, đặt trên gradient. Dùng ảnh chụp màn thật khi có.</figcaption>
+  </figure>
+ </div>
+ <h3>Điều cần tránh</h3>
+ <div class="grid g2">
+  <div class="card"><ul class="avoid"><li>Sáo rỗng ngành: xe tải, container xếp chồng, quả địa cầu, mũi tên vận chuyển.</li><li>Xanh công nghệ đại trà: mạch điện, robot, não AI phát sáng.</li><li>Ảnh stock giả tạo, người bắt tay trước màn hình.</li></ul></div>
+  <div class="card"><ul class="avoid"><li>Ảnh người kiểu điện ảnh (gu ElevenLabs): học gu, không sao chép.</li><li>Ký hiệu hai vạch dọc, ô vuông pixel và kiểu chữ cũ.</li><li>Chữ trắng nhỏ trên hồng, san hô, periwinkle; cứng nhắc kiểu doanh nghiệp truyền thống.</li></ul></div>
+ </div>
+</div></section>
+
+<section id="giong-van"><div class="wrap">
+ <div class="eyebrow">08 · Giọng văn</div>
+ <h2>Điềm tĩnh, chắc, có số liệu.</h2>
+ <p class="lead">Tính cách: chuyên gia điềm tĩnh (hiểu nghề, nói ít mà chắc) và kỹ sư tiên phong (đi trước về AI nhưng có cơ sở). Hào hứng đến từ hình ảnh và nhịp câu, không từ dấu chấm than.</p>
+ <div class="say">Khai mở cách vận hành mới.</div>
+ <div class="say">Chứng từ vào. Hồ sơ sẵn.</div>
+ <div class="tw" style="margin-top:24px"><table><thead><tr><th>Nên</th><th>Không nên</th></tr></thead><tbody>
+  <tr><td>Gọi đúng tên nghề: eDO, EIR, Booking Note, phiếu cân, ePort, lệnh vận tải</td><td>Từ chung chung: "quy trình", "giải pháp", "nghiệp vụ" đứng một mình</td></tr>
+  <tr><td>Câu ngắn, động từ mạnh, một ý một câu</td><td>Câu dài nhiều mệnh đề, chồng tính từ</td></tr>
+  <tr><td>Kết quả trước, cơ chế sau</td><td>Mở bằng công nghệ</td></tr>
+  <tr><td>Số có phạm vi, có nguồn</td><td>Số tuyệt đối, so sánh nhất ("hàng đầu", "toàn diện")</td></tr>
+  <tr><td>Tôn trọng kinh nghiệm của người làm nghề</td><td>Nói như thể kinh nghiệm của khách là vấn đề</td></tr>
+ </tbody></table></div>
+ <h3>Trước → sau</h3>
+ <div class="grid g2">
+  <div class="card"><p class="muted small">Trước</p><p>Giải pháp logistics toàn diện ứng dụng AI tiên tiến hàng đầu Việt Nam!</p><p class="muted small">Sau</p><p><b>Booking Note vào, hồ sơ lô hàng có sẵn để bạn duyệt.</b> Bớt nhập lại từ tờ chứng từ đầu tiên.</p></div>
+  <div class="card"><p class="muted small">Trước</p><p>Vui lòng liên hệ để được tư vấn giải pháp.</p><p class="muted small">Sau</p><p><b>Đặt lịch xem Invlogis chạy trên chứng từ của bạn.</b></p></div>
+ </div>
+ <h3>Xưng hô theo kênh</h3>
+ <div class="tw"><table><thead><tr><th>Kênh</th><th>Xưng hô</th><th>Ghi chú</th></tr></thead><tbody>
+  <tr><td>Web, mạng xã hội, deck, tài liệu bán hàng</td><td>"chúng tôi – bạn"</td><td>Gần, thẳng, không "Quý khách"</td></tr>
+  <tr><td>Hợp đồng, báo giá, thư chính thức</td><td>Trang trọng: "Quý công ty"</td><td>Chữ ký "Invlogis by innvie"</td></tr>
+  <tr><td>Giao diện sản phẩm, thông báo</td><td>Không xưng</td><td>Câu mệnh lệnh ngắn; theo <code>design/design.md</code></td></tr>
+  <tr><td>Tiếng Anh</td><td>we – you</td><td>Câu ngắn, rõ; dùng đúng tên chứng từ gốc</td></tr>
+ </tbody></table></div>
+ <h3>Khẩu hiệu</h3>
+ <div class="tw"><table><thead><tr><th>Tiếng Việt</th><th>English</th><th>Dùng khi</th></tr></thead><tbody>
+  <tr><td><b>Khai mở cách vận hành mới.</b></td><td>Open a new way to operate.</td><td>Khẩu hiệu chính; ra mắt, bìa, thương hiệu</td></tr>
+  <tr><td>Chứng từ vào. Hồ sơ sẵn.</td><td>Documents in. Records ready.</td><td>Nói cụ thể về sản phẩm</td></tr>
+  <tr><td>Đọc đúng từ tờ đầu tiên.</td><td>Read it right, from the first page.</td><td>Tài liệu bán hàng</td></tr>
+  <tr><td>Nhập một lần. Đi suốt lô hàng.</td><td>Enter once. Follow the shipment.</td><td>Trang giới thiệu sản phẩm</td></tr>
+ </tbody></table></div>
+ <p class="small muted" style="margin-top:12px">Khẩu hiệu không chứa "AI agent", "toàn diện", "hàng đầu". Số liệu 110.000 lô/năm ghi ẩn danh ("một doanh nghiệp vận tải container") cho tới khi khách đầu tiên đồng ý.</p>
+</div></section>
+
+<section id="kien-truc"><div class="wrap">
+ <div class="eyebrow">09 · Kiến trúc Invlogis – innvie</div>
+ <h2>Invlogis đứng trước. innvie đứng sau.</h2>
+ <div class="grid g2">
+  <div class="card">
+   <ul>
+    <li><b>Invlogis là thương hiệu chính.</b> Mọi truyền thông đi qua Invlogis.</li>
+    <li><b>innvie là pháp nhân đứng sau</b>: chữ ký nhỏ ở chân trang, hợp đồng, hoá đơn, dòng "by innvie".</li>
+    <li>Hai logo cùng một hệ (Lexend 340, chữ i đầu có hình lụa; innvie không gradient). Khi đứng chung một mặt, logo innvie cao không quá 50% logo Invlogis và đặt xa Invlogis. Không tạo ký hiệu riêng cho innvie.</li>
+    <li>Không đặt hai logo lớn ngang nhau; không dùng innvie làm tên sản phẩm.</li>
+   </ul>
+  </div>
+  <div class="card">
+   <h4>Mẫu chữ ký</h4>
+   <div class="lockup"><img src="../logo-final/invlogis-by-innvie.svg" alt="Invlogis by innvie" loading="lazy"></div>
+   <hr style="border:0;border-top:1px solid var(--brand-border);margin:16px 0">
+   <p class="small muted" style="margin:0">Chân hợp đồng và hoá đơn: <b>[tên pháp nhân đầy đủ]</b>, thương hiệu Invlogis. Địa chỉ, mã số thuế: [điền theo giấy đăng ký].</p>
+  </div>
+ </div>
+ <div class="grid g3" style="margin-top:16px">
+  <div class="card"><h4>Cùng họ</h4><p class="small">Chữ thường, cùng Lexend mảnh, cùng góc cắt chéo khoảng 14°.</p></div>
+  <div class="card"><h4>Cùng màu</h4><p class="small">innvie dùng Mực chàm và Cobalt; không còn xanh #0036B5 của logo cũ trên tài liệu mới.</p></div>
+  <div class="card"><h4>Cùng token</h4><p class="small">Deck cho khách đọc <code>brand.yml</code> của hệ này; pháp nhân hiện ở chân slide cuối.</p></div>
+ </div>
+</div></section>
+
+<section id="mau-ung-dung"><div class="wrap">
+ <div class="eyebrow">10 · Ứng dụng mẫu</div>
+ <h2>Cùng một bộ, nhiều bề mặt.</h2>
+ <div class="grid g2" style="margin-top:24px">
+  <div class="sample s-social silk silk-blob" style="border-radius:var(--brand-radius-lg)">
+   <img src="../logo-final/invlogis-reverse.svg" class="logo-h" alt="Invlogis" loading="lazy">
+   <div><h4>Khai mở cách vận hành mới.</h4><div class="tags" style="margin-top:14px"><span class="glass" style="padding:8px 14px;font:500 .78rem var(--brand-font-mono)">[Booking Note · đã đọc]</span></div></div>
+  </div>
+  <div class="sample s-deck">
+   <div class="eyebrow" style="color:#97A6FF;margin:0">Invlogis · Giới thiệu</div>
+   <div><h4>Chứng từ vào. Hồ sơ sẵn.</h4><p class="small" style="color:#C4CDFF;margin:8px 0 0">Bớt nhập lại từ tờ chứng từ đầu tiên.</p></div>
+   <div class="lockup"><img src="../logo-final/invlogis-reverse.svg" alt="Invlogis" loading="lazy"></div>
+  </div>
+  <div class="sample s-mail">
+   <div class="mono muted small">Tiêu đề: Invlogis chạy trên chứng từ của bạn</div>
+   <p style="margin-top:12px;color:#0E1442">Chào anh Minh,<br>Chúng tôi đã đọc thử ba tờ Booking Note của anh vào hồ sơ lô hàng. Anh duyệt rồi lưu là xong.</p>
+   <div class="sig"><img src="../logo-final/invlogis-primary.svg" alt="Invlogis" loading="lazy"><div class="small muted" style="margin-top:8px">Invlogis by innvie · [tên pháp nhân đầy đủ]</div></div>
+  </div>
+  <div class="sample s-web"><div class="h"><div class="eyebrow">Đọc chứng từ Việt</div><h3 style="margin-top:0;font-size:clamp(1.6rem,3vw,2.2rem)">Booking Note vào, hồ sơ lô hàng có sẵn.</h3><p class="muted">Bớt nhập lại. Đúng mốc. Minh bạch.</p><div class="tags"><button class="btn" type="button">Đặt lịch xem</button><span class="tag">[eDO]</span><span class="tag">[EIR]</span></div></div></div>
+ </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+ <p>Quy chuẩn thương hiệu Invlogis × innvie · hướng A · Lụa (DEC-072) · bản nháp 14/10/2026. Token thương hiệu cho tài liệu và web marketing; không thay token sản phẩm (<code>design/design-tokens.css</code>, DEC-066).</p>
+ <p>Invlogis là thương hiệu của [tên pháp nhân đầy đủ] (innvie).</p>
+</div></footer>
+
+<script>
+(function(){
+ var root=document.documentElement,btn=document.getElementById('theme'),modes=['auto','light','dark'],lab={auto:'Tự động',light:'Sáng',dark:'Tối'},m='auto';
+ try{m=localStorage.getItem('brand-theme')||'auto'}catch(e){}
+ function apply(){if(m==='auto')root.removeAttribute('data-theme');else root.setAttribute('data-theme',m);btn.textContent=lab[m]}
+ btn.addEventListener('click',function(){m=modes[(modes.indexOf(m)+1)%3];try{localStorage.setItem('brand-theme',m)}catch(e){}apply()});
+ apply();
+})();
+</script>
+</body>
+</html>

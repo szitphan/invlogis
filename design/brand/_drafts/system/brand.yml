@@ -1,0 +1,25 @@
+# Thương hiệu Invlogis × innvie — dùng cho tài liệu trình bày với khách (/deck). Hướng A · Lụa (DEC-072).
+# Cùng định dạng design/brand/innvie/brand.yml. Bản nháp: chốt xong chuyển thành design/brand/invlogis/brand.yml
+# và sửa đường dẫn logo cho khớp thư mục đó (hiện trỏ tương đối từ design/brand/_drafts/system/).
+# Logo: ../logo-final/ (đã bàn giao, tên file theo logo-final/logo-spec.md).
+# Lưu ý: /deck đọc 4 khoá colors; cách /deck dùng: primary = nền slide bìa/ngăn mục, accent = thanh tiến độ + thẻ đề xuất.
+# Mọi chữ trên gradient chiến dịch phải theo luật vùng đặt chữ trong brand-guideline.html.
+name: Invlogis
+colors:
+  primary: "#0B1033"     # Chàm đêm — nền slide bìa/ngăn mục/kết; (Cobalt #2F43DB là màu nhấn thương hiệu)
+  on-primary: "#FFFFFF"  # chữ trên nền primary: 18.48:1
+  accent: "#2F43DB"      # Cobalt — thanh tiến độ, thẻ đề xuất (trên nền trắng: 7.13:1)
+  accent-2: "#97A6FF"    # Periwinkle — vệt sáng phụ, chữ nhấn trên nền primary (8.11:1)
+  warm: "#FF7A59"       # San hô — chỉ điểm nhấn diện tích nhỏ; KHÔNG đặt chữ trắng lên
+  paper: "#FAF8F4"      # nền giấy ấm cho trang sáng
+  ink: "#0E1442"          # chữ chính trên nền sáng (16.53:1 trên giấy ấm)
+logo:
+  on-primary: ../logo-final/invlogis-reverse.svg   # bản nền tối, đặt trên primary
+  on-light: ../logo-final/invlogis-primary.svg             # bản màu, đặt trên nền sáng
+mark:
+  on-primary: ../logo-final/invlogis-symbol-reverse.svg # ký hiệu "i" bản nền tối
+  on-light: ../logo-final/invlogis-symbol.svg
+fonts:
+  display: "Lexend (300/400/600)"
+  body: "Be Vietnam Pro (400/500/600)"
+  mono: "JetBrains Mono (400/500)"
