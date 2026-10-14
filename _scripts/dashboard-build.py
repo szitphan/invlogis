@@ -52,6 +52,9 @@ STATUS_TO_COL = {"draft": "draft", "captured": "draft", "in-progress": "draft", 
                  "approved": "approved", "done": "approved", "processed": "approved",
                  "shipped": "shipped", "stale": "stale"}
 OQ_CLOSED_RE = re.compile(r"^(Đã chốt|Đóng|Bỏ)", re.IGNORECASE)
+# OQ mở đã đẩy hỏi khách = ô cuối ghi phản hồi của khách (Còn mở: … / Một phần: … / Ngoài …).
+# Còn lại (vd "Chưa hỏi Delta (ngoài deck vòng 1)", ô chưa có trạng thái) = nội bộ, chưa gửi khách.
+OQ_SENT_RE = re.compile(r"^(Còn mở|Một phần|Ngoài)", re.IGNORECASE)
 
 
 # ─── helpers ────────────────────────────────────────────────────────────────
@@ -113,20 +116,34 @@ def scan_features(feature_filter):
     return out
 
 
+OQ_ANSWER_COL_RE = re.compile(r"trả lời|trạng thái|quyết định|kết quả|answer|status", re.IGNORECASE)
+
+
 def scan_oq(feature):
-    """Dòng bảng `| OQ-n | … | <trạng thái> |` trong mọi doc của feature. Mở = không bắt đầu
-    bằng Đã chốt / Đóng / Bỏ (ô cuối của dòng)."""
+    """Dòng bảng `| OQ-n | … | <trạng thái> |` trong mọi doc của feature. Mở = ô cuối không bắt đầu
+    bằng Đã chốt / Đóng / Bỏ. Kèm tiêu đề cột, mục chứa bảng và cờ có cột Trả lời (để trả lời từ dashboard)."""
     rows = []
     for p in sorted((ROOT / "docs" / feature).rglob("*.md")):
-        for i, line in enumerate(read(p).split("\n"), 1):
+        lines = read(p).split("\n")
+        header, heading = [], ""
+        for i, line in enumerate(lines, 1):
+            if re.match(r"^#{1,6}\s", line):
+                heading = line.lstrip("#").strip()
+            if line.startswith("|") and i < len(lines) and re.match(r"^\|[\s:|-]+\|\s*$", lines[i]):
+                header = table_cells(line)
             m = re.match(r"^\|\s*OQ-(\d+)\s*\|", line)
             if not m:
                 continue
             cells = [c for c in table_cells(line) if c]
             state = cells[-1] if len(cells) > 1 else ""
+            hdr = [h for h in header if h] if len([h for h in header if h]) == len(cells) else []
             rows.append({"id": f"OQ-{m.group(1)}", "path": rel(p), "line": i,
                          "question": cells[1] if len(cells) > 1 else "",
-                         "open": not OQ_CLOSED_RE.match(state)})
+                         "open": not OQ_CLOSED_RE.match(state),
+                         "sent": bool(OQ_SENT_RE.match(state)),
+                         "heading": heading,
+                         "cols": [[hdr[k] if hdr else f"Cột {k + 1}", c] for k, c in enumerate(cells)],
+                         "answerable": bool(hdr) and bool(OQ_ANSWER_COL_RE.search(hdr[-1]))})
     return rows
 
 
@@ -227,8 +244,10 @@ def parse_sources():
     for line in read(ROOT / "docs-input/README.md").split("\n"):
         if not re.match(r"^\| SRC-\d+ \|", line):
             continue
-        c = table_cells(line)
-        rows.append({"id": c[0], "file": c[1].strip("`"), "group": c[2], "feed": c[3]})
+        c = table_cells(line) + [""] * 8
+        rows.append({"id": c[0], "file": c[1].strip("`"), "group": c[2], "feed": c[3],
+                     "used": re.findall(r"`([^`]+)`", c[4]), "tasks": re.findall(r"BL-\d+", c[5]),
+                     "received": c[6], "note": c[7]})
     return rows
 
 
@@ -322,6 +341,62 @@ def source_cell(feature, ledgers, features=()):
     state = "block" if redo else "part" if pending else "done"
     return cell(state, f"{done}/{total}", first[0], first[1] if first[2] else None,
                 note="có mục 🔄 bản mới chưa rà" if redo else "")
+
+
+def source_feed(src, led, features, open_bl):
+    """Nguồn này feed vào brainstorm nào, đang ở đâu, còn thiếu gì, vấn đề nào chưa giải quyết."""
+    targets, missing_feats = {}, set()
+    pend = []
+    cnt = {"todo": 0, "redo": 0, "moved": 0, "done": 0, "out": 0}
+    if led:
+        for r in led["rows"]:
+            res = r["result"]
+            fs, _ = row_feature(r, features)
+            for f in fs:
+                targets[f] = targets.get(f, 0) + 1
+            mv = re.search(r"➡\s*([a-z0-9-]+)", res)
+            if mv and mv.group(1) not in features:
+                missing_feats.add(mv.group(1))
+                cnt["moved"] += 1
+                pend.append({"mark": f"➡ {mv.group(1)} (chưa có)", "muc": r["muc"], "note": r["note"], "line": r["line"],
+                             "feat": mv.group(1)})
+            elif "✅" in res:
+                cnt["done"] += 1
+            elif "➖" in res:
+                cnt["out"] += 1
+            elif "🔄" in res:
+                cnt["redo"] += 1
+                pend.append({"mark": "🔄 bản mới chưa rà", "muc": r["muc"], "note": r["note"], "line": r["line"],
+                             "feat": (fs or [""])[0]})
+            elif any(m in res for m in PENDING_MARKS) or not res:
+                cnt["todo"] += 1
+                pend.append({"mark": "⬜ chưa đưa vào", "muc": r["muc"], "note": r["note"], "line": r["line"],
+                             "feat": (fs or [""])[0]})
+            elif mv:
+                cnt["done"] += 1  # ➡ sang feature đã có: tính ở sổ của feature đó
+    for u in src.get("used", []):
+        m_ = re.match(r"docs/([^/]+)/brainstorms/", u)
+        if m_ and m_.group(1) in features:
+            targets.setdefault(m_.group(1), 0)
+    feed = src["feed"]
+    if feed.startswith("➖"):
+        state, label = "ref", "Tham khảo"
+    elif not led:
+        state, label = "unread", "Chưa đọc"
+    elif not pend:
+        state, label = "done", "Đã feed đủ"
+    else:
+        state, label = "partial", "Đang đối chiếu"
+    tasks = [open_bl[t] for t in src.get("tasks", []) if t in open_bl]
+    feed_re = re.compile(r"^(Đọc và feed|Lập sổ đối chiếu|Hoàn tất sổ đối chiếu|Rà lại SRC)")
+    feed_tasks = [t for t in tasks if feed_re.match(t["task"])]
+    tasks = [t for t in tasks if not feed_re.match(t["task"])]
+    warn = re.findall(r"⚠\s*([^⚠]+)", src.get("note", ""))
+    return {"targets": sorted(targets), "missing_feats": sorted(missing_feats), "pending": pend, "cnt": cnt,
+            "fstate": state, "flabel": label,
+            "open_tasks": [{"id": t["id"], "task": t["task"], "line": t["line"]} for t in tasks],
+            "feed_tasks": [{"id": t["id"], "task": t["task"], "line": t["line"]} for t in feed_tasks],
+            "warn": [w_.strip().rstrip(".;") for w_ in warn]}
 
 
 def parse_params():
@@ -584,14 +659,413 @@ def feature_row(feature, cov, oqs, lint, orphans, audit, ledgers, features=()):
         else:
             st[key] = cell("none")
 
+    details = stage_details(feature, st, cov, oqs, lint, orphans, audit, ledgers, list(features) or [feature], screens, sidx)
     reached = [k for k, _ in STAGES if st[k]["state"] != "none"]
     furthest = reached[-1] if reached else None
     done_n = sum(1 for k, _ in STAGES if st[k]["state"] == "done")
     return {"feature": feature, "stages": st, "furthest": furthest,
             "furthest_idx": [k for k, _ in STAGES].index(furthest) if furthest else -1,
             "done": done_n, "blocks": [k for k, _ in STAGES if st[k]["state"] == "block"],
-            "open_oq": len(open_oq), "oq_rows": oqs, "lint": lint, "audit": audit,
-            "screens": len(screens)}
+            "open_oq": len(open_oq), "open_oq_internal": sum(1 for o in open_oq if not o["sent"]), "oq_rows": oqs, "lint": lint, "audit": audit,
+            "screens": len(screens), "details": details}
+
+
+# ─── chi tiết từng ô trục tiến độ ───────────────────────────────────────────
+# Ô ngoài lưới chỉ hiện trạng thái chung; bấm ô mở bảng chi tiết: các bước con (stepper) + danh sách việc còn lại.
+
+def step(label, state, text="", path=None, line=None):
+    return {"label": label, "state": state, "text": text, "path": path, "line": line}
+
+
+def fmt_d(iso):
+    return f"{iso[8:10]}/{iso[5:7]}" if iso and len(iso) >= 10 else (iso or "")
+
+
+def ask_rounds(bs_rel):
+    """Vòng hỏi khách của 1 brainstorm: biên bản docs/meetings/*.md có link tới brainstorm.
+    Số vòng lấy từ "(vòng N)" ở tiêu đề; ngày gửi = ngày deck biên bản link tới; ngày trả lời = dòng Ngày nhận."""
+    out = []
+    for p in sorted((ROOT / "docs/meetings").glob("*.md")):
+        text = read(p)
+        if bs_rel not in text.split("\n---\n", 1)[0] + "\n":
+            continue
+        h1 = re.search(r"^#\s+(.+)$", text, re.M)
+        rn = re.search(r"vòng\s*(\d+)", h1.group(1) if h1 else "", re.I)
+        if not rn:
+            continue
+        deck = re.search(r"^\s*-\s*(docs/meetings/decks/[^\s]+\.md)\s*$", text, re.M)
+        sent = frontmatter(read(ROOT / deck.group(1))).get("date", "") if deck else ""
+        got = re.search(r"Ngày nhận:\s*(\d{4}-\d{2}-\d{2})", text)
+        out.append({"n": int(rn.group(1)), "sent": sent, "answered": got.group(1) if got else p.name[:10],
+                    "path": rel(p), "deck": deck.group(1) if deck else None})
+    return sorted(out, key=lambda r: r["n"])
+
+
+def source_groups(feature, ledgers, features):
+    """Mục sổ đối chiếu thuộc feature, gom theo nguồn; mục còn chờ liệt kê ra."""
+    groups = []
+    for src, led in sorted(ledgers.items()):
+        mine = [r for r in led["rows"] if feature in row_feature(r, features)[0]]
+        if not mine:
+            continue
+        done = sum(1 for r in mine if "✅" in r["result"])
+        live = [r for r in mine if "➖" not in r["result"]]
+        pend = [r for r in live if "✅" not in r["result"]]
+        groups.append({"title": f"{src} · {led['name']}", "path": led["path"], "line": None,
+                       "meta": f"{done}/{len(mine)} mục đã đưa vào",
+                       "items": [{"tag": ("🔄 bản mới" if "🔄" in r["result"] else "⬜ chưa đưa vào"),
+                                  "text": r["muc"], "note": r["note"], "path": led["path"], "line": r["line"]}
+                                 for r in pend]})
+    return groups
+
+
+def oq_items(rows):
+    return [{"tag": o["id"], "text": o["question"][:180], "note": o["cols"][-1][1][:140] if o["cols"] else "",
+             "path": o["path"], "line": o["line"]} for o in rows]
+
+
+def current_step(steps):
+    """Bước đang đứng = bước xa nhất đã bắt đầu; bước đó xong rồi thì là bước kế tiếp."""
+    started = [i for i, s in enumerate(steps) if s["state"] != "none"]
+    if not started:
+        return steps[0] if steps else None
+    i = started[-1]
+    return steps[i + 1] if steps[i]["state"] == "done" and i + 1 < len(steps) else steps[i]
+
+
+def stage_details(feature, st, cov, oqs, lint, orphans, audit, ledgers, features, screens, sidx):
+    base = ROOT / "docs" / feature
+    cov = cov or {}
+    det = {}
+
+    # Nguồn
+    groups = source_groups(feature, ledgers, features)
+    n_pend = sum(len(g["items"]) for g in groups)
+    det["nguon"] = {"steps": [step("Mục nguồn đã đưa vào", st["nguon"]["state"], st["nguon"]["text"] or "—"),
+                              step("Mục còn chờ", "done" if not n_pend else "part", f"{n_pend} mục")] if groups else [],
+                    "groups": groups,
+                    "empty": "Chưa có mục sổ đối chiếu nào gắn feature này. Nguồn chưa đọc: xem tab Nguồn khách."}
+
+    # Brainstorm — 5 bước
+    bs = base / "brainstorms" / f"{feature}.md"
+    if bs.exists():
+        text = read(bs)
+        s = frontmatter(text).get("status", "draft")
+        approved = s in ("approved", "shipped")
+        bs_rel = rel(bs)
+        iv = re.search(r"Phỏng vấn xong đủ (\d+) phần ngày (\d{4}-\d{2}-\d{2})", text)
+        if iv:
+            s2 = step("Phỏng vấn", "done", f"Xong {iv.group(1)}/{iv.group(1)} phần · {fmt_d(iv.group(2))}", bs_rel)
+        elif approved:
+            s2 = step("Phỏng vấn", "done", "Xong", bs_rel)
+        else:
+            s2 = step("Phỏng vấn", "part", "Đang phỏng vấn", bs_rel)
+        mine = [o for o in oqs if o["path"] == bs_rel]
+        closed = [o for o in mine if not o["open"]]
+        waiting = [o for o in mine if o["open"] and o["sent"]]
+        internal = [o for o in mine if o["open"] and not o["sent"]]
+        rounds = ask_rounds(bs_rel)
+        last = rounds[-1] if rounds else None
+        parts = []
+        if last:
+            parts.append(f"Vòng {last['n']}: gửi {fmt_d(last['sent'])} · trả lời {fmt_d(last['answered'])}")
+        elif mine:
+            parts.append("Chưa hỏi khách vòng nào")
+        else:
+            parts.append("Không có câu hỏi cho khách")
+        if mine:
+            parts.append(f"{len(closed)} đã chốt · {len(waiting)} khách còn mở · {len(internal)} chưa gửi")
+        s3_state = "done" if not waiting and not internal and (last or not mine) else "part"
+        s3 = step("Hỏi khách", s3_state, " · ".join(parts), last["path"] if last else bs_rel)
+        s4 = step("Review", "done" if approved else "part" if s in ("in-review", "revisions") else "none",
+                  {"in-review": "Đang review", "revisions": "Đang sửa theo review"}.get(s, "Xong" if approved else "Chưa gửi review"))
+        s5 = step("Chốt", "done" if approved else "none", s if approved else "—", bs_rel)
+        s1 = step("Đối chiếu nguồn", "done" if st["nguon"]["state"] in ("done", "none") else st["nguon"]["state"],
+                  (st["nguon"]["text"] + " mục") if st["nguon"]["text"] else "Không có mục nguồn",
+                  st["nguon"]["path"], st["nguon"]["line"])
+        steps = [s1, s2, s3, s4, s5]
+        cur = current_step(steps)
+        groups = [{"title": f"Vòng {r['n']} hỏi khách", "path": r["path"], "line": None,
+                   "meta": f"gửi {fmt_d(r['sent'])} · trả lời {fmt_d(r['answered'])}", "items": []} for r in rounds]
+        if internal:
+            groups.append({"title": f"Chưa gửi khách ({len(internal)}) — dồn cho vòng {(last['n'] + 1) if last else 1}",
+                           "path": None, "line": None, "meta": "", "items": oq_items(internal)})
+        if waiting:
+            groups.append({"title": f"Khách còn mở ({len(waiting)})", "path": None, "line": None, "meta": "",
+                           "items": oq_items(waiting)})
+        det["brainstorm"] = {"steps": steps, "groups": groups, "current": cur["label"], "path": bs_rel}
+        short = {"Đối chiếu nguồn": "Đối chiếu nguồn", "Hỏi khách": f"Hỏi khách vòng {last['n'] if last else 1}"}
+        st["brainstorm"]["text"] = "Đã chốt" if approved else short.get(cur["label"], cur["label"])
+    else:
+        det["brainstorm"] = {"steps": [], "groups": [], "empty": "Chưa có brainstorm. Bắt đầu bằng /brainstorm."}
+
+    # Chốt OQ — toàn feature
+    closed = [o for o in oqs if not o["open"]]
+    waiting = [o for o in oqs if o["open"] and o["sent"]]
+    internal = [o for o in oqs if o["open"] and not o["sent"]]
+    by_doc = {}
+    for o in internal + waiting:
+        by_doc.setdefault(o["path"], []).append(o)
+    det["oq"] = {"steps": [step("Đã chốt", "done", f"{len(closed)} câu"),
+                           step("Đã hỏi, chờ khách", "part" if waiting else "done", f"{len(waiting)} câu"),
+                           step("Chưa gửi khách", "block" if internal else "done", f"{len(internal)} câu")] if oqs else [],
+                 "groups": [{"title": p.split("/")[-1], "path": p, "line": None,
+                             "meta": f"{sum(1 for o in os_ if not o['sent'])} chưa gửi · {sum(1 for o in os_ if o['sent'])} chờ khách",
+                             "items": [dict(i, tag=i["tag"] + (" · chờ khách" if o["sent"] else " · chưa gửi"))
+                                       for i, o in zip(oq_items(os_), os_)]} for p, os_ in sorted(by_doc.items())],
+                 "empty": "Feature chưa có câu hỏi mở nào."}
+
+    # SRS
+    spec = base / "srs" / f"{feature}-spec.md"
+    if spec.exists():
+        s = frontmatter(read(spec)).get("status", "draft")
+        fr = cov.get("fr_total", 0)
+        fail, warn = (lint or {}).get("fail", 0), (lint or {}).get("warn", 0)
+        extra = [(k, base / "srs" / f"{feature}-{k}.md") for k in ("flows", "states", "erd")]
+        have = [k for k, p in extra if p.exists()]
+        det["srs"] = {"steps": [
+            step("Spec", "done" if fr else "part", f"{fr} FR · {cov.get('br_total', 0)} BR · {cov.get('nfr_total', 0)} NFR · {cov.get('e_total', 0)} mã lỗi", rel(spec)),
+            step("Tầng SaaS", "block" if fail else "part" if warn else "done", f"{fail} FAIL · {warn} WARN", rel(spec), (lint or {}).get("first_warn_line")),
+            step("Luồng · trạng thái · ERD", "done" if len(have) == 3 else "part" if have else "none", f"{len(have)}/3 file"),
+            step("Review", "done" if s in ("approved", "shipped") else "part" if s in ("in-review", "revisions") else "none", s),
+            step("Chốt", "done" if s in ("approved", "shipped") else "block" if s == "stale" else "none", s)],
+            "groups": [{"title": "File SRS", "path": None, "line": None, "meta": "",
+                        "items": [{"tag": k if p.exists() else f"{k} · chưa có", "text": p.name,
+                                   "note": frontmatter(read(p)).get("status", "") if p.exists() else "",
+                                   "path": rel(p) if p.exists() else None, "line": None}
+                                  for k, p in [("spec", spec)] + extra]}]}
+    else:
+        det["srs"] = {"steps": [], "groups": [], "empty": "Chưa có SRS. Chạy /srs sau khi chốt brainstorm."}
+
+    # Userflow
+    uf = base / "srs" / f"{feature}-userflow.md"
+    if uf.exists():
+        txt = read(uf)
+        s = frontmatter(txt).get("status", "draft")
+        flows = re.findall(r"^### Flow:\s*(\S+)", txt, re.M)
+        det["userflow"] = {"steps": [
+            step("Flow", "done" if flows else "part", f"{len(flows)} flow", rel(uf)),
+            step("Màn mồ côi", "part" if orphans else "done", "KG lỗi — chưa đếm" if orphans is None else f"{orphans} màn"),
+            step("Chốt", "done" if s in ("approved", "shipped") else "none", s)],
+            "groups": [{"title": "Flow", "path": None, "line": None, "meta": "",
+                        "items": [{"tag": f"{i + 1}", "text": f_, "note": "", "path": rel(uf),
+                                   "line": line_of(rel(uf), rf"^### Flow:\s*{re.escape(f_)}")} for i, f_ in enumerate(flows)]}]}
+    else:
+        det["userflow"] = {"steps": [], "groups": [], "empty": "Chưa có userflow. Chạy /user-flow sau SRS."}
+
+    # Figma
+    if sidx.exists() or screens:
+        flows = []
+        for ln, line in enumerate(read(sidx).split("\n"), 1) if sidx.exists() else []:
+            c = table_cells(line)
+            if line.startswith("| ") and len(c) >= 8 and c[0].isdigit():
+                flows.append({"tag": c[0], "text": c[1], "note": f"{c[3]} · {c[6]}", "path": rel(sidx), "line": ln,
+                               "done": c[6] in ("approved", "shipped")})
+        nd = sum(1 for f_ in flows if f_["done"])
+        det["figma"] = {"steps": [
+            step("Flow đã vẽ", "done" if flows and nd == len(flows) else "part", f"{len(flows)} flow · {len(screens)} file mô tả", rel(sidx) if sidx.exists() else None),
+            step("Audit", "none" if not audit else "block" if audit["cao"] else "done",
+                 f"{audit['cao']} Cao · {audit['trung']} Trung · {audit['thap']} Thấp · {fmt_d(audit['date'])}" if audit else "Chưa audit",
+                 audit["path"] if audit else None),
+            step("Duyệt flow", "done" if flows and nd == len(flows) else "part" if nd else "none", f"{nd}/{len(flows)} approved")],
+            "groups": [{"title": "Flow trên Figma", "path": None, "line": None, "meta": "", "items": flows}] if flows else []}
+    else:
+        det["figma"] = {"steps": [], "groups": [], "empty": "Chưa vẽ màn nào trên Figma."}
+
+    # US/AC
+    fr = cov.get("fr_total", 0)
+    if fr:
+        us = cov.get("us_total", 0)
+        covd = cov.get("fr_covered", 0)
+        orph = cov.get("us_orphan", [])
+        unc = cov.get("fr_uncovered", [])
+        det["usac"] = {"steps": [
+            step("User story", "done" if us else "none", f"{us} US"),
+            step("FR có story", "done" if covd == fr else "part" if covd else "none", f"{covd}/{fr} FR"),
+            step("Acceptance criteria", "done" if cov.get("ac_total") else "none", f"{cov.get('ac_total', 0)} AC"),
+            step("US không trỏ FR", "block" if orph else "done", f"{len(orph)} US")],
+            "groups": [{"title": f"FR chưa có story ({len(unc)})", "path": rel(spec) if spec.exists() else None, "line": None,
+                        "meta": "", "items": [{"tag": x.replace(f"FR-{feature}-", "FR-"), "text": x, "note": "",
+                                               "path": rel(spec) if spec.exists() else None,
+                                               "line": line_of(rel(spec), re.escape(x)) if spec.exists() else None}
+                                              for x in unc]}] if unc else []}
+    else:
+        det["usac"] = {"steps": [], "groups": [], "empty": "Chưa có FR nên chưa viết story."}
+
+    # Test
+    uc_total = cov.get("uc_total", 0)
+    if uc_total:
+        unt = cov.get("uc_untested", [])
+        det["test"] = {"steps": [step("Use case", "done", f"{uc_total} UC"),
+                                 step("UC có test", "done" if not unt else "part" if len(unt) < uc_total else "none",
+                                      f"{uc_total - len(unt)}/{uc_total} UC")],
+                       "groups": [{"title": f"UC chưa có test ({len(unt)})", "path": None, "line": None, "meta": "",
+                                   "items": [{"tag": "UC", "text": str(x), "note": "", "path": None, "line": None} for x in unt]}] if unt else []}
+    else:
+        det["test"] = {"steps": [], "groups": [], "empty": "Chưa có use case để lập test."}
+
+    for key, label in HIDDEN_STAGES:
+        c = st[key]
+        det[key] = ({"steps": [step(label.upper(), c["state"], c["text"], c["path"])], "groups": []}
+                    if c["path"] else {"steps": [], "groups": [], "empty": f"Chưa có {label}."})
+    return det
+
+
+# ─── quyết định theo feature: ai chốt (BA hay khách) ────────────────────────
+BA_HANDLES = ("@szitphan",)
+
+
+def parse_dec_log():
+    """Sổ _workspace/decisions.md → dòng DEC (người chốt ở cột Ai chốt)."""
+    rows = []
+    path = "_workspace/decisions.md"
+    for ln, line in enumerate(read(ROOT / path).split("\n"), 1):
+        if not line.startswith("| DEC-"):
+            continue
+        c = table_cells(line) + [""] * 8
+        rows.append({"id": c[0], "date": c[1], "text": c[2], "reason": c[3], "who": c[5], "where": c[6],
+                     "status": c[7], "path": path, "line": ln, "blob": line})
+    return rows
+
+
+def parse_meeting_decisions():
+    """Bảng "## Quyết định" của biên bản họp với khách. Người chốt = cột Người đề xuất, không có thì người trả lời."""
+    out = []
+    for p in sorted((ROOT / "docs/meetings").glob("*.md")):
+        text = read(p)
+        fm_block = text.split("\n---\n", 1)[0]
+        bss = re.findall(r"docs/([a-z0-9-]+)/brainstorms/", fm_block)
+        decks = re.findall(r"(docs/meetings/decks/[^\s]+\.md)", fm_block)
+        aliases = ({frontmatter(read(ROOT / d)).get("feature", "") for d in decks} | set(decks)) - {""}
+        who_m = re.search(r"(?:Người trả lời|Bên khách):\s*([^|\n]+)", text)
+        who_def = who_m.group(1).strip().rstrip(",") if who_m else "Khách"
+        got = re.search(r"(?:Ngày nhận|Ngày):\s*(\d{4}-\d{2}-\d{2})", text)
+        day = got.group(1) if got else p.name[:10]
+        lines = text.split("\n")
+        sec = next((i for i, l in enumerate(lines) if re.match(r"^##\s+Quyết định", l)), None)
+        if sec is None:
+            continue
+        header = None
+        for i in range(sec + 1, len(lines)):
+            l = lines[i]
+            if l.startswith("## "):
+                break
+            if not l.startswith("|") or re.match(r"^\|[\s:|-]+\|\s*$", l):
+                continue
+            c = table_cells(l)
+            if header is None:
+                header = c
+                continue
+            col = {h: c[k] if k < len(c) else "" for k, h in enumerate(header)}
+            dec = next((v for h, v in col.items() if h.startswith("Quyết định")), "")
+            oq = next((v for h, v in col.items() if h == "Mã"), "")
+            who = next((v for h, v in col.items() if h.startswith("Người")), "") or who_def
+            q = col.get("Câu hỏi", "")
+            out.append({"oq": oq if oq.startswith("OQ-") else "", "question": q, "text": dec,
+                        "note": col.get("Ghi chú", "") or col.get("Ghi vào", ""), "who": who, "date": day,
+                        "path": rel(p), "line": i + 1, "features": bss, "aliases": sorted(aliases)})
+    return out
+
+
+def closed_checklist_oqs(feature):
+    """OQ dạng checklist `- [x] OQ-n: câu hỏi — trả lời` trong doc của feature."""
+    out = []
+    for p in sorted((ROOT / "docs" / feature).rglob("*.md")):
+        for ln, line in enumerate(read(p).split("\n"), 1):
+            m = re.match(r"^- \[x\]\s*(OQ-\d+):\s*(.+?)\s+—\s+(.+)$", line)
+            if m:
+                out.append({"id": m.group(1), "question": m.group(2), "answer": m.group(3), "path": rel(p), "line": ln})
+    return out
+
+
+def owner_of(who):
+    """Phân loại người chốt: BA (đội mình) hay khách."""
+    w = who.lower()
+    if any(h in w for h in BA_HANDLES) or w.startswith("ba") or "đội" in w:
+        return "BA"
+    return "Delta"
+
+
+def feature_decisions(feature, oq_rows, dec_log, mdecs):
+    bs_rel = f"docs/{feature}/brainstorms/{feature}.md"
+    bs_text = read(ROOT / bs_rel)
+    my_oq = {o["id"] for o in oq_rows}
+    items, seen_oq = [], set()
+    # 1. Khách chốt — biên bản họp link tới brainstorm của feature
+    for d in mdecs:
+        if feature not in d["features"]:
+            continue
+        if d["oq"]:
+            if d["oq"] not in my_oq:
+                continue
+        else:
+            codes = re.findall(r"\b([A-Z]{1,2}\d{1,2}[a-z]?)\b", d["note"])
+            if codes and len(d["features"]) > 1 and not any(re.search(rf"\b{c}\b", bs_text) for c in codes):
+                continue
+        seen_oq.add(d["oq"])
+        items.append({"owner": owner_of(d["who"]), "who": d["who"], "date": d["date"],
+                      "code": d["oq"] or "Họp", "text": d["text"] or d["question"],
+                      "note": d["question"] if d["oq"] else d["note"], "path": d["path"], "line": d["line"], "src": "Biên bản họp"})
+    # 2. Sổ DEC — dòng nhắc feature (hoặc tên cũ của feature trong deck/biên bản)
+    aliases = {feature} | {a for d in mdecs if feature in d["features"] for a in d["aliases"]}
+    for d in dec_log:
+        if any(f"docs/{a}/" in d["blob"] or (a.endswith(".md") and a in d["blob"])
+               or re.search(rf"(?<![\w-]){re.escape(a)}(?![\w-])", d["blob"]) for a in aliases):
+            items.append({"owner": owner_of(d["who"]), "who": d["who"], "date": d["date"], "code": d["id"],
+                          "text": d["text"], "note": ("" if d["status"] == "hiệu lực" else d["status"]),
+                          "path": d["path"], "line": d["line"], "src": "Sổ quyết định"})
+    # 3. Ý tưởng brainstorm Mục 4 — [SOP to-be] = thiết kế to-be của khách (Delta chốt); [SOP+] / [Mới] = BA chốt khi phỏng vấn
+    iv = re.search(r"Phỏng vấn xong đủ \d+ phần ngày (\d{4}-\d{2}-\d{2})", bs_text)
+    sec4 = re.search(r"^## 4\..*?(?=^## 5\.)", bs_text, re.S | re.M)
+    if sec4:
+        base_ln = bs_text[:sec4.start()].count("\n") + 1
+        for k, line in enumerate(sec4.group(0).split("\n")):
+            m = re.match(r"^- \*{0,2}([A-Z]\d+[a-z]?)\*{0,2}\s+((?:\[[^\]]+\]\s*)+)(.+)$", line)
+            if m:
+                sop = "[SOP to-be]" in m.group(2)  # ý có sẵn trong SOP của khách → khách chốt
+                items.append({"owner": "Delta" if sop else "BA", "who": "SOP to-be của Delta" if sop else "@szitphan",
+                              "date": iv.group(1) if iv else "",
+                              "code": m.group(1), "text": m.group(3), "note": m.group(2).strip(),
+                              "path": bs_rel, "line": base_ln + k, "src": "Ý tưởng brainstorm"})
+    # 4. OQ đã chốt trong doc nhưng không có trong biên bản → suy người chốt từ câu trả lời
+    closed = [{"id": o["id"], "question": o["question"], "answer": o["cols"][-1][1] if o["cols"] else "",
+               "path": o["path"], "line": o["line"]} for o in oq_rows if not o["open"]]
+    closed += closed_checklist_oqs(feature)
+    for o in closed:
+        if o["id"] in seen_oq:
+            continue
+        seen_oq.add(o["id"])
+        ans = re.sub(r"^(Đã chốt|Đóng|Bỏ)\s*:?\s*", "", o["answer"])
+        delta = re.search(r"Delta|khách", o["answer"], re.I)
+        items.append({"owner": "Delta" if delta else "BA", "who": "suy từ câu trả lời", "date": "",
+                      "code": o["id"], "text": ans or o["answer"], "note": o["question"],
+                      "path": o["path"], "line": o["line"], "src": "OQ đã chốt"})
+    items.sort(key=lambda x: (x["owner"], x["date"] or "9999", x["code"]))
+    return items
+
+
+def decision_cell_and_detail(items):
+    n_ba = sum(1 for x in items if x["owner"] == "BA")
+    n_kh = len(items) - n_ba
+    c = cell("part" if items else "none", f"{n_ba} BA · {n_kh} Delta" if items else "")
+    groups = []
+    for owner, title in (("Delta", "Delta chốt"), ("BA", "BA chốt (tôi)")):
+      for src in ("Biên bản họp", "Sổ quyết định", "Ý tưởng brainstorm", "OQ đã chốt"):
+        xs = [x for x in items if x["owner"] == owner and x["src"] == src]
+        if xs:
+            meta = {"Ý tưởng brainstorm": ("ý [SOP to-be] — có sẵn trong SOP của khách" if owner == "Delta"
+                                           else "ý [SOP+] / [Mới] — BA chốt khi phỏng vấn"),
+                    "OQ đã chốt": "người chốt suy từ câu trả lời (có chữ Delta/khách → Delta)"}.get(src, "")
+            groups.append({"title": f"{title} — {src} ({len(xs)})", "path": None, "line": None, "meta": meta,
+                           "items": [{"tag": x["code"], "text": x["text"][:220],
+                                      "note": " · ".join(v for v in [fmt_d(x["date"]) if x["date"] else "", x["who"], x["src"],
+                                                                    x["note"][:120] if x["note"] else ""] if v),
+                                      "path": x["path"], "line": x["line"]} for x in xs]})
+    det = {"steps": [step("Delta chốt", "done" if n_kh else "none", f"{n_kh} quyết định"),
+                     step("BA chốt", "done" if n_ba else "none", f"{n_ba} quyết định")] if items else [],
+           "groups": groups,
+           "empty": "Chưa có quyết định nào gắn feature này (sổ _workspace/decisions.md, biên bản họp, OQ đã chốt)."}
+    return c, det
 
 
 # ─── kanban ─────────────────────────────────────────────────────────────────
@@ -855,6 +1329,25 @@ def build(feature_filter=None, light_mode=False):
         s_["name"] = source_name(s_, ledgers)
         s_["ratio"] = feed_ratio(s_["feed"])
         s_["ledger"] = ledgers.get(s_["id"], {}).get("path")
+        s_.update(source_feed(s_, ledgers.get(s_["id"]), scan_features(None), {b["id"]: b for b in backlog}))
+    # Nguồn tham khảo (➖, không đối chiếu từng mục) mà feature dùng: cột "Dùng ở" của sổ nguồn hoặc links của brainstorm.
+    dec_log, mdecs = parse_dec_log(), parse_meeting_decisions()
+    for r in rows:
+        f = r["feature"]
+        bs_links = read(ROOT / "docs" / f / "brainstorms" / f"{f}.md").split("\n---\n", 1)[0]
+        refs = [x for x in sources if x["feed"].startswith("➖")
+                and (any(u.startswith(f"docs/{f}/") for u in x["used"]) or f"docs-input/{x['file']}" in bs_links)]
+        if refs:
+            r["details"]["nguon"]["groups"].append({
+                "title": f"Nguồn tham khảo ({len(refs)}) — dùng làm căn cứ, không đối chiếu từng mục", "path": None, "line": None, "meta": "",
+                "items": [{"tag": x["id"], "text": x["name"], "note": " · ".join(v for v in [x["group"], x["feed"].lstrip("➖ ").strip(), x["note"][:140]] if v),
+                           "path": "docs-input/" + x["file"], "line": None} for x in refs]})
+            if r["stages"]["nguon"]["state"] == "none":
+                r["stages"]["nguon"] = cell("done", f"{len(refs)} nguồn TK", "docs-input/" + refs[0]["file"],
+                                            note="chỉ có nguồn tham khảo, không có mục cần đối chiếu")
+                r["details"]["nguon"]["steps"] = [step("Nguồn tham khảo", "done", f"{len(refs)} nguồn")]
+        items = feature_decisions(f, r["oq_rows"], dec_log, mdecs)
+        r["stages"]["dec"], r["details"]["dec"] = decision_cell_and_detail(items)
     work = build_queue(rows, backlog, stale_docs, actions, ledgers,
                        [] if feature_filter else orphan_worktrees(), today, stale_log)
     history = {"points": [], "decks": []} if light_mode else oq_history(feature_filter, today=today)
@@ -873,6 +1366,7 @@ def build(feature_filter=None, light_mode=False):
     quality = ws.compute_quality(ROOT, docs, feature_filter)
 
     open_oq = sum(r["open_oq"] for r in rows)
+    oq_internal = sum(r["open_oq_internal"] for r in rows)
     dead_log = [s for s in stale_log if s["dead"]]
     not_fed = [s for s in sources if s["feed"].startswith("⬜")]
     feedable = [s for s in sources if not s["feed"].startswith("➖")]
@@ -911,7 +1405,8 @@ def build(feature_filter=None, light_mode=False):
         {"key": "waiting", "label": "Chờ bạn", "value": waiting, "light": "green" if not waiting else "amber",
          "sub": f"{len(lanes.get('review', []))} duyệt land · {len(lanes.get('blocked', []))} chặn · {len(lanes.get('planned', []))} card"},
         {"key": "oq", "label": "Câu hỏi mở", "value": open_oq, "light": light(open_oq, 0, 20), "delta": oq_delta(history),
-         "sub": " · ".join(f"{r['feature']} {r['open_oq']}" for r in sorted(rows, key=lambda r: -r["open_oq"]) if r["open_oq"]) or "không còn",
+         "sub": (f"{oq_internal} nội bộ chưa gửi khách · {open_oq - oq_internal} đã hỏi khách — " if open_oq else "")
+                + (" · ".join(f"{r['feature']} {r['open_oq']}" for r in sorted(rows, key=lambda r: -r["open_oq"]) if r["open_oq"]) or "không còn"),
          "path": next((r["stages"]["oq"]["path"] for r in sorted(rows, key=lambda r: -r["open_oq"]) if r["open_oq"]), None),
          "line": next((r["stages"]["oq"]["line"] for r in sorted(rows, key=lambda r: -r["open_oq"]) if r["open_oq"]), None)},
         {"key": "stale", "label": "Doc stale", "value": len(stale_docs),
@@ -939,7 +1434,7 @@ def build(feature_filter=None, light_mode=False):
         "features": rows, "kanban": kanban, "stale_docs": stale_docs, "stale_log": stale_log,
         "freshness": fresh, "quality": quality, "coverage": coverage,
         "counts": {"docs_md": kanban["total"], "features": len(rows), "sources": len(sources),
-                   "backlog_open": len(open_bl), "open_oq": open_oq},
+                   "backlog_open": len(open_bl), "open_oq": open_oq, "open_oq_internal": oq_internal},
     }
 
 
@@ -1064,6 +1559,28 @@ li.dismissed{display:none!important}body.show-dismissed li.dismissed{display:fle
 .stages .h{color:var(--color-text-secondary);text-align:center;font-weight:var(--font-weight-medium);text-transform:uppercase;padding-bottom:var(--spacing-1)}
 .stages .f{font:var(--font-weight-medium) 12px/16px var(--font-code);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:6px 0}
 .cell{border-radius:var(--radius-inner);padding:6px 4px;text-align:center;font-variant-numeric:tabular-nums;background:transparent;border:1px dashed var(--color-border-emphasized);color:var(--color-text-secondary);text-decoration:none;min-height:28px}
+button.cell{font:inherit;font-size:12px;cursor:pointer;width:100%}
+button.cell:hover{box-shadow:inset 0 0 0 100px var(--color-overlay-hover)}
+button.cell[aria-expanded="true"]{outline:2px solid var(--color-text-primary);outline-offset:1px}
+#detwrap .det{border:1px solid var(--color-border-emphasized);border-radius:var(--radius-inner);padding:var(--spacing-3);margin-top:var(--spacing-2);background:var(--color-background-muted)}
+.dethead{display:flex;gap:var(--spacing-2);align-items:center;flex-wrap:wrap}
+.dethead h3{margin:0;font-size:14px;flex:1}
+.stepper{list-style:none;margin:var(--spacing-2) 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--spacing-2)}
+.step{border:1px solid var(--color-border-emphasized);border-radius:var(--radius-inner);padding:8px;font-size:12px;background:var(--color-background)}
+.step a.steplink,.step>span{color:inherit;text-decoration:none}
+.step .sn{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--color-neutral);font-weight:var(--font-weight-semibold);margin-right:6px}
+.step .sl{font-weight:var(--font-weight-semibold)}
+.step .chip{margin-left:6px}
+.step .st{display:block;margin-top:4px;color:var(--color-text-secondary)}
+.step.done .sn{background:var(--color-accent);color:var(--color-on-accent)}
+.step.block{border-color:var(--color-status-chip-red-fg)}
+.step.none{opacity:.6}
+.step.here{box-shadow:0 0 0 2px var(--color-text-primary)}
+.detg h4{margin:var(--spacing-3) 0 var(--spacing-1);font-size:13px}
+.detg ul{margin:0;padding-left:18px;font-size:12px}
+.detg li{margin:2px 0}
+.detg .tag{margin-right:6px}
+.srct td{vertical-align:top}.srct .iss{font-size:12px;max-width:340px}.srct .chip{margin:0 4px 4px 0}.srcbox{padding:4px 8px}.srcbox h4{margin:8px 0 4px;font-size:13px}.srcbox ul{margin:0;padding-left:18px;font-size:12px;list-style:disc}.srcbox li{display:list-item;margin:3px 0;border:0;padding:0}
 .cell.done{background:var(--color-accent);border-color:var(--color-accent);color:var(--color-on-accent);font-weight:var(--font-weight-semibold)}
 .cell.part{background:var(--color-neutral);border:1px solid transparent;color:var(--color-text-primary);font-weight:var(--font-weight-medium)}
 .cell.block{background:var(--color-status-chip-red-bg);border:1px solid transparent;color:var(--color-status-chip-red-fg);font-weight:var(--font-weight-semibold)}
@@ -1146,9 +1663,28 @@ details.howto p{margin:var(--spacing-1) 0 0;max-width:75ch}
   table.work td{border:0;padding:2px 0}
   table.work td.scol{width:auto;white-space:normal}
   table.work td[data-l]::before{content:attr(data-l);display:block;font-size:12px;font-weight:var(--font-weight-medium);color:var(--color-text-secondary)}
-  table.work tr.more-row{display:none}table.work.all tr.more-row{display:block}
+  table.work tr.more-row{display:none}table.work.all tr.more-row,body.searching table.work tr.more-row{display:block}
+  .qbox{min-width:0;width:100%}
+  .oqbox dl{grid-template-columns:1fr}
 }
 .bcol .kbody{max-height:70vh;overflow-y:auto}
+/* Tìm + lọc (14/10) */
+.qbox{height:32px;min-width:220px;padding:0 var(--spacing-3);border:1px solid var(--color-border-emphasized);border-radius:var(--radius-element);background:var(--color-background-surface);color:var(--color-text-primary);font:var(--font-weight-normal) 14px/20px var(--font-body)}
+.fbar{display:flex;flex-wrap:wrap;gap:var(--spacing-2) var(--spacing-4);align-items:center;font-size:12px}
+.flab{display:inline-flex;align-items:center;gap:var(--spacing-1);font-size:12px;color:var(--color-text-secondary)}
+.fbar select{font:var(--font-weight-normal) 12px/16px var(--font-body);height:28px;padding:0 var(--spacing-2);border:1px solid var(--color-border-emphasized);border-radius:var(--radius-element);background:var(--color-background-surface);color:var(--color-text-primary)}
+.fcount{font-size:12px;color:var(--color-text-secondary)}
+.fhide{display:none!important}
+body.searching table.work tr.more-row{display:table-row}
+/* Câu hỏi mở: chi tiết + trả lời */
+tr.oqd>td{background:var(--color-background-muted)}
+.oqbox{display:flex;flex-direction:column;gap:var(--spacing-2);max-width:900px}
+.oqbox dl{display:grid;grid-template-columns:max-content 1fr;gap:var(--spacing-1) var(--spacing-3);margin:0}
+.oqbox dt{font-size:12px;color:var(--color-text-secondary);font-weight:var(--font-weight-medium)}
+.oqbox dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.oqans{display:flex;flex-direction:column;gap:var(--spacing-2);font-size:12px}
+.oqans textarea{font:var(--font-weight-normal) 14px/20px var(--font-body);min-height:80px;padding:var(--spacing-2);border:1px solid var(--color-border-emphasized);border-radius:var(--radius-element);background:var(--color-background-surface);color:var(--color-text-primary);resize:vertical}
+.oqans textarea:disabled{color:var(--color-text-secondary)}
 .bcard .btitle{overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;font-weight:var(--font-weight-medium)}
 .bdetail{white-space:pre-wrap;font:12px/16px var(--font-body);margin:var(--spacing-1) 0 0;color:var(--color-text-primary)}
 .cempty{margin:0;padding:var(--spacing-3);text-align:center;font-size:12px;color:var(--color-text-primary)}
@@ -1166,7 +1702,29 @@ JS = """
         if(window.__EMBED){a.target='_blank';a.rel='noopener'}else a.removeAttribute('target')}});
     [].forEach.call(document.querySelectorAll('[data-mode]'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-mode')===mode))});
   }
+  function norm(t){return (t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\u0111/g,'d')}
+  function filt(){
+    var qe=document.getElementById('q'),q=norm(qe?qe.value.trim():''),conds={},tot={},shown={};
+    document.body.classList.toggle('searching',!!q);
+    [].forEach.call(document.querySelectorAll('select.flt'),function(s){if(s.value)(conds[s.dataset.group]=conds[s.dataset.group]||[]).push([s.dataset.attr,s.value])});
+    [].forEach.call(document.querySelectorAll('[data-fx]'),function(el){
+      var g=el.dataset.fx,ok=(conds[g]||[]).every(function(c){var v=el.getAttribute('data-'+c[0])||'';return v===c[1]||(c[0]==='feat'&&(' '+v+' ').indexOf(' '+c[1]+' ')>=0)});
+      if(ok&&q)ok=norm(el.dataset.s||el.textContent).indexOf(q)>=0;
+      el.classList.toggle('fhide',!ok);tot[g]=(tot[g]||0)+1;if(ok)shown[g]=(shown[g]||0)+1;
+      var d=el.nextElementSibling;if(d&&d.classList.contains('oqd')){d.classList.toggle('fhide',!ok)}});
+    [].forEach.call(document.querySelectorAll('.fcount'),function(c){var g=c.dataset.group,on=q||conds[g];c.textContent=on?('Hiện '+(shown[g]||0)+'/'+(tot[g]||0)):''})}
+  document.addEventListener('input',function(e){if(e.target.id==='q')filt()});
+  document.addEventListener('change',function(e){if(e.target.classList&&e.target.classList.contains('flt'))filt()});
   document.addEventListener('click',function(e){
+    var dc=e.target.closest&&e.target.closest('button.cell[data-det],.detclose');
+    if(dc){var open=document.querySelector('#detwrap .det:not([hidden])'),btn=document.querySelector('button.cell[aria-expanded="true"]');
+      if(open)open.hidden=true;if(btn)btn.setAttribute('aria-expanded','false');
+      if(dc.classList.contains('cell')&&btn!==dc){var t=document.getElementById(dc.dataset.det);
+        if(t){t.hidden=false;dc.setAttribute('aria-expanded','true');t.scrollIntoView({block:'nearest',behavior:'smooth'})}}
+      return}
+    var ot=e.target.closest&&e.target.closest('.oq-toggle');
+    if(ot){var d=document.getElementById(ot.getAttribute('aria-controls')),on=ot.getAttribute('aria-expanded')!=='true';
+      ot.setAttribute('aria-expanded',String(on));if(d)d.hidden=!on;return}
     var b=e.target.closest&&e.target.closest('[data-mode]');
     if(b){mode=b.getAttribute('data-mode');try{localStorage.setItem(K,mode)}catch(err){}apply();return}
     var mb=e.target.closest&&e.target.closest('#btn-more');
@@ -1307,8 +1865,19 @@ AJS = r"""
       var bk=c.querySelector('.fback');if(bk)bk.hidden=!o;
       var sel=c.querySelector('.fmove');if(sel){sel.innerHTML='';var o0=document.createElement('option');o0.value='';o0.textContent='Chuyển sang…';sel.appendChild(o0);
         COLS_FIG.forEach(function(k){if(k[0]===col)return;var x=document.createElement('option');x.value=k[0];x.textContent=k[1];sel.appendChild(x)})}});
+    [].forEach.call(document.querySelectorAll('.oqans'),function(box){var p=pending[box.dataset.key],ta=box.querySelector('textarea'),cb=box.querySelector('.oq-close');
+      ta.disabled=!!p;cb.disabled=!!p;if(p){ta.value=p.answer||'';cb.checked=!!p.close}
+      box.querySelector('.oq-send').hidden=!!p;box.querySelector('.oq-cancel').hidden=!p;
+      box.querySelector('.oq-st').textContent=p?('Chờ /dashboard sync'+(p.close?' · sẽ chốt câu này':'')):'';
+      var row=document.querySelector('tr[data-oqkey="'+box.dataset.key.replace(/"/g,'\\"')+'"] .oq-toggle');
+      if(row)row.textContent=p?'Chi tiết · đã trả lời, chờ sync':'Chi tiết · trả lời'});
     counts()}
   document.addEventListener('click',function(e){
+    var os=e.target.closest&&e.target.closest('.oq-send');if(os){var box=os.closest('.oqans'),ta=box.querySelector('textarea'),v=(ta.value||'').trim();
+      if(!v){say('Nhập câu trả lời trước khi gửi.');ta.focus();return}
+      var rq=Object.assign(JSON.parse(box.dataset.req),{answer:v,close:!!box.querySelector('.oq-close').checked});
+      addReq(box.dataset.key,rq);say(rq.oq+': đã lưu trả lời, ghi vào tài liệu khi chạy /dashboard sync.');return}
+    var oc=e.target.closest&&e.target.closest('.oq-cancel');if(oc){dropReq(oc.closest('.oqans').dataset.key);say('Đã huỷ yêu cầu trả lời.');return}
     var b=e.target.closest&&e.target.closest('.act');if(b&&!b.disabled){addReq(b.dataset.key,JSON.parse(b.dataset.req));return}
     var d=e.target.closest&&e.target.closest('.dismiss');if(d){if(!need())return;var id=hid(d.dataset.id);dismissed[id]={sig:d.dataset.sig};paint();db.collection('dismissed').doc(id).set({id:d.dataset.id,sig:d.dataset.sig,at:new Date().toISOString()}).catch(fail);return}
     var sd=e.target.closest&&e.target.closest('#btn-dismissed');if(sd){document.body.classList.toggle('show-dismissed');paint();return}
@@ -1339,6 +1908,55 @@ AJS = r"""
 """
 
 
+def fbar(group, selects):
+    """Thanh lọc cho 1 nhóm (data-fx). selects = [(nhãn, thuộc tính data-, [(giá trị, chữ)])]."""
+    out = []
+    for label, attr, opts in selects:
+        o = "".join(f'<option value="{E(v)}">{E(t)}</option>' for v, t in opts)
+        out.append(f'<label class="flab">{E(label)} <select class="flt" data-group="{group}" data-attr="{attr}">'
+                   f'<option value="">Tất cả</option>{o}</select></label>')
+    return f'<div class="fbar" role="group" aria-label="Lọc">{"".join(out)}<span class="fcount" data-group="{group}"></span></div>'
+
+
+STEP_DOT = {"done": "green", "part": "blue", "block": "red", "none": ""}
+STEP_TXT = {"done": "Xong", "part": "Đang làm", "block": "Cần xử lý", "none": "Chưa tới"}
+
+
+def render_detail(feature, key, label, ce, d):
+    """Bảng chi tiết của 1 ô trục tiến độ: các bước con + danh sách việc còn lại (ẩn, bấm ô mới hiện)."""
+    did = f"det-{feature}-{key}"
+    h = [f'<section class="det" id="{E(did)}" hidden aria-label="{E(feature)} · {E(label)}">'
+         f'<div class="dethead"><h3><span class="mono">{E(feature)}</span> · {E(label)}</h3>'
+         + (link(ce["path"], "Mở file ↗", ce.get("line"), "mini") if ce.get("path") else "")
+         + '<button type="button" class="detclose mini ghost" aria-label="Đóng chi tiết">Đóng</button></div>']
+    steps = d.get("steps", [])
+    if steps:
+        cur = d.get("current")
+        h.append('<ol class="stepper">')
+        for i, s_ in enumerate(steps, 1):
+            here = " here" if s_["label"] == cur else ""
+            body = (f'<span class="sn">{i}</span><span class="sl">{E(s_["label"])}</span>'
+                    f'<span class="chip {STEP_DOT[s_["state"]]}">{E(STEP_TXT[s_["state"]])}</span>'
+                    f'<span class="st">{E(s_["text"])}</span>')
+            h.append(f'<li class="step {s_["state"]}{here}">'
+                     + (link(s_["path"], body, s_.get("line"), "steplink") if s_.get("path") else body) + "</li>")
+        h.append("</ol>")
+    for g in d.get("groups", []):
+        h.append('<div class="detg"><h4>' + (link(g["path"], E(g["title"]), g.get("line")) if g.get("path") else E(g["title"]))
+                 + (f' <span class="muted">· {E(g["meta"])}</span>' if g.get("meta") else "") + "</h4>")
+        if g["items"]:
+            h.append("<ul>" + "".join(
+                f'<li><span class="tag">{E(it["tag"])}</span>'
+                + (link(it["path"], E(it["text"]), it.get("line")) if it.get("path") else E(it["text"]))
+                + (f'<span class="muted"> — {E(it["note"])}</span>' if it.get("note") else "") + "</li>"
+                for it in g["items"]) + "</ul>")
+        h.append("</div>")
+    if not steps and not d.get("groups"):
+        h.append(f'<p class="muted">{E(d.get("empty", "Chưa tới bước này."))}</p>')
+    h.append("</section>")
+    return "".join(h)
+
+
 def render(m, artifact=False):
     A = artifact
     v = m["verdict"]
@@ -1358,6 +1976,7 @@ def render(m, artifact=False):
       '<div class="tools">'
       + ('<span class="pendbar" id="pending" hidden></span><span class="muted" id="sync-note" role="status" aria-live="polite" style="font-size:12px"></span>' if A else
          (f'<span class="meta">Thao tác (kéo thẻ, reset stale…): <a href="{E(url)}" target="_blank" rel="noopener">bản artifact</a></span>' if url else ""))
+      + '<input type="search" id="q" class="qbox" placeholder="Tìm: mã, tên, nội dung…" aria-label="Tìm trên dashboard">'
       + '<span class="seg" role="group" aria-label="Mở link bằng">Mở bằng<span class="sc">'
       '<button type="button" data-mode="local" aria-pressed="true">VS Code</button>'
       '<button type="button" data-mode="gh" aria-pressed="false">GitHub</button></span></span></div></header>'
@@ -1434,14 +2053,15 @@ def render(m, artifact=False):
         w('<p class="muted">Không còn việc nào khác.</p>')
     else:
         has_dm = any(x["due"] or x["manual"] for x in rest)  # cột Hạn · Ưu tiên toàn rỗng thì ẩn
+        w(fbar("work", [("Loại", "kind", [("BL", "Task backlog"), ("Máy", "Việc máy phát hiện")])]))
         w('<div class="scroll"><table class="work"><thead><tr><th class="num">Điểm</th><th>Việc</th><th>Vì sao</th>'
           '<th>Xong khi</th>' + ('<th>Hạn · Ưu tiên</th>' if has_dm else '') + '<th>Mở ở đâu</th>' + ("<th></th>" if A else "") + '</tr></thead><tbody>')
         for i, x in enumerate(rest):
             parts = "<br>".join(f"{k} {v}" for k, v in x["parts"].items() if v) or "0"
             cls = ["more-row"] if i >= 10 else []
-            attrs = ""
+            attrs = f' data-fx="work" data-kind="{E(x["kind"])}"'
             if x["kind"] == "Máy":
-                attrs = f' data-wid="{E(x["id"])}" data-sig="{E(x["title"])}"'
+                attrs += f' data-wid="{E(x["id"])}" data-sig="{E(x["title"])}"'
             tag = f'<span class="tag{" tag-m" if x["kind"] == "Máy" else ""}">{E(x["id"] if x["kind"] == "BL" else "Máy")}</span>'
             dm = " · ".join(v for v in [E(x["due"]) if x["due"] else "", f'<span class="chip">{E(x["manual"])}</span>' if x["manual"] else ""] if v) or '<span class="muted">—</span>'
             opens = []
@@ -1485,7 +2105,7 @@ def render(m, artifact=False):
         for x in cs:
             kind = {"task": ("BL" if x["id"].startswith("BL-") else "Task"), "run": "Run card", "worktree": "Worktree"}.get(x["kind"], x["kind"])
             drag = bool(A and x.get("moves"))
-            w(f'<div class="kcard bcard" data-bid="{E(x["id"])}" data-col="{E(key)}" data-moves="{E(",".join(x.get("moves", [])))}" '
+            w(f'<div class="kcard bcard" data-fx="flow" data-bid="{E(x["id"])}" data-col="{E(key)}" data-moves="{E(",".join(x.get("moves", [])))}" '
               f'data-title="{E(x["title"][:120])}"' + (' draggable="true"' if drag else "") + '>'
               f'<span class="frow"><span class="tag{"" if kind == "BL" else " tag-m"}">{E(x["id"] if kind == "BL" else kind)}</span>'
               + (f'<span class="km mono">{E(x["feature"])}</span>' if x.get("feature") else "") + '</span>'
@@ -1499,30 +2119,31 @@ def render(m, artifact=False):
     # Feature
     w('<div role="tabpanel" id="p-feat" aria-labelledby="t-feat" hidden>')
     w('<p class="muted" style="margin:0">Ô đậm = xong · ô nhạt = đang làm · viền đỏ = đang giữ feature lại · xám = chưa tới. '
-      'Bấm ô để mở file. Feature chậm nhất lên đầu. '
+      'Bấm ô để xem chi tiết từng bước. Feature chậm nhất lên đầu. '
       '<button type="button" id="btn-hidden" class="seg-btn" aria-pressed="false">Hiện cột ẩn URD/BRD/PRD</button></p>')
-    cols = STAGES + HIDDEN_STAGES
-    w(f'<div class="scroll"><div class="stages" style="--n:{len(STAGES)}" id="stages">')
+    cols = STAGES + [("dec", "Quyết định")] + HIDDEN_STAGES
+    w(f'<div class="scroll"><div class="stages" style="--n:{len(STAGES) + 1}" id="stages">')
     neck = m.get("neck")
     w("<span></span>" + "".join(f'<span class="h{" neck" if k == neck else ""}">{E(l)}'
                                 + (f'<br>{chip("red", "triangle-alert", "Nút thắt")}' if k == neck else "") + '</span>' for k, l in STAGES)
+      + '<span class="h">Quyết định</span>'
       + "".join(f'<span class="h hidden-col">{E(l)}</span>' for _, l in HIDDEN_STAGES))
     for r in m["features"]:
         w(f'<span class="f" title="{E(r["feature"])}">{E(r["feature"])}</span>')
-        for k, _ in cols:
+        for k, lab in cols:
             ce = r["stages"][k]
             hid = " hidden-col" if k in dict(HIDDEN_STAGES) else ""
             cls = f'cell {ce["state"]}{hid}' + (" neckc" if k == neck and ce["state"] == "block" else "")
-            t = E(ce["text"])
-            if ce.get("note"):
-                cls_title = f' title="{E(ce["note"])}"'
-            else:
-                cls_title = ""
-            if ce.get("path"):
-                w(link(ce["path"], t, ce.get("line"), cls).replace("<a ", f"<a{cls_title} ", 1))
-            else:
-                w(f'<span class="{cls}"{cls_title}>{t}</span>')
+            did = f'det-{r["feature"]}-{k}'
+            tip = f'{r["feature"]} · {lab}' + (f' — {ce["note"]}' if ce.get("note") else "") + " · bấm xem chi tiết"
+            w(f'<button type="button" class="{cls}" data-det="{E(did)}" aria-expanded="false" title="{E(tip)}" aria-label="{E(tip)}">'
+              f'{E(ce["text"]) or "&nbsp;"}</button>')
     w("</div></div>")
+    w('<div id="detwrap">')
+    for r in m["features"]:
+        for k, lab in cols:
+            w(render_detail(r["feature"], k, lab, r["stages"][k], r["details"].get(k, {})))
+    w("</div>")
     w("<style>body.show-hidden #stages{--n:%d}</style>" % len(cols))
     un = m.get("unassigned", [])
     if un:
@@ -1577,13 +2198,44 @@ def render(m, artifact=False):
               f'<span class="hn num">{p_["open"]} · {p_["closed"]}</span>')
             prev_d = p_["date"]
         w("</div></div>")
-    oq_rows = [o for r in m["features"] for o in r["oq_rows"] if o["open"]]
-    w(f'<div class="panel"><h2>Câu hỏi mở ({len(oq_rows)})</h2><div class="scroll"><table><thead><tr><th>Feature</th><th>Mã</th><th>Câu hỏi</th></tr></thead><tbody>')
+    oq_rows = sorted((o for r in m["features"] for o in r["oq_rows"] if o["open"]), key=lambda o: o["sent"])
+    n_int = sum(1 for o in oq_rows if not o["sent"])
+    w(f'<div class="panel"><h2>Câu hỏi mở ({len(oq_rows)})</h2>'
+      f'<p class="muted" style="margin:0;font-size:12px">{n_int} nội bộ chưa gửi khách · {len(oq_rows) - n_int} đã hỏi khách, chờ trả lời. '
+      'Đã hỏi = ô trả lời bắt đầu bằng “Còn mở”, “Một phần” hoặc “Ngoài”; còn lại tính là nội bộ. '
+      + ('Bấm <i>Chi tiết</i> để xem đủ ngữ cảnh và trả lời; câu trả lời ghi vào tài liệu khi chạy <code>/dashboard sync</code>.</p>'
+         if A else (f'Trả lời trực tiếp trên <a href="{E(url)}" target="_blank" rel="noopener">bản artifact</a>.</p>' if url else '</p>'))
+      + fbar("oq", [("Feature", "feat", [(f, f) for f in sorted({o["path"].split("/")[1] for o in oq_rows})]),
+                    ("Đã gửi khách?", "sent", [("internal", "Nội bộ, chưa gửi"), ("sent", "Đã hỏi khách")])])
+      + '<div class="scroll"><table class="oqt"><thead><tr><th>Feature</th><th>Mã</th><th>Câu hỏi</th><th>Đã gửi khách?</th><th></th></tr></thead><tbody>')
     if not oq_rows:
-        w('<tr><td colspan="3" class="muted">Không còn câu hỏi mở nào.</td></tr>')
-    for o in oq_rows:
+        w('<tr><td colspan="5" class="muted">Không còn câu hỏi mở nào.</td></tr>')
+    for i, o in enumerate(oq_rows):
         feat = o["path"].split("/")[1]
-        w(f'<tr><td>{E(feat)}</td><td class="mono">{link(o["path"], E(o["id"]), o["line"])}</td><td>{E(o["question"][:160])}</td></tr>')
+        sent_chip = '<span class="chip blue">Đã hỏi khách</span>' if o["sent"] else '<span class="chip yellow">Nội bộ, chưa gửi</span>'
+        search = " ".join([feat, o["id"], o["heading"]] + [c for _, c in o["cols"]])
+        key = f'oq:{o["path"]}#{o["id"]}'
+        w(f'<tr data-fx="oq" data-feat="{E(feat)}" data-sent="{"sent" if o["sent"] else "internal"}" data-s="{E(search)}" data-oqkey="{E(key)}">'
+          f'<td>{E(feat)}</td><td class="mono">{link(o["path"], E(o["id"]), o["line"])}</td><td>{E(o["question"][:160])}</td><td>{sent_chip}</td>'
+          f'<td><button type="button" class="oq-toggle mini ghost" aria-expanded="false" aria-controls="oqd-{i}">Chi tiết{" · trả lời" if A and o["answerable"] else ""}</button></td></tr>')
+        dl = "".join(f"<dt>{E(h)}</dt><dd>{E(c)}</dd>" for h, c in o["cols"])
+        ans = ""
+        if A and o["answerable"]:
+            req = {"type": "oq-answer", "path": o["path"], "line": o["line"], "oq": o["id"], "feature": feat,
+                   "question": o["question"][:120]}
+            ans = (f'<div class="oqans" data-key="{E(key)}" data-req=\'{E(json.dumps(req, ensure_ascii=False))}\'>'
+                   f'<label for="oqa-{i}">Trả lời của anh (ghi vào cột “{E(o["cols"][-1][0])}”)</label>'
+                   f'<textarea id="oqa-{i}" maxlength="2000" placeholder="Nhập câu trả lời hoặc quyết định…"></textarea>'
+                   f'<label class="flab"><input type="checkbox" class="oq-close"> Chốt luôn câu này (ô trả lời thành “Đã chốt …”, OQ đóng)</label>'
+                   '<div class="frow"><button type="button" class="oq-send mini">Gửi trả lời</button>'
+                   '<button type="button" class="oq-cancel mini ghost" hidden>Huỷ yêu cầu</button>'
+                   '<span class="oq-st muted"></span></div></div>')
+        elif A:
+            ans = ('<p class="muted" style="margin:0;font-size:12px">Bảng này chưa có cột Trả lời nên không ghi được từ dashboard. '
+                   'Trả lời trong tài liệu (mở link ở trên).</p>')
+        w(f'<tr class="oqd" id="oqd-{i}" hidden><td colspan="5"><div class="oqbox">'
+          f'<p class="muted" style="margin:0;font-size:12px">Mục: {E(o["heading"] or "—")} · {link(o["path"], E(where(o["path"], o["line"])), o["line"])}</p>'
+          f'<dl>{dl}</dl>{ans}</div></td></tr>')
     w("</tbody></table></div></div></div>")
 
     # Kanban
@@ -1594,6 +2246,7 @@ def render(m, artifact=False):
            if A else (f'Kéo thả đổi status trên <a href="{E(url)}" target="_blank" rel="noopener">bản artifact</a>.' if url
                       else "Kéo thả đổi status trên bản artifact (publish bằng <code>/dashboard</code>)."))
     w(f'<p class="muted" style="margin:0">{len(kb["cards"])} doc có status · {n_child} doc đi theo doc chỉ mục · {len(kb["loose"])} doc không thuộc nhóm nào. {how}</p>')
+    w(fbar("kb", [("Feature", "feat", [(f, f) for f in sorted({x["feature"] or "_dự án" for x in kb["cards"]})])]))
     w('<div class="scroll"><div class="kb">')
     for key, label in KANBAN:
         cs = [x for x in kb["cards"] if x["col"] == key]
@@ -1605,7 +2258,7 @@ def render(m, artifact=False):
             meta = " · ".join(s for s in [x["type"], x["feature"], x["updated"],
                                           f"trước: {x['prev']}" if key == "stale" and x["prev"] else ""] if s)
             dattr = (f' data-path="{E(x["path"])}" data-status="{E(x["status"])}" data-prev="{E(x["prev"])}" '
-                     f'data-title="{E(x["title"])}"' + (' draggable="true"' if A else ""))
+                     f'data-title="{E(x["title"])}" data-fx="kb" data-feat="{E(x["feature"] or "_dự án")}"' + (' draggable="true"' if A else ""))
             w(f'<div class="kcard"{dattr}>{doc_chip(x["status"])}{link(x["path"], E(x["title"]))}<span class="km">{E(meta)}</span>'
               + ('<span class="pend" hidden></span><select class="kmove" aria-label="Chuyển sang cột"></select>' if A else ""))
             if x["children"]:
@@ -1628,7 +2281,7 @@ def render(m, artifact=False):
             w(f'<div class="kcol fcol" data-col="{key}"><h3><span class="dot {fdot}"></span>{E(label)} <span class="n">{len(cs)}</span></h3><div class="kbody">')
             for x in cs:
                 lsac, licon = LEVEL_CHIP.get(x["level"], ("gray", "info"))
-                w(f'<div class="kcard fcard" data-fid="{E(x["id"])}" data-col="{E(x["col"])}"' + (' draggable="true"' if A else "") + '>'
+                w(f'<div class="kcard fcard" data-fx="fig" data-fid="{E(x["id"])}" data-col="{E(x["col"])}"' + (' draggable="true"' if A else "") + '>'
                   f'<span class="frow">{chip(lsac, licon, x["level"])}<span class="km mono">{E(x["code"])} · {E(x["feature"])}</span></span>'
                   f'<span>{E(re.sub(r"`", "", x["what"])[:160])}</span>'
                   f'<span class="km">{link(x["report"], E(re.sub(r"`", "", x["where"])[:90]))}</span>'
@@ -1642,29 +2295,67 @@ def render(m, artifact=False):
         w('<div class="panel"><h2>Doc không có status</h2><ul>' + "".join(f"<li>{link(p, E(p))}</li>" for p in kb["loose"]) + "</ul></div>")
     w("</div>")
 
-    # Nguồn khách
+    # Nguồn khách — nguồn cần feed vào brainstorm: feed vào đâu, tới đâu, còn thiếu gì, vấn đề nào chưa giải quyết
     srcs = m["sources"]
     w('<div role="tabpanel" id="p-src" aria-labelledby="t-src" hidden>')
-    w('<p class="muted" style="margin:0">Thanh = mục đã đối chiếu / tổng mục (sổ <code>docs-input/_coverage/</code>). Nguồn ít được xử lý nhất lên đầu. Bấm mã để mở nguồn, bấm số để mở sổ đối chiếu.</p>')
-    def src_key(x):
+    feedable = [x for x in srcs if x["fstate"] != "ref"]
+    nst = {k: sum(1 for x in feedable if x["fstate"] == k) for k in ("unread", "partial", "done")}
+    n_iss = sum(1 for x in feedable if x["open_tasks"] or x["warn"])
+    w(f'<p class="muted" style="margin:0"><b>{len(feedable)} nguồn cần feed vào brainstorm</b>: {nst["unread"]} chưa đọc · '
+      f'{nst["partial"]} đang đối chiếu · {nst["done"]} đã feed đủ · {n_iss} nguồn còn vấn đề chưa giải quyết (task backlog khác việc feed, hoặc ghi chú ⚠). '
+      'Số lấy từ sổ đối chiếu <code>docs-input/_coverage/</code> (từng mục) và task backlog còn mở. Bấm <i>Chi tiết</i> để xem từng mục còn thiếu.</p>')
+    order = {"partial": 0, "unread": 1, "done": 2, "ref": 3}
+    feats = sorted({f for x in srcs for f in x["targets"] + x["missing_feats"]})
+    w(fbar("src", [("Trạng thái", "st", [("unread", "Chưa đọc"), ("partial", "Đang đối chiếu"), ("done", "Đã feed đủ"), ("ref", "Tham khảo")]),
+                   ("Feed vào", "feat", [(f, f) for f in feats] + [("none", "Chưa gán")]),
+                   ("Vấn đề", "iss", [("open", "Còn việc chưa giải quyết"), ("clear", "Không còn")]),
+                   ("Nhóm", "group", [(g, g) for g in sorted({x["group"] for x in srcs})])]))
+    SCHIP = {"unread": ("yellow", "clock"), "partial": ("blue", "pen-line"), "done": ("green", "circle-check"), "ref": ("gray", "info")}
+    w('<div class="panel"><div class="scroll"><table class="srct"><thead><tr><th>Mã</th><th>Nguồn</th><th>Feed vào brainstorm</th>'
+      '<th>Trạng thái</th><th>Còn thiếu</th><th>Chưa giải quyết</th><th></th></tr></thead><tbody>')
+    for i, x in enumerate(sorted(srcs, key=lambda x: (order[x["fstate"]], -len(x["pending"]), x["id"]))):
         r = x["ratio"]
-        if x["feed"].startswith("➖"):
-            return (3, 0, x["id"])
+        c = x["cnt"]
+        tg = "".join(f'<span class="chip">{E(f)}</span>' for f in x["targets"])
+        tg += "".join(f'<span class="chip yellow" title="feature chưa tạo">{E(f)} · chưa có</span>' for f in x["missing_feats"])
+        if not tg:
+            tg = '<span class="muted">' + ("—" if x["fstate"] == "ref" else "Chưa gán") + "</span>"
+        sac, icon = SCHIP[x["fstate"]]
+        stt = chip(sac, icon, x["flabel"])
         if r:
-            return (1, r[0] / r[1] if r[1] else 1, x["id"])
-        return (0, 0, x["id"])
-    un_by = {}
-    for u in m.get("unassigned", []):
-        un_by.setdefault(u["src"], []).append(u)
-    w('<div class="panel"><div class="scroll"><table><thead><tr><th>Mã</th><th>Tên</th><th>Nhóm</th><th>Đối chiếu</th><th>Chưa gắn feature</th><th>Feed</th></tr></thead><tbody>')
-    for x in sorted(srcs, key=src_key):
-        r = x["ratio"]
-        pct = int(100 * r[0] / r[1]) if r and r[1] else 0
-        bar = (f'<div class="pbar"><i style="width:{pct}%"></i></div>' + link(x["ledger"], f"{r[0]}/{r[1]}", None, "num")) if r else ""
-        w(f'<tr><td class="mono">{link("docs-input/" + x["file"], E(x["id"]))}</td><td>{E(x["name"])}</td>'
-          f'<td class="muted">{E(x["group"])}</td><td class="pcell">{bar}</td>'
-          f'<td class="num">{link(un_by[x["id"]][0]["path"], str(len(un_by[x["id"]])) + " mục", un_by[x["id"]][0]["line"]) if x["id"] in un_by else ""}</td>'
-          f'<td>{E(x["feed"].split(" ")[0])}</td></tr>')
+            pct = int(100 * r[0] / r[1]) if r[1] else 0
+            stt += f'<div class="pbar"><i style="width:{pct}%"></i></div>' + link(x["ledger"], f"{r[0]}/{r[1]} mục", None, "num")
+        stt += "".join('<br><span class="muted" style="font-size:11px">việc feed: ' + link("_workspace/backlog.md", E(t["id"]), t["line"]) + "</span>"
+                       for t in x["feed_tasks"])
+        miss = " · ".join(v for v in [f'{c["todo"]} ⬜ chưa đưa vào' if c["todo"] else "",
+                                      f'{c["redo"]} 🔄 bản mới' if c["redo"] else "",
+                                      f'{c["moved"]} ➡ feature chưa có' if c["moved"] else ""] if v)
+        if not miss:
+            miss = '<span class="muted">Chưa lập sổ đối chiếu</span>' if x["fstate"] == "unread" else '<span class="muted">—</span>'
+        iss = []
+        for t in x["open_tasks"]:
+            iss.append(link("_workspace/backlog.md", f'<span class="tag">{E(t["id"])}</span>', t["line"]) + E(t["task"][:90]))
+        for wn in x["warn"]:
+            iss.append(f'<span class="chip yellow">⚠ lưu ý</span> {E(wn[:160])}')
+        iss_html = "<br>".join(iss) if iss else '<span class="muted">Không còn</span>'
+        fattr = " ".join(x["targets"] + x["missing_feats"]) or "none"
+        has_det = bool(x["pending"] or iss)
+        w(f'<tr data-fx="src" data-st="{x["fstate"]}" data-group="{E(x["group"])}" data-iss="{"open" if x["open_tasks"] or x["warn"] else "clear"}" '
+          f'data-feat="{E(fattr)}" data-s="{E(x["id"] + " " + x["name"] + " " + fattr)}">'
+          f'<td class="mono">{link("docs-input/" + x["file"], E(x["id"]))}</td><td>{E(x["name"])}<br><span class="muted" style="font-size:11px">{E(x["group"])} · nhận {E(x["received"])}</span></td>'
+          f'<td>{tg}</td><td class="pcell">{stt}</td><td>{miss}</td><td class="iss">{iss_html}</td>'
+          + (f'<td><button type="button" class="oq-toggle mini ghost" aria-expanded="false" aria-controls="srcd-{i}">Chi tiết</button></td>' if x["pending"] else "<td></td>")
+          + "</tr>")
+        if x["pending"]:
+            by = {}
+            for pd in x["pending"]:
+                by.setdefault(pd["feat"] or "chưa gán", []).append(pd)
+            body = "".join(
+                f'<h4>{E("Chưa gán feature" if f == "chưa gán" else f)} <span class="muted">({len(ps)} mục)</span></h4><ul>'
+                + "".join(f'<li><span class="chip">{E(pd["mark"])}</span> {link(x["ledger"], E(pd["muc"]), pd["line"])}'
+                          + (f'<span class="muted"> — {E(pd["note"])}</span>' if pd["note"] else "") + "</li>" for pd in ps)
+                + "</ul>" for f, ps in sorted(by.items()))
+            w(f'<tr class="oqd" id="srcd-{i}" hidden><td colspan="7"><div class="srcbox">{body}</div></td></tr>')
     w("</tbody></table></div></div></div>")
 
     # Sức khỏe
@@ -1679,7 +2370,7 @@ def render(m, artifact=False):
         ln = line_of(d["path"], r"^status:")
         up = (f'<span class="muted">← upstream </span>{link(s["upstream"], E(where(s["upstream"])))}<span class="muted"> đổi {E(s["date"])}</span>'
               if s and (ROOT / s["upstream"]).exists() else (f'<span class="muted">← {E(s["upstream"])} đổi {E(s["date"])}</span>' if s else ""))
-        w(f'<li>{link(d["path"], E(d["path"]) + f" <span class=muted>· dòng {ln}</span>", ln)}{up}'
+        w(f'<li data-fx="health">{link(d["path"], E(d["path"]) + f" <span class=muted>· dòng {ln}</span>", ln)}{up}'
           + act("Đã biết, reset", f"reset:{d['path']}", {"type": "stale-reset", "path": d["path"]}, A, "act mini ghost")
           + act("Cần rà", f"review:{d['path']}", {"type": "stale-review", "path": d["path"]}, A, "act mini ghost") + "</li>")
     if not sd:
@@ -1765,7 +2456,7 @@ def main():
         c = m["counts"]
         print(f"Dashboard: {out.relative_to(ROOT) if out.is_absolute() and ROOT in out.parents else out}")
         print(f"  Verdict: {m['verdict']['title']}")
-        print(f"  {c['features']} feature · {c['docs_md']} doc · {c['open_oq']} OQ mở · {c['sources']} nguồn · {c['backlog_open']} task mở")
+        print(f"  {c['features']} feature · {c['docs_md']} doc · {c['open_oq']} OQ mở ({c['open_oq_internal']} nội bộ chưa gửi khách) · {c['sources']} nguồn · {c['backlog_open']} task mở")
         print(f"  Ghi đè ~{len(page.encode()) // 1024} KB" + (" (file đã có)" if out.exists() else " (file mới)"))
         return
     out.parent.mkdir(parents=True, exist_ok=True)

@@ -18,15 +18,17 @@ Toàn bộ số liệu VÀ HTML do **`_scripts/dashboard-build.py`** sinh tất 
 
 Có **2 bản** cùng dữ liệu: bản local `docs/_shared/dashboard.html` (chỉ xem, link mở VS Code) và **bản artifact**
 trên claude.ai (link cố định ở `.claude/state/dashboard.json`) — có thao tác: kéo thẻ kanban, "Đã biết, reset" /
-"Cần rà" cho stale, "Đưa vào backlog" / "Đã biết" cho việc máy, kéo thẻ Review Figma. Thao tác thành **yêu cầu**
+"Cần rà" cho stale, "Đưa vào backlog" / "Đã biết" cho việc máy, kéo thẻ Review Figma, **trả lời câu hỏi mở** (Chi tiết → ô trả lời, tuỳ chọn chốt luôn). Thao tác thành **yêu cầu**
 trong kho của trang; `/dashboard sync` áp vào repo.
 
 Trang có 5 tab (thứ tự = thứ tự quan trọng):
 1) **Hôm nay** — verdict theo giai đoạn + 5 ô (Chờ bạn · Câu hỏi mở · Stale chờ xác nhận · Nguồn chưa feed · Hàng việc) + làn Chờ bạn + **hàng việc chung** (task backlog + việc máy phát hiện, xếp theo `priority_score`).
-2) **Feature** — trục tiến độ 8 cột Nguồn → Brainstorm → Chốt OQ → SRS → Userflow → Figma → US/AC → Test (+3 cột ẩn URD/BRD/PRD), ô Tầng SaaS · Tham số P chưa chốt · Figma, bảng OQ còn mở có link tới đúng dòng.
+2) **Feature** — trục tiến độ 8 cột Nguồn → Brainstorm → Chốt OQ → SRS → Userflow → Figma → US/AC → Test (+3 cột ẩn URD/BRD/PRD), ô Tầng SaaS · Tham số P chưa chốt · Figma, bảng OQ còn mở có link tới đúng dòng. Ô chỉ hiện trạng thái chung; **bấm ô mở bảng chi tiết** (14/10): các bước con + danh sách việc còn lại của đúng cột đó (`stage_details()`).
 3) **Kanban** — 6 cột Draft · In Review · Revisions · Approved · Shipped · Stale; doc không có status đi theo doc chỉ mục cùng folder.
-4) **Nguồn khách** — mỗi SRC: tên, nhóm, thanh đối chiếu n/m (link sổ `_coverage/`), trạng thái feed; nguồn ít xử lý nhất lên đầu.
+4) **Nguồn khách** — nguồn cần feed vào brainstorm (14/10): mỗi SRC có *Feed vào brainstorm* (feature nhận mục, kể cả feature chưa tạo), *Trạng thái* (Chưa đọc / Đang đối chiếu n/m / Đã feed đủ / Tham khảo), *Còn thiếu* (⬜ chưa đưa vào · 🔄 bản mới · ➡ feature chưa có), *Chưa giải quyết* (task backlog còn mở khác việc feed + ghi chú ⚠ ở sổ nguồn); *Chi tiết* liệt kê từng mục còn thiếu theo feature. Lọc theo Trạng thái, Feed vào, Vấn đề, Nhóm.
 5) **Sức khỏe vault** — doc stale kèm upstream gây ra, dòng log stale trỏ file đã xoá, độ tươi (chỉ theo tuổi), review quá hạn.
+
+> **Tìm + lọc (14/10):** ô tìm ở đầu trang lọc mọi tab (bỏ dấu tiếng Việt); thanh lọc riêng cho Hàng việc (Loại), Câu hỏi mở (Feature, Đã gửi khách?), Kanban (Feature), Nguồn khách (Nhóm, Feed). Câu hỏi mở chia *Nội bộ, chưa gửi* / *Đã hỏi khách* theo ô trả lời (bắt đầu "Còn mở"/"Một phần"/"Ngoài" = đã hỏi); *Chi tiết* hiện đủ các cột của dòng OQ + mục chứa bảng.
 
 > **Nguyên tắc report tốt (BẮT BUỘC theo):** kết luận lên trên, bằng chứng xuống dưới. Feature/việc **có vấn đề xếp trước**. Giữ mã thật (FR/OQ/BL) + lệnh chạy. Muốn đổi bố cục/logic → sửa `dashboard-build.py`, KHÔNG sửa HTML sinh ra.
 
@@ -132,6 +134,8 @@ Feature không tồn tại / vault rỗng → theo `feature-bootstrap.md` Nhóm 
    phần còn lại là **L1** (1 lần cho cả lô). Mục ⚠ upstream chưa duyệt: hỏi anh từng mục; đồng ý → thêm `"confirm_upstream": true`.
    Chạy trong `/loop` mà có mục cần L1 → chỉ áp `board-move`, giữ phần còn lại `pending`, báo 1 dòng "N yêu cầu chờ anh duyệt".
 4) Anh `Y` → `CLAUDE_CHANGELOG_AUTHOR=@<handle> python3 _scripts/dashboard-apply.py <file>` → JSON kết quả `{id, state, note}`.
+   Yêu cầu `oq-answer` ghi vào ô cột Trả lời của dòng `| OQ-n |` (chốt → "Đã chốt {ngày} (dashboard): …", không chốt → nối
+   "Trả lời {ngày} (dashboard): …"), tự ghi changelog + chạy hook lan stale. Bảng không có cột Trả lời / OQ đã đóng → `rejected`.
    Kết quả `state: "claude"` = việc Claude làm tiếp (quy trình chuyển từ `/board`):
    - **Duyệt card + chạy** (card Chờ duyệt → Đang chạy): sửa card trong worktree (`approved: <hôm nay>`,
      `run_state: running`, Nhật ký "duyệt qua dashboard"), `git -C <worktree> commit`, rồi mở Terminal:
@@ -164,8 +168,10 @@ Feature không tồn tại / vault rỗng → theo `feature-bootstrap.md` Nhóm 
 | Nguồn | Mục sổ `docs-input/_coverage/*.md` thuộc feature: chắc chắn khi `➡ {feature}` hoặc path `docs/{feature}/` ở cột Ở đâu (1 mục có thể thuộc nhiều feature); đoán khi mục còn ⏳/⬜ nhắc đúng 1 tên feature ở Ở đâu/Ghi chú. `✅/tổng`; còn ⬜/⏳ nhạt · có 🔄 chặn · không mục nào xám. Mục còn chờ không gắn được feature → dòng "N mục nguồn chưa gắn feature" (tab Feature) + cột "Chưa gắn feature" (tab Nguồn khách) |
 | Hàng việc · `priority_score` | Chặn 40 khi việc chạm **ô chặn chính** (ô viền đỏ đầu tiên) của feature, 25 khi chạm ô viền đỏ khác, 0 nếu không — "chạm" = đường dẫn file của ô hoặc từ khoá cột có trong nội dung việc + Xong khi (KHÔNG xét cột Nguồn; ô OQ chỉ theo từ khoá vì dùng chung file brainstorm) + Hạn 25 (≤7 ngày) / 15 (≤14 ngày) từ cột **Hạn** backlog + Lan 4đ mỗi feature/doc nhắc tới (trần 20) + Tuổi 1đ/2 ngày (trần 15). Cột **Ưu tiên** backlog: `P0` luôn đầu, `để sau` luôn cuối. Việc máy: doc stale (gom theo feature), OQ mở chưa có task, lint FAIL, audit Figma Cao, nguồn 🔄, worktree không theo `feat/*`, việc engine (review kẹt, US thiếu AC…) |
 | Tầng SaaS · Tham số P | FAIL/WARN `saas-layer-lint` cộng trên mọi spec · dòng `P-…` trong `docs/_product/tenant-parameters.md` có "chưa chốt" |
-| Brainstorm | `brainstorms/{feature}.md`: approved đậm · stale chặn · còn lại nhạt |
+| Brainstorm | `brainstorms/{feature}.md`: approved đậm · stale chặn · còn lại nhạt. Chữ trong ô = bước đang đứng trong 5 bước ① Đối chiếu nguồn ② Phỏng vấn (dòng `> Phỏng vấn xong đủ N phần ngày …`) ③ Hỏi khách (vòng N = biên bản `docs/meetings/*.md` link tới brainstorm, tiêu đề có "vòng N"; ngày gửi = `date` của deck biên bản link tới) ④ Review ⑤ Chốt |
 | Chốt OQ | Số OQ mở trong mọi doc của feature; còn mở + đã có brainstorm = chặn |
+| Quyết định (cột thông tin, không tính tiến độ) | `{n} BA · {m} Delta`; chi tiết gom theo người chốt × nguồn: **Delta** = bảng "## Quyết định" của biên bản `docs/meetings/*.md` link tới brainstorm (OQ phải thuộc feature; dòng không mã OQ lọc theo mã ý ở cột Ghi vào) · **BA** = dòng `_workspace/decisions.md` nhắc `docs/{feature}/`, tên feature hoặc deck/tên cũ của feature (cột Ai chốt `@szitphan`) + ý tưởng brainstorm Mục 4 nhãn `[SOP+]`/`[Mới]` (chốt khi phỏng vấn); ý `[SOP to-be]` tính cho **Delta** (thiết kế to-be của khách) · OQ đã chốt không có trong biên bản → suy người chốt từ câu trả lời (có "Delta/khách" → Delta) |
+| Nguồn tham khảo | Feature không có mục sổ đối chiếu nhưng dùng nguồn ➖ (cột Dùng ở hoặc links brainstorm) → ô `N nguồn TK`, chi tiết liệt kê các nguồn đó |
 | SRS | `srs/{feature}-spec.md`: số FR + FAIL/WARN `saas-layer-lint`; FAIL hoặc spec stale = chặn |
 | Userflow | `srs/{feature}-userflow.md` + node mồ côi từ KG |
 | Figma | Số file `screens/*.md` + audit `figma-audit` mới nhất; còn mục Cao = chặn |

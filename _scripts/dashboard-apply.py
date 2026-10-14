@@ -15,6 +15,10 @@ Loại yêu cầu:
   stale-review  {path}               thêm task BL "Rà lại {path}", Xong khi doc hết stale
   log-ack       {path, upstream}     dòng log stale trỏ file đã xoá → ghi _workspace/stale-ack.md (staleness.md là file sinh, không sửa)
   to-backlog    {title, done_when, source}  thêm task BL từ việc máy phát hiện
+  oq-answer     {path, line, oq, answer, close}  ghi trả lời vào ô cuối (cột Trả lời) của dòng `| OQ-n |`.
+                                     close=true → ô thành "Đã chốt {ngày} (dashboard): …" (OQ đóng); false → nối
+                                     "Trả lời {ngày} (dashboard): …" sau nội dung cũ. Dòng không còn / đã đóng /
+                                     bảng không có cột Trả lời → rejected.
   board-move    {item, from, to}     thẻ tab Luồng việc (gộp /board): kiểm lại với ảnh chụp mới (board-snapshot.py).
                                      Task manual Mở → Xong: script đóng dòng backlog. Card → Đang chạy (duyệt + chạy) và
                                      🔍 → Xong (duyệt land): trả state "claude" — Claude làm theo /dashboard SKILL mục Sync.
@@ -112,6 +116,61 @@ def last_line(out):
     return re.sub(r"^❌\s*", "", line)
 
 
+ANSWER_COL_RE = re.compile(r"trả lời|trạng thái|quyết định|kết quả|answer|status", re.IGNORECASE)
+CLOSED_RE = re.compile(r"^(Đã chốt|Đóng|Bỏ)", re.IGNORECASE)
+
+
+def cells_of(line):
+    return [c.strip() for c in line.strip().strip("|").split("|")]
+
+
+def oq_locate(path, oid, line):
+    """Trả (lines, index dòng OQ, header) hoặc (lines, None, lý do)."""
+    f = ROOT / path
+    if not f.exists():
+        return None, None, "file không còn"
+    lines = f.read_text(encoding="utf-8").split("\n")
+    pat = re.compile(rf"^\|\s*{re.escape(oid)}\s*\|")
+    if line and 0 < line <= len(lines) and pat.match(lines[line - 1]):
+        idx = line - 1
+    else:
+        hits = [k for k, l in enumerate(lines) if pat.match(l)]
+        if len(hits) != 1:
+            return lines, None, f"không tìm thấy duy nhất dòng {oid} (thấy {len(hits)})"
+        idx = hits[0]
+    k = idx
+    while k > 0 and lines[k - 1].startswith("|"):
+        k -= 1
+    header = cells_of(lines[k]) if k < idx else []
+    return lines, idx, header
+
+
+def after_doc_write(path, note):
+    """Ghi bằng script không kích hoạt hook PostToolUse → tự ghi changelog + chạy hook lan stale như khi Edit."""
+    author = os.environ.get("CLAUDE_CHANGELOG_AUTHOR") or run_out(["git", "config", "user.name"]) or "manual"
+    note = " ".join(note.replace("|", "\\|").split())
+    subprocess.run([sys.executable, str(ROOT / "_scripts/logbook.py"), "add", "changelog",
+                    f"| {TODAY} | /dashboard sync | {author} | `{path}` | {note} |"], cwd=ROOT, capture_output=True)
+    hook = ROOT / ".claude/hooks/post-edit-stale.sh"
+    if hook.exists():
+        subprocess.run(["bash", str(hook)], input=json.dumps({"tool_input": {"file_path": str(ROOT / path)}}),
+                       text=True, cwd=ROOT, capture_output=True, env={**os.environ, "CLAUDE_PROJECT_DIR": str(ROOT)})
+
+
+def run_out(cmd):
+    try:
+        return subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    except OSError:
+        return ""
+
+
+def oq_new_cell(old, answer, close):
+    ans = " ".join(answer.replace("|", "/").split())
+    if close:
+        return f"Đã chốt {TODAY} (dashboard): {ans}" + (f" — trước đó: {old}" if old else "")
+    return (f"{old} · " if old else "") + f"Trả lời {TODAY} (dashboard): {ans}"
+
+
 def check_one(r, seen_ack):
     """Trả (ok, mô tả thay đổi, ghi chú). ok ∈ True | False | 'confirm'."""
     t = r.get("type")
@@ -162,6 +221,18 @@ def check_one(r, seen_ack):
         if it["kind"] == "run":
             return "claude", "duyệt card + chạy", "Claude: sửa card (approved, run_state running), commit trong worktree, mở Terminal /run-task resume"
         return "claude", "duyệt land", "Claude: làm như /queue làn 🔍 (Figma nháp nếu có → wt.sh land → commit → drop)"
+    if t == "oq-answer":
+        if not (r.get("answer") or "").strip():
+            return False, "trả lời OQ", "câu trả lời rỗng"
+        lines, idx, hdr = oq_locate(path, r.get("oq", ""), r.get("line"))
+        if idx is None:
+            return False, "trả lời OQ", hdr
+        cells = cells_of(lines[idx])
+        if not hdr or len(hdr) != len(cells) or not ANSWER_COL_RE.search(hdr[-1]):
+            return False, "trả lời OQ", "bảng không có cột Trả lời — trả lời trong tài liệu"
+        if CLOSED_RE.match(cells[-1]):
+            return False, "trả lời OQ", f"{r['oq']} đã đóng trong tài liệu"
+        return True, ("chốt " if r.get("close") else "trả lời ") + r["oq"], r["answer"][:60]
     if t == "to-backlog":
         if not r.get("title") or not r.get("done_when"):
             return False, "thêm task BL", "thiếu tên việc hoặc điều kiện Xong khi"
@@ -227,6 +298,14 @@ def main():
         elif t == "board-move":
             ok_ = bl_close(r["item"], f"kéo trên dashboard {TODAY}")
             code, msg = (0, "đã đóng task") if ok_ else (1, "không tìm thấy dòng backlog")
+        elif t == "oq-answer":
+            lines, idx, _ = oq_locate(r["path"], r["oq"], r.get("line"))
+            row = lines[idx].rstrip()
+            head, old = row[:-1].rstrip().rsplit("|", 1) if row.endswith("|") else row.rsplit("|", 1)
+            lines[idx] = f"{head}| {oq_new_cell(old.strip(), r['answer'], r.get('close'))} |"
+            (ROOT / r["path"]).write_text("\n".join(lines), encoding="utf-8")
+            code, msg = 0, f"{r['oq']} {'đã chốt' if r.get('close') else 'đã ghi trả lời'} · dòng {idx + 1}"
+            after_doc_write(r["path"], f"{r['oq']} {'chốt' if r.get('close') else 'trả lời'} từ dashboard: {r['answer'][:50]}")
         elif t == "log-ack":
             acks.append(f"| {TODAY} | `{r['path']}` | `{r.get('upstream', '')}` |\n")
             code, msg = 0, "stale-ack"
