@@ -1,7 +1,7 @@
 ---
 type: backlog
 status: draft
-updated: 2026-10-14
+updated: 2026-10-15
 links:
   - docs-input/README.md
 ---
@@ -13,6 +13,7 @@ links:
 
 | ID | Việc | Nguồn | Xong khi | Trạng thái | Tạo | Xong | Bằng chứng | Hạn | Ưu tiên |
 |---|---|---|---|---|---|---|---|---|---|
+| BL-120 | Đưa vào brainstorm SIM (OQ hỏi khách) 2 điểm giao VIS ↔ SIM mà nguồn chưa nói: (1) hóa đơn tổng VETC cuối kỳ (SRC-06 3.1.3 Bước 4) sau khi VIS đối chiếu GPS có đi qua IIP/MISA như hóa đơn đầu vào thường không, ai duyệt, gắn JobID nào; (2) hóa đơn dầu mua ngoài lái xe tải lên IIP có ghép với đối soát sensor dầu VIS (SRC-06 3.6, cảnh báo "gian lận hóa đơn cấp dầu ngoài luồng") không. Chi phí VIS duyệt (vé, dầu bù, km tìm vỏ J01) có chảy sang SIM để ghép hóa đơn theo JobID không. Slug brainstorm SIM đổi thì sửa đường dẫn Xong khi | `sop/vis-du-lieu-van-hanh-xe/` · `sop/quan-ly-hoa-don-sim/` · `tich-hop/vis-sim-cong-tac-chuan-bi/` | `grep:docs/debt-management/brainstorms/debt-management.md:VETC` | ⬜ | 2026-10-14 |  |  |  |  |
 | BL-111 | Hỏi khách 2 mâu thuẫn trong bộ SIM nhận 12–14/10: (1) Hóa đơn vô chủ duyệt 2 bước (SIM 12/10 mục 3.3.4) hay 3 bước CBQL–Kế toán–Giám đốc (bản IIP đứng riêng 12/10); (2) giao dịch lỗi đối soát quá 24h tự tạo phiếu chi hoàn tiền (SRC-25 mở đầu) hay chỉ hoàn tiền sau duyệt tay (SIM 3.3). Chốt xong ghi vào sổ đối chiếu SRC-07 mục 3.3.4–3.3.5 và BL-062 | `sop/quan-ly-hoa-don-sim/` · `sop/sim-ke-khai-thue-tu-dong/` | `manual` | ⬜ | 2026-10-14 |  |  |  |  |
 | BL-085 | Port skill Figma về kit `/Users/szit/Desktop/szit/AI/kits/figma-skills`: `custom/figma-component` (bản reqwise), `custom/figma-screen` (P-24), thay `reqwise/` bằng bản 1.1.0; tách đoạn đặt tên flow của `figma-userflow` ra khỏi `reqwise/`; tham chiếu chỉ invlogis có (`status-chip-lint.py`, Chip trạng thái, `ui-review.md`) đổi thành tuỳ chọn. Làm khi 2 skill custom đã chạy thật ổn | hội thoại 2026-10-13 | `grep:/Users/szit/Desktop/szit/AI/kits/figma-skills/custom/figma-component/SKILL.md:Hai đường ghi && grep:/Users/szit/Desktop/szit/AI/kits/figma-skills/custom/figma-screen/SKILL.md:visual-audit\.py && grep:/Users/szit/Desktop/szit/AI/kits/figma-skills/reqwise/figma-bpmn/SKILL.md:cheat` | ⬜ | 2026-10-13 |  |  |  |  |
 | BL-003 | Reverse SRS cũ LG sang bộ SRS chuẩn (`/reverse-doc`) | `srs-cu/` | `grep:docs/_reverse/*/*-reverse-spec.md:lg-srs-export` | ⬜ | 2026-10-02 |  |  |  |  |
@@ -89,6 +90,34 @@ links:
 | BL-117 | Hoàn tất sổ đối chiếu SRC-21 (còn mục chưa xử lý) | `ui-common/app/app-common-rules.md` | `fed:ui-common/app/app-common-rules.md` | ⬜ | 2026-10-14 |  |  |  |  |
 | BL-118 | Hoàn tất sổ đối chiếu SRC-22 (còn mục chưa xử lý) | `srs-cu/lg-srs-export.md` | `fed:srs-cu/lg-srs-export.md` | ⬜ | 2026-10-14 |  |  |  |  |
 | BL-119 | Hoàn tất sổ đối chiếu SRC-23 (còn mục chưa xử lý) | `srs-cu/srs-mobile/srs-mobile.md` | `fed:srs-cu/srs-mobile/srs-mobile.md` | ⬜ | 2026-10-14 |  |  |  |  |
+| BL-121 | Chốt cấu trúc module vào Feature Map PRD + object-map (DEC-079): Danh mục cấp doanh nghiệp chia theo miền, slug feature mới (`product-catalog`, `partners`, `cost-catalog`, `organization`, `repair-quotation`…) | — | `grep:docs/_product/prd.md:product-catalog` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-122 | Định nghĩa thuật ngữ dev–BA BusinessDocument (chứng từ nghiệp vụ) và ChangeRequest (yêu cầu thay đổi danh mục) — vấn đề ISS-07 | — | `grep:docs/_shared/definitions.md:ChangeRequest` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-123 | Script kiểm kế thừa reverse → tài liệu mới: liệt kê FR/BR/E hiện trạng chưa được dẫn ở brainstorm/SRS mới hoặc chưa ghi "Bỏ" (DEC-082) | — | `exists:_scripts/reverse-carryover.py` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-124 | Lập feature access-control (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/access-control/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-125 | Lập feature account-access (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/account-access/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-126 | Lập feature common-workspace (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/common-workspace/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-127 | Lập feature cost-catalog (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/cost-catalog/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-128 | Lập feature employee-records (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/employee-records/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-129 | Lập feature fuel-allowance (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/fuel-allowance/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-130 | Lập feature fuel-issuing (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/fuel-issuing/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-131 | Lập feature fuel-payment (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/fuel-payment/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-132 | Lập feature fuel-purchase (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/fuel-purchase/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-133 | Lập feature fuel-stations (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/fuel-stations/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-134 | Lập feature help-center (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/help-center/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-135 | Lập feature incident-report (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/incident-report/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-136 | Lập feature inventory-count (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/inventory-count/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-137 | Lập feature organization (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/organization/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-138 | Lập feature partners (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/partners/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-139 | Lập feature product-catalog (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/product-catalog/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-140 | Lập feature purchasing (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/purchasing/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-141 | Lập feature reminders (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/reminders/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-142 | Lập feature repair-order (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/repair-order/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-143 | Lập feature repair-quotation (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/repair-quotation/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-144 | Lập feature service-sales-payment (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/service-sales-payment/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-145 | Lập feature stock-movement (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/stock-movement/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-146 | Lập feature vehicle-management (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/vehicle-management/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-147 | Lập feature workshop-payment (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/workshop-payment/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-148 | Lập feature workshop-reports (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/workshop-reports/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
 
 ## Đã xong
 

@@ -21,12 +21,13 @@ trên claude.ai (link cố định ở `.claude/state/dashboard.json`) — có t
 "Cần rà" cho stale, "Đưa vào backlog" / "Đã biết" cho việc máy, kéo thẻ Review Figma, **trả lời câu hỏi mở** (Chi tiết → ô trả lời, tuỳ chọn chốt luôn). Thao tác thành **yêu cầu**
 trong kho của trang; `/dashboard sync` áp vào repo.
 
-Trang có 5 tab (thứ tự = thứ tự quan trọng):
+Trang có 7 tab: Hôm nay · Luồng việc · Feature · Hệ thống cũ · Kanban · Nguồn khách · Sức khỏe vault (thứ tự = thứ tự quan trọng; Luồng việc mô tả ở mục dưới):
 1) **Hôm nay** — verdict theo giai đoạn + 5 ô (Chờ bạn · Câu hỏi mở · Stale chờ xác nhận · Nguồn chưa feed · Hàng việc) + làn Chờ bạn + **hàng việc chung** (task backlog + việc máy phát hiện, xếp theo `priority_score`).
 2) **Feature** — trục tiến độ 8 cột Nguồn → Brainstorm → Chốt OQ → SRS → Userflow → Figma → US/AC → Test (+3 cột ẩn URD/BRD/PRD), ô Tầng SaaS · Tham số P chưa chốt · Figma, bảng OQ còn mở có link tới đúng dòng. Ô chỉ hiện trạng thái chung; **bấm ô mở bảng chi tiết** (14/10): các bước con + danh sách việc còn lại của đúng cột đó (`stage_details()`).
-3) **Kanban** — 6 cột Draft · In Review · Revisions · Approved · Shipped · Stale; doc không có status đi theo doc chỉ mục cùng folder.
-4) **Nguồn khách** — nguồn cần feed vào brainstorm (14/10): mỗi SRC có *Feed vào brainstorm* (feature nhận mục, kể cả feature chưa tạo), *Trạng thái* (Chưa đọc / Đang đối chiếu n/m / Đã feed đủ / Tham khảo), *Còn thiếu* (⬜ chưa đưa vào · 🔄 bản mới · ➡ feature chưa có), *Chưa giải quyết* (task backlog còn mở khác việc feed + ghi chú ⚠ ở sổ nguồn); *Chi tiết* liệt kê từng mục còn thiếu theo feature. Lọc theo Trạng thái, Feed vào, Vấn đề, Nhóm.
-5) **Sức khỏe vault** — doc stale kèm upstream gây ra, dòng log stale trỏ file đã xoá, độ tươi (chỉ theo tuổi), review quá hạn.
+3) **Hệ thống cũ** (15/10) — feature tái lập từ SRS cũ, nhóm theo module: *Nguồn* (SRS Web/Mobile + trang, bấm mở đúng chỗ; thay đổi đã chốt kèm mô tả) · *Mục nguồn* (đã đưa vào tài liệu mới / tổng mục `➡ {feature}` trong sổ đối chiếu) · *Reverse* (chưa chạy / xong) · *Vấn đề cần giải quyết* (sổ `docs/_product/legacy-issues.md`) · *Brainstorm* (có/chưa). Dữ liệu: `docs/_reverse/reverse-plan.json` (chưa land thì đọc bản trong `.claude/worktrees/*/`), sổ vấn đề, `docs-input/_coverage/`, `docs/{feature}/brainstorms/`. Code: `_scripts/dashboard_legacy.py`.
+4) **Kanban** — 6 cột Draft · In Review · Revisions · Approved · Shipped · Stale; doc không có status đi theo doc chỉ mục cùng folder.
+5) **Nguồn khách** — nguồn cần feed vào brainstorm (14/10): mỗi SRC có *Feed vào brainstorm* (feature nhận mục, kể cả feature chưa tạo), *Trạng thái* (Chưa đọc / Đang đối chiếu n/m / Đã feed đủ / Tham khảo), *Còn thiếu* (⬜ chưa đưa vào · 🔄 bản mới · ➡ feature chưa có), *Chưa giải quyết* (task backlog còn mở khác việc feed + ghi chú ⚠ ở sổ nguồn); *Chi tiết* liệt kê từng mục còn thiếu theo feature. Lọc theo Trạng thái, Feed vào, Vấn đề, Nhóm.
+6) **Sức khỏe vault** — doc stale kèm upstream gây ra, dòng log stale trỏ file đã xoá, độ tươi (chỉ theo tuổi), review quá hạn.
 
 > **Tìm + lọc (14/10):** ô tìm ở đầu trang lọc mọi tab (bỏ dấu tiếng Việt); thanh lọc riêng cho Hàng việc (Loại), Câu hỏi mở (Feature, Đã gửi khách?), Kanban (Feature), Nguồn khách (Nhóm, Feed). Câu hỏi mở chia *Nội bộ, chưa gửi* / *Đã hỏi khách* theo ô trả lời (bắt đầu "Còn mở"/"Một phần"/"Ngoài" = đã hỏi); *Chi tiết* hiện đủ các cột của dòng OQ + mục chứa bảng.
 

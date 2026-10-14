@@ -33,6 +33,8 @@ import sys
 from datetime import date, timedelta
 from pathlib import Path
 
+import dashboard_legacy as legacy_tab  # tab "Hệ thống cũ" (feature tái lập từ SRS cũ)
+
 ROOT = Path(__file__).resolve().parent.parent
 GITHUB = "https://github.com/szitphan/invlogis/blob/main/"
 META_DIRS = {"meetings", "exports", "reports", "cr", "inbox", "userguide", "guides"}
@@ -1430,7 +1432,7 @@ def build(feature_filter=None, light_mode=False):
         "generated": today.isoformat(), "scope": feature_filter or "project", "root": str(ROOT),
         "verdict": verdict, "tiles": tiles, "lanes": lanes, "actions": actions, "work": work,
         "sources": sources, "params": params, "history": history, "figma_board": fboard, "flow": flow,
-        "transitions": transitions, "state": dashboard_state(),
+        "transitions": transitions, "state": dashboard_state(), "legacy": legacy_tab.legacy_view(ROOT, ledgers),
         "features": rows, "kanban": kanban, "stale_docs": stale_docs, "stale_log": stale_log,
         "freshness": fresh, "quality": quality, "coverage": coverage,
         "counts": {"docs_md": kanban["total"], "features": len(rows), "sources": len(sources),
@@ -1984,6 +1986,7 @@ def render(m, artifact=False):
       '<button role="tab" id="t-today" aria-selected="true" aria-controls="p-today">Hôm nay</button>'
       '<button role="tab" id="t-flow" aria-selected="false" aria-controls="p-flow">Luồng việc</button>'
       '<button role="tab" id="t-feat" aria-selected="false" aria-controls="p-feat">Feature</button>'
+      '<button role="tab" id="t-legacy" aria-selected="false" aria-controls="p-legacy">Hệ thống cũ</button>'
       '<button role="tab" id="t-kb" aria-selected="false" aria-controls="p-kb">Kanban</button>'
       '<button role="tab" id="t-src" aria-selected="false" aria-controls="p-src">Nguồn khách</button>'
       '<button role="tab" id="t-health" aria-selected="false" aria-controls="p-health">Sức khỏe vault</button>'
@@ -2294,6 +2297,9 @@ def render(m, artifact=False):
     if kb["loose"]:
         w('<div class="panel"><h2>Doc không có status</h2><ul>' + "".join(f"<li>{link(p, E(p))}</li>" for p in kb["loose"]) + "</ul></div>")
     w("</div>")
+
+    # Hệ thống cũ — feature tái lập từ SRS cũ theo module: nguồn, mục nguồn đã đưa vào, reverse, vấn đề, brainstorm
+    w(legacy_tab.render_legacy(m.get("legacy"), link, E))
 
     # Nguồn khách — nguồn cần feed vào brainstorm: feed vào đâu, tới đâu, còn thiếu gì, vấn đề nào chưa giải quyết
     srcs = m["sources"]

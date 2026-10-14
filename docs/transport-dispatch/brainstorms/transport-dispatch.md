@@ -2,7 +2,7 @@
 type: brainstorm
 feature: transport-dispatch
 status: draft
-updated: 2026-10-12
+updated: 2026-10-14
 links:
   - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md
   - docs-input/sop/sop-dieu-phoi.md
@@ -416,6 +416,7 @@ Nguồn khách: tên tài liệu khách gửi và mục. Cột Trả lời theo 
 | OQ-43 | Chu kỳ nhắc nhập nhật ký nhiệt độ mặc định cho từng loại hàng lạnh là bao nhiêu? (SOP chỉ có sầu riêng 3–4 giờ/lần, hàng lạnh khác 3–4 lần/ngày) | Giao nhận hàng hoá (18/9/2026) | Chưa hỏi Delta (ngoài deck vòng 1) |
 | OQ-45 | "Hàng quay cắt" trong thực tế là tình huống nào? Khi đó xe và hàng được xử lý ra sao? | Chưa có trong tài liệu khách gửi (trao đổi trực tiếp 09/10/2026) | Chưa hỏi Delta (ngoài deck vòng 1) |
 | OQ-46 | Có cần làm luồng tạm ứng dầu cho xe CBT không? (Đợt trước khách nói bỏ phần xử lý bên ngoài) | Chưa có trong tài liệu khách gửi (trao đổi trực tiếp 09/10/2026) | Chưa hỏi Delta (ngoài deck vòng 1) |
+| OQ-47 | Dữ liệu xe (VIS) và hóa đơn, thanh toán (SIM) nối nhau ở đâu? (1) Hóa đơn tổng VETC cuối kỳ, sau khi đối chiếu với GPS, có đi qua IIP/MISA như hóa đơn đầu vào thường không, ai duyệt, gắn JobID nào? (2) Hóa đơn dầu mua ngoài mà lái xe tải lên IIP có ghép với đối soát sensor dầu không? (3) Chi phí đã duyệt trên Lệnh (vé, dầu bù, km tìm vỏ J01) có chuyển sang SIM để ghép hóa đơn theo JobID không? | VIS (08/10/2026) mục 3.1.3 Bước 4, 3.6; SIM & VIS Công tác chuẩn bị (11/10/2026) mục 2.2–2.3 | Chưa hỏi Delta; brainstorm SIM nhận lại (BL-120) |
 
 ## 12. Next Steps
 
