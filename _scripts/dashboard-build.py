@@ -1161,7 +1161,9 @@ JS = """
   function apply(){
     [].forEach.call(document.querySelectorAll('a[data-gh]'),function(a){
       if(mode==='gh'){a.href=a.getAttribute('data-gh');a.target='_blank';a.rel='noopener'}
-      else{a.href=a.getAttribute('data-local');a.removeAttribute('target')}});
+      else{a.href=a.getAttribute('data-local');
+        // Trong iframe claude.ai, vscode:// mở ngay trong khung bị chặn ("This content is blocked") → mở cửa sổ ngoài.
+        if(window.__EMBED){a.target='_blank';a.rel='noopener'}else a.removeAttribute('target')}});
     [].forEach.call(document.querySelectorAll('[data-mode]'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-mode')===mode))});
   }
   document.addEventListener('click',function(e){
@@ -1719,7 +1721,7 @@ def render(m, artifact=False):
         data = {"transitions": m.get("transitions", {}), "generated": m["generated"]}
         # Trong claude.ai link vscode:// thường bị chặn → bản artifact mặc định mở GitHub (đổi được bằng nút).
         w(f'</main><script type="application/json" id="dash-data">{json.dumps(data, ensure_ascii=False)}</script>'
-          f"<script>window.__DEFMODE='gh'</script><script>{JS}</script><script>{AJS}</script>")
+          f"<script>window.__DEFMODE='gh';window.__EMBED=true</script><script>{JS}</script><script>{AJS}</script>")
     else:
         w(f"</main><script>{JS}</script></body></html>")
     return "\n".join(out) + "\n"
