@@ -2,6 +2,8 @@
 
 > Chuyển đổi từ PDF theo bố cục trang. Bảng được xuất thành Markdown table; chú thích trang dùng để đối chiếu nguồn. Với bảng không có hàng tiêu đề rõ ràng trong PDF, `Cột n` là nhãn kỹ thuật để giữ cấu trúc cột.
 
+> Ảnh: trích từ PDF gốc `~/Downloads/lg-export.pdf` (193 MB, để ngoài git) ngày 2026-10-14 — 1.373 ảnh (diện tích ≥ 30.000 px, cạnh ngắn ≥ 80 px; bỏ icon) vào `images/`, tên `lg-p{trang}-{thứ tự}-{loại}`. Loại theo tiêu đề gần nhất: flow = lưu đồ hoạt động · state = lưu đồ trạng thái · screen = mockup màn hình · img = khác.
+
 <!-- Page 1 -->
 
 [v2.0] Quy tắc chung xử lý giao diện trên website (Website common rules & shared components) 10
@@ -471,6 +473,9 @@ Hệ thống thông báo in-app, hiển thị qua icon 🔔 trên header.
 | Badge số lượng | Badge | Hiển thị số thông báo chưa đọc.<br>Màu đỏ.<br>Tối đa hiển thị 9+ .<br>Ẩn hoàn toàn khi không có thông báo chưa đọc.<br>Cập nhật realtime khi có thông báo mới. |
 
 Panel danh sách thông báo
+
+![Trang 12 — hình](images/lg-p0012-00-img.png)
+
 12
 
 <!-- Page 13 -->
@@ -515,6 +520,9 @@ SC-03 — Confirm Dialog
 Modal xác nhận trước khi thực hiện hành động quan trọng hoặc không thể hoàn tác.
 Các hành động bắt buộc dùng SC-03: Xoá, Thu hồi, Phê duyệt, Từ chối, Huỷ form (khi có dữ
 liệu chưa lưu).
+
+![Trang 14 — hình](images/lg-p0014-00-img.png)
+
 14
 
 <!-- Page 15 -->
@@ -522,6 +530,15 @@ liệu chưa lưu).
 |  | Action | Tiêu đề | Nội dung |
 | --- | --- | --- | --- |
 | 1 | Xoá | Xoá [tên feature]? | Bạn đang xoá [tên feature] [tên/mã]. Hành động<br>này không thể hoàn tác. |
+
+![Trang 15 — hình](images/lg-p0015-00-img.png)
+
+![Trang 15 — hình](images/lg-p0015-01-img.png)
+
+![Trang 15 — hình](images/lg-p0015-02-img.png)
+
+![Trang 15 — hình](images/lg-p0015-03-img.png)
+
 15
 
 <!-- Page 16 -->
@@ -556,6 +573,8 @@ thể được định nghĩa trong từng UC.
 | --- | --- | --- | --- |
 | 1 | Tiêu đề | Label | "Bộ lọc" + số điều kiện đang active (VD: "Bộ lọc (3)"). |
 
+![Trang 17 — hình](images/lg-p0017-00-img.png)
+
 17
 
 <!-- Page 18 -->
@@ -564,6 +583,10 @@ thể được định nghĩa trong từng UC.
 | --- | --- | --- | --- |
 | 2 | Các trường<br>lọc | Input / Select<br>/ DatePicker | Hiển thị các tab là các cột (được phép lọc) theo thứ tự từ trên<br>xuống dưới là thứ tự cột từ trái qua phải của bảng (kể cả các<br>cột đã ẩn).<br>Trong mỗi tab, hiển thị các giá trị của cột đó & 1 giá trị “Không<br>có” cho các dữ liệu null.<br>Hỗ trợ: Select đơn, Select nhiều, Khoảng ngày (từ–đến),<br>Khoảng số (từ–đến).<br>Chọn giá trị: Người dùng có thể chọn giá trị để filter data. Áp<br>dụng cho các trường trạng thái hoặc phân loại ngắn (dưới 5<br>options)<br>Date time picker: Người dùng có thể chọn ngày bắt đầu -<br>ngày kết thúc để filter data theo thời gian.<br>Từ-đến: Cho phép người dùng nhập trong khoảng. |
 | 3 | Button Xoá<br>bộ lọc | Button | Variant ghost.<br>Reset toàn bộ trường về trạng thái rỗng. |
+
+![Trang 18 — hình](images/lg-p0018-00-img.png)
+
+![Trang 18 — hình](images/lg-p0018-01-img.png)
 
 18
 
@@ -578,6 +601,8 @@ SC-06 — Column Customizer (Tuỳ chỉnh cột)
 Panel/Dropdown cho phép người dùng bật/tắt và sắp xếp thứ tự cột trong bảng danh sách. Cấu
 hình được lưu theo từng người dùng.
 
+![Trang 19 — hình](images/lg-p0019-00-img.png)
+
 
 19
 
@@ -589,6 +614,8 @@ hình được lưu theo từng người dùng.
 | 4 | Button Áp dụng | Button | Variant filled.<br>Click → áp dụng cấu hình cột, bảng cập nhật ngay. |
 SC-07 — Action Matrix (Inline Actions trên danh sách)
 Pattern chuẩn cho cột action cuối mỗi hàng trong bảng danh sách.
+
+![Trang 20 — hình](images/lg-p0020-00-img.png)
 
 |  | Thành phần | Control | Mô tả |
 | --- | --- | --- | --- |
@@ -619,6 +646,9 @@ Popover/Panel hiển thị lịch sử thay đổi trạng thái và hành độ
 | Sắp xếp | — | Mới nhất hiển thị trên cùng. |
 
 Nội dung và icon theo hành động:
+
+![Trang 22 — hình](images/lg-p0022-00-img.png)
+
 22
 
 <!-- Page 23 -->
@@ -635,6 +665,11 @@ Lý do từ chối: Hiển thị dòng thứ 2 ngay dưới nội dung: Lý do: 
 dung lý do] . Chỉ xuất hiện với hành động Từ chối.
 Tên feature điền theo từng màn hình. VD: "kế hoạch mua dầu", "cây dầu nội
 bộ".
+
+![Trang 23 — hình](images/lg-p0023-00-img.png)
+
+![Trang 23 — hình](images/lg-p0023-01-img.png)
+
 23
 
 <!-- Page 24 -->
@@ -645,6 +680,8 @@ mua → PO → Nhập dầu → Thanh toán).
 Xem thêm ở UC00.00.02.
 SC-10 — File Upload
 Component upload file dùng chung cho các màn hình cần đính kèm chứng từ, tài liệu.màn
+
+![Trang 24 — hình](images/lg-p0024-00-img.png)
 
 | Thành phần | Control | Mô tả |
 | --- | --- | --- |
@@ -680,6 +717,9 @@ Xử lý lỗi
 SC-13 — Thanh điều hướng (Sidebar Menu)
 Sidebar menu cố định bên trái màn hình, là điểm truy cập chính đến tất cả module và tính năng
 trong hệ thống.
+
+![Trang 26 — hình](images/lg-p0026-00-img.png)
+
 26
 
 <!-- Page 27 -->
@@ -907,6 +947,8 @@ Hệ thống có 3 loại error message phân biệt rõ theo nguồn gốc và 
 
 2.16 Freeze cột trong bảng danh sách
 
+![Trang 37 — hình](images/lg-p0037-00-img.png)
+
 | Quy tắc | Mô tả |
 | --- | --- |
 | Điều kiện áp dụng | Chỉ áp dụng khi bảng có nhiều cột, cần scroll ngang.<br>Khi màn hình đủ rộng hiển thị hết tất cả cột (không cần scroll ngang):<br>không áp dụng freeze. |
@@ -928,6 +970,10 @@ Hệ thống có 3 loại error message phân biệt rõ theo nguồn gốc và 
 | Chọn nhóm | Người dùng chọn 1 cột để nhóm qua button Nhóm trên toolbar.<br>Các cột được phép nhóm định nghĩa trong từng UC. |
 | Bỏ nhóm | Click button Nhóm → chọn Xoá để tắt nhóm, danh sách trở về trạng<br>thái bình thường. |
 | Hiển thị sau khi nhóm | Mặc định hiển thị các dòng cha (header nhóm, là tên giá trị theo<br>trường thông tin được nhóm) kèm số lượng bản ghi con.<br>VD: "Petrolimex (5)". |
+
+![Trang 38 — hình](images/lg-p0038-00-img.png)
+
+![Trang 38 — hình](images/lg-p0038-01-img.png)
 
 38
 
@@ -958,6 +1004,9 @@ Cho phép xuất bảng danh sách dưới dạng file PDF / Excel.
 
 Nội dung file được xuất sẽ bao gồm toàn bộ bảng (sau khi áp dụng bộ lọc, nhóm, tuỳ chỉnh,…)
 của toàn bộ các trang được trải ra.
+
+![Trang 40 — hình](images/lg-p0040-00-img.png)
+
 2.20 — Filter by keyword
 Cho phép người dùng search hoặc filter giá trị theo từng cột.
 Nếu là các trường nhập giá trị/ID, hiển thị searchbox
@@ -989,6 +1038,8 @@ UC00.00.01 - Lưu nháp bản ghi tạo mới
 41
 
 <!-- Page 42 -->
+
+![Trang 42 — mockup màn hình](images/lg-p0042-00-screen.png)
 
 
 42
@@ -1024,6 +1075,8 @@ Thanh nối
 Tên feature/nghiệp vụ
 Hiển thị nodata cho phần component thanh tiến trình như sau (trong trường hợp feature đó độc
 lập không thuộc 1 liên quy trình nào):
+
+![Trang 46 — hình](images/lg-p0046-00-img.png)
 
 | Control | Loại | Giá trị<br>mặc định | Mô tả |
 | --- | --- | --- | --- |
@@ -1197,6 +1250,9 @@ Rule chung:
 Mỗi feature khi ghi nhận trạng thái hoàn thành sẽ trigger hiển thị button tạo mới nghiệp
 vụ/feature tiếp theo (nếu có phân quyền) trong 1 quy trình lớn để người dùng thực hiện nhanh
 chóng, thuận tiện hơn.
+
+![Trang 57 — hình](images/lg-p0057-00-img.png)
+
 Ví dụ như trong hình minh hoạ, Phiếu nhập kho (nghiệp vụ hiện tại) đã hoàn thành (phê duyệt)
 sẽ hiển thị button Nhập kho (nghiệp vụ tiếp theo tương ứng) để người dùng có thể chuyển tiếp
 thực hiện.
@@ -1454,6 +1510,9 @@ pane / Rows to repeat at top.
 Export detail feature - Module Cây dầu
 Nguồn template: Cay dau_Export detail_v1.0.xlsx
 1. Kế hoạch mua
+
+![Trang 74 — hình](images/lg-p0074-00-img.png)
+
 Export chi tiết UC12.01.03 - Xem chi tiết kế hoạch mua dầu.
 File sample: Kế hoạch mua dầu-Sample.pdf
 
@@ -1489,6 +1548,9 @@ File sample: Kế hoạch mua dầu-Sample.pdf
 <!-- Page 76 -->
 
 2. Đơn mua dầu
+
+![Trang 76 — hình](images/lg-p0076-00-img.png)
+
 Export chi tiết UC12.01.08 - Xem chi tiết đơn mua dầu PO.
 File sample: PO dầu-sample.pdf
 
@@ -1536,6 +1598,8 @@ File sample: PO dầu-sample.pdf
 
 <!-- Page 79 -->
 
+![Trang 79 — hình](images/lg-p0079-00-img.png)
+
 79
 
 <!-- Page 80 -->
@@ -1549,6 +1613,8 @@ File sample: Phiếu cấp dầu (từ PT)-sample.pdf Phiếu cấp dầu (từ 
 | 1 | NGÀY<br>LẬP | dd/mm<br>/yyy<br>y | — | Giữa | Ngày tạo phiếu nhập dầu. |
 | 2 | MÃ<br>PHIẾU | Text | — | Trái |  |
 | 3 | TRẠNG<br>THÁI | Badge | — | Trái |  |
+
+![Trang 80 — hình](images/lg-p0080-00-img.png)
 
 80
 
@@ -1598,6 +1664,8 @@ File sample: Bảng kê công nợ - Mua dầu-sample.pdf
 | --- | --- | --- | --- | --- | --- |
 |  | Trường | Format | Đ<br>ơ<br>n<br>v<br>ị | Căn<br>lề | Mô tả/Lấy dữ liệu |
 
+![Trang 84 — hình](images/lg-p0084-00-img.png)
+
 84
 
 <!-- Page 85 -->
@@ -1625,6 +1693,9 @@ File sample: Bảng kê công nợ - Mua dầu-sample.pdf
 <!-- Page 86 -->
 
 6. BẢNG KÊ CÔNG NỢ — CẤP DẦU
+
+![Trang 86 — hình](images/lg-p0086-00-img.png)
+
 Export chi tiết UC12.05.02 - Xem chi tiết kỳ chốt công nợ, phía cấp dầu cho cây dầu mua ngoài
 File sample: Bảng kê công nợ - Cấp dầu-sample.pdf
 Cấu trúc giống hệt sheet 5, khác biệt duy nhất:
@@ -1662,6 +1733,9 @@ Mô tả các trường dùng chung
 Mô tả các trường dùng riêng theo từng nghiệp vụ:
 Module Xưởng
 Đơn mua HHDV
+
+![Trang 88 — hình](images/lg-p0088-00-img.png)
+
 88
 
 <!-- Page 89 -->
@@ -1712,6 +1786,10 @@ Module Xưởng
 <!-- Page 91 -->
 
 Báo giá chẩn đoán - Loại báo giá: Bán dịch vụ sửa chữa
+
+![Trang 91 — hình](images/lg-p0091-00-img.png)
+
+![Trang 91 — hình](images/lg-p0091-01-img.png)
 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 |
 | --- | --- | --- | --- | --- |
@@ -1781,6 +1859,9 @@ Báo giá chẩn đoán - Loại báo giá: Bán dịch vụ sửa chữa
 | 3<br>7 | Lái xe |  |  | Lấy tên lái xe của báo giá. |
 
 Báo giá chẩn đoán - Loại báo giá: Bán phụ tùng
+
+![Trang 94 — hình](images/lg-p0094-00-img.png)
+
 94
 
 <!-- Page 95 -->
@@ -1833,6 +1914,11 @@ Lệnh sửa chữa - Sửa chữa xe - Bên sửa chữa = Khách hàng
 | 1 | Mã lệnh sửa chữa |  |  | Lấy mã của lệnh sửa chữa. |
 
 1. Thông tin chung
+
+![Trang 97 — hình](images/lg-p0097-00-img.png)
+
+![Trang 97 — hình](images/lg-p0097-01-img.png)
+
 97
 
 <!-- Page 98 -->
@@ -1904,6 +1990,11 @@ Lệnh sửa chữa xe Delta - Sửa chữa xe/Thay ắc quy
 | 1 | Mã lệnh sửa chữa |  |  | Lấy mã của lệnh sửa chữa. |
 
 1. Thông tin chung
+
+![Trang 101 — hình](images/lg-p0101-00-img.png)
+
+![Trang 101 — hình](images/lg-p0101-01-img.png)
+
 101
 
 <!-- Page 102 -->
@@ -1962,6 +2053,9 @@ Lệnh sửa chữa xe Delta - Sửa chữa xe/Thay ắc quy
 | 31 | Người chốt lệnh |  |  | Lấy tên người chốt lệnh sửa chữa. |
 
 Lệnh sửa chữa xe Delta - Thay lốp
+
+![Trang 104 — hình](images/lg-p0104-00-img.png)
+
 104
 
 <!-- Page 105 -->
@@ -2420,7 +2514,13 @@ Map cột: Gắn cột dữ liệu của file với các cột dữ liệu đíc
 Validate dữ liệu: Hệ thống kiểm tra các validations của dữ liệu xem dữ liệu import lên có thoả
 mãn hay không.
 5.4.1. Tải file lên
+
+![Trang 128 — hình](images/lg-p0128-00-img.png)
+
 Màn hình bước 1 khi chưa upload file lên
+
+![Trang 128 — hình](images/lg-p0128-01-img.png)
+
 128
 
 <!-- Page 129 -->
@@ -2451,6 +2551,14 @@ Màn hình bước 1 khi chưa upload file lên
 | 8 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>import<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ import trước khi<br>huỷ.<br>Xác nhận: loại bỏ/không ghi<br>nhận thông tin import & trở<br>về màn hình Danh sách<br>Hủy: trở về màn Bước 1 -<br>Import với các dữ liệu đã<br>chọn/nhập. |  |
 | 9 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>import<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ import trước khi<br>huỷ.<br>Xác nhận: loại bỏ/không ghi<br>nhận thông tin import & trở<br>về màn hình Danh sách<br>Hủy: trở về màn Bước 1 -<br>Import với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 131 — hình](images/lg-p0131-00-img.png)
+
+![Trang 131 — hình](images/lg-p0131-01-img.png)
+
+![Trang 131 — hình](images/lg-p0131-00-img.png)
+
+![Trang 131 — hình](images/lg-p0131-01-img.png)
+
 5.4.2. Map cột
 131
 
@@ -2462,6 +2570,8 @@ Màn hình bước 1 khi chưa upload file lên
 | 2 | File tải lên | File |  |  | Hệ thống hiển thị file đã<br>upload lên từ trước |  |
 | 3 | Tải xuống | Icon |  | Enable | Cho phép người dùng tải lại<br>file xuống nếu cần. |  |
 | 4 | Bảng map cột: Hệ thống hiển thị danh sách tất cả các cột dữ liệu cuối cần import lên phần<br>mềm |  |  |  |  |  |
+
+![Trang 132 — hình](images/lg-p0132-00-img.png)
 
 132
 
@@ -2475,6 +2585,8 @@ Màn hình bước 1 khi chưa upload file lên
 | 8 | Hành động |  |  |  |  |  |
 | 9 |  | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>import<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ import trước khi<br>huỷ.<br>Xác nhận: loại bỏ/không ghi<br>nhận thông tin import & trở<br>về màn hình Danh sách<br>Hủy: trở về màn Bước 1 -<br>Import với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 133 — hình](images/lg-p0133-00-img.png)
+
 133
 
 <!-- Page 134 -->
@@ -2485,6 +2597,8 @@ Màn hình bước 1 khi chưa upload file lên
 | 1<br>1 | Tiếp theo | Butto<br>n |  |  | Cho phép người dùng kết thúc<br>bước 2 và chuyển tiếp sang<br>bước 3 (validate dữ liệu) của<br>chức năng import<br>Hệ thống lấy giá trị dữ liệu<br>mapping theo cột dữ liệu<br>trong file mà người dùng nhập<br>tương ứng với từng trường dữ<br>liệu cuối. | Check all validations |
 
 5.4.3. Validate dữ liệu
+
+![Trang 134 — hình](images/lg-p0134-00-img.png)
 
 
 134
@@ -2515,6 +2629,12 @@ Màn hình bước 1 khi chưa upload file lên
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 8 | Xác nhận |  |  |  | Cho phép người dùng xác<br>nhận hoàn thành import.<br>Nếu bảng dữ liệu import vẫn<br>có các giá trị vi phạm<br>validations, hệ thống hiển thị<br>popup xác nhận:<br>Nếu chọn tiếp tục, hệ thống<br>loại bỏ các hàng dữ liệu bị<br>vi phạm validate và tiếp tục<br>import các dữ liệu còn lại<br>Nếu chọn quay lại, hệ<br>thống hiển thị lại các trường<br>bị validate và hiển thị tổng<br>số validation vi phạm còn<br>lại.<br>Hệ thống tắt popup import và<br>hiển thị popup tiến trình<br>import, thể hiện tiến độ import<br>hiện tại theo giá trị %.<br>Nếu người dùng click icon ,<br>hệ thống hiển thị hộp thoại<br>xác nhận huỷ import trước khi<br>huỷ. |  |  |
 
+![Trang 137 — hình](images/lg-p0137-00-img.png)
+
+![Trang 137 — hình](images/lg-p0137-01-img.png)
+
+![Trang 137 — hình](images/lg-p0137-02-img.png)
+
 137
 
 <!-- Page 138 -->
@@ -2527,6 +2647,9 @@ import và tiếp tục import.
 Sau khi hoàn thành import, hệ
 thống hiển thị hộp thoại thông
 báo thành công:
+
+![Trang 138 — hình](images/lg-p0138-00-img.png)
+
 138
 
 <!-- Page 139 -->
@@ -2584,6 +2707,10 @@ này.
 | Ngày<br>hiện tại | Label | Text | — | — | Hiển thị dạng "Thứ X, ngày DD tháng MM năm YYYY".<br>Góc phải cùng hàng với lời chào. | — |
 | Label<br>Danh<br>sách<br>module | Label | Text | — | — | Tiêu đề phần danh sách.<br>Căn giữa, font nhỏ, chữ hoa, màu xám. | — |
 
+![Trang 140 — hình](images/lg-p0140-00-img.png)
+
+![Trang 140 — hình](images/lg-p0140-01-img.png)
+
 140
 
 <!-- Page 141 -->
@@ -2617,6 +2744,9 @@ Module người dùng không có quyền: không hiển thị trên danh sách �
 Nếu người dùng chỉ được phân quyền 1 module duy nhất và module đó chỉ có 1 cơ sở: hệ thống có thể skip màn Home
 và navigate thẳng vào module.
 3.2 Modal Chọn cơ sở
+
+![Trang 142 — hình](images/lg-p0142-00-img.png)
+
 Modal trung tâm màn hình, xuất hiện khi người dùng click vào module có cơ sở và được phân quyền nhiều hơn 1 cơ sở (hoặc module có bật cơ chế
 "Ngoài cơ sở" — xem mục 2). Màu sắc accent của modal theo màu module đang được chọn.
 
@@ -2875,9 +3005,14 @@ liệt kê rõ số lượng thành công/bị bỏ qua nếu có ít nhất 1 b
 hàng loạt ẩn đi, các badge số đếm liên quan (nếu có) cập nhật lại.
 3. Mô tả màn hình
 3.1 Cột checkbox chọn dòng
+
+![Trang 151 — mockup màn hình](images/lg-p0151-00-screen.png)
+
 151
 
 <!-- Page 152 -->
+
+![Trang 152 — mockup màn hình](images/lg-p0152-00-screen.png)
 
 
 152
@@ -2898,6 +3033,8 @@ lọc); nếu đổi bộ lọc/tìm kiếm, lựa chọn luôn được reset v
 độ nào. UC cụ thể có thể khai báo tắt tính năng "chọn tất cả khớp bộ lọc" ở
 mục 3.6 nếu không phù hợp.
 3.2 Thanh hành động hàng loạt
+
+![Trang 154 — hình](images/lg-p0154-00-img.png)
 
 | Tên<br>thành<br>phần | Contro<br>l | Loại | Bắt<br>buộc | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -2959,6 +3096,8 @@ chọn"; người dùng cần thu hẹp lại lựa chọn để có thể thao 
 | 2. Hiển thị đang<br>xử lý | Trong lúc xử lý, hiển thị trạng thái đang xử lý (toast/progress dạng "Đang xử lý<br>hàng loạt...") - đặc biệt cần thiết khi N lớn và xử lý mất > 1-2 giây. |
 | 3. Phân loại kết<br>quả | Vẫn còn thoả điều kiện → xử lý hành động bình thường theo logic nghiệp vụ<br>của UC cụ thể.<br>Không còn thoả điều kiện (đã bị người khác xử lý trước, hoặc trạng thái đã đổi<br>vì lý do khác) → bỏ qua, không thực hiện hành động trên bản ghi đó. |
 
+![Trang 157 — hình](images/lg-p0157-00-img.png)
+
 157
 
 <!-- Page 158 -->
@@ -2967,6 +3106,8 @@ chọn"; người dùng cần thu hẹp lại lựa chọn để có thể thao 
 | --- | --- |
 | 4. Hiển thị kết<br>quả | Toàn bộ N bản ghi thành công → chỉ hiện Toast thành công.<br>Có ít nhất 1 bản ghi bị bỏ qua → hiện Dialog kết quả, liệt kê số lượng thành<br>công/bị bỏ qua, và với mỗi bản ghi bị bỏ qua: mã định danh + trạng thái hiện<br>tại.<br>Nếu số bản ghi bị bỏ qua quá nhiều (VD > 50), Dialog kết quả chỉ liệt kê tối đa<br>50 bản ghi đầu tiên kèm tổng số bị bỏ qua.<br>Hiển thị số lượng thành công/tất cả bản ghi muốn thực hiện hành động.<br>Hiển thị tối đa 10 bản ghi, sau đó scroll thêm để xem. |
 | 5. Refresh | Sau khi đóng toast/dialog kết quả: danh sách tự refresh theo bộ lọc hiện tại,<br>badge số đếm liên quan (nếu có) cập nhật lại, lựa chọn reset về rỗng, thanh<br>hành động hàng loạt ẩn đi. |
+
+![Trang 158 — hình](images/lg-p0158-00-img.png)
 
 3.5 Trường hợp không có bản ghi nào hợp lệ
 Nếu tại bước re-validate (mục 3.4, bước 1) phát hiện toàn bộ N bản ghi đã chọn đều không còn
@@ -3015,6 +3156,9 @@ UC02.03.01 - Thay đổi ngôn ngữ
 | Điều kiện sau | Hệ thống đổi ngôn ngữ thành công<br>Hệ thống hiển thị giao diện theo ngôn ngữ mới |
 
 2. Lưu đồ hoạt động
+
+![Trang 160 — lưu đồ hoạt động](images/lg-p0160-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Ngôn ngữ
 160
@@ -3022,6 +3166,10 @@ UC02.03.01 - Thay đổi ngôn ngữ
 <!-- Page 161 -->
 
 Người dụng chọn icon Avatar (góc trên bên phải màn hình) để hiển thị dropdown:
+
+![Trang 161 — mockup màn hình](images/lg-p0161-00-screen.png)
+
+![Trang 161 — mockup màn hình](images/lg-p0161-01-screen.png)
 
 
 161
@@ -4385,6 +4533,9 @@ Hệ thống sẽ phân quyền dữ liệu theo các quyền chức năng mà n
 được:
 Không có quyền chức năng: Người dùng sẽ không xem được dữ liệu của đối tượng và không
 thấy đối tượng trên giao diện. Giao diện hệ thống hide tab/sub-tab ở trên menu để không cho
+
+![Trang 234 — hình](images/lg-p0234-00-img.png)
+
 234
 
 <!-- Page 235 -->
@@ -4873,6 +5024,8 @@ trong phạm vi tài liệu này).
 3. Mô tả màn hình
 3.1. Màn hình Đăng nhập
 
+![Trang 249 — mockup màn hình](images/lg-p0249-00-screen.png)
+
 
 249
 
@@ -4918,7 +5071,13 @@ trong phạm vi tài liệu này).
 truy cập vào phần
 mềm xưởng, hiển
 thị thông báo lỗi:
+
+![Trang 254 — mockup màn hình](images/lg-p0254-00-screen.png)
+
 3.2 Modal Chọn tổ chức
+
+![Trang 254 — mockup màn hình](images/lg-p0254-01-screen.png)
+
 Xuất hiện sau khi đăng nhập thành công, khi tài khoản có quyền truy cập ≥2 chi nhánh hoặc ≥2
 tổ chức.
 Modal overlay trung tâm màn hình, không thể đóng bằng click backdrop (bắt buộc chọn).
@@ -4992,6 +5151,11 @@ UC01.02 - Quên mật khẩu
 
 3. Mô tả màn hình:
 3.1. Màn hình Chọn cách lấy lại mật khẩu
+
+![Trang 259 — lưu đồ hoạt động](images/lg-p0259-00-flow.png)
+
+![Trang 259 — mockup màn hình](images/lg-p0259-01-screen.png)
+
 259
 
 <!-- Page 260 -->
@@ -5009,6 +5173,10 @@ UC01.02 - Quên mật khẩu
 Màn hình Nhập tên tài khoản - Liên hệ IT
 Màn hình Nhập tên tài khoản - Reset mật khẩu bằng email
 
+![Trang 261 — mockup màn hình](images/lg-p0261-00-screen.png)
+
+![Trang 261 — mockup màn hình](images/lg-p0261-01-screen.png)
+
 
 261
 
@@ -5025,6 +5193,8 @@ Màn hình Nhập tên tài khoản - Reset mật khẩu bằng email
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 3 | Xác nhận | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận và chuyển tiếp đến bước<br>tiếp theo nếu nhập đúng tài<br>khoản:<br>Liên hệ IT: hiển thị màn<br>hình thông báo Gửi tài<br>khoản thành công và gửi<br>email tự động tới email IT<br>Delta:<br>Tiêu đề email: Yêu cầu hỗ trợ<br>đặt lại mật khẩu tài khoản<br>Delta<br>Nội dung email:<br>Xin chào đội IT,<br>Hệ thống vừa ghi nhận một<br>yêu cầu đặt lại mật khẩu từ<br>người dùng. Dưới đây là thông<br>tin chi tiết:<br>Tên tài khoản: [Tên tài<br>khoản]<br>Tên người dùng: [Tên người<br>dùng]<br>Thời gian yêu cầu: [Thời<br>gian gửi yêu cầu]<br>Vui lòng kiểm tra và hỗ trợ đặt<br>lại mật khẩu theo quy trình.<br>Nếu cần thêm thông tin, vui<br>lòng liên hệ bộ phận hỗ trợ.<br>Trân trọng,<br>Đội ngũ hỗ trợ Delta.<br>Reset mật khẩu bằng email:<br>Hiển thị thông báo Kiểm<br>tra hòm thư | Chỉ cho phép người<br>dùng gửi email quên<br>mật khẩu 1 lần mỗi<br>phút.<br>Nếu vi phạm, khi<br>người dùng ấn<br>button Xác nhận và<br>báo popup message<br>lỗi như sau: |  |
+
+![Trang 263 — mockup màn hình](images/lg-p0263-00-screen.png)
 
 263
 
@@ -5065,6 +5235,11 @@ Trân trọng,
 | 1 | Quay về<br>đăng nhập | Butto<br>n |  | Enable | Cho phép người dùng nhập<br>quay trở về màn hình Đăng<br>nhập |  |
 
 3.3. Màn hình Kiểm tra hòm thư
+
+![Trang 265 — mockup màn hình](images/lg-p0265-00-screen.png)
+
+![Trang 265 — mockup màn hình](images/lg-p0265-01-screen.png)
+
 265
 
 <!-- Page 266 -->
@@ -5090,6 +5265,9 @@ UC01.03 - Đăng xuất
 | Điều kiện sau | Tài khoản đã đăng xuất khỏi phần mềm Xưởng<br>Hiển thị màn hình Đăng nhập |
 
 2. Lưu đồ quy trình
+
+![Trang 267 — hình](images/lg-p0267-00-img.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Đăng xuất
 267
@@ -5101,6 +5279,10 @@ Người dụng chọn icon Avatar (góc trên bên phải màn hình) để hi�
 |  | Control | Loại | Trư<br>ờng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Đăng xuất | Butto<br>n |  |  | Cho phép người dùng đăng<br>xuất khỏi hệ thống.<br>Khi nhấn vào button Đăng<br>xuất, hệ thống sẽ đăng xuất<br>người dùng khỏi hệ thống và<br>chuyển hướng người dùng về<br>màn hình Đăng nhập. |  |
+
+![Trang 268 — mockup màn hình](images/lg-p0268-00-screen.png)
+
+![Trang 268 — mockup màn hình](images/lg-p0268-01-screen.png)
 
 268
 
@@ -5119,6 +5301,9 @@ UC01.04 - Đổi mật khẩu
 | Điều kiện sau | Người dùng cập nhật được mật khẩu mới cho tài khoản của mình<br>Hiển thị toast message Thành công<br>Hiển thị trở lại màn hình Thông tin tài khoản |
 
 2. Lưu đồ hoạt động
+
+![Trang 269 — lưu đồ hoạt động](images/lg-p0269-00-flow.png)
+
 3. Mô tả màn hình
 269
 
@@ -5128,6 +5313,8 @@ UC01.04 - Đổi mật khẩu
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Tài khoản | Label |  |  | Hiển thị Họ và tên & Tên tài<br>khoản của người dùng hiện<br>tại. |  |
 | 2 | Mật khẩu cũ | Textb<br>ox<br>(short<br>) | Có |  | Cho phép người dùng nhập<br>mật khẩu cũ để xác nhận<br>quyền truy cập. | Mật khẩu cũ phải<br>được nhập chính<br>xác để xác nhận<br>quyền thay đổi mật<br>khẩu.<br>=> Thông báo lỗi:<br>"Mật khẩu cũ không<br>chính xác." |
+
+![Trang 270 — mockup màn hình](images/lg-p0270-00-screen.png)
 
 270
 
@@ -5170,6 +5357,10 @@ UC01.05 - Tạo mật khẩu mới
 
 3. Mô tả màn hình
 3.1 Màn hình Tạo mật khẩu mới
+
+![Trang 274 — lưu đồ hoạt động](images/lg-p0274-00-flow.png)
+
+![Trang 274 — mockup màn hình](images/lg-p0274-01-screen.png)
 
 
 274
@@ -5215,6 +5406,9 @@ UC01.06 - Xem thông tin cá nhân
 | Điều kiện sau | Người dùng xem được thông tin tài khoản của mình đang đăng nhập |
 
 2. Lưu đồ hoạt động
+
+![Trang 278 — lưu đồ hoạt động](images/lg-p0278-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Xem thông tin tài khoản
 278
@@ -5231,6 +5425,8 @@ UC01.06 - Xem thông tin cá nhân
 | 6 | Phòng ban | Label |  |  | Hiển thị tên Phòng ban, để<br>trống nếu không có. |  |
 | 7 | Xưởng | Label |  |  | Hiển thị tên Xưởng, để trống<br>nếu không có. |  |
 
+![Trang 279 — mockup màn hình](images/lg-p0279-00-screen.png)
+
 279
 
 <!-- Page 280 -->
@@ -5245,6 +5441,8 @@ UC01.06 - Xem thông tin cá nhân
 | 1<br>3 | Địa chỉ | Label |  |  | Hiển thị Địa chỉ, để trống nếu<br>không có. |  |
 | 1<br>4 | Ghi chú | Label |  |  | Hiển thị Ghi chú, để trống nếu<br>không có. |  |
 | 1<br>5 | Lịch sử hoạt<br>động | Butto<br>n |  |  | Cho phép người dùng xem<br>được lịch sử hoạt động của<br>nhân viên<br>Chọn để hiển thị popup Lịch<br>sử hoạt động của nhân viên<br>đó |  |
+
+![Trang 280 — mockup màn hình](images/lg-p0280-00-screen.png)
 
 280
 
@@ -5270,6 +5468,8 @@ Epic 03 - Danh mục
 
 03 - Lưu đồ trạng thái chung cho danh mục
 Lưu đồ chung cho tất cả các danh mục:
+
+![Trang 284 — lưu đồ trạng thái](images/lg-p0284-00-state.png)
 
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
@@ -5325,6 +5525,9 @@ UC03.01.01 - Xem danh mục Dịch vụ kỹ thuật
 | Điều kiện sau | Hệ thống hiển thị danh sách dịch vụ kỹ thuật thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 288 — lưu đồ hoạt động](images/lg-p0288-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách dịch vụ kỹ thuật
 288
@@ -5335,6 +5538,8 @@ UC03.01.01 - Xem danh mục Dịch vụ kỹ thuật
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thanh<br>tìm kiếm | Sear<br>ch<br>box |  |  | Cho phép tìm kiếm gần<br>đúng các dữ liệu trong<br>toàn bộ bảng |  |  |
 | 2 | Nhóm | Butt<br>on |  |  | Cho phép nhóm các cột<br>sau:<br>Đơn vị tính<br>Loại phương tiện<br>Tên phương tiện<br>Hệ thống tổng thành<br>xe<br>Trạng thái |  |  |
+
+![Trang 289 — mockup màn hình](images/lg-p0289-00-screen.png)
 
 289
 
@@ -5389,6 +5594,9 @@ UC03.01.02 - Xem thông tin Dịch vụ kỹ thuật
 | Điều kiện sau | Hiển thị thông tin chi tiết của Dịch vụ kỹ thuật |
 
 2. Lưu đồ hoạt động
+
+![Trang 293 — lưu đồ hoạt động](images/lg-p0293-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin dịch vụ kỹ thuật
 293
@@ -5404,6 +5612,8 @@ UC03.01.02 - Xem thông tin Dịch vụ kỹ thuật
 | 5 | Loại<br>phương tiện | Label |  |  | Hiển thị loại phương tiện |  |
 | 6 | Tên phương<br>tiện | Label |  |  | Hiển thị tên phương tiện |  |
 | 7 | Hệ thống<br>tổng thành<br>xe | Label |  |  | Hiển thị hệ thống tổng thành<br>xe |  |
+
+![Trang 294 — mockup màn hình](images/lg-p0294-00-screen.png)
 
 294
 
@@ -5421,6 +5631,8 @@ UC03.01.02 - Xem thông tin Dịch vụ kỹ thuật
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1<br>0 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với dịch vụ kỹ thuật<br>đó theo từng trạng thái của<br>đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Danh sách dịch vụ<br>kỹ thuật<br>Huỷ: Quay trở về màn<br>hình Thông tin dịch vụ<br>kỹ thuật<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo |  |  |
+
+![Trang 296 — mockup màn hình](images/lg-p0296-00-screen.png)
 
 296
 
@@ -5457,12 +5669,17 @@ UC03.01.03 - Tạo đề xuất tạo mới Dịch vụ kỹ thuật
 | Điều kiện sau | Hệ thống tạo 1 bản ghi xưởng với trạng thái Chờ phê duyệt<br>Hiển thị toast message tạo thành công<br>Hiển thị màn hình Thông tin DVKT (Xem) |
 
 2. Lưu đồ hoạt động
+
+![Trang 298 — lưu đồ hoạt động](images/lg-p0298-00-flow.png)
+
 3. Mô tả màn hình
 298
 
 <!-- Page 299 -->
 
 3.1 Màn hình Tạo mới DVKT
+
+![Trang 299 — mockup màn hình](images/lg-p0299-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -5508,6 +5725,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 8 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới dịch vụ kỹ<br>thuật<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới dịch vụ<br>kỹ thuật trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách dịch vụ kỹ<br>thuật<br>Hủy: trở về màn Tạo mới<br>dịch vụ kỹ thuật với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 303 — mockup màn hình](images/lg-p0303-00-screen.png)
+
 303
 
 <!-- Page 304 -->
@@ -5515,6 +5734,8 @@ không hợp lệ đó.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 9 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới dịch vụ kỹ<br>thuật<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới dịch vụ<br>kỹ thuật trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách dịch vụ kỹ<br>thuật<br>Hủy: trở về màn Tạo mới<br>dịch vụ kỹ thuật với các dữ<br>liệu đã chọn/nhập. |  |
+
+![Trang 304 — mockup màn hình](images/lg-p0304-00-screen.png)
 
 Bảng Tên phương tiện - Mã phương tiện - Loại phương tiện
 
@@ -5583,6 +5804,9 @@ Bảng Tên phương tiện - Mã phương tiện - Loại phương tiện
 | 39 | Trạm bơm dầu | 38 | Trạm bơm dầu |
 
 3.1 Màn hình Thông tin DVKT (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 307 — mockup màn hình](images/lg-p0307-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết dịch vụ kỹ thuật, ở đây chỉ mô
 tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Button Huỷ đề xuất: Click vào để hiển thị popup Xác nhận huỷ yêu cầu, thực hiện UC Huỷ đề
@@ -5608,12 +5832,17 @@ UC03.01.04 - Huỷ đề xuất cấp mới Dịch vụ kỹ thuật
 | Điều kiện sau | Trạng thái của bản ghi thay đổi từ Chờ phê duyệt → Đã huỷ<br>Hiển thị toast message thành công<br>Tắt popup Xác nhận huỷ và hiển thị màn hình Thông tin dịch vụ kỹ thuật |
 
 2. Lưu đồ hoạt động
+
+![Trang 308 — lưu đồ hoạt động](images/lg-p0308-00-flow.png)
+
 308
 
 <!-- Page 309 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
+
+![Trang 309 — mockup màn hình](images/lg-p0309-00-screen.png)
 
 
 309
@@ -5632,6 +5861,9 @@ UC03.01.04 - Huỷ đề xuất cấp mới Dịch vụ kỹ thuật
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>dịch vụ kỹ thuật.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin Dịch vụ kỹ<br>thuật. |  |
 
 3.2 Màn hình Thông tin dịch vụ kỹ thuật (Xem) - Trạng thái Đã huỷ
+
+![Trang 311 — mockup màn hình](images/lg-p0311-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết dịch vụ kỹ thuật, ở đây chỉ mô
 tả hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở Lưu
 đồ trạng thái)
@@ -5654,6 +5886,8 @@ yêu cầu hiện tại (đã bị huỷ) nhưng không sinh ra bản ghi mới 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 |
 | --- | --- | --- | --- | --- |
 | trạng thái (từ | Đã huỷ | về | Chờ phê duyệt | ) |
+
+![Trang 312 — mockup màn hình](images/lg-p0312-00-screen.png)
 
 312
 
@@ -5679,6 +5913,10 @@ UC03.01.05 - Phê duyệt/Từ chối đề xuất cấp mới Dịch vụ kỹ 
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 314 — lưu đồ hoạt động](images/lg-p0314-00-flow.png)
+
+![Trang 314 — mockup màn hình](images/lg-p0314-01-screen.png)
+
 
 314
 
@@ -5695,6 +5933,8 @@ UC03.01.05 - Phê duyệt/Từ chối đề xuất cấp mới Dịch vụ kỹ 
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới dịch vụ kỹ thuật.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo dịch vụ kỹ<br>thuật thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin dịch vụ kỹ thuật<br>với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới dịch vụ kỹ thuật này với<br>nội dung:<br>Dịch vụ kỹ thuật - Yêu cầu<br>cấp mới<br>Yêu cầu cấp mới dịch vụ kỹ<br>thuật [Tên DVKT] đã bị từ<br>chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin dịch vụ kỹ thuật<br>của người phê duyệt<br>khi ấn Từ chối sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của dịch vụ<br>kỹ thuật. |
 
+![Trang 316 — mockup màn hình](images/lg-p0316-00-screen.png)
+
 316
 
 <!-- Page 317 -->
@@ -5704,6 +5944,9 @@ UC03.01.05 - Phê duyệt/Từ chối đề xuất cấp mới Dịch vụ kỹ 
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo dịch vụ kỹ thuật.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin dịch vụ kỹ<br>thuật. |  |
 
 3.2 Màn hình Thông tin dịch vụ kỹ thuật (Xem) - Trạng thái Đã từ chối
+
+![Trang 317 — mockup màn hình](images/lg-p0317-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết dịch vụ kỹ thuật, ở đây chỉ mô
 tả hành động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở
 Lưu đồ trạng thái)
@@ -5732,6 +5975,10 @@ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 318 — mockup màn hình](images/lg-p0318-00-screen.png)
+
+![Trang 318 — mockup màn hình](images/lg-p0318-01-screen.png)
+
 318
 
 <!-- Page 319 -->
@@ -5739,6 +5986,8 @@ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của nhân viên<br>thay đổi từ Chờ phê duyệt<br>→ Đã phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạo dịch<br>vụ kỹ thuật thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tin dịch vụ kỹ thuật.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới dịch vụ kỹ thuật này với<br>nội dung:<br>Dịch vụ kỹ thuật - Yêu cầu<br>cấp mới<br>Yêu cầu cấp mới dịch vụ kỹ<br>thuật [Tên DVKT] đã được<br>phê duyệt.<br>Generate ID mới cho dịch<br>vụ kỹ thuật với quy tắc như<br>sau:<br>Format: aabxxccc<br>aa: Mã phương tiện<br>chạy từ 00 đến 37<br>b: Mã hệ thống chạy từ<br>0 đến 6 theo bảng mã<br>hệ thống tổng thành xe<br>xx: Nhóm giá dịch vụ<br>kỹ thuật xác định theo<br>nhóm xe tải, chi tiết<br>như sau: | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin dịch vụ kỹ thuật<br>của người phê duyệt<br>khi ấn Phê Duyệt<br>sau khi người khác<br>vừa huỷ đề xuất<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của dịch vụ<br>kỹ thuật. |  |
+
+![Trang 319 — mockup màn hình](images/lg-p0319-00-screen.png)
 
 319
 
@@ -5782,6 +6031,9 @@ Lưu 1 bản ghi hoạt động mới
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết dịch vụ kỹ thuật, ở đây không
 có thêm hành động nào khác ở trạng thái Đã phê duyệt (xem đầy đủ các hành động theo từng
 trạng thái ở Lưu đồ trạng thái)
+
+![Trang 321 — mockup màn hình](images/lg-p0321-00-screen.png)
+
 321
 
 <!-- Page 322 -->
@@ -5828,6 +6080,9 @@ UC03.03.01 - Xem danh mục phụ tùng vật tư
 | Điều kiện sau | Hệ thống hiển thị danh sách Phụ tùng vật tư thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 325 — lưu đồ hoạt động](images/lg-p0325-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách phụ tùng vật tư
 325
@@ -5838,6 +6093,8 @@ UC03.03.01 - Xem danh mục phụ tùng vật tư
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Đơn vị tính<br>Loại phương tiện<br>Tên phương tiện<br>Hệ thống tổng thành xe<br>Trạng thái |  |
+
+![Trang 326 — mockup màn hình](images/lg-p0326-00-screen.png)
 
 326
 
@@ -5886,6 +6143,9 @@ UC03.03.02 - Xem thông tin phụ tùng vật tư
 | Điều kiện sau | Hiển thị thông tin chi tiết của phụ tùng vật tư |
 
 2. Lưu đồ hoạt động
+
+![Trang 329 — lưu đồ hoạt động](images/lg-p0329-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin phụ tùng vật tư
 329
@@ -5901,6 +6161,8 @@ UC03.03.02 - Xem thông tin phụ tùng vật tư
 | 5 | Tên phương<br>tiện | Label |  |  | Hiển thị tên phương tiện |  |
 | 6 | Hệ thống<br>tổng thành<br>xe | Label |  |  | Hiển thị hệ thống tổng thành<br>xe |  |
 | 7 | Quản lý<br>serial NCC | Label |  |  | Hiển thị có hay không việc<br>quản lý số serial của phụ tùng<br>vật tư |  |
+
+![Trang 330 — mockup màn hình](images/lg-p0330-00-screen.png)
 
 330
 
@@ -5918,6 +6180,8 @@ UC03.03.02 - Xem thông tin phụ tùng vật tư
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1<br>0 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với phụ tùng vật tư<br>đó theo từng trạng thái của<br>đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Danh sách phụ tùng<br>vật tư<br>Huỷ: Quay trở về màn<br>hình Thông tin phụ<br>tùng vật tư<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo |  |  |
+
+![Trang 332 — mockup màn hình](images/lg-p0332-00-screen.png)
 
 332
 
@@ -5954,12 +6218,17 @@ UC03.03.03 - Tạo đề xuất tạo mới phụ tùng vật tư
 | Điều kiện sau | Hệ thống tạo 1 bản ghi với trạng thái Chờ phê duyệt<br>Hiển thị toast message tạo thành công<br>Hiển thị màn hình Thông tin phụ tùng vật tư (Xem) |
 
 2. Lưu đồ hoạt động
+
+![Trang 334 — lưu đồ hoạt động](images/lg-p0334-00-flow.png)
+
 3. Mô tả màn hình
 334
 
 <!-- Page 335 -->
 
 3.1 Màn hình Tạo mới phụ tùng vật tư
+
+![Trang 335 — mockup màn hình](images/lg-p0335-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -6006,6 +6275,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 9 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới phụ tùng vật<br>tư<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới phụ<br>tùng vật tư trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách phụ tùng<br>vật tư<br>Hủy: trở về màn Tạo mới<br>phụ tùng vật tư với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 339 — mockup màn hình](images/lg-p0339-00-screen.png)
+
 339
 
 <!-- Page 340 -->
@@ -6013,6 +6284,8 @@ không hợp lệ đó.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>0 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới phụ tùng vật<br>tư<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới phụ<br>tùng vật tư trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách phụ tùng<br>vật tư<br>Hủy: trở về màn Tạo mới<br>phụ tùng vật tư với các dữ<br>liệu đã chọn/nhập. |  |
+
+![Trang 340 — mockup màn hình](images/lg-p0340-00-screen.png)
 
 Bảng Tên phương tiện - Mã phương tiện - Loại phương tiện
 
@@ -6081,6 +6354,9 @@ Bảng Tên phương tiện - Mã phương tiện - Loại phương tiện
 | 39 | Trạm bơm dầu | 38 | Trạm bơm dầu |
 
 3.1 Màn hình Thông tin PTVT (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 343 — mockup màn hình](images/lg-p0343-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết phụ tùng vật tư, ở đây chỉ mô
 tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Button Huỷ đề xuất: Click vào để hiển thị popup Xác nhận huỷ yêu cầu, thực hiện UC Huỷ đề
@@ -6106,12 +6382,17 @@ UC03.03.04 - Huỷ đề xuất cấp mới phụ tùng vật tư
 | Điều kiện sau | Trạng thái của bản ghi thay đổi từ Chờ phê duyệt → Đã huỷ<br>Hiển thị toast message thành công<br>Tắt popup Xác nhận huỷ và hiển thị màn hình Thông tin phụ tùng vật tư |
 
 2. Lưu đồ hoạt động
+
+![Trang 344 — lưu đồ hoạt động](images/lg-p0344-00-flow.png)
+
 3. Mô tả màn hình
 344
 
 <!-- Page 345 -->
 
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
+
+![Trang 345 — mockup màn hình](images/lg-p0345-00-screen.png)
 
 
 345
@@ -6130,6 +6411,9 @@ UC03.03.04 - Huỷ đề xuất cấp mới phụ tùng vật tư
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>phụ tùng vật tư.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin phụ tùng<br>vật tư |  |
 
 3.2 Màn hình Thông tin phụ tùng vật tư (Xem) - Trạng thái Đã huỷ
+
+![Trang 347 — mockup màn hình](images/lg-p0347-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết phụ tùng vật tư, ở đây chỉ mô
 tả hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở Lưu
 đồ trạng thái)
@@ -6152,6 +6436,8 @@ yêu cầu hiện tại (đã bị huỷ) nhưng không sinh ra bản ghi mới 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 |
 | --- | --- | --- | --- | --- |
 | trạng thái (từ | Đã huỷ | về | Chờ phê duyệt | ) |
+
+![Trang 348 — mockup màn hình](images/lg-p0348-00-screen.png)
 
 348
 
@@ -6177,6 +6463,10 @@ UC03.03.05 - Phê duyệt/Từ chối đề xuất cấp mới phụ tùng vật
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 350 — lưu đồ hoạt động](images/lg-p0350-00-flow.png)
+
+![Trang 350 — mockup màn hình](images/lg-p0350-01-screen.png)
+
 
 350
 
@@ -6193,6 +6483,8 @@ UC03.03.05 - Phê duyệt/Từ chối đề xuất cấp mới phụ tùng vật
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới phụ tùng vật tư.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo phụ tùng<br>vật tư thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin phụ tùng vật tư<br>với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới phụ tùng vật tư này với<br>nội dung:<br>Phụ tùng vật tư - Yêu cầu cấp<br>mới<br>Yêu cầu cấp mới phụ tùng vật<br>tư [Tên PTVT] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin phụ tùng vật tư<br>của người phê duyệt<br>khi ấn Từ chối sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của phụ<br>tùng vật tư. |
 
+![Trang 352 — mockup màn hình](images/lg-p0352-00-screen.png)
+
 352
 
 <!-- Page 353 -->
@@ -6202,6 +6494,9 @@ UC03.03.05 - Phê duyệt/Từ chối đề xuất cấp mới phụ tùng vật
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo phụ tùng vật tư.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin phụ tùng<br>vật tư. |  |
 
 3.2 Màn hình Thông tin phụ tùng vật tư (Xem) - Trạng thái Đã từ chối
+
+![Trang 353 — mockup màn hình](images/lg-p0353-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết phụ tùng vật tư, ở đây chỉ mô
 tả hành động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở
 Lưu đồ trạng thái)
@@ -6230,6 +6525,10 @@ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 354 — mockup màn hình](images/lg-p0354-00-screen.png)
+
+![Trang 354 — mockup màn hình](images/lg-p0354-01-screen.png)
+
 354
 
 <!-- Page 355 -->
@@ -6237,6 +6536,8 @@ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạo phụ<br>tùng vật tư thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tin phụ tùng vật tư.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới phụ tùng vật tư này với<br>nội dung:<br>Phụ tùng vật tư - Yêu cầu cấp<br>mới<br>Yêu cầu cấp mới phụ tùng vật<br>tư [Tên PTVT] đã được phê<br>duyệt.<br>Generate ID mới cho phụ<br>tùng vật tư với quy tắc như<br>sau:<br>Format: aab0xxccccc<br>aa: Mã phương tiện<br>chạy từ 00 đến 37<br>b: Mã hệ thống chạy từ<br>0 đến 6 theo bảng mã<br>hệ thống tổng thành xe<br>xx là:<br>00: Mã cho phụ<br>tùng, không bao | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin phụ tùng vật tư<br>của người phê duyệt<br>khi ấn Phê Duyệt<br>sau khi người khác<br>vừa huỷ đề xuất<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của phụ<br>tùng vật tư. |  |
+
+![Trang 355 — mockup màn hình](images/lg-p0355-00-screen.png)
 
 355
 
@@ -6276,6 +6577,9 @@ Lưu 1 bản ghi hoạt động mới
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết phụ tùng vật tư, ở đây không
 có thêm hành động nào khác ở trạng thái Đã phê duyệt (xem đầy đủ các hành động theo từng
 trạng thái ở Lưu đồ trạng thái)
+
+![Trang 357 — mockup màn hình](images/lg-p0357-00-screen.png)
+
 357
 
 <!-- Page 358 -->
@@ -6322,6 +6626,9 @@ UC03.04.01 - Xem danh mục công cụ dụng cụ
 | Điều kiện sau | Hệ thống hiển thị danh sách Công cụ dụng cụ thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 361 — lưu đồ hoạt động](images/lg-p0361-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách Công cụ dụng cụ
 361
@@ -6334,6 +6641,8 @@ UC03.04.01 - Xem danh mục công cụ dụng cụ
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Đơn vị tính<br>Loại công cụ dụng cụ<br>Trạng thái |  |
 | 3 | Bộ lọc | Sideb<br>ar |  |  | Xem mô tả phần Common<br>Rules<br>Cho phép lọc các cột sau:<br>Đơn vị tính<br>Loại công cụ dụng cụ<br>Trạng thái |  |
 | 4 | Export | Butto<br>n |  |  | Xem mô tả phần Common<br>Rules |  |
+
+![Trang 362 — mockup màn hình](images/lg-p0362-00-screen.png)
 
 362
 
@@ -6378,6 +6687,9 @@ UC03.04.02 - Xem thông tin công cụ dụng cụ
 | Điều kiện sau | Hiển thị thông tin chi tiết của công cụ dụng cụ |
 
 2. Lưu đồ hoạt động
+
+![Trang 365 — lưu đồ hoạt động](images/lg-p0365-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin phụ công cụ dụng cụ
 365
@@ -6392,6 +6704,8 @@ UC03.04.02 - Xem thông tin công cụ dụng cụ
 | 4 | Phân loại | Label |  |  | Hiển thị phân loại công cụ<br>dụng cụ |  |
 | 5 | Trạng thái | Label |  |  | Hiển thị trạng thái hiện tại của<br>công cụ dụng cụ |  |
 | 6 | Quản lý<br>serial nhà<br>sản xuất | Label |  |  | Hiển thị có hay không quản lý<br>serial nhà sản xuất |  |
+
+![Trang 366 — mockup màn hình](images/lg-p0366-00-screen.png)
 
 366
 
@@ -6408,6 +6722,8 @@ UC03.04.02 - Xem thông tin công cụ dụng cụ
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 8 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với công cụ dụng cụ<br>đó theo từng trạng thái của<br>đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Danh sách công cụ<br>dụng cụ<br>Huỷ: Quay trở về màn<br>hình Thông tin công<br>cụ dụng cụ<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo |  |  |
+
+![Trang 368 — mockup màn hình](images/lg-p0368-00-screen.png)
 
 368
 
@@ -6444,12 +6760,17 @@ UC03.04.03 - Tạo đề xuất tạo mới công cụ dụng cụ
 | Điều kiện sau | Hệ thống tạo 1 bản ghi với trạng thái Chờ phê duyệt<br>Hiển thị toast message tạo thành công<br>Hiển thị màn hình Thông tin công cụ dụng cụ (Xem) |
 
 2. Lưu đồ hoạt động
+
+![Trang 370 — lưu đồ hoạt động](images/lg-p0370-00-flow.png)
+
 370
 
 <!-- Page 371 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Tạo mới công cụ dụng cụ
+
+![Trang 371 — mockup màn hình](images/lg-p0371-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -6487,6 +6808,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 7 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới công cụ dụng<br>cụ<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới công cụ<br>dụng cụ trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách công cụ<br>dụng cụ<br>Hủy: trở về màn Tạo mới<br>công cụ dụng cụ với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 374 — mockup màn hình](images/lg-p0374-00-screen.png)
+
 374
 
 <!-- Page 375 -->
@@ -6495,7 +6818,12 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 8 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới công cụ dụng<br>cụ<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới công cụ<br>dụng cụ trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách công cụ<br>dụng cụ<br>Hủy: trở về màn Tạo mới<br>công cụ dụng cụ với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 375 — mockup màn hình](images/lg-p0375-00-screen.png)
+
 3.1 Màn hình Thông tin CCDC (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 375 — mockup màn hình](images/lg-p0375-01-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết công cụ dụng cụ, ở đây chỉ mô
 tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 375
@@ -6532,6 +6860,10 @@ UC03.04.04 - Huỷ đề xuất cấp mới công cụ dụng cụ
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
 
+![Trang 378 — lưu đồ hoạt động](images/lg-p0378-00-flow.png)
+
+![Trang 378 — mockup màn hình](images/lg-p0378-01-screen.png)
+
 
 378
 
@@ -6549,6 +6881,9 @@ UC03.04.04 - Huỷ đề xuất cấp mới công cụ dụng cụ
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>công cụ dụng cụ.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin công cụ<br>dụng cụ |  |
 
 3.2 Màn hình Thông tin công cụ dụng cụ (Xem) - Trạng thái Đã huỷ
+
+![Trang 380 — mockup màn hình](images/lg-p0380-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết công cụ dụng cụ, ở đây chỉ mô
 tả hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở Lưu
 đồ trạng thái)
@@ -6571,6 +6906,8 @@ từ yêu cầu hiện tại (đã bị huỷ) nhưng không sinh ra bản ghi m
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 |
 | --- | --- | --- | --- | --- |
 | và trạng thái (từ | Đã huỷ | về | Chờ phê duyệt | ) |
+
+![Trang 381 — mockup màn hình](images/lg-p0381-00-screen.png)
 
 381
 
@@ -6596,6 +6933,10 @@ UC03.04.05 - Phê duyệt/Từ chối đề xuất cấp mới công cụ dụng
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 383 — lưu đồ hoạt động](images/lg-p0383-00-flow.png)
+
+![Trang 383 — mockup màn hình](images/lg-p0383-01-screen.png)
+
 
 383
 
@@ -6612,6 +6953,8 @@ UC03.04.05 - Phê duyệt/Từ chối đề xuất cấp mới công cụ dụng
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới công cụ dụng cụ.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo công cụ<br>dụng cụ thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin công cụ dụng cụ<br>với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới công cụ dụng cụ này<br>với nội dung:<br>Công cụ dụng cụ - Yêu cầu<br>cấp mới<br>Yêu cầu cấp mới công cụ<br>dụng cụ [Tên CCDC] đã bị từ<br>chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin công cụ dụng cụ<br>của người phê duyệt<br>khi ấn Từ chối sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của công<br>cụ dụng cụ. |
 
+![Trang 385 — mockup màn hình](images/lg-p0385-00-screen.png)
+
 385
 
 <!-- Page 386 -->
@@ -6621,6 +6964,9 @@ UC03.04.05 - Phê duyệt/Từ chối đề xuất cấp mới công cụ dụng
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo công cụ dụng cụ.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin công cụ<br>dụng cụ. |  |
 
 3.2 Màn hình Thông tin công cụ dụng cụ (Xem) - Trạng thái Đã từ chối
+
+![Trang 386 — mockup màn hình](images/lg-p0386-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết công cụ dụng cụ, ở đây chỉ mô
 tả hành động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở
 Lưu đồ trạng thái)
@@ -6649,6 +6995,10 @@ từ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 387 — mockup màn hình](images/lg-p0387-00-screen.png)
+
+![Trang 387 — mockup màn hình](images/lg-p0387-01-screen.png)
+
 387
 
 <!-- Page 388 -->
@@ -6656,6 +7006,8 @@ từ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạo<br>công cụ dụng cụ thành<br>công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tincông cụ dụng<br>cụ.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới công cụ dụng cụ này<br>với nội dung:<br>Công cụ dụng cụ - Yêu cầu<br>cấp mới<br>Yêu cầu cấp mới công cụ<br>dụng cụ [Tên CCDC] đã được<br>phê duyệt.<br>Generate ID mới cho công<br>cụ dụng cụ với quy tắc như<br>sau:<br>Format: aaccccc<br>aa: Hai số 01 và 02 chỉ<br>loại công cụ trong đó<br>01 là loại cầm tay và 02<br>là loại công cụ dụng cụ<br>lớn.<br>ccccc: Mã công cụ<br>dụng cụ chạy từ 00001 | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tincông cụ dụng cụ<br>của người phê duyệt<br>khi ấn Phê Duyệt<br>sau khi người khác<br>vừa huỷ đề xuất<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củacông<br>cụ dụng cụ. |  |
+
+![Trang 388 — mockup màn hình](images/lg-p0388-00-screen.png)
 
 388
 
@@ -6677,6 +7029,9 @@ Lưu 1 bản ghi hoạt động mới
 3.4 Màn hình Thông tincông cụ dụng cụ (Xem) - Trạng thái Đã phê duyệt
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết công cụ dụng cụ, ở đây không
 có thêm hành động nào khác ở trạng thái Đã phê duyệt (xem đầy đủ các hành động theo từng
+
+![Trang 389 — mockup màn hình](images/lg-p0389-00-screen.png)
+
 389
 
 <!-- Page 390 -->
@@ -6728,6 +7083,9 @@ UC03.05.01 - Xem danh mục lốp
 | Điều kiện sau | Hệ thống hiển thị danh sách lốp thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 394 — lưu đồ hoạt động](images/lg-p0394-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách lốp
 394
@@ -6738,6 +7096,8 @@ UC03.05.01 - Xem danh mục lốp
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Loại phương tiện<br>Mã PT - Tên PT<br>Hệ thống tổng thành xe<br>Đơn vị tính<br>Săm<br>Trạng thái |  |
+
+![Trang 395 — mockup màn hình](images/lg-p0395-00-screen.png)
 
 395
 
@@ -6796,6 +7156,9 @@ UC03.05.02 - Xem thông tin lốp
 | Điều kiện sau | Hiển thị thông tin chi tiết của lốp |
 
 2. Lưu đồ hoạt động
+
+![Trang 399 — lưu đồ hoạt động](images/lg-p0399-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin lốp
 399
@@ -6810,6 +7173,8 @@ UC03.05.02 - Xem thông tin lốp
 | 4 | Mã PT - Tên<br>PT | Label |  |  | Hiển thị tên phương tiện của<br>lốp |  |
 | 5 | Hệ thống<br>tổng thành<br>xe | Label |  |  | Hiển thị hệ thống tổng thành<br>xe của lốp |  |
 | 6 | Nhà sản<br>xuất | Label |  |  | Hiển thị nhà sản xuất lốp<br>Nếu không có giá trị thì để “--” |  |
+
+![Trang 400 — mockup màn hình](images/lg-p0400-00-screen.png)
 
 400
 
@@ -6832,6 +7197,8 @@ UC03.05.02 - Xem thông tin lốp
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1<br>4 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với lốp đó theo từng<br>trạng thái của đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Danh sách lốp<br>Huỷ: Quay trở về màn<br>hình Thông tin lốp<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo<br>mới yêu cầu cấp mới, thực<br>hiện UC Tạo đề xuất cấp mới<br>lốp với các trường lấy thông |  |  |
+
+![Trang 402 — mockup màn hình](images/lg-p0402-00-screen.png)
 
 402
 
@@ -6871,6 +7238,9 @@ UC03.05.03 - Tạo đề xuất tạo mới lốp
 
 3. Mô tả màn hình
 3.1 Màn hình Tạo mới lốp
+
+![Trang 405 — lưu đồ hoạt động](images/lg-p0405-00-flow.png)
+
 405
 
 <!-- Page 406 -->
@@ -6880,6 +7250,8 @@ UC03.05.03 - Tạo đề xuất tạo mới lốp
 | 1 | Tên lốp | Short<br>textb<br>ox | Có |  | Cho phép người dùng nhập<br>tên lốp | Tên lốp phải unique<br>→ Hệ thống báo lỗi:<br>“Tên này đã bị<br>trùng.” |
 | 2 | Quản lý<br>serial nhà<br>sản xuất | Dropd<br>own |  | Có và<br>disable | Mặc định giá trị có và không<br>cho chỉnh sửa<br>Lốp bắt buộc phải quản lý<br>serial của NSX |  |
 | 3 | Nhà sản<br>xuất | Short<br>textb<br>ox |  |  | Cho phép người dùng nhập<br>nhà sản xuất của lốp |  |
+
+![Trang 406 — mockup màn hình](images/lg-p0406-00-screen.png)
 
 406
 
@@ -6923,6 +7295,14 @@ không hợp lệ đó.
 | 1<br>3 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới lốp<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới lốp<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách lốp<br>Hủy: trở về màn Tạo mới<br>lốp với các dữ liệu đã<br>chọn/nhập. |  |
 | 1<br>4 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới lốp<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới lốp<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách lốp<br>Hủy: trở về màn Tạo mới<br>lốp với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 410 — mockup màn hình](images/lg-p0410-00-screen.png)
+
+![Trang 410 — mockup màn hình](images/lg-p0410-01-screen.png)
+
+![Trang 410 — mockup màn hình](images/lg-p0410-00-screen.png)
+
+![Trang 410 — mockup màn hình](images/lg-p0410-01-screen.png)
+
 3.1 Màn hình Thông tin lốp (xem) - Trạng thái Chờ phê duyệt
 410
 
@@ -6936,6 +7316,9 @@ Button Phê duyệt: Click vào để hiển thị popup Xác nhận phê duyệ
 Phê duyệt đề xuất cấp mới lốp
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối yêu cầu, thực hiện UC Từ chối
 đề xuất cấp mới lốp
+
+![Trang 411 — mockup màn hình](images/lg-p0411-00-screen.png)
+
 411
 
 <!-- Page 412 -->
@@ -6960,6 +7343,10 @@ UC03.05.04 - Huỷ đề xuất cấp mới lốp
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
 
+![Trang 413 — lưu đồ hoạt động](images/lg-p0413-00-flow.png)
+
+![Trang 413 — mockup màn hình](images/lg-p0413-01-screen.png)
+
 
 413
 
@@ -6977,6 +7364,9 @@ UC03.05.04 - Huỷ đề xuất cấp mới lốp
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>lốp.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin lốp |  |
 
 3.2 Màn hình Thông tin lốp (Xem) - Trạng thái Đã huỷ
+
+![Trang 415 — mockup màn hình](images/lg-p0415-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết lốp, ở đây chỉ mô tả hành động
 chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái)
 Xoá yêu cầu: Cho phép người dùng xoá yêu cầu đã bị huỷ.
@@ -6990,6 +7380,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Danh sách lốp
 Huỷ: Quay trở về màn hình Thông tin lốp
+
+![Trang 416 — mockup màn hình](images/lg-p0416-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Người dùng chọn tới icon … > Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu
 cầu cấp mới, thực hiện UC Tạo đề xuất cấp mới lốp với các trường lấy thông tin từ yêu cầu hiện
@@ -7023,6 +7416,10 @@ UC03.05.05 - Phê duyệt/Từ chối đề xuất cấp mới lốp
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 418 — lưu đồ hoạt động](images/lg-p0418-00-flow.png)
+
+![Trang 418 — mockup màn hình](images/lg-p0418-01-screen.png)
+
 
 418
 
@@ -7032,6 +7429,9 @@ UC03.05.05 - Phê duyệt/Từ chối đề xuất cấp mới lốp
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Lý do từ<br>chối | Textb<br>ox<br>(Short<br>) | Khô<br>ng |  | Cho phép người dùng nhập lý<br>do từ chối đề xuất cấp mới<br>lốp. |  |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới lốp.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo lốp thành<br>công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin lốp với 2 hoạt<br>động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới lốp này với nội dung:<br>Lốp - Yêu cầu cấp mới<br>Yêu cầu cấp mới lốp [Mã lốp]<br>đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin lốp của người<br>phê duyệt khi ấn Từ<br>chối sau khi người<br>khác vừa huỷ đề<br>xuất trước, hệ thống<br>hiển thị popup thông<br>báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của lốp. |
+
+![Trang 419 — mockup màn hình](images/lg-p0419-00-screen.png)
+
 419
 
 <!-- Page 420 -->
@@ -7041,6 +7441,9 @@ UC03.05.05 - Phê duyệt/Từ chối đề xuất cấp mới lốp
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo lốp.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin lốp |  |
 
 3.2 Màn hình Thông tin lốp (Xem) - Trạng thái Đã từ chối
+
+![Trang 420 — mockup màn hình](images/lg-p0420-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết lốp ở đây chỉ mô tả hành động
 chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng
 thái)
@@ -7069,6 +7472,10 @@ tại (đã bị từ chối) nhưng không sinh ra bản ghi mới mà cập nh
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 421 — mockup màn hình](images/lg-p0421-00-screen.png)
+
+![Trang 421 — mockup màn hình](images/lg-p0421-01-screen.png)
+
 421
 
 <!-- Page 422 -->
@@ -7076,6 +7483,8 @@ tại (đã bị từ chối) nhưng không sinh ra bản ghi mới mà cập nh
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạo lốp<br>thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinlốp.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới lốp này với nội dung:<br>Lốp - Yêu cầu cấp mới<br>Yêu cầu cấp mới lốp [Tên lốp]<br>đã được phê duyệt.<br>Generate ID mới cho lốp với<br>quy tắc như sau:<br>Format: aab01ccc<br>aa: Mã phương tiện<br>chạy từ 00 đến 37<br>b: Mã hệ thống chạy từ<br>0 đến 6 theo bảng mã<br>hệ thống tổng thành xe<br>01: Mã dành cho lốp<br>ccccc: Mã lốp chạy từ<br>00001 đến 99999,<br>đánh số thứ tự tăng<br>dần.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động: | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinlốp của người<br>phê duyệt khi ấn<br>Phê Duyệt sau khi<br>người khác vừa huỷ<br>đề xuất trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củalốp. |  |
+
+![Trang 422 — mockup màn hình](images/lg-p0422-00-screen.png)
 
 422
 
@@ -7090,6 +7499,9 @@ tại (đã bị từ chối) nhưng không sinh ra bản ghi mới mà cập nh
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận phê duyệt đề<br>xuất tạo lốp.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin lốp |  |
 
 3.4 Màn hình Thông tin lốp (Xem) - Trạng thái Đã phê duyệt
+
+![Trang 423 — mockup màn hình](images/lg-p0423-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết lốp, ở đây không có thêm hành
 động nào khác ở trạng thái Đã phê duyệt (xem đầy đủ các hành động theo từng trạng thái ở
 Lưu đồ trạng thái)
@@ -7139,6 +7551,9 @@ UC03.06.01 - Xem danh mục ắc quy
 | Điều kiện sau | Hệ thống hiển thị danh sách ắc quy thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 427 — lưu đồ hoạt động](images/lg-p0427-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách ắc quy
 427
@@ -7149,6 +7564,8 @@ UC03.06.01 - Xem danh mục ắc quy
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng<br>(trừ trạng thái) |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Loại phương tiện<br>Mã phương tiện - Tên<br>phương tiện<br>Hệ thống tổng thành xe<br>Đơn vị tính<br>Trạng thái |  |
+
+![Trang 428 — mockup màn hình](images/lg-p0428-00-screen.png)
 
 428
 
@@ -7206,6 +7623,9 @@ UC03.06.02 - Xem thông tin ắc quy
 | Điều kiện sau | Hiển thị thông tin chi tiết của ắc quy |
 
 2. Lưu đồ hoạt động
+
+![Trang 432 — lưu đồ hoạt động](images/lg-p0432-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin ắc quy
 432
@@ -7219,6 +7639,8 @@ UC03.06.02 - Xem thông tin ắc quy
 | 3 | Loại<br>phương tiện | Label |  |  | Hiển thị loại phương tiện của<br>ắc quy |  |
 | 4 | Mã PT - Tên<br>PT | Label |  |  | Hiển thị tên phương tiện của<br>ắc quy |  |
 | 5 | Hệ thống<br>tổng thành<br>xe | Label |  |  | Hiển thị hệ thống tổng thành<br>xe của ắc quy |  |
+
+![Trang 433 — mockup màn hình](images/lg-p0433-00-screen.png)
 
 433
 
@@ -7241,6 +7663,8 @@ UC03.06.02 - Xem thông tin ắc quy
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1<br>3 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với ắc quy đó theo<br>từng trạng thái của đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Danh sách ắc quy<br>Huỷ: Quay trở về màn<br>hình Thông tin ắc quy<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo<br>mới yêu cầu cấp mới, thực<br>hiện UC Tạo đề xuất cấp mới<br>ắc quy với các trường lấy |  |  |
+
+![Trang 435 — mockup màn hình](images/lg-p0435-00-screen.png)
 
 435
 
@@ -7274,12 +7698,17 @@ UC03.06.03 - Tạo đề xuất tạo mới ắc quy
 | Điều kiện sau | Hệ thống tạo 1 bản ghi với trạng thái Chờ phê duyệt<br>Hiển thị toast message tạo thành công<br>Hiển thị màn hình Thông tin ắc quy (Xem) |
 
 2. Lưu đồ hoạt động
+
+![Trang 437 — lưu đồ hoạt động](images/lg-p0437-00-flow.png)
+
 437
 
 <!-- Page 438 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Tạo mới ắc quy
+
+![Trang 438 — mockup màn hình](images/lg-p0438-00-screen.png)
 
 |  | Control | Loại | Trư<br>ờng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -7328,6 +7757,14 @@ không hợp lệ đó.
 | 1<br>2 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới ắc quy<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới ắc quy<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách ắc quy<br>Hủy: trở về màn Tạo mới ắc<br>quy với các dữ liệu đã<br>chọn/nhập. |  |
 | 1<br>3 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới ắc quy<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới ắc quy<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách ắc quy<br>Hủy: trở về màn Tạo mới ắc<br>quy với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 442 — mockup màn hình](images/lg-p0442-00-screen.png)
+
+![Trang 442 — mockup màn hình](images/lg-p0442-01-screen.png)
+
+![Trang 442 — mockup màn hình](images/lg-p0442-00-screen.png)
+
+![Trang 442 — mockup màn hình](images/lg-p0442-01-screen.png)
+
 3.1 Màn hình Thông tin ắc quy (xem) - Trạng thái Chờ phê duyệt
 442
 
@@ -7341,6 +7778,9 @@ Button Phê duyệt: Click vào để hiển thị popup Xác nhận phê duyệ
 Phê duyệt đề xuất cấp mới ắc quy
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối yêu cầu, thực hiện UC Từ chối
 đề xuất cấp mới ắc quy
+
+![Trang 443 — mockup màn hình](images/lg-p0443-00-screen.png)
+
 443
 
 <!-- Page 444 -->
@@ -7358,12 +7798,17 @@ UC03.06.04 - Huỷ đề xuất cấp mới ắc quy
 | Điều kiện sau | Trạng thái của bản ghi thay đổi từ Chờ phê duyệt → Đã huỷ<br>Hiển thị toast message thành công<br>Tắt popup Xác nhận huỷ và hiển thị màn hình Thông tin ắc quy |
 
 2. Lưu đồ hoạt động
+
+![Trang 444 — lưu đồ hoạt động](images/lg-p0444-00-flow.png)
+
 444
 
 <!-- Page 445 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
+
+![Trang 445 — mockup màn hình](images/lg-p0445-00-screen.png)
 
 
 445
@@ -7382,6 +7827,9 @@ UC03.06.04 - Huỷ đề xuất cấp mới ắc quy
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>ắc quy.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin ắc quy |  |
 
 3.2 Màn hình Thông tin ắc quy (Xem) - Trạng thái Đã huỷ
+
+![Trang 447 — mockup màn hình](images/lg-p0447-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết ắc quy, ở đây chỉ mô tả hành
 động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng
 thái)
@@ -7396,6 +7844,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Danh sách ắc quy
 Huỷ: Quay trở về màn hình Thông tin ắc quy
+
+![Trang 448 — mockup màn hình](images/lg-p0448-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Người dùng chọn tới icon … > Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu
 cầu cấp mới, thực hiện UC Tạo đề xuất cấp mới ắc quy với các trường lấy thông tin từ yêu cầu
@@ -7428,6 +7879,11 @@ UC03.06.05 - Phê duyệt/Từ chối đề xuất cấp mới ắc quy
 
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
+
+![Trang 450 — lưu đồ hoạt động](images/lg-p0450-00-flow.png)
+
+![Trang 450 — mockup màn hình](images/lg-p0450-01-screen.png)
+
 450
 
 <!-- Page 451 -->
@@ -7444,6 +7900,8 @@ UC03.06.05 - Phê duyệt/Từ chối đề xuất cấp mới ắc quy
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới ắc quy.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo ắc quy<br>thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin ắc quy với 2 hoạt<br>động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới ắc quy này với nội<br>dung:<br>Ắc quy - Yêu cầu cấp mới<br>Yêu cầu cấp mới ắc quy [Mã<br>ắc quy] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin ắc quy của người<br>phê duyệt khi ấn Từ<br>chối sau khi người<br>khác vừa huỷ đề<br>xuất trước, hệ thống<br>hiển thị popup thông<br>báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của ắc quy. |
 
+![Trang 452 — mockup màn hình](images/lg-p0452-00-screen.png)
+
 452
 
 <!-- Page 453 -->
@@ -7453,6 +7911,9 @@ UC03.06.05 - Phê duyệt/Từ chối đề xuất cấp mới ắc quy
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo ắc quy.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin ắc quy |  |
 
 3.2 Màn hình Thông tin ắc quy (Xem) - Trạng thái Đã từ chối
+
+![Trang 453 — mockup màn hình](images/lg-p0453-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết ắc quy đây chỉ mô tả hành
 động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ
 trạng thái)
@@ -7476,6 +7937,10 @@ hiện tại (đã bị từ chối)
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 454 — mockup màn hình](images/lg-p0454-00-screen.png)
+
+![Trang 454 — mockup màn hình](images/lg-p0454-01-screen.png)
+
 454
 
 <!-- Page 455 -->
@@ -7483,6 +7948,8 @@ hiện tại (đã bị từ chối)
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạo ắc<br>quythành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinắc quy.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới ắc quy này với nội<br>dung:<br>Ắc quy - Yêu cầu cấp mới<br>Yêu cầu cấp mới ắc quy [Tên<br>ắc quy] đã được phê duyệt.<br>Generate ID mới cho ắc quy<br>với quy tắc như sau:<br>Format: aab02ccc<br>aa: Mã phương tiện<br>chạy từ 00 đến 37<br>b: Mã hệ thống chạy từ<br>0 đến 6 theo bảng mã<br>hệ thống tổng thành xe<br>02: Mã dành cho ắc<br>quy<br>ccccc: Mã lốp chạy từ<br>00001 đến 99999,<br>đánh số thứ tự tăng<br>dần. | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinắc quy của người<br>phê duyệt khi ấn<br>Phê Duyệt sau khi<br>người khác vừa huỷ<br>đề xuất trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củaắc quy. |  |
+
+![Trang 455 — mockup màn hình](images/lg-p0455-00-screen.png)
 
 455
 
@@ -7499,6 +7966,9 @@ Lưu 1 bản ghi hoạt động mới
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận phê duyệt đề<br>xuất tạo ắc quy.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin ắc quy |  |
 
 3.4 Màn hình Thông tin ắc quy (Xem) - Trạng thái Đã phê duyệt
+
+![Trang 456 — mockup màn hình](images/lg-p0456-00-screen.png)
+
 456
 
 <!-- Page 457 -->
@@ -7552,6 +8022,9 @@ UC03.07.01 - Xem danh mục nhà cung cấp HHDV
 | Điều kiện sau | Hệ thống hiển thị danh sách nhà cung cấp HHDV thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 461 — lưu đồ hoạt động](images/lg-p0461-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách nhà cung cấp HHDV
 461
@@ -7562,6 +8035,8 @@ UC03.07.01 - Xem danh mục nhà cung cấp HHDV
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Loại nhà cung cấp<br>Chi nhánh Delta ký hợp<br>đồng với NCC<br>Phương thức thanh toán<br>Hoá đơn tài chính<br>Ngân hàng<br>Trạng thái |  |
+
+![Trang 462 — mockup màn hình](images/lg-p0462-00-screen.png)
 
 462
 
@@ -7630,6 +8105,9 @@ UC03.07.02 - Xem thông tin nhà cung cấp HHDV
 | Điều kiện sau | Hiển thị thông tin chi tiết của nhà cung cấp HHDV |
 
 2. Lưu đồ hoạt động
+
+![Trang 467 — lưu đồ hoạt động](images/lg-p0467-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin nhà cung cấp HHDV
 
@@ -7693,6 +8171,8 @@ UC03.07.02 - Xem thông tin nhà cung cấp HHDV
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2<br>5 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với nhà cung cấp<br>HHDV đó theo từng trạng thái<br>của đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Danh sách nhà cung<br>cấp HHDV<br>Huỷ: Quay trở về màn<br>hình Thông tin nhà<br>cung cấp HHDV<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo |  |  |
 
+![Trang 472 — mockup màn hình](images/lg-p0472-00-screen.png)
+
 472
 
 <!-- Page 473 -->
@@ -7728,13 +8208,22 @@ UC03.07.03 - Tạo đề xuất tạo mới nhà cung cấp HHDV
 | Điều kiện sau | Hệ thống tạo 1 bản ghi với trạng thái Chờ phê duyệt<br>Hiển thị toast message tạo thành công<br>Hiển thị màn hình Thông tin nhà cung cấp HHDV (Xem) |
 
 2. Lưu đồ hoạt động
+
+![Trang 474 — lưu đồ hoạt động](images/lg-p0474-00-flow.png)
+
 3. Mô tả màn hình
 474
 
 <!-- Page 475 -->
 
 3.1 Màn hình Tạo mới nhà cung cấp HHDV
+
+![Trang 475 — mockup màn hình](images/lg-p0475-00-screen.png)
+
 DELTA ERP 3.0 | CÂY DẦU | WEB
+
+![Trang 475 — mockup màn hình](images/lg-p0475-01-screen.jpg)
+
 • Updated 3 days ago
 Figma Open preview modal
 UI chưa final
@@ -7842,6 +8331,8 @@ Chỉ cho phép chọn 1 giá trị
 | 1<br>5 | Button<br>upload file | Butto<br>n |  | Enable | Cho phép người dùng mở thư<br>mục local để chọn file tải lên. |  |
 | 1<br>6 | Phương<br>thức thanh<br>toán | Dropd<br>own<br>list | Có |  | Cho phép chọn phương thức<br>thanh toán trong danh sách có<br>sẵn, bao gồm:<br>Thanh toán trả trước<br>Thanh toán trả sau<br>Chỉ cho phép chọn 1 giá trị |  |
 
+![Trang 481 — mockup màn hình](images/lg-p0481-00-screen.png)
+
 481
 
 <!-- Page 482 -->
@@ -7884,6 +8375,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>4 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới nhà cung cấp<br>HHDV<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới nhà<br>cung cấp HHDV trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách nhà cung<br>cấp HHDV<br>Hủy: trở về màn Tạo mới<br>nhà cung cấp HHDV với<br>các dữ liệu đã chọn/nhập. |  |
 
+![Trang 485 — mockup màn hình](images/lg-p0485-00-screen.png)
+
 485
 
 <!-- Page 486 -->
@@ -7891,6 +8384,8 @@ không hợp lệ đó.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>5 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới nhà cung cấp<br>HHDV<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới nhà<br>cung cấp HHDV trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách nhà cung<br>cấp HHDV<br>Hủy: trở về màn Tạo mới<br>nhà cung cấp HHDV với<br>các dữ liệu đã chọn/nhập. |  |
+
+![Trang 486 — mockup màn hình](images/lg-p0486-00-screen.png)
 
 3.1 Màn hình Thông tin nhà cung cấp HHDV (xem) - Trạng thái Chờ phê duyệt
 486
@@ -7906,6 +8401,9 @@ Button Phê duyệt: Click vào để hiển thị popup Xác nhận phê duyệ
 Phê duyệt đề xuất cấp mới nhà cung cấp HHDV
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối yêu cầu, thực hiện UC Từ chối
 đề xuất cấp mới nhà cung cấp HHDV
+
+![Trang 487 — mockup màn hình](images/lg-p0487-00-screen.png)
+
 487
 
 <!-- Page 488 -->
@@ -7930,6 +8428,10 @@ UC03.07.04 - Huỷ đề xuất cấp mới nhà cung cấp HHDV
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
 
+![Trang 489 — lưu đồ hoạt động](images/lg-p0489-00-flow.png)
+
+![Trang 489 — mockup màn hình](images/lg-p0489-01-screen.png)
+
 
 489
 
@@ -7947,6 +8449,9 @@ UC03.07.04 - Huỷ đề xuất cấp mới nhà cung cấp HHDV
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>nhà cung cấp HHDV.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin nhà cung<br>cấp HHDV |  |
 
 3.2 Màn hình Thông tin nhà cung cấp HHDV (Xem) - Trạng thái Đã huỷ
+
+![Trang 491 — mockup màn hình](images/lg-p0491-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhà cung cấp HHDV , ở đây chỉ
 mô tả hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở
 Lưu đồ trạng thái)
@@ -7961,6 +8466,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Danh sách nhà cung cấp HHDV
 Huỷ: Quay trở về màn hình Thông tin nhà cung cấp HHDV
+
+![Trang 492 — mockup màn hình](images/lg-p0492-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Người dùng chọn tới icon … > Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu
 cầu cấp mới, thực hiện UC Tạo đề xuất cấp mới nhà cung cấp HHDV với các trường lấy thông
@@ -7989,6 +8497,10 @@ UC03.07.05 - Phê duyệt/Từ chối đề xuất cấp mới nhà cung cấp H
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 494 — lưu đồ hoạt động](images/lg-p0494-00-flow.png)
+
+![Trang 494 — mockup màn hình](images/lg-p0494-01-screen.png)
+
 
 494
 
@@ -8005,6 +8517,8 @@ UC03.07.05 - Phê duyệt/Từ chối đề xuất cấp mới nhà cung cấp H
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới nhà cung cấp HHDV.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo nhà cung<br>cấp HHDV thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tinnhà cung cấp<br>HHDV với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới nhà cung cấp HHDV<br>này với nội dung:<br>Nhà cung cấp HHDV - Yêu<br>cầu cấp mới<br>Yêu cầu cấp mới nhà cung<br>cấp HHDV [Tên NCC] đã bị từ<br>chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin nhà cung cấp<br>HHDV của người<br>phê duyệt khi ấn Từ<br>chối sau khi người<br>khác vừa huỷ đề<br>xuất trước, hệ thống<br>hiển thị popup thông<br>báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của nhà<br>cung cấp HHDV. |
 
+![Trang 496 — mockup màn hình](images/lg-p0496-00-screen.png)
+
 496
 
 <!-- Page 497 -->
@@ -8014,6 +8528,9 @@ UC03.07.05 - Phê duyệt/Từ chối đề xuất cấp mới nhà cung cấp H
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo nhà cung cấp HHDV.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin nhà cung<br>cấp HHDV. |  |
 
 3.2 Màn hình Thông tin nhà cung cấp HHDV (Xem) - Trạng thái Đã từ chối
+
+![Trang 497 — mockup màn hình](images/lg-p0497-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhà cung cấp HHDV, ở đây chỉ
 mô tả hành động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái
 ở Lưu đồ trạng thái)
@@ -8037,6 +8554,10 @@ tin từ yêu cầu hiện tại (đã bị từ chối)
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 498 — mockup màn hình](images/lg-p0498-00-screen.png)
+
+![Trang 498 — mockup màn hình](images/lg-p0498-01-screen.png)
+
 498
 
 <!-- Page 499 -->
@@ -8044,6 +8565,8 @@ tin từ yêu cầu hiện tại (đã bị từ chối)
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạonhà<br>cung cấp HHDV thành<br>công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinnhà cung cấp<br>HHDV.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới nhà cung cấp HHDV<br>này với nội dung:<br>Nhà cung cấp HHDV - Yêu<br>cầu cấp mới<br>Yêu cầu cấp mới nhà cung<br>cấp HHDV [Tên NCC] đã được<br>phê duyệt.<br>Generate ID mới cho nhà<br>cung cấp với quy tắc như<br>sau:<br>Format: aabbb<br>aa: Là hai chữ cái viết<br>tắt tên chi nhánh Delta<br>ký hợp đồng với nhà<br>cung cấp đó. Cụ thể<br>như sau:<br>HN: Delta Hà Nội | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinnhà cung cấp<br>HHDV của người<br>phê duyệt khi ấn<br>Phê Duyệt sau khi<br>người khác vừa huỷ<br>đề xuất trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củanhà<br>cung cấp HHDV. |  |
+
+![Trang 499 — mockup màn hình](images/lg-p0499-00-screen.png)
 
 499
 
@@ -8075,6 +8598,9 @@ Lưu 1 bản ghi hoạt động mới
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhà cung cấp HHDV, ở đây
 không có thêm hành động nào khác ở trạng thái Đã phê duyệt (xem đầy đủ các hành động theo
 từng trạng thái ở Lưu đồ trạng thái)
+
+![Trang 501 — mockup màn hình](images/lg-p0501-00-screen.png)
+
 501
 
 <!-- Page 502 -->
@@ -8121,6 +8647,9 @@ UC03.08.01 - Xem danh mục khách hàng DK05
 | Điều kiện sau | Hệ thống hiển thị danh sách khách hàng DK05 thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 505 — lưu đồ hoạt động](images/lg-p0505-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách khách hàng DK05
 505
@@ -8131,6 +8660,8 @@ UC03.08.01 - Xem danh mục khách hàng DK05
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Loại khách hàng<br>Phương thức thanh toán<br>Ngân hàng<br>Trạng thái |  |
+
+![Trang 506 — mockup màn hình](images/lg-p0506-00-screen.png)
 
 506
 
@@ -8191,11 +8722,18 @@ UC03.08.02 - Xem thông tin khách hàng DK05
 | Điều kiện sau | Hiển thị thông tin chi tiết của khách hàng DK05 |
 
 2. Lưu đồ hoạt động
+
+![Trang 510 — lưu đồ hoạt động](images/lg-p0510-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin khách hàng DK05
 510
 
 <!-- Page 511 -->
+
+![Trang 511 — mockup màn hình](images/lg-p0511-00-screen.png)
+
+![Trang 511 — mockup màn hình](images/lg-p0511-01-screen.png)
 
 511
 
@@ -8217,6 +8755,8 @@ UC03.08.02 - Xem thông tin khách hàng DK05
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 7 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với khách hàng DK05<br>đó theo từng trạng thái của đối<br>tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup và<br>trở về màn hình<br>Danh sách khách<br>hàng DK05<br>Huỷ: Quay trở về màn<br>hình Thông tin khách<br>hàng DK05<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo |  |  |
+
+![Trang 513 — mockup màn hình](images/lg-p0513-00-screen.png)
 
 513
 
@@ -8288,12 +8828,17 @@ UC03.08.03 - Tạo đề xuất tạo mới khách hàng DK05
 | Điều kiện sau | Hệ thống tạo 1 bản ghi với trạng thái Chờ phê duyệt<br>Hiển thị toast message tạo thành công<br>Hiển thị màn hình Thông tin khách hàng DK05 (Xem) |
 
 2. Lưu đồ hoạt động
+
+![Trang 517 — lưu đồ hoạt động](images/lg-p0517-00-flow.png)
+
 3. Mô tả màn hình
 517
 
 <!-- Page 518 -->
 
 3.1 Màn hình Tạo mới khách hàng DK05
+
+![Trang 518 — mockup màn hình](images/lg-p0518-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -8411,6 +8956,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>7 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới khách hàng<br>DK05<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới khách<br>hàng DK05 trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách khách<br>hàng DK05<br>Hủy: trở về màn Tạo mới<br>khách hàng DK05 với các<br>dữ liệu đã chọn/nhập. |  |
 
+![Trang 525 — mockup màn hình](images/lg-p0525-00-screen.png)
+
 525
 
 <!-- Page 526 -->
@@ -8419,7 +8966,12 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>8 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới khách hàng<br>DK05<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới khách<br>hàng DK05 trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách khách<br>hàng DK05<br>Hủy: trở về màn Tạo mới<br>khách hàng DK05 với các<br>dữ liệu đã chọn/nhập. |  |
 
+![Trang 526 — mockup màn hình](images/lg-p0526-00-screen.png)
+
 3.1 Màn hình Thông tin khách hàng DK05 (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 526 — mockup màn hình](images/lg-p0526-01-screen.png)
+
 526
 
 <!-- Page 527 -->
@@ -8450,12 +9002,17 @@ UC03.08.04 - Huỷ đề xuất cấp mới khách hàng DK05
 | Điều kiện sau | Trạng thái của bản ghi thay đổi từ Chờ phê duyệt → Đã huỷ<br>Hiển thị toast message thành công<br>Tắt popup Xác nhận huỷ và hiển thị màn hình Khách hàng DK05 |
 
 2. Lưu đồ hoạt động
+
+![Trang 528 — lưu đồ hoạt động](images/lg-p0528-00-flow.png)
+
 3. Mô tả màn hình
 528
 
 <!-- Page 529 -->
 
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
+
+![Trang 529 — mockup màn hình](images/lg-p0529-00-screen.png)
 
 
 529
@@ -8474,6 +9031,9 @@ UC03.08.04 - Huỷ đề xuất cấp mới khách hàng DK05
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>khách hàng DK05.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin khách hàng<br>DK05 |  |
 
 3.2 Màn hình Thông tin khách hàng DK05 (Xem) - Trạng thái Đã huỷ
+
+![Trang 531 — mockup màn hình](images/lg-p0531-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết khách hàng DK05, ở đây chỉ
 mô tả hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở
 Lưu đồ trạng thái)
@@ -8488,6 +9048,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Danh sách khách hàng DK05
 Huỷ: Quay trở về màn hình Thông tin khách hàng DK05
+
+![Trang 532 — mockup màn hình](images/lg-p0532-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Người dùng chọn tới icon … > Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu
 cầu cấp mới, thực hiện UC Tạo đề xuất cấp mới khách hàng DK05 với các trường lấy thông tin
@@ -8516,6 +9079,10 @@ UC03.08.05 - Phê duyệt/Từ chối đề xuất cấp mới khách hàng DK05
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 534 — lưu đồ hoạt động](images/lg-p0534-00-flow.png)
+
+![Trang 534 — mockup màn hình](images/lg-p0534-01-screen.png)
+
 
 534
 
@@ -8532,6 +9099,8 @@ UC03.08.05 - Phê duyệt/Từ chối đề xuất cấp mới khách hàng DK05
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới khách hàng DK05.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo khách hàng<br>DK05 thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin khách hàng<br>DK05 với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới khách hàng DK05 này<br>với nội dung:<br>Khách hàng DK05 - Yêu cầu<br>cấp mới<br>Yêu cầu cấp mới khách hàng<br>DK05 [Tên KH] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin khách hàng<br>DK05 của người phê<br>duyệt khi ấn Từ chối<br>sau khi người khác<br>vừa huỷ đề xuất<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của khách<br>hàng DK05. |
 
+![Trang 536 — mockup màn hình](images/lg-p0536-00-screen.png)
+
 536
 
 <!-- Page 537 -->
@@ -8541,6 +9110,9 @@ UC03.08.05 - Phê duyệt/Từ chối đề xuất cấp mới khách hàng DK05
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo khách hàng DK05.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin khách hàng<br>DK05. |  |
 
 3.2 Màn hình Thông tin khách hàng DK05 (Xem) - Trạng thái Đã từ chối
+
+![Trang 537 — mockup màn hình](images/lg-p0537-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết khách hàng DK05, ở đây chỉ
 mô tả hành động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái
 ở Lưu đồ trạng thái)
@@ -8564,6 +9136,10 @@ từ yêu cầu hiện tại (đã bị từ chối)
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 538 — mockup màn hình](images/lg-p0538-00-screen.png)
+
+![Trang 538 — mockup màn hình](images/lg-p0538-01-screen.png)
+
 538
 
 <!-- Page 539 -->
@@ -8571,6 +9147,8 @@ từ yêu cầu hiện tại (đã bị từ chối)
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạo<br>khách hàng DK05 thành<br>công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinkhách hàng<br>DK05.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới khách hàng DK05 này<br>với nội dung:<br>Khách hàng DK05 - Yêu cầu<br>cấp mới<br>Yêu cầu cấp mới khách hàng<br>DK05 [Tên KH] đã được phê<br>duyệt.<br>Generate ID mới cho khách<br>hàng DK05 với quy tắc như<br>sau:<br>Format: DK05xxxxx với<br>xxxxx: Số thứ tự khách<br>hàng từ 00001 đến<br>99999, đánh số thứ tự<br>tăng dần.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động: | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinkhách hàng<br>DK05 của người phê<br>duyệt khi ấn Phê<br>Duyệt sau khi người<br>khác vừa huỷ đề<br>xuất trước, hệ thống<br>hiển thị popup thông<br>báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củakhách<br>hàng DK05. |  |
+
+![Trang 539 — mockup màn hình](images/lg-p0539-00-screen.png)
 
 539
 
@@ -8585,6 +9163,9 @@ từ yêu cầu hiện tại (đã bị từ chối)
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận phê duyệt đề<br>xuất tạo khách hàng DK05.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin khách hàng<br>DK05 |  |
 
 3.4 Màn hình Thông tin khách hàng DK05 (Xem) - Trạng thái Đã phê duyệt
+
+![Trang 540 — mockup màn hình](images/lg-p0540-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết khách hàng DK05, ở đây
 không có thêm hành động nào khác ở trạng thái Đã phê duyệt (xem đầy đủ các hành động theo
 từng trạng thái ở Lưu đồ trạng thái)
@@ -8638,6 +9219,9 @@ UC03.09.01 - Xem danh mục xe của khách hàng
 | Điều kiện sau | Hệ thống hiển thị danh sách xe của khách hàng thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 545 — lưu đồ hoạt động](images/lg-p0545-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách xe của khách hàng
 545
@@ -8648,6 +9232,8 @@ UC03.09.01 - Xem danh mục xe của khách hàng
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Khách hàng DK05<br>Loại phương tiện<br>Mã phương tiện - Tên<br>phương tiện<br>Trạng thái |  |
+
+![Trang 546 — mockup màn hình](images/lg-p0546-00-screen.png)
 
 546
 
@@ -8696,6 +9282,9 @@ UC03.09.02 - Xem thông tin xe của khách hàng
 | Điều kiện sau | Hiển thị thông tin chi tiết của xe khách hàng |
 
 2. Lưu đồ hoạt động
+
+![Trang 549 — lưu đồ hoạt động](images/lg-p0549-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin xe của khách hàng
 549
@@ -8709,6 +9298,8 @@ UC03.09.02 - Xem thông tin xe của khách hàng
 | 3 | Mã phương<br>tiện - Tên<br>phương tiện | Label |  |  | Hiển thị mã phương tiện - tên<br>phương tiện của khách hàng |  |
 | 4 | Khách hàng<br>sở hữu | Label |  |  | Hiển thị khách hàng sở hữu xe |  |
 | 5 | Lái xe | Label |  |  | Hiển thị lái xe của xe khách<br>hàng |  |
+
+![Trang 550 — mockup màn hình](images/lg-p0550-00-screen.png)
 
 550
 
@@ -8727,6 +9318,8 @@ UC03.09.02 - Xem thông tin xe của khách hàng
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 9 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với xe của khách<br>hàng đó theo từng trạng thái<br>của đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Danh sách xe của<br>khách hàng<br>Huỷ: Quay trở về màn<br>hình Thông tin xe của<br>khách hàng<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo |  |  |
+
+![Trang 552 — mockup màn hình](images/lg-p0552-00-screen.png)
 
 552
 
@@ -8763,12 +9356,17 @@ UC03.09.03 - Tạo đề xuất tạo mới xe của khách hàng
 | Điều kiện sau | Hệ thống tạo 1 bản ghi với trạng thái Chờ phê duyệt<br>Hiển thị toast message tạo thành công<br>Hiển thị màn hình Thông tin xe của khách hàng (Xem) |
 
 2. Lưu đồ hoạt động
+
+![Trang 554 — lưu đồ hoạt động](images/lg-p0554-00-flow.png)
+
 3. Mô tả màn hình
 554
 
 <!-- Page 555 -->
 
 3.1 Màn hình Tạo mới xe của khách hàng
+
+![Trang 555 — mockup màn hình](images/lg-p0555-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -8816,6 +9414,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>0 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới xe của khách<br>hàng<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới xe của<br>khách hàng trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách xe của<br>khách hàng<br>Hủy: trở về màn Tạo mới xe<br>của khách hàng với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 559 — mockup màn hình](images/lg-p0559-00-screen.png)
+
 559
 
 <!-- Page 560 -->
@@ -8823,6 +9423,8 @@ không hợp lệ đó.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>1 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới xe của khách<br>hàng<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới xe của<br>khách hàng trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách xe của<br>khách hàng<br>Hủy: trở về màn Tạo mới xe<br>của khách hàng với các dữ<br>liệu đã chọn/nhập. |  |
+
+![Trang 560 — mockup màn hình](images/lg-p0560-00-screen.png)
 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 |
 | --- | --- | --- | --- |
@@ -8889,6 +9491,9 @@ không hợp lệ đó.
 | 39 | Trạm bơm dầu | 38 | Trạm bơm dầu |
 
 3.1 Màn hình Thông tin xe của khách hàng (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 563 — mockup màn hình](images/lg-p0563-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết xe của khách hàng, ở đây chỉ
 mô tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng
 thái):
@@ -8919,12 +9524,17 @@ UC03.09.04 - Huỷ đề xuất cấp mới xe của khách hàng
 | Điều kiện sau | Trạng thái của bản ghi thay đổi từ Chờ phê duyệt → Đã huỷ<br>Hiển thị toast message thành công<br>Tắt popup Xác nhận huỷ và hiển thị màn hình Thông tin xe của khách<br>hàng |
 
 2. Lưu đồ hoạt động
+
+![Trang 565 — lưu đồ hoạt động](images/lg-p0565-00-flow.png)
+
 565
 
 <!-- Page 566 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
+
+![Trang 566 — mockup màn hình](images/lg-p0566-00-screen.png)
 
 
 566
@@ -8943,6 +9553,9 @@ UC03.09.04 - Huỷ đề xuất cấp mới xe của khách hàng
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>xe của khách hàng.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin xe của<br>khách hàng |  |
 
 3.2 Màn hình Thông tin xe của khách hàng (Xem) - Trạng thái Đã huỷ
+
+![Trang 568 — mockup màn hình](images/lg-p0568-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết xe của khách hàng, ở đây chỉ
 mô tả hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở
 Lưu đồ trạng thái)
@@ -8957,6 +9570,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Danh sách xe của khách hàng
 Huỷ: Quay trở về màn hình Thông tin xe của khách hàng
+
+![Trang 569 — mockup màn hình](images/lg-p0569-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Người dùng chọn tới icon … > Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu
 cầu cấp mới, thực hiện UC Tạo đề xuất cấp mới xe của khách hàng với các trường lấy thông tin
@@ -8990,6 +9606,10 @@ UC03.09.05 - Phê duyệt/Từ chối đề xuất cấp mới xe của khách h
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 571 — lưu đồ hoạt động](images/lg-p0571-00-flow.png)
+
+![Trang 571 — mockup màn hình](images/lg-p0571-01-screen.png)
+
 
 571
 
@@ -9006,6 +9626,8 @@ UC03.09.05 - Phê duyệt/Từ chối đề xuất cấp mới xe của khách h
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới xe của khách hàng.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo xe của<br>khách hàng thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin xe của khách<br>hàng với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới xe của khách hàng này<br>với nội dung:<br>Xe của khách hàng - Yêu cầu<br>cấp mới<br>Yêu cầu cấp mới xe [Biển số<br>xe] của khách hàng [Tên KH]<br>đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin xe của khách<br>hàng của người phê<br>duyệt khi ấn Từ chối<br>sau khi người khác<br>vừa huỷ đề xuất<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của xe của<br>khách hàng. |
 
+![Trang 573 — mockup màn hình](images/lg-p0573-00-screen.png)
+
 573
 
 <!-- Page 574 -->
@@ -9015,6 +9637,9 @@ UC03.09.05 - Phê duyệt/Từ chối đề xuất cấp mới xe của khách h
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo xe của khách hàng.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin xe của<br>khách hàng. |  |
 
 3.2 Màn hình Thông tin xe của khách hàng (Xem) - Trạng thái Đã từ chối
+
+![Trang 574 — mockup màn hình](images/lg-p0574-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết xe của khách hàng, ở đây chỉ
 mô tả hành động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái
 ở Lưu đồ trạng thái)
@@ -9040,6 +9665,10 @@ từ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản
 
 3.3 Màn hình Xác nhận phê duyệt đề xuất tạo mới
 
+![Trang 575 — mockup màn hình](images/lg-p0575-00-screen.png)
+
+![Trang 575 — mockup màn hình](images/lg-p0575-01-screen.png)
+
 
 575
 
@@ -9048,6 +9677,9 @@ từ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạoxe<br>của khách hàng thành<br>công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinxe của khách<br>hàng.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mớixe của khách hàngnày<br>với nội dung:<br>Xe của khách hàng - Yêu cầu<br>cấp mới<br>Yêu cầu cấp mới xe [Biển số<br>xe] của khách hàng [Tên KH]<br>đã được phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã phê duyệt yêu cầu cấp mới | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinxe của khách<br>hàng của người phê<br>duyệt khi ấn Phê<br>Duyệt sau khi người<br>khác vừa huỷ đề<br>xuất trước, hệ thống<br>hiển thị popup thông<br>báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củaxe của<br>khách hàng. |
+
+![Trang 576 — mockup màn hình](images/lg-p0576-00-screen.png)
+
 576
 
 <!-- Page 577 -->
@@ -9060,6 +9692,9 @@ từ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết xe của khách hàng, ở đây
 không có thêm hành động nào khác ở trạng thái Đã phê duyệt (xem đầy đủ các hành động theo
 từng trạng thái ở Lưu đồ trạng thái)
+
+![Trang 577 — mockup màn hình](images/lg-p0577-00-screen.png)
+
 577
 
 <!-- Page 578 -->
@@ -9106,6 +9741,9 @@ UC03.10.01 - Xem danh mục chi phí cấp 1
 | Điều kiện sau | Hệ thống hiển thị danh sách chi phí cấp 1 thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 581 — lưu đồ hoạt động](images/lg-p0581-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách chi phí cấp 1
 581
@@ -9118,6 +9756,8 @@ UC03.10.01 - Xem danh mục chi phí cấp 1
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Trạng thái |  |
 | 3 | Bộ lọc | Sideb<br>ar |  |  | Xem mô tả phần Common<br>Rules<br>Cho phép lọc các cột sau:<br>Trạng thái |  |
 | 4 | Export | Butto<br>n |  |  | Xem mô tả phần Common<br>Rules |  |
+
+![Trang 582 — mockup màn hình](images/lg-p0582-00-screen.png)
 
 582
 
@@ -9160,6 +9800,9 @@ UC03.10.02 - Xem thông tin chi phí cấp 1
 | Điều kiện sau | Hiển thị thông tin chi tiết của chi phí cấp 1 |
 
 2. Lưu đồ hoạt động
+
+![Trang 585 — lưu đồ hoạt động](images/lg-p0585-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin chi phí cấp 2
 585
@@ -9168,6 +9811,11 @@ UC03.10.02 - Xem thông tin chi phí cấp 1
 
 Tab Thông tin chung
 Tab Chi phí cấp 2
+
+![Trang 586 — mockup màn hình](images/lg-p0586-00-screen.png)
+
+![Trang 586 — mockup màn hình](images/lg-p0586-01-screen.png)
+
 586
 
 <!-- Page 587 -->
@@ -9199,6 +9847,8 @@ Tab Chi phí cấp 2
 | 1<br>6 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
 | 1<br>7 | Hành động |  |  |  |  |  |
 
+![Trang 588 — mockup màn hình](images/lg-p0588-00-screen.png)
+
 588
 
 <!-- Page 589 -->
@@ -9206,6 +9856,8 @@ Tab Chi phí cấp 2
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1<br>8 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với chi phí cấp 1 đó<br>theo từng trạng thái của đối<br>tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Danh sách chi phí<br>cấp 1<br>Huỷ: Quay trở về màn<br>hình Thông tin chi phí<br>cấp 1<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo |  |  |
+
+![Trang 589 — mockup màn hình](images/lg-p0589-00-screen.png)
 
 589
 
@@ -9242,12 +9894,17 @@ UC03.10.03 - Tạo đề xuất tạo mới chi phí cấp 1
 | Điều kiện sau | Hệ thống tạo 1 bản ghi với trạng thái Chờ phê duyệt<br>Hiển thị toast message tạo thành công<br>Hiển thị màn hình Thông tin chi phí cấp 1 (Xem) |
 
 2. Lưu đồ hoạt động
+
+![Trang 591 — lưu đồ hoạt động](images/lg-p0591-00-flow.png)
+
 591
 
 <!-- Page 592 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Tạo mới chi phí cấp 1
+
+![Trang 592 — mockup màn hình](images/lg-p0592-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -9283,6 +9940,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 5 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới chi phí cấp 1<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới chi phí<br>cấp 1 trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách chi phí cấp<br>1<br>Hủy: trở về màn Tạo mới<br>chi phí cấp 1 với các dữ liệu<br>đã chọn/nhập. |  |
 
+![Trang 595 — mockup màn hình](images/lg-p0595-00-screen.png)
+
 595
 
 <!-- Page 596 -->
@@ -9291,7 +9950,12 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 6 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới chi phí cấp 1<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới chi phí<br>cấp 1 trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách chi phí cấp<br>1<br>Hủy: trở về màn Tạo mới<br>chi phí cấp 1 với các dữ liệu<br>đã chọn/nhập. |  |
 
+![Trang 596 — mockup màn hình](images/lg-p0596-00-screen.png)
+
 3.1 Màn hình Thông tin chi phí cấp 1 (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 596 — mockup màn hình](images/lg-p0596-01-screen.png)
+
 596
 
 <!-- Page 597 -->
@@ -9321,12 +9985,17 @@ UC03.10.04 - Huỷ đề xuất cấp mới chi phí cấp 1
 | Điều kiện sau | Trạng thái của bản ghi thay đổi từ Chờ phê duyệt → Đã huỷ<br>Hiển thị toast message thành công<br>Tắt popup Xác nhận huỷ và hiển thị màn hình Thông tin chi phí cấp 1 |
 
 2. Lưu đồ hoạt động
+
+![Trang 598 — lưu đồ hoạt động](images/lg-p0598-00-flow.png)
+
 598
 
 <!-- Page 599 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
+
+![Trang 599 — mockup màn hình](images/lg-p0599-00-screen.png)
 
 
 599
@@ -9345,6 +10014,9 @@ UC03.10.04 - Huỷ đề xuất cấp mới chi phí cấp 1
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>chi phí cấp 1.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin chi phí cấp 1 |  |
 
 3.2 Màn hình Thông tin chi phí cấp 1 (Xem) - Trạng thái Đã huỷ
+
+![Trang 601 — mockup màn hình](images/lg-p0601-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết chi phí cấp 2, ở đây chỉ mô tả
 hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ
 trạng thái)
@@ -9359,6 +10031,9 @@ Hiển thị toast message Xoá yêu cầu thành công
 
 Đóng tất cả popup và trở về màn hình Danh sách chi phí cấp 2
 Huỷ: Quay trở về màn hình Thông tin chi phí cấp 2
+
+![Trang 602 — mockup màn hình](images/lg-p0602-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Người dùng chọn tới icon … > Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu
 cầu cấp mới, thực hiện UC Tạo đề xuất cấp mới chi phí cấp 2 với các trường lấy thông tin từ
@@ -9392,6 +10067,10 @@ UC03.10.05 - Phê duyệt/Từ chối đề xuất cấp mới chi phí cấp 1
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 604 — lưu đồ hoạt động](images/lg-p0604-00-flow.png)
+
+![Trang 604 — mockup màn hình](images/lg-p0604-01-screen.png)
+
 
 604
 
@@ -9408,6 +10087,8 @@ UC03.10.05 - Phê duyệt/Từ chối đề xuất cấp mới chi phí cấp 1
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới chi phí cấp 1.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo chi phí cấp<br>1 thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin chi phí cấp 1 với<br>2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới chi phí cấp 1 này với nội<br>dung:<br>Chi phí cấp 1 - Yêu cầu cấp<br>mới<br>Yêu cầu cấp mới chi phí cấp 1<br>[Tên chi phí] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin chi phí cấp 1 của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa huỷ<br>đề xuất trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của chi phí<br>cấp 1. |
 
+![Trang 606 — mockup màn hình](images/lg-p0606-00-screen.png)
+
 606
 
 <!-- Page 607 -->
@@ -9417,6 +10098,9 @@ UC03.10.05 - Phê duyệt/Từ chối đề xuất cấp mới chi phí cấp 1
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo chi phí cấp 1.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin chi phí cấp 1 |  |
 
 3.2 Màn hình Thông tin chi phí cấp 1 (Xem) - Trạng thái Đã từ chối
+
+![Trang 607 — mockup màn hình](images/lg-p0607-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết chi phí cấp 1, ở đây chỉ mô tả
 hành động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở Lưu
 đồ trạng thái)
@@ -9442,6 +10126,10 @@ cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi mới
 
 3.3 Màn hình Xác nhận phê duyệt đề xuất tạo mới
 
+![Trang 608 — mockup màn hình](images/lg-p0608-00-screen.png)
+
+![Trang 608 — mockup màn hình](images/lg-p0608-01-screen.png)
+
 
 608
 
@@ -9450,6 +10138,9 @@ cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi mới
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạochi<br>phí cấp 1 thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinchi phí cấp 1.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới chi phí cấp 1 này với nội<br>dung:<br>Chi phí cấp 1 - Yêu cầu cấp<br>mới<br>Yêu cầu cấp mới chi phí cấp 1<br>[Tên chi phí] đã được phê<br>duyệt.<br>Generate ID mới cho chi phí<br>cấp 1 với quy tắc như sau:<br>Format: aa<br>aa: Mã chi phí chạy từ<br>01 đến 99, đánh số thứ<br>tự tăng dần.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã phê duyệt yêu cầu cấp mới | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinchi phí cấp 1 của<br>người phê duyệt khi<br>ấn Phê Duyệt sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củachi phí<br>cấp 1. |
+
+![Trang 609 — mockup màn hình](images/lg-p0609-00-screen.png)
+
 609
 
 <!-- Page 610 -->
@@ -9462,6 +10153,9 @@ cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi mới
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết chi phí cấp 1, ở đây không có
 thêm hành động nào khác ở trạng thái Đã phê duyệt (xem đầy đủ các hành động theo từng
 trạng thái ở Lưu đồ trạng thái)
+
+![Trang 610 — mockup màn hình](images/lg-p0610-00-screen.png)
+
 610
 
 <!-- Page 611 -->
@@ -9508,6 +10202,9 @@ UC03.11.01 - Xem danh mục chi phí cấp 2
 | Điều kiện sau | Hệ thống hiển thị danh sách chi phí cấp 2 thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 614 — lưu đồ hoạt động](images/lg-p0614-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách chi phí cấp 2
 614
@@ -9519,6 +10216,8 @@ UC03.11.01 - Xem danh mục chi phí cấp 2
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng<br>(trừ trạng thái) |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Chi phí cấp 1<br>Trạng thái |  |
 | 3 | Bộ lọc | Sideb<br>ar |  |  | Xem mô tả phần Common<br>Rules<br>Cho phép lọc các cột sau:<br>Chi phí cấp 1<br>Trạng thái |  |
+
+![Trang 615 — mockup màn hình](images/lg-p0615-00-screen.png)
 
 615
 
@@ -9563,6 +10262,9 @@ UC03.11.02 - Xem thông tin chi phí cấp 2
 | Điều kiện sau | Hiển thị thông tin chi tiết của chi phí cấp 2 |
 
 2. Lưu đồ hoạt động
+
+![Trang 618 — lưu đồ hoạt động](images/lg-p0618-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin chi phí cấp 2
 618
@@ -9571,6 +10273,11 @@ UC03.11.02 - Xem thông tin chi phí cấp 2
 
 Tab Thông tin chung
 Tab Chi phí cấp 3
+
+![Trang 619 — mockup màn hình](images/lg-p0619-00-screen.png)
+
+![Trang 619 — mockup màn hình](images/lg-p0619-01-screen.png)
+
 619
 
 <!-- Page 620 -->
@@ -9600,6 +10307,8 @@ Tab Chi phí cấp 3
 | 1<br>4 | Mã chi phí | Label |  |  | Hiển thị mã chi phí cấp 3 |  |
 | 1<br>5 | Tên chi phí<br>cấp 3 | Label |  |  | Hiển thị tên chi phí cấp 3 |  |
 
+![Trang 621 — mockup màn hình](images/lg-p0621-00-screen.png)
+
 621
 
 <!-- Page 622 -->
@@ -9617,6 +10326,8 @@ Tab Chi phí cấp 3
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1<br>9 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với chi phí cấp 2 đó<br>theo từng trạng thái của đối<br>tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Danh sách chi phí<br>cấp 2<br>Huỷ: Quay trở về màn<br>hình Thông tin chi phí<br>cấp 2<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo |  |  |
+
+![Trang 623 — mockup màn hình](images/lg-p0623-00-screen.png)
 
 623
 
@@ -9653,12 +10364,17 @@ UC03.11.03 - Tạo đề xuất tạo mới chi phí cấp 2
 | Điều kiện sau | Hệ thống tạo 1 bản ghi với trạng thái Chờ phê duyệt<br>Hiển thị toast message tạo thành công<br>Hiển thị màn hình Thông tin chi phí cấp 2 (Xem) |
 
 2. Lưu đồ hoạt động
+
+![Trang 625 — lưu đồ hoạt động](images/lg-p0625-00-flow.png)
+
 625
 
 <!-- Page 626 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Tạo mới chi phí cấp 2
+
+![Trang 626 — mockup màn hình](images/lg-p0626-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -9695,6 +10411,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 6 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới chi phí cấp 2<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới chi phí<br>cấp 2 trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách chi phí cấp<br>2<br>Hủy: trở về màn Tạo mới<br>chi phí cấp 2 với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 629 — mockup màn hình](images/lg-p0629-00-screen.png)
+
 629
 
 <!-- Page 630 -->
@@ -9703,7 +10421,12 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 7 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới chi phí cấp 2<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới chi phí<br>cấp 2 trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách chi phí cấp<br>2<br>Hủy: trở về màn Tạo mới<br>chi phí cấp 2 với các dữ liệu<br>đã chọn/nhập. |  |
 
+![Trang 630 — mockup màn hình](images/lg-p0630-00-screen.png)
+
 3.1 Màn hình Thông tin chi phí cấp 2 (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 630 — mockup màn hình](images/lg-p0630-01-screen.png)
+
 630
 
 <!-- Page 631 -->
@@ -9733,12 +10456,17 @@ UC03.11.04 - Huỷ đề xuất cấp mới chi phí cấp 2
 | Điều kiện sau | Trạng thái của bản ghi thay đổi từ Chờ phê duyệt → Đã huỷ<br>Hiển thị toast message thành công<br>Tắt popup Xác nhận huỷ và hiển thị màn hình Thông tin chi phí cấp 2 |
 
 2. Lưu đồ hoạt động
+
+![Trang 632 — lưu đồ hoạt động](images/lg-p0632-00-flow.png)
+
 632
 
 <!-- Page 633 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
+
+![Trang 633 — mockup màn hình](images/lg-p0633-00-screen.png)
 
 
 633
@@ -9757,6 +10485,9 @@ UC03.11.04 - Huỷ đề xuất cấp mới chi phí cấp 2
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>chi phí cấp 2.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin chi phí cấp<br>2 |  |
 
 3.2 Màn hình Thông tin chi phí cấp 2 (Xem) - Trạng thái Đã huỷ
+
+![Trang 635 — mockup màn hình](images/lg-p0635-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết chi phí cấp 2, ở đây chỉ mô tả
 hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ
 trạng thái)
@@ -9771,6 +10502,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Danh sách chi phí cấp 2
 Huỷ: Quay trở về màn hình Thông tin chi phí cấp 2
+
+![Trang 636 — mockup màn hình](images/lg-p0636-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Người dùng chọn tới icon … > Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu
 cầu cấp mới, thực hiện UC Tạo đề xuất cấp mới chi phí cấp 2 với các trường lấy thông tin từ
@@ -9804,6 +10538,10 @@ UC03.11.05 - Phê duyệt/Từ chối đề xuất cấp mới chi phí cấp 2
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 638 — lưu đồ hoạt động](images/lg-p0638-00-flow.png)
+
+![Trang 638 — mockup màn hình](images/lg-p0638-01-screen.png)
+
 
 638
 
@@ -9820,6 +10558,8 @@ UC03.11.05 - Phê duyệt/Từ chối đề xuất cấp mới chi phí cấp 2
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới chi phí cấp 2.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo chi phí cấp<br>2 thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin chi phí cấp 2 với<br>2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới chi phí cấp 2 này với nội<br>dung:<br>Chi phí cấp 2 - Yêu cầu cấp<br>mới<br>Yêu cầu cấp mới chi phí cấp 2<br>[Tên chi phí] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin chi phí cấp 2 của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa huỷ<br>đề xuất trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của chi phí<br>cấp 2. |
 
+![Trang 640 — mockup màn hình](images/lg-p0640-00-screen.png)
+
 640
 
 <!-- Page 641 -->
@@ -9829,6 +10569,9 @@ UC03.11.05 - Phê duyệt/Từ chối đề xuất cấp mới chi phí cấp 2
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo chi phí cấp 2.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin chi phí cấp<br>2 |  |
 
 3.2 Màn hình Thông tin chi phí cấp 2 (Xem) - Trạng thái Đã từ chối
+
+![Trang 641 — mockup màn hình](images/lg-p0641-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết chi phí cấp 2, ở đây chỉ mô tả
 hành động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở Lưu
 đồ trạng thái)
@@ -9857,6 +10600,10 @@ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 642 — mockup màn hình](images/lg-p0642-00-screen.png)
+
+![Trang 642 — mockup màn hình](images/lg-p0642-01-screen.png)
+
 642
 
 <!-- Page 643 -->
@@ -9864,6 +10611,8 @@ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạochi<br>phí cấp 2 thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinchi phí cấp 2.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới chi phí cấp 2 này với<br>nội dung:<br>Chi phí cấp 2 - Yêu cầu cấp<br>mới<br>Yêu cầu cấp mới chi phí cấp 2<br>[Tên chi phí] đã được phê<br>duyệt.<br>Generate ID mới cho chi phí<br>cấp 2 với quy tắc như sau:<br>Format: xxaa<br>xx: Mã chi phí cấp 1 mà<br>chi phí cấp 2 thuộc về<br>aa: Mã chi phí chạy từ<br>01 đến 99, đánh số thứ<br>tự tăng dần.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinchi phí cấp 2 của<br>người phê duyệt khi<br>ấn Phê Duyệt sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củachi phí<br>cấp 2. |  |
+
+![Trang 643 — mockup màn hình](images/lg-p0643-00-screen.png)
 
 643
 
@@ -9879,6 +10628,9 @@ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi 
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết chi phí cấp 2, ở đây không có
 thêm hành động nào khác ở trạng thái Đã phê duyệt (xem đầy đủ các hành động theo từng
 trạng thái ở Lưu đồ trạng thái)
+
+![Trang 644 — mockup màn hình](images/lg-p0644-00-screen.png)
+
 644
 
 <!-- Page 645 -->
@@ -9925,6 +10677,9 @@ UC03.12.01 - Xem danh mục chi phí cấp 3
 | Điều kiện sau | Hệ thống hiển thị danh sách chi phí cấp 3 thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 648 — lưu đồ hoạt động](images/lg-p0648-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách chi phí cấp 3
 648
@@ -9935,6 +10690,8 @@ UC03.12.01 - Xem danh mục chi phí cấp 3
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng<br>(trừ trạng thái) |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Chi phí cấp 2<br>Ghi nhận PO<br>Dịch vụ liên quan tới<br>phương tiện<br>Trạng thái |  |
+
+![Trang 649 — mockup màn hình](images/lg-p0649-00-screen.png)
 
 649
 
@@ -9983,6 +10740,9 @@ UC03.12.02 - Xem thông tin chi phí cấp 3
 | Điều kiện sau | Hiển thị thông tin chi tiết của chi phí cấp 3 |
 
 2. Lưu đồ hoạt động
+
+![Trang 652 — lưu đồ hoạt động](images/lg-p0652-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin chi phí cấp 3
 652
@@ -9995,6 +10755,8 @@ UC03.12.02 - Xem thông tin chi phí cấp 3
 | 2 | Mã chi phí | Label |  |  | Hiển thị mã chi phí cấp 3 (nếu<br>có) |  |
 | 3 | Tên tiếng<br>anh | Label |  |  | Hiển thị tên tiếng anh của chi<br>phí cấp 3 |  |
 | 4 | Ghi nhận<br>PO | Label |  |  | Hiển thị có hay không việc chi<br>phí cấp 3 được ghi nhận qua<br>luồng PO |  |
+
+![Trang 653 — mockup màn hình](images/lg-p0653-00-screen.png)
 
 653
 
@@ -10015,6 +10777,8 @@ UC03.12.02 - Xem thông tin chi phí cấp 3
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1<br>0 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với chi phí cấp 3 đó<br>theo từng trạng thái của đối<br>tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Danh sách chi phí<br>cấp 3<br>Huỷ: Quay trở về màn<br>hình Thông tin chi phí<br>cấp 3<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo |  |  |
+
+![Trang 655 — mockup màn hình](images/lg-p0655-00-screen.png)
 
 655
 
@@ -10051,12 +10815,17 @@ UC03.12.03 - Tạo đề xuất tạo mới chi phí cấp 3
 | Điều kiện sau | Hệ thống tạo 1 bản ghi với trạng thái Chờ phê duyệt<br>Hiển thị toast message tạo thành công<br>Hiển thị màn hình Thông tin chi phícấp 3 (Xem) |
 
 2. Lưu đồ hoạt động
+
+![Trang 657 — lưu đồ hoạt động](images/lg-p0657-00-flow.png)
+
 657
 
 <!-- Page 658 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Tạo mới chi phí cấp 3
+
+![Trang 658 — mockup màn hình](images/lg-p0658-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -10110,6 +10879,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 9 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới chi phí cấp 3<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới chi phí<br>cấp 3 trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách chi phí cấp<br>3<br>Hủy: trở về màn Tạo mới<br>chi phí cấp 3 với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 663 — mockup màn hình](images/lg-p0663-00-screen.png)
+
 663
 
 <!-- Page 664 -->
@@ -10118,7 +10889,12 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>0 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới chi phí cấp 3<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới chi phí<br>cấp 3 trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách chi phí cấp<br>3<br>Hủy: trở về màn Tạo mới<br>chi phí cấp 3 với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 664 — mockup màn hình](images/lg-p0664-00-screen.png)
+
 3.1 Màn hình Thông tin chi phí cấp 3 (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 664 — mockup màn hình](images/lg-p0664-01-screen.png)
+
 664
 
 <!-- Page 665 -->
@@ -10148,12 +10924,17 @@ UC03.12.04 - Huỷ đề xuất cấp mới chi phí cấp 3
 | Điều kiện sau | Trạng thái của bản ghi thay đổi từ Chờ phê duyệt → Đã huỷ<br>Hiển thị toast message thành công<br>Tắt popup Xác nhận huỷ và hiển thị màn hình Thông tin chi phí cấp 3 |
 
 2. Lưu đồ hoạt động
+
+![Trang 666 — lưu đồ hoạt động](images/lg-p0666-00-flow.png)
+
 666
 
 <!-- Page 667 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
+
+![Trang 667 — mockup màn hình](images/lg-p0667-00-screen.png)
 
 
 667
@@ -10172,6 +10953,9 @@ UC03.12.04 - Huỷ đề xuất cấp mới chi phí cấp 3
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>chi phí cấp 3.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin chi phí cấp<br>3 |  |
 
 3.2 Màn hình Thông tin chi phí cấp 3 (Xem) - Trạng thái Đã huỷ
+
+![Trang 669 — mockup màn hình](images/lg-p0669-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết chi phí cấp 3, ở đây chỉ mô tả
 hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ
 trạng thái)
@@ -10186,6 +10970,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Danh sách chi phí cấp 3
 Huỷ: Quay trở về màn hình Thông tin chi phí cấp 3
+
+![Trang 670 — mockup màn hình](images/lg-p0670-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Người dùng chọn tới icon … > Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu
 cầu cấp mới, thực hiện UC Tạo đề xuất cấp mới chi phí cấp 3 với các trường lấy thông tin từ
@@ -10219,6 +11006,10 @@ UC03.12.05 - Phê duyệt/Từ chối đề xuất cấp mới chi phí cấp 3
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 672 — lưu đồ hoạt động](images/lg-p0672-00-flow.png)
+
+![Trang 672 — mockup màn hình](images/lg-p0672-01-screen.png)
+
 
 672
 
@@ -10235,6 +11026,8 @@ UC03.12.05 - Phê duyệt/Từ chối đề xuất cấp mới chi phí cấp 3
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới chi phí cấp 3.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo chi phí cấp<br>3 thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin chi phí cấp 3 với<br>2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới chi phí cấp 3 này với<br>nội dung:<br>Chi phí cấp 3 - Yêu cầu cấp<br>mới<br>Yêu cầu cấp mới chi phí cấp 3<br>[Tên chi phí] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin chi phí cấp 3 của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa huỷ<br>đề xuất trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của chi phí<br>cấp 3. |
 
+![Trang 674 — mockup màn hình](images/lg-p0674-00-screen.png)
+
 674
 
 <!-- Page 675 -->
@@ -10244,6 +11037,9 @@ UC03.12.05 - Phê duyệt/Từ chối đề xuất cấp mới chi phí cấp 3
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo chi phí cấp 3.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin chi phí cấp<br>3 |  |
 
 3.2 Màn hình Thông tin chi phí cấp 3 (Xem) - Trạng thái Đã từ chối
+
+![Trang 675 — mockup màn hình](images/lg-p0675-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết chi phí cấp 3, ở đây chỉ mô tả
 hành động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở Lưu
 đồ trạng thái)
@@ -10272,6 +11068,10 @@ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 676 — mockup màn hình](images/lg-p0676-00-screen.png)
+
+![Trang 676 — mockup màn hình](images/lg-p0676-01-screen.png)
+
 676
 
 <!-- Page 677 -->
@@ -10279,6 +11079,8 @@ yêu cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạochi<br>phí cấp 3 thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinchi phí cấp 3.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới chi phí cấp 3 này với<br>nội dung:<br>Chi phí cấp 3 - Yêu cầu cấp<br>mới<br>Yêu cầu cấp mới chi phí cấp 3<br>[Tên chi phí] đã được phê<br>duyệt.<br>Generate ID mới cho chi phí<br>cấp 3 với quy tắc như sau:<br>Format: xxaabbb<br>xx: Mã chi phí cấp 1 mà<br>chi phí cấp 3 thuộc về<br>aa: Mã chi phí cấp 2<br>mà chi phí cấp 3 thuộc<br>về<br>bbb: Mã chi phí cấp 3<br>chạy từ 001 đến 999,<br>đánh số thứ tự tăng<br>dần nếu xx và aa trùng<br>nhau. | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinchi phí cấp 3 của<br>người phê duyệt khi<br>ấn Phê Duyệt sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củachi phí<br>cấp 3. |  |
+
+![Trang 677 — mockup màn hình](images/lg-p0677-00-screen.png)
 
 677
 
@@ -10297,6 +11099,9 @@ Lưu 1 bản ghi hoạt động mới
 3.4 Màn hình Thông tinchi phí cấp 3 (Xem) - Trạng thái Đã phê duyệt
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết chi phí cấp 3, ở đây không có
 thêm hành động nào khác ở trạng thái Đã phê duyệt (xem đầy đủ các hành động theo từng
+
+![Trang 678 — mockup màn hình](images/lg-p0678-00-screen.png)
+
 678
 
 <!-- Page 679 -->
@@ -10312,6 +11117,9 @@ Epic 04 - Quản lý tài sản
 <!-- Page 681 -->
 
 Quản lý vòng đời và trạng thái các hàng hoá trong xưởng
+
+![Trang 681 — hình](images/lg-p0681-00-img.png)
+
 Định nghĩa:
 Trạng thái hàng hoá:
 Ký hiệu Ý nghĩa
@@ -10682,12 +11490,20 @@ UC04.02.01 - Xem danh sách hàng tồn kho của xưởng
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Danh sách hàng tồn kho
+
+![Trang 699 — mockup màn hình](images/lg-p0699-00-screen.png)
+
 699
 
 <!-- Page 700 -->
 
 Số lượng hàng tồn kho được quản lý độc lập theo từng xưởng. Danh sách sắp xếp theo thứ tự A
 - Z, hiển thị cả các hàng hóa mà số lượng tồn kho = 0.
+
+![Trang 700 — mockup màn hình](images/lg-p0700-00-screen.png)
+
+![Trang 700 — mockup màn hình](images/lg-p0700-01-screen.png)
+
 700
 
 <!-- Page 701 -->
@@ -10838,6 +11654,9 @@ UC04.02.01 - Xem lịch sử kiểm kê hàng tồn kho
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Lịch sử kiểm kê hàng tồn kho
+
+![Trang 713 — mockup màn hình](images/lg-p0713-00-screen.png)
+
 713
 
 <!-- Page 714 -->
@@ -10875,6 +11694,14 @@ UC04.02.01 - Xem lịch sử kiểm kê hàng tồn kho
 | 1<br>5 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Dropd<br>own<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 1<br>6 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
 
+![Trang 716 — mockup màn hình](images/lg-p0716-00-screen.png)
+
+![Trang 716 — mockup màn hình](images/lg-p0716-01-screen.png)
+
+![Trang 716 — mockup màn hình](images/lg-p0716-00-screen.png)
+
+![Trang 716 — mockup màn hình](images/lg-p0716-01-screen.png)
+
 716
 
 <!-- Page 717 -->
@@ -10900,6 +11727,11 @@ UC04.02.02 - Xem thông tin kiểm kê hàng tồn kho
 
 Màn hình trước khi ghi nhận kiểm kê
 Màn hình sau khi ghi nhận kiểm kê
+
+![Trang 718 — mockup màn hình](images/lg-p0718-00-screen.png)
+
+![Trang 718 — mockup màn hình](images/lg-p0718-01-screen.png)
+
 718
 
 <!-- Page 719 -->
@@ -10927,6 +11759,9 @@ Tổng kết
 8 [CTKK] Chi tiết hàng hóa kiểm kê:
 Hiển thị 2 dạng bảng:
 Trước khi ghi nhận kiểm kê:
+
+![Trang 720 — mockup màn hình](images/lg-p0720-00-screen.png)
+
 Hiển thị danh sách tất cả hàng hóa được thêm vào danh sách để thực hiện kiểm kê. Các cập
 nhật liên quan đến hàng hoá trong thời gian tạo đến lúc phê duyệt yêu cầu sẽ được cập nhật
 real-time trên danh sách kiểm kê:
@@ -10936,6 +11771,9 @@ lượng tồn kho về 0, vẫn giữ bản ghi hàng hoá đó trong danh sác
 Nếu trường hợp kiểm kê toàn bộ/bất thường, thay đổi toàn bộ thông tin theo danh sách
 hàng tồn kho mới nhất.
 Sau khi ghi nhận kiểm kê:
+
+![Trang 720 — mockup màn hình](images/lg-p0720-01-screen.png)
+
 Hiển thị danh sách hàng hóa theo từng loại (tất cả/đủ hàng/thiếu hàng/thừa hàng) được thêm
 vào danh sách để thực hiện kiểm kê.
 720
@@ -10975,6 +11813,8 @@ vào danh sách để thực hiện kiểm kê.
 | 2<br>3 | Icon<br>xuất/nhập |  |  |  | Hiển thị icon theo loại:<br>Xuất kho:<br>Nhập kho: |  |
 | 2<br>4 | Ngày<br>xuất/nhập<br>kho |  |  |  | Hiển thị thời gian xuất/nhập<br>kho<br>Format: dd/mm/yyyy |  |
 
+![Trang 723 — mockup màn hình](images/lg-p0723-00-screen.png)
+
 723
 
 <!-- Page 724 -->
@@ -10997,6 +11837,8 @@ vào danh sách để thực hiện kiểm kê.
 | 3<br>1 | Tổng kết<br>Trường hợp kiểm kê đủ<br>Trường hợp kiểm kê chênh lệch |  |  |  |  |  |
 | 3<br>2 | Tình trạng |  |  |  | Hiển thị tình trạng:<br>Đủ:<br>Chênh lệch: |  |
 | 3<br>3 | Tổng GT<br>thừa |  |  |  | Hiển thị tổng giá trị thừa của<br>hàng tồn kho ghi nhận sau khi<br>kiểm kê.<br>Giá trị = tổng (SL chênh lệch *<br>đơn giá của hàng hóa) của tất<br>cả hàng tồn kho có chênh<br>lệch > 0<br>Chỉ hiển thị khi tình trạng =<br>chênh lệch |  |
+
+![Trang 725 — mockup màn hình](images/lg-p0725-00-screen.png)
 
 725
 
@@ -11047,6 +11889,8 @@ UC04.02.03 - Tạo mới yêu cầu kiểm kê hàng tồn kho
 3. Mô tả màn hình
 3.1 Màn hình Chọn hình thức kiểm kê
 
+![Trang 729 — mockup màn hình](images/lg-p0729-00-screen.png)
+
 
 729
 
@@ -11069,6 +11913,8 @@ UC04.02.03 - Tạo mới yêu cầu kiểm kê hàng tồn kho
 | 2 | Hình thức<br>kiểm kê | Label |  |  | Hiển thị hình thức kiểm kê<br>người dùng chọn. |  |
 | 3 | Hàng kiểm<br>kê | Label |  |  | “Hàng tồn kho” |  |
 
+![Trang 731 — mockup màn hình](images/lg-p0731-00-screen.png)
+
 731
 
 <!-- Page 732 -->
@@ -11076,9 +11922,18 @@ UC04.02.03 - Tạo mới yêu cầu kiểm kê hàng tồn kho
 4 Chi tiết hàng hóa kiểm kê: Hiển thị danh sách các hàng hóa được thêm vào danh sách thực
 hiện kiểm kê.
 Trường hợp chưa chọn hình thức kiểm kê:
+
+![Trang 732 — mockup màn hình](images/lg-p0732-00-screen.png)
+
 Trường hợp hình thức kiểm kê = kiểm kê xác suất:
+
+![Trang 732 — mockup màn hình](images/lg-p0732-01-screen.png)
+
 Danh sách ban đầu no data, người dùng sẽ tự thêm hàng hoá chọn để kiểm kê.
 Trường hợp hình thức kiểm kê = kiểm kê xác suất/bất thường:
+
+![Trang 732 — mockup màn hình](images/lg-p0732-02-screen.png)
+
 Danh sách lấy tự động tất cả hàng hoá (cả serial) có trong hàng tồn kho (số lượng tồn kho >
 0) và chia theo từng tab loại hàng hoá.
 732
@@ -11143,6 +11998,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>1 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới kiểm kê hàng<br>tồn kho<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới kiểm kê<br>hàng tồn kho trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử kiểm kê hàng<br>tồn kho<br>Hủy: trở về màn Tạo mới<br>kiểm kê hàng tồn kho với<br>các dữ liệu đã chọn/nhập. |  |
 
+![Trang 738 — mockup màn hình](images/lg-p0738-00-screen.png)
+
 738
 
 <!-- Page 739 -->
@@ -11150,6 +12007,8 @@ không hợp lệ đó.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>2 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>tạo mới yêu cầu kiểm kê hàng<br>tồn kho<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới yêu cầu<br>kiểm kê hàng tồn kho trước<br>khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử kiểm kê hàng<br>tồn kho<br>Hủy: trở về màn Tạo mới<br>kiểm kê hàng tồn kho với<br>các dữ liệu đã chọn/nhập. |  |
+
+![Trang 739 — mockup màn hình](images/lg-p0739-00-screen.png)
 
 3.2 Màn hình Thông tin kiểm kê hàng tồn kho (xem) - Trạng thái Chờ phê duyệt
 739
@@ -11165,6 +12024,9 @@ Button Phê duyệt: Click vào để hiển thị popup Xác nhận phê duyệ
 Phê duyệt yêu cầu kiểm kê hàng tồn kho
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối yêu cầu, thực hiện UC Từ chối
 yêu cầukiểm kê hàng tồn kho
+
+![Trang 740 — mockup màn hình](images/lg-p0740-00-screen.png)
+
 740
 
 <!-- Page 741 -->
@@ -11185,6 +12047,8 @@ UC04.02.04 - Thu hồi yêu cầu kiểm kê hàng tồn kho
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận Thu hồi yêu cầu
 
+![Trang 741 — mockup màn hình](images/lg-p0741-00-screen.png)
+
 
 741
 
@@ -11202,6 +12066,9 @@ UC04.02.04 - Thu hồi yêu cầu kiểm kê hàng tồn kho
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận thu hồi yêu cầu<br>kiểm kê hàng tồn kho.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin kiểm kê<br>hàng tồn kho |  |
 
 3.2 Màn hình Thông tin kiểm kê hàng tồn kho (Xem) - Trạng thái Đã thu hồi
+
+![Trang 743 — mockup màn hình](images/lg-p0743-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết kiểm kê hàng tồn kho, ở đây
 chỉ mô tả hành động chi tiết ở trạng thái Đã thu hồi(xem đầy đủ các hành động theo từng trạng
 thái ở Lưu đồ trạng thái)
@@ -11216,6 +12083,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử kiểm kê hàng tồn kho
 Huỷ: Quay trở về màn hình Thông tin kiểm kê hàng tồn kho
+
+![Trang 744 — mockup màn hình](images/lg-p0744-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu cầu, thực hiện UC Tạo mới
 kiểm kê hàng tồn kho với các trường lấy thông tin từ yêu cầu hiện tại (đã bị thu hồi) nhưng
@@ -11244,6 +12114,9 @@ UC04.02.05 - Phê duyệt/Từ chối yêu cầu kiểm kê hàng tồn kho
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu
+
+![Trang 745 — mockup màn hình](images/lg-p0745-00-screen.png)
+
 745
 
 <!-- Page 746 -->
@@ -11260,6 +12133,8 @@ UC04.02.05 - Phê duyệt/Từ chối yêu cầu kiểm kê hàng tồn kho
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu kiểm kê<br>hàng tồn kho .<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối yêu cầu kiểm kê hàng<br>tồn kho thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin kiểm kê hàng tồn<br>kho với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu kiểm<br>kê hàng tồn kho này với nội<br>dung:<br>Hàng tồn kho - Kiểm kê<br>Yêu cầu kiểm kê hàng tồn kho<br>đã bị từ chối phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu.<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động thu hồi yêu<br>cầu và Phê<br>duyệt/Từ chối yêu<br>cầu xảy ra cùng<br>thời điểm → Ưu tiên<br>hành động thu hồi<br>yêu cầu<br>Tại màn hình Thông<br>tin kiểm kê hàng<br>tồn kho của người<br>phê duyệt khi ấn Từ<br>chối sau khi người<br>khác vừa thu hồi yêu<br>cầu trước, hệ thống<br>hiển thị popup thông<br>báo lỗi:<br>(Thay text = “Bản<br>ghi này đã bị thu hồi.<br>Vui lòng tải lại trang<br>để cập nhật.”)<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của kiểm<br>kê hàng tồn kho. |
 
+![Trang 747 — mockup màn hình](images/lg-p0747-00-screen.png)
+
 747
 
 <!-- Page 748 -->
@@ -11269,6 +12144,9 @@ UC04.02.05 - Phê duyệt/Từ chối yêu cầu kiểm kê hàng tồn kho
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối yêu cầu<br>kiểm kê hàng tồn kho.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin kiểm kê<br>hàng tồn kho. |  |
 
 3.2 Màn hình Thông tin kiểm kê hàng tồn kho (Xem) - Trạng thái Đã từ chối
+
+![Trang 748 — mockup màn hình](images/lg-p0748-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết ở đây chỉ mô tả hành động chi
 tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái)
 Xoá yêu cầu: Cho phép người dùng xoá yêu cầu đã bị từ chối.
@@ -11293,6 +12171,10 @@ kiểm kê hàng tồn kho với các trường lấy thông tin từ yêu cầu
 phê duyệt)
 3.3 Màn hình Xác nhận phê duyệt yêu cầu
 
+![Trang 749 — mockup màn hình](images/lg-p0749-00-screen.png)
+
+![Trang 749 — mockup màn hình](images/lg-p0749-01-screen.png)
+
 
 749
 
@@ -11301,6 +12183,9 @@ phê duyệt)
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt yêu cầukiểm kê<br>hàng tồn kho thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinkiểm kê hàng tồn<br>kho.<br>Ngưng cập nhật realtime<br>danh sách hàng hoá kiểm<br>kê<br>Ghi nhận các lịch sử xuất<br>nhập kho ở tab Thay đổi<br>hàng tồn kho<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu kiểm<br>kê hàng tồn kho với nội<br>dung:<br>Hàng tồn kho - Kiểm kê<br>Yêu cầu kiểm kê hàng tồn kho<br>đã được phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã phê duyệt yêu cầu. | Trường hợp hành<br>động thu hồi yêu<br>cầu và Phê<br>duyệt/Từ chối yêu<br>cầu xảy ra cùng<br>thời điểm → Ưu tiên<br>hành động thu hồi<br>yêu cầu<br>Tại màn hình Thông<br>tinkiểm kê hàng<br>tồn kho của người<br>phê duyệt khi ấn<br>Phê duyệt sau khi<br>người khác vừa thu<br>hồi yêu cầu trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>(Thay text = “Bản<br>ghi này đã bị thu hồi.<br>Vui lòng tải lại trang<br>để cập nhật.”)<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củakiểm<br>kê hàng tồn kho. |
+
+![Trang 750 — mockup màn hình](images/lg-p0750-00-screen.png)
+
 750
 
 <!-- Page 751 -->
@@ -11315,6 +12200,9 @@ chỉ mô tả thêm các hành động (xem đầy đủ các hành động the
 thái):
 Button Ghi nhận: Click vào để hiển thị popup Ghi nhận kiểm kê, thực hiện UC Ghi nhận kiểm
 kê hàng tồn kho
+
+![Trang 751 — mockup màn hình](images/lg-p0751-00-screen.png)
+
 751
 
 <!-- Page 752 -->
@@ -11343,6 +12231,8 @@ UC04.02.06 - Ghi nhận kiểm kê hàng tồn kho
 | 1 | Thông tin chung |  |  |  |  |  |
 | 2 | Hình thức<br>kiểm kê | Label |  |  | Hiển thị hình thức kiểm kê:<br>Kiểm kê xác suất<br>Kiểm kê bất thường<br>Kiểm kê toàn bộ |  |
 | 3 | Hàng kiểm<br>kê | Label |  |  | “Hàng tồn kho” |  |
+
+![Trang 753 — mockup màn hình](images/lg-p0753-00-screen.png)
 
 753
 
@@ -11400,6 +12290,14 @@ UC04.02.06 - Ghi nhận kiểm kê hàng tồn kho
 | 2<br>3 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>ghi nhận kiểm kê hàng tồn kho<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ ghi nhận kiểm<br>kê hàng tồn kho trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Ghi nhận<br>kiểm kê hàng tồn kho với<br>các dữ liệu đã chọn/nhập. |  |
 | 2<br>4 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>ghi nhận kiểm kê hàng tồn kho<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ ghi nhận kiểm<br>kê hàng tồn kho trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Ghi nhận<br>kiểm kê hàng tồn kho với<br>các dữ liệu đã chọn/nhập. |  |
 
+![Trang 758 — mockup màn hình](images/lg-p0758-00-screen.png)
+
+![Trang 758 — mockup màn hình](images/lg-p0758-01-screen.png)
+
+![Trang 758 — mockup màn hình](images/lg-p0758-00-screen.png)
+
+![Trang 758 — mockup màn hình](images/lg-p0758-01-screen.png)
+
 3.2 Màn hình Ký biên bản
 758
 
@@ -11410,6 +12308,8 @@ UC04.02.06 - Ghi nhận kiểm kê hàng tồn kho
 | 1 | Biển bản<br>bàn giao số | Label |  |  | Hiển thị mã biên bản của bản<br>ghi kiểm kê<br>Mã được gen theo format sau:<br>KKHTKyyyymmxx<br>yyyy là năm kiểm kê<br>mm là tháng kiểm kê<br>xx là dãy số từ 01 → 99 |  |
 | 2 | In biên bản | Butto<br>n |  |  | Cho phép người dùng tải<br>xuống biên bản với các số liệu<br>người dùng thêm.<br>Chưa có format biên bản<br>export |  |
 
+![Trang 759 — mockup màn hình](images/lg-p0759-00-screen.png)
+
 759
 
 <!-- Page 760 -->
@@ -11417,6 +12317,10 @@ UC04.02.06 - Ghi nhận kiểm kê hàng tồn kho
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 3 | Upload biên<br>bản đã ký | Uploa<br>d | Có |  | Cho phép người dùng upload<br>file biên bản đã ký lên lên hệ<br>thống.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được upload,<br>phần mềm hiển thêm thị giao<br>diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
+
+![Trang 760 — mockup màn hình](images/lg-p0760-00-screen.png)
+
+![Trang 760 — mockup màn hình](images/lg-p0760-01-screen.png)
 
 760
 
@@ -11447,6 +12351,9 @@ lệ, thông báo lỗi (in-line
 error msg) dưới trường
 không hợp lệ đó.
 3.2 Màn hình Thông tin kiểm kê hàng tồn kho (xem) - Trạng thái Chờ phê duyệt ghi nhận
+
+![Trang 763 — mockup màn hình](images/lg-p0763-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết kiểm kê hàng tồn kho, ở đây
 chỉ mô tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng
 thái):
@@ -11479,6 +12386,9 @@ UC04.02.07 - Thu hồi yêu cầu kiểm kê hàng tồn kho
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận thu hồi ghi nhận
+
+![Trang 765 — mockup màn hình](images/lg-p0765-00-screen.png)
+
 765
 
 <!-- Page 766 -->
@@ -11500,6 +12410,9 @@ UC04.02.07 - Thu hồi yêu cầu kiểm kê hàng tồn kho
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận thu hồi ghi nhận<br>kiểm kê hàng tồn kho.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt ghi<br>nhận<br>Đóng popup và trở về màn<br>hình Thông tin kiểm kê<br>hàng tồn kho |  |
 
 3.2 Màn hình Thông tin kiểm kê hàng tồn kho (Xem) - Trạng thái Đã thu hồi ghi nhận
+
+![Trang 768 — mockup màn hình](images/lg-p0768-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết kiểm kê hàng tồn kho, ở đây
 chỉ mô tả hành động chi tiết ở trạng thái Đã thu hồi ghi nhận(xem đầy đủ các hành động theo
 từng trạng thái ở Lưu đồ trạng thái)
@@ -11534,6 +12447,9 @@ UC04.02.08 - Phê duyệt/Từ chối ghi nhận kiểm kê hàng tồn kho
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối ghi nhận
+
+![Trang 770 — mockup màn hình](images/lg-p0770-00-screen.png)
+
 770
 
 <!-- Page 771 -->
@@ -11550,6 +12466,8 @@ UC04.02.08 - Phê duyệt/Từ chối ghi nhận kiểm kê hàng tồn kho
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối ghi nhận kiểm kê<br>hàng tồn kho .<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt ghi<br>nhận → Đã từ chối ghi<br>nhận<br>Trạng thái của tiến trình<br>chuyển từ Đang triển khai<br>→ Đã huỷ/từ chối<br>Hiển thị toast message : “Từ<br>chối ghi nhận kiểm kê hàng<br>tồn kho thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin kiểm kê hàng tồn<br>kho với hoạt động:<br>Ghi nhận lại<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu, người<br>đã phê duyệt và người ghi<br>nhận kiểm kê. với nội dung:<br>Hàng tồn kho - Kiểm kê<br>Ghi nhận kiểm kê hàng tồn<br>khođã bị từ chối phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối ghi nhận ghi nhận.<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động thu hồi ghi<br>nhận và Phê<br>duyệt/Từ chối ghi<br>nhận xảy ra cùng<br>thời điểm → Ưu tiên<br>hành động thu hồi<br>ghi nhận<br>Tại màn hình Thông<br>tin kiểm kê hàng<br>tồn kho của người<br>phê duyệt khi ấn Từ<br>chối sau khi người<br>khác vừa thu hồi ghi<br>nhận trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>(Thay text = “Ghi<br>nhận kiểm kê này đã<br>bị thu hồi. Vui lòng<br>tải lại trang để cập<br>nhật.”)<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của kiểm<br>kê hàng tồn kho. |  |
 
+![Trang 772 — mockup màn hình](images/lg-p0772-00-screen.png)
+
 772
 
 <!-- Page 773 -->
@@ -11559,6 +12477,9 @@ UC04.02.08 - Phê duyệt/Từ chối ghi nhận kiểm kê hàng tồn kho
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối ghi nhận<br>kiểm kê hàng tồn kho.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt ghi<br>nhận<br>Đóng popup và trở về màn<br>hình Thông tin kiểm kê<br>hàng tồn kho. |  |
 
 3.2 Màn hình Thông tin kiểm kê hàng tồn kho (Xem) - Trạng thái Đã từ chối ghi nhận
+
+![Trang 773 — mockup màn hình](images/lg-p0773-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết ở đây chỉ mô tả hành động chi
 tiết ở trạng thái Đã từ chối ghi nhận (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ
 trạng thái)
@@ -11577,6 +12498,8 @@ kê hàng tồn kho với các trường lấy thông tin từ ghi nhận hiện
 Chờ phê duyệt ghi nhận)
 3.3 Màn hình Xác nhận phê duyệt ghi nhận
 
+![Trang 774 — mockup màn hình](images/lg-p0774-00-screen.png)
+
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
@@ -11587,6 +12510,8 @@ Chờ phê duyệt ghi nhận)
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt ghi nhận.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt ghi<br>nhận → Đã phê duyệt ghi<br>nhận<br>Hiển thị toast message :<br>“Phê duyệt ghi nhậnkiểm<br>kê hàng tồn kho thành<br>công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinkiểm kê hàng tồn<br>kho.<br>Đối với hàng hoá bị<br>thiếu/thừa, cập nhật các<br>hàng hoá với số lượng tồn<br>kho/xưởng (mới) = số lượng<br>kiểm kê của hàng hoá tương<br>ứng trong bản ghi kiểm kê.<br>Đối với hàng hoá bị thiếu, tự<br>động tạo ra bản ghi đề nghị<br>bồi thường mới với số lượng<br>hàng hoá bị thiếu.<br>Gửi thông báo tới người<br>dùng đã tạo ghi nhận kiểm<br>kê hàng tồn kho với nội<br>dung:<br>Hàng tồn kho - Kiểm kê<br>Ghi nhận kiểm kê hàng tồn<br>kho đã được phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động: | Trường hợp hành<br>động thu hồi ghi<br>nhận và Phê<br>duyệt/Từ chối ghi<br>nhận xảy ra cùng<br>thời điểm → Ưu tiên<br>hành động thu hồi<br>ghi nhận<br>Tại màn hình Thông<br>tinkiểm kê hàng<br>tồn kho của người<br>phê duyệt khi ấn<br>Phê duyệt sau khi<br>người khác vừa thu<br>hồi ghi nhận trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>(Thay text = “Ghi<br>nhận kiểm kê này đã<br>bị thu hồi. Vui lòng<br>tải lại trang để cập<br>nhật.”)<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củakiểm<br>kê hàng tồn kho. |  |
+
+![Trang 775 — mockup màn hình](images/lg-p0775-00-screen.png)
 
 775
 
@@ -11604,6 +12529,9 @@ nhận.
 3.4 Màn hình Thông tinkiểm kê hàng tồn kho (Xem) - Trạng thái Đã phê duyệt ghi nhận
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết kiểm kê hàng tồn kho, ở đây
 không có thêm hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng
+
+![Trang 776 — mockup màn hình](images/lg-p0776-00-screen.png)
+
 776
 
 <!-- Page 777 -->
@@ -11633,6 +12561,9 @@ UC04.03.01 - Xem danh sách hàng tồn xưởng của xưởng
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Danh sách hàng tồn xưởng
+
+![Trang 779 — mockup màn hình](images/lg-p0779-00-screen.png)
+
 779
 
 <!-- Page 780 -->
@@ -11705,6 +12636,14 @@ A - Z, hiển thị cả các hàng hóa mà số lượng tồn xưởng = 0.
 | 1<br>9 | Hành động | Colu<br>mn |  |  | Hiển thị các hành động (có<br>được phân quyền) mà người<br>dùng có thể thực hiện đối với<br>1 bản ghi trong danh sách<br>tương ứng theoLưu đồ trạng<br>thái. |  |
 | 2<br>0 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Drop<br>down<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 2<br>1 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
+
+![Trang 786 — mockup màn hình](images/lg-p0786-00-screen.png)
+
+![Trang 786 — mockup màn hình](images/lg-p0786-01-screen.png)
+
+![Trang 786 — mockup màn hình](images/lg-p0786-00-screen.png)
+
+![Trang 786 — mockup màn hình](images/lg-p0786-01-screen.png)
 
 786
 
@@ -11800,6 +12739,9 @@ UC04.03.01 - Xem lịch sử kiểm kê hàng tồn xưởng
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Lịch sử kiểm kê hàng tồn xưởng
+
+![Trang 794 — mockup màn hình](images/lg-p0794-00-screen.png)
+
 794
 
 <!-- Page 795 -->
@@ -11836,6 +12778,14 @@ UC04.03.01 - Xem lịch sử kiểm kê hàng tồn xưởng
 | 1<br>4 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Dropd<br>own<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 1<br>5 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
 
+![Trang 797 — mockup màn hình](images/lg-p0797-00-screen.png)
+
+![Trang 797 — mockup màn hình](images/lg-p0797-01-screen.png)
+
+![Trang 797 — mockup màn hình](images/lg-p0797-00-screen.png)
+
+![Trang 797 — mockup màn hình](images/lg-p0797-01-screen.png)
+
 797
 
 <!-- Page 798 -->
@@ -11861,6 +12811,11 @@ UC04.03.02 - Xem thông tin kiểm kê hàng tồn xưởng
 
 Thông tin kiểm kê hàng hóa bao gồm:
 Thông tin chung
+
+![Trang 799 — mockup màn hình](images/lg-p0799-00-screen.png)
+
+![Trang 799 — mockup màn hình](images/lg-p0799-01-screen.png)
+
 799
 
 <!-- Page 800 -->
@@ -11883,6 +12838,9 @@ Tổng kết
 5 Chi tiết hàng hóa kiểm kê:
 Hiển thị 2 dạng bảng:
 Trước khi ghi nhận kiểm kê:
+
+![Trang 801 — mockup màn hình](images/lg-p0801-00-screen.png)
+
 Hiển thị danh sách tất cả hàng hóa được thêm vào danh sách để thực hiện kiểm kê. Các cập
 nhật liên quan đến hàng hoá trong thời gian tạo đến lúc phê duyệt yêu cầu sẽ được cập nhật
 real-time trên danh sách kiểm kê:
@@ -11942,6 +12900,8 @@ vào danh sách để thực hiện kiểm kê.
 | 2<br>4 | Tình trạng |  |  |  | Hiển thị tình trạng:<br>Đủ:<br>Chênh lệch: |  |
 | 2<br>5 | Tổng GT<br>thừa |  |  |  | Hiển thị tổng giá trị thừa của<br>hàng tồn xưởng ghi nhận sau<br>khi kiểm kê.<br>Giá trị = tổng (SL chênh lệch *<br>đơn giá của hàng hóa) của tất<br>cả hàng tồn xưởng có chênh<br>lệch > 0<br>Chỉ hiển thị khi tình trạng =<br>chênh lệch |  |
 
+![Trang 805 — mockup màn hình](images/lg-p0805-00-screen.png)
+
 805
 
 <!-- Page 806 -->
@@ -11991,6 +12951,8 @@ UC04.03.03 - Tạo mới yêu cầu kiểm kê hàng tồn xưởng
 3. Mô tả màn hình
 3.1 Màn hình Chọn hình thức kiểm kê
 
+![Trang 809 — mockup màn hình](images/lg-p0809-00-screen.png)
+
 
 809
 
@@ -12011,6 +12973,8 @@ UC04.03.03 - Tạo mới yêu cầu kiểm kê hàng tồn xưởng
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thông tin chung |  |  |  |  |  |
 
+![Trang 811 — mockup màn hình](images/lg-p0811-00-screen.png)
+
 811
 
 <!-- Page 812 -->
@@ -12027,9 +12991,18 @@ UC04.03.03 - Tạo mới yêu cầu kiểm kê hàng tồn xưởng
 4 Chi tiết hàng hóa kiểm kê: Hiển thị danh sách các hàng hóa được thêm vào danh sách thực
 hiện kiểm kê.
 Trường hợp chưa chọn hình thức kiểm kê:
+
+![Trang 813 — mockup màn hình](images/lg-p0813-00-screen.png)
+
 Trường hợp hình thức kiểm kê = kiểm kê xác suất:
+
+![Trang 813 — mockup màn hình](images/lg-p0813-01-screen.png)
+
 Danh sách ban đầu no data, người dùng sẽ tự thêm hàng hoá chọn để kiểm kê.
 Trường hợp hình thức kiểm kê = kiểm kê xác suất/bất thường:
+
+![Trang 813 — mockup màn hình](images/lg-p0813-02-screen.png)
+
 Danh sách lấy tự động tất cả hàng hoá (cả serial) có trong hàng tồn xưởng (số lượng tồn
 xưởng > 0) và chia theo từng tab loại hàng hoá.
 813
@@ -12094,6 +13067,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>1 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới kiểm kê hàng<br>tồn xưởng<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới kiểm kê<br>hàng tồn xưởng trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử kiểm kê hàng<br>tồn xưởng<br>Hủy: trở về màn Tạo mới<br>kiểm kê hàng tồn xưởng<br>với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 819 — mockup màn hình](images/lg-p0819-00-screen.png)
+
 819
 
 <!-- Page 820 -->
@@ -12102,7 +13077,12 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>2 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>tạo mới yêu cầu kiểm kê hàng<br>tồn xưởng<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới yêu cầu<br>kiểm kê hàng tồn xưởng trước<br>khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử kiểm kê hàng<br>tồn xưởng<br>Hủy: trở về màn Tạo mới<br>kiểm kê hàng tồn xưởng<br>với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 820 — mockup màn hình](images/lg-p0820-00-screen.png)
+
 3.2 Màn hình Thông tin kiểm kê hàng tồn xưởng (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 820 — mockup màn hình](images/lg-p0820-01-screen.png)
+
 820
 
 <!-- Page 821 -->
@@ -12136,6 +13116,8 @@ UC04.03.04 - Thu hồi yêu cầu kiểm kê hàng tồn xưởng
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận Thu hồi yêu cầu
 
+![Trang 822 — mockup màn hình](images/lg-p0822-00-screen.png)
+
 
 822
 
@@ -12163,6 +13145,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử kiểm kê hàng tồn xưởng
 Huỷ: Quay trở về màn hình Thông tin kiểm kê hàng tồn xưởng
+
+![Trang 824 — mockup màn hình](images/lg-p0824-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu cầu, thực hiện UC Tạo mới
 kiểm kê hàng tồn xưởng với các trường lấy thông tin từ yêu cầu hiện tại (đã bị thu hồi) nhưng
@@ -12191,6 +13176,9 @@ UC04.03.05 - Phê duyệt/Từ chối yêu cầu kiểm kê hàng tồn xưởng
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu
+
+![Trang 825 — mockup màn hình](images/lg-p0825-00-screen.png)
+
 825
 
 <!-- Page 826 -->
@@ -12207,6 +13195,8 @@ UC04.03.05 - Phê duyệt/Từ chối yêu cầu kiểm kê hàng tồn xưởng
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu kiểm kê<br>hàng tồn xưởng .<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối yêu cầu kiểm kê hàng<br>tồn xưởng thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin kiểm kê hàng tồn<br>xưởng với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu kiểm<br>kê hàng tồn xưởng này với<br>nội dung:<br>Hàng tồn xưởng - Kiểm kê<br>Yêu cầu kiểm kê hàng tồn<br>xưởngđã bị từ chối phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu.<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động thu hồi yêu<br>cầu và Phê<br>duyệt/Từ chối yêu<br>cầu xảy ra cùng<br>thời điểm → Ưu tiên<br>hành động thu hồi<br>yêu cầu<br>Tại màn hình Thông<br>tin kiểm kê hàng<br>tồn xưởng của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa thu<br>hồi yêu cầu trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>(Thay text = “Bản<br>ghi này đã bị thu hồi.<br>Vui lòng tải lại trang<br>để cập nhật.”)<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của kiểm<br>kê hàng tồn xưởng. |
 
+![Trang 827 — mockup màn hình](images/lg-p0827-00-screen.png)
+
 827
 
 <!-- Page 828 -->
@@ -12220,6 +13210,9 @@ Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiế
 tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái)
 Xoá yêu cầu: Cho phép người dùng xoá yêu cầu đã bị từ chối.
 Chọn Xoá: Hệ thống hiển thị popup Xác nhận
+
+![Trang 828 — mockup màn hình](images/lg-p0828-00-screen.png)
+
 Xoá:
 Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
@@ -12239,6 +13232,8 @@ phê duyệt)
 
 <!-- Page 829 -->
 
+![Trang 829 — mockup màn hình](images/lg-p0829-00-screen.png)
+
 
 829
 
@@ -12247,6 +13242,9 @@ phê duyệt)
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt yêu cầukiểm kê<br>hàng tồn xưởng thành<br>công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinkiểm kê hàng tồn<br>xưởng.<br>Ngưng cập nhật realtime<br>danh sách hàng hoá kiểm<br>kê<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu kiểm<br>kê hàng tồn xưởng với nội<br>dung:<br>Hàng tồn xưởng - Kiểm kê<br>Yêu cầu kiểm kê hàng tồn<br>xưởng đã được phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã phê duyệt yêu cầu. | Trường hợp hành<br>động thu hồi yêu<br>cầu và Phê<br>duyệt/Từ chối yêu<br>cầu xảy ra cùng<br>thời điểm → Ưu tiên<br>hành động thu hồi<br>yêu cầu<br>Tại màn hình Thông<br>tinkiểm kê hàng<br>tồn xưởng của<br>người phê duyệt khi<br>ấn Phê duyệt sau<br>khi người khác vừa<br>thu hồi yêu cầu<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>(Thay text = “Bản<br>ghi này đã bị thu hồi.<br>Vui lòng tải lại trang<br>để cập nhật.”)<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củakiểm<br>kê hàng tồn xưởng. |
+
+![Trang 830 — mockup màn hình](images/lg-p0830-00-screen.png)
+
 830
 
 <!-- Page 831 -->
@@ -12292,6 +13290,8 @@ UC04.03.06 - Ghi nhận kiểm kê hàng tồn xưởng
 | 4 | Chi tiết hàng hóa kiểm kê: Hiển thị danh sách các hàng hóa được thêm vào danh sách thực<br>hiện kiểm kê, lấy theo danh sách hàng hoá và số lượng/đơn giá sau khi phê duyệt yêu cầu<br>kiểm kê. |  |  |  |  |  |
 | 5 | Loại hàng<br>hóa | Colu<br>mn |  |  | Hiển thị loại hàng hóa của<br>hàng hóa |  |
 
+![Trang 833 — mockup màn hình](images/lg-p0833-00-screen.png)
+
 833
 
 <!-- Page 834 -->
@@ -12327,6 +13327,8 @@ UC04.03.06 - Ghi nhận kiểm kê hàng tồn xưởng
 | 1<br>8 | Hoàn thành | Butto<br>n |  | Enable | Cho phép người dùng hoàn tất<br>việc ghi nhận kiểm kê.<br>Hệ thống thực hiện kiểm tra<br>validate các trường thông tin.<br>Nếu tất cả hợp lệ, hiển thị<br>màn hình Ký biên bản<br>Nếu có trường không hợp<br>lệ, thông báo lỗi (in-line<br>error msg) dưới trường<br>không hợp lệ đó. |  |
 | 1<br>9 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>ghi nhận kiểm kê hàng tồn<br>xưởng<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ ghi nhận kiểm<br>kê hàng tồn xưởng trước khi<br>huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Ghi nhận<br>kiểm kê hàng tồn xưởng<br>với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 836 — mockup màn hình](images/lg-p0836-00-screen.png)
+
 836
 
 <!-- Page 837 -->
@@ -12335,7 +13337,11 @@ UC04.03.06 - Ghi nhận kiểm kê hàng tồn xưởng
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>0 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>ghi nhận kiểm kê hàng tồn<br>xưởng<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ ghi nhận kiểm<br>kê hàng tồn xưởng trước khi<br>huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Ghi nhận<br>kiểm kê hàng tồn xưởng<br>với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 837 — mockup màn hình](images/lg-p0837-00-screen.png)
+
 3.2 Màn hình Ký biên bản
+
+![Trang 837 — mockup màn hình](images/lg-p0837-01-screen.png)
 
 
 837
@@ -12353,6 +13359,10 @@ UC04.03.06 - Ghi nhận kiểm kê hàng tồn xưởng
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 3 | Upload biên<br>bản đã ký | Uploa<br>d | Có |  | Cho phép người dùng upload<br>file biên bản đã ký lên lên hệ<br>thống.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được upload,<br>phần mềm hiển thêm thị giao<br>diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
+
+![Trang 839 — mockup màn hình](images/lg-p0839-00-screen.png)
+
+![Trang 839 — mockup màn hình](images/lg-p0839-01-screen.png)
 
 839
 
@@ -12380,6 +13390,9 @@ lệ, thông báo lỗi (in-line
 error msg) dưới trường
 không hợp lệ đó.
 3.2 Màn hình Thông tin kiểm kê hàng tồn xưởng (xem) - Trạng thái Chờ phê duyệt ghi nhận
+
+![Trang 842 — mockup màn hình](images/lg-p0842-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết kiểm kê hàng tồn xưởng, ở đây
 chỉ mô tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng
 thái):
@@ -12408,6 +13421,9 @@ UC04.03.07 - Thu hồi yêu cầu kiểm kê hàng tồn xưởng
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận thu hồi ghi nhận
+
+![Trang 843 — mockup màn hình](images/lg-p0843-00-screen.png)
+
 843
 
 <!-- Page 844 -->
@@ -12460,6 +13476,9 @@ UC04.03.08 - Phê duyệt/Từ chối ghi nhận kiểm kê hàng tồn xưởng
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối ghi nhận
+
+![Trang 847 — mockup màn hình](images/lg-p0847-00-screen.png)
+
 847
 
 <!-- Page 848 -->
@@ -12475,6 +13494,8 @@ UC04.03.08 - Phê duyệt/Từ chối ghi nhận kiểm kê hàng tồn xưởng
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối ghi nhận kiểm kê<br>hàng tồn xưởng .<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt ghi<br>nhận → Đã từ chối ghi<br>nhận<br>Hiển thị toast message : “Từ<br>chối ghi nhận kiểm kê hàng<br>tồn xưởng thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin kiểm kê hàng tồn<br>xưởng với hoạt động:<br>Ghi nhận lại<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu, người<br>đã phê duyệt và người ghi<br>nhận kiểm kê. với nội dung:<br>Hàng tồn xưởng - Kiểm kê<br>Ghi nhận kiểm kê hàng tồn<br>xưởngđã bị từ chối phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối ghi nhận ghi nhận.<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động thu hồi ghi<br>nhận và Phê<br>duyệt/Từ chối ghi<br>nhận xảy ra cùng<br>thời điểm → Ưu tiên<br>hành động thu hồi<br>ghi nhận<br>Tại màn hình Thông<br>tin kiểm kê hàng<br>tồn xưởng của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa thu<br>hồi ghi nhận trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>(Thay text = “Ghi<br>nhận kiểm kê này đã<br>bị thu hồi. Vui lòng<br>tải lại trang để cập<br>nhật.”)<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của kiểm<br>kê hàng tồn xưởng. |
+
+![Trang 849 — mockup màn hình](images/lg-p0849-00-screen.png)
 
 849
 
@@ -12499,6 +13520,8 @@ kê hàng tồn xưởng với các trường lấy thông tin từ ghi nhận h
 Chờ phê duyệt ghi nhận)
 3.3 Màn hình Xác nhận phê duyệt ghi nhận
 
+![Trang 850 — mockup màn hình](images/lg-p0850-00-screen.png)
+
 
 850
 
@@ -12507,6 +13530,9 @@ Chờ phê duyệt ghi nhận)
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt ghi nhận.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt ghi<br>nhận → Đã phê duyệt ghi<br>nhận<br>Hiển thị toast message :<br>“Phê duyệt ghi nhậnkiểm<br>kê hàng tồn xưởng thành<br>công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinkiểm kê hàng tồn<br>xưởng.<br>Gửi thông báo tới người<br>dùng đã tạo ghi nhận kiểm<br>kê hàng tồn xưởng với nội<br>dung:<br>Hàng tồn xưởng - Kiểm kê<br>Ghi nhận kiểm kê hàng tồn<br>xưởng đã được phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã phê duyệt ghi nhận ghi<br>nhận. | Trường hợp hành<br>động thu hồi ghi<br>nhận và Phê<br>duyệt/Từ chối ghi<br>nhận xảy ra cùng<br>thời điểm → Ưu tiên<br>hành động thu hồi<br>ghi nhận<br>Tại màn hình Thông<br>tinkiểm kê hàng<br>tồn xưởng của<br>người phê duyệt khi<br>ấn Phê duyệt sau<br>khi người khác vừa<br>thu hồi ghi nhận<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>(Thay text = “Ghi<br>nhận kiểm kê này đã<br>bị thu hồi. Vui lòng<br>tải lại trang để cập<br>nhật.”)<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củakiểm<br>kê hàng tồn xưởng. |
+
+![Trang 851 — mockup màn hình](images/lg-p0851-00-screen.png)
+
 851
 
 <!-- Page 852 -->
@@ -12589,6 +13615,9 @@ UC04.04.01 - Xem lịch sử thanh lý rác thải
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Lịch sử thanh lý rác thải
+
+![Trang 858 — mockup màn hình](images/lg-p0858-00-screen.png)
+
 858
 
 <!-- Page 859 -->
@@ -12630,6 +13659,14 @@ UC04.04.01 - Xem lịch sử thanh lý rác thải
 | 1<br>9 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Dropd<br>own<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 2<br>0 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
 
+![Trang 861 — mockup màn hình](images/lg-p0861-00-screen.png)
+
+![Trang 861 — mockup màn hình](images/lg-p0861-01-screen.png)
+
+![Trang 861 — mockup màn hình](images/lg-p0861-00-screen.png)
+
+![Trang 861 — mockup màn hình](images/lg-p0861-01-screen.png)
+
 861
 
 <!-- Page 862 -->
@@ -12653,6 +13690,9 @@ UC04.04.02 - Xem thông tin thanh lý rác thải
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Thông tin thanh lý rác thải
+
+![Trang 863 — mockup màn hình](images/lg-p0863-00-screen.png)
+
 863
 
 <!-- Page 864 -->
@@ -12751,6 +13791,8 @@ UC04.04.03 - Tạo mới yêu cầu thanh lý rác thải
 | 2 | Người mua | Drop<br>down |  |  | Cho phép người dùng chọn từ<br>danh mục khách hàng DK05.<br>Danh sách bao gồm các giá trị<br>khách hàng DK05 ở trạng thái<br>đã được phê duyệt.<br>Chỉ cho phép chọn 1.<br>Cho phép search trong<br>dropdown. |  |
 | 3 | Mã số thuế | Label |  |  | Hiển thị mã số thuế của người<br>mua |  |
 
+![Trang 870 — mockup màn hình](images/lg-p0870-00-screen.png)
+
 870
 
 <!-- Page 871 -->
@@ -12828,11 +13870,22 @@ không hợp lệ đó.
 | 2<br>7 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>yêu cầu thanh lý rác thải<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ thanh lý rác thải<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử thanh lý rác<br>thải<br>Hủy: trở về màn thanh lý<br>rác thải với các dữ liệu đã<br>chọn/nhập. |  |
 | 2<br>8 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>yêu cầu thanh lý rác thải<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ thanh lý rác thải<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử thanh lý rác<br>thải<br>Hủy: trở về màn thanh lý<br>rác thải với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 877 — mockup màn hình](images/lg-p0877-00-screen.png)
+
+![Trang 877 — mockup màn hình](images/lg-p0877-01-screen.png)
+
+![Trang 877 — mockup màn hình](images/lg-p0877-00-screen.png)
+
+![Trang 877 — mockup màn hình](images/lg-p0877-01-screen.png)
+
 877
 
 <!-- Page 878 -->
 
 3.4 Màn hình Thông tin thanh lý rác thải (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 878 — mockup màn hình](images/lg-p0878-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết thanh lý rác thải, ở đây chỉ mô
 tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Button Thu hồi: Click vào để hiển thị popup Xác nhận thu hồi yêu cầu, thực hiện UC Thu hồi
@@ -12861,6 +13914,8 @@ UC04.04.04 - Thu hồi yêu cầu thanh lý rác thải
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận thu hồi
 
+![Trang 879 — mockup màn hình](images/lg-p0879-00-screen.png)
+
 
 879
 
@@ -12878,6 +13933,9 @@ UC04.04.04 - Thu hồi yêu cầu thanh lý rác thải
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận thu hồi yêu cầu<br>thanh lý rác thải.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin thanh lý rác<br>thải |  |
 
 3.2 Màn hình Thông tin thanh lý rác thải (Xem) - Trạng thái Đã thu hồi
+
+![Trang 881 — mockup màn hình](images/lg-p0881-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết thanh lý rác thải, ở đây chỉ mô
 tả hành động chi tiết ở trạng thái Đã thu hồi(xem đầy đủ các hành động theo từng trạng thái ở
 Lưu đồ trạng thái)
@@ -12897,6 +13955,9 @@ cầu thanh lý rác thải với các trường lấy thông tin từ yêu cầ
 duyệt)
 Xoá yêu cầu: Cho phép người dùng xoá yêu cầu đã bị huỷ.
 Chọn Xoá yêu cầu: Hệ thống hiển thị popup Xác nhận
+
+![Trang 882 — mockup màn hình](images/lg-p0882-00-screen.png)
+
 Xoá:
 Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
@@ -12921,6 +13982,9 @@ UC04.04.05 - Phê duyệt/Từ chối yêu cầu thanh lý rác thải
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối
+
+![Trang 883 — mockup màn hình](images/lg-p0883-00-screen.png)
+
 883
 
 <!-- Page 884 -->
@@ -12937,6 +14001,8 @@ UC04.04.05 - Phê duyệt/Từ chối yêu cầu thanh lý rác thải
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu yêu cầu<br>thanh lý rác thải.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối yêu cầu thanh lý rác<br>thải thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin thanh lý rác thải<br>với hoạt động:<br>Tạo mới<br>Xóa<br>Gửi thông báo tới người<br>dùng đã tạo/ yêu cầu thanh<br>lý rác thải này với nội dung:<br>thanh lý rác thải - thông<br>tin<br>Yêu cầu thông tin thanh lý<br>rác thải - [Loại thanh lý rác<br>thải] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện<br>hành động] hh:mm<br>dd/mm/yyyy<br>Đã từ chối yêu cầu thông<br>tin<br>Lý do: [Lý do người dùng<br>nhập khi thực hiện hành<br>động] | Trường hợp hành<br>động Thu hồi và<br>Phê duyệt/Từ chối<br>xảy ra cùng thời<br>điểm → Ưu tiên<br>hành động Thu hồi<br>Tại màn hình Thông<br>tin thanh lý rác thải<br>của người phê duyệt<br>khi ấn Từ chối sau<br>khi người khác vừa<br>thu hồi yêu cầu<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>(Thay UI text “Đề<br>xuất tạo mới” = “Yêu<br>cầu”)<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của thanh<br>lý rác thải. |
 
+![Trang 885 — mockup màn hình](images/lg-p0885-00-screen.png)
+
 885
 
 <!-- Page 886 -->
@@ -12946,6 +14012,9 @@ UC04.04.05 - Phê duyệt/Từ chối yêu cầu thanh lý rác thải
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối yêu cầu<br>thanh lý rác thải.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin thanh lý rác<br>thải. |  |
 
 3.2 Màn hình Thông tin thanh lý rác thải (Xem) - Trạng thái Đã từ chối
+
+![Trang 886 — mockup màn hình](images/lg-p0886-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết thanh lý rác thải, ở đây chỉ mô
 tả hành động chi tiết ở trạng thái Đã từ chối(xem đầy đủ các hành động theo từng trạng thái ở
 Lưu đồ trạng thái)
@@ -12965,12 +14034,17 @@ yêu cầu thanh lý rác thải với các trường lấy thông tin từ yêu
 phê duyệt)
 Xoá yêu cầu: Cho phép người dùng xoá yêu cầu đã bị huỷ.
 Chọn Xoá yêu cầu: Hệ thống hiển thị popup Xác nhận
+
+![Trang 887 — mockup màn hình](images/lg-p0887-00-screen.png)
+
 Xoá:
 Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử thanh lý rác thải
 Huỷ: Quay trở về màn hình Thông tin thanh lý rác thải
 3.3 Màn hình Xác nhận phê duyệt
+
+![Trang 887 — mockup màn hình](images/lg-p0887-01-screen.png)
 
 
 887
@@ -12980,6 +14054,9 @@ Huỷ: Quay trở về màn hình Thông tin thanh lý rác thải
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu yêu<br>cầu.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt yêu cầuthanh lý<br>rác thải thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinthanh lý rác thải.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu thanh<br>lý rác thải này với nội dung:<br>Thanh lý rác thải - Tạo mới<br>Yêu cầu thanh lý rác thải đã<br>được phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện<br>hành động] hh:mm<br>dd/mm/yyyy<br>Đã phê duyệt yêu cầu<br>Generate ID mới cho thanh<br>lý rác thải với quy tắc như<br>sau:<br>TLRTyyyymmxx<br>yyyy là năm phát sinh<br>thanh lý rác thải<br>mm là tháng phát sinh<br>thanh lý rác thải<br>xx là dãy số từ 01 → 99 | Trường hợp hành<br>động Thu hồi và<br>Phê duyệt/Từ chối<br>xảy ra cùng thời<br>điểm → Ưu tiên<br>hành động Thu hồi<br>yêu cầu<br>Tại màn hình Thông<br>tinthanh lý rác thải<br>của người phê duyệt<br>khi ấn Phê duyệt<br>sau khi người khác<br>vừa huỷ yêu cầu<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củathanh<br>lý rác thải. |
+
+![Trang 888 — mockup màn hình](images/lg-p0888-00-screen.png)
+
 888
 
 <!-- Page 889 -->
@@ -12994,6 +14071,9 @@ tả hành động chi tiết ở trạng thái Đã phê duyệt (xem đầy đ
 ở Lưu đồ trạng thái)
 Ghi nhận thanh toán: Cho phép người dùng ghi nhận thanh toán tiền thanh lý rác thải, thực
 hiện UC Ghi nhận thanh toán cho thanh lý rác thải
+
+![Trang 889 — mockup màn hình](images/lg-p0889-00-screen.png)
+
 889
 
 <!-- Page 890 -->
@@ -13014,6 +14094,8 @@ UC04.04.06 - Ghi nhận thanh toán cho thanh lý rác thải
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận ghi nhận thanh toán
 
+![Trang 890 — mockup màn hình](images/lg-p0890-00-screen.png)
+
 
 c
 890
@@ -13032,6 +14114,9 @@ c
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận thanh lý rác<br>thải.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Đã phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin thanh lý rác<br>thải |  |
 
 3.2 Màn hình Thông tin thanh lý rác thải (Xem) - Trạng thái Đã thanh toán
+
+![Trang 892 — mockup màn hình](images/lg-p0892-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết ở đây chỉ mô tả hành động chi
 tiết ở trạng thái Đã thanh toán (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng
 thái):
@@ -13067,6 +14152,8 @@ tự A - Z.
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng<br>(trừ trạng thái) |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Loại hàng hóa |  |
 
+![Trang 894 — mockup màn hình](images/lg-p0894-00-screen.png)
+
 894
 
 <!-- Page 895 -->
@@ -13091,6 +14178,14 @@ tự A - Z.
 | 1<br>1 | Hành động | Colu<br>mn |  |  | Hiển thị các hành động (có<br>được phân quyền) mà người<br>dùng có thể thực hiện đối với<br>1 bản ghi trong danh sách<br>tương ứng theoLưu đồ trạng<br>thái. |  |
 | 1<br>2 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Drop<br>down<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 1<br>3 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
+
+![Trang 896 — mockup màn hình](images/lg-p0896-00-screen.png)
+
+![Trang 896 — mockup màn hình](images/lg-p0896-01-screen.png)
+
+![Trang 896 — mockup màn hình](images/lg-p0896-00-screen.png)
+
+![Trang 896 — mockup màn hình](images/lg-p0896-01-screen.png)
 
 896
 
@@ -13170,6 +14265,8 @@ Mua dịch vụ sửa phụ tùng hỏng ở xưởng ngoài
 
 05.01 - Lưu đồ trạng thái cho đơn mua HHDV
 
+![Trang 905 — hình](images/lg-p0905-00-img.png)
+
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 |
 | --- | --- | --- | --- | --- |
 | Trạng thái | Hệ<br>thống<br>trigger | Thời điểm (Trigger) | Hành động ở PM Xưởng (chưa<br>tính phân quyền) | Hành động ở APP Lái xe<br>(chưa tính phân quyền) |
@@ -13206,6 +14303,9 @@ UC05.01.01 - Xem lịch sử mua hàng hoá dịch vụ
 | Điều kiện sau | Hệ thống hiển thị lịch sử mua hàng hoá dịch vụ thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 907 — lưu đồ hoạt động](images/lg-p0907-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Lịch sử mua hàng hoá dịch vụ
 907
@@ -13216,6 +14316,8 @@ UC05.01.01 - Xem lịch sử mua hàng hoá dịch vụ
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng<br>(trừ trạng thái) |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Nhà cung cấp<br>Loại đơn mua HHDV<br>Phương thức thanh toán<br>Người phụ trách<br>Trạng thái |  |
+
+![Trang 908 — mockup màn hình](images/lg-p0908-00-screen.png)
 
 908
 
@@ -13282,6 +14384,9 @@ UC05.01.02 - Xem thông tin đơn mua hàng hoá dịch vụ
 | Điều kiện sau | Hiển thị thông tin chi tiết đơn mua hàng hoá dịch vụ |
 
 2. Lưu đồ hoạt động
+
+![Trang 913 — lưu đồ hoạt động](images/lg-p0913-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin đơn mua HHDV
 913
@@ -13298,6 +14403,9 @@ Tổng cộng
 Giao diện freeze thông tin khác và tổng cộng để vừa độ dài screen, freeze title đơn mua hàng và
 các button bên dưới.
 Giao diện chỉ cho phép scroll từ các thông tin nhà cung cấp, chi tiết hàng hoá, dịch vụ.
+
+![Trang 914 — mockup màn hình](images/lg-p0914-00-screen.png)
+
 914
 
 <!-- Page 915 -->
@@ -13355,6 +14463,8 @@ Thanh toán
 | 1<br>8 | Mã hàng<br>hoá | Colu<br>mn |  |  | Hiển thị mã hàng hoá của<br>hàng hoá |  |
 | 1<br>9 | Tên hàng<br>hoá | Colu<br>mn |  |  | Hiển thị tên hàng hoá của<br>hàng hoá |  |
 
+![Trang 918 — mockup màn hình](images/lg-p0918-00-screen.png)
+
 918
 
 <!-- Page 919 -->
@@ -13375,6 +14485,8 @@ Thanh toán
 | 3<br>1 | Thông tin khác |  |  |  |  |  |
 | 3<br>2 | Tên tài<br>khoản - Tên<br>người phụ<br>trách |  |  |  | Hiển thị tên tài khoản - tên<br>phụ trách của đơn mua HHDV |  |
 
+![Trang 919 — mockup màn hình](images/lg-p0919-00-screen.png)
+
 919
 
 <!-- Page 920 -->
@@ -13393,6 +14505,8 @@ Thanh toán
 | 4<br>2 | Thuế | Label |  |  | Hiển thị tổng thuế của đơn<br>mua HHDV |  |
 | 4<br>3 | Tổng giá trị<br>thanh toán | Label |  |  | Hiển thị tổng giá trị thanh toán<br>của đơn mua HHDV |  |
 
+![Trang 920 — mockup màn hình](images/lg-p0920-00-screen.png)
+
 920
 
 <!-- Page 921 -->
@@ -13400,6 +14514,8 @@ Thanh toán
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 4<br>4 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với đơn mua HHDV<br>đó theo từng trạng thái của<br>đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối/Đã từ chối nghiệm thu,<br>hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Lịch sử đơn mua<br>HHDV<br>Huỷ: Quay trở về màn<br>hình Thông tin đơn<br>mua HHDV<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ |  |  |
+
+![Trang 921 — mockup màn hình](images/lg-p0921-00-screen.png)
 
 921
 
@@ -13430,6 +14546,8 @@ hide icon …
 | 4<br>9 |  | Icon |  | Enable | Click icon để đóng màn hình,<br>quay lại màn hình Lịch sử đơn<br>mua HHDV |  |
 
 3.5 Màn hình Thông tin hàng hoá/dịch vụ
+
+![Trang 923 — mockup màn hình](images/lg-p0923-00-screen.png)
 
 
 923
@@ -13475,6 +14593,9 @@ Loại phương tiện
 Mã PT - Tên PT
 Hệ thống tổng thành
 Đơn vị tính
+
+![Trang 925 — mockup màn hình](images/lg-p0925-00-screen.png)
+
 925
 
 <!-- Page 926 -->
@@ -13503,6 +14624,10 @@ UC05.01.03 - Tạo mới đơn mua HHDV
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Hàng hoá | Butto<br>n |  |  | Cho phép người dùng chọn<br>loại đơn mua HHDV là hàng<br>hoá.<br>Hệ thống hiển thị màn hình<br>Tạo mới đơn mua hàng hoá |  |
 
+![Trang 927 — lưu đồ hoạt động](images/lg-p0927-00-flow.png)
+
+![Trang 927 — mockup màn hình](images/lg-p0927-01-screen.png)
+
 927
 
 <!-- Page 928 -->
@@ -13512,11 +14637,23 @@ UC05.01.03 - Tạo mới đơn mua HHDV
 | 2 | Dịch vụ | Butto<br>n |  |  | Cho phép người dùng chọn<br>loại đơn mua HHDV là dịch vụ.<br>Hệ thống hiển thị màn hình<br>Chọn loại dịch vụ. |  |
 
 3.2 Màn hình Chọn loại dịch vụ
+
+![Trang 928 — mockup màn hình](images/lg-p0928-00-screen.png)
+
 Trường hợp chưa chọn loại DV
+
+![Trang 928 — mockup màn hình](images/lg-p0928-01-screen.png)
+
 Trường hợp chọn loại DV không liên quan
 tới phương tiện
+
+![Trang 928 — mockup màn hình](images/lg-p0928-02-screen.png)
+
 Trường hợp chọn loại DV có liên quan tới
 phương tiện
+
+![Trang 928 — mockup màn hình](images/lg-p0928-03-screen.png)
+
 Trường hợp chọn loại DV sửa chữa xe
 ngoài
 928
@@ -13529,6 +14666,8 @@ hỏng ở xưởng ngoài
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Chọn loại<br>dịch vụ | Dropd<br>own<br>list | Có |  | Cho phép người dùng chọn<br>loại dịch vụ của đơn mua từ<br>danh sách có sẵn.<br>Danh sách lấy các giá trị từ:<br>Danh sách các dịch vụ<br>tương ứng chi phí cấp 3<br>(các chi phí có ghi nhận qua<br>PO)<br>Sửa chữa xe ở xưởng ngoài<br>Sửa chữa PT hỏng ở xưởng<br>ngoài<br>Chỉ cho phép chọn 1 |  |
+
+![Trang 929 — mockup màn hình](images/lg-p0929-00-screen.png)
 
 929
 
@@ -13570,6 +14709,9 @@ phát từ đơn mua HHDV và lệnh sửa chữa nên sẽ lấy các giá tr�
 Nhà cung cấp
 Danh sách hàng hoá
 Danh sách dịch vụ
+
+![Trang 933 — mockup màn hình](images/lg-p0933-00-screen.png)
+
 933
 
 <!-- Page 934 -->
@@ -13604,6 +14746,8 @@ Thanh toán
 | 2 | Tên loại đơn<br>mua hàng | Label |  |  | Hiển thị tên loại đơn mua<br>HHDV = Đơn mua hàng nếu<br>thuộc trường hợp mua hàng<br>hoá<br>Hiển thị tên loại đơn mua<br>HHDV = Đơn mua dịch vụ -<br>[Tên dịch vụ] nếu thuộc<br>trường hợp mua dịch vụ |  |
 | 3 | Thông tin nhà cung cấp |  |  |  |  |  |
 
+![Trang 936 — mockup màn hình](images/lg-p0936-00-screen.png)
+
 936
 
 <!-- Page 937 -->
@@ -13629,6 +14773,8 @@ Thanh toán
 | 1<br>3 | Loại xe | Label |  |  | Hiển thị loại xe của phương<br>tiện được chọn |  |
 | 1<br>4 | Mã phương<br>tiện - Tên<br>phương tiện | Label |  |  | Hiển thị mã phương tiện - tên<br>phương tiện của phương tiện<br>được chọn |  |
 
+![Trang 938 — mockup màn hình](images/lg-p0938-00-screen.png)
+
 938
 
 <!-- Page 939 -->
@@ -13644,6 +14790,10 @@ Thanh toán
 | 2<br>1 | Thành tiền | Colu<br>mn |  |  | Hiển thị tổng giá của hàng hoá |  |
 | 2<br>2 | Thêm đơn<br>hàng 1 | Butto<br>n |  |  | Chỉ hiển thị khi danh sách đơn<br>hàng chưa có dữ liệu (no data)<br>Hệ thống hiển thị màn hình<br>Thêm đơn hàng khi chọn tới |  |
 
+![Trang 939 — mockup màn hình](images/lg-p0939-00-screen.png)
+
+![Trang 939 — mockup màn hình](images/lg-p0939-01-screen.png)
+
 939
 
 <!-- Page 940 -->
@@ -13655,6 +14805,10 @@ Thanh toán
 | 2<br>5 | Xoá | Butto<br>n |  |  | Cho phép người dùng bỏ đơn<br>hàng đã được thêm vào trước<br>đó.<br>Hệ thống bỏ bản ghi vừa được<br>thêm vào danh sách trước đó. |  |
 | 2<br>6 | Chi tiết dịch vụ: Hiển thị chi tiết danh sách dịch vụ được thêm.<br>Hiển thị no data:<br>Hiển thị có data:<br>Lấy danh sách giá trị default từ đơn mua HHDV/Lệnh SC nếu thuộc 2 trường hợp sửa chữa xe<br>ở xưởng ngoài và sửa chữa PT hỏng ở xường ngoài |  |  |  |  |  |
 | 2<br>7 | Mã dịch vụ | Colu<br>mn |  |  | Hiển thị mã dịch vụ của dịch<br>vụ |  |
+
+![Trang 940 — mockup màn hình](images/lg-p0940-00-screen.png)
+
+![Trang 940 — mockup màn hình](images/lg-p0940-01-screen.png)
 
 940
 
@@ -13695,6 +14849,8 @@ Thanh toán
 |  |  |  |  |  | khấu của tất cả hàng hoá dịch<br>vụ trong đơn mua HHDV.<br>Giá trị = tổng thành tiền của<br>tất cả hàng hoá và dịch vụ<br>trong đơn mua HHDV. |  |
 | 4<br>3 | Tổng CK<br>theo từng<br>HHDV | Label |  |  | Hiển thị tổng tất cả các chiết<br>khấu theo từng hàng hoá/dịch<br>vụ có trong đơn mua HHDV.<br>Giá trị = tổng chiết khấu của<br>tất cả hàng hoá và dịch vụ có<br>trong đơn mua HHDV. |  |
 
+![Trang 943 — mockup màn hình](images/lg-p0943-00-screen.png)
+
 943
 
 <!-- Page 944 -->
@@ -13719,6 +14875,8 @@ Thanh toán
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 4<br>7 | Thuế |  |  |  | Hiển thị tổng số tiền thuế của<br>tất cả hàng hoá dịch vụ trong<br>đơn mua HHDV. |  |  |
+
+![Trang 946 — mockup màn hình](images/lg-p0946-00-screen.png)
 
 946
 
@@ -13759,6 +14917,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 5<br>1 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới đơn mua<br>HHDV<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới đơn<br>mua HHDV trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử đơn mua<br>HHDV<br>Hủy: trở về màn Tạo mới<br>đơn mua HHDV với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 949 — mockup màn hình](images/lg-p0949-00-screen.png)
+
 949
 
 <!-- Page 950 -->
@@ -13767,7 +14927,12 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 5<br>2 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới đơn mua<br>HHDV<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới đơn<br>mua HHDV trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử đơn mua<br>HHDV<br>Hủy: trở về màn Tạo mới<br>đơn mua HHDV với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 950 — mockup màn hình](images/lg-p0950-00-screen.png)
+
 3.4 Màn hình Thêm/cập nhật đơn hàng
+
+![Trang 950 — mockup màn hình](images/lg-p0950-01-screen.png)
+
 Thêm hàng hoá - No data
 950
 
@@ -13775,6 +14940,11 @@ Thêm hàng hoá - No data
 
 Thêm dịch vụ - No data
 Cập nhật hàng hoá
+
+![Trang 951 — mockup màn hình](images/lg-p0951-00-screen.png)
+
+![Trang 951 — mockup màn hình](images/lg-p0951-01-screen.png)
+
 951
 
 <!-- Page 952 -->
@@ -13784,6 +14954,8 @@ Cập nhật dịch vụ
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Loại hàng<br>hoá | Drop<br>down<br>list | Có |  | Cho phép người dùng chọn<br>loại hàng hoá để thêm đơn<br>hàng. |  |
+
+![Trang 952 — mockup màn hình](images/lg-p0952-00-screen.png)
 
 952
 
@@ -13829,6 +15001,11 @@ Cập nhật dịch vụ
 7
 Hiển thị no data:
 Hiển thị có data (khi chọn xong giá trị cho trường mã HH/DV - tên HH/DV:
+
+![Trang 956 — mockup màn hình](images/lg-p0956-00-screen.png)
+
+![Trang 956 — mockup màn hình](images/lg-p0956-01-screen.png)
+
 Hiển thị thông tin danh mục theo loại hàng hoá/dịch vụ như sau:
 Hàng hoá
 Công cụ dụng cụ
@@ -13853,6 +15030,10 @@ Hệ thống tổng thành
 | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>8 | Trợ giúp mua hàng: Hiển thị các nhà cung cấp mà Delta có đơn mua hàng hoá đối với sản<br>phẩm hàng hoá được chọn, theo thứ tự latest to oldest.<br>Hiển thị no data:<br>→ Mặc định collapsed ban đầu<br>Hiển thị có data:<br>→ Mặc định mở rộng (expanded) sau khi chọn hàng hoá. |  |  |  |  |  |
 | 1<br>9 | Mã nhà<br>cung cấp | Hyper<br>link |  |  | Hiển thị mã nhà cung cấp<br>HHDV<br>Hover vào UI thể hiện:<br>Người dùng có thể chọn tới<br>hyperlink, hệ thống hiển thị<br>màn hình Báo cáo - Lịch sử<br>giá mua đối với loại hàng hoá<br>được chọn từ nhà cung cấp<br>HHDV được chọn.<br>(định nghĩa thêm và xử lý sau<br>khi triển khai module Báo cáo) | Nếu phân luồng =<br>Mua hàng hoá, mỗi<br>nhà cung cấp HHDV<br>chỉ được tạo 1 đơn<br>mua HHDV mới sau<br>6 giờ tính từ thởi<br>điểm đơn mua<br>HHDV có phân<br>luồng Mua hàng hoá<br>gần nhất được phê<br>duyệt.<br>→ Nếu vi phạm, hệ<br>thống báo lỗi toast<br>msg sau khi chọn<br>giá trị:<br>Trong popup thể<br>hiện số giờ, số phút<br>giới hạn còn lại. |
+
+![Trang 957 — mockup màn hình](images/lg-p0957-00-screen.png)
+
+![Trang 957 — mockup màn hình](images/lg-p0957-01-screen.png)
 
 957
 
@@ -13879,6 +15060,9 @@ Hệ thống tổng thành
 <!-- Page 960 -->
 
 3.1 Màn hình Thông tin đơn mua HHDV (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 960 — mockup màn hình](images/lg-p0960-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết đơn mua HHDV, ở đây chỉ mô
 tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Button Huỷ đề xuất: Click vào để hiển thị popup Xác nhận huỷ yêu cầu, thực hiện UC Huỷ đề
@@ -13911,6 +15095,10 @@ UC05.01.04 - Huỷ tạo mới đơn mua HHDV
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
 
+![Trang 962 — lưu đồ hoạt động](images/lg-p0962-00-flow.png)
+
+![Trang 962 — mockup màn hình](images/lg-p0962-01-screen.png)
+
 
 962
 
@@ -13928,6 +15116,9 @@ UC05.01.04 - Huỷ tạo mới đơn mua HHDV
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>đơn mua HHDV.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin đơn mua<br>HHDV |  |
 
 3.2 Màn hình Thông tin đơn mua HHDV (Xem) - Trạng thái Đã huỷ
+
+![Trang 964 — mockup màn hình](images/lg-p0964-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết đơn mua HHDV, ở đây chỉ mô
 tả hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở Lưu
 đồ trạng thái)
@@ -13942,6 +15133,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử mua HHDV
 Huỷ: Quay trở về màn hình Thông tin đơn mua HHDV
+
+![Trang 965 — mockup màn hình](images/lg-p0965-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu cầu tạo mới, thực hiện UC Tạo
 đề xuất tạo mới đơn mua HHDV với các trường lấy thông tin từ yêu cầu hiện tại (đã bị huỷ)
@@ -13979,6 +15173,10 @@ UC05.01.05 - Phê duyệt/Từ chối tạo mới đơn mua HHDV lần 1
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Lý do từ<br>chối | Textb<br>ox<br>(Short<br>) | Khô<br>ng |  | Cho phép người dùng nhập lý<br>do từ chối đề xuất cấp mới<br>đơn mua HHDV lần 1. |  |
 
+![Trang 967 — lưu đồ hoạt động](images/lg-p0967-00-flow.png)
+
+![Trang 967 — mockup màn hình](images/lg-p0967-01-screen.png)
+
 967
 
 <!-- Page 968 -->
@@ -13986,6 +15184,8 @@ UC05.01.05 - Phê duyệt/Từ chối tạo mới đơn mua HHDV lần 1
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới đơn mua HHDV lần 1.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Trạng thái của tiến trình<br>chuyển từ Đang triển khai<br>→ Đã huỷ/từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo đơn mua<br>HHDV thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin đơn mua HHDV<br>với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới đơn mua HHDV này với<br>nội dung:<br>PO - Mua HHDV<br>Yêu cầu mua HHDV - [Loại<br>đơn] đã bị từ chối ở phê duyệt<br>lần 1.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu tạo mới ở<br>lần phê duyệt 1. | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất lần 1<br>xảy ra cùng thời<br>điểm → Ưu tiên<br>hành động Hủy đề<br>xuất<br>Tại màn hình Thông<br>tin đơn mua HHDV<br>của người phê duyệt<br>khi ấn Từ chối sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của đơn<br>mua HHDV. |  |
+
+![Trang 968 — mockup màn hình](images/lg-p0968-00-screen.png)
 
 968
 
@@ -13999,6 +15199,9 @@ nhập]
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo đơn mua HHDV.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin đơn mua<br>HHDV. |  |
 
 3.2 Màn hình Thông tin đơn mua HHDV (Xem) - Trạng thái Đã từ chối
+
+![Trang 969 — mockup màn hình](images/lg-p0969-00-screen.png)
+
 969
 
 <!-- Page 970 -->
@@ -14022,6 +15225,11 @@ xuất cấp mớiđơn mua HHDV với các trường lấy thông tin từ yêu
 
 Chờ phê duyệt)
 3.3 Màn hình Xác nhận phê duyệt đề xuất tạo mới
+
+![Trang 970 — mockup màn hình](images/lg-p0970-00-screen.png)
+
+![Trang 970 — mockup màn hình](images/lg-p0970-01-screen.png)
+
 970
 
 <!-- Page 971 -->
@@ -14030,6 +15238,8 @@ Chờ phê duyệt)
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Đơn dịch vụ<br>gần đây |  |  |  | Hiển thị các đơn dịch vụ được<br>phê duyệt trong 6 giờ trở về |  |
 
+![Trang 971 — mockup màn hình](images/lg-p0971-00-screen.png)
+
 971
 
 <!-- Page 972 -->
@@ -14037,6 +15247,8 @@ Chờ phê duyệt)
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt - lần 1<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạođơn<br>mua HHDV thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinđơn mua HHDV.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới đơn mua HHDV với nội<br>dung:<br>PO - Mua HHDV<br>Yêu cầu mua HHDV - [Loại<br>đơn] đã được phê duyệt lần 1.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã phê duyệt yêu cầu cấp mới<br>ở lần 1 | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất lần 1<br>xảy ra cùng thời<br>điểm → Ưu tiên<br>hành động Hủy đề<br>xuất<br>Tại màn hình Thông<br>tinđơn mua HHDV<br>của người phê duyệt<br>khi ấn Phê duyệt<br>sau khi người khác<br>vừa huỷ đề xuất<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củađơn<br>mua HHDV. |
+
+![Trang 972 — mockup màn hình](images/lg-p0972-00-screen.png)
 
 972
 
@@ -14049,6 +15261,9 @@ Chờ phê duyệt)
 3.4 Màn hình Thông tinđơn mua HHDV (Xem) - Trạng thái Đã phê duyệt - lần 1
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết đơn mua HHDV, ở đây chỉ mô
 tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
+
+![Trang 973 — mockup màn hình](images/lg-p0973-00-screen.png)
+
 973
 
 <!-- Page 974 -->
@@ -14087,6 +15302,10 @@ UC05.01.06 - Phê duyệt/Từ chối tạo mới đơn mua HHDV lần 2
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Lý do từ<br>chối | Textb<br>ox<br>(Short<br>) | Khô<br>ng |  | Cho phép người dùng nhập lý<br>do từ chối đề xuất cấp mới<br>đơn mua HHDV lần 2. |  |
 
+![Trang 976 — lưu đồ hoạt động](images/lg-p0976-00-flow.png)
+
+![Trang 976 — mockup màn hình](images/lg-p0976-01-screen.png)
+
 976
 
 <!-- Page 977 -->
@@ -14094,6 +15313,8 @@ UC05.01.06 - Phê duyệt/Từ chối tạo mới đơn mua HHDV lần 2
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới đơn mua HHDV lần 2.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Đã phê duyệt - lần 1<br>→ Đã từ chối<br>Trạng thái của tiến trình<br>chuyển từ Đang triển khai<br>→ Đã huỷ/từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo đơn mua<br>HHDV thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin đơn mua HHDV<br>với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới đơn mua HHDV này với<br>nội dung:<br>PO - Mua HHDV<br>Yêu cầu mua HHDV - [Loại<br>đơn] đã bị từ chối ở lần phê<br>duyệt 1.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu tạo mới ở<br>lần phê duyệt 2. | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất lần 2<br>xảy ra cùng thời<br>điểm → Ưu tiên<br>hành động Hủy đề<br>xuất<br>Tại màn hình Thông<br>tin đơn mua HHDV<br>của người phê duyệt<br>khi ấn Từ chối sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của đơn<br>mua HHDV. |  |
+
+![Trang 977 — mockup màn hình](images/lg-p0977-00-screen.png)
 
 977
 
@@ -14107,6 +15328,9 @@ nhập]
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo đơn mua HHDV.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Đã phê duyệt - lần<br>1<br>Đóng popup và trở về màn<br>hình Thông tin đơn mua<br>HHDV. |  |
 
 3.2 Màn hình Thông tin đơn mua HHDV (Xem) - Trạng thái Đã từ chối
+
+![Trang 978 — mockup màn hình](images/lg-p0978-00-screen.png)
+
 978
 
 <!-- Page 979 -->
@@ -14130,6 +15354,11 @@ xuất tạo mớiđơn mua HHDV với các trường lấy thông tin từ yêu
 
 Chờ phê duyệt)
 3.3 Màn hình Xác nhận phê duyệt đề xuất tạo mới
+
+![Trang 979 — mockup màn hình](images/lg-p0979-00-screen.png)
+
+![Trang 979 — mockup màn hình](images/lg-p0979-01-screen.png)
+
 979
 
 <!-- Page 980 -->
@@ -14138,6 +15367,8 @@ Chờ phê duyệt)
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Đơn dịch vụ<br>gần đây |  |  |  | Hiển thị các đơn dịch vụ được<br>phê duyệt trong 6 giờ trở về |  |
 
+![Trang 980 — mockup màn hình](images/lg-p0980-00-screen.png)
+
 980
 
 <!-- Page 981 -->
@@ -14145,6 +15376,8 @@ Chờ phê duyệt)
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Đã phê duyệt - lần 1<br>→ Đã phê duyệt - lần 2<br>Trạng thái của tiến trình<br>chuyển từ Đang triển khai<br>→ Đã xong<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạođơn<br>mua HHDV thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinđơn mua HHDV.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới đơn mua HHDV với nội<br>dung:<br>PO - Mua HHDV<br>Yêu cầu mua HHDV - [Loại<br>đơn] đã được phê duyệt lần 2.<br>Generate ID mới cho đơn<br>mua HHDV với quy tắc như<br>sau: XXXXXyymmaaaa<br>XXXXX: Mã nhà cung cấp<br>của đơn hàng<br>yy: Chỉ 2 số cuối của năm<br>đặt hàng.<br>mm: Chỉ tháng đặt đơn<br>hàng. | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất lần 2<br>xảy ra cùng thời<br>điểm → Ưu tiên<br>hành động Hủy đề<br>xuất<br>Tại màn hình Thông<br>tinđơn mua HHDV<br>của người phê duyệt<br>khi ấn Phê duyệt<br>sau khi người khác<br>vừa huỷ đề xuất<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củađơn<br>mua HHDV. |  |
+
+![Trang 981 — mockup màn hình](images/lg-p0981-00-screen.png)
 
 981
 
@@ -14181,6 +15414,9 @@ Tạo mới đề nghị thanh toán trả trước - Trường hợp: Mua hàng
 trường hợp Nhà cung cấp HHDV có phương thức thanh toán = trả trước)
 Button In đơn mua: Theo common rules.
 Button Export: Theo common rules.
+
+![Trang 983 — mockup màn hình](images/lg-p0983-00-screen.png)
+
 983
 
 <!-- Page 984 -->
@@ -14242,6 +15478,8 @@ Bán phụ tùng
 
 05.02 - Lưu đồ trạng thái cho báo giá
 
+![Trang 990 — lưu đồ trạng thái](images/lg-p0990-00-state.png)
+
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
 | Trạng thái | Thời điểm (Trigger) | Hành động (chưa tính<br>phân quyền) |
@@ -14280,6 +15518,9 @@ UC05.02.01 - Xem danh sách báo giá
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Danh sách báo giá
+
+![Trang 992 — mockup màn hình](images/lg-p0992-00-screen.png)
+
 992
 
 <!-- Page 993 -->
@@ -14342,6 +15583,14 @@ UC05.02.01 - Xem danh sách báo giá
 | 2<br>6 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Dropd<br>own<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 2<br>7 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
 
+![Trang 997 — mockup màn hình](images/lg-p0997-00-screen.png)
+
+![Trang 997 — mockup màn hình](images/lg-p0997-01-screen.png)
+
+![Trang 997 — mockup màn hình](images/lg-p0997-00-screen.png)
+
+![Trang 997 — mockup màn hình](images/lg-p0997-01-screen.png)
+
 997
 
 <!-- Page 998 -->
@@ -14365,9 +15614,13 @@ UC05.02.02 - Xem thông tin báo giá
 
 <!-- Page 999 -->
 
+![Trang 999 — mockup màn hình](images/lg-p0999-00-screen.png)
+
 999
 
 <!-- Page 1000 -->
+
+![Trang 1000 — mockup màn hình](images/lg-p1000-00-screen.png)
 
 1000
 
@@ -14384,6 +15637,9 @@ Chi tiết hàng hoá
 Chi tiết dịch vụ
 Thông tin khác
 Tổng cộng
+
+![Trang 1001 — mockup màn hình](images/lg-p1001-00-screen.png)
+
 1001
 
 <!-- Page 1002 -->
@@ -14485,6 +15741,10 @@ Thanh toán trả trước/trả sau
 | 3<br>3 | Thành tiền | Colu<br>mn |  |  | Hiển thị tổng giá của hàng hoá |  |
 | 3<br>4 | Chi tiết dịch vụ: Hiển thị chi tiết danh sách dịch vụ mà xưởng hiện tại cung cấp |  |  |  |  |  |
 
+![Trang 1008 — mockup màn hình](images/lg-p1008-00-screen.png)
+
+![Trang 1008 — mockup màn hình](images/lg-p1008-01-screen.png)
+
 1008
 
 <!-- Page 1009 -->
@@ -14525,6 +15785,8 @@ Thanh toán trả trước/trả sau
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 5<br>3 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với báo giá đó theo<br>từng trạng thái của đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Danh sách báo giá<br>Huỷ: Quay trở về màn<br>hình Thông tin báo giá<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo<br>mới báo giá, thực hiện UC<br>Tạo yêu cầu báo giá với các |  |  |
 
+![Trang 1011 — mockup màn hình](images/lg-p1011-00-screen.png)
+
 1011
 
 <!-- Page 1012 -->
@@ -14547,6 +15809,8 @@ hide icon …
 <!-- Page 1013 -->
 
 3.5 Màn hình Thông tin hàng hoá/dịch vụ
+
+![Trang 1013 — mockup màn hình](images/lg-p1013-00-screen.png)
 
 |  | Control | Loại | Trư<br>ờng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -14595,6 +15859,9 @@ Loại phương tiện
 Mã PT - Tên PT
 Hệ thống tổng thành
 Đơn vị tính
+
+![Trang 1015 — mockup màn hình](images/lg-p1015-00-screen.png)
+
 1015
 
 <!-- Page 1016 -->
@@ -14615,6 +15882,8 @@ UC05.02.03 - Tạo mới báo giá
 3. Mô tả màn hình
 3.1 Màn hình Chọn loại báo giá
 
+![Trang 1016 — mockup màn hình](images/lg-p1016-00-screen.png)
+
 
 1016
 
@@ -14626,6 +15895,8 @@ UC05.02.03 - Tạo mới báo giá
 | 2 | Bán phụ<br>tùng | Butto<br>n |  |  | Cho phép người dùng chọn<br>loại báo giá là Bán phụ tùng<br>Hệ thống hiển thị màn hình<br>Chọn khách hàng. |  |
 | 3 | Đóng | Butto<br>n |  |  | Cho phép người dùng đóng<br>cửa sổ và trở về màn hình<br>trước đó |  |
 3.2 Màn hình Chọn loại sửa chữa
+
+![Trang 1017 — mockup màn hình](images/lg-p1017-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -14642,6 +15913,12 @@ UC05.02.03 - Tạo mới báo giá
 | 4 | Đóng | Butto<br>n |  |  | Cho phép người dùng đóng<br>cửa sổ và trở về màn hình<br>trước đó |  |
 
 3.3 Màn hình Chọn phương tiện
+
+![Trang 1018 — mockup màn hình](images/lg-p1018-00-screen.png)
+
+![Trang 1018 — mockup màn hình](images/lg-p1018-01-screen.png)
+
+![Trang 1018 — mockup màn hình](images/lg-p1018-02-screen.png)
 
 
 1018
@@ -14681,6 +15958,8 @@ UC05.02.03 - Tạo mới báo giá
 
 3.3 Màn hình Chọn khách hàng
 
+![Trang 1022 — mockup màn hình](images/lg-p1022-00-screen.png)
+
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Loại khách<br>hàng | Radio<br>butto<br>n | Có | Khách<br>hàng<br>DK05 | Cho phép người dùng loại<br>khách hàng sử dụng dịch vụ<br>Giá trị:<br>Khách hàng DK05<br>Khách hàng lẻ<br>Chỉ cho phép chọn 1 |  |
@@ -14711,21 +15990,34 @@ Trường hợp 4: Sửa chữa xe khách hàng DK05 (Lốp/ắc quy/PTVT còn l
 Trường hợp 5: Sửa chữa xe khách hàng lẻ (Lốp/ắc quy/PTVT còn lại)
 Trường hợp 6: Bán phụ tùng cho khách hàng DK05
 Trường hợp 7: Bán phụ tùng cho khách hàng lẻ
+
+![Trang 1024 — mockup màn hình](images/lg-p1024-00-screen.png)
+
 1024
 
 <!-- Page 1025 -->
+
+![Trang 1025 — mockup màn hình](images/lg-p1025-00-screen.png)
 
 1025
 
 <!-- Page 1026 -->
 
+![Trang 1026 — mockup màn hình](images/lg-p1026-00-screen.png)
+
 1026
 
 <!-- Page 1027 -->
 
+![Trang 1027 — mockup màn hình](images/lg-p1027-00-screen.png)
+
 1027
 
 <!-- Page 1028 -->
+
+![Trang 1028 — mockup màn hình](images/lg-p1028-00-screen.png)
+
+![Trang 1028 — mockup màn hình](images/lg-p1028-01-screen.png)
 
 1028
 
@@ -14771,6 +16063,8 @@ Thanh toán
 | 8 | Nhà cung<br>cấp | Drop<br>down<br>list/La<br>bel | Có |  | Cho phép người dùng chọn tới<br>nhà cung cấp từ danh mục<br>nhà cung cấp HHDV.<br>Danh sách bao gồm các giá trị<br>nhà cung cấp HHDV ở trạng<br>thái đã được phê duyệt.<br>Chỉ cho phép chọn 1.<br>Cho phép search trong<br>dropdown |  |
 | 9 | Hyperlink | Icon |  |  | Cho phép người dùng xem<br>màn hình Thông tin chi tiết<br>của khách hàng DK05 |  |
 
+![Trang 1032 — mockup màn hình](images/lg-p1032-00-screen.png)
+
 1032
 
 <!-- Page 1033 -->
@@ -14781,6 +16075,10 @@ Thanh toán
 | 1<br>1 | Số điện<br>thoại | Label |  |  | Hiển thị số điện thoại của nhà<br>cung cấp HHDV được chọn |  |
 | 1<br>2 | Địa chỉ | Label |  |  | Hiển thị địa chỉ của nhà cung<br>cấp HHDV được chọn |  |
 | 1<br>3 | Thông tin khách hàng: Chỉ hiển thị trong trường hợp 4+5<br>Trường hợp 4: Sửa chữa xe khách hàng DK05 (Lốp/ắc quy/PTVT còn lại)<br>Trường hợp 5: Sửa chữa xe khách hàng lẻ (Lốp/ắc quy/PTVT còn lại) |  |  |  |  |  |
+
+![Trang 1033 — mockup màn hình](images/lg-p1033-00-screen.png)
+
+![Trang 1033 — mockup màn hình](images/lg-p1033-01-screen.png)
 
 1033
 
@@ -14810,6 +16108,10 @@ Thanh toán
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>0 | Thông tin phương tiện: Chỉ hiển thị mục thông tin này nếu báo giá thuộc trường hợp sửa xe<br>Delta hoặc sửa xe khách hàng (TH1 → TH5)<br>Trường hợp xe Delta/xe KH từ danh mục KH DK05<br>Trường hợp xe KH lẻ |  |  |  |  |  |
 | 2<br>1 | Biển số xe | Label<br>/textb<br>ox |  |  | Là label nếu phương tiện<br>sửa chữa là phương tiện<br>Delta hoặc của khách hàng<br>DK05 → hiển thị biển số xe<br>theo thông tin phương tiện<br>lưu ở danh mục.<br>Là textbox nếu phương tiện<br>sửa chữa là phương tiện của<br>khách hàng lẻ → Cho phép<br>người dùng nhập biển số<br>của phương tiện |  |
+
+![Trang 1036 — mockup màn hình](images/lg-p1036-00-screen.png)
+
+![Trang 1036 — mockup màn hình](images/lg-p1036-01-screen.png)
 
 1036
 
@@ -14855,6 +16157,10 @@ Thanh toán
 | 3<br>6 | Thành tiền | Colu<br>mn |  |  | Hiển thị tổng giá của hàng hoá |  |
 | 3<br>7 | Thêm | Butto<br>n |  |  | Cho phép người dùng thêm 1<br>đơn hàng mới vào danh sách<br>đơn hàng của báo giá<br>Hệ thống hiển thị màn hình<br>Thêm đơn hàng khi chọn tới |  |
 
+![Trang 1040 — mockup màn hình](images/lg-p1040-00-screen.png)
+
+![Trang 1040 — mockup màn hình](images/lg-p1040-01-screen.png)
+
 1040
 
 <!-- Page 1041 -->
@@ -14895,6 +16201,8 @@ Thanh toán
 |  |  |  |  |  | khấu của tất cả hàng hoá dịch<br>vụ trong báo giá.<br>Giá trị = tổng thành tiền của<br>tất cả hàng hoá và dịch vụ<br>trong báo giá. |  |
 | 5<br>4 | Tổng CK<br>theo từng<br>HHDV | Label |  |  | Hiển thị tổng tất cả các chiết<br>khấu theo từng hàng hoá/dịch<br>vụ có trong báo giá.<br>Giá trị = tổng chiết khấu của<br>tất cả hàng hoá và dịch vụ có<br>trong báo giá. |  |
 
+![Trang 1043 — mockup màn hình](images/lg-p1043-00-screen.png)
+
 1043
 
 <!-- Page 1044 -->
@@ -14919,6 +16227,8 @@ Thanh toán
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 5<br>8 | Thuế |  |  |  | Hiển thị tổng số tiền thuế của<br>tất cả hàng hoá dịch vụ trong<br>báo giá.<br>Giá trị = tổng tiền thuế của tất<br>cả hàng hoá dịch vụ có trong<br>báo giá - tổng chiết khẩu thuế<br>của tất cả hàng hoá dịch vụ<br>trong báo giá.<br>Chiết khấu thuế chỉ có giá trị<br>khi CK thêm > 0.<br>Chiết khấu thuế (đ) của mỗi<br>HHDV = Thuế cũ (đ) * Số<br>lượng - Giá mới sau CK *<br>Thuế (%) * Số lượng<br>Trong đó,<br>Giá mới sau CK = Tương<br>đương - Chiết khấu theo<br>từng HHDV - Tỷ trọng<br>HH/DV *CK thêm (đ)/Số<br>lượng<br>Tỷ trọng HH/DV = GTTT<br>sau CK của HH/DV trên<br>từng đơn vị * Số<br>lượng/GTTT trước CK toàn<br>đơn<br>Ví dụ (tính theo nghiệp vụ):<br>Tuy nhiên đối với các phần<br>tính toán mình đã tính trước<br>đó rồi nên ở đây mình sẽ tách |  |  |
+
+![Trang 1046 — mockup màn hình](images/lg-p1046-00-screen.png)
 
 1046
 
@@ -14985,14 +16295,30 @@ không hợp lệ đó.
 | 6<br>3 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới báo giá<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới báo giá<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử báo giá<br>Hủy: trở về màn Tạo mới<br>báo giá với các dữ liệu đã<br>chọn/nhập. |  |
 | 6<br>4 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới báo giá<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới báo giá<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử báo giá<br>Hủy: trở về màn Tạo mới<br>báo giá với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1050 — mockup màn hình](images/lg-p1050-00-screen.png)
+
+![Trang 1050 — mockup màn hình](images/lg-p1050-01-screen.png)
+
+![Trang 1050 — mockup màn hình](images/lg-p1050-00-screen.png)
+
+![Trang 1050 — mockup màn hình](images/lg-p1050-01-screen.png)
+
 3.6 Màn hình Thêm/cập nhật đơn hàng
 1050
 
 <!-- Page 1051 -->
 
+![Trang 1051 — mockup màn hình](images/lg-p1051-00-screen.png)
+
+![Trang 1051 — mockup màn hình](images/lg-p1051-01-screen.png)
+
 1051
 
 <!-- Page 1052 -->
+
+![Trang 1052 — mockup màn hình](images/lg-p1052-00-screen.png)
+
+![Trang 1052 — mockup màn hình](images/lg-p1052-01-screen.png)
 
 1052
 
@@ -15001,6 +16327,8 @@ không hợp lệ đó.
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Hàng hoá<br>hoặc<br>Dịch vụ | Drop<br>down<br>list | Có |  | Cho phép người dùng chọn<br>mã hàng hoá - tên hàng hoá<br>có số lượng tồn kho > 0 mà<br>muốn thêm vào đơn hàng.<br>Danh sách lựa chọn lấy các<br>bản ghi ở trạng thái đã phê<br>duyệt.<br>Đối với hàng hoá, lấy danh<br>sách PTVT tuỳ theo loại PTVT<br>được chọn trước khi tạo:<br>Thay lốp → Hiển thị danh<br>sách hàng hoá = danh mục<br>lốp<br>Thay ắc quy → Hiển thị<br>danh sách hàng hoá = danh<br>mục ắc quy<br>Sửa chữa PTVT còn lại →<br>Hiển thị danh sách hàng<br>hoá = danh mục PTVT<br>Chỉ được chọn 1.<br>UI đánh dấu phân biệt giữa<br>hàng mới và hàng được phục<br>hồi như sau: |  |
+
+![Trang 1053 — mockup màn hình](images/lg-p1053-00-screen.png)
 
 1053
 
@@ -15062,6 +16390,9 @@ không hợp lệ đó.
 9
 Hiển thị no data:
 Hiển thị có data (khi chọn xong giá trị cho trường mã HH/DV - tên HH/DV):
+
+![Trang 1059 — mockup màn hình](images/lg-p1059-00-screen.png)
+
 Hiển thị thông tin danh mục theo loại hàng hoá/dịch vụ như sau:
 Phụ tùng vật tư/Lốp/Ắc quy
 Loại phương tiện
@@ -15116,6 +16447,9 @@ Phê duyệt đề xuất tạo mới báo giá
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối yêu cầu, thực hiện UC Từ chối
 đề xuất tạo mới báo giá
 3.8 Màn hình Thông tin báo giá (xem) - Trạng thái Chờ xác nhận
+
+![Trang 1063 — mockup màn hình](images/lg-p1063-00-screen.png)
+
 1063
 
 <!-- Page 1064 -->
@@ -15128,6 +16462,9 @@ Button Phê duyệt: Click vào để hiển thị popup Xác nhận phê duyệ
 Xác nhận báo giá
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối yêu cầu, thực hiện UC Từ chối
 xác nhận báo giá
+
+![Trang 1064 — mockup màn hình](images/lg-p1064-00-screen.png)
+
 1064
 
 <!-- Page 1065 -->
@@ -15148,6 +16485,8 @@ UC05.02.04 - Huỷ tạo mới báo giá
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
 
+![Trang 1065 — mockup màn hình](images/lg-p1065-00-screen.png)
+
 
 1065
 
@@ -15165,6 +16504,9 @@ UC05.02.04 - Huỷ tạo mới báo giá
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>báo giá.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê<br>duyệt/Chờ xác nhận<br>Đóng popup và trở về màn<br>hình Thông tin báo giá |  |
 
 3.2 Màn hình Thông tin báo giá (Xem) - Trạng thái Đã huỷ
+
+![Trang 1067 — mockup màn hình](images/lg-p1067-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết báo giá, ở đây chỉ mô tả hành
 động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng
 thái)
@@ -15179,6 +16521,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử báo giá
 Huỷ: Quay trở về màn hình Thông tin báo giá
+
+![Trang 1068 — mockup màn hình](images/lg-p1068-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu cầu tạo mới, thực hiện UC Tạo
 đề xuất tạo mới báo giá với các trường lấy thông tin từ yêu cầu hiện tại (đã bị huỷ) nhưng không
@@ -15207,6 +16552,9 @@ UC05.02.05 - Phê duyệt/Từ chối tạo mới báo giá
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
+
+![Trang 1069 — mockup màn hình](images/lg-p1069-00-screen.png)
+
 1069
 
 <!-- Page 1070 -->
@@ -15223,6 +16571,8 @@ UC05.02.05 - Phê duyệt/Từ chối tạo mới báo giá
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới báo giá.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Trạng thái của tiến trình<br>chuyển từ Đang triển khai<br>→ Đã huỷ/từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo báo giá<br>thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin báo giá với 2<br>hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới báo giá này với nội<br>dung:<br>Báo giá - Tạo mới<br>Yêu cầu tạo mới báo giá -<br>[Loại báo giá] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu tạo mới ở<br>lần phê duyệt 1. | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin báo giá của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa huỷ<br>đề xuất trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của báo<br>giá. |  |
 
+![Trang 1071 — mockup màn hình](images/lg-p1071-00-screen.png)
+
 1071
 
 <!-- Page 1072 -->
@@ -15235,6 +16585,9 @@ nhập]
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo báo giá.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin báo giá. |  |
 
 3.2 Màn hình Thông tin báo giá (Xem) - Trạng thái Đã từ chối
+
+![Trang 1072 — mockup màn hình](images/lg-p1072-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết ở đây chỉ mô tả hành động chi
 tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái)
 Xoá yêu cầu: Cho phép người dùng xoá yêu cầu đã bị từ chối.
@@ -15261,6 +16614,10 @@ xuất tạo mớibáo giá với các trường lấy thông tin từ yêu cầ
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 1073 — mockup màn hình](images/lg-p1073-00-screen.png)
+
+![Trang 1073 — mockup màn hình](images/lg-p1073-01-screen.png)
+
 1073
 
 <!-- Page 1074 -->
@@ -15268,6 +16625,8 @@ xuất tạo mớibáo giá với các trường lấy thông tin từ yêu cầ
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạobáo<br>giá thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinbáo giá.<br>Cập nhật thêm thông tin về<br>Sửa tại và địa điểm sửa<br>chữa cho Báo cáo sự cố<br>nếu trường hợp báo giá =<br>sửa xe Delta và có yêu cầu<br>sửa chữa.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới báo giá với nội dung:<br>Báo giá - Tạo mới<br>Yêu cầu tạo mới báo giá -<br>[Loại báo giá] đã được phê<br>duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã phê duyệt yêu cầu tạo mới<br>Generate ID mới cho báo<br>giá với quy tắc như sau:<br>XXXXXyymmaaaa | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinbáo giá của<br>người phê duyệt khi<br>ấn Phê duyệt sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củabáo<br>giá. |  |
+
+![Trang 1074 — mockup màn hình](images/lg-p1074-00-screen.png)
 
 1074
 
@@ -15310,6 +16669,9 @@ Button Thanh toán: hiển thị khi thuộc trường hợp loại báo giá = 
 → Click vào để hiển thị màn hình Cập nhật thanh toán trả trước/sau, thực hiện UC Cập nhật
 thanh toán trả trước/sau (tuỳ thuộc vào khách hàng DK05 có phuơng thức thanh toán là gì, nếu
 khách hàng lẻ luôn luôn tạo thanh toán trả trước).
+
+![Trang 1076 — mockup màn hình](images/lg-p1076-00-screen.png)
+
 1076
 
 <!-- Page 1077 -->
@@ -15335,6 +16697,8 @@ UC05.02.06 - Xác nhận/Từ chối báo giá
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối xác nhận
 
+![Trang 1078 — mockup màn hình](images/lg-p1078-00-screen.png)
+
 
 1078
 
@@ -15351,6 +16715,8 @@ UC05.02.06 - Xác nhận/Từ chối báo giá
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>tạo mới báo giá.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ xác nhận → Bị<br>khoá<br>Trạng thái của tiến trình<br>chuyển từ Đang triển khai<br>→ Đã huỷ/từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo báo giá<br>thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin báo giá với 2<br>hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới báo giá này với nội<br>dung:<br>Báo giá - Khách hàng xác<br>nhận<br>Báo giá - [Loại báo giá] đã bị<br>khách hàng từ chối xác nhận.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã đại diện khách hàng từ<br>chối xác nhận | Trường hợp hành<br>động Hủy đề xuất<br>và Xác nhận/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin báo giá của<br>người xác nhận khi<br>ấn Từ chối sau khi<br>người khác vừa huỷ<br>đề xuất trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của báo<br>giá. |  |
 
+![Trang 1080 — mockup màn hình](images/lg-p1080-00-screen.png)
+
 1080
 
 <!-- Page 1081 -->
@@ -15363,6 +16729,9 @@ khi thực hiện hành động]
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo báo giá.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ xác nhận<br>Đóng popup và trở về màn<br>hình Thông tin báo giá. |  |
 
 3.2 Màn hình Thông tin báo giá (Xem) - Trạng thái Bị khoá
+
+![Trang 1081 — mockup màn hình](images/lg-p1081-00-screen.png)
+
 1081
 
 <!-- Page 1082 -->
@@ -15389,6 +16758,10 @@ xuất tạo mớibáo giá với các trường lấy thông tin từ yêu cầ
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 1082 — mockup màn hình](images/lg-p1082-00-screen.png)
+
+![Trang 1082 — mockup màn hình](images/lg-p1082-01-screen.png)
+
 1082
 
 <!-- Page 1083 -->
@@ -15396,6 +16769,8 @@ xuất tạo mớibáo giá với các trường lấy thông tin từ yêu cầ
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Nếu báo giá thuộc trường<br>hợp Bán phụ tùng<br>Trạng thái của bản ghi<br>thay đổi từ Chờ xác nhận<br>→ Đã xác nhận<br>Generate ID mới cho báo<br>giá với quy tắc như sau:<br>XXXXXyymmaaaa<br>XXXXX: Mã khách<br>hàng của báo giá (đối<br>với khách lẻ để 00000)<br>yy: Chỉ 2 số cuối của<br>năm báo giá.<br>mm: Chỉ tháng đặt báo<br>giá.<br>aaaa: là dãy số chạy từ<br>0001 đến 9999 chỉ số<br>báo giá được cấp liên<br>tục trong năm trên<br>phần mềm.<br>Trạng thái của tiến trình<br>chuyển từ Đang triển<br>khai → Đã xong<br>Nếu báo giá thuộc trường<br>hợp Sửa xe Khách hàng<br>Trạng thái của bản ghi<br>thay đổi từ Chờ xác nhận<br>→ Chờ phê duyệt<br>Hiển thị toast message :<br>“Xác nhậnbáo giá thành | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinbáo giá của<br>người phê duyệt khi<br>ấn Phê duyệt sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củabáo<br>giá. |  |
+
+![Trang 1083 — mockup màn hình](images/lg-p1083-00-screen.png)
 
 1083
 
@@ -15437,6 +16812,9 @@ giá
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối báo giá, thực hiện UC Từ chối
 xác nhận báo giá
 3.4 Màn hình Thông tinbáo giá (Xem) - Trạng thái Đã xác nhận
+
+![Trang 1085 — mockup màn hình](images/lg-p1085-00-screen.png)
+
 1085
 
 <!-- Page 1086 -->
@@ -15445,6 +16823,9 @@ Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiế
 các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái)
 Button Xuất kho: Click vào để hiển thị màn hình Tạo phiếu xuất kho, thực hiện UC Tạo phiếu
 xuất kho
+
+![Trang 1086 — mockup màn hình](images/lg-p1086-00-screen.png)
+
 1086
 
 <!-- Page 1087 -->
@@ -15484,6 +16865,8 @@ phần Nghiệp vụ xưởng - Nhập kho như sau:
 05.03 - Lưu đồ trạng thái cho nhập kho
 Lưu đồ chung cho phiếu nhập kho:
 
+![Trang 1091 — lưu đồ trạng thái](images/lg-p1091-00-state.png)
+
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
 | Trạng thái | Thời điểm (Trigger) | Hành động (chưa tính<br>phân quyền) |
@@ -15511,6 +16894,9 @@ UC05.03.01 - Xem lịch sử nhập kho
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Lịch sử nhập kho
+
+![Trang 1092 — mockup màn hình](images/lg-p1092-00-screen.png)
+
 1092
 
 <!-- Page 1093 -->
@@ -15540,6 +16926,14 @@ UC05.03.01 - Xem lịch sử nhập kho
 | 1<br>4 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Dropd<br>own<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 1<br>5 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
 
+![Trang 1094 — mockup màn hình](images/lg-p1094-00-screen.png)
+
+![Trang 1094 — mockup màn hình](images/lg-p1094-01-screen.png)
+
+![Trang 1094 — mockup màn hình](images/lg-p1094-00-screen.png)
+
+![Trang 1094 — mockup màn hình](images/lg-p1094-01-screen.png)
+
 1094
 
 <!-- Page 1095 -->
@@ -15559,6 +16953,9 @@ UC05.03.02 - Xem thông tin nhập kho
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Thông tin nhập kho
+
+![Trang 1095 — mockup màn hình](images/lg-p1095-00-screen.png)
+
 1095
 
 <!-- Page 1096 -->
@@ -15613,6 +17010,8 @@ UC05.03.02 - Xem thông tin nhập kho
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2<br>6 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với phiếu nhập kho<br>đó theo từng trạng thái của<br>đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Lịch sử nhập kho<br>Huỷ: Quay trở về màn<br>hình Thông tin nhập<br>kho<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới: Hệ thống hiển<br>thị màn hình Tạo mới yêu cầu<br>nhập kho, thực hiện UC Tạo |  |  |
 
+![Trang 1099 — mockup màn hình](images/lg-p1099-00-screen.png)
+
 1099
 
 <!-- Page 1100 -->
@@ -15658,13 +17057,22 @@ Phục hồi phụ tùng hỏng: Hệ thống hiển thị tiếp màn hình Ch�
 Sửa chữa còn dư: Hệ thống hiển thị tiếp màn hình Chọn lệnh sửa chữa
 Chuyển kho: Hệ thống hiển thị tiếp màn hình Chọn phiếu chuyển kho
 3.2 Màn hình Chọn đơn mua hàng/Lệnh sửa chữa/Phiếu chuyển kho
+
+![Trang 1102 — mockup màn hình](images/lg-p1102-00-screen.png)
+
 1102
 
 <!-- Page 1103 -->
 
+![Trang 1103 — mockup màn hình](images/lg-p1103-00-screen.png)
+
+![Trang 1103 — mockup màn hình](images/lg-p1103-01-screen.png)
+
 1103
 
 <!-- Page 1104 -->
+
+![Trang 1104 — mockup màn hình](images/lg-p1104-00-screen.png)
 
 
 1104
@@ -15687,6 +17095,8 @@ Chuyển kho: Hệ thống hiển thị tiếp màn hình Chọn phiếu chuyể
 | 6 | Tạo | Butto<br>n |  |  | Cho phép người dùng chuyển<br>tiếp sang bước tiếp theo.<br>Hệ thống hiển thị màn hình<br>Tạo mới nhập kho tương ứng<br>với từng trường hợp. |  |
 
 3.3 Màn hình Tạo mới nhập kho
+
+![Trang 1106 — mockup màn hình](images/lg-p1106-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -15734,6 +17144,8 @@ Nhập kho
 | 8 | Tên hàng<br>hoá | Colu<br>mn |  |  | Hiển thị tên của hàng hoá |  |
 | 9 | Đơn vị tính | Colu<br>mn |  |  | Hiển thị đơn vị tính của hàng<br>hoá |  |
 | 1<br>0 | SL đặt | Colu<br>mn |  |  | [Hiển thị trong trường hợp<br>Mua phụ tùng]<br>Hiển thị SL đặt mua của hàng<br>hoá.<br>Lấy giá trị số lượng của hàng<br>hoá tương ứng ở đơn mua<br>hàng. |  |
+
+![Trang 1109 — mockup màn hình](images/lg-p1109-00-screen.png)
 
 1109
 
@@ -15798,6 +17210,8 @@ Nhập kho
 | 3<br>0 | Ghi nhận số<br>lượng | Butto<br>n |  | Enable | Cho phép người dùng hoàn tất<br>việc tạo yêu cầu tạo mới 1 bản<br>ghi nhập kho.<br>Hệ thống thực hiện kiểm tra<br>validate các trường thông tin<br>tạo mới.<br>Nếu tất cả hợp lệ, hệ thống<br>hiển thị màn hình Xác nhận<br>phiếu nhập kho theo từng<br>trường hợp kết quả.<br>Nếu có trường không hợp<br>lệ, thông báo lỗi (in-line<br>error msg) dưới trường<br>không hợp lệ đó đối với<br>textbox ngoài bảng và dạng<br>tooltip đối với textbox trong<br>bảng |  |
 | 3<br>1 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới nhập kho<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới nhập<br>kho trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử nhập kho<br>Hủy: trở về màn Tạo mới<br>nhập kho với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1115 — mockup màn hình](images/lg-p1115-00-screen.png)
+
 1115
 
 <!-- Page 1116 -->
@@ -15806,7 +17220,11 @@ Nhập kho
 | --- | --- | --- | --- | --- | --- | --- |
 | 3<br>2 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới nhập kho<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới nhập<br>kho trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử nhập kho<br>Hủy: trở về màn Tạo mới<br>nhập kho với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1116 — mockup màn hình](images/lg-p1116-00-screen.png)
+
 3.1 Màn hình Nhập serial
+
+![Trang 1116 — mockup màn hình](images/lg-p1116-01-screen.png)
 
 
 1116
@@ -15830,6 +17248,14 @@ Nhập kho
 | 7 | Huỷ | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>việc thêm số serial định danh<br>sản phẩm cho từng hàng hoá.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới trước<br>khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Tạo mới nhập kho<br>Hủy: trở về màn Nhập serial<br>với các dữ liệu đã<br>chọn/nhập. |  |
 | 8 | Tạo | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>việc thêm số serial định danh<br>sản phẩm cho từng hàng hoá.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới trước<br>khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Tạo mới nhập kho<br>Hủy: trở về màn Nhập serial<br>với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1118 — mockup màn hình](images/lg-p1118-00-screen.png)
+
+![Trang 1118 — mockup màn hình](images/lg-p1118-01-screen.png)
+
+![Trang 1118 — mockup màn hình](images/lg-p1118-00-screen.png)
+
+![Trang 1118 — mockup màn hình](images/lg-p1118-01-screen.png)
+
 3.1 Màn hình Xác nhận phiếu nhập kho
 1118
 
@@ -15838,6 +17264,13 @@ Nhập kho
 Kết quả 1
 Kết quả 2
 Kết quả 3
+
+![Trang 1119 — mockup màn hình](images/lg-p1119-00-screen.png)
+
+![Trang 1119 — mockup màn hình](images/lg-p1119-01-screen.png)
+
+![Trang 1119 — mockup màn hình](images/lg-p1119-02-screen.png)
+
 1119
 
 <!-- Page 1120 -->
@@ -15849,6 +17282,12 @@ Lưu đồ trường hợp - kết quả
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Danh sách hàng hoá nhập kho: Hiển thị danh sách các hàng hoá tiến hành nhập kho.<br>Bảng chỉ hiển thị trong trường hợp có hàng hoá thiếu số lượng. |  |  |  |  |  |
 | 2 | Mã HH | Colu<br>mn |  |  | Hiển thị mã hàng hoá |  |
+
+![Trang 1120 — mockup màn hình](images/lg-p1120-00-screen.png)
+
+![Trang 1120 — mockup màn hình](images/lg-p1120-01-screen.png)
+
+![Trang 1120 — mockup màn hình](images/lg-p1120-02-screen.png)
 
 1120
 
@@ -15892,6 +17331,9 @@ Button Phê duyệt: Click vào để hiển thị popup Xác nhận phê duyệ
 Phê duyệt đề xuất cấp mới nhập kho
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối yêu cầu, thực hiện UC Từ chối
 đề xuất cấp mới nhập kho
+
+![Trang 1124 — mockup màn hình](images/lg-p1124-00-screen.png)
+
 1124
 
 <!-- Page 1125 -->
@@ -15912,6 +17354,8 @@ UC05.03.04 - Huỷ yêu cầu nhập kho
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ yêu cầu
 
+![Trang 1125 — mockup màn hình](images/lg-p1125-00-screen.png)
+
 
 1125
 
@@ -15929,6 +17373,9 @@ UC05.03.04 - Huỷ yêu cầu nhập kho
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ yêu cầu<br>nhập kho.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin nhập kho |  |
 
 3.2 Màn hình Thông tin nhập kho (Xem) - Trạng thái Đã huỷ
+
+![Trang 1127 — mockup màn hình](images/lg-p1127-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhập kho, ở đây chỉ mô tả hành
 động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng
 thái)
@@ -15943,6 +17390,9 @@ Hiển thị toast message Xoá yêu cầu thành công
 
 Đóng tất cả popup và trở về màn hình Lịch sử nhập kho
 Huỷ: Quay trở về màn hình Thông tin nhập kho
+
+![Trang 1128 — mockup màn hình](images/lg-p1128-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Người dùng chọn tới icon … > Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu
 cầu, thực hiện UC Tạo yêu cầu nhập kho với các trường lấy thông tin từ yêu cầu hiện tại (đã bị
@@ -15976,6 +17426,10 @@ UC05.03.05 - Phê duyệt/Từ chối yêu cầu nhập kho
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 1130 — lưu đồ hoạt động](images/lg-p1130-00-flow.png)
+
+![Trang 1130 — mockup màn hình](images/lg-p1130-01-screen.png)
+
 
 1130
 
@@ -15985,6 +17439,9 @@ UC05.03.05 - Phê duyệt/Từ chối yêu cầu nhập kho
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Lý do từ<br>chối | Textb<br>ox<br>(Short<br>) | Khô<br>ng |  | Cho phép người dùng nhập lý<br>do từ chối yêu cầu nhập kho |  |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu yêu cầu<br>nhập kho.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối yêu cầu tạo nhập kho<br>thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin nhập kho với 2<br>hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu nhập<br>kho này với nội dung:<br>a<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>a | Trường hợp hành<br>động Hủy yêu cầu<br>và Phê duyệt/Từ<br>chối yêu cầu xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy yêu cầu<br>Tại màn hình Thông<br>tin nhập kho của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa huỷ<br>yêu cầu trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của nhập<br>kho. |
+
+![Trang 1131 — mockup màn hình](images/lg-p1131-00-screen.png)
+
 1131
 
 <!-- Page 1132 -->
@@ -15994,6 +17451,9 @@ UC05.03.05 - Phê duyệt/Từ chối yêu cầu nhập kho
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối yêu cầu<br>tạo nhập kho.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin nhập kho |  |
 
 3.2 Màn hình Thông tin nhập kho (Xem) - Trạng thái Đã từ chối
+
+![Trang 1132 — mockup màn hình](images/lg-p1132-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhập kho, ở đây chỉ mô tả hành
 động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ
 trạng thái)
@@ -16022,6 +17482,10 @@ từ chối) nhưng không sinh ra bản ghi mới mà cập nhật thông tin c
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 1133 — mockup màn hình](images/lg-p1133-00-screen.png)
+
+![Trang 1133 — mockup màn hình](images/lg-p1133-01-screen.png)
+
 1133
 
 <!-- Page 1134 -->
@@ -16029,6 +17493,8 @@ từ chối) nhưng không sinh ra bản ghi mới mà cập nhật thông tin c
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu yêu<br>cầu.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt yêu cầu tạo<br>nhập kho thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinnhập kho.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu nhập<br>kho này với nội dung:<br>Nhập kho - Yêu cầu tạo mới<br>Yêu cầu nhập kho [Tên loại<br>nhập kho] đã được phê duyệt.<br>Generate ID mới cho nhập<br>kho với quy tắc như sau<br>theo 2 hướng:<br>Trường hợp Mua hàng<br>hoá:<br>XXXXXyymmaaa<br>XXXXX: Mã nhà cung<br>cấp HHDV tương ứng<br>với đơn nhập kho<br>yy: Chỉ 2 số cuối của<br>năm nhập hàng (lấy<br>theo trường thời gian<br>nhập kho)<br>mm: Chỉ tháng nhập<br>hàng | Trường hợp hành<br>động Hủy yêu cầu<br>và Phê duyệt/Từ<br>chối yêu cầu xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy yêu cầu<br>Tại màn hình Thông<br>tinnhập kho của<br>người phê duyệt khi<br>ấn Phê Duyệt sau<br>khi người khác vừa<br>huỷ yêu cầu trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củanhập<br>kho. |  |
+
+![Trang 1134 — mockup màn hình](images/lg-p1134-00-screen.png)
 
 1134
 
@@ -16116,6 +17582,9 @@ nhập kho.
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận phê duyệt yêu<br>cầu tạo nhập kho.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin nhập kho |  |
 
 3.4 Màn hình Thông tinnhập kho (Xem) - Trạng thái Đã phê duyệt
+
+![Trang 1137 — mockup màn hình](images/lg-p1137-00-screen.png)
+
 1137
 
 <!-- Page 1138 -->
@@ -16126,6 +17595,9 @@ Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiế
 Đối với trường hợp Mua phụ tùng - Đã thanh toán, Chuyển kho, Phục hồi PT hỏng và Sửa
 chữa còn dư khi nhập kho thiếu số lượng : hiển thị button Bồi thường. Hệ thống cho phép
 người dùng thực hiện UC Cập nhật đề nghị bồi thường.
+
+![Trang 1138 — mockup màn hình](images/lg-p1138-00-screen.png)
+
 1138
 
 <!-- Page 1139 -->
@@ -16176,6 +17648,8 @@ Mục đích khác
 
 05.04 - Lưu đồ trạng thái cho phiếu xuất kho
 
+![Trang 1143 — lưu đồ trạng thái](images/lg-p1143-00-state.png)
+
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
 | Trạng thái | Thời điểm (Trigger) | Hành động (chưa tính<br>phân quyền) |
@@ -16213,6 +17687,8 @@ UC05.04.01 - Xem lịch sử xuất kho
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng<br>(trừ trạng thái) |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Mục đích xuất kho<br>Người phụ trách<br>Trạng thái |  |
 
+![Trang 1145 — mockup màn hình](images/lg-p1145-00-screen.png)
+
 1145
 
 <!-- Page 1146 -->
@@ -16241,6 +17717,14 @@ UC05.04.01 - Xem lịch sử xuất kho
 | 1<br>5 | Hành động | Colu<br>mn |  |  | Hiển thị các hành động (có<br>được phân quyền) mà người<br>dùng có thể thực hiện đối với 1<br>bản ghi trong danh sách<br>tương ứng theoLưu đồ trạng<br>thái. |  |
 | 1<br>6 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Dropd<br>own<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 1<br>7 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
+
+![Trang 1147 — mockup màn hình](images/lg-p1147-00-screen.png)
+
+![Trang 1147 — mockup màn hình](images/lg-p1147-01-screen.png)
+
+![Trang 1147 — mockup màn hình](images/lg-p1147-00-screen.png)
+
+![Trang 1147 — mockup màn hình](images/lg-p1147-01-screen.png)
 
 1147
 
@@ -16281,6 +17765,8 @@ Tổng cộng
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 1150 — mockup màn hình](images/lg-p1150-00-screen.png)
+
 1150
 
 <!-- Page 1151 -->
@@ -16313,6 +17799,8 @@ thanh tiến trình.
 | 2 | Tooltip<br>phiếu xuất<br>kho |  |  |  | Hiển thị tooltip thể hiện danh<br>sách phiếu xuất kho liên quan<br>trong quy trình.<br>Hiển thị tooltip chỉ khi có nhiều<br>hơn 1 phiếu xuất kho ở trong<br>quy trình.<br>Nếu màn hình thể hiện thông<br>tin chi tiết của nghiệp vụ khác,<br>không phải phiếu xuất kho thì<br>hiện tooltip sau title của step<br>trên thanh tiến trình.<br>Nếu màn hình thể hiện thông<br>tin chi tiết phiếu xuất kho thì<br>hiện tooltip sau title chính của<br>màn hình.<br>Hover vào để hiển thị tooltip<br>Phiếu xuất kho đang hiển thị<br>thể hiện state selected như<br>trong hình.<br>Tooltip thể hiện thông tin:<br>Ngày xuất kho<br>ID của phiếu xuất kho |  |
 | 3 | Mã phiếu | Label |  |  | Hiển thị mã phiếu xuất kho<br>(nếu có) |  |
 
+![Trang 1153 — mockup màn hình](images/lg-p1153-00-screen.png)
+
 1153
 
 <!-- Page 1154 -->
@@ -16325,6 +17813,8 @@ thanh tiến trình.
 | 7 | Chi tiết hàng hoá: Hiển thị chi tiết danh sách hàng hoá thực hiện xuất kho. |  |  |  |  |  |
 | 8 | Loại hàng<br>hoá | Colu<br>mn |  |  | Hiển thị tên loại hàng hoá xuất<br>kho<br>Giá trị:<br>PTVT<br>Lốp<br>Ắc quy<br>CCDC<br>Chỉ hiển thị trong các trường<br>hợp:<br>Bán phụ tùng<br>Chuyển kho<br>Mục đích khác |  |
 
+![Trang 1154 — mockup màn hình](images/lg-p1154-00-screen.png)
+
 1154
 
 <!-- Page 1155 -->
@@ -16336,6 +17826,8 @@ thanh tiến trình.
 | 1<br>1 | SL xuất | Colu<br>mn |  |  | Hiển thị số lượng xuất kho của<br>của hàng hoá |  |
 | 1<br>2 | Giá trị (hàng<br>hoá) | Colu<br>mn |  |  | Hiển thị giá trị của háng hoá.<br>Nếu hàng hoá không quản lý<br>số serial, giá trị = giá trị của<br>hàng hoá đó.<br>Nếu hàng hoá có quản lý số<br>serial, giá trị = null |  |
 | 1<br>3 | Tổng GTXK | Colu<br>mn |  |  | Hiển thị tổng giá trị xuất kho<br>của từng hàng hoá<br>Nếu hàng hoá không quản lý<br>số serial, tổng GTXK = số<br>lượng xuất * giá trị<br>Nếu hàng hoá có quản lý số<br>serial, tổng GTXK = tổng giá<br>trị của tất cả các serial |  |
+
+![Trang 1155 — mockup màn hình](images/lg-p1155-00-screen.png)
 
 1155
 
@@ -16353,6 +17845,8 @@ thanh tiến trình.
 | 2<br>1 | Ghi chú | Text |  |  | Hiển thị ghi chú của phiếu<br>xuất kho |  |
 | 2<br>2 | Tổng cộng |  |  |  |  |  |
 
+![Trang 1156 — mockup màn hình](images/lg-p1156-00-screen.png)
+
 1156
 
 <!-- Page 1157 -->
@@ -16369,6 +17863,8 @@ thanh tiến trình.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2<br>5 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với phiếu xuất kho<br>đó theo từng trạng thái của<br>đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Lịch sử phiếu xuất<br>kho<br>Step Xuất kho của<br>thanh tiến trình trở<br>về Chưa triển khai<br>(trong trường hợp<br>không có phiếu xuất<br>kho nào khác)<br>Huỷ: Quay trở về màn<br>hình Thông tin phiếu<br>xuất kho |  |  |
+
+![Trang 1158 — mockup màn hình](images/lg-p1158-00-screen.png)
 
 1158
 
@@ -16404,6 +17900,8 @@ hide icon …
 
 3.2 Màn hình Thông tin hàng hoá
 
+![Trang 1160 — mockup màn hình](images/lg-p1160-00-screen.png)
+
 
 1160
 
@@ -16433,6 +17931,11 @@ Mã PT - Tên PT
 Hệ thống tổng thành
 Đơn vị tính
 3.3 Màn hình Thông tin serial
+
+![Trang 1162 — mockup màn hình](images/lg-p1162-00-screen.png)
+
+![Trang 1162 — mockup màn hình](images/lg-p1162-01-screen.png)
+
 1162
 
 <!-- Page 1163 -->
@@ -16466,6 +17969,8 @@ UC05.04.03 - Tạo mới phiếu xuất kho
 3. Mô tả màn hình
 3.1 Màn hình Chọn mục đích xuất kho
 
+![Trang 1164 — mockup màn hình](images/lg-p1164-00-screen.png)
+
 
 1164
 
@@ -16493,6 +17998,11 @@ UC05.04.03 - Tạo mới phiếu xuất kho
 
 Đối với trường hợp phiếu xuất kho lần đầu cho 1 lệnh sửa chữa hoặc xuất kho bán phụ tùng,
 phiếu xuất kho sẽ tự động lấy danh sách hàng hoá từ báo giá đã được phê duyệt và không cho
+
+![Trang 1167 — mockup màn hình](images/lg-p1167-00-screen.png)
+
+![Trang 1167 — mockup màn hình](images/lg-p1167-01-screen.png)
+
 1167
 
 <!-- Page 1168 -->
@@ -16539,6 +18049,8 @@ thanh tiến trình.
 | --- | --- | --- | --- | --- | --- | --- |
 | 6 | Loại hàng<br>hoá | Colu<br>mn/D<br>ropdo<br>wn/L<br>abel | Có |  | Trường hợp xuất kho không<br>được thay đổi hàng hoá và số<br>lượng → Hiển thị label tên loại<br>hàng hoá lấy theo báo giá.<br>Trường hợp xuất kho được<br>thay đổi hàng hoá và số lượng<br>→ Hiển thị dropdown tên loại<br>hàng hoá cho phép người<br>dùng chọn loại hàng hoá.<br>Chỉ cho phép chọn 1.<br>Giá trị:<br>PTVT<br>Lốp<br>Ắc quy<br>CCDC |  |
 | 7 | Hàng hoá | Colu<br>mn/D<br>ropdo<br>wn | Có |  | Cho phép người dùng chọn<br>hàng hoá để thực hiện xuất<br>kho.<br>Danh sách lấy ra các giá trị mã<br>- tên hàng hoá trong hàng tồn<br>kho.<br>Chỉ cho phép chọn 1<br>UI đánh dấu phân biệt giữa<br>hàng mới và hàng được phục<br>hồi như sau: |  |
+
+![Trang 1171 — mockup màn hình](images/lg-p1171-00-screen.png)
 
 1171
 
@@ -16599,6 +18111,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>6 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới phiếu xuất<br>kho<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới phiếu<br>xuất kho trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử phiếu xuất kho<br>Hủy: trở về màn Tạo mới<br>phiếu xuất kho với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 1176 — mockup màn hình](images/lg-p1176-00-screen.png)
+
 1176
 
 <!-- Page 1177 -->
@@ -16607,7 +18121,12 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>7 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới phiếu xuất<br>kho<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới phiếu<br>xuất kho trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử phiếu xuất kho<br>Hủy: trở về màn Tạo mới<br>phiếu xuất kho với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 1177 — mockup màn hình](images/lg-p1177-00-screen.png)
+
 3.1 Màn hình Thông tin phiếu xuất kho (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 1177 — mockup màn hình](images/lg-p1177-01-screen.png)
+
 1177
 
 <!-- Page 1178 -->
@@ -16640,6 +18159,8 @@ UC05.04.04 - Thu hồi phiếu xuất kho
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận Thu hồi tạo mới
 
+![Trang 1179 — mockup màn hình](images/lg-p1179-00-screen.png)
+
 
 1179
 
@@ -16657,6 +18178,9 @@ UC05.04.04 - Thu hồi phiếu xuất kho
 | 2 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng thu hồi<br>bỏ việc xác nhận Thu hồi tạo<br>phiếu xuất kho.<br>Sau khi thu hồi bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin phiếu xuất<br>kho |  |
 
 3.2 Màn hình Thông tin phiếu xuất kho (Xem) - Trạng thái Đã thu hồi
+
+![Trang 1181 — mockup màn hình](images/lg-p1181-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết phiếu xuất kho, ở đây chỉ mô
 tả hành động chi tiết ở trạng thái Đã thu hồi(xem đầy đủ các hành động theo từng trạng thái ở
 Lưu đồ trạng thái)
@@ -16671,6 +18195,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử xuất kho
 Huỷ: Quay trở về màn hình Thông tin phiếu xuất kho
+
+![Trang 1182 — mockup màn hình](images/lg-p1182-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị thu hồi.
 Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu cầu, thực hiện UC Tạo đề xuất
 xuất kho với các trường lấy thông tin từ yêu cầu hiện tại (đã bị thu hồi) nhưng không sinh ra bản
@@ -16698,6 +18225,9 @@ UC05.04.05 - Phê duyệt/Từ chối tạo mới phiếu xuất kho lần 1
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
+
+![Trang 1183 — mockup màn hình](images/lg-p1183-00-screen.png)
+
 1183
 
 <!-- Page 1184 -->
@@ -16714,6 +18244,8 @@ UC05.04.05 - Phê duyệt/Từ chối tạo mới phiếu xuất kho lần 1
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu phiếu<br>xuất kho lần 1.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Trạng thái của tiến trình<br>chuyển từ Đang triển khai<br>→ Đã huỷ/từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo phiếu xuất<br>kho thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin phiếu xuất kho<br>với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu tạo<br>mới với nội dung:<br>Xuất kho - Tạo mới<br>Yêu cầu xuất kho - [Loại xuất<br>kho] đã bị từ chối ở lần phê<br>duyệt 1.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu tạo mới ở<br>lần phê duyệt 1. | Trường hợp hành<br>động Thu hồi và<br>Phê duyệt/Từ chối<br>đề xuất lần 1 xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Thu hồi<br>Tại màn hình Thông<br>tin phiếu xuất kho<br>của người phê duyệt<br>khi ấn Từ chối sau<br>khi người khác vừa<br>thu hồi trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của phiếu<br>xuất kho. |  |
 
+![Trang 1185 — mockup màn hình](images/lg-p1185-00-screen.png)
+
 1185
 
 <!-- Page 1186 -->
@@ -16726,6 +18258,9 @@ nhập]
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo phiếu xuất kho.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin phiếu xuất<br>kho. |  |
 
 3.2 Màn hình Thông tin phiếu xuất kho (Xem) - Trạng thái Đã từ chối
+
+![Trang 1186 — mockup màn hình](images/lg-p1186-00-screen.png)
+
 1186
 
 <!-- Page 1187 -->
@@ -16749,6 +18284,10 @@ phiếu xuất kho với các trường lấy thông tin từ yêu cầu hiện 
 
 3.3 Màn hình Xác nhận phê duyệt đề xuất tạo mới
 
+![Trang 1187 — mockup màn hình](images/lg-p1187-00-screen.png)
+
+![Trang 1187 — mockup màn hình](images/lg-p1187-01-screen.png)
+
 
 1187
 
@@ -16757,6 +18296,9 @@ phiếu xuất kho với các trường lấy thông tin từ yêu cầu hiện 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt - lần 1<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạo<br>phiếu xuất kho thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinphiếu xuất kho.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu tạo<br>mới và người dùng có<br>quyền phê duyệt/từ chối<br>yêu cầu tạo mới lần 2 với<br>nội dung:<br>Xuất kho - Tạo mới<br>Yêu cầu xuất kho - [Loại xuất<br>kho] đã được phê duyệt lần 1.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã phê duyệt yêu cầu cấp mới<br>ở lần 1 | Trường hợp hành<br>động Thu hồi và<br>Phê duyệt/Từ chối<br>đề xuất lần 1 xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Thu hồi<br>Tại màn hình Thông<br>tinphiếu xuất kho<br>của người phê duyệt<br>khi ấn Phê duyệt<br>sau khi người khác<br>vừa thu hồi trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củaphiếu<br>xuất kho. |
+
+![Trang 1188 — mockup màn hình](images/lg-p1188-00-screen.png)
+
 1188
 
 <!-- Page 1189 -->
@@ -16768,6 +18310,9 @@ phiếu xuất kho với các trường lấy thông tin từ yêu cầu hiện 
 3.4 Màn hình Thông tinphiếu xuất kho (Xem) - Trạng thái Đã phê duyệt - lần 1
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết phiếu xuất kho, ở đây chỉ mô
 tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
+
+![Trang 1189 — mockup màn hình](images/lg-p1189-00-screen.png)
+
 1189
 
 <!-- Page 1190 -->
@@ -16795,6 +18340,9 @@ UC05.04.06 - Phê duyệt/Từ chối tạo mới phiếu xuất kho lần 2
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
+
+![Trang 1191 — mockup màn hình](images/lg-p1191-00-screen.png)
+
 1191
 
 <!-- Page 1192 -->
@@ -16811,6 +18359,8 @@ UC05.04.06 - Phê duyệt/Từ chối tạo mới phiếu xuất kho lần 2
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>xuất kho lần 2.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Đã phê duyệt - lần 1<br>→ Đã từ chối<br>Trạng thái của tiến trình<br>chuyển từ Đang triển khai<br>→ Đã huỷ/từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo phiếu xuất<br>kho thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin phiếu xuất kho<br>với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới phiếu xuất kho này với<br>nội dung:<br>Xuất kho - Tạo mới<br>Yêu cầu xuất kho - [Loại xuất<br>kho] đã bị từ chối ở lần phê<br>duyệt 2.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu tạo mới ở<br>lần phê duyệt 2. | Trường hợp hành<br>động Thu hồi và<br>Phê duyệt/Từ chối<br>đề xuất lần 2 xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Thu hồi<br>Tại màn hình Thông<br>tin phiếu xuất kho<br>của người phê duyệt<br>khi ấn Từ chối sau<br>khi người khác vừa<br>thu hồi trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của phiếu<br>xuất kho. |  |
 
+![Trang 1193 — mockup màn hình](images/lg-p1193-00-screen.png)
+
 1193
 
 <!-- Page 1194 -->
@@ -16823,6 +18373,9 @@ nhập]
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo phiếu xuất kho.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Đã phê duyệt - lần<br>1<br>Đóng popup và trở về màn<br>hình Thông tin phiếu xuất<br>kho. |  |
 
 3.2 Màn hình Thông tin phiếu xuất kho (Xem) - Trạng thái Đã từ chối
+
+![Trang 1194 — mockup màn hình](images/lg-p1194-00-screen.png)
+
 1194
 
 <!-- Page 1195 -->
@@ -16850,6 +18403,10 @@ Chờ phê duyệt)
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 1195 — mockup màn hình](images/lg-p1195-00-screen.png)
+
+![Trang 1195 — mockup màn hình](images/lg-p1195-01-screen.png)
+
 1195
 
 <!-- Page 1196 -->
@@ -16857,6 +18414,8 @@ Chờ phê duyệt)
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Đã phê duyệt - lần 1<br>→ Đã phê duyệt - lần 2<br>Trạng thái của tiến trình<br>chuyển từ Đang triển khai<br>→ Đã xong<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạo<br>phiếu xuất kho thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinphiếu xuất kho.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu xuất<br>kho với nội dung:<br>Xuất kho - Tạo mới<br>Yêu cầu xuất kho - [Loại xuất<br>kho] đã được phê duyệt lần 2.<br>Generate ID mới cho phiếu<br>xuất kho với quy tắc như<br>sau: yymmaaaa<br>yy: Chỉ 2 số cuối của năm<br>xuất kho.<br>mm: Chỉ tháng đặt xuất<br>kho.<br>aaaa: là dãy số chạy từ<br>0001 đến 9999 chỉ số<br>xuất kho được cấp liên<br>tục trong năm trên phần<br>mềm. | Trường hợp hành<br>động Thu hồi và<br>Phê duyệt/Từ chối<br>đề xuất lần 2 xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Thu hồi<br>Tại màn hình Thông<br>tinphiếu xuất kho<br>của người phê duyệt<br>khi ấn Phê duyệt<br>sau khi người khác<br>vừa thu hồi trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củaphiếu<br>xuất kho. |  |
+
+![Trang 1196 — mockup màn hình](images/lg-p1196-00-screen.png)
 
 1196
 
@@ -16912,6 +18471,9 @@ Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiế
 có thêm hành động nào (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Button In phiếu: Theo common rules.
 Button Export: Theo common rules.
+
+![Trang 1198 — mockup màn hình](images/lg-p1198-00-screen.png)
+
 1198
 
 <!-- Page 1199 -->
@@ -16974,6 +18536,8 @@ Phục hồi phụ tùng hỏng
 
 05.06 - Lưu đồ trạng thái cho lệnh sửa chữa
 
+![Trang 1205 — lưu đồ trạng thái](images/lg-p1205-00-state.png)
+
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 |
 | --- | --- | --- | --- | --- |
 | Trạng thái | Hệ<br>thống<br>trigger | Thời điểm (Trigger) | Hành động ở PM Xưởng<br>(chưa tính phân quyền) | Hành động ở APP<br>Lái xe |
@@ -17013,6 +18577,8 @@ UC05.06.01 - Xem lịch sử sửa chữa
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng<br>(trừ trạng thái) |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Khách hàng<br>Phân luồng<br>Biển số phương tiện<br>Lái xe phương tiện<br>Người phụ trách<br>Trạng thái |  |
+
+![Trang 1208 — mockup màn hình](images/lg-p1208-00-screen.png)
 
 1208
 
@@ -17062,6 +18628,14 @@ UC05.06.01 - Xem lịch sử sửa chữa
 | 2<br>1 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Dropd<br>own<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 2<br>2 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
 
+![Trang 1212 — mockup màn hình](images/lg-p1212-00-screen.png)
+
+![Trang 1212 — mockup màn hình](images/lg-p1212-01-screen.png)
+
+![Trang 1212 — mockup màn hình](images/lg-p1212-00-screen.png)
+
+![Trang 1212 — mockup màn hình](images/lg-p1212-01-screen.png)
+
 1212
 
 <!-- Page 1213 -->
@@ -17085,6 +18659,8 @@ UC05.06.02 - Xem thông tin lệnh sửa chữa
 
 <!-- Page 1214 -->
 
+![Trang 1214 — mockup màn hình](images/lg-p1214-00-screen.png)
+
 1214
 
 <!-- Page 1215 -->
@@ -17097,6 +18673,9 @@ Thông tin phương tiện
 Chi tiết hàng hoá/dịch vụ/Lịch sử xuất kho
 Thông tin khác
 Tổng cộng
+
+![Trang 1215 — mockup màn hình](images/lg-p1215-00-screen.png)
+
 1215
 
 <!-- Page 1216 -->
@@ -17134,6 +18713,8 @@ Nhập kho
 | 3 | Mã sửa<br>chữa | Label |  |  | Hiển thị mã lệnh sửa chữa |  |
 | 4 | Trạng thái | Label |  |  | Hiển thị trạng thái hiện tại của<br>lệnh sửa chữa |  |
 | 5 | Thông tin chung |  |  |  |  |  |
+
+![Trang 1219 — mockup màn hình](images/lg-p1219-00-screen.png)
 
 1219
 
@@ -17182,6 +18763,12 @@ Nhập kho
 | --- | --- | --- | --- |
 |  | 2<br>4 | [CTSC] Chi tiết hàng hoá: Hiển thị chi tiết danh sách hàng hoá tổng hợp mà xưởng đã thực<br>hiện xuất kho, lấy danh sách ban đầu từ báo giá tương ứng được phê duyệt.<br>Trước khi chốt lệnh SC:<br>Thông tin và dữ liệu ban đầu lấy theo báo giá.<br>Cho phép người ấn vào từng bản ghi xem chi tiết thông tin hàng hoá hoặc serial.<br>Sau khi chốt lệnh SC: |  |
 
+![Trang 1223 — mockup màn hình](images/lg-p1223-00-screen.png)
+
+![Trang 1223 — mockup màn hình](images/lg-p1223-01-screen.png)
+
+![Trang 1223 — mockup màn hình](images/lg-p1223-02-screen.png)
+
 1223
 
 <!-- Page 1224 -->
@@ -17199,6 +18786,8 @@ Phiếu xuất kho cho lệnh sửa chữa trên có hàng hoá A có số lư�
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>5 | Sub-tab | Tab |  | Thay ra | Hiển thị tab của hàng hoá<br>(phụ tùng vật tư/ắc quy)<br>Thay ra<br>Lắp từ kho<br>Lắp từ DM xưởng |  |
 | 2<br>6 | [CTSC] [CTHH] Thay ra: Hiển thị danh sách các hàng hoá được thay ra khỏi phương tiện<br>Delta.<br>Chỉ hiển thị trong trường hợp sửa chữa xe Delta/thay lốp xe Delta/thay ắc quy xe Delta.<br>Chỉ hiển thị sau khi chốt lệnh sửa chữa.<br>Cho phép người dùng ấn vào từng bản ghi để xem chi tiết thông tin hàng hoá. Hệ thống mở<br>màn hình Thông tin chi tiết hàng hoá thay hoặc Thông tin serial thay ra |  |  |  |  |  |
+
+![Trang 1224 — mockup màn hình](images/lg-p1224-00-screen.png)
 
 1224
 
@@ -17229,6 +18818,8 @@ Phiếu xuất kho cho lệnh sửa chữa trên có hàng hoá A có số lư�
 | 4<br>0 | SL thừa | Colu<br>mn |  |  | Hiển thị số lượng thừa của<br>hàng hoá ghi nhận lúc chốt<br>lệnh SC |  |
 | 4<br>1 | SL hỏng | Colu<br>mn |  |  | Hiển thị số lượng hỏng của<br>hàng hoá ghi nhận lúc chốt<br>lệnh SC |  |
 | 4<br>2 | Collapse/Ex<br>pand | Icon |  | Collapse<br>d | Cho phép người dùng ẩn hiện<br>các thông tin serial của hàng<br>hoá |  |
+
+![Trang 1226 — mockup màn hình](images/lg-p1226-00-screen.png)
 
 1226
 
@@ -17264,6 +18855,8 @@ Phiếu xuất kho cho lệnh sửa chữa trên có hàng hoá A có số lư�
 | 6<br>1 | Khoảng<br>nhắc lịch | Label |  |  | Hiển thị khoảng nhắc lịch của<br>hoạt động nhắc lịch |  |
 | 6<br>2 | Đơn vị nhắc<br>lịch | Label |  |  | Hiển thị đơn vị nhắc lịch của<br>hoạt động nhắc lịch |  |
 
+![Trang 1228 — mockup màn hình](images/lg-p1228-00-screen.png)
+
 1228
 
 <!-- Page 1229 -->
@@ -17279,6 +18872,8 @@ Phiếu xuất kho cho lệnh sửa chữa trên có hàng hoá A có số lư�
 | 6<br>9 | Thợ kỹ<br>thuật | Label |  |  | [Chỉ hiển thị sau khi chốt lệnh<br>SC]<br>Hiển thị thợ kỹ thuật của lệnh<br>sửa chữa<br>Lấy giá trị của người phụ trách<br>Format hiển thị: mã NV - tên<br>NV |  |
 | 7<br>0 | Giờ công | Label |  |  | [Chỉ hiển thị sau khi chốt lệnh<br>SC]<br>Hiển thị giờ công ghi nhận của<br>lệnh sửa chữa |  |
 | 7<br>1 | Thông tin khác |  |  |  |  |  |
+
+![Trang 1229 — mockup màn hình](images/lg-p1229-00-screen.png)
 
 1229
 
@@ -17323,6 +18918,8 @@ Phiếu xuất kho cho lệnh sửa chữa trên có hàng hoá A có số lư�
 | 2 | Mã hàng<br>hoá | Label |  |  | Hiển thị mã hàng hoá được<br>thay ra khỏi phương tiện Delta |  |
 | 3 | Số lượng | Label |  |  | Hiển thị số lượng của hàng<br>hoá được thay ra khỏi phương<br>tiện Delta |  |
 
+![Trang 1233 — mockup màn hình](images/lg-p1233-00-screen.png)
+
 1233
 
 <!-- Page 1234 -->
@@ -17356,11 +18953,17 @@ Mã PT - Tên PT
 Hệ thống tổng thành
 Đơn vị tính
 3.3 Màn hình Thông tin hàng hoá lắp vào
+
+![Trang 1235 — mockup màn hình](images/lg-p1235-00-screen.png)
+
 1235
 
 <!-- Page 1236 -->
 
 Hàng hoá lắp vào từ kho
+
+![Trang 1236 — mockup màn hình](images/lg-p1236-00-screen.png)
+
 1236
 
 <!-- Page 1237 -->
@@ -17371,6 +18974,8 @@ Hàng hoá lắp vào từ DM xưởng
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Tên hàng<br>hoá | Label |  |  | Hiển thị tên hàng hoá được lắp<br>lên phương tiện Delta |  |
 | 2 | Mã hàng<br>hoá | Label |  |  | Hiển thị mã hàng hoá được lắp<br>lên phương tiện Delta |  |
+
+![Trang 1237 — mockup màn hình](images/lg-p1237-00-screen.png)
 
 1237
 
@@ -17435,6 +19040,9 @@ Hiển thị thêm vị trí xuất ra của hàng hoá lắp vào:
 Nếu hàng hoá đi từ luồng xuất kho thì vị trí xuất ra = kho
 Nếu hàng hoá được thêm từ DM xưởng khi chốt lệnh SC thì vị trí xuất ra = danh mục xưởng
 3.4 Màn hình Thông tin serial thay ra
+
+![Trang 1242 — mockup màn hình](images/lg-p1242-00-screen.png)
+
 1242
 
 <!-- Page 1243 -->
@@ -17444,6 +19052,8 @@ Nếu hàng hoá được thêm từ DM xưởng khi chốt lệnh SC thì vị 
 | 1 | Serial | Label |  |  | Hiển thị serial của sản phẩm<br>được thay ra khỏi phương tiện<br>Delta |  |
 | 2 | Nhà sản<br>xuất | Label |  |  | Hiển thị nhà sản xuất của sản<br>phẩm |  |
 | 3 | Lưu ý | Label |  |  | Hiển thị lưu ý của sản phẩm |  |
+
+![Trang 1243 — mockup màn hình](images/lg-p1243-00-screen.png)
 
 1243
 
@@ -17457,6 +19067,9 @@ Nếu hàng hoá được thêm từ DM xưởng khi chốt lệnh SC thì vị 
 | 7 | Bằng chữ | Label |  |  | Hiển thị giá trị sản phẩm bằng<br>chữ |  |
 
 3.5 Màn hình Thông tin serial lắp vào
+
+![Trang 1244 — mockup màn hình](images/lg-p1244-00-screen.png)
+
 1244
 
 <!-- Page 1245 -->
@@ -17466,6 +19079,8 @@ Nếu hàng hoá được thêm từ DM xưởng khi chốt lệnh SC thì vị 
 | 1 | Serial | Label |  |  | Hiển thị serial của sản phẩm<br>được lắp lên phương tiện Delta |  |
 | 2 | Nhà sản<br>xuất | Label |  |  | Hiển thị nhà sản xuất của sản<br>phẩm |  |
 | 3 | Lưu ý | Label |  |  | Hiển thị lưu ý của sản phẩm |  |
+
+![Trang 1245 — mockup màn hình](images/lg-p1245-00-screen.png)
 
 1245
 
@@ -17492,6 +19107,8 @@ Nếu hàng hoá được thêm từ DM xưởng khi chốt lệnh SC thì vị 
 | 4 | Đơn giá | Label |  |  | Hiển thị đơn giá của dịch vụ<br>được thêm vào lệnh sửa chữa |  |
 | 5 | Tổng giá trị<br>dịch vụ | Label |  |  | Hiển thị tổng giá trị dịch vụ<br>được thêm vào lệnh sửa chữa.<br>Lấy giá trị = số lượng * đơn<br>giá. |  |
 
+![Trang 1247 — mockup màn hình](images/lg-p1247-00-screen.png)
+
 1247
 
 <!-- Page 1248 -->
@@ -17501,10 +19118,17 @@ Nếu hàng hoá được thêm từ DM xưởng khi chốt lệnh SC thì vị 
 | 6 | Bằng chữ | Label |  |  | Hiển thị tổng giá trị đơn hàng<br>bằng chữ |  |
 | 7 | Thông tin danh mục của dịch vụ:<br>Hiển thị thông tin danh mục theo dịch vụ như sau:<br>Dịch vụ kỹ thuật<br>Loại phương tiện<br>Mã PT - Tên PT<br>Hệ thống tổng thành<br>Đơn vị tính |  |  |  |  |  |
 
+![Trang 1248 — mockup màn hình](images/lg-p1248-00-screen.png)
+
 3.6 Màn hình Thông tin Lệnh sửa chữa - Trường hợp Phục hồi phụ tùng hỏng
+
+![Trang 1248 — mockup màn hình](images/lg-p1248-01-screen.png)
+
 1248
 
 <!-- Page 1249 -->
+
+![Trang 1249 — mockup màn hình](images/lg-p1249-00-screen.png)
 
 
 1249
@@ -17571,6 +19195,8 @@ Nếu hàng hoá được thêm từ DM xưởng khi chốt lệnh SC thì vị 
 
 3.5 Màn hình Thông tin hàng hoá phục hồi
 
+![Trang 1254 — mockup màn hình](images/lg-p1254-00-screen.png)
+
 
 1254
 
@@ -17599,6 +19225,11 @@ Hệ thống tổng thành
 Đơn vị tính
 Vị trí xuất ra = DM xưởng
 3.5 Màn hình Thông tin serial phục hồi
+
+![Trang 1256 — mockup màn hình](images/lg-p1256-00-screen.png)
+
+![Trang 1256 — mockup màn hình](images/lg-p1256-01-screen.png)
+
 1256
 
 <!-- Page 1257 -->
@@ -17619,6 +19250,8 @@ Vị trí xuất ra = DM xưởng
 
 <!-- Page 1258 -->
 
+![Trang 1258 — mockup màn hình](images/lg-p1258-00-screen.png)
+
 1258
 
 <!-- Page 1259 -->
@@ -17629,6 +19262,8 @@ Vị trí xuất ra = DM xưởng
 | 2 | Thông tin phương tiện |  |  |  |  |  |
 | 3 | Chi tiết dịch vụ |  |  |  |  |  |
 | 4 | Lịch sử xuất kho |  |  |  |  |  |
+
+![Trang 1259 — mockup màn hình](images/lg-p1259-00-screen.png)
 
 1259
 
@@ -17649,6 +19284,12 @@ Vị trí xuất ra = DM xưởng
 | --- | --- | --- | --- |
 |  | 9 | [CTSC] Lốp<br>Trước khi chốt lệnh, hiển thị sơ đồ lốp hiện tại của phương tiện<br>Sau khi chốt lênh, hiển thị sơ đồ lốp sau khi thay thế của phương tiện.<br>Hiển thị button Phóng to cho phép người dùng phóng to sơ đồ lốp. Hệ thống hiển thị<br>UI như sau:<br>Cho phép người dùng hover tới từng lốp ở các vị trí trên sơ đồ để xem thêm thông tin của lốp:<br>Màu sắc icon lốp: Lốp từ đâu<br>Serial |  |
 
+![Trang 1261 — mockup màn hình](images/lg-p1261-00-screen.png)
+
+![Trang 1261 — mockup màn hình](images/lg-p1261-01-screen.png)
+
+![Trang 1261 — mockup màn hình](images/lg-p1261-02-screen.png)
+
 1261
 
 <!-- Page 1262 -->
@@ -17666,6 +19307,10 @@ Lấy từ đâu: kho/xưởng (tính theo lệnh sửa chữa hiện tại)
 | 1<br>3 | Màu icon<br>lốp | Color |  |  | Hiển thị màu icon lốp màu<br>xanh thể hiện hàng xuất ra từ<br>kho. |  |
 | 1<br>4 | [SĐL] Danh mục xưởng: Hiển thị danh sách các lốp được thay thế ra khỏi phương tiện và đưa<br>vào danh mục xưởng. |  |  |  |  |  |
 
+![Trang 1262 — mockup màn hình](images/lg-p1262-00-screen.png)
+
+![Trang 1262 — mockup màn hình](images/lg-p1262-01-screen.png)
+
 1262
 
 <!-- Page 1263 -->
@@ -17679,6 +19324,8 @@ Lấy từ đâu: kho/xưởng (tính theo lệnh sửa chữa hiện tại)
 | 1<br>9 | Serial | Label |  |  | Hiển thị số serial của lốp được<br>lấy ra từ phương tiện. |  |
 | 2<br>0 | Hàng hoá | Label |  |  | Hiển thị mã - tên hàng hoá của<br>lốp được lấy ra từ phương tiện. |  |
 | 2<br>1 | Màu icon<br>lốp | Color |  |  | Hiển thị màu icon lốp màu xám<br>thể hiện lốp ở trên phương tiện<br>lấy ra. |  |
+
+![Trang 1263 — mockup màn hình](images/lg-p1263-00-screen.png)
 
 1263
 
@@ -17700,6 +19347,8 @@ UC05.06.03 - Tạo mới lệnh sửa chữa
 3. Mô tả màn hình
 3.1 Màn hình Chọn loại lệnh sửa chữa
 
+![Trang 1264 — mockup màn hình](images/lg-p1264-00-screen.png)
+
 
 1264
 
@@ -17709,6 +19358,8 @@ UC05.06.03 - Tạo mới lệnh sửa chữa
 | 2 | Sửa chữa<br>phụ tùng<br>hỏng |  |  |  | Cho phép người dùng chọn<br>loại lệnh sửa chữa là Sửa<br>chữa phụ tùng hỏng<br>Hệ thống hiển thị màn hình<br>Tạo mới lệnh sửa chữa -<br>trường hợp sửa chữa phụ tùng<br>hỏng. |  |
 | 3 | Đóng | Butto<br>n |  |  | Cho phép người dùng đóng<br>cửa sổ và trở về màn hình<br>trước đó |  |
 3.2 Màn hình Chọn loại sửa chữa - Sửa xe
+
+![Trang 1265 — mockup màn hình](images/lg-p1265-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -17731,6 +19382,9 @@ UC05.06.03 - Tạo mới lệnh sửa chữa
 | 4 | Đóng | Butto<br>n |  |  | Cho phép người dùng đóng<br>cửa sổ và trở về màn hình<br>trước đó |  |
 
 3.3 Màn hình Chọn dữ liệu đầu vào
+
+![Trang 1267 — mockup màn hình](images/lg-p1267-00-screen.png)
+
 1267
 
 <!-- Page 1268 -->
@@ -17739,6 +19393,8 @@ UC05.06.03 - Tạo mới lệnh sửa chữa
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Loại dữ liệu<br>đầu vào | Radio<br>butto<br>n | Có |  | Cho phép người dùng chọn<br>loại dữ liệu đầu vào để tạo<br>lệnh sửa chữa<br>Danh sách lựa chọn bao gồm:<br>Chọn xe<br>Chọn báo giá<br>Chỉ cho phép chọn 1 |  |
 | 2 | Bên sửa<br>chữa | Dropd<br>own<br>list | Có |  | Cho phép người dùng chọn<br>bên sửa chữa.<br>Giá trị:<br>Delta<br>Khách hàng<br>Giá trị được chọn sẽ quyết<br>định trường hiển thị bên dưới. |  |
+
+![Trang 1268 — mockup màn hình](images/lg-p1268-00-screen.png)
 
 1268
 
@@ -17780,10 +19436,14 @@ tạo lệnh.
 | 8 | Huỷ | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>việc tạo mới lệnh sửa chữa,<br>đóng cửa sổ và quay về màn<br>hình trước đó. |  |
 | 9 | Đóng | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>việc tạo mới lệnh sửa chữa,<br>đóng cửa sổ và quay về màn<br>hình trước đó. |  |
 
+![Trang 1272 — mockup màn hình](images/lg-p1272-00-screen.png)
+
 3.4 Màn hình Tạo mới lệnh sửa chữa - Trường hợp Sửa chữa xe
 1272
 
 <!-- Page 1273 -->
+
+![Trang 1273 — mockup màn hình](images/lg-p1273-00-screen.png)
 
 1273
 
@@ -17791,6 +19451,8 @@ tạo lệnh.
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
+
+![Trang 1274 — mockup màn hình](images/lg-p1274-00-screen.png)
 
 1274
 
@@ -17919,6 +19581,14 @@ không hợp lệ đó.
 | 3<br>8 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới lệnh sửa chữa<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới lệnh sửa<br>chữa trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử lệnh sửa chữa<br>Hủy: trở về màn Tạo mới<br>lệnh sửa chữa với các dữ<br>liệu đã chọn/nhập. |  |
 | 3<br>9 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới lệnh sửa chữa<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới lệnh sửa<br>chữa trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử lệnh sửa chữa<br>Hủy: trở về màn Tạo mới<br>lệnh sửa chữa với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 1283 — mockup màn hình](images/lg-p1283-00-screen.png)
+
+![Trang 1283 — mockup màn hình](images/lg-p1283-01-screen.png)
+
+![Trang 1283 — mockup màn hình](images/lg-p1283-00-screen.png)
+
+![Trang 1283 — mockup màn hình](images/lg-p1283-01-screen.png)
+
 3.4 Màn hình Tạo mới lệnh sửa chữa - Trường hợp Phục hồi phụ tùng hỏng
 1283
 
@@ -17929,6 +19599,8 @@ không hợp lệ đó.
 | 2 | [Hàng hoá] Lắp từ DM xưởng: Hiển thị danh sách các hàng hoá được lắp vào phương tiện từ<br>hàng tồn xưởng.<br>Hiển thị no data ban đầu |  |  |  |  |  |
 | 3 |  |  |  |  | Hiển thị trạng thái hiện tại của<br>quy trình: Đang triển khai<br>Hiển thị tiến trình theo<br>trường hợp Phục hồi phụ<br>tùng hỏng<br>Có 2 bước nghiệp vụ:<br>Sửa chữa<br>Nhập kho |  |
 | 4 | Thông tin chung |  |  |  |  |  |
+
+![Trang 1284 — mockup màn hình](images/lg-p1284-00-screen.png)
 
 1284
 
@@ -18007,6 +19679,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>5 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới lệnh sửa chữa<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới lệnh sửa<br>chữa trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử lệnh sửa chữa<br>Hủy: trở về màn Tạo mới<br>lệnh sửa chữa với các dữ<br>liệu đã chọn/nhập. |  |
 
+![Trang 1290 — mockup màn hình](images/lg-p1290-00-screen.png)
+
 1290
 
 <!-- Page 1291 -->
@@ -18014,6 +19688,8 @@ không hợp lệ đó.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>6 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới lệnh sửa chữa<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới lệnh sửa<br>chữa trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử lệnh sửa chữa<br>Hủy: trở về màn Tạo mới<br>lệnh sửa chữa với các dữ<br>liệu đã chọn/nhập. |  |
+
+![Trang 1291 — mockup màn hình](images/lg-p1291-00-screen.png)
 
 3.5 Màn hình Thông tin lệnh sửa chữa (xem) - Trường hợp Sửa chữa xe - Trạng thái Đang
 sửa chữa
@@ -18033,6 +19709,9 @@ Button Chốt lệnh SC: Click vào để hiển thị popup Chốt lệnh sửa
 Chốt/cập nhật chốt lệnh SC
 3.5 Màn hình Thông tin lệnh sửa chữa (xem) - Trường hợp Phục hồi phụ tùng hỏng - Trạng
 thái Đang sửa chữa
+
+![Trang 1292 — mockup màn hình](images/lg-p1292-00-screen.png)
+
 1292
 
 <!-- Page 1293 -->
@@ -18041,6 +19720,9 @@ Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiế
 thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Button Chốt lệnh SC: Click vào để hiển thị popup Chốt lệnh sửa chữa, thực hiện UC
 Chốt/cập nhật chốt lệnh SC
+
+![Trang 1293 — mockup màn hình](images/lg-p1293-00-screen.png)
+
 1293
 
 <!-- Page 1294 -->
@@ -18066,12 +19748,22 @@ UC05.06.04 - Chốt/cập nhật chốt lệnh sửa chữa
 
 Tab Hàng hoá - Thay ra
 Tab Hàng hoá - Lắp từ kho
+
+![Trang 1295 — mockup màn hình](images/lg-p1295-00-screen.png)
+
+![Trang 1295 — mockup màn hình](images/lg-p1295-01-screen.png)
+
 1295
 
 <!-- Page 1296 -->
 
 Tab Hàng hoá - Lắp từ DM xưởng
 Tab Dịch vụ
+
+![Trang 1296 — mockup màn hình](images/lg-p1296-00-screen.png)
+
+![Trang 1296 — mockup màn hình](images/lg-p1296-01-screen.png)
+
 1296
 
 <!-- Page 1297 -->
@@ -18260,6 +19952,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 5<br>0 | Huỷ | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>chốt lệnh sửa chữa<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ chốt lệnh sửa<br>chữa trước khi huỷ.<br>Xác nhận: trở về màn hình<br>Lịch sử lệnh sửa chữa<br>Hủy: trở về màn Chốt lệnh<br>sửa chữa với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1309 — mockup màn hình](images/lg-p1309-00-screen.png)
+
 1309
 
 <!-- Page 1310 -->
@@ -18267,6 +19961,8 @@ không hợp lệ đó.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 5<br>1 | Đóng | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>chốt lệnh sửa chữa<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ chốt lệnh sửa<br>chữa trước khi huỷ.<br>Xác nhận: trở về màn hình<br>Lịch sử lệnh sửa chữa<br>Hủy: trở về màn Chốt lệnh<br>sửa chữa với các dữ liệu đã<br>chọn/nhập. |  |
+
+![Trang 1310 — mockup màn hình](images/lg-p1310-00-screen.png)
 
 3.2 Màn hình Thông tin lệnh sửa chữa (Xem) - Trường hợp Sửa xe - Trạng thái Đã chốt lệnh
 1310
@@ -18285,6 +19981,9 @@ toán bán HHDV trả sau, thực hiện UC Cập nhật thanh toán bán HHDV t
 Button Nhập kho (chỉ có trong trường hợp lệnh sửa chữa có hàng hoá có SL thừa hoặc hàng
 hoá có serial trạng thái thừa): Cho phép người dùng thực hiện nhập kho đối với các hàng hoá
 được ghi nhận thừa.
+
+![Trang 1311 — mockup màn hình](images/lg-p1311-00-screen.png)
+
 1311
 
 <!-- Page 1312 -->
@@ -18292,6 +19991,9 @@ hoá có serial trạng thái thừa): Cho phép người dùng thực hiện nh
 Hệ thống hiển thị màn hình Tạo mới nhập kho, thực hiện UC Tạo mới nhập kho với danh sách
 hàng hoá + serial được lấy từ lệnh sửa chữa (các hàng hoá + serial ghi nhận tình trạng hoặc số
 lượng = thừa)
+
+![Trang 1312 — mockup màn hình](images/lg-p1312-00-screen.png)
+
 3.2 Màn hình Chốt lệnh sửa chữa - Trường hợp Phục hồi phụ tùng hỏng
 1312
 
@@ -18304,6 +20006,8 @@ lượng = thừa)
 | 4 | Chi tiết sửa chữa: Hiển thị danh sách các hàng hoá thực hiện việc sửa chữa phục hồi.<br>Lấy danh sách hàng hoá lúc tạo. |  |  |  |  |  |
 | 5 | Loại HH | Colu<br>mn |  |  | Hiển thị loại hàng hoá của<br>hàng hoá |  |
 | 6 | Hàng hoá | Colu<br>mn |  |  | Hiển thị mã - tên hàng hoá<br>của hàng hoá |  |
+
+![Trang 1313 — mockup màn hình](images/lg-p1313-00-screen.png)
 
 1313
 
@@ -18385,6 +20089,14 @@ không hợp lệ đó.
 | 1<br>8 | Huỷ | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>chốt lệnh sửa chữa<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ chốt lệnh sửa<br>chữa trước khi huỷ.<br>Xác nhận: trở về màn hình<br>Lịch sử lệnh sửa chữa<br>Hủy: trở về màn Chốt lệnh<br>sửa chữa với các dữ liệu đã<br>chọn/nhập. |  |
 | 1<br>9 | Đóng | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>chốt lệnh sửa chữa<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ chốt lệnh sửa<br>chữa trước khi huỷ.<br>Xác nhận: trở về màn hình<br>Lịch sử lệnh sửa chữa<br>Hủy: trở về màn Chốt lệnh<br>sửa chữa với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1318 — mockup màn hình](images/lg-p1318-00-screen.png)
+
+![Trang 1318 — mockup màn hình](images/lg-p1318-01-screen.png)
+
+![Trang 1318 — mockup màn hình](images/lg-p1318-00-screen.png)
+
+![Trang 1318 — mockup màn hình](images/lg-p1318-01-screen.png)
+
 3.4 Màn hình Thông tin lệnh sửa chữa (Xem) - Trường hợp Phục hồi phụ tùng hỏng - Trạng
 thái Đã chốt lệnh
 1318
@@ -18399,9 +20111,14 @@ thành công.
 Hệ thống hiển thị màn hình Tạo mới nhập kho, thực hiện UC Tạo mới nhập kho với danh sách
 hàng hoá + serial được lấy từ lệnh sửa chữa (các hàng hoá + serial ghi nhận tình trạng hoặc số
 lượng = phục hồi)
+
+![Trang 1319 — mockup màn hình](images/lg-p1319-00-screen.png)
+
 1319
 
 <!-- Page 1320 -->
+
+![Trang 1320 — mockup màn hình](images/lg-p1320-00-screen.png)
 
 1320
 
@@ -18441,12 +20158,21 @@ người dùng nhận biết.
 Nếu tại 1 vị trí trên sơ đồ lốp của phương tiện đã lắp lốp, người dùng kéo 1 lốp mới từ danh mục
 khác vào (kho, xưởng) lên vị trí đó thì hệ thống sẽ báo lỗi toast message: “Phương tiện đã lắp
 lốp tại vị trí này. Vui lòng tháo lốp ra trước khi lắp lốp mới vào.”
+
+![Trang 1322 — mockup màn hình](images/lg-p1322-00-screen.png)
+
 1322
 
 <!-- Page 1323 -->
 
 Vùng được kéo vào:
+
+![Trang 1323 — mockup màn hình](images/lg-p1323-00-screen.png)
+
 Vùng không được kéo vào:
+
+![Trang 1323 — mockup màn hình](images/lg-p1323-01-screen.png)
+
 → Nếu đưa vào vùng không được kéo thả vào, hệ thống sẽ không nhận hành động drop bản ghi
 của người dùng mà quay trở về ban đầu.
 Tổng hợp các quy tắc kéo thả giữa các vị trí như sau:
@@ -18506,6 +20232,10 @@ Lốp được thay đổi vị trí: thể hiện icon
 | 7 | [SĐL] Sơ đồ lốp: Hiển thị sơ đồ lốp hiện tại của phương tiện Delta tương ứng được thực hiện<br>sửa chữa.<br>Cho phép người dùng hover vào để xem thêm thông tin về lốp:<br>Serial<br>Mã - tên lốp<br>Vị trí hiện tại trên sơ đồ<br>Đã tráo đổi với vị trí [vị trí trước đó của lốp]<br>Ngày lắp lên PT<br>Lốp xám → hiển thị theo ngày được lắp lên trước đó.<br>Lốp xanh/vàng → hiển thị ngày hiện tại. |
 | 8 | [SĐL] Kho (đã xuất): Hiển thị danh sách các hàng hoá được lắp vào phương tiện từ hàng tồn<br>kho.<br>Danh sách hàng hoá lắp từ kho được tổng hợp từ tất cả các phiếu xuất kho để thực hiện việc<br>sửa chữa.<br>Danh sách sắp xếp thứ tự từ newest - oldest ban đầu (tổng hợp từ các lệnh sửa chữa), sau đó<br>người dùng tương tác kéo thả thêm bớt lốp vào danh mục thì các lốp mới thêm vào cũng sẽ<br>được sắp xếp newest - oldest. |
 
+![Trang 1326 — mockup màn hình](images/lg-p1326-00-screen.png)
+
+![Trang 1326 — mockup màn hình](images/lg-p1326-01-screen.png)
+
 1326
 
 <!-- Page 1327 -->
@@ -18533,6 +20263,8 @@ Lốp được thay đổi vị trí: thể hiện icon
 | 2<br>0 | Hàng hoá | Label |  |  | Hiển thị mã - tên hàng hoá<br>của lốp được lấy ra từ phương<br>tiện. |  |
 | 2<br>1 | Màu icon<br>lốp | Color |  |  | Hiển thị màu icon lốp màu<br>xám thể hiện lốp ở trên<br>phương tiện lấy ra. |  |
 | 2<br>2 | Chi tiết dịch vụ: Hiển thị chi tiết danh sách dịch vụ phục vụ sửa chữa.<br>Lấy các giá trị/dữ liệu ban đầu từ báo giá qua. |  |  |  |  |  |
+
+![Trang 1328 — mockup màn hình](images/lg-p1328-00-screen.png)
 
 1328
 
@@ -18621,11 +20353,22 @@ không hợp lệ đó.
 | 3<br>2 | Huỷ | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>chốt lệnh sửa chữa<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ chốt lệnh sửa<br>chữa trước khi huỷ.<br>Xác nhận: trở về màn hình<br>Lịch sử lệnh sửa chữa<br>Hủy: trở về màn Chốt lệnh<br>sửa chữa với các dữ liệu đã<br>chọn/nhập. |  |
 | 3<br>3 | Đóng | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>chốt lệnh sửa chữa<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ chốt lệnh sửa<br>chữa trước khi huỷ.<br>Xác nhận: trở về màn hình<br>Lịch sử lệnh sửa chữa<br>Hủy: trở về màn Chốt lệnh<br>sửa chữa với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1333 — mockup màn hình](images/lg-p1333-00-screen.png)
+
+![Trang 1333 — mockup màn hình](images/lg-p1333-01-screen.png)
+
+![Trang 1333 — mockup màn hình](images/lg-p1333-00-screen.png)
+
+![Trang 1333 — mockup màn hình](images/lg-p1333-01-screen.png)
+
 1333
 
 <!-- Page 1334 -->
 
 3.2 Màn hình Thông tin lệnh sửa chữa (Xem) - Trường hợp Sửa xe - Trạng thái Đã chốt lệnh
+
+![Trang 1334 — mockup màn hình](images/lg-p1334-00-screen.png)
+
 Màn xem thông tin chi tiết sau khi chốt lệnh sửa chữa - thay lốp xe Delta sẽ được cập nhật/thay
 thế bảng lốp ban đầu (bảng tổng hợp các lốp xuất kho) thành sơ đồ lốp sau khi thay đổi và các
 bảng theo danh mục.
@@ -18653,6 +20396,8 @@ lượng = thừa)
 
 <!-- Page 1336 -->
 
+![Trang 1336 — mockup màn hình](images/lg-p1336-00-screen.png)
+
 1336
 
 <!-- Page 1337 -->
@@ -18663,6 +20408,8 @@ Feature 05.07 - Báo cáo sự cố
 <!-- Page 1338 -->
 
 05.07 - Lưu đồ trạng thái cho báo cáo sự cố
+
+![Trang 1338 — lưu đồ trạng thái](images/lg-p1338-00-state.png)
 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 |
 | --- | --- | --- | --- | --- |
@@ -18733,6 +20480,9 @@ UC05.07.01 - Xem danh sách báo cáo sự cố
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Lịch sử báo cáo sự cố
+
+![Trang 1343 — mockup màn hình](images/lg-p1343-00-screen.png)
+
 1343
 
 <!-- Page 1344 -->
@@ -18784,6 +20534,14 @@ Danh sách hiển thị tất cả các bản ghi báo cáo sự cố được t
 | 2<br>0 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Dropd<br>own<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 2<br>1 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
 
+![Trang 1347 — mockup màn hình](images/lg-p1347-00-screen.png)
+
+![Trang 1347 — mockup màn hình](images/lg-p1347-01-screen.png)
+
+![Trang 1347 — mockup màn hình](images/lg-p1347-00-screen.png)
+
+![Trang 1347 — mockup màn hình](images/lg-p1347-01-screen.png)
+
 1347
 
 <!-- Page 1348 -->
@@ -18803,6 +20561,9 @@ UC05.07.02 - Xem thông tin chi tiết báo cáo sự cố
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Thông tin báo cáo sự cố
+
+![Trang 1348 — mockup màn hình](images/lg-p1348-00-screen.png)
+
 1348
 
 <!-- Page 1349 -->
@@ -18838,6 +20599,12 @@ Thông tin khác
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 9 | Hình ảnh và<br>chứng từ sự<br>cố | Imag<br>e |  |  | Hiển thị các hình ảnh và<br>chứng từ sự cố tại thời điểm<br>bàn giao ở dạng preview.<br>Cho phép người dùng điều<br>hướng trước sau bằng icon<br>để xem các ảnh khác.<br>Cho phép người dùng ấn vào<br>ảnh hoặc ấn vào icon Phóng<br>to để xem ảnh lớn hơn.<br>Cho phép người dùng tải<br>xuống file ảnh.<br>… ở dưới ảnh được thể hiện<br>như sau:<br>Nếu chỉ có 1,2,3 ảnh thì thể<br>hiện bằng 1,2,3 chấm. Đang<br>hiển thị ảnh nào thì ảnh đó<br>chấm đậm lên.<br>Khi ảnh lớn hơn 3 thì chuyển<br>ảnh và chấm được active thì di<br>chuyển qua lại ở giữa (ảnh<br>dưới): |  |
+
+![Trang 1351 — mockup màn hình](images/lg-p1351-00-screen.png)
+
+![Trang 1351 — mockup màn hình](images/lg-p1351-01-screen.png)
+
+![Trang 1351 — mockup màn hình](images/lg-p1351-02-screen.png)
 
 1351
 
@@ -18904,6 +20671,9 @@ UC05.07.03 - Xác nhận/từ chối báo cáo sự cố của lái xe
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Từ chối báo cáo sự cố
+
+![Trang 1356 — mockup màn hình](images/lg-p1356-00-screen.png)
+
 1356
 
 <!-- Page 1357 -->
@@ -18920,6 +20690,8 @@ UC05.07.03 - Xác nhận/từ chối báo cáo sự cố của lái xe
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối báo cáo sự cố.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Đang chờ xử lý → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối báo cáo sự cố thành<br>công”<br>Đóng popup Xác nhận từ<br>chối và hiển thị màn hình<br>Thông tin báo cáo sự cố.<br>Gửi thông báo tới người<br>dùng đã tạo báo cáo sự cố<br>này ở app Lái xe với nội<br>dung:<br>Báo cáo sự cố<br>Báo cáo sự cố của bạn đã bị<br>từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối báo cáo sự cố<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Thu hồi và<br>Xác nhận/Từ chối<br>xảy ra cùng thời<br>điểm → Ưu tiên<br>hành động Thu hồi<br>Tại màn hình Thông<br>tin báo cáo sự cố<br>của người Xác nhận<br>khi ấn Từ chối sau<br>khi người khác vừa<br>thu hồi trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>(thay UI “huỷ” =<br>“thu hồi”)<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của báo<br>cáo sự cố. |
 
+![Trang 1358 — mockup màn hình](images/lg-p1358-00-screen.png)
+
 1358
 
 <!-- Page 1359 -->
@@ -18929,8 +20701,14 @@ UC05.07.03 - Xác nhận/từ chối báo cáo sự cố của lái xe
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối báo cáo<br>sự cố.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Đang chờ xử lý<br>Đóng popup và trở về màn<br>hình Thông tin báo cáo sự<br>cố. |  |
 
 3.2 Màn hình Thông tin báo cáo sự cố (Xem) - Trạng thái Đã từ chối
+
+![Trang 1359 — mockup màn hình](images/lg-p1359-00-screen.png)
+
 Không có thêm hành động nào ở đây.
 3.3 Màn hình Xác nhận báo cáo sự cố
+
+![Trang 1359 — mockup màn hình](images/lg-p1359-01-screen.png)
+
 1359
 
 <!-- Page 1360 -->
@@ -18938,6 +20716,8 @@ Không có thêm hành động nào ở đây.
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Xác nhận | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận Xác nhận báo cáo sự<br>cố.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ Xác nhận → Đã<br>Xác nhận<br>Hiển thị toast message :<br>“Xác nhận báo cáo sự cố<br>thành công”<br>Đóng popup Xác nhận Xác<br>nhận và hiển thị màn hình<br>Thông tinbáo cáo sự cố.<br>Gửi thông báo tới người<br>dùng đã tạo báo cáo sự cố<br>này ở app Lái xe với nội<br>dung:<br>Báo cáo sự cố<br>Báo cáo sự cố của bạn đã<br>được xác nhận.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã xác nhận báo cáo sự cố. | Trường hợp hành<br>động Thu hồi và<br>Xác nhận/Từ chối<br>xảy ra cùng thời<br>điểm → Ưu tiên<br>hành động Thu hồi<br>Tại màn hình Thông<br>tinbáo cáo sự cố<br>của người Xác nhận<br>khi ấn Xác nhận sau<br>khi người khác vừa<br>thu hồi trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>(thay UI “huỷ” =<br>“thu hồi”)<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củabáo<br>cáo sự cố. |
+
+![Trang 1360 — mockup màn hình](images/lg-p1360-00-screen.png)
 
 1360
 
@@ -18953,6 +20733,9 @@ thêm các hành động (xem đầy đủ các hành động theo từng trạn
 Button In biên bản: Cho phép người dùng in biên bản báo cáo sự cố đang được chọn tới.
 Hệ thống hiển thị popup extension in.
 Button Xuất file: Cho phép người dùng export theo 2 dạng sau: .docx, .pdf
+
+![Trang 1361 — mockup màn hình](images/lg-p1361-00-screen.png)
+
 1361
 
 <!-- Page 1362 -->
@@ -19023,6 +20806,8 @@ Mua dịch vụ PT hỏng ở xưởng ngoài
 
 06.01 - Lưu đồ trạng thái cho thanh toán trả trước
 
+![Trang 1369 — lưu đồ trạng thái](images/lg-p1369-00-state.png)
+
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
 | Trạng thái | Thời điểm (Trigger) | Hành động (chưa tính<br>phân quyền) |
@@ -19069,6 +20854,8 @@ UC06.01.01 - Xem lịch sử thanh toán trả trước
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng<br>(trừ trạng thái) |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Nhà cung cấp<br>Phân luồng<br>Người phụ trách<br>Trạng thái |  |
 
+![Trang 1372 — mockup màn hình](images/lg-p1372-00-screen.png)
+
 1372
 
 <!-- Page 1373 -->
@@ -19105,6 +20892,14 @@ UC06.01.01 - Xem lịch sử thanh toán trả trước
 | 1<br>6 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Dropd<br>own<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 1<br>7 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
 
+![Trang 1375 — mockup màn hình](images/lg-p1375-00-screen.png)
+
+![Trang 1375 — mockup màn hình](images/lg-p1375-01-screen.png)
+
+![Trang 1375 — mockup màn hình](images/lg-p1375-00-screen.png)
+
+![Trang 1375 — mockup màn hình](images/lg-p1375-01-screen.png)
+
 1375
 
 <!-- Page 1376 -->
@@ -19134,6 +20929,9 @@ Thông tin phương tiện
 Chi tiết hàng hoá
 Chi tiết dịch vụ
 Thông tin khác
+
+![Trang 1377 — mockup màn hình](images/lg-p1377-00-screen.png)
+
 1377
 
 <!-- Page 1378 -->
@@ -19235,6 +21033,8 @@ Phiếu nhập kho
 | 4<br>0 | Tổng giá trị<br>thanh toán |  |  |  | Hiển thị tổng giá trị thanh toán<br>của đơn hàng |  |
 | 4<br>1 | Bằng chữ |  |  |  | Hiển thị tổng giá trị thanh toán<br>của đơn hàng bằng chữ |  |
 
+![Trang 1383 — mockup màn hình](images/lg-p1383-00-screen.png)
+
 1383
 
 <!-- Page 1384 -->
@@ -19242,6 +21042,8 @@ Phiếu nhập kho
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 4<br>2 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với thanh toán trả<br>trước đó theo từng trạng thái<br>của đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối/Đã từ chối chi, hiển thị 2<br>hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Lịch sử thanh toán<br>trả trước<br>Huỷ: Quay trở về màn<br>hình Thông tin thanh<br>toán trả trước<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ |  |  |
+
+![Trang 1384 — mockup màn hình](images/lg-p1384-00-screen.png)
 
 1384
 
@@ -19272,6 +21074,9 @@ hide icon …
 | 4<br>7 |  | Icon |  | Enable | Click icon để đóng màn hình,<br>quay lại màn hình Lịch sử<br>thanh toán trả trước |  |
 
 3.2 Màn hình Thông tin hàng hoá/dịch vụ
+
+![Trang 1386 — mockup màn hình](images/lg-p1386-00-screen.png)
+
 Làm giống bên Đơn mua hàng, người dùng có thể ấn vào từng hàng hoá/dịch vụ để xem chi tiết.
 
 
@@ -19318,6 +21123,9 @@ Loại phương tiện
 Mã PT - Tên PT
 Hệ thống tổng thành
 Đơn vị tính
+
+![Trang 1388 — mockup màn hình](images/lg-p1388-00-screen.png)
+
 1388
 
 <!-- Page 1389 -->
@@ -19338,6 +21146,8 @@ UC06.01.03 - Tạo mới đề nghị thanh toán trả trước
 3. Mô tả màn hình
 3.1 Màn hình Chọn đơn mua HHDV
 
+![Trang 1389 — mockup màn hình](images/lg-p1389-00-screen.png)
+
 
 1389
 
@@ -19357,6 +21167,9 @@ UC06.01.03 - Tạo mới đề nghị thanh toán trả trước
 Giao diện freeze thông tin khác và tổng cộng để vừa độ dài screen, freeze title đơn mua hàng.
 Giao diện chỉ cho phép scroll từ các thông tin thanh toán, nhà cung cấp, thông tin phương tiện,
 chi tiết hàng hoá, dịch vụ.
+
+![Trang 1391 — mockup màn hình](images/lg-p1391-00-screen.png)
+
 1391
 
 <!-- Page 1392 -->
@@ -19406,6 +21219,10 @@ Phiếu nhập kho
 | 8 | Thông tin nhà cung cấp, Thông tin phương tiện, Chi tiết hàng hoá, Chi tiết dịch vụ: Mô tả<br>tương tự UC Xem thông tin chi tiết thanh toán trả trước. |  |  |  |  |  |
 | 9 | Thông tin khác |  |  |  |  |  |
 
+![Trang 1395 — mockup màn hình](images/lg-p1395-00-screen.png)
+
+![Trang 1395 — mockup màn hình](images/lg-p1395-01-screen.png)
+
 1395
 
 <!-- Page 1396 -->
@@ -19436,6 +21253,8 @@ Phiếu nhập kho
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1<br>9 | Thuế |  |  |  | Hiển thị tổng số tiền thuế của<br>tất cả hàng hoá dịch vụ trong<br>đề nghị thanh toán.<br>Giá trị = tổng tiền thuế của tất<br>cả hàng hoá dịch vụ có trong<br>đề nghị thanh toán - tổng<br>chiết khẩu thuế của tất cả<br>hàng hoá dịch vụ trong đề<br>nghị thanh toán.<br>Chiết khấu thuế chỉ có giá trị<br>khi CK thêm > 0.<br>Chiết khấu thuế (đ) của mỗi<br>HHDV = Thuế cũ (đ) * Số<br>lượng - Giá mới sau CK *<br>Thuế (%) * Số lượng<br>Trong đó,<br>Giá mới sau CK = Tương<br>đương - Chiết khấu theo<br>từng HHDV - Tỷ trọng<br>HH/DV *CK thêm (đ)/Số<br>lượng<br>Tỷ trọng HH/DV = GTTT<br>sau CK của HH/DV trên<br>từng đơn vị * Số<br>lượng/GTTT trước CK toàn<br>đơn<br>Ví dụ (tính theo nghiệp vụ):<br>Tuy nhiên đối với các phần<br>tính toán mình đã tính trước |  |  |
+
+![Trang 1398 — mockup màn hình](images/lg-p1398-00-screen.png)
 
 1398
 
@@ -19512,6 +21331,14 @@ không hợp lệ đó.
 | 2<br>4 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới thanh toán trả<br>trước<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới thanh<br>toán trả trước trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử thanh toán trả<br>trước<br>Hủy: trở về màn Tạo mới<br>thanh toán trả trước với<br>các dữ liệu đã chọn/nhập. |  |
 | 2<br>5 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới thanh toán trả<br>trước<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới thanh<br>toán trả trước trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử thanh toán trả<br>trước<br>Hủy: trở về màn Tạo mới<br>thanh toán trả trước với<br>các dữ liệu đã chọn/nhập. |  |
 
+![Trang 1402 — mockup màn hình](images/lg-p1402-00-screen.png)
+
+![Trang 1402 — mockup màn hình](images/lg-p1402-01-screen.png)
+
+![Trang 1402 — mockup màn hình](images/lg-p1402-00-screen.png)
+
+![Trang 1402 — mockup màn hình](images/lg-p1402-01-screen.png)
+
 3.1 Màn hình Thông tin thanh toán trả trước (xem) - Trạng thái Chờ phê duyệt
 1402
 
@@ -19522,6 +21349,9 @@ mô tả thêm các hành động (xem đầy đủ các hành động theo từ
 thái):
 Có 2 trường hợp xảy ra:
 Đối với nhà cung cấp HHDV của thanh toán đó có hoá đơn tài chính:
+
+![Trang 1403 — mockup màn hình](images/lg-p1403-00-screen.png)
+
 Button Huỷ đề xuất: Click vào để hiển thị popup Xác nhận huỷ yêu cầu, thực hiện UC Huỷ
 đề nghị thanh toán trả trước
 Button Phê duyệt: Click vào để hiển thị popup Xác nhận phê duyệt yêu cầu, thực hiện UC
@@ -19539,6 +21369,9 @@ Button Phê duyệt: Click vào để hiển thị popup Xác nhận phê duyệ
 duyệt chi thanh toán trả trước
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối chi, thực hiện UC Từ chối chi
 thanh toán trả trước
+
+![Trang 1404 — mockup màn hình](images/lg-p1404-00-screen.png)
+
 1404
 
 <!-- Page 1405 -->
@@ -19558,6 +21391,9 @@ UC06.01.04 - Huỷ tạo mới đề nghị thanh toán trả trước
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
+
+![Trang 1405 — mockup màn hình](images/lg-p1405-00-screen.png)
+
 1405
 
 <!-- Page 1406 -->
@@ -19610,6 +21446,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử thanh toán trả trước
 Huỷ: Quay trở về màn hình Thông tin thanh toán trả trước
+
+![Trang 1409 — mockup màn hình](images/lg-p1409-00-screen.png)
+
 1409
 
 <!-- Page 1410 -->
@@ -19623,6 +21462,9 @@ Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới 
 | không sinh ra bản ghi mới mà cập nhật thông tin chỉnh sửa và trạng thái (từ | Đã huỷ | về | Chờ phê |
 
 duyệt/Chờ duyệt chi)
+
+![Trang 1410 — mockup màn hình](images/lg-p1410-00-screen.png)
+
 1410
 
 <!-- Page 1411 -->
@@ -19642,6 +21484,9 @@ UC06.01.05 - Phê duyệt/Từ chối đề nghị thanh toán trả trước
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
+
+![Trang 1411 — mockup màn hình](images/lg-p1411-00-screen.png)
+
 1411
 
 <!-- Page 1412 -->
@@ -19657,6 +21502,8 @@ UC06.01.05 - Phê duyệt/Từ chối đề nghị thanh toán trả trước
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề nghị<br>thanh toán trả trước .<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Trạng thái của tiến trình<br>chuyển từ Đang triển khai<br>→ Đã huỷ/từ chối<br>Hiển thị toast message : “Từ<br>chối đề nghị thanh toán trả<br>trước thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin thanh toán trả<br>trước với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu thanh<br>toán trả trước này với nội<br>dung:<br>Thanh toán trả trước - Tạo<br>mới<br>Đề nghị thanh toán trả trước -<br>[Loại TT] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu tạo mới. | Trường hợp hành<br>động Hủy đề nghị<br>và Phê duyệt/Từ<br>chối đề nghị xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề nghị<br>Tại màn hình Thông<br>tin thanh toán trả<br>trước của người phê<br>duyệt khi ấn Từ chối<br>sau khi người khác<br>vừa huỷ đề nghị<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của thanh<br>toán trả trước. |  |
+
+![Trang 1413 — mockup màn hình](images/lg-p1413-00-screen.png)
 
 1413
 
@@ -19683,6 +21530,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử thanh toán trả trước
 Huỷ: Quay trở về màn hình Thông tinthanh toán trả trước
+
+![Trang 1415 — mockup màn hình](images/lg-p1415-00-screen.png)
+
 1415
 
 <!-- Page 1416 -->
@@ -19700,6 +21550,10 @@ thanh toán trả trước với các trường lấy thông tin từ yêu cầu
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 1416 — mockup màn hình](images/lg-p1416-00-screen.png)
+
+![Trang 1416 — mockup màn hình](images/lg-p1416-01-screen.png)
+
 1416
 
 <!-- Page 1417 -->
@@ -19707,6 +21561,8 @@ thanh toán trả trước với các trường lấy thông tin từ yêu cầu
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>nghị cấp mới.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt →<br>Chờ duyệt chi<br>Hiển thị toast message :<br>“Phê duyệt đề nghị tạo<br>thanh toán trả trước thành<br>công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinthanh toán trả<br>trước.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu thanh<br>toán trả trước với nội dung:<br>Thanh toán trả trước - Tạo<br>mới<br>Đề nghị thanh toán trả trước -<br>[Loại TT] đã được phê duyệt.<br>Gửi thông báo tới người<br>dùng có quyền phê<br>duyệt/từ chối chi đề nghị<br>thanh toán:<br>Thanh toán trả trước - Duyệt<br>chi<br>Đề nghị thanh toán trả trước -<br>[Loại TT] đang chờ phê duyệt<br>chi.<br>Gen ID cho bản ghi thanh<br>toán trả trước nếu nhà cung<br>cấp HHDV có hoá đơn tài | Trường hợp hành<br>động Hủy đề nghị<br>và Phê duyệt/Từ<br>chối đề nghị xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề nghị<br>Tại màn hình Thông<br>tinthanh toán trả<br>trước của người phê<br>duyệt khi ấn Phê<br>duyệt sau khi người<br>khác vừa huỷ đề<br>nghị trước, hệ thống<br>hiển thị popup thông<br>báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củathanh<br>toán trả trước. |  |
+
+![Trang 1417 — mockup màn hình](images/lg-p1417-00-screen.png)
 
 1417
 
@@ -19742,6 +21598,9 @@ Button Phê duyệt: Click vào để hiển thị popup Xác nhận phê duyệ
 Phê duyệt chi thanh toán trả trước
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối yêu cầu, thực hiện UC Từ chối
 đề nghị chi thanh toán trả trước
+
+![Trang 1419 — mockup màn hình](images/lg-p1419-00-screen.png)
+
 1419
 
 <!-- Page 1420 -->
@@ -19761,6 +21620,9 @@ UC06.01.06 - Phê duyệt/Từ chối chi thanh toán trả trước
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối chi
+
+![Trang 1420 — mockup màn hình](images/lg-p1420-00-screen.png)
+
 1420
 
 <!-- Page 1421 -->
@@ -19777,6 +21639,8 @@ UC06.01.06 - Phê duyệt/Từ chối chi thanh toán trả trước
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối chi thanh toán trả<br>trước.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Trạng thái của tiến trình<br>chuyển từ Đang triển khai<br>→ Đã huỷ/từ chối<br>Hiển thị toast message : “Từ<br>chối đề nghị thanh toán trả<br>trước thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin thanh toán trả<br>trước với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo chi thanh toán<br>trả trước này với nội dung:<br>Thanh toán trả trước - Tạo<br>mới<br>Đề nghị thanh toán trả trước -<br>[Loại TT] đã bị từ chối chi.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối chi.<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề nghị<br>và Phê duyệt/Từ<br>chối đề nghị xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề nghị<br>Tại màn hình Thông<br>tin thanh toán trả<br>trước của người phê<br>duyệt khi ấn Từ chối<br>sau khi người khác<br>vừa huỷ đề nghị<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của thanh<br>toán trả trước. |  |
 
+![Trang 1422 — mockup màn hình](images/lg-p1422-00-screen.png)
+
 1422
 
 <!-- Page 1423 -->
@@ -19786,6 +21650,9 @@ UC06.01.06 - Phê duyệt/Từ chối chi thanh toán trả trước
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề nghị<br>tạo thanh toán trả trước.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin thanh toán<br>trả trước. |  |
 
 3.2 Màn hình Thông tin thanh toán trả trước (Xem) - Trạng thái Đã từ chối
+
+![Trang 1423 — mockup màn hình](images/lg-p1423-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết ở đây chỉ mô tả hành động chi
 tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái)
 Xoá bản ghi: Cho phép người dùng xoá bản ghi đã bị từ chối.
@@ -19813,6 +21680,10 @@ duyệt chi tuỳ vào nhà cung cấp HHDV có/không có hoá đơn tài chín
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 1424 — mockup màn hình](images/lg-p1424-00-screen.png)
+
+![Trang 1424 — mockup màn hình](images/lg-p1424-01-screen.png)
+
 1424
 
 <!-- Page 1425 -->
@@ -19820,6 +21691,8 @@ duyệt chi tuỳ vào nhà cung cấp HHDV có/không có hoá đơn tài chín
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt chi.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt →<br>Chờ duyệt chi<br>Hiển thị toast message :<br>“Phê duyệt đề nghị tạo<br>thanh toán trả trước thành<br>công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinthanh toán trả<br>trước.<br>Gửi thông báo tới người<br>dùng đã tạo chi thanh toán<br>trả trước với nội dung:<br>Thanh toán trả trước - Tạo<br>mới<br>Đề nghị thanh toán trả trước -<br>[Loại TT] đã được phê duyệt.<br>Gửi thông báo tới người<br>dùng có quyền phê<br>duyệt/từ chối chi đề nghị<br>thanh toán:<br>Thanh toán trả trước - Duyệt<br>chi<br>Đề nghị thanh toán trả trước -<br>[Loại TT] đang chờ phê duyệt<br>chi.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy | Trường hợp hành<br>động Hủy đề nghị<br>và Phê duyệt/Từ<br>chối đề nghị xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề nghị<br>Tại màn hình Thông<br>tinthanh toán trả<br>trước của người phê<br>duyệt khi ấn Phê<br>duyệt sau khi người<br>khác vừa huỷ đề<br>nghị trước, hệ thống<br>hiển thị popup thông<br>báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củathanh<br>toán trả trước. |  |
+
+![Trang 1425 — mockup màn hình](images/lg-p1425-00-screen.png)
 
 1425
 
@@ -19841,6 +21714,9 @@ mô tả thêm các hành động (xem đầy đủ các hành động theo từ
 thái):
 Button Ghi nhận thanh toán: Click vào để hiển thị popup Xác nhận ghi nhận thanh toán, thực
 hiện UC Ghi nhận thanh toán cho thanh toán trả trước
+
+![Trang 1427 — mockup màn hình](images/lg-p1427-00-screen.png)
+
 1427
 
 <!-- Page 1428 -->
@@ -19860,6 +21736,8 @@ UC06.01.07 - Ghi nhận thanh toán cho thanh toán trả trước
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận ghi nhận thanh toán
+
+![Trang 1428 — mockup màn hình](images/lg-p1428-00-screen.png)
 
 
 c
@@ -19888,6 +21766,9 @@ tiết ở trạng thái Đã thanh toán (xem đầy đủ các hành động t
 thái)
 Button Nhập kho: Click vào để hiển thị popup Tạo mới phiếu nhập kho, thực hiện UC Tạo
 yêu cầu nhập khovới trường hợp Mua hàng hoá - Đã thanh toán
+
+![Trang 1431 — mockup màn hình](images/lg-p1431-00-screen.png)
+
 1431
 
 <!-- Page 1432 -->
@@ -19945,6 +21826,8 @@ phần Thanh toán - Chi phí - Thanh toán trả sau như sau:
 Trạng thái công nợ: Trạng thái đối với hành động chốt công nợ
 Trạng thái thanh toán: Trạng thái đối với hành động ghi nhận thanh toán
 
+![Trang 1437 — lưu đồ trạng thái](images/lg-p1437-00-state.png)
+
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
 | Trạng thái công<br>nợ | Thời điểm (Trigger) | Hành động (chưa tính<br>phân quyền) |
@@ -19963,6 +21846,8 @@ Trạng thái thanh toán: Trạng thái đối với hành động ghi nhận t
 | Chưa thanh toán | Sau khi người dùng chốt công nợ từng phần lần<br>thứ 1 hoặc toàn phần | Ghi nhận thanh toán<br>Export<br>In bảng công nợ |
 | Đã thanh toán 1<br>phần | Sau khi người dùng ghi nhận thanh toán 1 phần<br>cho bảng công nợ và ngày hiện tại chưa tới ngày<br>thời hạn thanh toán | Cập nhật ghi nhận<br>thanh toán (lần gần<br>nhất)<br>Ghi nhận thanh toán<br>Export<br>In bảng công nợ |
 | Đã tất toán | Sau khi người dùng ghi nhận thanh toán toàn bộ<br>công nợ (còn lại) cho bảng công nợ | Cập nhật ghi nhận<br>thanh toán (lần gần<br>nhất)<br>Export<br>In bảng công nợ |
+
+![Trang 1438 — lưu đồ trạng thái](images/lg-p1438-00-state.png)
 
 1438
 
@@ -19996,6 +21881,11 @@ UC06.02.01 - Xem danh sách công nợ
 <!-- Page 1441 -->
 
 Màn hình no data (ban đầu)
+
+![Trang 1441 — mockup màn hình](images/lg-p1441-00-screen.png)
+
+![Trang 1441 — mockup màn hình](images/lg-p1441-01-screen.png)
+
 1441
 
 <!-- Page 1442 -->
@@ -20017,6 +21907,10 @@ Màn hình no data (ban đầu)
 | 6 | Công nợ<br>chưa thanh<br>toán | Card |  | - | Hiển thị tổng số công nợ của<br>tất cả tháng trong năm tài<br>chính được chọn mình chưa<br>thanh toán cho nhà cung cấp<br>HHDV. |  |
 | 7 | Bảng công nợ theo tháng: Hiển thị bảng công nợ theo tháng (fixed cứng 12 bản ghi) theo nhà<br>cung cấp HHDV được chọn.<br>Hiển thị no data khi chưa chọn nhà cung cấp.<br>Hiển thị có data khi đã chọn nhà cung cấp.<br>Danh sách hiển thị fixed cứng 12 bản ghi bảng công nợ tương ứng với 12 tháng trong năm.<br>Danh sách xếp thứ tự hiển thị trên xuống là tháng 1 - tháng 12.<br>Tháng X lấy khoảng thời gian công nợ tính từ ngày chốt cộng nợ tháng X-1 +1ngày đến<br>ngày chốt cộng nợ tháng X. |  |  |  |  |  |
 
+![Trang 1443 — mockup màn hình](images/lg-p1443-00-screen.png)
+
+![Trang 1443 — mockup màn hình](images/lg-p1443-01-screen.png)
+
 1443
 
 <!-- Page 1444 -->
@@ -20027,6 +21921,8 @@ Màn hình no data (ban đầu)
 | 9 | Tháng | Colu<br>mn |  |  | Hiển thị tên tháng mà bảng<br>công nợ ghi nhận. |  |
 | 1<br>0 | Tổng tiền<br>thanh toán | Colu<br>mn |  |  | Hiển thị tổng số tiền công nợ<br>của bảng công nợ theo tháng<br>của nhà cung cấp HHDV được<br>chọn |  |
 | 1<br>1 | Trạng thái<br>công nợ | Colu<br>mn |  |  | Hiển thị trạng thái công nợ<br>của bảng công nợ. |  |
+
+![Trang 1444 — mockup màn hình](images/lg-p1444-00-screen.png)
 
 1444
 
@@ -20064,9 +21960,13 @@ UC06.02.03 - Chốt/cập nhật chốt/chốt tiếp (mới) công nợ theo th
 
 <!-- Page 1448 -->
 
+![Trang 1448 — mockup màn hình](images/lg-p1448-00-screen.png)
+
 1448
 
 <!-- Page 1449 -->
+
+![Trang 1449 — mockup màn hình](images/lg-p1449-00-screen.png)
 
 1449
 
@@ -20076,6 +21976,8 @@ UC06.02.03 - Chốt/cập nhật chốt/chốt tiếp (mới) công nợ theo th
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Tên bảng<br>công nợ | Label |  |  | Hiển thị tên bảng công nợ<br>theo format:<br>Bảng công nợ - Tháng<br>[Tháng] |  |
 | 2 | Thông tin nhà cung cấp |  |  |  |  |  |
+
+![Trang 1450 — mockup màn hình](images/lg-p1450-00-screen.png)
 
 1450
 
@@ -20106,6 +22008,8 @@ UC06.02.03 - Chốt/cập nhật chốt/chốt tiếp (mới) công nợ theo th
 |  | 9 | Ngày lập<br>hoá đơn | Date<br>picker | Có |  | Cho phép người dùng chọn<br>ngày lập hoá đơn của bảng<br>công nợ<br>Nếu nhà cung cấp HHDV có<br>hoá đơn tài chính thì hiển thị<br>trường này. |  |  |
 |  | 1<br>0 | Hoá đơn | File<br>uploa<br>d | Có |  | Cho phép người dùng upload<br>file hoá đơn lên hệ thống.<br>Nếu nhà cung cấp HHDV có<br>hoá đơn tài chính thì hiển thị<br>trường này.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được<br>upload, phần mềm hiển thêm<br>thị giao diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |  |
 
+![Trang 1453 — mockup màn hình](images/lg-p1453-00-screen.png)
+
 1453
 
 <!-- Page 1454 -->
@@ -20113,6 +22017,8 @@ UC06.02.03 - Chốt/cập nhật chốt/chốt tiếp (mới) công nợ theo th
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>1 | Bảng kê | File<br>uploa<br>d | Có |  | Cho phép người dùng upload<br>file bảng kê lên hệ thống.<br>Nếu nhà cung cấp HHDV<br>không có hoá đơn tài chính<br>thì hiển thị trường này. | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
+
+![Trang 1454 — mockup màn hình](images/lg-p1454-00-screen.png)
 
 1454
 
@@ -20222,11 +22128,22 @@ không hợp lệ đó.
 | 3<br>0 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc chốt công nợ.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách bảng công<br>nợ<br>Hủy: trở về màn Chốt công<br>nợ với các dữ liệu đã<br>chọn/nhập. |  |
 | 3<br>1 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>việc chốt công nợ.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách bảng công<br>nợ<br>Hủy: trở về màn Chốt công<br>nợ với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1461 — mockup màn hình](images/lg-p1461-00-screen.png)
+
+![Trang 1461 — mockup màn hình](images/lg-p1461-01-screen.png)
+
+![Trang 1461 — mockup màn hình](images/lg-p1461-00-screen.png)
+
+![Trang 1461 — mockup màn hình](images/lg-p1461-01-screen.png)
+
 1461
 
 <!-- Page 1462 -->
 
 3.3 Màn hình Thông tin bảng công nợ (xem) - Trạng thái Đã chốt CN - lần X
+
+![Trang 1462 — mockup màn hình](images/lg-p1462-00-screen.png)
+
 Mặc định sau khi chốt công nợ xong, hệ thống trở về màn hình Thông tin bảng công nợ, hiển thị
 tab lần X lần chốt công nợ vừa tạo của bảng công nợ tương ứng.
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết bảng công nợ, ở đây chỉ mô tả
@@ -20246,6 +22163,9 @@ mới CN lần tiếp theo): Cho phép người dùng cập nhật lần chốt 
 Người dùng chọn tới … > Chọn Cập nhật chốt CN: Hệ thống hiển thị màn hình Chốt công nợ với
 số liệu chốt công nợ đã tạo trước đó, cho phép người dùng thay đổi/cập nhật.
 3.3 Màn hình Thông tin bảng công nợ (xem) - Trạng thái Đã chốt hết CN
+
+![Trang 1463 — mockup màn hình](images/lg-p1463-00-screen.png)
+
 Mặc định sau khi chốt công nợ xong, hệ thống trở về màn hình Thông tin bảng công nợ, hiển thị
 tab lần X lần chốt công nợ vừa tạo của bảng công nợ tương ứng.
 Button Ghi nhận TT: Cho phép người dùng ghi nhận thanh toán cho số công nợ đã chốt của
@@ -20279,6 +22199,9 @@ tháng
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Ghi nhận thanh toán
+
+![Trang 1465 — mockup màn hình](images/lg-p1465-00-screen.png)
+
 1465
 
 <!-- Page 1466 -->
@@ -20367,6 +22290,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 7 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc Ghi nhận thanh toán.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách bảng công<br>nợ<br>Hủy: trở về màn Ghi nhận<br>thanh toán với các dữ liệu<br>đã chọn/nhập. |  |
 
+![Trang 1470 — mockup màn hình](images/lg-p1470-00-screen.png)
+
 1470
 
 <!-- Page 1471 -->
@@ -20374,6 +22299,8 @@ không hợp lệ đó.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 8 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>việc Ghi nhận thanh toán.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách bảng công<br>nợ<br>Hủy: trở về màn Ghi nhận<br>thanh toán với các dữ liệu<br>đã chọn/nhập. |  |
+
+![Trang 1471 — mockup màn hình](images/lg-p1471-00-screen.png)
 
 3.3 Màn hình Thông tin bảng công nợ (xem) - Trạng thái Thanh toán 1 phần
 1471
@@ -20390,6 +22317,9 @@ nhận thanh toán, thực hiện UC Ghi nhận thanh toán.
 Button Cập nhật ghi nhận TT (lần gần nhất): Cho phép người dùng cập nhật lần ghi nhận
 thanh toán gần nhất.
 3.4 Màn hình Thông tin bảng công nợ (xem) - Trạng thái Đã thanh toán
+
+![Trang 1472 — mockup màn hình](images/lg-p1472-00-screen.png)
+
 1472
 
 <!-- Page 1473 -->
@@ -20400,6 +22330,9 @@ Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiế
 thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Button Cập nhật ghi nhận TT (lần gần nhất): Cho phép người dùng cập nhật lần ghi nhận
 thanh toán gần nhất.
+
+![Trang 1473 — mockup màn hình](images/lg-p1473-00-screen.png)
+
 1473
 
 <!-- Page 1474 -->
@@ -20463,6 +22396,8 @@ Lý do khác
 
 06.03 - Lưu đồ trạng thái cho đề nghị bồi thường
 
+![Trang 1480 — lưu đồ trạng thái](images/lg-p1480-00-state.png)
+
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
 | Trạng thái | Thời điểm (Trigger) | Hành động (chưa tính<br>phân quyền) |
@@ -20491,6 +22426,9 @@ UC06.03.01 - Xem danh sách đề nghị bồi thường
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Lịch sử bồi thường thiệt hại
+
+![Trang 1481 — mockup màn hình](images/lg-p1481-00-screen.png)
+
 1481
 
 <!-- Page 1482 -->
@@ -20537,6 +22475,14 @@ UC06.03.01 - Xem danh sách đề nghị bồi thường
 | 1<br>7 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Dropd<br>own<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 1<br>8 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
 
+![Trang 1485 — mockup màn hình](images/lg-p1485-00-screen.png)
+
+![Trang 1485 — mockup màn hình](images/lg-p1485-01-screen.png)
+
+![Trang 1485 — mockup màn hình](images/lg-p1485-00-screen.png)
+
+![Trang 1485 — mockup màn hình](images/lg-p1485-01-screen.png)
+
 1485
 
 <!-- Page 1486 -->
@@ -20556,6 +22502,9 @@ UC06.03.02 - Xem thông tin đề nghị bồi thường
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Thông tin đề nghị bồi thường
+
+![Trang 1486 — mockup màn hình](images/lg-p1486-00-screen.png)
+
 Màn hình tự gen
 1486
 
@@ -20572,6 +22521,9 @@ Trường hợp 2: Chuyển kho chênh lệch số lượng
 Phần mềm ghi nhận số lượng chênh lệch giữa số lượng xuất kho ở kho chuyển đối với các
 hàng hoá so với số lượng nhập kho thực tế tại xưởng nhận của các hàng hoá tương ứng để lấy
 ra danh sách hàng hoá bị thiếu.
+
+![Trang 1487 — mockup màn hình](images/lg-p1487-00-screen.png)
+
 1487
 
 <!-- Page 1488 -->
@@ -20715,6 +22667,8 @@ tiến trình.
 | 4<br>3 | Tổng thiệt<br>hại |  |  |  | Hiển thị tổng thiệt hại của đề<br>nghị bồi thường<br>Tổng thiệt hại = tổng thành<br>tiền của tất cả háng hoá được<br>ghi nhận |  |
 | 4<br>4 | Tổng số<br>tiền bồi<br>thường<br>nhận được |  |  |  | Hiển thị tổng số tiền bồi<br>thường nhận được<br>Giá trị = tổng số tiền của các<br>người bồi thường trong mục<br>giải quyết bồi thường. |  |
 
+![Trang 1496 — mockup màn hình](images/lg-p1496-00-screen.png)
+
 1496
 
 <!-- Page 1497 -->
@@ -20745,6 +22699,8 @@ tiến trình.
 | 2 | Mã hàng<br>hoá | Label |  |  | Hiển thị mã hàng hoá thêm<br>vào |  |
 | 3 | Số lượng | Label |  |  | Hiển thị số lượng chênh lệch<br>ghi nhận để thực hiện bồi<br>thường. |  |
 | 4 | Đơn giá | Label |  |  | Hiển thị đơn giá |  |
+
+![Trang 1499 — mockup màn hình](images/lg-p1499-00-screen.png)
 
 1499
 
@@ -20787,6 +22743,9 @@ Loại phương tiện
 Mã PT - Tên PT
 Hệ thống tổng thành
 Đơn vị tính
+
+![Trang 1502 — mockup màn hình](images/lg-p1502-00-screen.png)
+
 1502
 
 <!-- Page 1503 -->
@@ -20806,9 +22765,18 @@ UC06.03.03 - Tạo mới/Hoàn thiện thông tin đề nghị bồi thường
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Chọn đề nghị bồi thường
+
+![Trang 1503 — mockup màn hình](images/lg-p1503-00-screen.png)
+
 1503
 
 <!-- Page 1504 -->
+
+![Trang 1504 — mockup màn hình](images/lg-p1504-00-screen.png)
+
+![Trang 1504 — mockup màn hình](images/lg-p1504-01-screen.png)
+
+![Trang 1504 — mockup màn hình](images/lg-p1504-02-screen.png)
 
 
 1504
@@ -20854,22 +22822,33 @@ UC06.03.03 - Tạo mới/Hoàn thiện thông tin đề nghị bồi thường
 <!-- Page 1509 -->
 
 Trường hợp 1 Mua HHDV
+
+![Trang 1509 — mockup màn hình](images/lg-p1509-00-screen.png)
+
 1509
 
 <!-- Page 1510 -->
 
 Trường hợp 2 Chuyển kho
+
+![Trang 1510 — mockup màn hình](images/lg-p1510-00-screen.png)
+
 1510
 
 <!-- Page 1511 -->
 
 Trường hợp 3 Lệnh SC
+
+![Trang 1511 — mockup màn hình](images/lg-p1511-00-screen.png)
+
 1511
 
 <!-- Page 1512 -->
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
+
+![Trang 1512 — mockup màn hình](images/lg-p1512-00-screen.png)
 
 1512
 
@@ -20933,6 +22912,8 @@ tiến trình.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>5 | Tài liệu giải<br>quyết sự<br>việc | File<br>uploa<br>d | Có |  | Cho phép người dùng upload<br>file tài liệu giải quyết sự việc<br>lên hệ thống.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được<br>upload, phần mềm hiển thêm<br>thị giao diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
 
+![Trang 1517 — mockup màn hình](images/lg-p1517-00-screen.png)
+
 1517
 
 <!-- Page 1518 -->
@@ -20940,6 +22921,8 @@ tiến trình.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 |
 | --- | --- | --- | --- |
 |  | 1<br>6 | Thông tin bồi thường: Hiển thị chi tiết danh sách hàng hoá mà được xác định đưa vào đề nghị<br>bồi thường.<br>Phần mềm sẽ tự động tạo ra các bản ghi đề nghị bồi thường (trừ trường hợp lý do bồi thường<br>= lý do khác → người dùng tự tạo) từ các nghiệp vụ trước đó.<br>Trường hợp 1: Thanh toán tiền nhưng chưa nhận (đủ) HHDV<br>Pre-conditions:<br>Phương thức thanh toán của nhà cung cấp = trả trước<br>Nhập kho - Mua hàng hoá có SL nhập (Nhập kho) < SL đặt (đơn mua HHDV)<br>Khối lượng hàng hoá:<br>Danh sách hàng hoá có SL đặt (đơn mua HHDV) - SL nhập (Nhập kho) > 0.<br>Hàng hoá không có serial<br>Trường hợp 2: Chuyển kho chênh lệch số lượng<br>Pre-conditions:<br>Nhập kho - Chuyển kho có SL nhập (nhập kho ở xưởng nhận) < SL xuất (xuất kho ở<br>xưởng xuất)<br>Khối lượng hàng hoá:<br>Danh sách hàng hoá có SL xuất (xuất kho ở xưởng xuất) - SL nhập (nhập kho ở xưởng<br>nhận) > 0.<br>Hàng hoá có thông tin serial nếu chuyển kho có hàng hoá quản lý serial<br>Trường hợp 3: Làm hỏng, mất phụ tùng ở Lệnh SC<br>Pre-conditions:<br>Lệnh sửa chữa (phân luồng = Sửa chữa xe) chốt lệnh có hàng hoá SL hỏng > 0<br>Khối lượng hàng hoá:<br>Danh sách hàng hoá có SL hỏng > 0.<br>Hàng hoá có thông tin serial nếu chuyển kho có hàng hoá quản lý serial |  |
+
+![Trang 1518 — mockup màn hình](images/lg-p1518-00-screen.png)
 
 1518
 
@@ -21093,6 +23076,8 @@ người dùng nhập tên
 | 4<br>5 | Hoàn thiện | Butto<br>n |  | Enable | Cho phép người dùng hoàn tất<br>việc hoàn thiện thông tin cho<br>đề nghị bồi thường.<br>Hệ thống thực hiện kiểm tra<br>validate các trường thông tin.<br>Nếu tất cả hợp lệ, hiển thị<br>màn hình Ký biên bản<br>Nếu có trường không hợp<br>lệ, thông báo lỗi (in-line<br>error msg) dưới trường<br>không hợp lệ đó. |  |
 | 4<br>6 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất hoàn thiện bồi thường<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ hoàn thiện bồi<br>thường trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử bồi thường<br>Hủy: trở về màn Hoàn thiện<br>bồi thường với các dữ liệu<br>đã chọn/nhập. |  |
 
+![Trang 1528 — mockup màn hình](images/lg-p1528-00-screen.png)
+
 1528
 
 <!-- Page 1529 -->
@@ -21101,7 +23086,12 @@ người dùng nhập tên
 | --- | --- | --- | --- | --- | --- | --- |
 | 4<br>7 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất hoàn thiện bồi thường<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ hoàn thiện bồi<br>thường trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử bồi thường<br>Hủy: trở về màn Hoàn thiện<br>bồi thường với các dữ liệu<br>đã chọn/nhập. |  |
 
+![Trang 1529 — mockup màn hình](images/lg-p1529-00-screen.png)
+
 3.3 Màn hình Tạo mới đề nghị bồi thường
+
+![Trang 1529 — mockup màn hình](images/lg-p1529-01-screen.png)
+
 1529
 
 <!-- Page 1530 -->
@@ -21120,6 +23110,8 @@ người dùng nhập tên
 | --- | --- | --- | --- | --- | --- | --- |
 | 4 | Tài liệu giải<br>quyết sự<br>việc | File<br>uploa<br>d | Có |  | Cho phép người dùng upload<br>file tài liệu giải quyết sự việc<br>lên hệ thống.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được<br>upload, phần mềm hiển thêm<br>thị giao diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
 | 5 | Giải quyết bồi thường:<br>Validate tối thiểu phải có 1 người bồi thường cho bản ghi.<br>Nếu vi phạm hệ thống báo popup lỗi: “Đề nghị bồi thường chưa có người chịu trách nhiệm<br>cho số tiền bị mất. Vui lòng kiểm tra lại!” |  |  |  |  |  |
+
+![Trang 1531 — mockup màn hình](images/lg-p1531-00-screen.png)
 
 1531
 
@@ -21163,6 +23155,8 @@ người dùng nhập tên
 | 1<br>8 | Hành động |  |  |  |  |  |
 | 1<br>9 | Tạo mới | Butto<br>n |  | Enable | Cho phép người dùng hoàn tất<br>việc tạo mới đề nghị bồi<br>thường.<br>Hệ thống thực hiện kiểm tra<br>validate các trường thông tin.<br>Nếu tất cả hợp lệ, hiển thị<br>màn hình Ký biên bản<br>Nếu có trường không hợp<br>lệ, thông báo lỗi (in-line<br>error msg) dưới trường<br>không hợp lệ đó. |  |
 
+![Trang 1535 — mockup màn hình](images/lg-p1535-00-screen.png)
+
 1535
 
 <!-- Page 1536 -->
@@ -21171,6 +23165,14 @@ người dùng nhập tên
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>0 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất hoàn thiện bồi thường<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ hoàn thiện bồi<br>thường trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử bồi thường<br>Hủy: trở về màn Hoàn thiện<br>bồi thường với các dữ liệu<br>đã chọn/nhập. |  |
 | 2<br>1 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất hoàn thiện bồi thường<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ hoàn thiện bồi<br>thường trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử bồi thường<br>Hủy: trở về màn Hoàn thiện<br>bồi thường với các dữ liệu<br>đã chọn/nhập. |  |
+
+![Trang 1536 — mockup màn hình](images/lg-p1536-00-screen.png)
+
+![Trang 1536 — mockup màn hình](images/lg-p1536-01-screen.png)
+
+![Trang 1536 — mockup màn hình](images/lg-p1536-00-screen.png)
+
+![Trang 1536 — mockup màn hình](images/lg-p1536-01-screen.png)
 
 3.2 Màn hình Ký biên bản
 1536
@@ -21182,6 +23184,8 @@ người dùng nhập tên
 | 1 | Biển bản<br>bàn giao số | Label |  |  | Hiển thị mã biên bản của bản<br>ghi bồi thường<br>Mã được gen theo format sau:<br>ĐNBTyyyymmxxx<br>yyyy là năm phát sinh bồi<br>thường<br>mm là tháng phát sinh bồi<br>thường<br>xxx là dãy số từ 001 → 999 |  |
 | 2 | In biên bản | Butto<br>n |  |  | Cho phép người dùng tải<br>xuống biên bản với các số liệu<br>người dùng thêm.<br>Chưa có format biên bản<br>export |  |
 
+![Trang 1537 — mockup màn hình](images/lg-p1537-00-screen.png)
+
 1537
 
 <!-- Page 1538 -->
@@ -21189,6 +23193,10 @@ người dùng nhập tên
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 3 | Upload biên<br>bản đã ký | Uploa<br>d | Có |  | Cho phép người dùng upload<br>file biên bản đã ký lên lên hệ<br>thống.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được upload,<br>phần mềm hiển thêm thị giao<br>diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
+
+![Trang 1538 — mockup màn hình](images/lg-p1538-00-screen.png)
+
+![Trang 1538 — mockup màn hình](images/lg-p1538-01-screen.png)
 
 1538
 
@@ -21198,6 +23206,14 @@ người dùng nhập tên
 | --- | --- | --- | --- | --- | --- | --- |
 | 4 | Đóng |  |  |  | Cho phép người dùng huỷ bỏ<br>ký biên bản,<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ ký biên bản<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Ký biên<br>bản với các dữ liệu đã<br>chọn/nhập. |  |
 | 5 | Huỷ | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>ký biên bản,<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ ký biên bản<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Ký biên<br>bản với các dữ liệu đã<br>chọn/nhập. |  |
+
+![Trang 1539 — mockup màn hình](images/lg-p1539-00-screen.png)
+
+![Trang 1539 — mockup màn hình](images/lg-p1539-01-screen.png)
+
+![Trang 1539 — mockup màn hình](images/lg-p1539-00-screen.png)
+
+![Trang 1539 — mockup màn hình](images/lg-p1539-01-screen.png)
 
 1539
 
@@ -21250,6 +23266,9 @@ Button Phê duyệt: Click vào để hiển thị popup Xác nhận phê duyệ
 Phê duyệt đề nghị bồi thường
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối yêu cầu, thực hiện UC Từ chối
 đề nghị bồi thường
+
+![Trang 1542 — mockup màn hình](images/lg-p1542-00-screen.png)
+
 1542
 
 <!-- Page 1543 -->
@@ -21269,6 +23288,8 @@ UC06.03.04 - Thu hồi tạo mới/hoàn thiện đề nghị bồi thường
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận thu hồi
+
+![Trang 1543 — mockup màn hình](images/lg-p1543-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -21328,6 +23349,9 @@ Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới 
 | không sinh ra bản ghi mới mà cập nhật thông tin chỉnh sửa và trạng thái (từ | Đã thu hồi | về | Chờ |
 
 phê duyệt)
+
+![Trang 1546 — mockup màn hình](images/lg-p1546-00-screen.png)
+
 1546
 
 <!-- Page 1547 -->
@@ -21361,6 +23385,9 @@ UC06.03.05 - Phê duyệt/Từ chối tạo mới/hoàn thiện đề nghị b�
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu
+
+![Trang 1548 — mockup màn hình](images/lg-p1548-00-screen.png)
+
 1548
 
 <!-- Page 1549 -->
@@ -21376,6 +23403,8 @@ UC06.03.05 - Phê duyệt/Từ chối tạo mới/hoàn thiện đề nghị b�
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề nghị<br>bồi thường.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Trạng thái của tiến trình<br>chuyển từ Đang triển khai<br>→ Đã huỷ/từ chối<br>Hiển thị toast message : “Từ<br>chối đề nghị bồi thường<br>thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin bồi thường với<br>hoạt động:<br>Tạo mới yêu cầu (TH tạo<br>mới)<br>Hoàn thiện lại (TH hoàn<br>thiện)<br>Gửi thông báo tới người<br>dùng đã tạo/hoàn thiện yêu<br>cầu bồi thường này với nội<br>dung:<br>TH hoàn thiện<br>Bồi thường thiệt hại -<br>Hoàn thiện thông tin<br>Yêu cầu hoàn thiện thông<br>tin bồi thường thiệt hại -<br>[Loại bồi thường thiệt<br>hại] đã bị từ chối.<br>TH tạo mới<br>Bồi thường thiệt hại - | Trường hợp hành<br>động Thu hồi đề<br>nghị và Phê<br>duyệt/Từ chối đề<br>nghị xảy ra cùng<br>thời điểm → Ưu tiên<br>hành động Thu hồi<br>đề nghị<br>Tại màn hình Thông<br>tin bồi thường của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa huỷ<br>đề nghị trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của bồi<br>thường. |  |
+
+![Trang 1550 — mockup màn hình](images/lg-p1550-00-screen.png)
 
 1550
 
@@ -21428,6 +23457,9 @@ Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới 
 | không sinh ra bản ghi mới mà cập nhật thông tin chỉnh sửa và trạng thái (từ | Đã từ chối | về | Chờ |
 
 phê duyệt)
+
+![Trang 1552 — mockup màn hình](images/lg-p1552-00-screen.png)
+
 1552
 
 <!-- Page 1553 -->
@@ -21444,6 +23476,8 @@ UC Hoàn thiện thông tin bồi thường với các trường lấy thông ti
 Chờ phê duyệt)
 3.3 Màn hình Xác nhận phê duyệt đề nghị tạo mới
 
+![Trang 1553 — mockup màn hình](images/lg-p1553-00-screen.png)
+
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
@@ -21454,6 +23488,8 @@ Chờ phê duyệt)
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>nghị.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề nghịbồi<br>thường thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinbồi thường.<br>Gửi thông báo tới người<br>dùng đã tạo/hoàn thiện yêu<br>cầu bồi thường này với nội<br>dung:<br>TH hoàn thiện<br>Bồi thường thiệt hại -<br>Hoàn thiện thông tin<br>Yêu cầu hoàn thiện thông<br>tin bồi thường thiệt hại -<br>[Loại bồi thường thiệt<br>hại] đã được phê duyệt.<br>TH tạo mới<br>Bồi thường thiệt hại -<br>Tạo mới<br>Yêu cầu tạo mới đề nghị<br>bồi thường - Lý do khác<br>đã được phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>TH hoàn thiện<br>[Tên tài khoản thực hiện | Trường hợp hành<br>động Thu hồi đề<br>nghị và Phê<br>duyệt/Từ chối đề<br>nghị xảy ra cùng<br>thời điểm → Ưu tiên<br>hành động Thu hồi<br>đề nghị<br>Tại màn hình Thông<br>tinbồi thường của<br>người phê duyệt khi<br>ấn Phê duyệt sau<br>khi người khác vừa<br>huỷ đề nghị trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củabồi<br>thường. |  |
+
+![Trang 1554 — mockup màn hình](images/lg-p1554-00-screen.png)
 
 1554
 
@@ -21489,6 +23525,9 @@ xx là dãy số từ 01 → 99
 
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết bồi thường, ở đây không có
 thêm hành động nào khác (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái).
+
+![Trang 1556 — mockup màn hình](images/lg-p1556-00-screen.png)
+
 1556
 
 <!-- Page 1557 -->
@@ -21574,6 +23613,8 @@ UC06.04.01 - Xem lịch sử thanh toán bán HHDV trả trước
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng<br>(trừ trạng thái) |  |
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Khách hàng<br>Phân luồng<br>Người phụ trách<br>Trạng thái |  |
 
+![Trang 1564 — mockup màn hình](images/lg-p1564-00-screen.png)
+
 1564
 
 <!-- Page 1565 -->
@@ -21610,6 +23651,14 @@ UC06.04.01 - Xem lịch sử thanh toán bán HHDV trả trước
 | 1<br>6 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Dropd<br>own<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 | 1<br>7 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
 
+![Trang 1567 — mockup màn hình](images/lg-p1567-00-screen.png)
+
+![Trang 1567 — mockup màn hình](images/lg-p1567-01-screen.png)
+
+![Trang 1567 — mockup màn hình](images/lg-p1567-00-screen.png)
+
+![Trang 1567 — mockup màn hình](images/lg-p1567-01-screen.png)
+
 1567
 
 <!-- Page 1568 -->
@@ -21642,6 +23691,9 @@ Chi tiết hàng hoá
 Chi tiết dịch vụ
 Thông tin khác
 Tổng cộng
+
+![Trang 1569 — mockup màn hình](images/lg-p1569-00-screen.png)
+
 1569
 
 <!-- Page 1570 -->
@@ -21681,6 +23733,8 @@ Tổng cộng
 | 1<br>7 | Loại xe | Label |  |  | Hiển thị loại phương tiện của<br>phương tiện sử dụng dịch vụ |  |
 | 1<br>8 | Mã PT - Tên<br>PT | Label |  |  | Hiển thị mã PT - tên PT của<br>phương tiện sử dụng dịch vụ |  |
 | 1<br>9 | Chi tiết hàng hoá: Hiển thị chi tiết danh sách hàng hoá xuất ra để thực hiện sửa chữa hoặc<br>bán phụ tùng.<br>Đối với trường hợp phân luồng = sửa chữa xe → Lấy bảng tổng hợp hàng hoá (có cả serial) ở<br>lệnh sửa chữa sau khi đã chốt lệnh.<br>Đối với trường hợp phân luồng = bán phụ tùng → Cập nhật bảng tổng hợp hàng hóa (có cả<br>serial) ở phiếu xuất kho sau khi phiếu xuất kho hoàn thành (qua 2 lần phê duyệt) |  |  |  |  |  |
+
+![Trang 1572 — mockup màn hình](images/lg-p1572-00-screen.png)
 
 1572
 
@@ -21737,6 +23791,8 @@ Tổng cộng
 | 5<br>2 | Tổng giá trị<br>thanh toán |  |  |  | Hiển thị tổng giá trị thanh toán<br>của đơn hàng |  |
 | 5<br>3 | Bằng chữ |  |  |  | Hiển thị tổng giá trị thanh toán<br>của đơn hàng bằng chữ |  |
 
+![Trang 1575 — mockup màn hình](images/lg-p1575-00-screen.png)
+
 1575
 
 <!-- Page 1576 -->
@@ -21771,6 +23827,8 @@ tiết.
 | 4 | Đơn giá | Label |  |  | Hiển thị đơn giá |  |
 | 5 | Đơn vị tiền<br>tệ | Label |  |  | Hiển thị đơn vị tiền tệ |  |
 | 6 | Tỷ giá | Label |  |  | Hiển thị tỷ giá |  |
+
+![Trang 1578 — mockup màn hình](images/lg-p1578-00-screen.png)
 
 1578
 
@@ -21810,6 +23868,9 @@ Loại phương tiện
 Mã PT - Tên PT
 Hệ thống tổng thành
 Đơn vị tính
+
+![Trang 1580 — mockup màn hình](images/lg-p1580-00-screen.png)
+
 1580
 
 <!-- Page 1581 -->
@@ -21830,6 +23891,8 @@ UC06.04.03 - Tạo mới/cập nhật đề nghị thanh toán bán HHDV trả t
 3. Mô tả màn hình
 3.1 Màn hình Chọn báo giá
 
+![Trang 1581 — mockup màn hình](images/lg-p1581-00-screen.png)
+
 
 1581
 
@@ -21839,6 +23902,9 @@ UC06.04.03 - Tạo mới/cập nhật đề nghị thanh toán bán HHDV trả t
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | báo giá | Dropd<br>own |  |  | Cho phép người dùng chọn<br>báo giá để tạo thanh toán bán<br>HHDV trả trước.<br>Danh sách lấy các giá trị từ<br>danh sách các báo giá đã<br>được phê duyệt của khách<br>hàng DK05 cho báo giá đó có<br>phương thức thanh toán = trả<br>trước hoặc của khách hàng lẻ<br>(không lấy các bản ghi báo giá<br>đã tạo đề nghị thanh toán).<br>Chỉ cho phép chọn 1. |  |
 | 2 | Tạo | Butto<br>n |  |  | Cho phép người dùng hoàn tất<br>việc chọn báo giá và chuyển<br>tiếp qua bước tạo tiếp theo.<br>Hệ thống hiển thị màn hình tạo<br>mới thanh toán bán HHDV trả<br>trước theo trường hợp mà báo<br>giá định nghĩa.<br>Báo giá bán phụ tùng →<br>Thanh toán trả trước bán<br>phụ tùng<br>Báo giá bán dịch vụ SC →<br>Thanh toán trả trước bán<br>dịch vụ SC | Validate số lượng<br>của tất cả hàng hoá<br>trong báo giá (bán<br>phụ tùng) phải lớn<br>hơn số lượng tồn<br>kho hiện tại của<br>hàng hoá tương ứng.<br>→ Nếu vi phạm, báo<br>message lỗi:<br>Hiển thị danh sách<br>các hàng hoá không<br>đủ tồn kho theo<br>format:<br>[Mã HH] -[Tên hàng<br>hoá] (số lượng<br>thiếu) |
+
+![Trang 1582 — mockup màn hình](images/lg-p1582-00-screen.png)
+
 1582
 
 <!-- Page 1583 -->
@@ -21849,12 +23915,17 @@ UC06.04.03 - Tạo mới/cập nhật đề nghị thanh toán bán HHDV trả t
 | 4 | Đóng | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>tạo mới thanh toán bán HHDV<br>trả trước.<br>Hệ thống tắt popup và trở về<br>màn Lịch sử thanh toán bán<br>HHDV trả trước. |  |
 
 3.2 Màn hình Tạo mới thanh toán bán HHDV trả trước
+
+![Trang 1583 — mockup màn hình](images/lg-p1583-00-screen.png)
+
 Trường hợp thanh toán bán dịch vụ SC
 1583
 
 <!-- Page 1584 -->
 
 Trường hợp thanh toán bán phụ tùng
+
+![Trang 1584 — mockup màn hình](images/lg-p1584-00-screen.png)
 
 
 1584
@@ -21875,6 +23946,8 @@ Trường hợp thanh toán bán phụ tùng
 | --- | --- |
 | 5 | Thông tin khách hàng DK05, Thông tin phương tiện: mô tả giống UC Xem thông tin thanh<br>toán bán HHDV trả trước. |
 | 6 | Chi tiết hàng hoá/dịch vụ: Hiển thị chi tiết danh sách hàng hoá/dịch vụ mà xưởng cung cấp.<br>Không hiển thị tab Dịch vụ trong trường hợp bán phụ tùng (do không có dịch vụ)<br>Dữ liệu được lấy như sau:<br>Trường hợp Bán phụ tùng: Danh sách hàng hoá dịch vụ lấy theo báo giá và không được<br>phép cập nhật.<br>Trường hợp Bán dịch vụ sửa chữa: Danh sách hàng hoá dịch vụ lấy theo lệnh sửa chữa<br>(tên hàng hoá/dịch vụ, số lượng sử dụng) sau khi được chốt, lấy các giá trị mà số lượng sử<br>dụng của hàng hoá tương ứng > 0.<br>Đối với các hàng hoá/dịch vụ được thêm vào ở báo giá, lấy thêm giá trị default của các<br>trường liên quan tới tiền của hàng hoá đó, bao gồm:<br>Đơn giá<br>Đơn vị tiền tệ<br>Tỷ giá<br>Chiết khấu<br>Thuế<br>Đối với các hàng hoá được thêm mới ở phiếu xuất kho (lần thứ 2 trở đi, do lần 1 lấy theo y<br>nguyên khối lượng của báo giá) hoặc các dịch vụ được chốt thêm ở lệnh sửa chữa, các<br>giá trị liên quan tới tiền để no data.<br>Danh sách chỉ lấy các giá trị hàng hoá và số lượng sử dụng của nó chứ không lấy serial sử<br>dụng để hiển thị trong bản ghi báo giá này đối với trường hợp hàng hoá đó có quản lý số<br>serial. |
+
+![Trang 1586 — mockup màn hình](images/lg-p1586-00-screen.png)
 
 1586
 
@@ -21908,6 +23981,8 @@ Trường hợp thanh toán bán phụ tùng
 | 2<br>3 | Tổng cộng: |  |  |  |  |  |
 | 2<br>4 | Tổng GTTT<br>trước chiết<br>khấu | Label |  |  | Hiển thị tổng GTTT trước chiết<br>khấu của tất cả hàng hoá dịch<br>vụ trong đề nghị thanh toán.<br>Giá trị = tổng thành tiền của<br>tất cả hàng hoá và dịch vụ<br>trong đề nghị thanh toán. |  |
 
+![Trang 1588 — mockup màn hình](images/lg-p1588-00-screen.png)
+
 1588
 
 <!-- Page 1589 -->
@@ -21933,6 +24008,8 @@ Trường hợp thanh toán bán phụ tùng
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2<br>9 | Thuế |  |  |  | Hiển thị tổng số tiền thuế của<br>tất cả hàng hoá dịch vụ trong<br>đề nghị thanh toán.<br>Giá trị = tổng tiền thuế của tất<br>cả hàng hoá dịch vụ có trong<br>đề nghị thanh toán - tổng<br>chiết khẩu thuế của tất cả<br>hàng hoá dịch vụ trong đề<br>nghị thanh toán.<br>Chiết khấu thuế chỉ có giá trị<br>khi CK thêm > 0.<br>Chiết khấu thuế (đ) của mỗi<br>HHDV = Thuế cũ (đ) * Số<br>lượng - Giá mới sau CK *<br>Thuế (%) * Số lượng<br>Trong đó,<br>Giá mới sau CK = Tương<br>đương - Chiết khấu theo<br>từng HHDV - Tỷ trọng<br>HH/DV *CK thêm (đ)/Số<br>lượng<br>Tỷ trọng HH/DV = GTTT<br>sau CK của HH/DV trên<br>từng đơn vị * Số<br>lượng/GTTT trước CK toàn<br>đơn<br>Ví dụ (tính theo nghiệp vụ):<br>Tuy nhiên đối với các phần<br>tính toán mình đã tính trước |  |  |
+
+![Trang 1591 — mockup màn hình](images/lg-p1591-00-screen.png)
 
 1591
 
@@ -21973,6 +24050,8 @@ khấu thêm trên cả đơn.”
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 3<br>7 | Tạo mới | Butto<br>n |  | Enable | Cho phép người dùng hoàn tất<br>việc tạo mới 1 bản ghi thanh<br>toán bán HHDV trả trước mới.<br>Hệ thống thực hiện kiểm tra<br>validate các trường thông tin<br>tạo mới.<br>Nếu tất cả hợp lệ:<br>Hiển thị toast message<br>Tạo mới thành công<br>Hiển thị màn hình thông<br>tin chi tiết đề nghị thanh<br>toán với hành động (tuỳ<br>theo phân quyền):<br>Ghi nhận thanh toán<br>Tạo 1 bản ghi thanh toán<br>bán HHDV trả trước với<br>trạng thái Chờ duyệt chi<br>Gửi thông báo tới người<br>dùng có quyền ghi nhận<br>thanh toán cho đề nghị<br>thanh toán với nội dung:<br>Thanh toán bán HHDV<br>trả trước - Tạo mới<br>Đề nghị thanh toán bán<br>HHDV trả trước - [Loại<br>TT] đang chờ thanh toán.<br>Gen ID cho bản ghi thanh<br>toán bán HHDV trả trước<br>theo quy tắc:<br>aaaaayyyyy<br>aaaaa: Là mã của<br>khách hàng DK05.<br>yyyyy: Dãy số chạy từ<br>00001-99999 | Validate tất cả hàng<br>hoá, dịch vụ phải có<br>tổng giá trị/thành<br>tiền.<br>→ Nếu vi phạm, hệ<br>thống báo popup<br>message báo lỗi list<br>ra các hàng<br>hoá/dịch vụ chưa có<br>thành tiền như sau:<br>Các bản ghi HHDV<br>có hyperlink mở tới<br>màn cập nhật giá<br>của HHDV tương<br>ứng. |  |
 
+![Trang 1594 — mockup màn hình](images/lg-p1594-00-screen.png)
+
 1594
 
 <!-- Page 1595 -->
@@ -21991,6 +24070,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 3<br>8 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới thanh toán<br>bán HHDV trả trước<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới thanh<br>toán bán HHDV trả trước trước<br>khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử thanh toán<br>bán HHDV trả trước<br>Hủy: trở về màn Tạo mới<br>thanh toán bán HHDV trả<br>trước với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1595 — mockup màn hình](images/lg-p1595-00-screen.png)
+
 1595
 
 <!-- Page 1596 -->
@@ -21999,6 +24080,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 3<br>9 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới thanh toán<br>bán HHDV trả trước<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới thanh<br>toán bán HHDV trả trước trước<br>khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử thanh toán<br>bán HHDV trả trước<br>Hủy: trở về màn Tạo mới<br>thanh toán bán HHDV trả<br>trước với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1596 — mockup màn hình](images/lg-p1596-00-screen.png)
+
 3.3 Màn hình Cập nhật đơn hàng
 1596
 
@@ -22006,6 +24089,11 @@ không hợp lệ đó.
 
 Cập nhật hàng hoá
 Cập nhật dịch vụ
+
+![Trang 1597 — mockup màn hình](images/lg-p1597-00-screen.png)
+
+![Trang 1597 — mockup màn hình](images/lg-p1597-01-screen.png)
+
 1597
 
 <!-- Page 1598 -->
@@ -22077,6 +24165,9 @@ Cập nhật dịch vụ
 <!-- Page 1604 -->
 
 3.4 Màn hình Thông tin thanh toán bán HHDV trả trước (xem) - Trạng thái Chờ thanh toán
+
+![Trang 1604 — mockup màn hình](images/lg-p1604-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết thanh toán bán HHDV trả
 trước, ở đây chỉ mô tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở
 Lưu đồ trạng thái):
@@ -22084,6 +24175,9 @@ Button Cập nhật: Người dùng chọn tới … > Cập nhật: Hệ thốn
 toán bán HHDV lấy các giá trị thông tin đã tạo trước đó. Việc cập nhật chỉ xảy ra sau khi tạo
 và trước khi ghi nhận thanh toán.
 Button Ghi nhận TT: Click vào để hiển thị popup Xác nhận ghi nhận thanh toán.
+
+![Trang 1604 — mockup màn hình](images/lg-p1604-01-screen.png)
+
 1604
 
 <!-- Page 1605 -->
@@ -22098,6 +24192,9 @@ Thêm 1 dòng lịch sử hoạt động:
 Đã ghi nhận thanh toán.
 Button Huỷ: Quay về màn hình trước đó.
 3.5 Màn hình Thông tin thanh toán bán HHDV trả trước (xem) - Trạng thái Đã thanh toán
+
+![Trang 1605 — mockup màn hình](images/lg-p1605-00-screen.png)
+
 1605
 
 <!-- Page 1606 -->
@@ -22118,12 +24215,18 @@ Thêm 1 dòng lịch sử hoạt động:
 Button Xuất kho:
 Cho phép người dùng thực hiện UC Tạo mới phiếu xuất kho, lấy thông tin theo đề nghị
 thanh toán tương ứng.
+
+![Trang 1606 — mockup màn hình](images/lg-p1606-00-screen.png)
+
 1606
 
 <!-- Page 1607 -->
 
 Chỉ trong trường hợp Bán phụ tùng.
 3.6 Màn hình Thông tin thanh toán bán HHDV trả trước (xem) - Trạng thái Đã xuất xưởng
+
+![Trang 1607 — mockup màn hình](images/lg-p1607-00-screen.png)
+
 1607
 
 <!-- Page 1608 -->
@@ -22182,6 +24285,8 @@ HHDV tương ứng (lấy theo thời gian bán HHDV) theo từng tháng chốt 
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Export | Butto<br>n |  |  | Xem mô tả phần Common<br>Rules |  |
 
+![Trang 1612 — mockup màn hình](images/lg-p1612-00-screen.png)
+
 1612
 
 <!-- Page 1613 -->
@@ -22204,6 +24309,10 @@ HHDV tương ứng (lấy theo thời gian bán HHDV) theo từng tháng chốt 
 | 8 | Tổng tiền | Colu<br>mn |  |  | Hiển thị tổng số tiền công nợ<br>theo tháng của khách hàng<br>DK05 được chọn |  |
 | 9 | Export | Butto<br>n |  |  | Cho phép người dùng export<br>bảng công nợ của khách hàng<br>DK05 tương ứng.<br>Theo Common rules. |  |
 
+![Trang 1614 — mockup màn hình](images/lg-p1614-00-screen.png)
+
+![Trang 1614 — mockup màn hình](images/lg-p1614-01-screen.png)
+
 1614
 
 <!-- Page 1615 -->
@@ -22217,6 +24326,8 @@ HHDV tương ứng (lấy theo thời gian bán HHDV) theo từng tháng chốt 
 | 1<br>4 | Mã phiếu | Colu<br>mn |  |  | Hiển thị mã phiếu đề nghị<br>thanh toán |  |
 | 1<br>5 | Mục đích | Colu<br>mn |  |  | Hiển thị mục đích của đề nghị<br>thanh toán |  |
 
+![Trang 1615 — mockup màn hình](images/lg-p1615-00-screen.png)
+
 1615
 
 <!-- Page 1616 -->
@@ -22226,6 +24337,8 @@ HHDV tương ứng (lấy theo thời gian bán HHDV) theo từng tháng chốt 
 | 1<br>6 | Thành tiền | Colu<br>mn |  |  | Hiển thị thành tiền của đề nghị<br>thanh toán<br>Chỉ hiển thị thành tiền khi đề<br>nghị thanh toán ở trạng thái<br>Đã cập nhật<br>Nếu chưa cập nhật, hiển thị<br>“-” |  |
 | 1<br>7 | Xem thêm | Butto<br>n |  |  | Cho phép người dùng xem<br>thêm 10 bản ghi tiếp theo<br>trong bảng đề nghị thanh toán |  |
 | 1<br>8 | Hành động | Colu<br>mn |  |  | Hiển thị hành động Cập nhật<br>hoặc trạng thái Đãcập nhật<br>của đề nghị thanh toán.<br>Cập nhật: Cho phép người<br>dùng cập nhật đề nghị<br>thanh toán, thực hiện UC<br>cập nhật. | Validate số lượng<br>của tất cả hàng hoá<br>trong báo giá (sửa<br>chữa xe) phải lớn<br>hơn số lượng tồn<br>kho hiện tại của<br>hàng hoá tương ứng.<br>→ Nếu vi phạm, báo<br>message lỗi:<br>Hiển thị danh sách<br>các hàng hoá không<br>đủ tồn kho theo<br>format:<br>[Mã HH] -[Tên hàng<br>hoá] (số lượng<br>thiếu) |
+
+![Trang 1616 — mockup màn hình](images/lg-p1616-00-screen.png)
 
 1616
 
@@ -22266,6 +24379,8 @@ UC06.04.03 - Cập nhật đề nghị thanh toán bán HHDV trả sau
 | --- | --- |
 | 5 | Thông tin khách hàng DK05, Thông tin phương tiện: mô tả giống UC Xem thông tin thanh<br>toán bán HHDV trả sau. |
 | 6 | Chi tiết hàng hoá/dịch vụ: Hiển thị chi tiết danh sách hàng hoá/dịch vụ mà xưởng cung cấp<br>trong lệnh sửa chữa/đề nghị thanh toán.<br>Không hiển thị tab Dịch vụ trong trường hợp bán phụ tùng (do không có dịch vụ)<br>Dữ liệu được lấy như sau:<br>Trường hợp Bán phụ tùng: Danh sách hàng hoá dịch vụ lấy theo đề nghị thanh toán và<br>không được phép cập nhật.<br>Trường hợp Bán dịch vụ sửa chữa: Danh sách hàng hoá dịch vụ lấy theo lệnh sửa chữa<br>(tên hàng hoá/dịch vụ, số lượng sử dụng) sau khi được chốt, lấy các giá trị mà số lượng sử<br>dụng của hàng hoá tương ứng > 0.<br>Đối với các hàng hoá/dịch vụ được thêm vào ở đề nghị thanh toán, lấy thêm giá trị<br>default của các trường liên quan tới tiền của hàng hoá đó, bao gồm:<br>Đơn giá<br>Đơn vị tiền tệ<br>Tỷ giá<br>Chiết khấu<br>Thuế<br>Đối với các hàng hoá được thêm mới ở phiếu xuất kho (lần thứ 2 trở đi, do lần 1 lấy theo y<br>nguyên khối lượng của đề nghị thanh toán) hoặc các dịch vụ được chốt thêm ở lệnh sửa<br>chữa, các giá trị liên quan tới tiền để no data.<br>Danh sách chỉ lấy các giá trị hàng hoá và số lượng sử dụng của nó chứ không lấy serial sử<br>dụng để hiển thị trong bản ghi đề nghị thanh toán này đối với trường hợp hàng hoá đó có<br>quản lý số serial. |
+
+![Trang 1619 — mockup màn hình](images/lg-p1619-00-screen.png)
 
 1619
 
@@ -22312,6 +24427,8 @@ UC06.04.03 - Cập nhật đề nghị thanh toán bán HHDV trả sau
 |  |  |  |  |  | khấu của tất cả hàng hoá dịch<br>vụ trong đề nghị thanh toán.<br>Giá trị = tổng thành tiền của<br>tất cả hàng hoá và dịch vụ<br>trong đề nghị thanh toán. |  |
 | 2<br>8 | Tổng CK<br>theo từng<br>HHDV | Label |  |  | Hiển thị tổng tất cả các chiết<br>khấu theo từng hàng hoá/dịch<br>vụ có trong đề nghị thanh<br>toán.<br>Giá trị = tổng chiết khấu của<br>tất cả hàng hoá và dịch vụ có<br>trong đề nghị thanh toán. |  |
 
+![Trang 1622 — mockup màn hình](images/lg-p1622-00-screen.png)
+
 1622
 
 <!-- Page 1623 -->
@@ -22336,6 +24453,8 @@ UC06.04.03 - Cập nhật đề nghị thanh toán bán HHDV trả sau
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 3<br>2 | Thuế |  |  |  | Hiển thị tổng số tiền thuế của<br>tất cả hàng hoá dịch vụ trong<br>đề nghị thanh toán.<br>Giá trị = tổng tiền thuế của tất<br>cả hàng hoá dịch vụ có trong<br>đề nghị thanh toán - tổng<br>chiết khẩu thuế của tất cả<br>hàng hoá dịch vụ trong đề<br>nghị thanh toán.<br>Chiết khấu thuế chỉ có giá trị<br>khi CK thêm > 0.<br>Chiết khấu thuế (đ) của mỗi<br>HHDV = Thuế cũ (đ) * Số<br>lượng - Giá mới sau CK *<br>Thuế (%) * Số lượng<br>Trong đó,<br>Giá mới sau CK = Tương<br>đương - Chiết khấu theo<br>từng HHDV - Tỷ trọng<br>HH/DV *CK thêm (đ)/Số<br>lượng<br>Tỷ trọng HH/DV = GTTT<br>sau CK của HH/DV trên<br>từng đơn vị * Số<br>lượng/GTTT trước CK toàn<br>đơn<br>Ví dụ (tính theo nghiệp vụ):<br>Tuy nhiên đối với các phần<br>tính toán mình đã tính trước |  |  |
+
+![Trang 1625 — mockup màn hình](images/lg-p1625-00-screen.png)
 
 1625
 
@@ -22365,6 +24484,8 @@ khấu thêm trên cả đơn.”
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 3<br>6 | Cập nhật | Butto<br>n |  | Enable | Cho phép người dùng hoàn tất<br>việc cập nhật 1 bản ghi thanh<br>toán bán HHDV trả sau.<br>Hệ thống thực hiện kiểm tra<br>validate các trường thông tin<br>cập nhật.<br>Nếu tất cả hợp lệ:<br>Hiển thị toast message<br>Cập nhật thành công<br>Hiển thị màn hình thông<br>tin chi tiết đề nghị thanh<br>toán với hành động (tuỳ<br>theo phân quyền):<br>Cập nhật (trong …)<br>Cập nhật bản ghi thanh<br>toán bán HHDV trả sau<br>với trạng thái Đã cập<br>nhật<br>Gen ID cho bản ghi thanh<br>toán bán HHDV trả sau<br>theo quy tắc:<br>aaaaayyyyy<br>aaaaa: Là mã của<br>khách hàng DK05.<br>yyyyy: Dãy số chạy từ<br>00001-99999<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã cập nhật.<br>Nếu có trường không hợp<br>lệ, thông báo lỗi (in-line<br>error msg) dưới trường<br>không hợp lệ đó. | Validate tất cả hàng<br>hoá, dịch vụ phải có<br>tổng giá trị/thành<br>tiền.<br>→ Nếu vi phạm, hệ<br>thống báo popup<br>message báo lỗi list<br>ra các hàng<br>hoá/dịch vụ chưa có<br>thành tiền như sau:<br>Các bản ghi HHDV<br>có hyperlink mở tới<br>màn cập nhật giá<br>của HHDV tương<br>ứng. |  |
 
+![Trang 1627 — mockup màn hình](images/lg-p1627-00-screen.png)
+
 1627
 
 <!-- Page 1628 -->
@@ -22372,6 +24493,8 @@ khấu thêm trên cả đơn.”
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 3<br>7 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất cập nhật thanh toán<br>bán HHDV trả sau<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ cập nhật thanh<br>toán bán HHDV trả sau trước<br>khi huỷ.<br>(thay text UI trong popup tạo<br>mới → cập nhật)<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử thanh toán<br>bán HHDV trả sau<br>Hủy: trở về màn Cập nhật<br>thanh toán bán HHDV trả<br>sau với các dữ liệu đã<br>chọn/nhập. |  |
+
+![Trang 1628 — mockup màn hình](images/lg-p1628-00-screen.png)
 
 1628
 
@@ -22381,6 +24504,8 @@ khấu thêm trên cả đơn.”
 | --- | --- | --- | --- | --- | --- | --- |
 | 3<br>8 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất cập nhật thanh toán<br>bán HHDV trả sau<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ cập nhật thanh<br>toán bán HHDV trả sau trước<br>khi huỷ.<br>(thay text UI trong popup tạo<br>mới → cập nhật)<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Lịch sử thanh toán<br>bán HHDV trả sau<br>Hủy: trở về màn Cập nhật<br>thanh toán bán HHDV trả<br>sau với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1629 — mockup màn hình](images/lg-p1629-00-screen.png)
+
 3.3 Màn hình Cập nhật đơn hàng
 1629
 
@@ -22388,6 +24513,11 @@ khấu thêm trên cả đơn.”
 
 Cập nhật hàng hoá
 Cập nhật dịch vụ
+
+![Trang 1630 — mockup màn hình](images/lg-p1630-00-screen.png)
+
+![Trang 1630 — mockup màn hình](images/lg-p1630-01-screen.png)
+
 1630
 
 <!-- Page 1631 -->
@@ -22466,6 +24596,8 @@ Cập nhật dịch vụ
 
 <!-- Page 1638 -->
 
+![Trang 1638 — mockup màn hình](images/lg-p1638-00-screen.png)
+
 1638
 
 <!-- Page 1639 -->
@@ -22486,6 +24618,9 @@ Cho phép xe [Biển số xe] xuất xưởng.
 Thêm 1 dòng lịch sử hoạt động:
 [Tên tài khoản thực hiện hành động] hh:mm dd/mm/yyyy
 Đã in phiếu xuất xưởng.
+
+![Trang 1639 — mockup màn hình](images/lg-p1639-00-screen.png)
+
 1639
 
 <!-- Page 1640 -->
@@ -22495,6 +24630,9 @@ Cho phép người dùng thực hiện UC Tạo mới phiếu xuất kho, lấy 
 thanh toán tương ứng.
 Chỉ trong trường hợp Bán phụ tùng.
 3.6 Màn hình Thông tin thanh toán bán HHDV trả sau (xem) - Trạng thái Đã xuất xưởng
+
+![Trang 1640 — mockup màn hình](images/lg-p1640-00-screen.png)
+
 1640
 
 <!-- Page 1641 -->
@@ -22529,6 +24667,9 @@ Dữ liệu thanh toán sẽ được quản lý độc lập theo từng xưở
 Thông tin thanh toán bán HHDV trả sau bao gồm:
 Thông tin thanh toán
 Thông tin khách hàng
+
+![Trang 1642 — mockup màn hình](images/lg-p1642-00-screen.png)
+
 1642
 
 <!-- Page 1643 -->
@@ -22580,6 +24721,8 @@ Tổng cộng
 | 1<br>9 | Chi tiết hàng hoá: Hiển thị chi tiết danh sách hàng hoá xuất ra để thực hiện sửa chữa hoặc<br>bán phụ tùng.<br>Đối với trường hợp phân luồng = sửa chữa xe → Lấy bảng tổng hợp hàng hoá (có cả serial) ở<br>lệnh sửa chữa sau khi đã chốt lệnh.<br>Đối với trường hợp phân luồng = bán phụ tùng → Cập nhật bảng tổng hợp hàng hóa (có cả<br>serial) ở phiếu xuất kho sau khi phiếu xuất kho hoàn thành (qua 2 lần phê duyệt) |  |  |  |  |  |
 | 2<br>0 | Tab | Tab |  |  | Hiển thị 2 tab:<br>Hàng hoá<br>Dịch vụ<br>Chỉ hiển thị tab trong trường<br>hợp Bán dịch vụ sửa chữa |  |
 
+![Trang 1646 — mockup màn hình](images/lg-p1646-00-screen.png)
+
 1646
 
 <!-- Page 1647 -->
@@ -22617,6 +24760,8 @@ Tổng cộng
 | 4<br>2 | CK thêm (đ) | Label |  |  | Hiển thị CK thêm (đ) của đề<br>nghị thanh toán |  |
 | 4<br>3 | Tổng GTTT<br>sau chiết<br>khấu | Label |  |  | Hiển thị tổng GTTT sau chiết<br>khấu của đề nghị thanh toán |  |
 
+![Trang 1648 — mockup màn hình](images/lg-p1648-00-screen.png)
+
 1648
 
 <!-- Page 1649 -->
@@ -22653,6 +24798,8 @@ Làm giống bên áo giá, người dùng có thể ấn vào từng hàng hoá
 | 4 | Đơn giá | Label |  |  | Hiển thị đơn giá |  |
 | 5 | Đơn vị tiền<br>tệ | Label |  |  | Hiển thị đơn vị tiền tệ |  |
 | 6 | Tỷ giá | Label |  |  | Hiển thị tỷ giá |  |
+
+![Trang 1651 — mockup màn hình](images/lg-p1651-00-screen.png)
 
 1651
 
@@ -22692,6 +24839,9 @@ Loại phương tiện
 Mã PT - Tên PT
 Hệ thống tổng thành
 Đơn vị tính
+
+![Trang 1653 — mockup màn hình](images/lg-p1653-00-screen.png)
+
 1653
 
 <!-- Page 1654 -->
@@ -22735,6 +24885,9 @@ UC10.01.01 - Xem danh sách báo cáo
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Danh sách báo cáo
+
+![Trang 1657 — mockup màn hình](images/lg-p1657-00-screen.png)
+
 1657
 
 <!-- Page 1658 -->
@@ -22746,6 +24899,8 @@ Danh sách báo cáo hiển thị các bản ghi mặc định ban đầu như s
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng<br>(trừ trạng thái) |  |
 | 2 | Bộ lọc | Sideb<br>ar |  |  | Xem mô tả phần Common<br>Rules<br>Cho phép lọc các cột sau:<br>Lần thay đổi gần nhất<br>Người thay đổi |  |
 | 3 | Export | Butto<br>n |  |  | Xem mô tả phần Common<br>Rules |  |
+
+![Trang 1658 — mockup màn hình](images/lg-p1658-00-screen.png)
 
 1658
 
@@ -22774,6 +24929,10 @@ Danh sách báo cáo hiển thị các bản ghi mặc định ban đầu như s
 | 8 | Tên báo cáo | Colu<br>mn |  |  | Hiển thị tên báo cáo |  |
 | 9 | Lần thay đổi<br>gần nhất | Colu<br>mn |  |  | Hiển thị lần thay đổi gần nhất<br>báo cáo |  |
 | 1<br>0 | Người thay<br>đổi | Colu<br>mn |  |  | Hiển thị người thay đổi gần<br>nhất lên báo cáo |  |
+
+![Trang 1661 — mockup màn hình](images/lg-p1661-00-screen.png)
+
+![Trang 1661 — mockup màn hình](images/lg-p1661-01-screen.png)
 
 1661
 
@@ -22805,6 +24964,8 @@ UC10.01.01 - Tạo báo cáo
 3. Mô tả màn hình
 3.1 Màn hình Tạo báo cáo - Đặt tên
 
+![Trang 1663 — mockup màn hình](images/lg-p1663-00-screen.png)
+
 
 c
 1663
@@ -22830,9 +24991,13 @@ c
 
 <!-- Page 1666 -->
 
+![Trang 1666 — mockup màn hình](images/lg-p1666-00-screen.png)
+
 1666
 
 <!-- Page 1667 -->
+
+![Trang 1667 — mockup màn hình](images/lg-p1667-00-screen.png)
 
 1667
 
@@ -22850,6 +25015,9 @@ UI Component: Component mà trường thông tin thể hiện trên giao diện.
 Input multiple: trường input + enter thành 1 giá trị để lọc, không có list để chọn. Khi tạo báo
 cáo nếu thoả mãn giá trị input, báo cáo sẽ hiển thị các bản ghi thoả mãn (giống search
 multiple)
+
+![Trang 1668 — mockup màn hình](images/lg-p1668-00-screen.png)
+
 1668
 
 <!-- Page 1669 -->
@@ -22892,6 +25060,9 @@ Báo cáo hàng hoá theo đơn mua hàng: Chọn hàng hoá + đơn mua hàng �
 đơn mua hàng là 1 dòng
 Báo cáo đơn mua hàng: Chọn đơn mua hàng → Mỗi đơn mua hàng là 1 dòng
 Báo cáo hàng hoá: Chọn hàng hoá → Mỗi hàng hoá là 1 dòng
+
+![Trang 1671 — mockup màn hình](images/lg-p1671-00-screen.png)
+
 1671
 
 <!-- Page 1672 -->
@@ -22908,6 +25079,8 @@ Báo cáo hàng hoá: Chọn hàng hoá → Mỗi hàng hoá là 1 dòng
 | --- | --- | --- | --- | --- | --- | --- |
 | 4 | Trường tuỳ<br>biế | Multip<br>le |  | Hiden | Hiển thị các trường thông tin<br>tuỳ biến theo từng loại<br>component tương ứng:<br>Thời gian → Date range<br>picker<br>Default: oldest - newest<br>Số → Slider<br>Default: Min-max<br>Chọn giá trị → 1/multiple<br>option dropdown list<br>Default = Tất cả<br>Text → Không có<br>component<br>Chọn tuỳ biến trường tương<br>ứng sẽ hiển thị component<br>trường tuỳ biến để người dùng<br>chọn giá trị.<br>→<br>Nếu trường tuý biến là trường<br>cha, hiển thị thêm các trường<br>con bên dưới. |  |
 | 5 | Ẩn/hiện<br>trường | Toogl<br>e |  | Disable/<br>on | Cho phép người dùng ẩn hiện<br>trường thông tin tương ứng khi<br>đã chọn sử dụng trường.<br>Enable khi tick chọn tuỳ biến<br>trường. |  |
+
+![Trang 1673 — mockup màn hình](images/lg-p1673-00-screen.png)
 
 1673
 
@@ -22928,6 +25101,14 @@ Báo cáo hàng hoá: Chọn hàng hoá → Mỗi hàng hoá là 1 dòng
 | 9 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>tạo mới báo cáo<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới báo cáo<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách báo cáo<br>Hủy: trở về màn Tạo mới<br>báo cáo với các dữ liệu đã<br>chọn/nhập. |  |
 | 1<br>0 | Đóng | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>tạo mới báo cáo<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới báo cáo<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách báo cáo<br>Hủy: trở về màn Tạo mới<br>báo cáo với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1675 — mockup màn hình](images/lg-p1675-00-screen.png)
+
+![Trang 1675 — mockup màn hình](images/lg-p1675-01-screen.png)
+
+![Trang 1675 — mockup màn hình](images/lg-p1675-00-screen.png)
+
+![Trang 1675 — mockup màn hình](images/lg-p1675-01-screen.png)
+
 1675
 
 <!-- Page 1676 -->
@@ -22942,6 +25123,9 @@ Báo cáo hàng hoá: Chọn hàng hoá → Mỗi hàng hoá là 1 dòng
 <!-- Page 1677 -->
 
 Các trường thông tin và hành động đã được mô tả ở UC Xem thông tin chi tiết báo cáo
+
+![Trang 1677 — mockup màn hình](images/lg-p1677-00-screen.png)
+
 1677
 
 <!-- Page 1678 -->
@@ -22961,6 +25145,9 @@ UC10.01.02 - Xem chi tiết báo cáo
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình chi tiết báo cáo
+
+![Trang 1678 — mockup màn hình](images/lg-p1678-00-screen.png)
+
 1678
 
 <!-- Page 1679 -->
@@ -22992,6 +25179,8 @@ UC10.01.02 - Xem chi tiết báo cáo
 | 9 | Hành động | Butto<br>n |  |  | Cho phép người dùng thực<br>hiện 1 số hành động sau:<br>Lưu bản sao: Cho phép<br>người dùng tạo nhanh 1 bản<br>ghi mới báo cáo mới với<br>setting hiện tại (kể cả các<br>thay đổi mà chưa lưu trên<br>bản ghi)<br>→ Mở màn hình Tạo báo<br>cáo<br>In báo cáo: Theo common<br>rules<br>Xuất file: Theo common<br>rules |  |
 | 1<br>0 | Tổng cộng | Label |  |  | Hiển thị tổng cộng theo các<br>các cột tương ứng (tổng tất cả<br>các bản ghi có trong báo cáo,<br>không phải theo từng trang).<br>Đối với các cột không tính<br>tổng giá trị, hiển thị “-”<br>Đối với các cột có tính tổng<br>giá trị, hiển thị giá trị tổng<br>tương ứng |  |
 | 1<br>1 | Bảng báo cáo: Hiển thị cột và dữ liệu theo báo cáo được chọn tạo. |  |  |  |  |  |
+
+![Trang 1681 — mockup màn hình](images/lg-p1681-00-screen.png)
 
 1681
 
@@ -23074,6 +25263,8 @@ UI cần cập nhật
 | % tồn kho | Label | Number | Góc trên phải.<br>Màu theo trạng thái. |
 | Màu card | — | — | 3 mức: Nguy hiểm (đỏ) · Cảnh báo (vàng) · Bình<br>thường (xanh lá).<br>Follow rule ngưỡng để thay đổi màu sắc. Xem rule<br>ngưỡng bên dưới. |
 
+![Trang 1688 — mockup màn hình](images/lg-p1688-00-screen.png)
+
 1688
 
 <!-- Page 1689 -->
@@ -23138,6 +25329,9 @@ trang.
 <!-- Page 1692 -->
 
 3.1 Màn hình Dashboards
+
+![Trang 1692 — lưu đồ hoạt động](images/lg-p1692-00-flow.png)
+
 Dữ liệu sẽ được quản lý độc lập theo từng cây dầu.
 Màn hình Dashboard bể dầu được chia thành 3 khu vực hiển thị chính, sắp xếp theo chiều dọc:
 (1) Khu vực Trạng thái bể dầu – Tank Visual + Metric Cards + Alert Banner
@@ -23164,6 +25358,8 @@ Dữ liệu ở Khu vực (1) và (2) thay đổi realtime, không cần tải l
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 | Cột 10 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 4 | Alert<br>Banner | Mess<br>age<br>Bann<br>er | Text |  |  | Hiển thị các alert banner liên<br>quan tới cây dầu.<br>Xem thêm các loại message ở<br>mục 4.5.<br>Khu vực hiển thị cảnh<br>báo/thông báo động ngay phía<br>dưới tiêu đề màn hình, phía trên<br>các metric cards.<br>Logic hiển thị khi có nhiều<br>message xảy ra đồng thời:<br>Nguyên tắc: Chỉ hiển thị 1<br>banner tại một thời điểm +<br>badge đếm số message còn lại.<br>Thứ tự ưu tiên hiển thị (cao →<br>thấp): Danger → Warning →<br>Info.<br>Khi có nhiều message cùng<br>mức ưu tiên: hiển thị message<br>có mã số nhỏ hơn trước (M2<br>trước M3, M1 trước M4).<br>Cấu trúc hiển thị:<br>[Icon loại] [Nội dung<br>message ưu tiên cao nhất]<br>[+N cảnh báo khác ▼]<br>Badge "+N cảnh báo khác"<br>hiển thị bên phải banner,<br>người dùng click vào để mở<br>dropdown liệt kê tất cả<br>message còn lại theo thứ tự<br>ưu tiên.<br>Dropdown hiển thị nội dung<br>đầy đủ và loại |  |  |
+
+![Trang 1694 — lưu đồ hoạt động](images/lg-p1694-00-flow.png)
 
 1694
 
@@ -23214,6 +25410,8 @@ chiếm diện tích màn hình.
 | 8 | Thân bể<br>(Tank<br>Body) | Cont<br>ainer | Visu<br>al | — |  | Khung hình chữ nhật đứng thể<br>hiện bể dầu.<br>Có thước đo (scale) dọc bên trái<br>thể hiện dung tích: 0 – 1000 –<br>2000 – 3000 – 4000 – 5000L<br>(theo dung tích tối đa được cấu<br>hình của bể).<br>Tỷ lệ 1:10. |  |
 | 9 | Mức<br>dầu<br>hiện tại<br>(Actual<br>Fill) | Fill<br>Bar | Visu<br>al | — |  | Vùng màu xanh lam chiếm từ<br>đáy bể lên đến mức tương ứng<br>với lượng dầu hiện tại / dung<br>tích tối đa của bể.<br>Phần trên cùng của mức dầu có<br>hiệu ứng gợn sóng (wave<br>animation) để thể hiện chất lỏng<br>đang ở trạng thái thực. |  |
 
+![Trang 1696 — lưu đồ hoạt động](images/lg-p1696-00-flow.png)
+
 1696
 
 <!-- Page 1697 -->
@@ -23232,6 +25430,8 @@ chiếm diện tích màn hình.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>3 | Chú<br>thích<br>(Legen<br>d) | Lege<br>nd | Text<br>+<br>Visu<br>al | — |  | Hiển thị bên dưới bể dầu, gồm 4<br>mục:<br>Hình vuông xanh lam = Mức<br>dầu hiện tại<br>Hình vuông tím viền đứt =<br>Mức sau nhập dầu<br>Đường đứt vàng = Ngưỡng<br>kích hoạt PO<br>Đường đứt đỏ = Ngưỡng vận<br>hành tối thiểu |  |
 | 1<br>4 | Khu vực 1.2 - Metric Cards (4 thẻ chỉ số)<br>Năm thẻ chỉ số hiển thị theo dạng lưới, mỗi thẻ gồm: nhãn tiêu đề, giá trị số nổi bật, thông tin<br>phụ, và thanh tiến trình mini (với các card có ngưỡng so sánh). |  |  |  |  |  |  |
+
+![Trang 1698 — lưu đồ hoạt động](images/lg-p1698-00-flow.png)
 
 1698
 
@@ -23265,6 +25465,8 @@ chiếm diện tích màn hình.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>8 | Card –<br>Ngưỡng<br>vận<br>hành tối<br>thiểu | Metri<br>c<br>Card | Num<br>ber | — |  | Hiển thị lượng dầu tối thiểu cần<br>thiết để hệ thống bơm dầu có<br>thể vận hành. Khi lượng dầu<br>hiện tại xuống dưới mức này, hệ<br>thống bơm phải cân nhắc dừng<br>hoạt động.<br>Đơn vị: lít (L).<br>Được cấu hình trong thông tin<br>danh mục cây dầu nội bộ tương<br>ứng.<br>Thông tin phụ: "XX% – Còn<br>cách Y L".<br>XX = Ngưỡng vận hành tối<br>thiểu/Dung tích của cây dầu<br>Y = Lượng dầu hiện tại -<br>Ngưỡng dầu kích hoạt PO<br>Nếu chưa cấu hình: Hiển thị "–". |  |
 | 1<br>9 | Khu vực 2 – Biểu đồ xu hướng lượng dầu (Trend Chart)<br>Biểu đồ line chart hiển thị lịch sử lượng dầu kết hợp dự báo sau khi nhập dầu. Người dùng có<br>thể chọn xem theo khoảng thời gian 7 ngày hoặc 30 ngày. |  |  |  |  |  |  |
+
+![Trang 1702 — lưu đồ hoạt động](images/lg-p1702-00-flow.png)
 
 1702
 
@@ -23350,6 +25552,8 @@ Click vào 1 hàng → navigate sang UC chi tiết tương ứng của nghiệp 
 | Section — Thẻ stat tổng hợp |  |  |  |  |  |  |
 | Thẻ Tổng<br>xuất | Label | Numb<br>er | — | — | Icon 🛒 đỏ + Label TỔNG XUẤT<br>+ Tổng lượng dầu xuất ra trong<br>kỳ. Màu đỏ, dấu − .<br>Tính từ tất cả giao dịch Cấp dầu.<br>Hiển thị tương ứng theo tổng giao<br>dịch được lọc bên dưới. | — |
 
+![Trang 1709 — mockup màn hình](images/lg-p1709-00-screen.png)
+
 1709
 
 <!-- Page 1710 -->
@@ -23361,6 +25565,9 @@ Click vào 1 hàng → navigate sang UC chi tiết tương ứng của nghiệp 
 | Thẻ Biến<br>động thuần | Label | Numb<br>er | — | — | Icon 📈 + Label BIẾN ĐỘNG<br>THUẦN + Giá trị = Tổng nhập −<br>Tổng xuất.<br>Màu xanh lá nếu dương, đỏ nếu<br>âm.<br>Hiển thị tương ứng theo tổng giao<br>dịch được lọc bên dưới. | — |
 
 Section — Lịch sử giao dịch
+
+![Trang 1710 — mockup màn hình](images/lg-p1710-00-screen.png)
+
 Chỉ hiển thị các giao dịch đã được hoàn thành (trạng thái cuối cùng).
 1710
 
@@ -23414,6 +25621,8 @@ Feature 12.1 - Mua dầu
 <!-- Page 1715 -->
 
 12.01 - Lưu đồ trạng thái kế hoạch mua dầu
+
+![Trang 1715 — lưu đồ trạng thái](images/lg-p1715-00-state.png)
 
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
@@ -23481,6 +25690,9 @@ chọn nhiều dòng để Thu hồi/Xoá/Từ chối hàng loạt, theo pattern
 Bulk actions cho màn danh sách.
 3. Mô tả màn hình
 3.1 Tab "Chính thức" - Danh sách kế hoạch mua dầu chính thức
+
+![Trang 1718 — mockup màn hình](images/lg-p1718-00-screen.png)
+
 Tab này tập trung hiển thị thông tin/thuộc tính của kế hoạch mua dầu đã được phê duyệt -
 không có cột hành động (không có action đổi trạng thái nào thao tác trực tiếp từ danh sách
 này; xem ghi chú cuối mục 3.3).
@@ -23688,6 +25900,9 @@ sách.
 Nhánh C — Huỷ: Confirm Dialog (SC-03). Xác nhận → navigate về danh sách.
 3. Mô tả màn hình
 3.1 Màn hình Tạo mới kế hoạch mua dầu
+
+![Trang 1729 — mockup màn hình](images/lg-p1729-00-screen.png)
+
 Màn hình popup toàn trang. Layout 2 cột: vùng main trái (~70%) và sidebar phải (~30%).
 Header có stepper 4 bước và action buttons. Footer bar cố định hiển thị thông tin tổng hợp.
 1729
@@ -23717,6 +25932,10 @@ Header có stepper 4 bước và action buttons. Footer bar cố định hiển 
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
 | 7 | Vùng main — Section Đề xuất nhà cung cấp<br>Hiển thị khi chưa có NCC nào (no data): illustration + text "Chưa có nhà cung<br>cấp nào được chọn!" + subtext "Vui lòng thêm nhà cung cấp để tiếp tục tạo kế<br>hoạch mua dầu!" + button + Thêm mới.<br>Hiển thị khi có data:<br>Xử lý scroll trong block, hiển thị mặc định tối thiểu 3 nhà cung cấp khi chưa<br>scroll |  |
+
+![Trang 1732 — mockup màn hình](images/lg-p1732-00-screen.png)
+
+![Trang 1732 — mockup màn hình](images/lg-p1732-01-screen.png)
 
 1732
 
@@ -23789,6 +26008,8 @@ Nút footer đổi thành Huỷ / Lưu nháp / Cập nhật.
 
 <!-- Page 1738 -->
 
+![Trang 1738 — hình](images/lg-p1738-00-img.png)
+
 1738
 
 <!-- Page 1739 -->
@@ -23831,6 +26052,9 @@ Click Phê duyệt → Navigate sang UC12.01.03.
 8. Người dùng click ✕ hoặc click ra ngoài → trở về danh sách.
 3. Mô tả màn hình
 3.1 Màn hình Chi tiết kế hoạch mua dầu
+
+![Trang 1740 — mockup màn hình](images/lg-p1740-00-screen.png)
+
 1740
 
 <!-- Page 1741 -->
@@ -23842,6 +26066,10 @@ Màn hình toàn trang, layout 2 cột: vùng main trái (~70%) + sidebar phải
 | --- | --- | --- | --- | --- | --- | --- |
 | Header |  |  |  |  |  |  |
 | Stepper | — | — | — | Bước<br>1<br>active | Xem SC-09<br>Bước 2, 3, 4 xám, không<br>clickable. Mã KH hiển thị<br>dưới tên bước 1 sau khi<br>phê duyệt. | — |
+
+![Trang 1741 — mockup màn hình](images/lg-p1741-00-screen.png)
+
+![Trang 1741 — mockup màn hình](images/lg-p1741-01-screen.png)
 
 1741
 
@@ -23869,6 +26097,10 @@ Màn hình toàn trang, layout 2 cột: vùng main trái (~70%) + sidebar phải
 | Dòng NCC<br>— Tên | Label | — | — | — | Chỉ đọc.<br>Avatar + Mã NCC (bold) +<br>Tên NCC (dòng 2, xám). | — |
 | Dòng NCC<br>— Số lượng | Label | Numb<br>er | — | — | Chỉ đọc.<br>VD: "100 L". | — |
 
+![Trang 1743 — mockup màn hình](images/lg-p1743-00-screen.png)
+
+![Trang 1743 — mockup màn hình](images/lg-p1743-01-screen.png)
+
 1743
 
 <!-- Page 1744 -->
@@ -23881,6 +26113,8 @@ Màn hình toàn trang, layout 2 cột: vùng main trái (~70%) + sidebar phải
 | Badge ĐÃ<br>CHỌN | Badg<br>e | — | — | — | Hiển thị trên dòng NCC<br>được chọn sau khi Đã phê<br>duyệt. Màu xanh lá. | — |
 | Vùng sidebar |  |  |  |  |  |  |
 | Người phụ<br>trách | Label | — | — | — | Chỉ đọc.<br>Card: Avatar + Tên + Chức<br>vụ + icon → navigate chi<br>tiết nhân viên. | — |
+
+![Trang 1744 — mockup màn hình](images/lg-p1744-00-screen.png)
 
 1744
 
@@ -23897,6 +26131,8 @@ Màn hình toàn trang, layout 2 cột: vùng main trái (~70%) + sidebar phải
 | Số lựa chọn | Label | Numb<br>er | — | — | Tổng số NCC đề xuất. | — |
 | Thành tiền | Label | Numb<br>er | — | — | Thành tiền NCC được<br>chọn.<br>-- nếu chưa phê duyệt. | — |
 | Thời gian<br>cần nhập<br>hàng | Label | DateT<br>ime | — | — | Hệ thống tự tính.<br>Dạng HH:mm<br>DD/MM/YYYY . | — |
+
+![Trang 1745 — mockup màn hình](images/lg-p1745-00-screen.png)
 
 1745
 
@@ -23945,6 +26181,9 @@ i. Người dùng click Huỷ.
 ii. Chuyển về màn xem, không thay đổi trạng thái.
 3. Mô tả màn hình
 3.1 Màn hình Phê duyệt kế hoạch mua dầu
+
+![Trang 1747 — mockup màn hình](images/lg-p1747-00-screen.png)
+
 Màn hình toàn trang, cùng layout với màn tạo mới. Vùng main chuyển sang chế độ chỉ đọc, thêm
 Radio button để chọn NCC.
 Sidebar hiển thị thông tin đầy đủ bao gồm chi tiết NCC được chọn sau khi phê duyệt.
@@ -23964,6 +26203,8 @@ màn phê duyệt (edit) luôn chứ không tách ra thành 2 màn popup riêng.
 | Icon More<br>(⋯) | Icon /<br>Butto<br>n | — | — | — | Góc trên phải. Dropdown:<br>Thu hồi (hiển thị nếu người<br>dùng là người tạo và có<br>quyền thu hồi). | — |
 | Button Huỷ | Butto<br>n | — | — | — | Variant: outlined, icon ✕.<br>Navigate về danh sách,<br>không thay đổi trạng thái.<br>Không cần Confirm Dialog<br>(màn này chỉ đọc + chọn). | — |
 
+![Trang 1748 — mockup màn hình](images/lg-p1748-00-screen.png)
+
 1748
 
 <!-- Page 1749 -->
@@ -23974,6 +26215,8 @@ màn phê duyệt (edit) luôn chứ không tách ra thành 2 màn popup riêng.
 | Button Phê<br>duyệt | Butto<br>n | — | — | — | Chỉ hiển thị với người có<br>quyền phê duyệt. Variant:<br>filled, màu xanh lá, icon ✓.<br>Click → validate đã chọn<br>NCC → Confirm Dialog →<br>phê duyệt. | "Vui lòng<br>chọn 1 nhà<br>cung cấp để<br>xác nhận<br>phê duyệt." |
 | Vùng main — Section Đề xuất nhà cung cấp |  |  |  |  |  |  |
 | Banner<br>hướng dẫn | — | — | — | — | Banner màu xanh dương<br>nhạt, icon ℹ, text: "Vui lòng<br>chọn 1 nhà cung cấp để xác<br>nhận và chuyển sang bước<br>đặt đơn mua dầu." | — |
+
+![Trang 1749 — mockup màn hình](images/lg-p1749-00-screen.png)
 
 1749
 
@@ -24005,6 +26248,8 @@ màn phê duyệt (edit) luôn chứ không tách ra thành 2 màn popup riêng.
 | Lượng dầu<br>nhập tối đa | Label | Numb<br>er | — | — | Lượng dầu có thể đặt mua tối<br>đa |  |
 | Số lựa chọn | Label | Numb<br>er | — | — | Tổng số NCC đề xuất trong<br>kế hoạch. | — |
 
+![Trang 1751 — mockup màn hình](images/lg-p1751-00-screen.png)
+
 1751
 
 <!-- Page 1752 -->
@@ -24029,6 +26274,8 @@ chọn NCC khi submit).
 <!-- Page 1753 -->
 
 12.01 - Lưu đồ trạng thái đơn mua dầu
+
+![Trang 1753 — hình](images/lg-p1753-00-img.png)
 
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
@@ -24084,6 +26331,9 @@ Nhánh E — Huỷ đơn nhanh: Click ⋯ → chọn Huỷ đơn → Confirm Dia
 Nhánh F — Nhóm: Click Nhóm → Chọn trường NHóm → danh sách hiển thị theo UI nhóm.
 3. Mô tả màn hình
 3.1 Màn hình Danh sách đơn mua dầu (PO)
+
+![Trang 1755 — mockup màn hình](images/lg-p1755-00-screen.png)
+
 Màn hình liệt kê tất cả PO mua dầu được tạo tự động sau khi kế hoạch được phê duyệt. Không
 có chức năng tạo mới thủ công.
 
@@ -24212,6 +26462,8 @@ stepper 4 bước. Footer bar cố định hiển thị tổng hợp tài chính
 | Header |  |  |  |  |  |  |
 | Stepper | — | — | — | Bước 2<br>active | Bước 1 Kế hoạch mua: icon ✓<br>xanh (đã hoàn thành) + mã<br>KH dưới tên bước. Bước 2<br>Mua dầu (PO): active. Bước<br>3, 4: xám, không clickable<br>cho đến khi đến lượt. Click<br>bước 1 → navigate sang<br>UC12.01.03.<br>(Xem SC-09) Bước 1 icon ✓ +<br>mã KH dưới tên. Click bước 1<br>→ navigate UC12.01.02. Bước<br>3, 4 xám cho đến khi đến<br>lượt. | — |
 
+![Trang 1763 — mockup màn hình](images/lg-p1763-00-screen.png)
+
 1763
 
 <!-- Page 1764 -->
@@ -24237,6 +26489,8 @@ stepper 4 bước. Footer bar cố định hiển thị tổng hợp tài chính
 
 Vùng main — Section Chi tiết hàng hóa
 
+![Trang 1766 — mockup màn hình](images/lg-p1766-00-screen.png)
+
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | Tiêu đề<br>section | Label | — | — | — | "Chi tiết hàng hóa". | — |
@@ -24251,6 +26505,8 @@ Vùng main — Section Chi tiết hàng hóa
 <!-- Page 1767 -->
 
 Vùng sidebar — Section Nhà cung cấp
+
+![Trang 1767 — mockup màn hình](images/lg-p1767-00-screen.png)
 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -24267,6 +26523,8 @@ Vùng sidebar — Section Nhà cung cấp
 
 Vùng sidebar — Section Thông tin khác
 
+![Trang 1768 — mockup màn hình](images/lg-p1768-00-screen.png)
+
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | Người phụ<br>trách | Label | — | — | — | Card: Avatar + Tên + Chức vụ<br>(dòng 2).<br>Icon → navigate sang trang<br>chi tiết nhân viên. | — |
@@ -24275,6 +26533,8 @@ Vùng sidebar — Section Thông tin khác
 | Footer bar (cố định dưới cùng) |  |  |  |  |  |  |
 | Chiết<br>khấu | Label | Numb<br>er | — | — | Tổng tiền chiết khấu = Giá<br>niêm yết × Số lượng × Chiết<br>khấu%.<br>Hiển thị màu đỏ, dấu trừ, VD:<br>"- 85.000 đ". | — |
 | GTTT<br>trước thuế | Label | Numb<br>er | — | — | = Đơn giá ban đầu × Số<br>lượng. VD: "100.000.000 đ". | — |
+
+![Trang 1768 — mockup màn hình](images/lg-p1768-01-screen.png)
 
 1768
 
@@ -24494,6 +26754,9 @@ Stepper cố định trên cùng màn hình. Xem thêm ở tài liệu UC00.00.0
 Chỉ xuất hiện với trường hợp Nhập từ NCC, luồng Nhập từ PT là luồng độc lập, không có thanh
 tiến trình.
 3.1.2 Header
+
+![Trang 1778 — mockup màn hình](images/lg-p1778-00-screen.png)
+
 1778
 
 <!-- Page 1779 -->
@@ -24508,6 +26771,9 @@ tiến trình.
 | 6 | Button X | Đóng, trở về danh sách. |
 
 3.1.3 Section Tổng quan
+
+![Trang 1779 — mockup màn hình](images/lg-p1779-00-screen.png)
+
 3 card ngang, read-only:
 
 | Cột 1 | Cột 2 | Cột 3 |
@@ -24525,6 +26791,9 @@ tiến trình.
 | 3 | NHẬP VÀO | +X L (lớn, xanh lá) + "−Z L với đơn mua dầu" (xám nhỏ, chênh lệch so với<br>PO) + Icon giọt dầu<br>X = Sau khi nhập - Trước khi nhập<br>Z = Số lít dầu đặt (trong PO) - Số lít dầu nhận thực tế (X)<br>Xanh nếu > 0<br>Đỏ nếu < 0<br>Nếu = 0 thì thể hiện như sau: |
 
 3.1.4 Section Đo lường cột dầu
+
+![Trang 1780 — mockup màn hình](images/lg-p1780-00-screen.png)
+
 2 cột ngang: TRƯỚC KHI NHẬP (trái) → arrow → SAU KHI NHẬP (phải).
 Read-only.
 Mỗi bên hiển thị 2 card xếp dọc:
@@ -24559,6 +26828,8 @@ Bên dưới 2 card (dùng chung):
 
 3.1.5 Section Phiếu xuất kho NCC
 
+![Trang 1781 — mockup màn hình](images/lg-p1781-00-screen.png)
+
 | Thành phần | Mô tả |
 | --- | --- |
 | Số phiếu xuất kho | Giá trị text. |
@@ -24569,6 +26840,9 @@ Bên dưới 2 card (dùng chung):
 <!-- Page 1782 -->
 
 3.1.6 Section Thông tin xe giao dầu
+
+![Trang 1782 — mockup màn hình](images/lg-p1782-00-screen.png)
+
 4 fields dạng 2 cột:
 
 | Label | Giá trị |
@@ -24590,6 +26864,8 @@ Bên dưới 2 card (dùng chung):
 | Nhà cung cấp | Card NCC: Avatar chữ cái + Tên NCC (bold) + Mã NCC + Phương<br>thức thanh toán + Địa chỉ + SĐT + Email.<br>Icon ›→ navigate trang chi tiết NCC. |
 | Thông tin khác | Người phụ trách (card: avatar + tên + chức vụ + icon ›) + Ghi chú<br>(italic box, ẩn nếu trống). |
 
+![Trang 1783 — mockup màn hình](images/lg-p1783-00-screen.png)
+
 1783
 
 <!-- Page 1784 -->
@@ -24597,13 +26873,22 @@ Bên dưới 2 card (dùng chung):
 Biên bản Các file biên bản upload lên sau khi tạo mới.
 Theo SC-10.
 3.2 Màn hình Phiếu nhập kho — Nhập từ Phương tiện
+
+![Trang 1784 — mockup màn hình](images/lg-p1784-00-screen.png)
+
 3.1 Header
+
+![Trang 1784 — mockup màn hình](images/lg-p1784-01-screen.png)
+
 Tương tự 3.1.2, badge phân loại: "NHẬP TỪ PHƯƠNG TIỆN" (tím).
 1784
 
 <!-- Page 1785 -->
 
 3.2 Section Tổng quan
+
+![Trang 1785 — mockup màn hình](images/lg-p1785-00-screen.png)
+
 2 card + 1 badge trung tâm:
 
 | Thành phần | Mô tả |
@@ -24615,6 +26900,9 @@ Tương tự 3.1.2, badge phân loại: "NHẬP TỪ PHƯƠNG TIỆN" (tím).
 3.4 Section Đo lường cột dầu
 Tương tự 5.4 — 2 cột TRƯỚC KHI NHẬP / SAU KHI NHẬP với sensor reference data.
 3.5 Section Thông tin phương tiện
+
+![Trang 1785 — mockup màn hình](images/lg-p1785-01-screen.png)
+
 Card xe: Biển số (bold) + Lái xe + Loại PT + Tên PT + X L / Y L (tồn hiện tại / dung tích bình).
 6.6 Section Lý do nhập dầu
 
@@ -24638,6 +26926,9 @@ Card xe: Biển số (bold) + Lái xe + Loại PT + Tên PT + X L / Y L (tồn h
 4. Hành động Thu hồi phiếu
 Không có màn riêng — xử lý qua SC-03 Confirm Dialog trên màn chi tiết.
 → Hệ thống xử lý:
+
+![Trang 1786 — mockup màn hình](images/lg-p1786-00-screen.png)
+
 1786
 
 <!-- Page 1787 -->
@@ -24691,7 +26982,13 @@ Tap "Huỷ" hoặc X → đóng modal, huỷ toàn bộ thao tác, phiếu khôn
 dùng quay lại form (dữ liệu vẫn còn).
 3. Mô tả màn hình
 3.1 Popup Chọn loại nhập dầu
+
+![Trang 1789 — mockup màn hình](images/lg-p1789-00-screen.png)
+
 3.1 Popup Chọn đơn mua dầu
+
+![Trang 1789 — mockup màn hình](images/lg-p1789-01-screen.png)
+
 Chỉ hiển thị những đơn mua dầu chưa có phiếu nhập dầu hoặc phiếu nhập dầu đã thu hồi/đã từ
 chối
 3.3 Màn hình Tạo mới phiếu nhập dầu
@@ -24706,6 +27003,10 @@ chối
 | Stepper | Theo Module dầu, Luồng nhập dầu, tài liệu UC00.00.02<br>Icon X góc phải đóng màn. |
 | Tiêu đề | "Phiếu nhập dầu" + Dot "Bản nháp" (chỉ hiển thị dot trong trạng thái bản<br>nháp) |
 
+![Trang 1790 — mockup màn hình](images/lg-p1790-00-screen.png)
+
+![Trang 1790 — mockup màn hình](images/lg-p1790-01-screen.png)
+
 1790
 
 <!-- Page 1791 -->
@@ -24718,6 +27019,9 @@ chối
 | Button Tạo mới | Filled xanh lá + icon +.<br>Validate on submit.<br>Mở popup Ký biên bản (3.4) |
 
 3.3.2 Section Đo lường cột dầu
+
+![Trang 1791 — mockup màn hình](images/lg-p1791-00-screen.png)
+
 Layout 2 cột ngang: TRƯỚC KHI NHẬP (trái) → icon mũi tên → SAU KHI NHẬP (phải).
 Mỗi bên có tab toggle 3 lựa chọn:
 TRƯỚC KHI NHẬP: [Hệ thống] [Thủ công] [Sensor] — mặc định chọn "Hệ thống"
@@ -24733,6 +27037,8 @@ thay đổi theo tab. Điều này cho phép user nhập ảnh một lần và t
 cả 3 chế độ.
 Tab Hệ thống (chỉ áp dụng TRƯỚC KHI NHẬP):
 
+![Trang 1792 — hình](images/lg-p1792-00-img.png)
+
 |  | Tên thành<br>phần | Control | Loại | Bắt buộc | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Chiều cao cột<br>dầu | Label | Number | — | Read-only.<br>Auto-tính từ<br>hệ thống dựa<br>trên lịch sử<br>phiếu<br>nhập/cấp<br>dầu. Suffix<br>"cm". Nền<br>xám nhạt. | — |
@@ -24743,6 +27049,8 @@ Tab Hệ thống (chỉ áp dụng TRƯỚC KHI NHẬP):
 <!-- Page 1793 -->
 
 Tab Thủ công:
+
+![Trang 1793 — hình](images/lg-p1793-00-img.png)
 
 |  | Tên thành<br>phần | Control | Loại | Bắt buộc | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -24768,6 +27076,8 @@ Tab Thủ công:
 | 6 | Ảnh đo cột<br>dầu | SC-10<br>File<br>Upload | — | Có | Tương tự STT 5. | "Vui lòng<br>upload ảnh<br>đo cột<br>dầu." |
 
 Chế độ Sensor:
+
+![Trang 1795 — hình](images/lg-p1795-00-img.png)
 
 
 1795
@@ -24803,6 +27113,10 @@ Nguồn dữ liệu cho preview bể: TRƯỚC = tab Hệ thống SAU = tab Th�
 |  | Tên thành<br>phần | Control | Loại | Bắt<br>buộc | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 1797 — hình](images/lg-p1797-00-img.png)
+
+![Trang 1797 — hình](images/lg-p1797-01-img.png)
+
 1797
 
 <!-- Page 1798 -->
@@ -24814,6 +27128,9 @@ Nguồn dữ liệu cho preview bể: TRƯỚC = tab Hệ thống SAU = tab Th�
 | 3 | Số điện<br>thoại | Input | Text | Có | Placeholder "VD: 032 894<br>9323". Validate format SĐT<br>(Web Common 2.8). | "Vui lòng<br>nhập thông<br>tin này!" ·<br>"SĐT không<br>đúng định<br>dạng." |
 | 4 | Số căn<br>cước công<br>dân<br>(CCCD) | Input | Text | Có | Placeholder "12 chữ số".<br>Chỉ cho nhập số, đúng 12<br>ký tự. | "Vui lòng<br>nhập thông<br>tin này!" ·<br>"CCCD phải đủ<br>12 chữ số." |
 3.3.5 Cột phải — Bể dầu (realtime preview)
+
+![Trang 1798 — hình](images/lg-p1798-00-img.png)
+
 1798
 
 <!-- Page 1799 -->
@@ -24825,6 +27142,8 @@ Nguồn dữ liệu cho preview bể: TRƯỚC = tab Hệ thống SAU = tab Th�
 | 3 | Legend | ■ Trước khi nhập · □ Sau khi nhập |
 
 3.6 Cột phải — Thông tin khác
+
+![Trang 1799 — hình](images/lg-p1799-00-img.png)
 
 |  | Tên thành<br>phần | Control | Loại | Bắt<br>buộc | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -24840,6 +27159,9 @@ Nguồn dữ liệu cho preview bể: TRƯỚC = tab Hệ thống SAU = tab Th�
 | 3 | Ghi chú | Textarea | Text | Không | Max 1000 ký tự (Web<br>Common 2.1).<br>Counter góc dưới phải. | — |
 
 3.4 Popup Ký biên bản
+
+![Trang 1800 — hình](images/lg-p1800-00-img.png)
+
 Xuất hiện tự động sau khi hệ thống tạo phiếu thành công. Overlay modal trung tâm màn hình
 (~600px).
 
@@ -24894,7 +27216,12 @@ SC-03. Tap Huỷ/X → huỷ toàn bộ, phiếu không được tạo. (Tương
 <!-- Page 1803 -->
 
 3.1 Màn hình Tạo mới phiếu cấp dầu
+
+![Trang 1803 — mockup màn hình](images/lg-p1803-00-screen.png)
+
 3.1 Header & Stepper
+
+![Trang 1803 — mockup màn hình](images/lg-p1803-01-screen.png)
 
 | Thành phần | Mô tả |
 | --- | --- |
@@ -24910,6 +27237,10 @@ SC-03. Tap Huỷ/X → huỷ toàn bộ, phiếu không được tạo. (Tương
 | Buttons | Giống UC12.02.03: Huỷ · Lưu nháp · Tạo mới. |
 
 3.3.2 Section Thông tin phương tiện
+
+![Trang 1804 — mockup màn hình](images/lg-p1804-00-screen.png)
+
+![Trang 1804 — mockup màn hình](images/lg-p1804-01-screen.png)
 
 |  | Tên thành<br>phần | Contr<br>ol | Loại | Bắt<br>buộc | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -24927,6 +27258,9 @@ SC-03. Tap Huỷ/X → huỷ toàn bộ, phiếu không được tạo. (Tương
 | 2 | Mô tả chi tiết | Texta<br>rea | Text | Khôn<br>g | Placeholder "Thêm mô tả chi tiết về<br>lý do nhập dầu từ phương tiện...".<br>Max 1000 ký tự. | — |
 
 3.3.4 Section Đo lường cột dầu
+
+![Trang 1805 — mockup màn hình](images/lg-p1805-00-screen.png)
+
 1805
 
 <!-- Page 1806 -->
@@ -24940,6 +27274,10 @@ bể, không đo xe vì xe đo qua chiều cao cột dầu bể trước/sau).
 | --- | --- | --- | --- |
 | Chart | Trục Y | Bars | Cập nhật khi |
 | XE | L | Tồn xe trước (tím đậm) + Tồn xe sau (tím nhạt,<br>tính = Trước − Nhập vào) | Chọn biển số xe |
+
+![Trang 1806 — mockup màn hình](images/lg-p1806-00-screen.png)
+
+![Trang 1806 — mockup màn hình](images/lg-p1806-01-screen.png)
 
 1806
 
@@ -25232,6 +27570,10 @@ nội dung mới (không đóng/mở lại).
 | 3 | Icon Đóng | Icon/Butt<br>on | Icon ✕.<br>Click → đóng Side Panel. |
 | 4 | Mã phiếu | Label | "CD-XXXX-XXXX".<br>Font regular, xám.<br>Chỉ hiển thị sau phê duyệt; trước đó ẩn. |
 
+![Trang 1821 — mockup màn hình](images/lg-p1821-00-screen.png)
+
+![Trang 1821 — mockup màn hình](images/lg-p1821-01-screen.png)
+
 1821
 
 <!-- Page 1822 -->
@@ -25242,6 +27584,11 @@ nội dung mới (không đóng/mở lại).
 | 6 | Trạng thái | Label +<br>Dot | "● [Nhãn trạng thái]".<br>Màu dot theo trạng thái. |
 
 3.2 Hero card
+
+![Trang 1822 — mockup màn hình](images/lg-p1822-00-screen.png)
+
+![Trang 1822 — mockup màn hình](images/lg-p1822-01-screen.png)
+
 Full-width, màu nền theo loại dGas. Cấu trúc:
 
 | Cột 1 | Cột 2 |
@@ -25454,9 +27801,16 @@ Click Chốt công nợ mới → mở modal UC12.05.03.
 Click Ghi nhận TT trên kỳ chốt → mở modal UC12.05.04.
 3. Mô tả màn hình
 3.1 Màn hình Tổng quan thanh toán trả sau
+
+![Trang 1832 — mockup màn hình](images/lg-p1832-00-screen.png)
+
 1832
 
 <!-- Page 1833 -->
+
+![Trang 1833 — mockup màn hình](images/lg-p1833-00-screen.png)
+
+![Trang 1833 — mockup màn hình](images/lg-p1833-01-screen.png)
 
 1833
 
@@ -25466,6 +27820,9 @@ Click Ghi nhận TT trên kỳ chốt → mở modal UC12.05.04.
 | --- | --- | --- | --- | --- | --- | --- |
 
 Header toolbar
+
+![Trang 1834 — mockup màn hình](images/lg-p1834-00-screen.png)
+
 1834
 
 <!-- Page 1835 -->
@@ -25487,7 +27844,12 @@ Header toolbar
 | Section Tổng quan công nợ — Chưa chọn NCC |  |  |  |  |  |  |
 | Empty<br>state | — | — | — | — | Illustration + "Chưa chọn nhà<br>cung cấp!" + subtext "Vui lòng<br>chọn nhà cung cấp để xem<br>bảng kê chi phí trả sau chi tiết!" | — |
 
+![Trang 1836 — mockup màn hình](images/lg-p1836-00-screen.png)
+
 Section Tổng quan công nợ — NCC không có cọc (Nhánh A)
+
+![Trang 1836 — mockup màn hình](images/lg-p1836-01-screen.png)
+
 1836
 
 <!-- Page 1837 -->
@@ -25500,6 +27862,10 @@ Section Tổng quan công nợ — NCC không có cọc (Nhánh A)
 | Section Tổng quan công nợ — NCC có cọc (Nhánh B) |  |  |  |  |  |  |
 | Thanh<br>progress<br>cọc | — | — | — | — | Layout 2 đầu: Đã dùng (trái,<br>xanh lá hoặc đen nếu quá<br>ngưỡng) / Còn lại (xám) hoặc<br>Quá (phải, đỏ).<br>Thanh màu xanh lá khi < 95%<br>tổng cọc, màu đỏ khi ≥ 95%.<br>Bên dưới thanh: "X% tổng cọc"<br>(trái) · "[Tổng cọc] đ tổng" (giữa)<br>· "X%" (phải). | — |
 
+![Trang 1837 — mockup màn hình](images/lg-p1837-00-screen.png)
+
+![Trang 1837 — mockup màn hình](images/lg-p1837-01-screen.png)
+
 1837
 
 <!-- Page 1838 -->
@@ -25510,6 +27876,8 @@ Section Tổng quan công nợ — NCC không có cọc (Nhánh A)
 | Section Bảng công nợ chi tiết:<br>Hiển thị tháng năm theo thứ tự mới nhất → cũ nhất.<br>Chỉ hiển thị các thẻ đã qua hoặc đang xảy ra.<br>Ví dụ: Đang tháng 4, hiển thị các thẻ Tháng 4-3-2-1, không hiển thị các tháng còn lại. |  |  |  |  |  |  |
 | Hàng<br>Tháng<br>(collapsed) | — | — | — | — | Hiển thị: Tháng MM/YYYY +<br>Badge trạng thái tháng + Tổng<br>công nợ trong tháng + Icon > .<br>Click → expand xem kỳ chốt<br>trong tháng (UC12.05.02).<br>Tháng hiện tại tự động expand<br>mặc định. | — |
 | Hàng<br>Tháng<br>(expanded) | — | — | — | — | Hiển thị icon ∨ .<br>Bên trong: danh sách kỳ chốt<br>của tháng đó. | — |
+
+![Trang 1838 — mockup màn hình](images/lg-p1838-00-screen.png)
 
 1838
 
@@ -25549,6 +27917,11 @@ luồng Mua dầu, hoặc màn chi tiết phiếu cấp dầu với luồng Cấ
 
 3. Mô tả màn hình
 3.1 Kỳ chốt — Chưa chốt
+
+![Trang 1840 — mockup màn hình](images/lg-p1840-00-screen.png)
+
+![Trang 1840 — mockup màn hình](images/lg-p1840-01-screen.png)
+
 1840
 
 <!-- Page 1841 -->
@@ -25587,11 +27960,20 @@ luồng Mua dầu, hoặc màn chi tiết phiếu cấp dầu với luồng Cấ
 | Thành tiền | Colum<br>n | — | — | — | Hiển thị thành tiền sau thuế<br>của phiếu cấp dầu, căn<br>phải, chữ đậm. |  |
 
 3.2 Kỳ chốt — Đã chốt (mọi trạng thái trừ Chưa chốt)
+
+![Trang 1843 — mockup màn hình](images/lg-p1843-00-screen.png)
+
+![Trang 1843 — mockup màn hình](images/lg-p1843-01-screen.png)
+
 1843
 
 <!-- Page 1844 -->
 
 State thẻ đổi màu theo màu của badge trạng thái.
+
+![Trang 1844 — mockup màn hình](images/lg-p1844-00-screen.png)
+
+![Trang 1844 — mockup màn hình](images/lg-p1844-01-screen.png)
 
 
 1844
@@ -25685,6 +28067,8 @@ Modal trung tâm màn hình, dùng chung cho cả chế độ Tạo mới và Ch
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Tiêu đề<br>modal | Label | — | — | "Chốt<br>công<br>nợ<br>mới" /<br>"Chỉn<br>h sửa<br>kỳ<br>chốt<br>công<br>nợ" | Button ✕ góc phải đóng<br>modal. | — |
 
+![Trang 1850 — mockup màn hình](images/lg-p1850-00-screen.png)
+
 1850
 
 <!-- Page 1851 -->
@@ -25694,6 +28078,8 @@ Modal trung tâm màn hình, dùng chung cho cả chế độ Tạo mới và Ch
 | 2 | Section Thông tin kỳ chốt |  |  |  |  |  |  |
 | 3 | Ngày bắt<br>đầu | DatePi<br>cker | Date | - | Ngày<br>chốt<br>kỳ<br>trước<br>+ 1 | Không cho phép chọn<br>trước ngày chốt kỳ<br>trước.<br>Disable, không được<br>chỉnh sửa. |  |
 | 4 | Ngày kết<br>thúc | DatePi<br>cker | Date | Có | Ngày<br>hiện<br>tại | Khi thay đổi → reload lại<br>danh sách PO / phiếu<br>cấp dầu theo khoảng<br>thời gian (ngày bắt đầu -<br>ngày kết thúc) + tính lại<br>tổng + tính lại Hạn TT.<br>Không được trước Ngày<br>bắt đầu.<br>Chế độ Chỉnh sửa: điền<br>sẵn. | "Vui lòng chọn<br>ngày kết<br>thúc."<br>"Ngày kết thúc<br>không được<br>trước ngày bắt<br>đầu." |
+
+![Trang 1851 — mockup màn hình](images/lg-p1851-00-screen.png)
 
 1851
 
@@ -25716,6 +28102,8 @@ Modal trung tâm màn hình, dùng chung cho cả chế độ Tạo mới và Ch
 | 1<br>0 | Cột mã PO | Colum<br>n | — | — | — | Hiển thị mã PO. |  |
 | 1<br>1 | Cột giá trị | Colum<br>n | — | — | — | Hiển thị tổng GTTT sau<br>thuế của PO. |  |
 | 1<br>2 | Section Phiếu cấp dầu (luồng Cấp dầu mua ngoài) |  |  |  |  |  |  |
+
+![Trang 1853 — mockup màn hình](images/lg-p1853-00-screen.png)
 
 1853
 
@@ -25743,6 +28131,8 @@ Modal trung tâm màn hình, dùng chung cho cả chế độ Tạo mới và Ch
 | 2<br>3 | Upload<br>bảng kê | — | — | Khôn<br>g | — | Định dạng và tối đa theo<br>SC-10.<br>Chế độ Chỉnh sửa: hiển<br>thị file đã upload, cho<br>phép xoá và upload<br>thêm. | — |
 | 2<br>4 | Footer |  |  |  |  |  |  |
 | 2<br>5 | Button Huỷ | Button | — | — | — | Đóng modal, không lưu. | — |
+
+![Trang 1855 — mockup màn hình](images/lg-p1855-00-screen.png)
 
 1855
 
@@ -25805,6 +28195,9 @@ thành công."
 6. Người dùng click Huỷ → đóng modal, không lưu.
 3. Mô tả màn hình
 3.1 Modal Ghi nhận thanh toán
+
+![Trang 1859 — mockup màn hình](images/lg-p1859-00-screen.png)
+
 Dùng chung cho cả chế độ Tạo mới và Chỉnh sửa.
 
 
@@ -25819,6 +28212,9 @@ Dùng chung cho cả chế độ Tạo mới và Chỉnh sửa.
 | Tổng công<br>nợ kỳ | Label | Numbe<br>r | — | — | Chỉ đọc. | — |
 | Đã thanh<br>toán trước | Label | Numbe<br>r | — | — | Chỉ đọc.<br>Tổng các lần TT trước<br>lần hiện tại.<br>Chế độ Chỉnh sửa:<br>không tính lần đang<br>chỉnh sửa. | — |
 | Còn phải<br>thanh toán | Label | Numbe<br>r | — | — | Chỉ đọc.<br>In đậm. = Tổng CN −<br>Đã TT trước.<br>Chế độ Chỉnh sửa: tính<br>lại sau khi loại trừ lần<br>đang chỉnh sửa. | — |
+
+![Trang 1860 — mockup màn hình](images/lg-p1860-00-screen.png)
+
 Section Thông tin thanh toán
 1860
 
@@ -25861,6 +28257,8 @@ Sub-feature 12.4.2 - Cây dầu mua ngoài
 
 12.04 - Lưu đồ vòng đời trạng thái của cây dầu mua ngoài
 Vòng đời đầy đủ của một bản ghi Cây dầu nội bộ:
+
+![Trang 1866 — hình](images/lg-p1866-00-img.png)
 
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
@@ -26100,6 +28498,8 @@ phân quyền.
 | 2 | Tên cây<br>dầu | Label | Text | — | — | Tiêu đề lớn, VD: "Cây dầu<br>Trạm Cầu Giấy". | — |
 | 3 | Mã bản<br>ghi | Label | Text | — | — | Hiển thị dạng CDN-[Mã<br>NCC]-[2 số] (theo<br>UC00.00.07), màu xám. | — |
 
+![Trang 1876 — mockup màn hình](images/lg-p1876-00-screen.png)
+
 1876
 
 <!-- Page 1877 -->
@@ -26217,6 +28617,9 @@ Nhánh C — Huỷ: Hiển thị Confirm Dialog (SC-03): "Bạn có chắc muố
 nhập sẽ bị mất." Xác nhận → đóng drawer, không lưu.
 3. Mô tả màn hình
 3.1 Drawer Tạo mới cây dầu mua ngoài
+
+![Trang 1885 — lưu đồ hoạt động](images/lg-p1885-00-flow.png)
+
 Drawer slide-in từ phải, chiều rộng ~480px. Nội dung chia 3 section dạng accordion (mặc định
 mở rộng tất cả). Dùng chung cho cả chế độ Tạo mới và Edit.
 1885
@@ -26229,6 +28632,8 @@ mở rộng tất cả). Dùng chung cho cả chế độ Tạo mới và Edit.
 | 2 | Tiêu đề<br>drawer | L<br>a<br>b<br>e<br>l | Text | — | "Tạo<br>mới cây<br>dầu<br>mua<br>ngoài" | Chế độ Edit: đổi thành<br>"Chỉnh sửa cây dầu mua<br>ngoài".<br>Button ✕ góc phải để<br>đóng (tương đương Huỷ). | — |
 | 3 | Section 1 — Thông tin cơ bản |  |  |  |  |  |  |
 | 4 | Tên cây<br>dầu | I<br>n<br>p<br>u<br>t | Title | Có | Placehol<br>der:<br>"Nhập<br>tên cây<br>dầu". | Tên định danh cây dầu<br>trong hệ thống.<br>Title có giới hạn số ký tự<br>theo common. | "Vui lòng nhập<br>tên cây dầu." |
+
+![Trang 1886 — lưu đồ hoạt động](images/lg-p1886-00-flow.png)
 
 1886
 
@@ -26252,6 +28657,8 @@ mở rộng tất cả). Dùng chung cho cả chế độ Tạo mới và Edit.
 | 1<br>1 | Ghi chú | T<br>e<br>x<br>t<br>a<br>r<br>e<br>a | Text | Khôn<br>g | Placehol<br>der:<br>"Nhập<br>thông tin<br>ghi<br>chú...". | Ghi chú nội bộ.<br>Max 1000 ký tự.<br>Hiển thị đếm ký tự góc<br>dưới phải. | — |
 | 1<br>2 | Section 2 — Hạn mức cấp dầu |  |  |  |  |  |  |
 
+![Trang 1888 — lưu đồ hoạt động](images/lg-p1888-00-flow.png)
+
 1888
 
 <!-- Page 1889 -->
@@ -26262,6 +28669,8 @@ mở rộng tất cả). Dùng chung cho cả chế độ Tạo mới và Edit.
 | 1<br>4 | Lượng<br>dầu đã<br>cấp (L) | I<br>n<br>p<br>u<br>t | Num<br>ber | Có | 0 | Lượng dầu đã cấp tính<br>đến thời điểm tạo bản ghi.<br>Chỉ cho phép nhập số<br>dương.<br>Helper text: "Nhập 0 nếu<br>chưa cấp lần nào." | "Vui lòng nhập<br>lượng dầu đã<br>cấp."<br>"Lượng đã cấp<br>không được vượt<br>quá hạn mức." |
 | 1<br>5 | Thanh<br>progress<br>hạn mức | — | — | — | — | Cập nhật realtime khi<br>người dùng nhập STT 9 và<br>10.<br>Phần cam = đã cấp, phần<br>xanh = còn lại.<br>Bên dưới: "X L đã cấp"<br>(cam, trái) và "X L còn lại"<br>(phải).<br>Dòng 2: "X% tổng hạn<br>mức" (trái) và "X% còn<br>lại" (phải).<br>Nếu chưa nhập hạn mức:<br>thanh hiển thị rỗng “—”. | — |
 | 1<br>6 | Section 3 — Loại hợp đồng |  |  |  |  |  |  |
+
+![Trang 1889 — lưu đồ hoạt động](images/lg-p1889-00-flow.png)
 
 1889
 
@@ -26362,6 +28771,8 @@ g. Click + Tạo tài khoản → UC00.01.02.
 3. Mô tả màn hình
 3.1 Tab Nội bộ
 
+![Trang 1896 — lưu đồ trạng thái](images/lg-p1896-00-state.png)
+
 | Tên thành phần | Control | Loại | Bắt<br>buộc | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | Hành động chung |  |  |  |  |  |  |
@@ -26402,6 +28813,8 @@ Vô hiệu hoá: Deactivated.
 <!-- Page 1898 -->
 
 3.2 Tab Đối tác
+
+![Trang 1898 — lưu đồ trạng thái](images/lg-p1898-00-state.png)
 
 | Tên thành<br>phần | Contr<br>ol | Loại | Bắt<br>buộc | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -26476,6 +28889,8 @@ chia site — không có bước chọn chi nhánh gốc. Admin chọn ≥ 1 nh�
 3. Mô tả màn hình
 3.1 Modal Tạo tài khoản — Bước 1: Chọn nhân viên
 
+![Trang 1901 — mockup màn hình](images/lg-p1901-00-screen.png)
+
 
 1901
 
@@ -26493,6 +28908,10 @@ chia site — không có bước chọn chi nhánh gốc. Admin chọn ≥ 1 nh�
 1902
 
 <!-- Page 1903 -->
+
+![Trang 1903 — mockup màn hình](images/lg-p1903-00-screen.png)
+
+![Trang 1903 — mockup màn hình](images/lg-p1903-01-screen.png)
 
 1903
 
@@ -26567,6 +28986,8 @@ Tiêu đề modal: "Tạo tài khoản đối tác" Stepper: 01 Nhà cung cấp 
 | 1 | Tiêu đề<br>modal | Label | — | — | "Tạo<br>tài<br>khoản<br>đối<br>tác" | Stepper 2 bước: 01 Nhà cung<br>cấp (active) → 02 Nhóm<br>quyền. (Xem SC-09) | — |
 | 2 | Label hướng<br>dẫn | Label | — | — | — | "CHỌN NHÀ CUNG CẤP" —<br>chữ hoa, xám nhạt, weight<br>500. | — |
 
+![Trang 1908 — hình](images/lg-p1908-00-img.png)
+
 1908
 
 <!-- Page 1909 -->
@@ -26606,6 +29027,8 @@ Tiêu đề modal: "Chọn nhóm quyền" Stepper: ✅ Nhà cung cấp (done) �
 | --- | --- | --- | --- | --- | --- | --- |
 | Tiêu đề<br>modal | Lab<br>el | — | — | "Ch<br>ọn<br>nhó<br>m<br>quy<br>ền" | Stepper: Bước 1 ✅ xanh (done)<br>→ 02 Nhóm quyền(active). | — |
 | Label hướng<br>dẫn | Lab<br>el | — | — | — | "CHỌN NHÓM QUYỀN" — chữ<br>hoa, xám nhạt. | — |
+
+![Trang 1911 — hình](images/lg-p1911-00-img.png)
 
 1911
 
@@ -26762,6 +29185,9 @@ log · Toast (SC-01): "Đã kích hoạt lại tài khoản."
 8. Click ✕ → đóng panel.
 3. Mô tả màn hình
 3.1 Side Panel — Tài khoản nội bộ
+
+![Trang 1917 — mockup màn hình](images/lg-p1917-00-screen.png)
+
 1917
 
 <!-- Page 1918 -->
@@ -26804,6 +29230,9 @@ log · Toast (SC-01): "Đã kích hoạt lại tài khoản."
 | Button Lưu<br>thay đổi | Butto<br>n | — | — | — | Variant filled, xanh lá,<br>icon ✓.<br>Chỉ enable khi có thay<br>đổi.<br>Xem bước 4 lưu đồ. | — |
 
 3.2 Side Panel — Tài khoản đối tác
+
+![Trang 1920 — mockup màn hình](images/lg-p1920-00-screen.png)
+
 Cấu trúc tương tự tài khoản nội bộ. Các điểm khác biệt:
 Tên thành phần Khác biệt so với Nội bộ
 1920
@@ -26818,6 +29247,9 @@ Tên thành phần Khác biệt so với Nội bộ
 | Thêm nhóm quyền | Click + Thêm nhóm quyền → mở modal 3.3 (chỉ hiển thị nhóm quyền loại<br>Đối tác). |
 
 3.3 Modal Thêm nhóm quyền
+
+![Trang 1921 — mockup màn hình](images/lg-p1921-00-screen.png)
+
 Mở khi click + Thêm nhóm quyền trong site card (nội bộ) hoặc section Quyền truy cập (đối tác).
 
 
@@ -26837,6 +29269,10 @@ Mở khi click + Thêm nhóm quyền trong site card (nội bộ) hoặc section
 <!-- Page 1923 -->
 
 3.4 Modal Cấp thêm quyền truy cập chi nhánh (chỉ tài khoản nội bộ)
+
+![Trang 1923 — mockup màn hình](images/lg-p1923-00-screen.png)
+
+![Trang 1923 — mockup màn hình](images/lg-p1923-01-screen.png)
 
 
 1923
@@ -26931,6 +29367,8 @@ UC13.02.05 chế độ Tạo mới.
 | Button +<br>Tạo mới | Butt<br>on | — | — | — | Click → UC13.02.05 chế độ Tạo mới. | — |
 | Bộ lọc | Butt<br>on | — | Khô<br>ng | — | Mở Filter Drawer (Xem SC-05).<br>Trường lọc: Loại nhóm quyền, Nền tảng<br>truy cập, Người dùng (chọn multiple)<br>Khi có filter active: Badge số điều kiện<br>trên button. |  |
 
+![Trang 1929 — mockup màn hình](images/lg-p1929-00-screen.png)
+
 1929
 
 <!-- Page 1930 -->
@@ -26939,6 +29377,8 @@ UC13.02.05 chế độ Tạo mới.
 | --- | --- | --- | --- | --- | --- | --- |
 | Phân trang | — | — | — | 50<br>bản<br>ghi/t<br>rang | (Xem SC-04).<br>Dropdown: 25 / 50 / 100. |  |
 | Card nhóm<br>quyền | — | — | — | — | Mỗi nhóm quyền 1 card.<br>Hiển thị: Badge loại (NỘI BỘ xanh lá /<br>ĐỐI TÁC cam) + Tên nhóm quyền<br>(bold) + Mô tả nhóm quyền + Platform<br>badges (App / Website) + Avatar stack<br>người dùng + Số người dùng.<br>Click → UC13.02.05 chế độ Edit. | — |
+
+![Trang 1930 — mockup màn hình](images/lg-p1930-00-screen.png)
 
 1930
 
@@ -26974,6 +29414,10 @@ quyền sẽ bị xoá vĩnh viễn." → xoá · Toast.
 
 <!-- Page 1932 -->
 
+![Trang 1932 — mockup màn hình](images/lg-p1932-00-screen.png)
+
+![Trang 1932 — mockup màn hình](images/lg-p1932-01-screen.png)
+
 1932
 
 <!-- Page 1933 -->
@@ -26982,6 +29426,11 @@ Layout full-width modal, 2 cột: trái (~35%) + phải (~65%).
 
 
 Cột trái — Thông tin nhóm quyền
+
+![Trang 1933 — mockup màn hình](images/lg-p1933-00-screen.png)
+
+![Trang 1933 — mockup màn hình](images/lg-p1933-01-screen.png)
+
 1933
 
 <!-- Page 1934 -->
@@ -27014,6 +29463,8 @@ Cột trái — Thông tin nhóm quyền
 <!-- Page 1937 -->
 
 Cột phải — Permission Matrix
+
+![Trang 1937 — mockup màn hình](images/lg-p1937-00-screen.png)
 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -27059,6 +29510,9 @@ Hệ thống flag session → ở request tiếp theo hiển thị popup bắt b
 quyền vừa được cập nhật" + button Tải lại ngay. User không thể tiếp tục
 thao tác cho đến khi reload. Ngoại lệ Suspend/Deactivate/Locked → kick
 ngay lập tức, không qua popup.
+
+![Trang 1941 — hình](images/lg-p1941-00-img.png)
+
 Nếu quyền xem đã on (tính cả vụ đã chọn tới cơ sở), thì mở quyền tạo/duyệt
 như bình thường
 Nếu chưa có quyền xem, thì lúc user bật quyền tạo/duyệt (+/- với chọn cơ
@@ -27137,6 +29591,11 @@ UC02.02.01 - Thay đổi phân quyền chức năng
 
 Ban đầu danh sách quyền chức năng hiện tất cả các quyền ở dưới dạng collapsed. Trong trường
 hợp người dùng chọn đích danh tới từng module, danh sách quyền chức năng mới hiển thị tất cả
+
+![Trang 1945 — mockup màn hình](images/lg-p1945-00-screen.png)
+
+![Trang 1945 — mockup màn hình](images/lg-p1945-01-screen.png)
+
 1945
 
 <!-- Page 1946 -->
@@ -27196,6 +29655,8 @@ và không load lên ở lần quay lại tới (xem như là hành động khô
 | 1<br>1 | Chức năng | Label |  |  | Hiển thị 4 cấp quyền chức<br>năng theo bảng phân quyền.<br>Cấp 1 là Module<br>Cấp 2 là Nhóm chức năng<br>Cấp 3 là Nghiệp vụ<br>Cấp 4 là Chức năng<br>Tương ứng với 4 cấp, danh<br>sách quyền ở giao diện được<br>thể hiện như sau: |  |
 | 1<br>2 | Phân quyền | Toogl<br>e<br>Colu<br>mn |  |  | Hiển thị toogle ON/OFF thể<br>hiện có hay không các quyền<br>chức năng tương ứng. |  |
 
+![Trang 1949 — mockup màn hình](images/lg-p1949-00-screen.png)
+
 1949
 
 <!-- Page 1950 -->
@@ -27205,6 +29666,8 @@ và không load lên ở lần quay lại tới (xem như là hành động khô
 | 1<br>3 |  | Icon |  |  | Cho phép người dùng<br>collapse hoặc expand danh<br>sách quyền con.<br>Trạng thái collapse icon thể<br>hiện:<br>Trạng thái expand icon thể<br>hiện: |  |
 
 3.2. Màn hình Thêm tài khoản
+
+![Trang 1950 — mockup màn hình](images/lg-p1950-00-screen.png)
 
 |  | Control | Loại | Trư<br>ờng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -27218,6 +29681,14 @@ và không load lên ở lần quay lại tới (xem như là hành động khô
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Huỷ | Butto<br>n |  |  | Cho phép người dùng huỷ<br>việc thêm tài khoản mới vào<br>xưởng để phân quyền<br>Hiển thị popup confirm:<br>Xác nhận: Trở về màn Phân<br>quyền<br>Huỷ bỏ: Trở về màn Thêm<br>tài khoản |  |
 | 3 | Đóng | Butto<br>n |  |  | Cho phép người dùng huỷ<br>việc thêm tài khoản mới vào<br>xưởng để phân quyền<br>Hiển thị popup confirm:<br>Xác nhận: Trở về màn Phân<br>quyền<br>Huỷ bỏ: Trở về màn Thêm<br>tài khoản |  |
+
+![Trang 1951 — mockup màn hình](images/lg-p1951-00-screen.png)
+
+![Trang 1951 — mockup màn hình](images/lg-p1951-01-screen.png)
+
+![Trang 1951 — mockup màn hình](images/lg-p1951-00-screen.png)
+
+![Trang 1951 — mockup màn hình](images/lg-p1951-01-screen.png)
 
 1951
 
@@ -27242,6 +29713,8 @@ Feature 02.01 - Quản trị nhân viên
 <!-- Page 1955 -->
 
 02.01 - Lưu đồ trạng thái
+
+![Trang 1955 — lưu đồ trạng thái](images/lg-p1955-00-state.png)
 
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
@@ -27312,6 +29785,9 @@ UC02.01.01 - Xem danh sách nhân viên
 | Điều kiện sau | Hệ thống hiển thị danh sách nhân viên theo đúng miền dữ liệu xưởng<br>được phân quyền. |
 
 2. Lưu đồ hoạt động
+
+![Trang 1960 — lưu đồ hoạt động](images/lg-p1960-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách nhân viên
 1960
@@ -27324,6 +29800,8 @@ UC02.01.01 - Xem danh sách nhân viên
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Chức vụ<br>Phòng ban<br>Trạng thái |  |
 | 3 | Bộ lọc | Sideb<br>ar |  |  | Xem mô tả phần Common<br>Rules<br>Cho phép lọc các cột sau:<br>Chức vụ<br>Phòng ban<br>Trạng thái |  |
 | 4 | Export | Butto<br>n |  |  | Xem mô tả phần Common<br>Rules |  |
+
+![Trang 1961 — mockup màn hình](images/lg-p1961-00-screen.png)
 
 1961
 
@@ -27366,6 +29844,9 @@ UC02.01.02 - Xem thông tin chi tiết nhân viên
 | Điều kiện sau | Hiển thị thông tin chi tiết của nhân viên |
 
 2. Lưu đồ hoạt động
+
+![Trang 1964 — lưu đồ hoạt động](images/lg-p1964-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin nhân viên
 1964
@@ -27375,6 +29856,8 @@ UC02.01.02 - Xem thông tin chi tiết nhân viên
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Avatar | Imag<br>e |  |  | Hiển thị 1 hình ảnh mặc định<br>cho tất cả nhân viên. |  |
+
+![Trang 1965 — mockup màn hình](images/lg-p1965-00-screen.png)
 
 1965
 
@@ -27453,6 +29936,9 @@ UC02.01.03 - Tạo đề xuất cấp mới nhân viên
 | Điều kiện sau | Hệ thống tạo 1 bản ghi nhân viên với trạng thái Yêu cầu cấp mới<br>Hiển thị toast message tạo thành công<br>Hiển thị màn hình Thông tin nhân viên (Xem) |
 
 2. Lưu đồ hoạt động
+
+![Trang 1971 — lưu đồ hoạt động](images/lg-p1971-00-flow.png)
+
 1971
 
 <!-- Page 1972 -->
@@ -27591,6 +30077,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>5 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới nhân viên<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới nhân<br>viên trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi nhân viên mới nào & trở<br>về màn hình Danh sách<br>nhân viên<br>Hủy: trở về màn Tạo mới<br>nhân viên với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 1980 — mockup màn hình](images/lg-p1980-00-screen.png)
+
 | Cột 1 | Cột 2 |
 | --- | --- |
 | Phòng ban | Chức vụ |
@@ -27664,6 +30152,9 @@ không hợp lệ đó.
 | Xưởng | Giám đốc xưởng |
 
 3.1 Màn hình Thông tin nhân viên (xem) - Trạng thái Yêu cầu cấp mới
+
+![Trang 1984 — mockup màn hình](images/lg-p1984-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhân viên, ở đây chỉ mô tả
 thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Button Huỷ đề xuất: Click vào để hiển thị popup Xác nhận huỷ yêu cầu, thực hiện UC Huỷ đề
@@ -27689,12 +30180,17 @@ UC02.01.04 - Huỷ đề xuất cấp mới nhân viên
 | Điều kiện sau | Trạng thái của nhân viên thay đổi từ Yêu cầu cấp mới → Đã huỷ<br>Hiển thị toast message thành công<br>Tắt popup Xác nhận huỷ và hiển thị màn hình Thông tin nhân viên |
 
 2. Lưu đồ hoạt động
+
+![Trang 1985 — lưu đồ hoạt động](images/lg-p1985-00-flow.png)
+
 1985
 
 <!-- Page 1986 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo nhân viên
+
+![Trang 1986 — mockup màn hình](images/lg-p1986-00-screen.png)
 
 
 1986
@@ -27713,6 +30209,9 @@ UC02.01.04 - Huỷ đề xuất cấp mới nhân viên
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>nhân viên.<br>Sau khi huỷ bỏ,<br>Trạng thái nhân viên giữ<br>nguyên: Yêu cầu cấp mới<br>Đóng popup và trở về màn<br>hình Thông tin nhân viên. |  |
 
 3.2 Màn hình Thông tin nhân viên (Xem) - Trạng thái Đã huỷ cấp mới
+
+![Trang 1988 — mockup màn hình](images/lg-p1988-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhân viên, ở đây chỉ mô tả
 hành động chi tiết ở trạng thái Đã huỷ cấp mới (xem đầy đủ các hành động theo từng trạng thái
 ở Lưu đồ trạng thái)
@@ -27748,6 +30247,8 @@ cầu hiện tại (đã bị huỷ) nhưng không sinh ra bản ghi mới mà c
 | --- | --- | --- | --- | --- |
 | trạng thái (từ | Đã huỷ | về | Chờ phê duyệt | ) |
 
+![Trang 1989 — mockup màn hình](images/lg-p1989-00-screen.png)
+
 1989
 
 <!-- Page 1990 -->
@@ -27772,6 +30273,10 @@ UC02.01.05 - Phê duyệt/từ chối yêu cầu tạo mới nhân viên
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 1991 — lưu đồ hoạt động](images/lg-p1991-00-flow.png)
+
+![Trang 1991 — mockup màn hình](images/lg-p1991-01-screen.png)
+
 
 1991
 
@@ -27788,6 +30293,8 @@ UC02.01.05 - Phê duyệt/từ chối yêu cầu tạo mới nhân viên
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới nhân viên.<br>Sau khi xác nhận,<br>Trạng thái của nhân viên<br>thay đổi từ Yêu cầu cấp mới<br>→ Đã từ chối cấp mới<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo nhân viên<br>thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin nhân viên với 2<br>hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới nhân viên này với nội<br>dung:<br>Nhân viên - Yêu cầu cấp mới<br>Yêu cầu cấp mới nhân viên<br>[Tên nhân viên] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin nhân viên của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa huỷ<br>đề xuất trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của xưởng. |
 
+![Trang 1993 — mockup màn hình](images/lg-p1993-00-screen.png)
+
 1993
 
 <!-- Page 1994 -->
@@ -27797,6 +30304,9 @@ UC02.01.05 - Phê duyệt/từ chối yêu cầu tạo mới nhân viên
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo nhân viên.<br>Sau khi huỷ bỏ,<br>Trạng thái nhân viên giữ<br>nguyên: Yêu cầu cấp mới<br>Đóng popup và trở về màn<br>hình Thông tin nhân viên. |  |
 
 3.2 Màn hình Thông tin nhân viên (Xem) - Trạng thái Đã từ chối cấp mới
+
+![Trang 1994 — mockup màn hình](images/lg-p1994-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhân viên, ở đây chỉ mô tả
 hành động chi tiết ở trạng thái Từ chối cấp mới (xem đầy đủ các hành động theo từng trạng thái
 ở Lưu đồ trạng thái)
@@ -27837,6 +30347,10 @@ cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi mới
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 1995 — mockup màn hình](images/lg-p1995-00-screen.png)
+
+![Trang 1995 — mockup màn hình](images/lg-p1995-01-screen.png)
+
 1995
 
 <!-- Page 1996 -->
@@ -27844,6 +30358,8 @@ cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi mới
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới nhân viên.<br>Sau khi xác nhận,<br>Trạng thái của nhân viên<br>thay đổi từ Yêu cầu cấp mới<br>→ Đang hoạt động<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạo<br>nhân viên thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tin nhân viên với<br>hành động (tuỳ theo phân<br>quyền): Tạo yêu cầu xin<br>nghỉ<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới nhân viên này với nội<br>dung:<br>Nhân viên - Yêu cầu cấp mới<br>Yêu cầu cấp mới nhân viên<br>[Tên nhân viên] đã được phê<br>duyệt.<br>Generate ID mới cho nhân<br>viên với quy tắc như sau:<br>Format: NV00000 →<br>NV99999<br>Tăng lần lượt các chữ số<br>như số thứ tự<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin nhân viên của<br>người phê duyệt khi<br>ấn Phê Duyệt sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của xưởng. |  |
+
+![Trang 1996 — mockup màn hình](images/lg-p1996-00-screen.png)
 
 1996
 
@@ -27856,6 +30372,9 @@ cầu hiện tại (đã bị từ chối) nhưng không sinh ra bản ghi mới
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận phê duyệt đề<br>xuất tạo nhân viên.<br>Sau khi huỷ bỏ,<br>Trạng thái nhân viên giữ<br>nguyên: Yêu cầu cấp mới<br>Đóng popup và trở về màn<br>hình Thông tin nhân viên. |  |
 
 3.4 Màn hình Thông tin nhân viên (Xem) - Trạng thái Đang làm việc
+
+![Trang 1997 — mockup màn hình](images/lg-p1997-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhân viên, ở đây chỉ mô tả
 thêm (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Yêu cầu xin nghỉ: Mở màn hình Xác nhận yêu cầu xin nghỉ, thực hiện UC Tạo yêu cầu xin nghỉ
@@ -27891,6 +30410,10 @@ UC02.01.06 - Tạo yêu cầu xin nghỉ nhân viên
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 2000 — lưu đồ hoạt động](images/lg-p2000-00-flow.png)
+
+![Trang 2000 — mockup màn hình](images/lg-p2000-01-screen.png)
+
 2000
 
 <!-- Page 2001 -->
@@ -27912,6 +30435,9 @@ UC02.01.06 - Tạo yêu cầu xin nghỉ nhân viên
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>yêu cầu xin nghỉ.<br>Đóng pop-up và trở về màn<br>hình xem chi tiết nhân viên<br>Trạng thái nhân viên vẫn giữ<br>nguyên: Đang hoạt động |  |
 
 3.2 Màn hình Thông tin nhân viên - Trạng thái Yêu cầu xin nghỉ
+
+![Trang 2002 — mockup màn hình](images/lg-p2002-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhân viên, ở đây chỉ mô tả
 thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Button Huỷ đề xuất: Click vào để hiển thị popup Xác nhận huỷ yêu cầu, thực hiện UC Huỷ đề
@@ -27937,12 +30463,17 @@ UC02.01.07 - Huỷ yêu cầu xin nghỉ nhân viên
 | Điều kiện sau | Trạng thái của nhân viên thay đổi từ Yêu cầu xin nghỉ → Đang hoạt động<br>Hiển thị toast message thành công<br>Đóng popup Xác nhận huỷ và hiển thị màn hình Thông tin nhân viên |
 
 2. Lưu đồ hoạt động
+
+![Trang 2003 — lưu đồ hoạt động](images/lg-p2003-00-flow.png)
+
 2003
 
 <!-- Page 2004 -->
 
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất xin nghỉ
+
+![Trang 2004 — mockup màn hình](images/lg-p2004-00-screen.png)
 
 
 2004
@@ -27961,6 +30492,9 @@ UC02.01.07 - Huỷ yêu cầu xin nghỉ nhân viên
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất tạo<br>nhân viên.<br>Sau khi huỷ bỏ,<br>Trạng thái nhân viên giữ<br>nguyên: Yêu cầu xin nghỉ<br>Đóng popup và trở về màn<br>hình Thông tin nhân viên. |  |
 
 3.2 Màn hình Thông tin nhân viên (Xem) - Trạng thái Đang hoạt động
+
+![Trang 2006 — mockup màn hình](images/lg-p2006-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhân viên, ở đây chỉ mô tả
 thêm (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Yêu cầu xin nghỉ: Mở màn hình Xác nhận yêu cầu xin nghỉ, thực hiện UC Tạo yêu cầu xin nghỉ
@@ -27988,6 +30522,10 @@ UC02.01.08 - Phê duyệt/từ chối yêu cầu xin nghỉ nhân viên
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu xin nghỉ
 
+![Trang 2008 — lưu đồ hoạt động](images/lg-p2008-00-flow.png)
+
+![Trang 2008 — mockup màn hình](images/lg-p2008-01-screen.png)
+
 
 2008
 
@@ -27997,6 +30535,9 @@ UC02.01.08 - Phê duyệt/từ chối yêu cầu xin nghỉ nhân viên
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Lý do từ<br>chối | Textb<br>ox<br>(Short<br>) | Khô<br>ng |  | Cho phép người dùng nhập lý<br>do từ chối yêu cầu xin nghỉ<br>nhân viên. |  |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu xin nghỉ<br>nhân viên.<br>Sau khi xác nhận,<br>Trạng thái của nhân viên<br>thay đổi từ Yêu cầu xin nghỉ<br>→ Đang hoạt động<br>Hiển thị toast message : “Từ<br>chối yêu cầu xin nghỉ thành<br>công”<br>Đóng popup Xác nhận từ<br>chối và hiển thị màn hình<br>Thông tin nhân viên<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu xin<br>nghỉ của nhân viên với nội<br>dung:<br>Nhân viên - Yêu cầu xin nghỉ<br>Yêu cầu xin nghỉ nhân viên<br>[Tên nhân viên] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin nhân viên của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa huỷ<br>đề xuất trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của xưởng. |
+
+![Trang 2009 — mockup màn hình](images/lg-p2009-00-screen.png)
+
 2009
 
 <!-- Page 2010 -->
@@ -28006,10 +30547,16 @@ UC02.01.08 - Phê duyệt/từ chối yêu cầu xin nghỉ nhân viên
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối yêu cầu<br>xin nghỉ nhân viên.<br>Sau khi huỷ bỏ,<br>Trạng thái nhân viên giữ<br>nguyên: Yêu cầu xin nghỉ<br>Đóng popup và trở về màn<br>hình Thông tin nhân viên. |  |
 
 3.2 Màn hình Thông tin nhân viên (Xem) - Trạng thái Đang hoạt động
+
+![Trang 2010 — mockup màn hình](images/lg-p2010-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhân viên, ở đây chỉ mô tả
 thêm (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Yêu cầu xin nghỉ: Mở màn hình Xác nhận yêu cầu xin nghỉ, thực hiện UC Tạo yêu cầu xin nghỉ
 3.3 Màn hình Xác nhận phê duyệt yêu cầu xin nghỉ
+
+![Trang 2010 — mockup màn hình](images/lg-p2010-01-screen.png)
+
 2010
 
 <!-- Page 2011 -->
@@ -28017,6 +30564,8 @@ Yêu cầu xin nghỉ: Mở màn hình Xác nhận yêu cầu xin nghỉ, thực
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới nhân viên.<br>Sau khi xác nhận,<br>Trạng thái của nhân viên<br>thay đổi từ Yêu cầu xin nghỉ<br>→ Đã nghỉ việc<br>Hiển thị toast message :<br>“Phê duyệt yêu cầu xin nghỉ<br>thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tin nhân viên<br>Gửi yêu cầu/thông báo qua<br>ERP Delta để request<br>deactivate tài khoản<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới nhân viên với nội dung:<br>Nhân viên - Yêu cầu xin nghỉ<br>Yêu cầu xin nghỉ của nhân<br>viên [Tên nhân viên] đã được<br>phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã phê duyệt yêu cầu xin nghỉ | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin nhân viên của<br>người phê duyệt khi<br>ấn Phê Duyệt sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của xưởng. |
+
+![Trang 2011 — mockup màn hình](images/lg-p2011-00-screen.png)
 
 2011
 
@@ -28027,6 +30576,9 @@ Yêu cầu xin nghỉ: Mở màn hình Xác nhận yêu cầu xin nghỉ, thực
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận phê duyệt yêu<br>cầu xin nghỉ nhân viên.<br>Sau khi huỷ bỏ,<br>Trạng thái nhân viên giữ<br>nguyên: Yêu cầu xin nghỉ<br>Đóng popup và trở về màn<br>hình Thông tin nhân viên. |  |
 
 3.4 Màn hình Thông tin nhân viên (Xem) - Trạng thái Đã nghỉ việc
+
+![Trang 2012 — mockup màn hình](images/lg-p2012-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết nhân viên, ở đây không có
 hành động gì thêm (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái)
 2012
@@ -28169,6 +30721,9 @@ nhật
 | Điều kiện sau | Hệ thống hiển thị danh sách các phương tiện Delta thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 2025 — lưu đồ hoạt động](images/lg-p2025-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách phương tiện Delta
 2025
@@ -28179,6 +30734,8 @@ nhật
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng |  |
 | 2 | Filter by<br>keywords | Searc<br>h box |  |  | Theo common rules. |  |
+
+![Trang 2026 — mockup màn hình](images/lg-p2026-00-screen.png)
 
 2026
 
@@ -28276,6 +30833,8 @@ Click vào bản ghi → mở UC04.00.02.
 | 1 | Hành động chung |  |  |  |  |  |  |
 | 2 | Ô tìm kiếm | Input | Text | Khôn<br>g | — | Tìm theo theo tất cả<br>trường thông tin (trừ<br>trạng thái).<br>Realtime debounce<br>300ms. | — |
 
+![Trang 2033 — mockup màn hình](images/lg-p2033-00-screen.png)
+
 2033
 
 <!-- Page 2034 -->
@@ -28308,6 +30867,8 @@ Click vào bản ghi → mở UC04.00.02.
 | 1<br>2 | Chi nhánh<br>sở hữu | Colu<br>mn | Text | — | — | Tên chi nhánh sở hữu<br>phương tiện. | — |
 | 1<br>3 | Chi nhánh<br>khai thác | Colu<br>mn | Text | — | — | Tên chi nhánh đang khai<br>thác phương tiện. | — |
 | 1<br>4 | Lái xe 1 | Colu<br>mn | Text | — | — | Avatar chữ cái + Tên lái<br>xe + Mã NV (dòng 2,<br>xám). | — |
+
+![Trang 2036 — mockup màn hình](images/lg-p2036-00-screen.png)
 
 2036
 
@@ -28370,6 +30931,9 @@ Thời hạn phù hiệu xe
 → Ghi nhận hoàn thành hoạt động nhắc lịch cố định tương ứng với các trường trên, trong đó:
 Lần cuối thực hiện = ngày cập nhật/phê duyệt cập nhật thông tin phương tiện Delta
 Ngày kế tiếp = giá trị trường thông tin được cập nhật tương ứng.
+
+![Trang 2040 — mockup màn hình](images/lg-p2040-00-screen.png)
+
 2040
 
 <!-- Page 2041 -->
@@ -28417,6 +30981,8 @@ Ngày kế tiếp = giá trị trường thông tin được cập nhật tươn
 | 2<br>5 | Số điện<br>thoại | Label |  |  | Hiển thị số điện thoại của<br>nhân viên tương ứng |  |
 | 2<br>6 | Email | Label |  |  | Hiển thị email của nhân viên<br>tương ứng |  |
 
+![Trang 2043 — mockup màn hình](images/lg-p2043-00-screen.png)
+
 2043
 
 <!-- Page 2044 -->
@@ -28426,6 +30992,10 @@ Ngày kế tiếp = giá trị trường thông tin được cập nhật tươn
 | 2<br>7 | [TTC] Thông tin định mức<br>Hiển thị thông tin của lái xe đang tiếp quản phương tiện Delta được chọn.<br>Hiển thị khi chưa có định mức:<br>Hiển thị khi đã có định mức:<br>Trường hợp phương tiện theo tải trọng hàng hoá<br>Trường hợp phương tiện không theo tải trọng hàng hoá |  |  |  |  |  |
 | 2<br>8 | Phân loại<br>khoán định<br>mức nhiên<br>liệu | Label |  |  | Hiển thị phân loại khoán định<br>mức nhiên liệu của phương<br>tiện.<br>Theo tải trọng hàng hoá<br>Không theo tải trọng hàng<br>hoá |  |
 | 2<br>9 | [TTC] [TTĐM] Bảng khoán định mức: Hiển thị khi phương tiện thuộc phân loại Theo tải trọng<br>hàng hoá |  |  |  |  |  |
+
+![Trang 2044 — mockup màn hình](images/lg-p2044-00-screen.png)
+
+![Trang 2044 — mockup màn hình](images/lg-p2044-01-screen.png)
 
 2044
 
@@ -28557,6 +31127,9 @@ Ngày kế tiếp = giá trị trường thông tin được cập nhật tươn
 | 1<br>0<br>2 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
 
 3.2. Màn hình Sơ đồ lốp của phương tiện
+
+![Trang 2052 — mockup màn hình](images/lg-p2052-00-screen.png)
+
 2052
 
 <!-- Page 2053 -->
@@ -28564,25 +31137,60 @@ Ngày kế tiếp = giá trị trường thông tin được cập nhật tươn
 Hệ thống hiển thị đúng sơ đồ lốp theo từng loại phương tiện và loại xe theo sơ đồ lốp, được định
 nghĩa từng sơ đồ bên dưới:
 Xe tải hai trục (1 dí 1 cầu tải):
+
+![Trang 2053 — mockup màn hình](images/lg-p2053-00-screen.png)
+
+![Trang 2053 — mockup màn hình](images/lg-p2053-01-screen.png)
+
 Xe tải ba trục (2 dí 1 cầu tải):
+
+![Trang 2053 — mockup màn hình](images/lg-p2053-02-screen.png)
+
 2053
 
 <!-- Page 2054 -->
 
 Xe tải ba trục (1 dí 2 cầu tải):
 Xe tải bốn trục (2 dí 2 cầu tải):
+
+![Trang 2054 — mockup màn hình](images/lg-p2054-00-screen.png)
+
+![Trang 2054 — mockup màn hình](images/lg-p2054-01-screen.png)
+
+![Trang 2054 — mockup màn hình](images/lg-p2054-02-screen.png)
+
+![Trang 2054 — mockup màn hình](images/lg-p2054-03-screen.png)
+
 2054
 
 <!-- Page 2055 -->
 
 Xe đầu kéo container 1 cầu sau (1 dí 1 cầu tải):
 Xe đầu kéo container 2 cầu sau (1 dí 2 cầu tải):
+
+![Trang 2055 — mockup màn hình](images/lg-p2055-00-screen.png)
+
+![Trang 2055 — mockup màn hình](images/lg-p2055-01-screen.png)
+
+![Trang 2055 — mockup màn hình](images/lg-p2055-02-screen.png)
+
+![Trang 2055 — mockup màn hình](images/lg-p2055-03-screen.png)
+
 2055
 
 <!-- Page 2056 -->
 
 Sơ mi-rơ mooc 2 giàn (2 cầu tải):
 Sơ mi-rơ mooc 3 giàn (3 cầu tải):
+
+![Trang 2056 — mockup màn hình](images/lg-p2056-00-screen.png)
+
+![Trang 2056 — mockup màn hình](images/lg-p2056-01-screen.png)
+
+![Trang 2056 — mockup màn hình](images/lg-p2056-02-screen.png)
+
+![Trang 2056 — mockup màn hình](images/lg-p2056-03-screen.png)
+
 2056
 
 <!-- Page 2057 -->
@@ -28590,6 +31198,15 @@ Sơ mi-rơ mooc 3 giàn (3 cầu tải):
 Xe nâng:
 Xe nâng điện
 Xe nâng diesel
+
+![Trang 2057 — mockup màn hình](images/lg-p2057-00-screen.png)
+
+![Trang 2057 — mockup màn hình](images/lg-p2057-01-screen.png)
+
+![Trang 2057 — mockup màn hình](images/lg-p2057-02-screen.png)
+
+![Trang 2057 — mockup màn hình](images/lg-p2057-03-screen.png)
+
 2057
 
 <!-- Page 2058 -->
@@ -28601,12 +31218,22 @@ File sơ đồ lốp cụ thể:
 Trong đó,
 Phân loại cấp 1 = Loại phương tiện hiện tại
 Phân loại cấp 2 = Loại xe theo sơ đồ lốp
+
+![Trang 2058 — mockup màn hình](images/lg-p2058-00-screen.png)
+
+![Trang 2058 — mockup màn hình](images/lg-p2058-01-screen.png)
+
+![Trang 2058 — mockup màn hình](images/lg-p2058-02-screen.png)
+
 2058
 
 <!-- Page 2059 -->
 
 Mô tả giao diện:
 Mỗi lốp trên từng sơ đồ đều phải thể hiện UI:
+
+![Trang 2059 — mockup màn hình](images/lg-p2059-00-screen.png)
+
 Icon khi chưa có thông tin của lốp: Hover vào để thể hiện text: “Chưa có thông tin lốp.”
 Icon khi có thông tin của lốp: Hover vào để thể hiện text:
 Serial: [Serial lốp]
@@ -28656,6 +31283,9 @@ Tab Lịch nhắc → UC04.00.02 mục 3.6
 
 3. Mô tả màn hình
 3.1 Tab Thông tin chung
+
+![Trang 2061 — mockup màn hình](images/lg-p2061-00-screen.png)
+
 Tab mặc định khi mở chi tiết phương tiện. Hiển thị toàn bộ thông tin nhận dạng, vận hành, lái xe,
 chi nhánh, phân loại, thông số kỹ thuật và hồ sơ pháp lý.
 
@@ -28681,6 +31311,8 @@ Header màn hình
 
 Section — Đồng hồ vận hành & Nhiên liệu
 
+![Trang 2063 — mockup màn hình](images/lg-p2063-00-screen.png)
+
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | Card Đồng<br>hồ vận hành | Label | Numbe<br>r | — | — | Nền xanh đậm.<br>Hiển thị: Label ĐỒNG HỒ VẬN<br>HÀNH + Số vận hành hiện tại<br>(font lớn, bold) + Thanh<br>progress: BD (baseline) → Tiếp<br>(mốc bảo dưỡng tiếp theo).<br>Số vận hành hiện tại: Lấy theo<br>API bên thứ 3 trả về.<br>Thanh progress:<br>Hiển thị theo lịch nhắc gần<br>nhất tính theo số vận hành<br>(đơn vị: km hoặc ngày)<br>Luôn max (điểm đầu: lần<br>cuối thực hiện lịch nhắc,<br>điểm cuối: số vận hành tiếp<br>theo cần thực hiện lịch<br>nhắc)<br>BE check thêm tài liệu của<br>Delta (đã có) | — |
@@ -28698,6 +31330,9 @@ Section — Đồng hồ vận hành & Nhiên liệu
 | Hãng sản<br>xuất | Label | Text | — | — | VD: "Yamaha". | — |
 
 Section — Lái xe phụ trách
+
+![Trang 2064 — mockup màn hình](images/lg-p2064-00-screen.png)
+
 2064
 
 <!-- Page 2065 -->
@@ -28710,11 +31345,15 @@ Section — Lái xe phụ trách
 | Chi nhánh<br>sở hữu | Label | — | — | — | Card: Avatar chữ cái + Tên chi<br>nhánh + SĐT + Tên người đại<br>diện + icon → navigate trang<br>chi tiết chi nhánh. | — |
 | Chi nhánh<br>khai thác | Label | — | — | — | Card tương tự Chi nhánh sở<br>hữu.<br>Lấy theo | — |
 
+![Trang 2065 — mockup màn hình](images/lg-p2065-00-screen.png)
+
 2065
 
 <!-- Page 2066 -->
 
 Section — Phân loại & Danh mục
+
+![Trang 2066 — mockup màn hình](images/lg-p2066-00-screen.png)
 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -28725,6 +31364,9 @@ Section — Phân loại & Danh mục
 | Sơ đồ lốp | Label | Text | — | — | VD: "4T - dưới 10T".<br>Hiển thị loại xe theo sơ đồ lốp<br>của phương tiện | — |
 
 Section — Thông số kỹ thuật
+
+![Trang 2066 — mockup màn hình](images/lg-p2066-01-screen.png)
+
 2066
 
 <!-- Page 2067 -->
@@ -28739,11 +31381,15 @@ Section — Thông số kỹ thuật
 | Slider ảnh<br>xe | — | — | — | — | Hiển thị ảnh phương tiện dạng<br>carousel. Biển số xe overlay<br>góc trên giữa (nền trắng, font<br>monospace bold). Nút < ><br>chuyển ảnh. Dot indicator bên<br>dưới. Icon expand góc dưới<br>phải để xem fullscreen. | — |
 | Biển kiểm<br>soát | Card | Text | — | — | Hiển thị biển kiểm soát của<br>phương tiện. |  |
 
+![Trang 2067 — mockup màn hình](images/lg-p2067-00-screen.png)
+
 2067
 
 <!-- Page 2068 -->
 
 Vùng phải — Hồ sơ pháp lý & Bảo hiểm
+
+![Trang 2068 — mockup màn hình](images/lg-p2068-00-screen.png)
 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -28754,6 +31400,8 @@ Vùng phải — Hồ sơ pháp lý & Bảo hiểm
 <!-- Page 2069 -->
 
 Vùng phải — Ghi chú
+
+![Trang 2069 — mockup màn hình](images/lg-p2069-00-screen.png)
 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -28770,6 +31418,10 @@ section thông tin · vùng phải (~35%) chứa ảnh xe + hồ sơ pháp lý +
 
 <!-- Page 2071 -->
 
+![Trang 2071 — hình](images/lg-p2071-00-img.png)
+
+![Trang 2071 — hình](images/lg-p2071-01-img.png)
+
 2071
 
 <!-- Page 2072 -->
@@ -28782,6 +31434,8 @@ hàng hóa hoặc theo hệ thống, 2 chế độ view: thẻ (card) và bảng
 | Vùng trái — Mục lục điều hướng |  |  |  |  |  |  |
 | Toggle Phân<br>loại / Hệ<br>thống | Tab | — | — | Phân<br>loại | 2 chế độ điều hướng: Phân<br>loại (theo loại hàng hóa) và<br>Hệ thống (theo hệ thống<br>tổng thành). | — |
 | Mục lục<br>Phân loại | — | — | — | Tất cả | Danh sách nhóm: Tất cả ·<br>Phụ tùng vật tư · Công cụ<br>dụng cụ · Lốp · Ắc quy ·<br>Thiết bị tiện nghi · Hệ thống<br>điện thân xe · Giấy tờ.<br>Mỗi mục hiển thị số lượng<br>bên phải.<br>Click → filter vùng main<br>theo nhóm đó. | — |
+
+![Trang 2072 — hình](images/lg-p2072-00-img.png)
 
 2072
 
@@ -28796,6 +31450,8 @@ hàng hóa hoặc theo hệ thống, 2 chế độ view: thẻ (card) và bảng
 <!-- Page 2074 -->
 
 Vùng main — Danh sách hàng hóa
+
+![Trang 2074 — hình](images/lg-p2074-00-img.png)
 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -28813,6 +31469,10 @@ Vùng main — Danh sách hàng hóa
 | Chế độ Card — Item hàng hóa<br>Card hàng hóa (thu gọn)<br>Card hàng hóa (mở rộng) |  |  |  |  |  |  |
 | Card hàng<br>hóa (thu<br>gọn) | — | — | — | — | Hiển thị: Icon loại (màu nền<br>theo loại) + Tên hàng hóa<br>(bold) + Mã danh mục + Số<br>lượng + Đơn vị tính + Link<br>Xem serial (nếu có quản lý<br>serial).<br>Hiển thị thêm 1 số trường<br>phụ của danh mục theo<br>hàng hoá, cụ thể sẽ được<br>đặc tả thêm ở bảng dưới<br>Click vào card → expand<br>xem thêm thông tin danh<br>mục (phần còn lại). | — |
 
+![Trang 2075 — hình](images/lg-p2075-00-img.png)
+
+![Trang 2075 — hình](images/lg-p2075-01-img.png)
+
 2075
 
 <!-- Page 2076 -->
@@ -28823,7 +31483,12 @@ Vùng main — Danh sách hàng hóa
 | Link Xem<br>serial | Butto<br>n | — | — | — | Chỉ hiển thị với hàng hóa có<br>quản lý serial.<br>Click → mở Drawer xem<br>danh sách serial (mục 3.2.1). | — |
 | Xem sơ đồ<br>lốp | Butto<br>n | — | — | — | Chỉ hiển thị ở section của<br>lốp.<br>Cho phép ấn vào để mở<br>popup xem sơ đồ lốp hiện<br>tại.<br>Nằm dưới thẻ cuối cùng của<br>section lốp. |  |
 
+![Trang 2076 — hình](images/lg-p2076-00-img.png)
+
 Chế độ Bảng — Item hàng hóa
+
+![Trang 2076 — hình](images/lg-p2076-01-img.png)
+
 2076
 
 <!-- Page 2077 -->
@@ -28833,6 +31498,8 @@ Chế độ Bảng — Item hàng hóa
 | Bảng danh<br>sách | Table | — | — | — | Cột: Follow theo bảng đặc tả<br>bên dưới tuỳ theo loại hàng<br>hoá.<br>Freeze 2 cột đầu tiên và<br>cuối cùng.<br>Mỗi nhóm là 1 section bảng<br>riêng với header nhóm.<br>Link Xem serial → ở cột<br>cuối. | — |
 | Icon serial | Colu<br>mn | Icon | — | — | Hiển thị icon thể hiện việc<br>có quản lý serial của hàng<br>hoá hay không (lấy theo<br>danh mục)<br>: có quản lý serial<br>: không quản lý serial |  |
 | Xem sơ đồ<br>lốp | Butto<br>n | — | — | — | Chỉ hiển thị ở section của<br>lốp.<br>Cho phép ấn vào để mở<br>popup xem sơ đồ lốp hiện<br>tại.<br>Nằm dưới bảng danh sách<br>lốp. |  |
+
+![Trang 2077 — hình](images/lg-p2077-00-img.png)
 
 Phân chia hiển thị trường thông tin con của hàng hoá (hiển thị phụ bên ngoài và trong expand)
 
@@ -28859,6 +31526,8 @@ Phân chia hiển thị trường thông tin con của hàng hoá (hiển thị 
 
 <!-- Page 2079 -->
 
+![Trang 2079 — hình](images/lg-p2079-00-img.png)
+
 2079
 
 <!-- Page 2080 -->
@@ -28872,6 +31541,8 @@ Hiển thị theo thẻ hay bảng tuỳ theo màn hàng hoá đang ở chế đ
 | Tiêu đề<br>drawer | Label | Text | — | — | Tên hàng hóa.<br>VD: "Lốp Bridgestone 315". | — |
 | Mã danh<br>mục | Label | Text | — | — | Dưới tiêu đề. | — |
 
+![Trang 2080 — hình](images/lg-p2080-00-img.png)
+
 2080
 
 <!-- Page 2081 -->
@@ -28882,6 +31553,8 @@ Hiển thị theo thẻ hay bảng tuỳ theo màn hàng hoá đang ở chế đ
 | Phân trang | — | — | — | — | (Xem SC-04) | — |
 | Chế độ xem serial (Card view mode) |  |  |  |  |  |  |
 | Card serial | — | — | — | — | Mỗi serial 1 card.<br>Hiển thị: Icon loại + Mã serial<br>(bold) + Badge tình trạng (Tốt<br>xanh lá / Sắp thay vàng / Cần<br>thay đỏ) + Vị trí lắp (có link →<br>navigate sơ đồ lốp nếu là lốp) +<br>Ngày lắp + Đơn giá.<br>Đối với link xem sơ đồ lốp ứng với<br>từng serial, hệ thống hiển thị như<br>sau:<br>Chỉ giữ nguyên màu đối với serial<br>lốp được chọn xem, vẫn cho<br>phép hover vào xem thêm thông<br>tin.<br>Các lốp còn lại hạ opacity và k<br>thể hover xem thông tin.<br>BE cần check xem ở đây có giữ<br>đc last update k (hay chỉ có<br>thuần 1 màu đen của lốp, expect<br>có các màu khác nữa) | — |
+
+![Trang 2081 — hình](images/lg-p2081-00-img.png)
 
 Chế độ xem serial (List view mode): Tương tự các trường như Card view trừ việc bỏ icon loại.
 3.3 Tab Bàn giao / Thu hồi
@@ -28895,19 +31568,29 @@ Tab hiển thị lái xe đang quản lý phương tiện và toàn bộ lịch 
 | Tên thành<br>phần | Co<br>ntr<br>ol | Loạ<br>i | Bắt<br>buộ<br>c | Giá<br>trị<br>mặ<br>c<br>địn<br>h | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 2082 — hình](images/lg-p2082-00-img.png)
+
 2082
 
 <!-- Page 2083 -->
 
 Vùng trái — Lái xe hiện tại
 Trường hợp chưa bàn giao: Empty state: illustration + "Chưa bàn giao cho lái xe".
+
+![Trang 2083 — hình](images/lg-p2083-00-img.png)
+
 Trường hợp đã bàn giao: Avatar lớn + Tên lái xe (bold) + Mã nhân viên + Điện thoại + Chức vụ +
 Số GPLX + Bàn giao từ (ngày).
+
+![Trang 2083 — hình](images/lg-p2083-01-img.png)
+
 2083
 
 <!-- Page 2084 -->
 
 Vùng phải — Lịch sử bàn giao
+
+![Trang 2084 — hình](images/lg-p2084-00-img.png)
 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -28926,6 +31609,9 @@ Vùng phải — Lịch sử bàn giao
 | Tình trạng<br>hoạt động | Lab<br>el | Text | — | — | Lấy giá tị theo bản ghi thu<br>hồi/bàn giao phương tiện. | — |
 
 3.4 Tab Sửa chữa
+
+![Trang 2085 — hình](images/lg-p2085-00-img.png)
+
 2085
 
 <!-- Page 2086 -->
@@ -28959,12 +31645,18 @@ Dữ liệu cần lấy được lịch sử sửa chữa của phương tiện 
 Tab hiển thị định mức nhiên liệu hiện tại đang áp dụng cho phương tiện và lịch sử thay đổi định
 mức.
 
+![Trang 2088 — hình](images/lg-p2088-00-img.png)
+
 
 2088
 
 <!-- Page 2089 -->
 
 Vùng trái — Thông tin định mức hiện tại
+
+![Trang 2089 — hình](images/lg-p2089-00-img.png)
+
+![Trang 2089 — hình](images/lg-p2089-01-img.png)
 
 | Tên thành<br>phần | Cont<br>rol | Loại | Bắt<br>buộc | Giá<br>trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -28981,6 +31673,9 @@ Vùng trái — Thông tin định mức hiện tại
 | Ghi chú cập<br>nhật | Label | Text | — | — | Dưới bảng: " Cập nhật theo<br>lần xác định gần nhất:<br>DD/MM/YYYY, phương tiện<br>thực hiện định mức [Biển<br>số xe]"*.<br>Font italic, màu xám. | — |
 
 Vùng phải — Lịch sử thực hiện định mức
+
+![Trang 2090 — hình](images/lg-p2090-00-img.png)
+
 2090
 
 <!-- Page 2091 -->
@@ -29007,6 +31702,8 @@ Hiển thị lịch nhắc theo thứ tự quá hạn - hoàn thành.
 | Tên thành<br>phần | Cont<br>rol | Loại | Bắt<br>buộc | Giá<br>trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 2092 — hình](images/lg-p2092-00-img.png)
+
 2092
 
 <!-- Page 2093 -->
@@ -29015,11 +31712,15 @@ Hiển thị lịch nhắc theo thứ tự quá hạn - hoàn thành.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | Thẻ lịch<br>nhắc | Card | — | — | Colla<br>psed | Hiển thị tên lịch nhắc.<br>Hiển thị trạng thái lịch nhắc màu sắc<br>như sau:<br>Chưa thực hiện: đến hạn nhắc lịch<br>(từ [lần cuối thực hiện + khoảng nhắc<br>lịch - dung sai] đến [lần cuối thực<br>hiện + khoảng nhắc lịch]) mà chưa<br>được thực hiện.<br>→ Màu vàng<br>Đã quá hạn: Quá [lần cuối thực hiện<br>+ khoảng nhắc lịch] nhưng chưa thực<br>hiện<br>→ Màu đỏ<br>Đã hoàn thành: Đã thực hiện và đang<br>trong thời gian nhắc lịch<br>→ Màu xanh<br>Chưa đến hạn: Đã thực hiện lần trước<br>và chưa đến hạn nhắc lịch tiếp theo<br>→ Màu xám + thẻ mờ<br>Thể hiện số ngày còn lại bằng badge<br>(trừ trạng thái Đã hoàn thành).<br>Nếu chưa đến hạn → Còn [X] ngày<br>Nếu quá hạn → Quá hạn [X] ngày<br>Các trường thông tin con sẽ tuỳ thuộc<br>vào phân loại lịch nhắc, xem thêm ở<br>dưới.<br>Thẻ có thể expand/collapse.<br>Khi collapse, hiển thị tên lịch nhắc và<br>badge số ngày hết hạn.<br>Khi expand, mở thêm các trường phụ<br>của từng lịch nhắc. |  |  |
 
+![Trang 2093 — hình](images/lg-p2093-00-img.png)
+
 2093
 
 <!-- Page 2094 -->
 
 Lịch nhắc theo thời gian
+
+![Trang 2094 — hình](images/lg-p2094-00-img.png)
 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -29028,6 +31729,8 @@ Lịch nhắc theo thời gian
 |  | Lịch nhắc theo vận hành |  |  |  |  |  |  |  |
 |  | Số kms<br>cuối thực<br>hiện | Label | — | — | — | Hiển thị số kms cuối phương tiện thực<br>hiện hoạt động.<br>Hiển thị đối với phương tiện chạy vận<br>hành theo kms. |  |  |
 |  | Số kms cần<br>thực hiện | Label | — | — | — | Hiển thị số kms cần thực hiện hoạt động<br>của phương tiện.<br>Text đỏ nếu quá hạn.<br>Hiển thị đối với phương tiện chạy vận<br>hành theo kms. |  |  |
+
+![Trang 2094 — hình](images/lg-p2094-01-img.png)
 
 2094
 
@@ -29042,6 +31745,8 @@ Lịch nhắc theo thời gian
 | Lịch nhắc theo hạn thời gian<br>Hạn nhắc lịch lấy theo trường thông tin tương ứng của phương tiện để lấy giá trị cho ngày kế<br>tiếp.<br>Khoảng thời gian nhắc lịch = Ngày kế tiếp - dung sai → Ngày kế tiếp |  |  |  |  |  |  |
 | Lần cuối<br>thực hiện | Label | — | — | — | Hiển thị ngày lần gần nhất thực hiện<br>hoạt động nhắc lịch cố định. |  |
 | Ngày hết<br>hạn | Label | — | — | — | Hiển thị ngày hết hạn tiếp theo của hoạt<br>động nhắc lịch<br>= Ngày giá trị tương ứng của trường<br>thông tin phương tiện Delta.<br>Text đỏ nếu quá hạn. |  |
+
+![Trang 2095 — hình](images/lg-p2095-00-img.png)
 
 2095
 
@@ -29104,6 +31809,8 @@ liệu đã lưu ở bản nháp gần nhất.
 
 <!-- Page 2099 -->
 
+![Trang 2099 — mockup màn hình](images/lg-p2099-00-screen.png)
+
 2099
 
 <!-- Page 2100 -->
@@ -29115,6 +31822,10 @@ liệu đã lưu ở bản nháp gần nhất.
 | 3 | Vùng<br>upload<br>ảnh mới | — | — | Khôn<br>g | — | Dashed border.<br>Label: "Chụp ảnh hoặc<br>tải file lên. JPG, PNG. Tối<br>đa 4 ảnh."<br>(Xem SC-10) | — |
 | 4 | Section — Tình trạng vận hành |  |  |  |  |  |  |
 | 5 | Ngày<br>đưa vào<br>sử dụng | DateP<br>icker | DateTi<br>me | Có | Giá trị<br>trước<br>đó | Cho phép nhập ngày đưa<br>vào sử dụng. | "Vui lòng chọn<br>ngày đưa vào sử<br>dụng." |
+
+![Trang 2100 — mockup màn hình](images/lg-p2100-00-screen.png)
+
+![Trang 2100 — mockup màn hình](images/lg-p2100-01-screen.png)
 
 2100
 
@@ -29128,6 +31839,8 @@ liệu đã lưu ở bản nháp gần nhất.
 | 9 | Section — Lái xe phụ trách |  |  |  |  |  |  |
 | 1<br>0 | Lái xe 1 | Label | — | — | — | Chỉ đọc.<br>Card lái xe hiện tại + note:<br>"Lái xe chính chỉ được<br>thay đổi qua luồng bàn<br>giao/thu hồi phương tiện."<br>Các thông tin của card lái<br>xe:<br>Avatar<br>Họ và tên lái xe<br>SDT lái xe<br>Số GPLX của lái xe<br>Icon xem chi tiết thông<br>tin → mở ra chi tiết<br>nhân viên. | — |
 
+![Trang 2101 — mockup màn hình](images/lg-p2101-00-screen.png)
+
 2101
 
 <!-- Page 2102 -->
@@ -29138,6 +31851,8 @@ liệu đã lưu ở bản nháp gần nhất.
 | 1<br>2 | Section — Chi nhánh |  |  |  |  |  |  |
 | 1<br>3 | Chi<br>nhánh sở<br>hữu | Label | — | — | — | Chỉ đọc.<br>Card chi nhánh hiển thị<br>các thông tin sau:<br>Avatar chi nhánh<br>Tên chi nhánh<br>SĐT chi nhánh<br>Người đại diện<br>Icon xem chi tiết → mở<br>ra màn thông tin chi tiết<br>chi nhánh.<br>Note: “Chi nhánh sở<br>hữu không được phép<br>cập nhật.” | — |
 
+![Trang 2102 — mockup màn hình](images/lg-p2102-00-screen.png)
+
 2102
 
 <!-- Page 2103 -->
@@ -29147,6 +31862,8 @@ liệu đã lưu ở bản nháp gần nhất.
 | 1<br>4 | Chi<br>nhánh<br>khai thác | Label | — | — | — | Chỉ đọc.<br>Card chi nhánh + note:<br>"Chi nhánh khai thác chỉ<br>được thay đổi qua luồng<br>bàn giao phương tiện."<br>Avatar chi nhánh<br>Tên chi nhánh<br>SĐT chi nhánh<br>Người đại diện<br>Icon xem chi tiết → mở<br>ra màn thông tin chi tiết<br>chi nhánh. | — |
 | 1<br>5 | Section — Hồ sơ pháp lý & Bảo hiểm |  |  |  |  |  |  |
 | 1<br>6 | Ngày hết<br>hạn BH<br>trách<br>nhiệm<br>dân sự | DateP<br>icker | DateTi<br>me | Có | Giá trị<br>trước<br>đó | Chọn date từ hôm nay trở<br>đi.<br>→ Sau khi được phê<br>duyệt save thì reset lại<br>lịch nhắc tương ứng theo<br>date mới.<br>Format: DD/MM/YYY. | "Vui lòng chọn<br>ngày hết hạn." |
+
+![Trang 2103 — mockup màn hình](images/lg-p2103-00-screen.png)
 
 2103
 
@@ -29170,6 +31887,8 @@ liệu đã lưu ở bản nháp gần nhất.
 | 2<br>3 | Kiểu vận<br>hành | Select | List | Có | Giá trị<br>trước<br>đó | Danh sách giá trị kiểu vận<br>hành:<br>Dùng chung list với loại<br>phương tiện. | "Vui lòng chọn<br>kiểu vận hành." |
 | 2<br>4 | Tên<br>phương<br>tiện | Select | Text | Có | Giá trị<br>trước<br>đó | Danh sách giá trị tên<br>phương tiện:<br>Xem thêm danh sách các<br>giá trị theo bảng 3.3 | "Vui lòng nhập<br>tên phương<br>tiện." |
 
+![Trang 2105 — mockup màn hình](images/lg-p2105-00-screen.png)
+
 2105
 
 <!-- Page 2106 -->
@@ -29188,6 +31907,8 @@ liệu đã lưu ở bản nháp gần nhất.
 | 2<br>7 | Section — Thông số kỹ thuật |  |  |  |  |  |  |
 | 2<br>8 | Dung<br>tích bình<br>nhiên<br>liệu | Input | Numb<br>er | Có | Giá trị<br>trước<br>đó | Đơn vị L inline bên phải.<br>Chỉ cho phép nhập số<br>dương. | "Vui lòng nhập<br>dung tích bình<br>nhiên liệu." |
 
+![Trang 2107 — mockup màn hình](images/lg-p2107-00-screen.png)
+
 2107
 
 <!-- Page 2108 -->
@@ -29204,6 +31925,8 @@ liệu đã lưu ở bản nháp gần nhất.
 | 3<br>6 | Footer |  |  |  |  |  |  |
 | 3<br>7 | Button<br>Huỷ | Butto<br>n | — | — | — | Confirm Dialog (SC-03)<br>cho hành động Huỷ<br>→ Xác nhận, back về màn<br>trước đó. | — |
 
+![Trang 2108 — mockup màn hình](images/lg-p2108-00-screen.png)
+
 2108
 
 <!-- Page 2109 -->
@@ -29214,6 +31937,8 @@ liệu đã lưu ở bản nháp gần nhất.
 | 3<br>9 | Button<br>Cập nhật | Butto<br>n | — | — | — | Variant filled, xanh lá.<br>Validate → mở modal Lý<br>do cập nhật (3.2). | — |
 
 3.2 Modal Lý do cập nhật
+
+![Trang 2109 — mockup màn hình](images/lg-p2109-00-screen.png)
 
 | Tên thành<br>phần | Contr<br>ol | Loại | Bắt<br>buộc | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -29354,6 +32079,11 @@ thái (thêm/sửa/xoá) đã lưu ở bản nháp gần nhất.
 
 3. Mô tả màn hình
 3.1 Màn hình Cập nhật hàng hóa — Chế độ Edit inline
+
+![Trang 2115 — mockup màn hình](images/lg-p2115-00-screen.png)
+
+![Trang 2115 — mockup màn hình](images/lg-p2115-01-screen.png)
+
 Nếu người dùng thay đổi hàng hoá & thiết bị, các trường thông tin reset về nodata.
 2115
 
@@ -29377,6 +32107,10 @@ Nếu người dùng thay đổi hàng hoá & thiết bị, các trường thôn
 | --- | --- | --- |
 | 8 | Danh sách Hàng hoá & Thiết bị:<br>Lấy các cột thông tin theo loại hàng hoá và & thiêt bị. Xem thêm ở bảng liệt<br>kê các thông tin theo loại hàng hoá & thiết bị.<br>Ở trường mã-tên hàng hoá, thể hiện cả icon serial để biết hàng hoá có quản<br>lý serial hay không.<br>Lưu ý: Các trường thông tin theo danh mục hàng hoá & thiết bị (Loại PT, tên<br>PT, đơn vị tính,…) sẽ bị disable không cho chỉnh sửa.<br>Trường hợp upload file, thể hiện UI như sau:<br>Nếu trống data thì hiển thị button Upload file.<br>Nếu file đã upload, mỗi file hiển thị icon Bin để xoá, nhiều hơn 2 file thì file t3<br>trở đi đưa vào +X. Hover vào +X để hiển thị popover list các file còn lại +<br>button Upload file. | Chưa có thông<br>tin serial<br>→ Báo lỗi<br>tooltip: “Chưa<br>có thông tin<br>serial cho<br>hàng hoá/thiết<br>bị.”<br>Không nhập<br>Trạng thái/ Số<br>lượng/ Đơn giá<br>ước tính<br>→ Báo lỗi<br>tooltip: “Vui<br>lòng điền<br>thông tin này.”<br>Không nhập<br>Tên giấy tờ<br>→ Báo lỗi<br>tooltip: “Vui<br>lòng điền<br>thông tin này.”<br>Thêm mới<br>dòng nhưng<br>bỏ trống tất cả<br>các trường<br>→ Báo all lỗi<br>tooltip: “Vui<br>lòng điền<br>thông tin này.” |
 
+![Trang 2117 — mockup màn hình](images/lg-p2117-00-screen.png)
+
+![Trang 2117 — mockup màn hình](images/lg-p2117-01-screen.png)
+
 2117
 
 <!-- Page 2118 -->
@@ -29391,6 +32125,8 @@ Nếu người dùng thay đổi hàng hoá & thiết bị, các trường thôn
 | 1<br>4 | Button Lưu<br>nháp | Button | — | — | — | Variant outline, đặt giữa<br>Button Huỷ và Button Cập<br>nhật. Hành vi lưu nháp xem<br>UC00.00.01 - Lưu nháp<br>bản ghi tạo mới. | — |
 | 1<br>5 | Button Cập<br>nhật | Button | — | — | — | Variant filled, xanh lá.<br>Validate → mở modal Lý do<br>cập nhật. | — |
 
+![Trang 2118 — mockup màn hình](images/lg-p2118-00-screen.png)
+
 2118
 
 <!-- Page 2119 -->
@@ -29402,6 +32138,9 @@ cầu cập nhật (UC04.00.06).
 Nếu bảng dài, freeze cột Tên (đầu) và Serial (cuối) khi scroll ngang.
 Chỉ view dạng bảng trong chế độ Edit, không chuyển sang card.
 3.2 Side Panel Cập nhật serial hàng hóa
+
+![Trang 2119 — hình](images/lg-p2119-00-img.png)
+
 Mở khi click Xem serial → trong chế độ Edit. Hiển thị bảng serial inline có thể chỉnh sửa.
 
 |  | Tên thành<br>phần | Contr<br>ol | Loại | Bắt<br>buộ<br>c | Giá trị mặc<br>định | Mô tả | Validate |
@@ -29427,6 +32166,10 @@ Mở khi click Xem serial → trong chế độ Edit. Hiển thị bảng serial
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 6 | Ô Tình<br>trạng | Select | — | Có | Placeholder<br>: “Tình<br>trạng” | Dropdown tình trạng (xem<br>danh sách mặc định bên dưới)<br>+ option + Tạo tình trạng<br>mới.<br>Nhập mã serial.<br>Cho phép search tên trạng<br>thái.<br>Nếu không có hiển thị hint<br>text: “Chưa có tình trạng này,<br>Enter để thêm tình trạng mới.”<br>Cho phép enter để tạo mới<br>tình trạng với màu mặc định<br>xám.<br>Các ô tình trạng do người<br>dùng tạo hiển thị thêm icon …<br>cho phép người dùng chỉnh<br>sửa trạng thái.<br>Click … hiển thị popover 3.3. | "Vui<br>lòng<br>chọn<br>tình<br>trạng." |
 | 7 | Button +<br>Thêm<br>Serial | Button | — | Khô<br>ng | — | Dashed border cuối bảng.<br>Click → thêm dòng serial mới. | — |
+
+![Trang 2121 — hình](images/lg-p2121-00-img.png)
+
+![Trang 2121 — hình](images/lg-p2121-01-img.png)
 
 2121
 
@@ -29457,6 +32200,9 @@ quả nghiệp vụ ở xưởng
 PTVT chỉ có (Mới, hỏng, Đã phục hồi) → → 3 trạng thái này fixed do có hệ quả nghiệp vụ ở
 xưởng
 Các hàng hoá còn lại → full list và không có hệ quả nghiệp vụ
+
+![Trang 2123 — hình](images/lg-p2123-00-img.png)
+
 2123
 
 <!-- Page 2124 -->
@@ -29532,6 +32278,10 @@ Yêu cầu cập nhật thông tin định mức của phương tiện Delta mã
 2126
 
 <!-- Page 2127 -->
+
+![Trang 2127 — mockup màn hình](images/lg-p2127-00-screen.png)
+
+![Trang 2127 — mockup màn hình](images/lg-p2127-01-screen.png)
 
 
 2127
@@ -29616,6 +32366,8 @@ Toast (SC-01): "Đã thu hồi yêu cầu cập nhật."
 3. Mô tả màn hình
 3.1 Toast banner cảnh báo (trên tab)
 
+![Trang 2131 — mockup màn hình](images/lg-p2131-00-screen.png)
+
 | Tên thành<br>phần | Control | Loại | Mô tả |
 | --- | --- | --- | --- |
 | Badge đỏ trên<br>tab | Badge | — | Hiển thị trên label tab có yêu cầu đang chờ. Biến mất<br>sau khi phê duyệt/từ chối. |
@@ -29641,6 +32393,8 @@ duyệt chỉ áp dụng cho 2 hành động Phê duyệt/Từ chối trong moda
 | 1 | Tiêu đề | Label | — | "Xem yêu cầu cập nhật".<br>Button ✕ đóng modal. |
 | 2 | Banner Lý do cập<br>nhật | — | — | Nền xanh dương nhạt.<br>Icon 📝 + label LÝ DO CẬP NHẬT + nội dung<br>lý do (italic). |
 
+![Trang 2133 — mockup màn hình](images/lg-p2133-00-screen.png)
+
 2133
 
 <!-- Page 2134 -->
@@ -29656,6 +32410,8 @@ duyệt chỉ áp dụng cho 2 hành động Phê duyệt/Từ chối trong moda
 
 <!-- Page 2135 -->
 
+![Trang 2135 — mockup màn hình](images/lg-p2135-00-screen.png)
+
 2135
 
 <!-- Page 2136 -->
@@ -29664,6 +32420,8 @@ duyệt chỉ áp dụng cho 2 hành động Phê duyệt/Từ chối trong moda
 | --- | --- | --- | --- |
 | Tiêu đề + Banner Lý<br>do | — | — | Tương tự 3.2. |
 | Summary badges | Badge | — | Góc trên phải: + X THÊM (xanh lá) · ✏ X<br>SỬA (vàng) · 🗑 X XOÁ (đỏ).<br>Tổng hợp theo từng loại hàng hóa và tổng<br>thể.<br>Không hiển thị nếu không có thay đổi theo<br>loại đó. |
+
+![Trang 2136 — mockup màn hình](images/lg-p2136-00-screen.png)
 
 2136
 
@@ -29685,6 +32443,8 @@ duyệt chỉ áp dụng cho 2 hành động Phê duyệt/Từ chối trong moda
 | 1 | Tiêu đề +<br>Banner Lý do | — | — | Tương tự 3.2. |
 | 2 | Section Thông<br>tin định mức | — | — | Layout 2 cột giống tab Định mức chế độ xem.<br>Các giá trị thay đổi highlight nền vàng nhạt + border<br>vàng.<br>Giá trị hiển thị = giá trị sau cập nhật.<br>Trong trường hợp thay đổi cả phân loại định mức thì<br>highlight tất cả dữ liệu định mức trong bảng hoặc trường<br>định mức khoán. |
 | 3 | Footer | — | — | Tương tự 3.2. |
+
+![Trang 2138 — hình](images/lg-p2138-00-img.png)
 
 2138
 
@@ -29735,6 +32495,9 @@ bản ghi thay đổi khỏi lịch sử hiển thị toast thành công.
 6. Người dùng đóng panel → quay về màn Chi tiết phương tiện.
 3. Mô tả màn hình
 3.1 Panel Lịch sử thay đổi
+
+![Trang 2140 — mockup màn hình](images/lg-p2140-00-screen.png)
+
 2140
 
 <!-- Page 2141 -->
@@ -29747,6 +32510,8 @@ thức/Từ chối-Thu hồi, và cho phép xem lại toàn bộ dữ liệu ph�
 | Icon<br>trigger | Icon /<br>Button | — | — | — | Góc trên phải màn Chi tiết<br>phương tiện (UC04.00.02). Click<br>→ mở panel này. | — |
 | Tiêu đề<br>panel | Label | Text | — | "Lịch<br>sử<br>thay<br>đổi" | — | — |
 | Tab<br>navigation | Tab | — | — | Chính<br>thức | 2 tab: Chính thức · Từ chối/Thu<br>hồi.<br>Tab active gạch chân xanh lá. | — |
+
+![Trang 2141 — mockup màn hình](images/lg-p2141-00-screen.png)
 
 2141
 
@@ -29773,6 +32538,9 @@ thức/Từ chối-Thu hồi, và cho phép xem lại toàn bộ dữ liệu ph�
 | Sắp xếp | — | — | — | — | Mới nhất hiển thị trên cùng, ở cả<br>2 tab. | — |
 
 3.2 Modal Xem phiên bản cũ
+
+![Trang 2143 — mockup màn hình](images/lg-p2143-00-screen.png)
+
 2143
 
 <!-- Page 2144 -->
@@ -29815,6 +32583,9 @@ UC04.01.01 - Xem lịch sử bàn giao/thu hồi phương tiện
 | Điều kiện sau | Hệ thống hiển thị lịch sử bàn giao thu hồi phương tiện thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 2146 — lưu đồ hoạt động](images/lg-p2146-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Lịch sử bàn giao thu hồi phương tiện
 2146
@@ -29825,6 +32596,8 @@ UC04.01.01 - Xem lịch sử bàn giao/thu hồi phương tiện
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng |  |
 | 2 | Filter by<br>keywords | Searc<br>h box |  |  | Theo common rules. |  |
+
+![Trang 2147 — mockup màn hình](images/lg-p2147-00-screen.png)
 
 2147
 
@@ -29892,6 +32665,8 @@ Sub-feature 01 - Bàn giao phương tiện
 
 04.01 - Lưu đồ trạng thái cho bàn giao phương tiện
 
+![Trang 2154 — lưu đồ trạng thái](images/lg-p2154-00-state.png)
+
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
 | Trạng thái | Thời điểm (Trigger) | Hành động (chưa tính<br>phân quyền) |
@@ -29919,12 +32694,18 @@ Sub-feature 01 - Bàn giao phương tiện
 | Được thay thế bởi | [v2.0] UC04.01.01 - Xem thông tin bàn giao phương tiện |
 
 2. Lưu đồ hoạt động
+
+![Trang 2155 — lưu đồ hoạt động](images/lg-p2155-00-flow.png)
+
 3. Mô tả màn hình
 2155
 
 <!-- Page 2156 -->
 
 3.1 Màn hình Thông tin bàn giao phương tiện
+
+![Trang 2156 — mockup màn hình](images/lg-p2156-00-screen.png)
+
 Full màn hình các thông tin
 2156
 
@@ -29940,6 +32721,8 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | 2 | Mã phiếu<br>BG |  |  |  | Hiển thị mã phiếu bàn giao<br>phương tiện (nếu có) |  |
 | 3 | Trạng thái | Label |  |  | Hiển thị trạng thái hiện tại của<br>phiếu bàn giao phương tiện |  |
 
+![Trang 2157 — mockup màn hình](images/lg-p2157-00-screen.png)
+
 2157
 
 <!-- Page 2158 -->
@@ -29951,6 +32734,8 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | 6 | Thông tin bàn giao |  |  |  |  |  |
 | 7 | [TTBG] Bên bàn giao |  |  |  |  |  |
 | 8 | Chi nhánh | Label |  |  | Hiển thị tên chi nhánh bàn<br>giao phương tiện (chi nhánh<br>sở hữu phương tiện) |  |
+
+![Trang 2158 — mockup màn hình](images/lg-p2158-00-screen.png)
 
 2158
 
@@ -29967,6 +32752,8 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | 1<br>5 | [TTBG] Bên tiếp nhận - trường hợp Lái xe tiếp nhận |  |  |  |  |  |
 | 1<br>6 | Người tiếp<br>nhận | Label |  |  | Hiển thị người tiếp nhận<br>phương tiện |  |
 
+![Trang 2159 — mockup màn hình](images/lg-p2159-00-screen.png)
+
 2159
 
 <!-- Page 2160 -->
@@ -29981,6 +32768,8 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | 2<br>2 | Chức vụ | Label |  |  | Hiển thị chức vụ của người<br>tiếp nhận |  |
 | 2<br>3 |  | Icon |  |  | Cho phép người dùng expand<br>để xem thêm thông tin.<br>Default để collapse, hiển thị<br>các thông tin sau:<br>Khi expand, hiển thị full các<br>thông tin mô tả trên:<br>Icon chuyển trạng thái<br>collapse |  |
 | 2<br>4 | [TTBG] Bên tiếp nhận - trường hợp chi nhánh tiếp nhận |  |  |  |  |  |
+
+![Trang 2160 — mockup màn hình](images/lg-p2160-00-screen.png)
 
 2160
 
@@ -30020,6 +32809,12 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 4<br>1 | Hình ảnh<br>phương tiện | Label |  |  | Hiển thị các hình ảnh của<br>phương tiện tại thời điểm bàn<br>giao ở dạng preview.<br>Cho phép người dùng điều<br>hướng trước sau bằng icon<br>để xem các ảnh khác.<br>Cho phép người dùng ấn vào<br>ảnh hoặc ấn vào icon Phóng<br>to để xem ảnh lớn hơn.<br>Cho phép người dùng tải<br>xuống file ảnh.<br>… ở dưới ảnh được thể hiện<br>như sau:<br>Nếu chỉ có 1,2,3 ảnh thì thể<br>hiện bằng 1,2,3 chấm. Đang<br>hiển thị ảnh nào thì ảnh đó<br>chấm đậm lên.<br>Khi ảnh lớn hơn 3 thì chuyển<br>ảnh và chấm được active thì di<br>chuyển qua lại ở giữa (ảnh<br>dưới): |  |  |
 
+![Trang 2163 — mockup màn hình](images/lg-p2163-00-screen.png)
+
+![Trang 2163 — mockup màn hình](images/lg-p2163-01-screen.png)
+
+![Trang 2163 — mockup màn hình](images/lg-p2163-02-screen.png)
+
 2163
 
 <!-- Page 2164 -->
@@ -30057,6 +32852,8 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 5<br>8 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với bàn giao phương<br>tiện đó theo từng trạng thái<br>của đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>trước đó<br>Huỷ: Quay trở về màn<br>hình Thông tin bàn<br>giao phương tiện<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo<br>mới yêu cầu bàn giao, thực |  |  |
+
+![Trang 2166 — mockup màn hình](images/lg-p2166-00-screen.png)
 
 2166
 
@@ -30114,6 +32911,8 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | 1 | Tên phiếu<br>bàn giao | Label |  |  | Hiển thị tên phiếu bàn giao<br>theo format:<br>Bàn giao phương tiện - [Biển<br>số xe] |  |
 | 2 | Mã phiếu<br>BG |  |  |  | Hiển thị mã phiếu bàn giao<br>phương tiện (nếu có) |  |
 | 3 | Trạng thái | Label |  |  | Hiển thị trạng thái hiện tại của<br>phiếu bàn giao phương tiện |  |
+
+![Trang 2170 — mockup màn hình](images/lg-p2170-00-screen.png)
 
 2170
 
@@ -30238,6 +33037,9 @@ hide icon …
 | 5<br>9 |  | Icon |  |  | Click icon để đóng màn hình,<br>quay lại màn hình Lịch sử bàn<br>giao/thu hồi phương tiện |  |
 
 3.2. Drawer xem serial hàng hóa
+
+![Trang 2179 — mockup màn hình](images/lg-p2179-00-screen.png)
+
 2179
 
 <!-- Page 2180 -->
@@ -30249,6 +33051,8 @@ Hiển thị theo thẻ hay bảng tuỳ theo màn hàng hoá đang ở chế đ
 
 | Tên thành<br>phần | Cont<br>rol | Loại | Bắt<br>buộc | Giá<br>trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
+
+![Trang 2180 — mockup màn hình](images/lg-p2180-00-screen.png)
 
 2180
 
@@ -30268,6 +33072,8 @@ Chế độ xem serial (Card view mode)
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | Card serial | — | — | — | — | Mỗi serial 1 card.<br>Hiển thị: Icon loại + Mã serial<br>(bold) + Badge tình trạng (Tốt<br>xanh lá / Sắp thay vàng / Cần<br>thay đỏ) + Vị trí lắp (có link →<br>navigate sơ đồ lốp nếu là lốp) +<br>Ngày lắp + Đơn giá.<br>Đối với link xem sơ đồ lốp ứng với<br>từng serial, hệ thống hiển thị như<br>sau:<br>Chỉ giữ nguyên màu đối với serial<br>lốp được chọn xem, vẫn cho<br>phép hover vào xem thêm thông<br>tin.<br>Các lốp còn lại hạ opacity và k<br>thể hover xem thông tin.<br>BE cần check xem ở đây có giữ<br>đc last update k (hay chỉ có<br>thuần 1 màu đen của lốp, expect<br>có các màu khác nữa) | — |
+
+![Trang 2182 — mockup màn hình](images/lg-p2182-00-screen.png)
 
 Chế độ xem serial (List view mode): Tương tự các trường như Card view trừ việc bỏ icon loại.
 2182
@@ -30294,6 +33100,11 @@ Chế độ xem serial (List view mode): Tương tự các trường như Card v
 
 3. Mô tả màn hình
 3.1 Màn hình Chọn phương tiện bàn giao
+
+![Trang 2184 — lưu đồ hoạt động](images/lg-p2184-00-flow.png)
+
+![Trang 2184 — mockup màn hình](images/lg-p2184-01-screen.png)
+
 2184
 
 <!-- Page 2185 -->
@@ -30302,6 +33113,8 @@ Chế độ xem serial (List view mode): Tương tự các trường như Card v
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phương tiện<br>bàn giao | Dropd<br>own<br>list | Có |  | Cho phép người dùng chọn<br>biển số xe phương tiện để tạo<br>yêu cầu bàn giao<br>Danh sách hiển thị biển số xe<br>tất cả phương tiện của Delta<br>Cho phép search trong<br>dropdown. | Phương tiện được<br>chọn bàn giao phải<br>đang không được<br>gắn đến lái xe nào.<br>→ Nếu vi phạm, hệ<br>thống báo lỗi:<br>“Phương tiện này<br>đang chưa được thu<br>hồi trở về để bàn<br>giao mới.” |
 | 2 | Bên nhận<br>bàn giao | Dropd<br>own<br>list | Có |  | Cho phép người dùng chọn<br>bên bàn giao<br>Giá trị:<br>Lái xe<br>Chi nhánh<br>Chỉ cho phép chọn 1.<br>→ Ảnh hưởng trường chọn<br>bên dưới: lái xe nhận bàn giao,<br>chi nhánh nhận bàn giao. |  |
+
+![Trang 2185 — mockup màn hình](images/lg-p2185-00-screen.png)
 
 2185
 
@@ -30328,6 +33141,9 @@ Chế độ xem serial (List view mode): Tương tự các trường như Card v
 <!-- Page 2188 -->
 
 Màn hình no data
+
+![Trang 2188 — mockup màn hình](images/lg-p2188-00-screen.png)
+
 2188
 
 <!-- Page 2189 -->
@@ -30339,6 +33155,8 @@ Màn hình có data
 | 1 | Thông tin bàn giao |  |  |  |  |  |
 | 2 | [TTBG] Bên bàn giao |  |  |  |  |  |
 | 3 | Chi nhánh | Label |  |  | Hiển thị tên chi nhánh bàn<br>giao phương tiện |  |
+
+![Trang 2189 — mockup màn hình](images/lg-p2189-00-screen.png)
 
 2189
 
@@ -30406,6 +33224,10 @@ Màn hình có data
 | 3<br>3 | Hình ảnh<br>phương tiện | Uploa<br>d | Có |  | Cho phép người dùng upload<br>file hình ảnh phương tiện tại<br>thời điểm bàn giao lên hệ<br>thống.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được<br>upload, phần mềm hiển thêm<br>thị giao diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
 | 3<br>4 | [TTBG] Thiết bị đi kèm - Tab Thiết bị chung: Hiển thị danh sách các thiết bị chung đi kèm<br>theo phương tiện.<br>Default hiển thị no data:<br>Hiển thị có data: |  |  |  |  |  |
 
+![Trang 2194 — mockup màn hình](images/lg-p2194-00-screen.png)
+
+![Trang 2194 — mockup màn hình](images/lg-p2194-01-screen.png)
+
 2194
 
 <!-- Page 2195 -->
@@ -30418,6 +33240,8 @@ Màn hình có data
 | 3<br>8 | Bỏ | Butto<br>n |  |  | Cho phép người dùng bỏ đi<br>dòng thiết bị tương ứng. |  |
 | 3<br>9 | [TTBG] Thiết bị đi kèm - Tab Thiết bị chi tiết: Hiển thị danh sách các thiết bị chi tiết đi kèm<br>theo phương tiện.<br>Default hiển thị no data<br>Hiển thị có data:<br>Cột Thiết bị, Xóa luôn fixed khi scroll<br>Hiển thị size bảng cho 5 bản ghi. |  |  |  |  |  |
 | 4<br>0 | Thiết bị | Short<br>textb<br>ox | Có |  | Cho phép người dùng nhập<br>tên thiết bị đi kèm. |  |
+
+![Trang 2195 — mockup màn hình](images/lg-p2195-00-screen.png)
 
 2195
 
@@ -30444,6 +33268,10 @@ Màn hình có data
 | 5<br>0 | Phóng to | Butto<br>n |  |  | Cho phép người dùng phóng<br>to danh sách thiết bị.<br>Hệ thống mở màn hình popup<br>Danh sách thiết bị chi tiết |  |
 | 5<br>1 | Import | Butto<br>n |  |  | Thực hiện chức năng common<br>import đối với bảng thiết bị.<br>Không có bước validate dữ<br>liệu (bước 3)<br>→ Giao diện:<br>Sau khi hoản thành import, hệ<br>thống hiển thị các bản ghi<br>được import vào bảng hiện tại:<br>Chi tiết import xem ở<br>Common Rules |  |
 
+![Trang 2197 — mockup màn hình](images/lg-p2197-00-screen.png)
+
+![Trang 2197 — mockup màn hình](images/lg-p2197-01-screen.png)
+
 2197
 
 <!-- Page 2198 -->
@@ -30455,6 +33283,8 @@ Màn hình có data
 | 5<br>4 | [TTBG] Giấy tờ: Hiển thị danh sách các giấy tờ kèm theo phương tiện.<br>Default hiển thị no data:<br>Hiển thị có data: |  |  |  |  |  |
 | 5<br>5 | Giấy tờ | Short<br>textb<br>ox | Có |  | Cho phép người dùng nhập<br>tên giấy tờ kèm theo phương<br>tiện. |  |
 | 5<br>6 | Nội dung | Short<br>textb<br>ox |  |  | Cho phép người dùng nhập<br>nội dung giấy tờ kèm theo<br>phương tiện. |  |
+
+![Trang 2198 — mockup màn hình](images/lg-p2198-00-screen.png)
 
 2198
 
@@ -30482,6 +33312,8 @@ chọn file tiếp theo để tải lên
 | 6<br>2 | Mô tả nhiên<br>liệu | Short<br>textb<br>ox |  |  | Cho phép người dùng nhập<br>mô tả nhiên liệu |  |
 | 6<br>3 | Hành động |  |  |  |  |  |
 
+![Trang 2200 — mockup màn hình](images/lg-p2200-00-screen.png)
+
 2200
 
 <!-- Page 2201 -->
@@ -30504,11 +33336,22 @@ không hợp lệ đó.
 | 6<br>5 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất bàn giao phương tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới bàn giao<br>phương tiện trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Tạo mới<br>bàn giao phương tiện với<br>các dữ liệu đã chọn/nhập. |  |
 | 6<br>6 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất bàn giao phương tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới bàn giao<br>phương tiện trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Tạo mới<br>bàn giao phương tiện với<br>các dữ liệu đã chọn/nhập. |  |
 
+![Trang 2202 — mockup màn hình](images/lg-p2202-00-screen.png)
+
+![Trang 2202 — mockup màn hình](images/lg-p2202-01-screen.png)
+
+![Trang 2202 — mockup màn hình](images/lg-p2202-00-screen.png)
+
+![Trang 2202 — mockup màn hình](images/lg-p2202-01-screen.png)
+
 2202
 
 <!-- Page 2203 -->
 
 3.2 Màn hình Danh sách thiết bị chi tiết
+
+![Trang 2203 — mockup màn hình](images/lg-p2203-00-screen.png)
+
 Hành động tương tự đối với mô tả bên trên.
 Cho phép người dùng ấn vào button Thu nhỏ hoặc ấn ra khỏi popup để trở về màn trước đó.
 3.3 Màn hình Thông tin bàn giao phương tiện (xem) - Trạng thái Chờ phê duyệt
@@ -30525,6 +33368,9 @@ Button Phê duyệt: Click vào để hiển thị popup Xác nhận phê duyệ
 Phê duyệt đề xuất bàn giao phương tiện
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối yêu cầu, thực hiện UC Từ chối
 đề xuất bàn giao phương tiện
+
+![Trang 2204 — mockup màn hình](images/lg-p2204-00-screen.png)
+
 2204
 
 <!-- Page 2205 -->
@@ -30544,6 +33390,9 @@ Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối 
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Chọn phương tiện bàn giao
+
+![Trang 2205 — mockup màn hình](images/lg-p2205-00-screen.png)
+
 2205
 
 <!-- Page 2206 -->
@@ -30584,6 +33433,8 @@ Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối 
 | 3 | Chi nhánh | Label |  |  | Hiển thị tên chi nhánh bàn<br>giao phương tiện |  |
 | 4 | Điện thoại | Label |  |  | Hiển thị số điện thoại của chi<br>nhánh |  |
 | 5 | Địa chỉ | Label |  |  | Hiển thị địa chỉ của chi nhánh |  |
+
+![Trang 2209 — mockup màn hình](images/lg-p2209-00-screen.png)
 
 2209
 
@@ -30733,6 +33584,9 @@ Button Phê duyệt: Click vào để hiển thị popup Xác nhận phê duyệ
 Phê duyệt đề xuất bàn giao phương tiện
 Button Từ chối: Click vào để hiển thị popup Xác nhận từ chối yêu cầu, thực hiện UC Từ chối
 đề xuất bàn giao phương tiện
+
+![Trang 2221 — mockup màn hình](images/lg-p2221-00-screen.png)
+
 2221
 
 <!-- Page 2222 -->
@@ -30757,6 +33611,10 @@ UC04.01.03 - Huỷ đề xuất bàn giao phương tiện
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
 
+![Trang 2223 — lưu đồ hoạt động](images/lg-p2223-00-flow.png)
+
+![Trang 2223 — mockup màn hình](images/lg-p2223-01-screen.png)
+
 
 2223
 
@@ -30774,6 +33632,9 @@ UC04.01.03 - Huỷ đề xuất bàn giao phương tiện
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất bàn<br>giao phương tiện.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin bàn giao<br>phương tiện |  |
 
 3.2 Màn hình Thông tin bàn giao phương tiện (Xem) - Trạng thái Đã huỷ
+
+![Trang 2225 — mockup màn hình](images/lg-p2225-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết bàn giao phương tiện, ở đây
 chỉ mô tả hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái
 ở Lưu đồ trạng thái)
@@ -30788,6 +33649,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử bàn giao/thu hồi phương tiện
 Huỷ: Quay trở về màn hình Thông tin bàn giao phương tiện
+
+![Trang 2226 — mockup màn hình](images/lg-p2226-00-screen.png)
+
 Tạo lại: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu cầu bàn giao, thực hiện UC
 Tạo đề xuất bàn giao phương tiện với các trường lấy thông tin từ yêu cầu hiện tại (đã bị huỷ)
@@ -30821,6 +33685,10 @@ UC04.01.04 - Phê duyệt/Từ chối đề xuất bàn giao phương tiện
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 2228 — lưu đồ hoạt động](images/lg-p2228-00-flow.png)
+
+![Trang 2228 — mockup màn hình](images/lg-p2228-01-screen.png)
+
 
 2228
 
@@ -30837,6 +33705,8 @@ UC04.01.04 - Phê duyệt/Từ chối đề xuất bàn giao phương tiện
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>bàn giao phương tiện.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất bàn giao<br>phương tiện thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin bàn giao phương<br>tiện với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu bàn<br>giao phương tiện này với nội<br>dung:<br>Phương tiện - Yêu cầu bàn<br>giao<br>Yêu cầu bàn giao phương tiện<br>[Biển số phương tiện] đã bị<br>từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu bàn giao<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin bàn giao phương<br>tiện của người phê<br>duyệt khi ấn Từ chối<br>sau khi người khác<br>vừa huỷ đề xuất<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của bàn<br>giao phương tiện. |
 
+![Trang 2230 — mockup màn hình](images/lg-p2230-00-screen.png)
+
 2230
 
 <!-- Page 2231 -->
@@ -30846,6 +33716,9 @@ UC04.01.04 - Phê duyệt/Từ chối đề xuất bàn giao phương tiện
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>bàn giao phương tiện.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin bàn giao<br>phương tiện. |  |
 
 3.2 Màn hình Thông tin bàn giao phương tiện (Xem) - Trạng thái Đã từ chối
+
+![Trang 2231 — mockup màn hình](images/lg-p2231-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết bàn giao phương tiện, ở đây
 chỉ mô tả hành động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng
 thái ở Lưu đồ trạng thái)
@@ -30860,6 +33733,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử bàn giao/thu hồi phương tiện
 Huỷ: Quay trở về màn hình Thông tin bàn giao phương tiện
+
+![Trang 2232 — mockup màn hình](images/lg-p2232-00-screen.png)
+
 Tạo lại: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu cầu bàn giao, thực hiện UC
 Tạo đề xuất bàn giao phương tiện với các trường lấy thông tin từ yêu cầu hiện tại (đã bị huỷ)
@@ -30871,6 +33747,8 @@ Tạo đề xuất bàn giao phương tiện với các trường lấy thông t
 Chờ phê duyệt)
 3.3 Màn hình Xác nhận phê duyệt đề xuất tạo mới
 
+![Trang 2232 — mockup màn hình](images/lg-p2232-01-screen.png)
+
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
@@ -30881,6 +33759,8 @@ Chờ phê duyệt)
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất bàn giao phương tiện.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất bàn giao<br>phương tiện thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinbàn giao phương<br>tiện.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu bàn<br>giao phương tiện này với nội<br>dung:<br>Phương tiện - Yêu cầu bàn<br>giao<br>Yêu cầu bàn giao phương tiện<br>[Biển số phương tiện] đã<br>được phê duyệt.<br>Generate ID mới cho phiếu<br>bàn giao với quy tắc như<br>sau:<br>Format: [Biển<br>số]/BGPT[xx]<br>[ddmmyyyy]<br>Biển số: lấy biển số<br>phương tiện bàn giao<br>xx: Mã bàn giao chạy<br>từ 01 đến 99, đánh số<br>thứ tự tăng dần nếu mà | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinbàn giao phương<br>tiện của người phê<br>duyệt khi ấn Phê<br>Duyệt sau khi người<br>khác vừa huỷ đề<br>xuất trước, hệ thống<br>hiển thị popup thông<br>báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củabàn<br>giao phương tiện. |  |
+
+![Trang 2233 — mockup màn hình](images/lg-p2233-00-screen.png)
 
 2233
 
@@ -30918,6 +33798,9 @@ Button Xuất file: Cho phép người dùng export theo 2 dạng sau: .docx, .p
 File template như sau:
 BIEN BAN BAN …21.docx
 24 Apr 2025, 03:48 PM
+
+![Trang 2235 — mockup màn hình](images/lg-p2235-00-screen.png)
+
 2235
 
 <!-- Page 2236 -->
@@ -30952,6 +33835,11 @@ UC04.01.05 - Ký biên bản bàn giao phương tiện
 
 3. Mô tả màn hình
 3.1 Màn hình ký biên bản bàn giao
+
+![Trang 2238 — lưu đồ hoạt động](images/lg-p2238-00-flow.png)
+
+![Trang 2238 — mockup màn hình](images/lg-p2238-01-screen.png)
+
 2238
 
 <!-- Page 2239 -->
@@ -30961,6 +33849,10 @@ UC04.01.05 - Ký biên bản bàn giao phương tiện
 | 1 | Biển bản<br>bàn giao số |  |  |  |  |  |
 | 2 | Upload biên<br>bản đã ký | Uploa<br>d | Có |  | Cho phép người dùng upload<br>file biên bản đã ký lên lên hệ<br>thống.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được upload,<br>phần mềm hiển thêm thị giao<br>diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
 
+![Trang 2239 — mockup màn hình](images/lg-p2239-00-screen.png)
+
+![Trang 2239 — mockup màn hình](images/lg-p2239-01-screen.png)
+
 2239
 
 <!-- Page 2240 -->
@@ -30968,6 +33860,10 @@ UC04.01.05 - Ký biên bản bàn giao phương tiện
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 3 | Hình ảnh<br>mô tả điểm<br>bất thường | Uploa<br>d |  |  | Cho phép người dùng upload<br>hình ảnh mô tả điểm bất<br>thường lên hệ thống.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được upload,<br>phần mềm hiển thêm thị giao<br>diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
+
+![Trang 2240 — mockup màn hình](images/lg-p2240-00-screen.png)
+
+![Trang 2240 — mockup màn hình](images/lg-p2240-01-screen.png)
 
 2240
 
@@ -30977,6 +33873,14 @@ UC04.01.05 - Ký biên bản bàn giao phương tiện
 | --- | --- | --- | --- | --- | --- | --- |
 | 4 | Đóng |  |  |  | Cho phép người dùng huỷ bỏ<br>ký biên bản bàn giao phương<br>tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ ký biên bản bàn<br>giao phương tiện trước khi<br>huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Ký biên<br>bản bàn giao phương tiện<br>với các dữ liệu đã<br>chọn/nhập. |  |
 | 5 | Huỷ | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>ký biên bản bàn giao phương<br>tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ ký biên bản bàn<br>giao phương tiện trước khi<br>huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Ký biên<br>bản bàn giao phương tiện<br>với các dữ liệu đã<br>chọn/nhập. |  |
+
+![Trang 2241 — mockup màn hình](images/lg-p2241-00-screen.png)
+
+![Trang 2241 — mockup màn hình](images/lg-p2241-01-screen.png)
+
+![Trang 2241 — mockup màn hình](images/lg-p2241-00-screen.png)
+
+![Trang 2241 — mockup màn hình](images/lg-p2241-01-screen.png)
 
 2241
 
@@ -31034,6 +33938,9 @@ File template như sau:
 BIEN BAN BAN …21.docx
 24 Apr 2025, 03:53 PM
 Các trường thay thế được để trong [], hightlight đỏ
+
+![Trang 2244 — mockup màn hình](images/lg-p2244-00-screen.png)
+
 2244
 
 <!-- Page 2245 -->
@@ -31057,6 +33964,8 @@ Sub-feature 02 - Thu hồi phương tiện
 <!-- Page 2247 -->
 
 04.01 - Lưu đồ trạng thái cho thu hồi phương tiện
+
+![Trang 2247 — lưu đồ trạng thái](images/lg-p2247-00-state.png)
 
 | Cột 1 | Cột 2 | Cột 3 |
 | --- | --- | --- |
@@ -31084,6 +33993,9 @@ Sub-feature 02 - Thu hồi phương tiện
 | Điều kiện sau | Hiển thị thông tin chi tiết thu hồi của phương tiện |
 
 2. Lưu đồ hoạt động
+
+![Trang 2248 — lưu đồ hoạt động](images/lg-p2248-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin thu hồi phương tiện
 2248
@@ -31091,6 +34003,9 @@ Sub-feature 02 - Thu hồi phương tiện
 <!-- Page 2249 -->
 
 Hiển thị default (collapse các thông tin)
+
+![Trang 2249 — mockup màn hình](images/lg-p2249-00-screen.png)
+
 2249
 
 <!-- Page 2250 -->
@@ -31103,6 +34018,8 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | 1 | Tên phiếu<br>thu hồi | Label |  |  | Hiển thị tên phiếu thu hồi theo<br>format:<br>Thu hồi phương tiện - [Biển<br>số xe] |  |
 | 2 | Mã phiếu<br>TH |  |  |  | Hiển thị mã phiếu thu hồi<br>phương tiện (nếu có) |  |
 
+![Trang 2250 — mockup màn hình](images/lg-p2250-00-screen.png)
+
 2250
 
 <!-- Page 2251 -->
@@ -31114,6 +34031,8 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | 5 | Thay đổi | Butto<br>n |  |  | Cho phép người dùng thay đổi<br>file biên bản hoặc upload hình<br>ảnh mô tả điểm bất thường.<br>Thực hiện UC Ký biên bản bàn<br>giao với data có sẵn từ trước<br>đó. |  |
 | 6 | Thông tin thu hồi |  |  |  |  |  |
 | 7 | [TTTH] Bên thu hồi |  |  |  |  |  |
+
+![Trang 2251 — mockup màn hình](images/lg-p2251-00-screen.png)
 
 2251
 
@@ -31131,6 +34050,8 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | 1<br>5 | Người hoàn<br>trả | Label |  |  | Hiển thị người hoàn trả<br>phương tiện |  |
 | 1<br>6 | Số CCCD | Label |  |  | Hiển thị số CCCD của người<br>hoàn trả |  |
 
+![Trang 2252 — mockup màn hình](images/lg-p2252-00-screen.png)
+
 2252
 
 <!-- Page 2253 -->
@@ -31144,6 +34065,8 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | 2<br>1 | Chức vụ | Label |  |  | Hiển thị chức vụ của người<br>hoàn trả |  |
 | 2<br>2 |  | Icon |  |  | Cho phép người dùng expand<br>để xem thêm thông tin.<br>Default để collapse, hiển thị<br>các thông tin sau:<br>Khi expand, hiển thị full các<br>thông tin mô tả trên:<br>Icon chuyển trạng thái<br>collapse |  |
 | 2<br>3 | [TTTH] Thông tin khác |  |  |  |  |  |
+
+![Trang 2253 — mockup màn hình](images/lg-p2253-00-screen.png)
 
 2253
 
@@ -31168,6 +34091,12 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 3<br>3 | Hình ảnh<br>phương tiện | Label |  |  | Hiển thị các hình ảnh của<br>phương tiện tại thời điểm bàn<br>giao ở dạng preview.<br>Cho phép người dùng điều<br>hướng trước sau bằng icon<br>để xem các ảnh khác.<br>Cho phép người dùng ấn vào<br>ảnh hoặc ấn vào icon Phóng<br>to để xem ảnh lớn hơn.<br>Cho phép người dùng tải<br>xuống file ảnh.<br>… ở dưới ảnh được thể hiện<br>như sau:<br>Nếu chỉ có 1,2,3 ảnh thì thể<br>hiện bằng 1,2,3 chấm. Đang<br>hiển thị ảnh nào thì ảnh đó<br>chấm đậm lên.<br>Khi ảnh lớn hơn 3 thì chuyển<br>ảnh và chấm được active thì di<br>chuyển qua lại ở giữa (ảnh<br>dưới): |  |
+
+![Trang 2255 — mockup màn hình](images/lg-p2255-00-screen.png)
+
+![Trang 2255 — mockup màn hình](images/lg-p2255-01-screen.png)
+
+![Trang 2255 — mockup màn hình](images/lg-p2255-02-screen.png)
 
 2255
 
@@ -31208,6 +34137,8 @@ màn hình. Khi cuộn xuống có stroke + shadow
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 5<br>1 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với bản ghi đó theo<br>từng trạng thái của đối tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối, hiển thị 2 hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu đã<br>bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá yêu cầu:<br>Hệ thống hiển thị popup<br>Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>trước đó<br>Huỷ: Quay trở về màn<br>hình Thông tin thu hồi<br>phương tiện<br>Tạo yêu cầu mới: Cho phép<br>người dùng tạo lại yêu cầu<br>mới từ thông tin đã bị huỷ.<br>Người dùng chọn tới icon … ><br>Chọn Tạo mới yêu cầu: Hệ<br>thống hiển thị màn hình Tạo<br>mới yêu cầu thu hồi, thực hiện<br>UC Tạo đề xuất thu hồi với |  |  |
 
+![Trang 2258 — mockup màn hình](images/lg-p2258-00-screen.png)
+
 2258
 
 <!-- Page 2259 -->
@@ -31233,6 +34164,9 @@ hide icon …
 | 5<br>6 |  | Icon |  |  | Click icon để đóng màn hình,<br>quay lại màn hình Lịch sử bàn<br>giao/thu hồi phương tiện |  |
 
 3.2 Màn hình Danh sách thiết bị chi tiết
+
+![Trang 2260 — mockup màn hình](images/lg-p2260-00-screen.png)
+
 Độ dài danh sách hiển thị 5 bản ghi của danh sách, nếu hơn thì để scroll
 Cho phép người dùng ấn ra ngoài popup hoặc ấn button Thu nhỏ để trở lại màn hình trước đó.
 2260
@@ -31405,6 +34339,11 @@ Cho phép người dùng ấn ra ngoài popup hoặc ấn button Thu nhỏ để
 3. Mô tả màn hình
 3.1 Màn hình Chọn phương tiện thu hồi
 Màn hình ban đầu
+
+![Trang 2272 — lưu đồ hoạt động](images/lg-p2272-00-flow.png)
+
+![Trang 2272 — mockup màn hình](images/lg-p2272-01-screen.png)
+
 2272
 
 <!-- Page 2273 -->
@@ -31414,6 +34353,8 @@ Màn hình sau khi chọn
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Đối tượng<br>thu hồi | Radio<br>butto<br>n | Có |  | Cho phép người dùng chọn 1<br>trong 2 đối tượng để thực hiện<br>thu hồi phương tiện.<br>Danh sách lựa chọn bao gồm:<br>Phương tiện thu hồi<br>Lái xe hoàn trả<br>Sau khi chọn giá trị, hệ thống<br>hiển thị dropdown tương ứng<br>để chọn giá trị tiếp theo. |  |
+
+![Trang 2273 — mockup màn hình](images/lg-p2273-00-screen.png)
 
 2273
 
@@ -31446,6 +34387,8 @@ giá trị ban đầu từ bản ghi bàn giao phương tiện liền trước c
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Thông tin thu hồi |  |  |  |  |  |
 | 2 | [TTTH] Bên thu hồi |  |  |  |  |  |
+
+![Trang 2276 — mockup màn hình](images/lg-p2276-00-screen.png)
 
 2276
 
@@ -31507,6 +34450,10 @@ giá trị ban đầu từ bản ghi bàn giao phương tiện liền trước c
 | 2<br>6 | Hình ảnh<br>phương tiện | Uploa<br>d | Có |  | Cho phép người dùng upload<br>file hình ảnh phương tiện tại<br>thời điểm thu hồi lên hệ thống.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được<br>upload, phần mềm hiển thêm<br>thị giao diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
 | 2<br>7 | [TTBG] Thiết bị đi kèm - Tab Thiết bị chung: Hiển thị danh sách các thiết bị chung đi kèm<br>theo phương tiện.<br>Default hiển thị no data:<br>Hiển thị có data: |  |  |  |  |  |
 
+![Trang 2281 — mockup màn hình](images/lg-p2281-00-screen.png)
+
+![Trang 2281 — mockup màn hình](images/lg-p2281-01-screen.png)
+
 2281
 
 <!-- Page 2282 -->
@@ -31519,6 +34466,8 @@ giá trị ban đầu từ bản ghi bàn giao phương tiện liền trước c
 | 3<br>1 | Bỏ | Butto<br>n |  |  | Cho phép người dùng bỏ đi<br>dòng thiết bị tương ứng. |  |
 | 3<br>2 | [TTBG] Thiết bị đi kèm - Tab Thiết bị chi tiết: Hiển thị danh sách các thiết bị chi tiết đi kèm<br>theo phương tiện.<br>Default hiển thị no data<br>Hiển thị có data:<br>Cột Thiết bị, Xóa luôn fixed khi scroll<br>Hiển thị size bảng cho 5 bản ghi. |  |  |  |  |  |
 | 3<br>3 | Thiết bị | Short<br>textb<br>ox | Có |  | Cho phép người dùng nhập<br>tên thiết bị đi kèm. |  |
+
+![Trang 2282 — mockup màn hình](images/lg-p2282-00-screen.png)
 
 2282
 
@@ -31545,6 +34494,10 @@ giá trị ban đầu từ bản ghi bàn giao phương tiện liền trước c
 | 4<br>3 | Phóng to | Butto<br>n |  |  | Cho phép người dùng phóng<br>to danh sách thiết bị.<br>Hệ thống mở màn hình popup<br>Danh sách thiết bị chi tiết |  |
 | 4<br>4 | Import | Butto<br>n |  |  | Thực hiện chức năng common<br>import đối với bảng thiết bị.<br>Không có bước validate dữ<br>liệu (bước 3)<br>→ Giao diện:<br>Sau khi hoàn thành import, hệ<br>thống hiển thị các bản ghi<br>được import vào bảng hiện tại:<br>Chi tiết import xem ở<br>Common Rules |  |
 
+![Trang 2284 — mockup màn hình](images/lg-p2284-00-screen.png)
+
+![Trang 2284 — mockup màn hình](images/lg-p2284-01-screen.png)
+
 2284
 
 <!-- Page 2285 -->
@@ -31564,6 +34517,8 @@ giá trị ban đầu từ bản ghi bàn giao phương tiện liền trước c
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 5<br>0 | File giấy tờ | Colu<br>mn |  |  | Cho phép người dùng upload<br>hình ảnh, file giấy tờ lên hệ<br>thống để lưu trữ.<br>By default no data hiển thị:<br>Ấn button Upload file để mở<br>local repo chọn file để tải lên<br>Sau khi upload thành công,<br>hiển thị UI:<br>Người dùng có thể bỏ file<br>upload bằng cách ấn vào nút<br>X.<br>Hiển thị file name của file đầu<br>tiên + số lượng file còn lại<br>được upload lên.<br>Ví dụ có tổng 8 file thì hiển thị<br>số +7<br>Người dùng có thể hover vào<br>để xem các file còn lại<br>được upload:<br>Người dùng có thể chọn<br>button Upload thêm file<br>để mở local repo<br>chọn file tiếp theo để tải lên | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
+
+![Trang 2286 — mockup màn hình](images/lg-p2286-00-screen.png)
 
 2286
 
@@ -31600,11 +34555,22 @@ không hợp lệ đó.
 | 5<br>8 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất thu hồi phương tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới thu hồi<br>phương tiện trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Tạo mới<br>thu hồi phương tiện với các<br>dữ liệu đã chọn/nhập. |  |
 | 5<br>9 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất thu hồi phương tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới thu hồi<br>phương tiện trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Tạo mới<br>thu hồi phương tiện với các<br>dữ liệu đã chọn/nhập. |  |
 
+![Trang 2289 — mockup màn hình](images/lg-p2289-00-screen.png)
+
+![Trang 2289 — mockup màn hình](images/lg-p2289-01-screen.png)
+
+![Trang 2289 — mockup màn hình](images/lg-p2289-00-screen.png)
+
+![Trang 2289 — mockup màn hình](images/lg-p2289-01-screen.png)
+
 2289
 
 <!-- Page 2290 -->
 
 3.1 Màn hình Thông tin thu hồi phương tiện (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 2290 — mockup màn hình](images/lg-p2290-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết thu hồi phương tiện, ở đây chỉ
 mô tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng
 thái):
@@ -31826,6 +34792,10 @@ UC04.01.08 - Huỷ đề xuất thu hồi phương tiện
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
 
+![Trang 2307 — lưu đồ hoạt động](images/lg-p2307-00-flow.png)
+
+![Trang 2307 — mockup màn hình](images/lg-p2307-01-screen.png)
+
 
 2307
 
@@ -31843,6 +34813,9 @@ UC04.01.08 - Huỷ đề xuất thu hồi phương tiện
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất thu<br>hồi phương tiện.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin thu hồi<br>phương tiện |  |
 
 3.2 Màn hình Thông tin thu hồi phương tiện (Xem) - Trạng thái Đã huỷ
+
+![Trang 2309 — mockup màn hình](images/lg-p2309-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết thu hồi phương tiện, ở đây chỉ
 mô tả hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng thái ở
 Lưu đồ trạng thái)
@@ -31857,6 +34830,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử thu hồi/thu hồi phương tiện
 Huỷ: Quay trở về màn hình Thông tin thu hồi phương tiện
+
+![Trang 2310 — mockup màn hình](images/lg-p2310-00-screen.png)
+
 Tạo lại: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu cầu thu hồi, thực hiện UC Tạo
 đề xuất thu hồi phương tiện với các trường lấy thông tin từ yêu cầu hiện tại (đã bị huỷ) nhưng
@@ -31890,6 +34866,10 @@ UC04.01.09 - Phê duyệt/Từ chối đề xuất thu hồi phương tiện
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 2312 — lưu đồ hoạt động](images/lg-p2312-00-flow.png)
+
+![Trang 2312 — mockup màn hình](images/lg-p2312-01-screen.png)
+
 
 2312
 
@@ -31906,6 +34886,8 @@ UC04.01.09 - Phê duyệt/Từ chối đề xuất thu hồi phương tiện
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>thu hồi phương tiện.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất thu hồi phương<br>tiện thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin thu hồi phương<br>tiện với 2 hoạt động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu thu hồi<br>phương tiện này với nội<br>dung:<br>Phương tiện - Yêu cầu thu hồi<br>Yêu cầu thu hồi phương tiện<br>[Biển số phương tiện] đã bị<br>từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu thu hồi<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin thu hồi phương<br>tiện của người phê<br>duyệt khi ấn Từ chối<br>sau khi người khác<br>vừa huỷ đề xuất<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của thu hồi<br>phương tiện. |
 
+![Trang 2314 — mockup màn hình](images/lg-p2314-00-screen.png)
+
 2314
 
 <!-- Page 2315 -->
@@ -31915,6 +34897,9 @@ UC04.01.09 - Phê duyệt/Từ chối đề xuất thu hồi phương tiện
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>thu hồi phương tiện.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin thu hồi<br>phương tiện. |  |
 
 3.2 Màn hình Thông tin thu hồi phương tiện (Xem) - Trạng thái Đã từ chối
+
+![Trang 2315 — mockup màn hình](images/lg-p2315-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết thu hồi phương tiện, ở đây chỉ
 mô tả hành động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái
 ở Lưu đồ trạng thái)
@@ -31929,6 +34914,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử bàn giao/thu hồi phương tiện
 Huỷ: Quay trở về màn hình Thông tin thu hồi phương tiện
+
+![Trang 2316 — mockup màn hình](images/lg-p2316-00-screen.png)
+
 Tạo lại: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu cầu thu hồi, thực hiện UC Tạo
 đề xuất thu hồi phương tiện với các trường lấy thông tin từ yêu cầu hiện tại (đã bị huỷ) nhưng
@@ -31940,6 +34928,8 @@ Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới 
 duyệt)
 3.3 Màn hình Xác nhận phê duyệt đề xuất tạo mới
 
+![Trang 2316 — mockup màn hình](images/lg-p2316-01-screen.png)
+
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
@@ -31950,6 +34940,8 @@ duyệt)
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất thu hồi phương tiện.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất thu hồi<br>phương tiện thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinthu hồi phương<br>tiện.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu thu hồi<br>phương tiện này với nội<br>dung:<br>Phương tiện - Yêu cầu thu hồi<br>Yêu cầu thu hồi phương tiện<br>[Biển số phương tiện] đã<br>được phê duyệt.<br>Generate ID mới cho phiếu<br>thu hồi với quy tắc như sau:<br>Format: [Biển<br>số]/THPT[xx]<br>[ddmmyyyy]<br>Biển số: lấy biển số<br>phương tiện thu hồi<br>xx: Mã thu hồi chạy từ<br>01 đến 99, đánh số thứ<br>tự tăng dần nếu mà có<br>cùng [Biển số] và<br>ddmmyyyy | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinthu hồi phương<br>tiện của người phê<br>duyệt khi ấn Phê<br>Duyệt sau khi người<br>khác vừa huỷ đề<br>xuất trước, hệ thống<br>hiển thị popup thông<br>báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củathu hồi<br>phương tiện. |  |
+
+![Trang 2317 — mockup màn hình](images/lg-p2317-00-screen.png)
 
 2317
 
@@ -31983,6 +34975,9 @@ Button Xuất file: Cho phép người dùng export theo 2 dạng sau: .docx, .p
 File template như sau:
 BIEN BAN THU HOI XE 29H-985.21.docx
 Các trường thay thế được để trong [], hightlight đỏ
+
+![Trang 2319 — mockup màn hình](images/lg-p2319-00-screen.png)
+
 2319
 
 <!-- Page 2320 -->
@@ -32013,6 +35008,11 @@ UC04.01.10 - Ký biên bản thu hồi phương tiện
 
 3. Mô tả màn hình
 3.1 Màn hình ký biên bản thu hồi
+
+![Trang 2322 — lưu đồ hoạt động](images/lg-p2322-00-flow.png)
+
+![Trang 2322 — mockup màn hình](images/lg-p2322-01-screen.png)
+
 2322
 
 <!-- Page 2323 -->
@@ -32022,6 +35022,10 @@ UC04.01.10 - Ký biên bản thu hồi phương tiện
 | 1 | Biển bản<br>thu hồi số |  |  |  |  |  |
 | 2 | Upload biên<br>bản đã ký | Uploa<br>d | Có |  | Cho phép người dùng upload<br>file biên bản đã ký lên lên hệ<br>thống.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được upload,<br>phần mềm hiển thêm thị giao<br>diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
 
+![Trang 2323 — mockup màn hình](images/lg-p2323-00-screen.png)
+
+![Trang 2323 — mockup màn hình](images/lg-p2323-01-screen.png)
+
 2323
 
 <!-- Page 2324 -->
@@ -32029,6 +35033,10 @@ UC04.01.10 - Ký biên bản thu hồi phương tiện
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 3 | Hình ảnh<br>mô tả điểm<br>bất thường | Uploa<br>d |  |  | Cho phép người dùng upload<br>hình ảnh mô tả điểm bất<br>thường lên hệ thống.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được upload,<br>phần mềm hiển thêm thị giao<br>diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
+
+![Trang 2324 — mockup màn hình](images/lg-p2324-00-screen.png)
+
+![Trang 2324 — mockup màn hình](images/lg-p2324-01-screen.png)
 
 2324
 
@@ -32038,6 +35046,14 @@ UC04.01.10 - Ký biên bản thu hồi phương tiện
 | --- | --- | --- | --- | --- | --- | --- |
 | 4 | Đóng |  |  |  | Cho phép người dùng huỷ bỏ<br>ký biên bản thu hồi phương<br>tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ ký biên bản thu<br>hồi phương tiện trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Ký biên<br>bản thu hồi phương tiện với<br>các dữ liệu đã chọn/nhập. |  |
 | 5 | Huỷ | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>ký biên bản thu hồi phương<br>tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ ký biên bản thu<br>hồi phương tiện trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Ký biên<br>bản thu hồi phương tiện với<br>các dữ liệu đã chọn/nhập. |  |
+
+![Trang 2325 — mockup màn hình](images/lg-p2325-00-screen.png)
+
+![Trang 2325 — mockup màn hình](images/lg-p2325-01-screen.png)
+
+![Trang 2325 — mockup màn hình](images/lg-p2325-00-screen.png)
+
+![Trang 2325 — mockup màn hình](images/lg-p2325-01-screen.png)
 
 2325
 
@@ -32092,6 +35108,9 @@ Các trường thay thế được để trong [], hightlight đỏ
 Ở bảng kê chi tiết thiết bị đi kèm phương tiện do chưa track được đầy đủ thông tin thiết bị trên
 phương tiện nên chỉ fix cứng và để người dùng tự sửa phần này. Hệ thống chỉ liệt kê danh sách
 lốp theo phương tiện
+
+![Trang 2328 — mockup màn hình](images/lg-p2328-00-screen.png)
+
 2328
 
 <!-- Page 2329 -->
@@ -32152,6 +35171,9 @@ UC04.01.11 - Xem lịch sử định mức NL cho phương tiện
 | Điều kiện sau | Hệ thống hiển thị lịch sử định mức nhiên liệu cho phương tiện thành<br>công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 2333 — lưu đồ hoạt động](images/lg-p2333-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Lịch sử định mức NL cho phương tiện
 2333
@@ -32194,6 +35216,8 @@ UC04.01.11 - Xem lịch sử định mức NL cho phương tiện
 | 1<br>8 | Hành động | Colu<br>mn |  |  | Hiển thị các hành động (có<br>được phân quyền) mà người<br>dùng có thể thực hiện đối với<br>1 bản ghi trong danh sách<br>tương ứng theoLưu đồ trạng<br>thái. |  |
 | 1<br>9 | Hiển thị [xx]<br>bản ghi trên<br>1 trang | Dropd<br>own<br>list |  |  | Xem mô tả phần Common<br>Rules |  |
 
+![Trang 2336 — mockup màn hình](images/lg-p2336-00-screen.png)
+
 2336
 
 <!-- Page 2337 -->
@@ -32201,6 +35225,8 @@ UC04.01.11 - Xem lịch sử định mức NL cho phương tiện
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>0 | Số trang | List |  |  | Xem mô tả phần Common<br>Rules |  |
+
+![Trang 2337 — mockup màn hình](images/lg-p2337-00-screen.png)
 
 2337
 
@@ -32219,6 +35245,9 @@ UC04.01.12 - Xem thông tin định mức nhiên liệu PT
 | Điều kiện sau | Hiển thị thông tin chi tiết định mức NL của phương tiện |
 
 2. Lưu đồ hoạt động
+
+![Trang 2338 — lưu đồ hoạt động](images/lg-p2338-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin định mức NL phương tiện
 2338
@@ -32231,6 +35260,9 @@ Ngược lại, trong các trường hợp còn lại, giao diện mặc định
 hiện tại của bản ghi đang được thực hiện, các bước còn lại sẽ ở để trong trạng thái collapsed.
 Ví dụ: Bản ghi đang ở trạng thái chờ phê duyệt định mức, tức đang thực hiện bước 3 thì khi mở
 xem thông tin bản ghi, hệ thống hiển thị như sau:
+
+![Trang 2339 — mockup màn hình](images/lg-p2339-00-screen.png)
+
 2339
 
 <!-- Page 2340 -->
@@ -32245,6 +35277,8 @@ Các trường trong bảng bị dài không đủ để hiển thị thì hệ 
 | 1 | Tên phiếu<br>định mức<br>NL | Label |  |  | Hiển thị tên phiếu định mức<br>NL theo format:<br>Định mức nhiên liệu - [Biển<br>số xe] |  |
 | 2 | Mã phiếu |  |  |  | Hiển thị mã phiếu định mức<br>NL phương tiện (nếu có) |  |
 | 3 | Trạng thái | Label |  |  | Hiển thị trạng thái hiện tại của<br>phiếu định mức NL phương<br>tiện |  |
+
+![Trang 2340 — mockup màn hình](images/lg-p2340-00-screen.png)
 
 2340
 
@@ -32316,6 +35350,8 @@ Các trường trong bảng bị dài không đủ để hiển thị thì hệ 
 | 3<br>7 | Phân loại<br>khoán định<br>mức nhiên<br>liệu | Label |  |  | Hiển thị phân loại khoán định<br>mức nhiên liệu của phương<br>tiện thực hiện định mức<br>Giá trị:<br>Theo tải trọng hàng hoá<br>Không theo tải trọng hàng<br>hoá |  |
 | 3<br>8 | Định mức<br>khoán<br>(l/km) | Label |  |  | [Chỉ hiển thị đối với trường<br>hợp phân loại khoán định<br>mức NL = không theo trải<br>trọng hàng hoá]<br>Hiển thị định mức khoán NL<br>chung cho phương tiện |  |
 
+![Trang 2345 — mockup màn hình](images/lg-p2345-00-screen.png)
+
 2345
 
 <!-- Page 2346 -->
@@ -32354,6 +35390,8 @@ Các trường trong bảng bị dài không đủ để hiển thị thì hệ 
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 4<br>9 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với bản ghi đó đó<br>theo từng trạng thái của đối<br>tượng.<br>Khi ở trạng thái Đã huỷ/Đã từ<br>chối/Đã huỷ cập nhật/ Đã từ<br>chối cập nhật/Đã huỷ định<br>mức/Đã từ chối định mức,<br>hiển thị 2 hành động:<br>Xoá: Cho phép người dùng<br>xoá bản ghi đã bị huỷ.<br>Người dùng chọn tới icon<br>… > Chọn Xoá: Hệ thống<br>hiển thị popup Xác nhận<br>Xoá:<br>Hệ thống xoá bản<br>ghi được chọn<br>Hiển thị toast<br>message Xoá bản<br>ghi thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>trước đó<br>Huỷ: Quay trở về màn<br>hình Thông tin định<br>mức NL phương tiện<br>Tạo lại/Cập nhật lại/Định<br>mức lại: Cho phép người<br>dùng tạo lại/cập nhật lại/<br>định mức lại từ thông tin đã<br>bị huỷ. |  |  |
+
+![Trang 2349 — mockup màn hình](images/lg-p2349-00-screen.png)
 
 2349
 
@@ -32416,6 +35454,8 @@ BB xac dinh mu….55.doc
 | 8 | NL cuối (l) | Colu<br>mn |  |  | Hiển thị số NL cuối của từng<br>chặng |  |
 | 9 | Đóng | Butto<br>n |  |  | Cho phép người dùng đóng<br>popup trở về màn hình trước<br>đó. |  |
 
+![Trang 2352 — mockup màn hình](images/lg-p2352-00-screen.png)
+
 2352
 
 <!-- Page 2353 -->
@@ -32440,6 +35480,10 @@ UC04.01.13 - Tạo yêu cầu định mức nhiên liệu PT
 3. Mô tả màn hình
 3.1 Màn hình Chọn phương tiện định mức NL
 
+![Trang 2354 — lưu đồ hoạt động](images/lg-p2354-00-flow.png)
+
+![Trang 2354 — mockup màn hình](images/lg-p2354-01-screen.png)
+
 
 2354
 
@@ -32459,6 +35503,9 @@ UC04.01.13 - Tạo yêu cầu định mức nhiên liệu PT
 | 4 | Đóng | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới định mức NL<br>phương tiện<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới phiếu<br>định mức NL trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Chọn<br>phương tiện định mức NL<br>với các dữ liệu đã<br>chọn/nhập. |  |
 
 3.2 Màn hình Tạo mới định mức NL phương tiện
+
+![Trang 2356 — mockup màn hình](images/lg-p2356-00-screen.png)
+
 2356
 
 <!-- Page 2357 -->
@@ -32485,6 +35532,8 @@ UC04.01.13 - Tạo yêu cầu định mức nhiên liệu PT
 | 1<br>1 | Địa điểm | Colu<br>mn +<br>Short<br>textb<br>ox | Có |  | Cho phép người dùng nhập<br>địa điểm của vị trí. |  |
 | 1<br>2 | Vị trí đổ<br>nhiên liệu | Colu<br>mn |  | Disable | Cho phép người dùng chọn vị<br>trí tương ứng có hay không<br>phải là vị trí đổ nhiên liệu<br>Nếu có, enable trường mô tả<br>vị trí đổ nhiên liệu lên. |  |
 | 1<br>3 | Mô tả vị trí<br>đổ nhiên<br>liệu | Colu<br>mn |  | Disable | Cho phép người dùng nhập<br>mô tả thêm cho vị trí đổ nhiên<br>liệu.<br>Chỉ enable khi trường vị trí đổ<br>nhiên liệu tương ứng được<br>ticked |  |
+
+![Trang 2358 — mockup màn hình](images/lg-p2358-00-screen.png)
 
 2358
 
@@ -32520,6 +35569,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>8 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất định mức NL phương<br>tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới định<br>mức NL phương tiện trước khi<br>huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Tạo mới<br>định mức NL phương tiện<br>với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 2361 — mockup màn hình](images/lg-p2361-00-screen.png)
+
 2361
 
 <!-- Page 2362 -->
@@ -32528,7 +35579,12 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>9 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất định mức NL phương<br>tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới định<br>mức NL phương tiện trước khi<br>huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Tạo mới<br>định mức NL phương tiện<br>với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 2362 — mockup màn hình](images/lg-p2362-00-screen.png)
+
 3.1 Màn hình Thông tin định mức NL phương tiện (xem) - Trạng thái Chờ phê duyệt kế hoạch
+
+![Trang 2362 — mockup màn hình](images/lg-p2362-01-screen.png)
+
 2362
 
 <!-- Page 2363 -->
@@ -32566,6 +35622,10 @@ UC04.01.14 - Huỷ đề xuất định mức nhiên liệu PT
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
 
+![Trang 2365 — lưu đồ hoạt động](images/lg-p2365-00-flow.png)
+
+![Trang 2365 — mockup màn hình](images/lg-p2365-01-screen.png)
+
 
 2365
 
@@ -32583,6 +35643,9 @@ UC04.01.14 - Huỷ đề xuất định mức nhiên liệu PT
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ đề xuất<br>định mức NL phương tiện.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt kế<br>hoạch<br>Đóng popup và trở về màn<br>hình Thông tin định mức<br>NL phương tiện |  |
 
 3.2 Màn hình Thông tin định mức NL phương tiện (Xem) - Trạng thái Đã huỷ
+
+![Trang 2367 — mockup màn hình](images/lg-p2367-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết định mức NL phương tiện, ở
 đây chỉ mô tả hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng
 thái ở Lưu đồ trạng thái)
@@ -32597,6 +35660,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử định mức NL/định mức NL phương tiện
 Huỷ: Quay trở về màn hình Thông tin định mức NL phương tiện
+
+![Trang 2368 — mockup màn hình](images/lg-p2368-00-screen.png)
+
 Tạo lại: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Chọn Tạo mới: Hệ thống hiển thị màn hình Tạo mới yêu cầu định mức NL, thực hiện UC Tạo đề
 xuất định mức NL phương tiện với các trường lấy thông tin từ yêu cầu hiện tại (đã bị huỷ) nhưng
@@ -32630,6 +35696,10 @@ UC04.01.15 - Phê duyệt/Từ chối đề xuất định mức nhiên liệu P
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 2370 — lưu đồ hoạt động](images/lg-p2370-00-flow.png)
+
+![Trang 2370 — mockup màn hình](images/lg-p2370-01-screen.png)
+
 
 2370
 
@@ -32646,6 +35716,8 @@ UC04.01.15 - Phê duyệt/Từ chối đề xuất định mức nhiên liệu P
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>định mức NL phương tiện.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt kế<br>hoạch → Đã từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất định mức NL<br>phương tiện thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin định mức NL<br>phương tiện với 2 hoạt<br>động:<br>Xoá<br>Tạo mới<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu định<br>mức NL phương tiện này với<br>nội dung:<br>Phương tiện - Yêu cầu định<br>mức<br>Yêu cầu định mức nhiên liệu<br>phương tiện [Biển số phương<br>tiện] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu định mức<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin định mức NL<br>phương tiện của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa huỷ<br>đề xuất trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của định<br>mức NL phương<br>tiện. |
 
+![Trang 2372 — mockup màn hình](images/lg-p2372-00-screen.png)
+
 2372
 
 <!-- Page 2373 -->
@@ -32655,6 +35727,9 @@ UC04.01.15 - Phê duyệt/Từ chối đề xuất định mức nhiên liệu P
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>định mức NL phương tiện.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt kế<br>hoạch<br>Đóng popup và trở về màn<br>hình Thông tin định mức<br>NL phương tiện. |  |
 
 3.2 Màn hình Thông tin định mức NL phương tiện (Xem) - Trạng thái Đã từ chối
+
+![Trang 2373 — mockup màn hình](images/lg-p2373-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết định mức NL phương tiện, ở
 đây chỉ mô tả hành động chi tiết ở trạng thái Đã từ chối(xem đầy đủ các hành động theo từng
 trạng thái ở Lưu đồ trạng thái)
@@ -32669,6 +35744,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Lịch sử định mức NL phương tiện
 Huỷ: Quay trở về màn hình Thông tin định mức NL phương tiện
+
+![Trang 2374 — mockup màn hình](images/lg-p2374-00-screen.png)
+
 Tạo lại: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Chọn Tạo lại: Hệ thống hiển thị màn hình Tạo mới yêu cầu định mức NL, thực hiện UC Tạo đề
 xuất định mức NL phương tiện với các trường lấy thông tin từ yêu cầu hiện tại (đã bị huỷ) nhưng
@@ -32680,6 +35758,8 @@ xuất định mức NL phương tiện với các trường lấy thông tin t�
 duyệt kế hoạch)
 3.3 Màn hình Xác nhận phê duyệt đề xuất tạo mới
 
+![Trang 2374 — mockup màn hình](images/lg-p2374-01-screen.png)
+
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
@@ -32690,6 +35770,8 @@ duyệt kế hoạch)
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất định mức NL phương<br>tiện.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt kế<br>hoạch → Đã phê duyệt<br>thực hiện<br>Hiển thị toast message :<br>“Phê duyệt đề xuất định<br>mức NL phương tiện thành<br>công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinđịnh mức NL<br>phương tiện.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu định<br>mức NL phương tiện này với<br>nội dung:<br>Phương tiện - Yêu cầu định<br>mức<br>Yêu cầu định mức nhiên liệu<br>phương tiện [Biển số phương<br>tiện] đã được phê duyệt.<br>Generate ID mới cho phiếu<br>định mức NL với quy tắc<br>như sau:<br>Format: [Biển<br>số]/DMNLPT[xx]<br>[ddmmyyyy]<br>Biển số: lấy biển số<br>phương tiện định mức<br>NL | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinđịnh mức NL<br>phương tiện của<br>người phê duyệt khi<br>ấn Phê Duyệt sau<br>khi người khác vừa<br>huỷ đề xuất trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củađịnh<br>mức NL phương<br>tiện. |  |
+
+![Trang 2375 — mockup màn hình](images/lg-p2375-00-screen.png)
 
 2375
 
@@ -32730,6 +35812,9 @@ File template như sau:
 BB xac dinh mu…(1).doc
 29 May 2025, 11:11 AM
 Các trường thay thế được để trong [], hightlight đỏ
+
+![Trang 2377 — mockup màn hình](images/lg-p2377-00-screen.png)
+
 2377
 
 <!-- Page 2378 -->
@@ -32753,6 +35838,9 @@ UC04.01.16 - Cập nhật mức tiêu hao nhiên liệu thực tế PT
 
 3. Mô tả màn hình
 3.1 Màn hình Cập nhật mức tiêu hao NL thực tế của phương tiện
+
+![Trang 2379 — lưu đồ hoạt động](images/lg-p2379-00-flow.png)
+
 2379
 
 <!-- Page 2380 -->
@@ -32761,6 +35849,8 @@ UC04.01.16 - Cập nhật mức tiêu hao nhiên liệu thực tế PT
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Kế hoạch định mức: Hiển thị thông tin như màn view |  |  |  |  |  |
 | 2 | Chi tiết quá trình định mức |  |  |  |  |  |
+
+![Trang 2380 — mockup màn hình](images/lg-p2380-00-screen.png)
 
 2380
 
@@ -32808,6 +35898,8 @@ UC04.01.16 - Cập nhật mức tiêu hao nhiên liệu thực tế PT
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>0 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>cập nhật mức tiêu hao NL<br>phương tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ cập nhật mức<br>tiêu hao NL phương tiện trước<br>khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Cập nhật<br>mức tiêu hao NL phương<br>tiện với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 2384 — mockup màn hình](images/lg-p2384-00-screen.png)
+
 2384
 
 <!-- Page 2385 -->
@@ -32816,7 +35908,11 @@ UC04.01.16 - Cập nhật mức tiêu hao nhiên liệu thực tế PT
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>1 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>cập nhật mức tiêu hao NL<br>phương tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ cập nhật mức<br>tiêu hao NL phương tiện trước<br>khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Cập nhật<br>mức tiêu hao NL phương<br>tiện với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 2385 — mockup màn hình](images/lg-p2385-00-screen.png)
+
 3.2 Màn hình Ký biên bản
+
+![Trang 2385 — mockup màn hình](images/lg-p2385-01-screen.png)
 
 
 2385
@@ -32828,6 +35924,11 @@ UC04.01.16 - Cập nhật mức tiêu hao nhiên liệu thực tế PT
 | 1 | Biển bản<br>bàn giao số | Label |  |  | Hiển thị mã biên bản của bản<br>ghi định mức |  |
 | 2 | In biên bản | Butto<br>n |  |  | Cho phép người dùng tải<br>xuống biên bản với các số liệu<br>người dùng cập nhật. |  |
 | 3 | Upload biên<br>bản đã ký | Uploa<br>d | Có |  | Cho phép người dùng upload<br>file biên bản đã ký lên lên hệ<br>thống.<br>Các định dạng cho phép: JPG,<br>PNG, PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được upload,<br>phần mềm hiển thêm thị giao<br>diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: JPG,<br>PNG, PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
+
+![Trang 2386 — mockup màn hình](images/lg-p2386-00-screen.png)
+
+![Trang 2386 — mockup màn hình](images/lg-p2386-01-screen.png)
+
 2386
 
 <!-- Page 2387 -->
@@ -32836,6 +35937,14 @@ UC04.01.16 - Cập nhật mức tiêu hao nhiên liệu thực tế PT
 | --- | --- | --- | --- | --- | --- | --- |
 | 4 | Đóng |  |  |  | Cho phép người dùng huỷ bỏ<br>ký biên bản cập nhật mức tiêu<br>hao NL phương tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ ký biên bản cập<br>nhật mức tiêu hao NL phương<br>tiện trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Ký biên<br>bản cập nhật mức tiêu hao<br>NL phương tiện với các dữ<br>liệu đã chọn/nhập. |  |
 | 5 | Huỷ | Butto<br>n |  |  | Cho phép người dùng huỷ bỏ<br>ký biên bản cập nhật mức tiêu<br>hao NL phương tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ ký biên bản cập<br>nhật mức tiêu hao NL phương<br>tiện trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Ký biên<br>bản cập nhật mức tiêu hao<br>NL phương tiện với các dữ<br>liệu đã chọn/nhập. |  |
+
+![Trang 2387 — mockup màn hình](images/lg-p2387-00-screen.png)
+
+![Trang 2387 — mockup màn hình](images/lg-p2387-01-screen.png)
+
+![Trang 2387 — mockup màn hình](images/lg-p2387-00-screen.png)
+
+![Trang 2387 — mockup màn hình](images/lg-p2387-01-screen.png)
 
 2387
 
@@ -32857,6 +35966,9 @@ error msg) dưới trường
 không hợp lệ đó.
 3.3 Màn hình Thông tin định mức NL phương tiện (xem) - Trạng thái Chờ phê duyệt mức tiêu
 hao
+
+![Trang 2389 — mockup màn hình](images/lg-p2389-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết định mức NL phương tiện, ở
 đây chỉ mô tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ
 trạng thái):
@@ -32894,6 +36006,10 @@ UC04.01.17 - Huỷ cập nhật mức tiêu hao nhiên liệu PT
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ đề xuất cập nhật
 
+![Trang 2392 — lưu đồ hoạt động](images/lg-p2392-00-flow.png)
+
+![Trang 2392 — mockup màn hình](images/lg-p2392-01-screen.png)
+
 
 2392
 
@@ -32911,6 +36027,9 @@ UC04.01.17 - Huỷ cập nhật mức tiêu hao nhiên liệu PT
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ cập nhật<br>mức tiêu hao NL phương tiện.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>mức tiêu hao<br>Đóng popup và trở về màn<br>hình Thông tin định mức<br>NL phương tiện |  |
 
 3.2 Màn hình Thông tin định mức NL phương tiện (Xem) - Trạng thái Đã huỷ
+
+![Trang 2394 — mockup màn hình](images/lg-p2394-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết định mức NL phương tiện, ở
 đây chỉ mô tả hành động chi tiết ở trạng thái Đã huỷ(xem đầy đủ các hành động theo từng trạng
 thái ở Lưu đồ trạng thái)
@@ -32925,6 +36044,9 @@ Hệ thống xoá bản ghiđược chọn
 Hiển thị toast message Xoá thành công
 Đóng tất cả popup và trở về màn hình Lịch sử định mức NL phương tiện
 Huỷ: Quay trở về màn hình Thông tin định mức NL phương tiện
+
+![Trang 2395 — mockup màn hình](images/lg-p2395-00-screen.png)
+
 Cập nhật lại: Cho phép người dùng tạo lại bản ghimới từ thông tin đã bị huỷ.
 Chọn Cập nhật lại: Hệ thống hiển thị màn hình Cập nhật mức tiêu hao NL phương tiện, thực
 hiện UC Cập nhật mức tiêu hao NL phương tiệnvới các trường lấy thông tin từ bản ghihiện tại
@@ -32958,6 +36080,10 @@ UC04.01.18 - Phê duyệt/Từ chối cập nhật mức tiêu hao nhiên liệu
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối cập nhật
 
+![Trang 2397 — lưu đồ hoạt động](images/lg-p2397-00-flow.png)
+
+![Trang 2397 — mockup màn hình](images/lg-p2397-01-screen.png)
+
 
 2397
 
@@ -32974,6 +36100,8 @@ UC04.01.18 - Phê duyệt/Từ chối cập nhật mức tiêu hao nhiên liệu
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối cập nhật cập<br>nhật mức tiêu hao NL phương<br>tiện.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt mức<br>tiêu hao → Đã từ chối cập<br>nhật<br>Hiển thị toast message : “Từ<br>chối cập nhật mức tiêu hao<br>NL phương tiện thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin định mức NL<br>phương tiện với 2 hoạt<br>động:<br>Xoá<br>Cập nhật<br>Gửi thông báo tới người<br>dùng đã cập nhật cập nhật<br>mức tiêu haoNL phương<br>tiện này với nội dung:<br>Phương tiện - Định mức<br>nhiên liệu<br>Mức tiêu hao nhiên liệu cho<br>phương tiện [Biển số phương<br>tiện] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối cập nhật mức tiêu<br>hao | Trường hợp hành<br>động Hủy cập nhật<br>và Phê duyệt/Từ<br>chối cập nhật xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin định mức NL<br>phương tiện của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa huỷ<br>cập nhật trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của định<br>mức NL phương<br>tiện. |  |
 
+![Trang 2399 — mockup màn hình](images/lg-p2399-00-screen.png)
+
 2399
 
 <!-- Page 2400 -->
@@ -32986,6 +36114,9 @@ nhập]
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối cập nhật<br>mức tiêu hao NL phương tiện.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>mức tiêu hao<br>Đóng popup và trở về màn<br>hình Thông tin định mức<br>NL phương tiện. |  |
 
 3.2 Màn hình Thông tin định mức NL phương tiện (Xem) - Trạng thái Đã từ chối cập nhật
+
+![Trang 2400 — mockup màn hình](images/lg-p2400-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết định mức NL phương tiện, ở
 đây chỉ mô tả hành động chi tiết ở trạng thái Đã từ chối cập nhật (xem đầy đủ các hành động
 theo từng trạng thái ở Lưu đồ trạng thái)
@@ -33000,6 +36131,9 @@ Hệ thống xoá bản ghi được chọn
 Hiển thị toast message Xoá thành công
 Đóng tất cả popup và trở về màn hình Lịch sử định mức NL phương tiện
 Huỷ: Quay trở về màn hình Thông tin định mức NL phương tiện
+
+![Trang 2401 — mockup màn hình](images/lg-p2401-00-screen.png)
+
 Cập nhật lại: Cho phép người dùng cập nhật lại bản ghi mới từ thông tin đã bị huỷ.
 Chọn Cập nhật lại: Hệ thống hiển thị màn hình Cập nhật mới mức tiêu haoNL, thực hiện UC
 Cập nhật mức tiêu hao NL phương tiện với các trường lấy thông tin từ bản ghi hiện tại (đã bị
@@ -33014,6 +36148,8 @@ Cập nhật mức tiêu hao NL phương tiện với các trường lấy thôn
 
 3.3 Màn hình Xác nhận phê duyệt cập nhật mới
 
+![Trang 2401 — mockup màn hình](images/lg-p2401-01-screen.png)
+
 
 2401
 
@@ -33022,6 +36158,9 @@ Cập nhật mức tiêu hao NL phương tiện với các trường lấy thôn
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt cập nhật mức<br>tiêu hao NL phương tiện.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt mức<br>tiêu hao → Đã phê duyệt<br>cập nhật<br>Hiển thị toast message :<br>“Phê duyệt cập nhật mức<br>tiêu hao NL phương tiện<br>thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinđịnh mức NL<br>phương tiện.<br>Gửi thông báo tới người<br>dùng đã cập nhật mức tiêu<br>haoNL phương tiện này với<br>nội dung:<br>Phương tiện - Định mức<br>nhiên liệu<br>Mức tiêu hao nhiên liệu cho<br>phương tiện [Biển số phương<br>tiện] đã được phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã phê duyệt cập nhật mức<br>tiêu hao | Trường hợp hành<br>động Hủy cập nhật<br>và Phê duyệt/Từ<br>chối cập nhật xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinđịnh mức NL<br>phương tiện của<br>người phê duyệt khi<br>ấn Phê Duyệt sau<br>khi người khác vừa<br>huỷ cập nhật trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củađịnh<br>mức NL phương<br>tiện. |
+
+![Trang 2402 — mockup màn hình](images/lg-p2402-00-screen.png)
+
 2402
 
 <!-- Page 2403 -->
@@ -33032,6 +36171,9 @@ Cập nhật mức tiêu hao NL phương tiện với các trường lấy thôn
 
 3.4 Màn hình Thông tinđịnh mức NL phương tiện (Xem) - Trạng thái Đã phê duyệt mức tiêu
 hao
+
+![Trang 2403 — mockup màn hình](images/lg-p2403-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết định mức NL phương tiện, ở
 đây chỉ mô tả thêm các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ
 trạng thái):
@@ -33070,6 +36212,9 @@ UC04.01.19 - Định mức khoán nhiên liệu thực tế PT
 
 3. Mô tả màn hình
 3.1 Màn hình Định mức khoán NL thực tế của phương tiện
+
+![Trang 2406 — lưu đồ hoạt động](images/lg-p2406-00-flow.png)
+
 2406
 
 <!-- Page 2407 -->
@@ -33082,6 +36227,8 @@ UC04.01.19 - Định mức khoán nhiên liệu thực tế PT
 | 4 | Tỷ lệ hao<br>hụt (%) | Num<br>berbo<br>x | Có |  | Cho phép người dùng điền %<br>tỷ lệ hao hụt khi tiêu hao nhiên<br>liệu của phương tiện<br>Chỉ điền 0% <= số <= 100% |  |
 | 5 | Điểm đi | Colu<br>mn |  |  | Hiển thị điểm đi của các chặng<br>thực hiện định mức NL |  |
 | 6 | Điểm đến | Colu<br>mn |  |  | Hiển thị điểm đến của các<br>chặng thực hiện định mức NL |  |
+
+![Trang 2407 — mockup màn hình](images/lg-p2407-00-screen.png)
 
 2407
 
@@ -33161,6 +36308,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>8 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>định mức khoán NL phương<br>tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ định mức khoán<br>NL phương tiện trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Định mức<br>khoán NL phương tiện với<br>các dữ liệu đã chọn/nhập. |  |
 
+![Trang 2414 — mockup màn hình](images/lg-p2414-00-screen.png)
+
 2414
 
 <!-- Page 2415 -->
@@ -33168,6 +36317,8 @@ không hợp lệ đó.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>9 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>định mức khoán NL phương<br>tiện.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ định mức khoán<br>NL phương tiện trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình trước đó<br>Hủy: trở về màn Định mức<br>khoán NL phương tiện với<br>các dữ liệu đã chọn/nhập. |  |
+
+![Trang 2415 — mockup màn hình](images/lg-p2415-00-screen.png)
 
 3.1 Màn hình Thông tin định mức NL phương tiện (xem) - Trạng thái Chờ phê duyệt định mức
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết định mức NL phương tiện, ở
@@ -33200,8 +36351,13 @@ UC04.01.20 - Huỷ định mức khoán nhiên liệu PT
 <!-- Page 2417 -->
 
 2. Lưu đồ hoạt động
+
+![Trang 2417 — lưu đồ hoạt động](images/lg-p2417-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận huỷ tạo mới
+
+![Trang 2417 — mockup màn hình](images/lg-p2417-01-screen.png)
 
 
 2417
@@ -33220,6 +36376,9 @@ UC04.01.20 - Huỷ định mức khoán nhiên liệu PT
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận huỷ định mức<br>NL phương tiện.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin định mức<br>NL phương tiện |  |
 
 3.2 Màn hình Thông tin định mức NL phương tiện (Xem) - Trạng thái Đã huỷ định mức
+
+![Trang 2419 — mockup màn hình](images/lg-p2419-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết định mức NL phương tiện, ở
 đây chỉ mô tả hành động chi tiết ở trạng thái Đã huỷ định mức (xem đầy đủ các hành động theo
 từng trạng thái ở Lưu đồ trạng thái)
@@ -33243,6 +36402,9 @@ NL phương tiện với các trường lấy thông tin từ bản ghi hiện t
 | bản ghi mới mà cập nhật thông tin chỉnh sửa và trạng thái (từ | Đã huỷ định mức | về | Chờ phê |
 
 duyệt định mức)
+
+![Trang 2420 — mockup màn hình](images/lg-p2420-00-screen.png)
+
 2420
 
 <!-- Page 2421 -->
@@ -33267,6 +36429,10 @@ UC04.01.21 - Phê duyệt/Từ chối định mức khoán nhiên liệu PT
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối định mức
 
+![Trang 2422 — lưu đồ hoạt động](images/lg-p2422-00-flow.png)
+
+![Trang 2422 — mockup màn hình](images/lg-p2422-01-screen.png)
+
 
 2422
 
@@ -33282,6 +36448,8 @@ UC04.01.21 - Phê duyệt/Từ chối định mức khoán nhiên liệu PT
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối định mức NL<br>phương tiện.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt định<br>mức → Đã từ chối định<br>mức<br>Hiển thị toast message : “Từ<br>chối định mức NL phương<br>tiện thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin định mức NL<br>phương tiện với 2 hoạt<br>động:<br>Xoá<br>Định mức lại<br>Gửi thông báo tới người<br>dùng đã tạo định mức NL<br>phương tiện này với nội<br>dung:<br>Phương tiện - định mức NL<br>định mức nhiên liệu phương<br>tiện [Biển số phương tiện] đã<br>bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối định mức NL<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy và Phê<br>duyệt/Từ chối xảy<br>ra cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin định mức NL<br>phương tiện của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa huỷ<br>trước, hệ thống hiển<br>thị popup thông báo<br>lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của định<br>mức NL phương<br>tiện. |
+
+![Trang 2424 — mockup màn hình](images/lg-p2424-00-screen.png)
 
 2424
 
@@ -33302,6 +36470,9 @@ Hệ thống xoá bản ghi được chọn
 Hiển thị toast message Xoá bản ghi thành công
 Đóng tất cả popup và trở về màn hình Lịch sử bàn giao/định mức NL phương tiện
 Huỷ: Quay trở về màn hình Thông tin định mức NL phương tiện
+
+![Trang 2425 — mockup màn hình](images/lg-p2425-00-screen.png)
+
 Định mức lại: Cho phép người dùng định mức lại bản ghi mới từ thông tin đã bị huỷ.
 Chọn Định mức lại: Hệ thống hiển thị màn hình Định mức NL, thực hiện UC Định mức NL
 phương tiện với các trường lấy thông tin từ bản ghi hiện tại (đã bị huỷ) nhưng không sinh ra bản
@@ -33319,6 +36490,8 @@ phương tiện với các trường lấy thông tin từ bản ghi hiện tạ
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 
+![Trang 2426 — mockup màn hình](images/lg-p2426-00-screen.png)
+
 2426
 
 <!-- Page 2427 -->
@@ -33326,6 +36499,8 @@ phương tiện với các trường lấy thông tin từ bản ghi hiện tạ
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt bản ghi định<br>mức NL phương tiện.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt định<br>mức → Đã phê duyệt định<br>mức<br>Hiển thị toast message :<br>“Phê duyệt định mức NL<br>phương tiện thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinđịnh mức NL<br>phương tiện.<br>Gửi thông báo tới người<br>dùng đã tạo định mức NL<br>phương tiện này với nội<br>dung:<br>Phương tiện - Định mức<br>nhiên liệu<br>Định mức khoán nhiên liệu<br>cho phương tiện [Biển số<br>phương tiện] đã được phê<br>duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã phê duyệt định mức khoán<br>nhiên liệu<br>Nếu trường áp dụng định<br>mức cho = chỉ riêng xe thực<br>hiện định mức, cập nhật | Trường hợp hành<br>động Hủy và Phê<br>duyệt/Từ chối xảy<br>ra cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tinđịnh mức NL<br>phương tiện của<br>người phê duyệt khi<br>ấn Phê Duyệt sau<br>khi người khác vừa<br>huỷ trước, hệ thống<br>hiển thị popup thông<br>báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củađịnh<br>mức NL phương<br>tiện. |  |
+
+![Trang 2427 — mockup màn hình](images/lg-p2427-00-screen.png)
 
 2427
 
@@ -33410,6 +36585,9 @@ UC03.02.01 - Xem danh mục Xưởng
 | Điều kiện sau | Hệ thống hiển thị danh sách xưởng thành công. |
 
 2. Lưu đồ hoạt động
+
+![Trang 2433 — lưu đồ hoạt động](images/lg-p2433-00-flow.png)
+
 3. Mô tả màn hình
 3.1. Màn hình Danh sách xưởng
 2433
@@ -33422,6 +36600,8 @@ UC03.02.01 - Xem danh mục Xưởng
 | 2 | Nhóm | Butto<br>n |  |  | Cho phép nhóm các cột sau:<br>Người đại diện<br>Trạng thái |  |
 | 3 | Bộ lọc | Sideb<br>ar |  |  | Xem mô tả phần Common<br>Rules<br>Cho phép lọc các cột sau:<br>Người đại diện<br>Trạng thái |  |
 | 4 | Export | Butto<br>n |  |  | Xem mô tả phần Common<br>Rules |  |
+
+![Trang 2434 — mockup màn hình](images/lg-p2434-00-screen.png)
 
 2434
 
@@ -33465,6 +36645,9 @@ UC03.02.02 - Xem thông tin xưởng
 | Điều kiện sau | Hiển thị thông tin chi tiết của xưởng |
 
 2. Lưu đồ hoạt động
+
+![Trang 2437 — lưu đồ hoạt động](images/lg-p2437-00-flow.png)
+
 3. Mô tả màn hình
 3.1 Màn hình Thông tin xưởng
 2437
@@ -33480,6 +36663,8 @@ UC03.02.02 - Xem thông tin xưởng
 | 5 | Địa chỉ | Text |  |  | Hiển thị địa chỉ của xưởng |  |
 | 6 | Ghi chú | Text |  |  | Hiển thị ghi chú của xưởng<br>Nếu không có thì không hiển<br>thị trên giao diện |  |
 
+![Trang 2438 — mockup màn hình](images/lg-p2438-00-screen.png)
+
 2438
 
 <!-- Page 2439 -->
@@ -33487,6 +36672,8 @@ UC03.02.02 - Xem thông tin xưởng
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 7 | … | Butto<br>n |  | Enable | Click vào … để chọn hành<br>động đối với xưởng đó theo<br>từng trạng thái của xưởng<br>Khi ở trạng thái Đã huỷ/Đã<br>từ chối cấp mới, hiển thị 2<br>hành động:<br>Xoá yêu cầu: Cho phép<br>người dùng xoá yêu cầu<br>đã bị huỷ.<br>Người dùng chọn tới<br>icon … > Chọn Xoá yêu<br>cầu: Hệ thống hiển thị<br>popup Xác nhận<br>Xoá:<br>Hệ thống xoá yêu<br>cầu được chọn<br>Hiển thị toast<br>message Xoá yêu<br>cầu thành công<br>Đóng tất cả popup<br>và trở về màn hình<br>Danh sách xưởng<br>Huỷ: Quay trở về<br>màn hình Thông tin<br>xưởng<br>Tạo yêu cầu mới: Cho<br>phép người dùng tạo lại<br>yêu cầu mới từ thông tin<br>đã bị huỷ.<br>Người dùng chọn tới icon …<br>> Chọn Tạo mới yêu cầu:<br>Hệ thống hiển thị màn hình |  |  |
+
+![Trang 2439 — mockup màn hình](images/lg-p2439-00-screen.png)
 
 2439
 
@@ -33523,12 +36710,17 @@ UC03.02.03 - Tạo đề xuất tạo mới xưởng
 | Điều kiện sau | Hệ thống tạo 1 bản ghi với trạng thái Chờ phê duyệt<br>Hiển thị toast message tạo thành công<br>Hiển thị màn hình Thông tin xưởng (Xem) |
 
 2. Lưu đồ hoạt động
+
+![Trang 2441 — lưu đồ hoạt động](images/lg-p2441-00-flow.png)
+
 3. Mô tả màn hình
 2441
 
 <!-- Page 2442 -->
 
 3.1 Màn hình Tạo mới xưởng
+
+![Trang 2442 — mockup màn hình](images/lg-p2442-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -33564,11 +36756,22 @@ không hợp lệ đó.
 | 6 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới xưởng<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới xưởng<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi xưởng mới nào & trở về<br>màn hình Danh sách xưởng<br>Hủy: trở về màn Tạo mới<br>xưởng với các dữ liệu đã<br>chọn/nhập. |  |
 | 7 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>đề xuất tạo mới xưởng<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ tạo mới xưởng<br>trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi xưởng mới nào & trở về<br>màn hình Danh sách xưởng<br>Hủy: trở về màn Tạo mới<br>xưởng với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 2445 — mockup màn hình](images/lg-p2445-00-screen.png)
+
+![Trang 2445 — mockup màn hình](images/lg-p2445-01-screen.png)
+
+![Trang 2445 — mockup màn hình](images/lg-p2445-00-screen.png)
+
+![Trang 2445 — mockup màn hình](images/lg-p2445-01-screen.png)
+
 2445
 
 <!-- Page 2446 -->
 
 3.1 Màn hình Thông tin xưởng (xem) - Trạng thái Chờ phê duyệt
+
+![Trang 2446 — mockup màn hình](images/lg-p2446-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết xưởng, ở đây chỉ mô tả thêm
 các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 Button Huỷ đề xuất: Click vào để hiển thị popup Xác nhận huỷ yêu cầu, thực hiện UC Huỷ đề
@@ -33594,12 +36797,17 @@ UC03.02.04 - Huỷ đề xuất cấp mới xưởng
 | Điều kiện sau | Trạng thái của bản ghi thay đổi từ Chờ phê duyệt → Đã huỷ cấp mới<br>Hiển thị toast message thành công<br>Tắt popup Xác nhận huỷ và hiển thị màn hình Thông tin xưởng |
 
 2. Lưu đồ hoạt động
+
+![Trang 2447 — lưu đồ hoạt động](images/lg-p2447-00-flow.png)
+
 3. Mô tả màn hình
 2447
 
 <!-- Page 2448 -->
 
 3.1 Màn hình Xác nhận huỷ đề xuất tạo mới
+
+![Trang 2448 — mockup màn hình](images/lg-p2448-00-screen.png)
 
 
 2448
@@ -33628,6 +36836,9 @@ Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Danh sách xưởng
 Huỷ: Quay trở về màn hình Thông tin xưởng
+
+![Trang 2450 — mockup màn hình](images/lg-p2450-00-screen.png)
+
 Tạo yêu cầu mới: Cho phép người dùng tạo lại yêu cầu mới từ thông tin đã bị huỷ.
 Người dùng chọn tới icon … > Chọn Tạo mới yêu cầu: Hệ thống hiển thị màn hình Tạo mới yêu
 cầu cấp mới, thực hiện UC Tạo đề xuất cấp mới xưởng với các trường lấy thông tin từ yêu cầu
@@ -33656,6 +36867,10 @@ UC03.02.05 - Phê duyệt/Từ chối đề xuất cấp mới xưởng
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối yêu cầu tạo mới
 
+![Trang 2452 — lưu đồ hoạt động](images/lg-p2452-00-flow.png)
+
+![Trang 2452 — mockup màn hình](images/lg-p2452-01-screen.png)
+
 
 2452
 
@@ -33665,6 +36880,9 @@ UC03.02.05 - Phê duyệt/Từ chối đề xuất cấp mới xưởng
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Lý do từ<br>chối | Textb<br>ox<br>(Short<br>) | Khô<br>ng |  | Cho phép người dùng nhập lý<br>do từ chối đề xuất cấp mới<br>xưởng. |  |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu đề xuất<br>cấp mới xưởng.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối đề xuất tạo xưởng<br>thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin xưởng với 2 hoạt<br>động:<br>Xoá yêu cầu<br>Tạo mới yêu cầu<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới xưởng này với nội dung:<br>Nhân viên - Yêu cầu cấp mới<br>Yêu cầu cấp mới xưởng [Tên<br>xưởng] đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã từ chối yêu cầu cấp mới<br>Lý do: [Lý do người dùng<br>nhập] | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin xưởng của người<br>phê duyệt khi ấn Từ<br>chối sau khi người<br>khác vừa huỷ đề<br>xuất trước, hệ thống<br>hiển thị popup thông<br>báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của xưởng. |
+
+![Trang 2453 — mockup màn hình](images/lg-p2453-00-screen.png)
+
 2453
 
 <!-- Page 2454 -->
@@ -33674,6 +36892,9 @@ UC03.02.05 - Phê duyệt/Từ chối đề xuất cấp mới xưởng
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối đề xuất<br>tạo xưởng.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin xưởng. |  |
 
 3.2 Màn hình Thông tin xưởng (Xem) - Trạng thái Đã từ chối
+
+![Trang 2454 — mockup màn hình](images/lg-p2454-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết xưởng, ở đây chỉ mô tả hành
 động chi tiết ở trạng thái Đã từ chối (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ
 trạng thái)
@@ -33694,6 +36915,10 @@ cầu cấp mới, thực hiện UC Tạo đề xuất cấp mới xưởngvới
 hiện tại (đã bị từ chối)
 3.3 Màn hình Xác nhận phê duyệt đề xuất tạo mới
 
+![Trang 2455 — mockup màn hình](images/lg-p2455-00-screen.png)
+
+![Trang 2455 — mockup màn hình](images/lg-p2455-01-screen.png)
+
 
 2455
 
@@ -33702,6 +36927,9 @@ hiện tại (đã bị từ chối)
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu đề<br>xuất cấp mới xưởng.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt đề xuất tạo<br>xưởng thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tin xưởng.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu cấp<br>mới xưởng này với nội dung:<br>Xưởng - Yêu cầu cấp mới<br>Yêu cầu cấp mới xưởng [Tên<br>xưởng] đã được phê duyệt.<br>Generate ID mới cho xưởng<br>với quy tắc như sau:<br>Format: XXaa<br>XX: Là hai chữ cái đầu<br>tiên của tên xưởng. Cụ<br>thể như sau:<br>aa: Chạy từ 01 đến 99,<br>đánh số thứ tự tăng<br>dần nếu mà có cùng 2<br>chữ cái đầu tiên<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện hành<br>động] hh:mm dd/mm/yyyy<br>Đã phê duyệt yêu cầu cấp mới | Trường hợp hành<br>động Hủy đề xuất<br>và Phê duyệt/Từ<br>chối đề xuất xảy ra<br>cùng thời điểm →<br>Ưu tiên hành động<br>Hủy đề xuất<br>Tại màn hình Thông<br>tin xưởng của người<br>phê duyệt khi ấn<br>Phê Duyệt sau khi<br>người khác vừa huỷ<br>đề xuất trước, hệ<br>thống hiển thị popup<br>thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của xưởng. |
+
+![Trang 2456 — mockup màn hình](images/lg-p2456-00-screen.png)
+
 2456
 
 <!-- Page 2457 -->
@@ -33711,6 +36939,9 @@ hiện tại (đã bị từ chối)
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận phê duyệt đề<br>xuất tạo xưởng.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin xưởng. |  |
 
 3.4 Màn hình Thông tin xưởng (Xem) - Trạng thái Đã phê duyệt
+
+![Trang 2457 — mockup màn hình](images/lg-p2457-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết xưởng, ở đây không có thêm
 hành động nào khác ở trạng thái Đã phê duyệt (xem đầy đủ các hành động theo từng trạng thái
 ở Lưu đồ trạng thái)
@@ -33726,6 +36957,9 @@ Sub-feature 12.4.1 - Cây dầu nội bộ
 12.04 - Lưu đồ vòng đời trạng thái của cây dầu nội bộ
 Vòng đời đầy đủ của Cây dầu nội bộ, tách theo 2 entity: Yêu cầu (tạo mới, chờ phê duyệt) và
 Cây dầu chính thức (được tạo khi Yêu cầu tương ứng được phê duyệt):
+
+![Trang 2459 — hình](images/lg-p2459-00-img.png)
+
 Vòng đời Yêu cầu (Cây dầu nội bộ)
 
 | Cột 1 | Cột 2 | Cột 3 |
@@ -34112,6 +37346,8 @@ Panel slide-in từ phải, chiều rộng ~600px. Có thể scroll nội dung b
 | 1 | Hành động chung: |  |  |  |  |  |  |
 | 2 | Button đóng<br>(✕) | Icon | — | — | — | Đóng panel.<br>Slide-out animation từ trái sang<br>phải, duration ~250ms. | — |
 
+![Trang 2481 — mockup màn hình](images/lg-p2481-00-screen.png)
+
 2481
 
 <!-- Page 2482 -->
@@ -34125,6 +37361,8 @@ Panel slide-in từ phải, chiều rộng ~600px. Có thể scroll nội dung b
 | 7 | Badge loại | Badg<br>e | — | — | — | Badge xanh lá: NỘI BỘ + icon.<br>Phân biệt với loại Mua ngoài. | — |
 | 8 | Trạng thái | Badg<br>e | — | — | — | Badge màu theo như bên dưới.<br>Nằm dưới hàng với badge loại. | — |
 
+![Trang 2482 — mockup màn hình](images/lg-p2482-00-screen.png)
+
 2482
 
 <!-- Page 2483 -->
@@ -34137,6 +37375,8 @@ Panel slide-in từ phải, chiều rộng ~600px. Có thể scroll nội dung b
 | 1<br>2 | Người đại<br>diện | Card | — | — | — | Card nhỏ hiển thị: Avatar (chữ tắt<br>tên, màu nền xanh lá), Tên đầy đủ<br>(bold), Mã NV + Chức vụ (xám<br>nhỏ).<br>Có icon › bên phải cho phép<br>click để xem profile nhân viên. | — |
 | 1<br>3 | Ghi chú | Label | Text | — | — | Nội dung ghi chú nội bộ.<br>Hiển thị dạng text block nền xám<br>nhạt, border-radius 8px.<br>Nếu trống: không hiển thị field<br>này. | — |
 
+![Trang 2483 — mockup màn hình](images/lg-p2483-00-screen.png)
+
 2483
 
 <!-- Page 2484 -->
@@ -34147,6 +37387,10 @@ Panel slide-in từ phải, chiều rộng ~600px. Có thể scroll nội dung b
 | 1<br>5 | Progress bar rows (cột trái):<br>Mỗi chỉ số hiển thị thành 1 row gồm: tên chỉ số + giá trị số (L) + tỷ lệ % + thanh progress bar<br>màu tương ứng.<br>Thanh progress bar thể hiện tỷ lệ so với Dung tích tối đa (100%). |  |  |  |  |  |  |
 | 1<br>6 | Dung tích tối<br>đa | Progr<br>ess<br>bar | — | — | — | Màu progress bar: Xám ( --<br>s200 )<br>Công thức tỷ lệ: 100% (cố định)<br>Mức tham chiếu tối đa. Luôn hiển<br>thị đầy bar.<br>VD: 2,100 L · 100% . | — |
 | 1<br>7 | Ngưỡng kích<br>hoạt PO | Progr<br>ess<br>bar |  |  |  | Màu progress bar: Vàng ( --<br>amber500 )<br>Công thức tỷ lệ: Ngưỡng PO /<br>Dung tích tối đa × 100<br>Mức kích hoạt tạo đơn mua.<br>VD: 1,500 L · 30% . |  |
+
+![Trang 2484 — mockup màn hình](images/lg-p2484-00-screen.png)
+
+![Trang 2484 — mockup màn hình](images/lg-p2484-01-screen.png)
 
 2484
 
@@ -34172,6 +37416,8 @@ Panel slide-in từ phải, chiều rộng ~600px. Có thể scroll nội dung b
 | 2<br>6 | File barem | Label | — | — | — | Hiển thị icon file + tên file đã<br>upload (VD:<br>Dang_ky_xe.excel ). | — |
 | 2<br>7 | Button tải về<br>(⬇) | Icon | — | — | — | Nằm bên phải tên file.<br>Click để download file barem về<br>máy.<br>Có state hover. | — |
 
+![Trang 2486 — mockup màn hình](images/lg-p2486-00-screen.png)
+
 2486
 
 <!-- Page 2487 -->
@@ -34183,6 +37429,8 @@ Panel slide-in từ phải, chiều rộng ~600px. Có thể scroll nội dung b
 | 3<br>0 | Tên sensor | Label | Text | — | — | Hiển thị tên Igas.<br>VD: Igas Bình Dương .<br>Tuỳ thuộc vào API của Igas để<br>tuỳ biến hiển thị trường này. |  |
 | 3<br>1 | Mã sensor | Label | Text | — | — | Mã định danh sensor.<br>Ví dụ: IGAS-BD-001-2026 .<br>Font monospace.<br>Tuỳ thuộc vào API của Igas để<br>tuỳ biến hiển thị trường này. |  |
 | 3<br>2 | Cập nhật gần<br>nhất | Label | Date<br>Time | — | — | Thời gian sensor gửi dữ liệu lần<br>cuối.<br>Format: DD/MM/YYYY HH:mm . |  |
+
+![Trang 2487 — mockup màn hình](images/lg-p2487-00-screen.png)
 
 2487
 
@@ -34250,9 +37498,14 @@ message.
 
 3. Mô tả màn hình
 3.1 Màn hình Tạo mới cây dầu nội bộ
+
+![Trang 2492 — mockup màn hình](images/lg-p2492-00-screen.png)
+
 2492
 
 <!-- Page 2493 -->
+
+![Trang 2493 — mockup màn hình](images/lg-p2493-00-screen.png)
 
 2493
 
@@ -34264,6 +37517,8 @@ message.
 | 2 | Tên cây dầu | Input | Title | Có | — | Tên định danh cây dầu trong hệ<br>thống.<br>VD: "Cây dầu Hà Đông". | "Vui<br>lòng<br>nhập tên<br>cây<br>dầu."<br>"Vui<br>lòng<br>chọn tên<br>ít hơn<br>40 ký<br>tự." |
 | 3 | Ảnh đại diện | Imag<br>e<br>Uploa<br>d | Imag<br>e | Khô<br>ng | — | Upload ảnh thumbnail cho cây<br>dầu.<br>Button "Tải ảnh lên" bên dưới<br>vùng preview.<br>Layout 2 cột: ảnh trái, các trường<br>nhập bên phải. |  |
 
+![Trang 2494 — mockup màn hình](images/lg-p2494-00-screen.png)
+
 2494
 
 <!-- Page 2495 -->
@@ -34273,6 +37528,8 @@ message.
 | 4 | Địa chỉ | Input | Text | Có | — | Địa chỉ vật lý của cây dầu.<br>Hỗ trợ nhập tự do. | "Vui<br>lòng<br>nhập địa<br>chỉ." |
 | 5 | Người đại diện | Selec<br>t | List | Có | — | Dropdown tìm kiếm nhân viên.<br>Hiển thị dropdown lúc mở và lúc<br>chọn như bên dưới:<br>Khi mở dropdown: mỗi option<br>hiển thị các thông tin:<br>Avatar nhân viên<br>Tên nhân viên<br>Mã NV<br>Chức vụ<br>Lúc đã chọn: Hiển thị ava + mã +<br>tên NV.<br>Lấy các giá trị tất cả nhân viên<br>của chi nhánh.<br>Chỉ chọn được 1 người. | "Vui<br>lòng<br>chọn<br>người<br>đại<br>diện." |
 | 6 | Ghi chú | Textar<br>ea | Text | Khô<br>ng | — | Ghi chú nội bộ. Max 1000 ký tự.<br>Placeholder: "Nhập thông tin ghi<br>chú..." | — |
+
+![Trang 2495 — mockup màn hình](images/lg-p2495-00-screen.png)
 
 2495
 
@@ -34284,6 +37541,8 @@ message.
 | 8 | Banner cảnh<br>báo vendor | Bann<br>er | — | — | — | Banner màu vàng: "Yêu cầu<br>vendor cài đặt sensor" — nhắc<br>người dùng vendor phải setup và<br>kết nối sensor vào Igas trước.<br>Hiển thị cố định, không ẩn được. | — |
 | 9 | Dropdown<br>Sensor Igas | Selec<br>t | List | Có | — | Hiển thị danh sách sensor chưa<br>được map với cây dầu nào.<br>Danh sách hiển thị tên và mã<br>Igas do bên API Igas trả về.<br>Nếu danh sách rỗng: hiển thị<br>"Chưa có sensor khả dụng — liên<br>hệ vendor". | "Vui<br>lòng<br>chọn<br>sensor<br>Igas." |
 
+![Trang 2496 — mockup màn hình](images/lg-p2496-00-screen.png)
+
 2496
 
 <!-- Page 2497 -->
@@ -34291,6 +37550,8 @@ message.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>0 | Button Kiểm<br>tra kết nối | Butto<br>n | — | Khô<br>ng | Disab<br>le | Active sau khi chọn sensor.<br>Click: gọi kiểm tra kết nối tới Igas<br>API.<br>Trạng thái loading 1–3 giây, thể<br>hiện UI và animation loading ở<br>button:<br>Thành công (xanh): hiển thị<br>block kết quả kèm:<br>Cập nhật gần nhất<br>Tên sensor<br>Lượng dầu đọc được (L)<br>Thời gian phản hồi (ms)<br>Trường hiển thị tuỳ biến/có thể<br>thay đổi tuỳ vào dữ liệu giao tiếp<br>thống nhất từ Igas.<br>Thất bại (đỏ): hiển thị "Mất kết<br>nối. Liên hệ Igas để kiểm tra lại<br>sensor hoặc API."<br>Sau khi ấn lần đầu, chuyển UI<br>button thành button Thử lại | — |
+
+![Trang 2497 — mockup màn hình](images/lg-p2497-00-screen.png)
 
 2497
 
@@ -34300,6 +37561,10 @@ message.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>1 | Block kết quả<br>kiểm tra | Label | — | — | — | Hiển thị sau khi click "Kiểm tra<br>kết nối".<br>Nếu thành công: lượng dầu đọc<br>được từ sensor tự điền vào<br>trường Lượng dầu hiện tại ở<br>Bước 4. | — |
 | 1<br>2 | Section 3 — Barem dầu<br>Upload file barem quy đổi chiều cao cột dầu (mm) sang lượng dầu (lít).<br>Xem thêm ở SC-10 (File Upload)<br>Validate file được upload lên:<br>Sheet 1 phải có header đúng: cột A chứa "Chiều cao H" (không phân biệt hoa thường,<br>bỏ qua ký tự xuống dòng), cột B chứa "Dung tích" → Message lỗi: "Không tìm thấy<br>header hợp lệ trong sheet. Header phải có cột 'Chiều cao H (cm)' và 'Dung tích (lít)'."<br>Sau header phải có ít nhất 10 hàng dữ liệu (tối thiểu để nội suy) → Message lỗi: "File barem<br>cần có tối thiểu 10 dòng dữ liệu để thực hiện quy đổi."<br>Tất cả giá trị cột A/B phải là số (nguyên hoặc thực, có thể lưu dạng text số) → Message lỗi:<br>"Giá trị dung tích tại hàng [N] không hợp lệ, phải là số."<br>Giá trị ≥ 0 → Message lỗi: "Giá trị tại hàng [N] không hợp lệ: [giá trị], không được âm."<br>Các giá trị H tăng dần→ Message lỗi: "Giá trị không liên tục giữa [H-trước] và [H-sau]."<br>Tất cả message để trả dưới dạng popup. |  |  |  |  |  |  |
+
+![Trang 2498 — mockup màn hình](images/lg-p2498-00-screen.png)
+
+![Trang 2498 — mockup màn hình](images/lg-p2498-01-screen.png)
 
 2498
 
@@ -34318,6 +37583,8 @@ message.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1<br>5 | Section 4 — Cấu hình dung tích & mức dầu:<br>Cấu hình các ngưỡng để hệ thống tính toán, cảnh báo và kích hoạt PO tự động.<br>Panel Xem trước bên phải cập nhật realtime khi người dùng nhập số liệu. |  |  |  |  |  |  |
 | 1<br>6 | Dung tích tối<br>đa (L) | Input | Num<br>ber | Có | — | Dung tích bình chuẩn tối đa của<br>bể dầu.<br>Sau khi nhập, các trường phía<br>dưới tự hiển thị tỷ lệ %. | "Vui<br>lòng<br>nhập<br>dung<br>tích tối<br>đa."<br>"Dung<br>tích tối<br>đa phải<br>lớn hơn<br>0." |
+
+![Trang 2500 — mockup màn hình](images/lg-p2500-00-screen.png)
 
 2500
 
@@ -34731,6 +37998,9 @@ UC08.04.01 - Xem danh sách lịch nhắc
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Danh sách lịch nhắc
+
+![Trang 2521 — mockup màn hình](images/lg-p2521-00-screen.png)
+
 2521
 
 <!-- Page 2522 -->
@@ -34740,6 +38010,8 @@ Phần mềm tạo sẵn ban đầu 19 hoạt động lịch nhắc được đ�
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 | Cột 10 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | S<br>T<br>T | Tên<br>hoạt<br>động<br>nhắc<br>lịch | Cá<br>ch<br>nh<br>ắc<br>lịch | Ph<br>ạm<br>vi<br>áp<br>dụ<br>ng<br>the<br>o<br>loại<br>PT | Khoảng nhắc<br>lịch | Dung sai | Đơn vị | Phạ<br>m vi<br>áp<br>dụn<br>g<br>theo<br>PT | DVKT<br>tương<br>ứng/T<br>rường<br>của<br>PT | Đối<br>tượ<br>ng<br>nhắ<br>c<br>lịch |
+
+![Trang 2522 — mockup màn hình](images/lg-p2522-00-screen.png)
 
 2522
 
@@ -34951,9 +38223,14 @@ UC08.04.02 - Xem thông tin lịch nhắc
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Thông tin lịch nhắc
+
+![Trang 2545 — mockup màn hình](images/lg-p2545-00-screen.png)
+
 2545
 
 <!-- Page 2546 -->
+
+![Trang 2546 — mockup màn hình](images/lg-p2546-00-screen.png)
 
 2546
 
@@ -34965,6 +38242,8 @@ Thông tin chung
 Phạm vi nhắc lịch
 Nghiệp vụ thực hiện
 Đối tượng nhắc lịch
+
+![Trang 2547 — mockup màn hình](images/lg-p2547-00-screen.png)
 
 
 2547
@@ -35042,6 +38321,11 @@ UC08.04.03 - Tạo mới/cập nhật lịch nhắc
 
 Danh sách lịch nhắc sẽ có 4 bản ghi lịch nhắc cố định, logic khác với các lịch nhắc còn lại do
 người dùng có thể tự tạo tự do như sau:
+
+![Trang 2553 — mockup màn hình](images/lg-p2553-00-screen.png)
+
+![Trang 2553 — mockup màn hình](images/lg-p2553-01-screen.png)
+
 2553
 
 <!-- Page 2554 -->
@@ -35060,6 +38344,8 @@ người dùng có thể tự tạo tự do như sau:
 | --- | --- | --- | --- | --- | --- | --- |
 | 4 | Điều kiện nhắc lịch:<br>Ban đầu hidden 3 trường này. Sau khi chọn trường phạm vi áp dụng theo PT, mới hiển thị UI<br>theo giá trị người dùng chọn.<br>Cách hiển thị tuỳ thuộc theo phạm vi áp dụng theo loại PT:<br>Chung cho tất cả loại PT: hiển thị 3 trường áp dụng chung cho tất cả các loại phương tiện.<br>Riêng cho từng loại PT: hiển thị bảng loại phương tiện để điền điều kiện phân biệt cho từng<br>loại PT.<br>Trong đó, các cột là các loại phương tiện:<br>Sơ mi-Rơ mooc<br>Đầu kéo container<br>Xe tải thùng<br>Máy phát điện<br>Xe nâng diesel<br>Xe nâng điện<br>Trạm bơm dầu<br>Reefer container<br>Các hàng là 3 trường cố định điều kiện nhắc lịch bao gồm: Khoản nhắc, dung sai, đơn vị. |  |  |  |  |  |
 | 5 | Khoảng<br>nhắc lịch | Numb<br>erbox | Có | Hidden | Cho phép người dùng điền<br>khoảng nhắc lịch.<br>Chỉ nhập số dương<br>Không có trường này đối với<br>4 bản ghi cố định. |  |
+
+![Trang 2555 — mockup màn hình](images/lg-p2555-00-screen.png)
 
 2555
 
@@ -35108,6 +38394,8 @@ người dùng có thể tự tạo tự do như sau:
 | 1<br>6 | Đối tượng<br>nhắc lịch | Toogl<br>e |  | Off | Cho phép người dùng tắt bật<br>việc nhắc lịch cho các đối<br>tượng.<br>Hiển thị cố định các đối tượng<br>sau:<br>Lái xe<br>Kế toán<br>Hành chính nhân sự<br>Điều vận<br>Quản lý xưởng |  |
 | 1<br>7 | Hành động |  |  |  |  |  |
 
+![Trang 2560 — mockup màn hình](images/lg-p2560-00-screen.png)
+
 2560
 
 <!-- Page 2561 -->
@@ -35129,6 +38417,8 @@ không hợp lệ đó.
 | Cột 1 | Cột 2 | Cột 3 | Cột 4 | Cột 5 | Cột 6 | Cột 7 | Cột 8 | Cột 9 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  | 1<br>9 | Cập nhật |  |  |  | Cho phép người dùng hoàn tất<br>việc thông tin cho yêu cầu<br>cập nhật lịch nhắc.<br>Hệ thống thực hiện kiểm tra<br>validate các trường thông tin<br>tạo mới.<br>Nếu tất cả hợp lệ, hiển thị<br>popup confirm như sau:<br>Xác nhận:<br>Hiển thị toast<br>message Yêu cầu cập<br>nhật thành công<br>Hiển thị màn hình<br>thông tin chi tiết với 3<br>hành động (tuỳ theo<br>phân quyền):<br>Thu hồi<br>Phê duyệt<br>Từ chối<br>Cập nhật bản ghi hiện<br>tại với trạng thái Chờ<br>phê duyệt cập nhật<br>Gửi thông báo tới<br>người dùng có quyền<br>phê duyệt yêu cầu lịch<br>nhắc với nội dung:<br>Quản lý lịch nhắc -<br>Cập nhật<br>Yêu cầu cập nhật lịch |  |  |
+
+![Trang 2563 — mockup màn hình](images/lg-p2563-00-screen.png)
 
 2563
 
@@ -35154,6 +38444,8 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>0 | Huỷ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>yêu cầu lịch nhắc<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ lịch nhắc trước<br>khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách lịch nhắc<br>Hủy: trở về màn lịch nhắc<br>với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 2564 — mockup màn hình](images/lg-p2564-00-screen.png)
+
 2564
 
 <!-- Page 2565 -->
@@ -35162,7 +38454,12 @@ không hợp lệ đó.
 | --- | --- | --- | --- | --- | --- | --- |
 | 2<br>1 |  | Icon |  |  | Cho phép người dùng huỷ bỏ<br>yêu cầu lịch nhắc<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ lịch nhắc trước<br>khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách lịch nhắc<br>Hủy: trở về màn lịch nhắc<br>với các dữ liệu đã<br>chọn/nhập. |  |
 
+![Trang 2565 — mockup màn hình](images/lg-p2565-00-screen.png)
+
 3.4 Màn hình Thông tin lịch nhắc (xem) - Trạng thái Chờ phê duyệt/Chờ phê duyệt cập nhật
+
+![Trang 2565 — mockup màn hình](images/lg-p2565-01-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết lịch nhắc, ở đây chỉ mô tả thêm
 các hành động (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ trạng thái):
 2565
@@ -35195,6 +38492,8 @@ UC08.04.04 - Thu hồi yêu cầu lịch nhắc
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận thu hồi
 
+![Trang 2567 — mockup màn hình](images/lg-p2567-00-screen.png)
+
 
 2567
 
@@ -35212,6 +38511,9 @@ UC08.04.04 - Thu hồi yêu cầu lịch nhắc
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận thu hồi yêu cầu<br>lịch nhắc.<br>Sau khi huỷ bỏ,<br>Trạng thái đối tượng giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin lịch nhắc |  |
 
 3.2 Màn hình Thông tin lịch nhắc (Xem) - Trạng thái Đã thu hồi
+
+![Trang 2569 — mockup màn hình](images/lg-p2569-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết lịch nhắc, ở đây chỉ mô tả hành
 động chi tiết ở trạng thái Đã thu hồi(xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ
 trạng thái)
@@ -35230,6 +38532,9 @@ cầu lịch nhắc với các trường lấy thông tin từ yêu cầu hiện
 
 Xoá yêu cầu: Cho phép người dùng xoá yêu cầu đã bị huỷ.
 Chọn Xoá yêu cầu: Hệ thống hiển thị popup Xác nhận
+
+![Trang 2570 — mockup màn hình](images/lg-p2570-00-screen.png)
+
 Xoá:
 Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
@@ -35254,6 +38559,9 @@ UC08.04.05 - Phê duyệt/Từ chối yêu cầu lịch nhắc
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1 Màn hình Xác nhận từ chối
+
+![Trang 2571 — mockup màn hình](images/lg-p2571-00-screen.png)
+
 2571
 
 <!-- Page 2572 -->
@@ -35270,6 +38578,8 @@ UC08.04.05 - Phê duyệt/Từ chối yêu cầu lịch nhắc
 | --- | --- | --- | --- | --- | --- | --- |
 | 2 | Từ chối | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận từ chối yêu cầu yêu cầu<br>lịch nhắc.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>từ chối<br>Hiển thị toast message : “Từ<br>chối yêu cầu lịch nhắc<br>thành công”<br>Đóng popup Xác nhận Từ<br>chối và hiển thị màn hình<br>Thông tin lịch nhắc với<br>hoạt động:<br>Tạo mới<br>Xóa<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu lịch<br>nhắc này với nội dung:<br>Quản lý lịch nhắc - Tạo mới<br>Yêu cầu tạo mới lịch nhắc<br>đã bị từ chối.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện<br>hành động] hh:mm<br>dd/mm/yyyy<br>Đã từ chối yêu cầu<br>Lý do: [Lý do người dùng<br>nhập khi thực hiện hành<br>động]<br>Cập nhật lại dữ liệu lịch<br>nhắc cho các phương tiện | Trường hợp hành<br>động Thu hồi và<br>Phê duyệt/Từ chối<br>xảy ra cùng thời<br>điểm → Ưu tiên<br>hành động Thu hồi<br>Tại màn hình Thông<br>tin lịch nhắc của<br>người phê duyệt khi<br>ấn Từ chối sau khi<br>người khác vừa thu<br>hồi yêu cầu trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>(Thay UI text “Đề<br>xuất tạo mới” = “Yêu<br>cầu”)<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất của lịch<br>nhắc. |
 
+![Trang 2573 — mockup màn hình](images/lg-p2573-00-screen.png)
+
 2573
 
 <!-- Page 2574 -->
@@ -35279,6 +38589,9 @@ UC08.04.05 - Phê duyệt/Từ chối yêu cầu lịch nhắc
 | 3 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận từ chối yêu cầu<br>lịch nhắc.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin lịch nhắc. |  |
 
 3.2 Màn hình Thông tin lịch nhắc (Xem) - Trạng thái Đã từ chối
+
+![Trang 2574 — mockup màn hình](images/lg-p2574-00-screen.png)
+
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết lịch nhắc, ở đây chỉ mô tả hành
 động chi tiết ở trạng thái Đã từ chối(xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ
 trạng thái)
@@ -35297,12 +38610,17 @@ Xoá yêu cầu: Cho phép người dùng xoá yêu cầu đã bị huỷ.
 <!-- Page 2575 -->
 
 Chọn Xoá yêu cầu: Hệ thống hiển thị popup Xác nhận
+
+![Trang 2575 — mockup màn hình](images/lg-p2575-00-screen.png)
+
 Xoá:
 Hệ thống xoá yêu cầu được chọn
 Hiển thị toast message Xoá yêu cầu thành công
 Đóng tất cả popup và trở về màn hình Danh sách lịch nhắc
 Huỷ: Quay trở về màn hình Thông tin lịch nhắc
 3.3 Màn hình Xác nhận phê duyệt
+
+![Trang 2575 — mockup màn hình](images/lg-p2575-01-screen.png)
 
 
 2575
@@ -35313,6 +38631,9 @@ Huỷ: Quay trở về màn hình Thông tin lịch nhắc
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phê duyệt | Butto<br>n |  | Enable | Cho phép người dùng xác<br>nhận phê duyệt yêu cầu yêu<br>cầu.<br>Sau khi xác nhận,<br>Trạng thái của bản ghi thay<br>đổi từ Chờ phê duyệt → Đã<br>phê duyệt<br>Hiển thị toast message :<br>“Phê duyệt yêu cầulịch<br>nhắc thành công”<br>Đóng popup Xác nhận phê<br>duyệt và hiển thị màn hình<br>Thông tinlịch nhắc.<br>Gửi thông báo tới người<br>dùng đã tạo yêu cầu lịch<br>nhắc này với nội dung:<br>Quản lý lịch nhắc - Tạo mới<br>Yêu cầu tạo mới lịch nhắc<br>đã được phê duyệt.<br>Lưu 1 bản ghi hoạt động mới<br>ở Lịch sử hoạt động:<br>[Tên tài khoản thực hiện<br>hành động] hh:mm<br>dd/mm/yyyy<br>Đã phê duyệt yêu cầu | Trường hợp hành<br>động Thu hồi và<br>Phê duyệt/Từ chối<br>xảy ra cùng thời<br>điểm → Ưu tiên<br>hành động Thu hồi<br>yêu cầu<br>Tại màn hình Thông<br>tinlịch nhắc của<br>người phê duyệt khi<br>ấn Phê duyệt sau<br>khi người khác vừa<br>huỷ yêu cầu trước,<br>hệ thống hiển thị<br>popup thông báo lỗi:<br>Nhấn nút Tải lại<br>trang để reload lại<br>trạng thái/thông tin<br>mới nhất củalịch<br>nhắc. |
 | 2 | Huỷ bỏ | Butto<br>n |  | Enable | Cho phép người dùng huỷ bỏ<br>việc xác nhận phê duyệt yêu<br>cầu lịch nhắc.<br>Sau khi huỷ bỏ,<br>Trạng thái bản ghi giữ<br>nguyên: Chờ phê duyệt<br>Đóng popup và trở về màn<br>hình Thông tin lịch nhắc |  |
+
+![Trang 2576 — mockup màn hình](images/lg-p2576-00-screen.png)
+
 2576
 
 <!-- Page 2577 -->
@@ -35321,6 +38642,9 @@ Huỷ: Quay trở về màn hình Thông tin lịch nhắc
 Các trường thông tin đã được mô tả ở UC Xem thông tin chi tiết lịch nhắc, ở đây không có thêm
 hành động ở trạng thái Đã phê duyệt (xem đầy đủ các hành động theo từng trạng thái ở Lưu đồ
 trạng thái)
+
+![Trang 2577 — mockup màn hình](images/lg-p2577-00-screen.png)
+
 2577
 
 <!-- Page 2578 -->
@@ -35349,6 +38673,8 @@ UC08.04.06 - Xem lịch nhắc của từng phương tiện (old version)
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Phân loại |  |  |  | Hiển thị lịch nhắc theo các<br>phân loại:<br>Theo thời gian:<br>Theo vận hành:<br>Theo hạn thời gian: |  |
 
+![Trang 2579 — mockup màn hình](images/lg-p2579-00-screen.png)
+
 2579
 
 <!-- Page 2580 -->
@@ -35359,6 +38685,12 @@ UC08.04.06 - Xem lịch nhắc của từng phương tiện (old version)
 | 3 | Nội dung<br>nhắc lịch | Label |  |  | Hiển thị tên hoạt động nhắc<br>lịch. |  |
 | 4 | Lần cuối<br>thực hiện | Label |  |  | Hiển thị thời gian lần cuối thực<br>hiện hoạt động của phương<br>tiện.<br>Hiển thị đối với các bản ghi<br>nhắc lịch theo thời gian. |  |
 | 5 | Ngày cần<br>thực hiện | Label |  |  | Hiển thị thời gian cần thực<br>hiện hoạt động của phương<br>tiện.<br>Hiển thị đối với các bản ghi<br>nhắc lịch theo thời gian. |  |
+
+![Trang 2580 — mockup màn hình](images/lg-p2580-00-screen.png)
+
+![Trang 2580 — mockup màn hình](images/lg-p2580-01-screen.png)
+
+![Trang 2580 — mockup màn hình](images/lg-p2580-02-screen.png)
 
 2580
 
@@ -35529,6 +38861,8 @@ Thứ tự mặc định của bản ghi sau khi tạo mới là hiển thị đ
 | 1 | Thanh tìm<br>kiếm | Searc<br>h box |  |  | Cho phép tìm kiếm gần đúng<br>các dữ liệu trong toàn bộ bảng<br>(trừ trạng thái) |  |
 | 2 | Thêm mới | Butto<br>n |  |  | Cho phép người dùng tạo mới<br>1 câu hỏi thưởng gặp.<br>Hệ thống hiển thị popup Tạo<br>mới câu hỏi thường gặp, thực<br>hiện UC Tạo mới câu hỏi<br>thường gặp |  |
 
+![Trang 2589 — mockup màn hình](images/lg-p2589-00-screen.png)
+
 2589
 
 <!-- Page 2590 -->
@@ -35542,6 +38876,8 @@ Thứ tự mặc định của bản ghi sau khi tạo mới là hiển thị đ
 | 7 | +/- | Icon |  | -<br>(Collaps<br>ed) | Cho phép người dùng<br>đóng/mở để xem chi tiết câu<br>trả lời cho câu hỏi thường gặp. |  |
 | 8 | Hành động | Butto<br>n |  |  | Cho phép người dùng được<br>chọn tới hành động được phân<br>quyền.<br>Cập nhật: Thực hiện UC<br>Cập nhật câu hỏi thường<br>gặp<br>Xóa: Thực hiện UC Xóa câu<br>hỏi thường gặp |  |
 | 9 | Xem thêm | Butto<br>n |  |  | Cho phép người dùng xem<br>tiếp 10 bản ghi tiếp theo. |  |
+
+![Trang 2590 — mockup màn hình](images/lg-p2590-00-screen.png)
 
 2590
 
@@ -35562,6 +38898,9 @@ UC09.01.02 - Tạo/cập nhật câu hỏi thường gặp
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Tạo mới/Cập nhật câu hỏi thường gặp
+
+![Trang 2591 — mockup màn hình](images/lg-p2591-00-screen.png)
+
 2591
 
 <!-- Page 2592 -->
@@ -35571,6 +38910,8 @@ UC09.01.02 - Tạo/cập nhật câu hỏi thường gặp
 | 1 | Câu hỏi | Short<br>textb<br>ox | Có |  | Cho phép người dùng nhập<br>câu hỏi. |  |
 | 2 | Câu trả lời | Long<br>textb<br>ox | Có |  | Cho phép người dùng nhập<br>câu trả lời.<br>Cho phép người dùng xuống<br>dòng, cách dòng. |  |
 
+![Trang 2592 — mockup màn hình](images/lg-p2592-00-screen.png)
+
 2592
 
 <!-- Page 2593 -->
@@ -35579,6 +38920,14 @@ UC09.01.02 - Tạo/cập nhật câu hỏi thường gặp
 | --- | --- | --- | --- | --- | --- | --- |
 | 3 | Hủy | Butto<br>n |  | Enable | Cho phép người dùng hủy tạo<br>mới câu hỏi thường gặp.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ câu hỏi thường<br>gặp trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách câu hỏi<br>thường gặp<br>Hủy: trở về màn Tạo<br>mới/Cập nhật câu hỏi<br>thường gặp với các dữ liệu<br>đã chọn/nhập. |  |
 | 4 | Đóng | Icon |  |  | Cho phép người dùng hủy tạo<br>mới câu hỏi thường gặp.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ câu hỏi thường<br>gặp trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách câu hỏi<br>thường gặp<br>Hủy: trở về màn Tạo<br>mới/Cập nhật câu hỏi<br>thường gặp với các dữ liệu<br>đã chọn/nhập. |  |
+
+![Trang 2593 — mockup màn hình](images/lg-p2593-00-screen.png)
+
+![Trang 2593 — mockup màn hình](images/lg-p2593-01-screen.png)
+
+![Trang 2593 — mockup màn hình](images/lg-p2593-00-screen.png)
+
+![Trang 2593 — mockup màn hình](images/lg-p2593-01-screen.png)
 
 2593
 
@@ -35607,6 +38956,9 @@ UC09.01.03 - Xóa câu hỏi thường gặp
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Xác nhận xóa câu hỏi thường gặp
+
+![Trang 2595 — mockup màn hình](images/lg-p2595-00-screen.png)
+
 2595
 
 <!-- Page 2596 -->
@@ -35640,6 +38992,9 @@ UC09.02.01 - Xem danh sách hướng dẫn sử dụng
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Danh sách hướng dẫn sử dụng
+
+![Trang 2598 — mockup màn hình](images/lg-p2598-00-screen.png)
+
 2598
 
 <!-- Page 2599 -->
@@ -35656,6 +39011,8 @@ Thứ tự mặc định của bản ghi sau khi tạo mới là hiển thị đ
 | 4 | Tên HDSD | Label |  |  | Hiển thị tên file hướng dẫn sử<br>dụng |  |
 | 5 | Ngày<br>upload | Label |  |  | Hiển thị ngày tạo bản ghi<br>hướng dẫn sử dụng |  |
 | 6 | Hình<br>preview |  |  |  | Cho phép người dùng xem<br>preview tài liệu thông qua UI<br>thẻ |  |
+
+![Trang 2599 — mockup màn hình](images/lg-p2599-00-screen.png)
 
 2599
 
@@ -35684,6 +39041,9 @@ UC09.02.02 - Tạo/cập nhật hướng dẫn sử dụng
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình Tạo mới/Cập nhật hướng dẫn sử dụng
+
+![Trang 2601 — mockup màn hình](images/lg-p2601-00-screen.png)
+
 2601
 
 <!-- Page 2602 -->
@@ -35694,6 +39054,8 @@ UC09.02.02 - Tạo/cập nhật hướng dẫn sử dụng
 | 2 | Mô tả | Short<br>textb<br>ox | Có |  | Cho phép người dùng nhập<br>mô tả cho tài liệu. |  |
 | 3 | Tài liệu | File<br>uploa<br>d | Có |  | Cho phép người dùng upload<br>tài liệu HDSD lên phần mềm.<br>Các định dạng cho phép: PDF.<br>Người dùng có thể kéo & thả<br>file vào trực tiếp component<br>upload để tải file lên.<br>Sau khi có file đã được<br>upload, phần mềm hiển thêm<br>thị giao diện:<br>Người dùng có thể chọn tên<br>file hoặc ấn icon Download<br>để tải file xuống hoặc icon<br>Thùng rác để loại bỏ file đã<br>upload | Dung lượng tối đa<br>được upload:<br>250MB.<br>→ Nếu vi phạm, hệ<br>thống hiển thị<br>message lỗi: “Dung<br>lượng các file tải lên<br>không quá 250MB.”<br>ngay sau khi file<br>được upload<br>Các định dạng<br>cho phép: PDF.<br>→ Nếu người dùng<br>upload các định<br>dạng không đúng<br>quy định lên, hệ<br>thống không ghi<br>nhận file upload và<br>báo lỗi: “File upload<br>lên không đúng định<br>dạng.” |
 
+![Trang 2602 — mockup màn hình](images/lg-p2602-00-screen.png)
+
 2602
 
 <!-- Page 2603 -->
@@ -35702,6 +39064,14 @@ UC09.02.02 - Tạo/cập nhật hướng dẫn sử dụng
 | --- | --- | --- | --- | --- | --- | --- |
 | 4 | Hủy | Butto<br>n |  | Enable | Cho phép người dùng hủy tạo<br>mới hướng dẫn sử dụng.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ hướng dẫn sử<br>dụng trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách hướng dẫn<br>sử dụng<br>Hủy: trở về màn Tạo<br>mới/Cập nhật hướng dẫn<br>sử dụng với các dữ liệu đã<br>chọn/nhập. |  |
 | 5 | Đóng | Icon |  |  | Cho phép người dùng hủy tạo<br>mới hướng dẫn sử dụng.<br>Hệ thống hiển thị hộp thoại<br>xác nhận huỷ hướng dẫn sử<br>dụng trước khi huỷ.<br>Xác nhận: không tạo ra bản<br>ghi mới nào & trở về màn<br>hình Danh sách hướng dẫn<br>sử dụng<br>Hủy: trở về màn Tạo<br>mới/Cập nhật hướng dẫn<br>sử dụng với các dữ liệu đã<br>chọn/nhập. |  |
+
+![Trang 2603 — mockup màn hình](images/lg-p2603-00-screen.png)
+
+![Trang 2603 — mockup màn hình](images/lg-p2603-01-screen.png)
+
+![Trang 2603 — mockup màn hình](images/lg-p2603-00-screen.png)
+
+![Trang 2603 — mockup màn hình](images/lg-p2603-01-screen.png)
 
 2603
 
@@ -35731,6 +39101,8 @@ UC09.02.03 - Xóa hướng dẫn sử dụng
 3. Mô tả màn hình
 3.1. Màn hình Xác nhận xóa câu hỏi thường gặp
 
+![Trang 2605 — mockup màn hình](images/lg-p2605-00-screen.png)
+
 
 2605
 
@@ -35759,6 +39131,8 @@ UC09.02.04 - Xem chi tiết hướng dẫn sử dụng
 2. Lưu đồ hoạt động
 3. Mô tả màn hình
 3.1. Màn hình chi tiết hướng dẫn sử dụng
+
+![Trang 2607 — mockup màn hình](images/lg-p2607-00-screen.png)
 
 |  | Control | Loại | Trườ<br>ng<br>bắt<br>buộ<br>c | Giá trị<br>mặc<br>định | Mô tả | Validate |
 | --- | --- | --- | --- | --- | --- | --- |
