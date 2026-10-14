@@ -1,10 +1,10 @@
 ---
 name: export
-description: Dùng khi cần xuất gói tài liệu BA của 1 feature cho stakeholder — định dạng PDF (in/email), DOCX (Word editable), hoặc HTML (self-contained xem browser). `/export <feature>` rồi nói định dạng, hoặc `/export <feature> pdf|docx|html`.
+description: Dùng khi cần xuất gói tài liệu BA của 1 feature cho stakeholder — định dạng PDF (in/email), DOCX (Word editable), hoặc HTML (self-contained xem browser). `/export <feature>` rồi nói định dạng, hoặc `/export <feature> pdf|docx|html`. `/export srs [pdf|docx|html] [--features a,b]` = 1 SRS tổng cho mọi feature (chương theo feature).
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 user-invocable: true
 disable-model-invocation: true
-argument-hint: "<feature> [pdf | docx | html]"
+argument-hint: "<feature> | srs [pdf | docx | html] [--features a,b]"
 ---
 <!-- Licensed to test.innvie@gmail.com — Order 56EB8MCXD -->
 
@@ -69,6 +69,8 @@ Gom toàn bộ tài liệu BA của 1 feature (URD/BRD/PRD/spec/erd/flows/states
 /export <feature> pdf          # PDF luôn
 /export <feature> docx         # DOCX
 /export <feature> html         # HTML
+/export srs docx               # SRS tổng: mọi feature có spec, xếp A→Z
+/export srs pdf --features a,b # SRS tổng: chọn feature + thứ tự chương
 ```
 
 Nói bằng lời cũng được: "xuất PDF cho payment", "bản Word của user-login", "xuất HTML feature checkout".‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
@@ -142,6 +144,18 @@ Tool check:
    Share: {gửi 1 file, PNG đã embed | mở browser double-click}.
    ```
 
+## Chế độ SRS tổng (`/export srs`)
+
+Dùng khi cần **1 tài liệu SRS cho nhiều feature** (gửi khách, nộp nghiệm thu). Nguồn vẫn là SRS từng
+feature — chỉ GỘP lúc xuất, không đổi cách viết (`/srs`, `/cr`, `/jira`, stale chain giữ nguyên).
+
+- **Feature đưa vào:** mọi `docs/*/srs/*-spec.md`, bỏ `zz-*` và `_*`. `--features a,b,c` = lọc + thứ tự chương; không có → A→Z. Feature chưa có spec → chỉ liệt kê ở Phần III, không có chương (KHÔNG refuse như chế độ 1 feature, trừ khi không feature nào có spec).
+- **Bố cục:** bìa (bảng chương · feature · status · cập nhật) → **Phần I Chung** (project-profile, system-overview, definitions, operating-environment, tenant-parameters, UI Common = Phụ lục A của mọi spec gộp, mỗi CMP/GR 1 lần) → **Phần II** mỗi feature 1 chương (spec bỏ Phụ lục A + Mục Open Questions, ERD, Flows, States, Userflow, Use cases) → **Phần III Tổng hợp** (OQ theo feature, ma trận truy vết = usecase-index, feature chưa có SRS).
+- **Không gồm** URD/BRD/PRD, user story, test — đó là gói 1 feature (`/export <feature>`).
+- **Trước khi chạy:** bước 4b + 4c (`ui-common-expand --check`, `screens-md appendix --check`) cho TỪNG feature có spec; cảnh báo gom 1 bảng.
+- **L1:** như Phase C, thêm danh sách chương (thứ tự + status từng spec) và feature bị bỏ vì chưa có spec. Spec `status` khác `approved` → ghi rõ trong L1 (bản tổng chứa nội dung chưa duyệt).
+- **Chạy:** `python3 _scripts/build-srs-book.py --format {pdf|docx|html} [--features a,b]` — dùng lại render/verify của `build-export.py`, cùng yêu cầu tool (Phase B).
+
 ## Output
 
 | Format | File |
@@ -149,6 +163,7 @@ Tool check:
 | PDF | `docs/exports/{date}-feature-{slug}-package.pdf` + `docs/exports/assets/{date}-feature-{slug}/diagram-NNN.png` |
 | DOCX | `docs/exports/{date}-feature-{slug}-package.docx` + assets PNG như trên |
 | HTML | `docs/exports/{date}-feature-{slug}-package.html` — self-contained THẬT (mermaid SVG inline, 0 CDN), không cần assets rời |
+| SRS tổng | `docs/exports/{date}-srs-{project}.{pdf|docx|html}` + `docs/exports/assets/{date}-srs-{project}/` (PDF/DOCX) |
 
 Mermaid + ảnh **pre-render thành PNG** trước khi nhúng PDF/DOCX (2 định dạng này không render mermaid).
 

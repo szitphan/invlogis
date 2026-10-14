@@ -1,9 +1,8 @@
 ---
 type: research
 keyword: "kết nối ePort tự động"
-status: in-review
-status_changed: 2026-10-05
-status_reason: "đã review upstream, không cần sửa"
+status: approved
+status_changed: 2026-10-14
 updated: 2026-10-02
 links:
   - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md

@@ -1,7 +1,8 @@
 ---
 type: research
 keyword: "cảnh báo mốc SI/CY/DEM/DET"
-status: in-review
+status: approved
+status_changed: 2026-10-14
 updated: 2026-10-02
 links:
   - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md

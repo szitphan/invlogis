@@ -515,7 +515,7 @@ def find_chrome() -> str:
 
 # === Pandoc conversion ===
 
-def md_to_pdf_via_chrome(md_path: Path, pdf_path: Path, chrome: str) -> int:
+def md_to_pdf_via_chrome(md_path: Path, pdf_path: Path, chrome: str, title: str = "Export Package") -> int:
     """pandoc md → standalone HTML (embed images base64) → Chrome headless → PDF."""
     html_path = md_path.with_suffix(".html")
     css = """
@@ -546,7 +546,7 @@ def md_to_pdf_via_chrome(md_path: Path, pdf_path: Path, chrome: str) -> int:
     cmd_html = [
         "pandoc", str(md_path), "-o", str(html_path),
         "--standalone", "--embed-resources",
-        "--metadata", "title=Export Package",
+        "--metadata", f"title={title}",
         "-c", str(css_path),
         "--toc", "--toc-depth=2",
         "--resource-path=" + str(md_path.parent),

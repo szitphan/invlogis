@@ -50,7 +50,11 @@ def _mermaid_to_inline_svg(md_content: str, tmp_dir):
         mmd.write_text(code, encoding="utf-8")
         try:
             env = os.environ.copy()
-            env.setdefault("PUPPETEER_CACHE_DIR", str(_P.home() / ".puppeteer-cache"))
+            # Chỉ ép ~/.puppeteer-cache khi cache mặc định không có (giống build-export.py):
+            # ép cứng làm mmdc không thấy chrome-headless-shell ở ~/.cache/puppeteer → mọi sơ đồ fail.
+            default_cache = _P.home() / ".cache" / "puppeteer"
+            if not (default_cache.is_dir() and os.access(default_cache, os.W_OK)):
+                env.setdefault("PUPPETEER_CACHE_DIR", str(_P.home() / ".puppeteer-cache"))
             r = subprocess.run(
                 ["mmdc", "-i", str(mmd), "-o", str(svg), "-e", "svg",
                  "-b", "transparent", "--theme", "default"],
@@ -240,7 +244,9 @@ def sanitize_embedded(md: str, feature_dir: Path) -> str:
             return m.group(0)
         anc = _md_target_anchor(path)
         return f"[{text}](#{anc})" if anc else text
-    md = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", _mdlink, md)
+    # (?<!!): bỏ qua ảnh `![alt](x.png)` — trước đây luật này gỡ cả ảnh thành chữ "!alt",
+    # làm export PDF/DOCX mất toàn bộ ảnh CMP + ảnh Figma (Phụ lục A/B).
+    md = re.sub(r"(?<!!)\[([^\]]+)\]\(([^)]+)\)", _mdlink, md)
 
     def _bare(m):
         fname = m.group(0)
