@@ -1,0 +1,860 @@
+{
+  "version": 2,
+  "created": "2026-10-14",
+  "branch": "feat/reverse-lg",
+  "sources": {
+    "web": {
+      "short": "SRS Web",
+      "title": "Tài liệu SRS - ERP Delta 3.0 (Web)",
+      "version": "30/9/2026",
+      "file": "docs-input/srs-cu/lg-srs-export.md",
+      "images": "docs-input/srs-cu/images/",
+      "original": "~/Downloads/lg-export.pdf (ngoài git)",
+      "page_marker": "<!-- Page N -->",
+      "src_id": "SRC-22"
+    },
+    "mobile": {
+      "short": "SRS Mobile",
+      "title": "Tài liệu SRS - ERP Delta 3.0 (Mobile)",
+      "version": "5/10/2026",
+      "file": "docs-input/srs-cu/srs-mobile/srs-mobile.md",
+      "images": "docs-input/srs-cu/srs-mobile/images/",
+      "original": "docs-input/srs-cu/srs-mobile/source/srs-mobile.pdf",
+      "page_marker": "<!-- Trang N -->",
+      "src_id": "SRC-23"
+    },
+    "changes": {
+      "short": "Ghi chép thay đổi",
+      "title": "Thay đổi so với SRS v2.0 (LG) — tài liệu nội bộ của đội",
+      "file": "docs/_product/srs-v2-change-log.md"
+    }
+  },
+  "excluded": {
+    "web": [
+      {
+        "range": [
+          1,
+          9
+        ],
+        "why": "mục lục"
+      },
+      {
+        "range": [
+          10,
+          40
+        ],
+        "why": "quy tắc giao diện chung — đã ở design/ui-common"
+      },
+      {
+        "range": [
+          46,
+          70
+        ],
+        "why": "liên quy trình UC00.00.02/03 — đã thay bằng docs/cross-process-flow"
+      },
+      {
+        "range": [
+          236,
+          246
+        ],
+        "why": "mục lục lặp lại"
+      }
+    ],
+    "mob": [
+      {
+        "range": [
+          1,
+          702
+        ],
+        "why": "mục lục + quy tắc giao diện chung — đã ở design/ui-common"
+      },
+      {
+        "range": [
+          861,
+          940
+        ],
+        "why": "liên quy trình UC00.01.02 — đã thay bằng docs/cross-process-flow"
+      }
+    ]
+  },
+  "features": [
+    {
+      "slug": "account-access",
+      "name": "Đăng nhập và tài khoản cá nhân",
+      "module": "Nền tảng",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": true,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Đăng nhập, mật khẩu, thông tin cá nhân, ngôn ngữ",
+          "web_pages": [
+            [
+              247,
+              281
+            ],
+            [
+              160,
+              162
+            ]
+          ],
+          "mobile_lines": [
+            [
+              941,
+              1604
+            ]
+          ],
+          "status": "done"
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "slug": "common-workspace",
+      "name": "Màn Home và thao tác chung",
+      "module": "Nền tảng",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Home, lưu nháp, format mã, workflow chung, danh mục dùng chung, seed dữ liệu, yêu cầu phi chức năng",
+          "web_pages": [
+            [
+              139,
+              143
+            ],
+            [
+              41,
+              45
+            ],
+            [
+              163,
+              196
+            ],
+            [
+              202,
+              216
+            ],
+            [
+              2609,
+              2610
+            ]
+          ],
+          "mobile_lines": [
+            [
+              703,
+              860
+            ]
+          ],
+          "status": "pending"
+        },
+        {
+          "id": "b",
+          "name": "Export chi tiết, export danh sách, export báo cáo, import, thao tác hàng loạt",
+          "web_pages": [
+            [
+              71,
+              138
+            ],
+            [
+              144,
+              159
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "help-center",
+      "name": "Câu hỏi thường gặp và hướng dẫn sử dụng",
+      "module": "Nền tảng",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Câu hỏi thường gặp, hướng dẫn sử dụng",
+          "web_pages": [
+            [
+              2586,
+              2608
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "access-control",
+      "name": "Tài khoản, nhóm quyền và phân quyền",
+      "module": "Quản trị và cấu hình",
+      "changes": [
+        {
+          "id": "CHG-23",
+          "desc": "quyền gắn với việc và theo ca"
+        }
+      ],
+      "existing_doc": "docs/_product/srs-v2-change-log.md",
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Tài khoản, nhóm quyền, phân quyền tài khoản, phân quyền chức năng và dữ liệu",
+          "web_pages": [
+            [
+              1892,
+              1952
+            ],
+            [
+              217,
+              235
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "organization",
+      "name": "Tổ chức: xưởng và cơ cấu tổ chức",
+      "module": "Danh mục › Tổ chức",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Danh sách xưởng, cơ cấu tổ chức và phân vùng dữ liệu theo chi nhánh",
+          "web_pages": [
+            [
+              283,
+              284
+            ],
+            [
+              2430,
+              2457
+            ],
+            [
+              197,
+              201
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "product-catalog",
+      "name": "Danh mục hàng hoá và dịch vụ kỹ thuật",
+      "module": "Danh mục › Hàng hoá",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": true,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Dịch vụ kỹ thuật, phụ tùng vật tư, công cụ dụng cụ, lốp, ắc quy",
+          "web_pages": [
+            [
+              282,
+              457
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "done"
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "slug": "business-partners",
+      "name": "Đối tác: nhà cung cấp, khách hàng, xe của khách",
+      "module": "Danh mục › Đối tác",
+      "changes": [
+        {
+          "id": "CHG-21",
+          "desc": "bên xuất hoá đơn có thể khác khách đặt dịch vụ"
+        }
+      ],
+      "existing_doc": "docs/_product/srs-v2-change-log.md",
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Nhà cung cấp HHDV, khách hàng DK05, xe của khách hàng",
+          "web_pages": [
+            [
+              283,
+              284
+            ],
+            [
+              458,
+              577
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "cost-catalog",
+      "name": "Khoản mục chi phí cấp 1–3",
+      "module": "Danh mục › Tài chính",
+      "changes": [
+        {
+          "id": "CHG-20",
+          "desc": "loại phí có cách hạch toán theo địa điểm"
+        }
+      ],
+      "existing_doc": "docs/_product/srs-v2-change-log.md",
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Chi phí cấp 1, cấp 2, cấp 3",
+          "web_pages": [
+            [
+              283,
+              284
+            ],
+            [
+              578,
+              679
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "vehicle-management",
+      "name": "Phương tiện, bàn giao và thu hồi",
+      "module": "Quản lý phương tiện",
+      "changes": [
+        {
+          "id": "CHG-17",
+          "desc": "tổ hợp đầu kéo – mooc – container trên Lệnh vận tải"
+        }
+      ],
+      "existing_doc": "docs/_product/srs-v2-change-log.md",
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Danh sách, chi tiết, cập nhật phương tiện",
+          "web_pages": [
+            [
+              2013,
+              2152
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        },
+        {
+          "id": "b",
+          "name": "Bàn giao phương tiện",
+          "web_pages": [
+            [
+              2153,
+              2245
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        },
+        {
+          "id": "c",
+          "name": "Thu hồi phương tiện",
+          "web_pages": [
+            [
+              2246,
+              2329
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "fuel-allowance",
+      "name": "Định mức nhiên liệu phương tiện",
+      "module": "Quản lý phương tiện",
+      "changes": [
+        {
+          "id": "CHG-18",
+          "desc": "cấp dầu gắn Lệnh vận tải và định mức phương tiện"
+        }
+      ],
+      "existing_doc": "docs/_product/srs-v2-change-log.md",
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Định mức nhiên liệu, tiêu hao thực tế, định mức khoán",
+          "web_pages": [
+            [
+              2330,
+              2429
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "incident-report",
+      "name": "Báo cáo sự cố phương tiện",
+      "module": "Bảo dưỡng sửa chữa",
+      "changes": [
+        {
+          "id": "CHG-19",
+          "desc": "báo thay đổi và vấn đề giữa chặng trên Lệnh vận tải"
+        }
+      ],
+      "existing_doc": "docs/_product/srs-v2-change-log.md",
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Báo cáo sự cố (web + app lái xe)",
+          "web_pages": [
+            [
+              1337,
+              1361
+            ]
+          ],
+          "mobile_lines": [
+            [
+              2535,
+              2982
+            ]
+          ],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "repair-quotation",
+      "name": "Chẩn đoán và báo giá sửa chữa",
+      "module": "Bảo dưỡng sửa chữa",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Báo giá hàng hoá dịch vụ (chẩn đoán sửa chữa)",
+          "web_pages": [
+            [
+              984,
+              1087
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "repair-order",
+      "name": "Lệnh sửa chữa",
+      "module": "Bảo dưỡng sửa chữa",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Lệnh sửa chữa (web + nghiệm thu trên app)",
+          "web_pages": [
+            [
+              1201,
+              1336
+            ]
+          ],
+          "mobile_lines": [
+            [
+              2073,
+              2534
+            ]
+          ],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "reminders",
+      "name": "Lịch nhắc bảo dưỡng và giấy tờ",
+      "module": "Bảo dưỡng sửa chữa",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Lịch nhắc (web + app)",
+          "web_pages": [
+            [
+              2516,
+              2585
+            ]
+          ],
+          "mobile_lines": [
+            [
+              2983,
+              3073
+            ]
+          ],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "purchasing",
+      "name": "Mua hàng hoá dịch vụ",
+      "module": "Bảo dưỡng sửa chữa",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Mua hàng hoá dịch vụ, nghiệm thu dịch vụ sửa chữa ngoài trên app",
+          "web_pages": [
+            [
+              897,
+              983
+            ]
+          ],
+          "mobile_lines": [
+            [
+              1605,
+              2072
+            ]
+          ],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "stock-movement",
+      "name": "Nhập và xuất kho phụ tùng",
+      "module": "Bảo dưỡng sửa chữa",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Nhập kho, xuất kho",
+          "web_pages": [
+            [
+              1088,
+              1200
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "inventory-count",
+      "name": "Kiểm kê tồn kho, tồn xưởng, thanh lý rác thải",
+      "module": "Bảo dưỡng sửa chữa",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Hàng tồn kho, kiểm kê tồn kho",
+          "web_pages": [
+            [
+              680,
+              777
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        },
+        {
+          "id": "b",
+          "name": "Hàng tồn xưởng, kiểm kê tồn xưởng, thanh lý rác thải",
+          "web_pages": [
+            [
+              778,
+              896
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "workshop-payment",
+      "name": "Thanh toán mua hàng và bồi thường",
+      "module": "Bảo dưỡng sửa chữa",
+      "changes": [
+        {
+          "id": "CHG-22",
+          "desc": "tạo Yêu cầu thanh toán trên Lệnh/JobID"
+        }
+      ],
+      "existing_doc": "docs/_product/srs-v2-change-log.md",
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Thanh toán trả trước, thanh toán trả sau",
+          "web_pages": [
+            [
+              1362,
+              1474
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        },
+        {
+          "id": "b",
+          "name": "Bồi thường thiệt hại",
+          "web_pages": [
+            [
+              1475,
+              1557
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "service-sales-payment",
+      "name": "Thu tiền bán hàng hoá dịch vụ",
+      "module": "Bảo dưỡng sửa chữa",
+      "changes": [
+        {
+          "id": "CHG-22",
+          "desc": "tạo Yêu cầu thanh toán trên Lệnh/JobID"
+        }
+      ],
+      "existing_doc": "docs/_product/srs-v2-change-log.md",
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Thanh toán bán HHDV trả trước, trả sau",
+          "web_pages": [
+            [
+              1558,
+              1653
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "workshop-reports",
+      "name": "Báo cáo và dashboard xưởng",
+      "module": "Bảo dưỡng sửa chữa",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Báo cáo, dashboard xưởng",
+          "web_pages": [
+            [
+              1654,
+              1682
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "fuel-stations",
+      "name": "Cây dầu và dashboard cây dầu",
+      "module": "Quản lý dầu",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Cây dầu nội bộ, cây dầu mua ngoài, dashboard cây dầu",
+          "web_pages": [
+            [
+              2458,
+              2504
+            ],
+            [
+              1863,
+              1891
+            ],
+            [
+              1684,
+              1712
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "fuel-purchase",
+      "name": "Kế hoạch mua và nhập dầu",
+      "module": "Quản lý dầu",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Mua dầu, nhập dầu",
+          "web_pages": [
+            [
+              1683,
+              1683
+            ],
+            [
+              1713,
+              1810
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "fuel-issuing",
+      "name": "Cấp dầu cho phương tiện",
+      "module": "Quản lý dầu",
+      "changes": [
+        {
+          "id": "CHG-18",
+          "desc": "cấp dầu gắn Lệnh vận tải và định mức phương tiện"
+        }
+      ],
+      "existing_doc": "docs/_product/srs-v2-change-log.md",
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Cấp dầu (web), phiếu cấp dầu (app), mã lỗi barem và cảm biến iGAS",
+          "web_pages": [
+            [
+              1811,
+              1825
+            ],
+            [
+              2505,
+              2515
+            ]
+          ],
+          "mobile_lines": [
+            [
+              3074,
+              5260
+            ]
+          ],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "fuel-payment",
+      "name": "Thanh toán trả sau cây dầu",
+      "module": "Quản lý dầu",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Chốt công nợ, ghi nhận thanh toán cây dầu",
+          "web_pages": [
+            [
+              1826,
+              1862
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    },
+    {
+      "slug": "employee-records",
+      "name": "Cấp mới và cho nghỉ nhân viên",
+      "module": "Nhân sự",
+      "changes": [],
+      "existing_doc": null,
+      "pilot": false,
+      "parts": [
+        {
+          "id": "a",
+          "name": "Cấp mới nhân viên, xin nghỉ nhân viên",
+          "web_pages": [
+            [
+              1953,
+              2012
+            ]
+          ],
+          "mobile_lines": [],
+          "status": "pending"
+        }
+      ],
+      "status": "pending"
+    }
+  ],
+  "updated": "2026-10-15",
+  "modules_decision": "DEC-079 (docs/_product/legacy-issues.md ISS-01) — nhãn module gắn tạm, chốt ở PRD (BL-121)",
+  "issues_register": "docs/_product/legacy-issues.md (đọc từ checkout main)"
+}
