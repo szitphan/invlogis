@@ -1,0 +1,14 @@
+# Thương hiệu Innvie — dùng cho tài liệu trình bày với khách (/deck).
+# Màu lấy mẫu từ logo gốc trong source/ (2026-10-06). Logo/mark tách nền trong suốt từ source/.
+name: Innvie
+colors:
+  primary: "#0036B5"     # xanh đậm — nền slide bìa / ngăn mục / kết
+  on-primary: "#FFFFFF"  # chữ trên nền primary
+  accent: "#00A2FF"      # xanh sáng (ô lớn của mark) — thanh tiến độ, thẻ đề xuất
+  accent-2: "#00FDE6"    # cyan (ô nhỏ của mark)
+logo:
+  on-primary: logo-color.png   # chữ trắng + mark màu, đặt trên nền primary
+  on-light: logo-black.png     # bản đen, đặt trên nền trắng
+mark:
+  on-primary: mark-color.svg   # vector — nét ở mọi cỡ (vẽ lại từ toạ độ ô vuông của logo gốc)
+  on-light: mark-black.svg

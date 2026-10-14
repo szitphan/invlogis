@@ -1,14 +1,15 @@
-# Thương hiệu Innvie — dùng cho tài liệu trình bày với khách (/deck).
-# Màu lấy mẫu từ logo gốc trong source/ (2026-10-06). Logo/mark tách nền trong suốt từ source/.
-name: Innvie
+# Thương hiệu innvie — pháp nhân đứng sau Invlogis, dùng cho tài liệu trình bày với khách (/deck).
+# Cùng hệ nhận diện Invlogis hướng A · Lụa (DEC-072…078). Logo cũ (2026-10-06) lưu ở _archive/.
+# Logo innvie lấy từ design/brand/invlogis/logo/innvie-logo.svg; bản nền tối dựng lại màu (chữ trắng, chấm i periwinkle).
+name: innvie
 colors:
-  primary: "#0036B5"     # xanh đậm — nền slide bìa / ngăn mục / kết
-  on-primary: "#FFFFFF"  # chữ trên nền primary
-  accent: "#00A2FF"      # xanh sáng (ô lớn của mark) — thanh tiến độ, thẻ đề xuất
-  accent-2: "#00FDE6"    # cyan (ô nhỏ của mark)
+  primary: "#0B1033"     # Chàm đêm — nền slide bìa / ngăn mục / kết
+  on-primary: "#FFFFFF"  # chữ trên nền primary: 18.48:1
+  accent: "#2F43DB"      # Cobalt — thanh tiến độ, thẻ đề xuất (trên nền trắng: 7.13:1)
+  accent-2: "#97A6FF"    # Periwinkle — chữ nhấn trên nền primary (8.11:1)
 logo:
-  on-primary: logo-color.png   # chữ trắng + mark màu, đặt trên nền primary
-  on-light: logo-black.png     # bản đen, đặt trên nền trắng
+  on-primary: innvie-logo-reverse.svg
+  on-light: innvie-logo.svg
 mark:
-  on-primary: mark-color.svg   # vector — nét ở mọi cỡ (vẽ lại từ toạ độ ô vuông của logo gốc)
-  on-light: mark-black.svg
+  on-primary: innvie-mark-reverse.svg
+  on-light: innvie-mark.svg

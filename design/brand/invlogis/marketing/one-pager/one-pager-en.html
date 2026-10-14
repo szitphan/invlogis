@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Invlogis · One-page overview</title>
+<!-- A4 dọc 794×1123 px. Sửa chữ ở các thẻ có data-edit. Dựng lại: python3 design/brand/_drafts/_tools/render.py THIS.html OUT.pdf  (PNG: --size 794x1123 --scale 2) -->
+<link rel="stylesheet" href="../assets/m3.css">
+<style>
+@page{size:794px 1123px;margin:0}
+body{width:794px;height:1123px;background:var(--paper)}
+.canvas{width:794px;height:1123px;background:var(--paper)}
+.hero{position:absolute;left:0;top:0;width:794px;height:372px;background:url(../assets/bg/bg-n1-chamdem_1920x1080.jpg) 80% 40%/cover no-repeat}
+.hero .logo{position:absolute;left:44px;top:40px;height:30px}
+.hero .eyebrow{position:absolute;left:44px;top:112px;font-size:10px;width:330px}
+.hero h1{position:absolute;left:44px;top:138px;width:330px;font-size:39px}
+.hero p{position:absolute;left:44px;top:256px;width:335px;font-size:12.5px;line-height:1.5}
+.main{position:absolute;left:44px;right:44px;top:392px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+h2{font-family:var(--f-d);font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);margin-bottom:8px}
+ul{list-style:none} li{font-size:11.5px;line-height:1.45;padding-left:14px;position:relative;margin-bottom:5px;color:var(--ink)}
+li:before{content:"";position:absolute;left:0;top:7px;width:6px;height:1px;background:var(--cobalt)}
+p.t{font-size:11.5px;line-height:1.5;color:var(--ink)}
+.docs{margin-top:9px;display:flex;flex-wrap:wrap;gap:5px} .docs .tag{font-size:9.5px;padding:4px 8px;color:var(--ink);border-color:rgba(14,20,66,.28)}
+.mods{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:2px}
+.mod{border:1px solid rgba(14,20,66,.14);border-radius:12px;background:#fff;padding:10px 11px;display:flex;flex-direction:column;gap:3px}
+.mod b{font-family:var(--f-d);font-weight:600;font-size:11px;line-height:1.25} .mod span{font-size:10px;line-height:1.4;color:var(--slate)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.step{display:flex;flex-direction:column;gap:3px;border-top:1px solid rgba(14,20,66,.28);padding-top:8px}
+.step i{font-style:normal;font-size:10px;color:var(--cobalt)} .step b{font-family:var(--f-d);font-weight:600;font-size:11.5px} .step span{font-size:10.5px;line-height:1.4;color:var(--slate)}
+.vals{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.val b{font-family:var(--f-d);font-weight:600;font-size:11.5px;display:block;margin-bottom:2px} .val span{display:block;font-size:10.5px;line-height:1.4;color:var(--slate)}
+.sec{margin-top:20px}
+.proof{margin-top:16px;border-left:2px solid var(--cobalt);padding:2px 0 2px 12px;font-family:var(--f-d);font-weight:300;font-size:13.5px;line-height:1.4}
+.cta{position:absolute;left:0;right:0;bottom:0;height:128px;background:url(../assets/bg/bg-n1-chamdem_1920x1080.jpg) 0 60%/cover no-repeat}
+.cta .logo{position:absolute;left:44px;top:62px;height:34px}
+.cta h3{position:absolute;left:44px;top:20px;font-family:var(--f-d);font-weight:300;font-size:19px;color:#fff;width:420px}
+.cta .s2{position:absolute;left:44px;top:46px;font-size:11px;color:#fff}
+.cta .ct{position:absolute;left:44px;bottom:12px;display:flex;gap:22px;font-size:10.5px;color:#fff}
+.cta .foot{position:absolute;right:44px;bottom:12px;font-size:9.5px;color:#fff;text-align:right}
+</style></head><body>
+<div class="canvas">
+ <div class="hero">
+  <img class="logo" src="../assets/logo/invlogis-reverse.svg" alt="invlogis">
+  <div class="sdoc" style="left:418px;top:34px;width:176px;font-size:10.5px;transform:rotate(-4deg)"><span class="tag">[Booking Note]</span><div class="r"><i>BOOKING NO</i><b>VD-0000</b></div><div class="r"><i>PORT</i><b>[sample port]</b></div><div class="r"><i>CONT TYPE</i><b>40HC</b></div><div class="ft">sample data · read</div></div><div class="sdoc" style="left:612px;top:58px;width:168px;font-size:10.5px;transform:rotate(3deg)"><span class="tag">[eDO]</span><div class="r"><i>CONT NO</i><b>MSKU 000000-0</b></div><div class="r"><i>PORT</i><b>[sample port]</b></div><div class="r"><i>PICK-UP BY</i><b>[sample date]</b></div><div class="ft">sample data · read</div></div><div class="sdoc" style="left:500px;top:206px;width:190px;font-size:10.5px;transform:rotate(2deg)"><span class="tag">[Weighbridge]</span><div class="r"><i>GROSS WEIGHT</i><b>00.000 kg</b></div><div class="r"><i>TARE</i><b>0.000 kg</b></div><div class="ft">sample data · read</div></div>
+  <div class="mono w chk" style="position:absolute;left:418px;bottom:14px;font-size:8.5px" data-edit>Sample data</div>
+  <div class="eyebrow w chk" data-edit>operating platform · Vietnamese logistics</div>
+  <h1 class="d w chk" data-edit>Open a new way to operate.</h1>
+  <p class="w chk" data-edit>Invlogis reads Vietnamese shipping documents straight into the shipment file, so you re-type less and your data carries on from port and yard to receivables.</p>
+ </div>
+ <div class="main">
+  <div class="row">
+   <div><h2>The problem</h2><ul><li>Miss a port deadline and fees follow: demurrage (DEM) when import containers sit past the free period, detention (DET) when the empty comes back late.</li><li>EIRs, handover records and weigh slips arrive late, so closing the order and costing run late too.</li><li>One shipment's data sits with many people in many files; jobs go out over Zalo and are hard to trace.</li></ul></div>
+   <div><h2>AI that reads Vietnamese documents</h2><p class="t" data-edit>Photograph or upload a document. Invlogis reads the key fields into the shipment file; you review and approve before it is saved.</p><div class="docs"><span class="tag" data-edit>[Booking Note]</span><span class="tag" data-edit>[eDO]</span><span class="tag" data-edit>[EIR]</span><span class="tag" data-edit>[weighbridge ticket]</span><span class="tag" data-edit>[QR customs declaration]</span></div></div>
+  </div>
+  <div class="sec"><h2>Modules, one set of data</h2><div class="mods"><div class="mod"><b data-edit>Dispatch</b><span data-edit>From customer documents to a completed transport order.</span></div><div class="mod"><b data-edit>Workshop</b><span data-edit>Repairs, spare-parts stock, purchasing.</span></div><div class="mod"><b data-edit>Receivables, payments, invoices</b><span data-edit>Costs and revenue land on the right shipment.</span></div><div class="mod"><b data-edit>Vehicles</b><span data-edit>Vehicle records, handover, return.</span></div><div class="mod"><b data-edit>Field app</b><span data-edit>Take jobs, photograph documents; works offline.</span></div><div class="mod"><b data-edit>Set up per customer</b><span data-edit>Parameters, lists, on/off packages; no code changes.</span></div></div></div>
+  <div class="sec row"><div style="grid-column:1/3"><h2>How it works</h2><div class="steps"><div class="step"><i class="mono">01</i><b data-edit>Documents come in</b><span data-edit>Booking Note, eDO, EIR, weighbridge ticket, declaration.</span></div><div class="step"><i class="mono">02</i><b data-edit>AI reads, you approve</b><span data-edit>Key fields land in the shipment file.</span></div><div class="step"><i class="mono">03</i><b data-edit>Data carries on</b><span data-edit>Dispatch, transport order, costs, receivables.</span></div></div></div></div>
+  <div class="sec"><h2>Built for Vietnamese ports</h2><div class="vals"><div class="val"><b data-edit>ePort ports</b><span data-edit>Keep the ePort task list and its results in the shipment file.</span></div><div class="val"><b data-edit>Storage and empty-return limits</b><span data-edit>See DEM and DET limits coming, so fees are avoided.</span></div><div class="val"><b data-edit>6 process templates</b><span data-edit>FCL, LCL/CFS, air × export, import; a shared catalogue of Vietnamese ports and yards.</span></div></div></div>
+  <div class="proof" data-edit>The platform already runs at a container trucking company handling around 110,000 shipments a year.</div>
+  <div class="ph s" style="margin-top:7px;font-size:9.5px" data-edit>[chờ: how long, measured result, source]</div>
+ </div>
+ <div class="cta">
+  <h3 data-edit>See Invlogis run on your own documents</h3>
+  <div class="s2" data-edit>Book a walkthrough with us.</div>
+  <div class="ct"><span class="ph" data-edit>[chờ: email]</span><span class="ph" data-edit>[chờ: phone]</span><span class="ph" data-edit>[chờ: website]</span></div>
+  <div class="foot" data-edit>Invlogis is a product of innvie.</div>
+ </div>
+</div></body></html>

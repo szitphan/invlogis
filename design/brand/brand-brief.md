@@ -144,8 +144,8 @@ Ba hướng phải khác nhau thật về ý tưởng, không phải ba biến t
 |---|---|
 | 1 | `brand-strategy.md`; mỗi hướng A, B, C: logo SVG (Invlogis chính, ký hiệu, lockup "by innvie", logo innvie), bảng màu (chủ đạo, trung tính, dải gradient chiến dịch), cặp font, 3 ứng dụng mẫu (bìa deck 1920×1080, bài mạng xã hội 1080×1350, splash điện thoại 390×844), thử favicon 16 và 32px; một trang so sánh |
 | 2 | Bộ logo đầy đủ, favicon, icon app, logo động; bộ màu và chữ; trang quy chuẩn (HTML + PDF); `brand.yml` mới; thư viện nền gradient ✅ 14/10/2026 (DEC-074): `design/brand/invlogis/` + `design/brand/guideline/` |
-| 3 | Deck + mẫu slide, landing page Việt + Anh, tài liệu 1 trang, bộ mạng xã hội, banner ra mắt, danh thiếp, giấy tiêu đề, chữ ký email, mẫu báo giá và hợp đồng, điểm chạm sản phẩm |
-| 4 | File Figma "[innvie] Invlogis Brand", PDF và PPTX bản cuối, gói bàn giao |
+| 3 | Deck + mẫu slide, landing page Việt + Anh, tài liệu 1 trang, bộ mạng xã hội, banner ra mắt, danh thiếp, giấy tiêu đề, chữ ký email, mẫu báo giá và hợp đồng, điểm chạm sản phẩm ✅ 14/10/2026 (DEC-075): `design/brand/invlogis/{deck,web,marketing,stationery,product}/` |
+| 4 | File Figma "[innvie] Invlogis Brand", PDF và PPTX bản cuối, gói bàn giao ✅ 14/10/2026 (DEC-078): https://www.figma.com/design/KPpfeOJ4m0JI33rBnhon3o · `design/brand/invlogis/README.md`; logo innvie cũ ở `design/brand/innvie/_archive/` |
 
 Thư mục nháp:
 

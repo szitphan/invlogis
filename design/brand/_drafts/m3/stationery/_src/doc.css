@@ -1,0 +1,21 @@
+@font-face{font-family:Lexend;font-weight:400;src:url({P}assets/fonts/Lexend-400.ttf)}
+@font-face{font-family:BVP;font-weight:400;src:url({P}assets/fonts/BeVietnamPro-400.ttf)}
+@font-face{font-family:BVP;font-weight:600;src:url({P}assets/fonts/BeVietnamPro-600.ttf)}
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+body{margin:0;font:10.5pt/1.35 BVP,Arial,sans-serif;color:#0E1442;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.ph{background:#FFD3C0}
+.hd{height:19mm;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:.5pt solid #2F43DB;padding-bottom:6mm;margin:12mm 22mm 8mm}
+.hd img{height:13mm}.hi{font-size:8pt;color:#4A5380;text-align:right;line-height:1.3}
+.ft{font-size:7.5pt;color:#4A5380;border-top:.5pt solid #C4CDFF;padding-top:2mm;margin:0 22mm 10mm;height:8mm}
+h1{font:400 20pt/1.1 Lexend,Arial,sans-serif;text-align:center;margin:6pt 0 0}
+.en{text-align:center;font-style:italic;color:#4A5380;font-size:10pt;margin:0 0 6pt}
+.meta{text-align:center;margin-bottom:10pt}
+h2{font:400 12pt/1.2 Lexend,Arial,sans-serif;margin:12pt 0 4pt;break-after:avoid}h2 i{font:italic 9pt BVP,Arial;color:#4A5380}
+p{margin:0 0 5pt;text-align:justify;line-height:1.35}p.m{font-size:9pt;color:#4A5380}p.i{font-style:italic}p.ind{margin-left:8mm}
+table{border-collapse:collapse}table.kv td{padding:1.5pt 3pt 1.5pt 0;font-size:10pt;vertical-align:top}table.kv td:first-child{width:48mm;color:#4A5380}
+table.grid{width:100%;margin:4pt 0 8pt}table.grid th{background:#E6EAF8;font-size:8.5pt;padding:3pt 4pt;border:.5pt solid #C4CDFF;text-align:center}table.grid th i{font-weight:400;font-size:7.5pt;color:#4A5380}
+table.grid td{border:.5pt solid #C4CDFF;padding:3pt 4pt;font-size:9pt}table.grid td.r{text-align:right}table.grid td.c{text-align:center}tr.tot td{font-weight:600;background:#FAF8F4}
+table.sig{width:100%;margin-top:14pt;break-inside:avoid}table.sig td{text-align:center;width:50%;vertical-align:top;font-size:10pt}table.sig i{font-size:8.5pt;color:#4A5380}table.sig span{font-size:8.5pt;color:#4A5380}.sp{height:34pt}
+
+table.pg{width:100%;border-collapse:collapse}table.pg>thead>tr>td,table.pg>tfoot>tr>td,table.pg>tbody>tr>td{padding:0}main{padding:0 22mm;display:block}thead{display:table-header-group}tfoot{display:table-footer-group}

@@ -1,0 +1,40 @@
+/* Invlogis × innvie — marketing M3 · CSS dùng chung. Token lấy từ design/brand/invlogis/brand-tokens.css */
+@font-face{font-family:"Lexend";font-weight:300;src:url(fonts/Lexend-300.ttf)}
+@font-face{font-family:"Lexend";font-weight:400;src:url(fonts/Lexend-400.ttf)}
+@font-face{font-family:"Lexend";font-weight:600;src:url(fonts/Lexend-600.ttf)}
+@font-face{font-family:"Be Vietnam Pro";font-weight:300;src:url(fonts/BeVietnamPro-300.ttf)}
+@font-face{font-family:"Be Vietnam Pro";font-weight:400;src:url(fonts/BeVietnamPro-400.ttf)}
+@font-face{font-family:"Be Vietnam Pro";font-weight:500;src:url(fonts/BeVietnamPro-500.ttf)}
+@font-face{font-family:"Be Vietnam Pro";font-weight:600;src:url(fonts/BeVietnamPro-600.ttf)}
+@font-face{font-family:"JetBrains Mono";font-weight:400;src:url(fonts/JetBrainsMono-400.ttf)}
+@font-face{font-family:"JetBrains Mono";font-weight:500;src:url(fonts/JetBrainsMono-500.ttf)}
+:root{--ink:#0E1442;--night:#0B1033;--navy:#17206F;--cobalt:#2F43DB;--violet:#7B55FF;--pink:#E24C9A;--coral:#FF7A59;
+--peri:#97A6FF;--peri-l:#C4CDFF;--smoke:#E6EAF8;--paper:#FAF8F4;--slate:#4A5380;
+--f-d:"Lexend","Be Vietnam Pro",sans-serif;--f-b:"Be Vietnam Pro",sans-serif;--f-m:"JetBrains Mono",ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff}
+body{font-family:var(--f-b);font-weight:400;-webkit-font-smoothing:antialiased;color:var(--ink)}
+.canvas{position:relative;overflow:hidden;background:var(--night)}
+.bg{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat}
+.abs{position:absolute}
+.d{font-family:var(--f-d);font-weight:300;line-height:1.1}
+.d6{font-family:var(--f-d);font-weight:600;line-height:1.15}
+.w{color:#fff}.k{color:var(--night)}.i{color:var(--ink)}.s{color:var(--slate)}
+.mono{font-family:var(--f-m);font-weight:500;letter-spacing:.02em}
+.eyebrow{font-family:var(--f-d);font-weight:400;text-transform:uppercase;letter-spacing:.14em}
+.tag{display:inline-block;font-family:var(--f-m);font-weight:500;letter-spacing:.02em;border:1px solid currentColor;border-radius:999px;white-space:nowrap}
+.glass{background:rgba(11,16,51,.78);border:1px solid rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(10px)}
+.glass-l{background:rgba(250,248,244,.88);border:1px solid rgba(14,20,66,.14);color:var(--night);backdrop-filter:blur(10px)}
+.frame{border:1px solid rgba(255,255,255,.3)}
+.logo{display:block;height:auto}
+.btn{display:inline-block;font-family:var(--f-b);font-weight:600;border-radius:999px;white-space:nowrap}
+.btn-w{background:#fff;color:var(--night)}
+.btn-c{background:var(--cobalt);color:#fff}
+.ph{font-family:var(--f-m);font-weight:500}
+/* Thẻ chứng từ minh hoạ (dữ liệu mẫu, không phải chứng từ thật). Cỡ đặt bằng font-size của thẻ */
+.sdoc{position:absolute;background:#fff;border:1px solid rgba(14,20,66,.14);border-radius:1.2em;padding:1.1em 1.2em;color:var(--ink);box-shadow:0 1.5em 3em rgba(11,16,51,.35)}
+.sdoc .tag{font-size:.8em;padding:.3em .8em;color:var(--ink);border-color:rgba(14,20,66,.28)}
+.sdoc .r{margin-top:.9em}
+.sdoc i{display:block;font:500 .62em var(--f-m);font-style:normal;color:var(--slate);letter-spacing:.06em}
+.sdoc b{display:block;font-weight:500;font-size:1.05em;margin-top:.15em}
+.sdoc .ft{margin-top:1.1em;border-top:1px solid rgba(14,20,66,.14);padding-top:.7em;font:500 .62em var(--f-m);color:var(--slate)}

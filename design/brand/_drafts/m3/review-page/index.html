@@ -1,0 +1,310 @@
+<title>Invlogis Mốc 3</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Một cột; mỗi bộ = ảnh + ô duyệt; câu hỏi chung + thông tin pháp nhân ở cuối; "Báo xong" chốt trang */
+:root{
+  --bg:#f6f5f1; --surface:#ffffff; --ink:#14173a; --muted:#565b78; --line:#dcdbe6;
+  --accent:#2a36d6; --accent-soft:#e7e9fb; --ok:#1f6b45;
+  --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10122a; --surface:#181b38; --ink:#eceef9; --muted:#a6abc8; --line:#2c3058;
+  --accent:#8f9bff; --accent-soft:#232a5c; --ok:#7fd3a6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10122a; --surface:#181b38; --ink:#eceef9; --muted:#a6abc8; --line:#2c3058;
+  --accent:#8f9bff; --accent-soft:#232a5c; --ok:#7fd3a6; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-body);padding-inline:16px;padding-block:32px 64px}
+main{max-width:920px;margin:0 auto;display:grid;gap:44px}
+h1,h2,h3{text-wrap:balance;line-height:1.25;margin:0}
+h1{font-size:clamp(28px,5vw,40px);font-weight:600}
+h2{font-size:22px;font-weight:600}
+h3{font-size:16px;font-weight:600}
+p,ul{margin:0;max-width:65ch}
+ul{padding-left:20px}
+.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.stack{display:grid;gap:12px}
+.lead{color:var(--muted);font-size:17px}
+.small{font-size:14px;color:var(--muted)}
+img.shot{width:100%;display:block;border-radius:12px;border:1px solid var(--line);background:var(--surface)}
+.scroll{max-height:640px;overflow:auto;border-radius:12px;border:1px solid var(--line)}
+.scroll img.shot{border:0;border-radius:0}
+.block{display:grid;gap:16px;padding-top:28px;border-top:1px solid var(--line)}
+.ask{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px}
+.ask + .ask{margin-top:-4px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts label{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;font-size:15px}
+.opts input{accent-color:var(--accent)}
+.opts label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.opts label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+textarea,input[type=text]{width:100%;box-sizing:border-box;font:15px/1.5 var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:64px}
+textarea:focus,input[type=text]:focus{outline:2px solid var(--accent);outline-offset:1px}
+blockquote{margin:0;padding:12px 16px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 10px 10px 0;font-size:15px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.fields label{display:grid;gap:4px;font-size:14px;color:var(--muted);min-width:0}
+.saved{font:500 12px/1 var(--f-mono);color:var(--ok);min-height:12px}
+.done{background:var(--accent-soft);border-radius:14px;padding:22px;display:grid;gap:12px}
+button{font:600 15px/1 var(--f-body);background:var(--accent);color:var(--surface);border:0;border-radius:999px;padding:12px 20px;cursor:pointer;justify-self:start}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+button[disabled]{opacity:.5;cursor:default}
+.status{font-size:14px;color:var(--muted)}
+.status.ok{color:var(--ok)}
+</style>
+
+<main>
+  <header class="stack">
+    <div class="eyebrow">Invlogis × innvie · Mốc 3 · 14/10/2026</div>
+    <h1>Duyệt bộ ứng dụng thương hiệu</h1>
+    <p class="lead">Năm bộ đã làm xong và đã sửa một vòng theo reviewer: deck chào hàng, landing page, marketing, văn phòng phẩm, điểm chạm sản phẩm. Mỗi bộ có ô duyệt và ô ghi chú, kèm vài câu cần bạn quyết. Câu trả lời tự lưu. Xong bấm "Báo xong" ở cuối trang.</p>
+    <p class="small">Chỗ ghi <code>[chờ: …]</code> trong ảnh là thông tin mình chưa có (pháp nhân, liên hệ, số liệu). Điền ở mục 6 thì mình thay vào hết.</p>
+    <p id="dbnote" class="small">Đang kết nối nơi lưu câu trả lời…</p>
+  </header>
+
+  <section class="block">
+    <div class="stack"><div class="eyebrow">1 · Deck chào hàng</div><h2>Deck 16 slide + bộ mẫu slide 8 kiểu</h2>
+      <p class="small">HTML để chiếu, PPTX sửa được chữ, PDF để gửi. Câu chuyện: nỗi khổ chứng từ cảng Việt → AI đọc chứng từ → nền tảng đủ module → theo một lô hàng → bằng chứng (không nêu tên khách) → ba điều chúng tôi giữ → hướng đi → chạy thử → liên hệ. Reviewer chấm 6/10 (vai giám đốc vận tải) và 8/10 (vai giữ thương hiệu) trước khi sửa.</p></div>
+    <img class="shot" src="deck.jpg" alt="Bảng ảnh toàn bộ slide deck chào hàng Invlogis" loading="lazy">
+    <div class="ask" data-q="deck">
+      <div class="opts" role="radiogroup" aria-label="Deck">
+        <label><input type="radio" name="deck" value="duyệt"> Duyệt</label>
+        <label><input type="radio" name="deck" value="cần sửa"> Cần sửa</label>
+      </div>
+      <textarea placeholder="Sửa gì? (ghi số slide)"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="stack"><div class="eyebrow">2 · Landing page</div><h2>Trang giới thiệu tiếng Việt + tiếng Anh</h2>
+      <p class="small">Có hiệu ứng "AI đọc chứng từ" (có nút dừng), giao diện tối, chạy trên điện thoại. Phần vấn đề viết theo đúng chữ trong tài liệu: phí lưu container (DEM), phí lưu vỏ (DET), chứng từ giấy về chậm, Excel và Zalo. Cuộn trong khung để xem cả trang; bên dưới là bản điện thoại.</p></div>
+    <div class="scroll"><img class="shot" src="web-desktop.jpg" alt="Landing page tiếng Việt trên máy tính, toàn trang" loading="lazy"></div>
+    <img class="shot" src="web-mobile.jpg" alt="Landing page tiếng Việt trên điện thoại, cắt thành bốn cột" loading="lazy">
+    <div class="ask" data-q="web">
+      <div class="opts" role="radiogroup" aria-label="Landing page">
+        <label><input type="radio" name="web" value="duyệt"> Duyệt</label>
+        <label><input type="radio" name="web" value="cần sửa"> Cần sửa</label>
+      </div>
+      <textarea placeholder="Sửa gì?"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+    <div class="ask" data-q="web-h1">
+      <h3>Tiêu đề lớn đầu trang</h3>
+      <div class="opts" role="radiogroup" aria-label="Tiêu đề đầu trang">
+        <label><input type="radio" name="web-h1" value="khai-mo"> "Khai mở cách vận hành mới." (đang dùng)</label>
+        <label><input type="radio" name="web-h1" value="chung-tu-vao"> "Chứng từ vào. Hồ sơ sẵn.", khẩu hiệu xuống dòng phụ</label>
+      </div>
+      <textarea placeholder="Ghi chú (không bắt buộc)"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+    <div class="ask" data-q="launch-strip">
+      <h3>Dải "Ra mắt Invlogis" màu rực trên đầu trang</h3>
+      <div class="opts" role="radiogroup" aria-label="Dải ra mắt">
+        <label><input type="radio" name="launch-strip" value="ngay"> Hiện từ bây giờ</label>
+        <label><input type="radio" name="launch-strip" value="ngay-ra-mat"> Chỉ hiện từ ngày ra mắt</label>
+      </div>
+      <textarea placeholder="Ngày ra mắt dự kiến (nếu đã có)"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="stack"><div class="eyebrow">3 · Marketing</div><h2>Tài liệu 1 trang, mạng xã hội, banner ra mắt</h2>
+      <p class="small">Tài liệu 1 trang A4 Việt/Anh; 6 bài đăng, 3 story, ảnh bìa LinkedIn, Facebook, YouTube/X; bộ ra mắt (hero web, đầu email, bài đăng, story đếm ngược, phông sự kiện 3000×2000). Thẻ chứng từ dùng dữ liệu minh hoạ, có nhãn.</p></div>
+    <img class="shot" src="marketing.jpg" alt="Bảng ảnh toàn bộ tài liệu marketing và banner ra mắt" loading="lazy">
+    <div class="ask" data-q="marketing">
+      <div class="opts" role="radiogroup" aria-label="Marketing">
+        <label><input type="radio" name="marketing" value="duyệt"> Duyệt</label>
+        <label><input type="radio" name="marketing" value="cần sửa"> Cần sửa</label>
+      </div>
+      <textarea placeholder="Sửa gì? (ghi tên file hoặc mô tả)"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+    <img class="shot" src="backdrop.jpg" alt="Phông sự kiện ra mắt với câu giải thích nghĩa khánh thành của innvie" loading="lazy">
+    <div class="ask" data-q="backdrop-line">
+      <h3>Câu về nghĩa "khánh thành" của innvie trên phông sự kiện</h3>
+      <blockquote>innvie, công ty đứng sau Invlogis, trong tiếng Na Uy còn có nghĩa là khánh thành và khai mở: hôm nay chúng tôi khai mở một cách vận hành mới.<br><span class="small">innvie, the company behind Invlogis, also means to inaugurate and to open in Norwegian: today we open a new way to operate.</span></blockquote>
+      <div class="opts" role="radiogroup" aria-label="Câu khánh thành">
+        <label><input type="radio" name="backdrop-line" value="duyệt"> Duyệt câu này</label>
+        <label><input type="radio" name="backdrop-line" value="sửa"> Sửa (ghi câu bạn muốn)</label>
+      </div>
+      <textarea placeholder="Câu bạn muốn dùng"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+    <div class="ask" data-q="templates6">
+      <h3>Tài liệu 1 trang ghi "6 mẫu quy trình: FCL, LCL/CFS, hàng không × xuất, nhập"</h3>
+      <p class="small">Mình thấy PRD có nhắc mẫu quy trình nhưng chưa đối chiếu được con số 6.</p>
+      <div class="opts" role="radiogroup" aria-label="Sáu mẫu quy trình">
+        <label><input type="radio" name="templates6" value="đúng"> Đúng, giữ</label>
+        <label><input type="radio" name="templates6" value="sai"> Chưa đúng (ghi lại)</label>
+      </div>
+      <textarea placeholder="Con số hoặc danh sách đúng"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="stack"><div class="eyebrow">4 · Văn phòng phẩm</div><h2>Danh thiếp, giấy tiêu đề, báo giá, hợp đồng, chữ ký email, phong bì</h2>
+      <p class="small">Danh thiếp 90×55 mm có tràn lề 3 mm và dấu cắt; giấy tiêu đề, báo giá, hợp đồng dạng DOCX + PDF. Mẫu hợp đồng chỉ là khung: mọi điều khoản ghi "[Cần luật sư duyệt]". DOCX chưa mở thử được trong Word trên máy này.</p></div>
+    <img class="shot" src="stationery.jpg" alt="Danh thiếp mặt trước và sau, chữ ký email, giấy tiêu đề, báo giá, hợp đồng" loading="lazy">
+    <div class="ask" data-q="stationery">
+      <div class="opts" role="radiogroup" aria-label="Văn phòng phẩm">
+        <label><input type="radio" name="stationery" value="duyệt"> Duyệt</label>
+        <label><input type="radio" name="stationery" value="cần sửa"> Cần sửa</label>
+      </div>
+      <textarea placeholder="Sửa gì?"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+    <div class="ask" data-q="contract-entity">
+      <h3>Pháp nhân ký hợp đồng và báo giá</h3>
+      <div class="opts" role="radiogroup" aria-label="Pháp nhân ký">
+        <label><input type="radio" name="contract-entity" value="innvie"> innvie</label>
+        <label><input type="radio" name="contract-entity" value="khác"> Pháp nhân khác (ghi tên)</label>
+      </div>
+      <textarea placeholder="Ghi chú (không bắt buộc)"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+    <div class="ask" data-q="tagline-stationery">
+      <h3>Khẩu hiệu "Khai mở cách vận hành mới." trên danh thiếp, chữ ký email</h3>
+      <div class="opts" role="radiogroup" aria-label="Khẩu hiệu trên văn phòng phẩm">
+        <label><input type="radio" name="tagline-stationery" value="giữ"> Giữ</label>
+        <label><input type="radio" name="tagline-stationery" value="bỏ"> Bỏ, chỉ để logo</label>
+      </div>
+      <textarea placeholder="Ghi chú (không bắt buộc)"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="stack"><div class="eyebrow">5 · Điểm chạm sản phẩm</div><h2>Đăng nhập, splash, icon, favicon, email hệ thống</h2>
+      <p class="small">Chỉ là đề xuất, chưa sửa file sản phẩm nào. Bên trong sản phẩm vẫn giữ màu nhấn than chì (DEC-041/042); gradient chỉ ở panel đăng nhập, splash, icon và đầu email. Bản khách thuê dùng tenant mẫu "Công ty Vận tải Mẫu".</p></div>
+    <img class="shot" src="product.jpg" alt="Màn đăng nhập, splash A và B, icon app, tab trình duyệt, ba email hệ thống, màn tải, màn giới thiệu" loading="lazy">
+    <div class="ask" data-q="product">
+      <div class="opts" role="radiogroup" aria-label="Điểm chạm sản phẩm">
+        <label><input type="radio" name="product" value="duyệt"> Duyệt</label>
+        <label><input type="radio" name="product" value="cần sửa"> Cần sửa</label>
+      </div>
+      <textarea placeholder="Sửa gì?"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+    <div class="ask" data-q="splash">
+      <h3>Chân màn splash (DEC-037)</h3>
+      <div class="opts" role="radiogroup" aria-label="Chân splash">
+        <label><input type="radio" name="splash" value="A"> A · Giữ "Được phát triển bởi innvie"</label>
+        <label><input type="radio" name="splash" value="B"> B · "Vận hành trên" + logo invlogis by innvie</label>
+      </div>
+      <textarea placeholder="Lý do (để ghi vào sổ quyết định)"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+    <div class="ask" data-q="tenant-panel">
+      <h3>Khi khách thuê đăng nhập, panel trái hiện "Vận hành trên Invlogis"</h3>
+      <div class="opts" role="radiogroup" aria-label="Panel khách thuê">
+        <label><input type="radio" name="tenant-panel" value="hiện"> Được, hiện như đề xuất</label>
+        <label><input type="radio" name="tenant-panel" value="ẩn"> Không, chỉ hiện logo khách</label>
+      </div>
+      <textarea placeholder="Ghi chú (không bắt buộc)"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="stack"><div class="eyebrow">6 · Câu hỏi chung</div><h2>Áp cho mọi bộ</h2></div>
+    <div class="ask" data-q="proof-110k">
+      <h3>Câu "khoảng 110.000 lô hàng mỗi năm tại một doanh nghiệp vận tải container" (không nêu tên khách)</h3>
+      <div class="opts" role="radiogroup" aria-label="Con số 110.000">
+        <label><input type="radio" name="proof-110k" value="được"> Được nói công khai</label>
+        <label><input type="radio" name="proof-110k" value="chưa"> Chưa, chỉ dùng khi gặp riêng</label>
+      </div>
+      <textarea placeholder="Ghi chú (không bắt buộc)"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+    <div class="ask" data-q="oq13">
+      <h3>Phân hệ Nhân sự và Nhiên liệu (dầu) trong tài liệu chào bán</h3>
+      <p class="small">PRD còn câu hỏi mở OQ-13 về hai phân hệ này. Deck và tài liệu 1 trang đã bỏ; landing page còn ô "Dầu".</p>
+      <div class="opts" role="radiogroup" aria-label="Nhân sự và Nhiên liệu">
+        <label><input type="radio" name="oq13" value="bỏ"> Bỏ khỏi mọi tài liệu đến khi chốt OQ-13</label>
+        <label><input type="radio" name="oq13" value="đưa vào"> Đưa cả hai vào</label>
+      </div>
+      <textarea placeholder="Ghi chú (không bắt buộc)"></textarea><span class="saved" aria-live="polite"></span>
+    </div>
+    <div class="ask" data-q="logo-motion">
+      <h3>Sửa lỗi logo động trong bộ đã duyệt Mốc 2</h3>
+      <p class="small"><code>logo/logo-motion.html</code> chỉ có chữ i chuyển động, các chữ khác đứng yên vì thiếu độ trễ từng chữ. Sửa một dòng, không đổi hình logo.</p>
+      <div class="opts" role="radiogroup" aria-label="Sửa logo động">
+        <label><input type="radio" name="logo-motion" value="sửa"> Sửa</label>
+        <label><input type="radio" name="logo-motion" value="để"> Để nguyên</label>
+      </div>
+      <span class="saved" aria-live="polite"></span>
+    </div>
+    <div class="ask" data-q="legal" data-kind="fields">
+      <h3>Thông tin để thay chỗ <code>[chờ]</code></h3>
+      <p class="small">Điền phần đã có, để trống phần chưa có.</p>
+      <div class="fields">
+        <label>Tên pháp nhân đầy đủ<input type="text" data-f="legalName"></label>
+        <label>Mã số thuế<input type="text" data-f="taxId"></label>
+        <label>Địa chỉ<input type="text" data-f="address"></label>
+        <label>Điện thoại<input type="text" data-f="phone"></label>
+        <label>Email liên hệ<input type="text" data-f="email"></label>
+        <label>Tên miền web<input type="text" data-f="domain"></label>
+        <label>Form liên hệ gửi về đâu<input type="text" data-f="formTarget" placeholder="email, Google Form, CRM…"></label>
+        <label>Ngày + nơi ra mắt<input type="text" data-f="launch"></label>
+      </div>
+      <span class="saved" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <section class="done">
+    <div class="eyebrow">Xong Mốc 3</div>
+    <p>Bấm khi đã chọn xong. Claude đọc câu trả lời, sửa theo ghi chú, thay thông tin vào chỗ <code>[chờ]</code>, chuyển bản duyệt sang <code>design/brand/invlogis/</code> rồi sang Mốc 4 (file Figma, bản PDF/PPTX cuối, gói bàn giao).</p>
+    <textarea id="general-note" placeholder="Ghi chú chung (không bắt buộc)"></textarea>
+    <button id="done-btn" type="button">Báo xong</button>
+    <p id="done-status" class="status" aria-live="polite"></p>
+  </section>
+</main>
+
+<script>
+(async () => {
+  const note = document.getElementById("dbnote");
+  const asks = [...document.querySelectorAll(".ask[data-q]")];
+  let db = null;
+  try { db = await window.claude?.use?.("db"); } catch (e) { db = null; }
+  if (!db) {
+    note.textContent = "Trang này không lưu được câu trả lời ở chế độ xem hiện tại. Mở trên claude.ai khi đã đăng nhập, hoặc trả lời trong khung chat.";
+    document.getElementById("done-btn").disabled = true;
+    return;
+  }
+  note.textContent = "Câu trả lời tự lưu khi bạn chọn hoặc gõ.";
+  const timers = {};
+  function collect(sec) {
+    const body = { updatedAt: new Date().toISOString() };
+    if (sec.dataset.kind === "fields") {
+      body.fields = {};
+      sec.querySelectorAll("input[data-f]").forEach(i => { body.fields[i.dataset.f] = i.value.trim(); });
+    } else {
+      const picked = sec.querySelector("input:checked");
+      body.choice = picked ? picked.value : null;
+      const ta = sec.querySelector("textarea");
+      body.note = ta ? ta.value.trim() : "";
+    }
+    return body;
+  }
+  async function save(sec) {
+    const tag = sec.querySelector(".saved");
+    try { await db.doc("answers/m3-" + sec.dataset.q).set(collect(sec)); tag.textContent = "Đã lưu"; }
+    catch (e) { tag.textContent = "Chưa lưu được: " + (e && e.message ? e.message : "lỗi"); }
+  }
+  function later(sec) { const q = sec.dataset.q; clearTimeout(timers[q]); timers[q] = setTimeout(() => save(sec), 900); }
+  for (const sec of asks) {
+    try {
+      const snap = await db.doc("answers/m3-" + sec.dataset.q).get();
+      if (snap.exists) {
+        const d = snap.data();
+        if (d.fields) sec.querySelectorAll("input[data-f]").forEach(i => { if (d.fields[i.dataset.f]) i.value = d.fields[i.dataset.f]; });
+        if (d.choice) { const r = [...sec.querySelectorAll("input[type=radio]")].find(x => x.value === d.choice); if (r) r.checked = true; }
+        const ta = sec.querySelector("textarea"); if (ta && d.note) ta.value = d.note;
+      }
+    } catch (e) {}
+    sec.querySelectorAll("input[type=radio]").forEach(i => i.addEventListener("change", () => save(sec)));
+    sec.querySelectorAll("textarea, input[type=text]").forEach(i => i.addEventListener("input", () => later(sec)));
+  }
+  const st = document.getElementById("done-status");
+  try {
+    const s = await db.doc("status/m3").get();
+    if (s.exists && s.data().done) { st.textContent = "Đã báo xong lúc " + new Date(s.data().at).toLocaleString("vi-VN") + ". Bấm lại nếu bạn đổi ý."; st.className = "status ok"; }
+    if (s.exists && s.data().note) document.getElementById("general-note").value = s.data().note;
+  } catch (e) {}
+  document.getElementById("done-btn").addEventListener("click", async () => {
+    for (const sec of asks) await save(sec);
+    try {
+      await db.doc("status/m3").set({ done: true, at: new Date().toISOString(), note: document.getElementById("general-note").value.trim() });
+      st.textContent = "Đã báo xong. Nhắn Claude \"đọc Mốc 3\" để chạy tiếp."; st.className = "status ok";
+    } catch (e) { st.textContent = "Chưa lưu được, thử lại hoặc trả lời trong chat."; st.className = "status"; }
+  });
+})();
+</script>
