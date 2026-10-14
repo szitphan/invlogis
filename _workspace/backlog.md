@@ -83,6 +83,12 @@ links:
 | BL-110 | Đọc và feed SRC-25 vào brainstorm/feature (lập sổ đối chiếu) | `sop/sim-ke-khai-thue-tu-dong/sim-ke-khai-thue-tu-dong.md` | `fed:sop/sim-ke-khai-thue-tu-dong/sim-ke-khai-thue-tu-dong.md` | ⬜ | 2026-10-14 |  |  |  |  |
 | BL-112 | Điền thông tin pháp nhân innvie (tên đầy đủ, MST, địa chỉ, điện thoại, email, tên miền, nơi nhận form, ngày + nơi ra mắt) vào chỗ `[chờ]` của bộ thương hiệu Mốc 3 | DEC-075 | `!grep:design/brand/invlogis/web/index.html:[chờ: MST]` | ⬜ | 2026-10-14 |  |  | 2026-11-06 |  |
 | BL-113 | Luật sư duyệt mẫu hợp đồng và điều khoản báo giá Invlogis (`design/brand/invlogis/stationery/contract/`, `quotation/`) | DEC-075 | `manual` | ⬜ | 2026-10-14 |  |  |  |  |
+| BL-114 | Đọc và feed SRC-26 vào brainstorm/feature (lập sổ đối chiếu) | `tich-hop/gps-tien-ich-de-xuat-2025-09-25/gps-tien-ich-de-xuat-2025-09-25.md` | `fed:tich-hop/gps-tien-ich-de-xuat-2025-09-25/gps-tien-ich-de-xuat-2025-09-25.md` | ⬜ | 2026-10-14 |  |  |  |  |
+| BL-115 | Đọc và feed SRC-27 vào brainstorm/feature (lập sổ đối chiếu) — Camera AI đã loại: chỉ lấy Mục 1 (ngữ cảnh quay cắt) + Mục 3 (yêu cầu ghi nhận/kê khai) cho brainstorm giải pháp GPS SRC-26, Mục 2 ghi ➖ | `tich-hop/camera-ai-quay-cat-de-xuat-2026-08-11/camera-ai-quay-cat-de-xuat-2026-08-11.md` | `fed:tich-hop/camera-ai-quay-cat-de-xuat-2026-08-11/camera-ai-quay-cat-de-xuat-2026-08-11.md` | ⬜ | 2026-10-14 |  |  |  |  |
+| BL-116 | Hoàn tất sổ đối chiếu SRC-20 (còn mục chưa xử lý) | `ui-common/web/web-common-rules.md` | `fed:ui-common/web/web-common-rules.md` | ⬜ | 2026-10-14 |  |  |  |  |
+| BL-117 | Hoàn tất sổ đối chiếu SRC-21 (còn mục chưa xử lý) | `ui-common/app/app-common-rules.md` | `fed:ui-common/app/app-common-rules.md` | ⬜ | 2026-10-14 |  |  |  |  |
+| BL-118 | Hoàn tất sổ đối chiếu SRC-22 (còn mục chưa xử lý) | `srs-cu/lg-srs-export.md` | `fed:srs-cu/lg-srs-export.md` | ⬜ | 2026-10-14 |  |  |  |  |
+| BL-119 | Hoàn tất sổ đối chiếu SRC-23 (còn mục chưa xử lý) | `srs-cu/srs-mobile/srs-mobile.md` | `fed:srs-cu/srs-mobile/srs-mobile.md` | ⬜ | 2026-10-14 |  |  |  |  |
 
 ## Đã xong
 
