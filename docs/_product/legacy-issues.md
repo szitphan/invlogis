@@ -27,6 +27,6 @@ links:
 | ISS-10 | Ký điện tử (biên bản bàn giao, thu hồi và chứng từ cần ký) | Quản lý phương tiện, Nền tảng | `vehicle-management`, `common-workspace` | brainstorm | ⬜ |
 | ISS-11 | Lái xe xem và kiểm tra thông tin trên app để tiến hành bàn giao, thu hồi | Quản lý phương tiện | `vehicle-management` | brainstorm | ⬜ |
 | ISS-12 | Báo cáo đang làm cố định — cần lọc, cấu hình được | Bảo dưỡng sửa chữa, Quản lý dầu, Nền tảng | `workshop-reports`, `fuel-stations`, `common-workspace` | brainstorm | ⬜ |
-| ISS-13 | Đăng nhập bằng SSO thay cách đăng nhập hiện tại | Nền tảng | `account-access` | brainstorm | ⬜ |
+| ISS-13 | Đăng nhập bằng SSO thay cách đăng nhập hiện tại | Nền tảng | `account-access` | brainstorm | ✅ bỏ SSO (brainstorm account-access 15/10) |
 | ISS-14 | Giao diện làm lại theo design system mới | Mọi module | `*` | `/figma-screen` | ⬜ |
-| ISS-15 | Onboarding trực tiếp hoặc hướng dẫn sử dụng gắn với từng chức năng (trừ feature đơn giản) | Mọi module, Nền tảng | `*`, `help-center` | brainstorm (đánh dấu feature đơn giản) + `/userguide` | ⬜ |
+| ISS-15 | Onboarding trực tiếp hoặc hướng dẫn sử dụng gắn với từng chức năng (trừ feature đơn giản) | Mọi module, Nền tảng | `*`, `help-center` | brainstorm (đánh dấu feature đơn giản) + `/userguide` | 🟡 account-access: feature đơn giản, không cần hướng dẫn riêng (15/10); còn các feature khác |

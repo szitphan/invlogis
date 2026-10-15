@@ -17,7 +17,7 @@
 | UC00.00.09 - Export danh sách | ✅ | `docs/cross-process-flow/srs/cross-process-flow-spec.md` FR-cross-process-flow-022 | tr. 144 |
 | [not done] UC00.00.10 - Export báo cáo | ➡ common-workspace |  | tr. 146 |
 | UC00.00.11 - Bulk actions cho màn danh sách | ➡ common-workspace |  | tr. 150 |
-| UC02.03.01 - Thay đổi ngôn ngữ | ➡ account-access |  | tr. 160 |
+| UC02.03.01 - Thay đổi ngôn ngữ | ✅ | `docs/account-access/brainstorms/account-access.md` D3 | tr. 160 |
 | Cập nhật danh mục | ➡ common-workspace |  | tr. 163 |
 | [not done] Seed dữ liệu khởi đầu | ➡ common-workspace |  | tr. 164 |
 | [not done] Cơ cấu tổ chức, phân vùng dữ liệu và quản lý feature theo Chi nhánh/Cơ sở | ➡ organization |  | tr. 197 |
@@ -26,13 +26,13 @@
 | Workflow và validation rules chung của 1 common feature | ➡ common-workspace |  | tr. 212 |
 | Phân quyền chức năng và dữ liệu | ➡ access-control |  | tr. 217 |
 | Yêu cầu chức năng - Functional Requirements | ➖ |  | tr. 236 · mục lục lặp lại bên trong SRS, không phải yêu cầu |
-| Epic 01 - Quản lý tài khoản cá nhân | ➡ account-access |  | tr. 247 |
-| UC01.01 - Đăng nhập | ➡ account-access |  | tr. 248 |
-| UC01.02 - Quên mật khẩu | ➡ account-access |  | tr. 258 |
-| UC01.03 - Đăng xuất | ➡ account-access |  | tr. 267 |
-| UC01.04 - Đổi mật khẩu | ➡ account-access |  | tr. 269 |
-| UC01.05 - Tạo mật khẩu mới | ➡ account-access |  | tr. 273 |
-| UC01.06 - Xem thông tin cá nhân | ➡ account-access |  | tr. 278 |
+| Epic 01 - Quản lý tài khoản cá nhân | ✅ | `docs/account-access/brainstorms/account-access.md` Mục 4 | tr. 247 |
+| UC01.01 - Đăng nhập | ✅ | `docs/account-access/brainstorms/account-access.md` A1–A11, D4 | tr. 248 |
+| UC01.02 - Quên mật khẩu | ✅ | `docs/account-access/brainstorms/account-access.md` B1–B3 | tr. 258 |
+| UC01.03 - Đăng xuất | ✅ | `docs/account-access/brainstorms/account-access.md` C1 | tr. 267 |
+| UC01.04 - Đổi mật khẩu | ✅ | `docs/account-access/brainstorms/account-access.md` B4, B5 | tr. 269 |
+| UC01.05 - Tạo mật khẩu mới | ✅ | `docs/account-access/brainstorms/account-access.md` A5, B6 | tr. 273 |
+| UC01.06 - Xem thông tin cá nhân | ✅ | `docs/account-access/brainstorms/account-access.md` D1, D2 | tr. 278 |
 | Module 1 - Xưởng | ➡ product-catalog |  | tr. 282 |
 | Epic 03 - Danh mục | ➡ organization |  | tr. 283 |
 | 03 - Lưu đồ trạng thái chung cho danh mục | ➡ organization |  | tr. 284 |

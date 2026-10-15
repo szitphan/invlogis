@@ -53,35 +53,35 @@
 | 2. Lưu đồ hoạt động | ➡ common-workspace |  |  |
 | 3. Mô tả màn hình | ➡ common-workspace |  |  |
 | UC00.01.02 - Xem thanh tiến trình liên quy trình | ✅ | `docs/cross-process-flow/brainstorms/cross-process-flow.md` Mục 2 |  |
-| Epic 01 - Quản lý tài khoản | ➡ account-access |  |  |
-| UC01.01.01 - Đăng nhập | ➡ account-access |  |  |
-| 1. Thông tin chung | ➡ account-access |  |  |
-| 2. Lưu đồ hoạt động | ➡ account-access |  |  |
-| 3. Mô tả màn hình | ➡ account-access |  |  |
-| UC01.01.02 - Quên mật khẩu | ➡ account-access |  |  |
-| 1. Thông tin chung | ➡ account-access |  |  |
-| 2. Lưu đồ hoạt động: | ➡ account-access |  |  |
-| 3. Mô tả màn hình: | ➡ account-access |  |  |
-| UC01.01.03 - Đăng xuất | ➡ account-access |  |  |
-| 1. Thông tin chung | ➡ account-access |  |  |
-| 2. Lưu đồ quy trình | ➡ account-access |  |  |
-| 3. Mô tả màn hình | ➡ account-access |  |  |
-| UC01.01.04 - Đổi mật khẩu | ➡ account-access |  |  |
-| 1. Thông tin chung | ➡ account-access |  |  |
-| 2. Lưu đồ hoạt động | ➡ account-access |  |  |
-| 3. Mô tả màn hình | ➡ account-access |  |  |
-| UC01.01.05 - Tạo mật khẩu mới | ➡ account-access |  |  |
-| 1. Thông tin chung | ➡ account-access |  |  |
-| 2. Lưu đồ hoạt động | ➡ account-access |  |  |
-| 3. Mô tả màn hình | ➡ account-access |  |  |
-| UC01.01.06 - Xem thông tin cá nhân - Tài khoản nội bộ | ➡ account-access |  |  |
-| 1. Thông tin chung | ➡ account-access |  |  |
-| 2. Lưu đồ hoạt động | ➡ account-access |  |  |
-| 3. Mô tả màn hình | ➡ account-access |  |  |
-| UC01.01.07 - Xem thông tin tài khoản - Tài khoản cây dầu | ➡ account-access |  |  |
-| 1. Thông tin chung | ➡ account-access |  |  |
-| 2. Lưu đồ hoạt động | ➡ account-access |  |  |
-| 3. Mô tả màn hình | ➡ account-access |  |  |
+| Epic 01 - Quản lý tài khoản | ✅ | `docs/account-access/brainstorms/account-access.md` Mục 4 |  |
+| UC01.01.01 - Đăng nhập | ✅ | `docs/account-access/brainstorms/account-access.md` A1–A11, C2, D4 |  |
+| 1. Thông tin chung | ✅ | `docs/account-access/brainstorms/account-access.md` A1–A11, C2, D4 |  |
+| 2. Lưu đồ hoạt động | ✅ | `docs/account-access/brainstorms/account-access.md` A1–A11, C2, D4 |  |
+| 3. Mô tả màn hình | ✅ | `docs/account-access/brainstorms/account-access.md` A1–A11, C2, D4 |  |
+| UC01.01.02 - Quên mật khẩu | ✅ | `docs/account-access/brainstorms/account-access.md` B1–B3 |  |
+| 1. Thông tin chung | ✅ | `docs/account-access/brainstorms/account-access.md` B1–B3 |  |
+| 2. Lưu đồ hoạt động: | ✅ | `docs/account-access/brainstorms/account-access.md` B1–B3 |  |
+| 3. Mô tả màn hình: | ✅ | `docs/account-access/brainstorms/account-access.md` B1–B3 |  |
+| UC01.01.03 - Đăng xuất | ✅ | `docs/account-access/brainstorms/account-access.md` C1 |  |
+| 1. Thông tin chung | ✅ | `docs/account-access/brainstorms/account-access.md` C1 |  |
+| 2. Lưu đồ quy trình | ✅ | `docs/account-access/brainstorms/account-access.md` C1 |  |
+| 3. Mô tả màn hình | ✅ | `docs/account-access/brainstorms/account-access.md` C1 |  |
+| UC01.01.04 - Đổi mật khẩu | ✅ | `docs/account-access/brainstorms/account-access.md` B4, B5 |  |
+| 1. Thông tin chung | ✅ | `docs/account-access/brainstorms/account-access.md` B4, B5 |  |
+| 2. Lưu đồ hoạt động | ✅ | `docs/account-access/brainstorms/account-access.md` B4, B5 |  |
+| 3. Mô tả màn hình | ✅ | `docs/account-access/brainstorms/account-access.md` B4, B5 |  |
+| UC01.01.05 - Tạo mật khẩu mới | ✅ | `docs/account-access/brainstorms/account-access.md` A5, B6 |  |
+| 1. Thông tin chung | ✅ | `docs/account-access/brainstorms/account-access.md` A5, B6 |  |
+| 2. Lưu đồ hoạt động | ✅ | `docs/account-access/brainstorms/account-access.md` A5, B6 |  |
+| 3. Mô tả màn hình | ✅ | `docs/account-access/brainstorms/account-access.md` A5, B6 |  |
+| UC01.01.06 - Xem thông tin cá nhân - Tài khoản nội bộ | ✅ | `docs/account-access/brainstorms/account-access.md` D1, D2 |  |
+| 1. Thông tin chung | ✅ | `docs/account-access/brainstorms/account-access.md` D1, D2 |  |
+| 2. Lưu đồ hoạt động | ✅ | `docs/account-access/brainstorms/account-access.md` D1, D2 |  |
+| 3. Mô tả màn hình | ✅ | `docs/account-access/brainstorms/account-access.md` D1, D2 |  |
+| UC01.01.07 - Xem thông tin tài khoản - Tài khoản cây dầu | ✅ | `docs/account-access/brainstorms/account-access.md` C2, C3 |  |
+| 1. Thông tin chung | ✅ | `docs/account-access/brainstorms/account-access.md` C2, C3 |  |
+| 2. Lưu đồ hoạt động | ✅ | `docs/account-access/brainstorms/account-access.md` C2, C3 |  |
+| 3. Mô tả màn hình | ✅ | `docs/account-access/brainstorms/account-access.md` C2, C3 |  |
 | Epic 02 - Đơn mua dịch vụ sửa chữa ngoài | ➡ purchasing |  |  |
 | 02 - Thông báo & Lịch sử hoạt động | ➡ purchasing |  |  |
 | 02 - Lưu đồ trạng thái cho đơn mua HHDV | ➡ purchasing |  |  |
