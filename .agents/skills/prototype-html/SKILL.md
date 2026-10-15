@@ -97,6 +97,7 @@ Cả 2 nguồn đều: chia flow theo `userflow.md` Mục 3, token theo `design.
 - **Vietnamese-first**; HTML `lang="vi"`.
 - **Lớp góp ý (comment) — MẶC ĐỊNH BẬT, tắt bằng `no-comment`:**
   - Nguồn DUY NHẤT: `assets/comment-layer.js` — chèn nguyên văn vào cuối `<body>`, KHÔNG viết lại inline, KHÔNG link file ngoài (prototype phải tự chứa 1 file).
+  - Module **dùng chung với `/wireframe-html`** (chế độ `CMT_ALL_SCREENS` cho trang hiện mọi màn cùng lúc). Sửa module thì thử cả 2 kiểu vật chủ: prototype có màn `.active` và wireframe hiện mọi màn.
   - Thanh công cụ góp ý đặt **góc dưới-TRÁI** (không đè FAB điều hướng ở góc phải) và có **2 trạng thái**: mở rộng (mặc định desktop ≥720px — 1 chạm là thêm góp ý) / thu gọn về 1 nút tròn (mặc định mobile). User đổi được, nhớ theo file.
   - Không tự điền Bin ID/Key vào file; người dựng nhập sau qua `#admin`.
   - Element chính nên có `data-cmt="{screen}.{field}"` để neo bền hơn.

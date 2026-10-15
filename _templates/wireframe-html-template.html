@@ -28,6 +28,9 @@
   - Element bên trong screen sinh từ Mục 2 Screen description (xem Element Mapping trong SKILL.md).
   - Frame render Ở BỀ RỘNG DEVICE THẬT (data-device trên .wf-page) — KHÔNG card 33% trừu tượng.
   - KHÔNG emoji làm icon (👁🔊...) — dùng token chữ (eye)/(play) hoặc SVG stroke B&W.
+  - Lớp góp ý (mặc định bật, SKILL.md Phase F.7): .wf-page mang class proto-app, mỗi .wf-screen
+    và khối bảng mô tả mang data-screen — module góp ý cần 2 thứ này. Màu của thanh/pin góp ý là
+    ngoại lệ B&W (UI để review, không thuộc wireframe). Mode no-comment vẫn giữ 2 thuộc tính này.
 -->
 <!DOCTYPE html>
 <html lang="{{LANG}}">
@@ -284,7 +287,7 @@
 <body>
 <script>if (window.self !== window.top) document.documentElement.classList.add('in-iframe');</script>
 <div class="wf-breadcrumb"><a href="{{FEATURE}}-wireframe.html">← Mục lục wireframe (tất cả flow)</a></div>
-<div class="wf-page" data-device="{{DEVICE}}">
+<div class="wf-page proto-app" data-device="{{DEVICE}}">
 
   <div class="wf-header">
     <div class="wf-feature-label">Feature: {{FEATURE}} / Wireframe</div>
@@ -297,7 +300,7 @@
     {{SCREENS}}
   </div>
 
-  <div class="wf-desc-section">
+  <div class="wf-desc-section" data-screen="bang-mo-ta">
     <div class="wf-desc-title">Mô tả màn hình</div>
     <table class="wf-desc-table">
       <thead>
@@ -326,7 +329,7 @@
   Frame rộng đúng device (375/768/1920) nhờ data-device trên .wf-page.
   ════════════════════════════════════════════════════════════════
 
-  <div class="wf-screen" id="s{n}">   <!-- id="s{n}" BẮT BUỘC: đích deep-link từ index điều hướng -->
+  <div class="wf-screen" id="s{n}" data-screen="{screen-slug}">   <!-- id="s{n}" BẮT BUỘC: đích deep-link từ index điều hướng · data-screen BẮT BUỘC: màn của góp ý -->
     <div class="wf-step-badge">{n}</div>
     <div class="wf-device-tag">{{DEVICE}} · {375|768|1920}px</div>
     <div class="wf-screen-frame">

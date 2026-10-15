@@ -1,10 +1,10 @@
 ---
 name: wireframe-html
-description: Dùng khi cần tạo wireframe HTML đen trắng cho các flow của 1 feature, render element HTML thật thay vì ASCII. Cần `srs/{feature}-userflow.md` trước.
+description: Dùng khi cần tạo wireframe HTML đen trắng cho các flow của 1 feature, render element HTML thật thay vì ASCII, kèm lớp góp ý ghim lên element. Cần `srs/{feature}-userflow.md` trước.
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Task, Agent, AskUserQuestion
 user-invocable: true
 disable-model-invocation: true
-argument-hint: "<feature> [--flow <flow-slug>]"
+argument-hint: "<feature> [--flow <flow-slug>] [no-comment]"
 ---
 <!-- Licensed to test.innvie@gmail.com — Order 56EB8MCXD -->
 
@@ -25,7 +25,7 @@ Ngay dưới phần wireframe của mỗi flow, skill sinh thêm __bảng mô t�
 __Thang fidelity 3 bậc:__ `/wireframe-ascii` (lo-fi chat-native) → `/wireframe-html` (lo-fi B&W, layout-accurate — bậc NÀY) → `/prototype-html` (hi-fi, tokens + JS). ASCII và HTML __cùng bậc lo-fi, 2 renderer__ cùng 1 screen.
 
 **Điểm khác biệt với `/prototype-html`:**
-* `/wireframe-html` → B&W static layout, không JS navigation, mục đích review scope/layout + tỉ lệ device nhanh.
+* `/wireframe-html` → B&W static layout, không JS navigation, mục đích review scope/layout + tỉ lệ device nhanh. Có lớp góp ý giống `/prototype-html` để người review ghim ý kiến lên từng element.
 * `/prototype-html` → màu sắc đầy đủ (design tokens), JS click-through, mục đích stakeholder demo.
 
 ## Constraints‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
@@ -45,6 +45,10 @@ __Thang fidelity 3 bậc:__ `/wireframe-ascii` (lo-fi chat-native) → `/wirefra
 * __Bảng mô tả 5 cột (Phase F.5)__: khi tài liệu nghiệp vụ thiếu chi tiết validation cụ thể cho 1 field (vd giới hạn ký tự nhưng không nói rõ charset cho phép, hoặc upload không nói rõ dung lượng/định dạng) → skill PHẢI hỏi user bổ sung (từng field một, theo no-re-ask rule), KHÔNG tự suy đoán hoặc bịa quy tắc không có nguồn.
 * __B&W strict__: CSS chỉ dùng `#000`, `#fff`, `#f0f0f0`, `#888`, `#ccc` — KHÔNG dùng màu có sắc.
 * __Self-contained HTML__: không có external CSS/JS dependencies. Inline tất.
+* **Lớp góp ý — MẶC ĐỊNH BẬT, tắt bằng `no-comment`** (Phase F.7):
+  - Nguồn DUY NHẤT: `.claude/skills/prototype-html/assets/comment-layer.js` — dùng chung với `/prototype-html`, chèn nguyên văn vào cuối `<body>` của **mỗi file flow**. KHÔNG viết lại inline, KHÔNG link file ngoài, KHÔNG chép module sang folder skill này.
+  - Bật chế độ mọi màn: `window.CMT_ALL_SCREENS = true` (wireframe hiện mọi màn cùng lúc, không có màn đang mở). Thiếu cờ này thì pin chỉ hiện ở màn đầu và danh sách góp ý bấm không cuộn tới đúng màn.
+  - Cửa-vào `{feature}-wireframe.html` KHÔNG nhúng lớp góp ý — nó chỉ là khung mục lục + iframe; góp ý nằm trong từng file flow (hiện được cả khi xem qua iframe).
 * __Cross-flow screens__: flow B bắt đầu từ màn hình thuộc flow A → bao gồm màn hình đó, nhãn `[chung]`.
 * __Vietnamese-first__ labels. User nói "viết bằng tiếng Anh" để switch.
 * __BA conventions__ — L1 prose preview, no-re-ask rule, IT-BA framing. Per @../../../.claude/rules/ba-conventions.md.
@@ -61,13 +65,24 @@ __Thang fidelity 3 bậc:__ `/wireframe-ascii` (lo-fi chat-native) → `/wirefra
 * __Divider "hoặc"__: khi nghiệp vụ có 2 phương thức song song (vd đăng nhập email hoặc Google) → render `<div class="divider"><span>hoặc</span></div>`.
 * __Back navigation__: khi màn có đường quay lại rõ trong `userflow.md` (nhánh `-.->`) → render `<div class="back-nav">← text</div>`.
 * __Font__: `-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif` cho body text. KHÔNG dùng emoji/icon libs.
+* __Màu của lớp góp ý không phạm B&W.__ Thanh công cụ, pin, popover góp ý có màu riêng của module — đó là UI để review, không thuộc wireframe. KHÔNG sửa module cho đen trắng, KHÔNG coi là lỗi khi tự kiểm B&W (chỉ kiểm CSS của template + `{{SCREENS}}`).
+* __Chèn lớp góp ý bằng `rfind('</body>')`__ (thẻ đóng CUỐI), không replace-đầu-tiên — template có khối chú thích mẫu sau `</html>` và nội dung có thể chứa chuỗi `</body>`; chèn nhầm chỗ làm vỡ file (đã xảy ra ở `/prototype-html`).
+* __Thiếu `data-screen` trên `.wf-screen` = góp ý không neo được.__ Module chỉ cho ghim bên trong khối có `data-screen`; bấm vào tiêu đề trang/footer sẽ báo "Chọn một phần tử bên trong màn hình". Khối bảng mô tả đã có `data-screen="bang-mo-ta"` sẵn trong template để góp ý được lên từng dòng bảng.
 
 ## Inputs
 
 ```
-/wireframe-html <feature>                    # tất cả flows
+/wireframe-html <feature>                    # tất cả flows, kèm lớp góp ý (mặc định)
 /wireframe-html <feature> --flow <slug>      # 1 flow cụ thể
+/wireframe-html <feature> no-comment         # bản trình chiếu thuần, KHÔNG có góp ý
 ```
+
+**2 mode góp ý (nhận diện bằng lời, không cần đúng cú pháp cờ):**
+
+| Mode | Khi nào | Kết quả |
+|---|---|---|
+| **Có góp ý** (mặc định) | không nói gì thêm | Mỗi file flow nhúng `comment-layer.js`; người xem ghim góp ý lên từng element, lưu chung qua jsonbin để cả nhóm thấy nhau |
+| **Không góp ý** | user nói `no-comment`, "không cần comment", "bản trình chiếu", "chỉ để demo" | KHÔNG nhúng lớp góp ý — file sạch, nhẹ hơn |
 
 Muốn đổi hành vi mặc định, nói bằng lời:
 * File flow đã tồn tại → skill tự regenerate (L2 diff mỗi file), không cần flag; muốn sửa gọi lại skill và nói cần đổi gì.
@@ -155,6 +170,8 @@ Em sẽ tạo {N} file HTML wireframe trong `docs/{feature}/html-wireframe/`:
      Device: {mobile 375 / tablet 768 / desktop 1920} · {N} màn hình (desktop 1 màn/hàng, còn lại tự wrap)
   ...
 
+  Góp ý: {có — nút góc dưới-trái mỗi file flow, ghim lên element | KHÔNG (bản trình chiếu)}
+
   Cộng thêm: {feature}-wireframe.html (index điều hướng — mở cái này) + {feature}-wireframe-html-index.md (metadata).
 
 Apply? (Y / sửa / skip <số>):
@@ -173,6 +190,7 @@ Với mỗi flow được duyệt:
 7. __Render HTML__ từ `_templates/wireframe-html-template.html` (xem Mục "HTML Template" — thay placeholder + fill `{{SCREENS}}`).
 8. **Fill `{{DESC_TABLE}}`** — xem Phase F.5 ngay dưới, chạy TRƯỚC khi Write.
 8b. __Review độc lập__ — Phase F.6, chạy TRƯỚC khi Write.
+8c. __Nhúng lớp góp ý__ — Phase F.7 (bỏ qua nếu mode `no-comment`).
 9. __Write__ `docs/{feature}/html-wireframe/{flow-slug}.html`.
 
 ### Phase F.5 — Bảng mô tả màn hình (5 cột)
@@ -253,6 +271,23 @@ Chạy sau F.5 (bảng 5 cột đã đủ), trước Write bước F-9, mỗi fl
    - Lỗi cơ học (mã, wording lệch nguyên văn, thiếu `Xem CMP-xx`) → tự sửa; finding nghiệp vụ (thêm màn/trạng thái, rule) → câu hỏi đánh số cho user, KHÔNG tự quyết. Tối đa 2 vòng.
    - In dòng `Review (@uxui-reviewer): N chặn · M cảnh báo · K đã tự sửa · J chờ anh quyết`.
    - Trong `/srs` chain mode: SKIP (Phase G của `/srs` đã gọi `@uxui-reviewer`), in `Review: SKIPPED — chạy trong /srs`. User nói "khỏi review" → SKIP.
+
+### Phase F.7 — Nhúng lớp GÓP Ý (bỏ qua nếu mode `no-comment`)
+
+1. **Mode không-góp-ý** → bỏ qua phase này. File ra sạch, không có dấu vết comment (`proto-app` + `data-screen` của template vẫn giữ — vô hại).
+2. **Mode có góp ý (mặc định):** đọc `.claude/skills/prototype-html/assets/comment-layer.js` rồi chèn vào ngay trước thẻ đóng `</body>` **cuối cùng** của file flow:
+   ```html
+   <!-- COMMENT LAYER -->
+   <script>window.CMT_ALL_SCREENS = true; window.CMT_FEATURE = '{feature}/{flow-slug}';</script>
+   <script>
+   ...nội dung comment-layer.js nguyên văn...
+   </script>
+   ```
+   - `CMT_ALL_SCREENS` bắt buộc (xem Constraints). `CMT_FEATURE` = tên ngăn chứa góp ý, cố định theo flow: đổi tên/chuyển file không làm mất góp ý, và **một kho jsonbin dùng chung được cho mọi flow** của feature (mỗi flow một ngăn riêng).
+   - Chèn ở `rfind('</body>')`, KHÔNG sửa nội dung module. Cần đổi hành vi → sửa `prototype-html/assets/comment-layer.js` (dùng chung 2 skill), rồi sinh lại.
+3. **Gắn `data-cmt` cho element chính** trong `{{SCREENS}}` (gần như miễn phí vì đã có tên từng element từ bảng 5 cột): `data-cmt="{screen-slug}.{field}"`, vd `data-cmt="login.email"`, `data-cmt="login.submit"`. Không có vẫn góp ý được, có thì neo chắc hơn khi sinh lại wireframe (update mode giữ được góp ý cũ trên đúng element).
+4. **KHÔNG cấu hình sẵn Bin ID/Key trong file.** Mở bằng `file://` → góp ý chạy chỉ-lưu-máy. Muốn cả nhóm thấy nhau → đẩy lên web rồi mở `{flow-slug}.html#admin` nhập kho lưu chung, theo `prototype-html/references/HUONG-DAN-LUU-CHUNG.md` + `HUONG-DAN-DAY-LEN-WEB.md`. Cấu hình nhớ theo từng file, nên mỗi file flow nhập 1 lần (cùng 1 Bin được).
+5. **Tự kiểm sau khi ghi** (có Chrome thì mở file): thanh góp ý hiện ở góc dưới-trái; ghim thử 1 góp ý trên màn thứ 2 → pin hiện đúng element của màn đó, không nhảy về màn 1; bấm góp ý trong danh sách → trang cuộn tới đúng màn. Xoá góp ý thử trước khi trình.
 
 ### Phase G — Write {feature}-wireframe-html-index.md
 
@@ -415,6 +450,7 @@ Collision: trùng slug → suffix `-2`.
 
 * **`/figma-screen <màn hoặc tính năng>`** — vẽ màn lên Figma, đọc wireframe HTML (hoặc ASCII) + bảng 5 cột làm hợp đồng, ghi link Figma về cột `Figma` của `{feature}-wireframe-html-index.md`.
 * **`/prototype-html <feature>`** — HTML clickable prototype có màu sắc + JS navigation (hi-fi).
+* Gom góp ý về tài liệu: trong file flow, mở danh sách góp ý → copy góp ý (ra markdown) rồi dán vào chat để sửa wireframe (gọi lại skill, update mode).
 
 ## References
 
@@ -432,7 +468,9 @@ Collision: trùng slug → suffix `-2`.
 * @../../../.claude/rules/ba-conventions.md
 * @../user-flow/SKILL.md (nguồn chia flow — chạy trước nếu chưa có)
 * @../wireframe-ascii/SKILL.md (renderer ngang hàng — đọc lại nếu đã chạy trước, xem Phase B.5)
-* @../prototype-html/SKILL.md (high-fidelity HTML clickable)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
+* @../prototype-html/SKILL.md (high-fidelity HTML clickable)
+* @../prototype-html/assets/comment-layer.js (lớp góp ý dùng chung — chèn nguyên văn cuối `<body>` mỗi file flow, kèm `CMT_ALL_SCREENS`, Phase F.7)
+* `../prototype-html/references/HUONG-DAN-LUU-CHUNG.md` · `HUONG-DAN-DAY-LEN-WEB.md` (nối kho lưu chung, đẩy web)‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 
 <!-- wm:60d5580055f5e6dd44329f2c02b7fe5a -->

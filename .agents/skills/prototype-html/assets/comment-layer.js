@@ -3,6 +3,9 @@
 // Tự chứa, không phụ thuộc thư viện. Chèn ngay trước thẻ đóng body.
 // Yêu cầu vật chủ: có .proto-app, các <section data-screen="{slug}">,
 // và (tuỳ chọn) hàm showScreen(slug) để nhảy màn khi click comment trong danh sách.
+// Vật chủ hiện MỌI màn cùng lúc (wireframe tĩnh, không có màn .active) → đặt
+// window.CMT_ALL_SCREENS = true trước khi nhúng: pin của mọi màn cùng hiện, click trong
+// danh sách thì cuộn tới màn đó thay vì gọi showScreen.
 // ════════════════════════════════════════════════════════════════════════
 (function () {
   'use strict';
@@ -14,6 +17,9 @@
   // Dùng khi bản prototype chỉ để trình chiếu, không cần thu thập góp ý.
   // ════════════════════════════════════════════════════════════════════════
   if (window.CMT_DISABLED === true) return;
+
+  // Mọi [data-screen] cùng hiện (wireframe) — không dựa vào màn .active
+  var ALL_SCREENS = window.CMT_ALL_SCREENS === true;
 
   // ════════════════════════════════════════════════════════════════════════
   // CẤU HÌNH LƯU TRỮ CHUNG (tuỳ chọn) — điền vào để comment chia sẻ được cho mọi người.
@@ -602,6 +608,7 @@
     '.cmt-pin.resolved{background:#9aa4ae}',
     '.cmt-pin.lost{background:#8e44ad}',
     '.cmt-layer.hidden{display:none}',
+    '.cmt-layer.all{overflow:visible}',   // wireframe: màn desktop 1920px tràn ngang khỏi khung app
     // Chế độ chọn element
     '.cmt-picking .proto-app *{cursor:crosshair !important}',
     '.cmt-hl{outline:2px dashed #ff6b2c !important;outline-offset:1px}',
@@ -774,7 +781,7 @@
   if (getComputedStyle(app).position === 'static') app.style.position = 'relative';
 
   var layer = document.createElement('div');
-  layer.className = 'cmt-layer';
+  layer.className = 'cmt-layer' + (ALL_SCREENS ? ' all' : '');
   app.appendChild(layer);
 
   // Lớp phủ BẮT click khi đang ghim — chỉ hiện lúc picking. Nhờ nó nằm TRÊN cùng,
@@ -895,6 +902,7 @@
   })();
 
   function currentScreenSlug() {
+    if (ALL_SCREENS) return null;   // không có màn "đang mở" — màn lấy theo phần tử được click
     var s = document.querySelector('[data-screen].active');
     return s ? s.getAttribute('data-screen') : null;
   }
@@ -903,7 +911,8 @@
     var slug = currentScreenSlug();
     var section = slug ? document.querySelector('[data-screen="' + cssEscape(slug) + '"]') : null;
     var appRect = app.getBoundingClientRect();
-    var mine = cmt.list.filter(function (c) { return c.screen === slug; });
+    var mine = ALL_SCREENS ? cmt.list.slice()
+                           : cmt.list.filter(function (c) { return c.screen === slug; });
 
     // đồng bộ số pin trong overlay với số comment của màn hiện tại
     var pins = layer.querySelectorAll('.cmt-pin');
@@ -928,6 +937,11 @@
       pin.textContent = c.n;
       pin.classList.toggle('resolved', !!c.resolved);
 
+      if (ALL_SCREENS) {
+        // mỗi comment neo trong màn của chính nó; màn đã bỏ khỏi file → ẩn pin (vẫn còn trong danh sách)
+        section = c.screen ? document.querySelector('[data-screen="' + cssEscape(c.screen) + '"]') : null;
+        if (!section) { pin.style.display = 'none'; return; }
+      }
       var el = resolveAnchor(c.anchor, section);
       var lost = !el;
       pin.classList.toggle('lost', lost);
@@ -950,12 +964,17 @@
         }
       }
       if (lost) {
-        // dự phòng: đặt theo % của khung app (vẫn thấy được, đánh dấu màu khác)
-        x = appRect.width * (c.fallback ? c.fallback.fx : 0.5);
-        y = appRect.height * (c.fallback ? c.fallback.fy : 0.25);
+        // dự phòng: đặt theo % của khung app (vẫn thấy được, đánh dấu màu khác).
+        // Chế độ mọi màn: % của chính màn đó, để pin không trôi sang màn khác.
+        var base = ALL_SCREENS ? section.getBoundingClientRect() : null;
+        var bw = base ? base.width : appRect.width, bh = base ? base.height : appRect.height;
+        var bx = base ? base.left - appRect.left : 0, by = base ? base.top - appRect.top : 0;
+        x = bx + bw * (c.fallback ? c.fallback.fx : 0.5);
+        y = by + bh * (c.fallback ? c.fallback.fy : 0.25);
       }
-      // Ẩn pin khi điểm neo cuộn khuất khỏi vùng nhìn thấy của section (giao section ∩ app)
-      var vis = x >= -8 && x <= appRect.width + 8 && y >= -8 && y <= appRect.height + 8;
+      // Ẩn pin khi điểm neo cuộn khuất khỏi vùng nhìn thấy của section (giao section ∩ app).
+      // Chế độ mọi màn: màn được phép tràn khỏi khung app (desktop 1920px) → chỉ xét theo màn.
+      var vis = ALL_SCREENS || (x >= -8 && x <= appRect.width + 8 && y >= -8 && y <= appRect.height + 8);
       if (vis && el && section) {
         var sr = section.getBoundingClientRect();
         var vx = appRect.left + x, vy = appRect.top + y;
@@ -1078,6 +1097,8 @@
     // 4) không bao giờ chọn cả section màn hoặc khung app
     if (el.hasAttribute && el.hasAttribute('data-screen')) return null;
     if (el === app) return null;
+    // chế độ mọi màn: ngoài khung màn nào (tiêu đề trang, chú thích) thì không ghim — không suy ra được màn
+    if (ALL_SCREENS && !(el.closest && el.closest('[data-screen]'))) return null;
     return el;
   }
 
@@ -1138,11 +1159,14 @@
       created: stamp(),
       resolved: false,
       anchor: buildAnchor(el, section || app, cx, cy),
-      // dự phòng khi mất neo: vị trí % so với khung app
-      fallback: {
-        fx: appRect.width ? (cx - appRect.left) / appRect.width : 0.5,
-        fy: appRect.height ? (cy - appRect.top) / appRect.height : 0.25
-      }
+      // dự phòng khi mất neo: vị trí % so với khung app (chế độ mọi màn: so với màn đó)
+      fallback: (function () {
+        var b = (ALL_SCREENS && section) ? section.getBoundingClientRect() : appRect;
+        return {
+          fx: b.width ? (cx - b.left) / b.width : 0.5,
+          fy: b.height ? (cy - b.top) / b.height : 0.25
+        };
+      })()
     };
     cmt.list.push(c);
     // CHỈ lưu cục bộ: comment lúc này còn RỖNG (user chưa gõ). Đẩy bản rỗng lên máy chủ
@@ -1586,7 +1610,14 @@
       n.addEventListener('click', function () {
         var c = byId(parseInt(n.dataset.cid, 10));
         if (!c) return;
-        if (c.screen && c.screen !== currentScreenSlug()) {
+        if (ALL_SCREENS) {
+          // mọi màn đều đang hiện → chỉ cần cuộn tới phần tử (hoặc màn) của comment
+          var sec = c.screen ? document.querySelector('[data-screen="' + cssEscape(c.screen) + '"]') : null;
+          var target = sec ? (resolveAnchor(c.anchor, sec) || sec) : null;
+          if (target && target.scrollIntoView) {
+            try { target.scrollIntoView({ block: 'center', inline: 'nearest' }); } catch (err) { target.scrollIntoView(); }
+          }
+        } else if (c.screen && c.screen !== currentScreenSlug()) {
           // Gọi THẲNG showScreen nếu vật chủ có (app không chắc lắng nghe hashchange),
           // đồng thời set hash để URL vẫn khớp màn đang xem.
           if (typeof window.showScreen === 'function') {
