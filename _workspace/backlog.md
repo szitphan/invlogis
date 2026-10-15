@@ -1,22 +1,14 @@
----
-type: backlog
-status: draft
-updated: 2026-10-15
-links:
-  - docs-input/README.md
----
-# Backlog
-
-> Task tự đóng khi điều kiện cột **Xong khi** thoả (`_scripts/intake-sync.py`, chạy qua hook). Nguồn mới trong `docs-input/` tự sinh task feed. Task `manual` đóng bằng cách đổi Trạng thái thành ✅. Cú pháp điều kiện: `exists:<glob>` · `grep:<glob>:<regex>` · `fed:<nguồn>` · `!` phủ định · `&&` nối.
+0fe92371a3d68847e69bfcf95f0e1360508e8ef6
 
 ## Đang mở
 
 | ID | Việc | Nguồn | Xong khi | Trạng thái | Tạo | Xong | Bằng chứng | Hạn | Ưu tiên |
 |---|---|---|---|---|---|---|---|---|---|
+| BL-003 | Reverse SRS cũ LG sang bộ SRS chuẩn (`/reverse-doc`) | `srs-cu/` | `exists:docs/_reverse/reverse-plan.json && !grep:docs/_reverse/reverse-plan.json:"status": "pending"` | ⬜ | 2026-10-02 |  |  |  |  |
+| BL-033 | Reverse SRS mobile (feature cũ đang phát triển) sang bộ SRS chuẩn (`/reverse-doc`) | `srs-cu/srs-mobile/srs-mobile.md` | `exists:docs/_reverse/reverse-plan.json && !grep:docs/_reverse/reverse-plan.json:"status": "pending"` | ⬜ | 2026-10-05 |  |  |  |  |
 | BL-120 | Đưa vào brainstorm SIM (OQ hỏi khách) 2 điểm giao VIS ↔ SIM mà nguồn chưa nói: (1) hóa đơn tổng VETC cuối kỳ (SRC-06 3.1.3 Bước 4) sau khi VIS đối chiếu GPS có đi qua IIP/MISA như hóa đơn đầu vào thường không, ai duyệt, gắn JobID nào; (2) hóa đơn dầu mua ngoài lái xe tải lên IIP có ghép với đối soát sensor dầu VIS (SRC-06 3.6, cảnh báo "gian lận hóa đơn cấp dầu ngoài luồng") không. Chi phí VIS duyệt (vé, dầu bù, km tìm vỏ J01) có chảy sang SIM để ghép hóa đơn theo JobID không. Slug brainstorm SIM đổi thì sửa đường dẫn Xong khi | `sop/vis-du-lieu-van-hanh-xe/` · `sop/quan-ly-hoa-don-sim/` · `tich-hop/vis-sim-cong-tac-chuan-bi/` | `grep:docs/debt-management/brainstorms/debt-management.md:VETC` | ⬜ | 2026-10-14 |  |  |  |  |
 | BL-111 | Hỏi khách 2 mâu thuẫn trong bộ SIM nhận 12–14/10: (1) Hóa đơn vô chủ duyệt 2 bước (SIM 12/10 mục 3.3.4) hay 3 bước CBQL–Kế toán–Giám đốc (bản IIP đứng riêng 12/10); (2) giao dịch lỗi đối soát quá 24h tự tạo phiếu chi hoàn tiền (SRC-25 mở đầu) hay chỉ hoàn tiền sau duyệt tay (SIM 3.3). Chốt xong ghi vào sổ đối chiếu SRC-07 mục 3.3.4–3.3.5 và BL-062 | `sop/quan-ly-hoa-don-sim/` · `sop/sim-ke-khai-thue-tu-dong/` | `manual` | ⬜ | 2026-10-14 |  |  |  |  |
 | BL-085 | Port skill Figma về kit `/Users/szit/Desktop/szit/AI/kits/figma-skills`: `custom/figma-component` (bản reqwise), `custom/figma-screen` (P-24), thay `reqwise/` bằng bản 1.1.0; tách đoạn đặt tên flow của `figma-userflow` ra khỏi `reqwise/`; tham chiếu chỉ invlogis có (`status-chip-lint.py`, Chip trạng thái, `ui-review.md`) đổi thành tuỳ chọn. Làm khi 2 skill custom đã chạy thật ổn | hội thoại 2026-10-13 | `grep:/Users/szit/Desktop/szit/AI/kits/figma-skills/custom/figma-component/SKILL.md:Hai đường ghi && grep:/Users/szit/Desktop/szit/AI/kits/figma-skills/custom/figma-screen/SKILL.md:visual-audit\.py && grep:/Users/szit/Desktop/szit/AI/kits/figma-skills/reqwise/figma-bpmn/SKILL.md:cheat` | ⬜ | 2026-10-13 |  |  |  |  |
-| BL-003 | Reverse SRS cũ LG sang bộ SRS chuẩn (`/reverse-doc`) | `srs-cu/` | `grep:docs/_reverse/*/*-reverse-spec.md:lg-srs-export` | ⬜ | 2026-10-02 |  |  |  |  |
 | BL-004 | Tạo SRS mới từ bộ reverse LG (`/srs`) | `srs-cu/` | `grep:docs/*/srs/*-spec.md:docs/_reverse/` | ⬜ | 2026-10-02 |  |  |  |  |
 | BL-005 | Chốt 3 brainstorm service-delivery, shipment-coordination, transport-dispatch (tách 12/10 từ brainstorm điều phối; checkpoint 07/10 đã ghi, còn Mục 6.2–6.4, 7, 9, 10) | `sop/` | `grep:docs/service-delivery/brainstorms/service-delivery.md:^status: approved && grep:docs/shipment-coordination/brainstorms/shipment-coordination.md:^status: approved && grep:docs/transport-dispatch/brainstorms/transport-dispatch.md:^status: approved` | ⬜ | 2026-10-02 |  |  |  |  |
 | BL-006 | Gõ lại chữ công văn VETC từ ảnh scan 7 trang | `tich-hop/vetc-api-cong-van-2026-09-02/` | `!grep:docs-input/tich-hop/vetc-api-cong-van-2026-09-02/*.md:Không trích xuất được` | ⬜ | 2026-10-02 |  |  |  |  |
@@ -41,7 +33,6 @@ links:
 | BL-029 | Chạy thử`/prototype-html <feature> <link Figma>` trên 1 flow thật, sửa skill theo kết quả (khớp artboard 3b, lệch Figma↔tài liệu, đối chiếu ảnh 26b) | `.claude/skills/prototype-html/` | `grep:docs/*/html-design/*-prototype.html:data-figma-node` | ⬜ | 2026-10-04 |  |  |  |  |
 | BL-031 | Đưa 4 đề xuất thẻ dùng chung (Mục 5 bản đồ đối tượng: Phương tiện, Nhà cung cấp, dòng mặt hàng, thẻ chứng từ) thành CMP qua`/update-overview patterns`, làm khi bắt đầu vẽ màn | `docs/_shared/object-map.md` | `grep:design/ui-common/screen-patterns.md:Ô chọn Nhà cung cấp` | ⬜ | 2026-10-05 |  |  |  |  |
 | BL-032 | Sửa fixture KG (`skills/kg/engine/test-fixtures/`) cho khớp engine hiện tại — đang 112 pass / 25 fail, hỏng sẵn cả ở kit | `_guides/pipeline.md` P-28 | `manual` | ⬜ | 2026-10-05 |  |  |  |  |
-| BL-033 | Reverse SRS mobile (feature cũ đang phát triển) sang bộ SRS chuẩn (`/reverse-doc`) | `srs-cu/srs-mobile/srs-mobile.md` | `grep:docs/_reverse/*/*-reverse-spec.md:srs-mobile` | ⬜ | 2026-10-05 |  |  |  |  |
 | BL-034 | Căn chỉnh lỗi hiển thị + đồng nhất cách thể hiện ở lab form báo cáo sự cố (chuyển sang bộ style chung) | `design/_lab/lab-form-incident.html` | `grep:design/_lab/lab-form-incident.html:lab-kit.css` | ⬜ | 2026-10-06 |  |  |  |  |
 | BL-035 | Dựng Confirm Sheet (CMP-03 Mobile) trên Figma sau khi chốt style lab — spec vào design.md, 393, ví dụ A+B+C (kế hoạch:`design/_lab/refs/notes.md`) | hội thoại 09/10 | `grep:design/design.md:### Confirm Sheet` | ⬜ | 2026-10-09 |  |  |  |  |
 | BL-036 | Nhận khách trả lời OQ-45 (hàng quay cắt), OQ-46 (tạm ứng dầu xe CBT) — đã gửi bản tổng hợp 09/10 | `docs/meetings/2026-10-09-client-dispatch-field-issues.md` | `manual` | ⬜ | 2026-10-09 |  |  |  |  |
@@ -90,7 +81,6 @@ links:
 | BL-117 | Hoàn tất sổ đối chiếu SRC-21 (còn mục chưa xử lý) | `ui-common/app/app-common-rules.md` | `fed:ui-common/app/app-common-rules.md` | ⬜ | 2026-10-14 |  |  |  |  |
 | BL-118 | Hoàn tất sổ đối chiếu SRC-22 (còn mục chưa xử lý) | `srs-cu/lg-srs-export.md` | `fed:srs-cu/lg-srs-export.md` | ⬜ | 2026-10-14 |  |  |  |  |
 | BL-119 | Hoàn tất sổ đối chiếu SRC-23 (còn mục chưa xử lý) | `srs-cu/srs-mobile/srs-mobile.md` | `fed:srs-cu/srs-mobile/srs-mobile.md` | ⬜ | 2026-10-14 |  |  |  |  |
-| BL-121 | Chốt cấu trúc module vào Feature Map PRD + object-map (DEC-079): Danh mục cấp doanh nghiệp chia theo miền, slug feature mới (`product-catalog`, `partners`, `cost-catalog`, `organization`, `repair-quotation`…) | — | `grep:docs/_product/prd.md:product-catalog` | ⬜ | 2026-10-15 |  |  |  |  |
 | BL-122 | Định nghĩa thuật ngữ dev–BA BusinessDocument (chứng từ nghiệp vụ) và ChangeRequest (yêu cầu thay đổi danh mục) — vấn đề ISS-07 | — | `grep:docs/_shared/definitions.md:ChangeRequest` | ⬜ | 2026-10-15 |  |  |  |  |
 | BL-123 | Script kiểm kế thừa reverse → tài liệu mới: liệt kê FR/BR/E hiện trạng chưa được dẫn ở brainstorm/SRS mới hoặc chưa ghi "Bỏ" (DEC-082) | — | `exists:_scripts/reverse-carryover.py` | ⬜ | 2026-10-15 |  |  |  |  |
 | BL-124 | Lập feature access-control (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/access-control/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
@@ -107,7 +97,7 @@ links:
 | BL-135 | Lập feature incident-report (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/incident-report/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
 | BL-136 | Lập feature inventory-count (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/inventory-count/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
 | BL-137 | Lập feature organization (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/organization/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
-| BL-138 | Lập feature partners (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/partners/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-138 | Lập feature business-partners (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/business-partners/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
 | BL-139 | Lập feature product-catalog (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/product-catalog/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
 | BL-140 | Lập feature purchasing (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/purchasing/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
 | BL-141 | Lập feature reminders (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/reminders/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
@@ -118,11 +108,15 @@ links:
 | BL-146 | Lập feature vehicle-management (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/vehicle-management/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
 | BL-147 | Lập feature workshop-payment (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/workshop-payment/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
 | BL-148 | Lập feature workshop-reports (nhận mục từ SRC-22) | `srs-cu/lg-srs-export.md` | `exists:docs/workshop-reports/brainstorms/*.md` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-150 | Cột "Thuộc" của object-map xếp lại theo module DEC-079 (Danh mục › Tổ chức/Hàng hoá/Đối tác/Tài chính, Bảo dưỡng sửa chữa, Quản lý dầu…) cho khớp Feature Map PRD 15/10 | — | `grep:docs/_shared/object-map.md:Danh mục › Hàng hoá` | ⬜ | 2026-10-15 |  |  |  |  |
+| BL-151 | `saas-core-vs-tenant.md` Mục 3.6 + danh sách gói: định mức nhiên liệu chuyển sang Gói "Nhiên liệu", thêm Gói Nhân sự (DEC-085) | — | `grep:docs/_product/saas-core-vs-tenant.md:DEC-085` | ⬜ | 2026-10-15 |  |  |  |  |
 
 ## Đã xong
 
 | ID | Việc | Nguồn | Xong khi | Trạng thái | Tạo | Xong | Bằng chứng | Hạn | Ưu tiên |
 |---|---|---|---|---|---|---|---|---|---|
+| BL-121 | Chốt cấu trúc module vào Feature Map PRD + object-map (DEC-079): Danh mục cấp doanh nghiệp chia theo miền, slug feature mới (`product-catalog`, `business-partners`, `cost-catalog`, `organization`, `repair-quotation`…) | — | `grep:docs/_product/prd.md:product-catalog` | ✅ | 2026-10-15 | 2026-10-15 | `docs/_product/prd.md` |  |  |
+| BL-149 | Duyệt + land `feat/reverse-lg` — Pilot reverse SRS cũ: account-access + product-catalog (gate 8/8), plan 25 feature, công cụ reverse-run | `feat/reverse-lg` | `!branch:feat/reverse-lg` | ✅ | 2026-10-15 | 2026-10-15 | không còn `feat/reverse-lg` |  |  |
 | BL-107 | Mốc 4 thương hiệu: file Figma "[innvie] Invlogis Brand", PDF + PPTX bản cuối, gói bàn giao | `design/brand/brand-brief.md` Mục 10 | `exists:design/brand/invlogis/README.md && grep:design/brand/invlogis/README.md:figma.com` | ✅ | 2026-10-14 | 2026-10-14 | `design/brand/invlogis/README.md` · `design/brand/invlogis/README.md` | 2026-11-06 |  |
 | BL-106 | Mốc 3 thương hiệu: deck, landing Việt + Anh, tài liệu 1 trang, mạng xã hội, văn phòng phẩm, điểm chạm sản phẩm | `design/brand/brand-brief.md` Mục 10 | `exists:design/brand/invlogis/deck/invlogis-sales-deck.pptx && exists:design/brand/invlogis/web/index.html` | ✅ | 2026-10-14 | 2026-10-14 | `design/brand/invlogis/deck/invlogis-sales-deck.pptx` · `design/brand/invlogis/web/index.html` | 2026-10-30 |  |
 | BL-105 | Mốc 2 thương hiệu: bộ logo đầy đủ, bộ màu và chữ, trang quy chuẩn, `brand.yml` mới | `design/brand/brand-brief.md` Mục 10 | `exists:design/brand/invlogis/logo/invlogis-primary.svg && exists:design/brand/guideline/brand-guideline.html` | ✅ | 2026-10-14 | 2026-10-14 | `design/brand/invlogis/logo/invlogis-primary.svg` · `design/brand/guideline/brand-guideline.html` | 2026-10-22 |  |
