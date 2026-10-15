@@ -59,3 +59,4 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 | P-ngon-ngu-giao-dien | Ngôn ngữ giao diện cho chọn | Danh sách | Cấu hình | Tiếng Việt, Tiếng Anh | Tiếng Việt, Tiếng Anh | Admin khách | Tài khoản D3 | SRS Web tr.162 (bỏ tiếng Nhật) |
 | P-huong-dan-cap-tai-khoan | Dòng hướng dẫn người chưa có tài khoản trên màn đăng nhập | Danh sách (nội dung) | Cấu hình | "Chưa có tài khoản? Liên hệ quản trị viên." | như mặc định | Admin khách | Tài khoản D5 | SRS Mobile tr.46 |
 | P-han-link-dat-lai | Hiệu lực link đặt lại mật khẩu trên web | Số (phút) | Cấu hình | chưa chốt | 30 phút | Admin khách | Tài khoản B1 | SRS Web tr.264 |
+| P-han-tao-mat-khau | Thời gian để lưu mật khẩu mới sau khi mở link hoặc nhập đúng mã đặt lại | Số (phút) | Cấu hình | 15 phút | 15 phút | Admin khách | Tài khoản BR-023 | Review SRS account-access 15/10 |
