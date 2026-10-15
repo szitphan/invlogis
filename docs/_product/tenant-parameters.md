@@ -53,9 +53,9 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 | P-so-lan-gui-ma-moi-gio | Số lần gửi link, mã tối đa mỗi tài khoản trong 1 giờ | Số (lần) | Cấu hình | 5 | 5 | Admin khách | Tài khoản B1 | Phỏng vấn account-access 15/10 |
 | P-han-ma-otp | Hiệu lực mã OTP đặt lại mật khẩu | Số (phút) | Cấu hình | 5 phút | 5 phút | Admin khách | Tài khoản B2 | SRS Mobile tr.57 |
 | P-so-lan-sai-otp | Số lần nhập sai mã OTP tối đa | Số (lần) | Cấu hình | 5 | 5 | Admin khách | Tài khoản B2 | SRS Mobile tr.58 |
-| P-email-ho-tro-mat-khau | Địa chỉ nhận yêu cầu Liên hệ IT khi quên mật khẩu | Danh sách (email) | Cấu hình | chưa chốt | chưa chốt (OQ-2) | Admin khách | Tài khoản B3 | SRS Web tr.263 |
+| P-email-ho-tro-mat-khau | Địa chỉ nhận yêu cầu Liên hệ IT khi quên mật khẩu | Danh sách (email) | Cấu hình | chưa chốt | it@delta.com.vn | Admin khách | Tài khoản B3 | SRS Web tr.263 |
 | P-chinh-sach-mat-khau | Độ dài tối thiểu và loại ký tự bắt buộc của mật khẩu | Danh sách | Cấu hình | 8 ký tự, chữ thường, chữ hoa, số, ký tự đặc biệt | như mặc định | Admin khách | Tài khoản B4 | SRS Web tr.271 |
 | P-so-ngay-lich-su-hoat-dong | Số ngày lịch sử hoạt động người dùng xem được | Số (ngày) | Cấu hình | 90 ngày | 90 ngày | Admin khách | Tài khoản D2 | Phỏng vấn account-access 15/10 |
 | P-ngon-ngu-giao-dien | Ngôn ngữ giao diện cho chọn | Danh sách | Cấu hình | Tiếng Việt, Tiếng Anh | Tiếng Việt, Tiếng Anh | Admin khách | Tài khoản D3 | SRS Web tr.162 (bỏ tiếng Nhật) |
-| P-huong-dan-cap-tai-khoan | Dòng hướng dẫn người chưa có tài khoản trên màn đăng nhập | Danh sách (nội dung) | Cấu hình | "Chưa có tài khoản? Liên hệ quản trị viên." | chưa chốt (OQ-3) | Admin khách | Tài khoản D5 | SRS Mobile tr.46 |
-| P-han-link-dat-lai | Hiệu lực link đặt lại mật khẩu trên web | Số (phút) | Cấu hình | chưa chốt | chưa chốt (OQ-1) | Admin khách | Tài khoản B1 | SRS Web tr.264 |
+| P-huong-dan-cap-tai-khoan | Dòng hướng dẫn người chưa có tài khoản trên màn đăng nhập | Danh sách (nội dung) | Cấu hình | "Chưa có tài khoản? Liên hệ quản trị viên." | như mặc định | Admin khách | Tài khoản D5 | SRS Mobile tr.46 |
+| P-han-link-dat-lai | Hiệu lực link đặt lại mật khẩu trên web | Số (phút) | Cấu hình | chưa chốt | 30 phút | Admin khách | Tài khoản B1 | SRS Web tr.264 |
