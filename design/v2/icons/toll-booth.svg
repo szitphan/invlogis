@@ -1,0 +1,2 @@
+<!-- DS v2 · icon/toll-booth · Trạm thu phí (tự vẽ, DEC-153) · bản viền, nét gốc 2 như Lucide, code đặt strokeWidth 1.8 (DEC-142) · icons.md mục 6 · màu currentColor -->
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l3-3 3 3v12"/><path d="M5 12h2"/><path d="M2 21h20"/><rect x="9" y="13" width="13" height="2.5" rx="1.25"/><path d="M13 13v2.5"/><path d="M17 13v2.5"/></svg>

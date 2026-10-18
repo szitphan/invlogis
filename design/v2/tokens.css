@@ -1,0 +1,366 @@
+/* DS v2 tokens — FILE SINH RA từ design/v2/tokens.json bằng _scripts/ds-v2-tokens.py. KHÔNG sửa tay. */
+/* version 0.2.0 · 2026-10-17 */
+
+:root {
+  /* Fonts (DEC-121) */
+  --font-title: 'Cal Sans', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-code: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  /* Primitives — component không dùng trực tiếp (DEC-115) */
+  --neutral-50: #F9FAFC;
+  --neutral-100: #F2F4F7;
+  --neutral-200: #E3E6EC;
+  --neutral-300: #D0D5DD;
+  --neutral-400: #98A2B3;
+  --neutral-500: #5F6B7A;
+  --neutral-600: #495363;
+  --neutral-700: #374050;
+  --neutral-800: #232C3A;
+  --neutral-900: #121826;
+  --neutral-950: #070C16;
+  --blue-50: #E7EFFD;
+  --blue-100: #D3E2FE;
+  --blue-200: #B5CFFF;
+  --blue-300: #93B9FF;
+  --blue-400: #6C9EFE;
+  --blue-500: #4982F7;
+  --blue-600: #3468D7;
+  --blue-700: #1F4FB8;
+  --blue-800: #163F98;
+  --blue-900: #0D2F7A;
+  --blue-950: #051F5C;
+  --teal-50: #E2F5F4;
+  --teal-100: #C6EDEB;
+  --teal-200: #A9DDD9;
+  --teal-300: #8AC9C5;
+  --teal-400: #67B3AD;
+  --teal-500: #449D95;
+  --teal-600: #2B847C;
+  --teal-700: #0B6B64;
+  --teal-800: #015751;
+  --teal-900: #01433E;
+  --teal-950: #002F2C;
+  --purple-50: #EFEAFE;
+  --purple-100: #E3DBFE;
+  --purple-200: #D0C4FF;
+  --purple-300: #B9AAFE;
+  --purple-400: #9E8CFE;
+  --purple-500: #836BFF;
+  --purple-600: #6A50E4;
+  --purple-700: #5536C4;
+  --purple-800: #4429A3;
+  --purple-900: #341C82;
+  --purple-950: #250F63;
+  --yellow-50: #FFF3DC;
+  --yellow-100: #FEE4B6;
+  --yellow-200: #F2D099;
+  --yellow-300: #E3B87A;
+  --yellow-400: #D19D59;
+  --yellow-500: #BF8239;
+  --yellow-600: #A56A21;
+  --yellow-700: #8A5300;
+  --yellow-800: #704303;
+  --yellow-900: #573301;
+  --yellow-950: #3F2300;
+  --green-50: #E8F5EC;
+  --green-100: #D3EDDB;
+  --green-200: #B3E0C1;
+  --green-300: #93CFA6;
+  --green-400: #6FBB89;
+  --green-500: #4CA66D;
+  --green-600: #348D57;
+  --green-700: #1B7542;
+  --green-800: #105F34;
+  --green-900: #054A26;
+  --green-950: #013519;
+  --red-50: #FDECEC;
+  --red-100: #FDDBDB;
+  --red-200: #FFC1BF;
+  --red-300: #FFA19C;
+  --red-400: #FC7970;
+  --red-500: #F05547;
+  --red-600: #D23C2E;
+  --red-700: #B42318;
+  --red-800: #94170E;
+  --red-900: #760B05;
+  --red-950: #580100;
+  --orange-50: #FFF7ED;
+  --orange-100: #FBEAD7;
+  --orange-200: #FFD3AB;
+  --orange-300: #FFB782;
+  --orange-400: #FE9356;
+  --orange-500: #F96E34;
+  --orange-600: #DE5626;
+  --orange-700: #C2410C;
+  --orange-800: #A03201;
+  --orange-900: #7E2500;
+  --orange-950: #5C1901;
+  --charcoal-800: #3B3B3B;
+  --charcoal-900: #262626;
+  --charcoal-950: #171717;
+  --white: #FFFFFF;
+  --alpha-neutral-950-50: #070C1680;
+  --space-0: 0;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --radius-0: 0;
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-14: 14px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-28: 28px;
+  --radius-full: 9999px;
+}
+
+/* Semantic — Light (mặc định) */
+:root, [data-theme="light"] {
+  --color-bg-canvas: var(--neutral-100);
+  --color-bg-surface: var(--white);
+  --color-bg-muted: var(--neutral-100);
+  --color-bg-hover: var(--neutral-50);
+  --color-bg-selected: var(--neutral-100);
+  --color-bg-inverse: var(--neutral-900);
+  --color-text-primary: var(--neutral-900);
+  --color-text-secondary: var(--neutral-500);
+  --color-text-tertiary: var(--neutral-400);
+  --color-text-inverse: var(--white);
+  --color-icon-primary: var(--neutral-700);
+  --color-icon-secondary: var(--neutral-500);
+  --color-border-default: var(--neutral-200);
+  --color-border-strong: var(--neutral-300);
+  --color-border-focus: var(--charcoal-900);
+  --color-action-primary: var(--charcoal-900);
+  --color-action-primary-hover: var(--charcoal-800);
+  --color-action-primary-pressed: var(--charcoal-950);
+  --color-action-secondary: var(--neutral-100);
+  --color-action-secondary-hover: var(--neutral-200);
+  --color-action-danger: var(--red-700);
+  --color-status-success-bg: var(--green-50);
+  --color-status-success-fg: var(--green-700);
+  --color-status-warning-bg: var(--yellow-50);
+  --color-status-warning-fg: var(--yellow-700);
+  --color-status-danger-bg: var(--red-50);
+  --color-status-danger-fg: var(--red-700);
+  --color-status-info-bg: var(--blue-50);
+  --color-status-info-fg: var(--blue-700);
+  --color-chip-gray-bg: var(--neutral-100);
+  --color-chip-gray-fg: var(--neutral-600);
+  --color-chip-blue-bg: var(--blue-50);
+  --color-chip-blue-fg: var(--blue-700);
+  --color-chip-teal-bg: var(--teal-50);
+  --color-chip-teal-fg: var(--teal-700);
+  --color-chip-purple-bg: var(--purple-50);
+  --color-chip-purple-fg: var(--purple-700);
+  --color-chip-yellow-bg: var(--yellow-50);
+  --color-chip-yellow-fg: var(--yellow-700);
+  --color-chip-green-bg: var(--green-50);
+  --color-chip-green-fg: var(--green-700);
+  --color-chip-red-bg: var(--red-50);
+  --color-chip-red-fg: var(--red-700);
+  --color-chip-orange-bg: var(--orange-50);
+  --color-chip-orange-fg: var(--orange-700);
+  --color-overlay-scrim: var(--alpha-neutral-950-50);
+}
+/* Semantic — Dark: Dark đang là bản sao của Light, điền ở vòng sau (DEC-116) */
+[data-theme="dark"] {
+  --color-bg-canvas: var(--neutral-100);
+  --color-bg-surface: var(--white);
+  --color-bg-muted: var(--neutral-100);
+  --color-bg-hover: var(--neutral-50);
+  --color-bg-selected: var(--neutral-100);
+  --color-bg-inverse: var(--neutral-900);
+  --color-text-primary: var(--neutral-900);
+  --color-text-secondary: var(--neutral-500);
+  --color-text-tertiary: var(--neutral-400);
+  --color-text-inverse: var(--white);
+  --color-icon-primary: var(--neutral-700);
+  --color-icon-secondary: var(--neutral-500);
+  --color-border-default: var(--neutral-200);
+  --color-border-strong: var(--neutral-300);
+  --color-border-focus: var(--charcoal-900);
+  --color-action-primary: var(--charcoal-900);
+  --color-action-primary-hover: var(--charcoal-800);
+  --color-action-primary-pressed: var(--charcoal-950);
+  --color-action-secondary: var(--neutral-100);
+  --color-action-secondary-hover: var(--neutral-200);
+  --color-action-danger: var(--red-700);
+  --color-status-success-bg: var(--green-50);
+  --color-status-success-fg: var(--green-700);
+  --color-status-warning-bg: var(--yellow-50);
+  --color-status-warning-fg: var(--yellow-700);
+  --color-status-danger-bg: var(--red-50);
+  --color-status-danger-fg: var(--red-700);
+  --color-status-info-bg: var(--blue-50);
+  --color-status-info-fg: var(--blue-700);
+  --color-chip-gray-bg: var(--neutral-100);
+  --color-chip-gray-fg: var(--neutral-600);
+  --color-chip-blue-bg: var(--blue-50);
+  --color-chip-blue-fg: var(--blue-700);
+  --color-chip-teal-bg: var(--teal-50);
+  --color-chip-teal-fg: var(--teal-700);
+  --color-chip-purple-bg: var(--purple-50);
+  --color-chip-purple-fg: var(--purple-700);
+  --color-chip-yellow-bg: var(--yellow-50);
+  --color-chip-yellow-fg: var(--yellow-700);
+  --color-chip-green-bg: var(--green-50);
+  --color-chip-green-fg: var(--green-700);
+  --color-chip-red-bg: var(--red-50);
+  --color-chip-red-fg: var(--red-700);
+  --color-chip-orange-bg: var(--orange-50);
+  --color-chip-orange-fg: var(--orange-700);
+  --color-overlay-scrim: var(--alpha-neutral-950-50);
+}
+
+/* Platform — Web (DEC-114, DEC-132…138) */
+:root, [data-platform="web"] {
+  --radius-control: var(--radius-8);
+  --radius-field: var(--radius-8);
+  --radius-card: var(--radius-12);
+  --radius-inner: var(--radius-8);
+  --radius-overlay: var(--radius-12);
+  --radius-chip: var(--radius-full);
+  --space-inset-xs: var(--space-4);
+  --space-inset-sm: var(--space-8);
+  --space-inset-md: var(--space-12);
+  --space-inset-lg: var(--space-16);
+  --space-inset-xl: var(--space-24);
+  --space-gap-xs: var(--space-4);
+  --space-gap-sm: var(--space-8);
+  --space-gap-md: var(--space-12);
+  --space-gap-lg: var(--space-16);
+  --space-gap-xl: var(--space-24);
+  --space-gap-2xl: var(--space-32);
+  --layout-screen-inset: var(--space-24);
+  --layout-card-padding: var(--space-16);
+  --layout-list-gap: var(--space-8);
+  --layout-section-gap: var(--space-32);
+  --touch-min: 24px;
+  --focus-width: 2px;
+  --focus-offset: 2px;
+  --type-display-size: 32px;
+  --type-display-line-height: 40px;
+  --type-title-1-size: 24px;
+  --type-title-1-line-height: 32px;
+  --type-title-2-size: 20px;
+  --type-title-2-line-height: 28px;
+  --type-title-3-size: 17px;
+  --type-title-3-line-height: 24px;
+  --type-heading-size: 14px;
+  --type-heading-line-height: 20px;
+  --type-body-size: 14px;
+  --type-body-line-height: 20px;
+  --type-label-size: 14px;
+  --type-label-line-height: 20px;
+  --type-caption-size: 12px;
+  --type-caption-line-height: 16px;
+  --type-code-size: 12px;
+  --type-code-line-height: 16px;
+  --type-label-weight: 500;
+  --icon-size-sm: 14px;
+  --icon-size-md: 16px;
+  --icon-size-lg: 20px;
+  --icon-size-chip: 14px;
+}
+
+/* Platform — Mobile (DEC-114, DEC-132…138) */
+[data-platform="mobile"] {
+  --radius-control: var(--radius-full);
+  --radius-field: var(--radius-14);
+  --radius-card: var(--radius-20);
+  --radius-inner: var(--radius-14);
+  --radius-overlay: var(--radius-28);
+  --radius-chip: var(--radius-full);
+  --space-inset-xs: var(--space-4);
+  --space-inset-sm: var(--space-8);
+  --space-inset-md: var(--space-12);
+  --space-inset-lg: var(--space-16);
+  --space-inset-xl: var(--space-24);
+  --space-gap-xs: var(--space-4);
+  --space-gap-sm: var(--space-8);
+  --space-gap-md: var(--space-12);
+  --space-gap-lg: var(--space-16);
+  --space-gap-xl: var(--space-24);
+  --space-gap-2xl: var(--space-32);
+  --layout-screen-inset: var(--space-16);
+  --layout-card-padding: 14px;
+  --layout-list-gap: var(--space-12);
+  --layout-section-gap: var(--space-24);
+  --touch-min: 44px;
+  --focus-width: 2px;
+  --focus-offset: 2px;
+  --type-display-size: 34px;
+  --type-display-line-height: 40px;
+  --type-title-1-size: 28px;
+  --type-title-1-line-height: 34px;
+  --type-title-2-size: 22px;
+  --type-title-2-line-height: 28px;
+  --type-title-3-size: 17px;
+  --type-title-3-line-height: 22px;
+  --type-heading-size: 15px;
+  --type-heading-line-height: 20px;
+  --type-body-size: 15px;
+  --type-body-line-height: 22px;
+  --type-label-size: 15px;
+  --type-label-line-height: 20px;
+  --type-caption-size: 13px;
+  --type-caption-line-height: 18px;
+  --type-code-size: 13px;
+  --type-code-line-height: 18px;
+  --type-label-weight: 600;
+  --icon-size-sm: 16px;
+  --icon-size-md: 20px;
+  --icon-size-lg: 24px;
+  --icon-size-chip: 14px;
+}
+
+:root {
+  /* Lớp nổi (DEC-137) */
+  --elev-0: none;
+  --elev-1: 0px 1px 2px 0px rgba(16, 24, 40, 0.06);
+  --elev-1-border: var(--color-border-default);
+  --elev-2: 0px 4px 12px 0px rgba(16, 24, 40, 0.1), 0px 1px 3px 0px rgba(16, 24, 40, 0.06);
+  --elev-2-border: var(--color-border-default);
+  --elev-3: 0px 16px 40px 0px rgba(16, 24, 40, 0.16), 0px 4px 12px 0px rgba(16, 24, 40, 0.08);
+  /* Chuyển động, focus (DEC-139) */
+  --duration-fast: 125ms;
+  --duration-medium: 300ms;
+  --duration-slow: 700ms;
+  --easing-standard: cubic-bezier(0.24, 1, 0.4, 1);
+  --focus-color: var(--color-border-focus);
+  /* Lưới (DEC-136); breakpoint chỉ để tra, media query ghi số trực tiếp */
+  --grid-columns: 12;
+  --grid-gutter: 24px;
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --duration-fast: 0ms; --duration-medium: 0ms; --duration-slow: 0ms; }
+}
+
+/* Kiểu chữ (DEC-132, DEC-133) — tên lớp = tên text style Figma */
+.type-display { font: 400 var(--type-display-size)/var(--type-display-line-height) var(--font-title); }
+.type-title-1 { font: 400 var(--type-title-1-size)/var(--type-title-1-line-height) var(--font-title); }
+.type-title-2 { font: 400 var(--type-title-2-size)/var(--type-title-2-line-height) var(--font-title); }
+.type-title-3 { font: 400 var(--type-title-3-size)/var(--type-title-3-line-height) var(--font-title); }
+.type-heading { font: 600 var(--type-heading-size)/var(--type-heading-line-height) var(--font-body); }
+.type-body { font: 400 var(--type-body-size)/var(--type-body-line-height) var(--font-body); }
+.type-label { font: var(--type-label-weight) var(--type-label-size)/var(--type-label-line-height) var(--font-body); }
+.type-caption { font: 400 var(--type-caption-size)/var(--type-caption-line-height) var(--font-body); }
+.type-code { font: 400 var(--type-code-size)/var(--type-code-line-height) var(--font-code); }
+.type-caption-caps { font: 500 var(--type-caption-size)/var(--type-caption-line-height) var(--font-body); text-transform: uppercase; letter-spacing: 0.04em; }
