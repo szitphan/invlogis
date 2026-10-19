@@ -36,7 +36,8 @@ Số của các hệ lấy từ trang gốc ngày 16/10/2026 (bảng nguồn tr�
 | Gốc | `Primitives` | Value | `neutral/900`, `space/16`, `radius/12` | Chỉ token tầng trên trỏ tới; ẩn khỏi bảng chọn |
 | Nghĩa | `Semantic` | Light, Dark | `color/text/secondary` | Component, màn |
 | Nền tảng | `Platform` | Web, Mobile | `radius/card`, `type/body/size`, `layout/screen-inset` | Component, màn |
-| Component | `Component` (vòng 4) | 1 | `button/bg/primary` | Component nhiều trạng thái |
+| Component | `Component` | Value | `button/bg/primary`, `button/fg/danger` (DEC-174, DEC-197) | Component nhiều trạng thái |
+| Theo khách | `Brand` | 8 dải | `color/brand/800` | Component, màn, theo vai mục 3.5 |
 
 - Component và màn **không gắn Primitives, không ghi mã màu trần**. Cần màu mới thì thêm token nghĩa.
 - Màn đặt chế độ `Platform` một lần ở khung màn (Web hoặc Mobile); chữ, bo góc, khoảng cách bên trong tự đổi.
@@ -357,7 +358,8 @@ trên Figma hay không thì chưa chốt (mục 13).
   Lưu ý: dưới mức 48dp Android khuyên.
 - **Web:** đích bấm tối thiểu 24×24 (WCAG 2.2 AA, mục 2.5.8).
 - **Focus:** vòng 2px, cách mép 2px, màu `color/border/focus` (than chì) cho mọi khách, không theo dải màu khách
-  (DEC-170). Ô nhập đang gõ: viền 2px cùng màu.
+  (DEC-170). Nút Danger: vòng focus màu danger (`button/focus/danger` → `color/action/danger`, DEC-198). Ô nhập
+  đang gõ: viền 2px cùng màu than chì.
 
 ## 10. Chuyển động (DEC-139)
 

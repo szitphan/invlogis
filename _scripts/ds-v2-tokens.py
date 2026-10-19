@@ -121,6 +121,15 @@ def build(doc) -> str:
                 L.append(f"  {css_name(k)}: {v[mode]};")
             L.append("}")
         L.append("")
+    comp = c.get("Component")
+    if comp:
+        # Khai lại ở nơi đặt data-theme để token Component tính lại theo Semantic sáng/tối.
+        L.append("/* Component — màu trạng thái của component (DEC-174; nút: DEC-176, DEC-197) */")
+        L.append(":root, [data-theme=\"light\"], [data-theme=\"dark\"] {")
+        for k, v in comp["color"].items():
+            L.append(f"  {css_name(k)}: var({css_name(v['Value'])});")
+        L.append("}")
+        L.append("")
     L.append(":root {")
     L.append("  /* Lớp nổi (DEC-137) */")
     L.append("  --elev-0: none;")

@@ -1,5 +1,5 @@
 /* DS v2 tokens — FILE SINH RA từ design/v2/tokens.json bằng _scripts/ds-v2-tokens.py. KHÔNG sửa tay. */
-/* version 0.5.0 · 2026-10-20 */
+/* version 0.6.1 · 2026-10-20 */
 
 :root {
   /* Fonts (DEC-121) */
@@ -481,6 +481,32 @@
   --color-brand-800: #6D2900;
   --color-brand-900: #501B00;
   --color-brand-950: #330D00;
+}
+
+/* Component — màu trạng thái của component (DEC-174; nút: DEC-176, DEC-197) */
+:root, [data-theme="light"], [data-theme="dark"] {
+  --button-bg-primary: var(--color-action-primary);
+  --button-bg-primary-hover: var(--color-action-primary-hover);
+  --button-bg-primary-pressed: var(--color-action-primary-pressed);
+  --button-fg-primary: var(--color-text-inverse);
+  --button-bg-secondary: var(--color-action-secondary);
+  --button-bg-secondary-hover: var(--color-action-secondary-hover);
+  --button-bg-secondary-pressed: var(--neutral-300);
+  --button-fg-secondary: var(--color-text-primary);
+  --button-bg-ghost-hover: var(--color-bg-selected);
+  --button-bg-ghost-pressed: var(--color-action-secondary-hover);
+  --button-fg-ghost: var(--color-text-primary);
+  --button-bg-danger: var(--color-action-danger-subtle);
+  --button-bg-danger-hover: var(--red-100);
+  --button-bg-danger-pressed: var(--red-200);
+  --button-fg-danger: var(--color-action-danger);
+  --button-bg-outline-hover: var(--color-bg-hover);
+  --button-bg-outline-pressed: var(--color-action-secondary-hover);
+  --button-fg-outline: var(--color-text-primary);
+  --button-border-outline: var(--color-border-strong);
+  --button-bg-disabled: var(--color-action-secondary);
+  --button-fg-disabled: var(--color-text-tertiary);
+  --button-focus-danger: var(--color-action-danger);
 }
 
 :root {
