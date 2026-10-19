@@ -4,7 +4,7 @@ status: stale
 status_prev: draft
 status_changed: 2026-10-14
 status_reason: "đã review upstream, không cần sửa"
-updated: 2026-10-15
+updated: 2026-10-20
 tenant_terms: [Delta, DK05, dGas, Nam Khánh, Phú Lợi, Pan Hải An]
 links:
   - docs/_product/saas-core-vs-tenant.md
@@ -67,9 +67,12 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 | P-thoi-gian-no-may-ngu | Máy nổ, xe đứng yên bao lâu thì ghi nổ máy ngủ | Số (phút) | Cấu hình | chưa chốt | 10 phút (chờ xác nhận, vehicle-telematics OQ-4) | Admin khách | Dữ liệu xe S3 | VIS mục 2.2.4 |
 | P-khoang-dung-giua-ket-xe | Khoảng đứng yên tối đa giữa 2 đoạn kẹt xe mà vẫn tính là kẹt cứng | Số (phút) | Cấu hình | chưa chốt | chưa chốt (OQ-57) | Admin khách | Dữ liệu xe S4 | Phỏng vấn VIS 15/10 |
 | P-lech-cung-duong-eta | Lệch so với cung đường bao nhiêu thì gọi lại dịch vụ bản đồ tính ETA | Số (%) | Cấu hình | chưa chốt | chưa chốt (VIS ghi "x%", OQ-57) | Admin khách | Điều vận I1 | VIS mục 2.2.1 |
+| P-lech-km-gps-lenh | Km GPS lệch km cung đường trên Lệnh bao nhiêu thì báo người duyệt Lệnh | Số (%) | Cấu hình | chưa chốt | chưa chốt | Admin khách | Điều vận I9 | Review VIS v2 (20/10) |
 | P-cung-dai-eta | Cung dài hơn mức này thì tính lại ETA định kỳ | Số (km) | Cấu hình | chưa chốt | 300 km | Admin khách | Điều vận I1 | VIS mục 2.2.1 |
 | P-chu-ky-eta-cung-dai | Chu kỳ tính lại ETA cho cung dài | Số (phút) | Cấu hình | chưa chốt | 30 phút | Admin khách | Điều vận I1 | VIS mục 2.2.1 |
 | P-quet-lai-vetc | Chờ bao lâu thì tra lại giao dịch thu phí cho trạm GPS đã qua mà chưa có giao dịch | Số (phút) | Cấu hình | chưa chốt | 120 phút | Admin khách | Điều vận I7 | VIS mục 3.1.3 |
+| P-han-duyet-lenh | Lệnh hết chạy bao lâu chưa duyệt thì nhắc người duyệt, báo trưởng điều vận | Số (giờ) | Cấu hình | chưa chốt | chưa chốt (OQ-59) | Admin khách | Điều vận I13 | Review VIS r9 (19/10) |
+| P-han-khieu-nai | Lái xe được khiếu nại một khoản trong bao nhiêu ngày từ lúc nhận thông báo | Số (ngày) | Cấu hình | chưa chốt | chưa chốt (OQ-60) | Admin khách | Điều vận I14 | Review VIS v4 (20/10) |
 | P-chu-ky-doc-dau-tat-may | Chu kỳ đọc mức dầu khi xe tắt máy | Số (phút) | Cấu hình | chưa chốt | 30 phút (VIS mục 2.2 ghi 30–60, OQ-4) | Admin khách | Dữ liệu xe K1 | VIS mục 2.2, 3.5 |
 | P-nguong-hut-dau | Dầu giảm bao nhiêu trong bao lâu thì nghi hút dầu | Số (lít trong phút) | Cấu hình | chưa chốt | 5 lít trong dưới 3 phút, dùng chung ngưỡng với EUP | Admin khách | Dữ liệu xe S7 | VIS mục 3.5 |
 | P-nguong-do-dau | Dầu tăng bao nhiêu trong bao lâu thì ghi sự kiện đổ dầu | Số (lít trong phút) | Cấu hình | chưa chốt | 20 lít trong 10 phút, dùng chung ngưỡng với EUP | Admin khách | Dữ liệu xe S6 | VIS mục 3.6 |
@@ -82,6 +85,8 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 | P-han-xu-ly-su-viec | Hạn xử lý sự việc (hút dầu, chạy ngoài Lệnh, lệch dầu) trước khi nhắc, báo trưởng bộ phận | Số (ngày) | Cấu hình | chưa chốt | chưa chốt (OQ-4) | Admin khách | Dữ liệu xe X1 | Phỏng vấn VIS 15/10 |
 | P-so-lan-loi-cam-bien | Số lần lỗi thiết bị trong kỳ thì báo kiểm tra thiết bị | Số (lần/kỳ) | Cấu hình | chưa chốt | chưa chốt (OQ-4) | Admin khách | Dữ liệu xe G2 | Phỏng vấn VIS 15/10 |
 | P-thoi-gian-giu-gps | Giữ dữ liệu GPS thô bao lâu để tra ngược | Số (tháng) | Cấu hình | chưa chốt | chưa chốt (OQ-4) | Admin khách | Dữ liệu xe G5 | Phỏng vấn VIS 15/10 |
+| P-giu-du-lieu-chua-khai | Giữ dữ liệu của thiết bị GPS chưa khai trên hồ sơ xe bao lâu để chờ khai | Số (ngày) | Cấu hình | chưa chốt | chưa chốt (OQ-16) | Admin khách | Dữ liệu xe G6 | Review VIS r10 (19/10) |
+| P-mat-du-lieu-ca-doi | Cả đội xe không có dữ liệu bao lâu thì coi là nhà cung cấp ngừng gửi, báo Admin khách | Số (phút) | Cấu hình | chưa chốt | chưa chốt (OQ-16) | Admin khách | Dữ liệu xe G7 | Review VIS r10 (19/10) |
 | P-qua-gio-ket-thuc-lenh | GPS hỏng: quá giờ kết thúc dự kiến bao lâu thì nhắc lái xe, điều vận | Số (phút) | Cấu hình | chưa chốt | chưa chốt (OQ-4) | Admin khách | Dữ liệu xe 6.5 | Phỏng vấn VIS 15/10 |
 | P-nhac-tat-may | Nhắc lái xe tắt máy trên app khi nổ máy ngủ | Bật/tắt | Cấu hình | chưa chốt | chờ khách (vehicle-telematics OQ-5) | Admin khách | Dữ liệu xe S10 | Phỏng vấn VIS 15/10 |
 | P-bu-dau-xep-hang | Bù dầu như kẹt xe khi xe xếp hàng chờ trong vùng cảng, bãi, kho mà máy vẫn nổ | Bật/tắt | Cấu hình | chưa chốt | chờ khách (transport-dispatch OQ-52) | Admin khách | Điều vận I4 | VIS mục 3.2 |

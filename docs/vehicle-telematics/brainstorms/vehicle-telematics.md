@@ -2,9 +2,9 @@
 type: brainstorm
 feature: vehicle-telematics
 status: draft
-status_changed: 2026-10-18
+status_changed: 2026-10-20
 status_reason: "đã review upstream, không cần sửa"
-updated: 2026-10-15
+updated: 2026-10-20
 links:
   - docs-input/sop/vis-giam-sat-doi-xe/vis-giam-sat-doi-xe.md
   - docs-input/tich-hop/vis-sim-cong-tac-chuan-bi/vis-sim-cong-tac-chuan-bi.md
@@ -33,6 +33,7 @@ Mô tả đã chốt: phần mềm tự đọc dữ liệu GPS, cảm biến d�
 | b | Bù dầu kẹt xe dựa vào lời lái xe kể |
 | c | Hút dầu, đổ thiếu phát hiện muộn hoặc không phát hiện |
 | d | Lái xe tránh trạm mà không ai biết |
+| e | Không kiểm soát được hao phí: xe nổ máy đứng yên, vé đường bộ không có dự toán để so (nổ máy ngủ S3, nhắc tắt máy S10, dự toán vé `transport-dispatch` I10) |
 
 **Vì sao lúc này:** Delta đang chuẩn bị làm việc với EUP, VETC và Vietcombank cho VIS (bản Công tác chuẩn bị 11/10/2026). Toàn bộ VIS vào giai đoạn 1, go-live 30/03/2027.
 
@@ -104,11 +105,11 @@ Phân quyền theo chức năng, không cố định vai trò. Luồng ghi theo 
 - S10 [Mới] [Lõi] [Cấu hình] Nhắc lái xe tắt máy trên app khi nổ máy ngủ, theo `P-nhac-tat-may` (chờ khách, OQ-5). Hoãn được nếu trễ go-live (review r17).
 
 **Nhóm T — danh mục trạm thu phí dùng chung**
-- T1 [SOP+] [Lõi] Danh mục trạm thu phí dùng chung mọi khách, đội sản phẩm duy trì: tên, toạ độ, vùng đa giác theo từng chiều, giá vé theo loại xe, ngày hiệu lực (DEC-101). Khách mới dùng được ngay; khách chỉ khai trạm riêng nếu thiếu. Nguồn ban đầu: hỏi VETC (OQ-3).
+- T1 [SOP+] [Lõi] Danh mục trạm thu phí dùng chung mọi khách, đội sản phẩm duy trì: tên, toạ độ, vùng đa giác theo từng chiều, giá vé theo nhóm xe (tính từ tổ hợp đầu kéo, mooc, container trên Lệnh), ngày hiệu lực (DEC-101). Sửa trạm (ngừng thu, sửa vùng, đổi giá) không đụng lượt qua trạm đã ghi: lượt qua trạm xét theo bản có hiệu lực lúc xe qua. Khách mới dùng được ngay; khách chỉ khai trạm riêng nếu thiếu. Nguồn ban đầu: hỏi VETC (OQ-3).
 - T2 [Mới] [Lõi] Giao dịch thu phí ở trạm chưa có trong danh mục: ghi tiền theo giao dịch, đánh dấu "Trạm chưa có trong danh mục", báo đội duy trì bổ sung. Chờ khách (OQ-7).
 
 **Nhóm X — sự việc cần xử lý**
-- X1 [SOP+] [Lõi] [Cấu hình] Hút dầu, xe chạy ngoài Lệnh, lệch dầu thực đổ là "sự việc cần xử lý": Mới → Vi phạm, Hợp lệ (bắt lý do) hoặc Lỗi thiết bị. Quá `P-han-xu-ly-su-viec` (chưa chốt) chưa xử lý thì nhắc người xử lý, báo trưởng bộ phận. Mở lại được khi kỳ chưa chốt, kèm lý do.
+- X1 [SOP+] [Lõi] [Cấu hình] Hút dầu, xe chạy ngoài Lệnh, lệch dầu thực đổ là "sự việc cần xử lý": Mới → kết quả tuỳ loại sự việc. Hút dầu, chạy ngoài Lệnh: Vi phạm (gắn lái xe đang giữ xe), Hợp lệ (bắt lý do) hoặc Lỗi thiết bị. Lệch dầu thực đổ do quản lý cây dầu xử lý: Lỗi lái xe (vào bảng kê lái xe) · Lỗi cây dầu (cây mua ngoài: vào bảng kê gửi nhà cung cấp; cây nội bộ: gắn nhân viên bơm ca đó) · Lỗi thiết bị (báo hiệu chỉnh cảm biến) · Hợp lệ (bắt lý do). Quá `P-han-xu-ly-su-viec` (chưa chốt) chưa xử lý thì nhắc người xử lý, báo trưởng bộ phận. Xem lại kết quả: người xử lý tự mở lại (kỳ chưa chốt, kèm lý do) hoặc lái xe khiếu nại (`transport-dispatch` I14, trong `P-han-khieu-nai`) → "Đang xem lại", khoản rút khỏi bảng kê; người ra kết quả gốc chọn Giữ kết quả hoặc Đổi kết quả kèm lý do; bị Giữ thì lái xe leo thang 1 lần. Mọi lần đổi ghi lịch sử; sự việc gắn Lệnh thì ghi "Điều chỉnh sau duyệt" trên Lệnh (`transport-dispatch` I8).
 - X2 [Mới] [Lõi] Hai người cùng xử lý một sự việc: người lưu sau thấy ai đã xử lý, không ghi đè. Hoãn được nếu trễ go-live (review r17).
 
 **Nhóm G — dữ liệu thiếu, sai**
@@ -117,6 +118,8 @@ Phân quyền theo chức năng, không cố định vai trò. Luồng ghi theo 
 - G3 [Mới] [Lõi] Thẻ ETC gắn nhầm xe: giao dịch thu phí của xe A ở trạm X trong khi GPS xe A lúc đó ở nơi khác thì không ghi vào Lệnh, cảnh báo "nghi gắn nhầm thẻ ETC". Chờ khách (OQ-7). Hoãn được nếu trễ go-live (review r17).
 - G4 [Mới] [Lõi] Trừ trùng: hai giao dịch cùng xe, cùng trạm, cách nhau vài phút thì ghi một lượt, lượt còn lại đánh dấu "nghi trừ trùng" để kế toán khiếu nại. Chờ khách (OQ-7). Hoãn được nếu trễ go-live (review r17).
 - G5 [SOP+] [Lõi] [Cấu hình] Dữ liệu GPS thô giữ `P-thoi-gian-giu-gps` (chưa chốt) để tra ngược cuối kỳ, quá hạn thì xoá. Hoãn được nếu trễ go-live (review r17).
+- G6 [Mới] [Lõi] [Cấu hình] Thiết bị gửi dữ liệu mà chưa khai trên hồ sơ xe nào (lắp mới chưa khai, lắp sang xe khác chưa duyệt): giữ dữ liệu `P-giu-du-lieu-chua-khai` (chưa chốt, OQ-16), báo quản lý phương tiện khai; khai trong hạn thì xử lý lại dữ liệu đã giữ theo giờ thật (G1), quá hạn thì xoá.
+- G7 [Mới] [Lõi] [Cấu hình] Cả đội xe không có dữ liệu quá `P-mat-du-lieu-ca-doi` (chưa chốt, OQ-16): coi là nhà cung cấp ngừng gửi, khác một xe mất sóng; báo Admin khách, không đếm lỗi thiết bị từng xe (G2); có lại thì lấy bù dữ liệu khoảng mất nếu nhà cung cấp cho.
 
 **Nhóm R — kỳ và báo cáo**
 - R1 [SOP+] [Lõi] Kỳ báo cáo là tháng, khớp kỳ chốt dầu; xem thêm theo khoảng ngày tuỳ ý. Sự việc kéo qua nửa đêm, qua tháng tính theo giờ bắt đầu; số liệu của Lệnh tính theo ngày duyệt Lệnh (chờ khách, OQ-9).
@@ -174,7 +177,7 @@ Chưa phân mức: mọi phần đã chốt đều vào giai đoạn 1.
 1. Phần mềm tạo sự việc (hút dầu, chạy ngoài Lệnh, lệch dầu thực đổ), gửi cảnh báo cho người xử lý theo chi nhánh khai thác xe.
 2. Người xử lý mở sự việc từ thông báo, xem bằng chứng (giờ, vị trí trên bản đồ, số liệu).
 3. Người xử lý chọn Vi phạm, Hợp lệ (bắt lý do) hoặc Lỗi thiết bị.
-4. Vi phạm gắn lái xe đang giữ xe lúc xảy ra, vào báo cáo cuối kỳ.
+4. Vi phạm, Lỗi lái xe gắn lái xe đang giữ xe lúc xảy ra, vào báo cáo cuối kỳ; Lỗi cây dầu vào bảng kê gửi nhà cung cấp cây dầu hoặc gắn nhân viên bơm ca đó (X1). Lái xe nhận thông báo khi bị ghi Vi phạm, Lỗi lái xe (`transport-dispatch` I14).
 
 ### 5.4 Duy trì danh mục trạm thu phí
 
@@ -212,7 +215,7 @@ Chưa phân mức: mọi phần đã chốt đều vào giai đoạn 1.
 | Entity | Từ | Sang | Trigger | Quay lại được? |
 |--------|------|----|---------|-------------|
 | Sự việc cần xử lý | — | Mới | Phần mềm phát hiện, gửi cảnh báo | — |
-| Sự việc cần xử lý | Mới | Vi phạm · Hợp lệ · Lỗi thiết bị | Người xử lý chọn; Hợp lệ bắt lý do | Mở lại được khi kỳ chưa chốt, kèm lý do |
+| Sự việc cần xử lý | Mới | Vi phạm · Hợp lệ · Lỗi thiết bị (lệch dầu thực đổ: Lỗi lái xe · Lỗi cây dầu · Lỗi thiết bị · Hợp lệ) | Người xử lý chọn; Hợp lệ bắt lý do | Mở lại được khi kỳ chưa chốt, kèm lý do |
 | Sự việc cần xử lý | Mới | Quá hạn | Quá `P-han-xu-ly-su-viec`: nhắc người xử lý, báo trưởng bộ phận | Có, khi người xử lý chọn kết quả |
 | Trạm thu phí (danh mục) | Đang dùng | Ngừng dùng | Đội sản phẩm ngừng trạm | Có |
 
@@ -222,10 +225,12 @@ Chưa phân mức: mọi phần đã chốt đều vào giai đoạn 1.
 |---|---|---|---|
 | Xe mất tín hiệu giữa đường | Dữ liệu tới lúc mất | Dữ liệu về muộn xử lý theo giờ thật (G1); trên Lệnh xử lý như `transport-dispatch` 6.4 | — |
 | Cả Lệnh không có dữ liệu (thiết bị hỏng) | Lệnh không có sự việc GPS | Lệnh ghi "Không có dữ liệu GPS"; báo quản lý phương tiện kiểm tra thiết bị | — |
-| Đơn vị thu phí lỗi, chậm | Lượt qua trạm chưa khớp | Tra lại theo `transport-dispatch` I6 | — |
+| Đơn vị thu phí lỗi, chậm | Lượt qua trạm chưa khớp | Tra lại theo `transport-dispatch` I7 | — |
 | Dịch vụ bản đồ lỗi | ETA gốc | ETA = quãng còn lại ÷ vận tốc trung bình tuyến, ghi "ETA ước tính" | — |
 | Cảm biến dầu nhiễu | Số đo tụt rồi trở lại | Không báo hút dầu; lặp lại thì G2 | — |
 | Hai người cùng xử lý một sự việc | Kết quả của người lưu trước | Người sau thấy ai đã xử lý (X2) | — |
+| Thiết bị chưa khai gửi dữ liệu | Dữ liệu giữ theo mã thiết bị | Khai trong `P-giu-du-lieu-chua-khai` thì xử lý lại (G6) | Quá hạn thì xoá |
+| Nhà cung cấp ngừng gửi cho cả đội | Dữ liệu tới lúc mất | Báo Admin khách; có lại thì lấy bù (G7) | Không đếm lỗi thiết bị từng xe |
 
 ### 6.5 Other Edge Cases
 
@@ -264,6 +269,8 @@ Mọi con số dưới đây chờ khách xác nhận hoặc cho số (OQ-4).
 | `P-thoi-gian-giu-gps` | chưa chốt | — | Xoá dữ liệu GPS thô |
 | `P-qua-gio-ket-thuc-lenh` | chưa chốt | sau giờ kết thúc dự kiến, khi GPS hỏng | Nhắc lái xe, điều vận |
 | `P-nhac-tat-may` | chờ khách | — | Bật thì nhắc lái xe tắt máy |
+| `P-giu-du-lieu-chua-khai` | chưa chốt | từ lúc nhận dữ liệu | Xoá dữ liệu của thiết bị chưa khai |
+| `P-mat-du-lieu-ca-doi` | chưa chốt | cả đội xe không có dữ liệu | Báo Admin khách |
 
 ### 7.3 Wording samples (exact strings)
 
@@ -337,42 +344,31 @@ Mục tiêu con số chốt ở BRD.
 | b | % lít bù dầu có bằng chứng GPS; độ lệch giữa số đề xuất và số được duyệt | ? |
 | c | Thời gian từ lúc hút dầu tới lúc quản lý nhận cảnh báo; % phiếu cấp dầu khớp cảm biến | ? |
 | d | Số trạm tránh trên 100 Lệnh, theo tháng | ? |
-| Hao phí | Lít nổ máy ngủ trên mỗi xe mỗi tháng | ? |
+| e | Lít nổ máy ngủ trên mỗi xe mỗi tháng; độ lệch vé thật so với dự toán | ? |
 
 ## 11. Open Questions
 
 | OQ | Câu hỏi | Nguồn khách | Trả lời |
 |---|---|---|---|
-| OQ-1 | Delta đang dùng dịch vụ bản đồ nào (Google, Delta Map API, Vietmap)? Có dữ liệu tắc đường, biển báo không? Đề xuất chọn bên có nhiều dữ liệu hơn vì đây là đầu vào điều chỉnh cung đường thực tế. | Vehicle Intelligent Service — VIS (08/10/2026), mục 2.1 Kiến trúc hệ thống, mục 2.2.1 Thời gian xe sẽ đến (ETA) | Chưa hỏi Delta |
-| OQ-2 | EUP có gửi sự kiện ngay khi trạng thái xe đổi không, bao nhiêu giây một lần khi xe chạy? EUP có đủ dữ liệu cảnh báo hút dầu để dùng thẳng không? Ngưỡng cảm biến (5 lít trong 3 phút, 20 lít trong 10 phút) đã thống nhất với EUP chưa? | VIS (08/10/2026), mục 2.2 Quy trình xử lý chi tiết, mục 3.5; SIM & VIS — Công tác chuẩn bị (11/10/2026), mục 3.3 Giám sát hành trình EUP | Chưa hỏi Delta |
-| OQ-3 | VETC có cung cấp danh mục trạm thu phí (toạ độ, giá theo loại xe) không? Đề xuất làm danh mục dùng chung, đội sản phẩm duy trì. | VIS (08/10/2026), mục 2.2.6 Giám sát lộ trình và ghi nhận tránh trạm vé | Chưa hỏi Delta |
-| OQ-4 | Xác nhận các ngưỡng đã ghi (đọc dầu 30 phút khi tắt máy — mục 2.2 ghi 30–60 phút; nổ máy ngủ 10 phút; hút dầu 5 lít trong 3 phút; đổ dầu 20 lít trong 10 phút) và cho số các ngưỡng còn trống: ngưỡng chạy ngoài Lệnh, hạn xử lý sự việc, số lần lỗi thiết bị, thời gian giữ dữ liệu GPS, quá giờ kết thúc Lệnh khi GPS hỏng. | VIS (08/10/2026), mục 2.2, 2.2.4, 3.5, 3.6 | Chưa hỏi Delta |
-| OQ-5 | Có muốn nhắc lái xe tắt máy trên app khi nổ máy đứng yên quá 10 phút không? | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta |
-| OQ-6 | Xe chưa gắn GPS, xe có GPS mà không có cảm biến dầu: xử lý như Mục 6.5 được không? | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta |
-| OQ-7 | Giao dịch ở trạm chưa có trong danh mục, thẻ ETC gắn nhầm xe, VETC trừ trùng: xử lý như T2, G3, G4 được không? | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta |
-| OQ-8 | Quy mô: số xe gắn GPS, số xe có cảm biến dầu, số trạm hay đi qua, số giao dịch VETC mỗi tháng, số người mỗi vai (quản lý phương tiện, kế toán, quản lý cây dầu). | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta |
-| OQ-9 | Sự việc kéo qua nửa đêm, qua tháng tính vào kỳ theo giờ bắt đầu; số liệu của Lệnh vào kỳ theo ngày duyệt: đúng ý khách không? | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta |
-| OQ-10 | Khách xem các rủi ro ở Mục 9 và cho ý kiến, nhất là: quy chế nội bộ đã cho phép tính tiền vào lương từ dữ liệu GPS (tránh trạm, nổ máy ngủ, hút dầu) chưa; lái xe sẽ được xem số liệu của mình thế nào. | VIS (08/10/2026), mục 3.1.1 Sơ đồ kiến trúc và luồng dữ liệu (vé tránh trạm trả vào lương lái xe) | Chưa hỏi Delta |
-| OQ-11 | Mục lục VIS không có mục 3.6 Quy trình đối soát lượng dầu thực đổ, thân tài liệu có. Mục này có thuộc phạm vi không? | VIS (08/10/2026), mục lục và mục 3.6 | Chưa hỏi Delta |
-| OQ-12 | Định mức dầu khi nổ máy không chạy (l/giờ) đã có chưa, ai đặt? Dùng chung một con số cho kẹt xe và nổ máy ngủ được không? (Chuyển `fuel-allowance` khi lập feature.) | VIS (08/10/2026), mục 3.2 bước 3, mục 3.4 bước 3 | Chưa hỏi Delta |
-| OQ-13 | Ghép sự kiện đổ dầu với phiếu cấp dầu trong khung giờ bao lâu? Dung sai lít thực đổ, dung sai coi là đầy bình, thời gian chờ cảm biến ổn định là bao nhiêu? (Chuyển `fuel-issuing`.) | VIS (08/10/2026), mục 3.6 bước 3 | Chưa hỏi Delta |
-| OQ-14 | dGas4, dGas5 ở cây dầu nội bộ dừng bơm do vòi tự ngắt, có thể lệch với cảm biến. Đề xuất: lấy số iGAS làm căn cứ, chờ cảm biến ổn định, chưa đầy thì nhắc bơm bồi một lần, vẫn chưa đầy thì chốt theo số iGAS và ghi số lít thiếu. Khách đồng ý không? (Chuyển `fuel-issuing`.) | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta |
+| OQ-1 | Delta đang dùng dịch vụ bản đồ nào (Google, Delta Map API, Vietmap)? Có dữ liệu tắc đường, biển báo không? Đề xuất chọn bên có nhiều dữ liệu hơn vì đây là đầu vào điều chỉnh cung đường thực tế. | Vehicle Intelligent Service — VIS (08/10/2026), mục 2.1 Kiến trúc hệ thống, mục 2.2.1 Thời gian xe sẽ đến (ETA) | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-2 | EUP có gửi sự kiện ngay khi trạng thái xe đổi không, bao nhiêu giây một lần khi xe chạy? EUP có đủ dữ liệu cảnh báo hút dầu để dùng thẳng không? Ngưỡng cảm biến (5 lít trong 3 phút, 20 lít trong 10 phút) đã thống nhất với EUP chưa? | VIS (08/10/2026), mục 2.2 Quy trình xử lý chi tiết, mục 3.5; SIM & VIS — Công tác chuẩn bị (11/10/2026), mục 3.3 Giám sát hành trình EUP | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-3 | VETC có cung cấp danh mục trạm thu phí (toạ độ, giá theo loại xe) không? Đề xuất làm danh mục dùng chung, đội sản phẩm duy trì. | VIS (08/10/2026), mục 2.2.6 Giám sát lộ trình và ghi nhận tránh trạm vé | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-4 | Xác nhận các ngưỡng đã ghi (đọc dầu 30 phút khi tắt máy — mục 2.2 ghi 30–60 phút; nổ máy ngủ 10 phút; hút dầu 5 lít trong 3 phút; đổ dầu 20 lít trong 10 phút) và cho số các ngưỡng còn trống: ngưỡng chạy ngoài Lệnh, hạn xử lý sự việc, số lần lỗi thiết bị, thời gian giữ dữ liệu GPS, quá giờ kết thúc Lệnh khi GPS hỏng. | VIS (08/10/2026), mục 2.2, 2.2.4, 3.5, 3.6 | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-5 | Có muốn nhắc lái xe tắt máy trên app khi nổ máy đứng yên quá 10 phút không? | Chưa có trong tài liệu khách gửi | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-6 | Xe chưa gắn GPS, xe có GPS mà không có cảm biến dầu: xử lý như Mục 6.5 được không? | Chưa có trong tài liệu khách gửi | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-7 | Giao dịch ở trạm chưa có trong danh mục, thẻ ETC gắn nhầm xe, VETC trừ trùng: xử lý như T2, G3, G4 được không? | Chưa có trong tài liệu khách gửi | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-8 | Quy mô: số xe gắn GPS, số xe có cảm biến dầu, số trạm hay đi qua, số giao dịch VETC mỗi tháng, số người mỗi vai (quản lý phương tiện, kế toán, quản lý cây dầu). | Chưa có trong tài liệu khách gửi | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-9 | Sự việc kéo qua nửa đêm, qua tháng tính vào kỳ theo giờ bắt đầu; số liệu của Lệnh vào kỳ theo ngày duyệt: đúng ý khách không? | Chưa có trong tài liệu khách gửi | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-10 | Khách xem các rủi ro ở Mục 9 và cho ý kiến, nhất là: quy chế nội bộ đã cho phép tính tiền vào lương từ dữ liệu GPS (tránh trạm, nổ máy ngủ, hút dầu) chưa; lái xe sẽ được xem số liệu của mình thế nào. | VIS (08/10/2026), mục 3.1.1 Sơ đồ kiến trúc và luồng dữ liệu (vé tránh trạm trả vào lương lái xe) | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-11 | Mục lục VIS không có mục 3.6 Quy trình đối soát lượng dầu thực đổ, thân tài liệu có. Mục này có thuộc phạm vi không? | VIS (08/10/2026), mục lục và mục 3.6 | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-12 | Định mức dầu khi nổ máy không chạy (l/giờ) đã có chưa, ai đặt? Dùng chung một con số cho kẹt xe và nổ máy ngủ được không? (Chuyển `fuel-allowance` khi lập feature.) | VIS (08/10/2026), mục 3.2 bước 3, mục 3.4 bước 3 | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-13 | Ghép sự kiện đổ dầu với phiếu cấp dầu trong khung giờ bao lâu? Dung sai lít thực đổ, dung sai coi là đầy bình, thời gian chờ cảm biến ổn định là bao nhiêu? (Chuyển `fuel-issuing`.) | VIS (08/10/2026), mục 3.6 bước 3 | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-14 | dGas4, dGas5 ở cây dầu nội bộ dừng bơm do vòi tự ngắt, có thể lệch với cảm biến. Đề xuất: lấy số iGAS làm căn cứ, chờ cảm biến ổn định, chưa đầy thì nhắc bơm bồi một lần, vẫn chưa đầy thì chốt theo số iGAS và ghi số lít thiếu. Khách đồng ý không? (Chuyển `fuel-issuing`.) | Chưa có trong tài liệu khách gửi | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
 | OQ-15 | Xe tắt máy, phần mềm chỉ đọc mức dầu mỗi 30 phút nên ngưỡng "giảm 5 lít trong dưới 3 phút" không kiểm được: hút dầu lúc xe đậu bãi tắt máy sẽ lọt, đổ dầu lúc tắt máy không ra sự kiện. EUP có gửi sự kiện dầu khi xe tắt máy không? Nếu không: đề xuất so hai lần đọc liền nhau, giảm quá ngưỡng là nghi hút dầu, tăng quá ngưỡng là đổ dầu (ngưỡng chờ khách cho số). | VIS (08/10/2026), mục 2.2, mục 3.5 Bước 1, mục 3.6 Bước 1 | Chưa hỏi Delta (review r1: hỏi khách) |
-
-### Review vòng 1 — chưa trả lời
-
-Câu review của PO và senior BA trên trang phỏng vấn VIS (https://claude.ai/artifact/GRtqWJ6Zwc7a3P4MuBoNhr, nhóm Phần 8). Ghi vào repo trước khi trả lời (anh chốt 15/10); trả lời xong thì áp vào mục được nêu.
-
-| # | Vấn đề | Đề xuất của reviewer | Áp vào |
-|---|---|---|---|
-| r6 | Lệch dầu thực đổ: lỗi của ai | Xem đề xuất trên trang | S6 · `fuel-issuing` |
-| r10 | Thiết bị chưa khai; cả đội mất dữ liệu | Xem đề xuất trên trang | K1, G1–G2, Mục 6.5 |
-| r11 | Trạm đổi giữa chừng; giá vé theo tổ hợp xe; trả tiền mặt tại trạm | Xem đề xuất trên trang | T1 · I7, I10 |
-| r12 | Một gói hay hai gói nhiên liệu | Tách "Giám sát nhiên liệu" (cảm biến) và "Nhiên liệu" (cây dầu, định mức, phiếu) | Nhãn gói toàn bộ · `saas-core-vs-tenant.md` |
-| r13 | Có thêm vấn đề (e) "không kiểm soát được hao phí" không | Thêm (e): nổ máy ngủ, nhắc tắt máy, dự toán vé, chỉ số lít nổ máy ngủ/xe/tháng | Mục 1, Mục 10 |
+| OQ-16 | Dữ liệu của thiết bị chưa khai giữ bao lâu để chờ khai (`P-giu-du-lieu-chua-khai`)? Cả đội xe không có dữ liệu bao nhiêu phút thì coi là nhà cung cấp ngừng gửi và báo Admin (`P-mat-du-lieu-ca-doi`)? | Chưa có trong tài liệu khách gửi | Còn mở: chưa hỏi Delta (review VIS r10, 19/10) |
 
 ## 12. Next Steps
 
-- Hỏi Delta các câu ở Mục 11 cùng câu mở VIS ở `transport-dispatch` (OQ-49–57) và `vehicle-management`.
-- Thêm "Gói Giám sát nhiên liệu" vào danh sách gói ở `saas-core-vs-tenant.md` và PRD sản phẩm; thêm `vehicle-telematics` vào Feature Map (`/prd`).
+- Hỏi Delta các câu ở Mục 11 cùng câu mở VIS ở `transport-dispatch` (OQ-49–59) và `vehicle-management`.
+- Thêm `vehicle-telematics` vào Feature Map (`/prd`); gói "Giám sát nhiên liệu" tách khỏi gói "Nhiên liệu" (DEC-195) cũng ghi vào PRD.
 - `/srs vehicle-telematics` sau khi khách trả lời OQ-1, OQ-2, OQ-4.

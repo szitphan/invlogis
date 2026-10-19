@@ -2,7 +2,7 @@
 type: brainstorm
 feature: transport-dispatch
 status: draft
-updated: 2026-10-15
+updated: 2026-10-20
 links:
   - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md
   - docs-input/sop/sop-dieu-phoi.md
@@ -132,14 +132,16 @@ Tần suất chưa đo được, ghi định tính. Dòng có ★ là tác vụ 
 - I2 [SOP to-be] [Lõi] Giờ đến thật tự ghi khi xe vào vùng từng điểm giao nhận; sắp trễ hoặc trễ mốc thì cảnh báo như B6.
 - I3 [SOP to-be] [Lõi] [Cấu hình] Kẹt xe trong Lệnh: máy nổ, xe nhích dưới `P-van-toc-ket-xe` (Delta: 5 km/h), quá `P-thoi-gian-ket-xe` (Delta: 10 phút). Xe đứng yên hẳn là nổ máy ngủ, gắn vào Lệnh, không bù; đứng yên có dấu hiệu kẹt cứng thì vẫn tính kẹt xe (cách phân loại: `vehicle-telematics` S2–S4; chờ khách, OQ-53). Thời gian kẹt xe làm bằng chứng cho cảnh báo quá mốc.
 - I4 [SOP to-be] [Gói: Nhiên liệu] Đề xuất bù dầu kẹt xe = số phút kẹt × định mức nổ máy không chạy (l/giờ) của xe, hiện "Đề xuất bù dầu do kẹt xe: [x] lít" trên Lệnh. Định mức l/giờ ở `fuel-allowance` (chờ khách, `vehicle-telematics` OQ-12). Xếp hàng chờ trong vùng cảng, bãi, kho có được bù không theo `P-bu-dau-xep-hang` (chờ khách, OQ-52).
-- I5 [SOP to-be] [Lõi] [Cấu hình] Tìm vỏ rỗng qua nhiều bãi, chỉ áp Lệnh thuộc JobID hàng xuất FCL: xe rời bãi nhận vỏ trên Lệnh, chưa tới nơi đóng hàng mà ở bãi khác trong danh mục quá `P-thoi-gian-o-bai-tim-vo` (Delta: 10 phút) thì ghi bãi vào lịch trình phụ. Km phát sinh = km GPS thực tế từ bãi nhận vỏ tới nơi đóng hàng trừ km cung đường trên Lệnh. Chỉ dùng GPS, lái xe không phải báo.
+- I5 [SOP to-be] [Lõi] [Cấu hình] Tìm vỏ rỗng qua nhiều bãi, chỉ áp Lệnh thuộc JobID hàng xuất FCL: xe rời bãi nhận vỏ trên Lệnh, chưa tới nơi đóng hàng mà ở bãi khác trong danh mục quá `P-thoi-gian-o-bai-tim-vo` (Delta: 10 phút) thì ghi bãi vào lịch trình phụ. Km phát sinh = km GPS thực tế từ bãi nhận vỏ tới nơi đóng hàng trừ km cung đường trên Lệnh. Chỉ dùng GPS, lái xe không phải báo. Km phát sinh ra số âm (bãi vỏ khác gần nơi đóng hàng hơn, đi đường tắt) thì tính 0: không bù, không trừ (review v1).
 - I6 [SOP to-be] [Gói: Nhiên liệu] Dầu bù tìm vỏ = km phát sinh × định mức mức tải "Đầu kéo không" của xe (`fuel-allowance`), hiện "Đề nghị cấp bù dầu do chọn container rỗng ở nhiều bãi: [x] lít" kèm bảng lịch trình phụ (Bãi A → B → C, km phát sinh, số lít).
-- I7 [SOP+] [Lõi] [Cấu hình] Khớp vé từng trạm: giao dịch thu phí về tới đâu thì ghép với lượt "Đã qua" trạm đó của Lệnh tới đó, ghi tiền vé lên Lệnh ngay. Lệnh hết chạy (xe vào vùng điểm cuối) thì chốt các trạm còn lại: trạm trên cung đường mà GPS không qua, không có giao dịch là tránh trạm; đã qua mà chưa có giao dịch thì tra lại sau `P-quet-lai-vetc` (Delta: 120 phút), vẫn chưa có thì "Chờ VETC", kiểm nốt cuối kỳ; có giao dịch ở trạm không nằm trên cung đường là "Ngoài cung đường". Đơn vị thu phí không gửi giao dịch ngay thì chỉ tra một lần lúc Lệnh hết chạy (OQ-49, OQ-51).
-- I8 [SOP+] [Lõi] [Cấu hình] Tránh trạm và ngoài cung đường chốt theo từng Lệnh. [Lõi]: phát hiện, ghi nhận, người duyệt Lệnh xem. [Cấu hình] `P-tinh-tien-tranh-tram` (Delta: bật): người duyệt chọn "Tính cho lái xe" hoặc "Chấp nhận" kèm lý do (đổi cung đường đã duyệt, đường cấm…); `P-chan-duyet-khi-con-tram` (Delta: bật): còn trạm chưa xử lý thì chưa duyệt được Lệnh (review r14). Kết quả là nguồn bảng kê tránh trạm theo lái xe theo kỳ cho bộ phận lương (OQ-50).
-- I9 [Mới] [Gói: Nhiên liệu] Người duyệt Lệnh sửa được số lít bù, bắt ghi lý do; Lệnh giữ cả số đề xuất và số được duyệt. Duyệt Lệnh thì dầu định mức của Lệnh (theo cung đường ban đầu) cộng dầu bù đã duyệt vào "dầu chờ nhận" của lái xe, nhận qua phiếu cấp dầu vận tải (Delta: dGas3); mỗi lần nhận không vượt chỗ trống trong bình theo cảm biến (xe không có cảm biến: không vượt dung tích bình), phần còn lại để lần sau (`fuel-issuing`).
-- I10 [Mới] [Lõi] Dự toán vé: lập Lệnh thì dò các trạm thu phí trên cung đường từ danh mục dùng chung (`vehicle-telematics` T1), tính tiền vé theo loại xe, cộng vào chi phí dự kiến của Lệnh. Chạy xong so dự toán với vé thật, chỉ ra trạm lệch.
-- I11 [SOP+] [Lõi] Dữ liệu GPS khi Lệnh thay đổi: Lệnh bị trả lại giữ nguyên kết quả đối soát; đổi cung đường thì tính lại trạm dự toán, trạm của cung cũ không bị coi là tránh trạm; Lệnh huỷ khi xe đang chạy thì kết thúc ở giờ huỷ, vé vẫn ghi lên Lệnh; GPS hỏng không vào được vùng điểm cuối thì lái xe bấm hoàn thành, Lệnh ghi "Kết thúc theo lái xe"; cả Lệnh không có dữ liệu GPS thì không đề xuất bù kẹt xe, vé theo giao dịch thu phí.
+- I7 [SOP+] [Lõi] [Cấu hình] Khớp vé từng trạm: giao dịch thu phí về tới đâu thì ghép với lượt "Đã qua" trạm đó của Lệnh tới đó, ghi tiền vé lên Lệnh ngay. Trạm xét theo bản danh mục có hiệu lực lúc xe qua trạm, không theo bản sửa sau đó. Lệnh hết chạy khi xe đã qua các điểm giao nhận theo thứ tự rồi mới vào vùng điểm cuối; chạm vùng điểm cuối trước đó (điểm cuối trùng điểm đi, xe đi ngang) không tính. Lệnh hết chạy thì chốt các trạm còn lại: trạm trên cung đường mà GPS không qua, không có giao dịch là tránh trạm; đã qua mà chưa có giao dịch thì tra lại sau `P-quet-lai-vetc` (Delta: 120 phút), vẫn chưa có thì "Chờ VETC", kiểm nốt cuối kỳ; có giao dịch ở trạm không nằm trên cung đường là "Ngoài cung đường". Đơn vị thu phí không gửi giao dịch ngay thì chỉ tra một lần lúc Lệnh hết chạy (OQ-49, OQ-51). Lái xe trả tiền mặt tại trạm (hết tiền tài khoản giao thông, trạm không thu tự động): đề xuất lái xe ghi khoản chi hộ (E4), chọn trạm, chụp biên lai; trạm đó thành "Đã qua", không chờ giao dịch VETC (OQ-58).
+- I8 [SOP+] [Lõi] [Cấu hình] Tránh trạm và ngoài cung đường chốt theo từng Lệnh. [Lõi]: phát hiện, ghi nhận, người duyệt Lệnh xem. [Cấu hình] `P-tinh-tien-tranh-tram` (Delta: bật): người duyệt chọn "Tính cho lái xe" hoặc "Chấp nhận" kèm lý do (đổi cung đường đã duyệt, đường cấm…); `P-chan-duyet-khi-con-tram` (Delta: bật): còn trạm chưa xử lý thì chưa duyệt được Lệnh (review r14). Lệnh chưa hết chạy thì chưa duyệt được; trạm "Chờ VETC" không chặn duyệt. Lệnh đã duyệt có khối "Điều chỉnh sau duyệt": mỗi dòng ghi khoản, số cũ → số mới, lý do, nguồn (vé VETC về muộn, khiếu nại, xem lại sự việc), người, ngày; không sửa số gốc. Chi phí đổi thì JobID cập nhật, báo kế toán (cùng OQ-51); dầu đổi thì cộng, trừ dầu chờ nhận; khoản lái xe đổi thì sửa bảng kê (kỳ chưa chốt sửa ngay, đã chốt vào kỳ sau). Trạm đã "Tính cho lái xe" mà vé VETC về muộn: xe không tránh trạm, tự huỷ khoản qua một dòng điều chỉnh, báo lái xe (review v4b, v5). Kết quả là nguồn bảng kê tránh trạm theo lái xe theo kỳ cho bộ phận lương (OQ-50).
+- I9 [Mới] [Gói: Nhiên liệu] Người duyệt Lệnh sửa được số lít bù, bắt ghi lý do; Lệnh giữ cả số đề xuất và số được duyệt. Dầu định mức của Lệnh tính theo từng đoạn: đoạn rỗng dùng mức "Đầu kéo không" hoặc "Vỏ container rỗng", đoạn có hàng dùng mức theo trọng lượng hàng (8 mức tải của định mức khoán, `fuel-allowance`). Lệnh hiện 2 số: dầu theo cung đường ban đầu (km cung đường trên Lệnh) và dầu theo cung đường thực tế (km GPS); dầu chờ nhận theo cung đường trên Lệnh (đổi cung đã duyệt thì theo cung mới, F3); số theo GPS chỉ để so, lệch quá `P-lech-km-gps-lenh` (chưa chốt) thì báo người duyệt Lệnh. Không cấp theo GPS vì km tìm vỏ đã bù riêng ở I6 sẽ bị tính 2 lần, và mất GPS thì cấp thiếu (review v2). Xe chưa có định mức: vẫn lập được Lệnh, phần mềm cảnh báo và cho 2 lựa chọn độc lập với một xe cùng loại xe theo vận hành: dùng tạm định mức đó cho Lệnh này (có/không), và gửi yêu cầu cập nhật thông tin phương tiện – định mức nhiên liệu để áp luôn cho xe (có/không); yêu cầu duyệt như sửa hồ sơ xe (`vehicle-management` H1; SRS LG UC04.01.19, UC04.01.21) (review v3). Duyệt Lệnh thì dầu định mức của Lệnh cộng dầu bù đã duyệt vào "dầu chờ nhận" của lái xe, nhận qua phiếu cấp dầu vận tải (Delta: dGas3); mỗi lần nhận không vượt chỗ trống trong bình theo cảm biến (xe không có cảm biến: không vượt dung tích bình), phần còn lại để lần sau (`fuel-issuing`).
+- I10 [Mới] [Lõi] Dự toán vé: lập Lệnh thì dò các trạm thu phí trên cung đường từ danh mục dùng chung (`vehicle-telematics` T1), tính tiền vé theo nhóm xe của tổ hợp đầu kéo, mooc, container (20 hay 40 feet) trên Lệnh, cộng vào chi phí dự kiến của Lệnh. Chạy xong so dự toán với vé thật, chỉ ra trạm lệch.
+- I11 [SOP+] [Lõi] Dữ liệu GPS khi Lệnh thay đổi: Lệnh bị trả lại giữ nguyên kết quả đối soát và không nhận sự việc GPS mới, sự việc mới gắn Lệnh đang chạy kế tiếp của xe; đổi cung đường thì tính lại trạm dự toán, trạm của cung cũ không bị coi là tránh trạm; không huỷ được Lệnh đang thực hiện: khách huỷ giữa chặng thì lái xe báo vấn đề (F1), Lệnh kết thúc sớm, vẫn chốt và duyệt như thường, dầu định mức, bù dầu, vé tính theo phần đường đã chạy; GPS hỏng không vào được vùng điểm cuối thì lái xe bấm hoàn thành, Lệnh ghi "Kết thúc theo lái xe"; cả Lệnh không có dữ liệu GPS thì không đề xuất bù kẹt xe, vé theo giao dịch thu phí.
 - I12 [SOP to-be] [Lõi] Báo cáo theo kỳ (tháng, hoặc khoảng ngày tuỳ ý): km GPS so với km trên Lệnh theo Lệnh, xe, lái xe; bảng kê tránh trạm theo lái xe; bù dầu đề xuất so với được duyệt theo Lệnh, lái xe, người duyệt.
+- I13 [Mới] [Lõi] [Cấu hình] Lệnh hết chạy quá `P-han-duyet-lenh` (chưa chốt, OQ-59) chưa duyệt: nhắc người duyệt, báo trưởng điều vận, để dầu chờ nhận của lái xe không bị treo. Hai người cùng duyệt bù dầu hoặc cùng xử lý một trạm: người lưu sau thấy ai đã làm lúc nào, không ghi đè.
+- I14 [Mới] [Lõi] [Cấu hình] Lái xe nhận thông báo trên app khi bị tính tiền tránh trạm, ngoài cung đường hoặc bị ghi vi phạm; màn "Số liệu của tôi" theo tháng: vé, bù dầu, nổ máy ngủ, vi phạm, dầu chờ nhận. Khiếu nại: khoản khiếu nại được là tránh trạm, ngoài cung đường, hút dầu Vi phạm, chạy ngoài Lệnh, lệch dầu Lỗi lái xe, bù dầu kẹt xe bị giảm hoặc Không bù, dầu định mức sai, nổ máy ngủ. Lái xe bấm Khiếu nại (lý do theo loại khoản, ghi chú, ảnh) trong `P-han-khieu-nai` ngày (chưa chốt); kỳ đã chốt vẫn khiếu nại được trong hạn. Khoản thành "Đang khiếu nại", rút khỏi bảng kê lương tới khi có kết quả. Khoản trên Lệnh (tránh trạm, ngoài cung đường, bù dầu, dầu định mức): người ra quyết định gốc chọn Giữ · Huỷ · Sửa số kèm lý do. Sự việc (hút dầu, chạy ngoài Lệnh, lệch dầu thực đổ): đi theo cơ chế xem lại của `vehicle-telematics` X1 (Giữ kết quả · Đổi kết quả). Phần mềm báo lái xe kết quả; bị Giữ thì lái xe được leo thang 1 lần lên trưởng bộ phận. Mỗi khoản khiếu nại 1 lần; quá hạn xem lại thì nhắc, rồi báo cấp trên. Chấp nhận thì ghi một dòng "Điều chỉnh sau duyệt" trên Lệnh (I8); kỳ đã chốt thì điều chỉnh vào kỳ sau. Chờ khách chốt luồng (OQ-60).
 
 ### P1 — should have
 
@@ -229,11 +231,11 @@ Chưa có giá --> cờ "Chưa có đơn giá" + việc "Xác định giá" --> 
 
 ### 5.5 Lệnh chạy có dữ liệu GPS và đối soát vé
 
-1. Lái xe nhận Lệnh. Xe rời vùng điểm đi: ghi giờ khởi hành, tính ETA gốc và quãng đường theo cung đường ban đầu; dầu định mức của Lệnh = quãng đường × định mức xe.
+1. Lái xe nhận Lệnh. Xe rời vùng điểm đi: ghi giờ khởi hành, tính ETA gốc và quãng đường theo cung đường ban đầu; dầu định mức của Lệnh = km từng đoạn × mức tải của đoạn đó (I9).
 2. Trên đường: kẹt xe cộng đề xuất bù dầu; đứng yên hẳn là nổ máy ngủ (trừ khi có dấu hiệu kẹt cứng); ETA tính lại (I1, I3).
 3. Xe qua trạm: ghi "Đã qua"; giao dịch thu phí về thì khớp, ghi tiền vé lên Lệnh (I7).
 4. Xe vào vùng từng điểm giao nhận: ghi giờ đến thật; trễ mốc thì cảnh báo (I2, B6).
-5. Xe vào vùng điểm cuối: Lệnh hết chạy, chốt danh sách trạm: tránh trạm, ngoài cung đường, chờ VETC (I7).
+5. Xe đã qua đủ các điểm giao nhận theo thứ tự rồi vào vùng điểm cuối: Lệnh hết chạy, chốt danh sách trạm: tránh trạm, ngoài cung đường, chờ VETC (I7).
 6. Người duyệt Lệnh xem khối "Dữ liệu hành trình": duyệt bù dầu (sửa được, ghi lý do), xử lý trạm tránh, rồi duyệt Lệnh (I8, I9).
 7. Duyệt Lệnh: dầu định mức của Lệnh và dầu bù đã duyệt vào dầu chờ nhận của lái xe; lái xe nhận qua phiếu cấp dầu vận tải.
 
@@ -243,7 +245,7 @@ Chưa có giá --> cờ "Chưa có đơn giá" + việc "Xác định giá" --> 
  Nhận Lệnh
  Rời vùng điểm đi ─────► Ghi giờ khởi hành
                          Tính ETA gốc, quãng đường theo cung đường ban đầu
-                         Dầu định mức của Lệnh = quãng đường × định mức xe
+                         Dầu định mức = km từng đoạn × mức tải của đoạn
  Chạy trên đường ──────► Nhận vị trí, tốc độ, máy (EUP)
                          ◇ Máy nổ quá 10 phút, xe nhích dưới 5 km/h?
                          ├─ Có ─► Kẹt xe: cộng đề xuất bù dầu, tính lại ETA
@@ -259,7 +261,8 @@ Chưa có giá --> cờ "Chưa có đơn giá" + việc "Xác định giá" --> 
                          └─ Chưa ─► Để chốt khi Lệnh hết chạy
  Vào vùng điểm giao ───► Ghi giờ đến thật
                          ◇ Trễ mốc? ─ Có ─► Cảnh báo quá mốc (B6)
- Vào vùng điểm cuối ───► Lệnh hết chạy: chốt danh sách trạm
+ Vào vùng điểm cuối ───► ◇ Đã qua đủ điểm giao nhận theo thứ tự?
+ (sau điểm giao cuối)    └─ Có ─► Lệnh hết chạy: chốt danh sách trạm
                          Trạm chưa khớp ──────────────────► Tra theo khung giờ Lệnh
                          ◇ GPS đã qua mà VETC vẫn chưa có?
                          ├─ Có ─► Chờ 120 phút, tra lại
@@ -304,7 +307,7 @@ Chưa có giá --> cờ "Chưa có đơn giá" + việc "Xác định giá" --> 
 | DP-14 | Chạy Lệnh | Có giao dịch thu phí của xe ở trạm vừa qua | Khớp, ghi tiền vé | Để chốt khi Lệnh hết chạy |
 | DP-15 | Lệnh hết chạy | Trạm trên cung đường mà GPS không qua, không có giao dịch | Tránh trạm, người duyệt xử lý | — |
 | DP-16 | Lệnh hết chạy | GPS đã qua mà chưa có giao dịch | Tra lại sau 120 phút; vẫn chưa có thì "Chờ VETC" | Khớp |
-| DP-17 | Duyệt Lệnh | Còn trạm tránh, ngoài cung đường chưa xử lý, hoặc bù dầu chưa duyệt | Chặn duyệt, chỉ ra phần còn thiếu | Duyệt được |
+| DP-17 | Duyệt Lệnh | Lệnh chưa hết chạy, còn trạm tránh, ngoài cung đường chưa xử lý, hoặc bù dầu chưa duyệt (trạm "Chờ VETC" không chặn) | Chặn duyệt, chỉ ra phần còn thiếu | Duyệt được |
 | DP-18 | Duyệt Lệnh | Người duyệt sửa số lít bù | Bắt ghi lý do | Duyệt số đề xuất |
 | DP-19 | Tìm vỏ | Lệnh hàng xuất FCL, xe ở bãi khác quá 10 phút trước nơi đóng hàng | Ghi lịch trình phụ, tính km phát sinh | Không có km phát sinh |
 
@@ -319,6 +322,7 @@ Ai được đổi trạng thái gì, ở trạng thái nào.
 | Lệnh | Đã giao lái xe | Đã lập | Lái xe | Từ chối, bắt chọn lý do | Báo điều vận giao lại |
 | Lệnh | Lái xe đã nhận | Đang thực hiện | Phần mềm hoặc lái xe | GPS ghi nhận xe khởi hành; không có GPS thì lái xe bấm "Bắt đầu" | Bắt đầu theo dõi mốc |
 | Lệnh | Đang thực hiện | Lái xe đã chốt | Lái xe | Đủ ảnh, chứng từ, chi phí | Chờ duyệt |
+| Lệnh | Đang thực hiện | Lái xe đã chốt (kết thúc sớm) | Lái xe | Khách huỷ giữa chặng, lái xe báo vấn đề (F1); không huỷ được Lệnh đang thực hiện | Chốt, duyệt như thường; dầu, vé theo phần đường đã chạy |
 | Lệnh | Lái xe đã chốt | Đã duyệt | Điều vận hoặc cán bộ quản lý (1 người là đủ) | — | Chi phí chuyển lên JobID |
 | Lệnh | Lái xe đã chốt | Đang thực hiện | Điều vận hoặc cán bộ quản lý | Trả lại, bắt ghi lý do | Lái xe bổ sung |
 | JobID | Đã tạo YCVT | Đã thực hiện Lệnh vận tải | Phần mềm | Mọi Lệnh của JobID đã duyệt | Sang `service-delivery` để hoàn thành dịch vụ |
@@ -369,7 +373,7 @@ Dự toán --> Đã qua --> Khớp
 Ngoài cung đường (có giao dịch, trạm không trên cung đường) --> Tính cho lái xe / Chấp nhận (có lý do)
 ```
 
-Xử lý trạm tránh, ngoài cung đường mở lại được trước khi duyệt Lệnh. Đổi cung đường thì danh sách dự toán tính lại.
+Xử lý trạm tránh, ngoài cung đường mở lại được trước khi duyệt Lệnh. Đổi cung đường thì danh sách dự toán tính lại. Giao dịch về sau khi Lệnh đã duyệt: một dòng "Điều chỉnh sau duyệt" (I8).
 
 **Đề xuất bù dầu**
 
@@ -396,8 +400,9 @@ Vòng đời YCVT xem `shipment-coordination` Mục 6.3; feature này đổi YCV
 | 8 | Cả Lệnh không có dữ liệu GPS (thiết bị hỏng) | "Không có dữ liệu GPS", không đề xuất bù kẹt xe, vé theo giao dịch thu phí; báo quản lý phương tiện kiểm tra thiết bị |
 | 9 | Đơn vị thu phí lỗi, chậm | Tra lại sau 120 phút; vẫn lỗi thì "Chờ VETC", Lệnh vẫn duyệt được, kiểm nốt cuối kỳ (OQ-51) |
 | 10 | Dịch vụ bản đồ lỗi | ETA theo vận tốc trung bình tuyến, ghi "ETA ước tính" |
-| 11 | Lệnh bị trả lại cho lái xe bổ sung | Giữ nguyên kết quả đối soát vé, bù dầu; không tra lại giao dịch |
-| 12 | Đổi cung đường, Lệnh huỷ khi đang chạy, GPS hỏng không vào được vùng điểm cuối | Như I11 |
+| 11 | Lệnh bị trả lại cho lái xe bổ sung | Giữ nguyên kết quả đối soát vé, bù dầu; không tra lại giao dịch; không nhận sự việc GPS mới, sự việc mới gắn Lệnh đang chạy kế tiếp của xe |
+| 12 | Đổi cung đường, khách huỷ giữa chặng (Lệnh kết thúc sớm), GPS hỏng không vào được vùng điểm cuối | Như I11 |
+| 13 | Danh mục trạm sửa (trạm ngừng thu, sửa vùng) trong lúc Lệnh đang chạy | Trạm xét theo bản có hiệu lực lúc xe qua trạm (I7) |
 
 ### 6.5 Other Edge Cases
 
@@ -537,7 +542,7 @@ Xác nhận (Xem CMP-03):
 | Thiếu tài liệu khách: quy trình điều vận | thường | Luồng CBT, đường sắt và trạng thái Lệnh sai | Bám OQ-1 |
 | GPS EUP gián đoạn | thỉnh thoảng | Mốc và giờ đến sai, cảnh báo sai | Lái xe bấm tay kèm ảnh định vị |
 | VETC không gửi giao dịch tức thời hoặc không cho tra theo xe | thỉnh thoảng | Tránh trạm phát hiện muộn, đối soát dồn cuối kỳ | Chạy được cả hai cách (I7); bám OQ-49 |
-| Lái xe phản đối khi bị tính tiền tránh trạm | thường | Tranh chấp, mất lái xe | Người duyệt chấp nhận được kèm lý do; khách xác nhận quy chế trước khi tính vào lương (OQ-50) |
+| Lái xe phản đối khi bị tính tiền tránh trạm | thường | Tranh chấp, mất lái xe | Người duyệt chấp nhận được kèm lý do; lái xe được báo và xem số liệu của mình (I14); khách xác nhận quy chế trước khi tính vào lương (OQ-50) |
 | Vùng trạm vẽ sai, thiếu | thỉnh thoảng | Báo tránh trạm sai, lái xe bị tính oan | Giao dịch thu phí là nguồn chuẩn khi có; danh mục dùng chung do đội sản phẩm duy trì |
 
 ## 10. Success Criteria (preliminary)
@@ -577,32 +582,21 @@ Nguồn khách: tên tài liệu khách gửi và mục. Cột Trả lời theo 
 | OQ-43 | Chu kỳ nhắc nhập nhật ký nhiệt độ mặc định cho từng loại hàng lạnh là bao nhiêu? (SOP chỉ có sầu riêng 3–4 giờ/lần, hàng lạnh khác 3–4 lần/ngày) | Giao nhận hàng hoá (18/9/2026) | Chưa hỏi Delta (ngoài deck vòng 1) |
 | OQ-45 | "Hàng quay cắt" trong thực tế là tình huống nào? Khi đó xe và hàng được xử lý ra sao? | Chưa có trong tài liệu khách gửi (trao đổi trực tiếp 09/10/2026) | Chưa hỏi Delta (ngoài deck vòng 1) |
 | OQ-46 | Có cần làm luồng tạm ứng dầu cho xe CBT không? (Đợt trước khách nói bỏ phần xử lý bên ngoài) | Chưa có trong tài liệu khách gửi (trao đổi trực tiếp 09/10/2026) | Chưa hỏi Delta (ngoài deck vòng 1) |
-| OQ-47 | Dữ liệu xe (VIS) và hóa đơn, thanh toán (SIM) nối nhau ở đâu? (1) Hóa đơn tổng VETC cuối kỳ, sau khi đối chiếu với GPS, có đi qua IIP/MISA như hóa đơn đầu vào thường không, ai duyệt, gắn JobID nào? (2) Hóa đơn dầu mua ngoài mà lái xe tải lên IIP có ghép với đối soát sensor dầu không? (3) Chi phí đã duyệt trên Lệnh (vé, dầu bù, km tìm vỏ J01) có chuyển sang SIM để ghép hóa đơn theo JobID không? | VIS (08/10/2026) mục 3.1.3 Bước 4, 3.6; SIM & VIS Công tác chuẩn bị (11/10/2026) mục 2.2–2.3 | Chưa hỏi Delta; brainstorm SIM nhận lại (BL-120) |
-| OQ-48 | Thiết bị EUP gửi vị trí bao nhiêu giây một lần khi xe chạy? Hai điểm GPS cách nhau tối đa bao lâu (hoặc bao xa) thì còn tin được để kết luận xe tránh trạm? | VIS (08/10/2026) mục 2.2.6 | Chưa hỏi Delta |
-| OQ-49 | Phần mềm gọi VETC đối soát lúc xe vào vùng điểm cuối hay lúc kết thúc Lệnh (2 mục ghi khác nhau)? VETC có gửi giao dịch ngay khi trừ tiền không? Nếu có: khớp vé từng trạm lúc xe đang chạy, điều vận thấy vé trên Lệnh ngay. Nếu không: chỉ khớp một lần khi Lệnh hết chạy, tránh trạm biết muộn hơn. | VIS (08/10/2026), mục 2.2.6 Giám sát lộ trình và ghi nhận tránh trạm vé, mục 3.1.1 Sơ đồ kiến trúc và luồng dữ liệu, mục 3.1.3 Bước 2 | Chưa hỏi Delta |
-| OQ-50 | Vé tránh trạm chốt theo từng Lệnh, người duyệt chọn "Tính cho lái xe" hoặc "Chấp nhận" kèm lý do: đúng ý khách không? Sơ đồ ghi "vé tránh trạm, trả vào lương lái xe": trừ lương hay cộng lương, tự động hay sau khi duyệt? Quy chế nội bộ đã cho phép tính khoản này vào lương chưa? | VIS (08/10/2026), mục 3.1.1 Sơ đồ kiến trúc và luồng dữ liệu | Chưa hỏi Delta |
-| OQ-51 | VETC vẫn chưa trả dữ liệu sau lượt tra lại 120 phút: cho duyệt Lệnh, trạm ghi "Chờ VETC" và đối soát nốt cuối kỳ được không? | VIS (08/10/2026), mục 3.1.3 Bước 3 | Chưa hỏi Delta |
-| OQ-52 | Xe xếp hàng chờ ở cổng cảng, bãi, kho quá 10 phút mà máy vẫn nổ: có bù dầu như kẹt xe không? | VIS (08/10/2026), mục 3.2 Bước 1 | Chưa hỏi Delta |
-| OQ-53 | Tai nạn, kẹt cứng không nhích được: xe đứng yên hẳn được tính là kẹt xe (có bù) khi đứng giữa hai đoạn kẹt, khi lái xe báo vấn đề giữa chặng, hoặc khi bản đồ báo tắc tại đó. Khách đồng ý không? | VIS (08/10/2026), mục 2.2.3, mục 2.2.4 | Chưa hỏi Delta |
-| OQ-54 | Mất tín hiệu GPS: đề xuất lái xe chụp ảnh định vị tại từng mốc để ghi giờ đến. Khách đồng ý không? | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta |
-| OQ-55 | Có trường hợp đổi xe giữa chặng không? | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta |
-| OQ-56 | Có trường hợp 2 container 20 feet của 2 Lệnh trên cùng một xe không? Nếu có: kẹt xe, vé trong khoảng chạy chung chia đều cho 2 Lệnh được không? | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta |
-| OQ-57 | Xác nhận các ngưỡng đã ghi (kẹt xe dưới 5 km/h quá 10 phút; tra lại VETC sau 120 phút; tính lại ETA mỗi 30 phút với cung trên 300 km; ở bãi khác quá 10 phút khi tìm vỏ) và cho số các ngưỡng còn trống (lệch cung đường "x%", đứng yên tối đa giữa 2 đoạn kẹt). | VIS (08/10/2026), mục 2.2.1, 2.2.3, 3.1.3, 3.3 | Chưa hỏi Delta |
+| OQ-47 | Dữ liệu xe (VIS) và hóa đơn, thanh toán (SIM) nối nhau ở đâu? (1) Hóa đơn tổng VETC cuối kỳ, sau khi đối chiếu với GPS, có đi qua IIP/MISA như hóa đơn đầu vào thường không, ai duyệt, gắn JobID nào? (2) Hóa đơn dầu mua ngoài mà lái xe tải lên IIP có ghép với đối soát sensor dầu không? (3) Chi phí đã duyệt trên Lệnh (vé, dầu bù, km tìm vỏ J01) có chuyển sang SIM để ghép hóa đơn theo JobID không? | VIS (08/10/2026) mục 3.1.3 Bước 4, 3.6; SIM & VIS Công tác chuẩn bị (11/10/2026) mục 2.2–2.3 | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời; brainstorm SIM nhận lại (BL-120) |
+| OQ-48 | Thiết bị EUP gửi vị trí bao nhiêu giây một lần khi xe chạy? Hai điểm GPS cách nhau tối đa bao lâu (hoặc bao xa) thì còn tin được để kết luận xe tránh trạm? | VIS (08/10/2026) mục 2.2.6 | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-49 | Phần mềm gọi VETC đối soát lúc xe vào vùng điểm cuối hay lúc kết thúc Lệnh (2 mục ghi khác nhau)? VETC có gửi giao dịch ngay khi trừ tiền không? Nếu có: khớp vé từng trạm lúc xe đang chạy, điều vận thấy vé trên Lệnh ngay. Nếu không: chỉ khớp một lần khi Lệnh hết chạy, tránh trạm biết muộn hơn. | VIS (08/10/2026), mục 2.2.6 Giám sát lộ trình và ghi nhận tránh trạm vé, mục 3.1.1 Sơ đồ kiến trúc và luồng dữ liệu, mục 3.1.3 Bước 2 | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-50 | Vé tránh trạm chốt theo từng Lệnh, người duyệt chọn "Tính cho lái xe" hoặc "Chấp nhận" kèm lý do: đúng ý khách không? Sơ đồ ghi "vé tránh trạm, trả vào lương lái xe": trừ lương hay cộng lương, tự động hay sau khi duyệt? Quy chế nội bộ đã cho phép tính khoản này vào lương chưa? | VIS (08/10/2026), mục 3.1.1 Sơ đồ kiến trúc và luồng dữ liệu | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-51 | VETC vẫn chưa trả dữ liệu sau lượt tra lại 120 phút: cho duyệt Lệnh, trạm ghi "Chờ VETC" và đối soát nốt cuối kỳ được không? | VIS (08/10/2026), mục 3.1.3 Bước 3 | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-52 | Xe xếp hàng chờ ở cổng cảng, bãi, kho quá 10 phút mà máy vẫn nổ: có bù dầu như kẹt xe không? | VIS (08/10/2026), mục 3.2 Bước 1 | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-53 | Tai nạn, kẹt cứng không nhích được: xe đứng yên hẳn được tính là kẹt xe (có bù) khi đứng giữa hai đoạn kẹt, khi lái xe báo vấn đề giữa chặng, hoặc khi bản đồ báo tắc tại đó. Khách đồng ý không? | VIS (08/10/2026), mục 2.2.3, mục 2.2.4 | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-54 | Mất tín hiệu GPS: đề xuất lái xe chụp ảnh định vị tại từng mốc để ghi giờ đến. Khách đồng ý không? | Chưa có trong tài liệu khách gửi | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-55 | Có trường hợp đổi xe giữa chặng không? | Chưa có trong tài liệu khách gửi | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-56 | Có trường hợp 2 container 20 feet của 2 Lệnh trên cùng một xe không? Nếu có: kẹt xe, vé trong khoảng chạy chung chia đều cho 2 Lệnh được không? | Chưa có trong tài liệu khách gửi | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-57 | Xác nhận các ngưỡng đã ghi (kẹt xe dưới 5 km/h quá 10 phút; tra lại VETC sau 120 phút; tính lại ETA mỗi 30 phút với cung trên 300 km; ở bãi khác quá 10 phút khi tìm vỏ) và cho số các ngưỡng còn trống (lệch cung đường "x%", đứng yên tối đa giữa 2 đoạn kẹt). | VIS (08/10/2026), mục 2.2.1, 2.2.3, 3.1.3, 3.3 | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-58 | Lái xe trả tiền mặt tại trạm thu phí (tài khoản giao thông hết tiền, trạm không thu tự động): đề xuất lái xe ghi khoản chi hộ kèm trạm và ảnh biên lai, trạm đó tính "Đã qua", không chờ giao dịch VETC. Delta có trường hợp này không, đồng ý cách làm không? | Chưa có trong tài liệu khách gửi | Còn mở: chưa hỏi Delta (review VIS r11, 19/10) |
+| OQ-59 | Lệnh hết chạy bao lâu chưa duyệt thì nhắc người duyệt và báo trưởng điều vận (`P-han-duyet-lenh`)? | Chưa có trong tài liệu khách gửi | Còn mở: chưa hỏi Delta (review VIS r9, 19/10) |
+| OQ-60 | Luồng khiếu nại của lái xe (I14): lái xe khiếu nại trong hạn, khoản rút khỏi bảng kê lương, người ra quyết định gốc xem lại (Giữ · Huỷ · Sửa số), bị Giữ thì leo thang 1 lần lên trưởng bộ phận: khách đồng ý không? Hạn khiếu nại bao nhiêu ngày (`P-han-khieu-nai`)? Quy chế có cho khiếu nại khoản đã chốt kỳ không? | Chưa có trong tài liệu khách gửi | Còn mở: chưa hỏi Delta (review VIS v4, 20/10) |
 
-
-### Review vòng 1 — chưa trả lời
-
-Câu review của PO và senior BA trên trang phỏng vấn VIS (https://claude.ai/artifact/GRtqWJ6Zwc7a3P4MuBoNhr, nhóm Phần 8). Ghi vào repo trước khi trả lời (anh chốt 15/10); trả lời xong thì áp vào mục được nêu.
-
-| # | Vấn đề | Đề xuất của reviewer | Áp vào |
-|---|---|---|---|
-| r2 | Lệnh "hết chạy" theo GPS lệch với trạng thái Lệnh (điểm cuối trùng điểm đi; duyệt trước khi xe vào vùng cuối; Lệnh bị trả lại) | Hết chạy khi đã qua các điểm theo thứ tự rồi mới vào vùng cuối; chưa hết chạy thì chưa duyệt; vé về sau duyệt thành chi phí bổ sung sau duyệt; Lệnh bị trả lại không nhận sự việc mới | I7, I11 |
-| r3 | Huỷ Lệnh khi xe đang chạy (trạng thái Lệnh chỉ cho huỷ trước khi lái xe nhận) | Không cho huỷ Lệnh đang thực hiện; khách huỷ giữa chặng thì Lệnh kết thúc sớm (F1); bỏ vế huỷ khỏi I11 | I11 |
-| r4 | Dầu định mức của Lệnh: cung đường nào, mức tải nào; xe chưa có định mức; km tìm vỏ âm | Theo cung đường trên Lệnh, đổi cung đã duyệt thì tính lại (giữ F3); tính theo từng đoạn rỗng/có hàng | F3, I5, I6, I9 |
-| r5 | Lái xe được báo, được xem, được khiếu nại | Lái xe thấy sự việc gắn mình trên app, khiếu nại trong hạn | Nhóm I · `vehicle-management` V1–V3 |
-| r7 | Chốt kỳ, bảng kê lương, vé của xe chạy ngoài Lệnh | Xem đề xuất trên trang | I8 · `vehicle-management` V2 |
-| r9 | Lệnh chờ duyệt quá lâu; hai người cùng duyệt bù dầu | Xem đề xuất trên trang | I4, I6, I8 |
-| r11 | Trạm đổi giữa chừng; giá vé theo tổ hợp xe; trả tiền mặt tại trạm | Xem đề xuất trên trang | T1 · I7, I10 |
 
 ## 12. Next Steps
 
@@ -611,4 +605,4 @@ Câu review của PO và senior BA trên trang phỏng vấn VIS (https://claude
 - Hỏi lại Delta các câu còn mở ở Mục 11 (BL-041)
 - `/user-flow transport-dispatch` — chạy lại; userflow tách máy từ bản nháp ngày 07/10, còn nội dung cũ (hạ vỏ "x/n", tiền hoàn nâng vỏ, duyệt chi ngoài định mức, CBT và đường sắt)
 - `/srs transport-dispatch` — đặc tả FR, BR, Error Matrix
-- Hỏi Delta OQ-49–57 cùng lượt với câu hỏi mở của `vehicle-telematics`, `vehicle-management`
+- Hỏi Delta OQ-49–60 cùng lượt với câu hỏi mở của `vehicle-telematics`, `vehicle-management`

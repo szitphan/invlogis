@@ -141,3 +141,22 @@ Bảng tình huống đổ dầu (đã chốt): có sự kiện + có phiếu + 
 | 26 | Kỳ: qua nửa đêm, qua tháng, Lệnh theo ngày duyệt | `vehicle-telematics` OQ-9 |
 | 27 | Khách xem các rủi ro | `vehicle-telematics` OQ-10 |
 | 28 | VETC cung cấp danh mục trạm thu phí | `vehicle-telematics` OQ-3 |
+
+## Review vòng 1 — trả lời 17–19/10/2026
+
+Trang phỏng vấn VIS nhóm Phần 8 (https://claude.ai/artifact/GRtqWJ6Zwc7a3P4MuBoNhr). Áp vào brainstorm ngày 19/10.
+
+| # | Vấn đề | Trả lời | Áp vào |
+|---|---|---|---|
+| r2 | Lệnh "hết chạy" theo GPS | Đồng ý | `transport-dispatch` I7, I8, I11 |
+| r3 | Huỷ Lệnh khi xe đang chạy | Đồng ý | `transport-dispatch` I11, 6.3 |
+| r4 | Dầu định mức của Lệnh | Sửa: đọc định mức theo tải ở SRS cũ; xe chưa có định mức thì cảnh báo, cho áp định mức xe cùng loại xe vận hành (tạm hoặc gán luôn); hiện 2 số dầu (cung đường ban đầu, thực tế); chưa hiểu km tìm vỏ âm; tính theo đoạn rỗng, có hàng đúng | `transport-dispatch` I5, I9 · vòng 2 v1–v3 |
+| r5 | Lái xe được báo, xem, khiếu nại | Đồng ý; phải phân tích vì sao lái xe khiếu nại và luồng sau khiếu nại để anh đánh giá, rồi mới hỏi khách | `transport-dispatch` I14 · `vehicle-management` V1–V3 · vòng 2 v4 |
+| r6 | Lệch dầu thực đổ: lỗi của ai | Đồng ý | `vehicle-telematics` X1, 5.3 |
+| r7 | Chốt kỳ, bảng kê lương, vé xe ngoài Lệnh | Sửa: soát ngược từ Lệnh xem case nào lọt tới chốt kỳ rồi mới tính giải pháp | vòng 2 v5 |
+| r8 | Thu hồi xe khi còn Lệnh chưa duyệt; thiết bị lỗi lúc bơm đầy | Sửa: thu hồi phải xong việc liên quan, duyệt trước rồi mới thu hồi; ý 2 đồng ý | `vehicle-management` B2, B3, B6 · vòng 2 v6 |
+| r9 | Lệnh chờ duyệt quá lâu; hai người cùng duyệt | Đồng ý | `transport-dispatch` I13 |
+| r10 | Thiết bị chưa khai; cả đội mất dữ liệu | Đồng ý | `vehicle-telematics` G6, G7 |
+| r11 | Trạm đổi giữa chừng; giá vé theo tổ hợp xe; trả tiền mặt tại trạm | Ý 1, 2 đồng ý; ý 3 hỏi lại khách | `transport-dispatch` I7, I10, OQ-58 · `vehicle-telematics` T1 |
+| r12 | Một gói hay hai gói nhiên liệu | Tách 2 gói | `saas-core-vs-tenant.md` 3.6 · DEC-195 |
+| r13 | Thêm vấn đề (e) hao phí | Thêm | `vehicle-telematics` Mục 2, 10 |

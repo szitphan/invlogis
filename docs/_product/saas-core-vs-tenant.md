@@ -4,7 +4,7 @@ status: stale
 status_prev: draft
 status_changed: 2026-10-14
 status_reason: "đã review upstream, không cần sửa"
-updated: 2026-10-12
+updated: 2026-10-20
 links:
   - docs/_shared/project-profile.md
   - docs/_shared/system-overview.md
@@ -117,6 +117,7 @@ Cột "Nếu viết cứng" ghi điều sẽ chặn bán cho khách khác.
 | Tên phiếu dGas1–dGas5 (cấp quản lý, cấp xưởng, cấp vận tải, đổ đầy bình, chốt dầu) | Riêng Delta (tên) + Cấu hình (loại phiếu) | Lõi có "phiếu cấp nhiên liệu" với loại phiếu do khách khai | Khách khác không hiểu "dGas4" |
 | Cây dầu nội bộ, cây dầu mua ngoài, nhân viên đối tác cây dầu dùng app | Gói "Nhiên liệu" | Chỉ bán cho khách có cây dầu riêng hoặc ký đối tác cây dầu | Khách đổ dầu ngoài hoàn toàn thấy cả module thừa |
 | Lưu lượng dầu dư khi mua ngoài theo hoá đơn lẻ để cấp bù | Gói "Nhiên liệu" | — | — |
+| Cảm biến dầu: dầu tồn, đổ dầu, hút dầu, lệch dầu thực đổ, dầu tiêu hao so định mức | Gói "Giám sát nhiên liệu" (tách khỏi "Nhiên liệu", DEC-195) | Bán riêng cho khách có xe gắn cảm biến dầu; nối với gói "Nhiên liệu" khi khách có cả cây dầu (đối soát dầu thực đổ với phiếu) | Gộp một gói thì khách có cảm biến mà không có cây dầu phải mua phần cây dầu không dùng |
 | Xưởng: lệnh sửa chữa, báo giá, kho phụ tùng, kiểm kê, rác thải | Gói "Bảo dưỡng đội xe" | Bán riêng hoặc kèm; nối với lõi qua phương tiện và chi phí | Khách thuê sửa ngoài hoàn toàn vẫn phải cài xưởng |
 | Mã "Khách hàng DK05", duyệt "DK05 cấp 2" | Riêng Delta (tên) + Cấu hình (cấp duyệt khách hàng) | — | — |
 
@@ -198,7 +199,7 @@ Con số chính sách không viết thẳng vào quy tắc mà gọi qua mã `P-
 | 2 | Dữ liệu Delta (chứng từ, chỗ AI sửa, danh mục) có được dùng để cải thiện sản phẩm chung không | Lãnh đạo + Delta | Ảnh hưởng thiết kế AI đọc chứng từ (CHG-27) |
 | 3 | Một app chung có chọn khách, hay mỗi khách một bản app mang tên riêng | Đội sản phẩm | Ảnh hưởng đăng nhập, phân phối app, tên "Delta Super App" |
 | 4 | Sửa mô hình "container là phương tiện" trước khi viết SRS Điều phối | BA + kỹ thuật | Rẻ nhất nếu sửa bây giờ |
-| 5 | Danh sách gói bán (Xưởng, Nhiên liệu, Hàng lạnh, Đường sắt, CBT, Tài chính, Đa chi nhánh) | Đội sản phẩm | Quyết định chỗ nối giữa lõi và gói |
+| 5 | Danh sách gói bán (Xưởng, Nhiên liệu, Giám sát nhiên liệu, Hàng lạnh, Đường sắt, CBT, Tài chính, Đa chi nhánh) | Đội sản phẩm | Quyết định chỗ nối giữa lõi và gói |
 
 ## 8. Bước tiếp theo đề xuất
 

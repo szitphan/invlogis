@@ -2,9 +2,9 @@
 type: brainstorm
 feature: vehicle-management
 status: draft
-status_changed: 2026-10-18
+status_changed: 2026-10-20
 status_reason: "đã review upstream, không cần sửa"
-updated: 2026-10-15
+updated: 2026-10-20
 links:
   - docs-input/srs-cu/lg-srs-export.md
   - docs-input/srs-cu/srs-mobile/srs-mobile.md
@@ -72,7 +72,7 @@ Phần VIS gắn theo từng xe (km, dầu tồn, hút dầu, xe chạy ngoài L
 ### P0 — must have
 
 **Nhóm H — hồ sơ xe**
-- H1 [SRS v2.0] [Lõi] Hồ sơ xe 6 tab: Thông tin chung · Hàng hoá và thiết bị · Bàn giao, thu hồi · Sửa chữa · Định mức · Lịch nhắc. Sửa hồ sơ qua duyệt, có lịch sử thay đổi. Tab Sửa chữa, Định mức, Lịch nhắc chỉ hiện khi khách bật gói tương ứng.
+- H1 [SRS v2.0] [Lõi] Hồ sơ xe 6 tab: Thông tin chung · Hàng hoá và thiết bị · Bàn giao, thu hồi · Sửa chữa · Định mức · Lịch nhắc. Sửa hồ sơ qua duyệt, có lịch sử thay đổi. Tab Sửa chữa, Định mức, Lịch nhắc chỉ hiện khi khách bật gói tương ứng. Yêu cầu cập nhật định mức nhiên liệu của xe, kể cả yêu cầu gửi từ Lệnh khi xe chưa có định mức (`transport-dispatch` I9), duyệt cùng quy trình sửa hồ sơ; nội dung định mức thuộc `fuel-allowance`.
 - H2 [SRS v2.0] [Lõi] Trạng thái xe theo người giữ: lái xe giữ (Đang hoạt động · Đang sửa chữa · Đang tạm giữ), công ty giữ (Sẵn sàng hoạt động · Đang sửa chữa).
 - H3 [Mới] [Lõi] Số thẻ ETC và mã thiết bị GPS trên hồ sơ xe, có lịch sử gắn và ngày hiệu lực, không trùng giữa các xe đang hoạt động. Dùng để ghép giao dịch thu phí và dữ liệu GPS với đúng xe.
 - H4 [SOP to-be] [Lõi] Km hiện tại lấy từ GPS, điền vào ô "Số vận hành hiện tại" đang chờ dữ liệu ngoài. Lịch nhắc theo km ở `reminders` đọc số này.
@@ -81,15 +81,16 @@ Phần VIS gắn theo từng xe (km, dầu tồn, hút dầu, xe chạy ngoài L
 
 **Nhóm B — bàn giao, thu hồi**
 - B1 [SRS v2.0] [Lõi] Yêu cầu bàn giao hoặc thu hồi → duyệt → ký biên bản. Bàn giao cho lái xe hoặc giữa chi nhánh; ảnh xe, tình trạng hoạt động.
-- B2 [SRS v2.0] [Gói: Nhiên liệu] Bàn giao đi cùng phiếu đổ đầy bình (Delta: dGas4), thu hồi đi cùng phiếu chốt dầu (Delta: dGas5). Làm phiếu trước hay biên bản trước đều được; biên bản chỉ ký xong khi phiếu đi kèm đã xong. Chờ khách xác nhận loại phiếu (OQ-1).
-- B3 [SOP+] [Gói: Nhiên liệu] Phần dầu trên biên bản lấy từ phiếu đã xong: số lít thực bơm, "Đã đầy (theo cảm biến)". Người ký chỉ xem lại, không nhập. Thay ô "Mô tả nhiên liệu" ghi bằng chữ.
+- B2 [SRS v2.0] [Gói: Nhiên liệu] Bàn giao đi cùng phiếu đổ đầy bình (Delta: dGas4), thu hồi đi cùng phiếu chốt dầu (Delta: dGas5). Làm phiếu trước hay biên bản trước đều được; biên bản chỉ ký xong khi phiếu đi kèm đã xong. Cảm biến hoặc iGAS lỗi lúc bơm, hoặc chi nhánh không có cây dầu nội bộ: quản lý phương tiện chọn "đầy bình" bằng tay, bắt ghi lý do, để phiếu xong và biên bản ký được. Chờ khách xác nhận loại phiếu (OQ-1).
+- B3 [SOP+] [Gói: Nhiên liệu] Phần dầu trên biên bản lấy từ phiếu đã xong: số lít thực bơm, "Đã đầy (theo cảm biến)". Người ký chỉ xem lại, không nhập; phiếu chọn "đầy bình" bằng tay thì biên bản ghi "Đầy bình (chọn tay)" kèm lý do. Thay ô "Mô tả nhiên liệu" ghi bằng chữ.
 - B4 [Mới] [Lõi] [Cấu hình] Km trên biên bản: xe có GPS thì lấy từ GPS lúc ký, không sửa tay. Lúc ký mà GPS không có dữ liệu thì lấy lần đọc gần nhất, ghi kèm giờ đọc (OQ-2). Xe không có GPS: `P-cho-nhap-km-tay` (Delta: tắt) bật thì cho nhập tay, bắt ghi lý do (review r15). Thay ô "KMs bàn giao" nhập tay.
 - B5 [Mới] [Gói: Nhiên liệu] [Cấu hình] Dầu chờ nhận của lái xe còn tồn khi thu hồi xe hoặc lái xe nghỉ việc: `P-dau-cho-nhan-vao-thuong` (Delta: bật) bật thì vào thưởng lương lái xe. Việc chốt dầu thuộc phiếu chốt dầu ở `fuel-issuing`; feature này chỉ nêu điều kiện ký biên bản thu hồi (review r16).
+- B6 [Mới] [Lõi] Thu hồi chỉ khi đã xong việc của lái xe với xe: xe còn Lệnh chưa duyệt (Đang thực hiện, Lái xe đã chốt) thì chưa ký được biên bản thu hồi, chỉ ra các Lệnh còn thiếu; duyệt xong các Lệnh đó thì dầu của chúng vào dầu chờ nhận trước khi phiếu chốt dầu chốt. Cũng chặn khi xe còn Lệnh đã giao mà chưa chạy (điều vận huỷ hoặc giao xe khác) hoặc phiếu cấp dầu đang mở của lái xe với xe. Không chặn khi còn sự việc Mới hoặc khiếu nại đang mở; các khoản này vẫn gắn lái xe cũ theo lịch sử bàn giao. Lái xe nghỉ đột xuất không chốt được Lệnh: người duyệt Lệnh chốt thay, bắt ghi lý do (review v6).
 
 **Nhóm V — vận hành theo xe**
-- V1 [SOP to-be] [Gói: Giám sát nhiên liệu] Nhận và xử lý cảnh báo hút dầu bất thường (phát hiện ở `vehicle-telematics` S7): xác nhận vi phạm, hợp lệ hoặc lỗi thiết bị; vi phạm gắn lái xe đang giữ xe.
-- V2 [Mới] [Lõi] [Cấu hình] Nhận và xử lý cảnh báo xe chạy ngoài Lệnh (`vehicle-telematics` S8). Vé thu phí phát sinh trong khoảng đó gắn vào sự việc, không thành vé mồ côi cuối kỳ. Trường hợp miễn cảnh báo chờ khách (OQ-3).
-- V3 [SOP to-be] [Lõi] Nổ máy ngủ ngoài Lệnh gắn lái xe đang giữ xe theo lịch sử bàn giao.
+- V1 [SOP to-be] [Gói: Giám sát nhiên liệu] Nhận và xử lý cảnh báo hút dầu bất thường (phát hiện ở `vehicle-telematics` S7): xác nhận vi phạm, hợp lệ hoặc lỗi thiết bị; vi phạm gắn lái xe đang giữ xe. Lái xe nhận thông báo trên app và thấy sự việc trong "Số liệu của tôi" (`transport-dispatch` I14); khiếu nại theo `transport-dispatch` I14.
+- V2 [Mới] [Lõi] [Cấu hình] Nhận và xử lý cảnh báo xe chạy ngoài Lệnh (`vehicle-telematics` S8). Vé thu phí phát sinh trong khoảng đó gắn vào sự việc, không thành vé mồ côi cuối kỳ; vé đi theo kết quả sự việc: Hợp lệ thì vào chi phí chung của xe, Vi phạm thì vào bảng kê lái xe; sự việc còn Mới, Đang xem, Đang xem lại hoặc Quá hạn lúc chốt kỳ thì sang kỳ sau (review v5). Lái xe nhận thông báo như V1. Trường hợp miễn cảnh báo chờ khách (OQ-3).
+- V3 [SOP to-be] [Lõi] Nổ máy ngủ ngoài Lệnh gắn lái xe đang giữ xe theo lịch sử bàn giao; lái xe thấy trong "Số liệu của tôi" (`transport-dispatch` I14).
 - V4 [SOP to-be] [Lõi] Báo cáo cuối kỳ theo xe, lái xe, chi nhánh, toàn đội: km theo GPS; nổ máy ngủ (số phút; số lít hao phí khi bật Gói Nhiên liệu).
 - V5 [SOP to-be] [Gói: Giám sát nhiên liệu] Báo cáo cuối kỳ: dầu tiêu hao, mức tiêu hao bình quân (l/100 km) so với định mức; dầu bị hút, có bản đồ vị trí.
 
@@ -113,8 +114,8 @@ Chưa phân mức: mọi phần đã chốt đều vào giai đoạn 1.
 
 ### 5.2 Thu hồi xe
 
-1. Lập yêu cầu thu hồi (xe Đang hoạt động hoặc Đang sửa chữa), duyệt.
-2. Phiếu chốt dầu đi kèm, bơm đầy tại cây dầu nội bộ, cảm biến xác nhận đầy.
+1. Lập yêu cầu thu hồi (xe Đang hoạt động hoặc Đang sửa chữa), duyệt. Xe còn Lệnh chưa duyệt thì người duyệt Lệnh duyệt xong trước (B6).
+2. Phiếu chốt dầu đi kèm, bơm đầy tại cây dầu nội bộ, cảm biến xác nhận đầy; thiết bị lỗi hoặc không có cây dầu nội bộ thì chọn "đầy bình" tay kèm lý do (B2).
 3. Dầu chờ nhận còn tồn của lái xe được chốt trên phiếu chốt dầu, đưa vào thưởng lương lái xe.
 4. Ký biên bản: km từ GPS, dầu từ phiếu. Xe về Sẵn sàng hoạt động.
 
@@ -125,7 +126,9 @@ Chưa phân mức: mọi phần đã chốt đều vào giai đoạn 1.
                            (phiếu trước hay biên bản trước đều được)
                                                      ◄──── Bơm, iGAS ghi số lít,
                                                            cảm biến xác nhận đầy
- Ký biên bản ────────────► ◇ Phiếu đi kèm đã xong?
+ Ký biên bản ────────────► ◇ Thu hồi: xe còn Lệnh chưa duyệt?
+                           ├─ Còn ─► Chưa ký được, chỉ ra Lệnh cần duyệt (B6)
+                           ◇ Phiếu đi kèm đã xong?
                            ├─ Không ─► Chưa ký xong, chỉ ra phiếu còn thiếu
                            └─ Có ─► Km từ GPS (không có thì lần đọc gần nhất + giờ)
                                     Dầu từ phiếu (chỉ xem)
@@ -161,6 +164,7 @@ Chưa phân mức: mọi phần đã chốt đều vào giai đoạn 1.
 |---|---|---|---|---|
 | D1 | 5.1, 5.2 | Phiếu dầu đi kèm đã xong | Ký xong biên bản | Chưa ký xong, chỉ ra phiếu còn thiếu |
 | D2 | 5.1, 5.2 | GPS có dữ liệu lúc ký | Km lúc ký | Km lần đọc gần nhất, ghi giờ đọc |
+| D6 | 5.2 | Xe còn Lệnh chưa duyệt | Chưa ký được biên bản thu hồi, chỉ ra Lệnh | Sang D1 |
 | D3 | 5.2 | Lái xe còn dầu chờ nhận | Chốt trên phiếu chốt dầu, vào thưởng lương | Bỏ qua |
 | D4 | 5.3 | Xe có lệnh sửa chữa mở, hoặc số đo trở lại ngay | Bỏ qua | Cảnh báo hút dầu |
 | D5 | 5.4 | Thuộc trường hợp miễn cảnh báo | Bỏ qua | Cảnh báo xe chạy ngoài Lệnh |
@@ -175,6 +179,8 @@ Chưa phân mức: mọi phần đã chốt đều vào giai đoạn 1.
 | Thu hồi | Phiếu trước | Đã xong | Ký biên bản; dầu chờ nhận chốt trên phiếu |
 | Thu hồi | Biên bản trước | Chưa xong | Chờ phiếu xong |
 | Bàn giao, thu hồi | — | Xe không có cảm biến | Phiếu chọn đầy bình bằng tay như hiện nay |
+| Bàn giao, thu hồi | — | Cảm biến, iGAS lỗi lúc bơm; chi nhánh không có cây dầu nội bộ | Quản lý phương tiện chọn "đầy bình" tay kèm lý do; phiếu xong, ký được |
+| Thu hồi | — | Xe còn Lệnh chưa duyệt | Chưa ký được; duyệt xong Lệnh rồi mới ký (B6) |
 
 ### 6.3 State Transitions
 
@@ -185,7 +191,7 @@ Chưa phân mức: mọi phần đã chốt đều vào giai đoạn 1.
 | Xe | Đang hoạt động · Sẵn sàng hoạt động | Đang sửa chữa | Xe gắn vào lệnh sửa chữa đang triển khai | Có, khi lệnh sửa chữa xong |
 | Xe | Đang hoạt động | Đang tạm giữ | Khoá xe | Có |
 | Bàn giao, thu hồi | Chờ phê duyệt | Đã phê duyệt · Đã từ chối · Đã huỷ | Duyệt, từ chối, huỷ (SRS v2.0) | Từ chối, huỷ: tạo lại |
-| Bàn giao, thu hồi | Đã phê duyệt | Đã hoàn thành | Ký biên bản, phiếu đi kèm đã xong | Không |
+| Bàn giao, thu hồi | Đã phê duyệt | Đã hoàn thành | Ký biên bản, phiếu đi kèm đã xong; thu hồi: xe không còn Lệnh chưa duyệt | Không |
 
 Sự việc hút dầu, chạy ngoài Lệnh dùng vòng đời "sự việc cần xử lý" ở `vehicle-telematics` Mục 6.3.
 
@@ -200,7 +206,7 @@ Sự việc hút dầu, chạy ngoài Lệnh dùng vòng đời "sự việc c�
 ### 6.5 Other Edge Cases
 
 - Xe chưa gắn GPS: biên bản lấy km theo cách OQ-2 hoặc theo câu trả lời của khách (`vehicle-telematics` OQ-6).
-- Thu hồi khi lái xe nghỉ việc: như thu hồi thường, dầu chờ nhận chốt vào thưởng lương (B5).
+- Thu hồi khi lái xe nghỉ việc: như thu hồi thường, các Lệnh của lái xe duyệt xong trước (B6), dầu chờ nhận chốt vào thưởng lương (B5).
 - Bàn giao giữa chi nhánh: không đổi người giữ là lái xe; sự việc ngoài Lệnh gắn chi nhánh nhận.
 
 ## 7. Validation, Limits & Wording
@@ -257,7 +263,7 @@ Sự việc hút dầu, chạy ngoài Lệnh dùng vòng đời "sự việc c�
 
 - Phần SRS v2.0 (hồ sơ, trạng thái, bàn giao, thu hồi) vẫn đúng với cách Delta làm; chưa phỏng vấn lại.
 - Lịch sử bàn giao, thu hồi phản ánh đúng ai đang giữ xe.
-- Bàn giao, thu hồi làm ở chi nhánh có cây dầu nội bộ, nên phiếu đổ đầy bình, chốt dầu bơm qua iGAS.
+- Bàn giao, thu hồi thường làm ở chi nhánh có cây dầu nội bộ, phiếu đổ đầy bình, chốt dầu bơm qua iGAS; chi nhánh không có cây nội bộ thì chọn "đầy bình" tay kèm lý do (B2).
 
 ## 9. Risks
 
@@ -265,7 +271,8 @@ Sự việc hút dầu, chạy ngoài Lệnh dùng vòng đời "sự việc c�
 |--------|----------|-------------------|-----------|
 | Lịch sử bàn giao không cập nhật kịp | thỉnh thoảng | Sự việc ngoài Lệnh gắn sai lái xe, tranh chấp | Biên bản ký xong mới đổi người giữ; báo cáo hiện người giữ theo từng ngày |
 | Lái xe phản đối khi bị ghi hút dầu, nổ máy ngủ | thường | Tranh chấp, mất lái xe | Lái xe xem được số liệu của mình; Hợp lệ kèm lý do; quy chế công bố trước |
-| Bắt phiếu đi kèm mới ký được biên bản làm chậm giao xe | thỉnh thoảng | Xe nằm chờ, trễ Lệnh | Cho làm phiếu trước hoặc biên bản trước; hỏi khách (OQ-1) |
+| Bắt phiếu đi kèm mới ký được biên bản làm chậm giao xe | thỉnh thoảng | Xe nằm chờ, trễ Lệnh | Cho làm phiếu trước hoặc biên bản trước; thiết bị lỗi thì chọn đầy bình tay; hỏi khách (OQ-1) |
+| Lệnh chưa duyệt chặn thu hồi xe | thỉnh thoảng | Xe không giao được cho lái xe khác | Chỉ ra Lệnh cần duyệt; nhắc người duyệt theo `transport-dispatch` I13 |
 
 ## 10. Success Criteria (preliminary)
 
@@ -279,18 +286,9 @@ Sự việc hút dầu, chạy ngoài Lệnh dùng vòng đời "sự việc c�
 
 | OQ | Câu hỏi | Nguồn khách | Trả lời |
 |---|---|---|---|
-| OQ-1 | Bàn giao xe đi cùng phiếu đổ đầy bình (dGas4), thu hồi đi cùng phiếu chốt dầu (dGas5): đúng không? Cho làm phiếu trước hay biên bản trước đều được, biên bản chỉ ký xong khi phiếu xong: có làm chậm giao xe không? | SRS LG v2.0, bảng liên quy trình (Bàn giao phương tiện, Thu hồi phương tiện) | Chưa hỏi Delta |
-| OQ-2 | Lúc ký biên bản bàn giao, thu hồi mà GPS không có dữ liệu: lấy km lần đọc gần nhất, ghi kèm giờ đọc được không? | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta |
-| OQ-3 | Xe chạy ngoài Lệnh: những trường hợp nào không cảnh báo (Lệnh đã nhận, xe đang tới điểm đầu; về bãi sau Lệnh; đi đổ dầu có phiếu đang mở; đi xưởng có lệnh sửa chữa đang mở; đang bàn giao giữa chi nhánh)? Đi bao xa hoặc bao lâu thì cảnh báo? | VIS (08/10/2026), mục 3.1.3 Bước 4 (chạy xe ngoài lịch trình, việc riêng) | Chưa hỏi Delta |
-
-### Review vòng 1 — chưa trả lời
-
-Câu review của PO và senior BA trên trang phỏng vấn VIS (https://claude.ai/artifact/GRtqWJ6Zwc7a3P4MuBoNhr, nhóm Phần 8). Ghi vào repo trước khi trả lời (anh chốt 15/10); trả lời xong thì áp vào mục được nêu.
-
-| # | Vấn đề | Đề xuất của reviewer | Áp vào |
-|---|---|---|---|
-| r5 | Lái xe được báo, được xem, được khiếu nại | Lái xe thấy sự việc gắn mình trên app, khiếu nại trong hạn | Nhóm I · `vehicle-management` V1–V3 |
-| r8 | Thu hồi xe khi còn Lệnh chưa duyệt; thiết bị lỗi lúc bơm đầy | Xem đề xuất trên trang | B2–B5 |
+| OQ-1 | Bàn giao xe đi cùng phiếu đổ đầy bình (dGas4), thu hồi đi cùng phiếu chốt dầu (dGas5): đúng không? Cho làm phiếu trước hay biên bản trước đều được, biên bản chỉ ký xong khi phiếu xong: có làm chậm giao xe không? | SRS LG v2.0, bảng liên quy trình (Bàn giao phương tiện, Thu hồi phương tiện) | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-2 | Lúc ký biên bản bàn giao, thu hồi mà GPS không có dữ liệu: lấy km lần đọc gần nhất, ghi kèm giờ đọc được không? | Chưa có trong tài liệu khách gửi | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-3 | Xe chạy ngoài Lệnh: những trường hợp nào không cảnh báo (Lệnh đã nhận, xe đang tới điểm đầu; về bãi sau Lệnh; đi đổ dầu có phiếu đang mở; đi xưởng có lệnh sửa chữa đang mở; đang bàn giao giữa chi nhánh)? Đi bao xa hoặc bao lâu thì cảnh báo? | VIS (08/10/2026), mục 3.1.3 Bước 4 (chạy xe ngoài lịch trình, việc riêng) | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
 
 ## 12. Next Steps
 
