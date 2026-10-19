@@ -108,6 +108,7 @@ Cột "Nếu viết cứng" ghi điều sẽ chặn bán cho khách khác.
 | Đơn giá đường sắt CS nhập tay (giai đoạn 1), lấy từ báo giá Sales (giai đoạn 2) | Gói "Đường sắt" + Lõi (bảng giá theo hợp đồng) | Bảng giá theo hợp đồng là lõi; nguồn giá (tay hay Sales) là cấu hình | — |
 | Bên xuất hoá đơn khác khách đặt dịch vụ | Lõi | — | — |
 | Thanh toán trả hộ, QR, UNC, API ngân hàng | Gói "Tài chính" + kết nối | Kết nối ngân hàng thay được; Vietcombank là kết nối đầu tiên | Chỉ chạy với khách dùng Vietcombank |
+| Khai tờ khai hải quan nháp, truyền sang phần mềm khai hải quan, nhận trạng thái tờ khai về JobID | Gói "Khai thuê hải quan" + kết nối | Bật cho khách làm đại lý hải quan; Ecus là kết nối đầu tiên, mỗi khách thuê chọn cách truyền (đồng bộ hay làm tay) | Khách chỉ làm vận tải thấy màn khai thừa |
 
 ### 3.6 Nhiên liệu, xưởng
 

@@ -1,6 +1,7 @@
 # Kết nối API với Ecus_Mô tả yêu cầu_Oct 26 2025
 
-> Chuyển từ PDF. Ảnh xem trước từng trang được giữ bên dưới để đối chiếu với bản gốc.
+> Nguồn: `Kết nối API với Ecus_Mô tả yêu cầu_Oct 26 2025.pdf` (PDF 3 trang, có lớp chữ, 2 sơ đồ) · Ngày tài liệu: 26/10/2025 · Nhận: 2026-10-02.
+> Chuyển từ PDF. Ảnh xem trước từng trang được giữ bên dưới để đối chiếu với bản gốc. Chữ trong 2 sơ đồ "Mô hình kết nối" chép lại ngay sau chỗ sơ đồ (ảnh nhỏ, nhãn nào không đọc rõ thì ghi "không đọc rõ").
 
 ## Trang 1
 
@@ -66,6 +67,8 @@ thống VNACCS/VCIS thì phần mềm Ecus Delta cập nhật dữ liệu (bao g
 đính kèm) lại trên phần mềm Delta để đảm bảo dữ liệu và chứng từ trên phần mềm Delta
 là tương tự như trên hệ thống của hải quan.
 o Mô hình kết nối:
+
+> **Sơ đồ 1 (Nhóm khách hàng 1) — chép chữ:** Delta ERP ⇄ API Service (hai mũi tên đi, về). API Service ⇄ 3 kho dữ liệu Ecus đặt riêng: HN ECUS DATA · HCM ECUS DATA · VT ECUS DATA. User 1, User 2 ⇄ máy ECUS VNACCS (đọc HN ECUS DATA) ⇄ đám mây ⇄ Cơ quan Hải quan.
 3.2. Nhóm khách hàng 2
 Sử dụng Ecus KH, khai báo trên máy của khách hàng qua Ultraview. Với nhóm khách hàng này,
 nhân viên Delta khai báo tờ khai nháp trên phần mềm Delta như mục 3.1. Tùy thuộc vào quyết định
@@ -78,6 +81,8 @@ tờ khai về máy chủ Ecus Delta thông qua API.
 ✓ Phần mềm Delta sẽ chủ động lấy dữ liệu từ máy chủ Ecus Delta và cập nhật các dữ liệu
 như mô tả ở mục 3.1.
 ✓ Mô hình kết nối:
+
+> **Sơ đồ 2 (Nhóm khách hàng 2, Lựa chọn 1) — chép chữ:** Khối "Doanh nghiệp": Phần mềm DELTA (ERP) —① (nhãn mũi tên không đọc rõ)⇄ Server api_service —②⇄ Data ECUS (của Delta). ③ qua mạng (nhãn đám mây không đọc rõ) ⇄ Server của khách: ECUS_Auto —④⇄ Data ECUS (của khách). Khối "Broker / FWD": User 1, User 2 → máy ECUS VNACCS —⑤⇄ Data ECUS của khách. ⑥ máy ECUS VNACCS → Cơ quan Hải quan: "Khai báo tờ khai hải quan", chiều về "Nhận kết quả từ hải quan".
 Kết nối API giữa phần mềm Delta và phần mềm Ecus Trang 2 of 3
 
 ![Ảnh gốc trang 2](images/page-02.png)

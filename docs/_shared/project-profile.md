@@ -37,7 +37,7 @@ Danh sách tác nhân chuẩn kèm tên gọi cần tránh: [[docs/_shared/defin
 ## Thị trường & ngôn ngữ
 
 - Vận hành tại Việt Nam. Chi nhánh Delta: Hà Nội, Vận Tải (VT), Bắc Ninh (BN), Hải Dương (HD, sẽ giải thể do sáp nhập tỉnh), TP.HCM; không có chi nhánh Hải Phòng. Bốn chi nhánh HN, VT, BN, HD gộp lại gấp 3–4 lần TP.HCM về sản lượng, doanh thu. (2026-10-12)
-- Quy mô Delta: ~110.000 lô hàng/năm (= số Lệnh vận tải), ~50.000 tờ khai/năm (= số JobID J01–J06), tăng 2 con số mỗi năm. (2026-10-12)
+- Quy mô Delta: ~110.000 lô hàng/năm (= số Lệnh vận tải), ~50.000 tờ khai/năm (= số JobID J01–J06), tăng 2 con số mỗi năm. (2026-10-12) · 254 xe dán thẻ VETC (4 tài khoản giao thông, 2 pháp nhân), trên 10.000 lượt vé cầu đường mỗi tháng (2026-09-21) · khai thuê hải quan cho 137 khách, khai tập trung ở Hà Nội, Hải Phòng, TP.HCM (2025-10-26)
 - Thương hiệu: Việt Nam trước, khu vực Đông Nam Á sau; tài liệu bán hàng song ngữ Việt + Anh. (2026-10-14)
 - Giao diện: Tiếng Việt (mặc định) và Tiếng Anh. Không hỗ trợ Tiếng Nhật. (2026-10-01)
 - Câu chữ giao diện theo `design/design.md` (Copy động), không dùng "Vui lòng". (2026-10-01)

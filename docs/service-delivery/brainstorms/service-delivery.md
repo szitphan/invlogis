@@ -5,6 +5,7 @@ status: stale
 status_prev: draft
 updated: 2026-10-12
 links:
+  - docs-input/tich-hop/ecus-api-yeu-cau-2025-10-26/ecus-api-yeu-cau-2025-10-26.md
   - docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md
   - docs-input/sop/sop-dieu-phoi.md
   - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md
@@ -39,7 +40,7 @@ JobID là xương sống của mọi dịch vụ Delta cung cấp (hải quan, v
 Vấn đề b, c, d (giao việc qua Zalo, quá mốc bị phạt, chứng từ giấy về chậm) nằm ở Điều phối và Điều vận.
 
 **Phạm vi:**
-- Gồm: tạo và duyệt JobID (có AI đọc chứng từ, kiểm nợ quá hạn và hạn mức); phân JobID sang Điều phối (có thủ tục giao nhận) hoặc thẳng sang Điều vận (CBT, đường sắt, không làm hiện trường); quy tắc ghi nhận chi phí, doanh thu lên JobID; hoàn thành dịch vụ; tự ghi nhận giao dịch nội bộ khi làm trái tuyến (B7); hoá đơn trả hộ, hoá đơn điện tử, đổi bên xuất hoá đơn.
+- Gồm: tạo và duyệt JobID (có AI đọc chứng từ, kiểm nợ quá hạn và hạn mức); phân JobID sang Điều phối (có thủ tục giao nhận) hoặc thẳng sang Điều vận (CBT, đường sắt, không làm hiện trường); quy tắc ghi nhận chi phí, doanh thu lên JobID; hoàn thành dịch vụ; tự ghi nhận giao dịch nội bộ khi làm trái tuyến (B7); hoá đơn trả hộ, hoá đơn điện tử, đổi bên xuất hoá đơn; khai tờ khai hải quan nháp và kết nối phần mềm khai hải quan (Ecus là bên đầu tiên).
 - Ranh giới với 2 feature cùng chuỗi:
   - Điều phối (`shipment-coordination`): nhận JobID "Chờ xử lý", kê khai, giao việc hiện trường, sinh YCVT. Màn Chi tiết JobID dùng chung cho cả 3 feature, thuộc feature này; Điều phối, Điều vận thêm phần kê khai, YCVT/Lệnh lên màn đó.
   - Điều vận (`transport-dispatch`): từ YCVT lập, chạy, chốt và duyệt Lệnh. Lệnh duyệt xong thì chi phí chuyển về JobID.
@@ -83,6 +84,7 @@ Mọi vai trò có màn "Việc của tôi" kèm thông báo đẩy mở thẳng
 
 **Nhóm A — giảm nhập liệu**
 - A9 [SOP+] [Lõi] Hoá đơn điện tử lấy qua kết nối nhà cung cấp hoá đơn điện tử (kết nối đầu tiên: MISA); không khớp thì chụp + nhập tay, gắn cờ "Chưa khớp hoá đơn điện tử".
+- A10 [SOP+] [Lõi] Tờ khai hải quan do chính doanh nghiệp khai qua phần mềm khai hải quan có kết nối (Ecus là bên đầu tiên, Nhóm H): sau khi khai chính thức, số tờ khai, ngày tờ khai, phân luồng, mã vạch lô hàng hoặc container và chứng từ đã đính kèm tờ khai tự bổ sung vào bộ chứng từ của JobID; CS không phải quét QR hay tải lại. Tờ khai khách tự khai thì vẫn quét QR (`shipment-coordination` A2). Nguồn: Kết nối API với Ecus (26/10/2025), mục 3.1.
 
 **Nhóm B — quy trình**
 - B7 [SOP+] [Gói: Đa chi nhánh] [Cấu hình] Giao dịch nội bộ theo 2 trường hợp trong SOP: tạo JobID trái tuyến (TH1) hoặc giao việc trái tuyến (TH2, phát sinh ở bước giao việc của Điều phối). Phần mềm lấy 2 dấu hiệu này để tự ghi nhận giao dịch nội bộ và tự hạch toán. Lợi nhuận chia theo `P-ty-le-chia-lai-noi-bo` (Delta: 50/50 lãi gộp, chỉ hạch toán sau khi đã chốt bảng kê công nợ phải thu, phải trả).
@@ -96,6 +98,13 @@ Mọi vai trò có màn "Việc của tôi" kèm thông báo đẩy mở thẳng
 - E2 [SOP to-be] [Lõi] [Cấu hình] Phần mềm đề xuất cách trả theo ngưỡng `P-nguong-tam-ung` (Delta: 5.000.000 ₫) (dưới: tạm ứng; trên: tạo việc cho CS phụ trách + kế toán), bắt chọn có/không hoá đơn.
 - E6 [SOP to-be] [Lõi] Nút tạo Yêu cầu thanh toán trên Lệnh/JobID, gắn chi phí đúng Lệnh/JobID; việc "Thu hoá đơn GTGT" giao người gần lái xe nhất; hiện trạng thái thanh toán. Màn Yêu cầu thanh toán của lái xe vẽ ở Điều vận (`payment-request`). Phần duyệt, QR, UNC, API ngân hàng thuộc feature "Thanh toán trả hộ".
 - E9 [SOP+] [Lõi] Hoá đơn trả hộ ghi trên JobID. Khi lập bảng kê nợ phải thu, phần mềm đánh dấu hoá đơn trả hộ mà khách không xác nhận thanh toán. Cách xử lý tiếp chờ khách trả lời (OQ-6).
+
+**Nhóm H — khai thuê hải quan (Kết nối API với Ecus, 26/10/2025)**
+- H1 [SOP to-be] [Gói: Khai thuê hải quan] Trên JobID hải quan, CS khai tờ khai nháp ngay trên phần mềm: tờ khai xuất, tờ khai nhập, tờ khai sửa AMA. Danh mục chuẩn VNACCS/VCIS chọn sẵn. Tờ khai đính kèm các chứng từ đã có trên JobID (Hợp đồng, Invoice, Packing List…), không phải tải lại. Không gồm: nguyên phụ liệu, thanh khoản, kiểm tra sau thông quan.
+- H2 [SOP to-be] [Gói: Khai thuê hải quan] [Cấu hình] Mỗi khách khai thuê chọn 1 trong 3 cách truyền tờ khai: (a) khai trên phần mềm khai hải quan của doanh nghiệp (Delta: Ecus Delta, dữ liệu riêng từng điểm khai); (b) khai trên phần mềm của khách có công cụ đồng bộ (EcusAuto); (c) khai trên phần mềm của khách không đồng bộ: phần mềm xuất file XML, nhân viên đưa lên bằng tay qua Ultraview.
+- H3 [SOP to-be] [Gói: Khai thuê hải quan] Với cách (a) và (b): phần mềm đẩy tờ khai nháp kèm chứng từ sang phần mềm khai hải quan; nhân viên đăng nhập phần mềm đó để khai chính thức.
+- H4 [SOP to-be] [Gói: Khai thuê hải quan] Phần mềm nhận về: số tiếp nhận của từng chứng từ đã tải lên (để kiểm hồ sơ đủ); trạng thái tờ khai (Đã truyền · Đã phân luồng · Có thông báo thuế với hàng nhập có thuế · Đã thông quan); số và ngày tờ khai; mã vạch lô hàng hoặc container. Sau khi khai chính thức thì đồng bộ lại toàn bộ dữ liệu và chứng từ để khớp với hải quan (bổ sung chứng từ JobID: A10).
+- H5 [SOP+] [Gói: Khai thuê hải quan] Cách (c) không nhận được dữ liệu về: nhân viên nhập tay số tờ khai, phân luồng, thông quan, hoặc quét QR tờ khai (`shipment-coordination` A2). JobID gắn cờ "Tờ khai ngoài kết nối".
 
 ### P1 — should have
 
@@ -331,6 +340,8 @@ Nguồn khách: tên tài liệu khách gửi và mục. Cột Trả lời theo 
 | OQ-36 | Ai duyệt mã khách DK05 cấp 2 khi CBT đổi pháp nhân thanh toán sang bên mới? | Giao nhận hàng hoá (18/9/2026) | Chưa hỏi Delta (ngoài deck vòng 1) |
 | OQ-42 | JobID dừng vì nợ quá hạn, vượt hạn mức có cần nhắc CS sau một số ngày không? Bao nhiêu ngày, nhắc ai? | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta (ngoài deck vòng 1) |
 | OQ-44 | Số hiện trạng và mục tiêu cho các tiêu chí thành công của 3 feature: tỉ lệ trường tự điền; tỉ lệ việc hiện trường giao, nhận trên app; số lần và tiền phạt lưu container, lưu vỏ, lưu xe mỗi tháng; thời gian từ xe xong việc tới duyệt Lệnh; tỉ lệ Lệnh duyệt đủ chi phí | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta (ngoài deck vòng 1) |
+| OQ-45 | Tài liệu Ecus ghi khai tập trung ở Hà Nội, Hải Phòng, TP.HCM, sơ đồ có 3 kho dữ liệu Ecus HN, HCM, VT; OQ-17 ghi "không có chi nhánh Hải Phòng". VT (Vận tải Delta) có phải điểm khai Hải Phòng không? JobID hải quan gắn chi nhánh nào? | Kết nối API với Ecus (26/10/2025), mục 1, mục 2.1, sơ đồ mục 3.1 | Còn mở: chưa hỏi Delta |
+| OQ-46 | Tài liệu từ 10/2025: Delta đã làm việc với bên cung cấp Ecus chưa? Trong 137 khách, bao nhiêu khách thuộc nhóm 2, và bao nhiêu khách chọn EcusAuto hay làm tay? | Kết nối API với Ecus (26/10/2025), mục 2.2, 3.2 | Còn mở: chưa hỏi Delta |
 
 ## 12. Next Steps
 

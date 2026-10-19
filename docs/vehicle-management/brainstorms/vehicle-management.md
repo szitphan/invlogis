@@ -6,6 +6,7 @@ status_changed: 2026-10-20
 status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-20
 links:
+  - docs-input/tich-hop/vetc-api-cong-van-2026-09-02/vetc-api-cong-van-2026-09-02.md
   - docs-input/srs-cu/lg-srs-export.md
   - docs-input/srs-cu/srs-mobile/srs-mobile.md
   - docs-input/sop/vis-giam-sat-doi-xe/vis-giam-sat-doi-xe.md
@@ -15,6 +16,7 @@ links:
   - docs/_product/tenant-parameters.md
   - docs/vehicle-telematics/brainstorms/vehicle-telematics.md
   - docs/transport-dispatch/brainstorms/transport-dispatch.md
+  - docs-input/tich-hop/gps-tien-ich-de-xuat-2025-09-25/gps-tien-ich-de-xuat-2025-09-25.md
 ---
 
 # Quản lý phương tiện — hồ sơ xe, bàn giao, thu hồi và dữ liệu vận hành theo xe
@@ -74,10 +76,12 @@ Phần VIS gắn theo từng xe (km, dầu tồn, hút dầu, xe chạy ngoài L
 **Nhóm H — hồ sơ xe**
 - H1 [SRS v2.0] [Lõi] Hồ sơ xe 6 tab: Thông tin chung · Hàng hoá và thiết bị · Bàn giao, thu hồi · Sửa chữa · Định mức · Lịch nhắc. Sửa hồ sơ qua duyệt, có lịch sử thay đổi. Tab Sửa chữa, Định mức, Lịch nhắc chỉ hiện khi khách bật gói tương ứng. Yêu cầu cập nhật định mức nhiên liệu của xe, kể cả yêu cầu gửi từ Lệnh khi xe chưa có định mức (`transport-dispatch` I9), duyệt cùng quy trình sửa hồ sơ; nội dung định mức thuộc `fuel-allowance`.
 - H2 [SRS v2.0] [Lõi] Trạng thái xe theo người giữ: lái xe giữ (Đang hoạt động · Đang sửa chữa · Đang tạm giữ), công ty giữ (Sẵn sàng hoạt động · Đang sửa chữa).
-- H3 [Mới] [Lõi] Số thẻ ETC và mã thiết bị GPS trên hồ sơ xe, có lịch sử gắn và ngày hiệu lực, không trùng giữa các xe đang hoạt động. Dùng để ghép giao dịch thu phí và dữ liệu GPS với đúng xe.
+- H3 [Mới] [Lõi] Số thẻ ETC và mã thiết bị GPS trên hồ sơ xe, có lịch sử gắn và ngày hiệu lực, không trùng giữa các xe đang hoạt động. Thẻ ETC ghi thêm: tài khoản thu phí chứa thẻ, loại phí xe đăng ký (Loại 1 đến Loại 5), trạng thái thẻ (Đang hoạt động · Tạm khoá) — theo danh mục xe gửi đơn vị thu phí (Công văn VETC 21/09/2026). Đổi thẻ, đổi biển số (kể cả đổi biển trắng sang biển vàng), xe nhận chuyển chủ sở hữu đều ghi lịch sử có ngày hiệu lực. Dùng để ghép giao dịch thu phí và dữ liệu GPS với đúng xe; giao dịch ghép theo số thẻ và ngày hiệu lực, không theo biển số.
 - H4 [SOP to-be] [Lõi] Km hiện tại lấy từ GPS, điền vào ô "Số vận hành hiện tại" đang chờ dữ liệu ngoài. Lịch nhắc theo km ở `reminders` đọc số này.
 - H5 [SOP to-be] [Gói: Giám sát nhiên liệu] Dầu tồn hiện tại lấy từ cảm biến, điền vào thẻ "Dầu diesel tồn"; chỉ xe có cảm biến.
 - H6 [Mới] [Lõi] Khối "Vận hành" trên hồ sơ xe: km, dầu tồn, sự việc gần nhất (đổ dầu, hút dầu, chạy ngoài Lệnh, nổ máy ngủ), mở thẳng tới sự việc. Hoãn được nếu trễ go-live (review r17).
+- H7 [SOP+] [Lõi] Hồ sơ mooc ghi mã thiết bị GPS mooc như H3: lịch sử gắn, ngày hiệu lực, không trùng giữa các mooc đang hoạt động. Mooc không có thiết bị vẫn quản lý như thường (Đề xuất tiện ích GPS, mục 2).
+- H8 [SOP+] [Gói: Hàng lạnh] Máy phát điện là thiết bị gắn theo mooc, ghi ở tab "Hàng hoá và thiết bị" của mooc: mã máy phát, mã thiết bị GPS riêng (nếu có), ngày gắn. Tháo sang mooc khác thì ghi dòng gắn mới, giữ lịch sử; một máy phát chỉ gắn một mooc tại một thời điểm. Máy phát không có hồ sơ xe riêng, không bàn giao cho lái xe (Đề xuất tiện ích GPS, mục 3; user chốt). Tháo lắp ai khai: chờ khách (OQ-4).
 
 **Nhóm B — bàn giao, thu hồi**
 - B1 [SRS v2.0] [Lõi] Yêu cầu bàn giao hoặc thu hồi → duyệt → ký biên bản. Bàn giao cho lái xe hoặc giữa chi nhánh; ảnh xe, tình trạng hoạt động.
@@ -93,6 +97,7 @@ Phần VIS gắn theo từng xe (km, dầu tồn, hút dầu, xe chạy ngoài L
 - V3 [SOP to-be] [Lõi] Nổ máy ngủ ngoài Lệnh gắn lái xe đang giữ xe theo lịch sử bàn giao; lái xe thấy trong "Số liệu của tôi" (`transport-dispatch` I14).
 - V4 [SOP to-be] [Lõi] Báo cáo cuối kỳ theo xe, lái xe, chi nhánh, toàn đội: km theo GPS; nổ máy ngủ (số phút; số lít hao phí khi bật Gói Nhiên liệu).
 - V5 [SOP to-be] [Gói: Giám sát nhiên liệu] Báo cáo cuối kỳ: dầu tiêu hao, mức tiêu hao bình quân (l/100 km) so với định mức; dầu bị hút, có bản đồ vị trí.
+- V6 [SOP+] [Lõi] Báo cáo khai thác mooc theo kỳ: các đầu kéo đã kéo, các container đã chở, số giờ ghép với đầu kéo; với máy phát (khi bật Gói Hàng lạnh): mooc đã gắn, đầu kéo đi cùng, giờ chạy. Nguồn `vehicle-telematics` M2–M4; dùng cho khấu hao, lịch bảo dưỡng theo mooc.
 
 ### P1 — should have
 
@@ -289,6 +294,8 @@ Sự việc hút dầu, chạy ngoài Lệnh dùng vòng đời "sự việc c�
 | OQ-1 | Bàn giao xe đi cùng phiếu đổ đầy bình (dGas4), thu hồi đi cùng phiếu chốt dầu (dGas5): đúng không? Cho làm phiếu trước hay biên bản trước đều được, biên bản chỉ ký xong khi phiếu xong: có làm chậm giao xe không? | SRS LG v2.0, bảng liên quy trình (Bàn giao phương tiện, Thu hồi phương tiện) | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
 | OQ-2 | Lúc ký biên bản bàn giao, thu hồi mà GPS không có dữ liệu: lấy km lần đọc gần nhất, ghi kèm giờ đọc được không? | Chưa có trong tài liệu khách gửi | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
 | OQ-3 | Xe chạy ngoài Lệnh: những trường hợp nào không cảnh báo (Lệnh đã nhận, xe đang tới điểm đầu; về bãi sau Lệnh; đi đổ dầu có phiếu đang mở; đi xưởng có lệnh sửa chữa đang mở; đang bàn giao giữa chi nhánh)? Đi bao xa hoặc bao lâu thì cảnh báo? | VIS (08/10/2026), mục 3.1.3 Bước 4 (chạy xe ngoài lịch trình, việc riêng) | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-4 | Máy phát điện có hay tháo lắp giữa các mooc không? Khi tháo lắp ai khai (quản lý phương tiện hay lái xe trên App)? Có cần nhắc bảo dưỡng máy phát theo giờ chạy (`reminders`) không? | Đề xuất tiện ích GPS (25/9/2025), mục 3 | Còn mở: chưa hỏi Delta |
+| OQ-5 | Delta có file Excel danh mục xe và thẻ ETC (bản đã gửi VETC: biển số, số eTag, loại phí, trạng thái thẻ của 254 xe) để nhập ban đầu vào hồ sơ xe không? | Công văn VETC (21/09/2026), 4 danh mục đính kèm | Còn mở: chưa hỏi Delta |
 
 ## 12. Next Steps
 
