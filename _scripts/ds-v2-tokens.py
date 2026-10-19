@@ -5,7 +5,8 @@
   python3 _scripts/ds-v2-tokens.py --check   # không ghi; exit 1 nếu tokens.css lệch json hoặc cặp chữ/nền dưới ngưỡng
 
 Tên CSS = '--' + tên token thay '/' bằng '-' (neutral/100 → --neutral-100, color/bg/canvas → --color-bg-canvas).
-Quyết định: _workspace/decisions.md DEC-115, DEC-116, DEC-129…139.
+Màu theo khách: collection Brand, mỗi chế độ một dải; đặt data-brand="<slug>" trên thẻ gốc (mặc định than-chi).
+Quyết định: _workspace/decisions.md DEC-115, DEC-116, DEC-129…139, DEC-167, DEC-168.
 """
 import json
 import sys
@@ -109,6 +110,17 @@ def build(doc) -> str:
             L.append(f"  {css_name(k)}: {ref_or_value(val, 'px')};")
         L.append("}")
         L.append("")
+    b = c.get("Brand")
+    if b:
+        for i, mode in enumerate(b["modes"]):
+            slug = b["modeSlugs"][mode]
+            sel = b["cssModeSelector"].replace("{slug}", slug)
+            L.append(f"/* Brand — {mode} ({b['hue'][mode]}) · DEC-167, DEC-168 */")
+            L.append((":root, " if i == 0 else "") + sel + " {")
+            for k, v in b["color"].items():
+                L.append(f"  {css_name(k)}: {v[mode]};")
+            L.append("}")
+        L.append("")
     L.append(":root {")
     L.append("  /* Lớp nổi (DEC-137) */")
     L.append("  --elev-0: none;")
@@ -155,12 +167,33 @@ def report(doc):
     return rows, bad
 
 
+def brand_report(doc):
+    """Mỗi dải: chữ trắng trên 800, bậc 700 trên nền trắng, 800 trên 50 — cần ≥ 4.5."""
+    b = doc["collections"].get("Brand")
+    rows, bad = [], []
+    if not b:
+        return rows, bad
+    for mode in b["modes"]:
+        v = {k.split("/")[-1]: x[mode] for k, x in b["color"].items()}
+        r = (contrast("#FFFFFF", v["800"]), contrast(v["700"], "#FFFFFF"), contrast(v["800"], v["50"]))
+        low = min(r) < 4.5
+        rows.append(f"  {mode:11} trắng/800 {r[0]:5.2f} · 700/trắng {r[1]:5.2f} · 800/50 {r[2]:5.2f}{'  LOW' if low else ''}")
+        if low:
+            bad.append(mode)
+    return rows, bad
+
+
 def main():
     doc = load()
     css = build(doc)
     rows, bad = report(doc)
     print("Tương phản (Light):")
     print("\n".join(rows))
+    brows, bbad = brand_report(doc)
+    if brows:
+        print("Tương phản dải màu khách:")
+        print("\n".join(brows))
+    bad = bad + bbad
     if "--check" in sys.argv:
         stale = not OUT.exists() or OUT.read_text(encoding="utf-8") != css
         print("tokens.css:", "LỆCH json — chạy lại không có --check" if stale else "khớp json")

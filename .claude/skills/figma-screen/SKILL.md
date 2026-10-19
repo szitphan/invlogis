@@ -382,6 +382,11 @@ Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một
 **Lớp 1 — audit máy** (FAIL sửa hết trước khi sang lớp 2)
 
 1. **A1** · `figma_read layout_audit` từng artboard: tràn, bị cắt, chữ bị cắt ba chấm. Sửa hết lỗi chặn.
+   **A1 · Máy đo lề đều + bo đồng tâm** (DEC-165, DEC-194): đọc `_scripts/figma-gauge.js`, thay `ROOTS` bằng id các
+   artboard vừa vẽ, gửi toàn văn qua `use_figma` (chỉ đọc). `FAIL` ở khung tự dựng (khối có hình ở góc không đồng tâm;
+   thẻ, nhóm, khối phụ, khối tóm tắt, thẻ chọn có lề nhìn thấy 4 phía chênh > 1) → sửa rồi chạy lại. `WARN` (khung có nền khác,
+   hoặc lỗi nằm trong component thư viện) → không tự sửa component; chuyển nguyên văn cho `@visual-reviewer` ở lớp 2
+   và ghi vào báo cáo. Khung tên lạ cần đo → thêm id vào `PAD_IDS`.
 2. **A2** · `figma_read a11y_audit`: tương phản, vùng chạm, control thiếu tên. Các ngoại lệ đã được chấp
    nhận trong *Accessibility* của `design.md` thì **không** tính là lỗi, nhưng liệt kê là "đã biết".
 3. **A2** · Gọi skill `accessibility-review` (WCAG 2.1 AA) làm lớp kiểm thứ hai ngay sau `a11y_audit`, trước
@@ -438,7 +443,7 @@ Cần đổi nghiệp vụ → ghi "cần `/cr`", không tự sửa.
    (`Usability (AI): SKIPPED — …`), không in PASS.
 11. **Thị giác (agent):** gọi `@visual-reviewer` (Task) với bảng `screenId · slug · nodeId` + báo cáo A5
    của từng artboard. Agent chấm thứ tự mắt đọc, phân cấp màu, 60/30/10, nhóm và nhịp, dễ đọc, vị trí
-   nút; quyết giữ/chấp nhận từng WARN A5. Luôn gọi khi lớp 1 không còn FAIL.
+   nút; quyết giữ/chấp nhận từng WARN A5 và WARN của máy đo lề, bo góc. Luôn gọi khi lớp 1 không còn FAIL.
 
 ## Bước 7 — báo đã vẽ gì
 

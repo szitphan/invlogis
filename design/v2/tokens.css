@@ -1,5 +1,5 @@
 /* DS v2 tokens — FILE SINH RA từ design/v2/tokens.json bằng _scripts/ds-v2-tokens.py. KHÔNG sửa tay. */
-/* version 0.4.0 · 2026-10-19 */
+/* version 0.5.0 · 2026-10-20 */
 
 :root {
   /* Fonts (DEC-121) */
@@ -368,6 +368,119 @@
   --icon-size-md: 20px;
   --icon-size-lg: 24px;
   --icon-size-chip: 14px;
+}
+
+/* Brand — Than chì (mặc định) · DEC-167, DEC-168 */
+:root, [data-brand="than-chi"] {
+  --color-brand-50: #F5F5F5;
+  --color-brand-100: #EBEBEB;
+  --color-brand-200: #D9D9D9;
+  --color-brand-300: #BFBFBF;
+  --color-brand-400: #999999;
+  --color-brand-500: #737373;
+  --color-brand-600: #575757;
+  --color-brand-700: #404040;
+  --color-brand-800: #262626;
+  --color-brand-900: #171717;
+  --color-brand-950: #0A0A0A;
+}
+/* Brand — Xanh lá (154° (Delta #1B7B46)) · DEC-167, DEC-168 */
+[data-brand="xanh-la"] {
+  --color-brand-50: #F0F8F2;
+  --color-brand-100: #DFF1E3;
+  --color-brand-200: #C2E3CB;
+  --color-brand-300: #98CFA8;
+  --color-brand-400: #64B47F;
+  --color-brand-500: #239857;
+  --color-brand-600: #027C42;
+  --color-brand-700: #026535;
+  --color-brand-800: #004F28;
+  --color-brand-900: #00381B;
+  --color-brand-950: #00220E;
+}
+/* Brand — Xanh ngọc (190°) · DEC-167, DEC-168 */
+[data-brand="xanh-ngoc"] {
+  --color-brand-50: #EDF9F7;
+  --color-brand-100: #D9F1EF;
+  --color-brand-200: #B6E4E0;
+  --color-brand-300: #81D0CA;
+  --color-brand-400: #2DB6AF;
+  --color-brand-500: #0A938E;
+  --color-brand-600: #047773;
+  --color-brand-700: #03615D;
+  --color-brand-800: #024C49;
+  --color-brand-900: #003634;
+  --color-brand-950: #00201F;
+}
+/* Brand — Xanh dương (255°) · DEC-167, DEC-168 */
+[data-brand="xanh-duong"] {
+  --color-brand-50: #F0F6FE;
+  --color-brand-100: #E0ECFD;
+  --color-brand-200: #C4DBF9;
+  --color-brand-300: #9EC2F1;
+  --color-brand-400: #6FA3E5;
+  --color-brand-500: #4081D2;
+  --color-brand-600: #1D67BB;
+  --color-brand-700: #0A529F;
+  --color-brand-800: #003F80;
+  --color-brand-900: #002C5E;
+  --color-brand-950: #001A3D;
+}
+/* Brand — Chàm (272°) · DEC-167, DEC-168 */
+[data-brand="cham"] {
+  --color-brand-50: #F3F5FE;
+  --color-brand-100: #E5EBFD;
+  --color-brand-200: #CED8FA;
+  --color-brand-300: #ADBDF2;
+  --color-brand-400: #889BE6;
+  --color-brand-500: #6478D3;
+  --color-brand-600: #4B5DBC;
+  --color-brand-700: #3B4AA0;
+  --color-brand-800: #2C3882;
+  --color-brand-900: #1D2661;
+  --color-brand-950: #0E1442;
+}
+/* Brand — Tím (300°) · DEC-167, DEC-168 */
+[data-brand="tim"] {
+  --color-brand-50: #F7F4FD;
+  --color-brand-100: #EDE8FB;
+  --color-brand-200: #DED3F5;
+  --color-brand-300: #C7B4EB;
+  --color-brand-400: #AB90DB;
+  --color-brand-500: #8E6AC7;
+  --color-brand-600: #764EAF;
+  --color-brand-700: #613C94;
+  --color-brand-800: #4C2C78;
+  --color-brand-900: #371D59;
+  --color-brand-950: #220C3C;
+}
+/* Brand — Đỏ đô (18°) · DEC-167, DEC-168 */
+[data-brand="do-do"] {
+  --color-brand-50: #FEF3F3;
+  --color-brand-100: #FCE5E5;
+  --color-brand-200: #F7CDCD;
+  --color-brand-300: #EEABAC;
+  --color-brand-400: #DD8285;
+  --color-brand-500: #C65860;
+  --color-brand-600: #AD3946;
+  --color-brand-700: #912835;
+  --color-brand-800: #751A27;
+  --color-brand-900: #560D19;
+  --color-brand-950: #3A010A;
+}
+/* Brand — Cam đất (45°) · DEC-167, DEC-168 */
+[data-brand="cam-dat"] {
+  --color-brand-50: #FDF3EF;
+  --color-brand-100: #FBE6DD;
+  --color-brand-200: #F5D0C0;
+  --color-brand-300: #EBB096;
+  --color-brand-400: #DA8964;
+  --color-brand-500: #C26030;
+  --color-brand-600: #A94400;
+  --color-brand-700: #8A3600;
+  --color-brand-800: #6D2900;
+  --color-brand-900: #501B00;
+  --color-brand-950: #330D00;
 }
 
 :root {

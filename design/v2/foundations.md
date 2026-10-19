@@ -13,7 +13,7 @@ links:
 
 > Kết quả vòng 2/6, chốt 16–17/10/2026 trên trang phỏng vấn https://claude.ai/artifact/D5KS1PPdUih9dsajBo48vU
 > (DEC-119…139); bổ sung 19/10 từ phần khoảng cách, màu theo khách và vòng 4 (DEC-164…170, DEC-173, DEC-176,
-> DEC-179, DEC-192…194). File này là **luật dùng**. Giá trị máy đọc nằm ở `design/v2/tokens.json`; `tokens.css` sinh ra từ
+> DEC-179, DEC-192…194, DEC-196). File này là **luật dùng**. Giá trị máy đọc nằm ở `design/v2/tokens.json`; `tokens.css` sinh ra từ
 > json bằng `python3 _scripts/ds-v2-tokens.py`. Bảng trong file này lệch json thì **json thắng**.
 > Trên Figma: trang `🎨 DS · Foundations` (collection Primitives, Semantic, Platform; text style `type/*`; effect style `elev/*`).
 
@@ -196,8 +196,10 @@ Viền cần 3:1 (WCAG 1.4.11): `color/border/input` 5.43:1 trên `color/bg/surf
 Tương phản đo trên Figma (section Màu thương hiệu theo khách 6159:49228): chữ trắng trên bậc 800 từ 9,77:1 (Xanh lá) tới
 15,13:1 (Than chì); bậc 700 trên nền trắng từ 7,20:1; bậc 800 trên bậc 50 từ 9,03:1.
 
-Chưa có trong `tokens.json`: collection `Brand` (8 chế độ, mỗi chế độ một dải) và biến `color/brand/50…950`; thêm khi dựng
-theme theo khách (mục 13).
+Trong `tokens.json`: collection `Brand`, 8 chế độ (mỗi chế độ một dải), biến `color/brand/50…950`; Figma có collection
+`Brand` cùng tên chế độ. CSS: đặt `data-brand="<slug>"` trên thẻ gốc theo khách: `than-chi` (mặc định), `xanh-la`,
+`xanh-ngoc`, `xanh-duong`, `cham`, `tim`, `do-do`, `cam-dat`. Bậc 200–600 chưa có vai nên ẩn khỏi bảng chọn biến trên
+Figma. Chế độ Dark của dải chờ DEC-116.
 
 ## 4. Chữ
 
@@ -261,7 +263,7 @@ trên Figma hay không thì chưa chốt (mục 13).
 5. Máy đo: mỗi khối có hình nằm gần góc khung đạt khi lề ≥ R, hoặc hai lề của góc chênh ≤ 1 và R = r + lề ± 1.
    Mẫu và ma trận 15 trường hợp: Figma section Câu 12b (6246:14279).
 
-## 6. Khoảng cách (DEC-135, DEC-164, DEC-166, DEC-173, DEC-192, DEC-194)
+## 6. Khoảng cách (DEC-135, DEC-164, DEC-166, DEC-173, DEC-192, DEC-194, DEC-196)
 
 - Bảng gốc thang 4, 13 bậc, tên theo px: `space/0 · 2 · 4 · 6 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64`.
 - Lề trong component: `space/inset-xs · sm · md · lg · xl` = 4 · 8 · 12 · 16 · 24.
@@ -293,8 +295,8 @@ trên Figma hay không thì chưa chốt (mục 13).
 
 - Mọi số trên thang 4; DEC-164 bỏ ngoại lệ lề thẻ app 14. Không thêm số lẻ ngoài thang.
 - **Ô đầu dòng (DEC-164, app):** ô 24 cho icon 16 và 20, radio, ô chọn, cách chữ 8; ô 36 cho vòng icon, avatar, cách chữ 12.
-  Icon đầu dòng luôn đặt giữa ô, không đặt trần. Trừ icon đầu khối phụ, khối tóm tắt (DEC-194, gạch "Khối phụ" dưới)
-  và icon cuối dòng (mục 7, DEC-193). Token `layout/lead-slot` thêm vào `tokens.json` khi dựng Base / List Row.
+  Icon đầu dòng luôn đặt giữa ô, không đặt trần. Trừ khung có nền: icon đầu khối phụ, khối tóm tắt (DEC-194), icon đầu
+  ô tìm, ô nhập và radio thẻ chọn (DEC-196) chạm mép nội dung; và icon cuối dòng (mục 7, DEC-193). Token `layout/lead-slot` thêm vào `tokens.json` khi dựng Base / List Row.
 - **Form (DEC-166):** đặt trên nền trang (nhóm bằng tiêu đề nhóm, web cách nhau 32) hoặc mỗi nhóm một thẻ (web lề 24
   = `space/inset-xl`, app theo `layout/card-padding`); người vẽ chọn theo màn.
 - **Tiêu đề (DEC-192):** tiêu đề màn → nội dung `layout/title-gap`; tiêu đề khối → nội dung khối 12 (`space/gap-md`).
@@ -307,8 +309,10 @@ trên Figma hay không thì chưa chốt (mục 13).
 - **Tab (DEC-161, DEC-164, DEC-192):** tab chip app cao 36 (`control/height/sm`): lề `tab/padding-x`, phía icon
   `tab/padding-x-icon`, icon → nhãn `control/icon-gap`, nhãn → số đếm 6 (`space/6`), các tab cách `tab/gap`. Tab gạch web
   cao 40 (`control/height/lg`), chữ canh giữa, gạch 2 phủ hết bề ngang tab.
-- **Ô có icon (DEC-164, DEC-192, DEC-193):** web phía icon 12 → 8 (icon đầu, icon cuối), icon 14 cách chữ 8. App icon đầu
-  không lùi: lề 16 → ô 24 → chữ K3 64. Icon cuối ô theo đường K bên phải (mục 7).
+- **Ô có icon (DEC-192, DEC-193, DEC-196):** web phía icon 12 → 8 (icon đầu, icon cuối), icon 14 cách chữ 8. App icon đầu:
+  khung icon 16 chạm mép nội dung (cách mép ô 16), chữ cách icon 16 → K3 64 (ô ở K1) hoặc K4 80 (ô đặt trong thẻ). Icon cuối
+  ô theo đường K bên phải (mục 7). Nút lọc trong ô tìm giữ ôm sát (DEC-165 luật 3: lề 4, bo đồng tâm).
+- **Thẻ chọn app (DEC-184, DEC-196):** lề 16; radio 20 chạm mép nội dung (cách mép thẻ 16), chữ cách radio 12 → K3 64.
 - **Khối phụ trong thẻ, khối tóm tắt trong sheet (DEC-194):** nền `color/bg/muted`, bo `radius/inner`, lề
   `layout/card-padding` 16 đều 4 phía. Khối phụ trong thẻ (đặt ở K2 32) có mép nội dung trái **K2b 48**, phải 345; khối tóm
   tắt trong sheet (đặt ở K1 16) có mép nội dung K2 32. Không icon: chữ ở mép nội dung. Có icon: khung icon 16 chạm mép nội
@@ -390,4 +394,3 @@ và mục menu đang chọn (web) giữ icon viền; 7 icon nghiệp vụ tự v
 - Có bật Corner smoothing (góc liền mạch kiểu iOS) cho thẻ, sheet trên app không.
 - Quyền publish thư viện của gói Figma (DEC-110).
 - Việc còn mở của icon: `design/v2/icons.md` mục 10.
-- Collection `Brand` (8 dải × 11 bậc) trong `tokens.json`, biến Figma và cách gắn theo khách (mục 3.5).

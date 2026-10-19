@@ -30,7 +30,7 @@ loãng điểm nhấn không).
 
 | Mã | Công cụ | Kiểm |
 |---|---|---|
-| A1 | `figma_read layout_audit` | Tràn, bị cắt, chữ ba chấm; styleHints: padding chật, bo góc lệch |
+| A1 | `figma_read layout_audit` + `_scripts/figma-gauge.js` (`use_figma`, chỉ đọc) | Tràn, bị cắt, chữ ba chấm; styleHints: padding chật, bo góc lệch; lề nhìn thấy đều 4 phía, bo đồng tâm (DEC-165, DEC-194): khung tự dựng FAIL, trong component thư viện WARN |
 | A2 | `figma_read a11y_audit` + skill `accessibility-review` | Tương phản, vùng chạm, control thiếu tên, WCAG 2.1 AA |
 | A3 | `figma.auditDesignSystem` | Màu/chữ/khoảng cách gắn token; giá trị off-system |
 | A4 | Do's & Don'ts tự rà + `status-chip-lint.py` | 1 Primary mỗi nhóm, trạng thái có chữ/icon, chip trạng thái |
@@ -97,7 +97,7 @@ In tách 2 lớp, không gộp "PASS":
 
 ```
 Lớp 1 — audit máy
-  A1 layout: 0 chặn · A2 a11y: 2 đã biết · A3 DS: 1.00 · A4 Do's: OK · A5 visual: 0 FAIL / 3 WARN (nhận diện 92%)
+  A1 layout: 0 chặn · lề/bo: 0 FAIL / 2 WARN · A2 a11y: 2 đã biết · A3 DS: 1.00 · A4 Do's: OK · A5 visual: 0 FAIL / 3 WARN (nhận diện 92%)
 Lớp 2 — reviewer
   Khớp đặc tả (@uxui-reviewer): 0 blocking / 1 warning
   Usability (AI): 3 tác vụ · 0 blocking / 2 warning | SKIPPED — <lý do>
