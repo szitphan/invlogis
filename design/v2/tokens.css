@@ -1,5 +1,5 @@
 /* DS v2 tokens — FILE SINH RA từ design/v2/tokens.json bằng _scripts/ds-v2-tokens.py. KHÔNG sửa tay. */
-/* version 0.6.1 · 2026-10-20 */
+/* version 0.9.0 · 2026-10-20 */
 
 :root {
   /* Fonts (DEC-121) */
@@ -272,6 +272,37 @@
   --nav-padding-x: var(--space-4);
   --nav-item-padding-y: var(--space-4);
   --nav-scan-size: 56px;
+  --chip-height: 24px;
+  --chip-padding-x: var(--space-12);
+  --chip-padding-x-icon: var(--space-8);
+  --chip-icon-gap: var(--space-4);
+  --chip-dot-gap: var(--space-6);
+  --chip-dot-size: 8px;
+  --avatar-size-sm: 24px;
+  --avatar-size-md: 36px;
+  --avatar-size-lg: 48px;
+  --avatar-status-size-sm: 6px;
+  --avatar-status-size-md: 10px;
+  --avatar-status-size-lg: 12px;
+  --avatar-edit-size-md: 20px;
+  --avatar-edit-size-lg: 24px;
+  --avatar-size-xl: 64px;
+  --avatar-size-xxl: 88px;
+  --avatar-status-size-xl: 14px;
+  --avatar-status-size-xxl: 16px;
+  --avatar-edit-size-xl: 28px;
+  --avatar-edit-size-xxl: 32px;
+  --avatar-group-overlap-sm: 6px;
+  --avatar-group-overlap-md: 8px;
+  --avatar-group-overlap-lg: 12px;
+  --avatar-ring: 2px;
+  --tooltip-padding-x: var(--space-8);
+  --tooltip-padding-y: var(--space-4);
+  --tooltip-radius: var(--radius-8);
+  --tooltip-max-width: 240px;
+  --tooltip-offset: 4px;
+  --tooltip-arrow-w: 8px;
+  --tooltip-arrow-h: 4px;
   --focus-width: 2px;
   --focus-offset: 2px;
   --type-display-size: 32px;
@@ -343,6 +374,37 @@
   --nav-padding-x: var(--space-4);
   --nav-item-padding-y: var(--space-4);
   --nav-scan-size: 56px;
+  --chip-height: 26px;
+  --chip-padding-x: var(--space-12);
+  --chip-padding-x-icon: var(--space-8);
+  --chip-icon-gap: var(--space-4);
+  --chip-dot-gap: var(--space-6);
+  --chip-dot-size: 8px;
+  --avatar-size-sm: 24px;
+  --avatar-size-md: 36px;
+  --avatar-size-lg: 48px;
+  --avatar-status-size-sm: 6px;
+  --avatar-status-size-md: 10px;
+  --avatar-status-size-lg: 12px;
+  --avatar-edit-size-md: 20px;
+  --avatar-edit-size-lg: 24px;
+  --avatar-size-xl: 64px;
+  --avatar-size-xxl: 88px;
+  --avatar-status-size-xl: 14px;
+  --avatar-status-size-xxl: 16px;
+  --avatar-edit-size-xl: 28px;
+  --avatar-edit-size-xxl: 32px;
+  --avatar-group-overlap-sm: 6px;
+  --avatar-group-overlap-md: 8px;
+  --avatar-group-overlap-lg: 12px;
+  --avatar-ring: 2px;
+  --tooltip-padding-x: var(--space-8);
+  --tooltip-padding-y: var(--space-4);
+  --tooltip-radius: var(--radius-8);
+  --tooltip-max-width: 240px;
+  --tooltip-offset: 4px;
+  --tooltip-arrow-w: 8px;
+  --tooltip-arrow-h: 4px;
   --focus-width: 2px;
   --focus-offset: 2px;
   --type-display-size: 34px;
@@ -507,6 +569,21 @@
   --button-bg-disabled: var(--color-action-secondary);
   --button-fg-disabled: var(--color-text-tertiary);
   --button-focus-danger: var(--color-action-danger);
+  --avatar-bg: var(--color-brand-100);
+  --avatar-fg: var(--color-brand-800);
+  --avatar-status-online: var(--color-chip-green-fg);
+  --avatar-status-busy: var(--color-chip-orange-fg);
+  --avatar-status-away: var(--color-chip-yellow-fg);
+  --avatar-status-offline: var(--color-chip-gray-fg);
+  --avatar-upload-border: var(--color-border-input);
+  --avatar-upload-fg: var(--color-text-secondary);
+  --avatar-scrim: var(--color-overlay-scrim);
+  --avatar-edit-bg: var(--button-bg-primary);
+  --avatar-edit-fg: var(--button-fg-primary);
+  --avatar-overflow-bg: var(--color-bg-muted);
+  --avatar-overflow-fg: var(--color-text-secondary);
+  --tooltip-bg: var(--color-bg-inverse);
+  --tooltip-fg: var(--color-text-inverse);
 }
 
 :root {
@@ -547,3 +624,4 @@
 .type-caption { font: 400 var(--type-caption-size)/var(--type-caption-line-height) var(--font-body); }
 .type-code { font: 400 var(--type-code-size)/var(--type-code-line-height) var(--font-code); }
 .type-caption-caps { font: 500 var(--type-caption-size)/var(--type-caption-line-height) var(--font-body); text-transform: uppercase; letter-spacing: 0.04em; }
+.type-caption-strong { font: 600 var(--type-caption-size)/var(--type-caption-line-height) var(--font-body); }

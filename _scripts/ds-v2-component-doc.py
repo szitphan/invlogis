@@ -17,7 +17,7 @@ BEGIN, END = "<!-- auto:begin -->", "<!-- auto:end -->"
 COLOR_COLS = [("bg", "Nền"), ("border", "Viền"), ("text", "Chữ"), ("icon", "Icon"), ("effect", "Vòng focus")]
 METRIC_COLS = [("height", "Cao"), ("width", "Rộng"), ("paddingLeft", "Lề trái"), ("paddingRight", "Lề phải"),
                ("paddingTop", "Lề trên"), ("paddingBottom", "Lề dưới"), ("itemSpacing", "Khoảng giữa"),
-               ("topLeftRadius", "Bo"), ("icon", "Cỡ icon")]
+               ("topLeftRadius", "Bo"), ("maxWidth", "Rộng tối đa"), ("icon", "Cỡ icon")]
 # Trường mà None nghĩa là "không có phần đó" (gộp được với giá trị khác), không phải "trong suốt".
 PRESENCE = {"text", "icon"}
 
@@ -69,6 +69,8 @@ def reduce_axes(table, keys):
 def cell(v, transparent=False):
     if v is None:
         return "trong suốt" if transparent else "—"
+    if v == "IMAGE":
+        return "ảnh (phủ kín)"
     return f"`{v}`" if isinstance(v, str) and "/" in v else str(v)
 
 
@@ -83,7 +85,7 @@ def render(d):
     L += ["### Thuộc tính", "", "| Thuộc tính | Loại | Mặc định | Giá trị |", "|---|---|---|---|"]
     kind = {"VARIANT": "Biến thể", "TEXT": "Chữ", "BOOLEAN": "Bật tắt", "INSTANCE_SWAP": "Đổi component", "SLOT": "Slot"}
     for p in d["props"]:
-        L.append(f"| {p['name']} | {kind.get(p['type'], p['type'])} | {p['default']} | {' · '.join(p['options']) if p['options'] else '—'} |")
+        L.append(f"| {p['name']} | {kind.get(p['type'], p['type'])} | {({True: 'bật', False: 'tắt'}.get(p['default'], p['default']) if isinstance(p['default'], bool) else p['default'])} | {' · '.join(p['options']) if p['options'] else '—'} |")
     L += ["", f"{d['variants']} biến thể · trục {' × '.join(d['axes'])}.", ""]
     ck, colors = reduce_axes(d["colors"], d["colorKeys"])
     cols = [c for c in COLOR_COLS if any(v.get(c[0]) is not None for v in colors.values())]

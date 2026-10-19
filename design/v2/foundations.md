@@ -36,7 +36,7 @@ Số của các hệ lấy từ trang gốc ngày 16/10/2026 (bảng nguồn tr�
 | Gốc | `Primitives` | Value | `neutral/900`, `space/16`, `radius/12` | Chỉ token tầng trên trỏ tới; ẩn khỏi bảng chọn |
 | Nghĩa | `Semantic` | Light, Dark | `color/text/secondary` | Component, màn |
 | Nền tảng | `Platform` | Web, Mobile | `radius/card`, `type/body/size`, `layout/screen-inset` | Component, màn |
-| Component | `Component` | Value | `button/bg/primary`, `button/fg/danger` (DEC-174, DEC-197) | Component nhiều trạng thái |
+| Component | `Component` | Value | `button/bg/primary`, `button/fg/danger` (DEC-174, DEC-197), `avatar/bg` (DEC-201), `tooltip/bg` (DEC-206) | Component nhiều trạng thái |
 | Theo khách | `Brand` | 8 dải | `color/brand/800` | Component, màn, theo vai mục 3.5 |
 
 - Component và màn **không gắn Primitives, không ghi mã màu trần**. Cần màu mới thì thêm token nghĩa.
@@ -176,7 +176,7 @@ Viền cần 3:1 (WCAG 1.4.11): `color/border/input` 5.43:1 trên `color/bg/surf
 
 | Bậc của dải | Vai trên màn |
 |---|---|
-| `color/brand/800` | Công tắc bật, ô chọn, radio và viền chỗ đang chọn, gạch tab đang chọn, thanh tiến độ |
+| `color/brand/800` | Công tắc bật, ô chọn, radio và viền chỗ đang chọn, gạch tab đang chọn, thanh tiến độ, chữ và icon avatar |
 | `color/brand/900` | Rê chuột trên phần mang màu khách |
 | `color/brand/950` | Đang bấm phần mang màu khách |
 | `color/brand/700` | Chữ liên kết, mã chứng từ |
@@ -223,7 +223,8 @@ Tiêu đề **Cal Sans** (một độ đậm), chữ thường **Inter**, mã **
 | `code` | JetBrains Mono | 400 | 12 / 16 | 13 / 18 | Mã lệnh, mã chứng từ |
 
 - Text style Figma tên `type/{vai}`, gắn cỡ và dòng vào biến `Platform`, nên một style dùng cho cả web và app.
-  Thêm `type/caption-caps` cho ngoại lệ viết hoa (mục 4.3).
+  Thêm `type/caption-caps` cho ngoại lệ viết hoa (mục 4.3). Thêm `type/caption-strong` (cỡ, dòng như caption; Inter 600)
+  cho chữ chip trạng thái Soft (DEC-200).
 - Web gần trùng Atlassian (đọc 14, phụ 12, tiêu đề trang 24). App đọc 15, nằm giữa Material (14) và HIG (17).
 - `title-2` 22 trên app là tiêu đề sheet (Material Title Large và HIG Title 2 cùng là 22). `display` cho số lớn.
 
@@ -293,6 +294,15 @@ trên Figma hay không thì chưa chốt (mục 13).
 | `nav/padding-x` | — (chỉ app) | 4 | Lề trong thanh điều hướng |
 | `nav/item-padding-y` | — (chỉ app) | 4 | Lề trên dưới mục, nên nền mục đang chọn cao 56 |
 | `nav/scan-size` | — (chỉ app) | 56 | Nút Quét mã giữa thanh |
+| `chip/height` | 24 | 26 | Cao chip trạng thái (DEC-200) |
+| `chip/padding-x` · `chip/padding-x-icon` | 12 · 8 | 12 · 8 | Lề phía chữ · phía icon của chip Soft |
+| `chip/icon-gap` | 4 | 4 | Icon → chữ chip Soft |
+| `chip/dot-gap` · `chip/dot-size` | 6 · 8 | 6 · 8 | Chấm → chữ, cỡ chấm của chip Dot |
+| `avatar/size/sm · md · lg · xl · xxl` | 24 · 36 · 48 · 64 · 88 | 24 · 36 · 48 · 64 · 88 | Cỡ avatar (DEC-201, DEC-203); MD 36 khớp ô đầu dòng 36 (DEC-164); XL, XXL cho ảnh đại diện đổi được |
+| `avatar/status-size/sm · md · lg · xl · xxl` | 6 · 10 · 12 · 14 · 16 | 6 · 10 · 12 · 14 · 16 | Chấm trạng thái avatar, thêm viền trắng 2 (DEC-204) |
+| `avatar/edit-size/md · lg · xl · xxl` | 20 · 24 · 28 · 32 | 20 · 24 · 28 · 32 | Nút đổi ảnh trên avatar (SM không có; DEC-203) |
+| `avatar/group-overlap/sm · md · lg` · `avatar/ring` | 6 · 8 · 12 · 2 | 6 · 8 · 12 · 2 | Avatar Group: lùi đè ¼ đường kính, viền trắng 2; bước giữa hai tâm = cỡ + 4 − lùi = 22 · 32 · 40 (DEC-205) |
+| `tooltip/padding-x · padding-y` · `tooltip/offset` · `tooltip/max-width` | 8 · 4 · 4 · 240 | 8 · 4 · 4 · 240 | Tooltip: lề, cách đối tượng, rộng tối đa; bo `tooltip/radius` 8, mũi tên 8 × 4 (DEC-206) |
 
 - Mọi số trên thang 4; DEC-164 bỏ ngoại lệ lề thẻ app 14. Không thêm số lẻ ngoài thang.
 - **Ô đầu dòng (DEC-164, app):** ô 24 cho icon 16 và 20, radio, ô chọn, cách chữ 8; ô 36 cho vòng icon, avatar, cách chữ 12.
@@ -380,6 +390,11 @@ Luật icon ở `design/v2/icons.md`: Lucide 1.58.0 cho web và app; nét 1.8 tr
 cỡ theo Platform `icon/size/sm · md · lg · chip` (web 14 · 16 · 20 · 14, app 16 · 20 · 24 · 14) — trên Figma chọn biến thể
 Size theo bảng, đổi chế độ Platform không tự đổi cỡ icon; bản tô cho cảnh báo, lỗi và trạng thái bật; tab đang chọn (app)
 và mục menu đang chọn (web) giữ icon viền; 7 icon nghiệp vụ tự vẽ; bảng icon theo nghĩa.
+
+**Cấu trúc lớp trên Figma (DEC-202):** mỗi icon mỗi cỡ là **một lớp nét tên `Vector`** (bản tô thêm một lớp `Hình tô`).
+Component tô màu icon bằng cách đè màu lớp `Vector`; nhờ cùng một lớp cùng tên nên đổi icon qua thuộc tính vẫn giữ màu. Icon mới
+phải gộp nét thành một lớp trước khi đưa vào thư viện. Lớp `Hình tô` không theo màu khi đổi icon: trong component dùng bản viền,
+cần bản tô thì gán màu lớp tô trên instance.
 
 ## 12. Luật gắn token khi vẽ và code
 

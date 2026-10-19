@@ -11,8 +11,9 @@ links:
 
 # Base / Button
 
-> L1 · phiên bản 0.1.0 · Nháp · người phụ trách @szitphan · Figma `Base / Button` (6373:491, trang L1 · Base), khung
-> tài liệu 6379:525 (hình nên / không nên, cấu tạo phóng 2×) · DEC-172…177, DEC-192, DEC-197…199
+> L1 · phiên bản 0.2.0 · Nháp · người phụ trách @szitphan · Figma `Base / Button` (6373:491, trang L1 · Base), xem nhanh
+> 6374:491, khung tài liệu 6379:525 (hình nên / không nên, cấu tạo phóng 2×) · DEC-172…177, DEC-192, DEC-197…199, DEC-206 ·
+> đi cùng [Tooltip](tooltip.md)
 
 ## Khi dùng
 
@@ -25,6 +26,11 @@ links:
   quen thuộc; luôn có tên cho trình đọc màn hình và tooltip trên web.
 - **Size:** app LG 52 cho nút chân màn, MD 42 cho nút trong thẻ, sheet và nút icon, SM 36 cho nút nhỏ. Web MD 32 mặc định,
   SM 28 trong hàng bảng, LG 40 ở màn đăng nhập và nút cần nổi (DEC-173).
+- **Web hay Mobile:** một component cho cả hai, không có biến thể Platform. Cao, lề, bo đọc từ biến collection Platform;
+  khung chứa (màn, thẻ) đặt mode Web hoặc Mobile thì nút tự đổi cỡ: SM 28 → 36, MD 32 → 42, LG 40 → 52. Trên Figma xem
+  mode ở panel bên phải của khung chứa, mục Layer → Platform. Khung xem nhanh 6374:491 có nhãn Web, Mobile từng hàng.
+- **Tooltip:** chỉ web. Bật `Tooltip` cho nút Icon Only để hiện tên hành động khi rê chuột hoặc focus ("Thêm lệnh");
+  tooltip nổi phía trên nút, cách 4. Nút có chữ thì không cần tooltip (DEC-206).
 - **Thứ tự** (DEC-088): chân dialog `[Phụ][Chính]` canh phải; hàng nút form trong trang `[Chính][Phụ]` canh trái.
 
 ## Nên và không nên
@@ -37,7 +43,8 @@ Hình minh hoạ ở khung tài liệu cạnh component trên Figma.
 
 ## Trạng thái
 
-Default · Hover (chỉ web) · Pressed · Focus (vòng 2 cách 2; Danger màu đỏ, DEC-198) · Disabled (một kiểu xám, không làm mờ,
+Default · Hover (chỉ web) · Pressed · Focus (vòng 2 cách 2; Danger màu đỏ, DEC-198; vẽ bằng lớp con "Vòng focus" đặt
+tự do sau nút, không cắt khung, để vòng không bị cắt khi nút nằm trong khung cắt) · Disabled (một kiểu xám, không làm mờ,
 DEC-174) · Loading (vòng quay + "Đang lưu…", giữ nguyên cỡ nút, bấm thêm không làm gì). Không khoá nút gửi form: bấm khi
 thiếu dữ liệu thì báo lỗi ngay tại ô (DEC-177).
 
@@ -58,8 +65,9 @@ Không viết hoa toàn bộ. Khi đang tải: "Đang lưu…", "Đang gửi…"
 | 2.5.5 Kích thước đích (AAA, ≥ 44) | App SM 36, MD 42: code thêm vùng chạm vô hình 44 (foundations mục 9) |
 | 4.1.2 Tên, vai trò | Icon Only bắt buộc `aria-label`; Loading đặt `aria-busy`, nhãn "Đang lưu…" để trình đọc báo |
 | 2.1.1 Bàn phím | Enter, Space kích hoạt; theo thứ tự Tab |
+| 1.4.13 Nội dung hiện khi rê, focus | ✓ tooltip: hiện cả khi focus bằng bàn phím, Esc đóng được, rê lên tooltip không tắt |
 | 2.3.3 Chuyển động (AAA) | Vòng quay đứng yên khi người dùng bật giảm chuyển động |
-| **Điểm** | **8/9 đạt** · cần cải thiện: Danger lúc bấm 4,27 (giữ màu đã duyệt vì trạng thái chỉ thoáng qua, DEC-199) |
+| **Điểm** | **9/10 đạt** · cần cải thiện: Danger lúc bấm 4,27 (giữ màu đã duyệt vì trạng thái chỉ thoáng qua, DEC-199) |
 
 ## Dùng ở đâu
 
@@ -67,7 +75,7 @@ Màn mẫu Câu 8d (nút chân sheet, nút trong thẻ, nút icon đầu màn); 
 
 ## Tên trong code
 
-`<Button variant="primary|secondary|ghost|danger|outline" size="sm|md|lg" icon={…} iconOnly loading>`; biến CSS
+`<Button variant="primary|secondary|ghost|danger|outline" size="sm|md|lg" icon={…} iconOnly loading tooltip="Thêm lệnh">`; biến CSS
 `--button-*` (màu, `tokens.css` khối Component), `--control-*` (cao, lề), `--radius-control`, `--icon-size-sm`.
 
 ## Cấu tạo, thuộc tính, token
@@ -82,6 +90,7 @@ Màn mẫu Câu 8d (nút chân sheet, nút trong thẻ, nút icon đầu màn); 
 | Label | Chữ | Lưu | — |
 | Loading Label | Chữ | Đang lưu… | — |
 | Icon | Đổi component | icon/plus · Size=16 | — |
+| Tooltip | Bật tắt | tắt | — |
 | Type | Biến thể | Primary | Primary · Secondary · Ghost · Danger · Outline |
 | Content | Biến thể | Label | Label · Leading Icon · Icon Only |
 | Size | Biến thể | SM | SM · MD · LG |
