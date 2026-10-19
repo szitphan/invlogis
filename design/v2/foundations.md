@@ -1,7 +1,7 @@
 ---
 type: design-foundations
 status: draft
-updated: 2026-10-17
+updated: 2026-10-19
 links:
   - design/v2/architecture.md
   - design/v2/tokens.json
@@ -12,7 +12,8 @@ links:
 # Design System v2 — nền tảng (Foundations)
 
 > Kết quả vòng 2/6, chốt 16–17/10/2026 trên trang phỏng vấn https://claude.ai/artifact/D5KS1PPdUih9dsajBo48vU
-> (DEC-119…139). File này là **luật dùng**. Giá trị máy đọc nằm ở `design/v2/tokens.json`; `tokens.css` sinh ra từ
+> (DEC-119…139); bổ sung 19/10 từ phần khoảng cách, màu theo khách và vòng 4 (DEC-164…170, DEC-173, DEC-176,
+> DEC-179). File này là **luật dùng**. Giá trị máy đọc nằm ở `design/v2/tokens.json`; `tokens.css` sinh ra từ
 > json bằng `python3 _scripts/ds-v2-tokens.py`. Bảng trong file này lệch json thì **json thắng**.
 > Trên Figma: trang `🎨 DS · Foundations` (collection Primitives, Semantic, Platform; text style `type/*`; effect style `elev/*`).
 
@@ -49,7 +50,8 @@ Số của các hệ lấy từ trang gốc ngày 16/10/2026 (bảng nguồn tr�
 
 11 bậc tên 50–950, tính bằng OKLCH để sáng đều theo mắt. Các mốc giữ đúng giá trị đã duyệt: neutral/100 nền,
 300 viền ô nhập, 400 chữ gợi ý, 500 chữ phụ, 900 chữ; mỗi sắc chip nền bậc 50, chữ bậc 700.
-Màu nhấn là than chì #262626 (DEC-119), không có bảng 11 bậc.
+Nút chính là than chì #262626 (DEC-119). Màu theo khách là thang riêng 11 bậc của từng khách, xem mục 3.5
+(DEC-167, DEC-168).
 
 | Sắc | 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -72,7 +74,8 @@ Thêm: `white` #FFFFFF, `alpha/neutral-950-50` (#070C16 độ mờ 50%, cho nề
 - Bậc 400 chỉ cho chữ gợi ý trong ô và icon tắt (2,58:1), không dùng cho nội dung.
 - Chip: nền bậc 50, chữ và icon bậc 700; riêng chip xám nền neutral/100, chữ neutral/600 (DEC-130). Kiểu chip
   (nền nhạt + icon, hay chấm + chữ) chốt luật ở vòng 4 (DEC-126).
-- Màu khách chỉ tô ô logo, không vào token (DEC-041, DEC-119).
+- Màu khách đi qua dải riêng của khách và chỉ vào các vai ở mục 3.5 (DEC-167…169); chip trạng thái không đổi
+  theo khách; ô logo luôn đúng màu logo khách.
 
 ### 3.3 Token nghĩa (DEC-131)
 
@@ -85,7 +88,7 @@ Material 3 không có vai thành công, cảnh báo, thông tin: mình tự thê
 | `color/bg/surface` | `white` | Thẻ, bảng, màn danh sách | secondarySystemGroupedBackground | surface-container-lowest | `elevation.surface` |
 | `color/bg/muted` | `neutral/100` | Ô nhập mobile, khối phụ trong thẻ | tertiarySystemFill | surface-container-highest | `color.background.input` |
 | `color/bg/hover` | `neutral/50` | Rê chuột dòng bảng, mục menu | — (iOS không có hover) | lớp trạng thái on-surface 8% | `color.background.neutral.subtle.hovered` |
-| `color/bg/selected` | `neutral/100` | Dòng, mục đang chọn (kèm vạch than chì) | systemFill | secondary-container | `color.background.selected` |
+| `color/bg/selected` | `neutral/100` | Dòng, mục đang chọn (kèm vạch than chì); khách có màu thì theo dải, mục 3.5 | systemFill | secondary-container | `color.background.selected` |
 | `color/bg/inverse` | `neutral/900` | Toast, tooltip | — | inverse-surface | `color.background.inverse.subtle` |
 | `color/text/primary` | `neutral/900` | Chữ chính | label | on-surface | `color.text` |
 | `color/text/secondary` | `neutral/500` | Chữ phụ, nhãn trường | secondaryLabel | on-surface-variant | `color.text.subtle` |
@@ -94,14 +97,16 @@ Material 3 không có vai thành công, cảnh báo, thông tin: mình tự thê
 | `color/icon/primary` | `neutral/700` | Icon đi cùng chữ chính | label | on-surface | `color.icon` |
 | `color/icon/secondary` | `neutral/500` | Chevron, icon trong ô tìm | secondaryLabel | on-surface-variant | `color.icon.subtle` |
 | `color/border/default` | `neutral/200` | Viền thẻ, kẻ bảng | separator | outline-variant | `color.border` |
-| `color/border/strong` | `neutral/300` | Viền ô nhập web | opaqueSeparator | outline | `color.border.input` |
-| `color/border/focus` | `charcoal/900` | Vòng focus 2px | tint (vòng focus bàn phím) | secondary (vòng focus) | `color.border.focused` |
+| `color/border/strong` | `neutral/300` | Viền tách khối đậm hơn mặc định; ô nhập dùng `color/border/input` | opaqueSeparator | outline | `color.border.bold` |
+| `color/border/input` | `neutral/500` | Viền ô nhập web và app, viền radio chưa chọn (DEC-179) | separator (đậm) | outline | `color.border.input` |
+| `color/border/focus` | `charcoal/900` | Vòng focus 2px, viền ô đang gõ 2px; than chì cho mọi khách (DEC-170) | tint (vòng focus bàn phím) | secondary (vòng focus) | `color.border.focused` |
 | `color/action/primary` | `charcoal/900` | Nút chính, tab chip đang chọn | tintColor · accentColor | primary | `color.background.brand.bold` |
 | `color/action/primary-hover` | `charcoal/800` | Rê chuột nút chính | — | primary + lớp on-primary 8% | `color.background.brand.bold.hovered` |
 | `color/action/primary-pressed` | `charcoal/950` | Đang bấm nút chính | — (hệ thống tự làm tối) | primary + lớp on-primary 10% | `color.background.brand.bold.pressed` |
 | `color/action/secondary` | `neutral/100` | Nút phụ | secondarySystemFill | secondary-container | `color.background.neutral` |
 | `color/action/secondary-hover` | `neutral/200` | Rê chuột nút phụ | — | secondary-container + lớp 8% | `color.background.neutral.hovered` |
-| `color/action/danger` | `red/700` | Nút xoá, huỷ lệnh | systemRed | error | `color.background.danger.bold` |
+| `color/action/danger` | `red/700` | Chữ, icon nút Danger: xoá, huỷ lệnh (DEC-176) | systemRed | error | `color.text.danger` |
+| `color/action/danger-subtle` | `red/50` | Nền nút Danger: nền đỏ nhạt, chữ đỏ (DEC-176) | systemRed (nhạt) | error-container | `color.background.danger` |
 | `color/status/success-bg` | `green/50` | Thông báo thành công: nền | systemGreen | — (không có, tự thêm) | `color.background.success` |
 | `color/status/success-fg` | `green/700` | Thông báo thành công: chữ, icon | systemGreen | — (không có, tự thêm) | `color.text.success` |
 | `color/status/warning-bg` | `yellow/50` | Cảnh báo: nền | systemOrange · systemYellow | — (không có, tự thêm) | `color.background.warning` |
@@ -141,6 +146,7 @@ Máy đo mỗi lần chạy `python3 _scripts/ds-v2-tokens.py --check`; dưới 
 | 4.92:1 | `color/text/secondary` trên `color/bg/muted` |
 | 15.13:1 | `color/text/inverse` trên `color/action/primary` |
 | 6.57:1 | `color/text/inverse` trên `color/action/danger` |
+| 5.76:1 | `color/action/danger` trên `color/action/danger-subtle` (nút Danger) |
 | 16.09:1 | `color/text/primary` trên `color/action/secondary` |
 | 2.58:1 | `color/text/tertiary` trên `color/bg/surface` (chỉ báo cáo: chữ gợi ý, chữ tắt) |
 | 5.10:1 | `color/status/success-fg` trên `color/status/success-bg` |
@@ -155,6 +161,43 @@ Máy đo mỗi lần chạy `python3 _scripts/ds-v2-tokens.py --check`; dưới 
 | 5.10:1 | `color/chip/green/fg` trên `color/chip/green/bg` |
 | 5.76:1 | `color/chip/red/fg` trên `color/chip/red/bg` |
 | 4.88:1 | `color/chip/orange/fg` trên `color/chip/orange/bg` |
+
+Viền cần 3:1 (WCAG 1.4.11): `color/border/input` 5.43:1 trên `color/bg/surface`, 4.92:1 cạnh `color/bg/muted` (ô app nền xám).
+
+### 3.5 Màu theo khách (DEC-167, DEC-168, DEC-169, DEC-170)
+
+- Mỗi khách một dải 11 bậc `color/brand/50…950`, là thang riêng, không thay bảng gốc mục 3.1. Có 8 dải dựng sẵn;
+  màu logo khách gán vào dải gần sắc nhất, lệch quá 30° thì dùng dải Than chì. Khách không khai màu dùng dải Than chì,
+  nhìn giữ như bản đã duyệt (DEC-168).
+- Một cách áp cho mọi khách, kiểu chạm nhẹ; không có tham số theo khách (DEC-167, DEC-169).
+- Nút chính giữ `color/action/primary` than chì (DEC-119). Vòng focus và viền ô đang gõ giữ `color/border/focus` than chì
+  (DEC-170). Chip trạng thái giữ 8 sắc cố định (DEC-130). Ô logo luôn đúng màu logo khách (`P-mau-logo`), không lấy từ dải.
+
+| Bậc của dải | Vai trên màn |
+|---|---|
+| `color/brand/800` | Công tắc bật, ô chọn, radio và viền chỗ đang chọn, gạch tab đang chọn, thanh tiến độ |
+| `color/brand/900` | Rê chuột trên phần mang màu khách |
+| `color/brand/950` | Đang bấm phần mang màu khách |
+| `color/brand/700` | Chữ liên kết, mã chứng từ |
+| `color/brand/100` | Nền mục menu đang chọn, nền avatar |
+| `color/brand/50` | Nền dòng bảng đang chọn |
+
+| Dải | Sắc | 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Than chì | mặc định | #F5F5F5 | #EBEBEB | #D9D9D9 | #BFBFBF | #999999 | #737373 | #575757 | #404040 | #262626 | #171717 | #0A0A0A |
+| Xanh lá | 154° (Delta #1B7B46) | #F0F8F2 | #DFF1E3 | #C2E3CB | #98CFA8 | #64B47F | #239857 | #027C42 | #026535 | #004F28 | #00381B | #00220E |
+| Xanh ngọc | 190° | #EDF9F7 | #D9F1EF | #B6E4E0 | #81D0CA | #2DB6AF | #0A938E | #047773 | #03615D | #024C49 | #003634 | #00201F |
+| Xanh dương | 255° | #F0F6FE | #E0ECFD | #C4DBF9 | #9EC2F1 | #6FA3E5 | #4081D2 | #1D67BB | #0A529F | #003F80 | #002C5E | #001A3D |
+| Chàm | 272° | #F3F5FE | #E5EBFD | #CED8FA | #ADBDF2 | #889BE6 | #6478D3 | #4B5DBC | #3B4AA0 | #2C3882 | #1D2661 | #0E1442 |
+| Tím | 300° | #F7F4FD | #EDE8FB | #DED3F5 | #C7B4EB | #AB90DB | #8E6AC7 | #764EAF | #613C94 | #4C2C78 | #371D59 | #220C3C |
+| Đỏ đô | 18° | #FEF3F3 | #FCE5E5 | #F7CDCD | #EEABAC | #DD8285 | #C65860 | #AD3946 | #912835 | #751A27 | #560D19 | #3A010A |
+| Cam đất | 45° | #FDF3EF | #FBE6DD | #F5D0C0 | #EBB096 | #DA8964 | #C26030 | #A94400 | #8A3600 | #6D2900 | #501B00 | #330D00 |
+
+Tương phản đo trên Figma (section Màu thương hiệu theo khách 6159:49228): chữ trắng trên bậc 800 từ 9,77:1 (Xanh lá) tới
+15,13:1 (Than chì); bậc 700 trên nền trắng từ 7,20:1; bậc 800 trên bậc 50 từ 9,03:1.
+
+Chưa có trong `tokens.json`: collection `Brand` (8 chế độ, mỗi chế độ một dải) và biến `color/brand/50…950`; thêm khi dựng
+theme theo khách (mục 13).
 
 ## 4. Chữ
 
@@ -192,13 +235,13 @@ Tiêu đề **Cal Sans** (một độ đậm), chữ thường **Inter**, mã **
 | Tránh | Inter 700 cho chữ đọc · Cal Sans dưới 17px · Ultralight, Thin, Light |
 | Viết hoa | Chỉ tên cột bảng và nhãn nhóm menu (DEC-027): `type/caption-caps` = caption, Inter 500, viết hoa, giãn chữ 4% (như bản xem trước A; bộ cũ để 0; DEC-140) |
 
-## 5. Bo góc (DEC-122, DEC-134)
+## 5. Bo góc (DEC-122, DEC-134, DEC-165)
 
 | Token | Web | App | Dùng cho |
 |---|---|---|---|
 | `radius/control` | 8 | tròn hẳn | Nút, tab chip, ô tìm |
 | `radius/field` | 8 | 14 | Ô nhập, ô chọn |
-| `radius/card` | 12 | 20 | Thẻ, khối trong trang, bảng |
+| `radius/card` | 12 | 16 | Thẻ, nhóm có viền, khối trong trang, bảng (app 20 → 16, DEC-165) |
 | `radius/inner` | 8 | 14 | Khối phụ trong thẻ, ảnh nhỏ |
 | `radius/overlay` | 12 | 28 | Dialog, popover; đầu sheet trên app |
 | `radius/chip` | tròn hẳn | tròn hẳn | Chip trạng thái, avatar |
@@ -206,7 +249,19 @@ Tiêu đề **Cal Sans** (một độ đậm), chữ thường **Inter**, mã **
 Bảng gốc: `radius/0 · 4 · 6 · 8 · 12 · 14 · 16 · 20 · 28 · full`. iOS dùng góc liền mạch; có bật "Corner smoothing"
 trên Figma hay không thì chưa chốt (mục 13).
 
-## 6. Khoảng cách (DEC-135)
+**Luật lồng góc và lề đều (DEC-165).** R là bo khung ngoài, r là bo khối bên trong, lề là khoảng từ mép khung tới mép khối.
+
+1. Khung có khối hình ở góc (ô icon, avatar, nút, ô nhập, khối phụ, công tắc) thì lề 4 phía bằng nhau, đo tới khối cao
+   nhất trong dòng. Chữ không có góc để khớp, chỉ cần lề đều.
+2. Khung lớn (thẻ, nhóm có viền) **tách xa**: bo không quá lề (app 16 = lề 16; web 12 dưới lề 16). Khối bên trong khi đó
+   chỉ đối diện cạnh thẳng nên giữ hình gì cũng được: ô icon tròn, avatar tròn, nút viên thuốc, ô nhập bo 14.
+3. Khung ôm sát một khối (dòng đang chọn, chip, ô tìm) **đồng tâm**: R = r + lề. Hình tròn, viên thuốc có r = cao ÷ 2 nên
+   R = cao ÷ 2 + lề, ôm sát thì khung cũng thành viên thuốc. Ví dụ: dòng đang chọn có ô vuông bo 8, lề 8 thì bo 16.
+4. Lồng nhiều lớp thì áp từng lớp.
+5. Máy đo: mỗi khối có hình nằm gần góc khung đạt khi lề ≥ R, hoặc hai lề của góc chênh ≤ 1 và R = r + lề ± 1.
+   Mẫu và ma trận 15 trường hợp: Figma section Câu 12b (6246:14279).
+
+## 6. Khoảng cách (DEC-135, DEC-164, DEC-166, DEC-173)
 
 - Bảng gốc thang 4, 13 bậc, tên theo px: `space/0 · 2 · 4 · 6 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64`.
 - Lề trong component: `space/inset-xs · sm · md · lg · xl` = 4 · 8 · 12 · 16 · 24.
@@ -215,19 +270,30 @@ trên Figma hay không thì chưa chốt (mục 13).
 | Token | Web | App | Dùng cho |
 |---|---|---|---|
 | `layout/screen-inset` | 24 | 16 | Lề màn |
-| `layout/card-padding` | 16 | 14 | Lề trong thẻ (app 14 nằm ngoài thang, giữ theo DEC-135) |
+| `layout/card-padding` | 16 | 16 | Lề chứa: lề trong thẻ, nhóm có viền, dòng trong nhóm (app 14 → 16, DEC-164) |
 | `layout/list-gap` | 8 | 12 | Giữa các thẻ, dòng trong danh sách |
 | `layout/section-gap` | 32 | 24 | Giữa các khối lớn |
 | `touch/min` | 24 | 44 | Vùng chạm tối thiểu (web: WCAG 2.2 AA 24; app: DEC-138) |
 | `focus/width` | 2 | 2 | Độ dày vòng focus |
 | `focus/offset` | 2 | 2 | Khoảng cách vòng focus tới mép control |
+| `control/height/sm · md · lg` | 28 · 32 · 40 | 36 · 42 · 52 | Cao nút, ô nhập, ô chọn; cùng cỡ thì cùng cao (DEC-173) |
 
-Lề thẻ app 14 nằm ngoài thang; giữ vì thẻ app đã duyệt dùng 14 (DEC-135). Không thêm số lẻ khác ngoài thang.
+- Mọi số trên thang 4; DEC-164 bỏ ngoại lệ lề thẻ app 14. Không thêm số lẻ ngoài thang.
+- **Ô đầu dòng (DEC-164, app):** ô 24 cho icon 16 và 20, radio, ô chọn, cách chữ 8; ô 36 cho vòng icon, avatar, cách chữ 12.
+  Icon luôn đặt giữa ô, không đặt trần. Token `layout/lead-slot` thêm vào `tokens.json` khi dựng Base / List Row.
+- **Form (DEC-166):** đặt trên nền trang (nhóm bằng tiêu đề nhóm, web cách nhau 32) hoặc mỗi nhóm một thẻ (web lề 24
+  = `space/inset-xl`, app theo `layout/card-padding`); người vẽ chọn theo màn.
+- 9 mục khoảng cách chi tiết đề xuất 18/10 (lề nút theo cỡ, tab web, giữa ô nhập…) chưa chốt; chờ demo lại theo DEC-164
+  (mục 13).
 
 ## 7. Lưới, đường canh, breakpoint (DEC-136, DEC-038, DEC-039)
 
-- **App 393:** lề màn 16; ba đường canh cố định: **K1 16** mép nội dung màn · **K2 30** mép chữ trong thẻ (16 + lề thẻ 14) ·
-  **K3 76** mép chữ sau icon trong thẻ. Mọi khối canh theo một trong ba đường này.
+- **App 393 (DEC-164):** lề màn 16; bốn đường canh: **K1 16** mép nội dung màn · **K2 32** mép chữ trong thẻ, nhóm, ô nhập,
+  tab đầu (16 + lề chứa 16) · **K3 64** mép chữ sau ô đầu dòng 24 (icon, radio) · **K4 80** mép chữ sau ô 36 (vòng icon,
+  avatar). Mọi chữ dòng thẻ và dòng danh sách có icon đứng ở K3; icon 20 luôn nằm trong ô 24 nên không còn chữ ở 58.
+  Mọi khối canh theo một trong bốn đường. Đường K đo từ mép ngoài khung; viền 1px của thẻ nằm trong khung, không cộng
+  vào lề (Figma stroke Inside; CSS `box-shadow: inset 0 0 0 1px` hoặc trừ 1px khỏi lề). Đường K bên phải (mép phải của mũi tên, giá trị, chip, công tắc cuối dòng)
+  đang dựng demo (mục 13).
 - **Web:** 12 cột, rãnh 24, lề màn 24. Màn chi tiết chia **8 cột nội dung + 4 cột thông tin** như Jira (DEC-127).
 - **Breakpoint:** 640 · 768 · 1024 · 1280 · 1536 (trùng Tailwind). Từ 768 tới 1279 menu trái thu còn 64 (cột icon),
   bấm thì bung 240 đè lên nội dung.
@@ -251,7 +317,8 @@ Lề thẻ app 14 nằm ngoài thang; giữ vì thẻ app đã duyệt dùng 14 
   (ghi chú câu 10, trang phỏng vấn).
   Lưu ý: dưới mức 48dp Android khuyên.
 - **Web:** đích bấm tối thiểu 24×24 (WCAG 2.2 AA, mục 2.5.8).
-- **Focus:** vòng 2px, cách mép 2px, màu `color/border/focus` (than chì).
+- **Focus:** vòng 2px, cách mép 2px, màu `color/border/focus` (than chì) cho mọi khách, không theo dải màu khách
+  (DEC-170). Ô nhập đang gõ: viền 2px cùng màu.
 
 ## 10. Chuyển động (DEC-139)
 
@@ -280,11 +347,14 @@ và mục menu đang chọn (web) giữ icon viền; 7 icon nghiệp vụ tự v
 3. Khung màn đặt chế độ `Platform` (Web hoặc Mobile) một lần.
 4. Thẻ dùng `elev/1` + viền `color/border/default`; menu nổi `elev/2`; dialog, sheet, toast `elev/3`.
 5. Sửa token: sửa `tokens.json` → chạy script sinh `tokens.css` → cập nhật biến Figma cùng lượt.
+6. Khối có hình đặt gần góc khung: chạy máy đo lồng góc (mục 5, DEC-165) trước khi trình màn.
 
 ## 13. Còn mở
 
 - Giá trị chế độ Dark (DEC-116).
 - Có bật Corner smoothing (góc liền mạch kiểu iOS) cho thẻ, sheet trên app không.
-- Cao control theo cỡ (nút, ô nhập web 32, app 52 / 42) chuyển thành token Component ở vòng 4.
 - Quyền publish thư viện của gói Figma (DEC-110).
 - Việc còn mở của icon: `design/v2/icons.md` mục 10.
+- Đường K bên phải cho phần cuối dòng (ghi chú của DEC-164): dựng demo rồi chốt.
+- 9 mục khoảng cách chi tiết (2c câu 1 chọn "cần xem thêm trên Figma"): demo lại theo lề chứa 16 và hai cỡ ô.
+- Collection `Brand` (8 dải × 11 bậc) trong `tokens.json`, biến Figma và cách gắn theo khách (mục 3.5).

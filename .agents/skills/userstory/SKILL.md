@@ -53,6 +53,11 @@ Per-story `status`, `priority`, `jira key` sống ở **bảng index**, KHÔNG �
 * **Existing story đã push Jira** (cột Jira trong `{feature}-story-index.md` ≠ `—`) — update mode KHÔNG đụng cột Jira/Status, chỉ sửa content us file + các cột mô tả. Jira là việc của `/jira`.
 * **Index drift** — nếu glob us-*.md có file không có trong bảng `{feature}-story-index.md` (tạo tay) → warn + đề xuất thêm row. Ngược lại row trỏ tới us file không tồn tại → warn broken link.
 * **Screen references missing** — generate story + add OQ "Screen ref TBD" + warning.
+* **Mục UI / Screen References** — mỗi màn một dòng `- [<screenId> · <slug> — <tên Việt>](<link Figma>) · [[docs/{feature}/screens/{flow}.md|{flow}]]`,
+  link Figma lấy ở dòng **Figma:** của khối màn trong `screens/{flow}.md`. Flow chưa lên Figma → bỏ link Figma, trỏ
+  wireframe (`html-wireframe/{flow}.html` hoặc `ascii-wireframe/{flow}.md`). Ghi đủ `screenId` có thiết bị: thẻ Spec
+  trên Figma đọc mục này để ghi mã US lên màn, `/jira` đưa các dòng này vào mô tả issue (`screen-source.md` Mục 9).
+  Story có màn đã lên Figma → báo cuối lượt: chạy `/figma-sync {feature}` để thẻ Spec có mã US.
 * **Numbering gap** (vd us-001, us-003 tồn tại — us-002 deleted) — KHÔNG reuse us-002, continue from us-004.
 * **Story numbering scope per-feature**, KHÔNG global — `docs/payment/userstories/us-001.md` và `docs/auth/userstories/us-001.md` cùng tồn tại OK.
 * **Feature/SRS hoàn toàn không tồn tại** — refuse + route `/srs {feature}` (không tự tạo feature, không bịa FR). **SRS tồn tại nhưng draft/in-review** — soft gate proceed, flag mỗi story `<!-- built from draft SRS, may need refinement -->`. Đừng gộp 2 case.

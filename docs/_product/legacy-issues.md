@@ -1,6 +1,8 @@
 ---
 type: issue-register
 status: draft
+status_changed: 2026-10-18
+status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-15
 links:
   - docs/_product/prd.md
@@ -16,9 +18,9 @@ links:
 | Mã | Vấn đề | Module | Feature | Xử lý ở | Trạng thái |
 |---|---|---|---|---|---|
 | ISS-01 | Chia module theo miền chuẩn (fleet, hrm, crm, inventory, organization, finance…), không dồn mọi thứ vào "danh mục". Danh mục dùng chung đưa lên cấp doanh nghiệp (trên chi nhánh), có trang riêng để quản lý và cấu hình | Cấp sản phẩm | (cấp sản phẩm) | PRD Feature Map + object-map | ⬜ |
-| ISS-02 | Tổ chức lại danh mục hàng hoá: sản phẩm (thông tin hàng hoá, thiết bị), fitment (sản phẩm lắp được cho loại phương tiện, tên phương tiện nào), nhóm sản phẩm dạng cây | Danh mục › Hàng hoá | `product-catalog`, `vehicle-management` | brainstorm | ⬜ |
+| ISS-02 | Tổ chức lại danh mục hàng hoá: sản phẩm (thông tin hàng hoá, thiết bị), fitment (sản phẩm lắp được cho loại phương tiện, tên phương tiện nào), nhóm sản phẩm dạng cây | Danh mục › Hàng hoá | `product-catalog`, `vehicle-management` | brainstorm | 🟡 product-catalog: một danh mục, nhóm dạng cây, "Dùng cho xe" 0..n (18/10); còn phần dòng xe, thiết bị ở vehicle-management |
 | ISS-03 | Phương tiện đang gộp cả thiết bị không phải xe (máy phát điện, rơ mooc…) — cần tách loại tài sản | Quản lý phương tiện | `vehicle-management` | brainstorm | ⬜ |
-| ISS-04 | Danh mục không ngừng dùng hay xoá được (khách tạo sai phải nhờ đội xoá); cân nhắc luồng cập nhật danh mục | Danh mục | `product-catalog`, `business-partners`, `cost-catalog`, `organization`, `common-workspace` | brainstorm (khuôn chung ở `common-workspace`) | ⬜ |
+| ISS-04 | Danh mục không ngừng dùng hay xoá được (khách tạo sai phải nhờ đội xoá); cân nhắc luồng cập nhật danh mục | Danh mục | `product-catalog`, `technical-services`, `business-partners`, `cost-catalog`, `organization`, `common-workspace` | brainstorm (khuôn chung ở `common-workspace`) | 🟡 khuôn đề xuất – duyệt – ngừng dùng – xoá viết ở product-catalog (18/10), chờ nâng lên common-workspace; còn các danh mục khác |
 | ISS-05 | Chứng từ nghiệp vụ chưa có điểm kết thúc rõ. Vd: chẩn đoán → lệnh sửa chữa → xuất kho, làm sai từ chẩn đoán thì không kết thúc được. Cần: đóng lệnh sửa chữa thì phát sinh nhập kho trả lại; chẩn đoán huỷ được để không tạo lại lệnh sửa chữa từ nó | Bảo dưỡng sửa chữa | `repair-quotation`, `repair-order`, `stock-movement`, `common-workspace` | brainstorm (khuôn vòng đời chứng từ ở `common-workspace`) | ⬜ |
 | ISS-06 | Chưa có cách cập nhật lệnh sửa chữa đã chốt (liên quan ghi chép đối ứng) | Bảo dưỡng sửa chữa | `repair-order`, `stock-movement`, `workshop-payment` | brainstorm | ⬜ |
 | ISS-07 | Thống nhất thuật ngữ dev–BA. Vd: một yêu cầu có 2 loại BusinessDocument (chứng từ nghiệp vụ) và ChangeRequest (yêu cầu thay đổi danh mục) — BA tài liệu hoá | Cấp dự án | (cấp dự án), `common-workspace` | `docs/_shared/definitions.md` | ⬜ |
@@ -29,4 +31,4 @@ links:
 | ISS-12 | Báo cáo đang làm cố định — cần lọc, cấu hình được | Bảo dưỡng sửa chữa, Quản lý dầu, Nền tảng | `workshop-reports`, `fuel-stations`, `common-workspace` | brainstorm | ⬜ |
 | ISS-13 | Đăng nhập bằng SSO thay cách đăng nhập hiện tại | Nền tảng | `account-access` | brainstorm | ✅ bỏ SSO (brainstorm account-access 15/10) |
 | ISS-14 | Giao diện làm lại theo design system mới | Mọi module | `*` | `/figma-screen` | ⬜ |
-| ISS-15 | Onboarding trực tiếp hoặc hướng dẫn sử dụng gắn với từng chức năng (trừ feature đơn giản) | Mọi module, Nền tảng | `*`, `help-center` | brainstorm (đánh dấu feature đơn giản) + `/userguide` | 🟡 account-access: feature đơn giản, không cần hướng dẫn riêng (15/10); còn các feature khác |
+| ISS-15 | Onboarding trực tiếp hoặc hướng dẫn sử dụng gắn với từng chức năng (trừ feature đơn giản) | Mọi module, Nền tảng | `*`, `help-center` | brainstorm (đánh dấu feature đơn giản) + `/userguide` | 🟡 account-access, product-catalog, technical-services: feature đơn giản, không cần hướng dẫn riêng (15/10); còn các feature khác |

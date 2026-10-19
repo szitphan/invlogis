@@ -106,6 +106,32 @@ def load_workspace_status():
 
 # ─── nguồn dữ liệu ──────────────────────────────────────────────────────────
 
+def worktree_features():
+    """Feature chưa land: worktree branch `feat/<slug>` có `docs/<slug>/` mà main chưa có → {slug: gốc worktree}.
+    Dashboard đọc thẳng từ worktree để thấy tiến độ trước khi land (user chốt 15/10)."""
+    code, out = run(["git", "worktree", "list", "--porcelain"])
+    res = {}
+    if code != 0:
+        return res
+    for blk in out.strip().split("\n\n"):
+        path = re.search(r"^worktree (.+)$", blk, re.M)
+        br = re.search(r"^branch refs/heads/feat/(.+)$", blk, re.M)
+        if not (path and br):
+            continue
+        wt, slug = Path(path.group(1)), br.group(1)
+        if wt != ROOT and (wt / "docs" / slug).is_dir() and not (ROOT / "docs" / slug).is_dir():
+            res[slug] = wt
+    return res
+
+
+WT_FEATURES = worktree_features()
+
+
+def fdir(feature) -> Path:
+    """Thư mục docs của feature: main, hoặc worktree `feat/<slug>` nếu chưa land."""
+    return WT_FEATURES.get(feature, ROOT) / "docs" / feature
+
+
 def scan_features(feature_filter):
     out = []
     for d in sorted((ROOT / "docs").iterdir()):
@@ -115,7 +141,8 @@ def scan_features(feature_filter):
         if feature_filter and name != feature_filter:
             continue
         out.append(name)
-    return out
+    out += [f for f in WT_FEATURES if not feature_filter or f == feature_filter]
+    return sorted(out)
 
 
 OQ_ANSWER_COL_RE = re.compile(r"trả lời|trạng thái|quyết định|kết quả|answer|status", re.IGNORECASE)
@@ -125,7 +152,7 @@ def scan_oq(feature):
     """Dòng bảng `| OQ-n | … | <trạng thái> |` trong mọi doc của feature. Mở = ô cuối không bắt đầu
     bằng Đã chốt / Đóng / Bỏ. Kèm tiêu đề cột, mục chứa bảng và cờ có cột Trả lời (để trả lời từ dashboard)."""
     rows = []
-    for p in sorted((ROOT / "docs" / feature).rglob("*.md")):
+    for p in sorted(fdir(feature).rglob("*.md")):
         lines = read(p).split("\n")
         header, heading = [], ""
         for i, line in enumerate(lines, 1):
@@ -578,7 +605,7 @@ def cell(state, text="", path=None, line=None, note=""):
 
 
 def feature_row(feature, cov, oqs, lint, orphans, audit, ledgers, features=()):
-    base = ROOT / "docs" / feature
+    base = fdir(feature)
     st = {}
     st["nguon"] = source_cell(feature, ledgers, features)
 
@@ -736,7 +763,7 @@ def current_step(steps):
 
 
 def stage_details(feature, st, cov, oqs, lint, orphans, audit, ledgers, features, screens, sidx):
-    base = ROOT / "docs" / feature
+    base = fdir(feature)
     cov = cov or {}
     det = {}
 
@@ -972,7 +999,7 @@ def parse_meeting_decisions():
 def closed_checklist_oqs(feature):
     """OQ dạng checklist `- [x] OQ-n: câu hỏi — trả lời` trong doc của feature."""
     out = []
-    for p in sorted((ROOT / "docs" / feature).rglob("*.md")):
+    for p in sorted(fdir(feature).rglob("*.md")):
         for ln, line in enumerate(read(p).split("\n"), 1):
             m = re.match(r"^- \[x\]\s*(OQ-\d+):\s*(.+?)\s+—\s+(.+)$", line)
             if m:
@@ -990,7 +1017,7 @@ def owner_of(who):
 
 def feature_decisions(feature, oq_rows, dec_log, mdecs):
     bs_rel = f"docs/{feature}/brainstorms/{feature}.md"
-    bs_text = read(ROOT / bs_rel)
+    bs_text = read(fdir(feature) / "brainstorms" / f"{feature}.md")
     my_oq = {o["id"] for o in oq_rows}
     items, seen_oq = [], set()
     # 1. Khách chốt — biên bản họp link tới brainstorm của feature
@@ -1075,7 +1102,7 @@ def decision_cell_and_detail(items):
 def build_kanban(feature_filter):
     cards, loose = [], []
     lifecycle_by_dir = {}
-    all_md = sorted((ROOT / "docs").rglob("*.md"))
+    all_md = sorted((ROOT / "docs").rglob("*.md")) + [x for f in sorted(WT_FEATURES) for x in sorted(fdir(f).rglob("*.md"))]
     metas = {}
     for p in all_md:
         r = rel(p)
@@ -1295,16 +1322,28 @@ def build(feature_filter=None, light_mode=False):
     ws = load_workspace_status()
     docs = ws.scan_docs(ROOT, feature_filter, today)
     features = scan_features(feature_filter)
-    coverage = {c["feature"]: c for c in ws.compute_coverage(ROOT, features, today)}
+    coverage = {c["feature"]: c for c in ws.compute_coverage(ROOT, [f for f in features if f not in WT_FEATURES], today)}
     crs = ws.scan_crs(ROOT, feature_filter, today)
     stories = ws.scan_user_stories(ROOT, feature_filter)
+    # Feature ở worktree chưa land: quét trong worktree, đường dẫn đổi về tương đối với ROOT (link mở đúng file)
+    for f, wt in WT_FEATURES.items():
+        if feature_filter and f != feature_filter:
+            continue
+        pre = rel(wt) + "/"
+        docs += [dict(d, path=pre + d["path"]) for d in ws.scan_docs(wt, f, today)
+                 if d["path"].startswith(f"docs/{f}/")]
+        stories += [dict(s_, path=pre + s_["path"]) for s_ in ws.scan_user_stories(wt, f)
+                    if s_["path"].startswith(f"docs/{f}/")]
+        for c in ws.compute_coverage(wt, [f], today):
+            c["stories"] = [dict(s_, path=pre + s_["path"]) for s_ in c["stories"]]
+            coverage[f] = c
     actions = ws.compute_action_items(docs, crs, stories, today)
 
     ledgers = parse_ledgers()
     rows = []
     for f in features:
-        spec = ROOT / "docs" / f / "srs" / f"{f}-spec.md"
-        uf = ROOT / "docs" / f / "srs" / f"{f}-userflow.md"
+        spec = fdir(f) / "srs" / f"{f}-spec.md"
+        uf = fdir(f) / "srs" / f"{f}-userflow.md"
         rows.append(feature_row(f, coverage.get(f), scan_oq(f), lint_spec(spec),
                                 kg_userflow_orphans(f) if uf.exists() else None, latest_figma_audit(f), ledgers,
                                 scan_features(None)))
@@ -1336,7 +1375,7 @@ def build(feature_filter=None, light_mode=False):
     dec_log, mdecs = parse_dec_log(), parse_meeting_decisions()
     for r in rows:
         f = r["feature"]
-        bs_links = read(ROOT / "docs" / f / "brainstorms" / f"{f}.md").split("\n---\n", 1)[0]
+        bs_links = read(fdir(f) / "brainstorms" / f"{f}.md").split("\n---\n", 1)[0]
         refs = [x for x in sources if x["feed"].startswith("➖")
                 and (any(u.startswith(f"docs/{f}/") for u in x["used"]) or f"docs-input/{x['file']}" in bs_links)]
         if refs:
@@ -2132,7 +2171,8 @@ def render(m, artifact=False):
       + '<span class="h">Quyết định</span>'
       + "".join(f'<span class="h hidden-col">{E(l)}</span>' for _, l in HIDDEN_STAGES))
     for r in m["features"]:
-        w(f'<span class="f" title="{E(r["feature"])}">{E(r["feature"])}</span>')
+        wt_ = f' · worktree feat/{r["feature"]}, chưa land' if r["feature"] in WT_FEATURES else ""
+        w(f'<span class="f" title="{E(r["feature"] + wt_)}">{E(r["feature"])}{" ⑂" if wt_ else ""}</span>')
         for k, lab in cols:
             ce = r["stages"][k]
             hid = " hidden-col" if k in dict(HIDDEN_STAGES) else ""

@@ -1,5 +1,5 @@
 /* DS v2 tokens — FILE SINH RA từ design/v2/tokens.json bằng _scripts/ds-v2-tokens.py. KHÔNG sửa tay. */
-/* version 0.2.0 · 2026-10-17 */
+/* version 0.3.0 · 2026-10-19 */
 
 :root {
   /* Fonts (DEC-121) */
@@ -141,6 +141,7 @@
   --color-icon-secondary: var(--neutral-500);
   --color-border-default: var(--neutral-200);
   --color-border-strong: var(--neutral-300);
+  --color-border-input: var(--neutral-500);
   --color-border-focus: var(--charcoal-900);
   --color-action-primary: var(--charcoal-900);
   --color-action-primary-hover: var(--charcoal-800);
@@ -148,6 +149,7 @@
   --color-action-secondary: var(--neutral-100);
   --color-action-secondary-hover: var(--neutral-200);
   --color-action-danger: var(--red-700);
+  --color-action-danger-subtle: var(--red-50);
   --color-status-success-bg: var(--green-50);
   --color-status-success-fg: var(--green-700);
   --color-status-warning-bg: var(--yellow-50);
@@ -190,6 +192,7 @@
   --color-icon-secondary: var(--neutral-500);
   --color-border-default: var(--neutral-200);
   --color-border-strong: var(--neutral-300);
+  --color-border-input: var(--neutral-500);
   --color-border-focus: var(--charcoal-900);
   --color-action-primary: var(--charcoal-900);
   --color-action-primary-hover: var(--charcoal-800);
@@ -197,6 +200,7 @@
   --color-action-secondary: var(--neutral-100);
   --color-action-secondary-hover: var(--neutral-200);
   --color-action-danger: var(--red-700);
+  --color-action-danger-subtle: var(--red-50);
   --color-status-success-bg: var(--green-50);
   --color-status-success-fg: var(--green-700);
   --color-status-warning-bg: var(--yellow-50);
@@ -248,6 +252,9 @@
   --layout-list-gap: var(--space-8);
   --layout-section-gap: var(--space-32);
   --touch-min: 24px;
+  --control-height-sm: 28px;
+  --control-height-md: 32px;
+  --control-height-lg: 40px;
   --focus-width: 2px;
   --focus-offset: 2px;
   --type-display-size: 32px;
@@ -279,7 +286,7 @@
 [data-platform="mobile"] {
   --radius-control: var(--radius-full);
   --radius-field: var(--radius-14);
-  --radius-card: var(--radius-20);
+  --radius-card: var(--radius-16);
   --radius-inner: var(--radius-14);
   --radius-overlay: var(--radius-28);
   --radius-chip: var(--radius-full);
@@ -295,10 +302,13 @@
   --space-gap-xl: var(--space-24);
   --space-gap-2xl: var(--space-32);
   --layout-screen-inset: var(--space-16);
-  --layout-card-padding: 14px;
+  --layout-card-padding: var(--space-16);
   --layout-list-gap: var(--space-12);
   --layout-section-gap: var(--space-24);
   --touch-min: 44px;
+  --control-height-sm: 36px;
+  --control-height-md: 42px;
+  --control-height-lg: 52px;
   --focus-width: 2px;
   --focus-offset: 2px;
   --type-display-size: 34px;

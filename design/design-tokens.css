@@ -203,6 +203,8 @@
   --radius-container: 12px;
   --radius-page: 28px;
   --radius-full: 9999px;
+  --radius-card-mobile: 22px;   /* DEC-096 */
+  --radius-inner-mobile: 16px;
 
   /* ---- Elevation ---- */
   /* Theo code Neutral (neutralTheme.ts); Dark ghi đè ở [data-theme="dark"] */

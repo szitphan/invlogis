@@ -1,7 +1,7 @@
 ---
 type: object-map
-status: in-review
-status_changed: 2026-10-14
+status: approved
+status_changed: 2026-10-15
 updated: 2026-10-05
 links:
   - docs/_shared/definitions.md

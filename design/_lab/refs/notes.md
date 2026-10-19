@@ -377,3 +377,31 @@ User muốn cân nhắc đổi màu nhấn thay than chì #262626 (lật quyết
 Chốt xong → đề xuất sửa design.md (Colors, Đã quyết định › Thương hiệu theo khách), `design-tokens.css`, biến Figma `Core/Accent`, và (nếu theo khách) `docs/_product/tenant-parameters.md` — qua L2.
 
 **Chốt 13/10/2026 (user):** giữ màu nhấn hiện tại than chì `#262626`, chưa đổi sang brand khách Delta. Quyết định 12/10 giữ nguyên: màu khách (`P-mau-logo`, Delta #1B7B46) chỉ tô ô logo; design.md, token, Figma không đổi.
+
+## Kết quả chốt Lab ↔ DS mobile (15/10/2026)
+
+Trang chốt: https://claude.ai/artifact/9ThSfr3ci8BdkwTMEaEmA8 (nguồn `refs/review-mobile-lab-ds.html`, collection `decisions`, doc m01–m21: choice ds|lab|mix + note). So section Duyệt (`5453:44355`) + UI Lab · Mobile style v1 (`5446:15413`) với DS mobile (M1–M4, Example/List Mobile). Đã ghi vào `design/design.md` § Mobile — chốt Lab ↔ DS mobile + DEC-096…099. Việc Figma: BL-161.
+
+| # | Hạng mục | Chốt | So với đề xuất | Ghi chú user |
+|---|---|---|---|---|
+| m01 | Nền màn, thẻ | Lab | trùng | |
+| m02 | Bo thẻ 22/16 | Lab | trùng | |
+| m03 | Cỡ chữ 28·17·15·14·13 | Kết hợp | trùng | |
+| m04 | Tiêu đề Cal Sans 28 | Kết hợp | trùng | |
+| m05 | Nút 52/42 | Lab | trùng | |
+| m06 | Nút phụ | Khớp | — | |
+| m07 | Nút icon tròn 42 | Lab | trùng | |
+| m08 | Chip trạng thái cỡ Mobile | Lab | trùng | |
+| m09 | Tab chip | Lab | trùng | |
+| m10 | Ô tìm luôn hiện | Lab | trùng | |
+| m11 | Đầu màn | Lab | trùng | |
+| m12 | Thẻ bản ghi | Lab | trùng | |
+| m13 | Họ thẻ 9 loại | Lab | trùng | |
+| m14 | Ô nhập | **Lab** | khác (đề xuất kết hợp: TextInput DS cao 48) | |
+| m15 | Thẻ chọn ≤ 6 | Kết hợp | trùng | |
+| m16 | Bottom sheet | **Kết hợp** | khác (đề xuất DS) | "Bottom sheet không để nút X" |
+| m17 | Form A + C | Kết hợp | trùng | |
+| m18 | Chân màn | Lab | trùng | "cái này tuỳ xem kết hợp trên dưới hoặc để 1 line" |
+| m19 | Khoảng cách 4·8·12·16·24·32 | Kết hợp | trùng | |
+| m20 | Bottom Navigation | Khớp | — | |
+| m21 | Màu | DS | trùng | |

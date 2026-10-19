@@ -45,6 +45,11 @@ MAX_OPTION_CHARS = 260   # tổng chữ trong 1 thẻ phương án
 MAX_QUESTION = 170
 MAX_CONTEXT = 300
 
+# `density: compact` — chữ nhỏ hơn ~25% (deck-template.html, body.compact), đổi lại cho phép bối cảnh dài
+# và dòng Trích dẫn. Chỉ nới các ngưỡng dưới đây; các luật khác giữ nguyên.
+DENSITIES = {"normal", "compact"}
+COMPACT = {"oq": 1800, "question": 200, "context": 800, "option": 360}
+
 # mã nội bộ KHÔNG được lộ lên slide khách (chỉ ở ghi chú / directive)
 INTERNAL_ID = re.compile(
     r"\b(?:FR|NFR|BR|E|BO|CAP)-[a-z][a-z0-9-]*-\d{2,3}\b"   # FR-payment-001, E-common-003
@@ -58,6 +63,7 @@ SLIDE_SEP = re.compile(r"^-{3,}\s*$")
 DIRECTIVE = re.compile(r"^<!--\s*(.*?)\s*-->\s*$")
 OPTION_H = re.compile(r"^###\s+([A-Z])[.)]\s*(.+)$")
 DOC_LABEL = "Tài liệu"  # dòng nguồn cho khách: tên tài liệu khách gửi + mục, không đường dẫn
+QUOTE_LABEL = "Trích dẫn"  # câu nguyên văn trong tài liệu khách + tên tài liệu, mục (chữ nhỏ, nghiêng)
 LABELED = re.compile(r"^\*\*([^*]{1,40}?):\*\*\s*(.*)$")
 
 
@@ -81,6 +87,10 @@ def plain(text):
 
 def delivery_of(fm):
     return str(fm.get("delivery") or "meeting").strip().lower()
+
+
+def density_of(fm):
+    return str(fm.get("density") or "normal").strip().lower()
 
 
 def dmy(iso):
@@ -184,7 +194,9 @@ def parse_slide(lines, idx):
         if lm:
             s["labeled"].append((lm.group(1).strip(), lm.group(2).strip())); s["order"].append("lab"); continue
         if re.match(r"^([-*]|\d+[.)])\s+", st):
-            s["items"].append(re.sub(r"^([-*]|\d+[.)])\s+", "", st)); s["order"].append("li"); continue
+            # "1." / "1)" → danh sách đánh số (oli), "-" / "*" → gạch đầu dòng (li)
+            s["items"].append(re.sub(r"^([-*]|\d+[.)])\s+", "", st))
+            s["order"].append("oli" if re.match(r"^\d", st) else "li"); continue
         s["paras"].append(st); s["order"].append("p")
     layout = s["dir"].get("layout")
     if not layout:
@@ -214,6 +226,12 @@ def lint(fm, slides):
             warns.append(f"frontmatter thiếu `{k}`")
     if fm.get("type") and fm.get("type") != "meeting-deck":
         warns.append(f"frontmatter type = `{fm.get('type')}` (chuẩn: meeting-deck)")
+    compact = density_of(fm) == "compact"
+    if density_of(fm) not in DENSITIES:
+        errs.append(f"frontmatter density = `{fm.get('density')}` — dùng `normal` (mặc định) hoặc `compact` (chữ nhỏ, bối cảnh dài)")
+    max_q = COMPACT["question"] if compact else MAX_QUESTION
+    max_ctx = COMPACT["context"] if compact else MAX_CONTEXT
+    max_opt = COMPACT["option"] if compact else MAX_OPTION_CHARS
     dlv = delivery_of(fm)
     if dlv not in DELIVERIES:
         errs.append(f"frontmatter delivery = `{fm.get('delivery')}` — dùng `meeting` (chiếu khi họp) hoặc `async` (gửi khách tự trả lời)")
@@ -240,7 +258,7 @@ def lint(fm, slides):
             if pm:
                 errs.append(f"{tag}: lộ đường dẫn/tên file nội bộ `{pm.group(0)}` — chuyển vào directive `src:` hoặc ghi chú")
         total = sum(len(t) for t in vis)
-        lim = LIMITS.get(lay, 600)
+        lim = COMPACT["oq"] if compact and lay == "oq" else LIMITS.get(lay, 600)
         if total > lim:
             errs.append(f"{tag}: quá dày — {total} ký tự hiển thị (tối đa {lim}). Tách slide hoặc chuyển chi tiết vào ghi chú")
         if len(s["items"]) > MAX_BULLETS:
@@ -250,10 +268,10 @@ def lint(fm, slides):
             q = s["h2"] or s["h1"]
             if not q:
                 errs.append(f"{tag}: thiếu câu hỏi (dòng `## …`)")
-            elif len(plain(q)) > MAX_QUESTION:
-                errs.append(f"{tag}: câu hỏi dài {len(plain(q))} ký tự (tối đa {MAX_QUESTION}) — rút gọn, bối cảnh đưa xuống dòng `>`")
-            if sum(len(plain(c)) for c in s["ctx"]) > MAX_CONTEXT:
-                errs.append(f"{tag}: bối cảnh dài quá {MAX_CONTEXT} ký tự — đưa chi tiết vào ghi chú")
+            elif len(plain(q)) > max_q:
+                errs.append(f"{tag}: câu hỏi dài {len(plain(q))} ký tự (tối đa {max_q}) — rút gọn, bối cảnh đưa xuống dòng `>`")
+            if sum(len(plain(c)) for c in s["ctx"]) > max_ctx:
+                errs.append(f"{tag}: bối cảnh dài quá {max_ctx} ký tự — đưa chi tiết vào ghi chú")
             ops = s["options"]
             if len(ops) > MAX_OPTIONS:
                 errs.append(f"{tag}: {len(ops)} phương án (tối đa {MAX_OPTIONS})")
@@ -264,8 +282,8 @@ def lint(fm, slides):
                 if len(o["pros"]) > MAX_PRO_CON or len(o["cons"]) > MAX_PRO_CON:
                     errs.append(f"{tag}: phương án {o['letter']} có quá {MAX_PRO_CON} ý +/−")
                 oc = sum(len(plain(x)) for x in [o["title"]] + o["desc"] + o["pros"] + o["cons"])
-                if oc > MAX_OPTION_CHARS:
-                    errs.append(f"{tag}: phương án {o['letter']} dài {oc} ký tự (tối đa {MAX_OPTION_CHARS})")
+                if oc > max_opt:
+                    errs.append(f"{tag}: phương án {o['letter']} dài {oc} ký tự (tối đa {max_opt})")
             rec = s["dir"].get("recommend")
             if rec and rec not in letters:
                 errs.append(f"{tag}: recommend `{rec}` không khớp phương án nào {letters}")
@@ -330,29 +348,31 @@ def with_guide(fm, slides):
 
 
 # ----------------------------------------------------------------- render
-def render_block_list(items, cls=""):
+def render_block_list(items, cls="", ordered=False):
     if not items:
         return ""
     c = f' class="{cls}"' if cls else ""
-    return f"<ul{c}>" + "".join(f"<li>{inline(i)}</li>" for i in items) + "</ul>"
+    tag = "ol" if ordered else "ul"
+    return f"<{tag}{c}>" + "".join(f"<li>{inline(i)}</li>" for i in items) + f"</{tag}>"
 
 
 def render_flow(s):
-    """Nội dung theo đúng thứ tự viết (ctx / lab / li / p)."""
+    """Nội dung theo đúng thứ tự viết (ctx / lab / li / oli / p)."""
     out, i_ctx, i_lab, i_li, i_p = [], 0, 0, 0, 0
-    pending_li = []
+    pending_li, pending_kind = [], None
     order = s["order"] + ["_end"]
     for kind in order:
-        if kind != "li" and pending_li:
-            out.append(render_block_list(pending_li)); pending_li = []
+        if pending_li and kind != pending_kind:
+            out.append(render_block_list(pending_li, ordered=pending_kind == "oli")); pending_li = []
         if kind == "ctx":
             out.append(f'<div class="ctx"><p>{inline(s["ctx"][i_ctx])}</p></div>'); i_ctx += 1
         elif kind == "lab":
             a, b = s["labeled"][i_lab]; i_lab += 1
-            cls = "lab srcdoc" if a.lower() == DOC_LABEL.lower() else "lab"
+            cls = ("lab srcdoc" if a.lower() == DOC_LABEL.lower()
+                   else "lab quote" if a.lower() == QUOTE_LABEL.lower() else "lab")
             out.append(f'<p class="{cls}"><b>{inline(a)}:</b> {inline(b)}</p>')
-        elif kind == "li":
-            pending_li.append(s["items"][i_li]); i_li += 1
+        elif kind in ("li", "oli"):
+            pending_li.append(s["items"][i_li]); pending_kind = kind; i_li += 1
         elif kind == "p":
             out.append(f"<p>{inline(s['paras'][i_p])}</p>"); i_p += 1
     # gộp các ctx liền nhau thành 1 khối
@@ -402,9 +422,15 @@ def render_slide(s, fm, oq_pos, oq_total, n_total):
             ph = "Ý kiến thêm (nếu có)…" if s["options"] else "Câu trả lời của anh/chị…"
         else:
             ph = "Ghi chú quyết định / câu trả lời của khách…" if s["options"] else "Câu trả lời của khách…"
-        field = (f'<textarea class="note" placeholder="{ph}"></textarea>' if not s["options"]
-                 else f'<input class="note" type="text" placeholder="{ph}">')
-        parts.append(f'<div class="decide"><span class="dl">{"Trả lời" if asy else "Quyết định"}</span>{btns}{field}</div>')
+        # async + có phương án: ô Ý kiến thêm nhiều dòng, xuống hàng riêng, rộng hết slide (khách hay viết dài)
+        wide = asy and bool(s["options"])
+        if not s["options"]:
+            field = f'<textarea class="note" placeholder="{ph}"></textarea>'
+        elif wide:
+            field = f'<textarea class="note" rows="3" placeholder="{ph}"></textarea>'
+        else:
+            field = f'<input class="note" type="text" placeholder="{ph}">'
+        parts.append(f'<div class="decide{" wide" if wide else ""}"><span class="dl">{"Trả lời" if asy else "Quyết định"}</span>{btns}{field}</div>')
         if not s["options"]:
             cls += " noopts"
     elif lay == "recap":
@@ -582,7 +608,8 @@ def render(fm, slides, deck_path, brand=None):
     page = (tpl.replace("{{TITLE}}", html.escape(str(fm.get("title", stem))))
                .replace("{{TOKENS}}", tokens)
                .replace("{{BRAND}}", brand_css(brand) if brand else "")
-               .replace("{{BODY_CLASS}}", " ".join(c for c in ["branded" if brand else "", "async" if asy else ""] if c))
+               .replace("{{BODY_CLASS}}", " ".join(c for c in ["branded" if brand else "", "async" if asy else "",
+                                                               "compact" if density_of(fm) == "compact" else ""] if c))
                .replace("{{SLIDES}}", "\n".join(out))
                .replace("{{DATA}}", json.dumps(meta, ensure_ascii=False).replace("</", "<\\/")))
     return page, tok_path
@@ -699,6 +726,8 @@ def main():
     n_out = len(slides) + (1 if asy else 0)
     print(f"[deck] {len(slides)} slide · {n_oq} câu hỏi · nguồn {a.deck}")
     print(f"  Hình thức:                      " + ("gửi khách tự trả lời (async) — tự chèn slide Hướng dẫn trả lời, KHÔNG nhúng ghi chú/nguồn" if asy else "chiếu trong buổi họp (meeting)"))
+    if density_of(fm) == "compact":
+        print("  Mật độ:                         compact — chữ nhỏ ~25%, bối cảnh tới 800 ký tự, có dòng Trích dẫn")
     print(f"  Mức 1 — Cú pháp deck.md:        PASS (parse được {len(slides)} slide)")
     print(f"  Mức 2 — Lint nội dung/mật độ:   {'FAIL' if errs else 'PASS'} ({len(errs)} lỗi, {len(warns)} cảnh báo)")
     for e in errs:

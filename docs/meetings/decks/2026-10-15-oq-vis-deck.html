@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</title>
+<style>
+/* ---- design tokens (inline từ design/design-tokens.css lúc build; thiếu file thì dùng giá trị dự phòng trong var()) ---- */
+/* ==========================================================================
+ Astryx — design tokens (CSS)
+ Sinh từ design/design.md · nguồn: Figma "Astryx Library (Community)" (FifpyOMpZk9OP8qyNzbRVJ)
+ Trích: 2026-09-27. KHÔNG sửa lệch design.md — đổi token thì sửa cả hai cùng lượt.
+ Light = mặc định (:root). Dark = [data-theme="dark"].
+ ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
+
+:root {
+  /* ---- Color · Neutral Light ---- */
+  --color-accent: #262626;
+  --color-accent-muted: #f1f1f1;
+  --color-on-accent: #ffffff;
+  --color-neutral: #0000000f;
+  --color-background-surface: #ffffff;
+  --color-background-body: #f1f1f1;
+  --color-overlay: #00000080;
+  --color-overlay-hover: #0000000d;
+  --color-overlay-pressed: #0000001a;
+  --color-background-muted: #f1f1f1;
+  --color-text-primary: #171717;
+  --color-text-secondary: #737373;
+  --color-text-disabled: #a3a3a3;
+  --color-text-accent: #262626;
+  --color-text-on-dark: #ffffff;
+  --color-text-on-light: #171717;
+  --color-icon-accent: #262626;
+  --color-icon-primary: #171717;
+  --color-icon-secondary: #737373;
+  --color-icon-disabled: #a3a3a3;
+  --color-surface-card: #ffffff;
+  --color-surface-popover: #ffffff;
+  --color-success: #007004;
+  --color-success-muted: #c5e5c0;
+  --color-on-success: #ffffff;
+  --color-error: #a50c25;
+  --color-error-muted: #facecb;
+  --color-on-error: #ffffff;
+  --color-warning: #745b00;
+  --color-warning-muted: #f8da9d;
+  --color-on-warning: #171717;
+  --color-border-default: #00000014;
+  --color-border-emphasized: #d4d4d4;
+  --color-skeleton: #ebebeb;
+  --color-blue-bg: #c4ddfb;
+  --color-blue-border: #b1c9e7;
+  --color-blue-icon: #00458c;
+  --color-blue-text: #00458c;
+  --color-cyan-bg: #a3e0ef;
+  --color-cyan-border: #91d3e3;
+  --color-cyan-icon: #00505f;
+  --color-cyan-text: #00505f;
+  --color-gray-bg: #e5e5e5;
+  --color-gray-border: #d4d4d4;
+  --color-gray-icon: #525252;
+  --color-gray-text: #262626;
+  --color-green-bg: #c5e5c0;
+  --color-green-border: #b2d1ac;
+  --color-green-icon: #0c5700;
+  --color-green-text: #0c5700;
+  --color-orange-bg: #fad0b5;
+  --color-orange-border: #e6bda2;
+  --color-orange-icon: #6e3500;
+  --color-orange-text: #6e3500;
+  --color-pink-bg: #fccadc;
+  --color-pink-border: #e7b7c8;
+  --color-pink-icon: #83004b;
+  --color-pink-text: #83004b;
+  --color-purple-bg: #eccef3;
+  --color-purple-border: #d8bbdf;
+  --color-purple-icon: #700084;
+  --color-purple-text: #700084;
+  --color-red-bg: #facecb;
+  --color-red-border: #e6bab8;
+  --color-red-icon: #89001a;
+  --color-red-text: #89001a;
+  --color-teal-bg: #a5e3d6;
+  --color-teal-border: #94d6c8;
+  --color-teal-icon: #005348;
+  --color-teal-text: #005348;
+  --color-yellow-bg: #f8da9d;
+  --color-yellow-border: #e4c279;
+  --color-yellow-icon: #584400;
+  --color-yellow-text: #584400;
+  /* ---- Chip trạng thái dự án (theo lab, 12/10/2026) ---- */
+  --color-status-chip-gray-bg: #f1f1f1;
+  --color-status-chip-gray-fg: #525252;
+  --color-status-chip-blue-bg: #e7effd;
+  --color-status-chip-blue-fg: #1f4fb8;
+  --color-status-chip-teal-bg: #e2f5f4;
+  --color-status-chip-teal-fg: #0b6b64;
+  --color-status-chip-purple-bg: #efeafe;
+  --color-status-chip-purple-fg: #5536c4;
+  --color-status-chip-yellow-bg: #fff3dc;
+  --color-status-chip-yellow-fg: #8a5300;
+  --color-status-chip-green-bg: #e8f5ec;
+  --color-status-chip-green-fg: #1b7542;
+  --color-status-chip-red-bg: #fdecec;
+  --color-status-chip-red-fg: #b42318;
+  /* Cam: chỉ cho nhãn Phát sinh của Cây quy trình (CMP-09) */
+  --color-status-chip-orange-bg: #fff7ed;
+  --color-status-chip-orange-fg: #c2410c;
+  --color-status-chip-orange-border: #fdba74;
+  --color-syntax-keyword: #700084;
+  --color-syntax-string: #005600;
+  --color-syntax-comment: #737373;
+  --color-syntax-number: #6e3500;
+  --color-syntax-function: #00458c;
+  --color-syntax-type: #700084;
+  --color-syntax-variable: #171717;
+  --color-syntax-operator: #737373;
+  --color-syntax-constant: #6e3500;
+  --color-syntax-tag: #89001a;
+  --color-syntax-attribute: #584400;
+  --color-syntax-property: #005348;
+  --color-syntax-punctuation: #a3a3a3;
+  --color-badge-info-bg: #0074e2;
+  --color-badge-success-bg: #198100;
+  --color-badge-warning-bg: #ffce2f;
+  --color-badge-error-bg: #e33f4a;
+  --color-badge-on-vivid: #ffffff;
+  --color-elevation-shadow: #0000001a;
+  --color-elevation-shadow-strong: #0000001a;
+  --color-shadow: #0000001a;      /* bóng cột dính của Table */
+  --color-tint-hover: #000000;    /* chỉ dùng trong color-mix */
+  --color-progress-accent: #0074e2;
+  --color-progress-success: #198100;
+  --color-progress-warning: #ffce2f;
+  --color-progress-error: #e33f4a;
+  --color-input-ring-focus: #f1f1f1;
+  --color-input-ring-hover: #d4d4d44d;
+  --color-input-ring-success: #1981004d;
+  --color-input-ring-warning: #ffce2f4d;
+  --color-input-ring-error: #e33f4a4d;
+  --color-background-inverted: #0a1317;
+  --color-error-inverted: #aa071e;
+  --color-track: #ccd3db;
+
+  /* ---- Typography ---- */
+  --font-body: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: "Cal Sans", var(--font-body);  /* Cal Sans chỉ có Regular */
+  --font-code: "JetBrains Mono", ui-monospace, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-size-4xs: 6px;
+  --font-size-3xs: 7px;
+  --font-size-2xs: 8px;
+  --font-size-xs: 10px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-lg: 17px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 29px;
+  --font-size-4xl: 35px;
+  --font-size-5xl: 42px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-heading-1: 32px;
+  --line-height-heading-2: 28px;
+  --line-height-heading-3: 24px;
+  --line-height-heading-4: 20px;
+  --line-height-heading-5: 20px;
+  --line-height-heading-6: 16px;
+  --line-height-body: 20px;
+  --line-height-large: 24px;
+  --line-height-label: 20px;
+  --line-height-code: 20px;
+  --line-height-code-sm: 16px;
+  --line-height-supporting: 20px;
+  --line-height-display-1: 52px;
+  --line-height-display-2: 44px;
+  --line-height-display-3: 36px;
+
+  /* ---- Spacing (base 4px) ---- */
+  --spacing-0: 0px;
+  --spacing-half: 2px;
+  --spacing-1: 4px;
+  --spacing-1-half: 6px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-11: 44px;
+  --spacing-12: 48px;
+
+  /* ---- Size ---- */
+  --size-element-small: 28px;
+  --size-element-medium: 32px;
+  --size-element-large: 36px;
+  --border-width: 1px;
+
+  /* ---- Radius ---- */
+  --radius-none: 0px;
+  --radius-inner: 6px;
+  --radius-element: 10px;
+  --radius-container: 12px;
+  --radius-page: 28px;
+  --radius-full: 9999px;
+
+  /* ---- Elevation ---- */
+  /* Theo code Neutral (neutralTheme.ts); Dark ghi đè ở [data-theme="dark"] */
+  --elevation-low: 0 2px 4px #0000000d, 0 4px 8px #0000001a;
+  --elevation-medium: 0 2px 4px #0000000d, 0 4px 12px #0000001a;
+  --elevation-high: 0 4px 6px #0000001a, 0 12px 24px #00000026;
+  --ring-focus: inset 0 0 0 3px var(--color-input-ring-focus);
+  --ring-hover: inset 0 0 0 3px var(--color-input-ring-hover);
+  --ring-success: inset 0 0 0 3px var(--color-input-ring-success);
+  --ring-warning: inset 0 0 0 3px var(--color-input-ring-warning);
+  --ring-error: inset 0 0 0 3px var(--color-input-ring-error);
+
+  /* ---- Motion (theme Neutral) ---- */
+  --duration-fast-min: 95ms;
+  --duration-fast: 125ms;
+  --duration-fast-max: 165ms;
+  --duration-medium-min: 225ms;
+  --duration-medium: 300ms;
+  --duration-medium-max: 400ms;
+  --duration-slow-min: 525ms;
+  --duration-slow: 700ms;
+  --duration-slow-max: 935ms;
+  --ease-standard: cubic-bezier(0.24, 1, 0.4, 1);
+
+  /* ---- Component (không có biến Figma riêng) ---- */
+  --toast-bg: #1c2024;  /* mã cứng trong Figma */
+  --disabled-opacity: 0.5;
+}
+
+[data-theme="dark"] {
+  /* ---- Color · Neutral Dark ---- */
+  --color-accent: #ebebeb;
+  --color-accent-muted: #262626;
+  --color-on-accent: #171717;
+  --color-neutral: #ffffff1a;
+  --color-background-surface: #262626;
+  --color-background-body: #1b1b1b;
+  --color-overlay: #000000cc;
+  --color-overlay-hover: #ffffff0d;
+  --color-overlay-pressed: #ffffff1a;
+  --color-background-muted: #1b1b1b;
+  --color-text-primary: #fafafa;
+  --color-text-secondary: #a3a3a3;
+  --color-text-disabled: #525252;
+  --color-text-accent: #ebebeb;
+  --color-text-on-dark: #ffffff;
+  --color-text-on-light: #171717;
+  --color-icon-accent: #ebebeb;
+  --color-icon-primary: #fafafa;
+  --color-icon-secondary: #a3a3a3;
+  --color-icon-disabled: #525252;
+  --color-surface-card: #1b1b1b;
+  --color-surface-popover: #1b1b1b;
+  --color-success: #9fe59b;
+  --color-success-muted: #84c9803d;
+  --color-on-success: #171717;
+  --color-error: #ffc6c1;
+  --color-error-muted: #ff9e973d;
+  --color-on-error: #171717;
+  --color-warning: #fdcf4f;
+  --color-warning-muted: #deb4333d;
+  --color-on-warning: #171717;
+  --color-border-default: #ffffff1a;
+  --color-border-emphasized: #525252;
+  --color-skeleton: #525252;
+  --color-blue-bg: #9eb7ff;
+  --color-blue-border: #6d9cfe;
+  --color-blue-icon: #9eb7ff;
+  --color-blue-text: #c7d3ff;
+  --color-cyan-bg: #83c2d4;
+  --color-cyan-border: #67a7b8;
+  --color-cyan-icon: #83c2d4;
+  --color-cyan-text: #9edef0;
+  --color-gray-bg: #ffffff;
+  --color-gray-border: #262626;
+  --color-gray-icon: #a3a3a3;
+  --color-gray-text: #e5e5e5;
+  --color-green-bg: #84c980;
+  --color-green-border: #69ad67;
+  --color-green-icon: #84c980;
+  --color-green-text: #9fe59b;
+  --color-orange-bg: #ffa258;
+  --color-orange-border: #e2883e;
+  --color-orange-icon: #ffa258;
+  --color-orange-text: #ffc9a2;
+  --color-pink-bg: #ff99c3;
+  --color-pink-border: #f273aa;
+  --color-pink-icon: #ff99c3;
+  --color-pink-text: #ffc3da;
+  --color-purple-bg: #f297ff;
+  --color-purple-border: #dd74f0;
+  --color-purple-icon: #f297ff;
+  --color-purple-text: #fac1ff;
+  --color-red-bg: #ff9e97;
+  --color-red-border: #ff6f6c;
+  --color-red-icon: #ff9e97;
+  --color-red-text: #ffc6c1;
+  --color-teal-bg: #7ec6b8;
+  --color-teal-border: #63ab9d;
+  --color-teal-icon: #7ec6b8;
+  --color-teal-text: #99e2d3;
+  --color-yellow-bg: #deb433;
+  --color-yellow-border: #c0990e;
+  --color-yellow-icon: #deb433;
+  --color-yellow-text: #fdcf4f;
+  /* ---- Chip trạng thái dự án · dark ---- */
+  --color-status-chip-gray-bg: #52525252;
+  --color-status-chip-gray-fg: #e5e5e5;
+  --color-status-chip-blue-bg: #1f4fb852;
+  --color-status-chip-blue-fg: #c7d3ff;
+  --color-status-chip-teal-bg: #0b6b6452;
+  --color-status-chip-teal-fg: #99e2d3;
+  --color-status-chip-purple-bg: #5536c452;
+  --color-status-chip-purple-fg: #cbbcff;
+  --color-status-chip-yellow-bg: #8a530052;
+  --color-status-chip-yellow-fg: #fdcf4f;
+  --color-status-chip-green-bg: #1b754252;
+  --color-status-chip-green-fg: #9fe59b;
+  --color-status-chip-red-bg: #b4231852;
+  --color-status-chip-red-fg: #ffc6c1;
+  --color-status-chip-orange-bg: #c2410c52;
+  --color-status-chip-orange-fg: #ffc9a2;
+  --color-status-chip-orange-border: #e2883e;
+  --color-syntax-keyword: #efa8ff;
+  --color-syntax-string: #a6d2a2;
+  --color-syntax-comment: #a3a3a3;
+  --color-syntax-number: #ffb37f;
+  --color-syntax-function: #a0caff;
+  --color-syntax-type: #efa8ff;
+  --color-syntax-variable: #e5e5e5;
+  --color-syntax-operator: #a3a3a3;
+  --color-syntax-constant: #ffb37f;
+  --color-syntax-tag: #ffaeaa;
+  --color-syntax-attribute: #eec12f;
+  --color-syntax-property: #83dac9;
+  --color-syntax-punctuation: #525252;
+  --color-badge-info-bg: #6d9cfe;
+  --color-badge-success-bg: #64af4c;
+  --color-badge-warning-bg: #ffce2f;
+  --color-badge-error-bg: #ff705d;
+  --color-badge-on-vivid: #171717;
+  --color-elevation-shadow: #0000001a; /* biến Figma; --elevation-* không dùng */
+  --color-elevation-shadow-strong: #0000001a; /* biến Figma; --elevation-* không dùng */
+  --color-shadow: #0000004d;
+  --color-tint-hover: #ffffff;
+  --color-progress-accent: #0074e2;
+  --color-progress-success: #198100;
+  --color-progress-warning: #ffce2f;
+  --color-progress-error: #e33f4a;
+  --color-input-ring-focus: #262626;
+  --color-input-ring-hover: #5252524d; /* alpha giả định = Light, chưa xác minh */
+  --color-input-ring-success: #1981004d; /* alpha giả định = Light, chưa xác minh */
+  --color-input-ring-warning: #ffce2f4d; /* alpha giả định = Light, chưa xác minh */
+  --color-input-ring-error: #e33f4a4d; /* alpha giả định = Light, chưa xác minh */
+  --color-background-inverted: #ffffff;
+  --color-error-inverted: #e3193b;
+  --color-track: #5a5e66;
+  --elevation-low: 0 2px 4px #00000040, 0 4px 8px #00000066, inset 0 0 0 1px #ffffff14;
+  --elevation-medium: 0 2px 4px #00000059, 0 4px 12px #00000080, inset 0 0 0 1px #ffffff1f;
+  --elevation-high: 0 4px 6px #00000080, 0 12px 24px #000000b3, inset 0 0 0 1px #ffffff26;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast-min: 0s; --duration-fast: 0s; --duration-fast-max: 0s;
+    --duration-medium-min: 0s; --duration-medium: 0s; --duration-medium-max: 0s;
+    --duration-slow-min: 0s; --duration-slow: 0s; --duration-slow-max: 0s;
+  }
+}
+
+/* ---- Text styles (khớp Figma text styles) ---- */
+.text-display-1 { font-family: var(--font-heading); font-size: 42px; font-weight: 400; line-height: 52px; letter-spacing: 0; }
+.text-display-2 { font-family: var(--font-heading); font-size: 35px; font-weight: 400; line-height: 44px; letter-spacing: 0; }
+.text-display-3 { font-family: var(--font-heading); font-size: 29px; font-weight: 400; line-height: 36px; letter-spacing: 0; }
+.text-heading-1 { font-family: var(--font-heading); font-size: 24px; font-weight: 400; line-height: 32px; letter-spacing: 0; }
+.text-heading-2 { font-family: var(--font-heading); font-size: 20px; font-weight: 400; line-height: 28px; letter-spacing: 0; }
+.text-heading-3 { font-family: var(--font-heading); font-size: 17px; font-weight: 400; line-height: 24px; letter-spacing: 0; }
+.text-heading-4 { font-family: var(--font-body); font-size: 14px; font-weight: 700; line-height: 20px; letter-spacing: 0; }
+.text-heading-5 { font-family: var(--font-body); font-size: 12px; font-weight: 600; line-height: 20px; letter-spacing: 0; }
+.text-heading-6 { font-family: var(--font-body); font-size: 10px; font-weight: 600; line-height: 16px; letter-spacing: 0; }
+.text-large { font-family: var(--font-body); font-size: 17px; font-weight: 600; line-height: 24px; letter-spacing: 0; }
+.text-body { font-family: var(--font-body); font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0; }
+.text-label { font-family: var(--font-body); font-size: 14px; font-weight: 500; line-height: 20px; letter-spacing: 0; }
+.text-supporting { font-family: var(--font-body); font-size: 12px; font-weight: 400; line-height: 20px; letter-spacing: 0; }
+.text-code { font-family: var(--font-code); font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0; }
+.text-code-sm { font-family: var(--font-code); font-size: 12px; font-weight: 400; line-height: 16px; letter-spacing: 0; }
+
+
+/* ---- slide tokens: chỉ ánh xạ, không đặt màu mới ---- */
+:root {
+  --d-bg: var(--color-background-body, #f1f1f1);
+  --d-surface: var(--color-background-surface, #ffffff);
+  --d-text: var(--color-text-primary, #171717);
+  --d-muted: var(--color-text-secondary, #737373);
+  --d-border: var(--color-border-emphasized, #d4d4d4);
+  --d-accent: var(--color-accent, #262626);
+  --d-on-accent: var(--color-on-accent, #ffffff);
+  --d-hl-bg: var(--color-blue-bg, #c4ddfb);
+  --d-hl-text: var(--color-blue-text, #00458c);
+  --d-hl-border: var(--color-blue-border, #b1c9e7);
+  --d-ok-bg: var(--color-success-muted, #c5e5c0);
+  --d-ok: var(--color-success, #007004);
+  --d-warn-bg: var(--color-warning-muted, #f8da9d);
+  --d-warn: var(--color-warning, #745b00);
+  --d-con: var(--color-error, #a50c25);
+  --d-font: var(--font-body, Inter, -apple-system, "Segoe UI", Roboto, Arial, sans-serif);
+  --d-font-head: var(--font-heading, var(--d-font));
+  --d-bar: var(--d-accent);
+}
+:root {
+  --d-accent: #0036B5;
+  --d-hl-text: #0036B5;
+  --d-on-accent: #FFFFFF;
+  --d-bar: #00A2FF;
+  --d-hl-border: #00A2FF;
+  --d-hl-bg: color-mix(in srgb, #00A2FF 28%, #ffffff);
+  --brand-logo-on-primary: url("data:image/png;base64,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");
+  --brand-logo-on-light: url("data:image/png;base64,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");
+  --brand-mark-on-primary: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOTEgMjg4IiBzaGFwZS1yZW5kZXJpbmc9ImNyaXNwRWRnZXMiPjxyZWN0IHg9IjI3IiB5PSIwIiB3aWR0aD0iNDIiIGhlaWdodD0iNDIiIGZpbGw9IiMwMEZERTYiLz48cmVjdCB4PSI3MSIgeT0iNDIiIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIxIiBmaWxsPSIjMDBBMkZGIi8+PHJlY3QgeD0iMjQ4IiB5PSIxMjEiIHdpZHRoPSI0MyIgaGVpZ2h0PSI0MiIgZmlsbD0iIzAwQTJGRiIvPjxyZWN0IHg9IjAiIHk9IjE2NCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjcxIiBmaWxsPSIjMDBGREU2Ii8+PHJlY3QgeD0iMTkyIiB5PSIxNjQiIHdpZHRoPSI1NSIgaGVpZ2h0PSI2MSIgZmlsbD0iI0ZGRkZGRiIvPjxyZWN0IHg9IjEzNiIgeT0iMjI2IiB3aWR0aD0iNTUiIGhlaWdodD0iNjIiIGZpbGw9IiMwMEZERTYiLz48L3N2Zz4K");
+  --brand-mark-on-light: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyOTEgMjg4IiBzaGFwZS1yZW5kZXJpbmc9ImNyaXNwRWRnZXMiPjxyZWN0IHg9IjI3IiB5PSIwIiB3aWR0aD0iNDIiIGhlaWdodD0iNDIiIGZpbGw9IiMwMDAwMDAiLz48cmVjdCB4PSI3MSIgeT0iNDIiIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIxIiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMjQ4IiB5PSIxMjEiIHdpZHRoPSI0MyIgaGVpZ2h0PSI0MiIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjAiIHk9IjE2NCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjcxIiBmaWxsPSIjMDAwMDAwIi8+PHJlY3QgeD0iMTkyIiB5PSIxNjQiIHdpZHRoPSI1NSIgaGVpZ2h0PSI2MSIgZmlsbD0iIzAwMDAwMCIvPjxyZWN0IHg9IjEzNiIgeT0iMjI2IiB3aWR0aD0iNTUiIGhlaWdodD0iNjIiIGZpbGw9IiMwMDAwMDAiLz48L3N2Zz4K");
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: #111; color: var(--d-text); font-family: var(--d-font); overflow: hidden; }
+
+/* ---- stage 16:9 cố định 1280×720, co giãn theo cửa sổ ---- */
+#viewport { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+#stage { position: relative; width: 1280px; height: 720px; flex: none; transform-origin: center center; }
+.slide { position: absolute; inset: 0; background: var(--d-surface); color: var(--d-text); padding: 56px 72px 64px; display: none; flex-direction: column; overflow: hidden; }
+.slide.active { display: flex; }
+.slide .fit { flex: 1; display: flex; flex-direction: column; min-height: 0; transform-origin: top left; }
+
+/* footer chung */
+.slide .foot { position: absolute; left: 72px; right: 72px; bottom: 22px; display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; line-height: 1; color: var(--d-muted); }
+.slide .bar { position: absolute; left: 0; bottom: 0; height: 4px; background: var(--d-bar); }
+.slide .foot .fl { display: flex; align-items: baseline; gap: 12px; }
+
+/* typography — cỡ cho màn chiếu, không viết hoa toàn bộ */
+h1 { font-family: var(--d-font-head); font-weight: 400; font-size: 56px; line-height: 1.15; margin: 0 0 20px; }
+h2 { font-family: var(--d-font-head); font-weight: 400; font-size: 38px; line-height: 1.2; margin: 0 0 24px; }
+p { font-size: 24px; line-height: 1.45; margin: 0 0 14px; }
+ul, ol { font-size: 24px; line-height: 1.45; margin: 0 0 14px; padding-left: 32px; }
+li { margin-bottom: 10px; }
+code { font-family: var(--font-code, ui-monospace, monospace); font-size: .9em; background: var(--d-bg); padding: 1px 6px; border-radius: 4px; }
+a { color: var(--d-hl-text); }
+.ctx { border-left: 4px solid var(--d-hl-border); background: var(--d-bg); padding: 12px 18px; border-radius: 0 6px 6px 0; margin: 0 0 16px; }
+.ctx p { font-size: 20px; margin: 0 0 6px; color: var(--d-text); }
+.ctx p:last-child { margin: 0; }
+.lab { font-size: 20px; line-height: 1.4; margin: 0 0 10px; }
+.lab b { color: var(--d-muted); font-weight: 600; }
+.lab.srcdoc { font-size: 16px; color: var(--d-muted); margin-top: -4px; }
+.lab.quote { font-size: 16px; font-style: italic; color: var(--d-muted); border-left: 2px solid var(--d-border); padding-left: 12px; margin: 0 0 8px; }
+.lab.quote b { font-style: normal; }
+
+/* layout: title */
+.l-title { justify-content: center; background: var(--d-accent); color: var(--d-on-accent); }
+.l-title h1 { font-size: 64px; max-width: 1000px; }
+.l-title p { font-size: 26px; opacity: .85; }
+.l-title .meta { margin-top: 40px; font-size: 20px; opacity: .7; }
+.l-title .foot { color: var(--d-on-accent); opacity: .6; }
+.l-title .bar { display: none; }
+
+/* căn giữa dọc cho bìa / ngăn mục / kết */
+.l-title .fit, .l-section .fit, .l-end .fit { justify-content: center; }
+body.branded .l-title .fit { padding-top: 70px; }
+.l-end .fit { align-items: center; }
+
+/* layout: section / end */
+.l-section, .l-end { justify-content: center; }
+.l-section h2, .l-end h1, .l-end h2 { font-size: 56px; }
+.l-end { text-align: center; align-items: center; }
+
+/* ---- brand: chỉ hiện khi deck khai `brand:` (body.branded) ---- */
+.brand-logo, .brand-mark { display: none; background-repeat: no-repeat; background-size: contain; background-position: left center; flex: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body.branded .brand-logo, body.branded .brand-mark { display: block; }
+body.branded .l-section, body.branded .l-end { background: var(--d-accent); color: var(--d-on-accent); }
+body.branded .l-section .foot, body.branded .l-end .foot { color: var(--d-on-accent); opacity: .6; }
+body.branded .l-title .bar, body.branded .l-section .bar, body.branded .l-end .bar { display: none; }
+body.branded .l-title h1, body.branded .l-title p { max-width: 760px; }
+body.branded .l-title, body.branded .l-section, body.branded .l-end { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.l-title > .brand-mark { position: absolute; right: 80px; top: 50%; transform: translateY(-50%); width: 300px; height: 297px; background-image: var(--brand-mark-on-primary); background-position: right center; }
+.l-section > .brand-mark { position: absolute; right: 72px; top: 56px; width: 130px; height: 129px; background-image: var(--brand-mark-on-primary); background-position: right top; }
+.l-title > .brand-logo { position: absolute; left: 72px; top: 56px; width: 190px; height: 85px; background-image: var(--brand-logo-on-primary); }
+.l-end > .brand-logo { position: absolute; right: 72px; top: 48px; width: 120px; height: 54px; background-image: var(--brand-logo-on-primary); background-position: right top; }
+.foot .brand-logo { width: 67px; height: 30px; background-position: left bottom; background-image: var(--brand-logo-on-light); }
+.l-title .foot .brand-logo, .l-section .foot .brand-logo, .l-end .foot .brand-logo { display: none; }
+
+/* layout: oq */
+.oq-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 18px; color: var(--d-muted); }
+.chip { font-size: 16px; font-weight: 600; padding: 5px 14px; border-radius: 999px; background: var(--d-bg); color: var(--d-muted); border: 1px solid var(--d-border); }
+.chip[data-s="decided"] { background: var(--d-ok-bg); color: var(--d-ok); border-color: transparent; }
+.chip[data-s="deferred"] { background: var(--d-warn-bg); color: var(--d-warn); border-color: transparent; }
+.l-oq h2 { font-size: 34px; margin-bottom: 16px; }
+.opts { display: flex; gap: 16px; margin: 4px 0 16px; flex: none; }
+.opt { flex: 1; min-height: 150px; border: 2px solid var(--d-border); border-radius: 10px; padding: 14px 16px; cursor: pointer; position: relative; background: var(--d-surface); display: flex; flex-direction: column; min-width: 0; }
+.opt:hover { border-color: var(--d-muted); }
+.opt .ot { font-size: 20px; font-weight: 600; margin-bottom: 8px; display: flex; gap: 10px; align-items: baseline; }
+.opt .lt { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--d-bg); display: inline-flex; align-items: center; justify-content: center; font-size: 17px; }
+.opt p { font-size: 17px; margin: 0 0 6px; }
+.opt ul { list-style: none; padding: 0; margin: 0; font-size: 17px; line-height: 1.35; }
+.opt li { margin-bottom: 4px; padding-left: 22px; position: relative; }
+.opt li::before { position: absolute; left: 0; font-weight: 700; }
+.opt li.pro::before { content: "+"; color: var(--d-ok); }
+.opt li.con::before { content: "−"; color: var(--d-con); }
+.opt.rec { border-color: var(--d-hl-border); background: color-mix(in srgb, var(--d-hl-bg) 22%, var(--d-surface)); }
+.opt .rtag { position: absolute; top: -13px; right: 14px; background: var(--d-hl-bg); color: var(--d-hl-text); font-size: 14px; font-weight: 600; padding: 2px 10px; border-radius: 999px; }
+.opt.picked { border-color: var(--d-ok); box-shadow: 0 0 0 3px var(--d-ok-bg); }
+.opt.picked .lt { background: var(--d-ok); color: #fff; }
+.decide { margin-top: auto; display: flex; align-items: center; gap: 10px; border-top: 1px solid var(--d-border); padding-top: 14px; }
+.decide .dl { font-size: 16px; color: var(--d-muted); margin-right: 4px; white-space: nowrap; }
+.decide button { font: 600 16px var(--d-font); padding: 7px 14px; border-radius: 8px; border: 1px solid var(--d-border); background: var(--d-surface); color: var(--d-text); cursor: pointer; }
+.decide button.on { background: var(--d-accent); color: var(--d-on-accent); border-color: var(--d-accent); }
+.decide .note { flex: 1; resize: none; font: 16px var(--d-font); padding: 8px 12px; border: 1px solid var(--d-border); border-radius: 8px; min-width: 0; }
+.l-oq.noopts .decide { margin-top: 8px; flex-wrap: wrap; }
+.decide.wide { flex-wrap: wrap; }
+.decide.wide .note { flex-basis: 100%; height: 84px; line-height: 1.4; }
+.l-oq.noopts .decide .note { flex-basis: 100%; height: 200px; font-size: 20px; line-height: 1.4; }
+
+/* layout: recap */
+.recap { width: 100%; border-collapse: collapse; font-size: 17px; }
+.recap th { text-align: left; color: var(--d-muted); font-weight: 600; border-bottom: 2px solid var(--d-border); padding: 6px 8px; }
+.recap td { border-bottom: 1px solid var(--d-border); padding: 7px 8px; vertical-align: top; }
+.recap td.st { white-space: nowrap; font-weight: 600; }
+.recap a.qlink { color: inherit; text-decoration: none; cursor: pointer; }
+.recap a.qlink:hover { color: var(--d-accent); }
+.wrapr { flex: 1; min-height: 0; overflow: auto; }
+.recap thead th { position: sticky; top: 0; background: var(--d-surface); z-index: 1; }
+.tools { display: flex; gap: 10px; margin-top: 12px; }
+.tools button { font: 600 16px var(--d-font); padding: 8px 16px; border-radius: 8px; border: 1px solid var(--d-accent); background: var(--d-accent); color: var(--d-on-accent); cursor: pointer; }
+.tools button.sec { background: var(--d-surface); color: var(--d-text); border-color: var(--d-border); }
+.sum { font-size: 18px; color: var(--d-muted); margin-bottom: 10px; }
+.tools .who { font: 16px var(--d-font); padding: 8px 12px; border: 1px solid var(--d-border); border-radius: 8px; width: 280px; }
+.tools .who.need { border-color: var(--d-con); box-shadow: 0 0 0 3px color-mix(in srgb, var(--d-con) 20%, transparent); }
+
+/* layout: guide (máy sinh khi delivery: async) */
+.l-guide ol { font-size: 21px; line-height: 1.4; padding-left: 30px; }
+/* density: compact — chữ nhỏ ~25% để có chỗ cho bối cảnh dài + trích dẫn (build-deck.py COMPACT) */
+body.compact .slide p, body.compact .slide ul, body.compact .slide ol { font-size: 18px; margin-bottom: 10px; }
+body.compact .l-oq h2 { font-size: 26px; margin-bottom: 12px; }
+body.compact .oq-top { font-size: 14px; margin-bottom: 10px; }
+body.compact .ctx { padding: 10px 14px; margin-bottom: 12px; }
+body.compact .ctx p { font-size: 16px; line-height: 1.45; }
+body.compact .slide .lab { font-size: 15px; margin-bottom: 6px; }
+body.compact .lab.srcdoc { font-size: 13px; }
+body.compact .lab.quote { font-size: 13px; line-height: 1.4; margin-bottom: 6px; }
+body.compact .opts { gap: 12px; }
+body.compact .opt { min-height: 110px; padding: 10px 12px; }
+body.compact .opt .ot { font-size: 16px; margin-bottom: 6px; }
+body.compact .opt .lt { width: 24px; height: 24px; font-size: 14px; }
+body.compact .opt p, body.compact .opt ul { font-size: 14px; }
+body.compact .l-oq.noopts .decide .note { height: 150px; font-size: 16px; }
+body.compact .decide.wide { padding-top: 10px; gap: 8px; }
+body.compact .decide.wide .note { height: 72px; font-size: 15px; }
+.l-guide li { margin-bottom: 14px; padding-left: 6px; }
+
+/* ---- async: nút điều hướng trên màn hình (khách tự xem, không biết phím tắt) ---- */
+#nav { display: none; position: fixed; right: 16px; bottom: 16px; z-index: 25; align-items: center; gap: 6px; background: rgba(17,17,17,.82); padding: 6px; border-radius: 10px; font: 600 14px var(--d-font); color: #ddd; }
+body.async #nav { display: flex; }
+#nav button { font: 600 15px var(--d-font); min-width: 40px; height: 36px; border: 0; border-radius: 7px; background: #3a3a3a; color: #fff; cursor: pointer; padding: 0 12px; }
+#nav button:hover { background: #555; }
+#nav button:disabled { opacity: .35; cursor: default; }
+#nav .pg { min-width: 56px; text-align: center; }
+@media screen { body.async .slide .foot > span:last-child { visibility: hidden; } }
+#warn { display: none; position: fixed; left: 50%; top: 12px; transform: translateX(-50%); z-index: 26; background: var(--d-warn-bg); color: var(--d-warn); font: 600 14px var(--d-font); padding: 8px 14px; border-radius: 8px; max-width: 90vw; }
+#warn.on { display: block; }
+
+/* ---- overview (phím O) ---- */
+#overview { position: fixed; inset: 0; background: rgba(17,17,17,.96); display: none; overflow: auto; padding: 32px; z-index: 20; }
+#overview.on { display: grid; grid-template-columns: repeat(auto-fill, minmax(256px, 1fr)); gap: 20px; align-content: start; }
+.thumb { width: 256px; height: 144px; overflow: hidden; position: relative; cursor: pointer; border: 2px solid transparent; border-radius: 4px; }
+.thumb.cur { border-color: #fff; }
+.thumb > .slide { display: flex; transform: scale(.2); transform-origin: top left; width: 1280px; height: 720px; pointer-events: none; }
+.thumb .n { position: absolute; right: 6px; bottom: 4px; background: rgba(0,0,0,.6); color: #fff; font-size: 12px; padding: 1px 6px; border-radius: 3px; }
+
+/* ---- help ---- */
+#help { position: fixed; left: 50%; top: 14px; transform: translateX(-50%); color: #999; font: 12px var(--d-font); opacity: 0; transition: opacity .3s; z-index: 30; pointer-events: none; background: rgba(0,0,0,.7); padding: 8px 12px; border-radius: 6px; }
+#help.on { opacity: 1; }
+
+/* ---- presenter (cửa sổ phím P) ---- */
+body.presenter { background: #1b1b1b; color: #eee; overflow: auto; }
+body.presenter #viewport { display: none; }
+#pv { display: none; }
+body.presenter #pv { display: grid; grid-template-columns: 1.6fr 1fr; grid-template-rows: auto 1fr; gap: 16px; padding: 16px; height: 100vh; }
+#pv .hd { grid-column: 1 / 3; display: flex; gap: 24px; align-items: center; font-size: 15px; color: #aaa; }
+#pv .hd .clock { font: 600 28px var(--d-font); color: #fff; }
+#pv .hd .over { color: #ff8a8a; }
+#pv .cur, #pv .nxt { position: relative; overflow: hidden; background: #000; }
+#pv .box { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+#pv .lbl { font-size: 13px; color: #888; margin: 0 0 4px; }
+#pv .notes { flex: 1; overflow: auto; background: #262626; border-radius: 8px; padding: 14px 16px; font-size: 19px; line-height: 1.5; }
+#pv .notes p, #pv .notes li { font-size: 19px; }
+#pv-meta { font-size: 14px; color: #bbb; background: #262626; border-radius: 8px; padding: 10px 14px; }
+#pv .slide { display: flex; width: 1280px; height: 720px; top: 0; left: 0; transform-origin: top left; pointer-events: none; }
+
+/* ---- in ra PDF: mỗi slide 1 trang ---- */
+body.pdfview .decide, body.pdfview .chip { display: none !important; }
+body.pdfview .slide .foot > span:last-child { visibility: visible !important; }
+.pdfnote { margin-top: 28px; font-size: 18px; opacity: .8; }
+@media print {
+  @page { size: 1280px 720px; margin: 0; }
+  body { background: #fff; overflow: visible; }
+  #viewport { position: static; display: block; }
+  #stage { transform: none !important; width: 1280px; height: auto; }
+  .slide { display: flex !important; position: relative; height: 720px; page-break-after: always; break-after: page; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  #overview, #help, #pv, #nav, #warn, .tools, .decide .note:placeholder-shown { display: none !important; }
+}
+</style>
+</head>
+<body class="branded async compact">
+<div id="viewport"><div id="stage">
+<section class="slide l-title" data-n="1"><i class="brand-logo"></i><i class="brand-mark"></i><div class="fit"><h1>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</h1><p>30 nội dung nhờ Delta trả lời để hoàn thiện phần vé cầu đường, bù dầu, đối soát dầu và cảnh báo xe</p><p class="meta">Delta · 15/10/2026</p></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>1 / 41</span></div><div class="bar" style="width:2.44%"></div></section>
+<section class="slide l-guide" data-n="2"><div class="fit"><h2>Hướng dẫn trả lời</h2><ol><li>Lưu file về máy rồi mở bằng trình duyệt (Chrome, Edge, Safari) — không mở trong khung xem trước của email hay Zalo</li><li>Chuyển trang bằng nút <b>‹ ›</b> ở góc dưới bên phải, hoặc phím mũi tên ← →</li><li>Mỗi trang là một câu hỏi: bấm vào <b>thẻ phương án</b> anh/chị chọn (nhãn <i>Đề xuất</i> là gợi ý của đội dự án). Chưa phù hợp → bấm <b>Khác</b> và ghi ý kiến; chưa quyết được → bấm <b>Cần trao đổi thêm</b>; câu không có phương án thì gõ câu trả lời vào ô lớn</li><li>Câu trả lời tự lưu — đóng file rồi mở lại vẫn còn, miễn là <b>cùng máy, cùng trình duyệt</b></li><li>Trang <b>Tổng kết</b> ở cuối: ghi tên người trả lời, bấm <b>Tải câu trả lời</b> rồi gửi file vừa tải cho người đã gửi file này cho anh/chị. Hoặc bấm <b>Copy để dán vào email</b> rồi dán thẳng vào email/Zalo — nội dung đã soạn sẵn thành thư trả lời</li></ol></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>2 / 41</span></div><div class="bar" style="width:4.88%"></div></section>
+<section class="slide l-bullets" data-n="3"><div class="fit"><h2>Vì sao cần anh/chị trả lời</h2><ul><li><b>30 câu hỏi</b> về dữ liệu vận hành xe (VIS) đang chặn phần thiết kế vé cầu đường, bù dầu kẹt xe, đối soát dầu và cảnh báo xe</li><li>Mỗi câu có bối cảnh và câu trích từ tài liệu Delta đã gửi (VIS 08/10, Công tác chuẩn bị 11/10, thư đề xuất GPS 25/9/2025) để tiện đọc lại</li><li>Nhiều câu đã có đề xuất của đội, chỉ cần Delta xác nhận hoặc sửa</li><li>Mất khoảng 75–90 phút; có thể làm nhiều lần, câu trả lời tự lưu</li><li>Câu liên quan EUP, VETC có thể cần hỏi đối tác: chưa rõ thì bấm <b>Cần trao đổi thêm</b></li></ul></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>3 / 41</span></div><div class="bar" style="width:7.32%"></div></section>
+<section class="slide l-bullets" data-n="4"><div class="fit"><h2>Nội dung</h2><ol><li><b>Vé cầu đường, VETC</b> — giao dịch VETC, tránh trạm, danh mục trạm, hoá đơn tổng (7 câu)</li><li><b>Kẹt xe, nổ máy, bù dầu</b> — xếp hàng ở cảng, kẹt cứng, nhắc tắt máy, định mức (4 câu)</li><li><b>Dầu, cảm biến</b> — dữ liệu EUP, đối soát dầu thực đổ, vòi tự ngắt, bàn giao xe (6 câu)</li><li><b>GPS và Lệnh</b> — mất GPS, đổi xe, ghép container, km, xe chạy ngoài Lệnh, bản đồ (8 câu)</li><li><b>Ngưỡng, quy mô, kỳ, rủi ro</b> — các con số, quy mô đội xe, kỳ báo cáo, rủi ro (5 câu)</li></ol></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>4 / 41</span></div><div class="bar" style="width:9.76%"></div></section>
+<section class="slide l-section" data-n="5"><i class="brand-mark"></i><div class="fit"><h2>Vé cầu đường, VETC</h2></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>5 / 41</span></div><div class="bar" style="width:12.2%"></div></section>
+<section class="slide l-oq" data-n="6"><div class="fit"><div class="oq-top"><span>Câu hỏi 1/30 · Vé cầu đường, VETC</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>VETC có gửi từng giao dịch trừ tiền về ngay khi xe qua trạm không?</h2><div class="ctx"><p>Ba chỗ trong tài liệu cùng một ý: phần mềm gọi VETC một lần khi xe vào vùng điểm đích, tức lúc kết thúc Lệnh, để lấy các giao dịch trong khung giờ của Lệnh. Còn chưa rõ VETC có tự gửi từng giao dịch về ngay khi trừ tiền không. Công văn VETC ngày 02/09/2026 là ảnh chụp, đội chưa đọc được nội dung. Đội thiết kế chạy được cả hai cách; câu trả lời quyết định lúc nào điều vận thấy tiền vé và biết lái xe tránh trạm.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 2.2.6 Giám sát lộ trình và ghi nhận tránh trạm vé, mục 3.1.3 Bước 2; SIM &amp; VIS — Công tác chuẩn bị (11/10/2026), mục 3.4 Thu phí tự động VETC</p><p class="lab quote"><b>Trích dẫn:</b> "Tại thời điểm xe kết thúc Lệnh vận tải, Delta MIS tự động gọi API sang hệ thống VETC để thu thập toàn bộ danh sách giao dịch trừ tiền phát sinh của phương tiện đó trong đúng khung thời gian thực hiện Lệnh vận tải" — VIS, mục 3.1.3 Bước 2</p><p class="lab quote"><b>Trích dẫn:</b> "gọi API VETC ngay tại thời điểm xe kích hoạt Geofence điểm đích (kết thúc Lệnh vận tải)" — Công tác chuẩn bị, mục 3.4</p><p class="lab"><b>Nếu chưa rõ:</b> bấm Cần trao đổi thêm, đội cùng Delta hỏi VETC</p><p class="lab"><b>Ảnh hưởng:</b> lúc nào tiền vé hiện trên Lệnh; lúc nào biết lái xe tránh trạm</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>Có, VETC gửi ngay khi trừ tiền</span></div><p>Phần mềm khớp vé từng trạm lúc xe đang chạy; tránh trạm vẫn chốt khi Lệnh hết chạy</p><ul><li class="pro">Điều vận thấy tiền vé trên Lệnh ngay</li><li class="pro">Biết sớm xe đã qua trạm nào</li><li class="con">Phụ thuộc VETC gửi đều, đúng giờ</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Không, chỉ tra được theo xe trong một khung giờ</span></div><p>Phần mềm khớp một lần khi xe vào vùng điểm cuối</p><ul><li class="pro">Đúng như tài liệu VIS mô tả</li><li class="con">Tiền vé và tránh trạm chỉ hiện sau khi xe chạy xong</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>6 / 41</span></div><div class="bar" style="width:14.63%"></div></section>
+<section class="slide l-oq" data-n="7"><div class="fit"><div class="oq-top"><span>Câu hỏi 2/30 · Vé cầu đường, VETC</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Trạm lái xe tránh có được xử lý ngay khi duyệt từng Lệnh không?</h2><div class="ctx"><p>VIS nói phần mềm tự ghi lái xe "Tránh trạm vé / Sai lộ trình" và đưa vào bảng kê, chưa nói ai xem lại và khi nào. Có lúc xe đi đường khác vì lý do chính đáng: điều vận đã cho đổi cung đường, đường cấm, tai nạn. Đội đề xuất: khi duyệt Lệnh, người duyệt xử lý từng trạm bị ghi tránh hoặc ngoài cung đường bằng "Tính cho lái xe" hoặc "Chấp nhận" kèm lý do; còn trạm chưa xử lý thì chưa duyệt được Lệnh. Kết quả thành bảng kê tránh trạm theo lái xe mỗi kỳ cho bộ phận lương.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 3.1.3 Bước 3 Phân loại dữ liệu và lập Bảng kê "Lái xe tránh trạm vé"</p><p class="lab quote"><b>Trích dẫn:</b> "Hệ thống tự động ghi nhận lái xe "Tránh trạm vé / Sai lộ trình", đồng thời đẩy thông tin vào Bảng kê tránh trạm vé." — VIS, mục 3.1.3 Bước 3</p><p class="lab"><b>Ảnh hưởng:</b> màn duyệt Lệnh, bảng kê tránh trạm gửi bộ phận lương</p><p class="lab"><b>Vì sao đề xuất A:</b> chỉ người duyệt Lệnh biết đã cho đổi cung đường hay chưa; xử lý dồn cuối kỳ dễ tính oan cho lái xe</p><div class="opts"><div class="opt rec" data-l="A"><span class="rtag">Đề xuất</span><div class="ot"><span class="lt">A</span><span>Chốt theo từng Lệnh khi duyệt</span></div><ul><li class="pro">Xử lý khi chuyến còn mới, dễ hỏi lại lái xe</li><li class="pro">Bảng kê cuối kỳ đã có lý do từng trạm</li><li class="con">Người duyệt Lệnh thêm một bước</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Chốt cuối kỳ theo bảng kê</span></div><ul><li class="pro">Duyệt Lệnh nhanh hơn</li><li class="con">Dồn việc cuối kỳ, khó nhớ lý do từng chuyến</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>7 / 41</span></div><div class="bar" style="width:17.07%"></div></section>
+<section class="slide l-oq" data-n="8"><div class="fit"><div class="oq-top"><span>Câu hỏi 3/30 · Vé cầu đường, VETC</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Tiền vé của trạm lái xe tránh được tính thế nào với lương lái xe?</h2><div class="ctx"><p>Sơ đồ VIS ghi "vé tránh trạm, trả vào lương lái xe" nhưng chưa rõ là trừ hay cộng. Thư đề xuất GPS năm 2025 cho thấy hiện nay vé lái xe trốn được ghi vào thu nhập chịu thuế của lái xe. Nay vé trừ tự động vào tài khoản VETC của công ty, lái xe không cầm tiền vé, nên cần chốt lại cách tính.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 3.1.1 Sơ đồ kiến trúc và luồng dữ liệu; Đề xuất phát triển tiện ích mới cho thiết bị GPS (25/9/2025), mục 1 Đầu kéo và Xe tải</p><p class="lab quote"><b>Trích dẫn:</b> "Vé tránh trạm, trả vào lương lái xe." — VIS, ghi chú sơ đồ mục 3.1.1</p><p class="lab quote"><b>Trích dẫn:</b> "việc lái xe trốn vé cầu đường và công ty phải ghi nhận những vé không phải trả để đưa vào thu nhập chịu thuế hàng tháng của lái xe" — Đề xuất tiện ích GPS, mục 1</p><p class="lab"><b>Ảnh hưởng:</b> bảng kê tránh trạm gửi bộ phận lương, quy chế lương lái xe</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>Trừ vào lương lái xe</span></div><p>Coi là vi phạm sai lộ trình</p><ul><li class="pro">Răn đe việc tránh trạm</li><li class="con">Cần quy chế nội bộ cho phép trừ lương</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Cộng vào lương, tính thu nhập chịu thuế</span></div><p>Như cách đang làm theo thư 2025</p><ul><li class="pro">Giữ cách hạch toán hiện nay</li><li class="con">Có thể khuyến khích lái xe tránh trạm</li></ul></div><div class="opt" data-l="C"><div class="ot"><span class="lt">C</span><span>Không tính tiền, chỉ ghi vi phạm</span></div><ul><li class="pro">Đơn giản, không động tới lương</li><li class="con">Không có chế tài</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="C">C</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>8 / 41</span></div><div class="bar" style="width:19.51%"></div></section>
+<section class="slide l-oq" data-n="9"><div class="fit"><div class="oq-top"><span>Câu hỏi 4/30 · Vé cầu đường, VETC</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>VETC vẫn chưa trả dữ liệu sau lần tra lại 120 phút: có cho duyệt Lệnh không?</h2><div class="ctx"><p>VIS nêu: xe đã qua trạm theo GPS mà VETC chưa trả giao dịch thì 120 phút sau tra lại. Tài liệu chưa nói tra lại vẫn chưa có thì làm gì. Đội đề xuất vẫn cho duyệt Lệnh, trạm đó ghi "Chờ VETC" và được kiểm nốt khi đối soát hoá đơn tổng VETC cuối kỳ.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 3.1.3 Bước 3 và Bước 4 Đối soát hóa đơn cuối kỳ</p><p class="lab quote"><b>Trích dẫn:</b> "Thiết lập cơ chế tự động quét lại sau 120 phút đối với các trường hợp GPS báo "Đã qua" nhưng VETC chưa trả về dữ liệu giao dịch để loại trừ độ trễ đồng bộ của bên thứ ba." — VIS, mục 3.1.3 Bước 3</p><p class="lab"><b>Ảnh hưởng:</b> duyệt Lệnh, đối soát hoá đơn VETC cuối kỳ</p><p class="lab"><b>Vì sao đề xuất A:</b> chậm trễ là của VETC, không nên giữ Lệnh và chi phí của cả chuyến; cuối kỳ vẫn kiểm lại đủ</p><div class="opts"><div class="opt rec" data-l="A"><span class="rtag">Đề xuất</span><div class="ot"><span class="lt">A</span><span>Cho duyệt, trạm ghi "Chờ VETC"</span></div><p>Kiểm nốt khi đối soát hoá đơn tổng cuối kỳ</p><ul><li class="pro">Lệnh, chi phí lên JobID không bị treo vì lỗi bên ngoài</li><li class="con">Vài vé lên Lệnh muộn, sau đối soát cuối kỳ</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Chưa cho duyệt tới khi VETC trả dữ liệu</span></div><ul><li class="pro">Lệnh đã duyệt là đủ tiền vé</li><li class="con">Lệnh có thể treo không rõ bao lâu</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>9 / 41</span></div><div class="bar" style="width:21.95%"></div></section>
+<section class="slide l-oq" data-n="10"><div class="fit"><div class="oq-top"><span>Câu hỏi 5/30 · Vé cầu đường, VETC</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>VETC có cung cấp được danh mục trạm thu phí (toạ độ, giá vé theo loại xe) không?</h2><div class="ctx"><p>Để biết xe qua trạm hay tránh trạm, mỗi trạm cần toạ độ chuẩn, vùng bao đoạn đường phải qua theo từng chiều và giá vé theo loại xe. Đội đề xuất làm một danh mục trạm dùng chung, đội sản phẩm duy trì, Delta không phải tự vẽ. Ngày 09/10 Delta đã chọn VETC là nguồn chuẩn về toạ độ và chi phí đường bộ, nên VETC là nguồn ban đầu tốt nhất.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 2.2.6 Giám sát lộ trình và ghi nhận tránh trạm vé; trao đổi với Delta ngày 09/10/2026, mục 4 Dữ liệu và chứng từ</p><p class="lab quote"><b>Trích dẫn:</b> "cần xác định tọa độ chuẩn của trạm vé lên danh mục trạm vé để thực hiện nhiệm vụ này" — VIS, mục 2.2.6</p><p class="lab quote"><b>Trích dẫn:</b> "Dữ liệu từ Vietmap và VETC đang lệch nhau về toạ độ và chi phí, cần thống nhất nguồn chuẩn -&gt; VETC." — bản tổng hợp trao đổi 09/10/2026</p><p class="lab"><b>Ảnh hưởng:</b> danh mục trạm thu phí, phát hiện tránh trạm, dự toán vé khi lập Lệnh</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>VETC cung cấp được</span></div><p>Delta xin VETC danh sách trạm, toạ độ, giá theo loại xe</p><ul><li class="pro">Đúng nguồn chuẩn Delta đã chọn</li><li class="con">Cần Delta làm việc với VETC</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>VETC không cung cấp</span></div><p>Đội sản phẩm tự dựng danh mục, Delta kiểm các trạm hay đi</p><ul><li class="pro">Không phải chờ VETC</li><li class="con">Delta mất thời gian kiểm danh mục</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>10 / 41</span></div><div class="bar" style="width:24.39%"></div></section>
+<section class="slide l-oq" data-n="11"><div class="fit"><div class="oq-top"><span>Câu hỏi 6/30 · Vé cầu đường, VETC</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Ba trường hợp vé bất thường dưới đây xử lý theo đề xuất của đội được không?</h2><div class="ctx"><p>VIS mới nói vé không gắn được vào Lệnh nào thì chuyển kế toán xử lý. Ba trường hợp sau chưa có trong tài liệu; đội đề xuất phần mềm tự nhận ra và xử lý như sau:</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 3.1.3 Quy trình đối soát và quản lý chi phí trên Delta MIS; ba trường hợp chưa có trong tài liệu Delta gửi</p><p class="lab quote"><b>Trích dẫn:</b> "Lập báo cáo các vé phát sinh ngoài lộ trình, hệ thống không ghi nhận vào đâu, để chuyển cho kế toán xử lý." — VIS, mục 3.1.3</p><ul><li>Trạm chưa có trong danh mục: vẫn ghi tiền theo giao dịch, đánh dấu "Trạm chưa có trong danh mục", báo bổ sung danh mục</li><li>Thẻ thu phí gắn nhầm xe: lúc trừ tiền, GPS của xe ở nơi khác thì không ghi vào Lệnh, cảnh báo "nghi gắn nhầm thẻ"</li><li>Trừ trùng: hai giao dịch cùng xe, cùng trạm cách vài phút thì ghi một lượt, lượt kia đánh dấu "nghi trừ trùng" để kế toán khiếu nại</li></ul><p class="lab"><b>Ảnh hưởng:</b> đối soát vé, danh sách việc của kế toán</p><p class="lab"><b>Vì sao đề xuất A:</b> phần mềm đã có GPS và danh mục trạm nên nhận ra được 3 trường hợp này; kế toán chỉ cần xử lý chỗ bị đánh dấu</p><div class="opts"><div class="opt rec" data-l="A"><span class="rtag">Đề xuất</span><div class="ot"><span class="lt">A</span><span>Đồng ý cả 3 đề xuất</span></div><ul><li class="pro">Vé lạ không thành vé không rõ chủ cuối kỳ</li><li class="pro">Có căn cứ khiếu nại VETC</li><li class="con">Thêm danh sách cảnh báo cho kế toán</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Không phân loại, chuyển hết cho kế toán</span></div><ul><li class="pro">Đơn giản</li><li class="con">Kế toán tự dò từng giao dịch</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>11 / 41</span></div><div class="bar" style="width:26.83%"></div></section>
+<section class="slide l-oq" data-n="12"><div class="fit"><div class="oq-top"><span>Câu hỏi 7/30 · Vé cầu đường, VETC</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Hoá đơn tổng VETC cuối kỳ có đi qua phần thu thập hoá đơn đầu vào như hoá đơn thường không?</h2><div class="ctx"><p>Cuối kỳ phần mềm đối soát hoá đơn tổng VETC với GPS, gợi ý cho kế toán giao dịch nào phát sinh ngoài Lệnh để duyệt hoặc xử lý lái xe. Tài liệu SIM có phần thu thập hoá đơn đầu vào (đọc, định danh, gắn vào JobID). Chưa rõ hoá đơn tổng VETC có đi qua phần đó không, và ai duyệt các giao dịch ngoài Lệnh.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 3.1.3 Bước 4 Đối soát hóa đơn cuối kỳ; SIM (12/10/2026), mục 3.3 Thu thập &amp; định danh hóa đơn đầu vào (IIP); Đề xuất tiện ích GPS (25/9/2025), mục 1</p><p class="lab quote"><b>Trích dẫn:</b> "Hệ thống tự động đưa ra gợi ý xử lý cho kế toán xác định chính xác giao dịch đó thuộc xe nào, phát sinh ngoài lệnh trong khung giờ nào, tại trạm nào để phê duyệt chi phí hợp lý hoặc xử lý sai phạm của lái xe" — VIS, mục 3.1.3 Bước 4</p><p class="lab quote"><b>Trích dẫn:</b> "Hàng tháng Delta đang phải hạch toán hàng ngàn vé xe vào các Lệnh vận chuyển cho gần 200 đầu xe." — Đề xuất tiện ích GPS, mục 1</p><p class="lab"><b>Ghi thêm:</b> ai duyệt các giao dịch phát sinh ngoài Lệnh</p><p class="lab"><b>Ảnh hưởng:</b> việc của kế toán cuối kỳ, chi phí vé trên JobID</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>Có, qua phần thu thập hoá đơn đầu vào</span></div><p>Ghép hoá đơn tổng với vé đã ghi trên từng Lệnh</p><ul><li class="pro">Một nơi quản lý mọi hoá đơn đầu vào, đối chiếu theo JobID</li><li class="con">Hoá đơn tổng gồm hàng ngàn vé của gần 200 đầu xe</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Không, kế toán xử lý riêng</span></div><p>Dùng bảng đối soát của VIS</p><ul><li class="pro">Kế toán làm như hiện nay</li><li class="con">Hoá đơn VETC nằm ngoài luồng hoá đơn đầu vào chung</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>12 / 41</span></div><div class="bar" style="width:29.27%"></div></section>
+<section class="slide l-section" data-n="13"><i class="brand-mark"></i><div class="fit"><h2>Kẹt xe, nổ máy, bù dầu</h2></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>13 / 41</span></div><div class="bar" style="width:31.71%"></div></section>
+<section class="slide l-oq" data-n="14"><div class="fit"><div class="oq-top"><span>Câu hỏi 8/30 · Kẹt xe, nổ máy, bù dầu</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Xe xếp hàng chờ ở cổng cảng, bãi, kho quá 10 phút mà máy vẫn nổ: có bù dầu như kẹt xe không?</h2><div class="ctx"><p>VIS dùng ngưỡng 10 phút để bỏ qua dừng đèn đỏ và check-in ở cổng cảng. Thực tế xe có thể xếp hàng ở cổng cảng, bãi, kho lâu hơn 10 phút mà máy vẫn nổ, nhích dưới 5 km/h. Theo cách tính của VIS, khoảng đó sẽ thành kẹt xe và được đề xuất bù dầu; cần Delta chốt có bù cho trường hợp này không.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 3.2 Bước 1 Ghi nhận sự kiện kích hoạt trạng thái "Traffic jam"</p><p class="lab quote"><b>Trích dẫn:</b> "Trạng thái này phải duy trì liên tục trên 10 phút để hệ thống tự động loại trừ các biến cố dừng đèn đỏ hoặc dừng check-in tại cổng cảng." — VIS, mục 3.2 Bước 1</p><p class="lab"><b>Ảnh hưởng:</b> đề xuất bù dầu kẹt xe trên Lệnh</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>Có, bù như kẹt xe</span></div><ul><li class="pro">Lái xe không chịu thiệt khi cảng ùn</li><li class="con">Số lít bù tăng, nhất là ở cảng hay ùn</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Không bù khi xe ở trong vùng cảng, bãi, kho</span></div><ul><li class="pro">Đúng ý loại trừ dừng ở cổng cảng của VIS</li><li class="con">Lái xe chịu phần dầu khi cảng ùn lâu</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>14 / 41</span></div><div class="bar" style="width:34.15%"></div></section>
+<section class="slide l-oq" data-n="15"><div class="fit"><div class="oq-top"><span>Câu hỏi 9/30 · Kẹt xe, nổ máy, bù dầu</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Tai nạn, kẹt cứng làm xe đứng yên hẳn: có tính là kẹt xe (được bù dầu) không?</h2><div class="ctx"><p>Theo VIS, xe nhích dưới 5 km/h là kẹt xe (được bù dầu), còn đứng yên hẳn khi máy nổ là nổ máy ngủ (không bù). Khi tai nạn hay kẹt cứng, xe đứng yên hẳn dù lái xe không có lỗi. Đội đề xuất: khoảng đứng yên vẫn tính là kẹt xe khi có ít nhất 1 dấu hiệu — nằm giữa hai đoạn kẹt xe gần nhau; lái xe đã báo sự cố giữa chặng trên app; hoặc bản đồ báo tắc, sự cố tại đó. Trạm dừng nghỉ, cây xăng không xét.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 2.2.3 Thời gian xe di chuyển dưới 5 km/h và mục 2.2.4 Thời gian nổ máy không di chuyển</p><p class="lab quote"><b>Trích dẫn:</b> "Điều kiện kích hoạt: Khi nhận Event vận tốc &lt; 5 km/h từ EUP và trạng thái máy hoạt động." — VIS, mục 2.2.3</p><p class="lab quote"><b>Trích dẫn:</b> "Điều kiện Idling là Nổ máy và Speed = 0 trong thời gian quá 10 phút." — VIS, mục 2.2.4</p><p class="lab"><b>Ảnh hưởng:</b> phân loại kẹt xe và nổ máy ngủ, đề xuất bù dầu trên Lệnh</p><p class="lab"><b>Vì sao đề xuất A:</b> kẹt cứng là lúc lái xe thiệt nhất mà không có lỗi; 3 dấu hiệu đều có dữ liệu kiểm được</p><div class="opts"><div class="opt rec" data-l="A"><span class="rtag">Đề xuất</span><div class="ot"><span class="lt">A</span><span>Tính kẹt xe khi có 1 trong 3 dấu hiệu</span></div><ul><li class="pro">Lái xe không chịu thiệt khi kẹt cứng</li><li class="pro">Vẫn có căn cứ, không tính tràn lan</li><li class="con">Cần chốt khoảng tối đa giữa hai đoạn kẹt (câu 26)</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Theo đúng VIS</span></div><p>Đứng yên hẳn là nổ máy ngủ, không bù</p><ul><li class="pro">Đơn giản</li><li class="con">Lái xe chịu dầu khi tai nạn, kẹt cứng</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>15 / 41</span></div><div class="bar" style="width:36.59%"></div></section>
+<section class="slide l-oq" data-n="16"><div class="fit"><div class="oq-top"><span>Câu hỏi 10/30 · Kẹt xe, nổ máy, bù dầu</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Có muốn phần mềm nhắc lái xe tắt máy trên app khi xe nổ máy đứng yên quá 10 phút không?</h2><div class="ctx"><p>VIS ghi nhận thời gian nổ máy không di chuyển (ví dụ bật điều hoà ngủ) và tổng hợp theo lái xe cuối kỳ. Đội có thể nhắc ngay trên app để lái xe tắt máy trước khi thành hao phí. Đây là đề xuất mới, không có trong VIS.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 2.2.4 Thời gian nổ máy không di chuyển và mục 3.4 Bước 3</p><p class="lab quote"><b>Trích dẫn:</b> "ghi nhận thời gian nổ máy không di chuyển để quản trị hao phí nhiên liệu vô ích (Tài xế dừng chờ bật điều hòa ngủ, không tắt máy xe)" — VIS, mục 2.2.4</p><p class="lab quote"><b>Trích dẫn:</b> "Dữ liệu được tổng hợp vào bảng tổng hợp Idling cuối kỳ theo từng lái xe." — VIS, mục 3.4 Bước 3</p><p class="lab"><b>Ảnh hưởng:</b> thông báo trên app lái xe</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>Có, nhắc trên app</span></div><ul><li class="pro">Giảm dầu đốt vô ích ngay lúc đó</li><li class="con">Lái xe có thể thấy phiền khi đang chờ bốc hàng</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Không, chỉ báo cáo cuối kỳ</span></div><ul><li class="pro">Đúng như VIS mô tả</li><li class="con">Chỉ biết sau khi dầu đã tốn</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>16 / 41</span></div><div class="bar" style="width:39.02%"></div></section>
+<section class="slide l-oq" data-n="17"><div class="fit"><div class="oq-top"><span>Câu hỏi 11/30 · Kẹt xe, nổ máy, bù dầu</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Định mức dầu khi máy nổ mà xe không chạy (lít/giờ): dùng chung cho kẹt xe và nổ máy ngủ được không?</h2><div class="ctx"><p>Hai mục của VIS dùng hai tên định mức: "khi nổ máy chờ" để tính dầu bù kẹt xe và "Idling" để tính dầu hao phí nổ máy ngủ, cùng đơn vị lít/giờ theo loại xe. Chưa rõ định mức này đã có số chưa và bộ phận nào đặt.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 3.2 Bước 3 và mục 3.4 Bước 3</p><p class="lab quote"><b>Trích dẫn:</b> "Delta MIS gọi bảng Định mức tiêu hao khi nổ máy chờ của loại xe đó trong danh mục để tính ra số lít dầu" — VIS, mục 3.2 Bước 3</p><p class="lab quote"><b>Trích dẫn:</b> "Delta MIS gọi Định mức tiêu hao dầu Idling (lít/giờ) tương ứng với từng loại xe trong danh mục hệ thống" — VIS, mục 3.4 Bước 3</p><p class="lab"><b>Ghi thêm:</b> định mức đã có số chưa, bộ phận nào đặt</p><p class="lab"><b>Ảnh hưởng:</b> dầu bù kẹt xe trên Lệnh, báo cáo dầu nổ máy ngủ</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>Dùng chung một định mức</span></div><p>Cho cả kẹt xe và nổ máy ngủ</p><ul><li class="pro">Một bảng, dễ duy trì</li><li class="con">Nhích chậm có thể tốn dầu hơn đứng yên</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Hai định mức riêng</span></div><ul><li class="pro">Sát thực tế hơn</li><li class="con">Thêm một bảng phải duy trì</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>17 / 41</span></div><div class="bar" style="width:41.46%"></div></section>
+<section class="slide l-section" data-n="18"><i class="brand-mark"></i><div class="fit"><h2>Dầu, cảm biến</h2></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>18 / 41</span></div><div class="bar" style="width:43.9%"></div></section>
+<section class="slide l-oq noopts" data-n="19"><div class="fit"><div class="oq-top"><span>Câu hỏi 12/30 · Dầu, cảm biến</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Dữ liệu từ EUP: nhờ Delta (hoặc EUP) trả lời 4 ý dưới đây</h2><div class="ctx"><p>Khi xe tắt máy, phần mềm chỉ đọc mức dầu 30–60 phút một lần, nên ngưỡng "giảm 5 lít trong dưới 3 phút" không kiểm được: hút dầu lúc xe đậu bãi tắt máy có thể lọt. Lái xe thường tắt máy khi đổ dầu nên cũng có thể không bắt được sự kiện đổ dầu. Nếu EUP không báo các sự kiện này khi xe tắt máy, đội sẽ so hai lần đọc liền nhau: giảm quá ngưỡng thì nghi hút dầu, tăng quá ngưỡng thì ghi đổ dầu.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 2.2 Quy trình xử lý chi tiết, mục 3.5 Bước 1–2; SIM &amp; VIS — Công tác chuẩn bị (11/10/2026), mục 3.3 Giám sát hành trình EUP</p><p class="lab quote"><b>Trích dẫn:</b> "Delta MIS chỉ chủ động quét (polling) với tần suất thấp (30-60 phút) khi xe tắt máy để kiểm tra dầu tồn." — VIS, mục 2.2</p><p class="lab quote"><b>Trích dẫn:</b> "Nếu EUP có thể cung cấp đầy đủ dữ liệu để Delta MIS cảnh báo hành vi hút dầu … thì dùng trực tiếp dữ liệu của EUP." — VIS, mục 3.5</p><ol><li>Khi trạng thái xe đổi, EUP có gửi sự kiện ngay không? Khi xe chạy, mấy giây gửi vị trí một lần?</li><li>Khi xe tắt máy, EUP có gửi sự kiện hút dầu, đổ dầu không?</li><li>EUP có sẵn cảnh báo hút dầu và báo cáo lượng dầu bị hút để dùng thẳng không?</li><li>Ngưỡng hút dầu 5 lít trong 3 phút, đổ dầu 20 lít trong 10 phút đã thống nhất với EUP chưa?</li></ol><p class="lab"><b>Ảnh hưởng:</b> cách phát hiện hút dầu, đổ dầu; cảnh báo đến sớm hay muộn</p><div class="decide"><span class="dl">Trả lời</span><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" placeholder="Câu trả lời của anh/chị…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>19 / 41</span></div><div class="bar" style="width:46.34%"></div></section>
+<section class="slide l-oq" data-n="20"><div class="fit"><div class="oq-top"><span>Câu hỏi 13/30 · Dầu, cảm biến</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Mục 3.6 Đối soát lượng dầu thực đổ có thuộc phạm vi giai đoạn 1 không?</h2><div class="ctx"><p>Mục lục tài liệu VIS dừng ở mục 3.5, nhưng thân tài liệu có thêm mục 3.6: so số lít trên phiếu cấp dầu với số lít cảm biến ghi nhận thực đổ vào bình, lệch thì đưa vào bảng kê nghi vấn. Đội đang đưa mục này vào giai đoạn 1.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục lục và mục 3.6 Quy trình đối soát lượng dầu thực đổ</p><p class="lab quote"><b>Trích dẫn:</b> "Mục tiêu của quy trình này là tự động so khớp chéo giữa lượng dầu cấp cho xe bằng phiếu cấp dầu với lượng dầu thực tế đổ vào bình do sensor dầu EUP ghi nhận" — VIS, mục 3.6</p><p class="lab"><b>Ảnh hưởng:</b> phạm vi giai đoạn 1, báo cáo đối soát nhiên liệu</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>Có, thuộc giai đoạn 1</span></div><ul><li class="pro">Phát hiện đổ thiếu, gian lận phiếu dầu ngay từ đầu</li><li class="con">Cần cảm biến đo chuẩn và các dung sai (câu 14)</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Để giai đoạn sau</span></div><ul><li class="pro">Giai đoạn 1 gọn hơn</li><li class="con">Chưa đối soát được dầu thực đổ</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>20 / 41</span></div><div class="bar" style="width:48.78%"></div></section>
+<section class="slide l-oq noopts" data-n="21"><div class="fit"><div class="oq-top"><span>Câu hỏi 14/30 · Dầu, cảm biến</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Đối soát dầu thực đổ: nhờ cho 4 con số dưới đây</h2><div class="ctx"><p>VIS nói phần mềm so phiếu cấp dầu với số lít cảm biến ngay khi đổ dầu xong, nhưng chưa nêu lệch bao nhiêu thì vẫn coi là khớp. Thiếu các số này, phần mềm sẽ báo lệch cả những lần đổ bình thường. Số ước lượng cũng được, đội ghi là số tạm.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 3.6 Bước 1 và Bước 3</p><p class="lab quote"><b>Trích dẫn:</b> "Ngay khi sự kiện đổ dầu kết thúc, Delta MIS thực hiện lệnh so khớp tự động giữa dữ liệu cấp dầu hệ thống (Bước 2) và dữ liệu thực đổ từ sensor (Bước 1)" — VIS, mục 3.6 Bước 3</p><ol><li>Sự kiện đổ dầu cách giờ phiếu cấp dầu tối đa bao lâu thì ghép với nhau?</li><li>Lệch bao nhiêu lít (hoặc %) giữa phiếu và cảm biến vẫn coi là khớp?</li><li>Thiếu bao nhiêu lít so với dung tích bình vẫn coi là đầy bình?</li><li>Chờ bao lâu sau khi đổ để cảm biến ổn định rồi mới đọc?</li></ol><p class="lab"><b>Ảnh hưởng:</b> bảng kê nghi vấn lệch dầu, tranh chấp với cây dầu và lái xe</p><div class="decide"><span class="dl">Trả lời</span><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" placeholder="Câu trả lời của anh/chị…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>21 / 41</span></div><div class="bar" style="width:51.22%"></div></section>
+<section class="slide l-oq" data-n="22"><div class="fit"><div class="oq-top"><span>Câu hỏi 15/30 · Dầu, cảm biến</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Cây dầu nội bộ dừng bơm khi vòi tự ngắt, số lít lệch với cảm biến: xử lý theo đề xuất được không?</h2><div class="ctx"><p>Phiếu đổ đầy bình (dGas4) và phiếu chốt dầu (dGas5) ở cây dầu nội bộ thường dừng khi vòi tự ngắt, nên số lít có thể lệch với cảm biến. Đội đề xuất: lấy số lít trên iGAS làm căn cứ; chờ cảm biến ổn định; cảm biến cho thấy chưa đầy bình thì nhắc bơm bồi một lần; vẫn chưa đầy thì chốt theo số iGAS và ghi số lít còn thiếu.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 3.6 Bước 2; cách xử lý vòi tự ngắt chưa có trong tài liệu Delta gửi</p><p class="lab quote"><b>Trích dẫn:</b> "Delta MIS lấy dữ liệu từ phiếu cấp dầu điện tử hoặc dữ liệu cấp dầu của module xưởng bao gồm (1) số lít dầu được cấp theo định mức/kế hoạch (2) thời gian cấp và tên cây dầu cấp." — VIS, mục 3.6 Bước 2</p><p class="lab"><b>Ảnh hưởng:</b> phiếu đổ đầy bình, phiếu chốt dầu, đối soát dầu thực đổ</p><p class="lab"><b>Vì sao đề xuất A:</b> số iGAS là số cây dầu đã bơm thật, cảm biến cần thời gian ổn định; nhắc bơm bồi giữ được mục tiêu đầy bình</p><div class="opts"><div class="opt rec" data-l="A"><span class="rtag">Đề xuất</span><div class="ot"><span class="lt">A</span><span>Đồng ý đề xuất</span></div><ul><li class="pro">Không tranh cãi số lít khi vòi tự ngắt</li><li class="pro">Vẫn biết số lít còn thiếu để theo dõi</li><li class="con">Thêm một lần bơm bồi khi chưa đầy</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Lấy số cảm biến làm căn cứ</span></div><ul><li class="pro">Đúng số dầu vào bình</li><li class="con">Cảm biến dao động ngay sau khi đổ, dễ lệch với cây dầu</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>22 / 41</span></div><div class="bar" style="width:53.66%"></div></section>
+<section class="slide l-oq" data-n="23"><div class="fit"><div class="oq-top"><span>Câu hỏi 16/30 · Dầu, cảm biến</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Hoá đơn dầu lái xe mua ngoài có cần đối chiếu với số lít cảm biến dầu ghi nhận không?</h2><div class="ctx"><p>VIS mục 3.6 chỉ lấy dữ liệu từ phiếu cấp dầu để so với cảm biến, và cảnh báo khi dầu thực đổ nhiều hơn dầu được cấp. Dầu lái xe mua ngoài theo hoá đơn lẻ chưa nằm trong phần đối soát này. Ngày 09/10 Delta muốn lưu lượng dầu dư của dầu mua ngoài để làm căn cứ cấp bù.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 3.6 Bước 2–3; trao đổi với Delta ngày 09/10/2026, mục 3 Nhiên liệu</p><p class="lab quote"><b>Trích dẫn:</b> "Nếu dầu thực đổ (Sensor) &gt; Dầu được cấp: Cảnh báo lái xe không dùng phiếu dầu để đổ hoặc có sự cố gian lận hóa đơn cấp dầu ngoài luồng." — VIS, mục 3.6 Bước 3</p><p class="lab quote"><b>Trích dẫn:</b> "Dầu mua ngoài theo hoá đơn lẻ: tính lượng dầu dư để làm căn cứ cấp bù" — bản tổng hợp trao đổi 09/10/2026</p><p class="lab"><b>Ảnh hưởng:</b> báo cáo đối soát dầu, căn cứ cấp bù dầu</p><p class="lab"><b>Vì sao đề xuất A:</b> dầu mua ngoài là chỗ dễ lệch nhất; cần số lít thật để tính dầu dư làm căn cứ cấp bù như Delta đã nêu</p><div class="opts"><div class="opt rec" data-l="A"><span class="rtag">Đề xuất</span><div class="ot"><span class="lt">A</span><span>Có, đối chiếu với cảm biến</span></div><p>So số lít trên hoá đơn với lần đổ dầu cảm biến ghi nhận</p><ul><li class="pro">Phát hiện hoá đơn không khớp dầu thực đổ</li><li class="pro">Có số lít thật để tính dầu dư, cấp bù</li><li class="con">Hoá đơn không khớp lần đổ nào thì kế toán xử lý tay</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Không</span></div><p>Chỉ đối soát phiếu cấp dầu</p><ul><li class="pro">Đối soát đơn giản hơn</li><li class="con">Dầu mua ngoài chỉ kiểm bằng hoá đơn</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>23 / 41</span></div><div class="bar" style="width:56.1%"></div></section>
+<section class="slide l-oq" data-n="24"><div class="fit"><div class="oq-top"><span>Câu hỏi 17/30 · Dầu, cảm biến</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Bàn giao xe kèm phiếu đổ đầy bình, thu hồi xe kèm phiếu chốt dầu: thứ tự làm như đề xuất được không?</h2><div class="ctx"><p>Theo SRS hiện tại, phiếu đổ đầy bình (dGas4) hoàn thành thì mới tạo được bàn giao xe; phiếu chốt dầu (dGas5) hoàn thành thì mới tạo được thu hồi xe. Đội đề xuất giữ cặp phiếu – biên bản này, nhưng cho làm phiếu trước hay biên bản trước đều được; biên bản chỉ ký xong khi phiếu đi kèm đã xong.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> Tài liệu SRS - ERP Delta 3.0 (Web) (30/9/2026), bảng liên quy trình (Bàn giao phương tiện, Thu hồi phương tiện)</p><p class="lab quote"><b>Trích dẫn:</b> "Phiếu dGas 4 trường hợp Bàn giao PT — Phiếu cấp dầu được hoàn thành — Tạo bàn giao phương tiện với phương tiện tương ứng" — SRS ERP Delta 3.0, bảng liên quy trình</p><p class="lab"><b>Ghi thêm:</b> cách làm này có làm chậm việc giao xe không</p><p class="lab"><b>Ảnh hưởng:</b> màn bàn giao, thu hồi xe; phiếu đổ đầy bình, chốt dầu</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>Làm trước sau đều được, ký xong khi phiếu xong</span></div><ul><li class="pro">Không phải chờ cây dầu mới lập được biên bản</li><li class="pro">Vẫn đủ phiếu trước khi giao xe</li><li class="con">Biên bản có thể nằm chờ phiếu</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Giữ như SRS hiện tại</span></div><p>Phiếu xong mới tạo được biên bản</p><ul><li class="pro">Một thứ tự rõ ràng</li><li class="con">Không lập biên bản trước được</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>24 / 41</span></div><div class="bar" style="width:58.54%"></div></section>
+<section class="slide l-section" data-n="25"><i class="brand-mark"></i><div class="fit"><h2>GPS và Lệnh</h2></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>25 / 41</span></div><div class="bar" style="width:60.98%"></div></section>
+<section class="slide l-oq" data-n="26"><div class="fit"><div class="oq-top"><span>Câu hỏi 18/30 · GPS và Lệnh</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Khi xe mất tín hiệu GPS, lái xe có phải chụp ảnh định vị tại từng mốc giao nhận không?</h2><div class="ctx"><p>Giờ đến thật tại cảng, bãi, kho dùng để tính quá mốc và phạt lưu container, lưu vỏ. Khi mất GPS, phần mềm không tự ghi được giờ đến. Đội đề xuất lái xe chụp ảnh định vị ngay tại từng mốc; ảnh tự mang giờ và vị trí, dùng thay cho giờ GPS.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 2.2.2 Thời gian xe đã đến (Geofencing); cách xử lý khi mất GPS chưa có trong tài liệu Delta gửi</p><p class="lab quote"><b>Trích dẫn:</b> "Chức năng này xác định thời gian xe đến các địa điểm giao nhận theo Lệnh vận tải và ghi nhận lên Lệnh vận tải." — VIS, mục 2.2.2</p><p class="lab"><b>Ảnh hưởng:</b> giờ đến trên Lệnh, cảnh báo quá mốc</p><p class="lab"><b>Vì sao đề xuất A:</b> giờ đến là căn cứ tính phạt quá mốc; ảnh định vị cho bằng chứng tương đương GPS</p><div class="opts"><div class="opt rec" data-l="A"><span class="rtag">Đề xuất</span><div class="ot"><span class="lt">A</span><span>Bắt chụp ảnh định vị tại từng mốc</span></div><ul><li class="pro">Có giờ, vị trí làm bằng chứng như GPS</li><li class="con">Thêm thao tác cho lái xe khi mất sóng</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Lái xe chỉ bấm "đã đến"</span></div><ul><li class="pro">Nhanh</li><li class="con">Không có bằng chứng giờ đến khi tranh chấp</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>26 / 41</span></div><div class="bar" style="width:63.41%"></div></section>
+<section class="slide l-oq" data-n="27"><div class="fit"><div class="oq-top"><span>Câu hỏi 19/30 · GPS và Lệnh</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Bỏ mooc giữa đường rồi điều xe khác ra kéo tiếp: phần còn lại chạy trên cùng Lệnh hay Lệnh mới?</h2><div class="ctx"><p>Ngày 09/10 Delta cho biết trường hợp hiếm phải bỏ mooc giữa đường thì điều xe khác ra kéo tiếp. Từ lúc đó, GPS, vé cầu đường, kẹt xe thuộc đầu kéo mới. Đội cần biết phần còn lại thuộc Lệnh nào để gắn đúng dữ liệu và chi phí. Nếu còn trường hợp đổi xe giữa chặng khác, nhờ ghi vào ô ý kiến.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> chưa có trong tài liệu Delta gửi (trao đổi ngày 09/10/2026, mục 2 Mooc)</p><p class="lab quote"><b>Trích dẫn:</b> "Trường hợp hiếm phải bỏ mooc giữa đường: điều xe khác ra kéo tiếp." — bản tổng hợp trao đổi 09/10/2026</p><p class="lab"><b>Ảnh hưởng:</b> Lệnh vận tải, dữ liệu GPS và chi phí theo xe</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>Cùng Lệnh, đổi xe giữa chặng</span></div><p>Trước giờ đổi gắn xe cũ, sau giờ đổi gắn xe mới; vé tra theo khung giờ từng xe</p><ul><li class="pro">Một chuyến hàng một Lệnh, chi phí không bị tách</li><li class="con">Một Lệnh có hai xe, hai lái xe</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Lệnh mới cho xe kéo tiếp</span></div><ul><li class="pro">Mỗi Lệnh một xe, dễ theo dõi</li><li class="con">Một chuyến hàng tách thành hai Lệnh</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>27 / 41</span></div><div class="bar" style="width:65.85%"></div></section>
+<section class="slide l-oq" data-n="28"><div class="fit"><div class="oq-top"><span>Câu hỏi 20/30 · GPS và Lệnh</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Có trường hợp một xe chở 2 container 20 feet thuộc 2 Lệnh khác nhau không?</h2><div class="ctx"><p>Nếu có, khoảng đường hai Lệnh chạy chung sinh kẹt xe, vé cầu đường cho cả hai. Đội đề xuất chia đều kẹt xe và vé trong khoảng chạy chung cho 2 Lệnh; dầu bù đi tìm vỏ chỉ tính cho Lệnh có bãi nhận vỏ đó.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> chưa có trong tài liệu Delta gửi</p><p class="lab"><b>Ghi thêm:</b> nếu có mà muốn chia cách khác, ghi cách chia</p><p class="lab"><b>Ảnh hưởng:</b> kẹt xe, vé, dầu bù trên từng Lệnh</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>Không có trường hợp này</span></div></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Có, chia đều như đề xuất</span></div><ul><li class="pro">Đơn giản, công bằng giữa 2 Lệnh</li><li class="con">Có thể chưa sát nếu 2 Lệnh khác quãng đường</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>28 / 41</span></div><div class="bar" style="width:68.29%"></div></section>
+<section class="slide l-oq noopts" data-n="29"><div class="fit"><div class="oq-top"><span>Câu hỏi 21/30 · GPS và Lệnh</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Hai lần ghi vị trí của xe cách nhau quá bao lâu thì coi là thiếu dữ liệu, không kết luận lái xe tránh trạm?</h2><div class="ctx"><p>Thiết bị trên xe gửi vị trí theo từng khoảng thời gian. Phần mềm xét cả điểm GPS lẫn đoạn nối hai điểm liền nhau có cắt vùng trạm không, để bắt xe chạy nhanh qua trạm. Nếu khoảng hở quá dài, xe có thể đi đường khác mà phần mềm không biết. Khi đó trạm mang cờ "Thiếu dữ liệu GPS" và chờ đối soát VETC, thay vì ghi lỗi cho lái xe. Nhờ ghi số phút (hoặc số km).</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 2.2.6 Giám sát lộ trình và ghi nhận tránh trạm vé</p><p class="lab quote"><b>Trích dẫn:</b> "Trạm vé trên danh mục phải được vẽ dưới dạng hình đa giác (Polygon geofence) bao trọn đoạn đường phải qua của trạm, thay vì bán kính tròn (Radius) để tránh bắt hụt sự kiện." — VIS, mục 2.2.6</p><p class="lab"><b>Ảnh hưởng:</b> kết luận tránh trạm, bảng kê tránh trạm</p><div class="decide"><span class="dl">Trả lời</span><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" placeholder="Câu trả lời của anh/chị…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>29 / 41</span></div><div class="bar" style="width:70.73%"></div></section>
+<section class="slide l-oq" data-n="30"><div class="fit"><div class="oq-top"><span>Câu hỏi 22/30 · GPS và Lệnh</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Ký biên bản bàn giao, thu hồi xe mà GPS không có dữ liệu lúc đó: lấy số km nào?</h2><div class="ctx"><p>Hiện biên bản thu hồi cho người dùng tự nhập số km của xe. Đội đề xuất km trên biên bản bàn giao, thu hồi lấy từ GPS lúc ký, không sửa tay, để không khai sai km. Cần chốt trường hợp lúc ký GPS không có dữ liệu.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> Tài liệu SRS - ERP Delta 3.0 (Web) (30/9/2026), phần Thu hồi phương tiện (ô KMs thu hồi)</p><p class="lab quote"><b>Trích dẫn:</b> "Cho phép người dùng nhập số kms hiện tại của phương tiện thu hồi. Chỉ cho phép nhập số dương" — SRS ERP Delta 3.0, ô KMs thu hồi</p><p class="lab"><b>Ảnh hưởng:</b> biên bản bàn giao, thu hồi; km của xe dùng cho định mức</p><p class="lab"><b>Vì sao đề xuất A:</b> giữ nguyên tắc km chỉ lấy từ GPS; giờ đọc đi kèm giúp người ký biết số km cũ đến đâu</p><div class="opts"><div class="opt rec" data-l="A"><span class="rtag">Đề xuất</span><div class="ot"><span class="lt">A</span><span>Lấy lần đọc GPS gần nhất, ghi kèm giờ đọc</span></div><ul><li class="pro">Km không sửa tay được</li><li class="pro">Giờ đọc cho biết số liệu cũ bao lâu</li><li class="con">Có thể lệch vài km nếu xe đã chạy sau lần đọc đó</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Cho người bàn giao nhập tay km đồng hồ</span></div><ul><li class="pro">Đúng số trên đồng hồ xe</li><li class="con">Quay lại nhập tay, khó kiểm</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>30 / 41</span></div><div class="bar" style="width:73.17%"></div></section>
+<section class="slide l-oq" data-n="31"><div class="fit"><div class="oq-top"><span>Câu hỏi 23/30 · GPS và Lệnh</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Xe không có Lệnh mà vẫn di chuyển: những trường hợp nào không cần cảnh báo?</h2><div class="ctx"><p>VIS nhắc xe chạy ngoài lịch trình, việc riêng. Đội đề xuất cảnh báo ngay khi xe không có Lệnh mà di chuyển quá một ngưỡng, trừ 5 trường hợp đã có chứng từ:</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 3.1.3 Bước 4 Đối soát hóa đơn cuối kỳ</p><p class="lab quote"><b>Trích dẫn:</b> "phê duyệt chi phí hợp lý hoặc xử lý sai phạm của lái xe (chạy xe ngoài lịch trình, việc riêng)" — VIS, mục 3.1.3 Bước 4</p><ul><li>(1) Lệnh đã nhận, xe đang tới điểm đầu · (2) Về bãi sau khi xong Lệnh · (3) Đi đổ dầu khi có phiếu cấp dầu đang mở</li><li>(4) Đi xưởng khi có lệnh sửa chữa đang mở · (5) Đang bàn giao xe giữa các chi nhánh</li></ul><p class="lab"><b>Ghi thêm:</b> đi bao xa (km) hoặc bao lâu (phút) thì cảnh báo</p><p class="lab"><b>Ảnh hưởng:</b> cảnh báo xe chạy ngoài Lệnh cho quản lý phương tiện</p><p class="lab"><b>Vì sao đề xuất A:</b> cả 5 trường hợp đều có chứng từ chứng minh lý do di chuyển</p><div class="opts"><div class="opt rec" data-l="A"><span class="rtag">Đề xuất</span><div class="ot"><span class="lt">A</span><span>Miễn cả 5 trường hợp</span></div><ul><li class="pro">Chỉ cảnh báo xe đi không có lý do</li><li class="con">Phiếu, lệnh phải được mở đúng lúc</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Chỉ miễn một số</span></div><p>Ghi số thứ tự các trường hợp được miễn vào ô ý kiến</p></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>31 / 41</span></div><div class="bar" style="width:75.61%"></div></section>
+<section class="slide l-oq" data-n="32"><div class="fit"><div class="oq-top"><span>Câu hỏi 24/30 · GPS và Lệnh</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Delta còn xe chưa gắn GPS, hoặc có GPS mà chưa có cảm biến dầu không?</h2><div class="ctx"><p>Đội đề xuất: xe chưa gắn GPS vẫn chạy Lệnh như hiện nay, lái xe bấm đến nơi kèm ảnh định vị, không có kẹt xe và bù dầu tự động, vé lấy theo giao dịch thu phí. Xe có GPS mà chưa có cảm biến dầu thì không có cảnh báo hút dầu, đổ dầu; phiếu đầy bình chọn tay.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> chưa có trong tài liệu Delta gửi</p><p class="lab"><b>Ảnh hưởng:</b> Lệnh của xe thiếu thiết bị, cảnh báo dầu</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>Còn, xử lý như đề xuất</span></div><p>Nhờ ghi số xe chưa gắn GPS, chưa có cảm biến</p></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Mọi xe sẽ gắn đủ GPS và cảm biến dầu trước khi dùng phần mềm</span></div></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>32 / 41</span></div><div class="bar" style="width:78.05%"></div></section>
+<section class="slide l-oq" data-n="33"><div class="fit"><div class="oq-top"><span>Câu hỏi 25/30 · GPS và Lệnh</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Delta đang dùng dịch vụ bản đồ nào để tính cung đường và giờ đến dự kiến?</h2><div class="ctx"><p>Tài liệu nhắc ba nguồn bản đồ khác nhau. Bản đồ dùng để tính cung đường, quãng đường, giờ đến dự kiến; nếu có dữ liệu tắc đường, sự cố thì dùng thêm để nhận biết kẹt cứng. Đội đề xuất chọn bên có nhiều dữ liệu giao thông hơn. Toạ độ trạm và phí đường bộ vẫn lấy VETC làm chuẩn như Delta đã chọn ngày 09/10.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 2.2.1 Thời gian xe sẽ đến (ETA), mục 2.2.6; trao đổi với Delta ngày 09/10/2026, mục 4</p><p class="lab quote"><b>Trích dẫn:</b> "thì không gọi Google Maps API mà tính ETA cơ học (Khoảng cách / Vận tốc trung bình tuyến)" — VIS, mục 2.2.1</p><p class="lab quote"><b>Trích dẫn:</b> "Chức năng Map API trên phần mềm Delta 2.0 đã ghi nhận các trạm vé mà xe phải qua trên Lệnh vận tải" — VIS, mục 2.2.6</p><p class="lab"><b>Ghi thêm:</b> bên đang dùng có dữ liệu tắc đường, đường cấm xe tải không</p><p class="lab"><b>Ảnh hưởng:</b> cung đường, giờ đến dự kiến, nhận biết kẹt cứng</p><div class="opts"><div class="opt" data-l="A"><div class="ot"><span class="lt">A</span><span>Google Maps</span></div></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Vietmap</span></div></div><div class="opt" data-l="C"><div class="ot"><span class="lt">C</span><span>Bản đồ của phần mềm Delta 2.0</span></div></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="C">C</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>33 / 41</span></div><div class="bar" style="width:80.49%"></div></section>
+<section class="slide l-section" data-n="34"><i class="brand-mark"></i><div class="fit"><h2>Ngưỡng, quy mô, kỳ, rủi ro</h2></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>34 / 41</span></div><div class="bar" style="width:82.93%"></div></section>
+<section class="slide l-oq noopts" data-n="35"><div class="fit"><div class="oq-top"><span>Câu hỏi 26/30 · Ngưỡng, quy mô, kỳ, rủi ro</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Các con số trên Lệnh vận tải: nhờ xác nhận 4 số đã có và cho 2 số còn trống</h2><div class="ctx"><p>Các số dưới đây lấy từ VIS; mỗi khách đặt số riêng được. Số nào muốn khác thì ghi số mới vào ô trả lời, số còn trống nhờ cho số.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 2.2.1, 2.2.3, 3.1.3, 3.3</p><p class="lab quote"><b>Trích dẫn:</b> "Nếu khoảng cách không lệch quá x% so với cung đường trên Lệnh vận tải thì không gọi Google Maps API" — VIS, mục 2.2.1</p><ul><li>Kẹt xe: xe nhích dưới 5 km/h, liên tục quá 10 phút</li><li>Tra lại VETC sau 120 phút khi chưa có giao dịch</li><li>Tính lại giờ đến dự kiến mỗi 30 phút với cung đường dài trên 300 km</li><li>Đi tìm vỏ: ở bãi khác quá 10 phút thì tính là bãi đi tìm vỏ</li><li>Còn trống: lệch cung đường bao nhiêu % thì tính lại giờ đến (VIS ghi "x%")</li><li>Còn trống: đứng yên tối đa bao lâu giữa hai đoạn kẹt xe vẫn tính là kẹt (câu 9)</li></ul><p class="lab"><b>Ảnh hưởng:</b> kẹt xe, bù dầu, giờ đến dự kiến trên Lệnh</p><div class="decide"><span class="dl">Trả lời</span><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" placeholder="Câu trả lời của anh/chị…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>35 / 41</span></div><div class="bar" style="width:85.37%"></div></section>
+<section class="slide l-oq noopts" data-n="36"><div class="fit"><div class="oq-top"><span>Câu hỏi 27/30 · Ngưỡng, quy mô, kỳ, rủi ro</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Các con số về dầu và cảnh báo xe: nhờ xác nhận 4 số đã có và cho các số còn trống</h2><div class="ctx"><p>Các số đã có lấy từ VIS và Công tác chuẩn bị; riêng chu kỳ đọc dầu khi tắt máy VIS ghi hai số khác nhau. Số nào muốn khác thì ghi số mới.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 2.2, 2.2.4, 3.5, 3.6; SIM &amp; VIS — Công tác chuẩn bị (11/10/2026), mục 3.3</p><p class="lab quote"><b>Trích dẫn:</b> "Khi xe tắt máy, hệ thống tự động chuyển sang chế độ quét định kỳ tần suất thấp (30 phút/lần)" — VIS, mục 3.5 Bước 1 (mục 2.2 ghi 30–60 phút)</p><ul><li>Đọc mức dầu khi xe tắt máy: 30 phút một lần</li><li>Nổ máy ngủ: máy nổ, xe đứng yên quá 10 phút</li><li>Hút dầu: giảm quá 5 lít trong dưới 3 phút; đổ dầu: tăng trên 20 lít trong 10 phút khi xe dừng</li><li>Còn trống: hạn xử lý một sự việc (hút dầu, chạy ngoài Lệnh, lệch dầu) trước khi báo trưởng bộ phận</li><li>Còn trống: thiết bị báo lỗi bao nhiêu lần trong tháng thì báo kiểm tra; giữ dữ liệu GPS chi tiết bao lâu</li><li>Còn trống: Lệnh quá giờ kết thúc dự kiến bao lâu khi GPS hỏng thì nhắc lái xe, điều vận</li></ul><p class="lab"><b>Ảnh hưởng:</b> cảnh báo hút dầu, nổ máy ngủ; nhắc xử lý sự việc</p><div class="decide"><span class="dl">Trả lời</span><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" placeholder="Câu trả lời của anh/chị…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>36 / 41</span></div><div class="bar" style="width:87.8%"></div></section>
+<section class="slide l-oq noopts" data-n="37"><div class="fit"><div class="oq-top"><span>Câu hỏi 28/30 · Ngưỡng, quy mô, kỳ, rủi ro</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Quy mô đội xe và việc đối soát hiện nay là bao nhiêu?</h2><div class="ctx"><p>Đội dùng các số này để ước khối lượng dữ liệu, số cảnh báo mỗi ngày và chi phí kết nối. Số ước lượng cũng được. Đội đã có: khoảng 110.000 lô hàng mỗi năm (Delta trả lời ngày 10/10) và gần 200 đầu xe (thư đề xuất GPS năm 2025).</p></div><p class="lab srcdoc"><b>Tài liệu:</b> chưa có trong tài liệu Delta gửi; Đề xuất tiện ích GPS (25/9/2025), mục 1</p><p class="lab quote"><b>Trích dẫn:</b> "Hàng tháng Delta đang phải hạch toán hàng ngàn vé xe vào các Lệnh vận chuyển cho gần 200 đầu xe." — Đề xuất tiện ích GPS, mục 1</p><ul><li>Số xe đã gắn GPS; số xe có cảm biến dầu</li><li>Số trạm thu phí xe hay đi qua</li><li>Số giao dịch VETC mỗi tháng</li><li>Số người: quản lý phương tiện, kế toán đối soát, quản lý cây dầu</li></ul><p class="lab"><b>Ảnh hưởng:</b> thiết kế danh sách cảnh báo, tốc độ phần mềm, chi phí kết nối</p><div class="decide"><span class="dl">Trả lời</span><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" placeholder="Câu trả lời của anh/chị…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>37 / 41</span></div><div class="bar" style="width:90.24%"></div></section>
+<section class="slide l-oq" data-n="38"><div class="fit"><div class="oq-top"><span>Câu hỏi 29/30 · Ngưỡng, quy mô, kỳ, rủi ro</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Số liệu dữ liệu xe tính vào kỳ báo cáo (tháng) theo cách đề xuất được không?</h2><div class="ctx"><p>Báo cáo dữ liệu xe tính theo tháng, khớp kỳ chốt dầu. Đội đề xuất: một sự việc (kẹt xe, nổ máy ngủ…) kéo qua nửa đêm hay qua tháng thì tính vào ngày, tháng bắt đầu; số liệu gắn với Lệnh (vé, dầu bù) tính vào kỳ theo ngày duyệt Lệnh.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> chưa có trong tài liệu Delta gửi</p><p class="lab"><b>Ảnh hưởng:</b> báo cáo tháng, kỳ chốt dầu, bảng kê tránh trạm</p><p class="lab"><b>Vì sao đề xuất A:</b> vé và dầu bù chỉ chắc chắn khi Lệnh đã duyệt; tính theo ngày duyệt thì kỳ đã chốt không phải sửa</p><div class="opts"><div class="opt rec" data-l="A"><span class="rtag">Đề xuất</span><div class="ot"><span class="lt">A</span><span>Đồng ý đề xuất</span></div><ul><li class="pro">Mỗi sự việc chỉ thuộc một kỳ, không bị cắt đôi</li><li class="pro">Số của Lệnh vào kỳ khi đã chốt xong</li><li class="con">Lệnh duyệt muộn thì số liệu sang kỳ sau</li></ul></div><div class="opt" data-l="B"><div class="ot"><span class="lt">B</span><span>Số liệu của Lệnh tính theo ngày xe chạy xong</span></div><ul><li class="pro">Đúng ngày phát sinh</li><li class="con">Lệnh chưa duyệt thì số chưa chắc, kỳ có thể phải sửa</li></ul></div></div><div class="decide wide"><span class="dl">Trả lời</span><button data-c="A">A</button><button data-c="B">B</button><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" rows="3" placeholder="Ý kiến thêm (nếu có)…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>38 / 41</span></div><div class="bar" style="width:92.68%"></div></section>
+<section class="slide l-oq noopts" data-n="39"><div class="fit"><div class="oq-top"><span>Câu hỏi 30/30 · Ngưỡng, quy mô, kỳ, rủi ro</span><span class="chip" data-s="open">Chưa chốt</span></div><h2>Rủi ro khi dùng dữ liệu xe để tính tiền: nhờ Delta cho ý kiến từng ý, nhất là ý 1 và 2</h2><div class="ctx"><p>Đây là những rủi ro đội thấy khi dữ liệu GPS, cảm biến được dùng để tính tiền cho lái xe. Ý 3–6 đã có cách phòng trong thiết kế; nhờ Delta xác nhận hoặc bổ sung.</p></div><p class="lab srcdoc"><b>Tài liệu:</b> VIS (08/10/2026), mục 3.1.1 và mục 3.5 Bước 3</p><p class="lab quote"><b>Trích dẫn:</b> "hiển thị trực quan vị trí hút dầu trên bản đồ để làm bằng chứng làm việc với lái xe" — VIS, mục 3.5 Bước 3</p><ol><li>Quy chế nội bộ đã cho phép tính tiền vào lương từ dữ liệu GPS (tránh trạm, nổ máy ngủ, hút dầu) chưa?</li><li>Lái xe xem số liệu của mình thế nào? Đề xuất: xem trên app; tháng đầu chỉ ghi nhận, chưa tính tiền</li><li>Lái xe phản đối khi bị ghi vi phạm: người duyệt chấp nhận được, kèm lý do</li><li>Cảm biến dầu lệch, nhiễu: có kết quả "Lỗi thiết bị", báo hiệu chỉnh khi lệch lặp lại</li><li>Vùng trạm vẽ sai: giao dịch VETC là nguồn chuẩn khi có</li><li>EUP, VETC không gửi dữ liệu ngay: cảnh báo trễ, đối soát dồn cuối kỳ</li></ol><p class="lab"><b>Ảnh hưởng:</b> thời điểm bật tính tiền, quyền xem của lái xe trên app</p><div class="decide"><span class="dl">Trả lời</span><button data-c="other">Khác</button><button data-c="defer">Cần trao đổi thêm</button><textarea class="note" placeholder="Câu trả lời của anh/chị…"></textarea></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>39 / 41</span></div><div class="bar" style="width:95.12%"></div></section>
+<section class="slide l-recap" data-n="40"><div class="fit"><h2>Tổng kết câu trả lời</h2><p class="sum"></p><div class="wrapr"><table class="recap"><thead><tr><th>#</th><th>Câu hỏi</th><th>Trả lời</th><th>Ghi chú</th></tr></thead><tbody></tbody></table></div><div class="tools"><input class="who" type="text" placeholder="Họ tên người trả lời"><button data-act="download">Tải câu trả lời</button><button class="sec" data-act="copy">Copy để dán vào email</button><button class="sec" data-act="reset">Xoá câu trả lời</button></div></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>40 / 41</span></div><div class="bar" style="width:97.56%"></div></section>
+<section class="slide l-end" data-n="41"><i class="brand-logo"></i><div class="fit"><h1>Cảm ơn anh/chị</h1><p>Đội sẽ cập nhật thiết kế theo câu trả lời và hẹn trao đổi riêng những câu cần bàn thêm</p></div><div class="foot"><span class="fl"><i class="brand-logo"></i><span>Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)</span></span><span>41 / 41</span></div><div class="bar" style="width:100.0%"></div></section>
+</div></div>
+<div id="overview"></div>
+<div id="help">← → chuyển · F toàn màn hình · O xem lưới · P cửa sổ người trình bày · E xuất kết quả</div>
+<div id="nav"><button data-nav="guide" title="Xem lại hướng dẫn">Hướng dẫn</button><button data-nav="prev" title="Trang trước">‹</button><span class="pg"></span><button data-nav="next" title="Trang sau">›</button></div>
+<div id="warn">Trình duyệt này không lưu được câu trả lời — hãy trả lời hết và bấm Tải câu trả lời trước khi đóng file.</div>
+<div id="pv">
+  <div class="hd"><span class="clock" id="pv-clock">00:00</span><span id="pv-slide">Slide</span><span id="pv-budget"></span><span id="pv-sync"></span></div>
+  <div class="box"><p class="lbl">Đang chiếu</p><div class="cur" id="pv-cur"></div></div>
+  <div class="box"><p class="lbl">Slide kế tiếp</p><div class="nxt" id="pv-nxt"></div>
+    <div id="pv-meta"></div>
+    <div class="notes" id="pv-notes"></div></div>
+</div>
+<script type="application/json" id="deck-data">{"id": "2026-10-15-oq-vis-deck", "title": "Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)", "meeting": "open-questions", "date": "2026-10-15", "duration": null, "source": "docs/meetings/decks/2026-10-15-oq-vis-deck.md", "delivery": "async", "client": "Delta", "resultName": "2026-10-15-oq-vis-tra-loi.md", "slides": [{"n": 1, "layout": "title", "notes": ""}, {"n": 2, "layout": "guide", "notes": ""}, {"n": 3, "layout": "goal", "notes": ""}, {"n": 4, "layout": "agenda", "notes": ""}, {"n": 5, "layout": "section", "notes": ""}, {"n": 6, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-49", "src": "", "recommend": "", "question": "VETC có gửi từng giao dịch trừ tiền về ngay khi xe qua trạm không?", "options": [{"letter": "A", "title": "Có, VETC gửi ngay khi trừ tiền"}, {"letter": "B", "title": "Không, chỉ tra được theo xe trong một khung giờ"}]}}, {"n": 7, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-50.1", "src": "", "recommend": "", "question": "Trạm lái xe tránh có được xử lý ngay khi duyệt từng Lệnh không?", "options": [{"letter": "A", "title": "Chốt theo từng Lệnh khi duyệt"}, {"letter": "B", "title": "Chốt cuối kỳ theo bảng kê"}]}}, {"n": 8, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-50.2", "src": "", "recommend": "", "question": "Tiền vé của trạm lái xe tránh được tính thế nào với lương lái xe?", "options": [{"letter": "A", "title": "Trừ vào lương lái xe"}, {"letter": "B", "title": "Cộng vào lương, tính thu nhập chịu thuế"}, {"letter": "C", "title": "Không tính tiền, chỉ ghi vi phạm"}]}}, {"n": 9, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-51", "src": "", "recommend": "", "question": "VETC vẫn chưa trả dữ liệu sau lần tra lại 120 phút: có cho duyệt Lệnh không?", "options": [{"letter": "A", "title": "Cho duyệt, trạm ghi \"Chờ VETC\""}, {"letter": "B", "title": "Chưa cho duyệt tới khi VETC trả dữ liệu"}]}}, {"n": 10, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-3", "src": "", "recommend": "", "question": "VETC có cung cấp được danh mục trạm thu phí (toạ độ, giá vé theo loại xe) không?", "options": [{"letter": "A", "title": "VETC cung cấp được"}, {"letter": "B", "title": "VETC không cung cấp"}]}}, {"n": 11, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-7", "src": "", "recommend": "", "question": "Ba trường hợp vé bất thường dưới đây xử lý theo đề xuất của đội được không?", "options": [{"letter": "A", "title": "Đồng ý cả 3 đề xuất"}, {"letter": "B", "title": "Không phân loại, chuyển hết cho kế toán"}]}}, {"n": 12, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-47.1", "src": "", "recommend": "", "question": "Hoá đơn tổng VETC cuối kỳ có đi qua phần thu thập hoá đơn đầu vào như hoá đơn thường không?", "options": [{"letter": "A", "title": "Có, qua phần thu thập hoá đơn đầu vào"}, {"letter": "B", "title": "Không, kế toán xử lý riêng"}]}}, {"n": 13, "layout": "section", "notes": ""}, {"n": 14, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-52", "src": "", "recommend": "", "question": "Xe xếp hàng chờ ở cổng cảng, bãi, kho quá 10 phút mà máy vẫn nổ: có bù dầu như kẹt xe không?", "options": [{"letter": "A", "title": "Có, bù như kẹt xe"}, {"letter": "B", "title": "Không bù khi xe ở trong vùng cảng, bãi, kho"}]}}, {"n": 15, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-53", "src": "", "recommend": "", "question": "Tai nạn, kẹt cứng làm xe đứng yên hẳn: có tính là kẹt xe (được bù dầu) không?", "options": [{"letter": "A", "title": "Tính kẹt xe khi có 1 trong 3 dấu hiệu"}, {"letter": "B", "title": "Theo đúng VIS"}]}}, {"n": 16, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-5", "src": "", "recommend": "", "question": "Có muốn phần mềm nhắc lái xe tắt máy trên app khi xe nổ máy đứng yên quá 10 phút không?", "options": [{"letter": "A", "title": "Có, nhắc trên app"}, {"letter": "B", "title": "Không, chỉ báo cáo cuối kỳ"}]}}, {"n": 17, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-12", "src": "", "recommend": "", "question": "Định mức dầu khi máy nổ mà xe không chạy (lít/giờ): dùng chung cho kẹt xe và nổ máy ngủ được không?", "options": [{"letter": "A", "title": "Dùng chung một định mức"}, {"letter": "B", "title": "Hai định mức riêng"}]}}, {"n": 18, "layout": "section", "notes": ""}, {"n": 19, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-2", "src": "", "recommend": "", "question": "Dữ liệu từ EUP: nhờ Delta (hoặc EUP) trả lời 4 ý dưới đây", "options": []}}, {"n": 20, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-11", "src": "", "recommend": "", "question": "Mục 3.6 Đối soát lượng dầu thực đổ có thuộc phạm vi giai đoạn 1 không?", "options": [{"letter": "A", "title": "Có, thuộc giai đoạn 1"}, {"letter": "B", "title": "Để giai đoạn sau"}]}}, {"n": 21, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-13", "src": "", "recommend": "", "question": "Đối soát dầu thực đổ: nhờ cho 4 con số dưới đây", "options": []}}, {"n": 22, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-14", "src": "", "recommend": "", "question": "Cây dầu nội bộ dừng bơm khi vòi tự ngắt, số lít lệch với cảm biến: xử lý theo đề xuất được không?", "options": [{"letter": "A", "title": "Đồng ý đề xuất"}, {"letter": "B", "title": "Lấy số cảm biến làm căn cứ"}]}}, {"n": 23, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-47.2", "src": "", "recommend": "", "question": "Hoá đơn dầu lái xe mua ngoài có cần đối chiếu với số lít cảm biến dầu ghi nhận không?", "options": [{"letter": "A", "title": "Có, đối chiếu với cảm biến"}, {"letter": "B", "title": "Không"}]}}, {"n": 24, "layout": "oq", "notes": "", "oq": {"id": "vm-OQ-1", "src": "", "recommend": "", "question": "Bàn giao xe kèm phiếu đổ đầy bình, thu hồi xe kèm phiếu chốt dầu: thứ tự làm như đề xuất được không?", "options": [{"letter": "A", "title": "Làm trước sau đều được, ký xong khi phiếu xong"}, {"letter": "B", "title": "Giữ như SRS hiện tại"}]}}, {"n": 25, "layout": "section", "notes": ""}, {"n": 26, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-54", "src": "", "recommend": "", "question": "Khi xe mất tín hiệu GPS, lái xe có phải chụp ảnh định vị tại từng mốc giao nhận không?", "options": [{"letter": "A", "title": "Bắt chụp ảnh định vị tại từng mốc"}, {"letter": "B", "title": "Lái xe chỉ bấm \"đã đến\""}]}}, {"n": 27, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-55", "src": "", "recommend": "", "question": "Bỏ mooc giữa đường rồi điều xe khác ra kéo tiếp: phần còn lại chạy trên cùng Lệnh hay Lệnh mới?", "options": [{"letter": "A", "title": "Cùng Lệnh, đổi xe giữa chặng"}, {"letter": "B", "title": "Lệnh mới cho xe kéo tiếp"}]}}, {"n": 28, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-56", "src": "", "recommend": "", "question": "Có trường hợp một xe chở 2 container 20 feet thuộc 2 Lệnh khác nhau không?", "options": [{"letter": "A", "title": "Không có trường hợp này"}, {"letter": "B", "title": "Có, chia đều như đề xuất"}]}}, {"n": 29, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-48", "src": "", "recommend": "", "question": "Hai lần ghi vị trí của xe cách nhau quá bao lâu thì coi là thiếu dữ liệu, không kết luận lái xe tránh trạm?", "options": []}}, {"n": 30, "layout": "oq", "notes": "", "oq": {"id": "vm-OQ-2", "src": "", "recommend": "", "question": "Ký biên bản bàn giao, thu hồi xe mà GPS không có dữ liệu lúc đó: lấy số km nào?", "options": [{"letter": "A", "title": "Lấy lần đọc GPS gần nhất, ghi kèm giờ đọc"}, {"letter": "B", "title": "Cho người bàn giao nhập tay km đồng hồ"}]}}, {"n": 31, "layout": "oq", "notes": "", "oq": {"id": "vm-OQ-3", "src": "", "recommend": "", "question": "Xe không có Lệnh mà vẫn di chuyển: những trường hợp nào không cần cảnh báo?", "options": [{"letter": "A", "title": "Miễn cả 5 trường hợp"}, {"letter": "B", "title": "Chỉ miễn một số"}]}}, {"n": 32, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-6", "src": "", "recommend": "", "question": "Delta còn xe chưa gắn GPS, hoặc có GPS mà chưa có cảm biến dầu không?", "options": [{"letter": "A", "title": "Còn, xử lý như đề xuất"}, {"letter": "B", "title": "Mọi xe sẽ gắn đủ GPS và cảm biến dầu trước khi dùng phần mềm"}]}}, {"n": 33, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-1", "src": "", "recommend": "", "question": "Delta đang dùng dịch vụ bản đồ nào để tính cung đường và giờ đến dự kiến?", "options": [{"letter": "A", "title": "Google Maps"}, {"letter": "B", "title": "Vietmap"}, {"letter": "C", "title": "Bản đồ của phần mềm Delta 2.0"}]}}, {"n": 34, "layout": "section", "notes": ""}, {"n": 35, "layout": "oq", "notes": "", "oq": {"id": "td-OQ-57", "src": "", "recommend": "", "question": "Các con số trên Lệnh vận tải: nhờ xác nhận 4 số đã có và cho 2 số còn trống", "options": []}}, {"n": 36, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-4", "src": "", "recommend": "", "question": "Các con số về dầu và cảnh báo xe: nhờ xác nhận 4 số đã có và cho các số còn trống", "options": []}}, {"n": 37, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-8", "src": "", "recommend": "", "question": "Quy mô đội xe và việc đối soát hiện nay là bao nhiêu?", "options": []}}, {"n": 38, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-9", "src": "", "recommend": "", "question": "Số liệu dữ liệu xe tính vào kỳ báo cáo (tháng) theo cách đề xuất được không?", "options": [{"letter": "A", "title": "Đồng ý đề xuất"}, {"letter": "B", "title": "Số liệu của Lệnh tính theo ngày xe chạy xong"}]}}, {"n": 39, "layout": "oq", "notes": "", "oq": {"id": "vt-OQ-10", "src": "", "recommend": "", "question": "Rủi ro khi dùng dữ liệu xe để tính tiền: nhờ Delta cho ý kiến từng ý, nhất là ý 1 và 2", "options": []}}, {"n": 40, "layout": "recap", "notes": ""}, {"n": 41, "layout": "end", "notes": ""}]}</script>
+<script>
+(function () {
+  'use strict';
+  var D = JSON.parse(document.getElementById('deck-data').textContent);
+  /* ?pdf — bản đọc nhanh (in PDF): bỏ trang chỉ dùng được trên trình duyệt, đánh lại số trang */
+  if (new URLSearchParams(location.search).has('pdf')) {
+    document.body.classList.add('pdfview');
+    Array.prototype.forEach.call(document.querySelectorAll('#stage > .l-guide, #stage > .l-recap'), function (el) { el.remove(); });
+    var keep = document.querySelectorAll('#stage > .slide');
+    Array.prototype.forEach.call(keep, function (el, i) {
+      var pg = el.querySelector('.foot > span:last-child'); if (pg) pg.textContent = (i + 1) + ' / ' + keep.length;
+    });
+    var tf = document.querySelector('#stage > .l-title .fit');
+    if (tf && D.delivery === 'async') {
+      var p = document.createElement('p'); p.className = 'pdfnote';
+      p.textContent = 'Bản PDF để đọc nhanh. Anh/chị trả lời trong file HTML gửi kèm.';
+      tf.appendChild(p);
+    }
+  }
+  var slides = Array.prototype.slice.call(document.querySelectorAll('#stage > .slide'));
+  var N = slides.length;
+  var qs = new URLSearchParams(location.search);
+  var MODE = qs.has('presenter') ? 'presenter' : (qs.has('verify') ? 'verify' : 'main');
+  var KEY = 'deck:' + D.id;
+  var ASYNC = D.delivery === 'async';   // gửi khách tự trả lời: không presenter, có nút điều hướng
+  var DEFER = ASYNC ? 'Cần trao đổi thêm' : 'Hoãn';
+  var cur = 0;
+  var peer = null;            // cửa sổ bên kia (presenter ↔ main)
+  var t0 = Date.now(), tSlide = Date.now();
+
+  /* ---------- lưu kết quả họp (localStorage, có thể bị chặn → chạy tiếp không lưu) ---------- */
+  var mem = { answers: {} };
+  var canSave = true;
+  function load() { try { var s = localStorage.getItem(KEY); if (s) mem = JSON.parse(s); if (!mem.answers) mem.answers = {}; localStorage.setItem(KEY + ':probe', '1'); localStorage.removeItem(KEY + ':probe'); } catch (e) { canSave = false; } }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(mem)); } catch (e) { canSave = false; } }
+  load();
+
+  function oqOf(i) { return D.slides[i] && D.slides[i].oq; }
+  function keyOf(i) { var o = oqOf(i); return o ? (o.id || ('slide-' + (i + 1))) : null; }
+
+  function setAnswer(i, patch) {
+    var k = keyOf(i); if (!k) return;
+    var a = mem.answers[k] || {};
+    for (var p in patch) a[p] = patch[p];
+    a.at = new Date().toISOString();
+    mem.answers[k] = a; save(); paintOq(i); paintRecap(); tell({ type: 'answers', answers: mem.answers });
+  }
+
+  function choiceLabel(o, a) {
+    if (!a || !a.choice) return '';
+    if (a.choice === 'defer') return DEFER;
+    if (a.choice === 'other') return 'Khác';
+    var op = (o.options || []).filter(function (x) { return x.letter === a.choice; })[0];
+    return op ? (op.letter + '. ' + op.title) : a.choice;
+  }
+
+  function paintOq(i, root) {
+    var o = oqOf(i); if (!o) return;
+    var el = root || slides[i];
+    var a = mem.answers[keyOf(i)] || {};
+    var chip = el.querySelector('.chip');
+    var s = !a.choice ? 'open' : (a.choice === 'defer' ? 'deferred' : 'decided');
+    chip.setAttribute('data-s', s);
+    chip.textContent = ASYNC
+      ? (s === 'open' ? 'Chưa trả lời' : (s === 'deferred' ? DEFER : 'Đã chọn: ' + (a.choice === 'other' ? 'Khác' : a.choice)))
+      : (s === 'open' ? 'Chưa chốt' : (s === 'deferred' ? 'Hoãn' : 'Đã chốt: ' + (a.choice === 'other' ? 'Khác' : a.choice)));
+    el.querySelectorAll('.opt').forEach(function (c) { c.classList.toggle('picked', c.getAttribute('data-l') === a.choice); });
+    el.querySelectorAll('.decide button').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-c') === a.choice); });
+    var inp = el.querySelector('.decide .note');
+    if (inp && document.activeElement !== inp) inp.value = a.note || '';
+  }
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function recapRows() {
+    var rows = [];
+    D.slides.forEach(function (s, i) {
+      if (!s.oq) return;
+      var a = mem.answers[keyOf(i)] || {};
+      rows.push({ n: rows.length + 1, i: i, o: s.oq, a: a, label: choiceLabel(s.oq, a) });
+    });
+    return rows;
+  }
+
+  function paintRecap(root) {
+    var els = root ? [root] : document.querySelectorAll('#stage .l-recap');
+    Array.prototype.forEach.call(els, function (el) {
+      var tb = el.querySelector('tbody'); if (!tb) return;
+      var rows = recapRows(), done = 0, def = 0;
+      tb.innerHTML = rows.map(function (r) {
+        if (r.a.choice === 'defer') def++; else if (r.a.choice) done++;
+        return '<tr><td>' + r.n + '</td><td><a class="qlink" href="#/' + (r.i + 1) + '" data-go="' + r.i + '" title="Mở câu hỏi ' + r.n + '">' + esc(r.o.question) + '</a></td><td class="st">' +
+          (r.label ? esc(r.label) : '<span style="color:var(--d-muted)">' + (ASYNC ? 'Chưa trả lời' : 'Chưa chốt') + '</span>') + '</td><td>' + esc(r.a.note || '') + '</td></tr>';
+      }).join('');
+      var sum = el.querySelector('.sum');
+      if (sum) sum.textContent = ASYNC
+        ? 'Đã trả lời ' + done + ' · ' + DEFER + ' ' + def + ' · Chưa trả lời ' + (rows.length - done - def) + ' / ' + rows.length + ' câu hỏi'
+        : 'Đã chốt ' + done + ' · Hoãn ' + def + ' · Còn mở ' + (rows.length - done - def) + ' / ' + rows.length + ' câu hỏi';
+      var who = el.querySelector('.who'); if (who && document.activeElement !== who) who.value = mem.respondent || '';
+    });
+  }
+
+  /* ---------- xuất kết quả họp (.md) — dùng cho /deck import ---------- */
+  function localTs(iso) { var d = new Date(iso), p = function (x) { return String(x).padStart(2, '0'); };
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()); }
+  function cell(s) { return String(s || '').replace(/\|/g, '\\|').replace(/\n/g, ' '); }
+  function minutesMd() {
+    var L = [];
+    L.push('---');
+    L.push('type: deck-result');
+    L.push('deck: ' + D.source);
+    L.push('meeting: ' + (D.meeting || ''));
+    L.push('delivery: ' + (D.delivery || 'meeting'));
+    L.push('date: ' + (D.date || ''));
+    if (ASYNC) { L.push('client: ' + (D.client || '')); L.push('respondent: ' + (mem.respondent || '')); }
+    L.push('exported: ' + new Date().toISOString());
+    L.push('---');
+    L.push('');
+    L.push((ASYNC ? '# Câu trả lời — ' : '# Kết quả họp — ') + D.title);
+    L.push('');
+    L.push('| # | Mã | Nguồn | Câu hỏi | Quyết định | Ghi chú | Lúc |');
+    L.push('|---|---|---|---|---|---|---|');
+    recapRows().forEach(function (r) {
+      L.push('| ' + r.n + ' | ' + cell(r.o.id) + ' | ' + cell(r.o.src) + ' | ' + cell(r.o.question) + ' | ' +
+        cell(r.label || (ASYNC ? 'Chưa trả lời' : 'Chưa chốt')) + ' | ' + cell(r.a.note) + ' | ' + cell(r.a.at ? localTs(r.a.at) : '') + ' |');
+    });
+    L.push('');
+    return L.join('\n');
+  }
+  function needName() {
+    if (!ASYNC || (mem.respondent || '').trim()) return false;
+    var w = document.querySelector('#stage .l-recap .who');
+    if (w) { go(slides.indexOf(w.closest('.slide'))); w.classList.add('need'); w.focus(); }
+    alert('Anh/chị vui lòng ghi họ tên người trả lời trước khi tải.');
+    return true;
+  }
+  function download() {
+    if (needName()) return;
+    var b = new Blob([minutesMd()], { type: 'text/markdown;charset=utf-8' });
+    var u = URL.createObjectURL(b), a = document.createElement('a');
+    a.href = u; a.download = D.resultName; document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(u); a.remove(); }, 500);
+  }
+  /* async: bản Copy là thư trả lời đọc được (dán vào email/Zalo), không phải .md.
+     Đánh số "Câu N" theo thứ tự trong deck + nguyên văn câu hỏi → /deck import ghép lại được. */
+  function dmy(iso) { var m = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '/' + m[2] + '/' + m[1] : String(iso || ''); }
+  function todayDmy() { var d = new Date(), p = function (x) { return String(x).padStart(2, '0'); }; return p(d.getDate()) + '/' + p(d.getMonth() + 1) + '/' + d.getFullYear(); }
+  function replyParts() {
+    var rows = recapRows(), done = 0, def = 0;
+    rows.forEach(function (r) { if (r.a.choice === 'defer') def++; else if (r.a.choice) done++; });
+    var who = (mem.respondent || '').trim();
+    return {
+      rows: rows, who: who,
+      intro: 'Gửi anh/chị câu trả lời cho bộ câu hỏi "' + D.title + '"' + (D.date ? ' nhận ngày ' + dmy(D.date) : '') + '.',
+      tally: 'Đã trả lời ' + done + '/' + rows.length + ' câu' + (def ? ', ' + def + ' câu cần trao đổi thêm' : '') +
+        (rows.length - done - def ? ', ' + (rows.length - done - def) + ' câu chưa trả lời' : '') + '.',
+      sign: (who || '') + (D.client ? (who ? ' — ' : '') + D.client : '') + ' · ' + todayDmy()
+    };
+  }
+  function replyText() {
+    var P = replyParts(), L = ['Chào anh/chị,', '', P.intro, P.tally, ''];
+    P.rows.forEach(function (r) {
+      L.push('Câu ' + r.n + '. ' + r.o.question);
+      L.push('   Trả lời: ' + (r.label || 'Chưa trả lời'));
+      if ((r.a.note || '').trim()) L.push('   Ý kiến thêm: ' + r.a.note.trim().replace(/\n+/g, ' '));
+      L.push('');
+    });
+    L.push('Trân trọng,'); L.push(P.sign);
+    return L.join('\n');
+  }
+  function replyHtml() {
+    var P = replyParts(), H = [];
+    H.push('<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#222">');
+    H.push('<p>Chào anh/chị,</p><p>' + esc(P.intro) + '<br>' + esc(P.tally) + '</p>');
+    P.rows.forEach(function (r) {
+      var ans = r.label ? esc(r.label) : '<span style="color:#888">Chưa trả lời</span>';
+      if (r.a.choice === 'defer') ans = '<span style="color:#8a6100">' + esc(r.label) + '</span>';
+      H.push('<p style="margin:0 0 12px"><b>Câu ' + r.n + '. ' + esc(r.o.question) + '</b><br>Trả lời: <b>' + ans + '</b>' +
+        ((r.a.note || '').trim() ? '<br>Ý kiến thêm: ' + esc(r.a.note.trim()) : '') + '</p>');
+    });
+    H.push('<p>Trân trọng,<br>' + esc(P.sign) + '</p></div>');
+    return H.join('');
+  }
+  function copyMd(btn) {
+    if (needName()) return;
+    var t = ASYNC ? replyText() : minutesMd();
+    var done = function () { if (btn) { var o = btn.textContent; btn.textContent = 'Đã copy — dán vào email'; setTimeout(function () { btn.textContent = o; }, 2000); } };
+    var legacy = function () {
+      // file:// hoặc trình duyệt cũ: chọn vùng HTML ẩn rồi copy → vẫn giữ in đậm khi dán
+      try {
+        var box = document.createElement('div'); box.contentEditable = 'true';
+        box.style.cssText = 'position:fixed;left:-9999px;top:0;white-space:normal';
+        if (ASYNC) box.innerHTML = replyHtml(); else box.textContent = t;
+        document.body.appendChild(box);
+        var rg = document.createRange(); rg.selectNodeContents(box);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rg);
+        var ok = document.execCommand('copy'); sel.removeAllRanges(); box.remove();
+        if (ok) return done();
+      } catch (e) {}
+      prompt('Copy nội dung:', t);
+    };
+    if (ASYNC && navigator.clipboard && window.ClipboardItem) {
+      navigator.clipboard.write([new ClipboardItem({
+        'text/html': new Blob([replyHtml()], { type: 'text/html' }),
+        'text/plain': new Blob([t], { type: 'text/plain' })
+      })]).then(done, legacy);
+    } else if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, legacy);
+    else legacy();
+  }
+  window.__deckReply = function () { return { text: replyText(), html: replyHtml() }; };  // để verify
+  function resetAll() {
+    if (!confirm(ASYNC ? 'Xoá toàn bộ câu trả lời đã ghi để làm lại từ đầu?' : 'Xoá toàn bộ quyết định đã ghi trong buổi họp này?')) return;
+    mem.answers = {}; save();
+    slides.forEach(function (_, i) { paintOq(i); }); paintRecap(); tell({ type: 'answers', answers: mem.answers });
+  }
+
+  /* ---------- tương tác trên slide ---------- */
+  slides.forEach(function (el, i) {
+    if (oqOf(i)) {
+      el.querySelectorAll('.opt').forEach(function (c) {
+        c.addEventListener('click', function () { var l = c.getAttribute('data-l'); var a = mem.answers[keyOf(i)] || {}; setAnswer(i, { choice: a.choice === l ? null : l }); });
+      });
+      el.querySelectorAll('.decide button').forEach(function (b) {
+        b.addEventListener('click', function () { var c = b.getAttribute('data-c'); var a = mem.answers[keyOf(i)] || {}; setAnswer(i, { choice: a.choice === c ? null : c }); });
+      });
+      var inp = el.querySelector('.decide .note');
+      if (inp) inp.addEventListener('input', function () { setAnswer(i, { note: inp.value }); });
+      paintOq(i);
+    }
+    var t = el.querySelector('[data-act="download"]'); if (t) t.addEventListener('click', download);
+    t = el.querySelector('[data-act="copy"]'); if (t) t.addEventListener('click', function () { copyMd(this); });
+    t = el.querySelector('[data-act="reset"]'); if (t) t.addEventListener('click', resetAll);
+    if (el.classList.contains('l-recap')) el.addEventListener('click', function (e) {
+      var q = e.target.closest && e.target.closest('[data-go]'); if (!q) return;
+      e.preventDefault(); go(parseInt(q.getAttribute('data-go'), 10));
+    });
+    t = el.querySelector('.who'); if (t) t.addEventListener('input', function () { mem.respondent = this.value; this.classList.remove('need'); save(); });
+  });
+  paintRecap();
+
+  /* ---------- tự co chữ khi nội dung vượt khung (lưới an toàn; lint là chặn chính) ---------- */
+  function fitSlide(el) {
+    var f = el.querySelector('.fit'); if (!f) return 1;
+    var wasActive = el.classList.contains('active');
+    el.style.display = 'flex';
+    f.style.transform = ''; f.style.width = '';
+    var avail = el.clientHeight - 56 - 64, need = f.scrollHeight, s = 1;
+    if (need > avail + 1) {
+      s = Math.max(0.78, avail / need);
+      f.style.transform = 'scale(' + s + ')'; f.style.width = (100 / s) + '%';
+    }
+    if (!wasActive) el.style.display = '';
+    return { scale: s, overflow: need * s > avail + 1 };
+  }
+
+  /* ---------- điều hướng ---------- */
+  function scale() {
+    var st = document.getElementById('stage');
+    var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    st.style.transform = 'scale(' + s + ')';
+  }
+  function go(n, fromPeer) {
+    n = Math.max(0, Math.min(N - 1, n));
+    if (n !== cur) tSlide = Date.now();
+    slides[cur].classList.remove('active'); cur = n; slides[cur].classList.add('active');
+    if (MODE === 'main') { try { history.replaceState(null, '', '#/' + (cur + 1)); } catch (e) {} }
+    if (MODE === 'presenter') paintPresenter();
+    if (!fromPeer) tell({ type: 'goto', n: cur });
+    paintNav();
+  }
+  function paintNav() {
+    if (!ASYNC) return;
+    var nv = document.getElementById('nav');
+    nv.querySelector('.pg').textContent = (cur + 1) + ' / ' + N;
+    nv.querySelector('[data-nav="prev"]').disabled = cur === 0;
+    nv.querySelector('[data-nav="next"]').disabled = cur === N - 1;
+  }
+  document.querySelectorAll('#nav button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = b.getAttribute('data-nav');
+      if (k === 'prev') go(cur - 1); else if (k === 'next') go(cur + 1);
+      else { var g = document.querySelector('#stage .l-guide'); if (g) go(slides.indexOf(g)); }
+    });
+  });
+  function tell(msg) { try { if (peer && !peer.closed) peer.postMessage(msg, '*'); } catch (e) {} }
+
+  window.addEventListener('message', function (e) {
+    var m = e.data || {};
+    if (m.type === 'goto') go(m.n, true);
+    if (m.type === 'answers') { mem.answers = m.answers || {}; slides.forEach(function (_, i) { paintOq(i); }); paintRecap(); if (MODE === 'presenter') paintPresenter(); }
+    if (m.type === 'hello' && MODE === 'main') { peer = e.source; tell({ type: 'goto', n: cur }); tell({ type: 'answers', answers: mem.answers }); }
+  });
+
+  function toggleOverview() {
+    var ov = document.getElementById('overview');
+    if (ov.classList.contains('on')) { ov.classList.remove('on'); ov.innerHTML = ''; return; }
+    slides.forEach(function (s, i) {
+      var t = document.createElement('div'); t.className = 'thumb' + (i === cur ? ' cur' : '');
+      var c = s.cloneNode(true); c.classList.add('active'); t.appendChild(c);
+      var n = document.createElement('span'); n.className = 'n'; n.textContent = i + 1; t.appendChild(n);
+      t.addEventListener('click', function () { toggleOverview(); go(i); });
+      ov.appendChild(t);
+    });
+    ov.classList.add('on');
+  }
+  function openPresenter() {
+    var u = location.href.split('#')[0].split('?')[0] + '?presenter#/' + (cur + 1);
+    peer = window.open(u, 'deck-presenter-' + D.id, 'width=1280,height=800');
+  }
+  function fullscreen() {
+    if (!document.fullscreenElement) { (document.documentElement.requestFullscreen || function () {}).call(document.documentElement); }
+    else document.exitFullscreen();
+  }
+
+  document.addEventListener('keydown', function (e) {
+    var tg = e.target;
+    if (tg && (tg.tagName === 'INPUT' || tg.tagName === 'TEXTAREA')) { if (e.key === 'Escape') tg.blur(); return; }
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var k = e.key;
+    if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'ArrowDown') { e.preventDefault(); go(cur + 1); }
+    else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'ArrowUp') { e.preventDefault(); go(cur - 1); }
+    else if (k === 'Home') go(0);
+    else if (k === 'End') go(N - 1);
+    else if (k === 'f' || k === 'F') fullscreen();
+    else if (k === 'o' || k === 'O') toggleOverview();
+    else if ((k === 'p' || k === 'P') && MODE === 'main' && !ASYNC) openPresenter();
+    else if (k === 'e' || k === 'E') download();
+    else if (k === 'Escape') { var ov = document.getElementById('overview'); if (ov.classList.contains('on')) toggleOverview(); }
+    else if (k === '?' || k === 'h') { var h = document.getElementById('help'); h.classList.add('on'); setTimeout(function () { h.classList.remove('on'); }, 3000); }
+  });
+
+  /* ---------- presenter ---------- */
+  function mount(box, i) {
+    box.innerHTML = '';
+    if (i >= N) { box.innerHTML = '<div style="color:#777;padding:20px">Hết slide</div>'; return; }
+    var c = slides[i].cloneNode(true); c.classList.add('active');
+    var s = box.clientWidth / 1280; c.style.transform = 'scale(' + s + ')';
+    box.style.height = (720 * s) + 'px'; box.appendChild(c);
+    if (oqOf(i)) paintOq(i, c);
+    if (c.classList.contains('l-recap')) paintRecap(c);
+  }
+  function mmss(ms) { var s = Math.floor(ms / 1000); return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); }
+  function paintPresenter() {
+    mount(document.getElementById('pv-cur'), cur);
+    mount(document.getElementById('pv-nxt'), cur + 1);
+    var s = D.slides[cur] || {};
+    document.getElementById('pv-notes').innerHTML = s.notes || '<span style="color:#777">Không có ghi chú</span>';
+    var meta = [];
+    if (s.oq) { if (s.oq.id) meta.push('Mã: <b>' + esc(s.oq.id) + '</b>'); if (s.oq.src) meta.push('Nguồn: ' + esc(s.oq.src)); if (s.oq.recommend) meta.push('Đề xuất: <b>' + esc(s.oq.recommend) + '</b>'); }
+    if (s.refs && s.refs.length) meta.push('Liên quan: ' + esc(s.refs.join(', ')));
+    var m = document.getElementById('pv-meta'); m.innerHTML = meta.join(' · '); m.style.display = meta.length ? '' : 'none';
+    document.getElementById('pv-slide').textContent = 'Slide ' + (cur + 1) + ' / ' + N;
+  }
+  function tick() {
+    var el = Date.now() - t0;
+    document.getElementById('pv-clock').textContent = mmss(el);
+    var s = D.slides[cur] || {}, b = document.getElementById('pv-budget');
+    var sl = Date.now() - tSlide;
+    if (s.time) { b.textContent = 'Slide này ' + mmss(sl) + ' / ' + s.time + ' phút'; b.className = sl > s.time * 60000 ? 'over' : ''; }
+    else b.textContent = 'Slide này ' + mmss(sl);
+    if (D.duration) { var tot = document.getElementById('pv-clock'); tot.title = 'Tổng ' + D.duration + ' phút'; tot.className = 'clock' + (el > D.duration * 60000 ? ' over' : ''); }
+    document.getElementById('pv-sync').textContent = (window.opener && !window.opener.closed) ? '● đã nối cửa sổ chiếu' : '○ chưa nối cửa sổ chiếu (mở bằng phím P)';
+  }
+
+  /* ---------- khởi động ---------- */
+  var start = parseInt((location.hash.match(/#\/(\d+)/) || [])[1] || '1', 10) - 1;
+  if (MODE === 'verify') {
+    // chế độ kiểm: đo từng slide, ghi kết quả vào DOM để build-deck.py đọc
+    var res = slides.map(function (el, i) { var r = fitSlide(el); return { n: i + 1, scale: Math.round(r.scale * 100) / 100, overflow: r.overflow }; });
+    var pre = document.createElement('pre'); pre.id = 'verify-result'; pre.textContent = JSON.stringify(res); document.body.appendChild(pre);
+    slides[0].classList.add('active');
+    return;
+  }
+  slides.forEach(fitSlide);
+  slides[0].classList.add('active');
+  if (MODE === 'presenter') {
+    document.body.classList.add('presenter');
+    peer = window.opener || null;
+    tell({ type: 'hello' });
+    go(isNaN(start) ? 0 : start, true);
+    setInterval(tick, 1000); tick();
+    window.addEventListener('resize', paintPresenter);
+  } else {
+    scale(); window.addEventListener('resize', scale);
+    go(isNaN(start) ? 0 : start, true);
+    var h = document.getElementById('help');
+    if (ASYNC) {
+      h.textContent = '← → hoặc nút ‹ › để chuyển trang · F toàn màn hình · O xem tất cả trang';
+      if (!canSave) document.getElementById('warn').classList.add('on');
+    }
+    h.classList.add('on'); setTimeout(function () { h.classList.remove('on'); }, 4000);
+  }
+})();
+</script>
+</body>
+</html>

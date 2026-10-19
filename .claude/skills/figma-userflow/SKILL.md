@@ -171,7 +171,9 @@ Fix the model, re-dry-run, then draw.
 
 ### Phase 4 — Draw, verify, report
 
-1. Place the frame clear of what is on the page (shared rules §7).
+1. Place the frame clear of what is on the page (shared rules §7). In a project that has
+   `design/setup-figma.md`, put it in the left column of its flow section (`Flow n · …`) inside the
+   feature section, as that file's *Bố cục trong Section flow* says.
 2. Draw.
 3. Read `audit` from the same result — it is the render-side check (overflow, clipping,
    truncation). Fix anything it reports. No second call for it.

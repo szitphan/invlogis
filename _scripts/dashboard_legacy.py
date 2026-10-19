@@ -96,6 +96,8 @@ def legacy_view(root, ledgers):
         iss = [i for i in issues if f"`{slug}`" in i["feats"]]
         glob_iss = [i for i in issues if "`*`" in i["feats"]]
         bs = sorted((root / "docs" / slug / "brainstorms").glob("*.md")) if (root / "docs" / slug).is_dir() else []
+        if not bs:  # feature chưa land: brainstorm nằm trong worktree feat/<slug>
+            bs = sorted((root / ".claude/worktrees").glob(f"*/docs/{slug}/brainstorms/*.md"))
         feats.append({"slug": slug, "name": f["name"], "module": f.get("module", "—"), "sources": srcs,
                       "changes": f["changes"], "ledger": {"done": done, "total": total, "first": first},
                       "reverse": rev, "issues": iss, "global_issues": glob_iss,

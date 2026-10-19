@@ -1,13 +1,14 @@
 ---
 type: brainstorm
 feature: service-delivery
-status: draft
+status: stale
+status_prev: draft
 updated: 2026-10-12
 links:
   - docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md
   - docs-input/sop/sop-dieu-phoi.md
   - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md
-  - docs-input/sop/quan-ly-hoa-don-sim/quan-ly-hoa-don-sim.md
+  - docs-input/sop/apas-thanh-toan-doi-soat/apas-thanh-toan-doi-soat.md
   - docs-input/sop/sop-ban-do-kien-thuc.md
   - docs/_research/2026-10-02-field-document-reading.md
   - docs/_shared/project-profile.md

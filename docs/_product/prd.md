@@ -1,6 +1,7 @@
 ---
 type: prd-product
-status: draft
+status: stale
+status_prev: draft
 updated: 2026-10-15
 links:
   - docs/_shared/project-profile.md
@@ -127,7 +128,7 @@ Ngoài 2 hành trình chính (back-office, quản trị): `common-workspace`, `h
 | 4 | Tra cứu câu hỏi thường gặp và hướng dẫn sử dụng | `help-center` | Nền tảng | Mọi người dùng | Could | `account-access` | ⬜ chưa |
 | 5 | Quản lý tài khoản, nhóm quyền và phân quyền | `access-control` | Quản trị và cấu hình | Admin | Must | `account-access`, `organization` | ⬜ chưa |
 | 6 | Quản lý xưởng, cơ cấu tổ chức và phân vùng dữ liệu theo chi nhánh | `organization` | Danh mục › Tổ chức | Admin | Must | `account-access` | ⬜ chưa |
-| 7 | Quản lý danh mục hàng hoá và dịch vụ kỹ thuật | `product-catalog` | Danh mục › Hàng hoá | Nhân viên xưởng | Should | `access-control` | ⬜ chưa (có bộ reverse) |
+| 7 | Quản lý danh mục hàng hoá và dịch vụ kỹ thuật | `product-catalog` | Danh mục › Hàng hoá | Nhân viên xưởng | Should | `access-control` | ✅ đã chi tiết (1 brainstorm) |
 | 8 | Quản lý nhà cung cấp, khách hàng và xe của khách hàng | `business-partners` | Danh mục › Đối tác | Nhân viên xưởng, CS, Kế toán | Must | `access-control` | ⬜ chưa |
 | 9 | Quản lý khoản mục chi phí cấp 1–3 | `cost-catalog` | Danh mục › Tài chính | Admin, Kế toán | Must | `access-control` | ⬜ chưa |
 | 10 | Mở hồ sơ dịch vụ (JobID) từ chứng từ khách | `service-delivery` | Điều phối vận tải | CS, Kế toán | Must | `access-control`, `business-partners`, `cost-catalog` | ✅ đã chi tiết (1 brainstorm) |

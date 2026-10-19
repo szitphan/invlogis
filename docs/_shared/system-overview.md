@@ -1,8 +1,8 @@
 ---
 type: shared-system-overview
-status: in-review
-status_changed: 2026-10-14
-updated: 2026-10-01
+status: revisions
+status_changed: 2026-10-15
+updated: 2026-10-17
 links:
   - docs-input/srs-cu/lg-srs-export.md
 ---
@@ -80,10 +80,10 @@ graph TB
     DT[Nhân viên đối tác cây dầu]
   end
   subgraph Kenh[Kênh truy cập]
-    Web[Website]
-    Mob[Delta Super App - mobile]
+    Web["Website - Angular"]
+    Mob["Delta Super App - Flutter"]
   end
-  subgraph HeThong["Hệ thống - theo Chi nhánh, Cơ sở"]
+  subgraph HeThong["Hệ thống - backend .NET, theo Chi nhánh, Cơ sở"]
     Chung["Dùng chung<br/>tài khoản, Home, thông báo,<br/>lịch sử, export, import"]
     M1[Module 1 Xưởng]
     M2[Module 2 Cây dầu]

@@ -24,8 +24,6 @@ As a {{persona}}, I want {{capability}}, so that {{benefit}}.
 
 {{screen_references}}
 
-*Reference screens via `[[docs/{{feature}}/ascii-wireframe/{{screen}}|{{screen}}]]`.*
-
 ## Data / Error References
 
 {{error_references}}

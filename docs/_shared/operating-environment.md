@@ -1,8 +1,8 @@
 ---
 type: shared-environment
-status: in-review
-status_changed: 2026-10-14
-updated: 2026-10-01
+status: approved
+status_changed: 2026-10-15
+updated: 2026-10-17
 links:
   - docs-input/srs-cu/lg-srs-export.md
   - docs/_shared/system-overview.md
@@ -22,6 +22,16 @@ feature kế thừa. Nguồn: tài liệu SRS LG (`docs-input/srs-cu/lg-srs-expo
 | Ứng dụng di động | **iOS** và **Android** | Delta Super App — dùng chung cho nhân viên Delta và nhân viên đối tác cây dầu, theo quyền nền tảng Mobile (vd Đơn mua HHDV, Lịch nhắc, Cấp dầu) |
 
 - Tích hợp với phần mềm ERP khác: **Delta ERP**.
+
+## Tech Stack
+
+Nguồn: user chốt 2026-10-17.
+
+| Tầng | Công nghệ | Dùng cho |
+|---|---|---|
+| Frontend web | **Angular** | Website (kênh chính, trình duyệt Chrome) |
+| Frontend mobile | **Flutter** | Delta Super App: một mã nguồn chạy cả iOS và Android |
+| Backend | **.NET** | API và xử lý nghiệp vụ phía server |
 
 ## Target Users
 

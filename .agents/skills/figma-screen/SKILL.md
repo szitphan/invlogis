@@ -1,7 +1,7 @@
 ---
 name: figma-screen
 description: Vẽ màn hình giao diện (UI) lên Figma theo đúng design system của dự án — đề xuất 3 phương án bố cục (1 theo mẫu có sẵn trong design/design.md + 2 độc lập) để user chọn, dùng component thật (instance), gắn token theo tên, vẽ đủ trạng thái rỗng/đang tải/lỗi, rồi tự kiểm trước khi trình. Dùng khi ai đó nói "vẽ màn", "dựng màn hình", "vẽ UI", "mock up màn", "làm giao diện cho <tính năng>" trên Figma.
-allowed-tools: Read, Glob, Grep, Edit, Write, Bash, Task, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__download_assets
+allowed-tools: Read, Glob, Grep, Edit, Write, Bash, Task, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__download_assets, mcp__claude_ai_Figma__use_figma
 user-invocable: true
 argument-hint: "<màn hoặc tính năng cần vẽ> [@nguồn: srs, states, userflow]"
 ---
@@ -93,6 +93,11 @@ Không hỏi user những gì đọc được.
    renderer nào → báo 1 dòng và hỏi: chạy `/wireframe-html` trước (đề xuất cho màn phức tạp) hoặc
    `/wireframe-ascii` (màn đơn giản), hay vẽ thẳng từ SRS (ghi "không có bảng 5 cột" trong báo cáo —
    mất bước khớp đặc tả mục 9 Bước 6 và không ghi được link Figma về repo).
+   * **Prototype đã duyệt** `html-design/{feature}-prototype.html` → có thì chạy `/figma-proto-check
+     {feature} {flow} --before` trước khi vẽ (memory "prototype-to-figma-diff-review"), trừ khi sổ
+     `html-design/{feature}-proto-check.md` đã có quyết định cho flow này. Dòng sổ `Theo prototype` →
+     vẽ theo số đo prototype; `Theo DS` → vẽ theo component; `Dựng component mới` → `/figma-component`
+     trước. Bảng 5 cột vẫn là hợp đồng nội dung; sổ chỉ quyết **cách nhìn**.
 4. **UI Common Rules & Components** (theo `.claude/rules/ui-common-rules-components.md`): đọc bảng
    mục lục `design/ui-common/screen-patterns.md` (CMP) + `conventions.md` (GR, E-common); bảng 5 cột
    ghi `Xem CMP-xx` / `Theo GR-xx` nào thì đọc mục đó. CMP có dòng **Figma** → dùng đúng component +
@@ -139,9 +144,13 @@ coi là thiếu ở mục tự kiểm (c).
 * Chọn thiết bị mà `design.md` chưa có chuẩn (Known Gaps) → nói rõ trước khi vẽ: vẽ tạm và ghi
   "chưa có chuẩn trong design.md".
 * Thiết bị đã chốt → cố định `frameW` cho mọi artboard, không dùng số của thiết bị khác. `frameH`
-  theo nội dung, tối thiểu bằng chiều cao thiết bị; riêng nhóm responsive cao cố định
-  (`design/setup-figma.md` › *Bố cục trong Section con*).
+  theo nội dung, tối thiểu bằng chiều cao thiết bị; riêng hàng Responsive theo Bước 4 mục 9.
 * Userflow chưa ghi `primary_device` → gợi ý ghi vào để lần sau không hỏi lại.
+* **Desktop web → luôn kèm hàng Responsive** (user chốt 15/10/2026): vẽ xong bản 1920 thì vẽ thêm
+  **1440** và **mobile web 393** theo *Responsive Behavior › Breakpoints* của `design.md`, chỉ state
+  mặc định. Mặc định chỉ vẽ **màn đại diện**, mỗi kiểu bố cục 1 màn (vd xác thực chia đôi, trang cài
+  đặt P4, danh sách), trừ khi user muốn vẽ đủ. Hàng này là dòng riêng trong bảng plan L1. Cách dựng:
+  Bước 4 mục 9.
 
 ### 2.3 Câu hỏi riêng của skill này (chỉ hỏi khi cần)
 
@@ -181,9 +190,9 @@ Chế độ Đầy đủ:
 
 ```
 Em sẽ vẽ "Quản lý đơn hàng" theo 1 luồng, tổng 2 màn + 3 trạng thái:
-Luồng 1 — Duyệt đơn (mỗi màn một nhóm, state xếp dọc):
-  2.1 · web · order-list (có dữ liệu) ↓ Empty ↓ Loading
-  2.2 · web · order-detail (bình thường) ↓ Load error
+Luồng 1 — Duyệt đơn (ma trận: cột = màn, hàng = case):
+  2.1 · web · order-list     Luồng chính: có dữ liệu · Đang tải: Loading · Biên: Empty
+  2.2 · web · order-detail   Luồng chính: bình thường · Lỗi: Load error
 Lỗi đại diện: 2.2 · web banner lỗi tải; ghi chú liệt kê các lỗi còn lại cùng kiểu banner
 Trạng thái nghiệp vụ → nhóm: Nháp→Neutral · Chờ duyệt→Warning · Đã duyệt→Success · Từ chối→Error
 Khung: Desktop 1920×1080
@@ -220,8 +229,11 @@ return local;
   `design/setup-figma.md` và chạy mục 3 (Kiểm tra setup). Chỉ vẽ khung tự dựng bằng token khi user
   đồng ý rõ ràng, và phải ghi "không dùng component thư viện" trong báo cáo.
 
-Nơi đặt màn: **trang module** `NN · <Module>`, trong Section feature `Fxx · <tên feature>`, rồi vào
-Section con `Web` hoặc `Mobile` theo thiết bị đã chốt. Section chưa có thì tạo. **Chưa có trang
+Nơi đặt màn: **trang module** `NN · <Module>`, trong Section feature `Fxx · <tên feature> — <slug>`, rồi
+Section `Web` hoặc `Mobile` theo thiết bị đã chốt, rồi Section `Flow n · <slug flow> — <tên Việt>`; userflow
+của flow nằm ở cột trái Section flow. Trang, số `Fxx` và vị trí feature theo mục *Thứ tự feature*; màu
+nền và title từng cấp theo *Bên trong một trang module — 4 cấp section* của `design/setup-figma.md`.
+Section chưa có thì tạo đúng cấp đó. **Chưa có trang
 module thì hỏi user** trước khi tạo (`figma.createPage`), đặt trong nhóm `SCREENS`, tên thụt 5 dấu
 cách (`"     06 · <Module>"`); tìm trang theo tên thì `trim()` trước khi so. Không tạo trang riêng cho
 từng feature. **Không bao giờ** vẽ lên các trang nhóm DESIGN SYSTEMS (component của thư viện),
@@ -250,13 +262,16 @@ Thứ tự dựng:
    ví dụ `"1.1 · web · process-line"`, để userflow nối được (`linkScreens`). Desktop, Tablet, Responsive
    dùng `web`; Mobile dùng `mob`; web và mobile cùng màn chung số + slug. `screenId` trong userflow phải
    ghi đủ thiết bị (`1.1 · web`), vì ghi `1.1` sẽ khớp nhầm cả bản `mob`.
-   Nền dùng token nền trang của `design.md`. Đặt frame theo *Bố cục trong Section con* của
-   `design/setup-figma.md`: mỗi màn một nhóm có thanh title; state xếp dọc dưới frame chính cách
-   100px; modal bên phải màn mở ra nó; các nhóm cách nhau 400px. Title nhóm ghi
-   `<screenId> · <slug> — <tên Việt> — States`. Frame state và modal **4 phần**
+   Nền dùng token nền trang của `design.md`. Đặt frame theo *Bố cục trong Section flow* của
+   `design/setup-figma.md` — ma trận màn × case: mỗi màn có số một cột, title cột
+   `<screenId> · <slug> — <tên Việt>`; mỗi case một hàng có thanh hàng (Luồng chính · Đang tải · Lỗi ·
+   Tình huống biên · Responsive); frame vào hàng theo màu node của nó trong userflow Mục 1. Toạ độ frame,
+   title cột, thanh hàng lấy từ `python3 _scripts/flow-matrix.py plan <feature> <flow> <frames.json>`
+   (frames.json = con trực tiếp của Section flow, đọc bằng `figma_read get_page_model`), không tự ước
+   khoảng cách. Vẽ title cột trước, đọc lại chiều cao, chạy `plan` lần hai để ra vị trí thanh hàng và frame. Frame state và modal **4 phần**
    `<screenId> · <slug> · <tên tiếng Anh>` theo *Tên frame* + bảng từ vựng của `design/setup-figma.md`
-   (vd `1.1 · web · process-line · Loading`); state có số riêng trong userflow là màn riêng, 3 phần. Vẽ xong mà frame cao thêm thì canh
-   lại khoảng cách cả cột.
+   (vd `1.1 · web · process-line · Loading`); state có số riêng trong userflow là màn riêng, 3 phần, cột riêng.
+   Vẽ xong hoặc frame cao thêm → chạy lại `flow-matrix.py plan` rồi dời frame và thanh hàng theo kế hoạch.
 2. **Khung trang**: dựng đúng cấu trúc của mẫu S/P đã chọn (vùng, thứ tự, cột, rail), bằng
    `children: [...]` trong một lần `create`. Frame bố cục dùng auto-layout, gap bằng `itemSpacing`
    gắn token spacing, không dùng spacer.
@@ -272,10 +287,11 @@ Thứ tự dựng:
    bảng *Ánh xạ trạng thái nghiệp vụ*. Dữ liệu mẫu: 5–8 hàng, giá trị đa dạng, có một giá trị dài
    để thử tràn chữ.
 6. **Lớp phủ**: dialog/drawer dùng `figma.overlay({...})` cho scrim, **không** dùng frame bán trong suốt.
-   Dialog/drawer vẽ trên **frame riêng bên phải màn mở ra nó** (cả màn + lớp phủ + modal), tên tiếng
-   Anh theo việc (`Approve order`). Dropdown, popover, menu vẽ ngay trong frame màn.
+   Dialog/drawer vẽ trên **frame riêng** (cả màn + lớp phủ + modal), đặt ở cột của màn mở ra nó, hàng
+   theo case; tên tiếng Anh theo việc (`Approve order`). Dropdown, popover, menu vẽ ngay trong frame màn.
 7. Đặt tên layer theo **việc nó làm** ("Nút duyệt đơn", "Ô tìm đơn hàng"), không để "Frame 12".
-   `a11y_audit` dựa vào tên layer để nhận diện control.
+   `a11y_audit` dựa vào tên layer để nhận diện control. Phần tử ứng với một row bảng 5 cột thì tên layer
+   **đúng chữ ở cột Items** (bỏ phần trong ngoặc), vì thẻ Spec ghim theo tên này (Bước 7).
 8. **Bám bảng 5 cột** (khi có — Bước 1.3). Bảng là hợp đồng, không phải gợi ý:
    * Mỗi row → 1 element trên màn, đúng `Control type` (tra `design/ba-crosswalk.md` → component).
      Không bỏ row; row không vẽ được → ghi lý do trong báo cáo.
@@ -287,6 +303,19 @@ Thứ tự dựng:
    * Lỗi vẽ đúng loại GR-15 ghi trong bảng (Inline / Popup / Toast) ở artboard lỗi đại diện.
    * Thấy nên khác bảng (đổi chữ, bỏ/thêm element) → vẫn vẽ theo bảng, ghi vào báo cáo mục
      "Đề xuất đổi so với bảng 5 cột" cho user quyết (đổi thật thì qua `/cr`).
+9. **Hàng Responsive** (khi thiết bị là Desktop web — Bước 2.2):
+   * *Đặt:* hàng `Responsive` (hàng cuối của ma trận), ô thuộc cột màn gốc; 1440 rồi 393 xếp ngang,
+     cách 100px, toạ độ theo `flow-matrix.py plan`. Nới Section flow và các section cha, dời section bên
+     dưới xuống để không đè nhau.
+   * *Tên:* `<screenId> · <slug> · 1440` / `· 393`; mobile web vẫn dùng `web` (feature có app riêng
+     thì tên `mob` đã thuộc bản app).
+   * *1440:* `clone` bản 1920 rồi `resize`; panel có bề rộng cố định thì đặt lại theo tỷ lệ.
+   * *393:* `clone` rồi chuyển đổi: ẩn menu trái + thanh trên desktop; thêm thanh trên mobile 48px
+     (`.MobileNavToggle` + tên đơn vị + `Avatar`); nội dung lề 16; hàng ngang → `layoutMode: VERTICAL`,
+     con FILL ngang + **HUG dọc** (không HUG thì nội dung bị cắt); nav phụ dọc → hàng tab cuộn ngang
+     (mục HUG, tab đang chọn phải nhìn thấy, nằm cuối thì canh `MAX`); màn xác thực chia đôi → ẩn
+     panel, logo khách lên đầu form. Cao theo nội dung, tối thiểu 852.
+   * *Kiểm:* `layout_audit` + screenshot từng frame.
 
 ## Bước 4b — nối prototype
 
@@ -375,10 +404,11 @@ Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một
      "Đề xuất đổi so với bảng 5 cột" (KHÔNG im lặng vì bảng không ghi). Bảng chỉ ghi `Xem CMP-xx` không có
      nghĩa là đã phủ hết hành vi của CMP (sự cố 13/10/2026: tooltip chip Điều kiện CMP-09 #4 lọt khỏi
      wireframe lẫn Figma);
-   - (g) **bố cục canvas**: `figma_read get_page_model` trên Section: state cách 100, nhóm cách 400,
-     mỗi nhóm có title (kèm tên Việt), mọi frame bắt đầu `<screenId> · <slug>` (chính 3 phần, state/modal
+   - (g) **bố cục canvas**: `figma_read get_page_model` trên Section flow: section đúng cấp (màu nền + title theo 4 cấp), userflow ở cột trái,
+     mỗi cột có title (kèm tên Việt), mỗi hàng có thanh hàng, `python3 _scripts/flow-matrix.py check <feature> <flow> <frames.json>`
+     trả về 0 (mọi frame đúng cột, đúng hàng, đúng khoảng cách); mọi frame bắt đầu `<screenId> · <slug>` (chính 3 phần, state/modal
      4 phần với tên tiếng Anh), không còn
-     `Frame N`, không có dấu cách đầu tên frame (`design/setup-figma.md` › *Bố cục trong Section con*).
+     `Frame N`, không có dấu cách đầu tên frame (`design/setup-figma.md` › *Bố cục trong Section flow*).
 6. **A4** · **Chip trạng thái:** mọi chip là instance `Chip trạng thái` (không tự vẽ pill); icon và chữ đúng màu
    `Status Chip/<Sắc>/Foreground` (đổi icon qua thuộc tính `Icon` xong phải gắn lại màu nét); mã nghiệp vụ
    dùng `Text/Code Small`; chip không đè tên/mã. Màn có trạng thái nghiệp vụ → chạy
@@ -435,8 +465,13 @@ Chưa có chuẩn trong design.md: <liệt kê chỗ vẽ tạm, hoặc "không"
 Chế độ: <Nhanh — không vẽ trạng thái phụ | Đầy đủ>
 Link Figma: đã ghi {n} màn vào {feature}-wireframe-html-index.md / {feature}-wireframe-index.md | qua /figma-sync | Chưa ghi: <lý do>
 Đồng bộ tài liệu (/figma-sync): <tóm tắt báo cáo của figma-sync> | Chưa sync tài liệu — <lý do>
+Thẻ Spec: {n} thẻ · ghim {x}/{y} row · chưa ghép: #<n> <Items> (<screenId>), … | SKIPPED — <lý do>
 Task chốt: BL-NNN Chốt giao diện Figma {feature} · {flow} | đã có | chưa trọn flow
+Đối chiếu prototype: chạy /figma-proto-check {feature} {flow} --after | không có prototype
 ```
+
+Feature có prototype đã duyệt → luôn đề nghị `/figma-proto-check {feature} {flow} --after` ngay sau khi
+vẽ trọn flow (đo Figma với prototype bằng số; reviewer không so với prototype).
 
 **Ghi link về repo.** Link màn: `[{screenId}](https://www.figma.com/design/{fileKey}/?node-id={nodeId,
 ":" đổi thành "-"})`. `fileKey`: plugin không trả → lấy từ link node trong
@@ -463,6 +498,17 @@ L1/L2 của nó). Lần đầu của flow: chuyển bảng 5 cột sang `screens
 mốc. Lần sau: những gì đã vẽ khác bảng (mục "Đề xuất đổi so với bảng 5 cột") và chỉnh tay của designer
 (Bước 5) thành đề xuất sửa `screens/` + userflow thay vì chỉ nằm trong báo cáo chat. User từ chối → ghi
 "Chưa sync tài liệu" trong báo cáo, không ghi mốc.
+
+**Thẻ Spec + lớp ghim (DEC-188, `.claude/rules/screen-source.md` Mục 9)** — chạy sau `/figma-sync`, khi flow đã
+có `screens/{flow}.md`:
+1. `python3 _scripts/screen-annotations.py build {feature} {flow} --json` → nội dung thẻ từng frame.
+2. Đọc lớp con của từng frame (tên, chữ, toạ độ trong frame, độ sâu) → `tree.json` →
+   `python3 _scripts/screen-annotations.py match {feature} {flow} tree.json --write` → bản đồ row ↔ phần tử vào mốc.
+   Row chưa ghép được → báo tên row + màn, đề xuất đổi tên layer cho khớp cột Items; không tự đoán phần tử.
+3. Vẽ: xoá thẻ và lớp ghim cũ của frame (theo tên `Ghi chú · Spec · <nodeId>`, `Ghi chú · Ghim · <nodeId>`), vẽ lại
+   theo nội dung bước 1 và bản đồ bước 2, cách nhìn theo `design/setup-figma.md` › *Bố cục trong Section flow*. Dùng
+   `figma_write`; plugin Reqwise chưa mở thì dùng `use_figma` (tool Figma chính thức, nạp skill `figma-use` trước).
+4. Thẻ cao khác frame nên chạy lại `flow-matrix.py plan` → dời frame, thẻ, lớp ghim → `flow-matrix.py check` trả về 0.
 
 **Task chốt:** vẽ xong trọn một flow mà backlog chưa có task cùng flow → thêm (báo 1 dòng, `backlog.md`):
 `Chốt giao diện Figma {feature} · {flow}` · Xong khi

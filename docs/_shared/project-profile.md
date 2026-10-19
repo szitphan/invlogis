@@ -1,7 +1,7 @@
 ---
 type: project-profile
-status: in-review
-status_changed: 2026-10-14
+status: approved
+status_changed: 2026-10-15
 updated: 2026-10-14
 links:
   - docs-input/srs-cu/lg-srs-export.md

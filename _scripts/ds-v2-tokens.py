@@ -25,6 +25,7 @@ PAIRS = [
     ("color/text/secondary", "color/bg/muted", 4.5),
     ("color/text/inverse", "color/action/primary", 4.5),
     ("color/text/inverse", "color/action/danger", 4.5),
+    ("color/action/danger", "color/action/danger-subtle", 4.5),
     ("color/text/primary", "color/action/secondary", 4.5),
     ("color/text/tertiary", "color/bg/surface", 0),
 ] + [(f"color/status/{k}-fg", f"color/status/{k}-bg", 4.5) for k in ("success", "warning", "danger", "info")] \

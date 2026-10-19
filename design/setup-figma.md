@@ -65,9 +65,9 @@ bước kiểm tra báo lỗi ở token, hãy báo lại để cập nhật hư�
 thành `<Tên dự án> — Design`. Không vẽ vào file gốc dùng để trích tài liệu.
 
 **B2. Thêm trang cho màn hình.** Tạo các trang và dòng phân cách theo mục **Cấu trúc trang file dự
-án**. Các trang thư viện (About, Foundation, Icons, Templates, Action… Table & List) chỉ **đổi vị
-trí** vào nhóm DESIGN SYSTEMS, **không đổi tên, không sửa nội dung**. Đó là nơi chứa component chính (main
-component).
+án**. Nội dung các trang thư viện (About, Foundation, Icons, Templates, Action… Table & List) gom về
+nhóm DESIGN SYSTEMS theo mục *Design system: innvie và Astryx tách riêng*, **không sửa nội dung component**.
+Đó là nơi chứa component chính (main component).
 
 Đoạn này chỉ áp dụng cho gói Starter; gói Edu/Professional không giới hạn số trang. Gói Starter
 giới hạn số trang mỗi file. Nếu Figma không cho thêm trang, có hai cách:
@@ -99,14 +99,25 @@ WORK
      🗄 Archive               ← bản cũ, không xóa
 ---
 DESIGN SYSTEMS
-——— 01 · FOUNDATIONS ———
-     About · Foundation · Icons
-——— 02 · COMPONENTS ———
-     Action · Chat · Container · Content · Feedback & Status · Form Controls · Layout ·
-     Navigation · Overlay · Table & List · Utility
-——— 03 · PATTERNS ———
-     Templates
+     innvie · Foundations     ← màu, chữ, icon, logo (Logo khách / Delta)
+     innvie · Components      ← component dự án dùng thật: mỗi component 1 hàng, Web | Mobile cạnh nhau
+     innvie · Patterns        ← khung trang, device frame, cây quy trình, splash, template đang dùng
+     Astryx · Library         ← component Astryx chưa xếp, 1 trang, section theo nhóm cũ (Action, Overlay…)
 ```
+
+**Design system: innvie và Astryx tách riêng** (DEC-103).
+* `innvie · Components` chứa mọi component mà màn đang dùng: component dự án (`· innvie`) và component Astryx
+  có instance trên trang màn. Mỗi component là một hàng (section trắng, title 112 là tên component), gồm
+  hai cột cạnh nhau: `Web` và `Mobile` (cùng nền `#F2F2F2`, phân biệt bằng title), để chỉnh hai bản cùng lúc. Chỉ có
+  một bản thì cột còn lại ghi "Chưa có bản Mobile/Web". Hàng xếp theo nhóm (Action, Form Controls,
+  Navigation, Overlay, Container, Content, Feedback & Status, Layout, Table & List), trong nhóm theo ABC,
+  **trải ngang từ trái sang phải, rộng quá khoảng 16.000px thì xuống dòng**; nhiều frame trong một cột
+  Web/Mobile cũng đặt cạnh nhau. Các nhóm xếp thành lưới, cách nhau 1.000px.
+* `Astryx · Library`: phần Astryx còn lại. Component không có instance nào trên trang màn (kể cả lồng trong
+  component đang dùng) gom vào section `🗑 Không dùng — chờ duyệt xoá`; chỉ xoá sau khi user duyệt danh sách.
+  Khi một component Astryx bắt đầu được dùng, chuyển main component sang `innvie · Components`.
+* Chuyển main component giữa các trang không làm đứt instance. Chuyển xong thì sửa vị trí ghi trong
+  `design/design.md` (dạng "trang …, khung … · innvie") cùng lượt.
 
 Tìm trang theo tên thì so sánh sau khi `trim()` (bỏ dấu cách thụt đầu).
 
@@ -123,35 +134,100 @@ Cách A không có nhóm DESIGN SYSTEMS trong file dự án: các trang đó n�
   (tên trang có link tới trang), *Quy ước trong trang module*, *Changelog* (mới nhất ở trên). Thêm module thì
   thêm một dòng ở Mục lục; gửi duyệt hoặc sửa màn đã Ready for dev thì thêm một dòng Changelog.
 
-**Bên trong một trang module:**
-* Mỗi feature là một Section `Fxx · <tên feature>`, ví dụ `F01 · Lập kế hoạch chuyến`.
-* Trong feature có hai Section con `Web` và `Mobile` (chỉ tạo phần có màn).
-* Trạng thái feature: tiền tố tên Section `🚧` (đang làm), `👀` (chờ duyệt); đã chốt thì bấm
-  **Ready for dev** (Dev Mode). Sửa sau khi đã Ready, Figma tự đổi sang *Changed*.
+**Thứ tự feature** (DEC-103). Số feature tăng dần, nên vị trí phải suy ra được từ PRD, không xếp theo ngày vẽ.
+* Trang module theo cột *Theme* của bảng Feature Map (`docs/_product/prd.md` Mục 7):
 
-**Bố cục trong Section con:**
-* Mỗi màn là một **nhóm**, có thanh title rộng bằng cả nhóm, ghi
-  `<screenId> · <slug> — <tên Việt> — States` (tên Việt = cột *Màn hình* của userflow Mục 2), ví dụ
-  `1.1 · web · process-line — Màn chi tiết bản ghi có dòng quy trình — States`.
-  Thanh title là text/rectangle, **không phải frame**, để `linkScreens` không khớp nhầm. Nhóm
-  responsive riêng có title `<screenId> · <slug> — <tên Việt> — Responsive`. Popup mở từ nơi chưa vẽ (màn ngoài
-  feature) gom một nhóm riêng, title `Popups — mở từ <nơi mở>`.
-* State của màn xếp **dọc** dưới frame chính, cách nhau 100px. State vẽ ở 1920, cao theo nội dung;
-  sửa nội dung xong thì canh lại khoảng cách cả cột, không để frame dính nhau hoặc cách lung tung.
-* Modal (dialog, confirm, form nhỏ) đặt **bên phải màn mở ra nó**, cách 100px. Frame modal là cả màn
-  có lớp phủ tối và modal ở trên. Nhiều modal nối tiếp sang phải; state của modal xếp dọc dưới modal.
+  | Theme | Trang |
+  |---|---|
+  | Nền tảng, Quản trị và cấu hình | `00 · Chung` |
+  | Bảo dưỡng sửa chữa | `01 · Quản lý xưởng` |
+  | Nhân sự | `02 · Nhân sự` |
+  | Quản lý phương tiện | `03 · Phương tiện` |
+  | Quản lý dầu | `04 · Quản lý dầu` |
+  | Danh mục › … | `05 · Danh mục` |
+  | Điều phối vận tải | `06 · Điều phối vận tải` (tạo khi vẽ feature đầu tiên) |
+
+  Theme mới chưa có trong bảng → hỏi user, tạo trang số tiếp theo, thêm dòng vào bảng này.
+* Mã `Fxx` = số ở cột `#` của bảng Feature Map, 2 chữ số (`account-access` = `F01`, `cross-process-flow` =
+  `F03`). Không đánh lại số. Feature chưa có trong Feature Map → hỏi user, thêm vào PRD trước rồi mới vẽ.
+* Trong một trang, feature xếp **từ trên xuống** theo `Fxx` tăng dần, mép trái thẳng hàng (x = 0), cách
+  nhau 1.000px. Chèn feature số nhỏ hơn vào giữa → dời cả khối các feature bên dưới xuống, không xếp ngang.
+* Không để node nào nằm rời ngoài section feature. Component → trang DESIGN SYSTEMS; thử nghiệm → Sandbox.
+* `Screens · Index`: mỗi feature một dòng `Fxx · <tên> · <trang> · <trạng thái>`, link tới section feature.
+
+**Bên trong một trang module — 4 cấp section** (DEC-103). Section lồng nhau phân cấp bằng màu nền; title
+là **text node đặt trong section**, font heading, cỡ đủ đọc khi zoom xa (nhãn tên section của Figma không
+phóng to được). Màu dưới đây là màu canvas để đọc file, không phải token sản phẩm.
+
+| Cấp | Tên section | Nền | Title | Ghi chú |
+|---|---|---|---|---|
+| L0 Feature | `Fxx · <tên feature> — <slug>` | `#E5E5E5` | 240, dưới là dòng phụ 64: `slug · trạng thái · link SRS · cập nhật dd/mm` | Trạng thái là tiền tố tên: `🚧` đang làm, `👀` chờ duyệt, `✅` đã chốt |
+| L1 Khối | `Tài nguyên` · `Web` · `Mobile` (theo thứ tự này, chỉ tạo khối có nội dung) | `#F2F2F2` cho cả ba; title phân biệt khối | 160 | Mobile web 393 thuộc `Web`; `Mobile` dành cho app |
+| L2 Flow | `Flow n · <slug flow> — <tên Việt>` | `#FFFFFF` | 112 | Thứ tự theo userflow Mục 3 của feature |
+| L3 Cột màn × hàng case | (không phải section) | — | 64 (title cột, thanh hàng) | Xem *Bố cục trong Section flow* |
+
+Chỉ dùng màu trung tính (xám, đen, trắng), không tô màu sắc cho section (DEC-104). Section `🗑 Không dùng — chờ
+duyệt xoá` ở `Astryx · Library` nền `#D9D9D9`.
+
+* **Tài nguyên** gồm 3 section L2: `Component phát sinh` (instance của component dự án sinh ra hoặc sửa vì
+  feature này; main component vẫn nằm ở `innvie · Components`), `Icon dùng`, `Chip trạng thái dùng`
+  (badge/status theo `srs/{feature}-states.md`). Mỗi mục có chú thích một dòng: dùng ở màn nào.
+* **Hàng theo flow:** mỗi Section flow là một hàng: **userflow của flow ở cột trái**, khu màn của flow bên
+  phải xếp thành **ma trận màn × case** (mục dưới). Người đọc thấy sơ đồ và màn của cùng một flow trên một hàng. Màn dùng chung nhiều flow vẽ ở
+  flow đầu tiên dùng nó; các flow sau chỉ trỏ tới bằng userflow (`linkScreens`), không nhân bản frame.
+* Đã chốt thì bấm **Ready for dev** (Dev Mode) trên section L0. Sửa sau khi đã Ready, Figma tự đổi sang *Changed*.
+
+**Bố cục trong Section flow — ma trận màn × case** (DEC-185, DEC-186):
+* Khu màn là một bảng: **mỗi màn có số là một cột**, **mỗi case là một hàng**. Đọc ngang hàng Luồng chính
+  là đi hết luồng chính từ trái sang phải; đọc dọc một cột là mọi trạng thái của một màn.
+* **Cột** = màn có số `[#]` ở userflow Mục 2 (kể cả state có số riêng), thứ tự theo cột *Màn hình gồm* của
+  userflow Mục 3 (thứ tự đi), màn không có ở đó thì theo số. Đầu cột là title
+  `<screenId> · <slug> — <tên Việt>` (tên Việt = cột *Màn hình* Mục 2), ví dụ
+  `1.1 · web · record-detail — Màn chi tiết bản ghi có dòng quy trình`. Title là text, **không phải frame**,
+  để `linkScreens` không khớp nhầm. Popup mở từ nơi chưa vẽ (màn ngoài feature) gom một cột cuối, title
+  `Popups — mở từ <nơi mở>`.
+* **Hàng** theo thứ tự `Luồng chính` · `Đang tải` · `Lỗi` · `Tình huống biên` · `Responsive` (chỉ desktop
+  web). Hàng không có frame nào trong flow thì bỏ. Mỗi hàng mở đầu bằng **thanh hàng** trải hết bề rộng các
+  cột: nền `#1F1F1F`, chữ trắng cỡ 64, chấm tròn màu case trước chữ (Luồng chính `#28A745`, Lỗi `#DC3545`,
+  Tình huống biên `#FFC107`, Đang tải và Responsive `#8C8C8C`; cùng màu `classDef` của userflow). Thanh hàng
+  là group (hình chữ nhật + chấm + chữ) tên `Hàng · <tên hàng>`, không phải frame.
+* **Frame vào hàng nào:** state Loading, `<Khối> loading`, Submitting → `Đang tải`. Frame khác theo màu node
+  của nó trong userflow Mục 1 (`class … happy` → Luồng chính, `error` → Lỗi, `edge` → Tình huống biên); node
+  tìm theo nhãn `[n]` (frame chính) hoặc `[n] · <State>` (frame state). Frame không có node → cột *Hàng* của
+  bảng từ vựng dưới. Màn chỉ có ở nhánh lỗi hoặc biên (vd popup lỗi) thì ô Luồng chính của cột đó để trống.
+* **Nhiều frame trong một ô** xếp **dọc**, cách 100px, theo thứ tự node trong userflow. Modal (dialog,
+  confirm, form nhỏ; frame cả màn có lớp phủ tối) không có số riêng nằm ở cột của màn mở ra nó, hàng theo
+  case của modal. Ô `Responsive` xếp **ngang**: 1440 rồi mobile web 393, cách 100px, chỉ state mặc định; 1920
+  là frame ở hàng Luồng chính, không nhân bản. Mobile web 393 nằm trong Section `Web`, tên
+  `<screenId> · <slug> · 393`; Section `Mobile` dành cho app.
+* State vẽ ở 1920, cao theo nội dung. Frame cao thêm → tính lại toạ độ, dời cả cột và các hàng bên dưới;
+  không để frame dính nhau hoặc cách lung tung.
+* Frame `Ghi chú … · <nodeId>` đặt ngay dưới frame có nodeId đó, cách 100px.
+* **Thẻ Spec** `Ghi chú · Spec · <nodeId>` (DEC-188, `.claude/rules/screen-source.md` Mục 9) đặt bên phải frame có
+  nodeId đó, cách 40px, cùng mép trên; cột rộng thêm phần thẻ, ô cao bằng phần cao hơn giữa frame và thẻ. Thẻ trắng,
+  viền `#D9D9D9`, bo 16, Inter; web rộng 720, mobile 400. **Lớp ghim** `Ghi chú · Ghim · <nodeId>` (group: khung nét
+  đứt + số tròn ở góc trên trái mỗi phần tử) nằm đè lên frame nhưng là anh em của frame, không lồng vào; dời frame
+  thì lớp ghim dời theo. Màu của lớp ghi chú: tím `#7B61FF`, chỉ dùng cho số và khung ghim.
 * Dropdown, popover, menu bám vào một phần tử nằm **bên trong** frame màn, không tách ra ngoài.
-* Nhóm responsive: 1920 và 1440 xếp ngang cách 100px, cùng cao cố định 1080, chỉ vẽ cho state mặc
-  định. Mobile 393 nằm ở Section con `Mobile`.
+* Toạ độ do máy tính, không ước bằng tay: `python3 _scripts/flow-matrix.py plan <feature> <flow> <frames.json>`
+  (frames.json = con trực tiếp của Section flow) ra kế hoạch; `check` kiểm mọi frame đúng cột, đúng hàng.
 
 | Thành phần | Vị trí |
 |---|---|
-| Nhóm đầu tiên | cách mép trái section 200px |
-| Title của nhóm | cách mép trên section 200px |
-| Frame đầu tiên của nhóm | cách mép trên section 352px (ngay dưới title) |
-| Frame kế tiếp cùng hàng (modal, breakpoint) | cách frame trước 100px |
-| Frame kế tiếp trong cột (state) | cách frame trên 100px |
-| Nhóm kế tiếp | cách mép phải nhóm trước **400px** |
+| Title của section (L0 / L1 / L2) | cách mép trái và mép trên section 160 / 100 / 80px |
+| Section con đầu tiên trong L0 | cách mép trên L0 600px; trong L1: 400px |
+| Section L1 kế tiếp / L2 kế tiếp | cách section trước 400px / 300px; đệm phải và đệm dưới mỗi section 200px |
+| Userflow của flow | cột trái Section flow: x = 200, y = 320 |
+| Cột màn đầu tiên | cách mép phải userflow **400px** |
+| Cột kế tiếp | cách mép phải cột trước **400px**; bề rộng cột = frame rộng nhất của cột (ô Responsive: 1440 + 100 + 393) |
+| Title cột | y = 320 trong Section flow; rộng bằng cột cộng khoảng trống tới cột kế, chừa 40px (cột cuối tính tới đệm phải); Inter 64 |
+| Thanh hàng đầu tiên | y = 472, cao 120, từ mép trái cột đầu tới mép phải cột cuối; title cột xuống nhiều dòng (cột mobile hẹp) thì lùi xuống, cách đáy title cao nhất 40px |
+| Frame đầu tiên của hàng | cách đáy thanh hàng 80px |
+| Frame kế tiếp trong ô | cách frame trên 100px (ô Responsive: cách frame bên trái 100px) |
+| Thẻ Spec | bên phải frame cách 40px, cùng mép trên; web rộng 720, mobile 400 |
+| Thanh hàng kế tiếp | cách đáy frame thấp nhất của hàng trên 300px |
+
+Vẽ thêm màn làm Section flow cao/rộng ra → nới section cha và dời các section bên dưới xuống, không để đè.
 
 **Tên frame:**
 Mọi frame bắt đầu bằng `<screenId> · <slug>`. Các phần ngăn bằng ` · ` (có dấu cách hai bên); số,
@@ -163,35 +239,37 @@ slug, tên Việt lấy từ userflow Mục 2 theo `.claude/rules/naming-convent
   `1.1 · web · process-line · Loading`, `1.1 · web · process-line · Confirm delete`. Tên tiếng Anh viết
   hoa chữ đầu, 2–3 từ, theo bảng từ vựng dưới.
 * State có số riêng trong userflow Mục 2 (có chuyển màn riêng ở Mục 3.5) là màn riêng: 3 phần với
-  số và slug của nó (`1.3 · web · process-line-error`), vẫn đặt trong nhóm của màn gốc.
+  số và slug của nó (`1.3 · web · process-line-error`), có cột riêng như mọi màn có số.
 * Không để `Frame 123`, `state 2`; không có dấu cách thừa đầu tên frame (tên trang module vẫn cố ý thụt).
 * **Frame thuộc màn nào:** tách tên theo ` · `. Phần 1 là số, phần 2 là thiết bị, phần 3 là slug,
   phần 4 (nếu có) là state/modal. So **từng phần**, không so chuỗi con (`1.1` không khớp `11.1`,
-  `1.10`). Vị trí trong nhóm dùng để kiểm chéo: frame chính trên cùng cột trái nhất, cùng cột là
-  state, bên phải là modal (cột dưới modal là state của modal). Frame tên bắt đầu bằng `Ghi chú` /
+  `1.10`). Vị trí dùng để kiểm chéo theo ma trận: cùng cột là cùng màn (title cột ghi `screenId`), hàng
+  cho biết case. Thẻ Spec và lớp ghim kết thúc bằng nodeId của frame (không phải screenId) nên không khớp
+  nhầm vào màn. Frame tên bắt đầu bằng `Ghi chú` /
   `Note` là ghi chú, không tính là state. Skill đọc frame (`/prototype-html`, `@usability-reviewer`)
   khớp theo luật này.
 
 **Bảng từ vựng tên state.** Tình huống mới chưa có trong bảng thì đặt theo mẫu *Danh từ + tính chất*,
-rồi thêm một dòng vào bảng.
+rồi thêm một dòng vào bảng. Cột *Hàng* là hàng của frame trong ma trận khi frame không có node trong
+userflow (Loading và Submitting luôn ở hàng Đang tải).
 
-| Tình huống | Tên |
-|---|---|
-| Đang tải | Loading |
-| Tải lỗi | Load error |
-| Một khối trong màn tải lỗi | `<Block> load error` (vd History load error) |
-| Rỗng, chưa có dữ liệu | Empty |
-| Tìm không ra | No search results |
-| Lọc không ra | No filter results |
-| Không có quyền xem | No permission |
-| Bị chặn khi mở | Open denied |
-| Banner dữ liệu vừa cập nhật | Update banner |
-| Chỉ xem | Read-only |
-| Đang sửa | Edit |
-| Đang gửi | Submitting |
-| Bản ghi đã xoá | Record deleted |
-| Modal | `<Đối tượng> <loại>`: Process diagram, Step sheet, Confirm delete |
-| Popup lỗi nghiệp vụ | Theo nguyên nhân: Step already requested, Source revoked |
+| Tình huống | Tên | Hàng |
+|---|---|---|
+| Đang tải | Loading | Đang tải |
+| Tải lỗi | Load error | Lỗi |
+| Một khối trong màn tải lỗi | `<Block> load error` (vd History load error) | Lỗi |
+| Rỗng, chưa có dữ liệu | Empty | Tình huống biên |
+| Tìm không ra | No search results | Tình huống biên |
+| Lọc không ra | No filter results | Tình huống biên |
+| Không có quyền xem | No permission | Lỗi |
+| Bị chặn khi mở | Open denied | Lỗi |
+| Banner dữ liệu vừa cập nhật | Update banner | Tình huống biên |
+| Chỉ xem | Read-only | Tình huống biên |
+| Đang sửa | Edit | Luồng chính |
+| Đang gửi | Submitting | Đang tải |
+| Bản ghi đã xoá | Record deleted | Lỗi |
+| Modal | `<Đối tượng> <loại>`: Process diagram, Step sheet, Confirm delete | theo userflow |
+| Popup lỗi nghiệp vụ | Theo nguyên nhân: Step already requested, Source revoked | Lỗi |
 
 **Mã màn (`screenId`):** `<[#]> · web` hoặc `<[#]> · mob`, ví dụ `1.1 · web · process-line`,
 `1.1 · mob · process-line` (web và mobile cùng màn chung số + slug). Desktop, Tablet, Responsive dùng

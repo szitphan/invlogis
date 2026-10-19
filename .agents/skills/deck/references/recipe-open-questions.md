@@ -33,6 +33,9 @@ Không có buổi họp, không có người trình bày, nên trình tự gọn
 
 Khác cách viết so với họp:
 
+- **Bối cảnh đủ + trích nguyên văn** khi khách tự đọc: dùng `density: compact` (deck-format.md mục Mật độ),
+  bối cảnh 2–4 câu (hiện trạng · tài liệu đang nói gì · chỗ chưa rõ/mâu thuẫn · vì sao phải chốt) và 1–3 dòng
+  `**Trích dẫn:**` câu gốc kèm tên tài liệu, mục.
 - **Lý do đề xuất lên slide.** Có `recommend` thì thêm 1 dòng `**Vì sao đề xuất C:** …` (lời khách, không
   mã) — ghi chú không được gửi đi nên khách không thấy lý do nếu chỉ để trong notes.
 - **Câu hỏi mở thật** (không phương án) → bối cảnh nói rõ khách cần trả lời gì, ví dụ mức chi tiết mong

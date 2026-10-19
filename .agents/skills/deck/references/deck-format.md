@@ -20,6 +20,7 @@ reply_to: chị Lan (lan@…)      # chỉ async — người nhận câu trả 
 reply_by: 2026-10-15           # chỉ async — hạn trả lời (ISO), hiện ở bìa + slide hướng dẫn
 footer: Rà soát câu hỏi mở     # tuỳ chọn, mặc định = title
 brand: innvie                  # tuỳ chọn — thư mục design/brand/{slug}/; `none` để tắt
+density: compact               # tuỳ chọn — chữ nhỏ ~25%, bối cảnh dài + dòng Trích dẫn (xem mục Mật độ)
 status: draft
 updated: 2026-10-06
 links:                         # mọi file nguồn đã dùng (hook stale theo dõi)
@@ -61,6 +62,7 @@ Dòng phụ
 | `## …` | Tiêu đề slide. Với `oq`: **câu hỏi** |
 | `> …` | Khối bối cảnh (nền xám, viền trái) |
 | `**Nhãn:** nội dung` | Dòng có nhãn, vd `**Ảnh hưởng:** …` |
+| `**Trích dẫn:** "…" — tên tài liệu (ngày), mục` | Câu nguyên văn trong tài liệu khách (chữ nhỏ, nghiêng, vạch trái). Được nhiều dòng; đặt sau dòng Tài liệu |
 | `**Tài liệu:** …` | Dòng nguồn cho khách (chữ nhỏ, xám): tên tài liệu khách gửi + ngày bản + số mục, tên mục. Đặt ngay sau `>` bối cảnh |
 | `- …` / `1. …` | Gạch đầu dòng |
 | dòng thường | Đoạn văn |
@@ -94,6 +96,7 @@ Thẻ phương án kết thúc khi gặp `### ` khác, `## `, `> ` hoặc `**Nh�
 | Slide hướng dẫn | Không | **Build tự chèn** "Hướng dẫn trả lời" ngay sau bìa (câu chữ cố định trong `build-deck.py` → `guide_slide`, điền `reply_to` + `reply_by`). Không viết tay — lint chặn |
 | Điều hướng | Phím tắt | Phím tắt + thanh nút **Hướng dẫn · ‹ · n/N · ›** góc dưới phải |
 | Nhãn trên slide `oq` | Quyết định · Hoãn · "Đã chốt" | Trả lời · **Cần trao đổi thêm** · "Đã chọn" |
+| Ô ghi chú (câu có phương án) | 1 dòng, cạnh các nút | **Ý kiến thêm** nhiều dòng (3 dòng), xuống hàng riêng, rộng hết slide |
 | Slide `recap` | Tải kết quả (.md) | Ô **Họ tên người trả lời** (bắt buộc trước khi tải/copy) + Tải câu trả lời |
 | Nhúng vào HTML | Ghi chú, `src`, `refs`, `recommend`, `time` | **Chỉ `id`** — ghi chú/nguồn/refs/time KHÔNG nhúng (khách mở mã nguồn là đọc được). Phím P tắt |
 | File xuất | `{…}-ket-qua.md` | `{…}-tra-loi.md`, frontmatter thêm `delivery`, `client`, `respondent`; cột Nguồn để trống |
@@ -128,6 +131,17 @@ mark:                          # biểu tượng không chữ — trang trí bì
 
 Có brand thì: bìa có logo góc trên + mark lớn bên phải; ngăn mục và slide kết dùng nền `primary` (slide kết: logo nhỏ góc trên phải, lời cảm ơn giữa slide); slide
 nội dung có logo nhỏ ở chân trang. Logo được nhúng base64 vào HTML để vẫn chạy offline.
+
+## Mật độ (`density`)
+
+| | `normal` (mặc định) | `compact` |
+|---|---|---|
+| Cỡ chữ slide nội dung | câu hỏi 34px · chữ 24px · bối cảnh 20px · thẻ 17px | câu hỏi 26px · chữ 18px · bối cảnh 16px · thẻ 14px · nguồn/trích dẫn 13px |
+| Ngưỡng lint | `oq` 900 ký tự · câu hỏi 170 · bối cảnh 300 · thẻ 260 | `oq` 1.800 · câu hỏi 200 · bối cảnh 800 · thẻ 360 |
+| Dùng khi | Chiếu trong họp, ít chữ | Gửi khách tự đọc (`async`), cần bối cảnh đủ + trích nguyên văn tài liệu khách |
+
+`compact` chỉ đổi cỡ chữ và ngưỡng; luật ẩn mã nội bộ, số phương án, số ý +/− giữ nguyên. Trích dẫn chỉ lấy
+từ tài liệu khách gửi (hoặc lời khách trong biên bản), không trích tài liệu đội tự viết.
 
 ## Lint (gate trong build-deck.py — lỗi thì không ghi HTML)
 

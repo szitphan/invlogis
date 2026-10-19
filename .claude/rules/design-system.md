@@ -89,7 +89,8 @@ paths:
    rõ "chưa có chuẩn trong design.md" ở cột Description.
 4. **Do's and Don'ts** là tiêu chí tự kiểm trước khi trình L3/L1: mỗi màn rà ít nhất (a) đúng 1
    nút chính/nhóm, (b) trạng thái có chữ/icon không chỉ màu, (c) đủ trạng thái rỗng/lỗi/đang tải,
-   (d) form không trải hết bề rộng desktop.
+   (d) form không trải hết bề rộng desktop, (e) mọi chữ trên màn qua 10 điểm
+   *Viết như người nói* (`design.md` › Content & Formatting).
 5. **Device** vẫn phải hỏi user theo `ba-conventions.md` Mục 7 — `design.md` chỉ để **đề xuất**.
 6. **Chọn component**: Control type → `ba-crosswalk.md` → mục component trong `components.md` (áp
    Nên/Không nên) → tên set trong `figma-library-keys.json`. Không có component hợp lệ hoặc tên không có

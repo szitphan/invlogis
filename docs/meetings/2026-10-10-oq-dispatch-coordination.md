@@ -1,6 +1,7 @@
 ---
 type: meeting
-status: draft
+status: stale
+status_prev: draft
 status_changed: 2026-10-14
 status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-12

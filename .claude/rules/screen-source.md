@@ -84,13 +84,22 @@ Trong `{flow-slug}.md`, mỗi màn:
 { "fileKey": "…", "synced_at": "2026-10-13",
   "screens": { "1.1 · web": {
       "nodeId": "5587:117888", "slug": "record-detail", "flows": ["view-process"], "frames": { "Loading": "5587:118511" },
-      "rows": { "1": {"nodeId": "…", "text": "Dòng quy trình", "component": "Row"} },
+      "rows": { "1": {"nodeId": "…", "text": "Dòng quy trình", "component": "Row"},
+                "8": {"nodeId": "…", "also": ["…"], "text": "Thu hồi / Xoá"} },
+      "frame_rows": { "Load error": { "1": {"nodeId": "…", "text": "Thông báo lỗi tại chỗ dòng quy trình"} } },
+      "level": "row",
       "texts": { "<nodeId>": "chữ hiển thị" },
       "reactions": [ {"from": "<nodeId>", "trigger": "ON_CLICK", "to": "1.2 · web"} ] } } }
 ```
 
 - Ghi bởi `/figma-screen` (sau Bước 7) và `/figma-sync` (sau mỗi lần sync thành công).
-- `rows` = bản đồ row bảng 5 cột → node trên Figma; đây là thứ cho phép sửa đúng row khi chữ trên Figma đổi.
+- `rows` = bản đồ row bảng 5 cột → node trên Figma của frame chính; `frame_rows` = bản đồ tương tự cho từng frame
+  trạng thái (khoá = tên trạng thái). Row ứng với nhiều phần tử (vd "Thu hồi / Xoá") ghi phần tử đầu ở `nodeId`,
+  phần còn lại ở `also`. Row chưa ghép được ghi `nodeId: null`; row BA xác nhận không có trên màn ghi thêm
+  `absent: "<lý do>"`; row ghim tay ghi `manual: true` (Mục 9). Đây là thứ cho phép sửa đúng row khi chữ trên
+  Figma đổi, và là chỗ thẻ Spec ghim (Mục 9). Ghép bằng `python3 _scripts/screen-annotations.py match … --write`.
+- `level` của từng màn: `row` khi màn đã có bản đồ row; mức chung của file (khoá `level` ngoài cùng) giữ nguyên cho
+  các màn chưa ghép.
 - Thiếu mốc (màn vẽ trước khi có rule này) → `/figma-sync` lấy Figma hiện tại làm mốc, không coi là thay đổi.
 
 ## 5. Ai gọi `/figma-sync` (DEC-052)
@@ -104,6 +113,8 @@ Figma không tự báo thay đổi, nên đồng bộ xảy ra khi **có skill �
 | `/figma-component` đổi component đang dùng trên màn của feature | `/figma-sync {feature}` |
 | Designer sửa tay trên Figma | User gọi `/figma-sync {feature}`, hoặc gọi trước khi chạy `/srs`, `/userstory`, `/export` |
 | Hook báo task "Chốt giao diện Figma …" đã đóng tay | `/figma-sync {feature} --done --flow {flow}` |
+| `/userstory` tạo hoặc sửa story có màn đã lên Figma | `/figma-sync {feature}` để ghi mã US lên thẻ Spec (Mục 9) |
+| `/jira --push` ghép story với issue mới | `/figma-sync {feature}` để ghi mã Jira lên thẻ Spec (Mục 9) |
 
 Gọi inline trong main thread (có HITL), KHÔNG Task sub-agent.
 
@@ -127,6 +138,7 @@ Gọi inline trong main thread (có HITL), KHÔNG Task sub-agent.
 | Quy tắc nghiệp vụ (validation, mã lỗi mới, điều kiện, quyền) | KHÔNG sửa thẳng — nháp `/cr` | `/cr` |
 | Chỉ màu, vị trí, khoảng cách | Không sửa tài liệu, chỉ cập nhật mốc | — |
 | Cùng row đổi cả trên Figma lẫn trong `screens/` | Xung đột — hỏi user từng chỗ | Hỏi |
+| Sửa tay thẻ Spec hoặc lớp ghim (Mục 9) | Không giữ: lần sync sau vẽ lại từ `screens/{flow}.md`. Muốn đổi nội dung thì sửa row trong `screens/` | — |
 
 Câu chữ mới trên Figma mà trùng nghĩa với E-common/CMP → vẫn ghi theo mã (`ui-common-rules-components.md`).
 
@@ -148,8 +160,41 @@ Mục 10 `## 10. Screens — Design (Figma)` gồm 3 phần theo thứ tự (khu
 - `/export`, `/preview` chạy `appendix <feature> --check` trước khi xuất; cũ hoặc thiếu ảnh → cảnh báo.
   Preview không có mục Screens/Wireframes/Designs riêng khi đã có `screens/` — chỉ thêm "Màn đang vẽ" cho flow chưa chốt.
 
+## 9. Thẻ Spec trên Figma (DEC-188)
+
+Mỗi frame có bảng 5 cột (màn chính và từng trạng thái) có một **thẻ Spec** bên cạnh và một **lớp ghim** trên màn,
+để dev đọc màn trên Figma biết từng phần tử làm gì và màn thuộc use case, story, ticket nào.
+
+| Phần | Nội dung | Nguồn |
+|---|---|---|
+| Đầu thẻ | `Spec — <tên flow>`, tiêu đề `<screenId> · <slug> — <tên Việt>`, Mô tả (màn chính) | `screens/{flow}.md` |
+| Mã | USE CASE · USER STORY (+ mã Jira có link) · YÊU CẦU (FR/BR/NFR) · LỖI (E) · DÙNG CHUNG (CMP/GR). Chưa có story hoặc Jira → một dòng mờ "Chưa có user story, chưa đẩy Jira" | cột Screens của `usecases/{feature}-usecase-index.md` · mục UI / Screen References của `userstories/us-*.md` · `.claude/state/atlassian/sync-state.yaml` · mã trong cột Description |
+| Mỗi row | Số tròn + Items, dòng nhỏ `Control type · Data type`, gạch đầu dòng của Description nguyên văn; row chưa ghép được ghi "chưa ghim" | bảng 5 cột |
+| Lớp ghim | Khung nét đứt quanh phần tử + số tròn ở góc trên trái, theo bản đồ row ↔ node (Mục 4) | mốc Figma |
+
+- **Tên:** thẻ là frame `Ghi chú · Spec · <nodeId frame>`, lớp ghim là group `Ghi chú · Ghim · <nodeId frame>`. Đuôi là
+  nodeId, không phải screenId, để `linkScreens` không khớp nhầm. Lớp ghim là **anh em** của frame màn, nằm đè lên
+  màn, không lồng vào frame (prototype, bản xuất HTML, audit màn không dính ghim).
+- **Chỗ đặt và cách nhìn:** `design/setup-figma.md` › *Bố cục trong Section flow* (thẻ bên phải frame; ma trận chừa chỗ).
+- **Máy sinh, không sửa tay** (Mục 7): `python3 _scripts/screen-annotations.py build <feature> <flow> --json` ra nội
+  dung; `match <feature> <flow> <tree.json> --write` ghép row ↔ phần tử theo tên layer và chữ, ghi vào mốc. Vẽ lại
+  mỗi lần `/figma-screen` vẽ hoặc sửa màn, mỗi lần `/figma-sync` đổi row hoặc dời frame, và sau `/userstory`,
+  `/jira --push` (Mục 5).
+- **Ba trạng thái của một row:**
+
+  | Trạng thái | Nghĩa | Thẻ hiện | Ai đặt |
+  |---|---|---|---|
+  | Đã ghim | ghép được phần tử | số tím trên màn | `match` (hoặc ghim tay `mark --node <nodeId>`, mốc ghi `manual: true`, `match` không ghi đè) |
+  | Chưa ghim | máy chưa ghép được, cần xử lý | "chưa ghim" | `match` |
+  | Không có trên màn | phần tử có điều kiện, không xuất hiện ở màn mẫu | "không có trên màn mẫu" + lý do, chỗ xem nếu có | BA, một lần: `mark … --absent "<lý do>"`; `match` chạy lại giữ nguyên |
+
+  Row chưa ghim: báo tên row + màn. Phần tử có trên màn nhưng khác tên → đổi tên layer cho khớp cột Items (luật đặt
+  tên layer của `/figma-screen`) rồi chạy lại `match`. Phần tử có điều kiện → `mark --absent`. **Không chốt flow
+  (`/figma-sync --done`) khi còn row chưa ghim.**
+
 ## Tóm tắt 1 dòng
 
 > **Lên Figma rồi thì bảng 5 cột sống ở `screens/{flow}.md`, wireframe flow đó bị xoá · mọi skill đụng
 > Figma kết thúc bằng `/figma-sync` · chữ/element/trạng thái/luồng sửa thẳng qua L2, quy tắc nghiệp vụ qua
-> `/cr` · done (user nói hoặc đóng task backlog) → ảnh 2x + danh mục và chi tiết màn máy sinh trong SRS Mục 10.**
+> `/cr` · done (user nói hoặc đóng task backlog) → ảnh 2x + danh mục và chi tiết màn máy sinh trong SRS Mục 10 ·
+> mỗi frame có thẻ Spec + lớp ghim máy sinh từ bảng 5 cột, use case, story, Jira (Mục 9).**

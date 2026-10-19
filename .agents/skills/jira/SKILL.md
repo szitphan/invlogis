@@ -104,8 +104,9 @@ Map cũ cần migrate: !`ls docs/_shared/jira-map.md docs/_shared/confluence-map
    - __Remote preflight__ (per Mục 5): mỗi item có key fetch-full + so hash content vs base; `content_remote_changed` → tách khỏi push, báo "cần --reconcile". KHÔNG force. Item `unmapped` (create) → dùng __crash-safe create__ (ghi pending-op + label `ba-vault:{vault_path}` trước, per Mục 11) để resume không tạo trùng.
    - L1 plan (chỉ item push được) → user Y.
    - Ensure Jira access (MCP authenticate; auth missing → export `docs/exports/jira-import-{feature}-{date}.md`, không invent URLs).
-   - Create/update qua MCP. Epic từ `srs/{feature}-spec.md`; Story từ `us-*.md`; AC theo dạng đã chốt (`ac_mapping` trong sync-state). __Push KHÔNG tự transition status__ (per Mục 6 — no-op có chủ đích, nêu rõ với BA; muốn đẩy tiến độ = opt-in riêng qua tool transition).
+   - Create/update qua MCP. Epic từ `srs/{feature}-spec.md`; Story từ `us-*.md`; AC theo dạng đã chốt (`ac_mapping` trong sync-state). Mô tả story có mục **Màn hình**: các dòng của mục UI / Screen References trong us-file (link frame Figma) để dev mở thẳng màn từ ticket (chiều ngược của thẻ Spec, `screen-source.md` Mục 9). __Push KHÔNG tự transition status__ (per Mục 6 — no-op có chủ đích, nêu rõ với BA; muốn đẩy tiến độ = opt-in riêng qua tool transition).
    - Sau mỗi ghi thành công: cập nhật entry sync-state (`remote_id`, 3 hash mới, `base_snapshot`, `state: synced`, xóa pending-op); cập nhật cột Jira bảng `{feature}-story-index.md` (bản chiếu — chỉ ghi cột `Jira`/`Status`, KHÔNG đụng semantic body, tránh kích stale hook).
+   - Có story vừa ghép với issue mới và màn của story đã lên Figma → nhắc `/figma-sync {feature}` để ghi mã Jira lên thẻ Spec (`screen-source.md` Mục 5, 9).
 9) **`--pull`** (`remote-changed` content, HOẶC chỉ kênh phụ meta/comment):
    - Kênh content (summary/description/AC remote) → __L2 diff__ vào us-file, user Y mới ghi.
    - Kênh phụ: status/assignee/sprint → ghi `delivery_metadata` (sync-state) + cột story-index, __KHÔNG__ L2 diff trên doc, __KHÔNG__ đổi lifecycle `status`. Comment → feedback inbox `docs/inbox/{date}-jira-feedback-{slug}.md` (Mục 10).

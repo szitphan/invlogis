@@ -15,8 +15,8 @@ links:
   - docs-input/sop/sop-dieu-phoi.md
   - docs-input/sop/sop-ban-do-kien-thuc.md
   - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md
-  - docs-input/sop/quan-ly-hoa-don-sim/quan-ly-hoa-don-sim.md
-  - docs-input/sop/vis-du-lieu-van-hanh-xe/vis-du-lieu-van-hanh-xe.md
+  - docs-input/sop/apas-thanh-toan-doi-soat/apas-thanh-toan-doi-soat.md
+  - docs-input/sop/vis-giam-sat-doi-xe/vis-giam-sat-doi-xe.md
   - docs/_shared/project-profile.md
 ---
 

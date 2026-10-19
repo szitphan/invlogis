@@ -85,7 +85,7 @@ bảng và không có Block.
 | [Code Block](#code-block) | CodeBlock hiển thị code tô màu cú pháp với số dòng, nút sao chép và phần thu gọn tùy chọn. | `CodeBlock` |
 | [Empty State](#empty-state) | EmptyState hiển thị nội dung giữ chỗ khi một vùng nội dung không có dữ liệu. | `EmptyState` |
 | [Heading](#heading) | Component heading có ngữ nghĩa, hiển thị phần tử h1–h6 với kiểu theo theme, cỡ theo token thang chữ, và cắt dòng bằng line-clamp. | `Heading` |
-| [Icon](#icon) | Icon là ký hiệu hình nhỏ đại diện cho hành động, đối tượng hoặc khái niệm. | `Icon` (trang Icons) |
+| [Icon](#icon) | Icon là ký hiệu hình nhỏ đại diện cho hành động, đối tượng hoặc khái niệm. | `Icon` (trang innvie · Foundations (khung Icon)) |
 | [Kbd](#kbd) | Hiển thị phím tắt dưới dạng badge phím. | `Kbd` |
 | [Markdown](#markdown) | Hiển thị chuỗi markdown thành các component theo kiểu Astryx. | `Markdown` |
 | [Text](#text) | Text hiển thị chữ thân và heading theo kiểu của theme. | `Text` |
@@ -953,7 +953,7 @@ bảng và không có Block.
 
 ## Icon
 
-`Icon` · Figma: `Icon` (trang Icons)
+`Icon` · Figma: `Icon` (trang innvie · Foundations (khung Icon))
 
 **Usage.** Icon là ký hiệu hình nhỏ đại diện cho hành động, đối tượng hoặc khái niệm. Chúng giúp dễ lướt và củng cố nghĩa bên cạnh chữ. Hỗ trợ cả component SVG trực tiếp và tên icon ngữ nghĩa thích ứng theo theme đang dùng.
 

@@ -1,224 +1,865 @@
 {
- "fileKey": "FifpyOMpZk9OP8qyNzbRVJ",
- "fileName": "[innvie] invlogis v0.3",
- "page": "00 · Chung",
- "pageId": "5506:14684",
- "synced_at": "2026-10-13",
- "level": "frame",
- "notes": [
-  "Mốc mức frame (user chọn 2026-10-13): không có texts/rows — lần sync sau so chữ Figma trực tiếp với bảng screens/ khi sync flow đó",
-  "figma_read không trả reactions — kênh liên kết prototype chưa có mốc"
- ],
- "ignored": {
-  "5562:106617": "Splash · 1",
-  "5562:106625": "Splash · 2",
-  "5562:106633": "Splash · 3",
-  "5562:106641": "Splash · 4",
-  "5570:106767": "Cây quy trình · innvie",
-  "5596:129165": "Khung trang · innvie",
-  "5600:159931": "Ghi chú biến thể · 5600:158266",
-  "5600:159933": "Ghi chú biến thể · 5600:158620"
- },
- "screens": {
-  "1.1 · web": {
-   "nodeId": "5587:117888",
-   "slug": "record-detail",
-   "flows": [
-    "view-process"
-   ],
-   "frames": {
-    "Loading": "5587:118511",
-    "Load error": "5587:118875"
-   }
+  "fileKey": "FifpyOMpZk9OP8qyNzbRVJ",
+  "fileName": "[innvie] invlogis v0.3",
+  "page": "00 · Chung",
+  "pageId": "5506:14684",
+  "synced_at": "2026-10-13",
+  "level": "frame",
+  "notes": [
+    "Mốc mức frame (user chọn 2026-10-13): không có texts/rows — lần sync sau so chữ Figma trực tiếp với bảng screens/ khi sync flow đó",
+    "figma_read không trả reactions — kênh liên kết prototype chưa có mốc"
+  ],
+  "ignored": {
+    "5562:106617": "Splash · 1",
+    "5562:106625": "Splash · 2",
+    "5562:106633": "Splash · 3",
+    "5562:106641": "Splash · 4",
+    "5570:106767": "Cây quy trình · innvie",
+    "5596:129165": "Khung trang · innvie",
+    "5600:159931": "Ghi chú biến thể · 5600:158266",
+    "5600:159933": "Ghi chú biến thể · 5600:158620"
   },
-  "1.2 · web": {
-   "nodeId": "5587:119271",
-   "slug": "process-diagram",
-   "flows": [
-    "view-process"
-   ],
-   "frames": {
-    "Loading": "5587:120011",
-    "Load error": "5587:120750",
-    "Update banner": "5587:121489",
-    "History load error": "5587:126054",
-    "Condition tooltip": "5627:156590"
-   }
-  },
-  "1.3 · web": {
-   "nodeId": "5587:122359",
-   "slug": "step-not-created",
-   "flows": [
-    "view-process"
-   ],
-   "frames": {}
-  },
-  "1.5 · web": {
-   "nodeId": "5587:123098",
-   "slug": "step-no-permission",
-   "flows": [
-    "view-process"
-   ],
-   "frames": {}
-  },
-  "1.6 · web": {
-   "nodeId": "5587:123837",
-   "slug": "debt-step",
-   "flows": [
-    "view-process"
-   ],
-   "frames": {}
-  },
-  "1.4 · web": {
-   "nodeId": "5587:124576",
-   "slug": "branch-point",
-   "flows": [
-    "view-process"
-   ],
-   "frames": {}
-  },
-  "1.7 · web": {
-   "nodeId": "5587:125315",
-   "slug": "step-previous-records",
-   "flows": [
-    "view-process"
-   ],
-   "frames": {}
-  },
-  "1.8 · web": {
-   "nodeId": "5587:127273",
-   "slug": "open-denied",
-   "flows": [
-    "view-process"
-   ],
-   "frames": {}
-  },
-  "1.9 · web": {
-   "nodeId": "5587:128058",
-   "slug": "record-deleted",
-   "flows": [
-    "view-process"
-   ],
-   "frames": {}
-  },
-  "3.1 · web": {
-   "nodeId": "5600:157912",
-   "slug": "new-record-detail",
-   "flows": [
-    "create-next-step"
-   ],
-   "frames": {}
-  },
-  "3.2 · web": {
-   "nodeId": "5600:158266",
-   "slug": "step-already-requested",
-   "flows": [
-    "create-next-step"
-   ],
-   "frames": {}
-  },
-  "3.4 · web": {
-   "nodeId": "5600:158620",
-   "slug": "has-child-step",
-   "flows": [
-    "create-next-step"
-   ],
-   "frames": {}
-  },
-  "3.3 · web": {
-   "nodeId": "5600:158974",
-   "slug": "source-revoked",
-   "flows": [
-    "create-next-step"
-   ],
-   "frames": {}
-  },
-  "2.1 · web": {
-   "nodeId": "5600:132884",
-   "slug": "process-list",
-   "flows": [
-    "search-process"
-   ],
-   "frames": {
-    "Loading": "5600:137717",
-    "Update banner": "5600:140138",
-    "Empty": "5600:144980",
-    "No search results": "5600:147401",
-    "No filter results": "5600:149822",
-    "Load error": "5600:152243",
-    "No permission": "5600:154664"
-   }
-  },
-  "2.2 · web": {
-   "nodeId": "5600:142559",
-   "slug": "list-process-diagram",
-   "flows": [
-    "search-process"
-   ],
-   "frames": {}
-  },
-  "1.1 · mob": {
-   "nodeId": "5600:159935",
-   "slug": "record-detail",
-   "flows": [
-    "view-process-mobile"
-   ],
-   "frames": {
-    "Loading": "5600:160508",
-    "Load error": "5600:160682"
-   }
-  },
-  "1.2 · mob": {
-   "nodeId": "5600:160887",
-   "slug": "process-diagram",
-   "flows": [
-    "view-process-mobile"
-   ],
-   "frames": {
-    "Loading": "5600:161816",
-    "Load error": "5600:161987",
-    "Update banner": "5600:162173"
-   }
-  },
-  "4.1 · mob": {
-   "nodeId": "5600:162600",
-   "slug": "step-sheet",
-   "flows": [
-    "view-process-mobile"
-   ],
-   "frames": {}
-  },
-  "1.3 · mob": {
-   "nodeId": "5600:163096",
-   "slug": "step-not-created",
-   "flows": [
-    "view-process-mobile"
-   ],
-   "frames": {}
-  },
-  "1.4 · mob": {
-   "nodeId": "5600:163629",
-   "slug": "branch-point",
-   "flows": [
-    "view-process-mobile"
-   ],
-   "frames": {}
-  },
-  "1.6 · mob": {
-   "nodeId": "5600:164169",
-   "slug": "debt-step",
-   "flows": [
-    "view-process-mobile"
-   ],
-   "frames": {}
-  },
-  "1.5 · mob": {
-   "nodeId": "5600:164723",
-   "slug": "step-no-permission",
-   "flows": [
-    "view-process-mobile"
-   ],
-   "frames": {}
+  "screens": {
+    "1.1 · web": {
+      "nodeId": "5587:117888",
+      "slug": "record-detail",
+      "flows": [
+        "view-process"
+      ],
+      "frames": {
+        "Loading": "5587:118511",
+        "Load error": "5587:118875"
+      },
+      "rows": {
+        "1": {
+          "nodeId": "5587:118196",
+          "text": "Dòng quy trình"
+        },
+        "2": {
+          "nodeId": "I5587:118196;5570:106857",
+          "text": "Tên luồng · mã quy trình"
+        },
+        "3": {
+          "nodeId": "I5587:118196;5578:111137",
+          "text": "Thanh tiến độ"
+        },
+        "4": {
+          "nodeId": "I5587:118196;5570:106860",
+          "text": "Dòng tóm tắt"
+        },
+        "5": {
+          "nodeId": "I5587:118196;5578:111143",
+          "also": [],
+          "text": "Bước trước / Phát sinh từ"
+        },
+        "6": {
+          "nodeId": "I5587:118196;5570:106858",
+          "text": "Xem sơ đồ ›"
+        },
+        "7": {
+          "nodeId": "5587:118172",
+          "text": "Nút tạo nghiệp vụ tiếp theo (vd \"Tạo phiếu xuất kho\")"
+        },
+        "8": {
+          "nodeId": "5587:118126",
+          "also": [
+            "5587:118149"
+          ],
+          "text": "Thu hồi / Xoá"
+        },
+        "9": {
+          "nodeId": "5587:118109",
+          "text": "Lịch sử (icon đồng hồ)"
+        }
+      },
+      "level": "row",
+      "frame_rows": {
+        "Load error": {
+          "1": {
+            "nodeId": "5587:118910",
+            "text": "Thông báo lỗi tại chỗ dòng quy trình"
+          },
+          "2": {
+            "nodeId": "I5587:118910;5570:106971;86:308727;5609:183393",
+            "text": "Thử lại"
+          }
+        },
+        "Loading": {
+          "1": {
+            "nodeId": "I5587:118546;5570:106970",
+            "text": "Skeleton dòng quy trình"
+          }
+        }
+      }
+    },
+    "1.2 · web": {
+      "nodeId": "5587:119271",
+      "slug": "process-diagram",
+      "flows": [
+        "view-process"
+      ],
+      "frames": {
+        "Loading": "5587:120011",
+        "Load error": "5587:120750",
+        "Update banner": "5587:121489",
+        "History load error": "5587:126054",
+        "Condition tooltip": "5627:156590"
+      },
+      "rows": {
+        "1": {
+          "nodeId": "5587:119615",
+          "text": "Popup sơ đồ"
+        },
+        "2": {
+          "nodeId": "5587:119617",
+          "text": "Tiêu đề popup"
+        },
+        "3": {
+          "nodeId": "5587:119620",
+          "text": "Đóng ×"
+        },
+        "4": {
+          "nodeId": "I5587:119306;5570:106860",
+          "text": "Card tóm tắt"
+        },
+        "5": {
+          "nodeId": "5587:119632",
+          "text": "Thẻ bước",
+          "manual": true
+        },
+        "6": {
+          "nodeId": "I5587:119642;5578:110693;5578:109865",
+          "text": "Đường nối + nhãn điều kiện"
+        },
+        "7": {
+          "nodeId": "I5587:119641;5575:108092",
+          "text": "Thanh phóng to"
+        },
+        "8": {
+          "nodeId": "5587:119642",
+          "text": "Panel bước"
+        },
+        "9": {
+          "nodeId": "I5587:119642;5578:110423",
+          "text": "Lịch sử hoạt động"
+        },
+        "10": {
+          "nodeId": "I5587:119642;6348:16975",
+          "text": "Xem tất cả",
+          "manual": true
+        },
+        "11": {
+          "nodeId": "I5587:119642;5578:110719;3:12347",
+          "text": "Mở màn hình chi tiết"
+        },
+        "12": {
+          "nodeId": "5587:119639",
+          "text": "Chip Điều kiện x/y",
+          "manual": true
+        }
+      },
+      "level": "row",
+      "frame_rows": {
+        "Loading": {
+          "1": {
+            "nodeId": "5587:120063",
+            "text": "Vùng sơ đồ đang tải"
+          },
+          "2": {
+            "nodeId": "5587:120062",
+            "text": "Đóng ×"
+          }
+        },
+        "Load error": {
+          "1": {
+            "nodeId": "5587:122241",
+            "text": "Khối lỗi trong vùng sơ đồ",
+            "manual": true
+          },
+          "2": {
+            "nodeId": "I5587:122241;2282:17818;5587:122245;3:12403",
+            "text": "Thử lại"
+          },
+          "3": {
+            "nodeId": "5587:120801",
+            "text": "Đóng ×"
+          }
+        },
+        "Update banner": {
+          "1": {
+            "nodeId": "5587:122288",
+            "text": "Banner cập nhật"
+          },
+          "2": {
+            "nodeId": "I5587:122288;86:308724;5587:122290;3:12403",
+            "text": "Tải lại"
+          }
+        },
+        "History load error": {
+          "1": {
+            "nodeId": "5587:126085",
+            "text": "Khối lỗi lịch sử"
+          },
+          "2": {
+            "nodeId": "I5587:126127;5584:112789;2282:17835;5609:183397;3:12403",
+            "text": "Thử lại"
+          }
+        },
+        "Condition tooltip": {
+          "1": {
+            "nodeId": "I5627:157340;5584:114097",
+            "text": "Chip \"Điều kiện x/y\""
+          },
+          "2": {
+            "nodeId": "5627:157340",
+            "text": "Tooltip điều kiện"
+          }
+        }
+      }
+    },
+    "1.3 · web": {
+      "nodeId": "5587:122359",
+      "slug": "step-not-created",
+      "flows": [
+        "view-process"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "I5587:122430;5570:108070",
+          "text": "Thẻ bước chưa tạo"
+        },
+        "2": {
+          "nodeId": "I5587:122432;5578:110427",
+          "text": "Đầu panel"
+        },
+        "3": {
+          "nodeId": "I5587:122432;5584:113121",
+          "text": "Câu trạng thái"
+        },
+        "4": {
+          "nodeId": "5587:122421",
+          "text": "Chọn bước khác",
+          "manual": true
+        }
+      },
+      "level": "row"
+    },
+    "1.5 · web": {
+      "nodeId": "5587:123098",
+      "slug": "step-no-permission",
+      "flows": [
+        "view-process"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5587:123163",
+          "text": "Thẻ bước",
+          "manual": true
+        },
+        "2": {
+          "nodeId": "I5587:123171;5578:110493",
+          "text": "Đầu panel"
+        },
+        "3": {
+          "nodeId": "I5587:123171;5578:110809",
+          "text": "Câu không có quyền"
+        }
+      },
+      "level": "row"
+    },
+    "1.6 · web": {
+      "nodeId": "5587:123837",
+      "slug": "debt-step",
+      "flows": [
+        "view-process"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5587:123905",
+          "text": "Thẻ công nợ",
+          "manual": true
+        },
+        "2": {
+          "nodeId": "I5587:123910;5578:110471",
+          "text": "Đầu panel"
+        },
+        "3": {
+          "nodeId": "I5587:123910;5578:110785;3:12347",
+          "text": "Mở bảng công nợ"
+        }
+      },
+      "level": "row"
+    },
+    "1.4 · web": {
+      "nodeId": "5587:124576",
+      "slug": "branch-point",
+      "flows": [
+        "view-process"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5587:124639",
+          "text": "Thẻ ngã rẽ",
+          "manual": true
+        },
+        "2": {
+          "nodeId": "I5587:124649;5578:110449",
+          "text": "Đầu panel"
+        },
+        "3": {
+          "nodeId": "I5587:124649;5578:110761",
+          "text": "Các hướng có thể đi"
+        }
+      },
+      "level": "row"
+    },
+    "1.7 · web": {
+      "nodeId": "5587:125315",
+      "slug": "step-previous-records",
+      "flows": [
+        "view-process"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "I5587:125381;5587:117782",
+          "text": "Thẻ bước có bản ghi trước"
+        },
+        "2": {
+          "nodeId": "I5587:125388;5587:117786",
+          "text": "Khối Bản ghi trước đó"
+        },
+        "3": {
+          "nodeId": "I5587:125388;5578:110719;3:12347",
+          "text": "Mở màn hình chi tiết"
+        }
+      },
+      "level": "row"
+    },
+    "1.8 · web": {
+      "nodeId": "5587:127273",
+      "slug": "open-denied",
+      "flows": [
+        "view-process"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5587:128013",
+          "text": "Popup không có quyền",
+          "manual": true
+        },
+        "2": {
+          "nodeId": "5587:127324",
+          "text": "Đóng"
+        }
+      },
+      "level": "row"
+    },
+    "1.9 · web": {
+      "nodeId": "5587:128058",
+      "slug": "record-deleted",
+      "flows": [
+        "view-process"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5587:128798",
+          "text": "Popup lỗi"
+        },
+        "2": {
+          "nodeId": "I5587:128798;2266:8693;5587:128842;3:12347",
+          "text": "Tải lại sơ đồ"
+        },
+        "3": {
+          "nodeId": "5587:128109",
+          "text": "Đóng"
+        }
+      },
+      "level": "row"
+    },
+    "3.1 · web": {
+      "nodeId": "5600:157912",
+      "slug": "new-record-detail",
+      "flows": [
+        "create-next-step"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5600:157930",
+          "text": "Dòng quy trình"
+        },
+        "2": {
+          "nodeId": null,
+          "text": "Thẻ bước mới trên sơ đồ",
+          "absent": "nằm trong sơ đồ quy trình, mở bằng Xem sơ đồ; màn 3.1 chỉ có dòng quy trình"
+        },
+        "3": {
+          "nodeId": "5600:157923",
+          "text": "Trạng thái bản ghi",
+          "manual": true
+        },
+        "4": {
+          "nodeId": "5600:159352",
+          "text": "Toast gửi thành công"
+        }
+      },
+      "level": "row"
+    },
+    "3.2 · web": {
+      "nodeId": "5600:158266",
+      "slug": "step-already-requested",
+      "flows": [
+        "create-next-step"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5600:159359",
+          "text": "Popup lỗi"
+        },
+        "2": {
+          "nodeId": "I5600:159359;2266:8693;5600:159362",
+          "text": "Đóng"
+        }
+      },
+      "level": "row"
+    },
+    "3.4 · web": {
+      "nodeId": "5600:158620",
+      "slug": "has-child-step",
+      "flows": [
+        "create-next-step"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5600:159405",
+          "text": "Popup lỗi"
+        },
+        "2": {
+          "nodeId": "I5600:159405;2266:8693;5600:159408",
+          "text": "Đóng"
+        }
+      },
+      "level": "row"
+    },
+    "3.3 · web": {
+      "nodeId": "5600:158974",
+      "slug": "source-revoked",
+      "flows": [
+        "create-next-step"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5600:159451",
+          "text": "Popup lỗi"
+        },
+        "2": {
+          "nodeId": "I5600:159451;2266:8693;5600:159454",
+          "text": "Giữ bản nháp"
+        },
+        "3": {
+          "nodeId": "I5600:159451;2266:8693;5600:159453",
+          "text": "Xoá bản nháp"
+        }
+      },
+      "level": "row"
+    },
+    "2.1 · web": {
+      "nodeId": "5600:132884",
+      "slug": "process-list",
+      "flows": [
+        "search-process"
+      ],
+      "frames": {
+        "Loading": "5600:137717",
+        "Update banner": "5600:140138",
+        "Empty": "5600:144980",
+        "No search results": "5600:147401",
+        "No filter results": "5600:149822",
+        "Load error": "5600:152243",
+        "No permission": "5600:154664"
+      },
+      "rows": {
+        "1": {
+          "nodeId": "I5600:132894;5596:129404",
+          "text": "Menu {Module} › Quy trình",
+          "manual": true
+        },
+        "2": {
+          "nodeId": "5600:133080",
+          "text": "Ô tìm"
+        },
+        "3": {
+          "nodeId": "5600:133117",
+          "text": "Bộ lọc"
+        },
+        "4": {
+          "nodeId": null,
+          "text": "Chip điều kiện lọc",
+          "absent": "chỉ hiện khi đang lọc — xem 2.1 · web · process-list · No filter results"
+        },
+        "5": {
+          "nodeId": null,
+          "text": "Xoá tất cả",
+          "absent": "chỉ hiện khi có điều kiện lọc — xem 2.1 · web · process-list · No filter results"
+        },
+        "6": {
+          "nodeId": "5600:133202",
+          "text": "Số kết quả"
+        },
+        "7": {
+          "nodeId": "5600:133143",
+          "text": "Tuỳ chỉnh cột"
+        },
+        "8": {
+          "nodeId": "5600:133056",
+          "text": "Xuất ▾"
+        },
+        "9": {
+          "nodeId": "5600:133205",
+          "text": "Cột Mã quy trình"
+        },
+        "10": {
+          "nodeId": "5600:133248",
+          "text": "Cột Luồng"
+        },
+        "11": {
+          "nodeId": "5600:133291",
+          "text": "Cột Bản ghi gốc"
+        },
+        "12": {
+          "nodeId": "5600:133334",
+          "also": [
+            "5600:136866"
+          ],
+          "text": "Cột Phương tiện / khách hàng"
+        },
+        "13": {
+          "nodeId": "5600:133377",
+          "text": "Cột Tiến độ"
+        },
+        "14": {
+          "nodeId": "5600:133420",
+          "text": "Cột Nhánh phát sinh"
+        },
+        "15": {
+          "nodeId": "5600:133463",
+          "text": "Cột Bước đang chờ"
+        },
+        "16": {
+          "nodeId": "5600:133506",
+          "text": "Cột Trạng thái"
+        },
+        "17": {
+          "nodeId": "5600:133549",
+          "text": "Cột Chi nhánh"
+        },
+        "18": {
+          "nodeId": "5600:133592",
+          "text": "Cột Cập nhật lần cuối"
+        },
+        "19": {
+          "nodeId": "5600:133677",
+          "text": "Dòng quy trình",
+          "manual": true
+        },
+        "20": {
+          "nodeId": "5600:137173",
+          "text": "Phân trang"
+        }
+      },
+      "level": "row",
+      "frame_rows": {
+        "Empty": {
+          "1": {
+            "nodeId": "5600:157107",
+            "text": "Trạng thái rỗng"
+          },
+          "2": {
+            "nodeId": "5600:144993",
+            "text": "Ô tìm, Bộ lọc, Xuất"
+          }
+        },
+        "Loading": {
+          "1": {
+            "nodeId": "5600:157438",
+            "text": "Skeleton bảng"
+          }
+        },
+        "Load error": {
+          "1": {
+            "nodeId": "5600:157210",
+            "text": "Khối lỗi"
+          },
+          "2": {
+            "nodeId": "I5600:157210;2282:17818;5600:157214;3:12403",
+            "text": "Thử lại"
+          }
+        },
+        "No filter results": {
+          "1": {
+            "nodeId": "5600:157164",
+            "text": "Trạng thái không có kết quả",
+            "manual": true
+          },
+          "2": {
+            "nodeId": "I5600:157164;2282:17818;5600:157197;86:275274",
+            "text": "Xoá bộ lọc"
+          }
+        },
+        "No permission": {
+          "1": {
+            "nodeId": "5600:157235",
+            "text": "Nội dung không có quyền"
+          },
+          "2": {
+            "nodeId": "I5600:157235;2282:17818;5600:157257;3:12347",
+            "text": "Về trang chủ"
+          }
+        },
+        "No search results": {
+          "1": {
+            "nodeId": "5600:157129",
+            "text": "Trạng thái không có kết quả",
+            "manual": true
+          },
+          "2": {
+            "nodeId": "I5600:157129;2282:17818;5600:157162;86:275274",
+            "text": "Xoá bộ lọc"
+          }
+        },
+        "Update banner": {
+          "1": {
+            "nodeId": "5600:157440",
+            "text": "Banner cập nhật"
+          },
+          "2": {
+            "nodeId": "I5600:157440;86:308724;5600:157442;3:12403",
+            "text": "Tải lại"
+          }
+        }
+      }
+    },
+    "2.2 · web": {
+      "nodeId": "5600:142559",
+      "slug": "list-process-diagram",
+      "flows": [
+        "search-process"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5600:157478",
+          "text": "Popup sơ đồ"
+        },
+        "2": {
+          "nodeId": "5600:157483",
+          "text": "Đóng ×"
+        },
+        "3": {
+          "nodeId": "5600:157502",
+          "text": "Chip Điều kiện x/y",
+          "manual": true
+        }
+      },
+      "level": "row"
+    },
+    "1.1 · mob": {
+      "nodeId": "5600:159935",
+      "slug": "record-detail",
+      "flows": [
+        "view-process-mobile"
+      ],
+      "frames": {
+        "Loading": "5600:160508",
+        "Load error": "5600:160682"
+      },
+      "rows": {
+        "1": {
+          "nodeId": "I5600:159936;5371:3073;5600:160088",
+          "text": "Thẻ quy trình"
+        },
+        "2": {
+          "nodeId": "I5600:159936;5371:3073;5600:159963",
+          "text": "Header màn chi tiết"
+        },
+        "3": {
+          "nodeId": null,
+          "text": "Nút tạo nghiệp vụ tiếp theo",
+          "absent": "chỉ hiện ở nghiệp vụ có màn trên app (cột Có trên app của bảng liên quy trình); bản ghi mẫu không có nút"
+        }
+      },
+      "level": "row",
+      "frame_rows": {
+        "Load error": {
+          "1": {
+            "nodeId": "I5600:160683;5371:3073;5600:160696;5570:106998",
+            "text": "Thẻ lỗi"
+          },
+          "2": {
+            "nodeId": "I5600:160683;5371:3073;5600:160696;5570:106998;86:308727;5609:183484",
+            "text": "Thử lại"
+          }
+        },
+        "Loading": {
+          "1": {
+            "nodeId": "I5600:160509;5371:3073;5600:160522;5570:106997",
+            "text": "Skeleton thẻ quy trình"
+          }
+        }
+      }
+    },
+    "1.2 · mob": {
+      "nodeId": "5600:160887",
+      "slug": "process-diagram",
+      "flows": [
+        "view-process-mobile"
+      ],
+      "frames": {
+        "Loading": "5600:161816",
+        "Load error": "5600:161987",
+        "Update banner": "5600:162173"
+      },
+      "rows": {
+        "1": {
+          "nodeId": "5600:161278",
+          "text": "Sheet sơ đồ"
+        },
+        "2": {
+          "nodeId": "I5600:160888;5371:3073;5600:160901;5570:106887",
+          "text": "Card tóm tắt"
+        },
+        "3": {
+          "nodeId": "5600:161524",
+          "text": "Cây dọc"
+        },
+        "4": {
+          "nodeId": null,
+          "text": "Chip Điều kiện x/y",
+          "absent": "chỉ hiện khi có từ 2 bước trước cùng vào một bước; cây mẫu không có — xem 1.2 · web · process-diagram · Condition tooltip"
+        }
+      },
+      "level": "row",
+      "frame_rows": {
+        "Loading": {
+          "1": {
+            "nodeId": "5600:161969",
+            "text": "Sheet đang tải"
+          }
+        },
+        "Load error": {
+          "1": {
+            "nodeId": "I5600:162140;5047:67614;5584:115247",
+            "text": "Khối lỗi trong sheet"
+          },
+          "2": {
+            "nodeId": "I5600:162140;5047:67614;5584:115247;2282:17818;5609:183487;3:12403",
+            "text": "Thử lại"
+          }
+        },
+        "Update banner": {
+          "1": {
+            "nodeId": "5600:162563",
+            "text": "Banner cập nhật"
+          },
+          "2": {
+            "nodeId": "I5600:162563;86:308724;5600:162565;3:12403",
+            "text": "Tải lại"
+          }
+        }
+      }
+    },
+    "4.1 · mob": {
+      "nodeId": "5600:162600",
+      "slug": "step-sheet",
+      "flows": [
+        "view-process-mobile"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5600:162990",
+          "text": "Sheet bước"
+        },
+        "2": {
+          "nodeId": "I5600:162990;5047:67611;5584:113768;5578:110555",
+          "text": "Lịch sử hoạt động"
+        },
+        "3": {
+          "nodeId": "I5600:162990;5047:67611;5584:113768;5578:110941;3:12375",
+          "text": "Mở màn hình chi tiết"
+        }
+      },
+      "level": "row"
+    },
+    "1.3 · mob": {
+      "nodeId": "5600:163096",
+      "slug": "step-not-created",
+      "flows": [
+        "view-process-mobile"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5600:163128",
+          "text": "Sheet bước chưa tạo"
+        }
+      },
+      "level": "row"
+    },
+    "1.4 · mob": {
+      "nodeId": "5600:163629",
+      "slug": "branch-point",
+      "flows": [
+        "view-process-mobile"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5600:163661",
+          "text": "Sheet ngã rẽ"
+        }
+      },
+      "level": "row"
+    },
+    "1.6 · mob": {
+      "nodeId": "5600:164169",
+      "slug": "debt-step",
+      "flows": [
+        "view-process-mobile"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5600:164201",
+          "text": "Sheet công nợ"
+        }
+      },
+      "level": "row"
+    },
+    "1.5 · mob": {
+      "nodeId": "5600:164723",
+      "slug": "step-no-permission",
+      "flows": [
+        "view-process-mobile"
+      ],
+      "frames": {},
+      "rows": {
+        "1": {
+          "nodeId": "5600:164755",
+          "text": "Sheet không có quyền"
+        }
+      },
+      "level": "row"
+    }
   }
- }
 }

@@ -33,65 +33,65 @@
 | UC01.04 - Đổi mật khẩu | ✅ | `docs/account-access/brainstorms/account-access.md` B4, B5 | tr. 269 |
 | UC01.05 - Tạo mật khẩu mới | ✅ | `docs/account-access/brainstorms/account-access.md` A5, B6 | tr. 273 |
 | UC01.06 - Xem thông tin cá nhân | ✅ | `docs/account-access/brainstorms/account-access.md` D1, D2 | tr. 278 |
-| Module 1 - Xưởng | ➡ product-catalog |  | tr. 282 |
+| Module 1 - Xưởng | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` Mục 2 | tr. 282 |
 | Epic 03 - Danh mục | ➡ organization |  | tr. 283 |
 | 03 - Lưu đồ trạng thái chung cho danh mục | ➡ organization |  | tr. 284 |
-| Feature 03.01 - Dịch vụ kỹ thuật | ➡ product-catalog |  | tr. 285 |
-| 03.01 - Thông báo & Lịch sử hoạt động | ➡ product-catalog |  | tr. 286 |
-| UC03.01.01 - Xem danh mục Dịch vụ kỹ thuật | ➡ product-catalog |  | tr. 288 |
-| UC03.01.02 - Xem thông tin Dịch vụ kỹ thuật | ➡ product-catalog |  | tr. 293 |
-| UC03.01.03 - Tạo đề xuất tạo mới Dịch vụ kỹ thuật | ➡ product-catalog |  | tr. 298 |
-| UC03.01.04 - Huỷ đề xuất cấp mới Dịch vụ kỹ thuật | ➡ product-catalog |  | tr. 308 |
-| UC03.01.05 - Phê duyệt/Từ chối đề xuất cấp mới Dịch vụ kỹ thuật | ➡ product-catalog |  | tr. 313 |
-| Feature 03.03 - Phụ tùng vật tư | ➡ product-catalog |  | tr. 322 |
-| 03.03 - Thông báo & Lịch sử hoạt động | ➡ product-catalog |  | tr. 323 |
-| UC03.03.01 - Xem danh mục phụ tùng vật tư | ➡ product-catalog |  | tr. 325 |
-| UC03.03.02 - Xem thông tin phụ tùng vật tư | ➡ product-catalog |  | tr. 329 |
-| UC03.03.03 - Tạo đề xuất tạo mới phụ tùng vật tư | ➡ product-catalog |  | tr. 334 |
-| UC03.03.04 - Huỷ đề xuất cấp mới phụ tùng vật tư | ➡ product-catalog |  | tr. 344 |
-| UC03.03.05 - Phê duyệt/Từ chối đề xuất cấp mới phụ tùng vật tư | ➡ product-catalog |  | tr. 349 |
-| Feature 03.04 - Công cụ dụng cụ | ➡ product-catalog |  | tr. 358 |
-| 03.04 - Thông báo & Lịch sử hoạt động | ➡ product-catalog |  | tr. 359 |
-| UC03.04.01 - Xem danh mục công cụ dụng cụ | ➡ product-catalog |  | tr. 361 |
-| UC03.04.02 - Xem thông tin công cụ dụng cụ | ➡ product-catalog |  | tr. 365 |
-| UC03.04.03 - Tạo đề xuất tạo mới công cụ dụng cụ | ➡ product-catalog |  | tr. 370 |
-| UC03.04.04 - Huỷ đề xuất cấp mới công cụ dụng cụ | ➡ product-catalog |  | tr. 377 |
-| UC03.04.05 - Phê duyệt/Từ chối đề xuất cấp mới công cụ dụng cụ | ➡ product-catalog |  | tr. 382 |
-| Feature 03.05 - Lốp | ➡ product-catalog |  | tr. 391 |
-| 03.05 - Thông báo & Lịch sử hoạt động | ➡ product-catalog |  | tr. 392 |
-| UC03.05.01 - Xem danh mục lốp | ➡ product-catalog |  | tr. 394 |
-| UC03.05.02 - Xem thông tin lốp | ➡ product-catalog |  | tr. 399 |
-| UC03.05.03 - Tạo đề xuất tạo mới lốp | ➡ product-catalog |  | tr. 404 |
-| UC03.05.04 - Huỷ đề xuất cấp mới lốp | ➡ product-catalog |  | tr. 412 |
-| UC03.05.05 - Phê duyệt/Từ chối đề xuất cấp mới lốp | ➡ product-catalog |  | tr. 417 |
-| Feature 03.06 - Ắc quy | ➡ product-catalog |  | tr. 424 |
-| 03.06 - Thông báo & Lịch sử hoạt động | ➡ product-catalog |  | tr. 425 |
-| UC03.06.01 - Xem danh mục ắc quy | ➡ product-catalog |  | tr. 427 |
-| UC03.06.02 - Xem thông tin ắc quy | ➡ product-catalog |  | tr. 432 |
-| UC03.06.03 - Tạo đề xuất tạo mới ắc quy | ➡ product-catalog |  | tr. 437 |
-| UC03.06.04 - Huỷ đề xuất cấp mới ắc quy | ➡ product-catalog |  | tr. 444 |
-| UC03.06.05 - Phê duyệt/Từ chối đề xuất cấp mới ắc quy | ➡ product-catalog |  | tr. 449 |
-| Feature 03.07 - Nhà cung cấp HHDV | ➡ partners |  | tr. 458 |
-| 03.07 - Thông báo & Lịch sử hoạt động | ➡ partners |  | tr. 459 |
-| UC03.07.01 - Xem danh mục nhà cung cấp HHDV | ➡ partners |  | tr. 461 |
-| UC03.07.02 - Xem thông tin nhà cung cấp HHDV | ➡ partners |  | tr. 467 |
-| UC03.07.03 - Tạo đề xuất tạo mới nhà cung cấp HHDV | ➡ partners |  | tr. 474 |
-| UC03.07.04 - Huỷ đề xuất cấp mới nhà cung cấp HHDV | ➡ partners |  | tr. 488 |
-| UC03.07.05 - Phê duyệt/Từ chối đề xuất cấp mới nhà cung cấp HHDV | ➡ partners |  | tr. 493 |
-| Feature 03.08 - Khách hàng DK05 | ➡ partners |  | tr. 502 |
-| 03.08 - Thông báo & Lịch sử hoạt động | ➡ partners |  | tr. 503 |
-| UC03.08.01 - Xem danh mục khách hàng DK05 | ➡ partners |  | tr. 505 |
-| UC03.08.02 - Xem thông tin khách hàng DK05 | ➡ partners |  | tr. 510 |
-| UC03.08.03 - Tạo đề xuất tạo mới khách hàng DK05 | ➡ partners |  | tr. 517 |
-| UC03.08.04 - Huỷ đề xuất cấp mới khách hàng DK05 | ➡ partners |  | tr. 528 |
-| UC03.08.05 - Phê duyệt/Từ chối đề xuất cấp mới khách hàng DK05 | ➡ partners |  | tr. 533 |
-| Feature 03.09 - Xe của khách hàng | ➡ partners |  | tr. 542 |
-| 03.09 - Thông báo & Lịch sử hoạt động | ➡ partners |  | tr. 543 |
-| UC03.09.01 - Xem danh mục xe của khách hàng | ➡ partners |  | tr. 545 |
-| UC03.09.02 - Xem thông tin xe của khách hàng | ➡ partners |  | tr. 549 |
-| UC03.09.03 - Tạo đề xuất tạo mới xe của khách hàng | ➡ partners |  | tr. 554 |
-| UC03.09.04 - Huỷ đề xuất cấp mới xe của khách hàng | ➡ partners |  | tr. 565 |
-| UC03.09.05 - Phê duyệt/Từ chối đề xuất cấp mới xe của khách hàng | ➡ partners |  | tr. 570 |
+| Feature 03.01 - Dịch vụ kỹ thuật | ✅ | `docs/technical-services/brainstorms/technical-services.md` S1–S5 | tr. 285 |
+| 03.01 - Thông báo & Lịch sử hoạt động | ✅ | `docs/technical-services/brainstorms/technical-services.md` S1–S5 | tr. 286 |
+| UC03.01.01 - Xem danh mục Dịch vụ kỹ thuật | ✅ | `docs/technical-services/brainstorms/technical-services.md` S1–S5 | tr. 288 |
+| UC03.01.02 - Xem thông tin Dịch vụ kỹ thuật | ✅ | `docs/technical-services/brainstorms/technical-services.md` S1–S5 | tr. 293 |
+| UC03.01.03 - Tạo đề xuất tạo mới Dịch vụ kỹ thuật | ✅ | `docs/technical-services/brainstorms/technical-services.md` S1–S5 | tr. 298 |
+| UC03.01.04 - Huỷ đề xuất cấp mới Dịch vụ kỹ thuật | ✅ | `docs/technical-services/brainstorms/technical-services.md` S1–S5 | tr. 308 |
+| UC03.01.05 - Phê duyệt/Từ chối đề xuất cấp mới Dịch vụ kỹ thuật | ✅ | `docs/technical-services/brainstorms/technical-services.md` S1–S5 | tr. 313 |
+| Feature 03.03 - Phụ tùng vật tư | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A1 | tr. 322 |
+| 03.03 - Thông báo & Lịch sử hoạt động | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A16, A17 | tr. 323 |
+| UC03.03.01 - Xem danh mục phụ tùng vật tư | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A2 | tr. 325 |
+| UC03.03.02 - Xem thông tin phụ tùng vật tư | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A3 | tr. 329 |
+| UC03.03.03 - Tạo đề xuất tạo mới phụ tùng vật tư | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A4, A5, A11–A15 | tr. 334 |
+| UC03.03.04 - Huỷ đề xuất cấp mới phụ tùng vật tư | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A7, A10 | tr. 344 |
+| UC03.03.05 - Phê duyệt/Từ chối đề xuất cấp mới phụ tùng vật tư | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A6, A8, A13, A18 | tr. 349 |
+| Feature 03.04 - Công cụ dụng cụ | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A1 | tr. 358 |
+| 03.04 - Thông báo & Lịch sử hoạt động | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A16, A17 | tr. 359 |
+| UC03.04.01 - Xem danh mục công cụ dụng cụ | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A2 | tr. 361 |
+| UC03.04.02 - Xem thông tin công cụ dụng cụ | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A3 | tr. 365 |
+| UC03.04.03 - Tạo đề xuất tạo mới công cụ dụng cụ | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A4, A5, A11–A15 | tr. 370 |
+| UC03.04.04 - Huỷ đề xuất cấp mới công cụ dụng cụ | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A7, A10 | tr. 377 |
+| UC03.04.05 - Phê duyệt/Từ chối đề xuất cấp mới công cụ dụng cụ | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A6, A8, A13, A18 | tr. 382 |
+| Feature 03.05 - Lốp | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A1 | tr. 391 |
+| 03.05 - Thông báo & Lịch sử hoạt động | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A16, A17 | tr. 392 |
+| UC03.05.01 - Xem danh mục lốp | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A2 | tr. 394 |
+| UC03.05.02 - Xem thông tin lốp | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A3 | tr. 399 |
+| UC03.05.03 - Tạo đề xuất tạo mới lốp | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A4, A5, A11–A15 | tr. 404 |
+| UC03.05.04 - Huỷ đề xuất cấp mới lốp | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A7, A10 | tr. 412 |
+| UC03.05.05 - Phê duyệt/Từ chối đề xuất cấp mới lốp | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A6, A8, A13, A18 | tr. 417 |
+| Feature 03.06 - Ắc quy | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A1 | tr. 424 |
+| 03.06 - Thông báo & Lịch sử hoạt động | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A16, A17 | tr. 425 |
+| UC03.06.01 - Xem danh mục ắc quy | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A2 | tr. 427 |
+| UC03.06.02 - Xem thông tin ắc quy | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A3 | tr. 432 |
+| UC03.06.03 - Tạo đề xuất tạo mới ắc quy | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A4, A5, A11–A15 | tr. 437 |
+| UC03.06.04 - Huỷ đề xuất cấp mới ắc quy | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A7, A10 | tr. 444 |
+| UC03.06.05 - Phê duyệt/Từ chối đề xuất cấp mới ắc quy | ✅ | `docs/product-catalog/brainstorms/product-catalog.md` A6, A8, A13, A18 | tr. 449 |
+| Feature 03.07 - Nhà cung cấp HHDV | ➡ business-partners |  | tr. 458 |
+| 03.07 - Thông báo & Lịch sử hoạt động | ➡ business-partners |  | tr. 459 |
+| UC03.07.01 - Xem danh mục nhà cung cấp HHDV | ➡ business-partners |  | tr. 461 |
+| UC03.07.02 - Xem thông tin nhà cung cấp HHDV | ➡ business-partners |  | tr. 467 |
+| UC03.07.03 - Tạo đề xuất tạo mới nhà cung cấp HHDV | ➡ business-partners |  | tr. 474 |
+| UC03.07.04 - Huỷ đề xuất cấp mới nhà cung cấp HHDV | ➡ business-partners |  | tr. 488 |
+| UC03.07.05 - Phê duyệt/Từ chối đề xuất cấp mới nhà cung cấp HHDV | ➡ business-partners |  | tr. 493 |
+| Feature 03.08 - Khách hàng DK05 | ➡ business-partners |  | tr. 502 |
+| 03.08 - Thông báo & Lịch sử hoạt động | ➡ business-partners |  | tr. 503 |
+| UC03.08.01 - Xem danh mục khách hàng DK05 | ➡ business-partners |  | tr. 505 |
+| UC03.08.02 - Xem thông tin khách hàng DK05 | ➡ business-partners |  | tr. 510 |
+| UC03.08.03 - Tạo đề xuất tạo mới khách hàng DK05 | ➡ business-partners |  | tr. 517 |
+| UC03.08.04 - Huỷ đề xuất cấp mới khách hàng DK05 | ➡ business-partners |  | tr. 528 |
+| UC03.08.05 - Phê duyệt/Từ chối đề xuất cấp mới khách hàng DK05 | ➡ business-partners |  | tr. 533 |
+| Feature 03.09 - Xe của khách hàng | ➡ business-partners |  | tr. 542 |
+| 03.09 - Thông báo & Lịch sử hoạt động | ➡ business-partners |  | tr. 543 |
+| UC03.09.01 - Xem danh mục xe của khách hàng | ➡ business-partners |  | tr. 545 |
+| UC03.09.02 - Xem thông tin xe của khách hàng | ➡ business-partners |  | tr. 549 |
+| UC03.09.03 - Tạo đề xuất tạo mới xe của khách hàng | ➡ business-partners |  | tr. 554 |
+| UC03.09.04 - Huỷ đề xuất cấp mới xe của khách hàng | ➡ business-partners |  | tr. 565 |
+| UC03.09.05 - Phê duyệt/Từ chối đề xuất cấp mới xe của khách hàng | ➡ business-partners |  | tr. 570 |
 | Feature 03.10 - Chi phí cấp 1 | ➡ cost-catalog |  | tr. 578 |
 | 03.10 - Thông báo & Lịch sử hoạt động | ➡ cost-catalog |  | tr. 579 |
 | UC03.10.01 - Xem danh mục chi phí cấp 1 | ➡ cost-catalog |  | tr. 581 |

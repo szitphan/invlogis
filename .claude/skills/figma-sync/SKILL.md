@@ -144,6 +144,11 @@ danh mục màn SRS Mục 10 (rule `screen-source.md` Mục 8).
 Sửa userflow → hook stale tự đánh dấu tài liệu phía sau; nhắc `/figma-userflow` vẽ lại sơ đồ trên Figma nếu
 có. Sửa `screens/` của flow đã `approved` → flow về `draft` trong index, Mục 10 của SRS cần sinh lại (báo).
 
+**Thẻ Spec + lớp ghim** (`.claude/rules/screen-source.md` Mục 9): row trong `screens/` vừa đổi, frame thêm/bỏ hoặc
+dời chỗ, hoặc gọi sau `/userstory`, `/jira --push` → vẽ lại thẻ và lớp ghim của các frame bị đụng theo đúng 4 bước
+"Thẻ Spec" ở Bước 7 của `/figma-screen` (build → match → vẽ → `flow-matrix.py plan`/`check`). Thẻ/ghim là bản máy
+sinh: chỉnh tay trên đó không đưa về tài liệu (rule Mục 7). Báo dòng `Thẻ Spec:` trong báo cáo.
+
 ## Bước 6 — `--done`: chốt flow, đưa vào SRS
 
 Điều kiện: flow đã có `screens/{flow}.md`, Bước 3 không còn thay đổi chưa xử lý (chạy sync trước nếu cần).
@@ -162,6 +167,10 @@ Không chạy `--done` khi còn xung đột hoặc row "cần bổ sung".
    `screens` (spec cũ, còn bảng tay hoặc "Phụ lục B") → L2 đặt marker theo `_templates/srs-spec.md` Mục 10
    trước; 2 khối máy sinh thì chỉ báo số flow/màn.
 4. Kiểm: `python3 _scripts/screens-md.py appendix {feature} --check` → exit 0. Khác 0 → báo nguyên văn.
+   Thẻ Spec của flow khớp bảng hiện tại: `screen-annotations.py build` so với chữ trên thẻ; lệch → vẽ lại trước khi chốt.
+   Còn row **chưa ghim** (`screen-annotations.py match` exit 1) → **không chốt flow**: hỏi từng row — phần tử có trên màn
+   mà khác tên thì đổi tên layer cho khớp cột Items rồi chạy lại `match`; phần tử có điều kiện, không xuất hiện ở màn mẫu
+   thì `screen-annotations.py mark {feature} "<screenId>[ · <State>]" <n> --absent "<lý do>"` (`screen-source.md` Mục 9).
 5. Task backlog "Chốt giao diện Figma {feature} · {flow}" tự đóng (Xong khi grep `approved`).
 
 ## Bước 7 — báo cáo

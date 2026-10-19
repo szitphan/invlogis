@@ -253,6 +253,8 @@ rounded:
   container: 12px
   page: 28px
   full: 9999px
+  card-mobile: 22px  # thẻ mobile (DEC-096)
+  inner-mobile: 16px # khối trong thẻ + ô nhập mobile
 
 spacing:             # Base 4px. Khóa = bậc Astryx (Spacing/<bậc>)
   "0": 0px
@@ -557,32 +559,63 @@ Chưa có mẫu **M (mobile)**. Xem Responsive Behavior và Known Gaps.
 
 ### Mẫu bố cục (M = mobile) — spec, chưa có node Figma
 
-> **Đề xuất (29/09/2026), mượn 3 nguyên tắc của `mobile-app-ui-design`, chưa dựng trong Figma —
-> vẽ mobile vẫn phải ghi "chưa có chuẩn trong design.md — theo spec M, chưa có node Figma".**
+> **Phần nhìn mobile đã chốt ở § Mobile — chốt Lab ↔ DS mobile (DEC-096).** 3 nguyên tắc dưới
+> (mượn `mobile-app-ui-design` 29/09, sửa theo lab ngày 15/10/2026) vẫn áp. M3/M4 chưa có node Figma —
+> vẽ M3/M4 ghi "theo spec M, chưa có node Figma".
 >
-> 1. **Lưới 8pt tương thích spacing 4px hiện có**: trên mobile chỉ dùng các bậc đã là số nhân của
->    8 trong thang hiện tại — `{spacing.2}` 8px · `{spacing.4}` 16px · `{spacing.6}` 24px ·
->    `{spacing.8}` 32px · `{spacing.10}` 40px · `{spacing.12}` 48px. Bỏ các bậc lẻ (2, 4, 6, 12,
->    20, 28, 36, 44px) khỏi margin/gutter mobile.
+> 1. **Khoảng cách mobile**: dùng `{spacing.1}` 4 · `{spacing.2}` 8 · `{spacing.3}` 12 · `{spacing.4}` 16 ·
+>    `{spacing.6}` 24 · `{spacing.8}` 32. Giữa các thẻ **12**, đệm trong thẻ 16, lề màn 16. Không dùng 10
+>    và các bậc lẻ khác (2, 6, 20, 28…).
 > 2. **Thumb zone**: hành động chính đặt cố định ở đáy màn (sticky bottom bar hoặc `BottomSheet`),
 >    không đặt góc trên phải như các mẫu P desktop. Dùng đúng component adaptive Astryx đã có sẵn
 >    (`BottomSheet`, `presentation="adaptive"` trên DropdownMenu/Selector/MultiSelector/DateTimeInput),
 >    không vẽ control mới.
-> 3. **Tối đa 4 cỡ chữ**: `{typography.heading-1}` (24px, tiêu đề trang) · `{typography.heading-3}`
->    (17px, tiêu đề khối) · `{typography.body}` (14px, nội dung chính) · `{typography.supporting}`
->    (12px, phụ). Bỏ display-*, heading-2/4-6, large khi vẽ mobile; label dùng lại body/supporting
->    theo ngữ cảnh.
+> 3. **5 cỡ chữ mobile**: **28** tiêu đề màn (Cal Sans, dòng riêng dưới hàng nút) · **17** tiêu đề khối
+>    (semibold) · **15** mã / giá trị chính (semibold) · **14** dòng thông tin · **13** phụ và chip. Bỏ
+>    display-*, heading-2/4-6, large khi vẽ mobile; không dùng cỡ lẻ .5. Text style Figma `Mobile/*`
+>    (chờ dựng — BL-161).
 
 | Mã | Mẫu | Khi nào dùng | Cấu trúc | Node Figma |
 | --- | --- | --- | --- | --- |
-| **M1** | Shell mobile | Khung ứng dụng trên mobile, thay S1/S2/S3 — chỉ cho 4 màn gốc | `Device / Frame` → Body cuộn cao hết vùng Content (764), nội dung chạy **dưới** `Bottom Navigation` nổi; Body chừa đệm đáy 92 (= chiều cao thanh) để mục cuối không bị che. Màn con dùng M3/M4 (ẩn thanh). Không dùng hamburger/`MobileNav` (chốt 06/10/2026) | `Example/Shell Mobile` — Templates › Shell (`5383:7822`) |
-| **M2** | Danh sách mobile | Thay P1 trên màn hẹp | Header (heading-1 + icon Tìm — chạm mở ô tìm full-width thay hàng tiêu đề) → `Tabs` trạng thái có đếm (cuộn ngang khi nhiều) → mỗi bản ghi 1 `Card`: dòng 1 mã + `Badge` trạng thái, 2–3 dòng `MetadataList` (thay bảng nhiều cột; không dồn hết cột của P1) → chạm thẻ mở M4. **2 biến thể tạo mới:** (a) **Màn gốc** — trong M1, nút [+] dạng icon ở header, có `Bottom Navigation`; (b) **Màn con** — ← quay lại ở header, ẩn thanh, nút "Tạo mới" rộng hết cố định đáy (thumb zone). Trạng thái: có dữ liệu / rỗng / đang tải (`Skeleton` dạng thẻ) / lọc không ra (chốt 06/10/2026). Thẻ dùng `Card` **Elevation=none** — biến thể có bóng của thư viện không có slot Content | `Example/List Mobile` — Templates › Table: Màn gốc (`5389:46482`) · Màn con (`5390:7575`) · Rỗng (`5390:7961`) · Đang tải (`5390:8192`) · Lọc không ra (`5390:8447`) |
-| **M3** | Form mobile | Thay P2/P3 trên màn hẹp | Tiêu đề heading-1 → field xếp 1 cột (bỏ 2 cột) → nút gửi cố định đáy (thumb zone) → control chọn dùng`presentation="adaptive"` (mở `BottomSheet` thay popover) | Chưa dựng |
+| **M1** | Shell mobile | Khung ứng dụng trên mobile, thay S1/S2/S3 — chỉ cho 4 màn gốc | `Device / Frame` → Body cuộn cao hết vùng Content (764), nội dung chạy **dưới** `Bottom Navigation` nổi; Body chừa đệm đáy 100 (thanh 64 + cách đáy 24 + 12) để mục cuối không bị che. Màn con dùng M3/M4 (ẩn thanh). Không dùng hamburger/`MobileNav` (chốt 06/10/2026) | `Example/Shell Mobile` — Templates › Shell (`5383:7822`) |
+| **M2** | Danh sách mobile | Thay P1 trên màn hẹp | Đầu màn mobile (màn gốc: lời chào; màn con: nút ←) → tiêu đề 28 dòng riêng → ô tìm luôn hiện + nút lọc trong ô → tab chip trạng thái có đếm (cuộn ngang) → mỗi bản ghi 1 thẻ bản ghi: icon tròn + mã + `Chip trạng thái`, 2–3 dòng icon + giá trị (icon thay nhãn khi nghĩa rõ), khối xám cho đối tượng liên quan → chạm thẻ mở M4 (§ Mobile — chốt Lab ↔ DS mobile). **2 biến thể tạo mới:** (a) **Màn gốc** — trong M1, `Đầu màn mobile` Màn con tắt `Có quay lại`, nút + tròn accent, có `Bottom Navigation`; (b) **Màn con** — ← quay lại ở header, ẩn thanh, nút "Tạo mới" rộng hết cố định đáy (thumb zone). Trạng thái: có dữ liệu / rỗng / đang tải (`Skeleton` dạng thẻ) / lọc không ra (chốt 06/10/2026). Thẻ dùng `Thẻ mobile / Bản ghi`; nền màn `Core/Background Surface`; trạng thái rỗng/lỗi dùng `EmptyState` thư viện (nút kiểu web — chưa có bản mobile) | `Example/List Mobile` — trang Sandbox (dựng lại 15/10 theo DS mobile): Màn gốc `5389:46482` · Màn con `5390:7575` · Rỗng `5390:7961` · Đang tải `5390:8192` · Lọc không ra `5390:8447` · Lỗi `5406:8175` |
+| **M3** | Form mobile | Thay P2/P3 trên màn hẹp | Tiêu đề 28 → field xếp 1 cột (bỏ 2 cột), ô nhập kiểu lab (nền xám, bo 16, cao 52, nhãn trong ô — DEC-099) → nút gửi cố định đáy (thumb zone). ≤ 6 lựa chọn có mô tả → thẻ chọn hiện sẵn trên form; dài hơn → `presentation="adaptive"` mở `BottomSheet`. Form ngắn = 1 màn (A); form có ảnh hoặc nhiều nhóm = nhiều bước (C: ✕ + tiêu đề + "n/N" + thanh đoạn) kết thúc bằng màn Kiểm tra trước khi gửi (Sửa từng khối) + màn Đã gửi | Chưa dựng |
 | **M4** | Chi tiết mobile | Thay P7 trên màn hẹp | Back + heading-1 + hàng meta →`Tabs` thay rail phải (rail dời vào 1 tab riêng, theo Collapsing Strategy) → hành động chính cố định đáy | Chưa dựng |
 
 Bảng này là **spec**, không phải mẫu đã vẽ: chưa có node Figma nào cho M1–M4. Trước khi
 `figma-screen` dùng được các mã M này, phải dựng frame mẫu tương ứng trong Figma rồi điền cột
 *Node Figma*.
+
+### Mobile — chốt Lab ↔ DS mobile (15/10/2026, DEC-096)
+
+So bản lab mobile đã duyệt (Figma Sandbox: section Duyệt `5453:44355`, UI Lab · Mobile style v1
+`5446:15413`) với DS mobile, user chọn từng dòng trên trang
+[Chốt Lab ↔ DS mobile](https://claude.ai/artifact/9ThSfr3ci8BdkwTMEaEmA8). Chỉ áp cho **mobile** (app và
+mobile web 393); web giữ như chốt 12/10. Màu lab luôn map về token DS. Component dự án mới chờ dựng (BL-161).
+
+| # | Hạng mục | Chốt | Giá trị áp dụng |
+| --- | --- | --- | --- |
+| m01 | Nền màn, thẻ | Lab | Danh sách: nền surface, thẻ viền mảnh (token viền nhạt) + bóng rất nhẹ; Trang chủ: nền `Core/Background Body`, thẻ trắng không viền. Khối phụ trong thẻ nền `Background Muted` |
+| m02 | Bo thẻ | Lab | Thẻ `{rounded.card-mobile}` 22 · khối trong `{rounded.inner-mobile}` 16 · chip, nút tròn hẳn |
+| m03 | Cỡ chữ | Kết hợp | 28 · 17 · 15 · 14 · 13 (§ Mẫu M nguyên tắc 3) |
+| m04 | Tiêu đề màn | Kết hợp | Cal Sans 28, dòng riêng dưới hàng nút |
+| m05 | Nút chính | Lab | Tròn hẳn; chân màn cao 52, nút nhỏ trong thẻ/sheet 42; chữ 15 semibold (DEC-097) |
+| m06 | Nút phụ | Khớp | Secondary nền `Core/Neutral`, không viền |
+| m07 | Nút icon | Lab | Tròn 42: nền trắng (←, tìm, chuông có chấm đỏ) hoặc nền accent cho hành động chính. Không dùng nút vuông |
+| m08 | Chip trạng thái | Lab | `Chip trạng thái` (DEC-029), cỡ Mobile cao 26, chữ 13 semibold, icon 14 |
+| m09 | Tab trạng thái | Lab | Tab chip cao 38, đang chọn nền accent chữ trắng, số đếm mờ; cuộn ngang. Web vẫn Tabs gạch chân. Component `Tab chip mobile` (`5795:150367`, trang innvie · Components › Navigation): State Rest/Selected/Pressed, `Nhãn`, `Số`, `Có số`; số ở Rest màu `Text/Primary` (Secondary trên Muted chỉ 4.2:1) |
+| m10 | Tìm và lọc | Lab | Ô tìm tròn hẳn cao 48 luôn hiện, nền `Background Muted`; nút lọc tròn 36 nền accent nằm trong ô. Component `Ô tìm mobile` (`5795:150411`, trang innvie · Components › Navigation): bọc `PowerSearch / Trigger`; State Rest/Đang nhập/Disabled, `Có nút lọc`, `Đang lọc`; placeholder giữ `Text/Secondary` (4.2:1 trên Muted, chấp nhận như ô nhập web — 15/10). **Phần lọc (nút lọc, chấm Đang lọc, hàng chip bên dưới) là tạm — chốt lại khi có component bộ lọc web** |
+| m11 | Đầu màn | Lab | Màn gốc: avatar 44 + lời chào “Xin chào,” + tên + dòng chi nhánh (icon `map-pin` 14 + tên chi nhánh 13 `Text/Primary` + `chevron-down` khi đổi được; vùng chạm 44; DEC-106, chốt 16/10) + nút tìm + chuông. Màn con: hàng nút (← · hành động) rồi tiêu đề 28 Component `Đầu màn mobile` (`5795:151949`, trang innvie · Components › Container): Kiểu Màn gốc / Màn con, `Có hành động`; Màn gốc thêm `Có chi nhánh`, `Chi nhánh`, `Đổi được chi nhánh` (16/10). |
+| m12 | Thẻ bản ghi | Lab | Đầu thẻ icon tròn 36 + mã 15 + chip; dòng icon 16 + giá trị (trường dễ nhầm như ngày tạo/hạn giữ nhãn ngắn); khối xám cho đối tượng liên quan Component `Thẻ mobile / Bản ghi` (`5795:151717`): Kiểu Thường / Có số lượng; `Mã`, `Có dòng 3`, `Có khối liên quan`. |
+| m13 | Họ thẻ | Lab | 9 loại: bản ghi · hàng danh sách · theo dõi tiến trình · cảnh báo · phương tiện · việc theo giờ · tóm tắt tiền · người liên hệ · lối tắt (mẫu `5446:13957`) Đã dựng (trang innvie · Components › Container, khung `5795:151680`): Bản ghi, Hàng danh sách (`5795:151788`), Cảnh báo (`5795:151852`), Phương tiện (`5795:151897`), Tiến trình (`5795:152091`), Việc theo giờ (`5795:152117`), Tóm tắt tiền (`5795:152146`), Người liên hệ (`5795:152182`), Lối tắt (`5795:152223`, Lưới 4 / Ô 2×2). Đủ 9 loại. |
+| m14 | Ô nhập | Lab | Nền `Background Muted`, bo 16, không viền, cao tối thiểu 52 (thực tế 56), nhãn nhỏ nằm trong ô (DEC-099). Component `Ô nhập mobile` (`5795:151109`, trang innvie · Components › Form Controls): Kiểu Một dòng/Nhiều dòng × Trạng thái Trống/Có giá trị/Focus/Error/Disabled; `Nhãn`, `Nội dung`, `Gợi ý`, `Có gợi ý`, `Thông báo lỗi`. `Ô mật khẩu` Platform=Mobile đã dùng ô này |
+| m15 | Chọn 1 trong ít lựa chọn | Kết hợp | ≤ 6 lựa chọn có mô tả → thẻ chọn (icon tròn + tên + mô tả + radio, viền accent khi chọn); dài hơn → BottomSheet. Component `Thẻ chọn` (`5795:151255`, trang innvie · Components › Form Controls): Platform = Mobile / Desktop × Trạng thái Chưa chọn/Đã chọn/Disabled (+ Rê chuột chỉ Desktop); `Tên`, `Mô tả`, `Có mô tả`, `Có icon`, `Icon`. Desktop (16/10, account-access 1.5 web): nền `Core/Background Surface`, viền `Border/Default`, `{rounded.container}`, icon tròn 32, tên `Text/Label`, mô tả `Text/Supporting`; Đã chọn viền `Core/Accent` 2px; dùng trong Dialog web |
+| m16 | Bottom sheet | Kết hợp | `BottomSheet` liền đáy, đầu bo 28, tay nắm; **không nút X** (DEC-098). Dòng đầu nội dung = `Đầu sheet mobile` (`5795:151449`, trang innvie · Components › Overlay); mẫu nội dung `.Nội dung sheet mobile · Chọn một` (`5795:151476`), chừa đáy 34 |
+| m17 | Form nhiều bước | Kết hợp | M3 = A (1 màn) mặc định; C nhiều bước theo lab khi có ảnh/nhiều nhóm |
+| m18 | Chân màn | Lab | Nền mờ dần từ nền trang; 1 nút rộng hết, hoặc 2 nút (phụ \| chính, chính rộng hơn) — nhãn dài thì chồng trên–dưới Component `Chân màn mobile` (`5795:151999`): Kiểu 1 nút / 2 nút cùng hàng / 2 nút chồng; gradient dùng mã màu cứng `#ffffff` (Dark đổi tay). |
+| m19 | Khoảng cách | Kết hợp | 4 · 8 · 12 · 16 · 24 · 32; giữa thẻ 12 (§ Mẫu M nguyên tắc 1) |
+| m20 | Bottom Navigation | Khớp | Giữ CMP-11 Mobile (nút Quét 56) |
+| m21 | Màu | DS | Token DS (accent `#262626`, chữ `Text/*`), không bảng màu riêng cho mobile |
 
 ### Whitespace Philosophy
 
@@ -611,7 +644,7 @@ là **none**. Chỉ nâng khi phần tử nổi trên ảnh hoặc trên nội d
 
 ### Border Radius Scale
 
-| Token | Giá trị | Dùng cho (theo trang Foundation → Shape) |
+| Token | Giá trị | Dùng cho (theo trang innvie · Foundations → Shape) |
 | --- | --- | --- |
 | `{rounded.none}` | 0px | "No rounding. Used for sections, headers, dividers." |
 | `{rounded.inner}` | 6px | Góc trong của ButtonGroup, nhóm token; checkbox |
@@ -619,6 +652,8 @@ là **none**. Chỉ nâng khi phần tử nổi trên ảnh hoặc trên nội d
 | `{rounded.container}` | 12px | Card, popover, dialog, toast, banner |
 | `{rounded.page}` | 28px | Panel lớn cấp trang |
 | `{rounded.full}` | 9999px | Pill, badge, avatar, status dot, nút tròn |
+| `{rounded.card-mobile}` | 22px | Thẻ trên mobile (DEC-096, m02) |
+| `{rounded.inner-mobile}` | 16px | Khối bên trong thẻ mobile, ô nhập mobile (m02, m14) |
 
 ### Motion
 
@@ -638,7 +673,7 @@ khi ghi chú prototype hoặc spec cho dev thì dùng tên token dưới đây.
 
 ### Iconography & Imagery
 
-* Icon theo bộ **Lucide**. Figma: component `icon/<tên>` ở trang Icons (cỡ gốc 16) và bộ `Icon` giữ 4 cỡ của DS: xsm 12 · sm 16 · md 20 · lg 24. Màu theo token `icon-*`.
+* Icon theo bộ **Lucide**. Figma: component `icon/<tên>` ở trang innvie · Foundations (khung Icon) (cỡ gốc 16) và bộ `Icon` giữ 4 cỡ của DS: xsm 12 · sm 16 · md 20 · lg 24. Màu theo token `icon-*`.
 * **Quy chuẩn icon của dự án (chốt 12/10/2026, theo lab `design/_lab/lab-web-kit.css` `.ic`) — áp cho cả thư viện Figma lẫn màn vẽ:**
 
   | Thuộc tính | Quy định |
@@ -767,9 +802,10 @@ không tự vẽ.
 * **Primary**: nền `{colors.accent}`, chữ `{colors.on-accent}`. Hành động chính của vùng.
 * **Secondary**: nền `{colors.neutral}` (đen 6%), chữ `{colors.text-primary}`. Hành động phụ ("View Options", "Restock", "Sign In").
 * **Ghost**: trong suốt, chỉ có chữ. Hành động nhẹ ("Cancel", "Fulfill item", "Refund", "Log out").
-* **Destructive**: nền `{colors.error-muted}`, chữ `{colors.error}`. Xóa, vô hiệu hóa.
+* **Destructive**: nền `{colors.error-muted}`, chữ `{colors.error}`. Xoá, vô hiệu hóa.
 * Hover: phủ `{colors.overlay-hover}` · Pressed: phủ `{colors.overlay-pressed}` · Focused: viền ngoài 2px `{colors.accent}` · Disabled: opacity 0.5 · Loading: spinner thay nội dung.
-* **Bo góc và cỡ theo nền tảng (chốt 12/10/2026):** web bo `{rounded.element}` 10px; mobile bo `{rounded.full}` (Figma `Radius/Full`), kể cả nút icon-only trên header sheet. Nút chính rộng hết sheet/màn trên mobile cao **40px** (Size=LG, ghi đè chiều cao; thư viện chỉ tới LG 36 — theo lab).
+* **Bo góc và cỡ theo nền tảng (chốt 12/10/2026):** web bo `{rounded.element}` 10px; mobile bo `{rounded.full}` (Figma `Radius/Full`), kể cả nút icon-only trên header sheet. Mobile: nút ở chân màn cao **52**, nút nhỏ trong thẻ/sheet và nút icon **42**, chữ 15 semibold (Size=LG, ghi đè chiều cao; thư viện chỉ tới LG 36 — DEC-097, thay mức 40 của DEC-032).
+* **Component dự án `Nút mobile`** (`5789:149694`): Kiểu Chính/Phụ × Cỡ 52/42 × State Rest/Pressed/Disabled/Loading (16), bọc `Button` LG, đệm ngang 20, nhãn `Mobile/Strong` 1 dòng cắt "…"; sửa nhãn/icon trên lớp `Button` lồng (đã expose). **`Nút mobile / Icon`** (`5795:150097`): Nền Trắng/Accent × State (6), tròn 42, BOOLEAN `Có chấm`; icon 16 theo cỡ thư viện; đổi icon trên Accent thì gắn lại nét `Core/On Accent`. Figma: trang innvie · Components › Action, khung `Nút mobile · innvie` (`5789:149673`). Mobile luôn dùng 2 set này, không sửa tay `Button`.
 * **Quay lại trong sheet:** sheet có bước con (vd Panel bước trong sheet sơ đồ) dùng `Button` Ghost LG, icon `chevron-left` + nhãn màn trước, bo `{rounded.full}`, đệm trái 0 cho thẳng lề nội dung, là dòng đầu của nội dung sheet. Sheet có bước con **không có header riêng, không X**; đóng bằng vuốt xuống / chạm nền.
 
 **`toggle-button`** · *Button / ToggleButton*: dạng ghost, `isPressed` phủ overlay-pressed và chữ semibold. Dùng cho thanh công cụ, chuyển chế độ xem.
@@ -818,7 +854,7 @@ Mọi field dùng chung giải phẫu **Field**: *nhãn* (`{typography.label}`, 
 
 ### Content
 
-**Heading** (Level 1–4) · **Text** (có truncation 1 dòng) · **Avatar** · **Token** (tag có thể xóa, 11 màu) · **Timestamp** (Relative / Auto / Date / Date Time / Time / System…) · **Code**, **CodeBlock**, **Markdown**, **Kbd** · **Thumbnail** (Image/Placeholder/Loading/Uploading) · **Citation** · **EmptyState** (icon + tiêu đề + mô tả + hành động; Default/Compact).
+**Heading** (Level 1–4) · **Text** (có truncation 1 dòng) · **Avatar** · **Token** (tag có thể xoá, 11 màu) · **Timestamp** (Relative / Auto / Date / Date Time / Time / System…) · **Code**, **CodeBlock**, **Markdown**, **Kbd** · **Thumbnail** (Image/Placeholder/Loading/Uploading) · **Citation** · **EmptyState** (icon + tiêu đề + mô tả + hành động; Default/Compact).
 
 ### Layout
 
@@ -839,7 +875,7 @@ Mọi field dùng chung giải phẫu **Field**: *nhãn* (`{typography.label}`, 
 ### Phân trang danh sách (theo SC-04, 29/09/2026)
 
 Nguồn: `web-common-rules.md` SC-04 (phân trang) và 2.17 (nhóm dữ liệu). Component: **`Pagination`**
-(trang Navigation) · Variant = **Pages** / Count / Compact / Dots / None · Size = md / sm ·
+(trang innvie · Components › Navigation) · Variant = **Pages** / Count / Compact / Dots / None · Size = md / sm ·
 `Has Prev`, `Has Next`, `Show Page Size Selector` · slot `Pages`. Hướng dẫn chung của component:
 `design/components.md` § Pagination.
 
@@ -904,7 +940,7 @@ khung riêng có mục *Master Components · bổ sung từ code*: `Stepper`, `S
 
 **Đã bỏ bản trùng (28/09/2026).** Các component sau **thư viện đã có sẵn** (dạng component đơn,
 không phải set, nên lượt so khớp đầu bị sót). Bản tôi dựng đã **xoá**, dùng bản gốc:
-`Tooltip`, `HoverCard`, `Popover`, `Lightbox` (trang Overlay) · `Blockquote` (Content) ·
+`Tooltip`, `HoverCard`, `Popover`, `Lightbox` (trang innvie · Components › Overlay) · `Blockquote` (Content) ·
 `Carousel` (Container) · `Navigation / TopNav`, `Navigation / TopNavHeading`,
 `Navigation / .TopNavMegaMenuFeaturedCard` (Navigation). Cũng đã xoá `NavHeadingMenu`,
 `NavHeadingMenu / Item` (chỉ dùng trong TopNavHeading của tôi).
@@ -934,8 +970,8 @@ Còn giữ vì đang có instance:
 * Theo code:
   - Nền `Core/Background Surface`, `Radius/Container`, `Elevation/High`.
   - Nội dung đệm 16px: `Heading/Heading 2` + `Text/Body` màu secondary.
-  - Chân đệm 16px, `[Hủy]` Ghost rồi `[Hành động]` căn phải. Ở dạng Stacked: full-width, **hành động ở trên**.
-* Hành vi không vẽ được: không đóng khi bấm ra ngoài; Esc = Hủy; focus mặc định ở Hủy.
+  - Chân đệm 16px, `[Huỷ]` Ghost rồi `[Hành động]` căn phải. Ở dạng Stacked: full-width, **hành động ở trên**.
+* Hành vi không vẽ được: không đóng khi bấm ra ngoài; Esc = Huỷ; focus mặc định ở Huỷ.
 * **Dùng thay cho Dialog thường** mỗi khi xác nhận xoá, huỷ lệnh, hoặc hành động không hoàn tác (xem Do's).
 
 **`AvatarGroup`** (key `a5863cbf…`, dựng từ `packages/core/src/AvatarGroup`): nhiều người liên quan hiển thị gọn trên một dòng.
@@ -974,7 +1010,11 @@ tổng quan. Figma đã có nó bên trong `Checkbox`, `Radio`, `DropdownMenuChe
 * Biến thể Height = Hug / Capped (62%) / Tall (92%), mẫu trên màn 390×844.
 * Theo code: nền surface, viền 1px `Border/Default` trên và hai bên, bo 12px hai góc trên, `Elevation/High`, thanh kéo 24px có vạch 36×4px.
 * Nội dung qua `Content` (instance swap). Đặt vào màn thì thêm scrim bằng `figma.overlay`.
-* Mẫu nội dung có sẵn (trang Overlay, trong khung BottomSheet), rộng 390px, swap vào `Content`:
+* **Mobile (DEC-098):** đầu sheet bo `{rounded.page}` 28, **không có nút X**; đóng bằng vuốt xuống hoặc chạm
+  nền mờ. Tay nắm là nút bấm được, nhãn truy cập "Đóng" (cho người không vuốt được). Sheet có hành động
+  dở (form, lý do từ chối) mà đóng thì hỏi theo GR-13. Bo 28 là ghi đè trên instance (thư viện bo 12). Nội dung swap vào
+  `Content` bắt đầu bằng `Đầu sheet mobile`, chừa đệm đáy 34.
+* Mẫu nội dung có sẵn (trang innvie · Components › Overlay, trong khung BottomSheet), rộng 390px, swap vào `Content`:
   - `BottomSheet / .Content · Hành động` (key `7735af84…`): danh sách `DropdownMenuItem`, cho DropdownMenu/MoreMenu `presentation="bottom-sheet"`.
   - `BottomSheet / .Content · Chọn một` (key `ce12a283…`): danh sách `RadioListItem`, cho Selector trên mobile.
   - `BottomSheet / .Content · Chọn nhiều` (key `646bb320…`): danh sách `CheckboxListItem`, cho MultiSelector trên mobile.
@@ -1032,7 +1072,7 @@ Astryx code (`@astryxdesign/core`) đã có sẵn khối tương đương mà ch
   bản ghi (NC). Mốc lịch sử chỉ để đọc (AL).
 * **Khác nguồn nghiệp vụ (SC):** mở spec bằng khối "> **Khác SC-xx gốc — chờ người phụ trách xác
   nhận:** …" kèm lý do, và thêm một mục KG ở Known Gaps. (NC, BL, TC)
-* **Figma:** trang Overlay, khung `<Tên> · innvie` + khung `Trạng thái · instances` có mọi trạng
+* **Figma:** trang innvie · Components › Overlay, khung `<Tên> · innvie` + khung `Trạng thái · instances` có mọi trạng
   thái, ví dụ trong màn, *Chữ dài · kiểm tra*. Nội dung khác nhau theo biến thể (icon theo Tone,
   nhãn lượt) → để sẵn trong từng biến thể + expose, không dùng thuộc tính TEXT/INSTANCE_SWAP. (NC, AL)
 
@@ -1044,7 +1084,7 @@ Astryx code (`@astryxdesign/core`) đã có sẵn khối tương đương mà ch
 > cần xử lý**; không đưa lý do từ chối và hạn xử lý vào thông báo; mobile là màn riêng; nền chưa đọc
 > dùng `{colors.accent-muted}` thay "nền xanh nhạt".
 
-**Component Figma** (trang Overlay, khung `NotificationCenter · innvie`, node `5142:2017`; khung
+**Component Figma** (trang innvie · Components › Overlay, khung `NotificationCenter · innvie`, node `5142:2017`; khung
 `Trạng thái · instances` bày đủ mọi trạng thái và phần *Chữ dài · kiểm tra*). Bên trong dùng
 instance thật của thư viện, không vẽ lại control:
 
@@ -1162,7 +1202,7 @@ Module (Xưởng / Nhân sự / Điều vận…) chỉ là thông tin phụ ở
 
 **Không tạo component vỏ** — dùng `PowerSearch / Popover` của thư viện
 (Form Controls; hướng dẫn: `components.md` § Power Search). Chỉ thêm nội dung sửa giá trị của dự án.
-Figma: trang Overlay, khung `BoLocNangCao · innvie` (node `5176:9303`), khung `Trạng thái · instances` có 3 cảnh
+Figma: trang innvie · Components › Overlay, khung `BoLocNangCao · innvie` (node `5176:9303`), khung `Trạng thái · instances` có 3 cảnh
 trên bảng (chọn cột / sửa điều kiện / không có kết quả), 3 màn mobile và *Chữ dài · kiểm tra*.
 
 | Phần | Dùng | Ghi chú |
@@ -1203,7 +1243,7 @@ thư viện: [Cột] [Toán tử] [Giá trị] → chân `[Huỷ]` Secondary SM 
 > bảng, không có "Áp dụng"; "Đặt lại mặc định" nằm ở chân popover. Gọi là *tuỳ chỉnh* chứ không phải
 > *cột ẩn* vì đây là cấu hình riêng của từng người dùng.
 
-Figma: trang Overlay, khung `TuyChinhCot · innvie` (node `5177:7634`), khung `Trạng thái · instances` có 3 cảnh
+Figma: trang innvie · Components › Overlay, khung `TuyChinhCot · innvie` (node `5177:7634`), khung `Trạng thái · instances` có 3 cảnh
 trên bảng (menu ⋯ mở / đang kéo tiêu đề / popover Tuỳ chỉnh cột) và *Chữ dài · kiểm tra*. Ba cảnh của
 Bộ lọc nâng cao cũng đặt nút này cạnh thanh lọc.
 
@@ -1239,7 +1279,7 @@ sau các nút hành động (vd `[Từ chối] [Phê duyệt] [🕐]`). Nhãn tr
 `Trạng thái · instances` có ví dụ *Trong màn chi tiết* cho Desktop (header P7 + panel neo dưới nút) và
 Mobile (M4 + scrim + BottomSheet).
 
-**Component Figma** (trang Overlay, khung `ActivityLog · innvie`, node `5160:3295`; khung `Trạng thái ·
+**Component Figma** (trang innvie · Components › Overlay, khung `ActivityLog · innvie`, node `5160:3295`; khung `Trạng thái ·
 instances` bày mọi trạng thái Desktop/Mobile, BottomSheet kéo lên Tall và phần *Chữ dài · kiểm tra*).
 
 | Component | Key | Biến thể / thuộc tính | Dựng từ |
@@ -1325,7 +1365,7 @@ panel theo lượt · Mobile M4 + Banner · Mobile BottomSheet theo lượt) và
 
 ### Sửa trong bảng (nhập/sửa trong ô và báo lỗi ô — 01/10/2026)
 
-Thư viện Astryx chưa có ô bảng sửa được (`components.md` § Table chỉ có Rich Cell Content). Figma: trang
+Thư viện Astryx chưa có ô bảng sửa được (`components.md` § Table chỉ có Rich Cell Content). Figma: trang innvie · Components ›
 Overlay, khung `SuaTrongBang · innvie` (node `5240:9341`), khung `Trạng thái · instances` có 3 cảnh (bảng
 danh sách đang sửa / lỗi ô + Tooltip / bảng dòng hàng trong form bấm Lưu có lỗi) và *Chữ dài · kiểm tra*.
 **Chỉ Desktop** (mobile: bảng → `List`, sửa trong màn/BottomSheet của bản ghi).
@@ -1408,7 +1448,7 @@ của hệ điều hành; không phải control, không có hành vi.
   cài SF Pro thì Figma báo thiếu font — cài SF Pro từ Apple Developer.
 * Glyph ở tone Inverted gắn `Text/On Dark` vì chưa có biến `Icon/On Dark`.
 * Home indicator giữ bản dự án (gắn biến), cùng số đo với file app.
-* **Figma:** trang Layout, khung `Device Frame · innvie` (`5370:5589`) gồm Master Components và
+* **Figma:** trang innvie · Patterns, khung `Device Frame · innvie` (`5370:5589`) gồm Master Components và
   Trạng thái & ví dụ (Light · Dark · Inverted trên nền tối · Có nội dung trong slot). `Device / Status Bar`
   `5370:5625` · `Device / Home Indicator` `5370:5643` · `Device / Frame` `5371:3063`. Hai set Status Bar /
   Home Indicator có nền xám ở trang Master để thấy được bản Inverted; nền này không theo vào instance.
@@ -1416,7 +1456,7 @@ của hệ điều hành; không phải control, không có hành vi.
 ### Khung trang web (CMP-11, component thật 12/10/2026)
 
 Menu trái + thanh trên cho mọi màn web, thay `AppShell` SideNav 300 của Astryx. Số đo khung: § Grid & Container ›
-Khung trang dự án; nội dung + hành vi: `design/ui-common/screen-patterns.md` § CMP-11. Figma: trang 00 · Chung ›
+Khung trang dự án; nội dung + hành vi: `design/ui-common/screen-patterns.md` § CMP-11. Figma: trang innvie · Patterns ›
 khung `Khung trang · innvie` (`5596:129165`).
 
 | Component | Node | Biến thể / thuộc tính | Ghi chú |
@@ -1425,7 +1465,7 @@ khung `Khung trang · innvie` (`5596:129165`).
 | `Khung trang / .Nhóm menu` | `5596:129227` | `Tên nhóm` | Chữ hoa `{typography.supporting}` secondary; cách mục trên 16, mục dưới 6; ẩn khi thu gọn |
 | `Khung trang / .Chân menu` | `5596:129268` | Trường hợp Nhiều cơ sở / Một cơ sở / Không chia cơ sở / Thu gọn · `Module`, `Cơ sở`, `Icon module` (swap) | Thẻ viền `{colors.border-default}` bo `{rounded.container}`, đệm 8: ô icon module 32 + tên module, vạch, dòng cơ sở (pin + tên + chevron khi nhiều cơ sở). Không kẻ vạch phía trên chân menu |
 | `Khung trang / Menu trái` | `5596:129316` | Dạng Mở rộng 240 / Thu gọn 64 · `Tên đơn vị`, `Tên module`, `Chữ logo` | Nền surface, viền phải 1px, đệm 12, mục cách 2. Đầu: ô logo 30 (màu `P-mau-logo`) + tên đơn vị + module + nút thu gọn (Ghost icon-only). Chân menu ghim đáy. Mục và nhóm là instance — sửa nhãn, icon, số đếm, mục đang chọn trên instance; thêm/bớt theo module và phân quyền role |
-| `Khung trang / Thanh trên` | `5596:129536` | `Mục cha`, `Trang hiện tại`, `Có thông báo` | Cao 44, nền surface, vạch dưới 1px: đường dẫn (mục cha secondary › trang hiện tại primary) · tìm · chuông (chấm đỏ khi có việc cần xử lý, CMP-02) · avatar chữ tắt |
+| `Khung trang / Thanh trên` | `5596:129536` | `Mục cha`, `Trang hiện tại`, `Có thông báo`, `Có chi nhánh`, `Chi nhánh`, `Đổi được chi nhánh`, `Họ tên` | Cao 44, nền surface, vạch dưới 1px: đường dẫn (mục cha secondary › trang hiện tại primary) · nút chi nhánh (`Button` Ghost SM: `map-pin` + tên + `chevron-down` khi đổi được; 1 chi nhánh thì chữ thường không bấm — FR-account-access-012; tên cắt "…" sau 240) · tìm · chuông (chấm đỏ khi có việc cần xử lý, CMP-02) · nút tài khoản (avatar Small 36 chữ tắt + họ tên cắt "…" sau 160 + `chevron-down`, mở menu Thông tin tài khoản / Đăng xuất; 16/10) |
 
 * **Ghép màn:** khung ngang [Menu trái (STRETCH)][Vùng chính: Thanh trên (STRETCH) + Nội dung đệm 24, nền surface].
   Danh sách giãn hết; chi tiết ≤ 1440, form ≤ 720, căn giữa. 768–1279 dùng Menu trái Thu gọn; < 768 dùng MobileNav.
@@ -1444,8 +1484,8 @@ dựng thành component dự án.
 | `Bottom Navigation` | Selected = Trang chủ / Lịch nhắc / Thông báo / Tài khoản | Thanh nổi: 4 Tab + Scan giữa |
 
 * **Bố cục:** thanh nổi rộng 361 (lề 16 hai bên, khung 393), cao 64, bo `{rounded.page}`, nền `Core/Background Surface`,
-  `Elevation/Medium`; nổi đè lên nội dung ở đáy slot Content của `Device / Frame` (mép dưới thanh cách vùng
-  Home indicator 8), nội dung màn gốc cuộn dưới thanh và chừa đệm đáy 92 (xem M1). Chia 5 cột
+  `Elevation/Medium`; nổi đè lên nội dung ở đáy `Device / Frame`, mép dưới thanh cách đáy màn 24 (sát vạch
+  Home indicator, DEC-107), nội dung màn gốc cuộn dưới thanh và chừa đệm đáy 100 (xem M1). Chia 5 cột
   bằng nhau: **Trang chủ · Lịch nhắc · [Quét] · Thông báo · Tài khoản**; nút Quét tròn 56 **nằm trong thanh,
   căn giữa dọc** (lùi vào 4 như khối nền tab), không nhô lên — 06/10/2026, khi bỏ nhãn tab.
 * **Tab — chỉ icon, không hiện chữ** (chốt 06/10/2026, sau khi so với bản icon + nhãn). Nhãn vẫn khai trong
@@ -1476,7 +1516,7 @@ dựng thành component dự án.
   * Màn con cần quét (vd quét mã trong form) tự đặt nút quét riêng trong màn, không dựa vào nút Quét của thanh.
 * Chạm lại tab đang chọn → cuộn danh sách về đầu (đề xuất).
 * **UC phải khai báo:** feature mở từ tab nào / màn nào; quét xong đi tới màn nào.
-* **Figma:** trang Layout, khung `Bottom Navigation · innvie` (`5377:5655`) gồm Master Components và
+* **Figma:** trang innvie · Components › Navigation, khung `Bottom Navigation · innvie` (`5377:5655`) gồm Master Components và
   Trạng thái & ví dụ (Trang chủ · Lịch nhắc · Thông báo badge 9+ · Tài khoản Dark · Quét đang nhấn, đặt
   trong `Device / Frame`). `Bottom Navigation / Tab` `5377:5693` · `Bottom Navigation / Scan` `5377:5715`
   · `Bottom Navigation` `5381:3341`. Tab và Scan trong thanh đã expose (bật/tắt badge, Scan Pressed).
@@ -1508,12 +1548,12 @@ Màn hiện khi app web tải dữ liệu lần đầu (sau đăng nhập, mở 
 ### Cây quy trình (CMP-09, component thật 12/10/2026)
 
 Xem cả quy trình nhiều nghiệp vụ dạng cây. Nội dung, hành vi và quy tắc vẽ R1–R18: `design/ui-common/screen-patterns.md`
-§ CMP-09; mẫu tương tác `design/_lab/lab-progress.html`. Mục này giữ phần component. Figma: trang 00 · Chung ›
+§ CMP-09; mẫu tương tác `design/_lab/lab-progress.html`. Mục này giữ phần component. Figma: trang innvie · Components › Table & List ›
 khung `Cây quy trình · innvie` (`5570:106767`) › Master Components `5570:106770`, Trạng thái & ví dụ `5578:111232`.
 
 | Component | Node | Biến thể / thuộc tính | Ghi chú |
 | --- | --- | --- | --- |
-| `Chip trạng thái` | `5578:109819` | Sắc × 7 · `Nhãn` · `Icon` (swap) | Chuẩn chung (xem § Ánh xạ trạng thái nghiệp vụ) |
+| `Chip trạng thái` | `5578:109819` | Sắc × 7 × Cỡ (Web \| Mobile) = 14 · `Nhãn` · `Icon` (swap) | Chuẩn chung (xem § Ánh xạ trạng thái nghiệp vụ) |
 | `Cây quy trình / Bước` | `5578:110094` | Nền tảng Desktop/Mobile × Trường hợp Có bản ghi/Chưa tạo/Ngã rẽ/Công nợ/Đã huỷ × Tương tác Thường/Rê chuột/Đang chọn · `Phát sinh`, `Ở đây` (boolean) · `Tên`, `Mã`, `Điều kiện`, `Nhà cung cấp`, `Icon nghiệp vụ` | Desktop 1 hàng, giãn 290–360 (Figma cố định 320): trái = icon 40 + chấm bước, tên + mã; phải = chip; khối chữ giãn, khe 12. Mobile 156×56: tên + chữ trạng thái màu, không chip, không mã |
 | `Cây quy trình / .Nhãn góc` | `5578:109857` | Loại = Phát sinh / Ở đây | Phát sinh: góc trên trái, nền `status-chip-orange-bg`, chữ/icon `-fg`, viền 1px nét đứt `-border`, cao 20, bo full, chữ Heading 6, icon nhánh 12. Ở đây: góc trên phải, nền `{colors.accent}`, chữ `{colors.on-accent}`, icon pin 12. Cả hai có vòng 2px màu nền vùng sơ đồ, đè nửa lên mép thẻ |
 | `Cây quy trình / Panel bước` | `5578:110668` | Nền tảng × Trạng thái Có bản ghi/Chưa tạo/Ngã rẽ/Công nợ/Không có quyền/Lịch sử lỗi/Đang tải/Đã huỷ · `Phát sinh`, `Có nhãn`, `Có module`, `Có lý do phát sinh` | Desktop 300: đầu nền `{colors.background-muted}` + dải trạng thái rộng hết (nền/chữ sắc chip); chữ phụ trên nền muted dùng `Status Chip/Gray/Foreground` cho đạt 4,5:1. Mobile: chip chuẩn phải tên, kẻ 1px `{colors.border-default}` dưới khối trạng thái. Đang tải = `Skeleton`; Lịch sử lỗi = `EmptyState` Compact wifi-off + Thử lại; Đã huỷ = dải/chip Đỏ + "Bản ghi của bước này đã bị xoá…", không nút mở. Tiêu đề khối 12px (Heading 5) |
@@ -1533,6 +1573,70 @@ khung `Cây quy trình · innvie` (`5570:106767`) › Master Components `5570:10
 * **Cảnh ví dụ:** popup mở từ màn chi tiết (Ở đây + panel), mở từ danh sách (không chọn, tooltip điều kiện), bước
   không có quyền, nhánh phát sinh có lý do, sơ đồ đang tải/lỗi (web + mobile), sheet cây + sheet panel bước, chữ dài.
 * **Giới hạn khi dựng bằng proxy (KG-32):** xem Known Gaps.
+
+### Ô mật khẩu (TextInput + nút hiện/ẩn, 15/10/2026, DEC-094)
+
+Ô nhập mật khẩu có nút hiện/ẩn ở cuối ô. Thư viện Figma Astryx chỉ có `TextInput` (không có slot cuối ô)
+nên dựng thành component dự án thay cho cách ghép Button đè lên TextInput. Dùng cho mọi ô mật khẩu:
+đăng nhập, tạo mật khẩu mới, đổi mật khẩu (web + app).
+
+| Component | Key | Biến thể / thuộc tính | Dựng từ |
+| --- | --- | --- | --- |
+| `Ô mật khẩu` | — | Hiển thị = Ẩn / Hiện × Trạng thái = Rest / Error / Disabled × Platform = Desktop / Mobile (12) · instance `Ô nhập` (TextInput) và nút mắt được expose — sửa nhãn, nội dung, dòng lỗi trực tiếp trên chữ của `Ô nhập` | `TextInput` size md (nhãn, ô, dòng lỗi; lề phải ô 36 desktop / 40 mobile chừa chỗ nút) + `Button` Ghost Icon Only ở cuối ô |
+
+* **Không có thuộc tính TEXT:** Figma từ chối nối thuộc tính vào lớp chữ nằm trong instance `TextInput`
+  ("Cannot set component property references on instance sublayer", 15/10/2026) → dùng expose thay thế.
+
+* **Nút hiện/ẩn:** Ẩn → icon `icon/eye`, nhãn truy cập "Hiện mật khẩu"; Hiện → `icon/eye-off`, "Ẩn mật khẩu".
+  Desktop: Button SM trong ô 32. Mobile: dựng trên `Ô nhập mobile`, Button MD căn giữa dọc ô 56, ô chừa đệm phải 52, vùng chạm 44 (phần ngoài ô không tính vào chiều cao ô).
+  Disabled: nút cũng Disabled.
+* **Nội dung:** Ẩn hiện dấu chấm (••••••••), Hiện hiện chữ thật. Ô trống thì là placeholder theo màn.
+* **Lỗi:** Trạng thái = Error dùng dòng lỗi của `TextInput` (wording theo SRS feature, vd E-account-access-001).
+* **Nhãn bắt buộc:** thư viện `FieldLabel` chưa có dấu `*` → ghi " *" cuối `Nhãn` (chưa có chuẩn trong design.md).
+* **Figma:** trang innvie · Components › Form Controls, khung `Ô mật khẩu · innvie` (`5765:142732`), set `Ô mật khẩu` (`5765:142750`);
+  Master Components + Trạng thái & ví dụ: *Trong ngữ cảnh* dialog Đổi mật khẩu + *Chữ dài · kiểm tra* 320px
+  (nội dung quá dài cắt "…" trước nút mắt). Đã thay vào 14 ô mật khẩu của account-access (1.3, 1.5, 2.1, 6.1 web + app).
+
+### Component phát sinh từ account-access (16/10/2026)
+
+Chốt trên trang duyệt lệch prototype ↔ DS ([artifact](https://claude.ai/artifact/SPnqtwujjRVacdaX8gcxLD), mục G4, W3,
+W7, A8, A9). Theo *Quy ước chung của component dự án*; khác quy ước thì ghi lý do ngay tại dòng. Figma: trang
+innvie · Components, mỗi component 1 khung `<Tên> · innvie` (Master Components + Trạng thái & ví dụ + Chữ dài · kiểm tra).
+
+| Component | Key | Biến thể / thuộc tính | Dựng từ |
+| --- | --- | --- | --- |
+| `Thông báo trạng thái` | `5826:154196` | Platform = Desktop / Mobile × Sắc = Trung tính / Lỗi / Thành công · `Tiêu đề`, `Có tiêu đề`, `Nội dung` (icon đổi bằng swap lớp `Vòng icon › Icon` — mỗi Sắc có icon mặc định riêng nên không dùng thuộc tính swap) | Vòng tròn 56 + icon 24 · tiêu đề · câu dẫn, căn giữa. Không chứa nút |
+| `Thẻ điều hướng` | `5826:154348` | Platform = Desktop / Mobile × Trạng thái = Rest / Rê chuột (chỉ Desktop) / Nhấn / Disabled · `Icon` (swap), `Tên`, `Mô tả`, `Có mô tả` | Ghép bằng token theo kiểu `ClickableCard` (slot của ClickableCard không điền được bằng proxy). Icon tròn 36 + tên + mô tả + `chevron-right` |
+| `Ảnh đại diện đổi được` | `5826:154842` | Cỡ = 64 / 88 × Trạng thái = Thường / Đang tải lên / Disabled · `Chữ tắt` | Vòng chữ tắt ghép token (`Avatar` thư viện chỉ có 48 / 128) + `Button` Primary Icon Only (SM / MD) bo full, icon `camera` |
+| `Hàng cài đặt mobile` | `5826:154986` | Trạng thái = Rest / Nhấn / Disabled / Đang lưu · `Icon` (swap), `Nhãn`, `Giá trị`, `Có giá trị`, `Có vạch dưới` | Ghép bằng token: icon 20 + nhãn + giá trị + `chevron-right` |
+| `Ô mã OTP` + `Ô mã OTP / .Ô số` | `5826:155045` · `5826:155023` | Ô mã: Trạng thái = Trống / Đang nhập / Đang kiểm tra / Lỗi / Hết hiệu lực (câu dòng dưới sửa trên lớp chữ `Thông báo` — mỗi trạng thái câu mẫu khác nên không dùng thuộc tính TEXT). Ô số: Trạng thái = Trống / Focus / Có số / Lỗi / Disabled · `Số` | 6 `.Ô số` kiểu `Ô nhập mobile` (nền Background Muted, `{rounded.inner-mobile}`) + dòng lỗi |
+
+* **Thông báo trạng thái** — màn kết quả hoặc màn chặn cả trang (1.4 không được dùng kênh, 2.1 hết hạn, 3.3 kiểm tra
+  email, 3.5 link hết hạn, 4.2 đã gửi). Khác `EmptyState`: EmptyState cho **vùng dữ liệu** rỗng/lỗi; khối này thay cả
+  nội dung màn. Vòng tròn: Trung tính nền `Core/Background Muted` icon `Icon/Primary` · Lỗi nền `Status/Error Muted`
+  icon `Status/Error` · Thành công nền `Status/Success Muted` icon `Status/Success`. Tiêu đề Desktop `Heading/Heading 2`
+  (Cal Sans) / Mobile 28 Cal Sans; câu dẫn Desktop `Text/Body` / Mobile 15, `Text/Primary`, căn giữa. Nút do màn đặt
+  (web: nút chính rộng hết dưới khối; app: `Chân màn mobile`). Chữ dài: tiêu đề tối đa 2 dòng, câu dẫn không cắt.
+  Icon là trang trí (ẩn với trình đọc màn); màn đặt `role="alert"` (Lỗi) hoặc `status`.
+* **Thẻ điều hướng** — chọn một lối đi rồi chuyển màn ngay (3.1 Quên mật khẩu). Khác `Thẻ chọn` (chọn rồi bấm nút
+  xác nhận, có radio). Desktop: đệm 16, cao tối thiểu 64; Mobile: nền `Core/Background Surface`, viền
+  `Border/Default`, `{rounded.inner-mobile}`, cao tối thiểu 64, cả thẻ là vùng chạm. Icon tròn 36 nền
+  `Core/Background Muted`; tên `Text/Label` (Mobile 15 semibold); mô tả `Text/Supporting` secondary. Chữ dài: tên 2
+  dòng, mô tả 2 dòng; nhiều thẻ cạnh nhau thì màn đặt cùng chiều cao (FILL). Nhãn truy cập = tên + mô tả.
+* **Ảnh đại diện đổi được** — 5.1 web (64) và app (88). `Avatar` thư viện chỉ có Medium 48 / Large 128 nên vòng chữ tắt
+  ghép token (`Core/Background Muted`, `Radius/Full`, chữ `Text/Secondary`); có ảnh thật thì thay fill vòng, ẩn chữ tắt. Nút máy ảnh góc dưới phải: 24 (cỡ 64) / 32 (cỡ 88),
+  viền 2px `Core/Background Surface`, nhãn truy cập "Đổi ảnh đại diện"; Desktop mở chọn tệp, Mobile mở sheet Thư
+  viện ảnh / Chụp ảnh / Tệp. Đang tải lên: lớp phủ `Core/Overlay` + vòng quay, nút Disabled. Lỗi (E-account-access-016,
+  E-common-006) do màn hiện dưới khối, không nằm trong component.
+* **Hàng cài đặt mobile** — các hàng trong thẻ Cài đặt / Bảo mật của 5.1, 5.3 app (Ngôn ngữ, Đổi mật khẩu, Lịch sử
+  hoạt động, Xem hợp đồng). Cao 52, đệm ngang 16, icon 20 `Icon/Primary`, nhãn 15 `Text/Primary` (FILL), giá trị 13
+  `Text/Secondary`, chevron 16. Nhấn: nền `Core/Overlay Pressed`. Đang lưu: giá trị thành "Đang lưu…" + vòng quay,
+  hàng Disabled. Vạch `Border/Default` giữa các hàng, hàng cuối tắt `Có vạch dưới`. Đặt trong thẻ trắng
+  `{rounded.card-mobile}`. Chữ dài: nhãn 2 dòng, giá trị 1 dòng cắt "…". Không dùng cho Đăng xuất (đó là nút).
+* **Ô mã OTP** — 3.4 app: mã 6 số (FR reset-password). 6 ô 48×56, khe 8, căn giữa; số 17 semibold. Focus viền 2px
+  `Core/Accent`; Lỗi viền `Status/Error` + dòng lỗi 13 `Status/Error` dưới hàng ô (E-account-access-011/012); Hết hiệu
+  lực: các ô Disabled. Đang kiểm tra: các ô Disabled, dòng dưới "Đang kiểm tra…" + vòng quay. Dán cả mã vào ô đầu thì
+  tự rải 6 ô. Nhãn truy cập nhóm "Mã xác thực 6 số", từng ô "Số thứ n". Web không dùng (web gửi link).
 
 ## States
 
@@ -1573,7 +1677,7 @@ Icon do feature chọn theo nghĩa trạng thái và ghi trong UC; ví dụ dư�
 Token: `{colors.status-chip-<sắc>-bg|fg}` (CSS `--color-status-chip-<sắc>-bg|fg`; Figma `Status Chip/<Sắc>/Background|Foreground`, có cả mode Dark).
 
 **Chuẩn chung (chốt 12/10/2026):** mọi chip trạng thái (bảng, thẻ, đầu trang chi tiết, panel) là instance
-component `Chip trạng thái` (Figma `5578:109819`): 7 biến thể `Sắc`, thuộc tính `Nhãn`, icon qua thuộc tính
+component `Chip trạng thái` (Figma `5578:109819`): 14 biến thể (Sắc × Cỡ): Web cao 24 chữ 12/600 · Mobile cao 26 chữ 13/600 (`Mobile/Caption Strong`), dùng cho thẻ và màn app (DEC-096), thuộc tính `Nhãn`, icon qua thuộc tính
 `Icon` (đổi icon xong phải gắn lại màu nét icon về `Status Chip/<Sắc>/Foreground`). Hai ngoại lệ đã duyệt, chỉ
 trong Cây quy trình (CMP-09): (1) dải trạng thái rộng hết đầu Panel bước desktop; (2) thẻ Bước mobile 156×56
 dùng **chữ trạng thái** màu `Foreground` thay chip. Sắc **Cam** (`status-chip-orange-*`, có thêm `-border`) chỉ
@@ -1586,7 +1690,7 @@ Mode Dark (duyệt 12/10/2026): nền = màu chữ bản sáng với độ đậ
 | Đang xử lý | Info | info | In Progress |
 | Chờ / cần chú ý / chờ duyệt | Warning | warning | Unfulfilled, In review, Needs attention |
 | Hoàn tất / thành công | Success | positive | Done, Paid |
-| Lỗi / từ chối / hủy / nghiêm trọng | Error | negative | (High priority) |
+| Lỗi / từ chối / huỷ / nghiêm trọng | Error | negative | (High priority) |
 
 * Mức ưu tiên (Low/Medium/High) và phân loại **không** phải trạng thái. Dùng Badge màu categorical (Teal/Yellow/Red) hoặc Token.
 * Trong wireframe B&W: chỉ ghi **nhãn chữ** của trạng thái (ví dụ `[Badge: Chờ duyệt]`), không tô màu.
@@ -1602,7 +1706,7 @@ Anh và kiểu Mỹ, chỉ để tham khảo bố cục. Khi vẽ màn, chữ v�
 * **Viết hoa:** chỉ viết hoa chữ đầu câu và tên riêng ("Tạo yêu cầu", "Lưu thông tin cho lần sau"). Không viết hoa từng chữ, không viết hoa toàn bộ, trừ badge nhấn mạnh.
 * **Nhãn nút** là động từ + đối tượng, ngắn ("Tạo yêu cầu", "Gửi hóa đơn", "Thêm vào giỏ"). Tránh nhãn chung chung như "OK" hay "Xác nhận" khi nói rõ được hành động.
 * **Vị trí nút chính:** trong form đặt **cuối form, căn trái theo cột field**; trên header trang đặt **góc phải**.
-* **Thứ tự nút:** chính trước, phụ sau (từ trái sang): `[Lưu] [Hủy]` (Primary rồi Ghost). Trên header: phụ bên trái, chính ngoài cùng bên phải ("Nhập lại kho" · "Sửa").
+* **Thứ tự nút:** chính trước, phụ sau (từ trái sang): `[Lưu] [Huỷ]` (Primary rồi Ghost). Trên header: phụ bên trái, chính ngoài cùng bên phải ("Nhập lại kho" · "Sửa").
 * **Placeholder** là ví dụ định dạng ("ten@congty.vn", "0901 234 567"), không thay cho nhãn.
 * **Trường bắt buộc:** dấu `*` sau nhãn (FieldLabel Indicator=Required); trường không bắt buộc ghi "(không bắt buộc)".
 * **Giá trị rỗng** trong bảng theo loại trường (`web-common-rules.md` 2.10, chốt 01/10/2026):
@@ -1617,14 +1721,14 @@ Cấu trúc câu cho copy ĐỘNG (đổi theo tình huống, khác nhãn tĩnh 
 đã dùng; các mục đánh dấu *(đã có)* chỉ gom lại từ `components.md` để nằm một chỗ, không đổi nội dung gốc.
 
 * **Tông giọng chung:** ngôi "bạn", câu ngắn, động từ đứng đầu cho hành động, không đùa cợt, không "Vui lòng" rườm rà. Áp dụng cho mọi dòng dưới.
-* **Xác nhận hành động phá hủy** (Dialog — Confirmation): tiêu đề `"<Động từ> <đối tượng>?"` + nội dung nói rõ hậu quả/có hoàn tác được không + nút ghi đúng hành động (Destructive) thay "OK"/"Hủy" chung.
-  Ví dụ: "Xóa yêu cầu #1024? Yêu cầu và lịch sử xử lý sẽ mất, không thể hoàn tác." → `[Xóa yêu cầu] [Hủy]`
+* **Xác nhận hành động phá huỷ** (Dialog — Confirmation): tiêu đề `"<Động từ> <đối tượng>?"` + nội dung nói rõ hậu quả/có hoàn tác được không + nút ghi đúng hành động (Destructive) thay "OK"/"Huỷ" chung.
+  Ví dụ: "Xoá yêu cầu #1024? Yêu cầu và lịch sử xử lý sẽ mất, không thể hoàn tác." → `[Xoá yêu cầu] [Huỷ]`
 * **Xác nhận hành động khác** (Dialog — Confirmation, theo SC-03 `web-common-rules.md`): 4 mẫu cố định,
   ưu tiên dùng tên bản ghi nếu có, không có tên thì dùng mã, không có cả hai thì bỏ qua phần đó.
-  - Thu hồi: "Thu hồi yêu cầu?" · "Bạn đang thu hồi [tên feature] **[tên/mã]**. Yêu cầu sẽ trở về trạng thái Bản nháp." → `[Thu hồi] [Hủy]`
-  - Phê duyệt: "Xác nhận phê duyệt?" · "Bạn đang phê duyệt [tên feature] **[tên/mã]**." → `[Phê duyệt] [Hủy]`
-  - Từ chối: "Từ chối yêu cầu?" · "Bạn đang từ chối [tên feature] **[tên/mã]**." → `[Từ chối] [Hủy]`
-  - Huỷ form (có dữ liệu chưa lưu): "Huỷ bản ghi?" · "Bạn có dữ liệu chưa được lưu. Nếu rời khỏi trang, toàn bộ thông tin sẽ bị mất." → `[Huỷ] [Tiếp tục chỉnh sửa]`
+  - Thu hồi: "Thu hồi yêu cầu?" · "Bạn đang thu hồi [tên feature] **[tên/mã]**. Yêu cầu sẽ trở về trạng thái Bản nháp." → `[Thu hồi] [Huỷ]`
+  - Phê duyệt: "Phê duyệt yêu cầu?" · "Bạn đang phê duyệt [tên feature] **[tên/mã]**." → `[Phê duyệt] [Huỷ]`
+  - Từ chối: "Từ chối yêu cầu?" · "Bạn đang từ chối [tên feature] **[tên/mã]**." → `[Từ chối] [Huỷ]`
+  - Huỷ form (có dữ liệu chưa lưu): "Huỷ thay đổi?" · "Bạn có thay đổi chưa lưu. Nếu rời khỏi trang, toàn bộ thông tin sẽ bị mất." → `[Huỷ] [Tiếp tục chỉnh sửa]`
   - Rời trang khi có dữ liệu chưa lưu (đóng tab, đóng trình duyệt, tải lại — theo 2.13): dùng hộp
     confirm **gốc của trình duyệt**, không vẽ Dialog. Câu: "Bạn có muốn rời trang? Dữ liệu chưa lưu sẽ mất."
     (Trình duyệt có thể thay bằng câu mặc định của nó; không vẽ màn này trong Figma.)
@@ -1636,16 +1740,44 @@ Cấu trúc câu cho copy ĐỘNG (đổi theo tình huống, khác nhãn tĩnh 
   một trường cụ thể nên không báo inline được. Tiêu đề lỗi (màu error) + mô tả chi tiết + nút Đóng,
   thêm nút Thử lại nếu hành động retry được. Không tự đóng; giữ nguyên form sau khi đóng để user
   xem lại và điều chỉnh.
-  Ví dụ: "Nhà cung cấp này đã tồn tại trong hệ thống." · "Lượng đặt mua vượt quá hạn mức hợp đồng." ·
-  "Tên cây dầu đã được sử dụng. Vui lòng chọn tên khác."
+  Ví dụ: "Nhà cung cấp này đã có. Mở nhà cung cấp đó hoặc đổi tên." · "Lượng đặt mua vượt quá hạn mức hợp đồng." ·
+  "Tên cây dầu này đã có. Chọn tên khác."
 * **Trạng thái rỗng** *(đã có khung ở components.md, thêm câu Việt)*: tiêu đề nói rõ cái gì rỗng + vì sao + CTA cụ thể.
   Ví dụ: "Chưa có đơn hàng nào. Tạo đơn đầu tiên để bắt đầu theo dõi." → `[Tạo đơn hàng]`
 * **Banner** *(đã có)* — xem `components.md` § Banner: tiêu đề ngắn, dễ lướt, không kể lể nguyên nhân.
   Ví dụ: "Thanh toán thất bại" (không phải "Đã có sự cố khi xử lý khoản thanh toán gần nhất của bạn").
 * **Toast** *(đã có)* — xem `components.md` § Toast: vài từ xác nhận hành động; thêm `[Hoàn tác]` nếu đảo ngược được.
-  Ví dụ: "Đã lưu thay đổi" · "Đã xóa 3 mục [Hoàn tác]".
+  Ví dụ: "Đã lưu thay đổi" · "Đã xoá 3 mục [Hoàn tác]".
 * **Đang tải/xử lý:** mẫu "Đang <động từ>…", không dùng "Loading...".
   Ví dụ: "Đang tải…" · "Đang lưu…" · "Đang xử lý…".
+
+### Viết như người nói (kiểm trước khi trình màn)
+
+Áp cho mọi chữ người dùng đọc: nhãn, nút, tiêu đề, lời dẫn, lỗi, trạng thái rỗng, toast, hộp xác nhận.
+*Copy động* ở trên là mẫu câu. Mục này là phép thử cho mọi câu, kể cả câu chưa có mẫu.
+
+**Phép thử chung:** đọc to câu đó như đang nói với đồng nghiệp qua điện thoại. Nghe như máy hoặc như
+công văn thì viết lại.
+
+| # | Kiểm | Tránh | Viết |
+| --- | --- | --- | --- |
+| 1 | Gọi đồ vật bằng tên người dùng quen | "bản ghi", "đối tượng", "dữ liệu", "record" | "phiếu xuất kho", "lệnh sửa chữa", "xe" |
+| 2 | Xưng "bạn", câu bắt đầu bằng động từ, không rào đón | "Vui lòng nhập email.", "Bạn có chắc muốn…?", "Lỗi!" | "Nhập email.", "Đăng xuất?" |
+| 3 | Lỗi nói chuyện gì xảy ra và làm gì tiếp | "Đã xảy ra lỗi." | "Chưa lưu được phiếu. Thử lại sau." |
+| 4 | Không mã lỗi, không từ kỹ thuật, không định dạng của dev | "Lỗi 422", "API", "timeout", "null", "dd/mm/yyyy" | "Nhập ngày theo dạng ngày/tháng/năm, ví dụ 03/07/2026." |
+| 5 | Không trộn tiếng Anh khi đã có từ Việt quen | "Reset mật khẩu", "Submit", "Loading…" | "Đặt lại mật khẩu", "Gửi", "Đang tải…" |
+| 6 | Không viết tắt mà người dùng phải đoán | "DS - Quy trình", "SL", "NCC" | "Danh sách quy trình", "Số lượng", "Nhà cung cấp" |
+| 7 | Câu chủ động, nói rõ ai làm | "Yêu cầu đã được phê duyệt bởi An." | "An đã phê duyệt yêu cầu." |
+| 8 | Trạng thái rỗng nói vì sao và làm gì tiếp | "Chưa có hoạt động." | "Chưa có hoạt động. Khi có người cập nhật bước này, lịch sử sẽ hiện ở đây." |
+| 9 | Hỏi lại bằng chính hành động, nút ghi đúng việc | "Xác nhận phê duyệt?" → `[OK]` | "Phê duyệt yêu cầu?" → `[Phê duyệt]` |
+| 10 | Một việc một tên trên mọi màn, chính tả thống nhất | "Hủy"/"Huỷ", "Xóa"/"Xoá" lẫn lộn | Luôn "Huỷ", "Xoá" (dấu đặt kiểu cũ) |
+
+* **Ngoại lệ:** từ ngành mà người dùng tự nói hằng ngày (container, mooc, GPS, OTP) và mã chứng từ
+  (PXK-0410) giữ nguyên. Tên nghiệp vụ lấy theo `docs/_shared/definitions.md`.
+* **Câu lấy từ tài liệu khách hoặc SRS cũ** (vd SRS cũ có "Vui lòng…") thì viết lại theo bảng này,
+  không chép nguyên văn. Nếu câu mới khác nghĩa câu gốc thì ghi câu gốc ở cột Description.
+* **Khi vẽ:** rà mọi chữ trên màn theo 10 điểm trước khi trình. Câu nào chưa chắc thì đưa cả câu gốc
+  lẫn câu đề xuất để user chọn.
 
 ### Nhập liệu và kiểm tra (theo 2.1–2.3, 2.7, 2.15)
 
@@ -1662,7 +1794,7 @@ kỹ thuật → Toast error (xem Copy động).
 | Tiêu đề (Title) | Tối đa **50** ký tự. Vượt → "Tối đa 50 ký tự." |
 | Text ngắn | Tối đa **255** ký tự. Không gõ thêm được; dán vượt thì tự cắt |
 | TextArea | Tối đa **1000** ký tự (hoặc theo UC), đếm ký tự góc dưới phải (`120/1000`); dán vượt thì tự cắt |
-| Ngày sai định dạng | "Hãy nhập ngày tháng theo định dạng: dd/mm/yyyy" |
+| Ngày sai định dạng | "Nhập ngày theo dạng ngày/tháng/năm, ví dụ 03/07/2026." |
 | Email sai định dạng | Phải có `@`. Câu lỗi: "Email không đúng định dạng." |
 | Select | Single: chọn 1. Multi: giá trị hiện dạng tag trong ô. Danh sách từ server: tìm gần đúng khi gõ |
 
@@ -1758,12 +1890,13 @@ chỉnh token. Reviewer không coi chúng là lỗi của màn. Chỉ báo lỗi
 
 * Đề xuất 3 phương án bố cục trước khi vẽ: 1 theo mẫu (S/P/M) có sẵn + 2 độc lập, để user chọn.
 * **Mỗi nhóm hành động chỉ một nút Primary.** Các nút còn lại là Secondary hoặc Ghost.
-* Dùng Destructive (nền error-muted) cho xóa/vô hiệu, và xác nhận bằng Dialog khi không hoàn tác được.
+* Dùng Destructive (nền error-muted) cho xoá/vô hiệu, và xác nhận bằng Dialog khi không hoàn tác được.
 * Dùng token, không mã màu cứng. Hover/pressed dùng overlay, không tự chọn màu đậm hơn.
 * Dùng MD (32px) làm cỡ mặc định. SM chỉ cho toolbar/bảng dày, LG cho màn công khai hoặc cảm ứng.
 * Giới hạn chiều rộng form (khối 800px, nội dung 752px cho 1 cột — xem Grid & Container). Field ngắn ghép 2 cột (Email/Số điện thoại, Tỉnh-Thành/Phường-Xã).
 * Có đủ trạng thái rỗng, đang tải, lỗi cho mọi vùng dữ liệu.
 * Dùng Banner cho thông báo bền, Toast cho phản hồi tạm thời.
+* Rà mọi chữ trên màn theo *Viết như người nói* (Content & Formatting) trước khi trình.
 
 ### Don't
 
@@ -1824,6 +1957,7 @@ khung 1920×1080 theo các mẫu P. Vẫn phải hỏi user khi chọn device th
 ### Touch Targets
 
 Control 28/32/36px, nhỏ hơn 44px. Xem mục Accessibility.
+Mobile: nút 52 (chân màn) / 42 (nhỏ, icon), vùng chạm ≥ 44 (DEC-097).
 
 ### Collapsing Strategy (định hướng, chưa có chuẩn)
 

@@ -33,3 +33,4 @@ docs-input/.staging/
 docs/_shared/dashboard*.html
 .claude/state/dashboard-artifact*.html
 .claude/state/dashboard-audit/
+_workspace/proto-check/

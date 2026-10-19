@@ -1,7 +1,7 @@
 ---
 type: design-architecture
 status: draft
-updated: 2026-10-17
+updated: 2026-10-19
 links:
   - _workspace/decisions.md
   - design/v2/foundations.md
@@ -16,6 +16,7 @@ links:
 > Kết quả vòng 1/6 (kiến trúc), chốt 16/10/2026 trên trang phỏng vấn
 > https://claude.ai/artifact/D5KS1PPdUih9dsajBo48vU. Mỗi mục dẫn mã DEC trong `_workspace/decisions.md`.
 > Vòng 2/6 (nền tảng) chốt 17/10: `design/v2/foundations.md` (luật) + `design/v2/tokens.json` (nguồn máy), DEC-119…139.
+> Vòng 4/6 (L0, L1) chốt luật component 18–19/10: DEC-171…184, tóm tắt ở mục 11.
 > Trong lúc dựng, DS v2 nằm ở `design/v2/`. Skill vẫn đọc bộ cũ `design/design.md` tới khi chuyển hẳn (vòng 6).
 
 ## 1. Phạm vi
@@ -99,9 +100,10 @@ component cha → hạ thành L0 của cha.
 | L2 | L1, L0 của chính nó | Detach, tự vẽ lại thứ L1 đã có |
 | L3 | L2, L1, khung bố cục | L0 trực tiếp, detach, mã màu trần |
 
-**Phần tuỳ biến của L1:** mở bằng Slot của Figma (ô trống có danh sách component được phép, vd ô Leading của
-`Base / List Row` chỉ nhận Avatar, icon tròn, ảnh nhỏ) hoặc bằng thuộc tính. L2 lấp slot bằng nội dung nghiệp vụ.
-Thử Slot trên Sandbox ở vòng 4 trước khi dùng thật.
+**Phần tuỳ biến của L1 (DEC-175):** chỗ nhỏ mở bằng thuộc tính (Text, Boolean, Instance swap); vùng chứa nhiều phần mở
+bằng Slot của Figma (ô trống có danh sách component được phép, vd ô Leading của `Base / List Row` chỉ nhận Avatar, icon
+trong ô 24, vòng icon 36, ảnh nhỏ). L2 lấp slot bằng nội dung nghiệp vụ. Thử Slot trên `Base / List Row` trước, ổn mới
+dùng cho `Base / Card`.
 
 **Bàn giao cho dev theo cấp:**
 
@@ -115,7 +117,7 @@ Thử Slot trên Sandbox ở vòng 4 trước khi dùng thật.
 ## 5. Tên (DEC-113)
 
 - Tên component, tên thuộc tính và giá trị thuộc tính bằng tiếng Anh. Mô tả component, tài liệu và chữ trên màn bằng tiếng Việt.
-- Biến thể theo dạng ảnh tham khảo bước 4: `Type=Primary, Size=MD, State=Hover`. Bộ trục chuẩn và giá trị chuẩn chốt ở vòng 4.
+- Biến thể theo dạng ảnh tham khảo bước 4: `Type=Primary, Size=MD, State=Hover`. Bộ trục chuẩn và giá trị chuẩn: mục 11 (DEC-172).
 - Thuộc tính không phải biến thể (chữ, bật/tắt, đổi icon) đặt tên tiếng Anh, viết hoa chữ đầu (`Label`, `Has Icon`, `Icon`).
 - Tên đối tượng ở L2 lấy từ cột tên tiếng Anh sẽ thêm vào `docs/_shared/object-map.md` (vòng 5).
 - Tên trang và section trên Figma giữ tiếng Việt.
@@ -133,14 +135,15 @@ Thử Slot trên Sandbox ở vòng 4 trước khi dùng thật.
 |---|---|---|---|
 | Primitives | 1 | Giá trị thô: bảng màu, thang số | `neutral/900`, `space/16` (tên theo px, DEC-135) |
 | Semantic | Light, Dark | Nghĩa của giá trị | `color/action/primary`, `color/text/secondary` |
-| Platform | Web, Mobile | Số đo theo nền tảng | `radius/card`, `type/body/size` (cao nút chuyển sang Component ở vòng 4) |
+| Platform | Web, Mobile | Số đo theo nền tảng | `radius/card`, `type/body/size`, `control/height/md` (DEC-173) |
 | Component | 1 | Chỉ cho component nhiều trạng thái (Button, ô nhập, chip…) | `button/bg/primary` |
 
 - Component chỉ gắn token tầng Semantic, Platform hoặc Component. Không gắn thẳng Primitives, không mã màu trần.
 - Tên và giá trị token: `design/v2/foundations.md` (luật dùng) và `design/v2/tokens.json` (nguồn máy; `tokens.css` sinh bằng
   `python3 _scripts/ds-v2-tokens.py`).
 - Tầng Semantic có chế độ Tối ngay từ đầu; giá trị Tối điền và kiểm ở một vòng sau (DEC-116).
-- Màu nhấn than chì (DEC-119, xác nhận DEC-042); màu khách chỉ tô ô logo (DEC-041).
+- Nút chính than chì (DEC-119). Màu khách theo dải riêng của từng khách, kiểu chạm nhẹ, chỉ vào các vai ở
+  `foundations.md` mục 3.5; vòng focus, viền đang gõ giữ than chì (DEC-167…170, thay DEC-041, DEC-042).
 
 ## 8. Golden data set (DEC-117)
 
@@ -164,6 +167,9 @@ Thử Slot trên Sandbox ở vòng 4 trước khi dùng thật.
 - Phiên bản `x.y.z`: z sửa nhìn hoặc lỗi, không đổi thuộc tính · y thêm biến thể hoặc thuộc tính, màn cũ vẫn đúng ·
   x đổi tên hoặc bỏ thuộc tính, màn phải sửa (báo trước, có script đổi).
 - `design.md` của bộ mới chỉ giữ quy tắc chung (nền tảng, bố cục, chữ trên màn, trợ năng). Lịch sử đổi ghi ở `_workspace/changelog.md`.
+- Đợt 1 làm đủ các mục ngay (DEC-183): thuộc tính và token do script sinh từ Figma; khi dùng, nên và không nên do Claude viết,
+  user duyệt, mỗi component 2 cặp nên / không nên có hình; thêm mục **chấm điểm trợ năng** theo benchmark (WCAG 2.2) để
+  thấy chỗ còn cần cải thiện.
 
 ## 10. Ảnh hưởng tới việc đang có
 
@@ -173,10 +179,27 @@ Thử Slot trên Sandbox ở vòng 4 trước khi dùng thật.
 | Đợt thử /figma-proto-check account-access Flow 1–3 | Giữ nguyên sổ đợt thử; quyết cách xử lý ở vòng 4 (user chọn "để sau", 16/10) |
 | BL-161 áp chốt Lab ↔ DS mobile lên bộ cũ | Không làm trên bộ cũ; nội dung DEC-096…099 là đầu vào vòng 2–4 |
 | BL-169 duyệt xoá phần Astryx thừa | Làm ở vòng 6, cùng lúc xoá bộ cũ |
-| BL-175 phần lọc của ô tìm mobile | Chốt khi dựng ô tìm ở vòng 4 |
+| BL-175 phần lọc của ô tìm mobile | Chốt khi dựng ô tìm ở đợt 2 của vòng 4 (DEC-171) |
 | BL-176 đổi 12 màn mobile cross-process-flow | Làm ở vòng 6, khi đổi instance sang bộ mới |
 | Skill dựa trên design system (/figma-screen, /figma-component, /figma-audit, /figma-design-system, /prototype-html, /figma-proto-check, /wireframe-html) và `.claude/rules/design-system.md` | Sửa ở vòng 6 |
 
-## 11. Còn mở
+## 11. Luật component vòng 4 (DEC-165, DEC-171…184)
+
+| Chủ đề | Luật | DEC |
+|---|---|---|
+| Đợt dựng | Đợt 1 theo thứ tự phụ thuộc: `Base / Button` → `Base / Status Chip` → `Base / Text Field` (+ `/ Mobile`) → `Base / List Row` → `Base / Card`, kèm `Base / Avatar`. Đợt 2: ô tìm và phần lọc, tab, dialog, bottom sheet, bảng, menu | DEC-171 |
+| Trục biến thể | `Type · Size · State`; State = Default · Hover (chỉ web) · Pressed · Focus · Disabled; thêm Loading, Error, Read Only, Selected khi component có; Tone cho chip; chữ, icon, bật tắt là thuộc tính | DEC-172 |
+| Cao control | `control/height/sm · md · lg`: web 28 · 32 · 40, app 36 · 42 · 52 | DEC-173 |
+| Màu trạng thái | Token riêng tầng Component cho từng trạng thái; Disabled một kiểu xám, không làm mờ | DEC-174 |
+| Nút | 5 kiểu Primary · Secondary · Ghost · Danger (nền đỏ nhạt, chữ đỏ) · Outline; một nút chính mỗi vùng; thứ tự DEC-088; nút icon là `Type=Icon Only` của `Base / Button`; đang tải: vòng quay + nhãn; không khoá nút gửi form | DEC-176, DEC-177 |
+| Ô nhập | Hai component: web nhãn trên ô, app nhãn trong ô; gợi ý và lỗi dưới ô; viền `color/border/input`; nhìn theo cột "Bản chốt" Figma 6234:13999 | DEC-178, DEC-179, DEC-184 |
+| Chip trạng thái | Trạng thái chính nền nhạt + icon (mỗi bản ghi một chip); trạng thái phụ, chỗ dày dùng chấm | DEC-180 |
+| Thẻ | `Base / Card` có phần lắp sẵn `.card / Header · Row · Related · Footer`; State có Selected; 9 loại thẻ cũ thành L2 | DEC-181 |
+| Thẻ chọn | Đang chọn: viền 1px, radio tô kín, vòng icon nền xám như lúc chưa chọn; web giữ cấu tạo Astryx, màu theo token; nhìn theo cột "Bản chốt" Figma 6234:13999 | DEC-184 |
+| Dòng danh sách | `Base / List Row` chung web và app; đầu và cuối dòng là Slot; cao theo nội dung, tối thiểu 52 app, 36 web | DEC-182 |
+| Lồng góc, lề đều | Khung lớn tách xa (bo ≤ lề), khung ôm đồng tâm; máy đo kiểm trước khi trình | DEC-165 |
+| Tài liệu | Đủ mục DEC-118 từ đợt 1, có mục chấm điểm trợ năng | DEC-183 |
+
+## 12. Còn mở
 
 - Gói Figma của team có quyền publish thư viện không (DEC-110).
