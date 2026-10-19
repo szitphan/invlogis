@@ -1,5 +1,5 @@
 /* DS v2 tokens — FILE SINH RA từ design/v2/tokens.json bằng _scripts/ds-v2-tokens.py. KHÔNG sửa tay. */
-/* version 0.3.0 · 2026-10-19 */
+/* version 0.4.0 · 2026-10-19 */
 
 :root {
   /* Fonts (DEC-121) */
@@ -251,10 +251,27 @@
   --layout-card-padding: var(--space-16);
   --layout-list-gap: var(--space-8);
   --layout-section-gap: var(--space-32);
+  --layout-title-gap: var(--space-16);
+  --form-field-gap: var(--space-16);
   --touch-min: 24px;
   --control-height-sm: 28px;
   --control-height-md: 32px;
   --control-height-lg: 40px;
+  --control-padding-x-sm: var(--space-8);
+  --control-padding-x-md: var(--space-12);
+  --control-padding-x-lg: var(--space-16);
+  --control-padding-x-icon-sm: var(--space-6);
+  --control-padding-x-icon-md: var(--space-8);
+  --control-padding-x-icon-lg: var(--space-12);
+  --control-icon-gap: var(--space-6);
+  --tab-padding-x: var(--space-8);
+  --tab-padding-x-icon: var(--space-6);
+  --tab-gap: var(--space-8);
+  --nav-height: 64px;
+  --nav-offset-bottom: var(--space-8);
+  --nav-padding-x: var(--space-4);
+  --nav-item-padding-y: var(--space-4);
+  --nav-scan-size: 56px;
   --focus-width: 2px;
   --focus-offset: 2px;
   --type-display-size: 32px;
@@ -305,10 +322,27 @@
   --layout-card-padding: var(--space-16);
   --layout-list-gap: var(--space-12);
   --layout-section-gap: var(--space-24);
+  --layout-title-gap: var(--space-16);
+  --form-field-gap: var(--space-12);
   --touch-min: 44px;
   --control-height-sm: 36px;
   --control-height-md: 42px;
   --control-height-lg: 52px;
+  --control-padding-x-sm: var(--space-12);
+  --control-padding-x-md: var(--space-16);
+  --control-padding-x-lg: var(--space-24);
+  --control-padding-x-icon-sm: var(--space-8);
+  --control-padding-x-icon-md: var(--space-12);
+  --control-padding-x-icon-lg: var(--space-20);
+  --control-icon-gap: var(--space-8);
+  --tab-padding-x: var(--space-16);
+  --tab-padding-x-icon: var(--space-12);
+  --tab-gap: var(--space-8);
+  --nav-height: 64px;
+  --nav-offset-bottom: var(--space-8);
+  --nav-padding-x: var(--space-4);
+  --nav-item-padding-y: var(--space-4);
+  --nav-scan-size: 56px;
   --focus-width: 2px;
   --focus-offset: 2px;
   --type-display-size: 34px;

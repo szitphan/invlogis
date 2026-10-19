@@ -13,7 +13,7 @@ links:
 
 > Kết quả vòng 2/6, chốt 16–17/10/2026 trên trang phỏng vấn https://claude.ai/artifact/D5KS1PPdUih9dsajBo48vU
 > (DEC-119…139); bổ sung 19/10 từ phần khoảng cách, màu theo khách và vòng 4 (DEC-164…170, DEC-173, DEC-176,
-> DEC-179). File này là **luật dùng**. Giá trị máy đọc nằm ở `design/v2/tokens.json`; `tokens.css` sinh ra từ
+> DEC-179, DEC-192…194). File này là **luật dùng**. Giá trị máy đọc nằm ở `design/v2/tokens.json`; `tokens.css` sinh ra từ
 > json bằng `python3 _scripts/ds-v2-tokens.py`. Bảng trong file này lệch json thì **json thắng**.
 > Trên Figma: trang `🎨 DS · Foundations` (collection Primitives, Semantic, Platform; text style `type/*`; effect style `elev/*`).
 
@@ -261,7 +261,7 @@ trên Figma hay không thì chưa chốt (mục 13).
 5. Máy đo: mỗi khối có hình nằm gần góc khung đạt khi lề ≥ R, hoặc hai lề của góc chênh ≤ 1 và R = r + lề ± 1.
    Mẫu và ma trận 15 trường hợp: Figma section Câu 12b (6246:14279).
 
-## 6. Khoảng cách (DEC-135, DEC-164, DEC-166, DEC-173)
+## 6. Khoảng cách (DEC-135, DEC-164, DEC-166, DEC-173, DEC-192, DEC-194)
 
 - Bảng gốc thang 4, 13 bậc, tên theo px: `space/0 · 2 · 4 · 6 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64`.
 - Lề trong component: `space/inset-xs · sm · md · lg · xl` = 4 · 8 · 12 · 16 · 24.
@@ -273,27 +273,62 @@ trên Figma hay không thì chưa chốt (mục 13).
 | `layout/card-padding` | 16 | 16 | Lề chứa: lề trong thẻ, nhóm có viền, dòng trong nhóm (app 14 → 16, DEC-164) |
 | `layout/list-gap` | 8 | 12 | Giữa các thẻ, dòng trong danh sách |
 | `layout/section-gap` | 32 | 24 | Giữa các khối lớn |
+| `layout/title-gap` | 16 | 16 | Tiêu đề màn → nội dung |
+| `form/field-gap` | 16 | 12 | Giữa 2 ô nhập trong một nhóm |
 | `touch/min` | 24 | 44 | Vùng chạm tối thiểu (web: WCAG 2.2 AA 24; app: DEC-138) |
 | `focus/width` | 2 | 2 | Độ dày vòng focus |
 | `focus/offset` | 2 | 2 | Khoảng cách vòng focus tới mép control |
 | `control/height/sm · md · lg` | 28 · 32 · 40 | 36 · 42 · 52 | Cao nút, ô nhập, ô chọn; cùng cỡ thì cùng cao (DEC-173) |
+| `control/padding-x/sm · md · lg` | 8 · 12 · 16 | 12 · 16 · 24 | Lề trái phải trong nút theo cỡ (nút app 52 lề 24, DEC-163) |
+| `control/padding-x-icon/sm · md · lg` | 6 · 8 · 12 | 8 · 12 · 20 | Lề phía có icon trong nút: lùi một bậc thang |
+| `control/icon-gap` | 6 | 8 | Icon → chữ trong nút, tab chip (DEC-161) |
+| `tab/padding-x` | 8 | 16 | Lề trái phải trong tab: web tab gạch, app tab chip |
+| `tab/padding-x-icon` | 6 | 12 | Lề phía có icon trong tab: lùi một bậc thang |
+| `tab/gap` | 8 | 8 | Giữa 2 tab |
+| `nav/height` | — (chỉ app) | 64 | Cao thanh điều hướng nổi (DEC-160) |
+| `nav/offset-bottom` | — (chỉ app) | 8 | Thanh điều hướng → vùng an toàn đáy màn |
+| `nav/padding-x` | — (chỉ app) | 4 | Lề trong thanh điều hướng |
+| `nav/item-padding-y` | — (chỉ app) | 4 | Lề trên dưới mục, nên nền mục đang chọn cao 56 |
+| `nav/scan-size` | — (chỉ app) | 56 | Nút Quét mã giữa thanh |
 
 - Mọi số trên thang 4; DEC-164 bỏ ngoại lệ lề thẻ app 14. Không thêm số lẻ ngoài thang.
 - **Ô đầu dòng (DEC-164, app):** ô 24 cho icon 16 và 20, radio, ô chọn, cách chữ 8; ô 36 cho vòng icon, avatar, cách chữ 12.
-  Icon luôn đặt giữa ô, không đặt trần. Token `layout/lead-slot` thêm vào `tokens.json` khi dựng Base / List Row.
+  Icon đầu dòng luôn đặt giữa ô, không đặt trần. Trừ icon đầu khối phụ, khối tóm tắt (DEC-194, gạch "Khối phụ" dưới)
+  và icon cuối dòng (mục 7, DEC-193). Token `layout/lead-slot` thêm vào `tokens.json` khi dựng Base / List Row.
 - **Form (DEC-166):** đặt trên nền trang (nhóm bằng tiêu đề nhóm, web cách nhau 32) hoặc mỗi nhóm một thẻ (web lề 24
   = `space/inset-xl`, app theo `layout/card-padding`); người vẽ chọn theo màn.
-- 9 mục khoảng cách chi tiết đề xuất 18/10 (lề nút theo cỡ, tab web, giữa ô nhập…) chưa chốt; chờ demo lại theo DEC-164
-  (mục 13).
+- **Tiêu đề (DEC-192):** tiêu đề màn → nội dung `layout/title-gap`; tiêu đề khối → nội dung khối 12 (`space/gap-md`).
+  Tiêu đề khối đặt trong thẻ, nhóm, không đặt ngoài.
+- **Form (DEC-184, DEC-192):** giữa 2 ô `form/field-gap`; ô → dòng gợi ý 4 (`space/gap-xs`); tiêu đề nhóm → ô 12; giữa 2
+  nhóm ô `layout/section-gap`; form web 2 cột cách 24 (`space/gap-xl`). Chữ gợi ý, chữ lỗi dưới ô: app lùi 16 thẳng chữ
+  trong ô (K2 32), web canh mép ô.
+- **Nút (DEC-162, DEC-163, DEC-192):** lề `control/padding-x/*` theo cỡ, phía có icon `control/padding-x-icon/*`, icon →
+  chữ `control/icon-gap`. Hai nút cạnh nhau trên app cách 12 (`space/gap-md`).
+- **Tab (DEC-161, DEC-164, DEC-192):** tab chip app cao 36 (`control/height/sm`): lề `tab/padding-x`, phía icon
+  `tab/padding-x-icon`, icon → nhãn `control/icon-gap`, nhãn → số đếm 6 (`space/6`), các tab cách `tab/gap`. Tab gạch web
+  cao 40 (`control/height/lg`), chữ canh giữa, gạch 2 phủ hết bề ngang tab.
+- **Ô có icon (DEC-164, DEC-192, DEC-193):** web phía icon 12 → 8 (icon đầu, icon cuối), icon 14 cách chữ 8. App icon đầu
+  không lùi: lề 16 → ô 24 → chữ K3 64. Icon cuối ô theo đường K bên phải (mục 7).
+- **Khối phụ trong thẻ, khối tóm tắt trong sheet (DEC-194):** nền `color/bg/muted`, bo `radius/inner`, lề
+  `layout/card-padding` 16 đều 4 phía. Khối phụ trong thẻ (đặt ở K2 32) có mép nội dung trái **K2b 48**, phải 345; khối tóm
+  tắt trong sheet (đặt ở K1 16) có mép nội dung K2 32. Không icon: chữ ở mép nội dung. Có icon: khung icon 16 chạm mép nội
+  dung, không đặt trong ô 24; chữ cách icon 16 (khối phụ: chữ K4 80; khối tóm tắt: chữ K3 64). Lề nhìn thấy từ mép nền tới
+  icon bằng lề 16.
+- **Thanh điều hướng app (DEC-160):** thanh nổi rộng 361 (393 − 2 × 16), cao `nav/height`, bo 28, cách vùng an toàn
+  `nav/offset-bottom`, lề trong `nav/padding-x`; mục lề trên dưới `nav/item-padding-y` nên nền mục đang chọn cao 56, bo
+  24 = 28 − 4 (đồng tâm, DEC-165); icon 24; nút Quét mã `nav/scan-size`.
 
-## 7. Lưới, đường canh, breakpoint (DEC-136, DEC-038, DEC-039)
+## 7. Lưới, đường canh, breakpoint (DEC-136, DEC-164, DEC-193, DEC-194, DEC-038, DEC-039)
 
-- **App 393 (DEC-164):** lề màn 16; bốn đường canh: **K1 16** mép nội dung màn · **K2 32** mép chữ trong thẻ, nhóm, ô nhập,
-  tab đầu (16 + lề chứa 16) · **K3 64** mép chữ sau ô đầu dòng 24 (icon, radio) · **K4 80** mép chữ sau ô 36 (vòng icon,
-  avatar). Mọi chữ dòng thẻ và dòng danh sách có icon đứng ở K3; icon 20 luôn nằm trong ô 24 nên không còn chữ ở 58.
+- **App 393 (DEC-164):** lề màn 16; năm đường canh: **K1 16** mép nội dung màn · **K2 32** mép chữ trong thẻ, nhóm, ô nhập,
+  tab đầu (16 + lề chứa 16) · **K2b 48** mép nội dung khối phụ trong thẻ và ô nhập đặt trong thẻ (32 + lề 16, DEC-194) ·
+  **K3 64** mép chữ sau ô đầu dòng 24 (icon, radio) · **K4 80** mép chữ sau ô 36 (vòng icon, avatar) và chữ khối phụ có icon. Mọi chữ dòng thẻ và dòng danh sách có icon đứng ở K3; icon 20 luôn nằm trong ô 24 nên không còn chữ ở 58.
   Mọi khối canh theo một trong bốn đường. Đường K đo từ mép ngoài khung; viền 1px của thẻ nằm trong khung, không cộng
-  vào lề (Figma stroke Inside; CSS `box-shadow: inset 0 0 0 1px` hoặc trừ 1px khỏi lề). Đường K bên phải (mép phải của mũi tên, giá trị, chip, công tắc cuối dòng)
-  đang dựng demo (mục 13).
+  vào lề (Figma stroke Inside; CSS `box-shadow: inset 0 0 0 1px` hoặc trừ 1px khỏi lề).
+- **Đường K bên phải (DEC-193):** soi gương bên trái: **K1 phải 377** (393 − 16) mép thẻ, nhóm · **K2 phải 361**
+  (377 − lề chứa 16) mép nội dung. Phần cuối dòng (giá trị, chip, công tắc, nút) chạm K2 phải. Icon cuối dòng và icon
+  cuối ô nhập (mũi tên, lịch, mũi tên xuống): khung icon 16 chạm K2 phải, không đặt trong ô 24 như đầu dòng; giá trị,
+  chip → khung icon 8. Mẫu: Figma Câu 8d (6288:14692).
 - **Web:** 12 cột, rãnh 24, lề màn 24. Màn chi tiết chia **8 cột nội dung + 4 cột thông tin** như Jira (DEC-127).
 - **Breakpoint:** 640 · 768 · 1024 · 1280 · 1536 (trùng Tailwind). Từ 768 tới 1279 menu trái thu còn 64 (cột icon),
   bấm thì bung 240 đè lên nội dung.
@@ -355,6 +390,4 @@ và mục menu đang chọn (web) giữ icon viền; 7 icon nghiệp vụ tự v
 - Có bật Corner smoothing (góc liền mạch kiểu iOS) cho thẻ, sheet trên app không.
 - Quyền publish thư viện của gói Figma (DEC-110).
 - Việc còn mở của icon: `design/v2/icons.md` mục 10.
-- Đường K bên phải cho phần cuối dòng (ghi chú của DEC-164): dựng demo rồi chốt.
-- 9 mục khoảng cách chi tiết (2c câu 1 chọn "cần xem thêm trên Figma"): demo lại theo lề chứa 16 và hai cỡ ô.
 - Collection `Brand` (8 dải × 11 bậc) trong `tokens.json`, biến Figma và cách gắn theo khách (mục 3.5).
