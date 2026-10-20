@@ -49,7 +49,7 @@ Vấn đề b, c, d (giao việc qua Zalo, quá mốc bị phạt, chứng từ 
 - Ranh giới với 2 feature cùng chuỗi:
   - Điều phối (`shipment-coordination`): nhận JobID "Chờ xử lý", kê khai, giao việc hiện trường, sinh YCVT. Màn Chi tiết JobID dùng chung cho cả 3 feature, thuộc feature này; Điều phối, Điều vận thêm phần kê khai, YCVT/Lệnh lên màn đó.
   - Điều vận (`transport-dispatch`): từ YCVT lập, chạy, chốt và duyệt Lệnh. Lệnh duyệt xong thì chi phí chuyển về JobID.
-- Không gồm (feature riêng, chỉ đảm bảo dữ liệu đủ và đúng JobID): màn bảng kê, công nợ (`debt-management`: duyệt doanh thu, mua ngoài, nợ phải thu, phải trả, đối soát hoá đơn đầu vào, lệch kỳ báo cáo và kỳ thanh toán), kết nối MISA (ngoài phần lấy hoá đơn điện tử); "Thanh toán trả hộ" (duyệt hạn mức, QR, UNC, API ngân hàng); phạm vi xem dữ liệu chi nhánh khác (feature Phân quyền); shipment list và dashboard tổng mọi chi nhánh (màn riêng); danh mục địa điểm (`master-data`); JobID kế toán (`cost-catalog`), JobID xưởng (phân hệ xưởng); cho thuê kho làm trên phần mềm quản lý kho riêng nối với hệ thống, giai đoạn 2. Cước quốc tế (đường biển, hàng không) và cho thuê kho có trong phạm vi phân hệ nhưng chưa có loại JobID (OQ-70).
+- Không gồm (feature riêng, chỉ đảm bảo dữ liệu đủ và đúng JobID): màn bảng kê, công nợ (`debt-management`: duyệt doanh thu, mua ngoài, nợ phải thu, phải trả, đối soát hoá đơn đầu vào, lệch kỳ báo cáo và kỳ thanh toán), kết nối MISA (ngoài phần lấy hoá đơn điện tử); quỹ, tạm ứng, thanh toán (`fund-payments`); thanh toán trả hộ qua ngân hàng — duyệt, QR, uỷ nhiệm chi, API ngân hàng (`payment-on-behalf`); phạm vi xem dữ liệu chi nhánh khác (feature Phân quyền); shipment list và dashboard tổng mọi chi nhánh (màn riêng); danh mục địa điểm (`master-data`); JobID kế toán (`cost-catalog`), JobID xưởng (phân hệ xưởng); cho thuê kho làm trên phần mềm quản lý kho riêng nối với hệ thống, giai đoạn 2. Cước quốc tế (đường biển, hàng không) và cho thuê kho có trong phạm vi phân hệ nhưng chưa có loại JobID (OQ-70).
 - Xử lý ngoài phần mềm: thoả thuận với khách về khoản chi ngoài định mức.
 - Ứng dụng: Delta Super App, web cho CS, kế toán, cán bộ quản lý.
 
@@ -89,12 +89,14 @@ Mọi vai trò có màn "Việc của tôi" kèm thông báo đẩy mở thẳng
 
 ### P0 — must have
 
+Mục nào không ghi ở P1, P2 dưới đây là P0 (DEC-229). DP-01 ở P0 do người tạo duyệt tay, đúng SOP tổng quát mục 4.2.3 cho giai đoạn trước khi xong giai đoạn 1.
+
 **Luồng lõi:** tạo, duyệt JobID → phân sang Điều phối, Điều vận hoặc thẳng sang ghi doanh thu → (Điều phối, Điều vận làm việc, ghi chi phí lên Lệnh và JobID) → ghi doanh thu → hoàn thành dịch vụ (Mục 5).
 
 **Nhóm A — giảm nhập liệu**
 - A9 [SOP+] [Lõi] Hoá đơn điện tử lấy qua kết nối nhà cung cấp hoá đơn điện tử (kết nối đầu tiên: MISA); không khớp thì chụp + nhập tay, gắn cờ "Chưa khớp hoá đơn điện tử".
 - A10 [SOP+] [Lõi] Tờ khai hải quan do chính doanh nghiệp khai qua phần mềm khai hải quan có kết nối (Ecus là bên đầu tiên, Nhóm H): sau khi khai chính thức, số tờ khai, ngày tờ khai, phân luồng, mã vạch lô hàng hoặc container và chứng từ đã đính kèm tờ khai tự bổ sung vào bộ chứng từ của JobID; CS không phải quét QR hay tải lại. Tờ khai khách tự khai thì vẫn quét QR (`shipment-coordination` A2). Nguồn: Kết nối API với Ecus (26/10/2025), mục 3.1.
-- A11 [SOP to-be] [Lõi] [Cấu hình] JobID nháp từ chứng từ đọc tự động: phần mềm nhận chứng từ khách qua các kênh `P-kenh-nhan-chung-tu` (Delta: Zalo OA, Telegram, WeChat, Gmail, tải lên app hoặc web), đọc mỗi chứng từ một lần rồi tạo JobID ở trạng thái Nháp, điền sẵn phần lớn trường; tự gán mã khách theo người gửi và số báo giá hoặc hợp đồng còn hiệu lực; kiểm số container theo ISO 6346. Dữ liệu đọc ra bị từ chối nếu sai kiểu, số âm, ngày sai định dạng, hoặc thiếu mã số thuế, số hoá đơn, tổng tiền; mã số thuế phải đủ 10 hoặc 13 số; tiền trước thuế cộng VAT phải bằng tổng (Phần mềm Delta 3.0, 16/10/2026, mục 2.2.1). CS hoặc điều vận kiểm, sửa rồi chuyển duyệt; chỗ người sửa so với bản đọc được lưu lại. Chứng từ không nhận ra khách thì vào hàng đợi tra soát thủ công, không tạo JobID. App chặn ảnh mờ (khoá nút "Gửi", bắt chụp lại). Vẫn có luồng tạo JobID thủ công khi đọc lỗi hoặc loại JobID không có chứng từ định danh. Cùng lần đọc này ra shipment list (`shipment-coordination`) và dữ liệu hoá đơn đầu vào (`debt-management`). Nguồn: Phân hệ APAS (17/10/2026), mục 2.2–2.2.4.
+- A11 [SOP to-be] [Lõi] [Cấu hình] JobID nháp từ chứng từ đọc tự động: phần mềm nhận chứng từ khách qua các kênh `P-kenh-nhan-chung-tu` (Delta: Zalo OA, Telegram, WeChat, Gmail, tải lên app hoặc web), đọc mỗi chứng từ một lần rồi tạo JobID ở trạng thái Nháp, điền sẵn phần lớn trường; tự gán mã khách theo người gửi và số báo giá hoặc hợp đồng còn hiệu lực; kiểm số container theo ISO 6346. Dữ liệu đọc ra bị từ chối nếu sai kiểu, số âm, ngày sai định dạng, hoặc thiếu mã số thuế, số hoá đơn, tổng tiền; mã số thuế phải đủ 10 hoặc 13 số; tiền trước thuế cộng VAT phải bằng tổng (Phần mềm Delta 3.0, 16/10/2026, mục 2.2.1). CS hoặc điều vận kiểm, sửa rồi chuyển duyệt; chỗ người sửa so với bản đọc được lưu lại. Chứng từ không nhận ra khách thì vào hàng đợi tra soát thủ công, không tạo JobID. App chặn ảnh mờ (khoá nút "Gửi", bắt chụp lại). Vẫn có luồng tạo JobID thủ công khi đọc lỗi hoặc loại JobID không có chứng từ định danh. Phần đọc chứng từ (DIS) là một khối riêng dùng chung; tạo JobID nháp là một ứng dụng của nó, cùng lần đọc ra shipment list (`shipment-coordination`) và dữ liệu hoá đơn đầu vào (`debt-management`) (DEC-230). Nguồn: Phân hệ APAS (17/10/2026), mục 2.2–2.2.4.
 
 **Nhóm B — quy trình**
 - B7 [SOP+] [Gói: Đa chi nhánh] [Cấu hình] Giao dịch nội bộ theo 2 trường hợp trong SOP: tạo JobID trái tuyến (TH1) hoặc giao việc trái tuyến (TH2, phát sinh ở bước giao việc của Điều phối). Chi nhánh làm toàn bộ dịch vụ cho JobID do chi nhánh khác tạo thì phải tự tạo JobID (thành TH1). Phần mềm lấy 2 dấu hiệu này để tự ghi nhận giao dịch nội bộ và tự hạch toán. Lợi nhuận chia theo `P-ty-le-chia-lai-noi-bo` (Delta: 50/50 lãi gộp, chỉ hạch toán sau khi đã chốt bảng kê công nợ phải thu, phải trả).
@@ -103,7 +105,7 @@ Mọi vai trò có màn "Việc của tôi" kèm thông báo đẩy mở thẳng
 - B10 [SOP to-be] [Lõi] Trường thêm ở bước tạo và duyệt JobID: số báo giá hoặc hợp đồng cung cấp dịch vụ; số container thực nhận khi chỉ làm một phần số container trên Booking Note hoặc vận đơn (hàng xuất, nhập nguyên container: mỗi container một YCVT); thoả thuận khác và yêu cầu đặc biệt của khách, hiện cho nhân viên nghiệp vụ và lái xe.
 - B11 [SOP to-be] [Lõi] Xác nhận thông tin viết hoá đơn trả hộ khi tạo JobID: phần mềm hiện thông tin viết hoá đơn ghi trên mã khách, CS xác nhận. Lô hàng cần thông tin khác mã khách (khách lẻ của 3PL chưa có mã khách riêng) thì CS nhập thông tin cho lô, cán bộ quản lý duyệt. Thông tin đi theo JobID sang YCVT và Lệnh.
 - B12 [SOP to-be] [Lõi] JobID không có vận tải (chỉ thủ tục hải quan, chuyên ngành, giá trị gia tăng) không vào Điều phối, Điều vận: ghi chi phí mua ngoài nếu có, rồi ghi doanh thu và hoàn thành dịch vụ.
-- B13 [SOP to-be] [Lõi] [Cấu hình] Gia hạn nợ quá hạn: khách có nợ quá hạn mà vẫn cần làm hàng thì CS hoặc Sales tạo yêu cầu gia hạn nợ, chọn hoá đơn hoặc bảng kê quá hạn, chuyển duyệt theo `P-cap-duyet-gia-han-no` (Delta: cán bộ quản lý rồi Ban giám đốc). Gia hạn được duyệt thì JobID đang dừng vì nợ quá hạn được duyệt lại. Số ngày gia hạn tối đa `P-so-ngay-gia-han-no-toi-da` (Delta: chưa chốt, OQ-67) (DEC-227).
+- B13 [SOP to-be] [Lõi] Gia hạn nợ quá hạn: khách có nợ quá hạn mà vẫn cần làm hàng thì JobID được duyệt khi có gia hạn nợ đã duyệt (DEC-227). Luồng tạo, duyệt yêu cầu gia hạn (`P-cap-duyet-gia-han-no`, `P-so-ngay-gia-han-no-toi-da`) và cách tính hạn mức thuộc `debt-management`; feature này chỉ dùng kết quả ở DP-01 (DEC-230).
 
 - B14 [SOP to-be] [Lõi] JobID không doanh thu: JobID tạo để làm việc không thu tiền (làm từ thiện, hỗ trợ khách hàng, đối tác, chạy bù chuyến xe tuyến bị hỏng). Khách trên JobID là chính doanh nghiệp hoặc chi nhánh; toàn bộ chi phí ghi vào chi phí quản lý; có báo cáo định kỳ tháng, quý, năm các chi phí này. Nguồn: Quy trình quản lý quỹ và thanh toán, Đính kèm 05 mục 2.1.3.
 **Nhóm D — từ SOP Giao nhận hàng hoá**
@@ -113,19 +115,19 @@ Mọi vai trò có màn "Việc của tôi" kèm thông báo đẩy mở thẳng
 
 **Nhóm E — chi phí, doanh thu (vấn đề e)**
 - E1 [SOP to-be] [Riêng Delta] Chi ngoài định mức: không làm luồng xin duyệt riêng trên app. Thoả thuận với khách giải quyết ngoài phần mềm; khoản chi ghi nhận và chi trả qua Quy trình cung cấp dịch vụ (chi phí mua ngoài) hoặc thanh toán không hoá đơn (Quy trình quản lý quỹ và thanh toán).
-- E2 [SOP to-be] [Lõi] [Cấu hình] Cách trả chi phí mặc định: nhân viên quét QR hoặc nhập tài khoản đối tác, trả từ tài khoản công ty qua ngân hàng; khoản chi ghi vào dư nợ tạm ứng của nhân viên và tự giảm khi hoá đơn về khớp giao dịch. Trả bằng tiền cá nhân là ngoại lệ, chỉ dưới `P-nguong-tam-ung` (Delta: 5.000.000 ₫, hạn mức chi tiền mặt theo quy định thuế); hoá đơn đó đi luồng thanh toán hoá đơn không có mã giao dịch ngân hàng, duyệt ở `debt-management`. Bắt chọn có/không hoá đơn. Nguồn: Phân hệ APAS (17/10/2026), mục 3.3; Quy trình cung cấp dịch vụ tổng quát, mục 4.6 điều kiện 5. Nghĩa của "Dư nợ tạm ứng 2": OQ-68.
-- E6 [SOP to-be] [Lõi] Nút tạo Yêu cầu thanh toán trên Lệnh/JobID, gắn chi phí đúng Lệnh/JobID; việc "Thu hoá đơn GTGT" giao người gần lái xe nhất; hiện trạng thái thanh toán. Màn Yêu cầu thanh toán của lái xe vẽ ở Điều vận (`payment-request`). Phần duyệt, QR, UNC, API ngân hàng thuộc feature "Thanh toán trả hộ".
+- E2 [SOP to-be] [Lõi] [Cấu hình] Cách trả chi phí mặc định: nhân viên quét QR hoặc nhập tài khoản đối tác, trả từ tài khoản công ty qua ngân hàng; khoản chi ghi vào dư nợ tạm ứng của nhân viên và tự giảm khi hoá đơn về khớp giao dịch. Trả bằng tiền cá nhân là ngoại lệ, chỉ dưới `P-nguong-tam-ung` (Delta: 5.000.000 ₫, hạn mức chi tiền mặt theo quy định thuế); hoá đơn đó đi luồng thanh toán hoá đơn không có mã giao dịch ngân hàng, duyệt ở `debt-management`. Quy trình trả, dư nợ tạm ứng, duyệt chi thuộc `fund-payments` và `payment-on-behalf`; feature này giữ quy tắc khoản chi gắn đúng JobID (DEC-230). Bắt chọn có/không hoá đơn. Nguồn: Phân hệ APAS (17/10/2026), mục 3.3; Quy trình cung cấp dịch vụ tổng quát, mục 4.6 điều kiện 5. Nghĩa của "Dư nợ tạm ứng 2": OQ-68.
+- E6 [SOP to-be] [Lõi] Nút tạo Yêu cầu thanh toán trên Lệnh/JobID, gắn chi phí đúng Lệnh/JobID; việc "Thu hoá đơn GTGT" giao người gần lái xe nhất; hiện trạng thái thanh toán. Màn Yêu cầu thanh toán của lái xe vẽ ở Điều vận (`payment-request`). Phần duyệt, QR, uỷ nhiệm chi, API ngân hàng thuộc `payment-on-behalf`.
 - E9 [SOP+] [Lõi] Hoá đơn trả hộ ghi trên JobID. Khi lập bảng kê nợ phải thu, phần mềm đánh dấu hoá đơn trả hộ mà khách không xác nhận thanh toán. Cách xử lý tiếp chờ khách trả lời (OQ-6).
 - E12 [SOP to-be] [Lõi] Kê khai nhu cầu mua ngoài ngay khi tạo JobID, theo cùng danh sách phạm vi (B9). Ghi chi phí mua ngoài lên JobID 3 bước: tạo bản ghi, kê loại dịch vụ mua ngoài (theo danh mục), nhà cung cấp, đơn giá, tổng chi phí, cách thanh toán (bảng kê chi phí trả hộ tách riêng), chuyển duyệt. Duyệt và thanh toán nhà cung cấp thuộc `debt-management`.
 - E13 [SOP to-be] [Lõi] JobID không có thủ tục hải quan trong phạm vi thì chặn ngay lúc kê: không tạo được mua ngoài dịch vụ hải quan, không thanh toán được chi phí định mức hải quan. Câu báo: "JobID này không có thủ tục hải quan trong phạm vi. Đổi phạm vi trước nếu cần."
 - E14 [SOP to-be] [Lõi] Chi phí định mức hải quan (tiền mở tờ khai, kiểm hoá, thanh lý tờ khai): phần mềm tự áp theo định mức của địa điểm làm thủ tục, nhân viên không tự gõ số tiền. Định mức từng địa điểm là dữ liệu của khách, sống trong danh mục địa điểm (`master-data`). Khi CS, nhân viên hiện trường thanh toán khoản không hoá đơn, phần mềm tự sinh Quyết định phân công công việc kèm bảng kê; Quyết định giao Lệnh hằng tháng cho lái xe ở `transport-dispatch`.
-- E15 [SOP to-be] [Lõi] Chi phí từ hoá đơn chưa gắn được khoản chi (hoá đơn vô chủ) lên JobID sau khi duyệt xong. Quy trình duyệt ở `debt-management`.
+- E15 [SOP to-be] [Lõi] Chi phí từ hoá đơn chưa gắn được khoản chi (hoá đơn vô chủ) lên JobID sau khi duyệt xong. Quy trình duyệt và việc đưa chi phí lên JobID do `debt-management` thực hiện.
 - E16 [SOP to-be] [Lõi] Ghi doanh thu dịch vụ lên JobID 3 bước: tạo bản ghi, kê loại dịch vụ đã cung cấp theo danh sách phạm vi, đơn giá, tổng phí, chuyển duyệt. Cán bộ quản lý duyệt doanh thu ở Quy trình quản lý nợ phải thu (`debt-management`). JobID chỉ sang "Hoàn thành dịch vụ" khi doanh thu đã duyệt.
-- E17 [SOP to-be] [Lõi] Lập bảng kê bị chặn khi JobID thiếu chi phí hoặc doanh thu so với danh sách phạm vi, hoặc có Lệnh nâng, hạ container mà chưa có chi phí nâng, hạ. Chặn ở bước lập bảng kê (`debt-management`), không chặn bước Hoàn thành dịch vụ.
+- E17 [SOP to-be] [Lõi] Lập bảng kê bị chặn khi JobID thiếu chi phí hoặc doanh thu so với danh sách phạm vi, hoặc có Lệnh nâng, hạ container mà chưa có chi phí nâng, hạ. Chặn ở bước lập bảng kê, không chặn bước Hoàn thành dịch vụ. Feature này định nghĩa điều kiện dữ liệu; `debt-management` thực hiện việc chặn (DEC-230).
 - E18 [SOP to-be] [Lõi] [Cấu hình] Doanh thu, chi phí của JobID vào kỳ báo cáo chứa ngày JobID chuyển "Hoàn thành dịch vụ". Độ dài kỳ `P-ky-bao-cao` (Delta: tháng, từ 00:00 ngày đầu tới 24:00 ngày cuối tháng). Lệch giữa kỳ báo cáo và kỳ thanh toán với khách xử lý ở `debt-management`.
 
 - E19 [SOP+] [Gói: CBT] Chi phí CBT trả nhà cung cấp ghi thẳng lên JobID, không qua Lệnh, chỉ phát sinh khi doanh nghiệp làm thủ tục hải quan cho lô. Hai cách trả: kế toán chuyển thẳng (phí hạ tầng cửa khẩu); trả sau theo hợp đồng và hoá đơn (dịch vụ khai báo thủ tục tại cửa khẩu — tính là mua ngoài, E12; phí bãi, cân xe). Danh mục loại phí và đơn giá là dữ liệu [Riêng Delta] (cửa khẩu Chalo, Hữu Nghị; bãi, cân Viettel). Chi phí trả cho lái xe ghi trên Lệnh (`transport-dispatch` E11). Nguồn: Thống kê chi phí chứng từ CBT (3/9/2026), mục I.
-- E20 [SOP to-be] [Lõi] Hoa hồng trả cho khách hàng: nhóm phí riêng, ghi trên JobID nghiệp vụ, thanh toán theo mã khách. Nguồn: Phần mềm Delta 3.0 (16/10/2026) mục 3.1.3; Đính kèm 05 phụ lục 4.2.
+- E20 [SOP to-be] [Lõi] Hoa hồng trả cho khách hàng: nhóm phí riêng trong danh mục khoản mục chi phí (`cost-catalog`), ghi trên JobID nghiệp vụ, thanh toán theo mã khách ở `fund-payments`. Nguồn: Phần mềm Delta 3.0 (16/10/2026) mục 3.1.3; Đính kèm 05 phụ lục 4.2.
 - E21 [SOP to-be] [Lõi] P/L Jobsheet: mỗi JobID có bảng khoản mục, chi phí, doanh thu, lãi gộp (doanh thu trừ chi phí) hoặc lỗ; gồm chi phí trực tiếp, mua ngoài, định mức, hoa hồng; chi phí trả hộ ghi từ Quy trình quản lý quỹ và thanh toán. Mẫu khoản mục chờ Delta (OQ-5). Nguồn: Đính kèm 05 mục 2.1.6, phụ lục 4.5; Phần mềm Delta 3.0 mục 3.1.3.
 **Nhóm H — khai thuê hải quan (Kết nối API với Ecus, 26/10/2025)**
 - H1 [SOP to-be] [Gói: Khai thuê hải quan] Trên JobID hải quan, CS khai tờ khai nháp ngay trên phần mềm: tờ khai xuất, tờ khai nhập, tờ khai sửa AMA. Danh mục chuẩn VNACCS/VCIS chọn sẵn. Tờ khai đính kèm các chứng từ đã có trên JobID (Hợp đồng, Invoice, Packing List…), không phải tải lại. Không gồm: nguyên phụ liệu, thanh khoản, kiểm tra sau thông quan.
@@ -136,11 +138,16 @@ Mọi vai trò có màn "Việc của tôi" kèm thông báo đẩy mở thẳng
 
 ### P1 — should have
 
-Chưa phân mức: mọi đề xuất đã chốt ở trên đều làm ngay giai đoạn này.
+Làm trong giai đoạn 1, có cách làm tay tạm hoặc phụ thuộc feature khác (DEC-229):
+- DP-01 duyệt tự động theo hạn mức — cần số liệu nợ từ `debt-management`.
+- B7 giao dịch nội bộ · B14 JobID không doanh thu · D9 mã vạch gốc air · D11 tiền tệ CBT.
+- E9 hoá đơn trả hộ khách không xác nhận (chờ OQ-6) · E15 hoá đơn vô chủ · E19 chi phí CBT trả nhà cung cấp · E20 hoa hồng · E21 P/L Jobsheet (mẫu chờ OQ-5).
+- A9 hoá đơn điện tử qua MISA (chờ OQ-23).
 
 ### P2 — nice to have
 
-Chưa có.
+Chờ khách hoặc gói bán riêng (DEC-229):
+- A10, H1–H5 khai thuê hải quan và kết nối Ecus (Gói Khai thuê hải quan; chờ OQ-45, OQ-46).
 
 ## 5. Core Flows (Happy Path)
 
@@ -260,8 +267,8 @@ Ai được đổi trạng thái gì, ở trạng thái nào.
 | JobID | Dừng - chờ khách thanh toán | Chờ xử lý | Phần mềm | Khách thanh toán xong, hoặc gia hạn nợ được duyệt | Vào danh sách của CS |
 | JobID | Nháp, Chờ xử lý | Huỷ | CS | Chưa phân luồng | Đóng JobID |
 | JobID | Đã thực hiện Lệnh vận tải (hoặc Chờ xử lý với JobID không có vận tải) | Hoàn thành dịch vụ | CS | Mọi Lệnh đã duyệt; doanh thu đã duyệt | Ghi doanh thu, chi phí vào kỳ báo cáo |
-| JobID | Hoàn thành dịch vụ | Đã xuất hoá đơn | Kế toán, phần mềm | Bảng kê phí dịch vụ đã chốt với khách, đã xuất hoá đơn (`debt-management`) | Ghi số hoá đơn lên JobID |
-| JobID | Đã xuất hoá đơn | Đã đóng | Phần mềm | Đã chốt công nợ phải thu của JobID | Khoá JobID, không ghi thêm chi phí, doanh thu |
+| JobID | Hoàn thành dịch vụ | Đã xuất hoá đơn | Kế toán, phần mềm (`debt-management`) | Bảng kê phí dịch vụ đã chốt với khách, đã xuất hoá đơn (`debt-management`) | Ghi số hoá đơn lên JobID |
+| JobID | Đã xuất hoá đơn | Đã đóng | Phần mềm (`debt-management`) | Đã chốt công nợ phải thu của JobID | Khoá JobID, không ghi thêm chi phí, doanh thu |
 | Yêu cầu gia hạn nợ | Chờ duyệt bước 1 | Chờ duyệt bước 2 | Cán bộ quản lý | Đồng ý | Chuyển Ban giám đốc |
 | Yêu cầu gia hạn nợ | Chờ duyệt bước 2 | Đã duyệt | Ban giám đốc | Đồng ý | JobID của khách được duyệt lại |
 | Yêu cầu gia hạn nợ | Chờ duyệt bước 1, 2 | Từ chối | Cán bộ quản lý, Ban giám đốc | Không đồng ý | JobID giữ "Dừng" |
@@ -405,12 +412,16 @@ Xác nhận (Xem CMP-03):
 
 ## 10. Success Criteria (preliminary)
 
-Mỗi tiêu chí gắn một vấn đề ban đầu. Số hiện trạng và mục tiêu chờ khách (OQ-44).
+Mỗi tiêu chí gắn một vấn đề ban đầu. Mục tiêu nội bộ tự đặt, đo sau 3 tháng chạy thật (DEC-229); số hiện trạng để so chờ khách (OQ-44).
 
 | Vấn đề | Tiêu chí | Mục tiêu |
 |---|---|---|
-| a. Nhập lại nhiều lần | Tỉ lệ trường tự điền khi tạo JobID (AI đọc) trên tổng trường phải nhập | ? |
-| e. Chi phí thiếu | Tỉ lệ JobID lập bảng kê không bị thiếu chi phí | ? |
+| a. Nhập lại nhiều lần | Trường định danh tự điền đúng, người tạo không phải sửa | ≥ 90% |
+| a. Nhập lại nhiều lần | JobID phải tạo tay vì đọc lỗi | ≤ 10% |
+| a. Nhập lại nhiều lần | Thời gian từ nhận chứng từ đến JobID chờ duyệt | ≤ 5 phút |
+| e. Chi phí thiếu | JobID lập bảng kê lần đầu không bị chặn vì thiếu chi phí, doanh thu (E17) | ≥ 95% |
+| e. Chi phí thiếu | Khoản chi gắn đúng JobID hoặc Lệnh khi ghi nhận | 100% |
+| e. Chi phí thiếu | JobID từ "Hoàn thành dịch vụ" tới "Đã xuất hoá đơn" trong kỳ báo cáo chứa ngày hoàn thành | 100% |
 
 ## 11. Open Questions
 
@@ -431,7 +442,7 @@ Nguồn khách: tên tài liệu khách gửi và mục. Cột Trả lời theo 
 | OQ-31 | Bảng loại phí × địa điểm → cách hạch toán (thu nhập chịu thuế lái xe / chi hộ / trả hộ / chi phí vận hành) cho các tuyến ngoài đường sắt | Giao nhận hàng hoá (18/9/2026) | Còn mở: Delta làm rõ luồng dữ liệu Cung cấp dịch vụ, Điều phối, Điều vận và bút toán đối ứng |
 | OQ-36 | Ai duyệt mã khách DK05 cấp 2 khi CBT đổi pháp nhân thanh toán sang bên mới? | Giao nhận hàng hoá (18/9/2026) | Chưa hỏi Delta (ngoài deck vòng 1) |
 | OQ-42 | JobID dừng vì nợ quá hạn, vượt hạn mức có cần nhắc CS sau một số ngày không? Bao nhiêu ngày, nhắc ai? | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta (ngoài deck vòng 1) |
-| OQ-44 | Số hiện trạng và mục tiêu cho các tiêu chí thành công của 3 feature: tỉ lệ trường tự điền; tỉ lệ việc hiện trường giao, nhận trên app; số lần và tiền phạt lưu container, lưu vỏ, lưu xe mỗi tháng; thời gian từ xe xong việc tới duyệt Lệnh; tỉ lệ Lệnh duyệt đủ chi phí | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta (ngoài deck vòng 1) |
+| OQ-44 | Số hiện trạng cho các tiêu chí thành công của 3 feature (để so với mục tiêu): tỉ lệ trường tự điền; tỉ lệ việc hiện trường giao, nhận trên app; số lần và tiền phạt lưu container, lưu vỏ, lưu xe mỗi tháng; thời gian từ xe xong việc tới duyệt Lệnh; tỉ lệ Lệnh duyệt đủ chi phí | Chưa có trong tài liệu khách gửi | Một phần: mục tiêu service-delivery đã chốt nội bộ (Mục 10, DEC-229); còn xin số hiện trạng |
 | OQ-45 | Tài liệu Ecus ghi khai tập trung ở Hà Nội, Hải Phòng, TP.HCM, sơ đồ có 3 kho dữ liệu Ecus HN, HCM, VT; OQ-17 ghi "không có chi nhánh Hải Phòng". VT (Vận tải Delta) có phải điểm khai Hải Phòng không? JobID hải quan gắn chi nhánh nào? | Kết nối API với Ecus (26/10/2025), mục 1, mục 2.1, sơ đồ mục 3.1 | Còn mở: chưa hỏi Delta |
 | OQ-46 | Tài liệu từ 10/2025: Delta đã làm việc với bên cung cấp Ecus chưa? Trong 137 khách, bao nhiêu khách thuộc nhóm 2, và bao nhiêu khách chọn EcusAuto hay làm tay? | Kết nối API với Ecus (26/10/2025), mục 2.2, 3.2 | Còn mở: chưa hỏi Delta |
 | OQ-66 | Phạm vi dịch vụ đổi được tới mốc nào? SOP ghi 2 kiểu: JobID tạo bằng quét chứng từ đổi được "trước khi thực hiện quy trình điều phối"; JobID tạo thủ công đổi được "tại một bước trong toàn bộ quy trình" — bước nào? JobID không qua Điều phối (CBT, đường sắt, không có vận tải) thì khoá phạm vi ở mốc nào? | Quy trình cung cấp dịch vụ tổng quát (24/9/2026), mục 5.1.2.1, 5.1.2.4 | Còn mở: đề xuất một quy tắc chung, đổi được tới trước khi vào Điều phối (B9) |
