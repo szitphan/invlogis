@@ -1,7 +1,7 @@
 ---
 type: design-foundations
 status: draft
-updated: 2026-10-19
+updated: 2026-10-20
 links:
   - design/v2/architecture.md
   - design/v2/tokens.json
@@ -13,7 +13,7 @@ links:
 
 > Kết quả vòng 2/6, chốt 16–17/10/2026 trên trang phỏng vấn https://claude.ai/artifact/D5KS1PPdUih9dsajBo48vU
 > (DEC-119…139); bổ sung 19/10 từ phần khoảng cách, màu theo khách và vòng 4 (DEC-164…170, DEC-173, DEC-176,
-> DEC-179, DEC-192…194, DEC-196). File này là **luật dùng**. Giá trị máy đọc nằm ở `design/v2/tokens.json`; `tokens.css` sinh ra từ
+> DEC-179, DEC-192…194, DEC-196); 20/10 nền đặt, thẻ, chip, avatar, dòng danh sách, thanh tiến độ, ô mã (DEC-231…246). File này là **luật dùng**. Giá trị máy đọc nằm ở `design/v2/tokens.json`; `tokens.css` sinh ra từ
 > json bằng `python3 _scripts/ds-v2-tokens.py`. Bảng trong file này lệch json thì **json thắng**.
 > Trên Figma: trang `🎨 DS · Foundations` (collection Primitives, Semantic, Platform; text style `type/*`; effect style `elev/*`).
 
@@ -38,10 +38,13 @@ Số của các hệ lấy từ trang gốc ngày 16/10/2026 (bảng nguồn tr�
 | Nền tảng | `Platform` | Web, Mobile | `radius/card`, `type/body/size`, `layout/screen-inset` | Component, màn |
 | Component | `Component` | Value | `button/bg/primary`, `button/fg/danger` (DEC-174, DEC-197), `avatar/bg` (DEC-201), `tooltip/bg` (DEC-206) | Component nhiều trạng thái |
 | Theo khách | `Brand` | 8 dải | `color/brand/800` | Component, màn, theo vai mục 3.5 |
+| Nền đặt | `Context` | Surface, Canvas | `focus/gap` (DEC-241) | `.focus / Ring`; khung, màn, ô mẫu đặt chế độ |
 
 - Component và màn **không gắn Primitives, không ghi mã màu trần**. Cần màu mới thì thêm token nghĩa.
 - Màn đặt chế độ `Platform` một lần ở khung màn (Web hoặc Mobile); chữ, bo góc, khoảng cách bên trong tự đổi.
   Trong code: `data-platform="mobile"` trên khung trang (mặc định là web), `data-theme="dark"` cho chế độ tối.
+- Chế độ `Context` (DEC-241) đặt ở khung nền xám (`color/bg/canvas`) một lần, như `Platform`: Canvas cho khung, màn, ô mẫu
+  nền xám; nền trắng giữ Surface mặc định. Trong code: `data-context="canvas"` trên khung nền xám.
 - Dark đang là bản sao của Light; giá trị tối điền và kiểm ở vòng sau (DEC-116).
 - Tên CSS = `--` + tên token thay `/` bằng `-`: `color/bg/canvas` → `var(--color-bg-canvas)`. Biến Figma có code syntax WEB đúng tên này.
 
@@ -265,7 +268,7 @@ trên Figma hay không thì chưa chốt (mục 13).
 5. Máy đo: mỗi khối có hình nằm gần góc khung đạt khi lề ≥ R, hoặc hai lề của góc chênh ≤ 1 và R = r + lề ± 1.
    Mẫu và ma trận 15 trường hợp: Figma section Câu 12b (6246:14279).
 
-## 6. Khoảng cách (DEC-135, DEC-164, DEC-166, DEC-173, DEC-192, DEC-194, DEC-196)
+## 6. Khoảng cách (DEC-135, DEC-164, DEC-166, DEC-173, DEC-192, DEC-194, DEC-196, DEC-232, DEC-234, DEC-239, DEC-242, DEC-243, DEC-244)
 
 - Bảng gốc thang 4, 13 bậc, tên theo px: `space/0 · 2 · 4 · 6 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64`.
 - Lề trong component: `space/inset-xs · sm · md · lg · xl` = 4 · 8 · 12 · 16 · 24.
@@ -282,6 +285,7 @@ trên Figma hay không thì chưa chốt (mục 13).
 | `touch/min` | 24 | 44 | Vùng chạm tối thiểu (web: WCAG 2.2 AA 24; app: DEC-138) |
 | `focus/width` | 2 | 2 | Độ dày vòng focus |
 | `focus/offset` | 2 | 2 | Khoảng cách vòng focus tới mép control |
+| `focus/gap` (collection `Context`) | Surface `bg/surface` · Canvas `bg/canvas` | như web | Màu khe giữa control và vòng focus, theo nền nơi control đặt (DEC-241); không thuộc Platform |
 | `control/height/sm · md · lg` | 28 · 32 · 40 | 36 · 42 · 52 | Cao nút, ô nhập, ô chọn; cùng cỡ thì cùng cao (DEC-173) |
 | `control/padding-x/sm · md · lg` | 8 · 12 · 16 | 12 · 16 · 24 | Lề trái phải trong nút theo cỡ (nút app 52 lề 24, DEC-163) |
 | `control/padding-x-icon/sm · md · lg` | 6 · 8 · 12 | 8 · 12 · 20 | Lề phía có icon trong nút: lùi một bậc thang |
@@ -294,20 +298,30 @@ trên Figma hay không thì chưa chốt (mục 13).
 | `nav/padding-x` | — (chỉ app) | 4 | Lề trong thanh điều hướng |
 | `nav/item-padding-y` | — (chỉ app) | 4 | Lề trên dưới mục, nên nền mục đang chọn cao 56 |
 | `nav/scan-size` | — (chỉ app) | 56 | Nút Quét mã giữa thanh |
-| `chip/height` | 24 | 26 | Cao chip trạng thái (DEC-200) |
+| `chip/height` · `chip/height-sm` | 24 · 16 | 26 · 16 | Cao chip trạng thái Size MD · SM; SM cho chip ở đầu thẻ (DEC-200, DEC-239) |
+| `chip/font-size-sm` · `chip/line-height-sm` · `chip/label-max-width` | 12 · 16 · 160 | 12 · 16 · 160 | Chữ chip SM cố định 12/16 cả web và app; nhãn chip tối đa 160 rồi cắt "…" (DEC-239) |
 | `chip/padding-x` · `chip/padding-x-icon` | 12 · 8 | 12 · 8 | Lề phía chữ · phía icon của chip Soft |
 | `chip/icon-gap` | 4 | 4 | Icon → chữ chip Soft |
 | `chip/dot-gap` · `chip/dot-size` | 6 · 8 | 6 · 8 | Chấm → chữ, cỡ chấm của chip Dot |
 | `avatar/size/sm · md · lg · xl · xxl` | 24 · 36 · 48 · 64 · 88 | 24 · 36 · 48 · 64 · 88 | Cỡ avatar (DEC-201, DEC-203); MD 36 khớp ô đầu dòng 36 (DEC-164); XL, XXL cho ảnh đại diện đổi được |
 | `avatar/status-size/sm · md · lg · xl · xxl` | 6 · 10 · 12 · 14 · 16 | 6 · 10 · 12 · 14 · 16 | Chấm trạng thái avatar, thêm viền trắng 2 (DEC-204) |
 | `avatar/edit-size/md · lg · xl · xxl` | 20 · 24 · 28 · 32 | 20 · 24 · 28 · 32 | Nút đổi ảnh trên avatar (SM không có; DEC-203) |
-| `avatar/group-overlap/sm · md · lg` · `avatar/ring` | 6 · 8 · 12 · 2 | 6 · 8 · 12 · 2 | Avatar Group: lùi đè ¼ đường kính, viền trắng 2; bước giữa hai tâm = cỡ + 4 − lùi = 22 · 32 · 40 (DEC-205) |
+| `avatar/icon-size/sm · md · lg · xl · xxl` | 14 · 20 · 24 · 24 · 24 | 14 · 20 · 24 · 24 · 24 | Icon trong avatar Content=Icon và Upload (DEC-242) |
+| `avatar/edit-icon-size/md · lg · xl · xxl` | 12 · 14 · 16 · 16 | 12 · 14 · 16 · 16 | Icon camera trong nút đổi ảnh (DEC-242) |
+| `avatar/spinner-size/sm · md · lg · xl · xxl` | 12 · 16 · 20 · 24 · 28 | 12 · 16 · 20 · 24 · 28 | Vòng quay Uploading (DEC-242) |
+| `avatar/group-overlap/sm · md · lg` · `avatar/ring` | −6 · −8 · −12 · 2 | −6 · −8 · −12 · 2 | Avatar Group: khoảng giữa là số âm = lùi đè ¼ đường kính, gắn vào itemSpacing; viền trắng 2; bước giữa hai tâm = cỡ + 4 − lùi = 22 · 32 · 40 (DEC-205, DEC-242) |
 | `tooltip/padding-x · padding-y` · `tooltip/offset` · `tooltip/max-width` | 8 · 4 · 4 · 240 | 8 · 4 · 4 · 240 | Tooltip: lề, cách đối tượng, rộng tối đa; bo `tooltip/radius` 8, mũi tên 8 × 4 (DEC-206) |
+| `list-row/min-height` · `padding-x` · `padding-y` · `gap` | 36 · 8 · 8 · 8 | 52 · 12 · 12 · 12 | `Base / List Item`: cao tối thiểu, lề ngang, lề dọc, khoảng giữa các phần; thêm `text-gap` 2, `radius` 8, `value-max-width` 120, `divider-height` 1 (DEC-232) |
+| `card/padding-none · compact · spacious` | 0 · 12 · 24 | 0 · 12 · 24 | Padding của `Base / Card` cạnh Default `layout/card-padding` 16 (DEC-234) |
+| `card/media-size` · `card/media-size-sm` | 64 · 48 | 64 · 48 | Ảnh nhỏ `.card / Media` MD · SM (DEC-237) |
+| `card/radio-size` · `card/radio-ring` · `card/radio-on-ring` | 16 · 1,5 · 5 | 20 · 1,5 · 6 | Radio của Selectable Card (DEC-184, DEC-236) |
+| `progress/height/sm · md` · `progress/gap` · `progress/width-default` | 4 · 6 · 2 · 320 | 4 · 6 · 2 · 361 | `Base / Progress`: cao thanh, khe giữa nhóm đoạn, rộng mặc định (DEC-243) |
+| `otp/cell-width` | 40 | 48 | Rộng một ô mã OTP; app dùng, web chưa dựng (DEC-244) |
 
 - Mọi số trên thang 4; DEC-164 bỏ ngoại lệ lề thẻ app 14. Không thêm số lẻ ngoài thang.
 - **Ô đầu dòng (DEC-164, app):** ô 24 cho icon 16 và 20, radio, ô chọn, cách chữ 8; ô 36 cho vòng icon, avatar, cách chữ 12.
   Icon đầu dòng luôn đặt giữa ô, không đặt trần. Trừ khung có nền: icon đầu khối phụ, khối tóm tắt (DEC-194), icon đầu
-  ô tìm, ô nhập và radio thẻ chọn (DEC-196) chạm mép nội dung; và icon cuối dòng (mục 7, DEC-193). Token `layout/lead-slot` thêm vào `tokens.json` khi dựng Base / List Row.
+  ô tìm, ô nhập và radio thẻ chọn (DEC-196) chạm mép nội dung; và icon cuối dòng (mục 7, DEC-193). Cỡ ô là `card/row-icon-cell` (24) và `card/lead-size` (36); không có token `layout/lead-slot` (từng đổi thành `list-row/lead-slot/*`, bỏ cùng hàng List Row, DEC-231).
 - **Form (DEC-166):** đặt trên nền trang (nhóm bằng tiêu đề nhóm, web cách nhau 32) hoặc mỗi nhóm một thẻ (web lề 24
   = `space/inset-xl`, app theo `layout/card-padding`); người vẽ chọn theo màn.
 - **Tiêu đề (DEC-192):** tiêu đề màn → nội dung `layout/title-gap`; tiêu đề khối → nội dung khối 12 (`space/gap-md`).
@@ -348,7 +362,7 @@ trên Figma hay không thì chưa chốt (mục 13).
 - **Breakpoint:** 640 · 768 · 1024 · 1280 · 1536 (trùng Tailwind). Từ 768 tới 1279 menu trái thu còn 64 (cột icon),
   bấm thì bung 240 đè lên nội dung.
 
-## 8. Lớp nổi (DEC-125, DEC-137)
+## 8. Lớp nổi (DEC-125, DEC-137, DEC-234)
 
 | Bậc | Viền | Bóng | Dùng cho |
 |---|---|---|---|
@@ -357,10 +371,12 @@ trên Figma hay không thì chưa chốt (mục 13).
 | `elev/2` | `color/border/default` | 0 4 12 · 10% + 0 1 3 · 6% | Menu thả, popover, gợi ý ô tìm |
 | `elev/3` | — | 0 16 40 · 16% + 0 4 12 · 8% | Dialog, sheet, toast |
 
-- Thẻ luôn có viền mảnh và bóng rất nhẹ (`elev/1`). Bóng đậm chỉ cho lớp nổi tạm (`elev/2`, `elev/3`).
+- Thẻ mặc định có viền mảnh và bóng rất nhẹ (`elev/1`). Bóng đậm chỉ cho lớp nổi tạm (`elev/2`, `elev/3`).
+- `Base / Card` chọn Elevation None · Low · Med · High = không bóng · `elev/1` · `elev/2` · `elev/3`, mặc định Low; thẻ đang
+  nhấn (Pressed) và Disabled bỏ bóng (DEC-234).
 - Effect style Figma tên `elev/1 · 2 · 3`; viền gắn riêng bằng `color/border/default`.
 
-## 9. Vùng chạm và focus (DEC-097, DEC-138, DEC-139)
+## 9. Vùng chạm và focus (DEC-97, DEC-138, DEC-139, DEC-241)
 
 - **App:** vùng chạm tối thiểu 44×44 cho mọi app (ưu tiên iOS). Nút nhìn: 52 ở chân màn, 42 cho nút nhỏ và nút icon;
   phần thiếu là vùng bấm vô hình quanh nút. Hai nút icon cạnh nhau cách nhau đủ để vùng bấm không chồng
@@ -370,6 +386,9 @@ trên Figma hay không thì chưa chốt (mục 13).
 - **Focus:** vòng 2px, cách mép 2px, màu `color/border/focus` (than chì) cho mọi khách, không theo dải màu khách
   (DEC-170). Nút Danger: vòng focus màu danger (`button/focus/danger` → `color/action/danger`, DEC-198). Ô nhập
   đang gõ: viền 2px cùng màu than chì.
+- **Khe focus (DEC-241):** khe 2px giữa control và vòng tô màu `focus/gap` (collection `Context`): trắng ở Surface, xám
+  `color/bg/canvas` ở Canvas, để control nền trong suốt (nút Outline, Ghost) đặt trên nền xám không lộ khe. Vòng là L0
+  `.focus / Ring` dùng chung.
 
 ## 10. Chuyển động (DEC-139)
 
@@ -404,6 +423,7 @@ cần bản tô thì gán màu lớp tô trên instance.
 4. Thẻ dùng `elev/1` + viền `color/border/default`; menu nổi `elev/2`; dialog, sheet, toast `elev/3`.
 5. Sửa token: sửa `tokens.json` → chạy script sinh `tokens.css` → cập nhật biến Figma cùng lượt.
 6. Khối có hình đặt gần góc khung: chạy máy đo lồng góc (mục 5, DEC-165) trước khi trình màn.
+7. Khung, màn, ô mẫu nền xám (`color/bg/canvas`) đặt chế độ `Context` = Canvas; nền trắng giữ Surface mặc định (DEC-241).
 
 ## 13. Còn mở
 

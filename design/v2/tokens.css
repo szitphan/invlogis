@@ -1,5 +1,5 @@
 /* DS v2 tokens — FILE SINH RA từ design/v2/tokens.json bằng _scripts/ds-v2-tokens.py. KHÔNG sửa tay. */
-/* version 0.9.0 · 2026-10-20 */
+/* version 0.12.0 · 2026-10-20 */
 
 :root {
   /* Fonts (DEC-121) */
@@ -273,6 +273,10 @@
   --nav-item-padding-y: var(--space-4);
   --nav-scan-size: 56px;
   --chip-height: 24px;
+  --chip-height-sm: 16px;
+  --chip-font-size-sm: 12px;
+  --chip-line-height-sm: 16px;
+  --chip-label-max-width: 160px;
   --chip-padding-x: var(--space-12);
   --chip-padding-x-icon: var(--space-8);
   --chip-icon-gap: var(--space-4);
@@ -292,9 +296,23 @@
   --avatar-status-size-xxl: 16px;
   --avatar-edit-size-xl: 28px;
   --avatar-edit-size-xxl: 32px;
-  --avatar-group-overlap-sm: 6px;
-  --avatar-group-overlap-md: 8px;
-  --avatar-group-overlap-lg: 12px;
+  --avatar-icon-size-sm: 14px;
+  --avatar-icon-size-md: 20px;
+  --avatar-icon-size-lg: 24px;
+  --avatar-icon-size-xl: 24px;
+  --avatar-icon-size-xxl: 24px;
+  --avatar-edit-icon-size-md: 12px;
+  --avatar-edit-icon-size-lg: 14px;
+  --avatar-edit-icon-size-xl: 16px;
+  --avatar-edit-icon-size-xxl: 16px;
+  --avatar-spinner-size-sm: 12px;
+  --avatar-spinner-size-md: 16px;
+  --avatar-spinner-size-lg: 20px;
+  --avatar-spinner-size-xl: 24px;
+  --avatar-spinner-size-xxl: 28px;
+  --avatar-group-overlap-sm: -6px;
+  --avatar-group-overlap-md: -8px;
+  --avatar-group-overlap-lg: -12px;
   --avatar-ring: 2px;
   --tooltip-padding-x: var(--space-8);
   --tooltip-padding-y: var(--space-4);
@@ -328,6 +346,46 @@
   --icon-size-md: 16px;
   --icon-size-lg: 20px;
   --icon-size-chip: 14px;
+  --list-row-min-height: 36px;
+  --list-row-padding-x: var(--space-8);
+  --list-row-padding-y: var(--space-8);
+  --list-row-gap: var(--space-8);
+  --list-row-text-gap: var(--space-2);
+  --list-row-radius: var(--radius-8);
+  --list-row-divider-height: 1px;
+  --list-row-value-max-width: 120px;
+  --card-padding-none: var(--space-0);
+  --card-padding-compact: var(--space-12);
+  --card-padding-spacious: var(--space-24);
+  --card-row-icon-cell: var(--space-24);
+  --card-lead-size: 36px;
+  --card-media-size: var(--space-64);
+  --card-media-size-sm: var(--space-48);
+  --card-action-gap: var(--space-8);
+  --card-border-width: 1px;
+  --card-border-width-selected: 2px;
+  --card-row-label-max: 120px;
+  --card-row-min-height: var(--space-24);
+  --card-check-size: var(--space-20);
+  --card-check-ring: 2px;
+  --card-radio-size: 16px;
+  --card-radio-ring: 1.5px;
+  --card-radio-on-ring: 5px;
+  --card-choice-text-gap: var(--space-2);
+  --field-border-width: 1px;
+  --field-border-width-active: 2px;
+  --field-width-default: 320px;
+  --field-edge-inset: var(--space-8);
+  --field-text-inset: var(--space-4);
+  --field-content-gap: var(--space-4);
+  --field-hint-inset: var(--space-0);
+  --field-label-max-width: 300px;
+  --progress-height-sm: 4px;
+  --progress-height-md: 6px;
+  --progress-gap: var(--space-2);
+  --progress-width-default: 320px;
+  --progress-segment-width: 24px;
+  --otp-cell-width: 40px;
 }
 
 /* Platform — Mobile (DEC-114, DEC-132…138) */
@@ -375,6 +433,10 @@
   --nav-item-padding-y: var(--space-4);
   --nav-scan-size: 56px;
   --chip-height: 26px;
+  --chip-height-sm: 16px;
+  --chip-font-size-sm: 12px;
+  --chip-line-height-sm: 16px;
+  --chip-label-max-width: 160px;
   --chip-padding-x: var(--space-12);
   --chip-padding-x-icon: var(--space-8);
   --chip-icon-gap: var(--space-4);
@@ -394,9 +456,23 @@
   --avatar-status-size-xxl: 16px;
   --avatar-edit-size-xl: 28px;
   --avatar-edit-size-xxl: 32px;
-  --avatar-group-overlap-sm: 6px;
-  --avatar-group-overlap-md: 8px;
-  --avatar-group-overlap-lg: 12px;
+  --avatar-icon-size-sm: 14px;
+  --avatar-icon-size-md: 20px;
+  --avatar-icon-size-lg: 24px;
+  --avatar-icon-size-xl: 24px;
+  --avatar-icon-size-xxl: 24px;
+  --avatar-edit-icon-size-md: 12px;
+  --avatar-edit-icon-size-lg: 14px;
+  --avatar-edit-icon-size-xl: 16px;
+  --avatar-edit-icon-size-xxl: 16px;
+  --avatar-spinner-size-sm: 12px;
+  --avatar-spinner-size-md: 16px;
+  --avatar-spinner-size-lg: 20px;
+  --avatar-spinner-size-xl: 24px;
+  --avatar-spinner-size-xxl: 28px;
+  --avatar-group-overlap-sm: -6px;
+  --avatar-group-overlap-md: -8px;
+  --avatar-group-overlap-lg: -12px;
   --avatar-ring: 2px;
   --tooltip-padding-x: var(--space-8);
   --tooltip-padding-y: var(--space-4);
@@ -430,6 +506,46 @@
   --icon-size-md: 20px;
   --icon-size-lg: 24px;
   --icon-size-chip: 14px;
+  --list-row-min-height: 52px;
+  --list-row-padding-x: var(--space-12);
+  --list-row-padding-y: var(--space-12);
+  --list-row-gap: var(--space-12);
+  --list-row-text-gap: var(--space-2);
+  --list-row-radius: var(--radius-8);
+  --list-row-divider-height: 1px;
+  --list-row-value-max-width: 120px;
+  --card-padding-none: var(--space-0);
+  --card-padding-compact: var(--space-12);
+  --card-padding-spacious: var(--space-24);
+  --card-row-icon-cell: var(--space-24);
+  --card-lead-size: 36px;
+  --card-media-size: var(--space-64);
+  --card-media-size-sm: var(--space-48);
+  --card-action-gap: var(--space-12);
+  --card-border-width: 1px;
+  --card-border-width-selected: 2px;
+  --card-row-label-max: 120px;
+  --card-row-min-height: var(--space-24);
+  --card-check-size: var(--space-20);
+  --card-check-ring: 2px;
+  --card-radio-size: var(--space-20);
+  --card-radio-ring: 1.5px;
+  --card-radio-on-ring: 6px;
+  --card-choice-text-gap: var(--space-4);
+  --field-border-width: 1px;
+  --field-border-width-active: 2px;
+  --field-width-default: 361px;
+  --field-edge-inset: var(--space-16);
+  --field-text-inset: var(--space-0);
+  --field-content-gap: var(--space-16);
+  --field-hint-inset: var(--space-16);
+  --field-label-max-width: 300px;
+  --progress-height-sm: 4px;
+  --progress-height-md: 6px;
+  --progress-gap: var(--space-2);
+  --progress-width-default: 361px;
+  --progress-segment-width: 24px;
+  --otp-cell-width: 48px;
 }
 
 /* Brand — Than chì (mặc định) · DEC-167, DEC-168 */
@@ -562,10 +678,11 @@
   --button-bg-danger-hover: var(--red-100);
   --button-bg-danger-pressed: var(--red-200);
   --button-fg-danger: var(--color-action-danger);
-  --button-bg-outline-hover: var(--color-bg-hover);
-  --button-bg-outline-pressed: var(--color-action-secondary-hover);
+  --button-bg-outline-hover: var(--neutral-300);
+  --button-bg-outline-pressed: var(--neutral-400);
   --button-fg-outline: var(--color-text-primary);
   --button-border-outline: var(--color-border-strong);
+  --button-border-outline-disabled: var(--color-border-default);
   --button-bg-disabled: var(--color-action-secondary);
   --button-fg-disabled: var(--color-text-tertiary);
   --button-focus-danger: var(--color-action-danger);
@@ -584,6 +701,67 @@
   --avatar-overflow-fg: var(--color-text-secondary);
   --tooltip-bg: var(--color-bg-inverse);
   --tooltip-fg: var(--color-text-inverse);
+  --list-row-bg-hover: var(--neutral-100);
+  --list-row-bg-pressed: var(--neutral-200);
+  --list-row-bg-selected: var(--color-bg-selected);
+  --list-row-fg-disabled: var(--color-text-tertiary);
+  --list-row-fg-secondary-pressed: var(--neutral-600);
+  --list-row-divider: var(--color-border-default);
+  --list-row-check-fg: var(--color-icon-primary);
+  --card-bg-default: var(--color-bg-surface);
+  --card-bg-hover: var(--color-bg-hover);
+  --card-bg-pressed: var(--neutral-300);
+  --card-border-default: var(--color-border-default);
+  --card-border-pressed: var(--neutral-400);
+  --card-border-selected: var(--color-brand-800);
+  --card-border-dashed: var(--color-border-strong);
+  --card-related-bg: var(--color-bg-muted);
+  --card-lead-bg: var(--color-bg-muted);
+  --card-fg-secondary-pressed: var(--neutral-600);
+  --card-fg-secondary-hover: var(--neutral-600);
+  --card-disabled-bg: var(--color-action-secondary);
+  --card-disabled-fg: var(--color-text-tertiary);
+  --card-disabled-lead-bg: var(--color-bg-surface);
+  --card-check-bg: var(--card-border-selected);
+  --card-check-fg: var(--color-text-inverse);
+  --card-check-ring: var(--card-bg-default);
+  --card-radio-border: var(--color-border-input);
+  --card-radio-on: var(--card-border-selected);
+  --card-choice-bg: var(--color-bg-muted);
+  --card-choice-bg-hover: var(--color-action-secondary-hover);
+  --card-choice-bg-pressed: var(--button-bg-secondary-pressed);
+  --field-bg-web: var(--color-bg-surface);
+  --field-bg-app: var(--color-bg-muted);
+  --field-bg-hover: var(--color-bg-hover);
+  --field-bg-disabled: var(--button-bg-disabled);
+  --field-bg-readonly: var(--color-bg-muted);
+  --field-border-default: var(--color-border-input);
+  --field-border-active: var(--color-border-focus);
+  --field-border-error: var(--color-status-danger-fg);
+  --field-border-disabled: var(--color-border-default);
+  --field-fg-value: var(--color-text-primary);
+  --field-fg-placeholder: var(--color-text-secondary);
+  --field-fg-label-web: var(--color-text-primary);
+  --field-fg-label-app: var(--color-text-secondary);
+  --field-fg-helper: var(--color-text-secondary);
+  --field-fg-error: var(--color-status-danger-fg);
+  --field-fg-disabled: var(--color-text-tertiary);
+  --field-fg-icon: var(--color-icon-secondary);
+  --progress-bg-track: var(--color-border-default);
+  --progress-fill-brand: var(--color-brand-800);
+  --progress-fill-success: var(--color-status-success-fg);
+  --progress-fill-info: var(--color-status-info-fg);
+  --progress-fill-warning: var(--color-status-warning-fg);
+  --progress-fill-danger: var(--color-status-danger-fg);
+  --progress-fill-neutral: var(--color-chip-gray-fg);
+}
+
+/* Context — màu theo nền đặt: khe vòng focus (DEC-241); data-context="canvas" trên khung nền xám */
+:root, [data-theme="light"], [data-theme="dark"], [data-context="surface"] {
+  --focus-gap: var(--color-bg-surface);
+}
+[data-context="canvas"] {
+  --focus-gap: var(--color-bg-canvas);
 }
 
 :root {

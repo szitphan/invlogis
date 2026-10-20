@@ -6,7 +6,9 @@
 
 Tên CSS = '--' + tên token thay '/' bằng '-' (neutral/100 → --neutral-100, color/bg/canvas → --color-bg-canvas).
 Màu theo khách: collection Brand, mỗi chế độ một dải; đặt data-brand="<slug>" trên thẻ gốc (mặc định than-chi).
-Quyết định: _workspace/decisions.md DEC-115, DEC-116, DEC-129…139, DEC-167, DEC-168.
+Nền đặt: collection Context (Surface | Canvas) chứa màu đổi theo nền của khung chứa (khe vòng focus `focus/gap`); đặt
+data-context="canvas" trên khung nền xám, mặc định surface.
+Quyết định: _workspace/decisions.md DEC-115, DEC-116, DEC-129…139, DEC-167, DEC-168, DEC-241.
 """
 import json
 import sys
@@ -129,6 +131,19 @@ def build(doc) -> str:
         for k, v in comp["color"].items():
             L.append(f"  {css_name(k)}: var({css_name(v['Value'])});")
         L.append("}")
+        L.append("")
+    ctx = c.get("Context")
+    if ctx:
+        # Màu theo nền đặt (DEC-241). Mặc định = chế độ đầu (Surface) khai ở mọi nơi đặt data-theme như Component, để var() tính lại
+        # theo Semantic sáng/tối; chế độ còn lại chỉ ghi đè trong khung mang data-context tương ứng.
+        L.append("/* Context — màu theo nền đặt: khe vòng focus (DEC-241); data-context=\"canvas\" trên khung nền xám */")
+        for i, mode in enumerate(ctx["modes"]):
+            slug = ctx["modeSlugs"][mode]
+            sel = ctx["cssModeSelector"].replace("{slug}", slug)
+            L.append((":root, [data-theme=\"light\"], [data-theme=\"dark\"], " if i == 0 else "") + sel + " {")
+            for k, v in ctx["color"].items():
+                L.append(f"  {css_name(k)}: var({css_name(v[mode])});")
+            L.append("}")
         L.append("")
     L.append(":root {")
     L.append("  /* Lớp nổi (DEC-137) */")
