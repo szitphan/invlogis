@@ -23,7 +23,7 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 
 | Mã | Tham số | Kiểu | Tầng | Mặc định sản phẩm | Delta | Ai sửa | Dùng ở | Nguồn |
 |---|---|---|---|---|---|---|---|---|
-| P-nguong-tam-ung | Ngưỡng cách trả một khoản chi: dưới thì tạm ứng, từ ngưỡng trở lên tạo việc cho CS phụ trách + kế toán | Số (₫/khoản) | Cấu hình | chưa chốt | 5.000.000 ₫ | Admin khách | Điều phối E2 | Quy trình cung cấp dịch vụ tổng quát |
+| P-nguong-tam-ung | Hạn mức chi tiền mặt một khoản: nhân viên chỉ được trả bằng tiền cá nhân dưới ngưỡng; từ ngưỡng trở lên trả từ tài khoản công ty | Số (₫/khoản) | Cấu hình | chưa chốt | 5.000.000 ₫ (hạn mức chi tiền mặt, OQ-68) | Admin khách | Cung cấp dịch vụ E2 | Quy trình cung cấp dịch vụ tổng quát mục 4.6; Phân hệ APAS (17/10/2026) mục 3.3 |
 | P-ca-truc-ngoai-gio | Khung giờ trực ngoài giờ; người trực có quyền tự giao việc trong ca | Số (giờ bắt đầu–kết thúc) | Cấu hình | chưa chốt | 17h30–8h | Admin khách | Điều phối B3b | Quy trình điều phối mục 4 |
 | P-ban-giao-ca-truc | Bàn giao việc đang dở đầu ca, cuối ca trực | Bật/tắt | Cấu hình | bật | bật | Admin khách | Điều phối B3b | Trả lời Delta 10/10 (OQ-26) |
 | P-ly-do-chuyen-viec | Lý do bắt buộc khi CS bấm "Chuyển việc" | Danh sách | Cấu hình | chưa chốt | Hết giờ làm việc · Khác (tự ghi) | Admin khách | Điều phối B2 | Trả lời Delta 10/10 (OQ-25) |
@@ -106,3 +106,15 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 | P-loai-cong-cu-dung-cu | Loại công cụ dụng cụ (2 chữ số đầu mã công cụ) | Danh sách | Cấu hình | 01 Cầm tay, 02 Lớn | 01 Cầm tay, 02 Lớn | Admin khách | Danh mục hàng hoá E1, mã | SRS Web tr.372, 388 |
 | P-nhom-gia-dich-vu-ky-thuat | Nhóm giá dịch vụ kỹ thuật theo nhóm xe (2 chữ số trong mã dịch vụ) | Danh sách | Cấu hình | chưa chốt | 00 Khác, 01 Tải 1–5 tấn, 02 Tải trên 5–13 tấn, 03 Đầu kéo container, 04 Sơ mi rơ mooc | Admin khách | Dịch vụ kỹ thuật S4, S5 | SRS Web tr.319–320 |
 | P-so-ngay-nhan-vua-thay-doi | Số ngày mặt hàng, dịch vụ hiện nhãn "Vừa thay đổi" sau khi đề xuất sửa được duyệt | Số (ngày) | Cấu hình | 7 | 7 | Admin khách | Danh mục hàng hoá C1 | Brainstorm danh mục hàng hoá (Vòng 2, 16/10) |
+| P-loai-jobid | Bộ loại JobID: mã, tên, chứng từ định danh, ai tạo, mục phạm vi dịch vụ được chọn | Danh sách | Lõi, Cấu hình | chưa chốt | J01–J12 (`service-delivery` Mục 5.3) | Admin khách | Cung cấp dịch vụ B8, B9 | Quy trình cung cấp dịch vụ tổng quát mục 4.2.1, 4.9.1–4.9.2 |
+| P-kenh-nhan-chung-tu | Kênh nhận chứng từ khách để phần mềm đọc và tạo JobID nháp | Danh sách | Cấu hình | tải lên app, web | Zalo OA, Telegram, WeChat, Gmail, tải lên app, web | Admin khách | Cung cấp dịch vụ A11 | Phân hệ APAS (17/10/2026) mục 2.2.1 |
+| P-so-thang-binh-quan-han-muc | Số tháng gần nhất lấy bình quân doanh thu dịch vụ + phí trả hộ để tính hạn mức khi khách có nợ quá hạn | Số (tháng) | Cấu hình | chưa chốt | 6 | Admin khách | Cung cấp dịch vụ DP-01 | Quy trình cung cấp dịch vụ tổng quát mục 4.9.5 |
+| P-cap-duyet-gia-han-no | Các bước duyệt yêu cầu gia hạn nợ quá hạn | Danh sách | Cấu hình | chưa chốt | Cán bộ quản lý → Ban giám đốc | Admin khách | Cung cấp dịch vụ B13 | Quy trình cung cấp dịch vụ tổng quát mục 4.9.4 |
+| P-so-ngay-gia-han-no-toi-da | Số ngày tối đa một lần gia hạn nợ quá hạn | Số (ngày) | Cấu hình | chưa chốt | chưa chốt (OQ-67) | Admin khách | Cung cấp dịch vụ B13 | Quy trình cung cấp dịch vụ tổng quát mục 4.9.4 |
+| P-tien-te-thanh-toan | Tiền tệ khách được thanh toán phí dịch vụ | Danh sách | Cấu hình | VND | VND, USD | Admin khách | Cung cấp dịch vụ D11 | Giao nhận hàng hoá (18/9/2026) mục 3.4.1.1 |
+| P-nhan-tien-mat-phi-dich-vu | Nhận thanh toán phí dịch vụ bằng tiền mặt | Bật/tắt | Cấu hình | chưa chốt | tắt | Admin khách | Cung cấp dịch vụ D11 | Giao nhận hàng hoá (18/9/2026) mục 3.4.1.1 |
+| P-ky-bao-cao | Độ dài kỳ báo cáo nội bộ (kỳ hạch toán) mà doanh thu, chi phí JobID hoàn thành được ghi vào | Số (kỳ) | Lõi, Cấu hình | tháng | tháng (00:00 ngày đầu – 24:00 ngày cuối) | Admin khách | Cung cấp dịch vụ E18 | Quy trình cung cấp dịch vụ tổng quát mục 4.9.3 |
+| P-thoi-gian-luu-chung-tu | Thời gian giữ chứng từ kế toán, thuế, hải quan trên hệ thống | Số (năm) | Cấu hình | chưa chốt | 10 năm | Admin khách | PRD 9.1 | Phần mềm Delta 3.0 (16/10/2026) mục 6.2 |
+| P-thoi-gian-luu-log | Thời gian giữ log hệ thống và log gọi AI | Số (tháng) | Cấu hình | chưa chốt | 6 tháng | Admin khách | PRD 9.1 | Phần mềm Delta 3.0 (16/10/2026) mục 6.2 |
+| P-gioi-han-luot-goi-ai | Số lượt gọi AI tối đa cho một tác vụ, vượt thì ngắt và chuyển làm tay | Số (lượt) | Cấu hình | chưa chốt | 10 | Admin khách | PRD 9.1 | Phần mềm Delta 3.0 (16/10/2026) mục 7.5 |
+| P-gioi-han-thoi-gian-tac-vu-ai | Thời gian chạy tối đa của một tác vụ AI, vượt thì ngắt và chuyển làm tay | Số (phút) | Cấu hình | chưa chốt | 3 phút | Admin khách | PRD 9.1 | Phần mềm Delta 3.0 (16/10/2026) mục 7.5 |

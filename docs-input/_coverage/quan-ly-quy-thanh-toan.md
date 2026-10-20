@@ -39,9 +39,9 @@ Phần lớn mục giao cho feature mới `fund-payments` (Quản lý quỹ và 
 | 6.5 Báo cáo | ➡ fund-payments | | 6 mẫu báo cáo (tạm ứng, có HĐ, không HĐ, TTNHĐ & TTTHĐ, đặt cọc, quỹ tiền mặt) |
 | Đính kèm 01 Quản lý hóa đơn đầu vào (AI01) | ➡ debt-management | | bản 20/06; APAS 17/10 thay AI01 bằng DIS + IIP (SRC-07 2.2, 3.3), đối chiếu khi viết IIP |
 | Đính kèm 02 API Banking | ➡ payment-on-behalf | | bản 03/03; UNC, sổ phụ điện tử, lưu đồ dự kiến; bảng phí ngân hàng là báo giá, không phải yêu cầu (như SRC-07 5.2) |
-| Đính kèm 03 Công tác phí | ⬜ | | trùng mục 4.6 "Chi phí không hóa đơn" của SOP CCDV (SRC-03, đang ⬜), xử lý cùng mục đó |
+| Đính kèm 03 Công tác phí | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` E14 | trùng SOP tổng quát 4.6; Quyết định giao Lệnh hằng tháng ở transport-dispatch (BL-218) |
 | Đính kèm 04 Thanh toán âm | ➡ fund-payments | | 15 trường hợp + giải pháp đề xuất |
-| Đính kèm 05 Job ID | ➡ service-delivery | | bản 26/07; JobID nghiệp vụ J01–J12, trạng thái, cách tạo; phần lớn trùng SOP CCDV 4.2 (4.2.1 đang ⬜) |
+| Đính kèm 05 Job ID | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` B8, B14, E20, E21, Mục 5.3, Mục 6.3, OQ-69 | bản 26/07; bảng mã lệch SOP 24/9 (OQ-69), thêm trạng thái Đã xuất hoá đơn, Đã đóng (Mục 6.3, DEC-228); JobID kế toán ➡ cost-catalog (dòng riêng); JobID xưởng ➡ phân hệ xưởng; JobID vận tải = Lệnh ➡ transport-dispatch |
 | Đính kèm 05 — JobID kế toán (2.2, 3.2, Phụ lục 4.2, 4.4) | ➡ cost-catalog | | K01–K07 theo nhóm phí cấp 1/cấp 2 |
 | Đính kèm 06 Hóa đơn trả hộ | ➖ | | trùng APAS 17/10 mục 2.1 + 3.1 (SRC-07, đã giao payment-on-behalf); bản này cũ hơn |
 | Đính kèm 07 Bảng phân quyền duyệt (xlsx) | ➡ fund-payments | | bản Excel của 6.4.1, thêm mã nhóm phí 03xx |

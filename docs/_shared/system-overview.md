@@ -2,9 +2,10 @@
 type: shared-system-overview
 status: revisions
 status_changed: 2026-10-15
-updated: 2026-10-17
+updated: 2026-10-20
 links:
   - docs-input/srs-cu/lg-srs-export.md
+  - docs-input/sop/delta-3-0-master-plan/delta-3-0-master-plan.md
 ---
 # System Overview
 
@@ -69,8 +70,16 @@ Mã và tên theo tài liệu nguồn. Cột **Vault** cho biết feature đã c
 
 - **iGAS** — dịch vụ cảm biến cây dầu: kiểm tra sensor khi tạo / sửa cây dầu nội bộ (UC12.04.03), kèm tải và xem trước bảng barem (bảng quy đổi mức dầu).
 - **Email** — gửi email nhắc lịch cho phương tiện (UC08.04.07).
+- **Ngân hàng (MB, Vietcombank, TPBank)** — chi tiền qua uỷ nhiệm chi, nhận sổ phụ để đối soát công nợ.
+- **MISA** — hoá đơn điện tử; nhận bút toán từng giao dịch để lập tờ khai thuế, báo cáo tài chính.
+- **EUP** — dữ liệu GPS xe.
+- **Google Maps, Việt MAP** — cung đường, trạm thu phí khi lập Lệnh vận tải.
+
+Nguồn bổ sung: Phần mềm Delta 3.0 (16/10/2026), mục 2.1.
 
 ## Architecture
+
+Định hướng của Delta (Phần mềm Delta 3.0, 16/10/2026, mục II, 2.1): 3 lớp — cơ sở dữ liệu; Delta MIS với các bước AI gắn trong quy trình; app di động — nối ngoài qua API (ngân hàng, MISA, EUP, bản đồ). Lộ trình 3 giai đoạn ghi ở `docs/_product/prd.md` Mục 9.
 
 ```mermaid
 graph TB

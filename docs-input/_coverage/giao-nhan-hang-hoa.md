@@ -22,7 +22,7 @@
 | 3.3.4 Thanh toán chi phí | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` E2, D9 | |
 | 3.4 Hàng CBT | ✅ | `docs/transport-dispatch/brainstorms/transport-dispatch.md` Mục 5.3, D8, E8 | |
 | 3.4.1 Doanh thu, chi phí, hóa đơn, chứng từ và phương thức thanh toán | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` D10, OQ-11 | |
-| 3.4.1.1 Doanh thu | ⬜ | | tiền USD, VAT 0% chưa ghi (cùng ý SRC-03 mục 4.8) |
+| 3.4.1.1 Doanh thu | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` D10, D11 | nguồn không có VAT 0% |
 | 3.4.3 Sầu riêng tươi từ Thái Lan sang Trung Quốc | ✅ | `docs/transport-dispatch/brainstorms/transport-dispatch.md` D1, D2, OQ-43 | |
 | 3.4.4 Sầu riêng tươi từ Việt Nam sang Trung Quốc | ✅ | `docs/transport-dispatch/brainstorms/transport-dispatch.md` D1, D2, OQ-43 | |
 | 3.4.5 Hàng Trung Quốc–Campuchia | ✅ | `docs/transport-dispatch/brainstorms/transport-dispatch.md` D8 | |

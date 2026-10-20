@@ -2,8 +2,9 @@
 type: prd-product
 status: stale
 status_prev: draft
-updated: 2026-10-15
+updated: 2026-10-20
 links:
+  - docs-input/sop/delta-3-0-master-plan/delta-3-0-master-plan.md
   - docs/_shared/project-profile.md
   - docs/_shared/system-overview.md
   - docs/_product/saas-core-vs-tenant.md
@@ -676,9 +677,20 @@ __Mục tiêu 3 / 6 / 12 tháng:__ 3 tháng — Delta chạy thật phân hệ �
 
 ## 9. Constraints
 
-* __Ngân sách / timeline / team:__ TBD (OQ-4). Chưa có business case và giá bán gói; phần cost-benefit để `/brd` làm.
+* __Ngân sách / timeline / team:__ Ngân sách, đội làm TBD (OQ-4). Chưa có business case và giá bán gói; phần cost-benefit để `/brd` làm. Lộ trình của Delta (Phần mềm Delta 3.0, 16/10/2026, mục II và 3.3): giai đoạn 1 từ 01/9/2026 đến 31/3/2027 làm phần quản trị cơ bản (vận tải, hải quan, thủ tục chuyên ngành, dịch vụ giá trị gia tăng); giai đoạn 2 từ 01/4 đến 31/12/2027 làm các phân hệ còn lại; giai đoạn 3 chuyển sang nền AI Agent làm việc qua MCP. Xưởng đã xong, đang hiệu chỉnh và go live; dầu go live 15/10/2026; kế toán quỹ và thanh toán go live trên Delta 2.0 trước 31/12/2026.
 * __Ràng buộc tích hợp (chỉ tên hệ thống):__ Hoá đơn điện tử MISA; ngân hàng Vietcombank (QR, uỷ nhiệm chi); VETC (phí đường bộ); Vietmap và GPS xe (EUP); kế hoạch nhà ga Ratraco (qua file). Mỗi kết nối là kết nối đầu tiên, thay được theo khách.
 * __Ràng buộc pháp lý / vùng / compliance:__ Hoá đơn GTGT điện tử theo quy định Việt Nam. Dữ liệu từng khách tách riêng; dữ liệu sửa của AI đọc chứng từ chỉ dùng cho chính khách đó, trừ khi hợp đồng cho phép. Quyền sở hữu sản phẩm đồng sở hữu với Delta; còn làm rõ quyền khai thác thương mại riêng của mỗi bên (OQ-8). Giao diện tiếng Việt và tiếng Anh.
+
+### 9.1 Yêu cầu chung về AI và dữ liệu
+
+Áp cho mọi feature. Nguồn: Phần mềm Delta 3.0 — Thiết kế kiến trúc và lộ trình (16/10/2026), mục 2.2.3, IV, VI, VII.
+
+* __Bảo mật nhiều tầng:__ dữ liệu được kiểm ngay khi vào hệ thống; AI chỉ làm được những gì người dùng thật đứng sau nó được phép; phân quyền tới từng dòng dữ liệu (theo chi nhánh, đội xe, luồng AI).
+* __AI nằm trong quy trình:__ AI chạy như một bước của quy trình, kích hoạt theo thao tác trên phần mềm; không chép dữ liệu ra công cụ AI bên ngoài. Sẵn sàng cho khách kiểm toán bảo mật dữ liệu.
+* __Đo chi phí AI:__ đo được số lượt gọi và token AI theo từng quy trình nghiệp vụ và theo từng khách.
+* __Phân loại dữ liệu 4 cấp:__ pháp lý (mã hoá, lưu biệt lập); quản trị, tài chính (P/L Jobsheet, công nợ, hợp đồng, bảng lương — chỉ người được phân quyền); vận hành; công cộng.
+* __Lưu trữ:__ lưu tập trung trên hệ thống, không lưu ra ngoài. Chứng từ kế toán, thuế, hải quan giữ theo `P-thoi-gian-luu-chung-tu` (Delta: 10 năm); log hệ thống và log gọi AI giữ theo `P-thoi-gian-luu-log` (Delta: 6 tháng).
+* __Chặn AI chạy vòng lặp:__ một tác vụ AI vượt `P-gioi-han-luot-goi-ai` (Delta: 10 lượt gọi) hoặc `P-gioi-han-thoi-gian-tac-vu-ai` (Delta: 3 phút) thì ngắt, báo email hoặc Telegram, khoá luồng AI đó và chuyển thành việc "Task lỗi cần xử lý bằng tay" cho nhân viên.
 
 ## 10. Risks & Assumptions
 
@@ -710,6 +722,6 @@ __Mục tiêu 3 / 6 / 12 tháng:__ 3 tháng — Delta chạy thật phân hệ �
 * [x] OQ-13: Danh sách gói bán chốt thế nào cho khớp `saas-core-vs-tenant.md` — có gói Nhân sự không (hay Nhân sự thuộc lõi)? Định mức nhiên liệu theo phương tiện thuộc lõi hay Gói Nhiên liệu? Resolved: có Gói Nhân sự; định mức nhiên liệu thuộc Gói Nhiên liệu (DEC-085).
 * [ ] OQ-14: Khách của doanh nghiệp (đại diện chủ hàng) có được xem tình trạng lô hàng của mình không, hay ngoài phạm vi?
 * [x] OQ-15: `service-delivery`, `shipment-coordination`, `transport-dispatch`, `inventory-count` đang lớn hơn cỡ một brainstorm — có tách không (vd chi phí JobID, danh mục cảng/bãi, gói Đường sắt/CBT/Hàng lạnh, thanh lý rác thải)? Resolved: không tách. (DEC-087)
-* [ ] OQ-16: Chưa có module Sales (DEC-086), JobID v1 lấy giá bán, doanh thu từ đâu (nhập tay, bảng giá theo khách)?
+* [ ] OQ-16: Chưa có module Sales (DEC-086), JobID v1 lấy giá bán, doanh thu từ đâu (nhập tay, bảng giá theo khách)? Phần mềm Delta 3.0 (16/10/2026) mục 3.1.5 xếp phân hệ Sales (hợp đồng, báo giá, hoa hồng sales và sales fund, hoa hồng khách, thu hồi công nợ) vào giai đoạn 2.
 * [ ] OQ-17: Danh mục cảng, bãi, điểm chụp ảnh và loại phí, định mức theo địa điểm mà brainstorm `shipment-coordination`, `transport-dispatch` dùng thuộc feature nào? Loại phí có trùng khoản mục chi phí của `cost-catalog` không?
 * [ ] OQ-18: Thông báo trong app (nhắc, cảnh báo quá mốc, chờ duyệt) do feature nào sở hữu — `common-workspace` hay feature riêng?

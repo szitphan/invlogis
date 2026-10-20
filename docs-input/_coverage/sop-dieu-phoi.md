@@ -23,4 +23,4 @@
 | 5.6 Quy trình điều phối hàng air nhập khẩu | ✅ | `docs/shipment-coordination/brainstorms/shipment-coordination.md` Mục 5.7 | |
 | 6.1 Bảng thông tin JobID | ⏳ | | phụ lục trống, OQ-3 ở shipment-coordination |
 | 6.2 Định mức chi phí | ⏳ | | OQ-3 |
-| 6.3 Danh mục địa điểm giao nhận | ⬜ | | dữ liệu danh mục; chờ chốt feature quản lý danh mục (có ở SRC-08) |
+| 6.3 Danh mục địa điểm giao nhận | ➡ master-data | | danh mục địa điểm giao nhận, có ở SRC-08 |
