@@ -66,6 +66,12 @@ Rộng nội dung 1960 = 3 cột × 620 + 2 khoảng × 50. "Đôi" = 1290 (2 c�
 | R5 | Thuộc tính · Token số đo · Token màu | 3 cột |
 | R6 | Trợ năng · Được dùng trong · Thành phần lồng | 3 cột |
 
+**Ô Cấu tạo của component rộng.** Component có bề rộng mẫu lớn hơn 360 (thẻ Record Card, Summary Card trên lưới 620) thì mục
+**Cấu tạo** (R2) chiếm **hai cột = 1290**, không dùng ô 780 × 372 mặc định: ô hình phóng rộng 1290, danh sách phần chuyển sang
+cột còn lại của hàng hoặc xuống dưới hình theo 3 cột. Hình phóng vẫn `rescale(2)` sau khi đặt chữ, nhãn xếp tầng theo Mục 5, đủ
+chỗ cho các nhãn mọc sang hai phía. Component rộng ≤ 360 giữ ô 780 × 372. Lý do: thẻ 361 phóng 2× là 722, cộng hai tầng nhãn mỗi
+phía vượt 780; ô hẹp làm nhãn đè nhau hoặc bị cắt (Record Card, ô 1290 × 904 mobile và web).
+
 Mục không áp dụng cho component (vd không có Nên/không nên) → giữ ô cột, 1 dòng "Không có — {lý do}". Mục quá dài so
 với hàng → đổi chỗ giữa các ô cột 3 cho cân hàng, giữ thứ tự đọc trái → phải, trên → dưới. Md theo đúng thứ tự này.
 
@@ -91,8 +97,15 @@ không dùng ghi ngắn lý do và token để dành; component chỉ web (`Base
 | Mặc định (nút, chip, ô nhập web, dòng, thẻ trong sheet) | `color/bg/surface` (trắng) |
 | Button Outline ("nút phụ trên nền xám") | `color/bg/canvas` (#F2F4F7) |
 | Thẻ đặt trên nền màn app | `color/bg/canvas` |
+| Thẻ Surface, Dashed, Record Card, Summary Card (Web và Mobile) | `color/bg/canvas`, Context = Canvas |
+| Thẻ Muted, Selectable Card | `color/bg/surface` |
 | Ô nhập app (`field/bg/app` xám) | `color/bg/surface` |
 
+- **Ô mẫu của thẻ** (mọi component ráp trên Base / Card: Card, Selectable, Record, Summary, Status Row khi cảnh có thẻ) có nền
+  `color/bg/canvas` cả **Web và Mobile**, đặt Variable mode `Context = Canvas` cho ô, không chỉ ở Mobile. Ngoại lệ: thẻ Muted và
+  thẻ chọn một (Selectable) đặt trên nền trắng `color/bg/surface` (Muted mất ranh giới trên nền xám). Lý do: thẻ trắng đặt trên
+  nền màn xám cả ở web lẫn app; đặt ô trắng thì không chứng minh được ranh giới thẻ (1,10:1 trên xám) và khe vòng focus
+  (`focus/gap`) không theo Context.
 - Cỡ ô: đều nhau trong một lưới. Cao ô = cao mẫu lớn nhất + 2 × 12 (Button MD: web 56, app 66; lưới Kích thước:
   web 56, app 76). Ô trống (tổ hợp không có) tên `Ô trống · …`, không nền, viền chấm 4/4, chữ "không có" 12
   `color/text/tertiary`.
@@ -247,6 +260,7 @@ frontmatter (type, status, updated, links)
   component web, phần Mobile tả component app. Phần máy: dùng hai khối `auto:` có tên nếu `_scripts/ds-v2-component-doc.py`
   đã nhận (đọc docstring đầu script); chưa nhận thì giữ md riêng cho bản app như cũ, phần `## Mobile` trỏ sang.
 - Chữ mẫu L1 trung tính (Lưu, Huỷ, Xoá, Thêm, Title, Value…), không có lệnh, chuyến, xe.
+- Mục "Đối chiếu Astryx" chỉ ghi trong md, không đặt trên khung Figma (khung tài liệu và dòng Meta không nhắc Astryx).
 - Frontmatter theo mẫu các md cùng thư mục: `type: design-component`, `status`, `updated`, `links`. Không `changelog`;
   lịch sử đổi ở `_workspace/changelog.md`.
 

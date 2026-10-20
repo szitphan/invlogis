@@ -709,7 +709,7 @@
   --list-row-divider: var(--color-border-default);
   --list-row-check-fg: var(--color-icon-primary);
   --card-bg-default: var(--color-bg-surface);
-  --card-bg-hover: var(--color-bg-hover);
+  --card-bg-hover: var(--neutral-100);
   --card-bg-pressed: var(--neutral-300);
   --card-border-default: var(--color-border-default);
   --card-border-pressed: var(--neutral-400);
