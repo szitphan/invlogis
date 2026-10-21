@@ -4,7 +4,7 @@
 > Bản: 12/10/2026 (nhận 2026-10-14)
 
 2026-10-19: tài liệu này đã được APAS 17/10 (SRC-07) mục 3.4 thay thế (user chốt); mọi mục ➖, đối chiếu tiếp ở sổ SRC-07.
-Cả nguồn giao `debt-management` = phần của brainstorm SIM đang chạy (chưa ghi file, chia feature sau).
+Cả nguồn đã được APAS 17/10 mục 3.4 thay thế; phần kê khai thuế thuộc `invoice-management` (DEC-251).
 Brainstorm ghi file → đổi từng dòng ➡ sang ✅ kèm đường dẫn + mã B/OQ; chia feature → đổi ➡ theo slug mới.
 
 | Mục | Kết quả | Ở đâu | Ghi chú |

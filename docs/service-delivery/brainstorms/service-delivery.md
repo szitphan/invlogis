@@ -49,7 +49,7 @@ Vấn đề b, c, d (giao việc qua Zalo, quá mốc bị phạt, chứng từ 
 - Ranh giới với 2 feature cùng chuỗi:
   - Điều phối (`shipment-coordination`): nhận JobID "Chờ xử lý", kê khai, giao việc hiện trường, sinh YCVT. Màn Chi tiết JobID dùng chung cho cả 3 feature, thuộc feature này; Điều phối, Điều vận thêm phần kê khai, YCVT/Lệnh lên màn đó.
   - Điều vận (`transport-dispatch`): từ YCVT lập, chạy, chốt và duyệt Lệnh. Lệnh duyệt xong thì chi phí chuyển về JobID.
-- Không gồm (feature riêng, chỉ đảm bảo dữ liệu đủ và đúng JobID): màn bảng kê, công nợ (`debt-management`: duyệt doanh thu, mua ngoài, nợ phải thu, phải trả, đối soát hoá đơn đầu vào, lệch kỳ báo cáo và kỳ thanh toán), kết nối MISA (ngoài phần lấy hoá đơn điện tử); quỹ, tạm ứng, thanh toán (`fund-payments`); thanh toán trả hộ qua ngân hàng — duyệt, QR, uỷ nhiệm chi, API ngân hàng (`payment-on-behalf`); phạm vi xem dữ liệu chi nhánh khác (feature Phân quyền); danh mục lô hàng (`shipment-coordination`) và dashboard tổng mọi chi nhánh (màn riêng); danh mục địa điểm (`location-catalog`); JobID kế toán (`cost-catalog`), JobID xưởng (phân hệ xưởng); cho thuê kho làm trên phần mềm quản lý kho riêng nối với hệ thống, giai đoạn 2. Cước quốc tế (đường biển, hàng không) và cho thuê kho có trong phạm vi phân hệ nhưng chưa có loại JobID (OQ-70).
+- Không gồm (feature riêng, chỉ đảm bảo dữ liệu đủ và đúng JobID): màn bảng kê, công nợ (`debt-management`: duyệt doanh thu, mua ngoài, nợ phải thu, phải trả, lệch kỳ báo cáo và kỳ thanh toán; hoá đơn đầu vào, đầu ra ở `invoice-management`), kết nối MISA (ngoài phần lấy hoá đơn điện tử); quỹ, tạm ứng, thanh toán (`fund-payments`); thanh toán trả hộ qua ngân hàng — duyệt, QR, uỷ nhiệm chi, API ngân hàng (`payment-on-behalf`); phạm vi xem dữ liệu chi nhánh khác (feature Phân quyền); danh mục lô hàng (`shipment-coordination`) và dashboard tổng mọi chi nhánh (màn riêng); danh mục địa điểm (`location-catalog`); JobID kế toán (`cost-catalog`), JobID xưởng (phân hệ xưởng); cho thuê kho làm trên phần mềm quản lý kho riêng nối với hệ thống, giai đoạn 2. Cước quốc tế (đường biển, hàng không) và cho thuê kho có trong phạm vi phân hệ nhưng chưa có loại JobID (OQ-70).
 - Xử lý ngoài phần mềm: thoả thuận với khách về khoản chi ngoài định mức.
 - Ứng dụng: Delta Super App, web cho CS, kế toán, cán bộ quản lý.
 
@@ -121,7 +121,7 @@ Mục nào không ghi ở P1, P2 dưới đây là P0 (DEC-229). DP-01 ở P0 do
 - E12 [SOP to-be] [Lõi] Kê khai nhu cầu mua ngoài ngay khi tạo JobID, theo cùng danh sách phạm vi (B9). Ghi chi phí mua ngoài lên JobID 3 bước: tạo bản ghi, kê loại dịch vụ mua ngoài (theo danh mục), nhà cung cấp, đơn giá, tổng chi phí, cách thanh toán (bảng kê chi phí trả hộ tách riêng), chuyển duyệt. Duyệt và thanh toán nhà cung cấp thuộc `debt-management`.
 - E13 [SOP to-be] [Lõi] JobID không có thủ tục hải quan trong phạm vi thì chặn ngay lúc kê: không tạo được mua ngoài dịch vụ hải quan, không thanh toán được chi phí định mức hải quan. Câu báo: "JobID này không có thủ tục hải quan trong phạm vi. Đổi phạm vi trước nếu cần."
 - E14 [SOP to-be] [Lõi] Chi phí định mức hải quan (tiền mở tờ khai, kiểm hoá, thanh lý tờ khai): phần mềm tự áp theo định mức của địa điểm làm thủ tục, nhân viên không tự gõ số tiền. Định mức từng địa điểm là dữ liệu của khách, sống trong danh mục địa điểm (`location-catalog`). Khi JobID có công tác phí, phần mềm sinh mỗi người một Quyết định phân công công việc mỗi tháng, kèm bảng kê JobID, ở `fund-payments` (Điều phối B20); Quyết định giao Lệnh hằng tháng cho lái xe ở `transport-dispatch`.
-- E15 [SOP to-be] [Lõi] Chi phí từ hoá đơn chưa gắn được khoản chi (hoá đơn vô chủ) lên JobID sau khi duyệt xong. Quy trình duyệt và việc đưa chi phí lên JobID do `debt-management` thực hiện.
+- E15 [SOP to-be] [Lõi] Chi phí từ hoá đơn chưa gắn được khoản chi (hoá đơn vô chủ) lên JobID sau khi duyệt xong. Quy trình duyệt và việc đưa chi phí lên JobID do `invoice-management` thực hiện (DEC-251).
 - E16 [SOP to-be] [Lõi] Ghi doanh thu dịch vụ lên JobID 3 bước: tạo bản ghi, kê loại dịch vụ đã cung cấp theo danh sách phạm vi, đơn giá, tổng phí, chuyển duyệt. Cán bộ quản lý duyệt doanh thu ở Quy trình quản lý nợ phải thu (`debt-management`). JobID chỉ sang "Hoàn thành dịch vụ" khi doanh thu đã duyệt.
 - E17 [SOP to-be] [Lõi] Lập bảng kê bị chặn khi JobID thiếu chi phí hoặc doanh thu so với danh sách phạm vi, hoặc có Lệnh nâng, hạ container mà chưa có chi phí nâng, hạ. Chặn ở bước lập bảng kê, không chặn bước Hoàn thành dịch vụ. Feature này định nghĩa điều kiện dữ liệu; `debt-management` thực hiện việc chặn (DEC-230).
 - E18 [SOP to-be] [Lõi] [Cấu hình] Doanh thu, chi phí của JobID vào kỳ báo cáo chứa ngày JobID chuyển "Hoàn thành dịch vụ". Độ dài kỳ `P-ky-bao-cao` (Delta: tháng, từ 00:00 ngày đầu tới 24:00 ngày cuối tháng). Lệch giữa kỳ báo cáo và kỳ thanh toán với khách xử lý ở `debt-management`.
@@ -209,7 +209,7 @@ Ký hiệu: `[Vai trò]` người làm · `(PM)` phần mềm tự làm · `<…
 (PM) Khoản hải quan mà JobID không có hải quan trong phạm vi --> chặn (E13)
 (PM) Cách trả mặc định: QR / tài khoản đối tác, trả từ tài khoản công ty (E2)
    +-- ghi dư nợ tạm ứng của nhân viên; hoá đơn về khớp giao dịch --> tự giảm
-   +-- ngoại lệ trả tiền cá nhân: chỉ dưới `P-nguong-tam-ung`; duyệt ở debt-management
+   +-- ngoại lệ trả tiền cá nhân: chỉ dưới `P-nguong-tam-ung`; duyệt ở invoice-management
 [Người tạo] Bắt chọn có / không hoá đơn
 <Có hoá đơn?> --Có--> (PM) lấy hoá đơn điện tử từ MISA (A9) --Không khớp--> chụp, nhập tay, cờ "Chưa khớp hoá đơn điện tử"
              --Không--> định mức hải quan tự áp (E14); có công tác phí thì vào Quyết định phân công tháng (`fund-payments`)
@@ -267,7 +267,7 @@ Ai được đổi trạng thái gì, ở trạng thái nào.
 | JobID | Dừng - chờ khách thanh toán | Chờ xử lý | Phần mềm | Khách thanh toán xong, hoặc gia hạn nợ được duyệt | Vào danh sách của CS |
 | JobID | Nháp, Chờ xử lý | Huỷ | CS | Chưa phân luồng | Đóng JobID |
 | JobID | Đã thực hiện Lệnh vận tải (hoặc Chờ xử lý với JobID không có vận tải) | Hoàn thành dịch vụ | CS | Mọi Lệnh đã duyệt; doanh thu đã duyệt | Ghi doanh thu, chi phí vào kỳ báo cáo |
-| JobID | Hoàn thành dịch vụ | Đã xuất hoá đơn | Kế toán, phần mềm (`debt-management`) | Bảng kê phí dịch vụ đã chốt với khách, đã xuất hoá đơn (`debt-management`) | Ghi số hoá đơn lên JobID |
+| JobID | Hoàn thành dịch vụ | Đã xuất hoá đơn | Kế toán, phần mềm (`invoice-management`) | Bảng kê phí dịch vụ đã chốt với khách (`debt-management`), đã xuất hoá đơn (`invoice-management`) | Ghi số hoá đơn lên JobID |
 | JobID | Đã xuất hoá đơn | Đã đóng | Phần mềm (`debt-management`) | Đã chốt công nợ phải thu của JobID | Khoá JobID, không ghi thêm chi phí, doanh thu |
 | Yêu cầu gia hạn nợ | Chờ duyệt bước 1 | Chờ duyệt bước 2 | Cán bộ quản lý | Đồng ý | Chuyển Ban giám đốc |
 | Yêu cầu gia hạn nợ | Chờ duyệt bước 2 | Đã duyệt | Ban giám đốc | Đồng ý | JobID của khách được duyệt lại |

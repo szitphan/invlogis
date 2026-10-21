@@ -37,7 +37,7 @@ Phần lớn mục giao cho feature mới `fund-payments` (Quản lý quỹ và 
 | 6.3 (trống) | ➖ | | mục không có tiêu đề và nội dung trong bản gốc |
 | 6.4 Phân quyền duyệt tạm ứng & thanh toán | ➡ fund-payments | | bảng quy trình × nhóm phí, bản gốc tự ghi "dự thảo, có thể chưa nhất quán"; bảng gọi Phiếu chi/Phiếu thu là 5.7/5.8 trong khi thân bài là 5.8/5.9; 6.4.2 hạn mức duyệt còn trống (BL-215) |
 | 6.5 Báo cáo | ➡ fund-payments | | 6 mẫu báo cáo (tạm ứng, có HĐ, không HĐ, TTNHĐ & TTTHĐ, đặt cọc, quỹ tiền mặt) |
-| Đính kèm 01 Quản lý hóa đơn đầu vào (AI01) | ➡ debt-management | | bản 20/06; APAS 17/10 thay AI01 bằng DIS + IIP (SRC-07 2.2, 3.3), đối chiếu khi viết IIP |
+| Đính kèm 01 Quản lý hóa đơn đầu vào (AI01) | ➡ invoice-management | | bản 20/06; APAS 17/10 thay AI01 bằng DIS + IIP (SRC-07 2.2, 3.3), đối chiếu khi viết IIP |
 | Đính kèm 02 API Banking | ➡ payment-on-behalf | | bản 03/03; UNC, sổ phụ điện tử, lưu đồ dự kiến; bảng phí ngân hàng là báo giá, không phải yêu cầu (như SRC-07 5.2) |
 | Đính kèm 03 Công tác phí | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` E14 | trùng SOP tổng quát 4.6; Quyết định giao Lệnh hằng tháng ở transport-dispatch (BL-218) |
 | Đính kèm 04 Thanh toán âm | ➡ fund-payments | | 15 trường hợp + giải pháp đề xuất |

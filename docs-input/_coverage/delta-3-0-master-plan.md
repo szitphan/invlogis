@@ -10,9 +10,9 @@ Tài liệu định hướng cấp dự án của Delta (kiến trúc 3 giai đo
 | I. Mục tiêu | ➖ | | giới thiệu; "Phần mềm Delta 3.0" = Delta 3.0 + Delta MIS + công cụ AI |
 | II. Cấu trúc Delta 3.0 | ✅ | `docs/_shared/system-overview.md` Architecture; `docs/_product/prd.md` Mục 9 | 3 giai đoạn: GĐ1 MIS cơ bản (vận tải, hải quan, thủ tục chuyên ngành, dịch vụ GTGT), GĐ2 các phân hệ còn lại, GĐ3 chuyển sang Genetic AI platform — đưa vào `docs/_shared/system-overview.md` |
 | 2.1 Delta 3.0 với node AI & workflow AI | ✅ | `docs/_shared/system-overview.md` External Integrations, Architecture | kiến trúc 3 lớp (Database · Delta MIS + node AI · Mobile App) + kết nối API ngân hàng, Misa, EUP, Google Maps, Việt MAP — đưa vào `system-overview` |
-| 2.1.2 Liên kết ngoại vi | ➡ debt-management | | Delta MIS đẩy bút toán từng giao dịch sang Misa qua API để Misa lập tờ khai thuế, BCTC; "cần xác định quy tắc chia sẻ dữ liệu giữa Delta MIS và Misa để hạn chế việc chỉnh sửa" (câu hỏi mở) |
+| 2.1.2 Liên kết ngoại vi | ➡ invoice-management | | Delta MIS đẩy bút toán từng giao dịch sang Misa qua API để Misa lập tờ khai thuế, BCTC; "cần xác định quy tắc chia sẻ dữ liệu giữa Delta MIS và Misa để hạn chế việc chỉnh sửa" (câu hỏi mở) |
 | 2.2 Delta 3.0 với Genetic AI platform | ➖ | | Giai đoạn 3 (sau GĐ2, kết thúc 31/12/2027, ước 6 tháng): AI Agent (Quick Desktop, Copilot) làm việc qua MCP Server; ngoài phạm vi hiện tại, ghi nhận khi lập roadmap |
-| 2.2.1 Thiết lập ranh giới dữ liệu sạch (Data Validation Gateway) chống Rác AI | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` A11 | kiểm dữ liệu AI đọc chứng từ; phần hoá đơn đầu vào cùng quy tắc ở debt-management |
+| 2.2.1 Thiết lập ranh giới dữ liệu sạch (Data Validation Gateway) chống Rác AI | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` A11 | kiểm dữ liệu AI đọc chứng từ; phần hoá đơn đầu vào cùng quy tắc ở invoice-management |
 | 2.2.3 Kiến trúc bảo mật đa tầng (Multi-Layer Security) | ✅ | `docs/_product/prd.md` Mục 9.1 | kiểm dữ liệu ở tầng API, quyền theo người dùng thật đằng sau AI Agent, phân quyền theo hàng dữ liệu (RLS) — NFR cấp sản phẩm (`prd`), liên quan `access-control`, `organization` |
 | 3.1 Phân hệ và chức năng | ✅ | `docs/_product/prd.md` Mục 7 | 6 phân hệ đã giao feature ở các dòng 3.1.1–3.1.6 |
 | 3.1.1 Hệ thống | ➡ access-control | | người dùng, phân quyền, danh mục |
@@ -35,7 +35,7 @@ Tài liệu định hướng cấp dự án của Delta (kiến trúc 3 giai đo
 | 6.4 Sao lưu cơ sở dữ liệu (Database backup) | ➖ | | phương án sao lưu sẽ phát triển trước GĐ3, việc hạ tầng |
 | VII. Rủi ro vận hành | ✅ | `docs/_product/prd.md` Mục 9.1 | mục con giao riêng ở 7.1–7.5 |
 | 7.1 API Ngân hàng gặp sự cố | ➡ payment-on-behalf | | xuất lệnh chi ra file chuẩn (Excel/XML theo ngân hàng) để kế toán tải lên Internet Banking duyệt tay |
-| 7.2 API Phần mềm kế toán Misa gặp sự cố | ➡ debt-management | | hàng chờ cô lập + tự gửi lại mỗi 15 phút đến khi thông |
+| 7.2 API Phần mềm kế toán Misa gặp sự cố | ➡ invoice-management | | hàng chờ cô lập + tự gửi lại mỗi 15 phút đến khi thông |
 | 7.3 API Bản đồ (Google Maps / Việt MAP) gặp sự cố | ➡ transport-dispatch | | điều vận nhập tay km cung đường + phí trạm vé, Lệnh vẫn phát hành, số liệu đánh dấu cho thanh tra rà lại |
 | 7.4 Quản lý chi phí Token | ➖ | | thử nghiệm LLM nội bộ (Llama 3, Qwen) trên cloud riêng — quyết định hạ tầng |
 | 7.5 Xử lý vòng lặp vô hạn (Infinite Loop / Token Bleeding) | ✅ | `docs/_product/prd.md` Mục 9.1 | ngưỡng thành P-gioi-han-luot-goi-ai, P-gioi-han-thoi-gian-tac-vu-ai |
