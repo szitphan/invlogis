@@ -323,6 +323,7 @@ KHÔNG `NEEDS_INPUT` (non-blocking, tự xử):
 
 ## References
 
+- @../../rules/common-features.md (bảng "Dùng chung" ở mục tích hợp: liên quy trình, thông báo, lịch sử, thao tác chung, quyền + danh mục; kế thừa từ brainstorm 7.4)
 - @.claude/rules/ui-common-rules-components.md
 > **Eager (nạp ngay) — CHỈ rule + template Tầng-1 luôn dùng.** Skill downstream (`/usecase`, `/sequence`, `/erd`, `/state`, `/user-flow`, `/wireframe-ascii`, `/wireframe-html`, `/userstory`, `/ac`) + template của chúng **KHÔNG @-include ở đây** — chúng chạy inline theo tên ở Phase D/E/F (xem note Phase D), và SKILL.md + template của từng skill **tự load lúc đó**. @-include sớm = load kép + phí ~40k token cho mỗi run kể cả Tier-1 spec-only. `/srs` chỉ cần biết output path (đã có trong `naming-conventions.md`) để quyết gọi skill nào, KHÔNG cần full instruction của chúng trong context up-front.
 

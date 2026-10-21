@@ -136,6 +136,7 @@ Hook tự ghi 1 dòng vào `_workspace/changelog.md`.
 
 ## References
 
+* @../../rules/common-features.md (capability dùng feature chung → ghi phụ thuộc, nhu cầu chưa có chủ → task backlog)
 * @../../rules/feature-bootstrap.md
 * @../../rules/ba-conventions.md
 * @../../rules/approval-gate.md

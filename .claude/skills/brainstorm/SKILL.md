@@ -228,6 +228,7 @@ __Section 4 — Detailed Flow Deep Dive__ (chỉ chạy nếu complexity signal 
 3) Notification gửi cho user qua kênh nào (email / push / in-app / SMS) + khi nào trigger (sau action gì)?
 4) Có xử lý nền / scheduled không (vd cleanup token expired hằng ngày, send digest tuần) — chỉ __business need__, KHÔNG hỏi cron syntax / queue system?
 5) Có cần real-time không (vd thông báo ngay khi event xảy ra) — chỉ __business need__, KHÔNG hỏi websocket/SSE/polling?
+6) Feature dùng chung: rà 5 nhóm (liên quy trình, thông báo, lịch sử, thao tác chung, quyền + danh mục) theo danh sách feature chung trong PRD; ghi bảng "Dùng chung" ở 7.4, đề xuất sẵn (liên feature → luôn đề xuất `cross-process-flow`), không hỏi từng câu. Per @../../rules/common-features.md.
 
 ### Section 7 — Edge Cases, Risks, Open Questions
 1) Lost connection mid-flow?
@@ -353,6 +354,7 @@ Skill KHÔNG mặc định Deep. Sau khi chấm scope × completeness (Phase A.6
 - @../../rules/project-profile.md
 - @../../rules/saas-layer.md
 - @../../rules/source-coverage.md
+- @../../rules/common-features.md
 - @../../rules/approval-gate.md
 - @../../rules/review-format.md (Mục Review độc lập khi skill chạy riêng — bước 8b)
 - @../../agents/senior-ba.md · @../../agents/po-reviewer.md
