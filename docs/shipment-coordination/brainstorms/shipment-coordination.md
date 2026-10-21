@@ -20,6 +20,14 @@ links:
   - docs/transport-dispatch/brainstorms/transport-dispatch.md
   - docs/fund-payments/brainstorms/fund-payments.md
   - docs/location-catalog/brainstorms/location-catalog.md
+  - docs-input/danh-muc/danh-muc-dia-diem-hang-tau.md
+  - docs-input/du-lieu-mau/eport-cargo-tracking-vi-du.md
+  - docs-input/chung-tu-mau/lenh-giao-vo-mau-thuc-te.jpg
+  - docs-input/chung-tu-mau/lenh-giao-vo-khong-mau-thuc-te.pdf
+  - docs-input/chung-tu-mau/phieu-eeir-mau-thuc-te.pdf
+  - docs-input/chung-tu-mau/bien-ban-bat-thuong-hang-nhap.pdf
+  - docs-input/chung-tu-mau/ma-vach-hang-nhap.pdf
+  - docs-input/chung-tu-mau/ma-vach-hang-xuat.pdf
 ---
 
 # Điều phối — từ JobID tới Yêu cầu vận tải, theo 6 luồng hàng
@@ -104,13 +112,13 @@ P0 là phần chuỗi JobID → YCVT cần để chạy ở giai đoạn 1.
 - A1 [SOP+] [Lõi] [Cấu hình] AI đọc Booking Note, eDO để điền mốc cắt máng, cut-off, lưu container, lưu vỏ. Hàng nhập: số ngày miễn phí lưu container lấy từ Giấy báo hàng đến. Hàng xuất: CS nhập thời gian miễn phí lưu vỏ để đóng hàng (đã bổ sung vào SOP to-be).
 - A2 [SOP+] [Lõi] Quét QR tờ khai hải quan; lưu cả ảnh QR lẫn thông tin bóc từ QR.
 - A3 [SOP+] [Lõi] Kiểm số container theo chữ số kiểm tra ISO 6346, bắt sai ngay khi nhập hoặc AI đọc.
-- A4 [SOP+] [Lõi] Chụp EIR để tự điền giờ, số container, số chì; giờ EIR nhận hàng là mốc tính lưu vỏ.
+- A4 [SOP+] [Lõi] Chụp EIR để tự điền giờ, số container, số chì; giờ EIR nhận hàng là mốc tính lưu vỏ. Đọc thêm giờ xe vào, giờ xe ra, số xe và số mooc, vị trí container trong bãi, hạn hiệu lực EIR; hàng lạnh đọc thêm nhiệt độ, thông gió, giờ cắm và rút điện. EIR có 3 mốc giờ (vào, ra, phát hành), mốc tính lưu vỏ lấy giờ nào: OQ-78. Nguồn: Phiếu EIR mẫu thực tế (cảng Nam Hải Đình Vũ, nhận 01/10/2026).
 - A5 [SOP+] [Lõi] Hỗ trợ CS danh sách việc ePort theo cảng, lưu lệnh và EIR về Lệnh (không kết nối máy với ePort).
-- A6 [SOP+] [Lõi] Quét QR Lệnh giao vỏ điện tử (mức nhẹ).
+- A6 [SOP+] [Lõi] Quét QR Lệnh giao vỏ điện tử (mức nhẹ). Lệnh có hai dạng: đã có số container (vỏ chọn trước) và chưa có số; ghi Booking, loại vỏ, hạn lệnh, mã in dưới QR. Phiếu thu đi kèm (phí nâng hạ, phí nâng vỏ, thông tin xuất hoá đơn) lưu về JobID làm chứng từ chi phí nâng vỏ. Bãi có thể bắt đăng ký thanh toán trước trên web của bãi và cho 3 ngày sửa thông tin hoá đơn (thuộc tính bãi ở `location-catalog`; ai đăng ký: OQ-81). Nguồn: Lệnh giao vỏ có màu, Lệnh giao vỏ không màu (mẫu thực tế, nhận 01/10/2026).
 - A8 [SOP+] [Lõi] AI đọc phiếu cân ra VGM; người chụp bắt buộc xác nhận trước khi lưu.
 
 **Nhóm B — quy trình**
-- B1 [SOP+] [Lõi] Danh mục cảng/bãi có 3 thuộc tính: có ePort, có xe mới chọn được vỏ, thanh lý tờ khai online hay tại bãi; phần mềm phân luồng theo 3 thuộc tính này. Danh mục và người cập nhật thuộc `location-catalog`.
+- B1 [SOP+] [Lõi] Danh mục cảng/bãi có 3 thuộc tính: có ePort, danh sách hãng tàu yêu cầu có xe mới chọn được vỏ (theo từng cảng, bãi; có thể trống), thanh lý tờ khai online hay tại bãi; phần mềm phân luồng theo 3 thuộc tính này. Danh mục và người cập nhật thuộc `location-catalog`. Nguồn: Danh mục cảng, bãi, kho CFS, kho hàng không, hãng tàu (15/9/2026).
 - B2 [SOP to-be] [Lõi] [Cấu hình] Nút "Chuyển việc" thay "Từ chối", bắt buộc chọn lý do trong `P-ly-do-chuyen-viec` (Delta: "Hết giờ làm việc" · "Khác" tự ghi); quyền thanh toán tự chuyển sang hiện trường.
 - B3a [SOP+] [Lõi] [Cấu hình] Gợi ý `P-so-nguoi-goi-y-nhan-viec` (Delta: 2–3) người nhận việc (gần cảng/bãi, số việc đang ôm, trong ca trực); quản lý vẫn bấm chọn. Dùng chung quy tắc "người gần lái xe nhất".
 - B3b [SOP to-be] [Lõi] [Cấu hình] Cán bộ quản lý hiện trường giao người trực ngoài giờ theo `P-ca-truc-ngoai-gio` (Delta: 17h30–8h); người trực có quyền tự giao việc trong ca, hết ca thu quyền. [Mới] Đầu ca và cuối ca có bước bàn giao việc đang dở giữa người trực và người làm giờ hành chính, theo `P-ban-giao-ca-truc` (Delta: bật).
@@ -131,6 +139,8 @@ P0 là phần chuỗi JobID → YCVT cần để chạy ở giai đoạn 1.
 Làm sau phần P0 trong giai đoạn 1 (cách phân mức như `service-delivery`, DEC-229).
 
 - A12 [SOP to-be] [Lõi] Danh mục lô hàng: mỗi chứng từ vận tải (B/L, Booking Note) phần đọc chứng từ nhận được qua các kênh thành một dòng lô hàng, kèm khách, loại chứng từ, kênh nhận và JobID nháp tạo cùng lần đọc. CS thấy ngay lô nào đã có chứng từ mà chưa thành JobID, mở JobID nháp để kiểm và chuyển duyệt (`service-delivery` A11). Chứng từ không nhận ra khách thì dòng hiện "Chờ tra soát", không có JobID nháp (theo `service-delivery` A11). Trường hiển thị, lọc, ai được xem: OQ-73. Nguồn: Phân hệ APAS (17/10/2026), mục 2.2.1–2.2.4.
+- A13 [SOP+] [Lõi] Bộ chứng từ hàng không nhập, xuất chụp và lưu vào JobID: danh sách hàng hoá đủ điều kiện qua khu vực giám sát của hải quan (có mã vạch), hoá đơn kho hàng không, phiếu giao hàng (nhập) hoặc hướng dẫn gửi hàng có giờ kho chấp nhận và dấu kiểm tra an ninh (xuất), biên bản bất thường của nhà ga. Phần mềm đọc số tờ khai, luồng, số kiện, trọng lượng; nối các chứng từ của một lô bằng số quản lý hàng hoá (một lô có thể nhiều tờ khai). Có biên bản bất thường (thiếu kiện, bẹp, rách, ướt…) thì JobID có cờ; ai ký, có chặn giao không: OQ-80. Liên quan "mã vạch gốc" (`service-delivery` D9, OQ-79). Nguồn: Biên bản bất thường hàng nhập, Mã vạch hàng nhập, Mã vạch hàng xuất (mẫu thực tế, nhận 01/10/2026).
+- A14 [SOP+] [Lõi] Hành trình container trên ePort (nhận vỏ rỗng, vào cổng, lên tàu, rời cảng, tàu đến, dỡ khỏi tàu, ra cổng, trả vỏ; mỗi sự kiện có giờ thực tế hoặc dự kiến) dùng để chốt các mốc hiện ở danh mục lô hàng (A12, OQ-73). Không kết nối máy với ePort (A5). Nguồn: ePort Cargo Tracking Detail (ví dụ 6/8/2026).
 - B19 [SOP to-be] [Lõi] Thu hoá đơn GTGT theo "người gần lái xe nhất": khi lái xe tạo Yêu cầu thanh toán trên Lệnh, phần mềm giao việc "Thu hoá đơn GTGT" theo phân công việc của JobID chứa Lệnh đó, lần lượt: (1) nhân viên hiện trường đang giữ việc của JobID tại cùng cảng, bãi, kho nơi phát sinh khoản; (2) nhân viên hiện trường làm việc gần nhất của JobID; (3) CS của JobID. Việc vào "Việc của tôi" kèm Lệnh, khoản, số tiền; người nhận "Chuyển việc" được như B2, việc đi tới người kế tiếp trong thứ tự, hết người thì về cán bộ quản lý hiện trường. CS hoặc nhân viên hiện trường tự tạo Yêu cầu thanh toán từ JobID thì người tạo tự thu hoá đơn. Quy tắc chọn người đặt ở đây; `service-delivery` E6 trỏ sang. Hạn thu hoá đơn: OQ-72. Nguồn: Phân hệ APAS (17/10/2026), mục 3.1.2; `service-delivery` E6.
 
 ### P2 — nice to have
@@ -597,8 +607,8 @@ Nguồn khách: tên tài liệu khách gửi và mục. Quy trình điều ph�
 | OQ-3 | Phụ lục Bảng thông tin JobID và Định mức chi phí còn trống | Quy trình điều phối, mục 6.1–6.2 | Còn mở: Delta gửi dần phụ lục |
 | OQ-19 | Khách có cung cấp số booking, tàu, chuyến (xuất) hoặc free time lưu container, lưu vỏ (nhập) ngay khi đặt xe không? | Giao nhận hàng hoá (18/9/2026) | Một phần: hàng nhập lấy số ngày miễn phí từ Giấy báo hàng đến; hàng xuất CS nhập thời gian miễn phí lưu vỏ (đã bổ sung SOP). Còn thiếu: số booking, tàu khi đặt xe; bản SOP mới |
 | OQ-21 | Các cảng, depot Delta làm nhiều nhất? | Chưa có trong tài liệu khách gửi | Bỏ: không thống kê được; lấy số thật khi phần mềm chạy, không cài sẵn thứ tự ưu tiên |
-| OQ-22 | QR trên tờ khai hải quan chứa những trường nào? Xin mẫu thật | Quy trình điều phối, các mục "Phân luồng công việc" | Còn mở: QR tĩnh và động theo một chuẩn; chờ mẫu |
-| OQ-24 | QR trên Lệnh giao vỏ điện tử chứa gì, bãi nào phát hành? | Mẫu Lệnh giao vỏ điện tử khách gửi | Còn mở: như OQ-22; chờ mẫu và danh sách bãi |
+| OQ-22 | QR trên tờ khai hải quan chứa những trường nào? Xin mẫu thật | Quy trình điều phối, các mục "Phân luồng công việc" | Còn mở: QR tĩnh và động theo một chuẩn; chờ mẫu. Đã có mẫu thật 01/10 (Mã vạch hàng nhập, hàng xuất) nhưng chưa giải mã được nội dung QR, mã vạch |
+| OQ-24 | QR trên Lệnh giao vỏ điện tử chứa gì, bãi nào phát hành? | Mẫu Lệnh giao vỏ điện tử khách gửi | Còn mở: như OQ-22. Đã có 2 mẫu thật 01/10 (có màu, không màu), chữ in dưới QR dạng `CNTRHUB…`, chưa giải mã được nội dung QR; còn chờ danh sách bãi |
 | OQ-25 | Danh sách lý do khi CS bấm "Chuyển cho hiện trường": bãi yêu cầu có xe mới chọn vỏ · ngoài giờ · ePort lỗi · khác (ghi chú) — khách duyệt, thêm, bớt | Quy trình điều phối, mục 5.1.2.2 | Đã chốt: nút "Chuyển việc", 2 lý do "Hết giờ làm việc" / "Khác" (tự ghi), bắt buộc (B2) |
 | OQ-26 | Ca trực ngoài giờ: xếp lịch theo vòng hay từng ngày; ngày không có người trực thì sao; việc dở lúc 8h chuyển cho ai; có trực cuối tuần, lễ không; một chi nhánh mấy người trực? | Quy trình điều phối, mục 4 Định nghĩa | Đã chốt: cán bộ quản lý hiện trường giao người trực; thêm bàn giao việc đầu ca, cuối ca (B3b) |
 | OQ-27 | Gộp giao việc Lệnh hạ vỏ theo vận đơn + nơi hạ có đúng thực tế không? | Chưa có trong tài liệu khách gửi | Đã chốt: chỉ hàng nhập FCL; gộp khi JobID có 1 container, nhiều container làm từng container (B4) |
@@ -613,6 +623,10 @@ Nguồn khách: tên tài liệu khách gửi và mục. Quy trình điều ph�
 | OQ-75 | Khi chọn vỏ FCL xuất còn dở (đang "Chọn tiếp" hoặc chờ duyệt chốt số), JobID không được lên "Đã thực hiện Lệnh vận tải" dù các Lệnh đã có đều duyệt. Delta đồng ý không? | Quy trình điều phối, mục 4.6 "Xác định số lượng container xuất FCL trên JobID" | Chưa hỏi Delta |
 | OQ-76 | Khách báo thêm việc sau khi JobID đã "Hoàn thành dịch vụ" (hoặc đã xuất hoá đơn): mở lại JobID có duyệt, hay ghi vào JobID mới? | Quy trình cung cấp dịch vụ tổng quát (24/9/2026), mục 5.1.2 | Chưa hỏi Delta |
 | OQ-77 | Chốt số container và việc phát sinh chờ cán bộ quản lý hiện trường duyệt bao lâu thì nhắc lại (`P-han-duyet-dieu-phoi`)? | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta |
+| OQ-78 | EIR có 3 mốc giờ (xe vào, xe ra, phát hành): mốc tính lưu vỏ lấy giờ nào? Hàng lạnh có tính phí điện theo giờ cắm, rút điện trên EIR không? | Phiếu EIR mẫu thực tế (cảng Nam Hải Đình Vũ) | Chưa hỏi Delta |
+| OQ-79 | "Mã vạch gốc" hàng không Delta đang theo dõi có phải là tờ danh sách hàng hoá đủ điều kiện qua khu vực giám sát của hải quan (có mã vạch) không? Ai nộp bản gốc cho kho hàng không? | Mã vạch hàng nhập, Mã vạch hàng xuất (mẫu thực tế) | Chưa hỏi Delta |
+| OQ-80 | Biên bản bất thường hàng nhập của nhà ga: ai ký ô "khách hàng" (Delta hay chủ hàng)? Có biên bản thì chặn giao hàng hay chỉ cảnh báo? Ai làm khiếu nại với hãng bay? | Biên bản bất thường hàng nhập (mẫu thực tế) | Chưa hỏi Delta |
+| OQ-81 | Bãi bắt đăng ký thanh toán trước trên web của bãi (vd Greating Fortune, từ 1/6/2026): ai làm việc này, CS hay hiện trường? | Lệnh giao vỏ không màu (mẫu thực tế) | Chưa hỏi Delta |
 
 ## 12. Next Steps
 

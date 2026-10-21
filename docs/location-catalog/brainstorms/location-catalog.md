@@ -8,6 +8,7 @@ links:
   - docs/_product/prd.md
   - docs/service-delivery/brainstorms/service-delivery.md
   - docs/shipment-coordination/brainstorms/shipment-coordination.md
+  - docs-input/danh-muc/danh-muc-dia-diem-hang-tau.md
 ---
 
 # Danh mục địa điểm
@@ -33,6 +34,13 @@ Ranh giới: `service-delivery` và `shipment-coordination` chỉ đọc danh m�
 | Nguồn | Tài liệu | Mục | Ghi chú sổ đối chiếu |
 |---|---|---|---|
 | SRC-02 | Quy trình điều phối | 6.3 Danh mục địa điểm giao nhận | danh mục địa điểm giao nhận, có ở SRC-08 |
+| SRC-08 | Danh mục cảng, bãi, kho CFS, kho hàng không, hãng tàu (15/9/2026) | 1. Danh mục cảng | 36 cảng, 25 có ePort; cột "xe chọn vỏ" là danh sách hãng tàu yêu cầu (Hapag Lloyd, Maersk, ZIM, "hãng nào yêu cầu"), không phải cờ có/không; MST, tỉnh, địa chỉ giao nhận, link bản đồ |
+| SRC-08 | Danh mục cảng, bãi, kho CFS, kho hàng không, hãng tàu (15/9/2026) | 2. Danh mục depot / bãi container (CY) | 88 bãi, 14 có ePort, cùng cột như cảng |
+| SRC-08 | Danh mục cảng, bãi, kho CFS, kho hàng không, hãng tàu (15/9/2026) | 3. Danh mục kho CFS | không nơi nào có ePort |
+| SRC-08 | Danh mục cảng, bãi, kho CFS, kho hàng không, hãng tàu (15/9/2026) | 4. Danh mục kho hàng không | cột Sân bay thay Tỉnh/TP |
+| SRC-08 | Danh mục cảng, bãi, kho CFS, kho hàng không, hãng tàu (15/9/2026) | 5. Danh mục hãng tàu | 24 hãng: tên, MST, tỉnh, địa chỉ; dữ liệu ban đầu [Riêng Delta] |
+| SRC-13 | Lệnh giao vỏ không màu (mẫu thực tế) | Toàn bộ chứng từ | thuộc tính bãi: bắt đăng ký thanh toán trước trên web của bãi (Greating Fortune, từ 1/6/2026), cho 3 ngày sửa thông tin hoá đơn (`shipment-coordination` A6, OQ-81) |
+| SRC-12 | Lệnh giao vỏ có màu (mẫu thực tế) | Toàn bộ chứng từ | có sơ đồ đường nội bộ nhà máy, bãi (khu, cổng, khu sửa chữa): cân nhắc lưu sơ đồ theo địa điểm |
 
 ## 4. Open Questions
 

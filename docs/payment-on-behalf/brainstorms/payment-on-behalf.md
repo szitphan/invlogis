@@ -4,6 +4,7 @@ feature: payment-on-behalf
 status: draft
 updated: 2026-10-20
 links:
+  - docs-input/tich-hop/eport-qr-thanh-toan-2026-09-16/eport-qr-thanh-toan-2026-09-16.md
   - docs-input/sop/apas-thanh-toan-doi-soat/apas-thanh-toan-doi-soat.md
   - docs-input/sop/delta-3-0-master-plan/delta-3-0-master-plan.md
   - docs-input/sop/quan-ly-quy-thanh-toan/quan-ly-quy-thanh-toan.md
@@ -42,6 +43,11 @@ Ranh giới với `service-delivery`: JobID là nơi ghi chi phí, doanh thu; fe
 | SRC-31 | Quy trình quản lý quỹ & Thanh toán | Đính kèm 02 API Banking | bản 03/03; UNC, sổ phụ điện tử, lưu đồ dự kiến; bảng phí ngân hàng là báo giá, không phải yêu cầu (như SRC-07 5.2) |
 | SRC-24 | Tích hợp hệ thống VIS & SIM — Công tác chuẩn bị | 2.3 Phân hệ SIM — Trục Tích hợp Kết nối Ngân hàng (API Banking) | lệnh chi outbound MB/TPBank/VCB, webhook sổ phụ inbound |
 | SRC-24 | Tích hợp hệ thống VIS & SIM — Công tác chuẩn bị | 3.1 Ngân hàng (MB, VCB, TPBank) | 1 gói API cho 3 pháp nhân HN/HCM/Hải Phòng (BL-048 hỏi còn giữ không); lưu vết mã FT ↔ JobID; báo giá VCB, Auto-topup |
+| SRC-11 | Mã QR thanh toán của ePort (16/9/2026) | Mở đầu: lợi ích và 2 loại QR | QR động do ePort tạo sau khi làm lệnh, hiệu lực vài phút đến tối đa 15 phút; QR tĩnh chỉ có tài khoản, nhập tay số tiền, nội dung |
+| SRC-11 | Mã QR thanh toán của ePort (16/9/2026) | 1. Vấn đề | trả trực tuyến trước khi đến bãi (QR động) và tại bãi (QR tĩnh: nâng hạ, lưu bãi, vệ sinh); nhân viên đang trả bằng tài khoản cá nhân rồi làm tạm ứng; cấm tiền mặt từ 5 triệu mỗi hoá đơn hoặc tổng mỗi ngày mỗi đối tác (`P-nguong-tam-ung`) |
+| SRC-11 | Mã QR thanh toán của ePort (16/9/2026) | 2.1 Các lựa chọn | Maker/Checker trên app ngân hàng doanh nghiệp, liên kết tài khoản với ePort (MB, Vietcombank có; TPBank chưa), ví hoặc tài khoản trả trước, giải mã QR; ngân hàng MB, TPBank, Vietcombank |
+| SRC-11 | Mã QR thanh toán của ePort (16/9/2026) | 2.2 Trích xuất dữ liệu mã QR | chuẩn VietQR/EMVCo, lấy 4 trường: ngân hàng và chủ tài khoản nhận, số tài khoản, số tiền, nội dung |
+| SRC-11 | Mã QR thanh toán của ePort (16/9/2026) | 3. Lựa chọn | tiêu chí: cả chuỗi quét, duyệt, đẩy lệnh phải xong trước khi QR động hết hạn (APAS ghi QR ≥3 phút) |
 
 ## 4. Open Questions
 

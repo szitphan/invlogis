@@ -56,7 +56,9 @@ STATUS_TO_COL = {"draft": "draft", "captured": "draft", "in-progress": "draft", 
 OQ_CLOSED_RE = re.compile(r"^(Đã chốt|Đóng|Bỏ)", re.IGNORECASE)
 # OQ mở đã đẩy hỏi khách = ô cuối ghi phản hồi của khách (Còn mở: … / Một phần: … / Ngoài …).
 # Còn lại (vd "Chưa hỏi Delta (ngoài deck vòng 1)", ô chưa có trạng thái) = nội bộ, chưa gửi khách.
+# Ô mở đầu "Còn mở: chưa hỏi …" vẫn là nội bộ ("chưa hỏi" ở giữa ô, vd 1 ý của câu "Một phần", không tính).
 OQ_SENT_RE = re.compile(r"^(Còn mở|Một phần|Ngoài)", re.IGNORECASE)
+OQ_UNASKED_RE = re.compile(r"^(Còn mở\s*[:—-]\s*)?chưa hỏi", re.IGNORECASE)
 
 
 # ─── helpers ────────────────────────────────────────────────────────────────
@@ -169,7 +171,7 @@ def scan_oq(feature):
             rows.append({"id": f"OQ-{m.group(1)}", "path": rel(p), "line": i,
                          "question": cells[1] if len(cells) > 1 else "",
                          "open": not OQ_CLOSED_RE.match(state),
-                         "sent": bool(OQ_SENT_RE.match(state)),
+                         "sent": bool(OQ_SENT_RE.match(state)) and not OQ_UNASKED_RE.match(state),
                          "heading": heading,
                          "cols": [[hdr[k] if hdr else f"Cột {k + 1}", c] for k, c in enumerate(cells)],
                          "answerable": bool(hdr) and bool(OQ_ANSWER_COL_RE.search(hdr[-1]))})
