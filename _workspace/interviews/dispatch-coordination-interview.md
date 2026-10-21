@@ -287,3 +287,24 @@ User trả lời nhóm A:
 - 2026-10-07 user OK Phần 7: 5 rủi ro (Zalo/không dùng app; thiếu dữ liệu nền; AI đọc sai; thiếu tài liệu khách; GPS gián đoạn) + 5 tiêu chí thành công gắn pain a–e, chưa có số → OQ-44.
 - OQ-44 (hỏi khách): Số hiện trạng và mục tiêu cho 5 tiêu chí: tỉ lệ trường tự điền; tỉ lệ việc hiện trường giao/nhận trên app; số lần + tiền phạt lưu cont/lưu vỏ/lưu xe mỗi tháng; thời gian từ xe xong việc tới duyệt Lệnh; tỉ lệ Lệnh duyệt đủ chi phí.
 - → PHỎNG VẤN BRAINSTORM XONG ĐỦ 7 PHẦN. Brainstorm file chưa cập nhật Phần 4–7 (đang là bản checkpoint). User yêu cầu chạy /user-flow.
+
+## 2026-10-21 — Phỏng vấn bổ sung theo nguồn mới (2 vòng, trang artifact MaDxc6TodGya3k4iVAokNZ)
+- Nguồn đưa vào: service-delivery 20/10 (phạm vi dịch vụ, số container thực nhận, việc phát sinh), Phân hệ APAS 17/10 (thu hoá đơn GTGT, danh mục lô hàng), Quy trình điều phối mục 4.6 (chọn thiếu vỏ), Quy trình cung cấp dịch vụ tổng quát mục 4.6 (định mức, Quyết định phân công).
+- Vòng 1 user chốt:
+  - 6.3 giữ ➡, feature danh mục địa điểm đã có sẵn; slug `master-data` đổi thành `location-catalog` (DEC-249).
+  - B15: phạm vi dịch vụ trên JobID quyết định Điều phối có bước nào.
+  - B16: CS bấm "Chọn tiếp" hoặc "Chốt số". Chốt số cần cán bộ quản lý duyệt (ghi nhận có, OQ-71 xác nhận với khách). Hạn chọn tiếp = cut-off; Chọn tiếp thì ghi mốc chờ để tính lưu xe.
+  - B18: việc phát sinh có duyệt, hạch toán lên JobID ngay.
+  - B19: người gần lái xe nhất theo phân công việc của JobID.
+  - B20: Quyết định phân công 1/người/tháng, chỉ khi có công tác phí.
+  - A12: danh mục lô hàng thuộc Điều phối; "shipment list" ở Điều vận đổi thành "Bảng kê đường sắt" (DEC-250).
+- Vòng 2 user chốt:
+  - B17: bỏ khoản chờ hoàn phí nâng (Delta 10/10 đã chốt bỏ theo dõi, OQ-28); chỉ đánh dấu "Phí nâng không dùng". User yêu cầu đề xuất giải pháp cho tiền nâng vỏ đã trả mà không nâng được → chấp nhận đề xuất này.
+  - Chốt số: huỷ thanh toán chưa trả, thu quyền thanh toán, tính lại định mức phần bỏ; cho tăng lại số sau khi chốt.
+  - JobID không lên "Đã thực hiện Lệnh" khi chọn vỏ còn dở (OQ-75).
+  - Việc phát sinh thêm được tới trước "Hoàn thành dịch vụ"; sau mốc đó theo OQ-76. Khoản thu thêm ghi theo service-delivery E16.
+  - Hạn chờ duyệt theo `P-han-duyet-dieu-phoi` (OQ-77); ngoài giờ gửi người trực.
+  - Cut-off là trường bắt buộc khi kê khai FCL xuất.
+  - Quy tắc chọn người thu hoá đơn GTGT đặt ở Điều phối B19; service-delivery E6 chỉ trỏ sang.
+  - Phân mức: A12, B19 ở P1; còn lại P0.
+- Review độc lập (senior-ba, po-reviewer) xong trước khi ghi. OQ-71…77 giữ để hỏi Delta.

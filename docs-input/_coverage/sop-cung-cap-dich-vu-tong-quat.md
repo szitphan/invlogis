@@ -27,7 +27,7 @@
 | 4.5 Lệch pha giữa kỳ thanh toán và kỳ hạch toán | ➡ debt-management |  | kỳ ghi chi phí về muộn |
 | 4.5.3 Ghi nhận doanh thu và chi phí | ➡ debt-management |  |  |
 | 4.5.3.4 Trạng thái của JobID nghiệp vụ | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` Mục 6.3 | |
-| 4.6 Chi phí không hóa đơn | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` E14 | Quyết định giao Lệnh hằng tháng cho lái xe ➡ transport-dispatch (BL mới); định mức theo địa điểm ➡ master-data |
+| 4.6 Chi phí không hóa đơn | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` E14<br>`docs/shipment-coordination/brainstorms/shipment-coordination.md` B20 | Quyết định giao Lệnh hằng tháng cho lái xe ➡ transport-dispatch (BL mới); định mức theo địa điểm ➡ location-catalog; Quyết định phân công công việc hằng tháng ➡ fund-payments |
 | 4.7 Hàng đường sắt | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` B9; `docs/transport-dispatch/brainstorms/transport-dispatch.md` D6, D7, E3 | khoá mục hải quan, nâng hạ ở ga; doanh thu đường sắt, J11 ở transport-dispatch |
 | 4.8 Hàng CBT | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` D10, D11 | thủ tục cửa khẩu sau khi lập Lệnh ➡ transport-dispatch (BL mới); nguồn không có VAT 0% |
 | 4.9.1 Thủ tục chuyên ngành | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` B9, Mục 5.3 |  |
@@ -37,7 +37,7 @@
 | 4.9.5 Hạn mức tín dụng | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` DP-01 | |
 | 4.9.6 Chi phí dở dang | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` DP-01 |  |
 | 4.10 Giải pháp phát hành hóa đơn | ➡ debt-management |  | lệch với SIM (SIM ghi QT 5.2, SOP ghi 5.4) |
-| 5.1 Quy trình tạo JobID | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` Mục 5.1 bước 0, A11, B10, OQ-66 | shipment list, dashboard tổng là màn riêng |
+| 5.1 Quy trình tạo JobID | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` Mục 5.1 bước 0, A11, B10, OQ-66<br>`docs/shipment-coordination/brainstorms/shipment-coordination.md` B15, B18 | danh mục lô hàng ở Điều phối A12; dashboard tổng là màn riêng |
 | 5.2 Quy trình cung cấp dịch vụ | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` Mục 5.1 bước 8, B12, E16, E17 |  |
 | 5.3 Quy trình quản lý nợ phải trả | ➡ debt-management |  |  |
 | 5.4 Quy trình quản lý nợ phải thu | ➡ debt-management |  |  |

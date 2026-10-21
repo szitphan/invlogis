@@ -133,7 +133,7 @@ Ngoài 2 hành trình chính (back-office, quản trị): `common-workspace`, `h
 | 8 | Quản lý nhà cung cấp, khách hàng và xe của khách hàng | `business-partners` | Danh mục › Đối tác | Nhân viên xưởng, CS, Kế toán | Must | `access-control` | ⬜ chưa |
 | 9 | Quản lý khoản mục chi phí cấp 1–3 | `cost-catalog` | Danh mục › Tài chính | Admin, Kế toán | Must | `access-control` | ⬜ chưa |
 | 10 | Mở hồ sơ dịch vụ (JobID) từ chứng từ khách | `service-delivery` | Điều phối vận tải | CS, Kế toán | Must | `access-control`, `business-partners`, `cost-catalog` | ✅ đã chi tiết (1 brainstorm) |
-| 11 | Điều phối việc cảng, bãi theo luồng hàng | `shipment-coordination` | Điều phối vận tải | CS, Hiện trường | Must | `service-delivery`, `access-control`, `cost-catalog` | ✅ đã chi tiết (1 brainstorm) |
+| 11 | Điều phối việc cảng, bãi theo luồng hàng | `shipment-coordination` | Điều phối vận tải | CS, Hiện trường | Must | `service-delivery`, `access-control`, `cost-catalog`, `fund-payments`, `location-catalog` | ✅ đã chi tiết (1 brainstorm) |
 | 12 | Lập và chạy Lệnh vận tải | `transport-dispatch` | Điều phối vận tải | Điều vận, Lái xe | Must | `shipment-coordination`, `vehicle-management`, `cost-catalog`; mềm (khi bật Gói Nhiên liệu): `fuel-allowance` | ✅ đã chi tiết (1 brainstorm) |
 | 13 | Quản lý phương tiện, bàn giao và thu hồi | `vehicle-management` | Quản lý phương tiện | Quản lý phương tiện, Lái xe | Must | `access-control` | ⬜ chưa |
 | 14 | Đặt định mức khoán nhiên liệu phương tiện | `fuel-allowance` | Quản lý phương tiện | Quản lý phương tiện | Should | `vehicle-management` | ⬜ chưa |
@@ -337,7 +337,7 @@ Dữ liệu đi liền từ JobID sang yêu cầu vận tải, không nhập l�
 
 __Phục vụ job:__ CS, Hiện trường — giao và làm việc cảng, bãi trên app thay Zalo; Lãnh đạo — biết việc nào sắp trễ mốc.
 
-__Phạm vi v1:__ Theo brainstorm `shipment-coordination`: 6 luồng hàng, danh mục cảng/bãi 3 thuộc tính, AI đọc Booking Note/eDO/EIR/phiếu cân, quét QR tờ khai, giao việc và chuyển việc, gợi ý người nhận việc, ca trực.
+__Phạm vi v1:__ Theo brainstorm `shipment-coordination`: 6 luồng hàng, phân luồng theo thuộc tính cảng/bãi (danh mục ở `location-catalog`), danh mục lô hàng, AI đọc Booking Note/eDO/EIR/phiếu cân, quét QR tờ khai, giao việc và chuyển việc, gợi ý người nhận việc, ca trực, chọn vỏ và chốt số container thực nhận, việc phát sinh có duyệt, thu hoá đơn GTGT, định mức khi giao việc.
 __Chưa làm:__ Kết nối máy với ePort.
 
 __Luồng chính:__
@@ -723,5 +723,5 @@ __Mục tiêu 3 / 6 / 12 tháng:__ 3 tháng — Delta chạy thật phân hệ �
 * [ ] OQ-14: Khách của doanh nghiệp (đại diện chủ hàng) có được xem tình trạng lô hàng của mình không, hay ngoài phạm vi?
 * [x] OQ-15: `service-delivery`, `shipment-coordination`, `transport-dispatch`, `inventory-count` đang lớn hơn cỡ một brainstorm — có tách không (vd chi phí JobID, danh mục cảng/bãi, gói Đường sắt/CBT/Hàng lạnh, thanh lý rác thải)? Resolved: không tách. (DEC-087)
 * [ ] OQ-16: Chưa có module Sales (DEC-086), JobID v1 lấy giá bán, doanh thu từ đâu (nhập tay, bảng giá theo khách)? Phần mềm Delta 3.0 (16/10/2026) mục 3.1.5 xếp phân hệ Sales (hợp đồng, báo giá, hoa hồng sales và sales fund, hoa hồng khách, thu hồi công nợ) vào giai đoạn 2.
-* [ ] OQ-17: Danh mục cảng, bãi, điểm chụp ảnh và loại phí, định mức theo địa điểm mà brainstorm `shipment-coordination`, `transport-dispatch` dùng thuộc feature nào? Loại phí có trùng khoản mục chi phí của `cost-catalog` không?
+* [ ] OQ-17: Danh mục cảng, bãi, điểm chụp ảnh và loại phí, định mức theo địa điểm mà brainstorm `shipment-coordination`, `transport-dispatch` dùng thuộc feature nào? Loại phí có trùng khoản mục chi phí của `cost-catalog` không? Đã chốt một phần: danh mục địa điểm và định mức theo địa điểm thuộc `location-catalog` (DEC-249). Điểm chụp ảnh, loại phí còn mở.
 * [ ] OQ-18: Thông báo trong app (nhắc, cảnh báo quá mốc, chờ duyệt) do feature nào sở hữu — `common-workspace` hay feature riêng?

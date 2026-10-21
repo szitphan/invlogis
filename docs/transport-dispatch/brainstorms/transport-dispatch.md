@@ -51,7 +51,7 @@ links:
   - Điều phối (`shipment-coordination`): sinh YCVT, ghi mốc, nơi nhận lấy từ D/O. Màn "Việc của tôi" (web, mobile) vẽ đầy đủ ở đó, feature này dùng chung.
   - Cung cấp dịch vụ tổng quát (`service-delivery`): tạo JobID (CBT, đường sắt đi thẳng sang đây), quy tắc thanh toán chi phí và Yêu cầu thanh toán (E2, E6), hoàn thành dịch vụ.
 - CBT và đường sắt không đi qua Điều phối (Delta, 10/10/2026). Mỗi loại JobID có giao diện riêng, kéo theo Yêu cầu vận tải và Lệnh riêng. Chi tiết chờ Quy trình điều vận (OQ-1). Mục 5.3, 5.4 và D6–D8, E3, E4, E8 dựa trên SOP Giao nhận hàng hoá.
-- Không gồm (feature riêng): shipment list, bảng kê đường sắt; ghi nhận và bù dầu ngoài Lệnh (module Vận tải / Cấp dầu); quản lý danh mục điểm chụp ảnh, loại phí.
+- Không gồm (feature riêng): Bảng kê đường sắt (màn riêng); ghi nhận và bù dầu ngoài Lệnh (module Vận tải / Cấp dầu); quản lý danh mục điểm chụp ảnh, loại phí.
 - Dữ liệu xe (VIS): feature này giữ phần hiện và dùng trên Lệnh (Nhóm I). Kết nối EUP, VETC, dịch vụ bản đồ, phát hiện sự việc và danh mục trạm thu phí dùng chung ở `vehicle-telematics`; km, dầu tồn, hút dầu, xe chạy ngoài Lệnh ở `vehicle-management`; định mức l/giờ ở `fuel-allowance`; nhận dầu chờ nhận ở `fuel-issuing`.
 - Ngoài giai đoạn 1: quản lý vỏ container (chi phí sửa vỏ vẫn ghi trên Lệnh).
 - Xử lý ngoài phần mềm: tiền hoàn nâng vỏ; quá mốc do kẹt xe, sự cố đường.
@@ -107,7 +107,7 @@ Tần suất chưa đo được, ghi định tính. Dòng có ★ là tác vụ 
 - D3 [SOP+] [Lõi] Air nhập chưa về đủ kiện thì chặn giao xe tới khi CS chọn "Khai theo số kiện đã về" hoặc "Chờ đủ hàng"; lô tách chuyến thành nhiều Lệnh dưới 1 JobID. Kho CFS chưa xác nhận hàng sẵn sàng thì chỉ cảnh báo.
 - D5 [SOP+] [Lõi] Gợi ý ghép hàng lẻ và hàng air chung xe (cùng kho/kho gần, giờ cut-off, CBM/trọng lượng so với tải xe); điều vận bấm chọn.
 - D6 [SOP+] [Gói: Đường sắt] Đường sắt: nhập kế hoạch nhà ga theo mẫu file (mẫu đầu tiên: Ratraco) ngày n (nhận ngày n-1), sinh Lệnh hàng loạt; xuất "Kế hoạch xe theo ga" gửi trưởng ga (chỉ nhận file); gợi ý nơi lấy vỏ theo thứ tự ưu tiên SOP.
-- D7 [SOP+] [Gói: Đường sắt] [Cấu hình] Lệnh đường sắt hoàn tất tự vào shipment list đúng kỳ `P-ky-chot-duong-sat` (Delta: ngày 25 / cuối tháng). Màn shipment list, bảng kê là feature riêng.
+- D7 [SOP+] [Gói: Đường sắt] [Cấu hình] Lệnh đường sắt hoàn tất tự vào Bảng kê đường sắt đúng kỳ `P-ky-chot-duong-sat` (Delta: ngày 25 / cuối tháng). Màn Bảng kê đường sắt là feature riêng.
 - D8 [Mới] [Gói: CBT] Gợi ý hàng chiều về cho xe CBT sắp trả hàng ở miền Nam, miền Trung.
 
 **Nhóm E — chi phí trên Lệnh (vấn đề e)**
@@ -238,7 +238,7 @@ Không đi qua Điều phối (Delta, 10/10/2026). Thứ tự bước giữa ch�
 (PM) Xuất "Kế hoạch xe theo ga" --> gửi trưởng ga (email / copy / file)
 [Lái xe] Chạy Lệnh, ghi chi hộ Ratraco / cân xe (loại phí, số tiền, ảnh)
 Chưa có giá --> cờ "Chưa có đơn giá" + việc "Xác định giá" --> [CS] nhập đơn giá tay (giai đoạn 1)
---> Chốt Lệnh --> (PM) vào shipment list kỳ 25 / cuối tháng
+--> Chốt Lệnh --> (PM) vào Bảng kê đường sắt kỳ 25 / cuối tháng
                   còn cờ "Chưa có đơn giá" --> chặn chốt kỳ
 ```
 
@@ -534,9 +534,9 @@ Xác nhận (Xem CMP-03):
 | Người duyệt Lệnh | Lệnh hết chạy có đề xuất bù dầu, trạm tránh, ngoài cung đường | Thông báo đẩy |
 | Khách | Các mốc giao nhận khác | Chờ OQ-38 |
 
-**Việc phần mềm tự chạy theo giờ:** đếm mốc và bắn cảnh báo quá mốc, leo thang · nhắc nhiệt độ theo chu kỳ · đồng hồ lưu xe theo `P-gio-mien-phi-luu-xe` (Delta: 72 giờ, chờ OQ-33) · sinh shipment list nháp tới kỳ `P-ky-chot-duong-sat` (Delta: ngày 25 và cuối tháng).
+**Việc phần mềm tự chạy theo giờ:** đếm mốc và bắn cảnh báo quá mốc, leo thang · nhắc nhiệt độ theo chu kỳ · đồng hồ lưu xe theo `P-gio-mien-phi-luu-xe` (Delta: 72 giờ, chờ OQ-33) · sinh Bảng kê đường sắt nháp tới kỳ `P-ky-chot-duong-sat` (Delta: ngày 25 và cuối tháng).
 
-**Cần gần như tức thời:** giờ đến theo GPS, cảnh báo quá mốc, giao Lệnh mới, vé khớp khi đơn vị thu phí gửi về. Còn lại (shipment list, thống kê) chậm vài phút được.
+**Cần gần như tức thời:** giờ đến theo GPS, cảnh báo quá mốc, giao Lệnh mới, vé khớp khi đơn vị thu phí gửi về. Còn lại (Bảng kê đường sắt, thống kê) chậm vài phút được.
 
 ## 8. Assumptions
 

@@ -13,7 +13,7 @@
 | 2.4 Hàng không | ✅ | `docs/shipment-coordination/brainstorms/shipment-coordination.md` Mục 5.5, 5.7 | |
 | 2.5 Hàng CBT | ✅ | `docs/transport-dispatch/brainstorms/transport-dispatch.md` Mục 5.3 | |
 | 2.6 Hàng đường sắt | ✅ | `docs/transport-dispatch/brainstorms/transport-dispatch.md` Mục 5.4 | |
-| 3.1 Hàng container | ✅ | `docs/shipment-coordination/brainstorms/shipment-coordination.md` Mục 5.2, 5.3 | |
+| 3.1 Hàng container | ✅ | `docs/shipment-coordination/brainstorms/shipment-coordination.md` B17, Mục 5.2, 5.3 | |
 | 3.1.4 Các vấn đề liên quan | ✅ | `docs/transport-dispatch/brainstorms/transport-dispatch.md` B5, B6 | |
 | 3.1.5 Thanh toán chi phí | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` E2 | |
 | 3.2 Hàng CFS/LCL | ✅ | `docs/shipment-coordination/brainstorms/shipment-coordination.md` Mục 5.4, 5.6; `docs/transport-dispatch/brainstorms/transport-dispatch.md` D3, D5 | |
