@@ -3,7 +3,7 @@ type: brainstorm
 feature: shipment-coordination
 status: stale
 status_prev: draft
-updated: 2026-10-12
+updated: 2026-10-21
 links:
   - docs-input/sop/sop-dieu-phoi.md
   - docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md
@@ -121,7 +121,7 @@ Chưa có.
 0. **Tạo và duyệt JobID** — `service-delivery`.
 1. **Nhận JobID vào Điều phối** — phần mềm đưa vào danh sách của CS, bắt đầu đếm mốc.
 2. **Hoàn thiện dữ liệu và phân luồng** — CS kê khai, đưa chứng từ; nơi nhận lấy từ D/O; chưa kê khai đủ thì khoá thanh toán trên JobID.
-3. **Giao việc hiện trường** — cán bộ quản lý hiện trường chọn người (phần mềm gợi ý `P-so-nguoi-goi-y-nhan-viec` (Delta: 2–3) người); phần mềm ghi chi phí định mức, cấp quyền thanh toán. Giao cho người chi nhánh khác thì tự ghi giao dịch nội bộ (B7).
+3. **Giao việc hiện trường** — cán bộ quản lý hiện trường chọn người (phần mềm gợi ý `P-so-nguoi-goi-y-nhan-viec` (Delta: 2–3) người); phần mềm ghi chi phí định mức, cấp quyền thanh toán. Định mức lấy theo địa điểm làm việc trong danh mục địa điểm (`master-data`); định mức hải quan (mở tờ khai, kiểm hoá, thanh lý tờ khai) theo `service-delivery` E14; con số chờ phụ lục định mức (OQ-3). Quyết định phân công công việc kèm bảng kê (JobID, số tiền) không sinh lúc giao việc: phần mềm sinh khi người được giao thanh toán khoản không hoá đơn (`fund-payments`, Quy trình 5.3); việc giao ở bước này là căn cứ của Quyết định (SOP tổng quát 4.6). Tiền chọn vỏ: OQ-48. Giao cho người chi nhánh khác thì tự ghi giao dịch nội bộ (B7).
 4. **Sinh YCVT** — FCL: sau khi hiện trường xong việc tại cảng/bãi. Hàng lẻ, CFS, air: ngay khi giao việc, việc hiện trường chạy song song với Lệnh.
 5–7. **Lập, chạy, chốt và duyệt Lệnh** — `transport-dispatch`.
 8. **Hoàn thành dịch vụ** — `service-delivery`.
@@ -474,6 +474,7 @@ Nguồn khách: tên tài liệu khách gửi và mục. Quy trình điều ph�
 | OQ-39 | Cảng có ePort nhưng hiện trường vẫn phải thanh lý tờ khai tại bãi: những cảng nào? | Quy trình điều phối, mục 5.4.2.2 | Chưa hỏi Delta (ngoài deck vòng 1) |
 | OQ-40 | Bước lấy Lệnh nâng hàng của hiện trường (FCL nhập) ghi "nhân viên CS upload": là hiện trường upload hay CS phải upload lại? | Quy trình điều phối, mục 5.4.2.4 | Chưa hỏi Delta (ngoài deck vòng 1) |
 | OQ-41 | Người được giao việc hiện trường bao lâu không bấm nhận thì việc tự quay về cán bộ quản lý giao lại? | Chưa có trong tài liệu khách gửi | Chưa hỏi Delta (ngoài deck vòng 1) |
+| OQ-48 | Tiền chọn vỏ container (nhân viên hiện trường trả cho quản lý bãi để lấy vỏ tốt) có áp định mức theo từng bãi và phần mềm tự ghi lên JobID khi giao việc chọn vỏ, giống định mức hải quan không? Hay hiện trường kê số thực chi khi thanh toán? SOP xếp khoản này vào nhóm Vận tải (công tác phí), nhưng câu "xây dựng định mức theo địa điểm… tự áp lên JobID" chỉ đứng sau 3 khoản hải quan. | Quy trình cung cấp dịch vụ tổng quát (24/9/2026), mục 4.6 | Chưa hỏi Delta |
 
 ## 12. Next Steps
 
