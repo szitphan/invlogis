@@ -4,7 +4,7 @@ feature: vehicle-management
 status: draft
 status_changed: 2026-10-20
 status_reason: "đã review upstream, không cần sửa"
-updated: 2026-10-20
+updated: 2026-10-21
 links:
   - docs-input/tich-hop/vetc-api-cong-van-2026-09-02/vetc-api-cong-van-2026-09-02.md
   - docs-input/srs-cu/lg-srs-export.md
@@ -289,11 +289,13 @@ Sự việc hút dầu, chạy ngoài Lệnh dùng vòng đời "sự việc c�
 
 ## 11. Open Questions
 
+Cột Trả lời theo [[docs/meetings/2026-10-21-oq-vis.md|Delta trả lời deck VIS]] (anh Nghĩa, 21/10/2026).
+
 | OQ | Câu hỏi | Nguồn khách | Trả lời |
 |---|---|---|---|
-| OQ-1 | Bàn giao xe đi cùng phiếu đổ đầy bình (dGas4), thu hồi đi cùng phiếu chốt dầu (dGas5): đúng không? Cho làm phiếu trước hay biên bản trước đều được, biên bản chỉ ký xong khi phiếu xong: có làm chậm giao xe không? | SRS LG v2.0, bảng liên quy trình (Bàn giao phương tiện, Thu hồi phương tiện) | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
-| OQ-2 | Lúc ký biên bản bàn giao, thu hồi mà GPS không có dữ liệu: lấy km lần đọc gần nhất, ghi kèm giờ đọc được không? | Chưa có trong tài liệu khách gửi | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
-| OQ-3 | Xe chạy ngoài Lệnh: những trường hợp nào không cảnh báo (Lệnh đã nhận, xe đang tới điểm đầu; về bãi sau Lệnh; đi đổ dầu có phiếu đang mở; đi xưởng có lệnh sửa chữa đang mở; đang bàn giao giữa chi nhánh)? Đi bao xa hoặc bao lâu thì cảnh báo? | VIS (08/10/2026), mục 3.1.3 Bước 4 (chạy xe ngoài lịch trình, việc riêng) | Còn mở: đã gửi Delta qua deck VIS 15/10, chờ trả lời |
+| OQ-1 | Bàn giao xe đi cùng phiếu đổ đầy bình (dGas4), thu hồi đi cùng phiếu chốt dầu (dGas5): đúng không? Cho làm phiếu trước hay biên bản trước đều được, biên bản chỉ ký xong khi phiếu xong: có làm chậm giao xe không? | SRS LG v2.0, bảng liên quy trình (Bàn giao phương tiện, Thu hồi phương tiện) | Đã chốt (Delta 21/10): B — giữ như SRS: đổ đầy bình dầu rồi mới bàn giao xe |
+| OQ-2 | Lúc ký biên bản bàn giao, thu hồi mà GPS không có dữ liệu: lấy km lần đọc gần nhất, ghi kèm giờ đọc được không? | Chưa có trong tài liệu khách gửi | Đã chốt (Delta 21/10): A — lấy lần đọc GPS gần nhất, ghi kèm giờ đọc; ghi thêm số km theo Lệnh vận tải (Delta MIS có dữ liệu) |
+| OQ-3 | Xe chạy ngoài Lệnh: những trường hợp nào không cảnh báo (Lệnh đã nhận, xe đang tới điểm đầu; về bãi sau Lệnh; đi đổ dầu có phiếu đang mở; đi xưởng có lệnh sửa chữa đang mở; đang bàn giao giữa chi nhánh)? Đi bao xa hoặc bao lâu thì cảnh báo? | VIS (08/10/2026), mục 3.1.3 Bước 4 (chạy xe ngoài lịch trình, việc riêng) | Một phần (Delta 21/10): 5 trường hợp không cảnh báo đã đủ; Delta đề nghị bổ sung giải pháp để làm rõ các vấn đề liên quan. Còn thiếu: đi bao xa hoặc bao lâu thì cảnh báo |
 | OQ-4 | Máy phát điện có hay tháo lắp giữa các mooc không? Khi tháo lắp ai khai (quản lý phương tiện hay lái xe trên App)? Có cần nhắc bảo dưỡng máy phát theo giờ chạy (`reminders`) không? | Đề xuất tiện ích GPS (25/9/2025), mục 3 | Còn mở: chưa hỏi Delta |
 | OQ-5 | Delta có file Excel danh mục xe và thẻ ETC (bản đã gửi VETC: biển số, số eTag, loại phí, trạng thái thẻ của 254 xe) để nhập ban đầu vào hồ sơ xe không? | Công văn VETC (21/09/2026), 4 danh mục đính kèm | Còn mở: chưa hỏi Delta |
 
