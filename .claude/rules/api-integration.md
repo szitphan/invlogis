@@ -1,3 +1,10 @@
+---
+paths:
+  - ".claude/skills/api-*/**"
+  - "docs/**/integration/**"
+  - "docs/**/test/api/**"
+---
+
 # API Integration — rule chung cho họ skill tích hợp API‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > Rule chung cho **7 skill** họ tích hợp API: `/api-assess`, `/api-doc`, `/api-design`, `/api-map`, `/api-checklist`, `/api-test`, `/api-readiness`. Mỗi skill MUST reference file này trong Constraints + References. Nó trả lời: **thứ tự pipeline, ranh giới own/3rd/mixed, chiều outbound/inbound, source-of-truth nào là gốc, và đâu là việc BA đâu là việc dev.**

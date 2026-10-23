@@ -95,7 +95,7 @@ __Quy tắc vận hành:__
 
 ## Rule nạp theo vùng file
 
-Luôn nạp: `approval-gate.md`, `backlog.md`. Các rule còn lại trong `.claude/rules/` chỉ tự nạp khi đụng file khớp `paths:` ở đầu rule. __Khi chạy skill, đọc các rule mà SKILL.md tham chiếu (Constraints/References) nếu chưa có trong ngữ cảnh__ — đừng giả định rule đã được nạp.
+Luôn nạp (rule không có `paths:`): `approval-gate.md`, `backlog.md`, `saas-layer.md`. Rule mới mà không khai `paths:` thì sẽ nạp ở mọi phiên, nên luôn khai. Các rule còn lại trong `.claude/rules/` chỉ tự nạp khi đụng file khớp `paths:` ở đầu rule. __Khi chạy skill, đọc các rule mà SKILL.md tham chiếu (Constraints/References) nếu chưa có trong ngữ cảnh__ — đừng giả định rule đã được nạp.
 
 ## Conventions
 

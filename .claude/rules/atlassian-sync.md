@@ -1,3 +1,10 @@
+---
+paths:
+  - ".claude/skills/jira/**"
+  - ".claude/skills/confluence/**"
+  - ".claude/state/atlassian/**"
+---
+
 # Atlassian Sync — rule chung cho `/jira` + `/confluence`‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 > Rule chung định nghĩa __đồng bộ 2 chiều__ giữa vault local và Atlassian (Jira Cloud + Confluence Cloud). Cả `/jira` và `/confluence` MUST reference file này. Nó trả lời: __làm sao kéo (pull) issue/page về, làm sao phát hiện conflict khi CẢ local lẫn remote cùng đổi, và ai (local hay remote) là chủ của từng loại thông tin.__
