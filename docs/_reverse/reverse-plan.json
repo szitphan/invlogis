@@ -277,7 +277,8 @@
           "status": "done"
         }
       ],
-      "status": "done"
+      "status": "done",
+      "covers": "technical-services — tách thành feature riêng theo DEC-157 (18/10), bộ reverse dịch vụ kỹ thuật nằm trong docs/_reverse/product-catalog/, không reverse lại (chốt 20/10)"
     },
     {
       "slug": "business-partners",
@@ -306,10 +307,10 @@
             ]
           ],
           "mobile_lines": [],
-          "status": "pending"
+          "status": "done"
         }
       ],
-      "status": "pending"
+      "status": "done"
     },
     {
       "slug": "cost-catalog",
@@ -338,10 +339,10 @@
             ]
           ],
           "mobile_lines": [],
-          "status": "pending"
+          "status": "done"
         }
       ],
-      "status": "pending"
+      "status": "done"
     },
     {
       "slug": "vehicle-management",
@@ -722,11 +723,11 @@
       "parts": [
         {
           "id": "a",
-          "name": "Cây dầu nội bộ, cây dầu mua ngoài, dashboard cây dầu",
+          "name": "Cây dầu nội bộ, cây dầu mua ngoài, dashboard cây dầu, mã lỗi barem và cảm biến iGAS",
           "web_pages": [
             [
               2458,
-              2504
+              2515
             ],
             [
               1863,
@@ -785,15 +786,11 @@
       "parts": [
         {
           "id": "a",
-          "name": "Cấp dầu (web), phiếu cấp dầu (app), mã lỗi barem và cảm biến iGAS",
+          "name": "Cấp dầu (web), phiếu cấp dầu (app)",
           "web_pages": [
             [
               1811,
               1825
-            ],
-            [
-              2505,
-              2515
             ]
           ],
           "mobile_lines": [
@@ -854,7 +851,7 @@
       "status": "pending"
     }
   ],
-  "updated": "2026-10-15",
+  "updated": "2026-10-20",
   "modules_decision": "DEC-079 (docs/_product/legacy-issues.md ISS-01) — nhãn module gắn tạm, chốt ở PRD (BL-121)",
   "issues_register": "docs/_product/legacy-issues.md (đọc từ checkout main)"
 }
