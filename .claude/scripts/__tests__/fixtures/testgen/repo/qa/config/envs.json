@@ -1,0 +1,5 @@
+{
+  "_note": "fixture",
+  "dev": { "apiBase": "https://api-dev-erp.innvie.vn", "webBase": "https://web-dev.example.test", "tenantIdEnv": "QA_TENANT_ID", "webBaseEnv": "QA_WEB_BASE" },
+  "local": { "apiBase": "http://localhost:8080", "webBase": "http://localhost:4200", "tenantIdEnv": "QA_TENANT_ID", "webBaseEnv": "QA_WEB_BASE" }
+}

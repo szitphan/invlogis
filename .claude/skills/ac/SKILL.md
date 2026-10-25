@@ -44,6 +44,7 @@ Generate, repair, hoặc review-only acceptance criteria cho user stories. AC __
 * __Compound AC — split có điều kiện, KHÔNG mù.__ "user submits AND email sent": nếu email là __outcome cam kết của cùng 1 giao dịch__ (submit thành công thì email PHẢI gửi) → GIỮ 1 AC (tách ra che mất tính toàn vẹn giao dịch). Chỉ split khi 2 hành vi __thật sự độc lập__ (có thể pass/fail riêng, không ràng buộc giao dịch).
 * __Negative/error theo rủi ro, KHÔNG theo quota.__ `@qa-reviewer` rubric chỉ __flag warning__ khi story có rủi ro rõ mà thiếu negative — KHÔNG ép "1 negative mỗi category". Story đơn giản không cần negative; story tiền/pháp lý cần nhiều.
 * __Thứ tự ưu tiên nguồn khi mâu thuẫn:__ SRS FR/BR/Error Matrix (contract) > UC (hành vi) > screen (chỉ presentation). Screen KHÔNG chứng minh rule/permission/backend outcome — __KHÔNG suy AC validation/error từ screen__ khi spec chưa cam kết; chỗ thiếu → __hỏi user làm rõ trước__ (bước 3b), không chốt được mới đánh OQ, tuyệt đối không bịa.
+* __Feature cũ chỉ có bộ tái lập__ (`srs/{feature}-spec.md` chưa có, `docs/_reverse/{feature}/{feature}-reverse-spec.md` có, story đã sinh từ bộ tái lập) — KHÔNG coi là "SRS missing": dùng `reverse-spec.md` + `reverse-gaps.md` làm contract thay SRS, soft gate warn "Nguồn là bộ tái lập (draft cứng)". Mỗi AC ghi `Nguồn: bộ tái lập` + mã tái lập (`FR-{feature}-R001`…) và mã AC dev nếu bộ tái lập trích (`AC:FU-FD-AC-002`). Chỗ reverse-gaps còn Conflict/OQ → hỏi user (bước 3b); chưa chốt mà tạm theo code thì ghi rõ "tạm theo code {mã AC dev}" để `/test-checklist` gắn nhãn `[đáp án: code …]`. Thứ tự ưu tiên nguồn: `.claude/rules/test-trace.md`.
 * __UC thường chỉ mô tả happy flow__ — đối chiếu alternate/exception flow trong `flows.md` để không sót edge case; thiếu và chặn viết AC → hỏi user làm rõ trước (bước 3b), chưa chốt được mới đánh OQ.
 * __AC vs test case__ — nếu 1 tiêu chí chỉ là boundary/format/max-length/browser/locator thuần kỹ thuật → KHÔNG đưa vào AC, ghi chú "thuộc test case QA". AC map ≥1 test nhưng không thay thế test suite (exploratory/regression/security/performance).
 * **`/ac` không edit AC trực tiếp** — edit `## Acceptance Criteria` section trong US file (inline). KHÔNG tạo file riêng. Update = semantic diff phần AC, KHÔNG regenerate toàn story.
@@ -64,15 +65,16 @@ Muốn chỉ review coverage (không sửa) hoặc chỉ sửa lỗi AC cũ (kh�
 
 Today: !`date +%Y-%m-%d`
 Features có US: !`for d in docs/*/userstories/; do [ -d "$d" ] && dirname "$d" | xargs basename; done | head -10`
+Features chỉ có bộ tái lập (chưa SRS mới): !`for d in docs/_reverse/*/*-reverse-spec.md; do [ -f "$d" ] || continue; f=$(basename "$(dirname "$d")"); [ -f "docs/$f/srs/$f-spec.md" ] || echo "$f"; done | head -20`
 
 ## Approach
 
 1) __Resolve targets.__ Mode generate (default), repair, review. Phân biệt 2 case (per `feature-bootstrap.md` nhóm B):
    * __Feature/story KHÔNG tồn tại__ (feature chưa có `docs/{feature}/userstories/us-*.md`, hoặc arg gõ sai) → __REFUSE tường minh + route__: "Chưa thể chạy `/ac` cho `{feature}` — thiếu `us-*.md` (cần story để gắn AC). Feature hiện có: {list}. Chạy `/userstory {feature}` trước để tạo story, rồi quay lại." KHÔNG tự tạo feature/story.‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
    * __Story tồn tại__ → proceed. (SRS/error matrix mỏng chỉ là soft gate ở bước 3, không phải chặn.)
-2) __Read__ SRS spec + screens + error matrix + target stories.
+2) __Read__ SRS spec + screens + error matrix + target stories. Chưa có SRS mới mà có bộ tái lập → Read `docs/_reverse/{feature}/{feature}-reverse-spec.md` + `reverse-gaps.md` + `reverse-sources.md` thay SRS (xem Pitfalls "Feature cũ chỉ có bộ tái lập").
    * __KG chọn nguồn trước (rẻ hơn scan):__ chạy `node .claude/skills/kg/engine/kg-query.mjs coverage {feature}` và `node .claude/skills/kg/engine/kg-query.mjs facts {feature}` để lấy danh sách candidate/coverage, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.claude/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
-3) __Soft gate__ SRS/error matrix missing (nhưng story đã có) → warn + ask proceed (build AC từ US content).
+3) __Soft gate__ SRS/error matrix missing (nhưng story đã có) → warn + ask proceed (build AC từ US content). Có bộ tái lập → warn 1 dòng "nguồn bộ tái lập (draft cứng)" rồi proceed, KHÔNG hỏi lại.
 3b. __Clarify-first khi nguồn thiếu (KHÔNG đánh OQ ngay).__ Trước khi đánh Open Question cho 1 chỗ mơ hồ, __hỏi user làm rõ__ — OQ chỉ là fallback khi user không trả lời được. Gom các điểm mơ hồ thật sự chặn việc viết AC (outcome/rule/threshold/error-path thiếu contract) → hỏi __từng nhóm một, business language, theo no-re-ask rule__ (KHÔNG hỏi lại điều spec/US/session đã có). Ví dụ: "Đơn thanh toán thất bại thì hệ thống báo gì cho khách?", "Có giới hạn số lần thử lại không?", "Ai được phép hủy sau khi đóng gói?". Quy tắc:
    * User __trả lời__ → dùng câu trả lời làm nguồn viết AC (đánh dấu là quyết định nghiệp vụ user cung cấp, KHÔNG phải Fact-từ-spec sẵn có). Gợi ý user cân nhắc bổ sung ngược vào `/srs` để chốt chính thức.
    * User __"bỏ qua"/"chưa biết"/"để sau"__ → lúc này mới đánh __Open Question__ (KHÔNG chặn tiến độ, vẫn sinh phần AC khác được).

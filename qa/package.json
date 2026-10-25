@@ -1,0 +1,18 @@
+{
+  "name": "invlogis-qa",
+  "private": true,
+  "type": "module",
+  "description": "Runtime dùng chung cho kiểm thử Invlogis (Playwright web, Bruno API, Maestro mobile). Test sinh ra nằm ở docs/{feature}/test/.",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "pw:install": "playwright install chromium",
+    "test:web": "node ../.claude/scripts/playwright-gen.mjs run",
+    "test:api": "node ../.claude/scripts/bruno-runner.mjs run",
+    "test:mobile": "node ../.claude/scripts/maestro-gen.mjs run"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.49.1",
+    "@usebruno/cli": "3.0.0",
+    "dotenv": "16.4.7"
+  }
+}

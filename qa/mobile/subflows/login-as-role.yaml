@@ -1,0 +1,52 @@
+# Subflow dùng chung: đăng nhập app Flutter (driver-portal, nhánh tuanvv) theo vai.
+# Gọi: - runFlow: { file: .../login-as-role.yaml, env: { ROLE: requester-mobile } }
+# Mật khẩu KHÔNG nằm trong repo: lấy từ biến môi trường QA_<ROLE>_USER / QA_<ROLE>_PASS
+# (khớp qa/config/roles.json; khai trong qa/.env, truyền cho Maestro bằng `maestro test -e ...`).
+# Chữ hiển thị lấy từ lib/translate/vi.dart (nhánh origin/tuanvv). Chưa có Semantics => chọn theo chữ.
+appId: ${APP_ID}
+---
+- launchApp:
+    clearState: true
+    permissions:
+      all: allow
+- extendedWaitUntil:
+    visible: "Nhập tên tài khoản hoặc Email"
+    timeout: 30000
+# --- vai requester-mobile (người xin cấp dầu, kênh Mobile) ---
+- runFlow:
+    when:
+      true: ${ROLE == 'requester-mobile'}
+    commands:
+      - tapOn: "Nhập tên tài khoản hoặc Email"
+      - inputText: ${QA_REQUESTER_MOBILE_USER}
+      - tapOn: "Nhập mật khẩu"
+      - inputText: ${QA_REQUESTER_MOBILE_PASS}
+# --- vai approver (người duyệt trên app) ---
+- runFlow:
+    when:
+      true: ${ROLE == 'approver'}
+    commands:
+      - tapOn: "Nhập tên tài khoản hoặc Email"
+      - inputText: ${QA_APPROVER_USER}
+      - tapOn: "Nhập mật khẩu"
+      - inputText: ${QA_APPROVER_PASS}
+# --- vai partner-station (nhân viên cây đối tác) ---
+- runFlow:
+    when:
+      true: ${ROLE == 'partner-station'}
+    commands:
+      - tapOn: "Nhập tên tài khoản hoặc Email"
+      - inputText: ${QA_PARTNER_STATION_USER}
+      - tapOn: "Nhập mật khẩu"
+      - inputText: ${QA_PARTNER_STATION_PASS}
+- hideKeyboard
+# Trang login có 2 chữ "Đăng nhập" (tiêu đề + nút); nút là cái thứ hai.
+# GIẢ ĐỊNH chưa kiểm trên máy: index 1 = nút. Khi app thêm Semantics id thì đổi sang id.
+- tapOn:
+    text: "Đăng nhập"
+    index: 1
+# Sau đăng nhập có thể hiện bước chọn đơn vị/cơ sở làm việc (3 bước của BE) — chưa có
+# nhãn chắc chắn trong app, nên subflow này chỉ chờ thanh điều hướng "Trang chủ".
+- extendedWaitUntil:
+    visible: "Trang chủ"
+    timeout: 30000

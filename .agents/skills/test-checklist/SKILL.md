@@ -28,14 +28,16 @@ Workflow QC chuẩn skill này hỗ trợ:
 - __Output format CỐ ĐỊNH theo grammar CHK hiện hành__ — format này là contract cho parser (preview data.js) + `/test-cases` + KG. Format cũ `[priority] [Yes/No] N.` chỉ còn được parser đọc __backward-compat__ (docs demo di sản); skill __KHÔNG sinh mới__ theo format cũ.
   - **Grammar item — 1 dòng (KHÔNG có STT/`N.`):**
     ```
-    [P] [Auto] CHK-{feature}-NNN → {Ref} · {nội dung}
+    [P] [Auto] CHK-{feature}-NNN → {Ref} · {nội dung} [@web|@mob|@api] [[đáp án: {nguồn}]]
     ```
     - `[P]` = `[1]`/`[2]`/`[3]`/`[4]` (Critical/High/Medium/Low) — __LUÔN đứng đầu__ (preview cần `priority`, thiếu → badge vỡ).
     - `[Auto]` = `[Yes]`/`[No]`.
     - `CHK-{feature}-NNN` = trace key, full-form (feature prefix literal), 3-digit; cấp từ `next_chk_id` ở index; __được phép có gap__ (xóa không lấp); thứ tự dòng KHÔNG mang nghĩa định danh.
-    - `→ {Ref}` = 1 hoặc nhiều `FR-/BR-/NFR-/E-{feature}-NNN` phẩy-phân-tách (vd `→ FR-{feature}-003, E-{feature}-003`); item chung (a11y/visual/perf) → `→ —`.
+    - `→ {Ref}` = 1 hoặc nhiều `FR-/BR-/NFR-/E-{feature}-NNN` (kể cả mã bộ tái lập có chữ R, vd `FR-{feature}-R001`) hoặc `AC:{mã AC của dev}` (vd `AC:FU-FD-AC-002`), phẩy-phân-tách (vd `→ FR-{feature}-003, E-{feature}-003`); item chung (a11y/visual/perf) → `→ —`.
     - `· {nội dung}` = câu mô tả; parse: Ref là chuỗi token ID bounded, split nội dung tại `·` __đầu tiên sau__ Ref.
+    - __Đuôi dòng (tuỳ chọn, luôn đặt SAU nội dung):__ kênh chạy `@web` / `@mob` / `@api` (thiếu → hiểu là `@web`, tương thích file cũ), rồi nhãn nguồn đáp án `[đáp án: SRS | CHG-xx | tái lập | code {mã AC dev} | UC cũ]`. Nhãn đáp án bắt buộc khi nguồn là bộ tái lập; thứ tự ưu tiên nguồn và cách chọn: `.claude/rules/test-trace.md`.
     - Ví dụ: `[1] [Yes] CHK-authentication-027 → FR-authentication-003, E-authentication-003 · Verify sai password hiển thị message generic "Email hoặc mật khẩu không đúng"`
+    - Ví dụ (nguồn tái lập, kênh API): `[1] [Yes] CHK-fuel-issuing-004 → FR-fuel-issuing-R003, AC:FU-FD-AC-002 · Tạo phiếu cấp dầu tại cây nội bộ trả về mã iGAS @api [đáp án: code FU-FD-AC-002]`
   - Category: `#1. <name>`, subcategory: `##1.1. <name>`.
   - __Vietnamese-first__ prose; __GIỮ NGUYÊN__ button labels, field names, technical terms (không dịch "Submit", "Email", "OTP", "Disconnect account").
   - __KHÔNG__ code block bọc checklist; __KHÔNG__ title/heading dẫn nhập trước checklist.
@@ -112,6 +114,7 @@ Nếu user gõ kèm intent tự nhiên ("update", "review only", "chỉ check co
 
 Today: !`date +%Y-%m-%d`
 Features có docs: !`ls -1 docs/ 2>/dev/null | grep -v '^_' | head -10`
+Features có bộ tái lập: !`ls -1 docs/_reverse/*/*-reverse-spec.md 2>/dev/null | sed 's|docs/_reverse/\([^/]*\)/.*|\1|' | head -20`
 
 ## Output
 
@@ -145,6 +148,7 @@ Skill gom **mọi doc có trong `docs/{feature}/`** làm context, không cần f
 - `userstories/{feature}-story-index.md` + US MD theo scope
 - `usecases/uc-*.md` theo scope
 - `integration/api-summary.md` — error catalog API nếu có
+- __Feature cũ chưa có SRS mới:__ `docs/_reverse/{feature}/{feature}-reverse-spec.md` (+ `reverse-gaps.md`) thay cho `srs/{feature}-spec.md` — FR/BR/E mang mã R (`FR-{feature}-R001`); US/AC sinh từ bộ tái lập (dòng "Nguồn: bộ tái lập") đọc như US/AC thường. Mã AC của dev (`AC:FU-FD-AC-NNN`) lấy từ chính bộ tái lập/`reverse-sources.md`, KHÔNG tự đọc repo dev để bịa đáp án. Mỗi item từ nguồn này mang nhãn `[đáp án: …]` theo `.claude/rules/test-trace.md`.
 
 Theo scope user chọn:
 - __Cả feature__ → tất cả docs feature folder.
@@ -152,7 +156,7 @@ Theo scope user chọn:
 - __1 user story__ → US MD + linked FR + screens.
 - __1 use case__ → UC MD + linked FR + screens.
 
-Nếu feature folder rỗng (chưa có brainstorm) → refuse với gợi ý `/brainstorm` trước.
+Nếu feature folder rỗng (chưa có brainstorm) → refuse với gợi ý `/brainstorm` trước. __Ngoại lệ:__ có bộ tái lập `docs/_reverse/{feature}/{feature}-reverse-spec.md` thì KHÔNG refuse, kể cả khi `docs/{feature}/` chỉ có `test/` hoặc chưa có — dùng bộ tái lập làm nguồn, warn 1 dòng "Nguồn là bộ tái lập (draft cứng) — đáp án chưa chốt sẽ mang nhãn `[đáp án: …]`". Không có cả hai → refuse như trên (gợi ý thêm `/reverse-doc {feature}` cho feature cũ).
 
 ## Approach
 
@@ -168,7 +172,7 @@ Nếu feature folder rỗng (chưa có brainstorm) → refuse với gợi ý `/b
 3) __Ngôn ngữ checklist__ — lấy từ `test-strategy.md` (durable). Chưa có → hỏi "(1) Vietnamese — default / (2) English / (3) khác", lưu vào strategy. File checklist đã tồn tại → giữ ngôn ngữ hiện có.
 4) __Resolve target.__ Compute output path. Check file đã tồn tại → hỏi "File checklist đã có rồi, update hay tạo mới đè?" (không bắt user gõ flag).
 5) __Gom context__ theo scope — __KG chọn nguồn trước (rẻ hơn scan):__ chạy `node .claude/skills/kg/engine/kg-query.mjs coverage {feature}` + `facts {feature}` để biết doc/FR/UC nào liên quan scope rồi CHỈ Read các doc đó (VẪN Read đầy đủ prose file đã chọn + mục "Phải Read tay"; `⚠ còn N mục` → `--all`; `KG-ERROR` → gom mọi doc trong `docs/{feature}/` như cũ — tuân `.claude/rules/kg-usage.md`). Refuse nếu folder rỗng (chưa `/brainstorm`).
-5bis. __Requirement inventory + coverage build__ (nếu có `srs/{feature}-spec.md`):
+5bis. __Requirement inventory + coverage build__ (nếu có `srs/{feature}-spec.md`; không có thì dùng `docs/_reverse/{feature}/{feature}-reverse-spec.md`, mã R):
    - Parse spec → inventory FR / BR / NFR / E (+ `states.md` transitions nếu có).
    - Mỗi requirement → *nghĩa vụ test*, CHỈ liệt kê nhánh có __evidence chữ__ trong spec/UC:
      - FR → happy + alternate (nếu spec nói).
@@ -197,15 +201,19 @@ Nếu feature folder rỗng (chưa có brainstorm) → refuse với gợi ý `/b
 8) __Generate items__ mỗi subcategory:
    - __1 item = 1 nghĩa vụ ATOMIC__ (xem Constraint "1 item atomic"): cùng precondition + action + __MỘT__ pass/fail oracle. CẤM "hoặc / nếu có / nếu spec / dấu hỏi" trong item đã chốt. Behavior đối lập (happy vs error) hoặc oracle khác → __tách item riêng__ (mỗi item CHK-ID riêng).
    - Priority: Critical (P1) cho core flow + security + data integrity; High (P2) cho main UX; Medium (P3) cho secondary; Low (P4) cho cosmetic/rare.
-   - Automatable: `[Yes]` cho click/visibility/input/navigation/response-code — tức __quan sát được qua UI/response mà Playwright tự chạy__. `[No]` khi cần: DB inspection (vd "fail counter +1" không hiện trên UI), concurrency/race, timing/measurement design (2 case response-time tương đương), visual/contrast cảm tính, system perf metric, webhook chờ async, UX heuristic. Nghi ngờ → `[No]` (an toàn).
+   - __Kênh:__ gắn `@web` (Playwright), `@mob` (Maestro) hoặc `@api` (Bruno) cuối dòng theo nơi hành vi xảy ra (vd tạo phiếu cấp dầu chỉ có trên app → `@mob`, bản API làm xương sống → thêm item `@api` riêng). 1 item = 1 kênh; cùng oracle trên 2 kênh = 2 item.
+   - __Nhãn đáp án:__ `[đáp án: …]` cuối dòng (sau kênh) cho mọi item có nguồn không phải SRS mới đã duyệt — chọn nguồn theo thứ tự ưu tiên trong `.claude/rules/test-trace.md`. Chỗ chưa chốt mà tạm theo code → `[đáp án: code {mã AC dev}]` + Ref có `AC:{mã}`.
+   - Automatable: `[Yes]` cho click/visibility/input/navigation/response-code — tức __quan sát được qua UI/response mà máy sinh test của kênh đó tự chạy__ (Playwright/Maestro/Bruno). `[No]` khi cần: DB inspection (vd "fail counter +1" không hiện trên UI), concurrency/race, timing/measurement design (2 case response-time tương đương), visual/contrast cảm tính, system perf metric, webhook chờ async, UX heuristic. Nghi ngờ → `[No]` (an toàn).
    - GIỮ button label / field name nguyên gốc (vd "Verify clicking nút __Đăng nhập__ redirects sang Dashboard" — "Đăng nhập" giữ vì là label thật, "Dashboard" giữ vì screen name).
    - **Item ID `CHK-{feature}-NNN`** — cấp từ `next_chk_id` ở index (KHÔNG "max+1 trong file", KHÔNG renumber). Xóa item → ID vào `## Retired CHK-IDs`, KHÔNG lấp gap, KHÔNG reuse. Unique toàn feature. Trace key cho `/test-cases` + edge KG (checklist→FR).
    - __Ref → 1 hoặc nhiều FR/BR/NFR/E__ phẩy-phân-tách (vd `→ FR-{feature}-003, E-{feature}-003` khi item verify đồng thời nhiều requirement). Item không map requirement cụ thể (a11y/visual/perf chung) → `→ —`. Nguồn edge VERIFIES + coverage.
    - __Validator (gate trước L3)__ — scan RAW mọi dòng không rỗng/không-header: PHẢI match grammar (regex cụ thể, `{feature}` thay literal):
-     `^\[[1-4]\] \[(Yes|No)\] CHK-{feature}-\d{3,} → (—|(FR|BR|NFR|E)-{feature}-\d{3,}(, (FR|BR|NFR|E)-{feature}-\d{3,})*) · .+$`  (tối thiểu 3 chữ số, cho phép ≥1000)
+     `^\[[1-4]\] \[(Yes|No)\] CHK-{feature}-\d{3,} → (—|REF(, REF)*) · .+?( @(web|mob|api))?( \[đáp án: [^\]]+\])?$`
+     với `REF` = `((FR|BR|NFR|E)-{feature}-R?\d{3,}|AC:[A-Z0-9]+(-[A-Z0-9]+)*)`  (tối thiểu 3 chữ số, cho phép ≥1000; phần đầu dòng tới `·` giữ nguyên như grammar cũ — KG đọc được cả dòng cũ lẫn mới)
      Dòng không match → báo `file:line: <nguyên văn>`, KHÔNG render L3 tới khi fix.
      - CHK-ID: literal prefix `CHK-{feature}-`, unique toàn feature (scan mọi `checklist-*.md`), ≤ projected-next (giá trị đã cấp in-memory), **KHÔNG nằm trong `## Retired CHK-IDs`** (reject reuse retired).
-     - Ref (mỗi ID ≠ —): phải tồn tại trong `srs/{feature}-spec.md` (else ref-ma → fail).
+     - Ref (mỗi ID ≠ —): FR/BR/NFR/E phải tồn tại trong `srs/{feature}-spec.md`, hoặc trong `docs/_reverse/{feature}/{feature}-reverse-spec.md` khi chưa có SRS mới; `AC:{mã}` phải xuất hiện trong bộ tái lập (`reverse-spec.md`/`reverse-sources.md`) hoặc US/AC của feature (else ref-ma → fail).
+     - Nguồn là bộ tái lập mà dòng thiếu `[đáp án: …]` → fail.
      - ≥1000: dùng 4 chữ số (pad tự nới), KHÔNG bế tắc — CHK-ID unique toàn feature nên tách file KHÔNG tạo namespace mới. (Validator này là tiền đề `kg-build --verify`.)
 9) __L3 iterate__ render checklist trong chat:
    ```
@@ -313,7 +321,7 @@ Nếu feature folder rỗng (chưa có brainstorm) → refuse với gợi ý `/b
        Automatable: Yes={x} No={y}
 
     Recommended next:
-      - /test-cases {feature}   — expand checklist → test case chi tiết (bám sát 1:1, UI)
+      - /test-cases {feature}   — expand checklist → test case chi tiết (bám sát 1:1); sau đó máy sinh theo kênh: @web → /playwright-gen · @api → /api-test + bruno-runner · @mob → /maestro-gen
       - /api-checklist {feature} — nếu SRS có endpoint own / feature tích hợp API (tầng API chưa cover). {gợi ý này CHỈ in khi coverage phát hiện obligation cần tầng API mà chưa có test/api/}
     ```
 
@@ -363,7 +371,8 @@ __Cách skill produce 2 file (cheap, ít token):__
        { scope: "feature", target: "", file: "checklist-feature.md",
          items: [
            { chk: "CHK-payment-001", ref: ["FR-payment-012"], category: "Header & Footer", subcategory: "Logo & Navigation",  // ref LUÔN là mảng (0..n ID; item `→ —` → [])
-             priority: 1, auto: "Yes", text: "Verify logo hiển thị đúng..." },
+             priority: 1, auto: "Yes", text: "Verify logo hiển thị đúng...",
+             channel: "web", answer: "" },   // channel từ đuôi @web/@mob/@api (thiếu → "web"); answer từ [đáp án: …] (thiếu → ""); text KHÔNG chứa đuôi
            ...
          ]
        },

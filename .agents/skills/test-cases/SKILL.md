@@ -16,10 +16,12 @@ Sinh test case chi tiết **bám sát checklist gần nhất**, mỗi checklist 
 
 **TC là nguồn cho codegen Playwright (skill riêng, Đợt sau) → sinh script `.spec.ts` → chạy script test.** Nên TC phải đủ giàu để build script chạy được: mỗi step nêu **element bằng nhãn/vai trò nghiệp vụ** (nút "Đăng nhập", field "Email" — codegen tự map `getByRole`/`getByLabel`; BA KHÔNG viết selector CSS), Expected verifiable + **wording exact** (để sinh `expect(...)`), Test-Data **giá trị thật** (để script có input). `Auto=Yes` = codegen build được; `No` = manual.
 
+**Máy sinh theo kênh (`**Target:**`):** `web` → `/playwright-gen` (`docs/{feature}/test/e2e/`) · `api` → `/api-test` + bruno-runner (`docs/{feature}/test/api/bruno-api/`; bảng 3rd-party vẫn `test/api/bruno/`) · `mob` → `/maestro-gen` (`docs/{feature}/test/mobile/maestro/`). Kết quả chạy chuẩn hoá ở `docs/{feature}/test/results/latest.json`. Hợp đồng đầy đủ (mã, kênh, nhãn đáp án, trạng thái kết quả): `.claude/rules/test-trace.md`.
+
 Workflow QC chuẩn:
 1) `/test-checklist` → checklist outline → review.
 2) `/test-cases` → TC chi tiết từ checklist → review.
-3) (Đợt sau) codegen Playwright đọc TC → `.spec.ts` → chạy script. Hoặc import TestRail/Jira.
+3) Máy sinh theo Target đọc TC → script → chạy DEV (feature cũ: chạy từ worktree `feat/<slug>`). Hoặc import TestRail/Jira.
 
 ## Constraints‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -28,31 +30,34 @@ Workflow QC chuẩn:
 * **Bảng mô tả màn 5 cột — tra theo `.claude/rules/screen-source.md` Mục 2:** flow có `docs/{feature}/screens/{flow}.md` (đã lên Figma) thì đó là nguồn duy nhất, block `## Screen: {slug}` + `### Trạng thái:`; chưa có thì `html-wireframe/` rồi `ascii-wireframe/`.
 * **HARD GATE: phải có checklist matching scope.** Không có `docs/{feature}/test/checklist/checklist-{scope-slug}.md` → refuse + gợi ý chạy `/test-checklist` trước.
 * **Bám sát checklist 1:1** — mỗi item trong checklist gốc → đúng 1 TC. KHÔNG split (1 item thành 2 TC), KHÔNG gộp (2 item thành 1 TC), KHÔNG thêm TC không có trong checklist. Số TC = số checklist item.
-* **Mapping qua CHK-ID (trace key ổn định)** — mỗi TC bám 1 checklist item qua `CHK-{feature}-NNN`. `**Checklist:**` PHẢI bắt đầu bằng `CHK-{feature}-NNN` (+ nội dung item gốc làm anchor). `**Ref:**` **bắt buộc**, kế thừa nguyên list Ref của item (vd `FR-{feature}-003, E-{feature}-003`), else `—`. `STT` chỉ là số hiển thị, KHÔNG phải khóa trace.
+* **Mapping qua CHK-ID (trace key ổn định)** — mỗi TC bám 1 checklist item qua `CHK-{feature}-NNN`. `**Checklist:**` PHẢI bắt đầu bằng `CHK-{feature}-NNN` (+ nội dung item gốc làm anchor). `**Ref:**` **bắt buộc**, kế thừa nguyên list Ref của item (vd `FR-{feature}-003, E-{feature}-003`; bộ tái lập `FR-{feature}-R003`; mã AC dev `AC:FU-FD-AC-002`), else `—`. `STT` chỉ là số hiển thị, KHÔNG phải khóa trace.
 * **Validator (gate trước Write)** — kiểm cardinality theo BLOCK (không chỉ set), chỉ tính **TC active** (loại TC `(retired)` khỏi phép đếm): mỗi TC block parse đủ field bắt buộc; mỗi CHK checklist **active** xuất hiện **đúng 1 lần** trong TC active; `count(TC active) = count(checklist item active)`. Báo riêng `missing`/`duplicate`/`extra`/`malformed`. TC anchor `CHK-...-NNN (retired)` (item đã xóa nhưng user giữ) → hợp lệ, WARNING (không block, không tính vào cardinality); TC anchor CHK không tồn tại + không retired → BLOCKING. TC ref `E-NNN` mà Expected KHÔNG chứa wording/mã khớp Error Matrix → WARNING (bắt lỗi sinh-từ-summary).
   * **Grammar `**Checklist:**`** chấp nhận 2 dạng: `CHK-{feature}-NNN — <text>` (active) HOẶC `CHK-{feature}-NNN (retired) — <text>` (item đã xóa, giữ TC). `(retired)` là biến thể hợp lệ của grammar, KHÔNG phải malformed.
-  * **Schema 10 field**: mỗi TC block phải có đúng 1 lần mỗi key, đúng order STT/Category/Sub-Category/Checklist/Ref/Priority/Title/Description/Auto/Preconditions rồi step blocks. Thiếu key / trùng / sai order → malformed. **`Preconditions` — validator kiểm đúng 4 dạng:** `—` · `<state> (dựng: <steps>; nguồn: <ID>)` · `<state>` (chỉ khi trỏ named-fixture trong test-strategy) · `TBD (cần BA cấp)`. **Reject:** `(dựng: ...)` rỗng / thiếu `nguồn:` / dùng ngưỡng-quy-tắc không có ID nguồn / plain `<state>` không có fixture-source. `Preconditions: TBD` → TC chưa automation-ready.
+  * **Schema 10 field (+3 tuỳ chọn)**: mỗi TC block phải có đúng 1 lần mỗi key, đúng order STT/Category/Sub-Category/Checklist/Ref/Priority/Title/Description/Auto/Preconditions rồi step blocks. 3 field tuỳ chọn `**Target:**` · `**Role:**` · `**Data:**` (mỗi cái tối đa 1 lần) nằm giữa `Auto` và `Preconditions`, đúng thứ tự đó. Thiếu key bắt buộc / trùng / sai order → malformed. `Target` ∈ `web|mob|api` (thiếu → `web`); `Role` phải là khoá có trong `qa/config/roles.json`; `Data` = danh sách tên dữ liệu tiền đề phẩy-phân-tách. **`Preconditions` — validator kiểm đúng 5 dạng:** `—` · các dòng `ROLE: <role-slug>` / `DATA: <data-key>` (khớp field Role/Data) · `<state> (dựng: <steps>; nguồn: <ID>)` · `<state>` (chỉ khi trỏ named-fixture trong test-strategy) · `TBD (cần BA cấp)`. **Reject:** `(dựng: ...)` rỗng / thiếu `nguồn:` / dùng ngưỡng-quy-tắc không có ID nguồn / plain `<state>` không có fixture-source. `Preconditions: TBD` → TC chưa automation-ready.
 * **Read prose là nguồn nội dung — coverage/anchor KHÔNG (HARD CONSTRAINT)** — coverage table + CHK anchor chỉ chọn obligation. Expected/message/side-effect/Test-Data CHỈ lấy từ Read prose gốc: resolve Ref → source block (spec Error Matrix, UC extension, screen desc) → Read nguyên prose → sinh nội dung. Không resolve được / prose không có wording → hỏi BA (clarify-first) hoặc `TBD (cần BA cấp)`, KHÔNG suy diễn.
 * **STT per-file, bắt đầu 01, renumber liên tục** — mỗi `testcases-{scope}.md` đánh số `01..N` không gap. Update mode renumber toàn file (trace thật là CHK-ID). Width theo tổng block cuối (≥100 → pad-3 toàn file). Chỉ là số hiển thị nội-file.
 * **KG chỉ để định tuyến/chọn file** — resolve Ref → source file bằng graph là OK, nhưng Expected/message/Test-Data LUÔN từ prose đã Read (khớp HARD CONSTRAINT trên). 3 nghĩa vụ khi gọi kg-query: `--all` khi output báo cap; Read TẤT CẢ mục "Phải Read tay"; `KG-ERROR` → quay về flow đọc-trực-tiếp cũ. Per @../../../.claude/rules/kg-usage.md.
-* **Format MD parser-compatible** — strict format cho preview parser + codegen. Mỗi TC block phân cách `---`. Field order (10 field): `**STT:**`, `**Category:**`, `**Sub-Category:**`, `**Checklist:**` (= `CHK-{feature}-NNN — <text>`), `**Ref:**` (= `FR/BR/NFR/E-{feature}-NNN[, ...]` else `—`), `**Priority:**`, `**Title:**`, `**Description:**`, `**Auto:**`, `**Preconditions:**` (state cần trước Step 1, else `—`), rồi N step: `**Step:** N` / `**Action:** ...` / `**Expected:** ...` / `**Test Data:** ...`.
+* **Format MD parser-compatible** — strict format cho preview parser + codegen. Mỗi TC block phân cách `---`. Field order (10 field): `**STT:**`, `**Category:**`, `**Sub-Category:**`, `**Checklist:**` (= `CHK-{feature}-NNN — <text>`), `**Ref:**` (= `FR/BR/NFR/E-{feature}-NNN[, ...]` else `—`), `**Priority:**`, `**Title:**`, `**Description:**`, `**Auto:**`, [`**Target:**`, `**Role:**`, `**Data:**` — tuỳ chọn], `**Preconditions:**` (state cần trước Step 1, else `—`), rồi N step: `**Step:** N` / `**Action:** ...` / `**Expected:** ...` / `**Test Data:** ...`.
 * **Preconditions — 4 giá trị, phân biệt "không cần" / "dựng được" / "chưa biết cách dựng" (HARD)** — field `**Preconditions:**` nêu state nghiệp vụ trước Step 1:
   * `—` = TC **KHÔNG cần** state/setup đặc biệt (anonymous, trạng thái mặc định).
   * `<state> (dựng: <các bước>; nguồn: <ID>)` = **state DỰNG ĐƯỢC bằng cách GHÉP các transition/action ĐÃ CÓ NGUỒN**. Skill CHỈ được ghép từ hành động/transition có thật trong tài liệu, **kèm provenance**. Vd: `account locked (dựng: tạo account → login sai 5 lần; nguồn: BR-{feature}-006 + UC-login)`. **Mọi mắt xích phải có nguồn** — KHÔNG chỉ con số: nếu **action, thứ tự chuyển state, guard, hoặc cơ chế reset** không có nguồn → `TBD`. CẤM suy diễn luồng tạo account / thứ tự / cách reset.
   * `<state>` (không kèm cách dựng) = **CHỈ** khi trỏ tới **fixture được ĐẶT TÊN trong `test-strategy.md`** (fixture đó lo cách dựng). KHÔNG dùng cho "cách đạt hiển nhiên" tự suy.
   * `TBD (cần BA cấp)` = state cần ngưỡng/quy tắc/action/fixture mà **tài liệu chưa nói** → không dựng được. Validator cảnh báo blocking cho codegen, TC not-ready.
+  * `ROLE: <role-slug>` / `DATA: <data-key>` (mỗi dòng 1 mục, đi kèm field `Role`/`Data`) = engine **tự lo**: đăng nhập sẵn theo vai (`qa/config/roles.json`) và gọi hook dựng dữ liệu / đọc testdata có tên. Preconditions chỉ gồm các dòng này (hoặc `—`) thì **KHÔNG phải setup-required** — TC run-ready.
   * **Nguồn (thứ tự resolve, KHÔNG bịa):** `states.md` → BR/FR/E prose → UC precondition → screen state → `test-strategy.md` (fixture). Bất kỳ mắt xích dựng-state thiếu nguồn → TBD.
   * ⚠️ **Ví dụ SAI (không tương đương nghiệp vụ):** "session hết hạn" ≠ "xóa session cookie" (xóa cookie = logout, khác expiry). Chỉ dựng khi có `login → chờ quá TTL (nguồn: NFR/BR)` hoặc fixture time-control trong strategy; thiếu TTL → TBD.
   * Case unverified/locked/fail-counter/onboarding để `—` = SAI. Ưu tiên `<state> (dựng: ...; nguồn: ...)` khi MỌI mắt xích có nguồn; else TBD.
 * **Phân biệt codegen-ready vs run-ready (tránh FAIL giả khi chạy)** — 2 khái niệm khác nhau:
   * **codegen-ready** = đủ để sinh test BODY (không TBD ở Expected/Test-Data/Precond). TC có `(dựng: ...)` VẪN codegen-ready.
-  * **run-ready** = chạy được ngay: Preconditions là `—`, HOẶC state đã có fixture/setup xác nhận. TC có `(dựng: ...)` = **setup-required** (cần dựng state trước) → **KHÔNG run-ready mặc định**; `/playwright-gen --run` phải **skip/PENDING với lý do "cần dựng state trước"**, KHÔNG chạy rồi FAIL giả bắt BA đoán.
+  * **run-ready** = chạy được ngay: Preconditions là `—` hoặc chỉ gồm dòng `ROLE:`/`DATA:`, HOẶC state đã có fixture/setup xác nhận. TC có `(dựng: ...)` = **setup-required** (cần dựng state trước) → **KHÔNG run-ready mặc định**; `/playwright-gen --run` phải **skip/PENDING với lý do "cần dựng state trước"**, KHÔNG chạy rồi FAIL giả bắt BA đoán.
   * TC có **TBD** (Precond/Expected/Test-Data) → không codegen-ready → `not-ready`.
 * **Auto=Yes** — TC kế thừa `Auto` 1:1 từ checklist. TC `Auto=Yes` mà **có TBD** → cảnh báo mismatch, báo user (KHÔNG tự sửa Auto — phá 1:1). TC `Auto=Yes` mà **setup-required** (`dựng:`) → hợp lệ để codegen, nhưng đánh dấu để `--run` biết cần dựng state.
 * **Bảng "Cần bổ sung" = HÀNG ĐỢI REVIEW tập trung, KHÔNG thay marker TBD trong TC** — MỌI chỗ thiếu (test-data/threshold/wording/state) gom vào **1 bảng `## Cần bổ sung`** trong `{feature}-testcase-index.md` (Final report chỉ là **bản chiếu**, không phải nguồn thứ 2). **Marker `TBD` VẪN nằm trong TC** (Preconditions/Expected/Test-Data) — vì `/playwright-gen` dựa marker đó để skip; bảng chỉ để BA review 1 chỗ. Mỗi dòng có **khóa định vị**: `File/Scope | CHK-ID | Field/Step | Loại | Thiếu gì | Gợi ý cấp`. Cấp xong → mode `supplement` (xem Update mode). (State DỰNG ĐƯỢC-có-nguồn thì skill tự dựng, KHÔNG vào bảng.)
 * **Test steps basic** — chỉ action thiết yếu (1-5 steps/TC). 1 step = 1 user action observable. **Action nêu element bằng nhãn/vai trò nghiệp vụ** (nút "Đăng nhập", field "Email" — lấy từ ascii-wireframe bảng 5 cột Items; codegen Đợt sau map getByRole/getByLabel). KHÔNG selector CSS/test-id.
 * **Expected result verifiable + wording exact** — pass/fail dứt khoát, trích message/mã exact từ prose (vd "Hiển thị message 'Email hoặc mật khẩu không đúng' (E-{feature}-003)"), state-change/redirect cụ thể — để codegen sinh assertion. KHÔNG "User thấy lỗi".
 * **Test Data cụ thể, không bịa** — thứ tự: source-cấp → synthetic-từ-rule-rõ (ghi rule) → BA-cấp → `TBD (cần BA cấp)`. CẤM bịa credentials/endpoint/URL/threshold/mã-lỗi. Placeholder `<valid_input>` không được. Không applicable → `—`.
+* **Bí mật chỉ ghi tên biến môi trường** — mật khẩu, tài khoản thật, khoá API, khoá simulator ghi dạng `ENV: QA_<ROLE>_PASS` (tên biến khai ở `qa/.env.example`, giá trị trong `qa/.env` gitignore). TUYỆT ĐỐI không ghi giá trị thật vào TC/testdata.
+* **Step chuẩn bị không có oracle** — step chỉ để đi tới chỗ kiểm (mở trang, nhập field) ghi `**Expected:** —`. Mọi step đều phải là 1 hành động máy làm được (mở, nhập, bấm, chọn, gọi API); CẤM step chỉ "Quan sát …" / "Kiểm tra …" không có hành động — gộp phần kiểm vào Expected của step hành động cuối.
 * **Language từ test-strategy.md** (durable) — không hỏi lặp. Chưa có strategy → nhìn ngôn ngữ checklist. Đổi ngôn ngữ khác → warn + confirm.
 * **L1 plan preview** dạng table TC count per category.
 * **L3 iterate** max 3 vòng render TC trong chat trước Write.
@@ -119,7 +124,7 @@ Features có checklist: !`for d in docs/*/test/checklist/; do [ -d "$d" ] && ech
 1) **Hỏi feature.** Thiếu → list features có folder `test/checklist/`.
 2) **Hỏi scope.** List checklist files có sẵn trong `test/checklist/` để user chọn.
 3) **Hard gate checklist exists.** Refuse nếu không tìm thấy `checklist-{scope-slug}.md` matching.
-4) **Đọc checklist gốc** + parse grammar `[P] [Auto] CHK-{feature}-NNN → {ref} · text` per item (Ref → mảng khi nhiều ID), gom category/subcategory headers (`#1. ...` / `##1.1. ...`). **Legacy gate**: checklist còn item không có CHK-ID → hard-gate "checklist chưa ổn định trace, chạy lại `/test-checklist` update trước" — KHÔNG cho legacy vào TC/Coverage/KG như trace hợp lệ.
+4) **Đọc checklist gốc** + parse grammar `[P] [Auto] CHK-{feature}-NNN → {ref} · text [@web|@mob|@api] [[đáp án: …]]` per item (Ref → mảng khi nhiều ID, gồm cả `AC:{mã dev}`; tách đuôi kênh + nhãn đáp án khỏi text), gom category/subcategory headers (`#1. ...` / `##1.1. ...`). **Legacy gate**: checklist còn item không có CHK-ID → hard-gate "checklist chưa ổn định trace, chạy lại `/test-checklist` update trước" — KHÔNG cho legacy vào TC/Coverage/KG như trace hợp lệ.
 5) **Ngôn ngữ từ `test/test-strategy.md`** (durable) — không hỏi lặp. Chưa có strategy → theo ngôn ngữ checklist. Đổi ngôn ngữ khác → warn + confirm.
 6) **Hỏi update vs replace** nếu `testcases-{scope-slug}.md` đã tồn tại. So sánh timestamp với checklist gốc → in cảnh báo stale nếu checklist mới hơn.
 7) **Gom context bổ sung** từ feature folder cho TC enrichment (test data lấy từ đâu?):
@@ -128,10 +133,12 @@ Features có checklist: !`for d in docs/*/test/checklist/; do [ -d "$d" ] && ech
    * `brainstorms/*.md` → scenario matrix, interrupted-tx (lấy test data thực tế)
    * `integration/api-summary.md` → error catalog API (test data cho integration TC)
    * `usecases/uc-*.md` → expected results từ "Expected result" section
+   * Feature cũ chưa có SRS mới → `docs/_reverse/{feature}/{feature}-reverse-spec.md` + `reverse-gaps.md` thay cho `srs/{feature}-spec.md` (Ref mã R); US/AC sinh từ bộ tái lập đọc như US/AC thường. Ref `AC:{mã dev}` → đọc đúng câu AC đó như bộ tái lập/`reverse-sources.md` trích. Thứ tự ưu tiên khi các nguồn lệch nhau: `.claude/rules/test-trace.md`.
+   * `qa/config/roles.json` → khoá vai hợp lệ cho field `Role`.
 8) **Generate TC 1:1 từ checklist items** — với MỖI item, TRƯỚC khi viết Expected/Test-Data:
    1) CHK-ID → chọn obligation.
    * **KG định tuyến nguồn Ref.** Với mỗi CHK, chạy `node .claude/skills/kg/engine/kg-query.mjs explore CHK-{feature}-NNN` và khi cần `node .claude/skills/kg/engine/kg-query.mjs trace {feature} --all` để tìm nhanh file nguồn của từng Ref trước khi Read nguyên văn. Nếu output báo `⚠ còn N mục — chạy với --all` thì chạy lại query với `--all`; Read toàn bộ mục `### Phải Read tay (ngoài graph)`; `KG-ERROR` hoặc lỗi bất kỳ → quay về flow resolve Ref/đọc-trực-tiếp cũ. **Read prose là nguồn nội dung** vẫn là hard constraint.
-   2) Resolve Ref → source block gốc. Ref có ID → FR/BR/E trong `spec.md`, UC extension. **Ref `—`** (item a11y/visual/chrome không map requirement) → fallback resolve theo: screen block trong scope → `test-strategy.md` (env/data) → nếu vẫn không có source → `TBD/OQ`, KHÔNG bịa.
+   2) Resolve Ref → source block gốc. Ref có ID → FR/BR/E trong `spec.md` (hoặc `reverse-spec.md` khi mã R), UC extension; `AC:{mã}` → câu AC dev được bộ tái lập trích. **Ref `—`** (item a11y/visual/chrome không map requirement) → fallback resolve theo: screen block trong scope → `test-strategy.md` (env/data) → nếu vẫn không có source → `TBD/OQ`, KHÔNG bịa.
    3) **Read NGUYÊN prose source đó** (KHÔNG dùng ô tóm tắt coverage/anchor làm nguồn).‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
    4) Sinh Expected/Test-Data từ prose (wording exact + mã E + side-effect).
    5) Không resolve được / prose không có wording → hỏi BA (clarify-first) hoặc `TBD (cần BA cấp)`, KHÔNG suy diễn.
@@ -140,13 +147,17 @@ Features có checklist: !`for d in docs/*/test/checklist/; do [ -d "$d" ] && ech
    * Field `Checklist` = `CHK-{feature}-NNN — <nội dung item gốc>`.
    * Field `Ref` = nguyên list Ref của item (kế thừa); item ref `—` → TC ref `—`.
    * Field `Priority` / `Auto` ↔ `[P]` / `[Auto]` của item.
+   * Field `Target` (tuỳ chọn) ↔ kênh `@web/@mob/@api` của item (`@web` hoặc thiếu → có thể bỏ field). Nhãn `[đáp án: …]` của item chép vào cuối `Description` (vd "… (đáp án: code FU-FD-AC-002)") để biết test rớt thì FAIL_APP hay FAIL_DOC.
+   * Field `Role` (tuỳ chọn) — vai đăng nhập sẵn, khoá trong `qa/config/roles.json` (vd `requester-mobile`, `approver`). Bỏ khi TC tự test đăng nhập hoặc chạy ẩn danh.
+   * Field `Data` (tuỳ chọn) — tên dữ liệu tiền đề engine dựng/đọc (vd `vehicle-with-quota`). Chỉ dùng tên đã khai trong testdata/hook của feature hoặc `test-strategy.md`; chưa có → `TBD (cần BA cấp)` ở Preconditions + dòng bảng Cần bổ sung.
    * Field `Title` — verb-object nêu **ý định test** (test cái gì, điều kiện nào). Item có ngữ cảnh nghiệp vụ (validation/error/BR) → thêm điều kiện làm rõ intent, KHÔNG chép nguyên checklist. Vd "Verify sai password → message generic" → Title "Đăng nhập sai mật khẩu **account tồn tại** trả lỗi generic" (thêm "account tồn tại"). **Ngoại lệ trivial**: item hiển-thị/navigation đơn giản (logo, link) không có điều kiện thêm → Title ngắn trùng ý checklist là CHẤP NHẬN (đừng bịa intent giả).
    * Field `Description` — **luôn PHẢI có** (schema 10 field, field bắt buộc). 1-2 câu nêu **mục đích + oracle/rủi ro**, KHÔNG dùng template rập khuôn `"Kiểm tra {category} — {checklist text}"`. Case có rủi ro → nói rõ (vd "anti-enumeration: sai-pwd và email-không-tồn-tại trả CÙNG wording, không leak"). Case trivial → 1 câu ngắn đúng oracle (KHÔNG bỏ trống, KHÔNG độn template).
    * Field `Preconditions` — state/account/env cần trước Step 1 (từ states.md/BR/UC precondition), else `—`. Bắt buộc khi TC test locked/unverified/onboarding/expired.
    * Field `Steps` — 1-5 steps, mỗi step Action/Expected/Test Data:
      * **Action**: nêu element bằng **nhãn/vai trò nghiệp vụ** (nút "Đăng nhập", field "Email" — từ ascii-wireframe bảng 5 cột). KHÔNG selector CSS.
      * **Expected**: verifiable, wording/mã exact từ prose (message "Email hoặc mật khẩu không đúng", state-change, redirect).
-     * **Test Data**: value thật (email "abc@def", password "wrong123") hoặc `TBD (cần BA cấp)` / `—`. KHÔNG bịa.
+     * **Expected** của step chuẩn bị (không phải oracle) = `—`.
+     * **Test Data**: value thật (email "abc@def") hoặc `ENV: <TÊN_BIẾN>` cho mật khẩu/bí mật, hoặc `TBD (cần BA cấp)` / `—`. KHÔNG bịa.
 9) **L3 iterate** render 5-10 TC đầu tiên trong chat:
    ```
    [/test-cases] Phiên bản 1 (preview 5/{total} TC đầu):
@@ -269,7 +280,9 @@ Features có checklist: !`for d in docs/*/test/checklist/; do [ -d "$d" ] && ech
 
     Recommended next:
       - Mở preview.html → click "Export Excel (merged)" → import vào TestRail/Jira
-      - /playwright-gen {feature}   — codegen script cho các TC đã ready (Auto=Yes, không TBD)
+      - /playwright-gen {feature}   — codegen script web cho các TC đã ready (Auto=Yes, không TBD, Target web)
+      - /api-test {feature} + bruno-runner — TC Target api
+      - /maestro-gen {feature}      — TC Target mob
     ```
 
 ## TC block format (parser-ready, strict)
@@ -283,29 +296,51 @@ Mỗi TC là 1 block phân cách bằng `---` (3 dấu trừ, dòng riêng). Tro
 **STT:** 01
 **Category:** Truy cập màn Login
 **Sub-Category:** Hiển thị form
-**Checklist:** CHK-{feature}-008 — Verify form Login hiển thị đầy đủ fields Email + Password + nút Đăng nhập
+**Checklist:** CHK-{feature}-010 — Verify đăng nhập đúng email + mật khẩu chuyển sang Dashboard
 **Ref:** FR-{feature}-001
 **Priority:** 1
-**Title:** Verify form Login render đầy đủ elements
-**Description:** Kiểm tra form Login hiển thị đầy đủ field Email, Password và button Đăng nhập với label đúng.
+**Title:** Đăng nhập bằng tài khoản hợp lệ chuyển sang Dashboard
+**Description:** Luồng chính: tài khoản đang hoạt động đăng nhập thành công và vào màn Dashboard.
 **Auto:** Yes
-**Preconditions:** User chưa đăng nhập (anonymous session)
+**Target:** web
+**Preconditions:** —
 
 **Step:** 1
-**Action:** Truy cập URL /login (step chuẩn bị — KHÔNG assert perf ở đây)
-**Expected:** Trang Login mở
+**Action:** Mở trang Login (step chuẩn bị — KHÔNG assert perf ở đây)
+**Expected:** —
 **Test Data:** URL: /login
 
 **Step:** 2
-**Action:** Quan sát form
-**Expected:** Hiển thị đủ 3 elements: field "Email" (placeholder "Nhập email"), field "Mật khẩu" (masked), nút "Đăng nhập"
+**Action:** Nhập field "Email"
+**Expected:** —
+**Test Data:** ENV: QA_WEB_VIEWER_USER
+
+**Step:** 3
+**Action:** Nhập field "Mật khẩu"
+**Expected:** —
+**Test Data:** ENV: QA_WEB_VIEWER_PASS
+
+**Step:** 4
+**Action:** Bấm nút "Đăng nhập"
+**Expected:** Chuyển sang màn Dashboard (URL "/dashboard" theo screen source)
 **Test Data:** —
 ---
 ```
 
-> **1 TC = 1 oracle-cuối.** Ví dụ trên: oracle là "form đủ 3 elements" (Step 2). Step 1 chỉ là prerequisite (KHÔNG assert "render <2 giây" — đó là oracle perf riêng, thuộc CHK/TC khác nếu có threshold).
+> **1 TC = 1 oracle-cuối.** Ví dụ trên: oracle là "vào Dashboard" (Step 4). Step 1–3 là step chuẩn bị nên Expected `—` (KHÔNG assert "render <2 giây" — đó là oracle perf riêng, thuộc CHK/TC khác nếu có threshold). Mật khẩu chỉ ghi tên biến `ENV: …`, không ghi giá trị. TC kiểm hiển thị (vd "form đủ 3 field") thì gắn Expected đó vào step hành động mở trang, KHÔNG thêm step "Quan sát form".
 
-> **Field order chuẩn (10 field)**: STT · Category · Sub-Category · Checklist (= `CHK-{feature}-NNN — <text>`) · **Ref** (= `FR/BR/NFR/E-{feature}-NNN[, ...]` hoặc `—`) · Priority · Title · Description · Auto · **Preconditions** (state trước Step 1, else `—`) · rồi N step block. `Ref` bắt buộc (kế thừa item); `Preconditions` bắt buộc khi TC cần state/account cụ thể.
+> **TC dùng vai + dữ liệu có tên (engine tự dựng):**
+> ```
+> **Auto:** Yes
+> **Target:** api
+> **Role:** requester-mobile
+> **Data:** vehicle-with-quota
+> **Preconditions:** ROLE: requester-mobile
+> DATA: vehicle-with-quota
+> ```
+> Preconditions chỉ gồm `ROLE:`/`DATA:` → run-ready, không phải setup-required.
+
+> **Field order chuẩn (10 field + 3 tuỳ chọn)**: STT · Category · Sub-Category · Checklist (= `CHK-{feature}-NNN — <text>`) · **Ref** (= `FR/BR/NFR/E-{feature}-[R]NNN` / `AC:{mã dev}`[, ...] hoặc `—`) · Priority · Title · Description · Auto · [Target · Role · Data] · **Preconditions** (state trước Step 1, else `—`) · rồi N step block. `Ref` bắt buộc (kế thừa item); `Preconditions` bắt buộc khi TC cần state/account cụ thể.
 
 **Strict rules cho parser:**
 * Mỗi field key `**Key:**` đứng đầu dòng riêng.
@@ -330,12 +365,12 @@ Pattern giống `/test-checklist`:
     { scope: "feature", target: "", file: "testcases-feature.md",
       testcases: [
         { stt: "01", category: "Header & Footer", subcategory: "Logo & Navigation",
-          checklist: "CHK-payment-001", ref: ["FR-payment-012"], priority: 1, auto: "Yes", preconditions: "—", retired: false,  // ref mảng; retired:true → loại khỏi active count/export, hiện ở filter riêng
+          checklist: "CHK-payment-001", ref: ["FR-payment-012"], priority: 1, auto: "Yes", target: "web", role: "", data: [], preconditions: "—", retired: false,  // ref mảng; retired:true → loại khỏi active count/export, hiện ở filter riêng
           title: "Verify logo render và clickable",
           description: "...",
           steps: [
-            { step: "1", action: "Truy cập /dashboard", expected: "Logo hiển thị tại header", testData: "URL: /dashboard" },
-            { step: "2", action: "Click logo", expected: "Redirect về /", testData: "—" }
+            { step: "1", action: "Mở /dashboard", expected: "—", testData: "URL: /dashboard" },
+            { step: "2", action: "Bấm logo", expected: "Redirect về /", testData: "—" }
           ]
         },
         ...

@@ -204,6 +204,7 @@ __Delivery (Phase 5):__
 | `/test-checklist <feature>` | Outline scenario cần test (chưa data chi tiết) để review TRƯỚC khi viết test case đầy đủ. 🟢/🟡/🔴. Output `test/checklist/{feature}-checklist-index.md` + `## Coverage` per-obligation. Khác `/ac` (Given/When/Then per story) và `/api-test` (bảng request data thật) |
 | `/test-cases <feature>` | Sinh test case chi tiết __1:1 atomic__ từ checklist gần nhất (bắt buộc có `/test-checklist` trước). Output `test/testcases/{feature}-testcase-index.md`. Là spec chạy được — nguồn cho `/playwright-gen` |
 | `/playwright-gen <feature> [--run]` | Codegen script Playwright (`.spec.ts`) chạy được từ test case UI (`/test-cases`) → chạy test. Tầng UI/browser (khác `/api-test` Bruno tầng API). Engine `.claude/scripts/playwright-gen.mjs`. Codegen 1 lần ra artifact bền, KHÔNG phải AI chạy test mỗi lần. Output `test/e2e/{feature}-e2e-index.md` + `specs/{scope}.spec.ts` |
+| `/maestro-gen <feature> [--run]` | Codegen flow Maestro (`.yaml`) cho app Flutter từ test case `Target: mob` → chạy trên iOS simulator. Engine `.claude/scripts/maestro-gen.mjs` (dùng lõi `testgen-core.mjs`), subflow chung ở `qa/mobile/subflows/`. Output `test/mobile/{feature}-mobile-index.md` + `test/mobile/maestro/flows/` |
 
 __Maintenance (Phase 6):__
 

@@ -1,0 +1,27 @@
+{
+  "stats": { "total": 4, "expected": 2, "unexpected": 1, "skipped": 1 },
+  "suites": [
+    {
+      "title": "auth.setup.ts",
+      "specs": [
+        { "title": "login approver", "tests": [ { "status": "expected", "results": [ { "status": "passed" } ] } ] }
+      ],
+      "suites": []
+    },
+    {
+      "title": "specs/flow-a.spec.ts",
+      "specs": [],
+      "suites": [
+        {
+          "title": "flow-a",
+          "specs": [
+            { "title": "CHK-fuel-demo-001: Duyệt phiếu cấp dầu cây ngoài", "tests": [ { "status": "expected", "results": [ { "status": "passed" } ] } ] },
+            { "title": "CHK-fuel-demo-003: Danh sách phiếu", "tests": [ { "status": "unexpected", "results": [ { "status": "failed", "error": { "message": "Error: expect(locator).toBeVisible() failed", "snippet": "await expect(page.getByText(\"Danh sách phiếu cấp dầu\", { exact: true })).toBeVisible(); /*@assert-step*/" } } ] } ] },
+            { "title": "CHK-fuel-demo-008: Mật khẩu lấy từ ENV", "tests": [ { "status": "skipped", "results": [ { "status": "skipped" } ] } ] }
+          ],
+          "suites": []
+        }
+      ]
+    }
+  ]
+}

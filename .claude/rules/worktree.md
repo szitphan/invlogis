@@ -40,22 +40,37 @@ _scripts/wt.sh list             # worktree nào còn commit / file chưa land
 | Vùng | Trong worktree feature | Trên `main` |
 |---|---|---|
 | `docs/{feature}/**` của chính feature đó | ✅ | ✅ |
+| `docs/_reverse/{feature}/**` — bộ tái lập của chính feature đó | ✅ | ✅ |
+| `docs/_reverse/{feature-khác}/**`, `docs/_reverse/reverse-plan.json` | ❌ | ✅ |
 | `docs/{feature-khác}/**` | ❌ — mở worktree của feature kia | ✅ |
 | `docs/_shared/**`, `docs/_product/**`, `design/**` | ❌ | ✅ |
+| `qa/**` (runtime kiểm thử dùng chung) | ❌ | ✅ |
 | `.claude/**`, `CLAUDE.md`, `AGENTS.md`, `_scripts/**`, `_templates/**` | ❌ | ✅ |
 | `_workspace/backlog.md`, `docs-input/README.md` | ❌ (hook tự chạy `--dry-run`) | ✅ (hook ghi) |
 | `_workspace/decisions.md` | ❌ — ghi vào doc feature, chép sang sổ sau khi land | ✅ |
 | `docs/_shared/dashboard*.html` | ❌ | ✅ — dựng lại sau land |
 | Log mảnh `_workspace/{changelog,staleness}.d/` | ✅ (hook tự ghi) | ✅ |
 
-Máy chặn: hook `worktree-guard.sh` (PreToolUse Write|Edit) từ chối mọi ghi ngoài `docs/<feature>/**` khi
-đang ở worktree feature (branch `feat/<slug>` có `docs/<slug>/`). Worktree không gắn feature không bị chặn.
+Máy chặn: hook `worktree-guard.sh` (PreToolUse Write|Edit) từ chối mọi ghi ngoài `docs/<feature>/**` và
+`docs/_reverse/<feature>/**` khi đang ở worktree feature (branch `feat/<slug>` có `docs/<slug>/`). Worktree không
+gắn feature không bị chặn.
 
 Feature cần sửa vùng ❌ → dừng, ghi vào run card Mục 7 / báo cáo "cần sửa trên main: …". Sửa trên `main`, commit,
 rồi `wt.sh sync <feature>`. KHÔNG sửa tạm trong worktree "rồi tính sau" — đó chính là xung đột khi land.
 
 > Ngoại lệ: hook `post-edit-stale.sh` có thể đánh `status: stale` doc downstream ở feature khác. Đây là
 > thay đổi frontmatter 2 dòng, merge thường tự gộp được; nếu land báo xung đột ở đó thì giữ bản `stale`.
+
+### 2bis. Kiểm thử feature cũ trong worktree
+
+Feature cũ đi luồng tái lập → US/AC → checklist → test case → máy sinh test → chạy DEV, tất cả trong worktree
+`feat/<slug>` (bộ tái lập ở `docs/_reverse/<slug>/`, test ở `docs/<slug>/test/`):
+
+- Test chạy **từ nhánh** cho tới khi land — không cần land mới chạy được. Kết quả ghi `docs/<slug>/test/results/`.
+- Land khi **SRS mới của feature đã chuẩn hoá xong** (không land từng mảnh test). Trong lúc chờ, `wt.sh sync` để
+  nhận phần chạy chung (`qa/`, skill, rule) đã sửa trên `main`.
+- Phần chạy dùng chung `qa/**` (cấu hình môi trường, vai, subflow) là vùng ❌ trong worktree feature — sửa trên `main`.
+- Hợp đồng mã, định dạng, thứ tự nguồn đáp án, xử lý lỗi: `.claude/rules/test-trace.md`.
 
 ## 3. File sinh ra (không commit)
 
@@ -99,6 +114,6 @@ Land là cửa duyệt cuối của 1 feature — **không bao giờ tự chạy
 
 ## Tóm tắt 1 dòng
 
-> **1 feature = 1 worktree `feat/<slug>` · chỉ sửa `docs/<slug>/**`, đồ dùng chung sửa trên main rồi sync ·
+> **1 feature = 1 worktree `feat/<slug>` · chỉ sửa `docs/<slug>/**` + `docs/_reverse/<slug>/**`, đồ dùng chung sửa trên main rồi sync ·
 > xong thì `ready` → task 🔍 trong backlog → người dùng review + duyệt → mới land (squash) + drop ·
 > log ghi theo mảnh, file tổng là file sinh ra.**

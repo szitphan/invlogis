@@ -3,9 +3,10 @@
 #
 # Vùng ghi xét theo VỊ TRÍ FILE (không theo cwd — phiên ở main vẫn ghi được path tuyệt đối vào worktree):
 #   1. File nằm trong worktree feature (repo của file ở branch feat/<slug> và có docs/<slug>/)
-#      → chỉ được ghi trong docs/<slug>/**.
+#      → chỉ được ghi trong docs/<slug>/** và bộ tái lập docs/_reverse/<slug>/**.
 #   2. Phiên đang đứng trong worktree feature (cwd ở branch feat/<slug>) → không được ghi ra ngoài
-#      chính worktree đó (vd sang checkout chính hay worktree khác).
+#      chính worktree đó (vd sang checkout chính hay worktree khác). Trong worktree, vùng ghi theo luật 1
+#      (docs/<slug>/** + docs/_reverse/<slug>/**).
 # Worktree không gắn feature (feat/skill-x, không có docs/skill-x/) → không chặn.
 # Hook script (logbook, stale, kg) ghi bằng shell, không qua Write/Edit → không bị chặn.
 
@@ -38,8 +39,8 @@ if [ -n "$FROOT" ]; then
     FSLUG="$(feature_of "$FROOT")"
     if [ -n "$FSLUG" ]; then
         case "$ABS" in
-            "$FROOT/docs/$FSLUG/"*) ;;
-            *) deny "worktree feat/$FSLUG chỉ được ghi trong docs/$FSLUG/** — chặn ghi ${ABS#$FROOT/}." ;;
+            "$FROOT/docs/$FSLUG/"*|"$FROOT/docs/_reverse/$FSLUG/"*) ;;
+            *) deny "worktree feat/$FSLUG chỉ được ghi trong docs/$FSLUG/** và docs/_reverse/$FSLUG/** — chặn ghi ${ABS#$FROOT/}." ;;
         esac
     fi
 fi

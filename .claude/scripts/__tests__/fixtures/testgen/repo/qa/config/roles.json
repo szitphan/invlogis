@@ -1,0 +1,5 @@
+{
+  "_note": "fixture",
+  "requester-mobile": { "channel": "Mobile", "audience": "Internal", "userEnv": "QA_REQUESTER_MOBILE_USER", "passEnv": "QA_REQUESTER_MOBILE_PASS", "orgUnitEnv": "QA_REQUESTER_MOBILE_ORG_UNIT", "facilityEnv": "QA_REQUESTER_MOBILE_FACILITY" },
+  "approver": { "channel": "Web", "audience": "Internal", "userEnv": "QA_APPROVER_USER", "passEnv": "QA_APPROVER_PASS", "orgUnitEnv": "QA_APPROVER_ORG_UNIT" }
+}

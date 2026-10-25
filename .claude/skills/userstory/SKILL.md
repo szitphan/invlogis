@@ -61,6 +61,7 @@ Per-story `status`, `priority`, `jira key` sống ở **bảng index**, KHÔNG �
 * **Numbering gap** (vd us-001, us-003 tồn tại — us-002 deleted) — KHÔNG reuse us-002, continue from us-004.
 * **Story numbering scope per-feature**, KHÔNG global — `docs/payment/userstories/us-001.md` và `docs/auth/userstories/us-001.md` cùng tồn tại OK.
 * **Feature/SRS hoàn toàn không tồn tại** — refuse + route `/srs {feature}` (không tự tạo feature, không bịa FR). **SRS tồn tại nhưng draft/in-review** — soft gate proceed, flag mỗi story `<!-- built from draft SRS, may need refinement -->`. Đừng gộp 2 case.
+* **Feature cũ chỉ có bộ tái lập** (`docs/_reverse/{feature}/{feature}-reverse-spec.md` có, `srs/{feature}-spec.md` chưa có) — KHÔNG refuse: dùng bộ tái lập làm nguồn FR, soft gate warn "Nguồn là bộ tái lập (draft cứng) — story chưa phải yêu cầu đã chốt". Mỗi story ghi dòng `Nguồn: bộ tái lập` + trích mã tái lập (`FR-{feature}-R001` / `FR-{feature}-NNN` của bộ cũ) và mã AC dev nếu bộ tái lập có (`AC:FU-FD-AC-002`). Chỗ reverse-gaps còn Conflict/OQ → story đánh OQ, KHÔNG tự chốt. Ghi story vào `docs/{feature}/userstories/` như thường (tạo folder nếu chưa có). Khi SRS mới ra, chạy lại `/userstory` để đổi nguồn sang SRS. Luồng đầy đủ: `.claude/rules/test-trace.md`.
 * **Hook stale-propagation** sẽ fire khi edit US → mark downstream AC stale (Phase 6).
 * **Auto-chain `/ac`** chỉ áp dụng cho stories **vừa tạo trong session này**. Stories cũ (update mode) KHÔNG auto-chain — user gọi `/ac` explicit và nói "sửa lại AC" nếu cần repair.
 * **Sửa content story đã push Jira → cảnh báo drift.** Update mode giữ nguyên cột Jira, nhưng **sửa nội dung us file** của story đã có Jira key tạo lệch local ↔ Jira. Khi diff đụng story đã push → warn "story này đã ở Jira {key}, nội dung sẽ lệch cho tới khi re-sync — cân nhắc `/cr` hoặc `/jira` update" trước khi apply.
@@ -83,14 +84,16 @@ Có sẵn stories rồi → tự động vào update mode (L2 diff), không cầ
 
 Today: !`date +%Y-%m-%d`
 Features có SRS: !`for d in docs/*/srs/*-spec.md; do [ -f "$d" ] && dirname "$d" | xargs dirname | xargs basename; done | head -20`
+Features chỉ có bộ tái lập: !`for d in docs/_reverse/*/*-reverse-spec.md; do [ -f "$d" ] || continue; f=$(basename "$(dirname "$d")"); [ -f "docs/$f/srs/$f-spec.md" ] || echo "$f"; done | head -20`
 Features có US: !`for d in docs/*/userstories/; do [ -d "$d" ] && dirname "$d" | xargs basename; done | head -10`‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
 ## Approach
 
 1. **Resolve feature.** No-arg → interactive picker. Phân biệt 2 case (per `feature-bootstrap.md` nhóm B):
-   * **Feature/`srs/{feature}-spec.md` KHÔNG tồn tại** (feature chưa có, hoặc arg gõ sai) → **REFUSE tường minh + route**: "Chưa thể chạy `/userstory` cho `{feature}` — thiếu `srs/{feature}-spec.md` (cần FR để split story). Feature hiện có: {list}. Chạy `/srs {feature}` trước để tạo FR, rồi quay lại." KHÔNG tự tạo feature.
+   * **`srs/{feature}-spec.md` KHÔNG tồn tại nhưng có `docs/_reverse/{feature}/{feature}-reverse-spec.md`** → dùng bộ tái lập (xem Pitfalls "Feature cũ chỉ có bộ tái lập"), warn 1 dòng rồi proceed.
+   * **Feature/`srs/{feature}-spec.md` KHÔNG tồn tại và không có bộ tái lập** (feature chưa có, hoặc arg gõ sai) → **REFUSE tường minh + route**: "Chưa thể chạy `/userstory` cho `{feature}` — thiếu `srs/{feature}-spec.md` (cần FR để split story). Feature hiện có: {list}. Chạy `/srs {feature}` trước để tạo FR, rồi quay lại." KHÔNG tự tạo feature.
    * **`srs/{feature}-spec.md` tồn tại** nhưng `status: draft/in-review` → soft gate warn + proceed (có FR thật để làm, chỉ chưa approved — flag mỗi story "built from draft SRS").
-2. **Read** SRS spec + flows + screens + UCs nếu present.
+2. **Read** SRS spec + flows + screens + UCs nếu present. Nguồn bộ tái lập → Read `{feature}-reverse-spec.md` + `reverse-gaps.md` + `reverse-sources.md` (thay cho SRS; reviewer bước 4b cũng nhận các đường dẫn này).
    * **KG chọn nguồn trước (rẻ hơn scan):** chạy `node .claude/skills/kg/engine/kg-query.mjs coverage {feature}` và `node .claude/skills/kg/engine/kg-query.mjs facts {feature}` để lấy danh sách candidate/coverage, rồi VẪN Read đầy đủ prose file đã chọn. Tuân `.claude/rules/kg-usage.md` (3 nghĩa vụ: `--all` khi bị cap · đọc mục "Phải Read tay" · `KG-ERROR` → scan trực tiếp như cũ).
 3. **Story split strategy (default = vertical slice):**
    * **Default `outcome`:** 1 story = 1 smallest end-to-end business outcome (user hoàn thành 1 việc có giá trị quan sát được). Ưu tiên patterns SPIDR/workflow-step/rule-variation — chia theo **hành vi nghiệp vụ**, KHÔNG theo tầng UI/API/DB.

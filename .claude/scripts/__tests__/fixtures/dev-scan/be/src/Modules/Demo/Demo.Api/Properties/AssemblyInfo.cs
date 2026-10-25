@@ -1,0 +1,1 @@
+[assembly: ApiModule("demo-mod")]

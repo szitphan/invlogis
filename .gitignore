@@ -13,6 +13,7 @@
 # Env / secrets
 .env
 .env.*
+!.env.example
 
 # Generated / runtime
 __pycache__/

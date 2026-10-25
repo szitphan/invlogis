@@ -1,0 +1,28 @@
+{
+  "_note": "Khoá = role-slug dùng ở field **Role:** của test case. Chỉ khai tên biến môi trường, giá trị nằm ở qa/.env. moduleEnv: mã module cấp working context (mặc định fuel).",
+  "requester-mobile": {
+    "channel": "Mobile", "audience": "Internal",
+    "userEnv": "QA_REQUESTER_MOBILE_USER", "passEnv": "QA_REQUESTER_MOBILE_PASS",
+    "orgUnitEnv": "QA_REQUESTER_MOBILE_ORG_UNIT", "facilityEnv": "QA_REQUESTER_MOBILE_FACILITY"
+  },
+  "approver": {
+    "channel": "Web", "audience": "Internal",
+    "userEnv": "QA_APPROVER_USER", "passEnv": "QA_APPROVER_PASS",
+    "orgUnitEnv": "QA_APPROVER_ORG_UNIT", "facilityEnv": "QA_APPROVER_FACILITY"
+  },
+  "web-viewer": {
+    "channel": "Web", "audience": "Internal",
+    "userEnv": "QA_WEB_VIEWER_USER", "passEnv": "QA_WEB_VIEWER_PASS",
+    "orgUnitEnv": "QA_WEB_VIEWER_ORG_UNIT", "facilityEnv": "QA_WEB_VIEWER_FACILITY"
+  },
+  "partner-station": {
+    "channel": "Mobile", "audience": "Partner",
+    "userEnv": "QA_PARTNER_STATION_USER", "passEnv": "QA_PARTNER_STATION_PASS",
+    "orgUnitEnv": "QA_PARTNER_STATION_ORG_UNIT", "facilityEnv": "QA_PARTNER_STATION_FACILITY"
+  },
+  "finance": {
+    "channel": "Web", "audience": "Internal",
+    "userEnv": "QA_FINANCE_USER", "passEnv": "QA_FINANCE_PASS",
+    "orgUnitEnv": "QA_FINANCE_ORG_UNIT", "facilityEnv": "QA_FINANCE_FACILITY"
+  }
+}

@@ -1,0 +1,9 @@
+# Subflow dùng chung: đăng xuất. Đường đi theo app (tuanvv): tab "Tài khoản" -> "Đăng xuất" -> hộp thoại "Chắc chắn".
+appId: ${APP_ID}
+---
+- tapOn: "Tài khoản"
+- tapOn: "Đăng xuất"
+- tapOn: "Chắc chắn"
+- extendedWaitUntil:
+    visible: "Nhập tên tài khoản hoặc Email"
+    timeout: 30000

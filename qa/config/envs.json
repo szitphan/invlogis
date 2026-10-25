@@ -1,0 +1,36 @@
+{
+  "_note": "Không bí mật. tenantId lấy từ biến môi trường QA_TENANT_ID (FE hiện hard-code TENANT_ID trong src/app/constants/base.constant.ts; bruno dev.yml dùng cùng giá trị). Chưa xác minh webBase dev/sit — điền khi dev xác nhận host web.",
+  "dev": {
+    "apiBase": "https://api-dev-erp.innvie.vn",
+    "webBase": "",
+    "webBase_note": "Chưa tìm thấy host web DEV trong FE/BE (chỉ có apiUrl). Điền QA_WEB_BASE trong .env hoặc sửa tại đây.",
+    "tenantIdEnv": "QA_TENANT_ID",
+    "webBaseEnv": "QA_WEB_BASE"
+  },
+  "sit": {
+    "apiBase": "https://api-sit-erp.innvie.vn",
+    "webBase": "",
+    "webBase_note": "Host web SIT chưa xác minh (FE environment.sit.ts chỉ có apiUrl).",
+    "tenantIdEnv": "QA_TENANT_ID",
+    "webBaseEnv": "QA_WEB_BASE"
+  },
+  "local": {
+    "apiBase": "http://localhost:8080",
+    "apiBase_note": "Theo bruno/environments/local.yml và Dockerfile EXPOSE 8080 (không có launchSettings.json).",
+    "webBase": "http://localhost:4200",
+    "webBase_note": "ng serve mặc định 4200 (angular.json không khai port).",
+    "tenantIdEnv": "QA_TENANT_ID",
+    "webBaseEnv": "QA_WEB_BASE"
+  },
+  "uat": {
+    "apiBase": "https://api-uat-erp.innvie.vn",
+    "apiBase_note": "Theo config.json của bản build app UAT (innvie.delta.app.uat, 3.0.0 build 2026102501). FE environment.uat.ts lại trỏ https://api.innvie.io.vn — chưa rõ có phải cùng hệ thống; chạy web trên UAT thì đặt QA_API_BASE sau khi dev xác nhận.",
+    "webBase": "",
+    "webBase_note": "Host web UAT chưa xác minh.",
+    "tenantIdEnv": "QA_TENANT_ID",
+    "webBaseEnv": "QA_WEB_BASE",
+    "appId": "innvie.delta.app.uat",
+    "igasSimulator": false,
+    "limits": "Không có giả lập iGAS (chỉ DEV) → bước bơm không hoàn tất; không có seed dev. Chỉ chạy luồng không bơm dầu (đăng nhập, danh sách, chi tiết, tạo nháp/gửi, lấy mã). Hạn chế tạo dữ liệu vì UAT có người nghiệm thu."
+  }
+}

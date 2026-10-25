@@ -95,6 +95,21 @@ Manifest chung: `docs/_reverse/reverse-plan.json` (máy-đọc-được, resumab
 * __⚠️ NGUỒN ≠ WORKSPACE__ — nhận path nguồn (vd `/path/to/source-docs/...`) rồi suy output tương đối
   theo nguồn → SAI. Output luôn vào `docs/_reverse/` của workspace BA (dir có `CLAUDE.md`+`.claude/`), thường
   khác ổ/repo với nguồn. Nguồn read-only; KHÔNG tạo/sửa/xóa gì trong cây nguồn.
+* __Hai lớp nguồn: nguồn gốc + nguồn đối chiếu__ — *nguồn gốc* là tài liệu khách/SRS cũ (quyết định nội dung
+  bộ tái lập). *Nguồn đối chiếu* (tuỳ chọn, user chỉ ra hoặc có sẵn trong vault): tài liệu dev (yêu cầu năng lực
+  BE kèm mã AC, vd `transport-erp/docs/modules/**` mã `FU-FD-AC-NNN`), SOP trong `docs-input/`, và quyết định BA
+  đã chốt (CHG/DEC/OQ đã đóng trong `_workspace/decisions.md`, doc feature, `docs/cr/`). Nguồn đối chiếu đăng ký
+  ở `reverse-sources.md` với cột Loại = `đối chiếu` (+ mã S riêng). Quy tắc:
+  * Tài liệu dev KHÔNG BAO GIỜ là "sự thật của khách" — chỉ cho biết code đang làm gì. Không nâng nhãn ✅ chỉ vì
+    tài liệu dev nói vậy; dùng để ghi chú "code hiện làm: …" và trích mã AC dev cạnh FR (cột Nguồn: `S7 · AC:FU-FD-AC-002`).
+  * Quyết định BA đã chốt (CHG/DEC, OQ đã đóng) thắng nguồn gốc cũ ở điểm nó chốt → ghi mệnh đề theo quyết định,
+    cột Nguồn trích mã quyết định, ghi bản cũ vào reverse-gaps loại Conflict (đã giải, kèm mã quyết định).
+  * Nguồn gốc lệch nguồn đối chiếu mà chưa có quyết định → ghi theo nguồn gốc + 🟡, thêm dòng __Conflict__ hoặc
+    __OQ__ vào `reverse-gaps.md` trích CẢ HAI nguồn (mã S + mục/mã AC). KHÔNG tự chọn bên.
+  * Thứ tự ưu tiên khi dùng bộ tái lập làm đáp án test: `.claude/rules/test-trace.md`.
+* __Mã yêu cầu bộ tái lập MỚI có chữ R__ — từ feature `fuel-issuing` trở đi, FR/BR/NFR/E đặt `FR-{feature}-R001`,
+  `BR-{feature}-R001`, `E-{feature}-R001`… để không trùng mã SRS mới viết sau này. 4 bộ tái lập cũ giữ mã hiện có.
+  Mã đã cấp không đổi, không dùng lại.
 
 ### Pitfalls — easy to get wrong‍​‌​​​‌‌​‌‌‌​​‌‌​​‌​​‌‌‌​‌‌‌‌​​‌‌​​‌​​​​​‌‌​‌‌​‌‌‌‌‌‌​‌​‌‌​‌​‌‌‌‌‌​‌‌‌​‌​​‌​​​​​‌‌​​​‌​‌​​‌​‌‌​‌​​​‌‌​​‌‌​‌‌​​​‌‌‌‌‌​‌​‌​‌​​​‌‌​‌‍
 
@@ -132,6 +147,9 @@ Ví dụ:
 /reverse-doc /path/to/source-docs/features/
 /reverse-doc ./legacy-docs ./screenshots ~/Downloads/payment-flow.docx
 ```
+
+Nguồn đối chiếu nói bằng lời (KHÔNG flag), vd "đối chiếu thêm docs BE ở `<repo>/docs/modules/fuel` và SOP cấp dầu".
+Skill chỉ đọc, không ghi gì vào repo dev.
 
 Đổi hành vi mặc định bằng lời (KHÔNG flag — `feedback_flag_diet_natural_chat`):
 * Viết tiếng Anh → "viết bằng tiếng Anh".
@@ -182,6 +200,9 @@ pandoc fallback: !`which pandoc 2>/dev/null || ls ~/bin/pandoc 2>/dev/null || ec
 
 6. __Đọc hết nội dung__ (md gốc + convert + pdf + ảnh). __Clean-room: mô tả cái đọc được TRƯỚC khi suy luận__
    (chống context poisoning). Trích signal nghiệp vụ (feature/role/flow/rule/limit/wording/screen/error).
+   Có nguồn đối chiếu → đọc SAU nguồn gốc, chỉ để so khớp từng mệnh đề (lệch → Conflict/OQ theo Hard rule
+   "Hai lớp nguồn"); KHÔNG dùng nguồn đối chiếu để cluster feature hay thêm FR không có trong nguồn gốc —
+   hành vi chỉ có ở code thì ghi Gap "code có, tài liệu gốc không có" kèm mã AC dev.
 7. __Cluster thành tính năng__ (DDD): changes-together → 1 feature; biên ngôn ngữ khác → tách. 1 màn+flow+rule
    quanh 1 mục tiêu user → 1 feature. Mỗi feature: derive slug kebab-case ASCII (`naming-conventions`), chấm
    confidence tổng. Kiểm hạt: tên "quản lý/và/hoặc" → cân nhắc tách; 1 field lẻ → cân nhắc gộp. **Mơ hồ tách-gộp
@@ -244,7 +265,8 @@ pandoc fallback: !`which pandoc 2>/dev/null || ls ~/bin/pandoc 2>/dev/null || ec
     checkpoint hỏi-nghiệp-vụ đã bỏ.)
 14. __Write__ từng file vào `docs/_reverse/{feature}/` từ template. File đã tồn tại → __L2 diff__. Tạo folder
     khi Write (Write tự tạo cha). Sau mỗi feature Write xong → **mark `status:"done"`** trong `reverse-plan.json`
-    (resumable — chạy lại bỏ qua feature done). Append activity log (hook).
+    (resumable — chạy lại bỏ qua feature done). Khi chạy trong worktree feature: KHÔNG sửa `reverse-plan.json`
+    (ngoài vùng ghi); liệt kê thay đổi cần làm dưới mục "cần sửa trên main" trong báo cáo. Append activity log (hook).
     * __Checkpoint per-batch__ (nhịp ghi file, KHÔNG phải hỏi nghiệp vụ): sau mỗi batch in bảng tiến độ
       (`đã viết / còn lại`) + [tiếp / bỏ phần còn lại / dừng]. Honor lựa chọn.
 

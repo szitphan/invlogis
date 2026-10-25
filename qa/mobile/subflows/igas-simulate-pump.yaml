@@ -1,0 +1,16 @@
+# Subflow dùng chung: giả lập bơm bằng nút trong app (thẻ "Giả lập bơm dầu (iGAS Simulator)"
+# trên trang iGAS cây nội bộ). Điều kiện: đã bấm "Lấy mã Igas" và có mã 6 số.
+# Tham số STAGE: inuse = chỉ "1. Đang bơm" · pumped = chỉ "2. Đã bơm" · both (mặc định) = cả hai theo thứ tự.
+# Chữ nút lấy từ igas_internal_fuel_supply_page.dart (nhánh tuanvv).
+appId: ${APP_ID}
+---
+- runFlow:
+    when:
+      true: ${typeof STAGE === 'undefined' || STAGE == 'both' || STAGE == 'inuse'}
+    commands:
+      - tapOn: "1. Đang bơm"
+- runFlow:
+    when:
+      true: ${typeof STAGE === 'undefined' || STAGE == 'both' || STAGE == 'pumped'}
+    commands:
+      - tapOn: "2. Đã bơm"

@@ -1,0 +1,6 @@
+# Subflow dùng chung: từ Trang chủ mở danh sách phiếu cấp dầu (thẻ dịch vụ "Cấp dầu").
+# Điều kiện: đã đăng nhập (login-as-role). Chữ thẻ lấy từ "fuel_dispensing" trong vi.dart.
+appId: ${APP_ID}
+---
+- tapOn: "Trang chủ"
+- tapOn: "Cấp dầu"
