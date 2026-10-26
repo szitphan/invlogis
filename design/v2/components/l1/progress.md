@@ -1,7 +1,7 @@
 ---
 type: design-component
 status: draft
-updated: 2026-10-20
+updated: 2026-10-26
 links:
   - design/v2/architecture.md
   - design/v2/foundations.md
@@ -11,6 +11,9 @@ links:
 ---
 
 # Base / Progress
+
+> ⚠ Đã hạ cấp (DEC-254, 26/10): thanh là L0 `.progress / Bar`; nội dung file này sẽ gộp thành mục L0 trong
+> `l1/progress-card.md` khi dựng `Base / Progress Card` (BL-240).
 
 > L1 · phiên bản 0.1.0 · Nháp · người phụ trách @szitphan · Figma `Base / Progress` (6520:212428, 24 biến thể, trang DS ·
 > Components · L0–L3, Section `Progress · L1 · Component Base` 6507:212370), L0 `.progress / Segment` (6520:212400), `.progress / Gap`
@@ -143,10 +146,10 @@ Màu (collection Component, tiền tố `progress/`; một bộ cho web và app;
 |---|---|---|
 | Rãnh | `bg/track` | `color/border/default` → neutral/200 · #E3E6EC |
 | Brand | `fill/brand` | `color/brand/800` → than chì · #262626 |
-| Success | `fill/success` | `color/status/success-fg` → green/700 · #1B7542 |
-| Info | `fill/info` | `color/status/info-fg` → blue/700 · #1F4FB8 |
-| Warning | `fill/warning` | `color/status/warning-fg` → yellow/700 · #8A5300 |
-| Danger | `fill/danger` | `color/status/danger-fg` → red/700 · #B42318 |
+| Success | `fill/success` | `color/status/success-text` → green/700 · #1B7542 |
+| Info | `fill/info` | `color/status/info-text` → blue/700 · #1F4FB8 |
+| Warning | `fill/warning` | `color/status/warning-text` → yellow/700 · #8A5300 |
+| Danger | `fill/danger` | `color/status/danger-text` → red/700 · #B42318 |
 | Neutral | `fill/neutral` | `color/chip/gray/fg` → neutral/600 · #495363 |
 
 Code: biến CSS `--progress-height-*`, `--progress-gap`, `--progress-width-default`, `--progress-fill-*`, `--progress-bg-track`.

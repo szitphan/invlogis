@@ -1,7 +1,7 @@
 ---
 type: design-component
 status: draft
-updated: 2026-10-20
+updated: 2026-10-26
 links:
   - design/v2/architecture.md
   - design/v2/foundations.md
@@ -44,7 +44,7 @@ nền trắng (sheet, form) nên ô mẫu nền `color/bg/surface`, trừ cảnh
   - Đầu thẻ một phần: bật Has Avatar hoặc Has Media thì tắt Has Icon; thẻ chỉ có một trong ba (vòng icon, avatar, ảnh nhỏ). Figma
     không tự tắt, quy ước nằm ở tài liệu (mô tả component có ghi).
   - Chọn một: trong nhóm chỉ một thẻ Selected = true; chọn thẻ khác thì thẻ cũ về false.
-  - Nền trắng: thẻ xám trên nền màn xám mất ranh giới; không đặt thẻ chọn trên nền xám.
+  - Nền trắng: thẻ xám trên khối `color/bg/muted` mất ranh giới; không đặt thẻ chọn trên khối xám. Nền trang trắng (DEC-258).
   - Body chỉ nhận `.card / Row`, Base / Status Row: Slot khoá bằng preferred values (`allowPreferredValuesOnly`), tối đa 3.
   - Đổi chữ qua thuộc tính: Title, Description của `.card / Name` đã đưa ra panel.
 
@@ -100,7 +100,7 @@ Cả thẻ là đích bấm; thấp nhất 68 ≥ `touch/min` 24 ✓.
 
 1. **Nên:** đầu thẻ một phần: bật Has Media thì tắt Has Icon. **Không nên:** bật Has Media mà vẫn để Has Icon: hai hình ở hai đầu
    thẻ tranh nhau.
-2. **Nên:** thẻ chọn trên nền trắng (sheet, form). **Không nên:** thẻ chọn trên nền màn xám: thẻ chưa chọn trùng nền, mất ranh giới.
+2. **Nên:** thẻ chọn trên nền trắng (sheet, form). **Không nên:** thẻ chọn trên khối `color/bg/muted`: thẻ chưa chọn trùng nền, mất ranh giới.
 
 ### Trợ năng — chấm theo WCAG 2.2
 
@@ -195,7 +195,7 @@ có nền (nền ở lớp con "Khung thẻ") nên script đo ở lớp con cho 
 |---|---|---|
 | Khung | 20 ô, 20 mẫu (khối Web; cả khung 38 ô, 38 mẫu) | luật A: 0 lỗi |
 | Sát ngưỡng (lớp "Khung thẻ") | Trạng thái · Selected=true · Hover | `card/bg/hover` = neutral/100 (#F2F4F7) so với Selected Default trắng 1,10:1: đạt, hết cờ "Giống Default" của bản #F9FAFC 1,04:1 (20/10). Cờ lớp ngoài Hover, Pressed "GIỐNG DEFAULT" 1:1 là báo nhầm (nền nằm ở lớp con "Khung thẻ") |
-| ✕ Mất hình (cố ý, lớp "Khung thẻ") | Cảnh · Không nên 2 | cảnh "Không nên": thẻ chưa chọn trên nền xám 1:1 |
+| ✕ Mất hình (cố ý, lớp "Khung thẻ") | Cảnh · Không nên 2 | cảnh "Không nên": thẻ chưa chọn trên khối `color/bg/muted` 1:1 |
 | ⚠ Nền chìm (lớp "Khung thẻ") | Selected=true · Default, Hover, Focus | thẻ trắng trên ô trắng; giữ nhờ viền chọn 15,13:1 |
 | Cờ ngoài (lớp ngoài) | Selected=true · Hover, Pressed | "GIỐNG DEFAULT" là báo nhầm: lớp ngoài không fill ở mọi State; số đúng ở lớp "Khung thẻ" (Pressed #D0D5DD = 1,47:1 so với trắng) |
 | Sát ngưỡng (lớp "Khung thẻ") | 13 mẫu | 1,10:1: thẻ chưa chọn #F2F4F7 trên trắng; giữ nhờ radio và chữ |
@@ -221,7 +221,7 @@ Hình phóng 2× trên Figma: như web, mode Mobile.
 | Radio | `card/radio-size` · `card/radio-ring` · `card/radio-on-ring` | 20 · 1,5 · 6 |
 | Tên | `type/label` · `type/caption` · `card/choice-text-gap` | Title 15/20 Semi Bold · Description 13/18 · cách 4 |
 | Cột chữ, Slot Body | `space/inset-sm` | 8 |
-| Vòng icon · ảnh nhỏ | `card/lead-size` · `card/media-size-sm` · `radius/inner` | 36 · 48 · bo 14 |
+| Vòng icon · ảnh nhỏ | `card/lead-size` · `card/media-size-sm` · `radius/inner` | 36 · 48 · bo 12 (DEC-259) |
 | Avatar | **Base / Avatar · MD → xem tài liệu Avatar** | 36 |
 
 ### Biến thể
@@ -279,7 +279,7 @@ Chưa có component cha dùng (L2 chưa dựng).
 ### Token
 
 Số đo (collection Platform, mode Mobile): lề 16 · khoảng 12 · radio 20 · viền 1,5 · viền khi chọn 6 · chữ `type/label` 15/20 Semi Bold ·
-`type/caption` 13/18 · `card/choice-text-gap` 4 · `space/inset-sm` 8 · dòng Body 24 · vòng icon 36 · ảnh nhỏ 48, bo 14 · avatar 36 ·
+`type/caption` 13/18 · `card/choice-text-gap` 4 · `space/inset-sm` 8 · dòng Body 24 · vòng icon 36 · ảnh nhỏ 48, bo 12 · avatar 36 ·
 `touch/min` 44 ✓ (thấp nhất 68).
 
 Màu: như web, bỏ màu rê (`fg/secondary-hover`) vì app không dùng Hover.
@@ -291,7 +291,7 @@ Cùng lần chạy ở khối Web:
 | Mức | Ô mẫu | Kết quả |
 |---|---|---|
 | Khung | 18 ô, 18 mẫu (khối Mobile) | luật A: 0 lỗi |
-| ✕ Mất hình (cố ý, lớp "Khung thẻ") | Cảnh · Không nên 2 | cảnh "Không nên": thẻ chưa chọn trên nền xám |
+| ✕ Mất hình (cố ý, lớp "Khung thẻ") | Cảnh · Không nên 2 | cảnh "Không nên": thẻ chưa chọn trên khối `color/bg/muted` |
 | ⚠ Nền chìm (lớp "Khung thẻ") | Selected=true · Default, Focus | thẻ trắng trên ô trắng; giữ nhờ viền chọn 15,13:1 |
 | Cờ ngoài (lớp ngoài) | Selected=true · Pressed | "GIỐNG DEFAULT" là báo nhầm như phần Web |
 | Sát ngưỡng (lớp "Khung thẻ") | 13 mẫu | 1,10:1, thẻ chưa chọn trên trắng (app không đặt Hover, không có cờ Hover) |

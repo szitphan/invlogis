@@ -1,7 +1,7 @@
 ---
 type: design-component
 status: draft
-updated: 2026-10-20
+updated: 2026-10-26
 links:
   - design/v2/architecture.md
   - design/v2/foundations.md
@@ -18,13 +18,13 @@ links:
 > L1 · phiên bản 0.1.0 · Nháp · người phụ trách @szitphan · Figma `Base / Card` (6457:22918, 136 biến thể, trang DS · Components ·
 > L0–L3, Section `Card · L1 · Component Base` 6444:24203), L0 kèm theo `.card / Check` (6426:82241), `.card / Heading` (set 6575:28555, State Default · Disabled),
 > `.card / Media` (6507:208231) · khung tài liệu `Tài liệu · Card` (6562:213228, khối Web 6562:213235, khối Mobile 6562:213242) ·
-> DEC-234 (Base / Card), DEC-237 (Dashed, Has Check, `.card / Media`), DEC-238 (màu nhấn, rê), DEC-233 (luật lồng), DEC-241 (Context), DEC-247 (Hover thẻ, Disabled giữ viền, Heading Disabled) ·
+> DEC-234 (Base / Card), DEC-237 (Dashed, Has Check, `.card / Media`), DEC-238 (màu nhấn, rê), DEC-233 (luật lồng), DEC-241 (Context, bỏ ở DEC-258), DEC-247 (Hover thẻ, Disabled giữ viền, Heading Disabled) ·
 > theo Astryx `Card` 43:108295 + `ClickableCard` 2611:21423
 
 Một component cho cả web và app, không có biến thể Platform: bo thẻ, cỡ chữ của nội dung mặc định đọc từ biến collection Platform,
 khung chứa đặt mode Web hoặc Mobile thì thẻ tự đổi. Màu (collection Component, tiền tố `card/`) giống nhau ở hai nền tảng. Một thẻ =
 **khung** (nền, viền, bo, lề, bóng, tick chọn, vòng focus) + **Slot Content** nhận mọi phần. Component không biết nghiệp vụ: chữ mẫu
-Title, Subtitle. Ô mẫu thẻ Surface, Dashed nằm trên nền màn xám `color/bg/canvas` (Context = Canvas); thẻ Muted nằm trên nền trắng.
+Title, Subtitle. Mọi ô mẫu nền trắng: nền trang web và app đều trắng (DEC-258).
 
 ## Web
 
@@ -34,8 +34,8 @@ Title, Subtitle. Ô mẫu thẻ Surface, Dashed nằm trên nền màn xám `col
 
 - **Khung thẻ:** nền, viền, bo, lề, bóng, tick chọn, vòng focus; nội dung đặt trong Slot `Content` (mặc định `.card / Heading`:
   Title + Subtitle).
-- **Tone Surface:** nền trắng, viền 1px, mặc định; đặt trên nền màn xám hoặc nền trắng.
-- **Tone Muted:** nền xám `card/choice/bg`, không viền, không bóng (chỉ Elevation None); chỉ đặt trên nền trắng.
+- **Tone Surface:** nền trắng, viền 1px, mặc định; đặt trên nền trang trắng (mặc định của mọi màn, DEC-258).
+- **Tone Muted:** nền xám `card/choice/bg`, không viền, không bóng (chỉ Elevation None); đặt trên nền trắng, không đặt trên khối `color/bg/muted`.
 - **Tone Dashed:** nền trắng, viền đứt 1px nét 4/4; thẻ của đối tượng chưa tồn tại hoặc đã huỷ (DEC-237).
 - **Content (Slot):** nhận chữ, ảnh, component; các phần cách `space/gap-md` 12; Slot không cắt nội dung để vòng focus của nút bên
   trong còn nguyên.
@@ -43,7 +43,7 @@ Title, Subtitle. Ô mẫu thẻ Surface, Dashed nằm trên nền màn xám `col
 - **Elevation:** None · Low (`elev/1`, mặc định) · Med (`elev/2`) · High (`elev/3`); Pressed, Disabled bỏ bóng.
 - **Chỉ có ở web:** State Hover (Surface, Muted, Dashed) và Selected Hover (Muted).
 - **Luật:**
-  - Muted chỉ trên nền trắng: trên nền xám thẻ xám mất ranh giới; nền xám dùng Surface.
+  - Muted chỉ trên nền trắng: trên khối `color/bg/muted` thẻ xám mất ranh giới; ở đó dùng Surface.
   - Selected Hover, Selected Pressed, Selected Focus chỉ có ở Muted; Surface chỉ có Selected (viền 2px + tick).
   - Dashed không có Selected, Disabled: khi chọn thì chuyển sang Surface Selected viền đặc.
   - Has Check: tắt tick khi góc trên phải đã có nhãn khác (vd ghim của thẻ L2).
@@ -52,7 +52,7 @@ Title, Subtitle. Ô mẫu thẻ Surface, Dashed nằm trên nền màn xám `col
 ### Cấu tạo
 
 Hình phóng 2× trên Figma: Tone Surface · State Selected · Padding Default · Elevation Low, rộng 200, Slot Content mặc định
-`.card / Heading`; nền ô là nền màn xám.
+`.card / Heading`; nền ô trắng (DEC-258).
 
 | Phần | Token | Giá trị web |
 |---|---|---|
@@ -62,9 +62,9 @@ Hình phóng 2× trên Figma: Tone Surface · State Selected · Padding Default 
 | Bóng | effect style `elev/1` · `elev/2` · `elev/3` | Low 0 1 2 · Med 0 4 12 + 0 1 3 · High 0 16 40 + 0 4 12 |
 | Viền chọn | `card/border-width-selected` · `card/border/selected` | 2px · brand/800 #262626 |
 | Slot Content | `space/gap-md` | các phần cách 12, không cắt |
-| Tick chọn | L0 `.card / Check`: `card/check-size` · `card/check-ring` · `card/check/bg` · `card/check/fg` · `card/check/ring` | 20 · viền trắng 2 · lệch −6 ra ngoài góc trên phải |
+| Tick chọn | L0 `.card / Check`: `card/check-size` · `card/check-ring` · `card/check/bg` · `card/check/fg` · `card/check/border` | 20 · viền trắng 2 · lệch −6 ra ngoài góc trên phải |
 | Chữ mặc định | L0 `.card / Heading`: `type/heading` · `type/caption`; `color/text/primary` · `color/text/secondary` | Title 14/20 · Subtitle 12/16 |
-| Vòng focus | L0 `.focus / Ring`: `focus/width` · `focus/offset` · `color/border/focus` · `focus/gap` | 2 · 2 · khe theo nền đặt (Context) |
+| Vòng focus | L0 `.focus / Ring`: `focus/width` · `focus/offset` · `color/border/focus` · `focus/gap` | 2 · 2 · khe = nền trang trắng (DEC-258) |
 
 ### Biến thể
 
@@ -85,7 +85,7 @@ của Surface Selected). Dashed chỉ có Padding None vì dùng làm Khung th�
 | Disabled | nền `card/disabled/bg`, viền 1px `card/border/default`, bỏ bóng | nền `card/disabled/bg`, viền 1px `card/border/default` | không có |
 
 - Chữ trong Slot không tự xám khi Disabled: `.card / Heading` có State Disabled (Title, Subtitle màu `card/disabled/fg`, DEC-174), thẻ Disabled dùng sẵn; nội dung khác tự đặt màu Disabled hoặc dùng State Disabled của component con. Viền Disabled `card/border/default` 1,13:1 trên nền Disabled.
-- Khe focus theo `focus/gap`, đặt Context=Canvas khi nằm trên nền xám.
+- Khe focus `color/focus/gap` = nền trang trắng (DEC-258).
 
 ### Kích thước
 
@@ -102,15 +102,15 @@ Selected cao thêm 2 (viền 2px). Mọi cao ≥ `touch/min` 24 (WCAG 2.5.8).
 
 ### Nên và không nên
 
-1. **Nên:** Muted trên nền trắng (sheet, form): thẻ xám tách khỏi nền. **Không nên:** Muted trên nền màn xám: thẻ trùng nền, mất
-   ranh giới; trên nền xám dùng Surface.
+1. **Nên:** Muted trên nền trắng (sheet, form): thẻ xám tách khỏi nền. **Không nên:** Muted trên khối `color/bg/muted`: thẻ trùng nền,
+   mất ranh giới; ở đó dùng Surface.
 2. **Nên:** đang chọn có viền 2px và tick góc trên phải, không chỉ dựa vào màu viền. **Không nên:** tắt Has Check khi góc trên phải
    không có nhãn khác: chọn chỉ còn viền.
 
 ### L0 của họ thẻ
 
 - **`.card / Check`:** tick đang chọn, vòng 20 (`card/check-size`) nền `card/check/bg`, viền trắng 2 (`card/check-ring`,
-  `card/check/ring`), icon check 14 màu `card/check/fg`; Absolute ở góc trên phải, lệch −6 ra ngoài thẻ; chỉ ở Surface Selected, bật
+  `card/check/border`), icon check 14 màu `card/check/fg`; Absolute ở góc trên phải, lệch −6 ra ngoài thẻ; chỉ ở Surface Selected, bật
   tắt bằng Has Check; không dùng riêng.
 - **`.card / Heading`:** nội dung mặc định của Slot Content: Title (`type/heading` 14/20, `color/text/primary`) + Subtitle
   (`type/caption` 12/16, `color/text/secondary`), sát nhau; Has Subtitle bật tắt; State Default · Disabled (Disabled: Title, Subtitle màu `card/disabled/fg`); thay được bằng phần khác.
@@ -126,7 +126,7 @@ Selected cao thêm 2 (viền 2px). Mọi cao ≥ `touch/min` 24 (WCAG 2.5.8).
 | 1.4.3 Tương phản chữ (AA, ≥ 4,5) | ✓ | Nội dung mặc định `.card / Heading`: Title 17,73 trên trắng · 16,09 khi rê · 12,03 khi nhấn · 16,09 trên Muted · 14,18 Muted rê. Subtitle 5,43 · rê 7,06 và nhấn 5,27 (chữ phụ neutral/600) · Muted 4,92 · Muted rê 6,22 |
 | 1.4.3 ngoại lệ — Disabled | ✓ | `card/disabled/fg` 2,34 trên nền Disabled: được miễn; chữ trong Slot không tự xám |
 | 1.4.1 Dùng màu | ✓ | Surface Selected có tick + viền 2px; Muted Selected đổi nền trắng và hiện viền 1px; thẻ chọn một dùng thêm radio (Selectable Card) |
-| 1.4.11 Tương phản ngoài chữ (AA, ≥ 3) | ! | viền chọn, tick, vòng focus 15,13 (13,73 trên xám). Ranh giới thẻ: viền 1,25 trên trắng · thẻ trắng trên xám 1,10 · Muted trên trắng 1,10 · viền đứt 1,47; nội dung trong thẻ gánh việc nhận ra |
+| 1.4.11 Tương phản ngoài chữ (AA, ≥ 3) | ! | viền chọn, tick, vòng focus 15,13 trên nền trắng. Ranh giới thẻ: viền 1,25 trên trắng · Muted trên trắng 1,10 · viền đứt 1,47; nội dung trong thẻ gánh việc nhận ra |
 | 2.4.7 Focus thấy được (AA) · 2.4.13 (AAA) | ✓ | vòng 2 cách 2, 15,13:1; khe `focus/gap` |
 | 2.5.8 Kích thước đích (AA, ≥ 24) | ✓ | thẻ thấp nhất 38 (Padding None) |
 | 4.1.2 Tên, vai trò | ✓ | thẻ bấm được là `button` hoặc `link` có tên; chọn thì `aria-pressed` / `aria-selected`; nút trong Slot là đích riêng, không lồng `button` trong `button` |
@@ -200,7 +200,7 @@ Màu (collection Component, một bộ cho web và app; bỏ tiền tố `card/`
 | Disabled · nền, chữ, viền | `disabled/bg` · `disabled/fg` · `border/default` | neutral/100 · neutral/400 · neutral/200 |
 | Chữ phụ · khi rê, khi nhấn | `fg/secondary-hover` · `fg/secondary-pressed` | neutral/600 · neutral/600 |
 | Tick · nền, icon, viền | `check/bg` · `check/fg` · `check/ring` | brand/800 · trắng · trắng |
-| Vòng focus · vòng, khe | `color/border/focus` · `focus/gap` | #262626 · theo nền (Context) |
+| Vòng focus · vòng, khe | `color/border/focus` · `focus/gap` | #262626 · = nền trang trắng (DEC-258) |
 
 Nền rê, nhấn dùng cho Surface, Dashed và Muted đã chọn. Tên trong code: `<Card tone="surface|muted|dashed" padding elevation state
 selected disabled hasCheck>{content}</Card>`; biến CSS `--card-*`, `--radius-card`, `--focus-gap`.
@@ -212,10 +212,10 @@ Chạy `check-mat-hinh.js` trên khung 6562:213228 ngày 20/10 (ngưỡng 1,1:1)
 | Mức | Ô mẫu | Kết quả |
 |---|---|---|
 | Khung | 43 ô, 43 mẫu (khối Web; cả khung 82 ô, 82 mẫu) | luật A: 0 lỗi, ô nào cũng có nền riêng và viền mảnh |
-| ✕ Mất hình (cố ý) | Cảnh · Không nên 1 | cảnh "Không nên": Muted trên nền xám 1:1 — đúng điều cảnh muốn chỉ ra |
-| ⚠ Nền chìm | Surface · Hover, Surface · Disabled, Dashed · Hover | nền #F2F4F7 trên nền ô xám #F2F4F7 = 1:1; hình giữ nhờ viền 1,13 (Surface) / viền đứt 1,34 (Dashed). Disabled có viền từ 20/10; Hover `card/bg/hover` = neutral/100 từ 20/10 |
+| ✕ Mất hình (cố ý) | Cảnh · Không nên 1 | cảnh "Không nên": Muted trên khối `color/bg/muted` 1:1 — đúng điều cảnh muốn chỉ ra |
+| Sát ngưỡng | Surface · Hover, Surface · Disabled, Dashed · Hover | nền #F2F4F7 trên ô trắng 1,10:1; viền 1,25 (Surface) / viền đứt 1,47 (Dashed), số tính lại theo nền trắng (DEC-258), chưa chạy lại máy. Disabled có viền từ 20/10; Hover `card/bg/hover` = neutral/100 từ 20/10 |
 | ⚠ Nền chìm | Muted · Selected; Muted · đã chọn · Default, Hover, Focus | thẻ trắng trên ô trắng; hình giữ nhờ viền chọn 15,13:1 |
-| Sát ngưỡng | 45 mẫu lớp ngoài (cả khung); 10 mẫu lớp con ("Ảnh" của `.card / Media`, "Khung thẻ" của Selectable) | 1,10:1: thẻ trắng trên nền xám, Muted trên trắng, ô ảnh chờ; Surface · Hover nền neutral/100 trên thẻ trắng 1,10:1 (hết cờ "Giống Default" của bản #F9FAFC 1,04:1) |
+| Sát ngưỡng | 45 mẫu lớp ngoài (cả khung); 10 mẫu lớp con ("Ảnh" của `.card / Media`, "Khung thẻ" của Selectable) | 1,10:1: Muted trên trắng, ô ảnh chờ; Surface · Hover nền neutral/100 trên thẻ trắng 1,10:1 (hết cờ "Giống Default" của bản #F9FAFC 1,04:1) |
 
 ## Mobile
 
@@ -268,7 +268,7 @@ Như web (cùng hai cặp, mode Mobile).
 
 ### L0 của họ thẻ
 
-Như web; `.card / Heading` 15/20 · 13/18; `.card / Media` bo `radius/inner` 14, cỡ 48 · 64 như web.
+Như web; `.card / Heading` 15/20 · 13/18; `.card / Media` bo `radius/inner` 12 (`radius/xl`, DEC-259), cỡ 48 · 64 như web.
 
 ### Trợ năng — chấm theo WCAG 2.2
 
@@ -299,9 +299,9 @@ Như web (cùng ba component cha, cùng cách ráp Khung thẻ).
 
 ### Token
 
-Số đo (collection Platform, mode Mobile): bo `radius/card` 16 · lề `layout/card-padding` 16 · `card/padding-compact` 12 ·
+Số đo (collection Platform, mode Mobile): bo `radius/card` 16 (`radius/2xl`) · lề `layout/card-padding` 16 · `card/padding-compact` 12 ·
 `card/padding-spacious` 24 · `card/padding-none` 0 · viền 1 · viền chọn 2 · `space/gap-md` 12 · tick 20 · 2 · chữ `type/heading` 15/20 ·
-`type/caption` 13/18 · vòng focus 2 · 2 · ảnh nhỏ 48 · 64 · `radius/inner` 14 · `touch/min` 44 (Padding None 40: !).
+`type/caption` 13/18 · vòng focus 2 · 2 · ảnh nhỏ 48 · 64 · `radius/inner` 12 (`radius/xl`) · `touch/min` 44 (Padding None 40: !).
 
 Màu: như web, bỏ các màu rê (`bg/hover`, `choice/bg-hover`, `fg/secondary-hover`) vì app không dùng Hover.
 
@@ -312,8 +312,8 @@ Cùng lần chạy ở khối Web:
 | Mức | Ô mẫu | Kết quả |
 |---|---|---|
 | Khung | 39 ô, 39 mẫu (khối Mobile) | luật A: 0 lỗi |
-| ⚠ Nền chìm | Trạng thái · Surface · Disabled | nền #F2F4F7 trên nền ô xám 1:1; hình giữ nhờ viền 1,13:1 (Disabled có viền từ 20/10) |
-| ✕ Mất hình (cố ý) | Cảnh · Không nên 1 | cảnh "Không nên": Muted trên nền xám |
+| Sát ngưỡng | Trạng thái · Surface · Disabled | nền #F2F4F7 trên ô trắng 1,10:1; viền 1,25:1 (số tính lại theo nền trắng (DEC-258), chưa chạy lại máy) |
+| ✕ Mất hình (cố ý) | Cảnh · Không nên 1 | cảnh "Không nên": Muted trên khối `color/bg/muted` |
 | ⚠ Nền chìm | Muted · Selected; Muted · đã chọn · Default, Focus | thẻ trắng trên ô trắng; giữ nhờ viền chọn 15,13:1 |
 | Sát ngưỡng | 22 mẫu lớp ngoài; 5 mẫu lớp con | 1,10:1 (app không đặt Hover, không có cờ Hover; mọi Pressed đạt ≥ 1,34) |
 

@@ -1,7 +1,7 @@
 ---
 type: design-component
 status: draft
-updated: 2026-10-20
+updated: 2026-10-26
 links:
   - design/v2/architecture.md
   - design/v2/foundations.md
@@ -38,7 +38,7 @@ hoặc Mobile thì dòng tự đổi. Màu giống nhau ở hai nền tảng. M�
   giữa dọc; không nền, không lề (nền và lề là của thẻ chứa).
 - **Chip:** Type Soft · Dot × 8 Tone, chữ, icon đổi ở panel (instance lộ ra); giữ Size MD, không đè cỡ.
 - **Nhãn:** màu phụ, rộng tối đa 120, một dòng cắt "…"; tên trạng thái để ở chip, không lặp ở nhãn.
-- **Chỉ có ở web:** không có: dòng không bấm được; web và app khác cao chip (24 · 26) và cỡ chữ.
+- **Chỉ có ở web:** không có: dòng không bấm được; web và app khác cỡ chữ; chip cao 24 ở cả hai (DEC-259).
 - **Rộng:** mẫu 329 (= thẻ 361 − 2 × lề 16); trong Slot tự kéo giãn theo thẻ.
 - **Chữ:** khi dùng, chữ chip lấy nguyên văn trạng thái trong SRS, Tone theo bảng ánh xạ ở tài liệu Status Chip.
 
@@ -110,7 +110,7 @@ liệu Status Chip).
 ### Được dùng trong
 
 Kiểm 20/10: Status Row là giá trị gợi ý (preferred value, Slot khoá) của Slot ở hai component cha; chưa có instance đặt sẵn
-(`findInstances` = 0 ngoài khung tài liệu). Hình trên Figma: Record Card nền xám, dòng 3 đổi sang Status Row, cắt còn vùng dòng.
+(`findInstances` = 0 ngoài khung tài liệu). Hình trên Figma: Record Card nền trắng, dòng 3 đổi sang Status Row, cắt còn vùng dòng.
 
 | Component cha | Chỗ đặt | Cấu hình dùng |
 |---|---|---|
@@ -138,14 +138,14 @@ Tên trong code: `<StatusRow label status tone type />`; biến CSS `--card-row-
 ### Kiểm máy
 
 Chạy `check-mat-hinh.js` trên khung 6562:224997 ngày 20/10 (ngưỡng 1,1:1; ô dòng nền `color/bg/surface`, ô thẻ nền
-`color/bg/canvas` Context = Canvas).
+trắng theo DEC-258).
 
 | Mức | Ô mẫu | Kết quả |
 |---|---|---|
 | Khung | 8 ô, 8 mẫu (khối Web; cả khung 16 ô, 16 mẫu) | luật A: 0 lỗi; không cờ B, C, D |
 | Sát ngưỡng (lớp "Trạng thái") | Biến thể · Soft · Gray, Cảnh · nhãn | dòng không nền, đo ở chip: nền chip Gray #F2F4F7 trên ô trắng = 1,10:1 (đã ghi ở tài liệu Status Chip, chip giữ hình nhờ chữ, icon) |
 | Sát ngưỡng (lớp "Trạng thái") | Biến thể · Soft · Green | nền chip #E8F5EC trên ô trắng = 1,12:1 |
-| Sát ngưỡng (lớp "Khung thẻ") | Cảnh · trong thẻ, Được dùng trong | thẻ #FFFFFF trên nền ô #F2F4F7 = 1,10:1; giữ hình nhờ viền 1,13:1 |
+| Ranh giới (lớp "Khung thẻ") | Cảnh · trong thẻ, Được dùng trong | thẻ trắng trên ô trắng: giữ hình nhờ viền 1,25:1 (số tính lại theo nền trắng (DEC-258), chưa chạy lại máy) |
 
 ## Mobile
 
@@ -154,7 +154,7 @@ Chạy `check-mat-hinh.js` trên khung 6562:224997 ngày 20/10 (ngưỡng 1,1:1;
 ### Tổng quan
 
 - **Khi dùng, vì sao là L1, cấu tạo, chip, nhãn, rộng, chữ:** như web.
-- **Khác web:** cao 26 (chip MD 26); chữ nhãn 15/22.
+- **Khác web:** chữ nhãn 15/22; cao 24 như web (chip MD 24, DEC-259).
 
 ### Cấu tạo
 
@@ -164,7 +164,7 @@ Hình phóng 2× trên Figma (ô 1290 × 316): như web, mode Mobile.
 |---|---|---|
 | Nhãn | `.card / Row` Type=Label: `type/body`; `card/row-label-max` | 15/22 · 120 |
 | Chip | **Base / Status Chip · MD · Soft → xem tài liệu Status Chip** | không lặp token |
-| Khung dòng | `space/gap-lg`; `card/row-min-height` | 16 · 24 (cao thật 26 theo chip) |
+| Khung dòng | `space/gap-lg`; `card/row-min-height` | 16 · 24 (cao thật 24, bằng chip) |
 
 ### Biến thể
 
@@ -178,7 +178,7 @@ Không có (như web).
 
 | Trường hợp | Cao | Cách tính |
 |---|---|---|
-| Một dòng | 26 | lớn nhất của `chip/height` 26, chữ 22, `card/row-min-height` 24 |
+| Một dòng | 24 | lớn nhất của `chip/height` 24, chữ 22, `card/row-min-height` 24 |
 | Trong Slot Rows của Record Card | +8 | `space/gap-sm` 8 |
 | Trong Slot Body của Selectable Card | +4 | `space/gap-xs` 4 |
 | Rộng | 329 | mẫu; kéo giãn theo Slot |
@@ -210,12 +210,12 @@ Như web (cùng bảng).
 
 ### Được dùng trong
 
-Như web (cùng bảng): Record Card cách 8, Selectable Card cách 4; chip MD 26 ở app.
+Như web (cùng bảng): Record Card cách 8, Selectable Card cách 4; chip MD 24 ở app.
 
 ### Token
 
-Số đo (collection Platform, mode Mobile): cao tối thiểu `card/row-min-height` 24 (cao thật 26 theo chip) · khoảng tối thiểu
-`space/gap-lg` 16 · nhãn tối đa `card/row-label-max` 120 · chữ `type/body` 15/22 · `chip/height` 26 (của Status Chip). Màu như web.
+Số đo (collection Platform, mode Mobile): cao tối thiểu `card/row-min-height` 24 (cao thật 24, bằng chip) · khoảng tối thiểu
+`space/gap-lg` 16 · nhãn tối đa `card/row-label-max` 120 · chữ `type/body` 15/22 · `chip/height` 24 (của Status Chip). Màu như web.
 
 ### Kiểm máy
 
@@ -224,7 +224,7 @@ Cùng lần chạy ở khối Web:
 | Mức | Ô mẫu | Kết quả |
 |---|---|---|
 | Khung | 8 ô, 8 mẫu (khối Mobile) | luật A: 0 lỗi; không cờ B, C, D |
-| Sát ngưỡng | như web | chip Gray 1,10:1, Green 1,12:1 trên ô trắng; thẻ trắng 1,10:1 trên nền xám |
+| Sát ngưỡng | như web | chip Gray 1,10:1, Green 1,12:1 trên ô trắng; thẻ trắng trên ô trắng giữ hình nhờ viền 1,25:1 |
 
 ## Đối chiếu Astryx
 
@@ -234,7 +234,7 @@ Astryx không có dòng nhãn – trạng thái riêng (thẻ Astryx đổ mọi
 | | Astryx | DS v2 | Vì sao |
 |---|---|---|---|
 | Lệch | không có thành phần dòng trong thẻ | L1 `Base / Status Row` = `.card / Row` Type=Label + `Base / Status Chip` MD | dòng trạng thái lặp ở nhiều thẻ L2; L0 không chứa L1 |
-| — | — | chip MD 24 / 26 giữ nguyên token của Status Chip | luật e: cha chỉ quyết khoảng cách quanh chip |
+| — | — | chip MD 24 giữ nguyên token của Status Chip | luật e: cha chỉ quyết khoảng cách quanh chip |
 
 ## Phần máy (chung Web và Mobile)
 

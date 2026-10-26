@@ -1,7 +1,7 @@
 ---
 type: design-component
 status: draft
-updated: 2026-10-20
+updated: 2026-10-26
 links:
   - design/v2/architecture.md
   - design/v2/foundations.md
@@ -74,7 +74,7 @@ State × Align (Size, Density chưa có: một mật độ, lề 8). 12 biến t
 | Default | không nền |
 | Hover | nền `list-row/bg/hover` = neutral/100, 1,10:1 so với trắng (lệch DEC-210 cho dòng danh sách, user chốt 20/10; chỉ web) |
 | Pressed | nền `list-row/bg/pressed`; chữ phụ đổi `list-row/fg/secondary-pressed` (neutral/600) |
-| Focus | vòng 2 cách 2 bo 10 (lớp `.focus / Ring` đặt tự do sau dòng, không cắt khung); khe theo `focus/gap` (đặt Context=Canvas khi nằm trên nền xám) |
+| Focus | vòng 2 cách 2 bo 10 (lớp `.focus / Ring` đặt tự do sau dòng, không cắt khung); khe `color/focus/gap` = nền trang trắng (DEC-258) |
 | Selected | nền `list-row/bg/selected` + dấu tick cuối dòng (không chỉ dựa vào màu, WCAG 1.4.1; DEC-208) |
 | Disabled | chữ, icon, dấu chọn xám `list-row/fg/disabled`, không làm mờ (DEC-174); phần trong hai Slot **không** tự xám: đặt State=Disabled ở từng component con (Avatar, Button) |
 
@@ -152,7 +152,7 @@ Số đo (collection Platform, mode Web):
 | Kẻ | `list-row/divider-height` | 1 |
 | Chữ | `type/body` · `type/caption` | 14/20 · 12/16 |
 | Cỡ dấu chọn | `icon/size/md` | 16 |
-| Vòng focus | `focus/width` · `focus/offset` · `focus/gap` (collection Context) | 2 · 2 |
+| Vòng focus | `focus/width` · `focus/offset` · `color/focus/gap` (= nền trang) | 2 · 2 |
 | Vùng chạm | `touch/min` | 24 ✓ |
 
 Đã bỏ khỏi `tokens.json` 0.12.0 các biến `list-row/*` không còn dùng (DEC-231): `ring-radius` (vòng focus dùng `list-row/radius`), `lead-slot/*`, `lead-margin-y`, `lead/*`, `switch/*`, `icon-stroke`.

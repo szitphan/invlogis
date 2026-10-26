@@ -1,7 +1,7 @@
 ---
 type: design-component
 status: draft
-updated: 2026-10-20
+updated: 2026-10-26
 links:
   - design/v2/architecture.md
   - design/v2/foundations.md
@@ -205,7 +205,7 @@ Chạy `check-mat-hinh.js` trên khung 6474:23680 ngày 20/10 (ngưỡng 1,1:1, 
 | Sát ngưỡng | — | không có ở lớp ngoài; lớp con: Avatar · Disabled [Edit] 1,10 |
 | Lớp con (mở rộng script) | 8 cờ | 7 ✕ MẤT HÌNH: khung viền trắng `avatar/ring` của chấm Status (Image · Online, Busy, Away, Offline; Cảnh Nên, Không nên) và "Avatar 1" (Được dùng trong · Avatar Group) trắng trên ô trắng — viền trắng là trang trí, hình giữ nhờ ảnh, chấm màu; 1 ⚠ NỀN CHÌM: Upload · Focus, lớp "Vòng focus" trắng, hình giữ nhờ viền đứt 5,43:1 |
 
-Ô nền xám (`color/bg/canvas`) đặt mode `Context = Canvas`: 6474:88739 (Được dùng trong · Record Card).
+Ô Được dùng trong · Record Card (6474:88739) nền trắng như mọi ô (DEC-258 bỏ Context).
 
 ## Mobile
 
@@ -217,7 +217,7 @@ Chạy `check-mat-hinh.js` trên khung 6474:23680 ngày 20/10 (ngưỡng 1,1:1, 
 - **Image:** có ảnh đại diện; ảnh phủ kín, cắt tròn. Ảnh lỗi hoặc chưa tải xong thì hiện Initials.
 - **Icon:** không có tên, ảnh (tài khoản hệ thống, đối tác); mặc định `icon/user-round`.
 - **Upload:** ô trống viền đứt để tải ảnh lên trong form tạo hồ sơ.
-- **Cỡ app:** SM 24 · MD 36 dòng danh sách, ô đầu dòng 36, chữ ở K4 80 (DEC-164) · LG 48 đầu thẻ, sheet · XL 64 ảnh
+- **Cỡ app:** SM 24 · MD 36 dòng danh sách, ô đầu dòng 36, chữ cách avatar 12 (`space/gap-md`; bỏ đường K, DEC-259) · LG 48 đầu thẻ, sheet · XL 64 ảnh
   đổi được trong form · XXL 88 đầu trang hồ sơ (DEC-203). Kéo ra mặc định SM.
 - **Chữ viết tắt app:** SM 13/18 · MD 15/20 Semi Bold · LG 17/22 · XL 22/28 · XXL 28/34.
 - **Khác web:** không Tooltip, không Hover; cỡ avatar như web, chữ viết tắt theo mode Mobile; avatar bấm được (Edit,
@@ -343,7 +343,7 @@ Chạy `check-mat-hinh.js` trên khung 6474:23680 ngày 20/10.
 | Sát ngưỡng | — | không có ở lớp ngoài; lớp con: Avatar · Disabled [Edit] 1,10 |
 | Lớp con (mở rộng script) | 8 cờ | như khối Web: 7 ✕ khung viền trắng `avatar/ring` (chấm Status, "Avatar 1") trắng trên ô trắng; 1 ⚠ Upload · Focus giữ hình nhờ viền đứt 5,43:1 |
 
-Ô nền xám đặt mode `Context = Canvas`: 6474:89470 (Được dùng trong · Record Card).
+Ô Được dùng trong · Record Card (6474:89470) nền trắng như mọi ô (DEC-258 bỏ Context).
 
 ## Phần máy (chung Web và Mobile)
 

@@ -1,7 +1,7 @@
 ---
 type: design-component
 status: draft
-updated: 2026-10-20
+updated: 2026-10-26
 links:
   - design/v2/architecture.md
   - design/v2/foundations.md
@@ -46,7 +46,7 @@ Không đặt Base / OTP Field trên web. Thuộc tính của component: xem ph�
 - **Tự kiểm:** đủ 6 số thì cha tự kiểm tra, không có nút Xác nhận trong component.
 - **State:** Default · Focus · Error · Disabled; mỗi State đặt sẵn nội dung đại diện, chỉnh từng ô qua panel (State, Content,
   Digit).
-- **Cỡ app:** ô 48 × 52, bo 14, khoảng giữa ô 8; hàng ô rộng 328 canh giữa khung rộng 361.
+- **Cỡ app:** ô 48 × 52, bo 12 (DEC-259), khoảng giữa ô 8; hàng ô rộng 328 canh giữa khung rộng 361.
 - **Chỉ có ở app:** web không dùng ô mã; app không có Hover.
 - **Mã sai:** cha xoá hết ô (về Default · Empty), đưa focus về ô 1, hiện chữ lỗi ở dòng dưới (Has Hint, Type=Error).
 - **Đang kiểm tra, hết hiệu lực:** dùng Disabled. Đang kiểm tra = ô tắt có số + chữ ở dòng dưới; hết hiệu lực = ô tắt trống +
@@ -61,7 +61,7 @@ tím: khoảng · xanh: nội dung (màu, chữ); số đọc từ biến theo m
 | Phần | Token | Giá trị app |
 |---|---|---|
 | Hàng ô | khoảng giữa ô `space/gap-sm`; canh giữa trong `field/width-default` | 8 giữa ô; 6 × 48 + 5 × 8 = 328 trong khung 361 |
-| Ô (L0 `.field / Code Cell`) | rộng `otp/cell-width`; cao `control/height/lg`; bo `radius/field`; nền `field/bg/app`; viền `field/border-width` + `field/border/default` | 48 × 52; bo 14; #F2F4F7; viền 1 #5F6B7A |
+| Ô (L0 `.field / Code Cell`) | rộng `otp/cell-width`; cao `control/height/lg`; bo `radius/field`; nền `field/bg/app`; viền `field/border-width` + `field/border/default` | 48 × 52; bo 12; #F2F4F7; viền 1 #5F6B7A |
 | Chữ số | thuộc tính Digit; `type/title-3` (Cal Sans); màu `field/fg/value`, cả khi Disabled | 17/22; #121826 |
 | Con trỏ | thanh `field/border-width-active` × `type/title-3/line-height`; màu `field/border/active`; chỉ State Focus · Content Empty | 2 × 22; #262626 |
 | Dòng dưới (L0 `.field / Code Hint`) | canh giữa, cách hàng ô `space/gap-xs`; `type/caption`; Helper `field/fg/helper`, Error `field/fg/error`; bật bằng Has Hint | 13/18; cách 4; #5F6B7A · #B42318 |
@@ -103,7 +103,7 @@ Một cỡ. Ô cao 52 khớp Base / Text Field / Mobile và Base / Button LG (`c
 
 | Phần | Rộng | Cao | Bo | Ghi chú |
 |---|---|---|---|---|
-| Ô | 48 | 52 | 14 | `otp/cell-width` · `control/height/lg` · `radius/field` |
+| Ô | 48 | 52 | 12 | `otp/cell-width` · `control/height/lg` · `radius/field` |
 | Hàng ô | 328 | 52 | — | 6 ô, khoảng giữa `space/gap-sm` = 8 |
 | Khung (Field) | 361 | 74 | — | có dòng dưới; `field/width-default` |
 | Dòng dưới | 361 | 18 | — | `type/caption` 13/18, cách hàng ô 4 |
@@ -169,7 +169,7 @@ Số đo (collection Platform, mode Mobile):
 |---|---|---|
 | Ô · rộng | `otp/cell-width` | 48 |
 | Ô · cao | `control/height/lg` | 52 |
-| Ô · bo | `radius/field` | 14 |
+| Ô · bo | `radius/field` → `radius/xl` | 12 |
 | Khoảng giữa ô | `space/gap-sm` | 8 |
 | Ô → dòng dưới | `space/gap-xs` | 4 |
 | Rộng khung | `field/width-default` | 361 |
@@ -187,11 +187,11 @@ Màu (collection Component, tiền tố `field/`, dùng chung với Base / Text 
 | Nền ô tắt | `bg/disabled` | `button/bg/disabled` → `color/action/secondary` · #F2F4F7 |
 | Viền nghỉ | `border/default` | `color/border/input` → neutral/500 · #5F6B7A |
 | Viền focus | `border/active` | `color/border/focus` → charcoal/900 · #262626 |
-| Viền lỗi | `border/error` | `color/status/danger-fg` → red/700 · #B42318 |
+| Viền lỗi | `border/error` | `color/border/danger` → red/700 · #B42318 |
 | Viền tắt | `border/disabled` | `color/border/default` → neutral/200 · #E3E6EC |
 | Chữ số (kể cả tắt) | `fg/value` | `color/text/primary` → neutral/900 · #121826 |
 | Gợi ý | `fg/helper` | `color/text/secondary` → neutral/500 · #5F6B7A |
-| Chữ lỗi | `fg/error` | `color/status/danger-fg` → red/700 · #B42318 |
+| Chữ lỗi | `fg/error` | `color/status/danger-text` → red/700 · #B42318 |
 
 Code: biến CSS `--otp-cell-width`, `--field-*`, `--control-height-lg`.
 

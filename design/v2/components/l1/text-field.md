@@ -1,7 +1,7 @@
 ---
 type: design-component
 status: draft
-updated: 2026-10-20
+updated: 2026-10-26
 links:
   - design/v2/architecture.md
   - design/v2/foundations.md
@@ -55,7 +55,7 @@ thái); rộng rút còn 200 cho vừa ô hình.
 |---|---|---|
 | Nền | `field/bg/web`; Hover `field/bg/hover`; Disabled `field/bg/disabled`; Read Only `field/bg/readonly` | trắng · #F9FAFC · #F2F4F7 · #F2F4F7 |
 | Viền | `field/border-width`, `field/border/default`; Focus `field/border-width-active` + `field/border/active`; Error `field/border/error`; Disabled `field/border/disabled`; Read Only không viền | 1px; Focus, Error 2px |
-| Nhãn | L0 `.field / Label` Style=Web; thuộc tính Label; `type/label`; `field/fg/label-web`; trên ô cách `space/gap-xs` | 14/20 Medium; cách ô 4; rộng tối đa 300 |
+| Nhãn | L0 `.field / Label` Style=Web; thuộc tính Label; `type/label`; `field/fg/label-web` = `color/text/secondary` (DEC-258, như app); trên ô cách `space/gap-xs` | 14/20 Medium, #5F6B7A; cách ô 4; rộng tối đa 300 |
 | Dấu bắt buộc | thuộc tính Required; `field/fg/error`; cách nhãn `space/gap-xs` | cùng cỡ chữ nhãn; cách 4 |
 | Khung ô | L0 `.field / Input`; cao `control/height/*`; rộng `field/width-default`; bo `radius/field` | 28 · 32 · 40; rộng 320; bo 8 |
 | Chữ giá trị, gợi ý | Value `field/fg/value`, Placeholder `field/fg/placeholder`, Disabled `field/fg/disabled`; `type/body`; lề `field/edge-inset` + `field/text-inset` | 14/20; phía không icon chữ cách mép 8 + 4 = 12 |
@@ -101,7 +101,7 @@ Bo 8, icon 14 ở mọi cỡ. Mọi cỡ ≥ `touch/min` 24 (WCAG 2.5.8).
 
 | Tiêu chí | KQ | Số đo, ghi chú |
 |---|---|---|
-| 1.4.3 Tương phản chữ (AA, ≥ 4,5) | ✓ | giá trị, nhãn 17,73 · chữ gợi ý, dòng gợi ý 5,43 (trên Hover 5,19) · chữ lỗi, dấu `*` 6,57 |
+| 1.4.3 Tương phản chữ (AA, ≥ 4,5) | ✓ | giá trị 17,73 · nhãn 5,43 · chữ gợi ý, dòng gợi ý 5,43 (trên Hover 5,19) · chữ lỗi, dấu `*` 6,57 |
 | 1.4.3 ngoại lệ — Disabled | ✓ | 2,34: được miễn (control không hoạt động) |
 | 1.4.11 Tương phản ngoài chữ (AA, ≥ 3) | ✓ | viền nghỉ 5,43 · viền đang gõ 15,13 · viền lỗi 6,57 · Read Only không viền (nền 1,10 trên trắng): nhận ra nhờ nhãn và chữ |
 | 2.4.7 Focus thấy được (AA) | ✓ | viền 2px than chì 15,13 khi focus bằng bàn phím; chính viền là dấu focus (DEC-207) |
@@ -211,8 +211,8 @@ nền nên script đo thêm lớp khung ô `Field` (L0 `.field / Input`), ghi "l
 - **Helper:** dòng gợi ý dưới ô, tắt bằng `Has Helper`. Ở State=Error chữ lỗi thay chỗ dòng gợi ý và luôn hiện.
 - **Cỡ app:** một cỡ 52 (`control/height/lg`), không có trục Size (DEC-173).
 - **Rộng:** mặc định 361 = 393 − 2 × 16 (`field/width-default`); đặt vào màn thì kéo Fill theo khung.
-- **Khác web:** nhãn caption nằm trong ô, trên giá trị; ô nền xám, bo 14, lề 16; icon cách mép 16, chữ cách icon 16, chữ
-  đứng ở K3 64 khi ô ở lề màn (DEC-196); dòng gợi ý, chữ lỗi lùi 16 cho thẳng chữ trong ô (DEC-192); không Hover.
+- **Khác web:** nhãn caption nằm trong ô, trên giá trị; ô nền `color/bg/muted`, bo 12 (DEC-259), lề 16; icon cách mép 16, chữ cách icon 16 (bỏ
+  đường K, DEC-259); dòng gợi ý, chữ lỗi lùi 16 cho thẳng chữ trong ô (DEC-192); không Hover.
 - **Giữa hai ô:** cách 12 (`form/field-gap`).
 - **Chữ:** nhãn danh từ ngắn, viết hoa chữ đầu, không dấu hai chấm; chữ gợi ý là ví dụ thật hoặc "Nhập …"; chữ lỗi nói
   cái sai và cách sửa, không xin lỗi. Nhãn dài cắt "…" ở rộng tối đa 300, dấu `*` vẫn ngay sau nhãn.
@@ -229,7 +229,7 @@ thước); rộng rút còn 220 cho vừa ô hình.
 | Viền | `field/border-width`, `field/border/default`; Focus `field/border-width-active` + `field/border/active`; Error `field/border/error`; Disabled `field/border/disabled`; Read Only không viền | 1px; Focus, Error 2px |
 | Nhãn trong ô | L0 `.field / Label` Style=App, lồng trong `.field / Input / App`; thuộc tính Label; `type/caption`; `field/fg/label-app` | 13/18 Regular; trên chữ giá trị; rộng tối đa 300 |
 | Dấu bắt buộc | thuộc tính Required; `field/fg/error`; cách nhãn `space/gap-xs` | cách 4 |
-| Khung ô | L0 `.field / Input / App`; cao `control/height/lg`; rộng `field/width-default`; bo `radius/field`; lề `field/edge-inset`, `field/text-inset` | cao 52; rộng 361; bo 14; lề 16, chữ thêm 0 |
+| Khung ô | L0 `.field / Input / App`; cao `control/height/lg`; rộng `field/width-default`; bo `radius/field`; lề `field/edge-inset`, `field/text-inset` | cao 52; rộng 361; bo 12; lề 16, chữ thêm 0 |
 | Chữ giá trị, gợi ý | Value `field/fg/value`, Placeholder `field/fg/placeholder`, Disabled `field/fg/disabled`; `type/body` | 15/22 |
 | Icon | Leading icon, Trailing icon (đổi component, DS · Icons); `icon/size/sm`; `field/fg/icon`; icon → chữ `field/content-gap` | 16; cách mép 16; chữ cách icon 16 (DEC-196) |
 | Dòng gợi ý, lỗi | L0 `.field / Hint`; Helper `field/fg/helper`, Error text `field/fg/error`; `type/caption`; cách ô `space/gap-xs`; lề `field/hint-inset` | 13/18; cách ô 4; lùi 16 cho thẳng chữ trong ô (DEC-192) |
@@ -259,7 +259,7 @@ App không dùng Hover (biến thể có trong component, không dùng).
 |---|---|---|---|---|---|
 | một cỡ (LG) | 52 | 361 (Fill theo khung) | 16 | 52 ≥ 44, đủ | mọi ô nhập app (DEC-173) |
 
-Bo 14, icon 16, dòng gợi ý lùi 16.
+Bo 12 (DEC-259), icon 16, dòng gợi ý lùi 16.
 
 ### Nên và không nên
 
@@ -338,7 +338,7 @@ Số đo (collection Platform, mode Mobile):
 | Lề chữ thêm | `field/text-inset` | 0 |
 | Icon → chữ | `field/content-gap` | 16 |
 | Cỡ icon | `icon/size/sm` | 16 |
-| Bo | `radius/field` | 14 |
+| Bo | `radius/field` → `radius/xl` | 12 |
 | Viền nghỉ · đang gõ | `field/border-width` · `field/border-width-active` | 1 · 2 |
 | Nhãn → `*`, ô → gợi ý | `space/gap-xs` | 4 |
 | Lề dòng gợi ý | `field/hint-inset` | 16 |

@@ -1,7 +1,7 @@
 ---
 type: design-component
 status: draft
-updated: 2026-10-20
+updated: 2026-10-26
 links:
   - design/v2/architecture.md
   - design/v2/foundations.md
@@ -20,7 +20,7 @@ links:
 > L1 · phiên bản 0.1.0 · Nháp · người phụ trách @szitphan · Figma `Base / Record Card` (6442:85850, trang DS · Components ·
 > L0–L3, Section `Card · L1 · Component Base` 6444:24203), khung tài liệu `Tài liệu · Record Card` (6562:220123, khối Web
 > 6562:220130, khối Mobile 6562:220137) · DEC-211 (khuôn thẻ Invlogis), DEC-233 (luật lồng), DEC-234 (ráp trên Base / Card),
-> DEC-235 (Slot Footer, Has Avatar, Status Row), DEC-237 (Has Media), DEC-238 (màu nhấn), DEC-239 (chip SM); giữ DEC-125,
+> DEC-235 (Slot Footer, Has Avatar, Status Row), DEC-237 (Has Media), DEC-238 (màu nhấn), DEC-239 (chip SM), DEC-258 (nền trắng), DEC-259 (bo, chip SM 22, bỏ đường K); giữ DEC-125,
 > DEC-177, DEC-192, DEC-209, DEC-210 như đã nêu ở từng mục · ráp trên [Card](card.md), lồng [Status Row](status-row.md),
 > [Status Chip](status-chip.md), [Avatar](avatar.md), [Button](button.md)
 
@@ -59,7 +59,7 @@ mẫu Title, Subtitle, Value, Label, Status.
 
 ### Cấu tạo
 
-Hình phóng 2× trên Figma (ô 1290 × 868, nền `color/bg/canvas`, Context = Canvas): State=Default · Has Trailing bật · 3 dòng,
+Hình phóng 2× trên Figma (ô 1290 × 868, nền trắng, DEC-258): State=Default · Has Trailing bật · 3 dòng,
 dòng 3 đổi sang Base / Status Row · Has Related, Has Footer bật · Has Media, Has Avatar tắt.
 
 | Phần | Token | Giá trị web |
@@ -91,7 +91,7 @@ Status Row · Has Media, tắt Related và Footer.
 | Default | nền `card/bg/default` (trắng), viền 1px `card/border/default`, bóng `elev/1` (DEC-125) |
 | Hover | nền `card/bg/hover` = neutral/100 (1,10:1 so với trắng); chữ phụ `card/fg/secondary-hover` = neutral/600; chỉ web |
 | Pressed | nền `card/bg/pressed` = neutral/300, viền `card/border/pressed` = neutral/400, chữ phụ `card/fg/secondary-pressed` = neutral/600, bỏ bóng (DEC-238); khối liên quan giữ nền neutral/100 nên nổi trên nền nhấn |
-| Focus | vòng `.focus / Ring` của khung, dày 2 cách 2, bo vòng = bo thẻ + 4; khe theo `focus/gap` (đặt Context=Canvas khi thẻ nằm trên nền xám) |
+| Focus | vòng `.focus / Ring` của khung, dày 2 cách 2, bo vòng = bo thẻ + 4; khe `color/focus/gap` = nền trang trắng (DEC-258) |
 | Selected | viền 2px `card/border/selected` (brand/800, than chì) + tick `.card / Check` 20 đè góc trên phải (Has Check của khung bật); đang chọn mà focus thì vòng focus chồng lên |
 
 Không có Disabled.
@@ -118,14 +118,14 @@ Một mật độ (Density chưa dựng).
 
 ### Trợ năng — chấm theo WCAG 2.2
 
-Ô mẫu nền xám `color/bg/canvas`; tương phản tính bằng công thức WCAG trên mã màu token.
+Ô mẫu nền trắng (DEC-258); tương phản tính bằng công thức WCAG trên mã màu token.
 
 | Tiêu chí | KQ | Số đo, ghi chú |
 |---|---|---|
 | 1.4.3 Tương phản chữ (AA, ≥ 4,5) | ✓ | Title 17,73 · chữ phụ 5,43 (rê 7,06 · nhấn 5,27 với neutral/600) · khối liên quan: Value 16,09, Label 4,92 (rê, nhấn 7,06) |
-| 1.4.11 Tương phản ngoài chữ (AA, ≥ 3) | ✓ | viền chọn 2px 13,73 trên nền xám · tick 15,13 · vòng focus 13,73; viền nghỉ 1,13 trên nền xám là trang trí (thẻ nhận ra nhờ nội dung và bóng) |
+| 1.4.11 Tương phản ngoài chữ (AA, ≥ 3) | ✓ | viền chọn 2px 15,13 trên nền trắng · tick 15,13 · vòng focus 15,13; viền nghỉ 1,25 trên nền trắng là trang trí (thẻ nhận ra nhờ nội dung và bóng) |
 | 1.4.1 Dùng màu | ✓ | Selected có tick + viền dày, không chỉ đổi màu; chip có chữ |
-| 2.4.7 Focus thấy được (AA) · 2.4.13 (AAA) | ✓ | vòng 2px cách 2px, 13,73:1 trên nền xám |
+| 2.4.7 Focus thấy được (AA) · 2.4.13 (AAA) | ✓ | vòng 2px cách 2px, 15,13:1 trên nền trắng |
 | 2.5.8 Kích thước đích (AA, ≥ 24) | ✓ | thẻ ≥ 196; nút chân thẻ 32 |
 | 4.1.2 Tên, vai trò | ✓ | thẻ bấm được là link (tiêu đề) hoặc button; nút chân thẻ là đích riêng, không lồng button trong button; Selected: `aria-selected` hoặc checkbox |
 | 2.1.1 Bàn phím | ✓ | Tab tới thẻ rồi tới nút chân thẻ; Enter mở; Space chọn (danh sách chọn nhiều) |
@@ -186,7 +186,7 @@ Số đo (collection Platform, mode Web):
 | Ảnh nhỏ | `card/media-size` | 64 |
 | Dòng · ô icon | `card/row-min-height` · `card/row-icon-cell` | 24 · 24 |
 | Khối liên quan | `radius/inner` · `layout/card-padding` · `space/gap-lg` | 8 · 16 · 16 |
-| Chip đầu thẻ | `chip/height-sm` | 16 |
+| Chip đầu thẻ | `chip/height-sm` | 22 (DEC-259) |
 | Cách nút chân thẻ | `card/action-gap` | 8 |
 | Tick | `card/check-size` · `card/check-ring` | 20 · 2 |
 | Chữ | `type/heading` · `type/body` · `type/caption` | 14/20 · 14/20 · 12/16 |
@@ -204,14 +204,14 @@ CSS `--card-*`, `--radius-card`, `--layout-card-padding`.
 
 ### Kiểm máy
 
-Chạy `check-mat-hinh.js` trên khung 6562:220123 ngày 20/10 (ngưỡng 1,1:1; ô mẫu nền `color/bg/canvas`, Context = Canvas).
+Chạy `check-mat-hinh.js` trên khung 6562:220123 ngày 20/10 (ngưỡng 1,1:1; ô mẫu khi đó nền xám, nay trắng theo DEC-258: hai dòng nền chìm đã tính lại).
 
 | Mức | Ô mẫu | Kết quả |
 |---|---|---|
 | Khung | 12 ô, 12 mẫu (khối Web; cả khung 23 ô, 23 mẫu) | luật A: 0 lỗi, ô nào cũng có nền riêng và viền mảnh |
-| ⚠ Nền chìm (lớp "Khung thẻ") | Trạng thái · Hover | nền #F2F4F7 (`card/bg/hover` = neutral/100) trên nền ô #F2F4F7 = 1:1; hình giữ nhờ viền 1,13:1 |
+| Sát ngưỡng (lớp "Khung thẻ") | Trạng thái · Hover | nền #F2F4F7 (`card/bg/hover` = neutral/100) trên ô trắng 1,10:1; viền 1,25:1 (số tính lại theo nền trắng (DEC-258), chưa chạy lại máy) |
 | Sát ngưỡng (lớp "Khung thẻ") | Trạng thái · Hover | Hover #F2F4F7 so với Default #FFFFFF = 1,10:1: đạt, hết cờ "Giống Default" của bản #F9FAFC 1,04:1 (20/10) |
-| Sát ngưỡng (lớp "Khung thẻ") | mọi ô thẻ trắng (Default, Focus, Selected, biến thể, cảnh) | nền thẻ #FFFFFF trên nền ô #F2F4F7 = 1,10:1; hình giữ nhờ viền 1,13:1 và bóng |
+| Ranh giới (lớp "Khung thẻ") | mọi ô thẻ trắng (Default, Focus, Selected, biến thể, cảnh) | thẻ trắng trên ô trắng: hình giữ nhờ viền 1,25:1 và bóng (số tính lại theo nền trắng (DEC-258), chưa chạy lại máy) |
 | Cờ ngoài (lớp ngoài) | Trạng thái · Hover, Pressed | "GIỐNG DEFAULT" 1:1 là báo nhầm: lớp ngoài của thẻ không fill, nền nằm ở lớp con "Khung thẻ"; Pressed thật là 1,34:1 so với nền ô, 1,47:1 so với Default |
 
 ## Mobile
@@ -222,9 +222,9 @@ Chạy `check-mat-hinh.js` trên khung 6562:220123 ngày 20/10 (ngưỡng 1,1:1;
 
 - **Khi dùng, ráp trên Base / Card, thứ tự, đầu thẻ, Rows, Footer, Selected, chữ, rộng:** như web (cùng cấu tạo, cùng thuộc
   tính).
-- **Khác web:** không Hover; bo thẻ 16, bo khối phụ 14; chữ 15/22 (tiêu đề 15/20, phụ 13/18); nút chân thẻ MD 42, cách 12; chip
-  đầu thẻ vẫn 16.
-- **Đường K app:** chữ đầu thẻ K4 80, chữ dòng K3 64, khối liên quan K2 32 → nội dung 48 (thẻ 361 trên màn 393).
+- **Khác web:** không Hover; bo thẻ 16, bo khối phụ 12 (DEC-259); chữ 15/22 (tiêu đề 15/20, phụ 13/18); nút chân thẻ MD 42,
+  cách 12; chip đầu thẻ SM 22 như web.
+- **Lưới app:** thẻ 361 trải 4 cột trên màn 393 (lề 16, rãnh 16); nội dung canh theo lề thẻ 16, không dùng đường K (DEC-259).
 
 ### Cấu tạo
 
@@ -236,11 +236,11 @@ Hình phóng 2× trên Figma: như web, mode Mobile (ô 1290 × 904).
 | Khung nội dung | `layout/card-padding` · `space/gap-md` | 16 · 12 |
 | Đầu thẻ | `.card / Header`: `card/lead-size`; cách chữ `space/gap-md` | 36 · 12 |
 | Title · Subtitle | `type/heading` · `type/caption` | 15/20 · 13/18 |
-| Ảnh nhỏ | `.card / Media` MD: `card/media-size`, bo `radius/inner` | 64 · 14 |
+| Ảnh nhỏ | `.card / Media` MD: `card/media-size`, bo `radius/inner` | 64 · 12 |
 | Avatar · Chip cuối | **Base / Avatar · MD**; **Base / Status Chip · SM · Soft** → xem tài liệu của từng component | không lặp token |
 | Slot Rows · `.card / Row` | `space/gap-sm`; `card/row-min-height`; Value `type/body` | 8 · 24 · 15/22 |
-| Dòng trạng thái | **Base / Status Row → xem tài liệu Status Row** (cao 26 ở app, chip MD 26) | không lặp token |
-| `.card / Related` | `card/related/bg`, `radius/inner`, `layout/card-padding` | 14 · 16; Label 13/18, Value 15/22 |
+| Dòng trạng thái | **Base / Status Row → xem tài liệu Status Row** (cao 24 như web, chip MD 24) | không lặp token |
+| `.card / Related` | `card/related/bg`, `radius/inner`, `layout/card-padding` | 12 · 16; Label 13/18, Value 15/22 |
 | Slot Footer | **Base / Button · MD · Ghost + Secondary → xem tài liệu Button**; `card/action-gap` | nút 42, cách 12 |
 
 ### Biến thể
@@ -256,7 +256,7 @@ Như web, trừ Hover. Focus: "khi điều hướng bằng bàn phím ngoài ho�
 | Trường hợp | Cao | Cách tính |
 |---|---|---|
 | Đủ phần (mặc định, 3 dòng) | 308 | 16 + 38 + 12 + 88 + 12 + 72 + 12 + 42 + 16 (đầu thẻ 38 = 20 + 18; khối liên quan 72 = 16 + 18 + 22 + 16) |
-| Dòng 3 là Base / Status Row | 310 | Status Row cao 26 (chip MD 26) |
+| Dòng 3 là Base / Status Row | 308 | Status Row cao 24 (chip MD 24), bằng dòng thường |
 | Has Media, tắt Related và Footer | 196 | 16 + 64 + 12 + 88 + 16 |
 | Has Media (đủ phần) | 334 | đầu thẻ 64 thay 38 |
 | Mỗi dòng thêm | +32 | 24 + 8 |
@@ -295,8 +295,8 @@ Chưa có component cha dùng (như web).
 ### Token
 
 Số đo (collection Platform, mode Mobile): lề `layout/card-padding` 16 · giữa phần `space/gap-md` 12 · giữa dòng `space/gap-sm` 8 ·
-bo `radius/card` 16 · viền 1 · 2 · `card/lead-size` 36 · `card/media-size` 64 · dòng 24 · 24 · khối liên quan `radius/inner` 14 ·
-lề 16 · khoảng 16 · `chip/height-sm` 16 · `card/action-gap` 12 · tick 20 · 2 · chữ 15/20 · 15/22 · 13/18 · vòng focus 2 · 2 ·
+bo `radius/card` 16 · viền 1 · 2 · `card/lead-size` 36 · `card/media-size` 64 · dòng 24 · 24 · khối liên quan `radius/inner` 12 (`radius/xl`) ·
+lề 16 · khoảng 16 · `chip/height-sm` 22 · `card/action-gap` 12 · tick 20 · 2 · chữ 15/20 · 15/22 · 13/18 · vòng focus 2 · 2 ·
 `touch/min` 44 (thẻ ✓, nút chân thẻ xem Button). Màu: như web, bỏ nền rê và chữ phụ rê (app không Hover).
 
 ### Kiểm máy
@@ -306,7 +306,7 @@ Cùng lần chạy ở khối Web:
 | Mức | Ô mẫu | Kết quả |
 |---|---|---|
 | Khung | 11 ô, 11 mẫu (khối Mobile) | luật A: 0 lỗi |
-| Sát ngưỡng (lớp "Khung thẻ") | mọi ô thẻ trắng | nền thẻ #FFFFFF trên nền ô #F2F4F7 = 1,10:1; giữ hình nhờ viền 1,13:1 và bóng (app không đặt Hover, không có cờ Hover) |
+| Ranh giới (lớp "Khung thẻ") | mọi ô thẻ trắng | thẻ trắng trên ô trắng: giữ hình nhờ viền 1,25:1 và bóng (số tính lại theo nền trắng (DEC-258), chưa chạy lại máy) (app không đặt Hover, không có cờ Hover) |
 | Cờ ngoài (lớp ngoài) | Trạng thái · Pressed | "GIỐNG DEFAULT" 1:1 là báo nhầm như phần Web: nền nằm ở lớp con "Khung thẻ" |
 
 ## Đối chiếu Astryx

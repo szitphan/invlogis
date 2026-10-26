@@ -1,7 +1,7 @@
 ---
 type: design-component
 status: draft
-updated: 2026-10-20
+updated: 2026-10-26
 links:
   - design/v2/architecture.md
   - design/v2/foundations.md
@@ -47,7 +47,7 @@ tổng**, ráp trên khung `Base / Card`. Thẻ chỉ đọc nên không có Sta
 
 ### Cấu tạo
 
-Hình phóng 2× trên Figma (ô 1290 × 630, nền `color/bg/canvas`, Context = Canvas): mặc định, 3 dòng nhãn – giá trị, Has Total bật.
+Hình phóng 2× trên Figma (ô 1290 × 630, nền trắng, DEC-258): mặc định, 3 dòng nhãn – giá trị, Has Total bật.
 
 | Phần | Token | Giá trị web |
 |---|---|---|
@@ -92,7 +92,7 @@ Cao dòng 24 vì chữ 14/20 thấp hơn `card/row-min-height`.
 | Tiêu chí | KQ | Số đo, ghi chú |
 |---|---|---|
 | 1.4.3 Tương phản chữ (AA, ≥ 4,5) | ✓ | tiêu đề, giá trị, dòng tổng 17,73 · nhãn 5,43 (trên nền thẻ trắng) |
-| 1.4.11 Tương phản ngoài chữ (AA, ≥ 3) | ✓ | không có control; viền 1,13 trên nền xám và đường kẻ 1,25 là trang trí |
+| 1.4.11 Tương phản ngoài chữ (AA, ≥ 3) | ✓ | không có control; viền 1,25 trên nền trắng và đường kẻ 1,25 là trang trí |
 | 1.4.1 Dùng màu | ✓ | dòng tổng khác ở độ đậm và đường kẻ, không dựa vào màu |
 | 1.3.1 Thông tin và quan hệ (A) | ✓ | khi code: danh sách mô tả (nhãn `dt`, giá trị `dd`) hoặc bảng 2 cột; dòng tổng đánh dấu rõ |
 | 4.1.2 Tên, vai trò | ✓ | không bấm được nên không role button; vùng có tên bằng tiêu đề |
@@ -149,12 +149,12 @@ Tên trong code: `<SummaryCard title total>` với slot `rows` gồm `<SummaryRo
 
 ### Kiểm máy
 
-Chạy `check-mat-hinh.js` trên khung 6562:223644 ngày 20/10 (ngưỡng 1,1:1; ô mẫu nền `color/bg/canvas`, Context = Canvas).
+Chạy `check-mat-hinh.js` trên khung 6562:223644 ngày 20/10 (ngưỡng 1,1:1; ô mẫu khi đó nền xám, nay trắng theo DEC-258: dòng Khung thẻ đã tính lại).
 
 | Mức | Ô mẫu | Kết quả |
 |---|---|---|
 | Khung | 7 ô, 7 mẫu (khối Web; cả khung 14 ô, 14 mẫu) | luật A: 0 lỗi; không cờ B, C, D |
-| Sát ngưỡng (lớp "Khung thẻ") | mọi ô | nền thẻ #FFFFFF trên nền ô #F2F4F7 = 1,10:1; hình giữ nhờ viền 1,13:1 |
+| Ranh giới (lớp "Khung thẻ") | mọi ô | thẻ trắng trên ô trắng: hình giữ nhờ viền 1,25:1 (số tính lại theo nền trắng (DEC-258), chưa chạy lại máy) |
 
 ## Mobile
 
@@ -238,7 +238,7 @@ Cùng lần chạy ở khối Web:
 | Mức | Ô mẫu | Kết quả |
 |---|---|---|
 | Khung | 7 ô, 7 mẫu (khối Mobile) | luật A: 0 lỗi; không cờ B, C, D |
-| Sát ngưỡng (lớp "Khung thẻ") | mọi ô | nền thẻ #FFFFFF trên nền ô #F2F4F7 = 1,10:1; giữ hình nhờ viền 1,13:1 |
+| Ranh giới (lớp "Khung thẻ") | mọi ô | thẻ trắng trên ô trắng: giữ hình nhờ viền 1,25:1 (số tính lại theo nền trắng (DEC-258), chưa chạy lại máy) |
 
 ## Đối chiếu Astryx
 

@@ -1,7 +1,7 @@
 ---
 type: design-component
 status: draft
-updated: 2026-10-20
+updated: 2026-10-26
 links:
   - design/v2/architecture.md
   - design/v2/foundations.md
@@ -32,8 +32,8 @@ của chip là trắng `color/bg/surface` (bảng, thẻ, đầu trang).
 - **Dot:** chấm + chữ: trạng thái phụ và chỗ dày chữ (lịch sử, dòng thời gian). Không có icon.
 - **Tone:** 8 sắc cố định (Gray · Blue · Teal · Purple · Yellow · Green · Red · Orange), không đổi theo khách; nghĩa từng
   sắc gán ở L2, nhãn lấy nguyên văn từ `docs/{feature}/srs/{feature}-states.md`.
-- **Cỡ web:** MD 24 mặc định khi kéo ra: bảng, đầu trang chi tiết, dòng nhãn – trạng thái (Base / Status Row) · SM 16:
-  chip ở đầu thẻ bản ghi (Base / Record Card). Hai cỡ cùng lề, icon, cỡ chữ 12/16 (SM dùng text style riêng `type/chip-sm-strong` · `type/chip-sm`); chỉ khác cao.
+- **Cỡ web:** MD 24 mặc định khi kéo ra: bảng, đầu trang chi tiết, dòng nhãn – trạng thái (Base / Status Row) · SM 22:
+  chip ở đầu thẻ bản ghi (Base / Record Card) (DEC-259). Cùng icon; lề phía chữ MD 10, SM 8; chữ MD 12/16, SM 12/18 (text style riêng `type/chip-sm-strong` · `type/chip-sm`). Token LG 28 lề 12 đã có, chưa dựng biến thể.
 - **Icon:** chỉ Soft; chọn theo nghĩa trạng thái (xong, chờ, lỗi…), đổi bằng thuộc tính Icon; gợi ý sẵn 4 icon: `icon/circle-check` (xong) · `icon/clock` (chờ) ·
   `icon/triangle-alert` (cảnh báo) · `icon/circle-x` (lỗi, huỷ). Dot dùng chấm L0 `.chip / Dot`.
 - **Chỉ có ở web:** chữ bị cắt "…" hiện đủ khi rê chuột (Base / Tooltip); trang chi tiết vẫn có chữ đủ.
@@ -43,7 +43,7 @@ của chip là trắng `color/bg/surface` (bảng, thẻ, đầu trang).
 
 ### Cấu tạo
 
-Hình phóng 2× trên Figma: Soft · Blue · MD (trái) và Dot · Blue · MD (phải), chữ mặc định "Trạng thái". SM đổi cao (16) và dùng text style riêng 12/16.
+Hình phóng 2× trên Figma: Soft · Blue · MD (trái) và Dot · Blue · MD (phải), chữ mặc định "Trạng thái". SM đổi cao (22) và dùng text style riêng 12/18.
 
 | Phần | Token | Giá trị web |
 |---|---|---|
@@ -52,7 +52,7 @@ Hình phóng 2× trên Figma: Soft · Blue · MD (trái) và Dot · Blue · MD (
 | Chữ Soft | thuộc tính Label; MD `type/caption-strong`, SM `type/chip-sm-strong` (`chip/font-size-sm`, `chip/line-height-sm`); màu `color/chip/{tone}/fg` | 12/16 Semi Bold |
 | Chữ Dot | thuộc tính Label; MD `type/caption`, SM `type/chip-sm`; màu `color/text/primary` | 12/16 Regular |
 | Chấm | chỉ Dot: L0 `.chip / Dot`, `chip/dot-size`; màu `color/chip/{tone}/fg` (Tone chấm theo Tone chip) | 8 |
-| Cao | `chip/height` (MD) · `chip/height-sm` (SM); rộng ôm nội dung | 24 · 16 |
+| Cao | `chip/height` (MD) · `chip/height-sm` (SM); rộng ôm nội dung | 24 · 22 |
 | Lề Soft | phía icon `chip/padding-x-icon`, phía chữ `chip/padding-x` | 8 · 12 |
 | Icon → chữ | `chip/icon-gap` | 4 |
 | Chấm → chữ | `chip/dot-gap`; Dot không lề | 6 |
@@ -80,8 +80,8 @@ Lưới trên Figma: Soft · Dot × MD · SM × Chữ vừa · Nhãn dài (mẫu
 
 | Size | Cao | Lề Soft (icon · chữ) | Icon | Chữ | Dùng khi |
 |---|---|---|---|---|---|
-| MD | 24 | 8 · 12 | 14 | 12/16 (`type/caption-strong` · `type/caption`) | mặc định: bảng, đầu trang chi tiết, Base / Status Row |
-| SM | 16 | 8 · 12 | 14 | 12/16 (`type/chip-sm-strong` · `type/chip-sm`) | đầu thẻ bản ghi (Base / Record Card) |
+| MD | 24 | 8 · 10 | 14 | 12/16 (`type/caption-strong` · `type/caption`) | mặc định: bảng, đầu trang chi tiết, Base / Status Row |
+| SM | 22 | 8 · 8 | 14 | 12/18 (`type/chip-sm-strong` · `type/chip-sm`) | đầu thẻ bản ghi (Base / Record Card) |
 
 Bo tròn hẳn ở mọi cỡ. Cần cỡ khác thì thêm biến thể ở component gốc, không đè.
 
@@ -111,7 +111,7 @@ Bo tròn hẳn ở mọi cỡ. Cần cỡ khác thì thêm biến thể ở comp
 |---|---|---|---|
 | Type | Biến thể | Soft | Soft · Dot |
 | Tone | Biến thể | Gray | Gray · Blue · Teal · Purple · Yellow · Green · Red · Orange |
-| Size | Biến thể | MD | MD 24 · SM 16 |
+| Size | Biến thể | MD | MD 24 · SM 22 |
 | Label | Chữ | Trạng thái | nhãn chip, 1–3 từ, đúng states.md; tối đa 160 (`chip/label-max-width`), dài hơn cắt "…" |
 | Icon | Đổi component | icon/circle-check · Size=14 | chỉ hiện ở Soft; chọn sẵn `icon/circle-check`; gợi ý sẵn (preferred) thêm `icon/clock`, `icon/triangle-alert`, `icon/circle-x` (mọi icon DS · Icons đổi được) |
 
@@ -132,7 +132,7 @@ Card`). Avatar không chứa chip. Slot `End Content` của Base / List Item g�
 
 | Component cha | Chỗ đặt | Cấu hình dùng |
 |---|---|---|
-| Base / Record Card | Đầu thẻ, cuối hàng (bật Has Trailing; Trailing đổi component), cách tên 12, canh giữa dọc | Size=SM (16, chữ 12/16 `type/chip-sm-strong`) · Soft · Gray · chữ mẫu "Status"; Trailing chọn sẵn Base / Status Chip, Base / Button; Type, Tone, chữ đổi ở panel (instance lộ ra); không đè cỡ. Thẻ Pressed nền `card/bg/pressed` #D0D5DD: nền chip Gray 1,34:1 trên đó |
+| Base / Record Card | Đầu thẻ, cuối hàng (bật Has Trailing; Trailing đổi component), cách tên 12, canh giữa dọc | Size=SM (22, chữ 12/18 `type/chip-sm-strong`) · Soft · Gray · chữ mẫu "Status"; Trailing chọn sẵn Base / Status Chip, Base / Button; Type, Tone, chữ đổi ở panel (instance lộ ra); không đè cỡ. Thẻ Pressed nền `card/bg/pressed` #D0D5DD: nền chip Gray 1,34:1 trên đó |
 | Base / Status Row | Bên phải dòng (canh hai đầu, cách nhãn ≥ 16), canh giữa dọc | Size=MD (24) · Soft · Gray · chữ mẫu "Status"; Type, Tone, chữ đổi ở panel (instance lộ ra). Status Row là giá trị chọn sẵn của Slot Rows ở Record Card |
 | Base / List Item | Slot `End Content` (tối đa 2 phần, cách `list-row/gap`) | gợi ý (preferred) cùng Base / Button, icon; đặt chip Size=MD, Soft hoặc Dot; ví dụ trong [List Item](list-item.md) |
 
@@ -142,14 +142,14 @@ Số đo (collection Platform, mode Web):
 
 | Phần | Token | MD | SM |
 |---|---|---|---|
-| Cao | `chip/height` · `chip/height-sm` | 24 | 16 |
-| Lề Soft: phía icon · phía chữ | `chip/padding-x-icon` · `chip/padding-x` | 8 · 12 | 8 · 12 |
+| Cao | `chip/height` · `chip/height-sm` | 24 | 22 |
+| Lề Soft: phía icon · phía chữ | `chip/padding-x-icon` · `chip/padding-x` (MD) · `chip/padding-x-sm` (SM) | 8 · 10 | 8 · 8 |
 | Icon · icon → chữ | `icon/size/chip` · `chip/icon-gap` | 14 · 4 | 14 · 4 |
 | Chấm · chấm → chữ | `chip/dot-size` · `chip/dot-gap` | 8 · 6 | 8 · 6 |
 | Bo | `radius/chip` | tròn (9999) | tròn (9999) |
-| Chữ Soft | `type/caption-strong` (MD) · `type/chip-sm-strong` (SM) | 12/16 Semi Bold | 12/16 Semi Bold |
-| Chữ Dot | `type/caption` (MD) · `type/chip-sm` (SM) | 12/16 Regular | 12/16 Regular |
-| Cỡ chữ · dòng SM | `chip/font-size-sm` · `chip/line-height-sm` | — | 12 · 16 |
+| Chữ Soft | `type/caption-strong` (MD) · `type/chip-sm-strong` (SM) | 12/16 Semi Bold | 12/18 Semi Bold |
+| Chữ Dot | `type/caption` (MD) · `type/chip-sm` (SM) | 12/16 Regular | 12/18 Regular |
+| Cỡ chữ · dòng SM | `chip/font-size-sm` · `chip/line-height-sm` | — | 12 · 18 |
 | Nhãn tối đa | `chip/label-max-width` | 160 | 160 |
 
 Chip không bấm: không có vùng chạm (`touch/min`).
@@ -180,7 +180,7 @@ Chạy `check-mat-hinh.js` trên khung 6473:84011 ngày 20/10 (ngưỡng 1,1:1, 
 
 | Mức | Ô mẫu | Kết quả |
 |---|---|---|
-| Khung | 66 ô, 72 mẫu (cả hai khối; thêm hàng Soft · SM, Dot · SM ở lưới Trạng thái) | 0 lỗi luật A: ô nào cũng có nền thật và viền mảnh; ô Record Card nền xám `color/bg/canvas` đã đặt `Context = Canvas` |
+| Khung | 66 ô, 72 mẫu (cả hai khối; thêm hàng Soft · SM, Dot · SM ở lưới Trạng thái) | 0 lỗi luật A: ô nào cũng có nền thật và viền mảnh; ô Record Card nền trắng như mọi ô (DEC-258 bỏ Context) |
 | ✕ Mất hình | Soft · Orange (lưới Biến thể; lưới Trạng thái: Chữ vừa, Nhãn dài, cả MD và SM) trên trắng | nền chip #FFF7ED trên nền ô #FFFFFF = 1,06:1; chip không viền, không vòng |
 | Sát ngưỡng | Soft · Gray 1,10 · Yellow 1,10 · Green 1,12 · Teal 1,13 · Red 1,14 trên trắng | Yellow thực 1,099 (script làm tròn trước khi so nên không gắn cờ); Blue 1,16, Purple 1,18 đạt; lớp con: Record Card · Khung thẻ 1,10 |
 | Không kiểm | Khe vòng focus (C), Hover/Pressed (D) | chip không có State, không có vòng focus |
@@ -198,10 +198,10 @@ Nền Soft nhạt là look đã duyệt (DEC-130, bậc 50): giữ nguyên hình
 - **Dot:** chấm + chữ: trạng thái phụ và chỗ dày chữ (lịch sử, dòng thời gian). Không có icon.
 - **Tone:** 8 sắc cố định (Gray · Blue · Teal · Purple · Yellow · Green · Red · Orange), không đổi theo khách; nghĩa từng
   sắc gán ở L2, nhãn lấy nguyên văn từ `docs/{feature}/srs/{feature}-states.md`.
-- **Cỡ app:** MD 26 mặc định khi kéo ra: đầu trang chi tiết, dòng nhãn – trạng thái (Base / Status Row) · SM 16: chip ở đầu thẻ bản ghi (Base / Record Card). Hai cỡ cùng lề, icon; chữ MD 13/18, SM 12/16 (text style riêng `type/chip-sm-strong` · `type/chip-sm`); khác cao và cỡ chữ.
+- **Cỡ app:** MD 24 mặc định khi kéo ra: đầu trang chi tiết, dòng nhãn – trạng thái (Base / Status Row) · SM 22: chip ở đầu thẻ bản ghi (Base / Record Card) (DEC-259). Cùng icon; lề phía chữ MD 10, SM 8; chữ MD 13/18, SM 12/18 (text style riêng `type/chip-sm-strong` · `type/chip-sm`).
 - **Icon:** chỉ Soft; chọn theo nghĩa trạng thái (xong, chờ, lỗi…), đổi bằng thuộc tính Icon; gợi ý sẵn 4 icon: `icon/circle-check` (xong) · `icon/clock` (chờ) ·
   `icon/triangle-alert` (cảnh báo) · `icon/circle-x` (lỗi, huỷ). Dot dùng chấm L0 `.chip / Dot`.
-- **Khác web:** MD cao 26 (web 24), chữ 13/18 (web 12/16); SM 16, chữ SM 12/16 như web. Không rê chuột: chữ bị cắt xem đủ ở trang chi
+- **Khác web:** cao như web (MD 24, SM 22, DEC-259); chữ MD 13/18 (web 12/16), chữ SM 12/18 như web. Không rê chuột: chữ bị cắt xem đủ ở trang chi
   tiết. Chip không bấm nên không cần vùng chạm 44.
 - **Chữ trên chip:** 1–3 từ, viết hoa chữ đầu, đúng nhãn trong states.md; nhãn tối đa 160 (`chip/label-max-width`), dài hơn cắt "…", không xuống dòng.
 - **Không bấm được:** chip chỉ hiển thị, không có State. Cần lọc hoặc chọn thì dùng tab chip hoặc ô chọn, không dùng
@@ -209,16 +209,16 @@ Nền Soft nhạt là look đã duyệt (DEC-130, bậc 50): giữ nguyên hình
 
 ### Cấu tạo
 
-Hình phóng 2× trên Figma: Soft · Blue · MD (trái) và Dot · Blue · MD (phải), chữ mặc định "Trạng thái". SM đổi cao (16) và dùng text style riêng 12/16.
+Hình phóng 2× trên Figma: Soft · Blue · MD (trái) và Dot · Blue · MD (phải), chữ mặc định "Trạng thái". SM đổi cao (22) và dùng text style riêng 12/18.
 
 | Phần | Token | Giá trị app |
 |---|---|---|
 | Nền | chỉ Soft: `color/chip/{tone}/bg` (bậc 50) | Dot không nền (nền là chỗ đặt) |
 | Icon | chỉ Soft: thuộc tính Icon (mặc định `icon/circle-check`; gợi ý sẵn thêm `icon/clock`, `icon/triangle-alert`, `icon/circle-x`); `icon/size/chip`; màu `color/chip/{tone}/fg` | 14 |
-| Chữ Soft | thuộc tính Label; MD `type/caption-strong`, SM `type/chip-sm-strong` (`chip/font-size-sm`, `chip/line-height-sm`); màu `color/chip/{tone}/fg` | 13/18 Semi Bold (SM 12/16) |
-| Chữ Dot | thuộc tính Label; MD `type/caption`, SM `type/chip-sm`; màu `color/text/primary` | 13/18 Regular (SM 12/16) |
+| Chữ Soft | thuộc tính Label; MD `type/caption-strong`, SM `type/chip-sm-strong` (`chip/font-size-sm`, `chip/line-height-sm`); màu `color/chip/{tone}/fg` | 13/18 Semi Bold (SM 12/18) |
+| Chữ Dot | thuộc tính Label; MD `type/caption`, SM `type/chip-sm`; màu `color/text/primary` | 13/18 Regular (SM 12/18) |
 | Chấm | chỉ Dot: L0 `.chip / Dot`, `chip/dot-size`; màu `color/chip/{tone}/fg` (Tone chấm theo Tone chip) | 8 |
-| Cao | `chip/height` (MD) · `chip/height-sm` (SM); rộng ôm nội dung | 26 · 16 |
+| Cao | `chip/height` (MD) · `chip/height-sm` (SM); rộng ôm nội dung | 24 · 22 |
 | Lề Soft | phía icon `chip/padding-x-icon`, phía chữ `chip/padding-x` | 8 · 12 |
 | Icon → chữ | `chip/icon-gap` | 4 |
 | Chấm → chữ | `chip/dot-gap`; Dot không lề | 6 |
@@ -246,8 +246,8 @@ Lưới trên Figma: Soft · Dot × MD · SM × Chữ vừa · Nhãn dài (mẫu
 
 | Size | Cao | Lề Soft (icon · chữ) | Icon | Chữ | Dùng khi |
 |---|---|---|---|---|---|
-| MD | 26 | 8 · 12 | 14 | 13/18 (`type/caption-strong` · `type/caption`) | mặc định: đầu trang chi tiết, Base / Status Row |
-| SM | 16 | 8 · 12 | 14 | 12/16 (`type/chip-sm-strong` · `type/chip-sm`) | đầu thẻ bản ghi (Base / Record Card) |
+| MD | 24 | 8 · 10 | 14 | 13/18 (`type/caption-strong` · `type/caption`) | mặc định: đầu trang chi tiết, Base / Status Row |
+| SM | 22 | 8 · 8 | 14 | 12/18 (`type/chip-sm-strong` · `type/chip-sm`) | đầu thẻ bản ghi (Base / Record Card) |
 
 Bo tròn hẳn ở mọi cỡ. Ở SM chữ 12/16 vừa khít chip 16, không lố khung (DEC-239).
 
@@ -276,7 +276,7 @@ Bo tròn hẳn ở mọi cỡ. Ở SM chữ 12/16 vừa khít chip 16, không l�
 |---|---|---|---|
 | Type | Biến thể | Soft | Soft · Dot |
 | Tone | Biến thể | Gray | Gray · Blue · Teal · Purple · Yellow · Green · Red · Orange |
-| Size | Biến thể | MD | MD 26 · SM 16 |
+| Size | Biến thể | MD | MD 24 · SM 22 |
 | Label | Chữ | Trạng thái | nhãn chip, 1–3 từ, đúng states.md; tối đa 160 (`chip/label-max-width`), dài hơn cắt "…" |
 | Icon | Đổi component | icon/circle-check · Size=14 | chỉ hiện ở Soft; chọn sẵn `icon/circle-check`; gợi ý sẵn (preferred) thêm `icon/clock`, `icon/triangle-alert`, `icon/circle-x` (mọi icon DS · Icons đổi được) |
 
@@ -295,9 +295,9 @@ Kiểm `getInstancesAsync()` trên Figma 20/10 (cùng cách lọc như phần We
 
 | Component cha | Chỗ đặt | Cấu hình dùng |
 |---|---|---|
-| Base / Record Card | Đầu thẻ, cuối hàng (bật Has Trailing; Trailing đổi component), cách tên 12, canh giữa dọc | Size=SM (16, chữ 12/16 `type/chip-sm-strong`) · Soft · Gray · chữ mẫu "Status"; Trailing chọn sẵn Base / Status Chip, Base / Button; Type, Tone, chữ đổi ở panel (instance lộ ra); không đè cỡ. Thẻ Pressed nền `card/bg/pressed` #D0D5DD: nền chip Gray 1,34:1 trên đó |
-| Base / Status Row | Bên phải dòng (canh hai đầu, cách nhãn ≥ 16), canh giữa dọc | Size=MD (26) · Soft · Gray · chữ mẫu "Status"; Type, Tone, chữ đổi ở panel (instance lộ ra). Status Row là giá trị chọn sẵn của Slot Rows ở Record Card |
-| Base / List Item | Slot `End Content` (tối đa 2 phần, cách `list-row/gap` 12) | gợi ý (preferred) cùng Base / Button, icon; đặt chip Size=MD (26), Soft hoặc Dot |
+| Base / Record Card | Đầu thẻ, cuối hàng (bật Has Trailing; Trailing đổi component), cách tên 12, canh giữa dọc | Size=SM (22, chữ 12/18 `type/chip-sm-strong`) · Soft · Gray · chữ mẫu "Status"; Trailing chọn sẵn Base / Status Chip, Base / Button; Type, Tone, chữ đổi ở panel (instance lộ ra); không đè cỡ. Thẻ Pressed nền `card/bg/pressed` #D0D5DD: nền chip Gray 1,34:1 trên đó |
+| Base / Status Row | Bên phải dòng (canh hai đầu, cách nhãn ≥ 16), canh giữa dọc | Size=MD (24) · Soft · Gray · chữ mẫu "Status"; Type, Tone, chữ đổi ở panel (instance lộ ra). Status Row là giá trị chọn sẵn của Slot Rows ở Record Card |
+| Base / List Item | Slot `End Content` (tối đa 2 phần, cách `list-row/gap` 12) | gợi ý (preferred) cùng Base / Button, icon; đặt chip Size=MD (24), Soft hoặc Dot |
 
 ### Token
 
@@ -305,14 +305,14 @@ Số đo (collection Platform, mode Mobile):
 
 | Phần | Token | MD | SM |
 |---|---|---|---|
-| Cao | `chip/height` · `chip/height-sm` | 26 | 16 |
-| Lề Soft: phía icon · phía chữ | `chip/padding-x-icon` · `chip/padding-x` | 8 · 12 | 8 · 12 |
+| Cao | `chip/height` · `chip/height-sm` | 24 | 22 |
+| Lề Soft: phía icon · phía chữ | `chip/padding-x-icon` · `chip/padding-x` (MD) · `chip/padding-x-sm` (SM) | 8 · 10 | 8 · 8 |
 | Icon · icon → chữ | `icon/size/chip` · `chip/icon-gap` | 14 · 4 | 14 · 4 |
 | Chấm · chấm → chữ | `chip/dot-size` · `chip/dot-gap` | 8 · 6 | 8 · 6 |
 | Bo | `radius/chip` | tròn (9999) | tròn (9999) |
-| Chữ Soft | `type/caption-strong` (MD) · `type/chip-sm-strong` (SM) | 13/18 Semi Bold | 12/16 Semi Bold |
-| Chữ Dot | `type/caption` (MD) · `type/chip-sm` (SM) | 13/18 Regular | 12/16 Regular |
-| Cỡ chữ · dòng SM | `chip/font-size-sm` · `chip/line-height-sm` | — | 12 · 16 |
+| Chữ Soft | `type/caption-strong` (MD) · `type/chip-sm-strong` (SM) | 13/18 Semi Bold | 12/18 Semi Bold |
+| Chữ Dot | `type/caption` (MD) · `type/chip-sm` (SM) | 13/18 Regular | 12/18 Regular |
+| Cỡ chữ · dòng SM | `chip/font-size-sm` · `chip/line-height-sm` | — | 12 · 18 |
 | Nhãn tối đa | `chip/label-max-width` | 160 | 160 |
 
 Chip không bấm: không có vùng chạm (`touch/min` 44 không áp).
@@ -328,7 +328,7 @@ Chạy `check-mat-hinh.js` trên khung 6473:84011 ngày 20/10 (ngưỡng 1,1:1, 
 
 | Mức | Ô mẫu | Kết quả |
 |---|---|---|
-| Khung | 66 ô, 72 mẫu (cả hai khối; thêm hàng Soft · SM, Dot · SM ở lưới Trạng thái) | 0 lỗi luật A; ô Record Card nền xám đã đặt `Context = Canvas` |
+| Khung | 66 ô, 72 mẫu (cả hai khối; thêm hàng Soft · SM, Dot · SM ở lưới Trạng thái) | 0 lỗi luật A; ô Record Card nền trắng (DEC-258) |
 | ✕ Mất hình | Soft · Orange (lưới Biến thể; lưới Trạng thái: Chữ vừa, Nhãn dài, cả MD và SM) trên trắng | nền chip #FFF7ED trên nền ô #FFFFFF = 1,06:1; chip không viền, không vòng |
 | Sát ngưỡng | Soft · Gray 1,10 · Yellow 1,10 · Green 1,12 · Teal 1,13 · Red 1,14 trên trắng | Yellow thực 1,099 (script làm tròn trước khi so); Blue 1,16, Purple 1,18 đạt; lớp con: Record Card · Khung thẻ 1,10 |
 | Không kiểm | Khe vòng focus (C), Hover/Pressed (D) | chip không có State; app không dùng Hover |
