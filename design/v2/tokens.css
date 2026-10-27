@@ -386,6 +386,18 @@
   --progress-width-default: 320px;
   --progress-segment-width: 24px;
   --otp-cell-width: 40px;
+  --vehicle-thumb-xs: var(--space-32);
+  --vehicle-thumb-sm: var(--space-48);
+  --vehicle-thumb-md: var(--space-64);
+  --vehicle-q-sm-w: 160px;
+  --vehicle-q-sm-h: 100px;
+  --vehicle-q-md-w: 240px;
+  --vehicle-q-md-h: 150px;
+  --vehicle-q-lg-w: 480px;
+  --vehicle-q-lg-h: 300px;
+  --vehicle-scale-sm: 8px;
+  --vehicle-scale-md: 16px;
+  --vehicle-scale-lg: 40px;
 }
 
 /* Platform — Mobile (DEC-114, DEC-132…138) */
@@ -546,6 +558,18 @@
   --progress-width-default: 361px;
   --progress-segment-width: 24px;
   --otp-cell-width: 48px;
+  --vehicle-thumb-xs: var(--space-32);
+  --vehicle-thumb-sm: var(--space-48);
+  --vehicle-thumb-md: var(--space-64);
+  --vehicle-q-sm-w: 160px;
+  --vehicle-q-sm-h: 100px;
+  --vehicle-q-md-w: 240px;
+  --vehicle-q-md-h: 150px;
+  --vehicle-q-lg-w: 480px;
+  --vehicle-q-lg-h: 300px;
+  --vehicle-scale-sm: 8px;
+  --vehicle-scale-md: 16px;
+  --vehicle-scale-lg: 40px;
 }
 
 /* Brand — Than chì (mặc định) · DEC-167, DEC-168 */

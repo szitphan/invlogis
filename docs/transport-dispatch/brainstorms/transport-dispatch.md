@@ -130,6 +130,8 @@ Tần suất chưa đo được, ghi định tính. Dòng có ★ là tác vụ 
 - F6 [Mới] [Lõi] [Gói: Nhiên liệu] Cấp dầu trên Lệnh gắn với định mức phương tiện; vượt định mức đi phiếu cấp nhiên liệu riêng như hiện có (loại phiếu theo danh mục của khách). [Gói: Nhiên liệu] Dầu mua ngoài theo hoá đơn lẻ: lưu lượng dầu dư làm căn cứ tạo phiếu cấp bù (hiện chưa lưu).
 - F7 [Mới] [Lõi] Hạn chuẩn bị giấy tờ đặt theo từng Lệnh.
 - F8 [Mới] [Lõi] Toạ độ và chi phí đường bộ lấy VETC làm nguồn chuẩn khi lệch với Vietmap.
+- F10 [Mới] [Lõi] [Cấu hình] Xếp tổ hợp đầu kéo – mooc – container kiểm theo `P-quy-tac-ghep-mooc` (Delta: chưa chốt, OQ-66, OQ-67): mức Chặn thì không cho chọn; dữ liệu nhập từ nguồn khác (AI đọc chứng từ, sửa Lệnh) ra cấu hình Chặn thì báo đỏ, không giao lái xe; Cảnh báo, Cần hỏi có dấu. Số container kiểm chữ số cuối ISO 6346. Nguồn lab-combo, `design/v2/vehicles.md` mục 5 (DEC-267).
+- F11 [Mới] [Lõi] Mỗi vị trí container trên tổ hợp có trạng thái riêng, độc lập trạng thái Lệnh: Chưa có số · Vỏ rỗng · Đang đóng (chưa niêm chì) · Có hàng · Đang đổi vỏ · Kiểm hoá · Đã hạ; container lạnh thêm nhiệt độ cài và nguồn điện.
 
 **Nhóm I — dữ liệu vận hành xe trên Lệnh (VIS 08/10/2026, phỏng vấn 14–15/10)**
 - I1 [SOP to-be] [Lõi] [Cấu hình] ETA: xe rời vùng điểm đi thì tính ETA gốc và quãng đường theo cung đường ban đầu qua dịch vụ bản đồ. Trên đường, ETA tính theo quãng còn lại và vận tốc trung bình tuyến; chỉ gọi lại dịch vụ bản đồ khi kẹt xe, khi lệch cung đường quá `P-lech-cung-duong-eta` (chưa chốt; VIS ghi "x%"), hoặc mỗi `P-chu-ky-eta-cung-dai` (Delta: 30 phút) với cung dài hơn `P-cung-dai-eta` (Delta: 300 km). Dịch vụ bản đồ lỗi thì ghi "ETA ước tính". CS xem ETA để báo khách khi sắp trễ mốc.
@@ -614,6 +616,13 @@ Nguồn khách: tên tài liệu khách gửi và mục. Cột Trả lời theo 
 | OQ-63 | Đầu kéo quay cắt cố định tại một nhà máy hay xoay giữa các nhà máy, lái xe xoay ca thế nào? Ai phân công? Nhà máy nào đang có quay cắt? | Camera AI (11/8/2026), mục 1 | Chưa hỏi Delta |
 | OQ-64 | Mooc của Delta để lại nhà máy đã gắn thiết bị GPS mooc chưa (đề xuất 25/9/2025)? Nếu chưa, mọi lượt quay cắt đi đường lái xe bấm trên App (Q4) tới khi lắp. | Đề xuất tiện ích GPS (25/9/2025), mục 2 | Chưa hỏi Delta |
 | OQ-65 | Chi ở cửa khẩu Trung Quốc lái xe trả bằng nhân dân tệ hay đồng? Nếu ngoại tệ thì quy đổi theo tỷ giá nào, ngày nào? Phí bãi xe Viettel nằm ở cả nhóm Delta trả nhà cung cấp và nhóm ghi trên Lệnh: khi nào lái xe trả, khi nào kế toán trả? | Thống kê chi phí chứng từ CBT (03/9/2026) | Chưa hỏi Delta |
+| OQ-66 | Mooc 40ft 2 giàn có khoá giữa để chở 1 container 20ft không? (quy tắc ghép F10) | Chưa có trong tài liệu khách gửi (lab-combo 11/10/2026 mục 10) | Chưa hỏi Delta |
+| OQ-67 | Mooc 45ft có khoá cho container 20ft, 40ft không, chở được 2×20 không? | Chưa có trong tài liệu khách gửi (lab-combo mục 10) | Chưa hỏi Delta |
+| OQ-68 | Tải trọng từng mooc là bao nhiêu, để cảnh báo 2×20 có hàng vượt tải? Danh mục mooc hiện chưa có trường tải. | Chưa có trong tài liệu khách gửi (lab-combo mục 10) | Chưa hỏi Delta |
+| OQ-69 | Container lạnh chạy điện bằng máy phát gắn rời (mã PT 35–37, `vehicle-management` H8) hay máy phát tích hợp khi đi đường sắt? Máy phát có là một thành phần của tổ hợp không? | Chưa có trong tài liệu khách gửi (lab-combo mục 10) | Chưa hỏi Delta |
+| OQ-70 | Hai container 20ft trên một mooc có được thuộc 2 Lệnh khác nhau (ghép hàng) không, hay một tổ hợp luôn thuộc một Lệnh? | Chưa có trong tài liệu khách gửi (lab-combo mục 10) | Chưa hỏi Delta |
+| OQ-71 | Container của Delta (mã PT 33–34) có theo dõi trên tổ hợp như phương tiện, hay chỉ ghi số như vỏ hãng tàu (liên quan OQ-18)? | Chưa có trong tài liệu khách gửi (lab-combo mục 10) | Chưa hỏi Delta |
+| OQ-72 | Đầu kéo chạy một mình (đi lấy mooc, về bãi sau khi bỏ mooc) có lập Lệnh không? | Chưa có trong tài liệu khách gửi (lab-combo mục 10) | Chưa hỏi Delta |
 
 
 ## 12. Next Steps

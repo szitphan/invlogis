@@ -298,6 +298,14 @@ Cột Trả lời theo [[docs/meetings/2026-10-21-oq-vis.md|Delta trả lời de
 | OQ-3 | Xe chạy ngoài Lệnh: những trường hợp nào không cảnh báo (Lệnh đã nhận, xe đang tới điểm đầu; về bãi sau Lệnh; đi đổ dầu có phiếu đang mở; đi xưởng có lệnh sửa chữa đang mở; đang bàn giao giữa chi nhánh)? Đi bao xa hoặc bao lâu thì cảnh báo? | VIS (08/10/2026), mục 3.1.3 Bước 4 (chạy xe ngoài lịch trình, việc riêng) | Một phần (Delta 21/10): 5 trường hợp không cảnh báo đã đủ; Delta đề nghị bổ sung giải pháp để làm rõ các vấn đề liên quan. Còn thiếu: đi bao xa hoặc bao lâu thì cảnh báo |
 | OQ-4 | Máy phát điện có hay tháo lắp giữa các mooc không? Khi tháo lắp ai khai (quản lý phương tiện hay lái xe trên App)? Có cần nhắc bảo dưỡng máy phát theo giờ chạy (`reminders`) không? | Đề xuất tiện ích GPS (25/9/2025), mục 3 | Chưa hỏi Delta |
 | OQ-5 | Delta có file Excel danh mục xe và thẻ ETC (bản đã gửi VETC: biển số, số eTag, loại phí, trạng thái thẻ của 254 xe) để nhập ban đầu vào hồ sơ xe không? | Công văn VETC (21/09/2026), 4 danh mục đính kèm | Chưa hỏi Delta |
+| OQ-6 | Kiểu sơ đồ lốp ở dòng 62–78 có tên "Xe tải bốn trục (2 dí 2 cầu tải)" nhưng dữ liệu có 5 trục, 17 lốp: có phải "Xe tải năm trục (2 dí 3 cầu tải)"? Có xe nào dùng không? | File sơ đồ lốp của Delta, dòng 62–78 | Chưa hỏi Delta |
+| OQ-7 | Vị trí ghi "Lốp lái trong" ở dòng 6, 31, 79, 88 nhưng cột Loại lốp là Lốp tải: sửa thành "Lốp tải trong"? | File sơ đồ lốp của Delta, dòng 6, 31, 79, 88 | Chưa hỏi Delta |
+| OQ-8 | Cột "Phần" của đầu kéo ghi Trước cho cả trục sau; lốp dự phòng xe ghi Trước, mooc ghi Sau. Cách ghi chuẩn là gì? | File sơ đồ lốp của Delta, dòng 4–21 | Chưa hỏi Delta |
+| OQ-9 | Cột "Vị trí lốp #1" lúc ghi "Bên phụ", lúc ghi "phụ": thống nhất "Bên phụ"? | File sơ đồ lốp của Delta, dòng 23, 30, 41, 43, 50, 52, 63, 65 | Chưa hỏi Delta |
+| OQ-10 | Đầu kéo 1 cầu sau dùng loại lốp "Lốp lái/đơn", "Lốp tải/kép", các kiểu khác dùng "Lốp lái", "Lốp tải": danh mục loại lốp chuẩn là gì? | File sơ đồ lốp của Delta | Chưa hỏi Delta |
+| OQ-11 | Xe nâng diesel: file ghi cả 2 trục là Lốp lái, thực tế trục trước là trục tải (dẫn động), trục sau là trục lái. Sửa theo thực tế? | File sơ đồ lốp của Delta, kiểu Xe nâng diesel | Chưa hỏi Delta |
+| OQ-12 | Trạm bơm dầu (mã loại 09) chưa có trong file: thêm dòng "Không có lốp"? | File sơ đồ lốp của Delta | Chưa hỏi Delta |
+| OQ-13 | Phần mềm gọi sơ đồ lốp theo cấu hình trục chung (vd đầu kéo 2 cầu sau, xe tải hai trục) thay cho "Kiểu 1–11" của file, và cho đổi sơ đồ riêng từng dòng xe (vd AC990 là xe ba trục 2 dí 1 cầu tải). Delta đồng ý cách gán này? | File sơ đồ lốp của Delta; `design/v2/vehicles.md` mục 3 (DEC-266) | Chưa hỏi Delta |
 
 ## 12. Next Steps
 
