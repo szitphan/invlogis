@@ -34,6 +34,7 @@ from datetime import date, timedelta
 from pathlib import Path
 
 import dashboard_legacy as legacy_tab  # tab "Hệ thống cũ" (feature tái lập từ SRS cũ)
+import dashboard_ds as ds_tab  # tab "Design system" (DS v2: foundations · base · application)
 
 ROOT = Path(__file__).resolve().parent.parent
 GITHUB = "https://github.com/szitphan/invlogis/blob/main/"
@@ -1474,6 +1475,7 @@ def build(feature_filter=None, light_mode=False):
         "verdict": verdict, "tiles": tiles, "lanes": lanes, "actions": actions, "work": work,
         "sources": sources, "params": params, "history": history, "figma_board": fboard, "flow": flow,
         "transitions": transitions, "state": dashboard_state(), "legacy": legacy_tab.legacy_view(ROOT, ledgers),
+        "ds": ds_tab.ds_view(ROOT),
         "features": rows, "kanban": kanban, "stale_docs": stale_docs, "stale_log": stale_log,
         "freshness": fresh, "quality": quality, "coverage": coverage,
         "counts": {"docs_md": kanban["total"], "features": len(rows), "sources": len(sources),
@@ -2028,6 +2030,7 @@ def render(m, artifact=False):
       '<button role="tab" id="t-flow" aria-selected="false" aria-controls="p-flow">Luồng việc</button>'
       '<button role="tab" id="t-feat" aria-selected="false" aria-controls="p-feat">Feature</button>'
       '<button role="tab" id="t-legacy" aria-selected="false" aria-controls="p-legacy">Hệ thống cũ</button>'
+      '<button role="tab" id="t-ds" aria-selected="false" aria-controls="p-ds">Design system</button>'
       '<button role="tab" id="t-kb" aria-selected="false" aria-controls="p-kb">Kanban</button>'
       '<button role="tab" id="t-src" aria-selected="false" aria-controls="p-src">Nguồn khách</button>'
       '<button role="tab" id="t-health" aria-selected="false" aria-controls="p-health">Sức khỏe vault</button>'
@@ -2342,6 +2345,8 @@ def render(m, artifact=False):
 
     # Hệ thống cũ — feature tái lập từ SRS cũ theo module: nguồn, mục nguồn đã đưa vào, reverse, vấn đề, brainstorm
     w(legacy_tab.render_legacy(m.get("legacy"), link, E))
+    # Design system v2 — foundations, base, application: trạng thái, vòng, việc chờ chọn, Figma ↔ repo
+    w(ds_tab.render_ds(m.get("ds"), link, E, lambda lb, k, rq, cls="act mini": act(lb, k, rq, A, cls)))
 
     # Nguồn khách — nguồn cần feed vào brainstorm: feed vào đâu, tới đâu, còn thiếu gì, vấn đề nào chưa giải quyết
     srcs = m["sources"]

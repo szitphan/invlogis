@@ -145,6 +145,14 @@ def oq_locate(path, oid, line):
     return lines, idx, header
 
 
+def _dfs():
+    """_scripts/ds-foundation-status.py (trạng thái 9 mục foundations)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("dfs", ROOT / "_scripts/ds-foundation-status.py")
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    return m
+
+
 def after_doc_write(path, note):
     """Ghi bằng script không kích hoạt hook PostToolUse → tự ghi changelog + chạy hook lan stale như khi Edit."""
     author = os.environ.get("CLAUDE_CHANGELOG_AUTHOR") or run_out(["git", "config", "user.name"]) or "manual"
@@ -207,6 +215,12 @@ def check_one(r, seen_ack):
         if (ROOT / path).exists():
             return False, "ghi stale-ack", "file vẫn còn — dùng reset stale cho doc"
         return True, "ghi stale-ack", f"← {r.get('upstream', '')}"
+    if t == "ds-status":
+        out = _dfs().apply([{"key": r.get("key"), "to": r.get("to"), "note": r.get("note", "")}], dry=True)[0]
+        cur = {x["key"]: x["status"] for x in _dfs().read()[3]}.get(r.get("key"))
+        if cur != r.get("from"):
+            return False, f"{r.get('from')} → {r.get('to')}", f"trạng thái hiện là {cur}, không còn là {r.get('from')} — bấm lại trên trang"
+        return out["ok"], f"Foundations · {r.get('title', r.get('key'))}: {r.get('from')} → {r.get('to')}", "" if out["ok"] else out["msg"]
     if t == "board-move":
         snap = r.get("_snap") or {}
         it = snap.get(r.get("item"))
@@ -306,6 +320,9 @@ def main():
             (ROOT / r["path"]).write_text("\n".join(lines), encoding="utf-8")
             code, msg = 0, f"{r['oq']} {'đã chốt' if r.get('close') else 'đã ghi trả lời'} · dòng {idx + 1}"
             after_doc_write(r["path"], f"{r['oq']} {'chốt' if r.get('close') else 'trả lời'} từ dashboard: {r['answer'][:50]}")
+        elif t == "ds-status":
+            o = _dfs().apply([{"key": r["key"], "to": r["to"], "note": r.get("note", "")}], by="/dashboard sync")[0]
+            code, msg = (0, f"{o['msg']} · cần ghi nhãn Figma “{o.get('figma', '')}”") if o["ok"] else (1, o["msg"])
         elif t == "log-ack":
             acks.append(f"| {TODAY} | `{r['path']}` | `{r.get('upstream', '')}` |\n")
             code, msg = 0, "stale-ack"

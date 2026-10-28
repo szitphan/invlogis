@@ -39,8 +39,21 @@ ERR_BIG = "Vượt 10 MB. Chọn file nhỏ hơn hoặc chụp lại."
 ERR_REQ = "Cần tải ít nhất một hoá đơn."
 
 # ---------- phần tử ----------
+# File type icon của DS (DS · Foundations › Misc icons, set 6657:165918), cỡ MD 40: tờ giấy gập góc + nhãn đuôi.
+# Type có sẵn: PDF · DOC · XLS · CSV · IMG · ZIP · Other. JPG/PNG → IMG; XML chưa có loại riêng → Other.
+FT = {"PDF": ("PDF", "#B42318", 30), "DOC": ("DOC", "#1F4FB8", 33), "XLS": ("XLS", "#1B7542", 29), "CSV": ("CSV", "#1B7542", 32),
+      "IMG": ("IMG", "#6A50E4", 30), "ZIP": ("ZIP", "#525252", 25)}
+FT_ALIAS = {"JPG": "IMG", "PNG": "IMG", "XML": "Other"}
 def ftype(kind):
-    return f'<span class="ft ft-{kind.lower()}">{kind}</span>'
+    t = FT_ALIAS.get(kind, kind)
+    badge = ""
+    if t in FT:
+        lab, col, w = FT[t]
+        badge = (f'<rect x="2" y="17" width="{w}" height="18" rx="2" fill="{col}"/>'
+                 f'<text x="{2 + w / 2}" y="30" text-anchor="middle" font-family="Inter" font-size="12" font-weight="600" fill="#fff">{lab}</text>')
+    return (f'<svg class="ft" viewBox="0 0 40 40" width="40" height="40" role="img" aria-label="Tệp {kind}">'
+            f'<path d="M8 1H25L33 9V39H8Z" fill="var(--bg)" stroke="var(--line2)" stroke-width="1.5"/>'
+            f'<path d="M25 1V9H33" fill="none" stroke="var(--line2)" stroke-width="1.5"/>{badge}</svg>')
 
 def frow(f, status="done", pct=100, msg=None):
     """Dòng file: status = uploading | done | error. D4 a = thanh tiến độ, b = nền tiến độ. D5 a/b = vị trí nút."""
@@ -70,7 +83,7 @@ def zone(state="", compact_btn="Chọn file"):
             f'<div class="dz-t">{f"<b>{hover_txt}</b>" if hover_txt else "<b class=lk>Bấm để chọn file</b> hoặc kéo thả vào đây"}</div>'
             f'<div class="dz-h">{HINT}</div></div>')
     comp = (f'<div class="{cls} dz-b" data-show="D2:b"><span class="fi sm">{ic("cloud", 18)}</span>'
-            f'<div class="dz-m"><div class="dz-t">{f"<b>{hover_txt}</b>" if hover_txt else "Kéo thả file vào đây"}</div>'
+            f'<div class="dz-m"><div class="dz-t">{f"<b>{hover_txt}</b>" if hover_txt else "<b>Kéo thả file vào đây</b>"}</div>'
             f'<div class="dz-h">{HINT}</div></div><button class="bt"{dis}>{ic("upload", 16)}{compact_btn}</button></div>')
     btn = (f'<div class="dz-c {state}" data-show="D2:c"><button class="bt"{dis}>{ic("upload", 16)}Tải file lên</button>'
            f'<span class="dz-h">{HINT}</span></div>')
@@ -120,7 +133,7 @@ def tile(n, status="done", pct=100, label=None):
     elif status == "error":
         over = f'<span class="tov er">{ic("retry", 18)}Thử lại</span>'
     cap = f'<span class="tcap">{label}</span>' if label else ""
-    return (f'<div class="tl {status}" data-meta="{label or ""}"><span class="ph" style="background:{shade}">{ic("img", 22)}</span>{over}{cap}'
+    return (f'<div class="tl {status}" data-meta="{label or ""}"><span class="ph sh{n % 4}">{ic("img", 22)}</span>{over}{cap}'
             f'<button class="tx" aria-label="Xoá ảnh">{ic("x", 12)}</button></div>')
 
 def rowify(tiles_html):
@@ -130,8 +143,8 @@ def rowify(tiles_html):
         st = "uploading" if "tov\"" in t and "%" in t else ("error" if "tov er" in t else "done")
         lab = t.split('data-meta="')[1].split('"')[0] or f"Ảnh {i + 1}"
         out.append(frow((f"{lab}.jpg", "2,1 MB", "JPG"), st, 48 if st == "uploading" else 100,
-                        "Mất kết nối" if st == "error" else None).replace('<span class="ft ft-jpg">JPG</span>',
-                        f'<span class="th" style="background:{["#C9D4E0", "#D8CFC2", "#C4D1C8", "#D3C9D8"][i % 4]}">{ic("img", 16)}</span>'))
+                        "Mất kết nối" if st == "error" else None).replace(ftype("JPG"),
+                        f'<span class="th sh{i % 4}">{ic("img", 16)}</span>'))
     return out
 
 SHEET = (f'<div class="scr" data-show="D6:a"></div><div class="sht" data-show="D6:a"><i class="hd"></i><div class="sh-t">Thêm ảnh hoá đơn</div>'
@@ -180,8 +193,7 @@ button{font:inherit;color:inherit}
 .fr.error{border-color:var(--err-bd)}
 .fr .fill{position:absolute;left:0;top:0;bottom:0;background:var(--muted);z-index:0}
 .fr>*{position:relative}
-.ft{width:32px;height:40px;border-radius:4px;border:1px solid var(--line2);font:700 9px/1 Inter;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;flex:none;background:var(--bg)}
-.ft-pdf{color:#D92D20}.ft-xml{color:#1F4FB8}.ft-jpg,.ft-png{color:#1B7542}
+.ft{flex:none;display:block}
 .th{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#5b6575;flex:none}
 .fm{flex:1;min-width:0}
 .fn{font:500 13.5px/20px Inter;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -191,7 +203,7 @@ button{font:inherit;color:inherit}
 .bar{height:6px;border-radius:99px;background:var(--muted);margin-top:8px;overflow:hidden}.bar i{display:block;height:100%;background:var(--solid);border-radius:99px}
 .lkr{border:0;background:none;padding:0;margin-top:6px;font:600 13px/18px Inter;color:var(--err);cursor:pointer}
 .fa{display:flex;gap:4px;align-items:center;align-self:center}
-.del{align-self:flex-start;margin:-6px -2px 0 0}
+.del{align-self:flex-start;margin-top:-6px;margin-right:-2px}
 /* ---- app ---- */
 .fu.m .lb{font-size:13px}
 .az{border:1px solid var(--line2);border-radius:16px;padding:14px;display:flex;gap:12px;align-items:center;background:var(--bg)}
@@ -548,12 +560,13 @@ def grid_web():
         cell("Lỗi — mất kết nối", pvc(f'<div style="width:440px">{frow(F_PDF, "error", msg="Mất kết nối")}</div>')),
         cell("Hover nút xoá", pvc(f'<div style="width:440px">{frow(F_XML, "done").replace("ib del", "ib del hv")}</div>')),
         cell("Focus link Thử lại", pvc(f'<div style="width:440px">{frow(F_BIG, "error", msg="Vượt 10 MB").replace("class=\"lkr\"", "class=\"lkr focus\"")}</div>'))],
-        "Icon loại file 32 × 40 (PDF đỏ, XML xanh, ảnh xanh lá). Nền tiến độ chạy từ trái; % ghi ở dòng phụ. Xoá luôn ở góc trên phải.")
+        "Icon loại file = File type icon của DS (Misc icons), cỡ MD 40. Nền tiến độ chạy từ trái; % ghi ở dòng phụ. Xoá luôn ở góc trên phải.")
     h += row("Icon loại file và ảnh nhỏ", [
         cell("PDF", pvc(f'<div style="width:300px">{frow(F_PDF, "done")}</div>', w=320)),
-        cell("XML", pvc(f'<div style="width:300px">{frow(F_XML, "done")}</div>', w=320)),
-        cell("Ảnh — hiện ảnh nhỏ", pvc('<div style="width:300px">' + frow(F_JPG, "done").replace('<span class="ft ft-jpg">JPG</span>',
-             f'<span class="th" style="background:#C9D4E0">{ic("img", 16)}</span>') + '</div>', w=320))])
+        cell("XML — chưa có loại riêng, tạm Other", pvc(f'<div style="width:300px">{frow(F_XML, "done")}</div>', w=320)),
+        cell("IMG (JPG, PNG)", pvc(f'<div style="width:300px">{frow(F_BIG, "done")}</div>', w=320)),
+        cell("Ảnh — hiện ảnh nhỏ", pvc('<div style="width:300px">' + frow(F_JPG, "done").replace(ftype("JPG"),
+             f'<span class="th sh0">{ic("img", 16)}</span>') + '</div>', w=320))])
     h += row("Field đủ (nhãn · vùng chọn · danh sách · gợi ý / lỗi)", [
         cell("Nhiều file — chưa có", pvc(f'<div style="width:440px">{field("Hoá đơn", hint="Mỗi hoá đơn tải cả PDF và XML nếu có.")}</div>')),
         cell("Nhiều file — đang tải + xong", pvc(f'<div style="width:440px">{W_UP}</div>')),
@@ -591,16 +604,43 @@ page["round"] = "preview"
 page["subtitle"] = ("Application component · nhóm B · vòng 2 Preview — tổ hợp đã chốt: "
                     + " · ".join(f"{k} {v.upper()}" for k, v in PICK.items()) + " (D2: giữ cả 3 kiểu làm biến thể)")
 page["preview"] = {"version": "1", "pick": PICK,
-                   "changes": "bản đầu theo lựa chọn vòng 1: vùng chọn 3 Type (đủ / gọn / nút), dòng file nền tiến độ, app ảnh dạng dòng",
+                   "changes": "icon loại file lấy theo File type icon của DS (Misc icons, MD 40; XML tạm Other); bản đầu theo lựa chọn vòng 1: vùng chọn 3 Type (đủ / gọn / nút), dòng file nền tiến độ, app ảnh dạng dòng",
                    "blocks": [{"title": "Web", "platform": "web", "note": "Field 440 · vùng thả đủ / gọn / nút · dòng file 64 · nhãn 14 trên khung", "html": grid_web()},
                               {"title": "Mobile (app)", "platform": "mobile", "note": "Khung 393 · ô bấm mở sheet · ảnh dạng dòng · nút xoá vùng bấm 44",
                                "frames": grid_mob()}]}
 
 # Khai giá trị preview — vòng 3 đối chiếu foundation (ds-foundation-check.py)
+# sel = chỗ trong CSS để tab Foundation vẽ lại hình theo token (bắt buộc với ds-foundation-check)
+PART_SEL = {
+ "Field": ".fu", "Label": ".lb", "Required mark": ".req", "Hint": ".hn", "Error text": ".fe", "Error icon": ".fe .i",
+ "Dropzone": ".dz", "Dropzone full": ".dz-a", "Dropzone compact": ".dz-b", "Dropzone button only": ".dz-c",
+ "Dropzone text": ".dz-t", "Dropzone link": ".dz-t b", "Dropzone hint": ".dz-h", "Featured icon": ".fi",
+ "Featured icon compact": ".dz-b .fi,.fi.sm", "Dropzone hover": ".dz.hv", "Dropzone drag-over": ".dz.hover",
+ "Dropzone disabled": ".dz.disabled,.az.disabled", "Dropzone error": ".dz.error,.az.error,.az2.error .bt",
+ "Focus ring": ".dz.focus,.bt.focus,.ib.focus,.az.focus,.lkr.focus", "Choose button": ".bt", "File list": ".fl",
+ "File row": ".fr", "File row error": ".fr.error", "Progress fill": ".fr .fill", "File type icon": ".ft", "Thumbnail": ".th",
+ "File name": ".fn", "File meta": ".fs", "File meta divider": ".sep", "Status done": ".st.ok", "Status error": ".st.er",
+ "Status uploading": ".st.up", "Status icon": ".st .i", "Retry link": ".lkr", "Delete button": ".ib", "Delete button hover": ".ib.hv",
+ "App tap area": ".az", "App tap icon": ".az .fi", "Sheet": ".sht", "Sheet grabber": ".sht .hd", "Sheet title": ".sh-t",
+ "Sheet item": ".sh-i", "Scrim": ".scr"}
+MOB_SEL = {"Label": ".fu.m .lb", "File row": ".pv[data-platform=mobile] .fr", "File name": ".pv[data-platform=mobile] .fn",
+           "Delete button": ".pv[data-platform=mobile] .fr .ib"}
+ICON_SEL = {"Featured icon": ".fi .i", "Choose button": ".bt .i", "Delete button": ".ib .i", "App tap icon": ".az .fi .i",
+            "Sheet item": ".sh-i .i"}
+CSSP = {("Focus ring", "focus-width"): "outline-width", ("Focus ring", "focus-offset"): "outline-offset",
+        ("Focus ring", "color"): "outline-color", ("Retry link", "height"): "line-height",
+        ("File meta divider", "color"): "background", ("Scrim", "background"): "background",
+        ("Sheet", "radius"): ["border-top-left-radius", "border-top-right-radius"]}
 V = []
 def v(part, prop, value, **kw):
-    V.append({"part": part, "prop": prop, "value": value, **kw})
+    sel = kw.pop("sel", None) or (ICON_SEL.get(part) if prop == "icon-size" else None) or \
+          (MOB_SEL.get(part) if kw.get("platform") == "Mobile" else None) or PART_SEL[part]
+    row = {"part": part, "prop": prop, "value": value, "sel": sel, **kw}
+    if (part, prop) in CSSP:
+        row["cssProp"] = CSSP[(part, prop)]
+    V.append(row)
 W_, M_ = {"platform": "Web"}, {"platform": "Mobile"}
+page["css"] += ".st.up{color:var(--fg3)}.az{min-height:72px;box-sizing:border-box}"
 v("Field", "gap", 6)
 v("Label", "font-size", 14, **W_); v("Label", "line-height", 20, **W_); v("Label", "font-weight", 500); v("Label", "color", "#525252", role="text", on="#FFFFFF")
 v("Label", "font-size", 13, **M_)
@@ -632,9 +672,7 @@ v("File row", "padding-y", 12, **W_); v("File row", "padding-left", 14, **W_); v
 v("File row", "radius", 12, **W_); v("File row", "radius", 14, **M_); v("File row", "padding-left", 12, **M_); v("File row", "padding-right", 4, **M_)
 v("File row", "border-color", "#E5E5E5", role="decorative", on="#FFFFFF"); v("File row error", "border-color", "#F04438", role="border", on="#FFFFFF", state="error")
 v("Progress fill", "background", "#F5F5F5", role="decorative", on="#FFFFFF")
-v("File type icon", "width", 32); v("File type icon", "height", 40); v("File type icon", "radius", 4); v("File type icon", "font-size", 9); v("File type icon", "font-weight", 700)
-v("File type PDF", "color", "#D92D20", role="text", large=True, on="#FFFFFF"); v("File type XML", "color", "#1F4FB8", role="text", large=True, on="#FFFFFF")
-v("File type image", "color", "#1B7542", role="text", large=True, on="#FFFFFF")
+v("File type icon", "size", 40)  # instance File type icon / Size=MD của DS (Misc icons) — màu, chữ theo set gốc
 v("Thumbnail", "size", 40); v("Thumbnail", "radius", 8)
 v("File name", "font-size", 13.5, **W_); v("File name", "font-size", 14, **M_); v("File name", "line-height", 20); v("File name", "font-weight", 500)
 v("File name", "color", "#171717", role="text", on="#FFFFFF")
@@ -655,7 +693,58 @@ v("Sheet grabber", "width", 36, **M_); v("Sheet grabber", "height", 4, **M_)
 v("Sheet title", "font-size", 17, **M_); v("Sheet title", "line-height", 24, **M_); v("Sheet title", "font-weight", 600)
 v("Sheet item", "height", 52, **M_, interactive=True, hitArea=52); v("Sheet item", "gap", 12, **M_); v("Sheet item", "font-size", 15, **M_); v("Sheet item", "icon-size", 20)
 v("Scrim", "background", "color/overlay/scrim")
+# phần còn lại của CSS component (khai đủ để máy chấm hết)
+v("Choose button", "background", "#FFFFFF"); v("Choose button", "line-height", 18)
+v("Choose button hover", "background", "#F5F5F5", sel=".bt.hv", state="hover")
+v("Choose button hover", "background", "#F5F5F5", sel=".dz-c.hv .bt", state="hover")
+v("Choose button focus", "focus-offset", 2, sel=".dz-c.focus .bt", cssProp="outline-offset")
+v("Choose button focus", "color", "#171717", sel=".dz-c.focus .bt", cssProp="outline-color", role="border", on="#FFFFFF")
+v("Choose button error", "border-color", "#F04438", sel=".dz-c.error .bt", role="border", on="#FFFFFF", state="error")
+v("Required mark", "margin-left", 3)
+v("Error text", "line-height", 18); v("Error text", "gap", 6); v("Error icon", "margin-top", 2, sel=".fe .i")
+v("Dropzone compact text", "min-width", 150, sel=".dz-m")
+v("Dropzone link", "underline-offset", 2, sel=".dz-t .lk", cssProp="text-underline-offset")
+v("Featured icon", "margin-bottom", 8)
+v("Featured icon drag-over", "color", "#171717", sel=".dz.hover .fi", role="icon", on="#FAFAFA", state="drag")
+v("File row", "background", "#FFFFFF")
+v("Thumbnail", "color", "#5B6575", role="decorative", on="#C9D4E0")
+v("File meta", "margin-top", 1); v("File meta divider", "width", 1)
+v("Status icon", "gap", 4, sel=".st")
+v("Retry link", "margin-top", 6)
+v("Delete button", "margin-top", 6, sel=".del", cssProp="margin-top", tpl="calc(-1 * $)"); v("Delete button", "margin-right", 2, sel=".del", cssProp="margin-right", tpl="calc(-1 * $)")
+v("Delete button hover", "color", "#171717", role="icon", on="#F5F5F5", state="hover")
+v("App tap area", "background", "#FFFFFF")
+v("Sheet", "background", "#FFFFFF", **M_); v("Sheet", "padding-top", 8, **M_)
+v("Sheet grabber", "radius", 2, **M_); v("Sheet grabber", "background", "#D4D4D4", role="decorative", on="#FFFFFF", **M_)
+v("Sheet grabber", "margin-bottom", 12, **M_); v("Sheet title", "margin-bottom", 6, **M_)
+v("Sheet item", "border-color", "#E5E5E5", role="decorative", on="#FFFFFF", cssProp="border-bottom-color", **M_)
 page["values"] = V
+
+# Tách CSS: khung màn mẫu → cssScreen (không chấm); phương án không chọn → cssIgnore (có lý do)
+import re
+SCREEN = re.compile(r"^(\.pv|\.pad|\.mpad|table|td,th|th|\.tb|\.chip|\.mw|\.md|\.inp|\.ta|\.card|\.cols|dl|dt|dd|\.mcard|\.pt|\.cta|\.mf|\.gl|\.bt\.pri|\.pv\[data-platform=mobile\] \.cols)(\b|[^\w-]|$)")
+cmp_css, scr_css = [], []
+for sel, body in re.findall(r"([^{}]+)\{([^{}]*)\}", re.sub(r"/\*.*?\*/", "", page["css"], flags=re.S)):
+    s = sel.strip()
+    keep_cmp = s.startswith(".pv[data-theme=dark]") or s.startswith(".pv[data-D") or s.startswith(".pvm") \
+               or s.startswith(".pv[data-platform=mobile] .f") or (s == ".pv" and False)
+    (cmp_css if keep_cmp or not SCREEN.match(s) else scr_css).append(f"{s}{{{body}}}")
+page["css"], page["cssScreen"] = "\n".join(cmp_css), "\n".join(scr_css) + "\n.sh0{background:#C9D4E0}.sh1{background:#D8CFC2}.sh2{background:#C4D1C8}.sh3{background:#D3C9D8}"
+NOT_PICKED = "phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+page["cssIgnore"] = [
+ {"sel": ".lbi", "why": "D1 B (nhãn trong khung app) — " + NOT_PICKED},
+ {"sel": ".bar", "why": "D4 A (thanh tiến độ) — " + NOT_PICKED}, {"sel": ".bar i", "why": "D4 A — " + NOT_PICKED},
+ {"sel": ".az2", "why": "D6 B (hai nút Chụp ảnh | Chọn tệp) — " + NOT_PICKED},
+ {"sel": ".bt.big", "why": "D6 B — " + NOT_PICKED},
+ {"sel": ".bt.sm", "why": "D5 B (nút Thử lại bên phải) — " + NOT_PICKED},
+ {"sel": ".fa", "why": "D5 B (cụm nút bên phải) — " + NOT_PICKED},
+ *[{"sel": x, "why": "D7 A (lưới ảnh) / D6 C (ô +) — " + NOT_PICKED}
+   for x in (".gr", ".tl", ".tl .ph", ".tl.add", ".tl.error", ".tov", ".tov.er", ".ring", ".tcap", ".tx")],
+ {"sel": ".lb", "props": ["gap"], "why": "nhãn đổi sang display:block (dấu * theo dòng chữ) — gap không còn tác dụng"},
+]
+
+# Preview bản 1 duyệt 28/10 (trong chat, kèm sửa icon loại file theo DS) → vòng 3 đối chiếu foundation
+page["round"] = "foundation"
 
 OUT.write_text(json.dumps(page, ensure_ascii=False, indent=1))
 print("ok", OUT, len(ideas), "ý tưởng ·", len(decisions), "điểm ·", len(page["screens"]), "màn ·", len(V), "giá trị")

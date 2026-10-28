@@ -4,20 +4,20 @@
   "note": ""
  },
  "brainstorm-D2": {
-  "choice": 0,
+  "choice": 1,
   "note": ""
  },
  "brainstorm-D3": {
-  "choice": 1,
+  "choice": 2,
   "note": ""
  },
  "brainstorm-D4": {
-  "choice": 1,
+  "choice": 2,
   "note": ""
  },
  "brainstorm-D5": {
   "choice": 2,
-  "note": ""
+  "note": "Trang chọn B; góp ý + chốt 28/10: số đếm đỏ (C)"
  },
  "brainstorm-D6": {
   "choice": 0,
@@ -30,10 +30,6 @@
  "brainstorm-D8": {
   "choice": 0,
   "note": ""
- },
- "preview-approve": {
-  "choice": 0,
-  "note": "duyệt trong chat 28/10"
  },
  "foundation-palette-empty.padding-y.web": {
   "choice": 1,

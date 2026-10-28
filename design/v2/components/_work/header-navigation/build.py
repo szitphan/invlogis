@@ -308,6 +308,8 @@ mark{background:var(--mark);color:inherit;border-radius:2px;padding:0 1px}
 .sb .sc b{display:block;font-weight:600}.sb .sc span{display:flex;gap:4px;align-items:center;color:var(--fg3);font-size:12px}
 .sb .sc>svg:last-child{margin-left:auto;color:var(--fg3)}
 .mn{flex:1;min-width:0;display:flex;flex-direction:column;position:relative}
+/* D2 b: bảng tìm là hộp thoại của cả màn — neo theo .app để lớp phủ che cả menu trái, bảng nằm giữa màn */
+.pv[data-D2=b] .app>.mn{position:static}
 /* thanh trên */
 .hd{height:56px;display:flex;align-items:center;gap:8px;padding:0 24px;border-bottom:1px solid var(--line);background:var(--bg)}
 .hd2{height:44px;display:flex;align-items:flex-end;gap:20px;padding:0 24px;border-bottom:1px solid var(--line);background:var(--bg)}
@@ -933,5 +935,57 @@ for x in page["values"]:
 for x in page["values"]:
     if x["part"] == "Mobile back row" and x["prop"] == "height": x["hitArea"] = 44  # vòng 4: user đổi ý, thêm vùng bấm vô hình 44 thay ngoại lệ
 page["preview"]["changes"] += "; vòng 3: ô tìm 300 × 32, bảng kết quả 400 (dòng 40), hàng tab 40, số đếm 20, menu tài khoản 300, chữ phụ 12, nền chữ khớp warning-bg-strong; hàng ← mobile hình 40, vùng bấm vô hình 44"
+
+# ================= Vòng 5 — review Figma (28/10): 3 agent, 26 điểm gộp còn 19 =================
+page["round"] = "review"
+page["figma"] = {"url": "https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=6768-190542",
+                 "label": "Master Header navigation (Breadcrumbs 6901:20705 · _Header search panel 6904:20446 · khung Tài liệu 6768:198301)"}
+def rv(i, agent, sev, node, text, fix, look=False):
+    return {"id": i, "agent": agent, "severity": sev, "node": node, "text": text, "fix": fix, "changesLook": look}
+page["reviews"] = [
+ rv("R1", "accessibility", "Cao", "6900:216882", "<b>2.1.4 — phím tắt một chữ “N”</b> ở dòng “Tạo lệnh vận tải”. Phím một chữ không bổ trợ trượt mức A (nhập giọng nói gõ nhầm), và đụng chữ “n” khi đang gõ trong ô tìm. Spec chưa chốt phím này (UX/UI cũng nêu).",
+    "A (đề xuất): bỏ phím tắt khỏi bản mẫu (tắt <code>Has Shortcut</code>), chưa có tính năng phím tắt tạo nhanh. B: đổi thành tổ hợp <code>Alt N</code>, chỉ chạy khi focus không ở ô nhập."),
+ rv("R2", "uxui-reviewer", "Cao", "6904:20446", "<b>Bảng tìm thiếu trạng thái</b>: chỉ có Results / Recent / Empty. Cây menu theo quyền tải sau đăng nhập — chưa xong hoặc lỗi thì bảng hiện “Không có tính năng…” sai, đẩy người dùng sang hướng “chưa cấp quyền”. Thiếu cả Recent rỗng (người dùng mới).",
+    "Thêm <code>Content = Loading</code> (3 dòng khung chờ, giữ chân bảng), <code>Error</code> (“Chưa tải được danh sách tính năng” + nút Tải lại), <code>Recent rỗng</code> (“Gõ tên màn để tìm”). Spec ghi: cây menu chưa sẵn sàng → Loading, không Empty."),
+ rv("R3", "uxui-reviewer", "Cao", "6768:198301", "<b>Chưa vẽ các lớp mở ra</b>: Mobile — màn tìm toàn trang, sheet tài khoản; Web — menu tài khoản 300, menu “…” của đường dẫn. Hiện chỉ có chữ trong spec, dev không có hình để dựng. Mobile cũng mất lối vào <b>Trợ giúp</b> (web có nút, mobile không).",
+    "Vẽ thêm vào khung Tài liệu: menu tài khoản web, menu “…” mở, màn tìm mobile (chưa gõ + Empty), sheet tài khoản mobile có mục <b>Trợ giúp</b> (trước Đăng xuất). Notification Center chỉ ghi chú trỏ sang component riêng."),
+ rv("R4", "visual-reviewer", "Trung", "6768:201351", "<b>Thứ tự co khi thiếu chỗ</b> (màn 1280, 1024): trang hiện tại bị cắt trước (“Danh…”), trong khi ô tìm giữ 300 và tầng cha vẫn dài. Trang hiện tại là thứ cần đọc nhất (UX/UI cũng nêu).",
+    "Ghi thứ tự vào spec và dựng lại: (1) ô tìm co 300 → 240 dưới 1280, (2) gom tầng giữa thành “…” khi không đủ chỗ (không chỉ theo số tầng), (3) trang hiện tại giữ tối thiểu 120 rồi mới cắt.", True),
+ rv("R5", "accessibility", "Trung", "6900:216892", "<b>1.4.3 — chữ phím tắt trên dòng đang chọn 4,35:1</b>: <code>text/secondary</code> 12 trên <code>bg/selected</code>. Path đã đổi sang <code>secondary-strong</code>, Shortcut thì chưa.",
+    "Lớp Shortcut ở <code>_Search result</code> State=Selected dùng <code>color/text/secondary-strong</code> (~7:1). Không đổi look đáng kể."),
+ rv("R6", "accessibility", "Trung", "6900:216885", "<b>2.4.7 / 1.4.11 — dòng đang chọn chỉ khác nền 1,09:1</b> (#F5F5F5 so với trắng) + icon ↵. Spec tự mâu thuẫn: ghi “vòng focus trên dòng kết quả” nhưng lại dùng mẫu combobox (focus ở ô nhập, dòng chọn qua <code>aria-activedescendant</code>).",
+    "Thêm vạch trái 2px <code>color/border/focus</code> cho dòng Selected (≥ 3:1). Spec: focus ở ô, mỗi dòng <code>role=\"option\"</code> + <code>aria-selected</code>, bỏ câu “vòng focus trên dòng”.", True),
+ rv("R7", "uxui-reviewer", "Trung", "6901:20705", "<b>Collapsed chưa giữ tầng đầu</b>: biến thể Collapsed mặc định là “Nhà › … › Mục cha › Trang hiện tại” vì <code>Has Root</code> mặc định tắt — lệch D7 A (giữ tầng đầu + tầng cuối + trang hiện tại).",
+    "Ở 3 biến thể Collapsed=True cho tầng đầu luôn hiện (không phụ thuộc <code>Has Root</code>)."),
+ rv("R8", "accessibility", "Trung", "6901:20705", "<b>Thiếu hình trạng thái</b> Hover / Focus / Đang mở của mục đường dẫn, nút “…”, avatar, nút Trợ giúp ở khung Trạng thái (ô tìm, chuông, tab thì có). Phụ: ở chuông State=Focus, viền trắng của số đếm đè lên góc vòng focus.",
+    "Thêm hàng minh hoạ Hover/Focus/Open cho đường dẫn, “…”, avatar, Trợ giúp vào khung Trạng thái. Số đếm nằm trên vòng focus mà không cắt vòng."),
+ rv("R9", "accessibility", "Trung", "6900:216808", "<b>Avatar mobile vùng chạm 32</b> (luật dự án DEC-138: mobile ≥ 44; WCAG 2.5.8 vẫn đạt). Menu / Tìm / Chuông là nút 42, avatar chỉ là khung 32.",
+    "Bọc avatar trong nút 42 như các nút khác (avatar vẫn 32)."),
+ rv("R10", "accessibility", "Trung", "6900:216829", "<b>Hàng ← chưa có vùng bấm 44</b> như DEC-290 ghi — chỉ có chữ trong spec; lề trái 12 lệch lề 16 của thanh (thị giác cũng nêu: nhãn nhỏ, nhạt, dễ bỏ qua).",
+    "A (đề xuất): tăng hàng lên 44, lề trái 16, cả hàng là liên kết “Quay lại {cấp trên}” — hết chồng lấn. B: giữ 40 + lớp Hit area 44 trong suốt.", True),
+ rv("R11", "accessibility", "Trung", "", "<b>Spec trợ năng thiếu</b>: tên đọc nút mobile (Mở menu + <code>aria-expanded</code>, Tìm tính năng, hàng ←); màn tìm và sheet tài khoản là <code>dialog</code> có nhãn, giữ focus, Esc trả focus; chuông <code>aria-expanded</code> + <code>aria-controls</code>; hàng tab đổi màn nên là <code>nav</code> + liên kết <code>aria-current</code> (không dùng tablist); 2.4.11 thanh dính đầu che focus; 1.4.10 ngưỡng 768 theo bề rộng CSS (zoom 400% tự sang Mobile).",
+    "Bổ sung các dòng trên vào mục Trợ năng / Kích thước của spec và mô tả component; ghi <code>scroll-padding-top</code> = cao thanh (56, 96 khi có hàng tab). Không đổi hình."),
+ rv("R12", "uxui-reviewer", "Thấp", "6768:191286", "<b>API thiếu thuộc tính hay đổi</b>: số đếm chuông, chữ gợi ý ô tìm, chữ tắt avatar phải vào instance lồng; <code>Has Menu</code>, <code>Has Back</code>, <code>Back label</code> hiện cả ở Web dù chỉ Mobile dùng.",
+    "Expose instance lồng (chuông, ô tìm, avatar) ra panel; mô tả thuộc tính ghi “chỉ Mobile”."),
+ rv("R13", "uxui-reviewer", "Thấp", "6900:217377", "<b>Chữ trạng thái rỗng</b> nối hai ý bằng “hoặc”, không nói làm gì tiếp: “Thử từ khác, hoặc tính năng chưa được cấp quyền cho tài khoản này.”",
+    "Đổi: “Thử từ khác. Nếu vẫn không thấy, tài khoản của bạn có thể chưa được cấp quyền — hỏi quản trị viên.”"),
+ rv("R14", "uxui-reviewer", "Thấp", "6904:20446", "<b>Chữ khớp không tô trong bản mẫu</b> Figma, trong khi spec ghi tô nền <code>warning-bg-strong</code>.",
+    "Mô phỏng trong bản mẫu Results: khung nền <code>status/warning-bg-strong</code> sau chữ “Lệnh” (chỉ minh hoạ, code tô thật).", True),
+ rv("R15", "uxui-reviewer", "Thấp", "6768:198301", "<b>Khung Tài liệu còn nhãn cũ</b> “_Header breadcrumb · Has Root tắt / bật” ở mục Cấu tạo.",
+    "Đổi nhãn sang <code>Breadcrumbs</code>; mô tả component rút về “dùng khi nào”, số đo để spec."),
+ rv("R16", "accessibility", "Thấp", "6900:216610", "<b>Breadcrumbs</b>: chevron phân cách chưa ghi <code>aria-hidden</code>; Type Text Line vạch dưới trang hiện tại trùng màu/độ dày vòng focus và vạch tab chọn — dễ nhầm “đang chọn” với “đang focus”.",
+    "Spec ghi aria-hidden cho dấu phân cách; vạch Current của Text Line đổi sang <code>color/text/primary</code> 2px, focus luôn là vòng quanh mục.", True),
+ rv("R17", "visual-reviewer", "Thấp", "6768:190944", "<b>Hai điểm nhấn tranh nhau</b> ở Secondary Nav: trang hiện tại (đậm) hàng 1 và tab chọn (đậm + vạch) hàng 2.",
+    "Giữ nguyên (vạch dưới đã đủ tách tab với đường dẫn); hoặc tab chọn nét 500 thay 600.", True),
+ rv("R18", "visual-reviewer", "Thấp", "6768:190822", "<b>Số đếm “9+”</b> rộng hơn, gần chạm avatar bên cạnh (khoảng 8).",
+    "Kiểm khe giữa số “9+” và avatar; dưới 4 thì tăng khoảng Actions → Account lên 12."),
+ rv("R19", "visual-reviewer", "Thấp", "6768:201351", "<b>Tầng cha bị cắt giữa từ</b> (“Quản lý vận tải đa phư…”).",
+    "Giữ (ngưỡng 160 + tooltip đủ chữ); Figma không cắt theo từ được."),
+]
+
+# page.json đã được sửa thẳng sau build (tách css/cssScreen, khai sel 253 dòng, proto, ghim R-n) — chạy lại build sẽ xoá hết
+import sys
+if OUT.exists() and "proto" in json.loads(OUT.read_text()) and "--force" not in sys.argv:
+    sys.exit("page.json đã có chỉnh sửa sau build (proto, cssScreen, sel). Sửa thẳng page.json; ghi đè thì thêm --force.")
 OUT.write_text(json.dumps(page, ensure_ascii=False, indent=1))
 print("ok", OUT, len(ideas), "ý tưởng", len(decisions), "điểm", len(screens), "màn")

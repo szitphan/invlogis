@@ -21,7 +21,7 @@
   ],
   "platform": "Nhóm A (DEC-279): cùng cấu tạo, số đo theo mode Platform. Vị trí toast là quy định cấp màn (D4, D8). Notification Center (CMP-02) là component Application riêng, ngoài lần này."
  },
- "css": "\n.pv{position:relative;--fg:#171717;--fg2:#737373;--bg:#fff;--muted:#F5F5F5;--line:#E5E5E5;--inv:#171717;--invfg:#fff;--sh:0 4px 12px rgba(16,24,40,.10),0 1px 3px rgba(16,24,40,.06);\n --ok:#1B7542;--ok-i:#348D57;--ok-bg:#E8F5EC;--ok-bd:#93CFA6;--warn:#8A5300;--warn-i:#A56A21;--warn-bg:#FFF3DC;--warn-bd:#E3B87A;\n --err:#B42318;--err-i:#D23C2E;--err-bg:#FDECEC;--err-bd:#FFA19C;--info:#1F4FB8;--info-i:#3468D7;--info-bg:#E7EFFD;--info-bd:#93B9FF;\n color:var(--fg);font:14px/20px Inter,system-ui,sans-serif}\n.pv[data-theme=dark]{--fg:#F5F5F5;--fg2:#A3A3A3;--bg:#0A0A0A;--muted:#171717;--line:#262626;--inv:#F5F5F5;--invfg:#0A0A0A;--sh:0 4px 12px rgba(0,0,0,.5);\n --ok:#93CFA6;--ok-i:#6FBB89;--ok-bg:#013519;--ok-bd:#1B7542;--warn:#E3B87A;--warn-i:#D19D59;--warn-bg:#3F2300;--warn-bd:#8A5300;\n --err:#FFA19C;--err-i:#FC7970;--err-bg:#580100;--err-bd:#B42318;--info:#93B9FF;--info-i:#6C9EFE;--info-bg:#051F5C;--info-bd:#1F4FB8}\n.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px}\n.pad{padding:16px 24px 24px;display:flex;flex-direction:column;gap:16px}.mpad{padding:12px 16px;display:flex;flex-direction:column;gap:12px}\n.tb{border:1px solid var(--line);border-radius:12px;overflow:hidden}\ntable{width:100%;border-collapse:collapse}td,th{padding:11px 16px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}tr:last-child td{border-bottom:0}th{color:var(--fg2);font-weight:500;background:var(--muted)}\n.chip{display:inline-block;font:500 12px/18px Inter;padding:2px 8px;border-radius:999px;background:var(--muted);color:var(--fg)}\n.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.span2{grid-column:span 2}\n.card{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px}.card.m{padding:14px}\n.card .h{font:600 15px/22px Inter}\ndl{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0;font-size:13px}dt{color:var(--fg2)}dd{margin:0}\n.mrow{padding:12px 16px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:2px 8px}.mrow .b{font-weight:600}.mrow .sub{color:var(--fg2);font-size:13px;grid-column:1}.mrow .chip{grid-row:1/span 2;grid-column:2;align-self:center}\n.cta{height:52px;border:0;border-radius:999px;background:var(--inv);color:var(--invfg);font:600 16px Inter;margin-top:8px}\n.i{flex:none;display:block}\n/* ---- màu theo tone ---- */\n.ok{--t:var(--ok);--ti:var(--ok-i);--tbg:var(--ok-bg);--tbd:var(--ok-bd)}.warn{--t:var(--warn);--ti:var(--warn-i);--tbg:var(--warn-bg);--tbd:var(--warn-bd)}\n.err{--t:var(--err);--ti:var(--err-i);--tbg:var(--err-bg);--tbd:var(--err-bd)}.info{--t:var(--info);--ti:var(--info-i);--tbg:var(--info-bg);--tbd:var(--info-bd)}\n/* ---- Toast (Notification) ---- */\n.tz{position:absolute;z-index:5;display:flex;flex-direction:column;gap:8px;width:400px;right:24px;top:80px}\n.pv[data-D4=b] .tz:not(.m){top:auto;bottom:24px}\n.pv[data-D4=c] .tz:not(.m){right:auto;left:calc(50% + 120px);transform:translateX(-50%)}\n.tz.m{left:12px;right:12px;width:auto;top:52px}\n.pv[data-D8=b] .tz.m{top:auto;bottom:76px}\n.ts{position:relative;display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;box-shadow:var(--sh);overflow:hidden;\n background:var(--bg);color:var(--fg);border:1px solid var(--line)}\n.ts .ib{color:var(--ti);display:grid;place-items:center}\n.ts .tx{flex:1;min-width:0;padding-top:1px}.ts .tt{font-weight:600;font-size:14px;line-height:20px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}\n.ts .ds{color:var(--fg2);font-size:12px;line-height:18px;margin-top:2px}\n.ac{display:flex;gap:12px;margin-top:6px}\n.lk{border:0;background:none;padding:0;font:600 12px/18px Inter;position:relative;color:var(--fg2);cursor:pointer}.lk.pri{color:var(--fg)}\n.cl{position:relative;border:0;background:none;padding:2px;color:var(--fg2);cursor:pointer;display:grid;place-items:center;margin:-2px -2px 0 0;opacity:.8}\n.tm{position:absolute;left:0;bottom:0;height:4px;width:62%;background:var(--ti);display:none}\n.pv[data-D6=b] .tm{display:block}\n/* D1 kiểu toast: a đảo nền (Astryx) · b trắng + icon màu (Untitled) · c nền nhạt theo tone */\n.pv[data-D1=a] .ts{background:var(--inv);color:var(--invfg);border-color:transparent}\n.pv[data-D1=a] .ts .ds,.pv[data-D1=a] .ts .lk,.pv[data-D1=a] .ts .cl{color:color-mix(in srgb,var(--invfg) 72%,transparent)}\n.pv[data-D1=a] .ts .lk.pri{color:var(--invfg);text-decoration:underline}\n.pv[data-D1=a] .ts .ib{color:color-mix(in srgb,var(--ti) 55%,var(--invfg))}\n.pv[data-D1=a] .ts.err{background:var(--err-i);color:#fff}.pv[data-D1=a] .ts.err .ib,.pv[data-D1=a] .ts.err .ds,.pv[data-D1=a] .ts.err .lk,.pv[data-D1=a] .ts.err .cl{color:#fff}\n.pv[data-D1=c] .ts{background:var(--tbg);border-color:var(--tbd);box-shadow:0 2px 6px rgba(16,24,40,.06)}\n.pv[data-D1=c] .ts .tt{color:var(--t)}\n.cl::after,.lk::after{content:\"\";position:absolute;left:50%;top:50%;width:24px;height:24px;min-width:100%;transform:translate(-50%,-50%)}\n.pv[data-platform=mobile] .cl::after,.pv[data-platform=mobile] .lk::after{width:44px;height:44px}\n.pv[data-platform=mobile] .ts .ac{gap:24px}\n/* nút trong alert trên app: bậc SM 36 + vùng bấm 44 */\n.pv[data-platform=mobile] .al .bt{height:36px;position:relative}.pv[data-platform=mobile] .al .bt::after{content:\"\";position:absolute;inset:-4px 0}\n/* Type Icon / Avatar / Progress */\n.nt{--t:var(--fg);--ti:var(--fg2);--tbg:var(--muted);--tbd:var(--line)}\n.av{width:32px;height:32px;border-radius:999px;background:#E7EFFD;color:#1F4FB8;font:600 12px/32px Inter;text-align:center;position:relative;flex:none;margin:-6px 0 -6px -2px}\n.pv[data-theme=dark] .av{background:#051F5C;color:#93B9FF}\n.av .on{position:absolute;right:-1px;bottom:-1px;width:10px;height:10px;border-radius:999px;background:#348D57;border:2px solid var(--bg)}\n.pg{display:flex;align-items:center;gap:10px;margin-top:8px}.pb{flex:1;height:6px;border-radius:999px;background:var(--muted);overflow:hidden}\n.pb i{display:block;height:100%;background:var(--info-i);border-radius:999px}.pg span{font:500 12px/18px Inter;color:var(--fg2);font-variant-numeric:tabular-nums;min-width:32px;text-align:right}\n.pg+.ds{font-size:12px;margin-top:2px}\n/* ---- Alert ---- */\n.al{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:10px;border:1px solid var(--tbd);background:var(--tbg)}\n.al .ib{color:var(--ti);display:grid;place-items:center}\n.al .tx{flex:1;min-width:0;padding-top:1px}.al .tt{font-weight:600;color:var(--t)}.al .ds{font-size:12px;line-height:18px;color:var(--fg);margin-top:2px}\n.al .ac{margin:0;align-self:center;flex:none}\n.bt{height:32px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:600 13px Inter;cursor:pointer}\n.al .cl{align-self:flex-start}\n/* D5 hành động: a dưới chữ · b căn phải cùng hàng */\n.pv[data-D5=a] .al{flex-wrap:wrap}.pv[data-D5=a] .al .ac{order:3;flex-basis:100%;padding-left:32px;margin-top:8px}\n.pv[data-D5=a] .al .cl{order:2}\n.al.stack{flex-wrap:wrap}.al.stack .ac{order:3;flex-basis:100%;padding-left:32px;margin-top:8px}.pv[data-D3=a] .al.stack .ac{padding-left:44px}\n/* D2 kiểu alert: a nền nhạt + viền · b trắng + vạch trái · c trắng + viền màu */\n.pv[data-D2=b] .al{background:var(--bg);border-color:var(--line);border-left:4px solid var(--ti);padding-left:12px}\n.pv[data-D2=b] .al .tt{color:var(--fg)}\n.pv[data-D2=c] .al{background:var(--bg);border-color:var(--t)}.pv[data-D2=c] .al .tt{color:var(--fg)}\n/* D3 icon: a vòng nền (featured) · b icon trần */\n.pv[data-D3=a] .ib{width:32px;height:32px;border-radius:999px;background:var(--tbg);margin:-6px 0 -6px -2px;box-shadow:0 0 0 4px color-mix(in srgb,var(--tbg) 45%,transparent)}\n.pv[data-D3=a][data-D1=a] .ts .ib{background:color-mix(in srgb,var(--invfg) 14%,transparent);box-shadow:none}\n.pv[data-D3=a] .ib .i{width:20px;height:20px}\n/* ---- Banner toàn trang (D7) ---- */\n.bn{display:flex;align-items:center;gap:10px;padding:8px 24px;background:var(--warn-bg);color:var(--warn);border-bottom:1px solid var(--warn-bd);font-size:13px}\n.bn span{flex:1}.bn b{font-weight:600}.bn .bt{height:28px;border-color:var(--warn-bd);background:transparent;color:var(--warn)}\n.pv[data-platform=mobile] .bn{padding:8px 16px}\n.pv[data-platform=mobile] .grid2{grid-template-columns:1fr}\n.tz.static{position:static;width:100%;transform:none}",
+ "css": ".pv{position:relative;--fg:#171717;--fg2:#737373;--bg:#fff;--muted:#F5F5F5;--line:#E5E5E5;--inv:#171717;--invfg:#fff;--sh:0 4px 12px rgba(16,24,40,.10),0 1px 3px rgba(16,24,40,.06);\n --ok:#1B7542;--ok-i:#348D57;--ok-bg:#E8F5EC;--ok-bd:#93CFA6;--warn:#8A5300;--warn-i:#A56A21;--warn-bg:#FFF3DC;--warn-bd:#E3B87A;\n --err:#B42318;--err-i:#D23C2E;--err-bg:#FDECEC;--err-bd:#FFA19C;--info:#1F4FB8;--info-i:#3468D7;--info-bg:#E7EFFD;--info-bd:#93B9FF;\n color:var(--fg);font:14px/20px Inter,system-ui,sans-serif}\n.pv[data-theme=dark]{--fg:#F5F5F5;--fg2:#A3A3A3;--bg:#0A0A0A;--muted:#171717;--line:#262626;--inv:#F5F5F5;--invfg:#0A0A0A;--sh:0 4px 12px rgba(0,0,0,.5);\n --ok:#93CFA6;--ok-i:#6FBB89;--ok-bg:#013519;--ok-bd:#1B7542;--warn:#E3B87A;--warn-i:#D19D59;--warn-bg:#3F2300;--warn-bd:#8A5300;\n --err:#FFA19C;--err-i:#FC7970;--err-bg:#580100;--err-bd:#B42318;--info:#93B9FF;--info-i:#6C9EFE;--info-bg:#051F5C;--info-bd:#1F4FB8}\n.card.m{padding:14px}\n.i{flex:none;display:block}\n.ok{--t:var(--ok);--ti:var(--ok-i);--tbg:var(--ok-bg);--tbd:var(--ok-bd)}\n.warn{--t:var(--warn);--ti:var(--warn-i);--tbg:var(--warn-bg);--tbd:var(--warn-bd)}\n.err{--t:var(--err);--ti:var(--err-i);--tbg:var(--err-bg);--tbd:var(--err-bd)}\n.info{--t:var(--info);--ti:var(--info-i);--tbg:var(--info-bg);--tbd:var(--info-bd)}\n.tz{position:absolute;z-index:5;display:flex;flex-direction:column;gap:8px;width:400px;right:24px;top:80px}\n.pv[data-D4=b] .tz:not(.m){top:auto;bottom:24px}\n.pv[data-D4=c] .tz:not(.m){right:auto;left:calc(50% + 120px);transform:translateX(-50%)}\n.tz.m{left:12px;right:12px;width:auto;top:52px}\n.pv[data-D8=b] .tz.m{top:auto;bottom:76px}\n.ts{position:relative;display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;box-shadow:var(--sh);overflow:hidden;\n background:var(--bg);color:var(--fg);border:1px solid var(--line)}\n.ts .ib{color:var(--ti);display:grid;place-items:center}\n.ts .tx{flex:1;min-width:0;padding-top:1px}\n.ts .tt{font-weight:600;font-size:14px;line-height:20px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}\n.ts .ds{color:var(--fg2);font-size:12px;line-height:18px;margin-top:2px}\n.ac{display:flex;gap:12px;margin-top:6px}\n.lk{border:0;background:none;padding:0;font:600 12px/18px Inter;position:relative;color:var(--fg2);cursor:pointer}\n.lk.pri{color:var(--fg)}\n.cl{position:relative;border:0;background:none;padding:2px;color:var(--fg2);cursor:pointer;display:grid;place-items:center;margin:-2px -2px 0 0;opacity:.8}\n.tm{position:absolute;left:0;bottom:0;height:4px;width:62%;background:var(--ti);display:none}\n.pv[data-D6=b] .tm{display:block}\n.pv[data-D1=a] .ts{background:var(--inv);color:var(--invfg);border-color:transparent}\n.pv[data-D1=a] .ts .ds,.pv[data-D1=a] .ts .lk,.pv[data-D1=a] .ts .cl{color:color-mix(in srgb,var(--invfg) 72%,transparent)}\n.pv[data-D1=a] .ts .lk.pri{color:var(--invfg);text-decoration:underline}\n.pv[data-D1=a] .ts .ib{color:color-mix(in srgb,var(--ti) 55%,var(--invfg))}\n.pv[data-D1=a] .ts.err{background:var(--err-i);color:#fff}\n.pv[data-D1=a] .ts.err .ib,.pv[data-D1=a] .ts.err .ds,.pv[data-D1=a] .ts.err .lk,.pv[data-D1=a] .ts.err .cl{color:#fff}\n.pv[data-D1=c] .ts{background:var(--tbg);border-color:var(--tbd);box-shadow:0 2px 6px rgba(16,24,40,.06)}\n.pv[data-D1=c] .ts .tt{color:var(--t)}\n.cl::after,.lk::after{content:\"\";position:absolute;left:50%;top:50%;width:24px;height:24px;min-width:100%;transform:translate(-50%,-50%)}\n.pv[data-platform=mobile] .cl::after,.pv[data-platform=mobile] .lk::after{width:44px;height:44px}\n.pv[data-platform=mobile] .ts .ac{gap:24px}\n.pv[data-platform=mobile] .al .bt{height:36px;position:relative}\n.pv[data-platform=mobile] .al .bt::after{content:\"\";position:absolute;inset:-4px 0}\n.nt{--t:var(--fg);--ti:var(--fg2);--tbg:var(--muted);--tbd:var(--line)}\n.av{width:32px;height:32px;border-radius:999px;background:#E7EFFD;color:#1F4FB8;font:600 12px/32px Inter;text-align:center;position:relative;flex:none;margin:-6px 0 -6px -2px}\n.pv[data-theme=dark] .av{background:#051F5C;color:#93B9FF}\n.av .on{position:absolute;right:-1px;bottom:-1px;width:10px;height:10px;border-radius:999px;background:#348D57;border:2px solid var(--bg)}\n.pg{display:flex;align-items:center;gap:10px;margin-top:8px}\n.pb{flex:1;height:6px;border-radius:999px;background:var(--muted);overflow:hidden}\n.pb i{display:block;height:100%;background:var(--info-i);border-radius:999px}\n.pg span{font:500 12px/18px Inter;color:var(--fg2);font-variant-numeric:tabular-nums;min-width:32px;text-align:right}\n.pg+.ds{font-size:12px;margin-top:2px}\n.al{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:10px;border:1px solid var(--tbd);background:var(--tbg)}\n.al .ib{color:var(--ti);display:grid;place-items:center}\n.al .tx{flex:1;min-width:0;padding-top:1px}\n.al .tt{font-weight:600;color:var(--t)}\n.al .ds{font-size:12px;line-height:18px;color:var(--fg);margin-top:2px}\n.al .ac{margin:0;align-self:center;flex:none}\n.bt{height:32px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:600 13px Inter;cursor:pointer}\n.al .cl{align-self:flex-start}\n.pv[data-D5=a] .al{flex-wrap:wrap}\n.pv[data-D5=a] .al .ac{order:3;flex-basis:100%;padding-left:32px;margin-top:8px}\n.pv[data-D5=a] .al .cl{order:2}\n.al.stack{flex-wrap:wrap}\n.al.stack .ac{order:3;flex-basis:100%;padding-left:32px;margin-top:8px}\n.pv[data-D3=a] .al.stack .ac{padding-left:44px}\n.pv[data-D2=b] .al{background:var(--bg);border-color:var(--line);border-left:4px solid var(--ti);padding-left:12px}\n.pv[data-D2=b] .al .tt{color:var(--fg)}\n.pv[data-D2=c] .al{background:var(--bg);border-color:var(--t)}\n.pv[data-D2=c] .al .tt{color:var(--fg)}\n.pv[data-D3=a] .ib{width:32px;height:32px;border-radius:999px;background:var(--tbg);margin:-6px 0 -6px -2px;box-shadow:0 0 0 4px color-mix(in srgb,var(--tbg) 45%,transparent)}\n.pv[data-D3=a][data-D1=a] .ts .ib{background:color-mix(in srgb,var(--invfg) 14%,transparent);box-shadow:none}\n.pv[data-D3=a] .ib .i{width:20px;height:20px}\n.bn .bt{height:28px;border-color:var(--warn-bd);background:transparent;color:var(--warn)}\n.pv[data-platform=mobile] .bn{padding:8px 16px}\n.pv[data-platform=mobile] .grid2{grid-template-columns:1fr}\n.tz.static{position:static;width:100%;transform:none}",
  "states": [
   {
    "key": "default",
@@ -634,37 +634,43 @@
    "part": "Toast",
    "prop": "width",
    "value": 400,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".tz"
   },
   {
    "part": "Toast",
    "prop": "padding-y",
    "value": 12,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".ts"
   },
   {
    "part": "Toast",
    "prop": "padding-left",
    "value": 12,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".ts"
   },
   {
    "part": "Toast",
    "prop": "padding-right",
    "value": 12,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".ts"
   },
   {
    "part": "Toast",
    "prop": "gap",
    "value": 12,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".ts"
   },
   {
    "part": "Toast",
    "prop": "radius",
    "value": 12,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".ts"
   },
   {
    "part": "Toast close",
@@ -672,7 +678,8 @@
    "value": 20,
    "platform": "Web",
    "interactive": true,
-   "hitArea": 24
+   "hitArea": 24,
+   "sel": ".pv[data-D3=a] .ib .i"
   },
   {
    "part": "Toast action",
@@ -680,31 +687,37 @@
    "value": 18,
    "platform": "Web",
    "interactive": true,
-   "hitArea": 24
+   "hitArea": 24,
+   "noOverride": true,
+   "why": "chiều cao dòng hành động lấy theo chữ, preview không đặt cao riêng"
   },
   {
    "part": "Alert",
    "prop": "padding-y",
    "value": 12,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".al"
   },
   {
    "part": "Alert",
    "prop": "padding-x",
    "value": 12,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".al"
   },
   {
    "part": "Alert",
    "prop": "gap",
    "value": 12,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".al"
   },
   {
    "part": "Alert",
    "prop": "radius",
    "value": 10,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".al"
   },
   {
    "part": "Alert button",
@@ -713,67 +726,80 @@
    "platform": "Web",
    "control": true,
    "interactive": true,
-   "hitArea": 32
+   "hitArea": 32,
+   "sel": ".bt"
   },
   {
    "part": "Alert button",
    "prop": "padding-x",
    "value": 12,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".bt"
   },
   {
    "part": "Alert button",
    "prop": "radius",
    "value": 8,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".bt"
   },
   {
    "part": "Toast stack",
    "prop": "gap",
    "value": 8,
-   "platform": "Web"
+   "platform": "Web",
+   "sel": ".tz"
   },
   {
    "part": "Toast zone",
    "prop": "margin",
    "value": 24,
-   "platform": "Web"
+   "platform": "Web",
+   "noOverride": true,
+   "why": "lề vùng toast thuộc khung màn"
   },
   {
    "part": "Toast",
    "prop": "width",
    "value": 361,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "noOverride": true,
+   "why": "bề rộng toast mobile = bề rộng màn trừ lề, preview không đặt số"
   },
   {
    "part": "Toast",
    "prop": "padding-y",
    "value": 12,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "sel": ".ts"
   },
   {
    "part": "Toast",
    "prop": "padding-left",
    "value": 12,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "sel": ".ts"
   },
   {
    "part": "Toast",
    "prop": "padding-right",
    "value": 12,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "sel": ".ts"
   },
   {
    "part": "Toast",
    "prop": "gap",
    "value": 12,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "sel": ".ts"
   },
   {
    "part": "Toast",
    "prop": "radius",
    "value": 12,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "sel": ".ts"
   },
   {
    "part": "Toast close",
@@ -781,7 +807,8 @@
    "value": 20,
    "platform": "Mobile",
    "interactive": true,
-   "hitArea": 44
+   "hitArea": 44,
+   "sel": ".pv[data-D3=a] .ib .i"
   },
   {
    "part": "Toast action",
@@ -789,31 +816,37 @@
    "value": 18,
    "platform": "Mobile",
    "interactive": true,
-   "hitArea": 44
+   "hitArea": 44,
+   "noOverride": true,
+   "why": "như trên"
   },
   {
    "part": "Alert",
    "prop": "padding-y",
    "value": 12,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "sel": ".al"
   },
   {
    "part": "Alert",
    "prop": "padding-x",
    "value": 12,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "sel": ".al"
   },
   {
    "part": "Alert",
    "prop": "gap",
    "value": 12,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "sel": ".al"
   },
   {
    "part": "Alert",
    "prop": "radius",
    "value": 10,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "sel": ".al"
   },
   {
    "part": "Alert button",
@@ -822,181 +855,220 @@
    "platform": "Mobile",
    "control": true,
    "interactive": true,
-   "hitArea": 44
+   "hitArea": 44,
+   "sel": ".pv[data-platform=mobile] .al .bt"
   },
   {
    "part": "Alert button",
    "prop": "padding-x",
    "value": 12,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "sel": ".bt"
   },
   {
    "part": "Alert button",
    "prop": "radius",
    "value": 8,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "sel": ".bt"
   },
   {
    "part": "Toast stack",
    "prop": "gap",
    "value": 8,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "sel": ".tz"
   },
   {
    "part": "Toast zone",
    "prop": "margin",
    "value": 12,
-   "platform": "Mobile"
+   "platform": "Mobile",
+   "noOverride": true,
+   "why": "lề vùng toast thuộc khung màn"
   },
   {
    "part": "Toast",
    "prop": "shadow",
-   "value": "elev/2"
+   "value": "elev/2",
+   "noOverride": true,
+   "why": "bóng ghi bằng token elev, preview dùng biến bóng nháp"
   },
   {
    "part": "Toast timer",
    "prop": "height",
-   "value": 4
+   "value": 4,
+   "sel": ".tm"
   },
   {
    "part": "Featured icon",
    "prop": "size",
-   "value": 32
+   "value": 32,
+   "sel": ".pv[data-D3=a] .ib"
   },
   {
    "part": "Featured icon",
    "prop": "icon-size",
-   "value": 20
+   "value": 20,
+   "sel": ".pv[data-D3=a] .ib .i"
   },
   {
    "part": "Featured icon ring",
    "prop": "width",
-   "value": 4
+   "value": 4,
+   "noOverride": true,
+   "why": "vòng quanh icon nổi chỉ có trên Figma"
   },
   {
    "part": "Icon",
    "prop": "icon-size",
-   "value": 20
+   "value": 20,
+   "sel": ".pv[data-D3=a] .ib .i"
   },
   {
    "part": "Close icon",
    "prop": "icon-size",
-   "value": 16
+   "value": 16,
+   "noOverride": true,
+   "why": "cỡ icon đặt bằng thuộc tính width của svg"
   },
   {
    "part": "Title",
    "prop": "font-size",
-   "value": 14
+   "value": 14,
+   "sel": ".ts .tt"
   },
   {
    "part": "Title",
    "prop": "line-height",
-   "value": 20
+   "value": 20,
+   "sel": ".ts .tt"
   },
   {
    "part": "Title",
    "prop": "font-weight",
-   "value": 600
+   "value": 600,
+   "noOverride": true,
+   "why": "độ đậm viết trong shorthand font"
   },
   {
    "part": "Description",
    "prop": "font-size",
-   "value": 12
+   "value": 12,
+   "sel": ".ts .ds"
   },
   {
    "part": "Description",
    "prop": "line-height",
-   "value": 18
+   "value": 18,
+   "sel": ".ts .ds"
   },
   {
    "part": "Action",
    "prop": "font-size",
-   "value": 12
+   "value": 12,
+   "sel": ".lk"
   },
   {
    "part": "Action",
    "prop": "font-weight",
-   "value": 600
+   "value": 600,
+   "noOverride": true,
+   "why": "độ đậm viết trong shorthand font"
   },
   {
    "part": "Avatar",
    "prop": "size",
-   "value": 32
+   "value": 32,
+   "sel": ".av"
   },
   {
    "part": "Avatar status",
    "prop": "size",
-   "value": 10
+   "value": 10,
+   "sel": ".av .on"
   },
   {
    "part": "Progress",
    "prop": "height",
-   "value": 6
+   "value": 6,
+   "sel": ".pb"
   },
   {
    "part": "Progress",
    "prop": "radius",
-   "value": 9999
+   "value": 9999,
+   "sel": ".pb"
   },
   {
    "part": "Progress",
    "prop": "gap",
-   "value": 10
+   "value": 10,
+   "sel": ".pg"
   },
   {
    "part": "Percent",
    "prop": "font-size",
-   "value": 12
+   "value": 12,
+   "sel": ".pg span"
   },
   {
    "part": "Meta",
    "prop": "font-size",
-   "value": 12
+   "value": 12,
+   "sel": ".pg+.ds"
   },
   {
    "part": "Toast",
    "prop": "background",
-   "value": "#FFFFFF"
+   "value": "#FFFFFF",
+   "sel": ".ts"
   },
   {
    "part": "Toast",
    "prop": "border-color",
    "value": "#E5E5E5",
    "role": "decorative",
-   "on": "#FFFFFF"
+   "on": "#FFFFFF",
+   "sel": ".ts"
   },
   {
    "part": "Title",
    "prop": "color",
    "value": "#171717",
    "role": "text",
-   "on": "#FFFFFF"
+   "on": "#FFFFFF",
+   "sel": ".ts"
   },
   {
    "part": "Description",
    "prop": "color",
    "value": "#737373",
    "role": "text",
-   "on": "#FFFFFF"
+   "on": "#FFFFFF",
+   "sel": ".ts .ds"
   },
   {
    "part": "Action secondary",
    "prop": "color",
    "value": "#737373",
    "role": "text",
-   "on": "#FFFFFF"
+   "on": "#FFFFFF",
+   "sel": ".lk"
   },
   {
    "part": "Close icon",
    "prop": "color",
    "value": "#737373",
    "role": "icon",
-   "on": "#FFFFFF"
+   "on": "#FFFFFF",
+   "sel": ".cl"
   },
   {
    "part": "Featured icon ok",
    "prop": "background",
-   "value": "#E8F5EC"
+   "value": "#E8F5EC",
+   "sel": ".pv[data-D3=a] .ok .ib"
   },
   {
    "part": "Icon ok",
@@ -1004,7 +1076,8 @@
    "value": "#348D57",
    "role": "icon",
    "on": "#E8F5EC",
-   "state": "ok"
+   "state": "ok",
+   "sel": ".ok .ib"
   },
   {
    "part": "Alert ok",
@@ -1012,7 +1085,8 @@
    "value": "#1B7542",
    "role": "border",
    "on": "#FFFFFF",
-   "state": "ok"
+   "state": "ok",
+   "sel": ".pv[data-D2=c] .al"
   },
   {
    "part": "Timer ok",
@@ -1020,12 +1094,14 @@
    "value": "#348D57",
    "role": "fill",
    "on": "#FFFFFF",
-   "state": "ok"
+   "state": "ok",
+   "sel": ".av .on"
   },
   {
    "part": "Featured icon warn",
    "prop": "background",
-   "value": "#FFF3DC"
+   "value": "#FFF3DC",
+   "sel": ".pv[data-D3=a] .warn .ib"
   },
   {
    "part": "Icon warn",
@@ -1033,7 +1109,8 @@
    "value": "#A56A21",
    "role": "icon",
    "on": "#FFF3DC",
-   "state": "warn"
+   "state": "warn",
+   "sel": ".warn .ib"
   },
   {
    "part": "Alert warn",
@@ -1041,7 +1118,8 @@
    "value": "#8A5300",
    "role": "border",
    "on": "#FFFFFF",
-   "state": "warn"
+   "state": "warn",
+   "sel": ".pv[data-D2=c] .al.warn"
   },
   {
    "part": "Timer warn",
@@ -1049,12 +1127,14 @@
    "value": "#A56A21",
    "role": "fill",
    "on": "#FFFFFF",
-   "state": "warn"
+   "state": "warn",
+   "sel": ".warn .pb i"
   },
   {
    "part": "Featured icon err",
    "prop": "background",
-   "value": "#FDECEC"
+   "value": "#FDECEC",
+   "sel": ".pv[data-D3=a] .err .ib"
   },
   {
    "part": "Icon err",
@@ -1062,7 +1142,8 @@
    "value": "#D23C2E",
    "role": "icon",
    "on": "#FDECEC",
-   "state": "err"
+   "state": "err",
+   "sel": ".err .ib"
   },
   {
    "part": "Alert err",
@@ -1070,7 +1151,8 @@
    "value": "#B42318",
    "role": "border",
    "on": "#FFFFFF",
-   "state": "err"
+   "state": "err",
+   "sel": ".pv[data-D2=c] .al.err"
   },
   {
    "part": "Timer err",
@@ -1078,12 +1160,14 @@
    "value": "#D23C2E",
    "role": "fill",
    "on": "#FFFFFF",
-   "state": "err"
+   "state": "err",
+   "sel": ".pv[data-D1=a] .ts.err"
   },
   {
    "part": "Featured icon info",
    "prop": "background",
-   "value": "#E7EFFD"
+   "value": "#E7EFFD",
+   "sel": ".av"
   },
   {
    "part": "Icon info",
@@ -1091,7 +1175,8 @@
    "value": "#3468D7",
    "role": "icon",
    "on": "#E7EFFD",
-   "state": "info"
+   "state": "info",
+   "sel": ".info .ib"
   },
   {
    "part": "Alert info",
@@ -1099,7 +1184,8 @@
    "value": "#1F4FB8",
    "role": "border",
    "on": "#FFFFFF",
-   "state": "info"
+   "state": "info",
+   "sel": ".pv[data-D2=c] .al.info"
   },
   {
    "part": "Timer info",
@@ -1107,59 +1193,602 @@
    "value": "#3468D7",
    "role": "fill",
    "on": "#FFFFFF",
-   "state": "info"
+   "state": "info",
+   "sel": ".pb i"
   },
   {
    "part": "Avatar",
    "prop": "background",
-   "value": "#E7EFFD"
+   "value": "#E7EFFD",
+   "sel": ".av"
   },
   {
    "part": "Avatar initials",
    "prop": "color",
    "value": "#1F4FB8",
    "role": "text",
-   "on": "#E7EFFD"
+   "on": "#E7EFFD",
+   "sel": ".av"
   },
   {
    "part": "Avatar status",
    "prop": "background",
    "value": "#348D57",
    "role": "fill",
-   "on": "#FFFFFF"
+   "on": "#FFFFFF",
+   "sel": ".av .on"
   },
   {
    "part": "Icon neutral",
    "prop": "color",
    "value": "#737373",
    "role": "icon",
-   "on": "#F5F5F5"
+   "on": "#F5F5F5",
+   "sel": ".nt .ib"
   },
   {
    "part": "Featured icon neutral",
    "prop": "background",
-   "value": "#F5F5F5"
+   "value": "#F5F5F5",
+   "sel": ".pb"
   },
   {
    "part": "Progress track",
    "prop": "background",
    "value": "#F5F5F5",
    "role": "decorative",
-   "on": "#FFFFFF"
+   "on": "#FFFFFF",
+   "sel": ".pb"
   },
   {
    "part": "Progress fill",
    "prop": "background",
    "value": "#3468D7",
    "role": "fill",
-   "on": "#F5F5F5"
+   "on": "#F5F5F5",
+   "sel": ".pb i"
   },
   {
    "part": "Percent",
    "prop": "color",
    "value": "#737373",
    "role": "text",
-   "on": "#FFFFFF"
+   "on": "#FFFFFF",
+   "sel": ".pg span"
+  },
+  {
+   "part": "Chữ gốc",
+   "sel": ".pv",
+   "platform": "Both",
+   "auto": true,
+   "prop": "color",
+   "cssProp": "color",
+   "value": "#171717"
+  },
+  {
+   "part": "Chữ gốc",
+   "sel": ".pv",
+   "platform": "Both",
+   "auto": true,
+   "prop": "font-size",
+   "value": 14,
+   "cssProp": "font"
+  },
+  {
+   "part": "Chữ gốc",
+   "sel": ".pv",
+   "platform": "Both",
+   "auto": true,
+   "prop": "line-height",
+   "value": 20,
+   "cssProp": "font"
+  },
+  {
+   "part": "Thẻ mobile",
+   "sel": ".card.m",
+   "platform": "Both",
+   "auto": true,
+   "prop": "padding",
+   "value": 14
+  },
+  {
+   "part": "Toast",
+   "sel": ".ts",
+   "platform": "Both",
+   "auto": true,
+   "prop": "shadow",
+   "value": "0 4px 12px rgba(16,24,40,.10),0 1px 3px rgba(16,24,40,.06)"
+  },
+  {
+   "part": "Toast nội dung",
+   "sel": ".ts .tx",
+   "platform": "Both",
+   "auto": true,
+   "prop": "padding-top",
+   "value": 1
+  },
+  {
+   "part": "Description",
+   "sel": ".ts .ds",
+   "platform": "Both",
+   "auto": true,
+   "prop": "margin-top",
+   "value": 2
+  },
+  {
+   "part": "Hàng hành động",
+   "sel": ".ac",
+   "platform": "Both",
+   "auto": true,
+   "prop": "gap",
+   "value": 12
+  },
+  {
+   "part": "Hàng hành động",
+   "sel": ".ac",
+   "platform": "Both",
+   "auto": true,
+   "prop": "margin-top",
+   "value": 6
+  },
+  {
+   "part": "Action",
+   "sel": ".lk",
+   "platform": "Both",
+   "auto": true,
+   "prop": "line-height",
+   "value": 18,
+   "cssProp": "font"
+  },
+  {
+   "part": "Action chính",
+   "sel": ".lk.pri",
+   "platform": "Both",
+   "auto": true,
+   "prop": "color",
+   "cssProp": "color",
+   "value": "#171717"
+  },
+  {
+   "part": "Close icon",
+   "sel": ".cl",
+   "platform": "Both",
+   "auto": true,
+   "prop": "padding",
+   "value": 2
+  },
+  {
+   "part": "Close icon",
+   "sel": ".cl",
+   "platform": "Both",
+   "auto": true,
+   "prop": "margin",
+   "value": 2
+  },
+  {
+   "part": "Close icon",
+   "sel": ".cl::after,.lk::after",
+   "platform": "Both",
+   "auto": true,
+   "prop": "width",
+   "value": 24
+  },
+  {
+   "part": "Close icon",
+   "sel": ".cl::after,.lk::after",
+   "platform": "Both",
+   "auto": true,
+   "prop": "height",
+   "value": 24
+  },
+  {
+   "part": "Close icon",
+   "sel": ".pv[data-platform=mobile] .cl::after,.pv[data-platform=mobile] .lk::after",
+   "platform": "Mobile",
+   "auto": true,
+   "prop": "width",
+   "value": 44
+  },
+  {
+   "part": "Close icon",
+   "sel": ".pv[data-platform=mobile] .cl::after,.pv[data-platform=mobile] .lk::after",
+   "platform": "Mobile",
+   "auto": true,
+   "prop": "height",
+   "value": 44
+  },
+  {
+   "part": "Hàng hành động",
+   "sel": ".pv[data-platform=mobile] .ts .ac",
+   "platform": "Mobile",
+   "auto": true,
+   "prop": "gap",
+   "value": 24
+  },
+  {
+   "part": "Avatar",
+   "sel": ".av",
+   "platform": "Both",
+   "auto": true,
+   "prop": "border-radius",
+   "value": 999
+  },
+  {
+   "part": "Avatar",
+   "sel": ".av",
+   "platform": "Both",
+   "auto": true,
+   "prop": "font-size",
+   "value": 12,
+   "cssProp": "font"
+  },
+  {
+   "part": "Avatar",
+   "sel": ".av",
+   "platform": "Both",
+   "auto": true,
+   "prop": "line-height",
+   "value": 32,
+   "cssProp": "font"
+  },
+  {
+   "part": "Avatar",
+   "sel": ".av",
+   "platform": "Both",
+   "auto": true,
+   "prop": "margin",
+   "value": 6
+  },
+  {
+   "part": "Avatar",
+   "sel": ".av",
+   "platform": "Both",
+   "auto": true,
+   "prop": "margin",
+   "value": 2
+  },
+  {
+   "part": "Avatar",
+   "sel": ".pv[data-theme=dark] .av",
+   "platform": "Both",
+   "auto": true,
+   "theme": "Dark",
+   "prop": "background",
+   "cssProp": "background",
+   "value": "#051F5C"
+  },
+  {
+   "part": "Avatar",
+   "sel": ".pv[data-theme=dark] .av",
+   "platform": "Both",
+   "auto": true,
+   "theme": "Dark",
+   "prop": "color",
+   "cssProp": "color",
+   "value": "#93B9FF"
+  },
+  {
+   "part": "Avatar status",
+   "sel": ".av .on",
+   "platform": "Both",
+   "auto": true,
+   "prop": "border-radius",
+   "value": 999
+  },
+  {
+   "part": "Avatar status",
+   "sel": ".av .on",
+   "platform": "Both",
+   "auto": true,
+   "prop": "border",
+   "value": 2
+  },
+  {
+   "part": "Progress",
+   "sel": ".pg",
+   "platform": "Both",
+   "auto": true,
+   "prop": "margin-top",
+   "value": 8
+  },
+  {
+   "part": "Progress",
+   "sel": ".pb",
+   "platform": "Both",
+   "auto": true,
+   "prop": "border-radius",
+   "value": 999
+  },
+  {
+   "part": "Timer info",
+   "sel": ".pb i",
+   "platform": "Both",
+   "auto": true,
+   "prop": "border-radius",
+   "value": 999
+  },
+  {
+   "part": "Percent",
+   "sel": ".pg span",
+   "platform": "Both",
+   "auto": true,
+   "prop": "line-height",
+   "value": 18,
+   "cssProp": "font"
+  },
+  {
+   "part": "Percent",
+   "sel": ".pg span",
+   "platform": "Both",
+   "auto": true,
+   "prop": "min-width",
+   "value": 32
+  },
+  {
+   "part": "Meta",
+   "sel": ".pg+.ds",
+   "platform": "Both",
+   "auto": true,
+   "prop": "margin-top",
+   "value": 2
+  },
+  {
+   "part": "Alert nội dung",
+   "sel": ".al .tx",
+   "platform": "Both",
+   "auto": true,
+   "prop": "padding-top",
+   "value": 1
+  },
+  {
+   "part": "Description",
+   "sel": ".al .ds",
+   "platform": "Both",
+   "auto": true,
+   "prop": "line-height",
+   "value": 18
+  },
+  {
+   "part": "Description",
+   "sel": ".al .ds",
+   "platform": "Both",
+   "auto": true,
+   "prop": "color",
+   "cssProp": "color",
+   "value": "#171717"
+  },
+  {
+   "part": "Description",
+   "sel": ".al .ds",
+   "platform": "Both",
+   "auto": true,
+   "prop": "margin-top",
+   "value": 2
+  },
+  {
+   "part": "Alert button",
+   "sel": ".bt",
+   "platform": "Both",
+   "auto": true,
+   "prop": "border-color",
+   "cssProp": "border",
+   "value": "#E5E5E5"
+  },
+  {
+   "part": "Alert button",
+   "sel": ".bt",
+   "platform": "Both",
+   "auto": true,
+   "prop": "background",
+   "cssProp": "background",
+   "value": "#FFFFFF"
+  },
+  {
+   "part": "Alert button",
+   "sel": ".bt",
+   "platform": "Both",
+   "auto": true,
+   "prop": "color",
+   "cssProp": "color",
+   "value": "#171717"
+  },
+  {
+   "part": "Alert button",
+   "sel": ".bt",
+   "platform": "Both",
+   "auto": true,
+   "prop": "font-size",
+   "value": 13,
+   "cssProp": "font"
+  },
+  {
+   "part": "Hàng hành động",
+   "sel": ".al.stack .ac",
+   "platform": "Both",
+   "auto": true,
+   "prop": "margin-top",
+   "value": 8
+  },
+  {
+   "part": "Hàng hành động",
+   "sel": ".pv[data-D3=a] .al.stack .ac",
+   "platform": "Both",
+   "auto": true,
+   "prop": "padding-left",
+   "value": 44
+  },
+  {
+   "part": "Alert",
+   "sel": ".pv[data-D2=c] .al",
+   "platform": "Both",
+   "auto": true,
+   "prop": "background",
+   "cssProp": "background",
+   "value": "#FFFFFF"
+  },
+  {
+   "part": "Title",
+   "sel": ".pv[data-D2=c] .al .tt",
+   "platform": "Both",
+   "auto": true,
+   "prop": "color",
+   "cssProp": "color",
+   "value": "#171717"
+  },
+  {
+   "part": "Featured icon",
+   "sel": ".pv[data-D3=a] .ib",
+   "platform": "Both",
+   "auto": true,
+   "prop": "border-radius",
+   "value": 999
+  },
+  {
+   "part": "Featured icon",
+   "sel": ".pv[data-D3=a] .ib",
+   "platform": "Both",
+   "auto": true,
+   "prop": "margin",
+   "value": 6
+  },
+  {
+   "part": "Featured icon",
+   "sel": ".pv[data-D3=a] .ib",
+   "platform": "Both",
+   "auto": true,
+   "prop": "margin",
+   "value": 2
+  },
+  {
+   "part": "Featured icon",
+   "sel": ".pv[data-D3=a] .ib",
+   "platform": "Both",
+   "auto": true,
+   "prop": "shadow",
+   "value": "0 0 0 4px color-mix(in srgb,var(--tbg) 45%,transparent)"
+  },
+  {
+   "part": "Alert button",
+   "sel": ".bn .bt",
+   "platform": "Both",
+   "auto": true,
+   "prop": "height",
+   "value": 28
+  },
+  {
+   "part": "Alert button",
+   "sel": ".bn .bt",
+   "platform": "Both",
+   "auto": true,
+   "prop": "border-color",
+   "cssProp": "border-color",
+   "value": "#E3B87A"
+  },
+  {
+   "part": "Alert button",
+   "sel": ".bn .bt",
+   "platform": "Both",
+   "auto": true,
+   "prop": "color",
+   "cssProp": "color",
+   "value": "#8A5300"
+  },
+  {
+   "part": "Banner toàn trang",
+   "sel": ".pv[data-platform=mobile] .bn",
+   "platform": "Mobile",
+   "auto": true,
+   "prop": "padding",
+   "value": 8
+  },
+  {
+   "part": "Banner toàn trang",
+   "sel": ".pv[data-platform=mobile] .bn",
+   "platform": "Mobile",
+   "auto": true,
+   "prop": "padding",
+   "value": 16
+  },
+  {
+   "part": "Featured icon",
+   "sel": ".ts .ib",
+   "platform": "Both",
+   "auto": true,
+   "prop": "color",
+   "cssProp": "color",
+   "value": "#348D57"
+  },
+  {
+   "part": "Toast timer",
+   "sel": ".tm",
+   "platform": "Both",
+   "auto": true,
+   "prop": "background",
+   "cssProp": "background",
+   "value": "#348D57"
+  },
+  {
+   "part": "Avatar",
+   "sel": ".av",
+   "platform": "Both",
+   "auto": true,
+   "prop": "radius",
+   "value": 9999,
+   "cssProp": "border-radius"
+  },
+  {
+   "part": "Avatar status",
+   "sel": ".av .on",
+   "platform": "Both",
+   "auto": true,
+   "prop": "radius",
+   "value": 9999,
+   "cssProp": "border-radius"
+  },
+  {
+   "part": "Timer info",
+   "sel": ".pb i",
+   "platform": "Both",
+   "auto": true,
+   "prop": "radius",
+   "value": 9999,
+   "cssProp": "border-radius"
+  },
+  {
+   "part": "Alert",
+   "sel": ".al",
+   "platform": "Both",
+   "auto": true,
+   "prop": "border-color",
+   "cssProp": "border",
+   "value": "#93CFA6"
+  },
+  {
+   "part": "Featured icon",
+   "sel": ".al .ib",
+   "platform": "Both",
+   "auto": true,
+   "prop": "color",
+   "cssProp": "color",
+   "value": "#348D57"
+  },
+  {
+   "part": "Featured icon",
+   "sel": ".pv[data-D3=a] .ib",
+   "platform": "Both",
+   "auto": true,
+   "prop": "radius",
+   "value": 9999,
+   "cssProp": "border-radius"
+  },
+  {
+   "part": "Featured icon",
+   "sel": ".pv[data-D3=a] .ib",
+   "platform": "Both",
+   "auto": true,
+   "prop": "background",
+   "cssProp": "background",
+   "value": "#E8F5EC"
   }
  ],
  "figma": {
@@ -1248,5 +1877,6 @@
    "text": "<b>CMP-01 và GR-15 Loại 3 còn luật cũ</b> — «góc trên phải», «toast lỗi tự ẩn 3 giây» — mâu thuẫn DEC-286.",
    "fix": "Sửa CMP-01 (đã trình bảng Trước → Sau trong chat) và GR-15 Loại 3 cùng lượt: dưới phải / trên thanh tab, lỗi và tiến trình không tự ẩn."
   }
- ]
+ ],
+ "cssScreen": ".mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px}\n.pad{padding:16px 24px 24px;display:flex;flex-direction:column;gap:16px}\n.mpad{padding:12px 16px;display:flex;flex-direction:column;gap:12px}\n.tb{border:1px solid var(--line);border-radius:12px;overflow:hidden}\ntable{width:100%;border-collapse:collapse}\ntd,th{padding:11px 16px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}\ntr:last-child td{border-bottom:0}\nth{color:var(--fg2);font-weight:500;background:var(--muted)}\n.chip{display:inline-block;font:500 12px/18px Inter;padding:2px 8px;border-radius:999px;background:var(--muted);color:var(--fg)}\n.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}\n.span2{grid-column:span 2}\n.card{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px}\n.card .h{font:600 15px/22px Inter}\ndl{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0;font-size:13px}\ndt{color:var(--fg2)}\ndd{margin:0}\n.mrow{padding:12px 16px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:2px 8px}\n.mrow .b{font-weight:600}\n.mrow .sub{color:var(--fg2);font-size:13px;grid-column:1}\n.mrow .chip{grid-row:1/span 2;grid-column:2;align-self:center}\n.cta{height:52px;border:0;border-radius:999px;background:var(--inv);color:var(--invfg);font:600 16px Inter;margin-top:8px}\n.bn{display:flex;align-items:center;gap:10px;padding:8px 24px;background:var(--warn-bg);color:var(--warn);border-bottom:1px solid var(--warn-bd);font-size:13px}\n.bn span{flex:1}\n.bn b{font-weight:600}"
 }

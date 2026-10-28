@@ -17,6 +17,25 @@ links:
 > json bằng `python3 _scripts/ds-v2-tokens.py`. Bảng trong file này lệch json thì **json thắng**.
 > Trên Figma: trang `🎨 DS · Foundations` (collection 0–8 theo mục 2; text style `type/*`; effect style `elev/*`).
 
+## 0. Trạng thái từng mục
+
+Component chỉ coi một mục là chuẩn khi mục đó `approved`; mục chưa duyệt vẫn dùng được nhưng trang review ghi "chưa duyệt".
+Đổi bằng `python3 _scripts/ds-foundation-status.py set <mã> <trạng thái>` (dashboard và trang duyệt foundations gọi lệnh này).
+
+<!-- foundation-status -->
+| Mã | Mục | Ở đâu | Trạng thái | Ngày | Ghi chú |
+|---|---|---|---|---|---|
+| color | Màu | mục 3 | draft | 2026-10-28 |  |
+| type | Chữ | mục 4 | draft | 2026-10-28 |  |
+| radius | Bo góc | mục 5 | draft | 2026-10-28 |  |
+| space | Khoảng cách | mục 6 | draft | 2026-10-28 |  |
+| grid | Lưới, độ rộng, breakpoint | mục 7 | draft | 2026-10-28 |  |
+| elevation | Lớp nổi, làm mờ nền | mục 8 | draft | 2026-10-28 |  |
+| touch-focus | Vùng chạm và focus | mục 9 | draft | 2026-10-28 |  |
+| motion | Chuyển động | mục 10 | draft | 2026-10-28 |  |
+| icon | Icon | mục 11 · `design/v2/icons.md` | draft | 2026-10-28 |  |
+<!-- /foundation-status -->
+
 ## 1. Nguồn tham chiếu (DEC-128, DEC-129)
 
 | Nền tảng | Nguồn chính | Dùng để |

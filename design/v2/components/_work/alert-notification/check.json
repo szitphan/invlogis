@@ -1,10 +1,65 @@
 {
- "tokens_version": "0.15.0",
+ "tokens_version": "0.16.0",
  "counts": {
-  "ok": 83,
-  "near": 2,
-  "new": 0,
-  "conflict": 0
+  "ok": 95,
+  "near": 28,
+  "new": 25,
+  "conflict": 3,
+  "undeclared": 0
+ },
+ "no_sel": 0,
+ "open": 44,
+ "ignored": [],
+ "groups": {
+  "typo": {
+   "label": "Chữ",
+   "total": 18,
+   "ok": 9,
+   "open": 9,
+   "audit": 1
+  },
+  "color": {
+   "label": "Màu",
+   "total": 47,
+   "ok": 38,
+   "open": 9,
+   "audit": 0
+  },
+  "icon": {
+   "label": "Icon",
+   "total": 11,
+   "ok": 5,
+   "open": 6,
+   "audit": 2
+  },
+  "effect": {
+   "label": "Hiệu ứng",
+   "total": 3,
+   "ok": 1,
+   "open": 2,
+   "audit": 0
+  },
+  "spacing": {
+   "label": "Khoảng cách & cỡ",
+   "total": 53,
+   "ok": 32,
+   "open": 11,
+   "audit": 0
+  },
+  "radius": {
+   "label": "Bo góc",
+   "total": 16,
+   "ok": 9,
+   "open": 5,
+   "audit": 0
+  },
+  "grid": {
+   "label": "Lưới & độ rộng",
+   "total": 3,
+   "ok": 1,
+   "open": 2,
+   "audit": 0
+  }
  },
  "rows": [
   {
@@ -14,15 +69,35 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 400,
+   "sel": ".tz",
+   "cssProps": [
+    "width"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "width/sm"
    ],
+   "bind": {
+    "token": "width/sm",
+    "css": "var(--width-sm)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "grid",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "width/sm",
+    "css": "var(--width-sm)"
+   }
   },
   {
    "id": "toast.padding-y.web",
@@ -31,7 +106,15 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "padding-top",
+    "padding-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -39,10 +122,23 @@
     "control/padding-x/md",
     "control/padding-x-icon/lg"
    ],
+   "bind": {
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   }
   },
   {
    "id": "toast.padding-left.web",
@@ -51,7 +147,14 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "padding-left"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -59,10 +162,23 @@
     "control/padding-x/md",
     "control/padding-x-icon/lg"
    ],
+   "bind": {
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": true
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   }
   },
   {
    "id": "toast.padding-right.web",
@@ -71,7 +187,14 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -79,10 +202,23 @@
     "control/padding-x/md",
     "control/padding-x-icon/lg"
    ],
+   "bind": {
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   }
   },
   {
    "id": "toast.gap.web",
@@ -91,7 +227,14 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -99,10 +242,23 @@
     "control/padding-x/md",
     "control/padding-x-icon/lg"
    ],
+   "bind": {
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   }
   },
   {
    "id": "toast.radius.web",
@@ -111,16 +267,35 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "radius/card",
-    "radius/xl"
+    "radius/card"
    ],
+   "bind": {
+    "token": "radius/card",
+    "css": "var(--radius-card)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/card",
+    "css": "var(--radius-card)"
+   }
   },
   {
    "id": "toast-close.size.web",
@@ -129,18 +304,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 20,
+   "sel": ".pv[data-D3=a] .ib .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "avatar/edit-size/md",
-    "avatar/icon-size/md",
-    "avatar/spinner-size/lg",
     "icon/size/lg"
    ],
+   "bind": {
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": true
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   }
   },
   {
    "id": "toast-action.height.web",
@@ -149,13 +342,33 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 18,
-   "cat": "near",
+   "sel": null,
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": true,
+   "cat": "new",
    "tokens": [],
-   "suggest": "20 (avatar/edit-size/md)",
+   "bind": null,
+   "to": {
+    "token": "touch/min",
+    "value": 24,
+    "css": "var(--touch-min)"
+   },
+   "visible": true,
+   "suggest": "touch/min (24)",
    "rules": [],
-   "note": "lệch -2",
-   "decided": true
+   "note": "thang chung gần nhất touch/min = 24",
+   "group": "spacing",
+   "decided": true,
+   "must": true,
+   "resolved": {
+    "kind": "new-token",
+    "value": 18
+   }
   },
   {
    "id": "alert.padding-y.web",
@@ -164,7 +377,15 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".al",
+   "cssProps": [
+    "padding-top",
+    "padding-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -172,10 +393,23 @@
     "control/padding-x/md",
     "control/padding-x-icon/lg"
    ],
+   "bind": {
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   }
   },
   {
    "id": "alert.padding-x.web",
@@ -184,7 +418,15 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".al",
+   "cssProps": [
+    "padding-left",
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -192,10 +434,23 @@
     "control/padding-x/md",
     "control/padding-x-icon/lg"
    ],
+   "bind": {
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": true
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   }
   },
   {
    "id": "alert.gap.web",
@@ -204,7 +459,14 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".al",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -212,10 +474,23 @@
     "control/padding-x/md",
     "control/padding-x-icon/lg"
    ],
+   "bind": {
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   }
   },
   {
    "id": "alert.radius.web",
@@ -224,16 +499,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 10,
-   "cat": "ok",
-   "tokens": [
-    "vehicle/thumb-radius-md",
-    "radius/lg"
+   "sel": ".al",
+   "cssProps": [
+    "border-radius"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "radius/tab",
+    "value": 8,
+    "css": "var(--radius-tab)"
+   },
+   "visible": false,
+   "suggest": "radius/tab (8)",
    "rules": [],
-   "note": "",
-   "decided": false
+   "note": "trùng số với vehicle/thumb-radius-md nhưng đó là token của component khác; thang chung gần nhất radius/tab = 8",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/tab",
+    "value": 8,
+    "css": "var(--radius-tab)",
+    "auto": true
+   }
   },
   {
    "id": "alert-button.height.web",
@@ -242,18 +537,35 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 32,
+   "sel": ".bt",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "control/height/md",
-    "avatar/edit-size/xxl",
-    "vehicle/thumb-xs",
-    "space/32"
+    "control/height/md"
    ],
+   "bind": {
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   }
   },
   {
    "id": "alert-button.padding-x.web",
@@ -262,7 +574,15 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".bt",
+   "cssProps": [
+    "padding-left",
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -270,10 +590,23 @@
     "control/padding-x/md",
     "control/padding-x-icon/lg"
    ],
+   "bind": {
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   }
   },
   {
    "id": "alert-button.radius.web",
@@ -282,7 +615,14 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 8,
+   "sel": ".bt",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "radius/control",
@@ -290,10 +630,23 @@
     "radius/inner",
     "radius/menu"
    ],
+   "bind": {
+    "token": "radius/tab",
+    "css": "var(--radius-tab)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/tab",
+    "css": "var(--radius-tab)"
+   }
   },
   {
    "id": "toast-stack.gap.web",
@@ -302,7 +655,14 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 8,
+   "sel": ".tz",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-sm",
@@ -310,10 +670,23 @@
     "layout/list-gap",
     "control/padding-x/sm"
    ],
+   "bind": {
+    "token": "space/gap-sm",
+    "css": "var(--space-gap-sm)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-sm",
+    "css": "var(--space-gap-sm)"
+   }
   },
   {
    "id": "toast-zone.margin.web",
@@ -322,18 +695,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 24,
+   "sel": null,
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": true,
    "cat": "ok",
    "tokens": [
     "space/inset-xl",
-    "space/gap-xl",
-    "card/padding-spacious",
-    "table/cell-padding-x"
+    "space/gap-xl"
    ],
+   "bind": {
+    "token": "space/gap-xl",
+    "css": "var(--space-gap-xl)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-xl",
+    "css": "var(--space-gap-xl)"
+   }
   },
   {
    "id": "toast.width.mobile",
@@ -342,16 +733,32 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 361,
-   "cat": "ok",
-   "tokens": [
-    "field/width-default",
-    "progress/width-default"
+   "sel": null,
+   "cssProps": [
+    "width"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": true,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "layout/content-max-width",
+    "value": 393,
+    "css": "var(--layout-content-max-width)"
+   },
+   "visible": true,
+   "suggest": "layout/content-max-width (393)",
    "rules": [],
-   "note": "",
-   "decided": false
+   "note": "trùng số với field/width-default, progress/width-default nhưng đó là token của component khác; thang chung gần nhất layout/content-max-width = 393",
+   "group": "grid",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
   },
   {
    "id": "toast.padding-y.mobile",
@@ -360,7 +767,15 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "padding-top",
+    "padding-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -368,10 +783,23 @@
     "layout/list-gap",
     "form/field-gap"
    ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
   },
   {
    "id": "toast.padding-left.mobile",
@@ -380,7 +808,14 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "padding-left"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -388,10 +823,23 @@
     "layout/list-gap",
     "form/field-gap"
    ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": true
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
   },
   {
    "id": "toast.padding-right.mobile",
@@ -400,7 +848,14 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -408,10 +863,23 @@
     "layout/list-gap",
     "form/field-gap"
    ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
   },
   {
    "id": "toast.gap.mobile",
@@ -420,7 +888,14 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -428,10 +903,23 @@
     "layout/list-gap",
     "form/field-gap"
    ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
   },
   {
    "id": "toast.radius.mobile",
@@ -440,17 +928,36 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "radius/field",
-    "radius/inner",
-    "radius/xl"
+    "radius/inner"
    ],
+   "bind": {
+    "token": "radius/field",
+    "css": "var(--radius-field)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/field",
+    "css": "var(--radius-field)"
+   }
   },
   {
    "id": "toast-close.size.mobile",
@@ -459,18 +966,36 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 20,
+   "sel": ".pv[data-D3=a] .ib .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "avatar/edit-size/md",
-    "avatar/icon-size/md",
-    "avatar/spinner-size/lg",
     "icon/size/md"
    ],
+   "bind": {
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": true
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   }
   },
   {
    "id": "toast-action.height.mobile",
@@ -479,13 +1004,33 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 18,
-   "cat": "near",
+   "sel": null,
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": true,
+   "cat": "new",
    "tokens": [],
-   "suggest": "20 (avatar/edit-size/md)",
+   "bind": null,
+   "to": {
+    "token": "control/height/sm",
+    "value": 36,
+    "css": "var(--control-height-sm)"
+   },
+   "visible": true,
+   "suggest": "control/height/sm (36)",
    "rules": [],
-   "note": "lệch -2",
-   "decided": true
+   "note": "thang chung gần nhất control/height/sm = 36",
+   "group": "spacing",
+   "decided": true,
+   "must": true,
+   "resolved": {
+    "kind": "new-token",
+    "value": 18
+   }
   },
   {
    "id": "alert.padding-y.mobile",
@@ -494,7 +1039,15 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".al",
+   "cssProps": [
+    "padding-top",
+    "padding-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -502,10 +1055,23 @@
     "layout/list-gap",
     "form/field-gap"
    ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
   },
   {
    "id": "alert.padding-x.mobile",
@@ -514,7 +1080,15 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".al",
+   "cssProps": [
+    "padding-left",
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -522,10 +1096,23 @@
     "layout/list-gap",
     "form/field-gap"
    ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": true
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
   },
   {
    "id": "alert.gap.mobile",
@@ -534,7 +1121,14 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".al",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -542,10 +1136,23 @@
     "layout/list-gap",
     "form/field-gap"
    ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
   },
   {
    "id": "alert.radius.mobile",
@@ -554,16 +1161,36 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 10,
-   "cat": "ok",
-   "tokens": [
-    "vehicle/thumb-radius-md",
-    "radius/lg"
+   "sel": ".al",
+   "cssProps": [
+    "border-radius"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "radius/field",
+    "value": 12,
+    "css": "var(--radius-field)"
+   },
+   "visible": false,
+   "suggest": "radius/field (12)",
    "rules": [],
-   "note": "",
-   "decided": false
+   "note": "trùng số với vehicle/thumb-radius-md nhưng đó là token của component khác; thang chung gần nhất radius/field = 12",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/field",
+    "value": 12,
+    "css": "var(--radius-field)",
+    "auto": true
+   }
   },
   {
    "id": "alert-button.height.mobile",
@@ -572,17 +1199,35 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 36,
+   "sel": ".pv[data-platform=mobile] .al .bt",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "control/height/sm",
-    "avatar/size/md",
-    "card/lead-size"
+    "control/height/sm"
    ],
+   "bind": {
+    "token": "control/height/sm",
+    "css": "var(--control-height-sm)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": true
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/sm",
+    "css": "var(--control-height-sm)"
+   }
   },
   {
    "id": "alert-button.padding-x.mobile",
@@ -591,7 +1236,15 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".bt",
+   "cssProps": [
+    "padding-left",
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -599,10 +1252,23 @@
     "layout/list-gap",
     "form/field-gap"
    ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
   },
   {
    "id": "alert-button.radius.mobile",
@@ -611,18 +1277,35 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 8,
+   "sel": ".bt",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu",
-    "tooltip/radius",
-    "list-row/radius",
-    "vehicle/thumb-radius-sm"
+    "radius/menu"
    ],
+   "bind": {
+    "token": "radius/menu",
+    "css": "var(--radius-menu)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/menu",
+    "css": "var(--radius-menu)"
+   }
   },
   {
    "id": "toast-stack.gap.mobile",
@@ -631,7 +1314,14 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 8,
+   "sel": ".tz",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "space/inset-sm",
@@ -639,10 +1329,23 @@
     "control/padding-x-icon/sm",
     "control/icon-gap"
    ],
+   "bind": {
+    "token": "space/gap-sm",
+    "css": "var(--space-gap-sm)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-sm",
+    "css": "var(--space-gap-sm)"
+   }
   },
   {
    "id": "toast-zone.margin.mobile",
@@ -651,7 +1354,14 @@
    "platform": "Mobile",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": null,
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": true,
    "cat": "ok",
    "tokens": [
     "space/inset-md",
@@ -659,10 +1369,23 @@
     "layout/list-gap",
     "form/field-gap"
    ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
   },
   {
    "id": "toast.shadow.web",
@@ -671,15 +1394,35 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "elev/2",
+   "sel": null,
+   "cssProps": [
+    "box-shadow"
+   ],
+   "tpl": null,
+   "noOverride": true,
    "cat": "ok",
    "tokens": [
     "elev/2"
    ],
+   "bind": {
+    "token": "elev/2",
+    "css": "0px 4px 12px 0px var(--color-shadow-md), 0px 1px 3px 0px var(--color-shadow-md-soft)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "effect",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "elev/2",
+    "css": "0px 4px 12px 0px var(--color-shadow-md), 0px 1px 3px 0px var(--color-shadow-md-soft)"
+   }
   },
   {
    "id": "toast-timer.height.web",
@@ -688,17 +1431,33 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 4,
-   "cat": "ok",
-   "tokens": [
-    "tooltip/arrow-h",
-    "progress/height/sm",
-    "space/4"
+   "sel": ".tm",
+   "cssProps": [
+    "height"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "touch/min",
+    "value": 24,
+    "css": "var(--touch-min)"
+   },
+   "visible": true,
+   "suggest": "touch/min (24)",
    "rules": [],
-   "note": "",
-   "decided": true
+   "note": "trùng số với tooltip/arrow-h, progress/height/sm nhưng đó là token của component khác; thang chung gần nhất touch/min = 24",
+   "group": "spacing",
+   "decided": true,
+   "must": true,
+   "resolved": {
+    "kind": "new-token",
+    "value": 4
+   }
   },
   {
    "id": "featured-icon.size.web",
@@ -707,18 +1466,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 32,
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "control/height/md",
-    "avatar/edit-size/xxl",
-    "vehicle/thumb-xs",
-    "space/32"
+    "control/height/md"
    ],
+   "bind": {
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   }
   },
   {
    "id": "featured-icon.icon-size.web",
@@ -727,18 +1504,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 20,
+   "sel": ".pv[data-D3=a] .ib .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "avatar/edit-size/md",
-    "avatar/icon-size/md",
-    "avatar/spinner-size/lg",
     "icon/size/lg"
    ],
+   "bind": {
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": true
+   "group": "icon",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   }
   },
   {
    "id": "featured-icon-ring.width.web",
@@ -747,17 +1542,32 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 4,
-   "cat": "ok",
-   "tokens": [
-    "tooltip/arrow-h",
-    "progress/height/sm",
-    "space/4"
+   "sel": null,
+   "cssProps": [
+    "width"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": true,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xs",
+    "value": 320,
+    "css": "var(--width-xs)"
+   },
+   "visible": true,
+   "suggest": "width/xs (320)",
    "rules": [],
-   "note": "",
-   "decided": false
+   "note": "trùng số với tooltip/arrow-h, progress/height/sm nhưng đó là token của component khác; thang chung gần nhất width/xs = 320",
+   "group": "icon",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
   },
   {
    "id": "icon.icon-size.web",
@@ -766,18 +1576,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 20,
+   "sel": ".pv[data-D3=a] .ib .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "avatar/edit-size/md",
-    "avatar/icon-size/md",
-    "avatar/spinner-size/lg",
     "icon/size/lg"
    ],
+   "bind": {
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   }
   },
   {
    "id": "close-icon.icon-size.web",
@@ -786,18 +1614,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 16,
+   "sel": null,
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": true,
    "cat": "ok",
    "tokens": [
-    "avatar/status-size/xxl",
-    "avatar/edit-icon-size/xl",
-    "avatar/edit-icon-size/xxl",
-    "avatar/spinner-size/md"
+    "icon/size/md"
    ],
+   "bind": {
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   }
   },
   {
    "id": "title.font-size.web",
@@ -806,17 +1652,37 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 14,
+   "sel": ".ts .tt",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "type/heading/size",
     "type/body/size",
     "type/label/size"
    ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
+   }
   },
   {
    "id": "title.line-height.web",
@@ -825,17 +1691,37 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 20,
+   "sel": ".ts .tt",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "type/heading/line-height",
     "type/body/line-height",
     "type/label/line-height"
    ],
+   "bind": {
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
+   }
   },
   {
    "id": "title.font-weight.web",
@@ -844,15 +1730,35 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 600,
+   "sel": null,
+   "cssProps": [
+    "font-weight"
+   ],
+   "tpl": null,
+   "noOverride": true,
    "cat": "ok",
    "tokens": [
     "Semi Bold"
    ],
+   "bind": {
+    "token": "Semi Bold",
+    "css": "600"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "Semi Bold",
+    "css": "600"
+   }
   },
   {
    "id": "description.font-size.web",
@@ -861,17 +1767,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".ts .ds",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "chip/font-size-sm",
     "type/caption/size",
     "type/code/size"
    ],
+   "bind": {
+    "token": "type/code/size",
+    "css": "var(--type-code-size)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": true
+   "group": "typo",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/code/size",
+    "css": "var(--type-code-size)"
+   }
   },
   {
    "id": "description.line-height.web",
@@ -880,15 +1805,32 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 18,
-   "cat": "ok",
-   "tokens": [
-    "chip/line-height-sm"
+   "sel": ".ts .ds",
+   "cssProps": [
+    "line-height"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/body/line-height",
+    "value": 20,
+    "css": "var(--type-body-line-height)"
+   },
+   "visible": true,
+   "suggest": "type/body/line-height (20)",
    "rules": [],
-   "note": "",
-   "decided": false
+   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/body/line-height = 20",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
   },
   {
    "id": "action.font-size.web",
@@ -897,17 +1839,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".lk",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "chip/font-size-sm",
     "type/caption/size",
     "type/code/size"
    ],
+   "bind": {
+    "token": "type/code/size",
+    "css": "var(--type-code-size)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": true
+   "group": "typo",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/code/size",
+    "css": "var(--type-code-size)"
+   }
   },
   {
    "id": "action.font-weight.web",
@@ -916,15 +1877,35 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 600,
+   "sel": null,
+   "cssProps": [
+    "font-weight"
+   ],
+   "tpl": null,
+   "noOverride": true,
    "cat": "ok",
    "tokens": [
     "Semi Bold"
    ],
+   "bind": {
+    "token": "Semi Bold",
+    "css": "600"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "Semi Bold",
+    "css": "600"
+   }
   },
   {
    "id": "avatar.size.web",
@@ -933,18 +1914,37 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 32,
+   "sel": ".av",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "control/height/md",
-    "avatar/edit-size/xxl",
-    "vehicle/thumb-xs",
-    "space/32"
+    "avatar/edit-size/xxl"
    ],
+   "bind": {
+    "token": "avatar/edit-size/xxl",
+    "css": "var(--avatar-edit-size-xxl)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "avatar/edit-size/xxl",
+    "css": "var(--avatar-edit-size-xxl)"
+   }
   },
   {
    "id": "avatar-status.size.web",
@@ -953,15 +1953,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 10,
+   "sel": ".av .on",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "avatar/status-size/md"
    ],
+   "bind": {
+    "token": "avatar/status-size/md",
+    "css": "var(--avatar-status-size-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "avatar/status-size/md",
+    "css": "var(--avatar-status-size-md)"
+   }
   },
   {
    "id": "progress.height.web",
@@ -970,17 +1991,35 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 6,
+   "sel": ".pb",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "avatar/status-size/sm",
-    "progress/height/md",
-    "space/6"
+    "progress/height/md"
    ],
+   "bind": {
+    "token": "progress/height/md",
+    "css": "var(--progress-height-md)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "progress/height/md",
+    "css": "var(--progress-height-md)"
+   }
   },
   {
    "id": "progress.radius.web",
@@ -989,15 +2028,35 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 9999,
+   "sel": ".pb",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "radius/chip"
    ],
+   "bind": {
+    "token": "radius/chip",
+    "css": "var(--radius-chip)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/chip",
+    "css": "var(--radius-chip)"
+   }
   },
   {
    "id": "progress.gap.web",
@@ -1006,15 +2065,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 10,
-   "cat": "ok",
-   "tokens": [
-    "chip/padding-x"
+   "sel": ".pg",
+   "cssProps": [
+    "gap"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-sm",
+    "value": 8,
+    "css": "var(--space-gap-sm)"
+   },
+   "visible": false,
+   "suggest": "space/gap-sm (8)",
    "rules": [],
-   "note": "",
-   "decided": false
+   "note": "trùng số với chip/padding-x nhưng đó là token của component khác; thang chung gần nhất space/gap-sm = 8",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-sm",
+    "value": 8,
+    "css": "var(--space-gap-sm)",
+    "auto": true
+   }
   },
   {
    "id": "percent.font-size.web",
@@ -1023,17 +2103,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".pg span",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "chip/font-size-sm",
     "type/caption/size",
     "type/code/size"
    ],
+   "bind": {
+    "token": "type/code/size",
+    "css": "var(--type-code-size)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/code/size",
+    "css": "var(--type-code-size)"
+   }
   },
   {
    "id": "meta.font-size.web",
@@ -1042,17 +2141,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": 12,
+   "sel": ".pg+.ds",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "chip/font-size-sm",
     "type/caption/size",
     "type/code/size"
    ],
+   "bind": {
+    "token": "type/code/size",
+    "css": "var(--type-code-size)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/code/size",
+    "css": "var(--type-code-size)"
+   }
   },
   {
    "id": "toast.background.web",
@@ -1061,26 +2179,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#FFFFFF",
+   "sel": ".ts",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/bg/canvas",
-    "color/bg/surface",
-    "color/text/inverse",
-    "color/focus/gap",
-    "button/fg/primary",
-    "avatar/edit/fg",
-    "tooltip/fg",
-    "card/bg/default",
-    "card/disabled/lead-bg",
-    "card/check/fg",
-    "card/check/border",
-    "field/bg/web"
+    "color/bg/surface"
    ],
+   "bind": {
+    "token": "color/bg/canvas",
+    "css": "var(--color-bg-canvas)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/canvas",
+    "css": "var(--color-bg-canvas)"
+   }
   },
   {
    "id": "toast.border-color.web",
@@ -1089,25 +2217,35 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#E5E5E5",
+   "sel": ".ts",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "color/border/default",
-    "color/action/secondary-hover",
-    "button/bg/secondary-hover",
-    "button/bg/ghost-pressed",
-    "button/border/outline-disabled",
-    "list-row/bg/pressed",
-    "list-row/divider",
-    "card/border/default",
-    "card/choice/bg-hover",
-    "field/border/disabled",
-    "progress/bg/track"
+    "color/border/default"
    ],
+   "bind": {
+    "token": "color/border/default",
+    "css": "var(--color-border-default)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/border/default",
+    "css": "var(--color-border-default)"
+   }
   },
   {
    "id": "title.color.web",
@@ -1116,24 +2254,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#171717",
+   "sel": ".ts",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/inverse",
-    "color/text/primary",
-    "color/action/primary-pressed",
-    "button/bg/primary-pressed",
-    "button/fg/secondary",
-    "button/fg/ghost",
-    "button/fg/outline",
-    "tooltip/bg",
-    "field/fg/value"
+    "color/text/primary"
    ],
+   "bind": {
+    "token": "color/text/primary",
+    "css": "var(--color-text-primary)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 17.93,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/primary",
+    "css": "var(--color-text-primary)"
+   }
   },
   {
    "id": "description.color.web",
@@ -1142,27 +2292,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#737373",
+   "sel": ".ts .ds",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "color/text/secondary",
-    "color/icon/secondary",
-    "color/border/input",
-    "avatar/upload/border",
-    "avatar/upload/fg",
-    "avatar/overflow/fg",
-    "card/radio/border",
-    "field/border/default",
-    "field/fg/label-web",
-    "field/fg/label-app",
-    "field/fg/helper",
-    "field/fg/icon"
+    "color/text/secondary"
    ],
+   "bind": {
+    "token": "color/text/secondary",
+    "css": "var(--color-text-secondary)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 4.74,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/secondary",
+    "css": "var(--color-text-secondary)"
+   }
   },
   {
    "id": "action-secondary.color.web",
@@ -1171,27 +2330,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#737373",
+   "sel": ".lk",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "color/text/secondary",
-    "color/icon/secondary",
-    "color/border/input",
-    "avatar/upload/border",
-    "avatar/upload/fg",
-    "avatar/overflow/fg",
-    "card/radio/border",
-    "field/border/default",
-    "field/fg/label-web",
-    "field/fg/label-app",
-    "field/fg/helper",
-    "field/fg/icon"
+    "color/text/secondary"
    ],
+   "bind": {
+    "token": "color/text/secondary",
+    "css": "var(--color-text-secondary)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 4.74,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/secondary",
+    "css": "var(--color-text-secondary)"
+   }
   },
   {
    "id": "close-icon.color.web",
@@ -1200,27 +2368,37 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#737373",
+   "sel": ".cl",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/text/secondary",
-    "color/icon/secondary",
-    "color/border/input",
-    "avatar/upload/border",
-    "avatar/upload/fg",
-    "avatar/overflow/fg",
-    "card/radio/border",
-    "field/border/default",
-    "field/fg/label-web",
-    "field/fg/label-app",
-    "field/fg/helper",
-    "field/fg/icon"
+    "color/icon/secondary"
    ],
+   "bind": {
+    "token": "color/icon/secondary",
+    "css": "var(--color-icon-secondary)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 4.74,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/icon/secondary",
+    "css": "var(--color-icon-secondary)"
+   }
   },
   {
    "id": "featured-icon-ok.background.web",
@@ -1229,75 +2407,147 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#E8F5EC",
+   "sel": ".pv[data-D3=a] .ok .ib",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/status/success-bg",
     "color/chip/green/bg"
    ],
+   "bind": {
+    "token": "color/chip/green/bg",
+    "css": "var(--color-chip-green-bg)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/chip/green/bg",
+    "css": "var(--color-chip-green-bg)"
+   }
   },
   {
-   "id": "icon-ok.color.web",
+   "id": "icon-ok.color.web.ok",
    "part": "Icon ok",
    "prop": "color",
    "platform": "Web",
    "size": "",
    "state": "ok",
+   "theme": "Light",
    "value": "#348D57",
+   "sel": ".ok .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/status/success-icon"
    ],
+   "bind": {
+    "token": "color/status/success-icon",
+    "css": "var(--color-status-success-icon)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 3.67,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/status/success-icon",
+    "css": "var(--color-status-success-icon)"
+   }
   },
   {
-   "id": "alert-ok.border-color.web",
+   "id": "alert-ok.border-color.web.ok",
    "part": "Alert ok",
    "prop": "border-color",
    "platform": "Web",
    "size": "",
    "state": "ok",
+   "theme": "Light",
    "value": "#1B7542",
+   "sel": ".pv[data-D2=c] .al",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "color/status/success-text",
-    "color/status/success-solid",
-    "color/status/success-border",
-    "color/chip/green/fg",
-    "avatar/status/online",
-    "progress/fill/success"
+    "color/status/success-border"
    ],
+   "bind": {
+    "token": "color/status/success-border",
+    "css": "var(--color-status-success-border)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 5.72,
-   "decided": true
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/status/success-border",
+    "css": "var(--color-status-success-border)"
+   }
   },
   {
-   "id": "timer-ok.background.web",
+   "id": "timer-ok.background.web.ok",
    "part": "Timer ok",
    "prop": "background",
    "platform": "Web",
    "size": "",
    "state": "ok",
+   "theme": "Light",
    "value": "#348D57",
-   "cat": "ok",
-   "tokens": [
-    "color/status/success-icon"
+   "sel": ".av .on",
+   "cssProps": [
+    "background"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/status/success-solid",
+    "value": "#1B7542",
+    "css": "var(--color-status-success-solid)"
+   },
+   "visible": true,
+   "suggest": "color/status/success-solid (#1B7542)",
    "rules": [],
-   "note": "",
+   "note": "trùng màu với color/status/success-icon nhưng token không dành cho nền; token đúng nghĩa gần nhất color/status/success-solid (#1B7542), ΔE 9.1",
    "contrast": 4.12,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
   },
   {
    "id": "featured-icon-warn.background.web",
@@ -1306,75 +2556,147 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#FFF3DC",
+   "sel": ".pv[data-D3=a] .warn .ib",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/status/warning-bg",
     "color/chip/yellow/bg"
    ],
+   "bind": {
+    "token": "color/chip/yellow/bg",
+    "css": "var(--color-chip-yellow-bg)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/chip/yellow/bg",
+    "css": "var(--color-chip-yellow-bg)"
+   }
   },
   {
-   "id": "icon-warn.color.web",
+   "id": "icon-warn.color.web.warn",
    "part": "Icon warn",
    "prop": "color",
    "platform": "Web",
    "size": "",
    "state": "warn",
+   "theme": "Light",
    "value": "#A56A21",
+   "sel": ".warn .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/status/warning-icon"
    ],
+   "bind": {
+    "token": "color/status/warning-icon",
+    "css": "var(--color-status-warning-icon)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 4.08,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/status/warning-icon",
+    "css": "var(--color-status-warning-icon)"
+   }
   },
   {
-   "id": "alert-warn.border-color.web",
+   "id": "alert-warn.border-color.web.warn",
    "part": "Alert warn",
    "prop": "border-color",
    "platform": "Web",
    "size": "",
    "state": "warn",
+   "theme": "Light",
    "value": "#8A5300",
+   "sel": ".pv[data-D2=c] .al.warn",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "color/status/warning-text",
-    "color/status/warning-solid",
-    "color/status/warning-border",
-    "color/chip/yellow/fg",
-    "avatar/status/away",
-    "progress/fill/warning"
+    "color/status/warning-border"
    ],
+   "bind": {
+    "token": "color/status/warning-border",
+    "css": "var(--color-status-warning-border)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 6.33,
-   "decided": true
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/status/warning-border",
+    "css": "var(--color-status-warning-border)"
+   }
   },
   {
-   "id": "timer-warn.background.web",
+   "id": "timer-warn.background.web.warn",
    "part": "Timer warn",
    "prop": "background",
    "platform": "Web",
    "size": "",
    "state": "warn",
+   "theme": "Light",
    "value": "#A56A21",
-   "cat": "ok",
-   "tokens": [
-    "color/status/warning-icon"
+   "sel": ".warn .pb i",
+   "cssProps": [
+    "background"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/status/warning-solid",
+    "value": "#8A5300",
+    "css": "var(--color-status-warning-solid)"
+   },
+   "visible": true,
+   "suggest": "color/status/warning-solid (#8A5300)",
    "rules": [],
-   "note": "",
+   "note": "trùng màu với color/status/warning-icon nhưng token không dành cho nền; token đúng nghĩa gần nhất color/status/warning-solid (#8A5300), ΔE 9.5",
    "contrast": 4.48,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
   },
   {
    "id": "featured-icon-err.background.web",
@@ -1383,82 +2705,149 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#FDECEC",
+   "sel": ".pv[data-D3=a] .err .ib",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/action/danger-subtle",
     "color/status/danger-bg",
-    "color/chip/red/bg",
-    "button/bg/danger"
+    "color/chip/red/bg"
    ],
+   "bind": {
+    "token": "color/chip/red/bg",
+    "css": "var(--color-chip-red-bg)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/chip/red/bg",
+    "css": "var(--color-chip-red-bg)"
+   }
   },
   {
-   "id": "icon-err.color.web",
+   "id": "icon-err.color.web.err",
    "part": "Icon err",
    "prop": "color",
    "platform": "Web",
    "size": "",
    "state": "err",
+   "theme": "Light",
    "value": "#D23C2E",
+   "sel": ".err .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/status/danger-icon"
    ],
+   "bind": {
+    "token": "color/status/danger-icon",
+    "css": "var(--color-status-danger-icon)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 4.15,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/status/danger-icon",
+    "css": "var(--color-status-danger-icon)"
+   }
   },
   {
-   "id": "alert-err.border-color.web",
+   "id": "alert-err.border-color.web.err",
    "part": "Alert err",
    "prop": "border-color",
    "platform": "Web",
    "size": "",
    "state": "err",
+   "theme": "Light",
    "value": "#B42318",
+   "sel": ".pv[data-D2=c] .al.err",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/border/danger",
-    "color/action/danger",
-    "color/status/danger-text",
-    "color/status/danger-solid",
-    "color/status/danger-border",
-    "color/chip/red/fg",
-    "button/fg/danger",
-    "button/focus/danger",
-    "field/border/error",
-    "field/fg/error",
-    "progress/fill/danger"
+    "color/status/danger-border"
    ],
+   "bind": {
+    "token": "color/border/danger",
+    "css": "var(--color-border-danger)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 6.57,
-   "decided": true
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/border/danger",
+    "css": "var(--color-border-danger)"
+   }
   },
   {
-   "id": "timer-err.background.web",
+   "id": "timer-err.background.web.err",
    "part": "Timer err",
    "prop": "background",
    "platform": "Web",
    "size": "",
    "state": "err",
+   "theme": "Light",
    "value": "#D23C2E",
-   "cat": "ok",
-   "tokens": [
-    "color/status/danger-icon"
+   "sel": ".pv[data-D1=a] .ts.err",
+   "cssProps": [
+    "background"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/action/danger",
+    "value": "#B42318",
+    "css": "var(--color-action-danger)"
+   },
+   "visible": true,
+   "suggest": "color/action/danger (#B42318)",
    "rules": [],
-   "note": "",
+   "note": "trùng màu với color/status/danger-icon nhưng token không dành cho nền; token đúng nghĩa gần nhất color/action/danger (#B42318), ΔE 9.1",
    "contrast": 4.74,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
   },
   {
    "id": "featured-icon-info.background.web",
@@ -1467,74 +2856,147 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#E7EFFD",
+   "sel": ".av",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/status/info-bg",
     "color/chip/blue/bg"
    ],
+   "bind": {
+    "token": "color/status/info-bg",
+    "css": "var(--color-status-info-bg)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/status/info-bg",
+    "css": "var(--color-status-info-bg)"
+   }
   },
   {
-   "id": "icon-info.color.web",
+   "id": "icon-info.color.web.info",
    "part": "Icon info",
    "prop": "color",
    "platform": "Web",
    "size": "",
    "state": "info",
+   "theme": "Light",
    "value": "#3468D7",
+   "sel": ".info .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/status/info-icon"
    ],
+   "bind": {
+    "token": "color/status/info-icon",
+    "css": "var(--color-status-info-icon)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 4.42,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/status/info-icon",
+    "css": "var(--color-status-info-icon)"
+   }
   },
   {
-   "id": "alert-info.border-color.web",
+   "id": "alert-info.border-color.web.info",
    "part": "Alert info",
    "prop": "border-color",
    "platform": "Web",
    "size": "",
    "state": "info",
+   "theme": "Light",
    "value": "#1F4FB8",
+   "sel": ".pv[data-D2=c] .al.info",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "color/status/info-text",
-    "color/status/info-solid",
-    "color/status/info-border",
-    "color/chip/blue/fg",
-    "progress/fill/info"
+    "color/status/info-border"
    ],
+   "bind": {
+    "token": "color/status/info-border",
+    "css": "var(--color-status-info-border)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 7.32,
-   "decided": true
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/status/info-border",
+    "css": "var(--color-status-info-border)"
+   }
   },
   {
-   "id": "timer-info.background.web",
+   "id": "timer-info.background.web.info",
    "part": "Timer info",
    "prop": "background",
    "platform": "Web",
    "size": "",
    "state": "info",
+   "theme": "Light",
    "value": "#3468D7",
-   "cat": "ok",
-   "tokens": [
-    "color/status/info-icon"
+   "sel": ".pb i",
+   "cssProps": [
+    "background"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/status/info-solid",
+    "value": "#1F4FB8",
+    "css": "var(--color-status-info-solid)"
+   },
+   "visible": true,
+   "suggest": "color/status/info-solid (#1F4FB8)",
    "rules": [],
-   "note": "",
+   "note": "trùng màu với color/status/info-icon nhưng token không dành cho nền; token đúng nghĩa gần nhất color/status/info-solid (#1F4FB8), ΔE 10.2",
    "contrast": 5.11,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
   },
   {
    "id": "avatar.background.web",
@@ -1543,16 +3005,36 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#E7EFFD",
+   "sel": ".av",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/status/info-bg",
     "color/chip/blue/bg"
    ],
+   "bind": {
+    "token": "color/chip/blue/bg",
+    "css": "var(--color-chip-blue-bg)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/chip/blue/bg",
+    "css": "var(--color-chip-blue-bg)"
+   }
   },
   {
    "id": "avatar-initials.color.web",
@@ -1561,20 +3043,37 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#1F4FB8",
+   "sel": ".av",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/status/info-text",
-    "color/status/info-solid",
-    "color/status/info-border",
-    "color/chip/blue/fg",
-    "progress/fill/info"
+    "color/chip/blue/fg"
    ],
+   "bind": {
+    "token": "color/chip/blue/fg",
+    "css": "var(--color-chip-blue-fg)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 6.33,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/chip/blue/fg",
+    "css": "var(--color-chip-blue-fg)"
+   }
   },
   {
    "id": "avatar-status.background.web",
@@ -1583,16 +3082,33 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#348D57",
-   "cat": "ok",
-   "tokens": [
-    "color/status/success-icon"
+   "sel": ".av .on",
+   "cssProps": [
+    "background"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/status/success-solid",
+    "value": "#1B7542",
+    "css": "var(--color-status-success-solid)"
+   },
+   "visible": true,
+   "suggest": "color/status/success-solid (#1B7542)",
    "rules": [],
-   "note": "",
+   "note": "trùng màu với color/status/success-icon nhưng token không dành cho nền; token đúng nghĩa gần nhất color/status/success-solid (#1B7542), ΔE 9.1",
    "contrast": 4.12,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
   },
   {
    "id": "icon-neutral.color.web",
@@ -1601,27 +3117,37 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#737373",
+   "sel": ".nt .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
     "color/text/secondary",
-    "color/icon/secondary",
-    "color/border/input",
-    "avatar/upload/border",
-    "avatar/upload/fg",
-    "avatar/overflow/fg",
-    "card/radio/border",
-    "field/border/default",
-    "field/fg/label-web",
-    "field/fg/label-app",
-    "field/fg/helper",
-    "field/fg/icon"
+    "color/icon/secondary"
    ],
+   "bind": {
+    "token": "color/icon/secondary",
+    "css": "var(--color-icon-secondary)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 4.35,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/icon/secondary",
+    "css": "var(--color-icon-secondary)"
+   }
   },
   {
    "id": "featured-icon-neutral.background.web",
@@ -1630,32 +3156,37 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#F5F5F5",
+   "sel": ".pb",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/muted",
     "color/bg/selected",
     "color/action/secondary",
-    "color/chip/gray/bg",
-    "button/bg/secondary",
-    "button/bg/ghost-hover",
-    "button/bg/disabled",
-    "avatar/overflow/bg",
-    "list-row/bg/hover",
-    "list-row/bg/selected",
-    "card/bg/hover",
-    "card/related/bg",
-    "card/lead/bg",
-    "card/disabled/bg",
-    "card/choice/bg",
-    "field/bg/app",
-    "field/bg/disabled",
-    "field/bg/readonly"
+    "color/chip/gray/bg"
    ],
+   "bind": {
+    "token": "color/bg/selected",
+    "css": "var(--color-bg-selected)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/selected",
+    "css": "var(--color-bg-selected)"
+   }
   },
   {
    "id": "progress-track.background.web",
@@ -1664,32 +3195,37 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#F5F5F5",
+   "sel": ".pb",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/muted",
     "color/bg/selected",
     "color/action/secondary",
-    "color/chip/gray/bg",
-    "button/bg/secondary",
-    "button/bg/ghost-hover",
-    "button/bg/disabled",
-    "avatar/overflow/bg",
-    "list-row/bg/hover",
-    "list-row/bg/selected",
-    "card/bg/hover",
-    "card/related/bg",
-    "card/lead/bg",
-    "card/disabled/bg",
-    "card/choice/bg",
-    "field/bg/app",
-    "field/bg/disabled",
-    "field/bg/readonly"
+    "color/chip/gray/bg"
    ],
+   "bind": {
+    "token": "color/bg/selected",
+    "css": "var(--color-bg-selected)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/selected",
+    "css": "var(--color-bg-selected)"
+   }
   },
   {
    "id": "progress-fill.background.web",
@@ -1698,16 +3234,33 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#3468D7",
-   "cat": "ok",
-   "tokens": [
-    "color/status/info-icon"
+   "sel": ".pb i",
+   "cssProps": [
+    "background"
    ],
-   "suggest": null,
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "progress/fill/info",
+    "value": "#1F4FB8",
+    "css": "var(--progress-fill-info)"
+   },
+   "visible": true,
+   "suggest": "progress/fill/info (#1F4FB8)",
    "rules": [],
-   "note": "",
+   "note": "trùng màu với color/status/info-icon nhưng token không dành cho nền; token đúng nghĩa gần nhất progress/fill/info (#1F4FB8), ΔE 10.2",
    "contrast": 4.69,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
   },
   {
    "id": "percent.color.web",
@@ -1716,27 +3269,2412 @@
    "platform": "Web",
    "size": "",
    "state": "",
+   "theme": "Light",
    "value": "#737373",
+   "sel": ".pg span",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
    "cat": "ok",
    "tokens": [
-    "color/text/secondary",
-    "color/icon/secondary",
-    "color/border/input",
-    "avatar/upload/border",
-    "avatar/upload/fg",
-    "avatar/overflow/fg",
-    "card/radio/border",
-    "field/border/default",
-    "field/fg/label-web",
-    "field/fg/label-app",
-    "field/fg/helper",
-    "field/fg/icon"
+    "color/text/secondary"
    ],
+   "bind": {
+    "token": "color/text/secondary",
+    "css": "var(--color-text-secondary)"
+   },
+   "to": null,
+   "visible": false,
    "suggest": null,
    "rules": [],
    "note": "",
    "contrast": 4.74,
-   "decided": false
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/secondary",
+    "css": "var(--color-text-secondary)"
+   }
+  },
+  {
+   "id": "chữ-gốc.color.both",
+   "part": "Chữ gốc",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".pv",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/primary"
+   ],
+   "bind": {
+    "token": "color/text/primary",
+    "css": "var(--color-text-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/primary",
+    "css": "var(--color-text-primary)"
+   }
+  },
+  {
+   "id": "chữ-gốc.font-size.both",
+   "part": "Chữ gốc",
+   "prop": "font-size",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".pv",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/title-3/size",
+    "value": 17,
+    "css": "var(--type-title-3-size)"
+   },
+   "visible": true,
+   "suggest": "type/title-3/size (17)",
+   "rules": [],
+   "note": "thang chung gần nhất type/title-3/size = 17",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "chữ-gốc.line-height.both",
+   "part": "Chữ gốc",
+   "prop": "line-height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".pv",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/heading/line-height",
+    "type/label/line-height"
+   ],
+   "bind": {
+    "token": "type/label/line-height",
+    "css": "var(--type-label-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/label/line-height",
+    "css": "var(--type-label-line-height)"
+   }
+  },
+  {
+   "id": "thẻ-mobile.padding.both",
+   "part": "Thẻ mobile",
+   "prop": "padding",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".card.m",
+   "cssProps": [
+    "padding"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-md",
+    "value": 12,
+    "css": "var(--space-gap-md)"
+   },
+   "visible": false,
+   "suggest": "space/gap-md (12)",
+   "rules": [],
+   "note": "lệch 2",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "value": 12,
+    "css": "var(--space-gap-md)",
+    "auto": true
+   }
+  },
+  {
+   "id": "toast.shadow.both",
+   "part": "Toast",
+   "prop": "shadow",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "0 4px 12px rgba(16,24,40,.10),0 1px 3px rgba(16,24,40,.06)",
+   "sel": ".ts",
+   "cssProps": [
+    "box-shadow"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "elev/1",
+    "value": "elev/1",
+    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+   },
+   "visible": true,
+   "suggest": "elev/1 (elev/1)",
+   "rules": [],
+   "note": "bóng tự do `0 4px 12px rgba(16,24,40,.10),0 1px 3px rgba(16,24,40,.06)` — chọn elev/1…3 hoặc thêm effect style",
+   "group": "effect",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "toast-nội-dung.padding-top.both",
+   "part": "Toast nội dung",
+   "prop": "padding-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 1,
+   "sel": ".ts .tx",
+   "cssProps": [
+    "padding-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)"
+   },
+   "visible": true,
+   "suggest": "space/gap-xs (4)",
+   "rules": [],
+   "note": "thang chung gần nhất space/gap-xs = 4",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "description.margin-top.both",
+   "part": "Description",
+   "prop": "margin-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".ts .ds",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": true,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với progress/gap nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "hàng-hành-động.gap.both",
+   "part": "Hàng hành động",
+   "prop": "gap",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ac",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-md",
+    "space/gap-md"
+   ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
+  },
+  {
+   "id": "hàng-hành-động.margin-top.both",
+   "part": "Hàng hành động",
+   "prop": "margin-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".ac",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": true,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với avatar/status-size/sm, progress/height/md nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "action.line-height.both",
+   "part": "Action",
+   "prop": "line-height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".lk",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/label/line-height",
+    "value": 20,
+    "css": "var(--type-label-line-height)"
+   },
+   "visible": true,
+   "suggest": "type/label/line-height (20)",
+   "rules": [],
+   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/label/line-height = 20",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "action-chính.color.both",
+   "part": "Action chính",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".lk.pri",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/primary"
+   ],
+   "bind": {
+    "token": "color/text/primary",
+    "css": "var(--color-text-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/primary",
+    "css": "var(--color-text-primary)"
+   }
+  },
+  {
+   "id": "close-icon.padding.both",
+   "part": "Close icon",
+   "prop": "padding",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".cl",
+   "cssProps": [
+    "padding"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)"
+   },
+   "visible": false,
+   "suggest": "space/gap-xs (4)",
+   "rules": [],
+   "note": "trùng số với avatar/ring, list-row/text-gap nhưng đó là token của component khác; thang chung gần nhất space/gap-xs = 4",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)",
+    "auto": true
+   }
+  },
+  {
+   "id": "close-icon.margin.both",
+   "part": "Close icon",
+   "prop": "margin",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".cl",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)"
+   },
+   "visible": false,
+   "suggest": "space/gap-xs (4)",
+   "rules": [],
+   "note": "trùng số với avatar/ring, list-row/text-gap nhưng đó là token của component khác; thang chung gần nhất space/gap-xs = 4",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)",
+    "auto": true
+   }
+  },
+  {
+   "id": "close-icon.width.both",
+   "part": "Close icon",
+   "prop": "width",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 24,
+   "sel": ".cl::after,.lk::after",
+   "cssProps": [
+    "width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xs",
+    "value": 320,
+    "css": "var(--width-xs)"
+   },
+   "visible": true,
+   "suggest": "width/xs (320)",
+   "rules": [],
+   "note": "trùng số với chip/height, avatar/size/sm nhưng đó là token của component khác; thang chung gần nhất width/xs = 320",
+   "group": "icon",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "close-icon.height.both",
+   "part": "Close icon",
+   "prop": "height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 24,
+   "sel": ".cl::after,.lk::after",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": true,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với chip/height, avatar/size/sm nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "icon",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "close-icon.width.mobile",
+   "part": "Close icon",
+   "prop": "width",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 44,
+   "sel": ".pv[data-platform=mobile] .cl::after,.pv[data-platform=mobile] .lk::after",
+   "cssProps": [
+    "width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xs",
+    "value": 320,
+    "css": "var(--width-xs)"
+   },
+   "visible": true,
+   "suggest": "width/xs (320)",
+   "rules": [],
+   "note": "trùng số với touch/min nhưng đó là token của component khác; thang chung gần nhất width/xs = 320",
+   "group": "icon",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "close-icon.height.mobile",
+   "part": "Close icon",
+   "prop": "height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 44,
+   "sel": ".pv[data-platform=mobile] .cl::after,.pv[data-platform=mobile] .lk::after",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "touch/min"
+   ],
+   "bind": {
+    "token": "touch/min",
+    "css": "var(--touch-min)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "touch/min",
+    "css": "var(--touch-min)"
+   }
+  },
+  {
+   "id": "hàng-hành-động.gap.mobile",
+   "part": "Hàng hành động",
+   "prop": "gap",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 24,
+   "sel": ".pv[data-platform=mobile] .ts .ac",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-xl",
+    "space/gap-xl",
+    "layout/section-gap",
+    "control/padding-x/lg"
+   ],
+   "bind": {
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "notification/action-gap",
+    "css": "var(--notification-action-gap)"
+   }
+  },
+  {
+   "id": "avatar.border-radius.both",
+   "part": "Avatar",
+   "prop": "border-radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 999,
+   "sel": ".av",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xl",
+    "value": 960,
+    "css": "var(--width-xl)"
+   },
+   "visible": true,
+   "suggest": "width/xl (960)",
+   "rules": [],
+   "note": "lệch 39",
+   "group": "radius",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "avatar.font-size.both",
+   "part": "Avatar",
+   "prop": "font-size",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".av",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/title-3/size",
+    "value": 17,
+    "css": "var(--type-title-3-size)"
+   },
+   "visible": true,
+   "suggest": "type/title-3/size (17)",
+   "rules": [],
+   "note": "trùng số với chip/font-size-sm nhưng đó là token của component khác; thang chung gần nhất type/title-3/size = 17",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "avatar.line-height.both",
+   "part": "Avatar",
+   "prop": "line-height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 32,
+   "sel": ".av",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/title-2/line-height",
+    "value": 28,
+    "css": "var(--type-title-2-line-height)"
+   },
+   "visible": true,
+   "suggest": "type/title-2/line-height (28)",
+   "rules": [],
+   "note": "thang chung gần nhất type/title-2/line-height = 28",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "avatar.margin.both",
+   "part": "Avatar",
+   "prop": "margin",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".av",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)"
+   },
+   "visible": false,
+   "suggest": "space/gap-xs (4)",
+   "rules": [],
+   "note": "trùng số với chip/dot-gap nhưng đó là token của component khác; thang chung gần nhất space/gap-xs = 4",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)",
+    "auto": true
+   }
+  },
+  {
+   "id": "avatar.margin.both-2",
+   "part": "Avatar",
+   "prop": "margin",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".av",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "avatar/ring"
+   ],
+   "bind": {
+    "token": "avatar/ring",
+    "css": "var(--avatar-ring)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "avatar/ring",
+    "css": "var(--avatar-ring)"
+   }
+  },
+  {
+   "id": "avatar.background.both.dark",
+   "part": "Avatar",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Dark",
+   "value": "#051F5C",
+   "sel": ".pv[data-theme=dark] .av",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/status/info-bg",
+    "color/chip/blue/bg"
+   ],
+   "bind": {
+    "token": "color/chip/blue/bg",
+    "css": "var(--color-chip-blue-bg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/chip/blue/bg",
+    "css": "var(--color-chip-blue-bg)"
+   }
+  },
+  {
+   "id": "avatar.color.both.dark",
+   "part": "Avatar",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Dark",
+   "value": "#93B9FF",
+   "sel": ".pv[data-theme=dark] .av",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/status/info-text",
+    "color/chip/blue/fg"
+   ],
+   "bind": {
+    "token": "color/chip/blue/fg",
+    "css": "var(--color-chip-blue-fg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/chip/blue/fg",
+    "css": "var(--color-chip-blue-fg)"
+   }
+  },
+  {
+   "id": "avatar-status.border-radius.both",
+   "part": "Avatar status",
+   "prop": "border-radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 999,
+   "sel": ".av .on",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xl",
+    "value": 960,
+    "css": "var(--width-xl)"
+   },
+   "visible": true,
+   "suggest": "width/xl (960)",
+   "rules": [],
+   "note": "lệch 39",
+   "group": "radius",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "avatar-status.border.both",
+   "part": "Avatar status",
+   "prop": "border",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".av .on",
+   "cssProps": [
+    "border"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": true,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với progress/gap nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "progress.margin-top.both",
+   "part": "Progress",
+   "prop": "margin-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".pg",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": true,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với chip/dot-size, tooltip/arrow-w nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "progress.border-radius.both",
+   "part": "Progress",
+   "prop": "border-radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 999,
+   "sel": ".pb",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xl",
+    "value": 960,
+    "css": "var(--width-xl)"
+   },
+   "visible": true,
+   "suggest": "width/xl (960)",
+   "rules": [],
+   "note": "lệch 39",
+   "group": "radius",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "timer-info.border-radius.both",
+   "part": "Timer info",
+   "prop": "border-radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 999,
+   "sel": ".pb i",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xl",
+    "value": 960,
+    "css": "var(--width-xl)"
+   },
+   "visible": true,
+   "suggest": "width/xl (960)",
+   "rules": [],
+   "note": "lệch 39",
+   "group": "radius",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "percent.line-height.both",
+   "part": "Percent",
+   "prop": "line-height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".pg span",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/label/line-height",
+    "value": 20,
+    "css": "var(--type-label-line-height)"
+   },
+   "visible": true,
+   "suggest": "type/label/line-height (20)",
+   "rules": [],
+   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/label/line-height = 20",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "percent.min-width.both",
+   "part": "Percent",
+   "prop": "min-width",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 32,
+   "sel": ".pg span",
+   "cssProps": [
+    "min-width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xs",
+    "value": 320,
+    "css": "var(--width-xs)"
+   },
+   "visible": true,
+   "suggest": "width/xs (320)",
+   "rules": [],
+   "note": "trùng số với avatar/edit-size/xxl, vehicle/thumb-xs nhưng đó là token của component khác; thang chung gần nhất width/xs = 320",
+   "group": "grid",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "meta.margin-top.both",
+   "part": "Meta",
+   "prop": "margin-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".pg+.ds",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": true,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với progress/gap nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "alert-nội-dung.padding-top.both",
+   "part": "Alert nội dung",
+   "prop": "padding-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 1,
+   "sel": ".al .tx",
+   "cssProps": [
+    "padding-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)"
+   },
+   "visible": true,
+   "suggest": "space/gap-xs (4)",
+   "rules": [],
+   "note": "thang chung gần nhất space/gap-xs = 4",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "description.line-height.both",
+   "part": "Description",
+   "prop": "line-height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".al .ds",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/label/line-height",
+    "value": 20,
+    "css": "var(--type-label-line-height)"
+   },
+   "visible": true,
+   "suggest": "type/label/line-height (20)",
+   "rules": [],
+   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/label/line-height = 20",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "description.color.both",
+   "part": "Description",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".al .ds",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/primary"
+   ],
+   "bind": {
+    "token": "color/text/primary",
+    "css": "var(--color-text-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/primary",
+    "css": "var(--color-text-primary)"
+   }
+  },
+  {
+   "id": "description.margin-top.both-2",
+   "part": "Description",
+   "prop": "margin-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".al .ds",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": true,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với progress/gap nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "alert-button.border-color.both",
+   "part": "Alert button",
+   "prop": "border-color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#E5E5E5",
+   "sel": ".bt",
+   "cssProps": [
+    "border"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/default",
+    "button/border/outline-disabled"
+   ],
+   "bind": {
+    "token": "button/border/outline-disabled",
+    "css": "var(--button-border-outline-disabled)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "button/border/outline-disabled",
+    "css": "var(--button-border-outline-disabled)"
+   }
+  },
+  {
+   "id": "alert-button.background.both",
+   "part": "Alert button",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#FFFFFF",
+   "sel": ".bt",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/canvas",
+    "color/bg/surface"
+   ],
+   "bind": {
+    "token": "color/bg/canvas",
+    "css": "var(--color-bg-canvas)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/canvas",
+    "css": "var(--color-bg-canvas)"
+   }
+  },
+  {
+   "id": "alert-button.color.both",
+   "part": "Alert button",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".bt",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/primary",
+    "button/fg/secondary",
+    "button/fg/ghost",
+    "button/fg/outline"
+   ],
+   "bind": {
+    "token": "button/fg/ghost",
+    "css": "var(--button-fg-ghost)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "button/fg/ghost",
+    "css": "var(--button-fg-ghost)"
+   }
+  },
+  {
+   "id": "alert-button.font-size.both",
+   "part": "Alert button",
+   "prop": "font-size",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 13,
+   "sel": ".bt",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/title-3/size",
+    "value": 17,
+    "css": "var(--type-title-3-size)"
+   },
+   "visible": true,
+   "suggest": "type/title-3/size (17)",
+   "rules": [],
+   "note": "thang chung gần nhất type/title-3/size = 17",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "hàng-hành-động.margin-top.both-2",
+   "part": "Hàng hành động",
+   "prop": "margin-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".al.stack .ac",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": true,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với chip/dot-size, tooltip/arrow-w nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "hàng-hành-động.padding-left.both",
+   "part": "Hàng hành động",
+   "prop": "padding-left",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 44,
+   "sel": ".pv[data-D3=a] .al.stack .ac",
+   "cssProps": [
+    "padding-left"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-2xl",
+    "value": 32,
+    "css": "var(--space-gap-2xl)"
+   },
+   "visible": true,
+   "suggest": "space/gap-2xl (32)",
+   "rules": [],
+   "note": "thang chung gần nhất space/gap-2xl = 32",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "alert.background.both",
+   "part": "Alert",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#FFFFFF",
+   "sel": ".pv[data-D2=c] .al",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/canvas",
+    "color/bg/surface"
+   ],
+   "bind": {
+    "token": "color/bg/canvas",
+    "css": "var(--color-bg-canvas)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/canvas",
+    "css": "var(--color-bg-canvas)"
+   }
+  },
+  {
+   "id": "title.color.both",
+   "part": "Title",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".pv[data-D2=c] .al .tt",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/primary"
+   ],
+   "bind": {
+    "token": "color/text/primary",
+    "css": "var(--color-text-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/primary",
+    "css": "var(--color-text-primary)"
+   }
+  },
+  {
+   "id": "featured-icon.border-radius.both",
+   "part": "Featured icon",
+   "prop": "border-radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 999,
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xl",
+    "value": 960,
+    "css": "var(--width-xl)"
+   },
+   "visible": true,
+   "suggest": "width/xl (960)",
+   "rules": [],
+   "note": "lệch 39",
+   "group": "radius",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "featured-icon.margin.both",
+   "part": "Featured icon",
+   "prop": "margin",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)"
+   },
+   "visible": false,
+   "suggest": "space/gap-xs (4)",
+   "rules": [],
+   "note": "trùng số với chip/dot-gap nhưng đó là token của component khác; thang chung gần nhất space/gap-xs = 4",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)",
+    "auto": true
+   }
+  },
+  {
+   "id": "featured-icon.margin.both-2",
+   "part": "Featured icon",
+   "prop": "margin",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)"
+   },
+   "visible": false,
+   "suggest": "space/gap-xs (4)",
+   "rules": [],
+   "note": "trùng số với avatar/ring, list-row/text-gap nhưng đó là token của component khác; thang chung gần nhất space/gap-xs = 4",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)",
+    "auto": true
+   }
+  },
+  {
+   "id": "featured-icon.shadow.both",
+   "part": "Featured icon",
+   "prop": "shadow",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "0 0 0 4px color-mix(in srgb,var(--tbg) 45%,transparent)",
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "box-shadow"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "elev/1",
+    "value": "elev/1",
+    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+   },
+   "visible": true,
+   "suggest": "elev/1 (elev/1)",
+   "rules": [],
+   "note": "bóng tự do `0 0 0 4px color-mix(in srgb,var(--tbg) 45%,transparent)` — chọn elev/1…3 hoặc thêm effect style",
+   "group": "effect",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "alert-button.height.both",
+   "part": "Alert button",
+   "prop": "height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 28,
+   "sel": ".bn .bt",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "không có thang token cho thuộc tính này",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "alert-button.border-color.both-2",
+   "part": "Alert button",
+   "prop": "border-color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#E3B87A",
+   "sel": ".bn .bt",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/status/warning-border-subtle"
+   ],
+   "bind": {
+    "token": "color/status/warning-border-subtle",
+    "css": "var(--color-status-warning-border-subtle)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/status/warning-border-subtle",
+    "css": "var(--color-status-warning-border-subtle)"
+   }
+  },
+  {
+   "id": "alert-button.color.both-2",
+   "part": "Alert button",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#8A5300",
+   "sel": ".bn .bt",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/status/warning-text",
+    "color/chip/yellow/fg"
+   ],
+   "bind": {
+    "token": "color/chip/yellow/fg",
+    "css": "var(--color-chip-yellow-fg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/chip/yellow/fg",
+    "css": "var(--color-chip-yellow-fg)"
+   }
+  },
+  {
+   "id": "banner-toàn-trang.padding.mobile",
+   "part": "Banner toàn trang",
+   "prop": "padding",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".pv[data-platform=mobile] .bn",
+   "cssProps": [
+    "padding"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-sm",
+    "space/gap-sm",
+    "control/padding-x-icon/sm",
+    "control/icon-gap"
+   ],
+   "bind": {
+    "token": "space/gap-sm",
+    "css": "var(--space-gap-sm)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-sm",
+    "css": "var(--space-gap-sm)"
+   }
+  },
+  {
+   "id": "banner-toàn-trang.padding.mobile-2",
+   "part": "Banner toàn trang",
+   "prop": "padding",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 16,
+   "sel": ".pv[data-platform=mobile] .bn",
+   "cssProps": [
+    "padding"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-lg",
+    "space/gap-lg",
+    "layout/screen-inset",
+    "layout/card-padding"
+   ],
+   "bind": {
+    "token": "space/gap-lg",
+    "css": "var(--space-gap-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-lg",
+    "css": "var(--space-gap-lg)"
+   }
+  },
+  {
+   "id": "featured-icon.color.both",
+   "part": "Featured icon",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#348D57",
+   "sel": ".ts .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/chip/green/fg",
+    "value": "#1B7542",
+    "css": "var(--color-chip-green-fg)"
+   },
+   "visible": true,
+   "suggest": "color/chip/green/fg (#1B7542)",
+   "rules": [],
+   "note": "trùng màu với color/status/success-icon nhưng token không dành cho chữ; token đúng nghĩa gần nhất color/chip/green/fg (#1B7542), ΔE 9.1",
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "toast-timer.background.both",
+   "part": "Toast timer",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#348D57",
+   "sel": ".tm",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/status/success-solid",
+    "value": "#1B7542",
+    "css": "var(--color-status-success-solid)"
+   },
+   "visible": true,
+   "suggest": "color/status/success-solid (#1B7542)",
+   "rules": [],
+   "note": "trùng màu với color/status/success-icon nhưng token không dành cho nền; token đúng nghĩa gần nhất color/status/success-solid (#1B7542), ΔE 9.1",
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "avatar.radius.both",
+   "part": "Avatar",
+   "prop": "radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 9999,
+   "sel": ".av",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/chip"
+   ],
+   "bind": {
+    "token": "radius/chip",
+    "css": "var(--radius-chip)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/chip",
+    "css": "var(--radius-chip)"
+   }
+  },
+  {
+   "id": "avatar-status.radius.both",
+   "part": "Avatar status",
+   "prop": "radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 9999,
+   "sel": ".av .on",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/chip"
+   ],
+   "bind": {
+    "token": "radius/chip",
+    "css": "var(--radius-chip)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/chip",
+    "css": "var(--radius-chip)"
+   }
+  },
+  {
+   "id": "timer-info.radius.both",
+   "part": "Timer info",
+   "prop": "radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 9999,
+   "sel": ".pb i",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/chip"
+   ],
+   "bind": {
+    "token": "radius/chip",
+    "css": "var(--radius-chip)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/chip",
+    "css": "var(--radius-chip)"
+   }
+  },
+  {
+   "id": "alert.border-color.both",
+   "part": "Alert",
+   "prop": "border-color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#93CFA6",
+   "sel": ".al",
+   "cssProps": [
+    "border"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/status/success-border-subtle"
+   ],
+   "bind": {
+    "token": "color/status/success-border-subtle",
+    "css": "var(--color-status-success-border-subtle)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/status/success-border-subtle",
+    "css": "var(--color-status-success-border-subtle)"
+   }
+  },
+  {
+   "id": "featured-icon.color.both-2",
+   "part": "Featured icon",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#348D57",
+   "sel": ".al .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/chip/green/fg",
+    "value": "#1B7542",
+    "css": "var(--color-chip-green-fg)"
+   },
+   "visible": true,
+   "suggest": "color/chip/green/fg (#1B7542)",
+   "rules": [],
+   "note": "trùng màu với color/status/success-icon nhưng token không dành cho chữ; token đúng nghĩa gần nhất color/chip/green/fg (#1B7542), ΔE 9.1",
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "featured-icon.radius.both",
+   "part": "Featured icon",
+   "prop": "radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 9999,
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/chip"
+   ],
+   "bind": {
+    "token": "radius/chip",
+    "css": "var(--radius-chip)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/chip",
+    "css": "var(--radius-chip)"
+   }
+  },
+  {
+   "id": "featured-icon.background.both",
+   "part": "Featured icon",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#E8F5EC",
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/status/success-bg",
+    "color/chip/green/bg"
+   ],
+   "bind": {
+    "token": "color/chip/green/bg",
+    "css": "var(--color-chip-green-bg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/chip/green/bg",
+    "css": "var(--color-chip-green-bg)"
+   }
+  },
+  {
+   "id": "audit.typo.combo-12-32",
+   "part": "Tổ hợp chữ",
+   "prop": "line-height",
+   "platform": "",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "12/32",
+   "sel": ".av",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": "type/chip-sm (Web)",
+   "rules": [
+    "cỡ 12 / dòng 32 không thuộc thang type/* (foundations mục 4.2)"
+   ],
+   "note": "cùng cỡ chữ thì sửa cao dòng; khác cỡ thì chọn vai gần nhất",
+   "fix": {
+    "token": "type/chip-sm (Web)",
+    "value": "12/18",
+    "css": "18px"
+   },
+   "group": "typo",
+   "audit": true,
+   "count": 1,
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "audit.icon.stroke-2",
+   "part": "Nét icon 2 (162 chỗ)",
+   "prop": "stroke-width",
+   "platform": "",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": "svg.i[stroke-width=\"2\"]",
+   "cssProps": [
+    "stroke-width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": "nét 1.8",
+   "rules": [
+    "nét icon thường là 1.8 trên khung 24; nét 2 chỉ cho icon trong chip (icons.md mục 2, DEC-142)"
+   ],
+   "note": "icon trong chip giữ 2 — chọn Ngoại lệ nếu mọi chỗ là chip",
+   "fix": {
+    "token": "nét 1.8",
+    "value": 1.8,
+    "css": "1.8"
+   },
+   "group": "icon",
+   "audit": true,
+   "count": 162,
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "audit.icon.featured-ib",
+   "part": "Khối icon .ib 32 / icon 20",
+   "prop": "size",
+   "platform": "",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "32/20",
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": "Featured icon 48",
+   "rules": [
+    "icon nhấn mạnh đặt trong Featured icon 48, icon 24 (icons.md mục 3.1, DEC-258)"
+   ],
+   "note": "",
+   "fix": {
+    "token": "Featured icon 48",
+    "value": 48,
+    "css": "48px"
+   },
+   "group": "icon",
+   "audit": true,
+   "count": 1,
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
   }
  ]
 }

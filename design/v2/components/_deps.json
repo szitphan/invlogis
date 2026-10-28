@@ -1,0 +1,69 @@
+{
+ "_note": "Sổ quan hệ component DS v2 (DEC-292). uses: con mà component dùng — role embed (dùng nguyên) | anchor (chỉ chỗ neo, mở component khác); provisional: con chưa dựng, cha đang vẽ tạm. inherited: quyết định chốt ở cha trước khi con được dựng — brainstorm của con hiện sẵn làm mặc định, user giữ hoặc đổi. Lệnh: python3 _scripts/ds-deps.py",
+ "components": {
+  "header-navigation": {
+   "uses": [
+    {
+     "child": "breadcrumbs",
+     "role": "embed"
+    },
+    {
+     "child": "command-search",
+     "role": "embed",
+     "provisional": true,
+     "parts": "nút kính lúp, hộp thoại ⌘K, bảng kết quả"
+    },
+    {
+     "child": "notification-center",
+     "role": "anchor",
+     "provisional": true,
+     "parts": "chuông + số đếm, panel mở ra"
+    },
+    {
+     "child": "tabs",
+     "role": "embed",
+     "provisional": true,
+     "parts": "hàng tab phụ cấp module"
+    },
+    {
+     "child": "avatar",
+     "role": "embed",
+     "parts": "avatar nút tài khoản"
+    },
+    {
+     "child": "button",
+     "role": "embed",
+     "parts": "nút icon"
+    }
+   ]
+  }
+ },
+ "inherited": {
+  "command-search": [
+   {
+    "from": "header-navigation",
+    "dec": "DEC-291",
+    "id": "D3",
+    "title": "Ô tìm trả về những gì",
+    "choice": "Tính năng + hành động + bản ghi (cần API tìm toàn cục, chưa có trong SRS)"
+   },
+   {
+    "from": "header-navigation",
+    "dec": "DEC-291",
+    "id": "D2",
+    "title": "Dạng mở trên thanh trên (Header giữ)",
+    "choice": "Nút kính lúp + hộp thoại ⌘K giữa màn, lớp phủ che cả menu trái",
+    "owner": "header-navigation"
+   }
+  ],
+  "notification-center": [
+   {
+    "from": "header-navigation",
+    "dec": "DEC-291",
+    "id": "D5",
+    "title": "Chuông báo có việc",
+    "choice": "Số đếm đỏ status/danger-solid, chữ 12 đậm, tối đa 9+"
+   }
+  ]
+ }
+}

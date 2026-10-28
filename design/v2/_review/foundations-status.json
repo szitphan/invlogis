@@ -1,0 +1,43 @@
+{
+ "slug": "96cc4891-0834-429d-b163-785e89c72a50",
+ "url": "https://claude.ai/artifact/Kd2eEPR572fjbfrdYJWMqh",
+ "collection": "status",
+ "build": "python3 _scripts/ds-foundation-page.py",
+ "figma": {
+  "fileKey": "FifpyOMpZk9OP8qyNzbRVJ",
+  "page": "DS · Foundations",
+  "labelName": "Nhãn trạng thái · foundation · {key}",
+  "labels": {
+   "color": [
+    "6918:218459"
+   ],
+   "type": [
+    "6918:218461"
+   ],
+   "icon": [
+    "6918:218463"
+   ],
+   "elevation": [
+    "6918:218465",
+    "6918:218467"
+   ],
+   "touch-focus": [
+    "6918:218469"
+   ],
+   "space": [
+    "6918:218471",
+    "6918:218473",
+    "6918:218475"
+   ],
+   "radius": [
+    "6918:218477"
+   ],
+   "grid": [
+    "6918:218479",
+    "6918:218481"
+   ],
+   "motion": []
+  },
+  "note": "motion chưa có khung trên Figma; nhãn gắn token color/status/* (draft: bg/muted + text/secondary-strong)"
+ }
+}

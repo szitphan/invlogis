@@ -17,8 +17,9 @@ links:
 # Header Navigation · thanh trên
 
 > Application · phiên bản 0.3.0 · Nháp · người phụ trách @szitphan · Figma: trang DS · Application components —
-> `Header navigation` 6768:191286 · `Breadcrumbs` 6768:190544 · `_Header bell` 6768:190822 · `_Header secondary nav`
-> 6768:190732 · `_Header search panel` (dựng ở vòng 4) · DEC-290 · trang duyệt
+> `Header navigation` 6768:191286 · `Breadcrumbs` 6901:20705 (biến thể gốc 6768:190544) · `_Header bell` 6768:190822 ·
+> `_Header secondary nav` 6768:190732 · `_Search result` 6900:216895 · `_Header search panel` 6904:20446 · khung tài liệu
+> `Tài liệu` 6768:198301 · DEC-290 · trang duyệt
 > https://claude.ai/artifact/Ua29VuBKRsRys51EYujU3P · ảnh mốc `_work/header-navigation/preview-web.png`,
 > `preview-mobile.png`
 
@@ -61,16 +62,16 @@ dùng `Mobile header`. Bản này sửa tại chỗ bộ `Header navigation` d�
 | Ô tìm | `Input` Size MD (`control/height/md`), icon dẫn 16, viền `color/border/input`, bo `radius/field`; lề trái `space/inset-sm` + 2, phải `space/inset-sm`, khoảng `space/inset-sm`; gợi ý phím `Kbd` `type/caption` `color/text/secondary` viền `color/border/strong` bo 4 | 300 × 32, cố định |
 | Bảng kết quả `_Header search panel` | nền `color/bg/surface`, viền `color/border/default`, bo `radius/card`, bóng `elev/3`; nhãn nhóm `type/caption` nét 600 chữ hoa `color/text/secondary`; dòng cao `control/height/lg` lề ngang 16 khoảng `chip/padding-x`, ô icon 28 bo `radius/control`; đang chọn `color/bg/selected`; chữ khớp nền `color/status/warning-bg-strong`; chân nền `color/bg/canvas` `type/caption` | rộng 400 (`width/sm`), mép trái thẳng mép trái ô tìm, cách ô 4 |
 | Trạng thái rỗng của bảng | tiêu đề `type/heading` nét 600 · phụ `type/caption` `color/text/secondary` | lề dọc `space/inset-xl` |
-| Nút Trợ giúp | `Button` Tertiary Icon Only MD + `Tooltip` "Trợ giúp" | 36, icon 20 — màu icon của `Button` Tertiary (không gắn đè) |
-| `_Header bell` | `Button` Tertiary Icon Only + số đếm: nền `color/status/danger-solid`, chữ `color/text/inverse` `type/caption` nét 600, bo `radius/full`, lề ngang `space/inset-xs`, viền tách 2 `color/bg/surface` | nút 36; số cao 20, rộng tối thiểu 20, góc trên phải lệch −1 / −3 |
-| Avatar | `Avatar` Size SM 32 trong nút 36 (lề 2), bo `radius/full`; chữ tắt `type/caption` nét 600 `color/text/secondary-strong` trên `color/bg/muted` | 36 |
+| Nút Trợ giúp | `Button` Tertiary Icon Only MD + `Tooltip` "Trợ giúp" | 32 (`control/height/md`; preview 36 kéo về luật cao control DEC-173), icon 20 — màu icon của `Button` (không gắn đè) |
+| `_Header bell` | `Button` Tertiary Icon Only + khối `Count` riêng (Badge không có bản nền đặc): nền `color/status/danger-solid`, chữ `color/text/inverse` `type/caption-strong`, bo `radius/full`, lề ngang `space/inset-xs`, viền tách 2 `color/bg/surface` | nút 32; số cao 20, rộng tối thiểu 20, đặt tuyệt đối x 18 · y −4 (mép trái số ở giữa chuông, không che chuông) |
+| Avatar | khung `Account` bo `radius/full` chứa `Avatar` Content Initials Size SM (màu, chữ theo Avatar) | 32, không lề (thẳng hàng nút 32) |
 | Menu tài khoản | `Dropdown menu` rộng 300 (`field/label-max-width`), bo `radius/card`, lề 6, bóng `elev/3`; đầu menu avatar 40, khoảng `chip/padding-x`, vai trò `type/caption` `color/text/secondary`; mục cao 36 lề `chip/padding-x` icon 16 `color/icon/secondary`; Đăng xuất `color/action/danger` | neo dưới avatar, mép phải thẳng mép phải thanh |
 | Vòng focus | `focus/width` 2, cách `focus/offset` 2, `color/border/focus` | mọi phần bấm được |
 
 ### Biến thể
 
 - `Header navigation`: Platform = Web · Mobile × Layout = Simple · Secondary Nav (giữ). Bật tắt: `Has Breadcrumb`,
-  `Has Search`, `Has Help`, `Has Bell`, `Has Account`; Mobile thêm `Has Back` (hàng ←).
+  `Has Search`, `Has Help`, `Has Bell`, `Has Account`; Mobile thêm `Has Back` (hàng ←), `Title`, `Back label`.
 - `_Header bell`: Count = 0 · 3 · 9+ × State = Default · Hover · Open.
 - `_Header search panel`: Content = Recent · Results · Empty.
 
@@ -112,10 +113,10 @@ Một cỡ. Thanh rộng theo vùng nội dung (1280 − menu 240 = 1040 ở mà
 
 ### Thuộc tính
 
-`Header navigation`: các `Has …` ở trên + instance lồng đã expose: `Breadcrumbs` (đổi số tầng, chữ), `Search`
-(`Input`), `Bell` (`_Header bell` Count / State), `Avatar` (chữ tắt / ảnh), `Secondary nav` (Type Tabs · Buttons).
-`_Header search panel`: `Query` (chữ khớp), khối dòng là instance `_Search result` (`Title`, `Path`, `Has Shortcut`,
-`Selected`).
+`Header navigation`: `Has Breadcrumb`, `Has Search`, `Has Help`, `Has Bell`, `Has Account`, `Has Menu`, `Has Back`, `Title`,
+`Back label`, Platform, Layout; đổi chữ đường dẫn, Count chuông, chữ tắt avatar, Type hàng phụ trên instance lồng.
+`_Header search panel`: Content = Results · Recent · Empty; mỗi dòng là instance `_Search result` (State Default ·
+Selected; `Title`, `Path`, `Has Shortcut`, `Shortcut`). Chữ khớp tô nền ở code (Figma không có nền theo đoạn chữ).
 
 ### Thành phần lồng
 
@@ -134,14 +135,21 @@ Số đo theo mode ở bảng Cấu tạo; màu ở Phần máy. Đối chiếu 
 
 ### Kiểm máy
 
-Chưa chạy — điền sau khi dựng (vòng 4) và review (vòng 5).
+Chạy 28/10 sau khi dựng (vòng 4):
+
+- **layout_audit** 5 bộ + khung tài liệu: 0 lỗi chặn. Tràn khung có chủ đích: số đếm chuông, tooltip, vòng focus (lớp
+  tuyệt đối). Hàng Chữ dài màn 1024 sửa theo luật Sidebar (dưới 1280 menu thu gọn 64 → thanh 960).
+- **a11y_audit**: 0 fail. Review: vùng chạm web 32 (đạt 2.5.8), viền popover 1,21:1 (mép popover, không phải viền control).
+- **auditDesignSystem**: compliance 0,95–1,00, không giá trị gõ cứng có token tương ứng.
+- **Dark**: bỏ (giá trị Dark DS v2 chưa điền).
+- **3 agent review**: vòng 5 (trang duyệt tab 4).
 
 ## Mobile
 
 > Khối Mobile đặt mode Platform = Mobile (web trên điện thoại, < 768).
 
-- Thanh 56 (D8 A): Menu (☰, "Mở menu") · tiêu đề trang hiện tại 15 nét 600, một dòng cắt "…" · Tìm (icon) · Chuông
-  (`_Header bell`) · Avatar 28. Không có đường dẫn, Trợ giúp.
+- Thanh 56 (D8 A): Menu (☰, "Mở menu") · tiêu đề trang hiện tại `type/heading` (mode Mobile), một dòng cắt "…" · Tìm
+  (icon) · Chuông (`_Header bell`) · Avatar SM 32 (preview 28 — Avatar không có cỡ 28). Không có đường dẫn, Trợ giúp.
 - **Hàng ←** (`Has Back`, màn con): "← {tên cấp trên}", cao 40, lề ngang `space/inset-md`, khoảng `space/inset-xs`, chữ
   `color/text/secondary-strong`; **vùng bấm vô hình 44** (DEC-290, theo DEC-138). Màn gốc của module không có hàng này.
 - Tìm: chạm icon mở **màn tìm toàn trang** — ô nhập cao 52 chữ 17 (`type/title-3`), nút ← đóng; kết quả như web (không có
@@ -149,11 +157,11 @@ Chưa chạy — điền sau khi dựng (vòng 4) và review (vòng 5).
 - Avatar: chạm mở **sheet tài khoản** từ dưới lên — bo trên `radius/2xl` 16, thanh kéo 36 × 4, đầu sheet avatar 40 + họ tên
   + vai trò, mục cao 48 lề `space/inset-md` icon 20 chữ 15/22, lớp phủ `color/overlay/scrim`.
 - Chuông: chạm mở màn Thông báo toàn trang của Notification Center (bản Mobile của component đó).
-- Nút icon 36, vùng bấm 44.
+- Nút icon 42 (`Button` MD mode Mobile).
 
 ### Kiểm máy
 
-Chưa chạy.
+Chung với khối Web (bộ có trục Platform); a11y_audit: nút 42 dưới mức thoải mái 44 — mức review, đạt 2.5.8.
 
 ## Đối chiếu Astryx
 

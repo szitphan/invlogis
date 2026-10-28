@@ -458,6 +458,31 @@ Mọi thứ nằm trên **một artifact** (4 tab, giữ một link suốt các 
 | `state.json` | `{round, artifact_url, approved: {brainstorm, preview, foundation}, figma: {set, demos}}` | Claude |
 | `{slug}-review.html` | trang sinh ra — publish file này | `_scripts/ds-component-page.py {slug}` |
 
+**Màn chính là preview toàn màn hình** (user chốt 28/10, khuôn `/prototype-html`): trang mở thẳng vào màn demo full cửa
+sổ (web vẽ theo bề rộng cửa sổ, mobile khung điện thoại giữa màn), nút tròn góc dưới phải mở bảng nổi 4 tab: *Bước* (1–4),
+*Màn & kịch bản* (mỗi màn → các trạng thái; bước 1 thêm bộ phương án theo nguồn), *Chọn* (việc của bước đang xem: B1 điểm
+cần quyết + Chốt tổ hợp · B2 Duyệt/Cần sửa · B3 chế độ xem + nhấp nháy + tô viền + danh sách điểm lệch, mỗi dòng có Soi và
+xem Trước/Sau riêng dòng đó · B4 chế độ xem + ghim + Sửa/Bỏ qua), *Hiển thị*. Trang tab cũ chỉ để đối chiếu, mở bằng
+*Xem bảng chi tiết*. Tab *Góp ý*: user bấm "Chọn phần tử", trỏ vào đúng component / control trên màn (có "Chọn phần tử
+cha"), ghi ý kiến → lưu db collection `comments` (bước, màn, trạng thái, tổ hợp, đường dẫn phần tử, tên phần theo `values`,
+chữ đang hiện, ghi chú), ghim G-n tím trên màn. Đầu mỗi lượt sửa: `ArtifactData list comments`, sửa từng góp ý, rồi ghi lại
+doc đó với `done: true` + `reply` (1 câu đã sửa gì, từ khoá bọc `**…**` để trang tô nổi) — trang tách 2 khối: tím "Anh góp ý", xanh "✓ Claude đã sửa" (cam "Chờ Claude xử lý" khi chưa có trả lời). **Góp ý thêm** (user chốt 28/10): dưới góp ý đã xử lý có nút "Chưa ổn — góp ý thêm" → trang
+nối `{role:"user", text, at}` vào `thread` và đặt `done: false` (ghim hiện lại). Lượt sau Claude đọc cả chuỗi (`note` → `reply` →
+`thread`), sửa theo ý mới nhất, rồi **nối** `{role:"claude", text, at}` vào `thread` + `done: true` — không ghi đè `reply` lần
+đầu, giữ lịch sử qua lại. **Ghi thay đổi theo từng góp ý** (thay cách chụp cả lượt): trước khi sửa 1 góp ý chép
+`page.json` ra scratchpad, sửa xong `python3 _scripts/ds-snap.py change <slug> <bản-chép> <id>` → `cmtChanges[id]` (từng luật
+CSS, màn, dòng values) + bản trước `snaps["c-<id>"]`. **Hoàn lại** (user 28/10): góp ý đã xử lý có nút "↶ Hoàn lại bản trước"
+(bấm 2 lần) → trang nối `{role:"user", action:"revert"}` + `done:false`. Claude chạy `ds-snap.py revert <slug> <id>` — chỗ
+hiện tại còn đúng bản sau thì trả về bản trước, chỗ đã bị góp ý sau sửa tiếp → xung đột, giữ nguyên và báo user; rồi nối
+`{role:"claude", action:"reverted", text}` + `done:true` + `reverted:true`. Góp ý đã xoá không hoàn lại. Lượt cũ chụp cả lượt
+(r1, r2…) không có `cmtChanges` → hoàn lại tay theo bản trước. **Bản trước khi sửa** (user chốt 28/10):
+trước khi sửa, chép `page.json` ra scratchpad; sửa xong chạy `python3 _scripts/ds-snap.py <slug> <bản-chép> r<n> "trước lượt
+sửa n (dd/mm)" <id góp ý,…>` → lưu phần đã đổi vào `snaps` + `cmtSnap`, mỗi góp ý có nút *Xem bản trước* cạnh *Xem trên
+màn* (màn vẽ lại bằng bản chụp, đúng màn, trạng thái, tổ hợp lúc góp ý; thanh tím "Về bản hiện tại"). Bản chụp trùng phần
+lớn bản có sẵn thì tự ghi `base` và chỉ lưu phần khác. `page.json` đã sửa thẳng (proto, `cssScreen`, `sel`, ghim) thì
+**không chạy lại `build.py`** — sửa thẳng `page.json`; build.py có chặn khi thấy `proto`. Dữ liệu mới không cần khai thêm — bảng nổi đọc từ `screens`, `states`, `presets`, `decisions`,
+check.json, `reviews`.
+
 Gọi lại `/figma-component <tên> --html` → đọc `state.json`, chạy tiếp đúng vòng đang dở, không làm lại vòng đã chốt.
 Publish luôn cùng đường dẫn file (giữ link), `capabilities: {db: {}, user: {}}` ở lần đầu; lần sau bỏ trống để giữ.
 
@@ -469,6 +494,19 @@ Publish luôn cùng đường dẫn file (giữ link), `capabilities: {db: {}, u
 3. **Nơi dùng thật:** grep tên component / control type trong `docs/*/screens/*.md`, `docs/*/srs/*-spec.md` → danh sách
    feature · màn. Không có nơi dùng → hỏi user có cần dựng không (DEC-260: chỉ dựng component sản phẩm dùng).
 4. **Xếp nhóm web/mobile** A/B/C theo DEC-279 (architecture Mục 6).
+5. **Lấy kho đã duyệt** (user chốt 28/10): `python3 _scripts/ds-kit.py` in trạng thái 9 mục foundations
+   (`design/v2/foundations.md` mục 0) và mọi component md (`design/v2/components/*/`). Preview vòng 1 và vòng 2 **ráp từ kho
+   này**: token qua `design/v2/tokens.css`, phần con là component đã có (lấy anatomy, CSS, số đo từ md/`_work` của nó),
+   không vẽ lại cái đã có. Chốt danh sách component preview dùng → `python3 _scripts/ds-kit.py <slug> --uses a,b` ghi
+   `page.kit`; trang hiện khối *Ráp từ kho*, phần chưa `approved` vẫn dùng nhưng gắn nhãn "chưa duyệt".
+6. **Component lồng nhau** (DEC-292): khai con trong `design/v2/components/_deps.json` (`uses`: child, role `embed`/`anchor`,
+   `provisional` khi con chưa dựng, `parts`). Quyết định về hình dạng con thuộc con — cha chỉ quyết cách đặt con; nếu buộc
+   phải chốt trước (con chưa dựng) thì ghi vào `inherited.<con>` (id, title, choice, from, dec). Component đang dựng là con
+   của ai → `ds-deps.py inherited <slug>`: các điểm đó vào brainstorm làm mặc định (trang hiện khối *Chốt sẵn từ component
+   cha*); user đổi thì cha cần sync. `ds-kit.py <slug>` tự lấy con từ sổ, ghi phiên bản từng con. Sau khi chốt / sửa góp ý
+   làm đổi hình một component → `python3 _scripts/ds-deps.py check --write --backlog`: cha có con đổi phiên bản bị đánh ⚠
+   cần sync (trang + dashboard) và có task "Sync <cha> theo <con>"; làm task = chạy lại `ds-kit.py <cha>`, dựng lại preview,
+   chạy lại bước 3 / review. Trên Figma cha dùng instance của con nên tự theo.
 
 ### Vòng 1 — Brainstorm (tab 1)
 
@@ -487,7 +525,10 @@ Publish luôn cùng đường dẫn file (giữ link), `capabilities: {db: {}, u
   thoại 393). Kit tự bọc **vỏ ứng dụng**: web = sidebar invlogis + header (đường dẫn, ô tìm, chuông, tài khoản) + tiêu đề
   trang; app = thanh trạng thái + thanh tiêu đề + thanh tab dưới. Màn chỉ viết phần nội dung. Nút nổi **Bảng chọn** (góc
   dưới phải; mobile mở sheet) mở menu 3 tab: *Biến thể* (bộ chọn sẵn theo nguồn + phương án từng điểm + "Chốt tổ hợp
-  này"), *Màn*, *Hiển thị* (trạng thái, Light/Dark). Bấm vào component trên màn (phần tử có `data-cmp`) cũng mở menu.
+  này"), *Màn*, *Hiển thị* (trạng thái, Light/Dark). **Màn bấm được như prototype** (mọi tab có màn demo, cả khung
+  biến thể lẻ): khai `proto` — bấm ô tìm mở bảng tìm, bấm chuông mở thông báo, bấm một dòng thì đóng; bấm ra ngoài lớp
+  đang mở hoặc Esc thì về trạng thái trước; bấm chỗ trống thì nháy viền mọi vùng bấm được. Không khai `proto` → bấm
+  phần tử `data-cmp` mở menu như cũ.
   Bộ chọn sẵn: `rec` (đề xuất), `untitled`, `astryx`, mỗi ý tưởng cộng đồng một bộ (id trùng id ý tưởng; card ý tưởng có
   nút "Xem trên màn demo").
   Cách viết trong `page.json` (khuôn: `html-kit/sample-page.json`):
@@ -499,14 +540,18 @@ Publish luôn cùng đường dẫn file (giữ link), `capabilities: {db: {}, u
   - `screens`: `[{id, name, device: web|mobile, width?, note, title?, nav?, crumb?, back?, tabs?, heading?, shell?, html}]`
     — `nav` = mục sidebar / tab dưới đang chọn; `shell: "none"` bỏ vỏ. Component đang bàn gắn `data-cmp`.
     `presets`: `[{id, label, pick: {D1: "a"}, screen?}]`.
+  - `proto`: `[{sel, state?, set?, toggle?, back?, close?}]` — bấm phần tử khớp `sel` sang `state` (và/hoặc biến thể
+    `set: {D7: "b"}`); `toggle` bấm lần 2 về `back` hoặc trạng thái trước; `close: true` = phần tử đóng lớp. `protoLayers`
+    = bộ chọn các lớp mở (bấm bên trong không đóng); `protoHint` = câu gợi ý trên màn. Mọi trạng thái người dùng tự mở
+    được trên sản phẩm thật phải có đường bấm; trạng thái do dữ liệu (rỗng, chữ dài) chọn ở Bảng chọn.
   - Dữ liệu mẫu cố định (không ngày giờ chạy, không ngẫu nhiên); nhãn trạng thái là chữ nghiệp vụ, không mã kỹ thuật;
     không emoji (icon SVG nét); màn chỉ chứa thứ người dùng thật thấy (luật `/prototype-html`).
 * Sinh trang (`ds-component-page.py`), publish, rồi **dừng**: báo link, chờ user chọn trên trang.
 
 ### Vòng 2 — Preview (tab 2)
 
-User báo đã chọn → `ArtifactData list answers` → ghi `answers.json` → tóm tắt lựa chọn trong chat (1 bảng) → dựng
-preview đúng các lựa chọn:
+User báo đã chọn → `ArtifactData list answers` → ghi `answers.json` → tóm tắt lựa chọn trong chat (1 bảng) → chạy lại
+`ds-kit.py <slug> --uses …` (trạng thái kho có thể đã đổi; tổ hợp mới có thể cần thêm component) → dựng preview đúng các lựa chọn:
 
 * **Màn demo đã chốt:** cùng `screens` của vòng 1, khoá theo tổ hợp user chốt (`ds-component-page.py` tự đọc
   `answers.json` ghi vào `preview.pick`), bổ sung màn còn thiếu tới đủ 4 loại (danh sách, chi tiết, form, sheet xác
@@ -515,14 +560,32 @@ preview đúng các lựa chọn:
   trong khung 393); Light/Dark (CSS tự khai `.pv[data-theme=dark]`); kiểm chữ dài cho trường được xuống dòng.
 * **Khai giá trị** vào `values` của `page.json` song song khi viết CSS: mỗi phần × thuộc tính × nền tảng × cỡ × trạng
   thái có số hoặc màu riêng (cách ghi: docstring của `ds-foundation-check.py`). Màu chữ/icon/viền mang nghĩa ghi kèm
-  `on` (nền) để đo tương phản; control ghi `control: true`; phần bấm được ghi `interactive` và `hitArea`.
+  `on` (nền) để đo tương phản; control ghi `control: true`; phần bấm được ghi `interactive` và `hitArea`. **Mỗi dòng
+  ghi `sel`** (bộ chọn trong CSS nơi giá trị nằm; thêm `cssProp`, `tpl` khi thuộc tính viết gộp) — thiếu `sel` thì tab 3
+  không vẽ lại được. CSS chỉ của khung màn demo (vỏ, bảng dữ liệu mẫu) để ở `cssScreen`, không đối chiếu. Thứ tự làm máy:
+  (1) `_scripts/ds-css-split.py _work/{slug} --inline --write` — style inline có số trong màn → class phụ, rule chỉ trúng
+  phần tử ngoài component (`data-cmp`, `data-show`/`data-any` theo phương án hay trạng thái, bảng biến thể) → `cssScreen`;
+  (2) `ds-foundation-check.py … --declare` — gắn `sel` (một ứng viên, hoặc trùng bộ chọn đã gắn cho cùng phần), khai tự
+  động giá trị trần còn lại (`"auto": true`, tên phần lấy theo bộ chọn đã học), bỏ dòng auto trùng dòng gốc; (3) dòng còn
+  mơ hồ gắn tay; dòng không có trên CSS preview (vd bóng elev, độ đậm trong shorthand) ghi `noOverride: true` + `why`;
+  (4) đặt tên phần dễ đọc cho dòng auto còn mang tên bộ chọn; (5) so ảnh tab 2 trước/sau phải giống từng điểm ảnh.
 * Duyệt kiểu L3: tối đa 3 bản (`preview.version`; ô duyệt của bản n lưu ở `preview-approve-vn`, bản 1 là `preview-approve`), mỗi bản sửa theo ghi chú + comment trên trang (comment chỉ đổi phần
   tử được comment, memory phạm vi comment). Dừng chờ "Duyệt".
 
 ### Vòng 3 — Đối chiếu foundation (tab 3)
 
 1. `python3 _scripts/ds-foundation-check.py design/v2/components/_work/{slug} --write` → `check.json`.
-2. Sinh lại trang, publish, dừng. User quyết từng dòng ⛔ và ＋ (↔ không bắt buộc; không chọn = kéo về token đề xuất).
+   **Kiểm kỹ 7 nhóm** (user chốt 28/10): `ds-foundation-check.py` gắn `group` cho mọi dòng (Chữ · Màu · Icon · Hiệu ứng ·
+   Khoảng cách & cỡ · Bo góc · Lưới & độ rộng) và nạp `_scripts/ds_foundation_audit.py` kiểm thêm: font ngoài bộ DS, tổ hợp
+   cỡ/dòng ngoài thang type/*, viết hoa + giãn chữ sai caption-caps, cỡ icon ngoài 12/14/16/20/24, nét khác 1.8, khối icon
+   nhấn mạnh khác Featured 48/24, blur ngoài blur/*, bề rộng khung ngoài width/*, lề nội dung khác screen-inset. Báo cáo in
+   "Theo nhóm", check.json có `groups`; bảng nổi bước 3 lọc theo nhóm.
+2. Sinh lại trang, publish, dừng. Tab 3 vẽ lại màn demo + bảng biến thể bằng `design/v2/tokens.css`, đổi qua lại 3
+   chế độ: *Tự do* (bản tab 2) · *Theo lựa chọn hiện tại* · *Tất cả về token có sẵn*, có nhấp nháy A/B, tô viền chỗ đổi,
+   bấm dòng để soi phần tử, Light/Dark, bảng Trước → Sau. User quyết từng dòng ⛔ và ＋, và mọi dòng ↔ **nhìn thấy khác**
+   (`must`, viền cam); ↔ không thấy khác thì không chọn = kéo về token đề xuất. Nhóm *Chưa khai* (giá trị trần trên hình
+   chưa có dòng) phải về 0 bằng cách khai thêm vào `values` — không chọn thay user. Bỏ qua một giá trị (`cssIgnore`) bắt
+   buộc có `why`; trang in ra để user soát.
 3. Dump `answers.json`, chạy lại script: exit 0 mới sang vòng 4. Quyết định "đổi luật foundation" hoặc "thêm token" →
    sửa `design/v2/tokens.json` + `foundations.md` qua L1/L2 trên `main`, chạy `ds-v2-tokens.py`, ghi DEC; quyết định sửa
    preview → sửa preview, sinh lại (không cần user duyệt lại phần đã khớp).
@@ -532,13 +595,33 @@ preview đúng các lựa chọn:
 * Ghi spec `design/v2/components/{base|application}/{slug}.md` từ các lựa chọn đã chốt (L1 plan; số đo ghi bằng **tên
   token** sau đối chiếu, không ghi số trần), thêm DEC cho từng điểm đã chọn giữa ≥ 2 phương án (gom một dòng DEC nếu
   nhỏ). Ảnh preview đã duyệt chụp lưu `_work/{slug}/preview-web.png`, `preview-mobile.png` làm mốc nhìn.
-* Dựng theo Bước 6–7 (đường `--build`, gói = spec + ảnh mốc). Hình Figma khác preview chỗ nào mà không do token → sửa
-  Figma, không sửa preview (memory prototype → Figma).
+* Dựng theo Bước 6–7 (đường `--build`, gói = spec + ảnh mốc). **Mốc nhìn là chế độ "Theo lựa chọn hiện tại" của tab 3**
+  (không phải bản tự do tab 2). Hình Figma khác mốc chỗ nào mà không do token → sửa Figma, không sửa preview (memory
+  prototype → Figma).
+* **Trạng thái:** md mang `status` draft → in-review (đã lên Figma, đang review) → approved (user duyệt sau vòng 5) →
+  shipped; dòng meta `> …` của md cùng nhãn (Nháp · Đang review · Đã duyệt · Đã bàn giao). Trên Figma: dòng đầu mô tả set
+  `Trạng thái: …` + frame "Nhãn trạng thái" nằm thẳng trong Section (không đặt tên "Trạng thái": trùng Section con khu demo state). Đổi status qua L2 bảng Trước → Sau.
+* **Figma ↔ repo luôn khớp:** sau MỌI lần ghi Figma chụp lại bằng `_scripts/figma-ds-snapshot.js` (qua `use_figma`, chỉ
+  đọc; `PAGE_ID=''` → biến + danh sách trang, rồi từng trang DS) → `ds-v2-sync-check.py --merge …` →
+  `ds-v2-sync-check.py --figma .claude/state/figma/ds-v2-snapshot.json`. FAIL thì sửa trước khi báo xong.
 
 ### Vòng 5 — Review Figma (tab 4)
 
 Bước 7 mục 12 (3 agent). Đưa kết quả vào `reviews` của `page.json` (ảnh chụp node tải lên bằng `assets` hoặc bỏ trống),
 link Figma vào `figma`, sinh lại, publish, dừng. User chọn Sửa / Bỏ qua → sửa → kiểm lại phần đã sửa → Bước 9.
+
+Tab 4 **có preview**: hình trái đứng yên (cùng màn demo, vẽ theo mốc tab 3, bấm được như prototype), danh sách điểm cuộn
+bên phải. Mỗi điểm review khai thêm khi chỉ được vào hình:
+
+| Trường | Nghĩa |
+|---|---|
+| `screen` · `state` · `pick` | màn (id), trạng thái, biến thể để thấy chỗ đó — nút *Xem trên hình* nhảy tới |
+| `sel` | phần tử trên màn — ghim R-n (đỏ/cam/xanh theo mức) hiện khi đúng màn + trạng thái |
+| `after` | CSS "sau khi sửa" (`.pv …{}`) — xem ở chế độ *Sau khi sửa · theo lựa chọn* / *· tất cả* |
+| markup `data-fix="R2"` / `data-unfix="R2"` trong `screens` | phần thêm / phần bị thay khi sửa (đổi chữ dùng cặp này) |
+| `where` | 1 câu chỗ lệch nằm ở đâu (vd "preview có, Figma chưa vẽ") |
+
+Điểm không chỉ được vào hình (API thuộc tính, nhãn khung Tài liệu, spec trợ năng) để trống các trường trên.
 
 ### Luật chặn
 
@@ -546,7 +629,8 @@ link Figma vào `figma`, sinh lại, publish, dừng. User chọn Sửa / Bỏ q
 |---|---|
 | user chọn xong vòng 1 (mọi điểm cần quyết có lựa chọn, hoặc user nói "theo đề xuất") | dựng preview |
 | user chọn "Duyệt" ở tab 2 | chạy đối chiếu foundation |
-| `ds-foundation-check.py` exit 0 | ghi spec md, đụng Figma |
+| `ds-foundation-check.py` exit 0 (gồm 0 *Chưa khai*, mọi dòng `must` đã chọn) | ghi spec md, đụng Figma |
+| `ds-v2-sync-check.py --figma` không FAIL sau lần ghi Figma | báo xong lượt dựng / sửa |
 | 3 agent review chạy xong | báo hoàn tất |
 
 Chế độ chạy (`/run-task`) không áp cho `--html`: mọi vòng chờ người chọn trên trang.
@@ -646,4 +730,7 @@ có chủ đích so với bảng của rule, tới khi chuyển hẳn sang DS v2
 - `/figma-design-system` (dựng cả bộ DS), `/figma-screen` (vẽ màn dùng component này).
 - `--html`: khung trang `html-kit/review-page.html` + khuôn dữ liệu `html-kit/sample-page.json` · `_scripts/ds-component-page.py`
   (sinh trang) · `_scripts/ds-foundation-check.py` (gate vòng 3) · `_scripts/ref-untitled.sh` (code Untitled) · DEC-285.
+- Khai giá trị: `_scripts/ds-css-split.py` (tách CSS khung màn, inline → class) · `ds-foundation-check.py --declare`.
+- Đồng bộ Figma ↔ repo: `_scripts/figma-ds-snapshot.js` (chụp Figma, chỉ đọc) · `_scripts/ds-v2-sync-check.py` (gate sau
+  mọi lần ghi Figma, `--status` bảng trạng thái).
 - Agent review Bước 7 mục 12: `.claude/agents/visual-reviewer.md`, `.claude/agents/uxui-reviewer.md`, skill `accessibility-review`.

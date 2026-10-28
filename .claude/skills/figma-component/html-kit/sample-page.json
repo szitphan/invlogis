@@ -189,7 +189,8 @@
    "size": "MD",
    "value": 24,
    "interactive": true,
-   "hitArea": 44
+   "hitArea": 44,
+   "sel": ".tg"
   },
   {
    "part": "Container",
@@ -250,7 +251,12 @@
    "severity": "Trung",
    "text": "Count và nhãn cùng độ đậm, khó tách.",
    "fix": "Count dùng nền muted.",
-   "node": "6800:1"
+   "node": "6800:1",
+   "screen": "list-web",
+   "state": "default",
+   "sel": "[data-cmp]",
+   "after": ".pv [data-cmp]{font-weight:600}",
+   "where": "ví dụ: ghim + CSS sau khi sửa"
   },
   {
    "id": "R2",
@@ -264,5 +270,14 @@
  "figma": {
   "url": "https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/",
   "label": "Tag trên DS · Base components"
- }
+ },
+ "cssScreen": "/* CSS chỉ của khung màn demo (vỏ, bảng mẫu) — không đối chiếu foundation */",
+ "proto": [
+  {
+   "sel": "[data-cmp]",
+   "state": "long",
+   "toggle": true
+  }
+ ],
+ "protoHint": "bấm component để thử chữ dài"
 }

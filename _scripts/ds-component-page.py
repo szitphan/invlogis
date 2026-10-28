@@ -3,6 +3,7 @@
 .claude/skills/figma-component/html-kit/review-page.html.
 
 Đầu vào: design/v2/components/_work/{slug}/page.json (+ check.json nếu đã chạy ds-foundation-check.py --write)
+         + design/v2/tokens.css (nhúng nguyên văn — tab 3 vẽ lại preview bằng token thật)
 Đầu ra:  design/v2/components/_work/{slug}/{slug}-review.html — publish file này bằng Artifact (cùng đường dẫn
          mỗi lần để giữ một link; capabilities {db:{}, user:{}}).
 
@@ -18,6 +19,7 @@ ROOT = Path(__file__).resolve().parent.parent
 KIT = ROOT / ".claude/skills/figma-component/html-kit/review-page.html"
 LOGO = ROOT / "design/brand/innvie-v1/logo-color.png"
 WORK = ROOT / "design/v2/components/_work"
+TOKENS_CSS = ROOT / "design/v2/tokens.css"  # nhúng cho preview "Theo foundation" ở tab 3
 
 NEED = {
     "brainstorm": ["component", "slug", "refs", "ideas", "decisions", "screens", "presets"],
@@ -51,7 +53,9 @@ def main():
     rnd = page.get("round", "brainstorm")
     if rnd not in ORDER:
         die(f"round phải là một trong {ORDER}")
-    missing = [k for r in ORDER[:ORDER.index(rnd) + 1] for k in NEED[r] if not page.get(k)]
+    # "brief": brainstorm gọn — chỉ điểm cần quyết, không có ý tưởng cộng đồng (user chọn 28/10 cho Base đã chốt biến thể)
+    missing = [k for r in ORDER[:ORDER.index(rnd) + 1] for k in NEED[r]
+               if not page.get(k) and not (k == "ideas" and page.get("brief"))]
     if rnd == "foundation" and not (d / "check.json").exists():
         missing.append("check.json (chạy ds-foundation-check.py --write)")
     ideas = page.get("ideas") or []
@@ -104,7 +108,8 @@ def main():
     title = page.get("title") or f"{page['component']} Review"
     html = (html.replace("__TITLE__", title).replace("__LOGO__", logo)
             .replace("/*__PAGE__*/", js_json(page))
-            .replace("/*__CHECK__*/", js_json(check) if check else "null"))
+            .replace("/*__CHECK__*/", js_json(check) if check else "null")
+            .replace("/*__TOKENS__*/", TOKENS_CSS.read_text().replace("</", "<\\/") if TOKENS_CSS.exists() else ""))
     out = d / f"{slug}-review.html"
     out.write_text(html)
     print(f"Đã sinh {out} ({len(html)//1024} KB) · vòng {rnd}")

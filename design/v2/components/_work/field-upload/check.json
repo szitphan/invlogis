@@ -1,0 +1,6062 @@
+{
+ "tokens_version": "0.16.0",
+ "counts": {
+  "ok": 99,
+  "near": 26,
+  "new": 24,
+  "conflict": 8,
+  "undeclared": 0
+ },
+ "no_sel": 0,
+ "open": 51,
+ "ignored": [
+  {
+   "sel": ".lbi",
+   "why": "D1 B (nhãn trong khung app) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".bar",
+   "why": "D4 A (thanh tiến độ) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".bar i",
+   "why": "D4 A — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".az2",
+   "why": "D6 B (hai nút Chụp ảnh | Chọn tệp) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".bt.big",
+   "why": "D6 B — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".bt.sm",
+   "why": "D5 B (nút Thử lại bên phải) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".fa",
+   "why": "D5 B (cụm nút bên phải) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".gr",
+   "why": "D7 A (lưới ảnh) / D6 C (ô +) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".tl",
+   "why": "D7 A (lưới ảnh) / D6 C (ô +) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".tl .ph",
+   "why": "D7 A (lưới ảnh) / D6 C (ô +) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".tl.add",
+   "why": "D7 A (lưới ảnh) / D6 C (ô +) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".tl.error",
+   "why": "D7 A (lưới ảnh) / D6 C (ô +) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".tov",
+   "why": "D7 A (lưới ảnh) / D6 C (ô +) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".tov.er",
+   "why": "D7 A (lưới ảnh) / D6 C (ô +) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".ring",
+   "why": "D7 A (lưới ảnh) / D6 C (ô +) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".tcap",
+   "why": "D7 A (lưới ảnh) / D6 C (ô +) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".tx",
+   "why": "D7 A (lưới ảnh) / D6 C (ô +) — phương án không chọn ở vòng 1 — chỉ dùng cho trang Brainstorm"
+  },
+  {
+   "sel": ".lb",
+   "props": [
+    "gap"
+   ],
+   "why": "nhãn đổi sang display:block (dấu * theo dòng chữ) — gap không còn tác dụng"
+  }
+ ],
+ "groups": {
+  "typo": {
+   "label": "Chữ",
+   "total": 31,
+   "ok": 14,
+   "open": 17,
+   "audit": 3
+  },
+  "color": {
+   "label": "Màu",
+   "total": 47,
+   "ok": 37,
+   "open": 10,
+   "audit": 0
+  },
+  "icon": {
+   "label": "Icon",
+   "total": 15,
+   "ok": 10,
+   "open": 5,
+   "audit": 4
+  },
+  "effect": {
+   "label": "Hiệu ứng",
+   "total": 4,
+   "ok": 3,
+   "open": 1,
+   "audit": 0
+  },
+  "spacing": {
+   "label": "Khoảng cách & cỡ",
+   "total": 47,
+   "ok": 29,
+   "open": 13,
+   "audit": 0
+  },
+  "radius": {
+   "label": "Bo góc",
+   "total": 10,
+   "ok": 6,
+   "open": 2,
+   "audit": 0
+  },
+  "grid": {
+   "label": "Lưới & độ rộng",
+   "total": 3,
+   "ok": 0,
+   "open": 3,
+   "audit": 0
+  }
+ },
+ "rows": [
+  {
+   "id": "field.gap.web",
+   "part": "Field",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".fu",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "control/padding-x-icon/sm",
+    "control/icon-gap"
+   ],
+   "bind": {
+    "token": "control/icon-gap",
+    "css": "var(--control-icon-gap)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/icon-gap",
+    "css": "var(--control-icon-gap)"
+   }
+  },
+  {
+   "id": "label.font-size.web",
+   "part": "Label",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".lb",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/label/size",
+    "css": "var(--type-label-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/label/size",
+    "css": "var(--type-label-size)"
+   }
+  },
+  {
+   "id": "label.line-height.web",
+   "part": "Label",
+   "prop": "line-height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".lb",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/heading/line-height",
+    "type/body/line-height",
+    "type/label/line-height"
+   ],
+   "bind": {
+    "token": "type/label/line-height",
+    "css": "var(--type-label-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/label/line-height",
+    "css": "var(--type-label-line-height)"
+   }
+  },
+  {
+   "id": "label.font-weight.web",
+   "part": "Label",
+   "prop": "font-weight",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 500,
+   "sel": ".lb",
+   "cssProps": [
+    "font-weight"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "Medium"
+   ],
+   "bind": {
+    "token": "Medium",
+    "css": "500"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "Medium",
+    "css": "500"
+   }
+  },
+  {
+   "id": "label.color.web",
+   "part": "Label",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#525252",
+   "sel": ".lb",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/secondary-strong",
+    "color/chip/gray/fg"
+   ],
+   "bind": {
+    "token": "color/chip/gray/fg",
+    "css": "var(--color-chip-gray-fg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 7.81,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/chip/gray/fg",
+    "css": "var(--color-chip-gray-fg)"
+   }
+  },
+  {
+   "id": "label.font-size.mobile",
+   "part": "Label",
+   "prop": "font-size",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 13,
+   "sel": ".fu.m .lb",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/caption/size",
+    "type/code/size"
+   ],
+   "bind": {
+    "token": "type/code/size",
+    "css": "var(--type-code-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/code/size",
+    "css": "var(--type-code-size)"
+   }
+  },
+  {
+   "id": "required-mark.color.web",
+   "part": "Required mark",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#B42318",
+   "sel": ".req",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/status/danger-text",
+    "color/chip/red/fg",
+    "field/fg/error"
+   ],
+   "bind": {
+    "token": "field/fg/error",
+    "css": "var(--field-fg-error)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 6.57,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/fg/error",
+    "css": "var(--field-fg-error)"
+   }
+  },
+  {
+   "id": "hint.font-size.web",
+   "part": "Hint",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12.5,
+   "sel": ".hn",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/code/size",
+    "value": 12,
+    "css": "var(--type-code-size)"
+   },
+   "visible": true,
+   "suggest": "type/code/size (12)",
+   "rules": [],
+   "note": "lệch 0.5",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "hint.line-height.web",
+   "part": "Hint",
+   "prop": "line-height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".hn",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/body/line-height",
+    "value": 20,
+    "css": "var(--type-body-line-height)"
+   },
+   "visible": true,
+   "suggest": "type/body/line-height (20)",
+   "rules": [],
+   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/body/line-height = 20",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "hint.color.web",
+   "part": "Hint",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#737373",
+   "sel": ".hn",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/secondary",
+    "field/fg/placeholder",
+    "field/fg/label-web",
+    "field/fg/label-app"
+   ],
+   "bind": {
+    "token": "field/fg/icon",
+    "css": "var(--field-fg-icon)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.74,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/fg/icon",
+    "css": "var(--field-fg-icon)"
+   }
+  },
+  {
+   "id": "error-text.font-size.web",
+   "part": "Error text",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12.5,
+   "sel": ".fe",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/code/size",
+    "value": 12,
+    "css": "var(--type-code-size)"
+   },
+   "visible": true,
+   "suggest": "type/code/size (12)",
+   "rules": [],
+   "note": "lệch 0.5",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "error-text.color.web",
+   "part": "Error text",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#B42318",
+   "sel": ".fe",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/status/danger-text",
+    "color/chip/red/fg",
+    "field/fg/error"
+   ],
+   "bind": {
+    "token": "field/fg/error",
+    "css": "var(--field-fg-error)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 6.57,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/fg/error",
+    "css": "var(--field-fg-error)"
+   }
+  },
+  {
+   "id": "error-icon.icon-size.web",
+   "part": "Error icon",
+   "prop": "icon-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".fe .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/sm",
+    "icon/size/chip"
+   ],
+   "bind": {
+    "token": "icon/size/sm",
+    "css": "var(--icon-size-sm)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/sm",
+    "css": "var(--icon-size-sm)"
+   }
+  },
+  {
+   "id": "dropzone.radius.web",
+   "part": "Dropzone",
+   "prop": "radius",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".dz",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/card"
+   ],
+   "bind": {
+    "token": "radius/card",
+    "css": "var(--radius-card)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/card",
+    "css": "var(--radius-card)"
+   }
+  },
+  {
+   "id": "dropzone.border-width.web",
+   "part": "Dropzone",
+   "prop": "border-width",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 1,
+   "sel": ".dz",
+   "cssProps": [
+    "border-width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "field/border-width",
+    "viền 1px (mặc định)"
+   ],
+   "bind": {
+    "token": "field/border-width",
+    "css": "var(--field-border-width)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/border-width",
+    "css": "var(--field-border-width)"
+   }
+  },
+  {
+   "id": "dropzone.border-color.web",
+   "part": "Dropzone",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#D4D4D4",
+   "sel": ".dz",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/strong"
+   ],
+   "bind": {
+    "token": "color/border/strong",
+    "css": "var(--color-border-strong)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/border/strong",
+    "css": "var(--color-border-strong)"
+   }
+  },
+  {
+   "id": "dropzone.background.web",
+   "part": "Dropzone",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#FFFFFF",
+   "sel": ".dz",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/canvas",
+    "color/bg/surface",
+    "field/bg/web"
+   ],
+   "bind": {
+    "token": "field/bg/web",
+    "css": "var(--field-bg-web)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/bg/web",
+    "css": "var(--field-bg-web)"
+   }
+  },
+  {
+   "id": "dropzone-full.padding-y.web",
+   "part": "Dropzone full",
+   "prop": "padding-y",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 16,
+   "sel": ".dz-a",
+   "cssProps": [
+    "padding-top",
+    "padding-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-lg",
+    "space/gap-lg",
+    "layout/card-padding",
+    "layout/title-gap"
+   ],
+   "bind": {
+    "token": "space/gap-lg",
+    "css": "var(--space-gap-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-lg",
+    "css": "var(--space-gap-lg)"
+   }
+  },
+  {
+   "id": "dropzone-full.padding-x.web",
+   "part": "Dropzone full",
+   "prop": "padding-x",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 24,
+   "sel": ".dz-a",
+   "cssProps": [
+    "padding-left",
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-xl",
+    "space/gap-xl"
+   ],
+   "bind": {
+    "token": "space/gap-xl",
+    "css": "var(--space-gap-xl)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-xl",
+    "css": "var(--space-gap-xl)"
+   }
+  },
+  {
+   "id": "dropzone-full.gap.web",
+   "part": "Dropzone full",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 4,
+   "sel": ".dz-a",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-xs",
+    "space/gap-xs",
+    "field/text-inset",
+    "field/content-gap"
+   ],
+   "bind": {
+    "token": "field/text-inset",
+    "css": "var(--field-text-inset)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/text-inset",
+    "css": "var(--field-text-inset)"
+   }
+  },
+  {
+   "id": "dropzone-compact.padding.web",
+   "part": "Dropzone compact",
+   "prop": "padding",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".dz-b",
+   "cssProps": [
+    "padding"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-md",
+    "space/gap-md",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
+  },
+  {
+   "id": "dropzone-compact.padding-left.web",
+   "part": "Dropzone compact",
+   "prop": "padding-left",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".dz-b",
+   "cssProps": [
+    "padding-left"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-md",
+    "value": 12,
+    "css": "var(--space-gap-md)"
+   },
+   "visible": false,
+   "suggest": "space/gap-md (12)",
+   "rules": [],
+   "note": "lệch 2",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "value": 12,
+    "css": "var(--space-gap-md)",
+    "auto": true
+   }
+  },
+  {
+   "id": "dropzone-compact.gap.web",
+   "part": "Dropzone compact",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".dz-b",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-md",
+    "space/gap-md",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
+  },
+  {
+   "id": "dropzone-button-only.gap.web",
+   "part": "Dropzone button only",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".dz-c",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-md",
+    "space/gap-md",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
+  },
+  {
+   "id": "dropzone-text.font-size.web",
+   "part": "Dropzone text",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 13.5,
+   "sel": ".dz-t",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/body/size",
+    "value": 14,
+    "css": "var(--type-body-size)"
+   },
+   "visible": true,
+   "suggest": "type/body/size (14)",
+   "rules": [],
+   "note": "lệch -0.5",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "dropzone-text.line-height.web",
+   "part": "Dropzone text",
+   "prop": "line-height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".dz-t",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/heading/line-height",
+    "type/body/line-height",
+    "type/label/line-height"
+   ],
+   "bind": {
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
+   }
+  },
+  {
+   "id": "dropzone-text.color.web",
+   "part": "Dropzone text",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#737373",
+   "sel": ".dz-t",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/secondary",
+    "field/fg/placeholder",
+    "field/fg/label-web",
+    "field/fg/label-app"
+   ],
+   "bind": {
+    "token": "field/fg/icon",
+    "css": "var(--field-fg-icon)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.74,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/fg/icon",
+    "css": "var(--field-fg-icon)"
+   }
+  },
+  {
+   "id": "dropzone-link.color.web",
+   "part": "Dropzone link",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".dz-t b",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/primary",
+    "field/fg/value"
+   ],
+   "bind": {
+    "token": "field/fg/value",
+    "css": "var(--field-fg-value)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 17.93,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/fg/value",
+    "css": "var(--field-fg-value)"
+   }
+  },
+  {
+   "id": "dropzone-link.font-weight.web",
+   "part": "Dropzone link",
+   "prop": "font-weight",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 600,
+   "sel": ".dz-t b",
+   "cssProps": [
+    "font-weight"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "Semi Bold"
+   ],
+   "bind": {
+    "token": "Semi Bold",
+    "css": "600"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "Semi Bold",
+    "css": "600"
+   }
+  },
+  {
+   "id": "dropzone-hint.font-size.web",
+   "part": "Dropzone hint",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".dz-h",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/caption/size",
+    "type/code/size"
+   ],
+   "bind": {
+    "token": "type/code/size",
+    "css": "var(--type-code-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/code/size",
+    "css": "var(--type-code-size)"
+   }
+  },
+  {
+   "id": "dropzone-hint.line-height.web",
+   "part": "Dropzone hint",
+   "prop": "line-height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".dz-h",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/body/line-height",
+    "value": 20,
+    "css": "var(--type-body-line-height)"
+   },
+   "visible": true,
+   "suggest": "type/body/line-height (20)",
+   "rules": [],
+   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/body/line-height = 20",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "dropzone-hint.color.web",
+   "part": "Dropzone hint",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#737373",
+   "sel": ".dz-h",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/secondary",
+    "field/fg/placeholder",
+    "field/fg/label-web",
+    "field/fg/label-app"
+   ],
+   "bind": {
+    "token": "field/fg/icon",
+    "css": "var(--field-fg-icon)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.74,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/fg/icon",
+    "css": "var(--field-fg-icon)"
+   }
+  },
+  {
+   "id": "featured-icon.size.web",
+   "part": "Featured icon",
+   "prop": "size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 40,
+   "sel": ".fi",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "control/height/lg"
+   ],
+   "bind": {
+    "token": "control/height/lg",
+    "css": "var(--control-height-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/lg",
+    "css": "var(--control-height-lg)"
+   }
+  },
+  {
+   "id": "featured-icon.radius.web",
+   "part": "Featured icon",
+   "prop": "radius",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 10,
+   "sel": ".fi",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "radius/tab",
+    "value": 8,
+    "css": "var(--radius-tab)"
+   },
+   "visible": false,
+   "suggest": "radius/tab (8)",
+   "rules": [],
+   "note": "trùng số với vehicle/thumb-radius-md nhưng đó là token của component khác; thang chung gần nhất radius/tab = 8",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/tab",
+    "value": 8,
+    "css": "var(--radius-tab)",
+    "auto": true
+   }
+  },
+  {
+   "id": "featured-icon.icon-size.web",
+   "part": "Featured icon",
+   "prop": "icon-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".fi .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/lg"
+   ],
+   "bind": {
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   }
+  },
+  {
+   "id": "featured-icon.border-color.web",
+   "part": "Featured icon",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#E5E5E5",
+   "sel": ".fi",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/default",
+    "field/border/disabled"
+   ],
+   "bind": {
+    "token": "field/border/disabled",
+    "css": "var(--field-border-disabled)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/border/disabled",
+    "css": "var(--field-border-disabled)"
+   }
+  },
+  {
+   "id": "featured-icon.color.web",
+   "part": "Featured icon",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#525252",
+   "sel": ".fi",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/secondary-strong",
+    "color/chip/gray/fg"
+   ],
+   "bind": {
+    "token": "color/chip/gray/fg",
+    "css": "var(--color-chip-gray-fg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 7.81,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/chip/gray/fg",
+    "css": "var(--color-chip-gray-fg)"
+   }
+  },
+  {
+   "id": "featured-icon-compact.size.web",
+   "part": "Featured icon compact",
+   "prop": "size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 36,
+   "sel": ".dz-b .fi,.fi.sm",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "control/height/md",
+    "value": 32,
+    "css": "var(--control-height-md)"
+   },
+   "visible": true,
+   "suggest": "control/height/md (32)",
+   "rules": [],
+   "note": "trùng số với avatar/size/md, list-row/min-height nhưng đó là token của component khác; thang chung gần nhất control/height/md = 32",
+   "group": "icon",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "dropzone-hover.background.web.hover",
+   "part": "Dropzone hover",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "hover",
+   "theme": "Light",
+   "value": "#F5F5F5",
+   "sel": ".dz.hv",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/selected",
+    "color/action/secondary",
+    "color/chip/gray/bg",
+    "field/bg/disabled"
+   ],
+   "bind": {
+    "token": "field/bg/disabled",
+    "css": "var(--field-bg-disabled)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/bg/disabled",
+    "css": "var(--field-bg-disabled)"
+   }
+  },
+  {
+   "id": "dropzone-hover.border-color.web.hover",
+   "part": "Dropzone hover",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "hover",
+   "theme": "Light",
+   "value": "#737373",
+   "sel": ".dz.hv",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/input",
+    "field/border/default"
+   ],
+   "bind": {
+    "token": "field/border/default",
+    "css": "var(--field-border-default)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.74,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/border/default",
+    "css": "var(--field-border-default)"
+   }
+  },
+  {
+   "id": "dropzone-drag-over.border-width.web.drag",
+   "part": "Dropzone drag-over",
+   "prop": "border-width",
+   "platform": "Web",
+   "size": "",
+   "state": "drag",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".dz.hover",
+   "cssProps": [
+    "border-width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "focus/width",
+    "field/border-width-active",
+    "viền 2px (đang gõ, focus)"
+   ],
+   "bind": {
+    "token": "field/border-width-active",
+    "css": "var(--field-border-width-active)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/border-width-active",
+    "css": "var(--field-border-width-active)"
+   }
+  },
+  {
+   "id": "dropzone-drag-over.border-color.web.drag",
+   "part": "Dropzone drag-over",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "drag",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".dz.hover",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "field/border/active",
+    "value": "#262626",
+    "css": "var(--field-border-active)"
+   },
+   "visible": true,
+   "suggest": "field/border/active (#262626)",
+   "rules": [],
+   "note": "trùng màu với color/bg/inverse, color/text/primary nhưng token không dành cho viền; token đúng nghĩa gần nhất field/border/active (#262626), ΔE 7.4",
+   "contrast": 17.18,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "dropzone-drag-over.background.web.drag",
+   "part": "Dropzone drag-over",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "drag",
+   "theme": "Light",
+   "value": "#FAFAFA",
+   "sel": ".dz.hover",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/muted",
+    "color/bg/hover",
+    "field/bg/app",
+    "field/bg/hover"
+   ],
+   "bind": {
+    "token": "field/bg/app",
+    "css": "var(--field-bg-app)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/bg/app",
+    "css": "var(--field-bg-app)"
+   }
+  },
+  {
+   "id": "dropzone-disabled.background.web.disabled",
+   "part": "Dropzone disabled",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "disabled",
+   "theme": "Light",
+   "value": "#F5F5F5",
+   "sel": ".dz.disabled,.az.disabled",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/selected",
+    "color/action/secondary",
+    "color/chip/gray/bg",
+    "field/bg/disabled"
+   ],
+   "bind": {
+    "token": "field/bg/disabled",
+    "css": "var(--field-bg-disabled)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/bg/disabled",
+    "css": "var(--field-bg-disabled)"
+   }
+  },
+  {
+   "id": "dropzone-disabled.opacity.web.disabled",
+   "part": "Dropzone disabled",
+   "prop": "opacity",
+   "platform": "Web",
+   "size": "",
+   "state": "disabled",
+   "theme": "Light",
+   "value": 0.6,
+   "sel": ".dz.disabled,.az.disabled",
+   "cssProps": [
+    "opacity"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/sm",
+    "value": 14,
+    "css": "var(--icon-size-sm)"
+   },
+   "visible": true,
+   "suggest": "icon/size/sm (14)",
+   "rules": [],
+   "note": "thang chung gần nhất icon/size/sm = 14",
+   "group": "effect",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "dropzone-error.border-color.web.error",
+   "part": "Dropzone error",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "error",
+   "theme": "Light",
+   "value": "#F04438",
+   "sel": ".dz.error,.az.error,.az2.error .bt",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "field/border/error",
+    "value": "#B42318",
+    "css": "var(--field-border-error)"
+   },
+   "visible": true,
+   "suggest": "field/border/error (#B42318)",
+   "rules": [],
+   "note": "gần nhất field/border/error (#B42318), ΔE 17.9",
+   "contrast": 3.76,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "focus-ring.focus-width.web",
+   "part": "Focus ring",
+   "prop": "focus-width",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".dz.focus,.bt.focus,.ib.focus,.az.focus,.lkr.focus",
+   "cssProps": [
+    "outline-width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "focus/width",
+    "field/border-width-active",
+    "focus/width"
+   ],
+   "bind": {
+    "token": "focus/width",
+    "css": "var(--focus-width)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "effect",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "focus/width",
+    "css": "var(--focus-width)"
+   }
+  },
+  {
+   "id": "focus-ring.focus-offset.web",
+   "part": "Focus ring",
+   "prop": "focus-offset",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".dz.focus,.bt.focus,.ib.focus,.az.focus,.lkr.focus",
+   "cssProps": [
+    "outline-offset"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "focus/width",
+    "focus/offset",
+    "field/border-width-active",
+    "focus/offset"
+   ],
+   "bind": {
+    "token": "focus/width",
+    "css": "var(--focus-width)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "effect",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "focus/width",
+    "css": "var(--focus-width)"
+   }
+  },
+  {
+   "id": "focus-ring.color.web",
+   "part": "Focus ring",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".dz.focus,.bt.focus,.ib.focus,.az.focus,.lkr.focus",
+   "cssProps": [
+    "outline-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "field/border/active",
+    "value": "#262626",
+    "css": "var(--field-border-active)"
+   },
+   "visible": true,
+   "suggest": "field/border/active (#262626)",
+   "rules": [],
+   "note": "trùng màu với color/bg/inverse, color/text/primary nhưng token không dành cho viền; token đúng nghĩa gần nhất field/border/active (#262626), ΔE 7.4",
+   "contrast": 17.93,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "choose-button.height.web",
+   "part": "Choose button",
+   "prop": "height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 32,
+   "sel": ".bt",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "control/height/md"
+   ],
+   "bind": {
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   }
+  },
+  {
+   "id": "choose-button.padding-x.web",
+   "part": "Choose button",
+   "prop": "padding-x",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".bt",
+   "cssProps": [
+    "padding-left",
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-md",
+    "space/gap-md",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
+  },
+  {
+   "id": "choose-button.radius.web",
+   "part": "Choose button",
+   "prop": "radius",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".bt",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/control",
+    "radius/field",
+    "radius/inner",
+    "radius/menu"
+   ],
+   "bind": {
+    "token": "radius/tab",
+    "css": "var(--radius-tab)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/tab",
+    "css": "var(--radius-tab)"
+   }
+  },
+  {
+   "id": "choose-button.gap.web",
+   "part": "Choose button",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".bt",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "control/padding-x-icon/sm",
+    "control/icon-gap"
+   ],
+   "bind": {
+    "token": "control/icon-gap",
+    "css": "var(--control-icon-gap)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/icon-gap",
+    "css": "var(--control-icon-gap)"
+   }
+  },
+  {
+   "id": "choose-button.font-size.web",
+   "part": "Choose button",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 13,
+   "sel": ".bt",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/body/size",
+    "value": 14,
+    "css": "var(--type-body-size)"
+   },
+   "visible": true,
+   "suggest": "type/body/size (14)",
+   "rules": [],
+   "note": "lệch -1",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "choose-button.font-weight.web",
+   "part": "Choose button",
+   "prop": "font-weight",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 600,
+   "sel": ".bt",
+   "cssProps": [
+    "font-weight"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "Semi Bold"
+   ],
+   "bind": {
+    "token": "Semi Bold",
+    "css": "600"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "Semi Bold",
+    "css": "600"
+   }
+  },
+  {
+   "id": "choose-button.border-color.web",
+   "part": "Choose button",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#D4D4D4",
+   "sel": ".bt",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/strong",
+    "button/border/outline"
+   ],
+   "bind": {
+    "token": "button/border/outline",
+    "css": "var(--button-border-outline)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "button/border/outline",
+    "css": "var(--button-border-outline)"
+   }
+  },
+  {
+   "id": "choose-button.icon-size.web",
+   "part": "Choose button",
+   "prop": "icon-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 16,
+   "sel": ".bt .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/md"
+   ],
+   "bind": {
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   }
+  },
+  {
+   "id": "file-list.gap.web",
+   "part": "File list",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".fl",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-sm",
+    "space/gap-sm",
+    "layout/list-gap",
+    "control/padding-x/sm"
+   ],
+   "bind": {
+    "token": "list-row/gap",
+    "css": "var(--list-row-gap)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "list-row/gap",
+    "css": "var(--list-row-gap)"
+   }
+  },
+  {
+   "id": "file-row.padding-y.web",
+   "part": "File row",
+   "prop": "padding-y",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".fr",
+   "cssProps": [
+    "padding-top",
+    "padding-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-md",
+    "space/gap-md",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
+  },
+  {
+   "id": "file-row.padding-left.web",
+   "part": "File row",
+   "prop": "padding-left",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".fr",
+   "cssProps": [
+    "padding-left"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-md",
+    "value": 12,
+    "css": "var(--space-gap-md)"
+   },
+   "visible": false,
+   "suggest": "space/gap-md (12)",
+   "rules": [],
+   "note": "lệch 2",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "value": 12,
+    "css": "var(--space-gap-md)",
+    "auto": true
+   }
+  },
+  {
+   "id": "file-row.padding-right.web",
+   "part": "File row",
+   "prop": "padding-right",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".fr",
+   "cssProps": [
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-sm",
+    "space/gap-sm",
+    "layout/list-gap",
+    "control/padding-x/sm"
+   ],
+   "bind": {
+    "token": "field/edge-inset",
+    "css": "var(--field-edge-inset)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/edge-inset",
+    "css": "var(--field-edge-inset)"
+   }
+  },
+  {
+   "id": "file-row.gap.web",
+   "part": "File row",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".fr",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-md",
+    "space/gap-md",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
+  },
+  {
+   "id": "file-row.radius.web",
+   "part": "File row",
+   "prop": "radius",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".fr",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/card"
+   ],
+   "bind": {
+    "token": "radius/card",
+    "css": "var(--radius-card)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/card",
+    "css": "var(--radius-card)"
+   }
+  },
+  {
+   "id": "file-row.radius.mobile",
+   "part": "File row",
+   "prop": "radius",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".pv[data-platform=mobile] .fr",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "radius/field",
+    "value": 12,
+    "css": "var(--radius-field)"
+   },
+   "visible": false,
+   "suggest": "radius/field (12)",
+   "rules": [],
+   "note": "lệch 2",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/field",
+    "value": 12,
+    "css": "var(--radius-field)",
+    "auto": true
+   }
+  },
+  {
+   "id": "file-row.padding-left.mobile",
+   "part": "File row",
+   "prop": "padding-left",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".pv[data-platform=mobile] .fr",
+   "cssProps": [
+    "padding-left"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-md",
+    "space/gap-md",
+    "layout/list-gap",
+    "form/field-gap"
+   ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
+  },
+  {
+   "id": "file-row.padding-right.mobile",
+   "part": "File row",
+   "prop": "padding-right",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 4,
+   "sel": ".pv[data-platform=mobile] .fr",
+   "cssProps": [
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-xs",
+    "space/gap-xs"
+   ],
+   "bind": {
+    "token": "space/gap-xs",
+    "css": "var(--space-gap-xs)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-xs",
+    "css": "var(--space-gap-xs)"
+   }
+  },
+  {
+   "id": "file-row.border-color.web",
+   "part": "File row",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#E5E5E5",
+   "sel": ".fr",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/default",
+    "field/border/disabled"
+   ],
+   "bind": {
+    "token": "field/border/disabled",
+    "css": "var(--field-border-disabled)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/border/disabled",
+    "css": "var(--field-border-disabled)"
+   }
+  },
+  {
+   "id": "file-row-error.border-color.web.error",
+   "part": "File row error",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "error",
+   "theme": "Light",
+   "value": "#F04438",
+   "sel": ".fr.error",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "field/border/error",
+    "value": "#B42318",
+    "css": "var(--field-border-error)"
+   },
+   "visible": true,
+   "suggest": "field/border/error (#B42318)",
+   "rules": [],
+   "note": "gần nhất field/border/error (#B42318), ΔE 17.9",
+   "contrast": 3.76,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "progress-fill.background.web",
+   "part": "Progress fill",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#F5F5F5",
+   "sel": ".fr .fill",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/selected",
+    "color/action/secondary",
+    "color/chip/gray/bg",
+    "field/bg/disabled"
+   ],
+   "bind": {
+    "token": "field/bg/disabled",
+    "css": "var(--field-bg-disabled)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/bg/disabled",
+    "css": "var(--field-bg-disabled)"
+   }
+  },
+  {
+   "id": "file-type-icon.size.web",
+   "part": "File type icon",
+   "prop": "size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 40,
+   "sel": ".ft",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "control/height/lg"
+   ],
+   "bind": {
+    "token": "control/height/lg",
+    "css": "var(--control-height-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/lg",
+    "css": "var(--control-height-lg)"
+   }
+  },
+  {
+   "id": "thumbnail.size.web",
+   "part": "Thumbnail",
+   "prop": "size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 40,
+   "sel": ".th",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "control/height/lg"
+   ],
+   "bind": {
+    "token": "control/height/lg",
+    "css": "var(--control-height-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/lg",
+    "css": "var(--control-height-lg)"
+   }
+  },
+  {
+   "id": "thumbnail.radius.web",
+   "part": "Thumbnail",
+   "prop": "radius",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".th",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/control",
+    "radius/field",
+    "radius/inner",
+    "radius/menu"
+   ],
+   "bind": {
+    "token": "radius/tab",
+    "css": "var(--radius-tab)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/tab",
+    "css": "var(--radius-tab)"
+   }
+  },
+  {
+   "id": "file-name.font-size.web",
+   "part": "File name",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 13.5,
+   "sel": ".fn",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/body/size",
+    "value": 14,
+    "css": "var(--type-body-size)"
+   },
+   "visible": true,
+   "suggest": "type/body/size (14)",
+   "rules": [],
+   "note": "lệch -0.5",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "file-name.font-size.mobile",
+   "part": "File name",
+   "prop": "font-size",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".pv[data-platform=mobile] .fn",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/body/size",
+    "value": 15,
+    "css": "var(--type-body-size)"
+   },
+   "visible": true,
+   "suggest": "type/body/size (15)",
+   "rules": [],
+   "note": "lệch -1",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "file-name.line-height.web",
+   "part": "File name",
+   "prop": "line-height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".fn",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/heading/line-height",
+    "type/body/line-height",
+    "type/label/line-height"
+   ],
+   "bind": {
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
+   }
+  },
+  {
+   "id": "file-name.font-weight.web",
+   "part": "File name",
+   "prop": "font-weight",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 500,
+   "sel": ".fn",
+   "cssProps": [
+    "font-weight"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "Medium"
+   ],
+   "bind": {
+    "token": "Medium",
+    "css": "500"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "Medium",
+    "css": "500"
+   }
+  },
+  {
+   "id": "file-name.color.web",
+   "part": "File name",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".fn",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/primary",
+    "field/fg/value"
+   ],
+   "bind": {
+    "token": "field/fg/value",
+    "css": "var(--field-fg-value)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 17.93,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/fg/value",
+    "css": "var(--field-fg-value)"
+   }
+  },
+  {
+   "id": "file-meta.font-size.web",
+   "part": "File meta",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12.5,
+   "sel": ".fs",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/code/size",
+    "value": 12,
+    "css": "var(--type-code-size)"
+   },
+   "visible": true,
+   "suggest": "type/code/size (12)",
+   "rules": [],
+   "note": "lệch 0.5",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "file-meta.line-height.web",
+   "part": "File meta",
+   "prop": "line-height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".fs",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/body/line-height",
+    "value": 20,
+    "css": "var(--type-body-line-height)"
+   },
+   "visible": true,
+   "suggest": "type/body/line-height (20)",
+   "rules": [],
+   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/body/line-height = 20",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "file-meta.gap.web",
+   "part": "File meta",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".fs",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-sm",
+    "space/gap-sm",
+    "layout/list-gap",
+    "control/padding-x/sm"
+   ],
+   "bind": {
+    "token": "field/edge-inset",
+    "css": "var(--field-edge-inset)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/edge-inset",
+    "css": "var(--field-edge-inset)"
+   }
+  },
+  {
+   "id": "file-meta.color.web",
+   "part": "File meta",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#737373",
+   "sel": ".fs",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/secondary",
+    "field/fg/placeholder",
+    "field/fg/label-web",
+    "field/fg/label-app"
+   ],
+   "bind": {
+    "token": "field/fg/icon",
+    "css": "var(--field-fg-icon)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.74,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/fg/icon",
+    "css": "var(--field-fg-icon)"
+   }
+  },
+  {
+   "id": "file-meta-divider.height.web",
+   "part": "File meta divider",
+   "prop": "height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".sep",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "touch/min",
+    "value": 24,
+    "css": "var(--touch-min)"
+   },
+   "visible": true,
+   "suggest": "touch/min (24)",
+   "rules": [],
+   "note": "trùng số với avatar/status-size/lg, avatar/edit-icon-size/md nhưng đó là token của component khác; thang chung gần nhất touch/min = 24",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "file-meta-divider.color.web",
+   "part": "File meta divider",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#D4D4D4",
+   "sel": ".sep",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/text/inverse",
+    "value": "#FFFFFF",
+    "css": "var(--color-text-inverse)"
+   },
+   "visible": true,
+   "suggest": "color/text/inverse (#FFFFFF)",
+   "rules": [],
+   "note": "trùng màu với color/border/strong, button/bg/secondary-pressed nhưng token không dành cho chữ; token đúng nghĩa gần nhất color/text/inverse (#FFFFFF), ΔE 15.1",
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "status-done.color.web",
+   "part": "Status done",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#1B7542",
+   "sel": ".st.ok",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/status/success-text",
+    "color/chip/green/fg"
+   ],
+   "bind": {
+    "token": "color/status/success-text",
+    "css": "var(--color-status-success-text)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 5.72,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/status/success-text",
+    "css": "var(--color-status-success-text)"
+   }
+  },
+  {
+   "id": "status-error.color.web",
+   "part": "Status error",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#B42318",
+   "sel": ".st.er",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/status/danger-text",
+    "color/chip/red/fg",
+    "field/fg/error"
+   ],
+   "bind": {
+    "token": "field/fg/error",
+    "css": "var(--field-fg-error)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 6.57,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/fg/error",
+    "css": "var(--field-fg-error)"
+   }
+  },
+  {
+   "id": "status-uploading.color.web",
+   "part": "Status uploading",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#737373",
+   "sel": ".st.up",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [
+    "color/text/secondary",
+    "field/fg/placeholder",
+    "field/fg/label-web",
+    "field/fg/label-app"
+   ],
+   "bind": {
+    "token": "field/fg/icon",
+    "css": "var(--field-fg-icon)"
+   },
+   "to": null,
+   "visible": true,
+   "suggest": null,
+   "rules": [
+    "Tương phản (foundations Mục 3.4, WCAG 1.4.3/1.4.11): 4.35:1 < 4.5:1 (text trên #F5F5F5)"
+   ],
+   "note": "",
+   "fix": {
+    "token": "color/text/secondary-strong",
+    "value": "#525252",
+    "css": "var(--color-text-secondary-strong)"
+   },
+   "contrast": 4.35,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "status-icon.icon-size.web",
+   "part": "Status icon",
+   "prop": "icon-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".st .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/sm",
+    "icon/size/chip"
+   ],
+   "bind": {
+    "token": "icon/size/sm",
+    "css": "var(--icon-size-sm)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/sm",
+    "css": "var(--icon-size-sm)"
+   }
+  },
+  {
+   "id": "retry-link.font-size.web",
+   "part": "Retry link",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 13,
+   "sel": ".lkr",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/body/size",
+    "value": 14,
+    "css": "var(--type-body-size)"
+   },
+   "visible": true,
+   "suggest": "type/body/size (14)",
+   "rules": [],
+   "note": "lệch -1",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "retry-link.font-weight.web",
+   "part": "Retry link",
+   "prop": "font-weight",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 600,
+   "sel": ".lkr",
+   "cssProps": [
+    "font-weight"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "Semi Bold"
+   ],
+   "bind": {
+    "token": "Semi Bold",
+    "css": "600"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "Semi Bold",
+    "css": "600"
+   }
+  },
+  {
+   "id": "retry-link.color.web",
+   "part": "Retry link",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#B42318",
+   "sel": ".lkr",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/status/danger-text",
+    "color/chip/red/fg",
+    "field/fg/error"
+   ],
+   "bind": {
+    "token": "field/fg/error",
+    "css": "var(--field-fg-error)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 6.57,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/fg/error",
+    "css": "var(--field-fg-error)"
+   }
+  },
+  {
+   "id": "retry-link.height.web",
+   "part": "Retry link",
+   "prop": "height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".lkr",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "touch/min",
+    "value": 24,
+    "css": "var(--touch-min)"
+   },
+   "visible": true,
+   "suggest": "touch/min (24)",
+   "rules": [],
+   "note": "thang chung gần nhất touch/min = 24",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "delete-button.size.web",
+   "part": "Delete button",
+   "prop": "size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 32,
+   "sel": ".ib",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "control/height/md"
+   ],
+   "bind": {
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   }
+  },
+  {
+   "id": "delete-button.size.mobile",
+   "part": "Delete button",
+   "prop": "size",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 40,
+   "sel": ".pv[data-platform=mobile] .fr .ib",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "control/height/md",
+    "value": 42,
+    "css": "var(--control-height-md)"
+   },
+   "visible": false,
+   "suggest": "control/height/md (42)",
+   "rules": [],
+   "note": "chỉ có primitive space/40 — component không gắn primitive (architecture Mục 7); thang chung gần nhất control/height/md = 42",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/md",
+    "value": 42,
+    "css": "var(--control-height-md)",
+    "auto": true
+   }
+  },
+  {
+   "id": "delete-button.radius.web",
+   "part": "Delete button",
+   "prop": "radius",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".ib",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/control",
+    "radius/field",
+    "radius/inner",
+    "radius/menu"
+   ],
+   "bind": {
+    "token": "radius/tab",
+    "css": "var(--radius-tab)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/tab",
+    "css": "var(--radius-tab)"
+   }
+  },
+  {
+   "id": "delete-button.icon-size.web",
+   "part": "Delete button",
+   "prop": "icon-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 16,
+   "sel": ".ib .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/md"
+   ],
+   "bind": {
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   }
+  },
+  {
+   "id": "delete-button.color.web",
+   "part": "Delete button",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#737373",
+   "sel": ".ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/secondary",
+    "color/icon/secondary",
+    "field/fg/placeholder",
+    "field/fg/label-web"
+   ],
+   "bind": {
+    "token": "field/fg/icon",
+    "css": "var(--field-fg-icon)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.74,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/fg/icon",
+    "css": "var(--field-fg-icon)"
+   }
+  },
+  {
+   "id": "delete-button-hover.background.web.hover",
+   "part": "Delete button hover",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "hover",
+   "theme": "Light",
+   "value": "#F5F5F5",
+   "sel": ".ib.hv",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/selected",
+    "color/action/secondary",
+    "color/chip/gray/bg",
+    "button/bg/secondary"
+   ],
+   "bind": {
+    "token": "button/bg/ghost-hover",
+    "css": "var(--button-bg-ghost-hover)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "button/bg/ghost-hover",
+    "css": "var(--button-bg-ghost-hover)"
+   }
+  },
+  {
+   "id": "app-tap-area.radius.mobile",
+   "part": "App tap area",
+   "prop": "radius",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 16,
+   "sel": ".az",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/card"
+   ],
+   "bind": {
+    "token": "radius/card",
+    "css": "var(--radius-card)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/card",
+    "css": "var(--radius-card)"
+   }
+  },
+  {
+   "id": "app-tap-area.padding.mobile",
+   "part": "App tap area",
+   "prop": "padding",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".az",
+   "cssProps": [
+    "padding"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-md",
+    "value": 12,
+    "css": "var(--space-gap-md)"
+   },
+   "visible": false,
+   "suggest": "space/gap-md (12)",
+   "rules": [],
+   "note": "lệch 2",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "value": 12,
+    "css": "var(--space-gap-md)",
+    "auto": true
+   }
+  },
+  {
+   "id": "app-tap-area.gap.mobile",
+   "part": "App tap area",
+   "prop": "gap",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".az",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-md",
+    "space/gap-md",
+    "layout/list-gap",
+    "form/field-gap"
+   ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
+  },
+  {
+   "id": "app-tap-area.min-height.mobile",
+   "part": "App tap area",
+   "prop": "min-height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 72,
+   "sel": ".az",
+   "cssProps": [
+    "min-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "control/height/lg",
+    "value": 52,
+    "css": "var(--control-height-lg)"
+   },
+   "visible": true,
+   "suggest": "control/height/lg (52)",
+   "rules": [],
+   "note": "thang chung gần nhất control/height/lg = 52",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "app-tap-area.border-color.web",
+   "part": "App tap area",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#D4D4D4",
+   "sel": ".az",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/strong"
+   ],
+   "bind": {
+    "token": "color/border/strong",
+    "css": "var(--color-border-strong)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/border/strong",
+    "css": "var(--color-border-strong)"
+   }
+  },
+  {
+   "id": "app-tap-icon.size.mobile",
+   "part": "App tap icon",
+   "prop": "size",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 44,
+   "sel": ".az .fi",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "touch/min"
+   ],
+   "bind": {
+    "token": "touch/min",
+    "css": "var(--touch-min)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "touch/min",
+    "css": "var(--touch-min)"
+   }
+  },
+  {
+   "id": "app-tap-icon.background.web",
+   "part": "App tap icon",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#F5F5F5",
+   "sel": ".az .fi",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/selected",
+    "color/action/secondary",
+    "color/chip/gray/bg",
+    "field/bg/disabled"
+   ],
+   "bind": {
+    "token": "field/bg/disabled",
+    "css": "var(--field-bg-disabled)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/bg/disabled",
+    "css": "var(--field-bg-disabled)"
+   }
+  },
+  {
+   "id": "app-tap-icon.icon-size.web",
+   "part": "App tap icon",
+   "prop": "icon-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".az .fi .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/lg"
+   ],
+   "bind": {
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   }
+  },
+  {
+   "id": "sheet.radius.mobile",
+   "part": "Sheet",
+   "prop": "radius",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 28,
+   "sel": ".sht",
+   "cssProps": [
+    "border-top-left-radius",
+    "border-top-right-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "radius/overlay",
+    "value": 24,
+    "css": "var(--radius-overlay)"
+   },
+   "visible": true,
+   "suggest": "radius/overlay (24)",
+   "rules": [],
+   "note": "thang chung gần nhất radius/overlay = 24",
+   "group": "radius",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "sheet.padding-x.mobile",
+   "part": "Sheet",
+   "prop": "padding-x",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 16,
+   "sel": ".sht",
+   "cssProps": [
+    "padding-left",
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-lg",
+    "space/gap-lg",
+    "layout/screen-inset",
+    "layout/card-padding"
+   ],
+   "bind": {
+    "token": "field/edge-inset",
+    "css": "var(--field-edge-inset)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/edge-inset",
+    "css": "var(--field-edge-inset)"
+   }
+  },
+  {
+   "id": "sheet.padding-bottom.mobile",
+   "part": "Sheet",
+   "prop": "padding-bottom",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 24,
+   "sel": ".sht",
+   "cssProps": [
+    "padding-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-xl",
+    "space/gap-xl",
+    "layout/section-gap",
+    "control/padding-x/lg"
+   ],
+   "bind": {
+    "token": "space/gap-xl",
+    "css": "var(--space-gap-xl)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-xl",
+    "css": "var(--space-gap-xl)"
+   }
+  },
+  {
+   "id": "sheet-grabber.width.mobile",
+   "part": "Sheet grabber",
+   "prop": "width",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 36,
+   "sel": ".sht .hd",
+   "cssProps": [
+    "width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xs",
+    "value": 320,
+    "css": "var(--width-xs)"
+   },
+   "visible": true,
+   "suggest": "width/xs (320)",
+   "rules": [],
+   "note": "trùng số với control/height/sm, avatar/size/md nhưng đó là token của component khác; thang chung gần nhất width/xs = 320",
+   "group": "grid",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "sheet-grabber.height.mobile",
+   "part": "Sheet grabber",
+   "prop": "height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 4,
+   "sel": ".sht .hd",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "control/height/sm",
+    "value": 36,
+    "css": "var(--control-height-sm)"
+   },
+   "visible": true,
+   "suggest": "control/height/sm (36)",
+   "rules": [],
+   "note": "trùng số với tooltip/arrow-h, progress/height/sm nhưng đó là token của component khác; thang chung gần nhất control/height/sm = 36",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "sheet-title.font-size.mobile",
+   "part": "Sheet title",
+   "prop": "font-size",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 17,
+   "sel": ".sh-t",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/title-3/size"
+   ],
+   "bind": {
+    "token": "type/title-3/size",
+    "css": "var(--type-title-3-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/title-3/size",
+    "css": "var(--type-title-3-size)"
+   }
+  },
+  {
+   "id": "sheet-title.line-height.mobile",
+   "part": "Sheet title",
+   "prop": "line-height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 24,
+   "sel": ".sh-t",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/title-3/line-height",
+    "value": 22,
+    "css": "var(--type-title-3-line-height)"
+   },
+   "visible": true,
+   "suggest": "type/title-3/line-height (22)",
+   "rules": [],
+   "note": "lệch 2",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "sheet-title.font-weight.web",
+   "part": "Sheet title",
+   "prop": "font-weight",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 600,
+   "sel": ".sh-t",
+   "cssProps": [
+    "font-weight"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "Semi Bold"
+   ],
+   "bind": {
+    "token": "Semi Bold",
+    "css": "600"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "Semi Bold",
+    "css": "600"
+   }
+  },
+  {
+   "id": "sheet-item.height.mobile",
+   "part": "Sheet item",
+   "prop": "height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 52,
+   "sel": ".sh-i",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "control/height/lg"
+   ],
+   "bind": {
+    "token": "control/height/lg",
+    "css": "var(--control-height-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/lg",
+    "css": "var(--control-height-lg)"
+   }
+  },
+  {
+   "id": "sheet-item.gap.mobile",
+   "part": "Sheet item",
+   "prop": "gap",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".sh-i",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-md",
+    "space/gap-md",
+    "layout/list-gap",
+    "form/field-gap"
+   ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
+  },
+  {
+   "id": "sheet-item.font-size.mobile",
+   "part": "Sheet item",
+   "prop": "font-size",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 15,
+   "sel": ".sh-i",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
+   }
+  },
+  {
+   "id": "sheet-item.icon-size.web",
+   "part": "Sheet item",
+   "prop": "icon-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".sh-i .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/lg"
+   ],
+   "bind": {
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   }
+  },
+  {
+   "id": "scrim.background.web",
+   "part": "Scrim",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "color/overlay/scrim",
+   "sel": ".scr",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/overlay/scrim"
+   ],
+   "bind": {
+    "token": "color/overlay/scrim",
+    "css": "var(--color-overlay-scrim)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/overlay/scrim",
+    "css": "var(--color-overlay-scrim)"
+   }
+  },
+  {
+   "id": "choose-button.background.web",
+   "part": "Choose button",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#FFFFFF",
+   "sel": ".bt",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/canvas",
+    "color/bg/surface",
+    "field/bg/web"
+   ],
+   "bind": {
+    "token": "field/bg/web",
+    "css": "var(--field-bg-web)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/bg/web",
+    "css": "var(--field-bg-web)"
+   }
+  },
+  {
+   "id": "choose-button.line-height.web",
+   "part": "Choose button",
+   "prop": "line-height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".bt",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/body/line-height",
+    "value": 20,
+    "css": "var(--type-body-line-height)"
+   },
+   "visible": true,
+   "suggest": "type/body/line-height (20)",
+   "rules": [],
+   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/body/line-height = 20",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "choose-button-hover.background.web.hover",
+   "part": "Choose button hover",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "hover",
+   "theme": "Light",
+   "value": "#F5F5F5",
+   "sel": ".bt.hv",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/selected",
+    "color/action/secondary",
+    "color/chip/gray/bg",
+    "button/bg/secondary"
+   ],
+   "bind": {
+    "token": "button/bg/ghost-hover",
+    "css": "var(--button-bg-ghost-hover)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "button/bg/ghost-hover",
+    "css": "var(--button-bg-ghost-hover)"
+   }
+  },
+  {
+   "id": "choose-button-hover.background.web.hover-2",
+   "part": "Choose button hover",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "hover",
+   "theme": "Light",
+   "value": "#F5F5F5",
+   "sel": ".dz-c.hv .bt",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/selected",
+    "color/action/secondary",
+    "color/chip/gray/bg",
+    "button/bg/secondary"
+   ],
+   "bind": {
+    "token": "button/bg/ghost-hover",
+    "css": "var(--button-bg-ghost-hover)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "button/bg/ghost-hover",
+    "css": "var(--button-bg-ghost-hover)"
+   }
+  },
+  {
+   "id": "choose-button-focus.focus-offset.web",
+   "part": "Choose button focus",
+   "prop": "focus-offset",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".dz-c.focus .bt",
+   "cssProps": [
+    "outline-offset"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "focus/width",
+    "focus/offset",
+    "field/border-width-active",
+    "focus/offset"
+   ],
+   "bind": {
+    "token": "focus/width",
+    "css": "var(--focus-width)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "effect",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "focus/width",
+    "css": "var(--focus-width)"
+   }
+  },
+  {
+   "id": "choose-button-focus.color.web",
+   "part": "Choose button focus",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".dz-c.focus .bt",
+   "cssProps": [
+    "outline-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "field/border/active",
+    "value": "#262626",
+    "css": "var(--field-border-active)"
+   },
+   "visible": true,
+   "suggest": "field/border/active (#262626)",
+   "rules": [],
+   "note": "trùng màu với color/bg/inverse, color/text/primary nhưng token không dành cho viền; token đúng nghĩa gần nhất field/border/active (#262626), ΔE 7.4",
+   "contrast": 17.93,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "choose-button-error.border-color.web.error",
+   "part": "Choose button error",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "error",
+   "theme": "Light",
+   "value": "#F04438",
+   "sel": ".dz-c.error .bt",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "field/border/error",
+    "value": "#B42318",
+    "css": "var(--field-border-error)"
+   },
+   "visible": true,
+   "suggest": "field/border/error (#B42318)",
+   "rules": [],
+   "note": "gần nhất field/border/error (#B42318), ΔE 17.9",
+   "contrast": 3.76,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "required-mark.margin-left.web",
+   "part": "Required mark",
+   "prop": "margin-left",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 3,
+   "sel": ".req",
+   "cssProps": [
+    "margin-left"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/sm",
+    "value": 14,
+    "css": "var(--icon-size-sm)"
+   },
+   "visible": true,
+   "suggest": "icon/size/sm (14)",
+   "rules": [],
+   "note": "thang chung gần nhất icon/size/sm = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "error-text.line-height.web",
+   "part": "Error text",
+   "prop": "line-height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".fe",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "type/body/line-height",
+    "value": 20,
+    "css": "var(--type-body-line-height)"
+   },
+   "visible": true,
+   "suggest": "type/body/line-height (20)",
+   "rules": [],
+   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/body/line-height = 20",
+   "group": "typo",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "error-text.gap.web",
+   "part": "Error text",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".fe",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "control/padding-x-icon/sm",
+    "control/icon-gap"
+   ],
+   "bind": {
+    "token": "control/icon-gap",
+    "css": "var(--control-icon-gap)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/icon-gap",
+    "css": "var(--control-icon-gap)"
+   }
+  },
+  {
+   "id": "error-icon.margin-top.web",
+   "part": "Error icon",
+   "prop": "margin-top",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".fe .i",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/sm",
+    "value": 14,
+    "css": "var(--icon-size-sm)"
+   },
+   "visible": true,
+   "suggest": "icon/size/sm (14)",
+   "rules": [],
+   "note": "trùng số với progress/gap nhưng đó là token của component khác; thang chung gần nhất icon/size/sm = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "dropzone-compact-text.min-width.web",
+   "part": "Dropzone compact text",
+   "prop": "min-width",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 150,
+   "sel": ".dz-m",
+   "cssProps": [
+    "min-width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xs",
+    "value": 320,
+    "css": "var(--width-xs)"
+   },
+   "visible": true,
+   "suggest": "width/xs (320)",
+   "rules": [],
+   "note": "trùng số với vehicle/q-md-h nhưng đó là token của component khác; thang chung gần nhất width/xs = 320",
+   "group": "grid",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "dropzone-link.underline-offset.web",
+   "part": "Dropzone link",
+   "prop": "underline-offset",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".dz-t .lk",
+   "cssProps": [
+    "text-underline-offset"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/sm",
+    "value": 14,
+    "css": "var(--icon-size-sm)"
+   },
+   "visible": true,
+   "suggest": "icon/size/sm (14)",
+   "rules": [],
+   "note": "trùng số với progress/gap nhưng đó là token của component khác; thang chung gần nhất icon/size/sm = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "featured-icon.margin-bottom.web",
+   "part": "Featured icon",
+   "prop": "margin-bottom",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".fi",
+   "cssProps": [
+    "margin-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/sm",
+    "value": 14,
+    "css": "var(--icon-size-sm)"
+   },
+   "visible": true,
+   "suggest": "icon/size/sm (14)",
+   "rules": [],
+   "note": "trùng số với chip/dot-size, tooltip/arrow-w nhưng đó là token của component khác; thang chung gần nhất icon/size/sm = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "featured-icon-drag-over.color.web.drag",
+   "part": "Featured icon drag-over",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "drag",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".dz.hover .fi",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/primary",
+    "field/fg/value"
+   ],
+   "bind": {
+    "token": "field/fg/value",
+    "css": "var(--field-fg-value)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 17.18,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/fg/value",
+    "css": "var(--field-fg-value)"
+   }
+  },
+  {
+   "id": "file-row.background.web",
+   "part": "File row",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#FFFFFF",
+   "sel": ".fr",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/canvas",
+    "color/bg/surface",
+    "field/bg/web"
+   ],
+   "bind": {
+    "token": "field/bg/web",
+    "css": "var(--field-bg-web)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/bg/web",
+    "css": "var(--field-bg-web)"
+   }
+  },
+  {
+   "id": "thumbnail.color.web",
+   "part": "Thumbnail",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#5B6575",
+   "sel": ".th",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "field/fg/icon",
+    "value": "#737373",
+    "css": "var(--field-fg-icon)"
+   },
+   "visible": true,
+   "suggest": "field/fg/icon (#737373)",
+   "rules": [],
+   "note": "gần nhất field/fg/icon (#737373), ΔE 11.9",
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "file-meta.margin-top.web",
+   "part": "File meta",
+   "prop": "margin-top",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 1,
+   "sel": ".fs",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/sm",
+    "value": 14,
+    "css": "var(--icon-size-sm)"
+   },
+   "visible": true,
+   "suggest": "icon/size/sm (14)",
+   "rules": [],
+   "note": "trùng số với list-row/divider-height nhưng đó là token của component khác; thang chung gần nhất icon/size/sm = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "file-meta-divider.width.web",
+   "part": "File meta divider",
+   "prop": "width",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 1,
+   "sel": ".sep",
+   "cssProps": [
+    "width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xs",
+    "value": 320,
+    "css": "var(--width-xs)"
+   },
+   "visible": true,
+   "suggest": "width/xs (320)",
+   "rules": [],
+   "note": "trùng số với list-row/divider-height nhưng đó là token của component khác; thang chung gần nhất width/xs = 320",
+   "group": "grid",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "status-icon.gap.web",
+   "part": "Status icon",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 4,
+   "sel": ".st",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-xs",
+    "space/gap-xs",
+    "field/text-inset",
+    "field/content-gap"
+   ],
+   "bind": {
+    "token": "field/text-inset",
+    "css": "var(--field-text-inset)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/text-inset",
+    "css": "var(--field-text-inset)"
+   }
+  },
+  {
+   "id": "retry-link.margin-top.web",
+   "part": "Retry link",
+   "prop": "margin-top",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".lkr",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/sm",
+    "value": 14,
+    "css": "var(--icon-size-sm)"
+   },
+   "visible": true,
+   "suggest": "icon/size/sm (14)",
+   "rules": [],
+   "note": "trùng số với avatar/status-size/sm, progress/height/md nhưng đó là token của component khác; thang chung gần nhất icon/size/sm = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "delete-button.margin-top.web",
+   "part": "Delete button",
+   "prop": "margin-top",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".del",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": "calc(-1 * $)",
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/sm",
+    "value": 14,
+    "css": "var(--icon-size-sm)"
+   },
+   "visible": true,
+   "suggest": "icon/size/sm (14)",
+   "rules": [],
+   "note": "trùng số với avatar/status-size/sm, progress/height/md nhưng đó là token của component khác; thang chung gần nhất icon/size/sm = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "delete-button.margin-right.web",
+   "part": "Delete button",
+   "prop": "margin-right",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".del",
+   "cssProps": [
+    "margin-right"
+   ],
+   "tpl": "calc(-1 * $)",
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/sm",
+    "value": 14,
+    "css": "var(--icon-size-sm)"
+   },
+   "visible": true,
+   "suggest": "icon/size/sm (14)",
+   "rules": [],
+   "note": "trùng số với progress/gap nhưng đó là token của component khác; thang chung gần nhất icon/size/sm = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "delete-button-hover.color.web.hover",
+   "part": "Delete button hover",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "hover",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".ib.hv",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/primary",
+    "button/fg/secondary",
+    "button/fg/ghost",
+    "button/fg/outline"
+   ],
+   "bind": {
+    "token": "button/fg/ghost",
+    "css": "var(--button-fg-ghost)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 16.44,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "button/fg/ghost",
+    "css": "var(--button-fg-ghost)"
+   }
+  },
+  {
+   "id": "app-tap-area.background.web",
+   "part": "App tap area",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#FFFFFF",
+   "sel": ".az",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/canvas",
+    "color/bg/surface",
+    "field/bg/web"
+   ],
+   "bind": {
+    "token": "field/bg/web",
+    "css": "var(--field-bg-web)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/bg/web",
+    "css": "var(--field-bg-web)"
+   }
+  },
+  {
+   "id": "sheet.background.mobile",
+   "part": "Sheet",
+   "prop": "background",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#FFFFFF",
+   "sel": ".sht",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/canvas",
+    "color/bg/surface",
+    "field/bg/web"
+   ],
+   "bind": {
+    "token": "field/bg/web",
+    "css": "var(--field-bg-web)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/bg/web",
+    "css": "var(--field-bg-web)"
+   }
+  },
+  {
+   "id": "sheet.padding-top.mobile",
+   "part": "Sheet",
+   "prop": "padding-top",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".sht",
+   "cssProps": [
+    "padding-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-sm",
+    "space/gap-sm",
+    "control/padding-x-icon/sm",
+    "control/icon-gap"
+   ],
+   "bind": {
+    "token": "space/gap-sm",
+    "css": "var(--space-gap-sm)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-sm",
+    "css": "var(--space-gap-sm)"
+   }
+  },
+  {
+   "id": "sheet-grabber.radius.mobile",
+   "part": "Sheet grabber",
+   "prop": "radius",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".sht .hd",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "radius/badge",
+    "value": 6,
+    "css": "var(--radius-badge)"
+   },
+   "visible": true,
+   "suggest": "radius/badge (6)",
+   "rules": [],
+   "note": "chỉ có primitive radius/xxs — component không gắn primitive (architecture Mục 7); thang chung gần nhất radius/badge = 6",
+   "group": "radius",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "sheet-grabber.background.mobile",
+   "part": "Sheet grabber",
+   "prop": "background",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#D4D4D4",
+   "sel": ".sht .hd",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/action/secondary-hover",
+    "value": "#E5E5E5",
+    "css": "var(--color-action-secondary-hover)"
+   },
+   "visible": true,
+   "suggest": "color/action/secondary-hover (#E5E5E5)",
+   "rules": [],
+   "note": "trùng màu với color/border/strong, button/bg/secondary-pressed nhưng token không dành cho nền; token đúng nghĩa gần nhất color/action/secondary-hover (#E5E5E5), ΔE 6.0",
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "sheet-grabber.margin-bottom.mobile",
+   "part": "Sheet grabber",
+   "prop": "margin-bottom",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".sht .hd",
+   "cssProps": [
+    "margin-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": false,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với avatar/status-size/lg, avatar/edit-icon-size/md nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)",
+    "auto": true
+   }
+  },
+  {
+   "id": "sheet-title.margin-bottom.mobile",
+   "part": "Sheet title",
+   "prop": "margin-bottom",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".sh-t",
+   "cssProps": [
+    "margin-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": true,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với avatar/status-size/sm, progress/height/md nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "sheet-item.border-color.mobile",
+   "part": "Sheet item",
+   "prop": "border-color",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#E5E5E5",
+   "sel": ".sh-i",
+   "cssProps": [
+    "border-bottom-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/default",
+    "field/border/disabled"
+   ],
+   "bind": {
+    "token": "field/border/disabled",
+    "css": "var(--field-border-disabled)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "field/border/disabled",
+    "css": "var(--field-border-disabled)"
+   }
+  },
+  {
+   "id": "audit.typo.combo-12.5-18",
+   "part": "Tổ hợp chữ",
+   "prop": "line-height",
+   "platform": "",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "12.5/18",
+   "sel": ".hn, .fe, .fs",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": "type/caption (Mobile)",
+   "rules": [
+    "cỡ 12.5 / dòng 18 không thuộc thang type/* (foundations mục 4.2)"
+   ],
+   "note": "cùng cỡ chữ thì sửa cao dòng; khác cỡ thì chọn vai gần nhất",
+   "fix": {
+    "token": "type/caption (Mobile)",
+    "value": "13/18",
+    "css": "18px"
+   },
+   "group": "typo",
+   "audit": true,
+   "count": 3,
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "audit.typo.combo-13.5-20",
+   "part": "Tổ hợp chữ",
+   "prop": "line-height",
+   "platform": "",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "13.5/20",
+   "sel": ".dz-t, .fn",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": "type/heading (Web)",
+   "rules": [
+    "cỡ 13.5 / dòng 20 không thuộc thang type/* (foundations mục 4.2)"
+   ],
+   "note": "cùng cỡ chữ thì sửa cao dòng; khác cỡ thì chọn vai gần nhất",
+   "fix": {
+    "token": "type/heading (Web)",
+    "value": "14/20",
+    "css": "20px"
+   },
+   "group": "typo",
+   "audit": true,
+   "count": 2,
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "audit.typo.combo-10.5-14",
+   "part": "Tổ hợp chữ",
+   "prop": "line-height",
+   "platform": "",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "10.5/14",
+   "sel": ".tcap",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": "type/caption (Web)",
+   "rules": [
+    "cỡ 10.5 / dòng 14 không thuộc thang type/* (foundations mục 4.2)"
+   ],
+   "note": "cùng cỡ chữ thì sửa cao dòng; khác cỡ thì chọn vai gần nhất",
+   "fix": {
+    "token": "type/caption (Web)",
+    "value": "12/16",
+    "css": "16px"
+   },
+   "group": "typo",
+   "audit": true,
+   "count": 1,
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "audit.icon.size-18",
+   "part": "Icon cỡ 18 (102 chỗ)",
+   "prop": "icon-size",
+   "platform": "",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": "svg.i[width=\"18\"]",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": "icon 16",
+   "rules": [
+    "cỡ icon ngoài thang 12 · 14 · 16 · 20 · 24 (icons.md mục 3)"
+   ],
+   "note": "",
+   "fix": {
+    "token": "icon 16",
+    "value": 16,
+    "css": "16px"
+   },
+   "group": "icon",
+   "audit": true,
+   "count": 102,
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "audit.icon.size-22",
+   "part": "Icon cỡ 22 (42 chỗ)",
+   "prop": "icon-size",
+   "platform": "",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 22,
+   "sel": "svg.i[width=\"22\"]",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": "icon 20",
+   "rules": [
+    "cỡ icon ngoài thang 12 · 14 · 16 · 20 · 24 (icons.md mục 3)"
+   ],
+   "note": "",
+   "fix": {
+    "token": "icon 20",
+    "value": 20,
+    "css": "20px"
+   },
+   "group": "icon",
+   "audit": true,
+   "count": 42,
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "audit.icon.stroke-2",
+   "part": "Nét icon 2 (553 chỗ)",
+   "prop": "stroke-width",
+   "platform": "",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": "svg.i[stroke-width=\"2\"]",
+   "cssProps": [
+    "stroke-width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": "nét 1.8",
+   "rules": [
+    "nét icon thường là 1.8 trên khung 24; nét 2 chỉ cho icon trong chip (icons.md mục 2, DEC-142)"
+   ],
+   "note": "icon trong chip giữ 2 — chọn Ngoại lệ nếu mọi chỗ là chip",
+   "fix": {
+    "token": "nét 1.8",
+    "value": 1.8,
+    "css": "1.8"
+   },
+   "group": "icon",
+   "audit": true,
+   "count": 553,
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "audit.icon.featured-fi",
+   "part": "Khối icon .fi 44 / icon 20",
+   "prop": "size",
+   "platform": "",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "44/20",
+   "sel": ".az .fi",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": "Featured icon 48",
+   "rules": [
+    "icon nhấn mạnh đặt trong Featured icon 48, icon 24 (icons.md mục 3.1, DEC-258)"
+   ],
+   "note": "",
+   "fix": {
+    "token": "Featured icon 48",
+    "value": 48,
+    "css": "48px"
+   },
+   "group": "icon",
+   "audit": true,
+   "count": 1,
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  }
+ ]
+}

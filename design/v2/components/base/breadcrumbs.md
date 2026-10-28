@@ -14,8 +14,9 @@ links:
 # Breadcrumbs
 
 > Base · phiên bản 0.3.0 · Nháp · người phụ trách @szitphan · Figma: trang DS · Application components — `Breadcrumbs`
-> 6768:190544 (nâng cấp tại chỗ từ `_Header breadcrumb`, giữ id; bộ Astryx cũ đổi tên `Astryx / Breadcrumbs` 44:14946) ·
-> `_Breadcrumb item` (dựng ở vòng 4) · DEC-290 · trang duyệt https://claude.ai/artifact/Ua29VuBKRsRys51EYujU3P
+> 6901:20705 — biến thể gốc Type=Text, Collapsed=False 6768:190544 (nâng cấp tại chỗ từ `_Header breadcrumb`: gộp bằng
+> `use_figma` combineAsVariants để giữ id, 51 instance giữ chữ); bộ Astryx cũ đổi tên `Astryx / Breadcrumbs` 44:14946 ·
+> DEC-290 · trang duyệt https://claude.ai/artifact/Ua29VuBKRsRys51EYujU3P
 
 Đường dẫn từ trang gốc tới trang hiện tại. Chỉ web (trang Application: breadcrumb mobile = web); dưới 768 thanh trên thay
 bằng hàng "← cấp trên" (xem `application/header-navigation.md` mục Mobile). Một bộ, ba Type theo Untitled; sản phẩm dùng
@@ -40,7 +41,7 @@ bằng hàng "← cấp trên" (xem `application/header-navigation.md` mục Mob
 |---|---|---|
 | Khung | auto layout ngang, khoảng `list-row/text-gap` 2, căn giữa dọc | ôm nội dung, co được |
 | Mục (tầng cha) | `type/label` 14/20 nét 500, `color/text/secondary`; hover `color/text/primary` | tối đa 160 |
-| Trang hiện tại | `type/label` nét 600, `color/text/primary` | tối đa 240 |
+| Trang hiện tại | text style `type/heading` (14/20 600), `color/text/primary`; Type Text: khung giãn theo chỗ còn lại, tối đa 240 — thiếu chỗ thì co và cắt trước | tối đa 240 |
 | Nhà | icon `home` 16 `color/icon/secondary` | vùng bấm 24 |
 | Phân cách | icon `chevron-right` 14 `color/border/strong`, ô 16 | — |
 | Nút "…" | icon `dots` 16, rộng 24; mở: nền `color/bg/selected` bo `radius/sm` | vùng bấm 24 |
@@ -51,9 +52,10 @@ bằng hàng "← cấp trên" (xem `application/header-navigation.md` mục Mob
 
 ### Biến thể
 
-- `Breadcrumbs`: Type = Text · Button · Text Line × Depth = 1 · 2 · 3 · Collapsed (≥ 4, có "…"). Bật tắt: `Has Home`.
-- `_Breadcrumb item`: Type = Text · Button · Text Line × State = Default · Hover · Focus · Current; nút "…" là
-  `_Breadcrumb item` Kind = Ellipsis (State Default · Open).
+- `Breadcrumbs`: Type = Text · Button · Text Line × Collapsed = False · True (6 biến thể). Số tầng bằng bật tắt:
+  1 tầng = tắt `Has Parent`; 2 tầng = mặc định; 3 tầng = bật `Has Root`; ≥ 4 tầng = Collapsed=True + `Has Root`
+  (Root · … · Parent · Current). `Has Home` tắt khi không cần icon nhà.
+- Hover / Focus / "…" đang mở không là biến thể: vẽ minh hoạ ở khung tài liệu và trang duyệt; code làm theo bảng Cấu tạo.
 
 ### Trạng thái
 
@@ -81,12 +83,12 @@ Một cỡ (14/20). Type Button 28, Text Line 36, Text 20.
 
 ### Thuộc tính
 
-`Breadcrumbs`: `Level 1`, `Level 2`, `Last level`, `Current` (TEXT), `Has Home` (BOOLEAN), Type / Depth (VARIANT).
-`_Breadcrumb item`: `Label` (TEXT).
+`Breadcrumbs`: `Root`, `Parent`, `Current` (TEXT), `Has Home`, `Has Root`, `Has Parent` (BOOLEAN), Type, Collapsed
+(VARIANT). Giữ tên thuộc tính cũ của `_Header breadcrumb` để instance không mất chữ.
 
 ### Thành phần lồng
 
-`_Breadcrumb item`, `Dropdown menu`, `Tooltip`, icon Lucide (`home`, `chevron-right`, `dots`).
+`Dropdown menu` (menu tầng ẩn, ghép ở chỗ dùng), `Tooltip`, icon `icon/house`, `icon/chevron-right`, `icon/ellipsis` (cỡ 16).
 
 ### Được dùng trong
 
@@ -98,7 +100,7 @@ Một cỡ (14/20). Type Button 28, Text Line 36, Text 20.
 
 ### Kiểm máy
 
-Chưa chạy — điền sau khi dựng.
+28/10: layout_audit 0 lỗi; a11y_audit 0 fail 0 review; auditDesignSystem 0,99 (khoảng cách 4 đều — có từ bản cũ, giữ).
 
 ## Mobile
 

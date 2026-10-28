@@ -26,7 +26,7 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TABS = [("p-today", "Hôm nay"), ("p-flow", "Luồng việc"), ("p-feat", "Feature"), ("p-legacy", "Hệ thống cũ"), ("p-kb", "Kanban"), ("p-src", "Nguồn khách"), ("p-health", "Sức khỏe vault")]
+TABS = [("p-today", "Hôm nay"), ("p-flow", "Luồng việc"), ("p-feat", "Feature"), ("p-legacy", "Hệ thống cũ"), ("p-ds", "Design system"), ("p-kb", "Kanban"), ("p-src", "Nguồn khách"), ("p-health", "Sức khỏe vault")]
 WIDTHS = [1440, 400]
 DS_FONTS = {"inter", "cal sans", "jetbrains mono"}
 DS_SIZES = {10, 12, 14, 17, 20, 24, 29, 35, 42}  # design.md Typography › Hierarchy
