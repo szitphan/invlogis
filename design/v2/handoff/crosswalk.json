@@ -1,0 +1,179 @@
+{
+  "$generator": "GENERATED — không sửa tay. Nguồn: design/v2/ · sinh bởi _scripts/ds-v2-handoff.py",
+  "rows": [
+    {
+      "controlType": "Textbox",
+      "when": "1 dòng chữ, email, mã, số điện thoại, số",
+      "component": "l1.text-field",
+      "gap": null
+    },
+    {
+      "controlType": "Textbox",
+      "when": "Mã OTP, mã xác nhận nhiều ô (app)",
+      "component": "l1.otp-field",
+      "gap": null
+    },
+    {
+      "controlType": "Textbox",
+      "when": "Gõ để gợi ý từ danh sách",
+      "component": null,
+      "gap": "chưa dựng; Astryx `Typeahead`"
+    },
+    {
+      "controlType": "Textarea",
+      "when": "Nhiều dòng",
+      "component": null,
+      "gap": "chưa dựng; Astryx `TextArea`"
+    },
+    {
+      "controlType": "Dropdown",
+      "when": "Chọn 1 / chọn nhiều trong danh sách",
+      "component": null,
+      "gap": "chưa dựng; Astryx `Selector`"
+    },
+    {
+      "controlType": "Checkbox / Radio",
+      "when": "Chọn trong vài lựa chọn hiện dạng thẻ",
+      "component": "l1.selectable-card",
+      "gap": null
+    },
+    {
+      "controlType": "Checkbox",
+      "when": "1 lựa chọn đồng ý / nhiều lựa chọn độc lập",
+      "component": null,
+      "gap": "chưa dựng; Astryx `Checkbox`"
+    },
+    {
+      "controlType": "Radio",
+      "when": "Chọn 1, 3–7 lựa chọn ngắn",
+      "component": null,
+      "gap": "chưa dựng; Astryx `Radio / RadioList`"
+    },
+    {
+      "controlType": "Toggle / Switch",
+      "when": "Bật/tắt có hiệu lực ngay",
+      "component": null,
+      "gap": "chưa dựng; Astryx `Switch`"
+    },
+    {
+      "controlType": "Datepicker",
+      "when": "Ngày / khoảng ngày / giờ",
+      "component": null,
+      "gap": "chưa dựng; Astryx `DateInput`"
+    },
+    {
+      "controlType": "Upload",
+      "when": "Chọn hoặc kéo thả file",
+      "component": null,
+      "gap": "chưa dựng; Astryx `FileInput`"
+    },
+    {
+      "controlType": "Button",
+      "when": "Hành động chính / phụ / nguy hiểm, nút chỉ icon",
+      "component": "l1.button",
+      "gap": null
+    },
+    {
+      "controlType": "Label",
+      "when": "Trạng thái nghiệp vụ",
+      "component": "l1.status-chip",
+      "gap": null
+    },
+    {
+      "controlType": "Label",
+      "when": "Dòng trạng thái kèm thời điểm, người làm",
+      "component": "l1.status-row",
+      "gap": null
+    },
+    {
+      "controlType": "Popover / Tooltip",
+      "when": "Chữ giải thích neo vào phần tử",
+      "component": "l1.tooltip",
+      "gap": null
+    },
+    {
+      "controlType": "List",
+      "when": "Danh sách mục dọc",
+      "component": "l1.list-item",
+      "gap": null
+    },
+    {
+      "controlType": "Card",
+      "when": "Khối nội dung chung",
+      "component": "l1.card",
+      "gap": null
+    },
+    {
+      "controlType": "Card",
+      "when": "Thẻ một bản ghi (mã, trạng thái, dòng thông tin, nút)",
+      "component": "l1.record-card",
+      "gap": null
+    },
+    {
+      "controlType": "Card",
+      "when": "Thẻ số liệu tổng hợp",
+      "component": "l1.summary-card",
+      "gap": null
+    },
+    {
+      "controlType": "Avatar",
+      "when": "Ảnh đại diện người",
+      "component": "l1.avatar",
+      "gap": null
+    },
+    {
+      "controlType": "Avatar",
+      "when": "Nhóm người",
+      "component": "l1.avatar-group",
+      "gap": null
+    },
+    {
+      "controlType": "Loading",
+      "when": "Tiến độ theo bước, phần trăm",
+      "component": "l1.progress",
+      "gap": null
+    },
+    {
+      "controlType": "Table",
+      "when": "Dữ liệu hàng–cột",
+      "component": null,
+      "gap": "chưa dựng; Astryx `TableCell`, `Pagination`"
+    },
+    {
+      "controlType": "Tab",
+      "when": "Chia nội dung cùng màn",
+      "component": null,
+      "gap": "chưa dựng; Astryx `Tabs / TabList`"
+    },
+    {
+      "controlType": "Stepper",
+      "when": "Tiến trình nhiều bước",
+      "component": null,
+      "gap": "chưa dựng (BL-241)"
+    },
+    {
+      "controlType": "Modal",
+      "when": "Chặn tương tác đến khi phản hồi",
+      "component": null,
+      "gap": "chưa dựng; Astryx `Dialog`, `BottomSheet`"
+    },
+    {
+      "controlType": "Toast / Banner",
+      "when": "Thông báo",
+      "component": null,
+      "gap": "chưa dựng; Astryx `Toast`, `Banner`"
+    },
+    {
+      "controlType": "Empty state",
+      "when": "Không có dữ liệu",
+      "component": null,
+      "gap": "chưa dựng; Astryx `EmptyState`"
+    },
+    {
+      "controlType": "Navigation",
+      "when": "Menu ứng dụng, thanh tab app",
+      "component": null,
+      "gap": "chưa dựng; Astryx `Navigation / SideNav`"
+    }
+  ]
+}

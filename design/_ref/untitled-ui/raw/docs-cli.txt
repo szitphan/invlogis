@@ -1,0 +1,472 @@
+Copy
+
+CLI tool
+
+The Untitled UI CLI tool helps you quickly scaffold projects and add components to your existing projects. This guide will help you understand how to use the CLI effectively.
+
+Installation
+
+The untitledui CLI tool is available directly as a command-line utility and doesn't require any installation. You can run it using either npx or bunx:
+
+npx
+bunx
+
+```
+npx untitledui@latest [command]
+```
+
+Init command
+
+The init command helps you scaffold a new project with Untitled UI components and configurations pre-installed.
+
+Next.js
+Vite
+
+Create a new project
+Run this command in your root folder to create a new Next.js project:
+
+```
+npx untitledui@latest init --nextjs
+```
+
+While running the command, you'll be asked a few questions to set up your project:
+
+```
+? What is your project named? › untitled-ui
+? Which color would you like to use as the brand color? ›
+❯   brand
+red
+orange
+amber
+yellow
+lime
+green
+...
+zinc
+neutral
+stone
+```
+
+This will create a new Next.js project in the untitled-ui directory with all the necessary configurations and components pre-installed. The choices are Tailwind's built-in palettes; picking one points the --color-brand-* variables in theme.css at it, and brand keeps the default purple. You can change the brand color at any time later (see Theming).
+
+Ready to go!
+Great! You're all set to start using Untitled UI components.
+If something is missing, you can copy/paste what you need into your project directly from individual components pages.
+
+Command options
+
+These are the available options for the init command:
+
+Option	Description
+--nextjs	Initialize a Next.js project
+--vite	Initialize a Vite project
+-c, --color <color-name>	Tailwind palette to use as the brand color, e.g. blue or emerald. See Theming for the full list
+-o, --overwrite	Overwrite existing files
+--colors-list	Show the available colors list
+-y, --yes	Non-interactive mode — skip all prompts and use defaults (for AI agents/CI). Falls back to the project's existing brand color, or brand if none is set. Combine with -c, --color to pick a different one explicitly.
+--license <key>	API key for PRO access (alternative to the key stored by login)
+--lib-version <version>	Component library version to set up (7 or 8). Auto-detected from components.json if not specified.
+
+Add command
+
+The add command allows you to add specific Untitled UI components to your existing project.
+
+Add components
+To add a specific component:
+
+```
+npx untitledui@latest add button
+```
+
+You can add multiple components at once:
+
+```
+npx untitledui@latest add button toggle avatar
+```
+
+If you run the command without specifying any components, you'll first be asked to select a component type:
+
+```
+npx untitledui@latest add
+```
+
+This will display a type selection interface:
+
+```
+? What type of component are you adding? ›
+❯ base
+marketing
+shared-assets
+application
+foundations
+```
+
+After selecting a type, you'll see available components in that category:
+
+```
+? Which components would you like to add? ›
+❯ ◯ button
+◯ card
+◯ dropdown
+◯ input
+◯ modal
+◯ table
+◯ tabs
+◯ toast
+◯ toggle
+◯ tooltip
+```
+
+You can navigate through the list using arrow keys, select components with the spacebar, and confirm your selection with Enter.
+
+PRO components
+For PRO components, you need to be authenticated:
+
+```
+npx untitledui@latest login
+npx untitledui@latest add pro-component
+```
+
+Customization options
+The add command offers several options:
+
+```
+# Specify where to add components
+npx untitledui@latest add button --path src/components
+
+# Specify project directory
+npx untitledui@latest add button --dir ./my-project
+
+# Overwrite existing files
+npx untitledui@latest add button --overwrite
+
+# Non-interactive mode (for AI agents/CI)
+npx untitledui@latest add button --yes
+```
+
+Command options
+
+These are the available options for the add command:
+
+Option	Description
+-a, --all	Add all available components
+-o, --overwrite	Overwrite existing files
+-p, --path <path>	The path to add the component to
+-d, --dir <directory>	The directory where the project is located
+-t, --type <type>	The type of the component to add (base, marketing, shared-assets, application, foundations)
+--include-all-components	Automatically include all base components without prompting
+-y, --yes	Non-interactive mode — use defaults for all prompts (for AI agents/CI). Implies --include-all-components and --overwrite.
+--license <key>	API key for PRO access (alternative to the key stored by login)
+--lib-version <version>	Component library version to pull (7 or 8). Auto-detected from components.json if not specified.
+
+Login command
+
+The login command allows you to authenticate with Untitled UI to access PRO components through the CLI.
+
+Interactive authentication
+To authenticate with your Untitled UI account:
+
+```
+npx untitledui@latest login
+```
+
+This will:
+
+Open your browser automatically
+
+Check if you're already signed in to Untitled UI
+
+If already signed in: Authenticate immediately and return to CLI
+
+If not signed in: Redirect to the sign-in page, send a magic link to your email, and authenticate after you click the link
+
+Login only succeeds for accounts that hold a React license, either purchased directly or through a team seat. Other accounts see a "No PRO license found" error in the terminal.
+
+What happens after login
+Once authenticated, you can access PRO components without authenticating again.
+Your authentication is saved locally and will persist across CLI sessions.
+
+Search command
+
+The search command lets you find components, page templates, and icons using natural language. It uses the same semantic search that powers our MCP server — it understands both the text description and visual appearance of every component, so you can search for things like "login page with customer reviews" and get accurate results.
+
+Search for anything
+Describe what you need in plain language. The search runs across components, templates, and icons simultaneously:
+
+```
+npx untitledui@latest search "login page with customer reviews"
+```
+
+Results are grouped by type, with the install command for the top match:
+
+```
+Components (5)
+
+1. login-split-quote-image-01  PRO  (marketing)
+Split-layout login page with customer testimonial quote,
+portrait photo, and carousel navigation arrows.
+carousel-navigation  image-display
+
+2. login-split-mockup-quote  PRO  (marketing)
+Split-layout login page with five-star rating, customer
+testimonial quote, and app dashboard screenshot mockup.
+app-mockup
+
+Install: npx untitledui@latest add login-split-quote-image-01 --yes
+
+Templates (5)
+
+1. landing-pages/14  (landing · full-width)
+Stacked landing page with testimonials, newsletter signup,
+metrics, and contact form with star ratings.
+
+Install: npx untitledui@latest example landing-pages/14 --yes
+
+Icons (5)
+
+1. Star01  (general)
+import { Star01 } from "@untitledui/icons"
+```
+
+Filter by type
+You can narrow your search to a specific type:
+
+```
+# Only search components
+npx untitledui@latest search "dark pricing table" --type components
+
+# Only search templates
+npx untitledui@latest search "fintech dashboard" --type templates
+
+# Only search icons
+npx untitledui@latest search "arrow" --type icons
+```
+
+More options
+
+```
+# Get more results
+npx untitledui@latest search "modal file upload" --limit 10
+
+# With PRO access
+npx untitledui@latest search "split login testimonial" --key YOUR_API_KEY
+```
+
+Command options
+
+These are the available options for the search command:
+
+Option	Description
+-t, --type <type>	Filter results by type: components, templates, icons, all (default: all)
+-l, --limit <number>	Maximum results per category (default: 5)
+-k, --key <key>	API key for PRO component access
+--lib-version <version>	Component library version (7 or 8). Defaults to 8.
+
+Adding example pages
+
+The example command allows you to add complete example pages to your project or initialize new projects based on example pages. These example pages include fully functional pages with all necessary components, styling, and functionality.
+
+Interactive example selection
+To browse and add an example interactively:
+
+```
+npx untitledui@latest example
+```
+
+This will prompt you to select from available example categories:
+
+```
+? Select which type of example you want to add ›
+❯ Application
+Marketing
+```
+
+After selecting a category, you'll see specific examples available in that category, and then be prompted for where to place the files:
+
+```
+? Where would you like to add the dashboards-01 example? › app
+? Where would you like to add the components? › components
+```
+
+Add specific examples
+You can directly specify an example to add:
+
+```
+# Add a specific dashboard example
+npx untitledui@latest example dashboards-01
+```
+
+For nested examples, you can specify the full path:
+
+```
+npx untitledui@latest example dashboards-01/01
+```
+
+PRO examples
+Many examples require PRO access. If you try to access a PRO example without authentication, you'll see:
+
+```
+🔒 The dashboards-01 example requires PRO access.
+
+To access PRO examples:
+→ If you've already purchased: npx untitledui@latest login
+→ To purchase PRO examples: https://www.untitledui.com/buy/react
+```
+
+Simply authenticate first, then add the example:
+
+```
+npx untitledui@latest login
+npx untitledui@latest example dashboards-01
+```
+
+Customization options
+The example command offers several options for customization:
+
+```
+# Specify where to add the example page
+npx untitledui@latest example dashboards-01/05 --example-path src/app/dashboard
+
+# Specify where to add the components
+npx untitledui@latest example dashboards-01/05 --path components/ui
+
+# Overwrite existing files
+npx untitledui@latest example dashboards-01/05 --overwrite
+
+# Non-interactive mode (for AI agents/CI)
+npx untitledui@latest example dashboards-01/05 --yes
+```
+
+What gets added
+When you add an example, the CLI will:
+
+Add the main example page to your specified directory (default: app/ or pages/)
+
+Install required components that the example uses
+
+Install dependencies needed for the example
+
+Configure imports to match your project structure
+
+Prompt for component selection if multiple components are needed
+
+The example will be fully functional and ready to use in your project.
+
+Command options
+
+These are the available options for the example command:
+
+Option	Description
+-o, --overwrite	Overwrite existing files.
+-p, --path <path>	The path to add the components to.
+-e, --example-path <path>	The path to add the example file to.
+-c, --color <color-name>	Brand color for the project. Forwarded to init, used when the project doesn't already have one set.
+--include-all-components	Automatically include all components from the example without prompting.
+-y, --yes	Non-interactive mode — skip every prompt (brand color, framework, paths, overwrite confirmations) and use defaults. Implies --include-all-components and --overwrite.
+--license <key>	API key for PRO access (alternative to the key stored by login).
+--lib-version <version>	Component library version to pull (7 or 8). Auto-detected from components.json if not specified.
+
+Upgrade command
+
+The upgrade command migrates a v7 project to v8: it replaces theme.css while keeping your brand colors, renames utility classes and Badge colors, updates dependencies and config files, and writes upgrade-report.json (plus UPGRADE-INSTRUCTIONS.md when manual review is needed). See the upgrade guide for the full walkthrough.
+
+```
+npx untitledui@latest upgrade --dry-run
+npx untitledui@latest upgrade
+```
+
+Option	Description
+--dry-run	Preview changes without writing files
+--skip-theme	Skip the theme.css replacement
+--skip-deps	Skip dependency updates
+--skip-config	Skip config file updates
+--path <dir>	Directory to scan for source files
+-y, --yes	Skip prompts and use defaults
+
+Migrate command
+
+The migrate command converts physical Tailwind classes (ml-, pl-, left-, …) to logical ones (ms-, ps-, start-, …) and swaps directional icons so your project works in RTL layouts. It works on v7 and v8 projects. See the RTL guide for what gets converted.
+
+```
+npx untitledui@latest migrate --dry-run
+npx untitledui@latest migrate
+npx untitledui@latest migrate src/components
+```
+
+Option	Description
+[path]	Path to migrate (defaults to the current directory)
+--dry-run	Preview changes without writing files
+--skip-icons	Skip directional icon swapping
+-y, --yes	Skip prompts and use defaults
+
+Version support
+
+The CLI supports both v7 and v8 of the component library. By default, it pulls the latest version (v8). If your project is still on v7, you can keep pulling v7 components without upgrading.
+
+Auto-detection
+
+The init, add and example commands read the version field in your project's components.json to determine which version to pull:
+
+"version": "7" in components.json — pulls v7 components
+
+"version": "8" or no version field — pulls v8 components (default)
+
+Manual override
+
+You can override the detected version with the --lib-version flag. The search command does not read components.json; it searches v8 unless you pass --lib-version 7:
+
+```
+npx untitledui@latest add button --lib-version 7
+
+npx untitledui@latest example dashboards-01/05 --lib-version 7
+```
+
+Usage examples
+
+Here are some common usage patterns for the Untitled UI CLI:
+
+Next.js
+Vite
+
+Create a new project
+Authentication
+Add components
+Search
+Add examples
+
+```
+# Create a new Next.js project with Untitled UI
+npx untitledui@latest init untitledui-app --nextjs
+
+# Navigate to your new project
+cd untitledui-app
+
+# Start the development server
+npm run dev
+```
+
+FAQs
+Please refer to our frequently asked questions page for more.
+
+How do I access PRO components?
+Run npx untitledui@latest login. It opens your browser, signs you in (or emails you a magic link), and saves an API key on your machine. Login only succeeds for accounts that hold a React license, purchased directly or through a team seat. In CI, pass the key with --license <key> instead.
+
+Do I need to log in every time I use the CLI?
+No. login stores your key in ~/.untitledui/config.json, and init, add and example read it from there on every run. If the browser doesn't open automatically, the CLI prints the URL so you can open it yourself; the login waits up to 5 minutes for you to finish.
+
+What's the difference between components and examples?
+add installs individual components, like button or avatar. example installs a complete page, such as dashboards-01, together with the components it uses and its npm dependencies, and can also create a new project around it.
+
+Which frameworks does the CLI support?
+init creates new Next.js, Vite and TanStack Start projects (--nextjs, --vite or --tanstack; without a flag it asks). In an existing project it detects Next.js or Vite from your next.config.* or vite.config.* file, which also covers TanStack Start since it runs on Vite.
+
+Does the CLI modify my existing code?
+add writes the component files, installs their npm dependencies and, if your tsconfig.json has no path alias yet, adds a paths entry for the alias you choose (@/* by default). If a component file already exists with different content, you are asked whether to overwrite it (the prompt defaults to Yes); --overwrite skips the prompt, and --yes implies --overwrite. init also copies the style files and imports globals.css from your root layout or entry file.
+
+Can I customize the installation directory?
+Yes, pass --path, for example npx untitledui@latest add button --path components/ui. In a project with a src folder the path is relative to src, so that example writes to src/components/ui.
+
+How do I update components to the latest version?
+Re-run add with --overwrite, for example npx untitledui@latest add button --overwrite. This replaces your local files with the latest version, so commit first if you've customized them.
+
+TypographyRTL support

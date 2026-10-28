@@ -1,0 +1,284 @@
+{
+  "$generator": "GENERATED — không sửa tay. Nguồn: design/v2/ · sinh bởi _scripts/ds-v2-handoff.py",
+  "id": "l1.list-item",
+  "name": "Base / List Item",
+  "level": "L1",
+  "version": "0.1.0",
+  "status": "Nháp",
+  "spec": "design/v2/components/l1/list-item.md",
+  "figma": {
+    "components": [
+      {
+        "name": "Base / List Item",
+        "nodeId": "6507:209513"
+      }
+    ],
+    "docFrame": "6507:209648"
+  },
+  "decisions": [
+    "DEC-164",
+    "DEC-165",
+    "DEC-172",
+    "DEC-174",
+    "DEC-231",
+    "DEC-232"
+  ],
+  "platforms": {
+    "web": {
+      "props": [
+        {
+          "name": "State",
+          "kind": "Biến thể",
+          "default": "Default",
+          "values": [
+            "Default",
+            "Hover",
+            "Pressed",
+            "Focus",
+            "Disabled",
+            "Selected"
+          ]
+        },
+        {
+          "name": "Align",
+          "kind": "Biến thể",
+          "default": "Center",
+          "values": [
+            "Center",
+            "Start"
+          ]
+        },
+        {
+          "name": "Label",
+          "kind": "Chữ (đưa ra panel từ `.list-item / Text`)",
+          "default": "Title",
+          "values": [
+            "tên dòng"
+          ]
+        },
+        {
+          "name": "Has Description",
+          "kind": "Bật tắt (thuộc tính của `.list-item / Text`, đưa ra panel)",
+          "default": "bật",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "Description",
+          "kind": "Chữ (từ `.list-item / Text`)",
+          "default": "Description",
+          "values": [
+            "ý phụ"
+          ]
+        },
+        {
+          "name": "Has Value",
+          "kind": "Bật tắt (thuộc tính của dòng, ẩn instance `.list-item / Value`)",
+          "default": "tắt",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "Value",
+          "kind": "Chữ (từ `.list-item / Value`)",
+          "default": "Value",
+          "values": [
+            "giá trị phụ, giờ"
+          ]
+        },
+        {
+          "name": "Has Start Content",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "Start Content",
+          "kind": "Slot, tối đa 1; gợi ý (không khoá hẳn, vì icon có hàng nghìn): Base / Avatar, icon/circle-dashed · chevron-right · phone · plus · search",
+          "default": "icon/circle-dashed",
+          "values": [
+            "Base / Avatar",
+            "icon"
+          ]
+        },
+        {
+          "name": "Has End Content",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "End Content",
+          "kind": "Slot, tối đa 2, cách `list-row/gap`; gợi ý (không khoá hẳn): Base / Status Chip, Base / Button, icon (5 bộ)",
+          "default": "icon/circle-dashed",
+          "values": [
+            "Base / Status Chip",
+            "Base / Button",
+            "icon"
+          ]
+        },
+        {
+          "name": "Divider",
+          "kind": "Bật tắt",
+          "default": "tắt",
+          "values": [
+            "—"
+          ]
+        }
+      ],
+      "selector": "inv-list-item",
+      "class": "InvListItemComponent"
+    },
+    "mobile": {
+      "props": [
+        {
+          "name": "State",
+          "kind": "Biến thể",
+          "default": "Default",
+          "values": [
+            "Default",
+            "Hover",
+            "Pressed",
+            "Focus",
+            "Disabled",
+            "Selected"
+          ]
+        },
+        {
+          "name": "Align",
+          "kind": "Biến thể",
+          "default": "Center",
+          "values": [
+            "Center",
+            "Start"
+          ]
+        },
+        {
+          "name": "Label",
+          "kind": "Chữ (đưa ra panel từ `.list-item / Text`)",
+          "default": "Title",
+          "values": [
+            "tên dòng"
+          ]
+        },
+        {
+          "name": "Has Description",
+          "kind": "Bật tắt (thuộc tính của `.list-item / Text`, đưa ra panel)",
+          "default": "bật",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "Description",
+          "kind": "Chữ (từ `.list-item / Text`)",
+          "default": "Description",
+          "values": [
+            "ý phụ"
+          ]
+        },
+        {
+          "name": "Has Value",
+          "kind": "Bật tắt (thuộc tính của dòng, ẩn instance `.list-item / Value`)",
+          "default": "tắt",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "Value",
+          "kind": "Chữ (từ `.list-item / Value`)",
+          "default": "Value",
+          "values": [
+            "giá trị phụ, giờ"
+          ]
+        },
+        {
+          "name": "Has Start Content",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "Start Content",
+          "kind": "Slot, tối đa 1; gợi ý (không khoá hẳn, vì icon có hàng nghìn): Base / Avatar, icon/circle-dashed · chevron-right · phone · plus · search",
+          "default": "icon/circle-dashed",
+          "values": [
+            "Base / Avatar",
+            "icon"
+          ]
+        },
+        {
+          "name": "Has End Content",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "End Content",
+          "kind": "Slot, tối đa 2, cách `list-row/gap`; gợi ý (không khoá hẳn): Base / Status Chip, Base / Button, icon (5 bộ)",
+          "default": "icon/circle-dashed",
+          "values": [
+            "Base / Status Chip",
+            "Base / Button",
+            "icon"
+          ]
+        },
+        {
+          "name": "Divider",
+          "kind": "Bật tắt",
+          "default": "tắt",
+          "values": [
+            "—"
+          ]
+        }
+      ],
+      "sameAsWeb": true,
+      "note": "Như web (cùng bảng).",
+      "widget": "InvListItem"
+    }
+  },
+  "tokens": [
+    "color/bg/hover",
+    "color/bg/surface",
+    "color/border/default",
+    "color/border/focus",
+    "color/focus/gap",
+    "color/text/primary",
+    "color/text/secondary",
+    "focus/gap",
+    "focus/offset",
+    "focus/width",
+    "icon/check",
+    "icon/size/md",
+    "list-row/*",
+    "list-row/bg/hover",
+    "list-row/bg/pressed",
+    "list-row/bg/selected",
+    "list-row/check/fg",
+    "list-row/divider",
+    "list-row/divider-height",
+    "list-row/fg/disabled",
+    "list-row/fg/secondary-pressed",
+    "list-row/gap",
+    "list-row/min-height",
+    "list-row/padding-x",
+    "list-row/padding-y",
+    "list-row/radius",
+    "list-row/text-gap",
+    "list-row/value-max-width",
+    "touch/min",
+    "type/body",
+    "type/caption"
+  ]
+}

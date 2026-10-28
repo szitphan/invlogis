@@ -1,9 +1,9 @@
 ---
 name: figma-component
-description: Tạo hoặc cập nhật MỘT component bất kỳ của dự án trên Figma (vd Notification Center, Bộ lọc nâng cao, Tuỳ chỉnh cột, thẻ KPI, dòng lịch sử…) — ghép từ instance thật của thư viện đang có, gắn token của dự án, có biến thể + thuộc tính dùng lại được, đủ trạng thái, Desktop/Mobile, kiểm chữ dài — theo spec trong design/design.md (DS cũ) hoặc design/v2/ (DS v2 đang dựng lại; chạy được trong agent con ở chế độ đề xuất --propose). Dùng khi ai đó nói "tạo component", "dựng component <tên>", "biến mẫu ghép này thành component", "thêm biến thể/trạng thái cho component", "làm lại component cho file mới". Không dùng để dựng cả design system (dùng /figma-design-system) hay vẽ màn (dùng /figma-screen).
-allowed-tools: Read, Glob, Grep, Edit, Write, Bash, Skill, AskUserQuestion, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write, mcp__claude_ai_Figma__use_figma, mcp__claude_ai_Figma__get_figma_skill, mcp__claude_ai_Figma__get_libraries, mcp__claude_ai_Figma__search_design_system, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__download_assets
+description: Tạo hoặc cập nhật MỘT component bất kỳ của dự án trên Figma (vd Notification Center, Bộ lọc nâng cao, Tuỳ chỉnh cột, thẻ KPI, dòng lịch sử…) — ghép từ instance thật của thư viện đang có, gắn token của dự án, có biến thể + thuộc tính dùng lại được, đủ trạng thái, Desktop/Mobile, kiểm chữ dài — theo spec trong design/design.md (DS cũ) hoặc design/v2/ (DS v2 đang dựng lại; chạy được trong agent con ở chế độ đề xuất --propose). `--html` = component mới của DS v2 đi qua trang artifact trước (brainstorm từ Untitled, Astryx và ý tưởng cộng đồng → preview web/mobile → đối chiếu foundation) rồi mới lên Figma. Dùng khi ai đó nói "tạo component", "dựng component <tên>", "brainstorm component", "biến mẫu ghép này thành component", "thêm biến thể/trạng thái cho component", "làm lại component cho file mới". Không dùng để dựng cả design system (dùng /figma-design-system) hay vẽ màn (dùng /figma-screen).
+allowed-tools: Read, Glob, Grep, Edit, Write, Bash, Skill, AskUserQuestion, Agent, WebSearch, WebFetch, Artifact, ArtifactData, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write, mcp__claude_ai_Figma__use_figma, mcp__claude_ai_Figma__get_figma_skill, mcp__claude_ai_Figma__get_libraries, mcp__claude_ai_Figma__search_design_system, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__download_assets
 user-invocable: true
-argument-hint: "<tên component> [link file Figma] [desktop|mobile|cả hai] [@spec/srs] [--propose | --build <gói đã duyệt>] [--ds cu]"
+argument-hint: "<tên component> [link file Figma] [desktop|mobile|cả hai] [@spec/srs] [--html | --propose | --build <gói đã duyệt>] [--ds cu]"
 ---
 
 # /figma-component — một component của dự án, dùng lại được, đúng design system
@@ -28,9 +28,11 @@ phải sơ đồ, nên các bước dưới đây thay cho luật vẽ sơ đồ
     `appendChild` vào slot** → sửa tiếp bằng `figma_write` (sửa được node trong slot qua id `I…;…`).
     Không tạo chữ/khung mới bằng `use_figma` — không gắn token.
 
-**Ba chế độ chạy** (chi tiết: *Chạy trong agent con*):
+**Bốn chế độ chạy** (chi tiết: *Chế độ `--html`* và *Chạy trong agent con*):
 
 * **Mặc định** — phiên chính, hỏi user bằng `AskUserQuestion`, làm Bước 1–9.
+* **`--html`** — component **mới** của DS v2: vòng 0–5 trên một trang artifact (brainstorm → preview → đối chiếu
+  foundation), user chốt rồi mới dựng Figma, cuối cùng 3 agent review. Một component mỗi lần chạy.
 * **`--propose`** — agent con (không hỏi được user): Bước 1–4 rồi trả **gói đề xuất**; không ghi repo, không ghi Figma.
 * **`--build <gói đã duyệt>`** — dựng theo gói user đã duyệt: Bước 6–9, không hỏi lại.
 
@@ -164,13 +166,12 @@ Chia component theo **nguyên tử → phân tử → khối chứa** (dựng t�
   đổi icon/khối → INSTANCE_SWAP. Mỗi set **≤ 30 tổ hợp**; nhiều hơn thì tách component con.
 * Instance con mà người dùng cần chỉnh (Timestamp, Body trong Panel…) → expose
   (`exposeNestedInstance`).
-* Nền tảng theo quy ước Web | Mobile của `design.md`: component tự đổi cách hiển thị (vd popover →
-  bottom sheet → màn riêng) thì làm trục `Platform`, không dựng hai họ riêng.
+* Nền tảng theo DEC-279 (architecture Mục 6): cùng cấu tạo → mode `Platform`, không trục; khác cấu tạo hoặc cách
+  thao tác (popover → bottom sheet → màn riêng) → trục biến thể `Platform=Web|Mobile` trong cùng bộ, không dựng set
+  `/ Mobile`; chỉ một nền tảng → ghi nền tảng kia dùng gì thay. Phần con chỉ có trên app: tiền tố `_`.
 * **DS v2:** tên theo cấp — L0 `.{cha} / {Tên}`, L1 `Base / {Tên}`, L2 `{Đối tượng} / {Bố cục}` (architecture Mục 4–5);
   trục dùng bộ chuẩn `Type · Size · State` (+ Tone…) và giá trị chuẩn ở Mục 11, không đặt trục mới khi bộ chuẩn đã
-  có. Nền tảng là **mode** của collection `Platform`, không phải trục biến thể, khi Web và Mobile cùng cấu tạo (thay
-  dòng trên); khác cấu tạo → tách hai component, hậu tố `/ Mobile` (Mục 6). Chỗ đặt L1 trong cha = Slot có preferred
-  values; đưa thuộc tính của instance lồng ra panel (`exposeNestedInstance`).
+  có. Chỗ đặt L1 trong cha = Slot có preferred values; đưa thuộc tính của instance lồng ra panel (`exposeNestedInstance`).
 
 ## Bước 4 — dò file Figma (chỉ đọc)
 
@@ -348,22 +349,34 @@ Kiểm bằng dữ liệu trước, ảnh chụp sau. **Lớp máy** (lỗi ch�
    `off-system` đổi sang giá trị có token hoặc ghi vào báo cáo. Thay cho việc soát mã hex bằng mắt.
 5. `figma_read responsive_audit` trên ví dụ *Trong ngữ cảnh* (Mobile: 320/360/390/430): bổ sung cho
    khung *Chữ dài*, không thay — chữ cực trị vẫn phải dựng tay.
-6. **Dark:** một khung mẫu đặt mode Dark bằng `modify(frameId, { explicitVariableModes: { <collection
+6. **Kiểm tên** (DEC-264, bắt buộc): chạy `_scripts/figma-name-lint.js` (đọc file, thay `ROOTS` = id Section của
+   component, dán làm `code` cho `figma_write`). Luật: component ≤ 32 · thuộc tính ≤ 20, giá trị ≤ 16 · layer chữ theo
+   vai trò (`Title`, `Label`, `Value`, `Note`…), không theo nội dung, ≤ 24 · màn demo `<Màn> / Web|Mobile[ / <Trạng
+   thái>]` ≤ 40 · không mã DEC/mã node trong tên. `fail` = 0 mới trình; FAIL ở giá trị biến thể → *Cần user quyết*.
+   Bảng đủ: `design/v2/_review/agent-brief-base.md` §2d.
+7. **Dark:** một khung mẫu đặt mode Dark bằng `modify(frameId, { explicitVariableModes: { <collection
    màu>: "Dark" } })` (tên collection/mode đọc từ `figma_rules`); không có mode Dark thì bỏ, ghi 1 dòng.
 
 **Tự rà** (máy không kiểm):
 
-7. **Một ảnh chụp mỗi component set**, một ảnh khung trạng thái, một ảnh *Chữ dài*, chụp **một lần** ở
+8. **Một ảnh chụp mỗi component set**, một ảnh khung trạng thái, một ảnh *Chữ dài*, chụp **một lần** ở
    cuối. Tìm: khoảng trống thừa, nội dung mặc định còn sót ("Button", "Content", giờ kiểu Mỹ…). Đối
    chiếu từng quy tắc chữ dài và hành vi của spec với ảnh.
-8. Do's and Don'ts của `design.md`: (a) ≤ 1 nút Primary mỗi nhóm; (b) trạng thái không chỉ dựa vào
+9. Do's and Don'ts của `design.md`: (a) ≤ 1 nút Primary mỗi nhóm; (b) trạng thái không chỉ dựa vào
    màu; (c) đủ rỗng / đang tải / lỗi; (e) không vi phạm "Không nên" của component thành phần.
-9. **Chip trạng thái:** component có trạng thái dùng instance `Chip trạng thái` (không tự vẽ pill); icon và chữ
+10. **Chip trạng thái:** component có trạng thái dùng instance `Chip trạng thái` (không tự vẽ pill); icon và chữ
    đúng màu `Status Chip/<Sắc>/Foreground` (đổi icon qua thuộc tính `Icon` xong kiểm màu nét, quét cả biến
    thể gốc lẫn instance — `findInstances`); mã nghiệp vụ dùng `Text/Code Small`; khung *Chữ dài* thử tên/nhãn dài nhất cho phép
    (14 ký tự) + mã dài nhất. Component gắn với feature có `*-states.md` → chạy
    `python3 _scripts/status-chip-lint.py <file states>`; FAIL thì báo, KHÔNG tự đổi nhãn nghiệp vụ.
-10. Sửa lỗi → chạy lại audit của phần đã sửa, chụp lại **chỉ phần đã sửa**.
+11. Sửa lỗi → chạy lại audit của phần đã sửa, chụp lại **chỉ phần đã sửa**.
+12. **DS v2 — 3 agent review** (bắt buộc mỗi lần dựng hoặc sửa lớn component DS v2, sau mục 1–11): chạy song song
+    `visual-reviewer`, `uxui-reviewer` và một agent `general-purpose` làm accessibility (`figma_read a11y_audit` trên set
+    và màn demo, rồi skill `accessibility-review`, chấm WCAG 2.2 riêng Web và Mobile). Prompt mỗi agent: file + node id
+    của set và demo, đường dẫn spec md, ảnh preview đã duyệt (nếu chạy `--html`), luật "không đổi look đã duyệt". Mỗi
+    điểm trả về: mức Cao/Trung/Thấp, mô tả, node, đề xuất sửa, cờ `changesLook`. Điểm không đổi look và không phải
+    quyết định → sửa luôn rồi kiểm lại phần đã sửa; điểm còn lại gom lên **một** trang (tab *Review Figma* khi chạy
+    `--html`, không thì một artifact riêng), không rải trong chat.
 
 **DS v2 — thêm / đổi ở Bước 7** (khuôn `design/v2/components/README.md`):
 
@@ -374,9 +387,9 @@ Kiểm bằng dữ liệu trước, ảnh chụp sau. **Lớp máy** (lỗi ch�
   fill / stroke / cỡ trên instance L1; L0 không chứa L1.
 * Số in trong tài liệu đọc từ biến theo mode của khối, không gõ tay. Trợ năng chấm WCAG 2.2 theo mục Trợ năng của khuôn
   (tiêu chí Web và Mobile khác nhau, điểm ghi riêng); lớp thứ hai `accessibility-review` (mục 3) vẫn chạy.
-* Mục 5 (`responsive_audit` ví dụ *Trong ngữ cảnh*) và mục 6 (Dark: giá trị Dark chưa điền, architecture Mục 7): bỏ,
+* Mục 5 (`responsive_audit` ví dụ *Trong ngữ cảnh*) và mục 7 (Dark: giá trị Dark chưa điền, architecture Mục 7): bỏ,
   ghi 1 dòng mỗi mục.
-* Mục 8: Do's and Don'ts vẫn đọc ở `design.md` (bảng *Chọn nguồn spec*). Mục 9: dùng instance `Base / Status Chip`, Tone
+* Mục 9: Do's and Don'ts vẫn đọc ở `design.md` (bảng *Chọn nguồn spec*). Mục 10: dùng instance `Base / Status Chip`, Tone
   theo bảng ánh xạ trạng thái nghiệp vụ → sắc, nhãn nguyên văn từ `*-states.md`, không đè màu; kiểm còn lại như mục 9.
 
 ## Bước 8 — cập nhật component đã có
@@ -427,6 +440,116 @@ Known Gaps `KG-nn`). User chốt giữa ≥ 2 phương án → thêm dòng DEC v
 thấy được trên màn (chữ, phần tử thêm/bớt, trạng thái) → gọi `/figma-sync {feature} --flow {flow}` inline cho
 từng flow bị chạm (`.claude/rules/screen-source.md` Mục 5). Chỉ đổi hình (màu, bo, khoảng cách) → không gọi,
 ghi "màn bị chạm: n, chỉ đổi hình" trong báo cáo.
+
+## Chế độ `--html` — brainstorm và preview trên artifact trước Figma
+
+Dùng cho component **mới** của DS v2 (DEC-285). Lý do: chốt hình trên HTML rẻ hơn sửa trên Figma, và HTML được **vẽ tự
+do**, không bị token và foundation hiện tại trói, để thấy được phương án tốt nhất trước; ràng buộc foundation kiểm ở
+vòng 3. **Một component mỗi lần chạy**: nhiều component một trang quá nặng để soi.
+
+Mọi thứ nằm trên **một artifact** (4 tab, giữ một link suốt các vòng). Nguồn của trang là thư mục làm việc
+`design/v2/components/_work/{slug}/`:
+
+| File | Nội dung | Ai ghi |
+|---|---|---|
+| `page.json` | dữ liệu trang: tham chiếu, ý tưởng, điểm cần quyết, preview, khai giá trị, kết quả review. Khuôn: `html-kit/sample-page.json` | Claude |
+| `check.json` | kết quả đối chiếu foundation | `_scripts/ds-foundation-check.py --write` |
+| `answers.json` | lựa chọn của user, dump từ db của artifact (`ArtifactData list`, collection `answers`) | Claude, đầu mỗi vòng |
+| `state.json` | `{round, artifact_url, approved: {brainstorm, preview, foundation}, figma: {set, demos}}` | Claude |
+| `{slug}-review.html` | trang sinh ra — publish file này | `_scripts/ds-component-page.py {slug}` |
+
+Gọi lại `/figma-component <tên> --html` → đọc `state.json`, chạy tiếp đúng vòng đang dở, không làm lại vòng đã chốt.
+Publish luôn cùng đường dẫn file (giữ link), `capabilities: {db: {}, user: {}}` ở lần đầu; lần sau bỏ trống để giữ.
+
+### Vòng 0 — tham chiếu (chỉ đọc)
+
+1. **Untitled UI:** code `design/_ref/untitled-ui/react/components/` (thiếu thì chạy `_scripts/ref-untitled.sh`) + trang
+   `untitledui.com/components/{tên}`: phần cấu tạo, trục biến thể, cỡ, trạng thái, hành vi mobile (breakpoint).
+2. **Astryx hiện tại:** mục component trong `design/design.md` + node Figma cũ (memory benchmark Astryx); chụp hoặc vẽ lại.
+3. **Nơi dùng thật:** grep tên component / control type trong `docs/*/screens/*.md`, `docs/*/srs/*-spec.md` → danh sách
+   feature · màn. Không có nơi dùng → hỏi user có cần dựng không (DEC-260: chỉ dựng component sản phẩm dùng).
+4. **Xếp nhóm web/mobile** A/B/C theo DEC-279 (architecture Mục 6).
+
+### Vòng 1 — Brainstorm (tab 1)
+
+* **Ý tưởng cộng đồng — 8 đến 12 mẫu**, không dừng ở 2–3. Nguồn: Dribbble, Behance, 21st.dev, Refero (refero.design —
+  màn sản phẩm thật web và app); thêm Mobbin khi cần mẫu app. Tìm bằng `WebSearch` (nhiều truy vấn cùng lượt: tên component tiếng Anh + biến thể +
+  "logistics / dashboard / mobile"), đọc trang bằng `WebFetch`. Chọn mẫu **sát tên component nhất** và **nhìn ổn**
+  (gọn, không trang trí thừa, đọc được); bỏ shot chỉ là ảnh đẹp không dùng được thật. Mỗi mẫu: nguồn, link bản gốc,
+  1–2 câu điều đáng học, và **hình vẽ lại bằng HTML** (không nhúng ảnh của người khác). Phủ đủ web và mobile.
+* **Điểm cần quyết** (thường 4–8): cấu tạo, trục biến thể, cỡ, trạng thái, hành vi web/mobile, chi tiết hình (bo, viền,
+  icon). Mỗi điểm: lý do phải quyết, nguồn, **2–4 phương án** có hình xem trước (ghi ý tưởng nguồn nếu có), cột
+  Untitled và cột "Astryx hiện tại" cùng nội dung để chỉ khác đúng điểm đang hỏi. Một phương án đánh dấu đề xuất.
+* Chữ trong hình dùng dữ liệu logistics thật (lệnh vận tải, xe, lái xe), tiếng Việt có dấu; theo memory về câu hỏi
+  đủ ngữ cảnh: giải thích mã, trích nguồn.
+* **Thử trên màn** (khu đầu tab, học `/prototype-html` và `/wireframe-html`): 2–4 **màn ví dụ trông như sản phẩm thật**
+  có dùng component đang bàn (chọn theo danh sách nơi dùng ở vòng 0), cả Web (khung 1280, tự co) và Mobile (khung điện
+  thoại 393). Kit tự bọc **vỏ ứng dụng**: web = sidebar invlogis + header (đường dẫn, ô tìm, chuông, tài khoản) + tiêu đề
+  trang; app = thanh trạng thái + thanh tiêu đề + thanh tab dưới. Màn chỉ viết phần nội dung. Nút nổi **Bảng chọn** (góc
+  dưới phải; mobile mở sheet) mở menu 3 tab: *Biến thể* (bộ chọn sẵn theo nguồn + phương án từng điểm + "Chốt tổ hợp
+  này"), *Màn*, *Hiển thị* (trạng thái, Light/Dark). Bấm vào component trên màn (phần tử có `data-cmp`) cũng mở menu.
+  Bộ chọn sẵn: `rec` (đề xuất), `untitled`, `astryx`, mỗi ý tưởng cộng đồng một bộ (id trùng id ý tưởng; card ý tưởng có
+  nút "Xem trên màn demo").
+  Cách viết trong `page.json` (khuôn: `html-kit/sample-page.json`):
+  - `css` chung cho mọi hình; phương án viết bằng bộ chọn thuộc tính: `.pv[data-D1=b] .tg{border-radius:999px}`
+    (phương án thứ i = chữ thứ i: a, b, c…).
+  - Phần tử chỉ có ở một phương án hoặc trạng thái: `data-show="D2:b"`, `data-show="state:loading"`; nhiều điều kiện
+    cách nhau dấu cách = phải đúng hết.
+  - `states`: `[{key, label}]` — đủ các trạng thái component có (mặc định, đang tải, rỗng, lỗi, chữ dài…).
+  - `screens`: `[{id, name, device: web|mobile, width?, note, title?, nav?, crumb?, back?, tabs?, heading?, shell?, html}]`
+    — `nav` = mục sidebar / tab dưới đang chọn; `shell: "none"` bỏ vỏ. Component đang bàn gắn `data-cmp`.
+    `presets`: `[{id, label, pick: {D1: "a"}, screen?}]`.
+  - Dữ liệu mẫu cố định (không ngày giờ chạy, không ngẫu nhiên); nhãn trạng thái là chữ nghiệp vụ, không mã kỹ thuật;
+    không emoji (icon SVG nét); màn chỉ chứa thứ người dùng thật thấy (luật `/prototype-html`).
+* Sinh trang (`ds-component-page.py`), publish, rồi **dừng**: báo link, chờ user chọn trên trang.
+
+### Vòng 2 — Preview (tab 2)
+
+User báo đã chọn → `ArtifactData list answers` → ghi `answers.json` → tóm tắt lựa chọn trong chat (1 bảng) → dựng
+preview đúng các lựa chọn:
+
+* **Màn demo đã chốt:** cùng `screens` của vòng 1, khoá theo tổ hợp user chốt (`ds-component-page.py` tự đọc
+  `answers.json` ghi vào `preview.pick`), bổ sung màn còn thiếu tới đủ 4 loại (danh sách, chi tiết, form, sheet xác
+  nhận) nếu component dùng ở đó; mọi trạng thái trong `states` phải bật được trên màn.
+* **Bảng biến thể** (`preview.blocks`): đủ biến thể và trạng thái đã chốt; **khối Web và khối Mobile riêng** (mobile
+  trong khung 393); Light/Dark (CSS tự khai `.pv[data-theme=dark]`); kiểm chữ dài cho trường được xuống dòng.
+* **Khai giá trị** vào `values` của `page.json` song song khi viết CSS: mỗi phần × thuộc tính × nền tảng × cỡ × trạng
+  thái có số hoặc màu riêng (cách ghi: docstring của `ds-foundation-check.py`). Màu chữ/icon/viền mang nghĩa ghi kèm
+  `on` (nền) để đo tương phản; control ghi `control: true`; phần bấm được ghi `interactive` và `hitArea`.
+* Duyệt kiểu L3: tối đa 3 bản (`preview.version`; ô duyệt của bản n lưu ở `preview-approve-vn`, bản 1 là `preview-approve`), mỗi bản sửa theo ghi chú + comment trên trang (comment chỉ đổi phần
+  tử được comment, memory phạm vi comment). Dừng chờ "Duyệt".
+
+### Vòng 3 — Đối chiếu foundation (tab 3)
+
+1. `python3 _scripts/ds-foundation-check.py design/v2/components/_work/{slug} --write` → `check.json`.
+2. Sinh lại trang, publish, dừng. User quyết từng dòng ⛔ và ＋ (↔ không bắt buộc; không chọn = kéo về token đề xuất).
+3. Dump `answers.json`, chạy lại script: exit 0 mới sang vòng 4. Quyết định "đổi luật foundation" hoặc "thêm token" →
+   sửa `design/v2/tokens.json` + `foundations.md` qua L1/L2 trên `main`, chạy `ds-v2-tokens.py`, ghi DEC; quyết định sửa
+   preview → sửa preview, sinh lại (không cần user duyệt lại phần đã khớp).
+
+### Vòng 4 — Figma
+
+* Ghi spec `design/v2/components/{base|application}/{slug}.md` từ các lựa chọn đã chốt (L1 plan; số đo ghi bằng **tên
+  token** sau đối chiếu, không ghi số trần), thêm DEC cho từng điểm đã chọn giữa ≥ 2 phương án (gom một dòng DEC nếu
+  nhỏ). Ảnh preview đã duyệt chụp lưu `_work/{slug}/preview-web.png`, `preview-mobile.png` làm mốc nhìn.
+* Dựng theo Bước 6–7 (đường `--build`, gói = spec + ảnh mốc). Hình Figma khác preview chỗ nào mà không do token → sửa
+  Figma, không sửa preview (memory prototype → Figma).
+
+### Vòng 5 — Review Figma (tab 4)
+
+Bước 7 mục 12 (3 agent). Đưa kết quả vào `reviews` của `page.json` (ảnh chụp node tải lên bằng `assets` hoặc bỏ trống),
+link Figma vào `figma`, sinh lại, publish, dừng. User chọn Sửa / Bỏ qua → sửa → kiểm lại phần đã sửa → Bước 9.
+
+### Luật chặn
+
+| Chưa có | Không được |
+|---|---|
+| user chọn xong vòng 1 (mọi điểm cần quyết có lựa chọn, hoặc user nói "theo đề xuất") | dựng preview |
+| user chọn "Duyệt" ở tab 2 | chạy đối chiếu foundation |
+| `ds-foundation-check.py` exit 0 | ghi spec md, đụng Figma |
+| 3 agent review chạy xong | báo hoàn tất |
+
+Chế độ chạy (`/run-task`) không áp cho `--html`: mọi vòng chờ người chọn trên trang.
 
 ## Chạy trong agent con
 
@@ -521,3 +644,6 @@ có chủ đích so với bảng của rule, tới khi chuyển hẳn sang DS v2
   `addComponentProperty`, `addVariant`, `instantiate`, `componentize`, `findInstances`).
 - `skill://figma/figma-use/SKILL.md`: luật Plugin API — chỉ cho đường dự phòng `use_figma`.
 - `/figma-design-system` (dựng cả bộ DS), `/figma-screen` (vẽ màn dùng component này).
+- `--html`: khung trang `html-kit/review-page.html` + khuôn dữ liệu `html-kit/sample-page.json` · `_scripts/ds-component-page.py`
+  (sinh trang) · `_scripts/ds-foundation-check.py` (gate vòng 3) · `_scripts/ref-untitled.sh` (code Untitled) · DEC-285.
+- Agent review Bước 7 mục 12: `.claude/agents/visual-reviewer.md`, `.claude/agents/uxui-reviewer.md`, skill `accessibility-review`.

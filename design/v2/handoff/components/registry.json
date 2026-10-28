@@ -1,0 +1,178 @@
+{
+  "$generator": "GENERATED — không sửa tay. Nguồn: design/v2/ · sinh bởi _scripts/ds-v2-handoff.py",
+  "$description": "Bảng nối mã component ↔ Figma ↔ spec ↔ Angular ↔ Flutter. Tên Angular/Flutter tay viết ở design/v2/components/platform-names.json.",
+  "prefix": {
+    "angular": "inv-",
+    "flutter": "Inv"
+  },
+  "components": [
+    {
+      "id": "l1.avatar-group",
+      "name": "Base / Avatar Group",
+      "level": "L1",
+      "version": "0.1.0",
+      "status": "Nháp",
+      "figmaNodeId": "6408:82080",
+      "spec": "design/v2/components/l1/avatar-group.md",
+      "angular": "inv-avatar-group",
+      "flutter": "InvAvatarGroup",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.avatar",
+      "name": "Base / Avatar",
+      "level": "L1",
+      "version": "0.2.0",
+      "status": "Nháp",
+      "figmaNodeId": "6397:825",
+      "spec": "design/v2/components/l1/avatar.md",
+      "angular": "inv-avatar",
+      "flutter": "InvAvatar",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.button",
+      "name": "Base / Button",
+      "level": "L1",
+      "version": "0.2.0",
+      "status": "Nháp",
+      "figmaNodeId": "6373:491",
+      "spec": "design/v2/components/l1/button.md",
+      "angular": "inv-button",
+      "flutter": "InvButton",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.card",
+      "name": "Base / Card",
+      "level": "L1",
+      "version": "0.1.0",
+      "status": "Nháp",
+      "figmaNodeId": "6457:22918",
+      "spec": "design/v2/components/l1/card.md",
+      "angular": "inv-card",
+      "flutter": "InvCard",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.list-item",
+      "name": "Base / List Item",
+      "level": "L1",
+      "version": "0.1.0",
+      "status": "Nháp",
+      "figmaNodeId": "6507:209513",
+      "spec": "design/v2/components/l1/list-item.md",
+      "angular": "inv-list-item",
+      "flutter": "InvListItem",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.otp-field",
+      "name": "Base / OTP Field",
+      "level": "L1",
+      "version": "0.1.0",
+      "status": "Nháp",
+      "figmaNodeId": "6528:26324",
+      "spec": "design/v2/components/l1/otp-field.md",
+      "angular": null,
+      "flutter": "InvOtpField",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.progress",
+      "name": "Base / Progress",
+      "level": null,
+      "version": "0.1.0",
+      "status": "Nháp",
+      "figmaNodeId": "6520:212428",
+      "spec": "design/v2/components/l1/progress.md",
+      "angular": "inv-progress",
+      "flutter": "InvProgress",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.record-card",
+      "name": "Base / Record Card",
+      "level": "L1",
+      "version": "0.1.0",
+      "status": "Nháp",
+      "figmaNodeId": "6442:85850",
+      "spec": "design/v2/components/l1/record-card.md",
+      "angular": "inv-record-card",
+      "flutter": "InvRecordCard",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.selectable-card",
+      "name": "Base / Selectable Card",
+      "level": "L1",
+      "version": "0.1.0",
+      "status": "Nháp",
+      "figmaNodeId": "6442:85947",
+      "spec": "design/v2/components/l1/selectable-card.md",
+      "angular": "inv-selectable-card",
+      "flutter": "InvSelectableCard",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.status-chip",
+      "name": "Base / Status Chip",
+      "level": "L1",
+      "version": "0.2.0",
+      "status": "Nháp",
+      "figmaNodeId": "6385:630",
+      "spec": "design/v2/components/l1/status-chip.md",
+      "angular": "inv-status-chip",
+      "flutter": "InvStatusChip",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.status-row",
+      "name": "Base / Status Row",
+      "level": "L1",
+      "version": "0.1.0",
+      "status": "Nháp",
+      "figmaNodeId": "6458:83667",
+      "spec": "design/v2/components/l1/status-row.md",
+      "angular": "inv-status-row",
+      "flutter": "InvStatusRow",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.summary-card",
+      "name": "Base / Summary Card",
+      "level": "L1",
+      "version": "0.1.0",
+      "status": "Nháp",
+      "figmaNodeId": "6442:85948",
+      "spec": "design/v2/components/l1/summary-card.md",
+      "angular": "inv-summary-card",
+      "flutter": "InvSummaryCard",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.text-field",
+      "name": "Base / Text Field",
+      "level": "L1",
+      "version": "0.2.0",
+      "status": "Nháp",
+      "figmaNodeId": "6423:21911",
+      "spec": "design/v2/components/l1/text-field.md",
+      "angular": "inv-text-field",
+      "flutter": "InvTextField",
+      "namesStatus": "đề xuất"
+    },
+    {
+      "id": "l1.tooltip",
+      "name": "Base / Tooltip",
+      "level": "L1",
+      "version": "0.2.0",
+      "status": "Nháp",
+      "figmaNodeId": "6405:2455",
+      "spec": "design/v2/components/l1/tooltip.md",
+      "angular": "inv-tooltip",
+      "flutter": "InvTooltip",
+      "namesStatus": "đề xuất"
+    }
+  ]
+}

@@ -1,0 +1,254 @@
+{
+  "type": {
+    "display": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Cal Sans",
+        "fontWeight": 400,
+        "fontSize": "{type.display.size}",
+        "lineHeight": "{type.display.line-height}",
+        "letterSpacing": "0.0em"
+      },
+      "$description": "Số lớn, màn giới thiệu"
+    },
+    "title-1": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Cal Sans",
+        "fontWeight": 400,
+        "fontSize": "{type.title-1.size}",
+        "lineHeight": "{type.title-1.line-height}",
+        "letterSpacing": "0.0em"
+      },
+      "$description": "Tiêu đề màn"
+    },
+    "title-2": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Cal Sans",
+        "fontWeight": 400,
+        "fontSize": "{type.title-2.size}",
+        "lineHeight": "{type.title-2.line-height}",
+        "letterSpacing": "0.0em"
+      },
+      "$description": "Tiêu đề dialog, sheet, khối lớn"
+    },
+    "title-3": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Cal Sans",
+        "fontWeight": 400,
+        "fontSize": "{type.title-3.size}",
+        "lineHeight": "{type.title-3.line-height}",
+        "letterSpacing": "0.0em"
+      },
+      "$description": "Tiêu đề khối, thẻ"
+    },
+    "heading": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": 600,
+        "fontSize": "{type.heading.size}",
+        "lineHeight": "{type.heading.line-height}",
+        "letterSpacing": "0.0em"
+      },
+      "$description": "Tiêu đề nhóm nhỏ"
+    },
+    "body": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": 400,
+        "fontSize": "{type.body.size}",
+        "lineHeight": "{type.body.line-height}",
+        "letterSpacing": "0.0em"
+      },
+      "$description": "Chữ đọc, giá trị"
+    },
+    "label": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": "{type.label.weight}",
+        "fontSize": "{type.label.size}",
+        "lineHeight": "{type.label.line-height}",
+        "letterSpacing": "0.0em"
+      },
+      "$description": "Nút, nhãn, tab"
+    },
+    "caption": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": 400,
+        "fontSize": "{type.caption.size}",
+        "lineHeight": "{type.caption.line-height}",
+        "letterSpacing": "0.0em"
+      },
+      "$description": "Thông tin phụ, thời gian"
+    },
+    "code": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "JetBrains Mono",
+        "fontWeight": 400,
+        "fontSize": "{type.code.size}",
+        "lineHeight": "{type.code.line-height}",
+        "letterSpacing": "0.0em"
+      },
+      "$description": "Mã lệnh, mã chứng từ"
+    },
+    "caption-caps": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": 500,
+        "fontSize": "{type.caption.size}",
+        "lineHeight": "{type.caption.line-height}",
+        "letterSpacing": "0.04em"
+      },
+      "$description": "Tên cột bảng, nhãn nhóm menu (ngoại lệ viết hoa DEC-027, DEC-133)",
+      "$extensions": {
+        "invlogis.textCase": "UPPER"
+      }
+    },
+    "caption-strong": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": 600,
+        "fontSize": "{type.caption.size}",
+        "lineHeight": "{type.caption.line-height}",
+        "letterSpacing": "0.0em"
+      },
+      "$description": "Chữ chip trạng thái Soft (DEC-200)"
+    },
+    "chip-sm": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": 400,
+        "fontSize": "{chip.font-size-sm}",
+        "lineHeight": "{chip.line-height-sm}",
+        "letterSpacing": "0.0em"
+      },
+      "$description": "Chữ chip, badge, tag cỡ SM (DEC-261)"
+    },
+    "chip-sm-strong": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter",
+        "fontWeight": 600,
+        "fontSize": "{chip.font-size-sm}",
+        "lineHeight": "{chip.line-height-sm}",
+        "letterSpacing": "0.0em"
+      },
+      "$description": "Chữ chip đã chọn cỡ SM (Tag Checked) (DEC-261)"
+    }
+  },
+  "elev": {
+    "1": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#1018280F",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "Thẻ (DEC-125)"
+    },
+    "2": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#1018281A",
+          "offsetX": "0px",
+          "offsetY": "4px",
+          "blur": "12px",
+          "spread": "0px"
+        },
+        {
+          "color": "#1018280F",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "3px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "Menu thả, popover, gợi ý ô tìm"
+    },
+    "3": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#10182829",
+          "offsetX": "0px",
+          "offsetY": "16px",
+          "blur": "40px",
+          "spread": "0px"
+        },
+        {
+          "color": "#1018281A",
+          "offsetX": "0px",
+          "offsetY": "4px",
+          "blur": "12px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "Dialog, sheet, toast"
+    }
+  },
+  "motion": {
+    "duration": {
+      "fast": {
+        "$type": "duration",
+        "$value": "125ms"
+      },
+      "medium": {
+        "$type": "duration",
+        "$value": "300ms"
+      },
+      "slow": {
+        "$type": "duration",
+        "$value": "700ms"
+      }
+    },
+    "easing": {
+      "standard": {
+        "$type": "cubicBezier",
+        "$value": [
+          0.24,
+          1.0,
+          0.4,
+          1.0
+        ]
+      }
+    }
+  },
+  "blur": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "8px",
+      "$description": "Đầu màn, thanh công cụ dính trên cùng khi cuộn (nền trắng 70%)."
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "16px",
+      "$description": "Thanh điều hướng nổi app (DEC-160), thanh hành động nổi đáy màn."
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "24px",
+      "$description": "Nền sau dialog, sheet: scrim 35% + blur."
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "40px",
+      "$description": "Không dùng trong app nghiệp vụ."
+    }
+  }
+}

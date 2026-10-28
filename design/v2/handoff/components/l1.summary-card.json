@@ -1,0 +1,106 @@
+{
+  "$generator": "GENERATED — không sửa tay. Nguồn: design/v2/ · sinh bởi _scripts/ds-v2-handoff.py",
+  "id": "l1.summary-card",
+  "name": "Base / Summary Card",
+  "level": "L1",
+  "version": "0.1.0",
+  "status": "Nháp",
+  "spec": "design/v2/components/l1/summary-card.md",
+  "figma": {
+    "components": [
+      {
+        "name": "Base / Summary Card",
+        "nodeId": "6442:85948"
+      }
+    ],
+    "docFrame": "6562:223644"
+  },
+  "decisions": [
+    "DEC-125",
+    "DEC-192",
+    "DEC-211",
+    "DEC-233",
+    "DEC-234"
+  ],
+  "platforms": {
+    "web": {
+      "props": [
+        {
+          "name": "Rows",
+          "kind": "Slot, 1–8",
+          "default": "3 × `.card / Row` (Label Value)",
+          "values": [
+            "chỉ `.card / Row` (khoá)"
+          ]
+        },
+        {
+          "name": "Has Total",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "đường kẻ + dòng tổng"
+          ]
+        },
+        {
+          "name": "Instance lộ ra",
+          "kind": "panel",
+          "default": "—",
+          "values": [
+            "Heading (Title, Has Subtitle), Dòng tổng (Label, Value)"
+          ]
+        }
+      ],
+      "selector": "inv-summary-card",
+      "class": "InvSummaryCardComponent"
+    },
+    "mobile": {
+      "props": [
+        {
+          "name": "Rows",
+          "kind": "Slot, 1–8",
+          "default": "3 × `.card / Row` (Label Value)",
+          "values": [
+            "chỉ `.card / Row` (khoá)"
+          ]
+        },
+        {
+          "name": "Has Total",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "đường kẻ + dòng tổng"
+          ]
+        },
+        {
+          "name": "Instance lộ ra",
+          "kind": "panel",
+          "default": "—",
+          "values": [
+            "Heading (Title, Has Subtitle), Dòng tổng (Label, Value)"
+          ]
+        }
+      ],
+      "sameAsWeb": true,
+      "note": "Như web (cùng bảng).",
+      "widget": "InvSummaryCard"
+    }
+  },
+  "tokens": [
+    "card/bg/default",
+    "card/border-width",
+    "card/border/default",
+    "card/row-label-max",
+    "card/row-min-height",
+    "color/border/default",
+    "color/text/primary",
+    "color/text/secondary",
+    "layout/card-padding",
+    "radius/card",
+    "space/gap-lg",
+    "space/gap-md",
+    "space/gap-sm",
+    "touch/min",
+    "type/body",
+    "type/heading"
+  ]
+}

@@ -1,0 +1,268 @@
+{
+ "component": "Tag",
+ "slug": "tag",
+ "title": "Tag Review",
+ "subtitle": "Base component · nhóm A (dùng chung web và app, số đo theo mode Platform)",
+ "round": "brainstorm",
+ "refs": {
+  "untitled": {
+   "summary": "Bo <mark>rounded-md</mark>, 3 cỡ sm/md/lg, có checkbox, dot, avatar, count và nút X.",
+   "source": "design/_ref/untitled-ui/react/components/base/tags/tags.tsx"
+  },
+  "astryx": {
+   "summary": "Chip bo tròn hoàn toàn, chỉ một cỡ, không có count.",
+   "source": "design/design.md › Chip · Figma 5578:109819"
+  },
+  "usage": [
+   "shipment-coordination · 2.1 · web · bộ lọc",
+   "vehicle-management · 1.3 · mob · nhãn xe"
+  ],
+  "platform": "Nhóm A — một bộ, cỡ theo Platform (DEC-279)"
+ },
+ "css": ".pv{--fg:#171717;--fg2:#525252;--bg:#fff;--muted:#F5F5F5;--line:#E5E5E5;--tagline:#D4D4D4;font:14px/20px Inter,system-ui,sans-serif;color:var(--fg);background:var(--bg)} .pv[data-theme=dark]{--fg:#F5F5F5;--fg2:#A3A3A3;--bg:#0A0A0A;--muted:#171717;--line:#262626;--tagline:#404040} .tg{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border:1px solid var(--tagline);border-radius:6px;color:var(--fg);background:var(--bg);font:500 12px/18px Inter;white-space:nowrap;max-width:180px;overflow:hidden;text-overflow:ellipsis} .pv[data-D1=b] .tg{border-radius:999px} .ct{font-weight:600;background:var(--muted);border-radius:3px;padding:0 4px} .pv[data-D2=b] .ct{background:none;padding:0;color:var(--fg2)} .x{font-style:normal;opacity:.6;cursor:pointer} .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px 24px;border-bottom:1px solid var(--line)} .top{height:56px;display:flex;align-items:center;padding:0 24px;border-bottom:1px solid var(--line);font-weight:600} table{width:100%;border-collapse:collapse} td,th{padding:10px 24px;border-bottom:1px solid var(--line);text-align:left;font-size:13px} th{color:var(--fg2);font-weight:500} .m-h{padding:16px;font:600 17px/24px Inter} .m-row{padding:12px 16px;border-bottom:1px solid var(--line)} .empty{padding:40px;text-align:center;color:var(--fg2)}",
+ "states": [
+  {
+   "key": "default",
+   "label": "Mặc định"
+  },
+  {
+   "key": "long",
+   "label": "Chữ dài"
+  },
+  {
+   "key": "empty",
+   "label": "Chưa lọc"
+  }
+ ],
+ "ideas": [
+  {
+   "id": "I1",
+   "source": "Dribbble",
+   "url": "https://dribbble.com/",
+   "title": "Tag lọc có đếm số",
+   "why": "Đếm số nằm trong tag, đọc nhanh khi lọc danh sách lệnh.",
+   "preview": "<span class='tg'>Đang chạy <b class='ct'>12</b></span>"
+  },
+  {
+   "id": "I2",
+   "source": "21st.dev",
+   "url": "https://21st.dev/",
+   "title": "Tag bo tròn, số chữ nhạt",
+   "why": "Nhẹ mắt khi nhiều tag cùng lúc.",
+   "preview": "<span class='tg' style='border-radius:999px'>Container 40' <span style='color:#737373'>8</span></span>"
+  }
+ ],
+ "decisions": [
+  {
+   "id": "D1",
+   "title": "Bo góc",
+   "why": "Untitled bo vừa, Astryx bo tròn.",
+   "source": "tags.tsx dòng 40",
+   "options": [
+    {
+     "label": "Bo vừa 6",
+     "desc": "Như Untitled",
+     "rec": true,
+     "preview": "<span class='tg'>Nhãn</span>",
+     "ideas": [
+      "I1"
+     ]
+    },
+    {
+     "label": "Bo tròn",
+     "desc": "Như Astryx",
+     "preview": "<span class='tg' style='border-radius:999px'>Nhãn</span>",
+     "ideas": [
+      "I2"
+     ]
+    }
+   ],
+   "untitled": "<span class='tg'>Label</span>",
+   "untitledNote": "rounded-md",
+   "astryx": "<span class='tg' style='border-radius:999px'>Nhãn</span>",
+   "astryxNote": "chip cũ"
+  },
+  {
+   "id": "D2",
+   "title": "Cách hiện số đếm",
+   "why": "Bộ lọc lệnh vận tải cần thấy số lệnh mỗi trạng thái.",
+   "source": "shipment-coordination 2.1",
+   "options": [
+    {
+     "label": "Ô nền nhạt",
+     "rec": true,
+     "preview": "<span class='tg'>Đang chạy <b class='ct'>12</b></span>"
+    },
+    {
+     "label": "Chữ nhạt",
+     "preview": "<span class='tg'>Đang chạy <b class='ct' style='background:none;color:#737373'>12</b></span>"
+    }
+   ]
+  }
+ ],
+ "presets": [
+  {
+   "id": "rec",
+   "label": "Đề xuất",
+   "pick": {
+    "D1": "a",
+    "D2": "a"
+   }
+  },
+  {
+   "id": "untitled",
+   "label": "Theo Untitled",
+   "pick": {
+    "D1": "a",
+    "D2": "a"
+   }
+  },
+  {
+   "id": "astryx",
+   "label": "Astryx hiện tại",
+   "pick": {
+    "D1": "b",
+    "D2": "b"
+   }
+  },
+  {
+   "id": "I1",
+   "label": "Ý tưởng I1 · Dribbble",
+   "pick": {
+    "D1": "a",
+    "D2": "a"
+   }
+  },
+  {
+   "id": "I2",
+   "label": "Ý tưởng I2 · 21st.dev",
+   "pick": {
+    "D1": "b",
+    "D2": "b"
+   },
+   "screen": 1
+  }
+ ],
+ "screens": [
+  {
+   "id": "list-web",
+   "name": "Danh sách lệnh vận tải",
+   "device": "web",
+   "width": 1280,
+   "nav": "Lệnh vận tải",
+   "title": "Lệnh vận tải",
+   "note": "Tag là bộ lọc nhanh trên đầu bảng.",
+   "html": "<div class='bar'><span data-show='state:empty' style='color:var(--fg2)'>Chưa chọn bộ lọc</span><span class='tg' data-cmp data-show='state:default'>Đang chạy <b class='ct'>12</b> <i class='x'>×</i></span><span class='tg' data-cmp data-show='state:default'>Container 40' <b class='ct'>8</b> <i class='x'>×</i></span><span class='tg' data-cmp data-show='state:long'>Kho Tân Cảng Cát Lái – Bình Dương <b class='ct'>3</b> <i class='x'>×</i></span></div><table><tr><th>Mã lệnh</th><th>Tuyến</th><th>Xe</th><th>Lái xe</th><th>Trạng thái</th></tr><tr><td>LVT-2026-0412</td><td>Cát Lái → Sóng Thần</td><td>51C-123.45</td><td>Trần Văn Bình</td><td>Đang chạy</td></tr><tr><td>LVT-2026-0413</td><td>Hiệp Phước → VSIP 2</td><td>51D-678.90</td><td>Lê Minh Châu</td><td>Đang chạy</td></tr><tr><td>LVT-2026-0414</td><td>Cát Lái → Long Hậu</td><td>51C-246.80</td><td>Phạm Quốc Dũng</td><td>Chờ nhận</td></tr></table>"
+  },
+  {
+   "id": "filter-mobile",
+   "name": "Lọc lệnh",
+   "device": "mobile",
+   "title": "Lệnh vận tải",
+   "nav": "Lệnh",
+   "note": "Tag đã chọn nằm dưới ô tìm.",
+   "html": "<div class='bar' style='padding:8px 16px'><span data-show='state:empty' style='color:var(--fg2)'>Chưa chọn bộ lọc</span><span class='tg' data-cmp data-show='state:default'>Đang chạy <b class='ct'>12</b> <i class='x'>×</i></span><span class='tg' data-cmp data-show='state:long'>Kho Tân Cảng Cát Lái – Bình Dương <b class='ct'>3</b></span></div><div class='m-row'><b>LVT-2026-0412</b><div style='color:var(--fg2)'>Cát Lái → Sóng Thần · 51C-123.45</div></div><div class='m-row'><b>LVT-2026-0413</b><div style='color:var(--fg2)'>Hiệp Phước → VSIP 2 · 51D-678.90</div></div>"
+  }
+ ],
+ "preview": {
+  "version": "1",
+  "blocks": [
+   {
+    "title": "Web",
+    "platform": "web",
+    "html": "<div style='display:flex;gap:8px;padding:16px'><span class='tg'>Nhãn</span><span class='tg'>Đang chạy <b class='ct'>12</b></span></div>"
+   },
+   {
+    "title": "Mobile",
+    "platform": "mobile",
+    "frames": [
+     "<div style='padding:16px'><span class='tg'>Nhãn</span></div>"
+    ]
+   }
+  ]
+ },
+ "values": [
+  {
+   "part": "Container",
+   "prop": "height",
+   "platform": "Both",
+   "size": "MD",
+   "value": 24,
+   "interactive": true,
+   "hitArea": 44
+  },
+  {
+   "part": "Container",
+   "prop": "radius",
+   "platform": "Web",
+   "size": "MD",
+   "value": 6
+  },
+  {
+   "part": "Container",
+   "prop": "padding-x",
+   "platform": "Web",
+   "size": "MD",
+   "value": 7
+  },
+  {
+   "part": "Container",
+   "prop": "border-color",
+   "role": "decorative",
+   "value": "#D4D4D4",
+   "on": "#FFFFFF"
+  },
+  {
+   "part": "Label",
+   "prop": "color",
+   "role": "text",
+   "value": "#171717",
+   "on": "#FFFFFF"
+  },
+  {
+   "part": "Label",
+   "prop": "font-size",
+   "platform": "Web",
+   "value": 12
+  },
+  {
+   "part": "Close",
+   "prop": "color",
+   "role": "icon",
+   "value": "#A3A3A3",
+   "on": "#FFFFFF"
+  },
+  {
+   "part": "Count",
+   "prop": "background",
+   "value": "#F3F4F6"
+  },
+  {
+   "part": "Container",
+   "prop": "shadow",
+   "value": "0 1px 2px rgba(0,0,0,.05)"
+  }
+ ],
+ "reviews": [
+  {
+   "id": "R1",
+   "agent": "visual-reviewer",
+   "severity": "Trung",
+   "text": "Count và nhãn cùng độ đậm, khó tách.",
+   "fix": "Count dùng nền muted.",
+   "node": "6800:1"
+  },
+  {
+   "id": "R2",
+   "agent": "accessibility",
+   "severity": "Cao",
+   "text": "Nút X 16×16 trên app dưới vùng chạm 44.",
+   "fix": "Thêm vùng bấm vô hình 44.",
+   "changesLook": false
+  }
+ ],
+ "figma": {
+  "url": "https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/",
+  "label": "Tag trên DS · Base components"
+ }
+}

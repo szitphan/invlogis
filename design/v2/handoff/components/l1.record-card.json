@@ -1,0 +1,279 @@
+{
+  "$generator": "GENERATED — không sửa tay. Nguồn: design/v2/ · sinh bởi _scripts/ds-v2-handoff.py",
+  "id": "l1.record-card",
+  "name": "Base / Record Card",
+  "level": "L1",
+  "version": "0.1.0",
+  "status": "Nháp",
+  "spec": "design/v2/components/l1/record-card.md",
+  "figma": {
+    "components": [
+      {
+        "name": "Base / Record Card",
+        "nodeId": "6442:85850"
+      }
+    ],
+    "docFrame": "6562:220123"
+  },
+  "decisions": [
+    "DEC-125",
+    "DEC-177",
+    "DEC-192",
+    "DEC-209",
+    "DEC-210",
+    "DEC-211",
+    "DEC-233",
+    "DEC-234",
+    "DEC-235",
+    "DEC-237",
+    "DEC-238",
+    "DEC-239",
+    "DEC-258",
+    "DEC-259"
+  ],
+  "platforms": {
+    "web": {
+      "props": [
+        {
+          "name": "State",
+          "kind": "Biến thể",
+          "default": "Default",
+          "values": [
+            "Default",
+            "Hover",
+            "Pressed",
+            "Focus",
+            "Selected"
+          ]
+        },
+        {
+          "name": "Has Media",
+          "kind": "Bật tắt",
+          "default": "tắt",
+          "values": [
+            "`.card / Media` MD ở đầu thẻ; bật thì đặt Header Lead=None"
+          ]
+        },
+        {
+          "name": "Has Avatar",
+          "kind": "Bật tắt",
+          "default": "tắt",
+          "values": [
+            "`Base / Avatar` MD ở đầu thẻ; bật thì đặt Header Lead=None"
+          ]
+        },
+        {
+          "name": "Has Trailing",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "chip cuối đầu thẻ"
+          ]
+        },
+        {
+          "name": "Trailing",
+          "kind": "Đổi instance",
+          "default": "Base / Status Chip SM",
+          "values": [
+            "chỉ Base / Status Chip",
+            "Base / Button"
+          ]
+        },
+        {
+          "name": "Has Rows",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "Rows",
+          "kind": "Slot, 1–4",
+          "default": "3 × `.card / Row`",
+          "values": [
+            "chỉ `.card / Row`",
+            "Base / Status Row (khoá)"
+          ]
+        },
+        {
+          "name": "Has Related",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "Has Footer",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "Footer",
+          "kind": "Slot, 1–2",
+          "default": "Ghost + Secondary, MD",
+          "values": [
+            "chỉ Base / Button (khoá)"
+          ]
+        },
+        {
+          "name": "Instance lộ ra",
+          "kind": "panel",
+          "default": "—",
+          "values": [
+            "Header (Lead, Icon), Heading (Title, Subtitle), Ảnh nhỏ, Avatar, Cuối (chip), Related"
+          ]
+        }
+      ],
+      "selector": "inv-record-card",
+      "class": "InvRecordCardComponent"
+    },
+    "mobile": {
+      "props": [
+        {
+          "name": "State",
+          "kind": "Biến thể",
+          "default": "Default",
+          "values": [
+            "Default",
+            "Hover",
+            "Pressed",
+            "Focus",
+            "Selected"
+          ]
+        },
+        {
+          "name": "Has Media",
+          "kind": "Bật tắt",
+          "default": "tắt",
+          "values": [
+            "`.card / Media` MD ở đầu thẻ; bật thì đặt Header Lead=None"
+          ]
+        },
+        {
+          "name": "Has Avatar",
+          "kind": "Bật tắt",
+          "default": "tắt",
+          "values": [
+            "`Base / Avatar` MD ở đầu thẻ; bật thì đặt Header Lead=None"
+          ]
+        },
+        {
+          "name": "Has Trailing",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "chip cuối đầu thẻ"
+          ]
+        },
+        {
+          "name": "Trailing",
+          "kind": "Đổi instance",
+          "default": "Base / Status Chip SM",
+          "values": [
+            "chỉ Base / Status Chip",
+            "Base / Button"
+          ]
+        },
+        {
+          "name": "Has Rows",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "Rows",
+          "kind": "Slot, 1–4",
+          "default": "3 × `.card / Row`",
+          "values": [
+            "chỉ `.card / Row`",
+            "Base / Status Row (khoá)"
+          ]
+        },
+        {
+          "name": "Has Related",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "Has Footer",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "—"
+          ]
+        },
+        {
+          "name": "Footer",
+          "kind": "Slot, 1–2",
+          "default": "Ghost + Secondary, MD",
+          "values": [
+            "chỉ Base / Button (khoá)"
+          ]
+        },
+        {
+          "name": "Instance lộ ra",
+          "kind": "panel",
+          "default": "—",
+          "values": [
+            "Header (Lead, Icon), Heading (Title, Subtitle), Ảnh nhỏ, Avatar, Cuối (chip), Related"
+          ]
+        }
+      ],
+      "sameAsWeb": true,
+      "note": "Như web (cùng bảng).",
+      "widget": "InvRecordCard"
+    }
+  },
+  "tokens": [
+    "card/action-gap",
+    "card/bg/default",
+    "card/bg/hover",
+    "card/bg/pressed",
+    "card/border-width",
+    "card/border-width-selected",
+    "card/border/default",
+    "card/border/pressed",
+    "card/border/selected",
+    "card/check-ring",
+    "card/check-size",
+    "card/check/bg",
+    "card/check/fg",
+    "card/fg/secondary-hover",
+    "card/fg/secondary-pressed",
+    "card/lead-size",
+    "card/lead/bg",
+    "card/media-size",
+    "card/related/bg",
+    "card/row-icon-cell",
+    "card/row-min-height",
+    "chip/height-sm",
+    "color/border/focus",
+    "color/focus/gap",
+    "color/icon/secondary",
+    "color/text/primary",
+    "color/text/secondary",
+    "focus/offset",
+    "focus/width",
+    "layout/card-padding",
+    "radius/card",
+    "radius/inner",
+    "radius/xl",
+    "space/gap-lg",
+    "space/gap-md",
+    "space/gap-sm",
+    "touch/min",
+    "type/body",
+    "type/caption",
+    "type/heading"
+  ]
+}

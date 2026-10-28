@@ -1,0 +1,106 @@
+{
+ "brainstorm-D1": {
+  "choice": 3,
+  "note": ""
+ },
+ "brainstorm-D2": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D3": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D4": {
+  "choice": 2,
+  "note": ""
+ },
+ "brainstorm-D5": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D6": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D7": {
+  "choice": 2,
+  "note": "Thẻ phạm vi ở tab Tài khoản nhé"
+ },
+ "preview-approve": {
+  "choice": 0,
+  "note": "Chưa cần dựng bản mobile app, số đếm màu xanh dương"
+ },
+ "foundation-collapse-icon.icon-size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-dialog-button.height.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-dialog-button.padding-x.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-dialog-column.min-height.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-dialog-title.font-size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-dialog.width.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-group-label.font-size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-module-tile-gray.background.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-module-tile-icon-teal.color.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-module-tile-icon-violet.color.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-module-tile-icon.icon-size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-module-tile-teal.background.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-module-tile-violet.background.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-search.border-color.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-search.height.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-sidebar-collapsed.width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-tenant-name.font-size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-tenant-name.line-height.web": {
+  "choice": 0,
+  "note": ""
+ }
+}

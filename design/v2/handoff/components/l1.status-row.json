@@ -1,0 +1,103 @@
+{
+  "$generator": "GENERATED — không sửa tay. Nguồn: design/v2/ · sinh bởi _scripts/ds-v2-handoff.py",
+  "id": "l1.status-row",
+  "name": "Base / Status Row",
+  "level": "L1",
+  "version": "0.1.0",
+  "status": "Nháp",
+  "spec": "design/v2/components/l1/status-row.md",
+  "figma": {
+    "components": [
+      {
+        "name": "Base / Status Row",
+        "nodeId": "6458:83667"
+      }
+    ],
+    "docFrame": "6562:224997"
+  },
+  "decisions": [
+    "DEC-233",
+    "DEC-235",
+    "DEC-239"
+  ],
+  "platforms": {
+    "web": {
+      "props": [
+        {
+          "name": "(không có)",
+          "kind": "—",
+          "default": "—",
+          "values": [
+            "Status Row không có thuộc tính riêng"
+          ]
+        },
+        {
+          "name": "Nhãn",
+          "kind": "instance lộ ra",
+          "default": "Label",
+          "values": [
+            "chữ nhãn (Label của `.card / Row`)"
+          ]
+        },
+        {
+          "name": "Trạng thái",
+          "kind": "instance lộ ra",
+          "default": "Soft · Gray · Status",
+          "values": [
+            "Type, Tone, Label, Icon của Base / Status Chip; giữ Size MD"
+          ]
+        }
+      ],
+      "selector": "inv-status-row",
+      "class": "InvStatusRowComponent"
+    },
+    "mobile": {
+      "props": [
+        {
+          "name": "(không có)",
+          "kind": "—",
+          "default": "—",
+          "values": [
+            "Status Row không có thuộc tính riêng"
+          ]
+        },
+        {
+          "name": "Nhãn",
+          "kind": "instance lộ ra",
+          "default": "Label",
+          "values": [
+            "chữ nhãn (Label của `.card / Row`)"
+          ]
+        },
+        {
+          "name": "Trạng thái",
+          "kind": "instance lộ ra",
+          "default": "Soft · Gray · Status",
+          "values": [
+            "Type, Tone, Label, Icon của Base / Status Chip; giữ Size MD"
+          ]
+        }
+      ],
+      "sameAsWeb": true,
+      "note": "Như web (cùng bảng).",
+      "widget": "InvStatusRow"
+    }
+  },
+  "tokens": [
+    "card/choice/bg",
+    "card/row-label-max",
+    "card/row-min-height",
+    "chip/height",
+    "color/bg/surface",
+    "color/text/secondary",
+    "icon/circle-check",
+    "icon/circle-x",
+    "icon/clock",
+    "icon/triangle-alert",
+    "space/gap-lg",
+    "space/gap-sm",
+    "space/gap-xs",
+    "touch/min",
+    "type/body"
+  ]
+}

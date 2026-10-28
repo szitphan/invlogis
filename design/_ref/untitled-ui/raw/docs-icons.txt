@@ -1,0 +1,179 @@
+Copy
+
+Untitled UI Icons
+
+Untitled UI Icons are a clean, consistent, and neutral icon library crafted for modern UI design. These icons are available as React components with instant npm access.
+
+Installation
+
+To get started, install the Untitled UI Icons package:
+
+npm
+yarn
+bun
+
+```
+npm install @untitledui/icons
+```
+
+Using Untitled UI Icons
+
+You can use Untitled UI Icons in two ways: by importing from the default import or by importing individual icon files. Here's a quick guide for both:
+
+Main module import (recommended)
+
+For modern build tools that support tree-shaking (e.g. Next.js, Vite), you can import icons directly from the main package:
+
+```
+import {
+Home01,
+Settings01,
+User01,
+Bell01
+} from "@untitledui/icons";
+
+```
+
+This method ensures that only the icons you use are included in the final bundle, keeping your bundle size small and optimized.
+
+Individual module import
+
+If you're using a build tool that doesn't fully support tree-shaking, you can import icons directly from individual files just as easily:
+
+```
+import Home01 from "@untitledui/icons/Home01";
+import Settings01 from "@untitledui/icons/Settings01";
+import User01 from "@untitledui/icons/User01";
+import Bell01 from "@untitledui/icons/Bell01";
+
+```
+
+This ensures that only the icons you explicitly import are included in your bundle.
+
+Styling Untitled UI Icons
+
+All Untitled UI Icons support standard SVG and React props out of the box:
+
+```
+import { Home01 } from "@untitledui/icons";
+
+console.log("Home icon clicked")}
+/>
+```
+
+You can customize icons using the following common SVG and React props:
+
+className – Apply utility classes to control size, color, spacing, and more.
+
+strokeWidth – Adjust the thickness of the icon's strokes.
+
+color – Set the icon color (using className for text color is recommended).
+
+aria-hidden – Set to true for decorative icons to improve accessibility.
+
+Untitled UI Icons PRO
+
+The PRO version of Untitled UI Icons includes 4,600+ icons across 4 styles. Choose between minimal line, modern duocolor or duotone, or solid icon styles.
+
+If you've purchased the PRO version of Untitled UI Icons, you'll need to configure your package manager with your private access token:
+
+Create a configuration file
+Start by creating a configuration file in your project root:
+npm
+yarn
+bun
+
+```
+# .npmrc
+
+@untitledui-pro:registry=https://pkg.untitledui.com
+//pkg.untitledui.com/:_authToken=YOUR_TOKEN_HERE
+```
+
+Add your private access token
+Replace YOUR_TOKEN_HERE with your private access token:
+Untitled UI Icons – PRO npm
+Upgrade to Untitled UI Icons PRO to unlock 4,600+ icons across 4 styles.
+
+Get PRO
+
+Installing icons
+Once you've set up access, you can install the PRO icons with a single command:
+npm
+yarn
+bun
+
+```
+npm install @untitledui-pro/icons
+```
+
+Importing different styles
+The PRO version of Untitled UI Icons includes multiple style variants—line, duocolor, duotone, and solid—each available via separate imports:
+
+```
+// Line icons (also available in the free package)
+import { Home01, Settings01 } from "@untitledui-pro/icons/line";
+
+// Solid icons
+import { Home01, Settings01 } from "@untitledui-pro/icons/solid";
+
+// Duocolor icons
+import { Home01, Settings01 } from "@untitledui-pro/icons/duocolor";
+
+// Duotone icons
+import { Home01, Settings01 } from "@untitledui-pro/icons/duotone";
+
+```
+
+Installing in CI/CD
+
+In CI/CD pipelines or other automated environments, you can't complete a browser-based login—and you should never commit your private access token to source control. Instead, store your token as a secret and read it from an environment variable at build time.
+
+Add your token as a secret
+In your CI provider (GitHub Actions, GitLab CI, Vercel, etc.), add your private access token as a secret or environment variable—for example, UNTITLEDUI_PRO_TOKEN.
+
+Reference the token from your config file
+Update your configuration file to read the token from the environment instead of hardcoding it. This file is safe to commit, since it no longer contains the token itself:
+npm
+yarn
+bun
+
+```
+# .npmrc
+
+@untitledui-pro:registry=https://pkg.untitledui.com
+//pkg.untitledui.com/:_authToken=${UNTITLEDUI_PRO_TOKEN}
+```
+
+Install during your build
+With the token available in the environment, your package manager will authenticate automatically and install the PRO icons:
+npm
+yarn
+bun
+
+```
+npm install @untitledui-pro/icons
+```
+
+FAQs
+Please refer to our frequently asked questions page for more.
+
+Are Untitled UI Icons free?
+Yes, the @untitledui/icons package is free and MIT licensed. It includes 1,100+ icons in the default line style. The PRO version of Untitled UI Icons adds 4,600+ icons across 4 styles through the private @untitledui-pro/icons package.
+
+How do I use the solid, duocolor or duotone icon styles?
+Those styles are part of Untitled UI Icons PRO. After configuring your package manager with your private access token and installing @untitledui-pro/icons, import each style from its own entry point: @untitledui-pro/icons/line, @untitledui-pro/icons/solid, @untitledui-pro/icons/duocolor or @untitledui-pro/icons/duotone. See the setup steps.
+
+Can I customize the color and size of the icons?
+Yes, icons accept standard SVG and React props. Use a text color class (e.g. text-brand-600) to change the color, a size class (e.g. size-6) to set the dimensions, and the strokeWidth prop to control line thickness.
+
+Do I need to import icons individually to optimize bundle size?
+No, if your bundler supports tree-shaking (Next.js and Vite do), import from the main package with import { Home01 } from "@untitledui/icons" and only the icons you use are bundled. For build tools without good tree-shaking, import each icon from its own file, such as import Home01 from "@untitledui/icons/Home01".
+
+How do I hide decorative icons from screen readers?
+Pass aria-hidden="true" to icons that are purely decorative, such as an icon next to a text label. This keeps screen readers from announcing the SVG, while the surrounding text still describes the action.
+
+How do I install PRO icons in CI without committing my token?
+Store your private access token as a secret in your CI provider, for example UNTITLEDUI_PRO_TOKEN, and reference that environment variable from your .npmrc, .yarnrc.yml or bunfig.toml instead of the raw token. The config file is then safe to commit. See Installing in CI/CD.
+
+Upgrade to v8.0Next.js

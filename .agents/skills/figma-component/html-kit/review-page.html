@@ -1,0 +1,457 @@
+<title>__TITLE__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Khung trang duyệt component (/figma-component --html). Sinh bằng _scripts/ds-component-page.py từ
+   design/v2/components/_work/{slug}/page.json — KHÔNG sửa trang đã sinh, sửa page.json rồi sinh lại.
+   Vỏ trang: nền trung tính + dải innvie-v1 #0036B5. Hình xem trước nằm trong shadow DOM, CSS tự do không đụng vỏ. */
+:root{
+  --bg:#F1F1F1; --surface:#FFFFFF; --sunk:#F6F7F9; --line:#E3E5E8; --line-strong:#D4D4D4;
+  --fg:#171717; --fg-2:#525252; --fg-3:#737373;
+  --brand:#0036B5; --on-brand:#FFFFFF; --accent:#00A2FF;
+  --ink:#0036B5; --ink-soft:#E5ECFA;
+  --ok:#007004; --ok-soft:#E3F2E0; --near:#745B00; --near-soft:#FBEFD2;
+  --new:#5B2BB5; --new-soft:#EEE6FB; --bad:#A50C25; --bad-soft:#FCE4E2;
+  --mark:color-mix(in srgb,#00A2FF 28%,transparent); --stage:#E9ECF0;
+  --f-head:'Cal Sans','Inter',system-ui,sans-serif;
+  --f-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111317; --surface:#1A1D23; --sunk:#20242B; --line:#2C3139; --line-strong:#3D434D;
+  --fg:#EDEEF0; --fg-2:#B4B8BF; --fg-3:#8A9099; --ink:#7FA6FF; --ink-soft:#18264A;
+  --ok:#6FCF7A; --ok-soft:#17301A; --near:#E8C25A; --near-soft:#33290C; --new:#B79BF5; --new-soft:#251A3D;
+  --bad:#F28B95; --bad-soft:#3A161B; --stage:#2A2F37; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111317; --surface:#1A1D23; --sunk:#20242B; --line:#2C3139; --line-strong:#3D434D;
+  --fg:#EDEEF0; --fg-2:#B4B8BF; --fg-3:#8A9099; --ink:#7FA6FF; --ink-soft:#18264A;
+  --ok:#6FCF7A; --ok-soft:#17301A; --near:#E8C25A; --near-soft:#33290C; --new:#B79BF5; --new-soft:#251A3D;
+  --bad:#F28B95; --bad-soft:#3A161B; --stage:#2A2F37; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 var(--f-body)}
+.band{background:var(--brand);color:var(--on-brand);padding:20px 16px 0}
+.band-in,.wrap{max-width:1180px;margin:0 auto}
+.band img{height:28px;display:block}
+.band h1{font:600 30px/1.2 var(--f-head);margin:14px 0 4px}
+.band p{margin:0 0 14px;opacity:.88;max-width:760px}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tab{border:0;background:transparent;color:#fff;opacity:.75;font:500 14px var(--f-body);padding:10px 14px;border-radius:10px 10px 0 0;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--bg);color:var(--fg);opacity:1}
+.tab[disabled]{opacity:.35;cursor:default}
+.tab .n{font-size:12px;margin-left:6px;opacity:.8}
+.wrap{padding:20px 16px 80px}
+.panel[hidden]{display:none}
+.lead{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card h3{margin:0 0 6px;font:600 15px var(--f-body)}
+.small{font-size:13px;color:var(--fg-2)} .src{font:12px/1.5 var(--f-mono);color:var(--fg-3);word-break:break-word}
+mark{background:var(--mark);color:inherit;padding:0 2px;border-radius:3px}
+h2{font:600 22px/1.3 var(--f-head);margin:28px 0 10px}
+.status{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:0 0 16px;font-size:13px;color:var(--fg-2)}
+.bar{flex:1;min-width:120px;height:6px;background:var(--line);border-radius:3px;overflow:hidden}.bar i{display:block;height:100%;background:var(--accent);width:0}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 14px}
+.chip{border:1px solid var(--line-strong);background:var(--surface);color:var(--fg);border-radius:999px;padding:4px 12px;font:500 13px var(--f-body);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink-soft);border-color:var(--brand);color:var(--ink)}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.idea{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.idea .stage{border-bottom:1px solid var(--line)}
+.idea .body{padding:12px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.idea .meta{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--fg-3)}
+.idea .meta a{color:var(--ink)}
+.stage{background:var(--stage);padding:20px;display:flex;align-items:center;justify-content:center;min-height:120px;overflow:auto}
+.stage.white{background:#fff}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.item-h{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.item-h h3{margin:0;font:600 17px var(--f-body)}
+.code{font:600 12px var(--f-mono);color:var(--ink);background:var(--ink-soft);border-radius:6px;padding:1px 6px}
+.done-dot{font-size:12px;color:var(--ok);font-weight:600}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:12px 0}
+.col{border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.col .cap{padding:8px 12px;font-size:13px;border-top:1px solid var(--line);background:var(--surface)}
+.col .cap b{display:block;font-size:13px}
+.col.ref .cap{background:var(--sunk)}
+.opt{display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+.opt input{margin-top:4px}
+.col.on{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
+.rec{font-size:11px;font-weight:600;color:var(--ink);margin-left:4px}
+textarea{width:100%;min-height:48px;resize:vertical;border:1px solid var(--line-strong);border-radius:8px;padding:8px 10px;font:14px/1.5 var(--f-body);background:var(--surface);color:var(--fg)}
+.save{font-size:12px;color:var(--fg-3);min-height:18px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:var(--surface);color:var(--fg);font:500 13px var(--f-body);padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--brand);color:#fff}
+.block{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:18px;overflow:hidden}
+.block-h{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.block-h b{font:600 15px var(--f-body)}
+.block .stage{min-height:200px;justify-content:flex-start;align-items:flex-start}
+.phone{width:393px;max-width:100%;border:1px solid var(--line-strong);border-radius:28px;overflow:hidden;background:#fff;flex:none}
+.demos{display:flex;gap:16px;flex-wrap:wrap}
+table.t{border-collapse:collapse;width:100%;font-size:13px;background:var(--surface)}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;font-variant-numeric:tabular-nums}
+table.t th{color:var(--fg-3);font-weight:600;position:sticky;top:0;background:var(--surface)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.pill{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:600;white-space:nowrap}
+.c-ok{background:var(--ok-soft);color:var(--ok)} .c-near{background:var(--near-soft);color:var(--near)}
+.c-new{background:var(--new-soft);color:var(--new)} .c-conflict{background:var(--bad-soft);color:var(--bad)}
+.sw{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--line-strong);vertical-align:-2px;margin-right:6px}
+select{font:13px var(--f-body);padding:4px 6px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);color:var(--fg);max-width:220px}
+.btn{border:1px solid var(--line-strong);background:var(--surface);color:var(--fg);border-radius:8px;padding:7px 14px;font:500 14px var(--f-body);cursor:pointer}
+.btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+pre.out{white-space:pre-wrap;background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:12px;font:12px/1.5 var(--f-mono);max-height:320px;overflow:auto}
+.empty{padding:28px;text-align:center;color:var(--fg-3);background:var(--surface);border:1px dashed var(--line-strong);border-radius:14px}
+.rv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,260px);gap:14px}
+.rv img{max-width:100%;border-radius:8px;border:1px solid var(--line)}
+/* Thử trên màn — học /prototype-html + /wireframe-html: màn ví dụ thật (vỏ ứng dụng web/app) căn giữa như thiết bị,
+   nút nổi "Bảng chọn" mở menu chọn biến thể (desktop: popover góc phải; mobile: sheet từ dưới). Bấm component trên màn cũng mở menu. */
+.cfg{margin-bottom:8px}
+.cfg-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:10px}
+.screen-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.desk{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 16px;display:flex;justify-content:center;overflow:hidden}
+.webwrap{width:100%;overflow:hidden}
+.webframe{border:1px solid #D4D4D4;border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 8px 32px rgba(16,24,40,.12);transform-origin:top left}
+.phone{width:393px;max-width:100%;border:1px solid #D4D4D4;border-radius:40px;overflow:hidden;background:#fff;box-shadow:0 24px 64px rgba(0,0,0,.22);flex:none}
+.cfg-panel{position:fixed;right:20px;bottom:84px;z-index:41;width:340px;max-width:calc(100vw - 40px);max-height:calc(100vh - 120px);background:var(--surface);color:var(--fg);border:1px solid var(--line-strong);border-radius:14px;display:none;flex-direction:column;box-shadow:0 12px 40px rgba(0,0,0,.25);overflow:hidden}
+.cfg-panel.open{display:flex}
+.cp-head{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.cp-head b{font-size:14px;white-space:nowrap}.cp-head .src{font-size:11px;line-height:15px}.cp-head .x{margin-left:auto;background:none;border:0;font-size:18px;cursor:pointer;color:var(--fg)}
+.cp-tabs{display:flex;border-bottom:1px solid var(--line)}
+.cp-tab{flex:1;padding:9px;background:none;border:0;border-bottom:2px solid transparent;font:500 13px var(--f-body);color:var(--fg-3);cursor:pointer}
+.cp-tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--brand);font-weight:600}
+.cp-body{overflow-y:auto;padding:12px 14px 16px}
+.cp-pane[hidden]{display:none}
+.cp-body h4{margin:12px 0 6px;font:600 12px var(--f-body);color:var(--fg-3);text-transform:uppercase;letter-spacing:.4px}
+.cp-body h4:first-child{margin-top:0}
+.dec{margin-bottom:12px}
+.dec .t{font-size:13px;font-weight:600;margin-bottom:4px}
+.seg.w{display:flex;flex-wrap:wrap;border:0;gap:4px}
+.seg.w button{border:1px solid var(--line-strong);border-radius:8px;text-align:left;flex:1 1 auto}
+.seg button[aria-pressed="true"] .rec{color:#fff;opacity:.85}
+.preset{display:block;width:100%;text-align:left;margin-bottom:4px}
+.preset[aria-pressed="true"]{border-color:var(--brand);background:var(--ink-soft);color:var(--ink)}
+.scr-link{display:block;width:100%;text-align:left;margin-bottom:4px}
+.fab{position:fixed;right:20px;bottom:20px;z-index:40;border:0;border-radius:999px;background:var(--brand);color:#fff;font:600 14px var(--f-body);padding:13px 18px;display:flex;gap:8px;align-items:center;box-shadow:0 6px 20px rgba(0,54,181,.35);cursor:pointer}
+.fab svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2}
+@media (max-width:720px){
+  .cfg-panel{left:0;right:0;bottom:0;width:auto;max-width:none;max-height:75vh;border-radius:16px 16px 0 0}
+  .desk{padding:12px 0;border-radius:0;border-left:0;border-right:0}
+  .phone{border-radius:0;box-shadow:none;border:0}
+}
+@media (max-width:720px){.band h1{font-size:24px}.rv{grid-template-columns:1fr}.stage{padding:12px}}
+</style>
+
+<header class="band"><div class="band-in">
+  <img src="__LOGO__" alt="innvie">
+  <h1 id="h-title"></h1>
+  <p id="h-sub"></p>
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+</div></header>
+<main class="wrap">
+  <div class="status"><span id="store">Đang kết nối nơi lưu…</span><div class="bar"><i id="prog"></i></div><span id="cnt"></span>
+    <button class="btn" id="btn-export">Xuất lựa chọn dạng chữ</button></div>
+  <pre class="out" id="out" hidden></pre>
+  <section class="panel" id="p-brainstorm"></section>
+  <section class="panel" id="p-preview" hidden></section>
+  <section class="panel" id="p-foundation" hidden></section>
+  <section class="panel" id="p-review" hidden></section>
+</main>
+
+<script type="application/json" id="page-data">/*__PAGE__*/</script>
+<script type="application/json" id="check-data">/*__CHECK__*/</script>
+<script>
+const PAGE=JSON.parse(document.getElementById("page-data").textContent||"{}");
+const CHECK=JSON.parse(document.getElementById("check-data").textContent||"null");
+const L=i=>String.fromCharCode(97+i); // chỉ số phương án → a, b, c…
+const STATES=PAGE.states||[]; // [{key:"default",label:"Mặc định"},…] — chung cho tab Brainstorm và Preview
+/* data-show="D1:b state:loading" → chỉ hiện khi MỌI điều kiện đúng (AND). Sinh luật ẩn một lần. */
+const SHOWCSS=(PAGE.decisions||[]).flatMap(d=>d.options.map((o,i)=>`.pv:not([data-${d.id}="${L(i)}"]) [data-show~="${d.id}:${L(i)}"]`))
+  .concat(STATES.map(s=>`.pv:not([data-state="${s.key}"]) [data-show~="state:${s.key}"]`)).join(",")+(PAGE.decisions?.length||STATES.length?"{display:none!important}":"");
+const PCSS=(PAGE.css||PAGE.preview?.css||"")+SHOWCSS;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const SLUG=PAGE.slug||"component"; const LS="cmp-review-"+SLUG;
+let state={}; try{state=JSON.parse(localStorage.getItem(LS)||"{}")}catch(e){}
+const lsSave=()=>{try{localStorage.setItem(LS,JSON.stringify(state))}catch(e){}};
+let db=null, uid=null, canWrite=true, theme="light";
+
+/* ---- hình xem trước: shadow DOM, CSS tự do của preview ---- */
+function stage(html,opts={}){
+  const id="pv"+Math.random().toString(36).slice(2,9);
+  queueMicrotask(()=>{const host=document.getElementById(id); if(!host||host.shadowRoot) return;
+    const sr=host.attachShadow({mode:"open"});
+    const attrs=Object.entries(opts.attrs||{}).map(([k,v])=>` data-${k}="${esc(v)}"`).join("");
+    sr.innerHTML=`<style>:host{display:block;font-family:'Inter',system-ui,sans-serif;color:#171717}${PCSS}${opts.css||""}</style><div class="pv" data-theme="${theme}" data-platform="${opts.platform||"web"}"${attrs}>${html||""}</div>`;});
+  return `<div class="stage${opts.white?" white":""}"><div id="${id}" class="pvhost" style="${opts.phone?"":"width:100%"}"></div></div>`;
+}
+function retheme(){document.querySelectorAll(".pvhost").forEach(h=>{const p=h.shadowRoot?.querySelector(".pv"); if(p) p.dataset.theme=theme;});}
+
+/* ---- Thử trên màn: màn ví dụ thật (vỏ ứng dụng) + nút nổi "Bảng chọn" ---- */
+const CFG={brainstorm:{screen:0,pick:{},state:"default",preset:null},preview:{screen:0,pick:{},state:"default",preset:null}};
+/* Vỏ ứng dụng dùng chung — để màn ví dụ trông như sản phẩm thật. Màn chỉ viết phần nội dung (screen.html). */
+const IC={home:'<path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',truck:'<path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+  list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>',
+  file:'<path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/>',chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 21h4"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/>',back:'<path d="M15 18l-6-6 6-6"/>',users:'<circle cx="9" cy="8" r="4"/><path d="M2 21c1-4 4-6 7-6s6 2 7 6M16 3a4 4 0 0 1 0 8M22 21c-.5-2.5-2-4.3-4-5.2"/>'};
+const svg=(k,s=18)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${IC[k]||""}</svg>`;
+const SHELL_CSS=`.sh{--s-bg:#fff;--s-fg:#171717;--s-fg2:#525252;--s-line:#E5E5E5;--s-sel:#F5F5F5;--s-ink:#171717;background:var(--s-bg);color:var(--s-fg);font:14px/20px Inter,system-ui,sans-serif}
+.pv[data-theme=dark] .sh{--s-bg:#0A0A0A;--s-fg:#F5F5F5;--s-fg2:#A3A3A3;--s-line:#262626;--s-sel:#171717;--s-ink:#F5F5F5}
+.sh-web{display:grid;grid-template-columns:240px 1fr;min-height:760px}
+.sh-side{border-right:1px solid var(--s-line);padding:16px 12px;display:flex;flex-direction:column;gap:2px}
+.sh-logo{font:700 18px/28px Inter;letter-spacing:-.3px;padding:4px 10px 16px;border-bottom:1px solid var(--s-line);margin:-4px -12px 10px;padding-left:22px}
+.sh-nav{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:8px;color:var(--s-fg2);font-weight:500}
+.sh-nav.on{background:var(--s-sel);color:var(--s-fg)}
+.sh-acc{margin-top:auto;display:flex;gap:10px;align-items:center;padding:10px;border-top:1px solid var(--s-line);margin-left:-12px;margin-right:-12px;padding-left:22px}
+.sh-av{width:32px;height:32px;border-radius:999px;background:#E7EFFD;color:#1F4FB8;display:grid;place-items:center;font:600 12px Inter;flex:none}
+.sh-main{min-width:0;display:flex;flex-direction:column}
+.sh-head{height:64px;border-bottom:1px solid var(--s-line);display:flex;align-items:center;gap:16px;padding:0 24px}
+.sh-crumb{color:var(--s-fg2);font-size:13px}.sh-crumb b{color:var(--s-fg);font-weight:600}
+.sh-search{margin-left:auto;display:flex;align-items:center;gap:8px;width:280px;height:32px;border:1px solid var(--s-line);border-radius:8px;padding:0 10px;color:var(--s-fg2);font-size:13px}
+.sh-icon{color:var(--s-fg2);display:grid;place-items:center}
+.sh-title{padding:20px 24px 4px;font:600 22px/30px Inter}
+.sh-body{flex:1}
+.sh-app{display:flex;flex-direction:column;height:760px}
+.sh-status{height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 26px;font:600 14px Inter}
+.sh-bar{height:52px;display:flex;align-items:center;gap:8px;padding:0 16px;font:600 17px/24px Inter}
+.sh-scroll{flex:1;overflow:auto}
+.sh-tabs{height:64px;border-top:1px solid var(--s-line);display:grid;grid-template-columns:repeat(4,1fr);padding-bottom:6px}
+.sh-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;color:var(--s-fg2)}
+.sh-tab.on{color:var(--s-ink);font-weight:600}
+[data-cmp]{cursor:pointer;outline-offset:2px}[data-cmp]:hover{outline:2px dashed #00A2FF}`;
+const WEB_NAV=[["home","Tổng quan"],["truck","Lệnh vận tải"],["list","Điều phối"],["users","Lái xe"],["file","Chứng từ"],["chart","Báo cáo"]];
+const APP_TABS=[["home","Trang chủ"],["truck","Lệnh"],["bell","Thông báo"],["user","Tài khoản"]];
+function shell(sc){
+  if(sc.shell==="none") return sc.html;
+  if(sc.device==="mobile") return `<div class="sh sh-app"><div class="sh-status"><span>9:41</span><span>▮▮▮</span></div>
+    <div class="sh-bar">${sc.back?svg("back",22):""}<span>${esc(sc.title||sc.name)}</span></div>${sc.top||""}<div class="sh-scroll">${sc.html}</div>
+    ${sc.tabs===false?"":`<div class="sh-tabs">${APP_TABS.map(([i,l])=>`<div class="sh-tab${(sc.nav||"Lệnh")===l?" on":""}">${svg(i,22)}<span>${l}</span></div>`).join("")}</div>`}</div>`;
+  return `<div class="sh sh-web"><aside class="sh-side"><div class="sh-logo">invlogis</div>${WEB_NAV.map(([i,l])=>`<div class="sh-nav${(sc.nav||"Lệnh vận tải")===l?" on":""}">${svg(i)}${l}</div>`).join("")}
+    <div class="sh-acc"><div class="sh-av">NA</div><div><b style="font-size:13px">Nguyễn Văn An</b><div style="font-size:12px;color:var(--s-fg2)">Điều phối viên</div></div></div></aside>
+    <div class="sh-main"><div class="sh-head"><div class="sh-crumb">${esc(sc.crumb||sc.nav||"Lệnh vận tải")} / <b>${esc(sc.title||sc.name)}</b></div>
+    <div class="sh-search">${svg("search",16)}Tìm lệnh, xe, lái xe… <span style="margin-left:auto">⌘K</span></div><span class="sh-icon">${svg("bell",20)}</span><div class="sh-av">NA</div></div>${sc.top||""}
+    ${sc.heading===false?"":`<div class="sh-title">${esc(sc.title||sc.name)}</div>`}<div class="sh-body">${sc.html}</div></div></div>`;}
+function defaultPick(tab){const p={};(PAGE.decisions||[]).forEach(d=>{
+  const saved=state["brainstorm-"+d.id]?.choice; const locked=PAGE.preview?.pick?.[d.id];
+  const rec=Math.max(0,d.options.findIndex(o=>o.rec));
+  p[d.id]=tab==="preview"?(locked??(saved!=null?L(saved):L(rec))):(saved!=null?L(saved):L(rec));}); return p;}
+function cfgAttrs(tab){const c=CFG[tab]; return {...c.pick,state:c.state};}
+function comboText(tab){return (PAGE.decisions||[]).map(d=>d.id+" "+CFG[tab].pick[d.id].toUpperCase()).join(" · ");}
+function applyCfg(tab){const host=document.getElementById("cfg-host-"+tab); const p=host?.shadowRoot?.querySelector(".pv");
+  if(p){Object.entries(cfgAttrs(tab)).forEach(([k,v])=>p.setAttribute("data-"+k,v)); p.dataset.theme=theme;}
+  const q=s=>document.querySelectorAll(`#cfg-${tab} ${s}`);
+  q("[data-dec]").forEach(b=>b.setAttribute("aria-pressed",String(CFG[tab].pick[b.dataset.dec]===b.dataset.opt)));
+  q("[data-st]").forEach(b=>b.setAttribute("aria-pressed",String(CFG[tab].state===b.dataset.st)));
+  q("[data-preset]").forEach(b=>b.setAttribute("aria-pressed",String(CFG[tab].preset===b.dataset.preset)));
+  q("[data-scr]").forEach(b=>b.setAttribute("aria-pressed",String(CFG[tab].screen===Number(b.dataset.scr))));
+  q("[data-combo]").forEach(x=>x.textContent=comboText(tab));
+  if(p) requestAnimationFrame(()=>fitWeb(tab));}
+function fitWeb(tab){const w=document.querySelector(`#cfg-${tab} .webwrap`); const f=w?.querySelector(".webframe"); if(!f||!w.clientWidth) return;
+  const W=Number(f.dataset.w)||1280; const s=Math.min(1,w.clientWidth/W); f.style.width=W+"px"; f.style.transform=`scale(${s})`;
+  w.style.height=(f.offsetHeight*s)+"px";}
+function screenView(tab){const sc=(PAGE.screens||[])[CFG[tab].screen]; if(!sc) return "";
+  const id="cfg-host-"+tab;
+  queueMicrotask(()=>{const host=document.getElementById(id); if(!host||host.shadowRoot) return;
+    const sr=host.attachShadow({mode:"open"});
+    sr.innerHTML=`<style>:host{display:block;font-family:'Inter',system-ui,sans-serif;color:#171717}${SHELL_CSS}${PCSS}</style><div class="pv" data-theme="${theme}" data-platform="${sc.device==="mobile"?"mobile":"web"}">${shell(sc)}</div>`;
+    sr.addEventListener("click",e=>{if(e.composedPath().some(n=>n.dataset&&n.dataset.cmp!==undefined)){e.preventDefault(); openPanel(tab,"var");}});
+    applyCfg(tab);});
+  return (sc.device==="mobile"
+    ? `<div class="desk"><div class="phone"><div id="${id}" class="pvhost"></div></div></div>`
+    : `<div class="desk" style="display:block"><div class="webwrap"><div class="webframe" data-w="${sc.width||1280}"><div id="${id}" class="pvhost"></div></div></div></div>`)
+    +`<div class="small" style="margin-top:6px">${esc(sc.note||"")}</div>`;}
+function configurator(tab){
+  const screens=PAGE.screens||[]; if(!screens.length) return "";
+  if(!Object.keys(CFG[tab].pick).length) CFG[tab].pick=defaultPick(tab);
+  const ds=PAGE.decisions||[]; const locked=tab==="preview"; const presets=PAGE.presets||[];
+  const varPane=`${!locked&&presets.length?`<h4>Theo nguồn tham khảo</h4>${presets.map(p=>`<button class="btn preset" data-preset="${esc(p.id)}">${esc(p.label)}</button>`).join("")}`:""}
+    ${ds.length?`<h4>${locked?"Tổ hợp đã chốt":"Phương án từng điểm"}</h4>${ds.map(d=>`<div class="dec"><div class="t">${esc(d.id)} · ${esc(d.title)}</div><div class="seg w">${d.options.map((o,i)=>`<button data-dec="${d.id}" data-opt="${L(i)}" ${locked?"disabled":""}>${L(i).toUpperCase()}. ${esc(o.label)}${o.rec?' <span class="rec">đề xuất</span>':""}</button>`).join("")}</div></div>`).join("")}`:""}
+    ${!locked&&ds.length?`<button class="btn primary" style="width:100%;margin-top:6px" data-commit>Chốt tổ hợp này</button><div class="save" id="cfg-saved"></div>`:""}`;
+  const scrPane=screens.map((s,i)=>`<button class="btn scr-link" data-scr="${i}">${esc(s.name)} · ${s.device==="mobile"?"Mobile":"Web"}</button>`).join("");
+  const viewPane=`<h4>Giao diện</h4><div class="seg" data-th><button data-t="light" aria-pressed="${theme==="light"}">Light</button><button data-t="dark" aria-pressed="${theme==="dark"}">Dark</button></div>
+    ${STATES.length?`<h4>Trạng thái</h4><div class="seg w">${STATES.map(s=>`<button data-st="${s.key}">${esc(s.label)}</button>`).join("")}</div>`:""}`;
+  return `<div class="cfg" id="cfg-${tab}">
+   <div class="cfg-bar"><div class="screen-tabs">${screens.map((s,i)=>`<button class="chip" data-scr="${i}">${esc(s.name)} · ${s.device==="mobile"?"Mobile":"Web"}</button>`).join("")}</div><span class="src" data-combo></span></div>
+   <div id="cfg-view-${tab}">${screenView(tab)}</div>
+   <div class="cfg-panel" id="cfg-panel-${tab}" role="dialog" aria-label="Bảng chọn">
+    <div class="cp-head"><b>Bảng chọn</b><span class="src" data-combo></span><button class="x" data-close aria-label="Đóng">✕</button></div>
+    <div class="cp-tabs" role="tablist"><button class="cp-tab" data-pane="var" aria-selected="true">Biến thể</button><button class="cp-tab" data-pane="scr" aria-selected="false">Màn</button><button class="cp-tab" data-pane="view" aria-selected="false">Hiển thị</button></div>
+    <div class="cp-body"><div class="cp-pane" data-p="var">${varPane}</div><div class="cp-pane" data-p="scr" hidden>${scrPane}</div><div class="cp-pane" data-p="view" hidden>${viewPane}</div></div>
+   </div>
+   <button class="fab" data-fab aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 6h10M4 12h16M4 18h7"/><circle cx="17" cy="6" r="2"/><circle cx="14" cy="18" r="2"/></svg>Bảng chọn</button></div>`;}
+function openPanel(tab,pane,force){const root=document.getElementById("cfg-"+tab); const p=root?.querySelector(".cfg-panel"); if(!p) return;
+  const open=force??(pane?true:!p.classList.contains("open")); p.classList.toggle("open",open); root.querySelector("[data-fab]").setAttribute("aria-expanded",String(open));
+  if(pane) root.querySelectorAll(".cp-tab").forEach(t=>{const on=t.dataset.pane===pane; t.setAttribute("aria-selected",String(on)); root.querySelector(`.cp-pane[data-p="${t.dataset.pane}"]`).hidden=!on;});}
+function showScreen(tab,i){CFG[tab].screen=i; document.getElementById("cfg-view-"+tab).innerHTML=screenView(tab); applyCfg(tab);}
+function bindCfg(tab){const root=document.getElementById("cfg-"+tab); if(!root) return;
+  root.querySelector("[data-fab]").onclick=()=>openPanel(tab);
+  root.querySelector("[data-close]").onclick=()=>openPanel(tab,null,false);
+  root.querySelectorAll(".cp-tab").forEach(t=>t.onclick=()=>openPanel(tab,t.dataset.pane,true));
+  root.querySelectorAll("[data-scr]").forEach(b=>b.onclick=()=>showScreen(tab,Number(b.dataset.scr)));
+  root.querySelectorAll("[data-dec]").forEach(b=>b.onclick=()=>{CFG[tab].pick[b.dataset.dec]=b.dataset.opt; CFG[tab].preset=null; applyCfg(tab);});
+  root.querySelectorAll("[data-st]").forEach(b=>b.onclick=()=>{CFG[tab].state=b.dataset.st; applyCfg(tab);});
+  root.querySelectorAll("[data-th] button").forEach(b=>b.onclick=()=>{theme=b.dataset.t; document.querySelectorAll("[data-th] button,#th button").forEach(x=>x.setAttribute("aria-pressed",String(x.dataset.t===theme))); retheme();});
+  root.querySelectorAll("[data-preset]").forEach(b=>b.onclick=()=>applyPreset(tab,b.dataset.preset));
+  root.querySelector("[data-commit]")?.addEventListener("click",()=>{(PAGE.decisions||[]).forEach(d=>{const key="brainstorm-"+d.id;
+      state[key]={...(state[key]||{}),choice:CFG[tab].pick[d.id].charCodeAt(0)-97}; persist(key);});
+    counts(); setTimeout(()=>{const y=scrollY; renderAll(); showTab(tab); scrollTo(0,y); openPanel(tab,"var",true); const sv=document.getElementById("cfg-saved"); if(sv) sv.textContent="Đã chốt "+comboText(tab);},250);});
+  applyCfg(tab);}
+addEventListener("resize",()=>{fitWeb("brainstorm");fitWeb("preview");});
+addEventListener("keydown",e=>{if(e.key==="Escape") ["brainstorm","preview"].forEach(t=>openPanel(t,null,false));});
+function applyPreset(tab,id){const p=(PAGE.presets||[]).find(x=>x.id===id); if(!p) return;
+  CFG[tab].pick={...CFG[tab].pick,...p.pick}; CFG[tab].preset=id;
+  if(p.screen!=null&&p.screen!==CFG[tab].screen) showScreen(tab,p.screen); else applyCfg(tab);}
+
+/* ---- mục cần chọn ---- */
+const ITEMS=[]; // {key, tab, title, opts:[label]}
+function reg(key,tab,title,opts){ITEMS.push({key,tab,title,opts});}
+function choiceUI(key,opts,{rec}={}){
+  const s=state[key]||{};
+  return `<div class="filters" role="radiogroup">${opts.map((o,i)=>`<label class="chip opt" aria-pressed="${s.choice===i}"><input type="radio" name="r-${key}" value="${i}" ${s.choice===i?"checked":""} hidden>${esc(o)}${rec===i?'<span class="rec">đề xuất</span>':""}</label>`).join("")}</div>
+  <textarea id="n-${key}" placeholder="Ghi chú (tuỳ chọn)">${esc(s.note||"")}</textarea><div class="save" id="st-${key}"></div>`;
+}
+function bindChoices(root){
+  root.querySelectorAll('input[type=radio][name^="r-"]').forEach(r=>r.onchange=()=>{
+    const key=r.name.slice(2); state[key]={...(state[key]||{}),choice:Number(r.value)};
+    root.querySelectorAll(`input[name="r-${key}"]`).forEach(x=>x.closest(".chip").setAttribute("aria-pressed",String(x.checked)));
+    root.querySelectorAll(`[data-col="${key}"]`).forEach((c,i)=>c.classList.toggle("on",i===Number(r.value)));
+    persist(key); counts();});
+  root.querySelectorAll('textarea[id^="n-"]').forEach(t=>{let tm; t.oninput=()=>{const key=t.id.slice(2); state[key]={...(state[key]||{}),note:t.value}; clearTimeout(tm); tm=setTimeout(()=>persist(key),800);};});
+  root.querySelectorAll('select[data-key]').forEach(s=>s.onchange=()=>{const key=s.dataset.key; state[key]={...(state[key]||{}),choice:s.value===""?null:Number(s.value)}; persist(key); counts();});
+}
+async function persist(key){
+  const s=state[key]; s.at=Date.now(); lsSave(); const st=document.getElementById("st-"+key);
+  if(!db){ if(st) st.textContent="Đã lưu trong trình duyệt này"; return; }
+  try{ if(st) st.textContent="Đang lưu…"; await db.doc("answers/"+key).set({choice:s.choice??null,note:s.note||"",at:s.at,by:uid||null}); if(st) st.textContent="Đã lưu "+new Date(s.at).toLocaleString("vi-VN"); }
+  catch(e){ if(st) st.textContent="Chưa lưu lên trang được (đã giữ trong trình duyệt này)"; }
+}
+function counts(){ const t=currentTab; const its=ITEMS.filter(i=>i.tab===t); const d=its.filter(i=>state[i.key]?.choice!=null).length;
+  $("#cnt").textContent=its.length?`${d} / ${its.length} đã chọn`:""; $("#prog").style.width=its.length?(d/its.length*100)+"%":"0"; }
+
+/* ---- tab 1: Brainstorm ---- */
+function renderBrainstorm(){
+  const el=$("#p-brainstorm"); const r=PAGE.refs||{}; const ideas=PAGE.ideas||[]; const ds=PAGE.decisions||[];
+  let h=`<div class="lead">
+   <div class="card"><h3>Untitled UI</h3><div class="small">${r.untitled?.summary||"—"}</div><div class="src">${esc(r.untitled?.source||"")}</div></div>
+   <div class="card"><h3>Astryx hiện tại</h3><div class="small">${r.astryx?.summary||"—"}</div><div class="src">${esc(r.astryx?.source||"")}</div></div>
+   <div class="card"><h3>Đang dùng ở</h3><div class="small">${(r.usage||[]).map(u=>esc(u)).join("<br>")||"—"}</div></div>
+   <div class="card"><h3>Web và Mobile</h3><div class="small">${r.platform||"—"}</div></div></div>`;
+  if((PAGE.screens||[]).length) h+=`<h2>Thử trên màn <span class="small">màn ví dụ dùng component đang bàn — bấm nút <b>Bảng chọn</b> góc dưới phải, hoặc bấm thẳng vào component trên màn, để đổi biến thể</span></h2>${configurator("brainstorm")}`;
+  if(ideas.length){
+    const srcs=[...new Set(ideas.map(i=>i.source))];
+    h+=`<h2>Ý tưởng cộng đồng <span class="small">${ideas.length} mẫu, vẽ lại để so — bấm link xem bản gốc</span></h2>
+    <div class="filters" id="idea-f"><button class="chip" aria-pressed="true" data-s="">Tất cả</button>${srcs.map(s=>`<button class="chip" aria-pressed="false" data-s="${esc(s)}">${esc(s)}</button>`).join("")}</div>
+    <div class="ideas">${ideas.map(i=>{const key="idea-"+i.id; reg(key,"brainstorm",i.title,["Thích","Bỏ"]);
+      return `<article class="idea" data-src="${esc(i.source)}">${stage(i.preview,{white:true})}<div class="body">
+      <div class="meta"><span class="code">${esc(i.id)}</span><span>${esc(i.source)}</span>${i.url?`<a href="${esc(i.url)}" target="_blank" rel="noopener">bản gốc ↗</a>`:""}</div>
+      <b>${esc(i.title)}</b><div class="small">${i.why||""}</div>${(PAGE.presets||[]).some(p=>p.id===i.id)&&(PAGE.screens||[]).length?`<button class="btn" data-try="${esc(i.id)}">Xem trên màn demo</button>`:""}${choiceUI(key,["Thích","Bỏ"])}</div></article>`}).join("")}</div>`;
+  }
+  if(ds.length){
+    h+=`<h2>Chi tiết từng điểm <span class="small">${ds.length} điểm — so phương án cạnh Untitled và Astryx</span></h2>`;
+    h+=ds.map(d=>{const key="brainstorm-"+d.id; const opts=d.options.map(o=>o.label); reg(key,"brainstorm",d.title,opts);
+      const rec=d.options.findIndex(o=>o.rec); const s=state[key]||{};
+      const refs=[d.untitled?`<div class="col ref">${stage(d.untitled,{white:true})}<div class="cap"><b>Untitled</b>${d.untitledNote||""}</div></div>`:"",
+                  d.astryx?`<div class="col ref">${stage(d.astryx,{white:true})}<div class="cap"><b>Astryx hiện tại</b>${d.astryxNote||""}</div></div>`:""].join("");
+      return `<div class="item" id="it-${key}"><div class="item-h"><span class="code">${esc(d.id)}</span><h3>${esc(d.title)}</h3>${s.choice!=null?'<span class="done-dot">✓ đã chọn</span>':""}</div>
+      <div class="small">${d.why||""}</div>${d.source?`<div class="src">${esc(d.source)}</div>`:""}
+      <div class="cols">${d.options.map((o,i)=>`<div class="col${s.choice===i?" on":""}" data-col="${key}">${stage(o.preview,{white:true,platform:o.platform})}<div class="cap"><b>${String.fromCharCode(65+i)}. ${esc(o.label)}${o.rec?'<span class="rec">đề xuất</span>':""}</b>${o.desc||""}${o.ideas?`<div class="src">từ ý tưởng ${esc(o.ideas.join(", "))}</div>`:""}</div></div>`).join("")}${refs}</div>
+      ${choiceUI(key,opts.map((o,i)=>String.fromCharCode(65+i)+". "+o),{rec:rec>=0?rec:undefined})}</div>`;}).join("");
+  }
+  if(!ideas.length&&!ds.length) h+=`<div class="empty">Chưa có nội dung brainstorm.</div>`;
+  el.innerHTML=h; bindChoices(el); bindCfg("brainstorm");
+  el.querySelectorAll("[data-try]").forEach(b=>b.onclick=()=>{applyPreset("brainstorm",b.dataset.try); document.getElementById("cfg-brainstorm")?.scrollIntoView({behavior:"smooth",block:"start"});});
+  el.querySelectorAll("#idea-f .chip").forEach(b=>b.onclick=()=>{el.querySelectorAll("#idea-f .chip").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
+    el.querySelectorAll(".idea").forEach(a=>a.hidden=!!b.dataset.s&&a.dataset.src!==b.dataset.s);});
+}
+
+/* ---- tab 2: Preview ---- */
+function renderPreview(){
+  const el=$("#p-preview"); const p=PAGE.preview; if(!p){el.innerHTML=`<div class="empty">Chưa tới vòng preview.</div>`;return;}
+  const ver=String(p.version||"1"); const key=ver==="1"?"preview-approve":"preview-approve-v"+ver; reg(key,"preview","Duyệt preview bản "+ver,["Duyệt","Cần sửa"]);
+  let h=`<div class="toolbar"><span class="small">Giao diện</span><div class="seg" id="th"><button aria-pressed="${theme==="light"}" data-t="light">Light</button><button aria-pressed="${theme==="dark"}" data-t="dark">Dark</button></div>
+    <span class="small">Bản ${esc(p.version||"1")}${p.changes?" · "+p.changes:""}</span></div>`;
+  if((PAGE.screens||[]).length) h+=`<h2>Màn demo đã chốt <span class="small">tổ hợp khoá theo lựa chọn ở Brainstorm — mở <b>Bảng chọn</b> để đổi màn, trạng thái, Light/Dark</span></h2>${configurator("preview")}`;
+  if((p.blocks||[]).length) h+=`<h2>Bảng biến thể</h2>`;
+  (p.blocks||[]).forEach(b=>{const mob=b.platform==="mobile";
+    h+=`<div class="block"><div class="block-h"><b>${esc(b.title)}</b><span class="small">${b.note||""}</span></div>
+    ${mob?`<div class="stage white" style="gap:16px;flex-wrap:wrap">${(b.frames||[b.html]).map(f=>`<div class="phone">${stage(f,{platform:"mobile",phone:true,white:true})}</div>`).join("")}</div>`:stage(b.html,{white:true,platform:"web"})}</div>`;});
+  if((p.demos||[]).length){h+=`<h2>Màn demo</h2>`; p.demos.forEach(d=>{const mob=/mobile/i.test(d.name);
+    h+=`<div class="block"><div class="block-h"><b>${esc(d.name)}</b><span class="small">${d.note||""}</span></div>${mob?`<div class="stage white"><div class="phone">${stage(d.html,{platform:"mobile",phone:true})}</div></div>`:stage(d.html,{white:true})}</div>`;});}
+  h+=`<div class="item"><div class="item-h"><h3>Duyệt bản preview ${esc(ver)}?</h3></div><div class="small">Cần sửa thì ghi rõ chỗ nào ở ô ghi chú, hoặc comment ngay trên phần tử.</div>${choiceUI(key,["Duyệt","Cần sửa"])}</div>`;
+  el.innerHTML=h; bindChoices(el); bindCfg("preview");
+  el.querySelectorAll("#th button").forEach(b=>b.onclick=()=>{theme=b.dataset.t; el.querySelectorAll("#th button").forEach(x=>x.setAttribute("aria-pressed",String(x===b))); retheme();});
+}
+
+/* ---- tab 3: Đối chiếu foundation ---- */
+const CAT={ok:["✅ Khớp","c-ok"],near:["↔ Lệch nhỏ","c-near"],new:["＋ Cần token mới","c-new"],conflict:["⛔ Xung đột luật","c-conflict"]};
+const FOPT={near:["Kéo về token đề xuất","Giữ giá trị preview"],new:["Thêm token mới","Sửa preview theo token có sẵn"],conflict:["Sửa preview theo luật","Đổi luật foundation (ghi DEC)","Ngoại lệ cho component này"]};
+let fFilter="open";
+function renderFoundation(){
+  const el=$("#p-foundation"); if(!CHECK){el.innerHTML=`<div class="empty">Chưa chạy đối chiếu foundation.</div>`;return;}
+  const rows=CHECK.rows||[]; rows.filter(r=>FOPT[r.cat]).forEach(r=>reg("foundation-"+r.id,"foundation",r.id,FOPT[r.cat]));
+  const c=CHECK.counts||{};
+  let h=`<div class="lead">${Object.keys(CAT).map(k=>`<div class="card"><span class="pill ${CAT[k][1]}">${CAT[k][0]}</span><div style="font:600 28px var(--f-head);margin-top:6px">${c[k]||0}</div></div>`).join("")}</div>
+  <p class="small">So từng giá trị của bản preview với <code>design/v2/tokens.json</code> (bản ${esc(CHECK.tokens_version||"")}) và luật trong foundations. Dòng <b>⛔</b> và <b>＋</b> phải có quyết định trước khi lên Figma.</p>
+  <div class="filters" id="ff">${[["open","Cần quyết"],["near","Lệch nhỏ"],["ok","Khớp"],["all","Tất cả"]].map(([k,l])=>`<button class="chip" aria-pressed="${fFilter===k}" data-k="${k}">${l}</button>`).join("")}</div>
+  <div class="tbl"><table class="t"><thead><tr><th>Mã</th><th>Phần · thuộc tính</th><th>Nền tảng</th><th>Giá trị</th><th>Nhóm</th><th>Token / luật</th><th>Quyết định</th></tr></thead><tbody>`;
+  const vis=rows.filter(r=>fFilter==="all"||(fFilter==="open"?(r.cat==="conflict"||r.cat==="new"):r.cat===fFilter));
+  h+=vis.map(r=>{const key="foundation-"+r.id; const s=state[key]||{}; const o=FOPT[r.cat];
+    const isC=/^#/.test(String(r.value));
+    return `<tr><td class="src">${esc(r.id)}</td><td>${esc(r.part||"")} · <b>${esc(r.prop)}</b>${r.state?` <span class="small">(${esc(r.state)})</span>`:""}</td><td>${esc(r.platform)}${r.size?" · "+esc(r.size):""}</td>
+    <td>${isC?`<span class="sw" style="background:${esc(r.value)}"></span>`:""}<code>${esc(r.value)}</code>${r.contrast?`<div class="small">${r.contrast}:1</div>`:""}</td>
+    <td><span class="pill ${CAT[r.cat][1]}">${CAT[r.cat][0]}</span></td>
+    <td class="small">${r.rules?.length?r.rules.map(esc).join("<br>"):(r.tokens?.length?`<code>${r.tokens.map(esc).join("</code>, <code>")}</code>`:"")}${r.suggest?`Đề xuất <code>${esc(r.suggest)}</code>`:""}${r.note?`<div>${esc(r.note)}</div>`:""}</td>
+    <td>${o?`<select data-key="${key}"><option value="">— chọn —</option>${o.map((x,i)=>`<option value="${i}" ${s.choice===i?"selected":""}>${esc(x)}</option>`).join("")}</select>
+      <textarea id="n-${key}" placeholder="Ghi chú" style="min-height:34px;margin-top:6px">${esc(s.note||"")}</textarea><div class="save" id="st-${key}"></div>`:""}</td></tr>`;}).join("")||`<tr><td colspan="7" class="small">Không có dòng nào ở nhóm này.</td></tr>`;
+  h+=`</tbody></table></div>`;
+  el.innerHTML=h; bindChoices(el);
+  el.querySelectorAll("#ff .chip").forEach(b=>b.onclick=()=>{fFilter=b.dataset.k; ITEMS.splice(0,ITEMS.length); renderAll(); showTab("foundation");});
+}
+
+/* ---- tab 4: Review Figma ---- */
+let rvFilter="";
+function renderReview(){
+  const el=$("#p-review"); const rv=PAGE.reviews||[]; if(!rv.length){el.innerHTML=`<div class="empty">Chưa dựng trên Figma, chưa có kết quả review.</div>`;return;}
+  rv.forEach(r=>reg("review-"+r.id,"review",r.text,["Sửa","Bỏ qua"]));
+  const agents=[...new Set(rv.map(r=>r.agent))];
+  let h=`<p class="small">${PAGE.figma?.url?`Figma: <a href="${esc(PAGE.figma.url)}" target="_blank" rel="noopener">${esc(PAGE.figma.label||"mở component")}</a> · `:""}Ba lượt review chạy song song trên bản Figma. Điểm có nhãn <b>đổi look</b> chạm vào bản đã duyệt — chỉ sửa khi bạn chọn.</p>
+  <div class="filters" id="rf"><button class="chip" aria-pressed="${!rvFilter}" data-a="">Tất cả (${rv.length})</button>${agents.map(a=>`<button class="chip" aria-pressed="${rvFilter===a}" data-a="${esc(a)}">${esc(a)} (${rv.filter(r=>r.agent===a).length})</button>`).join("")}</div>`;
+  h+=rv.filter(r=>!rvFilter||r.agent===rvFilter).map(r=>{const key="review-"+r.id;
+    return `<div class="item"><div class="item-h"><span class="code">${esc(r.id)}</span><span class="pill ${r.severity==="Cao"?"c-conflict":r.severity==="Trung"?"c-near":"c-ok"}">${esc(r.severity||"")}</span><span class="small">${esc(r.agent)}</span>${r.changesLook?'<span class="pill c-new">đổi look</span>':""}</div>
+    <div class="rv"><div><p style="margin:8px 0">${r.text||""}</p>${r.fix?`<div class="small"><b>Đề xuất sửa:</b> ${r.fix}</div>`:""}${r.node?`<div class="src">node ${esc(r.node)}</div>`:""}${choiceUI(key,["Sửa","Bỏ qua"],{rec:r.changesLook?undefined:0})}</div>
+    <div>${r.img?`<img src="${esc(r.img)}" alt="Ảnh chụp ${esc(r.id)}">`:""}</div></div></div>`;}).join("");
+  el.innerHTML=h; bindChoices(el);
+  el.querySelectorAll("#rf .chip").forEach(b=>b.onclick=()=>{rvFilter=b.dataset.a; ITEMS.splice(0,ITEMS.length); renderAll(); showTab("review");});
+}
+
+/* ---- tabs ---- */
+const TABS=[["brainstorm","1 · Brainstorm"],["preview","2 · Preview"],["foundation","3 · Đối chiếu foundation"],["review","4 · Review Figma"]];
+let currentTab="brainstorm";
+function renderAll(){ITEMS.length=0;renderBrainstorm();renderPreview();renderFoundation();renderReview();}
+function showTab(t){currentTab=t; TABS.forEach(([k])=>{$("#p-"+k).hidden=k!==t; document.getElementById("t-"+k)?.setAttribute("aria-selected",String(k===t));});
+  try{localStorage.setItem(LS+"-tab",t)}catch(e){} counts(); requestAnimationFrame(()=>fitWeb(t));}
+function initTabs(){
+  const avail={brainstorm:true,preview:!!PAGE.preview,foundation:!!CHECK,review:!!(PAGE.reviews||[]).length};
+  $("#tabs").innerHTML=TABS.map(([k,l])=>`<button class="tab" role="tab" id="t-${k}" ${avail[k]?"":"disabled"} aria-selected="false">${l}</button>`).join("");
+  TABS.forEach(([k])=>{const b=document.getElementById("t-"+k); b.onclick=()=>!b.disabled&&showTab(k);});
+  let t=PAGE.round||"brainstorm"; try{const s=localStorage.getItem(LS+"-tab"); if(s&&avail[s]) t=s;}catch(e){}
+  showTab(avail[t]?t:"brainstorm");
+}
+$("#h-title").textContent=PAGE.component||"Component";
+$("#h-sub").innerHTML=PAGE.subtitle||"";
+$("#btn-export").onclick=()=>{const L=[`${PAGE.component} — lựa chọn`,""];
+  ITEMS.forEach(i=>{const s=state[i.key]||{}; if(s.choice==null&&!s.note) return; L.push(`- ${i.key}: ${s.choice!=null?i.opts[s.choice]:"(chưa chọn)"}${s.note?" — "+s.note.replace(/\n/g," "):""}`);});
+  const o=$("#out"); o.textContent=L.join("\n"); o.hidden=false;};
+renderAll(); initTabs();
+(async()=>{
+  if(!window.claude?.use){$("#store").textContent="Lưu trong trình duyệt này";return;}
+  const [d,u]=await Promise.all([claude.use("db"),claude.use("user")]);
+  if(!d){$("#store").textContent="Lưu trong trình duyệt này";return;}
+  db=d; try{uid=u?await u.id():null}catch(e){}
+  try{const w=u?await u.can("data.write"):null; if(w===false) canWrite=false;}catch(e){}
+  $("#store").textContent=canWrite?"Lựa chọn lưu trên trang, Claude đọc được":"Bạn chỉ có quyền xem trang này";
+  db.collection("answers").onSnapshot(snap=>{let ch=false;
+    snap.docs.forEach(doc=>{const x=doc.data(); if(!x) return; const cur=state[doc.id];
+      if(!cur||(x.at||0)>(cur.at||0)){state[doc.id]={choice:x.choice??undefined,note:x.note||"",at:x.at}; ch=true;}});
+    if(ch){lsSave(); const a=document.activeElement; if(!(a&&(a.tagName==="TEXTAREA"||a.tagName==="SELECT"))){ITEMS.splice(0,ITEMS.length); renderAll(); showTab(currentTab);} else counts();}
+  },()=>{$("#store").textContent="Mất kết nối nơi lưu — lựa chọn vẫn giữ trong trình duyệt này";});
+})();
+</script>

@@ -1,0 +1,54 @@
+{
+ "brainstorm-D1": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D2": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D3": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D4": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D5": {
+  "choice": 2,
+  "note": ""
+ },
+ "brainstorm-D6": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D7": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D8": {
+  "choice": 0,
+  "note": ""
+ },
+ "preview-approve": {
+  "choice": 0,
+  "note": "duyệt trong chat 28/10"
+ },
+ "foundation-palette-empty.padding-y.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-search.height.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-palette-highlight.background.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-mobile-back-row.height.mobile": {
+  "choice": 2,
+  "note": ""
+ }
+}

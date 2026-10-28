@@ -1,0 +1,34 @@
+== Kiểm số token: raw/theme.css vs tokens.untitled.json ==
+
+  [OK ] color / utility              theme.css= 134  json= 134
+  [OK ] color / text                 theme.css=  23  json=  23
+  [OK ] color / border               theme.css=   8  json=   8
+  [OK ] color / foreground           theme.css=  19  json=  19
+  [OK ] color / background           theme.css=  28  json=  28
+  [OK ] color / brand (primitive)    theme.css=  11  json=  11
+  [OK ] color / alpha (primitive)    theme.css=   2  json=   2
+  [OK ] color / base + component     theme.css=  21  json=  21
+  [OK ] shadow                       theme.css=  14  json=  14
+  [OK ] drop-shadow                  theme.css=   1  json=   1
+  [OK ] font family                  theme.css=   3  json=   3
+  [OK ] text-color alias             theme.css=  23  json=  23
+  [OK ] text scale                   theme.css=  26  json=  26
+  [OK ] breakpoint                   theme.css=   2  json=   2
+  [OK ] max-width/container          theme.css=   1  json=   1
+  [OK ] animate                      theme.css=   2  json=   2
+  [OK ] background-color alias       theme.css=  30  json=  30
+  [OK ] border-color alias           theme.css=  10  json=  10
+  [OK ] ring-color alias             theme.css=  10  json=  10
+  [OK ] outline-color alias          theme.css=  10  json=  10
+
+-- Tổng hợp theo yêu cầu task (tiền tố) --
+  --color-       theme.css= 246  json= 246
+  --shadow-      theme.css=  14  json=  14
+  --text-        theme.css=  49  json=  49
+  --radius-      theme.css=   0  json=   0 (S3 docs: 10 token radius, KHÔNG có trong theme.css)
+  --spacing-     theme.css=   0  json=   0 (S3/Tailwind default: --spacing=0.25rem, KHÔNG khai trong theme.css)
+
+Tổng biến theme.css (light @theme): 378
+Tổng biến trong tokens.json (S2, bỏ not_in_theme_css/s1_only): 378
+Tổng biến mang nguồn S1 trong tokens.json (src chứa S1): 649
+KẾT QUẢ: PASS — khớp

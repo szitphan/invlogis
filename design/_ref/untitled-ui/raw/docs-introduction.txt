@@ -1,0 +1,91 @@
+Copy
+
+Introduction
+
+Welcome to Untitled UI React! This library is a collection of UI components based on the world's largest and most popular Figma UI kit and design system.
+
+What is Untitled UI React?
+
+Untitled UI React is the world's largest collection of open-source React components built with Tailwind CSS v4.3 and React Aria v1.21. Just copy, paste, and build.
+
+Skip months of design and development with pixel-perfect, production-ready components. Untitled UI React is built with React Aria v1.21 and TypeScript v6.0, and styled with the latest version of Tailwind CSS v4.3.
+
+It's the perfect starting point for any project—everything you need to design and build modern, beautiful interfaces and websites.
+
+Tech stack
+
+We've kept our tech stack minimal, so you can focus on building. Untitled UI is powered by:
+
+React
+v19.2
+
+Tailwind CSS
+v4.3
+
+TypeScript
+v5.9
+
+React Aria
+v1.20
+
+Accessibility
+
+Accessibility isn’t optional—it’s the baseline for any modern build.
+
+To ensure every component meets accessibility standards and best practices, we built our components based on React Aria. React Aria is a library of unstyled primitives that make it easy to build high-quality and accessible components.
+
+How is this different from a library?
+
+Unlike traditional component libraries that are installed as a dependency, Untitled UI React gives you the source code.
+
+When you select a component, its code is added directly to your project. This means no package dependencies to manage and no vendor lock-in! You have full control to modify, extend, or adapt the components to your specific needs—because you own the code.
+
+Next steps
+
+Check out our installation guide to get started.
+
+Want to contribute? Head to our GitHub repo to open an issue or pull request—we’re always looking to improve and make these components even more useful for you.
+
+Untitled UI React
+github.com/untitleduico
+
+Untitled UI Figma
+untitledui.com/figma
+
+FAQs
+Please refer to our frequently asked questions page for more.
+
+What is Untitled UI React?
+Untitled UI React is the world's largest collection of open-source React components. The components are built with React Aria and TypeScript and styled with Tailwind CSS v4.3, and you copy their source code into your project instead of installing them as a package.
+
+Is Untitled UI React free and open-source?
+A large part of it is. The open-source components are licensed under the MIT license, so you can use them for free in unlimited commercial projects.
+The base components are open-source, along with core application UI components such as tables, tabs, date pickers, charts, pagination, modals and navigation. Each marketing website section category also has a free variant.
+The PRO version adds more application UI components and marketing website sections, plus complete page examples such as dashboards, settings pages and marketing pages.
+
+What tech stack does Untitled UI React use?
+Untitled UI React components are built with and powered by:
+
+React v19.3
+
+Tailwind CSS v4.3
+
+TypeScript v6.0
+
+React Aria Components v1.21
+
+There is no separate Tailwind config file: the theme is defined in CSS with Tailwind CSS v4's @theme directive in theme.css.
+
+How is this different from a component library?
+Traditional component libraries are installed as a dependency. With Untitled UI React, the component's source code is added directly to your project, so there's no component package to keep updated and no vendor lock-in. You can modify, extend or adapt the code however you need.
+
+Are the components accessible?
+Yes. The components are built on React Aria, a library of unstyled primitives for building accessible components. Untitled UI adds the styling on top.
+
+Can I contribute to Untitled UI React?
+Yes! Head over to our GitHub repository to open an issue or submit a pull request.
+
+Does Untitled UI React have a Figma library?
+Yes, Untitled UI Figma is the matching Figma UI kit and design system. It's a separate product from Untitled UI React.
+
+Installation

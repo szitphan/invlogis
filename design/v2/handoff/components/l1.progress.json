@@ -1,0 +1,153 @@
+{
+  "$generator": "GENERATED — không sửa tay. Nguồn: design/v2/ · sinh bởi _scripts/ds-v2-handoff.py",
+  "id": "l1.progress",
+  "name": "Base / Progress",
+  "level": null,
+  "version": "0.1.0",
+  "status": "Nháp",
+  "spec": "design/v2/components/l1/progress.md",
+  "figma": {
+    "components": [
+      {
+        "name": "Base / Progress",
+        "nodeId": "6520:212428"
+      }
+    ],
+    "docFrame": "6522:26020"
+  },
+  "decisions": [
+    "DEC-243",
+    "DEC-254"
+  ],
+  "platforms": {
+    "web": {
+      "props": [
+        {
+          "name": "Type",
+          "kind": "Biến thể",
+          "default": "Bar",
+          "values": [
+            "Bar",
+            "Segmented"
+          ]
+        },
+        {
+          "name": "Size",
+          "kind": "Biến thể",
+          "default": "MD",
+          "values": [
+            "SM 4",
+            "MD 6"
+          ]
+        },
+        {
+          "name": "Value",
+          "kind": "Biến thể",
+          "default": "50",
+          "values": [
+            "None",
+            "0",
+            "10 … 100 (chỉ Bar; Segmented = None)"
+          ]
+        },
+        {
+          "name": "Segments",
+          "kind": "Slot",
+          "default": "4 Success · khe · 2 Info · khe · 1 Neutral",
+          "values": [
+            "chỉ Segmented; preferred `.progress / Segment`, `.progress / Gap`"
+          ]
+        },
+        {
+          "name": "Fill",
+          "kind": "Instance lồng",
+          "default": "Tone Brand",
+          "values": [
+            "Tone: Brand",
+            "Success",
+            "Info",
+            "Warning",
+            "Danger",
+            "Neutral (chỉ Bar; không đổi Size, Shape ở panel)"
+          ]
+        }
+      ],
+      "selector": "inv-progress",
+      "class": "InvProgressComponent"
+    },
+    "mobile": {
+      "props": [
+        {
+          "name": "Type",
+          "kind": "Biến thể",
+          "default": "Bar",
+          "values": [
+            "Bar",
+            "Segmented"
+          ]
+        },
+        {
+          "name": "Size",
+          "kind": "Biến thể",
+          "default": "MD",
+          "values": [
+            "SM 4",
+            "MD 6"
+          ]
+        },
+        {
+          "name": "Value",
+          "kind": "Biến thể",
+          "default": "50",
+          "values": [
+            "None",
+            "0",
+            "10 … 100 (chỉ Bar; Segmented = None)"
+          ]
+        },
+        {
+          "name": "Segments",
+          "kind": "Slot",
+          "default": "4 Success · khe · 2 Info · khe · 1 Neutral",
+          "values": [
+            "chỉ Segmented; preferred `.progress / Segment`, `.progress / Gap`"
+          ]
+        },
+        {
+          "name": "Fill",
+          "kind": "Instance lồng",
+          "default": "Tone Brand",
+          "values": [
+            "Tone: Brand",
+            "Success",
+            "Info",
+            "Warning",
+            "Danger",
+            "Neutral (chỉ Bar; không đổi Size, Shape ở panel)"
+          ]
+        }
+      ],
+      "sameAsWeb": true,
+      "note": "Như web (cùng bảng).",
+      "widget": "InvProgress"
+    }
+  },
+  "tokens": [
+    "color/bg/surface",
+    "color/border/default",
+    "color/brand/800",
+    "color/chip/gray/fg",
+    "color/status/danger-text",
+    "color/status/info-text",
+    "color/status/success-text",
+    "color/status/warning-text",
+    "progress/bg/track",
+    "progress/gap",
+    "progress/height/*",
+    "progress/height/md",
+    "progress/height/sm",
+    "progress/segment-width",
+    "progress/width-default",
+    "radius/chip"
+  ]
+}

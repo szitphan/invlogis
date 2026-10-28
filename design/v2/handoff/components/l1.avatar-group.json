@@ -1,0 +1,163 @@
+{
+  "$generator": "GENERATED — không sửa tay. Nguồn: design/v2/ · sinh bởi _scripts/ds-v2-handoff.py",
+  "id": "l1.avatar-group",
+  "name": "Base / Avatar Group",
+  "level": "L1",
+  "version": "0.1.0",
+  "status": "Nháp",
+  "spec": "design/v2/components/l1/avatar-group.md",
+  "figma": {
+    "components": [
+      {
+        "name": "Base / Avatar Group",
+        "nodeId": "6408:82080"
+      }
+    ],
+    "docFrame": "6474:90239"
+  },
+  "decisions": [
+    "DEC-205",
+    "DEC-242"
+  ],
+  "platforms": {
+    "web": {
+      "props": [
+        {
+          "name": "Size",
+          "kind": "Biến thể",
+          "default": "SM",
+          "values": [
+            "SM 28",
+            "MD 40",
+            "LG 52 (cao nhóm)"
+          ]
+        },
+        {
+          "name": "Count",
+          "kind": "Biến thể",
+          "default": "2",
+          "values": [
+            "2",
+            "3",
+            "4 avatar"
+          ]
+        },
+        {
+          "name": "State",
+          "kind": "Biến thể",
+          "default": "Default",
+          "values": [
+            "Default",
+            "Focus (web: Focus ở ô \"+n\", chọn State của instance con Overflow)"
+          ]
+        },
+        {
+          "name": "Overflow",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "ô \"+n\" cuối nhóm"
+          ]
+        },
+        {
+          "name": "Avatar 1–4 › Base / Avatar",
+          "kind": "Instance lồng",
+          "default": "Image, Initials xen kẽ",
+          "values": [
+            "Content, Initials, Icon, Status, Tooltip; không bật Edit"
+          ]
+        },
+        {
+          "name": "Overflow › Text",
+          "kind": "Instance lồng",
+          "default": "+3",
+          "values": [
+            "\"+n\", n = số người còn lại"
+          ]
+        }
+      ],
+      "selector": "inv-avatar-group",
+      "class": "InvAvatarGroupComponent"
+    },
+    "mobile": {
+      "props": [
+        {
+          "name": "Size",
+          "kind": "Biến thể",
+          "default": "SM",
+          "values": [
+            "SM 28",
+            "MD 40",
+            "LG 52 (cao nhóm)"
+          ]
+        },
+        {
+          "name": "Count",
+          "kind": "Biến thể",
+          "default": "2",
+          "values": [
+            "2",
+            "3",
+            "4 avatar"
+          ]
+        },
+        {
+          "name": "State",
+          "kind": "Biến thể",
+          "default": "Default",
+          "values": [
+            "Default",
+            "Focus (web: Focus ở ô \"+n\", chọn State của instance con Overflow)"
+          ]
+        },
+        {
+          "name": "Overflow",
+          "kind": "Bật tắt",
+          "default": "bật",
+          "values": [
+            "ô \"+n\" cuối nhóm"
+          ]
+        },
+        {
+          "name": "Avatar 1–4 › Base / Avatar",
+          "kind": "Instance lồng",
+          "default": "Image, Initials xen kẽ",
+          "values": [
+            "Content, Initials, Icon, Status, Tooltip; không bật Edit"
+          ]
+        },
+        {
+          "name": "Overflow › Text",
+          "kind": "Instance lồng",
+          "default": "+3",
+          "values": [
+            "\"+n\", n = số người còn lại"
+          ]
+        }
+      ],
+      "sameAsWeb": true,
+      "note": "Như web (thêm thuộc tính State: Default · Focus, app: Focus bao cả nhóm); khác: Tooltip của avatar con không dùng trên app.",
+      "widget": "InvAvatarGroup"
+    }
+  },
+  "tokens": [
+    "avatar/group-overlap/*",
+    "avatar/group-overlap/lg",
+    "avatar/group-overlap/md",
+    "avatar/group-overlap/sm",
+    "avatar/overflow/bg",
+    "avatar/overflow/fg",
+    "avatar/ring",
+    "avatar/size/*",
+    "color/bg/surface",
+    "color/border/focus",
+    "focus/gap",
+    "focus/offset",
+    "focus/width",
+    "radius/chip",
+    "touch/min",
+    "type/caption-strong",
+    "type/label",
+    "type/title-3"
+  ]
+}

@@ -6,8 +6,8 @@
 
 Tên CSS = '--' + tên token thay '/' bằng '-' (neutral/100 → --neutral-100, color/bg/canvas → --color-bg-canvas).
 Màu theo khách: collection Brand, mỗi chế độ một dải; đặt data-brand="<slug>" trên thẻ gốc (mặc định than-chi).
-Nền đặt: collection Context (Surface | Canvas) chứa màu đổi theo nền của khung chứa (khe vòng focus `focus/gap`); đặt
-data-context="canvas" trên khung nền xám, mặc định surface.
+Bóng: màu mỗi lớp đi qua biến Semantic `color/shadow/*` (đổi theo sáng/tối); `blur/*` sinh --blur-*.
+Collection Context đã bỏ (DEC-258): khe focus là token Semantic `color/focus/gap`.
 Quyết định: _workspace/decisions.md DEC-115, DEC-116, DEC-129…139, DEC-167, DEC-168, DEC-241.
 """
 import json
@@ -26,12 +26,14 @@ PAIRS = [
     ("color/text/secondary", "color/bg/surface", 4.5),
     ("color/text/secondary", "color/bg/canvas", 4.5),
     ("color/text/secondary", "color/bg/muted", 4.5),
+    ("color/text/secondary-strong", "color/bg/selected", 4.5),
+    ("color/text/secondary-strong", "color/bg/hover", 4.5),
     ("color/text/inverse", "color/action/primary", 4.5),
     ("color/text/inverse", "color/action/danger", 4.5),
     ("color/action/danger", "color/action/danger-subtle", 4.5),
     ("color/text/primary", "color/action/secondary", 4.5),
     ("color/text/tertiary", "color/bg/surface", 0),
-] + [(f"color/status/{k}-fg", f"color/status/{k}-bg", 4.5) for k in ("success", "warning", "danger", "info")] \
+] + [(f"color/status/{k}-text", f"color/status/{k}-bg", 4.5) for k in ("success", "warning", "danger", "info")] \
   + [(f"color/chip/{c}/fg", f"color/chip/{c}/bg", 4.5)
      for c in ("gray", "blue", "teal", "purple", "yellow", "green", "red", "orange")]
 
@@ -150,10 +152,14 @@ def build(doc) -> str:
     L.append("  --elev-0: none;")
     for k, v in doc["effectStyles"].items():
         shadows = ", ".join(
-            f"{s['x']}px {s['y']}px {s['blur']}px {s['spread']}px rgba(16, 24, 40, {s['alpha']})" for s in v["shadows"])
+            f"{s['x']}px {s['y']}px {s['blur']}px {s['spread']}px "
+            + (f"var({css_name(s['var'])})" if s.get("var") else f"rgba(16, 24, 40, {s['alpha']})") for s in v["shadows"])
         L.append(f"  {css_name(k)}: {shadows};")
         if v.get("border"):
             L.append(f"  {css_name(k)}-border: var({css_name(v['border'])});")
+    L.append("  /* Làm mờ nền (DEC-258) */")
+    for k, v in doc.get("blur", {}).items():
+        L.append(f"  {css_name(k)}: {px(v['value'])};")
     L.append("  /* Chuyển động, focus (DEC-139) */")
     for k, v in doc["motion"].items():
         L.append(f"  {css_name(k)}: {v};")

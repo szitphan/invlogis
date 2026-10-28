@@ -1,0 +1,79 @@
+# S1 Color variables (frame 6472-97620). token	light	dark	usage (diễn giải ngắn)
+## Text (node 6472-97625) — 20 dòng
+text-primary	neutral-900	neutral-50	Chữ chính, vd tiêu đề trang
+text-primary_on-brand	white	neutral-50	Chữ chính trên nền brand đặc (CTA sections)
+text-secondary	neutral-700	neutral-300	Chữ phụ: nhãn, tiêu đề mục
+text-secondary_hover	neutral-800	neutral-200	text-secondary khi hover
+text-secondary_on-brand	brand-200	neutral-300	Chữ phụ trên nền brand đặc (CTA sections)
+text-tertiary	neutral-600	neutral-400	Chữ hỗ trợ, đoạn văn
+text-tertiary_hover	neutral-700	neutral-300	text-tertiary khi hover
+text-tertiary_on-brand	brand-200	neutral-400	Chữ cấp 3 trên nền brand đặc (CTA sections)
+text-quaternary	neutral-500	neutral-400	Chữ nhạt, tương phản thấp, vd tiêu đề cột footer
+text-quaternary_on-brand	brand-300	neutral-400	Chữ cấp 4 trên nền brand đặc (footers)
+text-white	text-white	text-white	Luôn trắng, mọi chế độ
+text-placeholder	neutral-500	neutral-400	Placeholder của input field; có thể đổi sang neutral-400 nhưng neutral-500 tương phản/khả dụng tốt hơn
+text-brand-primary	brand-900	neutral-50	Chữ brand chính cho heading (card trong pricing page header)
+text-brand-secondary	brand-700	neutral-300	Chữ brand cho buttons, chữ nhấn, highlight, subheading (blog post cards)
+text-brand-secondary_hover	brand-800	neutral-200	text-brand-secondary khi hover (brand buttons)
+text-brand-tertiary	brand-600	neutral-400	Chữ brand nhạt hơn cho nhấn/highlight (số trong metric cards)
+text-brand-tertiary_alt	brand-600	neutral-50	Biến thể tertiary sáng hơn ở dark mode (link buttons)
+text-error-primary	red-600	red-400	Chữ trạng thái lỗi mặc định (lỗi input field)
+text-warning-primary	yellow-600	yellow-400	Chữ cảnh báo mặc định
+text-success-primary	green-600	green-400	Chữ thành công mặc định
+## Border (node 6483-314735) — 8 dòng
+border-primary	neutral-300	neutral-700	Viền tương phản cao: input fields, button groups, checkboxes
+border-secondary	neutral-200	neutral-800	Viền tương phản vừa; viền DÙNG NHIỀU NHẤT, mặc định cho phần lớn component (file uploaders, cards/tables, content dividers)
+border-secondary_alt	#000000 10%	neutral-800	Biến thể alpha của secondary; chỉ dùng cho menu nổi (input dropdowns, notifications) để mép dưới sắc hơn
+border-tertiary	neutral-100	neutral-800	Viền tương phản thấp: divider rất nhạt, trục line/bar chart
+border-brand	brand-500	brand-400	Viền brand mặc định, trạng thái active (input fields)
+border-brand_alt	brand-600	neutral-700	Viền brand chuyển sang xám ở dark mode (banner, footer kiểu brand)
+border-error	red-500	red-400	Viền lỗi mặc định (input fields, file uploaders)
+border-error_subtle	red-300	red-500	Viền lỗi nhạt hơn (input field lỗi)
+## Foreground (node 6485-339301) — 18 dòng (non-text: icon, chấm, thanh)
+fg-primary	neutral-900	white	Phần tử không phải chữ tương phản cao nhất, vd icon
+fg-secondary	neutral-700	neutral-300	Phần tử không phải chữ tương phản cao, vd icon
+fg-secondary_hover	neutral-800	neutral-200	fg-secondary khi hover
+fg-tertiary	neutral-600	neutral-400	Tương phản vừa, vd icon
+fg-tertiary_hover	neutral-700	neutral-300	fg-tertiary khi hover
+fg-quaternary	neutral-400	neutral-500	Tương phản thấp: icon trong buttons, help icons, icon trong input fields
+fg-quaternary_hover	neutral-500	neutral-400	fg-quaternary khi hover (help icons)
+fg-white	white	white	Luôn trắng, mọi chế độ
+fg-brand-primary	brand-600	brand-500	Màu brand chính cho featured icons, progress bars
+fg-brand-primary_alt	brand-600	neutral-300	Như fg-brand-primary nhưng thành xám ở dark mode (horizontal tabs active)
+fg-brand-secondary	brand-500	brand-500	Brand phụ: nhấn, mũi tên ở trang marketing (hero header sections)
+fg-brand-secondary_alt	brand-500	neutral-600	Như trên nhưng thành xám ở dark mode (brand buttons)
+fg-error-primary	red-600	red-500	Lỗi chính cho featured icons
+fg-error-secondary	red-500	red-400	Lỗi phụ: icon trong input field lỗi, chart/icon âm của metrics item
+fg-warning-primary	yellow-600	yellow-500	Cảnh báo chính cho featured icons
+fg-warning-secondary	yellow-500	yellow-400	Cảnh báo phụ
+fg-success-primary	green-600	green-500	Thành công chính cho featured icons
+fg-success-secondary	green-500	green-400	Thành công phụ: button dots, chấm online của avatar, chart/icon metrics item (Figma ghi "negative" — có vẻ chép nhầm từ error)
+## Background (node 6487-340429) — 28 dòng
+bg-primary	white	neutral-950	Nền chính (trắng) cho mọi layout và component
+bg-primary_alt	white	neutral-900	Nền trắng nhưng chuyển thành bg-secondary ở dark mode
+bg-primary_hover	neutral-50	neutral-900	Hover mặc định cho component nền trắng (select menu items)
+bg-primary-solid	neutral-950	neutral-800	Nền tối chính; ở dark mode chuyển thành bg-tertiary; dùng cho tooltips
+bg-secondary	neutral-50	neutral-900	Nền phụ tạo tương phản với nền trắng, vd nền section website
+bg-secondary_alt	neutral-50	neutral-950	Nền phụ chuyển thành bg-primary ở dark mode (horizontal tabs kiểu viền)
+bg-secondary_hover	neutral-100	neutral-800	Hover cho component nền neutral-50, vd active (navigation items, date pickers)
+bg-secondary-solid	neutral-600	neutral-600	Nền tối phụ, dùng cho featured icons
+bg-tertiary	neutral-100	neutral-800	Nền cấp 3 tạo tương phản trên nền sáng (toggles)
+bg-quaternary	neutral-200	neutral-700	Nền cấp 4 trên nền sáng (sliders, progress bars)
+bg-overlay	neutral-950	neutral-800	Nền mặc định của lớp phủ (modals)
+bg-brand-primary	brand-50	brand-500	Nền brand chính (check icons)
+bg-brand-primary_alt	brand-50	neutral-800	Nền brand chuyển thành bg-secondary ở dark mode (horizontal tabs active)
+bg-brand-secondary	brand-100	brand-600	Nền brand phụ (featured icons)
+bg-brand-solid	brand-600	brand-600	Nền brand đặc mặc định (toggles, messages)
+bg-brand-solid_hover	brand-700	brand-500	bg-brand-solid khi hover (toggles)
+bg-brand-section	brand-800	neutral-800	Nền section brand tối mặc định (CTA, testimonial sections); dark → bg-secondary
+bg-brand-section_subtle	brand-700	neutral-950	Nền section brand thay thế để tạo tương phản (FAQ sections); dark → bg-primary
+bg-error-primary	red-50	red-950	Nền lỗi chính (buttons)
+bg-error-secondary	red-100	red-600	Nền lỗi phụ (featured icons)
+bg-error-solid	red-600	red-600	Nền lỗi đặc (buttons, featured icons, metric items)
+bg-error-solid_hover	red-700	red-500	Nền lỗi đặc khi hover (buttons)
+bg-warning-primary	yellow-50	yellow-950	Nền cảnh báo chính
+bg-warning-secondary	yellow-100	yellow-600	Nền cảnh báo phụ (featured icons)
+bg-warning-solid	yellow-600	yellow-600	Nền cảnh báo đặc (featured icons)
+bg-success-primary	green-50	green-950	Nền thành công chính
+bg-success-secondary	green-100	green-600	Nền thành công phụ (featured icons)
+bg-success-solid	green-600	green-600	Nền thành công đặc (featured icons, metric items)

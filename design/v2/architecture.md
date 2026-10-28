@@ -78,7 +78,7 @@ List Row đã bỏ (DEC-231); dòng danh sách là hàng List Item (DEC-232).
 
 | Cấp | Định nghĩa | Mẫu tên | Ví dụ |
 |---|---|---|---|
-| L0 Element | Cấu phần tạo nên component, không dùng riêng lẻ (khoá) | `.{cha} / {Tên}` | `.card / Media`, `.button / Spinner`, `.transport-order / Route Row` |
+| L0 Element | Cấu phần tạo nên component, không dùng riêng lẻ (khoá); đặt một mình lên màn không đủ nghĩa. Dùng chung được nhiều họ khi tên mang họ riêng (DEC-254) | `.{cha} / {Tên}` | `.card / Media`, `.button / Spinner`, `.progress / Bar`, `.transport-order / Route Row` |
 | L1 Base | Không mang ngữ cảnh, là cấu trúc UI nguyên thuỷ, tuỳ biến được để dùng ở nhiều ngữ cảnh (vd thẻ dọc, thẻ ngang) | `Base / {Tên}` | `Base / Card`, `Base / Selectable Card`, `Base / Button`, `Base / List Item` |
 | L2 Content | Mang ngữ cảnh, dùng ở đúng một ngữ cảnh (vd hotel card dùng hai thẻ nền dọc và ngang, thêm ngữ cảnh hotel) | `{Đối tượng} / {Tên}` | `Transport Order / Card` (Layout = Horizontal \| Vertical), `Vehicle / Card`, `Notification / Item` |
 | L3 Screen | Màn hoàn chỉnh | `{mã màn} · {nền tảng} · {slug}` | `2.1 · mob · order-list`, `1.3 · web · sign-in` |
@@ -90,6 +90,7 @@ List Row đã bỏ (DEC-231); dòng danh sách là hàng List Item (DEC-232).
 
 1. Có ai dùng riêng nó trên màn không? Không → L0 của component cha, kể cả khi nó có mặt ở nhiều màn nhưng chỉ qua cha.
    Có → L1, kể cả khi nó cũng nằm trong component khác: nút ở chân thẻ vẫn là `Base / Button` (DEC-233a).
+   Phép thử: đặt một mình lên màn có đủ nghĩa không (vd thanh tiến độ không chữ → không, nên là L0 `.progress / Bar`, DEC-254).
 2. Nó có mang dữ liệu hay nghĩa nghiệp vụ không (tên trường, đối tượng, quy tắc)? Có → L2, đặt dưới đối tượng nghiệp vụ.
 3. Không mang nghiệp vụ và đã dùng ở 2 ngữ cảnh trở lên? Có → L1 Base.
 4. Không mang nghiệp vụ nhưng mới có 1 ngữ cảnh? Để trong L2 của ngữ cảnh đó. Có ngữ cảnh thứ 2 thì tách phần chung lên L1.
@@ -145,7 +146,10 @@ bằng Slot của Figma (ô trống có danh sách component được phép, vd 
 
 - Collection `Platform` (chế độ Web, Mobile) chứa số đo khác nhau giữa hai nền tảng: cao control, bo góc, cỡ chữ, khoảng cách.
   Khung màn đặt chế độ một lần, mọi instance bên trong tự đổi.
-- Cùng cấu tạo → một component. Khác cấu tạo → tách, tên thêm hậu tố nền tảng (vd `Base / Text Field` và `Base / Text Field / Mobile`).
+- Xếp mỗi component vào 1 nhóm (DEC-279). **A Dùng chung**: cùng phần, cùng cách thao tác, chỉ khác số đo → một bộ, số đo
+  theo mode `Platform`, không có trục nền tảng. **B Lệch**: khác cấu tạo hoặc cách thao tác (menu ↔ bottom sheet, popover ↔
+  action sheet) → một bộ có trục `Platform=Web|Mobile`, cùng tên thuộc tính. **C Một nền tảng**: một bộ, mô tả ghi nền tảng
+  kia dùng gì thay. Phần con chỉ có trên app thì thêm tiền tố `_`.
 - Code: cùng component, token đổi theo nền tảng (vd thuộc tính `data-platform` trên khung trang).
 
 ## 7. Token (DEC-115, DEC-116)
@@ -219,7 +223,7 @@ bằng Slot của Figma (ô trống có danh sách component được phép, vd 
 
 | Chủ đề | Luật | DEC |
 |---|---|---|
-| Đợt dựng | Đợt 1 theo thứ tự phụ thuộc: `Base / Button` → `Base / Status Chip` → `Base / Text Field` (+ `/ Mobile`) → `Base / List Item` → `Base / Card` và thẻ L1, kèm `Base / Avatar`, `Base / Avatar Group`, `Base / Tooltip`; bổ sung L1 trước khi dựng L2: `Base / Progress`, `Base / OTP Field`. Đợt 2: ô tìm và phần lọc, tab, dialog, bottom sheet, bảng, menu | DEC-171, DEC-231, DEC-232, DEC-243, DEC-244 |
+| Đợt dựng | Đợt 1 theo thứ tự phụ thuộc: `Base / Button` → `Base / Status Chip` → `Base / Text Field` (+ `/ Mobile`) → `Base / List Item` → `Base / Card` và thẻ L1, kèm `Base / Avatar`, `Base / Avatar Group`, `Base / Tooltip`; bổ sung L1 trước khi dựng L2: `Base / Progress Card` (thanh là L0 `.progress / Bar`, DEC-254), `Base / OTP Field`. Đợt 2: ô tìm và phần lọc, tab, dialog, bottom sheet, bảng, menu, `Base / Stepper` | DEC-171, DEC-231, DEC-232, DEC-243, DEC-244, DEC-254 |
 | Luật lồng | Dùng riêng được thì là L1 kể cả khi nằm trong component khác; lồng bằng instance gốc; L0 không chứa L1; vùng chứa L1 là Slot của L1 cha; phụ thuộc một chiều L0 → L1 → L2 (Mục 4) | DEC-233 |
 | Trục biến thể | `Type · Size · State`; State = Default · Hover (chỉ web) · Pressed · Focus · Disabled; thêm Loading, Error, Read Only, Selected khi component có; Tone cho chip; chữ, icon, bật tắt là thuộc tính | DEC-172 |
 | Cao control | `control/height/sm · md · lg`: web 28 · 32 · 40, app 36 · 42 · 52 | DEC-173 |

@@ -1,0 +1,79 @@
+Copy
+
+Theming
+
+Learn how to customize our components effortlessly to make them your own.
+
+Via CLI upon project creation
+
+When initializing a new project using the untitledui CLI tool, the init command asks which color palette to use as the brand color:
+
+```
+? Which color would you like to use as the brand color?
+❯   brand
+red
+orange
+amber
+yellow
+lime
+green
+...
+zinc
+neutral
+stone
+```
+
+brand keeps the default purple palette. The other choices are Tailwind's built-in palettes: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose, slate, gray, zinc, neutral and stone. Picking one points each --color-brand-* variable in your theme.css at the matching Tailwind variable, for example --color-brand-600: var(--color-blue-600);. Nothing else in the theme changes.
+
+You can also pass the choice directly with npx untitledui@latest init --color <name>, or re-open the prompt in an existing project with npx untitledui@latest init --colors-list. Palettes you add to your own theme.css as rgb() values (for example --color-ocean-50 through --color-ocean-950) appear in the prompt as well.
+
+Manually
+
+If you've already created an Untitled UI project and would like to change the brand color to something else, you can point the --color-brand-* variables at one of Tailwind's built-in palettes (or your own rgb() values):
+
+```
+@theme {
+--color-brand-50: rgb(249 245 255);
+--color-brand-100: rgb(244 235 255);
+--color-brand-200: rgb(233 215 254);
+--color-brand-300: rgb(214 187 251);
+--color-brand-400: rgb(182 146 246);
+--color-brand-500: rgb(158 119 237);
+--color-brand-600: rgb(127 86 217);
+--color-brand-700: rgb(105 65 198);
+--color-brand-800: rgb(83 56 158);
+--color-brand-900: rgb(66 48 125);
+--color-brand-950: rgb(44 28 95);
+--color-brand-50: var(--color-rose-50);
+--color-brand-100: var(--color-rose-100);
+--color-brand-200: var(--color-rose-200);
+--color-brand-300: var(--color-rose-300);
+--color-brand-400: var(--color-rose-400);
+--color-brand-500: var(--color-rose-500);
+--color-brand-600: var(--color-rose-600);
+--color-brand-700: var(--color-rose-700);
+--color-brand-800: var(--color-rose-800);
+--color-brand-900: var(--color-rose-900);
+--color-brand-950: var(--color-rose-950);
+}
+```
+
+FAQs
+Please refer to our frequently asked questions page for more.
+
+Can I use custom colors instead of the predefined palettes?
+Yes. Set each --color-brand-* variable in the @theme block of theme.css to your own rgb() values. Define all eleven shades, from 50 to 950, because components use the whole scale.
+
+How do I change the brand color after initial setup?
+Run npx untitledui@latest init --colors-list to reopen the palette prompt, or pass a palette directly with npx untitledui@latest init --color <name>. You can also edit theme.css by hand and point each --color-brand-* variable at a Tailwind palette, for example --color-brand-600: var(--color-rose-600);.
+
+Which palettes can I choose as the brand color?
+brand keeps the default purple. The other choices are Tailwind's built-in palettes: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose, slate, gray, zinc, neutral and stone.
+
+Does changing the brand color affect gray, error or success colors?
+No. Picking a palette only repoints the --color-brand-* variables; the gray scale and the error, warning and success colors stay as they are.
+
+How do theme changes affect dark mode?
+Both modes update. The dark mode tokens in the .dark-mode block of theme.css reference the same --color-brand-* scale (for example, --color-utility-brand-50 maps to --color-brand-950), so a new brand palette carries over to dark mode without extra changes.
+
+InstallationDark mode

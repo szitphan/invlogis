@@ -1,7 +1,7 @@
 ---
 type: design-icons
 status: draft
-updated: 2026-10-17
+updated: 2026-10-26
 links:
   - design/v2/foundations.md
   - design/v2/architecture.md
@@ -12,8 +12,9 @@ links:
 # Design System v2 — icon
 
 > Kết quả vòng 3/6, chốt 17/10/2026 trên trang phỏng vấn https://claude.ai/artifact/D5KS1PPdUih9dsajBo48vU
-> (tab 3 và 3b, DEC-141…156). Trên Figma: trang `✦ DS · Icons` — khung "Thư viện icon · DS v2" (82 component set)
-> và "Bảng nghĩa icon · DEC-146". Bộ cũ (`icon/*` ở trang innvie · Foundations) giữ tới vòng 6 rồi xoá.
+> (tab 3 và 3b, DEC-141…156). Trên Figma: trang `DS · Foundations`, khung `Foundations / Icons` — các nhóm icon theo cách A
+> (component set `icon/<tên>` nằm ngay trong ô tài liệu, nghĩa ghi dưới tên; DEC-262 thêm 53 icon; user chốt giữ cách A cho icon, 27/10).
+> Kho nguồn 1694 icon ở khung `Foundations / Icons / Resources`. Bộ cũ giữ tới vòng 6 rồi xoá.
 
 ## 1. Bộ nền (DEC-141, DEC-156)
 
@@ -42,6 +43,14 @@ Code (lucide-react): `strokeWidth={1.8}` cho mọi icon, `strokeWidth={2}` cho i
 | `icon/size/chip` | 14 | 14 | Chip trạng thái |
 
 Trên Figma chọn biến thể `Size` theo bảng này: biến thể không gắn được biến, nên đổi chế độ Platform của khung màn **không** tự đổi cỡ icon. Code đọc token. Cỡ 12 để dự phòng cho chỗ rất dày, chưa có token.
+
+### 3.1 Nhấn mạnh bằng Featured icon, không phóng icon (DEC-258)
+
+1. Không phóng icon quá 24 (app) / 20 (web): nét 1.8 trên khung 24 sẽ dày và thô khi phóng (Untitled UI cùng luật).
+2. Cần nhấn mạnh (màn trống, màn kết quả, đầu dialog xác nhận) thì đặt icon 24 trong **Featured icon** 48: khối tròn (app,
+   màn trống, màn kết quả) hoặc vuông bo 14; nền `color/status/*-bg-strong` hoặc `color/bg/muted`, icon `color/status/*-icon`
+   hoặc `color/icon/primary`.
+3. `Base / Featured Icon` vào danh sách L1 đợt 2 (cùng Stepper, BL-241).
 
 ## 4. Bản tô (DEC-141, DEC-144)
 
@@ -101,7 +110,7 @@ eir:
 ## 7. Bảng nghĩa (DEC-146)
 
 Mỗi nghĩa đúng một icon, mọi feature dùng chung. AI và người vẽ tra bảng, không tự chọn. Thêm nghĩa mới thì thêm
-dòng ở đây và ở khung "Bảng nghĩa icon" trên Figma cùng lượt.
+dòng ở đây và dòng nghĩa trong ô icon ở khung `Foundations / Icons` cùng lượt (khung "Bảng nghĩa icon" cũ không còn).
 
 ### Hành động
 
@@ -130,6 +139,40 @@ dòng ở đây và ở khung "Bảng nghĩa icon" trên Figma cùng lượt.
 | Đóng, xoá chip | `icon/x` |
 | Tìm | `icon/search` |
 | Thông báo | `icon/bell` |
+| Quay lại màn trước | `icon/arrow-left` |
+| Sắp xếp cột | `icon/arrow-up-down` |
+| Mở rộng | `icon/chevron-down` |
+| Thu gọn | `icon/chevron-up` |
+| Trang trước | `icon/chevron-left` |
+| Trang sau, vào chi tiết hàng | `icon/chevron-right` |
+| Mở trang ngoài | `icon/external-link` |
+| Trang tổng quan | `icon/layout-dashboard` |
+| Thu/mở thanh menu bên | `icon/panel-left` |
+| Xem dạng danh sách | `icon/list` |
+| Xem dạng cột | `icon/columns-3` |
+| Đăng xuất | `icon/log-out` |
+| Tách, rẽ nhánh | `icon/git-branch` |
+| Trang chủ | `icon/house` |
+| Mở menu | `icon/menu` |
+| Tiếp theo | `icon/arrow-right` |
+| Đăng nhập | `icon/log-in` |
+| Xoá bộ lọc | `icon/funnel-x` |
+| Bớt, giảm số lượng | `icon/minus` |
+| Bắt đầu | `icon/play` |
+| Cài đặt | `icon/settings` |
+| Kéo để đổi thứ tự | `icon/grip` |
+| Lưu | `icon/save` |
+| Hoàn tác | `icon/undo-2` |
+| Ghim | `icon/pin` |
+| Yêu thích | `icon/star` |
+| Chia sẻ | `icon/share-2` |
+| Liên kết | `icon/link` |
+| Lưu trữ | `icon/archive` |
+| Nhập file | `icon/import` |
+| Mã QR | `icon/qr-code` |
+| Mã vạch | `icon/barcode` |
+| Đổi mật khẩu | `icon/key-round` |
+| Đổi ngôn ngữ | `icon/languages` |
 
 
 ### Đối tượng
@@ -153,6 +196,45 @@ dòng ở đây và ở khung "Bảng nghĩa icon" trên Figma cùng lượt.
 | Trạm dầu | `icon/fuel` |
 | Trạm thu phí | `icon/toll-booth` · tự vẽ · có bản tô |
 | Lịch | `icon/calendar` |
+| Thư, email | `icon/mail` |
+| Báo cáo, biểu đồ | `icon/chart-column` |
+| Hàng hoá | `icon/package` |
+| Thêm hàng hoá | `icon/package-plus` |
+| Công ty, đối tác | `icon/building` |
+| Hỗ trợ, tổng đài | `icon/headset` |
+| Tiền mặt, thanh toán | `icon/banknote` |
+| Mua sắm, vật tư | `icon/shopping-cart` |
+| Sửa chữa, bảo dưỡng | `icon/wrench` |
+| Lập chứng từ | `icon/file-plus` |
+| Chứng từ đã duyệt | `icon/file-check` |
+| Bảng tính (Excel) | `icon/file-spreadsheet` |
+| Đã kiểm tra | `icon/clipboard-check` |
+| Thư mục | `icon/folder` |
+| Dấu xác nhận | `icon/stamp` |
+| Hoá đơn | `icon/receipt-text` |
+| Xe nâng | `icon/forklift` |
+| Tàu | `icon/ship` |
+| Đường sắt | `icon/train-front` |
+| Hàng không | `icon/plane` |
+| Công tơ mét, số km | `icon/gauge` |
+| Đường | `icon/road` |
+| Bản đồ | `icon/map` |
+| Vị trí hiện tại | `icon/locate-fixed` |
+| Nhà máy, xưởng | `icon/factory` |
+| Cửa hàng | `icon/store` |
+| Hàng nhiều kiện | `icon/boxes` |
+| Đã giao nhận | `icon/package-check` |
+| Điểm dừng | `icon/waypoints` |
+| Nhóm, đội | `icon/users` |
+| Thêm người dùng | `icon/user-plus` |
+| Giấy phép lái xe, CCCD | `icon/id-card` |
+| Ví, quỹ | `icon/wallet` |
+| Thẻ | `icon/credit-card` |
+| Tạm ứng | `icon/hand-coins` |
+| Đối soát, tính toán | `icon/calculator` |
+| Ngân hàng | `icon/landmark` |
+| Thuế, chiết khấu | `icon/percent` |
+| Đối tác, hợp đồng | `icon/handshake` |
 
 
 ### Trạng thái (chip, DEC-029)
@@ -169,12 +251,29 @@ dòng ở đây và ở khung "Bảng nghĩa icon" trên Figma cùng lượt.
 | Cảnh báo | `icon/triangle-alert` · có bản tô |
 | Lỗi | `icon/circle-alert` · có bản tô |
 | Thông tin | `icon/info` |
+| Hoàn thành, thành công | `icon/circle-check` |
+| Chưa bắt đầu, nháp | `icon/circle-dashed` |
+| Tạm dừng | `icon/circle-pause` |
+| Trợ giúp | `icon/circle-question-mark` |
+| Không được phép, bị chặn | `icon/ban` |
+| Không có kết quả tìm | `icon/search-x` |
+| Mất kết nối | `icon/wifi-off` |
+| Khoá, bảo mật | `icon/lock` |
+| Quyền truy cập, bảo vệ | `icon/shield` |
+| Chưa có dữ liệu (màn trống) | `icon/inbox` |
+| Đang tải | `icon/loader-circle` |
+| Đang chờ xử lý | `icon/hourglass` |
+| Đang xử lý | `icon/circle-dot` |
+| Đã xác minh | `icon/badge-check` |
+| An toàn | `icon/shield-check` |
+| Tắt thông báo | `icon/bell-off` |
+| Đánh dấu | `icon/flag` |
 
 
-## 8. Icon đang dùng trên màn đã duyệt, ngoài bảng nghĩa
+## 8. Icon đang dùng trên màn đã duyệt
 
-Quét trang `00 · Chung` ngày 17/10 (5 trang màn khác chưa có icon): `arrow-left`, `arrow-up-down`, `ban`, `banknote`, `chart-column`, `chevron-down`, `chevron-left`, `chevron-right`, `circle-check`, `circle-dashed`, `circle-pause`, `circle-question-mark`, `columns-3`, `external-link`, `funnel`, `funnel-x`, `git-branch`, `headset`, `inbox`, `layout-dashboard`, `list`, `lock`, `mail`, `minus`, `package`, `package-plus`, `panel-left`, `pen-line`, `play`, `search-x`, `shield`, `shopping-cart`, `wifi-off`, `wrench`.
-Đã đưa vào thư viện (DEC-148). Chưa có nghĩa chuẩn; có nghĩa thì thêm vào bảng.
+Quét trang `00 · Chung` ngày 17/10 (5 trang màn khác chưa có icon) ra 34 icon ngoài bảng nghĩa, đã đưa vào thư viện (DEC-148).
+Ngày 27/10 (DEC-262) các icon này đã có nghĩa chuẩn ở mục 7, trừ hai icon đang lệch dưới đây.
 
 Lệch cần thống nhất ở vòng 6 (khi đổi instance sang bộ mới): màn dùng `funnel` cho lọc trong khi bảng nghĩa
 là `list-filter`; `pen-line` và `pencil` cùng dùng cho sửa.
@@ -185,6 +284,7 @@ là `list-filter`; `pen-line` và `pencil` cùng dùng cho sửa.
   Icon có bản tô thêm `Fill=Off · On`.
 - Component dùng icon mở thuộc tính đổi icon (Instance swap) và chọn Size; không resize tay, không sửa nét.
 - Icon trong chip trạng thái cần nét 2 trên khung 24 (mục 2): component Chip (vòng 4) đặt sẵn nét này cho icon bên trong, người vẽ không sửa.
+- Kho nguồn để chọn icon thêm: khung `Foundations / Icons / Resources` cạnh khung tài liệu trên trang `DS · Foundations` (node `6679:68629`, link ở mô tả đầu trang Foundations · Icons); chưa phân nhóm.
 - Thêm icon mới: `python3 _scripts/ds-v2-icons.py figma <tên>...` tải SVG Lucide 1.58.0 và in mã dựng 5 biến thể, chạy qua `use_figma` (file, trang, khung thư viện ghi trong script); icon tự vẽ lấy SVG ở `design/v2/icons/`.
 
 ## 10. Còn mở

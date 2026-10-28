@@ -1,0 +1,101 @@
+{
+  "color": {
+    "brand": {
+      "50": {
+        "$type": "color",
+        "$value": "#F5F5F5",
+        "$description": "Nền dòng bảng đang chọn",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#EBEBEB",
+        "$description": "Nền mục menu đang chọn, nền avatar",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#D9D9D9",
+        "$description": "Chưa có vai; ẩn khỏi bảng chọn biến"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#BFBFBF",
+        "$description": "Chưa có vai; ẩn khỏi bảng chọn biến"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#999999",
+        "$description": "Chưa có vai; ẩn khỏi bảng chọn biến"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#737373",
+        "$description": "Chưa có vai; ẩn khỏi bảng chọn biến"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#575757",
+        "$description": "Chưa có vai; ẩn khỏi bảng chọn biến"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#404040",
+        "$description": "Chữ liên kết, mã chứng từ",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#262626",
+        "$description": "Công tắc bật, ô chọn, radio và viền chỗ đang chọn, gạch tab đang chọn, thanh tiến độ",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#171717",
+        "$description": "Rê chuột trên phần mang màu khách",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL",
+            "STROKE_COLOR",
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#0A0A0A",
+        "$description": "Đang bấm phần mang màu khách",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL",
+            "STROKE_COLOR",
+            "TEXT_FILL"
+          ]
+        }
+      }
+    }
+  }
+}

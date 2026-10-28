@@ -35,3 +35,6 @@ docs/_shared/dashboard*.html
 .claude/state/dashboard-artifact*.html
 .claude/state/dashboard-audit/
 _workspace/proto-check/
+
+# Code Untitled UI tham chiếu (_scripts/ref-untitled.sh)
+design/_ref/untitled-ui/react/

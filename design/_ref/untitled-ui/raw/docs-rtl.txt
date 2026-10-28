@@ -1,0 +1,243 @@
+Copy
+
+RTL support
+
+Build right-to-left interfaces with Untitled UI React. Supports Arabic, Hebrew, Persian, and other RTL languages using CSS logical properties.
+
+Right-to-left support
+
+Untitled UI React supports right-to-left (RTL) layouts for languages like Arabic, Hebrew, and Persian. Our components use CSS logical properties that automatically adapt based on the document direction.
+
+Switch between English and Arabic to see how the layout mirrors automatically:
+
+Arabic
+English
+
+تم نشر المقال
+تم نشر هذا المقال بنجاح. سيتمكن أعضاء الفريق من تعديل هذا المقال وإعادة نشر التغييرات.
+
+مشاركة على إكس
+@yourcompany
+
+مشاركة على ميديوم
+yourcompany.medium.com
+
+مشاركة على فيسبوك
+@yourcompany
+
+إلغاءتأكيد
+
+Notice how the close button, toggle switches, button order, and text alignment all mirror correctly. This is handled by CSS logical properties — no JavaScript direction detection needed.
+
+How it works
+
+Traditional CSS properties like margin-left, padding-right, and left are physical — they always refer to the same side regardless of text direction. CSS logical properties like margin-inline-start, padding-inline-end, and inset-inline-start are directional — they adapt to the document's dir attribute.
+
+Tailwind CSS v4.3 provides logical property utilities:
+
+Physical (LTR only)	Logical (LTR + RTL)	CSS property
+ml-4	ms-4	margin-inline-start
+mr-4	me-4	margin-inline-end
+pl-4	ps-4	padding-inline-start
+pr-4	pe-4	padding-inline-end
+left-0	start-0	inset-inline-start
+right-0	end-0	inset-inline-end
+text-left	text-start	text-align: start
+text-right	text-end	text-align: end
+rounded-l-lg	rounded-s-lg	border-start-start-radius
+rounded-r-lg	rounded-e-lg	border-start-end-radius
+border-l	border-s	border-inline-start
+border-r	border-e	border-inline-end
+
+Symmetrical utilities like px-4, mx-4, p-4, and m-4 apply to both sides and work correctly in RTL without changes.
+
+Setting up RTL
+
+Set the dir attribute
+Add dir="rtl" to your <html> element or any container:
+
+```
+
+```
+
+For dynamic direction switching, use React state:
+
+```
+
+```
+
+Add I18nProvider for React Aria
+React Aria components (modals, popovers, tooltips) render in portals outside your DOM tree. They need I18nProvider to inherit the correct direction:
+
+```
+import { I18nProvider } from "react-aria-components";
+
+function App({ children }) {
+return (
+
+{children}
+
+);
+}
+```
+
+This ensures portal-based components render with the correct text direction and locale.
+
+Migrate classes with the CLI
+Use our CLI to automatically convert physical direction classes to logical properties across your project:
+npm
+yarn
+bun
+
+```
+npx untitledui@latest migrate --dry-run
+npx untitledui@latest migrate
+```
+
+The CLI transforms ml- to ms-, pr- to pe-, left- to start-, rounded-l- to rounded-s-, and more. Run with --dry-run first to preview changes.
+
+What the CLI migrates
+
+The migrate command handles these conversions:
+
+Direct replacements
+
+These render identically in LTR and automatically mirror in RTL:
+
+Category	Before	After
+Margin left	ml-*	ms-*
+Margin right	mr-*	me-*
+Padding left	pl-*	ps-*
+Padding right	pr-*	pe-*
+Position left	left-*	start-*
+Position right	right-*	end-*
+Border radius left	rounded-l-*	rounded-s-*
+Border radius right	rounded-r-*	rounded-e-*
+Border radius top-left	rounded-tl-*	rounded-ss-*
+Border radius top-right	rounded-tr-*	rounded-se-*
+Border radius bottom-left	rounded-bl-*	rounded-es-*
+Border radius bottom-right	rounded-br-*	rounded-ee-*
+Border left	border-l	border-s
+Border right	border-r	border-e
+Text align left	text-left	text-start
+Text align right	text-right	text-end
+Float left	float-left	float-start
+Float right	float-right	float-end
+Clear left	clear-left	clear-start
+Clear right	clear-right	clear-end
+Scroll margin left	scroll-ml-*	scroll-ms-*
+Scroll margin right	scroll-mr-*	scroll-me-*
+Scroll padding left	scroll-pl-*	scroll-ps-*
+Scroll padding right	scroll-pr-*	scroll-pe-*
+
+RTL variant additions
+
+These add an rtl: counterpart that only activates when dir="rtl" is set:
+
+Category	Before	After
+Slide in from right	slide-in-from-right	slide-in-from-right rtl:slide-in-from-left
+Slide in from left	slide-in-from-left	slide-in-from-left rtl:slide-in-from-right
+Slide out to right	slide-out-to-right	slide-out-to-right rtl:slide-out-to-left
+Slide out to left	slide-out-to-left	slide-out-to-left rtl:slide-out-to-right
+Translate X	translate-x-4	translate-x-4 rtl:-translate-x-4
+Negative translate X	-translate-x-4	-translate-x-4 rtl:translate-x-4
+Space X	space-x-4	space-x-4 rtl:space-x-reverse
+Divide X	divide-x	divide-x rtl:divide-x-reverse
+Gradient to right	bg-linear-to-r	bg-linear-to-r rtl:bg-linear-to-l
+Gradient to left	bg-linear-to-l	bg-linear-to-l rtl:bg-linear-to-r
+Legacy gradient to right	bg-gradient-to-r	bg-gradient-to-r rtl:bg-gradient-to-l
+Legacy gradient to left	bg-gradient-to-l	bg-gradient-to-l rtl:bg-gradient-to-r
+
+Safe by design: These changes don't affect LTR layouts. ms-4 renders identically to ml-4 in LTR mode — it only differs when dir="rtl" is set.
+
+Directional icons
+
+Icons like arrows and chevrons may need to flip in RTL when they represent navigation direction (e.g., "next" or "previous").
+
+If you're using @untitledui/icons, you can import RTL-aware icon variants that flip automatically based on the document direction:
+
+Physical icon	RTL-aware icon	Use case
+ArrowRight	ArrowNext	"Next" navigation, "forward" action
+ArrowLeft	ArrowPrevious	"Previous" navigation, "back" action
+ChevronRight	ChevronNext	Pagination next, submenu indicator
+ChevronLeft	ChevronPrevious	Pagination previous, breadcrumb separator
+ChevronRightDouble	ChevronNextDouble	Jump to last page
+ChevronLeftDouble	ChevronPreviousDouble	Jump to first page
+
+Setup
+
+These icons use a data-rtl-flip attribute to mark themselves as flippable. To activate the flip, add this one line to your globals.css:
+
+```
+[data-rtl-flip]:dir(rtl) { transform: scaleX(-1); }
+```
+
+The :dir(rtl) pseudo-class matches any element inside a dir="rtl" context. When the document is LTR, the selector doesn't match and the icon renders normally. When RTL, scaleX(-1) mirrors the icon horizontally. No JavaScript, no runtime cost.
+
+Usage
+
+```
+import { ArrowNext, ChevronPrevious } from "@untitledui/icons";
+
+// Flips automatically in RTL — no extra props or classes needed
+Next
+Previous
+```
+
+Using a different icon library
+
+If you're not using @untitledui/icons, you can flip icons manually with Tailwind's rtl: variant:
+
+```
+
+```
+
+When NOT to flip
+
+Not all directional icons should flip. Icons representing fixed concepts should keep their original direction — use the physical icon name for those:
+
+External links (ArrowUpRight) — always points up-right
+
+Play buttons — always points right
+
+Reply/forward — follows email convention, not text direction
+
+Download/upload — vertical, direction-independent
+
+Testing in Storybook
+
+Our Storybook setup includes an RTL toggle button in the toolbar. Clicking it:
+
+Sets dir="rtl" on the story canvas
+
+Switches React Aria's I18nProvider to Arabic locale
+
+All components mirror automatically
+
+This is configured in .storybook/wrapper.tsx using the storybook-addon-rtl package.
+
+FAQs
+Please refer to our frequently asked questions page for more.
+
+Do I need to change every ml- and pl- class?
+Only if you want RTL support. The logical equivalents (ms-, ps-) render identically in LTR mode, so migrating is safe and backwards-compatible. Run npx untitledui@latest migrate --dry-run to preview the changes before writing them.
+
+What about px-4 and mx-4?
+Symmetrical utilities like px-4, mx-4, p-4 and m-4 apply to both sides and work in RTL without changes. One-sided utilities need migrating: ml-/mr-, pl-/pr-, left-/right-, text-left/text-right, rounded-l-/rounded-r-, border-l/border-r and their scroll margin and padding variants.
+
+Will RTL migration break my LTR layout?
+No. A logical utility like ms-4 sets margin-inline-start, which is the left margin when the direction is LTR, so it renders exactly like ml-4. The difference only shows when dir="rtl" is set.
+
+How do I handle animations in RTL?
+Slide animations like slide-in-from-right need an rtl: counterpart (rtl:slide-in-from-left) because transforms have no logical equivalent. The migrate command adds these automatically, along with rtl: variants for translate-x, space-x, divide-x and horizontal gradients.
+
+Why do modals and popovers still render left-to-right?
+React Aria renders modals, popovers and tooltips in portals outside your DOM tree, so they don't inherit dir from your container. Wrap your app in <I18nProvider locale="ar"> from react-aria-components (or your RTL locale) so they render in the correct direction.
+
+How do I flip arrow and chevron icons in RTL?
+Use the RTL-aware icons from @untitledui/icons, such as ArrowNext, ArrowPrevious, ChevronNext and ChevronPrevious, and add [data-rtl-flip]:dir(rtl) { transform: scaleX(-1); } to your globals.css. For other icon libraries, add the rtl:-scale-x-100 class to the icon.
+
+Can I use RTL for just part of my page?
+Yes. Add dir="rtl" to any container element, and the logical utilities inside it follow that direction. Wrap the same section in <I18nProvider> so React Aria components rendered from it use the RTL locale too.
+
+CLIUpgrade to v8.0

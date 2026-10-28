@@ -1,0 +1,10 @@
+khớp 140 ô; lệch 8; S1 có mà S2 không: []
+text-white	Light	S1=text-white	S2=white
+text-white	Dark	S1=text-white	S2=white
+text-placeholder	Dark	S1=neutral-400	S2=neutral.500
+fg-quaternary	Dark	S1=neutral-500	S2=neutral.600
+fg-quaternary_hover	Dark	S1=neutral-400	S2=neutral.500
+bg-primary-solid	Dark	S1=neutral-800	S2=bg.secondary (→neutral-900)
+bg-brand-primary_alt	Dark	S1=neutral-800	S2=bg.secondary (→neutral-900)
+bg-brand-section	Dark	S1=neutral-800	S2=bg.secondary (→neutral-900)
+S2 có mà S1 không: ['fg-brand-secondary_hover', 'text-editor-icon-fg', 'text-editor-icon-fg_active', 'text-error-primary_hover']

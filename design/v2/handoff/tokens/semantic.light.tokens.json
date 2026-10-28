@@ -1,0 +1,1092 @@
+{
+  "color": {
+    "bg": {
+      "canvas": {
+        "$type": "color",
+        "$value": "{white}",
+        "$description": "Không dùng nữa (DEC-258): nền trang trắng như bg/surface; giữ token để không gãy tham chiếu cũ.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "systemGroupedBackground",
+            "m3": "surface-container-low",
+            "atlassian": "elevation.surface.sunken"
+          }
+        }
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "{white}",
+        "$description": "Nền trang và nền mọi thẻ, bảng, sheet. Dùng ở: Card, Record Card, Summary Card, List Item.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "secondarySystemGroupedBackground",
+            "m3": "surface-container-lowest",
+            "atlassian": "elevation.surface"
+          }
+        }
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{neutral.100}",
+        "$description": "Nền khối phụ trong thẻ, ô nhập app. Dùng ở: khối tóm tắt trong Card, Text Field (app), OTP Field.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "tertiarySystemFill",
+            "m3": "surface-container-highest",
+            "atlassian": "color.background.input"
+          }
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{neutral.50}",
+        "$description": "Nền khi rê chuột lên thứ nền trắng. Dùng ở: dòng bảng, mục menu, List Item (web).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "— (iOS không có hover)",
+            "m3": "lớp trạng thái on-surface 8%",
+            "atlassian": "color.background.neutral.subtle.hovered"
+          }
+        }
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "{neutral.100}",
+        "$description": "Nền mục đang chọn khi khách không có màu riêng. Dùng ở: List Item đang chọn, mục menu đang chọn.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "systemFill",
+            "m3": "secondary-container",
+            "atlassian": "color.background.selected"
+          }
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{neutral.900}",
+        "$description": "Nền tối tương phản cao. Dùng ở: Tooltip, toast trung tính.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "—",
+            "m3": "inverse-surface",
+            "atlassian": "color.background.inverse.subtle"
+          }
+        }
+      }
+    },
+    "text": {
+      "primary": {
+        "$type": "color",
+        "$value": "{neutral.900}",
+        "$description": "Tiêu đề, giá trị chính. Dùng ở: tiêu đề Card, giá trị trong Record Card, chữ Text Field đã nhập.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "label",
+            "m3": "on-surface",
+            "atlassian": "color.text"
+          }
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{neutral.500}",
+        "$description": "Chữ phụ: nhãn trường (web = app), mô tả, thời gian. Dùng ở: nhãn Text Field, nhãn dòng Record Card, Status Row.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "secondaryLabel",
+            "m3": "on-surface-variant",
+            "atlassian": "color.text.subtle"
+          }
+        }
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{neutral.400}",
+        "$description": "Chữ gợi ý trong ô và chữ tắt; không dùng cho nội dung (2,58:1). Dùng ở: placeholder Text Field, nút Disabled.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "tertiaryLabel · placeholderText",
+            "m3": "on-surface 38% (tắt)",
+            "atlassian": "color.text.subtlest"
+          }
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{white}",
+        "$description": "Chữ trên nền đậm. Dùng ở: chữ nút Primary, chữ Tooltip.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "—",
+            "m3": "inverse-on-surface · on-primary",
+            "atlassian": "color.text.inverse"
+          }
+        }
+      }
+    },
+    "icon": {
+      "primary": {
+        "$type": "color",
+        "$value": "{neutral.700}",
+        "$description": "Icon đi cùng chữ chính. Dùng ở: icon dòng Record Card, icon List Item.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ],
+          "invlogis.refs": {
+            "hig": "label",
+            "m3": "on-surface",
+            "atlassian": "color.icon"
+          }
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{neutral.500}",
+        "$description": "Icon phụ: chevron, icon trong ô. Dùng ở: icon Text Field, chevron List Item.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ],
+          "invlogis.refs": {
+            "hig": "secondaryLabel",
+            "m3": "on-surface-variant",
+            "atlassian": "color.icon.subtle"
+          }
+        }
+      }
+    },
+    "border": {
+      "default": {
+        "$type": "color",
+        "$value": "{neutral.200}",
+        "$description": "Viền dùng nhiều nhất: viền thẻ, kẻ bảng, vạch chia. Dùng ở: Card, Record Card, List Item (vạch chia).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ],
+          "invlogis.refs": {
+            "hig": "separator",
+            "m3": "outline-variant",
+            "atlassian": "color.border"
+          }
+        }
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{neutral.300}",
+        "$description": "Viền tách khối đậm hơn mặc định. Dùng ở: viền nút Secondary, chip viền.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ],
+          "invlogis.refs": {
+            "hig": "opaqueSeparator",
+            "m3": "outline",
+            "atlassian": "color.border.bold"
+          }
+        }
+      },
+      "input": {
+        "$type": "color",
+        "$value": "{neutral.500}",
+        "$description": "Viền tương phản cao (≥ 3:1) cho thứ người dùng nhập hoặc chọn. Dùng ở: Text Field, OTP Field, radio Selectable Card.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ],
+          "invlogis.refs": {
+            "hig": "separator (đậm)",
+            "m3": "outline",
+            "atlassian": "color.border.input"
+          }
+        }
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{charcoal.900}",
+        "$description": "Vòng focus 2px và viền ô đang gõ; than chì cho mọi khách (DEC-170). Dùng ở: .focus / Ring, Text Field đang gõ.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ],
+          "invlogis.refs": {
+            "hig": "tint (vòng focus bàn phím)",
+            "m3": "secondary (vòng focus)",
+            "atlassian": "color.border.focused"
+          }
+        }
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "{red.700}",
+        "$description": "Viền lỗi. Dùng ở: Text Field lỗi, OTP Field lỗi.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ],
+          "invlogis.refs": {
+            "hig": "systemRed",
+            "m3": "error",
+            "atlassian": "color.border.danger"
+          }
+        }
+      }
+    },
+    "action": {
+      "primary": {
+        "$type": "color",
+        "$value": "{charcoal.900}",
+        "$description": "Nền hành động chính. Dùng ở: nút Primary, tab chip đang chọn.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "tintColor · accentColor",
+            "m3": "primary",
+            "atlassian": "color.background.brand.bold"
+          }
+        }
+      },
+      "primary-hover": {
+        "$type": "color",
+        "$value": "{charcoal.800}",
+        "$description": "Nền nút Primary khi rê chuột.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "—",
+            "m3": "primary + lớp on-primary 8%",
+            "atlassian": "color.background.brand.bold.hovered"
+          }
+        }
+      },
+      "primary-pressed": {
+        "$type": "color",
+        "$value": "{charcoal.950}",
+        "$description": "Nền nút Primary khi bấm.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "— (hệ thống tự làm tối)",
+            "m3": "primary + lớp on-primary 10%",
+            "atlassian": "color.background.brand.bold.pressed"
+          }
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{neutral.100}",
+        "$description": "Nền hành động phụ và nền xám của trạng thái tắt. Dùng ở: nút Secondary, nút Disabled.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "secondarySystemFill",
+            "m3": "secondary-container",
+            "atlassian": "color.background.neutral"
+          }
+        }
+      },
+      "secondary-hover": {
+        "$type": "color",
+        "$value": "{neutral.200}",
+        "$description": "Nền nút Secondary khi rê chuột.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "—",
+            "m3": "secondary-container + lớp 8%",
+            "atlassian": "color.background.neutral.hovered"
+          }
+        }
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "{red.700}",
+        "$description": "Chữ, icon hành động phá huỷ. Dùng ở: nút Danger (xoá, huỷ lệnh).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL",
+            "TEXT_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "systemRed",
+            "m3": "error",
+            "atlassian": "color.text.danger"
+          }
+        }
+      },
+      "danger-subtle": {
+        "$type": "color",
+        "$value": "{red.50}",
+        "$description": "Nền nhạt của nút Danger.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "systemRed (nhạt)",
+            "m3": "error-container",
+            "atlassian": "color.background.danger"
+          }
+        }
+      }
+    },
+    "status": {
+      "success-text": {
+        "$type": "color",
+        "$value": "{green.700}",
+        "$description": "Thành công · Chữ trạng thái: chữ dưới ô, chữ trong banner.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "success-icon": {
+        "$type": "color",
+        "$value": "{green.600}",
+        "$description": "Thành công · Icon trạng thái.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "success-bg": {
+        "$type": "color",
+        "$value": "{green.50}",
+        "$description": "Thành công · Nền nhạt: banner, thanh thông báo.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "success-bg-strong": {
+        "$type": "color",
+        "$value": "{green.100}",
+        "$description": "Thành công · Nền vòng Featured icon.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "success-solid": {
+        "$type": "color",
+        "$value": "{green.700}",
+        "$description": "Thành công · Nền đặc chữ trắng: toast, huy hiệu đếm.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "success-solid-hover": {
+        "$type": "color",
+        "$value": "{green.800}",
+        "$description": "Thành công · Nền đặc khi rê chuột.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "success-border": {
+        "$type": "color",
+        "$value": "{green.700}",
+        "$description": "Thành công · Viền trạng thái.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "success-border-subtle": {
+        "$type": "color",
+        "$value": "{green.300}",
+        "$description": "Thành công · Viền nhạt quanh banner.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "warning-text": {
+        "$type": "color",
+        "$value": "{yellow.700}",
+        "$description": "Cảnh báo · Chữ trạng thái: chữ dưới ô, chữ trong banner.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "warning-icon": {
+        "$type": "color",
+        "$value": "{yellow.600}",
+        "$description": "Cảnh báo · Icon trạng thái.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "warning-bg": {
+        "$type": "color",
+        "$value": "{yellow.50}",
+        "$description": "Cảnh báo · Nền nhạt: banner, thanh thông báo.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "warning-bg-strong": {
+        "$type": "color",
+        "$value": "{yellow.100}",
+        "$description": "Cảnh báo · Nền vòng Featured icon.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "warning-solid": {
+        "$type": "color",
+        "$value": "{yellow.700}",
+        "$description": "Cảnh báo · Nền đặc chữ trắng: toast, huy hiệu đếm.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "warning-solid-hover": {
+        "$type": "color",
+        "$value": "{yellow.800}",
+        "$description": "Cảnh báo · Nền đặc khi rê chuột.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "warning-border": {
+        "$type": "color",
+        "$value": "{yellow.700}",
+        "$description": "Cảnh báo · Viền trạng thái.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "warning-border-subtle": {
+        "$type": "color",
+        "$value": "{yellow.300}",
+        "$description": "Cảnh báo · Viền nhạt quanh banner.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "danger-text": {
+        "$type": "color",
+        "$value": "{red.700}",
+        "$description": "Lỗi · Chữ trạng thái: chữ dưới ô, chữ trong banner.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "danger-icon": {
+        "$type": "color",
+        "$value": "{red.600}",
+        "$description": "Lỗi · Icon trạng thái.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "danger-bg": {
+        "$type": "color",
+        "$value": "{red.50}",
+        "$description": "Lỗi · Nền nhạt: banner, thanh thông báo.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "danger-bg-strong": {
+        "$type": "color",
+        "$value": "{red.100}",
+        "$description": "Lỗi · Nền vòng Featured icon.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "danger-solid": {
+        "$type": "color",
+        "$value": "{red.700}",
+        "$description": "Lỗi · Nền đặc chữ trắng: toast, huy hiệu đếm.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "danger-solid-hover": {
+        "$type": "color",
+        "$value": "{red.800}",
+        "$description": "Lỗi · Nền đặc khi rê chuột.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "danger-border": {
+        "$type": "color",
+        "$value": "{red.700}",
+        "$description": "Lỗi · Viền trạng thái.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "danger-border-subtle": {
+        "$type": "color",
+        "$value": "{red.300}",
+        "$description": "Lỗi · Viền nhạt quanh banner.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "info-text": {
+        "$type": "color",
+        "$value": "{blue.700}",
+        "$description": "Thông tin · Chữ trạng thái: chữ dưới ô, chữ trong banner.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "info-icon": {
+        "$type": "color",
+        "$value": "{blue.600}",
+        "$description": "Thông tin · Icon trạng thái.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "info-bg": {
+        "$type": "color",
+        "$value": "{blue.50}",
+        "$description": "Thông tin · Nền nhạt: banner, thanh thông báo.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "info-bg-strong": {
+        "$type": "color",
+        "$value": "{blue.100}",
+        "$description": "Thông tin · Nền vòng Featured icon.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "info-solid": {
+        "$type": "color",
+        "$value": "{blue.700}",
+        "$description": "Thông tin · Nền đặc chữ trắng: toast, huy hiệu đếm.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "info-solid-hover": {
+        "$type": "color",
+        "$value": "{blue.800}",
+        "$description": "Thông tin · Nền đặc khi rê chuột.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "info-border": {
+        "$type": "color",
+        "$value": "{blue.700}",
+        "$description": "Thông tin · Viền trạng thái.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "info-border-subtle": {
+        "$type": "color",
+        "$value": "{blue.300}",
+        "$description": "Thông tin · Viền nhạt quanh banner.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      }
+    },
+    "chip": {
+      "gray": {
+        "bg": {
+          "$type": "color",
+          "$value": "{neutral.100}",
+          "$description": "Chip trạng thái gray: nền. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "invlogis.refs": {
+              "hig": "systemGray",
+              "m3": "— (dùng tertiary hoặc tự thêm)",
+              "atlassian": "color.background.accent.gray.subtler"
+            }
+          }
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{neutral.600}",
+          "$description": "Chip trạng thái gray: chữ, icon. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "invlogis.refs": {
+              "hig": "systemGray",
+              "m3": "—",
+              "atlassian": "color.text.accent.gray"
+            }
+          }
+        }
+      },
+      "blue": {
+        "bg": {
+          "$type": "color",
+          "$value": "{blue.50}",
+          "$description": "Chip trạng thái blue: nền. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "invlogis.refs": {
+              "hig": "systemBlue",
+              "m3": "— (dùng tertiary hoặc tự thêm)",
+              "atlassian": "color.background.accent.blue.subtler"
+            }
+          }
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{blue.700}",
+          "$description": "Chip trạng thái blue: chữ, icon. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "invlogis.refs": {
+              "hig": "systemBlue",
+              "m3": "—",
+              "atlassian": "color.text.accent.blue"
+            }
+          }
+        }
+      },
+      "teal": {
+        "bg": {
+          "$type": "color",
+          "$value": "{teal.50}",
+          "$description": "Chip trạng thái teal: nền. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "invlogis.refs": {
+              "hig": "systemTeal",
+              "m3": "— (dùng tertiary hoặc tự thêm)",
+              "atlassian": "color.background.accent.teal.subtler"
+            }
+          }
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{teal.700}",
+          "$description": "Chip trạng thái teal: chữ, icon. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "invlogis.refs": {
+              "hig": "systemTeal",
+              "m3": "—",
+              "atlassian": "color.text.accent.teal"
+            }
+          }
+        }
+      },
+      "purple": {
+        "bg": {
+          "$type": "color",
+          "$value": "{purple.50}",
+          "$description": "Chip trạng thái purple: nền. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "invlogis.refs": {
+              "hig": "systemPurple",
+              "m3": "— (dùng tertiary hoặc tự thêm)",
+              "atlassian": "color.background.accent.purple.subtler"
+            }
+          }
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{purple.700}",
+          "$description": "Chip trạng thái purple: chữ, icon. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "invlogis.refs": {
+              "hig": "systemPurple",
+              "m3": "—",
+              "atlassian": "color.text.accent.purple"
+            }
+          }
+        }
+      },
+      "yellow": {
+        "bg": {
+          "$type": "color",
+          "$value": "{yellow.50}",
+          "$description": "Chip trạng thái yellow: nền. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "invlogis.refs": {
+              "hig": "systemYellow",
+              "m3": "— (dùng tertiary hoặc tự thêm)",
+              "atlassian": "color.background.accent.yellow.subtler"
+            }
+          }
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{yellow.700}",
+          "$description": "Chip trạng thái yellow: chữ, icon. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "invlogis.refs": {
+              "hig": "systemYellow",
+              "m3": "—",
+              "atlassian": "color.text.accent.yellow"
+            }
+          }
+        }
+      },
+      "green": {
+        "bg": {
+          "$type": "color",
+          "$value": "{green.50}",
+          "$description": "Chip trạng thái green: nền. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "invlogis.refs": {
+              "hig": "systemGreen",
+              "m3": "— (dùng tertiary hoặc tự thêm)",
+              "atlassian": "color.background.accent.green.subtler"
+            }
+          }
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{green.700}",
+          "$description": "Chip trạng thái green: chữ, icon. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "invlogis.refs": {
+              "hig": "systemGreen",
+              "m3": "—",
+              "atlassian": "color.text.accent.green"
+            }
+          }
+        }
+      },
+      "red": {
+        "bg": {
+          "$type": "color",
+          "$value": "{red.50}",
+          "$description": "Chip trạng thái red: nền. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "invlogis.refs": {
+              "hig": "systemRed",
+              "m3": "— (dùng tertiary hoặc tự thêm)",
+              "atlassian": "color.background.accent.red.subtler"
+            }
+          }
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{red.700}",
+          "$description": "Chip trạng thái red: chữ, icon. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "invlogis.refs": {
+              "hig": "systemRed",
+              "m3": "—",
+              "atlassian": "color.text.accent.red"
+            }
+          }
+        }
+      },
+      "orange": {
+        "bg": {
+          "$type": "color",
+          "$value": "{orange.50}",
+          "$description": "Chip trạng thái orange: nền. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ],
+            "invlogis.refs": {
+              "hig": "systemOrange",
+              "m3": "— (dùng tertiary hoặc tự thêm)",
+              "atlassian": "color.background.accent.orange.subtler"
+            }
+          }
+        },
+        "fg": {
+          "$type": "color",
+          "$value": "{orange.700}",
+          "$description": "Chip trạng thái orange: chữ, icon. Dùng ở: Status Chip, Status Row.",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ],
+            "invlogis.refs": {
+              "hig": "systemOrange",
+              "m3": "—",
+              "atlassian": "color.text.accent.orange"
+            }
+          }
+        }
+      }
+    },
+    "overlay": {
+      "scrim": {
+        "$type": "color",
+        "$value": "{alpha.neutral-950-50}",
+        "$description": "Lớp phủ sau dialog, sheet.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "invlogis.refs": {
+            "hig": "— (hệ thống tự làm mờ)",
+            "m3": "scrim",
+            "atlassian": "color.blanket"
+          }
+        }
+      }
+    },
+    "shadow": {
+      "sm": {
+        "$type": "color",
+        "$value": "{alpha.shadow-6}",
+        "$description": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/1.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "md": {
+        "$type": "color",
+        "$value": "{alpha.shadow-10}",
+        "$description": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/2 lớp 1, elev/3 lớp 2.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "md-soft": {
+        "$type": "color",
+        "$value": "{alpha.shadow-6}",
+        "$description": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/2 lớp 2.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "lg": {
+        "$type": "color",
+        "$value": "{alpha.shadow-16}",
+        "$description": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/3 lớp 1.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      }
+    },
+    "focus": {
+      "gap": {
+        "$type": "color",
+        "$value": "{white}",
+        "$description": "Khe 2px giữa control và vòng focus, trùng nền trang (DEC-258, thay collection Context). Dùng ở: .focus / Ring, ruột nút Ghost, Outline.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL",
+            "EFFECT_COLOR"
+          ]
+        }
+      }
+    }
+  }
+}

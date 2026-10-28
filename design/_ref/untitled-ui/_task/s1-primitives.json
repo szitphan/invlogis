@@ -1,0 +1,1858 @@
+{
+ "Base": {
+  "White": {
+   "hex": "#FFFFFF",
+   "wcag": "AAA 21.00",
+   "pct": false,
+   "default": false
+  },
+  "Black": {
+   "hex": "#000000",
+   "wcag": "AAA 21.00",
+   "pct": false,
+   "default": false
+  },
+  "Transparent": {
+   "hex": "#FFFFFF",
+   "wcag": "",
+   "pct": true,
+   "default": false
+  }
+ },
+ "Brand": {
+  "50": {
+   "hex": "#F9F5FF",
+   "wcag": "AA 6.15",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#F4EBFF",
+   "wcag": "AA 5.72",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#E9D7FE",
+   "wcag": "AA 4.92",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#D6BBFB",
+   "wcag": "3.89",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#B692F6",
+   "wcag": "2.49",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#9E77ED",
+   "wcag": "3.32",
+   "pct": false,
+   "default": false
+  },
+  "600": {
+   "hex": "#7F56D9",
+   "wcag": "AA 4.95",
+   "pct": false,
+   "default": true
+  },
+  "700": {
+   "hex": "#6941C6",
+   "wcag": "AA 6.61",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#53389E",
+   "wcag": "AAA 8.65",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#42307D",
+   "wcag": "AAA 10.76",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#2C1C5F",
+   "wcag": "AAA 14.59",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Red": {
+  "50": {
+   "hex": "#FEF2F2",
+   "wcag": "AA 5.91",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#FEE2E2",
+   "wcag": "AA 5.29",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#FECACA",
+   "wcag": "4.47",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#FCA5A5",
+   "wcag": "3.40",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#F87171",
+   "wcag": "2.76",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#EF4444",
+   "wcag": "3.76",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#DC2626",
+   "wcag": "AA 4.82",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#B91C1C",
+   "wcag": "AA 6.47",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#991B1B",
+   "wcag": "AAA 8.31",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#7F1D1D",
+   "wcag": "AAA 10.01",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#450A0A",
+   "wcag": "AAA 16.14",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Orange": {
+  "50": {
+   "hex": "#FFF7ED",
+   "wcag": "AA 4.87",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#FFEDD5",
+   "wcag": "AA 4.51",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#FED7AA",
+   "wcag": "3.82",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#FDBA74",
+   "wcag": "3.07",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#FB923C",
+   "wcag": "2.26",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#F97316",
+   "wcag": "2.80",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#EA580C",
+   "wcag": "3.55",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#C2410C",
+   "wcag": "AA 5.17",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#9A3412",
+   "wcag": "AAA 7.30",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#7C2D12",
+   "wcag": "AAA 9.37",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#431407",
+   "wcag": "AAA 15.65",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Amber": {
+  "50": {
+   "hex": "#FFFBEB",
+   "wcag": "AA 4.84",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#FEF3C7",
+   "wcag": "AA 4.50",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#FDE68A",
+   "wcag": "4.03",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#FCD34D",
+   "wcag": "3.48",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#FBBF24",
+   "wcag": "1.66",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#F59E0B",
+   "wcag": "2.14",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#D97706",
+   "wcag": "3.18",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#B45309",
+   "wcag": "AA 5.02",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#92400E",
+   "wcag": "AAA 7.09",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#78350F",
+   "wcag": "AAA 9.07",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#451A03",
+   "wcag": "AAA 14.97",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Yellow": {
+  "50": {
+   "hex": "#FEFCE8",
+   "wcag": "AA 4.75",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#FEF9C3",
+   "wcag": "AA 4.58",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#FEF08A",
+   "wcag": "4.23",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#FDE047",
+   "wcag": "3.73",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#FACC15",
+   "wcag": "1.53",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#EAB308",
+   "wcag": "1.91",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#CA8A04",
+   "wcag": "2.93",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#A16207",
+   "wcag": "AA 4.92",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#854D0E",
+   "wcag": "AA 6.85",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#713F12",
+   "wcag": "AAA 8.67",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#422006",
+   "wcag": "AAA 14.57",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Lime": {
+  "50": {
+   "hex": "#F7FEE7",
+   "wcag": "AAA 4.82?—ghi \"AAA 4.82\"",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#ECFCCB",
+   "wcag": "AA 4.60",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#D9F99D",
+   "wcag": "4.27",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#BEF264",
+   "wcag": "3.82",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#A3E635",
+   "wcag": "1.50",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#84CC16",
+   "wcag": "1.97",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#65A30D",
+   "wcag": "3.08",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#4D7C0F",
+   "wcag": "AA 4.99",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#3F6212",
+   "wcag": "AAA 7.07",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#365314",
+   "wcag": "AAA 8.73",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#1A2E05",
+   "wcag": "AAA 14.61",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Green": {
+  "50": {
+   "hex": "#F0FDF4",
+   "wcag": "AA 4.79",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#DCFCE7",
+   "wcag": "AA 4.56",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#BBF7D0",
+   "wcag": "3.78",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#86EFAC",
+   "wcag": "3.57",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#4ADE80",
+   "wcag": "1.74",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#22C55E",
+   "wcag": "2.27",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#16A34A",
+   "wcag": "3.29",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#15803D",
+   "wcag": "AA 5.01",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#166534",
+   "wcag": "AAA 7.13",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#14532D",
+   "wcag": "AAA 9.11",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#052E16",
+   "wcag": "AAA 14.90",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Emerald": {
+  "50": {
+   "hex": "#ECFDF5",
+   "wcag": "AA 5.20",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#D1FAE5",
+   "wcag": "AA 4.83",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#A7F3D0",
+   "wcag": "4.27",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#6EE7B7",
+   "wcag": "3.59",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#34D399",
+   "wcag": "1.92",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#10B981",
+   "wcag": "2.53",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#059669",
+   "wcag": "3.76",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#047857",
+   "wcag": "AA 5.48",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#065F46",
+   "wcag": "AAA 7.68",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#064E3B",
+   "wcag": "AAA 9.71",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#022C22",
+   "wcag": "AAA 15.15",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Teal": {
+  "50": {
+   "hex": "#F0FDFA",
+   "wcag": "AA 5.24",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#CCFBF1",
+   "wcag": "AA 4.85",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#99F6E4",
+   "wcag": "4.34",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#5EEAD4",
+   "wcag": "3.69",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#2DD4BF",
+   "wcag": "1.86",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#14B8A6",
+   "wcag": "2.48",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#0D9488",
+   "wcag": "3.74",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#0F766E",
+   "wcag": "AA 5.47",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#115E59",
+   "wcag": "AAA 7.58",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#134E4A",
+   "wcag": "AAA 9.47",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#042F2E",
+   "wcag": "AAA 14.47",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Cyan": {
+  "50": {
+   "hex": "#ECFEFF",
+   "wcag": "AA 5.15",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#CFFAFE",
+   "wcag": "AA 4.78",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#A5F3FC",
+   "wcag": "4.29",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#67E8F9",
+   "wcag": "3.69",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#22D3EE",
+   "wcag": "1.80",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#06B6D4",
+   "wcag": "2.42",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#0891B2",
+   "wcag": "3.68",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#0E7490",
+   "wcag": "AA 5.35",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#155E75",
+   "wcag": "AAA 7.26",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#164E63",
+   "wcag": "AAA 9.11",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#083344",
+   "wcag": "AAA 13.39",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Sky": {
+  "50": {
+   "hex": "#F0F9FF",
+   "wcag": "AA 5.56",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#E0F2FE",
+   "wcag": "AA 5.17",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#BAE6FD",
+   "wcag": "4.47",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#7DD3FC",
+   "wcag": "3.55",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#38BDF8",
+   "wcag": "2.14",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#0EA5E9",
+   "wcag": "2.77",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#0284C7",
+   "wcag": "4.09",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#0369A1",
+   "wcag": "AA 5.93",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#075985",
+   "wcag": "AAA 7.56",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#0C4A6E",
+   "wcag": "AAA 9.45",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#082F49",
+   "wcag": "AAA 13.87",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Blue": {
+  "50": {
+   "hex": "#EFF6FF",
+   "wcag": "AA 6.15",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#DBEAFE",
+   "wcag": "AA 5.49",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#BFDBFE",
+   "wcag": "AA 4.71",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#93C5FD",
+   "wcag": "3.71",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#60A5FA",
+   "wcag": "2.54",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#3B82F6",
+   "wcag": "3.67",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#2563EB",
+   "wcag": "AA 5.16",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#1D4ED8",
+   "wcag": "AA 6.70",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#1E40AF",
+   "wcag": "AAA 8.72",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#1E3A8A",
+   "wcag": "AAA 10.35",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#172554",
+   "wcag": "AAA 14.69",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Indigo": {
+  "50": {
+   "hex": "#EEF2FF",
+   "wcag": "AA 7.06",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#E0E7FF",
+   "wcag": "AA 6.41",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#C7D2FE",
+   "wcag": "AA 5.29",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#A5B4FC",
+   "wcag": "3.96",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#818CF8",
+   "wcag": "2.98",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#6366F1",
+   "wcag": "4.46",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#4F46E5",
+   "wcag": "AA 6.28",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#4338CA",
+   "wcag": "AAA 7.90",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#3730A3",
+   "wcag": "AAA 9.93",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#312E81",
+   "wcag": "AAA 11.42",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#1E1B4B",
+   "wcag": "AAA 15.98",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Violet": {
+  "50": {
+   "hex": "#F5F3FF",
+   "wcag": "AA 6.47",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#EDE9FE",
+   "wcag": "AA 5.98",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#DDD6FE",
+   "wcag": "AA 5.11",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#C4B5FD",
+   "wcag": "3.84",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#A78BFA",
+   "wcag": "2.72",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#8B5CF6",
+   "wcag": "4.23",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#7C3AED",
+   "wcag": "AA 5.69",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#6D28D9",
+   "wcag": "AAA 7.10",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#5B21B6",
+   "wcag": "AAA 8.98",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#4C1D95",
+   "wcag": "AAA 10.95",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#2E1065",
+   "wcag": "AAA 15.23",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Purple": {
+  "50": {
+   "hex": "#FAF5FF",
+   "wcag": "AA 6.50",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#F3E8FF",
+   "wcag": "AA 5.91",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#E9D5FF",
+   "wcag": "AA 5.12",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#D8B4FE",
+   "wcag": "3.95",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#C084FC",
+   "wcag": "2.64",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#A855F7",
+   "wcag": "3.95",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#9333EA",
+   "wcag": "AA 5.38",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#7E22CE",
+   "wcag": "AA 6.98",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#6B21A8",
+   "wcag": "AAA 8.72",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#581C87",
+   "wcag": "AAA 10.87",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#3B0764",
+   "wcag": "AAA 14.99",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Fuchsia": {
+  "50": {
+   "hex": "#FDF4FF",
+   "wcag": "AA 5.88",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#FAE8FF",
+   "wcag": "AA 5.43",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#F5D0FE",
+   "wcag": "AA 4.61",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#F0ABFC",
+   "wcag": "3.59",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#E879F9",
+   "wcag": "2.46",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#D946EF",
+   "wcag": "3.45",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#C026D3",
+   "wcag": "AA 4.70",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#A21CAF",
+   "wcag": "AA 6.32",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#86198F",
+   "wcag": "AAA 8.23",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#701A75",
+   "wcag": "AAA 10.03",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#4A044E",
+   "wcag": "AAA 14.80",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Pink": {
+  "50": {
+   "hex": "#FDF2F8",
+   "wcag": "AA 5.52",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#FCE7F3",
+   "wcag": "AA 5.12",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#FBCFE8",
+   "wcag": "4.36",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#F9A8D4",
+   "wcag": "3.32",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#F472B6",
+   "wcag": "2.64",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#EC4899",
+   "wcag": "3.52",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#DB2777",
+   "wcag": "AA 4.59",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#BE185D",
+   "wcag": "AA 6.03",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#9D174D",
+   "wcag": "AAA 7.88",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#831843",
+   "wcag": "AAA 9.64",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#500724",
+   "wcag": "AAA 15.03",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Rose": {
+  "50": {
+   "hex": "#FFF1F2",
+   "wcag": "AA 5.72",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#FFE4E6",
+   "wcag": "AA 5.23",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#FECDD3",
+   "wcag": "4.45",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#FDA4AF",
+   "wcag": "3.32",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#FB7185",
+   "wcag": "2.69",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#F43F5E",
+   "wcag": "3.67",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#E11D48",
+   "wcag": "AA 4.69",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#BE123C",
+   "wcag": "AA 6.28",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#9F1239",
+   "wcag": "AAA 8.01",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#881337",
+   "wcag": "AAA 9.56",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#4C0519",
+   "wcag": "AAA 15.63",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Slate": {
+  "50": {
+   "hex": "#F8FAFC",
+   "wcag": "AAA 7.24",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#F1F5F9",
+   "wcag": "AA 6.91",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#E2E8F0",
+   "wcag": "AA 6.14",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#CBD5E1",
+   "wcag": "AA 5.10",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#94A3B8",
+   "wcag": "2.56",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#64748B",
+   "wcag": "AA 4.75",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#475569",
+   "wcag": "AAA 7.57",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#334155",
+   "wcag": "AAA 10.35",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#1E293B",
+   "wcag": "AAA 14.62",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#0F172A",
+   "wcag": "AAA 17.85",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#020617",
+   "wcag": "AAA 20.17",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Gray": {
+  "50": {
+   "hex": "#F9FAFB",
+   "wcag": "AAA 7.23",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#F3F4F6",
+   "wcag": "AA 6.86",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#E5E7EB",
+   "wcag": "AA 6.10",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#D1D5DB",
+   "wcag": "AA 5.12",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#9CA3AF",
+   "wcag": "2.53",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#6B7280",
+   "wcag": "AA 4.83",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#4B5563",
+   "wcag": "AAA 7.55",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#374151",
+   "wcag": "AAA 10.30",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#1F2937",
+   "wcag": "AAA 14.67",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#111827",
+   "wcag": "AAA 17.73",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#030712",
+   "wcag": "AAA 20.13",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Zinc": {
+  "50": {
+   "hex": "#FAFAFA",
+   "wcag": "AAA 7.40",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#F4F4F5",
+   "wcag": "AAA 7.03",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#E4E4E7",
+   "wcag": "AA 6.09",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#D4D4D8",
+   "wcag": "AA 5.22",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#A1A1AA",
+   "wcag": "2.56",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#71717A",
+   "wcag": "AA 4.83",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#52525B",
+   "wcag": "AAA 7.72",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#3F3F46",
+   "wcag": "AAA 10.44",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#27272A",
+   "wcag": "AAA 14.89",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#18181B",
+   "wcag": "AAA 17.71",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#09090B",
+   "wcag": "AAA 19.89",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Neutral": {
+  "50": {
+   "hex": "#FAFAFA",
+   "wcag": "AAA 7.48",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#F5F5F5",
+   "wcag": "AAA 7.16",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#E5E5E5",
+   "wcag": "AA 6.20",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#D4D4D4",
+   "wcag": "AA 5.27",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#A3A3A3",
+   "wcag": "2.52",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#737373",
+   "wcag": "AA 4.74",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#525252",
+   "wcag": "AAA 7.81",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#404040",
+   "wcag": "AAA 10.36",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#262626",
+   "wcag": "AAA 15.13",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#171717",
+   "wcag": "AAA 17.92",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#0A0A0A",
+   "wcag": "AAA 19.79",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Stone": {
+  "50": {
+   "hex": "#FAFAF9",
+   "wcag": "AAA 7.30",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#F5F5F4",
+   "wcag": "AA 6.99",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#E7E5E4",
+   "wcag": "AA 6.07",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#D6D3D1",
+   "wcag": "AA 5.12",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#A8A29E",
+   "wcag": "2.52",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#78716C",
+   "wcag": "AA 4.79",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#57534E",
+   "wcag": "AAA 7.62",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#44403C",
+   "wcag": "AAA 10.27",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#292524",
+   "wcag": "AAA 15.16",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#1C1917",
+   "wcag": "AAA 17.48",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#0C0A09",
+   "wcag": "AAA 19.75",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Taupe": {
+  "50": {
+   "hex": "#FBFAF9",
+   "wcag": "AAA 7.55",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#F3F1F1",
+   "wcag": "AAA 7.00",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#E8E4E3",
+   "wcag": "AA 6.24",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#D8D2D0",
+   "wcag": "AA 5.27",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#ABA09C",
+   "wcag": "3.09",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#7C6D67",
+   "wcag": "AA 4.95",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#5B4F4B",
+   "wcag": "AAA 7.88",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#473C39",
+   "wcag": "AAA 10.64",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#2B2422",
+   "wcag": "AAA 15.23",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#1D1816",
+   "wcag": "AAA 17.58",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#0C0A09",
+   "wcag": "AAA 19.75",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Mauve": {
+  "50": {
+   "hex": "#FAFAFA",
+   "wcag": "AAA 7.70",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#F3F1F3",
+   "wcag": "AAA 7.16",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#E7E4E7",
+   "wcag": "AA 6.37",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#D7D0D7",
+   "wcag": "AA 5.32",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#A89EA9",
+   "wcag": "3.11",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#79697B",
+   "wcag": "AA 5.09",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#594C5B",
+   "wcag": "AAA 8.04",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#463947",
+   "wcag": "AAA 10.84",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#2A212C",
+   "wcag": "AAA 15.52",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#1D161E",
+   "wcag": "AAA 17.71",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#0C090C",
+   "wcag": "AAA 19.81",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Mist": {
+  "50": {
+   "hex": "#F9FBFB",
+   "wcag": "AAA 7.71",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#F1F3F3",
+   "wcag": "AA 6.62",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#E3E7E8",
+   "wcag": "AA 5.92",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#D0D6D8",
+   "wcag": "AA 5.02",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#9CA8AB",
+   "wcag": "3.02",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#67787C",
+   "wcag": "AA 4.61",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#4B585B",
+   "wcag": "AAA 7.37",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#394447",
+   "wcag": "AAA 10.03",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#22292B",
+   "wcag": "AAA 14.78",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#161B1D",
+   "wcag": "AAA 17.37",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#090B0C",
+   "wcag": "AAA 19.72",
+   "pct": false,
+   "default": false
+  }
+ },
+ "Olive": {
+  "50": {
+   "hex": "#FBFBF9",
+   "wcag": "AA 6.66",
+   "pct": false,
+   "default": false
+  },
+  "100": {
+   "hex": "#F4F4F0",
+   "wcag": "AA 6.25",
+   "pct": false,
+   "default": false
+  },
+  "200": {
+   "hex": "#E8E8E3",
+   "wcag": "AA 5.61",
+   "pct": false,
+   "default": false
+  },
+  "300": {
+   "hex": "#D8D8D0",
+   "wcag": "AA 4.81",
+   "pct": false,
+   "default": false
+  },
+  "400": {
+   "hex": "#ABAB9C",
+   "wcag": "2.96",
+   "pct": false,
+   "default": false
+  },
+  "500": {
+   "hex": "#7C7C67",
+   "wcag": "4.25",
+   "pct": false,
+   "default": true
+  },
+  "600": {
+   "hex": "#5B5B4B",
+   "wcag": "AA 6.90",
+   "pct": false,
+   "default": false
+  },
+  "700": {
+   "hex": "#474739",
+   "wcag": "AAA 9.42",
+   "pct": false,
+   "default": false
+  },
+  "800": {
+   "hex": "#2B2B22",
+   "wcag": "AAA 14.27",
+   "pct": false,
+   "default": false
+  },
+  "900": {
+   "hex": "#1D1D16",
+   "wcag": "AAA 16.94",
+   "pct": false,
+   "default": false
+  },
+  "950": {
+   "hex": "#0C0C09",
+   "wcag": "AAA 19.58",
+   "pct": false,
+   "default": false
+  }
+ }
+}
