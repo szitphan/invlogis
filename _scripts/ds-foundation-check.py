@@ -17,6 +17,7 @@
           cùng giá trị nằm ở nhiều rule (vd [".sbx.hv", ".sbx:hover"])
   cssProp thuộc tính CSS thật khi khác prop (biến cục bộ "--fg2", "padding-left"…); có thể là list
   tpl     khuôn giá trị khi thuộc tính ghép nhiều phần, $ = giá trị token: "inset 0 -2px 0 $"
+  token   token mong muốn khi nhiều token trùng giá trị (vd "type/caption/size" thay "type/code/size")
   noOverride  lý do không ghi đè được trên preview (vd độ dày vạch vẽ bằng box-shadow) — thay cho sel
   tokenRole   khi role = decorative mà vẫn cần kiểm token đúng nghĩa (đường kẻ → border)
   "cssIgnore" (khoá trang) [{"sel", "props": [...], "why"}] — khai báo không hiện trên hình ở tổ hợp đã chốt mà máy
@@ -262,7 +263,10 @@ def color_allowed(name, coll, role, fams):
     return True, ""
 
 
-def pick_name(cands, fams, part):
+def pick_name(cands, fams, part, hint=None):
+    """hint = trường "token" của dòng values: token mong muốn khi nhiều token trùng số (vd type/caption thay type/code)."""
+    if hint and hint in cands:
+        return hint
     pw = words(part)
     return max(cands, key=lambda n: (related(n.split("/")[0], fams) * 3 + len(words(n) & pw), -len(n)))
 
@@ -278,7 +282,7 @@ def check_color(row, tk, fams):
     allowed = {h: v for h, v in allowed.items() if v}
     rolenote = "" if role or row.get("role") == "decorative" else "chưa khai role — không kiểm được token đúng nghĩa; "
     if hx in allowed:
-        name = pick_name(allowed[hx], fams, row.get("part"))
+        name = pick_name(allowed[hx], fams, row.get("part"), row.get("token"))
         return {"cat": "ok", "tokens": allowed[hx][:4], "bind": {"token": name, "css": css_var(name)},
                 "note": rolenote.rstrip("; ")}
     if not allowed:
@@ -307,7 +311,16 @@ def fmt(n):
     return str(int(n)) if float(n).is_integer() else f"{n:.1f}"
 
 
-def num_pools(prop, platform, tk, fams):
+SMALL_WIDTH = 120  # bề rộng dưới mức này là cỡ phần tử (icon, chấm, nút), không phải khung → không so với width/*
+
+
+def num_family(base, val=None):
+    if base in ("width", "min-width", "max-width") and val is not None and val < SMALL_WIDTH:
+        return {"control", "icon", "touch", "space"}
+    return PROP_FAMILIES.get(base, GENERIC_NUM)
+
+
+def num_pools(prop, platform, tk, fams, val=None):
     """allowed / other (Platform khác nghĩa) / prim: value -> [names]"""
     scope, prim = POOLS.get(prop, ("WIDTH_HEIGHT", "space"))
     modes = ["Web", "Mobile"] if platform == "Both" else [platform]
@@ -321,7 +334,7 @@ def num_pools(prop, platform, tk, fams):
         n = vals.pop()
         pre = name.split("/")[0]
         base = "padding" if prop.startswith("padding") else prop
-        generic = PROP_FAMILIES.get(base, GENERIC_NUM) & GENERIC_NUM
+        generic = num_family(base, val) & GENERIC_NUM
         (allowed if pre in generic or related(pre, fams) else other).setdefault(n, []).append(name)
     if prim:
         for name, n in tk["prim_num"].items():
@@ -350,15 +363,15 @@ def check_num(row, tk, fams):
         return {"cat": "near", "visible": True, "to": {"token": WEIGHTS[best], "value": best, "css": str(best)}}
     if prop == "radius" and val >= 999:
         val = 9999.0
-    allowed, other, prims = num_pools(prop, platform, tk, fams)
+    allowed, other, prims = num_pools(prop, platform, tk, fams, val)
     if val in allowed:
-        name = pick_name(allowed[val], fams, row.get("part"))
+        name = pick_name(allowed[val], fams, row.get("part"), row.get("token"))
         return {"cat": "ok", "tokens": allowed[val][:4], "bind": {"token": name, "css": num_css(name, val)}}
     if not allowed:
         return {"cat": "new", "note": "không có thang token cho thuộc tính này"}
     # gợi ý kéo về: chỉ thang chung (token riêng component chỉ nhận khi khớp đúng số)
     base = "padding" if prop.startswith("padding") else prop
-    generic = PROP_FAMILIES.get(base, GENERIC_NUM) & GENERIC_NUM
+    generic = num_family(base, val) & GENERIC_NUM
     sug = {n: [x for x in names if x.split("/")[0] in generic or "/" not in x] for n, names in allowed.items()}
     sug = {n: v for n, v in sug.items() if v} or allowed
     best = min(sug, key=lambda n: abs(n - val))
@@ -368,6 +381,12 @@ def check_num(row, tk, fams):
     typo = prop in ("font-size", "line-height")
     visible = diff > 0 if typo else diff > 2
     close = diff <= 2 or diff <= best * 0.1
+    if diff > max(8, val * 0.25):
+        # token chung gần nhất quá xa — kéo về sẽ vỡ hình, không gợi ý (user 28/10: width 16 → width/xs 320)
+        why = f"thang chung gần nhất {name} = {fmt(best)} lệch quá xa, không kéo về được"
+        if val in other:
+            why = f"trùng số với {', '.join(other[val][:2])} nhưng đó là token của component khác; " + why
+        return {"cat": "new", "to": None, "visible": True, "note": why + " — chọn thêm token mới (giữ hình preview)"}
     cat = "near" if close else "new"
     if val in other:
         return {"cat": cat, "to": to, "visible": visible,

@@ -126,10 +126,10 @@ def icon():
         s = re.sub(r'\s(width|height)="[^"]*"', "", s, count=2)
         svgs.append((p.stem, s))
     rows = "".join(
-        f'<div class="icr"><b>{sz}px</b>' + "".join(f'<span class="ic" style="width:{sz}px;height:{sz}px;--sw:{round(1.8 * 24 / sz, 2) if False else 1.8}" title="{E(n)}">{s}</span>'
-                                                    for n, s in svgs) + f'<small class="muted">nét {round(1.8 * sz / 24, 2)} hiển thị</small></div>'
+        f'<div class="icr"><b>{sz}px</b>' + "".join(f'<span class="ic" style="width:{sz}px;height:{sz}px;--sw:2" title="{E(n)}">{s}</span>'
+                                                    for n, s in svgs) + f'<small class="muted">nét {round(2 * sz / 24, 2)} hiển thị</small></div>'
         for sz in (14, 16, 20, 24))
-    return (f'<p class="muted">Lucide 1.58 + icon nghiệp vụ (DEC-145) · nét 1.8 trên khung 24 · cỡ theo nền tảng: '
+    return (f'<p class="muted">Lucide 1.58 + icon nghiệp vụ (DEC-145) · nét 2 trên khung 24 · cỡ theo nền tảng: '
             f'<code>icon/size/sm</code> <span data-css="--icon-size-sm"></span> · <code>md</code> <span data-css="--icon-size-md"></span> · '
             f'<code>lg</code> <span data-css="--icon-size-lg"></span></p>{rows}')
 

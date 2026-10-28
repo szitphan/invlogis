@@ -578,7 +578,7 @@ User báo đã chọn → `ArtifactData list answers` → ghi `answers.json` →
    **Kiểm kỹ 7 nhóm** (user chốt 28/10): `ds-foundation-check.py` gắn `group` cho mọi dòng (Chữ · Màu · Icon · Hiệu ứng ·
    Khoảng cách & cỡ · Bo góc · Lưới & độ rộng) và nạp `_scripts/ds_foundation_audit.py` kiểm thêm: font ngoài bộ DS, tổ hợp
    cỡ/dòng ngoài thang type/*, viết hoa + giãn chữ sai caption-caps, cỡ icon ngoài 12/14/16/20/24, nét khác 1.8, khối icon
-   nhấn mạnh khác Featured 48/24, blur ngoài blur/*, bề rộng khung ngoài width/*, lề nội dung khác screen-inset. Báo cáo in
+   nhấn mạnh khác Featured 48/24, blur ngoài blur/*, bề rộng khung ngoài width/* và lề nội dung khác screen-inset (cả hai chỉ chấm cho component dựng khung trang, `page.json` `"auditInset": true` — lề nằm ở khung màn demo, không thuộc component thường; user 29/10). Báo cáo in
    "Theo nhóm", check.json có `groups`; bảng nổi bước 3 lọc theo nhóm.
 2. Sinh lại trang, publish, dừng. Tab 3 vẽ lại màn demo + bảng biến thể bằng `design/v2/tokens.css`, đổi qua lại 3
    chế độ: *Tự do* (bản tab 2) · *Theo lựa chọn hiện tại* · *Tất cả về token có sẵn*, có nhấp nháy A/B, tô viền chỗ đổi,

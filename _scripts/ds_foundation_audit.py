@@ -2,9 +2,9 @@
 
 Bộ kiểm chính so từng giá trị đã khai (values) với token. Module này thêm phần nó không thấy:
   Chữ      font-family ngoài bộ font DS · tổ hợp cỡ/dòng không thuộc thang type/* · viết hoa + giãn chữ sai caption-caps
-  Icon     cỡ icon ngoài thang 12/14/16/20/24 · nét khác 1.8 (2 cho chip) · khối icon nhấn mạnh khác Featured 48 / icon 24
+  Icon     cỡ icon ngoài thang 12/14/16/20/24 · nét khác 2 (DEC-300) · khối icon nhấn mạnh khác Featured 48 / icon 24
   Hiệu ứng blur ngoài blur/* (làm mờ nền)
-  Lưới     bề rộng khung (width/max-width/min-width) ngoài width/*, content-max-width, breakpoint · lề nội dung khác layout/screen-inset
+  Lưới     bề rộng khung (width/max-width/min-width) ngoài width/*, content-max-width, breakpoint · lề nội dung khác layout/screen-inset (chỉ khi page.json auditInset: true)
 và gắn nhóm cho mọi dòng (group_of) để trang review lọc theo nhóm, báo cáo tách nhóm.
 Dòng sinh ra có cat "conflict" (phải chọn: sửa theo luật / đổi luật / ngoại lệ), id ổn định "audit.{nhóm}.{khoá}".
 """
@@ -21,7 +21,7 @@ EFFECT = {"shadow", "blur", "backdrop-blur", "opacity", "focus-width", "focus-of
 WIDTH = {"width", "max-width", "min-width"}
 DS_FONTS = {"cal sans", "inter", "jetbrains mono"}
 ICON_SIZES = {12, 14, 16, 20, 24}
-STROKES = {"1.8", "2"}  # icons.md mục 2 (DEC-142): 1.8 mọi icon, 2 icon trong chip
+STROKES = {"2"}  # icons.md mục 2 (DEC-300): nét 2 trên khung 24 cho mọi icon
 
 
 def group_of(prop, part=""):
@@ -82,7 +82,22 @@ def _font_short(v):
     return m.group(1), float(m.group(2)), float(m.group(3)) if m.group(3) else None, m.group(4)
 
 
+_FONT_VARS = None
+
+
 def _first_family(v):
+    """Họ font đầu tiên; var(--font-*) đọc theo design/v2/tokens.css (vd --font-body = Inter)."""
+    global _FONT_VARS
+    v = v.strip()
+    m = re.match(r"var\((--[\w-]+)\s*(?:,(.*))?\)$", v)
+    if m:
+        if _FONT_VARS is None:
+            css = (Path(__file__).resolve().parent.parent / "design/v2/tokens.css").read_text()
+            _FONT_VARS = dict(re.findall(r"(--font-[\w-]+)\s*:\s*([^;]+);", css))
+        if m.group(1) in _FONT_VARS:
+            v = _FONT_VARS[m.group(1)]
+        elif m.group(2):
+            v = m.group(2)
     return v.split(",")[0].strip().strip("'\"").lower()
 
 
@@ -170,18 +185,10 @@ def audit(page, parse_css, tokens_path):
         rows.append(_row("icon", f"size-{_n(w)}", f"Icon cỡ {_n(w)} ({n} chỗ)", "icon-size", _n(w),
                          f'svg.i[width="{_n(w)}"]', "cỡ icon ngoài thang 12 · 14 · 16 · 20 · 24 (icons.md mục 3)",
                          {"token": f"icon {to}", "value": to, "css": f"{to}px"}, css_props=["width", "height"], count=n))
-    std = sum(1 for m in re.finditer(r'stroke-width="2"', html))
-    if std:
-        rows.append(_row("icon", "stroke-2", f"Nét icon 2 ({std} chỗ)", "stroke-width", 2, 'svg.i[stroke-width="2"]',
-                         "nét icon thường là 1.8 trên khung 24; nét 2 chỉ cho icon trong chip (icons.md mục 2, DEC-142)",
-                         {"token": "nét 1.8", "value": 1.8, "css": "1.8"}, css_props=["stroke-width"], count=std,
-                         note="icon trong chip giữ 2 — chọn Ngoại lệ nếu mọi chỗ là chip"))
     for sw, n in strokes.items():
-        if sw == "2":
-            continue
         rows.append(_row("icon", f"stroke-{_slug(sw)}", f"Nét icon {sw} ({n} chỗ)", "stroke-width", sw,
-                         f'svg[stroke-width="{sw}"]', "nét icon ngoài 1.8 / 2 (icons.md mục 2)",
-                         {"token": "nét 1.8", "value": 1.8, "css": "1.8"}, css_props=["stroke-width"], count=n))
+                         f'svg[stroke-width="{sw}"]', "nét icon khác 2 trên khung 24 (icons.md mục 2, DEC-300)",
+                         {"token": "nét 2", "value": 2, "css": "2"}, css_props=["stroke-width"], count=n))
     # khối icon nhấn mạnh: khối vuông = tròn/bo, chỉ chứa một svg → Featured icon 48, icon 24 (icons.md 3.1, DEC-258)
     circ = {}
     for sel, decl in by_sel.items():
@@ -220,7 +227,8 @@ def audit(page, parse_css, tokens_path):
         allowed.setdefault(float(v), f"breakpoint {k}")
     side = {float(num(pv[k][m])) for k in pv if k.startswith(("sidebar/", "nav/width")) for m in ("Web", "Mobile")
             if isinstance(num(pv[k].get(m)), (int, float))}
-    for sel, p, v in screen:
+    # độ rộng khung màn demo (lưới form, bảng mẫu) cũng thuộc khung màn — cùng cờ auditInset (user 29/10: Tooltip .grid2)
+    for sel, p, v in (screen if page.get("auditInset") else []):
         if p in ("max-width",):
             x = _px(v)
             if x and x >= 200 and x not in allowed:
@@ -228,7 +236,9 @@ def audit(page, parse_css, tokens_path):
                 rows.append(_row("grid", f"width-{_slug(sel)}-{_slug(p)}", sel, p, _n(x), sel,
                                  "khung nội dung rộng ngoài width/* · content-max-width · breakpoint (foundations mục 7)",
                                  {"token": allowed[to], "value": _n(to), "css": f"{_n(to)}px"}, css_props=[p]))
-    inset = num(pv.get("layout/screen-inset", {}).get("Web"))
+    # lề nội dung thuộc khung màn, không thuộc component — chỉ kiểm khi component dựng khung trang
+    # (page.json "auditInset": true, vd app shell / page layout). User 29/10: Header nav → ngoài phạm vi.
+    inset = num(pv.get("layout/screen-inset", {}).get("Web")) if page.get("auditInset") else None
     for sel, p, v in screen:
         if (re.search(r"(^|[\s.>])(main|\.ct|content)\b", sel) or sel.strip() in (".ct", "main")) and p in ("padding", "padding-left", "padding-right"):
             vals = [_px(x) for x in v.split()]

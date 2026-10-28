@@ -14,6 +14,8 @@ links:
 
 # Base / Tooltip
 
+> **Đã thay bằng [base/tooltip.md](../base/tooltip.md) (Đã duyệt 29/10, DEC-301).** Giữ file này để tra lịch sử; không dựng theo file này.
+
 > L1 · phiên bản 0.2.0 · Nháp · người phụ trách @szitphan · Figma `Base / Tooltip` (6405:2455, trang DS · Components ·
 > L0–L3), L0 `.tooltip / Arrow` (6442:84443), khung tài liệu `Tài liệu · Tooltip` (6467:84315) · DEC-206, DEC-213, DEC-245, DEC-246 ·
 > lồng sẵn trong [Button](button.md), [Avatar](avatar.md) (bật `Tooltip`)

@@ -1,5 +1,5 @@
 /* DS v2 tokens — FILE SINH RA từ design/v2/tokens.json bằng _scripts/ds-v2-tokens.py. KHÔNG sửa tay. */
-/* version 0.16.0 · 2026-10-28 */
+/* version 0.16.0 · 2026-10-29 */
 
 :root {
   /* Fonts (DEC-121) */
@@ -401,6 +401,8 @@
   --tooltip-offset: 4px;
   --tooltip-arrow-w: 8px;
   --tooltip-arrow-h: 4px;
+  --help-sheet-title-line-height: 24px;
+  --help-sheet-body-gap: var(--space-20);
   --focus-width: 2px;
   --focus-offset: 2px;
   --type-display-size: 32px;
@@ -595,6 +597,8 @@
   --tooltip-offset: 4px;
   --tooltip-arrow-w: 8px;
   --tooltip-arrow-h: 4px;
+  --help-sheet-title-line-height: 24px;
+  --help-sheet-body-gap: var(--space-20);
   --focus-width: 2px;
   --focus-offset: 2px;
   --type-display-size: 34px;

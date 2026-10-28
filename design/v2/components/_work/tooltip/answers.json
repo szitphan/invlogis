@@ -1,1 +1,74 @@
-{}
+{
+ "brainstorm-D1": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D2": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D3": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D4": {
+  "choice": 0,
+  "note": ""
+ },
+ "preview-approve": {
+  "choice": 0,
+  "note": "duyệt trong chat 29/10"
+ },
+ "foundation-audit.icon.stroke-2": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-help-sheet.padding-bottom.mobile": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-help-sheet.radius.mobile": {
+  "choice": 1,
+  "note": "theo DEC-259: radius/overlay 24 — chat 29/10"
+ },
+ "foundation-tooltip-supporting.max-width.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-tooltip.font-size.both": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-tooltip.line-height.both": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-tooltip.shadow.both": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-tooltip-supporting-·-tiêu-đề.font-size.both": {
+  "choice": 0,
+  "note": "theo chữ tooltip 12/16 — chat 29/10"
+ },
+ "foundation-tooltip-supporting-·-tiêu-đề.line-height.both": {
+  "choice": 0,
+  "note": "theo chữ tooltip 12/16 — chat 29/10"
+ },
+ "foundation-help-sheet-·-nội-dung.margin.mobile": {
+  "choice": 0,
+  "note": "giữ 20 — chat 29/10"
+ },
+ "foundation-help-sheet-·-tiêu-đề.line-height.mobile": {
+  "choice": 1,
+  "note": "giữ 24 — chat 29/10"
+ },
+ "foundation-help-sheet-·-thanh-kéo.radius.mobile": {
+  "choice": 1,
+  "note": "kéo về radius/badge — chat 29/10"
+ },
+ "foundation-tooltip.shadow.web": {
+  "choice": 1,
+  "note": ""
+ }
+}

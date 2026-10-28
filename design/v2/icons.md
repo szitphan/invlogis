@@ -23,14 +23,13 @@ links:
 - Không dùng SF Symbols (theo điều khoản của Apple, chỉ dùng trong app chạy trên thiết bị Apple), không trộn Material Symbols (DEC-141).
 - Thiếu icon nghiệp vụ khác thì đề xuất vẽ theo cách của DEC-145 (lưới 24, nét Lucide, mục 6), duyệt bằng ảnh trước khi dùng; không mượn bộ khác.
 
-## 2. Độ dày nét (DEC-142)
+## 2. Độ dày nét (DEC-300, thay DEC-142)
 
 | Cỡ | 12 | 14 | 16 | 20 | 24 |
 |---|---|---|---|---|---|
-| Nét (1.8 trên khung 24) | 0.9 | 1.05 | 1.2 | 1.5 | 1.8 |
-| Nét icon trong chip (2 trên khung 24) | 1.0 | 1.17 | 1.33 | 1.67 | 2.0 |
+| Nét (2 trên khung 24, mọi icon kể cả trong chip) | 1.0 | 1.17 | 1.33 | 1.67 | 2.0 |
 
-Code (lucide-react): `strokeWidth={1.8}` cho mọi icon, `strokeWidth={2}` cho icon trong chip; để
+Code (lucide-react): `strokeWidth={2}` (mặc định Lucide) cho mọi icon; để
 `absoluteStrokeWidth` mặc định (tắt) thì nét tự co theo cỡ như bảng trên.
 
 ## 3. Cỡ theo nền tảng (DEC-143)
@@ -46,7 +45,7 @@ Trên Figma chọn biến thể `Size` theo bảng này: biến thể không g�
 
 ### 3.1 Nhấn mạnh bằng Featured icon, không phóng icon (DEC-258)
 
-1. Không phóng icon quá 24 (app) / 20 (web): nét 1.8 trên khung 24 sẽ dày và thô khi phóng (Untitled UI cùng luật).
+1. Không phóng icon quá 24 (app) / 20 (web): nét 2 trên khung 24 sẽ dày và thô khi phóng (Untitled UI cùng luật).
 2. Cần nhấn mạnh (màn trống, màn kết quả, đầu dialog xác nhận) thì đặt icon 24 trong **Featured icon** 48: khối tròn (app,
    màn trống, màn kết quả) hoặc vuông bo 14; nền `color/status/*-bg-strong` hoặc `color/bg/muted`, icon `color/status/*-icon`
    hoặc `color/icon/primary`.
@@ -81,8 +80,8 @@ Giữ như bộ cũ (`design/design.md` › Iconography), đổi tên token sang
 | `icon/container-ship` | Cảng | DEC-154 | có |
 | `icon/eir` | Phiếu EIR | DEC-155 | có |
 
-Lưới 24, nét gốc 2 (hiển thị 1.8), đầu và góc nét bo tròn, chừa ít nhất 1 quanh mép như hướng dẫn của Lucide. File SVG
-(bản viền và bản tô) ở `design/v2/icons/`. Mã bản viền dưới đây để nét 2 như Lucide gốc; trong code đặt `strokeWidth={1.8}`:
+Lưới 24, nét 2, đầu và góc nét bo tròn, chừa ít nhất 1 quanh mép như hướng dẫn của Lucide. File SVG
+(bản viền và bản tô) ở `design/v2/icons/`. Mã bản viền dưới đây để nét 2 như Lucide gốc, code giữ `strokeWidth={2}`:
 
 ```svg
 tractor-unit:
@@ -283,7 +282,7 @@ là `list-filter`; `pen-line` và `pencil` cùng dùng cho sửa.
 - Mỗi icon là component set `icon/<tên>` với biến thể `Size=12 · 14 · 16 · 20 · 24`, nét đặt sẵn đúng cỡ.
   Icon có bản tô thêm `Fill=Off · On`.
 - Component dùng icon mở thuộc tính đổi icon (Instance swap) và chọn Size; không resize tay, không sửa nét.
-- Icon trong chip trạng thái cần nét 2 trên khung 24 (mục 2): component Chip (vòng 4) đặt sẵn nét này cho icon bên trong, người vẽ không sửa.
+- Icon trong chip trạng thái dùng cùng nét 2 trên khung 24 như mọi icon (mục 2, DEC-300); người vẽ không sửa nét.
 - Kho nguồn để chọn icon thêm: khung `Foundations / Icons / Resources` cạnh khung tài liệu trên trang `DS · Foundations` (node `6679:68629`, link ở mô tả đầu trang Foundations · Icons); chưa phân nhóm.
 - Thêm icon mới: `python3 _scripts/ds-v2-icons.py figma <tên>...` tải SVG Lucide 1.58.0 và in mã dựng 5 biến thể, chạy qua `use_figma` (file, trang, khung thư viện ghi trong script); icon tự vẽ lấy SVG ở `design/v2/icons/`.
 

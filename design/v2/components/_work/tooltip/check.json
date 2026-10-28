@@ -1,0 +1,1401 @@
+{
+ "tokens_version": "0.16.0",
+ "counts": {
+  "ok": 29,
+  "near": 1,
+  "new": 5,
+  "conflict": 0,
+  "undeclared": 0
+ },
+ "no_sel": 0,
+ "open": 0,
+ "ignored": [],
+ "groups": {
+  "typo": {
+   "label": "Chữ",
+   "total": 9,
+   "ok": 9,
+   "open": 0,
+   "audit": 0
+  },
+  "color": {
+   "label": "Màu",
+   "total": 6,
+   "ok": 6,
+   "open": 0,
+   "audit": 0
+  },
+  "icon": {
+   "label": "Icon",
+   "total": 4,
+   "ok": 4,
+   "open": 0,
+   "audit": 0
+  },
+  "effect": {
+   "label": "Hiệu ứng",
+   "total": 1,
+   "ok": 0,
+   "open": 0,
+   "audit": 0
+  },
+  "spacing": {
+   "label": "Khoảng cách & cỡ",
+   "total": 11,
+   "ok": 9,
+   "open": 0,
+   "audit": 0
+  },
+  "radius": {
+   "label": "Bo góc",
+   "total": 2,
+   "ok": 0,
+   "open": 0,
+   "audit": 0
+  },
+  "grid": {
+   "label": "Lưới & độ rộng",
+   "total": 2,
+   "ok": 1,
+   "open": 0,
+   "audit": 0
+  }
+ },
+ "rows": [
+  {
+   "id": "tooltip-supporting.padding-y.web",
+   "part": "Tooltip Supporting",
+   "prop": "padding-y",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".tt.sup",
+   "cssProps": [
+    "padding"
+   ],
+   "tpl": "$ 12px",
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-sm",
+    "space/gap-sm",
+    "layout/list-gap",
+    "control/padding-x/sm"
+   ],
+   "bind": {
+    "token": "space/gap-sm",
+    "css": "var(--space-gap-sm)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-sm",
+    "css": "var(--space-gap-sm)"
+   }
+  },
+  {
+   "id": "tooltip-supporting.padding-x.web",
+   "part": "Tooltip Supporting",
+   "prop": "padding-x",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".tt.sup",
+   "cssProps": [
+    "padding"
+   ],
+   "tpl": "8px $",
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-md",
+    "space/gap-md",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-md",
+    "css": "var(--space-gap-md)"
+   }
+  },
+  {
+   "id": "tooltip-supporting.max-width.web",
+   "part": "Tooltip Supporting",
+   "prop": "max-width",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 280,
+   "sel": ".tt.sup",
+   "cssProps": [
+    "max-width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xs",
+    "value": 320,
+    "css": "var(--width-xs)"
+   },
+   "visible": true,
+   "suggest": "width/xs (320)",
+   "rules": [],
+   "note": "thang chung gần nhất width/xs = 320",
+   "group": "grid",
+   "decided": true,
+   "must": true,
+   "resolved": {
+    "kind": "token",
+    "token": "width/xs",
+    "value": 320,
+    "css": "var(--width-xs)"
+   }
+  },
+  {
+   "id": "tooltip.gap.web",
+   "part": "Tooltip",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".tt",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)"
+   },
+   "visible": false,
+   "suggest": "space/gap-xs (4)",
+   "rules": [],
+   "note": "trùng số với avatar/ring, list-row/text-gap nhưng đó là token của component khác; thang chung gần nhất space/gap-xs = 4",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-xs",
+    "value": 4,
+    "css": "var(--space-gap-xs)",
+    "auto": true
+   }
+  },
+  {
+   "id": "help-icon.size.web",
+   "part": "Help icon",
+   "prop": "size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 16,
+   "sel": ".hi",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/md"
+   ],
+   "bind": {
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   }
+  },
+  {
+   "id": "help-icon.size.mobile",
+   "part": "Help icon",
+   "prop": "size",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 24,
+   "sel": ".mf .hi",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/lg"
+   ],
+   "bind": {
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   }
+  },
+  {
+   "id": "tooltip.font-size.web",
+   "part": "Tooltip",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".tt",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/caption/size",
+    "type/code/size"
+   ],
+   "bind": {
+    "token": "type/caption/size",
+    "css": "var(--type-caption-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/caption/size",
+    "css": "var(--type-caption-size)"
+   }
+  },
+  {
+   "id": "tooltip.line-height.web",
+   "part": "Tooltip",
+   "prop": "line-height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 16,
+   "sel": ".tt",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/caption/line-height",
+    "type/code/line-height"
+   ],
+   "bind": {
+    "token": "type/caption/line-height",
+    "css": "var(--type-caption-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/caption/line-height",
+    "css": "var(--type-caption-line-height)"
+   }
+  },
+  {
+   "id": "tooltip.shadow.web",
+   "part": "Tooltip",
+   "prop": "shadow",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#1018281A",
+   "sel": ".tt",
+   "cssProps": [
+    "box-shadow"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "elev/1",
+    "value": "elev/1",
+    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+   },
+   "visible": true,
+   "suggest": "elev/1 (elev/1)",
+   "rules": [],
+   "note": "bóng tự do `#1018281A` — chọn elev/1…3 hoặc thêm effect style",
+   "group": "effect",
+   "decided": true,
+   "must": true,
+   "resolved": {
+    "kind": "token",
+    "token": "elev/1",
+    "value": "elev/1",
+    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+   }
+  },
+  {
+   "id": "tooltip-supporting-·-tiêu-đề.font-size.web",
+   "part": "Tooltip Supporting · tiêu đề",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".tt.sup b",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/caption/size",
+    "type/code/size"
+   ],
+   "bind": {
+    "token": "type/caption/size",
+    "css": "var(--type-caption-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/caption/size",
+    "css": "var(--type-caption-size)"
+   }
+  },
+  {
+   "id": "tooltip-supporting-·-tiêu-đề.line-height.web",
+   "part": "Tooltip Supporting · tiêu đề",
+   "prop": "line-height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 16,
+   "sel": ".tt.sup b",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/caption/line-height",
+    "type/code/line-height"
+   ],
+   "bind": {
+    "token": "type/caption/line-height",
+    "css": "var(--type-caption-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/caption/line-height",
+    "css": "var(--type-caption-line-height)"
+   }
+  },
+  {
+   "id": "tooltip-·-mũi-tên-bottom.border-color.web",
+   "part": "Tooltip · mũi tên bottom",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "tooltip/bg",
+   "sel": ".tt.a-bottom::after",
+   "cssProps": [
+    "border-top-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/inverse",
+    "color/action/primary-pressed",
+    "tooltip/bg"
+   ],
+   "bind": {
+    "token": "tooltip/bg",
+    "css": "var(--tooltip-bg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "tooltip/bg",
+    "css": "var(--tooltip-bg)"
+   }
+  },
+  {
+   "id": "tooltip-·-mũi-tên-top.border-color.web",
+   "part": "Tooltip · mũi tên top",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "tooltip/bg",
+   "sel": ".tt.a-top::after",
+   "cssProps": [
+    "border-bottom-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/inverse",
+    "color/action/primary-pressed",
+    "tooltip/bg"
+   ],
+   "bind": {
+    "token": "tooltip/bg",
+    "css": "var(--tooltip-bg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "tooltip/bg",
+    "css": "var(--tooltip-bg)"
+   }
+  },
+  {
+   "id": "tooltip-·-mũi-tên-left.border-color.web",
+   "part": "Tooltip · mũi tên left",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "tooltip/bg",
+   "sel": ".tt.a-left::after",
+   "cssProps": [
+    "border-right-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/inverse",
+    "color/action/primary-pressed",
+    "tooltip/bg"
+   ],
+   "bind": {
+    "token": "tooltip/bg",
+    "css": "var(--tooltip-bg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "tooltip/bg",
+    "css": "var(--tooltip-bg)"
+   }
+  },
+  {
+   "id": "tooltip-·-mũi-tên-right.border-color.web",
+   "part": "Tooltip · mũi tên right",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "tooltip/bg",
+   "sel": ".tt.a-right::after",
+   "cssProps": [
+    "border-left-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/inverse",
+    "color/action/primary-pressed",
+    "tooltip/bg"
+   ],
+   "bind": {
+    "token": "tooltip/bg",
+    "css": "var(--tooltip-bg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "tooltip/bg",
+    "css": "var(--tooltip-bg)"
+   }
+  },
+  {
+   "id": "tooltip-·-mũi-tên-bl.border-color.web",
+   "part": "Tooltip · mũi tên bl",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "tooltip/bg",
+   "sel": ".tt.a-bl::after",
+   "cssProps": [
+    "border-top-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/inverse",
+    "color/action/primary-pressed",
+    "tooltip/bg"
+   ],
+   "bind": {
+    "token": "tooltip/bg",
+    "css": "var(--tooltip-bg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "tooltip/bg",
+    "css": "var(--tooltip-bg)"
+   }
+  },
+  {
+   "id": "tooltip-·-mũi-tên-br.border-color.web",
+   "part": "Tooltip · mũi tên br",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "tooltip/bg",
+   "sel": ".tt.a-br::after",
+   "cssProps": [
+    "border-top-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/inverse",
+    "color/action/primary-pressed",
+    "tooltip/bg"
+   ],
+   "bind": {
+    "token": "tooltip/bg",
+    "css": "var(--tooltip-bg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "tooltip/bg",
+    "css": "var(--tooltip-bg)"
+   }
+  },
+  {
+   "id": "help-sheet.radius.mobile",
+   "part": "Help sheet",
+   "prop": "radius",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 28,
+   "sel": ".sheet",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "radius/overlay",
+    "value": 24,
+    "css": "var(--radius-overlay)"
+   },
+   "visible": true,
+   "suggest": "radius/overlay (24)",
+   "rules": [],
+   "note": "thang chung gần nhất radius/overlay = 24",
+   "group": "radius",
+   "decided": true,
+   "must": true,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/overlay",
+    "value": 24,
+    "css": "var(--radius-overlay)"
+   }
+  },
+  {
+   "id": "help-sheet.padding-top.mobile",
+   "part": "Help sheet",
+   "prop": "padding-top",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".sheet",
+   "cssProps": [
+    "padding-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-sm",
+    "space/gap-sm",
+    "control/padding-x-icon/sm",
+    "control/icon-gap"
+   ],
+   "bind": {
+    "token": "space/gap-sm",
+    "css": "var(--space-gap-sm)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-sm",
+    "css": "var(--space-gap-sm)"
+   }
+  },
+  {
+   "id": "help-sheet.padding-x.mobile",
+   "part": "Help sheet",
+   "prop": "padding-x",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".sheet",
+   "cssProps": [
+    "padding-left",
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "control/padding-x-icon/lg",
+    "help-sheet/body-gap"
+   ],
+   "bind": {
+    "token": "help-sheet/body-gap",
+    "css": "var(--help-sheet-body-gap)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "help-sheet/body-gap",
+    "css": "var(--help-sheet-body-gap)"
+   }
+  },
+  {
+   "id": "help-sheet.padding-bottom.mobile",
+   "part": "Help sheet",
+   "prop": "padding-bottom",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 28,
+   "sel": ".sheet",
+   "cssProps": [
+    "padding-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/gap-xl",
+    "value": 24,
+    "css": "var(--space-gap-xl)"
+   },
+   "visible": true,
+   "suggest": "space/gap-xl (24)",
+   "rules": [],
+   "note": "thang chung gần nhất space/gap-xl = 24",
+   "group": "spacing",
+   "decided": true,
+   "must": true,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-xl",
+    "value": 24,
+    "css": "var(--space-gap-xl)"
+   }
+  },
+  {
+   "id": "help-sheet-·-thanh-kéo.width.mobile",
+   "part": "Help sheet · thanh kéo",
+   "prop": "width",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 36,
+   "sel": ".sheet .grab",
+   "cssProps": [
+    "width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "control/height/sm"
+   ],
+   "bind": {
+    "token": "control/height/sm",
+    "css": "var(--control-height-sm)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "grid",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/sm",
+    "css": "var(--control-height-sm)"
+   }
+  },
+  {
+   "id": "help-sheet-·-thanh-kéo.height.mobile",
+   "part": "Help sheet · thanh kéo",
+   "prop": "height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 4,
+   "sel": ".sheet .grab",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "tooltip/arrow-h"
+   ],
+   "bind": {
+    "token": "tooltip/arrow-h",
+    "css": "var(--tooltip-arrow-h)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "tooltip/arrow-h",
+    "css": "var(--tooltip-arrow-h)"
+   }
+  },
+  {
+   "id": "help-sheet-·-thanh-kéo.radius.mobile",
+   "part": "Help sheet · thanh kéo",
+   "prop": "radius",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".sheet .grab",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "radius/badge",
+    "value": 6,
+    "css": "var(--radius-badge)"
+   },
+   "visible": true,
+   "suggest": "radius/badge (6)",
+   "rules": [],
+   "note": "chỉ có primitive radius/xxs — component không gắn primitive (architecture Mục 7); thang chung gần nhất radius/badge = 6",
+   "group": "radius",
+   "decided": true,
+   "must": true,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/badge",
+    "value": 6,
+    "css": "var(--radius-badge)"
+   }
+  },
+  {
+   "id": "help-sheet-·-thanh-kéo.margin.mobile",
+   "part": "Help sheet · thanh kéo",
+   "prop": "margin",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 4,
+   "sel": ".sheet .grab",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-xs",
+    "space/gap-xs",
+    "tooltip/padding-y",
+    "tooltip/offset"
+   ],
+   "bind": {
+    "token": "space/gap-xs",
+    "css": "var(--space-gap-xs)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-xs",
+    "css": "var(--space-gap-xs)"
+   }
+  },
+  {
+   "id": "help-sheet-·-thanh-kéo.margin.mobile-2",
+   "part": "Help sheet · thanh kéo",
+   "prop": "margin",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 16,
+   "sel": ".sheet .grab",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "space/inset-lg",
+    "space/gap-lg",
+    "layout/screen-inset",
+    "layout/card-padding"
+   ],
+   "bind": {
+    "token": "space/gap-lg",
+    "css": "var(--space-gap-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/gap-lg",
+    "css": "var(--space-gap-lg)"
+   }
+  },
+  {
+   "id": "help-sheet-·-tiêu-đề.font-size.mobile",
+   "part": "Help sheet · tiêu đề",
+   "prop": "font-size",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 17,
+   "sel": ".sheet b",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/title-3/size"
+   ],
+   "bind": {
+    "token": "type/title-3/size",
+    "css": "var(--type-title-3-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/title-3/size",
+    "css": "var(--type-title-3-size)"
+   }
+  },
+  {
+   "id": "help-sheet-·-tiêu-đề.line-height.mobile",
+   "part": "Help sheet · tiêu đề",
+   "prop": "line-height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 24,
+   "sel": ".sheet b",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "help-sheet/title-line-height"
+   ],
+   "bind": {
+    "token": "help-sheet/title-line-height",
+    "css": "var(--help-sheet-title-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "help-sheet/title-line-height",
+    "css": "var(--help-sheet-title-line-height)"
+   }
+  },
+  {
+   "id": "help-sheet-·-tiêu-đề.margin-bottom.mobile",
+   "part": "Help sheet · tiêu đề",
+   "prop": "margin-bottom",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".sheet b",
+   "cssProps": [
+    "margin-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "tooltip/arrow-w"
+   ],
+   "bind": {
+    "token": "tooltip/arrow-w",
+    "css": "var(--tooltip-arrow-w)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "tooltip/arrow-w",
+    "css": "var(--tooltip-arrow-w)"
+   }
+  },
+  {
+   "id": "help-sheet-·-nội-dung.margin.mobile",
+   "part": "Help sheet · nội dung",
+   "prop": "margin",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".sheet p",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "help-sheet/body-gap"
+   ],
+   "bind": {
+    "token": "help-sheet/body-gap",
+    "css": "var(--help-sheet-body-gap)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "help-sheet/body-gap",
+    "css": "var(--help-sheet-body-gap)"
+   }
+  },
+  {
+   "id": "help-sheet-·-nội-dung.line-height.mobile",
+   "part": "Help sheet · nội dung",
+   "prop": "line-height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 22,
+   "sel": ".sheet p",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/title-3/line-height",
+    "type/body/line-height"
+   ],
+   "bind": {
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
+   }
+  },
+  {
+   "id": "help-sheet-·-nút-đã-hiểu.font-size.mobile",
+   "part": "Help sheet · nút Đã hiểu",
+   "prop": "font-size",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 15,
+   "sel": ".sheet .ok",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
+   }
+  },
+  {
+   "id": "help-sheet-·-nút-đã-hiểu.line-height.mobile",
+   "part": "Help sheet · nút Đã hiểu",
+   "prop": "line-height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".sheet .ok",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "type/heading/line-height",
+    "type/label/line-height"
+   ],
+   "bind": {
+    "token": "type/label/line-height",
+    "css": "var(--type-label-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/label/line-height",
+    "css": "var(--type-label-line-height)"
+   }
+  },
+  {
+   "id": "help-icon-·-hình-(app).width.mobile",
+   "part": "Help icon · hình (app)",
+   "prop": "width",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".mf .hi svg",
+   "cssProps": [
+    "width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/md"
+   ],
+   "bind": {
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   }
+  },
+  {
+   "id": "help-icon-·-hình-(app).height.mobile",
+   "part": "Help icon · hình (app)",
+   "prop": "height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".mf .hi svg",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/md"
+   ],
+   "bind": {
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   }
+  }
+ ]
+}

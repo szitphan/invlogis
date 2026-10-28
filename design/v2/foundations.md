@@ -507,7 +507,7 @@ Transition theo từng thuộc tính (background, color, opacity, transform, box
 
 ## 11. Icon (DEC-141…156)
 
-Luật icon ở `design/v2/icons.md`: Lucide 1.58.0 cho web và app; nét 1.8 trên khung 24 đổi theo cỡ, icon trong chip nét 2;
+Luật icon ở `design/v2/icons.md`: Lucide 1.58.0 cho web và app; nét 2 trên khung 24 đổi theo cỡ, cả icon trong chip (DEC-300);
 cỡ theo Platform `icon/size/sm · md · lg · chip` (web 14 · 16 · 20 · 14, app 16 · 20 · 24 · 14) — trên Figma chọn biến thể
 Size theo bảng, đổi chế độ Platform không tự đổi cỡ icon; bản tô cho cảnh báo, lỗi và trạng thái bật; tab đang chọn (app)
 và mục menu đang chọn (web) giữ icon viền; 7 icon nghiệp vụ tự vẽ; bảng icon theo nghĩa.

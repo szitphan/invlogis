@@ -6,8 +6,8 @@
   python3 _scripts/ds-v2-icons.py figma <tên>...     # in mã JS để chạy qua use_figma (Figma MCP)
         [--page ID] [--library ID]                   #   mặc định: trang ✦ DS · Icons, khung "Thư viện icon · DS v2"
 
-Mã `figma` thêm mỗi icon thành component set `icon/<tên>` với 5 biến thể Size=12 · 14 · 16 · 20 · 24, nét 1.8 trên
-khung 24 co theo cỡ (DEC-142, DEC-147), màu gắn biến `color/icon/primary`, đặt vào cuối "Lưới icon".
+Mã `figma` thêm mỗi icon thành component set `icon/<tên>` với 5 biến thể Size=12 · 14 · 16 · 20 · 24, nét 2 trên
+khung 24 co theo cỡ (DEC-300, DEC-147), màu gắn biến `color/icon/primary`, đặt vào cuối "Lưới icon".
 Icon đã có trên trang thì bỏ qua. Chạy với fileKey FIGMA_FILE bên dưới.
 
 Nguồn bản viền: design/v2/icons/<tên>.svg nếu có (icon tự vẽ, DEC-145), không thì Lucide 1.58.0 tải từ unpkg
@@ -123,10 +123,10 @@ def load(name: str, mean: dict, decs: dict):
     if source == "tự vẽ":
         tag = ", ".join(x for x in ("tự vẽ", decs.get(name)) if x)
         full = f"{m or 'Chưa có nghĩa chuẩn'} ({tag})"
-        short, tail = full, "Lưới và nét Lucide 1.8 trên khung 24."
+        short, tail = full, "Lưới và nét Lucide 2 trên khung 24."
     else:
         full = f"{m} (bảng nghĩa DEC-146)" if m else None
-        short, tail = m or "Chưa có nghĩa chuẩn", f"{source} · nét 1.8 trên khung 24."
+        short, tail = m or "Chưa có nghĩa chuẩn", f"{source} · nét 2 trên khung 24."
     desc = (f"Nghĩa: {full}. " if full else "Chưa có trong bảng nghĩa (DEC-146). ")
     if has_fill:
         desc += "Có bản tô (Fill=On) cho cảnh báo, lỗi, trạng thái bật (DEC-141). "
@@ -167,7 +167,7 @@ const GREY={r:95/255,g:107/255,b:122/255},INK={r:18/255,g:24/255,b:38/255};
 const T=(s,size,col,fam)=>{const t=figma.createText();t.fontName={family:fam||'Inter',style:'Regular'};t.fontSize=size;t.lineHeight={unit:'PIXELS',value:Math.round(size*1.4)};t.characters=s;t.fills=[{type:'SOLID',color:col}];return t};
 const lib=await figma.getNodeByIdAsync('__LIBRARY__');const grid=lib&&lib.findChild(n=>n.name==='Lưới icon');
 if(!grid)throw new Error('Không thấy "Lưới icon" trong khung __LIBRARY__');
-const outline=inner=>`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#121826" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+const outline=inner=>`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#121826" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
 const filled=inner=>`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">${inner.replaceAll('currentColor','#121826')}</svg>`;
 function variant(svg,name,s,fill){const c=figma.createComponentFromNode(figma.createNodeFromSvg(svg));c.name=name;c.fills=[];
  if(fill){const body=c.children.filter(n=>'fills' in n&&n.fills.length&&!n.strokes.length);if(body.length)(body.length>1?figma.flatten(body,c,0):body[0]).name='Hình tô'}
