@@ -32,14 +32,17 @@ links:
 Code (lucide-react): `strokeWidth={2}` (mặc định Lucide) cho mọi icon; để
 `absoluteStrokeWidth` mặc định (tắt) thì nét tự co theo cỡ như bảng trên.
 
+**Ngoại lệ — icon trong Badge:** nét 2.5 trên khung 24 (icon 14 → ≈ 1,46px), code `strokeWidth={2.5}`, vì nét 1px quá mảnh cạnh chữ nhãn 600 (DEC-309).
+
 ## 3. Cỡ theo nền tảng (DEC-143)
 
 | Token (Platform) | Web | App | Dùng cho |
 |---|---|---|---|
 | `icon/size/sm` | 14 | 16 | Trong nút có chữ, ô nhập, ô tìm, mũi tên tuyến, chevron |
 | `icon/size/md` | 16 | 20 | Menu, hàng bảng, hàng danh sách, nút icon |
+| `icon/size/ml` | 18 | 18 | Featured icon gọn 36, nút lớn trên app, lớp Thử lại trên ảnh (DEC-306) |
 | `icon/size/lg` | 20 | 24 | Thanh tab app, icon đứng riêng cần nổi |
-| `icon/size/chip` | 14 | 14 | Chip trạng thái |
+| `icon/size/chip` | 14 | 14 | Icon trong Badge (DEC-310) |
 
 Trên Figma chọn biến thể `Size` theo bảng này: biến thể không gắn được biến, nên đổi chế độ Platform của khung màn **không** tự đổi cỡ icon. Code đọc token. Cỡ 12 để dự phòng cho chỗ rất dày, chưa có token.
 
@@ -279,7 +282,7 @@ là `list-filter`; `pen-line` và `pencil` cùng dùng cho sửa.
 
 ## 9. Trên Figma (DEC-147)
 
-- Mỗi icon là component set `icon/<tên>` với biến thể `Size=12 · 14 · 16 · 20 · 24`, nét đặt sẵn đúng cỡ.
+- Mỗi icon là component set `icon/<tên>` với biến thể `Size=12 · 14 · 16 · 18 · 20 · 24`, nét đặt sẵn đúng cỡ (18 thêm theo DEC-306, Figma chưa có biến thể này).
   Icon có bản tô thêm `Fill=Off · On`.
 - Component dùng icon mở thuộc tính đổi icon (Instance swap) và chọn Size; không resize tay, không sửa nét.
 - Icon trong chip trạng thái dùng cùng nét 2 trên khung 24 như mọi icon (mục 2, DEC-300); người vẽ không sửa nét.

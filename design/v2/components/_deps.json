@@ -1,6 +1,328 @@
 {
  "_note": "Sổ quan hệ component DS v2 (DEC-292). uses: con mà component dùng — role embed (dùng nguyên) | anchor (chỉ chỗ neo, mở component khác); provisional: con chưa dựng, cha đang vẽ tạm. inherited: quyết định chốt ở cha trước khi con được dựng — brainstorm của con hiện sẵn làm mặc định, user giữ hoặc đổi. Lệnh: python3 _scripts/ds-deps.py",
  "components": {
+  "alert-notification": {
+   "group": "base",
+   "file": "design/v2/components/base/alert-notification.md",
+   "foundations": [
+    "color",
+    "elevation",
+    "icon",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "elevation": "ebcce69dfc",
+     "icon": "21cbf9be01",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "avatar": {
+   "group": "base",
+   "file": "design/v2/components/base/avatar.md",
+   "foundations": [
+    "color",
+    "icon",
+    "radius",
+    "space",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "1a2fe27869",
+     "icon": "521f83ce61",
+     "radius": "5d41377db5",
+     "space": "00b3c1d1d4",
+     "type": "9e17693623"
+    },
+    "at": "2026-10-30"
+   }
+  },
+  "avatar-group": {
+   "group": "l1",
+   "file": "design/v2/components/l1/avatar-group.md",
+   "foundations": [
+    "color",
+    "radius",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "radius": "5d41377db5",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "badge": {
+   "group": "base",
+   "file": "design/v2/components/base/badge.md",
+   "foundations": [
+    "color",
+    "icon",
+    "radius",
+    "space",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "1a2fe27869",
+     "icon": "521f83ce61",
+     "radius": "5d41377db5",
+     "space": "00b3c1d1d4",
+     "type": "9e17693623"
+    },
+    "at": "2026-10-30"
+   }
+  },
+  "badge-avatar": {
+   "group": "_work",
+   "file": "design/v2/components/_work/badge-avatar/page.json",
+   "foundations": [
+    "color",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "1a2fe27869",
+     "radius": "5d41377db5",
+     "space": "00b3c1d1d4",
+     "touch-focus": "4141f924b6",
+     "type": "9e17693623"
+    },
+    "at": "2026-10-30"
+   }
+  },
+  "breadcrumbs": {
+   "group": "base",
+   "file": "design/v2/components/base/breadcrumbs.md",
+   "foundations": [
+    "color",
+    "elevation",
+    "icon",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "elevation": "ebcce69dfc",
+     "icon": "21cbf9be01",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "button": {
+   "group": "l1",
+   "file": "design/v2/components/l1/button.md",
+   "foundations": [
+    "color",
+    "icon",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "icon": "21cbf9be01",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "buttons": {
+   "group": "_work",
+   "file": "design/v2/components/_work/buttons/page.json",
+   "foundations": [
+    "color",
+    "motion",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "motion": "08d9908bfe",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "card": {
+   "group": "l1",
+   "file": "design/v2/components/l1/card.md",
+   "foundations": [
+    "color",
+    "elevation",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "elevation": "ebcce69dfc",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "combo-figure": {
+   "group": "application",
+   "file": "design/v2/components/application/combo-figure.md",
+   "foundations": [
+    "color"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "combo-slots": {
+   "group": "application",
+   "file": "design/v2/components/application/combo-slots.md",
+   "foundations": [
+    "color",
+    "radius",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "radius": "5d41377db5",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "combo-text": {
+   "group": "application",
+   "file": "design/v2/components/application/combo-text.md",
+   "foundations": [
+    "color",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "container-slot": {
+   "group": "application",
+   "file": "design/v2/components/application/container-slot.md",
+   "foundations": [
+    "color",
+    "radius",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "radius": "5d41377db5",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "error-page": {
+   "group": "_work",
+   "file": "design/v2/components/_work/error-page/page.json",
+   "foundations": []
+  },
+  "field-upload": {
+   "group": "application",
+   "file": "design/v2/components/application/field-upload.md",
+   "foundations": [
+    "color",
+    "icon",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {},
+    "at": "2026-10-29"
+   }
+  },
+  "form-controls": {
+   "group": "_work",
+   "file": "design/v2/components/_work/form-controls/page.json",
+   "foundations": [
+    "color",
+    "motion",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "motion": "08d9908bfe",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
   "header-navigation": {
    "uses": [
     {
@@ -35,7 +357,432 @@
      "role": "embed",
      "parts": "nút icon"
     }
-   ]
+   ],
+   "group": "application",
+   "file": "design/v2/components/application/header-navigation.md",
+   "foundations": [
+    "color",
+    "elevation",
+    "icon",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {
+     "breadcrumbs": "7bfea2787d",
+     "command-search": "chua-dung",
+     "notification-center": "chua-dung",
+     "tabs": "chua-dung",
+     "avatar": "5a68bd6814",
+     "button": "0157540c06"
+    },
+    "foundations": {
+     "color": "f706c1bc03",
+     "elevation": "ebcce69dfc",
+     "icon": "267e46bd13",
+     "radius": "5d41377db5",
+     "space": "5ace7374cf",
+     "touch-focus": "4141f924b6",
+     "type": "9e17693623"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "input": {
+   "group": "_work",
+   "file": "design/v2/components/_work/input/page.json",
+   "foundations": [],
+   "built": {
+    "children": {},
+    "foundations": {},
+    "at": "2026-10-29"
+   }
+  },
+  "list-item": {
+   "group": "l1",
+   "file": "design/v2/components/l1/list-item.md",
+   "foundations": [
+    "color",
+    "icon",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "icon": "21cbf9be01",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "map-marker": {
+   "group": "application",
+   "file": "design/v2/components/application/map-marker.md",
+   "foundations": [
+    "color",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "multiselect": {
+   "group": "_work",
+   "file": "design/v2/components/_work/multiselect/page.json",
+   "foundations": [],
+   "built": {
+    "children": {},
+    "foundations": {},
+    "at": "2026-10-29"
+   }
+  },
+  "otp-field": {
+   "group": "l1",
+   "file": "design/v2/components/l1/otp-field.md",
+   "foundations": [
+    "color",
+    "radius",
+    "space",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "progress": {
+   "group": "l1",
+   "file": "design/v2/components/l1/progress.md",
+   "foundations": [
+    "color",
+    "radius",
+    "space"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "radius": "5d41377db5",
+     "space": "ddf2320226"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "record-card": {
+   "group": "l1",
+   "file": "design/v2/components/l1/record-card.md",
+   "foundations": [
+    "color",
+    "elevation",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "elevation": "ebcce69dfc",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "select": {
+   "group": "_work",
+   "file": "design/v2/components/_work/select/page.json",
+   "foundations": [],
+   "built": {
+    "children": {},
+    "foundations": {},
+    "at": "2026-10-29"
+   }
+  },
+  "selectable-card": {
+   "group": "l1",
+   "file": "design/v2/components/l1/selectable-card.md",
+   "foundations": [
+    "color",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "sidebar-navigation": {
+   "group": "application",
+   "file": "design/v2/components/application/sidebar-navigation.md",
+   "foundations": [
+    "color",
+    "elevation",
+    "grid",
+    "icon",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "elevation": "ebcce69dfc",
+     "grid": "cdff5a29e9",
+     "icon": "21cbf9be01",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "sidebar-navigation-r2": {
+   "group": "_work",
+   "file": "design/v2/components/_work/sidebar-navigation-r2/page.json",
+   "foundations": [],
+   "built": {
+    "children": {},
+    "foundations": {},
+    "at": "2026-10-29"
+   }
+  },
+  "status-chip": {
+   "group": "l1",
+   "file": "design/v2/components/l1/status-chip.md",
+   "foundations": [
+    "color",
+    "icon",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "icon": "21cbf9be01",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "status-row": {
+   "group": "l1",
+   "file": "design/v2/components/l1/status-row.md",
+   "foundations": [
+    "color",
+    "icon",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "icon": "21cbf9be01",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "summary-card": {
+   "group": "l1",
+   "file": "design/v2/components/l1/summary-card.md",
+   "foundations": [
+    "color",
+    "elevation",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "elevation": "ebcce69dfc",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "tag": {
+   "group": "_work",
+   "file": "design/v2/components/_work/tag/page.json",
+   "foundations": [],
+   "built": {
+    "children": {},
+    "foundations": {},
+    "at": "2026-10-29"
+   }
+  },
+  "text-field": {
+   "group": "l1",
+   "file": "design/v2/components/l1/text-field.md",
+   "foundations": [
+    "color",
+    "icon",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "icon": "21cbf9be01",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "tooltip": {
+   "group": "base",
+   "file": "design/v2/components/base/tooltip.md",
+   "foundations": [
+    "color",
+    "elevation",
+    "grid",
+    "icon",
+    "radius",
+    "space",
+    "touch-focus",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "elevation": "ebcce69dfc",
+     "grid": "cdff5a29e9",
+     "icon": "21cbf9be01",
+     "radius": "5d41377db5",
+     "space": "ddf2320226",
+     "touch-focus": "4141f924b6",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "tyre-layout": {
+   "group": "application",
+   "file": "design/v2/components/application/tyre-layout.md",
+   "foundations": [
+    "color",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "vehicle-card": {
+   "group": "application",
+   "file": "design/v2/components/application/vehicle-card.md",
+   "foundations": [
+    "color",
+    "radius",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "radius": "5d41377db5",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "vehicle-option-card": {
+   "group": "application",
+   "file": "design/v2/components/application/vehicle-option-card.md",
+   "foundations": [
+    "color",
+    "space",
+    "type"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "space": "ddf2320226",
+     "type": "8180cbbfd7"
+    },
+    "at": "2026-10-29"
+   }
+  },
+  "vehicle-thumb": {
+   "group": "application",
+   "file": "design/v2/components/application/vehicle-thumb.md",
+   "foundations": [
+    "color",
+    "radius",
+    "space"
+   ],
+   "built": {
+    "children": {},
+    "foundations": {
+     "color": "f706c1bc03",
+     "radius": "5d41377db5",
+     "space": "ddf2320226"
+    },
+    "at": "2026-10-29"
+   }
   }
  },
  "inherited": {
@@ -65,5 +812,43 @@
     "choice": "Số đếm đỏ status/danger-solid, chữ 12 đậm, tối đa 9+"
    }
   ]
+ },
+ "foundations": {
+  "color": {
+   "name": "Màu",
+   "file": "design/v2/foundations.md"
+  },
+  "type": {
+   "name": "Chữ",
+   "file": "design/v2/foundations.md"
+  },
+  "radius": {
+   "name": "Bo góc",
+   "file": "design/v2/foundations.md"
+  },
+  "space": {
+   "name": "Khoảng cách",
+   "file": "design/v2/foundations.md"
+  },
+  "grid": {
+   "name": "Lưới, độ rộng, breakpoint",
+   "file": "design/v2/foundations.md"
+  },
+  "elevation": {
+   "name": "Lớp nổi, làm mờ nền",
+   "file": "design/v2/foundations.md"
+  },
+  "touch-focus": {
+   "name": "Vùng chạm và focus",
+   "file": "design/v2/foundations.md"
+  },
+  "motion": {
+   "name": "Chuyển động",
+   "file": "design/v2/foundations.md"
+  },
+  "icon": {
+   "name": "Icon",
+   "file": "design/v2/icons.md"
+  }
  }
 }

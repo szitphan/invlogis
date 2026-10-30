@@ -74,7 +74,33 @@ def add_btn(size="md"):
 
 SIZES = [("xs", "XS"), ("sm", "SM"), ("md", "MD"), ("lg", "LG"), ("xl", "XL"), ("xxl", "XXL")]
 
-CSS = tok_css() + BASE_CSS + """
+CSS_A = """
+/* khung màn Bản B (thay style inline) */
+/* góp ý 29/10: thử chữ badge 500 trong bảng danh sách (cột Trạng thái + Loại hàng); DEC-277 đang là 600 */
+.tbl .fb .fl{font-weight:500}
+[data-sx="bools4"]{grid-template-columns:60px repeat(4,max-content)}[data-sx="bools5"]{grid-template-columns:60px repeat(5,max-content)}
+[data-sx="sx1"]{grid-template-columns:100px repeat(8,max-content)}
+[data-sx="sx2"]{grid-template-columns:70px repeat(6,96px)}
+[data-sx="sx3"]{gap:48px;align-items:flex-start;flex-wrap:wrap}
+[data-sx="sx4"]{gap:28px}
+[data-sx="sx5"]{gap:24px}
+[data-sx="sx6"]{font-size:13px}
+[data-sx="sx7"]{max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-sx="sx8"]{display:contents}
+[data-sx="sx9"]{padding:0 24px}
+[data-sx="sx10"]{overflow:hidden}
+[data-sx="sx11"]{margin-top:-1px;border-top:0}
+[data-sx="sx12"]{font:600 17px/24px var(--font-body)}
+[data-sx="sx13"]{padding:4px 16px 0}
+[data-sx="sx14"]{width:36px;height:36px;border-radius:50%}
+[data-sx="sx15"]{width:140px}
+[data-sx="sx16"]{width:200px;margin-top:6px}
+[data-sx="sx17"]{display:flex;flex-direction:column;gap:12px}
+[data-sx="sx18"]{font-size:15px;font-weight:600}
+[data-sx="sx19"]{gap:8px}
+[data-sx="sx20"]{display:flex;flex-direction:column;gap:14px;margin-top:16px}
+[data-sx="sx21"]{width:320px}
+/* ===== Bản A (đã thay bằng Bản B) — chỉ còn cho hình D1–D6 vòng brainstorm ===== */
 /* ===== Badge ===== chữ type/chip-sm-strong mọi cỡ (DEC-277) */
 .bd{display:inline-flex;align-items:center;gap:var(--chip-icon-gap);height:var(--chip-height);padding:0 var(--chip-padding-x);
  font:600 var(--chip-font-size-sm)/var(--chip-line-height-sm) var(--font-body);white-space:nowrap;max-width:var(--chip-label-max-width);
@@ -148,6 +174,8 @@ CSS = tok_css() + BASE_CSS + """
 .mrow .s{font-size:13px;line-height:18px;color:var(--color-text-secondary)}
 .prof{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 16px 12px}
 .flt{display:flex;gap:8px;padding:0 24px 12px;flex-wrap:wrap}
+.dh{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.kv{display:grid;grid-template-columns:140px 1fr;gap:14px 16px;margin:0;font-size:14px;line-height:20px}.kv dt{color:var(--color-text-secondary)}.kv dd{margin:0;min-width:0}
 .tg{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 4px 0 8px;border:1px solid var(--color-border-strong);border-radius:6px;font:600 12px/18px var(--font-body);color:var(--color-text-secondary-strong)}
 .tg button{border:0;background:none;padding:0;width:16px;height:16px;display:grid;place-items:center;color:inherit;opacity:.6}
 """
@@ -265,13 +293,530 @@ TBL3 = lambda d: mini({"D3": d}, f'<table class="tbl card" style="width:auto"><t
                                  f'<tr><td>{bd("Đang chạy", "blue", "pill", icon="dot")}</td><td><span class="st-rule">{bd("Hàng lạnh", "teal", "modern", icon="dot")}</span><span class="st-free">{bd("Hàng lạnh", "teal", "badge")}</span></td></tr>'
                                  f'<tr><td>{bd("Trễ 25 phút", "red", "pill", icon="dot")}</td><td><span class="st-rule">{bd("Quá khổ", "purple", "modern", icon="dot")}</span><span class="st-free">{bd("Quá khổ", "purple", "badge")}</span></td></tr></table>')
 
+# =====================================================================================
+# Bản B — theo cấu trúc Figma hiện tại (Section Badges 6657:165305 · Avatars 6657:165741, đo 29/10).
+# Bản A (ở trên) giữ nguyên như bản đã đăng artifact; chọn bản ở điểm V.
+# =====================================================================================
+FSIZES = [("xs", "XS", 24), ("sm", "SM", 32), ("md", "MD", 36), ("lg", "LG", 48), ("xl", "XL", 64), ("xxl", "XXL", 88)]
+FTYPES = [("pc", "Pill Color"), ("po", "Pill Outline"), ("bc", "Badge Color"), ("bo", "Badge Outline"), ("bm", "Badge Modern"), ("dt", "Dot")]
+
+
+def fbd(label="Đang chạy", color="gray", typ="pc", size="md", dot=True, icon=None, count=None, count_only=None, x=False, attrs=""):
+    """Badge Figma: Type × Color × Size + boolean Has Dot / Has Icon Leading / Has Count / Count Only / Has X Close / Has Label."""
+    inner = ""
+    if count_only is not None:
+        inner = f'<span class="flw fco">{count_only}</span>'
+    else:
+        if icon:
+            inner += f'<span class="fdw iw">{ic(icon, 14, "fi").replace('stroke-width="2"', 'stroke-width="2.5"')}</span>'
+        elif dot:
+            inner += '<span class="fdw"><i class="fdot"></i></span>'
+        inner += f'<span class="flw"><span class="fl">{label}</span></span>'
+        if count is not None:
+            inner += f'<b class="fcnt">{count}</b>'
+        if x:
+            inner += f'<button class="fx" aria-label="Bỏ {label}">{ic("x", 14)}</button>'
+    return f'<span class="fb {typ} {size} c-{color}" {attrs}>{inner}</span>'
+
+
+def fstatus(status):
+    if not status:
+        return ""
+    lab = {"on": "Đang trực", "off": "Ngoại tuyến", "busy": "Đang chạy chuyến", "away": "Tạm vắng"}[status]
+    return f'<i class="fst {status}" aria-label="{lab}"><i></i></i>'
+
+
+def fav(size="md", content="initials", text="NA", status=None, i=0, attrs=""):
+    """Avatar Figma: Content Image | Loading | Initials | Icon | Upload × Size XS–XXL; Status = instance lồng _Avatar status."""
+    if content in ("image", "loading"):
+        inner = '<span class="fph" role="img" aria-label="Ảnh đại diện"></span>'
+    elif content == "icon":
+        inner = ic("user", 20, "fai")
+    else:
+        inner = f'<span class="fat">{text}</span>'
+    if content == "loading":
+        inner += ('<span class="fscrim"></span><svg class="fspin" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" '
+                  'stroke="#fff" stroke-opacity=".3" stroke-width="2"/><path d="M8 2a6 6 0 0 1 6 6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>')
+    if content in ("upload", "loading"):
+        inner += f'<span class="fup{" dis" if content == "loading" else ""}" aria-label="Đổi ảnh đại diện">{ic("camera", 12, "fupi")}</span>'
+    st = fstatus(status) if content not in ("upload", "loading") else ""
+    return f'<span class="fa {size} {content}" {attrs}>{inner}{st}</span>'
+
+
+def fcompany(size="md", content="initials", text="DL"):
+    inner = {"image": ic("image", 16, "fai"), "icon": ic("building", 16, "fai")}.get(content, f'<span class="fat">{text}</span>')
+    return f'<span class="fa {size} co {content}">{inner}</span>'
+
+
+def fgroup(size="md", more=3):
+    s = {"xs": "xs", "md": "md", "lg": "lg"}[size]
+    items = "".join(f'<span class="fgw{" n" if k else ""}">{fav(s, "initials" if k % 2 else "image", ["TB", "LC", "PD", "NA"][k], i=k)}</span>' for k in range(4))
+    return f'<span class="fg {s}">{items}<span class="fgw n"><span class="fa {s} more"><span class="fat">+{more}</span></span></span></span>'
+
+
+def flg(name="Nguyễn Văn An", sub="Lái xe · 51C-123.45", size="md", status=None, content="initials", text="NA", i=0):
+    av_size = {"sm": "sm", "md": "md", "lg": "lg"}[size]
+    return f'<span class="flg {size}">{fav(av_size, content, text, status, i)}<span class="ftx"><b>{name}</b><span>{sub}</span></span></span>'
+
+
+def fadd(state="default"):
+    if state == "loading":
+        return ('<button class="fadd loading" aria-label="Thêm người" aria-busy="true" disabled><svg viewBox="0 0 16 16" aria-hidden="true">'
+                '<circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/>'
+                '<path d="M8 2a6 6 0 0 1 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>')
+    return f'<button class="fadd {state}" aria-label="Thêm người"{" disabled" if state == "disabled" else ""}>{ic("plus", 24)}</button>'
+
+
+import base64  # noqa: E402
+PHOTO = base64.b64encode((Path(__file__).parent / "assets/avatar-photo.jpg").read_bytes()).decode()  # ảnh mẫu Figma 6657:166104 (Unsplash)
+
+CSS = tok_css() + """
+.c-gray{--c-bg:var(--color-chip-gray-bg);--c-fg:var(--color-chip-gray-fg);--c-dot:var(--neutral-500);--c-ring:var(--neutral-200)}
+.c-blue{--c-bg:var(--color-chip-blue-bg);--c-fg:var(--color-chip-blue-fg);--c-dot:var(--blue-600);--c-ring:var(--blue-200)}
+.c-green{--c-bg:var(--color-chip-green-bg);--c-fg:var(--color-chip-green-fg);--c-dot:var(--green-600);--c-ring:var(--green-200)}
+.c-yellow{--c-bg:var(--color-chip-yellow-bg);--c-fg:var(--color-chip-yellow-fg);--c-dot:var(--yellow-600);--c-ring:var(--yellow-200)}
+.c-red{--c-bg:var(--color-chip-red-bg);--c-fg:var(--color-chip-red-fg);--c-dot:var(--red-600);--c-ring:var(--red-200)}
+.c-teal{--c-bg:var(--color-chip-teal-bg);--c-fg:var(--color-chip-teal-fg);--c-dot:var(--teal-600);--c-ring:var(--teal-200)}
+.c-purple{--c-bg:var(--color-chip-purple-bg);--c-fg:var(--color-chip-purple-fg);--c-dot:var(--purple-600);--c-ring:var(--purple-200)}
+.c-orange{--c-bg:var(--color-chip-orange-bg);--c-fg:var(--color-chip-orange-fg);--c-dot:var(--orange-600);--c-ring:var(--orange-200)}
+"""
+CSS += f".fa .fph{{position:absolute;inset:0;border-radius:inherit;background:url(data:image/jpeg;base64,{PHOTO}) center/cover}}"
+CSS += """
+/* ===================== Bản B — theo Figma ===================== */
+/* Badge theo spec Status chip (DEC-310): chữ type/caption-strong (SM type/chip-sm-strong 12/18) · chấm 8 → chữ 6 · icon 14 → chữ 4 · lề phía chấm/icon 6/8/10, phía chữ 10/12/14. Số đo viết theo từng cỡ để trang đối chiếu ghi đè đúng cỡ */
+.fb{display:inline-flex;align-items:center;vertical-align:middle;white-space:nowrap;font:600 var(--type-caption-size)/var(--type-caption-line-height) var(--font-body);outline-offset:-1px}
+.fb.pc,.fb.po{border-radius:var(--radius-full)}
+.fb.sm{height:22px;gap:var(--chip-icon-gap);padding-left:var(--chip-padding-x-icon-sm);font-size:var(--chip-font-size-sm);line-height:var(--chip-line-height-sm)}
+.fb.pc.sm,.fb.po.sm{padding-right:var(--chip-padding-x-sm)}
+.fb.bc.sm,.fb.bo.sm,.fb.bm.sm{padding-right:var(--chip-padding-x-sm);border-radius:6px}
+.fb.sm .fcnt{height:16px}
+.fb.bc.sm .fcnt,.fb.bo.sm .fcnt,.fb.bm.sm .fcnt{border-radius:3px}
+.fb.md{height:24px;gap:var(--chip-icon-gap);padding-left:var(--chip-padding-x-icon)}
+.fb.pc.md,.fb.po.md{padding-right:var(--chip-padding-x)}
+.fb.bc.md,.fb.bo.md,.fb.bm.md{padding-right:var(--chip-padding-x);border-radius:6px}
+.fb.md .fcnt{height:16px}
+.fb.bc.md .fcnt,.fb.bo.md .fcnt,.fb.bm.md .fcnt{border-radius:3px}
+.fb.lg{height:28px;gap:var(--chip-icon-gap);padding-left:var(--chip-padding-x-icon-lg)}
+.fb.pc.lg,.fb.po.lg{padding-right:var(--chip-padding-x-lg)}
+.fb.bc.lg,.fb.bo.lg,.fb.bm.lg{padding-right:var(--chip-padding-x-lg);border-radius:8px}
+.fb.lg .fcnt{height:20px}
+.fb.bc.lg .fcnt,.fb.bo.lg .fcnt,.fb.bm.lg .fcnt{border-radius:4px}
+/* Có ô đếm: lề phải thu về chip/count-inset 3 · 3 · 4 để ô đếm cách đều trên, dưới, phải (DEC-303, DEC-310) */
+.fb.sm:has(.fcnt){padding-right:var(--chip-count-inset)}
+.fb.md:has(.fcnt),.fb.lg:has(.fcnt){padding-right:var(--chip-count-inset-lg)}
+/* Count Only (chỉ có số): khung số đệm trái chip/count-only-offset 4 → số cách đều hai bên 10 · 12 · 14 (DEC-310) */
+.fb .flw.fco{padding-left:var(--chip-count-only-offset)}
+/* Type Dot: không nền, không lề, chữ type/caption 400 màu text/primary (SM 12/18), chấm theo màu */
+.fb.dt[class]{background:transparent;color:var(--color-text-primary);font-weight:400;padding-left:0;padding-right:0;outline:0}
+/* viền (user 29/10): Pill Outline màu theo sắc 200 · Badge Outline + Modern xám. Viết riêng từng màu — không qua biến chung để trang đối chiếu không đè mọi badge */
+/* màu theo sắc, viết riêng từng màu (không qua biến chung) */
+.fb.c-gray{background:var(--color-chip-gray-bg);color:var(--color-chip-gray-fg)}.fb.c-gray .fdot{background:var(--color-chip-gray-fg)}.fb.c-gray .fi{color:var(--color-chip-gray-fg)}
+.fb.c-blue{background:var(--color-chip-blue-bg);color:var(--color-chip-blue-fg)}.fb.c-blue .fdot{background:var(--color-chip-blue-fg)}.fb.c-blue .fi{color:var(--color-chip-blue-fg)}
+.fb.c-green{background:var(--color-chip-green-bg);color:var(--color-chip-green-fg)}.fb.c-green .fdot{background:var(--color-chip-green-fg)}.fb.c-green .fi{color:var(--color-chip-green-fg)}
+.fb.c-yellow{background:var(--color-chip-yellow-bg);color:var(--color-chip-yellow-fg)}.fb.c-yellow .fdot{background:var(--color-chip-yellow-fg)}.fb.c-yellow .fi{color:var(--color-chip-yellow-fg)}
+.fb.c-red{background:var(--color-chip-red-bg);color:var(--color-chip-red-fg)}.fb.c-red .fdot{background:var(--color-chip-red-fg)}.fb.c-red .fi{color:var(--color-chip-red-fg)}
+.fb.c-teal{background:var(--color-chip-teal-bg);color:var(--color-chip-teal-fg)}.fb.c-teal .fdot{background:var(--color-chip-teal-fg)}.fb.c-teal .fi{color:var(--color-chip-teal-fg)}
+.fb.c-purple{background:var(--color-chip-purple-bg);color:var(--color-chip-purple-fg)}.fb.c-purple .fdot{background:var(--color-chip-purple-fg)}.fb.c-purple .fi{color:var(--color-chip-purple-fg)}
+.fb.c-orange{background:var(--color-chip-orange-bg);color:var(--color-chip-orange-fg)}.fb.c-orange .fdot{background:var(--color-chip-orange-fg)}.fb.c-orange .fi{color:var(--color-chip-orange-fg)}
+.fb.bm{outline:1px solid var(--color-border-strong)} /* Badge Outline viền theo màu như Pill Outline (user 29/10) */
+.fb.po.c-gray,.fb.bo.c-gray{outline:1px solid var(--neutral-200)}.fb.po.c-blue,.fb.bo.c-blue{outline:1px solid var(--blue-200)}.fb.po.c-green,.fb.bo.c-green{outline:1px solid var(--green-200)}.fb.po.c-yellow,.fb.bo.c-yellow{outline:1px solid var(--yellow-200)}.fb.po.c-red,.fb.bo.c-red{outline:1px solid var(--red-200)}.fb.po.c-teal,.fb.bo.c-teal{outline:1px solid var(--teal-200)}.fb.po.c-purple,.fb.bo.c-purple{outline:1px solid var(--purple-200)}.fb.po.c-orange,.fb.bo.c-orange{outline:1px solid var(--orange-200)}
+.fb.bm[class]{background:var(--color-bg-surface);color:var(--color-text-primary)}
+.fb .fdw{display:inline-flex;align-items:center}
+
+.fb .fdw:not(.iw){margin-right:var(--chip-dot-extra-gap)} /* chấm → chữ = chip/icon-gap 4 + 2 = chip/dot-gap 6 (DEC-310) */
+.fb .fdot{width:var(--chip-dot-size);height:var(--chip-dot-size);border-radius:50%;display:block}
+.fb .fi{width:14px;height:14px;display:block}
+.fb .flw{display:inline-flex;min-width:0;max-width:160px}
+.fb .fl{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.fb .fcnt{display:inline-flex;align-items:center;padding:0 6px;font:400 var(--chip-count-font-size)/var(--chip-count-line-height) var(--font-body);background:var(--color-bg-surface)}
+.fb .fco{font:400 var(--chip-count-font-size)/var(--chip-count-line-height) var(--font-body)} /* Count Only: caption 400 cố định (review R3, R11) */
+.fb.pc .fcnt,.fb.po .fcnt{border-radius:var(--radius-full)}
+.fb.bm .fcnt{background:var(--color-bg-muted)}
+
+/* Avatar: XS 24 · SM 32 · MD 36 · LG 48 · XL 64 · XXL 88 · chữ Initials 500. Số đo viết thẳng theo từng cỡ (lý do như Badge) */
+.fa{position:relative;display:inline-grid;place-items:center;flex:none;border-radius:50%;background:var(--avatar-bg);color:var(--avatar-fg);vertical-align:middle}
+.fa .aimg{width:100%;height:100%;border-radius:inherit;display:block}
+.fa .fat{font-weight:500;font-family:var(--font-body)}
+.fa .fai{color:var(--color-icon-secondary)}
+.fa .fscrim{position:absolute;inset:0;border-radius:50%;background:var(--avatar-scrim)}
+.fa .fspin{position:absolute;animation:fsp 1s linear infinite}
+@keyframes fsp{to{transform:rotate(360deg)}}
+.fa .fup{position:absolute;right:0;bottom:0;border-radius:50%;background:var(--color-bg-surface);border:1px solid var(--color-border-default);display:grid;place-items:center;color:var(--color-icon-secondary)}
+.fa .fup.dis{background:var(--color-bg-muted)}.fa .fup.dis .fupi{opacity:.4}
+/* _Avatar status: chấm + viền trắng 2; Offline = chấm rỗng viền xám 2. Vị trí tương đương mọi cỡ: tâm chấm trên mép tròn ở góc 45° (lệch khỏi góc khung 0,1464 × cỡ) */
+.fa .fst{position:absolute;padding:2px;border-radius:50%;background:var(--color-bg-surface);display:block;line-height:0}
+.fa .fst>i{display:block;border-radius:50%}
+.fst.on>i{background:var(--color-status-success-icon)}.fst.busy>i{background:var(--color-status-danger-icon)}.fst.away>i{background:var(--color-status-warning-icon)}
+.fst.off>i{background:var(--color-bg-surface);border:2px solid var(--neutral-500);box-sizing:border-box}
+.fa.xs{width:24px;height:24px}
+.fa.xs .fat{font-size:12px;line-height:16px}
+.fa.xs .fai{width:14px;height:14px}
+.fa.xs .fspin{width:12px;height:12px}
+.fa.xs .fup{width:14px;height:14px}
+.fa.xs .fupi{width:12px;height:12px}
+.fa.xs .fst{right:-1.5px;bottom:-1.5px}
+.fa.xs .fst>i{width:6px;height:6px}
+.fa.sm{width:32px;height:32px}
+.fa.sm .fat{font-size:12px;line-height:16px}
+.fa.sm .fai{width:16px;height:16px}
+.fa.sm .fspin{width:14px;height:14px}
+.fa.sm .fup{width:16px;height:16px}
+.fa.sm .fupi{width:12px;height:12px}
+.fa.sm .fst{right:-1.3px;bottom:-1.3px}
+.fa.sm .fst>i{width:8px;height:8px}
+.fa.md{width:var(--avatar-size-md);height:var(--avatar-size-md)}
+.fa.md .fat{font-size:14px;line-height:20px}
+.fa.md .fai{width:20px;height:20px}
+.fa.md .fspin{width:16px;height:16px}
+.fa.md .fup{width:16px;height:16px}
+.fa.md .fupi{width:12px;height:12px}
+.fa.md .fst{right:-1.7px;bottom:-1.7px}
+.fa.md .fst>i{width:10px;height:10px}
+.fa.lg{width:var(--avatar-size-lg);height:var(--avatar-size-lg)}
+.fa.lg .fat{font-size:17px;line-height:24px}
+.fa.lg .fai{width:24px;height:24px}
+.fa.lg .fspin{width:20px;height:20px}
+.fa.lg .fup{width:20px;height:20px}
+.fa.lg .fupi{width:14px;height:14px}
+.fa.lg .fst{right:-1.0px;bottom:-1.0px}
+.fa.lg .fst>i{width:12px;height:12px}
+.fa.xl{width:var(--avatar-size-xl);height:var(--avatar-size-xl)}
+.fa.xl .fat{font-size:20px;line-height:28px}
+.fa.xl .fai{width:24px;height:24px}
+.fa.xl .fspin{width:24px;height:24px}
+.fa.xl .fup{width:24px;height:24px}
+.fa.xl .fupi{width:16px;height:16px}
+.fa.xl .fst{right:0.4px;bottom:0.4px}
+.fa.xl .fst>i{width:14px;height:14px}
+.fa.xxl{width:var(--avatar-size-xxl);height:var(--avatar-size-xxl)}
+.fa.xxl .fat{font-size:24px;line-height:32px}
+.fa.xxl .fai{width:24px;height:24px}
+.fa.xxl .fspin{width:28px;height:28px}
+.fa.xxl .fup{width:32px;height:32px}
+.fa.xxl .fupi{width:20px;height:20px}
+.fa.xxl .fst{right:2.9px;bottom:2.9px}
+.fa.xxl .fst>i{width:16px;height:16px}
+/* Company avatar: vuông bo theo cỡ, viền 1 */
+.fa.co{border-radius:6px;border:1px solid var(--color-border-default)}.fa.co.image{background:var(--color-bg-surface)}
+.fa.co.xs{border-radius:4px}.fa.co.lg{border-radius:8px}.fa.co.xl{border-radius:12px}.fa.co.xxl{border-radius:16px}
+/* Avatar group: mỗi avatar trong khung trắng đệm 2, chồng −6/−8/−12; ô +n nền muted */
+.fg{display:inline-flex;align-items:center}.fg .fgw{display:inline-flex;padding:2px;border-radius:50%;background:var(--color-bg-surface);position:relative}
+.fg.xs .fgw.n{margin-left:var(--avatar-group-overlap-sm)}.fg.md .fgw.n{margin-left:var(--avatar-group-overlap-md)}.fg.lg .fgw.n{margin-left:var(--avatar-group-overlap-lg)}
+.fg .fa.more{background:var(--color-bg-muted);color:var(--color-text-secondary-strong)}
+[data-D4=b] .fg .fgw:nth-child(1){z-index:5}[data-D4=b] .fg .fgw:nth-child(2){z-index:4}[data-D4=b] .fg .fgw:nth-child(3){z-index:3}[data-D4=b] .fg .fgw:nth-child(4){z-index:2}
+/* Avatar label group: rộng 240, cách 8; SM 32 + 14/20 · 12/16 · MD 36 + 14/20 · 14/20 · LG 48 + 14/20 · 14/20 */
+.flg{display:inline-flex;align-items:center;gap:8px;width:240px;max-width:100%;min-width:0}
+.flg .ftx{display:flex;flex-direction:column;min-width:0;flex:1}
+.flg b{font:600 14px/20px var(--font-body);color:var(--color-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.flg .ftx span{font:400 var(--avatar-label-subtitle-size)/var(--avatar-label-subtitle-line-height) var(--font-body);color:var(--color-text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Avatar add button: State Default · Hover · Focus · Disabled, 36 */
+.fadd{width:48px;height:48px;border-radius:50%;border:1px dashed var(--color-border-strong);background:var(--color-bg-surface);color:var(--color-icon-secondary);
+ display:inline-grid;place-items:center;padding:0;cursor:pointer}
+.fadd svg{width:24px;height:24px}.fadd.hover,.fadd:hover{background:var(--color-bg-hover)}
+.fadd.loading{cursor:progress}.fadd.loading svg{animation:fsp 1s linear infinite}
+.fadd.focus,.fadd:focus-visible{outline:var(--focus-width) solid var(--focus-color);outline-offset:var(--focus-offset)}
+.fadd:disabled{opacity:.4;cursor:not-allowed}
+.vnote{font:400 12px/16px var(--font-body);color:var(--color-text-tertiary);white-space:normal}
+"""
+
+
+def f_badge_types():
+    head = '<div class="vl"></div>' + "".join(f'<div class="vl">{n}</div>' for _, n, _ in COLORS)
+    rows = "".join(f'<div class="vl">{n}</div>' + "".join(f'<div>{fbd("Đang chạy", c, t)}</div>' for c, _, _ in COLORS) for t, n in FTYPES)
+    return f'<div class="vgrid" data-sx="sx1">{head}{rows}</div>'
+
+
+def f_badge_bools(x=True):
+    cols = ("Has Dot (mặc định)", "Has Icon Leading", "Has Count", "Count Only") + (("Has X Close",) if x else ())
+    out = '<div class="vl"></div>' + "".join(f'<div class="vl">{x}</div>' for x in cols)
+    for sz, lab in (("sm", "SM 22"), ("md", "MD 24"), ("lg", "LG 28")):
+        out += (f'<div class="vl">{lab}</div><div>{fbd("Đang chạy", "blue", "pc", sz)}</div>'
+                f'<div>{fbd("Đã giao", "green", "pc", sz, icon="truck")}</div>'
+                f'<div>{fbd("Chờ điều", "yellow", "pc", sz, count=12)}</div>'
+                f'<div>{fbd(color="red", typ="pc", size=sz, count_only=12)}</div>'
+                + (f'<div>{fbd("Hàng lạnh", "teal", "bc", sz, x=True)}</div>' if x else ""))
+    return f'<div class="vgrid" data-sx="bools{len(cols)}">{out}</div>'
+
+
+def f_badge_types_size():
+    out = '<div class="vl"></div>' + "".join(f'<div class="vl">{n}</div>' for n in ("Badge Color", "Badge Color + Count", "Badge Outline + Count", "Badge Modern + Count"))
+    for sz, lab in (("sm", "SM 22"), ("md", "MD 24"), ("lg", "LG 28")):
+        out += (f'<div class="vl">{lab}</div><div>{fbd("Hàng lạnh", "teal", "bc", sz)}</div><div>{fbd("Chờ điều", "yellow", "bc", sz, count=12)}</div>'
+                f'<div>{fbd("Chờ điều", "yellow", "bo", sz, count=12)}</div><div>{fbd("Hàng lạnh", "teal", "bm", sz, count=3)}</div>')
+    return f'<div class="vgrid" data-sx="bools4">{out}</div>'
+
+
+def f_av_matrix():
+    head = '<div class="vl"></div>' + "".join(f'<div class="vl">{n} · {px}</div>' for _, n, px in FSIZES)
+    rows = ""
+    for content, lab in (("image", "Image"), ("loading", "Loading"), ("initials", "Initials"), ("icon", "Icon"), ("upload", "Upload")):
+        rows += f'<div class="vl">{lab}</div>' + "".join(f'<div>{fav(s, content, "NA", i=k % 4)}</div>' for k, (s, _, _) in enumerate(FSIZES))
+    return f'<div class="vgrid" data-sx="sx2">{head}{rows}</div>'
+
+
+def f_co_matrix():
+    head = '<div class="vl"></div>' + "".join(f'<div class="vl">{n}</div>' for _, n, _ in FSIZES)
+    rows = "".join(f'<div class="vl">{lab}</div>' + "".join(f'<div>{fcompany(s, c)}</div>' for s, _, _ in FSIZES)
+                   for c, lab in (("image", "Image"), ("initials", "Initials"), ("icon", "Icon")))
+    return f'<div class="vgrid" data-sx="sx2">{head}{rows}</div>'
+
+
+def f_status_matrix():
+    head = '<div class="vl"></div>' + "".join(f'<div class="vl">{n}</div>' for _, n, _ in FSIZES)
+    rows = "".join(f'<div class="vl">{lab}</div>' + "".join(f'<div>{fav(s, "initials", "NA", st)}</div>' for s, _, _ in FSIZES)
+                   for st, lab in ((None, "None"), ("on", "Online"), ("off", "Offline"), ("busy", "Busy"), ("away", "Away")))
+    return f'<div class="vgrid" data-sx="sx2">{head}{rows}</div>'
+
+
+VNOTE = '<p class="vnote">Bản B theo Figma: viền (D2), chấm Offline (D5) và thang cỡ (D6) lấy đúng như Figma, không đổi theo D2/D5/D6. D1, D3, D4 vẫn áp dụng.</p>'
+
+VAR_WEB_F = f"""<div class="vt">{VNOTE}
+<div><div class="vh">Badge · Type × Color <small>Size=MD · 5 kiểu theo Figma (6657:165736)</small></div>{f_badge_types()}</div>
+<div><div class="vh">Badge · Size × phần thêm <small>boolean, không phải biến thể · SM 22 · MD 24 · LG 28</small></div>{f_badge_bools()}</div>
+<div><div class="vh">Chữ dài <small>khung chữ tối đa 160, cắt "…"</small></div>
+ <div class="vg">{fbd("Chờ chứng từ hải quan tại cảng Cát Lái", "yellow", "pc")}{fbd("Hàng nguy hiểm nhóm 3 — chất lỏng dễ cháy", "red", "bc")}{fbd("Hàng lạnh âm 18 độ, cần cắm điện", "teal", "bm")}</div></div>
+<div><div class="vh">Avatar · Content × Size <small>5 nội dung × 6 cỡ (6657:166192)</small></div>{f_av_matrix()}</div>
+<div class="row" data-sx="sx3">
+ <div><div class="vh">Company avatar · Content × Size</div>{f_co_matrix()}</div>
+ <div><div class="vh">_Avatar status · Status × Size <small>instance lồng, nội bộ</small></div>{f_status_matrix()}</div>
+</div>
+<div class="row" data-sx="sx3">
+ <div><div class="vh">Avatar group · Size <small>XS · MD · LG</small></div><div class="vg" data-sx="sx4">{fgroup("xs")}{fgroup("md")}{fgroup("lg")}</div></div>
+ <div><div class="vh">Avatar add button · State</div><div class="vg">{fadd("default")}{fadd("loading")}{fadd("hover")}{fadd("focus")}{fadd("disabled")}</div></div>
+</div>
+<div><div class="vh">Avatar label · Size <small>avatar + tên + dòng phụ, rộng 240 (Figma đang đặt tên set "Avatar label group" → đổi khi sửa Figma)</small></div><div class="vg" data-sx="sx5">{flg(size="sm")}{flg(size="md")}{flg(size="lg")}
+ {flg("Nguyễn Hoàng Thị Phương Thảo", "Điều phối viên ca đêm · Đội Sóng Thần", "md", text="NP")}</div></div>
+</div>"""
+
+VAR_APP_F = f"""<div class="vt">{VNOTE}
+<div><div class="vh">Badge trên app <small>cùng số đo (nhóm A)</small></div>
+ <div class="vg">{fbd("Đang chạy", "blue", "pc")}{fbd("Đã giao", "green", "pc", icon="check")}{fbd("Trễ 25 phút", "red", "po")}{fbd("Hàng lạnh", "teal", "bm")}{fbd("Chờ điều", "yellow", "pc", count=3)}</div></div>
+<div><div class="vh">Avatar + status</div><div class="vg">{fav("sm", "image", status="on", i=0)}{fav("md", "image", status="busy", i=1)}{fav("lg", "initials", "LC", status="away")}{fav("xl", "image", status="off", i=2)}</div></div>
+<div><div class="vh">Avatar label</div>{flg("Trần Văn Bình", "Lái xe · 51C-123.45", "md", "on", "image", i=0)}</div>
+<div><div class="vh">Ảnh hồ sơ <small>Upload → Loading → Image</small></div><div class="vg">{fav("xxl", "upload", "NA")}{fav("xxl", "loading", i=3)}{fav("xxl", "image", i=3)}</div></div>
+<div><div class="vh">Avatar group</div>{fgroup("md", 2)}</div>
+</div>"""
+
+
+def lst_rows_f(long=False):
+    out = ""
+    for k, (code, route, (st, sc), (ty, tc), drv) in enumerate(ROWS):
+        if long and k == 0:
+            st, route = "Chờ chứng từ hải quan tại cảng Cát Lái", "Tân Cảng Cát Lái (cổng B) → ICD Sóng Thần, Dĩ An, Bình Dương"
+        # bảng danh sách: badge trạng thái dạng Icon Leading (góp ý 29/10), icon theo bộ icon badge trên Figma
+        icon = {"Đang chạy": "navigation", "Trễ 25 phút": "triangle-alert", "Chờ điều": "hourglass", "Đã giao": "circle-check"}.get(st, "clock")
+        free = fbd(st, sc, "pc", icon=icon, attrs="data-cmp")
+        typ = (f'<span class="st-rule">{fbd(ty, tc, "bm", attrs="data-cmp")}</span>'
+               f'<span class="st-free">{fbd(ty, tc, "bc", attrs="data-cmp")}</span>')
+        d = (flg(drv[0], drv[1], "sm", None, "image", i=drv[2]) if drv  # danh sách: avatar không có chấm trạng thái (góp ý 29/10)
+             else '<span class="muted" data-sx="sx6">Chưa điều</span>')
+        out += (f'<tr><td class="mono">{code}</td><td data-sx="sx7">{route}</td>'
+                f'<td>{free}</td><td>{typ}</td><td>{d}</td></tr>')
+    return out
+
+
+LIST_F = f"""<div class="tbar"><span class="muted" data-sx="sx6">Ca trực hôm nay</span>{fgroup("xs", 3)}<span class="sp"></span>
+<span class="muted" data-sx="sx6">48 lệnh</span></div>
+<div class="flt"><span class="xtag tg">Đang chạy <button aria-label="Bỏ lọc">{ic("x", 12)}</button></span><span class="xtag tg">Hàng lạnh <button aria-label="Bỏ lọc">{ic("x", 12)}</button></span>
+</div>
+<div data-sx="sx9"><table class="tbl card" data-sx="sx10"><tr><th>Mã lệnh</th><th>Tuyến</th><th>Trạng thái</th><th>Loại hàng</th><th>Lái xe</th></tr>
+<tbody data-hide="long">{lst_rows_f()}</tbody><tbody data-show="state:long">{lst_rows_f(True)}</tbody></table></div>"""
+
+APP_F = (f'<div class="prof">{fav("xxl", "image", status="on", i=3, attrs="data-cmp")}<b data-sx="sx12">Nguyễn Văn An</b>'
+         f'<span class="muted" data-sx="sx6">Đội trưởng ca ngày</span></div>'
+         f'<div class="vh" data-sx="sx13">Lái xe trong đội</div>'
+         + "".join(f'<div class="mrow">{fav("md", "image" if k != 1 else "initials", "LC", s, i=k, attrs="data-cmp")}<div class="tx2"><b>{n}</b><div class="s">{sub}</div></div>{fbd(st, sc, "pc", attrs="data-cmp")}</div>'
+                   for k, (n, sub, s, (st, sc), _) in enumerate(DRIVERS))
+)
+
+
+# ---------- Vòng 2 · Preview (tổ hợp chốt 29/10: V=B theo Figma · D1 A bỏ X · D3 A · D4 A) ----------
+PICK = {"V": "b", "D1": "a", "D2": "b", "D3": "a", "D4": "a", "D5": "a", "D6": "a"}
+_pa = " ".join(f'data-{k}="{v}"' for k, v in PICK.items())
+
+PV_WEB = f"""<div class="vt">
+<div><div class="vh">Badge · Type × Color <small>Size=MD</small></div>{f_badge_types()}</div>
+<div><div class="vh">Badge · Size × phần thêm <small>boolean · SM 22 · MD 24 · LG 28 · không có X (D1 = A, chip lọc dùng Tag)</small></div>{f_badge_bools(False)}</div>
+<div><div class="vh">Badge Color · Outline · Modern theo cỡ <small>bo 6 · 6 · 8, ô đếm bo đồng tâm 3 · 3 · 4</small></div>{f_badge_types_size()}</div>
+<div><div class="vh">Chữ dài <small>khung chữ tối đa 160, cắt "…", tooltip hiện đủ</small></div>
+ <div class="vg">{fbd("Chờ chứng từ hải quan tại cảng Cát Lái", "yellow", "pc")}{fbd("Hàng nguy hiểm nhóm 3 — chất lỏng dễ cháy", "red", "bc")}{fbd("Hàng lạnh âm 18 độ, cần cắm điện", "teal", "bm")}</div></div>
+<div><div class="vh">Avatar · Content × Size</div>{f_av_matrix()}</div>
+<div><div class="vh">_Avatar status · Status × Size <small>instance lồng, nội bộ</small></div>{f_status_matrix()}</div>
+<div><div class="vh">Company avatar · Content × Size</div>{f_co_matrix()}</div>
+<div class="row" data-sx="sx3">
+ <div><div class="vh">Avatar group · Size</div><div class="vg" data-sx="sx4">{fgroup("xs")}{fgroup("md")}{fgroup("lg")}</div></div>
+ <div><div class="vh">Avatar add button · State</div><div class="vg">{fadd("default")}{fadd("loading")}{fadd("hover")}{fadd("focus")}{fadd("disabled")}</div></div>
+</div>
+<div><div class="vh">Avatar label · Size <small>rộng 240</small></div><div class="vg" data-sx="sx5">{flg(size="sm")}{flg(size="md")}{flg(size="lg")}
+ {flg("Nguyễn Hoàng Thị Phương Thảo", "Điều phối viên ca đêm · Đội Sóng Thần", "md", text="NP")}</div></div>
+</div>"""
+
+PV_MOB = [
+    f"""<div class="vt"><div><div class="vh">Badge</div><div class="vg">{fbd("Đang chạy", "blue", "pc")}{fbd("Đã giao", "green", "pc", icon="check")}{fbd("Trễ 25 phút", "red", "po")}{fbd("Chờ điều", "yellow", "pc", count=3)}{fbd("Hàng lạnh", "teal", "bm")}{fbd(color="red", count_only=5)}</div></div>
+<div><div class="vh">Chữ dài</div><div class="vg">{fbd("Chờ chứng từ hải quan tại cảng Cát Lái", "yellow", "pc")}</div></div></div>""",
+    f"""<div class="vt"><div><div class="vh">Avatar + status</div><div class="vg">{fav("sm", "image", status="on")}{fav("md", "image", status="busy")}{fav("lg", "initials", "LC", status="away")}{fav("xl", "image", status="off")}</div></div>
+<div><div class="vh">Avatar label · Avatar group</div><div data-sx="sx17">{flg("Trần Văn Bình", "Lái xe · 51C-123.45", "md", "on", "image")}{flg("Nguyễn Hoàng Thị Phương Thảo", "Điều phối viên ca đêm · Đội Sóng Thần", "md", text="NP")}{fgroup("md", 2)}</div></div></div>""",
+    f"""<div class="vt"><div><div class="vh">Ảnh hồ sơ <small>Upload → Loading → Image</small></div><div class="vg">{fav("xxl", "upload", "NA")}{fav("xxl", "loading")}{fav("xxl", "image", status="on")}</div></div>
+<div><div class="vh">Company avatar</div><div class="vg">{fcompany("lg", "image")}{fcompany("lg", "initials")}{fcompany("lg", "icon")}</div></div></div>""",
+]
+
+DETAIL_F = f"""<div class="pg">
+<div class="dh"><span class="mono" data-sx="sx18">LVT-2026-0412</span>
+ <span data-hide="long">{fbd("Đang chạy", "blue", "pc", "lg", attrs="data-cmp")}</span><span data-show="state:long">{fbd("Chờ chứng từ hải quan tại cảng Cát Lái", "yellow", "pc", "lg", attrs="data-cmp")}</span>
+ {fbd("Hàng lạnh", "teal", "bm", "lg", attrs="data-cmp")}<span class="sp"></span>
+ <span class="muted" data-sx="sx6">Người theo dõi</span>{fgroup("xs", 2)}{fadd()}</div>
+<dl class="kv">
+ <dt>Khách hàng</dt><dd><span class="row" data-sx="sx19">{fcompany("sm", "initials", "DL")}<span>Delta Logistics</span></span></dd>
+ <dt>Tuyến</dt><dd>Cát Lái → ICD Sóng Thần</dd>
+ <dt>Lái xe</dt><dd>{flg("Trần Văn Bình", "51C-123.45 · đang chạy chuyến", "md", "busy", "image")}</dd>
+ <dt>Điều phối</dt><dd>{flg("Nguyễn Hoàng Thị Phương Thảo", "Điều phối viên ca đêm · Đội Sóng Thần", "sm", text="NP")}</dd>
+</dl>
+</div>"""
+
+PROFILE_F = f"""<div class="prof">
+<span data-hide="upload uploading">{fav("xxl", "image", status="on", attrs="data-cmp")}</span>
+<span data-show="state:uploading">{fav("xxl", "loading", attrs="data-cmp")}</span>
+<span data-show="state:upload">{fav("xxl", "upload", "NA", attrs="data-cmp")}</span>
+<span class="muted" data-sx="sx6" data-hide="upload uploading">Chạm vào ảnh để đổi ảnh đại diện</span>
+<span class="muted" data-sx="sx6" data-show="state:upload">Chưa có ảnh. Chạm biểu tượng máy ảnh để thêm</span>
+<span class="muted" data-sx="sx6" data-show="state:uploading">Đang tải ảnh lên…</span></div>
+<div class="mrow"><div class="tx2"><div class="s">Họ và tên</div><b data-hide="long">Nguyễn Văn An</b><b data-show="state:long">Nguyễn Hoàng Thị Phương Thảo</b></div></div>
+<div class="mrow"><div class="tx2"><div class="s">Vai trò</div><b>Lái xe · Đội Sóng Thần</b></div>{fbd("Đang trực", "green", "pc", attrs="data-cmp")}</div>
+<div class="mrow"><div class="tx2"><div class="s">Xe đang nhận</div><b>51C-123.45 · mooc 51R-045.67</b></div></div>"""
+
+preview = {
+    "version": 2, "pick": PICK,
+    "changes": "Bản 29/10 theo tổ hợp chốt: Bản B (đúng cấu trúc Figma) · Badge bỏ X Close, chip lọc dùng Tag (D1 = A) · teal/tím/cam chỉ cho cột Loại ở dạng Badge Modern (D3 = A) · nhóm avatar: avatar sau đè avatar trước (D4 = A). "
+               "Thêm màn Chi tiết lệnh (web) và Ảnh hồ sơ (app: Upload → Loading → Image). Bản 2: bỏ trạng thái Đang tải / Rỗng của màn (không phải trạng thái của component); trạng thái chỉ còn Có dữ liệu, Chữ dài và biến thể Content Upload / Loading của Avatar.",
+    "blocks": [
+        {"title": "Web", "platform": "web", "note": "Badge 5 kiểu × 8 màu × 3 cỡ + phần thêm · Avatar 5 nội dung × 6 cỡ · status · Company · Group · Add · Avatar label · chữ dài",
+         "html": f'<div class="pv pvp" {_pa} data-platform="web" data-state="x">{PV_WEB}</div>'},
+        {"title": "Mobile (app)", "platform": "mobile", "note": "Nhóm A — cùng số đo web: badge, avatar + status, avatar label, ảnh hồ sơ",
+         "frames": [f'<div class="pv pvp" {_pa} data-platform="mobile" data-state="x">{h}</div>' for h in PV_MOB]},
+    ],
+}
+
+
+VALUES = [
+ # Badge
+ {"part": "Badge", "prop": "height", "value": 22, "platform": "Web", "size": "SM", "sel": ".fb.sm"},
+ {"part": "Badge", "prop": "height", "value": 24, "platform": "Web", "size": "MD", "sel": ".fb.md"},
+ {"part": "Badge", "prop": "height", "value": 28, "platform": "Web", "size": "LG", "sel": ".fb.lg"},
+ {"part": "Badge", "prop": "padding-left", "value": 6, "platform": "Web", "size": "SM", "sel": ".fb.sm", "cssProp": "padding-left"},
+ {"part": "Badge", "prop": "padding-left", "value": 8, "platform": "Web", "size": "MD", "sel": ".fb.md", "cssProp": "padding-left"},
+ {"part": "Badge", "prop": "padding-left", "value": 10, "platform": "Web", "size": "LG", "sel": ".fb.lg", "cssProp": "padding-left"},
+ {"part": "Badge", "prop": "padding-right", "value": 10, "platform": "Web", "size": "SM", "sel": ".fb.pc.sm,.fb.po.sm,.fb.bc.sm,.fb.bo.sm,.fb.bm.sm", "cssProp": "padding-right"},
+ {"part": "Badge", "prop": "padding-right", "value": 12, "platform": "Web", "size": "MD", "sel": ".fb.pc.md,.fb.po.md,.fb.bc.md,.fb.bo.md,.fb.bm.md", "cssProp": "padding-right"},
+ {"part": "Badge", "prop": "padding-right", "value": 14, "platform": "Web", "size": "LG", "sel": ".fb.pc.lg,.fb.po.lg,.fb.bc.lg,.fb.bo.lg,.fb.bm.lg", "cssProp": "padding-right"},
+ {"part": "Badge", "prop": "gap", "value": 4, "platform": "Web", "size": "SM", "sel": ".fb.sm", "cssProp": "gap"},
+ {"part": "Badge", "prop": "gap", "value": 4, "platform": "Web", "size": "MD", "sel": ".fb.md", "cssProp": "gap"},
+ {"part": "Badge", "prop": "gap", "value": 4, "platform": "Web", "size": "LG", "sel": ".fb.lg", "cssProp": "gap"},
+ {"part": "Badge", "prop": "radius", "value": 6, "platform": "Web", "size": "MD", "sel": ".fb.bc.md,.fb.bo.md,.fb.bm.md", "cssProp": "border-radius"},
+ {"part": "Badge", "prop": "radius", "value": 8, "platform": "Web", "size": "LG", "sel": ".fb.bc.lg,.fb.bo.lg,.fb.bm.lg", "cssProp": "border-radius"},
+ {"part": "Badge · Label", "prop": "max-width", "value": 160, "platform": "Web", "sel": ".fb .flw"},
+ {"part": "Badge · Dot", "prop": "size", "value": 6, "platform": "Web", "sel": ".fb .fdot", "cssProp": ["width", "height"]},
+ {"part": "Badge · có Count", "prop": "padding-right", "value": 3, "platform": "Web", "size": "SM", "sel": ".fb.sm:has(.fcnt)", "cssProp": "padding-right"},
+ {"part": "Badge · có Count", "prop": "padding-right", "value": 4, "platform": "Web", "size": "LG", "sel": ".fb.md:has(.fcnt),.fb.lg:has(.fcnt)", "cssProp": "padding-right"},
+ {"part": "Badge · Count Only", "prop": "padding-left", "value": 4, "platform": "Web", "sel": ".fb .flw.fco", "cssProp": "padding-left"},
+ {"part": "Badge · Dot", "prop": "margin-right", "value": 2, "platform": "Web", "sel": ".fb .fdw:not(.iw)", "cssProp": "margin-right"},
+ {"part": "Badge · Icon", "prop": "size", "value": 14, "platform": "Web", "sel": ".fb .fi", "cssProp": ["width", "height"]},
+ {"part": "Badge · Count", "prop": "padding-x", "value": 6, "platform": "Web", "sel": ".fb .fcnt", "cssProp": "padding", "tpl": "0 $"},
+ # Avatar
+ {"part": "Avatar", "prop": "size", "value": 24, "platform": "Web", "size": "XS", "sel": ".fa.xs", "cssProp": ["width", "height"]},
+ {"part": "Avatar", "prop": "size", "value": 32, "platform": "Web", "size": "SM", "sel": ".fa.sm", "cssProp": ["width", "height"]},
+ {"part": "Avatar · Initials", "prop": "font-size", "value": 14, "platform": "Web", "size": "MD", "sel": ".fa.md .fat"},
+ {"part": "Avatar · Initials", "prop": "font-size", "value": 17, "platform": "Web", "size": "LG", "sel": ".fa.lg .fat"},
+ {"part": "Avatar · Status", "prop": "size", "value": 10, "platform": "Web", "size": "MD", "sel": ".fa.md .fst>i", "cssProp": ["width", "height"]},
+ {"part": "Avatar · Status ring", "prop": "padding", "value": 2, "platform": "Web", "sel": ".fa .fst"},
+ {"part": "Avatar · Upload", "prop": "size", "value": 16, "platform": "Web", "size": "MD", "sel": ".fa.md .fup", "cssProp": ["width", "height"]},
+ {"part": "Company avatar", "prop": "radius", "value": 6, "platform": "Web", "size": "MD", "sel": ".fa.co", "cssProp": "border-radius"},
+ {"part": "Company avatar", "prop": "radius", "value": 16, "platform": "Web", "size": "XXL", "sel": ".fa.co.xxl", "cssProp": "border-radius"},
+ {"part": "Avatar group · ring", "prop": "padding", "value": 2, "platform": "Web", "sel": ".fg .fgw"},
+ {"part": "Avatar label", "prop": "gap", "value": 8, "platform": "Web", "sel": ".flg"},
+ {"part": "Avatar label", "prop": "width", "value": 240, "platform": "Web", "sel": ".flg"},
+ {"part": "Avatar label · Title", "prop": "font-size", "value": 14, "platform": "Web", "sel": ".flg b", "cssProp": "font", "tpl": "600 $/20px var(--font-body)"},
+ {"part": "Avatar add button", "prop": "size", "value": 48, "platform": "Web", "sel": ".fadd", "cssProp": ["width", "height"], "interactive": True, "hitArea": 48},
+]
+
+
+REVIEWS = [
+ {"id": "R1", "agent": "visual-reviewer", "severity": "Cao", "node": "6657:165736", "changesLook": True,
+  "text": "<b>Badge Orange gần Yellow</b> trên nền nhạt — cam (chỉ cho phân loại) dễ đọc nhầm là cảnh báo. Anh đã chọn <b>Sửa</b>; phương án cụ thể chờ duyệt: xem chế độ <i>Sau khi sửa</i>.",
+  "fix": "Chip cam: nền <b>orange-100</b> #FBEAD7 (đang orange-50 #FFF7ED), chữ <b>orange-800</b> #A03201 (đang orange-700 #C2410C) — ngả đỏ-cam, tách khỏi chip vàng (nền #FFF3DC, chữ #8A5300). Đổi token color/chip/orange/bg, /fg (ảnh hưởng mọi chip cam).",
+  "after": ".pv .fb.c-orange:not(.bm){background:var(--orange-100)!important;color:var(--orange-800)!important}.pv .fb.c-orange .fdot{background:var(--orange-800)!important}", "screen": "list-web", "state": "default", "sel": ".fb.c-orange", "where": "Danh sách lệnh · Web, cột Loại hàng (Hàng nguy hiểm)"},
+ {"id": "R2", "agent": "visual + accessibility", "severity": "Cao", "node": "6657:165851", "changesLook": True,
+  "text": "<b>Chấm Online / Busy / Away chỉ khác màu</b> (WCAG 1.4.1, tỷ lệ giữa các màu 1,1–1,2); ở XS 6 / SM 8 khó phân biệt, Offline XS gần như chấm đặc. Spec đã thêm chữ trạng thái + aria-label + không bật Status ở XS.",
+  "fix": "Thêm hình trong chấm (tích / gạch / đồng hồ) từ MD trở lên — hoặc giữ như hiện tại, dựa vào chữ thay thế đã ghi trong spec."},
+ {"id": "R3", "agent": "uxui-reviewer", "severity": "Cao", "node": "6657:165736", "changesLook": True,
+  "text": "<b>Count Only</b> (số đứng thẳng trên nền badge) đang <b>12/18 · 600</b> như nhãn; ô đếm (Has Count) đã đổi sang <b>type/caption 12/16 · 400</b>.",
+  "fix": "Chọn: giữ Count Only đậm (nó đứng thay nhãn) — hoặc đổi sang caption 400 cho đồng bộ với ô đếm."},
+ {"id": "R4", "agent": "uxui-reviewer", "severity": "Trung", "node": "6658:191370", "changesLook": True,
+  "text": "<b>Icon plus của nút thêm</b> đang là biến thể icon Size=20 kéo giãn lên 24; nét 1,67 chưa theo DEC-300 (nét 2).",
+  "fix": "Đổi sang biến thể icon Size=24 (nét đúng thang) — nét có thể dày lên chút."},
+ {"id": "R5", "agent": "visual-reviewer", "severity": "Trung", "node": "6658:191370", "changesLook": True,
+  "text": "<b>Nút thêm: Default và Hover gần như giống nhau</b>, viền nét đứt nhạt — nhấn yếu.",
+  "fix": "Hover đổi nền rõ hơn (color/bg/hover) hoặc viền đậm một bậc ở Default."},
+ {"id": "R6", "agent": "visual + accessibility", "severity": "Trung", "node": "6657:166325", "changesLook": True,
+  "text": "<b>Ô \"+n\" của Avatar group</b> chữ xám trên nền xám nhạt (4,54 : 1, sát ngưỡng) — nhìn như disabled.",
+  "fix": "Chữ ô +n đổi sang color/text/secondary-strong (dư biên tương phản)."},
+ {"id": "R7", "agent": "visual-reviewer", "severity": "Trung", "node": "6657:165736", "changesLook": True,
+  "text": "<b>Viền Badge Outline / Modern</b> (color/border/strong) mảnh, ranh giới mờ khi badge nằm trên nền xám của bảng.",
+  "fix": "Tăng một bậc xám viền — hoặc giữ (viền là trang trí, chữ mang nghĩa)."},
+ {"id": "R8", "agent": "visual + uxui", "severity": "Trung", "node": "6657:166192", "changesLook": True,
+  "text": "<b>Upload / Loading ở XS–MD</b>: nút máy ảnh 14–16 che gần hết chữ \"NA\", spinner rất nhỏ; vùng chạm dưới 24 (WCAG 2.5.8).",
+  "fix": "Bỏ biến thể Upload / Loading ở XS, SM, MD (spec đã ghi Upload chỉ dùng từ LG) — hoặc giữ cho đủ ma trận."},
+ {"id": "R9", "agent": "visual-reviewer", "severity": "Trung", "node": "6657:167713", "changesLook": True,
+  "text": "<b>Company avatar dạng Image (placeholder)</b> viền và icon rất nhạt, ở XS/SM gần như biến mất.",
+  "fix": "Tăng đậm icon placeholder (color/icon/secondary) và viền một bậc."},
+ {"id": "R10", "agent": "uxui-reviewer", "severity": "Trung", "node": "6657:167394", "changesLook": False,
+  "text": "<b>Avatar label thiếu thuộc tính</b>: không có boolean Has Subtitle, không swap avatar (Image / Initials / Company); Avatar group cũng không swap từng avatar.",
+  "fix": "Thêm boolean Has Subtitle + instance swap cho avatar trong Avatar label và Avatar group (không đổi hình)."},
+ {"id": "R11", "agent": "uxui-reviewer", "severity": "Thấp", "node": "6653:264", "changesLook": True,
+  "text": "<b>type/caption trên app là 13/18</b> (web 12/16) — số đếm và dòng phụ Avatar label trên app sẽ khác web, trái nhóm A \"cùng số đo\".",
+  "fix": "Thêm token cố định cho số đếm / dòng phụ 12/16 — hoặc chấp nhận app 13/18 và ghi ngoại lệ trong spec."},
+ {"id": "R12", "agent": "uxui-reviewer", "severity": "Thấp", "node": "6658:191370", "changesLook": False,
+  "text": "<b>Nút thêm chưa có trạng thái đang xử lý</b> (thêm người gọi máy chủ).",
+  "fix": "Thêm State=Loading (spinner thay dấu +) — hoặc để nơi dùng hiện thông báo, không cần state."},
+ {"id": "R13", "agent": "accessibility (review 30/10)", "severity": "Trung", "node": "6657:165736", "changesLook": False,
+  "text": "<b>Spec tự mâu thuẫn về focus</b> (WCAG 2.4.7): mục Trạng thái ghi badge không có hover / focus, nhưng mục Trợ năng cho badge bị cắt \"…\" mang <code>tabindex=\"0\"</code> để mở tooltip — đã nhận focus thì phải có vòng focus, set chưa có.",
+  "fix": "<b>Đề xuất (Sửa):</b> bỏ <code>tabindex</code> trên badge; tooltip toàn văn mở khi focus dòng / ô chứa badge (spec đã có). <b>Bỏ qua</b> = giữ tabindex và phải thêm trạng thái Focus (đổi hình)."},
+ {"id": "R14", "agent": "accessibility (review 30/10)", "severity": "Trung", "node": "6657:165736", "changesLook": True,
+  "text": "<b>Cỡ chữ hệ thống lớn (Dynamic Type, zoom 200%)</b> (WCAG 1.4.4): badge cao cố định 22/24/28, ô đếm 16/20 và chữ số 12/16 cố định — khi người dùng tăng cỡ chữ, số không lớn theo, nhãn bị cắt nhiều hơn mà app không có tooltip.",
+  "fix": "Ghi trong spec: chiều cao là <b>tối thiểu</b> (min-height), chữ nhãn và số co theo cỡ chữ hệ thống, chặn trên ở mức AX3. Cỡ mặc định không đổi."},
+ {"id": "R15", "agent": "visual-reviewer (review 30/10)", "severity": "Trung", "node": "6657:165736", "changesLook": False,
+  "text": "<b>Type Dot đủ 8 màu</b> nhưng ở chấm 6×6, Red / Orange và Green / Teal gần như không phân biệt; DEC-303 đã giới hạn Teal / tím / cam cho phân loại ở Modern.",
+  "fix": "Ghi luật: Type Dot chỉ dùng 5 màu trạng thái (Gray · Blue · Green · Yellow · Red); Teal / Purple / Orange chỉ ở Badge Modern. Biến thể vẫn giữ trên Figma."},
+ {"id": "R16", "agent": "visual-reviewer (review 30/10)", "severity": "Thấp", "node": "6657:165736", "changesLook": True,
+  "text": "<b>Count Only nền nhạt, số 400</b> trông yếu khi dùng làm chỉ báo thông báo (mắt dễ bỏ qua).",
+  "fix": "Thêm kiểu Count Only nền đặc (nền <code>color/chip/red/fg</code>, chữ trắng) cho chỉ báo thông báo — <b>Bỏ qua</b> nếu Count Only chỉ dùng cho số lượng thường."},
+ {"id": "R17", "agent": "visual-reviewer (review 30/10)", "severity": "Thấp", "node": "6657:165736", "changesLook": True,
+  "text": "<b>Badge Modern nặng hơn Pill Color</b> khi cạnh nhau (chữ 600 đen trên trắng + viền) — nhãn phân loại có thể lấn nhãn trạng thái trong cùng dòng bảng.",
+  "fix": "Thử chữ Modern <code>color/text/secondary</code> — <b>Bỏ qua</b> = giữ, chỉ ghi luật cột Trạng thái đứng trước cột Loại.", "after": ".pv .fb.bm[class]{color:var(--color-text-secondary)!important}", "screen": "list-web", "state": "default", "sel": ".fb.bm", "where": "Danh sách lệnh · Web, cột Loại hàng"}
+]
+# Ảnh Trước / Sau cho từng điểm review (user 30/10: xem trước và sau khi sửa để đánh giá)
+import base64 as _b64
+for _r in REVIEWS:
+    _f = Path(__file__).parent / "assets" / "review" / f"{_r['id']}.jpg"
+    if _f.exists():
+        _r["img"] = "data:image/jpeg;base64," + _b64.b64encode(_f.read_bytes()).decode()
+
+
+
+def ver(a, b):
+    """V = a: bản hiện tại trên artifact · b: theo Figma."""
+    return f'<div data-show="V:a">{a}</div><div data-show="V:b">{b}</div>'
+
+
 page = {
     "component": "Badge · Avatar",
     "slug": "badge-avatar",
     "title": "Badge · Avatar Review",
     "subtitle": "Base component · Badge, Avatar (+ Company, Group, Label group, Add) · nhóm A (dùng chung web và app)",
-    "round": "brainstorm",
+    "round": "review",
+    "reviews": REVIEWS,
+    "figma": {"url": "https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?node-id=6657-165741", "label": "Section Badges 6657:165305 · Avatars 6657:165741 trên DS · Base components"},
     "brief": True,
+    "preview": preview,
     "refs": {
         "untitled": {
             "summary": "Badge 3 kiểu <mark>pill-color · color · modern</mark>, 3 cỡ, có dot / icon / nút X; Pill và Badge Color có <mark>viền màu nhạt</mark> (ring-1). Avatar 7 cỡ 16–64, initials nền xám, chấm Online xanh / Offline xám đặc, group: avatar sau đè avatar trước.",
@@ -289,14 +834,28 @@ page = {
         "platform": "Nhóm A — một bộ, cùng số đo web và app. Đã chốt biến thể 26/10: Badge Type 3 × Color 8 × Icon 5 × Size 3; Avatar Content 4 × Size 6 × Status 4 + Group, Label group, Add, Company. Brainstorm gọn: 6 điểm còn mở từ lượt duyệt Figma 1.",
     },
     "css": CSS,
+    "cssScreen": BASE_CSS + CSS_A,
+    "values": VALUES,
+    "cssIgnore": [{"sel": ".fb", "props": ["outline-offset"], "why": "Viền 1px của Pill/Badge Outline và Modern vẽ bằng outline lùi vào trong 1px — tương đương stroke Inside trên Figma, không phải khoảng cách."}],
     "states": [
         {"key": "default", "label": "Có dữ liệu"},
         {"key": "long", "label": "Chữ dài"},
-        {"key": "loading", "label": "Đang tải"},
-        {"key": "empty", "label": "Rỗng"},
+        {"key": "upload", "label": "Avatar · Upload (chưa có ảnh)"},
+        {"key": "uploading", "label": "Avatar · Loading (đang tải ảnh)"},
     ],
     "ideas": [],
     "decisions": [
+        {"id": "V", "title": "Phiên bản để duyệt",
+         "why": "<mark>Bản A</mark> = bản đang đăng trên artifact (Badge 3 kiểu, Avatar 4 nội dung, thang cỡ chọn ở D6). "
+                "<mark>Bản B</mark> = dựng lại theo <b>cấu trúc Figma hiện tại</b>: Badge 5 kiểu (thêm Pill Outline, Badge Outline) + công tắc Dot / Icon / Count / Count Only / X; "
+                "Avatar 5 nội dung (thêm Loading), cỡ 24·32·36·48·64·88, Status là instance lồng, Company 3 nội dung, Group XS/MD/LG, Label group SM/MD/LG, Add button 4 trạng thái.",
+         "source": "Figma Section Badges 6657:165305 · Avatars 6657:165741 (đo 29/10)",
+         "options": [
+             {"label": "Bản A · hiện tại", "desc": "Giữ nguyên bản trên artifact, D2/D5/D6 còn mở.",
+              "preview": mini({"V": "a"}, bd("Đang chạy", "blue", "pill", icon="dot") + bd("Hàng lạnh", "teal", "badge") + av("md", "image", status="on", i=0) + av("md", "upload"))},
+             {"label": "Bản B · theo Figma", "desc": "Theo đúng component đang có trên Figma; D2/D5/D6 lấy theo Figma.", "rec": True,
+              "preview": mini({"V": "b"}, fbd("Đang chạy", "blue", "pc") + fbd("Hàng lạnh", "teal", "bo") + fav("md", "image", status="on", i=0) + fav("md", "upload"))},
+         ]},
         {"id": "D1", "title": "Badge có nút X không",
          "why": "Lượt 1 cho Badge có <mark>X Close</mark> (để làm chip lọc). Untitled coi Badge là <b>chỉ đọc</b>; thứ bỏ được là <b>Tag</b> (đã có component riêng, DEC-284). Giữ cả hai → hai cách vẽ chip lọc (mục R1).",
          "source": "Trang Duyệt Base components › R1 · Figma Badge 6657:165736 · DEC-284 (Tag)",
@@ -355,18 +914,20 @@ page = {
          ]},
     ],
     "presets": [
-        {"id": "rec", "label": "Đề xuất", "pick": {"D1": "a", "D2": "b", "D3": "a", "D4": "a", "D5": "a", "D6": "a"}},
-        {"id": "untitled", "label": "Theo Untitled", "pick": {"D1": "a", "D2": "a", "D3": "a", "D4": "a", "D5": "b", "D6": "a"}},
-        {"id": "astryx", "label": "Astryx hiện tại", "pick": {"D1": "b", "D2": "b", "D3": "b", "D4": "b", "D5": "a", "D6": "b"}},
+        {"id": "rec", "label": "Đề xuất", "pick": {"V": "a", "D1": "a", "D2": "b", "D3": "a", "D4": "a", "D5": "a", "D6": "a"}},
+        {"id": "untitled", "label": "Theo Untitled", "pick": {"V": "a", "D1": "a", "D2": "a", "D3": "a", "D4": "a", "D5": "b", "D6": "a"}},
+        {"id": "figma", "label": "Bản B · Figma", "pick": {"V": "b", "D1": "b", "D2": "a", "D3": "a", "D4": "a", "D5": "a", "D6": "b"}},
+        {"id": "astryx", "label": "Astryx hiện tại", "pick": {"V": "a", "D1": "b", "D2": "b", "D3": "b", "D4": "b", "D5": "a", "D6": "b"}},
     ],
     "screens": [
-        {"id": "var-web", "name": "Bảng biến thể", "device": "web", "width": 1280, "shell": "none",
-         "note": "Toàn bộ biến thể đã chốt 26/10, đổi theo D1–D6 và Light/Dark.", "html": VAR_WEB},
-        {"id": "var-app", "name": "Bảng biến thể", "device": "mobile", "shell": "none", "note": "Cùng component trên khung app 393.", "html": VAR_APP},
         {"id": "list-web", "name": "Danh sách lệnh", "device": "web", "width": 1280, "nav": "Lệnh vận tải", "title": "Lệnh vận tải",
-         "note": "Badge ở cột Trạng thái và Loại; Avatar label group ở cột Lái xe; Avatar group ở thanh ca trực. Bảng chọn › Hiển thị đổi Đang tải / Rỗng / Chữ dài.", "html": LIST},
+         "note": "Badge ở cột Trạng thái (Pill) và Loại (Badge Modern); Avatar label ở cột Lái xe; Avatar group ở thanh ca trực; bộ lọc dùng Tag. Bảng chọn › Hiển thị đổi Chữ dài.", "html": LIST_F},
+        {"id": "detail-web", "name": "Chi tiết lệnh", "device": "web", "width": 1280, "nav": "Lệnh vận tải", "title": "Chi tiết lệnh",
+         "note": "Badge LG ở đầu trang; Company avatar cạnh tên khách; Avatar label lái xe (MD, có status) và điều phối (SM); Avatar group + nút thêm người theo dõi.", "html": DETAIL_F},
         {"id": "team-app", "name": "Đội lái xe", "device": "mobile", "nav": "Tài khoản", "title": "Đội của tôi",
-         "note": "Avatar có chấm trạng thái + Badge trạng thái chuyến.", "html": APP},
+         "note": "Avatar có chấm trạng thái + Badge trạng thái chuyến.", "html": APP_F},
+        {"id": "profile-app", "name": "Ảnh hồ sơ", "device": "mobile", "nav": "Tài khoản", "title": "Hồ sơ", "back": True,
+         "note": "Đổi ảnh đại diện theo biến thể Content của Avatar: Upload (chưa có ảnh) → Loading (đang tải) → Image (Có dữ liệu). Chữ dài = tên dài.", "html": PROFILE_F},
     ],
 }
 

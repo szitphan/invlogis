@@ -184,8 +184,8 @@ Giá trị Dark: mục 3.6. Trạng thái (`color/status/*`) có 8 vai × 4 nhó
 | `color/chip/green/fg` | `green/700` | Chip trạng thái green: chữ, icon. Dùng ở: Status Chip, Status Row. |
 | `color/chip/red/bg` | `red/50` | Chip trạng thái red: nền. Dùng ở: Status Chip, Status Row. |
 | `color/chip/red/fg` | `red/700` | Chip trạng thái red: chữ, icon. Dùng ở: Status Chip, Status Row. |
-| `color/chip/orange/bg` | `orange/50` | Chip trạng thái orange: nền. Dùng ở: Status Chip, Status Row. |
-| `color/chip/orange/fg` | `orange/700` | Chip trạng thái orange: chữ, icon. Dùng ở: Status Chip, Status Row. |
+| `color/chip/orange/bg` | `orange/100` (DEC-311) | Chip trạng thái orange: nền. Dùng ở: Status Chip, Status Row. |
+| `color/chip/orange/fg` | `orange/800` (DEC-311) | Chip trạng thái orange: chữ, icon. Dùng ở: Status Chip, Status Row. |
 | `color/overlay/scrim` | `alpha/neutral-950-50` | Lớp phủ sau dialog, sheet. |
 | `color/shadow/sm` | `alpha/shadow-6` | Màu bóng, đổi theo sáng/tối. Dùng trong: elev/1. |
 | `color/shadow/md` | `alpha/shadow-10` | Màu bóng, đổi theo sáng/tối. Dùng trong: elev/2 lớp 1, elev/3 lớp 2. |
@@ -222,7 +222,7 @@ Máy đo mỗi lần chạy `python3 _scripts/ds-v2-tokens.py --check`; dưới 
 | 5.76:1 | `color/chip/yellow/fg` trên `color/chip/yellow/bg` |
 | 5.10:1 | `color/chip/green/fg` trên `color/chip/green/bg` |
 | 5.76:1 | `color/chip/red/fg` trên `color/chip/red/bg` |
-| 4.88:1 | `color/chip/orange/fg` trên `color/chip/orange/bg` |
+| 6.05:1 | `color/chip/orange/fg` trên `color/chip/orange/bg` (DEC-311) |
 
 Viền cần 3:1 (WCAG 1.4.11): `color/border/input` 4.74:1 trên `color/bg/surface`, 4.54:1 cạnh `color/bg/muted` (ô nhập app).
 
@@ -283,7 +283,7 @@ vai cần chuyển xám thì chuyển xám (chờ điền). Giá trị máy đ�
 
 Tiêu đề **Cal Sans** (một độ đậm), chữ thường **Inter**, mã **JetBrains Mono**.
 
-### 4.2 Thang 9 vai (DEC-132)
+### 4.2 Thang 10 vai (DEC-132, DEC-306)
 
 | Vai | Font | Độ đậm | Web cỡ / dòng | App cỡ / dòng | Dùng cho |
 |---|---|---|---|---|---|
@@ -295,6 +295,7 @@ Tiêu đề **Cal Sans** (một độ đậm), chữ thường **Inter**, mã **
 | `body` | Inter | 400 | 14 / 20 | 15 / 22 | Chữ đọc, giá trị |
 | `label` | Inter | 500 web · 600 app | 14 / 20 | 15 / 20 | Nút, nhãn, tab |
 | `caption` | Inter | 400 | 12 / 16 | 13 / 18 | Thông tin phụ, thời gian |
+| `hint` | Inter | 400 | 12.5 / 18 | 12.5 / 18 | Gợi ý dưới ô, chữ lỗi, dòng phụ file (DEC-306) |
 | `code` | JetBrains Mono | 400 | 12 / 16 | 13 / 18 | Mã lệnh, mã chứng từ |
 
 - Text style Figma tên `type/{vai}`, gắn cỡ và dòng vào biến `Platform`, nên một style dùng cho cả web và app.
@@ -376,13 +377,15 @@ Bảng gốc đặt tên theo cỡ như Untitled UI (DEC-259): `radius/none 0 ·
 | `nav/item-padding-y` | — (chỉ app) | 4 | Lề trên dưới mục, nên nền mục đang chọn cao 56 |
 | `nav/scan-size` | — (chỉ app) | 56 | Nút Quét mã giữa thanh |
 | `chip/height-sm` · `chip/height` · `chip/height-lg` | 22 · 24 · 28 | 22 · 24 · 28 | Cao chip SM · MD · LG theo Untitled (DEC-259; SM 16 → 22, app MD 26 → 24); SM cho chip ở đầu thẻ (DEC-239) |
-| `chip/font-size-sm` · `chip/line-height-sm` · `chip/label-max-width` | 12 · 16 · 160 | 12 · 16 · 160 | Chữ chip SM cố định 12/16 cả web và app; nhãn chip tối đa 160 rồi cắt "…" (DEC-239) |
-| `chip/padding-x-sm` · `chip/padding-x` · `chip/padding-x-lg` · `chip/padding-x-icon` | 8 · 10 · 12 · 8 | như web | Lề phía chữ SM · MD · LG (DEC-259) · phía icon của chip Soft |
+| `chip/font-size-sm` · `chip/line-height-sm` · `chip/label-max-width` | 12 · 18 · 160 | 12 · 18 · 160 | Chữ chip SM cố định 12/18 cả web và app; nhãn chip tối đa 160 rồi cắt "…" (DEC-239) |
+| `chip/padding-x-sm` · `chip/padding-x` · `chip/padding-x-lg` | 10 · 12 · 14 | như web | Badge: lề phía chữ SM · MD · LG (DEC-310) |
+| `chip/padding-x-icon-sm` · `chip/padding-x-icon` · `chip/padding-x-icon-lg` · `chip/icon-gap` · `chip/dot-gap` · `chip/dot-extra-gap` · `chip/dot-size` | 6 · 8 · 10 · 4 · 6 · 2 · 6 | như web | Badge: lề phía chấm/icon; icon → chữ 4; chấm → chữ 6 (= 4 + 2); chấm 6 (DEC-310) |
 | `table/row-min-height` · `table/cell-padding-y` · `table/cell-padding-x` | 52 · 16 · 24 | 52 · 12 · 16 | Bảng theo Untitled (DEC-259). `list-row/*` giữ 36 cho List Item trong menu, danh sách |
-| `chip/icon-gap` | 4 | 4 | Icon → chữ chip Soft |
-| `chip/dot-gap` · `chip/dot-size` | 6 · 8 | 6 · 8 | Chấm → chữ, cỡ chấm của chip Dot |
-| `avatar/size/sm · md · lg · xl · xxl` | 24 · 36 · 48 · 64 · 88 | 24 · 36 · 48 · 64 · 88 | Cỡ avatar (DEC-201, DEC-203); MD 36 khớp ô đầu dòng 36 (DEC-164); XL, XXL cho ảnh đại diện đổi được |
-| `avatar/status-size/sm · md · lg · xl · xxl` | 6 · 10 · 12 · 14 · 16 | 6 · 10 · 12 · 14 · 16 | Chấm trạng thái avatar, thêm viền trắng 2 (DEC-204) |
+| `chip/count-height-sm` · `chip/count-height` · `chip/count-height-lg` · `chip/count-radius` · `chip/count-radius-lg` · `chip/count-inset` · `chip/count-inset-lg` · `chip/count-only-offset` | 16 · 16 · 20 · 3 · 4 · 3 · 4 · 4 | như web | Badge: ô đếm cao SM · MD · LG; bo ô đếm; khi có ô đếm lề phải thu về 3 (SM) · 4 (MD, LG) để ô cách đều trên, dưới, phải; Count Only đệm trái khung số 4 để số cách đều hai bên (DEC-303, DEC-310) |
+| `avatar-label/width` | 240 | 240 | Avatar label: rộng mặc định, tên và dòng phụ cắt "…" (DEC-303) |
+| `chip/count-font-size` · `chip/count-line-height` · `avatar-label/subtitle-size` · `avatar-label/subtitle-line-height` | 12 · 16 · 12 · 16 | 12 · 16 · 12 · 16 | Chữ số đếm Badge và dòng phụ Avatar label cố định 12/16 cả web và app — không theo `type/caption` (app 13/18) để giữ nhóm A cùng số đo (DEC-304) |
+| `avatar/size/xs · sm · md · lg · xl · xxl` | 24 · 32 · 36 · 48 · 64 · 88 | 24 · 32 · 36 · 48 · 64 · 88 | Cỡ avatar thang XS–XXL (DEC-201, DEC-203; thêm SM 32 và đổi tên sm → xs, DEC-303); MD 36 khớp ô đầu dòng 36 (DEC-164); XL, XXL cho ảnh đại diện đổi được |
+| `avatar/status-size/xs · sm · md · lg · xl · xxl` · `avatar/status-border` | 6 · 8 · 10 · 12 · 14 · 16 · 2 | 6 · 8 · 10 · 12 · 14 · 16 · 2 | Chấm trạng thái avatar, thêm viền trắng 2 (DEC-204); SM 8 và đổi tên theo thang XS–XXL; viền chấm Offline rỗng 2 (DEC-303) |
 | `avatar/edit-size/md · lg · xl · xxl` | 20 · 24 · 28 · 32 | 20 · 24 · 28 · 32 | Nút đổi ảnh trên avatar (SM không có; DEC-203) |
 | `avatar/icon-size/sm · md · lg · xl · xxl` | 14 · 20 · 24 · 24 · 24 | 14 · 20 · 24 · 24 · 24 | Icon trong avatar Content=Icon và Upload (DEC-242) |
 | `avatar/edit-icon-size/md · lg · xl · xxl` | 12 · 14 · 16 · 16 | 12 · 14 · 16 · 16 | Icon camera trong nút đổi ảnh (DEC-242) |

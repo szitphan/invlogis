@@ -1,1 +1,146 @@
-{}
+{
+ "brainstorm-V": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D1": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D2": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D3": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D4": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D5": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D6": {
+  "choice": 0,
+  "note": ""
+ },
+ "preview-approve-v2": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-.fa.co.xl.radius.both": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-.fb-.fx.margin-right.both": {
+  "choice": 0,
+  "note": "lỗi"
+ },
+ "foundation-.fb.bm-.fdw.padding-right.both": {
+  "choice": 0,
+  "note": "cái này bạn vẽ k đúng badge rồi, phải là chip info"
+ },
+ "foundation-.flg-.ftx-span.font-size.both": {
+  "choice": null,
+  "note": "Dùng bản caption (12px)"
+ },
+ "foundation-.flg.sm-.ftx-span.line-height.both": {
+  "choice": null,
+  "note": "không tìm thấy"
+ },
+ "foundation-audit.icon.featured-fadd": {
+  "choice": 0,
+  "note": "user chốt 29/10 trong chat: đổi 48 / icon 24 theo luật Featured icon"
+ },
+ "foundation-avatar-·-initials.line-height.both": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-avatar-·-initials.line-height.both-2": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-avatar-·-initials.line-height.both-4": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-avatar-·-initials.line-height.both-6": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-avatar-·-status.border.both": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-avatar-·-status.width.both-2": {
+  "choice": 0,
+  "note": "icon lỗi"
+ },
+ "foundation-avatar-group.margin-left.both-2": {
+  "choice": 0,
+  "note": "k tìm tháy vị trí"
+ },
+ "foundation-avatar-label.width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-badge-·-count.font-size.both": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-badge-·-count.height.both": {
+  "choice": 0,
+  "note": "cả 2 đều đang lỗi, phần trắng background đang height k cover đủ cho số"
+ },
+ "foundation-badge-·-count.radius.both": {
+  "choice": 0,
+  "note": "đề xuất Claude 29/10, user đồng ý (chạy tiếp)"
+ },
+ "foundation-badge-·-count.radius.both-2": {
+  "choice": 0,
+  "note": "đề xuất Claude 29/10, user đồng ý (chạy tiếp)"
+ },
+ "foundation-badge-·-dot.background.both": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-badge-·-label.line-height.both": {
+  "choice": null,
+  "note": "nhìn k thấy khác gì nhau"
+ },
+ "foundation-badge-·-label.max-width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-avatar-·-status.height.both-2": {
+  "choice": 1,
+  "note": "đề xuất Claude 29/10, user đồng ý (chạy tiếp)"
+ },
+ "foundation-badge.height.web.sm": {
+  "choice": 1,
+  "note": "đề xuất Claude 29/10, user đồng ý (chạy tiếp)"
+ },
+ "foundation-badge-·-count.height.both-2": {
+  "choice": 1,
+  "note": "đề xuất Claude 29/10, user đồng ý (chạy tiếp)"
+ },
+ "foundation-badge-·-count.radius.both-3": {
+  "choice": 1,
+  "note": "đề xuất Claude 29/10, user đồng ý (chạy tiếp)"
+ },
+ "foundation-badge.padding.both": {
+  "choice": 1,
+  "note": "đề xuất Claude 29/10, user đồng ý (chạy tiếp)"
+ },
+ "foundation-badge.padding-x.web.md": {
+  "choice": 1,
+  "note": "đề xuất Claude 29/10, user đồng ý (chạy tiếp)"
+ },
+ "foundation-badge-·-dot.margin-right.web": {
+  "choice": 0,
+  "note": "token mới chip/dot-extra-gap 2 = chip/dot-gap 6 − chip/icon-gap 4 (DEC-310, user 29/10 chấm → chữ 6, icon → chữ 4)"
+ }
+}

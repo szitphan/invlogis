@@ -111,6 +111,7 @@
   --space-4: 4px;
   --space-6: 6px;
   --space-8: 8px;
+  --space-10: 10px;
   --space-12: 12px;
   --space-16: 16px;
   --space-20: 20px;
@@ -207,8 +208,8 @@
   --color-chip-green-fg: var(--green-700);
   --color-chip-red-bg: var(--red-50);
   --color-chip-red-fg: var(--red-700);
-  --color-chip-orange-bg: var(--orange-50);
-  --color-chip-orange-fg: var(--orange-700);
+  --color-chip-orange-bg: var(--orange-100);
+  --color-chip-orange-fg: var(--orange-800);
   --color-overlay-scrim: var(--alpha-neutral-950-50);
   --color-shadow-sm: var(--alpha-shadow-6);
   --color-shadow-md: var(--alpha-shadow-10);
@@ -333,6 +334,7 @@
   --touch-min: 24px;
   --control-height-sm: 28px;
   --control-height-md: 32px;
+  --control-height-ml: 36px;
   --control-height-lg: 40px;
   --control-padding-x-sm: var(--space-8);
   --control-padding-x-md: var(--space-12);
@@ -355,17 +357,35 @@
   --chip-font-size-sm: 12px;
   --chip-line-height-sm: 18px;
   --chip-label-max-width: 160px;
-  --chip-padding-x: 10px;
-  --chip-padding-x-sm: var(--space-8);
-  --chip-padding-x-lg: var(--space-12);
+  --chip-count-only-offset: var(--space-4);
+  --chip-count-inset: 3px;
+  --chip-count-inset-lg: var(--space-4);
+  --chip-count-height-sm: 16px;
+  --chip-count-height: 16px;
+  --chip-count-height-lg: 20px;
+  --chip-count-radius: 3px;
+  --chip-count-radius-lg: 4px;
+  --chip-count-font-size: 12px;
+  --chip-count-line-height: 16px;
+  --avatar-label-width: 240px;
+  --avatar-label-subtitle-size: 12px;
+  --avatar-label-subtitle-line-height: 16px;
+  --chip-padding-x: var(--space-12);
+  --chip-padding-x-sm: var(--space-10);
+  --chip-padding-x-lg: 14px;
   --chip-padding-x-icon: var(--space-8);
+  --chip-padding-x-icon-sm: var(--space-6);
+  --chip-padding-x-icon-lg: var(--space-10);
   --chip-icon-gap: var(--space-4);
   --chip-dot-gap: var(--space-6);
-  --chip-dot-size: 8px;
-  --avatar-size-sm: 24px;
+  --chip-dot-extra-gap: var(--space-2);
+  --chip-dot-size: 6px;
+  --avatar-size-xs: 24px;
+  --avatar-size-sm: 32px;
   --avatar-size-md: 36px;
   --avatar-size-lg: 48px;
-  --avatar-status-size-sm: 6px;
+  --avatar-status-size-xs: 6px;
+  --avatar-status-size-sm: 8px;
   --avatar-status-size-md: 10px;
   --avatar-status-size-lg: 12px;
   --avatar-edit-size-md: 20px;
@@ -394,6 +414,7 @@
   --avatar-group-overlap-md: -8px;
   --avatar-group-overlap-lg: -12px;
   --avatar-ring: 2px;
+  --avatar-status-border: 2px;
   --tooltip-padding-x: var(--space-8);
   --tooltip-padding-y: var(--space-4);
   --tooltip-radius: var(--radius-md);
@@ -403,6 +424,22 @@
   --tooltip-arrow-h: 4px;
   --help-sheet-title-line-height: 24px;
   --help-sheet-body-gap: var(--space-20);
+  --upload-action-font-size: 13px;
+  --upload-disabled-opacity: 0.6;
+  --upload-divider-height: 12px;
+  --upload-divider-width: 1px;
+  --upload-app-tap-min-height: 72px;
+  --upload-sheet-radius: 28px;
+  --upload-required-gap: 3px;
+  --upload-error-icon-offset: 2px;
+  --upload-compact-text-min-width: 150px;
+  --upload-link-underline-offset: 2px;
+  --upload-featured-gap: 8px;
+  --upload-meta-offset: 1px;
+  --upload-retry-offset: 6px;
+  --upload-delete-offset-top: 6px;
+  --upload-delete-offset-right: 2px;
+  --upload-sheet-title-gap: 6px;
   --focus-width: 2px;
   --focus-offset: 2px;
   --type-display-size: 32px;
@@ -421,13 +458,17 @@
   --type-label-line-height: 20px;
   --type-caption-size: 12px;
   --type-caption-line-height: 16px;
+  --type-hint-size: 12.5px;
+  --type-hint-line-height: 18px;
   --type-code-size: 12px;
   --type-code-line-height: 16px;
   --type-label-weight: 500;
   --icon-size-sm: 14px;
   --icon-size-md: 16px;
+  --icon-size-ml: 18px;
   --icon-size-lg: 20px;
   --icon-size-chip: 14px;
+  --featured-icon-size: 48px;
   --list-row-min-height: 36px;
   --list-row-padding-x: var(--space-8);
   --list-row-padding-y: var(--space-8);
@@ -493,6 +534,18 @@
   --vehicle-thumb-radius-sm: var(--radius-md);
   --vehicle-thumb-radius-md: var(--radius-lg);
   --notification-action-gap: var(--space-12);
+  --header-nav-height: 44px;
+  --header-nav-tab-gap: 20px;
+  --header-nav-account-menu-width: 256px;
+  --notification-count-size: 16px;
+  --breadcrumbs-current-max-width: 240px;
+  --breadcrumbs-menu-min-width: 240px;
+  --command-search-width: 600px;
+  --command-search-highlight-radius: 2px;
+  --command-search-highlight-padding-x: 1px;
+  --command-search-empty-icon-gap: 8px;
+  --sheet-grabber-height: 4px;
+  --sheet-grabber-radius: 2px;
 }
 
 /* Platform — Mobile (DEC-114, DEC-132…138) */
@@ -529,6 +582,7 @@
   --touch-min: 44px;
   --control-height-sm: 36px;
   --control-height-md: 42px;
+  --control-height-ml: 42px;
   --control-height-lg: 52px;
   --control-padding-x-sm: var(--space-12);
   --control-padding-x-md: var(--space-16);
@@ -551,17 +605,35 @@
   --chip-font-size-sm: 12px;
   --chip-line-height-sm: 18px;
   --chip-label-max-width: 160px;
-  --chip-padding-x: 10px;
-  --chip-padding-x-sm: var(--space-8);
-  --chip-padding-x-lg: var(--space-12);
+  --chip-count-only-offset: var(--space-4);
+  --chip-count-inset: 3px;
+  --chip-count-inset-lg: var(--space-4);
+  --chip-count-height-sm: 16px;
+  --chip-count-height: 16px;
+  --chip-count-height-lg: 20px;
+  --chip-count-radius: 3px;
+  --chip-count-radius-lg: 4px;
+  --chip-count-font-size: 12px;
+  --chip-count-line-height: 16px;
+  --avatar-label-width: 240px;
+  --avatar-label-subtitle-size: 12px;
+  --avatar-label-subtitle-line-height: 16px;
+  --chip-padding-x: var(--space-12);
+  --chip-padding-x-sm: var(--space-10);
+  --chip-padding-x-lg: 14px;
   --chip-padding-x-icon: var(--space-8);
+  --chip-padding-x-icon-sm: var(--space-6);
+  --chip-padding-x-icon-lg: var(--space-10);
   --chip-icon-gap: var(--space-4);
   --chip-dot-gap: var(--space-6);
-  --chip-dot-size: 8px;
-  --avatar-size-sm: 24px;
+  --chip-dot-extra-gap: var(--space-2);
+  --chip-dot-size: 6px;
+  --avatar-size-xs: 24px;
+  --avatar-size-sm: 32px;
   --avatar-size-md: 36px;
   --avatar-size-lg: 48px;
-  --avatar-status-size-sm: 6px;
+  --avatar-status-size-xs: 6px;
+  --avatar-status-size-sm: 8px;
   --avatar-status-size-md: 10px;
   --avatar-status-size-lg: 12px;
   --avatar-edit-size-md: 20px;
@@ -590,6 +662,7 @@
   --avatar-group-overlap-md: -8px;
   --avatar-group-overlap-lg: -12px;
   --avatar-ring: 2px;
+  --avatar-status-border: 2px;
   --tooltip-padding-x: var(--space-8);
   --tooltip-padding-y: var(--space-4);
   --tooltip-radius: var(--radius-md);
@@ -599,6 +672,22 @@
   --tooltip-arrow-h: 4px;
   --help-sheet-title-line-height: 24px;
   --help-sheet-body-gap: var(--space-20);
+  --upload-action-font-size: 13px;
+  --upload-disabled-opacity: 0.6;
+  --upload-divider-height: 12px;
+  --upload-divider-width: 1px;
+  --upload-app-tap-min-height: 72px;
+  --upload-sheet-radius: 28px;
+  --upload-required-gap: 3px;
+  --upload-error-icon-offset: 2px;
+  --upload-compact-text-min-width: 150px;
+  --upload-link-underline-offset: 2px;
+  --upload-featured-gap: 8px;
+  --upload-meta-offset: 1px;
+  --upload-retry-offset: 6px;
+  --upload-delete-offset-top: 6px;
+  --upload-delete-offset-right: 2px;
+  --upload-sheet-title-gap: 6px;
   --focus-width: 2px;
   --focus-offset: 2px;
   --type-display-size: 34px;
@@ -617,13 +706,17 @@
   --type-label-line-height: 20px;
   --type-caption-size: 13px;
   --type-caption-line-height: 18px;
+  --type-hint-size: 12.5px;
+  --type-hint-line-height: 18px;
   --type-code-size: 13px;
   --type-code-line-height: 18px;
   --type-label-weight: 600;
   --icon-size-sm: 16px;
   --icon-size-md: 20px;
+  --icon-size-ml: 18px;
   --icon-size-lg: 24px;
   --icon-size-chip: 14px;
+  --featured-icon-size: 48px;
   --list-row-min-height: 52px;
   --list-row-padding-x: var(--space-12);
   --list-row-padding-y: var(--space-12);
@@ -689,6 +782,18 @@
   --vehicle-thumb-radius-sm: var(--radius-md);
   --vehicle-thumb-radius-md: var(--radius-lg);
   --notification-action-gap: var(--space-24);
+  --header-nav-height: 56px;
+  --header-nav-tab-gap: 20px;
+  --header-nav-account-menu-width: 256px;
+  --notification-count-size: 16px;
+  --breadcrumbs-current-max-width: 240px;
+  --breadcrumbs-menu-min-width: 240px;
+  --command-search-width: 600px;
+  --command-search-highlight-radius: 2px;
+  --command-search-highlight-padding-x: 1px;
+  --command-search-empty-icon-gap: 8px;
+  --sheet-grabber-height: 4px;
+  --sheet-grabber-radius: 2px;
 }
 
 /* Brand — Than chì (mặc định) · DEC-167, DEC-168 */
@@ -897,6 +1002,8 @@
   --progress-fill-warning: var(--color-status-warning-text);
   --progress-fill-danger: var(--color-status-danger-text);
   --progress-fill-neutral: var(--color-chip-gray-fg);
+  --upload-border-drag: var(--color-text-primary);
+  --upload-divider: var(--color-border-strong);
 }
 
 :root {
@@ -942,6 +1049,7 @@
 .type-body { font: 400 var(--type-body-size)/var(--type-body-line-height) var(--font-body); }
 .type-label { font: var(--type-label-weight) var(--type-label-size)/var(--type-label-line-height) var(--font-body); }
 .type-caption { font: 400 var(--type-caption-size)/var(--type-caption-line-height) var(--font-body); }
+.type-hint { font: 400 var(--type-hint-size)/var(--type-hint-line-height) var(--font-body); }
 .type-code { font: 400 var(--type-code-size)/var(--type-code-line-height) var(--font-code); }
 .type-caption-caps { font: 500 var(--type-caption-size)/var(--type-caption-line-height) var(--font-body); text-transform: uppercase; letter-spacing: 0.04em; }
 .type-caption-strong { font: 600 var(--type-caption-size)/var(--type-caption-line-height) var(--font-body); }

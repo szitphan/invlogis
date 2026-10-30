@@ -102,6 +102,7 @@ pre.out{white-space:pre-wrap;background:var(--sunk);border:1px solid var(--line)
 .empty{padding:28px;text-align:center;color:var(--fg-3);background:var(--surface);border:1px dashed var(--line-strong);border-radius:14px}
 .rv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,260px);gap:14px}
 .rv img{max-width:100%;border-radius:8px;border:1px solid var(--line)}
+.zoomov{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}.zoomov img{max-width:min(1400px,96vw);max-height:92vh;border-radius:10px;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.4)}
 .item.hl{border-color:#00A2FF;box-shadow:0 0 0 2px rgba(0,162,255,.35)}
 /* tab 4: màn demo gần full bề rộng cửa sổ (web 1280 hiện đúng cỡ thật khi cửa sổ đủ rộng) để soi spacing, bo, icon, chữ;
    danh sách điểm review là lớp nổi bên phải, thu gọn / mở được (như bảng comment Figma) */
@@ -187,6 +188,11 @@ body.focus .webframe{border:0;border-radius:0;box-shadow:none;transform:none!imp
 #cmt-before-bar button{border:0;border-radius:999px;background:#fff;color:#5B21B6;font:600 13px/18px Inter,system-ui,sans-serif;padding:6px 12px;cursor:pointer}
 #fx-fab b{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;border-radius:999px;background:#E11D48;color:#fff;font:700 11px/20px Inter;padding:0 5px}
 body.focus #fx-fab{display:flex}
+/* toàn màn · xem Bảng biến thể (nút trong "Màn & kịch bản") */
+body.focus.fxblk .panel:not([hidden]){position:fixed;inset:0;z-index:20;overflow:auto;background:#E9EAEC;padding:24px 24px 120px}
+body.focus.fxblk .panel>.cfg{display:none!important}
+body.focus.fxblk .panel>.block{display:block!important;max-width:1400px;margin:0 auto 20px}
+.fx-miss{margin-top:6px;padding:6px 8px;border-radius:8px;background:#FEF3F2;color:#B42318;font-size:12px}
 #fx-panel{display:none;position:fixed;right:16px;top:16px;bottom:84px;z-index:61;width:400px;max-width:calc(100vw - 32px);background:var(--surface);color:var(--fg);
   border:1px solid var(--line-strong);border-radius:16px;box-shadow:0 16px 48px rgba(0,0,0,.28);flex-direction:column;overflow:hidden;font:14px/1.45 var(--f-body)}
 #fx-panel.open{display:flex}
@@ -236,7 +242,7 @@ body.focus #fx-fab{display:flex}
 .fx-c textarea{width:100%;min-height:30px;margin-top:6px;font:12px var(--f-body)}
 .fx-seg{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
 .fx-note{font-size:12px;color:var(--fg-3);margin:0 0 8px}
-#fx-back{display:none;position:fixed;right:20px;bottom:20px;z-index:60}
+#fx-back{display:none;position:fixed;left:20px;bottom:20px;z-index:60} /* góc trái: góc phải là nút "Bảng chọn" */
 body:not(.focus) #fx-back{display:block}
 @media (max-width:720px){#fx-panel{left:0;right:0;top:auto;bottom:0;width:auto;max-width:none;height:78vh;border-radius:16px 16px 0 0}}
 </style>
@@ -274,7 +280,7 @@ const SHOWCSS=(PAGE.decisions||[]).flatMap(d=>d.options.map((o,i)=>`.pv:not([dat
 const PCSS=(PAGE.css||PAGE.preview?.css||"")+(PAGE.cssScreen||"")+SHOWCSS+"[data-fix]{display:none!important}"+".pv[data-full]>:first-child{min-height:100vh}"
   +"[data-cmt-hover]{outline:2px solid #7C3AED!important;outline-offset:1px;cursor:crosshair!important}[data-cmt-sel]{outline:2px solid #7C3AED!important;outline-offset:2px;box-shadow:inset 0 0 0 9999px rgba(124,58,237,.06)!important}"
   +".cmtpin{position:absolute;z-index:98;min-width:22px;height:22px;padding:0 5px;border-radius:11px 11px 11px 2px;background:#7C3AED;color:#fff;font:700 11px/22px Inter,system-ui,sans-serif;text-align:center;cursor:pointer;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}.cmtpin.done{background:#9CA3AF}";
-/* ---- bấm như prototype: PAGE.proto=[{sel,state?,set?,toggle?,back?,close?}] — bấm phần tử khớp sel → đổi trạng thái (state) và/hoặc
+/* ---- bấm như prototype: PAGE.proto=[{sel,state?,set?,toggle?,back?,close?,hover?}] — bấm phần tử khớp sel → đổi trạng thái (state) và/hoặc
    biến thể (set:{D7:"b"}). Trạng thái mở bằng proto là "lớp mở": bấm ra ngoài lớp (PAGE.protoLayers) hoặc Esc → về trạng
    thái trước khi mở; close:true = phần tử đóng lớp (chọn 1 dòng, nút Quay lại); toggle bấm lần 2 → back hoặc trạng thái trước.
    Bấm chỗ không bấm được → nháy viền xanh mọi vùng bấm được (như Figma prototype). ---- */
@@ -286,17 +292,24 @@ const HOME=STATES[0]?.key||"default";
 function protoClick(e,sr,get,set){
   if(!PROTO.length) return false; const pv=sr.querySelector(".pv");
   for(const n of e.composedPath()){ if(n===pv||n===sr) break; if(n.nodeType!==1) continue;
-    const hit=PROTO.find(x=>n.matches(x.sel));
+    const hit=PROTO.find(x=>!x.hover&&n.matches(x.sel));
     if(hit){e.preventDefault(); const cur=get(); const base=PROTO_ST.has(cur.state)?(cur.base||HOME):cur.state;
       if(hit.close){set({state:base}); return true;}
       let st=hit.state; if(st&&hit.toggle&&cur.state===st) st=hit.back||base; set({state:st,pick:hit.set,base}); return true;}
     if(PAGE.protoLayers&&n.matches(PAGE.protoLayers)) return true;}
   const cur=get(); if(PROTO_ST.has(cur.state)){set({state:cur.base||HOME}); return true;}
   pv.classList.add("hs-on"); setTimeout(()=>pv.classList.remove("hs-on"),700); return true;}
+/* hover:true = rê chuột vào phần tử khớp sel → chỉ đổi biến thể (set), không đổi trạng thái (vd rê module → cột bên đổi theo) */
+const PROTO_HOV=PROTO.filter(x=>x.hover);
+function protoHover(e,sr,cur,set){if(!PROTO_HOV.length) return; const pv=sr.querySelector(".pv");
+  for(const n of e.composedPath()){ if(n===pv||n===sr) break; if(n.nodeType!==1) continue;
+    const hit=PROTO_HOV.find(x=>n.matches(x.sel));
+    if(hit){ if(Object.entries(hit.set||{}).some(([k,v])=>cur(k)!==v)) set(hit.set); return;}}}
 function protoStage(sr){ // khung biến thể lẻ (stage) — trạng thái giữ trên chính .pv của khung
   const pv=sr.querySelector(".pv");
   sr.addEventListener("click",e=>protoClick(e,sr,()=>({state:pv.dataset.state,base:pv.dataset.base}),o=>{
-    if(o.base!==undefined) pv.dataset.base=o.base; if(o.pick) Object.entries(o.pick).forEach(([k,v])=>pv.setAttribute("data-"+k,v)); if(o.state) pv.dataset.state=o.state;}));}
+    if(o.base!==undefined) pv.dataset.base=o.base; if(o.pick) Object.entries(o.pick).forEach(([k,v])=>pv.setAttribute("data-"+k,v)); if(o.state) pv.dataset.state=o.state;}))
+  sr.addEventListener("mouseover",e=>protoHover(e,sr,k=>pv.getAttribute("data-"+k),p=>Object.entries(p).forEach(([k,v])=>pv.setAttribute("data-"+k,v))));}
 /* design/v2/tokens.css nhúng sẵn — preview "Theo foundation" ghi đè giá trị bằng var(--token) thật.
    .pv có data-theme + data-platform nên các khối [data-theme] / [data-platform] của tokens.css áp đúng mode. */
 // :root trong shadow root không khớp gì → đổi thành :host để biến kế thừa xuống .pv
@@ -320,8 +333,11 @@ function stage(html,opts={}){
     const sr=host.attachShadow({mode:"open"});
     const attrs=Object.entries(opts.attrs||{}).map(([k,v])=>` data-${k}="${esc(v)}"`).join("");
     sr.innerHTML=`<style>:host{display:block;font-family:'Inter',system-ui,sans-serif;color:#171717}${PCSS}${PROTO_CSS}${opts.css||""}</style><div class="pv" data-theme="${theme}" data-platform="${opts.platform||"web"}"${attrs}>${html||""}</div>`;
-    if(opts.fov) fovPrep(sr); protoStage(sr);});
-  return `<div class="stage${opts.white?" white":""}"><div id="${id}" class="pvhost" style="${opts.phone?"":"width:100%"}"></div></div>`;
+    if(opts.fov) fovPrep(sr); protoStage(sr);
+    if(opts.cmt){ // góp ý trên Bảng biến thể (khung vẽ riêng, không qua configurator)
+      sr.addEventListener("mouseover",e=>{if(!cmtPick) return; const t=cmtTarget(e,sr); sr.querySelectorAll("[data-cmt-hover]").forEach(x=>x.removeAttribute("data-cmt-hover")); if(t) t.setAttribute("data-cmt-hover","");});
+      sr.addEventListener("click",e=>{if(!cmtPick) return; const t=cmtTarget(e,sr); if(t){e.preventDefault(); e.stopPropagation(); cmtSelect(t,sr,currentTab,opts.cmt);}},true);}});
+  return `<div class="stage${opts.white?" white":""}"><div id="${id}" class="pvhost"${opts.cmt?` data-cmt-scr="${esc(opts.cmt.screen)}"`:""} style="${opts.phone?"":"width:100%"}"></div></div>`;
 }
 function retheme(){document.querySelectorAll(".pvhost").forEach(h=>{const p=h.shadowRoot?.querySelector(".pv"); if(p) p.dataset.theme=theme;});}
 
@@ -404,6 +420,7 @@ function screenView(tab){let sc=(PAGE.screens||[])[CFG[tab].screen]; if(!sc) ret
     const sr=host.attachShadow({mode:"open"});
     sr.innerHTML=`<style>:host{display:block;position:relative;font-family:'Inter',system-ui,sans-serif;color:#171717}${SHELL_CSS}${screenCSS()}${PROTO_CSS}${tab==="review"?RV_PIN_CSS:""}</style><div class="pv" data-theme="${theme}" data-platform="${sc.device==="mobile"?"mobile":"web"}">${shell(sc)}</div>`;
     if(tab==="foundation"||tab==="review") fovPrep(sr);
+    sr.addEventListener("mouseover",e=>{if(!cmtPick) protoHover(e,sr,k=>CFG[tab].pick[k],p=>{Object.assign(CFG[tab].pick,p); applyCfg(tab);});});
     sr.addEventListener("mouseover",e=>{if(!cmtPick) return; const t=cmtTarget(e,sr); sr.querySelectorAll("[data-cmt-hover]").forEach(x=>x.removeAttribute("data-cmt-hover")); if(t) t.setAttribute("data-cmt-hover","");});
     sr.addEventListener("click",e=>{
       if(cmtPick){const t=cmtTarget(e,sr); if(t){e.preventDefault(); e.stopPropagation(); cmtSelect(t,sr,tab);} return;}
@@ -476,10 +493,12 @@ function bindChoices(root){
   root.querySelectorAll('textarea[id^="n-"]').forEach(t=>{let tm; t.oninput=()=>{const key=t.id.slice(2); state[key]={...(state[key]||{}),note:t.value}; clearTimeout(tm); tm=setTimeout(()=>persist(key),800);};});
   root.querySelectorAll('select[data-key]').forEach(s=>{s.onclick=e=>e.stopPropagation(); s.onchange=()=>{const key=s.dataset.key; state[key]={...(state[key]||{}),choice:s.value===""?null:Number(s.value)}; persist(key); counts(); onChoice(key);};});
 }
+/* kho artifact không nhận id có "·" hay dấu — đổi sang id an toàn, đọc về tra ngược qua DBK */
+const DBK={}; function dbId(key){const id=String(key).normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D").replace(/[^A-Za-z0-9._-]+/g,"_"); DBK[id]=key; return id;}
 async function persist(key){
   const s=state[key]; s.at=Date.now(); lsSave(); const st=document.getElementById("st-"+key);
   if(!db){ if(st) st.textContent="Đã lưu trong trình duyệt này"; return; }
-  try{ if(st) st.textContent="Đang lưu…"; await db.doc("answers/"+key).set({choice:s.choice??null,note:s.note||"",at:s.at,by:uid||null}); if(st) st.textContent="Đã lưu "+new Date(s.at).toLocaleString("vi-VN"); }
+  try{ if(st) st.textContent="Đang lưu…"; await db.doc("answers/"+dbId(key)).set({choice:s.choice??null,note:s.note||"",at:s.at,by:uid||null}); if(st) st.textContent="Đã lưu "+new Date(s.at).toLocaleString("vi-VN"); }
   catch(e){ if(st) st.textContent="Chưa lưu lên trang được (đã giữ trong trình duyệt này)"; }
 }
 function counts(){ const t=currentTab; const its=ITEMS.filter(i=>i.tab===t); const d=its.filter(i=>state[i.key]?.choice!=null).length;
@@ -529,9 +548,9 @@ function renderPreview(){
     <span class="small">Bản ${esc(p.version||"1")}${p.changes?" · "+p.changes:""}</span></div>`;
   if((PAGE.screens||[]).length) h+=`<h2>Màn demo đã chốt <span class="small">tổ hợp khoá theo lựa chọn ở Brainstorm — mở <b>Bảng chọn</b> để đổi màn, trạng thái, Light/Dark</span></h2>${configurator("preview")}`;
   if((p.blocks||[]).length) h+=`<h2>Bảng biến thể</h2>`;
-  (p.blocks||[]).forEach(b=>{const mob=b.platform==="mobile";
+  (p.blocks||[]).forEach((b,bi)=>{const mob=b.platform==="mobile";
     h+=`<div class="block"><div class="block-h"><b>${esc(b.title)}</b><span class="small">${b.note||""}</span></div>
-    ${mob?`<div class="stage white" style="gap:16px;flex-wrap:wrap">${(b.frames||[b.html]).map(f=>`<div class="phone">${stage(f,{platform:"mobile",phone:true,white:true})}</div>`).join("")}</div>`:stage(b.html,{white:true,platform:"web"})}</div>`;});
+    ${mob?`<div class="stage white" style="gap:16px;flex-wrap:wrap">${(b.frames||[b.html]).map((f,fi)=>`<div class="phone">${stage(f,{platform:"mobile",phone:true,white:true,cmt:blkCtx(bi,b,fi)})}</div>`).join("")}</div>`:stage(b.html,{white:true,platform:"web",cmt:blkCtx(bi,b)})}</div>`;});
   if((p.demos||[]).length){h+=`<h2>Màn demo</h2>`; p.demos.forEach(d=>{const mob=/mobile/i.test(d.name);
     h+=`<div class="block"><div class="block-h"><b>${esc(d.name)}</b><span class="small">${d.note||""}</span></div>${mob?`<div class="stage white"><div class="phone">${stage(d.html,{platform:"mobile",phone:true})}</div></div>`:stage(d.html,{white:true})}</div>`;});}
   h+=`<div class="item"><div class="item-h"><h3>Duyệt bản preview ${esc(ver)}?</h3></div><div class="small">Cần sửa thì ghi rõ chỗ nào ở ô ghi chú, hoặc comment ngay trên phần tử.</div>${choiceUI(key,["Duyệt","Cần sửa"])}</div>`;
@@ -547,10 +566,10 @@ function renderPreview(){
    Mỗi dòng check.json có sel + cssProps → ghi đè `sel{prop: var(--token) !important}`. */
 const CAT={ok:["✅ Khớp","c-ok"],near:["↔ Lệch nhỏ","c-near"],new:["＋ Cần token mới","c-new"],conflict:["⛔ Xung đột luật","c-conflict"],undeclared:["⛔ Chưa khai","c-undecl"]};
 const FOPT={near:r=>[`Kéo về ${r.to?.token||"token đề xuất"}`,"Tạo token mới theo preview"],
-  new:r=>["Thêm token mới (giữ hình preview)",`Sửa preview theo ${r.to?.token||"token có sẵn"}`],
+  new:r=>r.to?["Thêm token mới (giữ hình preview)",`Sửa preview theo ${r.to.token}`]:["Thêm token mới (giữ hình preview)"],
   conflict:r=>[`Sửa theo luật${r.fix?.token?" → "+r.fix.token:""}`,"Đổi luật foundation (ghi DEC)","Ngoại lệ cho component này"]};
 const FMODES=[["free","Tự do (bản tab 2)"],["current","Theo lựa chọn hiện tại"],["tokens","Tất cả về token có sẵn"]];
-let fFilter="open", fMode="current", fMark=true, fFlash=null, fBlink=null, FOV_CSS="", fPeek=null;
+let fFilter="open", fMode="current", fMark=true, fSoiMark=true, fFlash=null, fBlink=null, FOV_CSS="", fPeek=null;
 const ROWS=()=>(CHECK?.rows||[]).filter(r=>r.cat!=="undeclared");
 const fch=r=>state["foundation-"+r.id]?.choice;
 /* giá trị CSS của một dòng ở một chế độ; null = giữ hình tự do */
@@ -563,6 +582,19 @@ function fval(r,mode){
   return null;}
 /* sau khi ghi đè, hình có khác bản tự do không (để tô viền) */
 const fchanged=(r,mode)=>fval(r,mode)!=null&&r.cat!=="ok";
+/* soi dòng trạng thái tương tác (:hover, :focus…): trang không ở trạng thái đó → bỏ giả lớp để tô đúng phần tử (user 29/10) */
+const soiSel=S=>S.replace(/:is\((?=[^)]*:(?:hover|focus|active))[^)]*\)/g,"").replace(/:(?:hover|focus-visible|focus-within|focus|active)\b/g,"").replace(/::?(?:after|before|placeholder|marker)\b/g,"");
+/* trạng thái do tương tác bật trên .pv (data-ck, data-sbr, data-state…) — soi thì đặt sẵn để thấy phần tử; bỏ D* (phương án), platform, theme */
+function fxAttrs(sel){const out=[]; splitSel(sel).forEach(x=>{const m=x.match(/^\.pv((?:\[[^\]]+\])+)/); if(!m) return; const a={};
+  for(const [,k,v] of m[1].matchAll(/\[data-([\w-]+)(?:=\"?([^\]"]*)\"?)?\]/g)){if(/^(platform|theme|D\d+)$/.test(k)) continue; a[k]=v??"";} if(Object.keys(a).length) out.push(a);}); return out;}
+/* r.soi (khai ở values): {state, set:{attr:v}, add:{"<sel>":"<class>"}} — bật trạng thái tương tác để thấy phần tử */
+function fxSets(r){const out=[]; const so=r.soi; if(so&&(so.state||so.set)) out.push({...(so.state?{state:so.state}:{}),...(so.set||{})}); return out.concat(fxAttrs(selStr(r)));}
+function fxAdd(root,add){const done=[]; Object.entries(add||{}).forEach(([q,c])=>{let e=null; try{e=root.querySelector(q)}catch(_){}; if(e&&!e.classList.contains(c)){e.classList.add(c); done.push([e,c]);}}); return ()=>done.forEach(([e,c])=>e.classList.remove(c));}
+function fxTry(root,S,sets,add){if(!root) return null; let el=fxFind(root,S); if(el) return el; const pv=root.querySelector(".pv"); if(!pv) return null;
+  const undo=fxAdd(root,add); el=fxFind(root,S); if(el) return el;
+  for(const a of sets){const old={}; Object.keys(a).forEach(k=>{old[k]=pv.getAttribute("data-"+k); pv.setAttribute("data-"+k,a[k]);});
+    el=fxFind(root,S); if(el) return el; Object.keys(a).forEach(k=>old[k]==null?pv.removeAttribute("data-"+k):pv.setAttribute("data-"+k,old[k]));}
+  undo(); return null;}
 function splitSel(sel){const out=[];let d=0,cur="";for(const ch of sel){if(ch==="("||ch==="[")d++;if(ch===")"||ch==="]")d--;if(ch===","&&!d){out.push(cur);cur="";}else cur+=ch;}out.push(cur);return out.map(x=>x.trim()).filter(Boolean);}
 const selStr=r=>Array.isArray(r.sel)?r.sel.join(","):(r.sel||"");
 function scopeSel(sel,r){const plat=/^(web|mobile)$/i.test(r.platform||"")?`[data-platform="${r.platform.toLowerCase()}"]`:"";
@@ -575,7 +607,7 @@ function buildFov(mode,marks=true){
     css.push(`${S}{${(r.cssProps||[r.prop]).map(p=>`${p}:${v} !important`).join(";")}}`);
     if(marks&&fMark&&mode!=="free"&&fchanged(r,mode)&&!(r.cssProps||[]).every(p=>p.startsWith("--"))&&!/^\.pv$/.test(selStr(r).trim())){
       const und=r.must&&fch(r)==null; mk.push(`${S}{outline:2px dashed ${und?"#D97706":"#E11D48"} !important;outline-offset:1px}`);}});
-  if(marks&&fFlash){const r=ROWS().find(x=>x.id===fFlash); if(r?.sel) mk.push(`${scopeSel(selStr(r),r)}{outline:3px solid #00A2FF !important;outline-offset:2px}`);}
+  if(marks&&fSoiMark&&fFlash){const r=ROWS().find(x=>x.id===fFlash); if(r?.sel||r?.at) mk.push(`${soiSel(scopeSel(r.at||selStr(r),r))}{outline:1.5px solid #00A2FF !important;outline-offset:4px}`);}
   return css.join("\n")+"\n"+mk.join("\n");}
 function refreshFov(){FOV_CSS=buildFov(fMode); document.querySelectorAll(".fovhost").forEach(h=>{const st=h.shadowRoot?.querySelector("style[data-fov]"); if(st) st.textContent=h.id==="cfg-host-review"?rvCss():FOV_CSS;});
   const m=document.getElementById("fmode-now"); if(m){m.textContent=FMODES.find(x=>x[0]===fMode)[1]; m.classList.toggle("free",fMode==="free");}
@@ -600,7 +632,8 @@ function renderFSummary(){const el=document.getElementById("fsum"); if(!el) retu
      return `<tr data-row="${esc(r.id)}"><td>${esc(r.part||"")} · <b>${esc(r.prop)}</b>${r.state?` <span class="small">(${esc(r.state)})</span>`:""}</td><td>${esc(r.platform)}${r.theme==="Dark"?" · Dark":""}</td><td>${showV(r.value)}</td><td>${showV(t?.value)} <code>${esc(t?.token||"")}</code>${r.must&&fch(r)==null?' <span class="pill c-near">chưa chọn</span>':""}</td></tr>`;}).join("")}</tbody></table></div>`:""}`;
   bindRowFlash(el);}
 function bindRowFlash(root){root.querySelectorAll("tr[data-row]").forEach(tr=>tr.onclick=e=>{if(e.target.closest("select,textarea,input,label")) return;
-  fFlash=fFlash===tr.dataset.row?null:tr.dataset.row; refreshFov(); document.getElementById("fstage")?.scrollIntoView({behavior:"smooth",block:"start"});});}
+  fxSoi(tr.dataset.row).then(hit=>{if(hit==="miss") alert0(tr); else if(hit==="screen") document.getElementById("fstage")?.scrollIntoView({behavior:"smooth",block:"start"});});});}
+function alert0(tr){tr.querySelector(".fx-miss")||tr.children[1]?.insertAdjacentHTML("beforeend",`<div class="fx-miss">Không thấy phần này trên màn demo nào hay bảng biến thể.</div>`);}
 function renderFoundation(){
   const el=$("#p-foundation"); if(!CHECK){el.innerHTML=`<div class="empty">Chưa chạy đối chiếu foundation.</div>`;return;}
   const rows=CHECK.rows||[]; rows.filter(r=>r.must&&FOPT[r.cat]).forEach(r=>reg("foundation-"+r.id,"foundation",r.id,FOPT[r.cat](r)));
@@ -611,13 +644,14 @@ function renderFoundation(){
   h+=`<div class="fbar" id="fstage"><div class="toolbar" style="margin:0"><span class="lbl">Đang xem</span><span class="fmode" id="fmode-now"></span>
      <div class="seg" id="fmode">${FMODES.map(([k,l])=>`<button data-m="${k}" aria-pressed="${fMode===k}">${l}</button>`).join("")}</div>
      <button class="btn" id="fblink" aria-pressed="${!!fBlink}">${fBlink?"Dừng nhấp nháy":"Nhấp nháy tự do ↔ hiện tại"}</button>
-     <label class="small"><input type="checkbox" id="fmark" ${fMark?"checked":""}> Tô viền chỗ đổi</label>
+     <label class="small" title="Viền đỏ / cam quanh chỗ đổi so với bản tự do"><input type="checkbox" id="fmark" ${fMark?"checked":""}> Viền chỗ đổi</label>
+     <label class="small" title="Viền xanh quanh phần tử của dòng đang Soi"><input type="checkbox" id="fsoimark" ${fSoiMark?"checked":""}> Viền chỗ đang soi</label>
      <div class="seg" id="th3"><button data-t="light" aria-pressed="${theme==="light"}">Light</button><button data-t="dark" aria-pressed="${theme==="dark"}">Dark</button></div></div></div>
   <p class="small">Cùng màn demo và bảng biến thể của tab 2, vẽ lại bằng <code>design/v2/tokens.css</code>. Đổi lựa chọn trong bảng bên dưới → hình đổi ngay. Thấy kéo về token có sẵn làm hỏng hình thì chọn <b>Tạo token mới theo preview</b>. Bấm một dòng để soi phần tử đó trên hình.</p>`;
   if((PAGE.screens||[]).length) h+=`<h2>Màn demo</h2>${configurator("foundation")}`;
-  (p.blocks||[]).forEach(b=>{const mob=b.platform==="mobile";
+  (p.blocks||[]).forEach((b,bi)=>{const mob=b.platform==="mobile";
     h+=`<div class="block"><div class="block-h"><b>${esc(b.title)}</b><span class="small">${b.note||""}</span></div>
-    ${mob?`<div class="stage white" style="gap:16px;flex-wrap:wrap">${(b.frames||[b.html]).map(f=>`<div class="phone">${stage(f,{platform:"mobile",phone:true,white:true,fov:true})}</div>`).join("")}</div>`:stage(b.html,{white:true,platform:"web",fov:true})}</div>`;});
+    ${mob?`<div class="stage white" style="gap:16px;flex-wrap:wrap">${(b.frames||[b.html]).map((f,fi)=>`<div class="phone">${stage(f,{platform:"mobile",phone:true,white:true,fov:true,cmt:blkCtx(bi,b,fi)})}</div>`).join("")}</div>`:stage(b.html,{white:true,platform:"web",fov:true,cmt:blkCtx(bi,b)})}</div>`;});
   h+=`<h2>Trước → Sau</h2><div id="fsum"></div>`;
   h+=`<h2>Từng giá trị <span class="small">so với <code>design/v2/tokens.json</code> bản ${esc(CHECK.tokens_version||"")} và luật foundations</span></h2>
   <div class="filters" id="ff">${[["open","Cần quyết"],["undeclared","Chưa khai"],["near","Lệch nhỏ"],["ok","Khớp"],["all","Tất cả"]].map(([k,l])=>`<button class="chip" aria-pressed="${fFilter===k}" data-k="${k}">${l}</button>`).join("")}</div>
@@ -631,13 +665,14 @@ function renderFoundation(){
     <td class="small">${r.rules?.length?r.rules.map(esc).join("<br>"):(r.tokens?.length?`<code>${r.tokens.map(esc).join("</code>, <code>")}</code>`:"")}${r.suggest&&r.cat!=="ok"?`<div>Token có sẵn gần nhất <code>${esc(r.suggest)}</code></div>`:""}${r.note?`<div>${esc(r.note)}</div>`:""}</td>
     <td id="after-${key}">${und?"":afterCell(r)}</td>
     <td>${o?`<select data-key="${key}"><option value="">— chọn —</option>${o.map((x,i)=>`<option value="${i}" ${s.choice===i?"selected":""}>${esc(x)}</option>`).join("")}</select>
-      <textarea id="n-${key}" placeholder="Ghi chú (vd tên token mới)" style="min-height:34px;margin-top:6px">${esc(s.note||"")}</textarea><div class="save" id="st-${key}"></div>`:(und?'<span class="small">Claude sửa page.json</span>':"")}</td></tr>`;}).join("")||`<tr><td colspan="8" class="small">Không có dòng nào ở nhóm này.</td></tr>`;
+      <textarea id="n-${key}" placeholder="Ghi chú (vd tên token mới)" style="min-height:34px;margin-top:6px">${esc(s.note||"")}</textarea><div class="save" id="st-${key}"></div>`:(und?'<span class="small">Claude sửa page.json</span>':`<textarea id="n-${key}" placeholder="Ghi chú (tuỳ chọn)" style="min-height:34px">${esc(s.note||"")}</textarea><div class="save" id="st-${key}"></div>`)}</td></tr>`;}).join("")||`<tr><td colspan="8" class="small">Không có dòng nào ở nhóm này.</td></tr>`;
   h+=`</tbody></table></div>`;
   FOV_CSS=buildFov(fMode);
   el.innerHTML=h; bindChoices(el); bindCfg("foundation"); renderFSummary(); bindRowFlash(el); refreshFov();
   el.querySelectorAll("#ff .chip").forEach(b=>b.onclick=()=>{fFilter=b.dataset.k; ITEMS.splice(0,ITEMS.length); renderAll(); showTab("foundation");});
   el.querySelectorAll("#fmode button").forEach(b=>b.onclick=()=>{fMode=b.dataset.m; refreshFov();});
   el.querySelector("#fmark").onchange=e=>{fMark=e.target.checked; refreshFov();};
+  el.querySelector("#fsoimark").onchange=e=>{fSoiMark=e.target.checked; refreshFov();};
   el.querySelector("#fblink").onclick=e=>{if(fBlink){clearInterval(fBlink); fBlink=null; fMode="current";}
     else{const back=fMode==="free"?"current":fMode; fBlink=setInterval(()=>{fMode=fMode==="free"?back:"free"; refreshFov();},800);}
     e.target.textContent=fBlink?"Dừng nhấp nháy":"Nhấp nháy tự do ↔ hiện tại"; e.target.setAttribute("aria-pressed",String(!!fBlink)); refreshFov();};
@@ -710,7 +745,7 @@ function renderReview(){
     return `<div class="item${rvFlash===r.id?" hl":""}" id="rv-${esc(r.id)}"><div class="item-h"><span class="code">${esc(r.id)}</span><span class="pill ${r.severity==="Cao"?"c-conflict":r.severity==="Trung"?"c-near":"c-ok"}">${esc(r.severity||"")}</span><span class="small">${esc(r.agent)}</span>${r.changesLook?'<span class="pill c-new">đổi look</span>':""}${hasAfter?'<span class="pill c-ok">có hình sau khi sửa</span>':""}
       ${canGo?`<button class="btn" data-go="${esc(r.id)}" style="margin-left:auto">Xem trên hình</button>`:""}</div>
     <div class="rv"><div><p style="margin:8px 0">${r.text||""}</p>${r.fix?`<div class="small"><b>Đề xuất sửa:</b> ${r.fix}</div>`:""}${r.node?`<div class="src">node ${esc(r.node)}${r.where?" · "+esc(r.where):""}</div>`:""}${choiceUI(key,["Sửa","Bỏ qua"],{rec:r.changesLook?undefined:0})}</div>
-    <div>${r.img?`<img src="${esc(r.img)}" alt="Ảnh chụp Figma ${esc(r.id)}">`:""}</div></div></div>`;}).join("");
+    <div>${r.img?`<img src="${esc(r.img)}" alt="Ảnh ${esc(r.id)}" data-zoom title="Bấm để xem cỡ lớn" style="cursor:zoom-in">`:""}${r.img?`<div class="small" style="margin-top:4px">Bấm ảnh để xem cỡ lớn</div>`:""}</div></div></div>`;}).join("");
   if((PAGE.screens||[]).length) h+=`</div></div>`;
   el.innerHTML=h; bindChoices(el); if((PAGE.screens||[]).length) bindCfg("review");
   el.querySelectorAll("#rf .chip").forEach(b=>b.onclick=()=>{rvFilter=b.dataset.a; ITEMS.splice(0,ITEMS.length); renderAll(); showTab("review");});
@@ -731,6 +766,32 @@ function fxOpen(pane,open=true){const p=$("#fx-panel"); if(pane) fxPane=pane; p.
 function fxSetFocus(on){document.body.classList.toggle("focus",on); try{localStorage.setItem(LS+"-focus",on?"1":"0")}catch(e){}
   if(!on) fxOpen(null,false); ["brainstorm","preview","foundation","review"].forEach(t=>{if(document.getElementById("cfg-host-"+t)?.shadowRoot) applyCfg(t);});
   requestAnimationFrame(()=>{fitWeb(currentTab); if(currentTab==="review") requestAnimationFrame(placePins);});}
+/* Bảng biến thể toàn màn + Soi tìm đúng chỗ (user 28/10: bấm Soi không biết đổi ở đâu) */
+let fxBlk=false; const fxMiss={};
+function fxBlkSet(on){fxBlk=on; document.body.classList.toggle("fxblk",on); if(!on) requestAnimationFrame(()=>fitWeb(currentTab));}
+function fxFind(root,S){if(!root) return null; let els=[]; try{els=[...root.querySelectorAll(S)]}catch(e){return null}
+  return els.find(e=>{const b=e.getBoundingClientRect(); return b.width>0&&b.height>0&&getComputedStyle(e).visibility!=="hidden";})||null;}
+function fxShow(el){el.scrollIntoView({behavior:"smooth",block:"center",inline:"center"});}
+async function fxSoi(id){ const tick=()=>new Promise(r=>setTimeout(r,0));
+  if(fFlash===id&&!fPeek){fFlash=null; refreshFov(); return null;}
+  fFlash=id; delete fxMiss[id]; refreshFov(); const r=ROWS().find(x=>x.id===id); if(!r?.sel&&!r?.at) return null;
+  /* r.at = chỗ để soi khi giá trị không vẽ lại được (noOverride) */
+  const t=currentTab, S=soiSel(scopeSel(r.at||selStr(r),r)), host=()=>document.getElementById("cfg-host-"+t)?.shadowRoot;
+  /* dòng theme Dark: chuyển trang sang Dark để thấy đúng phần tử */
+  if((r.theme==="Dark"||/data-theme=\"?dark/.test(selStr(r)))&&theme!=="dark"){theme="dark"; document.querySelectorAll("[data-th] button,#th button,#th3 button").forEach(x=>x.setAttribute("aria-pressed",String(x.dataset.t===theme))); retheme(); await tick();}
+  const sets=fxSets(r), add=r.soi?.add;
+  let el=!fxBlk&&fxTry(host(),S,sets,add); if(el){fxShow(el); return "screen";}
+  /* bảng biến thể trước (không đổi màn đang xem), rồi tới từng màn × trạng thái */
+  const blk=[...document.querySelectorAll(`#p-${t} .block .fovhost`)];
+  if(document.body.classList.contains("focus")) fxBlkSet(true);
+  for(const h of blk){el=fxTry(h.shadowRoot,S,sets,add); if(el){fxShow(el); return "blocks";}}
+  fxBlkSet(false); const c=CFG[t]; if(!c) return null; const keep={screen:c.screen,state:c.state};
+  const want=/^mobile$/i.test(r.platform||"")?"mobile":/^web$/i.test(r.platform||"")?"web":null;
+  for(let i=0;i<(PAGE.screens||[]).length;i++){const dev=PAGE.screens[i].device==="mobile"?"mobile":"web"; if(want&&dev!==want) continue;
+    for(const st of [...STATES].sort((x,y)=>(y.key===r.soi?.state)-(x.key===r.soi?.state))){c.state=st.key; if(c.screen!==i){showScreen(t,i); await tick();} else applyCfg(t); refreshFov();
+      el=fxTry(host(),S,sets,add); if(el){requestAnimationFrame(()=>fxShow(el)); return "screen";}}}
+  c.state=keep.state; if(c.screen!==keep.screen){showScreen(t,keep.screen); await tick();} else applyCfg(t); refreshFov();
+  fxMiss[id]=true; return "miss";}
 function fxChoose(key,i){state[key]={...(state[key]||{}),choice:state[key]?.choice===i?null:i}; persist(key); onChoice(key); counts(); fxBadge(); fxRender();}
 function fxNote(key,v){state[key]={...(state[key]||{}),note:v}; clearTimeout(fxNote.t); fxNote.t=setTimeout(()=>persist(key),500);}
 function fxBadge(){const n=ITEMS.filter(i=>i.tab===currentTab&&state[i.key]?.choice==null).length; const b=$("#fx-badge"); b.hidden=!n; b.textContent=n;}
@@ -755,19 +816,22 @@ function fxChooseHTML(t){
       <textarea data-fn="${esc(i.key)}" placeholder="Cần sửa chỗ nào (tuỳ chọn)">${esc(state[i.key]?.note||"")}</textarea></div>`).join("");}
   else if(t==="foundation"){
     h+=`<div class="fx-seg">${FMODES.map(([k,l])=>`<button data-fm="${k}" aria-pressed="${fMode===k&&!fBlink}">${l}</button>`).join("")}<button id="fx-blink" aria-pressed="${!!fBlink}">${fBlink?"Dừng nhấp nháy":"Nhấp nháy tự do ↔ hiện tại"}</button></div>
-      <label class="small"><input type="checkbox" id="fx-mark" ${fMark?"checked":""}> Tô viền chỗ đổi</label>
+      <label class="small" title="Viền đỏ / cam quanh chỗ đổi so với bản tự do"><input type="checkbox" id="fx-mark" ${fMark?"checked":""}> Viền chỗ đổi</label>
+      <label class="small" title="Viền xanh quanh phần tử của dòng đang Soi"><input type="checkbox" id="fx-soimark" ${fSoiMark?"checked":""}> Viền chỗ đang soi</label>
       <div class="fx-seg" style="margin-top:8px">${[["open","Cần quyết"],["seen","Đổi hình"],["all","Tất cả"]].map(([k,l])=>`<button data-ff="${k}" aria-pressed="${fxFilter===k}">${l}</button>`).join("")}</div>`;
     const G=CHECK?.groups||{}; const inF=r=>fxFilter==="all"?true:fxFilter==="open"?r.must:(r.visible&&r.cat!=="ok");
     if(Object.keys(G).length) h+=`<div class="fx-g" style="margin-top:10px">Kiểm theo nhóm</div><div class="fx-seg fx-grp">${[["all","Tất cả",ROWS().filter(inF).length]].concat(Object.entries(G).map(([k,g])=>[k,g.label,ROWS().filter(r=>r.group===k&&inF(r)).length])).map(([k,l,n])=>`<button data-fg="${k}" aria-pressed="${fxGroup===k}">${esc(l)} <b>${n}</b></button>`).join("")}</div>`;
     const rows=ROWS().filter(r=>inF(r)&&(fxGroup==="all"||r.group===fxGroup));
     h+=rows.map(r=>{const key="foundation-"+r.id, o=r.must&&FOPT[r.cat]?FOPT[r.cat](r):null, tg=(r.cat==="conflict"?r.fix:r.to)||r.bind;
       return `<div class="fx-c${fFlash===r.id?" on":""}" id="fxf-${esc(r.id)}"><div class="hd"><span class="pill ${CAT[r.cat][1]}">${CAT[r.cat][0]}</span>${r.group&&G[r.group]?`<span class="pill grp">${esc(G[r.group].label)}</span>`:""}<span class="small">${esc(r.platform||"")}${r.theme==="Dark"?" · Dark":""}</span>
-        ${r.sel?`<button class="mini" data-soi="${esc(r.id)}" aria-pressed="${fFlash===r.id}" style="margin-left:auto">Soi</button>`:""}</div>
+        ${r.sel||r.at?`<button class="mini" data-soi="${esc(r.id)}" aria-pressed="${fFlash===r.id}" style="margin-left:auto">Soi</button>`:""}</div>
+        ${fxMiss[r.id]?`<div class="fx-miss">Không thấy phần này trên màn demo nào hay bảng biến thể — bộ chọn <code>${esc(selStr(r))}</code> không trúng phần tử đang hiện. Claude cần sửa dòng này.</div>`:""}
         <div class="tt">${esc(r.part||"")} · <b>${esc(r.prop)}</b>${r.state?` <span class="small">(${esc(r.state)})</span>`:""}</div>
         ${r.audit&&r.rules?.length?`<div class="rule">${esc(r.rules[0])}</div>`:""}
         <div class="ba">Trước ${showV(r.value)} <span class="arrow">→</span> Sau ${showV(tg?.value)} <code>${esc(tg?.token||"")}</code></div>
         ${r.sel?`<div class="ba" style="margin-top:4px">Xem trên màn: <button class="mini" data-pk="${esc(r.id)}" data-side="before" aria-pressed="${fPeek?.id===r.id&&fPeek.side==="before"}">Trước</button><button class="mini" data-pk="${esc(r.id)}" data-side="after" aria-pressed="${fPeek?.id===r.id&&fPeek.side==="after"}">Sau</button></div>`:""}
-        ${o?fxOps(key,o):""}</div>`;}).join("")||`<p class="fx-note">Không có dòng nào.</p>`;}
+        ${o?fxOps(key,o):""}
+        ${r.cat==="undeclared"?"":`<textarea data-fn="${esc(key)}" placeholder="Ghi chú (tuỳ chọn)">${esc(state[key]?.note||"")}</textarea>`}</div>`;}).join("")||`<p class="fx-note">Không có dòng nào.</p>`;}
   else if(t==="review"){
     h+=`<div class="fx-seg">${RVMODES.map(([k,l])=>`<button data-rm="${k}" aria-pressed="${rvMode===k}">${l}</button>`).join("")}</div>
       <label class="small"><input type="checkbox" id="fx-pins" ${rvPins?"checked":""}> Hiện ghim trên màn</label>`;
@@ -784,14 +848,15 @@ function fxRender(){
   if(fxPane==="step") body=FX_STEPS.map(([k,l])=>`<button class="fx-i" data-step="${k}" ${av[k]?"":"disabled"} aria-current="${k===t}">${l}${av[k]?"":' <span class="tg">chưa tới</span>'}</button>`).join("");
   else if(fxPane==="screens"){
     body=(PAGE.screens||[]).map((sc,i)=>`<div class="fx-g">${esc(sc.name)} · ${sc.device==="mobile"?"Mobile":"Web"}</div>`
-      +STATES.map(st=>`<button class="fx-i sub" data-scr="${i}" data-st="${st.key}" aria-current="${c.screen===i&&c.state===st.key}">${esc(st.label)}</button>`).join("")).join("");
+      +STATES.map(st=>`<button class="fx-i sub" data-scr="${i}" data-st="${st.key}" aria-current="${!fxBlk&&c.screen===i&&c.state===st.key}">${esc(st.label)}</button>`).join("")).join("");
+    if(t!=="brainstorm"&&(PAGE.preview?.blocks||[]).length) body+=`<div class="fx-g">Bảng biến thể</div><button class="fx-i sub" data-blk="1" aria-current="${fxBlk}">Mọi biến thể · trạng thái (${PAGE.preview.blocks.length} khối)</button>`;
     if(t==="brainstorm"&&(PAGE.presets||[]).length) body+=`<div class="fx-g">Bộ phương án theo nguồn</div>`+PAGE.presets.map(pr=>`<button class="fx-i sub" data-pre="${esc(pr.id)}" aria-current="${c.preset===pr.id}">${esc(pr.label)}</button>`).join("");}
   else if(fxPane==="choose") body=fxChooseHTML(t);
   else if(fxPane==="cmt") body=cmtHTML(t);
   else body=`<div class="fx-g">Giao diện</div><div class="fx-seg">${[["light","Light"],["dark","Dark"]].map(([k,l])=>`<button data-th="${k}" aria-pressed="${theme===k}">${l}</button>`).join("")}</div>
     <p class="fx-note">Bấm trên màn như prototype${PROTO.length?" ("+esc(PAGE.protoHint||"")+")":""}. Bấm chỗ trống để thấy vùng bấm được; Esc đóng lớp đang mở.</p>`;
   const sc=(PAGE.screens||[])[c.screen];
-  p.innerHTML=`<div class="fx-h"><div><div class="k">${esc(PAGE.component||"")} · ${esc(FX_STEPS.find(x=>x[0]===t)?.[1]||"")}</div><b>${esc(sc?.name||"")}${sc?` · ${esc(STATES.find(x=>x.key===c.state)?.label||"")}`:""}</b></div><button class="x" aria-label="Đóng">✕</button></div>
+  p.innerHTML=`<div class="fx-h"><div><div class="k">${esc(PAGE.component||"")} · ${esc(FX_STEPS.find(x=>x[0]===t)?.[1]||"")}</div><b>${fxBlk?"Bảng biến thể":esc(sc?.name||"")+(sc?` · ${esc(STATES.find(x=>x.key===c.state)?.label||"")}`:"")}</b></div><button class="x" aria-label="Đóng">✕</button></div>
     <div class="fx-tabs" role="tablist">${[["step","Bước"],["screens","Màn & kịch bản"],["choose","Chọn"],["cmt","Góp ý"],["view","Hiển thị"]].map(([k,l])=>`<button role="tab" data-pane="${k}" aria-selected="${fxPane===k}">${l}</button>`).join("")}</div>
     <div class="fx-b">${body}</div><div class="fx-f"><button class="btn" id="fx-detail">Xem bảng chi tiết</button></div>`;
   p.querySelector(".fx-b").scrollTop=y;
@@ -799,7 +864,8 @@ function fxRender(){
   p.querySelectorAll("[data-pane]").forEach(b=>b.onclick=()=>{fxPane=b.dataset.pane; p.querySelector(".fx-b").scrollTop=0; fxRender(); p.querySelector(".fx-b").scrollTop=0;});
   p.querySelector("#fx-detail").onclick=()=>fxSetFocus(false);
   p.querySelectorAll("[data-step]").forEach(b=>b.onclick=()=>{showTab(b.dataset.step); fxPane="choose"; fxRender();});
-  p.querySelectorAll("[data-scr]").forEach(b=>b.onclick=()=>{const i=Number(b.dataset.scr); CFG[t].state=b.dataset.st; if(i!==CFG[t].screen) showScreen(t,i); else applyCfg(t); fxRender();});
+  p.querySelectorAll("[data-blk]").forEach(b=>b.onclick=()=>{fxBlkSet(true); fxRender();});
+  p.querySelectorAll("[data-scr]").forEach(b=>b.onclick=()=>{fxBlkSet(false); const i=Number(b.dataset.scr); CFG[t].state=b.dataset.st; if(i!==CFG[t].screen) showScreen(t,i); else applyCfg(t); fxRender();});
   p.querySelectorAll("[data-pre]").forEach(b=>b.onclick=()=>{applyPreset(t,b.dataset.pre); fxRender();});
   p.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>{theme=b.dataset.th; retheme(); fxRender();});
   p.querySelectorAll("[data-fk]").forEach(b=>b.onclick=()=>fxChoose(b.dataset.fk,Number(b.dataset.fi)));
@@ -810,11 +876,12 @@ function fxRender(){
   p.querySelector("#fx-blink")?.addEventListener("click",()=>{if(fBlink){clearInterval(fBlink); fBlink=null; fMode="current";}
     else{const back=fMode==="free"?"current":fMode; fBlink=setInterval(()=>{fMode=fMode==="free"?back:"free"; refreshFov();},800);} refreshFov(); fxRender();});
   p.querySelector("#fx-mark")?.addEventListener("change",e=>{fMark=e.target.checked; refreshFov();});
+  p.querySelector("#fx-soimark")?.addEventListener("change",e=>{fSoiMark=e.target.checked; refreshFov();});
   p.querySelectorAll("[data-ff]").forEach(b=>b.onclick=()=>{fxFilter=b.dataset.ff; fxRender();});
   p.querySelectorAll("[data-fg]").forEach(b=>b.onclick=()=>{fxGroup=b.dataset.fg; fxRender();});
-  p.querySelectorAll("[data-soi]").forEach(b=>b.onclick=()=>{fFlash=fFlash===b.dataset.soi?null:b.dataset.soi; refreshFov(); fxRender();});
+  p.querySelectorAll("[data-soi]").forEach(b=>b.onclick=()=>{fxSoi(b.dataset.soi).then(fxRender);});
   p.querySelectorAll("[data-pk]").forEach(b=>b.onclick=()=>{const k={id:b.dataset.pk,side:b.dataset.side};
-    fPeek=fPeek&&fPeek.id===k.id&&fPeek.side===k.side?null:k; fFlash=fPeek?k.id:fFlash; refreshFov(); fxRender();});
+    fPeek=fPeek&&fPeek.id===k.id&&fPeek.side===k.side?null:k; if(fPeek&&fFlash!==k.id) fxSoi(k.id).then(fxRender); else {refreshFov(); fxRender();}});
   p.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{rvMode=b.dataset.rm; refreshRv(); fxRender();});
   p.querySelector("#fx-pins")?.addEventListener("change",e=>{rvPins=e.target.checked; placePins();});
   p.querySelectorAll(".fx-b [data-go]").forEach(b=>b.onclick=()=>{rvFocus(b.dataset.go,true); fxRender();});
@@ -836,10 +903,11 @@ function cmtPath(el,pv){const out=[]; for(let n=el;n&&n!==pv;n=n.parentElement){
   out.unshift(s);} return out.join(" > ");}
 function cmtPart(el){const hits=[]; for(const v of PAGE.values||[]){const ss=Array.isArray(v.sel)?v.sel:(v.sel?[v.sel]:[]);
   for(const x of ss){try{const sx=x.replace(/^\.pv(\[[^\]]*\])*\s*/,""); if(sx&&el.matches(sx)){hits.push(v.part); break;}}catch(e){}}} return [...new Set(hits)].slice(0,3);}
-function cmtSelect(el,sr,tab){sr.querySelectorAll("[data-cmt-hover],[data-cmt-sel]").forEach(x=>{x.removeAttribute("data-cmt-hover"); x.removeAttribute("data-cmt-sel");});
+const blkCtx=(bi,b,fi)=>({screen:`blk-${bi}${fi!=null?"-"+fi:""}`,screenName:`Bảng biến thể · ${b.title||""}${fi!=null?" · khung "+(fi+1):""}`});
+function cmtSelect(el,sr,tab,ctx){sr.querySelectorAll("[data-cmt-hover],[data-cmt-sel]").forEach(x=>{x.removeAttribute("data-cmt-hover"); x.removeAttribute("data-cmt-sel");});
   el.setAttribute("data-cmt-sel",""); const pv=sr.querySelector(".pv"); const c=CFG[tab]; const sc=(PAGE.screens||[])[c.screen];
   const parts=cmtPart(el); const txt=(el.getAttribute("aria-label")||el.innerText||"").replace(/\s+/g," ").trim().slice(0,60);
-  cmtDraft={step:tab,screen:sc?.id||"",screenName:sc?.name||"",state:c.state,stateLabel:STATES.find(x=>x.key===c.state)?.label||c.state,
+  cmtDraft={step:tab,screen:ctx?ctx.screen:(sc?.id||""),screenName:ctx?ctx.screenName:(sc?.name||""),state:ctx?"x":c.state,stateLabel:ctx?"Bảng biến thể":(STATES.find(x=>x.key===c.state)?.label||c.state),
     pick:{...c.pick},sel:cmtPath(el,pv),parts,text:txt,tag:el.tagName.toLowerCase()+(el.classList.length?"."+[...el.classList].slice(0,2).join("."):""),_el:el};
   cmtPick=false; fxOpen("cmt"); setTimeout(()=>document.getElementById("cmt-new")?.focus(),50);}
 function cmFmt(t){return esc(t).replace(/\*\*(.+?)\*\*/g,"<mark>$1</mark>").replace(/\n/g,"<br>");} // **từ khoá** → mark
@@ -872,7 +940,8 @@ function cmtHTML(t){
       <div class="op"><button data-cmsend="${esc(id)}" aria-pressed="true">Gửi góp ý thêm</button><button data-cmcancel="${esc(id)}">Huỷ</button></div></div>`:""}
     <div class="op"><button data-cgo="${esc(id)}">Xem trên màn</button>${snapOf(id)?`<button data-cbefore="${esc(id)}" aria-pressed="${cmtBefore===id}">${cmtBefore===id?"Đang xem bản trước":"Xem bản trước"}</button>`:""}<button data-cdel="${esc(id)}">Xoá</button></div></div>`).join("")||`<p class="fx-note">Chưa có góp ý.</p>`;
   return h;}
-async function cmtPersist(id){cmtSave(); if(!db) return; try{const c=CMT[id]; if(!c) await db.doc("comments/"+id).delete?.(); else await db.doc("comments/"+id).set({...c,by:uid||null});}catch(e){}}
+async function cmtPersist(id){cmtSave(); if(!db) return; try{const c=CMT[id]; if(!c) await db.doc("comments/"+id).delete?.(); else await db.doc("comments/"+id).set({...c,by:uid||null});}
+  catch(e){const s=$("#store"); if(s) s.textContent="Chưa lưu được góp ý — thử lại sau ("+(e?.code||e?.message||"lỗi")+")"; console.warn("cmtPersist",e);}}
 function cmtBind(p){
   p.querySelector("#cmt-pick")?.addEventListener("click",()=>{cmtPick=!cmtPick; cmtDraft=null; if(cmtPick) fxOpen(null,false); else fxRender();});
   p.querySelector("#cmt-done")?.addEventListener("change",e=>{cmtShowDone=e.target.checked; fxRender();});
@@ -886,10 +955,10 @@ function cmtBind(p){
   p.querySelectorAll("[data-cmore]").forEach(b=>b.onclick=()=>{cmtMore=b.dataset.cmore; fxRender(); setTimeout(()=>document.getElementById("cmt-more-"+cmtMore)?.focus(),30);});
   p.querySelectorAll("[data-crev]").forEach(b=>b.onclick=()=>{const id=b.dataset.crev, c=CMT[id]; if(!c) return;
     if(b.dataset.sure!=="1"){b.dataset.sure="1"; b.textContent="Bấm lần nữa để gửi yêu cầu hoàn lại"; return;}
-    c.thread=[...(c.thread||[]),{role:"user",action:"revert",text:"Hoàn lại về bản trước khi sửa góp ý này",at:Date.now()}]; c.done=false; cmtPersist(id); fxRender(); placeCmt();});
+    CMT[id]={...c,thread:[...(c.thread||[]),{role:"user",action:"revert",text:"Hoàn lại về bản trước khi sửa góp ý này",at:Date.now()}],done:false}; cmtPersist(id); fxRender(); placeCmt();});
   p.querySelectorAll("[data-cmcancel]").forEach(b=>b.onclick=()=>{cmtMore=null; fxRender();});
   p.querySelectorAll("[data-cmsend]").forEach(b=>b.onclick=()=>{const id=b.dataset.cmsend, c=CMT[id]; const t=p.querySelector("#cmt-more-"+id)?.value.trim(); if(!c||!t) return;
-    c.thread=[...(c.thread||[]),{role:"user",text:t,at:Date.now()}]; c.done=false; cmtMore=null; cmtPersist(id); fxRender(); placeCmt();});
+    CMT[id]={...c,thread:[...(c.thread||[]),{role:"user",text:t,at:Date.now()}],done:false}; cmtMore=null; cmtPersist(id); fxRender(); placeCmt();});
   p.querySelectorAll("[data-cbefore]").forEach(b=>b.onclick=()=>cmtShowBefore(cmtBefore===b.dataset.cbefore?null:b.dataset.cbefore));}
 function cmtShowBefore(id,go=true){const prev=cmtBefore, t0=currentTab;
   if(prev&&cmtBeforePick){CFG[cmtBeforePick.tab].pick=cmtBeforePick.pick; cmtBeforePick=null;}
@@ -907,6 +976,9 @@ function cmtShowBefore(id,go=true){const prev=cmtBefore, t0=currentTab;
 function cmtClearSel(){document.querySelectorAll(".pvhost").forEach(h=>h.shadowRoot?.querySelectorAll("[data-cmt-sel],[data-cmt-hover]").forEach(x=>{x.removeAttribute("data-cmt-sel"); x.removeAttribute("data-cmt-hover");}));}
 function cmtFind(c,sr){try{return sr.querySelector(".pv > "+c.sel)||sr.querySelector(".pv "+c.sel.split(" > ").slice(-2).join(" > "));}catch(e){return null;}}
 function cmtGo(id){const c=CMT[id]; if(!c) return; if(c.step&&c.step!==currentTab&&fxAvail()[c.step]) showTab(c.step);
+  if(String(c.screen||"").startsWith("blk-")){if(document.body.classList.contains("focus")) fxBlkSet(true);
+    setTimeout(()=>{const hs=[...document.querySelectorAll(`[data-cmt-scr="${c.screen}"]`)].filter(h=>h.offsetParent); const sr=hs[0]?.shadowRoot; const el=sr&&cmtFind(c,sr);
+      cmtClearSel(); if(el){el.setAttribute("data-cmt-sel",""); el.scrollIntoView({block:"center"});} else hs[0]?.scrollIntoView({block:"center"});},250); return;}
   const t=currentTab, si=(PAGE.screens||[]).findIndex(s=>s.id===c.screen); CFG[t].state=c.state||CFG[t].state;
   if(si>=0&&si!==CFG[t].screen) showScreen(t,si); else applyCfg(t);
   setTimeout(()=>{const sr=document.getElementById("cfg-host-"+t)?.shadowRoot; const el=sr&&cmtFind(c,sr); cmtClearSel(); if(el){el.setAttribute("data-cmt-sel",""); el.scrollIntoView({block:"center"});}},250);}
@@ -937,6 +1009,7 @@ $("#h-title").textContent=PAGE.component||"Component";
 $("#h-sub").innerHTML=PAGE.subtitle||"";
 $("#btn-export").onclick=()=>{const L=[`${PAGE.component} — lựa chọn`,""];
   ITEMS.forEach(i=>{const s=state[i.key]||{}; if(s.choice==null&&!s.note) return; L.push(`- ${i.key}: ${s.choice!=null?i.opts[s.choice]:"(chưa chọn)"}${s.note?" — "+s.note.replace(/\n/g," "):""}`);});
+  ROWS().filter(r=>!ITEMS.some(i=>i.key==="foundation-"+r.id)).forEach(r=>{const n=state["foundation-"+r.id]?.note; if(n) L.push(`- foundation-${r.id}: (ghi chú) ${n.replace(/\n/g," ")}`);});
   const o=$("#out"); o.textContent=L.join("\n"); o.hidden=false;};
 renderAll(); initTabs();
 {let fo="1"; try{fo=localStorage.getItem(LS+"-focus")??"1"}catch(e){} fxSetFocus(fo!=="0"&&(PAGE.screens||[]).length>0);}
@@ -948,12 +1021,15 @@ renderAll(); initTabs();
   try{const w=u?await u.can("data.write"):null; if(w===false) canWrite=false;}catch(e){}
   $("#store").textContent=canWrite?"Lựa chọn lưu trên trang, Claude đọc được":"Bạn chỉ có quyền xem trang này";
   db.collection("comments").onSnapshot(snap=>{snap.docs.forEach(doc=>{const x=doc.data(); if(!x) return;
-      if(x.deleted){delete CMT[doc.id]; return;} if(!CMT[doc.id]||(x.at||0)>=(CMT[doc.id].at||0)) CMT[doc.id]=x;});
+      if(x.deleted){delete CMT[doc.id]; return;} if(!CMT[doc.id]||(x.at||0)>=(CMT[doc.id].at||0)) CMT[doc.id]=JSON.parse(JSON.stringify(x)); /* kho trả object đóng băng — chép để sửa được */});
     cmtSave(); const a=document.activeElement; if(!(a&&a.tagName==="TEXTAREA")) fxRender(); placeCmt();},()=>{});
+  ROWS().forEach(r=>dbId("foundation-"+r.id)); ITEMS.forEach(i=>dbId(i.key));
   db.collection("answers").onSnapshot(snap=>{let ch=false;
-    snap.docs.forEach(doc=>{const x=doc.data(); if(!x) return; const cur=state[doc.id];
-      if(!cur||(x.at||0)>(cur.at||0)){state[doc.id]={choice:x.choice??undefined,note:x.note||"",at:x.at}; ch=true;}});
+    snap.docs.forEach(doc=>{const x=doc.data(); if(!x) return; const k=DBK[doc.id]||doc.id, cur=state[k];
+      if(!cur||(x.at||0)>(cur.at||0)){state[k]={choice:x.choice??undefined,note:x.note||"",at:x.at}; ch=true;}});
     if(ch){lsSave(); const a=document.activeElement; if(!(a&&(a.tagName==="TEXTAREA"||a.tagName==="SELECT"))){ITEMS.splice(0,ITEMS.length); renderAll(); showTab(currentTab);} else counts();}
   },()=>{$("#store").textContent="Mất kết nối nơi lưu — lựa chọn vẫn giữ trong trình duyệt này";});
 })();
+
+document.addEventListener("click",e=>{const im=e.target.closest&&e.target.closest("img[data-zoom]");if(!im)return;const o=document.createElement("div");o.className="zoomov";o.setAttribute("role","dialog");o.setAttribute("aria-label","Ảnh cỡ lớn");o.innerHTML=`<img src="${im.src}" alt="${im.alt}">`;o.onclick=()=>o.remove();document.addEventListener("keydown",function k(ev){if(ev.key==="Escape"){o.remove();document.removeEventListener("keydown",k)}});document.body.appendChild(o);});
 </script>

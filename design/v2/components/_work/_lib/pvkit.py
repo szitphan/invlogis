@@ -11,6 +11,12 @@ ROOT = Path(__file__).resolve().parents[5]
 TOKENS_CSS = ROOT / "design/v2/tokens.css"
 
 P = {
+    "navigation": '<path d="M3 11l19-9-9 19-2-8-8-2z"/>',
+    "triangle-alert": '<path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>',
+    "hourglass": '<path d="M5 22h14M5 2h14M17 22v-4.2a2 2 0 0 0-.6-1.4L12 12l-4.4 4.4a2 2 0 0 0-.6 1.4V22M7 2v4.2a2 2 0 0 0 .6 1.4L12 12l4.4-4.4a2 2 0 0 0 .6-1.4V2"/>',
+    "circle-check": '<circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/>',
+    "clock": '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+    "image": '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/>',
     "plus": '<path d="M12 5v14M5 12h14"/>',
     "arrow-r": '<path d="M5 12h14M13 6l6 6-6 6"/>',
     "x": '<path d="M6 6l12 12M18 6L6 18"/>',
@@ -98,5 +104,11 @@ def hide_css(page):
 
 def write(out_path, page):
     page["css"] = page.get("css", "") + hide_css(page)
+    # giữ lịch sử góp ý (bản trước / hoàn lại) do ds-snap.py ghi — dựng lại trang không được xoá
+    if Path(out_path).exists():
+        old = json.loads(Path(out_path).read_text())
+        for k in ("snaps", "cmtSnap", "cmtChanges"):
+            if k in old and k not in page:
+                page[k] = old[k]
     Path(out_path).write_text(json.dumps(page, ensure_ascii=False, indent=1))
     print(f"Đã ghi {out_path}")
