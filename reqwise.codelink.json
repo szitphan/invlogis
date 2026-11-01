@@ -1,0 +1,6710 @@
+{
+  "version": 1,
+  "project": {
+    "id": "p-5563f8",
+    "name": "invlogis"
+  },
+  "figmaFiles": [
+    {
+      "id": "f-d95944",
+      "name": "[innvie] invlogis v0.3.4"
+    }
+  ],
+  "components": [
+    {
+      "figma": {
+        "id": "43:242790",
+        "name": "SegmentedControl / SegmentedControlItem",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tags/tags.tsx",
+        "export": "TagGroup",
+        "import": "@/components/base/tags/tags"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Content",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Content": [
+              "Icon + Text",
+              "Icon Only",
+              "Text"
+            ],
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover",
+              "Selected"
+            ]
+          },
+          "props": {
+            "Label": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "label": "string",
+            "selectionMode": "string",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "43:250616",
+        "name": "SegmentedControl",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tags/tags.tsx",
+        "export": "TagGroup",
+        "import": "@/components/base/tags/tags"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "LG": "lg",
+            "MD": "md"
+          }
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Content",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Segment 1",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Segment 2",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Segment 3",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Content": [
+              "Icon + Text",
+              "Icon Only",
+              "Text"
+            ],
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled"
+            ]
+          },
+          "props": {
+            "Segment 1": "TEXT",
+            "Segment 2": "TEXT",
+            "Segment 3": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "label": "string",
+            "selectionMode": "string",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "86:202686",
+        "name": "List",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/social-icons/angel-list.tsx",
+        "export": "AngelList",
+        "import": "@/components/foundations/social-icons/angel-list",
+        "default": true
+      },
+      "map": [
+        {
+          "figma": "Header",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Header Text",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {
+            "Header": "BOOLEAN",
+            "Header Text": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "size": "number"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "105:49328",
+        "name": "Navigation / .TopNavItem",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tags/tags.tsx",
+        "export": "TagGroup",
+        "import": "@/components/base/tags/tags"
+      },
+      "map": [
+        {
+          "figma": "state",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "md": "md",
+            "sm": "sm",
+            "lg": "lg"
+          }
+        },
+        {
+          "figma": "isIconOnly",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "label",
+          "kind": "text",
+          "prop": "label"
+        },
+        {
+          "figma": "hasIcon",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "isIconOnly": [
+              "false",
+              "true"
+            ],
+            "Size": [
+              "lg",
+              "md",
+              "sm"
+            ],
+            "state": [
+              "default",
+              "disabled",
+              "hover",
+              "selected"
+            ]
+          },
+          "props": {
+            "hasIcon": "BOOLEAN",
+            "label": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "label": "string",
+            "selectionMode": "string",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "196:47915",
+        "name": "DateInput",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/input/inputs.demo.tsx",
+        "export": "DateInputs",
+        "import": "@/components/base/input/inputs.demo"
+      },
+      "map": [
+        {
+          "figma": "state",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "size",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "size": [
+              "lg",
+              "md",
+              "sm"
+            ],
+            "state": [
+              "disabled",
+              "error",
+              "focused",
+              "hover",
+              "loading",
+              "rest",
+              "success",
+              "warning"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "196:48837",
+        "name": "TimeInput",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tags/tags.tsx",
+        "export": "TagGroup",
+        "import": "@/components/base/tags/tags"
+      },
+      "map": [
+        {
+          "figma": "state",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "sm": "sm",
+            "md": "md",
+            "lg": "lg"
+          }
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "size": [
+              "lg",
+              "md",
+              "sm"
+            ],
+            "state": [
+              "disabled",
+              "error",
+              "focused",
+              "hover",
+              "loading",
+              "rest",
+              "success",
+              "warning"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "label": "string",
+            "selectionMode": "string",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "196:50559",
+        "name": "Tokenizer",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tags/tags.tsx",
+        "export": "TagGroup",
+        "import": "@/components/base/tags/tags"
+      },
+      "map": [
+        {
+          "figma": "state",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "sm": "sm",
+            "md": "md",
+            "lg": "lg"
+          }
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "size": [
+              "lg",
+              "md",
+              "sm"
+            ],
+            "state": [
+              "disabled",
+              "error",
+              "focused",
+              "hover",
+              "loading",
+              "rest",
+              "success",
+              "warning"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "label": "string",
+            "selectionMode": "string",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "196:51499",
+        "name": "Typeahead",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tags/tags.tsx",
+        "export": "TagGroup",
+        "import": "@/components/base/tags/tags"
+      },
+      "map": [
+        {
+          "figma": "state",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "sm": "sm",
+            "md": "md",
+            "lg": "lg"
+          }
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "size": [
+              "lg",
+              "md",
+              "sm"
+            ],
+            "state": [
+              "disabled",
+              "error",
+              "focused",
+              "hover",
+              "loading",
+              "rest",
+              "success",
+              "warning"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "label": "string",
+            "selectionMode": "string",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "219:19568",
+        "name": "Button / ToggleButton",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/toggle/toggle.tsx",
+        "export": "Toggle",
+        "import": "@/components/base/toggle/toggle"
+      },
+      "map": [
+        {
+          "figma": "size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "sm": "sm",
+            "md": "md",
+            "lg": null
+          }
+        },
+        {
+          "figma": "isPressed",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "isIconOnly",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "isIconOnly": [
+              "false",
+              "true"
+            ],
+            "isPressed": [
+              "false",
+              "true"
+            ],
+            "size": [
+              "lg",
+              "md",
+              "sm"
+            ]
+          },
+          "props": {
+            "Label": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "hint": "node",
+            "label": "string",
+            "size": "enum:md|sm",
+            "slim": "boolean"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:6432",
+        "name": "icon/x",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/social-icons/x.tsx",
+        "export": "X",
+        "import": "@/components/foundations/social-icons/x",
+        "default": true
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "number"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:6626",
+        "name": "icon/underline",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/tabs/tabs.demo.tsx",
+        "export": "UnderlineDemo",
+        "import": "@/components/application/tabs/tabs.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:6714",
+        "name": "icon/toggle-right",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/toggle/toggle.tsx",
+        "export": "Toggle",
+        "import": "@/components/base/toggle/toggle"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "hint": "node",
+            "label": "string",
+            "size": "enum:md|sm",
+            "slim": "boolean"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:6716",
+        "name": "icon/toggle-left",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/toggle/toggle.tsx",
+        "export": "Toggle",
+        "import": "@/components/base/toggle/toggle"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "hint": "node",
+            "label": "string",
+            "size": "enum:md|sm",
+            "slim": "boolean"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:6756",
+        "name": "icon/text-select",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/select/select.tsx",
+        "export": "Select",
+        "import": "@/components/base/select/select"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "other",
+            "hideRequiredIndicator": "other",
+            "hint": "other",
+            "icon": "node",
+            "items": "other",
+            "label": "other",
+            "placeholder": "string",
+            "popoverClassName": "string",
+            "size": "string",
+            "tooltip": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:6804",
+        "name": "icon/tags",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/select/select.demo.tsx",
+        "export": "Tags",
+        "import": "@/components/base/select/select.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:6806",
+        "name": "icon/tag",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tags/tags.tsx",
+        "export": "Tag",
+        "import": "@/components/base/tags/tags"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "avatarContrastBorder": "boolean",
+            "avatarSrc": "other",
+            "children": "node",
+            "className": "other",
+            "count": "other",
+            "dot": "other",
+            "dotClassName": "other",
+            "id": "other",
+            "isDisabled": "other"
+          },
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:6828",
+        "name": "icon/table",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/table/table.demo.tsx",
+        "export": "TableOffline",
+        "import": "@/components/application/table/table.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:6884",
+        "name": "icon/star",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/rating-stars.tsx",
+        "export": "StarIcon",
+        "import": "@/components/foundations/rating-stars"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "progress": "number"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7038",
+        "name": "icon/square",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/background-patterns/square.tsx",
+        "export": "Square",
+        "import": "@/components/shared-assets/background-patterns/square"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7124",
+        "name": "icon/signal",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/social-icons/signal.tsx",
+        "export": "Signal",
+        "import": "@/components/foundations/social-icons/signal",
+        "default": true
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "number"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7216",
+        "name": "icon/section",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/section-divider.tsx",
+        "export": "SectionDivider",
+        "import": "@/components/shared-assets/section-divider"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7228",
+        "name": "icon/search",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/select/select.demo.tsx",
+        "export": "Search",
+        "import": "@/components/base/select/select.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7262",
+        "name": "icon/scan",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/qr-code.tsx",
+        "export": "GradientScan",
+        "import": "@/components/shared-assets/qr-code"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7272",
+        "name": "icon/save-all",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/button-group/button-group.demo.tsx",
+        "export": "All",
+        "import": "@/components/base/button-group/button-group.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7334",
+        "name": "icon/reply-all",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/button-group/button-group.demo.tsx",
+        "export": "All",
+        "import": "@/components/base/button-group/button-group.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7338",
+        "name": "icon/replace-all",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/button-group/button-group.demo.tsx",
+        "export": "All",
+        "import": "@/components/base/button-group/button-group.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7414",
+        "name": "icon/radio",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/radio-buttons/radio-buttons.tsx",
+        "export": "RadioButton",
+        "import": "@/components/base/radio-buttons/radio-buttons"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "hint": "node",
+            "label": "node",
+            "size": "enum:md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7420",
+        "name": "icon/radar",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/charts/radar-charts.demo.tsx",
+        "export": "RadarChart",
+        "import": "@/components/application/charts/radar-charts.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7426",
+        "name": "icon/qr-code",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/qr-code.tsx",
+        "export": "QRCode",
+        "import": "@/components/shared-assets/qr-code"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "string",
+            "options": "other",
+            "size": "enum:lg|md",
+            "value": "string"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7488",
+        "name": "icon/pill",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/badges/badges.demo.tsx",
+        "export": "PillColor",
+        "import": "@/components/base/badges/badges.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:7658",
+        "name": "icon/notebook-tabs",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/tabs/tabs.tsx",
+        "export": "Tabs",
+        "import": "@/components/application/tabs/tabs"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8014",
+        "name": "icon/list",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/social-icons/angel-list.tsx",
+        "export": "AngelList",
+        "import": "@/components/foundations/social-icons/angel-list",
+        "default": true
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "number"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8020",
+        "name": "icon/link",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/buttons/buttons.demo.tsx",
+        "export": "LinkGray",
+        "import": "@/components/base/buttons/buttons.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8058",
+        "name": "icon/layout-grid",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/background-patterns/grid.tsx",
+        "export": "Grid",
+        "import": "@/components/shared-assets/background-patterns/grid"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8066",
+        "name": "icon/layers",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/social-icons/layers.tsx",
+        "export": "Layers",
+        "import": "@/components/foundations/social-icons/layers",
+        "default": true
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "number"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8070",
+        "name": "icon/lasso-select",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/select/select.tsx",
+        "export": "Select",
+        "import": "@/components/base/select/select"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "other",
+            "hideRequiredIndicator": "other",
+            "hint": "other",
+            "icon": "node",
+            "items": "other",
+            "label": "other",
+            "placeholder": "string",
+            "popoverClassName": "string",
+            "size": "string",
+            "tooltip": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8272",
+        "name": "icon/group",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/avatar/avatar.demo.tsx",
+        "export": "Group",
+        "import": "@/components/base/avatar/avatar.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8280",
+        "name": "icon/grid-3x3",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/background-patterns/grid.tsx",
+        "export": "Grid",
+        "import": "@/components/shared-assets/background-patterns/grid"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8282",
+        "name": "icon/grid-3x2",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/background-patterns/grid.tsx",
+        "export": "Grid",
+        "import": "@/components/shared-assets/background-patterns/grid"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8288",
+        "name": "icon/grid-2x2-check",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/background-patterns/grid-check.tsx",
+        "export": "GridCheck",
+        "import": "@/components/shared-assets/background-patterns/grid-check"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "enum:md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8290",
+        "name": "icon/grid-2x2",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/background-patterns/grid.tsx",
+        "export": "Grid",
+        "import": "@/components/shared-assets/background-patterns/grid"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8390",
+        "name": "icon/form",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/form/form.tsx",
+        "export": "Form",
+        "import": "@/components/base/form/form"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8432",
+        "name": "icon/folder-input",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/input/input.tsx",
+        "export": "Input",
+        "import": "@/components/base/input/input"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "groupRef": "other",
+            "hideRequiredIndicator": "boolean",
+            "hint": "node",
+            "icon": "other",
+            "iconClassName": "other",
+            "inputClassName": "other",
+            "label": "string",
+            "placeholder": "other",
+            "shortcut": "other",
+            "size": "string",
+            "tooltip": "other",
+            "tooltipClassName": "other",
+            "type": "string",
+            "wrapperClassName": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8492",
+        "name": "icon/flag",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/badges/badges.demo.tsx",
+        "export": "WithFlag",
+        "import": "@/components/base/badges/badges.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8572",
+        "name": "icon/file-input",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/input/input-file.tsx",
+        "export": "InputFile",
+        "import": "@/components/base/input/input-file"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "acceptedFileTypes": "other",
+            "allowsMultiple": "boolean",
+            "buttonText": "string",
+            "className": "string",
+            "hideRequiredIndicator": "boolean",
+            "hint": "node",
+            "isDisabled": "boolean",
+            "isInvalid": "boolean",
+            "isLoading": "boolean",
+            "isRequired": "boolean",
+            "label": "string",
+            "placeholder": "string",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8600",
+        "name": "icon/file-chart-pie",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/charts/pie-charts.demo.tsx",
+        "export": "PieChartXxs",
+        "import": "@/components/application/charts/pie-charts.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "data": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8620",
+        "name": "icon/file",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/input/input-file.tsx",
+        "export": "InputFile",
+        "import": "@/components/base/input/input-file"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "acceptedFileTypes": "other",
+            "allowsMultiple": "boolean",
+            "buttonText": "string",
+            "className": "string",
+            "hideRequiredIndicator": "boolean",
+            "hint": "node",
+            "isDisabled": "boolean",
+            "isInvalid": "boolean",
+            "isLoading": "boolean",
+            "isRequired": "boolean",
+            "label": "string",
+            "placeholder": "string",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8702",
+        "name": "icon/dot",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/dot-icon.tsx",
+        "export": "Dot",
+        "import": "@/components/foundations/dot-icon"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "size": "enum:md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8794",
+        "name": "icon/credit-card",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/credit-card/credit-card.tsx",
+        "export": "CreditCard",
+        "import": "@/components/shared-assets/credit-card/credit-card"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "cardExpiration": "string",
+            "cardHolder": "string",
+            "cardNumber": "string",
+            "className": "string",
+            "company": "string",
+            "type": "other",
+            "width": "number"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:8922",
+        "name": "icon/cloud",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/illustrations/cloud.tsx",
+        "export": "CloudIllustration",
+        "import": "@/components/shared-assets/illustrations/cloud"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "childrenClassName": "string",
+            "size": "enum:lg|md|sm",
+            "svgClassName": "string"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9044",
+        "name": "icon/circle-dot-dashed",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/loading-indicator/loading-indicator.demo.tsx",
+        "export": "DotCircleDemo",
+        "import": "@/components/application/loading-indicator/loading-indicator.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9046",
+        "name": "icon/circle-dot",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/loading-indicator/loading-indicator.demo.tsx",
+        "export": "DotCircleDemo",
+        "import": "@/components/application/loading-indicator/loading-indicator.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9084",
+        "name": "icon/circle",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/background-patterns/circle.tsx",
+        "export": "Circle",
+        "import": "@/components/shared-assets/background-patterns/circle"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9140",
+        "name": "icon/check-check",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/background-patterns/grid-check.tsx",
+        "export": "GridCheck",
+        "import": "@/components/shared-assets/background-patterns/grid-check"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "enum:md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9142",
+        "name": "icon/check",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/background-patterns/grid-check.tsx",
+        "export": "GridCheck",
+        "import": "@/components/shared-assets/background-patterns/grid-check"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "enum:md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9148",
+        "name": "icon/chart-pie",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/charts/pie-charts.demo.tsx",
+        "export": "PieChartXxs",
+        "import": "@/components/application/charts/pie-charts.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "data": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9178",
+        "name": "icon/chart-bar-stacked",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/charts/bar-charts.demo.tsx",
+        "export": "BarChart",
+        "import": "@/components/application/charts/bar-charts.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9180",
+        "name": "icon/chart-bar-increasing",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/charts/bar-charts.demo.tsx",
+        "export": "BarChart",
+        "import": "@/components/application/charts/bar-charts.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9182",
+        "name": "icon/chart-bar-decreasing",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/charts/bar-charts.demo.tsx",
+        "export": "BarChart",
+        "import": "@/components/application/charts/bar-charts.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9184",
+        "name": "icon/chart-bar-big",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/charts/bar-charts.demo.tsx",
+        "export": "BarChart",
+        "import": "@/components/application/charts/bar-charts.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9186",
+        "name": "icon/chart-bar",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/charts/bar-charts.demo.tsx",
+        "export": "BarChart",
+        "import": "@/components/application/charts/bar-charts.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9238",
+        "name": "icon/calendars",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/date-picker/calendar.tsx",
+        "export": "Calendar",
+        "import": "@/components/application/date-picker/calendar"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "other",
+            "highlightedDates": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9248",
+        "name": "icon/calendar-range",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/date-picker/range-calendar.tsx",
+        "export": "RangeCalendar",
+        "import": "@/components/application/date-picker/range-calendar"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "highlightedDates": "other",
+            "presets": "other",
+            "showOutOfRangeDates": "boolean",
+            "showPresetsOnDesktop": "boolean",
+            "visibleDuration": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9280",
+        "name": "icon/calendar",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/date-picker/calendar.tsx",
+        "export": "Calendar",
+        "import": "@/components/application/date-picker/calendar"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "other",
+            "highlightedDates": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9340",
+        "name": "icon/box",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/select/combobox.tsx",
+        "export": "ComboBox",
+        "import": "@/components/base/select/combobox"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "other",
+            "hideRequiredIndicator": "other",
+            "icon": "node",
+            "items": "other",
+            "placeholder": "string",
+            "popoverClassName": "string",
+            "shortcut": "boolean",
+            "shortcutClassName": "string",
+            "size": "string"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9420",
+        "name": "icon/bolt",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/integration-icons/bolt-icon.tsx",
+        "export": "BoltIcon",
+        "import": "@/components/foundations/integration-icons/bolt-icon",
+        "default": true
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "grayscale": "boolean"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9438",
+        "name": "icon/bitcoin",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/payment-icons/bitcoin-icon.tsx",
+        "export": "BitcoinIcon",
+        "import": "@/components/foundations/payment-icons/bitcoin-icon",
+        "default": true
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9570",
+        "name": "icon/badge",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/badges/badges.demo.tsx",
+        "export": "BadgeColor",
+        "import": "@/components/base/badges/badges.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2023:9686",
+        "name": "icon/apple",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/social-icons/apple.tsx",
+        "export": "Apple",
+        "import": "@/components/foundations/social-icons/apple",
+        "default": true
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "number"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2437:43658",
+        "name": "Outline",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/featured-icon/featured-icon.demo.tsx",
+        "export": "OutlineDemo",
+        "import": "@/components/foundations/featured-icon/featured-icon.demo"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "2575:21597",
+        "name": "Slider",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/slider/slider.tsx",
+        "export": "Slider",
+        "import": "@/components/base/slider/slider"
+      },
+      "map": [
+        {
+          "figma": "state",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "type",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Show Description",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Show Marks",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Show Value",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Description",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Value",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Status Message",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "state": [
+              "disabled",
+              "error",
+              "focus",
+              "hover",
+              "rest",
+              "success",
+              "warning"
+            ],
+            "type": [
+              "range",
+              "single"
+            ]
+          },
+          "props": {
+            "Description": "TEXT",
+            "Show Description": "BOOLEAN",
+            "Show Marks": "BOOLEAN",
+            "Show Value": "BOOLEAN",
+            "Status Message": "TEXT",
+            "Value": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "formatOptions": "other",
+            "labelPosition": "other",
+            "maxValue": "other",
+            "minValue": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "3340:58278",
+        "name": "Example/Settings Dialog",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/modals/modal.tsx",
+        "export": "Dialog",
+        "import": "@/components/application/modals/modal"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "5046:67329",
+        "name": "ComplexSelector / .Popover Content",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/select/popover.tsx",
+        "export": "Popover",
+        "import": "@/components/base/select/popover"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "5046:67332",
+        "name": "ComplexSelector / .Popover",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/select/popover.tsx",
+        "export": "Popover",
+        "import": "@/components/base/select/popover"
+      },
+      "map": [
+        {
+          "figma": "Content",
+          "kind": "instance",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {
+            "Content": "INSTANCE_SWAP"
+          }
+        },
+        "code": {
+          "props": {
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "5971:339",
+        "name": "icon/search",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/select/select.demo.tsx",
+        "export": "Search",
+        "import": "@/components/base/select/select.demo"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "12",
+              "14",
+              "16",
+              "20",
+              "24"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "5971:766",
+        "name": "icon/x",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/social-icons/x.tsx",
+        "export": "X",
+        "import": "@/components/foundations/social-icons/x",
+        "default": true
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "12",
+              "14",
+              "16",
+              "20",
+              "24"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "size": "number"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:163375",
+        "name": "Featured icon",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/featured-icon/featured-icon.tsx",
+        "export": "FeaturedIcon",
+        "import": "@/components/foundations/featured-icon/featured-icon"
+      },
+      "map": [
+        {
+          "figma": "Color",
+          "kind": "variant",
+          "prop": "color",
+          "values": {
+            "Gray": "gray",
+            "Success": "success",
+            "Warning": "warning",
+            "Error": "error",
+            "Info": null
+          }
+        },
+        {
+          "figma": "Theme",
+          "kind": "variant",
+          "prop": "theme",
+          "values": {
+            "Light": "light",
+            "Outline": "outline",
+            "Modern": "modern"
+          }
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg",
+            "XL": "xl"
+          }
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Color": [
+              "Error",
+              "Gray",
+              "Info",
+              "Success",
+              "Warning"
+            ],
+            "Size": [
+              "LG",
+              "MD",
+              "SM",
+              "XL"
+            ],
+            "Theme": [
+              "Light",
+              "Modern",
+              "Outline"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "string",
+            "color": "enum:brand|error|gray|success|warning",
+            "icon": "node",
+            "size": "enum:lg|md|sm|xl",
+            "theme": "enum:dark|gradient|light|modern|modern-neue|outline"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:163467",
+        "name": "Button",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/buttons/button.tsx",
+        "export": "Button",
+        "import": "@/components/base/buttons/button"
+      },
+      "map": [
+        {
+          "figma": "Hierarchy",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "MD": "md",
+            "SM": "sm",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "Icon",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Destructive",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Loading Label",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Has Icon Leading",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Icon Trailing",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Icon Leading",
+          "kind": "instance",
+          "prop": "iconLeading"
+        },
+        {
+          "figma": "Icon Trailing",
+          "kind": "instance",
+          "prop": "iconTrailing"
+        },
+        {
+          "figma": "Has Tooltip",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Destructive": [
+              "False",
+              "True"
+            ],
+            "Hierarchy": [
+              "Link Gray",
+              "Primary",
+              "Secondary",
+              "Tertiary"
+            ],
+            "Icon": [
+              "Default",
+              "Only"
+            ],
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover",
+              "Loading",
+              "Pressed"
+            ]
+          },
+          "props": {
+            "Has Icon Leading": "BOOLEAN",
+            "Has Icon Trailing": "BOOLEAN",
+            "Has Tooltip": "BOOLEAN",
+            "Icon Leading": "INSTANCE_SWAP",
+            "Icon Trailing": "INSTANCE_SWAP",
+            "Label": "TEXT",
+            "Loading Label": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "other",
+            "color": "string",
+            "iconLeading": "other",
+            "iconTrailing": "other",
+            "isDisabled": "other",
+            "isLoading": "other",
+            "noTextPadding": "other",
+            "showTextWhileLoading": "other",
+            "size": "string"
+          },
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:164851",
+        "name": "Close button",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/buttons/close-button.tsx",
+        "export": "CloseButton",
+        "import": "@/components/base/buttons/close-button"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Has Tooltip",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover",
+              "Pressed"
+            ]
+          },
+          "props": {
+            "Has Tooltip": "BOOLEAN"
+          }
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "label": "string",
+            "size": "enum:lg|md|sm|xs",
+            "slot": "string",
+            "theme": "enum:dark|light"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:164908",
+        "name": "Utility button",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/buttons/buttons.demo.tsx",
+        "export": "UtilityButton",
+        "import": "@/components/base/buttons/buttons.demo"
+      },
+      "map": [
+        {
+          "figma": "Hierarchy",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Icon",
+          "kind": "instance",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Tooltip",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Hierarchy": [
+              "Secondary",
+              "Tertiary"
+            ],
+            "Size": [
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover",
+              "Pressed"
+            ]
+          },
+          "props": {
+            "Has Tooltip": "BOOLEAN",
+            "Icon": "INSTANCE_SWAP"
+          }
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:165642",
+        "name": "Tooltip",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tooltip/tooltip.tsx",
+        "export": "Tooltip",
+        "import": "@/components/base/tooltip/tooltip"
+      },
+      "map": [
+        {
+          "figma": "Type",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Arrow",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Title",
+          "kind": "text",
+          "prop": "title"
+        },
+        {
+          "figma": "Description",
+          "kind": "text",
+          "prop": "description"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Arrow": [
+              "Bottom Center",
+              "Bottom Left",
+              "Bottom Right",
+              "Left",
+              "None",
+              "Right",
+              "Top Center"
+            ],
+            "Type": [
+              "Short",
+              "Supporting"
+            ]
+          },
+          "props": {
+            "Description": "TEXT",
+            "Title": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "arrow": "boolean",
+            "children": "node",
+            "closeDelay": "other",
+            "crossOffset": "other",
+            "defaultOpen": "other",
+            "delay": "number",
+            "description": "node",
+            "isDisabled": "other",
+            "isOpen": "other",
+            "offset": "other",
+            "placement": "string",
+            "title": "node",
+            "trigger": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:165736",
+        "name": "Badge",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/badges/badge-groups.tsx",
+        "export": "BadgeGroup",
+        "import": "@/components/base/badges/badge-groups"
+      },
+      "map": [
+        {
+          "figma": "Type",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Color",
+          "kind": "variant",
+          "prop": "color",
+          "values": {
+            "Gray": "gray",
+            "Blue": null,
+            "Green": null,
+            "Yellow": null,
+            "Red": null,
+            "Teal": null,
+            "Purple": null,
+            "Orange": null
+          }
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "MD": "md",
+            "SM": null,
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "Count",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Has Label",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Dot",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Icon Leading",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Icon Leading",
+          "kind": "instance",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Count value",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Count Only",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Color": [
+              "Blue",
+              "Gray",
+              "Green",
+              "Orange",
+              "Purple",
+              "Red",
+              "Teal",
+              "Yellow"
+            ],
+            "Count": [
+              "No",
+              "Yes"
+            ],
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "Type": [
+              "Badge Color",
+              "Badge Modern",
+              "Badge Outline",
+              "Dot",
+              "Pill Color",
+              "Pill Outline"
+            ]
+          },
+          "props": {
+            "Count Only": "BOOLEAN",
+            "Count value": "TEXT",
+            "Has Dot": "BOOLEAN",
+            "Has Icon Leading": "BOOLEAN",
+            "Has Label": "BOOLEAN",
+            "Icon Leading": "INSTANCE_SWAP",
+            "Label": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "addonText": "string",
+            "align": "enum:leading|trailing",
+            "children": "node",
+            "className": "string",
+            "color": "enum:brand|error|gray|success|warning",
+            "iconTrailing": "node",
+            "size": "enum:lg|md",
+            "theme": "enum:light|modern"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:165790",
+        "name": "_Tag close X",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tags/base-components/tag-close-x.tsx",
+        "export": "TagCloseX",
+        "import": "@/components/base/tags/base-components/tag-close-x"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "string",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:165851",
+        "name": "_Avatar status",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/avatar/base-components/verified-tick.tsx",
+        "export": "VerifiedTick",
+        "import": "@/components/base/avatar/base-components/verified-tick"
+      },
+      "map": [
+        {
+          "figma": "Status",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "XS": "xs",
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg",
+            "XL": "xl",
+            "XXL": null
+          }
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "LG",
+              "MD",
+              "SM",
+              "XL",
+              "XS",
+              "XXL"
+            ],
+            "Status": [
+              "Away",
+              "Busy",
+              "None",
+              "Offline",
+              "Online"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "string",
+            "size": "enum:2xl|3xl|4xl|lg|md|sm|xl|xs"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:166028",
+        "name": "_Tag checkbox",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tags/base-components/tag-checkbox.tsx",
+        "export": "TagCheckbox",
+        "import": "@/components/base/tags/base-components/tag-checkbox"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "Checked",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": "isDisabled",
+          "values": {
+            "Default": null,
+            "Hover": null,
+            "Focus": null,
+            "Disabled": true
+          },
+          "reason": "css"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Checked": [
+              "False",
+              "True"
+            ],
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "string",
+            "isDisabled": "boolean",
+            "isFocused": "boolean",
+            "isSelected": "boolean",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:166083",
+        "name": "Check icon",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/foundations/featured-icon/featured-icon.tsx",
+        "export": "FeaturedIcon",
+        "import": "@/components/foundations/featured-icon/featured-icon"
+      },
+      "map": [
+        {
+          "figma": "Color",
+          "kind": "variant",
+          "prop": "color",
+          "values": {
+            "Gray": "gray",
+            "Success": "success",
+            "Brand": "brand"
+          }
+        },
+        {
+          "figma": "Theme",
+          "kind": "variant",
+          "prop": "theme",
+          "values": {
+            "Light": "light",
+            "Solid": null
+          }
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg"
+          }
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Color": [
+              "Brand",
+              "Gray",
+              "Success"
+            ],
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "Theme": [
+              "Light",
+              "Solid"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "string",
+            "color": "enum:brand|error|gray|success|warning",
+            "icon": "node",
+            "size": "enum:lg|md|sm|xl",
+            "theme": "enum:dark|gradient|light|modern|modern-neue|outline"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:166192",
+        "name": "Avatar",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/avatar/avatar.tsx",
+        "export": "Avatar",
+        "import": "@/components/base/avatar/avatar"
+      },
+      "map": [
+        {
+          "figma": "Content",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "XS": "xs",
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg",
+            "XL": "xl",
+            "XXL": null
+          }
+        },
+        {
+          "figma": "Initials",
+          "kind": "text",
+          "prop": "initials"
+        },
+        {
+          "figma": "Icon",
+          "kind": "instance",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Content": [
+              "Icon",
+              "Image",
+              "Initials",
+              "Loading",
+              "Upload"
+            ],
+            "Size": [
+              "LG",
+              "MD",
+              "SM",
+              "XL",
+              "XS",
+              "XXL"
+            ]
+          },
+          "props": {
+            "Icon": "INSTANCE_SWAP",
+            "Initials": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "alt": "string",
+            "badge": "node",
+            "border": "boolean",
+            "className": "string",
+            "contentClassName": "string",
+            "contrastBorder": "boolean",
+            "count": "number",
+            "focusable": "boolean",
+            "initials": "string",
+            "placeholder": "node",
+            "placeholderIcon": "other",
+            "rounded": "boolean",
+            "size": "enum:2xl|lg|md|sm|xl|xs",
+            "src": "string",
+            "status": "enum:offline|online",
+            "verified": "boolean"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:166246",
+        "name": "_Tag count",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tags/tags.tsx",
+        "export": "TagGroup",
+        "import": "@/components/base/tags/tags"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "Count",
+          "kind": "text",
+          "prop": "children"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ]
+          },
+          "props": {
+            "Count": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "label": "string",
+            "selectionMode": "string",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:166325",
+        "name": "Avatar group",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/avatar/avatar-label-group.tsx",
+        "export": "AvatarLabelGroup",
+        "import": "@/components/base/avatar/avatar-label-group"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "XS": null,
+            "MD": "md",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "Has Avatar 3",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Avatar 4",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Overflow",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Overflow Count",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "LG",
+              "MD",
+              "XS"
+            ]
+          },
+          "props": {
+            "Has Avatar 3": "BOOLEAN",
+            "Has Avatar 4": "BOOLEAN",
+            "Has Overflow": "BOOLEAN",
+            "Overflow Count": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "avatarClassName": "string",
+            "className": "other",
+            "rounded": "boolean",
+            "size": "enum:lg|md|sm",
+            "subtitle": "node",
+            "title": "node"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:167122",
+        "name": "Radio",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/radio-buttons/radio-buttons.tsx",
+        "export": "RadioButton",
+        "import": "@/components/base/radio-buttons/radio-buttons"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md"
+          }
+        },
+        {
+          "figma": "Checked",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Checked": [
+              "False",
+              "True"
+            ],
+            "Size": [
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "hint": "node",
+            "label": "node",
+            "size": "enum:md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:167394",
+        "name": "Avatar label",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/avatar/avatar-label-group.tsx",
+        "export": "AvatarLabelGroup",
+        "import": "@/components/base/avatar/avatar-label-group"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "Title",
+          "kind": "text",
+          "prop": "title"
+        },
+        {
+          "figma": "Subtitle",
+          "kind": "text",
+          "prop": "subtitle"
+        },
+        {
+          "figma": "Has Subtitle",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ]
+          },
+          "props": {
+            "Has Subtitle": "BOOLEAN",
+            "Subtitle": "TEXT",
+            "Title": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "avatarClassName": "string",
+            "className": "other",
+            "rounded": "boolean",
+            "size": "enum:lg|md|sm",
+            "subtitle": "node",
+            "title": "node"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:167713",
+        "name": "Company avatar",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/avatar/base-components/avatar-company-icon.tsx",
+        "export": "AvatarCompanyIcon",
+        "import": "@/components/base/avatar/base-components/avatar-company-icon"
+      },
+      "map": [
+        {
+          "figma": "Content",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "XS": "xs",
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg",
+            "XL": "xl",
+            "XXL": null
+          }
+        },
+        {
+          "figma": "Initials",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Icon",
+          "kind": "instance",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Content": [
+              "Icon",
+              "Image",
+              "Initials"
+            ],
+            "Size": [
+              "LG",
+              "MD",
+              "SM",
+              "XL",
+              "XS",
+              "XXL"
+            ]
+          },
+          "props": {
+            "Icon": "INSTANCE_SWAP",
+            "Initials": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "alt": "string",
+            "size": "enum:2xl|lg|md|sm|xl|xs",
+            "src": "string"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:167808",
+        "name": "_Input field",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tags/tags.tsx",
+        "export": "TagGroup",
+        "import": "@/components/base/tags/tags"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "MD": "md",
+            "SM": "sm",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Placeholder",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Value",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Leading Icon",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Icon Leading",
+          "kind": "instance",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Leading Dropdown",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Dropdown Text",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Leading Text",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Leading Text",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Trailing Text",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Trailing Text",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Trailing Icon",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Icon Trailing",
+          "kind": "instance",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Stepper",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Trailing Button",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Disabled",
+              "Error",
+              "Filled",
+              "Focus",
+              "Hover",
+              "Placeholder",
+              "Read Only"
+            ]
+          },
+          "props": {
+            "Dropdown Text": "TEXT",
+            "Has Leading Dropdown": "BOOLEAN",
+            "Has Leading Icon": "BOOLEAN",
+            "Has Leading Text": "BOOLEAN",
+            "Has Stepper": "BOOLEAN",
+            "Has Trailing Button": "BOOLEAN",
+            "Has Trailing Icon": "BOOLEAN",
+            "Has Trailing Text": "BOOLEAN",
+            "Icon Leading": "INSTANCE_SWAP",
+            "Icon Trailing": "INSTANCE_SWAP",
+            "Leading Text": "TEXT",
+            "Placeholder": "TEXT",
+            "Trailing Text": "TEXT",
+            "Value": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "label": "string",
+            "selectionMode": "string",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6657:167999",
+        "name": "Tag",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/tags/tags.tsx",
+        "export": "Tag",
+        "import": "@/components/base/tags/tags"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Checked",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Has Checkbox",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Dot",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Avatar",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Flag",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Count",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Close X",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Checked": [
+              "False",
+              "True"
+            ],
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover"
+            ]
+          },
+          "props": {
+            "Has Avatar": "BOOLEAN",
+            "Has Checkbox": "BOOLEAN",
+            "Has Close X": "BOOLEAN",
+            "Has Count": "BOOLEAN",
+            "Has Dot": "BOOLEAN",
+            "Has Flag": "BOOLEAN",
+            "Label": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "avatarContrastBorder": "boolean",
+            "avatarSrc": "other",
+            "children": "node",
+            "className": "other",
+            "count": "other",
+            "dot": "other",
+            "dotClassName": "other",
+            "id": "other",
+            "isDisabled": "other"
+          },
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:168382",
+        "name": "Radio label",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/radio-buttons/radio-buttons.tsx",
+        "export": "RadioButton",
+        "import": "@/components/base/radio-buttons/radio-buttons"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md"
+          }
+        },
+        {
+          "figma": "Checked",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        },
+        {
+          "figma": "Hint",
+          "kind": "text",
+          "prop": "hint"
+        },
+        {
+          "figma": "Has Hint",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Checked": [
+              "False",
+              "True"
+            ],
+            "Size": [
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover"
+            ]
+          },
+          "props": {
+            "Has Hint": "BOOLEAN",
+            "Hint": "TEXT",
+            "Label": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "hint": "node",
+            "label": "node",
+            "size": "enum:md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:168861",
+        "name": "_Toggle base",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/toggle/toggle.tsx",
+        "export": "ToggleBase",
+        "import": "@/components/base/toggle/toggle"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md"
+          }
+        },
+        {
+          "figma": "Checked",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": "isDisabled",
+          "values": {
+            "Default": null,
+            "Hover": null,
+            "Pressed": null,
+            "Focus": null,
+            "Disabled": true
+          },
+          "reason": "css"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Checked": [
+              "False",
+              "True"
+            ],
+            "Size": [
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover",
+              "Pressed"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "string",
+            "isDisabled": "boolean",
+            "isFocusVisible": "boolean",
+            "isHovered": "boolean",
+            "isSelected": "boolean",
+            "size": "enum:md|sm",
+            "slim": "boolean"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:170547",
+        "name": "Toggle",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/toggle/toggle.tsx",
+        "export": "Toggle",
+        "import": "@/components/base/toggle/toggle"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md"
+          }
+        },
+        {
+          "figma": "Checked",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Checked": [
+              "False",
+              "True"
+            ],
+            "Size": [
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover",
+              "Pressed"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "hint": "node",
+            "label": "string",
+            "size": "enum:md|sm",
+            "slim": "boolean"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:170777",
+        "name": "Radio group item",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/radio-buttons/radio-buttons.tsx",
+        "export": "RadioGroup",
+        "import": "@/components/base/radio-buttons/radio-buttons"
+      },
+      "map": [
+        {
+          "figma": "Platform",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Type",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Checked",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Title",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Description",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Description",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Secondary",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Secondary",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Value",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Unit",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Checked": [
+              "False",
+              "True"
+            ],
+            "Platform": [
+              "Mobile",
+              "Web"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover"
+            ],
+            "Type": [
+              "Avatar",
+              "Icon card",
+              "Icon simple",
+              "Payment icon",
+              "Payment logo",
+              "Radio button",
+              "Vehicle"
+            ]
+          },
+          "props": {
+            "Description": "TEXT",
+            "Has Description": "BOOLEAN",
+            "Has Secondary": "BOOLEAN",
+            "Secondary": "TEXT",
+            "Title": "TEXT",
+            "Unit": "TEXT",
+            "Value": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "string",
+            "size": "enum:md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:171058",
+        "name": "Toggle label",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/toggle/toggle.tsx",
+        "export": "Toggle",
+        "import": "@/components/base/toggle/toggle"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md"
+          }
+        },
+        {
+          "figma": "Checked",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        },
+        {
+          "figma": "Hint",
+          "kind": "text",
+          "prop": "hint"
+        },
+        {
+          "figma": "Has Hint",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Checked": [
+              "False",
+              "True"
+            ],
+            "Size": [
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover",
+              "Pressed"
+            ]
+          },
+          "props": {
+            "Has Hint": "BOOLEAN",
+            "Hint": "TEXT",
+            "Label": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "hint": "node",
+            "label": "string",
+            "size": "enum:md|sm",
+            "slim": "boolean"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:172078",
+        "name": "Input",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/input/input.tsx",
+        "export": "Input",
+        "import": "@/components/base/input/input"
+      },
+      "map": [
+        {
+          "figma": "Platform",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Type",
+          "kind": "variant",
+          "prop": "type",
+          "values": {
+            "Default": "default",
+            "Leading Icon": "leading icon",
+            "Password": "password",
+            "Date": "date",
+            "File": "file",
+            "Prefix": "prefix",
+            "Phone": "phone",
+            "Currency": "currency",
+            "Copy": "copy",
+            "Number Horizontal": "number horizontal",
+            "Website": "website",
+            "Number Vertical": "number vertical",
+            "Bank Account": "bank account"
+          }
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "MD": "md",
+            "SM": "sm",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        },
+        {
+          "figma": "Has Label",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Required",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Help Icon",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Hint",
+          "kind": "text",
+          "prop": "hint"
+        },
+        {
+          "figma": "Has Hint",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Error Message",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Account Name",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Platform": [
+              "Mobile",
+              "Web"
+            ],
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Disabled",
+              "Error",
+              "Filled",
+              "Focus",
+              "Hover",
+              "Placeholder",
+              "Read Only"
+            ],
+            "Type": [
+              "Bank Account",
+              "Copy",
+              "Currency",
+              "Date",
+              "Default",
+              "File",
+              "Leading Icon",
+              "Number Horizontal",
+              "Number Vertical",
+              "Password",
+              "Phone",
+              "Prefix",
+              "Website"
+            ]
+          },
+          "props": {
+            "Account Name": "TEXT",
+            "Error Message": "TEXT",
+            "Has Help Icon": "BOOLEAN",
+            "Has Hint": "BOOLEAN",
+            "Has Label": "BOOLEAN",
+            "Hint": "TEXT",
+            "Label": "TEXT",
+            "Required": "BOOLEAN"
+          }
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "groupRef": "other",
+            "hideRequiredIndicator": "boolean",
+            "hint": "node",
+            "icon": "other",
+            "iconClassName": "other",
+            "inputClassName": "other",
+            "label": "string",
+            "placeholder": "other",
+            "shortcut": "other",
+            "size": "string",
+            "tooltip": "other",
+            "tooltipClassName": "other",
+            "type": "string",
+            "wrapperClassName": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:187203",
+        "name": "Textarea",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/textarea/textarea.tsx",
+        "export": "TextArea",
+        "import": "@/components/base/textarea/textarea"
+      },
+      "map": [
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        },
+        {
+          "figma": "Has Label",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Required",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Help Icon",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Placeholder",
+          "kind": "text",
+          "prop": "placeholder"
+        },
+        {
+          "figma": "Value",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Hint",
+          "kind": "text",
+          "prop": "hint"
+        },
+        {
+          "figma": "Has Hint",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Error Message",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Counter",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Counter",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Resize",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "State": [
+              "Disabled",
+              "Error",
+              "Filled",
+              "Focus",
+              "Hover",
+              "Placeholder",
+              "Read Only"
+            ]
+          },
+          "props": {
+            "Counter": "TEXT",
+            "Error Message": "TEXT",
+            "Has Counter": "BOOLEAN",
+            "Has Help Icon": "BOOLEAN",
+            "Has Hint": "BOOLEAN",
+            "Has Label": "BOOLEAN",
+            "Hint": "TEXT",
+            "Label": "TEXT",
+            "Placeholder": "TEXT",
+            "Required": "BOOLEAN",
+            "Resize": "BOOLEAN",
+            "Value": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "cols": "number",
+            "hideRequiredIndicator": "boolean",
+            "hint": "node",
+            "label": "string",
+            "placeholder": "string",
+            "rows": "number",
+            "size": "other",
+            "textAreaClassName": "other",
+            "textAreaRef": "other",
+            "tooltip": "string"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:190134",
+        "name": "_Multi-select item",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/select/select-item.tsx",
+        "export": "SelectItem",
+        "import": "@/components/base/select/select-item"
+      },
+      "map": [
+        {
+          "figma": "Checked",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        },
+        {
+          "figma": "Supporting Text",
+          "kind": "text",
+          "prop": "supportingText"
+        },
+        {
+          "figma": "Has Supporting Text",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Checked": [
+              "False",
+              "Indeterminate",
+              "True"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Hover"
+            ]
+          },
+          "props": {
+            "Has Supporting Text": "BOOLEAN",
+            "Label": "TEXT",
+            "Supporting Text": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "avatarUrl": "other",
+            "children": "node",
+            "className": "other",
+            "icon": "other",
+            "id": "other",
+            "isDisabled": "other",
+            "label": "other",
+            "selectionIndicator": "enum:checkbox|checkmark|none",
+            "selectionIndicatorAlign": "enum:left|right",
+            "supportingText": "other",
+            "value": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:190447",
+        "name": "Checkbox",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/checkbox/checkbox.tsx",
+        "export": "Checkbox",
+        "import": "@/components/base/checkbox/checkbox"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md"
+          }
+        },
+        {
+          "figma": "Checked",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Checked": [
+              "False",
+              "Indeterminate",
+              "True"
+            ],
+            "Size": [
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "hint": "node",
+            "label": "node",
+            "size": "enum:md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:190814",
+        "name": "Select item",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/select/select-item.tsx",
+        "export": "SelectItem",
+        "import": "@/components/base/select/select-item"
+      },
+      "map": [
+        {
+          "figma": "Layout",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        },
+        {
+          "figma": "Supporting Text",
+          "kind": "text",
+          "prop": "supportingText"
+        },
+        {
+          "figma": "Code",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Meta",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Icon Leading",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Icon Leading",
+          "kind": "instance",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Lead Icon",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Lead Icon",
+          "kind": "instance",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Avatar",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Meta",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Badge",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Layout": [
+              "Rich",
+              "Simple",
+              "Supporting"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Hover",
+              "Selected"
+            ]
+          },
+          "props": {
+            "Code": "TEXT",
+            "Has Avatar": "BOOLEAN",
+            "Has Badge": "BOOLEAN",
+            "Has Icon Leading": "BOOLEAN",
+            "Has Lead Icon": "BOOLEAN",
+            "Has Meta": "BOOLEAN",
+            "Icon Leading": "INSTANCE_SWAP",
+            "Label": "TEXT",
+            "Lead Icon": "INSTANCE_SWAP",
+            "Meta": "TEXT",
+            "Supporting Text": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "avatarUrl": "other",
+            "children": "node",
+            "className": "other",
+            "icon": "other",
+            "id": "other",
+            "isDisabled": "other",
+            "label": "other",
+            "selectionIndicator": "enum:checkbox|checkmark|none",
+            "selectionIndicatorAlign": "enum:left|right",
+            "supportingText": "other",
+            "value": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:191113",
+        "name": "Checkbox label",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/checkbox/checkbox.tsx",
+        "export": "Checkbox",
+        "import": "@/components/base/checkbox/checkbox"
+      },
+      "map": [
+        {
+          "figma": "Platform",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md"
+          }
+        },
+        {
+          "figma": "Checked",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        },
+        {
+          "figma": "Hint",
+          "kind": "text",
+          "prop": "hint"
+        },
+        {
+          "figma": "Has Hint",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Checked": [
+              "False",
+              "Indeterminate",
+              "True"
+            ],
+            "Platform": [
+              "Mobile",
+              "Web"
+            ],
+            "Size": [
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover"
+            ]
+          },
+          "props": {
+            "Has Hint": "BOOLEAN",
+            "Hint": "TEXT",
+            "Label": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "hint": "node",
+            "label": "node",
+            "size": "enum:md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:191370",
+        "name": "Avatar add button",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/avatar/base-components/avatar-add-button.tsx",
+        "export": "AvatarAddButton",
+        "import": "@/components/base/avatar/base-components/avatar-add-button"
+      },
+      "map": [
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "State": [
+              "Default",
+              "Disabled",
+              "Focus",
+              "Hover",
+              "Loading"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "string",
+            "size": "enum:md|sm|xs",
+            "title": "string"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:193429",
+        "name": "Multi-select",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/select/select-native.tsx",
+        "export": "NativeSelect",
+        "import": "@/components/base/select/select-native"
+      },
+      "map": [
+        {
+          "figma": "Platform",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md"
+          }
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        },
+        {
+          "figma": "Has Label",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Required",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Hint",
+          "kind": "text",
+          "prop": "hint"
+        },
+        {
+          "figma": "Has Hint",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Placeholder",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Search Text",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Tag 3",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Count",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Value",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Clear All",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Platform": [
+              "Mobile",
+              "Web"
+            ],
+            "Size": [
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Active",
+              "Disabled",
+              "Focus",
+              "Open Active",
+              "Placeholder",
+              "Search Empty"
+            ]
+          },
+          "props": {
+            "Has Clear All": "BOOLEAN",
+            "Has Count": "BOOLEAN",
+            "Has Hint": "BOOLEAN",
+            "Has Label": "BOOLEAN",
+            "Has Tag 3": "BOOLEAN",
+            "Hint": "TEXT",
+            "Label": "TEXT",
+            "Placeholder": "TEXT",
+            "Required": "BOOLEAN",
+            "Search Text": "TEXT",
+            "Value": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "hint": "string",
+            "label": "string",
+            "options": "other",
+            "selectClassName": "string",
+            "size": "enum:lg|md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:194903",
+        "name": "Select",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/select/select.tsx",
+        "export": "Select",
+        "import": "@/components/base/select/select"
+      },
+      "map": [
+        {
+          "figma": "Platform",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Type",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        },
+        {
+          "figma": "Has Label",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Required",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Placeholder",
+          "kind": "text",
+          "prop": "placeholder"
+        },
+        {
+          "figma": "Value",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Supporting Text",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Supporting Text",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Hint",
+          "kind": "text",
+          "prop": "hint"
+        },
+        {
+          "figma": "Has Hint",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Error Message",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Icon Leading",
+          "kind": "instance",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Icon Leading",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Platform": [
+              "Mobile",
+              "Web"
+            ],
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Disabled",
+              "Error",
+              "Filled",
+              "Focus",
+              "Hover",
+              "Open",
+              "Placeholder"
+            ],
+            "Type": [
+              "Avatar Leading",
+              "Default",
+              "Dot Leading",
+              "Icon Leading",
+              "Native",
+              "Searchable"
+            ]
+          },
+          "props": {
+            "Error Message": "TEXT",
+            "Has Hint": "BOOLEAN",
+            "Has Icon Leading": "BOOLEAN",
+            "Has Label": "BOOLEAN",
+            "Has Supporting Text": "BOOLEAN",
+            "Hint": "TEXT",
+            "Icon Leading": "INSTANCE_SWAP",
+            "Label": "TEXT",
+            "Placeholder": "TEXT",
+            "Required": "BOOLEAN",
+            "Supporting Text": "TEXT",
+            "Value": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "other",
+            "hideRequiredIndicator": "other",
+            "hint": "other",
+            "icon": "node",
+            "items": "other",
+            "label": "other",
+            "placeholder": "string",
+            "popoverClassName": "string",
+            "size": "string",
+            "tooltip": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6658:195920",
+        "name": "Dropdown search",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/dropdown/dropdown-search-simple.tsx",
+        "export": "DropdownSearchSimple",
+        "import": "@/components/base/dropdown/dropdown-search-simple"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6659:210091",
+        "name": "Payment input",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/input/input-payment.tsx",
+        "export": "PaymentInput",
+        "import": "@/components/base/input/input-payment"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "SM": "sm",
+            "MD": "md",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        },
+        {
+          "figma": "Has Label",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Required",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Help Icon",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Hint",
+          "kind": "text",
+          "prop": "hint"
+        },
+        {
+          "figma": "Has Hint",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Error Message",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Placeholder",
+          "kind": "text",
+          "prop": "placeholder"
+        },
+        {
+          "figma": "Value",
+          "kind": "text",
+          "prop": "value"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Disabled",
+              "Error",
+              "Filled",
+              "Focus",
+              "Hover",
+              "Placeholder",
+              "Read Only"
+            ]
+          },
+          "props": {
+            "Error Message": "TEXT",
+            "Has Help Icon": "BOOLEAN",
+            "Has Hint": "BOOLEAN",
+            "Has Label": "BOOLEAN",
+            "Hint": "TEXT",
+            "Label": "TEXT",
+            "Placeholder": "TEXT",
+            "Required": "BOOLEAN",
+            "Value": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "className": "other",
+            "defaultValue": "other",
+            "groupRef": "other",
+            "hideRequiredIndicator": "other",
+            "hint": "other",
+            "iconClassName": "other",
+            "inputClassName": "other",
+            "label": "other",
+            "maxLength": "other",
+            "placeholder": "other",
+            "shortcut": "other",
+            "size": "string",
+            "tooltip": "other",
+            "tooltipClassName": "other",
+            "type": "string",
+            "value": "other",
+            "wrapperClassName": "other"
+          },
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6659:213718",
+        "name": "Tags input",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/input/input-tags.tsx",
+        "export": "InputTags",
+        "import": "@/components/base/input/input-tags"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": "size",
+          "values": {
+            "MD": "md",
+            "SM": "sm",
+            "LG": "lg"
+          }
+        },
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": "isDisabled",
+          "values": {
+            "Placeholder": null,
+            "Focus": null,
+            "Error": null,
+            "Hover": null,
+            "Filled": null,
+            "Disabled": true,
+            "Read Only": null
+          },
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        },
+        {
+          "figma": "Has Label",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Required",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Help Icon",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Hint",
+          "kind": "text",
+          "prop": "hint"
+        },
+        {
+          "figma": "Has Hint",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Error Message",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Placeholder",
+          "kind": "text",
+          "prop": "placeholder"
+        },
+        {
+          "figma": "Value",
+          "kind": "text",
+          "prop": "value"
+        },
+        {
+          "figma": "Has Tag 2",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Tag 3",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Tag 4",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Tag 5",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Tag 6",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "LG",
+              "MD",
+              "SM"
+            ],
+            "State": [
+              "Disabled",
+              "Error",
+              "Filled",
+              "Focus",
+              "Hover",
+              "Placeholder",
+              "Read Only"
+            ]
+          },
+          "props": {
+            "Error Message": "TEXT",
+            "Has Help Icon": "BOOLEAN",
+            "Has Hint": "BOOLEAN",
+            "Has Label": "BOOLEAN",
+            "Has Tag 2": "BOOLEAN",
+            "Has Tag 3": "BOOLEAN",
+            "Has Tag 4": "BOOLEAN",
+            "Has Tag 5": "BOOLEAN",
+            "Has Tag 6": "BOOLEAN",
+            "Hint": "TEXT",
+            "Label": "TEXT",
+            "Placeholder": "TEXT",
+            "Required": "BOOLEAN",
+            "Value": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "allowDuplicates": "boolean",
+            "className": "string",
+            "defaultValue": "other",
+            "hideRequiredIndicator": "boolean",
+            "hint": "node",
+            "isDisabled": "boolean",
+            "isInvalid": "boolean",
+            "isRequired": "boolean",
+            "label": "string",
+            "maxTags": "number",
+            "placeholder": "string",
+            "size": "enum:lg|md|sm",
+            "tooltip": "string",
+            "value": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6681:227883",
+        "name": "Company logo",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/avatar/avatar.demo.tsx",
+        "export": "CompanyLogoDemo",
+        "import": "@/components/base/avatar/avatar.demo"
+      },
+      "map": [
+        {
+          "figma": "Name",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Name": [
+              "Delta",
+              "Giữ chỗ 01",
+              "Giữ chỗ 02",
+              "Giữ chỗ 03"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6699:854",
+        "name": "icon/qr-code",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/qr-code.tsx",
+        "export": "QRCode",
+        "import": "@/components/shared-assets/qr-code"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "12",
+              "14",
+              "16",
+              "20",
+              "24"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "className": "string",
+            "options": "other",
+            "size": "enum:lg|md",
+            "value": "string"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6699:1104",
+        "name": "icon/circle-dot",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/loading-indicator/loading-indicator.demo.tsx",
+        "export": "DotCircleDemo",
+        "import": "@/components/application/loading-indicator/loading-indicator.demo"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "12",
+              "14",
+              "16",
+              "20",
+              "24"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {},
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6700:1474",
+        "name": "icon/credit-card",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/shared-assets/credit-card/credit-card.tsx",
+        "export": "CreditCard",
+        "import": "@/components/shared-assets/credit-card/credit-card"
+      },
+      "map": [
+        {
+          "figma": "Size",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Size": [
+              "12",
+              "14",
+              "16",
+              "20",
+              "24"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "cardExpiration": "string",
+            "cardHolder": "string",
+            "cardNumber": "string",
+            "className": "string",
+            "company": "string",
+            "type": "other",
+            "width": "number"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6768:190697",
+        "name": "Mobile header",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/app-navigation/base-components/mobile-header.tsx",
+        "export": "MobileNavigationHeader",
+        "import": "@/components/application/app-navigation/base-components/mobile-header"
+      },
+      "map": [
+        {
+          "figma": "Type",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Title",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Greeting",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Name",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Branch",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Title Text",
+          "kind": "text",
+          "prop": "children"
+        },
+        {
+          "figma": "Has Search",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Bell",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Branch",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Can Switch Branch",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Actions",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Action 2",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Tab Chips",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Title": [
+              "Compact",
+              "Large",
+              "None"
+            ],
+            "Type": [
+              "Child",
+              "Hamburger",
+              "Root"
+            ]
+          },
+          "props": {
+            "Branch": "TEXT",
+            "Can Switch Branch": "BOOLEAN",
+            "Greeting": "TEXT",
+            "Has Action 2": "BOOLEAN",
+            "Has Actions": "BOOLEAN",
+            "Has Bell": "BOOLEAN",
+            "Has Branch": "BOOLEAN",
+            "Has Search": "BOOLEAN",
+            "Has Tab Chips": "BOOLEAN",
+            "Name": "TEXT",
+            "Title Text": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "children": "node"
+          },
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6768:191286",
+        "name": "Header navigation",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/app-navigation/header-navigation.tsx",
+        "export": "HeaderNavigationBase",
+        "import": "@/components/application/app-navigation/header-navigation"
+      },
+      "map": [
+        {
+          "figma": "Platform",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Layout",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Breadcrumb",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Search",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Help",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Bell",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Account",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Back",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Menu",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Title",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Back label",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Layout": [
+              "Secondary Nav",
+              "Simple"
+            ],
+            "Platform": [
+              "Mobile",
+              "Web"
+            ]
+          },
+          "props": {
+            "Back label": "TEXT",
+            "Has Account": "BOOLEAN",
+            "Has Back": "BOOLEAN",
+            "Has Bell": "BOOLEAN",
+            "Has Breadcrumb": "BOOLEAN",
+            "Has Help": "BOOLEAN",
+            "Has Menu": "BOOLEAN",
+            "Has Search": "BOOLEAN",
+            "Title": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "actions": "node",
+            "activeUrl": "string",
+            "centered": "boolean",
+            "hideBorder": "boolean",
+            "items": "other",
+            "secondaryType": "enum:buttons|tabs",
+            "subItems": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6768:193304",
+        "name": "_Nav button",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/app-navigation/base-components/nav-button.tsx",
+        "export": "NavButton",
+        "import": "@/components/application/app-navigation/base-components/nav-button"
+      },
+      "map": [
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Icon",
+          "kind": "instance",
+          "prop": "icon"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "label"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "State": [
+              "Current",
+              "Default",
+              "Focus",
+              "Hover"
+            ]
+          },
+          "props": {
+            "Icon": "INSTANCE_SWAP",
+            "Label": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "string",
+            "current": "boolean",
+            "href": "string",
+            "icon": "other",
+            "label": "string",
+            "open": "boolean",
+            "tooltipPlacement": "enum:bottom|left|right|top"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6768:193845",
+        "name": "_Nav account card",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/app-navigation/base-components/nav-account-card.tsx",
+        "export": "NavAccountCard",
+        "import": "@/components/application/app-navigation/base-components/nav-account-card"
+      },
+      "map": [],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "avatarRounded": "boolean",
+            "items": "other",
+            "popoverPlacement": "other",
+            "selectedAccountId": "string"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6768:194161",
+        "name": "Sidebar navigation",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/application/app-navigation/sidebar-navigation/sidebar-slim.tsx",
+        "export": "SidebarNavigationSlim",
+        "import": "@/components/application/app-navigation/sidebar-navigation/sidebar-slim"
+      },
+      "map": [
+        {
+          "figma": "Type",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Width",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Tenant Switch",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Search",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Featured Card",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Panel",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Account Label",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Panel Title",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Scope Card",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Branch",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Tenant Name",
+          "kind": "text",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Has Tenant Name",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Type": [
+              "Dual Tier",
+              "Sections Dividers",
+              "Sections Subheadings",
+              "Slim"
+            ],
+            "Width": [
+              "240",
+              "280",
+              "64",
+              "68"
+            ]
+          },
+          "props": {
+            "Account Label": "TEXT",
+            "Branch": "TEXT",
+            "Has Featured Card": "BOOLEAN",
+            "Has Panel": "BOOLEAN",
+            "Has Scope Card": "BOOLEAN",
+            "Has Search": "BOOLEAN",
+            "Has Tenant Name": "BOOLEAN",
+            "Has Tenant Switch": "BOOLEAN",
+            "Panel Title": "TEXT",
+            "Tenant Name": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "activeUrl": "string",
+            "footerItems": "other",
+            "hideBorder": "boolean",
+            "hideRightBorder": "boolean",
+            "items": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6768:212084",
+        "name": "_Button group item",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/button-group/button-group.tsx",
+        "export": "ButtonGroupItem",
+        "import": "@/components/base/button-group/button-group"
+      },
+      "map": [
+        {
+          "figma": "State",
+          "kind": "variant",
+          "prop": null,
+          "reason": "css"
+        },
+        {
+          "figma": "Label",
+          "kind": "text",
+          "prop": "children"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "State": [
+              "Current",
+              "Current Focus",
+              "Default",
+              "Focus",
+              "Hover"
+            ]
+          },
+          "props": {
+            "Label": "TEXT"
+          }
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "other",
+            "iconLeading": "other",
+            "iconTrailing": "other"
+          },
+          "known": false
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6768:212105",
+        "name": "_Button group",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/button-group/button-group.tsx",
+        "export": "ButtonGroup",
+        "import": "@/components/base/button-group/button-group"
+      },
+      "map": [
+        {
+          "figma": "Has Item 3",
+          "kind": "boolean",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {},
+          "props": {
+            "Has Item 3": "BOOLEAN"
+          }
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "string",
+            "size": "other"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    },
+    {
+      "figma": {
+        "id": "6814:843",
+        "name": "Radio group",
+        "file": "f-d95944"
+      },
+      "code": {
+        "path": "design/_ref/untitled-ui/react/components/base/radio-buttons/radio-buttons.tsx",
+        "export": "RadioGroup",
+        "import": "@/components/base/radio-buttons/radio-buttons"
+      },
+      "map": [
+        {
+          "figma": "Platform",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        },
+        {
+          "figma": "Type",
+          "kind": "variant",
+          "prop": null,
+          "reason": "no-prop"
+        }
+      ],
+      "snapshot": {
+        "design": {
+          "axes": {
+            "Platform": [
+              "Mobile",
+              "Web"
+            ],
+            "Type": [
+              "Avatar",
+              "Icon card",
+              "Icon simple",
+              "Payment icon",
+              "Payment logo",
+              "Radio button",
+              "Vehicle"
+            ]
+          },
+          "props": {}
+        },
+        "code": {
+          "props": {
+            "children": "node",
+            "className": "string",
+            "size": "enum:md|sm"
+          },
+          "known": true
+        }
+      },
+      "linkedAt": "2026-11-01T04:38:27.092Z"
+    }
+  ]
+}
