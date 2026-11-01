@@ -1,0 +1,114 @@
+{
+ "brainstorm-D1": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D2": {
+  "choice": 0,
+  "note": "chọn lại 29/10: theo Astryx (góp ý cmvscra32)"
+ },
+ "brainstorm-D3": {
+  "choice": 1,
+  "note": "chọn lại 29/10: icon trần cho cả toast và Alert (user xác nhận trong chat)"
+ },
+ "brainstorm-D4": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D5": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D6": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D7": {
+  "choice": 1,
+  "note": "đổi ở duyệt preview bản 1: bỏ banner"
+ },
+ "brainstorm-D8": {
+  "choice": 1,
+  "note": ""
+ },
+ "idea-I1": {
+  "choice": 0,
+  "note": ""
+ },
+ "preview-approve": {
+  "choice": 1,
+  "note": "- Banner bỏ\n- cần thêm dạng avatar\n- cần thêm dạng icon\n- cần thêm dạng progressing upload/export/import"
+ },
+ "preview-approve-v2": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-action.font-size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-alert-button.height.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-alert-err.border-color.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-alert-info.border-color.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-alert-ok.border-color.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-alert-warn.border-color.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-alert.padding-x.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-alert.padding-x.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-description.font-size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-featured-icon.icon-size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-toast-action.height.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-toast-action.height.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-toast-close.size.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-toast-close.size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-toast-timer.height.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-toast.padding-left.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-toast.padding-left.web": {
+  "choice": 0,
+  "note": ""
+ }
+}

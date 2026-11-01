@@ -1,0 +1,8 @@
+{
+  "$description": "Tên component bên code (tay viết). Mã = id trong handoff/components/registry.json. status: đề xuất | dev đã chốt. Sửa xong chạy python3 _scripts/ds-v2-handoff.py.",
+  "prefix": {
+    "angular": "inv-",
+    "flutter": "Inv"
+  },
+  "components": {}
+}

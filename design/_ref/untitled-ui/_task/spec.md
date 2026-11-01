@@ -2,7 +2,7 @@
 
 > Người nhận: một AI agent có trình duyệt (Chrome điều khiển được) và shell (`gh`, `curl`).
 > Mục đích cuối: đội Invlogis so sánh Foundations của Untitled UI với DS v2 của mình
-> (`design/v2/foundations.md`, `design/v2/tokens.json`) rồi chọn phần nên học. **Bạn chỉ lo bước trích
+> (`design-system/foundations/README.md`, `design-system/tokens.json`) rồi chọn phần nên học. **Bạn chỉ lo bước trích
 > xuất.** Báo cáo so sánh do phiên khác làm sau, dựa trên output của bạn.
 
 ## 1. Nguồn
@@ -64,7 +64,7 @@ Không làm Shared assets và Application examples.
 
 ## 5. Output
 
-Ghi vào `design/_ref/untitled-ui/` (tạo mới; **không đụng** `design/v2/`, `design/design.md`, `.claude/`):
+Ghi vào `design/_ref/untitled-ui/` (tạo mới; **không đụng** `design-system/`, `design/design.md`, `.claude/`):
 
 ```
 design/_ref/untitled-ui/

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Trang duyệt trạng thái 9 mục foundations DS v2 → design/v2/_review/foundations-status.html (publish thành artifact).
+"""Trang duyệt trạng thái 9 mục foundations DS v2 → design-system/_review/foundations-status.html (publish thành artifact).
 
   python3 _scripts/ds-foundation-page.py
 
-Mỗi mục: xem thử dựng bằng design/v2/tokens.css (Light/Dark, Web/Mobile), trạng thái hiện tại trong repo, nút chọn trạng
+Mỗi mục: xem thử dựng bằng design-system/tokens.css (Light/Dark, Web/Mobile), trạng thái hiện tại trong repo, nút chọn trạng
 thái mới + ghi chú → lưu kho trang (collection "status", doc = mã mục). Claude đọc về rồi áp bằng
 `ds-foundation-status.py apply` (L1), ghi nhãn Figma. Nguồn trạng thái vẫn là bảng trong foundations.md.
 """
@@ -14,14 +14,14 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "design/v2/_review/foundations-status.html"
+OUT = ROOT / "design-system/_review/foundations-status.html"
 E = html.escape
 
 spec = importlib.util.spec_from_file_location("dfs", ROOT / "_scripts/ds-foundation-status.py")
 dfs = importlib.util.module_from_spec(spec); spec.loader.exec_module(dfs)
 ROWS = dfs.read()[3]
-TK = json.loads((ROOT / "design/v2/tokens.json").read_text())
-CSS = (ROOT / "design/v2/tokens.css").read_text()
+TK = json.loads((ROOT / "design-system/tokens.json").read_text())
+CSS = (ROOT / "design-system/tokens.css").read_text()
 MARK = (ROOT / "design/brand/innvie-v1/mark-color.svg").read_text()
 MARK = re.sub(r"<\?xml[^>]*>", "", MARK)
 
@@ -43,9 +43,9 @@ def color():
     groups = [("Nền", "color/bg/"), ("Chữ", "color/text/"), ("Icon", "color/icon/"), ("Viền", "color/border/"),
               ("Trạng thái", "color/status/")]
     h = "".join(f'<h4>{g}</h4><div class="swg">{"".join(sw(n) for n in sem_colors(p))}</div>' for g, p in groups)
-    pairs = [("color/text/primary", "color/bg/surface"), ("color/text/secondary", "color/bg/surface"),
-             ("color/text/secondary-strong", "color/bg/muted"), ("color/text/secondary", "color/bg/muted"),
-             ("color/text/tertiary", "color/bg/surface")]
+    pairs = [("color/text/primary", "color/bg/primary"), ("color/text/tertiary", "color/bg/primary"),
+             ("color/text/tertiary_strong", "color/bg/secondary"), ("color/text/tertiary", "color/bg/secondary"),
+             ("color/text/disabled", "color/bg/primary")]
     h += '<h4>Tương phản đo trên trang</h4><div class="cg">' + "".join(
         f'<div class="ct" style="background:var({v(b)});color:var({v(a)})" data-fg="{v(a)}" data-bg="{v(b)}">'
         f'<span>Lệnh vận tải LVT-2026-0412</span><small>{E(a.split("/")[-1])} / {E(b.split("/")[-1])} · <b class="cr"></b></small></div>'
@@ -59,7 +59,7 @@ def typo():
         size, lh = v(st["size"]), v(st["lineHeight"])
         fam = "var(--font-title)" if st["family"] == "Cal Sans" else "var(--font-code)" if "Mono" in st["family"] else "var(--font-body)"
         w = {"Regular": 400, "Medium": 500, "Semi Bold": 600, "Bold": 700}.get(st["style"], 400)
-        up = "text-transform:uppercase;letter-spacing:.04em;" if st.get("case") == "UPPER" else ""
+        up = "text-transform:uppercase;" if st.get("case") == "UPPER" else ""
         out.append(f'<div class="ty"><div class="tyl"><b>{E(name)}</b><small>{E(st["family"])} {E(st["style"])} · '
                    f'<span data-css="{size}"></span>/<span data-css="{lh}"></span></small></div>'
                    f'<div style="font-family:{fam};font-size:var({size});line-height:var({lh});font-weight:{w};{up}">'
@@ -106,7 +106,7 @@ def elevation():
 
 def touch():
     return ('<div class="tf"><button class="fb">Nút có vòng focus</button><span class="muted">vòng <code data-css="--focus-width"></code> · '
-            'cách <code data-css="--focus-offset"></code> · màu <code>color/border/focus</code></span></div>'
+            'cách <code data-css="--focus-offset"></code> · màu <code>color/focus/ring</code></span></div>'
             '<div class="tf"><span class="hit"><i></i></span><span class="muted">vùng chạm tối thiểu <code data-css="--touch-min"></code> '
             '(icon 16 vẫn bấm được cả ô)</span></div>')
 
@@ -119,7 +119,7 @@ def motion():
 
 
 def icon():
-    files = sorted(p for p in (ROOT / "design/v2/icons").glob("*.svg") if not p.stem.endswith("-fill"))[:8]
+    files = sorted(p for p in (ROOT / "design-system/icons").glob("*.svg") if not p.stem.endswith("-fill"))[:8]
     svgs = []
     for p in files:
         s = re.sub(r"<\?xml[^>]*>", "", p.read_text())
@@ -170,34 +170,34 @@ PAGE_CSS = r"""
 .pick button[aria-pressed=true]{background:#0036B5;color:#fff;border-color:#0036B5}
 .pick textarea{flex-basis:100%;min-height:44px;border:1px solid #CBD5E1;border-radius:10px;padding:8px 10px;font:13px Inter}
 .saved{font-size:12px;color:#067647}
-.pvw{padding:16px 18px;background:var(--color-bg-canvas);color:var(--color-text-primary);font-family:var(--font-body)}
-.pvw h4{margin:14px 0 8px;font:600 12px/16px Inter;text-transform:uppercase;letter-spacing:.04em;color:var(--color-text-secondary)}
-.pvw code,.pvw [data-css]{font:12px var(--font-code);color:var(--color-text-secondary)}
+.pvw{padding:16px 18px;background:var(--color-bg-primary);color:var(--color-text-primary);font-family:var(--font-body)}
+.pvw h4{margin:14px 0 8px;font:600 12px/16px Inter;text-transform:uppercase;letter-spacing:.04em;color:var(--color-text-tertiary)}
+.pvw code,.pvw [data-css]{font:12px var(--font-code);color:var(--color-text-tertiary)}
 .swg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
-.sw{display:grid;grid-template-columns:28px 1fr;gap:2px 8px;align-items:center;font-size:12px}.sw i{grid-row:span 2;width:28px;height:28px;border-radius:8px;border:1px solid var(--color-border-subtle,#e5e5e5)}
-.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}.ct{border-radius:10px;padding:10px 12px;border:1px solid var(--color-border-subtle,#e5e5e5);display:grid;gap:2px}
+.sw{display:grid;grid-template-columns:28px 1fr;gap:2px 8px;align-items:center;font-size:12px}.sw i{grid-row:span 2;width:28px;height:28px;border-radius:8px;border:1px solid var(--color-border-tertiary,#e5e5e5)}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}.ct{border-radius:10px;padding:10px 12px;border:1px solid var(--color-border-tertiary,#e5e5e5);display:grid;gap:2px}
 .ct small{font-size:12px}.cr.bad{color:#B42318}
-.ty{display:grid;grid-template-columns:220px 1fr;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--color-border-subtle,#e5e5e5)}
-.tyl{display:grid}.tyl small{font-size:12px;color:var(--color-text-secondary)}
+.ty{display:grid;grid-template-columns:220px 1fr;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--color-border-tertiary,#e5e5e5)}
+.tyl{display:grid}.tyl small{font-size:12px;color:var(--color-text-tertiary)}
 .rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}.rd{display:grid;gap:4px;font-size:12px}
-.rd i{height:56px;background:var(--color-bg-muted);border:1px solid var(--color-border-default,#d4d4d4)}
+.rd i{height:56px;background:var(--color-bg-secondary);border:1px solid var(--color-border-secondary,#d4d4d4)}
 .sp{display:grid;gap:6px}.spr{display:grid;grid-template-columns:200px auto 1fr;gap:10px;align-items:center;font-size:12px}
 .spr i{height:12px;background:var(--color-action-primary,#3468D7);border-radius:2px;display:block}
-.ctl{display:flex;gap:10px;align-items:flex-end}.ctl span{display:inline-flex;align-items:center;border:1px solid var(--color-border-default,#d4d4d4);border-radius:var(--radius-control);font-size:13px}
-.gr{display:grid;grid-template-columns:repeat(12,1fr);height:60px;background:var(--color-bg-muted)}.gr i{background:rgba(52,104,215,.18)}
+.ctl{display:flex;gap:10px;align-items:flex-end}.ctl span{display:inline-flex;align-items:center;border:1px solid var(--color-border-secondary,#d4d4d4);border-radius:var(--radius-control);font-size:13px}
+.gr{display:grid;grid-template-columns:repeat(12,1fr);height:60px;background:var(--color-bg-secondary)}.gr i{background:rgba(52,104,215,.18)}
 .wd{display:grid;grid-template-columns:auto 90px 60px;gap:10px;align-items:center;font-size:12px;margin:4px 0}.wd i{height:10px;background:var(--color-action-primary,#3468D7);display:block;border-radius:2px}
-.elg{display:flex;gap:24px;padding:12px;background:var(--color-bg-muted);border-radius:12px}
-.el{width:160px;height:90px;background:var(--color-bg-surface);border-radius:var(--radius-card);display:grid;place-items:center;font-size:13px}
+.elg{display:flex;gap:24px;padding:12px;background:var(--color-bg-secondary);border-radius:12px}
+.el{width:160px;height:90px;background:var(--color-bg-primary);border-radius:var(--radius-card);display:grid;place-items:center;font-size:13px}
 .blg{display:flex;gap:12px;flex-wrap:wrap}.bl{position:relative;width:200px;height:90px;border-radius:12px;overflow:hidden}
 .blbg{position:absolute;inset:0;background:repeating-linear-gradient(45deg,#3468D7 0 12px,#FDB022 12px 24px,#fff 24px 36px)}
 .blf{position:absolute;inset:18px;border-radius:10px;background:rgba(255,255,255,.35);display:grid;place-items:center;font-size:12px}
-.tf{display:flex;gap:14px;align-items:center;margin:8px 0}.fb{height:36px;padding:0 14px;border-radius:var(--radius-control);border:1px solid var(--color-border-default,#d4d4d4);background:var(--color-bg-surface);color:inherit;font:600 13px Inter;outline:var(--focus-width) solid var(--color-border-focus,#262626);outline-offset:var(--focus-offset)}
-.hit{width:var(--touch-min);height:var(--touch-min);border:1px dashed #E11D48;display:grid;place-items:center}.hit i{width:16px;height:16px;background:var(--color-icon-primary,#525252);border-radius:3px}
+.tf{display:flex;gap:14px;align-items:center;margin:8px 0}.fb{height:36px;padding:0 14px;border-radius:var(--radius-control);border:1px solid var(--color-border-secondary,#d4d4d4);background:var(--color-bg-primary);color:inherit;font:600 13px Inter;outline:var(--focus-width) solid var(--color-focus-ring,#262626);outline-offset:var(--focus-offset)}
+.hit{width:var(--touch-min);height:var(--touch-min);border:1px dashed #E11D48;display:grid;place-items:center}.hit i{width:16px;height:16px;background:var(--color-fg-secondary,#525252);border-radius:3px}
 .mo{display:grid;gap:8px}.mor{display:grid;grid-template-columns:140px 70px 1fr;gap:10px;align-items:center;font-size:12px}
-.track{height:12px;background:var(--color-bg-muted);border-radius:6px;position:relative}.track i{position:absolute;left:0;top:0;width:12px;height:12px;border-radius:6px;background:var(--color-action-primary,#3468D7);transition-property:left}
+.track{height:12px;background:var(--color-bg-secondary);border-radius:6px;position:relative}.track i{position:absolute;left:0;top:0;width:12px;height:12px;border-radius:6px;background:var(--color-action-primary,#3468D7);transition-property:left}
 .mo.run .track i{left:calc(100% - 12px)}
 .icr{display:flex;gap:14px;align-items:center;margin:6px 0}.icr>b{width:44px;font-size:12px}
-.ic{display:inline-grid;color:var(--color-icon-primary,#525252)}.ic svg{width:100%;height:100%;stroke-width:var(--sw)}
+.ic{display:inline-grid;color:var(--color-fg-secondary,#525252)}.ic svg{width:100%;height:100%;stroke-width:var(--sw)}
 """
 
 PAGE_JS = r"""

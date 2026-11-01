@@ -1,0 +1,6111 @@
+{
+ "tokens_version": "0.22.0",
+ "counts": {
+  "ok": 118,
+  "near": 18,
+  "new": 17,
+  "conflict": 1,
+  "undeclared": 0
+ },
+ "no_sel": 0,
+ "off_page": 0,
+ "open": 29,
+ "ignored": [
+  {
+   "sel": ".al",
+   "props": [
+    "background"
+   ],
+   "why": "nền Alert theo tone qua biến --tbg — đã khai từng tone ở dòng Alert ok/warn/err/info (sel .al.{tone})"
+  },
+  {
+   "sel": ".al .tt",
+   "props": [
+    "color"
+   ],
+   "why": "màu tiêu đề Alert theo tone qua biến --t — đã khai từng tone ở dòng Alert title {tone}"
+  }
+ ],
+ "groups": {
+  "typo": {
+   "label": "Chữ",
+   "total": 18,
+   "ok": 17,
+   "open": 1,
+   "audit": 1
+  },
+  "color": {
+   "label": "Màu",
+   "total": 53,
+   "ok": 46,
+   "open": 7,
+   "audit": 0
+  },
+  "icon": {
+   "label": "Icon",
+   "total": 9,
+   "ok": 6,
+   "open": 3,
+   "audit": 0
+  },
+  "effect": {
+   "label": "Hiệu ứng",
+   "total": 3,
+   "ok": 1,
+   "open": 2,
+   "audit": 0
+  },
+  "spacing": {
+   "label": "Khoảng cách & cỡ",
+   "total": 51,
+   "ok": 35,
+   "open": 9,
+   "audit": 0
+  },
+  "radius": {
+   "label": "Bo góc",
+   "total": 17,
+   "ok": 12,
+   "open": 5,
+   "audit": 0
+  },
+  "grid": {
+   "label": "Lưới & độ rộng",
+   "total": 3,
+   "ok": 1,
+   "open": 2,
+   "audit": 0
+  }
+ },
+ "rows": [
+  {
+   "id": "toast.width.web",
+   "part": "Toast",
+   "prop": "width",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 400,
+   "sel": ".tz",
+   "cssProps": [
+    "width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "width/sm"
+   ],
+   "bind": {
+    "token": "width/sm",
+    "css": "var(--width-sm)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "grid",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "width/sm",
+    "css": "var(--width-sm)"
+   }
+  },
+  {
+   "id": "toast.padding-y.web",
+   "part": "Toast",
+   "prop": "padding-y",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "padding-top",
+    "padding-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "toast.padding-left.web",
+   "part": "Toast",
+   "prop": "padding-left",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "padding-left"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "toast.padding-right.web",
+   "part": "Toast",
+   "prop": "padding-right",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "toast.gap.web",
+   "part": "Toast",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "toast.radius.web",
+   "part": "Toast",
+   "prop": "radius",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/xl"
+   ],
+   "bind": {
+    "token": "radius/xl",
+    "css": "var(--radius-xl)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/xl",
+    "css": "var(--radius-xl)"
+   }
+  },
+  {
+   "id": "toast-close.size.web",
+   "part": "Toast close",
+   "prop": "size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".pv[data-D3=a] .ib .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/lg"
+   ],
+   "bind": {
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   }
+  },
+  {
+   "id": "toast-action.height.web",
+   "part": "Toast action",
+   "prop": "height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": null,
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": true,
+   "soi": null,
+   "at": ".ts .lk",
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "touch/min",
+    "value": 24,
+    "css": "var(--touch-min)"
+   },
+   "visible": true,
+   "suggest": "touch/min (24)",
+   "rules": [],
+   "note": "trùng số với icon/size/ml nhưng đó là token của component khác; thang chung gần nhất touch/min = 24",
+   "group": "spacing",
+   "decided": true,
+   "must": true,
+   "resolved": {
+    "kind": "new-token",
+    "value": 18
+   }
+  },
+  {
+   "id": "alert.padding-y.web",
+   "part": "Alert",
+   "prop": "padding-y",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".al",
+   "cssProps": [
+    "padding-top",
+    "padding-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "alert.padding-x.web",
+   "part": "Alert",
+   "prop": "padding-x",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".al",
+   "cssProps": [
+    "padding-left",
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "alert.gap.web",
+   "part": "Alert",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".al",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "alert.radius.web",
+   "part": "Alert",
+   "prop": "radius",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 10,
+   "sel": ".al",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/lg"
+   ],
+   "bind": {
+    "token": "radius/lg",
+    "css": "var(--radius-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/lg",
+    "css": "var(--radius-lg)"
+   }
+  },
+  {
+   "id": "alert-button.height.web",
+   "part": "Alert button",
+   "prop": "height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 32,
+   "sel": ".bt",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "control/height/md"
+   ],
+   "bind": {
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   }
+  },
+  {
+   "id": "alert-button.padding-x.web",
+   "part": "Alert button",
+   "prop": "padding-x",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".bt",
+   "cssProps": [
+    "padding-left",
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "control/padding-x/md",
+    "control/padding-x-icon/lg"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "alert-button.radius.web",
+   "part": "Alert button",
+   "prop": "radius",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".bt",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/md"
+   ],
+   "bind": {
+    "token": "radius/md",
+    "css": "var(--radius-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/md",
+    "css": "var(--radius-md)"
+   }
+  },
+  {
+   "id": "toast-stack.gap.web",
+   "part": "Toast stack",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".tz",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/md",
+    "layout/list-gap",
+    "control/padding-x/sm",
+    "control/padding-x-icon/md"
+   ],
+   "bind": {
+    "token": "space/md",
+    "css": "var(--space-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/md",
+    "css": "var(--space-md)"
+   }
+  },
+  {
+   "id": "toast-zone.margin.web",
+   "part": "Toast zone",
+   "prop": "margin",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 24,
+   "sel": null,
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": true,
+   "soi": null,
+   "at": ".tz",
+   "cat": "ok",
+   "tokens": [
+    "space/3xl"
+   ],
+   "bind": {
+    "token": "space/3xl",
+    "css": "var(--space-3xl)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/3xl",
+    "css": "var(--space-3xl)"
+   }
+  },
+  {
+   "id": "toast.width.mobile",
+   "part": "Toast",
+   "prop": "width",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 361,
+   "sel": null,
+   "cssProps": [
+    "width"
+   ],
+   "tpl": null,
+   "noOverride": true,
+   "soi": null,
+   "at": ".ts",
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "layout/content-max-width",
+    "value": 393,
+    "css": "var(--layout-content-max-width)"
+   },
+   "visible": true,
+   "suggest": "layout/content-max-width (393)",
+   "rules": [],
+   "note": "trùng số với field/width-default, progress/width-default nhưng đó là token của component khác; thang chung gần nhất layout/content-max-width = 393",
+   "group": "grid",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "toast.padding-y.mobile",
+   "part": "Toast",
+   "prop": "padding-y",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "padding-top",
+    "padding-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "layout/list-gap",
+    "form/field-gap",
+    "control/padding-x/sm"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "toast.padding-left.mobile",
+   "part": "Toast",
+   "prop": "padding-left",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "padding-left"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "layout/list-gap",
+    "form/field-gap",
+    "control/padding-x/sm"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "toast.padding-right.mobile",
+   "part": "Toast",
+   "prop": "padding-right",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "layout/list-gap",
+    "form/field-gap",
+    "control/padding-x/sm"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "toast.gap.mobile",
+   "part": "Toast",
+   "prop": "gap",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "layout/list-gap",
+    "form/field-gap",
+    "control/padding-x/sm"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "toast.radius.mobile",
+   "part": "Toast",
+   "prop": "radius",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ts",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/xl"
+   ],
+   "bind": {
+    "token": "radius/xl",
+    "css": "var(--radius-xl)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/xl",
+    "css": "var(--radius-xl)"
+   }
+  },
+  {
+   "id": "toast-close.size.mobile",
+   "part": "Toast close",
+   "prop": "size",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".pv[data-D3=a] .ib .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/md"
+   ],
+   "bind": {
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   }
+  },
+  {
+   "id": "toast-action.height.mobile",
+   "part": "Toast action",
+   "prop": "height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": null,
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": true,
+   "soi": null,
+   "at": ".ts .lk",
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": null,
+   "rules": [],
+   "note": "trùng số với icon/size/ml nhưng đó là token của component khác; thang chung gần nhất control/height/sm = 36 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "group": "spacing",
+   "decided": true,
+   "must": true,
+   "resolved": {
+    "kind": "new-token",
+    "value": 18
+   }
+  },
+  {
+   "id": "alert.padding-y.mobile",
+   "part": "Alert",
+   "prop": "padding-y",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".al",
+   "cssProps": [
+    "padding-top",
+    "padding-bottom"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "layout/list-gap",
+    "form/field-gap",
+    "control/padding-x/sm"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "alert.padding-x.mobile",
+   "part": "Alert",
+   "prop": "padding-x",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".al",
+   "cssProps": [
+    "padding-left",
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "layout/list-gap",
+    "form/field-gap",
+    "control/padding-x/sm"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "alert.gap.mobile",
+   "part": "Alert",
+   "prop": "gap",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".al",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "layout/list-gap",
+    "form/field-gap",
+    "control/padding-x/sm"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "alert.radius.mobile",
+   "part": "Alert",
+   "prop": "radius",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 10,
+   "sel": ".al",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/lg"
+   ],
+   "bind": {
+    "token": "radius/lg",
+    "css": "var(--radius-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/lg",
+    "css": "var(--radius-lg)"
+   }
+  },
+  {
+   "id": "alert-button.height.mobile",
+   "part": "Alert button",
+   "prop": "height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 36,
+   "sel": ".pv[data-platform=mobile] .al .bt",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "control/height/sm"
+   ],
+   "bind": {
+    "token": "control/height/sm",
+    "css": "var(--control-height-sm)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/sm",
+    "css": "var(--control-height-sm)"
+   }
+  },
+  {
+   "id": "alert-button.padding-x.mobile",
+   "part": "Alert button",
+   "prop": "padding-x",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".bt",
+   "cssProps": [
+    "padding-left",
+    "padding-right"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "layout/list-gap",
+    "form/field-gap",
+    "control/padding-x/sm"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "alert-button.radius.mobile",
+   "part": "Alert button",
+   "prop": "radius",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".bt",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/md"
+   ],
+   "bind": {
+    "token": "radius/md",
+    "css": "var(--radius-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/md",
+    "css": "var(--radius-md)"
+   }
+  },
+  {
+   "id": "toast-stack.gap.mobile",
+   "part": "Toast stack",
+   "prop": "gap",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".tz",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/md",
+    "control/padding-x-icon/sm",
+    "control/icon-gap"
+   ],
+   "bind": {
+    "token": "space/md",
+    "css": "var(--space-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/md",
+    "css": "var(--space-md)"
+   }
+  },
+  {
+   "id": "toast-zone.margin.mobile",
+   "part": "Toast zone",
+   "prop": "margin",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": null,
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": true,
+   "soi": null,
+   "at": ".tz",
+   "cat": "ok",
+   "tokens": [
+    "space/lg",
+    "layout/list-gap",
+    "form/field-gap"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "toast.shadow.web",
+   "part": "Toast",
+   "prop": "shadow",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "elev/2",
+   "sel": null,
+   "cssProps": [
+    "box-shadow"
+   ],
+   "tpl": null,
+   "noOverride": true,
+   "soi": null,
+   "at": ".ts",
+   "cat": "ok",
+   "tokens": [
+    "elev/2"
+   ],
+   "bind": {
+    "token": "elev/2",
+    "css": "0px 4px 12px 0px var(--color-shadow-md), 0px 1px 3px 0px var(--color-shadow-md-soft)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "effect",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "elev/2",
+    "css": "0px 4px 12px 0px var(--color-shadow-md), 0px 1px 3px 0px var(--color-shadow-md-soft)"
+   }
+  },
+  {
+   "id": "toast-timer.height.web",
+   "part": "Toast timer",
+   "prop": "height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 4,
+   "sel": ".tm",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": null,
+   "rules": [],
+   "note": "trùng số với size/xs nhưng đó là token của component khác; thang chung gần nhất touch/min = 24 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "group": "spacing",
+   "decided": true,
+   "must": true,
+   "resolved": {
+    "kind": "new-token",
+    "value": 4
+   }
+  },
+  {
+   "id": "featured-icon.size.web",
+   "part": "Featured icon",
+   "prop": "size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 32,
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "control/height/md"
+   ],
+   "bind": {
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   }
+  },
+  {
+   "id": "featured-icon.icon-size.web",
+   "part": "Featured icon",
+   "prop": "icon-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".pv[data-D3=a] .ib .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/lg"
+   ],
+   "bind": {
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   }
+  },
+  {
+   "id": "featured-icon-ring.width.web",
+   "part": "Featured icon ring",
+   "prop": "width",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 4,
+   "sel": null,
+   "cssProps": [
+    "width"
+   ],
+   "tpl": null,
+   "noOverride": true,
+   "soi": null,
+   "at": ".ts .ib",
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": null,
+   "rules": [],
+   "note": "trùng số với size/xs nhưng đó là token của component khác; thang chung gần nhất icon/size/sm = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "group": "icon",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "icon.icon-size.web",
+   "part": "Icon",
+   "prop": "icon-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".pv[data-D3=a] .ib .i",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "icon/size/lg"
+   ],
+   "bind": {
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/lg",
+    "css": "var(--icon-size-lg)"
+   }
+  },
+  {
+   "id": "close-icon.icon-size.web",
+   "part": "Close icon",
+   "prop": "icon-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 16,
+   "sel": null,
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": true,
+   "soi": null,
+   "at": ".ts .cl",
+   "cat": "ok",
+   "tokens": [
+    "icon/size/md"
+   ],
+   "bind": {
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "icon/size/md",
+    "css": "var(--icon-size-md)"
+   }
+  },
+  {
+   "id": "title.font-size.web",
+   "part": "Title",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".ts .tt",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
+   }
+  },
+  {
+   "id": "title.line-height.web",
+   "part": "Title",
+   "prop": "line-height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".ts .tt",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/heading/line-height",
+    "type/body/line-height",
+    "type/label/line-height"
+   ],
+   "bind": {
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
+   }
+  },
+  {
+   "id": "title.font-weight.web",
+   "part": "Title",
+   "prop": "font-weight",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 600,
+   "sel": null,
+   "cssProps": [
+    "font-weight"
+   ],
+   "tpl": null,
+   "noOverride": true,
+   "soi": null,
+   "at": ".ts .tt",
+   "cat": "ok",
+   "tokens": [
+    "Semi Bold"
+   ],
+   "bind": {
+    "token": "Semi Bold",
+    "css": "600"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "Semi Bold",
+    "css": "600"
+   }
+  },
+  {
+   "id": "description.font-size.web",
+   "part": "Description",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ts .ds",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/caption/size",
+    "type/hint/size",
+    "type/code/size"
+   ],
+   "bind": {
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
+   }
+  },
+  {
+   "id": "description.line-height.web",
+   "part": "Description",
+   "prop": "line-height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".ts .ds",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/hint/line-height"
+   ],
+   "bind": {
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
+   }
+  },
+  {
+   "id": "action.font-size.web",
+   "part": "Action",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".lk",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/caption/size",
+    "type/hint/size",
+    "type/code/size"
+   ],
+   "bind": {
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": true,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
+   }
+  },
+  {
+   "id": "action.font-weight.web",
+   "part": "Action",
+   "prop": "font-weight",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 600,
+   "sel": null,
+   "cssProps": [
+    "font-weight"
+   ],
+   "tpl": null,
+   "noOverride": true,
+   "soi": null,
+   "at": ".ts .lk",
+   "cat": "ok",
+   "tokens": [
+    "Semi Bold"
+   ],
+   "bind": {
+    "token": "Semi Bold",
+    "css": "600"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "Semi Bold",
+    "css": "600"
+   }
+  },
+  {
+   "id": "avatar.size.web",
+   "part": "Avatar",
+   "prop": "size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 32,
+   "sel": ".av",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "control/height/md"
+   ],
+   "bind": {
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "control/height/md",
+    "css": "var(--control-height-md)"
+   }
+  },
+  {
+   "id": "avatar-status.size.web",
+   "part": "Avatar status",
+   "prop": "size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 10,
+   "sel": ".av .on",
+   "cssProps": [
+    "width",
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "avatar/status-size/md"
+   ],
+   "bind": {
+    "token": "avatar/status-size/md",
+    "css": "var(--avatar-status-size-md)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "avatar/status-size/md",
+    "css": "var(--avatar-status-size-md)"
+   }
+  },
+  {
+   "id": "progress.height.web",
+   "part": "Progress",
+   "prop": "height",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".pb",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": null,
+   "rules": [],
+   "note": "trùng số với size/sm nhưng đó là token của component khác; thang chung gần nhất touch/min = 24 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "progress.radius.web",
+   "part": "Progress",
+   "prop": "radius",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 9999,
+   "sel": ".pb",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/full"
+   ],
+   "bind": {
+    "token": "radius/full",
+    "css": "var(--radius-full)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/full",
+    "css": "var(--radius-full)"
+   }
+  },
+  {
+   "id": "progress.gap.web",
+   "part": "Progress",
+   "prop": "gap",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 10,
+   "sel": ".pg",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/md",
+    "value": 8,
+    "css": "var(--space-md)"
+   },
+   "visible": false,
+   "suggest": "space/md (8)",
+   "rules": [],
+   "note": "trùng số với chip/padding-x-sm, chip/padding-x-icon-lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/md",
+    "value": 8,
+    "css": "var(--space-md)",
+    "auto": true
+   }
+  },
+  {
+   "id": "percent.font-size.web",
+   "part": "Percent",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".pg span",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/caption/size",
+    "type/hint/size",
+    "type/code/size"
+   ],
+   "bind": {
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
+   }
+  },
+  {
+   "id": "meta.font-size.web",
+   "part": "Meta",
+   "prop": "font-size",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".pg+.ds",
+   "cssProps": [
+    "font-size"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/caption/size",
+    "type/hint/size",
+    "type/code/size"
+   ],
+   "bind": {
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
+   }
+  },
+  {
+   "id": "toast.background.web",
+   "part": "Toast",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#FFFFFF",
+   "sel": ".ts",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/primary",
+    "color/bg/primary_alt"
+   ],
+   "bind": {
+    "token": "color/bg/primary",
+    "css": "var(--color-bg-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/primary",
+    "css": "var(--color-bg-primary)"
+   }
+  },
+  {
+   "id": "toast.border-color.web",
+   "part": "Toast",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#E5E5E5",
+   "sel": ".ts",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/disabled",
+    "color/border/secondary"
+   ],
+   "bind": {
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
+   }
+  },
+  {
+   "id": "title.color.web",
+   "part": "Title",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".ts",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/primary",
+    "color/text/primary"
+   ],
+   "bind": {
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 17.93,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
+   }
+  },
+  {
+   "id": "description.color.web",
+   "part": "Description",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#737373",
+   "sel": ".ts .ds",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
+    "color/text/tertiary"
+   ],
+   "bind": {
+    "token": "color/text/tertiary",
+    "css": "var(--color-text-tertiary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.74,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/tertiary",
+    "css": "var(--color-text-tertiary)"
+   }
+  },
+  {
+   "id": "action-secondary.color.web",
+   "part": "Action secondary",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#737373",
+   "sel": ".lk",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
+    "color/text/tertiary"
+   ],
+   "bind": {
+    "token": "color/text/tertiary",
+    "css": "var(--color-text-tertiary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.74,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/tertiary",
+    "css": "var(--color-text-tertiary)"
+   }
+  },
+  {
+   "id": "close-icon.color.web",
+   "part": "Close icon",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#737373",
+   "sel": ".cl",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
+    "color/text/tertiary"
+   ],
+   "bind": {
+    "token": "color/text/tertiary",
+    "css": "var(--color-text-tertiary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.74,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/tertiary",
+    "css": "var(--color-text-tertiary)"
+   }
+  },
+  {
+   "id": "featured-icon-ok.background.web",
+   "part": "Featured icon ok",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#E8F5EC",
+   "sel": ".pv[data-D3=a] .ok .ib",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/success/primary"
+   ],
+   "bind": {
+    "token": "color/bg/success/primary",
+    "css": "var(--color-bg-success-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/success/primary",
+    "css": "var(--color-bg-success-primary)"
+   }
+  },
+  {
+   "id": "icon-ok.color.web.ok",
+   "part": "Icon ok",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "ok",
+   "theme": "Light",
+   "value": "#348D57",
+   "sel": ".ok .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/success/primary"
+   ],
+   "bind": {
+    "token": "color/fg/success/primary",
+    "css": "var(--color-fg-success-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 3.67,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/fg/success/primary",
+    "css": "var(--color-fg-success-primary)"
+   }
+  },
+  {
+   "id": "alert-ok.border-color.web.ok",
+   "part": "Alert ok",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "ok",
+   "theme": "Light",
+   "value": "#1B7542",
+   "sel": ".pv[data-D2=c] .al",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/success"
+   ],
+   "bind": {
+    "token": "color/border/success",
+    "css": "var(--color-border-success)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 5.72,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/border/success",
+    "css": "var(--color-border-success)"
+   }
+  },
+  {
+   "id": "timer-ok.background.web.ok",
+   "part": "Timer ok",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "ok",
+   "theme": "Light",
+   "value": "#348D57",
+   "sel": ".ts.ok .tm",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/bg/success/solid",
+    "value": "#1B7542",
+    "css": "var(--color-bg-success-solid)"
+   },
+   "visible": true,
+   "suggest": "color/bg/success/solid (#1B7542)",
+   "rules": [],
+   "note": "trùng màu với color/fg/success/primary, color/utility/green/600 nhưng token không dành cho nền; token đúng nghĩa gần nhất color/bg/success/solid (#1B7542), ΔE 9.1",
+   "contrast": 4.12,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "featured-icon-warn.background.web",
+   "part": "Featured icon warn",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#FFF3DC",
+   "sel": ".pv[data-D3=a] .warn .ib",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/warning/primary"
+   ],
+   "bind": {
+    "token": "color/bg/warning/primary",
+    "css": "var(--color-bg-warning-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/warning/primary",
+    "css": "var(--color-bg-warning-primary)"
+   }
+  },
+  {
+   "id": "icon-warn.color.web.warn",
+   "part": "Icon warn",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "warn",
+   "theme": "Light",
+   "value": "#A56A21",
+   "sel": ".warn .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/warning/primary"
+   ],
+   "bind": {
+    "token": "color/fg/warning/primary",
+    "css": "var(--color-fg-warning-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.08,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/fg/warning/primary",
+    "css": "var(--color-fg-warning-primary)"
+   }
+  },
+  {
+   "id": "alert-warn.border-color.web.warn",
+   "part": "Alert warn",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "warn",
+   "theme": "Light",
+   "value": "#8A5300",
+   "sel": ".pv[data-D2=c] .al.warn",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/warning"
+   ],
+   "bind": {
+    "token": "color/border/warning",
+    "css": "var(--color-border-warning)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 6.33,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/border/warning",
+    "css": "var(--color-border-warning)"
+   }
+  },
+  {
+   "id": "timer-warn.background.web.warn",
+   "part": "Timer warn",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "warn",
+   "theme": "Light",
+   "value": "#A56A21",
+   "sel": ".ts.warn .tm",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/bg/warning/solid",
+    "value": "#8A5300",
+    "css": "var(--color-bg-warning-solid)"
+   },
+   "visible": true,
+   "suggest": "color/bg/warning/solid (#8A5300)",
+   "rules": [],
+   "note": "trùng màu với color/fg/warning/primary, color/utility/yellow/600 nhưng token không dành cho nền; token đúng nghĩa gần nhất color/bg/warning/solid (#8A5300), ΔE 9.5",
+   "contrast": 4.48,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "featured-icon-err.background.web",
+   "part": "Featured icon err",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#FDECEC",
+   "sel": ".pv[data-D3=a] .err .ib",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/error/primary"
+   ],
+   "bind": {
+    "token": "color/bg/error/primary",
+    "css": "var(--color-bg-error-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/error/primary",
+    "css": "var(--color-bg-error-primary)"
+   }
+  },
+  {
+   "id": "icon-err.color.web.err",
+   "part": "Icon err",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "err",
+   "theme": "Light",
+   "value": "#D23C2E",
+   "sel": ".err .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/error/primary"
+   ],
+   "bind": {
+    "token": "color/fg/error/primary",
+    "css": "var(--color-fg-error-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.15,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/fg/error/primary",
+    "css": "var(--color-fg-error-primary)"
+   }
+  },
+  {
+   "id": "alert-err.border-color.web.err",
+   "part": "Alert err",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "err",
+   "theme": "Light",
+   "value": "#B42318",
+   "sel": ".pv[data-D2=c] .al.err",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/error",
+    "color/focus/ring_error"
+   ],
+   "bind": {
+    "token": "color/border/error",
+    "css": "var(--color-border-error)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 6.57,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/border/error",
+    "css": "var(--color-border-error)"
+   }
+  },
+  {
+   "id": "timer-err.background.web.err",
+   "part": "Timer err",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "err",
+   "theme": "Light",
+   "value": "#D23C2E",
+   "sel": ".ts.err .tm",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/bg/error/solid",
+    "value": "#B42318",
+    "css": "var(--color-bg-error-solid)"
+   },
+   "visible": true,
+   "suggest": "color/bg/error/solid (#B42318)",
+   "rules": [],
+   "note": "trùng màu với color/fg/error/primary, color/utility/red/600 nhưng token không dành cho nền; token đúng nghĩa gần nhất color/bg/error/solid (#B42318), ΔE 9.1",
+   "contrast": 4.74,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "featured-icon-info.background.web",
+   "part": "Featured icon info",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#E7EFFD",
+   "sel": ".av",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/info/primary"
+   ],
+   "bind": {
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
+   }
+  },
+  {
+   "id": "icon-info.color.web.info",
+   "part": "Icon info",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "info",
+   "theme": "Light",
+   "value": "#3468D7",
+   "sel": ".info .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/info/primary"
+   ],
+   "bind": {
+    "token": "color/fg/info/primary",
+    "css": "var(--color-fg-info-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.42,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/fg/info/primary",
+    "css": "var(--color-fg-info-primary)"
+   }
+  },
+  {
+   "id": "alert-info.border-color.web.info",
+   "part": "Alert info",
+   "prop": "border-color",
+   "platform": "Web",
+   "size": "",
+   "state": "info",
+   "theme": "Light",
+   "value": "#1F4FB8",
+   "sel": ".pv[data-D2=c] .al.info",
+   "cssProps": [
+    "border-color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/info"
+   ],
+   "bind": {
+    "token": "color/border/info",
+    "css": "var(--color-border-info)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 7.32,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/border/info",
+    "css": "var(--color-border-info)"
+   }
+  },
+  {
+   "id": "timer-info.background.web.info",
+   "part": "Timer info",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "info",
+   "theme": "Light",
+   "value": "#3468D7",
+   "sel": ".ts.info .tm",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/bg/info/solid",
+    "value": "#1F4FB8",
+    "css": "var(--color-bg-info-solid)"
+   },
+   "visible": true,
+   "suggest": "color/bg/info/solid (#1F4FB8)",
+   "rules": [],
+   "note": "trùng màu với color/fg/info/primary, color/utility/blue/600 nhưng token không dành cho nền; token đúng nghĩa gần nhất color/bg/info/solid (#1F4FB8), ΔE 10.2",
+   "contrast": 5.11,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "avatar.background.web",
+   "part": "Avatar",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#E7EFFD",
+   "sel": ".av",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/info/primary"
+   ],
+   "bind": {
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
+   }
+  },
+  {
+   "id": "avatar-initials.color.web",
+   "part": "Avatar initials",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#1F4FB8",
+   "sel": ".av",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/info/primary"
+   ],
+   "bind": {
+    "token": "color/text/info/primary",
+    "css": "var(--color-text-info-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 6.33,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/info/primary",
+    "css": "var(--color-text-info-primary)"
+   }
+  },
+  {
+   "id": "avatar-status.background.web",
+   "part": "Avatar status",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#348D57",
+   "sel": ".av .on",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/bg/success/solid",
+    "value": "#1B7542",
+    "css": "var(--color-bg-success-solid)"
+   },
+   "visible": true,
+   "suggest": "color/bg/success/solid (#1B7542)",
+   "rules": [],
+   "note": "trùng màu với color/fg/success/primary, color/utility/green/600 nhưng token không dành cho nền; token đúng nghĩa gần nhất color/bg/success/solid (#1B7542), ΔE 9.1",
+   "contrast": 4.12,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "icon-neutral.color.web",
+   "part": "Icon neutral",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#737373",
+   "sel": ".nt .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
+    "color/text/tertiary"
+   ],
+   "bind": {
+    "token": "color/text/tertiary",
+    "css": "var(--color-text-tertiary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.35,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/tertiary",
+    "css": "var(--color-text-tertiary)"
+   }
+  },
+  {
+   "id": "featured-icon-neutral.background.web",
+   "part": "Featured icon neutral",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#F5F5F5",
+   "sel": ".pb",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/action/secondary",
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
+   ],
+   "bind": {
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
+   }
+  },
+  {
+   "id": "progress-track.background.web",
+   "part": "Progress track",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#F5F5F5",
+   "sel": ".pb",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/action/secondary",
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
+   ],
+   "bind": {
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
+   }
+  },
+  {
+   "id": "progress-fill.background.web",
+   "part": "Progress fill",
+   "prop": "background",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#3468D7",
+   "sel": ".pb i",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/bg/info/solid",
+    "value": "#1F4FB8",
+    "css": "var(--color-bg-info-solid)"
+   },
+   "visible": true,
+   "suggest": "color/bg/info/solid (#1F4FB8)",
+   "rules": [],
+   "note": "trùng màu với color/fg/info/primary, color/utility/blue/600 nhưng token không dành cho nền; token đúng nghĩa gần nhất color/bg/info/solid (#1F4FB8), ΔE 10.2",
+   "contrast": 4.69,
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "percent.color.web",
+   "part": "Percent",
+   "prop": "color",
+   "platform": "Web",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#737373",
+   "sel": ".pg span",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
+    "color/text/tertiary"
+   ],
+   "bind": {
+    "token": "color/text/tertiary",
+    "css": "var(--color-text-tertiary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 4.74,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/tertiary",
+    "css": "var(--color-text-tertiary)"
+   }
+  },
+  {
+   "id": "chữ-gốc.color.both",
+   "part": "Chữ gốc",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".pv",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/primary",
+    "color/text/primary"
+   ],
+   "bind": {
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
+   }
+  },
+  {
+   "id": "chữ-gốc.font-size.both",
+   "part": "Chữ gốc",
+   "prop": "font-size",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".pv",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
+   }
+  },
+  {
+   "id": "chữ-gốc.line-height.both",
+   "part": "Chữ gốc",
+   "prop": "line-height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 20,
+   "sel": ".pv",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/heading/line-height",
+    "type/body/line-height",
+    "type/label/line-height"
+   ],
+   "bind": {
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
+   }
+  },
+  {
+   "id": "thẻ-mobile.padding.both",
+   "part": "Thẻ mobile",
+   "prop": "padding",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 14,
+   "sel": ".card.m",
+   "cssProps": [
+    "padding"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/lg",
+    "value": 12,
+    "css": "var(--space-lg)"
+   },
+   "visible": false,
+   "suggest": "space/lg (12)",
+   "rules": [],
+   "note": "trùng số với chip/padding-x-lg nhưng đó là token của component khác; thang chung gần nhất space/lg = 12",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "value": 12,
+    "css": "var(--space-lg)",
+    "auto": true
+   }
+  },
+  {
+   "id": "toast.shadow.both",
+   "part": "Toast",
+   "prop": "shadow",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "0 4px 12px rgba(16,24,40,.10),0 1px 3px rgba(16,24,40,.06)",
+   "sel": ".ts",
+   "cssProps": [
+    "box-shadow"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "elev/1",
+    "value": "elev/1",
+    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+   },
+   "visible": true,
+   "suggest": "elev/1 (elev/1)",
+   "rules": [],
+   "note": "bóng tự do `0 4px 12px rgba(16,24,40,.10),0 1px 3px rgba(16,24,40,.06)` — chọn elev/1…3 hoặc thêm effect style",
+   "group": "effect",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "toast-nội-dung.padding-top.both",
+   "part": "Toast nội dung",
+   "prop": "padding-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 1,
+   "sel": ".ts .tx",
+   "cssProps": [
+    "padding-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/none",
+    "value": 0,
+    "css": "var(--space-none)"
+   },
+   "visible": false,
+   "suggest": "space/none (0)",
+   "rules": [],
+   "note": "trùng số với upload/meta-offset, command-search/highlight-padding-x nhưng đó là token của component khác; thang chung gần nhất space/none = 0",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/none",
+    "value": 0,
+    "css": "var(--space-none)",
+    "auto": true
+   }
+  },
+  {
+   "id": "description.margin-top.both",
+   "part": "Description",
+   "prop": "margin-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".ts .ds",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": null,
+   "rules": [],
+   "note": "trùng số với size/xxs nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "hàng-hành-động.gap.both",
+   "part": "Hàng hành động",
+   "prop": "gap",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".ac",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/lg"
+   ],
+   "bind": {
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/lg",
+    "css": "var(--space-lg)"
+   }
+  },
+  {
+   "id": "hàng-hành-động.margin-top.both",
+   "part": "Hàng hành động",
+   "prop": "margin-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".ac",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": true,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với size/sm nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "action.line-height.both",
+   "part": "Action",
+   "prop": "line-height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".lk",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/hint/line-height"
+   ],
+   "bind": {
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
+   }
+  },
+  {
+   "id": "action-chính.color.both",
+   "part": "Action chính",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".lk.pri",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/primary",
+    "color/text/primary"
+   ],
+   "bind": {
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
+   }
+  },
+  {
+   "id": "close-icon.padding.both",
+   "part": "Close icon",
+   "prop": "padding",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".cl",
+   "cssProps": [
+    "padding"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/xxs"
+   ],
+   "bind": {
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
+   }
+  },
+  {
+   "id": "close-icon.margin.both",
+   "part": "Close icon",
+   "prop": "margin",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".cl",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/xxs"
+   ],
+   "bind": {
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
+   }
+  },
+  {
+   "id": "close-icon.width.both",
+   "part": "Close icon",
+   "prop": "width",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 24,
+   "sel": ".cl::after,.lk::after",
+   "cssProps": [
+    "width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/ml",
+    "value": 18,
+    "css": "var(--icon-size-ml)"
+   },
+   "visible": true,
+   "suggest": "icon/size/ml (18)",
+   "rules": [],
+   "note": "trùng số với size/3xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18",
+   "group": "icon",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "close-icon.height.both",
+   "part": "Close icon",
+   "prop": "height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 24,
+   "sel": ".cl::after,.lk::after",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/ml",
+    "value": 18,
+    "css": "var(--icon-size-ml)"
+   },
+   "visible": true,
+   "suggest": "icon/size/ml (18)",
+   "rules": [],
+   "note": "trùng số với size/3xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18",
+   "group": "icon",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "close-icon.width.mobile",
+   "part": "Close icon",
+   "prop": "width",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 44,
+   "sel": ".pv[data-platform=mobile] .cl::after,.pv[data-platform=mobile] .lk::after",
+   "cssProps": [
+    "width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "touch/min"
+   ],
+   "bind": {
+    "token": "touch/min",
+    "css": "var(--touch-min)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "touch/min",
+    "css": "var(--touch-min)"
+   }
+  },
+  {
+   "id": "close-icon.height.mobile",
+   "part": "Close icon",
+   "prop": "height",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 44,
+   "sel": ".pv[data-platform=mobile] .cl::after,.pv[data-platform=mobile] .lk::after",
+   "cssProps": [
+    "height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "touch/min"
+   ],
+   "bind": {
+    "token": "touch/min",
+    "css": "var(--touch-min)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "icon",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "touch/min",
+    "css": "var(--touch-min)"
+   }
+  },
+  {
+   "id": "hàng-hành-động.gap.mobile",
+   "part": "Hàng hành động",
+   "prop": "gap",
+   "platform": "Mobile",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 24,
+   "sel": ".pv[data-platform=mobile] .ts .ac",
+   "cssProps": [
+    "gap"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/3xl",
+    "layout/section-gap",
+    "control/padding-x/lg"
+   ],
+   "bind": {
+    "token": "space/3xl",
+    "css": "var(--space-3xl)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/3xl",
+    "css": "var(--space-3xl)"
+   }
+  },
+  {
+   "id": "avatar.border-radius.both",
+   "part": "Avatar",
+   "prop": "border-radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 999,
+   "sel": ".av",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xl",
+    "value": 960,
+    "css": "var(--width-xl)"
+   },
+   "visible": true,
+   "suggest": "width/xl (960)",
+   "rules": [],
+   "note": "lệch 39",
+   "group": "radius",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "avatar.font-size.both",
+   "part": "Avatar",
+   "prop": "font-size",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".av",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "avatar-label/subtitle-size",
+    "type/caption/size",
+    "type/hint/size",
+    "type/code/size"
+   ],
+   "bind": {
+    "token": "avatar-label/subtitle-size",
+    "css": "var(--avatar-label-subtitle-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "avatar-label/subtitle-size",
+    "css": "var(--avatar-label-subtitle-size)"
+   }
+  },
+  {
+   "id": "avatar.line-height.both",
+   "part": "Avatar",
+   "prop": "line-height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 32,
+   "sel": ".av",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/title-1/line-height"
+   ],
+   "bind": {
+    "token": "type/title-1/line-height",
+    "css": "var(--type-title-1-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/title-1/line-height",
+    "css": "var(--type-title-1-line-height)"
+   }
+  },
+  {
+   "id": "avatar.margin.both",
+   "part": "Avatar",
+   "prop": "margin",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".av",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/sm"
+   ],
+   "bind": {
+    "token": "space/sm",
+    "css": "var(--space-sm)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/sm",
+    "css": "var(--space-sm)"
+   }
+  },
+  {
+   "id": "avatar.margin.both-2",
+   "part": "Avatar",
+   "prop": "margin",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".av",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/xxs"
+   ],
+   "bind": {
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
+   }
+  },
+  {
+   "id": "avatar.background.both.dark",
+   "part": "Avatar",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Dark",
+   "value": "#051F5C",
+   "sel": ".pv[data-theme=dark] .av",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/info/primary"
+   ],
+   "bind": {
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
+   }
+  },
+  {
+   "id": "avatar.color.both.dark",
+   "part": "Avatar",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Dark",
+   "value": "#93B9FF",
+   "sel": ".pv[data-theme=dark] .av",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/info/primary"
+   ],
+   "bind": {
+    "token": "color/text/info/primary",
+    "css": "var(--color-text-info-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/info/primary",
+    "css": "var(--color-text-info-primary)"
+   }
+  },
+  {
+   "id": "avatar-status.border-radius.both",
+   "part": "Avatar status",
+   "prop": "border-radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 999,
+   "sel": ".av .on",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xl",
+    "value": 960,
+    "css": "var(--width-xl)"
+   },
+   "visible": true,
+   "suggest": "width/xl (960)",
+   "rules": [],
+   "note": "lệch 39",
+   "group": "radius",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "avatar-status.border.both",
+   "part": "Avatar status",
+   "prop": "border",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".av .on",
+   "cssProps": [
+    "border"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": null,
+   "rules": [],
+   "note": "trùng số với size/xxs nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "progress.margin-top.both",
+   "part": "Progress",
+   "prop": "margin-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".pg",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": true,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với size/md nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "progress.border-radius.both",
+   "part": "Progress",
+   "prop": "border-radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 999,
+   "sel": ".pb",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xl",
+    "value": 960,
+    "css": "var(--width-xl)"
+   },
+   "visible": true,
+   "suggest": "width/xl (960)",
+   "rules": [],
+   "note": "lệch 39",
+   "group": "radius",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "timer-info.border-radius.both",
+   "part": "Timer info",
+   "prop": "border-radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 999,
+   "sel": ".ts.info .tm",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xl",
+    "value": 960,
+    "css": "var(--width-xl)"
+   },
+   "visible": true,
+   "suggest": "width/xl (960)",
+   "rules": [],
+   "note": "lệch 39",
+   "group": "radius",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "percent.line-height.both",
+   "part": "Percent",
+   "prop": "line-height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".pg span",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/hint/line-height"
+   ],
+   "bind": {
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
+   }
+  },
+  {
+   "id": "percent.min-width.both",
+   "part": "Percent",
+   "prop": "min-width",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 32,
+   "sel": ".pg span",
+   "cssProps": [
+    "min-width"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": null,
+   "rules": [],
+   "note": "trùng số với size/4xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "group": "grid",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "meta.margin-top.both",
+   "part": "Meta",
+   "prop": "margin-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".pg+.ds",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": null,
+   "rules": [],
+   "note": "trùng số với size/xxs nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "alert-nội-dung.padding-top.both",
+   "part": "Alert nội dung",
+   "prop": "padding-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 1,
+   "sel": ".al .tx",
+   "cssProps": [
+    "padding-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/none",
+    "value": 0,
+    "css": "var(--space-none)"
+   },
+   "visible": false,
+   "suggest": "space/none (0)",
+   "rules": [],
+   "note": "trùng số với upload/meta-offset, command-search/highlight-padding-x nhưng đó là token của component khác; thang chung gần nhất space/none = 0",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/none",
+    "value": 0,
+    "css": "var(--space-none)",
+    "auto": true
+   }
+  },
+  {
+   "id": "description.line-height.both",
+   "part": "Description",
+   "prop": "line-height",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 18,
+   "sel": ".al .ds",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/hint/line-height"
+   ],
+   "bind": {
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
+   }
+  },
+  {
+   "id": "description.color.both",
+   "part": "Description",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".al .ds",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/primary",
+    "color/text/primary"
+   ],
+   "bind": {
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
+   }
+  },
+  {
+   "id": "description.margin-top.both-2",
+   "part": "Description",
+   "prop": "margin-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".al .ds",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": null,
+   "rules": [],
+   "note": "trùng số với size/xxs nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "alert-button.border-color.both",
+   "part": "Alert button",
+   "prop": "border-color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#E5E5E5",
+   "sel": ".bt",
+   "cssProps": [
+    "border"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/disabled",
+    "color/border/secondary"
+   ],
+   "bind": {
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
+   }
+  },
+  {
+   "id": "alert-button.background.both",
+   "part": "Alert button",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#FFFFFF",
+   "sel": ".bt",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/primary",
+    "color/bg/primary_alt"
+   ],
+   "bind": {
+    "token": "color/bg/primary",
+    "css": "var(--color-bg-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/primary",
+    "css": "var(--color-bg-primary)"
+   }
+  },
+  {
+   "id": "alert-button.color.both",
+   "part": "Alert button",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".bt",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/primary",
+    "color/text/primary"
+   ],
+   "bind": {
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
+   }
+  },
+  {
+   "id": "alert-button.font-size.both",
+   "part": "Alert button",
+   "prop": "font-size",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 12,
+   "sel": ".bt",
+   "cssProps": [
+    "font"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/caption/size",
+    "type/hint/size",
+    "type/code/size"
+   ],
+   "bind": {
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "typo",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
+   }
+  },
+  {
+   "id": "hàng-hành-động.margin-top.both-2",
+   "part": "Hàng hành động",
+   "prop": "margin-top",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 8,
+   "sel": ".al.stack .ac",
+   "cssProps": [
+    "margin-top"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "icon/size/chip",
+    "value": 14,
+    "css": "var(--icon-size-chip)"
+   },
+   "visible": true,
+   "suggest": "icon/size/chip (14)",
+   "rules": [],
+   "note": "trùng số với size/md nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "hàng-hành-động.padding-left.both",
+   "part": "Hàng hành động",
+   "prop": "padding-left",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 44,
+   "sel": ".pv[data-D3=a] .al.stack .ac",
+   "cssProps": [
+    "padding-left"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "space/5xl",
+    "value": 40,
+    "css": "var(--space-5xl)"
+   },
+   "visible": true,
+   "suggest": "space/5xl (40)",
+   "rules": [],
+   "note": "lệch 4",
+   "group": "spacing",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "alert.background.both",
+   "part": "Alert",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#FFFFFF",
+   "sel": ".pv[data-D2=c] .al",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/primary",
+    "color/bg/primary_alt"
+   ],
+   "bind": {
+    "token": "color/bg/primary",
+    "css": "var(--color-bg-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/primary",
+    "css": "var(--color-bg-primary)"
+   }
+  },
+  {
+   "id": "title.color.both",
+   "part": "Title",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#171717",
+   "sel": ".pv[data-D2=c] .al .tt",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/primary",
+    "color/text/primary"
+   ],
+   "bind": {
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
+   }
+  },
+  {
+   "id": "featured-icon.border-radius.both",
+   "part": "Featured icon",
+   "prop": "border-radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 999,
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "width/xl",
+    "value": 960,
+    "css": "var(--width-xl)"
+   },
+   "visible": true,
+   "suggest": "width/xl (960)",
+   "rules": [],
+   "note": "lệch 39",
+   "group": "radius",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "featured-icon.margin.both",
+   "part": "Featured icon",
+   "prop": "margin",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 6,
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/sm"
+   ],
+   "bind": {
+    "token": "space/sm",
+    "css": "var(--space-sm)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/sm",
+    "css": "var(--space-sm)"
+   }
+  },
+  {
+   "id": "featured-icon.margin.both-2",
+   "part": "Featured icon",
+   "prop": "margin",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 2,
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "margin"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/xxs"
+   ],
+   "bind": {
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
+   }
+  },
+  {
+   "id": "featured-icon.shadow.both",
+   "part": "Featured icon",
+   "prop": "shadow",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "0 0 0 4px color-mix(in srgb,var(--tbg) 45%,transparent)",
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "box-shadow"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "elev/1",
+    "value": "elev/1",
+    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+   },
+   "visible": true,
+   "suggest": "elev/1 (elev/1)",
+   "rules": [],
+   "note": "bóng tự do `0 0 0 4px color-mix(in srgb,var(--tbg) 45%,transparent)` — chọn elev/1…3 hoặc thêm effect style",
+   "group": "effect",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "featured-icon.color.both",
+   "part": "Featured icon",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#348D57",
+   "sel": ".ts .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/success/primary"
+   ],
+   "bind": {
+    "token": "color/fg/success/primary",
+    "css": "var(--color-fg-success-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/fg/success/primary",
+    "css": "var(--color-fg-success-primary)"
+   }
+  },
+  {
+   "id": "toast-timer.background.both",
+   "part": "Toast timer",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#348D57",
+   "sel": ".tm",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/bg/success/solid",
+    "value": "#1B7542",
+    "css": "var(--color-bg-success-solid)"
+   },
+   "visible": true,
+   "suggest": "color/bg/success/solid (#1B7542)",
+   "rules": [],
+   "note": "trùng màu với color/fg/success/primary, color/utility/green/600 nhưng token không dành cho nền; token đúng nghĩa gần nhất color/bg/success/solid (#1B7542), ΔE 9.1",
+   "group": "color",
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "avatar.radius.both",
+   "part": "Avatar",
+   "prop": "radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 9999,
+   "sel": ".av",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/full"
+   ],
+   "bind": {
+    "token": "radius/full",
+    "css": "var(--radius-full)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/full",
+    "css": "var(--radius-full)"
+   }
+  },
+  {
+   "id": "avatar-status.radius.both",
+   "part": "Avatar status",
+   "prop": "radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 9999,
+   "sel": ".av .on",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/full"
+   ],
+   "bind": {
+    "token": "radius/full",
+    "css": "var(--radius-full)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/full",
+    "css": "var(--radius-full)"
+   }
+  },
+  {
+   "id": "timer-info.radius.both",
+   "part": "Timer info",
+   "prop": "radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 9999,
+   "sel": ".ts.info .tm",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/full"
+   ],
+   "bind": {
+    "token": "radius/full",
+    "css": "var(--radius-full)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/full",
+    "css": "var(--radius-full)"
+   }
+  },
+  {
+   "id": "alert.border-color.both",
+   "part": "Alert",
+   "prop": "border-color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#93CFA6",
+   "sel": ".al",
+   "cssProps": [
+    "border"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/border/success_subtle"
+   ],
+   "bind": {
+    "token": "color/border/success_subtle",
+    "css": "var(--color-border-success_subtle)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/border/success_subtle",
+    "css": "var(--color-border-success_subtle)"
+   }
+  },
+  {
+   "id": "featured-icon.color.both-2",
+   "part": "Featured icon",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#348D57",
+   "sel": ".al .ib",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/fg/success/primary"
+   ],
+   "bind": {
+    "token": "color/fg/success/primary",
+    "css": "var(--color-fg-success-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/fg/success/primary",
+    "css": "var(--color-fg-success-primary)"
+   }
+  },
+  {
+   "id": "featured-icon.radius.both",
+   "part": "Featured icon",
+   "prop": "radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 9999,
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/full"
+   ],
+   "bind": {
+    "token": "radius/full",
+    "css": "var(--radius-full)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/full",
+    "css": "var(--radius-full)"
+   }
+  },
+  {
+   "id": "featured-icon.background.both",
+   "part": "Featured icon",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "#E8F5EC",
+   "sel": ".pv[data-D3=a] .ib",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/success/primary"
+   ],
+   "bind": {
+    "token": "color/bg/success/primary",
+    "css": "var(--color-bg-success-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/success/primary",
+    "css": "var(--color-bg-success-primary)"
+   }
+  },
+  {
+   "id": "alert-ok.background.both.ok",
+   "part": "Alert ok",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "ok",
+   "theme": "Light",
+   "value": "#E8F5EC",
+   "sel": ".al.ok",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/success/primary"
+   ],
+   "bind": {
+    "token": "color/bg/success/primary",
+    "css": "var(--color-bg-success-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/success/primary",
+    "css": "var(--color-bg-success-primary)"
+   }
+  },
+  {
+   "id": "alert-title-ok.color.both.ok",
+   "part": "Alert title ok",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "ok",
+   "theme": "Light",
+   "value": "#1B7542",
+   "sel": ".al.ok .tt",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/success/primary"
+   ],
+   "bind": {
+    "token": "color/text/success/primary",
+    "css": "var(--color-text-success-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 5.1,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/success/primary",
+    "css": "var(--color-text-success-primary)"
+   }
+  },
+  {
+   "id": "alert-warn.background.both.warn",
+   "part": "Alert warn",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "warn",
+   "theme": "Light",
+   "value": "#FFF3DC",
+   "sel": ".al.warn",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/warning/primary"
+   ],
+   "bind": {
+    "token": "color/bg/warning/primary",
+    "css": "var(--color-bg-warning-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/warning/primary",
+    "css": "var(--color-bg-warning-primary)"
+   }
+  },
+  {
+   "id": "alert-title-warn.color.both.warn",
+   "part": "Alert title warn",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "warn",
+   "theme": "Light",
+   "value": "#8A5300",
+   "sel": ".al.warn .tt",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/warning/primary"
+   ],
+   "bind": {
+    "token": "color/text/warning/primary",
+    "css": "var(--color-text-warning-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 5.76,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/warning/primary",
+    "css": "var(--color-text-warning-primary)"
+   }
+  },
+  {
+   "id": "alert-err.background.both.err",
+   "part": "Alert err",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "err",
+   "theme": "Light",
+   "value": "#FDECEC",
+   "sel": ".al.err",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/error/primary"
+   ],
+   "bind": {
+    "token": "color/bg/error/primary",
+    "css": "var(--color-bg-error-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/error/primary",
+    "css": "var(--color-bg-error-primary)"
+   }
+  },
+  {
+   "id": "alert-title-err.color.both.err",
+   "part": "Alert title err",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "err",
+   "theme": "Light",
+   "value": "#B42318",
+   "sel": ".al.err .tt",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/error/primary",
+    "color/text/error/primary_hover"
+   ],
+   "bind": {
+    "token": "color/text/error/primary",
+    "css": "var(--color-text-error-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 5.76,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/error/primary",
+    "css": "var(--color-text-error-primary)"
+   }
+  },
+  {
+   "id": "alert-info.background.both.info",
+   "part": "Alert info",
+   "prop": "background",
+   "platform": "Both",
+   "size": "",
+   "state": "info",
+   "theme": "Light",
+   "value": "#E7EFFD",
+   "sel": ".al.info",
+   "cssProps": [
+    "background"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/bg/info/primary"
+   ],
+   "bind": {
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
+   }
+  },
+  {
+   "id": "alert-title-info.color.both.info",
+   "part": "Alert title info",
+   "prop": "color",
+   "platform": "Both",
+   "size": "",
+   "state": "info",
+   "theme": "Light",
+   "value": "#1F4FB8",
+   "sel": ".al.info .tt",
+   "cssProps": [
+    "color"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "color/text/info/primary"
+   ],
+   "bind": {
+    "token": "color/text/info/primary",
+    "css": "var(--color-text-info-primary)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "contrast": 6.33,
+   "group": "color",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "color/text/info/primary",
+    "css": "var(--color-text-info-primary)"
+   }
+  },
+  {
+   "id": "progress-fill.radius.both",
+   "part": "Progress fill",
+   "prop": "radius",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 9999,
+   "sel": ".pb i",
+   "cssProps": [
+    "border-radius"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "radius/full"
+   ],
+   "bind": {
+    "token": "radius/full",
+    "css": "var(--radius-full)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "radius",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "radius/full",
+    "css": "var(--radius-full)"
+   }
+  },
+  {
+   "id": "alert-actions-stacked.padding-left.both",
+   "part": "Alert actions stacked",
+   "prop": "padding-left",
+   "platform": "Both",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": 32,
+   "sel": ".al.stack .ac",
+   "cssProps": [
+    "padding-left"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "space/4xl"
+   ],
+   "bind": {
+    "token": "space/4xl",
+    "css": "var(--space-4xl)"
+   },
+   "to": null,
+   "visible": false,
+   "suggest": null,
+   "rules": [],
+   "note": "",
+   "group": "spacing",
+   "decided": false,
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "space/4xl",
+    "css": "var(--space-4xl)"
+   }
+  },
+  {
+   "id": "audit.typo.combo-12-32",
+   "part": "Tổ hợp chữ",
+   "prop": "line-height",
+   "platform": "",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "12/32",
+   "sel": ".av",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": "type/hint (Web)",
+   "rules": [
+    "cỡ 12 / dòng 32 không thuộc thang type/* (foundations mục 4.2)"
+   ],
+   "note": "cùng cỡ chữ thì sửa cao dòng; khác cỡ thì chọn vai gần nhất",
+   "fix": {
+    "token": "type/hint (Web)",
+    "value": "12/18",
+    "css": "18px"
+   },
+   "group": "typo",
+   "audit": true,
+   "count": 1,
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  }
+ ]
+}

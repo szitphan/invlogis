@@ -1,0 +1,1267 @@
+{
+ "primitives_new": {
+  "dark/0": "#191919",
+  "dark/1": "#202020",
+  "dark/2": "#232323",
+  "dark/3": "#2B2B2B",
+  "dark/4": "#2E2E2E",
+  "alpha/black-10": "#0000001A"
+ },
+ "semantic": {
+  "color/bg/surface": {
+   "Light": "white",
+   "Dark": "dark/0",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền trang và nền mọi thẻ, bảng, sheet. Dùng ở: Card, Record Card, Summary Card, List Item."
+  },
+  "color/bg/muted": {
+   "Light": "neutral/50",
+   "Dark": "dark/2",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền khối phụ trong thẻ, ô nhập app. Dùng ở: khối tóm tắt trong Card, Text Field (app), OTP Field."
+  },
+  "color/bg/hover": {
+   "Light": "neutral/50",
+   "Dark": "dark/2",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền khi rê chuột lên thứ nền trắng. Dùng ở: dòng bảng, mục menu, List Item (web)."
+  },
+  "color/bg/selected": {
+   "Light": "neutral/100",
+   "Dark": "dark/3",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền mục đang chọn khi khách không có màu riêng. Dùng ở: List Item đang chọn, mục menu đang chọn."
+  },
+  "color/bg/pressed": {
+   "Light": "neutral/200",
+   "Dark": "neutral/700",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền đang bấm của thứ nền trắng: dòng danh sách, thẻ bấm được (app không có hover); chữ phụ trên nền này dùng text/secondary-strong (DEC-316)"
+  },
+  "color/bg/muted-hover": {
+   "Light": "neutral/100",
+   "Dark": "dark/3",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Rê chuột trên khối nền muted (DEC-316)"
+  },
+  "color/bg/raised": {
+   "Light": "white",
+   "Dark": "dark/1",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Mặt nổi trên trang: menu, dropdown, dialog, sheet, toast; ở Dark sáng hơn nền trang (DEC-316)"
+  },
+  "color/bg/track": {
+   "Light": "neutral/200",
+   "Dark": "neutral/700",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Rãnh: công tắc tắt, thanh tiến độ, slider (DEC-316)"
+  },
+  "color/bg/track-hover": {
+   "Light": "neutral/300",
+   "Dark": "neutral/600",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Rãnh công tắc tắt khi rê chuột (DEC-316)"
+  },
+  "color/bg/skeleton": {
+   "Light": "neutral/100",
+   "Dark": "dark/3",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Khối chờ tải (skeleton) (DEC-316)"
+  },
+  "color/bg/disabled": {
+   "Light": "neutral/100",
+   "Dark": "dark/3",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền control tắt: nút, ô nhập, ô chọn (DEC-316)"
+  },
+  "color/bg/inverse": {
+   "Light": "neutral/900",
+   "Dark": "neutral/200",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền tối tương phản cao. Dùng ở: Tooltip, toast trung tính."
+  },
+  "color/text/primary": {
+   "Light": "neutral/900",
+   "Dark": "neutral/200",
+   "scopes": [
+    "TEXT_FILL"
+   ],
+   "use": "Tiêu đề, giá trị chính. Dùng ở: tiêu đề Card, giá trị trong Record Card, chữ Text Field đã nhập."
+  },
+  "color/text/emphasis": {
+   "Light": "neutral/700",
+   "Dark": "neutral/300",
+   "scopes": [
+    "TEXT_FILL"
+   ],
+   "use": "Chữ nhấn bậc 700: tiêu đề mục, nhãn nhóm (DEC-316)"
+  },
+  "color/text/secondary": {
+   "Light": "neutral/500",
+   "Dark": "neutral/400",
+   "scopes": [
+    "TEXT_FILL"
+   ],
+   "use": "Chữ phụ: nhãn trường (web = app), mô tả, thời gian. Dùng ở: nhãn Text Field, nhãn dòng Record Card, Status Row."
+  },
+  "color/text/secondary-strong": {
+   "Light": "neutral/600",
+   "Dark": "neutral/300",
+   "scopes": [
+    "TEXT_FILL"
+   ],
+   "use": "Chữ phụ trên nền nhấn (hover, đang chọn) để giữ ≥ 4,5:1 (DEC-289). Dùng ở: dòng phụ thẻ phạm vi khi Hover/Open, dòng chọn Hover/Selected của Scope dialog."
+  },
+  "color/text/secondary-hover": {
+   "Light": "neutral/700",
+   "Dark": "neutral/300",
+   "scopes": [
+    "TEXT_FILL"
+   ],
+   "use": "Chữ phụ khi rê chuột: breadcrumb, liên kết phụ, mục menu (DEC-316)"
+  },
+  "color/text/placeholder": {
+   "Light": "neutral/500",
+   "Dark": "neutral/400",
+   "scopes": [
+    "TEXT_FILL"
+   ],
+   "use": "Chữ gợi ý trong ô trống (DEC-316)"
+  },
+  "color/text/disabled": {
+   "Light": "neutral/400",
+   "Dark": "neutral/600",
+   "scopes": [
+    "TEXT_FILL"
+   ],
+   "use": "Chữ control tắt; không dùng cho nội dung (DEC-316)"
+  },
+  "color/text/tertiary": {
+   "Light": "neutral/400",
+   "Dark": "neutral/600",
+   "scopes": [],
+   "use": "Bí danh cũ của color/text/disabled (cùng giá trị), giữ để không gãy tham chiếu; không gắn mới, ẩn khỏi bảng chọn (DEC-316)"
+  },
+  "color/text/inverse": {
+   "Light": "white",
+   "Dark": "neutral/950",
+   "scopes": [
+    "TEXT_FILL"
+   ],
+   "use": "Chữ trên nền đậm. Dùng ở: chữ nút Primary, chữ Tooltip."
+  },
+  "color/text/on-solid": {
+   "Light": "white",
+   "Dark": "white",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chữ, icon trên nền đặc giữ màu ở cả hai chế độ: toast, huy hiệu đếm, nền status/*-solid (DEC-316)"
+  },
+  "color/icon/primary": {
+   "Light": "neutral/700",
+   "Dark": "neutral/300",
+   "scopes": [
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Icon đi cùng chữ chính. Dùng ở: icon dòng Record Card, icon List Item."
+  },
+  "color/icon/secondary": {
+   "Light": "neutral/500",
+   "Dark": "neutral/400",
+   "scopes": [
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Icon phụ: chevron, icon trong ô. Dùng ở: icon Text Field, chevron List Item."
+  },
+  "color/icon/secondary-hover": {
+   "Light": "neutral/700",
+   "Dark": "neutral/300",
+   "scopes": [
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Icon phụ khi rê chuột: icon trợ giúp, nút icon (DEC-316)"
+  },
+  "color/icon/disabled": {
+   "Light": "neutral/400",
+   "Dark": "neutral/600",
+   "scopes": [
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Icon control tắt (DEC-316)"
+  },
+  "color/icon/inverse": {
+   "Light": "white",
+   "Dark": "neutral/950",
+   "scopes": [
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Icon trên nền đậm đổi theo chế độ: Tooltip, nút Primary (DEC-316)"
+  },
+  "color/border/default": {
+   "Light": "neutral/200",
+   "Dark": "dark/4",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Viền dùng nhiều nhất: viền thẻ, kẻ bảng, vạch chia. Dùng ở: Card, Record Card, List Item (vạch chia)."
+  },
+  "color/border/subtle": {
+   "Light": "neutral/100",
+   "Dark": "dark/2",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Vạch chia rất nhạt, trục biểu đồ (DEC-316)"
+  },
+  "color/border/strong": {
+   "Light": "neutral/300",
+   "Dark": "neutral/700",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Viền tách khối đậm hơn mặc định. Dùng ở: viền nút Secondary, chip viền."
+  },
+  "color/border/input": {
+   "Light": "neutral/500",
+   "Dark": "neutral/500",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Viền tương phản cao (≥ 3:1) cho thứ người dùng nhập hoặc chọn. Dùng ở: Text Field, OTP Field, radio Selectable Card."
+  },
+  "color/border/disabled": {
+   "Light": "neutral/200",
+   "Dark": "dark/4",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Viền control tắt (DEC-316)"
+  },
+  "color/border/focus": {
+   "Light": "charcoal/900",
+   "Dark": "neutral/200",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Vòng focus 2px và viền ô đang gõ; than chì cho mọi khách (DEC-170). Dùng ở: .focus / Ring, Text Field đang gõ."
+  },
+  "color/border/focus-danger": {
+   "Light": "red/700",
+   "Dark": "red/300",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Vòng focus của control đang lỗi và nút Danger (DEC-316)"
+  },
+  "color/border/danger": {
+   "Light": "red/700",
+   "Dark": "red/300",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Viền lỗi. Dùng ở: Text Field lỗi, OTP Field lỗi."
+  },
+  "color/border/overlay": {
+   "Light": "alpha/black-10",
+   "Dark": "dark/4",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Viền menu nổi, dropdown, thông báo: mép đều trên nền trắng lẫn nền xám (DEC-316)"
+  },
+  "color/action/primary": {
+   "Light": "charcoal/900",
+   "Dark": "neutral/200",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền hành động chính. Dùng ở: nút Primary, tab chip đang chọn."
+  },
+  "color/action/primary-hover": {
+   "Light": "charcoal/800",
+   "Dark": "neutral/300",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền nút Primary khi rê chuột."
+  },
+  "color/action/primary-pressed": {
+   "Light": "charcoal/950",
+   "Dark": "neutral/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền nút Primary khi bấm."
+  },
+  "color/action/secondary": {
+   "Light": "neutral/100",
+   "Dark": "dark/3",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền hành động phụ và nền xám của trạng thái tắt. Dùng ở: nút Secondary, nút Disabled."
+  },
+  "color/action/secondary-hover": {
+   "Light": "neutral/200",
+   "Dark": "neutral/700",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền nút Secondary khi rê chuột."
+  },
+  "color/action/secondary-pressed": {
+   "Light": "neutral/300",
+   "Dark": "neutral/600",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền nút Secondary khi bấm; nút Outline dùng chung thang secondary khi rê, bấm."
+  },
+  "color/action/danger": {
+   "Light": "red/700",
+   "Dark": "red/300",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL",
+    "TEXT_FILL"
+   ],
+   "use": "Chữ, icon hành động phá huỷ. Dùng ở: nút Danger (xoá, huỷ lệnh)."
+  },
+  "color/action/danger-subtle": {
+   "Light": "red/50",
+   "Dark": "red/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền nhạt của nút Danger."
+  },
+  "color/action/danger-subtle-hover": {
+   "Light": "red/100",
+   "Dark": "red/900",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền nhạt nút Danger khi rê chuột."
+  },
+  "color/action/danger-subtle-pressed": {
+   "Light": "red/200",
+   "Dark": "red/800",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Nền nhạt nút Danger khi bấm."
+  },
+  "color/accent/solid": {
+   "Light": "color/brand/800",
+   "Dark": "color/brand/300",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Màu khách · Công tắc bật, ô chọn, radio, gạch tab đang chọn, thanh tiến độ (DEC-316)"
+  },
+  "color/accent/solid-hover": {
+   "Light": "color/brand/900",
+   "Dark": "color/brand/200",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Màu khách · Rê chuột trên phần mang màu khách (DEC-316)"
+  },
+  "color/accent/solid-pressed": {
+   "Light": "color/brand/950",
+   "Dark": "color/brand/100",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Màu khách · Đang bấm phần mang màu khách (DEC-316)"
+  },
+  "color/accent/text": {
+   "Light": "color/brand/700",
+   "Dark": "color/brand/300",
+   "scopes": [
+    "TEXT_FILL"
+   ],
+   "use": "Màu khách · Chữ liên kết, mã chứng từ (DEC-316)"
+  },
+  "color/accent/text-hover": {
+   "Light": "color/brand/800",
+   "Dark": "color/brand/200",
+   "scopes": [
+    "TEXT_FILL"
+   ],
+   "use": "Màu khách · Chữ liên kết khi rê chuột (DEC-316)"
+  },
+  "color/accent/fg": {
+   "Light": "color/brand/800",
+   "Dark": "color/brand/200",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Màu khách · Chữ viết tắt, icon avatar trên nền accent/bg (DEC-316)"
+  },
+  "color/accent/bg": {
+   "Light": "color/brand/100",
+   "Dark": "color/brand/900",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Màu khách · Nền mục menu đang chọn, nền avatar (DEC-316)"
+  },
+  "color/accent/bg-subtle": {
+   "Light": "color/brand/50",
+   "Dark": "color/brand/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Màu khách · Nền dòng bảng đang chọn (DEC-316)"
+  },
+  "color/accent/border": {
+   "Light": "color/brand/800",
+   "Dark": "color/brand/300",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Màu khách · Viền chỗ đang chọn: thẻ chọn, ô chọn (DEC-316)"
+  },
+  "color/status/success-text": {
+   "Light": "green/700",
+   "Dark": "green/300",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Thành công · Chữ trạng thái: chữ dưới ô, chữ trong banner."
+  },
+  "color/status/success-icon": {
+   "Light": "green/600",
+   "Dark": "green/400",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Thành công · Icon trạng thái."
+  },
+  "color/status/success-bg": {
+   "Light": "green/50",
+   "Dark": "green/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Thành công · Nền nhạt: banner, thanh thông báo."
+  },
+  "color/status/success-bg-strong": {
+   "Light": "green/100",
+   "Dark": "green/900",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Thành công · Nền vòng Featured icon."
+  },
+  "color/status/success-solid": {
+   "Light": "green/700",
+   "Dark": "green/700",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Thành công · Nền đặc chữ trắng: toast, huy hiệu đếm."
+  },
+  "color/status/success-solid-hover": {
+   "Light": "green/800",
+   "Dark": "green/600",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Thành công · Nền đặc khi rê chuột."
+  },
+  "color/status/success-border": {
+   "Light": "green/700",
+   "Dark": "green/300",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Thành công · Viền trạng thái."
+  },
+  "color/status/success-border-subtle": {
+   "Light": "green/300",
+   "Dark": "green/700",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Thành công · Viền nhạt quanh banner."
+  },
+  "color/status/warning-text": {
+   "Light": "yellow/700",
+   "Dark": "yellow/300",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Cảnh báo · Chữ trạng thái: chữ dưới ô, chữ trong banner."
+  },
+  "color/status/warning-icon": {
+   "Light": "yellow/600",
+   "Dark": "yellow/400",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Cảnh báo · Icon trạng thái."
+  },
+  "color/status/warning-bg": {
+   "Light": "yellow/50",
+   "Dark": "yellow/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Cảnh báo · Nền nhạt: banner, thanh thông báo."
+  },
+  "color/status/warning-bg-strong": {
+   "Light": "yellow/100",
+   "Dark": "yellow/900",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Cảnh báo · Nền vòng Featured icon."
+  },
+  "color/status/warning-solid": {
+   "Light": "yellow/700",
+   "Dark": "yellow/700",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Cảnh báo · Nền đặc chữ trắng: toast, huy hiệu đếm."
+  },
+  "color/status/warning-solid-hover": {
+   "Light": "yellow/800",
+   "Dark": "yellow/600",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Cảnh báo · Nền đặc khi rê chuột."
+  },
+  "color/status/warning-border": {
+   "Light": "yellow/700",
+   "Dark": "yellow/300",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Cảnh báo · Viền trạng thái."
+  },
+  "color/status/warning-border-subtle": {
+   "Light": "yellow/300",
+   "Dark": "yellow/700",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Cảnh báo · Viền nhạt quanh banner."
+  },
+  "color/status/danger-text": {
+   "Light": "red/700",
+   "Dark": "red/300",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Lỗi · Chữ trạng thái: chữ dưới ô, chữ trong banner."
+  },
+  "color/status/danger-icon": {
+   "Light": "red/600",
+   "Dark": "red/400",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Lỗi · Icon trạng thái."
+  },
+  "color/status/danger-bg": {
+   "Light": "red/50",
+   "Dark": "red/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Lỗi · Nền nhạt: banner, thanh thông báo."
+  },
+  "color/status/danger-bg-strong": {
+   "Light": "red/100",
+   "Dark": "red/900",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Lỗi · Nền vòng Featured icon."
+  },
+  "color/status/danger-solid": {
+   "Light": "red/700",
+   "Dark": "red/700",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Lỗi · Nền đặc chữ trắng: toast, huy hiệu đếm."
+  },
+  "color/status/danger-solid-hover": {
+   "Light": "red/800",
+   "Dark": "red/600",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Lỗi · Nền đặc khi rê chuột."
+  },
+  "color/status/danger-border": {
+   "Light": "red/700",
+   "Dark": "red/300",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Lỗi · Viền trạng thái."
+  },
+  "color/status/danger-border-subtle": {
+   "Light": "red/300",
+   "Dark": "red/700",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Lỗi · Viền nhạt quanh banner."
+  },
+  "color/status/info-text": {
+   "Light": "blue/700",
+   "Dark": "blue/300",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Thông tin · Chữ trạng thái: chữ dưới ô, chữ trong banner."
+  },
+  "color/status/info-icon": {
+   "Light": "blue/600",
+   "Dark": "blue/400",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Thông tin · Icon trạng thái."
+  },
+  "color/status/info-bg": {
+   "Light": "blue/50",
+   "Dark": "blue/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Thông tin · Nền nhạt: banner, thanh thông báo."
+  },
+  "color/status/info-bg-strong": {
+   "Light": "blue/100",
+   "Dark": "blue/900",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Thông tin · Nền vòng Featured icon."
+  },
+  "color/status/info-solid": {
+   "Light": "blue/700",
+   "Dark": "blue/700",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Thông tin · Nền đặc chữ trắng: toast, huy hiệu đếm."
+  },
+  "color/status/info-solid-hover": {
+   "Light": "blue/800",
+   "Dark": "blue/600",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Thông tin · Nền đặc khi rê chuột."
+  },
+  "color/status/info-border": {
+   "Light": "blue/700",
+   "Dark": "blue/300",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Thông tin · Viền trạng thái."
+  },
+  "color/status/info-border-subtle": {
+   "Light": "blue/300",
+   "Dark": "blue/700",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Thông tin · Viền nhạt quanh banner."
+  },
+  "color/chip/gray/bg": {
+   "Light": "neutral/100",
+   "Dark": "neutral/900",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip trạng thái gray: nền. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/gray/fg": {
+   "Light": "neutral/600",
+   "Dark": "neutral/400",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chip trạng thái gray: chữ, icon. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/gray/border": {
+   "Light": "neutral/200",
+   "Dark": "neutral/800",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Chip gray: viền Badge Outline (DEC-308) (DEC-316)"
+  },
+  "color/chip/gray/dot": {
+   "Light": "neutral/500",
+   "Dark": "neutral/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip gray: chấm Badge Dot (DEC-310) (DEC-316)"
+  },
+  "color/chip/blue/bg": {
+   "Light": "blue/50",
+   "Dark": "blue/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip trạng thái blue: nền. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/blue/fg": {
+   "Light": "blue/700",
+   "Dark": "blue/300",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chip trạng thái blue: chữ, icon. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/blue/border": {
+   "Light": "blue/200",
+   "Dark": "blue/800",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Chip blue: viền Badge Outline (DEC-308) (DEC-316)"
+  },
+  "color/chip/blue/dot": {
+   "Light": "blue/600",
+   "Dark": "blue/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip blue: chấm Badge Dot (DEC-310) (DEC-316)"
+  },
+  "color/chip/teal/bg": {
+   "Light": "teal/50",
+   "Dark": "teal/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip trạng thái teal: nền. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/teal/fg": {
+   "Light": "teal/700",
+   "Dark": "teal/300",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chip trạng thái teal: chữ, icon. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/teal/border": {
+   "Light": "teal/200",
+   "Dark": "teal/800",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Chip teal: viền Badge Outline (DEC-308) (DEC-316)"
+  },
+  "color/chip/teal/dot": {
+   "Light": "teal/600",
+   "Dark": "teal/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip teal: chấm Badge Dot (DEC-310) (DEC-316)"
+  },
+  "color/chip/purple/bg": {
+   "Light": "purple/50",
+   "Dark": "purple/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip trạng thái purple: nền. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/purple/fg": {
+   "Light": "purple/700",
+   "Dark": "purple/300",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chip trạng thái purple: chữ, icon. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/purple/border": {
+   "Light": "purple/200",
+   "Dark": "purple/800",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Chip purple: viền Badge Outline (DEC-308) (DEC-316)"
+  },
+  "color/chip/purple/dot": {
+   "Light": "purple/600",
+   "Dark": "purple/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip purple: chấm Badge Dot (DEC-310) (DEC-316)"
+  },
+  "color/chip/yellow/bg": {
+   "Light": "yellow/50",
+   "Dark": "yellow/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip trạng thái yellow: nền. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/yellow/fg": {
+   "Light": "yellow/700",
+   "Dark": "yellow/300",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chip trạng thái yellow: chữ, icon. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/yellow/border": {
+   "Light": "yellow/200",
+   "Dark": "yellow/800",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Chip yellow: viền Badge Outline (DEC-308) (DEC-316)"
+  },
+  "color/chip/yellow/dot": {
+   "Light": "yellow/600",
+   "Dark": "yellow/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip yellow: chấm Badge Dot (DEC-310) (DEC-316)"
+  },
+  "color/chip/green/bg": {
+   "Light": "green/50",
+   "Dark": "green/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip trạng thái green: nền. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/green/fg": {
+   "Light": "green/700",
+   "Dark": "green/300",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chip trạng thái green: chữ, icon. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/green/border": {
+   "Light": "green/200",
+   "Dark": "green/800",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Chip green: viền Badge Outline (DEC-308) (DEC-316)"
+  },
+  "color/chip/green/dot": {
+   "Light": "green/600",
+   "Dark": "green/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip green: chấm Badge Dot (DEC-310) (DEC-316)"
+  },
+  "color/chip/red/bg": {
+   "Light": "red/50",
+   "Dark": "red/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip trạng thái red: nền. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/red/fg": {
+   "Light": "red/700",
+   "Dark": "red/300",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chip trạng thái red: chữ, icon. Dùng ở: Status Chip, Status Row."
+  },
+  "color/chip/red/border": {
+   "Light": "red/200",
+   "Dark": "red/800",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Chip red: viền Badge Outline (DEC-308) (DEC-316)"
+  },
+  "color/chip/red/dot": {
+   "Light": "red/600",
+   "Dark": "red/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip red: chấm Badge Dot (DEC-310) (DEC-316)"
+  },
+  "color/chip/orange/bg": {
+   "Light": "orange/100",
+   "Dark": "orange/950",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip trạng thái orange: nền. Dùng ở: Status Chip, Status Row. Light orange/100 (review R1, DEC-311: tách khỏi chip vàng)."
+  },
+  "color/chip/orange/fg": {
+   "Light": "orange/800",
+   "Dark": "orange/300",
+   "scopes": [
+    "TEXT_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chip trạng thái orange: chữ, icon. Dùng ở: Status Chip, Status Row. Light orange/800 (review R1, DEC-311)."
+  },
+  "color/chip/orange/border": {
+   "Light": "orange/200",
+   "Dark": "orange/800",
+   "scopes": [
+    "STROKE_COLOR"
+   ],
+   "use": "Chip orange: viền Badge Outline (DEC-308) (DEC-316)"
+  },
+  "color/chip/orange/dot": {
+   "Light": "orange/600",
+   "Dark": "orange/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Chip orange: chấm Badge Dot (DEC-310) (DEC-316)"
+  },
+  "color/chart/1": {
+   "Light": "blue/500",
+   "Dark": "blue/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chuỗi dữ liệu biểu đồ thứ 1 (DEC-316)"
+  },
+  "color/chart/2": {
+   "Light": "teal/500",
+   "Dark": "teal/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chuỗi dữ liệu biểu đồ thứ 2 (DEC-316)"
+  },
+  "color/chart/3": {
+   "Light": "purple/500",
+   "Dark": "purple/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chuỗi dữ liệu biểu đồ thứ 3 (DEC-316)"
+  },
+  "color/chart/4": {
+   "Light": "yellow/500",
+   "Dark": "yellow/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chuỗi dữ liệu biểu đồ thứ 4 (DEC-316)"
+  },
+  "color/chart/5": {
+   "Light": "green/500",
+   "Dark": "green/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chuỗi dữ liệu biểu đồ thứ 5 (DEC-316)"
+  },
+  "color/chart/6": {
+   "Light": "red/500",
+   "Dark": "red/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chuỗi dữ liệu biểu đồ thứ 6 (DEC-316)"
+  },
+  "color/chart/7": {
+   "Light": "orange/500",
+   "Dark": "orange/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chuỗi dữ liệu biểu đồ thứ 7 (DEC-316)"
+  },
+  "color/chart/8": {
+   "Light": "neutral/500",
+   "Dark": "neutral/400",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL",
+    "STROKE_COLOR"
+   ],
+   "use": "Chuỗi dữ liệu biểu đồ thứ 8 (DEC-316)"
+  },
+  "color/overlay/scrim": {
+   "Light": "alpha/neutral-950-50",
+   "Dark": "alpha/neutral-950-50",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL"
+   ],
+   "use": "Lớp phủ sau dialog, sheet."
+  },
+  "color/shadow/sm": {
+   "Light": "alpha/shadow-6",
+   "Dark": "alpha/black-40",
+   "scopes": [
+    "EFFECT_COLOR"
+   ],
+   "use": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/1."
+  },
+  "color/shadow/md": {
+   "Light": "alpha/shadow-10",
+   "Dark": "alpha/black-50",
+   "scopes": [
+    "EFFECT_COLOR"
+   ],
+   "use": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/2 lớp 1, elev/3 lớp 2."
+  },
+  "color/shadow/md-soft": {
+   "Light": "alpha/shadow-6",
+   "Dark": "alpha/black-40",
+   "scopes": [
+    "EFFECT_COLOR"
+   ],
+   "use": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/2 lớp 2."
+  },
+  "color/shadow/lg": {
+   "Light": "alpha/shadow-16",
+   "Dark": "alpha/black-60",
+   "scopes": [
+    "EFFECT_COLOR"
+   ],
+   "use": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/3 lớp 1."
+  },
+  "color/focus/gap": {
+   "Light": "white",
+   "Dark": "dark/0",
+   "scopes": [
+    "FRAME_FILL",
+    "SHAPE_FILL",
+    "EFFECT_COLOR"
+   ],
+   "use": "Khe 2px giữa control và vòng focus, trùng nền trang (DEC-258, thay collection Context). Dùng ở: .focus / Ring, ruột nút Ghost, Outline."
+  }
+ },
+ "semantic_delete": {
+  "color/bg/canvas": "color/bg/surface"
+ },
+ "component_rename": {
+  "field/bg/web": "field/bg/default",
+  "field/fg/label-web": "field/fg/label"
+ },
+ "component_delete": {
+  "field/bg/app": "field/bg/default",
+  "field/fg/label-app": "field/fg/label"
+ },
+ "component": {
+  "button/bg/primary": "color/action/primary",
+  "button/bg/primary-hover": "color/action/primary-hover",
+  "button/bg/primary-pressed": "color/action/primary-pressed",
+  "button/fg/primary": "color/text/inverse",
+  "button/bg/secondary": "color/action/secondary",
+  "button/bg/secondary-hover": "color/action/secondary-hover",
+  "button/bg/secondary-pressed": "color/action/secondary-pressed",
+  "button/fg/secondary": "color/text/primary",
+  "button/bg/ghost-hover": "color/bg/selected",
+  "button/bg/ghost-pressed": "color/action/secondary-hover",
+  "button/fg/ghost": "color/text/primary",
+  "button/bg/danger": "color/action/danger-subtle",
+  "button/bg/danger-hover": "color/action/danger-subtle-hover",
+  "button/bg/danger-pressed": "color/action/danger-subtle-pressed",
+  "button/fg/danger": "color/action/danger",
+  "button/bg/outline-hover": "color/action/secondary-hover",
+  "button/bg/outline-pressed": "color/action/secondary-pressed",
+  "button/fg/outline": "color/text/primary",
+  "button/border/outline": "color/border/strong",
+  "button/border/outline-disabled": "color/border/disabled",
+  "button/bg/disabled": "color/bg/disabled",
+  "button/fg/disabled": "color/text/disabled",
+  "button/focus/danger": "color/border/focus-danger",
+  "avatar/bg": "color/accent/bg",
+  "avatar/fg": "color/accent/fg",
+  "avatar/status/online": "color/chip/green/fg",
+  "avatar/status/busy": "color/chip/orange/fg",
+  "avatar/status/away": "color/chip/yellow/fg",
+  "avatar/status/offline": "color/chip/gray/fg",
+  "avatar/upload/border": "color/border/input",
+  "avatar/upload/fg": "color/text/secondary",
+  "avatar/scrim": "color/overlay/scrim",
+  "avatar/edit/bg": "color/action/primary",
+  "avatar/edit/fg": "color/text/inverse",
+  "avatar/overflow/bg": "color/bg/muted",
+  "avatar/overflow/fg": "color/text/secondary",
+  "tooltip/bg": "color/bg/inverse",
+  "tooltip/fg": "color/text/inverse",
+  "field/bg/default": "color/bg/surface",
+  "field/bg/hover": "color/bg/hover",
+  "field/bg/disabled": "color/bg/disabled",
+  "field/bg/readonly": "color/bg/muted",
+  "field/border/default": "color/border/input",
+  "field/border/active": "color/border/focus",
+  "field/border/error": "color/border/danger",
+  "field/border/disabled": "color/border/disabled",
+  "field/fg/value": "color/text/primary",
+  "field/fg/placeholder": "color/text/placeholder",
+  "field/fg/label": "color/text/secondary",
+  "field/fg/helper": "color/text/secondary",
+  "field/fg/error": "color/status/danger-text",
+  "field/fg/disabled": "color/text/disabled",
+  "field/fg/icon": "color/icon/secondary",
+  "progress/bg/track": "color/bg/track",
+  "progress/fill/brand": "color/accent/solid",
+  "progress/fill/success": "color/status/success-text",
+  "progress/fill/info": "color/status/info-text",
+  "progress/fill/warning": "color/status/warning-text",
+  "progress/fill/danger": "color/status/danger-text",
+  "progress/fill/neutral": "color/chip/gray/fg",
+  "upload/border-drag": "color/text/primary",
+  "upload/divider": "color/border/strong"
+ },
+ "collections": {
+  "prim": "0. Primitives",
+  "sem": "1. Semantic",
+  "brand": "7. Brand",
+  "comp": "8. Component"
+ },
+ "note": "Alias theo ID trong đúng collection (file có collection trùng tên biến: Color, Chocolate…, Thử · vòng 4). Giá trị dạng {alias: VariableID}. Xoá bằng deleteVariable(name,{replaceWith}). codeSyntax WEB = var(--tên-thay-/-bằng--)."
+}

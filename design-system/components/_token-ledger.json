@@ -1,0 +1,1785 @@
+{
+ "$note": "Sổ ánh xạ token tầng Component đã gộp về token chung (DEC-318 màu, DEC-319 số đo). Mỗi dòng: tên cũ → token chung thay thế + giá trị gốc. Dùng để tách lại collection component bằng script khi cần — không gắn mới vào tên cũ.",
+ "color": {
+  "collection": "8. Component",
+  "dec": "DEC-318",
+  "removed": "2026-11-01",
+  "tokens": {
+   "button/bg/primary": {
+    "replacement": "color/action/primary",
+    "original": {
+     "Value": "color/action/primary"
+    }
+   },
+   "button/bg/primary-hover": {
+    "replacement": "color/action/primary-hover",
+    "original": {
+     "Value": "color/action/primary-hover"
+    }
+   },
+   "button/bg/primary-pressed": {
+    "replacement": "color/action/primary-pressed",
+    "original": {
+     "Value": "color/action/primary-pressed"
+    }
+   },
+   "button/fg/primary": {
+    "replacement": "color/text/inverse",
+    "original": {
+     "Value": "color/text/inverse"
+    }
+   },
+   "button/bg/secondary": {
+    "replacement": "color/action/secondary",
+    "original": {
+     "Value": "color/action/secondary"
+    }
+   },
+   "button/bg/secondary-hover": {
+    "replacement": "color/action/secondary-hover",
+    "original": {
+     "Value": "color/action/secondary-hover"
+    }
+   },
+   "button/bg/secondary-pressed": {
+    "replacement": "color/action/secondary-pressed",
+    "original": {
+     "Value": "color/action/secondary-pressed"
+    }
+   },
+   "button/fg/secondary": {
+    "replacement": "color/text/primary",
+    "original": {
+     "Value": "color/text/primary"
+    }
+   },
+   "button/bg/ghost-hover": {
+    "replacement": "color/bg/selected",
+    "original": {
+     "Value": "color/bg/selected"
+    }
+   },
+   "button/bg/ghost-pressed": {
+    "replacement": "color/action/secondary-hover",
+    "original": {
+     "Value": "color/action/secondary-hover"
+    }
+   },
+   "button/fg/ghost": {
+    "replacement": "color/text/primary",
+    "original": {
+     "Value": "color/text/primary"
+    }
+   },
+   "button/bg/danger": {
+    "replacement": "color/bg/error/primary",
+    "original": {
+     "Value": "color/bg/error/primary"
+    }
+   },
+   "button/bg/danger-hover": {
+    "replacement": "color/bg/error/primary_hover",
+    "original": {
+     "Value": "color/bg/error/primary_hover"
+    }
+   },
+   "button/bg/danger-pressed": {
+    "replacement": "color/bg/error/primary_pressed",
+    "original": {
+     "Value": "color/bg/error/primary_pressed"
+    }
+   },
+   "button/fg/danger": {
+    "replacement": "color/text/error/primary",
+    "original": {
+     "Value": "color/text/error/primary"
+    }
+   },
+   "button/bg/outline-hover": {
+    "replacement": "color/action/secondary-hover",
+    "original": {
+     "Value": "color/action/secondary-hover"
+    }
+   },
+   "button/bg/outline-pressed": {
+    "replacement": "color/action/secondary-pressed",
+    "original": {
+     "Value": "color/action/secondary-pressed"
+    }
+   },
+   "button/fg/outline": {
+    "replacement": "color/text/primary",
+    "original": {
+     "Value": "color/text/primary"
+    }
+   },
+   "button/border/outline": {
+    "replacement": "color/border/primary",
+    "original": {
+     "Value": "color/border/primary"
+    }
+   },
+   "button/border/outline-disabled": {
+    "replacement": "color/border/disabled",
+    "original": {
+     "Value": "color/border/disabled"
+    }
+   },
+   "button/bg/disabled": {
+    "replacement": "color/bg/disabled",
+    "original": {
+     "Value": "color/bg/disabled"
+    }
+   },
+   "button/fg/disabled": {
+    "replacement": "color/text/disabled",
+    "original": {
+     "Value": "color/text/disabled"
+    }
+   },
+   "button/focus/danger": {
+    "replacement": "color/focus/ring_error",
+    "original": {
+     "Value": "color/focus/ring_error"
+    }
+   },
+   "avatar/bg": {
+    "replacement": "color/accent/bg",
+    "original": {
+     "Value": "color/accent/bg"
+    }
+   },
+   "avatar/fg": {
+    "replacement": "color/accent/fg",
+    "original": {
+     "Value": "color/accent/fg"
+    }
+   },
+   "avatar/status/online": {
+    "replacement": "color/utility/green/700",
+    "original": {
+     "Value": "color/utility/green/700"
+    }
+   },
+   "avatar/status/busy": {
+    "replacement": "color/utility/orange/800",
+    "original": {
+     "Value": "color/utility/orange/800"
+    }
+   },
+   "avatar/status/away": {
+    "replacement": "color/utility/yellow/700",
+    "original": {
+     "Value": "color/utility/yellow/700"
+    }
+   },
+   "avatar/status/offline": {
+    "replacement": "color/utility/neutral/600",
+    "original": {
+     "Value": "color/utility/neutral/600"
+    }
+   },
+   "avatar/upload/border": {
+    "replacement": "color/border/input",
+    "original": {
+     "Value": "color/border/input"
+    }
+   },
+   "avatar/upload/fg": {
+    "replacement": "color/text/tertiary",
+    "original": {
+     "Value": "color/text/tertiary"
+    }
+   },
+   "avatar/scrim": {
+    "replacement": "color/bg/overlay",
+    "original": {
+     "Value": "color/bg/overlay"
+    }
+   },
+   "avatar/edit/bg": {
+    "replacement": "color/action/primary",
+    "original": {
+     "Value": "color/action/primary"
+    }
+   },
+   "avatar/edit/fg": {
+    "replacement": "color/text/inverse",
+    "original": {
+     "Value": "color/text/inverse"
+    }
+   },
+   "avatar/overflow/bg": {
+    "replacement": "color/bg/secondary",
+    "original": {
+     "Value": "color/bg/secondary"
+    }
+   },
+   "avatar/overflow/fg": {
+    "replacement": "color/text/tertiary",
+    "original": {
+     "Value": "color/text/tertiary"
+    }
+   },
+   "tooltip/bg": {
+    "replacement": "color/bg/primary_solid",
+    "original": {
+     "Value": "color/bg/primary_solid"
+    }
+   },
+   "tooltip/fg": {
+    "replacement": "color/text/inverse",
+    "original": {
+     "Value": "color/text/inverse"
+    }
+   },
+   "field/bg/default": {
+    "replacement": "color/bg/primary",
+    "original": {
+     "Value": "color/bg/primary"
+    }
+   },
+   "field/bg/hover": {
+    "replacement": "color/bg/primary_hover",
+    "original": {
+     "Value": "color/bg/primary_hover"
+    }
+   },
+   "field/bg/disabled": {
+    "replacement": "color/bg/disabled",
+    "original": {
+     "Value": "color/bg/disabled"
+    }
+   },
+   "field/bg/readonly": {
+    "replacement": "color/bg/secondary",
+    "original": {
+     "Value": "color/bg/secondary"
+    }
+   },
+   "field/border/default": {
+    "replacement": "color/border/input",
+    "original": {
+     "Value": "color/border/input"
+    }
+   },
+   "field/border/active": {
+    "replacement": "color/focus/ring",
+    "original": {
+     "Value": "color/focus/ring"
+    }
+   },
+   "field/border/error": {
+    "replacement": "color/border/error",
+    "original": {
+     "Value": "color/border/error"
+    }
+   },
+   "field/border/disabled": {
+    "replacement": "color/border/disabled",
+    "original": {
+     "Value": "color/border/disabled"
+    }
+   },
+   "field/fg/value": {
+    "replacement": "color/text/primary",
+    "original": {
+     "Value": "color/text/primary"
+    }
+   },
+   "field/fg/placeholder": {
+    "replacement": "color/text/placeholder",
+    "original": {
+     "Value": "color/text/placeholder"
+    }
+   },
+   "field/fg/label": {
+    "replacement": "color/text/tertiary",
+    "original": {
+     "Value": "color/text/tertiary"
+    }
+   },
+   "field/fg/helper": {
+    "replacement": "color/text/tertiary",
+    "original": {
+     "Value": "color/text/tertiary"
+    }
+   },
+   "field/fg/error": {
+    "replacement": "color/text/error/primary",
+    "original": {
+     "Value": "color/text/error/primary"
+    }
+   },
+   "field/fg/disabled": {
+    "replacement": "color/text/disabled",
+    "original": {
+     "Value": "color/text/disabled"
+    }
+   },
+   "field/fg/icon": {
+    "replacement": "color/fg/quaternary",
+    "original": {
+     "Value": "color/fg/quaternary"
+    }
+   },
+   "progress/bg/track": {
+    "replacement": "color/bg/quaternary",
+    "original": {
+     "Value": "color/bg/quaternary"
+    }
+   },
+   "progress/fill/brand": {
+    "replacement": "color/accent/solid",
+    "original": {
+     "Value": "color/accent/solid"
+    }
+   },
+   "progress/fill/success": {
+    "replacement": "color/text/success/primary",
+    "original": {
+     "Value": "color/text/success/primary"
+    }
+   },
+   "progress/fill/info": {
+    "replacement": "color/text/info/primary",
+    "original": {
+     "Value": "color/text/info/primary"
+    }
+   },
+   "progress/fill/warning": {
+    "replacement": "color/text/warning/primary",
+    "original": {
+     "Value": "color/text/warning/primary"
+    }
+   },
+   "progress/fill/danger": {
+    "replacement": "color/text/error/primary",
+    "original": {
+     "Value": "color/text/error/primary"
+    }
+   },
+   "progress/fill/neutral": {
+    "replacement": "color/utility/neutral/600",
+    "original": {
+     "Value": "color/utility/neutral/600"
+    }
+   },
+   "upload/border-drag": {
+    "replacement": "color/text/primary",
+    "original": {
+     "Value": "color/text/primary"
+    }
+   },
+   "upload/divider": {
+    "replacement": "color/border/primary",
+    "original": {
+     "Value": "color/border/primary"
+    }
+   }
+  }
+ },
+ "size": {
+  "collection": "6. Platform · Component sizes",
+  "dec": "DEC-319",
+  "tokens": {
+   "chip/height": {
+    "original": {
+     "Web": "size/3xl",
+     "Mobile": "size/3xl"
+    },
+    "use": "Cao chip MD (DEC-259 theo Untitled: sm 22 · md 24 · lg 28)",
+    "replacement": "size/3xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/height-sm": {
+    "original": {
+     "Web": 22,
+     "Mobile": 22
+    },
+    "use": "Cao chip Size SM: 16 = một dòng chữ 12/16, dùng ở đầu thẻ bản ghi; web và app cùng 16 (DEC-239); MD là chip/height",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "chip/height-lg": {
+    "original": {
+     "Web": 28,
+     "Mobile": 28
+    },
+    "use": "Cao chip LG (DEC-259)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "chip/font-size-sm": {
+    "original": {
+     "Web": 12,
+     "Mobile": 12
+    },
+    "use": "Chip SM: cỡ chữ cố định 12 cả web lẫn app, không theo type/caption/size (DEC-239)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "chip/line-height-sm": {
+    "original": {
+     "Web": 18,
+     "Mobile": 18
+    },
+    "use": "Chip SM: cao dòng cố định 16 cả web lẫn app (DEC-239)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "chip/label-max-width": {
+    "original": {
+     "Web": "size/11xl",
+     "Mobile": "size/11xl"
+    },
+    "use": "Chip: rộng tối đa lớp nhãn 160, dài hơn cắt \"…\" một dòng (DEC-239)",
+    "replacement": "size/11xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/count-only-offset": {
+    "original": {
+     "Web": "space/xs",
+     "Mobile": "space/xs"
+    },
+    "use": "Badge Count Only: đệm trái khung số = chip/padding-x − chip/padding-x-icon (4 ở mọi cỡ) → số cách đều hai bên 10 · 12 · 14 (DEC-310)",
+    "replacement": "space/xs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/count-inset": {
+    "original": {
+     "Web": 3,
+     "Mobile": 3
+    },
+    "use": "Badge SM có ô đếm: lề phải 3 = (22 − 16) / 2 (DEC-303, DEC-310)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "chip/count-inset-lg": {
+    "original": {
+     "Web": "space/xs",
+     "Mobile": "space/xs"
+    },
+    "use": "Badge MD, LG có ô đếm: lề phải 4 = (24 − 16) / 2 = (28 − 20) / 2 (DEC-303, DEC-310)",
+    "replacement": "space/xs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/count-height-sm": {
+    "original": {
+     "Web": "size/xl",
+     "Mobile": "size/xl"
+    },
+    "use": "Badge: cao ô đếm SM 16 (DEC-303)",
+    "replacement": "size/xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/count-height": {
+    "original": {
+     "Web": "size/xl",
+     "Mobile": "size/xl"
+    },
+    "use": "Badge: cao ô đếm MD 16 (DEC-310; trước 18)",
+    "replacement": "size/xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/count-height-lg": {
+    "original": {
+     "Web": "size/2xl",
+     "Mobile": "size/2xl"
+    },
+    "use": "Badge: cao ô đếm LG 20 (DEC-303)",
+    "replacement": "size/2xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/count-radius": {
+    "original": {
+     "Web": 3,
+     "Mobile": 3
+    },
+    "use": "Badge Color/Outline/Modern: bo ô đếm SM, MD 3 (DEC-303)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "chip/count-radius-lg": {
+    "original": {
+     "Web": "radius/xs",
+     "Mobile": "radius/xs"
+    },
+    "use": "Badge Color/Outline/Modern: bo ô đếm LG 4 (DEC-303)",
+    "replacement": "radius/xs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/count-font-size": {
+    "original": {
+     "Web": 12,
+     "Mobile": 12
+    },
+    "use": "Badge: chữ số đếm và Count Only 12 cố định web + app (review R11, DEC-304)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "chip/count-line-height": {
+    "original": {
+     "Web": 16,
+     "Mobile": 16
+    },
+    "use": "Badge: dòng chữ số đếm 16 cố định web + app (DEC-304)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar-label/width": {
+    "original": {
+     "Web": 240,
+     "Mobile": 240
+    },
+    "use": "Avatar label: rộng mặc định 240, tên và dòng phụ cắt \"…\" một dòng (DEC-303)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar-label/subtitle-size": {
+    "original": {
+     "Web": 12,
+     "Mobile": 12
+    },
+    "use": "Avatar label: chữ dòng phụ 12 cố định web + app (DEC-304)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar-label/subtitle-line-height": {
+    "original": {
+     "Web": 16,
+     "Mobile": 16
+    },
+    "use": "Avatar label: dòng phụ cao 16 cố định web + app (DEC-304)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "chip/padding-x": {
+    "original": {
+     "Web": "space/lg",
+     "Mobile": "space/lg"
+    },
+    "use": "Badge MD: lề phía chữ 12 (DEC-310)",
+    "replacement": "space/lg",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/padding-x-sm": {
+    "original": {
+     "Web": "space/10",
+     "Mobile": "space/10"
+    },
+    "use": "Badge SM: lề phía chữ 10 (DEC-310)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "chip/padding-x-lg": {
+    "original": {
+     "Web": 14,
+     "Mobile": 14
+    },
+    "use": "Badge LG: lề phía chữ 14 (DEC-310)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "chip/padding-x-icon": {
+    "original": {
+     "Web": "space/md",
+     "Mobile": "space/md"
+    },
+    "use": "Badge MD: lề phía chấm/icon 8 (DEC-310)",
+    "replacement": "space/md",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/padding-x-icon-sm": {
+    "original": {
+     "Web": "space/sm",
+     "Mobile": "space/sm"
+    },
+    "use": "Badge SM: lề phía chấm/icon 6 (DEC-310)",
+    "replacement": "space/sm",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/padding-x-icon-lg": {
+    "original": {
+     "Web": "space/10",
+     "Mobile": "space/10"
+    },
+    "use": "Badge LG: lề phía chấm/icon 10 (DEC-310)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "chip/icon-gap": {
+    "original": {
+     "Web": "space/xs",
+     "Mobile": "space/xs"
+    },
+    "use": "Badge: icon → chữ → ô đếm 4, mọi cỡ (DEC-310)",
+    "replacement": "space/xs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/dot-gap": {
+    "original": {
+     "Web": "space/sm",
+     "Mobile": "space/sm"
+    },
+    "use": "Badge: chấm → chữ 6, mọi cỡ (DEC-310)",
+    "replacement": "space/sm",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/dot-extra-gap": {
+    "original": {
+     "Web": "space/xxs",
+     "Mobile": "space/xxs"
+    },
+    "use": "Badge: đệm phải khung chấm = chip/dot-gap 6 − chip/icon-gap 4, để một gap chung ra hai khoảng (DEC-310)",
+    "replacement": "space/xxs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "chip/dot-size": {
+    "original": {
+     "Web": "size/sm",
+     "Mobile": "size/sm"
+    },
+    "use": "Badge: chấm tròn 6, màu chip/{tone}/fg (DEC-310)",
+    "replacement": "size/sm",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/size/xs": {
+    "original": {
+     "Web": "size/3xl",
+     "Mobile": "size/3xl"
+    },
+    "use": "Cỡ avatar XS 24 (thang XS–XXL, DEC-303; trước DEC-303 tên avatar/size/sm)",
+    "replacement": "size/3xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/size/sm": {
+    "original": {
+     "Web": "size/4xl",
+     "Mobile": "size/4xl"
+    },
+    "use": "Cỡ avatar SM 32 (DEC-303)",
+    "replacement": "size/4xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/size/md": {
+    "original": {
+     "Web": 36,
+     "Mobile": 36
+    },
+    "use": "Cỡ avatar MD (DEC-201)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar/size/lg": {
+    "original": {
+     "Web": "size/6xl",
+     "Mobile": "size/6xl"
+    },
+    "use": "Cỡ avatar LG (DEC-201)",
+    "replacement": "size/6xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/status-size/xs": {
+    "original": {
+     "Web": "size/sm",
+     "Mobile": "size/sm"
+    },
+    "use": "Chấm trạng thái avatar XS, chưa tính viền trắng 2 (DEC-303; trước là status-size/sm)",
+    "replacement": "size/sm",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/status-size/sm": {
+    "original": {
+     "Web": "size/md",
+     "Mobile": "size/md"
+    },
+    "use": "Chấm trạng thái avatar SM 32, chưa tính viền trắng 2 (DEC-303)",
+    "replacement": "size/md",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/status-size/md": {
+    "original": {
+     "Web": 10,
+     "Mobile": 10
+    },
+    "use": "Chấm trạng thái avatar MD, chưa tính viền trắng 2 (DEC-201)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar/status-size/lg": {
+    "original": {
+     "Web": "size/lg",
+     "Mobile": "size/lg"
+    },
+    "use": "Chấm trạng thái avatar LG, chưa tính viền trắng 2 (DEC-201)",
+    "replacement": "size/lg",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/edit-size/md": {
+    "original": {
+     "Web": "size/2xl",
+     "Mobile": "size/2xl"
+    },
+    "use": "Nút đổi ảnh trên avatar MD (DEC-201)",
+    "replacement": "size/2xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/edit-size/lg": {
+    "original": {
+     "Web": "size/3xl",
+     "Mobile": "size/3xl"
+    },
+    "use": "Nút đổi ảnh trên avatar LG (DEC-201)",
+    "replacement": "size/3xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/size/xl": {
+    "original": {
+     "Web": "size/7xl",
+     "Mobile": "size/7xl"
+    },
+    "use": "Cỡ avatar XL, ảnh đại diện đổi được (DEC-203)",
+    "replacement": "size/7xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/size/xxl": {
+    "original": {
+     "Web": 88,
+     "Mobile": 88
+    },
+    "use": "Cỡ avatar XXL, đầu trang hồ sơ (DEC-203)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar/status-size/xl": {
+    "original": {
+     "Web": 14,
+     "Mobile": 14
+    },
+    "use": "Chấm trạng thái avatar XL (DEC-203)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar/status-size/xxl": {
+    "original": {
+     "Web": "size/xl",
+     "Mobile": "size/xl"
+    },
+    "use": "Chấm trạng thái avatar XXL (DEC-203)",
+    "replacement": "size/xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/edit-size/xl": {
+    "original": {
+     "Web": 28,
+     "Mobile": 28
+    },
+    "use": "Nút đổi ảnh trên avatar XL (DEC-203)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar/edit-size/xxl": {
+    "original": {
+     "Web": "size/4xl",
+     "Mobile": "size/4xl"
+    },
+    "use": "Nút đổi ảnh trên avatar XXL (DEC-203)",
+    "replacement": "size/4xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/icon-size/sm": {
+    "original": {
+     "Web": 14,
+     "Mobile": 14
+    },
+    "use": "Icon trong Avatar SM (Content=Icon, Upload): 14 (DEC-242)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar/icon-size/md": {
+    "original": {
+     "Web": "size/2xl",
+     "Mobile": "size/2xl"
+    },
+    "use": "Icon trong Avatar MD (Content=Icon, Upload): 20 (DEC-242)",
+    "replacement": "size/2xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/icon-size/lg": {
+    "original": {
+     "Web": "size/3xl",
+     "Mobile": "size/3xl"
+    },
+    "use": "Icon trong Avatar LG (Content=Icon, Upload): 24 (thư viện icon có tới cỡ 24) (DEC-242)",
+    "replacement": "size/3xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/icon-size/xl": {
+    "original": {
+     "Web": "size/3xl",
+     "Mobile": "size/3xl"
+    },
+    "use": "Icon trong Avatar XL (Content=Icon, Upload): 24 (DEC-242)",
+    "replacement": "size/3xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/icon-size/xxl": {
+    "original": {
+     "Web": "size/3xl",
+     "Mobile": "size/3xl"
+    },
+    "use": "Icon trong Avatar XXL (Content=Icon, Upload): 24 (DEC-242)",
+    "replacement": "size/3xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/edit-icon-size/md": {
+    "original": {
+     "Web": "size/lg",
+     "Mobile": "size/lg"
+    },
+    "use": "Icon camera nút đổi ảnh MD (nút 20): 12 (DEC-242)",
+    "replacement": "size/lg",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/edit-icon-size/lg": {
+    "original": {
+     "Web": 14,
+     "Mobile": 14
+    },
+    "use": "Icon camera nút đổi ảnh LG (nút 24): 14 (DEC-242)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar/edit-icon-size/xl": {
+    "original": {
+     "Web": "size/xl",
+     "Mobile": "size/xl"
+    },
+    "use": "Icon camera nút đổi ảnh XL (nút 28): 16 (DEC-242)",
+    "replacement": "size/xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/edit-icon-size/xxl": {
+    "original": {
+     "Web": "size/xl",
+     "Mobile": "size/xl"
+    },
+    "use": "Icon camera nút đổi ảnh XXL (nút 32): 16 (DEC-242)",
+    "replacement": "size/xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/spinner-size/sm": {
+    "original": {
+     "Web": "size/lg",
+     "Mobile": "size/lg"
+    },
+    "use": "Vòng quay Uploading, Avatar SM: 12 (DEC-242)",
+    "replacement": "size/lg",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/spinner-size/md": {
+    "original": {
+     "Web": "size/xl",
+     "Mobile": "size/xl"
+    },
+    "use": "Vòng quay Uploading, Avatar MD: 16 (DEC-242)",
+    "replacement": "size/xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/spinner-size/lg": {
+    "original": {
+     "Web": "size/2xl",
+     "Mobile": "size/2xl"
+    },
+    "use": "Vòng quay Uploading, Avatar LG: 20 (DEC-242)",
+    "replacement": "size/2xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/spinner-size/xl": {
+    "original": {
+     "Web": "size/3xl",
+     "Mobile": "size/3xl"
+    },
+    "use": "Vòng quay Uploading, Avatar XL: 24 (DEC-242)",
+    "replacement": "size/3xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/spinner-size/xxl": {
+    "original": {
+     "Web": 28,
+     "Mobile": 28
+    },
+    "use": "Vòng quay Uploading, Avatar XXL: 28 (DEC-242)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar/group-overlap/sm": {
+    "original": {
+     "Web": -6,
+     "Mobile": -6
+    },
+    "use": "Avatar Group SM: khoảng giữa các avatar là số ÂM = lùi đè ¼ đường kính (6), gắn vào itemSpacing của Base / Avatar Group (DEC-205, DEC-242)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar/group-overlap/md": {
+    "original": {
+     "Web": -8,
+     "Mobile": -8
+    },
+    "use": "Avatar Group MD: khoảng giữa các avatar là số ÂM = lùi đè ¼ đường kính (8), gắn vào itemSpacing của Base / Avatar Group (DEC-205, DEC-242)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar/group-overlap/lg": {
+    "original": {
+     "Web": -12,
+     "Mobile": -12
+    },
+    "use": "Avatar Group LG: khoảng giữa các avatar là số ÂM = lùi đè ¼ đường kính (12), gắn vào itemSpacing của Base / Avatar Group (DEC-205, DEC-242)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "avatar/ring": {
+    "original": {
+     "Web": "size/xxs",
+     "Mobile": "size/xxs"
+    },
+    "use": "Viền trắng quanh avatar trong Group, chấm trạng thái, nút đổi ảnh (DEC-205)",
+    "replacement": "size/xxs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "avatar/status-border": {
+    "original": {
+     "Web": "size/xxs",
+     "Mobile": "size/xxs"
+    },
+    "use": "Viền xám của chấm Offline (chấm rỗng) (DEC-303)",
+    "replacement": "size/xxs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "tooltip/padding-x": {
+    "original": {
+     "Web": "space/md",
+     "Mobile": "space/md"
+    },
+    "use": "Lề trái phải tooltip (DEC-206)",
+    "replacement": "space/md",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "tooltip/padding-y": {
+    "original": {
+     "Web": "space/xs",
+     "Mobile": "space/xs"
+    },
+    "use": "Lề trên dưới tooltip (DEC-206)",
+    "replacement": "space/xs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "tooltip/radius": {
+    "original": {
+     "Web": "radius/md",
+     "Mobile": "radius/md"
+    },
+    "use": "Bo tooltip (DEC-206)",
+    "replacement": "radius/md",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "tooltip/max-width": {
+    "original": {
+     "Web": 240,
+     "Mobile": 240
+    },
+    "use": "Rộng tối đa tooltip, quá thì xuống dòng (DEC-206)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "tooltip/offset": {
+    "original": {
+     "Web": "space/xs",
+     "Mobile": "space/xs"
+    },
+    "use": "Tooltip cách đối tượng (DEC-206)",
+    "replacement": "space/xs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "tooltip/arrow-w": {
+    "original": {
+     "Web": "size/md",
+     "Mobile": "size/md"
+    },
+    "use": "Rộng mũi tên tooltip (DEC-206)",
+    "replacement": "size/md",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "tooltip/arrow-h": {
+    "original": {
+     "Web": "size/xs",
+     "Mobile": "size/xs"
+    },
+    "use": "Cao mũi tên tooltip (DEC-206)",
+    "replacement": "size/xs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "help-sheet/title-line-height": {
+    "original": {
+     "Web": 24,
+     "Mobile": 24
+    },
+    "use": "Dòng tiêu đề Help sheet (app, cỡ 17) (DEC-301)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "help-sheet/body-gap": {
+    "original": {
+     "Web": "space/2xl",
+     "Mobile": "space/2xl"
+    },
+    "use": "Khoảng dưới đoạn nội dung Help sheet, trên nút Đã hiểu (DEC-301)",
+    "replacement": "space/2xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "upload/action-font-size": {
+    "original": {
+     "Web": 13,
+     "Mobile": 13
+    },
+    "use": "Chữ nút Chọn tệp, link Thử lại (DEC-307)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "upload/disabled-opacity": {
+    "original": {
+     "Web": 0.6,
+     "Mobile": 0.6
+    },
+    "use": "Vùng kéo thả bị khoá (DEC-307)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "upload/divider-height": {
+    "original": {
+     "Web": "size/lg",
+     "Mobile": "size/lg"
+    },
+    "use": "Cao vạch chia dòng phụ file (DEC-307)",
+    "replacement": "size/lg",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "upload/divider-width": {
+    "original": {
+     "Web": 1,
+     "Mobile": 1
+    },
+    "use": "Rộng vạch chia dòng phụ file (DEC-307)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "upload/app-tap-min-height": {
+    "original": {
+     "Web": 72,
+     "Mobile": 72
+    },
+    "use": "Cao tối thiểu vùng bấm tải lên trên app (DEC-307)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "upload/sheet-radius": {
+    "original": {
+     "Web": 28,
+     "Mobile": 28
+    },
+    "use": "Bo sheet chọn nguồn file (lệch DEC-259, user chốt) (DEC-307)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "upload/required-gap": {
+    "original": {
+     "Web": 3,
+     "Mobile": 3
+    },
+    "use": "Khoảng trước dấu * bắt buộc (DEC-307)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "upload/error-icon-offset": {
+    "original": {
+     "Web": "space/xxs",
+     "Mobile": "space/xxs"
+    },
+    "use": "Icon lỗi dịch xuống cho thẳng dòng chữ (DEC-307)",
+    "replacement": "space/xxs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "upload/compact-text-min-width": {
+    "original": {
+     "Web": 150,
+     "Mobile": 150
+    },
+    "use": "Rộng tối thiểu chữ vùng kéo thả gọn (DEC-307)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "upload/link-underline-offset": {
+    "original": {
+     "Web": "space/xxs",
+     "Mobile": "space/xxs"
+    },
+    "use": "Khoảng gạch chân link Bấm để tải lên (DEC-307)",
+    "replacement": "space/xxs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "upload/featured-gap": {
+    "original": {
+     "Web": "space/md",
+     "Mobile": "space/md"
+    },
+    "use": "Khoảng dưới Featured icon trong vùng kéo thả (DEC-307)",
+    "replacement": "space/md",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "upload/meta-offset": {
+    "original": {
+     "Web": 1,
+     "Mobile": 1
+    },
+    "use": "Khoảng trên dòng phụ file (DEC-307)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "upload/retry-offset": {
+    "original": {
+     "Web": "space/sm",
+     "Mobile": "space/sm"
+    },
+    "use": "Khoảng trên link Thử lại (DEC-307)",
+    "replacement": "space/sm",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "upload/delete-offset-top": {
+    "original": {
+     "Web": "space/sm",
+     "Mobile": "space/sm"
+    },
+    "use": "Nút xoá dịch xuống (DEC-307)",
+    "replacement": "space/sm",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "upload/delete-offset-right": {
+    "original": {
+     "Web": "space/xxs",
+     "Mobile": "space/xxs"
+    },
+    "use": "Nút xoá lùi vào từ mép phải (DEC-307)",
+    "replacement": "space/xxs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "upload/sheet-title-gap": {
+    "original": {
+     "Web": "space/sm",
+     "Mobile": "space/sm"
+    },
+    "use": "Khoảng dưới tiêu đề sheet chọn nguồn (DEC-307)",
+    "replacement": "space/sm",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "field/border-width": {
+    "original": {
+     "Web": 1,
+     "Mobile": 1
+    },
+    "use": "Ô nhập: viền nghỉ 1px (DEC-184) (DEC-207)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "field/border-width-active": {
+    "original": {
+     "Web": "size/xxs",
+     "Mobile": "size/xxs"
+    },
+    "use": "Ô nhập: viền đang gõ và viền lỗi 2px (DEC-184) (DEC-207)",
+    "replacement": "size/xxs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "field/width-default": {
+    "original": {
+     "Web": 320,
+     "Mobile": 361
+    },
+    "use": "Ô nhập: rộng mặc định. Web 320; app 361 = 393 − 2 × 16 (DEC-192). Dùng thật thì Fill theo khung (DEC-207)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "field/edge-inset": {
+    "original": {
+     "Web": "space/md",
+     "Mobile": "space/xl"
+    },
+    "use": "Ô nhập: lề từ mép ô tới khối đầu. Mép chữ = edge-inset + text-inset = 12 web, 16 app; icon đầu, cuối cách mép đúng số này (DEC-184, DEC-192, DEC-196) (DEC-207)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "field/text-inset": {
+    "original": {
+     "Web": "space/xs",
+     "Mobile": "space/none"
+    },
+    "use": "Ô nhập: lề trái phải vùng chữ. Web 4 = 12 − 8, app 0 (DEC-184) (DEC-207)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "field/content-gap": {
+    "original": {
+     "Web": "space/xs",
+     "Mobile": "space/xl"
+    },
+    "use": "Ô nhập: khoảng icon → vùng chữ; cộng text-inset ra 8 web (DEC-192), 16 app (DEC-196) (DEC-207)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "field/hint-inset": {
+    "original": {
+     "Web": "space/none",
+     "Mobile": "space/xl"
+    },
+    "use": "Ô nhập: lề trái dòng gợi ý, dòng lỗi. Web 0 canh mép ô, app 16 thẳng chữ trong ô (DEC-192) (DEC-207)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "field/label-max-width": {
+    "original": {
+     "Web": 300,
+     "Mobile": 300
+    },
+    "use": "Ô nhập: rộng tối đa nhãn, để nhãn dài cắt \"…\" mà dấu * vẫn ngay sau nhãn. 300 ≈ rộng mặc định trừ lề và chỗ cho *; ô hẹp hơn thì chỉnh (DEC-207)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "progress/height/sm": {
+    "original": {
+     "Web": "size/xs",
+     "Mobile": "size/xs"
+    },
+    "use": "Cao thanh tiến độ cỡ SM: thẻ gọn trên app (DEC-243)",
+    "replacement": "size/xs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "progress/height/md": {
+    "original": {
+     "Web": "size/sm",
+     "Mobile": "size/sm"
+    },
+    "use": "Cao thanh tiến độ cỡ MD, mặc định: dòng quy trình web, thẻ tóm tắt (DEC-243)",
+    "replacement": "size/sm",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "progress/gap": {
+    "original": {
+     "Web": "space/xxs",
+     "Mobile": "space/xxs"
+    },
+    "use": "Khe giữa hai nhóm đoạn của thanh chia đoạn (DEC-243)",
+    "replacement": "space/xxs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "progress/width-default": {
+    "original": {
+     "Web": 320,
+     "Mobile": 361
+    },
+    "use": "Thanh tiến độ: bề rộng mặc định của component. Web 320; app 361 = 393 − 2 × 16 lề màn. Dùng instance thì kéo rộng theo khung (Fill) (DEC-243)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "progress/segment-width": {
+    "original": {
+     "Web": "size/3xl",
+     "Mobile": "size/3xl"
+    },
+    "use": "Rộng mặc định của một đoạn (`.progress / Segment`) khi đặt tự do, chưa nằm trong khung chứa. Trong Base / Progress đoạn luôn Fill hoặc có % rộng nên số này không đổi hình thanh (DEC-243)",
+    "replacement": "size/3xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "otp/cell-width": {
+    "original": {
+     "Web": "size/5xl",
+     "Mobile": "size/6xl"
+    },
+    "use": "Ô mã OTP: rộng một ô. App 48 theo bản vẽ account-access 3.4; web 40 là giá trị đề xuất, chưa dựng khối Web (DEC-244)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "table/row-min-height": {
+    "original": {
+     "Web": 52,
+     "Mobile": 52
+    },
+    "use": "Cao tối thiểu dòng bảng (DEC-259, như Untitled)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "table/cell-padding-y": {
+    "original": {
+     "Web": "space/xl",
+     "Mobile": "space/lg"
+    },
+    "use": "Lề trên dưới ô bảng",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "table/cell-padding-x": {
+    "original": {
+     "Web": "space/3xl",
+     "Mobile": "space/xl"
+    },
+    "use": "Lề trái phải ô bảng",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "vehicle/thumb-xs": {
+    "original": {
+     "Web": "size/4xl",
+     "Mobile": "size/4xl"
+    },
+    "use": "Ảnh thu nhỏ phương tiện trong dòng bảng web, cắt đầu xe tràn mép (DEC-266)",
+    "replacement": "size/4xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "vehicle/thumb-sm": {
+    "original": {
+     "Web": "size/6xl",
+     "Mobile": "size/6xl"
+    },
+    "use": "Ảnh thu nhỏ phương tiện SM: thẻ chọn, List Item; bằng card/media-size-sm (DEC-266)",
+    "replacement": "size/6xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "vehicle/thumb-md": {
+    "original": {
+     "Web": "size/7xl",
+     "Mobile": "size/7xl"
+    },
+    "use": "Ảnh thu nhỏ phương tiện MD: đầu thẻ bản ghi; bằng card/media-size (DEC-266)",
+    "replacement": "size/7xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "vehicle/q-sm-w": {
+    "original": {
+     "Web": "size/11xl",
+     "Mobile": "size/11xl"
+    },
+    "use": "Khung ảnh 3/4 trước (16:10) cho thẻ mobile (DEC-266)",
+    "replacement": "size/11xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "vehicle/q-sm-h": {
+    "original": {
+     "Web": 100,
+     "Mobile": 100
+    },
+    "use": "Cao khung ảnh 3/4 trước cho thẻ mobile (DEC-266)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "vehicle/q-md-w": {
+    "original": {
+     "Web": 240,
+     "Mobile": 240
+    },
+    "use": "Khung ảnh 3/4 trước (16:10) cho thẻ web (DEC-266)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "vehicle/q-md-h": {
+    "original": {
+     "Web": 150,
+     "Mobile": 150
+    },
+    "use": "Cao khung ảnh 3/4 trước cho thẻ web (DEC-266)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "vehicle/q-lg-w": {
+    "original": {
+     "Web": 480,
+     "Mobile": 480
+    },
+    "use": "Khung ảnh 3/4 trước (16:10) cho đầu trang chi tiết phương tiện (DEC-266)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "vehicle/q-lg-h": {
+    "original": {
+     "Web": 300,
+     "Mobile": 300
+    },
+    "use": "Cao khung ảnh 3/4 trước cho đầu trang chi tiết phương tiện (DEC-266)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "vehicle/scale-sm": {
+    "original": {
+     "Web": "size/md",
+     "Mobile": "size/md"
+    },
+    "use": "Tỉ lệ thật px/m cho hình ghép tổ hợp trong cột danh sách; số để tính, không gắn trực tiếp vào layer (DEC-266)",
+    "replacement": "size/md",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "vehicle/scale-md": {
+    "original": {
+     "Web": "size/xl",
+     "Mobile": "size/xl"
+    },
+    "use": "Tỉ lệ thật px/m cho khối chi tiết, form, thẻ app; số để tính, không gắn trực tiếp vào layer (DEC-266)",
+    "replacement": "size/xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "vehicle/scale-lg": {
+    "original": {
+     "Web": "size/5xl",
+     "Mobile": "size/5xl"
+    },
+    "use": "Tỉ lệ thật px/m cho trang tài liệu, dàn xe; số để tính, không gắn trực tiếp vào layer (DEC-266)",
+    "replacement": "size/5xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "vehicle/thumb-radius-xs": {
+    "original": {
+     "Web": "radius/sm",
+     "Mobile": "radius/sm"
+    },
+    "use": "Bo ô Vehicle Thumb XS (radius/sm) (DEC-266)",
+    "replacement": "radius/sm",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "vehicle/thumb-radius-sm": {
+    "original": {
+     "Web": "radius/md",
+     "Mobile": "radius/md"
+    },
+    "use": "Bo ô Vehicle Thumb SM (radius/md) (DEC-266)",
+    "replacement": "radius/md",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "vehicle/thumb-radius-md": {
+    "original": {
+     "Web": "radius/lg",
+     "Mobile": "radius/lg"
+    },
+    "use": "Bo ô Vehicle Thumb MD (radius/lg) (DEC-266)",
+    "replacement": "radius/lg",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "notification/action-gap": {
+    "original": {
+     "Web": "space/lg",
+     "Mobile": "space/3xl"
+    },
+    "use": "Notification: khoảng giữa 2 nút hành động — app 24 để vùng chạm 44 không chồng nhau (DEC-287)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "header-nav/height": {
+    "original": {
+     "Web": 44,
+     "Mobile": 56
+    },
+    "use": "Cao thanh trên Header navigation (DEC-305)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "header-nav/tab-gap": {
+    "original": {
+     "Web": "space/2xl",
+     "Mobile": "space/2xl"
+    },
+    "use": "Khoảng giữa các tab phụ của Header navigation (DEC-305)",
+    "replacement": "space/2xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "header-nav/account-menu-width": {
+    "original": {
+     "Web": 256,
+     "Mobile": 256
+    },
+    "use": "Rộng menu tài khoản mở từ avatar (DEC-305)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "notification/count-size": {
+    "original": {
+     "Web": "size/xl",
+     "Mobile": "size/xl"
+    },
+    "use": "Cao / rộng tối thiểu số đếm trên chuông (DEC-305)",
+    "replacement": "size/xl",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "breadcrumbs/current-max-width": {
+    "original": {
+     "Web": 240,
+     "Mobile": 240
+    },
+    "use": "Breadcrumbs: trang hiện tại rộng tối đa, quá thì cắt + tooltip (DEC-305)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "breadcrumbs/menu-min-width": {
+    "original": {
+     "Web": 240,
+     "Mobile": 240
+    },
+    "use": "Breadcrumbs: rộng tối thiểu menu tầng ẩn “…” (DEC-305)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "command-search/width": {
+    "original": {
+     "Web": 600,
+     "Mobile": 600
+    },
+    "use": "Rộng hộp thoại tìm ⌘K giữa màn (DEC-305)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "command-search/highlight-radius": {
+    "original": {
+     "Web": "radius/xxs",
+     "Mobile": "radius/xxs"
+    },
+    "use": "Bo nền chữ khớp trong kết quả tìm (DEC-305)",
+    "replacement": "radius/xxs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "command-search/highlight-padding-x": {
+    "original": {
+     "Web": 1,
+     "Mobile": 1
+    },
+    "use": "Lề trái phải nền chữ khớp (DEC-305)",
+    "replacement": null,
+    "status": "pending-round-2"
+   },
+   "command-search/empty-icon-gap": {
+    "original": {
+     "Web": "space/md",
+     "Mobile": "space/md"
+    },
+    "use": "Khoảng icon rỗng → tiêu đề khi không có kết quả (DEC-305)",
+    "replacement": "space/md",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "sheet/grabber-height": {
+    "original": {
+     "Web": "size/xs",
+     "Mobile": "size/xs"
+    },
+    "use": "Cao thanh kéo của sheet mobile (DEC-305)",
+    "replacement": "size/xs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   },
+   "sheet/grabber-radius": {
+    "original": {
+     "Web": "radius/xxs",
+     "Mobile": "radius/xxs"
+    },
+    "use": "Bo thanh kéo của sheet mobile (DEC-305)",
+    "replacement": "radius/xxs",
+    "status": "merged",
+    "removed": "2026-11-01"
+   }
+  }
+ },
+ "colorRename": {
+  "dec": "DEC-320",
+  "note": "Semantic màu đổi tên theo Untitled. Khoá là tên cũ, giá trị là tên mới (đều bỏ tiền tố color/). Figma đổi tên theo ID.",
+  "map": {
+   "bg/surface": "bg/primary",
+   "bg/muted": "bg/secondary",
+   "bg/hover": "bg/primary_hover",
+   "bg/muted-hover": "bg/secondary_hover",
+   "bg/raised": "bg/primary_alt",
+   "bg/track": "bg/quaternary",
+   "bg/track-hover": "bg/quaternary_hover",
+   "bg/inverse": "bg/primary_solid",
+   "text/emphasis": "text/secondary",
+   "text/secondary": "text/tertiary",
+   "text/secondary-strong": "text/tertiary_strong",
+   "text/secondary-hover": "text/tertiary_hover",
+   "text/tertiary": "text/disabled",
+   "text/on-solid": "text/white",
+   "icon/primary": "fg/secondary",
+   "icon/secondary": "fg/quaternary",
+   "icon/secondary-hover": "fg/quaternary_hover",
+   "icon/disabled": "fg/disabled",
+   "icon/inverse": "fg/inverse",
+   "border/default": "border/secondary",
+   "border/subtle": "border/tertiary",
+   "border/strong": "border/primary",
+   "border/focus": "focus/ring",
+   "border/focus-danger": "focus/ring_error",
+   "border/danger": "border/error",
+   "status/danger-border": "border/error",
+   "border/overlay": "border/secondary_alt",
+   "action/danger": "text/error/primary",
+   "status/danger-text": "text/error/primary",
+   "action/danger-subtle": "bg/error/primary",
+   "status/danger-bg": "bg/error/primary",
+   "action/danger-subtle-hover": "bg/error/primary_hover",
+   "action/danger-subtle-pressed": "bg/error/primary_pressed",
+   "status/success-text": "text/success/primary",
+   "status/success-icon": "fg/success/primary",
+   "status/success-bg": "bg/success/primary",
+   "status/success-bg-strong": "bg/success/secondary",
+   "status/success-solid": "bg/success/solid",
+   "status/success-solid-hover": "bg/success/solid_hover",
+   "status/success-border": "border/success",
+   "status/success-border-subtle": "border/success_subtle",
+   "status/warning-text": "text/warning/primary",
+   "status/warning-icon": "fg/warning/primary",
+   "status/warning-bg": "bg/warning/primary",
+   "status/warning-bg-strong": "bg/warning/secondary",
+   "status/warning-solid": "bg/warning/solid",
+   "status/warning-solid-hover": "bg/warning/solid_hover",
+   "status/warning-border": "border/warning",
+   "status/warning-border-subtle": "border/warning_subtle",
+   "status/danger-icon": "fg/error/primary",
+   "status/danger-bg-strong": "bg/error/secondary",
+   "status/danger-solid": "bg/error/solid",
+   "status/danger-solid-hover": "bg/error/solid_hover",
+   "status/danger-border-subtle": "border/error_subtle",
+   "status/info-text": "text/info/primary",
+   "status/info-icon": "fg/info/primary",
+   "status/info-bg": "bg/info/primary",
+   "status/info-bg-strong": "bg/info/secondary",
+   "status/info-solid": "bg/info/solid",
+   "status/info-solid-hover": "bg/info/solid_hover",
+   "status/info-border": "border/info",
+   "status/info-border-subtle": "border/info_subtle",
+   "chip/gray/bg": "utility/neutral/100",
+   "chip/gray/fg": "utility/neutral/600",
+   "chip/gray/border": "utility/neutral/200",
+   "chip/gray/dot": "utility/neutral/500",
+   "chart/8": "utility/neutral/500",
+   "chip/blue/bg": "utility/blue/50",
+   "chip/blue/fg": "utility/blue/700",
+   "chip/blue/border": "utility/blue/200",
+   "chip/blue/dot": "utility/blue/600",
+   "chip/teal/bg": "utility/teal/50",
+   "chip/teal/fg": "utility/teal/700",
+   "chip/teal/border": "utility/teal/200",
+   "chip/teal/dot": "utility/teal/600",
+   "chip/purple/bg": "utility/purple/50",
+   "chip/purple/fg": "utility/purple/700",
+   "chip/purple/border": "utility/purple/200",
+   "chip/purple/dot": "utility/purple/600",
+   "chip/yellow/bg": "utility/yellow/50",
+   "chip/yellow/fg": "utility/yellow/700",
+   "chip/yellow/border": "utility/yellow/200",
+   "chip/yellow/dot": "utility/yellow/600",
+   "chip/green/bg": "utility/green/50",
+   "chip/green/fg": "utility/green/700",
+   "chip/green/border": "utility/green/200",
+   "chip/green/dot": "utility/green/600",
+   "chip/red/bg": "utility/red/50",
+   "chip/red/fg": "utility/red/700",
+   "chip/red/border": "utility/red/200",
+   "chip/red/dot": "utility/red/600",
+   "chip/orange/bg": "utility/orange/100",
+   "chip/orange/fg": "utility/orange/800",
+   "chip/orange/border": "utility/orange/200",
+   "chip/orange/dot": "utility/orange/600",
+   "chart/1": "utility/blue/500",
+   "chart/2": "utility/teal/500",
+   "chart/3": "utility/purple/500",
+   "chart/4": "utility/yellow/500",
+   "chart/5": "utility/green/500",
+   "chart/6": "utility/red/500",
+   "chart/7": "utility/orange/500",
+   "overlay/scrim": "bg/overlay"
+  },
+  "merged": {
+   "text/tertiary": "text/disabled",
+   "status/danger-text": "text/error/primary",
+   "status/danger-bg": "bg/error/primary",
+   "status/danger-border": "border/error",
+   "chart/8": "utility/neutral/500"
+  }
+ }
+}

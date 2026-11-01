@@ -1,0 +1,230 @@
+{
+ "brainstorm-D1": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D2": {
+  "choice": 0,
+  "note": "Lấy cả 3 biến thể này"
+ },
+ "brainstorm-D3": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D4": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D5": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D6": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D7": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D8": {
+  "choice": 0,
+  "note": ""
+ },
+ "preview-approve": {
+  "choice": 0,
+  "note": "duyệt trong chat 28/10, sửa icon loại file theo File type icon (Misc icons)"
+ },
+ "foundation-app-tap-area.min-height.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-audit.icon.featured-fi": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-audit.icon.size-18": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-audit.typo.combo-12.5-18": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-audit.typo.combo-13.5-20": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-choose-button-error.border-color.web.error": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-choose-button-focus.color.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-choose-button.font-size.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-choose-button.line-height.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-delete-button.margin-right.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-delete-button.margin-top.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-dropzone-compact-text.min-width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-dropzone-disabled.opacity.web.disabled": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-dropzone-drag-over.border-color.web.drag": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-dropzone-error.border-color.web.error": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-dropzone-hint.line-height.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-dropzone-link.underline-offset.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-dropzone-text.font-size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-error-icon.margin-top.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-error-text.font-size.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-error-text.line-height.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-featured-icon-compact.size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-featured-icon.margin-bottom.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-file-meta-divider.color.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-file-meta-divider.height.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-file-meta-divider.width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-file-meta.font-size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-file-meta.line-height.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-file-meta.margin-top.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-file-name.font-size.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-file-name.font-size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-file-row-error.border-color.web.error": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-focus-ring.color.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-hint.font-size.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-hint.line-height.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-required-mark.margin-left.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-retry-link.font-size.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-retry-link.height.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-retry-link.margin-top.web": {
+  "choice": 0,
+  "note": "bấm nhầm, giữ 6 (chat 29/10)"
+ },
+ "foundation-sheet-grabber.background.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-sheet-grabber.height.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-sheet-grabber.radius.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-sheet-title.line-height.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-sheet-title.margin-bottom.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-sheet.radius.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-status-uploading.color.web": {
+  "choice": 0,
+  "note": "sửa màu cho đạt tương phản (chat 29/10) → color/text/tertiary_strong"
+ },
+ "foundation-thumbnail.color.web": {
+  "choice": 1,
+  "note": "kéo về color/fg/quaternary (chat 29/10, phương án b)"
+ },
+ "foundation-app-tap-icon.size.mobile": {
+  "choice": 0,
+  "note": "Featured 48 theo DEC-258 → featured-icon/size"
+ }
+}

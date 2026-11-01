@@ -1,0 +1,51 @@
+{
+  "$description": "Chỉ mục bộ token DTCG của DS v2. Mỗi collection Figma = 1 nhóm file, mỗi mode = 1 file. Ghép: primitives + styles + 1 file mỗi collection theo mode đang dùng.",
+  "generator": "GENERATED — không sửa tay. Nguồn: design-system/ · sinh bởi _scripts/ds-v2-handoff.py",
+  "version": "0.22.0",
+  "collections": {
+    "Primitives": [
+      "primitives.tokens.json"
+    ],
+    "Semantic": [
+      "semantic.light.tokens.json",
+      "semantic.dark.tokens.json"
+    ],
+    "Platform": [
+      "platform.web.tokens.json",
+      "platform.mobile.tokens.json"
+    ],
+    "Brand": [
+      "brand.than-chi.tokens.json",
+      "brand.xanh-la.tokens.json",
+      "brand.xanh-ngoc.tokens.json",
+      "brand.xanh-duong.tokens.json",
+      "brand.cham.tokens.json",
+      "brand.tim.tokens.json",
+      "brand.do-do.tokens.json",
+      "brand.cam-dat.tokens.json"
+    ],
+    "Styles": [
+      "styles.tokens.json"
+    ]
+  },
+  "modes": {
+    "Semantic": [
+      "Light",
+      "Dark"
+    ],
+    "Platform": [
+      "Web",
+      "Mobile"
+    ],
+    "Brand": [
+      "Than chì",
+      "Xanh lá",
+      "Xanh ngọc",
+      "Xanh dương",
+      "Chàm",
+      "Tím",
+      "Đỏ đô",
+      "Cam đất"
+    ]
+  }
+}

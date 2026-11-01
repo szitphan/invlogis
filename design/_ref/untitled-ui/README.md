@@ -11,7 +11,7 @@ links:
 # Untitled UI (v8.0) — Design tokens tham chiếu
 
 Tài liệu trích xuất Foundations của Untitled UI React để đội Invlogis so sánh với DS v2
-(`design/v2/`). **Chỉ trích xuất, không so sánh/đề xuất** (việc đó do phiên khác làm).
+(`design-system/`). **Chỉ trích xuất, không so sánh/đề xuất** (việc đó do phiên khác làm).
 
 ## Nguồn & ngày đọc
 

@@ -2,7 +2,7 @@
 """Đối chiếu giá trị của bản preview HTML (vẽ tự do) với foundation DS v2 — gate vòng 3 của
 /figma-component --html.
 
-Đầu vào: design/v2/components/_work/{slug}/page.json
+Đầu vào: design-system/components/_work/{slug}/page.json
   "css"       CSS của component — bị chấm toàn bộ: mọi px / mã màu trần phải có dòng trong "values".
   "cssScreen" CSS của khung màn mẫu (bảng, lưới, chữ giữ chỗ) — không chấm, không lên Figma.
   "tokenFamilies" (tuỳ chọn) tiền tố token riêng component được dùng, vd ["nav", "tab"]. Mặc định: các từ
@@ -38,11 +38,11 @@ Mỗi dòng ra kèm "bind" (token gắn được khi khớp), "to" (đích khi k
 answers.json) — trang review dùng để vẽ preview "Theo foundation", vòng 4 dùng để ghi spec.
 
 Dùng:
-  python3 _scripts/ds-foundation-check.py design/v2/components/_work/tag            # in báo cáo
-  python3 _scripts/ds-foundation-check.py design/v2/components/_work/tag --write    # ghi check.json
-  python3 _scripts/ds-foundation-check.py design/v2/components/_work/tag --bind     # đề xuất sel cho dòng thiếu
-  python3 _scripts/ds-foundation-check.py design/v2/components/_work/tag --bind --write-bind  # ghi sel chắc chắn
-  python3 _scripts/ds-foundation-check.py design/v2/components/_work/tag --declare   # gắn sel theo phần đã học + khai
+  python3 _scripts/ds-foundation-check.py design-system/components/_work/tag            # in báo cáo
+  python3 _scripts/ds-foundation-check.py design-system/components/_work/tag --write    # ghi check.json
+  python3 _scripts/ds-foundation-check.py design-system/components/_work/tag --bind     # đề xuất sel cho dòng thiếu
+  python3 _scripts/ds-foundation-check.py design-system/components/_work/tag --bind --write-bind  # ghi sel chắc chắn
+  python3 _scripts/ds-foundation-check.py design-system/components/_work/tag --declare   # gắn sel theo phần đã học + khai
                                                                                # tự động giá trị trần còn lại ("auto")
 Dòng coi là đã quyết khi answers.json (dump từ db của artifact) có doc "foundation-{id}" có choice.
 Phải quyết: ⛔ ＋ và ↔ nhìn thấy; ↔ không nhìn thấy mà chưa chọn → tự kéo về token. ⛔ Chưa khai và dòng
@@ -57,7 +57,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TOKENS = ROOT / "design/v2/tokens.json"
+TOKENS = ROOT / "design-system/tokens.json"
 
 CAT_LABEL = {"ok": "✅ Khớp", "near": "↔ Lệch nhỏ", "new": "＋ Cần token mới", "conflict": "⛔ Xung đột luật",
              "undeclared": "⛔ Chưa khai"}
@@ -136,7 +136,7 @@ def load_tokens():
     prim_color = dict(c["Primitives"]["color"])
     prim_num = dict(c["Primitives"]["number"])
     sem = c["Semantic"]["color"]
-    comp = c["Component"]["color"]
+    comp = c.get("Component", {}).get("color", {})
 
     def color_of(ref, mode="Light", depth=0):
         if depth > 6 or ref is None:
@@ -403,6 +403,9 @@ def check_num(row, tk, fams):
 
 # ---------- luật ----------
 
+FIX_MAX_DE = 40  # ngưỡng ΔE gợi ý màu sửa tương phản
+
+
 def plat_value(tk, mode, name):
     v = tk["plat"].get(name)
     return v[mode] if v else None
@@ -425,12 +428,16 @@ def rules(row, tk, fams):
             row["_contrast"] = round(r, 2)
             if r < need and not row.get("hint"):
                 crole = color_role(row)
+                status_part = "status" in (row.get("part") or "").lower()
                 cands = [(h, n) for h, lst in tk["colors"][theme].items() for n, cl in lst
-                         if color_allowed(n, cl, crole, fams)[0] and contrast(h, bg) >= need]
+                         if color_allowed(n, cl, crole, fams)[0] and contrast(h, bg) >= need
+                         and (status_part or not n.startswith("color/status/"))]
                 fix = None
                 if cands:
                     h, n = min(cands, key=lambda x: delta_e(fg, x[0]))
-                    fix = {"token": n, "value": h, "css": css_var(n)}
+                    # màu đạt chuẩn gần nhất vẫn khác hẳn (vd nền xám → xanh success, user 29/10) → không gợi ý
+                    if delta_e(fg, h) <= FIX_MAX_DE:
+                        fix = {"token": n, "value": h, "css": css_var(n)}
                 out.append(("Tương phản (foundations Mục 3.4, WCAG 1.4.3/1.4.11)",
                             f"{r:.2f}:1 < {need}:1 ({role} trên {bg})", fix))
     if prop in ("height", "min-height") and row.get("control"):
@@ -489,6 +496,9 @@ def check_row(row, tk, fams):
         "size": row.get("size") or "", "state": row.get("state") or "", "theme": row.get("theme") or "Light",
         "value": row.get("value"), "sel": row.get("sel"), "cssProps": cp if isinstance(cp, list) else [cp],
         "tpl": row.get("tpl"), "noOverride": row.get("noOverride"),
+        # cách soi phần tử chỉ hiện khi tương tác: {"state": "scope", "set": {"ck": "…"}, "add": {"<sel>": "<class>"}}
+        "soi": row.get("soi"),
+        "at": row.get("at"),  # chỗ để soi cho dòng noOverride (không ghi đè được nhưng phải chỉ được trên hình)
         "cat": "conflict" if broken else res["cat"], "tokens": res.get("tokens", []),
         "bind": res.get("bind"), "to": res.get("to"), "visible": bool(res.get("visible")),
         "suggest": (f"{res['to']['token']} ({res['to']['value']})" if res.get("to") else None),
@@ -655,40 +665,169 @@ TOKEN_VARS = None
 
 
 def token_vars():
-    """Tên biến CSS có trong design/v2/tokens.css (var(--x) tới đây = đã qua token)."""
+    """Tên biến CSS có trong design-system/tokens.css (var(--x) tới đây = đã qua token)."""
     global TOKEN_VARS
     if TOKEN_VARS is None:
-        css = (ROOT / "design/v2/tokens.css")
+        css = (ROOT / "design-system/tokens.css")
         TOKEN_VARS = set(re.findall(r"(--[\w-]+)\s*:", css.read_text())) if css.exists() else set()
     return TOKEN_VARS
 
 
+VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
+
+
+def _hidden_by(attrs, pick):
+    if pick is None:  # xem mọi phương án
+        return False
+    sh, an = attrs.get("data-show"), attrs.get("data-any")
+    if sh and any(pick.get(d) and pick[d] != o for d, o in re.findall(r"(D\d+):([a-z])", sh)):
+        return True
+    if an:
+        terms = re.findall(r"(D\d+):([a-z])", an)
+        return bool(terms) and not any(pick.get(d) == o for d, o in terms)
+    return False
+
+
+class _Walk(HTMLParser):
+    """Duyệt HTML có lồng nhau: phần tử nằm TRONG khối bị ẩn (data-show phương án đã loại) cũng bị ẩn."""
+    def __init__(self, pick, platform):
+        super().__init__(convert_charrefs=True)
+        self.pick, self.platform, self.stack, self.els = pick, platform, [], []
+
+    def _el(self, tag, attrs, push):
+        a = {k: (v or "") for k, v in attrs}
+        par = self.stack[-1] if self.stack else None
+        # hình nhỏ lồng .pv.pvm mang lựa chọn riêng (data-Dn) và ẩn theo data-mshow của khung gần nhất
+        loc = par["loc"] if par else None
+        if "pvm" in a.get("class", "").split():
+            loc = {k[5:].upper(): v for k, v in a.items() if re.fullmatch(r"data-d\d+", k, re.I)}  # parser hạ chữ thường
+        hid = (par["hid"] if par else False) or _hidden_by(a, self.pick)
+        if not hid and loc is not None and a.get("data-mshow"):
+            hid = self.pick is not None and _hidden_by({"data-show": a["data-mshow"]}, loc)
+        e = {"tag": tag, "cls": set(a.get("class", "").split()), "attrs": a, "shown": not hid,
+             "platform": self.platform, "parent": par["el"] if par else None}
+        self.els.append(e)
+        if push:
+            self.stack.append({"hid": hid, "el": e, "loc": loc})
+
+    def handle_starttag(self, tag, attrs):
+        self._el(tag, attrs, tag not in VOID_TAGS)
+
+    def handle_startendtag(self, tag, attrs):
+        self._el(tag, attrs, False)
+
+    def handle_endtag(self, tag):
+        if tag not in VOID_TAGS and self.stack:
+            self.stack.pop()
+
+
+def page_elements(page, pick):
+    """Mọi phần tử trên màn demo + bảng biến thể, kèm cờ hiện ở tổ hợp đã chốt và nền tảng (web/mobile)."""
+    pv = page.get("preview") or {}
+    srcs = [(s.get("html") or "", "mobile" if s.get("device") == "mobile" else "web") for s in page.get("screens") or []]
+    srcs += [(h, "mobile" if b.get("platform") == "mobile" else "web")
+             for b in pv.get("blocks") or [] for h in (b.get("frames") or [b.get("html") or ""])]
+    els = []
+    for html, plat in srcs:
+        w = _Walk(pick, plat)
+        w.feed(html)
+        els += w.els
+    if pick:
+        css_hide(page, pick, els)
+    return els
+
+
+def css_hide(page, pick, els):
+    """Ẩn theo CSS gắn phương án: luật display:none có [data-Dn=o] đúng pick (vd .pv[data-D6=c] .sb .sbs) → phần tử
+    khớp coi như không lên hình. Luật ẩn mặc định không gắn phương án (.fly{display:none}) thì bỏ qua — tương tác bật lại."""
+    if not pick:
+        return
+    for sel, prop, val in parse_css(page.get("css") or ""):
+        if prop != "display" or val.strip() != "none":
+            continue
+        for part in [x.strip() for x in re.split(r",(?![^\[(]*[\])])", sel) if x.strip()]:
+            terms = re.findall(r"\[data-(D\d+)=\"?([a-z])\"?\]", part)
+            if not terms or any(pick.get(d) != o for d, o in terms) or re.search(r":(?!not)[\w-]", part):
+                continue
+            rest = re.sub(r"^\.pv(\[[^\]]*\])*\s*", "", part)
+            if re.search(r"\[data-(?!D\d)", part.split(" ")[0]):  # còn điều kiện trạng thái trên .pv
+                continue
+            for e in els:
+                if e["shown"] and _chain_ok(rest, e):
+                    e["shown"] = False
+                    # con cháu cũng ẩn
+            # lan xuống con cháu
+            for e in els:
+                a = e["parent"]
+                while a is not None and e["shown"]:
+                    if not a["shown"]:
+                        e["shown"] = False
+                    a = a["parent"]
+
+
+def _chain_ok(part, e):
+    chain = [c for c in re.split(r"\s*[>+~]\s*|\s+", re.sub(r"[^\s>+~]+\s*[+~]\s*", "", part)) if c]
+    if not chain or not _compound_ok(chain[-1], e):
+        return False
+    a, rest = e["parent"], chain[:-1]
+    while rest and a is not None:
+        if _compound_ok(rest[-1], a):
+            rest = rest[:-1]
+        a = a["parent"]
+    return not rest
+
+
 def hidden_classes(page, pick):
-    """Class chỉ nằm trên phần tử bị ẩn ở tổ hợp đã chốt (data-show / data-any theo điểm Dn)."""
+    """Class chỉ nằm trên phần tử bị ẩn ở tổ hợp đã chốt (data-show / data-any theo điểm Dn, tính cả khối cha)."""
     if not pick:
         return set()
-    pv = page.get("preview") or {}
-    html = " ".join([s.get("html") or "" for s in page.get("screens") or []] +
-                    [h for b in pv.get("blocks") or [] for h in (b.get("frames") or [b.get("html") or ""])])
-    seen, shown = set(), set()
-    for tag in re.findall(r"<[a-zA-Z][^>]*>", html):
-        m = re.search(r'class="([^"]*)"', tag)
-        if not m:
-            continue
-        cls = m.group(1).split()
-        sh = re.search(r'data-show="([^"]*)"', tag)
-        an = re.search(r'data-any="([^"]*)"', tag)
-        hide = False
-        if sh:
-            hide = any(pick.get(d) and pick[d] != o for d, o in re.findall(r"(D\d+):([a-z])", sh.group(1)))
-        if an and not hide:
-            terms = re.findall(r"(D\d+):([a-z])", an.group(1))
-            hide = bool(terms) and not any(pick.get(d) == o for d, o in terms)
-        for c in cls:
-            seen.add(c)
-            if not hide:
-                shown.add(c)
+    els = page_elements(page, pick)
+    seen = {c for e in els for c in e["cls"]}
+    shown = {c for e in els if e["shown"] for c in e["cls"]}
     return seen - shown
+
+
+def shown_classes(page, pick):
+    """Class có trên ít nhất một phần tử đang hiện ở tổ hợp chốt — CSS cho class ngoài tập này không lên hình."""
+    return {c for e in page_elements(page, pick or {}) if e["shown"] for c in e["cls"]}
+
+
+def _compound_ok(comp, e):
+    """So một vế đơn (tag.cls[attr="v"]) với một phần tử — bỏ :hover/::before."""
+    comp = re.sub(r"::?[\w-]+(\([^)]*\))?", "", comp)
+    m = re.match(r"^([a-zA-Z][\w-]*)?", comp)
+    if m.group(1) and m.group(1).lower() != e["tag"]:
+        return False
+    if not set(re.findall(r"\.([\w-]+)", comp)) <= e["cls"]:
+        return False
+    for k, v in re.findall(r'\[([\w-]+)(?:=\"?([^\]"]*)\"?)?\]', comp):
+        if k not in e["attrs"] or (v and e["attrs"][k] != v):
+            return False
+    return True
+
+
+def sel_on_page(sel, els, platform=""):
+    """Bộ chọn có trỏ tới ít nhất một phần tử đang hiện (đúng nền tảng) không — xét vế cuối và tổ tiên gần
+    đúng theo chuỗi tổ tiên. Gate "mọi dòng sai lệch phải soi được trên màn demo hoặc bảng biến thể" (user 29/10)."""
+    plat = platform.lower() if platform.lower() in ("web", "mobile") else ""
+    sel = ",".join(sel) if isinstance(sel, list) else (sel or "")
+    for part in [x.strip() for x in re.split(r",(?![^\[(]*[\])])", sel) if x.strip()]:
+        part = re.sub(r"^\.pv(\[[^\]]*\])*\s*", "", part)
+        part = re.sub(r"[^\s>+~]+\s*[+~]\s*", "", part)  # anh em (+ ~): chỉ giữ vế sau
+        if not part:
+            return True
+        chain = [c for c in re.split(r"\s*[>+~]\s*|\s+", part) if c]
+        for e in els:
+            if not e["shown"] or (plat and e["platform"] != plat) or not _compound_ok(chain[-1], e):
+                continue
+            a, rest = e["parent"], chain[:-1]
+            while rest and a is not None:  # tổ tiên khớp lần lượt (coi > như khoảng trắng)
+                if _compound_ok(rest[-1], a):
+                    rest = rest[:-1]
+                a = a["parent"]
+            if not rest:
+                return True
+    return False
 
 
 def scan_css(page):
@@ -715,9 +854,14 @@ def scan_css(page):
     live = {v for v in win.values()}
     hid = hidden_classes(page, pick)
 
+    live_cls = shown_classes(page, pick) if pick else None
+
     def dead_part(part):
         last = re.split(r"[\s>+~]+", re.sub(r"\[[^\]]*\]|::?[\w-]+(\([^)]*\))?", "", part.strip()))[-1]
-        return bool(set(re.findall(r"\.([\w-]+)", last)) & hid)
+        cls = set(re.findall(r"\.([\w-]+)", last))
+        # mọi class trong bộ chọn (kể cả tổ tiên) phải có trên hình — không thì là CSS của phương án không dựng
+        every = set(re.findall(r"\.([\w-]+)", re.sub(r"\[[^\]]*\]|::?[\w-]+(\([^)]*\))?", "", part)))
+        return bool(cls & hid) or (live_cls is not None and bool(every - live_cls - {"pv"}))
     for n, (sel, prop, val) in enumerate(parse_css(page.get("css") or "")):
         if not any(pr[1] == n for pr in live):
             continue
@@ -1049,7 +1193,31 @@ def main():
     import ds_foundation_audit as fa
     for r in rows:
         r.setdefault("group", fa.group_of(r.get("prop"), r.get("part")))
-    rows += fa.audit(page, parse_css, TOKENS)
+    pick0 = (page.get("preview") or {}).get("pick") or {}
+    els = page_elements(page, pick0 or {})
+    # dòng values chỉ trỏ vào phần tử nằm trong khối ẩn ở tổ hợp chốt (phương án đã loại)
+    # → không phải giá trị của component đã chốt, bỏ khỏi đối chiếu
+    if pick0:
+        els_all = page_elements(page, None)
+        def _off_pick(r):
+            sl = ",".join(r["sel"]) if isinstance(r.get("sel"), list) else (r.get("sel") or "")
+            return bool(sl) and r["cat"] != "undeclared" and not sel_on_page(sl, els, r.get("platform") or "") \
+                and sel_on_page(sl, els_all, r.get("platform") or "")
+        dropped = [r for r in rows if _off_pick(r)]
+        rows = [r for r in rows if not _off_pick(r)]
+        if dropped:
+            print(f"Bỏ {len(dropped)} dòng chỉ thuộc phương án đã loại: " + ", ".join(r["id"] for r in dropped[:8])
+                  + (" …" if len(dropped) > 8 else ""))
+    # dòng kiểm thêm chỉ trỏ vào phương án đã loại (ẩn ở tổ hợp chốt) → không phải sai lệch của component
+    rows += [r for r in fa.audit(page, parse_css, TOKENS) if not r.get("sel") or sel_on_page(r["sel"], els)]
+    # mọi dòng còn lại phải soi được trên hình (user 29/10) — dòng không trỏ tới phần tử nào đang hiện
+    off_page = [r for r in rows if r["cat"] != "undeclared" and (r.get("sel") or r.get("at"))
+                and not sel_on_page(r.get("at") or r["sel"], els, r.get("platform") or "")]
+    # dòng phải quyết mà không chỉ được chỗ nào trên hình (noOverride thiếu at) → user không nhìn được
+    off_page += [r for r in rows if (r["cat"] in ("conflict", "new") or (r["cat"] == "near" and r["visible"]))
+                 and not r.get("sel") and not r.get("at")]
+    for r in off_page:
+        r["offPage"] = True
 
     answers_path = page_path.parent / "answers.json"
     answers = json.loads(answers_path.read_text()) if answers_path.exists() else {}
@@ -1081,18 +1249,24 @@ def main():
             print(f"  - {r['id']}: {where} = {r['value']} — {extra}{tag}")
     if no_sel:
         print(f"\nThiếu sel (preview Theo foundation không ghi đè được): {len(no_sel)} — chạy --bind")
+    if off_page:
+        print(f"\nKhông soi được trên hình: {len(off_page)} — sel không trỏ tới phần tử nào đang hiện ở màn demo hay bảng"
+              " biến thể (sai nền tảng, chỉ có ở phương án đã loại, hoặc thiếu ô biến thể). Sửa platform/sel hoặc thêm ô:")
+        for r in off_page:
+            print(f"  - {r['id']}: {r['sel']} ({r.get('platform') or 'mọi nền tảng'})")
     print(f"\nCòn chưa xong: {len(open_rows)} (chưa khai {counts['undeclared']} · chưa quyết "
-          f"{len(open_rows) - counts['undeclared']}) · thiếu sel {len(no_sel)}")
+          f"{len(open_rows) - counts['undeclared']}) · thiếu sel {len(no_sel)} · không soi được {len(off_page)}")
 
     if "--write" in sys.argv:
         out = page_path.parent / "check.json"
         out.write_text(json.dumps({"tokens_version": tk["version"], "counts": counts, "no_sel": len(no_sel),
+                                   "off_page": len(off_page),
                                    "open": len(open_rows),  # backlog đóng task khi "open": 0
                                    "ignored": page.get("cssIgnore") or [],
                                    "groups": groups,
                                    "rows": rows}, ensure_ascii=False, indent=1))
         print(f"Đã ghi {out.relative_to(ROOT) if out.is_relative_to(ROOT) else out}")
-    sys.exit(1 if open_rows or no_sel else 0)
+    sys.exit(1 if open_rows or no_sel or off_page else 0)
 
 
 if __name__ == "__main__":

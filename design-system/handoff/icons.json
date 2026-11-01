@@ -1,0 +1,758 @@
+{
+  "$generator": "GENERATED — không sửa tay. Nguồn: design-system/ · sinh bởi _scripts/ds-v2-handoff.py",
+  "library": {
+    "name": "lucide",
+    "version": "1.58.0",
+    "angular": "lucide-angular",
+    "flutter": "lucide_icons_flutter (tên snake → LucideIcons.camelCase)"
+  },
+  "custom": [
+    {
+      "name": "circle-alert",
+      "svg": "design-system/icons/circle-alert.svg",
+      "svgFill": "design-system/icons/circle-alert-fill.svg"
+    },
+    {
+      "name": "container-seal",
+      "svg": "design-system/icons/container-seal.svg",
+      "svgFill": "design-system/icons/container-seal-fill.svg"
+    },
+    {
+      "name": "container-ship",
+      "svg": "design-system/icons/container-ship.svg",
+      "svgFill": "design-system/icons/container-ship-fill.svg"
+    },
+    {
+      "name": "container-truck",
+      "svg": "design-system/icons/container-truck.svg",
+      "svgFill": "design-system/icons/container-truck-fill.svg"
+    },
+    {
+      "name": "eir",
+      "svg": "design-system/icons/eir.svg",
+      "svgFill": "design-system/icons/eir-fill.svg"
+    },
+    {
+      "name": "semi-trailer",
+      "svg": "design-system/icons/semi-trailer.svg",
+      "svgFill": "design-system/icons/semi-trailer-fill.svg"
+    },
+    {
+      "name": "toll-booth",
+      "svg": "design-system/icons/toll-booth.svg",
+      "svgFill": "design-system/icons/toll-booth-fill.svg"
+    },
+    {
+      "name": "tractor-unit",
+      "svg": "design-system/icons/tractor-unit.svg",
+      "svgFill": "design-system/icons/tractor-unit-fill.svg"
+    },
+    {
+      "name": "triangle-alert",
+      "svg": "design-system/icons/triangle-alert.svg",
+      "svgFill": "design-system/icons/triangle-alert-fill.svg"
+    }
+  ],
+  "meanings": [
+    {
+      "meaning": "Lập, thêm",
+      "icon": "plus",
+      "custom": false
+    },
+    {
+      "meaning": "Sửa",
+      "icon": "pencil",
+      "custom": false
+    },
+    {
+      "meaning": "Xoá",
+      "icon": "trash-2",
+      "custom": false
+    },
+    {
+      "meaning": "Sao chép",
+      "icon": "copy",
+      "custom": false
+    },
+    {
+      "meaning": "Xuất file",
+      "icon": "upload",
+      "custom": false
+    },
+    {
+      "meaning": "Tải xuống",
+      "icon": "download",
+      "custom": false
+    },
+    {
+      "meaning": "In",
+      "icon": "printer",
+      "custom": false
+    },
+    {
+      "meaning": "Gửi",
+      "icon": "send",
+      "custom": false
+    },
+    {
+      "meaning": "Bộ lọc",
+      "icon": "list-filter",
+      "custom": false
+    },
+    {
+      "meaning": "Tuỳ chỉnh cột",
+      "icon": "sliders-vertical",
+      "custom": false
+    },
+    {
+      "meaning": "Nhóm",
+      "icon": "rows-3",
+      "custom": false
+    },
+    {
+      "meaning": "Lịch sử",
+      "icon": "history",
+      "custom": false
+    },
+    {
+      "meaning": "Giao lại",
+      "icon": "refresh-cw",
+      "custom": false
+    },
+    {
+      "meaning": "Theo dõi",
+      "icon": "eye",
+      "custom": false
+    },
+    {
+      "meaning": "Duyệt",
+      "icon": "check",
+      "custom": false
+    },
+    {
+      "meaning": "Gọi lái xe",
+      "icon": "phone",
+      "custom": false
+    },
+    {
+      "meaning": "Chụp ảnh",
+      "icon": "camera",
+      "custom": false
+    },
+    {
+      "meaning": "Đính kèm",
+      "icon": "paperclip",
+      "custom": false
+    },
+    {
+      "meaning": "Quét mã",
+      "icon": "scan-line",
+      "custom": false
+    },
+    {
+      "meaning": "Thêm thao tác",
+      "icon": "ellipsis",
+      "custom": false
+    },
+    {
+      "meaning": "Đóng, xoá chip",
+      "icon": "x",
+      "custom": false
+    },
+    {
+      "meaning": "Tìm",
+      "icon": "search",
+      "custom": false
+    },
+    {
+      "meaning": "Thông báo",
+      "icon": "bell",
+      "custom": false
+    },
+    {
+      "meaning": "Quay lại màn trước",
+      "icon": "arrow-left",
+      "custom": false
+    },
+    {
+      "meaning": "Sắp xếp cột",
+      "icon": "arrow-up-down",
+      "custom": false
+    },
+    {
+      "meaning": "Mở rộng",
+      "icon": "chevron-down",
+      "custom": false
+    },
+    {
+      "meaning": "Thu gọn",
+      "icon": "chevron-up",
+      "custom": false
+    },
+    {
+      "meaning": "Trang trước",
+      "icon": "chevron-left",
+      "custom": false
+    },
+    {
+      "meaning": "Trang sau, vào chi tiết hàng",
+      "icon": "chevron-right",
+      "custom": false
+    },
+    {
+      "meaning": "Mở trang ngoài",
+      "icon": "external-link",
+      "custom": false
+    },
+    {
+      "meaning": "Trang tổng quan",
+      "icon": "layout-dashboard",
+      "custom": false
+    },
+    {
+      "meaning": "Thu/mở thanh menu bên",
+      "icon": "panel-left",
+      "custom": false
+    },
+    {
+      "meaning": "Xem dạng danh sách",
+      "icon": "list",
+      "custom": false
+    },
+    {
+      "meaning": "Xem dạng cột",
+      "icon": "columns-3",
+      "custom": false
+    },
+    {
+      "meaning": "Đăng xuất",
+      "icon": "log-out",
+      "custom": false
+    },
+    {
+      "meaning": "Tách, rẽ nhánh",
+      "icon": "git-branch",
+      "custom": false
+    },
+    {
+      "meaning": "Trang chủ",
+      "icon": "house",
+      "custom": false
+    },
+    {
+      "meaning": "Mở menu",
+      "icon": "menu",
+      "custom": false
+    },
+    {
+      "meaning": "Tiếp theo",
+      "icon": "arrow-right",
+      "custom": false
+    },
+    {
+      "meaning": "Đăng nhập",
+      "icon": "log-in",
+      "custom": false
+    },
+    {
+      "meaning": "Xoá bộ lọc",
+      "icon": "funnel-x",
+      "custom": false
+    },
+    {
+      "meaning": "Bớt, giảm số lượng",
+      "icon": "minus",
+      "custom": false
+    },
+    {
+      "meaning": "Bắt đầu",
+      "icon": "play",
+      "custom": false
+    },
+    {
+      "meaning": "Cài đặt",
+      "icon": "settings",
+      "custom": false
+    },
+    {
+      "meaning": "Kéo để đổi thứ tự",
+      "icon": "grip",
+      "custom": false
+    },
+    {
+      "meaning": "Lưu",
+      "icon": "save",
+      "custom": false
+    },
+    {
+      "meaning": "Hoàn tác",
+      "icon": "undo-2",
+      "custom": false
+    },
+    {
+      "meaning": "Ghim",
+      "icon": "pin",
+      "custom": false
+    },
+    {
+      "meaning": "Yêu thích",
+      "icon": "star",
+      "custom": false
+    },
+    {
+      "meaning": "Chia sẻ",
+      "icon": "share-2",
+      "custom": false
+    },
+    {
+      "meaning": "Liên kết",
+      "icon": "link",
+      "custom": false
+    },
+    {
+      "meaning": "Lưu trữ",
+      "icon": "archive",
+      "custom": false
+    },
+    {
+      "meaning": "Nhập file",
+      "icon": "import",
+      "custom": false
+    },
+    {
+      "meaning": "Mã QR",
+      "icon": "qr-code",
+      "custom": false
+    },
+    {
+      "meaning": "Mã vạch",
+      "icon": "barcode",
+      "custom": false
+    },
+    {
+      "meaning": "Đổi mật khẩu",
+      "icon": "key-round",
+      "custom": false
+    },
+    {
+      "meaning": "Đổi ngôn ngữ",
+      "icon": "languages",
+      "custom": false
+    },
+    {
+      "meaning": "Lệnh vận tải",
+      "icon": "clipboard-list",
+      "custom": false
+    },
+    {
+      "meaning": "Lái xe",
+      "icon": "user-round",
+      "custom": false
+    },
+    {
+      "meaning": "Đầu kéo",
+      "icon": "tractor-unit",
+      "custom": true
+    },
+    {
+      "meaning": "Mooc",
+      "icon": "semi-trailer",
+      "custom": true
+    },
+    {
+      "meaning": "Container",
+      "icon": "container",
+      "custom": false
+    },
+    {
+      "meaning": "Seal",
+      "icon": "container-seal",
+      "custom": true
+    },
+    {
+      "meaning": "Xe container",
+      "icon": "container-truck",
+      "custom": true
+    },
+    {
+      "meaning": "Chứng từ",
+      "icon": "file-text",
+      "custom": false
+    },
+    {
+      "meaning": "Phiếu EIR",
+      "icon": "eir",
+      "custom": true
+    },
+    {
+      "meaning": "Chi phí",
+      "icon": "receipt",
+      "custom": false
+    },
+    {
+      "meaning": "Hành trình, tuyến",
+      "icon": "route",
+      "custom": false
+    },
+    {
+      "meaning": "Địa điểm",
+      "icon": "map-pin",
+      "custom": false
+    },
+    {
+      "meaning": "Cảng",
+      "icon": "container-ship",
+      "custom": true
+    },
+    {
+      "meaning": "Kho, cơ sở",
+      "icon": "warehouse",
+      "custom": false
+    },
+    {
+      "meaning": "Trạm dầu",
+      "icon": "fuel",
+      "custom": false
+    },
+    {
+      "meaning": "Trạm thu phí",
+      "icon": "toll-booth",
+      "custom": true
+    },
+    {
+      "meaning": "Lịch",
+      "icon": "calendar",
+      "custom": false
+    },
+    {
+      "meaning": "Thư, email",
+      "icon": "mail",
+      "custom": false
+    },
+    {
+      "meaning": "Báo cáo, biểu đồ",
+      "icon": "chart-column",
+      "custom": false
+    },
+    {
+      "meaning": "Hàng hoá",
+      "icon": "package",
+      "custom": false
+    },
+    {
+      "meaning": "Thêm hàng hoá",
+      "icon": "package-plus",
+      "custom": false
+    },
+    {
+      "meaning": "Công ty, đối tác",
+      "icon": "building",
+      "custom": false
+    },
+    {
+      "meaning": "Hỗ trợ, tổng đài",
+      "icon": "headset",
+      "custom": false
+    },
+    {
+      "meaning": "Tiền mặt, thanh toán",
+      "icon": "banknote",
+      "custom": false
+    },
+    {
+      "meaning": "Mua sắm, vật tư",
+      "icon": "shopping-cart",
+      "custom": false
+    },
+    {
+      "meaning": "Sửa chữa, bảo dưỡng",
+      "icon": "wrench",
+      "custom": false
+    },
+    {
+      "meaning": "Lập chứng từ",
+      "icon": "file-plus",
+      "custom": false
+    },
+    {
+      "meaning": "Chứng từ đã duyệt",
+      "icon": "file-check",
+      "custom": false
+    },
+    {
+      "meaning": "Bảng tính (Excel)",
+      "icon": "file-spreadsheet",
+      "custom": false
+    },
+    {
+      "meaning": "Đã kiểm tra",
+      "icon": "clipboard-check",
+      "custom": false
+    },
+    {
+      "meaning": "Thư mục",
+      "icon": "folder",
+      "custom": false
+    },
+    {
+      "meaning": "Dấu xác nhận",
+      "icon": "stamp",
+      "custom": false
+    },
+    {
+      "meaning": "Hoá đơn",
+      "icon": "receipt-text",
+      "custom": false
+    },
+    {
+      "meaning": "Xe nâng",
+      "icon": "forklift",
+      "custom": false
+    },
+    {
+      "meaning": "Tàu",
+      "icon": "ship",
+      "custom": false
+    },
+    {
+      "meaning": "Đường sắt",
+      "icon": "train-front",
+      "custom": false
+    },
+    {
+      "meaning": "Hàng không",
+      "icon": "plane",
+      "custom": false
+    },
+    {
+      "meaning": "Công tơ mét, số km",
+      "icon": "gauge",
+      "custom": false
+    },
+    {
+      "meaning": "Đường",
+      "icon": "road",
+      "custom": false
+    },
+    {
+      "meaning": "Bản đồ",
+      "icon": "map",
+      "custom": false
+    },
+    {
+      "meaning": "Vị trí hiện tại",
+      "icon": "locate-fixed",
+      "custom": false
+    },
+    {
+      "meaning": "Nhà máy, xưởng",
+      "icon": "factory",
+      "custom": false
+    },
+    {
+      "meaning": "Cửa hàng",
+      "icon": "store",
+      "custom": false
+    },
+    {
+      "meaning": "Hàng nhiều kiện",
+      "icon": "boxes",
+      "custom": false
+    },
+    {
+      "meaning": "Đã giao nhận",
+      "icon": "package-check",
+      "custom": false
+    },
+    {
+      "meaning": "Điểm dừng",
+      "icon": "waypoints",
+      "custom": false
+    },
+    {
+      "meaning": "Nhóm, đội",
+      "icon": "users",
+      "custom": false
+    },
+    {
+      "meaning": "Thêm người dùng",
+      "icon": "user-plus",
+      "custom": false
+    },
+    {
+      "meaning": "Giấy phép lái xe, CCCD",
+      "icon": "id-card",
+      "custom": false
+    },
+    {
+      "meaning": "Ví, quỹ",
+      "icon": "wallet",
+      "custom": false
+    },
+    {
+      "meaning": "Thẻ",
+      "icon": "credit-card",
+      "custom": false
+    },
+    {
+      "meaning": "Tạm ứng",
+      "icon": "hand-coins",
+      "custom": false
+    },
+    {
+      "meaning": "Đối soát, tính toán",
+      "icon": "calculator",
+      "custom": false
+    },
+    {
+      "meaning": "Ngân hàng",
+      "icon": "landmark",
+      "custom": false
+    },
+    {
+      "meaning": "Thuế, chiết khấu",
+      "icon": "percent",
+      "custom": false
+    },
+    {
+      "meaning": "Đối tác, hợp đồng",
+      "icon": "handshake",
+      "custom": false
+    },
+    {
+      "meaning": "Đã lập",
+      "icon": "pencil",
+      "custom": false
+    },
+    {
+      "meaning": "Đã giao lái xe",
+      "icon": "truck",
+      "custom": false
+    },
+    {
+      "meaning": "Lái xe đã nhận",
+      "icon": "check",
+      "custom": false
+    },
+    {
+      "meaning": "Đang thực hiện",
+      "icon": "navigation",
+      "custom": false
+    },
+    {
+      "meaning": "Chờ duyệt",
+      "icon": "clock",
+      "custom": false
+    },
+    {
+      "meaning": "Đã duyệt",
+      "icon": "check-check",
+      "custom": false
+    },
+    {
+      "meaning": "Huỷ",
+      "icon": "circle-x",
+      "custom": false
+    },
+    {
+      "meaning": "Cảnh báo",
+      "icon": "triangle-alert",
+      "custom": false
+    },
+    {
+      "meaning": "Lỗi",
+      "icon": "circle-alert",
+      "custom": false
+    },
+    {
+      "meaning": "Thông tin",
+      "icon": "info",
+      "custom": false
+    },
+    {
+      "meaning": "Hoàn thành, thành công",
+      "icon": "circle-check",
+      "custom": false
+    },
+    {
+      "meaning": "Chưa bắt đầu, nháp",
+      "icon": "circle-dashed",
+      "custom": false
+    },
+    {
+      "meaning": "Tạm dừng",
+      "icon": "circle-pause",
+      "custom": false
+    },
+    {
+      "meaning": "Trợ giúp",
+      "icon": "circle-question-mark",
+      "custom": false
+    },
+    {
+      "meaning": "Không được phép, bị chặn",
+      "icon": "ban",
+      "custom": false
+    },
+    {
+      "meaning": "Không có kết quả tìm",
+      "icon": "search-x",
+      "custom": false
+    },
+    {
+      "meaning": "Mất kết nối",
+      "icon": "wifi-off",
+      "custom": false
+    },
+    {
+      "meaning": "Khoá, bảo mật",
+      "icon": "lock",
+      "custom": false
+    },
+    {
+      "meaning": "Quyền truy cập, bảo vệ",
+      "icon": "shield",
+      "custom": false
+    },
+    {
+      "meaning": "Chưa có dữ liệu (màn trống)",
+      "icon": "inbox",
+      "custom": false
+    },
+    {
+      "meaning": "Đang tải",
+      "icon": "loader-circle",
+      "custom": false
+    },
+    {
+      "meaning": "Đang chờ xử lý",
+      "icon": "hourglass",
+      "custom": false
+    },
+    {
+      "meaning": "Đang xử lý",
+      "icon": "circle-dot",
+      "custom": false
+    },
+    {
+      "meaning": "Đã xác minh",
+      "icon": "badge-check",
+      "custom": false
+    },
+    {
+      "meaning": "An toàn",
+      "icon": "shield-check",
+      "custom": false
+    },
+    {
+      "meaning": "Tắt thông báo",
+      "icon": "bell-off",
+      "custom": false
+    },
+    {
+      "meaning": "Đánh dấu",
+      "icon": "flag",
+      "custom": false
+    }
+  ]
+}

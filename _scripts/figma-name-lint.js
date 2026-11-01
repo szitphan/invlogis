@@ -1,4 +1,4 @@
-// Kiểm tên node Figma theo luật đặt tên component (DEC-264, design/v2/_review/agent-brief-base.md §2d).
+// Kiểm tên node Figma theo luật đặt tên component (DEC-264, design-system/_review/agent-brief-base.md §2d).
 // Cách chạy: đọc file này, thay ROOTS bằng id Section của component vừa dựng, dán làm `code` cho
 // reqwise figma_write. Chỉ đọc, không sửa gì. Kết quả: { fail: [...], pass } — fail ≠ 0 thì sửa rồi chạy lại.
 const ROOTS = ['<sectionId>'];

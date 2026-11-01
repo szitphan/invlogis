@@ -2,7 +2,7 @@
 
 Bộ kiểm chính so từng giá trị đã khai (values) với token. Module này thêm phần nó không thấy:
   Chữ      font-family ngoài bộ font DS · tổ hợp cỡ/dòng không thuộc thang type/* · viết hoa + giãn chữ sai caption-caps
-  Icon     cỡ icon ngoài thang 12/14/16/20/24 · nét khác 2 (DEC-300) · khối icon nhấn mạnh khác Featured 48 / icon 24
+  Icon     cỡ icon ngoài thang 12/14/16/18/20/24 · nét khác 2 (DEC-300) · khối icon nhấn mạnh khác Featured 48 / icon 24
   Hiệu ứng blur ngoài blur/* (làm mờ nền)
   Lưới     bề rộng khung (width/max-width/min-width) ngoài width/*, content-max-width, breakpoint · lề nội dung khác layout/screen-inset (chỉ khi page.json auditInset: true)
 và gắn nhóm cho mọi dòng (group_of) để trang review lọc theo nhóm, báo cáo tách nhóm.
@@ -20,7 +20,7 @@ TYPO = {"font-size", "line-height", "font-weight", "letter-spacing", "font-famil
 EFFECT = {"shadow", "blur", "backdrop-blur", "opacity", "focus-width", "focus-offset"}
 WIDTH = {"width", "max-width", "min-width"}
 DS_FONTS = {"cal sans", "inter", "jetbrains mono"}
-ICON_SIZES = {12, 14, 16, 20, 24}
+ICON_SIZES = {12, 14, 16, 18, 20, 24}  # 18 = icon/size/ml (DEC-306)
 STROKES = {"2"}  # icons.md mục 2 (DEC-300): nét 2 trên khung 24 cho mọi icon
 
 
@@ -65,12 +65,15 @@ def _row(group, key, part, prop, value, sel, rule, fix=None, note="", css_props=
 def _text_pairs(d):
     """{(cỡ, cao dòng): tên style} của thang type/* cả Web và Mobile."""
     pv = d["collections"]["Platform"]["vars"]
+    prim = d["collections"]["Primitives"]["number"]
+    num = lambda x: prim.get(x, x) if isinstance(x, str) else x  # type/*/size trỏ thang font-size/*, line-height/* (DEC-322)
     out = {}
     for name, st in (d.get("textStyles") or {}).items():
         s, lh = pv.get(st.get("size")) or {}, pv.get(st.get("lineHeight")) or {}
         for m in ("Web", "Mobile"):
-            if isinstance(s.get(m), (int, float)) and isinstance(lh.get(m), (int, float)):
-                out.setdefault((s[m], lh[m]), f"{name} ({m})")
+            a, b = num(s.get(m)), num(lh.get(m))
+            if isinstance(a, (int, float)) and isinstance(b, (int, float)):
+                out.setdefault((a, b), f"{name} ({m})")
     return out
 
 
@@ -86,13 +89,13 @@ _FONT_VARS = None
 
 
 def _first_family(v):
-    """Họ font đầu tiên; var(--font-*) đọc theo design/v2/tokens.css (vd --font-body = Inter)."""
+    """Họ font đầu tiên; var(--font-*) đọc theo design-system/tokens.css (vd --font-body = Inter)."""
     global _FONT_VARS
     v = v.strip()
     m = re.match(r"var\((--[\w-]+)\s*(?:,(.*))?\)$", v)
     if m:
         if _FONT_VARS is None:
-            css = (Path(__file__).resolve().parent.parent / "design/v2/tokens.css").read_text()
+            css = (Path(__file__).resolve().parent.parent / "design-system/tokens.css").read_text()
             _FONT_VARS = dict(re.findall(r"(--font-[\w-]+)\s*:\s*([^;]+);", css))
         if m.group(1) in _FONT_VARS:
             v = _FONT_VARS[m.group(1)]
@@ -183,7 +186,7 @@ def audit(page, parse_css, tokens_path):
     for w, n in sorted(sizes.items()):
         to = min(ICON_SIZES, key=lambda x: abs(x - w))
         rows.append(_row("icon", f"size-{_n(w)}", f"Icon cỡ {_n(w)} ({n} chỗ)", "icon-size", _n(w),
-                         f'svg.i[width="{_n(w)}"]', "cỡ icon ngoài thang 12 · 14 · 16 · 20 · 24 (icons.md mục 3)",
+                         f'svg.i[width="{_n(w)}"]', "cỡ icon ngoài thang 12 · 14 · 16 · 18 · 20 · 24 (icons.md mục 3)",
                          {"token": f"icon {to}", "value": to, "css": f"{to}px"}, css_props=["width", "height"], count=n))
     for sw, n in strokes.items():
         rows.append(_row("icon", f"stroke-{_slug(sw)}", f"Nét icon {sw} ({n} chỗ)", "stroke-width", sw,
@@ -199,8 +202,15 @@ def audit(page, parse_css, tokens_path):
             if cls:
                 circ[cls[-1]] = (sel, w)
     for cls, (sel, w) in circ.items():
-        if re.search(r'class="(?:[^"]*\s)?%s(?:\s[^"]*)?"[^>]*>\s*<svg\b[^>]*?\swidth="(\d+)"' % re.escape(cls), html):
-            iw = int(re.search(r'class="(?:[^"]*\s)?%s(?:\s[^"]*)?"[^>]*>\s*<svg\b[^>]*?\swidth="(\d+)"' % re.escape(cls), html).group(1))
+        # bộ chọn có lớp cha (".az .fi") → chỉ xét phần tử nằm trong lớp cha đó, không lấy nhầm ".fi" ở chỗ khác
+        anc = re.findall(r"\.([\w-]+)", sel.split(",")[0])[:-1]
+        iw = None
+        for m in re.finditer(r'class="(?:[^"]*\s)?%s(?:\s[^"]*)?"[^>]*>\s*<svg\b[^>]*?\swidth="(\d+)"' % re.escape(cls), html):
+            before = html[max(0, m.start() - 400):m.start()]
+            if all(re.search(r'class="(?:[^"]*\s)?%s(?:\s[^"]*)?"' % re.escape(a), before) for a in anc):
+                iw = int(m.group(1))
+                break
+        if iw is not None:
             if w != 48 or iw != 24:
                 rows.append(_row("icon", f"featured-{_slug(cls)}", f"Khối icon .{cls} {_n(w)} / icon {iw}", "size",
                                  f"{_n(w)}/{iw}", sel, "icon nhấn mạnh đặt trong Featured icon 48, icon 24 (icons.md mục 3.1, DEC-258)",

@@ -1,0 +1,1967 @@
+{
+  "radius": {
+    "none": {
+      "$type": "dimension",
+      "$value": "{radius.0}",
+      "$description": "Thang bo góc Untitled `radius-none` = 0 (DEC-315)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "xxs": {
+      "$type": "dimension",
+      "$value": "{radius.2}",
+      "$description": "Thang bo góc Untitled `radius-xxs` = 2 (DEC-315)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "xs": {
+      "$type": "dimension",
+      "$value": "{radius.4}",
+      "$description": "Thang bo góc Untitled `radius-xs` = 4 (DEC-315)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "{radius.6}",
+      "$description": "Thang bo góc Untitled `radius-sm` = 6 (DEC-315)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "{radius.8}",
+      "$description": "Thang bo góc Untitled `radius-md` = 8 (DEC-315)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "{radius.10}",
+      "$description": "Thang bo góc Untitled `radius-lg` = 10 (DEC-315)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "{radius.12}",
+      "$description": "Thang bo góc Untitled `radius-xl` = 12 (DEC-315)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "{radius.16}",
+      "$description": "Thang bo góc Untitled `radius-2xl` = 16 (DEC-315)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "3xl": {
+      "$type": "dimension",
+      "$value": "{radius.20}",
+      "$description": "Thang bo góc Untitled `radius-3xl` = 20 (DEC-315)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "4xl": {
+      "$type": "dimension",
+      "$value": "{radius.24}",
+      "$description": "Thang bo góc Untitled `radius-4xl` = 24 (DEC-315)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "full": {
+      "$type": "dimension",
+      "$value": "{radius.9999}",
+      "$description": "Thang bo góc Untitled `radius-full` = tròn hẳn (DEC-315)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "control": {
+      "$type": "dimension",
+      "$value": "{radius.full}",
+      "$description": "Nút, tab chip, ô tìm",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "field": {
+      "$type": "dimension",
+      "$value": "{radius.xl}",
+      "$description": "Ô nhập, ô chọn",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "card": {
+      "$type": "dimension",
+      "$value": "{radius.2xl}",
+      "$description": "Thẻ, nhóm có viền, khối trong trang, bảng; bo không quá lề thẻ (DEC-165)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "inner": {
+      "$type": "dimension",
+      "$value": "{radius.xl}",
+      "$description": "Khối phụ trong thẻ, ảnh nhỏ",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "overlay": {
+      "$type": "dimension",
+      "$value": "{radius.4xl}",
+      "$description": "Dialog, popover; đầu sheet trên app (DEC-259: web 16, app 24)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "chip": {
+      "$type": "dimension",
+      "$value": "{radius.full}",
+      "$description": "Chip trạng thái, avatar",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "menu": {
+      "$type": "dimension",
+      "$value": "{radius.md}",
+      "$description": "Menu thả, popover danh sách (DEC-259, như Untitled)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "menu-item": {
+      "$type": "dimension",
+      "$value": "{radius.sm}",
+      "$description": "Mục trong menu thả (DEC-259)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "badge": {
+      "$type": "dimension",
+      "$value": "{radius.sm}",
+      "$description": "Badge vuông cho nhãn phân loại, không phải trạng thái (DEC-259)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "tab": {
+      "$type": "dimension",
+      "$value": "{radius.full}",
+      "$description": "Tab kiểu nút (web 8, app tab chip tròn); tab gạch không bo (DEC-259)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    }
+  },
+  "space": {
+    "none": {
+      "$type": "dimension",
+      "$value": "{space.0}",
+      "$description": "Thang khoảng cách Untitled `spacing-none` = 0: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "xxs": {
+      "$type": "dimension",
+      "$value": "{space.2}",
+      "$description": "Thang khoảng cách Untitled `spacing-xxs` = 2: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "xs": {
+      "$type": "dimension",
+      "$value": "{space.4}",
+      "$description": "Thang khoảng cách Untitled `spacing-xs` = 4: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "{space.6}",
+      "$description": "Thang khoảng cách Untitled `spacing-sm` = 6: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "{space.8}",
+      "$description": "Thang khoảng cách Untitled `spacing-md` = 8: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "{space.12}",
+      "$description": "Thang khoảng cách Untitled `spacing-lg` = 12: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "{space.16}",
+      "$description": "Thang khoảng cách Untitled `spacing-xl` = 16: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "{space.20}",
+      "$description": "Thang khoảng cách Untitled `spacing-2xl` = 20: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "3xl": {
+      "$type": "dimension",
+      "$value": "{space.24}",
+      "$description": "Thang khoảng cách Untitled `spacing-3xl` = 24: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "4xl": {
+      "$type": "dimension",
+      "$value": "{space.32}",
+      "$description": "Thang khoảng cách Untitled `spacing-4xl` = 32: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "5xl": {
+      "$type": "dimension",
+      "$value": "{space.40}",
+      "$description": "Thang khoảng cách Untitled `spacing-5xl` = 40: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "6xl": {
+      "$type": "dimension",
+      "$value": "{space.48}",
+      "$description": "Thang khoảng cách Untitled `spacing-6xl` = 48: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "7xl": {
+      "$type": "dimension",
+      "$value": "{space.64}",
+      "$description": "Thang khoảng cách Untitled `spacing-7xl` = 64: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "8xl": {
+      "$type": "dimension",
+      "$value": "{space.80}",
+      "$description": "Thang khoảng cách Untitled `spacing-8xl` = 80: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "9xl": {
+      "$type": "dimension",
+      "$value": "{space.96}",
+      "$description": "Thang khoảng cách Untitled `spacing-9xl` = 96: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "10xl": {
+      "$type": "dimension",
+      "$value": "{space.128}",
+      "$description": "Thang khoảng cách Untitled `spacing-10xl` = 128: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "11xl": {
+      "$type": "dimension",
+      "$value": "{space.160}",
+      "$description": "Thang khoảng cách Untitled `spacing-11xl` = 160: lề trong, khoảng giữa phần tử (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    }
+  },
+  "layout": {
+    "screen-inset": {
+      "$type": "dimension",
+      "$value": "{space.16}",
+      "$description": "Lề màn (DEC-259: web 32 như Untitled, app 16)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "card-padding": {
+      "$type": "dimension",
+      "$value": "{space.16}",
+      "$description": "Lề chứa: lề trong thẻ, nhóm có viền, dòng trong nhóm (DEC-164, DEC-165)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "list-gap": {
+      "$type": "dimension",
+      "$value": "{space.12}",
+      "$description": "Giữa các thẻ, dòng trong danh sách",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "section-gap": {
+      "$type": "dimension",
+      "$value": "{space.24}",
+      "$description": "Giữa các khối lớn",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "title-gap": {
+      "$type": "dimension",
+      "$value": "{space.16}",
+      "$description": "Tiêu đề màn → nội dung (DEC-192)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "empty-padding": {
+      "$type": "dimension",
+      "$value": "{space.64}",
+      "$description": "Lề trên dưới màn trống, màn kết quả, đăng nhập (DEC-259)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "content-max-width": {
+      "$type": "dimension",
+      "$value": "393px",
+      "$description": "Rộng nội dung tối đa màn chi tiết, form web; màn bảng trải hết (DEC-259)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "form": {
+    "field-gap": {
+      "$type": "dimension",
+      "$value": "{space.12}",
+      "$description": "Giữa 2 ô nhập trong một nhóm (DEC-192)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    }
+  },
+  "touch": {
+    "min": {
+      "$type": "dimension",
+      "$value": "44px",
+      "$description": "Vùng chạm tối thiểu (web: WCAG 2.2 AA 24; app: DEC-138)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "control": {
+    "height": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "36px",
+        "$description": "Cao control cỡ SM: nút trong hàng bảng (web), tab chip, nút nhỏ (app) (DEC-173)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "42px",
+        "$description": "Cao control cỡ MD (mặc định): nút, ô nhập web; nút trong thẻ, sheet, nút icon (app) (DEC-173)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "ml": {
+        "$type": "dimension",
+        "$value": "42px",
+        "$description": "Nút icon / avatar thanh trên, Featured icon gọn (DEC-304)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "52px",
+        "$description": "Cao control cỡ LG: màn đăng nhập, nút cần nổi (web); nút chân màn, ô nhập (app) (DEC-173)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      }
+    },
+    "padding-x": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "{space.12}",
+        "$description": "Lề trái phải trong nút cỡ SM (DEC-192)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "GAP"
+          ]
+        }
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "{space.16}",
+        "$description": "Lề trái phải trong nút cỡ MD (DEC-192)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "GAP"
+          ]
+        }
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "{space.24}",
+        "$description": "Lề trái phải trong nút cỡ LG; nút app 52 lề 24 (DEC-163, DEC-192)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "GAP"
+          ]
+        }
+      }
+    },
+    "padding-x-icon": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "{space.8}",
+        "$description": "Lề phía có icon trong nút cỡ SM: lùi một bậc thang (DEC-192)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "GAP"
+          ]
+        }
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "{space.12}",
+        "$description": "Lề phía có icon trong nút cỡ MD: lùi một bậc thang (DEC-192)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "GAP"
+          ]
+        }
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "{space.20}",
+        "$description": "Lề phía có icon trong nút cỡ LG: lùi một bậc thang (DEC-163, DEC-192)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "GAP"
+          ]
+        }
+      }
+    },
+    "icon-gap": {
+      "$type": "dimension",
+      "$value": "{space.8}",
+      "$description": "Icon → chữ trong nút, tab chip (DEC-161, DEC-192)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    }
+  },
+  "tab": {
+    "padding-x": {
+      "$type": "dimension",
+      "$value": "{space.16}",
+      "$description": "Lề trái phải trong tab: web tab gạch, app tab chip (DEC-164, DEC-192)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "padding-x-icon": {
+      "$type": "dimension",
+      "$value": "{space.12}",
+      "$description": "Lề phía có icon trong tab: lùi một bậc thang (DEC-192)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.8}",
+      "$description": "Giữa 2 tab (DEC-192)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    }
+  },
+  "nav": {
+    "height": {
+      "$type": "dimension",
+      "$value": "64px",
+      "$description": "Cao thanh điều hướng nổi app (DEC-160); chỉ app, giá trị Web cho đủ mode",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "offset-bottom": {
+      "$type": "dimension",
+      "$value": "{space.8}",
+      "$description": "Thanh điều hướng → vùng an toàn đáy màn (DEC-160); chỉ app",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "padding-x": {
+      "$type": "dimension",
+      "$value": "{space.4}",
+      "$description": "Lề trong thanh điều hướng (DEC-160); chỉ app",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "item-padding-y": {
+      "$type": "dimension",
+      "$value": "{space.4}",
+      "$description": "Lề trên dưới mục, nên nền mục đang chọn cao 56 (DEC-160); chỉ app",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "scan-size": {
+      "$type": "dimension",
+      "$value": "56px",
+      "$description": "Nút Quét mã giữa thanh điều hướng (DEC-160); chỉ app",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "chip": {
+    "height-sm": {
+      "$type": "dimension",
+      "$value": "22px",
+      "$description": "Cao chip Size SM: 16 = một dòng chữ 12/16, dùng ở đầu thẻ bản ghi; web và app cùng 16 (DEC-239); MD là chip/height",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "height-lg": {
+      "$type": "dimension",
+      "$value": "28px",
+      "$description": "Cao chip LG (DEC-259)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "font-size-sm": {
+      "$type": "dimension",
+      "$value": "{font-size.xs}",
+      "$description": "Chip SM: cỡ chữ 12 cả web lẫn app, bằng type/hint (DEC-239, DEC-322)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "FONT_SIZE"
+        ]
+      }
+    },
+    "line-height-sm": {
+      "$type": "dimension",
+      "$value": "{line-height.xs}",
+      "$description": "Chip SM: cao dòng 18 cả web lẫn app, bằng type/hint (DEC-310, DEC-322)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "LINE_HEIGHT"
+        ]
+      }
+    },
+    "count-inset": {
+      "$type": "dimension",
+      "$value": "3px",
+      "$description": "Badge SM có ô đếm: lề phải 3 = (22 − 16) / 2 (DEC-303, DEC-310)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "count-radius": {
+      "$type": "dimension",
+      "$value": "3px",
+      "$description": "Badge Color/Outline/Modern: bo ô đếm SM, MD 3 (DEC-303)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "count-font-size": {
+      "$type": "dimension",
+      "$value": "{font-size.xs}",
+      "$description": "Badge: chữ số đếm và Count Only 12 cố định web + app (review R11, DEC-304)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "FONT_SIZE"
+        ]
+      }
+    },
+    "count-line-height": {
+      "$type": "dimension",
+      "$value": "{line-height.xs-tight}",
+      "$description": "Badge: dòng chữ số đếm 16 cố định web + app (DEC-304)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "LINE_HEIGHT"
+        ]
+      }
+    },
+    "padding-x-sm": {
+      "$type": "dimension",
+      "$value": "{space.10}",
+      "$description": "Badge SM: lề phía chữ 10 (DEC-310)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "padding-x-lg": {
+      "$type": "dimension",
+      "$value": "14px",
+      "$description": "Badge LG: lề phía chữ 14 (DEC-310)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "padding-x-icon-lg": {
+      "$type": "dimension",
+      "$value": "{space.10}",
+      "$description": "Badge LG: lề phía chấm/icon 10 (DEC-310)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    }
+  },
+  "avatar-label": {
+    "width": {
+      "$type": "dimension",
+      "$value": "240px",
+      "$description": "Avatar label: rộng mặc định 240, tên và dòng phụ cắt \"…\" một dòng (DEC-303)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "subtitle-size": {
+      "$type": "dimension",
+      "$value": "{font-size.xs}",
+      "$description": "Avatar label: chữ dòng phụ 12 cố định web + app (DEC-304)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "FONT_SIZE"
+        ]
+      }
+    },
+    "subtitle-line-height": {
+      "$type": "dimension",
+      "$value": "{line-height.xs-tight}",
+      "$description": "Avatar label: dòng phụ cao 16 cố định web + app (DEC-304)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "LINE_HEIGHT"
+        ]
+      }
+    }
+  },
+  "avatar": {
+    "size": {
+      "md": {
+        "$type": "dimension",
+        "$value": "36px",
+        "$description": "Cỡ avatar MD (DEC-201)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "xxl": {
+        "$type": "dimension",
+        "$value": "88px",
+        "$description": "Cỡ avatar XXL, đầu trang hồ sơ (DEC-203)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      }
+    },
+    "status-size": {
+      "md": {
+        "$type": "dimension",
+        "$value": "10px",
+        "$description": "Chấm trạng thái avatar MD, chưa tính viền trắng 2 (DEC-201)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "14px",
+        "$description": "Chấm trạng thái avatar XL (DEC-203)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      }
+    },
+    "edit-size": {
+      "xl": {
+        "$type": "dimension",
+        "$value": "28px",
+        "$description": "Nút đổi ảnh trên avatar XL (DEC-203)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      }
+    },
+    "icon-size": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "14px",
+        "$description": "Icon trong Avatar SM (Content=Icon, Upload): 14 (DEC-242)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      }
+    },
+    "edit-icon-size": {
+      "lg": {
+        "$type": "dimension",
+        "$value": "14px",
+        "$description": "Icon camera nút đổi ảnh LG (nút 24): 14 (DEC-242)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      }
+    },
+    "spinner-size": {
+      "xxl": {
+        "$type": "dimension",
+        "$value": "28px",
+        "$description": "Vòng quay Uploading, Avatar XXL: 28 (DEC-242)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      }
+    },
+    "group-overlap": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "-6px",
+        "$description": "Avatar Group SM: khoảng giữa các avatar là số ÂM = lùi đè ¼ đường kính (6), gắn vào itemSpacing của Base / Avatar Group (DEC-205, DEC-242)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "GAP"
+          ]
+        }
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "-8px",
+        "$description": "Avatar Group MD: khoảng giữa các avatar là số ÂM = lùi đè ¼ đường kính (8), gắn vào itemSpacing của Base / Avatar Group (DEC-205, DEC-242)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "GAP"
+          ]
+        }
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "-12px",
+        "$description": "Avatar Group LG: khoảng giữa các avatar là số ÂM = lùi đè ¼ đường kính (12), gắn vào itemSpacing của Base / Avatar Group (DEC-205, DEC-242)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "GAP"
+          ]
+        }
+      }
+    }
+  },
+  "tooltip": {
+    "max-width": {
+      "$type": "dimension",
+      "$value": "240px",
+      "$description": "Rộng tối đa tooltip, quá thì xuống dòng (DEC-206)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "help-sheet": {
+    "title-line-height": {
+      "$type": "dimension",
+      "$value": "{line-height.lg}",
+      "$description": "Dòng tiêu đề Help sheet, theo type/title-3 18/28 (DEC-322)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "LINE_HEIGHT"
+        ]
+      }
+    }
+  },
+  "upload": {
+    "action-font-size": {
+      "$type": "dimension",
+      "$value": "{font-size.sm}",
+      "$description": "Chữ nút Chọn tệp, link Thử lại, theo type/label 14 (DEC-322)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "FONT_SIZE"
+        ]
+      }
+    },
+    "disabled-opacity": {
+      "$type": "dimension",
+      "$value": "0.6px",
+      "$description": "Vùng kéo thả bị khoá (DEC-307)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "OPACITY"
+        ]
+      }
+    },
+    "divider-width": {
+      "$type": "dimension",
+      "$value": "1px",
+      "$description": "Rộng vạch chia dòng phụ file (DEC-307)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "app-tap-min-height": {
+      "$type": "dimension",
+      "$value": "72px",
+      "$description": "Cao tối thiểu vùng bấm tải lên trên app (DEC-307)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "sheet-radius": {
+      "$type": "dimension",
+      "$value": "28px",
+      "$description": "Bo sheet chọn nguồn file (lệch DEC-259, user chốt) (DEC-307)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "CORNER_RADIUS"
+        ]
+      }
+    },
+    "required-gap": {
+      "$type": "dimension",
+      "$value": "3px",
+      "$description": "Khoảng trước dấu * bắt buộc (DEC-307)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "compact-text-min-width": {
+      "$type": "dimension",
+      "$value": "150px",
+      "$description": "Rộng tối thiểu chữ vùng kéo thả gọn (DEC-307)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "meta-offset": {
+      "$type": "dimension",
+      "$value": "1px",
+      "$description": "Khoảng trên dòng phụ file (DEC-307)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    }
+  },
+  "focus": {
+    "width": {
+      "$type": "dimension",
+      "$value": "2px",
+      "$description": "Độ dày vòng focus",
+      "$extensions": {
+        "com.figma.scopes": [
+          "STROKE_FLOAT"
+        ]
+      }
+    },
+    "offset": {
+      "$type": "dimension",
+      "$value": "2px",
+      "$description": "Khoảng cách vòng focus tới mép control"
+    }
+  },
+  "type": {
+    "display": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.display-sm}",
+        "$description": "Số lớn, màn giới thiệu",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.display-sm}",
+        "$description": "Số lớn, màn giới thiệu",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "title-1": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.display-xs}",
+        "$description": "Tiêu đề màn",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.display-xs}",
+        "$description": "Tiêu đề màn",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "title-2": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.xl}",
+        "$description": "Tiêu đề dialog, sheet, khối lớn",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.xl}",
+        "$description": "Tiêu đề dialog, sheet, khối lớn",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "title-3": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.lg}",
+        "$description": "Tiêu đề khối, thẻ",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.lg}",
+        "$description": "Tiêu đề khối, thẻ",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "heading": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.sm}",
+        "$description": "Tiêu đề nhóm nhỏ",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.sm}",
+        "$description": "Tiêu đề nhóm nhỏ",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "body": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.sm}",
+        "$description": "Chữ đọc, giá trị",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.sm}",
+        "$description": "Chữ đọc, giá trị",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "label": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.sm}",
+        "$description": "Nút, nhãn, tab",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.sm}",
+        "$description": "Nút, nhãn, tab",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "caption": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.xs}",
+        "$description": "Thông tin phụ, thời gian",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.xs-tight}",
+        "$description": "Thông tin phụ, thời gian",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "hint": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.xs}",
+        "$description": "Gợi ý dưới ô, chữ lỗi, dòng phụ file (DEC-306)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.xs}",
+        "$description": "Gợi ý dưới ô, chữ lỗi, dòng phụ file (DEC-306)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "code": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.xs}",
+        "$description": "Mã lệnh, mã chứng từ",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.xs-tight}",
+        "$description": "Mã lệnh, mã chứng từ",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "display-2xl": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.display-2xl}",
+        "$description": "Số rất lớn, màn giới thiệu, Cal Sans (DEC-322)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.display-2xl}",
+        "$description": "Số rất lớn, màn giới thiệu, Cal Sans (DEC-322)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "display-xl": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.display-xl}",
+        "$description": "Số rất lớn, màn giới thiệu (DEC-322)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.display-xl}",
+        "$description": "Số rất lớn, màn giới thiệu (DEC-322)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "display-lg": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.display-lg}",
+        "$description": "Số lớn, màn giới thiệu (DEC-322)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.display-lg}",
+        "$description": "Số lớn, màn giới thiệu (DEC-322)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "display-md": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.display-md}",
+        "$description": "Số lớn trên màn rộng (DEC-322)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.display-md}",
+        "$description": "Số lớn trên màn rộng (DEC-322)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    },
+    "body-lg": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{font-size.md}",
+        "$description": "Chữ 16/24, bậc Text md của Untitled (DEC-322)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FONT_SIZE"
+          ]
+        }
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{line-height.md}",
+        "$description": "Chữ 16/24, bậc Text md của Untitled (DEC-322)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "LINE_HEIGHT"
+          ]
+        }
+      }
+    }
+  },
+  "icon": {
+    "size": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$description": "Icon trong nút có chữ, ô nhập, ô tìm, mũi tên tuyến, chevron (DEC-143)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "20px",
+        "$description": "Icon menu, hàng bảng, hàng danh sách, nút icon (DEC-143)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "ml": {
+        "$type": "dimension",
+        "$value": "18px",
+        "$description": "Icon trong Featured gọn 36, nút lớn app, lớp Thử lại trên ảnh (DEC-306)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$description": "Icon thanh tab app, icon đứng riêng (DEC-143)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "chip": {
+        "$type": "dimension",
+        "$value": "14px",
+        "$description": "Icon trong Badge 14, màu chip/{tone}/fg (DEC-310)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      }
+    }
+  },
+  "featured-icon": {
+    "size": {
+      "$type": "dimension",
+      "$value": "48px",
+      "$description": "Khối Featured icon nhấn mạnh (màn trống, màn kết quả, đầu dialog, ô bấm tải lên app), icon 24 bên trong (icons.md mục 3.1, DEC-258, DEC-307)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "field": {
+    "border-width": {
+      "$type": "dimension",
+      "$value": "1px",
+      "$description": "Ô nhập: viền nghỉ 1px (DEC-184) (DEC-207)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "STROKE_FLOAT"
+        ]
+      }
+    },
+    "width-default": {
+      "$type": "dimension",
+      "$value": "361px",
+      "$description": "Ô nhập: rộng mặc định. Web 320; app 361 = 393 − 2 × 16 (DEC-192). Dùng thật thì Fill theo khung (DEC-207)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "edge-inset": {
+      "$type": "dimension",
+      "$value": "{space.xl}",
+      "$description": "Ô nhập: lề từ mép ô tới khối đầu. Mép chữ = edge-inset + text-inset = 12 web, 16 app; icon đầu, cuối cách mép đúng số này (DEC-184, DEC-192, DEC-196) (DEC-207)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "text-inset": {
+      "$type": "dimension",
+      "$value": "{space.none}",
+      "$description": "Ô nhập: lề trái phải vùng chữ. Web 4 = 12 − 8, app 0 (DEC-184) (DEC-207)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "content-gap": {
+      "$type": "dimension",
+      "$value": "{space.xl}",
+      "$description": "Ô nhập: khoảng icon → vùng chữ; cộng text-inset ra 8 web (DEC-192), 16 app (DEC-196) (DEC-207)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "hint-inset": {
+      "$type": "dimension",
+      "$value": "{space.xl}",
+      "$description": "Ô nhập: lề trái dòng gợi ý, dòng lỗi. Web 0 canh mép ô, app 16 thẳng chữ trong ô (DEC-192) (DEC-207)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "label-max-width": {
+      "$type": "dimension",
+      "$value": "300px",
+      "$description": "Ô nhập: rộng tối đa nhãn, để nhãn dài cắt \"…\" mà dấu * vẫn ngay sau nhãn. 300 ≈ rộng mặc định trừ lề và chỗ cho *; ô hẹp hơn thì chỉnh (DEC-207)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "progress": {
+    "width-default": {
+      "$type": "dimension",
+      "$value": "361px",
+      "$description": "Thanh tiến độ: bề rộng mặc định của component. Web 320; app 361 = 393 − 2 × 16 lề màn. Dùng instance thì kéo rộng theo khung (Fill) (DEC-243)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "otp": {
+    "cell-width": {
+      "$type": "dimension",
+      "$value": "{size.6xl}",
+      "$description": "Ô mã OTP: rộng một ô. App 48 theo bản vẽ account-access 3.4; web 40 là giá trị đề xuất, chưa dựng khối Web (DEC-244)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "width": {
+    "xs": {
+      "$type": "dimension",
+      "$value": "320px",
+      "$description": "Popover, menu thả rộng (DEC-259)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "400px",
+      "$description": "Dialog xác nhận, drawer thường (Untitled slideout 400) (DEC-259)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "560px",
+      "$description": "Dialog form, form 1 cột (DEC-259)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "720px",
+      "$description": "Đoạn văn tối đa, dialog lớn (DEC-259)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "960px",
+      "$description": "Drawer rộng (DEC-259)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "1280px",
+      "$description": "Khung nội dung tối đa web (DEC-259)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "size": {
+    "none": {
+      "$type": "dimension",
+      "$value": "{space.0}",
+      "$description": "Thang kích thước theo bậc Untitled = 0: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "xxs": {
+      "$type": "dimension",
+      "$value": "{space.2}",
+      "$description": "Thang kích thước theo bậc Untitled = 2: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "xs": {
+      "$type": "dimension",
+      "$value": "{space.4}",
+      "$description": "Thang kích thước theo bậc Untitled = 4: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "{space.6}",
+      "$description": "Thang kích thước theo bậc Untitled = 6: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "{space.8}",
+      "$description": "Thang kích thước theo bậc Untitled = 8: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "{space.12}",
+      "$description": "Thang kích thước theo bậc Untitled = 12: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "{space.16}",
+      "$description": "Thang kích thước theo bậc Untitled = 16: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "{space.20}",
+      "$description": "Thang kích thước theo bậc Untitled = 20: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "3xl": {
+      "$type": "dimension",
+      "$value": "{space.24}",
+      "$description": "Thang kích thước theo bậc Untitled = 24: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "4xl": {
+      "$type": "dimension",
+      "$value": "{space.32}",
+      "$description": "Thang kích thước theo bậc Untitled = 32: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "5xl": {
+      "$type": "dimension",
+      "$value": "{space.40}",
+      "$description": "Thang kích thước theo bậc Untitled = 40: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "6xl": {
+      "$type": "dimension",
+      "$value": "{space.48}",
+      "$description": "Thang kích thước theo bậc Untitled = 48: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "7xl": {
+      "$type": "dimension",
+      "$value": "{space.64}",
+      "$description": "Thang kích thước theo bậc Untitled = 64: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "8xl": {
+      "$type": "dimension",
+      "$value": "{space.80}",
+      "$description": "Thang kích thước theo bậc Untitled = 80: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "9xl": {
+      "$type": "dimension",
+      "$value": "{space.96}",
+      "$description": "Thang kích thước theo bậc Untitled = 96: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "10xl": {
+      "$type": "dimension",
+      "$value": "{space.128}",
+      "$description": "Thang kích thước theo bậc Untitled = 128: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "11xl": {
+      "$type": "dimension",
+      "$value": "{space.160}",
+      "$description": "Thang kích thước theo bậc Untitled = 160: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "table": {
+    "row-min-height": {
+      "$type": "dimension",
+      "$value": "52px",
+      "$description": "Cao tối thiểu dòng bảng (DEC-259, như Untitled)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "cell-padding-y": {
+      "$type": "dimension",
+      "$value": "{space.lg}",
+      "$description": "Lề trên dưới ô bảng",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "cell-padding-x": {
+      "$type": "dimension",
+      "$value": "{space.xl}",
+      "$description": "Lề trái phải ô bảng",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    }
+  },
+  "vehicle": {
+    "q-sm-h": {
+      "$type": "dimension",
+      "$value": "100px",
+      "$description": "Cao khung ảnh 3/4 trước cho thẻ mobile (DEC-266)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "q-md-w": {
+      "$type": "dimension",
+      "$value": "240px",
+      "$description": "Khung ảnh 3/4 trước (16:10) cho thẻ web (DEC-266)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "q-md-h": {
+      "$type": "dimension",
+      "$value": "150px",
+      "$description": "Cao khung ảnh 3/4 trước cho thẻ web (DEC-266)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "q-lg-w": {
+      "$type": "dimension",
+      "$value": "480px",
+      "$description": "Khung ảnh 3/4 trước (16:10) cho đầu trang chi tiết phương tiện (DEC-266)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "q-lg-h": {
+      "$type": "dimension",
+      "$value": "300px",
+      "$description": "Cao khung ảnh 3/4 trước cho đầu trang chi tiết phương tiện (DEC-266)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "notification": {
+    "action-gap": {
+      "$type": "dimension",
+      "$value": "{space.3xl}",
+      "$description": "Notification: khoảng giữa 2 nút hành động — app 24 để vùng chạm 44 không chồng nhau (DEC-287)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    }
+  },
+  "header-nav": {
+    "height": {
+      "$type": "dimension",
+      "$value": "56px",
+      "$description": "Cao thanh trên Header navigation (DEC-305)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "account-menu-width": {
+      "$type": "dimension",
+      "$value": "256px",
+      "$description": "Rộng menu tài khoản mở từ avatar (DEC-305)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "breadcrumbs": {
+    "current-max-width": {
+      "$type": "dimension",
+      "$value": "240px",
+      "$description": "Breadcrumbs: trang hiện tại rộng tối đa, quá thì cắt + tooltip (DEC-305)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "menu-min-width": {
+      "$type": "dimension",
+      "$value": "240px",
+      "$description": "Breadcrumbs: rộng tối thiểu menu tầng ẩn “…” (DEC-305)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "command-search": {
+    "width": {
+      "$type": "dimension",
+      "$value": "600px",
+      "$description": "Rộng hộp thoại tìm ⌘K giữa màn (DEC-305)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "highlight-padding-x": {
+      "$type": "dimension",
+      "$value": "1px",
+      "$description": "Lề trái phải nền chữ khớp (DEC-305)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    }
+  }
+}

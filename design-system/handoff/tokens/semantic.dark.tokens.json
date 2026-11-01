@@ -1,0 +1,1959 @@
+{
+  "color": {
+    "accent": {
+      "bg": {
+        "$type": "color",
+        "$value": "{color.brand.900}",
+        "$description": "Màu khách · Nền mục menu đang chọn, nền avatar (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "bg-subtle": {
+        "$type": "color",
+        "$value": "{color.brand.950}",
+        "$description": "Màu khách · Nền dòng bảng đang chọn (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{color.brand.300}",
+        "$description": "Màu khách · Viền chỗ đang chọn: thẻ chọn, ô chọn (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "fg": {
+        "$type": "color",
+        "$value": "{color.brand.200}",
+        "$description": "Màu khách · Chữ viết tắt, icon avatar trên nền accent/bg (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL",
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "solid": {
+        "$type": "color",
+        "$value": "{color.brand.300}",
+        "$description": "Màu khách · Công tắc bật, ô chọn, radio, gạch tab đang chọn, thanh tiến độ (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "solid-hover": {
+        "$type": "color",
+        "$value": "{color.brand.200}",
+        "$description": "Màu khách · Rê chuột trên phần mang màu khách (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "solid-pressed": {
+        "$type": "color",
+        "$value": "{color.brand.100}",
+        "$description": "Màu khách · Đang bấm phần mang màu khách (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.brand.300}",
+        "$description": "Màu khách · Chữ liên kết, mã chứng từ (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "text-hover": {
+        "$type": "color",
+        "$value": "{color.brand.200}",
+        "$description": "Màu khách · Chữ liên kết khi rê chuột (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      }
+    },
+    "action": {
+      "primary": {
+        "$type": "color",
+        "$value": "{neutral.200}",
+        "$description": "Nền hành động chính. Dùng ở: nút Primary, tab chip đang chọn.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "primary-hover": {
+        "$type": "color",
+        "$value": "{neutral.300}",
+        "$description": "Nền nút Primary khi rê chuột.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "primary-pressed": {
+        "$type": "color",
+        "$value": "{neutral.400}",
+        "$description": "Nền nút Primary khi bấm.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{dark.3}",
+        "$description": "Nền hành động phụ và nền xám của trạng thái tắt. Dùng ở: nút Secondary, nút Disabled.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "secondary-hover": {
+        "$type": "color",
+        "$value": "{neutral.700}",
+        "$description": "Nền nút Secondary khi rê chuột.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "secondary-pressed": {
+        "$type": "color",
+        "$value": "{neutral.600}",
+        "$description": "Nền nút Secondary khi bấm; nút Outline dùng chung thang secondary khi rê, bấm.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      }
+    },
+    "bg": {
+      "disabled": {
+        "$type": "color",
+        "$value": "{dark.3}",
+        "$description": "Nền control tắt: nút, ô nhập, ô chọn (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "error": {
+        "primary": {
+          "$type": "color",
+          "$value": "{red.950}",
+          "$description": "Nền lỗi chính (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "primary_hover": {
+          "$type": "color",
+          "$value": "{red.900}",
+          "$description": "Nền nhạt nút Danger khi rê chuột. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "primary_pressed": {
+          "$type": "color",
+          "$value": "{red.800}",
+          "$description": "Nền nhạt nút Danger khi bấm. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{red.900}",
+          "$description": "Nền lỗi phụ: featured icon (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "solid": {
+          "$type": "color",
+          "$value": "{red.700}",
+          "$description": "Nền lỗi đặc: nút, featured icon, số liệu (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "solid_hover": {
+          "$type": "color",
+          "$value": "{red.600}",
+          "$description": "Nền lỗi đặc khi rê chuột (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "overlay": {
+          "$type": "color",
+          "$value": "{alpha.red-700-55}",
+          "$description": "Lớp phủ đỏ trên ảnh tải lỗi, không đổi theo Light/Dark vì ảnh không đổi (DEC-321)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        }
+      },
+      "info": {
+        "primary": {
+          "$type": "color",
+          "$value": "{blue.950}",
+          "$description": "Nền thông tin chính (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{blue.900}",
+          "$description": "Nền thông tin phụ: featured icon (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "solid": {
+          "$type": "color",
+          "$value": "{blue.700}",
+          "$description": "Nền thông tin đặc: nút, featured icon, số liệu (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "solid_hover": {
+          "$type": "color",
+          "$value": "{blue.600}",
+          "$description": "Nền thông tin đặc khi rê chuột (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        }
+      },
+      "overlay": {
+        "$type": "color",
+        "$value": "{alpha.neutral-950-50}",
+        "$description": "Nền lớp phủ sau dialog, sheet (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "pressed": {
+        "$type": "color",
+        "$value": "{neutral.700}",
+        "$description": "Nền đang bấm của thứ nền trắng: dòng danh sách, thẻ bấm được (app không có hover); chữ phụ trên nền này dùng text/tertiary_strong (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "primary": {
+        "$type": "color",
+        "$value": "{dark.0}",
+        "$description": "Nền chính cho mọi bố cục và component (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "primary_alt": {
+        "$type": "color",
+        "$value": "{dark.1}",
+        "$description": "Nền trắng ở Light, sáng hơn nền trang ở Dark: menu, dialog, sheet (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "primary_hover": {
+        "$type": "color",
+        "$value": "{dark.2}",
+        "$description": "Rê chuột trên component nền trắng: menu chọn, dòng bảng (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "primary_solid": {
+        "$type": "color",
+        "$value": "{neutral.200}",
+        "$description": "Nền tối chính: tooltip, toast trung tính (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "quaternary": {
+        "$type": "color",
+        "$value": "{neutral.700}",
+        "$description": "Nền cấp 4 trên nền sáng: thanh trượt, thanh tiến độ, công tắc tắt (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "quaternary_hover": {
+        "$type": "color",
+        "$value": "{neutral.600}",
+        "$description": "Rãnh công tắc tắt khi rê chuột (DEC-316, DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{dark.2}",
+        "$description": "Nền phụ tạo tương phản với nền trắng (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "secondary_alt": {
+        "$type": "color",
+        "$value": "{dark.0}",
+        "$description": "Nền phụ thành nền trang ở Dark (tab kiểu viền) (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "secondary_hover": {
+        "$type": "color",
+        "$value": "{dark.3}",
+        "$description": "Rê chuột trên component nền phụ (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "secondary_solid": {
+        "$type": "color",
+        "$value": "{neutral.600}",
+        "$description": "Nền tối phụ: featured icon (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "{dark.3}",
+        "$description": "Nền mục đang chọn khi khách không có màu riêng. Dùng ở: List Item đang chọn, mục menu đang chọn.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "skeleton": {
+        "$type": "color",
+        "$value": "{dark.3}",
+        "$description": "Khối chờ tải (skeleton) (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "success": {
+        "primary": {
+          "$type": "color",
+          "$value": "{green.950}",
+          "$description": "Nền thành công chính (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{green.900}",
+          "$description": "Nền thành công phụ: featured icon (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "solid": {
+          "$type": "color",
+          "$value": "{green.700}",
+          "$description": "Nền thành công đặc: nút, featured icon, số liệu (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "solid_hover": {
+          "$type": "color",
+          "$value": "{green.600}",
+          "$description": "Nền thành công đặc khi rê chuột (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        }
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{dark.3}",
+        "$description": "Nền cấp 3: công tắc tắt (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "warning": {
+        "primary": {
+          "$type": "color",
+          "$value": "{yellow.950}",
+          "$description": "Nền cảnh báo chính (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{yellow.900}",
+          "$description": "Nền cảnh báo phụ: featured icon (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "solid": {
+          "$type": "color",
+          "$value": "{yellow.700}",
+          "$description": "Nền cảnh báo đặc: nút, featured icon, số liệu (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "solid_hover": {
+          "$type": "color",
+          "$value": "{yellow.600}",
+          "$description": "Nền cảnh báo đặc khi rê chuột (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        }
+      }
+    },
+    "border": {
+      "disabled": {
+        "$type": "color",
+        "$value": "{dark.4}",
+        "$description": "Viền control tắt (DEC-316)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{red.300}",
+        "$description": "Viền lỗi mặc định: ô nhập, tải tệp (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "error_subtle": {
+        "$type": "color",
+        "$value": "{red.700}",
+        "$description": "Viền lỗi nhạt hơn (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{blue.300}",
+        "$description": "Viền thông tin (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "info_subtle": {
+        "$type": "color",
+        "$value": "{blue.700}",
+        "$description": "Viền thông tin nhạt (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "input": {
+        "$type": "color",
+        "$value": "{neutral.500}",
+        "$description": "Viền tương phản cao (≥ 3:1) cho thứ người dùng nhập hoặc chọn. Dùng ở: Text Field, OTP Field, radio Selectable Card.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "primary": {
+        "$type": "color",
+        "$value": "{neutral.700}",
+        "$description": "Viền tương phản cao hơn mặc định: nhóm nút, nút Secondary (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{dark.4}",
+        "$description": "Viền dùng nhiều nhất, mặc định cho phần lớn component (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "secondary_alt": {
+        "$type": "color",
+        "$value": "{dark.4}",
+        "$description": "Biến thể alpha của viền phụ, chỉ dùng cho menu nổi (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{green.300}",
+        "$description": "Viền thành công (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "success_subtle": {
+        "$type": "color",
+        "$value": "{green.700}",
+        "$description": "Viền thành công nhạt (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{dark.2}",
+        "$description": "Viền tương phản thấp: vạch chia rất nhạt, trục biểu đồ (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{yellow.300}",
+        "$description": "Viền cảnh báo (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "warning_subtle": {
+        "$type": "color",
+        "$value": "{yellow.700}",
+        "$description": "Viền cảnh báo nhạt (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "input_hover": {
+        "$type": "color",
+        "$value": "{neutral.300}",
+        "$description": "Viền ô nhập khi rê chuột, đậm hơn border/input (DEC-321)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      }
+    },
+    "fg": {
+      "disabled": {
+        "$type": "color",
+        "$value": "{neutral.600}",
+        "$description": "Icon control tắt (DEC-316, DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "error": {
+        "primary": {
+          "$type": "color",
+          "$value": "{red.400}",
+          "$description": "Icon lỗi chính: featured icon (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{red.400}",
+          "$description": "Icon trong ô lỗi, chỉ số âm (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        }
+      },
+      "info": {
+        "primary": {
+          "$type": "color",
+          "$value": "{blue.400}",
+          "$description": "Icon thông tin chính: featured icon (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{neutral.950}",
+        "$description": "Icon trên nền đậm đổi theo chế độ: Tooltip, nút Primary (DEC-316, DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "primary": {
+        "$type": "color",
+        "$value": "{white}",
+        "$description": "Icon tương phản cao nhất (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "quaternary": {
+        "$type": "color",
+        "$value": "{neutral.600}",
+        "$description": "Tương phản thấp: icon trong nút, icon trợ giúp, icon trong ô nhập (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "quaternary_hover": {
+        "$type": "color",
+        "$value": "{neutral.500}",
+        "$description": "Icon tương phản thấp khi rê chuột (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{neutral.300}",
+        "$description": "Phần tử không phải chữ tương phản cao: icon đi cùng chữ chính (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "secondary_hover": {
+        "$type": "color",
+        "$value": "{neutral.200}",
+        "$description": "Icon khi rê chuột (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "success": {
+        "primary": {
+          "$type": "color",
+          "$value": "{green.400}",
+          "$description": "Icon thành công chính: featured icon (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{green.400}",
+          "$description": "Chấm online avatar, chấm nút (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        }
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{neutral.400}",
+        "$description": "Icon tương phản vừa (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "tertiary_hover": {
+        "$type": "color",
+        "$value": "{neutral.300}",
+        "$description": "Icon tương phản vừa khi rê chuột (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "warning": {
+        "primary": {
+          "$type": "color",
+          "$value": "{yellow.400}",
+          "$description": "Icon cảnh báo chính: featured icon (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{yellow.400}",
+          "$description": "Cảnh báo phụ (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        }
+      },
+      "white": {
+        "$type": "color",
+        "$value": "{white}",
+        "$description": "Icon luôn trắng, mọi chế độ (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "SHAPE_FILL",
+            "STROKE_COLOR"
+          ]
+        }
+      }
+    },
+    "focus": {
+      "gap": {
+        "$type": "color",
+        "$value": "{dark.0}",
+        "$description": "Khe 2px giữa control và vòng focus, trùng nền trang (DEC-258, thay collection Context). Dùng ở: .focus / Ring, ruột nút Ghost, Outline.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL",
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "ring": {
+        "$type": "color",
+        "$value": "{neutral.200}",
+        "$description": "Vòng focus mặc định; than chì cho mọi khách (DEC-170) (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      },
+      "ring_error": {
+        "$type": "color",
+        "$value": "{red.300}",
+        "$description": "Vòng focus lỗi (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "STROKE_COLOR"
+          ]
+        }
+      }
+    },
+    "shadow": {
+      "lg": {
+        "$type": "color",
+        "$value": "{alpha.black.60}",
+        "$description": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/3 lớp 1.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "md": {
+        "$type": "color",
+        "$value": "{alpha.black.50}",
+        "$description": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/2 lớp 1, elev/3 lớp 2.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "md-soft": {
+        "$type": "color",
+        "$value": "{alpha.black.40}",
+        "$description": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/2 lớp 2.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "sm": {
+        "$type": "color",
+        "$value": "{alpha.black.40}",
+        "$description": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/1.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      }
+    },
+    "text": {
+      "disabled": {
+        "$type": "color",
+        "$value": "{neutral.600}",
+        "$description": "Chữ control tắt; không dùng cho nội dung (DEC-316, DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "error": {
+        "primary": {
+          "$type": "color",
+          "$value": "{red.300}",
+          "$description": "Chữ lỗi mặc định (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "primary_hover": {
+          "$type": "color",
+          "$value": "{red.300}",
+          "$description": "Chữ lỗi khi rê chuột (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL"
+            ]
+          }
+        }
+      },
+      "info": {
+        "primary": {
+          "$type": "color",
+          "$value": "{blue.300}",
+          "$description": "Chữ thông tin mặc định (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{neutral.950}",
+        "$description": "Chữ trên nền đậm. Dùng ở: chữ nút Primary, chữ Tooltip.",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{neutral.400}",
+        "$description": "Chữ gợi ý trong ô nhập",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "primary": {
+        "$type": "color",
+        "$value": "{neutral.200}",
+        "$description": "Chữ chính: tiêu đề trang, giá trị chính",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "quaternary": {
+        "$type": "color",
+        "$value": "{neutral.400}",
+        "$description": "Chữ nhạt, tương phản thấp (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{neutral.300}",
+        "$description": "Chữ phụ: nhãn, tiêu đề mục (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "secondary_hover": {
+        "$type": "color",
+        "$value": "{neutral.200}",
+        "$description": "Chữ phụ khi rê chuột (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "success": {
+        "primary": {
+          "$type": "color",
+          "$value": "{green.300}",
+          "$description": "Chữ thành công mặc định (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        }
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "{neutral.400}",
+        "$description": "Chữ hỗ trợ, đoạn văn, nhãn trường, thời gian (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "tertiary_hover": {
+        "$type": "color",
+        "$value": "{neutral.300}",
+        "$description": "Chữ hỗ trợ khi rê chuột (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "tertiary_strong": {
+        "$type": "color",
+        "$value": "{neutral.300}",
+        "$description": "Chữ phụ trên nền nhấn (hover, đang chọn) để giữ ≥ 4,5:1 (DEC-289). Dùng ở: dòng phụ thẻ phạm vi khi Hover/Open, dòng chọn Hover/Selected của Scope dialog. (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL"
+          ]
+        }
+      },
+      "warning": {
+        "primary": {
+          "$type": "color",
+          "$value": "{yellow.300}",
+          "$description": "Chữ cảnh báo mặc định (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        }
+      },
+      "white": {
+        "$type": "color",
+        "$value": "{white}",
+        "$description": "Luôn trắng, mọi chế độ: chữ trên nền đặc (DEC-320)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "TEXT_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      }
+    },
+    "utility": {
+      "blue": {
+        "100": {
+          "$type": "color",
+          "$value": "{blue.900}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "200": {
+          "$type": "color",
+          "$value": "{blue.800}",
+          "$description": "Chip blue: viền Badge Outline (DEC-308) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "300": {
+          "$type": "color",
+          "$value": "{blue.700}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "400": {
+          "$type": "color",
+          "$value": "{blue.600}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "50": {
+          "$type": "color",
+          "$value": "{blue.950}",
+          "$description": "Chip trạng thái blue: nền. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "500": {
+          "$type": "color",
+          "$value": "{blue.400}",
+          "$description": "Chuỗi dữ liệu biểu đồ thứ 1 (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "600": {
+          "$type": "color",
+          "$value": "{blue.400}",
+          "$description": "Chip blue: chấm Badge Dot (DEC-310) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "700": {
+          "$type": "color",
+          "$value": "{blue.300}",
+          "$description": "Chip trạng thái blue: chữ, icon. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        }
+      },
+      "green": {
+        "100": {
+          "$type": "color",
+          "$value": "{green.900}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "200": {
+          "$type": "color",
+          "$value": "{green.800}",
+          "$description": "Chip green: viền Badge Outline (DEC-308) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "300": {
+          "$type": "color",
+          "$value": "{green.700}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "400": {
+          "$type": "color",
+          "$value": "{green.600}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "50": {
+          "$type": "color",
+          "$value": "{green.950}",
+          "$description": "Chip trạng thái green: nền. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "500": {
+          "$type": "color",
+          "$value": "{green.400}",
+          "$description": "Chuỗi dữ liệu biểu đồ thứ 5 (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "600": {
+          "$type": "color",
+          "$value": "{green.400}",
+          "$description": "Chip green: chấm Badge Dot (DEC-310) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "700": {
+          "$type": "color",
+          "$value": "{green.300}",
+          "$description": "Chip trạng thái green: chữ, icon. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        }
+      },
+      "neutral": {
+        "100": {
+          "$type": "color",
+          "$value": "{dark.3}",
+          "$description": "Chip trạng thái gray: nền. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "200": {
+          "$type": "color",
+          "$value": "{neutral.800}",
+          "$description": "Chip gray: viền Badge Outline (DEC-308) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "300": {
+          "$type": "color",
+          "$value": "{neutral.700}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "400": {
+          "$type": "color",
+          "$value": "{neutral.600}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "50": {
+          "$type": "color",
+          "$value": "{neutral.950}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "500": {
+          "$type": "color",
+          "$value": "{neutral.400}",
+          "$description": "Chip gray: chấm Badge Dot (DEC-310) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "600": {
+          "$type": "color",
+          "$value": "{neutral.400}",
+          "$description": "Chip trạng thái gray: chữ, icon. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "700": {
+          "$type": "color",
+          "$value": "{neutral.300}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        }
+      },
+      "orange": {
+        "100": {
+          "$type": "color",
+          "$value": "{orange.950}",
+          "$description": "Chip trạng thái orange: nền. Dùng ở: Status Chip, Status Row. Light orange/100 (review R1, DEC-311: tách khỏi chip vàng). (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "200": {
+          "$type": "color",
+          "$value": "{orange.800}",
+          "$description": "Chip orange: viền Badge Outline (DEC-308) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "300": {
+          "$type": "color",
+          "$value": "{orange.700}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "400": {
+          "$type": "color",
+          "$value": "{orange.600}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "50": {
+          "$type": "color",
+          "$value": "{orange.950}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "500": {
+          "$type": "color",
+          "$value": "{orange.400}",
+          "$description": "Chuỗi dữ liệu biểu đồ thứ 7 (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "600": {
+          "$type": "color",
+          "$value": "{orange.400}",
+          "$description": "Chip orange: chấm Badge Dot (DEC-310) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "700": {
+          "$type": "color",
+          "$value": "{orange.300}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "800": {
+          "$type": "color",
+          "$value": "{orange.300}",
+          "$description": "Chip trạng thái orange: chữ, icon. Dùng ở: Status Chip, Status Row. Light orange/800 (review R1, DEC-311). (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        }
+      },
+      "purple": {
+        "100": {
+          "$type": "color",
+          "$value": "{purple.900}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "200": {
+          "$type": "color",
+          "$value": "{purple.800}",
+          "$description": "Chip purple: viền Badge Outline (DEC-308) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "300": {
+          "$type": "color",
+          "$value": "{purple.700}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "400": {
+          "$type": "color",
+          "$value": "{purple.600}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "50": {
+          "$type": "color",
+          "$value": "{purple.950}",
+          "$description": "Chip trạng thái purple: nền. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "500": {
+          "$type": "color",
+          "$value": "{purple.400}",
+          "$description": "Chuỗi dữ liệu biểu đồ thứ 3 (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "600": {
+          "$type": "color",
+          "$value": "{purple.400}",
+          "$description": "Chip purple: chấm Badge Dot (DEC-310) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "700": {
+          "$type": "color",
+          "$value": "{purple.300}",
+          "$description": "Chip trạng thái purple: chữ, icon. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        }
+      },
+      "red": {
+        "100": {
+          "$type": "color",
+          "$value": "{red.900}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "200": {
+          "$type": "color",
+          "$value": "{red.800}",
+          "$description": "Chip red: viền Badge Outline (DEC-308) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "300": {
+          "$type": "color",
+          "$value": "{red.700}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "400": {
+          "$type": "color",
+          "$value": "{red.600}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "50": {
+          "$type": "color",
+          "$value": "{red.950}",
+          "$description": "Chip trạng thái red: nền. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "500": {
+          "$type": "color",
+          "$value": "{red.400}",
+          "$description": "Chuỗi dữ liệu biểu đồ thứ 6 (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "600": {
+          "$type": "color",
+          "$value": "{red.400}",
+          "$description": "Chip red: chấm Badge Dot (DEC-310) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "700": {
+          "$type": "color",
+          "$value": "{red.300}",
+          "$description": "Chip trạng thái red: chữ, icon. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        }
+      },
+      "teal": {
+        "100": {
+          "$type": "color",
+          "$value": "{teal.900}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "200": {
+          "$type": "color",
+          "$value": "{teal.800}",
+          "$description": "Chip teal: viền Badge Outline (DEC-308) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "300": {
+          "$type": "color",
+          "$value": "{teal.700}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "400": {
+          "$type": "color",
+          "$value": "{teal.600}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "50": {
+          "$type": "color",
+          "$value": "{teal.950}",
+          "$description": "Chip trạng thái teal: nền. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "500": {
+          "$type": "color",
+          "$value": "{teal.400}",
+          "$description": "Chuỗi dữ liệu biểu đồ thứ 2 (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "600": {
+          "$type": "color",
+          "$value": "{teal.400}",
+          "$description": "Chip teal: chấm Badge Dot (DEC-310) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "700": {
+          "$type": "color",
+          "$value": "{teal.300}",
+          "$description": "Chip trạng thái teal: chữ, icon. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        }
+      },
+      "yellow": {
+        "100": {
+          "$type": "color",
+          "$value": "{yellow.900}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "200": {
+          "$type": "color",
+          "$value": "{yellow.800}",
+          "$description": "Chip yellow: viền Badge Outline (DEC-308) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "300": {
+          "$type": "color",
+          "$value": "{yellow.700}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "400": {
+          "$type": "color",
+          "$value": "{yellow.600}",
+          "$description": "Thang utility, đảo bậc ở Dark (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR",
+              "TEXT_FILL"
+            ]
+          }
+        },
+        "50": {
+          "$type": "color",
+          "$value": "{yellow.950}",
+          "$description": "Chip trạng thái yellow: nền. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "500": {
+          "$type": "color",
+          "$value": "{yellow.400}",
+          "$description": "Chuỗi dữ liệu biểu đồ thứ 4 (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        },
+        "600": {
+          "$type": "color",
+          "$value": "{yellow.400}",
+          "$description": "Chip yellow: chấm Badge Dot (DEC-310) (DEC-316, DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "FRAME_FILL",
+              "SHAPE_FILL"
+            ]
+          }
+        },
+        "700": {
+          "$type": "color",
+          "$value": "{yellow.300}",
+          "$description": "Chip trạng thái yellow: chữ, icon. Dùng ở: Status Chip, Status Row. (DEC-320)",
+          "$extensions": {
+            "com.figma.scopes": [
+              "TEXT_FILL",
+              "SHAPE_FILL",
+              "STROKE_COLOR"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

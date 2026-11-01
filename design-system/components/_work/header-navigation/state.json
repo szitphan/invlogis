@@ -1,0 +1,24 @@
+{
+  "round": "review",
+  "artifact_url": "https://claude.ai/artifact/Ua29VuBKRsRys51EYujU3P",
+  "approved": {
+    "brainstorm": "2026-10-28",
+    "preview": "2026-10-28",
+    "foundation": "2026-10-29"
+  },
+  "figma": {
+    "set": "6768:191286",
+    "breadcrumbs": "6901:20705",
+    "search_panel": "6904:20446",
+    "search_result": "6900:216895",
+    "doc": "6768:198301",
+    "bell": "6768:190822",
+    "secondary_nav": "6768:190732",
+    "header_tab": "6768:190577",
+    "search_button_web": "6940:218896",
+    "search_button_secondary": "6940:218954",
+    "doc_menu": "6941:219205"
+  },
+  "source_variants": "https://claude.ai/artifact/L3pzcVoU11rCka42c9tHoS (headernav v15, breadcrumb v10)",
+  "reopened": "2026-10-28: chốt lại tổ hợp D2 B · D3 C · D4 C + 8 góp ý (DEC-291). Figma đang theo tổ hợp cũ (DEC-290) — vẽ lại sau khi duyệt preview + foundation · 28/10 11:32 D4 C → B (DEC-293)"
+}

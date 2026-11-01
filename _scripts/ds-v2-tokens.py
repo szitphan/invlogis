@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""DS v2 — sinh design/v2/tokens.css từ design/v2/tokens.json (nguồn duy nhất).
+"""DS v2 — sinh design-system/tokens.css từ design-system/tokens.json (nguồn duy nhất).
 
   python3 _scripts/ds-v2-tokens.py           # ghi tokens.css + in bảng tương phản
   python3 _scripts/ds-v2-tokens.py --check   # không ghi; exit 1 nếu tokens.css lệch json hoặc cặp chữ/nền dưới ngưỡng
 
-Tên CSS = '--' + tên token thay '/' bằng '-' (neutral/100 → --neutral-100, color/bg/canvas → --color-bg-canvas).
+Tên CSS = '--' + tên token thay '/' bằng '-' (neutral/100 → --neutral-100, color/bg/primary → --color-bg-primary).
 Màu theo khách: collection Brand, mỗi chế độ một dải; đặt data-brand="<slug>" trên thẻ gốc (mặc định than-chi).
 Bóng: màu mỗi lớp đi qua biến Semantic `color/shadow/*` (đổi theo sáng/tối); `blur/*` sinh --blur-*.
 Collection Context đã bỏ (DEC-258): khe focus là token Semantic `color/focus/gap`.
@@ -15,27 +15,30 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "design/v2/tokens.json"
-OUT = ROOT / "design/v2/tokens.css"
+SRC = ROOT / "design-system/tokens.json"
+OUT = ROOT / "design-system/tokens.css"
 WEIGHT = {"Regular": 400, "Medium": 500, "Semi Bold": 600, "Bold": 700}
 
 # Cặp chữ/nền phải đạt ngưỡng (WCAG 2.2: chữ thường 4.5, chữ gợi ý/icon tắt chỉ báo cáo).
 PAIRS = [
-    ("color/text/primary", "color/bg/surface", 4.5),
-    ("color/text/primary", "color/bg/canvas", 4.5),
-    ("color/text/secondary", "color/bg/surface", 4.5),
-    ("color/text/secondary", "color/bg/canvas", 4.5),
-    ("color/text/secondary", "color/bg/muted", 4.5),
-    ("color/text/secondary-strong", "color/bg/selected", 4.5),
-    ("color/text/secondary-strong", "color/bg/hover", 4.5),
+    ("color/text/primary", "color/bg/primary", 4.5),
+    ("color/text/tertiary", "color/bg/primary", 4.5),
+    ("color/text/tertiary", "color/bg/secondary", 4.5),
+    ("color/text/tertiary_strong", "color/bg/selected", 4.5),
+    ("color/text/tertiary_strong", "color/bg/primary_hover", 4.5),
     ("color/text/inverse", "color/action/primary", 4.5),
-    ("color/text/inverse", "color/action/danger", 4.5),
-    ("color/action/danger", "color/action/danger-subtle", 4.5),
+    ("color/text/inverse", "color/text/error/primary", 4.5),
+    ("color/text/error/primary", "color/bg/error/primary", 4.5),
     ("color/text/primary", "color/action/secondary", 4.5),
-    ("color/text/tertiary", "color/bg/surface", 0),
-] + [(f"color/status/{k}-text", f"color/status/{k}-bg", 4.5) for k in ("success", "warning", "danger", "info")] \
-  + [(f"color/chip/{c}/fg", f"color/chip/{c}/bg", 4.5)
-     for c in ("gray", "blue", "teal", "purple", "yellow", "green", "red", "orange")]
+    ("color/text/disabled", "color/bg/primary", 0),
+    ("color/text/placeholder", "color/bg/primary", 4.5),
+    ("color/text/secondary", "color/bg/primary", 4.5),
+    ("color/text/tertiary_strong", "color/bg/pressed", 4.5),
+] + [(f"color/text/{k}/primary", f"color/bg/{k}/primary", 4.5) for k in ("success", "warning", "error", "info")] \
+  + [("color/text/white", f"color/bg/{k}/solid", 4.5) for k in ("success", "warning", "error", "info")] \
+  + [(f"color/utility/{c}/{fg}", f"color/utility/{c}/{bg}", 4.5)  # cặp chữ/nền chip (bậc riêng: neutral 600/100, orange 800/100; DEC-311, DEC-320)
+     for c, fg, bg in (("neutral", 600, 100), ("blue", 700, 50), ("teal", 700, 50), ("purple", 700, 50), ("yellow", 700, 50),
+                       ("green", 700, 50), ("red", 700, 50), ("orange", 800, 100))]
 
 
 def css_name(token: str) -> str:
@@ -81,7 +84,7 @@ def ref_or_value(v, kind):
 
 def build(doc) -> str:
     c = doc["collections"]
-    L = ["/* DS v2 tokens — FILE SINH RA từ design/v2/tokens.json bằng _scripts/ds-v2-tokens.py. KHÔNG sửa tay. */",
+    L = ["/* DS v2 tokens — FILE SINH RA từ design-system/tokens.json bằng _scripts/ds-v2-tokens.py. KHÔNG sửa tay. */",
          f"/* version {doc['version']} · {doc['updated']} */", "", ":root {", "  /* Fonts (DEC-121) */"]
     for k, v in doc["fonts"].items():
         L.append(f"  --font-{k}: {v};")
@@ -111,7 +114,8 @@ def build(doc) -> str:
             if k == "type/label/style":
                 L.append(f"  --type-label-weight: {WEIGHT[val]};")
                 continue
-            L.append(f"  {css_name(k)}: {ref_or_value(val, 'px')};")
+            unit = "raw" if "OPACITY" in v.get("scopes", []) else "px"
+            L.append(f"  {css_name(k)}: {ref_or_value(val, unit)};")
         L.append("}")
         L.append("")
     b = c.get("Brand")
@@ -163,7 +167,7 @@ def build(doc) -> str:
     L.append("  /* Chuyển động, focus (DEC-139) */")
     for k, v in doc["motion"].items():
         L.append(f"  {css_name(k)}: {v};")
-    L.append("  --focus-color: var(--color-border-focus);")
+    L.append("  --focus-color: var(--color-focus-ring);")
     L.append("  /* Lưới (DEC-136); breakpoint chỉ để tra, media query ghi số trực tiếp */")
     L.append(f"  --grid-columns: {doc['grid']['web']['columns']};")
     L.append(f"  --grid-gutter: {px(doc['grid']['web']['gutter'])};")
@@ -180,9 +184,25 @@ def build(doc) -> str:
         fam = {"Cal Sans": "var(--font-title)", "Inter": "var(--font-body)", "JetBrains Mono": "var(--font-code)"}[v["family"]]
         weight = "var(--type-label-weight)" if v.get("styleVar") else WEIGHT[v["style"]]
         rule = f".{k.replace('/', '-')} {{ font: {weight} var(--type-{role}-size)/var(--type-{role}-line-height) {fam};"
+        if v["family"] == "Cal Sans":
+            rule += " font-synthesis: none;"
         if v.get("case") == "UPPER":
-            rule += f" text-transform: uppercase; letter-spacing: {v['letterSpacingPercent'] / 100}em;"
+            rule += " text-transform: uppercase;"
+        if v.get("letterSpacingPercent"):
+            rule += f" letter-spacing: {v['letterSpacingPercent'] / 100}em;"
         L.append(rule + " }")
+    L += ["", "/* Số đều bề rộng: cột số, tiền, giờ, đếm, KPI (DEC-322) */", ".num { font-variant-numeric: tabular-nums; }", "",
+          "/* Nội dung dài (DEC-322) */",
+          ".prose { font: 400 var(--type-body-size)/var(--type-body-line-height) var(--font-body); color: var(--color-text-tertiary); max-width: 72ch; }",
+          ".prose h1 { font: 400 var(--type-display-size)/var(--type-display-line-height) var(--font-title); font-synthesis: none; color: var(--color-text-primary); }",
+          ".prose h2 { font: 400 var(--type-title-1-size)/var(--type-title-1-line-height) var(--font-title); font-synthesis: none; color: var(--color-text-primary); }",
+          ".prose h3 { font: 400 var(--type-title-2-size)/var(--type-title-2-line-height) var(--font-title); font-synthesis: none; color: var(--color-text-primary); }",
+          ".prose h4 { font: 400 var(--type-title-3-size)/var(--type-title-3-line-height) var(--font-title); font-synthesis: none; color: var(--color-text-primary); }",
+          ".prose p { margin: 0; } .prose p + p { margin-top: 1em; }",
+          ".prose strong { color: var(--color-text-primary); }",
+          ".prose hr { border: 0; border-top: 1px solid var(--color-border-secondary); }",
+          ".prose blockquote { margin: 0; font: 500 var(--type-title-2-size)/var(--type-title-2-line-height) var(--font-body); color: var(--color-text-primary); }",
+          ".prose code { font: 700 var(--type-body-size)/var(--type-body-line-height) var(--font-code); background: var(--color-bg-secondary); box-shadow: inset 0 0 0 1px var(--color-border-secondary); border-radius: 6px; padding: 0 4px; }"]
     return "\n".join(L) + "\n"
 
 

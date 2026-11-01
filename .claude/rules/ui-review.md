@@ -7,6 +7,7 @@ paths:
   - ".claude/skills/prototype-html/**"
   - ".claude/skills/wireframe-*/**"
   - "_scripts/visual-audit.py"
+  - "_scripts/attention-audit.py"
 ---
 
 # UI Review — ai kiểm luật nào, ở lớp nào
@@ -36,6 +37,7 @@ loãng điểm nhấn không).
 | A4 | Do's & Don'ts tự rà + `status-chip-lint.py` | 1 Primary mỗi nhóm, trạng thái có chữ/icon, chip trạng thái |
 | A5 | `_scripts/visual-audit.py` | Luật thị giác đo được — Mục 2 |
 | A6 | `_scripts/figma-audit.py` (`/figma-audit`) | Nhất quán GIỮA nhiều màn đã vẽ: token, vai trò lệch giá trị, biến thể nút, icon (kể cả override), khối tự dựng, mã bản ghi dọc luồng |
+| A7 | `_scripts/attention-audit.py` | Thứ tự chú ý: phép thử nheo mắt (làm mờ + xám) đo "độ nặng" từng vùng; khung (breadcrumb, icon thanh trên, menu) không được nặng hơn tiêu đề trang — Mục 2 |
 
 ### Lớp 2 — reviewer
 
@@ -59,6 +61,7 @@ Ngưỡng A5 là hằng số đầu `_scripts/visual-audit.py` — sửa ngưỡ
 | **Readability** | `R1` số cỡ chữ: web > 5, mobile > 4 · WARN<br>`R2` chữ < 12px · FAIL mobile, WARN web (design có heading-6 10px)<br>`R3` dòng > 90 ký tự · WARN | visual: dễ quét, căn lề thẳng, nhãn gọn |
 | **60/30/10** | `C1` tỷ lệ diện tích trung tính / phụ / nhấn; nhấn > 15% · WARN; trung tính < 60% · WARN<br>`C2` > 3 sắc độ đậm khác nhau (không tính chip/badge trạng thái) · WARN | visual: diễn giải tỷ lệ theo theme Neutral của dự án |
 | **Color hierarchy** | — | visual |
+| **Thứ tự chú ý** | A7 `K1` vùng `khung` nặng > 0,60 × `tieu-de` · WARN; > 0,80 · FAIL (hằng số đầu `_scripts/attention-audit.py`)<br>`K0` thiếu vùng `tieu-de` / role lạ · WARN | visual: thứ tự nheo mắt có khớp thứ tự ưu tiên của tác vụ không; khung có kéo mắt khỏi nội dung không |
 | **Màu cho phản hồi** | A4 (trạng thái có chữ/icon, chip) | visual: màu lỗi/thành công nhất quán, không dùng màu trạng thái cho trang trí |
 | **Jakob** | — | usability: control/vị trí giống thói quen app cùng loại không |
 | Tương phản, vùng chạm | A2 | — |
@@ -67,7 +70,8 @@ Ngưỡng A5 là hằng số đầu `_scripts/visual-audit.py` — sửa ngưỡ
 | Heuristic Nielsen, số bước tác vụ | — | usability |
 
 > Mức A5 tối đa là WARN trừ `R2` — luật thị giác có ngoại lệ hợp lý (bảng nhiều cột theo nghiệp vụ,
-> toolbar dày). Reviewer quyết WARN nào thành finding.
+> toolbar dày). Reviewer quyết WARN nào thành finding. A7 có FAIL ở `K1`: khung nặng hơn tiêu đề trang
+> là sai phân cấp, không có ngoại lệ hợp lý.
 
 **Chạy A5:** `figma_read get_design_context` `{nodeId: <artboard>, depth: 20, detail: "full"}` → lưu
 JSON → `python3 _scripts/visual-audit.py <file.json>`. Script in tỷ lệ nhận diện component; < 80% thì
@@ -77,18 +81,27 @@ Vỏ thiết bị (Status Bar, Home Indicator) tự bỏ; nội dung trong `SLOT
 trang) tính là khung tự dựng.
 
 **Không đo được bằng máy:** độ đậm chữ — cây node của plugin không có `fontWeight`/`fontName` (đã thử
-`get_design_context`, `get_node`, `scan_text_nodes`, `get_fonts`). `@visual-reviewer` chấm phân cấp đậm
-nhạt qua ảnh (V5).
+`get_design_context`, `get_node`, `scan_text_nodes`, `get_fonts`). A7 đo **gián tiếp** trên ảnh (chữ đậm/to
+→ vùng tối hơn khi nheo mắt); `@visual-reviewer` chấm phần còn lại qua ảnh (V5).
+
 Sửa script/ngưỡng xong chạy 2 fixture: `_scripts/fixtures/visual-audit/pass-web.json` (exit 0, 0 WARN)
 và `fail-mobile.json` (exit 1, đủ mã F1 F2 F3 H1 H2 M1 P1 R1 R2 R3 S1 C1 C2).
+
+**Chạy A7:** HTML: đánh dấu vùng `data-attn="role:tên"` (role `khung` · `tieu-de` · `chinh` · `hanh-dong` · `phu`) →
+`python3 _scripts/attention-audit.py --html <file> --out <dir>`. Figma: ảnh `get_screenshot` + file vùng lấy
+toạ độ từ cây node (`{"scale": 2, "regions": [{name, role, box:[x,y,w,h]}]}`) → `--image <png> --regions <json>`.
+`--hotgaze` thêm mật độ chú ý HotGaze fast (chỉ INFO). Không dùng bản đồ nhiệt AI (HotGaze deep/UNISAL)
+làm căn cứ: pilot 28/10 cho thấy nó không phân biệt chữ đậm/nhạt. Sửa ngưỡng xong chạy 3 fixture
+`_scripts/fixtures/attention-audit/`: `fail-…` exit 1 (K1 FAIL), `warn-…` exit 0 (1 WARN), `pass-…` exit 0 (0 WARN).
 
 ## 3. Chạy ở đâu
 
 | Skill | Lớp 1 | uxui | usability | visual |
 |---|---|---|---|---|
 | `/wireframe-ascii`, `/wireframe-html` | — | ✓ | — | — (lo-fi, chưa có màu) |
-| `/prototype-html` | A5 không chạy (script đọc JSON Figma) | ✓ | — | ✓ (chấm bằng ảnh, ghi "không có số liệu A5") |
-| `/figma-screen` | A1–A5 | ✓ | ✓ khi trọn flow + có Mục 3.6 | ✓ |
+| `/prototype-html` | A5 không chạy (script đọc JSON Figma); A7 `--html` | ✓ | — | ✓ (chấm bằng ảnh + A7, ghi "không có số liệu A5") |
+| `/figma-screen` | A1–A5, A7 | ✓ | ✓ khi trọn flow + có Mục 3.6 | ✓ |
+| `/figma-component` | A7 trên màn "Trong ngữ cảnh" (component khung: header, sidebar, breadcrumb) | — | — | ✓ |
 | `/figma-audit` | A6 | — | — | — (chỉ máy đo; sửa theo mục user chọn) |
 
 ## 4. Báo cáo
@@ -97,7 +110,7 @@ In tách 2 lớp, không gộp "PASS":
 
 ```
 Lớp 1 — audit máy
-  A1 layout: 0 chặn · lề/bo: 0 FAIL / 2 WARN · A2 a11y: 2 đã biết · A3 DS: 1.00 · A4 Do's: OK · A5 visual: 0 FAIL / 3 WARN (nhận diện 92%)
+  A1 layout: 0 chặn · lề/bo: 0 FAIL / 2 WARN · A2 a11y: 2 đã biết · A3 DS: 1.00 · A4 Do's: OK · A5 visual: 0 FAIL / 3 WARN (nhận diện 92%) · A7 chú ý: 0 FAIL / 1 WARN
 Lớp 2 — reviewer
   Khớp đặc tả (@uxui-reviewer): 0 blocking / 1 warning
   Usability (AI): 3 tác vụ · 0 blocking / 2 warning | SKIPPED — <lý do>
@@ -108,5 +121,5 @@ Agent bị bỏ qua → `SKIPPED — <lý do>`, không in PASS.
 
 ## Tóm tắt 1 dòng
 
-> **Máy đo trước (A1–A5), 3 reviewer song song sau · mỗi luật một chủ theo bảng Mục 2 · reviewer
+> **Máy đo trước (A1–A5, A7), 3 reviewer song song sau · mỗi luật một chủ theo bảng Mục 2 · reviewer
 > diễn giải số, không đo lại.**

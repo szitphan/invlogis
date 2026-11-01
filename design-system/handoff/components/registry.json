@@ -1,0 +1,9 @@
+{
+  "$generator": "GENERATED — không sửa tay. Nguồn: design-system/ · sinh bởi _scripts/ds-v2-handoff.py",
+  "$description": "Bảng nối mã component ↔ Figma ↔ spec ↔ Angular ↔ Flutter. Tên Angular/Flutter tay viết ở design-system/components/platform-names.json.",
+  "prefix": {
+    "angular": "inv-",
+    "flutter": "Inv"
+  },
+  "components": []
+}

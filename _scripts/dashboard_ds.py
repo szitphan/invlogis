@@ -1,10 +1,10 @@
 """Tab "Design system" của /dashboard — quản lý DS v2 theo 3 nhóm: Foundations · Base components · Application components
-(+ bản cũ l1 chờ dựng lại, + component đang brainstorm chưa có spec md).
+(+ component đang brainstorm chưa có spec md). Bản cũ l1 đã bỏ (DEC-312).
 
 Dữ liệu (chỉ đọc, tất định):
-  design/v2/tokens.json, foundations.md          — số token theo collection, phiên bản
-  design/v2/components/{base,application,l1}/*.md — trạng thái md, node Figma md trỏ tới (qua ds-v2-sync-check.specs)
-  design/v2/components/_work/{slug}/             — state.json (vòng, link trang review), check.json (tab 3), page.json +
+  design-system/tokens.json, foundations.md          — số token theo collection, phiên bản
+  design-system/components/{base,application}/*.md — trạng thái md, node Figma md trỏ tới (qua ds-v2-sync-check.specs)
+  design-system/components/_work/{slug}/             — state.json (vòng, link trang review), check.json (tab 3), page.json +
                                                    answers.json (điểm review Figma chưa quyết)
   .claude/state/figma/ds-v2-snapshot.json        — ảnh chụp Figma: nhãn trạng thái đang có, ngày chụp
   ds-v2-sync-check.py --figma <snapshot>         — FAIL/WARN theo từng md
@@ -16,7 +16,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-TIER_NAME = {"base": "Base components", "application": "Application components", "l1": "Bản cũ (l1) — chờ dựng lại"}
+TIER_NAME = {"base": "Base components", "application": "Application components"}
 
 
 def _sync_mod(root):
@@ -34,7 +34,7 @@ def _json(p):
 
 
 def _work(root, slug):
-    d = root / "design/v2/components/_work" / slug
+    d = root / "design-system/components/_work" / slug
     if not d.is_dir():
         return None
     st = _json(d / "state.json") or {}
@@ -57,10 +57,10 @@ def _work(root, slug):
 
 def ds_view(root):
     root = Path(root)
-    if not (root / "design/v2/tokens.json").exists():
+    if not (root / "design-system/tokens.json").exists():
         return None
     m = _sync_mod(root)
-    tk = _json(root / "design/v2/tokens.json") or {}
+    tk = _json(root / "design-system/tokens.json") or {}
     cols = tk.get("collections") or {}
     fcount = []
     for name, c in cols.items():
@@ -91,7 +91,7 @@ def ds_view(root):
             kind = "fail" if mm.group(1) == "✕" else "warn"
             if code == "F4":
                 f4[kind] += 1
-            pm = re.search(r"(design/v2/components/[\w/-]+\.md)", mm.group(2))
+            pm = re.search(r"(design-system/components/[\w/-]+\.md)", mm.group(2))
             if pm:
                 d = issues.setdefault(pm.group(1), {"fail": 0, "warn": 0, "first": []})
                 d[kind] += 1
@@ -102,7 +102,7 @@ def ds_view(root):
     comps = {c["id"]: c for c in snap.get("components") or []}
     secs = {s["id"]: s for s in snap.get("sections") or []}
     file_key = snap.get("fileKey")
-    groups = {t: [] for t in ("base", "application", "l1")}
+    groups = {t: [] for t in ("base", "application")}
     md_slugs = set()
     for s in m.specs():
         md_slugs.add(s["slug"])
@@ -118,7 +118,7 @@ def ds_view(root):
             "figma_url": f"https://www.figma.com/design/{file_key}/?node-id={first_node.replace(':', '-')}"
             if file_key and first_node else None,
             "work": _work(root, s["slug"]), "sync": issues.get(s["path"], {"fail": 0, "warn": 0, "first": []})})
-    wdir = root / "design/v2/components/_work"
+    wdir = root / "design-system/components/_work"
     drafts = []
     for d in sorted(wdir.iterdir()) if wdir.is_dir() else []:
         if d.is_dir() and d.name not in md_slugs and (d / "page.json").exists():
@@ -137,19 +137,20 @@ def ds_view(root):
         for c in comps.values():
             if c["type"] == "COMPONENT_SET" and c["id"] not in allrefs and not c["name"].startswith(("_", ".", "icon/")):
                 unref.setdefault(c["page"], []).append(c["name"])
-    return {"version": tk.get("version"), "collections": fcount, "foundations_md": "design/v2/foundations.md",
-            "tokens_path": "design/v2/tokens.json", "snap": {"taken": snap.get("taken"), "fileKey": file_key,
+    return {"version": tk.get("version"), "collections": fcount, "foundations_md": "design-system/foundations/README.md",
+            "tokens_path": "design-system/tokens.json", "snap": {"taken": snap.get("taken"), "fileKey": file_key,
                                                               "pages": pages, "path": ".claude/state/figma/ds-v2-snapshot.json"},
             "f4": f4, "groups": groups, "drafts": drafts, "unref": unref, "fstatus": _fstatus(root), "deps": _deps(root)}
 
 
 def _deps(root):
-    """Cha cần sync theo con (ds-deps.py check, DEC-292) + cây cha–con."""
+    """Component stale theo con lồng trong nó / foundation nó dùng (ds-deps.py check, DEC-292, DEC-302) + cây cha–con."""
     try:
         spec = importlib.util.spec_from_file_location("deps", Path(root) / "_scripts/ds-deps.py")
         m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
         r = m.reg()
-        return {"stale": m.check(), "tree": {p: d.get("uses", []) for p, d in r["components"].items()}}
+        out, notes = m.check()
+        return {"stale": out, "notes": notes, "tree": {p: d.get("uses", []) for p, d in r["components"].items() if d.get("uses")}}
     except Exception:
         return {"stale": [], "tree": {}}
 
@@ -174,7 +175,7 @@ FS_ACT = {"in-review": "Gửi duyệt", "approved": "Duyệt", "revisions": "C�
 
 def _fpage():
     try:
-        return json.loads((Path(__file__).resolve().parent.parent / "design/v2/_review/foundations-status.json").read_text())["url"]
+        return json.loads((Path(__file__).resolve().parent.parent / "design-system/_review/foundations-status.json").read_text())["url"]
     except Exception:
         return ""
 
@@ -201,7 +202,7 @@ def _fs_table(rows, E, act):
 def render_ds(v, link, E, act=lambda *a, **k: ""):
     h = ['<div role="tabpanel" id="p-ds" aria-labelledby="t-ds" hidden>']
     if not v:
-        h.append('<div class="panel"><h2>Design system</h2><p class="muted">Chưa có <code>design/v2/tokens.json</code>.</p></div></div>')
+        h.append('<div class="panel"><h2>Design system</h2><p class="muted">Chưa có <code>design-system/tokens.json</code>.</p></div></div>')
         return "".join(h)
     allc = [c for t in ("base", "application") for c in v["groups"][t]]
     nfail = sum(c["sync"]["fail"] for t in v["groups"].values() for c in t)
@@ -225,19 +226,20 @@ def render_ds(v, link, E, act=lambda *a, **k: ""):
     if dp.get("stale") or dp.get("tree"):
         st = dp.get("stale") or []
         h.append('<div class="panel"><h2>Component lồng nhau</h2>'
-                 + ('<p><span class="chip red">' + str(len(st)) + ' cần sync</span> ' + " · ".join(
-                     f'<b>{E(o["parent"])}</b> theo {E(o["child"])}' for o in st) + '</p>' if st else
-                    '<p class="muted" style="margin:0 0 6px">Không component nào cần sync theo con.</p>')
+                 + ('<p><span class="chip red">' + str(len(st)) + ' stale</span> ' + " · ".join(
+                     f'<b>{E(o["slug"])}</b> theo {E("; ".join(o["reasons"]))}' for o in st) + '</p>' if st else
+                    '<p class="muted" style="margin:0 0 6px">Không component nào stale (theo con lồng trong nó hoặc foundation).</p>')
+                 + "".join(f'<p class="muted" style="margin:2px 0">ℹ {E(n)}</p>' for n in dp.get("notes") or [])
                  + "".join(f'<p style="margin:2px 0"><b>{E(p)}</b> dùng: ' + ", ".join(
                      E(u["child"]) + (" (neo)" if u.get("role") == "anchor" else "") + (" <span class=muted>tạm</span>" if u.get("provisional") else "")
                      for u in us) + "</p>" for p, us in (dp.get("tree") or {}).items())
-                 + '<p class="muted" style="margin:6px 0 0">Sổ <code>design/v2/components/_deps.json</code> · '
-                 '<code>python3 _scripts/ds-deps.py check --write --backlog</code> (DEC-292)</p></div>')
+                 + '<p class="muted" style="margin:6px 0 0">Sổ <code>design-system/components/_deps.json</code> · '
+                 '<code>python3 _scripts/ds-deps.py check --write --backlog</code> (DEC-292, DEC-302)</p></div>')
     # Foundations
     f4 = v["f4"]
     f4c = "green" if not f4["fail"] else "red"
     h.append('<div class="panel"><h2>Foundations</h2><p class="muted" style="margin:0 0 8px">'
-             + link(v["foundations_md"], "foundations.md") + " · " + link(v["tokens_path"], "tokens.json")
+             + link(v["foundations_md"], "foundations/") + " · " + link(v["tokens_path"], "tokens.json")
              + fig_page("DS · Foundations")
              + f' · biến Figma ↔ tokens.json: <span class="chip {f4c}">{"khớp" if not f4["fail"] else str(f4["fail"]) + " lệch"}</span></p>'
              + (_fs_table(v.get("fstatus") or [], E, act) if v.get("fstatus") else "")
@@ -286,7 +288,7 @@ def render_ds(v, link, E, act=lambda *a, **k: ""):
                 f'<td>{t3}</td><td>{rvc}</td><td>{syc}</td><td>{" · ".join(links) or "—"}</td></tr>')
     head = ('<div class="scroll"><table class="srct"><thead><tr><th>Component</th><th>Trạng thái (md · Figma)</th><th>Vòng</th>'
             '<th>Đối chiếu foundation</th><th>Review Figma</th><th>Figma ↔ repo</th><th>Mở</th></tr></thead><tbody>')
-    for t, page in (("base", "DS · Base components"), ("application", "DS · Application components"), ("l1", None)):
+    for t, page in (("base", "DS · Base components"), ("application", "DS · Application components")):
         cs = v["groups"][t]
         drafts = []
         if not cs:

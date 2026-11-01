@@ -5,15 +5,15 @@ Repo (luôn chạy):
   R1 status frontmatter hợp lệ (draft · in-review · approved · shipped)
   R2 dòng meta "> … · Nháp · …" của md khớp status frontmatter
   R3 _work/{slug}/state.json khớp status (approved cần round = done; round done mà md còn draft → báo)
-  R4 tên token ghi trong md (`color/text/secondary`, `space/inset-md`…) có thật trong tokens.json
+  R4 tên token ghi trong md (`color/text/tertiary`, `space/lg`…) có thật trong tokens.json
 Figma (khi có --figma <snapshot.json>, ảnh chụp từ _scripts/figma-ds-snapshot.js qua use_figma):
   F1 node Figma md trỏ tới (`Tên` (id)) còn trên Figma và đúng tên
   F2 nhãn trạng thái trên Figma (dòng đầu mô tả set "Trạng thái: …" + nhãn "Nhãn trạng thái" trong Section) khớp md
   F3 component set trên trang DS không md nào nhắc tới (bỏ qua tên bắt đầu "_" hoặc ".": phần riêng của set khác)
-  F4 biến Figma khớp tokens.json: thiếu / thừa / khác giá trị theo mode (Primitives, Semantic, Platform, Component)
+  F4 biến Figma khớp tokens.json: thiếu / thừa / khác giá trị theo mode (Primitives, Semantic, Platform, Brand)
 
 Nhãn trạng thái: draft = Nháp · in-review = Đang review · approved = Đã duyệt · shipped = Đã bàn giao.
-md trong l1/ (dựng trước DEC-260) mang nhãn Figma "Bản cũ — chờ dựng lại" dù status là draft.
+Thư mục l1/ (dựng trước DEC-260) đã bỏ (DEC-312).
 
 Dùng:
   python3 _scripts/ds-v2-sync-check.py                         # chỉ phần repo
@@ -29,12 +29,12 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-COMP = ROOT / "design/v2/components"
+COMP = ROOT / "design-system/components"
 WORK = COMP / "_work"
-TOKENS = ROOT / "design/v2/tokens.json"
+TOKENS = ROOT / "design-system/tokens.json"
 LABEL = {"draft": "Nháp", "in-review": "Đang review", "approved": "Đã duyệt", "shipped": "Đã bàn giao"}
 LEGACY = "Bản cũ — chờ dựng lại"
-TIERS = ("base", "application", "l1")
+TIERS = ("base", "application")
 
 
 def die(msg):
@@ -61,13 +61,17 @@ def specs():
             fm = front(t)
             meta = " ".join(l for l in t.splitlines()[:40] if l.startswith(">"))
             refs = re.findall(r"`([^`\n]+)`\s*\(?(\d+:\d+)", t)
+            st = fm.get("status")
+            # `stale` (DEC-302, .claude/rules/ds-stale.md) là cờ phụ thuộc, không phải bước vòng đời: kiểm theo status_prev
+            if st == "stale" and fm.get("status_prev") in LABEL:
+                st = fm.get("status_prev")
             out.append({"path": f.relative_to(ROOT).as_posix(), "slug": f.stem, "tier": tier, "text": t,
-                        "status": fm.get("status"), "meta": meta, "refs": refs})
+                        "status": st, "meta": meta, "refs": refs})
     return out
 
 
 def figma_label(s):
-    return LEGACY if s["tier"] == "l1" else LABEL.get(s["status"], s["status"])
+    return LABEL.get(s["status"], s["status"])
 
 
 # ---------- token ----------
@@ -105,13 +109,25 @@ def expected_vars(d):
         ref = str(ref)
         if ref.startswith("#"):
             return ref.upper()
-        for coll in (prim_c, c["Semantic"]["color"], c["Component"]["color"]):
+        for coll in (prim_c, c["Semantic"]["color"], c.get("Component", {}).get("color", {})):
             if ref in coll:
                 return col(coll[ref], mode, depth + 1)
+        if ref in c.get("Brand", {}).get("color", {}):  # Brand: chế độ đầu (Than chì) như :root
+            b = c["Brand"]["color"][ref]
+            return col(b.get(c["Brand"]["modes"][0]) if isinstance(b, dict) else b, mode, depth + 1)
         return None
 
-    def num(ref):
-        return prim_n.get(ref, ref) if isinstance(ref, str) else ref
+    pv = c["Platform"]["vars"]
+
+    def num(ref, mode="Web", depth=0):
+        """Giải alias số: Primitives hoặc token Platform khác (token component trỏ space/*, size/*… — DEC-313)."""
+        if not isinstance(ref, str) or depth > 8:
+            return ref
+        if ref in prim_n:
+            return prim_n[ref]
+        if ref in pv:
+            return num(pv[ref].get(mode), mode, depth + 1)
+        return ref
 
     out = []
     for n, v in prim_c.items():
@@ -119,13 +135,16 @@ def expected_vars(d):
     for n, v in prim_n.items():
         out.append((fig.get("Primitives", "Primitives"), n, {"*": v}))
     for coll in ("Semantic", "Component"):
-        for n, v in c[coll]["color"].items():
+        for n, v in c.get(coll, {}).get("color", {}).items():
             out.append((fig.get(coll, coll), n, {"Light": col(v, "Light"), "Dark": col(v, "Dark")}))
     plat = fig.get("Platform", {})
     for n, v in c["Platform"]["vars"].items():
         cname = next((k for k, pres in plat.items() if any(n.startswith(p) for p in pres)), "Platform") \
             if isinstance(plat, dict) else plat
-        out.append((cname, n, {"Web": num(v.get("Web")), "Mobile": num(v.get("Mobile"))}))
+        w, m = num(v.get("Web"), "Web"), num(v.get("Mobile"), "Mobile")
+        if "OPACITY" in v.get("scopes", []):  # Figma đo độ mờ 0–100, tokens.json/CSS 0–1
+            w, m = (x * 100 if isinstance(x, (int, float)) else x for x in (w, m))
+        out.append((cname, n, {"Web": w, "Mobile": m}))
     return out
 
 

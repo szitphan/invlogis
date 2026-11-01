@@ -13,8 +13,8 @@ Cách xếp một rule: lấy class ở phần chủ (compound cuối) của t�
 Rule nhóm (a,b{}) mà các bộ chọn lệch nhau → tách thành 2 rule.
 
 Dùng:
-  python3 _scripts/ds-css-split.py design/v2/components/_work/{slug}            # in đề xuất (rule chuyển sang cssScreen)
-  python3 _scripts/ds-css-split.py design/v2/components/_work/{slug} --write    # ghi page.json (css + cssScreen)
+  python3 _scripts/ds-css-split.py design-system/components/_work/{slug}            # in đề xuất (rule chuyển sang cssScreen)
+  python3 _scripts/ds-css-split.py design-system/components/_work/{slug} --write    # ghi page.json (css + cssScreen)
   thêm --inline: style inline có số/màu trong screens → class phụ "il-…" + rule trong css (rồi mới tách)
 Chạy lại an toàn: rule đã ở cssScreen giữ nguyên. Soát danh sách in ra — rule xếp nhầm thì sửa tay page.json.
 """

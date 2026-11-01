@@ -4960,6 +4960,51 @@ class GraphBuilder {
     }
   }
 
+  // DS v2 (DEC-292, DEC-302): sổ design-system/components/_deps.json → node ds_component (ds:<slug>) +
+  // ds_foundation (ds-f:<mã>), edge USES_COMPONENT (cha → con) + USES_FOUNDATION (component → mục foundation).
+  // `kg impact ds:<con>` / `kg impact ds-f:<mã>` = mọi component bị ảnh hưởng, kể cả bắc cầu (ds-deps.py check gọi).
+  parseDsDeps(depsAbs) {
+    const file = this.repoPath(depsAbs);
+    let reg;
+    try {
+      reg = JSON.parse(fs.readFileSync(depsAbs, "utf8"));
+    } catch (error) {
+      this.optionalNotes.push(`${file}: JSON lỗi — bỏ qua node DS v2 (${error.message})`);
+      return;
+    }
+    const comps = reg.components || {};
+    const fnds = reg.foundations || {};
+    for (const [fkey, f] of Object.entries(fnds)) {
+      this.addNode({
+        key: `ds-f:${fkey}`, type: "ds_foundation", title: f.name || fkey, status: f.status || null,
+        source: { file: f.file || "design-system/foundations/README.md", line: 1 }, props: { version: f.version || null },
+      });
+    }
+    const compNode = (slug) => {
+      const c = comps[slug] || {};
+      return this.addNode({
+        key: `ds:${slug}`, type: "ds_component", title: c.name || slug, status: c.status || null,
+        source: { file: c.file || file, line: 1 }, props: { version: c.version || null, group: c.group || null },
+      });
+    };
+    for (const [slug, c] of Object.entries(comps)) {
+      compNode(slug);
+      for (const u of c.uses || []) {
+        compNode(u.child);
+        this.addEdge({
+          from: `ds:${slug}`, to: `ds:${u.child}`, type: "USES_COMPONENT", provenance: "declared",
+          source: { file, line: 1 }, props: { role: u.role || "embed", provisional: Boolean(u.provisional) },
+        });
+      }
+      for (const fkey of c.foundations || []) {
+        this.addEdge({
+          from: `ds:${slug}`, to: `ds-f:${fkey}`, type: "USES_FOUNDATION", provenance: "declared",
+          source: { file, line: 1 },
+        });
+      }
+    }
+  }
+
   // Parse sync-state.yaml subset theo artifacts[].mappings.
   parseSyncState(syncAbs) {
     const file = this.repoPath(syncAbs);
@@ -5461,6 +5506,9 @@ class GraphBuilder {
         ".claude/state/atlassian/sync-state.yaml vắng — bỏ qua nguồn Jira/Confluence canonical"
       );
     }
+
+    const depsAbs = path.join(this.rootAbs, "design", "v2", "components", "_deps.json");
+    if (fs.existsSync(depsAbs)) this.parseDsDeps(depsAbs);
 
     this.parseActivityLog();
     this.parseStalenessLog();

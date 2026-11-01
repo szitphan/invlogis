@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Khung trang duyệt component (/figma-component --html). Sinh bằng _scripts/ds-component-page.py từ
-   design/v2/components/_work/{slug}/page.json — KHÔNG sửa trang đã sinh, sửa page.json rồi sinh lại.
+   design-system/components/_work/{slug}/page.json — KHÔNG sửa trang đã sinh, sửa page.json rồi sinh lại.
    Vỏ trang: nền trung tính + dải innvie-v1 #0036B5. Hình xem trước nằm trong shadow DOM, CSS tự do không đụng vỏ. */
 :root{
   --bg:#F1F1F1; --surface:#FFFFFF; --sunk:#F6F7F9; --line:#E3E5E8; --line-strong:#D4D4D4;
@@ -310,7 +310,7 @@ function protoStage(sr){ // khung biến thể lẻ (stage) — trạng thái gi
   sr.addEventListener("click",e=>protoClick(e,sr,()=>({state:pv.dataset.state,base:pv.dataset.base}),o=>{
     if(o.base!==undefined) pv.dataset.base=o.base; if(o.pick) Object.entries(o.pick).forEach(([k,v])=>pv.setAttribute("data-"+k,v)); if(o.state) pv.dataset.state=o.state;}))
   sr.addEventListener("mouseover",e=>protoHover(e,sr,k=>pv.getAttribute("data-"+k),p=>Object.entries(p).forEach(([k,v])=>pv.setAttribute("data-"+k,v))));}
-/* design/v2/tokens.css nhúng sẵn — preview "Theo foundation" ghi đè giá trị bằng var(--token) thật.
+/* design-system/tokens.css nhúng sẵn — preview "Theo foundation" ghi đè giá trị bằng var(--token) thật.
    .pv có data-theme + data-platform nên các khối [data-theme] / [data-platform] của tokens.css áp đúng mode. */
 // :root trong shadow root không khớp gì → đổi thành :host để biến kế thừa xuống .pv
 const TCSS=(document.getElementById("tokens-data")?.textContent||"").replace(/^\/\*__TOK.*?\*\/$/,"").replace(/:root/g,":host");
@@ -647,13 +647,13 @@ function renderFoundation(){
      <label class="small" title="Viền đỏ / cam quanh chỗ đổi so với bản tự do"><input type="checkbox" id="fmark" ${fMark?"checked":""}> Viền chỗ đổi</label>
      <label class="small" title="Viền xanh quanh phần tử của dòng đang Soi"><input type="checkbox" id="fsoimark" ${fSoiMark?"checked":""}> Viền chỗ đang soi</label>
      <div class="seg" id="th3"><button data-t="light" aria-pressed="${theme==="light"}">Light</button><button data-t="dark" aria-pressed="${theme==="dark"}">Dark</button></div></div></div>
-  <p class="small">Cùng màn demo và bảng biến thể của tab 2, vẽ lại bằng <code>design/v2/tokens.css</code>. Đổi lựa chọn trong bảng bên dưới → hình đổi ngay. Thấy kéo về token có sẵn làm hỏng hình thì chọn <b>Tạo token mới theo preview</b>. Bấm một dòng để soi phần tử đó trên hình.</p>`;
+  <p class="small">Cùng màn demo và bảng biến thể của tab 2, vẽ lại bằng <code>design-system/tokens.css</code>. Đổi lựa chọn trong bảng bên dưới → hình đổi ngay. Thấy kéo về token có sẵn làm hỏng hình thì chọn <b>Tạo token mới theo preview</b>. Bấm một dòng để soi phần tử đó trên hình.</p>`;
   if((PAGE.screens||[]).length) h+=`<h2>Màn demo</h2>${configurator("foundation")}`;
   (p.blocks||[]).forEach((b,bi)=>{const mob=b.platform==="mobile";
     h+=`<div class="block"><div class="block-h"><b>${esc(b.title)}</b><span class="small">${b.note||""}</span></div>
     ${mob?`<div class="stage white" style="gap:16px;flex-wrap:wrap">${(b.frames||[b.html]).map((f,fi)=>`<div class="phone">${stage(f,{platform:"mobile",phone:true,white:true,fov:true,cmt:blkCtx(bi,b,fi)})}</div>`).join("")}</div>`:stage(b.html,{white:true,platform:"web",fov:true,cmt:blkCtx(bi,b)})}</div>`;});
   h+=`<h2>Trước → Sau</h2><div id="fsum"></div>`;
-  h+=`<h2>Từng giá trị <span class="small">so với <code>design/v2/tokens.json</code> bản ${esc(CHECK.tokens_version||"")} và luật foundations</span></h2>
+  h+=`<h2>Từng giá trị <span class="small">so với <code>design-system/tokens.json</code> bản ${esc(CHECK.tokens_version||"")} và luật foundations</span></h2>
   <div class="filters" id="ff">${[["open","Cần quyết"],["undeclared","Chưa khai"],["near","Lệch nhỏ"],["ok","Khớp"],["all","Tất cả"]].map(([k,l])=>`<button class="chip" aria-pressed="${fFilter===k}" data-k="${k}">${l}</button>`).join("")}</div>
   <div class="tbl"><table class="t"><thead><tr><th>Mã</th><th>Phần · thuộc tính</th><th>Nền tảng</th><th>Preview</th><th>Nhóm</th><th>Token / luật</th><th>Sau</th><th>Quyết định</th></tr></thead><tbody>`;
   const vis=rows.filter(r=>fFilter==="all"||(fFilter==="open"?(r.must&&fch(r)==null)||r.cat==="undeclared":r.cat===fFilter));

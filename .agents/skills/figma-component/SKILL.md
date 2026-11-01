@@ -1,6 +1,6 @@
 ---
 name: figma-component
-description: Tạo hoặc cập nhật MỘT component bất kỳ của dự án trên Figma (vd Notification Center, Bộ lọc nâng cao, Tuỳ chỉnh cột, thẻ KPI, dòng lịch sử…) — ghép từ instance thật của thư viện đang có, gắn token của dự án, có biến thể + thuộc tính dùng lại được, đủ trạng thái, Desktop/Mobile, kiểm chữ dài — theo spec trong design/design.md (DS cũ) hoặc design/v2/ (DS v2 đang dựng lại; chạy được trong agent con ở chế độ đề xuất --propose). `--html` = component mới của DS v2 đi qua trang artifact trước (brainstorm từ Untitled, Astryx và ý tưởng cộng đồng → preview web/mobile → đối chiếu foundation) rồi mới lên Figma. Dùng khi ai đó nói "tạo component", "dựng component <tên>", "brainstorm component", "biến mẫu ghép này thành component", "thêm biến thể/trạng thái cho component", "làm lại component cho file mới". Không dùng để dựng cả design system (dùng /figma-design-system) hay vẽ màn (dùng /figma-screen).
+description: Tạo hoặc cập nhật MỘT component bất kỳ của dự án trên Figma (vd Notification Center, Bộ lọc nâng cao, Tuỳ chỉnh cột, thẻ KPI, dòng lịch sử…) — ghép từ instance thật của thư viện đang có, gắn token của dự án, có biến thể + thuộc tính dùng lại được, đủ trạng thái, Desktop/Mobile, kiểm chữ dài — theo spec trong design/design.md (DS cũ) hoặc design-system/ (DS v2 đang dựng lại; chạy được trong agent con ở chế độ đề xuất --propose). `--html` = component mới của DS v2 đi qua trang artifact trước (brainstorm từ Untitled, Astryx và ý tưởng cộng đồng → preview web/mobile → đối chiếu foundation) rồi mới lên Figma. Dùng khi ai đó nói "tạo component", "dựng component <tên>", "brainstorm component", "biến mẫu ghép này thành component", "thêm biến thể/trạng thái cho component", "làm lại component cho file mới". Không dùng để dựng cả design system (dùng /figma-design-system) hay vẽ màn (dùng /figma-screen).
 allowed-tools: Read, Glob, Grep, Edit, Write, Bash, Skill, AskUserQuestion, Agent, WebSearch, WebFetch, Artifact, ArtifactData, mcp__reqwise-figma__figma_status, mcp__reqwise-figma__figma_docs, mcp__reqwise-figma__figma_read, mcp__reqwise-figma__figma_rules, mcp__reqwise-figma__figma_write, mcp__claude_ai_Figma__use_figma, mcp__claude_ai_Figma__get_figma_skill, mcp__claude_ai_Figma__get_libraries, mcp__claude_ai_Figma__search_design_system, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__download_assets
 user-invocable: true
 argument-hint: "<tên component> [link file Figma] [desktop|mobile|cả hai] [@spec/srs] [--html | --propose | --build <gói đã duyệt>] [--ds cu]"
@@ -40,8 +40,8 @@ phải sơ đồ, nên các bước dưới đây thay cho luật vẽ sơ đồ
 
 Một **họ component set** trong file Figma đích mà designer/dev lấy instance là dùng được:
 
-* Ghép từ **instance thật** của thư viện (Button, Badge, Tabs, Popover…), không vẽ lại control. DS v2: thư viện là L0 / L1
-  của chính DS v2.
+* Ghép từ **instance thật** của thư viện (Button, Badge, Tabs, Popover…), không vẽ lại control. DS v2: thư viện là Base / Application
+  của chính DS v2 (DEC-260).
 * Mọi màu / khoảng cách / bo góc / chữ **gắn biến và style** của dự án.
 * **API rõ**: biến thể (VARIANT) cho khác biệt về hình, thuộc tính TEXT / BOOLEAN / INSTANCE_SWAP cho
   nội dung, instance con được expose khi người dùng cần chỉnh.
@@ -55,46 +55,43 @@ thể nào, cái gì là thuộc tính — quyết sai thì người dùng phả
 
 ## Chọn nguồn spec — DS cũ hay DS v2
 
-`design/v2/architecture.md` tồn tại → **DS v2** (đang dựng lại song song với bộ cũ). Không có file đó, hoặc lời gọi ghi
+`design-system/architecture.md` tồn tại → **DS v2** (đang dựng lại song song với bộ cũ). Không có file đó, hoặc lời gọi ghi
 `--ds cu` (sửa component bộ cũ, chỉ lỗi chặn) → **DS cũ**: bỏ qua mục này, skill chạy đúng như trước.
 
 | Việc | DS cũ | DS v2 |
 |---|---|---|
-| Nguồn spec | `design/design.md` | `design/v2/`: `architecture.md`, `foundations.md`, `tokens.json`, `components/{l1,l2}/*.md`; lý do từng quyết định ở `_workspace/decisions.md` (Grep theo mã DEC) |
-| Ghi spec | mục trong `design.md` | một md mỗi component: `design/v2/components/{l1,l2}/{slug}.md`; **không** ghi vào `design.md` (gộp lúc DS v2 chốt) |
-| Cấp, tên, trục | § Components - <dự án> | architecture Mục 4 (cấp, luật lắp), 5 (tên), 6 (web/mobile), 11 (trục biến thể, luật component) |
-| Token | biến/style theo tên (§ Tên trong Figma) | tầng Semantic / Platform / Component theo tên; không gắn Primitives, không mã trần (architecture Mục 7, foundations Mục 12) |
-| Phần ghép | thư viện (`figma-library-keys.json`) | L0 và L1 của DS v2 trên ma trận; Astryx chỉ để tham chiếu (dưới) |
-| Nơi đặt | hỏi user (Bước 5) | ma trận trang `DS · Components · L0–L3`: hàng của component gốc, Section đúng cột (L0 · L1 · L2 · Tài liệu); không đè khung có sẵn, không đụng hàng khác, nới Section của hàng mình khi cần |
+| Nguồn spec | `design/design.md` | `design-system/`: `architecture.md`, `foundations.md`, `tokens.json`, `components/{base,application}/*.md`; lý do từng quyết định ở `_workspace/decisions.md` (Grep theo mã DEC) |
+| Ghi spec | mục trong `design.md` | một md mỗi component: `design-system/components/{base,application}/{slug}.md`; **không** ghi vào `design.md` (gộp lúc DS v2 chốt) |
+| Nhóm, tên, trục | § Components - <dự án> | architecture Mục 4 (nhóm Base / Application, luật lồng), 5 (tên), 6 (web/mobile), 11 (luật component chung) |
+| Token | biến/style theo tên (§ Tên trong Figma) | gắn Semantic (`1.`–`5.`), Brand theo vai, token Component của chính nó (`6.`, `8.`); token Component mới chỉ trỏ Semantic; không gắn Primitives, không số / mã trần (architecture Mục 7, foundations Mục 2, 12, DEC-313) |
+| Phần ghép | thư viện (`figma-library-keys.json`) | component Base / Application đã có của DS v2; Astryx chỉ để tham chiếu (dưới) |
+| Nơi đặt | hỏi user (Bước 5) | trang `DS · Base components` hoặc `DS · Application components`: Section của họ component (kèm 1 màn web + 1 màn app để duyệt, DEC-260 F12); không đè khung có sẵn, không đụng Section khác, nới Section của mình khi cần |
 | Khung trình bày | khung chứa + "Trạng thái & ví dụ" (Bước 6) | khung tài liệu theo khuôn (đầu Bước 6) |
-| Quy tắc chung chưa có bản v2 (States, Content & Formatting, Accessibility, Do's and Don'ts) | `design.md` | vẫn đọc mục đó ở `design.md`; lệch với `design/v2/` thì v2 thắng |
+| Quy tắc chung chưa có bản v2 (States, Content & Formatting, Accessibility, Do's and Don'ts) | `design.md` | vẫn đọc mục đó ở `design.md`; lệch với `design-system/` thì v2 thắng |
 
-**Xếp tầng** — hỏi lần lượt theo architecture Mục 4; ghi tầng ở dòng đầu md.
+**Xếp nhóm** theo architecture Mục 4: **Base** = component nguyên thuỷ theo Untitled, không nghiệp vụ, chữ giữ chỗ trung
+tính; **Application** = khối ứng dụng ráp từ Base (điều hướng, bảng, upload) và khối nghiệp vụ logistics dùng lại ở nhiều màn.
+Ghi nhóm ở dòng meta đầu md.
 
-* **L1 bổ sung:** không ngữ cảnh nghiệp vụ, chữ giữ chỗ (Title, Value…), ráp từ L0 và L1 khác. **Cấu tạo theo Astryx:**
-  tìm component tương đương trên trang `Astryx · Library` (chỉ đọc), lấy anatomy — phần, trục biến thể, Slot, trạng
-  thái — rồi gắn token DS v2. Spec có mục *Đối chiếu Astryx*: khớp gì, lệch gì, vì sao. Lệch mà đổi look đã duyệt → hỏi,
-  không tự đổi. Astryx là nguồn tham chiếu **cấu tạo**, không phải nguồn instance (bộ Astryx bị xoá ở vòng 6): không
-  đặt instance Astryx vào component v2.
-* **L2:** instance L1 gốc + nội dung nghiệp vụ thật, dùng đúng một ngữ cảnh; tên `{Đối tượng} / {Bố cục}` (đối tượng
-  theo `docs/_shared/object-map.md`). Chỉ đổi chữ, swap, visible, chọn biến thể, điền Slot trong preferred values —
-  **không** vẽ lại phần L1, không đè fill / stroke / cỡ. Chữ và dữ liệu mẫu lấy từ SRS, `*-states.md`,
-  `screens/{flow}.md` (khớp màn đã duyệt); định dạng chưa chốt → "chưa chốt (OQ-n)", mẫu trung tính. Description ghi
-  nguồn (file + mục), dùng ở (feature · màn), L1 gốc, nhãn tầng SaaS (`.claude/rules/saas-layer.md`). Dựng bản Web,
-  Mobile theo nơi dùng thật.
-* **Luật lồng:** lồng bằng instance của component gốc, không sao chép; L0 không chứa L1 (chỗ đặt L1 trong cha là Slot
-  có preferred values); token của component lồng giữ nguyên, cha chỉ quyết khoảng cách quanh nó (cần cỡ mới → thêm
-  biến thể ở component gốc); phụ thuộc một chiều L0 → L1 → L2.
+* **Cấu tạo theo nguồn tham chiếu:** tìm component tương đương (Untitled UI; Astryx trên trang `Astryx · Library` chỉ đọc),
+  lấy anatomy — phần, trục biến thể, Slot, trạng thái — rồi gắn token DS v2. Spec có mục đối chiếu: khớp gì, lệch gì, vì sao.
+  Lệch mà đổi look đã duyệt → hỏi, không tự đổi. Không đặt instance Astryx vào component v2.
+* **Khối nghiệp vụ (Application):** chữ và dữ liệu mẫu lấy từ SRS, `*-states.md`, `screens/{flow}.md` (khớp màn đã duyệt);
+  định dạng chưa chốt → "chưa chốt (OQ-n)", mẫu trung tính. Description ghi nguồn (file + mục), dùng ở (feature · màn),
+  nhãn tầng SaaS (`.claude/rules/saas-layer.md`).
+* **Luật lồng:** lồng bằng instance của component gốc, không sao chép, không vẽ lại; token của component lồng giữ nguyên, cha
+  chỉ quyết khoảng cách quanh nó (cần cỡ mới → thêm biến thể ở component gốc); phụ thuộc một chiều, không vòng; quan hệ
+  cha–con ghi vào `_deps.json` qua `ds-deps.py` (`.claude/rules/ds-stale.md`).
 
 ## Luật quyết định thành bại
 
-* **Nguồn spec duy nhất** là `design/design.md` (DS cũ) hoặc `design/v2/` (DS v2, mục trên). Đọc lại từ file mỗi lần
+* **Nguồn spec duy nhất** là `design/design.md` (DS cũ) hoặc `design-system/` (DS v2, mục trên). Đọc lại từ file mỗi lần
   chạy, **theo mục** (Bước 1.2). Skill này không chứa giá trị nào của dự án (màu, câu mẫu, bề rộng, tên trạng thái…).
 * **Không có spec thì không dựng.** Component phải có spec: mục trong `design.md` (thường ở § Components - <dự án>),
-  hoặc md ở `design/v2/components/` với DS v2. Chưa có → Bước 2 viết spec, trình user duyệt, ghi vào nơi đó
+  hoặc md ở `design-system/components/` với DS v2. Chưa có → Bước 2 viết spec, trình user duyệt, ghi vào nơi đó
   (approval gate), rồi mới dựng.
 * **Không tạo component khi thư viện đã có cái tương đương** (Don't của `design.md`). Kiểm thư viện
-  Figma + `design/components.md` trước (DS v2: ma trận L0 / L1 / L2 + md trong `design/v2/components/`); nghi ngờ
+  Figma + `design/components.md` trước (DS v2: trang `DS · Base components` / `DS · Application components` + md trong `design-system/components/`); nghi ngờ
   thì kiểm code thư viện (vd repo Astryx).
 * Tôn trọng quyết định "mẫu ghép" hay "component thật" đã ghi trong `design.md`. Muốn đổi → hỏi user
   và sửa quy định trong `design.md` (DS v2: trong md component) cùng lượt.
@@ -114,14 +111,14 @@ thể nào, cái gì là thuộc tính — quyết sai thì người dùng phả
      đề xuất bố cục ví dụ *Trong ngữ cảnh*.
    * Không đọc Colors, Typography Hierarchy, Elevation, Shapes: giá trị gắn qua biến/style Figma theo
      tên. Đoạn đã đọc có "xem §…" → đọc luôn đoạn đó.
-   * **DS v2** (mục *Chọn nguồn spec*) thay các mục trên bằng: `design/v2/architecture.md` Mục 4, 5, 6, 7, 11 và
+   * **DS v2** (mục *Chọn nguồn spec*) thay các mục trên bằng: `design-system/architecture.md` Mục 4, 5, 6, 7, 11 và
      `foundations.md` Mục 12 (luôn đọc) + mục foundations liên quan tới component (chữ, bo, khoảng cách, vùng chạm và
      focus); tên token cần dùng thì Grep trong `tokens.json`; spec đang dựng (nếu có) và md cùng họ ở
-     `components/{l1,l2}/` làm tiền lệ — spec mới phải nhất quán, lệch thì nêu lý do; `components/README.md` là khuôn
-     tài liệu. Mã DEC trong các file → Grep `_workspace/decisions.md` khi cần lý do. Mục chung chưa có bản v2 → đọc ở
+     `components/{base,application}/` làm tiền lệ — spec mới phải nhất quán, lệch thì nêu lý do; `components/README.md` là
+     cách ghi md. Mã DEC trong các file → Grep `_workspace/decisions.md` khi cần lý do. Mục chung chưa có bản v2 → đọc ở
      `design.md` như bảng trên.
 3. `design/components.md`: đọc mục của **từng component thành phần** định dùng (Usage, Nên/Không nên). DS v2: đọc md
-   của từng thành phần ở `design/v2/components/` (khi dùng, nên / không nên, thành phần lồng) thay `components.md`.
+   của từng thành phần ở `design-system/components/` (khi dùng, nên / không nên, thành phần lồng) thay `components.md`.
 4. Nguồn nghiệp vụ (Glob): `srs/*`, file user tag `@`, tài liệu quy tắc chung của dự án được
    `design.md` dẫn tới. Có nguồn thì dẫn xuất nội dung mẫu từ đó.
 
@@ -142,8 +139,8 @@ Phỏng vấn bằng `AskUserQuestion`, gộp một lượt, mỗi câu kèm đ�
 
 Viết spec theo khuôn của các mục có sẵn trong `design.md`, trình user, duyệt xong mới ghi.
 
-**DS v2:** spec là md theo khuôn `design/v2/components/README.md` (không chép khuôn vào đây; thiếu file khuôn → báo
-thiếu, không tự nghĩ ra khuôn). Danh mục câu trên vẫn là thứ cần chốt, với L1 bỏ phần mẫu câu nghiệp vụ (chữ giữ
+**DS v2:** spec là md theo khuôn `design-system/components/README.md` (không chép khuôn vào đây; thiếu file khuôn → báo
+thiếu, không tự nghĩ ra khuôn). Danh mục câu trên vẫn là thứ cần chốt, với Base bỏ phần mẫu câu nghiệp vụ (chữ giữ
 chỗ) và thêm *Đối chiếu Astryx* (mục *Chọn nguồn spec*).
 
 **`--propose`: không phỏng vấn.** Soạn spec từ nguồn đã đọc; mỗi điểm lẽ ra hỏi user thành một dòng trong *Câu cần user
@@ -169,9 +166,9 @@ Chia component theo **nguyên tử → phân tử → khối chứa** (dựng t�
 * Nền tảng theo DEC-279 (architecture Mục 6): cùng cấu tạo → mode `Platform`, không trục; khác cấu tạo hoặc cách
   thao tác (popover → bottom sheet → màn riêng) → trục biến thể `Platform=Web|Mobile` trong cùng bộ, không dựng set
   `/ Mobile`; chỉ một nền tảng → ghi nền tảng kia dùng gì thay. Phần con chỉ có trên app: tiền tố `_`.
-* **DS v2:** tên theo cấp — L0 `.{cha} / {Tên}`, L1 `Base / {Tên}`, L2 `{Đối tượng} / {Bố cục}` (architecture Mục 4–5);
-  trục dùng bộ chuẩn `Type · Size · State` (+ Tone…) và giá trị chuẩn ở Mục 11, không đặt trục mới khi bộ chuẩn đã
-  có. Chỗ đặt L1 trong cha = Slot có preferred values; đưa thuộc tính của instance lồng ra panel (`exposeNestedInstance`).
+* **DS v2:** tên component tiếng Anh theo Untitled, thuộc tính `Hierarchy=Primary, Size=MD, State=Hover…` (architecture
+  Mục 5, DEC-260 F11); phần con chỉ dùng bên trong bắt đầu `_` hoặc `.`; không đặt trục mới khi bộ chuẩn đã có. Chỗ đặt
+  component con trong cha = Slot có preferred values; đưa thuộc tính của instance lồng ra panel (`exposeNestedInstance`).
 
 ## Bước 4 — dò file Figma (chỉ đọc)
 
@@ -189,8 +186,8 @@ Chỉ đọc, gọi song song được:
   bản thứ hai.
 * Component cần **slot** (nội dung đặt vào Popover/Drawer…) → đánh dấu phần đó đi đường dự phòng
   `use_figma`; thử trước bằng một lệnh nhỏ có **tự dọn**.
-* **DS v2:** phần ghép là L0 (`.…`) và L1 (`Base / …`) trên ma trận → `get_components` trang `DS · Components ·
-  L0–L3`; không có key thư viện ngoài file. Tìm Section của hàng × cột sẽ đặt. Thiếu L0 / L1 cần dùng → dựng nó
+* **DS v2:** phần ghép là component Base / Application đã có → `get_components` trang `DS · Base components`,
+  `DS · Application components`; không có key thư viện ngoài file. Tìm Section sẽ đặt. Thiếu component con cần dùng → dựng nó
   trước (đợt riêng) hoặc đưa vào *Câu cần user quyết*, không vẽ lại trong component này. Astryx: `get_components` /
   `get_page_model` trên trang `Astryx · Library`, chỉ đọc.
 
@@ -235,7 +232,7 @@ trên trang đích, xem phần nào đã có (proxy lưu `state` khi bị cắt 
 cửa sổ Figma ra trước, chia lời gọi nhỏ hơn. `createVariants` bị cắt giữa chừng để lại các component
 rời **chưa gộp thành set** (một cái tên kiểu `<Tên>=Trục=…`) → xoá hết rồi gọi lại, không gộp tay.
 
-**DS v2 — khung trình bày là khung tài liệu theo khuôn** `design/v2/components/README.md` (không chép lại khuôn vào
+**DS v2 — khung trình bày là khung tài liệu theo khuôn** `design-system/components/README.md` (không chép lại khuôn vào
 đây): Web | Mobile dàn ngang, nền trắng, mỗi khối đặt mode `Platform` của mình, mục Cấu tạo (hình phóng có nhãn
 token), mọi hình mẫu nằm trong ô mẫu có nền thật (chống mất hình), số liệu đọc từ biến theo mode. Đặt trong Section
 cột Tài liệu của hàng. Khung này **thay** bước 1 và khung "Trạng thái & ví dụ" của bước 3 bên dưới (khung chứa, cấp
@@ -353,7 +350,7 @@ Kiểm bằng dữ liệu trước, ảnh chụp sau. **Lớp máy** (lỗi ch�
    component, dán làm `code` cho `figma_write`). Luật: component ≤ 32 · thuộc tính ≤ 20, giá trị ≤ 16 · layer chữ theo
    vai trò (`Title`, `Label`, `Value`, `Note`…), không theo nội dung, ≤ 24 · màn demo `<Màn> / Web|Mobile[ / <Trạng
    thái>]` ≤ 40 · không mã DEC/mã node trong tên. `fail` = 0 mới trình; FAIL ở giá trị biến thể → *Cần user quyết*.
-   Bảng đủ: `design/v2/_review/agent-brief-base.md` §2d.
+   Bảng đủ: `design-system/_review/agent-brief-base.md` §2d.
 7. **Dark:** một khung mẫu đặt mode Dark bằng `modify(frameId, { explicitVariableModes: { <collection
    màu>: "Dark" } })` (tên collection/mode đọc từ `figma_rules`); không có mode Dark thì bỏ, ghi 1 dòng.
 
@@ -370,6 +367,10 @@ Kiểm bằng dữ liệu trước, ảnh chụp sau. **Lớp máy** (lỗi ch�
    (14 ký tự) + mã dài nhất. Component gắn với feature có `*-states.md` → chạy
    `python3 _scripts/status-chip-lint.py <file states>`; FAIL thì báo, KHÔNG tự đổi nhãn nghiệp vụ.
 11. Sửa lỗi → chạy lại audit của phần đã sửa, chụp lại **chỉ phần đã sửa**.
+11a. **A7 · Thứ tự chú ý — chỉ component khung** (header, sidebar, breadcrumb, page header, tab bar, bottom nav): chạy
+    trên màn demo Web *Trong ngữ cảnh*, lập vùng như `/figma-screen` Bước 6 mục 7a → `python3 _scripts/attention-audit.py
+    --image <png> --regions <vùng.json> --out <scratchpad>`. `K1` FAIL (khung nặng hơn tiêu đề trang) chặn — sửa trước
+    khi trình; kết quả truyền cho `visual-reviewer` ở mục 12. Không phải component khung → ghi 1 dòng "A7: không áp".
 12. **DS v2 — 3 agent review** (bắt buộc mỗi lần dựng hoặc sửa lớn component DS v2, sau mục 1–11): chạy song song
     `visual-reviewer`, `uxui-reviewer` và một agent `general-purpose` làm accessibility (`figma_read a11y_audit` trên set
     và màn demo, rồi skill `accessibility-review`, chấm WCAG 2.2 riêng Web và Mobile). Prompt mỗi agent: file + node id
@@ -378,13 +379,13 @@ Kiểm bằng dữ liệu trước, ảnh chụp sau. **Lớp máy** (lỗi ch�
     quyết định → sửa luôn rồi kiểm lại phần đã sửa; điểm còn lại gom lên **một** trang (tab *Review Figma* khi chạy
     `--html`, không thì một artifact riêng), không rải trong chat.
 
-**DS v2 — thêm / đổi ở Bước 7** (khuôn `design/v2/components/README.md`):
+**DS v2 — thêm / đổi ở Bước 7** (khuôn `design-system/components/README.md`):
 
 * **Kiểm mất hình** bằng script README chỉ tới, trên khung tài liệu, trước khi chụp ảnh: luật A (khung) phải 0 lỗi, sửa
   tới khi đạt. Cờ B–D trên nền thật là sự thật của component — **không** sửa component, không đổi nền ô cho đẹp: ghi
   *Cần user quyết*. Kết quả ghi vào md, không đặt hộp kết quả trên Figma.
-* **Kiểm luật lắp** (architecture Mục 4): L1 không mã màu trần / dữ liệu nghiệp vụ; L2 không detach, không override
-  fill / stroke / cỡ trên instance L1; L0 không chứa L1.
+* **Kiểm luật lồng** (architecture Mục 4, 7): không mã màu / số trần, không gắn Primitives; Base không mang dữ liệu nghiệp
+  vụ; component cha không detach, không override fill / stroke / cỡ trên instance con.
 * Số in trong tài liệu đọc từ biến theo mode của khối, không gõ tay. Trợ năng chấm WCAG 2.2 theo mục Trợ năng của khuôn
   (tiêu chí Web và Mobile khác nhau, điểm ghi riêng); lớp thứ hai `accessibility-review` (mục 3) vẫn chạy.
 * Mục 5 (`responsive_audit` ví dụ *Trong ngữ cảnh*) và mục 7 (Dark: giá trị Dark chưa điền, architecture Mục 7): bỏ,
@@ -414,7 +415,7 @@ Sửa **tại chỗ** để giữ liên kết instance:
 ```
 Đã dựng "<Tên>" trong <file>, trang <trang> (node <id khung>):
 <set> <n biến thể> · <set> <n> · …
-Máy đã kiểm: biến thể/thuộc tính · layout_audit · a11y_audit · compliance <x> · responsive <w…> · Dark
+Máy đã kiểm: biến thể/thuộc tính · layout_audit · a11y_audit · compliance <x> · responsive <w…> · Dark · A7 chú ý <n FAIL / m WARN | không áp>
 Tự rà: ảnh chụp <n> · chữ dài ở <w> và 320px · Do's and Don'ts
 Đường dự phòng use_figma: <phần nào, vì sao — hoặc "không dùng">
 Máy KHÔNG kiểm: nội dung nghiệp vụ đúng chưa [Cao] · thiếu trạng thái nghiệp vụ nào [Cao] · thẩm mỹ [Thấp]
@@ -426,11 +427,11 @@ từ gì; các quyết định mới; Known Gaps theo Iteration Guide — dòng 
 tiết ghi ngay tại dòng đó, không có file backlog riêng) — qua approval gate. Quyết định mới lặp lại ở ≥ 2 spec → đề xuất
 đưa lên *Quy ước chung của component dự án*.
 
-**DS v2:** cập nhật md `design/v2/components/{l1,l2}/{slug}.md` (component mới thì tạo md) thay cho `design.md` — qua
+**DS v2:** cập nhật md `design-system/components/{base,application}/{slug}.md` (component mới thì tạo md) thay cho `design.md` — qua
 approval gate (plan preview khi tạo, diff khi sửa). Phần máy giữa `<!-- auto:begin -->` và `<!-- auto:end -->` (thuộc tính, màu và số đo
 theo phần) sinh từ Figma bằng `_scripts/figma-component-export.js` rồi `python3 _scripts/ds-v2-component-doc.py`, không
 sửa tay; phần người viết (khi dùng, nên / không nên, mục *Đối chiếu Astryx*, `### Kiểm máy`) nằm ngoài hai dấu. Báo cáo
-thêm *Đối chiếu Astryx* (L1) và kết quả kiểm mất hình; dòng cuối đổi thành `Cần user quyết: <…>` (DS v2 không có
+thêm mục đối chiếu nguồn tham chiếu và kết quả kiểm mất hình; dòng cuối đổi thành `Cần user quyết: <…>` (DS v2 không có
 Known Gaps `KG-nn`). User chốt giữa ≥ 2 phương án → thêm dòng DEC vào `_workspace/decisions.md`
 (`.claude/rules/decision-log.md`).
 
@@ -448,7 +449,7 @@ do**, không bị token và foundation hiện tại trói, để thấy được
 vòng 3. **Một component mỗi lần chạy**: nhiều component một trang quá nặng để soi.
 
 Mọi thứ nằm trên **một artifact** (4 tab, giữ một link suốt các vòng). Nguồn của trang là thư mục làm việc
-`design/v2/components/_work/{slug}/`:
+`design-system/components/_work/{slug}/`:
 
 | File | Nội dung | Ai ghi |
 |---|---|---|
@@ -495,18 +496,21 @@ Publish luôn cùng đường dẫn file (giữ link), `capabilities: {db: {}, u
    feature · màn. Không có nơi dùng → hỏi user có cần dựng không (DEC-260: chỉ dựng component sản phẩm dùng).
 4. **Xếp nhóm web/mobile** A/B/C theo DEC-279 (architecture Mục 6).
 5. **Lấy kho đã duyệt** (user chốt 28/10): `python3 _scripts/ds-kit.py` in trạng thái 9 mục foundations
-   (`design/v2/foundations.md` mục 0) và mọi component md (`design/v2/components/*/`). Preview vòng 1 và vòng 2 **ráp từ kho
-   này**: token qua `design/v2/tokens.css`, phần con là component đã có (lấy anatomy, CSS, số đo từ md/`_work` của nó),
+   (`design-system/foundations/README.md` mục 0) và mọi component md (`design-system/components/*/`). Preview vòng 1 và vòng 2 **ráp từ kho
+   này**: token qua `design-system/tokens.css`, phần con là component đã có (lấy anatomy, CSS, số đo từ md/`_work` của nó),
    không vẽ lại cái đã có. Chốt danh sách component preview dùng → `python3 _scripts/ds-kit.py <slug> --uses a,b` ghi
    `page.kit`; trang hiện khối *Ráp từ kho*, phần chưa `approved` vẫn dùng nhưng gắn nhãn "chưa duyệt".
-6. **Component lồng nhau** (DEC-292): khai con trong `design/v2/components/_deps.json` (`uses`: child, role `embed`/`anchor`,
+6. **Component lồng nhau** (DEC-292): khai con trong `design-system/components/_deps.json` (`uses`: child, role `embed`/`anchor`,
    `provisional` khi con chưa dựng, `parts`). Quyết định về hình dạng con thuộc con — cha chỉ quyết cách đặt con; nếu buộc
    phải chốt trước (con chưa dựng) thì ghi vào `inherited.<con>` (id, title, choice, from, dec). Component đang dựng là con
    của ai → `ds-deps.py inherited <slug>`: các điểm đó vào brainstorm làm mặc định (trang hiện khối *Chốt sẵn từ component
    cha*); user đổi thì cha cần sync. `ds-kit.py <slug>` tự lấy con từ sổ, ghi phiên bản từng con. Sau khi chốt / sửa góp ý
-   làm đổi hình một component → `python3 _scripts/ds-deps.py check --write --backlog`: cha có con đổi phiên bản bị đánh ⚠
-   cần sync (trang + dashboard) và có task "Sync <cha> theo <con>"; làm task = chạy lại `ds-kit.py <cha>`, dựng lại preview,
-   chạy lại bước 3 / review. Trên Figma cha dùng instance của con nên tự theo.
+   làm đổi hình một component → `python3 _scripts/ds-deps.py check --write --backlog` (hook `ds-stale.sh` cũng tự chạy):
+   component có con lồng trong nó (kể cả bắc cầu, tra qua `kg impact`) hoặc foundation nó dùng đổi phiên bản bị đánh
+   `status: stale` + ⚠ (trang + dashboard) và có task "Sync <slug> (DS stale)"; làm task = chạy lại `ds-kit.py <slug>`,
+   dựng lại preview, chạy lại bước 3 / review, rồi **`python3 _scripts/ds-deps.py synced <slug>`** (ghi mốc, trả status cũ,
+   task tự đóng). Component mới dựng xong cũng chạy `synced <slug>` để có mốc. Trên Figma cha dùng instance của con nên tự
+   theo. Luật đủ: `.claude/rules/ds-stale.md` (DEC-302).
 
 ### Vòng 1 — Brainstorm (tab 1)
 
@@ -569,30 +573,42 @@ User báo đã chọn → `ArtifactData list answers` → ghi `answers.json` →
   động giá trị trần còn lại (`"auto": true`, tên phần lấy theo bộ chọn đã học), bỏ dòng auto trùng dòng gốc; (3) dòng còn
   mơ hồ gắn tay; dòng không có trên CSS preview (vd bóng elev, độ đậm trong shorthand) ghi `noOverride: true` + `why`;
   (4) đặt tên phần dễ đọc cho dòng auto còn mang tên bộ chọn; (5) so ảnh tab 2 trước/sau phải giống từng điểm ảnh.
+* **Component khung → A7 trên preview** trước khi dừng chờ duyệt: chụp màn demo Web bằng Playwright/Chrome, hộp vùng lấy
+  bằng `getBoundingClientRect` → `attention-audit.py --image --regions`. FAIL thì sửa preview trước — bắt lỗi khung nặng
+  hơn nội dung ngay ở bản xem trước, trước khi lên Figma.
 * Duyệt kiểu L3: tối đa 3 bản (`preview.version`; ô duyệt của bản n lưu ở `preview-approve-vn`, bản 1 là `preview-approve`), mỗi bản sửa theo ghi chú + comment trên trang (comment chỉ đổi phần
   tử được comment, memory phạm vi comment). Dừng chờ "Duyệt".
 
 ### Vòng 3 — Đối chiếu foundation (tab 3)
 
-1. `python3 _scripts/ds-foundation-check.py design/v2/components/_work/{slug} --write` → `check.json`.
+1. `python3 _scripts/ds-foundation-check.py design-system/components/_work/{slug} --write` → `check.json`.
    **Kiểm kỹ 7 nhóm** (user chốt 28/10): `ds-foundation-check.py` gắn `group` cho mọi dòng (Chữ · Màu · Icon · Hiệu ứng ·
    Khoảng cách & cỡ · Bo góc · Lưới & độ rộng) và nạp `_scripts/ds_foundation_audit.py` kiểm thêm: font ngoài bộ DS, tổ hợp
-   cỡ/dòng ngoài thang type/*, viết hoa + giãn chữ sai caption-caps, cỡ icon ngoài 12/14/16/20/24, nét khác 1.8, khối icon
+   cỡ/dòng ngoài thang type/*, viết hoa + giãn chữ sai caption-caps, cỡ icon ngoài 12/14/16/18/20/24, nét khác 1.8, khối icon
    nhấn mạnh khác Featured 48/24, blur ngoài blur/*, bề rộng khung ngoài width/* và lề nội dung khác screen-inset (cả hai chỉ chấm cho component dựng khung trang, `page.json` `"auditInset": true` — lề nằm ở khung màn demo, không thuộc component thường; user 29/10). Báo cáo in
    "Theo nhóm", check.json có `groups`; bảng nổi bước 3 lọc theo nhóm.
-2. Sinh lại trang, publish, dừng. Tab 3 vẽ lại màn demo + bảng biến thể bằng `design/v2/tokens.css`, đổi qua lại 3
+   **Mọi dòng phải soi được trên hình** (user 29/10): `ds-foundation-check.py` FAIL khi `sel` của một dòng không trỏ tới
+   phần tử nào đang hiện ở tổ hợp đã chốt, đúng nền tảng (in "Không soi được trên hình"). Dòng kiểm thêm chỉ nằm trong
+   phương án đã loại (`data-show`/`data-mshow` khác pick, tính cả khối cha) tự bỏ — không phải sai lệch của component.
+   Luật `display:none` gắn phương án đã chọn (`.pv[data-D6=c] .sbs{display:none}`) cũng tính là ẩn.
+   Sửa bằng `platform`/`sel` đúng chỗ, hoặc thêm ô vào bảng biến thể; bỏ khai báo CSS không phần tử nào dùng.
+   Phần chỉ hiện khi tương tác (menu nổi, popover, tooltip): khai `"soi": {"state": "scope", "set": {"ck": "…"},
+   "add": {"<sel>": "is-hover"}}` trên dòng values — nút Soi tự bật trạng thái đó. Dòng `noOverride` phải quyết thì
+   khai `"at": "<sel>"` (chỗ để soi, không ghi đè). Dòng theme Dark: Soi tự chuyển trang sang Dark.
+2. Sinh lại trang, chạy `python3 _scripts/ds-soi-check.py {slug} --all` (bấm Soi thật từng dòng trên trang bằng Chromium
+   headless; còn ✗ thì sửa như bước 1 rồi sinh lại), publish, dừng. Tab 3 vẽ lại màn demo + bảng biến thể bằng `design-system/tokens.css`, đổi qua lại 3
    chế độ: *Tự do* (bản tab 2) · *Theo lựa chọn hiện tại* · *Tất cả về token có sẵn*, có nhấp nháy A/B, tô viền chỗ đổi,
    bấm dòng để soi phần tử, Light/Dark, bảng Trước → Sau. User quyết từng dòng ⛔ và ＋, và mọi dòng ↔ **nhìn thấy khác**
    (`must`, viền cam); ↔ không thấy khác thì không chọn = kéo về token đề xuất. Nhóm *Chưa khai* (giá trị trần trên hình
    chưa có dòng) phải về 0 bằng cách khai thêm vào `values` — không chọn thay user. Bỏ qua một giá trị (`cssIgnore`) bắt
    buộc có `why`; trang in ra để user soát.
 3. Dump `answers.json`, chạy lại script: exit 0 mới sang vòng 4. Quyết định "đổi luật foundation" hoặc "thêm token" →
-   sửa `design/v2/tokens.json` + `foundations.md` qua L1/L2 trên `main`, chạy `ds-v2-tokens.py`, ghi DEC; quyết định sửa
+   sửa `design-system/tokens.json` + `foundations.md` qua L1/L2 trên `main`, chạy `ds-v2-tokens.py`, ghi DEC; quyết định sửa
    preview → sửa preview, sinh lại (không cần user duyệt lại phần đã khớp).
 
 ### Vòng 4 — Figma
 
-* Ghi spec `design/v2/components/{base|application}/{slug}.md` từ các lựa chọn đã chốt (L1 plan; số đo ghi bằng **tên
+* Ghi spec `design-system/components/{base|application}/{slug}.md` từ các lựa chọn đã chốt (L1 plan; số đo ghi bằng **tên
   token** sau đối chiếu, không ghi số trần), thêm DEC cho từng điểm đã chọn giữa ≥ 2 phương án (gom một dòng DEC nếu
   nhỏ). Ảnh preview đã duyệt chụp lưu `_work/{slug}/preview-web.png`, `preview-mobile.png` làm mốc nhìn.
 * Dựng theo Bước 6–7 (đường `--build`, gói = spec + ảnh mốc). **Mốc nhìn là chế độ "Theo lựa chọn hiện tại" của tab 3**
@@ -629,7 +645,8 @@ bên phải. Mỗi điểm review khai thêm khi chỉ được vào hình:
 |---|---|
 | user chọn xong vòng 1 (mọi điểm cần quyết có lựa chọn, hoặc user nói "theo đề xuất") | dựng preview |
 | user chọn "Duyệt" ở tab 2 | chạy đối chiếu foundation |
-| `ds-foundation-check.py` exit 0 (gồm 0 *Chưa khai*, mọi dòng `must` đã chọn) | ghi spec md, đụng Figma |
+| `ds-soi-check.py {slug} --all` exit 0 (mọi dòng soi ra phần tử trên màn demo / bảng biến thể) | publish trang vòng 3 |
+| `ds-foundation-check.py` exit 0 (gồm 0 *Chưa khai*, 0 *Không soi được*, mọi dòng `must` đã chọn) | ghi spec md, đụng Figma |
 | `ds-v2-sync-check.py --figma` không FAIL sau lần ghi Figma | báo xong lượt dựng / sửa |
 | 3 agent review chạy xong | báo hoàn tất |
 
@@ -663,7 +680,7 @@ Làm Bước 1 (đọc) → 2 (soạn spec, không phỏng vấn) → 3 (API) �
    set · thuộc tính · xếp + mô tả), phần đi `use_figma` (slot), khung tài liệu; kèm kết quả dò Bước 4 làm căn cứ (id /
    key thành phần, token thiếu, node đã có).
 4. **Câu cần user quyết:** mỗi câu có câu hỏi, **đề xuất mặc định**, lý do, nguồn (file + mục hoặc DEC), và nhãn *chặn
-   dựng* / *không chặn*. Luôn có: thiết bị; điểm lệch Astryx làm đổi look; token, L0, L1 thiếu; điểm spec chờ xác nhận.
+   dựng* / *không chặn*. Luôn có: thiết bị; điểm lệch Astryx làm đổi look; token, component con thiếu; điểm spec chờ xác nhận.
 5. **Chưa có chuẩn** chạm tới (không bịa giá trị).
 
 **Phiên chính** (không phải agent con) trình gói qua approval gate (plan preview, diff), hỏi *Câu cần user quyết* bằng `AskUserQuestion`, sửa gói
@@ -676,7 +693,7 @@ chính — chạy Bước 6 → 9, không hỏi lại.
 
 * Đọc lại trang đích (`get_page_model`) trước khi ghi: file có thể đã đổi từ lúc dò; khác gói (node đã có, tên trùng,
   token đổi) → dừng, báo.
-* Gặp điều gói không phủ (thiếu token / L1, `stuck` không giải thích được, kiểm mất hình có cờ B–D, buộc phải đổi look
+* Gặp điều gói không phủ (thiếu token / component con, `stuck` không giải thích được, kiểm mất hình có cờ B–D, buộc phải đổi look
   đã duyệt) → **dừng ở chỗ đó**, trả *Cần user quyết*; không tự quyết thay user.
 * Đầu ra: báo cáo Bước 9, ảnh chụp lưu vào thư mục nháp, và **md cập nhật dạng đề xuất** (Trước → Sau) — không ghi repo.
   Phiên chính ghi qua approval gate, thêm DEC, gọi `/figma-sync` nếu màn đổi theo.
@@ -688,17 +705,17 @@ một agent (luật không ghi song song).
 
 ### Luật cứng
 
-* Không dựng khi chưa có spec đã duyệt trong `design.md` (DS v2: md ở `design/v2/components/`).
+* Không dựng khi chưa có spec đã duyệt trong `design.md` (DS v2: md ở `design-system/components/`).
 * Không tạo component trùng cái thư viện đã có; không vẽ lại control; không sửa main component
   của thư viện.
 * Không mã màu/cỡ/khoảng cách cứng khi đã có token.
 * Không bịa nội dung nghiệp vụ; không bịa giá trị ở Known Gaps — hỏi, hoặc ghi "chưa có chuẩn trong
-  design.md" (DS v2: "chưa có chuẩn trong design/v2/").
+  design.md" (DS v2: "chưa có chuẩn trong design-system/").
 * Không xoá node mình không tạo; không dựng bản thứ hai khi đã có.
 * Thiết bị luôn hỏi user (`--propose`: thành một câu trong gói đề xuất). Không ghi song song (`figma_write` hay `use_figma`).
 * `use_figma` chỉ cho việc `figma_write` không làm được (slot); mỗi lần dùng ghi vào báo cáo.
-* **DS v2:** spec ghi ở `design/v2/components/{l1,l2}/`, **không** ghi vào `design.md`. Không đặt instance Astryx vào
-  component v2. L2 không đè fill / stroke / cỡ của L1.
+* **DS v2:** spec ghi ở `design-system/components/{base,application}/`, **không** ghi vào `design.md`. Không đặt instance Astryx vào
+  component v2. Cha không đè fill / stroke / cỡ của component con.
 * **`--propose`:** không hỏi, không ghi repo, không ghi Figma — chỉ trả gói đề xuất. **`--build`:** không hỏi; điều
   gói không phủ → dừng, trả *Cần user quyết*.
 
@@ -714,10 +731,10 @@ có chủ đích so với bảng của rule, tới khi chuyển hẳn sang DS v2
 
 - Rule workspace `.claude/rules/design-system.md`.
 - @.claude/rules/approval-gate.md (plan preview, diff; sub-agent không ghi file đích trước approval).
-- DS v2: `design/v2/architecture.md` (cấp, luật lắp, tên, web/mobile, token, tài liệu, luật component) ·
-  `design/v2/foundations.md` · `design/v2/tokens.json` · `design/v2/components/README.md` (khuôn tài liệu) ·
-  `design/v2/components/{l1,l2}/*.md` (spec + tiền lệ) · `_workspace/decisions.md` +
-  `.claude/rules/decision-log.md` · `.claude/rules/saas-layer.md` (nhãn tầng của L2).
+- DS v2: `design-system/architecture.md` (nhóm, luật lồng, tên, web/mobile, token, tài liệu, luật component) ·
+  `design-system/foundations/README.md` · `design-system/tokens.json` · `design-system/components/README.md` (thư mục, cách ghi md) ·
+  `design-system/components/{base,application}/*.md` (spec + tiền lệ) · `_workspace/decisions.md` +
+  `.claude/rules/decision-log.md` · `.claude/rules/saas-layer.md` (nhãn tầng của khối nghiệp vụ).
 - `design/design.md`: spec component, token, § Tên trong Figma, States, Content & Formatting,
   Accessibility, Responsive, Known Gaps, Quy ước chung của component dự án. Ví dụ spec đầy đủ:
   § Notification Center.

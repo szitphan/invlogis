@@ -1,1029 +1,95 @@
 {
- "fileKey": "FifpyOMpZk9OP8qyNzbRVJ",
- "taken": "2026-10-29",
- "varhash": {
-  "Color": {
-   "n": 134,
-   "h": "vdee85",
-   "modes": [
-    "Neutral Light",
-    "Neutral Dark"
-   ]
-  },
-  "Spacing": {
-   "n": 15,
-   "h": "w9um2f",
-   "modes": [
-    "Default"
-   ]
-  },
-  "Size": {
-   "n": 3,
-   "h": "b7hpug",
-   "modes": [
-    "Default"
-   ]
-  },
-  "Border": {
-   "n": 1,
-   "h": "1ihgbvn",
-   "modes": [
-    "Default"
-   ]
-  },
-  "Radius": {
-   "n": 8,
-   "h": "up81c1",
-   "modes": [
-    "Neutral"
-   ]
-  },
-  "Typography": {
-   "n": 33,
-   "h": "fcroi3",
-   "modes": [
-    "Neutral"
-   ]
-  },
-  "Chocolate": {
-   "n": 0,
-   "h": "45h",
-   "modes": [
-    "Neutral",
-    "Chocolate"
-   ]
-  },
-  "Butter": {
-   "n": 0,
-   "h": "45h",
-   "modes": [
-    "Neutral",
-    "Butter"
-   ]
-  },
-  "Stone": {
-   "n": 0,
-   "h": "45h",
-   "modes": [
-    "Neutral",
-    "Stone"
-   ]
-  },
-  "Y2K": {
-   "n": 0,
-   "h": "45h",
-   "modes": [
-    "Neutral",
-    "Y2K"
-   ]
-  },
-  "Gothic": {
-   "n": 0,
-   "h": "45h",
-   "modes": [
-    "Neutral",
-    "Gothic"
-   ]
-  },
-  "Matcha": {
-   "n": 0,
-   "h": "45h",
-   "modes": [
-    "Neutral",
-    "Matcha"
-   ]
-  },
-  "Lab": {
-   "n": 42,
-   "h": "1zn8qj",
-   "modes": [
-    "Mode 1"
-   ]
-  },
-  "0. Primitives": {
-   "n": 125,
-   "h": "wngigs",
-   "modes": [
-    "Value"
-   ]
-  },
-  "1. Semantic": {
-   "n": 79,
-   "h": "h5i4q",
-   "modes": [
-    "Light",
-    "Dark"
-   ]
-  },
-  "zz · Platform cũ (chờ xoá)": {
-   "n": 174,
-   "h": "1mczkgp",
-   "modes": [
-    "Web",
-    "Mobile"
-   ]
-  },
-  "Thử · vòng 4": {
-   "n": 4,
-   "h": "sg72bn",
-   "modes": [
-    "A · Web",
-    "A · Mobile",
-    "B · Web",
-    "B · Mobile"
-   ]
-  },
-  "7. Brand": {
-   "n": 11,
-   "h": "8pqyc",
-   "modes": [
-    "Than chì",
-    "Xanh lá",
-    "Xanh ngọc",
-    "Xanh dương",
-    "Chàm",
-    "Tím",
-    "Đỏ đô",
-    "Cam đất"
-   ]
-  },
-  "8. Component": {
-   "n": 91,
-   "h": "1q32s61",
-   "modes": [
-    "Value"
-   ]
-  },
-  "2. Platform · Radius": {
-   "n": 10,
-   "h": "1723887",
-   "modes": [
-    "Web",
-    "Mobile"
-   ]
-  },
-  "3. Platform · Spacing & Layout": {
-   "n": 22,
-   "h": "1yeexfe",
-   "modes": [
-    "Web",
-    "Mobile"
-   ]
-  },
-  "4. Platform · Typography": {
-   "n": 19,
-   "h": "1gkvn4l",
-   "modes": [
-    "Web",
-    "Mobile"
-   ]
-  },
-  "5. Platform · Sizes": {
-   "n": 28,
-   "h": "1fqki7s",
-   "modes": [
-    "Web",
-    "Mobile"
-   ]
-  },
-  "6. Platform · Component sizes": {
-   "n": 113,
-   "h": "x8rdwl",
-   "modes": [
-    "Web",
-    "Mobile"
-   ]
-  },
-  "9. Brand · Invlogis": {
-   "n": 16,
-   "h": "1745lp",
-   "modes": [
-    "Value"
-   ]
-  }
- },
- "variables": [
-  {
-   "collection": "8. Component",
-   "name": "button/bg/primary",
-   "modes": {
-    "Value": "#262626",
-    "Light": "#262626",
-    "Dark": "#FAFAFA"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/primary-hover",
-   "modes": {
-    "Value": "#3B3B3B",
-    "Light": "#3B3B3B",
-    "Dark": "#E5E5E5"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/primary-pressed",
-   "modes": {
-    "Value": "#171717",
-    "Light": "#171717",
-    "Dark": "#D4D4D4"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/fg/primary",
-   "modes": {
-    "Value": "#FFFFFF",
-    "Light": "#FFFFFF",
-    "Dark": "#0A0A0A"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/secondary",
-   "modes": {
-    "Value": "#F5F5F5",
-    "Light": "#F5F5F5",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/secondary-hover",
-   "modes": {
-    "Value": "#E5E5E5",
-    "Light": "#E5E5E5",
-    "Dark": "#404040"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/secondary-pressed",
-   "modes": {
-    "Value": "#D4D4D4",
-    "Light": "#D4D4D4",
-    "Dark": "#D4D4D4"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/fg/secondary",
-   "modes": {
-    "Value": "#171717",
-    "Light": "#171717",
-    "Dark": "#F5F5F5"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/ghost-hover",
-   "modes": {
-    "Value": "#F5F5F5",
-    "Light": "#F5F5F5",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/ghost-pressed",
-   "modes": {
-    "Value": "#E5E5E5",
-    "Light": "#E5E5E5",
-    "Dark": "#404040"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/fg/ghost",
-   "modes": {
-    "Value": "#171717",
-    "Light": "#171717",
-    "Dark": "#F5F5F5"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/danger",
-   "modes": {
-    "Value": "#FDECEC",
-    "Light": "#FDECEC",
-    "Dark": "#580100"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/danger-hover",
-   "modes": {
-    "Value": "#FDDBDB",
-    "Light": "#FDDBDB",
-    "Dark": "#FDDBDB"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/danger-pressed",
-   "modes": {
-    "Value": "#FFC1BF",
-    "Light": "#FFC1BF",
-    "Dark": "#FFC1BF"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/fg/danger",
-   "modes": {
-    "Value": "#B42318",
-    "Light": "#B42318",
-    "Dark": "#FFA19C"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/outline-hover",
-   "modes": {
-    "Value": "#D4D4D4",
-    "Light": "#D4D4D4",
-    "Dark": "#D4D4D4"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/outline-pressed",
-   "modes": {
-    "Value": "#A3A3A3",
-    "Light": "#A3A3A3",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/fg/outline",
-   "modes": {
-    "Value": "#171717",
-    "Light": "#171717",
-    "Dark": "#F5F5F5"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/border/outline",
-   "modes": {
-    "Value": "#D4D4D4",
-    "Light": "#D4D4D4",
-    "Dark": "#404040"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/bg/disabled",
-   "modes": {
-    "Value": "#F5F5F5",
-    "Light": "#F5F5F5",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/fg/disabled",
-   "modes": {
-    "Value": "#A3A3A3",
-    "Light": "#A3A3A3",
-    "Dark": "#525252"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/focus/danger",
-   "modes": {
-    "Value": "#B42318",
-    "Light": "#B42318",
-    "Dark": "#FFA19C"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/bg",
-   "modes": {
-    "Value": "#EBEBEB",
-    "Light": "#EBEBEB",
-    "Dark": "#EBEBEB"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/fg",
-   "modes": {
-    "Value": "#262626",
-    "Light": "#262626",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/status/online",
-   "modes": {
-    "Value": "#1B7542",
-    "Light": "#1B7542",
-    "Dark": "#93CFA6"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/upload/border",
-   "modes": {
-    "Value": "#737373",
-    "Light": "#737373",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/upload/fg",
-   "modes": {
-    "Value": "#737373",
-    "Light": "#737373",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/status/busy",
-   "modes": {
-    "Value": "#C2410C",
-    "Light": "#C2410C",
-    "Dark": "#FFB782"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/status/away",
-   "modes": {
-    "Value": "#8A5300",
-    "Light": "#8A5300",
-    "Dark": "#E3B87A"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/status/offline",
-   "modes": {
-    "Value": "#525252",
-    "Light": "#525252",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/scrim",
-   "modes": {
-    "Value": "#0A0A0A80",
-    "Light": "#0A0A0A80",
-    "Dark": "#0A0A0A80"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/edit/bg",
-   "modes": {
-    "Value": "#262626",
-    "Light": "#262626",
-    "Dark": "#FAFAFA"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/edit/fg",
-   "modes": {
-    "Value": "#FFFFFF",
-    "Light": "#FFFFFF",
-    "Dark": "#0A0A0A"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/overflow/bg",
-   "modes": {
-    "Value": "#FAFAFA",
-    "Light": "#FAFAFA",
-    "Dark": "#171717"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "avatar/overflow/fg",
-   "modes": {
-    "Value": "#737373",
-    "Light": "#737373",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "tooltip/bg",
-   "modes": {
-    "Value": "#171717",
-    "Light": "#171717",
-    "Dark": "#F5F5F5"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "tooltip/fg",
-   "modes": {
-    "Value": "#FFFFFF",
-    "Light": "#FFFFFF",
-    "Dark": "#0A0A0A"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "list-row/bg/hover",
-   "modes": {
-    "Value": "#F5F5F5",
-    "Light": "#F5F5F5",
-    "Dark": "#F5F5F5"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "list-row/bg/pressed",
-   "modes": {
-    "Value": "#E5E5E5",
-    "Light": "#E5E5E5",
-    "Dark": "#E5E5E5"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "list-row/bg/selected",
-   "modes": {
-    "Value": "#F5F5F5",
-    "Light": "#F5F5F5",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "list-row/fg/disabled",
-   "modes": {
-    "Value": "#A3A3A3",
-    "Light": "#A3A3A3",
-    "Dark": "#525252"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "list-row/divider",
-   "modes": {
-    "Value": "#E5E5E5",
-    "Light": "#E5E5E5",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/bg/default",
-   "modes": {
-    "Value": "#FFFFFF",
-    "Light": "#FFFFFF",
-    "Dark": "#0A0A0A"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/bg/hover",
-   "modes": {
-    "Value": "#F5F5F5",
-    "Light": "#F5F5F5",
-    "Dark": "#F5F5F5"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/bg/pressed",
-   "modes": {
-    "Value": "#D4D4D4",
-    "Light": "#D4D4D4",
-    "Dark": "#D4D4D4"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/border/default",
-   "modes": {
-    "Value": "#E5E5E5",
-    "Light": "#E5E5E5",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/border/pressed",
-   "modes": {
-    "Value": "#A3A3A3",
-    "Light": "#A3A3A3",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/border/selected",
-   "modes": {
-    "Value": "#262626",
-    "Light": "#262626",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/related/bg",
-   "modes": {
-    "Value": "#FAFAFA",
-    "Light": "#FAFAFA",
-    "Dark": "#171717"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/lead/bg",
-   "modes": {
-    "Value": "#FAFAFA",
-    "Light": "#FAFAFA",
-    "Dark": "#171717"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/bg/web",
-   "modes": {
-    "Value": "#FFFFFF",
-    "Light": "#FFFFFF",
-    "Dark": "#0A0A0A"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/bg/app",
-   "modes": {
-    "Value": "#FAFAFA",
-    "Light": "#FAFAFA",
-    "Dark": "#171717"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/bg/hover",
-   "modes": {
-    "Value": "#FAFAFA",
-    "Light": "#FAFAFA",
-    "Dark": "#171717"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/bg/disabled",
-   "modes": {
-    "Value": "#F5F5F5",
-    "Light": "#F5F5F5",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/bg/readonly",
-   "modes": {
-    "Value": "#FAFAFA",
-    "Light": "#FAFAFA",
-    "Dark": "#171717"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/border/default",
-   "modes": {
-    "Value": "#737373",
-    "Light": "#737373",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/border/active",
-   "modes": {
-    "Value": "#262626",
-    "Light": "#262626",
-    "Dark": "#FAFAFA"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/border/error",
-   "modes": {
-    "Value": "#B42318",
-    "Light": "#B42318",
-    "Dark": "#FFA19C"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/border/disabled",
-   "modes": {
-    "Value": "#E5E5E5",
-    "Light": "#E5E5E5",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/fg/value",
-   "modes": {
-    "Value": "#171717",
-    "Light": "#171717",
-    "Dark": "#F5F5F5"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/fg/placeholder",
-   "modes": {
-    "Value": "#737373",
-    "Light": "#737373",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/fg/label-web",
-   "modes": {
-    "Value": "#737373",
-    "Light": "#737373",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/fg/label-app",
-   "modes": {
-    "Value": "#737373",
-    "Light": "#737373",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/fg/helper",
-   "modes": {
-    "Value": "#737373",
-    "Light": "#737373",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/fg/error",
-   "modes": {
-    "Value": "#B42318",
-    "Light": "#B42318",
-    "Dark": "#FFA19C"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/fg/disabled",
-   "modes": {
-    "Value": "#A3A3A3",
-    "Light": "#A3A3A3",
-    "Dark": "#525252"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "field/fg/icon",
-   "modes": {
-    "Value": "#737373",
-    "Light": "#737373",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "list-row/check/fg",
-   "modes": {
-    "Value": "#404040",
-    "Light": "#404040",
-    "Dark": "#D4D4D4"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/check/bg",
-   "modes": {
-    "Value": "#262626",
-    "Light": "#262626",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/check/fg",
-   "modes": {
-    "Value": "#FFFFFF",
-    "Light": "#FFFFFF",
-    "Dark": "#0A0A0A"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/check/border",
-   "modes": {
-    "Value": "#FFFFFF",
-    "Light": "#FFFFFF",
-    "Dark": "#0A0A0A"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/radio/border",
-   "modes": {
-    "Value": "#737373",
-    "Light": "#737373",
-    "Dark": "#A3A3A3"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/radio/on",
-   "modes": {
-    "Value": "#262626",
-    "Light": "#262626",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/choice/bg",
-   "modes": {
-    "Value": "#FAFAFA",
-    "Light": "#FAFAFA",
-    "Dark": "#171717"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/choice/bg-pressed",
-   "modes": {
-    "Value": "#D4D4D4",
-    "Light": "#D4D4D4",
-    "Dark": "#D4D4D4"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/disabled/bg",
-   "modes": {
-    "Value": "#F5F5F5",
-    "Light": "#F5F5F5",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/disabled/fg",
-   "modes": {
-    "Value": "#A3A3A3",
-    "Light": "#A3A3A3",
-    "Dark": "#525252"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/choice/bg-hover",
-   "modes": {
-    "Value": "#E5E5E5",
-    "Light": "#E5E5E5",
-    "Dark": "#404040"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/fg/secondary-pressed",
-   "modes": {
-    "Value": "#525252",
-    "Light": "#525252",
-    "Dark": "#525252"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/disabled/lead-bg",
-   "modes": {
-    "Value": "#FFFFFF",
-    "Light": "#FFFFFF",
-    "Dark": "#0A0A0A"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "button/border/outline-disabled",
-   "modes": {
-    "Value": "#E5E5E5",
-    "Light": "#E5E5E5",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/fg/secondary-hover",
-   "modes": {
-    "Value": "#525252",
-    "Light": "#525252",
-    "Dark": "#525252"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "card/border/dashed",
-   "modes": {
-    "Value": "#D4D4D4",
-    "Light": "#D4D4D4",
-    "Dark": "#404040"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "list-row/fg/secondary-pressed",
-   "modes": {
-    "Value": "#525252",
-    "Light": "#525252",
-    "Dark": "#525252"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "progress/bg/track",
-   "modes": {
-    "Value": "#E5E5E5",
-    "Light": "#E5E5E5",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "progress/fill/brand",
-   "modes": {
-    "Value": "#262626",
-    "Light": "#262626",
-    "Dark": "#262626"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "progress/fill/success",
-   "modes": {
-    "Value": "#1B7542",
-    "Light": "#1B7542",
-    "Dark": "#93CFA6"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "progress/fill/info",
-   "modes": {
-    "Value": "#1F4FB8",
-    "Light": "#1F4FB8",
-    "Dark": "#93B9FF"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "progress/fill/warning",
-   "modes": {
-    "Value": "#8A5300",
-    "Light": "#8A5300",
-    "Dark": "#E3B87A"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "progress/fill/danger",
-   "modes": {
-    "Value": "#B42318",
-    "Light": "#B42318",
-    "Dark": "#FFA19C"
-   }
-  },
-  {
-   "collection": "8. Component",
-   "name": "progress/fill/neutral",
-   "modes": {
-    "Value": "#525252",
-    "Light": "#525252",
-    "Dark": "#A3A3A3"
-   }
-  }
- ],
  "components": [
+  {
+   "id": "6681:227878",
+   "name": "Logo",
+   "type": "COMPONENT_SET",
+   "page": "DS · Foundations",
+   "section": "6702:122239",
+   "sectionName": "Logos",
+   "status": null
+  },
+  {
+   "id": "6681:227883",
+   "name": "Company logo",
+   "type": "COMPONENT_SET",
+   "page": "DS · Foundations",
+   "section": "6702:122239",
+   "sectionName": "Logos",
+   "status": null
+  },
+  {
+   "id": "6657:165918",
+   "name": "File type icon",
+   "type": "COMPONENT_SET",
+   "page": "DS · Foundations",
+   "section": "6732:186018",
+   "sectionName": "File type icon",
+   "status": null
+  },
+  {
+   "id": "6657:166083",
+   "name": "Check icon",
+   "type": "COMPONENT_SET",
+   "page": "DS · Foundations",
+   "section": "6732:186019",
+   "sectionName": "Check icon",
+   "status": null
+  },
+  {
+   "id": "6657:163375",
+   "name": "Featured icon",
+   "type": "COMPONENT_SET",
+   "page": "DS · Foundations",
+   "section": "6687:70657",
+   "sectionName": "Master · Featured icon",
+   "status": null
+  },
+  {
+   "id": "6708:100826",
+   "name": "Payment method icon",
+   "type": "COMPONENT_SET",
+   "page": "DS · Foundations",
+   "section": "6704:100801",
+   "sectionName": "Master · Payment method icon",
+   "status": null
+  },
+  {
+   "id": "6706:1532",
+   "name": "Flag",
+   "type": "COMPONENT_SET",
+   "page": "DS · Foundations",
+   "section": "6704:100967",
+   "sectionName": "Master · Flag",
+   "status": null
+  },
+  {
+   "id": "6704:101952",
+   "name": "Bank logo",
+   "type": "COMPONENT_SET",
+   "page": "DS · Foundations",
+   "section": "6704:101953",
+   "sectionName": "Master · Bank logo",
+   "status": null
+  },
+  {
+   "id": "6709:1020",
+   "name": "App logo",
+   "type": "COMPONENT_SET",
+   "page": "DS · Foundations",
+   "section": "6708:100726",
+   "sectionName": "Master · App logo",
+   "status": null
+  },
+  {
+   "id": "6777:1914",
+   "name": "Vehicle Image",
+   "type": "COMPONENT_SET",
+   "page": "DS · Foundations",
+   "section": "6779:2086",
+   "sectionName": "Vehicles",
+   "status": null
+  },
   {
    "id": "6657:163209",
    "name": "_Button spinner",
@@ -1094,7 +160,7 @@
    "page": "DS · Base components",
    "section": "6657:165305",
    "sectionName": "Badges",
-   "status": null
+   "status": "Đã duyệt"
   },
   {
    "id": "6657:165790",
@@ -1139,7 +205,7 @@
    "page": "DS · Base components",
    "section": "6657:165741",
    "sectionName": "Avatars",
-   "status": null
+   "status": "Đã duyệt"
   },
   {
    "id": "6657:166192",
@@ -1148,7 +214,7 @@
    "page": "DS · Base components",
    "section": "6657:165741",
    "sectionName": "Avatars",
-   "status": null
+   "status": "Đã duyệt"
   },
   {
    "id": "6657:166325",
@@ -1161,12 +227,12 @@
   },
   {
    "id": "6657:167394",
-   "name": "Avatar label group",
+   "name": "Avatar label",
    "type": "COMPONENT_SET",
    "page": "DS · Base components",
    "section": "6657:165741",
    "sectionName": "Avatars",
-   "status": null
+   "status": "Đã duyệt"
   },
   {
    "id": "6657:167713",
@@ -1175,7 +241,7 @@
    "page": "DS · Base components",
    "section": "6657:165741",
    "sectionName": "Avatars",
-   "status": null
+   "status": "Đã duyệt"
   },
   {
    "id": "6658:191370",
@@ -1184,7 +250,7 @@
    "page": "DS · Base components",
    "section": "6657:165741",
    "sectionName": "Avatars",
-   "status": null
+   "status": "Đã duyệt"
   },
   {
    "id": "6657:167808",
@@ -1526,7 +592,7 @@
    "page": "DS · Application components",
    "section": "6768:190541",
    "sectionName": "Header navigation",
-   "status": null
+   "status": "Đang review"
   },
   {
    "id": "6768:190577",
@@ -1544,7 +610,7 @@
    "page": "DS · Application components",
    "section": "6768:190541",
    "sectionName": "Header navigation",
-   "status": null
+   "status": "Đang review"
   },
   {
    "id": "6768:190822",
@@ -1553,7 +619,7 @@
    "page": "DS · Application components",
    "section": "6768:190541",
    "sectionName": "Header navigation",
-   "status": null
+   "status": "Đang review"
   },
   {
    "id": "6900:216895",
@@ -1562,7 +628,7 @@
    "page": "DS · Application components",
    "section": "6768:190541",
    "sectionName": "Header navigation",
-   "status": null
+   "status": "Đang review"
   },
   {
    "id": "6904:20446",
@@ -1571,7 +637,7 @@
    "page": "DS · Application components",
    "section": "6768:190541",
    "sectionName": "Header navigation",
-   "status": null
+   "status": "Đang review"
   },
   {
    "id": "6768:191286",
@@ -1580,7 +646,7 @@
    "page": "DS · Application components",
    "section": "6768:190541",
    "sectionName": "Header navigation",
-   "status": null
+   "status": "Đang review"
   },
   {
    "id": "6768:192076",
@@ -1589,7 +655,7 @@
    "page": "DS · Application components",
    "section": "6768:190829",
    "sectionName": "Sidebar navigation",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6768:193304",
@@ -1616,7 +682,7 @@
    "page": "DS · Application components",
    "section": "6768:190829",
    "sectionName": "Sidebar navigation",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6768:193845",
@@ -1643,7 +709,7 @@
    "page": "DS · Application components",
    "section": "6768:190829",
    "sectionName": "Sidebar navigation",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6896:205467",
@@ -1652,7 +718,7 @@
    "page": "DS · Application components",
    "section": "6768:190829",
    "sectionName": "Sidebar navigation",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6896:205515",
@@ -1661,7 +727,7 @@
    "page": "DS · Application components",
    "section": "6768:190829",
    "sectionName": "Sidebar navigation",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6896:206071",
@@ -1670,7 +736,7 @@
    "page": "DS · Application components",
    "section": "6768:190829",
    "sectionName": "Sidebar navigation",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6768:194161",
@@ -1679,7 +745,7 @@
    "page": "DS · Application components",
    "section": "6768:190829",
    "sectionName": "Sidebar navigation",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6768:212071",
@@ -1742,6 +808,132 @@
    "page": "DS · Application components",
    "section": "6788:12444",
    "sectionName": "Vehicle thumb",
+   "status": "Nháp"
+  },
+  {
+   "id": "43:276664",
+   "name": "Heading",
+   "type": "COMPONENT_SET",
+   "page": "DS · Application components",
+   "section": null,
+   "sectionName": null,
+   "status": null
+  },
+  {
+   "id": "43:276441",
+   "name": "Text",
+   "type": "COMPONENT_SET",
+   "page": "DS · Application components",
+   "section": null,
+   "sectionName": null,
+   "status": null
+  },
+  {
+   "id": "5596:129193",
+   "name": "Khung trang / .Mục menu",
+   "type": "COMPONENT_SET",
+   "page": "DS · Application components",
+   "section": "6782:139814",
+   "sectionName": "Khung trang",
+   "status": null
+  },
+  {
+   "id": "5596:129227",
+   "name": "Khung trang / .Nhóm menu",
+   "type": "COMPONENT",
+   "page": "DS · Application components",
+   "section": "6782:139814",
+   "sectionName": "Khung trang",
+   "status": null
+  },
+  {
+   "id": "5596:129268",
+   "name": "Khung trang / .Chân menu",
+   "type": "COMPONENT_SET",
+   "page": "DS · Application components",
+   "section": "6782:139814",
+   "sectionName": "Khung trang",
+   "status": null
+  },
+  {
+   "id": "5596:129316",
+   "name": "Khung trang / Menu trái",
+   "type": "COMPONENT_SET",
+   "page": "DS · Application components",
+   "section": "6782:139814",
+   "sectionName": "Khung trang",
+   "status": null
+  },
+  {
+   "id": "5596:129536",
+   "name": "Khung trang / Thanh trên",
+   "type": "COMPONENT",
+   "page": "DS · Application components",
+   "section": "6782:139814",
+   "sectionName": "Khung trang",
+   "status": null
+  },
+  {
+   "id": "5370:5625",
+   "name": "Device / Status Bar",
+   "type": "COMPONENT_SET",
+   "page": "DS · Application components",
+   "section": "6782:139884",
+   "sectionName": "Device Frame",
+   "status": null
+  },
+  {
+   "id": "5370:5643",
+   "name": "Device / Home Indicator",
+   "type": "COMPONENT_SET",
+   "page": "DS · Application components",
+   "section": "6782:139884",
+   "sectionName": "Device Frame",
+   "status": null
+  },
+  {
+   "id": "5371:3063",
+   "name": "Device / Frame",
+   "type": "COMPONENT",
+   "page": "DS · Application components",
+   "section": "6782:139884",
+   "sectionName": "Device Frame",
+   "status": null
+  },
+  {
+   "id": "5828:155110",
+   "name": "Logo khách / Delta",
+   "type": "COMPONENT",
+   "page": "DS · Application components",
+   "section": null,
+   "sectionName": null,
+   "status": null
+  },
+  {
+   "id": "5841:988",
+   "name": "Logo sản phẩm / Invlogis",
+   "type": "COMPONENT",
+   "page": "DS · Application components",
+   "section": null,
+   "sectionName": null,
+   "status": null
+  },
+  {
+   "id": "43:250616",
+   "name": "SegmentedControl",
+   "type": "COMPONENT_SET",
+   "page": "DS · Application components",
+   "section": null,
+   "sectionName": null,
+   "status": null
+  },
+  {
+   "id": "43:242790",
+   "name": "SegmentedControl / SegmentedControlItem",
+   "type": "COMPONENT_SET",
+   "page": "DS · Application components",
+   "section": null,
+   "sectionName": null,
    "status": null
   },
   {
@@ -1751,7 +943,7 @@
    "page": "DS · Application components",
    "section": "6792:14479",
    "sectionName": "Vehicle card",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6791:13823",
@@ -1760,7 +952,7 @@
    "page": "DS · Application components",
    "section": "6792:14479",
    "sectionName": "Vehicle card",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6794:14809",
@@ -1769,7 +961,7 @@
    "page": "DS · Application components",
    "section": "6795:15459",
    "sectionName": "Vehicle option card",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6794:14992",
@@ -1778,7 +970,7 @@
    "page": "DS · Application components",
    "section": "6795:15459",
    "sectionName": "Vehicle option card",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6797:15876",
@@ -1787,7 +979,7 @@
    "page": "DS · Application components",
    "section": "6798:15913",
    "sectionName": "Container slot",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6801:15783",
@@ -1796,7 +988,7 @@
    "page": "DS · Application components",
    "section": "6802:15841",
    "sectionName": "Combo text",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6804:16465",
@@ -1805,7 +997,7 @@
    "page": "DS · Application components",
    "section": "6805:16591",
    "sectionName": "Combo slots",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6806:16351",
@@ -1814,7 +1006,7 @@
    "page": "DS · Application components",
    "section": "6807:110447",
    "sectionName": "Combo figure",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6808:16502",
@@ -1823,7 +1015,7 @@
    "page": "DS · Application components",
    "section": "6809:17018",
    "sectionName": "Tyre layout",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6808:16848",
@@ -1832,7 +1024,7 @@
    "page": "DS · Application components",
    "section": "6809:17018",
    "sectionName": "Tyre layout",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6811:17156",
@@ -1841,7 +1033,7 @@
    "page": "DS · Application components",
    "section": "6812:111364",
    "sectionName": "Map marker",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6811:17181",
@@ -1859,7 +1051,7 @@
    "page": "DS · Application components",
    "section": "6812:111364",
    "sectionName": "Map marker",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6811:17199",
@@ -1868,6 +1060,15 @@
    "page": "DS · Application components",
    "section": "6812:111364",
    "sectionName": "Map marker",
+   "status": "Nháp"
+  },
+  {
+   "id": "76:84564",
+   "name": "Layout / FormLayout",
+   "type": "COMPONENT_SET",
+   "page": "DS · Application components",
+   "section": null,
+   "sectionName": null,
    "status": null
   },
   {
@@ -1877,7 +1078,7 @@
    "page": "DS · Application components",
    "section": "6879:60948",
    "sectionName": "Alerts & notifications",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6862:202736",
@@ -1886,7 +1087,7 @@
    "page": "DS · Application components",
    "section": "6879:60948",
    "sectionName": "Alerts & notifications",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6862:203147",
@@ -1895,100 +1096,91 @@
    "page": "DS · Application components",
    "section": "6879:60948",
    "sectionName": "Alerts & notifications",
-   "status": null
+   "status": "Nháp"
   },
   {
-   "id": "6681:227878",
-   "name": "Logo",
+   "id": "6975:226434",
+   "name": "_File row",
    "type": "COMPONENT_SET",
-   "page": "DS · Foundations",
-   "section": "6702:122239",
-   "sectionName": "Logos",
-   "status": null
+   "page": "DS · Application components",
+   "section": "6975:226270",
+   "sectionName": "Field upload",
+   "status": "Đang review"
   },
   {
-   "id": "6681:227883",
-   "name": "Company logo",
+   "id": "6975:230197",
+   "name": "Field Upload",
    "type": "COMPONENT_SET",
-   "page": "DS · Foundations",
-   "section": "6702:122239",
-   "sectionName": "Logos",
-   "status": null
+   "page": "DS · Application components",
+   "section": "6975:226270",
+   "sectionName": "Field upload",
+   "status": "Đang review"
   },
   {
-   "id": "6657:165918",
-   "name": "File type icon",
-   "type": "COMPONENT_SET",
-   "page": "DS · Foundations",
-   "section": "6732:186018",
-   "sectionName": "File type icon",
-   "status": null
-  },
-  {
-   "id": "6657:166083",
-   "name": "Check icon",
-   "type": "COMPONENT_SET",
-   "page": "DS · Foundations",
-   "section": "6732:186019",
-   "sectionName": "Check icon",
-   "status": null
-  },
-  {
-   "id": "6657:163375",
-   "name": "Featured icon",
-   "type": "COMPONENT_SET",
-   "page": "DS · Foundations",
-   "section": "6687:70657",
-   "sectionName": "Master · Featured icon",
-   "status": null
-  },
-  {
-   "id": "6708:100826",
-   "name": "Payment method icon",
-   "type": "COMPONENT_SET",
-   "page": "DS · Foundations",
-   "section": "6704:100801",
-   "sectionName": "Master · Payment method icon",
-   "status": null
-  },
-  {
-   "id": "6706:1532",
-   "name": "Flag",
-   "type": "COMPONENT_SET",
-   "page": "DS · Foundations",
-   "section": "6704:100967",
-   "sectionName": "Master · Flag",
-   "status": null
-  },
-  {
-   "id": "6704:101952",
-   "name": "Bank logo",
-   "type": "COMPONENT_SET",
-   "page": "DS · Foundations",
-   "section": "6704:101953",
-   "sectionName": "Master · Bank logo",
-   "status": null
-  },
-  {
-   "id": "6709:1020",
-   "name": "App logo",
-   "type": "COMPONENT_SET",
-   "page": "DS · Foundations",
-   "section": "6708:100726",
-   "sectionName": "Master · App logo",
-   "status": null
-  },
-  {
-   "id": "6777:1914",
-   "name": "Vehicle Image",
-   "type": "COMPONENT_SET",
-   "page": "DS · Foundations",
-   "section": "6779:2086",
-   "sectionName": "Vehicles",
-   "status": null
+   "id": "6975:230317",
+   "name": "_Upload sheet",
+   "type": "COMPONENT",
+   "page": "DS · Application components",
+   "section": "6975:226270",
+   "sectionName": "Field upload",
+   "status": "Đang review"
   }
  ],
  "sections": [
+  {
+   "id": "6702:122239",
+   "name": "Logos",
+   "page": "DS · Foundations",
+   "badge": null
+  },
+  {
+   "id": "6732:186018",
+   "name": "File type icon",
+   "page": "DS · Foundations",
+   "badge": null
+  },
+  {
+   "id": "6732:186019",
+   "name": "Check icon",
+   "page": "DS · Foundations",
+   "badge": null
+  },
+  {
+   "id": "6687:70657",
+   "name": "Master · Featured icon",
+   "page": "DS · Foundations",
+   "badge": null
+  },
+  {
+   "id": "6704:100801",
+   "name": "Master · Payment method icon",
+   "page": "DS · Foundations",
+   "badge": null
+  },
+  {
+   "id": "6704:100967",
+   "name": "Master · Flag",
+   "page": "DS · Foundations",
+   "badge": null
+  },
+  {
+   "id": "6704:101953",
+   "name": "Master · Bank logo",
+   "page": "DS · Foundations",
+   "badge": null
+  },
+  {
+   "id": "6708:100726",
+   "name": "Master · App logo",
+   "page": "DS · Foundations",
+   "badge": null
+  },
+  {
+   "id": "6779:2086",
+   "name": "Vehicles",
+   "page": "DS · Foundations",
+   "badge": "Nháp"
+  },
   {
    "id": "6657:163199",
    "name": "Buttons",
@@ -2005,7 +1197,7 @@
    "id": "6657:165305",
    "name": "Badges",
    "page": "DS · Base components",
-   "badge": null
+   "badge": "Đã duyệt"
   },
   {
    "id": "6657:165740",
@@ -2017,7 +1209,7 @@
    "id": "6657:165741",
    "name": "Avatars",
    "page": "DS · Base components",
-   "badge": null
+   "badge": "Đã duyệt"
   },
   {
    "id": "6657:166247",
@@ -2074,14 +1266,86 @@
    "badge": null
   },
   {
-   "id": "6768:190541",
-   "name": "Header navigation",
+   "id": "6768:193729",
+   "name": "Mobile",
    "page": "DS · Application components",
    "badge": null
   },
   {
+   "id": "6768:193759",
+   "name": "Biến thể",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:193760",
+   "name": "Trạng thái",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:193761",
+   "name": "Chữ dài",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:193762",
+   "name": "Cấu tạo",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:190541",
+   "name": "Header navigation",
+   "page": "DS · Application components",
+   "badge": "Đang review"
+  },
+  {
    "id": "6768:190829",
    "name": "Sidebar navigation",
+   "page": "DS · Application components",
+   "badge": "Nháp"
+  },
+  {
+   "id": "6768:201350",
+   "name": "Biến thể",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:202028",
+   "name": "Trạng thái",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:202366",
+   "name": "Cấu tạo",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:202464",
+   "name": "Chữ dài",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:193786",
+   "name": "Demo · Mobile header",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:193857",
+   "name": "Demo · Header navigation",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:204061",
+   "name": "Demo · Sidebar navigation",
    "page": "DS · Application components",
    "badge": null
   },
@@ -2092,8 +1356,74 @@
    "badge": null
   },
   {
+   "id": "6768:217189",
+   "name": "Web",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:217190",
+   "name": "Mobile",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:217191",
+   "name": "Biến thể",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:217192",
+   "name": "Chữ dài",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:217193",
+   "name": "Cấu tạo",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
    "id": "6768:211685",
    "name": "Section headers",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:220439",
+   "name": "Biến thể",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:220436",
+   "name": "Web",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:220437",
+   "name": "Mobile",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:220438",
+   "name": "Trạng thái",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:220440",
+   "name": "Chữ dài",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:220441",
+   "name": "Cấu tạo",
    "page": "DS · Application components",
    "badge": null
   },
@@ -2104,8 +1434,62 @@
    "badge": null
   },
   {
+   "id": "6768:212086",
+   "name": "Demo · Page headers",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:218464",
+   "name": "Demo · Card headers",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6768:220613",
+   "name": "Demo · Section headers",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
    "id": "6788:12444",
    "name": "Vehicle thumb",
+   "page": "DS · Application components",
+   "badge": "Nháp"
+  },
+  {
+   "id": "6788:12449",
+   "name": "Biến thể",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6788:12450",
+   "name": "Cấu tạo",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6788:12452",
+   "name": "Demo · Vehicle thumb",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6782:139814",
+   "name": "Khung trang",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6782:139884",
+   "name": "Device Frame",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6782:139943",
+   "name": "Splash · chuyển động khi tải lần đầu",
    "page": "DS · Application components",
    "badge": null
   },
@@ -2113,11 +1497,59 @@
    "id": "6792:14479",
    "name": "Vehicle card",
    "page": "DS · Application components",
+   "badge": "Nháp"
+  },
+  {
+   "id": "6792:14484",
+   "name": "Biến thể",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6792:14485",
+   "name": "Trạng thái",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6792:14486",
+   "name": "Chữ dài",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6792:14488",
+   "name": "Demo · Vehicle card",
+   "page": "DS · Application components",
    "badge": null
   },
   {
    "id": "6795:15459",
    "name": "Vehicle option card",
+   "page": "DS · Application components",
+   "badge": "Nháp"
+  },
+  {
+   "id": "6795:15464",
+   "name": "Biến thể",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6795:15465",
+   "name": "Nội dung",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6795:15466",
+   "name": "Chữ dài",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6795:15468",
+   "name": "Demo · Vehicle option card",
    "page": "DS · Application components",
    "badge": null
   },
@@ -2125,11 +1557,47 @@
    "id": "6798:15913",
    "name": "Container slot",
    "page": "DS · Application components",
+   "badge": "Nháp"
+  },
+  {
+   "id": "6798:15918",
+   "name": "Biến thể",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6798:15919",
+   "name": "Ghép trên mooc",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6798:15921",
+   "name": "Demo · Container slot",
+   "page": "DS · Application components",
    "badge": null
   },
   {
    "id": "6802:15841",
    "name": "Combo text",
+   "page": "DS · Application components",
+   "badge": "Nháp"
+  },
+  {
+   "id": "6802:15846",
+   "name": "Biến thể",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6802:15847",
+   "name": "Chữ dài",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6802:15849",
+   "name": "Demo · Combo text",
    "page": "DS · Application components",
    "badge": null
   },
@@ -2137,11 +1605,47 @@
    "id": "6805:16591",
    "name": "Combo slots",
    "page": "DS · Application components",
+   "badge": "Nháp"
+  },
+  {
+   "id": "6805:16596",
+   "name": "Biến thể",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6805:16597",
+   "name": "Lỗi và chỗ hẹp",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6805:16599",
+   "name": "Demo · Combo slots",
+   "page": "DS · Application components",
    "badge": null
   },
   {
    "id": "6807:110447",
    "name": "Combo figure",
+   "page": "DS · Application components",
+   "badge": "Nháp"
+  },
+  {
+   "id": "6807:110452",
+   "name": "Biến thể",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6807:110453",
+   "name": "Đổi phần",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6807:110455",
+   "name": "Demo · Combo figure",
    "page": "DS · Application components",
    "badge": null
   },
@@ -2149,11 +1653,47 @@
    "id": "6809:17018",
    "name": "Tyre layout",
    "page": "DS · Application components",
+   "badge": "Nháp"
+  },
+  {
+   "id": "6809:17023",
+   "name": "Tyre slot",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6809:17024",
+   "name": "Tyre layout",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6809:17026",
+   "name": "Demo · Tyre layout",
+   "page": "DS · Application components",
    "badge": null
   },
   {
    "id": "6812:111364",
    "name": "Map marker",
+   "page": "DS · Application components",
+   "badge": "Nháp"
+  },
+  {
+   "id": "6812:111369",
+   "name": "Map marker",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6812:111370",
+   "name": "Dot, cluster, pin",
+   "page": "DS · Application components",
+   "badge": null
+  },
+  {
+   "id": "6812:111372",
+   "name": "Demo · Map marker",
    "page": "DS · Application components",
    "badge": null
   },
@@ -2161,60 +1701,24 @@
    "id": "6879:60948",
    "name": "Alerts & notifications",
    "page": "DS · Application components",
+   "badge": "Nháp"
+  },
+  {
+   "id": "6879:60968",
+   "name": "Demo · Alerts & notifications",
+   "page": "DS · Application components",
    "badge": null
   },
   {
-   "id": "6702:122239",
-   "name": "Logos",
-   "page": "DS · Foundations",
-   "badge": null
+   "id": "6975:226270",
+   "name": "Field upload",
+   "page": "DS · Application components",
+   "badge": "Đang review"
   },
   {
-   "id": "6732:186018",
-   "name": "File type icon",
-   "page": "DS · Foundations",
-   "badge": null
-  },
-  {
-   "id": "6732:186019",
-   "name": "Check icon",
-   "page": "DS · Foundations",
-   "badge": null
-  },
-  {
-   "id": "6687:70657",
-   "name": "Master · Featured icon",
-   "page": "DS · Foundations",
-   "badge": null
-  },
-  {
-   "id": "6704:100801",
-   "name": "Master · Payment method icon",
-   "page": "DS · Foundations",
-   "badge": null
-  },
-  {
-   "id": "6704:100967",
-   "name": "Master · Flag",
-   "page": "DS · Foundations",
-   "badge": null
-  },
-  {
-   "id": "6704:101953",
-   "name": "Master · Bank logo",
-   "page": "DS · Foundations",
-   "badge": null
-  },
-  {
-   "id": "6708:100726",
-   "name": "Master · App logo",
-   "page": "DS · Foundations",
-   "badge": null
-  },
-  {
-   "id": "6779:2086",
-   "name": "Vehicles",
-   "page": "DS · Foundations",
+   "id": "6978:232794",
+   "name": "Demo · Field upload",
+   "page": "DS · Application components",
    "badge": null
   }
  ],
@@ -2232,5 +1736,201 @@
    "name": "DS · Application components"
   }
  ],
- "note": "Bỏ icon/* (120 set) và 1695 component lẻ ở Foundations; nhãn trạng thái chưa có trên Figma (badge null) · 29/10: cập nhật varhash (thêm help-sheet/*); component giữ bản 28/10 (đã đối chiếu id)"
+ "varhash": {
+  "Color": {
+   "n": 134,
+   "h": "vdee85",
+   "modes": [
+    "Neutral Light",
+    "Neutral Dark"
+   ]
+  },
+  "Spacing": {
+   "n": 15,
+   "h": "w9um2f",
+   "modes": [
+    "Default"
+   ]
+  },
+  "Size": {
+   "n": 3,
+   "h": "b7hpug",
+   "modes": [
+    "Default"
+   ]
+  },
+  "Border": {
+   "n": 1,
+   "h": "1ihgbvn",
+   "modes": [
+    "Default"
+   ]
+  },
+  "Radius": {
+   "n": 8,
+   "h": "up81c1",
+   "modes": [
+    "Neutral"
+   ]
+  },
+  "Typography": {
+   "n": 33,
+   "h": "fcroi3",
+   "modes": [
+    "Neutral"
+   ]
+  },
+  "Chocolate": {
+   "n": 0,
+   "h": "45h",
+   "modes": [
+    "Neutral",
+    "Chocolate"
+   ]
+  },
+  "Butter": {
+   "n": 0,
+   "h": "45h",
+   "modes": [
+    "Neutral",
+    "Butter"
+   ]
+  },
+  "Stone": {
+   "n": 0,
+   "h": "45h",
+   "modes": [
+    "Neutral",
+    "Stone"
+   ]
+  },
+  "Y2K": {
+   "n": 0,
+   "h": "45h",
+   "modes": [
+    "Neutral",
+    "Y2K"
+   ]
+  },
+  "Gothic": {
+   "n": 0,
+   "h": "45h",
+   "modes": [
+    "Neutral",
+    "Gothic"
+   ]
+  },
+  "Matcha": {
+   "n": 0,
+   "h": "45h",
+   "modes": [
+    "Neutral",
+    "Matcha"
+   ]
+  },
+  "Lab": {
+   "n": 42,
+   "h": "1zn8qj",
+   "modes": [
+    "Mode 1"
+   ]
+  },
+  "0. Primitives": {
+   "n": 175,
+   "h": "s5wnr0",
+   "modes": [
+    "Value"
+   ]
+  },
+  "1. Semantic": {
+   "n": 170,
+   "h": "5vt7r2",
+   "modes": [
+    "Light",
+    "Dark"
+   ]
+  },
+  "zz · Platform cũ (chờ xoá)": {
+   "n": 174,
+   "h": "1mczkgp",
+   "modes": [
+    "Web",
+    "Mobile"
+   ]
+  },
+  "Thử · vòng 4": {
+   "n": 4,
+   "h": "sg72bn",
+   "modes": [
+    "A · Web",
+    "A · Mobile",
+    "B · Web",
+    "B · Mobile"
+   ]
+  },
+  "7. Brand": {
+   "n": 11,
+   "h": "8pqyc",
+   "modes": [
+    "Than chì",
+    "Xanh lá",
+    "Xanh ngọc",
+    "Xanh dương",
+    "Chàm",
+    "Tím",
+    "Đỏ đô",
+    "Cam đất"
+   ]
+  },
+  "2. Platform · Radius": {
+   "n": 21,
+   "h": "16tn8hf",
+   "modes": [
+    "Web",
+    "Mobile"
+   ]
+  },
+  "3. Platform · Spacing & Layout": {
+   "n": 28,
+   "h": "19ceqi7",
+   "modes": [
+    "Web",
+    "Mobile"
+   ]
+  },
+  "4. Platform · Typography": {
+   "n": 30,
+   "h": "1pxwztj",
+   "modes": [
+    "Value"
+   ]
+  },
+  "5. Platform · Sizes": {
+   "n": 48,
+   "h": "22fmps",
+   "modes": [
+    "Web",
+    "Mobile"
+   ]
+  },
+  "6. Platform · Component sizes": {
+   "n": 59,
+   "h": "1r5tku1",
+   "modes": [
+    "Web",
+    "Mobile"
+   ]
+  },
+  "9. Brand · Invlogis": {
+   "n": 16,
+   "h": "1745lp",
+   "modes": [
+    "Value"
+   ]
+  }
+ },
+ "fileKey": "FifpyOMpZk9OP8qyNzbRVJ",
+ "taken": "2026-11-01",
+ "sync_note": "2026-10-30 BL-315: Figma đồng bộ tokens.json (DEC-312/313/314): +color/action/secondary-pressed, color/action/danger-subtle-hover, color/action/danger-subtle-pressed; space/* Untitled; size/*; xoá card/*, list-row/*; 5 biến zz-old/gap-* chờ xoá (BL-316). DEC-315: radius primitive theo px + thang Semantic radius/* Untitled. | DEC-321 (01/11): +color/border/input_hover, color/bg/error/overlay, alpha/red-700-55; đổi gắn biến ở Base, Application. | DEC-322 (01/11): thang font-size/*, line-height/*, 23 text style, collection 4 một mode.",
+ "variables": []
 }

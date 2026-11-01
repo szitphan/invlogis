@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-COMP = ROOT / "design/v2/components"
+COMP = ROOT / "design-system/components"
 
 
 def foundations():

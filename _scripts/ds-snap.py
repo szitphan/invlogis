@@ -18,7 +18,7 @@ import re
 import sys
 from pathlib import Path
 
-WORK = Path("design/v2/components/_work")
+WORK = Path("design-system/components/_work")
 
 
 def css_rules(css):

@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""DS v2 — sinh bộ bàn giao cho dev (Angular web + Flutter app) vào design/v2/handoff/.
+"""DS v2 — sinh bộ bàn giao cho dev (Angular web + Flutter app) vào design-system/handoff/.
 
   python3 _scripts/ds-v2-handoff.py           # ghi toàn bộ handoff/
   python3 _scripts/ds-v2-handoff.py --check   # không ghi; exit 1 nếu handoff/ lệch nguồn
 
 Nguồn (sửa ở đây, KHÔNG sửa handoff/):
-  design/v2/tokens.json                      token (tên = tên biến Figma)
-  design/v2/components/l*/*.md               spec component (dòng meta + bảng Thuộc tính khối Web / Mobile)
-  design/v2/components/platform-names.json   tên component bên Angular / Flutter (tay viết)
-  design/v2/crosswalk.md                     Control type của BA → mã component
-  design/v2/icons.md, design/v2/icons/*.svg  icon
+  design-system/tokens.json                      token (tên = tên biến Figma)
+  design-system/components/l*/*.md               spec component (dòng meta + bảng Thuộc tính khối Web / Mobile)
+  design-system/components/platform-names.json   tên component bên Angular / Flutter (tay viết)
+  design-system/crosswalk.md                     Control type của BA → mã component
+  design-system/foundations/icon.md, design-system/icons/*.svg  icon
 
 Sinh ra:
   handoff/tokens/*.tokens.json   chuẩn DTCG ($value/$type), 1 file/collection/mode — cho Style Dictionary, Tokens Studio
-  handoff/web/tokens.css         bản chép design/v2/tokens.css (sinh bởi ds-v2-tokens.py)
+  handoff/web/tokens.css         bản chép design-system/tokens.css (sinh bởi ds-v2-tokens.py)
   handoff/web/_tokens.scss       biến SCSS trỏ biến CSS, cho Angular
   handoff/flutter/invlogis_tokens.g.dart   hằng + ThemeExtension cho Flutter
   handoff/components/registry.json         bảng nối: mã ↔ Figma ↔ spec ↔ Angular ↔ Flutter
@@ -28,13 +28,13 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-V2 = ROOT / "design/v2"
+V2 = ROOT / "design-system"
 OUT = V2 / "handoff"
 SRC = V2 / "tokens.json"
 NAMES = V2 / "components/platform-names.json"
 CROSSWALK = V2 / "crosswalk.md"
 WEIGHT = {"Regular": 400, "Medium": 500, "Semi Bold": 600, "Bold": 700}
-GEN = "GENERATED — không sửa tay. Nguồn: design/v2/ · sinh bởi _scripts/ds-v2-handoff.py"
+GEN = "GENERATED — không sửa tay. Nguồn: design-system/ · sinh bởi _scripts/ds-v2-handoff.py"
 
 
 def slug(s):
@@ -58,13 +58,12 @@ def collections(doc):
         "Semantic": c["Semantic"]["color"],
         "Platform": c["Platform"]["vars"],
         "Brand": c["Brand"]["color"],
-        "Component": c["Component"]["color"],
     }
 
 
 def owner(cols, name):
     """Collection chứa token `name` (thứ tự ưu tiên như Figma: tầng thấp trước)."""
-    for col in ("Primitives", "Brand", "Semantic", "Component", "Platform"):
+    for col in ("Primitives", "Brand", "Semantic", "Platform"):
         if name in cols[col]:
             return col
     return None
@@ -139,7 +138,6 @@ def build_dtcg(doc):
     by_mode("Semantic", "color", "color")
     by_mode("Platform", "vars", "dimension")
     by_mode("Brand", "color", "color", c["Brand"]["modeSlugs"])
-    by_mode("Component", "color", "color", {"Value": "default"})
 
     ts = {}
     for k, v in doc["textStyles"].items():
@@ -173,10 +171,10 @@ def build_dtcg(doc):
             "Primitives": ["primitives.tokens.json"],
             **{col: [f"{col.lower()}.{s}.tokens.json" for s in
                      [(c[col].get("modeSlugs") or {}).get(m, "default" if m == "Value" else slug(m)) for m in c[col]["modes"]]]
-               for col in ("Semantic", "Platform", "Brand", "Component")},
+               for col in ("Semantic", "Platform", "Brand")},
             "Styles": ["styles.tokens.json"],
         },
-        "modes": {col: c[col]["modes"] for col in ("Semantic", "Platform", "Brand", "Component")},
+        "modes": {col: c[col]["modes"] for col in ("Semantic", "Platform", "Brand")},
     }
     files["$manifest"] = manifest
     return files
@@ -185,9 +183,9 @@ def build_dtcg(doc):
 def build_scss(doc):
     cols = collections(doc)
     L = [f"// {GEN}", "// Biến SCSS trỏ biến CSS — giá trị đổi theo data-theme / data-platform / data-brand / data-context.",
-         "// Dùng trong Angular: @use 'design/v2/handoff/web/tokens' as t;  → color: t.$color-text-primary;", ""]
+         "// Dùng trong Angular: @use 'design-system/handoff/web/tokens' as t;  → color: t.$color-text-primary;", ""]
     seen = set()
-    for col in ("Primitives", "Semantic", "Platform", "Brand", "Component"):
+    for col in ("Primitives", "Semantic", "Platform", "Brand"):
         L.append(f"// {col}")
         for k in cols[col]:
             name = "type-label-weight" if k == "type/label/style" else k.replace("/", "-")
@@ -229,7 +227,7 @@ def dart_color(hex_):
 def build_dart(doc):
     c = doc["collections"]
     cols = collections(doc)
-    sem, brand, comp = cols["Semantic"], cols["Brand"], cols["Component"]
+    sem, brand = cols["Semantic"], cols["Brand"]
     P = c["Primitives"]
     L = [f"// {GEN}", "// ignore_for_file: constant_identifier_names, lines_longer_than_80_chars", "",
          "import 'package:flutter/material.dart';", ""]
@@ -284,7 +282,9 @@ def build_dart(doc):
         out.append("")
         return out
 
-    # Semantic
+    # Semantic — token trỏ dải Brand (color/accent/*, DEC-316) tách sang InvAccentColors (tính lúc chạy theo khách)
+    sem_acc = {k: v for k, v in sem.items() if any(str(v[m]).startswith("color/brand/") for m in c["Semantic"]["modes"])}
+    sem = {k: v for k, v in sem.items() if k not in sem_acc}
     fields = [(ident(k), "Color", v.get("use", "")) for k, v in sem.items()]
     body = []
     for mode in c["Semantic"]["modes"]:
@@ -310,40 +310,14 @@ def build_dart(doc):
     body.append("")
     L += ext_class("InvBrandColors", fields, "Brand — dải màu theo khách (tenant). Chọn theo slug khách: InvBrandColors.all[slug].", body)
 
-    # Component: tính từ Semantic + Brand lúc chạy (đổi theo sáng/tối và theo khách)
-    def resolve_expr(raw, local):
-        if raw in sem:
-            return f"s.{ident(raw)}"
-        if raw in brand:
-            return f"b.{ident(raw)}"
-        if raw in local:
-            return ident(raw)
-        return prim_ref(raw)
-
-    def ordered(table, mode):
-        done, order = set(), []
-
-        def visit(k):
-            if k in done:
-                return
-            ref = table[k][mode]
-            if ref in table:
-                visit(ref)
-            done.add(k)
-            order.append(k)
-        for k in table:
-            visit(k)
-        return order
-
-    fields = [(ident(k), "Color", v.get("use", "")) for k, v in comp.items()]
-    body = ["  /// Tính từ Semantic (sáng/tối) + Brand (khách) đang dùng.",
-            "  factory InvComponentColors.from(InvColors s, InvBrandColors b) {"]
-    for k in ordered(comp, "Value"):
-        body.append(f"    final {ident(k)} = {resolve_expr(comp[k]['Value'], comp)};")
-    body.append("    return InvComponentColors(" + ", ".join(f"{f}: {f}" for f, _, _ in fields) + ");")
-    body.append("  }")
-    body.append("")
-    L += ext_class("InvComponentColors", fields, "Component — màu theo phần của component (DEC-174).", body)
+    # Accent: Semantic theo vai trỏ dải khách — Light/Dark chọn bậc, InvBrandColors cho giá trị
+    fields = [(ident(k), "Color", v.get("use", "")) for k, v in sem_acc.items()]
+    body = ["  /// Tính từ chế độ sáng/tối + dải màu khách đang dùng (DEC-316).",
+            "  factory InvAccentColors.from(bool dark, InvBrandColors b) => dark",
+            "      ? InvAccentColors(" + ", ".join(f"{ident(k)}: b.{ident(v['Dark'])}" for k, v in sem_acc.items()) + ")",
+            "      : InvAccentColors(" + ", ".join(f"{ident(k)}: b.{ident(v['Light'])}" for k, v in sem_acc.items()) + ");",
+            ""]
+    L += ext_class("InvAccentColors", fields, "Accent — màu khách theo vai (color/accent/*), đổi theo sáng/tối và theo khách.", body)
 
     # Platform
     pv = cols["Platform"]
@@ -416,18 +390,18 @@ def build_dart(doc):
         "/// Gắn DS v2 vào ThemeData. Đổi khách: truyền brand khác.",
         "ThemeData invTheme({Brightness brightness = Brightness.light, InvBrandColors brand = InvBrandColors.thanChi}) {",
         "  final s = brightness == Brightness.dark ? InvColors.dark : InvColors.light;",
+        "  final a = InvAccentColors.from(brightness == Brightness.dark, brand);",
         "  return ThemeData(",
         "    brightness: brightness,",
         "    fontFamily: 'Inter',",
-        "    scaffoldBackgroundColor: s.bgCanvas,",
-        "    extensions: [s, brand, InvComponentColors.from(s, brand), InvPlatform.mobile],",
+        "    scaffoldBackgroundColor: s.bgSurface,",
+        "    extensions: [s, brand, a, InvPlatform.mobile],",
         "  );",
         "}",
         "",
         "extension InvThemeX on BuildContext {",
         "  InvColors get invColors => Theme.of(this).extension<InvColors>()!;",
         "  InvBrandColors get invBrand => Theme.of(this).extension<InvBrandColors>()!;",
-        "  InvComponentColors get invComponent => Theme.of(this).extension<InvComponentColors>()!;",
         "  InvPlatform get invPlatform => Theme.of(this).extension<InvPlatform>()!;",
         "}",
         "",
@@ -523,7 +497,7 @@ def build_components():
             "namesStatus": n.get("status", "chưa đặt"),
         })
     registry = {"$generator": GEN, "$description": "Bảng nối mã component ↔ Figma ↔ spec ↔ Angular ↔ Flutter. "
-                "Tên Angular/Flutter tay viết ở design/v2/components/platform-names.json.",
+                "Tên Angular/Flutter tay viết ở design-system/components/platform-names.json.",
                 "prefix": names.get("prefix", {}), "components": reg}
     unknown = sorted(set(names["components"]) - {c["id"] for c in comps})
     return registry, per, unknown
@@ -547,7 +521,7 @@ def build_crosswalk(ids):
 
 
 def build_icons():
-    text = (V2 / "icons.md").read_text(encoding="utf-8")
+    text = (V2 / "foundations/icon.md").read_text(encoding="utf-8")
     lib = re.search(r"\*\*Lucide\*\*.*?bản \*\*([\d.]+)\*\*", text)
     meanings = []
     part = text.split("## 7.")[1] if "## 7." in text else ""
@@ -558,8 +532,8 @@ def build_icons():
         "$generator": GEN,
         "library": {"name": "lucide", "version": lib.group(1) if lib else None,
                     "angular": "lucide-angular", "flutter": "lucide_icons_flutter (tên snake → LucideIcons.camelCase)"},
-        "custom": [{"name": n, "svg": f"design/v2/icons/{n}.svg",
-                    "svgFill": f"design/v2/icons/{n}-fill.svg" if (V2 / f"icons/{n}-fill.svg").exists() else None} for n in custom],
+        "custom": [{"name": n, "svg": f"design-system/icons/{n}.svg",
+                    "svgFill": f"design-system/icons/{n}-fill.svg" if (V2 / f"icons/{n}-fill.svg").exists() else None} for n in custom],
         "meanings": meanings,
     }
 

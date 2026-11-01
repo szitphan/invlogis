@@ -1,4 +1,4 @@
-// _scripts/check-mat-hinh.js — kiểm "mất hình" khung tài liệu component DS v2 (khuôn: design/v2/components/README.md, Mục 9).
+// _scripts/check-mat-hinh.js — kiểm "mất hình" khung tài liệu component DS v2 (khuôn: design-system/components/README.md, Mục 9).
 // Mục đích: mỗi hình mẫu phải đọc được trên nền thật của ô chứa nó; bắt ô thiếu nền, thân mẫu chìm vào nền ô, khe vòng focus lộ, Hover/Pressed giống Default.
 // Cách dùng: thay __FRAME_ID__ (dòng `const FRAME_ID`) bằng ID khung `Tài liệu · {Tên}`, gửi toàn văn làm `code` — qua figma_write nếu proxy chạy được các hàm Plugin API dưới đây (getNodeByIdAsync, variables…), không thì use_figma. CHỈ ĐỌC, không sửa node.
 // Đầu ra: { soO, soMau, soCo, co[], satNguong[], soCoLopCon, coLopCon[], satNguongLopCon[], tomTatLop, bang[] } — chép kết quả vào mục `### Kiểm máy` của md (mỗi khối Web / Mobile).

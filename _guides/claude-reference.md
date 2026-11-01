@@ -257,6 +257,7 @@ __Hooks (auto-fire on PostToolUse Write/Edit):__
 - `auto-changelog.sh` — append 1 dòng sự kiện vào `_workspace/changelog.md` (writer duy nhất, dedupe dòng trùng).
 - `status-transition.sh` — print suggestion khi `status:` field thay đổi.
 - `post-edit-stale.sh` — reverse-graph scan `links:` → mark downstream `status: stale` + log `_shared/staleness.md`.
+- `ds-stale.sh` — sửa foundation/component DS v2 → `ds-deps.py check --write --backlog`: component có con (bắc cầu) hoặc foundation đổi so với mốc `built` → `status: stale` + task; tra `kg impact` (`.claude/rules/ds-stale.md`, DEC-302).
 - `session-init.sh` (SessionStart) — print dashboard counts.
 - `intake-sync.sh` (SessionStart/UserPromptSubmit/PostToolUse) — đăng ký nguồn mới trong `docs-input/`, tự đóng task backlog theo điều kiện "Xong khi".
 

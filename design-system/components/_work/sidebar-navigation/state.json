@@ -1,0 +1,38 @@
+{
+ "round": "done",
+ "artifact_url": "https://claude.ai/artifact/8BtztH3oHrmpHCfpfAMZbT",
+ "approved": {
+  "brainstorm": "2026-10-28",
+  "preview": "2026-10-28",
+  "foundation": "2026-10-28",
+  "review": "2026-10-28"
+ },
+ "figma": {
+  "file": "[innvie] invlogis v0.3.3",
+  "fileKey": "FifpyOMpZk9OP8qyNzbRVJ",
+  "page": "DS · Application components",
+  "section": "6768:190829",
+  "demo_section": "6768:204061",
+  "sets": {
+   "_Module tile": "6896:204887",
+   "_Nav scope card": "6896:205467",
+   "_Scope option": "6896:205515",
+   "Scope dialog": "6896:206071",
+   "Sidebar navigation": "6768:194161",
+   "_Nav item": "6768:192076",
+   "_Scope option Focus": "6896:213729"
+  },
+  "variants": {
+   "Sidebar navigation Width=64": "6896:206354"
+  },
+  "doc_frame": "6896:212951",
+  "demos": [
+   "6768:202878",
+   "6768:203426",
+   "6768:209276",
+   "6896:212160"
+  ],
+  "built": "2026-10-28",
+  "token_added": "color/text/tertiary_strong (DEC-289)"
+ }
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""DS v2 — icon: lấy SVG theo tên, sinh mã dựng component icon trên Figma (design/v2/icons.md).
+"""DS v2 — icon: lấy SVG theo tên, sinh mã dựng component icon trên Figma (design-system/foundations/icon.md).
 
   python3 _scripts/ds-v2-icons.py check <tên>...     # có SVG không (tự vẽ / Lucide), có bản tô, có nghĩa chưa
   python3 _scripts/ds-v2-icons.py payload <tên>...   # in JSON dữ liệu dựng (SVG, nghĩa, mô tả)
@@ -7,11 +7,11 @@
         [--page ID] [--library ID]                   #   mặc định: trang ✦ DS · Icons, khung "Thư viện icon · DS v2"
 
 Mã `figma` thêm mỗi icon thành component set `icon/<tên>` với 5 biến thể Size=12 · 14 · 16 · 20 · 24, nét 2 trên
-khung 24 co theo cỡ (DEC-300, DEC-147), màu gắn biến `color/icon/primary`, đặt vào cuối "Lưới icon".
+khung 24 co theo cỡ (DEC-300, DEC-147), màu gắn biến `color/fg/secondary`, đặt vào cuối "Lưới icon".
 Icon đã có trên trang thì bỏ qua. Chạy với fileKey FIGMA_FILE bên dưới.
 
-Nguồn bản viền: design/v2/icons/<tên>.svg nếu có (icon tự vẽ, DEC-145), không thì Lucide 1.58.0 tải từ unpkg
-(DEC-156). Có design/v2/icons/<tên>-fill.svg thì thêm trục Fill=Off · On. Bản tô không tự sinh: vẽ tay trên Figma
+Nguồn bản viền: design-system/icons/<tên>.svg nếu có (icon tự vẽ, DEC-145), không thì Lucide 1.58.0 tải từ unpkg
+(DEC-156). Có design-system/icons/<tên>-fill.svg thì thêm trục Fill=Off · On. Bản tô không tự sinh: vẽ tay trên Figma
 theo icons.md mục 4 rồi xuất SVG vào file đó. Nghĩa lấy từ bảng nghĩa icons.md mục 7 (DEC-146).
 Figma tái cấu trúc (vòng 6) thì sửa PAGE, LIBRARY, COLLECTION.
 """
@@ -26,15 +26,15 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DOC = ROOT / "design/v2/icons.md"
-LOCAL = ROOT / "design/v2/icons"
+DOC = ROOT / "design-system/foundations/icon.md"
+LOCAL = ROOT / "design-system/icons"
 LUCIDE = "1.58.0"
 LUCIDE_URL = "https://unpkg.com/lucide-static@{ver}/icons/{name}.svg"
 
 FIGMA_FILE = "FifpyOMpZk9OP8qyNzbRVJ"
 PAGE = "5961:221"                               # trang ✦ DS · Icons
 LIBRARY = "5968:221"                            # khung "Thư viện icon · DS v2", có con "Lưới icon"
-COLLECTION = "VariableCollectionId:5938:223"    # Semantic, chứa color/icon/primary
+COLLECTION = "VariableCollectionId:5938:223"    # Semantic, chứa color/fg/secondary
 NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 WARN_LEN = 45_000                               # mã dài hơn thì nên chia nhiều lần chạy
 
@@ -160,8 +160,8 @@ const page=await figma.getNodeByIdAsync('__PAGE__');await figma.setCurrentPageAs
 await Promise.all([['Inter','Regular'],['JetBrains Mono','Regular']].map(([f,s])=>figma.loadFontAsync({family:f,style:s})));
 const ICONS=__DATA__;
 const SIZES=[12,14,16,20,24];
-const iconVar=(await figma.variables.getLocalVariablesAsync('COLOR')).find(v=>v.name==='color/icon/primary'&&v.variableCollectionId==='__COLLECTION__');
-if(!iconVar)throw new Error('Không thấy biến color/icon/primary trong collection __COLLECTION__');
+const iconVar=(await figma.variables.getLocalVariablesAsync('COLOR')).find(v=>v.name==='color/fg/secondary'&&v.variableCollectionId==='__COLLECTION__');
+if(!iconVar)throw new Error('Không thấy biến color/fg/secondary trong collection __COLLECTION__');
 const P=()=>figma.variables.setBoundVariableForPaint({type:'SOLID',color:{r:0,g:0,b:0}},'color',iconVar);
 const GREY={r:95/255,g:107/255,b:122/255},INK={r:18/255,g:24/255,b:38/255};
 const T=(s,size,col,fam)=>{const t=figma.createText();t.fontName={family:fam||'Inter',style:'Regular'};t.fontSize=size;t.lineHeight={unit:'PIXELS',value:Math.round(size*1.4)};t.characters=s;t.fills=[{type:'SOLID',color:col}];return t};
@@ -217,7 +217,7 @@ def main():
         sys.exit(1 if missing else 0)
 
     if missing:
-        sys.exit(f"Không có SVG cho: {', '.join(missing)} (không có trong design/v2/icons/ và Lucide {LUCIDE})")
+        sys.exit(f"Không có SVG cho: {', '.join(missing)} (không có trong design-system/icons/ và Lucide {LUCIDE})")
     if a.cmd == "payload":
         print(json.dumps(data, ensure_ascii=False, indent=1))
         return

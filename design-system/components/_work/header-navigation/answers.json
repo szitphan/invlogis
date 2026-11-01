@@ -1,0 +1,202 @@
+{
+ "brainstorm-D1": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D2": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D3": {
+  "choice": 2,
+  "note": ""
+ },
+ "brainstorm-D4": {
+  "choice": 1,
+  "note": "Chốt lại 28/10 11:32: chỉ avatar, tên + mã NV · chức vụ trong menu (DEC-293)"
+ },
+ "brainstorm-D5": {
+  "choice": 2,
+  "note": "Trang chọn B; góp ý + chốt 28/10: số đếm đỏ (C)"
+ },
+ "brainstorm-D6": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D7": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D8": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-palette-empty.padding-y.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-search.height.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-palette-highlight.background.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-mobile-back-row.height.mobile": {
+  "choice": 2,
+  "note": ""
+ },
+ "foundation-account-button-mobile.size.mobile": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-account-button.height.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-account-button.max-width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-account-button.padding.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-account-menu.width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-audit.grid.inset-ct": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-audit.icon.featured-pei": {
+  "choice": 0,
+  "note": "Sửa theo luật 48/24 (29/10)"
+ },
+ "foundation-audit.icon.size-18": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-audit.icon.size-22": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-audit.typo.caps-pg": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-avatar-sm.font-size.mobile": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-avatar-sm.size.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-bell-count.height.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-bell-count.min-width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-breadcrumb-current.max-width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-breadcrumb-ellipsis-open.background.web.open-2": {
+  "choice": 2,
+  "note": "Ngoại lệ riêng Header nav (DEC-305)"
+ },
+ "foundation-breadcrumb-ellipsis.width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-breadcrumb-line.height.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-breadcrumb-separator.width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-ellipsis-menu-item.height.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-ellipsis-menu.min-width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-header.height.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-menu-item.height.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-palette-empty-icon.margin-bottom.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-palette-highlight.padding-x.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-palette-highlight.radius.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-search-dialog-input.font-size.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-search-dialog.width.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "foundation-search-hover.border-color.web.hover": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-search.width.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-secondary-nav.gap.web": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-sheet-grabber.height.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-sheet-grabber.radius.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-sheet-item.min-height.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-tooltip.line-height.web": {
+  "choice": 1,
+  "note": ""
+ },
+ "preview-approve-v2": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-palette-empty-icon.size.web": {
+  "choice": 0,
+  "note": "Featured icon 48 (icons.md 3.1) — token thuộc Featured Icon (BL-253)"
+ },
+ "foundation-palette-empty-icon.icon-size.web": {
+  "choice": 0,
+  "note": "Icon 24 trong Featured 48 — token thuộc Featured Icon (BL-253)"
+ }
+}

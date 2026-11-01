@@ -425,6 +425,12 @@ Kiểm bằng dữ liệu. Ảnh chụp chỉ để người xem, chụp **một
    truyền cho reviewer ở lớp 2 (luật thị giác có ngoại lệ hợp lý; reviewer quyết giữ hay chấp nhận).
    Tỷ lệ nhận diện < 80% → đọc lại vùng con và chạy lại với `--part <vùng.json>`; vẫn thấp → ghi rõ
    trong báo cáo, không in PASS.
+7a. **A7** · **Thứ tự chú ý:** mỗi artboard chính → `figma_read screenshot` (ghi `scale` = rộng ảnh / rộng
+   artboard) + file vùng lập từ JSON cây node của A5 (toạ độ theo artboard: cộng dồn x, y của các tầng cha). Vai trò:
+   thanh trên / breadcrumb / menu → `khung` · tiêu đề trang → `tieu-de` · khối chính → `chinh` · nút chính →
+   `hanh-dong` → `python3 _scripts/attention-audit.py --image <png> --regions <vùng.json> --out <scratchpad>`.
+   `K1` FAIL (khung nặng hơn tiêu đề) → khung tự dựng: sửa bằng token (hạ cỡ / độ đậm / màu chữ); khung là component
+   thư viện: không tự sửa, chuyển nguyên văn cho `@visual-reviewer`. `WARN` giữ nguyên văn để truyền cho reviewer.
 8. Một `figma_read screenshot` cho mỗi màn chính ở cuối, để user xem.
 
 **Lớp 2 — reviewer** (gọi song song trong 1 lượt Task, chỉ đọc, chỉ trả finding). Sửa theo finding
@@ -442,7 +448,7 @@ Cần đổi nghiệp vụ → ghi "cần `/cr`", không tự sửa.
    Nhanh, vài màn lẻ) hoặc thiếu Mục 3.6 → KHÔNG gọi, ghi rõ lý do ở báo cáo
    (`Usability (AI): SKIPPED — …`), không in PASS.
 11. **Thị giác (agent):** gọi `@visual-reviewer` (Task) với bảng `screenId · slug · nodeId` + báo cáo A5
-   của từng artboard. Agent chấm thứ tự mắt đọc, phân cấp màu, 60/30/10, nhóm và nhịp, dễ đọc, vị trí
+   + báo cáo A7 (thứ tự nheo mắt, `squint.png`) của từng artboard. Agent chấm thứ tự mắt đọc, phân cấp màu, 60/30/10, nhóm và nhịp, dễ đọc, vị trí
    nút; quyết giữ/chấp nhận từng WARN A5 và WARN của máy đo lề, bo góc. Luôn gọi khi lớp 1 không còn FAIL.
 
 ## Bước 7 — báo đã vẽ gì
@@ -457,7 +463,7 @@ Ngắn, theo mẫu:
 2.1 · web · order-list     P1 · default / Empty / Loading
 2.2 · web · order-detail   P7 · default / Load error
 
-Máy đã kiểm: layout 0 lỗi · a11y 0 lỗi mới (2 ngoại lệ đã biết) · DS compliance 1.00 · A5 thị giác 0 FAIL / 3 WARN (nhận diện 92%)
+Máy đã kiểm: layout 0 lỗi · a11y 0 lỗi mới (2 ngoại lệ đã biết) · DS compliance 1.00 · A5 thị giác 0 FAIL / 3 WARN (nhận diện 92%) · A7 chú ý 0 FAIL / 1 WARN
 Bảng 5 cột (nguồn: HTML | ASCII): 2.1 · web 12/12, 2.2 · web 9/9 row có trên màn | không có bảng 5 cột — vẽ từ SRS
 Đề xuất đổi so với bảng 5 cột: <liệt kê, hoặc "không">
 Object map: <n chỗ lệch bảng 5 cột (đã ghi ở Đề xuất đổi) · thẻ dùng chung: … | không có object map>
@@ -591,7 +597,7 @@ Do's and Don'ts làm tiêu chí tự kiểm trước khi trình.
 
 - `../reqwise-diagram-rules.md` § 5: cổng kết nối Figma.
 - Rule workspace `.claude/rules/design-system.md`: design system là nguồn chung cho mọi skill vẽ màn.
-- Rule workspace `.claude/rules/ui-review.md`: chia việc audit máy (A1–A5) và 3 reviewer, ngưỡng A5.
+- Rule workspace `.claude/rules/ui-review.md`: chia việc audit máy (A1–A5, A7) và 3 reviewer, ngưỡng A5.
 - `design/design.md`: token, mẫu bố cục, component, trạng thái, định dạng nội dung, Known Gaps.
 - `design/components.md`: chọn component theo nhu cầu, cùng Usage, Nên/Không nên và Examples của từng component (dịch từ Astryx, chia theo section).
 - `design/design-tokens.css`: cùng bộ token, dạng CSS (cho prototype/code, không dùng khi vẽ Figma).

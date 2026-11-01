@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Trạng thái 9 mục foundations DS v2 — nguồn: bảng `<!-- foundation-status -->` trong design/v2/foundations.md.
+"""Trạng thái 9 mục foundations DS v2 — nguồn: bảng `<!-- foundation-status -->` trong design-system/foundations/README.md.
 
   python3 _scripts/ds-foundation-status.py list [--json]
   python3 _scripts/ds-foundation-status.py set <mã> <draft|in-review|revisions|approved> [--note "…"] [--by /skill] [--dry]
@@ -16,8 +16,8 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-MD = ROOT / "design/v2/foundations.md"
-REL = "design/v2/foundations.md"
+MD = ROOT / "design-system/foundations/README.md"
+REL = "design-system/foundations/README.md"
 START, END = "<!-- foundation-status -->", "<!-- /foundation-status -->"
 STATUSES = ("draft", "in-review", "revisions", "approved")
 FLOW = {"draft": {"in-review", "approved"}, "in-review": {"revisions", "approved", "draft"},

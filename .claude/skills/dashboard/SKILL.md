@@ -34,7 +34,7 @@ Trang có 8 tab: Hôm nay · Luồng việc · Feature · Hệ thống cũ · De
    `_scripts/dashboard_ds.py`. Muốn số Figma mới thì chụp lại Figma trước (`figma-ds-snapshot.js`, xem `/figma-component`).
    **Trạng thái 9 mục foundations** (28/10): bảng trong khối Foundations, nút đổi trạng thái tạo yêu cầu `ds-status`
    (`{key, from, to}`); sync áp bằng `_scripts/ds-foundation-status.py` (nguồn: `foundations.md` mục 0), rồi Claude sửa nhãn
-   Figma "Trạng thái: …" theo `design/v2/_review/foundations-status.json` › `figma.labels` (chữ + token màu
+   Figma "Trạng thái: …" theo `design-system/_review/foundations-status.json` › `figma.labels` (chữ + token màu
    `color/status/*`). Trang duyệt có xem thử: link trong khối; lựa chọn ở đó nằm trong kho trang đó (collection `status`) —
    đọc `db_list status` rồi `ds-foundation-status.py apply` (L1), dựng lại trang bằng `_scripts/ds-foundation-page.py`.
 4) **Kanban** — 6 cột Draft · In Review · Revisions · Approved · Shipped · Stale; doc không có status đi theo doc chỉ mục cùng folder.

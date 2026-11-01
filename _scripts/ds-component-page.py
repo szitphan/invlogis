@@ -2,9 +2,9 @@
 """Sinh trang artifact duyệt component (/figma-component --html) từ khung
 .claude/skills/figma-component/html-kit/review-page.html.
 
-Đầu vào: design/v2/components/_work/{slug}/page.json (+ check.json nếu đã chạy ds-foundation-check.py --write)
-         + design/v2/tokens.css (nhúng nguyên văn — tab 3 vẽ lại preview bằng token thật)
-Đầu ra:  design/v2/components/_work/{slug}/{slug}-review.html — publish file này bằng Artifact (cùng đường dẫn
+Đầu vào: design-system/components/_work/{slug}/page.json (+ check.json nếu đã chạy ds-foundation-check.py --write)
+         + design-system/tokens.css (nhúng nguyên văn — tab 3 vẽ lại preview bằng token thật)
+Đầu ra:  design-system/components/_work/{slug}/{slug}-review.html — publish file này bằng Artifact (cùng đường dẫn
          mỗi lần để giữ một link; capabilities {db:{}, user:{}}).
 
 Dùng: python3 _scripts/ds-component-page.py <slug> [--check]
@@ -18,8 +18,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 KIT = ROOT / ".claude/skills/figma-component/html-kit/review-page.html"
 LOGO = ROOT / "design/brand/innvie-v1/logo-color.png"
-WORK = ROOT / "design/v2/components/_work"
-TOKENS_CSS = ROOT / "design/v2/tokens.css"  # nhúng cho preview "Theo foundation" ở tab 3
+WORK = ROOT / "design-system/components/_work"
+TOKENS_CSS = ROOT / "design-system/tokens.css"  # nhúng cho preview "Theo foundation" ở tab 3
 
 NEED = {
     "brainstorm": ["component", "slug", "refs", "ideas", "decisions", "screens", "presets"],
