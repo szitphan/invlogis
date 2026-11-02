@@ -4,7 +4,7 @@ Nguồn: design-system/components/_deps.json · rule .claude/rules/ds-stale.md
 
   python3 _scripts/ds-deps.py tree                 # cây: cha dùng con nào (role, tạm) + foundation mỗi component dùng
   python3 _scripts/ds-deps.py version <slug>       # phiên bản hiện tại của 1 component
-  python3 _scripts/ds-deps.py fversion [<mã>]      # phiên bản hiện tại của 1 / 9 mục foundation
+  python3 _scripts/ds-deps.py fversion [<mã>]      # phiên bản hiện tại của 1 / các mục foundation
   python3 _scripts/ds-deps.py impact <slug|f:mã>   # đổi con/mục này thì component nào bị ảnh hưởng (qua KG, bắc cầu)
   python3 _scripts/ds-deps.py inherited <child>    # quyết định chốt sẵn từ cha (brainstorm con hiện làm mặc định)
   python3 _scripts/ds-deps.py scan [--write]       # dò mọi component (md + _work) + foundation nó dùng → _deps.json
@@ -17,7 +17,7 @@ Nguồn: design-system/components/_deps.json · rule .claude/rules/ds-stale.md
 Phiên bản component = 10 ký tự sha1 phần quyết định hình dạng: _work/<slug> (answers brainstorm + css + values) nếu có,
 không thì file md (bỏ dòng updated/status/status_prev). Chưa có gì → "chua-dung".
 Phiên bản foundation = sha1 mục tương ứng trong foundations.md (cột "Ở đâu") + icons.md (mục icon) + các dòng tokens.css
-có tiền tố của mục (FPREFIX).
+có tiền tố của mục (FPREFIX). Có nhắc logo.md (hoặc màn mẫu trong page.json ghi "logo") thì tính là dùng mục logo (DEC-326).
 """
 import hashlib
 import importlib.util
@@ -40,19 +40,38 @@ KGQ = ROOT / ".claude/skills/kg/engine/kg-query.mjs"
 TODAY = date.today().isoformat()
 WORK_SKIP = {"_forms", "_lib"}
 
-FFILE = {k: "design-system/foundations/" + f for k, f in {"color": "color.md", "type": "typography.md", "radius": "radius.md", "space": "spacing.md", "grid": "grids.md", "elevation": "effect-styles.md", "touch-focus": "touch-focus.md", "motion": "motion.md", "icon": "icon.md"}.items()}
+FFILE = {k: "design-system/foundations/" + f for k, f in {"color": "color.md", "type": "typography.md", "radius": "radius.md", "space": "spacing.md", "grid": "grids.md", "elevation": "effect-styles.md", "touch-focus": "touch-focus.md", "motion": "motion.md", "icon": "icon.md", "misc-icon": "icon-sets.md", "vehicle": "vehicle.md", "logo": "logo.md"}.items()}
+
+# DEC-331, DEC-332: hai mục không có FPREFIX vì biến của chúng còn trỏ tiếp sang màu, cỡ (FPREFIX chặn dò ngược);
+# tính phiên bản theo FTOKEN + file riêng, nhận component dùng theo biến hoặc tên trong spec
+FTOKEN = {"misc-icon": ("featured-icon-", "color-file-type-", "file-type-"), "vehicle": ("vehicle-", "color-vehicle-")}
+FDOC = {"misc-icon": "icon-sets.md", "vehicle": "vehicle.md"}
+FTEXT = {"misc-icon": re.compile(r"Featured [Ii]con|featured-icon|File type icon|`Flag`|Bank logo|App logo|QR code|icon-sets\.md"),
+         "vehicle": re.compile(r"vehicle\.md|vehicles\.json|Vehicle Image|Tyre Layout|Map Marker")}
+
+# DEC-337: instance đo trên Figma (_scripts/figma-ds-uses.js), bắt component dùng mà spec không nhắc tên
+FIGMA_USES = COMP / "_figma-uses.json"
+
+
+def figma_uses(slug):
+    if not FIGMA_USES.exists():
+        return set()
+    d = json.loads(FIGMA_USES.read_text(encoding="utf-8"))
+    return {k for name, keys in d["uses"].items() if d["slugs"].get(name) == slug for k in keys}
+
 
 # tiền tố biến CSS → mục foundation (biến component như --tooltip-bg được dò ngược qua var() trong tokens.css)
 FPREFIX = {
-    "color": ("color-", "neutral-", "blue-", "red-", "green-", "yellow-", "orange-", "purple-", "teal-", "charcoal-", "alpha-", "dark-"),
+    "color": ("color-", "neutral-", "blue-", "red-", "green-", "yellow-", "orange-", "purple-", "teal-", "charcoal-", "alpha-", "dark-", "file-type-"),
     "type": ("type-", "font-"),
     "radius": ("radius-",),
     "space": ("space-",),
-    "grid": ("grid-", "width-", "bp-"),
-    "elevation": ("elev-", "blur-"),
+    "grid": ("grid-", "container-", "width-", "bp-"),
+    "elevation": ("shadow-", "backdrop-blur-"),
     "touch-focus": ("touch-", "focus-"),
     "motion": ("duration-", "ease-"),
     "icon": ("icon-",),
+    "logo": ("invlogis-", "innvie-"),  # màu thương hiệu; logo không có biến cỡ (DEC-326), nên dò thêm theo chữ ở foundations_used
 }
 
 
@@ -107,7 +126,7 @@ def _sections():
     """Mục `## N.` gộp từ mọi file foundations/*.md (DEC-317); mỗi file bắt đầu lại, phần đầu file không thuộc mục nào."""
     out = {}
     for f in sorted(FDIR.glob("*.md")):
-        if f.name in ("icon.md", "misc-icon.md"):
+        if f.name in ("icon.md", "vehicle.md", "icon-sets.md"):
             continue
         cur = None
         for line in f.read_text(encoding="utf-8").splitlines():
@@ -132,7 +151,9 @@ def fversions():
         parts = [secs.get(n, "") for n in re.findall(r"mục (\d+)", row["where"])]
         if k == "icon" and ICONS.exists():
             parts.append(re.sub(r"^updated:.*$", "", ICONS.read_text(encoding="utf-8"), flags=re.M))
-        pre = tuple("--" + x for x in FPREFIX.get(k, ()))
+        if k in FDOC and (FDIR / FDOC[k]).exists():
+            parts.append(re.sub(r"^updated:.*$", "", (FDIR / FDOC[k]).read_text(encoding="utf-8"), flags=re.M))
+        pre = tuple("--" + x for x in FPREFIX.get(k, FTOKEN.get(k, ())))
         parts += [l.strip() for l in css if l.strip().startswith(pre)]
         out[k] = {"name": row["name"], "status": row["status"],
                   "version": hashlib.sha1("\n".join(parts).encode()).hexdigest()[:10]}
@@ -168,7 +189,7 @@ def _resolver():
 
 def foundations_used(slug):
     g, fnd = _resolver()
-    names, text = set(), ""
+    names, text, logo_note = set(), "", ""
     pj = COMP / "_work" / slug / "page.json"
     if pj.exists():
         p = json.loads(pj.read_text())
@@ -177,6 +198,8 @@ def foundations_used(slug):
         blob = re.sub(r"--([\w-]+)\s*:\s*[^;{}\"]*;?", lambda m: "" if m.group(1) in g else m.group(0), blob)
         names |= set(re.findall(r"var\(--([\w-]+)", blob))
         text += blob
+        # màn mẫu ghi logo trong note: error-page "chỉ logo và chân trang"; Payment/Bank/App logo là logo đối tác, không phải mục này
+        logo_note = " ".join(str(x.get("note", "")) for x in p.get("screens") or [] if isinstance(x, dict))
     m = md_of(slug)
     if m:
         s = m.read_text(encoding="utf-8")
@@ -188,6 +211,12 @@ def foundations_used(slug):
         out |= fnd(n)
     if re.search(r"icons\.md|lucide", text, re.I):
         out.add("icon")
+    if "logo.md" in text or re.search(r"(?<!Payment )(?<!Bank )(?<!App )\blogo\b", logo_note, re.I):
+        out.add("logo")
+    for k, rx in FTEXT.items():
+        if rx.search(text) or any(n.startswith(FTOKEN[k]) for n in names):
+            out.add(k)
+    out |= figma_uses(slug)
     return sorted(out)
 
 

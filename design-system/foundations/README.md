@@ -1,7 +1,7 @@
 ---
 type: design-foundations
 status: draft
-updated: 2026-11-01
+updated: 2026-11-02
 links:
   - design-system/architecture.md
   - design-system/tokens.json
@@ -16,7 +16,7 @@ links:
 > (DEC-119…139); bổ sung 19/10 từ phần khoảng cách, màu theo khách và vòng 4 (DEC-164…170, DEC-173, DEC-176,
 > DEC-179, DEC-192…194, DEC-196); 20/10 nền đặt, thẻ, chip, avatar, dòng danh sách, thanh tiến độ, ô mã (DEC-231…246). File này là **luật dùng**. Giá trị máy đọc nằm ở `design-system/tokens.json`; `tokens.css` sinh ra từ
 > json bằng `python3 _scripts/ds-v2-tokens.py`. Bảng trong file này lệch json thì **json thắng**.
-> Thư mục này thay file `foundations.md` cũ (DEC-317): mỗi phần một file, giữ số mục cũ. Trên Figma: trang `🎨 DS · Foundations` (collection 0–8 theo mục 2; text style `type/*`; effect style `elev/*`).
+> Thư mục này thay file `foundations.md` cũ (DEC-317): mỗi phần một file, giữ số mục cũ. Trên Figma: trang `🎨 DS · Foundations` (collection 0–8 theo mục 2; text style `type/*`; effect style `shadow/*`).
 
 ## 0. Trạng thái từng mục
 
@@ -27,14 +27,17 @@ Component chỉ coi một mục là chuẩn khi mục đó `approved`; mục ch�
 | Mã | Mục | Ở đâu | Trạng thái | Ngày | Ghi chú |
 |---|---|---|---|---|---|
 | color | Màu | [color.md](color.md) (mục 3) | approved | 2026-11-01 | DEC-316, DEC-320 · tên theo Untitled · DEC-316 · Dark #191919 · 52 token mới · web = mobile |
-| type | Chữ | [typography.md](typography.md) (mục 4) | draft | 2026-11-01 |  |
-| radius | Bo góc | [radius.md](radius.md) (mục 5) | draft | 2026-10-28 |  |
+| type | Chữ | [typography.md](typography.md) (mục 4) | approved | 2026-11-01 | DEC-322 · thang Untitled · một bộ web và app |
+| radius | Bo góc | [radius.md](radius.md) (mục 5) | approved | 2026-11-02 | DEC-328 · một bộ web và app · control 8, card 12, overlay 20, menu 10 |
 | space | Khoảng cách | [spacing.md](spacing.md) (mục 6) | draft | 2026-10-28 |  |
-| grid | Lưới, độ rộng, breakpoint | [grids.md](grids.md) (mục 7) | draft | 2026-10-28 |  |
-| elevation | Lớp nổi, làm mờ nền | [effect-styles.md](effect-styles.md) (mục 8) | draft | 2026-10-28 |  |
+| grid | Lưới, độ rộng, breakpoint | [grids.md](grids.md) (mục 7) | approved | 2026-11-02 |  |
+| elevation | Lớp nổi, làm mờ nền | [effect-styles.md](effect-styles.md) (mục 8) | approved | 2026-11-02 | DEC-327 · tên và số Untitled · 7 bậc shadow · Tối đen 60/40 |
 | touch-focus | Vùng chạm và focus | [touch-focus.md](touch-focus.md) (mục 9) | draft | 2026-10-28 |  |
-| motion | Chuyển động | [motion.md](motion.md) (mục 10) | draft | 2026-10-28 |  |
-| icon | Icon | [icon.md](icon.md) (mục 11) | draft | 2026-10-28 |  |
+| motion | Chuyển động | [motion.md](motion.md) (mục 10) | approved | 2026-11-02 | DEC-333 · 125, 200, 300, 500 · hai đường cong |
+| icon | Icon | [icon.md](icon.md) (mục 11) | approved | 2026-11-02 | DEC-329 · Lucide · một bộ 12, 14, 16, 20 · nét 2,25 từ 16 trở xuống |
+| misc-icon | Misc icons | [icon-sets.md](icon-sets.md) | approved | 2026-11-02 | DEC-335 · 7 bộ · màu loại tệp riêng · cờ US · QR vẫn Nháp |
+| vehicle | Phương tiện | [vehicle.md](vehicle.md) | approved | 2026-11-02 | DEC-334 · foundation duyệt, 9 component vẫn Nháp |
+| logo | Logo | [logo.md](logo.md) (mục 14) | approved | 2026-11-02 | DEC-326 · một component trục Owner · 2 biến thể · 24, 40, 64 |
 <!-- /foundation-status -->
 
 ## Các file
@@ -50,8 +53,9 @@ Component chỉ coi một mục là chuẩn khi mục đó `approved`; mục ch�
 | 9 | [touch-focus.md](touch-focus.md) | touch-focus |
 | 10 | [motion.md](motion.md) | motion |
 | 11 | [icon.md](icon.md) | icon |
-| — | [misc-icon.md](misc-icon.md) | — (phương tiện: ảnh, icon, tổ hợp) |
-| — | [logo.md](logo.md) | — |
+| — | [icon-sets.md](icon-sets.md) | misc-icon (Featured icon, File type, Check, Payment, Flag, Bank, App, Social) |
+| — | [vehicle.md](vehicle.md) | vehicle (phương tiện: ảnh, sơ đồ lốp, marker, tổ hợp) |
+| 14 | [logo.md](logo.md) | logo |
 
 ## 1. Nguồn tham chiếu (DEC-128, DEC-129)
 
@@ -71,14 +75,14 @@ Số của các hệ lấy từ trang gốc ngày 16/10/2026 (bảng nguồn tr�
 |---|---|---|---|---|
 | Primitive | `0. Primitives` | Value | `neutral/900`, `space/16`, `radius/md`, `font-size/sm` | Chỉ tầng Semantic trỏ tới; ẩn khỏi bảng chọn |
 | Semantic · màu | `1. Semantic` | Light, Dark | `color/text/tertiary`, `color/action/secondary-pressed` | Component, màn |
-| Semantic · số đo | `2. Platform · Radius` · `3. Platform · Spacing & Layout` · `5. Platform · Sizes` | Web, Mobile | `radius/card`, `space/xxs`, `layout/screen-inset`, `control/height/md` | Component, màn |
+| Semantic · số đo | `2. Platform · Radius` · `3. Platform · Spacing & Layout` · `5. Platform · Sizes` | Web, Mobile | `radius/card`, `space/xxs`, `grid/margin`, `control/height/md` | Component, màn |
 | Semantic · chữ | `4. Platform · Typography` | Value (một bộ, DEC-322) | `type/body/size`, `type/label/line-height` | Text style `type/*` |
 | Theo khách | `7. Brand` | 8 dải | `color/brand/800` | Component, màn, theo vai mục 3.5 |
 | Component · số đo | `6. Platform · Component sizes` | Web, Mobile | Đang gộp về token chung (DEC-319): còn 59 token chờ đợt 2, sổ `components/_token-ledger.json` | Chính component đó |
-| Thương hiệu | `9. Brand · Invlogis` | Value | `invlogis/*`, `innvie/*` (DEC-261) | Logo, trang giới thiệu; không dùng trong component sản phẩm |
+| Thương hiệu | `9. Brand · Invlogis` | Value | `invlogis/*`, `innvie/*` (DEC-261) | Logo, trang giới thiệu (CSS `--invlogis-*`, DEC-326); không dùng trong component sản phẩm |
 
 - **Primitive màu, khoảng cách (`space/<px>`), bo góc (`radius/<px>`) chỉ để tầng Semantic trỏ tới** (DEC-315). Lớp nổi: style
-  `elev/*` là tầng nghĩa, màu bóng qua `color/shadow/*`.
+  `shadow/*` đặt tên theo thang Untitled, vai tra ở `effect-styles.md`, màu bóng qua `color/shadow/*` (DEC-327).
 - **Token tầng Component (`6.`, `8.`) chỉ trỏ Semantic (`1.`–`5.`) hoặc Brand theo vai, kể cả số đo** (DEC-313). `8. Component`
   chỉ có một chế độ; trỏ thẳng Primitive thì sang Dark vẫn giữ màu sáng. Chưa có Semantic đúng vai thì thêm Semantic, không
   trỏ tắt. Máy kiểm: `python3 _scripts/ds-token-usage.py --check`. Chi tiết tầng: `architecture.md` mục 7.
@@ -91,7 +95,7 @@ Số của các hệ lấy từ trang gốc ngày 16/10/2026 (bảng nguồn tr�
 - Màn đặt chế độ `Platform` một lần ở khung màn (Web hoặc Mobile); chữ, bo góc, khoảng cách bên trong tự đổi.
   Trong code: `data-platform="mobile"` trên khung trang (mặc định là web), `data-theme="dark"` cho chế độ tối.
 - **Không dùng nền trang xám nữa (DEC-258)**, cả web và app: nền trang trắng, thẻ trắng có viền `color/border/secondary`.
-  Collection Context (DEC-241) đã bỏ; khe focus là token Semantic `color/focus/gap`. `color/bg/secondary` giữ cho khối phụ trong
+  Collection Context (DEC-241) đã bỏ; vòng focus là outline, khe trong suốt (DEC-327). `color/bg/secondary` giữ cho khối phụ trong
   thẻ và ô nhập app. `color/bg/primary` trỏ về trắng, chỉ giữ để không gãy tham chiếu cũ.
 - Dark: bản nháp theo quy tắc đảo bậc, đã đo và chỉnh, xem mục 3.6 (DEC-257). Brand chưa có giá trị Dark.
 - Tên CSS = `--` + tên token thay `/` bằng `-`: `color/bg/primary` → `var(--color-bg-primary)`. Biến Figma có code syntax WEB đúng tên này.
@@ -101,7 +105,7 @@ Số của các hệ lấy từ trang gốc ngày 16/10/2026 (bảng nguồn tr�
 1. Fill, viền, chữ gắn biến `Semantic`; bo góc, khoảng cách, lề gắn biến `Platform`. Không mã màu, không số trần.
 2. Chữ dùng text style `type/*`; không chỉnh cỡ tay. Cần cỡ không có trong thang thì hỏi, không tự thêm.
 3. Khung màn đặt chế độ `Platform` (Web hoặc Mobile) một lần.
-4. Thẻ dùng `elev/1` + viền `color/border/secondary`; menu nổi `elev/2`; dialog, sheet, toast `elev/3`.
+4. Thẻ dùng `shadow/xs` + `shadow/xs-border`; menu nổi `shadow/lg` + `shadow/lg-border`; dialog, sheet, toast `shadow/xl` + `shadow/xl-border`.
 5. Sửa token: sửa `tokens.json` → chạy script sinh `tokens.css` → cập nhật biến Figma cùng lượt.
 6. Khối có hình đặt gần góc khung: chạy máy đo lồng góc (mục 5, DEC-165) trước khi trình màn.
 7. Nền trang luôn trắng (`color/bg/primary`), không dùng nền xám (DEC-258).
@@ -109,6 +113,5 @@ Số của các hệ lấy từ trang gốc ngày 16/10/2026 (bảng nguồn tr�
 ## 13. Còn mở
 
 - Dark của Brand (quy ước `_alt`); biến Figma chưa điền Dark, chưa bỏ Context (BL-249, BL-252).
-- Có bật Corner smoothing (góc liền mạch kiểu iOS) cho thẻ, sheet trên app không.
 - Quyền publish thư viện của gói Figma (DEC-110).
 - Việc còn mở của icon: `design-system/foundations/icon.md` mục 10.

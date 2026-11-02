@@ -2,26 +2,33 @@
 type: design-foundations
 feature: ds-v2
 status: draft
-updated: 2026-11-01
+updated: 2026-11-02
 links:
   - design-system/foundations/README.md
   - design-system/handoff/vehicles.json
+  - design-system/assets/vehicles
   - design/_lab/vehicles-final.html
   - design/_lab/lab-combo.html
   - design/_lab/tyre-mapping.html
 ---
 
-# Foundations · Phương tiện (DEC-266, DEC-267)
+# Foundations · Phương tiện (DEC-266, DEC-267, DEC-334)
 
 Ảnh phương tiện, khung và cỡ, sơ đồ lốp, marker bản đồ, và quy ước tổ hợp đầu kéo – mooc – container.
 Chuẩn hoá từ lab 09–12/10 (`design/_lab/vehicles-final.html`, `lab-combo.html`, `tyre-mapping.html`),
-phỏng vấn 27/10. Dữ liệu máy đọc: `design-system/handoff/vehicles.json`.
+phỏng vấn 27/10, trang review 02/11 (DEC-334). Dữ liệu máy đọc: `design-system/handoff/vehicles.json`.
+Ảnh: `design-system/assets/vehicles/` (Mục 2.6).
 
 ## 1. Nhóm hình — khoá ảnh `[Lõi]`
 
-Ảnh khoá theo **nhóm hình chung** (loại × số trục × cỡ dài), không theo tên xe của khách. Mỗi khách gán tên
-xe của mình vào một nhóm; bảng gán của Delta (39 tên, SRS cũ LG) là dữ liệu `[Riêng Delta]` trong
-`vehicles.json` → `tenants.delta`.
+Ảnh khoá theo **nhóm hình chung** (loại × số trục × cỡ dài), không theo tên xe của khách.
+
+| Phần | Tầng | Ai làm |
+|---|---|---|
+| Nhóm hình | `[Lõi]` | Mọi khách dùng chung |
+| Bảng gán tên xe → nhóm | `[Riêng Delta]`, dữ liệu mẫu trong `vehicles.json` → `tenants.delta` (39 tên, SRS cũ LG) | **Đội sản phẩm tự gán khi đưa khách lên; khách không sửa, không có màn cấu hình cho khách** (DEC-334 vh10) |
+
+Bảng gán là dữ liệu danh mục, không có mã `P-…` (`.claude/rules/saas-layer.md` Mục 4). Tên chưa gán về `unknown`.
 
 | Họ | Mã nhóm | Tên | Ảnh mặc định | Kiểu dáng phụ (Style) | Sơ đồ lốp mặc định |
 |---|---|---|---|---|---|
@@ -69,27 +76,64 @@ Cần quay trái thì lật ngang (`scaleX(-1)`), chấp nhận logo ngược �
 | **Vừa khung** | Ảnh thu nhỏ, thẻ, ô chọn loại | Mọi nhóm chung một khung, căn đáy bánh. Ô vuông: xe dài cắt lấy **đầu xe, tràn mép phải**; mooc lấy **cụm bánh, tràn mép trái**; thiết bị gọn lấy cả (`thumb_crop` = head · wheels · whole) |
 | **Tỉ lệ thật** | Tổ hợp, so sánh, dàn xe | Theo px/m từ `size_m`, căn đáy bánh, không cắt |
 
-### 2.3 Token cỡ (`design-system/tokens.json` → Platform, Web = Mobile)
+### 2.3 Khung và cỡ
 
-| Token | Giá trị | Dùng |
+Foundation chỉ chốt **tỉ lệ khung ảnh `Q` là 16:10**. Số đo cỡ ảnh của thẻ thuộc tầng Component của Vehicle Card
+(DEC-334 vh01); bảng dưới là để tra.
+
+| Chỗ dùng | Cỡ | Token (`tokens.json` → Platform) |
 |---|---|---|
-| `size/4xl` | 32 | Ảnh thu nhỏ trong dòng bảng web |
-| `size/6xl` | 48 | Thẻ chọn, dòng danh sách |
-| `size/7xl` | 64 | Đầu thẻ bản ghi |
-| `size/11xl` × `-h` | 160 × 100 | Thẻ mobile |
-| `vehicle/q-md-w` × `-h` | 240 × 150 | Thẻ web |
-| `vehicle/q-lg-w` × `-h` | 480 × 300 | Đầu trang chi tiết phương tiện |
-| `size/md` | 8 (px/m) | Hình ghép trong cột danh sách (tổ hợp 20 m ≈ 160 px) |
-| `size/xl` | 16 (px/m) | Khối chi tiết, form, thẻ app |
-| `size/5xl` | 40 (px/m) | Trang tài liệu, dàn xe |
+| Vehicle Thumb XS · SM · MD | 32 · 48 · 64 vuông, bo 8 cả 3 cỡ | `size/4xl` · `size/6xl` · `size/7xl` · `radius/inner` |
+| Vehicle Card web | 160 × 100 | `size/11xl` × `vehicle/q-sm-h` |
+| Vehicle Card app | 140 × 88 | `vehicle/card-media-app-w` × `vehicle/card-media-app-h` |
+| Đầu trang chi tiết phương tiện | rộng tối đa 480, app trải theo màn, cao theo 16:10 (DEC-334 vh02) | `vehicle/q-lg-w` |
+
+**Tỉ lệ thật px/m là hằng số**, không phải token (DEC-334 vh03): `vehicles.json` → `scale_px_per_m`. Đây là số nhân với
+`size_m`, không phải cỡ; không mượn `size/*`.
+
+| Tên | px/m | Dùng |
+|---|---|---|
+| `sm` | 8 | Hình ghép trong cột danh sách, thẻ app (Combo Figure 1×45 ≈ 149) |
+| `md` | 16 | Khối chi tiết, form (Combo Figure 1×45 ≈ 297) |
+| `lg` | 40 | Trang tài liệu, dàn xe |
 
 ### 2.4 Sửa ảnh 27/10
 
 - `c40-s`, `c45-s`, `t07-s` cao hơn thật (+50…102%) → nén dọc về 2,59 / 2,9 m (xử lý cục bộ, không gọi API).
-  Bản gốc ở `design/_lab/assets/vehicles/b-ai/_orig/`.
+  Bản gốc ở `design-system/assets/vehicles/_orig/`.
 - **Lỗi còn mở:** `c40-top`, `c45-top`, `t07-top`, `t06-top` không phải ảnh nhìn thẳng từ trên (c45 nghiêng
-  phối cảnh, t07 chụp mặt đầu cụm máy lạnh). Marker container dùng hình vẽ khối tới khi sinh lại (cần duyệt
+  phối cảnh, t07 chụp mặt đầu cụm máy lạnh). Marker container dùng hình vẽ khối tới khi sinh lại (BL-264, cần duyệt
   chi phí API).
+
+### 2.5 Nền ô và nét bao (DEC-334 vh08)
+
+Ảnh trong suốt nên một nền không cứu được cả hai chế độ: Sáng thì container trắng tan, Tối thì lốp đen tan. Đo trên
+21 ảnh `Q`, tỉ lệ điểm ảnh dưới 1,5:1 so với nền: Sáng `#FAFAFA` trung bình 34%; Tối `#232323` trung bình 32%, đổi
+`#404040` còn 26%.
+
+| | Sáng | Tối |
+|---|---|---|
+| Nền ô ảnh | `color/bg/secondary` | `color/bg/quaternary` |
+| Nét bao 0,6 theo hình (drop-shadow trên ảnh trong suốt) | `color/fg/quaternary` | `color/fg/tertiary` |
+
+**Chưa đo hiệu năng** nét bao trong danh sách dài, chưa kiểm trên Flutter.
+
+### 2.6 Ảnh bàn giao (DEC-334 vh09)
+
+Nguồn duy nhất: `design-system/assets/vehicles/{ảnh}-{view}.png` · bản gốc trước khi sửa ở `_orig/`.
+
+- **Ảnh chưa nén**, file lớn nhất 935 KB. **Dev phải nén khi tích hợp.** Đo 02/11 bằng PIL, WebP chất lượng 80 theo cỡ
+  dùng (Q rộng 960, S 448, Top 120): 1,19 MB trên 44,2 MB của 76 file đang dùng.
+- `g-truck-s.png` không có trong `vehicles.json`, giữ cùng thư mục, chưa dùng.
+
+### 2.7 Icon xe hay ảnh (DEC-334 vh11)
+
+| Chỗ | Dùng |
+|---|---|
+| Menu, nhãn, chip (≤ 20) | Icon xe: `icon/tractor-unit`, `icon/container-truck` (`design-system/foundations/icon.md`) |
+| Dòng dữ liệu (≥ 32) | `Vehicle Thumb` |
+
+Icon phụ đi kèm chữ trên thẻ xe (`gauge`, `map-pin`, `user-round`, `route`) dùng `color/fg/tertiary`, theo DEC-329.
 
 ## 3. Sơ đồ lốp `[Lõi]`
 
@@ -114,19 +158,34 @@ Mỗi vị trí lốp (`Tyre Slot`): **Default · Selected · Warning** (đến 
 thay) **· Empty** (chưa lắp, viền đứt). Màu theo nhóm trạng thái Semantic (`warning-*`, `error-*`), không màu riêng.
 8 điểm lệch trong file lốp của khách: `docs/vehicle-management/brainstorms/vehicle-management.md` OQ-6…OQ-13.
 
+Màu lốp không mượn token chữ, viền (DEC-334 vh12): số trên nền trạng thái `color/text/white`, lốp lái
+`color/fg/tertiary`, Error `color/bg/error/solid`. Vùng chạm (vh13): app phóng 1,5 lần (lốp 24 × 45) và luôn có danh
+sách vị trí bên dưới; web nới vùng bấm 24 × 32. Số đo ở `design-system/components/application/tyre-layout.md`.
+
 ## 4. Marker bản đồ
 
-| Mức phóng | Hiển thị |
-|---|---|
-| Gần | Ảnh `Top` ghép theo tổ hợp (đầu kéo + mooc + container), xoay theo hướng chạy, dài theo `size_m` |
-| Vừa | Chấm tròn màu trạng thái + nhãn biển số |
-| Xa | Cụm có số đếm (`Map Cluster`) |
+| Mức phóng | Bản đồ | Hiển thị |
+|---|---|---|
+| Gần | ≥ 17 | Ảnh `Top` ghép theo tổ hợp (đầu kéo + mooc + container), xoay theo hướng chạy, dài theo `size_m` |
+| Vừa | 12–16 | Chấm tròn màu trạng thái + nhãn biển số |
+| Xa | ≤ 11 | Cụm có số đếm (`Map Cluster`) |
+
+`[Lõi]`, không theo khách. Mức phóng là ước lượng theo Web Mercator ở vĩ độ 10,8°, chưa thử trên Vietmap (DEC-334 vh16).
+**Cỡ hình:** marker thường 4 px/m, Đang chọn 8 px/m (`vehicles.json` → `marker_px_per_m`); đầu kéo + mooc 40 dài 74 và 147.
+Hình không theo tỉ lệ thật của bản đồ: 8 px/m chỉ đúng ở mức 20.
+
+**Nhóm thiếu ảnh `Top`** (`vehicles.json` → `top_fallback`, DEC-334 vh15): xe tải mượn `t03-top`, dài theo `size_m` của
+nhóm; thiết bị dùng chấm. Sinh lại ảnh theo BL-264 khi duyệt chi phí.
+
+Nhãn, chấm, cụm dùng `shadow/sm`: vai Marker bản đồ trong `design-system/foundations/effect-styles.md` (vh17).
 
 Loại: **Vehicle** (xe đơn) · **Combo** (đầu kéo + mooc) · **Trailer** (mooc đứng riêng tại chỗ đỗ —
 `vehicle-telematics` M2). Ghim điểm Lệnh: `Map Pin` Lấy · Giao.
 
-Trạng thái: **Moving** (chạy) · **Stopped** (dừng) · **Idling** (nổ máy không chạy) · **Offline** (mất tín
-hiệu: vị trí cuối, mờ + giờ) · **Alert** (có sự việc) · **Selected** (đang chọn: to hơn + viền).
+Trạng thái: **Moving** (chạy) · **Stopped** (dừng, `color/fg/tertiary`) · **Idling** (nổ máy không chạy) · **Offline**
+(mất tín hiệu: vị trí cuối + giờ, `color/fg/quaternary`, chấm không mờ, hình mờ) · **Alert** (có sự việc,
+`color/bg/error/solid`) · **Selected** (đang chọn: to hơn + viền). Số đo tương phản trên nền đất giả lập, chưa kiểm bản
+đồ thật: `design-system/components/application/map-marker.md`.
 
 ## 5. Tổ hợp đầu kéo – mooc – container (DEC-267, nguồn `lab-combo`)
 
@@ -169,6 +228,29 @@ Số container kiểm chữ số cuối ISO 6346.
 mooc 20ft · (13) đổi vỏ sau khi lên mooc. Thêm 27/10: (14) cắt mooc tại nhà máy · (15) quay cắt mooc đơn vị
 khác · (16) kiểm hoá giữ container · (17) đang đóng hàng chưa niêm chì. Component tổ hợp phải hiển thị đúng cả 17.
 
+**Bảng 17 ca × component** (DEC-334 vh18). Đây là bảng kiểm, **chưa dựng trên Figma**: dựng khi sync. Ô "chưa chốt" là
+chỗ `lab-combo` chưa vẽ ca đó, quyết khi dựng.
+
+| # | Ca | Combo Text | Combo Slots | Combo Figure | Container Slot | Đặt ngoài component |
+|---|---|---|---|---|---|---|
+| 1 | Đầu kéo một mình | No Trailer | No Trailer | No Trailer | — | — |
+| 2 | Kéo mooc, không container | No Container | Empty | Empty | — | — |
+| 3 | Đã xếp chỗ, chưa có số | One Box, "— (chưa có số)" | 1×20 | 1×20 | No Number | Banner chưa có số |
+| 4 | 1×20 vỏ rỗng | One Box | 1×20 | 1×20 | Empty | — |
+| 5 | 1×20 có hàng | One Box | 1×20 | 1×20 | Loaded | — |
+| 6 | 2×20 cùng Lệnh | Two Boxes | 2×20 | 2×20 | ×2, theo từng khe | — |
+| 7 | 2×20 ghép 2 Lệnh | Two Boxes, "· LVT-…" | 2×20 | 2×20 | ×2, Has Order | — |
+| 8 | 1×40 có hàng | One Box | 1×40 | 1×40 | Loaded | — |
+| 9 | 1×45 lạnh | One Box | 1×45 | 1×45, Box đổi `reefer-45` | Loaded, Reefer | — |
+| 10 | F4: mooc trên Lệnh khác mooc đang móc | One Box | 1×40 | 1×40 | Empty | Banner F4 |
+| 11 | F5: bỏ mooc giữa đường | One Box | 1×40 | 1×40 | Loaded | Hai chặng đầu kéo |
+| 12 | Chặn 40ft trên mooc 20ft | One Box | 1×40, Has Error | chưa chốt | Loaded | Cấu hình Chặn bị gạch ở form |
+| 13 | Đổi vỏ sau khi lên mooc | One Box | 1×20 | 1×20 | Swapping | Banner đổi vỏ |
+| 14 | Cắt mooc tại nhà máy | chưa chốt | chưa chốt | chưa chốt | Dropped | Ghi chú khe trống |
+| 15 | Quay cắt mooc đơn vị khác | chưa chốt | chưa chốt | chưa chốt | Dropped | Ghi chú khe trống |
+| 16 | Kiểm hoá giữ container | One Box | theo cấu hình | theo cấu hình | Held | — |
+| 17 | Đang đóng hàng, chưa niêm chì | One Box | theo cấu hình | theo cấu hình | Loading | — |
+
 ### 5.4 Ba cách thể hiện và chỗ dùng
 
 | Cách | Component | Danh sách Lệnh (web) | Chi tiết Lệnh | Form xếp tổ hợp | Thẻ Lệnh app lái xe | Bản đồ |
@@ -183,15 +265,18 @@ Cảnh báo / Cần hỏi có dấu; hình ghép cập nhật theo lựa chọn.
 
 ## 6. Component (Application) — dựng tuần tự, mỗi cái một lượt duyệt
 
+**Cả 9 là Nháp** (DEC-334 vh19): DEC-268…276 “user duyệt” là duyệt kế hoạch dựng. Sync từ dưới lên trong lượt riêng, duyệt 1
+trang riêng rồi mới `approved`.
+
 | # | Component | Thuộc tính chính | Ráp từ |
 |---|---|---|---|
-| 1 | `Vehicle Thumb` | Group (22) × Size XS 32 · SM 48 · MD 64, cắt sẵn theo nhóm (DEC-268); Style qua ảnh lồng | `Vehicle Image` View Q |
-| 2 | `Vehicle Card` · `Vehicle Card / Mobile` | Mẫu 7: chữ trái, ảnh Q lấn phải, Badge trạng thái, chân lái xe + tuyến; State (DEC-269) | `Vehicle Image` Q · Badge |
-| 3 | `Vehicle Option Card` · `/ Mobile` | Dòng gọn: Thumb SM · biển số · Badge + "tải trọng · lái xe" · Radio phải; Selected × State, xe không khả dụng = Disabled (DEC-270) | `Vehicle Thumb` · Badge · Radio |
+| 1 | `Vehicle Thumb` | Group (22) × Size XS 32 · SM 48 · MD 64, cắt sẵn theo nhóm (DEC-268), bo `radius/inner`; Style qua ảnh lồng | `Vehicle Image` View Q |
+| 2 | `Vehicle Card` · `Vehicle Card / Mobile` | Mẫu 7: chữ trái, ảnh Q lấn phải, Badge trạng thái, chân lái xe + tuyến; State (DEC-269); trải theo cột, tối thiểu 304, `shadow/xs` (DEC-334) | `Vehicle Image` Q · Badge |
+| 3 | `Vehicle Option Card` · `/ Mobile` | Dòng gọn: Thumb SM · biển số · Badge + "tải trọng · lái xe" · Radio phải; Selected × State, xe không khả dụng = Disabled (DEC-270); trải theo khối chứa (DEC-334) | `Vehicle Thumb` · Badge · Radio |
 | 4 | `Container Slot` | State 7 × Density Default · Compact; Reefer, Has Order (DEC-271) | Badge |
 | 5 | `Combo Text` | Config No Trailer · No Container · One Box · Two Boxes; Load luôn hiện, Boxes cắt "…", Has Types (DEC-272) | — |
 | 6 | `Combo Slots` | Config No Trailer · Empty · 1×20 · 1×20 Center · 2×20 · 1×40 · 1×45 × Density (Compact xếp dọc); Has Error (DEC-273) | `Container Slot` |
-| 7 | `Combo Figure` | Config 7 × Scale MD 16 · SM 8 px/m; hình chỉ nhận dạng, trạng thái ở Combo Slots (DEC-274) | `Vehicle Image` View=S |
+| 7 | `Combo Figure` | Config 7 × Scale MD 16 · SM 8 px/m (`scale_px_per_m`); hình chỉ nhận dạng, trạng thái ở Combo Slots (DEC-274) | `Vehicle Image` View=S |
 | 8 | `Tyre Layout` · `Tyre Slot` | Layout 11 · Tyre Slot Kind Steer · Load · Spare × State 5 (DEC-275) | `Tyre Slot` |
 | 9 | `Map Marker` · `Map Dot` · `Map Cluster` · `Map Pin` | Marker Kind 3 × State 6 · Dot State 6 · Cluster Size 3 · Pin Type 2; xoay chỉ Figure (DEC-276) | `Vehicle Image` View=Top |
 
@@ -204,4 +289,4 @@ Combo Slots 6804:16465 · Combo Figure 6806:16351 · Tyre Slot 6808:16502 · Tyr
 Foundations trên Figma: Section `Vehicles` trên trang `❖ FOUNDATIONS` (khối con: Images · Frames · Tyres ·
 Markers) + Section `Demo · Vehicles` (DEC-263, DEC-264). `Vehicle Image` = Group × View × Style.
 
-Figma Section Vehicles: 6779:2086 (master `Vehicle Image` 6777:1914, 79 biến thể; View S và Top theo 16 px/m, khung Top rộng thật 2,5 m — xe nâng 1,2 m) · Demo · Vehicles 6780:1870. User duyệt 27/10.
+Figma Section Vehicles: 6779:2086 (master `Vehicle Image` 6777:1914, 79 biến thể; View S và Top theo 16 px/m, khung Top rộng thật 2,5 m — xe nâng 1,2 m) · Demo · Vehicles 6780:1870. User duyệt 27/10. Figma chưa theo DEC-334 (biến, ảnh, 9 component): sync lượt riêng.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Trạng thái 9 mục foundations DS v2 — nguồn: bảng `<!-- foundation-status -->` trong design-system/foundations/README.md.
+"""Trạng thái các mục foundations DS v2 — nguồn: bảng `<!-- foundation-status -->` trong design-system/foundations/README.md.
 
   python3 _scripts/ds-foundation-status.py list [--json]
   python3 _scripts/ds-foundation-status.py set <mã> <draft|in-review|revisions|approved> [--note "…"] [--by /skill] [--dry]

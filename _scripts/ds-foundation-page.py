@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Trang duyệt trạng thái 9 mục foundations DS v2 → design-system/_review/foundations-status.html (publish thành artifact).
+"""Trang duyệt trạng thái các mục foundations DS v2 → design-system/_review/foundations-status.html (publish thành artifact).
 
   python3 _scripts/ds-foundation-page.py
 
@@ -7,10 +7,13 @@ Mỗi mục: xem thử dựng bằng design-system/tokens.css (Light/Dark, Web/M
 thái mới + ghi chú → lưu kho trang (collection "status", doc = mã mục). Claude đọc về rồi áp bằng
 `ds-foundation-status.py apply` (L1), ghi nhãn Figma. Nguồn trạng thái vẫn là bảng trong foundations.md.
 """
+import base64
 import html
 import importlib.util
 import json
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -76,7 +79,7 @@ def radius():
 
 def space():
     names = [f"space/gap-{x}" for x in ("xs", "sm", "md", "lg", "xl", "2xl")] + [f"space/inset-{x}" for x in ("xs", "sm", "md", "lg", "xl")]
-    names += ["layout/screen-inset", "layout/card-padding", "layout/list-gap", "layout/section-gap", "layout/title-gap"]
+    names += ["grid/margin", "layout/card-padding", "layout/list-gap", "layout/section-gap", "layout/title-gap"]
     return '<div class="sp">' + "".join(
         f'<div class="spr"><b>{n}</b><i style="width:var({v(n)})"></i><code data-css="{v(n)}"></code></div>' for n in names) + "</div>" + \
         '<h4>Cao control</h4><div class="ctl">' + "".join(
@@ -90,17 +93,17 @@ def grid():
     bps = " · ".join(f"{k} {x}" for k, x in TK["breakpoints"].items())
     widths = "".join(f'<div class="wd"><i style="width:min(100%,calc(var(--width-{w}) / 3))"></i><b>width/{w}</b>'
                      f'<code data-css="--width-{w}"></code></div>' for w in ("xs", "sm", "md", "lg", "xl", "2xl"))
-    return (f'<p class="muted">Web: {g["columns"]} cột, gutter {g["gutter"]}, lề <code>layout/screen-inset</code>, rộng tối đa '
+    return (f'<p class="muted">Web: {g["columns"]} cột, gutter {g["gutter"]}, lề <code>grid/margin</code>, rộng tối đa '
             f'{g["maxWidth"]} ({E(g["maxWidthApplies"])}); chi tiết chia {g["detailSplit"]}. Breakpoint: {bps}.</p>'
-            f'<div class="gr" style="gap:calc({g["gutter"]}px / 3);padding:0 calc(var(--layout-screen-inset) / 3)">{cols}</div>'
+            f'<div class="gr" style="gap:calc({g["gutter"]}px / 3);padding:0 calc(var(--grid-margin) / 3)">{cols}</div>'
             f'<h4>Độ rộng khung (thu 1/3)</h4>{widths}')
 
 
 def elevation():
-    cards = "".join(f'<div class="el" style="box-shadow:var(--elev-{n});border:1px solid var(--elev-{n}-border, transparent)">elev/{n}</div>'
-                    for n in (1, 2, 3))
-    blurs = "".join(f'<div class="bl"><div class="blbg"></div><div class="blf" style="backdrop-filter:blur(var(--blur-{b}))">blur/{b} · '
-                    f'<code data-css="--blur-{b}"></code></div></div>' for b in ("sm", "md", "lg", "xl"))
+    cards = "".join(f'<div class="el" style="box-shadow:var(--shadow-{n});border:1px solid var(--shadow-{n}-border, transparent)">shadow/{n}</div>'
+                    for n in ("xs", "sm", "md", "lg", "xl", "2xl", "3xl"))
+    blurs = "".join(f'<div class="bl"><div class="blbg"></div><div class="blf" style="backdrop-filter:blur(var(--backdrop-blur-{b}))">backdrop-blur/{b} · '
+                    f'<code data-css="--backdrop-blur-{b}"></code></div></div>' for b in ("sm", "md", "lg", "xl"))
     return f'<div class="elg">{cards}</div><h4>Làm mờ nền</h4><div class="blg">{blurs}</div>'
 
 
@@ -126,7 +129,7 @@ def icon():
         s = re.sub(r'\s(width|height)="[^"]*"', "", s, count=2)
         svgs.append((p.stem, s))
     rows = "".join(
-        f'<div class="icr"><b>{sz}px</b>' + "".join(f'<span class="ic" style="width:{sz}px;height:{sz}px;--sw:2" title="{E(n)}">{s}</span>'
+        f'<div class="icr"><b>{sz}px</b>' + "".join(f'<span class="ic" style="width:{sz}px;height:{sz}px;--sw:{2.25 if sz <= 16 else 2}" title="{E(n)}">{s}</span>'
                                                     for n, s in svgs) + f'<small class="muted">nét {round(2 * sz / 24, 2)} hiển thị</small></div>'
         for sz in (14, 16, 20, 24))
     return (f'<p class="muted">Lucide 1.58 + icon nghiệp vụ (DEC-145) · nét 2 trên khung 24 · cỡ theo nền tảng: '
@@ -134,8 +137,74 @@ def icon():
             f'<code>lg</code> <span data-css="--icon-size-lg"></span></p>{rows}')
 
 
+def logo():
+    """Logo thật từ tệp SVG, đổi theo nút Light/Dark của trang; dùng <img> vì các SVG trùng id gradient."""
+    def img(path, h):
+        b = base64.b64encode((ROOT / path).read_bytes()).decode()
+        return f'<img src="data:image/svg+xml;base64,{b}" alt="" style="height:{h}px;width:auto;max-width:100%;display:block">'
+    inv, dl = "design/brand/invlogis/logo/invlogis", "design/brand/delta/logo/delta"
+
+    def cell(light, dark, h):
+        return f'<span class="lgl">{img(light, h)}</span><span class="lgd">{img(dark, h)}</span>'
+    rows = "".join(
+        f'<h4>{E(name)}</h4><div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center">'
+        + "".join(cell(f"{base}-primary.svg", f"{base}-reverse.svg", h) for h in (24, 40, 64))
+        + cell(f"{sym}.svg", f"{sym}-reverse.svg", 24) + "</div>"
+        for name, base, sym in (("Invlogis · logo ngang 24, 40, 64 · ký hiệu 24", inv, inv + "-symbol-small"),
+                                ("Khách (Delta) · logo ngang 24, 40, 64 · ký hiệu 24", dl, dl + "-symbol")))
+    return ('<style>.lgd{display:none}[data-theme="dark"] .lgl{display:none}[data-theme="dark"] .lgd{display:inline}</style>'
+            '<p class="muted">Trục Size theo thang <code>size/*</code>: <code>size/3xl</code> 24 · <code>size/5xl</code> 40 · '
+            '<code>size/7xl</code> 64 (DEC-326). Cao tối thiểu 20.</p>' + rows)
+
+
+PREVIEW = ROOT / "design-system/_review/foundations/previews"
+FIGMA_NODE = "https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ?node-id="
+
+
+def _shot(p, cls, alt):
+    if not p.exists():
+        return f'<p class="muted {cls}">Chưa có ảnh.</p>'
+    return (f'<img class="{cls}" src="data:image/png;base64,{base64.b64encode(p.read_bytes()).decode()}" alt="{E(alt)}" loading="lazy" '
+            'style="width:100%;height:auto;border:1px solid #E2E8F0;border-radius:8px">')
+
+
+def shot_note(key, doc):
+    """Ảnh không tự làm mới: so phiên bản lúc chụp với phiên bản hiện tại của mục (DEC-337)."""
+    m = json.loads((PREVIEW / "previews.json").read_text(encoding="utf-8"))
+    cur = (subprocess.run([sys.executable, str(ROOT / "_scripts/ds-deps.py"), "fversion", key], capture_output=True, text=True, cwd=ROOT).stdout.split()[1])
+    note = (f"Ảnh chụp từ Figma ngày {m['taken']}, đổi theo nút Light/Dark ở trên; bấm tên để mở đúng khu. Luật: <code>design-system/foundations/{doc}</code>.")
+    if m["versions"].get(key) != cur:
+        note = f"<b>⚠ Tài liệu đã đổi sau ngày chụp, ảnh có thể cũ.</b> {note}"
+    return note
+
+
+def shots(items):
+    """Ảnh chụp từng khu trên Figma (Sáng, Tối), lưu ở _review/foundations/previews: 2 mục này không dựng được từ tokens.css."""
+    out = ['<style>.shd{display:none}[data-theme="dark"] .shd{display:block}.shl{display:block}[data-theme="dark"] .shl{display:none}</style>']
+    for name, f, node in items:
+        link = f'<a href="{FIGMA_NODE}{node.replace(":", "-")}">{E(name)}</a>'
+        out.append(f'<h4>{link}</h4>{_shot(PREVIEW / f"{f}.png", "shl", name)}{_shot(PREVIEW / f"{f}-dark.png", "shd", name + " · Dark")}')
+    return "".join(out)
+
+
+def misc_icon():
+    return ('<p class="muted">' + shot_note("misc-icon", "icon-sets.md") + '</p>'
+            + shots((("Featured icon", "misc-featured", "6732:186017"), ("File type icon", "misc-file-type", "6732:186018"),
+                     ("Huy hiệu, QR, _Dot, Play", "misc-badges", "6732:186019"), ("Payment", "misc-payment", "6732:186020"),
+                     ("Cờ quốc gia", "misc-flag", "6732:186021"), ("Ngân hàng Việt Nam", "misc-bank", "6732:186022"),
+                     ("App tích hợp", "misc-app", "6732:186023"))))
+
+
+def vehicle():
+    d = json.loads((ROOT / "design-system/handoff/vehicles.json").read_text(encoding="utf-8"))
+    return (f'<p class="muted">{len(d["groups"])} nhóm hình · {len(d["views"])} mặt cắt · {len(d["tyre_layouts"])} sơ đồ lốp (DEC-266, DEC-267). '
+            + shot_note("vehicle", "vehicle.md") + '</p>'
+            + shots((("Images", "vehicle-images", "6779:2091"), ("Frames", "vehicle-frames", "6779:2092"),
+                     ("Tyres", "vehicle-tyres", "6779:2093"), ("Markers", "vehicle-markers", "6779:2094"))))
+
+
 SECTIONS = {"color": color, "type": typo, "radius": radius, "space": space, "grid": grid, "elevation": elevation,
-            "touch-focus": touch, "motion": motion, "icon": icon}
+            "touch-focus": touch, "motion": motion, "icon": icon, "misc-icon": misc_icon, "vehicle": vehicle, "logo": logo}
 LBL = dfs.LABEL
 ORDER = list(dfs.STATUSES)
 

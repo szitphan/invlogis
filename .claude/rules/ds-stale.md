@@ -28,7 +28,9 @@ Mốc chỉ đổi khi chạy `ds-deps.py synced <A>`, không tự đổi.
 | Thứ | Phiên bản = sha1 của |
 |---|---|
 | Component | `_work/<slug>` (answers brainstorm + css + values) nếu có, không thì file md (bỏ dòng `updated`/`status`/`status_prev`) |
-| Mục foundation | Mục `## N.` tương ứng trong `design-system/foundations/*.md` (cột "Ở đâu" của bảng trạng thái ở `README.md`) + `icon.md` (mục icon) + các dòng `tokens.css` có tiền tố của mục (`FPREFIX` trong script) |
+| Mục foundation | Mục `## N.` tương ứng trong `design-system/foundations/*.md` (cột "Ở đâu" của bảng trạng thái ở `README.md`) + `icon.md` (mục icon) + `icon-sets.md` (mục misc-icon) + `vehicle.md` (mục vehicle) + các dòng `tokens.css` có tiền tố của mục (`FPREFIX` trong script) |
+
+Mục misc-icon, vehicle còn lấy instance đo trên Figma: `design-system/components/_figma-uses.json`, quét lại bằng `_scripts/figma-ds-uses.js` khi component đổi phần con (DEC-337).
 
 Sửa mục Màu chỉ đánh component dùng màu, không đánh cả bộ.
 

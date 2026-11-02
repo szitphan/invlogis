@@ -36,8 +36,19 @@
     "6918:218479",
     "6918:218481"
    ],
-   "motion": []
+   "motion": [
+    "7154:2204"
+   ],
+   "logo": [
+    "7121:210190"
+   ],
+   "misc-icon": [
+    "7145:96740"
+   ],
+   "vehicle": [
+    "7145:96743"
+   ]
   },
-  "note": "motion chưa có khung trên Figma; nhãn gắn token color/status/* (draft: bg/muted + text/secondary-strong)"
+  "note": "nhãn gắn token color/status/* (draft: bg/muted + text/secondary-strong)"
  }
 }

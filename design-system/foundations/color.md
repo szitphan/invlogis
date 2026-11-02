@@ -1,6 +1,6 @@
 ---
 type: design-foundations
-status: draft
+status: approved
 updated: 2026-11-01
 links:
   - design-system/foundations/README.md
@@ -35,7 +35,7 @@ Nút chính là than chì #262626 (DEC-119). Màu theo khách là thang riêng 1
 
 Thang nền tối `dark/0…4` (DEC-316, chỉ cho Dark): `dark/0` **#191919** nền trang · `dark/1` #202020 mặt nổi · `dark/2` #232323 khối phụ, rê chuột · `dark/3` #2B2B2B đang chọn, nút phụ, tắt · `dark/4` #2E2E2E viền.
 
-Thêm: `white` #FFFFFF, `black` #000000, 20 bậc alpha theo Untitled `alpha/white/10…100` và `alpha/black/10…100` (DEC-320); riêng của mình: `alpha/neutral-950-50` (#0A0A0A 50%, lớp phủ sau dialog, sheet), `alpha/shadow-6`, `-10`, `-16` (bóng đổ).
+Thêm: `white` #FFFFFF, `black` #000000, 20 bậc alpha theo Untitled `alpha/white/10…100` và `alpha/black/10…100` (DEC-320); 7 bậc thấp cho màu bóng `alpha/black/3`, `4`, `5`, `6`, `8`, `14`, `18` (DEC-327); riêng của mình: `alpha/neutral-950-35` (#0A0A0A 35%, lớp phủ có làm mờ), `alpha/neutral-950-50` (#0A0A0A 50%, đường lùi và lớp tối trên ảnh), `alpha/dark-0-70` (#191919 70%, thanh mờ ở Dark); `file-type/pdf` #B42318, `doc` #1F4FB8, `xls` #1B7542, `csv` #1B7542, `img` #6A50E4, `zip` #525252, `vid` #B54708 (màu nhận diện loại tệp, DEC-335).
 
 ### 3.2 Luật dùng bậc
 
@@ -45,7 +45,7 @@ Thêm: `white` #FFFFFF, `black` #000000, 20 bậc alpha theo Untitled `alpha/whi
 - Chip: nền bậc 50, chữ và icon bậc 700; riêng chip xám nền neutral/100, chữ neutral/600 (DEC-130). Kiểu chip
   (nền nhạt + icon, hay chấm + chữ) chốt luật ở vòng 4 (DEC-126).
 - Màu khách đi qua dải riêng của khách và chỉ vào các vai ở mục 3.5 (DEC-167…169); chip trạng thái không đổi
-  theo khách; ô logo luôn đúng màu logo khách.
+  theo khách; ô chữ cái đầu của khách đúng màu `P-mau-logo`, logo thật không tô ô (mục 3.5).
 
 ### 3.3 Token nghĩa (DEC-131, DEC-258, DEC-316, DEC-320)
 
@@ -66,7 +66,9 @@ Tên và mục đích theo Untitled UI v8, dùng `/` thay `-` cho cấp nhóm, g
 | `color/bg/info/secondary` | `blue/100` | `blue/900` | Nền thông tin phụ: featured icon (DEC-320) |
 | `color/bg/info/solid` | `blue/700` | `blue/700` | Nền thông tin đặc: nút, featured icon, số liệu (DEC-320) |
 | `color/bg/info/solid_hover` | `blue/800` | `blue/600` | Nền thông tin đặc khi rê chuột (DEC-320) |
-| `color/bg/overlay` | `alpha/neutral-950-50` | `alpha/neutral-950-50` | Nền lớp phủ sau dialog, sheet; lớp tối và rãnh vòng tiến độ đè lên ảnh (DEC-320, DEC-321) |
+| `color/bg/overlay` | `alpha/neutral-950-35` | `alpha/neutral-950-35` | Nền lớp phủ sau dialog, sheet: 35% + `backdrop-blur/lg` (DEC-258, DEC-327) |
+| `color/bg/overlay_solid` | `alpha/neutral-950-50` | `alpha/neutral-950-50` | Đường lùi khi máy không chạy được làm mờ; lớp tối và rãnh vòng tiến độ đè lên ảnh (DEC-321, DEC-327) |
+| `color/bg/primary_blur` | `alpha/white/70` | `alpha/dark-0-70` | Nền đầu màn dính và thanh nổi app, đi cùng `backdrop-blur/*` (DEC-327) |
 | `color/bg/error/overlay` | `alpha/red-700-55` | `alpha/red-700-55` | Lớp phủ đỏ trên ảnh tải lỗi, không đổi theo Light/Dark vì ảnh không đổi (DEC-321) |
 | `color/bg/pressed` | `neutral/200` | `neutral/700` | Nền đang bấm của thứ nền trắng: dòng danh sách, thẻ bấm được (app không có hover); chữ phụ trên nền này dùng text/tertiary_strong (DEC-316) |
 | `color/bg/primary` | `white` | `dark/0` | Nền chính cho mọi bố cục và component (DEC-320) |
@@ -112,7 +114,7 @@ Tên và mục đích theo Untitled UI v8, dùng `/` thay `-` cho cấp nhóm, g
 | `color/text/warning/primary` | `yellow/700` | `yellow/300` | Chữ cảnh báo mặc định (DEC-320) |
 | `color/text/white` | `white` | `white` | Luôn trắng, mọi chế độ: chữ trên nền đặc (DEC-320) |
 
-**Icon.** Tên **và giá trị** theo Untitled `fg-*`, quy về màu gốc của mình (user chỉ định, DEC-320). `fg/quaternary` chỉ đạt 2,52:1 trên trắng, dưới ngưỡng 3:1 cho icon mang nghĩa: đã được user xác nhận. Token riêng: `fg/inverse`, `fg/disabled`, `fg/info/primary`.
+**Icon.** Tên **và giá trị** theo Untitled `fg-*`, quy về màu gốc của mình (user chỉ định, DEC-320). `fg/quaternary` chỉ đạt 2,52:1 trên trắng, dưới ngưỡng 3:1 cho icon mang nghĩa, nên từ DEC-329 (ic12) chỉ dùng cho icon trang trí và disabled; icon phụ mang nghĩa dùng `fg/tertiary`. Token riêng: `fg/inverse`, `fg/disabled`, `fg/info/primary`.
 
 | Token | Light | Dark | Mục đích |
 |---|---|---|---|
@@ -122,13 +124,13 @@ Tên và mục đích theo Untitled UI v8, dùng `/` thay `-` cho cấp nhóm, g
 | `color/fg/info/primary` | `blue/600` | `blue/400` | Icon thông tin chính: featured icon (DEC-320) |
 | `color/fg/inverse` | `white` | `neutral/950` | Icon trên nền đậm đổi theo chế độ: Tooltip, nút Primary (DEC-316, DEC-320) |
 | `color/fg/primary` | `neutral/900` | `white` | Icon tương phản cao nhất (DEC-320) |
-| `color/fg/quaternary` | `neutral/400` | `neutral/600` | Tương phản thấp: icon trong nút, icon trợ giúp, icon trong ô nhập (DEC-320) |
+| `color/fg/quaternary` | `neutral/400` | `neutral/600` | Tương phản thấp, chỉ cho icon trang trí và disabled (DEC-320, DEC-329 ic12) |
 | `color/fg/quaternary_hover` | `neutral/500` | `neutral/500` | Icon tương phản thấp khi rê chuột (DEC-320) |
 | `color/fg/secondary` | `neutral/700` | `neutral/300` | Phần tử không phải chữ tương phản cao: icon đi cùng chữ chính (DEC-320) |
 | `color/fg/secondary_hover` | `neutral/800` | `neutral/200` | Icon khi rê chuột (DEC-320) |
 | `color/fg/success/primary` | `green/600` | `green/400` | Icon thành công chính: featured icon (DEC-320) |
 | `color/fg/success/secondary` | `green/500` | `green/400` | Chấm online avatar, chấm nút (DEC-320) |
-| `color/fg/tertiary` | `neutral/600` | `neutral/400` | Icon tương phản vừa (DEC-320) |
+| `color/fg/tertiary` | `neutral/600` | `neutral/400` | Icon tương phản vừa (DEC-320); icon phụ mang nghĩa: chevron ô chọn, icon ô tìm, Help (DEC-329 ic12) |
 | `color/fg/tertiary_hover` | `neutral/700` | `neutral/300` | Icon tương phản vừa khi rê chuột (DEC-320) |
 | `color/fg/warning/primary` | `yellow/600` | `yellow/400` | Icon cảnh báo chính: featured icon (DEC-320) |
 | `color/fg/warning/secondary` | `yellow/500` | `yellow/400` | Cảnh báo phụ (DEC-320) |
@@ -158,7 +160,6 @@ Tên và mục đích theo Untitled UI v8, dùng `/` thay `-` cho cấp nhóm, g
 
 | Token | Light | Dark | Mục đích |
 |---|---|---|---|
-| `color/focus/gap` | `white` | `dark/0` | Khe 2px giữa control và vòng focus, trùng nền trang (DEC-258, thay collection Context). Dùng ở: .focus / Ring, ruột nút Ghost, Outline. |
 | `color/focus/ring` | `charcoal/900` | `neutral/200` | Vòng focus mặc định; than chì cho mọi khách (DEC-170) (DEC-320) |
 | `color/focus/ring_error` | `red/700` | `red/300` | Vòng focus lỗi (DEC-320) |
 
@@ -261,12 +262,37 @@ Tên và mục đích theo Untitled UI v8, dùng `/` thay `-` cho cấp nhóm, g
 
 | Token | Light | Dark | Mục đích |
 |---|---|---|---|
-| `color/shadow/lg` | `alpha/shadow-16` | `alpha/black/60` | Màu bóng, đổi theo sáng/tối. Dùng trong: elev/3 lớp 1. |
-| `color/shadow/md` | `alpha/shadow-10` | `alpha/black/50` | Màu bóng, đổi theo sáng/tối. Dùng trong: elev/2 lớp 1, elev/3 lớp 2. |
-| `color/shadow/md-soft` | `alpha/shadow-6` | `alpha/black/40` | Màu bóng, đổi theo sáng/tối. Dùng trong: elev/2 lớp 2. |
-| `color/shadow/sm` | `alpha/shadow-6` | `alpha/black/40` | Màu bóng, đổi theo sáng/tối. Dùng trong: elev/1. |
+| `color/shadow/xs` | `alpha/black/5` | `alpha/black/40` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/xs lớp 1 (DEC-327). |
+| `color/shadow/sm_01` | `alpha/black/10` | `alpha/black/60` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/sm lớp 1 (DEC-327). |
+| `color/shadow/sm_02` | `alpha/black/10` | `alpha/black/40` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/sm lớp 2 (DEC-327). |
+| `color/shadow/md_01` | `alpha/black/10` | `alpha/black/60` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/md lớp 1 (DEC-327). |
+| `color/shadow/md_02` | `alpha/black/6` | `alpha/black/40` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/md lớp 2 (DEC-327). |
+| `color/shadow/lg_01` | `alpha/black/8` | `alpha/black/60` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/lg lớp 1 (DEC-327). |
+| `color/shadow/lg_02` | `alpha/black/3` | `alpha/black/40` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/lg lớp 2 (DEC-327). |
+| `color/shadow/lg_03` | `alpha/black/4` | `alpha/black/40` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/lg lớp 3 (DEC-327). |
+| `color/shadow/xl_01` | `alpha/black/8` | `alpha/black/60` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/xl lớp 1 (DEC-327). |
+| `color/shadow/xl_02` | `alpha/black/3` | `alpha/black/40` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/xl lớp 2 (DEC-327). |
+| `color/shadow/xl_03` | `alpha/black/4` | `alpha/black/40` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/xl lớp 3 (DEC-327). |
+| `color/shadow/2xl_01` | `alpha/black/18` | `alpha/black/60` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/2xl lớp 1 (DEC-327). |
+| `color/shadow/2xl_02` | `alpha/black/4` | `alpha/black/40` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/2xl lớp 2 (DEC-327). |
+| `color/shadow/3xl_01` | `alpha/black/14` | `alpha/black/60` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/3xl lớp 1 (DEC-327). |
+| `color/shadow/3xl_02` | `alpha/black/4` | `alpha/black/40` | Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/3xl lớp 2 (DEC-327). |
 
-Lớp phủ dùng `color/bg/overlay`; khe vòng focus dùng `color/focus/gap`.
+Đủ 15 biến đúng tên Untitled; Dark: lớp `_01` (tán chính) `alpha/black/60`, còn lại `alpha/black/40` (DEC-327). Lớp phủ dùng `color/bg/overlay`; vòng focus là outline, khe trong suốt, không có token khe.
+
+**Ô nền logo đối tác** (DEC-338): `color/logo/bg`, Light và Dark đều `white`, dùng cho ô của Bank logo để logo màu không chìm trên nền Tối.
+
+**Màu nhận diện loại tệp** (DEC-335 ms02): nền nhãn File type icon, không đảo theo chế độ, chữ `color/fg/white`. Không mang nghĩa trạng thái. Luật dùng: [icon-sets.md](icon-sets.md).
+
+| Biến | Light | Dark |
+|---|---|---|
+| `color/file-type/pdf` | `file-type/pdf` | `file-type/pdf` |
+| `color/file-type/doc` | `file-type/doc` | `file-type/doc` |
+| `color/file-type/xls` | `file-type/xls` | `file-type/xls` |
+| `color/file-type/csv` | `file-type/csv` | `file-type/csv` |
+| `color/file-type/img` | `file-type/img` | `file-type/img` |
+| `color/file-type/zip` | `file-type/zip` | `file-type/zip` |
+| `color/file-type/vid` | `file-type/vid` | `file-type/vid` |
 
 ### 3.4 Tương phản đo được
 
@@ -315,6 +341,12 @@ Máy đo Light mỗi lần chạy `python3 _scripts/ds-v2-tokens.py --check`. B�
 | `utility/green/600` trên `bg/primary` | 3:1 | 4,12 | 7,66 |
 | `utility/red/600` trên `bg/primary` | 3:1 | 4,74 | 6,79 |
 | `utility/orange/600` trên `bg/primary` | 3:1 | 3,84 | 7,97 |
+| `fg/white` trên `file-type/pdf` | 4.5:1 | 6,57 | 6,57 |
+| `fg/white` trên `file-type/doc` | 4.5:1 | 7,32 | 7,32 |
+| `fg/white` trên `file-type/xls`, `csv` | 4.5:1 | 5,72 | 5,72 |
+| `fg/white` trên `file-type/img` | 4.5:1 | 5,41 | 5,41 |
+| `fg/white` trên `file-type/zip` | 4.5:1 | 7,81 | 7,81 |
+| `fg/white` trên `file-type/vid` | 4.5:1 | 5,43 | 5,43 |
 
 ### 3.5 Màu theo khách (DEC-167, DEC-168, DEC-169, DEC-170)
 
@@ -323,7 +355,7 @@ Máy đo Light mỗi lần chạy `python3 _scripts/ds-v2-tokens.py --check`. B�
   nhìn giữ như bản đã duyệt (DEC-168).
 - Một cách áp cho mọi khách, kiểu chạm nhẹ; không có tham số theo khách (DEC-167, DEC-169).
 - Nút chính giữ `color/action/primary` than chì (DEC-119). Vòng focus và viền ô đang gõ giữ `color/focus/ring` than chì
-  (DEC-170). Chip trạng thái giữ 8 sắc cố định (DEC-130). Ô logo luôn đúng màu logo khách (`P-mau-logo`), không lấy từ dải.
+  (DEC-170). Chip trạng thái giữ 8 sắc cố định (DEC-130). Logo thật của khách đặt thẳng trên nền, không tô ô; `P-mau-logo` chỉ tô ô khi hiện chữ cái đầu, đúng mã khách khai, không lấy từ dải (DEC-326, [logo.md](logo.md) mục 14.4).
 
 Vai màu khách đi qua nhóm Semantic `color/accent/*` (DEC-316); component **không trỏ thẳng** `color/brand/N`. Dark lấy bậc sáng của chính dải khách, nên dải Brand không cần chế độ Dark.
 
@@ -367,7 +399,7 @@ lâu. Mặt nổi sáng dần theo thang `dark/0…4`; chữ chính `neutral/200
 
 | Vai | Dark | Ghi chú |
 |---|---|---|
-| Nền trang, thẻ, khe focus (`bg/primary`, `focus/gap`) | `dark/0` #191919 | |
+| Nền trang, thẻ (`bg/primary`) | `dark/0` #191919 | |
 | Mặt nổi: menu, dialog, sheet, toast (`bg/primary_alt`) | `dark/1` #202020 | bóng đổ khó thấy trên nền tối, mặt nổi sáng hơn nền |
 | Khối phụ, rê chuột (`bg/secondary`, `bg/primary_hover`) | `dark/2` #232323 | |
 | Đang chọn, nút phụ, tắt, chờ tải (`bg/selected`, `action/secondary`, `bg/disabled`, `bg/skeleton`, `bg/secondary_hover`) | `dark/3` #2B2B2B | |

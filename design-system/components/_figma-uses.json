@@ -1,0 +1,171 @@
+{
+ "_note": "Đo trên Figma bằng _scripts/figma-ds-uses.js (DEC-337). slugs: tên component Figma → slug spec; tên không có slug chưa có spec nên chưa đánh stale được.",
+ "taken": "2026-11-02",
+ "uses": {
+  "Badge": [
+   "misc-icon"
+  ],
+  "Tag": [
+   "misc-icon"
+  ],
+  "_Avatar status": [
+   "misc-icon"
+  ],
+  "Avatar": [
+   "misc-icon"
+  ],
+  "Avatar group": [
+   "misc-icon"
+  ],
+  "Avatar label": [
+   "misc-icon"
+  ],
+  "Input": [
+   "misc-icon"
+  ],
+  "_Card brand": [
+   "misc-icon"
+  ],
+  "Payment input": [
+   "misc-icon"
+  ],
+  "Radio group item": [
+   "misc-icon"
+  ],
+  "Radio group": [
+   "misc-icon"
+  ],
+  "Checkbox group item": [
+   "misc-icon"
+  ],
+  "Checkbox group": [
+   "misc-icon"
+  ],
+  "_Multi-select menu": [
+   "misc-icon"
+  ],
+  "Multi-select": [
+   "misc-icon"
+  ],
+  "_Multi-select sheet": [
+   "misc-icon"
+  ],
+  "Select item": [
+   "misc-icon"
+  ],
+  "_Select sheet": [
+   "misc-icon"
+  ],
+  "Dropdown item": [
+   "misc-icon"
+  ],
+  "Dropdown heading": [
+   "misc-icon"
+  ],
+  "Dropdown trigger": [
+   "misc-icon"
+  ],
+  "Mobile header": [
+   "misc-icon"
+  ],
+  "_Header search panel": [
+   "misc-icon"
+  ],
+  "Header navigation": [
+   "misc-icon"
+  ],
+  "_Nav account card": [
+   "misc-icon"
+  ],
+  "Sidebar navigation": [
+   "misc-icon"
+  ],
+  "Card header": [
+   "misc-icon"
+  ],
+  "Page header": [
+   "misc-icon"
+  ],
+  "Vehicle Thumb": [
+   "vehicle"
+  ],
+  "Vehicle Card": [
+   "misc-icon",
+   "vehicle"
+  ],
+  "Vehicle Card / Mobile": [
+   "misc-icon",
+   "vehicle"
+  ],
+  "Vehicle Option Card": [
+   "misc-icon",
+   "vehicle"
+  ],
+  "Vehicle Option Card / Mobile": [
+   "misc-icon",
+   "vehicle"
+  ],
+  "Container Slot": [
+   "misc-icon"
+  ],
+  "Combo Slots": [
+   "misc-icon"
+  ],
+  "Combo Figure": [
+   "vehicle"
+  ],
+  "Tyre Layout": [
+   "vehicle"
+  ],
+  "Map Marker": [
+   "vehicle"
+  ],
+  "Notification": [
+   "misc-icon"
+  ],
+  "_File row": [
+   "misc-icon"
+  ],
+  "Field Upload": [
+   "misc-icon"
+  ]
+ },
+ "slugs": {
+  "Badge": "badge",
+  "Tag": "tag",
+  "_Avatar status": "avatar",
+  "Avatar": "avatar",
+  "Avatar group": "avatar",
+  "Avatar label": "avatar",
+  "Input": "input",
+  "_Card brand": "input",
+  "Payment input": "input",
+  "Radio group item": "form-controls",
+  "Radio group": "form-controls",
+  "Checkbox group item": "form-controls",
+  "Checkbox group": "form-controls",
+  "_Multi-select menu": "multiselect",
+  "Multi-select": "multiselect",
+  "_Multi-select sheet": "multiselect",
+  "Select item": "select",
+  "_Select sheet": "select",
+  "_Header search panel": "header-navigation",
+  "Header navigation": "header-navigation",
+  "Mobile header": "header-navigation",
+  "_Nav account card": "sidebar-navigation",
+  "Sidebar navigation": "sidebar-navigation",
+  "Vehicle Thumb": "vehicle-thumb",
+  "Vehicle Card": "vehicle-card",
+  "Vehicle Card / Mobile": "vehicle-card",
+  "Vehicle Option Card": "vehicle-option-card",
+  "Vehicle Option Card / Mobile": "vehicle-option-card",
+  "Container Slot": "container-slot",
+  "Combo Slots": "combo-slots",
+  "Combo Figure": "combo-figure",
+  "Tyre Layout": "tyre-layout",
+  "Map Marker": "map-marker",
+  "Notification": "alert-notification",
+  "_File row": "field-upload",
+  "Field Upload": "field-upload"
+ }
+}
