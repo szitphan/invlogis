@@ -2,9 +2,9 @@
 type: design-component
 status: stale
 status_prev: draft
-updated: 2026-10-27
+updated: 2026-11-02
 links:
-  - design-system/foundations/misc-icon.md
+  - design-system/foundations/vehicle.md
   - design/_lab/tyre-mapping.html
   - docs/vehicle-management/brainstorms/vehicle-management.md
   - _workspace/decisions.md
@@ -14,9 +14,9 @@ links:
 
 > Application · phiên bản 0.1.0 · Nháp · người phụ trách @szitphan · Figma `Tyre Layout` (6808:16848) và
 > `Tyre Slot` (6808:16502), trang DS · Application components, Section `Tyre layout` 6809:17018, Demo 6809:17026 ·
-> DEC-266, DEC-275
+> DEC-266, DEC-275, DEC-334
 
-Sơ đồ lốp nhìn từ trên theo **cấu hình trục** (`design-system/foundations/misc-icon.md` mục 3) và vị trí lốp có trạng thái. Một
+Sơ đồ lốp nhìn từ trên theo **cấu hình trục** (`design-system/foundations/vehicle.md` mục 3) và vị trí lốp có trạng thái. Một
 component cho web và app.
 
 ## Web
@@ -51,7 +51,7 @@ trailer-3ax · forklift-diesel · forklift-elec (11). Nhóm hình chọn sơ đ�
 
 | Kind | Nền mặc định |
 |---|---|
-| Steer — lốp lái | `color/text/tertiary` |
+| Steer — lốp lái | `color/fg/tertiary` |
 | Load — lốp tải | `color/bg/primary_solid` |
 | Spare — dự phòng | vòng tròn 26, viền đứt `color/text/tertiary` |
 
@@ -60,10 +60,10 @@ trailer-3ax · forklift-diesel · forklift-elec (11). Nhóm hình chọn sơ đ�
 | Default | theo Kind |
 | Selected | nền `color/bg/info/solid`, viền ngoài 3 `color/focus/ring` |
 | Warning | nền `color/bg/warning/solid` — đến hạn km / ngày, mòn |
-| Error | nền `color/border/error` — hỏng, cần thay |
+| Error | nền `color/bg/error/solid` — hỏng, cần thay |
 | Empty | không nền, viền đứt `color/border/primary`, số `color/text/disabled` — chưa lắp |
 
-15 biến thể. Chữ số `type/chip-sm-strong`, `color/text/inverse`.
+15 biến thể. Chữ số `type/chip-sm-strong`: Selected, Warning, Error `color/text/white`; Default `color/text/inverse`; Empty như trên.
 
 ### Nên và không nên
 
@@ -72,8 +72,9 @@ trailer-3ax · forklift-diesel · forklift-elec (11). Nhóm hình chọn sơ đ�
 
 ### Trợ năng — chấm theo WCAG 2.2
 
-- 1.4.1: trạng thái lốp có chữ ở danh sách đi kèm. 2.5.8: vùng chạm lốp 16 × 30 < 24 × 24 ở web — nới vùng chạm
-  vô hình 24 × 32 khi code; app phóng sơ đồ ≥ 1,5 lần hoặc chọn từ danh sách.
+- 1.4.1: trạng thái lốp có chữ ở danh sách đi kèm. 2.5.8: vùng chạm lốp 16 × 30 < 24 × 24 ở web — nới vùng bấm
+  vô hình 24 × 32 khi code; app phóng sơ đồ 1,5 lần (lốp 24 × 45, khung 300) **và** luôn có danh sách vị trí bên dưới, vì
+  lốp kép ngoài và trong chỉ cách 3 nên phóng vẫn dễ bấm nhầm (DEC-334 vh13).
 - Tên truy cập lốp: "Vị trí n, lốp lái/tải, bên lái/phụ, trục m, trạng thái".
 
 ### Thuộc tính
@@ -87,11 +88,23 @@ Demo `Lốp xe / Web` (đầu kéo 6x4 + cột chi tiết), `Lốp xe / Mobile` 
 ### Kiểm máy
 
 27/10: kiểm tên fail 0. Đã sửa: Selected trùng màu lốp tải; cột chi tiết demo cao cố định. Còn: forklift-elec lốp 3
-giữa trục che chữ "trục 2". Dark: chưa điền giá trị Dark.
+giữa trục che chữ "trục 2". 02/11: spec theo DEC-334, Figma chưa sync.
+
+### Dark
+
+| Lốp | Nền | Số | Sáng | Tối |
+|---|---|---|---|---|
+| Selected | `color/bg/info/solid` | `color/text/white` | 7,32:1 | 7,32:1 |
+| Warning | `color/bg/warning/solid` | `color/text/white` | 6,33:1 | 6,33:1 |
+| Error | `color/bg/error/solid` | `color/text/white` | 6,57:1 | 6,57:1 |
+| Steer, Default | `color/fg/tertiary` | `color/text/inverse` | 7,81:1 | 7,85:1 |
+| Load, Default | `color/bg/primary_solid` | `color/text/inverse` | 17,93:1 | 15,72:1 |
+
+Empty, thân xe, trục, nhãn: chưa có số đo Dark.
 
 ## Mobile
 
-> Mode Platform = Mobile, cùng component. Trên app phóng sơ đồ hoặc dùng danh sách vị trí để chọn (vùng chạm).
+> Mode Platform = Mobile, cùng component. Trên app phóng sơ đồ 1,5 lần và luôn có danh sách vị trí bên dưới (vùng chạm).
 
 ## Phần máy (chung Web và Mobile)
 

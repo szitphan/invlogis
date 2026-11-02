@@ -73,4 +73,4 @@ Thêm `--tries 2` nếu chọn 2 phương án. Sau khi chạy: soát hướng xe
 - Đã chạy 23 ảnh theo kế hoạch + 5 ảnh bù có ảnh thật (MAZ, Maxxforce = n06 riêng, Cascadia = n08, Toyota khung hở, máy phát Shindaiwa 25 kVA) = 28 lượt Pro ≈ 3,8 USD.
 - Chỉnh sau khi sinh (không gọi lại API): lật 4 ảnh quay trái, xoay 3 ảnh nhìn từ trên; bỏ đèn studio lọt khung (n03); ngưỡng tách nền tự theo độ xanh của nền (sửa MAZ bị khoét).
 - Quyết định khi chạy: cabin đầu kéo / xe tải sơn trắng trung lập, giữ dáng + lưới + logo hãng; xe nâng, container, máy phát giữ màu thật.
-- Bộ chốt: 38 ảnh trong `assets/vehicles/b-ai/` (không tính bản -flash/-pro so sánh và ảnh thu nhỏ -th/-xs).
+- Bộ chốt: 38 ảnh trong `design-system/assets/vehicles/` (không tính bản -flash/-pro so sánh và ảnh thu nhỏ -th/-xs).

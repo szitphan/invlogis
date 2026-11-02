@@ -1,22 +1,22 @@
 {
  "tokens_version": "0.22.0",
  "counts": {
-  "ok": 28,
-  "near": 1,
+  "ok": 29,
+  "near": 0,
   "new": 6,
   "conflict": 0,
-  "undeclared": 1
+  "undeclared": 0
  },
  "no_sel": 0,
  "off_page": 0,
- "open": 4,
+ "open": 2,
  "ignored": [],
  "groups": {
   "typo": {
    "label": "Chữ",
-   "total": 10,
-   "ok": 8,
-   "open": 1,
+   "total": 9,
+   "ok": 9,
+   "open": 0,
    "audit": 0
   },
   "color": {
@@ -406,22 +406,22 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `#1018281A` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `#1018281A` — chọn shadow/xs…3 hoặc thêm effect style",
    "group": "effect",
    "decided": true,
    "must": true,
    "resolved": {
     "kind": "token",
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    }
   },
   {
@@ -1258,7 +1258,7 @@
    "size": "",
    "state": "",
    "theme": "Light",
-   "value": 22,
+   "value": 20,
    "sel": ".sheet p",
    "cssProps": [
     "line-height"
@@ -1267,23 +1267,28 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
+   "cat": "ok",
+   "tokens": [
+    "type/heading/line-height",
+    "type/body/line-height",
+    "type/label/line-height"
+   ],
+   "bind": {
     "token": "type/body/line-height",
-    "value": 20,
     "css": "var(--type-body-line-height)"
    },
-   "visible": true,
-   "suggest": "type/body/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "lệch 2",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    }
   },
   {
@@ -1445,31 +1450,6 @@
     "token": "icon/size/md",
     "css": "var(--icon-size-md)"
    }
-  },
-  {
-   "id": "css.1",
-   "part": ".sheet p",
-   "prop": "line-height",
-   "platform": "",
-   "size": "",
-   "state": "",
-   "theme": "",
-   "value": "20px",
-   "sel": ".sheet p",
-   "cssProps": [
-    "line-height"
-   ],
-   "cat": "undeclared",
-   "tokens": [],
-   "bind": null,
-   "to": null,
-   "visible": true,
-   "suggest": null,
-   "rules": [],
-   "note": "`line-height: 20px` — khai một dòng values (sel này), hoặc dời sang cssScreen nếu là khung màn",
-   "group": "typo",
-   "decided": false,
-   "must": false
   }
  ]
 }

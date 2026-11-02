@@ -1,7 +1,7 @@
 {
  "CMP-01": {
   "file": "design/ui-common/screen-patterns.md",
-  "hash": "077e32b40847"
+  "hash": "0b30dbbc82c7"
  },
  "CMP-02": {
   "file": "design/ui-common/screen-patterns.md",
@@ -33,7 +33,7 @@
  },
  "CMP-09": {
   "file": "design/ui-common/screen-patterns.md",
-  "hash": "c8d138f8f3c3"
+  "hash": "110c06a261f9"
  },
  "CMP-10": {
   "file": "design/ui-common/screen-patterns.md",
@@ -153,7 +153,7 @@
  },
  "GR-15": {
   "file": "design/ui-common/conventions.md",
-  "hash": "4431994cc877"
+  "hash": "9633d54297b0"
  },
  "GR-16": {
   "file": "design/ui-common/conventions.md",
@@ -201,7 +201,7 @@
  },
  "GR-27": {
   "file": "design/ui-common/conventions.md",
-  "hash": "497d1eac1fe9"
+  "hash": "e49c10f486ae"
  },
  "GR-28": {
   "file": "design/ui-common/conventions.md",

@@ -14,8 +14,8 @@ Phần lớn mục giao cho feature mới `fund-payments` (Quản lý quỹ và 
 | 4.2 Tạm ứng tiền mặt | ➡ fund-payments | | bỏ "tạm ứng chuyển khoản"; tạm ứng hóa đơn trả hộ < 5 triệu; hạn 7 ngày từ ngày duyệt Phiếu chi, cảnh báo còn 2 ngày, quá hạn khóa tạm ứng mới; gia hạn rút gọn 3 bước; 2 tiêu chí phân loại; hạn mức theo mã nhân viên; 5 trạng thái; "Dư nợ tạm ứng 1" |
 | 4.3 Dư nợ tạm ứng của nhân viên | ➡ fund-payments | | 3 loại dư nợ; dư nợ 2 (TTNHĐ) là tài khoản trung gian, không sang Misa, không hạn mức; dư nợ 3 (đặt cọc) là TK 244; chuyển giao khi nghỉ việc/chuyển việc |
 | 4.4 Thanh toán & Thanh toán có hóa đơn | ➡ fund-payments | | phân loại theo nhóm phí (JobID kế toán/nghiệp vụ) và theo 6 mục đích; không đối ứng tạm ứng, dư nợ 1 chuyển sang module nhân sự; 4 trạng thái Yêu cầu thanh toán |
-| 4.5 Thanh toán nợ hóa đơn | ➡ payment-on-behalf | | hạn trả hóa đơn 3 ngày làm việc, quá hạn khóa quyền tạo TTNHĐ; duyệt trong 2 ngày cuối tháng thì khóa từ ngày làm việc đầu tháng sau; tạo từ JobID (CS, hiện trường) và Lệnh vận tải (lái xe) |
-| 4.6 Thanh toán trả hóa đơn | ➡ payment-on-behalf | | báo cáo dư nợ 2 đầu tháng, thu hồi bằng Phiếu thu; comment 09/10: anh Nghĩa bỏ đoạn "thanh toán không hóa đơn để nhận lại số tiền này" |
+| 4.5 Thanh toán nợ hóa đơn | ✅ | `docs/payment-on-behalf/brainstorms/payment-on-behalf.md` B1, B4, OQ-9 | hạn trả hóa đơn 3 ngày làm việc, quá hạn khóa quyền tạo TTNHĐ; duyệt trong 2 ngày cuối tháng thì khóa từ ngày làm việc đầu tháng sau; tạo từ JobID (CS, hiện trường) và Lệnh vận tải (lái xe) |
+| 4.6 Thanh toán trả hóa đơn | ✅ | `docs/payment-on-behalf/brainstorms/payment-on-behalf.md` B1–B6, OQ-14 | báo cáo dư nợ 2 đầu tháng, thu hồi bằng Phiếu thu; comment 09/10: anh Nghĩa bỏ đoạn "thanh toán không hóa đơn để nhận lại số tiền này" |
 | 4.7 Thanh toán không hóa đơn | ➡ fund-payments | | chi phí quản lý chung không chứng từ; chi phí định mức (COGS) ghi lên Mã nhân viên; hoa hồng khách hàng qua Mã DK05; comment 09/10: tạm ứng không hạn chế, quản lý ở module nhân sự; ⚠ chốt ranh giới với `employee-records` (BL-215) |
 | 4.8 Quản lý tiền đặt cọc | ➡ fund-payments | | 5 trường hợp đặt cọc; TK 244, dư nợ 3 không hạn mức; hoàn trả nhiều lần; không đòi được thì ghi TK 811 / TK 1388 |
 | 4.9 Phiếu chi và Phiếu thu | ➡ fund-payments | | phần mềm tự tạo phiếu từ Yêu cầu thanh toán/Đề nghị tạm ứng; thủ quỹ tạo tay chỉ ở tình huống đặc biệt |
@@ -25,8 +25,8 @@ Phần lớn mục giao cho feature mới `fund-payments` (Quản lý quỹ và 
 | 5.1 Quy trình tạm ứng tiền mặt | ➡ fund-payments | | duyệt 2 bước; chủ tài khoản chính duyệt trên ngân hàng; webhook lấy UNC; ⚠ đồng chủ tài khoản lệch APAS 3.1 (BL-215) |
 | 5.2 Quy trình thanh toán có hóa đơn | ➡ fund-payments | | chọn hóa đơn từ AI01 cùng nhóm phí, tổng tiền tự cộng; comment 09/10: biên lai cũng dùng quy trình này, duyệt xong là trả tiền; ⚠ 2 bước duyệt, APAS 3.3 là 3 cấp (BL-215) |
 | 5.3 Quy trình thanh toán không hóa đơn | ➡ fund-payments | | |
-| 5.4 Quy trình thanh toán nợ hóa đơn | ➡ payment-on-behalf | | QR động (≥ 3 phút), QR tĩnh, tài khoản đối tác; gợi ý 3–5 cảng bãi gần lái xe; duyệt bước 1 theo giới hạn duyệt và hạn mức trên ngân hàng |
-| 5.5 Quy trình thanh toán trả hóa đơn | ➡ payment-on-behalf | | |
+| 5.4 Quy trình thanh toán nợ hóa đơn | ✅ | `docs/payment-on-behalf/brainstorms/payment-on-behalf.md` A1–A11, OQ-3, OQ-4 | QR động (≥ 3 phút), QR tĩnh, tài khoản đối tác; gợi ý 3–5 cảng bãi gần lái xe; duyệt bước 1 theo giới hạn duyệt và hạn mức trên ngân hàng |
+| 5.5 Quy trình thanh toán trả hóa đơn | ✅ | `docs/payment-on-behalf/brainstorms/payment-on-behalf.md` B1, B2, OQ-7, OQ-18 | |
 | 5.6 Quy trình quản lý tiền đặt cọc | ➡ fund-payments | | |
 | 5.7 Quy trình thanh toán nhà cung cấp | ➡ debt-management | | |
 | 5.8 Quy trình Phiếu chi | ➡ fund-payments | | |

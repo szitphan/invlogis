@@ -2,10 +2,12 @@
 type: design-component
 status: stale
 status_prev: draft
-updated: 2026-10-28
+updated: 2026-11-02
 links:
   - design-system/architecture.md
   - design-system/foundations/README.md
+  - design-system/foundations/logo.md
+  - design-system/components/base/logo.md
   - design-system/tokens.json
   - design-system/components/_work/sidebar-navigation/page.json
   - design/ui-common/screen-patterns.md
@@ -65,17 +67,17 @@ có quyền xem tổng (SRS cũ tr.197–199, PRD 7.6, FR-account-access-012).
 | Phần | Token | Giá trị (Web) |
 |---|---|---|
 | Khung menu | nền `color/bg/primary`, viền phải `color/border/secondary`, lề `space/lg` | rộng 240; thu gọn 64 (`nav/height`), lề ngang thu gọn 10 |
-| Đầu menu | logo 28 (`control/height/sm`) bo `radius/control`; tên `type/heading` nét 600, cao dòng `type/title-3/line-height`, `color/text/primary`; chi nhánh `type/caption` (12/16) `color/text/tertiary`; nút thu gọn `control/height/md` icon 20 | cao tối thiểu 36, khoảng 8, cách nội dung 12 |
+| Đầu menu | `Logo` (`base/logo.md`, `foundations/logo.md`) Size 24 (`size/3xl`, DEC-326), logo thật không tô ô, không bo; thu gọn 64 dùng Symbol 24; tên `type/heading` nét 600, cao dòng `type/title-3/line-height`, `color/text/primary`; chi nhánh `type/caption` (12/16) `color/text/tertiary`; nút thu gọn `control/height/md` icon 20 | cao tối thiểu 36, khoảng 8, cách nội dung 12 |
 | Nhãn nhóm | `type/caption-caps`, `color/text/tertiary` | 12/16, lề trên 16, dưới 6, ngang 10 |
-| `_Nav item` | cao 36, lề ngang 10, khoảng 10, bo `radius/control`; chữ `type/body` nét 500 `color/text/tertiary`… đang chọn nền `color/bg/selected`, chữ `color/text/primary` nét 600; icon 20 `color/fg/quaternary` | giữa các mục 2 |
+| `_Nav item` | cao 36, lề ngang 10, khoảng 10, bo `radius/control`; chữ `type/body` nét 500 `color/text/tertiary`… đang chọn nền `color/bg/selected`, chữ `color/text/primary` nét 600; icon 20 `color/fg/tertiary` | giữa các mục 2 |
 | Số đếm | `Badge` Color Blue: nền `color/utility/blue/50`, chữ `color/utility/blue/700`, `radius/full` | 12/18, lề ngang 8; trên 99 ghi "99+" |
-| `_Nav scope card` | nền `color/bg/primary`, viền `color/border/secondary`, bóng `elev/1`, bo `radius/lg`, lề `space/md`, khoảng `space/lg`; hover `color/bg/primary_hover`, đang mở `color/bg/selected`; dòng 2 trên hai nền đó `color/text/tertiary_strong` | cao 52 (thu gọn 40); chevron lên xuống 16 `color/fg/quaternary` |
-| `_Module tile` | nền `color/chip/{tone}/bg`, icon `color/chip/{tone}/fg`, bo `radius/control` | 32 (thẻ) · 28 (hộp thoại); icon 20 / 16 |
+| `_Nav scope card` | nền `color/bg/primary`, viền `color/border/secondary`, bóng `shadow/xs`, bo `radius/md`, lề `space/md`, khoảng `space/lg`; hover `color/bg/primary_hover`, đang mở `color/bg/selected`; dòng 2 trên hai nền đó `color/text/tertiary_strong` | cao 52 (thu gọn 40); chevron lên xuống 16 `color/fg/tertiary` |
+| `_Module tile` | nền `color/chip/{tone}/bg`, icon `color/chip/{tone}/fg`, bo `radius/inner`; thẻ thu gọn bo `radius/xs` (ngoại lệ, DEC-328) | 32 (thẻ) · 28 (hộp thoại); icon 20 / 16 |
 | Dòng module / cơ sở | `type/heading` nét 600 `color/text/primary` · `type/hint` (12/18) `color/text/tertiary` | 1 dòng, cắt "…", tooltip đủ tên |
-| `Scope dialog` | nền `color/bg/primary`, bo `radius/xl`, bóng `elev/3`, lớp phủ `color/bg/overlay`; tiêu đề `type/title-3` nét 600 | rộng 960 (`width/xl`); đầu lề 20 / 16; cột lề 8, chia bằng viền `color/border/secondary` |
+| `Scope dialog` | nền `color/bg/primary_alt`, viền `shadow/xl-border`, bo `radius/overlay`, bóng `shadow/xl`, lớp phủ `color/bg/overlay` + `backdrop-blur/lg`; tiêu đề `type/title-3` nét 600 | Bản hộp thoại cũ: chọn phạm vi đã đổi về popover 2 cột (DEC-299), không còn dùng rộng 960; đầu lề 20 / 16; cột lề 8, chia bằng viền `color/border/secondary` |
 | Tiêu đề cột | `type/caption` nét 600 `color/text/tertiary` | "1 · Chi nhánh" · "2 · Module" · "3 · {Xưởng / Cây dầu}" |
 | `_Scope option` | lề 8, khoảng 10, bo `radius/control`; ô icon 28 nền `color/bg/secondary`; tên `type/body` nét 500; dòng phụ `type/caption` `color/text/tertiary`; chọn: nền `color/bg/selected` + dấu ✓ 16 `color/text/primary`; dòng phụ khi Hover/Selected `color/text/tertiary_strong`; Focus vòng 2px `color/focus/ring` | vùng bấm ≥ 44 |
-| Ô tìm | `Input` cao `control/height/md`, viền `color/border/input`, bo `radius/field` | 32, lề ngang 10 |
+| Ô tìm | `Input` cao `control/height/md`, viền `color/border/input`, bo `radius/control` | 32, lề ngang 10 |
 | Chân hộp thoại | `Button` Secondary "Huỷ" + Primary "Chọn" Size LG (`control/height/lg`), lề 16 / 12, khoảng 8 | 40 |
 
 Màu ô module theo module (cùng tone ở mọi màn): Điều phối vận tải Blue · Quản lý phương tiện Teal · Bảo dưỡng sửa chữa
@@ -92,7 +94,8 @@ Danh sách module và màu là cấu hình theo khách `[Lõi] [Cấu hình]` �
   ẩn bật bằng visible ở instance: `No result` (cột 1), `In development` (cột 2), `Load error` (cột 3).
 - `Sidebar navigation`: thêm Width = 64 (thu gọn của Type Sections Subheadings, dựng từ Slim); `Has Scope Card` (bật),
   `Branch`, `Tenant Name`, `Has Tenant Name` (tắt khi logo là logo chữ). `Has Tenant Switch` mặc định tắt. Đầu menu tự
-  xuống dòng khi logo rộng (chi nhánh nằm dưới logo).
+  xuống dòng khi logo rộng (chi nhánh nằm dưới logo). Logo rộng quá 176 thì hạ cao, không dưới 20; Width 64 dùng `P-logo-vuong`,
+  thiếu thì chữ cái đầu trên ô (DEC-326).
 
 ### Trạng thái
 
@@ -173,6 +176,10 @@ Chạy 28/10 sau khi dựng (vòng 4) và sau khi sửa theo review (vòng 5):
   Thẻ phạm vi trên nền trắng giữ hình bằng viền + bóng.
 - **3 agent review** (visual, UX/UI, accessibility): 20 điểm; sửa R1–R4, R6–R13; giữ R5, R14–R19; R20 mở việc riêng
   (DEC-289).
+
+### Chuyển động
+
+Thu gọn 240 ↔ 64 chạy bề rộng `duration/medium` + `easing/standard`, không lò xo; chevron xoay `duration/fast`. `Scope dialog`: vào `duration/medium` + `easing/standard`, phóng 95; ra `duration/exit` + `easing/exit`; thôi chặn bấm ngay khi đóng. Luật chung: `foundations/motion.md` (DEC-333).
 
 ## Mobile
 
@@ -301,10 +308,10 @@ chỉ có một dòng phạm vi để đọc. Bản nháp: tab 2 của trang duy
 
 | State | Nền | Chữ | Icon |
 |---|---|---|---|
-| Default | `color/bg/secondary` | `color/text/primary` | `color/fg/quaternary` |
-| Hover | `color/bg/primary_hover` | `color/text/primary` | `color/fg/quaternary` |
+| Default | `color/bg/secondary` | `color/text/primary` | `color/fg/tertiary` |
+| Hover | `color/bg/primary_hover` | `color/text/primary` | `color/fg/tertiary` |
 | Selected | `color/bg/selected` | `color/text/primary` | `color/text/primary` |
-| Focus | `color/bg/secondary` | `color/text/primary` | `color/fg/quaternary` |
+| Focus | `color/bg/secondary` | `color/text/primary` | `color/fg/tertiary` |
 
 ### Số đo theo phần (token)
 
@@ -339,7 +346,7 @@ chỉ có một dòng phạm vi để đọc. Bản nháp: tab 2 của trang duy
 
 | Nền | Chữ | Icon | Bóng |
 |---|---|---|---|
-| `color/bg/primary` | `color/text/primary` | `color/fg/quaternary` | `elev/3` |
+| `color/bg/primary` | `color/text/primary` | `color/fg/tertiary` | `elev/3` |
 
 ### Số đo theo phần (token)
 

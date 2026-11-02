@@ -8,7 +8,8 @@ client: Delta
 date: 2026-10-15
 footer: Câu hỏi cần xác nhận — Dữ liệu vận hành xe (VIS)
 brand: innvie-v1
-status: shipped
+status: stale
+status_prev: shipped
 status_changed: 2026-10-21
 updated: 2026-10-15
 links:

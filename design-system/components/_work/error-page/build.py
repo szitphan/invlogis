@@ -93,7 +93,7 @@ def block(key, icon, tone, code, title, desc, pri, sec, live=True, only=None):
     illo += f'<div class="ep-ill2" data-show="D2:d">{ILLO.get(key, "")}</div>'
     illo += f'<div class="ep-ill2 il-line" data-show="D2:e">{ILLO.get(key, "")}</div>'
     cmp = " data-cmp" if live else ""
-    return (f'<div class="ep st-{key}"{show}{cmp}><div class="ep-art"><div class="ep-grid" data-show="D2:a"></div>{feat}{big}{illo}</div>'
+    return (f'<div class="ep st-{key}"{show}{cmp}><div class="ep-art">{feat}{big}{illo}</div>'
             f'<div class="ep-text"><h2 class="ep-t">{title}</h2><p class="ep-d">{desc}</p>{path}</div>'
             f'{srch}<div class="ep-acts">{btns}</div>{sugg}{meta}</div>')
 
@@ -118,7 +118,7 @@ CSS_EP = r"""
 .ep-grid{position:absolute;width:336px;height:336px;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;
  background-image:linear-gradient(var(--color-border-secondary) 1px,transparent 1px),linear-gradient(90deg,var(--color-border-secondary) 1px,transparent 1px);background-size:48px 48px;
  -webkit-mask-image:radial-gradient(circle,#000 0,transparent 70%);mask-image:radial-gradient(circle,#000 0,transparent 70%)}
-.ep-feat{position:relative;width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--color-border-primary);background:var(--color-bg-primary);color:var(--color-text-secondary);box-shadow:var(--elev-1)}
+.ep-feat{position:relative;width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--color-border-primary);background:var(--color-bg-primary);color:var(--color-text-secondary);box-shadow:var(--shadow-xs)}
 .ep-feat.t-red{color:var(--color-fg-error-primary)}.ep-feat.t-yellow{color:var(--color-fg-warning-primary)}.ep-feat.t-blue{color:var(--color-fg-info-primary)}
 .ep-code{font:600 96px/104px Inter;letter-spacing:-2px;color:var(--color-text-primary)}
 .ep-illo{color:var(--color-text-tertiary)}.ep-ill2 .il{width:160px;height:150px}.pv[data-platform=mobile] .ep-ill2 .il{width:128px;height:120px}.ep-cell .ep-ill2 .il{width:128px;height:120px}.ep-illo.t-red{color:var(--color-fg-error-primary)}.ep-illo.t-yellow{color:var(--color-fg-warning-primary)}.ep-illo.t-blue{color:var(--color-fg-info-primary)}
@@ -128,7 +128,7 @@ CSS_EP = r"""
 .ep-path{font-size:13px;line-height:18px;color:var(--color-text-tertiary);overflow-wrap:anywhere;padding:8px 12px;background:var(--color-bg-tertiary);border-radius:8px;text-align:left}
 .ep-acts{display:flex;gap:12px;justify-content:center;position:relative}
 .ep-acts .bt{height:40px;padding:0 16px;font-size:14px}
-.ep-search{display:flex;align-items:center;gap:8px;width:100%;max-width:360px;height:40px;padding:0 12px;border:1px solid var(--color-border-primary);border-radius:8px;color:var(--color-fg-quaternary);background:var(--color-bg-primary);position:relative}
+.ep-search{display:flex;align-items:center;gap:8px;width:100%;max-width:360px;height:40px;padding:0 12px;border:1px solid var(--color-border-primary);border-radius:8px;color:var(--color-fg-tertiary);background:var(--color-bg-primary);position:relative}
 .ep-sugg{width:100%;position:relative}
 .ep-sh{font:500 13px/18px Inter;color:var(--color-text-tertiary);text-align:left;margin-bottom:8px}
 .ep-li{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--color-border-secondary);border-radius:10px;margin-bottom:8px;text-align:left;color:var(--color-text-secondary);cursor:pointer;background:var(--color-bg-primary)}
@@ -144,7 +144,7 @@ CSS_EP = r"""
 .pv[data-platform=web][data-D1=b] .ep>:not(.ep-art){flex:0 0 calc(100% - 344px)}
 .pv[data-platform=web][data-D1=b] .ep-acts{justify-content:flex-start}
 .pv[data-platform=web][data-D1=b] .ep-meta{justify-content:flex-start}
-.pv[data-platform=web][data-D1=c] .ep{background:var(--color-bg-primary);border:1px solid var(--color-border-secondary);border-radius:16px;padding:40px 32px;box-shadow:var(--elev-3);margin-top:48px;margin-bottom:48px}
+.pv[data-platform=web][data-D1=c] .ep{background:var(--color-bg-primary);border:1px solid var(--color-border-secondary);border-radius:16px;padding:40px 32px;box-shadow:var(--shadow-xl);margin-top:48px;margin-bottom:48px}
 .pv[data-platform=web][data-D1=c] .ep-host{background-color:var(--color-bg-secondary);background-image:radial-gradient(var(--color-border-primary) 1px,transparent 1px);background-size:20px 20px}
 .ep-host{min-height:100%;display:flex;flex-direction:column;justify-content:center}
 /* D6 app */
@@ -154,7 +154,7 @@ CSS_EP = r"""
 .pv[data-platform=mobile] .ep-code{font-size:72px;line-height:80px}
 .pv[data-platform=mobile] .ep-grid{width:288px;height:288px}
 .pv[data-platform=mobile] .ep-acts{flex-direction:column-reverse;width:100%;gap:8px}
-.pv[data-platform=mobile] .ep-acts .bt{height:48px;border-radius:12px;font-size:15px;width:100%}
+.pv[data-platform=mobile] .ep-acts .bt{height:48px;border-radius:var(--radius-control);font-size:15px;width:100%}
 .pv[data-platform=mobile][data-D6=a] .ep-host{min-height:640px}
 .pv[data-platform=mobile][data-D6=a] .ep{min-height:640px}
 .pv[data-platform=mobile][data-D6=a] .ep-acts{margin-top:auto}
@@ -203,7 +203,7 @@ decisions = [
   "why": "Cùng một khung cho 5 loại lỗi; hình phải phân biệt được loại lỗi mà không chỉ dựa vào màu (Do's (b)).",
   "source": "foundations · Featured icon 48/24 · Untitled 404-pages · 21st.dev Error 404 (số lớn)",
   "options": [
-   {"label": "Featured icon + lưới mờ", "desc": "Icon 24 trong ô 48 có viền, nền lưới mờ dần. Mỗi loại lỗi một icon. Dùng lại Featured icon có sẵn.", "rec": True,
+   {"label": "Featured icon", "desc": "Icon 24 trong ô 48 có viền, không có mẫu lưới (DEC-335 ms16). Mỗi loại lỗi một icon. Dùng lại Featured icon có sẵn.", "rec": True,
     "preview": m({"D2": "a"}, "s500"), "ideas": ["I1", "I5"]},
    {"label": "Mã lỗi số lớn", "desc": "“404”, “500” cỡ 96. Dễ nhận ra với người quen web; mất kết nối không có mã thì phải dùng “!”.",
     "preview": m({"D2": "b"}, "default"), "ideas": ["I6", "I7"]},

@@ -197,7 +197,7 @@ duyệt xoá` ở `Astryx · Library` nền `#D9D9D9`.
   bảng từ vựng dưới. Màn chỉ có ở nhánh lỗi hoặc biên (vd popup lỗi) thì ô Luồng chính của cột đó để trống.
 * **Nhiều frame trong một ô** xếp **dọc**, cách 100px, theo thứ tự node trong userflow. Modal (dialog,
   confirm, form nhỏ; frame cả màn có lớp phủ tối) không có số riêng nằm ở cột của màn mở ra nó, hàng theo
-  case của modal. Ô `Responsive` xếp **ngang**: 1440 rồi mobile web 393, cách 100px, chỉ state mặc định; 1920
+  case của modal. Ô `Responsive` xếp **ngang**: 1280, 1024 rồi mobile web 393 (DEC-324), cách 100px, chỉ state mặc định; 1920
   là frame ở hàng Luồng chính, không nhân bản. Mobile web 393 nằm trong Section `Web`, tên
   `<screenId> · <slug> · 393`; Section `Mobile` dành cho app.
 * State vẽ ở 1920, cao theo nội dung. Frame cao thêm → tính lại toạ độ, dời cả cột và các hàng bên dưới;
@@ -219,7 +219,7 @@ duyệt xoá` ở `Astryx · Library` nền `#D9D9D9`.
 | Section L1 kế tiếp / L2 kế tiếp | cách section trước 400px / 300px; đệm phải và đệm dưới mỗi section 200px |
 | Userflow của flow | cột trái Section flow: x = 200, y = 320 |
 | Cột màn đầu tiên | cách mép phải userflow **400px** |
-| Cột kế tiếp | cách mép phải cột trước **400px**; bề rộng cột = frame rộng nhất của cột (ô Responsive: 1440 + 100 + 393) |
+| Cột kế tiếp | cách mép phải cột trước **400px**; bề rộng cột = frame rộng nhất của cột (ô Responsive: 1280 + 100 + 1024 + 100 + 393) |
 | Title cột | y = 320 trong Section flow; rộng bằng cột cộng khoảng trống tới cột kế, chừa 40px (cột cuối tính tới đệm phải); Inter 64 |
 | Thanh hàng đầu tiên | y = 472, cao 120, từ mép trái cột đầu tới mép phải cột cuối; title cột xuống nhiều dòng (cột mobile hẹp) thì lùi xuống, cách đáy title cao nhất 40px |
 | Frame đầu tiên của hàng | cách đáy thanh hàng 80px |

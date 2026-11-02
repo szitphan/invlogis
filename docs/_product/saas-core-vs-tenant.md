@@ -4,7 +4,7 @@ status: stale
 status_prev: draft
 status_changed: 2026-10-14
 status_reason: "đã review upstream, không cần sửa"
-updated: 2026-10-20
+updated: 2026-11-02
 links:
   - docs/_shared/project-profile.md
   - docs/_shared/system-overview.md
@@ -138,8 +138,8 @@ Cột "Nếu viết cứng" ghi điều sẽ chặn bán cho khách khác.
 
 | Quy tắc (theo Delta) | Tầng | Cách tổng quát hoá | Nếu viết cứng |
 |---|---|---|---|
-| Tên app "Delta Super App", logo Delta | Cấu hình (gắn nhãn theo khách) | Một app chung chọn khách khi đăng nhập, hoặc mỗi khách một bản build mang tên riêng — cần quyết định (Mục 7) | Khách khác không chấp nhận app mang tên Delta |
-| Quy tắc giao diện GR, CMP, E-common; design system không gắn thương hiệu | Lõi + Cấu hình (logo, màu ô logo) | Thương hiệu khách chỉ thay ô logo (`P-logo`, `P-mau-logo`); bộ màu và component giữ trung tính, không đổi theo khách (chốt 12/10/2026) | — |
+| Tên app "Delta Super App", logo Delta | Cấu hình (gắn nhãn theo khách) | Mỗi khách một bản build mang tên và icon riêng (DEC-326, Mục 7) | Khách khác không chấp nhận app mang tên Delta |
+| Quy tắc giao diện GR, CMP, E-common; design system không gắn thương hiệu | Lõi + Cấu hình (logo, màu ô logo) | Thương hiệu khách thay logo (`P-logo`, `P-logo-nen-toi`, `P-logo-vuong`), favicon, icon app (`P-favicon`, `P-icon-app`); `P-mau-logo` chỉ tô ô chữ cái đầu (DEC-326); bộ màu và component giữ trung tính, không đổi theo khách (chốt 12/10/2026) | — |
 | Tiếng Việt, Tiếng Anh | Lõi | — | — |
 | Câu chữ ngôi "bạn", không "Vui lòng" | Lõi | — | — |
 
@@ -198,7 +198,7 @@ Con số chính sách không viết thẳng vào quy tắc mà gọi qua mã `P-
 |---|---|---|---|
 | 1 | **Quyền khai thác phần mềm đồng sở hữu** — hợp đồng outsource quy định phần mềm thuộc cả hai bên (xác nhận 2026-10-12). Còn phải kiểm 3 điều khoản: (a) mỗi bên có được tự bán, cấp quyền cho khách khác mà không cần Delta đồng ý không, có phải chia doanh thu không; (b) có điều khoản độc quyền hoặc không cạnh tranh trong ngành logistics không; (c) SOP, quy trình, dữ liệu Delta cung cấp có là thông tin bảo mật không — nếu có, sản phẩm chỉ dùng lại phần mềm, không mang theo nội dung riêng của Delta | Lãnh đạo, pháp chế | Đồng sở hữu chưa chắc đã cho phép một bên tự khai thác thương mại; (c) quyết định phần nào ở tầng "Riêng Delta" phải tách hẳn khỏi sản phẩm |
 | 2 | Dữ liệu Delta (chứng từ, chỗ AI sửa, danh mục) có được dùng để cải thiện sản phẩm chung không | Lãnh đạo + Delta | Ảnh hưởng thiết kế AI đọc chứng từ (CHG-27) |
-| 3 | Một app chung có chọn khách, hay mỗi khách một bản app mang tên riêng | Đội sản phẩm | Ảnh hưởng đăng nhập, phân phối app, tên "Delta Super App" |
+| 3 | **Đã chốt 02/11 (DEC-326): mỗi khách một bản app trên store**, mang tên và icon riêng (`P-favicon`, `P-icon-app`), vì một app chung không đổi được icon theo khách. Còn việc: quy trình phát hành và tài khoản store theo khách | Đội sản phẩm | Ảnh hưởng đăng nhập, phân phối app, tên "Delta Super App" |
 | 4 | Sửa mô hình "container là phương tiện" trước khi viết SRS Điều phối | BA + kỹ thuật | Rẻ nhất nếu sửa bây giờ |
 | 5 | Danh sách gói bán (Xưởng, Nhiên liệu, Giám sát nhiên liệu, Hàng lạnh, Đường sắt, CBT, Tài chính, Đa chi nhánh) | Đội sản phẩm | Quyết định chỗ nối giữa lõi và gói |
 

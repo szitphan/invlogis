@@ -52,11 +52,11 @@ python3 _scripts/figma-audit.py <batch1> <batch2> ... \
 | K1 | Màu / cỡ chữ / bo góc / khoảng cách / padding không gắn token (chỉ node tự dựng) | màu Cao · chữ, bo Trung · khoảng cách Thấp |
 | K2 | Cùng tên layer (vai trò) mà khác giá trị giữa các màn, so trong cùng thiết bị | Trung |
 | K3 | > 1 nút Primary trong một nhóm · cùng nhãn nút khác biến thể/cỡ giữa các màn | Cao · Trung |
-| K4 | Icon: cỡ ngoài 12/14/16/18/20/24 · nét ≠ cỡ × 1.8/24 (chip × 2/24) gom theo cỡ · màu nét không gắn token · sai icon theo hành động của `design.md` · cùng nhãn khác icon · icon mặc định thư viện đang hiện · vector tự vẽ | Cao (cỡ) · Trung |
+| K4 | Icon: cỡ ngoài 12/14/16/18/20/24 · nét ≠ cỡ × 1.8/24 (chip × 2/24) gom theo cỡ · màu nét không gắn token · sai icon theo hành động của `design.md` · cùng nhãn khác icon · **icon ngoài bảng nghĩa** (`design-system/foundations/icon.md` mục 7, đọc qua `design-system/handoff/icons.json`, DEC-329) · icon mặc định thư viện đang hiện · vector tự vẽ | Cao (cỡ) · Trung |
 | K5 | Khung tự dựng trùng tên component đang dùng (nghi tách rời / dựng lại) | Trung |
 | K6 | Mã bản ghi chỉ có ở 1 màn trong khi các màn khác cùng flow dùng mã cùng loại khác | Thấp |
 
-Icon được đọc **kể cả bên trong instance** (icon thay qua thuộc tính/override). Node ẩn bị bỏ qua.
+Icon được đọc **kể cả bên trong instance** (icon thay qua thuộc tính/override). Node ẩn bị bỏ qua. Icon ngoài bảng nghĩa trên màn cũ chỉ báo, sửa khi dựng lại ở vòng 6; `_scripts/figma-name-lint.js` có `ICON_MEANINGS` cho kiểm cùng luật ở component.
 Sửa ngưỡng/luật trong script → chạy 2 fixture: `_scripts/fixtures/figma-audit/pass.json` (exit 0,
 0 mục) và `fail.json` (exit 1, đủ K1–K6).
 

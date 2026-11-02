@@ -6,17 +6,22 @@
 
 Tên CSS = '--' + tên token thay '/' bằng '-' (neutral/100 → --neutral-100, color/bg/primary → --color-bg-primary).
 Màu theo khách: collection Brand, mỗi chế độ một dải; đặt data-brand="<slug>" trên thẻ gốc (mặc định than-chi).
-Bóng: màu mỗi lớp đi qua biến Semantic `color/shadow/*` (đổi theo sáng/tối); `blur/*` sinh --blur-*.
-Collection Context đã bỏ (DEC-258): khe focus là token Semantic `color/focus/gap`.
-Quyết định: _workspace/decisions.md DEC-115, DEC-116, DEC-129…139, DEC-167, DEC-168, DEC-241.
+Bóng: màu mỗi lớp đi qua biến Semantic `color/shadow/*`; `shadow/*`, `shadow/*-border` khai trong khối Semantic Light và Dark để khung
+data-theme lồng trong trang khác chế độ tính lại đúng (DEC-327, BL-348); `blur` trong json sinh --backdrop-blur-*.
+Vòng focus là outline, khe trong suốt: không có token khe (DEC-327).
+Màu thương hiệu: collection Brand Invlogis sinh --invlogis-*, --innvie-* cho logo, trang giới thiệu (DEC-326); không dùng trong
+component sản phẩm (DEC-261, ds-token-usage.py cờ brandleak). --check so thêm với design/brand/invlogis/brand-tokens.css.
+Quyết định: _workspace/decisions.md DEC-115, DEC-116, DEC-129…139, DEC-167, DEC-168, DEC-241, DEC-333.
 """
 import json
+import re
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "design-system/tokens.json"
 OUT = ROOT / "design-system/tokens.css"
+BRAND_CSS = ROOT / "design/brand/invlogis/brand-tokens.css"
 WEIGHT = {"Regular": 400, "Medium": 500, "Semi Bold": 600, "Bold": 700}
 
 # Cặp chữ/nền phải đạt ngưỡng (WCAG 2.2: chữ thường 4.5, chữ gợi ý/icon tắt chỉ báo cáo).
@@ -38,7 +43,8 @@ PAIRS = [
   + [("color/text/white", f"color/bg/{k}/solid", 4.5) for k in ("success", "warning", "error", "info")] \
   + [(f"color/utility/{c}/{fg}", f"color/utility/{c}/{bg}", 4.5)  # cặp chữ/nền chip (bậc riêng: neutral 600/100, orange 800/100; DEC-311, DEC-320)
      for c, fg, bg in (("neutral", 600, 100), ("blue", 700, 50), ("teal", 700, 50), ("purple", 700, 50), ("yellow", 700, 50),
-                       ("green", 700, 50), ("red", 700, 50), ("orange", 800, 100))]
+                       ("green", 700, 50), ("red", 700, 50), ("orange", 800, 100))] \
+  + [("color/fg/white", f"color/file-type/{k}", 4.5) for k in ("pdf", "doc", "xls", "csv", "img", "zip", "vid")]  # nhãn File type icon (DEC-335 ms02)
 
 
 def css_name(token: str) -> str:
@@ -79,7 +85,23 @@ def ref_or_value(v, kind):
     """Giá trị Platform/Semantic: tên token → var(), số → px, chuỗi khác giữ nguyên."""
     if isinstance(v, (int, float)):
         return px(v) if kind == "px" else str(v)
+    if v.endswith("%"):
+        return v
     return f"var({css_name(v)})"
+
+
+def shadow_decls(doc, mode):
+    """--shadow-*, --shadow-*-border của một chế độ. border là tên token, hoặc {Light, Dark} khi khác nhau (None = trong suốt)."""
+    out = ["  --shadow-none: none;"]
+    for k, v in doc["effectStyles"].items():
+        layers = ", ".join(f"{s['x']}px {s['y']}px {s['blur']}px {s['spread']}px var({css_name(s['var'])})" for s in v["shadows"])
+        out.append(f"  {css_name(k)}: {layers};")
+        border = v.get("border")
+        if isinstance(border, dict):
+            out.append(f"  {css_name(k)}-border: " + (f"var({css_name(border[mode])});" if border[mode] else "transparent;"))
+        elif border:
+            out.append(f"  {css_name(k)}-border: var({css_name(border)});")
+    return out
 
 
 def build(doc) -> str:
@@ -99,11 +121,13 @@ def build(doc) -> str:
     L.append(":root, [data-theme=\"light\"] {")
     for k, v in c["Semantic"]["color"].items():
         L.append(f"  {css_name(k)}: var({css_name(v['Light'])});")
+    L += shadow_decls(doc, "Light")
     L.append("}")
     L.append(f"/* Semantic — Dark: {c['Semantic']['darkNote']} */")
     L.append("[data-theme=\"dark\"] {")
     for k, v in c["Semantic"]["color"].items():
         L.append(f"  {css_name(k)}: var({css_name(v['Dark'])});")
+    L += shadow_decls(doc, "Dark")
     L.append("}")
     L.append("")
     for mode, sel in (("Web", ":root, [data-platform=\"web\"]"), ("Mobile", c["Platform"]["cssModeSelector"])):
@@ -114,7 +138,7 @@ def build(doc) -> str:
             if k == "type/label/style":
                 L.append(f"  --type-label-weight: {WEIGHT[val]};")
                 continue
-            unit = "raw" if "OPACITY" in v.get("scopes", []) else "px"
+            unit = "raw" if "OPACITY" in v.get("scopes", []) or k == "grid/columns" else "px"
             L.append(f"  {css_name(k)}: {ref_or_value(val, unit)};")
         L.append("}")
         L.append("")
@@ -129,6 +153,14 @@ def build(doc) -> str:
                 L.append(f"  {css_name(k)}: {v[mode]};")
             L.append("}")
         L.append("")
+    bi = c.get("Brand Invlogis")
+    if bi:
+        L.append("/* Brand Invlogis — logo, trang giới thiệu, tài liệu; KHÔNG dùng trong component sản phẩm (DEC-261, DEC-326) */")
+        L.append(":root {")
+        for k, v in bi["color"].items():
+            L.append(f"  {css_name(k)}: {v['Value']};")
+        L.append("}")
+        L.append("")
     comp = c.get("Component")
     if comp:
         # Khai lại ở nơi đặt data-theme để token Component tính lại theo Semantic sáng/tối.
@@ -138,45 +170,40 @@ def build(doc) -> str:
             L.append(f"  {css_name(k)}: var({css_name(v['Value'])});")
         L.append("}")
         L.append("")
-    ctx = c.get("Context")
-    if ctx:
-        # Màu theo nền đặt (DEC-241). Mặc định = chế độ đầu (Surface) khai ở mọi nơi đặt data-theme như Component, để var() tính lại
-        # theo Semantic sáng/tối; chế độ còn lại chỉ ghi đè trong khung mang data-context tương ứng.
-        L.append("/* Context — màu theo nền đặt: khe vòng focus (DEC-241); data-context=\"canvas\" trên khung nền xám */")
-        for i, mode in enumerate(ctx["modes"]):
-            slug = ctx["modeSlugs"][mode]
-            sel = ctx["cssModeSelector"].replace("{slug}", slug)
-            L.append((":root, [data-theme=\"light\"], [data-theme=\"dark\"], " if i == 0 else "") + sel + " {")
-            for k, v in ctx["color"].items():
-                L.append(f"  {css_name(k)}: var({css_name(v[mode])});")
-            L.append("}")
-        L.append("")
     L.append(":root {")
-    L.append("  /* Lớp nổi (DEC-137) */")
-    L.append("  --elev-0: none;")
-    for k, v in doc["effectStyles"].items():
-        shadows = ", ".join(
-            f"{s['x']}px {s['y']}px {s['blur']}px {s['spread']}px "
-            + (f"var({css_name(s['var'])})" if s.get("var") else f"rgba(16, 24, 40, {s['alpha']})") for s in v["shadows"])
-        L.append(f"  {css_name(k)}: {shadows};")
-        if v.get("border"):
-            L.append(f"  {css_name(k)}-border: var({css_name(v['border'])});")
     L.append("  /* Làm mờ nền (DEC-258) */")
     for k, v in doc.get("blur", {}).items():
         L.append(f"  {css_name(k)}: {px(v['value'])};")
-    L.append("  /* Chuyển động, focus (DEC-139) */")
+    L.append("  /* Chuyển động (DEC-139) */")
     for k, v in doc["motion"].items():
         L.append(f"  {css_name(k)}: {v};")
-    L.append("  --focus-color: var(--color-focus-ring);")
-    L.append("  /* Lưới (DEC-136); breakpoint chỉ để tra, media query ghi số trực tiếp */")
-    L.append(f"  --grid-columns: {doc['grid']['web']['columns']};")
-    L.append(f"  --grid-gutter: {px(doc['grid']['web']['gutter'])};")
+    L.append("  /* Breakpoint (DEC-324) chỉ để tra, media query ghi số trực tiếp */")
     for k, v in doc["breakpoints"].items():
         L.append(f"  --bp-{k}: {px(v)};")
     L.append("}")
     L.append("@media (prefers-reduced-motion: reduce) {")
-    L.append("  :root { --duration-fast: 0ms; --duration-medium: 0ms; --duration-slow: 0ms; }")
+    # DEC-333 (mt13): mọi duration về 0, tự theo tokens.json nên token mới không lọt
+    durs = " ".join(f"--{k.replace('/', '-')}: 0ms;" for k in doc["motion"] if k.startswith("duration"))
+    L.append(f"  :root {{ {durs} }}")
     L.append("}")
+    L.append("")
+    L.append("/* Preset chuyển động (DEC-336): chỉ dùng biến thời gian nên giảm chuyển động tự về 0 */")
+    decls = lambda d: " ".join(f"{k}: {v};" for k, v in d.items())
+    ease = lambda e: e if e == "linear" else f"var({css_name(e)})"
+    for name, p in doc.get("motionPresets", {}).items():
+        dur = f"var({css_name(p['duration'])})"
+        if p.get("multiply"):
+            dur = f"calc({dur} * {p['multiply']})"
+        if p.get("keyframes"):
+            L.append(f"@keyframes inv-{name} {{ " + " ".join(f"{at} {{ {decls(d)} }}" for at, d in p["keyframes"].items()) + " }")
+            L.append(f".anim-{name} {{ {decls(p.get('base', {}))} animation: inv-{name} {dur} {ease(p['easing'])} both; }}".replace("{  ", "{ "))
+        elif p.get("exitDuration"):
+            prop = p["transition"]
+            L.append(f".anim-{name} {{ {decls(p.get('closed', {}))} transition: {prop} var({css_name(p['exitDuration'])}) {ease(p['exitEasing'])}; }}")
+            L.append(f".anim-{name}[data-open=\"true\"] {{ {decls(p.get('open', {}))} transition: {prop} {dur} {ease(p['easing'])}; }}")
+            L.append(f".anim-{name} > * {{ overflow: hidden; min-height: 0; }}")
+        else:
+            L.append(f".anim-{name} {{ transition: {p['transition']} {dur} {ease(p['easing'])}; }}")
     L.append("")
     L.append("/* Kiểu chữ (DEC-132, DEC-133) — tên lớp = tên text style Figma */")
     for k, v in doc["textStyles"].items():
@@ -193,7 +220,7 @@ def build(doc) -> str:
         L.append(rule + " }")
     L += ["", "/* Số đều bề rộng: cột số, tiền, giờ, đếm, KPI (DEC-322) */", ".num { font-variant-numeric: tabular-nums; }", "",
           "/* Nội dung dài (DEC-322) */",
-          ".prose { font: 400 var(--type-body-size)/var(--type-body-line-height) var(--font-body); color: var(--color-text-tertiary); max-width: 72ch; }",
+          ".prose { font: 400 var(--type-body-size)/var(--type-body-line-height) var(--font-body); color: var(--color-text-tertiary); max-width: var(--width-paragraph-max); }",
           ".prose h1 { font: 400 var(--type-display-size)/var(--type-display-line-height) var(--font-title); font-synthesis: none; color: var(--color-text-primary); }",
           ".prose h2 { font: 400 var(--type-title-1-size)/var(--type-title-1-line-height) var(--font-title); font-synthesis: none; color: var(--color-text-primary); }",
           ".prose h3 { font: 400 var(--type-title-2-size)/var(--type-title-2-line-height) var(--font-title); font-synthesis: none; color: var(--color-text-primary); }",
@@ -233,6 +260,20 @@ def brand_report(doc):
     return rows, bad
 
 
+def brand_css_diff(doc):
+    """Bộ --brand-c-* của brand-tokens.css phải cùng giá trị collection Brand Invlogis; innvie/* không có bản ở đó."""
+    if not BRAND_CSS.exists():
+        return [f"thiếu {BRAND_CSS.relative_to(ROOT)}"]
+    have = {m[0]: m[1].upper() for m in re.findall(r"--brand-c-([\w-]+):\s*(#[0-9A-Fa-f]{6})", BRAND_CSS.read_text(encoding="utf-8"))}
+    out = []
+    for k, v in doc["collections"]["Brand Invlogis"]["color"].items():
+        if k.startswith("invlogis/"):
+            n = k.split("/")[1].replace("_", "-")
+            if have.get(n) != v["Value"].upper():
+                out.append(f"{k} {v['Value']} ≠ --brand-c-{n} {have.get(n)}")
+    return out
+
+
 def main():
     doc = load()
     css = build(doc)
@@ -244,6 +285,9 @@ def main():
         print("Tương phản dải màu khách:")
         print("\n".join(brows))
     bad = bad + bbad
+    bdiff = brand_css_diff(doc)
+    print("brand-tokens.css:", "LỆCH " + "; ".join(bdiff) if bdiff else "khớp collection Brand Invlogis")
+    bad = bad + bdiff
     if "--check" in sys.argv:
         stale = not OUT.exists() or OUT.read_text(encoding="utf-8") != css
         print("tokens.css:", "LỆCH json — chạy lại không có --check" if stale else "khớp json")

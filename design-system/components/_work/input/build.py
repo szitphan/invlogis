@@ -101,10 +101,10 @@ CSS_INPUT = r"""
 .ob{width:40px;height:48px;border:1px solid var(--color-border-input);border-radius:8px;display:grid;place-items:center;font:600 20px Inter;color:var(--color-text-primary);box-sizing:border-box;background:var(--color-bg-primary)}
 .ob.on{border-color:var(--color-focus-ring);box-shadow:inset 0 0 0 1px var(--color-focus-ring)}
 .otp.is-err .ob{border-color:var(--color-border-error)}.otp.is-dis .ob{background:var(--color-bg-disabled);color:var(--color-text-disabled)}
-.m .ob{width:46px;height:56px;border-radius:12px}
+.m .ob{width:46px;height:56px;border-radius:var(--radius-field)}
 /* D1 focus */
 .pv[data-D1=b] .ctl.is-focus,.pv[data-D1=b][data-state=focus] [data-live] .ctl,.pv[data-D1=b] .otp .ob.on{border-color:var(--color-focus-ring);box-shadow:inset 0 0 0 1px var(--color-focus-ring)}
-.pv[data-D1=c] .ctl.is-focus,.pv[data-D1=c][data-state=focus] [data-live] .ctl,.pv[data-D1=c] .otp .ob.on{border-color:var(--color-border-input);box-shadow:0 0 0 2px var(--color-focus-gap),0 0 0 4px var(--color-focus-ring)}
+.pv[data-D1=c] .ctl.is-focus,.pv[data-D1=c][data-state=focus] [data-live] .ctl,.pv[data-D1=c] .otp .ob.on{border-color:var(--color-border-input);outline:var(--focus-width) solid var(--color-focus-ring);outline-offset:var(--focus-offset)}
 .pv[data-D1=b] .ctl.is-err.is-focus{box-shadow:inset 0 0 0 1px var(--color-focus-ring_error)}
 /* D2 mobile nhãn trong ô */
 .mw{display:contents}
@@ -384,7 +384,7 @@ page = {
   "platform": "Nhóm A — một bộ, cỡ theo Platform (web 28 · 32 · 40, app 48). Trang chốt biến thể ghi mobile “same” — D2 hỏi lại vì DEC-207 cũ khác cấu tạo."},
  "css": CSS + CSS_INPUT, "cssScreen": SCREEN_CSS + r"""
 .login{min-height:760px;display:grid;place-items:center;background:var(--color-bg-secondary)}
-.lgc{width:400px;background:var(--color-bg-primary);border:1px solid var(--color-border-secondary);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:14px}
+.lgc{width:var(--width-xs);background:var(--color-bg-primary);border:1px solid var(--color-border-secondary);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:14px}
 .lgc .lgl{font:700 20px Inter;letter-spacing:-.3px}.lgc b{font-size:20px;line-height:28px}.lgc .s{color:var(--color-text-tertiary);font-size:13.5px;margin-top:-8px}
 .mdv2{height:1px;background:var(--color-border-secondary);margin:6px 0}
 """,

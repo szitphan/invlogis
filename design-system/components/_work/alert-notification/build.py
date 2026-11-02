@@ -133,19 +133,19 @@ table{width:100%;border-collapse:collapse}td,th{padding:11px 16px;border-bottom:
 .card .h{font:600 15px/22px Inter}
 dl{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0;font-size:13px}dt{color:var(--color-text-secondary)}dd{margin:0}
 .mrow{padding:12px 16px;border-bottom:1px solid var(--color-border-secondary);display:grid;grid-template-columns:1fr auto;gap:2px 8px}.mrow .b{font-weight:600}.mrow .sub{color:var(--color-text-secondary);font-size:13px;grid-column:1}.mrow .chip{grid-row:1/span 2;grid-column:2;align-self:center}
-.cta{height:52px;border:0;border-radius:999px;background:var(--color-action-primary);color:var(--color-text-inverse);font:600 16px Inter;margin-top:8px}
+.cta{height:52px;border:0;border-radius:var(--radius-control);background:var(--color-action-primary);color:var(--color-text-inverse);font:600 16px Inter;margin-top:8px}
 .i{flex:none;display:block}
 /* ---- màu theo tone ---- */
 .ok{--t:var(--color-text-success-primary);--ti:var(--color-fg-success-primary);--tbg:var(--color-bg-success-primary);--tbd:var(--color-border-success_subtle)}.warn{--t:var(--color-text-warning-primary);--ti:var(--color-fg-warning-primary);--tbg:var(--color-bg-warning-primary);--tbd:var(--color-border-warning_subtle)}
 .err{--t:var(--color-text-error-primary);--ti:var(--color-fg-error-primary);--tbg:var(--color-bg-error-primary);--tbd:var(--color-border-error_subtle)}.info{--t:var(--color-text-info-primary);--ti:var(--color-fg-info-primary);--tbg:var(--color-bg-info-primary);--tbd:var(--color-border-info_subtle)}
 /* ---- Toast (Notification) ---- */
-.tz{position:absolute;z-index:5;display:flex;flex-direction:column;gap:8px;width:400px;right:24px;top:80px}
+.tz{position:absolute;z-index:5;display:flex;flex-direction:column;gap:8px;width:var(--width-xs);max-width:calc(100% - 2 * var(--grid-margin));right:24px;top:80px}
 .pv[data-D4=b] .tz:not(.m){top:auto;bottom:24px}
 .pv[data-D4=c] .tz:not(.m){right:auto;left:calc(50% + 120px);transform:translateX(-50%)}
 .tz.m{left:12px;right:12px;width:auto;top:52px}
 .pv[data-D8=b] .tz.m{top:auto;bottom:76px}
-.ts{position:relative;display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;box-shadow:var(--elev-3);overflow:hidden;
- background:var(--color-bg-primary);color:var(--color-text-primary);border:1px solid var(--color-border-secondary)}
+.ts{position:relative;display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;box-shadow:var(--shadow-xl);overflow:hidden;
+ background:var(--color-bg-primary);color:var(--color-text-primary);border:1px solid var(--shadow-xl-border)}
 .ts .ib{color:var(--ti);display:grid;place-items:center}
 .ts .tx{flex:1;min-width:0;padding-top:1px}.ts .tt{font-weight:600;font-size:14px;line-height:20px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .ts .ds{color:var(--color-text-secondary);font-size:12px;line-height:18px;margin-top:2px}
@@ -160,7 +160,7 @@ dl{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0;font-size:
 .pv[data-D1=a] .ts .lk.pri{color:var(--color-text-inverse);text-decoration:underline}
 .pv[data-D1=a] .ts .ib{color:color-mix(in srgb,var(--ti) 55%,var(--color-text-inverse))}
 .pv[data-D1=a] .ts.err{background:var(--color-bg-error-solid);color:var(--color-text-white)}.pv[data-D1=a] .ts.err .ib,.pv[data-D1=a] .ts.err .ds,.pv[data-D1=a] .ts.err .lk,.pv[data-D1=a] .ts.err .cl{color:var(--color-text-white)}
-.pv[data-D1=c] .ts{background:var(--tbg);border-color:var(--tbd);box-shadow:var(--elev-3)}
+.pv[data-D1=c] .ts{background:var(--tbg);border-color:var(--tbd);box-shadow:var(--shadow-xl)}
 .pv[data-D1=c] .ts .tt{color:var(--t)}
 .cl::after,.lk::after{content:"";position:absolute;left:50%;top:50%;width:24px;height:24px;min-width:100%;transform:translate(-50%,-50%)}
 .pv[data-platform=mobile] .cl::after,.pv[data-platform=mobile] .lk::after{width:44px;height:44px}
@@ -360,7 +360,7 @@ A_COPY = {"ok": ("Tài xế đã nhận lệnh lúc 08:15.", "", ()),
           "err": ("Không tải được quy trình.", "Phần còn lại của lệnh vẫn dùng bình thường.", ("Thử lại",))}
 
 def grid(mobile):
-    w = "100%" if mobile else "400px"
+    w = "100%" if mobile else "var(--width-xs)"
     cell = lambda lab, inner: (f'<div style="display:flex;flex-direction:column;gap:6px;width:{w}">'
                                f'<div style="font:500 11px Inter;color:var(--color-text-tertiary)">{lab}</div>{inner}</div>')
     row = lambda title, cells: (f'<div style="font:600 13px Inter;margin:18px 0 8px">{title}</div>'
@@ -399,7 +399,7 @@ page["round"] = "foundation"
 page["subtitle"] = "Base component · nhóm A · vòng 2 Preview — tổ hợp đã chốt: " + " · ".join(f"{k} {v.upper()}" for k, v in PICK.items())
 page["preview"] = {"version": "2", "changes": "đã áp quyết định vòng 3: vùng bấm 24/44, nút alert app 36, viền alert đậm, padding 12, chữ phụ 12, thanh giờ 4, icon 20",
                    "pick": PICK,
-                   "blocks": [{"title": "Web", "platform": "web", "note": "Toast 400 · alert theo cột nội dung", "html": grid(False)},
+                   "blocks": [{"title": "Web", "platform": "web", "note": "Toast 384 · alert theo cột nội dung", "html": grid(False)},
                               {"title": "Mobile", "platform": "mobile", "note": "Toast và alert rộng 361 (lề 16)",
                                "frames": [grid(True)]}]}
 
@@ -418,7 +418,7 @@ for plat in ("Web", "Mobile"):
     v("Alert button", "padding-x", 12, platform=plat); v("Alert button", "radius", 8, platform=plat)
     v("Toast stack", "gap", 8, platform=plat)
     v("Toast zone", "margin", 24 if plat == "Web" else 12, platform=plat)
-v("Toast", "shadow", "elev/2"); v("Toast timer", "height", 4)
+v("Toast", "shadow", "shadow/xl"); v("Toast timer", "height", 4)
 v("Featured icon", "size", 32); v("Featured icon", "icon-size", 20); v("Featured icon ring", "width", 4); v("Icon", "icon-size", 20); v("Close icon", "icon-size", 16)
 v("Title", "font-size", 14); v("Title", "line-height", 20); v("Title", "font-weight", 600)
 v("Description", "font-size", 12); v("Description", "line-height", 18)
@@ -477,5 +477,7 @@ OUT.parent.mkdir(parents=True, exist_ok=True)
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "_lib"))
 from pvkit import tok_css_nested  # noqa: E402
 page["css"] = tok_css_nested() + page["css"]
+from icon_dec329 import apply as _dec329  # noqa
+_dec329(page)  # DEC-329: cỡ, nét, màu icon
 OUT.write_text(json.dumps(page, ensure_ascii=False, indent=1))
 print("ok", OUT, len(ideas), "ý tưởng ·", len(decisions), "điểm")

@@ -6,8 +6,8 @@
   python3 _scripts/ds-v2-icons.py figma <tên>...     # in mã JS để chạy qua use_figma (Figma MCP)
         [--page ID] [--library ID]                   #   mặc định: trang ✦ DS · Icons, khung "Thư viện icon · DS v2"
 
-Mã `figma` thêm mỗi icon thành component set `icon/<tên>` với 5 biến thể Size=12 · 14 · 16 · 20 · 24, nét 2 trên
-khung 24 co theo cỡ (DEC-300, DEC-147), màu gắn biến `color/fg/secondary`, đặt vào cuối "Lưới icon".
+Mã `figma` thêm mỗi icon thành component set `icon/<tên>` với 5 biến thể Size=12 · 14 · 16 · 20 · 24, nét trên
+khung 24 theo cỡ: 2,25 cho cỡ 16 trở xuống, 2 cho cỡ 20 và 24 (DEC-329 ic01, DEC-147), màu gắn biến `color/fg/secondary`, đặt vào cuối "Lưới icon".
 Icon đã có trên trang thì bỏ qua. Chạy với fileKey FIGMA_FILE bên dưới.
 
 Nguồn bản viền: design-system/icons/<tên>.svg nếu có (icon tự vẽ, DEC-145), không thì Lucide 1.58.0 tải từ unpkg
@@ -36,6 +36,7 @@ PAGE = "5961:221"                               # trang ✦ DS · Icons
 LIBRARY = "5968:221"                            # khung "Thư viện icon · DS v2", có con "Lưới icon"
 COLLECTION = "VariableCollectionId:5938:223"    # Semantic, chứa color/fg/secondary
 NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+FILL_ON_PATH = {"star", "pin", "flag"}          # DEC-329 ic08: bật bằng fill trên chính path Lucide, không có file -fill
 WARN_LEN = 45_000                               # mã dài hơn thì nên chia nhiều lần chạy
 
 
@@ -48,6 +49,11 @@ def inner_markup(svg: str) -> str:
     s = re.sub(r"\s+", " ", m.group(1))
     s = re.sub(r"\s*/>", "/>", s)
     return re.sub(r">\s*<", "><", s).strip()
+
+
+def fill_on_path(inner: str) -> str:
+    """Fill=On của icon trạng thái bật: giữ nguyên path Lucide, tô thêm fill."""
+    return f'<g fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{inner}</g>'
 
 
 def http_get(url: str):
@@ -119,21 +125,21 @@ def load(name: str, mean: dict, decs: dict):
         svg, source = fetch_lucide(name), f"Lucide {LUCIDE}"
         if svg is None:
             return None
-    m, has_fill = mean.get(name), fill.exists()
+    m, has_fill = mean.get(name), fill.exists() or name in FILL_ON_PATH
     if source == "tự vẽ":
         tag = ", ".join(x for x in ("tự vẽ", decs.get(name)) if x)
         full = f"{m or 'Chưa có nghĩa chuẩn'} ({tag})"
-        short, tail = full, "Lưới và nét Lucide 2 trên khung 24."
+        short, tail = full, "Lưới và nét Lucide, nét theo cỡ (icon.md mục 2)."
     else:
         full = f"{m} (bảng nghĩa DEC-146)" if m else None
-        short, tail = m or "Chưa có nghĩa chuẩn", f"{source} · nét 2 trên khung 24."
+        short, tail = m or "Chưa có nghĩa chuẩn", f"{source} · nét theo cỡ (icon.md mục 2)."
     desc = (f"Nghĩa: {full}. " if full else "Chưa có trong bảng nghĩa (DEC-146). ")
     if has_fill:
         desc += "Có bản tô (Fill=On) cho cảnh báo, lỗi, trạng thái bật (DEC-141). "
     return {
         "source": source,
         "outline": inner_markup(svg),
-        "fill": inner_markup(fill.read_text(encoding="utf-8")) if has_fill else None,
+        "fill": fill_on_path(inner_markup(svg)) if name in FILL_ON_PATH else inner_markup(fill.read_text(encoding="utf-8")) if has_fill else None,
         "meaning": m,
         "description": desc + tail,
         "label": f"{full or short} · viền và tô" if has_fill else short,
@@ -167,7 +173,7 @@ const GREY={r:95/255,g:107/255,b:122/255},INK={r:18/255,g:24/255,b:38/255};
 const T=(s,size,col,fam)=>{const t=figma.createText();t.fontName={family:fam||'Inter',style:'Regular'};t.fontSize=size;t.lineHeight={unit:'PIXELS',value:Math.round(size*1.4)};t.characters=s;t.fills=[{type:'SOLID',color:col}];return t};
 const lib=await figma.getNodeByIdAsync('__LIBRARY__');const grid=lib&&lib.findChild(n=>n.name==='Lưới icon');
 if(!grid)throw new Error('Không thấy "Lưới icon" trong khung __LIBRARY__');
-const outline=inner=>`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#121826" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+const outline=(inner,sw)=>`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#121826" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
 const filled=inner=>`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">${inner.replaceAll('currentColor','#121826')}</svg>`;
 function variant(svg,name,s,fill){const c=figma.createComponentFromNode(figma.createNodeFromSvg(svg));c.name=name;c.fills=[];
  if(fill){const body=c.children.filter(n=>'fills' in n&&n.fills.length&&!n.strokes.length);if(body.length)(body.length>1?figma.flatten(body,c,0):body[0]).name='Hình tô'}
@@ -177,7 +183,7 @@ const made=[],skipped=[];
 for(const [name,d] of Object.entries(ICONS)){
  if(page.findOne(n=>n.type==='COMPONENT_SET'&&n.name==='icon/'+name)){skipped.push(name);continue}
  const cell=figma.createAutoLayout('VERTICAL');cell.name='Ô · '+name;cell.fills=[{type:'SOLID',color:{r:249/255,g:250/255,b:252/255}}];cell.cornerRadius=12;cell.paddingLeft=cell.paddingRight=cell.paddingTop=cell.paddingBottom=12;cell.itemSpacing=6;grid.appendChild(cell);cell.resize(226,10);cell.primaryAxisSizingMode='AUTO';cell.counterAxisSizingMode='FIXED';
- const comps=SIZES.map(s=>variant(outline(d.outline),d.fill?`Size=${s}, Fill=Off`:`Size=${s}`,s));
+ const comps=SIZES.map(s=>variant(outline(d.outline,s<=16?2.25:2),d.fill?`Size=${s}, Fill=Off`:`Size=${s}`,s));
  if(d.fill)comps.push(...SIZES.map(s=>variant(filled(d.fill),`Size=${s}, Fill=On`,s,true)));
  const set=figma.combineAsVariants(comps,cell);set.name='icon/'+name;set.description=d.description;
  set.layoutMode='HORIZONTAL';set.itemSpacing=14;set.paddingLeft=set.paddingRight=set.paddingTop=set.paddingBottom=10;set.counterAxisAlignItems='CENTER';

@@ -4,7 +4,7 @@ status: stale
 status_prev: draft
 status_changed: 2026-10-14
 status_reason: "đã review upstream, không cần sửa"
-updated: 2026-10-20
+updated: 2026-11-02
 tenant_terms: [Delta, DK05, dGas, Nam Khánh, Phú Lợi, Pan Hải An]
 links:
   - docs/_product/saas-core-vs-tenant.md
@@ -19,7 +19,7 @@ links:
 
 Mỗi dòng là một chỗ mà khách khác có thể cần giá trị khác. Tài liệu nghiệp vụ ghi mã `P-…` kèm giá trị của khách trong ngoặc; phần mềm đọc giá trị từ cấu hình của từng khách.
 
-Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (các lựa chọn khách sửa được) · **Bật/tắt** (tính năng một khách dùng, một khách không).
+Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (các lựa chọn khách sửa được) · **Bật/tắt** (tính năng một khách dùng, một khách không) · **Tệp** (logo, icon khách nộp).
 
 | Mã | Tham số | Kiểu | Tầng | Mặc định sản phẩm | Delta | Ai sửa | Dùng ở | Nguồn |
 |---|---|---|---|---|---|---|---|---|
@@ -43,8 +43,13 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 | P-chu-ky-nhac-nhiet | Chu kỳ nhắc nhập nhật ký nhiệt độ, theo loại hàng lạnh | Số (giờ/lần, theo loại hàng) | Gói: Hàng lạnh | chưa chốt | chưa chốt (OQ-43) | Trưởng điều vận | Điều phối D2 | Giao nhận hàng hoá (18/9/2026) |
 | P-thoi-gian-cho-nhan-viec | Bao lâu không bấm nhận thì việc quay về cán bộ quản lý | Số (phút) | Cấu hình | chưa chốt | chưa chốt (OQ-41) | Admin khách | Điều phối 6.4 | — |
 | P-nhac-jobid-dung-cong-no | Sau bao lâu nhắc CS về JobID dừng vì công nợ | Số (ngày) | Cấu hình | chưa chốt | chưa chốt (OQ-42) | Admin khách | Điều phối 6.4 | — |
-| P-logo | Logo và tên app hiện ở góc menu, màn đăng nhập, splash mobile, splash web | Tệp logo + tên hiển thị | Cấu hình | chữ cái đầu tên khách trên ô vuông | Bộ vector `design/brand/delta/logo/` (DEC-325): `delta-primary.svg`, nền tối `delta-reverse.svg`, ký hiệu `delta-symbol.svg` | Admin khách | Khung trang (menu, đăng nhập, splash) | Chốt UI 12/10/2026 (design.md § Thương hiệu theo khách, § Splash web) |
-| P-mau-logo | Màu nền ô logo. Chỉ ô logo đổi màu; nút, menu, tab, link và màu trạng thái giữ trung tính | Mã màu | Cấu hình | #262626 | #1B7B46 (user chốt 13/10/2026) | Admin khách | Khung trang (menu, đăng nhập) | Chốt UI 12/10/2026 (design.md § Thương hiệu theo khách) |
+| P-logo | Logo và tên app, thay Invlogis ở góc menu, màn đăng nhập, splash app, splash web, màn chủ app, email giao dịch, chứng từ in. Logo thật đặt thẳng trên nền | Tệp logo + tên hiển thị | Lõi, Cấu hình | chữ cái đầu tên khách trên ô vuông | Bộ vector `design/brand/delta/logo/` (DEC-325): `delta-primary.svg`; chứng từ in `delta-original.svg` | Admin khách | Khung trang (menu, đăng nhập, splash); app; email; chứng từ in | Chốt UI 12/10/2026 (design.md § Thương hiệu theo khách, § Splash web); review Logo (DEC-326) |
+| P-logo-nen-toi | Logo trên nền Tối. Khách chưa nộp thì đặt tệp chính trên ô trắng; splash thì cả màn giữ nền trắng | Tệp, tuỳ chọn | Cấu hình | không có (tệp chính trên ô trắng) | `delta-reverse.svg` | Admin khách | Chế độ Tối: menu, đăng nhập, splash, app | Review Logo (DEC-326) |
+| P-logo-vuong | Logo vuông, bản nền sáng và bản nền Tối, cho menu thu gọn 64 và thanh trên mobile web. Thiếu thì chữ cái đầu trên ô | Hai tệp, tuỳ chọn | Cấu hình | không có (chữ cái đầu trên ô) | `delta-symbol.svg`, nền Tối `delta-symbol-reverse.svg` | Admin khách | Menu web thu gọn, thanh trên mobile web | Review Logo (DEC-326) |
+| P-mau-logo | Màu ô chữ cái đầu, chỉ tô khi hiện chữ cái đầu; có logo thật thì không tô ô. Cũng là đầu vào chọn dải màu khách (`design-system/foundations/color.md` mục 3.3) | Mã màu | Cấu hình | #262626 | #1B7B46 (user chốt 13/10/2026) | Admin khách | Khung trang (menu, đăng nhập, splash) | Chốt UI 12/10/2026 (design.md § Thương hiệu theo khách); review Logo (DEC-326) |
+| P-favicon | Favicon tab trình duyệt theo khách | Tệp | Cấu hình | chưa chốt (đề xuất: bộ Invlogis) | `design/brand/delta/logo/favicon.svg`, `favicon-16/32/48.png` | Admin khách | Tab trình duyệt | Review Logo (DEC-326) |
+| P-icon-app | Icon app iOS, Android theo khách. Mỗi khách một bản app trên store (`saas-core-vs-tenant.md` Mục 7 việc 3, DEC-326) | Tệp | Cấu hình | chưa chốt (đề xuất: bộ Invlogis) | `design/brand/delta/logo/app-icon-1024.png`, `apple-touch-icon-180.png`, `android-foreground-432.png`, `android-background-432.png` | innvie, khi phát hành bản app | Icon app | Review Logo (DEC-326) |
+| P-hien-phat-trien-boi | Dòng "Được phát triển bởi innvie" cao 20 ở chân đăng nhập, splash | Bật/tắt | Cấu hình | bật | chưa chốt (OQ) | Admin khách | Đăng nhập, splash | Review Logo (DEC-326) |
 | P-mau-ma-quy-trinh | Mẫu mã quy trình: tiền tố, thành phần (chi nhánh, năm), số chữ số, chu kỳ đánh lại số | Mẫu mã | Cấu hình | `QT-[Mã chi nhánh]-[YY]-[XXXX]`, đánh lại theo năm | `QT-[Mã chi nhánh]-[YY]-[XXXX]`, đánh lại theo năm | Admin khách | Liên quy trình BR-004 | Chốt 12/10/2026 (cross-process-flow OQ-10) |
 | P-khoang-gps-toi-da | Khoảng hở tối đa giữa 2 điểm GPS liền nhau mà phần mềm còn dùng để kết luận xe qua hay tránh trạm vé | Số (giây hoặc mét) | Cấu hình | chưa chốt | chưa chốt (OQ-48) | Admin khách | Điều phối E10 | VIS mục 2.2.6 |
 | P-dang-nhap-bang-sdt | Cho đăng nhập bằng số điện thoại ngoài tên tài khoản, email | Bật/tắt | Cấu hình | tắt | tắt | Admin khách | Tài khoản A1 | Phỏng vấn account-access 15/10 |
@@ -61,6 +66,7 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 | P-chinh-sach-mat-khau | Độ dài tối thiểu và loại ký tự bắt buộc của mật khẩu | Danh sách | Cấu hình | 8 ký tự, chữ thường, chữ hoa, số, ký tự đặc biệt | như mặc định | Admin khách | Tài khoản B4 | SRS Web tr.271 |
 | P-so-ngay-lich-su-hoat-dong | Số ngày lịch sử hoạt động người dùng xem được | Số (ngày) | Cấu hình | 90 ngày | 90 ngày | Admin khách | Tài khoản D2 | Phỏng vấn account-access 15/10 |
 | P-ngon-ngu-giao-dien | Ngôn ngữ giao diện cho chọn | Danh sách | Cấu hình | Tiếng Việt, Tiếng Anh | Tiếng Việt, Tiếng Anh | Admin khách | Tài khoản D3 | SRS Web tr.162 (bỏ tiếng Nhật) |
+| P-link-tai-app | Liên kết tải app trên App Store, Google Play của từng khách, gắn vào hai huy hiệu cửa hàng. Mỗi khách một bản app (DEC-326) | Liên kết theo khách | Cấu hình | chưa chốt | chưa chốt | innvie, khi phát hành bản app | Email kích hoạt tài khoản, trang đăng nhập khi mở trên điện thoại | DEC-335 ms05, DEC-326 |
 | P-huong-dan-cap-tai-khoan | Dòng hướng dẫn người chưa có tài khoản trên màn đăng nhập | Danh sách (nội dung) | Cấu hình | "Chưa có tài khoản? Liên hệ quản trị viên." | như mặc định | Admin khách | Tài khoản D5 | SRS Mobile tr.46 |
 | P-han-link-dat-lai | Hiệu lực link đặt lại mật khẩu trên web | Số (phút) | Cấu hình | chưa chốt | 30 phút | Admin khách | Tài khoản B1 | SRS Web tr.264 |
 | P-han-tao-mat-khau | Thời gian để lưu mật khẩu mới sau khi mở link hoặc nhập đúng mã đặt lại | Số (phút) | Cấu hình | 15 phút | 15 phút | Admin khách | Tài khoản BR-023 | Review SRS account-access 15/10 |
@@ -120,4 +126,29 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 | P-thoi-gian-luu-log | Thời gian giữ log hệ thống và log gọi AI | Số (tháng) | Cấu hình | chưa chốt | 6 tháng | Admin khách | PRD 9.1 | Phần mềm Delta 3.0 (16/10/2026) mục 6.2 |
 | P-gioi-han-luot-goi-ai | Số lượt gọi AI tối đa cho một tác vụ, vượt thì ngắt và chuyển làm tay | Số (lượt) | Cấu hình | chưa chốt | 10 | Admin khách | PRD 9.1 | Phần mềm Delta 3.0 (16/10/2026) mục 7.5 |
 | P-gioi-han-thoi-gian-tac-vu-ai | Thời gian chạy tối đa của một tác vụ AI, vượt thì ngắt và chuyển làm tay | Số (phút) | Cấu hình | chưa chốt | 3 phút | Admin khách | PRD 9.1 | Phần mềm Delta 3.0 (16/10/2026) mục 7.5 |
-| P-quy-tac-ghep-mooc | Mức ghép (Được, Cảnh báo, Chặn, Cần hỏi) cho từng loại mooc × cấu hình container (rỗng, 1×20, 2×20, 1×40, 1×45) khi xếp tổ hợp | Bảng | Lõi, Cấu hình | theo `design/v2/vehicles.md` mục 5.1 | chưa chốt (OQ-66, OQ-67 Điều phối) | Admin khách | Điều phối F10 | lab-combo (11/10/2026), DEC-267 |
+| P-phi-lai-xe-tra-ho | Danh sách loại phí rút gọn lái xe được chọn khi tạo Yêu cầu nợ hóa đơn trên Lệnh | Danh sách | Cấu hình | chưa chốt | Hàng xuất: phí hạ hàng · Hàng nhập: phí hạ vỏ, vệ sinh, sửa chữa container | Admin khách | Trả hộ A1 | Quy trình quản lý quỹ & Thanh toán (06/10/2026) mục 5.4 |
+| P-so-cang-bai-goi-y | Số cảng, bãi gần nhất gợi ý cho lái xe khi chọn người nhận từ danh mục | Số (điểm) | Cấu hình | chưa chốt | 3–5 | Admin khách | Trả hộ A3 | Phân hệ APAS (17/10/2026) mục 3.1.3 |
+| P-qr-hieu-luc-toi-thieu | Hiệu lực còn lại tối thiểu của QR động khi gửi duyệt và ngay trước khi gửi ngân hàng; dưới thì trả lại người tạo | Số (phút) | Cấu hình | chưa chốt | 3 phút | Admin khách | Trả hộ A6 | Phân hệ APAS (17/10/2026) mục 3.1.3 |
+| P-qr-hieu-luc-goc-ngan | Hiệu lực gốc của QR động coi là quá ngắn: cảnh báo và gợi ý cách trả khác | Số (phút) | Cấu hình | chưa chốt | 15 phút (chặn hay cảnh báo: OQ-2 Trả hộ) | Admin khách | Trả hộ A6 | Phân hệ APAS (17/10/2026) mục 2.1.4, 3.1.4 |
+| P-han-muc-duyet-chi | Giới hạn duyệt bước 1 của cán bộ quản lý; vượt thì chuyển duyệt bước 2 | Danh sách (cấp × ₫/lệnh) | Cấu hình | chưa chốt | chưa chốt (OQ-3 Trả hộ) | Admin khách | Trả hộ A8 | Quy trình quản lý quỹ & Thanh toán (06/10/2026) mục 5.4.2 |
+| P-han-muc-dong-chu-tai-khoan | Hạn mức duyệt OTP của đồng chủ tài khoản trên ngân hàng theo cấp, mỗi lệnh và mỗi ngày; phần mềm định tuyến trước theo hạn mức còn lại | Danh sách (cấp × ₫/lệnh × ₫/ngày) | Cấu hình | chưa chốt | Quản lý nghiệp vụ 15 triệu/lệnh, 50 triệu/ngày · quản lý hiện trường 10 triệu/lệnh, 30 triệu/ngày | Admin khách | Trả hộ A8 | Phân hệ APAS (17/10/2026) mục 3.1 |
+| P-han-tra-hoa-don | Thời hạn người tạo phải trả hóa đơn (hoặc trả tiền) cho Yêu cầu nợ hóa đơn đã duyệt | Số (ngày làm việc) | Cấu hình | chưa chốt | 3 ngày làm việc từ ngày duyệt | Admin khách | Trả hộ B1, B4 | Quy trình quản lý quỹ & Thanh toán (06/10/2026) mục 4.5 |
+| P-khoa-cuoi-thang | Số ngày cuối tháng mà Yêu cầu nợ hóa đơn được duyệt thì tạm dừng quyền tạo từ ngày làm việc đầu tháng sau nếu chưa trả hóa đơn | Số (ngày) | Cấu hình | chưa chốt | 2 ngày cuối tháng | Admin khách | Trả hộ B4 | Quy trình quản lý quỹ & Thanh toán (06/10/2026) mục 4.5 |
+| P-thoi-gian-cho-otp | Thời gian chờ chủ tài khoản duyệt OTP trước khi nhắc qua SMS | Số (phút) | Cấu hình | chưa chốt | chưa chốt (đề xuất 30 phút) | Admin khách | Trả hộ A14 | Phỏng vấn 14/10 |
+| P-thoi-gian-cho-ngan-hang | Thời gian ngân hàng ngừng kết nối trước khi xuất tệp lệnh chi và cho chuyển cách trả | Số (giờ) | Cấu hình | chưa chốt | chưa chốt (đề xuất 2 giờ) | Admin khách | Trả hộ A15 | Phỏng vấn 14/10; Phần mềm Delta 3.0 (16/10/2026) mục 7.1 |
+| P-lech-ngay-khop-hoa-don | Số ngày tối đa giữa ngày lập hóa đơn và ngày giao dịch để tự khớp 1-1 | Số (ngày) | Cấu hình | 3 | 3 ngày | Admin khách | Hóa đơn B5 | Phân hệ APAS (17/10/2026) mục 3.3.2 Bước 3 |
+| P-han-tra-soat-giao-dich | Thời gian giao dịch lệch tiền nằm trong Hàng chờ tra soát trước khi cảnh báo kế toán | Số (giờ) | Cấu hình | 24 | 24 giờ | Admin khách | Hóa đơn B6 | Phân hệ APAS (17/10/2026) mục 3.3.2 |
+| P-tu-hoan-tien-qua-han | Tự tạo phiếu chi hoàn tiền khi giao dịch quá hạn tra soát chưa định danh | Bật/tắt | Cấu hình | tắt | tắt (OQ-2 Hóa đơn) | Admin khách | Hóa đơn B6 | Phân hệ APAS (17/10/2026) mục 3.4.1; phỏng vấn 14/10 |
+| P-cap-duyet-hoa-don-tien-ca-nhan | Các bước duyệt hóa đơn nhân viên trả bằng tiền cá nhân | Danh sách (cấp duyệt) | Cấu hình | chưa chốt | 3 bước: Cán bộ quản lý → Kế toán → Ban giám đốc (OQ-10 Hóa đơn) | Admin khách | Hóa đơn B8 | Phân hệ APAS (17/10/2026) mục 3.3.4 |
+| P-cua-so-nghi-khop | Số ngày tìm giao dịch cùng nhân viên, cùng số tiền để chặn chi 2 lần cho hóa đơn tiền cá nhân | Số (ngày) | Cấu hình | 7 | 7 ngày | Admin khách | Hóa đơn B9 | Phỏng vấn 14/10 |
+| P-gioi-han-tep-hoa-don | Dung lượng và số tệp tối đa mỗi hóa đơn tải lên | Số (MB, tệp) | Cấu hình | chưa chốt | 50 MB, 5 tệp | Admin khách | Hóa đơn B1 | Phỏng vấn 14/10 |
+| P-ky-so-thu-lai | Lịch tự thử lại khi ký số hóa đơn đầu ra lỗi kết nối | Số (khoảng chờ + số lần) | Cấu hình | 1, 5, 15 phút; 5 lần | 1, 5, 15 phút; tối đa 5 lần (OQ-11 Hóa đơn) | Admin khách | Hóa đơn C4 | Phân hệ APAS (17/10/2026) mục 4.2 |
+| P-dong-bo-ke-toan-thu-lai | Chu kỳ tự gửi lại dữ liệu sang phần mềm kế toán khi kết nối lỗi | Số (phút) | Cấu hình | 15 | mỗi 15 phút, tới khi thông | Admin khách | Hóa đơn D2 | Phần mềm Delta 3.0 (16/10/2026) mục 7.2 |
+| P-han-tai-hoa-don | Hạn nhân viên, lái xe tải hóa đơn chi phí của tháng | Số (ngày trong tháng) | Cấu hình | chưa chốt | ngày 12 | Admin khách | Hóa đơn E2 | Phân hệ APAS (17/10/2026) mục 3.4.4 |
+| P-nhac-truoc-han-tai-hoa-don | Nhắc trước hạn tải hóa đơn bao nhiêu ngày | Số (ngày) | Cấu hình | 3 | 3 ngày | Admin khách | Hóa đơn E2 | Phỏng vấn 14/10 |
+| P-han-day-du-lieu-ke-toan | Hạn đẩy dữ liệu hóa đơn đã định danh sang phần mềm kế toán | Số (ngày trong tháng) | Cấu hình | chưa chốt | ngày 15 | Admin khách | Hóa đơn D2, E1 | Phân hệ APAS (17/10/2026) mục 3.4.4 |
+| P-nhom-phi | Mã nhóm thuế gắn cho hóa đơn để phần mềm kế toán lập tờ khai | Danh sách | Cấu hình | chưa chốt | Đầu ra DT02 · đầu vào CP01 quản lý chung, CP02 hàng bán, CP03 trả hộ, CP04 tài sản cố định và đầu tư, CP05 khác (OQ-12 Hóa đơn) | Admin khách | Hóa đơn E1 | Phân hệ APAS (17/10/2026) mục 3.4.2.1, 5.1 |
+| P-nguong-khau-tru-tncn | Mức chi cho cá nhân không ký hợp đồng lao động từ đó trở lên phải khấu trừ thuế TNCN | Số (₫/lần) | Lõi, Cấu hình | chưa chốt | 2.000.000 ₫ | Admin khách | Hóa đơn E5 | Phân hệ APAS (17/10/2026) mục 3.4.2.2 |
+| P-ty-le-khau-tru-tncn | Tỷ lệ khấu trừ thuế TNCN khi chi cho cá nhân không ký hợp đồng lao động | Số (%) | Lõi, Cấu hình | chưa chốt | 10% | Admin khách | Hóa đơn E5 | Phân hệ APAS (17/10/2026) mục 3.4.2.2 |
+| P-han-muc-du-no-tam-ung | Dư nợ tạm ứng tối đa của nhân viên trước khi cảnh báo người duyệt khi có tạm ứng mới | Số (₫/người) | Cấu hình | chưa chốt | chưa chốt (theo chức danh, Quy trình quản lý quỹ mục 6.2; OQ-1 Quỹ) | Admin khách | Quỹ S1 | Phỏng vấn 14/10 |
+| P-quy-tac-ghep-mooc | Mức ghép (Được, Cảnh báo, Chặn, Cần hỏi) cho từng loại mooc × cấu hình container (rỗng, 1×20, 2×20, 1×40, 1×45) khi xếp tổ hợp | Bảng | Lõi, Cấu hình | theo `design-system/foundations/vehicle.md` mục 5.1 | chưa chốt (OQ-66, OQ-67 Điều phối) | Admin khách | Điều phối F10 | lab-combo (11/10/2026), DEC-267 |

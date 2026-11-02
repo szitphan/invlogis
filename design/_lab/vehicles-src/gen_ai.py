@@ -6,7 +6,7 @@ Chạy:
   python3 design/_lab/vehicles-src/gen_ai.py                 # cả 9 loại
   python3 design/_lab/vehicles-src/gen_ai.py t02 t03         # chỉ vài loại
   python3 design/_lab/vehicles-src/gen_ai.py t02 --ref refs/user/u06.png --model gemini-3-pro-image-preview
-Ảnh gốc (nền xanh) giữ ở vehicles-src/raw/ để soát; ảnh dùng ở assets/vehicles/b-ai/.
+Ảnh gốc (nền xanh) giữ ở vehicles-src/raw/ để soát; ảnh dùng ở design-system/assets/vehicles/.
 """
 import argparse, base64, json, os, pathlib, ssl, sys, time, urllib.request, urllib.error
 import numpy as np

@@ -34,8 +34,8 @@ Tài liệu định hướng cấp dự án của Delta (kiến trúc 3 giai đo
 | 6.3 Quyền truy cập dữ liệu (Access control) | ➡ organization | | phân quyền theo hàng dữ liệu theo chi nhánh, đội xe, luồng AI — khớp "phân vùng dữ liệu theo chi nhánh" của `organization` |
 | 6.4 Sao lưu cơ sở dữ liệu (Database backup) | ➖ | | phương án sao lưu sẽ phát triển trước GĐ3, việc hạ tầng |
 | VII. Rủi ro vận hành | ✅ | `docs/_product/prd.md` Mục 9.1 | mục con giao riêng ở 7.1–7.5 |
-| 7.1 API Ngân hàng gặp sự cố | ➡ payment-on-behalf | | xuất lệnh chi ra file chuẩn (Excel/XML theo ngân hàng) để kế toán tải lên Internet Banking duyệt tay |
-| 7.2 API Phần mềm kế toán Misa gặp sự cố | ➡ invoice-management | | hàng chờ cô lập + tự gửi lại mỗi 15 phút đến khi thông |
+| 7.1 API Ngân hàng gặp sự cố | ✅ | `docs/payment-on-behalf/brainstorms/payment-on-behalf.md` A15 | xuất lệnh chi ra file chuẩn (Excel/XML theo ngân hàng) để kế toán tải lên Internet Banking duyệt tay |
+| 7.2 API Phần mềm kế toán Misa gặp sự cố | ✅ | `docs/invoice-management/brainstorms/invoice-management.md` D2 | hàng chờ cô lập + tự gửi lại mỗi 15 phút đến khi thông |
 | 7.3 API Bản đồ (Google Maps / Việt MAP) gặp sự cố | ➡ transport-dispatch | | điều vận nhập tay km cung đường + phí trạm vé, Lệnh vẫn phát hành, số liệu đánh dấu cho thanh tra rà lại |
 | 7.4 Quản lý chi phí Token | ➖ | | thử nghiệm LLM nội bộ (Llama 3, Qwen) trên cloud riêng — quyết định hạ tầng |
 | 7.5 Xử lý vòng lặp vô hạn (Infinite Loop / Token Bleeding) | ✅ | `docs/_product/prd.md` Mục 9.1 | ngưỡng thành P-gioi-han-luot-goi-ai, P-gioi-han-thoi-gian-tac-vu-ai |

@@ -2,7 +2,7 @@
 type: design-component
 status: stale
 status_prev: draft
-updated: 2026-10-28
+updated: 2026-11-02
 links:
   - design-system/architecture.md
   - design-system/foundations/README.md
@@ -43,10 +43,10 @@ bằng hàng "← cấp trên" (xem `application/header-navigation.md` mục Mob
 | Khung | auto layout ngang, khoảng `space/xxs` 2, căn giữa dọc | ôm nội dung, co được |
 | Mục (tầng cha) | `type/label` 14/20 nét 500, `color/text/tertiary`; hover `color/text/primary` | tối đa 160 |
 | Trang hiện tại | text style `type/heading` (14/20 600), `color/text/primary`; Type Text: khung giãn theo chỗ còn lại, tối đa 240 — thiếu chỗ thì co và cắt trước | tối đa 240 |
-| Nhà | icon `home` 16 `color/fg/quaternary` | vùng bấm 24 |
+| Nhà | icon `home` 16 `color/fg/tertiary` | vùng bấm 24 |
 | Phân cách | icon `chevron-right` 14 `color/border/primary`, ô 16 | — |
 | Nút "…" | icon `dots` 16, rộng 24; mở: nền `color/bg/selected` bo `radius/sm` | vùng bấm 24 |
-| Menu tầng ẩn | `Dropdown menu`: rộng tối thiểu 240, bo `radius/lg`, lề 4, bóng `elev/3`; mục cao 36 lề `space/lg` bo `radius/sm` | cách nút 8 |
+| Menu tầng ẩn | `Dropdown menu`: rộng tối thiểu 240, bo `radius/lg`, lề 4, bóng `shadow/lg`, viền `shadow/lg-border`; mục cao 36 lề `space/lg` bo `radius/sm` | cách nút 8 |
 | Type Button | mục cao 28, lề ngang `space/md`, bo `radius/sm`; hover nền `color/bg/primary_hover`; trang hiện tại nền `color/bg/secondary` | ô phân cách 12 |
 | Type Text Line | mục cao 36; trang hiện tại vạch dưới 2 `color/focus/ring`; hover vạch `color/border/primary` | — |
 | Vòng focus | `focus/width` 2 cách `focus/offset` 2 `color/focus/ring`, bo `radius/sm` | — |
@@ -102,6 +102,10 @@ Một cỡ (14/20). Type Button 28, Text Line 36, Text 20.
 ### Kiểm máy
 
 28/10: layout_audit 0 lỗi; a11y_audit 0 fail 0 review; auditDesignSystem 0,99 (khoảng cách 4 đều — có từ bản cũ, giữ).
+
+### Chuyển động
+
+Menu tầng ẩn: `duration/fast`, trượt 4; vào `easing/standard`, ra `easing/exit`. Tooltip chờ 300 mới hiện. Luật chung: `foundations/motion.md` (DEC-333).
 
 ## Mobile
 

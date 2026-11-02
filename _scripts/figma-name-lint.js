@@ -2,6 +2,8 @@
 // Cách chạy: đọc file này, thay ROOTS bằng id Section của component vừa dựng, dán làm `code` cho
 // reqwise figma_write. Chỉ đọc, không sửa gì. Kết quả: { fail: [...], pass } — fail ≠ 0 thì sửa rồi chạy lại.
 const ROOTS = ['<sectionId>'];
+// Tuỳ chọn (DEC-329 ic15): dán tên icon từ design-system/handoff/icons.json (meanings[].icon) để báo instance icon ngoài bảng nghĩa.
+const ICON_MEANINGS = [];
 
 const MAX = { set: 32, section: 32, frame: 40, text: 24, prop: 20, value: 16 };
 const ROLE = /^(Title|Subtitle|Group title|Label|Row label|Col label|Description|Value|Caption|Helper|Hint|Note|Text|Placeholder|Error message|Code|Name|Route|Vehicle|Driver|Time|Count)\b/;
@@ -30,6 +32,7 @@ async function walk(id, inComponent) {
       if (name.length > MAX.text) bad(n, `layer chữ > ${MAX.text}`, 'đặt theo vai trò: Title, Subtitle, Label, Value, Note…');
       else if (byContent && !ROLE.test(name) && name.length > 12) bad(n, 'layer chữ lấy nội dung làm tên', 'đặt theo vai trò');
     }
+    if (ICON_MEANINGS.length && n.type === 'INSTANCE' && /^icon\//.test(name) && !ICON_MEANINGS.includes(name.slice(5))) bad(n, 'icon ngoài bảng nghĩa', 'tra design-system/foundations/icon.md mục 7');
     if (/DEC-\d+|\d+:\d+/.test(name)) bad(n, 'tên chứa mã DEC / mã node', 'chuyển vào description');
     if (n.childCount && n.type !== 'INSTANCE') await walk(n.id, inComponent || n.type === 'COMPONENT');
   }

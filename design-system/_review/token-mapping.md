@@ -55,4 +55,4 @@ links:
 | `color/chip/orange/fg` | systemOrange | — | `color.text.accent.orange` |
 | `color/overlay/scrim` | — (hệ thống tự làm mờ) | scrim | `color.blanket` |
 
-Token chưa có ánh xạ (mới ở DEC-258): `color/status/*` 8 vai, `color/shadow/*`, `color/focus/gap`.
+Token chưa có ánh xạ (mới ở DEC-258): `color/status/*` 8 vai, `color/shadow/*`.

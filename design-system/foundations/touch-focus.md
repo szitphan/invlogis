@@ -22,6 +22,7 @@ links:
 - **Focus:** vòng 2px, cách mép 2px, màu `color/focus/ring` (than chì) cho mọi khách, không theo dải màu khách
   (DEC-170). Nút Danger: vòng focus màu danger (`color/focus/ring_error`, DEC-198, DEC-318). Ô nhập
   đang gõ: viền 2px cùng màu than chì.
-- **Khe focus (DEC-241, DEC-258):** khe 2px giữa control và vòng tô `color/focus/gap` = nền trang (trắng; Dark 950). Hết nền
-  xám nên không còn chế độ Canvas. Vòng là L0 `.focus / Ring` dùng chung.
+- **Khe focus (DEC-327, thay phần khe của DEC-241, DEC-258):** web dùng `outline` 2px, `outline-offset` 2px, khe trong suốt nên đúng trên
+  mọi nền (nền phụ, dòng chọn, cảnh báo), không có token khe. Trên Figma khung vòng `.focus / Ring` không tô nền. Không dùng `box-shadow`
+  để vẽ vòng; không thêm style focus-ring gộp bóng của Untitled, vòng là lớp riêng nên bóng thẻ giữ nguyên.
 

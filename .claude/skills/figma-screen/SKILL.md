@@ -147,7 +147,7 @@ coi là thiếu ở mục tự kiểm (c).
   theo nội dung, tối thiểu bằng chiều cao thiết bị; riêng hàng Responsive theo Bước 4 mục 9.
 * Userflow chưa ghi `primary_device` → gợi ý ghi vào để lần sau không hỏi lại.
 * **Desktop web → luôn kèm hàng Responsive** (user chốt 15/10/2026): vẽ xong bản 1920 thì vẽ thêm
-  **1440** và **mobile web 393** theo *Responsive Behavior › Breakpoints* của `design.md`, chỉ state
+  **1280**, **1024** (DEC-324, thay 1440) và **mobile web 393** theo *Responsive Behavior › Breakpoints* của `design.md`, chỉ state
   mặc định. Mặc định chỉ vẽ **màn đại diện**, mỗi kiểu bố cục 1 màn (vd xác thực chia đôi, trang cài
   đặt P4, danh sách), trừ khi user muốn vẽ đủ. Hàng này là dòng riêng trong bảng plan L1. Cách dựng:
   Bước 4 mục 9.
@@ -304,12 +304,12 @@ Thứ tự dựng:
    * Thấy nên khác bảng (đổi chữ, bỏ/thêm element) → vẫn vẽ theo bảng, ghi vào báo cáo mục
      "Đề xuất đổi so với bảng 5 cột" cho user quyết (đổi thật thì qua `/cr`).
 9. **Hàng Responsive** (khi thiết bị là Desktop web — Bước 2.2):
-   * *Đặt:* hàng `Responsive` (hàng cuối của ma trận), ô thuộc cột màn gốc; 1440 rồi 393 xếp ngang,
+   * *Đặt:* hàng `Responsive` (hàng cuối của ma trận), ô thuộc cột màn gốc; 1280, 1024 rồi 393 xếp ngang,
      cách 100px, toạ độ theo `flow-matrix.py plan`. Nới Section flow và các section cha, dời section bên
      dưới xuống để không đè nhau.
-   * *Tên:* `<screenId> · <slug> · 1440` / `· 393`; mobile web vẫn dùng `web` (feature có app riêng
+   * *Tên:* `<screenId> · <slug> · 1280` / `· 1024` / `· 393`; mobile web vẫn dùng `web` (feature có app riêng
      thì tên `mob` đã thuộc bản app).
-   * *1440:* `clone` bản 1920 rồi `resize`; panel có bề rộng cố định thì đặt lại theo tỷ lệ.
+   * *1280, 1024:* `clone` bản 1920 rồi `resize`; panel có bề rộng cố định thì đặt lại theo tỷ lệ.
    * *393:* `clone` rồi chuyển đổi: ẩn menu trái + thanh trên desktop; thêm thanh trên mobile 48px
      (`.MobileNavToggle` + tên đơn vị + `Avatar`); nội dung lề 16; hàng ngang → `layoutMode: VERTICAL`,
      con FILL ngang + **HUG dọc** (không HUG thì nội dung bị cắt); nav phụ dọc → hàng tab cuộn ngang

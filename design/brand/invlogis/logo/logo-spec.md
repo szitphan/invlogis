@@ -1,10 +1,11 @@
 ---
 type: brand-logo
 status: approved
-updated: 2026-10-14
+updated: 2026-11-02
 links:
   - design/brand/brand-brief.md
   - design/brand/_drafts/logo-final/v-options.md
+  - design-system/foundations/logo.md
 ---
 
 # Quy chuẩn logo invlogis × innvie
@@ -34,11 +35,13 @@ Hướng A · Lụa (DEC-072), chữ v theo phương án 1 · Gradient nhẹ (DE
 | Vùng an toàn | Chừa trống ít nhất **1 x** ở cả bốn phía. Không có chữ, hình hay mép khung nào lọt vào. Thanh điều hướng chật thì tối thiểu 0,5 x. |
 | Logo chữ, màn hình | Cao ≥ **20px** (khoảng 72px ngang), tính chiều cao toàn logo. Ở 16px vẫn đọc được (đã thử trong sheet) nhưng chỉ dùng khi bắt buộc. |
 | Logo chữ, bản in | Cao ≥ **6 mm** (khoảng 22 mm ngang) |
-| Ký hiệu `invlogis-symbol.svg` | Cao ≥ **48px** / 8 mm. Nhỏ hơn thì dùng bản favicon (thân dày hơn, vẽ khớp lưới điểm ảnh). |
+| Ký hiệu `invlogis-symbol.svg` | Cao ≥ **48px** / 8 mm. Nhỏ hơn thì dùng bản favicon (thân dày hơn, vẽ khớp lưới điểm ảnh): `invlogis-symbol-small.svg`, `-reverse`. |
 | Lockup "by innvie" | Logo chính cao ≥ **48px** / 12 mm, để chữ "innvie" không nhỏ quá 6px x |
 | Lockup có khẩu hiệu | Logo chính cao ≥ **64px** / 16 mm |
 
 ## 3. Dùng biến thể nào, khi nào
+
+**Trong phần mềm chỉ 2 biến thể** (DEC-326, `design-system/foundations/logo.md` mục 14.2): logo ngang `invlogis-primary` / `-reverse` và ký hiệu `invlogis-symbol-small` / `-reverse`. Các file khác cho in ấn, deck, marketing.
 
 | File | Khi nào dùng |
 |---|---|
@@ -47,11 +50,12 @@ Hướng A · Lụa (DEC-072), chữ v theo phương án 1 · Gradient nhẹ (DE
 | `invlogis-mono-black.svg` | In một màu, fax, đóng dấu, khắc. Dùng khi không in được màu. |
 | `invlogis-mono-white.svg` | Trên nền cobalt `#2F43DB`, trên ảnh tối hoặc vùng gradient sáng (chỗ mà gradient của chữ i bị chìm) |
 | `invlogis-symbol.svg` / `-reverse` / `-mono` | Ảnh đại diện mạng xã hội, hình chìm, điểm nhấn trong slide. Dùng khi chữ "invlogis" đã xuất hiện gần đó. |
-| `invlogis-stacked.svg` | Khung vuông hoặc dọc: splash, bìa dọc, gian hàng. Chữ i trong tên tô màu mực để không lặp lụa hai lần. |
-| `invlogis-by-innvie.svg` (+ `-reverse`) | Chân trang web, trang cuối deck, hợp đồng, báo giá, hoá đơn |
+| `invlogis-symbol-small.svg` / `-reverse` | Ký hiệu cao dưới 48px trong phần mềm: menu thu gọn. Tách từ `favicon.svg`, cùng nét, màu cố định theo chế độ của app. |
+| `invlogis-stacked.svg` | Khung vuông hoặc dọc ngoài phần mềm: bìa dọc, gian hàng, in ấn, deck. Chữ i trong tên tô màu mực để không lặp lụa hai lần. Splash trong phần mềm dùng logo ngang (DEC-326). |
+| `invlogis-by-innvie.svg` (+ `-reverse`) | Chân trang web, trang cuối deck, hợp đồng, báo giá, hoá đơn của innvie. Chứng từ khách in từ phần mềm mang logo khách (DEC-326). |
 | `invlogis-tagline.svg` / `-tagline-en.svg` | Bìa deck, landing page, banner ra mắt. Khẩu hiệu: "Khai mở cách vận hành mới." / "Open a new way to operate." |
 | `innvie-logo.svg` / `-mono` | Chỉ dùng cho pháp nhân: chữ ký, con dấu số, giấy tờ pháp lý |
-| `favicon.svg` | Favicon chính. Tự đổi sang tông periwinkle khi trình duyệt ở chế độ tối. |
+| `favicon.svg` | Favicon chính cho tab trình duyệt. Tự đổi sang tông periwinkle khi trình duyệt ở chế độ tối. |
 | `favicon-16/32/48.png` | Favicon dự phòng. Màu đặc được chọn để đạt ≥ 3:1 trên tab sáng và tab tối. |
 | `apple-touch-icon-180.png`, `app-icon-1024.png` | Icon iOS / web app, phương án B "Lụa vắt" (`app-icon-options.png`). Chữ i lớn, lệch phải, thân là dải lụa vắt cong ra khỏi khung, nền lụa cobalt. Nền đầy, không trong suốt, hệ điều hành tự bo góc. |
 | `android-foreground-432.png` + `android-background-432.png` | Adaptive icon, phương án B. Chấm i và đầu thân nằm trong vòng an toàn 66dp. Dải lụa cố ý vắt ra ngoài vùng 72dp, bị mặt nạ cắt cũng không sao. |
@@ -62,7 +66,7 @@ Hướng A · Lụa (DEC-072), chữ v theo phương án 1 · Gradient nhẹ (DE
 - Trong lockup, "by innvie" cao bằng 30% logo chính, căn phải theo chữ s, đặt dưới đuôi g một khoảng 0,1 x. Chữ "by" màu xám chàm `#4A5380`, chữ "innvie" màu mực, chấm i đầu màu cobalt.
 - Khi innvie đứng riêng trên cùng một mặt với Invlogis (chân hợp đồng, slide cuối), logo innvie cao không quá **50%** logo Invlogis và đặt xa Invlogis.
 - innvie dùng cùng hệ: Lexend 340, chữ i đầu có hình lụa nhưng không gradient. Không tạo ký hiệu riêng cho innvie.
-- Splash hiện ghi "Được phát triển bởi innvie" (DEC-037). Lockup "by innvie" chỉ là đề xuất thay thế, founder duyệt rồi mới đổi.
+- Chân đăng nhập, splash ghi "Được phát triển bởi innvie", cao 20px, tắt được theo khách (`P-hien-phat-trien-boi`, DEC-326). Không dùng "Vận hành trên" hay lockup "by innvie" ở chân. innvie vẫn ở màn Giới thiệu và giấy tờ.
 
 ## 5. Cấm
 
@@ -94,6 +98,8 @@ Logo là đồ hoạ nên ngưỡng là 3:1 (WCAG 1.4.11). Phần chữ mực đ
 | Favicon PNG thân `#4F62EE` / tab sáng · / tab tối `#202124` | 4.59 · 3.31 | đạt (≥ 3) |
 | Favicon PNG chấm `#6577F2` / tab sáng · / tab tối | 3.62 · 4.20 | đạt (≥ 3) |
 | Khẩu hiệu `#4A5380` / giấy | 6.97 | đạt (AA chữ thường) |
+| Ký hiệu nhỏ thân `#4F62EE` · chấm `#6577F2` / trắng | 4.87 · 3.84 | đạt (≥ 3) |
+| Ký hiệu nhỏ đảo thân `#A3B0FF` · chấm `#D6DCFF` / nền Tối `#191919` | 8.55 · 13.01 | đạt (≥ 3) |
 
 ## 7. Dựng lại
 
@@ -105,5 +111,7 @@ python3 _src/iconboard.py && python3 ../_tools/render.py _src/app-icon-options.h
 python3 _src/vopt.py && python3 ../_tools/render.py _src/v-options.html v-options.png --size 1600x900
 python3 _src/sheet.py && python3 ../_tools/render.py _src/logo-sheet.html logo-sheet.png --size 1600x2000
 ```
+
+`invlogis-symbol-small.svg`, `-reverse` tách tay từ `favicon.svg`: giữ nguyên 2 đường `path`, bỏ `<style>`, thay bằng màu sáng hoặc màu tối của favicon. Dựng lại favicon thì tách lại.
 
 Font gốc: `_src/LexendVF.ttf` (Lexend có trục độ đậm, OFL, lấy từ google/fonts) và `_src/BeVietnamPro-400/500.ttf` (OFL). Cả hai đủ dấu tiếng Việt (`vn_glyphs.py`).

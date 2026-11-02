@@ -158,7 +158,7 @@ def acc_menu(n=None, r=None, i=None, show=' data-show="state:account"', cls="am"
     return (f'<div class="{cls}"{show} role="menu">'
             f'<div class="mh"><span class="av lg">{i or INIT}</span><div><b>{n or NAME_FULL}</b><span>{r or ROLE}</span></div></div>'
             + it("user", "Thông tin cá nhân") + it("key", "Đổi mật khẩu")
-            + it("globe", "Ngôn ngữ", '<span class="mv">Tiếng Việt</span>')
+            + it("globe", "Ngôn ngữ", '<span class="mv" style="display:inline-flex;align-items:center;gap:var(--space-xs)"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex:none"><circle cx="12" cy="12" r="12" fill="#DA251D"/><path d="M12 5.2l1.6 4.9h5.1l-4.1 3 1.6 4.9-4.2-3-4.2 3 1.6-4.9-4.1-3h5.1z" fill="#FFCD00"/></svg>Tiếng Việt</span>')
             + '<div class="msep"></div>' + it("out", "Đăng xuất", cls="dng") + '</div>')
 
 def notif_panel():
@@ -259,7 +259,7 @@ def m_sheet(n=None, r=None, i=None):
     return (f'<div class="mscr"></div><div class="msh" role="dialog" aria-label="Tài khoản"><i class="grab"></i>'
             f'<div class="mh"><span class="av lg">{i or INIT}</span><div><b>{n or NAME_FULL}</b><span>{r or ROLE}</span></div></div>'
             + it("user", "Thông tin cá nhân") + it("key", "Đổi mật khẩu")
-            + it("globe", "Ngôn ngữ", '<span class="mv">Tiếng Việt</span>') + '<div class="msep"></div>'
+            + it("globe", "Ngôn ngữ", '<span class="mv" style="display:inline-flex;align-items:center;gap:var(--space-xs)"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex:none"><circle cx="12" cy="12" r="12" fill="#DA251D"/><path d="M12 5.2l1.6 4.9h5.1l-4.1 3 1.6 4.9-4.2-3-4.2 3 1.6-4.9-4.1-3h5.1z" fill="#FFCD00"/></svg>Tiếng Việt</span>') + '<div class="msep"></div>'
             + it("out", "Đăng xuất", cls="dng") + '</div>')
 
 def m_notif():
@@ -385,10 +385,10 @@ mark{background:var(--color-utility-yellow-100);color:inherit;border-radius:2px;
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
 .kpi{border:1px solid var(--color-border-secondary);border-radius:12px;padding:12px 14px;display:grid}.kpi span{color:var(--color-text-tertiary);font-size:13px}.kpi b{font:600 24px/32px Inter}
 /* bảng tìm tính năng */
-.pal{position:absolute;top:52px;right:196px;width:440px;background:var(--color-bg-primary_alt);border:1px solid var(--color-border-secondary);border-radius:12px;box-shadow:var(--elev-2);z-index:20;overflow:hidden}
+.pal{position:absolute;top:52px;right:196px;width:440px;background:var(--color-bg-primary_alt);border:1px solid var(--color-border-secondary);border-radius:var(--radius-overlay);box-shadow:var(--shadow-xl);z-index:20;overflow:hidden}
 .pv[data-D2=c] .pal{right:auto;left:50%;transform:translateX(-50%);width:480px}
 .pv[data-D2=b] .pal{top:96px;left:50%;right:auto;transform:translateX(-50%);width:600px;z-index:31}
-.scr{position:absolute;inset:0;background:var(--color-bg-overlay);z-index:30}
+.scr{position:absolute;inset:0;background:var(--color-bg-overlay);backdrop-filter:blur(var(--backdrop-blur-lg));z-index:30}
 .pin{display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;border-bottom:1px solid var(--color-border-secondary);font-size:16px}
 .pin span{flex:1}
 .pg{font:600 11px/16px Inter;letter-spacing:.05em;text-transform:uppercase;color:var(--color-text-tertiary);padding:12px 16px 4px}
@@ -402,7 +402,7 @@ mark{background:var(--color-utility-yellow-100);color:inherit;border-radius:2px;
 .pf{display:flex;gap:14px;padding:8px 16px;border-top:1px solid var(--color-border-secondary);font-size:12px;color:var(--color-text-tertiary);background:var(--color-bg-secondary)}
 .pf span:last-child{margin-left:auto}
 /* menu tài khoản */
-.am{position:absolute;top:52px;right:24px;width:280px;background:var(--color-bg-primary_alt);border:1px solid var(--color-border-secondary);border-radius:12px;box-shadow:var(--elev-3);z-index:20;padding:6px}
+.am{position:absolute;top:52px;right:24px;width:280px;background:var(--color-bg-primary_alt);border:1px solid var(--color-border-secondary);border-radius:var(--radius-menu);box-shadow:var(--shadow-lg);z-index:20;padding:var(--space-xs)}
 .am .mh{display:flex;gap:10px;align-items:center;padding:8px 10px 12px;border-bottom:1px solid var(--color-border-secondary);margin-bottom:6px}
 .am .mh b{display:block;font-weight:600}.am .mh>div>span{display:block;font-size:12px;line-height:16px;color:var(--color-text-tertiary)}
 .mi{display:flex;align-items:center;gap:10px;height:36px;padding:0 10px;border-radius:8px;color:var(--color-text-secondary);font-weight:500}
@@ -411,7 +411,7 @@ mark{background:var(--color-utility-yellow-100);color:inherit;border-radius:2px;
 .mi.dng,.mi.dng span{color:var(--color-text-error-primary)}
 .msep{height:1px;background:var(--color-border-secondary);margin:6px 0}
 /* panel thông báo (Notification Center, chỉ minh hoạ vị trí neo) */
-.np{position:absolute;top:52px;right:72px;width:380px;background:var(--color-bg-primary_alt);border:1px solid var(--color-border-secondary);border-radius:12px;box-shadow:var(--elev-2);z-index:20;overflow:hidden}
+.np{position:absolute;top:52px;right:72px;width:380px;background:var(--color-bg-primary_alt);border:1px solid var(--color-border-secondary);border-radius:12px;box-shadow:var(--shadow-lg);z-index:20;overflow:hidden}
 .np .nh{display:flex;justify-content:space-between;align-items:center;padding:12px 16px}.np .lk{font-size:13px;color:var(--color-text-secondary);font-weight:600}
 .ntab{display:flex;gap:16px;padding:0 16px;border-bottom:1px solid var(--color-border-secondary);font-weight:600;color:var(--color-text-tertiary)}
 .ntab span{padding-bottom:8px}.ntab .on{color:var(--color-text-primary);box-shadow:inset 0 -2px 0 var(--color-accent-solid)}
@@ -683,7 +683,7 @@ CSS3 = ".pv[data-theme=dark] .pv{" + DARK + "}" + r"""
 .acc.only{padding:2px;height:36px;width:36px;justify-content:center;border-radius:50%;margin:0}
 .pv[data-D4=b] .hd .acc{padding:2px;width:36px;height:36px;justify-content:center;border-radius:50%}
 .elw{position:relative;display:inline-flex}.bc .ci.el.op{background:var(--color-bg-selected);border-radius:6px;color:var(--color-text-primary)}
-.elm{position:absolute;top:28px;left:-8px;min-width:220px;background:var(--color-bg-primary_alt);border:1px solid var(--color-border-secondary);border-radius:10px;box-shadow:var(--elev-2);padding:4px;z-index:5}
+.elm{position:absolute;top:28px;left:-8px;min-width:220px;background:var(--color-bg-primary_alt);border:1px solid var(--color-border-secondary);border-radius:10px;box-shadow:var(--shadow-lg);padding:4px;z-index:5}
 .elm a{display:flex;align-items:center;gap:8px;height:36px;padding:0 10px;border-radius:6px;color:var(--color-text-primary);font-weight:500;white-space:nowrap}
 .elm a:hover{background:var(--color-bg-primary_hover)}
 .static .pal,.static .am{position:static;transform:none}
@@ -691,8 +691,8 @@ CSS3 = ".pv[data-theme=dark] .pv{" + DARK + "}" + r"""
 .ex{display:flex;flex-direction:column;gap:6px;width:max-content}
 .lab{font:500 11px Inter;color:var(--color-text-tertiary)}
 .mhd .acc.m{padding:0;height:36px;width:36px;justify-content:center;margin:0}
-.mscr{position:absolute;inset:0;background:var(--color-bg-overlay);z-index:30}
-.msh{position:absolute;left:0;right:0;bottom:0;background:var(--color-bg-primary_alt);border-radius:16px 16px 0 0;padding:8px 8px 24px;z-index:31}
+.mscr{position:absolute;inset:0;background:var(--color-bg-overlay);backdrop-filter:blur(var(--backdrop-blur-lg));z-index:30}
+.msh{position:absolute;left:0;right:0;bottom:0;background:var(--color-bg-primary_alt);border-radius:var(--radius-overlay) var(--radius-overlay) 0 0;padding:8px 8px 24px;z-index:31}
 .msh .grab{display:block;width:36px;height:4px;border-radius:2px;background:var(--color-bg-quaternary);margin:0 auto 8px}
 .msh .mh{display:flex;gap:12px;align-items:center;padding:8px 12px 14px;border-bottom:1px solid var(--color-border-secondary);margin-bottom:6px}
 .msh .mh b{display:block}.msh .mh>div>span{display:block;font-size:13px;line-height:18px;color:var(--color-text-tertiary)}
@@ -855,7 +855,7 @@ v("Breadcrumb separator", "icon-size", 14); v("Breadcrumb separator", "width", 1
 v("Breadcrumb home", "icon-size", 16); v("Breadcrumb ellipsis", "width", 24, interactive=True, hitArea=24)
 v("Breadcrumb button", "height", 28, interactive=True, hitArea=28); v("Breadcrumb button", "padding-x", 8); v("Breadcrumb button", "radius", 6)
 v("Breadcrumb button hover", "background", "#F5F5F5", state="hover"); v("Breadcrumb line", "height", 36); v("Breadcrumb line", "border-width", 2)
-v("Ellipsis menu", "min-width", 220); v("Ellipsis menu", "radius", 10); v("Ellipsis menu", "padding", 4); v("Ellipsis menu", "shadow", "elev/3")
+v("Ellipsis menu", "min-width", 220); v("Ellipsis menu", "radius", 10); v("Ellipsis menu", "padding", 4); v("Ellipsis menu", "shadow", "shadow/lg")
 v("Ellipsis menu item", "height", 36, interactive=True, hitArea=36); v("Ellipsis menu item", "padding-x", 10); v("Ellipsis menu item", "radius", 6)
 v("Search", "width", 280, **W_); v("Search", "height", 36, **W_, control=True, interactive=True, hitArea=36); v("Search", "radius", 8)
 v("Search", "padding-left", 10); v("Search", "padding-right", 8); v("Search", "gap", 8); v("Search", "icon-size", 16)
@@ -863,7 +863,7 @@ v("Search", "border-color", "#737373", role="border", on="#FFFFFF"); v("Search h
 v("Search focus", "border-color", "#262626", role="border", on="#FFFFFF", state="focus")
 v("Search placeholder", "color", "#737373", role="text", on="#FFFFFF"); v("Search value", "color", "#171717", role="text", on="#FFFFFF")
 v("Kbd", "font-size", 11); v("Kbd", "line-height", 16); v("Kbd", "padding-x", 4); v("Kbd", "radius", 4); v("Kbd", "color", "#737373", role="text", on="#FFFFFF", hint=True)
-v("Palette", "width", 440, **W_); v("Palette", "radius", 12); v("Palette", "shadow", "elev/3"); v("Palette", "border-color", "#E5E5E5", role="decorative", on="#FFFFFF")
+v("Palette", "width", 440, **W_); v("Palette", "radius", 12); v("Palette", "shadow", "shadow/xl"); v("Palette", "border-color", "#E5E5E5", role="decorative", on="#FFFFFF")
 v("Palette group label", "font-size", 11); v("Palette group label", "line-height", 16); v("Palette group label", "font-weight", 600)
 v("Palette group label", "color", "#737373", role="text", on="#FFFFFF"); v("Palette group label", "padding-x", 16); v("Palette group label", "padding-top", 12)
 v("Palette row", "min-height", 44, interactive=True, hitArea=44); v("Palette row", "padding-x", 16); v("Palette row", "gap", 10)
@@ -884,7 +884,7 @@ v("Bell count", "background", "#B42318"); v("Bell count", "color", "#FFFFFF", ro
 v("Avatar", "size", 32); v("Avatar", "radius", 9999); v("Avatar", "font-size", 12); v("Avatar", "background", "#F5F5F5")
 v("Avatar", "color", "#525252", role="text", on="#F5F5F5"); v("Avatar", "border-color", "#E5E5E5", role="decorative", on="#F5F5F5")
 v("Account button", "size", 36, **W_, interactive=True, hitArea=36); v("Account button", "padding", 2)
-v("Account menu", "width", 280, **W_); v("Account menu", "radius", 12); v("Account menu", "padding", 6); v("Account menu", "shadow", "elev/3")
+v("Account menu", "width", 280, **W_); v("Account menu", "radius", 12); v("Account menu", "padding", 6); v("Account menu", "shadow", "shadow/lg")
 v("Account menu header", "gap", 10); v("Account menu header", "padding-x", 10); v("Account menu avatar", "size", 40)
 v("Account menu role", "font-size", 12); v("Account menu role", "line-height", 16); v("Account menu role", "color", "#737373", role="text", on="#FFFFFF")
 v("Menu item", "height", 36, **W_, interactive=True, hitArea=36); v("Menu item", "padding-x", 10); v("Menu item", "gap", 10); v("Menu item", "radius", 8)
@@ -990,5 +990,7 @@ if OUT.exists() and "proto" in json.loads(OUT.read_text()) and "--force" not in 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "_lib"))
 from pvkit import tok_css_nested  # noqa: E402
 page["css"] = tok_css_nested() + page["css"]
+from icon_dec329 import apply as _dec329  # noqa
+_dec329(page)  # DEC-329: cỡ, nét, màu icon
 OUT.write_text(json.dumps(page, ensure_ascii=False, indent=1))
 print("ok", OUT, len(ideas), "ý tưởng", len(decisions), "điểm", len(screens), "màn")

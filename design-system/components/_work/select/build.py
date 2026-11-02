@@ -149,13 +149,13 @@ CSS_SEL = r"""
 /* app */
 .fs{position:absolute;inset:0;background:var(--color-bg-primary_alt);z-index:9;display:flex;flex-direction:column}
 .fs .fs-h{height:52px;display:flex;align-items:center;gap:8px;padding:44px 16px 0;box-sizing:content-box;font:600 17px Inter}
-.fs .msr{margin:8px 16px;border:1px solid var(--color-border-primary);border-radius:12px;height:44px;padding:0 12px}
+.fs .msr{margin:8px 16px;border:1px solid var(--color-border-primary);border-radius:var(--radius-control);height:44px;padding:0 12px}
 .fs .fs-b{flex:1;overflow:auto;padding:0 8px}
 .fs .ro{padding:12px}
 .whl{display:flex;flex-direction:column;align-items:center;padding:8px 0 16px;font:400 18px/40px Inter;color:var(--color-text-tertiary)}
 .whl .on{color:var(--color-text-primary);font-weight:500;background:var(--color-bg-selected);border-radius:10px;width:calc(100% - 32px);text-align:center}
-.mn.vgm{box-shadow:var(--elev-2);max-height:none}
-.sht.static,.fs.static{position:relative;border-radius:16px;max-height:none;box-shadow:none;border:1px solid var(--color-border-secondary)}
+.mn.vgm{box-shadow:var(--shadow-lg);max-height:none}
+.sht.static,.fs.static{position:relative;border-radius:var(--radius-overlay);max-height:none;box-shadow:none;border:1px solid var(--color-border-secondary)}
 .fs.static .fs-h{padding-top:0}
 """
 

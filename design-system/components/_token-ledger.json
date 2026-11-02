@@ -504,8 +504,9 @@
      "Mobile": 3
     },
     "use": "Badge Color/Outline/Modern: bo ô đếm SM, MD 3 (DEC-303)",
-    "replacement": null,
-    "status": "pending-round-2"
+    "replacement": "radius/xxs",
+    "status": "merged",
+    "removed": "2026-11-02"
    },
    "chip/count-radius-lg": {
     "original": {
@@ -1138,8 +1139,9 @@
      "Mobile": 28
     },
     "use": "Bo sheet chọn nguồn file (lệch DEC-259, user chốt) (DEC-307)",
-    "replacement": null,
-    "status": "pending-round-2"
+    "replacement": "radius/overlay",
+    "status": "merged",
+    "removed": "2026-11-02"
    },
    "upload/required-gap": {
     "original": {
@@ -1443,7 +1445,9 @@
     },
     "use": "Cao khung ảnh 3/4 trước cho thẻ mobile (DEC-266)",
     "replacement": null,
-    "status": "pending-round-2"
+    "status": "kept-component",
+    "dec": "DEC-334",
+    "note": "Giữ tầng Component của Vehicle Card (vh01)"
    },
    "vehicle/q-md-w": {
     "original": {
@@ -1452,7 +1456,10 @@
     },
     "use": "Khung ảnh 3/4 trước (16:10) cho thẻ web (DEC-266)",
     "replacement": null,
-    "status": "pending-round-2"
+    "status": "removed",
+    "removed": "2026-11-02",
+    "dec": "DEC-334",
+    "note": "Xoá, chỉ còn tỉ lệ 16:10 ở foundation (vh01, vh02)"
    },
    "vehicle/q-md-h": {
     "original": {
@@ -1461,7 +1468,10 @@
     },
     "use": "Cao khung ảnh 3/4 trước cho thẻ web (DEC-266)",
     "replacement": null,
-    "status": "pending-round-2"
+    "status": "removed",
+    "removed": "2026-11-02",
+    "dec": "DEC-334",
+    "note": "Xoá, chỉ còn tỉ lệ 16:10 ở foundation (vh01, vh02)"
    },
    "vehicle/q-lg-w": {
     "original": {
@@ -1470,7 +1480,9 @@
     },
     "use": "Khung ảnh 3/4 trước (16:10) cho đầu trang chi tiết phương tiện (DEC-266)",
     "replacement": null,
-    "status": "pending-round-2"
+    "status": "kept-component",
+    "dec": "DEC-334",
+    "note": "Giữ tầng Component, là rộng tối đa, app trải theo màn (vh02)"
    },
    "vehicle/q-lg-h": {
     "original": {
@@ -1479,7 +1491,10 @@
     },
     "use": "Cao khung ảnh 3/4 trước cho đầu trang chi tiết phương tiện (DEC-266)",
     "replacement": null,
-    "status": "pending-round-2"
+    "status": "removed",
+    "removed": "2026-11-02",
+    "dec": "DEC-334",
+    "note": "Xoá, chỉ còn tỉ lệ 16:10 ở foundation (vh01, vh02)"
    },
    "vehicle/scale-sm": {
     "original": {
@@ -1487,9 +1502,11 @@
      "Mobile": "size/md"
     },
     "use": "Tỉ lệ thật px/m cho hình ghép tổ hợp trong cột danh sách; số để tính, không gắn trực tiếp vào layer (DEC-266)",
-    "replacement": "size/md",
-    "status": "merged",
-    "removed": "2026-11-01"
+    "replacement": null,
+    "status": "removed",
+    "removed": "2026-11-01",
+    "dec": "DEC-334",
+    "note": "Thành hằng số vehicles.json → scale_px_per_m, không mượn size/* (vh03)"
    },
    "vehicle/scale-md": {
     "original": {
@@ -1497,9 +1514,11 @@
      "Mobile": "size/xl"
     },
     "use": "Tỉ lệ thật px/m cho khối chi tiết, form, thẻ app; số để tính, không gắn trực tiếp vào layer (DEC-266)",
-    "replacement": "size/xl",
-    "status": "merged",
-    "removed": "2026-11-01"
+    "replacement": null,
+    "status": "removed",
+    "removed": "2026-11-01",
+    "dec": "DEC-334",
+    "note": "Thành hằng số vehicles.json → scale_px_per_m, không mượn size/* (vh03)"
    },
    "vehicle/scale-lg": {
     "original": {
@@ -1507,9 +1526,11 @@
      "Mobile": "size/5xl"
     },
     "use": "Tỉ lệ thật px/m cho trang tài liệu, dàn xe; số để tính, không gắn trực tiếp vào layer (DEC-266)",
-    "replacement": "size/5xl",
-    "status": "merged",
-    "removed": "2026-11-01"
+    "replacement": null,
+    "status": "removed",
+    "removed": "2026-11-01",
+    "dec": "DEC-334",
+    "note": "Thành hằng số vehicles.json → scale_px_per_m, không mượn size/* (vh03)"
    },
    "vehicle/thumb-radius-xs": {
     "original": {
@@ -1517,9 +1538,11 @@
      "Mobile": "radius/sm"
     },
     "use": "Bo ô Vehicle Thumb XS (radius/sm) (DEC-266)",
-    "replacement": "radius/sm",
+    "replacement": "radius/inner",
     "status": "merged",
-    "removed": "2026-11-01"
+    "removed": "2026-11-01",
+    "dec": "DEC-334",
+    "note": "Thumb một vai radius/inner 8 ở cả 3 cỡ (vh04)"
    },
    "vehicle/thumb-radius-sm": {
     "original": {
@@ -1527,9 +1550,11 @@
      "Mobile": "radius/md"
     },
     "use": "Bo ô Vehicle Thumb SM (radius/md) (DEC-266)",
-    "replacement": "radius/md",
+    "replacement": "radius/inner",
     "status": "merged",
-    "removed": "2026-11-01"
+    "removed": "2026-11-01",
+    "dec": "DEC-334",
+    "note": "Thumb một vai radius/inner 8 ở cả 3 cỡ (vh04)"
    },
    "vehicle/thumb-radius-md": {
     "original": {
@@ -1537,9 +1562,11 @@
      "Mobile": "radius/lg"
     },
     "use": "Bo ô Vehicle Thumb MD (radius/lg) (DEC-266)",
-    "replacement": "radius/lg",
+    "replacement": "radius/inner",
     "status": "merged",
-    "removed": "2026-11-01"
+    "removed": "2026-11-01",
+    "dec": "DEC-334",
+    "note": "Thumb một vai radius/inner 8 ở cả 3 cỡ (vh04)"
    },
    "notification/action-gap": {
     "original": {
@@ -1780,6 +1807,22 @@
    "status/danger-bg": "bg/error/primary",
    "status/danger-border": "border/error",
    "chart/8": "utility/neutral/500"
+  }
+ },
+ "motion": {
+  "collection": "6. Platform · Component sizes",
+  "dec": "DEC-333",
+  "note": "Token Component chuyển động chờ đợt 2 (mt09). Để mục riêng: mục size là số đo, spacing.py khoá số lượng của nó.",
+  "tokens": {
+   "spinner/period": {
+    "original": {
+     "Web": "1000ms",
+     "Mobile": "1000ms"
+    },
+    "use": "Chu kỳ một vòng Spinner, Button đổi từ 0,8 giây. CSS hiện ghi calc(var(--duration-slow) * 2) cho tới khi có token.",
+    "replacement": null,
+    "status": "pending-round-2"
+   }
   }
  }
 }

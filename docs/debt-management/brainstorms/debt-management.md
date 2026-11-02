@@ -40,10 +40,16 @@ Ranh giới với `invoice-management` (DEC-251): hoá đơn đầu vào, hoá �
 | SRC-03 | Quy trình cung cấp dịch vụ tổng quát | 5.3 Quy trình quản lý nợ phải trả |  |
 | SRC-03 | Quy trình cung cấp dịch vụ tổng quát | 5.4 Quy trình quản lý nợ phải thu |  |
 
-## 4. Open Questions
+## 4. Ghi nhận trước phỏng vấn
+
+Từ phỏng vấn SIM 14/10/2026 và Phân hệ APAS (17/10/2026) mục 2.1.2, khi tách hóa đơn sang `invoice-management`:
+
+- C5 [SOP to-be] [Lõi] Nhận biến động số dư (sổ phụ) từ ngân hàng theo thời gian thực (dùng chung bộ nối ngân hàng của `payment-on-behalf` A16), tìm mã khách hàng, số hóa đơn, bảng kê trong nội dung chuyển khoản, gạch nợ phải thu. Tiền về không nhận ra (thiếu số hóa đơn, chuyển gộp) vào "Tiền về chờ gạch nợ" cho kế toán gạch tay. Số nợ quá hạn là nguồn cho `service-delivery` cảnh báo, chặn tạo JobID khi nợ xấu.
+
+## 5. Open Questions
 
 Chưa có — sinh khi phỏng vấn.
 
-## 5. Next Steps
+## 6. Next Steps
 
 - `/brainstorm debt-management` — phỏng vấn đầy đủ từ các mục nguồn ở Mục 3

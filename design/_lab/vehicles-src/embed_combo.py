@@ -6,7 +6,7 @@ from PIL import Image
 
 lab = pathlib.Path(__file__).resolve().parent.parent
 src = lab / "lab-combo.html"
-b_ai = lab / "assets" / "vehicles" / "b-ai"
+b_ai = lab.parent.parent / "design-system" / "assets" / "vehicles"
 html = src.read_text(encoding="utf-8")
 
 TR = ["t02", "n05", "n06", "n08", "n09"]

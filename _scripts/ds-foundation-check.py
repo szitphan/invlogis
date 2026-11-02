@@ -382,7 +382,7 @@ def check_num(row, tk, fams):
     visible = diff > 0 if typo else diff > 2
     close = diff <= 2 or diff <= best * 0.1
     if diff > max(8, val * 0.25):
-        # token chung gần nhất quá xa — kéo về sẽ vỡ hình, không gợi ý (user 28/10: width 16 → width/xs 320)
+        # token chung gần nhất quá xa — kéo về sẽ vỡ hình, không gợi ý (user 28/10: width 16 → width/xxs 320)
         why = f"thang chung gần nhất {name} = {fmt(best)} lệch quá xa, không kéo về được"
         if val in other:
             why = f"trùng số với {', '.join(other[val][:2])} nhưng đó là token của component khác; " + why
@@ -481,8 +481,8 @@ def check_row(row, tk, fams):
         elif v in tk["effects"]:
             res = {"cat": "ok", "tokens": [v], "bind": {"token": v, "css": tk["effects"][v]}}
         else:
-            res = {"cat": "new", "visible": True, "to": {"token": "elev/1", "value": "elev/1", "css": tk["effects"].get("elev/1")},
-                   "note": f"bóng tự do `{v}` — chọn elev/1…3 hoặc thêm effect style"}
+            res = {"cat": "new", "visible": True, "to": {"token": "shadow/xs", "value": "shadow/xs", "css": tk["effects"].get("shadow/xs")},
+                   "note": f"bóng tự do `{v}` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*"}
     else:
         res = check_num(row, tk, fams)
     broken = rules(row, tk, fams)

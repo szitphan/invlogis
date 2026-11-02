@@ -1,7 +1,8 @@
 ---
 type: brainstorm
 feature: transport-dispatch
-status: draft
+status: stale
+status_prev: draft
 updated: 2026-10-21
 links:
   - docs-input/sop/giao-nhan-hang-hoa/giao-nhan-hang-hoa.md
@@ -130,7 +131,7 @@ Tần suất chưa đo được, ghi định tính. Dòng có ★ là tác vụ 
 - F6 [Mới] [Lõi] [Gói: Nhiên liệu] Cấp dầu trên Lệnh gắn với định mức phương tiện; vượt định mức đi phiếu cấp nhiên liệu riêng như hiện có (loại phiếu theo danh mục của khách). [Gói: Nhiên liệu] Dầu mua ngoài theo hoá đơn lẻ: lưu lượng dầu dư làm căn cứ tạo phiếu cấp bù (hiện chưa lưu).
 - F7 [Mới] [Lõi] Hạn chuẩn bị giấy tờ đặt theo từng Lệnh.
 - F8 [Mới] [Lõi] Toạ độ và chi phí đường bộ lấy VETC làm nguồn chuẩn khi lệch với Vietmap.
-- F10 [Mới] [Lõi] [Cấu hình] Xếp tổ hợp đầu kéo – mooc – container kiểm theo `P-quy-tac-ghep-mooc` (Delta: chưa chốt, OQ-66, OQ-67): mức Chặn thì không cho chọn; dữ liệu nhập từ nguồn khác (AI đọc chứng từ, sửa Lệnh) ra cấu hình Chặn thì báo đỏ, không giao lái xe; Cảnh báo, Cần hỏi có dấu. Số container kiểm chữ số cuối ISO 6346. Nguồn lab-combo, `design/v2/vehicles.md` mục 5 (DEC-267).
+- F10 [Mới] [Lõi] [Cấu hình] Xếp tổ hợp đầu kéo – mooc – container kiểm theo `P-quy-tac-ghep-mooc` (Delta: chưa chốt, OQ-66, OQ-67): mức Chặn thì không cho chọn; dữ liệu nhập từ nguồn khác (AI đọc chứng từ, sửa Lệnh) ra cấu hình Chặn thì báo đỏ, không giao lái xe; Cảnh báo, Cần hỏi có dấu. Số container kiểm chữ số cuối ISO 6346. Nguồn lab-combo, `design-system/foundations/vehicle.md` mục 5 (DEC-267).
 - F11 [Mới] [Lõi] Mỗi vị trí container trên tổ hợp có trạng thái riêng, độc lập trạng thái Lệnh: Chưa có số · Vỏ rỗng · Đang đóng (chưa niêm chì) · Có hàng · Đang đổi vỏ · Kiểm hoá · Đã hạ; container lạnh thêm nhiệt độ cài và nguồn điện.
 
 **Nhóm I — dữ liệu vận hành xe trên Lệnh (VIS 08/10/2026, phỏng vấn 14–15/10)**

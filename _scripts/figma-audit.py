@@ -18,7 +18,7 @@ Mã kiểm:
   K2 cùng vai trò (cùng tên layer) mà khác giá trị giữa các màn
   K3 nút: cùng nhãn khác biến thể/cỡ giữa các màn; >1 nút Primary trong một nhóm
   K4 icon (kể cả icon bị thay trong instance): cỡ, độ dày nét, màu nét, icon giữ chỗ, icon theo hành động,
-     cùng nhãn khác icon, vector tự vẽ
+     cùng nhãn khác icon, vector tự vẽ, icon ngoài bảng nghĩa DS v2 (DEC-329 ic15)
   K5 khối tự dựng trùng tên component (nghi tách rời) — đầu vào cho /figma-component --scan
   K6 mã bản ghi cùng loại khác giá trị trong một flow — cần người soát
 
@@ -109,6 +109,14 @@ def button_variant(n):
 
 def norm_label(s):
     return re.sub(r"\s+", " ", s).strip().lower()
+
+
+def parse_meaning_icons(path="design-system/handoff/icons.json"):
+    """Bảng nghĩa icon DS v2 (icon.md mục 7, qua handoff) → {icon/<tên>}. Không đọc được → rỗng, bỏ qua kiểm."""
+    try:
+        return {"icon/" + m["icon"] for m in json.loads(Path(path).read_text(encoding="utf-8"))["meanings"]}
+    except (OSError, ValueError, KeyError):
+        return set()
 
 
 def parse_action_icons(design_md):
@@ -282,6 +290,11 @@ def audit(frames, action_icons, flow_of, var_names):
         if len(combos) > 1:
             det = " · ".join(f"{v}/{s}: {', '.join(sorted(f))}" for (v, s), f in combos.items())
             rep.add("Trung", "K3", f"Nút \"{lb}\" khác biến thể/cỡ giữa các màn — {det}", "")
+    # K4 icon ngoài bảng nghĩa (DEC-146, DEC-329 ic15): mỗi nghĩa một icon, tra bảng chứ không tự chọn
+    meaning = parse_meaning_icons()
+    for i, f in sorted(icon_use.items()):
+        if meaning and i not in meaning and i not in PLACEHOLDER_ICONS:
+            rep.add("Trung", "K4", f"`{i}` ngoài bảng nghĩa icon (design-system/foundations/icon.md mục 7) — {len(f)} màn; đổi sang icon đúng nghĩa khi dựng lại ở vòng 6", "")
     # K4 cùng nhãn khác icon
     for lb, icons in icon_by_label.items():
         if len(icons) > 1:

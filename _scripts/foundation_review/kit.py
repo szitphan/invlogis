@@ -66,33 +66,34 @@ mark{background:color-mix(in srgb,#00A2FF 28%,transparent);color:inherit;padding
 .tp-scroll{overflow-x:auto;padding-bottom:8px}.tp-row{display:flex;gap:16px;align-items:flex-start;width:max-content}
 /* màn demo — mọi số đo đọc từ token, đề xuất đè ở .tp-f.tp-prop */
 .tp-f{--d-logo:24px;background:var(--color-bg-primary);color:var(--color-text-primary);border:1px solid var(--color-border-secondary);border-radius:var(--radius-card);overflow:hidden;font-family:var(--font-body);position:relative}
-.tp-web{width:1180px;display:grid;grid-template-columns:216px minmax(0,1fr);min-height:560px}.tp-webs{width:680px;min-height:520px}.tp-webc{width:680px;min-height:320px}
-.tp-app{width:375px;min-height:720px;display:flex;flex-direction:column}
+.tp-web{width:1280px;display:grid;grid-template-columns:240px minmax(0,1fr);min-height:560px}.tp-webs{width:680px;min-height:520px}.tp-webc{width:680px;min-height:320px}
+.tp-app{width:393px;min-height:720px;display:flex;flex-direction:column}
 .tp-side{border-right:1px solid var(--color-border-secondary);padding:var(--space-xl) var(--space-lg);display:grid;gap:var(--space-xs);align-content:start}
-.tp-logo{display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg)}.tp-logo svg{height:var(--d-logo);width:auto}
+.tp-logo{display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-lg)}.tp-logo svg{height:var(--d-logo);width:auto}.tp-logo .lg-d{display:none}[data-theme="dark"] .tp-logo .lg-d{display:block}[data-theme="dark"] .tp-logo .lg-l{display:none}
 .tp-nav{display:flex;align-items:center;gap:var(--space-md);padding:var(--space-sm) var(--space-md);border-radius:var(--radius-menu-item);color:var(--color-text-tertiary)}.tp-nav.on{background:var(--color-bg-selected);color:var(--color-text-primary)}
 .tp-grp{margin-top:var(--space-lg);padding:0 var(--space-md);color:var(--color-text-tertiary)}
-.tp-main{padding:var(--layout-screen-inset);display:grid;grid-template-columns:minmax(0,1fr);gap:var(--layout-title-gap);align-content:start;min-width:0}.tp-pad{padding:var(--layout-screen-inset);display:grid;gap:var(--layout-list-gap);align-content:start;flex:1}
+.tp-main{padding:var(--grid-margin);display:grid;grid-template-columns:minmax(0,1fr);gap:var(--layout-title-gap);align-content:start;min-width:0}.tp-pad{padding:var(--grid-margin);display:grid;gap:var(--layout-list-gap);align-content:start;flex:1}
 .tp-top{display:flex;justify-content:space-between;align-items:center;gap:var(--space-lg)}.tp-sub{color:var(--color-text-tertiary)}
-.tp-card{border:1px solid var(--elev-1-border);border-radius:var(--radius-card);padding:var(--layout-card-padding);display:grid;gap:var(--space-md);background:var(--color-bg-primary);box-shadow:var(--elev-1);min-width:0}
+.tp-card{border:1px solid var(--shadow-xs-border);border-radius:var(--radius-card);padding:var(--layout-card-padding);display:grid;gap:var(--space-md);background:var(--color-bg-primary);box-shadow:var(--shadow-xs);min-width:0}
 .tp-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg)}.tp-num{font-variant-numeric:tabular-nums}
 .tp-tb{width:100%;border-collapse:collapse}.tp-tb th{text-align:left;padding:var(--space-md) var(--space-lg);color:var(--color-text-tertiary);border-bottom:1px solid var(--color-border-secondary)}.tp-tb td{padding:var(--space-lg);border-bottom:1px solid var(--color-border-secondary);vertical-align:top}
-.tp-chip{display:inline-flex;align-items:center;height:22px;padding:0 var(--space-md);border-radius:var(--radius-chip);font-size:var(--font-size-xs);line-height:var(--line-height-xs-tight);font-weight:500;white-space:nowrap}
+.tp-chip{display:inline-flex;align-items:center;height:22px;padding:0 var(--space-md);border-radius:var(--radius-full);font-size:var(--font-size-xs);line-height:var(--line-height-xs-tight);font-weight:500;white-space:nowrap}
 .tp-g{background:var(--color-utility-green-50);color:var(--color-utility-green-700)}.tp-b{background:var(--color-utility-blue-50);color:var(--color-utility-blue-700)}.tp-y{background:var(--color-utility-yellow-50);color:var(--color-utility-yellow-700)}
 .tp-kv{display:grid;grid-template-columns:120px minmax(0,1fr);gap:var(--space-sm) var(--space-lg);margin:0}.tp-kv dt{color:var(--color-text-tertiary)}.tp-kv dd{margin:0}
 .tp-btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-sm);height:var(--control-height-md);padding:0 var(--space-xl);border-radius:var(--radius-control);background:var(--color-action-primary);color:var(--color-text-inverse);white-space:nowrap}
 .tp-btn.sec{background:var(--color-bg-primary);color:var(--color-text-primary);box-shadow:inset 0 0 0 1px var(--color-border-primary)}.tp-btn.wide{width:100%}
 .tp-fld{display:grid;gap:var(--space-xs)}.tp-inp{display:flex;align-items:center;gap:var(--space-md);min-height:var(--control-height-md);border:1px solid var(--color-border-input);border-radius:var(--radius-field);padding:0 var(--space-lg);background:var(--color-bg-primary)}.tp-ph{color:var(--color-text-placeholder)}.tp-err{color:var(--color-text-error-primary)}.tp-inp.e{border-color:var(--color-border-error)}
-.tp-appbar{padding:var(--space-lg) var(--layout-screen-inset);border-bottom:1px solid var(--color-border-secondary);display:flex;align-items:center;gap:var(--space-md)}.tp-foot{padding:var(--space-lg) var(--layout-screen-inset);border-top:1px solid var(--color-border-secondary);display:flex;gap:var(--space-md)}
-.tp-menu{position:absolute;right:var(--layout-screen-inset);top:96px;width:200px;background:var(--color-bg-primary_alt);border:1px solid var(--elev-2-border);border-radius:var(--radius-menu);box-shadow:var(--elev-2);padding:var(--space-xs);display:grid;gap:2px;z-index:2}
+.tp-appbar{padding:var(--space-lg) var(--grid-margin);border-bottom:1px solid var(--color-border-secondary);display:flex;align-items:center;gap:var(--space-md)}.tp-foot{padding:var(--space-lg) var(--grid-margin);border-top:1px solid var(--color-border-secondary);display:flex;gap:var(--space-md)}
+.tp-menu{position:absolute;right:var(--grid-margin);top:96px;width:200px;background:var(--color-bg-primary_alt);border:1px solid var(--shadow-lg-border);border-radius:var(--radius-menu);box-shadow:var(--shadow-lg);padding:var(--space-xs);display:grid;gap:2px;z-index:2}
 .tp-menu>span{display:flex;align-items:center;gap:var(--space-md);padding:var(--space-sm) var(--space-md);border-radius:var(--radius-menu-item)}
-.tp-scrim{position:absolute;inset:0;background:var(--color-bg-overlay);display:flex}.tp-scrim.c{align-items:center;justify-content:center}.tp-scrim.b{align-items:flex-end}
-.tp-dlg{background:var(--color-bg-primary_alt);display:grid;gap:var(--space-lg);padding:var(--space-2xl);border-radius:var(--radius-overlay);width:440px;box-shadow:var(--elev-3)}.tp-sheet{width:100%;border-radius:var(--radius-overlay) var(--radius-overlay) 0 0}.tp-acts{display:flex;gap:var(--space-md);justify-content:flex-end}
+.tp-scrim{position:absolute;inset:0;background:var(--color-bg-overlay);backdrop-filter:blur(var(--backdrop-blur-lg));display:flex}.tp-scrim.c{align-items:center;justify-content:center}.tp-scrim.b{align-items:flex-end}
+.tp-dlg{background:var(--color-bg-primary_alt);display:grid;gap:var(--space-lg);padding:var(--space-2xl);border:1px solid var(--shadow-xl-border);border-radius:var(--radius-overlay);width:440px;box-shadow:var(--shadow-xl)}.tp-sheet{width:100%;border-radius:var(--radius-overlay) var(--radius-overlay) 0 0}.tp-acts{display:flex;gap:var(--space-md);justify-content:flex-end}
 .tp-ic{display:inline-flex;flex:none}.tp-ic svg{width:var(--ic,16px);height:var(--ic,16px);display:block}
 .tp-ic-sm{--ic:var(--icon-size-sm)}.tp-ic-md{--ic:var(--icon-size-md)}.tp-ic-lg{--ic:var(--icon-size-lg)}.tp-fg2{color:var(--color-fg-secondary)}
 .tp-note{position:absolute;z-index:3;pointer-events:none}
 /* nhãn số đo đọc trực tiếp từ trình duyệt */
 [data-tags="on"] [data-tag]{outline:1px dashed color-mix(in srgb,#00A2FF 70%,transparent);outline-offset:-1px;position:relative}
+[data-tags="on"] :is(.tp-menu,.tp-scrim)[data-tag]{position:absolute}
 [data-tags="on"] [data-tag]::after{content:attr(data-tag);position:absolute;right:0;top:0;z-index:4;padding:0 4px;border-radius:0 0 0 4px;background:#0036B5;color:#fff;font:500 10px/14px "JetBrains Mono",monospace;white-space:nowrap}
 /* lưới cột phủ lên màn (trang Grids) */
 .tp-gridov{position:absolute;pointer-events:none;inset:0 auto 0 auto;display:none;z-index:3}
@@ -157,9 +158,9 @@ def icon(name, cls="tp-ic-md"):
     return f'<span class="tp-ic {cls}">{s}</span>'
 
 
-def cr(fg, bg, minimum=4.5):
+def cr(fg, bg, minimum=4.5, min=None):
     """Nhãn tương phản đo trên trang. fg, bg là tên token dạng color/text/primary."""
-    return f'<span class="cr" data-fg="{v(fg)}" data-bg="{v(bg)}" data-min="{minimum}"></span>'
+    return f'<span class="cr" data-fg="{v(fg)}" data-bg="{v(bg)}" data-min="{min if min is not None else minimum}"></span>'
 
 
 def v(token):
@@ -168,7 +169,7 @@ def v(token):
 
 def panes(body, modes=("light", "dark"), platforms=("web",), labels=None):
     """Xem thử trong item: một ô cho mỗi tổ hợp chế độ × nền tảng, biến đọc đúng theo data-theme/data-platform."""
-    name = {"light": "Sáng", "dark": "Tối", "web": "Web", "mobile": "Mobile"}
+    name = {"light": "Sáng", "dark": "Tối", "web": "Web", "mobile": "App"}
     cells = []
     for m in modes:
         for p in platforms:
@@ -199,8 +200,14 @@ def t(cls, text, extra=""):
 
 
 def mini_mark():
-    p = ROOT / "design/brand/invlogis/logo/invlogis-symbol.svg"
-    return re.sub(r"<\?xml[^>]*>", "", p.read_text()) if p.exists() else MARK
+    """Logo đầy đủ từ file thật (logo-spec Mục 5 cấm gõ lại bằng font): bản chính ở Sáng, bản đảo ở Tối, tiền tố id để không trùng."""
+    out = []
+    for name, cls in (("primary", "lg-l"), ("reverse", "lg-d")):
+        x = re.sub(r"<\?xml[^>]*>", "", (ROOT / f"design/brand/invlogis/logo/invlogis-{name}.svg").read_text())
+        x = re.sub(r'id="([^"]+)"', lambda m: f'id="{cls}{m.group(1)}"', x)
+        x = re.sub(r"url\(#([^)]+)\)", lambda m: f"url(#{cls}{m.group(1)})", x)
+        out.append(x.replace("<svg ", f'<svg class="{cls}" ', 1))
+    return "".join(out)
 
 
 def demo_screens(logo_svg=None):
@@ -211,10 +218,10 @@ def demo_screens(logo_svg=None):
     kpi = lambda a, b, c: f'<div class="tp-card"><div class="type-caption tp-sub">{a}</div><div class="type-display tp-num">{b}</div><div class="type-hint tp-sub">{c}</div></div>'
     row = lambda code, r, s, m, tm, c, x: (f'<tr><td><div class="type-code">{code}</div></td><td><div class="type-body">{r}</div><div class="type-caption tp-sub">{s}</div></td>'
                                            f'<td><span class="type-body tp-num">{m}</span></td><td><span class="type-caption tp-sub tp-num">{tm}</span></td><td>{chip(c, x)}</td>'
-                                           f'<td><span class="tp-fg2">{icon("ellipsis-vertical")}</span></td></tr>')
-    web_list = (f'<div class="tp-f tp-web" data-platform="web"><aside class="tp-side"><div class="tp-logo">{logo}<span class="type-title-3">Invlogis</span></div>'
-                f'<div class="type-caption-caps tp-grp">Vận hành</div>{nav("truck", "Lệnh vận tải", "on")}{nav("container", "Phương tiện")}{nav("users", "Tài xế")}{nav("fuel", "Nhiên liệu")}'
-                f'<div class="type-caption-caps tp-grp">Danh mục</div>{nav("building-2", "Khách hàng")}{nav("settings", "Cài đặt")}</aside>'
+                                           f'<td><span class="tp-fg2">{icon("ellipsis")}</span></td></tr>')
+    web_list = (f'<div class="tp-f tp-web" data-platform="web"><aside class="tp-side"><div class="tp-logo">{logo}</div>'
+                f'<div class="type-caption-caps tp-grp">Vận hành</div>{nav("clipboard-list", "Lệnh vận tải", "on")}{nav("container", "Phương tiện")}{nav("user-round", "Tài xế")}{nav("fuel", "Nhiên liệu")}'
+                f'<div class="type-caption-caps tp-grp">Danh mục</div>{nav("building", "Khách hàng")}{nav("settings", "Cài đặt")}</aside>'
                 f'<div class="tp-main"><div class="tp-top"><div><div class="type-title-1">Lệnh vận tải</div><div class="type-body tp-sub">Theo dõi và duyệt lệnh trong ngày.</div></div>'
                 f'<span class="tp-btn">{icon("plus")}<span class="type-label">Tạo lệnh</span></span></div>'
                 f'<div class="tp-kpis">{kpi("Lệnh đang chạy", "128", "Tăng 12 so với hôm qua")}{kpi("Chờ duyệt", "16", "Quá hạn 3 lệnh")}{kpi("Doanh thu hôm nay", "412 tr ₫", "Cập nhật lúc 14:30")}</div>'
@@ -240,17 +247,17 @@ def demo_screens(logo_svg=None):
              + acard("LVT-2026-0411", "tp-g", "Hoàn thành", "ICD Phước Long → Bình Dương", "51D-120.77 · Trần Quốc Việt", "2.480.000 ₫", "09:15 · 01/11")
              + acard("LVT-2026-0409", "tp-y", "Chờ duyệt", "Cảng Hiệp Phước → Đồng Nai", "50H-338.02 · Lê Thị Ệ", "980.000 ₫", "16:40 · 31/10"))
     app_list = f'<div class="tp-f tp-app" data-platform="mobile">{bar("Lệnh của tôi", "3 lệnh trong hôm nay")}<div class="tp-pad">{cards}</div></div>'
-    app_detail = (f'<div class="tp-f tp-app" data-platform="mobile">{bar("Chi tiết lệnh", "LVT-2026-0412", icon("chevron-left", "tp-ic-lg"))}<div class="tp-pad"><div class="tp-card"><div class="type-heading">Thông tin chuyến</div>{kv}</div>'
+    app_detail = (f'<div class="tp-f tp-app" data-platform="mobile">{bar("Chi tiết lệnh", "LVT-2026-0412", icon("arrow-left", "tp-ic-lg"))}<div class="tp-pad"><div class="tp-card"><div class="type-heading">Thông tin chuyến</div>{kv}</div>'
                   f'<div class="tp-card"><div class="type-heading">Ghi chú điều vận</div><div class="type-body">Tài xế nhận container tại cổng B, kiểm tra niêm phong trước khi rời cảng.</div></div></div><div class="tp-foot"><span class="tp-btn wide"><span class="type-label">Bắt đầu chuyến</span></span></div></div>')
-    app_form = f'<div class="tp-f tp-app" data-platform="mobile">{bar("Báo cáo sự cố", "", icon("chevron-left", "tp-ic-lg"))}<div class="tp-pad">{fields()}</div><div class="tp-foot"><span class="tp-btn wide"><span class="type-label">Gửi báo cáo</span></span></div></div>'
+    app_form = f'<div class="tp-f tp-app" data-platform="mobile">{bar("Báo cáo sự cố", "", icon("arrow-left", "tp-ic-lg"))}<div class="tp-pad">{fields()}</div><div class="tp-foot"><span class="tp-btn wide"><span class="type-label">Gửi báo cáo</span></span></div></div>'
     app_sheet = (f'<div class="tp-f tp-app" data-platform="mobile">{bar("Lệnh của tôi", "3 lệnh trong hôm nay")}<div class="tp-pad">{cards}</div><div class="tp-scrim b"><div class="tp-dlg tp-sheet"><div class="type-title-3">Kết thúc chuyến LVT-2026-0412?</div>'
                  '<div class="type-body tp-sub">Bạn sẽ không sửa được số km sau khi kết thúc. Kiểm tra lại trước khi xác nhận.</div><span class="tp-btn wide"><span class="type-label">Kết thúc chuyến</span></span><span class="tp-btn wide sec"><span class="type-label">Để sau</span></span></div></div></div>')
     return (f'<div class="tp-h">Web <small>· danh sách, có menu nổi</small></div><div class="tp-scroll"><div class="tp-row">{web_list}</div></div>'
             f'<div class="tp-h">Web <small>· chi tiết, biểu mẫu, hộp xác nhận</small></div><div class="tp-scroll"><div class="tp-row">{web_detail}{web_form}{web_dlg}</div></div>'
-            f'<div class="tp-h">App <small>· danh sách, chi tiết, biểu mẫu, sheet xác nhận (rộng 375)</small></div><div class="tp-scroll"><div class="tp-row">{app_list}{app_detail}{app_form}{app_sheet}</div></div>')
+            f'<div class="tp-h">App <small>· danh sách, chi tiết, biểu mẫu, sheet xác nhận (rộng 393)</small></div><div class="tp-scroll"><div class="tp-row">{app_list}{app_detail}{app_form}{app_sheet}</div></div>')
 
 
-NAV = [("icon", "Icon"), ("logo", "Logo"), ("effect", "Effect styles"), ("spacing", "Khoảng cách"), ("radius", "Bo góc"), ("grids", "Lưới")]
+NAV = [("icon", "Icon"), ("logo", "Logo"), ("effect", "Effect styles"), ("spacing", "Khoảng cách"), ("radius", "Bo góc"), ("grids", "Lưới"), ("touch", "Vùng chạm, focus"), ("misc", "Misc icons"), ("vehicle", "Phương tiện"), ("motion", "Chuyển động")]
 
 
 def _item(it):

@@ -257,59 +257,153 @@
       "$description": "Mã trong dòng của .prose (DEC-322)"
     }
   },
-  "elev": {
-    "1": {
+  "shadow": {
+    "xs": {
       "$type": "shadow",
       "$value": [
         {
-          "color": "#1018280F",
+          "color": "#0000000D",
           "offsetX": "0px",
           "offsetY": "1px",
           "blur": "2px",
           "spread": "0px"
         }
       ],
-      "$description": "Thẻ (DEC-125)"
+      "$description": "Thẻ (vai thẻ, DEC-327)"
     },
-    "2": {
+    "sm": {
       "$type": "shadow",
       "$value": [
         {
-          "color": "#1018281A",
-          "offsetX": "0px",
-          "offsetY": "4px",
-          "blur": "12px",
-          "spread": "0px"
-        },
-        {
-          "color": "#1018280F",
+          "color": "#0000001A",
           "offsetX": "0px",
           "offsetY": "1px",
           "blur": "3px",
           "spread": "0px"
+        },
+        {
+          "color": "#0000001A",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "-1px"
         }
       ],
-      "$description": "Menu thả, popover, gợi ý ô tìm"
+      "$description": "Thang Untitled, chưa gán vai"
     },
-    "3": {
+    "md": {
       "$type": "shadow",
       "$value": [
         {
-          "color": "#10182829",
-          "offsetX": "0px",
-          "offsetY": "16px",
-          "blur": "40px",
-          "spread": "0px"
-        },
-        {
-          "color": "#1018281A",
+          "color": "#0000001A",
           "offsetX": "0px",
           "offsetY": "4px",
-          "blur": "12px",
-          "spread": "0px"
+          "blur": "6px",
+          "spread": "-1px"
+        },
+        {
+          "color": "#0000000F",
+          "offsetX": "0px",
+          "offsetY": "2px",
+          "blur": "4px",
+          "spread": "-2px"
         }
       ],
-      "$description": "Dialog, sheet, toast"
+      "$description": "Thang Untitled, chưa gán vai"
+    },
+    "lg": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#00000014",
+          "offsetX": "0px",
+          "offsetY": "12px",
+          "blur": "16px",
+          "spread": "-4px"
+        },
+        {
+          "color": "#00000008",
+          "offsetX": "0px",
+          "offsetY": "4px",
+          "blur": "6px",
+          "spread": "-2px"
+        },
+        {
+          "color": "#0000000A",
+          "offsetX": "0px",
+          "offsetY": "2px",
+          "blur": "2px",
+          "spread": "-1px"
+        }
+      ],
+      "$description": "Menu thả, popover, gợi ý ô tìm (vai menu, DEC-327)"
+    },
+    "xl": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#00000014",
+          "offsetX": "0px",
+          "offsetY": "20px",
+          "blur": "24px",
+          "spread": "-4px"
+        },
+        {
+          "color": "#00000008",
+          "offsetX": "0px",
+          "offsetY": "8px",
+          "blur": "8px",
+          "spread": "-4px"
+        },
+        {
+          "color": "#0000000A",
+          "offsetX": "0px",
+          "offsetY": "3px",
+          "blur": "3px",
+          "spread": "-1.5px"
+        }
+      ],
+      "$description": "Dialog, sheet, toast (vai lớp phủ, DEC-327)"
+    },
+    "2xl": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#0000002E",
+          "offsetX": "0px",
+          "offsetY": "24px",
+          "blur": "48px",
+          "spread": "-12px"
+        },
+        {
+          "color": "#0000000A",
+          "offsetX": "0px",
+          "offsetY": "4px",
+          "blur": "4px",
+          "spread": "-2px"
+        }
+      ],
+      "$description": "Thang Untitled, chưa gán vai"
+    },
+    "3xl": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#00000024",
+          "offsetX": "0px",
+          "offsetY": "32px",
+          "blur": "64px",
+          "spread": "-12px"
+        },
+        {
+          "color": "#0000000A",
+          "offsetX": "0px",
+          "offsetY": "5px",
+          "blur": "5px",
+          "spread": "-2.5px"
+        }
+      ],
+      "$description": "Thang Untitled, chưa gán vai"
     }
   },
   "motion": {
@@ -324,7 +418,11 @@
       },
       "slow": {
         "$type": "duration",
-        "$value": "700ms"
+        "$value": "500ms"
+      },
+      "exit": {
+        "$type": "duration",
+        "$value": "200ms"
       }
     },
     "easing": {
@@ -336,29 +434,152 @@
           0.4,
           1.0
         ]
+      },
+      "exit": {
+        "$type": "cubicBezier",
+        "$value": [
+          0.4,
+          0.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "preset": {
+      "fade-in": {
+        "$type": "transition",
+        "$value": {
+          "duration": "125ms",
+          "delay": "0ms",
+          "timingFunction": [
+            0.24,
+            1.0,
+            0.4,
+            1.0
+          ]
+        },
+        "$description": "Số đổi, nội dung sau skeleton (an07, an11)"
+      },
+      "pop": {
+        "$type": "transition",
+        "$value": {
+          "duration": "300ms",
+          "delay": "0ms",
+          "timingFunction": [
+            0.24,
+            1.0,
+            0.4,
+            1.0
+          ]
+        },
+        "$description": "Đĩa dấu kết quả (an02)"
+      },
+      "draw": {
+        "$type": "transition",
+        "$value": {
+          "duration": "300ms",
+          "delay": "0ms",
+          "timingFunction": [
+            0.24,
+            1.0,
+            0.4,
+            1.0
+          ]
+        },
+        "$description": "Vẽ nét dấu kết quả; đường path có pathLength=1, dấu tích đi từ nét ngắn sang nét dài (an02)"
+      },
+      "swap": {
+        "$type": "transition",
+        "$value": {
+          "duration": "125ms",
+          "delay": "0ms",
+          "timingFunction": [
+            0.24,
+            1.0,
+            0.4,
+            1.0
+          ]
+        },
+        "$description": "Đổi icon tại chỗ, giữ 1000 rồi về (an05)"
+      },
+      "flash": {
+        "$type": "transition",
+        "$value": {
+          "duration": "1500ms",
+          "delay": "0ms",
+          "timingFunction": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ]
+        },
+        "$description": "Dòng vừa đổi, chạy một lần: giữ 1000, phai 500 (an06, an08)"
+      },
+      "expand": {
+        "$type": "transition",
+        "$value": {
+          "duration": "300ms",
+          "delay": "0ms",
+          "timingFunction": [
+            0.24,
+            1.0,
+            0.4,
+            1.0
+          ]
+        },
+        "$description": "Mở, đóng khối, dòng mới, dải mất mạng (an08, an10, an16). Bật bằng data-open=\"true\""
+      },
+      "glide": {
+        "$type": "transition",
+        "$value": {
+          "duration": "300ms",
+          "delay": "0ms",
+          "timingFunction": [
+            0.24,
+            1.0,
+            0.4,
+            1.0
+          ]
+        },
+        "$description": "Xe trên bản đồ khi có điểm GPS mới (an12)"
+      },
+      "grow": {
+        "$type": "transition",
+        "$value": {
+          "duration": "300ms",
+          "delay": "0ms",
+          "timingFunction": [
+            0.24,
+            1.0,
+            0.4,
+            1.0
+          ]
+        },
+        "$description": "Cột biểu đồ mọc khi tải, đổi lọc thì đổi ngay (an17)"
       }
     }
   },
-  "blur": {
+  "backdrop-blur": {
     "sm": {
       "$type": "dimension",
       "$value": "8px",
-      "$description": "Đầu màn, thanh công cụ dính trên cùng khi cuộn (nền trắng 70%)."
+      "$description": "Đầu màn, thanh công cụ dính trên cùng khi cuộn (nền color/bg/primary_blur)."
     },
     "md": {
       "$type": "dimension",
       "$value": "16px",
-      "$description": "Thanh điều hướng nổi app (DEC-160), thanh hành động nổi đáy màn."
+      "$description": "Thanh điều hướng nổi app (DEC-160), thanh hành động nổi đáy màn (nền color/bg/primary_blur)."
     },
     "lg": {
       "$type": "dimension",
       "$value": "24px",
-      "$description": "Nền sau dialog, sheet: scrim 35% + blur."
+      "$description": "Nền sau dialog, sheet: color/bg/overlay 35% + blur; máy yếu lùi color/bg/overlay_solid."
     },
     "xl": {
       "$type": "dimension",
       "$value": "40px",
-      "$description": "Không dùng trong app nghiệp vụ."
+      "$description": "Giữ cho đủ thang, chưa dùng trong app nghiệp vụ."
     }
   }
 }

@@ -39,7 +39,7 @@ def tag(label, lead=None, trail=None, size="md", st="", count=None, on=False, li
 CSS_TAG = r"""
 .pv[data-state=long] [data-live] .nl{display:none}
 .pv[data-state=hover] [data-live].tg{background:var(--color-bg-primary_hover);border-color:var(--color-border-input)}
-.pv[data-state=focus] [data-live].tg{box-shadow:0 0 0 2px var(--color-focus-gap),0 0 0 4px var(--color-focus-ring)}
+.pv[data-state=focus] [data-live].tg{outline:var(--focus-width) solid var(--color-focus-ring);outline-offset:var(--focus-offset)}
 .pv[data-state=disabled] [data-live].tg{opacity:.5}
 .tg.t-sm .cbx{width:12px;height:12px}.tg.t-lg .cbx{width:16px;height:16px}
 .tg.t-lg .av{width:20px!important;height:20px!important}

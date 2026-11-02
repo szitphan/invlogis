@@ -36,7 +36,7 @@
 | 4.9.4 Nợ quá hạn | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` B13, DP-01, OQ-67 | đổi Mục 6.3 từ "không duyệt ngoại lệ" sang có gia hạn đã duyệt (DEC-227) |
 | 4.9.5 Hạn mức tín dụng | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` DP-01 | |
 | 4.9.6 Chi phí dở dang | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` DP-01 |  |
-| 4.10 Giải pháp phát hành hóa đơn | ➡ invoice-management |  | lệch với SIM (SIM ghi QT 5.2, SOP ghi 5.4) |
+| 4.10 Giải pháp phát hành hóa đơn | ✅ | `docs/invoice-management/brainstorms/invoice-management.md` C1, OQ-1 | lệch với SIM (SIM ghi QT 5.2, SOP ghi 5.4) |
 | 5.1 Quy trình tạo JobID | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` Mục 5.1 bước 0, A11, B10, OQ-66<br>`docs/shipment-coordination/brainstorms/shipment-coordination.md` B15, B18 | danh mục lô hàng ở Điều phối A12; dashboard tổng là màn riêng |
 | 5.2 Quy trình cung cấp dịch vụ | ✅ | `docs/service-delivery/brainstorms/service-delivery.md` Mục 5.1 bước 8, B12, E16, E17 |  |
 | 5.3 Quy trình quản lý nợ phải trả | ➡ debt-management |  |  |

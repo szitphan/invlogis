@@ -150,7 +150,7 @@ const ISS=[
  "Sau duyệt 09/10: kiểu 2 = MAZ, kiểu 5 = AC990, kiểu 6 = Chenglong H5. Chỉ còn <b>kiểu 7 (5 trục, 17 lốp)</b> chưa có xe nào — giữ hay bỏ?",
 ];
 /* ảnh: bản gửi đi nhúng sẵn IMGS (data URI); bản trên máy đọc từ assets/ */
-const IMGSRC=k=>(window.IMGS&&IMGS[k])||`assets/vehicles/b-ai/${k}-q.png`;
+const IMGSRC=k=>(window.IMGS&&IMGS[k])||`../../design-system/assets/vehicles/${k}-q.png`;
 /* ---- vẽ sơ đồ ---- */
 function draw(lay,scale=1){
   const T=lay.tyres; if(!T.length) return "";

@@ -41,9 +41,9 @@ ERR_REQ = "Cần tải ít nhất một hoá đơn."
 
 # ---------- phần tử ----------
 # File type icon của DS (DS · Foundations › Misc icons, set 6657:165918), cỡ MD 40: tờ giấy gập góc + nhãn đuôi.
-# Type có sẵn: PDF · DOC · XLS · CSV · IMG · ZIP · Other. JPG/PNG → IMG; XML chưa có loại riêng → Other.
-FT = {"PDF": ("PDF", "var(--color-bg-error-solid)", 30), "DOC": ("DOC", "var(--color-bg-info-solid)", 33), "XLS": ("XLS", "var(--color-bg-success-solid)", 29), "CSV": ("CSV", "var(--color-bg-success-solid)", 32),
-      "IMG": ("IMG", "var(--color-bg-info-solid)", 30), "ZIP": ("ZIP", "var(--color-bg-secondary_solid)", 25)}
+# Type có sẵn: PDF · DOC · XLS · CSV · IMG · ZIP · VID · Other. JPG/PNG → IMG; XML chưa có loại riêng → Other.
+FT = {"PDF": ("PDF", "var(--color-file-type-pdf)", 30), "DOC": ("DOC", "var(--color-file-type-doc)", 33), "XLS": ("XLS", "var(--color-file-type-xls)", 29), "CSV": ("CSV", "var(--color-file-type-csv)", 32),
+      "IMG": ("IMG", "var(--color-file-type-img)", 30), "ZIP": ("ZIP", "var(--color-file-type-zip)", 25), "VID": ("VID", "var(--color-file-type-vid)", 28)}  # DEC-335 ms02, ms03
 FT_ALIAS = {"JPG": "IMG", "PNG": "IMG", "XML": "Other"}
 def ftype(kind):
     t = FT_ALIAS.get(kind, kind)
@@ -160,7 +160,7 @@ CSS = r"""
 .i{flex:none;display:block}
 button{font:inherit;color:inherit}
 .bt{height:32px;padding:0 12px;border:1px solid var(--color-border-primary);border-radius:8px;background:var(--color-bg-primary);display:inline-flex;align-items:center;gap:6px;font:600 13px/18px Inter;white-space:nowrap;cursor:pointer}
-.bt.sm{height:28px;padding:0 8px;font-size:12.5px}.bt.big{height:48px;justify-content:center;border-radius:12px;font-size:14px}
+.bt.sm{height:28px;padding:0 8px;font-size:12.5px}.bt.big{height:48px;justify-content:center;border-radius:var(--radius-control);font-size:14px}
 .pv .md-f .bt.pri.pri{background:var(--color-action-primary)!important;color:var(--color-text-inverse)!important;border-color:var(--color-action-primary)!important}
 .bt[disabled]{opacity:.5;cursor:not-allowed}
 .ib{width:32px;height:32px;border:0;background:none;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;color:var(--color-text-tertiary);cursor:pointer;flex:none}
@@ -207,22 +207,22 @@ button{font:inherit;color:inherit}
 .del{align-self:flex-start;margin-top:-6px;margin-right:-2px}
 /* ---- app ---- */
 .fu.m .lb{font-size:13px}
-.az{border:1px solid var(--color-border-input);border-radius:16px;padding:14px;display:flex;gap:12px;align-items:center;background:var(--color-bg-primary)}
+.az{border:1px solid var(--color-border-input);border-radius:var(--radius-card);padding:14px;display:flex;gap:12px;align-items:center;background:var(--color-bg-primary)}
 .az .fi{margin:0;border-radius:50%;width:48px;height:48px;background:var(--color-bg-tertiary);border:0}
 .az-m{flex:1;min-width:0}
 .az2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .gr{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.tl{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;border:1px solid var(--color-border-secondary)}
+.tl{position:relative;aspect-ratio:1;border-radius:var(--radius-inner);overflow:hidden;border:1px solid var(--color-border-secondary)}
 .tl .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--color-fg-tertiary)}
 .tl.add{border:1px dashed var(--color-border-input);background:var(--color-bg-primary);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:500 11.5px Inter;color:var(--color-text-secondary);cursor:pointer}
 .tl.error{border:2px solid var(--color-border-error)}
-.tov{position:absolute;inset:0;background:var(--color-bg-overlay);color:var(--color-text-white);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:600 12px Inter}
+.tov{position:absolute;inset:0;background:var(--color-bg-overlay_solid);color:var(--color-text-white);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:600 12px Inter}
 .tov.er{background:var(--color-bg-error-overlay)}
-.ring{width:24px;height:24px;border-radius:50%;background:conic-gradient(var(--color-fg-white) calc(var(--p)*1%),var(--color-bg-overlay) 0)}
-.tcap{position:absolute;left:6px;bottom:6px;right:6px;font:600 10.5px/14px Inter;color:var(--color-text-white);background:var(--color-bg-overlay);padding:0 4px;border-radius:4px;width:max-content;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tx{position:absolute;top:5px;right:5px;width:22px;height:22px;border-radius:50%;border:0;background:var(--color-bg-overlay);color:var(--color-text-white);display:flex;align-items:center;justify-content:center}
-.scr{position:absolute;inset:0;background:var(--color-bg-overlay);z-index:8;border-radius:inherit}
-.sht{position:absolute;left:0;right:0;bottom:0;z-index:9;background:var(--color-bg-primary_alt);border-radius:28px 28px 0 0;padding:8px 16px 24px;display:flex;flex-direction:column}
+.ring{width:24px;height:24px;border-radius:50%;background:conic-gradient(var(--color-fg-white) calc(var(--p)*1%),var(--color-bg-overlay_solid) 0)}
+.tcap{position:absolute;left:6px;bottom:6px;right:6px;font:600 10.5px/14px Inter;color:var(--color-text-white);background:var(--color-bg-overlay_solid);padding:0 4px;border-radius:4px;width:max-content;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tx{position:absolute;top:5px;right:5px;width:22px;height:22px;border-radius:50%;border:0;background:var(--color-bg-overlay_solid);color:var(--color-text-white);display:flex;align-items:center;justify-content:center}
+.scr{position:absolute;inset:0;background:var(--color-bg-overlay);backdrop-filter:blur(var(--backdrop-blur-lg));z-index:8;border-radius:inherit}
+.sht{position:absolute;left:0;right:0;bottom:0;z-index:9;background:var(--color-bg-primary_alt);border-radius:var(--radius-overlay) var(--radius-overlay) 0 0;padding:8px 16px 24px;display:flex;flex-direction:column}
 .sht .hd{width:36px;height:4px;border-radius:2px;background:var(--color-bg-quaternary);align-self:center;margin-bottom:12px}
 .sh-t{font:600 17px/24px Inter;margin-bottom:6px}
 .sh-i{height:52px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--color-border-secondary);font:500 15px Inter}
@@ -231,8 +231,8 @@ button{font:inherit;color:inherit}
 table{width:100%;border-collapse:collapse}td,th{padding:11px 16px;border-bottom:1px solid var(--color-border-secondary);text-align:left;font-size:13px}th{color:var(--color-text-tertiary);font-weight:500;background:var(--color-bg-secondary)}
 .tb{border:1px solid var(--color-border-secondary);border-radius:12px;overflow:hidden}
 .chip{display:inline-block;font:500 12px/18px Inter;padding:2px 8px;border-radius:999px;background:var(--color-utility-neutral-100)}
-.mw{position:absolute;inset:0;background:var(--color-bg-overlay);display:flex;align-items:flex-start;justify-content:center;padding-top:56px;z-index:6}
-.md{width:560px;background:var(--color-bg-primary_alt);border-radius:16px;box-shadow:var(--elev-3);display:flex;flex-direction:column}
+.mw{position:absolute;inset:0;background:var(--color-bg-overlay);backdrop-filter:blur(var(--backdrop-blur-lg));display:flex;align-items:flex-start;justify-content:center;padding-top:56px;z-index:6}
+.md{width:560px;background:var(--color-bg-primary_alt);border-radius:var(--radius-overlay);border:1px solid var(--shadow-xl-border);box-shadow:var(--shadow-xl);display:flex;flex-direction:column}
 .md-h{padding:20px 24px 8px;display:flex;gap:12px;align-items:flex-start}.md-h b{font:600 18px/28px Inter;display:block}.md-h span{color:var(--color-text-tertiary);font-size:13.5px}
 .md-b{padding:12px 24px 8px;display:flex;flex-direction:column;gap:16px}
 .md-f{padding:16px 24px 20px;display:flex;justify-content:flex-end;gap:8px}
@@ -242,10 +242,10 @@ table{width:100%;border-collapse:collapse}td,th{padding:11px 16px;border-bottom:
 .card .h{font:600 15px/22px Inter;display:flex;justify-content:space-between;align-items:center}
 .cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
 dl{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;margin:0;font-size:13px}dt{color:var(--color-text-tertiary)}dd{margin:0}
-.mcard{border:1px solid var(--color-border-secondary);border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.mcard{border:1px solid var(--color-border-secondary);border-radius:var(--radius-card);padding:12px 14px;display:flex;flex-direction:column;gap:2px}
 .mcard b{font-size:15px}.mcard span{color:var(--color-text-tertiary);font-size:13px}
 .pt{display:flex;gap:8px;align-items:center;font:600 14px Inter}.pt .chip{margin-left:auto;font-weight:500}
-.cta{position:sticky;bottom:0;height:52px;border:0;border-radius:999px;background:var(--color-action-primary);color:var(--color-text-inverse);font:600 16px Inter;width:100%}
+.cta{position:sticky;bottom:0;height:52px;border:0;border-radius:var(--radius-control);background:var(--color-action-primary);color:var(--color-text-inverse);font:600 16px Inter;width:100%}
 .pv[data-platform=mobile] .cols{grid-template-columns:1fr}
 """
 
@@ -445,8 +445,8 @@ APP_COST = by_state({
  "long": afield("Ảnh hoá đơn", [frow(F_LONG, "done")]),
 })
 S_APP_COST = ('<div class="mpad"><div class="mcard"><b>LVT-2026-0412</b><span>Cát Lái → Sóng Thần · 51C-482.19</span></div>'
-              '<div class="fu m"><div class="lb">Loại chi phí<span class="req">*</span></div><div class="inp" style="height:48px;border-radius:12px;color:var(--color-text-primary)">Dầu diesel</div></div>'
-              '<div class="fu m"><div class="lb">Số tiền<span class="req">*</span></div><div class="inp" style="height:48px;border-radius:12px;color:var(--color-text-primary)">1.250.000 ₫</div></div>'
+              '<div class="fu m"><div class="lb">Loại chi phí<span class="req">*</span></div><div class="inp" style="height:48px;border-radius:var(--radius-field);color:var(--color-text-primary)">Dầu diesel</div></div>'
+              '<div class="fu m"><div class="lb">Số tiền<span class="req">*</span></div><div class="inp" style="height:48px;border-radius:var(--radius-field);color:var(--color-text-primary)">1.250.000 ₫</div></div>'
               + APP_COST + '<button class="cta">Ghi chi phí</button></div>')
 
 APP_PHOTO = by_state({
@@ -513,7 +513,7 @@ DARK = CSS.split(".pv[data-theme=dark]{", 1)[1].split("}", 1)[0]
 page["css"] += ".pv[data-theme=dark] .pv{" + DARK + "}" + r"""
 .dz.focus,.bt.focus,.ib.focus,.az.focus,.lkr.focus{outline:2px solid var(--color-focus-ring);outline-offset:2px}
 .ib.hv{background:var(--color-bg-primary_hover);color:var(--color-text-primary)}.dz.hv{border-color:var(--color-border-input);background:var(--color-bg-primary_hover)}
-.pv[data-platform=mobile] .fr{padding:12px 4px 12px 12px;border-radius:14px}
+.pv[data-platform=mobile] .fr{padding:12px 4px 12px 12px;border-radius:var(--radius-field)}
 .pv[data-platform=mobile] .fr .ib{width:40px;height:40px}
 .pv[data-platform=mobile] .fn{font-size:14px}
 .lb{display:block}.req{margin-left:3px}
@@ -755,5 +755,7 @@ page["figma"] = {"url": "https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/?no
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "_lib"))
 from pvkit import tok_css_nested  # noqa: E402
 page["css"] = tok_css_nested() + page["css"]
+from icon_dec329 import apply as _dec329  # noqa
+_dec329(page)  # DEC-329: cỡ, nét, màu icon
 OUT.write_text(json.dumps(page, ensure_ascii=False, indent=1))
 print("ok", OUT, len(ideas), "ý tưởng ·", len(decisions), "điểm ·", len(page["screens"]), "màn ·", len(V), "giá trị")

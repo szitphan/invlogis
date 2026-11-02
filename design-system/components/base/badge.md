@@ -2,7 +2,7 @@
 type: design-component
 status: stale
 status_prev: approved
-updated: 2026-10-29
+updated: 2026-11-02
 links:
   - design-system/architecture.md
   - design-system/foundations/README.md
@@ -33,7 +33,7 @@ web và app. Badge **không có nút X** — chip lọc bỏ được dùng comp
 |---|---|---|
 | **Pill Color** | bo tròn hẳn `radius/full`, nền màu sắc | Trạng thái (cột Trạng thái của bảng, đầu trang chi tiết) |
 | **Pill Outline** | Pill Color + viền 1 màu sắc 200 | Trạng thái cần tách khỏi nền xám (dòng đang chọn / hover) |
-| **Badge Color** | bo `radius/badge` 6 (LG `radius/menu` 8), nền màu sắc | Nhãn phụ, số liệu |
+| **Badge Color** | bo `radius/badge` 6 (LG `radius/md` 8), nền màu sắc | Nhãn phụ, số liệu |
 | **Badge Outline** | Badge Color + viền 1 màu sắc 200 (như Pill Outline) | Như Badge Color, trên nền không trắng |
 | **Badge Modern** | nền trắng, viền xám `color/border/primary`, chữ `color/text/primary`; chỉ chấm / icon mang màu | **Phân loại** (cột Loại: hàng lạnh, quá khổ…) |
 | **Dot** | không nền, không viền, không lề; chấm màu + chữ thường `color/text/primary` | Trạng thái phụ, chỗ dày chữ (lịch sử, dòng thời gian) — từ kiểu Dot của Status chip (DEC-310) |
@@ -62,12 +62,12 @@ web và app. Badge **không có nút X** — chip lọc bỏ được dùng comp
 | Chấm → chữ | 6 | 6 | 6 | `space/sm` = `space/xs` + đệm phải khung chấm `space/xxs` 2 |
 | Chữ nhãn | 12/18 · 600 | 12/16 · 600 | như MD | SM `type/chip-sm-strong`; MD, LG `type/caption-strong`; màu `color/chip/{tone}/fg`. Dot: 400, `color/text/primary` (DEC-310, thay phần chữ của DEC-277) |
 | Khung chữ rộng tối đa | 160 | 160 | 160 | `size/11xl`, dài hơn cắt "…" một dòng |
-| Chấm | 6 × 6 | 6 × 6 | 6 × 6 | `size/sm`; màu `color/chip/{tone}/fg` |
-| Icon Leading | 14 | 14 | 14 | `icon/size/chip`; màu `color/chip/{tone}/fg`; nét 2.5 trên khung 24 (ngoại lệ DEC-300, DEC-309) |
+| Chấm | 6 × 6 | 6 × 6 | 6 × 6 | phần con `_Dot`, `size/sm`; màu truyền từ cha `color/chip/{tone}/fg`; nhìn không đổi (DEC-335 ms10, [icon-sets.md](../../foundations/icon-sets.md)) |
+| Icon Leading | 14 | 14 | 14 | `icon/size/chip`; màu `color/chip/{tone}/fg`; nét 2.25 trên khung 24 như mọi icon cỡ 14 (DEC-329, bỏ ngoại lệ DEC-309) |
 | Ô đếm — cao | 16 | 16 | 20 | `size/xl` · `size/xl` · `size/2xl` |
 | Ô đếm — đệm ngang | 6 | 6 | 6 | — |
 | Ô đếm và Count Only — chữ | 12/16 · 400 | 12/16 · 400 | 12/16 · 400 | `chip/count-font-size` / `chip/count-line-height` — **không đậm**, cố định cả web và app (DEC-303, DEC-304) |
-| Ô đếm — bo (Badge Color / Outline / Modern) | 3 | 3 | 4 | `chip/count-radius` · `radius/xs` |
+| Ô đếm — bo (Badge Color / Outline / Modern) | 2 | 2 | 4 | `radius/xxs` · `radius/xs` (DEC-328) |
 | Ô đếm — bo (Pill) | tròn | tròn | tròn | `radius/full` |
 | Ô đếm — nền | trắng (Modern, Dot: `color/bg/secondary`) | | | `color/bg/primary` · `color/bg/secondary` |
 | Viền Outline / Modern | 1 | 1 | 1 | Pill Outline, Badge Outline: màu sắc 200 · Modern: `color/border/primary` |

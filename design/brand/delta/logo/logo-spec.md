@@ -34,15 +34,17 @@ Innvie đã duyệt; Delta đã đồng ý ngày 02/11/2026 (BL-351).
 
 ## 3. Dùng biến thể nào, khi nào
 
+**Trong phần mềm chỉ 2 biến thể** (DEC-326, `design-system/foundations/logo.md` mục 14.2): logo ngang `delta-primary` / `delta-reverse` và ký hiệu `delta-symbol` / `-reverse`. Cao tối thiểu 20px nên phần mềm không dùng `delta-small`. Các file khác cho in ấn, deck, chứng từ.
+
 | File | Khi nào dùng |
 |---|---|
-| `delta-primary.svg` | Mặc định trên nền sáng, trong phần mềm: đầu menu, đăng nhập, màn chủ app. ® nhỏ cạnh chữ A nên chữ chiếm đủ chiều cao khung. |
+| `delta-primary.svg` | Mặc định trên nền sáng, trong phần mềm: đầu menu, đăng nhập, splash, màn chủ app. ® nhỏ cạnh chữ A nên chữ chiếm đủ chiều cao khung. |
 | `delta-reverse.svg` | Nền Tối. Chữ trắng, thanh xanh giữ nguyên. |
 | `delta-mono-black.svg` | In một màu, đóng dấu. |
 | `delta-mono-white.svg` | Trên nền xanh `#1B7B46`, trên ảnh tối. |
-| `delta-small.svg`, `delta-small-reverse.svg` | Cao dưới 20px. |
+| `delta-small.svg`, `delta-small-reverse.svg` | Cao dưới 20px, ngoài phần mềm. |
 | `delta-symbol.svg`, `-reverse`, `-mono` | Menu thu gọn 64, ảnh đại diện, chỗ không đủ rộng cho cả chữ. |
-| `delta-stacked.svg`, `-reverse` | Khung vuông hoặc dọc: splash. |
+| `delta-stacked.svg`, `-reverse` | Khung vuông hoặc dọc ngoài phần mềm: in ấn, deck. Splash trong phần mềm dùng logo ngang (DEC-326). |
 | `delta-original.svg` | ® to như logo gốc. Dùng khi in ấn, chứng từ cần giữ đúng bản Delta. |
 | `favicon.svg` | Favicon chính, tự đổi chữ trắng khi trình duyệt ở chế độ tối. |
 | `favicon-16/32/48.png` | Favicon dự phòng, đặt trên ô trắng để đọc được ở cả tab sáng và tab tối. |

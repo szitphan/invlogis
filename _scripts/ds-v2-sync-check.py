@@ -86,6 +86,7 @@ def token_index():
                 names |= set(vals)
     names |= set(c["Platform"]["vars"])
     names |= set(d.get("effectStyles") or {}) | set(d.get("textStyles") or {})
+    names |= {f"{k}-border" for k, v in (d.get("effectStyles") or {}).items() if "border" in v}
     return d, names
 
 

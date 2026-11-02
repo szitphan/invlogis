@@ -1,6 +1,6 @@
 ---
 type: design-foundations
-status: draft
+status: approved
 updated: 2026-11-01
 links:
   - design-system/foundations/README.md

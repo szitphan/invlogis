@@ -1,10 +1,10 @@
 {
  "tokens_version": "0.22.0",
  "counts": {
-  "ok": 123,
-  "near": 11,
+  "ok": 125,
+  "near": 9,
   "new": 15,
-  "conflict": 1,
+  "conflict": 0,
   "undeclared": 1
  },
  "no_sel": 0,
@@ -90,10 +90,10 @@
  "groups": {
   "typo": {
    "label": "Chữ",
-   "total": 29,
-   "ok": 26,
+   "total": 28,
+   "ok": 28,
    "open": 0,
-   "audit": 1
+   "audit": 0
   },
   "color": {
    "label": "Màu",
@@ -1122,7 +1122,7 @@
    "size": "",
    "state": "",
    "theme": "Light",
-   "value": 13.5,
+   "value": 14,
    "sel": ".dz-t",
    "cssProps": [
     "font-size"
@@ -1131,27 +1131,29 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/body/size",
-    "value": 14,
-    "css": "var(--type-body-size)"
+   "cat": "ok",
+   "tokens": [
+    "upload/action-font-size",
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "upload/action-font-size",
+    "css": "var(--upload-action-font-size)"
    },
-   "visible": true,
-   "suggest": "type/body/size (14)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "lệch -0.5",
+   "note": "",
    "group": "typo",
    "decided": true,
-   "must": true,
+   "must": false,
    "resolved": {
     "kind": "token",
-    "token": "type/body/size",
-    "value": 14,
-    "css": "var(--type-body-size)",
-    "auto": false
+    "token": "upload/action-font-size",
+    "css": "var(--upload-action-font-size)"
    }
   },
   {
@@ -3055,7 +3057,7 @@
    "size": "",
    "state": "",
    "theme": "Light",
-   "value": 13.5,
+   "value": 14,
    "sel": ".fn",
    "cssProps": [
     "font-size"
@@ -3064,27 +3066,29 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/body/size",
-    "value": 14,
-    "css": "var(--type-body-size)"
+   "cat": "ok",
+   "tokens": [
+    "upload/action-font-size",
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "upload/action-font-size",
+    "css": "var(--upload-action-font-size)"
    },
-   "visible": true,
-   "suggest": "type/body/size (14)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "lệch -0.5",
+   "note": "",
    "group": "typo",
    "decided": true,
-   "must": true,
+   "must": false,
    "resolved": {
     "kind": "token",
-    "token": "type/body/size",
-    "value": 14,
-    "css": "var(--type-body-size)",
-    "auto": false
+    "token": "upload/action-font-size",
+    "css": "var(--upload-action-font-size)"
    }
   },
   {
@@ -4393,11 +4397,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "upload/sheet-radius"
+    "radius/overlay"
    ],
    "bind": {
-    "token": "upload/sheet-radius",
-    "css": "var(--upload-sheet-radius)"
+    "token": "radius/overlay",
+    "css": "var(--radius-overlay)"
    },
    "to": null,
    "visible": false,
@@ -4409,8 +4413,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "upload/sheet-radius",
-    "css": "var(--upload-sheet-radius)"
+    "token": "radius/overlay",
+    "css": "var(--radius-overlay)"
    }
   },
   {
@@ -6116,48 +6120,6 @@
    "group": "spacing",
    "decided": false,
    "must": false
-  },
-  {
-   "id": "audit.typo.combo-13.5-20",
-   "part": "Tổ hợp chữ",
-   "prop": "line-height",
-   "platform": "",
-   "size": "",
-   "state": "",
-   "theme": "Light",
-   "value": "13.5/20",
-   "sel": ".dz-t, .fn",
-   "cssProps": [
-    "line-height"
-   ],
-   "tpl": null,
-   "noOverride": null,
-   "cat": "conflict",
-   "tokens": [],
-   "bind": null,
-   "to": null,
-   "visible": true,
-   "suggest": "type/heading (Web)",
-   "rules": [
-    "cỡ 13.5 / dòng 20 không thuộc thang type/* (foundations mục 4.2)"
-   ],
-   "note": "cùng cỡ chữ thì sửa cao dòng; khác cỡ thì chọn vai gần nhất",
-   "fix": {
-    "token": "type/heading (Web)",
-    "value": "14/20",
-    "css": "20px"
-   },
-   "group": "typo",
-   "audit": true,
-   "count": 2,
-   "decided": true,
-   "must": true,
-   "resolved": {
-    "kind": "fix",
-    "token": "type/heading (Web)",
-    "value": "14/20",
-    "css": "20px"
-   }
   }
  ]
 }

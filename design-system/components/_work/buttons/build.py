@@ -48,7 +48,7 @@ CSS = tok_css() + BASE_CSS + """
 .bt{display:inline-flex;align-items:center;justify-content:center;gap:var(--control-icon-gap);height:var(--control-height-md);
  padding:0 var(--control-padding-x-md);border-radius:var(--radius-control);border:1px solid transparent;position:relative;cursor:pointer;
  font:600 var(--type-label-size)/var(--type-label-line-height) var(--font-body);white-space:nowrap;max-width:240px;min-width:0;
- transition:background var(--duration-fast)}
+ transition:background var(--duration-fast) var(--easing-standard)}
 .bt .tx{overflow:hidden;text-overflow:ellipsis;min-width:0}
 .bt svg{flex:none}
 .bt.sm{height:var(--control-height-sm);padding:0 var(--control-padding-x-sm)}
@@ -60,7 +60,7 @@ CSS = tok_css() + BASE_CSS + """
 /* Secondary — D1: a viền + nền trắng (Untitled) · b nền xám đậm · c nền xám nhạt phẳng (lượt 1 / Astryx) */
 .bt.sec{background:var(--color-action-secondary);color:var(--color-text-primary)}
 .bt.sec.h{background:var(--color-action-secondary-hover)}.bt.sec.p{background:var(--color-action-secondary-pressed)}
-[data-D1=a] .bt.sec{background:var(--color-bg-primary);border-color:var(--color-border-primary);box-shadow:0 1px 2px var(--color-shadow-sm)}
+[data-D1=a] .bt.sec{background:var(--color-bg-primary);border-color:var(--color-border-primary);box-shadow:var(--shadow-xs)}
 [data-D1=a] .bt.sec.h{background:var(--color-bg-primary_hover)}[data-D1=a] .bt.sec.p{background:var(--color-bg-selected)}
 [data-D1=b] .bt.sec{background:var(--color-action-secondary-hover)}
 [data-D1=b] .bt.sec.h{background:var(--color-action-secondary-pressed)}[data-D1=b] .bt.sec.p{background:var(--color-action-secondary-pressed)}
@@ -82,8 +82,8 @@ CSS = tok_css() + BASE_CSS + """
 /* Disabled + Loading (DEC-277: tải trông như tắt + spinner) */
 .bt.d,.bt.ld{background:var(--color-bg-disabled)!important;color:var(--color-text-disabled)!important;border-color:transparent!important;box-shadow:none!important;cursor:not-allowed}
 .bt.ter.d,.bt.lkg.d,.bt.ter.ld,.bt.lkg.ld{background:transparent!important}
-.spn{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:spn .8s linear infinite;flex:none}
-@keyframes spn{to{transform:rotate(360deg)}}
+.spn{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:spn calc(var(--duration-slow) * 2) linear infinite,spin-wait 0s var(--duration-medium) both;flex:none}
+@keyframes spn{to{transform:rotate(360deg)}}@keyframes spin-wait{from{opacity:0}to{opacity:1}}
 /* Focus — D3: a vòng than chì 2px cách 2 (lượt 1) · b vòng xanh brand */
 .bt.f,.cx.f,.ut.f{outline:var(--focus-width) solid var(--color-focus-ring);outline-offset:var(--focus-offset)}
 .bt.dz.f{outline-color:var(--color-focus-ring_error)}
@@ -146,11 +146,11 @@ CSS = tok_css() + BASE_CSS + """
 .kv{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:16px 24px}
 .kv dt{font-size:12px;line-height:16px;color:var(--color-text-tertiary)}.kv dd{margin:2px 0 0;font-weight:500}
 .foot{display:flex;gap:8px;padding:16px 24px;border-top:1px solid var(--color-border-secondary)}
-.form{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:720px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:var(--width-md)}
 .fld label{display:block;font:500 13px/18px var(--font-body);color:var(--color-text-tertiary_strong);margin-bottom:6px}
 .fld .in{height:var(--control-height-md);border:1px solid var(--color-border-input);border-radius:var(--radius-field);padding:0 10px;display:flex;align-items:center;background:var(--color-bg-primary)}
-.scrim{position:absolute;inset:0;background:var(--color-bg-overlay);display:grid;place-items:center;z-index:5}
-.dlg{width:440px;background:var(--color-bg-primary);border-radius:var(--radius-overlay);box-shadow:0 12px 32px var(--color-shadow-lg);overflow:hidden}
+.scrim{position:absolute;inset:0;background:var(--color-bg-overlay);backdrop-filter:blur(var(--backdrop-blur-lg));display:grid;place-items:center;z-index:5}
+.dlg{width:440px;background:var(--color-bg-primary_alt);border-radius:var(--radius-overlay);border:1px solid var(--shadow-xl-border);box-shadow:var(--shadow-xl);overflow:hidden}
 .dlg .hd{display:flex;gap:12px;align-items:flex-start;padding:20px 20px 0}.dlg .hd b{font:600 16px/24px var(--font-body);display:block}
 .dlg .bd{padding:8px 20px 20px 20px;color:var(--color-text-tertiary)}
 .dlg .ft{display:flex;gap:8px;justify-content:flex-end;padding:16px 20px;border-top:1px solid var(--color-border-secondary)}

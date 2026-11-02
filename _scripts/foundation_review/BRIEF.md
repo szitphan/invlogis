@@ -66,3 +66,17 @@ Trang tải `tokens.css` thật. Đề xuất đè trên màn demo qua `.tp-f.tp
 ## Trả về
 
 Báo cáo ≤ 12 dòng: kết quả build cuối (số mục, fail/warn), 3-5 phát hiện chính, điều chưa chắc (ref thiếu…), lỗi kit nếu có. Không dán SPEC.
+
+## Luật thống nhất sau soát chéo (áp cho cả 6 trang)
+
+- **Không đánh số lại mục**: người duyệt đã có thể lưu lựa chọn theo id. Bỏ mục thì để trống số đó.
+- Tên section bắt buộc: `Bảng đối chiếu … — Untitled ↔ mình` · `Đã chốt, không mở lại` (bảng DEC đang hiệu lực, mỗi dòng một câu) · `Bộ chung đề xuất (nếu chọn hết theo khuyến nghị)`. Build chặn nếu thiếu.
+- Câu `final` mẫu: "Khi bạn chốt: mình cập nhật `tokens.json` → sinh `tokens.css` + handoff → sửa `design-system/foundations/<file>.md` → cập nhật biến Figma cùng lượt → ghi DEC; rồi đặt <b>x = approved</b> (`ds-foundation-status.py set x approved`). Component đang có bị đánh stale và sync dần (rule ds-stale)." Thêm việc riêng của trang sau câu này.
+- Thuật ngữ: nhãn nền tảng hiển thị **Web · App**; chữ "Mobile" chỉ khi nói tên chế độ token. **Sáng · Tối** trong câu chữ; Light/Dark chỉ khi trích tên chế độ. Khung demo gọi **màn mẫu**.
+- Khung chuẩn: web **1280**, menu **240** (DEC-039), app **393**. 375 và 320 chỉ là máy thử.
+- Mở lại DEC: đọc đúng dòng DEC đó (cả cột Bỏ), kiểm DEC còn hiệu lực hay đã "thay bởi", viết câu **"Mở lại DEC-x:"** kèm bằng chứng mới. DEC đã thay thì trích DEC thay thế. Phương án trùng với phương án DEC đã bỏ cũng tính là mở lại.
+- Không thêm bậc Semantic cho số lẻ khi DEC-314 đã bỏ: ghi ngoại lệ. Không mượn token vai khác vì trùng số (cùng tinh thần `ic11`, `rd09`).
+- Tên token mới không được trùng tên Untitled mà khác số (lý do của `gr00`).
+- Mục phụ thuộc trang khác: thêm dòng `note` "Phụ thuộc <mã>: nếu chọn …, thì …" và ghi số kèm tên, không chỉ tên.
+- Điều lấy từ trí nhớ hoặc web: ghi nguồn hoặc ghi "chưa kiểm"; số chỉ đúng trong điều kiện nào thì nói điều kiện.
+- Mã, ký hiệu (K1–K4, "đợt 2") giải nghĩa ở lần xuất hiện đầu trên trang.

@@ -6,752 +6,1227 @@
     "angular": "lucide-angular",
     "flutter": "lucide_icons_flutter (tên snake → LucideIcons.camelCase)"
   },
+  "stroke": {
+    "upTo16": 2.25,
+    "from20": 2,
+    "note": "nét trên khung 24 theo cỡ (icon.md mục 2)"
+  },
+  "sizes": {
+    "xs": 12,
+    "sm": 14,
+    "chip": 14,
+    "md": 16,
+    "lg": 20
+  },
   "custom": [
     {
-      "name": "circle-alert",
-      "svg": "design-system/icons/circle-alert.svg",
-      "svgFill": "design-system/icons/circle-alert-fill.svg"
-    },
-    {
       "name": "container-seal",
-      "svg": "design-system/icons/container-seal.svg",
-      "svgFill": "design-system/icons/container-seal-fill.svg"
+      "svg": "design-system/icons/container-seal.svg"
     },
     {
       "name": "container-ship",
-      "svg": "design-system/icons/container-ship.svg",
-      "svgFill": "design-system/icons/container-ship-fill.svg"
+      "svg": "design-system/icons/container-ship.svg"
     },
     {
       "name": "container-truck",
-      "svg": "design-system/icons/container-truck.svg",
-      "svgFill": "design-system/icons/container-truck-fill.svg"
+      "svg": "design-system/icons/container-truck.svg"
     },
     {
       "name": "eir",
-      "svg": "design-system/icons/eir.svg",
-      "svgFill": "design-system/icons/eir-fill.svg"
+      "svg": "design-system/icons/eir.svg"
     },
     {
       "name": "semi-trailer",
-      "svg": "design-system/icons/semi-trailer.svg",
-      "svgFill": "design-system/icons/semi-trailer-fill.svg"
+      "svg": "design-system/icons/semi-trailer.svg"
     },
     {
       "name": "toll-booth",
-      "svg": "design-system/icons/toll-booth.svg",
-      "svgFill": "design-system/icons/toll-booth-fill.svg"
+      "svg": "design-system/icons/toll-booth.svg"
     },
     {
       "name": "tractor-unit",
-      "svg": "design-system/icons/tractor-unit.svg",
-      "svgFill": "design-system/icons/tractor-unit-fill.svg"
+      "svg": "design-system/icons/tractor-unit.svg"
+    }
+  ],
+  "filled": [
+    {
+      "name": "circle-alert",
+      "svgFill": "design-system/icons/circle-alert-fill.svg"
     },
     {
       "name": "triangle-alert",
-      "svg": "design-system/icons/triangle-alert.svg",
       "svgFill": "design-system/icons/triangle-alert-fill.svg"
     }
   ],
+  "fillOnPath": [
+    "star",
+    "pin",
+    "flag"
+  ],
+  "brand": {
+    "license": "MIT, Untitled UI React · design-system/icons/LICENSE-untitled-ui.txt · logo vẫn thuộc chủ thương hiệu",
+    "payment": [
+      {
+        "name": "affirm",
+        "svg": "design-system/icons/payment/affirm.svg"
+      },
+      {
+        "name": "afterpay",
+        "svg": "design-system/icons/payment/afterpay.svg"
+      },
+      {
+        "name": "alipay",
+        "svg": "design-system/icons/payment/alipay.svg"
+      },
+      {
+        "name": "amazon",
+        "svg": "design-system/icons/payment/amazon.svg"
+      },
+      {
+        "name": "amex",
+        "svg": "design-system/icons/payment/amex.svg"
+      },
+      {
+        "name": "apple-pay",
+        "svg": "design-system/icons/payment/apple-pay.svg"
+      },
+      {
+        "name": "ayden",
+        "svg": "design-system/icons/payment/ayden.svg"
+      },
+      {
+        "name": "bancontact",
+        "svg": "design-system/icons/payment/bancontact.svg"
+      },
+      {
+        "name": "binance-pay",
+        "svg": "design-system/icons/payment/binance-pay.svg"
+      },
+      {
+        "name": "bitcoin-cash",
+        "svg": "design-system/icons/payment/bitcoin-cash.svg"
+      },
+      {
+        "name": "bitcoin",
+        "svg": "design-system/icons/payment/bitcoin.svg"
+      },
+      {
+        "name": "bitpay",
+        "svg": "design-system/icons/payment/bitpay.svg"
+      },
+      {
+        "name": "braintree",
+        "svg": "design-system/icons/payment/braintree.svg"
+      },
+      {
+        "name": "cash-app-pay",
+        "svg": "design-system/icons/payment/cash-app-pay.svg"
+      },
+      {
+        "name": "citadele",
+        "svg": "design-system/icons/payment/citadele.svg"
+      },
+      {
+        "name": "coinbase",
+        "svg": "design-system/icons/payment/coinbase.svg"
+      },
+      {
+        "name": "diners-club",
+        "svg": "design-system/icons/payment/diners-club.svg"
+      },
+      {
+        "name": "discover",
+        "svg": "design-system/icons/payment/discover.svg"
+      },
+      {
+        "name": "elo",
+        "svg": "design-system/icons/payment/elo.svg"
+      },
+      {
+        "name": "etherium",
+        "svg": "design-system/icons/payment/etherium.svg"
+      },
+      {
+        "name": "forbrugsforeningen",
+        "svg": "design-system/icons/payment/forbrugsforeningen.svg"
+      },
+      {
+        "name": "giropay",
+        "svg": "design-system/icons/payment/giropay.svg"
+      },
+      {
+        "name": "google-pay",
+        "svg": "design-system/icons/payment/google-pay.svg"
+      },
+      {
+        "name": "ideal",
+        "svg": "design-system/icons/payment/ideal.svg"
+      },
+      {
+        "name": "interac",
+        "svg": "design-system/icons/payment/interac.svg"
+      },
+      {
+        "name": "jcb",
+        "svg": "design-system/icons/payment/jcb.svg"
+      },
+      {
+        "name": "klarna",
+        "svg": "design-system/icons/payment/klarna.svg"
+      },
+      {
+        "name": "lightcoin",
+        "svg": "design-system/icons/payment/lightcoin.svg"
+      },
+      {
+        "name": "maestro",
+        "svg": "design-system/icons/payment/maestro.svg"
+      },
+      {
+        "name": "mastercard",
+        "svg": "design-system/icons/payment/mastercard.svg"
+      },
+      {
+        "name": "payoneer",
+        "svg": "design-system/icons/payment/payoneer.svg"
+      },
+      {
+        "name": "paypal",
+        "svg": "design-system/icons/payment/paypal.svg"
+      },
+      {
+        "name": "paysafe",
+        "svg": "design-system/icons/payment/paysafe.svg"
+      },
+      {
+        "name": "qiwi",
+        "svg": "design-system/icons/payment/qiwi.svg"
+      },
+      {
+        "name": "razorpay",
+        "svg": "design-system/icons/payment/razorpay.svg"
+      },
+      {
+        "name": "revolut",
+        "svg": "design-system/icons/payment/revolut.svg"
+      },
+      {
+        "name": "ru-pay",
+        "svg": "design-system/icons/payment/ru-pay.svg"
+      },
+      {
+        "name": "samsung-pay",
+        "svg": "design-system/icons/payment/samsung-pay.svg"
+      },
+      {
+        "name": "sepa",
+        "svg": "design-system/icons/payment/sepa.svg"
+      },
+      {
+        "name": "shop-pay",
+        "svg": "design-system/icons/payment/shop-pay.svg"
+      },
+      {
+        "name": "shopee-pay",
+        "svg": "design-system/icons/payment/shopee-pay.svg"
+      },
+      {
+        "name": "skrill",
+        "svg": "design-system/icons/payment/skrill.svg"
+      },
+      {
+        "name": "sofort",
+        "svg": "design-system/icons/payment/sofort.svg"
+      },
+      {
+        "name": "stripe",
+        "svg": "design-system/icons/payment/stripe.svg"
+      },
+      {
+        "name": "union-pay",
+        "svg": "design-system/icons/payment/union-pay.svg"
+      },
+      {
+        "name": "upi",
+        "svg": "design-system/icons/payment/upi.svg"
+      },
+      {
+        "name": "venmo",
+        "svg": "design-system/icons/payment/venmo.svg"
+      },
+      {
+        "name": "verifone",
+        "svg": "design-system/icons/payment/verifone.svg"
+      },
+      {
+        "name": "visa",
+        "svg": "design-system/icons/payment/visa.svg"
+      },
+      {
+        "name": "we-chat-pay",
+        "svg": "design-system/icons/payment/we-chat-pay.svg"
+      },
+      {
+        "name": "we-chat",
+        "svg": "design-system/icons/payment/we-chat.svg"
+      },
+      {
+        "name": "webmoney",
+        "svg": "design-system/icons/payment/webmoney.svg"
+      },
+      {
+        "name": "wise",
+        "svg": "design-system/icons/payment/wise.svg"
+      },
+      {
+        "name": "yandex",
+        "svg": "design-system/icons/payment/yandex.svg"
+      },
+      {
+        "name": "zelle",
+        "svg": "design-system/icons/payment/zelle.svg"
+      },
+      {
+        "name": "zip-pay",
+        "svg": "design-system/icons/payment/zip-pay.svg"
+      }
+    ],
+    "social": [
+      {
+        "name": "angel-list",
+        "svg": "design-system/icons/social/angel-list.svg"
+      },
+      {
+        "name": "apple",
+        "svg": "design-system/icons/social/apple.svg"
+      },
+      {
+        "name": "clubhouse",
+        "svg": "design-system/icons/social/clubhouse.svg"
+      },
+      {
+        "name": "discord",
+        "svg": "design-system/icons/social/discord.svg"
+      },
+      {
+        "name": "dribbble",
+        "svg": "design-system/icons/social/dribbble.svg"
+      },
+      {
+        "name": "facebook",
+        "svg": "design-system/icons/social/facebook.svg"
+      },
+      {
+        "name": "figma",
+        "svg": "design-system/icons/social/figma.svg"
+      },
+      {
+        "name": "github",
+        "svg": "design-system/icons/social/github.svg"
+      },
+      {
+        "name": "google",
+        "svg": "design-system/icons/social/google.svg"
+      },
+      {
+        "name": "instagram",
+        "svg": "design-system/icons/social/instagram.svg"
+      },
+      {
+        "name": "layers",
+        "svg": "design-system/icons/social/layers.svg"
+      },
+      {
+        "name": "linkedin",
+        "svg": "design-system/icons/social/linkedin.svg"
+      },
+      {
+        "name": "pinterest",
+        "svg": "design-system/icons/social/pinterest.svg"
+      },
+      {
+        "name": "reddit",
+        "svg": "design-system/icons/social/reddit.svg"
+      },
+      {
+        "name": "signal",
+        "svg": "design-system/icons/social/signal.svg"
+      },
+      {
+        "name": "snapchat",
+        "svg": "design-system/icons/social/snapchat.svg"
+      },
+      {
+        "name": "telegram",
+        "svg": "design-system/icons/social/telegram.svg"
+      },
+      {
+        "name": "tiktok",
+        "svg": "design-system/icons/social/tiktok.svg"
+      },
+      {
+        "name": "tumblr",
+        "svg": "design-system/icons/social/tumblr.svg"
+      },
+      {
+        "name": "twitter",
+        "svg": "design-system/icons/social/twitter.svg"
+      },
+      {
+        "name": "x",
+        "svg": "design-system/icons/social/x.svg"
+      },
+      {
+        "name": "youtube",
+        "svg": "design-system/icons/social/youtube.svg"
+      }
+    ]
+  },
   "meanings": [
     {
-      "meaning": "Lập, thêm",
-      "icon": "plus",
-      "custom": false
-    },
-    {
-      "meaning": "Sửa",
-      "icon": "pencil",
-      "custom": false
-    },
-    {
-      "meaning": "Xoá",
-      "icon": "trash-2",
-      "custom": false
-    },
-    {
-      "meaning": "Sao chép",
-      "icon": "copy",
-      "custom": false
-    },
-    {
-      "meaning": "Xuất file",
-      "icon": "upload",
-      "custom": false
-    },
-    {
-      "meaning": "Tải xuống",
-      "icon": "download",
-      "custom": false
-    },
-    {
-      "meaning": "In",
-      "icon": "printer",
-      "custom": false
-    },
-    {
-      "meaning": "Gửi",
-      "icon": "send",
-      "custom": false
-    },
-    {
-      "meaning": "Bộ lọc",
-      "icon": "list-filter",
-      "custom": false
-    },
-    {
-      "meaning": "Tuỳ chỉnh cột",
-      "icon": "sliders-vertical",
-      "custom": false
-    },
-    {
-      "meaning": "Nhóm",
-      "icon": "rows-3",
-      "custom": false
-    },
-    {
-      "meaning": "Lịch sử",
-      "icon": "history",
-      "custom": false
-    },
-    {
-      "meaning": "Giao lại",
-      "icon": "refresh-cw",
-      "custom": false
-    },
-    {
-      "meaning": "Theo dõi",
-      "icon": "eye",
-      "custom": false
-    },
-    {
-      "meaning": "Duyệt",
-      "icon": "check",
-      "custom": false
-    },
-    {
-      "meaning": "Gọi lái xe",
-      "icon": "phone",
-      "custom": false
-    },
-    {
-      "meaning": "Chụp ảnh",
-      "icon": "camera",
-      "custom": false
-    },
-    {
-      "meaning": "Đính kèm",
-      "icon": "paperclip",
-      "custom": false
-    },
-    {
-      "meaning": "Quét mã",
-      "icon": "scan-line",
-      "custom": false
-    },
-    {
-      "meaning": "Thêm thao tác",
-      "icon": "ellipsis",
-      "custom": false
-    },
-    {
-      "meaning": "Đóng, xoá chip",
-      "icon": "x",
-      "custom": false
-    },
-    {
-      "meaning": "Tìm",
-      "icon": "search",
-      "custom": false
-    },
-    {
-      "meaning": "Thông báo",
-      "icon": "bell",
-      "custom": false
-    },
-    {
+      "group": "Điều hướng và bố cục",
       "meaning": "Quay lại màn trước",
       "icon": "arrow-left",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Sắp xếp cột",
       "icon": "arrow-up-down",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Mở rộng",
       "icon": "chevron-down",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Thu gọn",
       "icon": "chevron-up",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Trang trước",
       "icon": "chevron-left",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Trang sau, vào chi tiết hàng",
       "icon": "chevron-right",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Mở trang ngoài",
       "icon": "external-link",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Trang tổng quan",
       "icon": "layout-dashboard",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Thu/mở thanh menu bên",
       "icon": "panel-left",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Xem dạng danh sách",
       "icon": "list",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Xem dạng cột",
       "icon": "columns-3",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
+      "meaning": "Nhóm",
+      "icon": "rows-3",
+      "custom": false
+    },
+    {
+      "group": "Điều hướng và bố cục",
       "meaning": "Đăng xuất",
       "icon": "log-out",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Tách, rẽ nhánh",
       "icon": "git-branch",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Trang chủ",
       "icon": "house",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Mở menu",
       "icon": "menu",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Tiếp theo",
       "icon": "arrow-right",
       "custom": false
     },
     {
+      "group": "Điều hướng và bố cục",
       "meaning": "Đăng nhập",
       "icon": "log-in",
       "custom": false
     },
     {
+      "group": "Hành động",
+      "meaning": "Lập, thêm",
+      "icon": "plus",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Sửa",
+      "icon": "pencil",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Xoá",
+      "icon": "trash-2",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Sao chép",
+      "icon": "copy",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Tải lên",
+      "icon": "upload",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Xuất file",
+      "icon": "file-output",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Tải xuống",
+      "icon": "download",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "In",
+      "icon": "printer",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Gửi",
+      "icon": "send",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Bộ lọc",
+      "icon": "list-filter",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
       "meaning": "Xoá bộ lọc",
       "icon": "funnel-x",
       "custom": false
     },
     {
+      "group": "Hành động",
+      "meaning": "Tuỳ chỉnh cột",
+      "icon": "sliders-vertical",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Lịch sử",
+      "icon": "history",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Giao lại",
+      "icon": "refresh-cw",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Theo dõi",
+      "icon": "eye",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Duyệt",
+      "icon": "check",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Gọi lái xe",
+      "icon": "phone",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Chụp ảnh",
+      "icon": "camera",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Đính kèm",
+      "icon": "paperclip",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Quét mã",
+      "icon": "scan-line",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Thêm thao tác",
+      "icon": "ellipsis",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Đóng, xoá chip",
+      "icon": "x",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
+      "meaning": "Tìm",
+      "icon": "search",
+      "custom": false
+    },
+    {
+      "group": "Hành động",
       "meaning": "Bớt, giảm số lượng",
       "icon": "minus",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Bắt đầu",
       "icon": "play",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Cài đặt",
       "icon": "settings",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Kéo để đổi thứ tự",
       "icon": "grip",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Lưu",
       "icon": "save",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Hoàn tác",
       "icon": "undo-2",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Ghim",
       "icon": "pin",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Yêu thích",
       "icon": "star",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Chia sẻ",
       "icon": "share-2",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Liên kết",
       "icon": "link",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Lưu trữ",
       "icon": "archive",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Nhập file",
       "icon": "import",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Mã QR",
       "icon": "qr-code",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Mã vạch",
       "icon": "barcode",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Đổi mật khẩu",
       "icon": "key-round",
       "custom": false
     },
     {
+      "group": "Hành động",
       "meaning": "Đổi ngôn ngữ",
       "icon": "languages",
       "custom": false
     },
     {
-      "meaning": "Lệnh vận tải",
-      "icon": "clipboard-list",
-      "custom": false
-    },
-    {
-      "meaning": "Lái xe",
-      "icon": "user-round",
-      "custom": false
-    },
-    {
-      "meaning": "Đầu kéo",
-      "icon": "tractor-unit",
-      "custom": true
-    },
-    {
-      "meaning": "Mooc",
-      "icon": "semi-trailer",
-      "custom": true
-    },
-    {
-      "meaning": "Container",
-      "icon": "container",
-      "custom": false
-    },
-    {
-      "meaning": "Seal",
-      "icon": "container-seal",
-      "custom": true
-    },
-    {
-      "meaning": "Xe container",
-      "icon": "container-truck",
-      "custom": true
-    },
-    {
-      "meaning": "Chứng từ",
-      "icon": "file-text",
-      "custom": false
-    },
-    {
-      "meaning": "Phiếu EIR",
-      "icon": "eir",
-      "custom": true
-    },
-    {
-      "meaning": "Chi phí",
-      "icon": "receipt",
-      "custom": false
-    },
-    {
-      "meaning": "Hành trình, tuyến",
-      "icon": "route",
-      "custom": false
-    },
-    {
-      "meaning": "Địa điểm",
-      "icon": "map-pin",
-      "custom": false
-    },
-    {
-      "meaning": "Cảng",
-      "icon": "container-ship",
-      "custom": true
-    },
-    {
-      "meaning": "Kho, cơ sở",
-      "icon": "warehouse",
-      "custom": false
-    },
-    {
-      "meaning": "Trạm dầu",
-      "icon": "fuel",
-      "custom": false
-    },
-    {
-      "meaning": "Trạm thu phí",
-      "icon": "toll-booth",
-      "custom": true
-    },
-    {
-      "meaning": "Lịch",
-      "icon": "calendar",
-      "custom": false
-    },
-    {
-      "meaning": "Thư, email",
-      "icon": "mail",
-      "custom": false
-    },
-    {
-      "meaning": "Báo cáo, biểu đồ",
-      "icon": "chart-column",
-      "custom": false
-    },
-    {
-      "meaning": "Hàng hoá",
-      "icon": "package",
-      "custom": false
-    },
-    {
-      "meaning": "Thêm hàng hoá",
-      "icon": "package-plus",
-      "custom": false
-    },
-    {
-      "meaning": "Công ty, đối tác",
-      "icon": "building",
-      "custom": false
-    },
-    {
-      "meaning": "Hỗ trợ, tổng đài",
-      "icon": "headset",
-      "custom": false
-    },
-    {
-      "meaning": "Tiền mặt, thanh toán",
-      "icon": "banknote",
-      "custom": false
-    },
-    {
-      "meaning": "Mua sắm, vật tư",
-      "icon": "shopping-cart",
-      "custom": false
-    },
-    {
-      "meaning": "Sửa chữa, bảo dưỡng",
-      "icon": "wrench",
-      "custom": false
-    },
-    {
-      "meaning": "Lập chứng từ",
-      "icon": "file-plus",
-      "custom": false
-    },
-    {
-      "meaning": "Chứng từ đã duyệt",
-      "icon": "file-check",
-      "custom": false
-    },
-    {
-      "meaning": "Bảng tính (Excel)",
-      "icon": "file-spreadsheet",
-      "custom": false
-    },
-    {
-      "meaning": "Đã kiểm tra",
-      "icon": "clipboard-check",
-      "custom": false
-    },
-    {
-      "meaning": "Thư mục",
-      "icon": "folder",
-      "custom": false
-    },
-    {
-      "meaning": "Dấu xác nhận",
-      "icon": "stamp",
-      "custom": false
-    },
-    {
-      "meaning": "Hoá đơn",
-      "icon": "receipt-text",
-      "custom": false
-    },
-    {
-      "meaning": "Xe nâng",
-      "icon": "forklift",
-      "custom": false
-    },
-    {
-      "meaning": "Tàu",
-      "icon": "ship",
-      "custom": false
-    },
-    {
-      "meaning": "Đường sắt",
-      "icon": "train-front",
-      "custom": false
-    },
-    {
-      "meaning": "Hàng không",
-      "icon": "plane",
-      "custom": false
-    },
-    {
-      "meaning": "Công tơ mét, số km",
-      "icon": "gauge",
-      "custom": false
-    },
-    {
-      "meaning": "Đường",
-      "icon": "road",
-      "custom": false
-    },
-    {
-      "meaning": "Bản đồ",
-      "icon": "map",
-      "custom": false
-    },
-    {
-      "meaning": "Vị trí hiện tại",
-      "icon": "locate-fixed",
-      "custom": false
-    },
-    {
-      "meaning": "Nhà máy, xưởng",
-      "icon": "factory",
-      "custom": false
-    },
-    {
-      "meaning": "Cửa hàng",
-      "icon": "store",
-      "custom": false
-    },
-    {
-      "meaning": "Hàng nhiều kiện",
-      "icon": "boxes",
-      "custom": false
-    },
-    {
-      "meaning": "Đã giao nhận",
-      "icon": "package-check",
-      "custom": false
-    },
-    {
-      "meaning": "Điểm dừng",
-      "icon": "waypoints",
-      "custom": false
-    },
-    {
-      "meaning": "Nhóm, đội",
-      "icon": "users",
-      "custom": false
-    },
-    {
-      "meaning": "Thêm người dùng",
-      "icon": "user-plus",
-      "custom": false
-    },
-    {
-      "meaning": "Giấy phép lái xe, CCCD",
-      "icon": "id-card",
-      "custom": false
-    },
-    {
-      "meaning": "Ví, quỹ",
-      "icon": "wallet",
-      "custom": false
-    },
-    {
-      "meaning": "Thẻ",
-      "icon": "credit-card",
-      "custom": false
-    },
-    {
-      "meaning": "Tạm ứng",
-      "icon": "hand-coins",
-      "custom": false
-    },
-    {
-      "meaning": "Đối soát, tính toán",
-      "icon": "calculator",
-      "custom": false
-    },
-    {
-      "meaning": "Ngân hàng",
-      "icon": "landmark",
-      "custom": false
-    },
-    {
-      "meaning": "Thuế, chiết khấu",
-      "icon": "percent",
-      "custom": false
-    },
-    {
-      "meaning": "Đối tác, hợp đồng",
-      "icon": "handshake",
-      "custom": false
-    },
-    {
-      "meaning": "Đã lập",
-      "icon": "pencil",
-      "custom": false
-    },
-    {
-      "meaning": "Đã giao lái xe",
-      "icon": "truck",
-      "custom": false
-    },
-    {
-      "meaning": "Lái xe đã nhận",
-      "icon": "check",
-      "custom": false
-    },
-    {
-      "meaning": "Đang thực hiện",
-      "icon": "navigation",
-      "custom": false
-    },
-    {
-      "meaning": "Chờ duyệt",
-      "icon": "clock",
-      "custom": false
-    },
-    {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Đã duyệt",
       "icon": "check-check",
       "custom": false
     },
     {
-      "meaning": "Huỷ",
-      "icon": "circle-x",
-      "custom": false
-    },
-    {
-      "meaning": "Cảnh báo",
-      "icon": "triangle-alert",
-      "custom": false
-    },
-    {
-      "meaning": "Lỗi",
-      "icon": "circle-alert",
-      "custom": false
-    },
-    {
-      "meaning": "Thông tin",
-      "icon": "info",
-      "custom": false
-    },
-    {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Hoàn thành, thành công",
       "icon": "circle-check",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
+      "meaning": "Huỷ",
+      "icon": "circle-x",
+      "custom": false
+    },
+    {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Chưa bắt đầu, nháp",
       "icon": "circle-dashed",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
+      "meaning": "Đã lập",
+      "icon": "file-pen",
+      "custom": false
+    },
+    {
+      "group": "Trạng thái và phản hồi",
+      "meaning": "Lái xe đã nhận",
+      "icon": "user-check",
+      "custom": false
+    },
+    {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Tạm dừng",
       "icon": "circle-pause",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
+      "meaning": "Chờ duyệt",
+      "icon": "clock",
+      "custom": false
+    },
+    {
+      "group": "Trạng thái và phản hồi",
+      "meaning": "Thông tin",
+      "icon": "info",
+      "custom": false
+    },
+    {
+      "group": "Trạng thái và phản hồi",
+      "meaning": "Cảnh báo",
+      "icon": "triangle-alert",
+      "custom": false
+    },
+    {
+      "group": "Trạng thái và phản hồi",
+      "meaning": "Lỗi",
+      "icon": "circle-alert",
+      "custom": false
+    },
+    {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Trợ giúp",
       "icon": "circle-question-mark",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Không được phép, bị chặn",
       "icon": "ban",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Không có kết quả tìm",
       "icon": "search-x",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Mất kết nối",
       "icon": "wifi-off",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Khoá, bảo mật",
       "icon": "lock",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Quyền truy cập, bảo vệ",
       "icon": "shield",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
+      "meaning": "Thông báo",
+      "icon": "bell",
+      "custom": false
+    },
+    {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Chưa có dữ liệu (màn trống)",
       "icon": "inbox",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Đang tải",
       "icon": "loader-circle",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Đang chờ xử lý",
       "icon": "hourglass",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Đang xử lý",
       "icon": "circle-dot",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Đã xác minh",
       "icon": "badge-check",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
       "meaning": "An toàn",
       "icon": "shield-check",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Tắt thông báo",
       "icon": "bell-off",
       "custom": false
     },
     {
+      "group": "Trạng thái và phản hồi",
       "meaning": "Đánh dấu",
       "icon": "flag",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Chứng từ",
+      "icon": "file-text",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Phiếu EIR",
+      "icon": "eir",
+      "custom": true
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Lệnh vận tải",
+      "icon": "clipboard-list",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Chi phí",
+      "icon": "receipt",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Thư, email",
+      "icon": "mail",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Báo cáo, biểu đồ",
+      "icon": "chart-column",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Hàng hoá",
+      "icon": "package",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Thêm hàng hoá",
+      "icon": "package-plus",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Lập chứng từ",
+      "icon": "file-plus",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Chứng từ đã duyệt",
+      "icon": "file-check",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Bảng tính (Excel)",
+      "icon": "file-spreadsheet",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Đã kiểm tra",
+      "icon": "clipboard-check",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Thư mục",
+      "icon": "folder",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Dấu xác nhận",
+      "icon": "stamp",
+      "custom": false
+    },
+    {
+      "group": "Tệp và chứng từ",
+      "meaning": "Hoá đơn",
+      "icon": "receipt-text",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Đã giao lái xe",
+      "icon": "truck",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Đầu kéo",
+      "icon": "tractor-unit",
+      "custom": true
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Mooc",
+      "icon": "semi-trailer",
+      "custom": true
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Xe container",
+      "icon": "container-truck",
+      "custom": true
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Hành trình, tuyến",
+      "icon": "route",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Đang thực hiện",
+      "icon": "navigation",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Địa điểm",
+      "icon": "map-pin",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Container",
+      "icon": "container",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Seal",
+      "icon": "container-seal",
+      "custom": true
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Cảng",
+      "icon": "container-ship",
+      "custom": true
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Kho, cơ sở",
+      "icon": "warehouse",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Trạm dầu",
+      "icon": "fuel",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Trạm thu phí",
+      "icon": "toll-booth",
+      "custom": true
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Công ty",
+      "icon": "building",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Lịch",
+      "icon": "calendar",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Xe nâng",
+      "icon": "forklift",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Tàu",
+      "icon": "ship",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Đường sắt",
+      "icon": "train-front",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Hàng không",
+      "icon": "plane",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Công tơ mét, số km",
+      "icon": "gauge",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Đường",
+      "icon": "road",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Bản đồ",
+      "icon": "map",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Vị trí hiện tại",
+      "icon": "locate-fixed",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Nhà máy, xưởng",
+      "icon": "factory",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Cửa hàng",
+      "icon": "store",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Hàng nhiều kiện",
+      "icon": "boxes",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Đã giao nhận",
+      "icon": "package-check",
+      "custom": false
+    },
+    {
+      "group": "Vận tải và địa điểm",
+      "meaning": "Điểm dừng",
+      "icon": "waypoints",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Lái xe",
+      "icon": "user-round",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Hỗ trợ, tổng đài",
+      "icon": "headset",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Tiền mặt, thanh toán",
+      "icon": "banknote",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Mua sắm, vật tư",
+      "icon": "shopping-cart",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Sửa chữa, bảo dưỡng",
+      "icon": "wrench",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Nhóm, đội",
+      "icon": "users",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Thêm người dùng",
+      "icon": "user-plus",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Giấy phép lái xe, CCCD",
+      "icon": "id-card",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Ví, quỹ",
+      "icon": "wallet",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Thẻ",
+      "icon": "credit-card",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Tạm ứng",
+      "icon": "hand-coins",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Đối soát, tính toán",
+      "icon": "calculator",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Ngân hàng",
+      "icon": "landmark",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Thuế, chiết khấu",
+      "icon": "percent",
+      "custom": false
+    },
+    {
+      "group": "Người, tài chính và khác",
+      "meaning": "Đối tác",
+      "icon": "handshake",
       "custom": false
     }
   ]

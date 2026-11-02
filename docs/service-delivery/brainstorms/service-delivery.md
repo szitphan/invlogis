@@ -1,10 +1,11 @@
 ---
 type: brainstorm
 feature: service-delivery
-status: draft
+status: stale
+status_prev: draft
 status_changed: 2026-10-20
 status_reason: "đã review upstream, không cần sửa"
-updated: 2026-10-20
+updated: 2026-10-21
 links:
   - docs-input/tich-hop/ecus-api-yeu-cau-2025-10-26/ecus-api-yeu-cau-2025-10-26.md
   - docs-input/sop/sop-cung-cap-dich-vu-tong-quat.md
@@ -94,7 +95,7 @@ Mục nào không ghi ở P1, P2 dưới đây là P0 (DEC-229). DP-01 ở P0 do
 **Luồng lõi:** tạo, duyệt JobID → phân sang Điều phối, Điều vận hoặc thẳng sang ghi doanh thu → (Điều phối, Điều vận làm việc, ghi chi phí lên Lệnh và JobID) → ghi doanh thu → hoàn thành dịch vụ (Mục 5).
 
 **Nhóm A — giảm nhập liệu**
-- A9 [SOP+] [Lõi] Hoá đơn điện tử lấy qua kết nối nhà cung cấp hoá đơn điện tử (kết nối đầu tiên: MISA); không khớp thì chụp + nhập tay, gắn cờ "Chưa khớp hoá đơn điện tử".
+- A9 [SOP+] [Lõi] Hoá đơn điện tử lấy qua kết nối nhà cung cấp hoá đơn điện tử của `invoice-management` (DEC-252; kết nối đầu tiên: MISA); không khớp thì chụp + nhập tay, gắn cờ "Chưa khớp hoá đơn điện tử".
 - A10 [SOP+] [Lõi] Tờ khai hải quan do chính doanh nghiệp khai qua phần mềm khai hải quan có kết nối (Ecus là bên đầu tiên, Nhóm H): sau khi khai chính thức, số tờ khai, ngày tờ khai, phân luồng, mã vạch lô hàng hoặc container và chứng từ đã đính kèm tờ khai tự bổ sung vào bộ chứng từ của JobID; CS không phải quét QR hay tải lại. Tờ khai khách tự khai thì vẫn quét QR (`shipment-coordination` A2). Nguồn: Kết nối API với Ecus (26/10/2025), mục 3.1.
 - A11 [SOP to-be] [Lõi] [Cấu hình] JobID nháp từ chứng từ đọc tự động: phần mềm nhận chứng từ khách qua các kênh `P-kenh-nhan-chung-tu` (Delta: Zalo OA, Telegram, WeChat, Gmail, tải lên app hoặc web), đọc mỗi chứng từ một lần rồi tạo JobID ở trạng thái Nháp, điền sẵn phần lớn trường; tự gán mã khách theo người gửi và số báo giá hoặc hợp đồng còn hiệu lực; kiểm số container theo ISO 6346. Dữ liệu đọc ra bị từ chối nếu sai kiểu, số âm, ngày sai định dạng, hoặc thiếu mã số thuế, số hoá đơn, tổng tiền; mã số thuế phải đủ 10 hoặc 13 số; tiền trước thuế cộng VAT phải bằng tổng (Phần mềm Delta 3.0, 16/10/2026, mục 2.2.1). CS hoặc điều vận kiểm, sửa rồi chuyển duyệt; chỗ người sửa so với bản đọc được lưu lại. Chứng từ không nhận ra khách thì vào hàng đợi tra soát thủ công, không tạo JobID. App chặn ảnh mờ (khoá nút "Gửi", bắt chụp lại). Vẫn có luồng tạo JobID thủ công khi đọc lỗi hoặc loại JobID không có chứng từ định danh. Phần đọc chứng từ (DIS) là một khối riêng dùng chung; tạo JobID nháp là một ứng dụng của nó, cùng lần đọc ra danh mục lô hàng (`shipment-coordination` A12) và dữ liệu hoá đơn đầu vào (`debt-management`) (DEC-230). Nguồn: Phân hệ APAS (17/10/2026), mục 2.2–2.2.4.
 
@@ -142,7 +143,7 @@ Làm trong giai đoạn 1, có cách làm tay tạm hoặc phụ thuộc feature
 - DP-01 duyệt tự động theo hạn mức — cần số liệu nợ từ `debt-management`.
 - B7 giao dịch nội bộ · B14 JobID không doanh thu · D9 mã vạch gốc air · D11 tiền tệ CBT.
 - E9 hoá đơn trả hộ khách không xác nhận (chờ OQ-6) · E15 hoá đơn vô chủ · E19 chi phí CBT trả nhà cung cấp · E20 hoa hồng · E21 P/L Jobsheet (mẫu chờ OQ-5).
-- A9 hoá đơn điện tử qua MISA (chờ OQ-23).
+- A9 hoá đơn điện tử qua MISA, kết nối ở `invoice-management` (chờ OQ-23).
 
 ### P2 — nice to have
 

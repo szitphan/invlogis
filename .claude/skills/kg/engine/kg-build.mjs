@@ -5507,7 +5507,7 @@ class GraphBuilder {
       );
     }
 
-    const depsAbs = path.join(this.rootAbs, "design", "v2", "components", "_deps.json");
+    const depsAbs = path.join(this.rootAbs, "design-system", "components", "_deps.json");
     if (fs.existsSync(depsAbs)) this.parseDsDeps(depsAbs);
 
     this.parseActivityLog();

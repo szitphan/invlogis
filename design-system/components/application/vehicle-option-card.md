@@ -2,9 +2,9 @@
 type: design-component
 status: stale
 status_prev: draft
-updated: 2026-10-27
+updated: 2026-11-02
 links:
-  - design-system/foundations/misc-icon.md
+  - design-system/foundations/vehicle.md
   - design-system/components/application/vehicle-thumb.md
   - design-system/components/application/vehicle-card.md
   - _workspace/decisions.md
@@ -15,10 +15,10 @@ links:
 > Application · phiên bản 0.1.0 · Nháp · người phụ trách @szitphan · Figma `Vehicle Option Card` (6794:14809) và
 > `Vehicle Option Card / Mobile` (6794:14992), trang DS · Application components, Section `Vehicle option card`
 > 6795:15459, Demo 6795:15468 · lồng `Vehicle Thumb` (6787:12415), Badge (6657:165736), Radio (6657:167122) ·
-> DEC-237, DEC-270
+> DEC-237, DEC-270, DEC-334
 
 Dòng chọn một phương tiện trong danh sách: ảnh thu nhỏ, biển số, trạng thái + tải trọng · lái xe, Radio bên phải.
-Hai component vì app không có Hover và dòng phụ xuống hàng.
+Hai component vì app không có Hover.
 
 ## Web
 
@@ -35,10 +35,10 @@ Hai component vì app không có Hover và dòng phụ xuống hàng.
 
 | Phần | Nội dung | Token |
 |---|---|---|
-| Dòng | lề 16 × 12, khoảng 12, viền dưới 1; rộng 420 kéo giãn | `color/bg/primary` · `color/border/secondary` |
+| Dòng | lề 16 × 12, khoảng 12, viền dưới 1; trải theo khối chứa, không có rộng cố định (DEC-334 vh07); phẳng, không bóng (vh06) | `color/bg/primary` · `color/border/secondary` |
 | Ảnh `Thumb` | Vehicle Thumb SM 48 (đổi Group trên panel) | `size/6xl` |
 | Biển số `Plate` | 1 dòng, cắt "…" | `type/heading` · `color/text/primary` |
-| Dòng phụ `Sub` | Badge `Status` (Pill Color SM) + `Meta` (tải trọng · lái xe), khoảng 8; Meta tối thiểu 140, không đủ chỗ thì xuống dưới Badge, 1 dòng cắt "…" | `type/caption` · `color/text/tertiary` |
+| Dòng phụ `Sub` | Badge `Status` (Pill Color SM) + `Meta` (tải trọng · lái xe), khoảng 8; Meta tối thiểu 140, không đủ chỗ thì xuống dưới Badge ở mọi nền tảng, 1 dòng cắt "…" | `type/caption` · `color/text/tertiary` |
 | Chọn | Radio MD của Base, Checked theo Selected | Radio |
 
 ### Biến thể
@@ -61,6 +61,11 @@ Hai component vì app không có Hover và dòng phụ xuống hàng.
 | Không cần trạng thái | tắt Has Status |
 
 Màu Badge theo DEC-269 (đề xuất, chưa chốt).
+
+### Kích thước
+
+Cao theo nội dung. Trong drawer `width/xs` 384 (lề drawer 24 × 2 là giả định, chưa có spec drawer): 336 − lề 32 − ảnh 48 −
+Radio 20 − 2 khoảng 12 = 212, nhỏ hơn Badge 132 + 8 + Meta 140 = 280, nên dòng phụ luôn xuống hàng. Chữ không mất, dòng cao thêm.
 
 ### Nên và không nên
 
@@ -87,11 +92,15 @@ Demo `Xếp xe cho lệnh / Web`, `Chọn đầu kéo / Mobile`.
 ### Kiểm máy
 
 27/10: kiểm tên fail 0 · 0 màu gõ tay. Chữ dài ở 420 và 320: biển số, Meta cắt "…", Badge giữ nguyên. Kiểm mất hình:
-chưa chạy. Dark: chưa điền giá trị Dark.
+chưa chạy. 02/11: spec theo DEC-334, Figma chưa sync.
+
+### Dark
+
+Nền ô ảnh và nét bao theo Vehicle Thumb. Dòng phẳng ở cả hai chế độ. Phần còn lại chưa có số đo Dark.
 
 ## Mobile
 
-> Component `Vehicle Option Card / Mobile`, mode Platform = Mobile. Giống Web, khác: rộng 343; không có Hover
+> Component `Vehicle Option Card / Mobile`, mode Platform = Mobile. Giống Web, khác: trải theo màn; không có Hover
 > (State Default · Pressed · Focus · Disabled, 7 biến thể); dòng phụ thường xuống hàng (Badge trên, Meta dưới) nên dòng
 > cao ≈ 91.
 

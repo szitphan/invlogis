@@ -1713,7 +1713,7 @@
    "size": "",
    "state": "",
    "theme": "Light",
-   "value": "elev/3",
+   "value": "shadow/xl",
    "sel": ".elm",
    "cssProps": [
     "box-shadow"
@@ -1724,11 +1724,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "elev/3"
+    "shadow/xl"
    ],
    "bind": {
-    "token": "elev/3",
-    "css": "0px 16px 40px 0px var(--color-shadow-lg), 0px 4px 12px 0px var(--color-shadow-md)"
+    "token": "shadow/xl",
+    "css": "0px 20px 24px -4px var(--color-shadow-xl_01), 0px 8px 8px -4px var(--color-shadow-xl_02), 0px 3px 3px -1.5px var(--color-shadow-xl_03)"
    },
    "to": null,
    "visible": false,
@@ -1740,8 +1740,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "elev/3",
-    "css": "0px 16px 40px 0px var(--color-shadow-lg), 0px 4px 12px 0px var(--color-shadow-md)"
+    "token": "shadow/xl",
+    "css": "0px 20px 24px -4px var(--color-shadow-xl_01), 0px 8px 8px -4px var(--color-shadow-xl_02), 0px 3px 3px -1.5px var(--color-shadow-xl_03)"
    }
   },
   {
@@ -2154,7 +2154,7 @@
    "size": "",
    "state": "",
    "theme": "Light",
-   "value": "elev/3",
+   "value": "shadow/xl",
    "sel": ".pal",
    "cssProps": [
     "box-shadow"
@@ -2165,11 +2165,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "elev/3"
+    "shadow/xl"
    ],
    "bind": {
-    "token": "elev/3",
-    "css": "0px 16px 40px 0px var(--color-shadow-lg), 0px 4px 12px 0px var(--color-shadow-md)"
+    "token": "shadow/xl",
+    "css": "0px 20px 24px -4px var(--color-shadow-xl_01), 0px 8px 8px -4px var(--color-shadow-xl_02), 0px 3px 3px -1.5px var(--color-shadow-xl_03)"
    },
    "to": null,
    "visible": false,
@@ -2181,8 +2181,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "elev/3",
-    "css": "0px 16px 40px 0px var(--color-shadow-lg), 0px 4px 12px 0px var(--color-shadow-md)"
+    "token": "shadow/xl",
+    "css": "0px 20px 24px -4px var(--color-shadow-xl_01), 0px 8px 8px -4px var(--color-shadow-xl_02), 0px 3px 3px -1.5px var(--color-shadow-xl_03)"
    }
   },
   {
@@ -4647,7 +4647,7 @@
    "size": "",
    "state": "",
    "theme": "Light",
-   "value": "elev/3",
+   "value": "shadow/xl",
    "sel": ".am",
    "cssProps": [
     "box-shadow"
@@ -4658,11 +4658,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "elev/3"
+    "shadow/xl"
    ],
    "bind": {
-    "token": "elev/3",
-    "css": "0px 16px 40px 0px var(--color-shadow-lg), 0px 4px 12px 0px var(--color-shadow-md)"
+    "token": "shadow/xl",
+    "css": "0px 20px 24px -4px var(--color-shadow-xl_01), 0px 8px 8px -4px var(--color-shadow-xl_02), 0px 3px 3px -1.5px var(--color-shadow-xl_03)"
    },
    "to": null,
    "visible": false,
@@ -4674,8 +4674,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "elev/3",
-    "css": "0px 16px 40px 0px var(--color-shadow-lg), 0px 4px 12px 0px var(--color-shadow-md)"
+    "token": "shadow/xl",
+    "css": "0px 20px 24px -4px var(--color-shadow-xl_01), 0px 8px 8px -4px var(--color-shadow-xl_02), 0px 3px 3px -1.5px var(--color-shadow-xl_03)"
    }
   },
   {

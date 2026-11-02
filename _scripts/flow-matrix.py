@@ -15,13 +15,13 @@ lấy từ `get_metadata` của Section flow hoặc `figma_read get_page_model`)
 
 Cách xếp:
   * Cột = màn có số (`[#]` userflow Mục 2), thứ tự theo cột "Màn hình gồm" của userflow Mục 3 (thứ tự đi),
-    màn không có ở đó thì theo số. Bề rộng cột = frame rộng nhất của cột (ô Responsive tính 1440 + 100 + 393).
+    màn không có ở đó thì theo số. Bề rộng cột = frame rộng nhất của cột (ô Responsive tính 1280 + 100 + 1024 + 100 + 393).
   * Hàng: Luồng chính · Đang tải · Lỗi · Tình huống biên · Responsive. Hàng trống cả flow thì bỏ.
     - Tên state Loading / `<Khối> loading` / Submitting → Đang tải.
     - Còn lại theo màu node của frame trong userflow Mục 1 (`class … happy|error|edge`); node tìm theo nhãn
       `[n]` (frame chính) hoặc `[n] · <State>` (frame state).
     - Không có node → cột Hàng của bảng từ vựng tên state trong `design/setup-figma.md`.
-    - Đuôi `1440` / `393` → Responsive.
+    - Đuôi `1280` / `1024` / `393` → Responsive (`1440` của màn vẽ trước DEC-324 vẫn nhận).
   * Trong một ô nhiều frame → xếp dọc cách 100px theo thứ tự node trong userflow; ô Responsive xếp ngang.
   * Frame `Ghi chú … · <nodeId>` đặt ngay dưới frame có nodeId đó, cách 100px. Riêng thẻ Spec
     `Ghi chú · Spec · <nodeId>` đặt bên phải frame đó, cách 40px, cùng mép trên (cột rộng thêm phần thẻ, ô cao bằng
@@ -41,6 +41,7 @@ ROOT = Path(__file__).resolve().parent.parent
 ROWS = ["Luồng chính", "Đang tải", "Lỗi", "Tình huống biên", "Responsive"]
 CLS_ROW = {"happy": "Luồng chính", "error": "Lỗi", "edge": "Tình huống biên"}
 DOT = {"Luồng chính": "#28A745", "Đang tải": "#8C8C8C", "Lỗi": "#DC3545", "Tình huống biên": "#FFC107", "Responsive": "#8C8C8C"}
+RESP_ORDER = ("1440", "1280", "1024", "393")  # đuôi tên frame hàng Responsive, thứ tự trái sang phải (DEC-324)
 LOADING = re.compile(r"(^|\s)(loading|submitting)$", re.I)
 NUM = re.compile(r"^\d+\.\d+$")
 
@@ -213,8 +214,8 @@ def plan(feature, flow, frames, setup_text=None, userflow_text=None):
             continue
         screens.setdefault(p["num"], {"num": p["num"], "dev": p["dev"], "slug": p["slug"]})
         state = p["state"]
-        if state in ("1440", "393"):
-            row, rank, why = "Responsive", (0 if state == "1440" else 1), "đuôi " + state
+        if state in RESP_ORDER:
+            row, rank, why = "Responsive", RESP_ORDER.index(state), "đuôi " + state
         elif state and LOADING.search(state):
             row, rank, why = "Đang tải", 0, "state đang tải"
         else:

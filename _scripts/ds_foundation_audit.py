@@ -2,9 +2,9 @@
 
 Bộ kiểm chính so từng giá trị đã khai (values) với token. Module này thêm phần nó không thấy:
   Chữ      font-family ngoài bộ font DS · tổ hợp cỡ/dòng không thuộc thang type/* · viết hoa + giãn chữ sai caption-caps
-  Icon     cỡ icon ngoài thang 12/14/16/18/20/24 · nét khác 2 (DEC-300) · khối icon nhấn mạnh khác Featured 48 / icon 24
-  Hiệu ứng blur ngoài blur/* (làm mờ nền)
-  Lưới     bề rộng khung (width/max-width/min-width) ngoài width/*, content-max-width, breakpoint · lề nội dung khác layout/screen-inset (chỉ khi page.json auditInset: true)
+  Icon     cỡ icon ngoài thang 12/14/16/20/24 · nét sai theo cỡ (DEC-329 ic01) · khối icon nhấn mạnh khác Featured 48 / icon 24
+  Hiệu ứng blur ngoài backdrop-blur/* (làm mờ nền)
+  Lưới     bề rộng khung (width/max-width/min-width) ngoài width/*, breakpoint · lề nội dung khác grid/margin (chỉ khi page.json auditInset: true)
 và gắn nhóm cho mọi dòng (group_of) để trang review lọc theo nhóm, báo cáo tách nhóm.
 Dòng sinh ra có cat "conflict" (phải chọn: sửa theo luật / đổi luật / ngoại lệ), id ổn định "audit.{nhóm}.{khoá}".
 """
@@ -20,8 +20,8 @@ TYPO = {"font-size", "line-height", "font-weight", "letter-spacing", "font-famil
 EFFECT = {"shadow", "blur", "backdrop-blur", "opacity", "focus-width", "focus-offset"}
 WIDTH = {"width", "max-width", "min-width"}
 DS_FONTS = {"cal sans", "inter", "jetbrains mono"}
-ICON_SIZES = {12, 14, 16, 18, 20, 24}  # 18 = icon/size/ml (DEC-306)
-STROKES = {"2"}  # icons.md mục 2 (DEC-300): nét 2 trên khung 24 cho mọi icon
+ICON_SIZES = {12, 14, 16, 20, 24}  # bỏ 18 (DEC-329 ic04)
+STROKES = {"2", "2.25"}  # icon.md mục 2 (DEC-329): 2,25 cho cỡ 16 trở xuống, 2 cho cỡ 20, 24
 
 
 def group_of(prop, part=""):
@@ -181,17 +181,19 @@ def audit(page, parse_css, tokens_path):
         sw = re.search(r'\bstroke-width="([\d.]+)"', tag)
         if w and float(w.group(1)) not in ICON_SIZES and 'class="i"' in tag:
             sizes[float(w.group(1))] = sizes.get(float(w.group(1)), 0) + 1
-        if sw and sw.group(1) not in STROKES and 'fill="none"' in tag:
+        if sw and w and sw.group(1) != ("2.25" if float(w.group(1)) <= 16 else "2") and sw.group(1) in ("2", "2.25", "2.5") and 'fill="none"' in tag:
+            strokes[sw.group(1)] = strokes.get(sw.group(1), 0) + 1
+        elif sw and sw.group(1) not in STROKES and 'fill="none"' in tag:
             strokes[sw.group(1)] = strokes.get(sw.group(1), 0) + 1
     for w, n in sorted(sizes.items()):
         to = min(ICON_SIZES, key=lambda x: abs(x - w))
         rows.append(_row("icon", f"size-{_n(w)}", f"Icon cỡ {_n(w)} ({n} chỗ)", "icon-size", _n(w),
-                         f'svg.i[width="{_n(w)}"]', "cỡ icon ngoài thang 12 · 14 · 16 · 18 · 20 · 24 (icons.md mục 3)",
+                         f'svg.i[width="{_n(w)}"]', "cỡ icon ngoài thang 12 · 14 · 16 · 20 · 24 (icon.md mục 3)",
                          {"token": f"icon {to}", "value": to, "css": f"{to}px"}, css_props=["width", "height"], count=n))
     for sw, n in strokes.items():
         rows.append(_row("icon", f"stroke-{_slug(sw)}", f"Nét icon {sw} ({n} chỗ)", "stroke-width", sw,
-                         f'svg[stroke-width="{sw}"]', "nét icon khác 2 trên khung 24 (icons.md mục 2, DEC-300)",
-                         {"token": "nét 2", "value": 2, "css": "2"}, css_props=["stroke-width"], count=n))
+                         f'svg[stroke-width="{sw}"]', "nét icon sai: 2,25 cho cỡ 16 trở xuống, 2 cho cỡ 20, 24 (icon.md mục 2, DEC-329)",
+                         {"token": "nét theo cỡ", "value": 2, "css": "2"}, css_props=["stroke-width"], count=n))
     # khối icon nhấn mạnh: khối vuông = tròn/bo, chỉ chứa một svg → Featured icon 48, icon 24 (icons.md 3.1, DEC-258)
     circ = {}
     for sel, decl in by_sel.items():
@@ -224,15 +226,14 @@ def audit(page, parse_css, tokens_path):
                 if float(b) not in blurs:
                     to = min(blurs, key=lambda x: abs(x - float(b)))
                     rows.append(_row("effect", f"blur-{_slug(sel)}", sel, "backdrop-filter", f"blur({_n(float(b))}px)", sel,
-                                     "làm mờ nền ngoài blur/sm 8 · md 16 · lg 24 · xl 40 (foundations mục 8.1)",
-                                     {"token": "blur", "value": to, "css": f"blur({_n(to)}px)"}, css_props=[p]))
+                                     "làm mờ nền ngoài backdrop-blur/sm 8 · md 16 · lg 24 · xl 40 (foundations mục 8.1)",
+                                     {"token": "backdrop-blur", "value": to, "css": f"blur({_n(to)}px)"}, css_props=[p]))
 
     # ---- Lưới & độ rộng ----
     allowed = {}
-    for k in [x for x in pv if x.startswith("width/")] + ["layout/content-max-width"]:
-        for m in ("Web", "Mobile"):
-            if isinstance(num(pv[k].get(m)), (int, float)):
-                allowed.setdefault(float(num(pv[k][m])), k)
+    for k, v in d["collections"]["Primitives"]["number"].items():
+        if k.startswith("width/"):
+            allowed.setdefault(float(v), k)
     for k, v in (d.get("breakpoints") or {}).items():
         allowed.setdefault(float(v), f"breakpoint {k}")
     side = {float(num(pv[k][m])) for k in pv if k.startswith(("sidebar/", "nav/width")) for m in ("Web", "Mobile")
@@ -248,15 +249,15 @@ def audit(page, parse_css, tokens_path):
                                  {"token": allowed[to], "value": _n(to), "css": f"{_n(to)}px"}, css_props=[p]))
     # lề nội dung thuộc khung màn, không thuộc component — chỉ kiểm khi component dựng khung trang
     # (page.json "auditInset": true, vd app shell / page layout). User 29/10: Header nav → ngoài phạm vi.
-    inset = num(pv.get("layout/screen-inset", {}).get("Web")) if page.get("auditInset") else None
+    inset = num(pv.get("grid/margin", {}).get("Web")) if page.get("auditInset") else None
     for sel, p, v in screen:
         if (re.search(r"(^|[\s.>])(main|\.ct|content)\b", sel) or sel.strip() in (".ct", "main")) and p in ("padding", "padding-left", "padding-right"):
             vals = [_px(x) for x in v.split()]
             xs = vals[1] if p == "padding" and len(vals) >= 2 else vals[0]
             if xs is not None and inset and xs != float(inset):
                 rows.append(_row("grid", f"inset-{_slug(sel)}", sel, "padding-x", _n(xs), sel,
-                                 f"lề nội dung web phải bằng layout/screen-inset {inset} (DEC-259)",
-                                 {"token": "layout/screen-inset", "value": inset,
+                                 f"lề nội dung web phải bằng grid/margin {inset} (DEC-259)",
+                                 {"token": "grid/margin", "value": inset,
                                   "css": f"{vals[0] if vals[0] is not None else 0}px {inset}px" if p == "padding" else f"{inset}px"},
                                  css_props=[p]))
     _ = side

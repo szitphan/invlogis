@@ -1527,7 +1527,7 @@ Màn hiện khi app web tải dữ liệu lần đầu (sau đăng nhập, mở 
 
 * **Khi nào hiện:** chỉ khi tải lâu hơn `duration-medium-max` (400ms); tải xong là tắt ngay, không chờ
   hết chuyển động. Chuyển trang trong app không dùng splash (dùng `Skeleton`).
-* **Bố cục:** nền trắng #FFFFFF. Logo khách (`P-logo`) giữa màn, cao 72px (logo Delta chỉ có ® nhỏ nên đặt cao 40px, giữ cỡ chữ cũ, DEC-325), **căn theo tâm phần chữ**:
+* **Bố cục:** nền trắng #FFFFFF. Logo khách (`P-logo`) giữa màn, cao 72px (logo Delta chỉ có ® nhỏ nên đặt cao 40px, giữ cỡ chữ cũ, DEC-325; DS v2 theo DEC-326: cao 64, trên app rộng tối đa bằng màn trừ lề), **căn theo tâm phần chữ**:
   logo có ký hiệu lệch một phía (vd ® của Delta) thì bù vị trí để chữ vào giữa, ký hiệu nhô ra ngoài.
   Chân màn cách đáy 40px: "Được phát triển bởi" 13px `{colors.text-secondary}` + logo innvie cao 26px,
   **thẳng chân chữ** (baseline), không căn giữa theo khối logo.
@@ -1940,6 +1940,8 @@ giá trị đó trở lên.
 | Mốc | sm | md | lg | xl | 2xl |
 | --- | --- | --- | --- | --- | --- |
 | Từ | 640 | 768 | 1024 | 1280 | 1536 |
+
+> DS v2 (DEC-324) thay khung kiểm 1440 bằng 1280 và 1024; chi tiết tối đa 1280 gồm lề, form 560. Xem `design-system/foundations/grids.md`. Bảng dưới là số của DS cũ.
 
 | Bề rộng | Khung trang | Khung vẽ Figma |
 | --- | --- | --- |

@@ -9,7 +9,8 @@ date: 2026-10-21
 reply_to: Tín Phan (tinpb.work@gmail.com)
 footer: Câu hỏi cần xác nhận — vòng 3
 brand: innvie-v1
-status: draft
+status: stale
+status_prev: draft
 updated: 2026-10-21
 links:
   - docs/transport-dispatch/brainstorms/transport-dispatch.md

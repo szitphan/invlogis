@@ -158,6 +158,10 @@ def build_dtcg(doc):
         put(ts, f"motion/{k}", {"$type": "duration" if k.startswith("duration") else "cubicBezier",
                                 "$value": v if k.startswith("duration") else
                                 [float(x) for x in re.findall(r"[\d.]+", v)]})
+    for k, p in doc.get("motionPresets", {}).items():
+        ms = int(doc["motion"][p["duration"]].replace("ms", "")) * p.get("multiply", 1)
+        curve = [0.0, 0.0, 1.0, 1.0] if p["easing"] == "linear" else [float(x) for x in re.findall(r"[\d.]+", doc["motion"][p["easing"]])]
+        put(ts, f"motion/preset/{k}", {"$type": "transition", "$value": {"duration": f"{ms}ms", "delay": "0ms", "timingFunction": curve}, "$description": p["use"]})
     for k, v in doc.get("blur", {}).items():
         put(ts, k, {"$type": "dimension", "$value": f"{v['value']}px", "$description": v["use"]})
     files["styles"] = ts
@@ -357,9 +361,9 @@ def build_dart(doc):
     L.append("}")
     L.append("")
 
-    # Elevation, motion
+    # Shadow, motion
     L.append("/// Đổ bóng (effect style Figma).")
-    L.append("abstract final class InvElevation {")
+    L.append("abstract final class InvShadow {")
     for k, v in doc["effectStyles"].items():
         shadows = ", ".join(
             f"BoxShadow(color: {dart_color(s['color'] + format(round(s['alpha'] * 255), '02X'))}, offset: Offset({float(s['x'])}, {float(s['y'])}), "
@@ -382,6 +386,23 @@ def build_dart(doc):
         else:
             a = ", ".join(re.findall(r"[\d.]+", v))
             L.append(f"  static const Curve {ident(k)} = Cubic({a});")
+    L.append("}")
+    L.append("")
+    # DEC-336: Flutter chỉ nhận thời gian và đường cong; hình chạy dựng bằng widget, xem foundations/motion.md mục 10.11
+    L.append("class InvMotionPreset {")
+    L.append("  final Duration duration;")
+    L.append("  final Curve curve;")
+    L.append("  final Duration? exitDuration;")
+    L.append("  final Curve? exitCurve;")
+    L.append("  const InvMotionPreset({required this.duration, required this.curve, this.exitDuration, this.exitCurve});")
+    for k, p in doc.get("motionPresets", {}).items():
+        d = f"InvMotion.{ident(p['duration'])}"
+        if p.get("multiply"):
+            d = f"Duration(milliseconds: {int(doc['motion'][p['duration']].replace('ms', '')) * p['multiply']})"
+        c = "Curves.linear" if p["easing"] == "linear" else f"InvMotion.{ident(p['easing'])}"
+        ex = f", exitDuration: InvMotion.{ident(p['exitDuration'])}, exitCurve: InvMotion.{ident(p['exitEasing'])}" if p.get("exitDuration") else ""
+        L.append(f"  /// {p['use']}")
+        L.append(f"  static const InvMotionPreset {ident(k)} = InvMotionPreset(duration: {d}, curve: {c}{ex});")
     L.append("}")
     L.append("")
 
@@ -523,17 +544,34 @@ def build_crosswalk(ids):
 def build_icons():
     text = (V2 / "foundations/icon.md").read_text(encoding="utf-8")
     lib = re.search(r"\*\*Lucide\*\*.*?bản \*\*([\d.]+)\*\*", text)
-    meanings = []
-    part = text.split("## 7.")[1] if "## 7." in text else ""
-    for m, icon, rest in re.findall(r"^\| ([^|`]+?) \| `icon/([a-z0-9\-]+)`([^|]*)\|", part, re.M):
-        meanings.append({"meaning": m.strip(), "icon": icon, "custom": "tự vẽ" in rest})
-    custom = sorted({p.stem.replace("-fill", "") for p in (V2 / "icons").glob("*.svg")})
+    meanings, group = [], None
+    part = text.split("## 7.")[1].split("## 8.")[0] if "## 7." in text else ""
+    for line in part.splitlines():
+        if line.startswith("### "):
+            group = line[4:].strip()
+            continue
+        row = re.match(r"^\| ([^|`]+?) \| `icon/([a-z0-9\-]+)`([^|]*)\|", line)
+        if row:
+            m, icon, rest = row.groups()
+            meanings.append({"group": group, "meaning": m.strip(), "icon": icon, "custom": "tự vẽ" in rest})
+    icons = V2 / "icons"
+    def rel(p):
+        return f"design-system/icons/{p}"
+    svgs = sorted(p.name for p in icons.glob("*.svg"))
     return {
         "$generator": GEN,
         "library": {"name": "lucide", "version": lib.group(1) if lib else None,
                     "angular": "lucide-angular", "flutter": "lucide_icons_flutter (tên snake → LucideIcons.camelCase)"},
-        "custom": [{"name": n, "svg": f"design-system/icons/{n}.svg",
-                    "svgFill": f"design-system/icons/{n}-fill.svg" if (V2 / f"icons/{n}-fill.svg").exists() else None} for n in custom],
+        "stroke": {"upTo16": 2.25, "from20": 2, "note": "nét trên khung 24 theo cỡ (icon.md mục 2)"},
+        "sizes": {"xs": 12, "sm": 14, "chip": 14, "md": 16, "lg": 20},
+        "custom": [{"name": n[:-4], "svg": rel(n)} for n in svgs if not n.endswith("-fill.svg")],
+        "filled": [{"name": n[:-9], "svgFill": rel(n)} for n in svgs if n.endswith("-fill.svg")],
+        "fillOnPath": ["star", "pin", "flag"],
+        "brand": {
+            "license": "MIT, Untitled UI React · design-system/icons/LICENSE-untitled-ui.txt · logo vẫn thuộc chủ thương hiệu",
+            "payment": [{"name": p.stem, "svg": rel(f"payment/{p.name}")} for p in sorted((icons / "payment").glob("*.svg"))],
+            "social": [{"name": p.stem, "svg": rel(f"social/{p.name}")} for p in sorted((icons / "social").glob("*.svg"))],
+        },
         "meanings": meanings,
     }
 

@@ -113,14 +113,14 @@ CSS_MS = r"""
 .ctl.ms.s-sm .tg{--th:20px;font-size:11.5px}
 /* app */
 .sht .mi{gap:12px}.sht .mi .cbx{width:20px;height:20px}
-.sht .sh-f .bt{flex:1;height:48px;border-radius:12px;font-size:15px}
+.sht .sh-f .bt{flex:1;height:48px;border-radius:var(--radius-control);font-size:15px}
 .fs{position:absolute;inset:0;background:var(--color-bg-primary_alt);z-index:9;display:flex;flex-direction:column}
 .fs .fs-h{height:52px;display:flex;align-items:center;gap:8px;padding:44px 16px 0;box-sizing:content-box;font:600 17px Inter}
-.fs .msr{margin:8px 16px;border:1px solid var(--color-border-primary);border-radius:12px;height:44px;padding:0 12px}
+.fs .msr{margin:8px 16px;border:1px solid var(--color-border-primary);border-radius:var(--radius-control);height:44px;padding:0 12px}
 .fs .fs-b{flex:1;overflow:auto;padding:0 8px}.fs .mi{min-height:52px;font-size:16px;padding:0 12px}
 .fs .chips{display:flex;gap:6px;flex-wrap:wrap;padding:4px 16px 8px}
 .fs .fs-f{padding:12px 16px 28px;border-top:1px solid var(--color-border-secondary)}
-.sht.static,.fs.static{position:relative;border-radius:16px;max-height:none;box-shadow:none;border:1px solid var(--color-border-secondary)}
+.sht.static,.fs.static{position:relative;border-radius:var(--radius-overlay);max-height:none;box-shadow:none;border:1px solid var(--color-border-secondary)}
 .fs.static .fs-h{padding-top:0}
 .vg .msm{max-height:none}
 """

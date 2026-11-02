@@ -10,7 +10,7 @@ html = src.read_text(encoding="utf-8")
 keys = sorted(set(re.findall(r'"([a-z0-9-]+)",(?:\d+|"none"|"\?"),"(?:ok|ask|none)"', html)) - {"—"})
 imgs = {}
 for k in keys:
-    f = lab / "assets" / "vehicles" / "b-ai" / f"{k}-q.png"
+    f = lab.parent.parent / "design-system" / "assets" / "vehicles" / f"{k}-q.png"
     if not f.exists():
         print("thiếu ảnh:", k); continue
     im = Image.open(f).convert("RGBA"); im.thumbnail((360, 200), Image.LANCZOS)

@@ -2,9 +2,9 @@
 type: design-component
 status: stale
 status_prev: draft
-updated: 2026-10-27
+updated: 2026-11-02
 links:
-  - design-system/foundations/misc-icon.md
+  - design-system/foundations/vehicle.md
   - design-system/handoff/vehicles.json
   - design-system/tokens.json
   - _workspace/decisions.md
@@ -14,7 +14,7 @@ links:
 
 > Application · phiên bản 0.1.0 · Nháp · người phụ trách @szitphan · Figma `Vehicle Thumb` (6787:12415, trang
 > DS · Application components, Section `Vehicle thumb` 6788:12444, Demo 6788:12452) · ảnh lồng `Vehicle Image`
-> (6777:1914, trang DS · Foundations) · DEC-266, DEC-268
+> (6777:1914, trang DS · Foundations) · DEC-266, DEC-268, DEC-334
 
 Ảnh thu nhỏ phương tiện trong ô vuông, cắt sẵn theo nhóm hình. Một component cho cả web và app: cỡ, bo, nền đọc
 từ biến collection Platform và có **cùng số ở hai mode**, nên phần Mobile trỏ về phần Web.
@@ -26,9 +26,10 @@ từ biến collection Platform và có **cùng số ở hai mode**, nên phần
 ### Tổng quan
 
 - Dùng khi cần nhận ra **loại phương tiện** trong một chỗ nhỏ: dòng bảng, dòng danh sách, thẻ chọn, đầu thẻ bản ghi.
-  Luôn đi kèm biển số hoặc mã bằng chữ; ảnh không thay chữ.
-- **Group** = 22 nhóm hình chung (`design-system/foundations/misc-icon.md` mục 1). Tên xe của khách gán vào nhóm theo bảng của khách
-  (`vehicles.json` → `tenants`); không có nhóm → `unknown`.
+  Luôn đi kèm biển số hoặc mã bằng chữ; ảnh không thay chữ. Ranh giới: dòng dữ liệu (≥ 32) dùng Thumb; menu, nhãn, chip
+  (≤ 20) dùng icon xe (DEC-334 vh11).
+- **Group** = 22 nhóm hình chung (`design-system/foundations/vehicle.md` mục 1). Đội sản phẩm gán tên xe của khách vào nhóm khi đưa khách
+  lên, khách không sửa (`vehicles.json` → `tenants`, DEC-334 vh10); không có nhóm → `unknown`.
 - Mỗi nhóm **cắt sẵn** phần nhận diện: đầu kéo, xe tải, container lấy đầu xe tràn mép phải; mooc lấy cụm bánh tràn
   mép trái; xe nâng, máy phát, trạm bơm lấy cả.
 - Kiểu dáng phụ theo hãng: chọn trên ảnh lồng **Image → Style** (Alt 1…3), không thêm biến thể.
@@ -38,8 +39,9 @@ từ biến collection Platform và có **cùng số ở hai mode**, nên phần
 | Phần | Token | Giá trị |
 |---|---|---|
 | Ô | `size/4xl` · `size/6xl` · `size/7xl` | 32 · 48 · 64 |
-| Bo góc | `radius/sm` · `radius/md` · `radius/lg` | 6 · 8 · 10 |
-| Nền | `color/bg/secondary` | — |
+| Bo góc | `radius/inner` | 8 cả 3 cỡ (DEC-334 vh04) |
+| Nền | Sáng `color/bg/secondary` · Tối `color/bg/quaternary` | DEC-334 vh08 |
+| Nét bao | drop-shadow theo hình: Sáng `color/fg/quaternary` · Tối `color/fg/tertiary` | 0,6 |
 | Ảnh | instance `Vehicle Image`, View = Q, cắt trong ô (clip) | đầu xe: chiều cao hình = 86% ô, đáy 96%, neo mép phải · mooc: cao hình 50% ô, đáy 88%, neo mép trái · thiết bị: vừa 84% × 80% ô, đáy 92%, căn giữa |
 | Chưa xác định | viền `color/border/primary`, nét đứt 3/3, không ảnh | — |
 
@@ -90,12 +92,22 @@ Demo `Danh sách phương tiện / Web` (XS) · `Chọn xe / Mobile` (SM). Sẽ 
 ### Token
 
 Ô: `--size-4xl` · `--size-6xl` · `--size-7xl` ·
-bo góc: `--radius-sm` · `--radius-md` · `--radius-lg` · nền `--color-bg-secondary`.
+bo góc: `--radius-inner` · nền `--color-bg-secondary`, Tối `--color-bg-quaternary` · nét bao `--color-fg-quaternary`, Tối `--color-fg-tertiary`.
 
 ### Kiểm máy
 
 27/10: kiểm tên (DEC-264) fail 0 trên Section và Demo · 66/66 biến thể gắn biến cỡ, bo, nền. Chữ dài: không áp
-(không có chữ). Dark: chưa điền giá trị Dark (architecture Mục 7). Kiểm mất hình `check-mat-hinh.js`: chưa chạy.
+(không có chữ). Kiểm mất hình `check-mat-hinh.js`: chưa chạy. 02/11: spec theo DEC-334, Figma chưa sync.
+
+### Dark
+
+| Phần | Sáng | Tối |
+|---|---|---|
+| Nền ô | `color/bg/secondary` #FAFAFA | `color/bg/quaternary` #404040 |
+| Nét bao 0,6 | `color/fg/quaternary` #A3A3A3 | `color/fg/tertiary` #A3A3A3 |
+
+Tỉ lệ điểm ảnh dưới 1,5:1 so với nền, 21 ảnh Q: Sáng 34%, Tối 26%. Chưa đo hiệu năng nét bao trong danh sách dài, chưa kiểm
+Flutter.
 
 ## Mobile
 

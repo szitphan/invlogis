@@ -10,15 +10,6 @@
    "status": null
   },
   {
-   "id": "6681:227883",
-   "name": "Company logo",
-   "type": "COMPONENT_SET",
-   "page": "DS · Foundations",
-   "section": "6702:122239",
-   "sectionName": "Logos",
-   "status": null
-  },
-  {
    "id": "6657:165918",
    "name": "File type icon",
    "type": "COMPONENT_SET",
@@ -898,24 +889,6 @@
    "page": "DS · Application components",
    "section": "6782:139884",
    "sectionName": "Device Frame",
-   "status": null
-  },
-  {
-   "id": "5828:155110",
-   "name": "Logo khách / Delta",
-   "type": "COMPONENT",
-   "page": "DS · Application components",
-   "section": null,
-   "sectionName": null,
-   "status": null
-  },
-  {
-   "id": "5841:988",
-   "name": "Logo sản phẩm / Invlogis",
-   "type": "COMPONENT",
-   "page": "DS · Application components",
-   "section": null,
-   "sectionName": null,
    "status": null
   },
   {
@@ -1836,15 +1809,15 @@
    ]
   },
   "0. Primitives": {
-   "n": 175,
-   "h": "s5wnr0",
+   "n": 195,
+   "h": "1wh77qa",
    "modes": [
     "Value"
    ]
   },
   "1. Semantic": {
-   "n": 170,
-   "h": "5vt7r2",
+   "n": 182,
+   "h": "ohd1te",
    "modes": [
     "Light",
     "Dark"
@@ -1883,16 +1856,16 @@
    ]
   },
   "2. Platform · Radius": {
-   "n": 21,
-   "h": "16tn8hf",
+   "n": 19,
+   "h": "1iw9o4z",
    "modes": [
     "Web",
     "Mobile"
    ]
   },
   "3. Platform · Spacing & Layout": {
-   "n": 28,
-   "h": "19ceqi7",
+   "n": 32,
+   "h": "133f3kw",
    "modes": [
     "Web",
     "Mobile"
@@ -1906,16 +1879,16 @@
    ]
   },
   "5. Platform · Sizes": {
-   "n": 48,
-   "h": "22fmps",
+   "n": 43,
+   "h": "19wokk0",
    "modes": [
     "Web",
     "Mobile"
    ]
   },
   "6. Platform · Component sizes": {
-   "n": 59,
-   "h": "1r5tku1",
+   "n": 57,
+   "h": "64o5dw",
    "modes": [
     "Web",
     "Mobile"
@@ -1930,7 +1903,7 @@
   }
  },
  "fileKey": "FifpyOMpZk9OP8qyNzbRVJ",
- "taken": "2026-11-01",
- "sync_note": "2026-10-30 BL-315: Figma đồng bộ tokens.json (DEC-312/313/314): +color/action/secondary-pressed, color/action/danger-subtle-hover, color/action/danger-subtle-pressed; space/* Untitled; size/*; xoá card/*, list-row/*; 5 biến zz-old/gap-* chờ xoá (BL-316). DEC-315: radius primitive theo px + thang Semantic radius/* Untitled. | DEC-321 (01/11): +color/border/input_hover, color/bg/error/overlay, alpha/red-700-55; đổi gắn biến ở Base, Application. | DEC-322 (01/11): thang font-size/*, line-height/*, 23 text style, collection 4 một mode.",
+ "taken": "2026-11-02",
+ "sync_note": "2026-10-30 BL-315: Figma đồng bộ tokens.json (DEC-312/313/314): +color/action/secondary-pressed, color/action/danger-subtle-hover, color/action/danger-subtle-pressed; space/* Untitled; size/*; xoá card/*, list-row/*; 5 biến zz-old/gap-* chờ xoá (BL-316). DEC-315: radius primitive theo px + thang Semantic radius/* Untitled. | DEC-321 (01/11): +color/border/input_hover, color/bg/error/overlay, alpha/red-700-55; đổi gắn biến ở Base, Application. | DEC-322 (01/11): thang font-size/*, line-height/*, 23 text style, collection 4 một mode. | 02/11: vá tay theo Figma (DEC-324, DEC-326): bỏ Company logo, Logo khách / Delta, Logo sản phẩm / Invlogis; varhash chụp lại sau khi xoá width/lg cũ.",
  "variables": []
 }

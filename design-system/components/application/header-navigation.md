@@ -2,10 +2,12 @@
 type: design-component
 status: stale
 status_prev: in-review
-updated: 2026-10-30
+updated: 2026-11-02
 links:
   - design-system/architecture.md
   - design-system/foundations/README.md
+  - design-system/foundations/logo.md
+  - design-system/components/base/logo.md
   - design-system/tokens.json
   - design-system/components/base/breadcrumbs.md
   - design-system/components/application/sidebar-navigation.md
@@ -51,7 +53,9 @@ dùng `Mobile header`. Bản này sửa tại chỗ bộ `Header navigation` d�
   (component riêng, CMP-02) neo dưới chuông.
 - **Tài khoản** (D4 B, DEC-293): chỉ avatar (chữ viết tắt hoặc ảnh); rê chuột hiện tooltip họ tên. Bấm mở menu: đầu menu
   avatar + họ tên + **mã NV · chức vụ** → Thông tin cá nhân · Đổi mật khẩu · Ngôn ngữ (giá trị hiện tại bên phải) · vạch ·
-  Đăng xuất (chữ đỏ) (UC01.01–01.06).
+  Đăng xuất (chữ đỏ) (UC01.01–01.06). Hàng Ngôn ngữ: giá trị = cờ `Flag` + tên ngôn ngữ, vẫn có chữ, cờ không đứng một mình;
+  theo `P-ngon-ngu-giao-dien`: Tiếng Việt cờ VN, Tiếng Anh cờ US (user 02/11) (DEC-335 ms06,
+  [icon-sets.md](../../foundations/icon-sets.md)).
 - **Layout = Secondary Nav:** thêm hàng tab dưới thanh (màn chi tiết: Chi tiết · Chi phí · Chứng từ · Lịch sử). Chỉ một
   viền dưới, ở đáy hàng tab.
 
@@ -62,14 +66,14 @@ dùng `Mobile header`. Bản này sửa tại chỗ bộ `Header navigation` d�
 | Khung thanh | cao `header-nav/height`; nền `color/bg/primary`, viền dưới 1 `color/border/secondary`; lề ngang `space/3xl`, khoảng `space/md` | 44 |
 | Hàng tab | cao `control/height/lg`, khoảng `space/2xl`, lề ngang `space/3xl`; tab `type/body` nét 500 (Medium), chưa chọn `color/text/tertiary`, đang chọn `color/text/primary` + vạch dưới `focus/width` `color/focus/ring`; lề dưới chữ `space/md` | 40 |
 | Đường dẫn | `Breadcrumbs` Type Text — `base/breadcrumbs.md`: chữ `type/body`, tầng cha nét 400 `color/text/tertiary`, trang hiện tại nét 500 `color/text/primary` cắt ở `breadcrumbs/current-max-width`; dấu phân cách icon `icon/size/sm` `color/border/primary`; nhà icon `icon/size/md` | co lại trước nhóm nút |
-| Menu tầng ẩn "…" | nút "…" `touch/min`, đang mở nền `color/bg/selected` (ngoại lệ tương phản, DEC-305); menu rộng tối thiểu `breadcrumbs/menu-min-width`, bo `radius/menu`, lề `space/xs`, bóng `elev/3`; mục cao `control/height/md` bo `radius/menu-item`; mục cuối (tầng sát trang hiện tại) chữ `color/text/tertiary` (R8) | — |
-| Nút Tìm · Trợ giúp | `Button` Tertiary Icon Only MD + `Tooltip` ("Tìm tính năng · ⌘K", "Trợ giúp") | `control/height/md`, icon `icon/size/lg`, bo `radius/tab`; rê nền `color/bg/selected`, đang mở nền `color/bg/selected` |
+| Menu tầng ẩn "…" | nút "…" `touch/min`, đang mở nền `color/bg/selected` (ngoại lệ tương phản, DEC-305); menu rộng tối thiểu `breadcrumbs/menu-min-width`, bo `radius/menu`, lề `space/xs`, bóng `shadow/lg`, viền `shadow/lg-border`; mục cao `control/height/md` bo `radius/menu-item`; mục cuối (tầng sát trang hiện tại) chữ `color/text/tertiary` (R8) | — |
+| Nút Tìm · Trợ giúp | `Button` Tertiary Icon Only MD + `Tooltip` ("Tìm tính năng · ⌘K", "Trợ giúp") | `control/height/md`, icon `icon/size/lg`, bo `radius/control`; rê nền `color/bg/selected`, đang mở nền `color/bg/selected` |
 | `_Header bell` | `Button` Tertiary Icon Only MD + khối `Count`: nền `color/text/error/primary`, chữ `color/text/inverse` nét 500 cỡ cố định `chip/count-font-size` / `chip/count-line-height` (12/16, không đổi theo mode, như Badge), cao và rộng tối thiểu `size/xl`, lề ngang `space/xs`, bo `radius/full`, viền tách `focus/width` `color/bg/primary` | neo góc trên phải icon, chỉ đè một góc |
 | Avatar | `Avatar` Content Initials Size SM (`size/4xl`, chữ và màu theo Avatar) trong nút tròn cùng cỡ, không đệm | 32 |
-| Menu tài khoản | `Dropdown menu` rộng `header-nav/account-menu-width`, bo `radius/card`, lề `control/icon-gap`, bóng `elev/3`; đầu menu avatar + họ tên nét 600 + mã NV · chức vụ `type/caption` `color/text/tertiary`, vạch `color/border/secondary` dưới đầu menu (Base `Dropdown heading` Type=Account, áp cho mọi menu tài khoản, R7); mục cao `control/height/md`, lề `space/md`, icon `icon/size/md` `color/fg/quaternary`; vạch `color/border/secondary`; Đăng xuất `color/text/error/primary` | neo dưới avatar, mép phải thẳng mép phải thanh |
-| Hộp thoại tìm | rộng `command-search/width`, cách đỉnh màn 96, bo `radius/card`, bóng `elev/3`, nền mờ `color/bg/overlay`; ô nhập cao 52 chữ `type/title-3` (chữ gợi ý `color/text/tertiary`), gợi ý phím `Kbd` Esc | 600 |
-| Kết quả | nhãn nhóm `type/caption-caps` `color/text/tertiary`; dòng cao `control/height/lg`, lề ngang `space/xl`, khoảng `space/md`, ô icon `control/height/sm` bo `radius/tab`; chữ chính `type/body` nét 500, phụ `type/caption` `color/text/tertiary`; đang chọn `color/bg/selected` + vạch trái 2 `color/focus/ring` (R3); chữ khớp nền `color/bg/warning/secondary`, bo `radius/xxs`, lề `command-search/highlight-padding-x`; chân nền `color/bg/secondary` `type/caption` | — |
-| Không có kết quả | `Featured icon` 48/24 (icons.md mục 3.1 — instance khi BL-253 dựng xong), cách tiêu đề `space/md`; tiêu đề `type/heading` nét 600, phụ `type/caption` `color/text/tertiary` ("Thử một từ khác. Màn bạn không có quyền sẽ không hiện ở đây.", R11); chân hộp gợi ý phím bằng `Kbd`; lề dọc `space/3xl` | — |
+| Menu tài khoản | `Dropdown menu` rộng `header-nav/account-menu-width`, bo `radius/menu`, lề `space/xs`, bóng `shadow/lg`, viền `shadow/lg-border`; đầu menu avatar + họ tên nét 600 + mã NV · chức vụ `type/caption` `color/text/tertiary`, vạch `color/border/secondary` dưới đầu menu (Base `Dropdown heading` Type=Account, áp cho mọi menu tài khoản, R7); mục cao `control/height/md`, lề `space/md`, icon `icon/size/md` `color/fg/tertiary`; vạch `color/border/secondary`; Đăng xuất `color/text/error/primary` | neo dưới avatar, mép phải thẳng mép phải thanh |
+| Hộp thoại tìm | rộng `command-search/width`, cách đỉnh màn 96, bo `radius/overlay`, bóng `shadow/xl`, viền `shadow/xl-border`, nền mờ `color/bg/overlay` + `backdrop-blur/lg`; ô nhập cao 52 chữ `type/title-3` (chữ gợi ý `color/text/tertiary`), gợi ý phím `Kbd` Esc | 600 |
+| Kết quả | nhãn nhóm `type/caption-caps` `color/text/tertiary`; dòng cao `control/height/lg`, lề ngang `space/xl`, khoảng `space/md`, ô icon `control/height/sm` bo `radius/inner`; chữ chính `type/body` nét 500, phụ `type/caption` `color/text/tertiary`; đang chọn `color/bg/selected` + vạch trái 2 `color/focus/ring` (R3); chữ khớp nền `color/bg/warning/secondary`, bo `radius/xxs`, lề `command-search/highlight-padding-x`; chân nền `color/bg/secondary` `type/caption` | — |
+| Không có kết quả | `Featured icon` kiểu `modern-subtle` 48/24 (DEC-335 ms17; icon.md mục 3.1; `Featured icon` chưa có component), cách tiêu đề `space/md`; tiêu đề `type/heading` nét 600, phụ `type/caption` `color/text/tertiary` ("Thử một từ khác. Màn bạn không có quyền sẽ không hiện ở đây.", R11); chân hộp gợi ý phím bằng `Kbd`; lề dọc `space/3xl` | — |
 | Tooltip | `Tooltip` Short (`base/tooltip.md`, DEC-301) | 12/16 |
 | Vòng focus | `focus/width` 2, cách `focus/offset` 2, `color/focus/ring` | mọi phần bấm được |
 
@@ -164,10 +168,16 @@ Vẽ lại Figma 29/10 theo tổ hợp DEC-291/293/305 (BL-273).
 - Đối chiếu Figma ↔ repo (`ds-v2-sync-check.py --figma`, 30/10): Header nav 0 FAIL (7 set + Section mang nhãn
   "Đang review"); 1 WARN khung `Tài liệu` là frame, không phải component.
 
+### Chuyển động
+
+Menu tài khoản, hộp tìm: `duration/fast`, trượt 4; vào `easing/standard`, ra `easing/exit`. Hover, nhấn `duration/fast`; vòng focus hiện ngay. Luật chung: `foundations/motion.md` (DEC-333).
+
 ## Mobile
 
 > Khối Mobile đặt mode Platform = Mobile (web trên điện thoại, < 768).
 
+- **Logo:** `Logo` (`base/logo.md`) Type Symbol, Size 24 (`size/3xl`), có ở mọi màn (DEC-326, `foundations/logo.md` mục 14.5), đứng sau nút
+  Menu, tiêu đề trang đứng sau logo. Trên khung 393 còn khoảng 153 cho tiêu đề (185 trừ ký hiệu 24 và khoảng 8).
 - Thanh `header-nav/height` 56 (D8 A): Menu (☰, "Mở menu") · tiêu đề trang hiện tại `type/body` nét 600, một dòng cắt
   "…" · Tìm (icon) · Chuông (`_Header bell`) · Avatar `size/4xl` trong nút `control/height/sm` có **vùng bấm vô
   hình 44** (DEC-305, theo DEC-138). Không có đường dẫn, Trợ giúp (Trợ giúp ở sheet tài khoản, R3).
@@ -175,7 +185,7 @@ Vẽ lại Figma 29/10 theo tổ hợp DEC-291/293/305 (BL-273).
   khoảng `space/xs`, chữ `color/text/tertiary_strong`; **vùng bấm vô hình 44**. Màn gốc của module không có hàng này.
 - Tìm: chạm icon mở **màn tìm toàn trang** — ô nhập cao 52 chữ `type/title-3`, nút ← đóng; kết quả như web (Tính năng ·
   Hành động · Bản ghi), không có phím tắt, không có chân phím.
-- Avatar: chạm mở **sheet tài khoản** từ dưới lên — bo trên `radius/card`, thanh kéo 36 × `size/xs` bo
+- Avatar: chạm mở **sheet tài khoản** từ dưới lên — bo trên `radius/overlay`, thanh kéo 36 × `size/xs` bo
   `radius/xxs`, đầu sheet avatar + họ tên + vai trò, mục cao `touch/min` lề `space/lg` icon `icon/size/md`
   chữ `type/body`, lớp phủ `color/bg/overlay`.
 - Chuông: chạm mở màn Thông báo toàn trang của Notification Center (bản Mobile của component đó).
@@ -192,6 +202,7 @@ Vẽ lại Figma 29/10 theo tổ hợp DEC-291/293/305 (BL-273).
 
 Chung với khối Web (bộ có trục Platform). Khung `Tài liệu` có màn tìm toàn trang (Recent / Results / Empty, ô 52, nút ←) và
 sheet tài khoản (Trợ giúp · Thông tin cá nhân · Đổi mật khẩu · Ngôn ngữ · Đăng xuất) (R2); hàng ← gắn `control/height/md` 42.
+Hàng Ngôn ngữ của sheet giống web: cờ `Flag` + tên ngôn ngữ (DEC-335 ms06).
 
 ## Đối chiếu Astryx
 

@@ -119,7 +119,7 @@ CSS = r"""
 .pok{display:inline-flex;align-items:center;gap:6px;font:400 14px/20px Inter;color:var(--fg3)}
 .poh b{font:600 14px/20px Inter;color:var(--fg);min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .poh .lk{margin-left:auto;display:inline-flex;align-items:center;gap:4px;border:0;background:none;font:500 13px/18px Inter;color:var(--fg);text-decoration:none;text-underline-offset:2px;cursor:pointer;white-space:nowrap;padding:4px}.poh .lk:hover{text-decoration:underline}
-.pop .sf{display:none}.sph{color:var(--fg4)}.car{width:1px;height:16px;background:var(--fg);margin-left:-6px;animation:car 1s steps(1) infinite}@keyframes car{50%{opacity:0}}
+.pop .sf{display:none}.sph{color:var(--fg4)}.car{width:1px;height:16px;background:var(--fg);margin-left:-6px;animation:car calc(var(--duration-slow) * 2) steps(1) infinite}@keyframes car{50%{opacity:0}}
 .pbk{width:28px;height:28px;border:0;background:none;border-radius:6px;display:grid;place-items:center;color:var(--fg2);cursor:pointer;transform:rotate(90deg)}
 .poh .sdi{margin-left:auto}
 .pop.pz,.pop.st{height:440px}.pmain{display:flex;flex-direction:column;flex:1;min-height:0}

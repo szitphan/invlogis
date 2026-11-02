@@ -1,23 +1,23 @@
 {
- "tokens_version": "0.22.0",
+ "tokens_version": "0.26.0",
  "counts": {
-  "ok": 68,
-  "near": 14,
-  "new": 30,
-  "conflict": 5,
-  "undeclared": 4
+  "ok": 69,
+  "near": 12,
+  "new": 32,
+  "conflict": 4,
+  "undeclared": 3
  },
  "no_sel": 0,
- "off_page": 0,
- "open": 42,
+ "off_page": 1,
+ "open": 40,
  "ignored": [],
  "groups": {
   "typo": {
    "label": "Chữ",
-   "total": 25,
-   "ok": 22,
-   "open": 2,
-   "audit": 2
+   "total": 24,
+   "ok": 23,
+   "open": 1,
+   "audit": 1
   },
   "color": {
    "label": "Màu",
@@ -833,15 +833,11 @@
    "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": {
-    "token": "width/xs",
-    "value": 320,
-    "css": "var(--width-xs)"
-   },
+   "to": null,
    "visible": true,
-   "suggest": "width/xs (320)",
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất width/xs = 320",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -907,18 +903,14 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
+   "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": {
-    "token": "layout/content-max-width",
-    "value": 393,
-    "css": "var(--layout-content-max-width)"
-   },
+   "to": null,
    "visible": true,
-   "suggest": "layout/content-max-width (393)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với field/width-default, progress/width-default nhưng đó là token của component khác; thang chung gần nhất layout/content-max-width = 393",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -1028,11 +1020,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "width/md"
+    "width/paragraph-max"
    ],
    "bind": {
-    "token": "width/md",
-    "css": "var(--width-md)"
+    "token": "width/paragraph-max",
+    "css": "var(--width-paragraph-max)"
    },
    "to": null,
    "visible": false,
@@ -1044,8 +1036,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "width/md",
-    "css": "var(--width-md)"
+    "token": "width/paragraph-max",
+    "css": "var(--width-paragraph-max)"
    }
   },
   {
@@ -1057,26 +1049,22 @@
    "state": "",
    "theme": "Light",
    "value": 361,
-   "sel": ".gx.m",
+   "sel": null,
    "cssProps": [
     "width"
    ],
    "tpl": null,
-   "noOverride": null,
+   "noOverride": true,
    "soi": null,
-   "at": null,
-   "cat": "near",
+   "at": ".gx.m",
+   "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": {
-    "token": "layout/content-max-width",
-    "value": 393,
-    "css": "var(--layout-content-max-width)"
-   },
+   "to": null,
    "visible": true,
-   "suggest": "layout/content-max-width (393)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với field/width-default, progress/width-default nhưng đó là token của component khác; thang chung gần nhất layout/content-max-width = 393",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -1865,6 +1853,7 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_blur",
     "color/bg/primary",
     "color/bg/primary_alt"
    ],
@@ -1907,14 +1896,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `#1018281A` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `#1018281A` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*",
    "group": "effect",
    "decided": false,
    "must": true,
@@ -2369,14 +2358,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `#262626` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `#262626` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*",
    "group": "effect",
    "decided": false,
    "must": true,
@@ -2676,14 +2665,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `#E5E5E5` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `#E5E5E5` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*",
    "group": "effect",
    "decided": false,
    "must": true,
@@ -2774,6 +2763,7 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_blur",
     "color/bg/primary",
     "color/bg/primary_alt"
    ],
@@ -2816,14 +2806,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `#E5E5E5` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `#E5E5E5` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*",
    "group": "effect",
    "decided": false,
    "must": true,
@@ -3219,7 +3209,7 @@
    "size": "",
    "state": "",
    "theme": "Light",
-   "value": 28,
+   "value": 30,
    "sel": ".gx .pr b",
    "cssProps": [
     "font"
@@ -3230,11 +3220,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "type/title-3/line-height"
+    "type/title-2/line-height"
    ],
    "bind": {
-    "token": "type/title-3/line-height",
-    "css": "var(--type-title-3-line-height)"
+    "token": "type/title-2/line-height",
+    "css": "var(--type-title-2-line-height)"
    },
    "to": null,
    "visible": false,
@@ -3246,8 +3236,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "type/title-3/line-height",
-    "css": "var(--type-title-3-line-height)"
+    "token": "type/title-2/line-height",
+    "css": "var(--type-title-2-line-height)"
    }
   },
   {
@@ -4251,9 +4241,9 @@
    "cat": "ok",
    "tokens": [
     "space/xl",
-    "layout/screen-inset",
     "layout/card-padding",
-    "layout/title-gap"
+    "layout/title-gap",
+    "control/padding-x/md"
    ],
    "bind": {
     "token": "control/padding-x/md",
@@ -4424,32 +4414,48 @@
    }
   },
   {
-   "id": "css.1",
-   "part": ".gx.m .sd,.gx.m .ds",
+   "id": "dòng-phụ-group.line-height.web",
+   "part": "Dòng phụ Group",
    "prop": "line-height",
-   "platform": "",
+   "platform": "Web",
    "size": "",
    "state": "",
-   "theme": "",
-   "value": "16px",
+   "theme": "Light",
+   "value": 16,
    "sel": ".gx.m .sd,.gx.m .ds",
    "cssProps": [
     "line-height"
    ],
-   "cat": "undeclared",
-   "tokens": [],
-   "bind": null,
+   "tpl": null,
+   "noOverride": null,
+   "soi": null,
+   "at": null,
+   "cat": "ok",
+   "tokens": [
+    "type/caption/line-height",
+    "type/code/line-height"
+   ],
+   "bind": {
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
+   },
    "to": null,
-   "visible": true,
+   "visible": false,
    "suggest": null,
    "rules": [],
-   "note": "`line-height: 16px` — khai một dòng values (sel này), hoặc dời sang cssScreen nếu là khung màn",
+   "note": "",
    "group": "typo",
+   "offPage": true,
    "decided": false,
-   "must": false
+   "must": false,
+   "resolved": {
+    "kind": "token",
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
+   }
   },
   {
-   "id": "css.2",
+   "id": "css.1",
    "part": ".flb",
    "prop": "font",
    "platform": "",
@@ -4474,7 +4480,7 @@
    "must": false
   },
   {
-   "id": "css.3",
+   "id": "css.2",
    "part": ".ta",
    "prop": "background",
    "platform": "",
@@ -4499,7 +4505,7 @@
    "must": false
   },
   {
-   "id": "css.4",
+   "id": "css.3",
    "part": ".pv[data-platform=mobile] .ta",
    "prop": "background",
    "platform": "",
@@ -4552,45 +4558,6 @@
     "token": "font/body",
     "value": "Inter",
     "css": "'Inter', system-ui, sans-serif"
-   },
-   "group": "typo",
-   "audit": true,
-   "count": 1,
-   "decided": false,
-   "must": true,
-   "resolved": {
-    "kind": "pending"
-   }
-  },
-  {
-   "id": "audit.typo.combo-20-28",
-   "part": "Tổ hợp chữ",
-   "prop": "line-height",
-   "platform": "",
-   "size": "",
-   "state": "",
-   "theme": "Light",
-   "value": "20/28",
-   "sel": ".gx .pr b",
-   "cssProps": [
-    "line-height"
-   ],
-   "tpl": null,
-   "noOverride": null,
-   "cat": "conflict",
-   "tokens": [],
-   "bind": null,
-   "to": null,
-   "visible": true,
-   "suggest": "type/title-2 (Web)",
-   "rules": [
-    "cỡ 20 / dòng 28 không thuộc thang type/* (foundations mục 4.2)"
-   ],
-   "note": "cùng cỡ chữ thì sửa cao dòng; khác cỡ thì chọn vai gần nhất",
-   "fix": {
-    "token": "type/title-2 (Web)",
-    "value": "20/30",
-    "css": "30px"
    },
    "group": "typo",
    "audit": true,

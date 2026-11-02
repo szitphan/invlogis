@@ -113,7 +113,7 @@
     "control": {
       "$type": "dimension",
       "$value": "{radius.md}",
-      "$description": "Nút, tab chip, ô tìm",
+      "$description": "Nút, tab chip, ô tìm; Web = App 8, bỏ viên thuốc (DEC-328)",
       "$extensions": {
         "com.figma.scopes": [
           "CORNER_RADIUS"
@@ -123,7 +123,7 @@
     "field": {
       "$type": "dimension",
       "$value": "{radius.md}",
-      "$description": "Ô nhập, ô chọn",
+      "$description": "Ô nhập, ô chọn; Web = App 8 (DEC-328)",
       "$extensions": {
         "com.figma.scopes": [
           "CORNER_RADIUS"
@@ -133,7 +133,7 @@
     "card": {
       "$type": "dimension",
       "$value": "{radius.xl}",
-      "$description": "Thẻ, nhóm có viền, khối trong trang, bảng; bo không quá lề thẻ (DEC-165)",
+      "$description": "Thẻ, nhóm có viền, khối trong trang, bảng; Web = App 12, bo không quá lề thẻ (DEC-165, DEC-328)",
       "$extensions": {
         "com.figma.scopes": [
           "CORNER_RADIUS"
@@ -143,7 +143,7 @@
     "inner": {
       "$type": "dimension",
       "$value": "{radius.md}",
-      "$description": "Khối phụ trong thẻ, ảnh nhỏ",
+      "$description": "Khối phụ trong thẻ, ảnh nhỏ, ô icon vuông, Featured icon vuông; Web = App 8 (DEC-328)",
       "$extensions": {
         "com.figma.scopes": [
           "CORNER_RADIUS"
@@ -152,18 +152,8 @@
     },
     "overlay": {
       "$type": "dimension",
-      "$value": "{radius.2xl}",
-      "$description": "Dialog, popover; đầu sheet trên app (DEC-259: web 16, app 24)",
-      "$extensions": {
-        "com.figma.scopes": [
-          "CORNER_RADIUS"
-        ]
-      }
-    },
-    "chip": {
-      "$type": "dimension",
-      "$value": "{radius.full}",
-      "$description": "Chip trạng thái, avatar",
+      "$value": "{radius.3xl}",
+      "$description": "Hộp thoại, hộp thoại tìm, mọi sheet; Web = App 20 (DEC-328)",
       "$extensions": {
         "com.figma.scopes": [
           "CORNER_RADIUS"
@@ -172,8 +162,8 @@
     },
     "menu": {
       "$type": "dimension",
-      "$value": "{radius.md}",
-      "$description": "Menu thả, popover danh sách (DEC-259, như Untitled)",
+      "$value": "{radius.lg}",
+      "$description": "Menu thả, popover danh sách: 10 = mục 6 + lề 4, đồng tâm (DEC-328)",
       "$extensions": {
         "com.figma.scopes": [
           "CORNER_RADIUS"
@@ -194,16 +184,6 @@
       "$type": "dimension",
       "$value": "{radius.sm}",
       "$description": "Badge vuông cho nhãn phân loại, không phải trạng thái (DEC-259)",
-      "$extensions": {
-        "com.figma.scopes": [
-          "CORNER_RADIUS"
-        ]
-      }
-    },
-    "tab": {
-      "$type": "dimension",
-      "$value": "{radius.md}",
-      "$description": "Tab kiểu nút (web 8, app tab chip tròn); tab gạch không bo (DEC-259)",
       "$extensions": {
         "com.figma.scopes": [
           "CORNER_RADIUS"
@@ -383,17 +363,71 @@
       }
     }
   },
-  "layout": {
-    "screen-inset": {
+  "container": {
+    "padding-mobile": {
       "$type": "dimension",
-      "$value": "{space.32}",
-      "$description": "Lề màn (DEC-259: web 32 như Untitled, app 16)",
+      "$value": "{space.16}",
+      "$description": "Lề container trên điện thoại (DEC-324, tên Untitled)",
       "$extensions": {
         "com.figma.scopes": [
           "GAP"
         ]
       }
     },
+    "padding-desktop": {
+      "$type": "dimension",
+      "$value": "{space.32}",
+      "$description": "Lề container từ 768 trở lên (DEC-324, tên Untitled)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "max-width-desktop": {
+      "$type": "dimension",
+      "$value": "{width.3xl}",
+      "$description": "Rộng tối đa màn chi tiết, form web, đã gồm lề; nội dung còn 1216. Màn bảng trải hết, app không đọc token này (DEC-324)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    }
+  },
+  "grid": {
+    "columns": {
+      "$type": "dimension",
+      "$value": "12px",
+      "$description": "Số cột màn (DEC-324). Tablet 6 cột ghi ở grid.tablet",
+      "$extensions": {
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "gutter": {
+      "$type": "dimension",
+      "$value": "{space.32}",
+      "$description": "Rãnh cột cấp màn (DEC-324)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    },
+    "margin": {
+      "$type": "dimension",
+      "$value": "{container.padding-desktop}",
+      "$description": "Lề lưới và lề màn: đọc token này để đổi theo nền tảng (DEC-324)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "GAP"
+        ]
+      }
+    }
+  },
+  "layout": {
     "card-padding": {
       "$type": "dimension",
       "$value": "{space.16}",
@@ -441,16 +475,6 @@
       "$extensions": {
         "com.figma.scopes": [
           "GAP"
-        ]
-      }
-    },
-    "content-max-width": {
-      "$type": "dimension",
-      "$value": "1280px",
-      "$description": "Rộng nội dung tối đa màn chi tiết, form web; màn bảng trải hết (DEC-259)",
-      "$extensions": {
-        "com.figma.scopes": [
-          "WIDTH_HEIGHT"
         ]
       }
     }
@@ -504,7 +528,7 @@
       "ml": {
         "$type": "dimension",
         "$value": "36px",
-        "$description": "Nút icon / avatar thanh trên, Featured icon gọn (DEC-304)",
+        "$description": "Nút icon / avatar thanh trên (DEC-304); Featured icon không còn mượn (DEC-329 ic11)",
         "$extensions": {
           "com.figma.scopes": [
             "WIDTH_HEIGHT"
@@ -729,16 +753,6 @@
       "$extensions": {
         "com.figma.scopes": [
           "GAP"
-        ]
-      }
-    },
-    "count-radius": {
-      "$type": "dimension",
-      "$value": "3px",
-      "$description": "Badge Color/Outline/Modern: bo ô đếm SM, MD 3 (DEC-303)",
-      "$extensions": {
-        "com.figma.scopes": [
-          "CORNER_RADIUS"
         ]
       }
     },
@@ -1013,16 +1027,6 @@
       "$extensions": {
         "com.figma.scopes": [
           "WIDTH_HEIGHT"
-        ]
-      }
-    },
-    "sheet-radius": {
-      "$type": "dimension",
-      "$value": "28px",
-      "$description": "Bo sheet chọn nguồn file (lệch DEC-259, user chốt) (DEC-307)",
-      "$extensions": {
-        "com.figma.scopes": [
-          "CORNER_RADIUS"
         ]
       }
     },
@@ -1408,10 +1412,20 @@
   },
   "icon": {
     "size": {
+      "xs": {
+        "$type": "dimension",
+        "$value": "{size.lg}",
+        "$description": "Icon rất nhỏ: xoá trong tag, dấu tick, dấu ngăn, mũi tên bước số; web = app 12 (DEC-329 ic03)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
       "sm": {
         "$type": "dimension",
-        "$value": "14px",
-        "$description": "Icon trong nút có chữ, ô nhập, ô tìm, mũi tên tuyến, chevron (DEC-143)",
+        "$value": "{size.14}",
+        "$description": "Icon trong nút có chữ, ô nhập, ô tìm, mũi tên tuyến, chevron; web = app 14 (DEC-329 ic02)",
         "$extensions": {
           "com.figma.scopes": [
             "WIDTH_HEIGHT"
@@ -1420,18 +1434,8 @@
       },
       "md": {
         "$type": "dimension",
-        "$value": "16px",
-        "$description": "Icon menu, hàng bảng, hàng danh sách, nút icon (DEC-143)",
-        "$extensions": {
-          "com.figma.scopes": [
-            "WIDTH_HEIGHT"
-          ]
-        }
-      },
-      "ml": {
-        "$type": "dimension",
-        "$value": "18px",
-        "$description": "Icon trong Featured gọn 36, nút lớn app, lớp Thử lại trên ảnh (DEC-306)",
+        "$value": "{size.xl}",
+        "$description": "Icon menu, hàng bảng, hàng danh sách, nút icon; web = app 16 (DEC-329 ic02)",
         "$extensions": {
           "com.figma.scopes": [
             "WIDTH_HEIGHT"
@@ -1440,8 +1444,8 @@
       },
       "lg": {
         "$type": "dimension",
-        "$value": "20px",
-        "$description": "Icon thanh tab app, icon đứng riêng (DEC-143)",
+        "$value": "{size.2xl}",
+        "$description": "Icon thanh tab app, icon đứng riêng, nút lớn app, Featured 36 và 40; web = app 20 (DEC-329 ic02, ic04)",
         "$extensions": {
           "com.figma.scopes": [
             "WIDTH_HEIGHT"
@@ -1450,8 +1454,8 @@
       },
       "chip": {
         "$type": "dimension",
-        "$value": "14px",
-        "$description": "Icon trong Badge 14, màu chip/{tone}/fg (DEC-310)",
+        "$value": "{size.14}",
+        "$description": "Icon trong Badge 14, màu chip/{tone}/fg, nét 2.25 trên khung 24 (DEC-310, DEC-329 ic01)",
         "$extensions": {
           "com.figma.scopes": [
             "WIDTH_HEIGHT"
@@ -1463,8 +1467,38 @@
   "featured-icon": {
     "size": {
       "$type": "dimension",
-      "$value": "48px",
-      "$description": "Khối Featured icon nhấn mạnh (màn trống, màn kết quả, đầu dialog, ô bấm tải lên app), icon 24 bên trong (icons.md mục 3.1, DEC-258, DEC-307)",
+      "$value": "{size.6xl}",
+      "$description": "Featured icon 48, icon 24: màn trống, màn kết quả, đầu dialog, ô bấm tải lên app (icon.md mục 3.1, DEC-258, DEC-307, DEC-329 ic11)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "size-md": {
+      "$type": "dimension",
+      "$value": "{size.5xl}",
+      "$description": "Featured icon 40, icon 20: Upload Full web (DEC-329 ic11)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "size-compact": {
+      "$type": "dimension",
+      "$value": "36px",
+      "$description": "Featured icon 36, icon 20: Upload Compact; ngoại lệ số trần vì thang không có 36 (DEC-329 ic04, ic11)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "size-xl": {
+      "$type": "dimension",
+      "$value": "56px",
+      "$description": "Featured icon 56, icon 28 theo Untitled; ngoại lệ số trần vì thang không có 56 (DEC-329 ic11)",
       "$extensions": {
         "com.figma.scopes": [
           "WIDTH_HEIGHT"
@@ -1485,8 +1519,8 @@
     },
     "width-default": {
       "$type": "dimension",
-      "$value": "320px",
-      "$description": "Ô nhập: rộng mặc định. Web 320; app 361 = 393 − 2 × 16 (DEC-192). Dùng thật thì Fill theo khung (DEC-207)",
+      "$value": "{width.xxs}",
+      "$description": "Ô nhập: Web 320; app trải theo màn trừ lề, 361 chỉ là kết quả trên khung 393 (DEC-324). Figma: app dùng Fill",
       "$extensions": {
         "com.figma.scopes": [
           "WIDTH_HEIGHT"
@@ -1547,8 +1581,8 @@
   "progress": {
     "width-default": {
       "$type": "dimension",
-      "$value": "320px",
-      "$description": "Thanh tiến độ: bề rộng mặc định của component. Web 320; app 361 = 393 − 2 × 16 lề màn. Dùng instance thì kéo rộng theo khung (Fill) (DEC-243)",
+      "$value": "{width.xxs}",
+      "$description": "Thanh tiến độ: Web 320; app trải theo màn trừ lề (DEC-324). Figma: app dùng Fill",
       "$extensions": {
         "com.figma.scopes": [
           "WIDTH_HEIGHT"
@@ -1569,60 +1603,10 @@
     }
   },
   "width": {
-    "xs": {
+    "paragraph-max": {
       "$type": "dimension",
-      "$value": "320px",
-      "$description": "Popover, menu thả rộng (DEC-259)",
-      "$extensions": {
-        "com.figma.scopes": [
-          "WIDTH_HEIGHT"
-        ]
-      }
-    },
-    "sm": {
-      "$type": "dimension",
-      "$value": "400px",
-      "$description": "Dialog xác nhận, drawer thường (Untitled slideout 400) (DEC-259)",
-      "$extensions": {
-        "com.figma.scopes": [
-          "WIDTH_HEIGHT"
-        ]
-      }
-    },
-    "md": {
-      "$type": "dimension",
-      "$value": "560px",
-      "$description": "Dialog form, form 1 cột (DEC-259)",
-      "$extensions": {
-        "com.figma.scopes": [
-          "WIDTH_HEIGHT"
-        ]
-      }
-    },
-    "lg": {
-      "$type": "dimension",
-      "$value": "720px",
-      "$description": "Đoạn văn tối đa, dialog lớn (DEC-259)",
-      "$extensions": {
-        "com.figma.scopes": [
-          "WIDTH_HEIGHT"
-        ]
-      }
-    },
-    "xl": {
-      "$type": "dimension",
-      "$value": "960px",
-      "$description": "Drawer rộng (DEC-259)",
-      "$extensions": {
-        "com.figma.scopes": [
-          "WIDTH_HEIGHT"
-        ]
-      }
-    },
-    "2xl": {
-      "$type": "dimension",
-      "$value": "1280px",
-      "$description": "Khung nội dung tối đa web (DEC-259)",
+      "$value": "{width.md}",
+      "$description": "Đoạn văn tối đa với chữ 14; lớp .prose đọc biến này (DEC-324)",
       "$extensions": {
         "com.figma.scopes": [
           "WIDTH_HEIGHT"
@@ -1685,6 +1669,16 @@
       "$type": "dimension",
       "$value": "{space.12}",
       "$description": "Thang kích thước theo bậc Untitled = 12: cao, rộng, cỡ khối của component (DEC-314)",
+      "$extensions": {
+        "com.figma.scopes": [
+          "WIDTH_HEIGHT"
+        ]
+      }
+    },
+    "14": {
+      "$type": "dimension",
+      "$value": "{space.14}",
+      "$description": "Bậc 14 cho icon, lệch thang Untitled do user chọn, không dùng cho khoảng cách (DEC-329 ic05)",
       "$extensions": {
         "com.figma.scopes": [
           "WIDTH_HEIGHT"
@@ -1838,27 +1832,27 @@
     "q-sm-h": {
       "$type": "dimension",
       "$value": "100px",
-      "$description": "Cao khung ảnh 3/4 trước cho thẻ mobile (DEC-266)",
+      "$description": "Cao ảnh Vehicle Card web 160 × 100, rộng size/11xl (DEC-269, DEC-334)",
       "$extensions": {
         "com.figma.scopes": [
           "WIDTH_HEIGHT"
         ]
       }
     },
-    "q-md-w": {
+    "card-media-app-w": {
       "$type": "dimension",
-      "$value": "240px",
-      "$description": "Khung ảnh 3/4 trước (16:10) cho thẻ web (DEC-266)",
+      "$value": "140px",
+      "$description": "Rộng ảnh Vehicle Card app 140 × 88 (DEC-269, DEC-334)",
       "$extensions": {
         "com.figma.scopes": [
           "WIDTH_HEIGHT"
         ]
       }
     },
-    "q-md-h": {
+    "card-media-app-h": {
       "$type": "dimension",
-      "$value": "150px",
-      "$description": "Cao khung ảnh 3/4 trước cho thẻ web (DEC-266)",
+      "$value": "88px",
+      "$description": "Cao ảnh Vehicle Card app 140 × 88 (DEC-269, DEC-334)",
       "$extensions": {
         "com.figma.scopes": [
           "WIDTH_HEIGHT"
@@ -1868,17 +1862,7 @@
     "q-lg-w": {
       "$type": "dimension",
       "$value": "480px",
-      "$description": "Khung ảnh 3/4 trước (16:10) cho đầu trang chi tiết phương tiện (DEC-266)",
-      "$extensions": {
-        "com.figma.scopes": [
-          "WIDTH_HEIGHT"
-        ]
-      }
-    },
-    "q-lg-h": {
-      "$type": "dimension",
-      "$value": "300px",
-      "$description": "Cao khung ảnh 3/4 trước cho đầu trang chi tiết phương tiện (DEC-266)",
+      "$description": "Rộng tối đa ảnh đầu trang chi tiết phương tiện, tỉ lệ 16:10; app trải theo màn (DEC-334)",
       "$extensions": {
         "com.figma.scopes": [
           "WIDTH_HEIGHT"

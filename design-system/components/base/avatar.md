@@ -2,7 +2,7 @@
 type: design-component
 status: stale
 status_prev: approved
-updated: 2026-10-29
+updated: 2026-11-02
 links:
   - design-system/architecture.md
   - design-system/foundations/README.md
@@ -30,7 +30,7 @@ thêm người. Nhóm A (DEC-279): một bộ, cùng số đo web và app.
 
 ### Avatar
 
-- **Content:** Image (ảnh thật) · Loading (đang tải ảnh lên: ảnh xem trước + lớp phủ `color/bg/overlay` + spinner; nút máy ảnh
+- **Content:** Image (ảnh thật) · Loading (đang tải ảnh lên: ảnh xem trước + lớp phủ `color/bg/overlay_solid` + spinner; nút máy ảnh
   tắt, icon mờ 40%) · Initials (2 chữ cái họ + tên, giữ dấu) · Icon (người) · Upload (chưa có ảnh: Initials + nút máy ảnh
   góc dưới phải). Luồng tải ảnh: Upload → Loading → Image; lỗi thì quay về Upload kèm thông báo. Thứ tự dự phòng khi hiển
   thị: Image → Initials → Icon.
@@ -42,7 +42,7 @@ thêm người. Nhóm A (DEC-279): một bộ, cùng số đo web và app.
 | Cỡ | 24 | 32 | 36 | 48 | 64 | 88 | `avatar/size/xs · sm · md · lg · xl · xxl` (thang XS–XXL, DEC-303) |
 | Initials cỡ chữ | 12 | 12 | 14 | 17 | 20 | 24 | — |
 | Initials dòng cao | 20 | 20 | 20 | 28 | 28 | 28 | `type/label/line-height` · `type/title-2/line-height` |
-| Chấm trạng thái | 6 | 8 | 10 | 12 | 14 | 16 | `size/sm … xxl` + viền trắng `size/xxs` 2 |
+| Chấm trạng thái | 6 | 8 | 10 | 12 | 14 | 16 | phần con `_Dot` đặt lại cỡ theo số này, màu truyền từ cha (DEC-335 ms10, [icon-sets.md](../../foundations/icon-sets.md)); `size/sm … xxl` + viền trắng `size/xxs` 2 |
 | Nút máy ảnh (Upload) | 14 | 16 | 16 | 20 | 24 | 32 | `avatar/edit-size/*` (chưa khớp thang mới, BL-281) |
 
 - Chấm trạng thái: tâm chấm nằm trên mép tròn ở góc 45° — cùng vị trí tương đối ở mọi cỡ. Offline = chấm rỗng, viền
@@ -52,7 +52,7 @@ thêm người. Nhóm A (DEC-279): một bộ, cùng số đo web và app.
 ### Company avatar
 
 Content Image · Initials · Icon × 6 cỡ như Avatar. Vuông bo theo cỡ, viền 1 `color/border/secondary`:
-XS `radius/badge` 6 · SM, MD 6 · LG 8 · XL `radius/menu` 8 · XXL 16.
+XS `radius/badge` 6 · SM, MD 6 · LG 8 · XL `radius/md` 8 · XXL 16.
 
 ### Avatar group
 
@@ -82,6 +82,10 @@ State Default · **Loading** (spinner thay dấu +, không bấm, aria-busy) · 
 - **Avatar group:** `role="group"` + aria-label "Phụ trách: A, B, C và 3 người khác"; avatar con `aria-hidden`. Nền ô "+n"
   không đậm hơn `color/bg/secondary` (chữ hiện 4,54 : 1, sát ngưỡng).
 - **Nút thêm:** aria-label "Thêm người" (đổi theo ngữ cảnh), tooltip cùng chữ trên web; focus ring 2 cách 4; vùng chạm 48.
+
+### Chuyển động
+
+Spinner chu kỳ `spinner/period` 1000 (CSS: `calc(var(--duration-slow) * 2)`), linear, chờ `duration/medium` mới hiện; bật giảm chuyển động thì dừng xoay + chữ "Đang tải…". Luật chung: `foundations/motion.md` (DEC-333).
 
 ## Mobile
 

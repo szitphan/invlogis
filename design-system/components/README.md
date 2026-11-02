@@ -61,8 +61,7 @@ links:
 - **Ô mẫu của thẻ** (mọi component ráp trên Base / Card: Card, Selectable, Record, Summary, Status Row khi cảnh có thẻ) có nền
   `color/bg/primary` cả **Web và Mobile**, đặt Variable mode `Context = Canvas` cho ô, không chỉ ở Mobile. Ngoại lệ: thẻ Muted và
   thẻ chọn một (Selectable) đặt trên nền trắng `color/bg/primary` (Muted mất ranh giới trên nền xám). Lý do: thẻ trắng đặt trên
-  nền màn xám cả ở web lẫn app; đặt ô trắng thì không chứng minh được ranh giới thẻ (1,10:1 trên xám) và khe vòng focus
-  (`focus/gap`) không theo Context.
+  nền màn xám cả ở web lẫn app; đặt ô trắng thì không chứng minh được ranh giới thẻ (1,10:1 trên xám).
 - Cỡ ô: đều nhau trong một lưới. Cao ô = cao mẫu lớn nhất + 2 × 12 (Button MD: web 56, app 66; lưới Kích thước:
   web 56, app 76). Ô trống (tổ hợp không có) tên `Ô trống · …`, không nền, viền chấm 4/4, chữ "không có" 12
   `color/text/disabled`.
@@ -70,11 +69,8 @@ links:
   ghi chú bị cắt). Đầu hàng rộng 110 (lưới Kích thước 96).
 - Mobile: mẫu thấp hơn `touch/min` thì bọc trong khung `Vùng chạm · touch/min` viền chấm tím 3/3, ngoài nút, bo tròn,
   rộng = max(rộng nút, 44), cao 44.
-- **Nền xám → mode Context** (collection `Context`: Surface | Canvas): khung hoặc ô nền xám (`color/bg/primary`) đặt
-  Variable mode Context = Canvas; nền trắng (`color/bg/primary`) giữ mặc định Surface. Khe vòng focus (`focus/gap`) và ruột
-  nút Outline / Ghost khi Focus tự theo nền; thẻ trắng nằm trên nền xám đã tự đặt lại Surface cho nút bên trong (Slot
-  Content và Footer), không cần làm gì thêm. Tài liệu component có vòng focus ghi: "khe focus theo `focus/gap`, đặt
-  Context=Canvas khi nằm trên nền xám".
+- **Vòng focus trên mọi nền:** khe trong suốt (DEC-327), không gắn mode theo nền; khung `.focus / Ring` không tô nền. Ruột nút
+  Outline, Ghost khi Focus giữ nền của chính kiểu nút, không tô màu nền trang.
 
 ## 4. Số liệu — chỉ đọc từ biến
 

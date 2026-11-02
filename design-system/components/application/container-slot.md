@@ -2,9 +2,9 @@
 type: design-component
 status: stale
 status_prev: draft
-updated: 2026-10-27
+updated: 2026-11-02
 links:
-  - design-system/foundations/misc-icon.md
+  - design-system/foundations/vehicle.md
   - docs/transport-dispatch/brainstorms/transport-dispatch.md
   - _workspace/decisions.md
 ---
@@ -13,9 +13,9 @@ links:
 
 > Application · phiên bản 0.1.0 · Nháp · người phụ trách @szitphan · Figma `Container Slot` (6797:15876), trang
 > DS · Application components, Section `Container slot` 6798:15913, Demo 6798:15921 · Badge (6657:165736) ·
-> DEC-267, DEC-271
+> DEC-267, DEC-271, DEC-334
 
-Một vị trí container trên mooc trong sơ đồ khe (cách B của tổ hợp, `design-system/foundations/misc-icon.md` mục 5). Mang cỡ, số
+Một vị trí container trên mooc trong sơ đồ khe (cách B của tổ hợp, `design-system/foundations/vehicle.md` mục 5). Mang cỡ, số
 container, trạng thái vị trí (độc lập trạng thái Lệnh, `transport-dispatch` F11), lạnh, và mã Lệnh khác khi ghép hàng.
 Một component cho web và app.
 
@@ -34,7 +34,7 @@ Một component cho web và app.
 
 | Phần | Nội dung | Token |
 |---|---|---|
-| Ô | lề 10 × 8, khoảng 4, rộng FILL | `color/bg/primary` · `color/border/secondary` · `radius/inner` |
+| Ô | lề 10 × 8, khoảng 4, rộng FILL; phẳng, nằm trong khối cha (DEC-334 vh06) | `color/bg/primary` · `color/border/secondary` · `radius/inner` |
 | `Top` | `Size label` ("20'", "45' · lạnh") + `Order` ("· LVT-0450", ẩn mặc định) | `type/caption` · `color/text/tertiary` / `tertiary` |
 | `Number` | số container | `type/code` · `color/text/primary` |
 | `Chips` | Badge `Status` (Pill Color SM) + Badge `Reefer` (Teal, "Lạnh -18 °C"); xuống hàng khi hẹp | Badge |
@@ -56,7 +56,7 @@ Một component cho web và app.
 | Default | chi tiết Lệnh, form, thẻ app |
 | Compact | không có chip trạng thái (cột danh sách mở rộng, popup bản đồ); chip Lạnh chỉ hiện khi bật Reefer |
 
-14 biến thể. Màu Badge là đề xuất (DEC-271), lab chỉ có màu cho 4 trạng thái đầu.
+14 biến thể. Màu Badge là đề xuất (DEC-271), lab chỉ có màu cho 4 trạng thái đầu. Bảng 17 ca: `design-system/foundations/vehicle.md` Mục 5.3.
 
 ### Nên và không nên
 
@@ -84,7 +84,11 @@ Demo `Chi tiết lệnh / Web` (2×20 ghép 2 Lệnh), `Lệnh của tôi / Mobi
 ### Kiểm máy
 
 27/10: kiểm tên fail 0. Đã sửa: hàng khe cao cố định cắt ô; Compact còn hàng chip rỗng. Kiểm mất hình: chưa chạy.
-Dark: chưa điền giá trị Dark.
+02/11: spec theo DEC-334, Figma chưa sync.
+
+### Dark
+
+Phẳng ở cả hai chế độ. Phần còn lại chưa có số đo Dark.
 
 ## Mobile
 

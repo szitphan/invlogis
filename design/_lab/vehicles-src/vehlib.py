@@ -1,11 +1,12 @@
 """Hàm dùng chung cho gen_ai.py: cắt viền, xoá đốm, bóng đổ, ghi manifest.
-Ảnh ra: design/_lab/assets/vehicles/b-ai/t{mã loại}.png (đại diện loại), n{mã tên}.png (riêng 1 tên), combo*.png."""
+Ảnh ra: design-system/assets/vehicles/t{mã loại}.png (đại diện loại), n{mã tên}.png (riêng 1 tên), combo*.png."""
 import json, pathlib, re
 import numpy as np
 from PIL import Image, ImageFilter
 
 LAB = pathlib.Path(__file__).resolve().parent.parent
 ASSETS = LAB / "assets" / "vehicles"
+IMG = LAB.parent.parent / "design-system" / "assets" / "vehicles"  # bộ ảnh chính (DEC-334 vh09)
 
 
 def drop_specks(im: Image.Image, min_ratio=0.01) -> Image.Image:
@@ -156,7 +157,7 @@ def frame(im: Image.Image, cut: str) -> Image.Image:
 
 
 def save(im: Image.Image, src: str, name: str, max_w=1400) -> pathlib.Path:
-    d = ASSETS / src
+    d = IMG if src == "b-ai" else ASSETS / src
     d.mkdir(parents=True, exist_ok=True)
     m = re.search(r"-(q|s)(-\d+)?(-[a-z]+)?$", name)
     if m or name.endswith("-top"):   # ảnh theo quy chuẩn: cắt SÁT mép thật (không viền) — chiều dài/chiều cao ảnh = kích thước thật để ghép tổ hợp
@@ -177,8 +178,8 @@ def save(im: Image.Image, src: str, name: str, max_w=1400) -> pathlib.Path:
 def write_manifest():
     m = {}
     for src in ("b-ai",):
-        d = ASSETS / src
-        m[src] = {p.stem: f"assets/vehicles/{src}/{p.name}" for p in sorted(d.glob("*.png"))} if d.exists() else {}
+        d = IMG
+        m[src] = {p.stem: f"../../design-system/assets/vehicles/{p.name}" for p in sorted(d.glob("*.png"))} if d.exists() else {}
     (ASSETS / "manifest.js").write_text(
         "/* Máy sinh bởi vehicles-src/vehlib.py — không sửa tay. */\nwindow.VEH_ASSETS=" + json.dumps(m, ensure_ascii=False, indent=1) + ";\n",
         encoding="utf-8")

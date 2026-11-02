@@ -1,15 +1,15 @@
 {
- "tokens_version": "0.16.0",
+ "tokens_version": "0.26.0",
  "counts": {
-  "ok": 190,
-  "near": 33,
-  "new": 82,
+  "ok": 220,
+  "near": 28,
+  "new": 57,
   "conflict": 10,
   "undeclared": 0
  },
  "no_sel": 0,
  "off_page": 0,
- "open": 107,
+ "open": 80,
  "ignored": [
   {
    "sel": ".pv[data-D1=b] .gh",
@@ -22,24 +22,24 @@
  "groups": {
   "typo": {
    "label": "Chữ",
-   "total": 56,
-   "ok": 15,
-   "open": 41,
-   "audit": 8
+   "total": 57,
+   "ok": 39,
+   "open": 18,
+   "audit": 9
   },
   "color": {
    "label": "Màu",
    "total": 110,
-   "ok": 107,
-   "open": 3,
+   "ok": 102,
+   "open": 4,
    "audit": 0
   },
   "icon": {
    "label": "Icon",
-   "total": 13,
-   "ok": 0,
-   "open": 12,
-   "audit": 2
+   "total": 12,
+   "ok": 1,
+   "open": 11,
+   "audit": 1
   },
   "effect": {
    "label": "Hiệu ứng",
@@ -51,8 +51,8 @@
   "spacing": {
    "label": "Khoảng cách & cỡ",
    "total": 95,
-   "ok": 49,
-   "open": 29,
+   "ok": 59,
+   "open": 25,
    "audit": 0
   },
   "radius": {
@@ -91,15 +91,11 @@
    "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": {
-    "token": "width/xs",
-    "value": 320,
-    "css": "var(--width-xs)"
-   },
+   "to": null,
    "visible": true,
-   "suggest": "width/xs (320)",
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất width/xs = 320",
+   "note": "trùng số với header-nav/account-menu-width nhưng đó là token của component khác; thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -126,7 +122,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/lg",
     "space/lg",
     "control/padding-x/md",
     "control/padding-x-icon/lg"
@@ -169,9 +164,9 @@
    "cat": "ok",
    "tokens": [
     "space/md",
-    "space/md",
     "layout/list-gap",
-    "control/padding-x/sm"
+    "control/padding-x/sm",
+    "control/padding-x-icon/md"
    ],
    "bind": {
     "token": "nav/offset-bottom",
@@ -210,11 +205,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/border/disabled",
     "color/border/secondary"
    ],
    "bind": {
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    },
    "to": null,
    "visible": false,
@@ -226,8 +222,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    }
   },
   {
@@ -286,23 +282,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "control/height/md",
-    "value": 32,
-    "css": "var(--control-height-md)"
+   "cat": "ok",
+   "tokens": [
+    "control/height/ml"
+   ],
+   "bind": {
+    "token": "control/height/ml",
+    "css": "var(--control-height-ml)"
    },
-   "visible": true,
-   "suggest": "control/height/md (32)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với avatar/size/md, list-row/min-height nhưng đó là token của component khác; thang chung gần nhất control/height/md = 32",
+   "note": "",
    "group": "spacing",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "control/height/ml",
+    "css": "var(--control-height-ml)"
    }
   },
   {
@@ -324,14 +323,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/control",
-    "radius/field",
-    "radius/inner",
-    "radius/menu"
+    "radius/md"
    ],
    "bind": {
-    "token": "radius/tab",
-    "css": "var(--radius-tab)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    },
    "to": null,
    "visible": false,
@@ -343,8 +339,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/tab",
-    "css": "var(--radius-tab)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    }
   },
   {
@@ -375,7 +371,7 @@
    "visible": false,
    "suggest": "space/md (8)",
    "rules": [],
-   "note": "trùng số với space/lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
+   "note": "trùng số với chip/padding-x-sm, chip/padding-x-icon-lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
    "group": "spacing",
    "decided": false,
    "must": false,
@@ -415,7 +411,7 @@
    "visible": false,
    "suggest": "space/md (8)",
    "rules": [],
-   "note": "trùng số với space/lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
+   "note": "trùng số với chip/padding-x-sm, chip/padding-x-icon-lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
    "group": "spacing",
    "decided": false,
    "must": false,
@@ -567,12 +563,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/text/tertiary_strong",
-    "color/utility/neutral/600"
+    "color/fg/tertiary",
+    "color/text/tertiary_strong"
    ],
    "bind": {
-    "token": "color/utility/neutral/600",
-    "css": "var(--color-utility-neutral-600)"
+    "token": "color/fg/tertiary",
+    "css": "var(--color-fg-tertiary)"
    },
    "to": null,
    "visible": false,
@@ -585,8 +581,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/neutral/600",
-    "css": "var(--color-utility-neutral-600)"
+    "token": "color/fg/tertiary",
+    "css": "var(--color-fg-tertiary)"
    }
   },
   {
@@ -607,27 +603,26 @@
    "noOverride": "cỡ icon nằm trong SVG",
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "icon/size/md",
-    "value": 16,
-    "css": "var(--icon-size-md)"
+   "cat": "ok",
+   "tokens": [
+    "icon/size/ml"
+   ],
+   "bind": {
+    "token": "icon/size/ml",
+    "css": "var(--icon-size-ml)"
    },
+   "to": null,
    "visible": false,
-   "suggest": "icon/size/md (16)",
+   "suggest": null,
    "rules": [],
-   "note": "lệch 2",
+   "note": "",
    "group": "icon",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "icon/size/md",
-    "value": 16,
-    "css": "var(--icon-size-md)",
-    "auto": true
+    "token": "icon/size/ml",
+    "css": "var(--icon-size-ml)"
    }
   },
   {
@@ -649,13 +644,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -667,8 +663,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -729,11 +725,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/primary",
     "color/text/primary"
    ],
    "bind": {
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    },
    "to": null,
    "visible": false,
@@ -746,8 +743,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    }
   },
   {
@@ -771,12 +768,12 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "type/code/size",
+    "token": "type/hint/size",
     "value": 12,
-    "css": "var(--type-code-size)"
+    "css": "var(--type-hint-size)"
    },
    "visible": true,
-   "suggest": "type/code/size (12)",
+   "suggest": "type/hint/size (12)",
    "rules": [],
    "note": "lệch -1",
    "group": "typo",
@@ -884,6 +881,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -922,23 +922,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "control/height/md",
-    "value": 32,
-    "css": "var(--control-height-md)"
+   "cat": "ok",
+   "tokens": [
+    "control/height/ml"
+   ],
+   "bind": {
+    "token": "control/height/ml",
+    "css": "var(--control-height-ml)"
    },
-   "visible": true,
-   "suggest": "control/height/md (32)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với avatar/size/md, list-row/min-height nhưng đó là token của component khác; thang chung gần nhất control/height/md = 32",
+   "note": "",
    "group": "spacing",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "control/height/ml",
+    "css": "var(--control-height-ml)"
    }
   },
   {
@@ -1000,9 +1003,9 @@
    "cat": "ok",
    "tokens": [
     "space/md",
-    "space/md",
     "layout/list-gap",
-    "control/padding-x/sm"
+    "control/padding-x/sm",
+    "control/padding-x-icon/md"
    ],
    "bind": {
     "token": "nav/offset-bottom",
@@ -1041,11 +1044,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/border/disabled",
     "color/border/secondary"
    ],
    "bind": {
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    },
    "to": null,
    "visible": false,
@@ -1057,8 +1061,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    }
   },
   {
@@ -1080,12 +1084,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/info/primary",
-    "color/utility/blue/50"
+    "color/bg/info/primary"
    ],
    "bind": {
-    "token": "color/utility/blue/50",
-    "css": "var(--color-utility-blue-50)"
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
    },
    "to": null,
    "visible": false,
@@ -1097,8 +1100,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/blue/50",
-    "css": "var(--color-utility-blue-50)"
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
    }
   },
   {
@@ -1120,12 +1123,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/text/info/primary",
-    "color/utility/blue/700"
+    "color/text/info/primary"
    ],
    "bind": {
-    "token": "color/utility/blue/700",
-    "css": "var(--color-utility-blue-700)"
+    "token": "color/text/info/primary",
+    "css": "var(--color-text-info-primary)"
    },
    "to": null,
    "visible": false,
@@ -1138,8 +1140,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/blue/700",
-    "css": "var(--color-utility-blue-700)"
+    "token": "color/text/info/primary",
+    "css": "var(--color-text-info-primary)"
    }
   },
   {
@@ -1163,12 +1165,12 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "type/code/size",
+    "token": "type/hint/size",
     "value": 12,
-    "css": "var(--type-code-size)"
+    "css": "var(--type-hint-size)"
    },
    "visible": true,
-   "suggest": "type/code/size (12)",
+   "suggest": "type/hint/size (12)",
    "rules": [],
    "note": "lệch -1",
    "group": "typo",
@@ -1195,23 +1197,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/body/line-height",
-    "value": 20,
-    "css": "var(--type-body-line-height)"
+   "cat": "ok",
+   "tokens": [
+    "type/hint/line-height"
+   ],
+   "bind": {
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
    },
-   "visible": true,
-   "suggest": "type/body/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/body/line-height = 20",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
    }
   },
   {
@@ -1235,22 +1240,22 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "space/md",
-    "value": 8,
-    "css": "var(--space-md)"
+    "token": "space/sm",
+    "value": 6,
+    "css": "var(--space-sm)"
    },
    "visible": false,
-   "suggest": "space/md (8)",
+   "suggest": "space/sm (6)",
    "rules": [],
-   "note": "lệch -1",
+   "note": "lệch 1",
    "group": "spacing",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/md",
-    "value": 8,
-    "css": "var(--space-md)",
+    "token": "space/sm",
+    "value": 6,
+    "css": "var(--space-sm)",
     "auto": true
    }
   },
@@ -1283,7 +1288,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất width/xs = 320 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -1357,11 +1362,12 @@
    "cat": "ok",
    "tokens": [
     "type/caption/size",
+    "type/hint/size",
     "type/code/size"
    ],
    "bind": {
-    "token": "type/code/size",
-    "css": "var(--type-code-size)"
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
    },
    "to": null,
    "visible": false,
@@ -1373,8 +1379,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "type/code/size",
-    "css": "var(--type-code-size)"
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
    }
   },
   {
@@ -1401,6 +1407,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -1446,7 +1455,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/primary_solid",
     "color/action/primary-pressed",
     "color/bg/primary_solid"
    ],
@@ -1492,12 +1500,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu-item",
-    "radius/badge"
+    "radius/sm"
    ],
    "bind": {
-    "token": "radius/badge",
-    "css": "var(--radius-badge)"
+    "token": "radius/sm",
+    "css": "var(--radius-sm)"
    },
    "to": null,
    "visible": false,
@@ -1509,8 +1516,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/badge",
-    "css": "var(--radius-badge)"
+    "token": "radius/sm",
+    "css": "var(--radius-sm)"
    }
   },
   {
@@ -1534,14 +1541,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/control",
-    "radius/field",
-    "radius/inner",
-    "radius/menu"
+    "radius/md"
    ],
    "bind": {
-    "token": "radius/tab",
-    "css": "var(--radius-tab)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    },
    "to": null,
    "visible": false,
@@ -1553,8 +1557,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/tab",
-    "css": "var(--radius-tab)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    }
   },
   {
@@ -1579,9 +1583,9 @@
    "cat": "ok",
    "tokens": [
     "space/md",
-    "space/md",
     "layout/list-gap",
-    "control/padding-x/sm"
+    "control/padding-x/sm",
+    "control/padding-x-icon/md"
    ],
    "bind": {
     "token": "nav/offset-bottom",
@@ -1620,11 +1624,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/primary",
     "color/text/primary"
    ],
    "bind": {
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    },
    "to": null,
    "visible": false,
@@ -1636,8 +1641,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    }
   },
   {
@@ -1657,23 +1662,28 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    },
-   "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    }
   },
   {
@@ -1696,11 +1706,12 @@
    "cat": "ok",
    "tokens": [
     "type/heading/line-height",
+    "type/body/line-height",
     "type/label/line-height"
    ],
    "bind": {
-    "token": "type/label/line-height",
-    "css": "var(--type-label-line-height)"
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    },
    "to": null,
    "visible": false,
@@ -1712,8 +1723,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "type/label/line-height",
-    "css": "var(--type-label-line-height)"
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    }
   },
   {
@@ -1740,11 +1751,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/border/disabled",
     "color/border/secondary"
    ],
    "bind": {
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    },
    "to": null,
    "visible": false,
@@ -1756,8 +1768,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    }
   },
   {
@@ -1784,11 +1796,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu"
+    "radius/md"
    ],
    "bind": {
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    },
    "to": null,
    "visible": false,
@@ -1800,8 +1812,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    }
   },
   {
@@ -1828,8 +1840,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_blur",
     "color/bg/primary",
-    "color/bg/primary"
+    "color/bg/primary_alt"
    ],
    "bind": {
     "token": "color/bg/primary",
@@ -1875,14 +1888,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `0 12px 16px -4px rgba(10,13,18,.08),0 4px 6px -2px rgba(10,13,18,.03)` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `0 12px 16px -4px rgba(10,13,18,.08),0 4px 6px -2px rgba(10,13,18,.03)` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*",
    "group": "effect",
    "decided": false,
    "must": true,
@@ -1914,7 +1927,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -1959,23 +1971,27 @@
     "state": "slim"
    },
    "at": null,
-   "cat": "new",
+   "cat": "near",
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)"
+    "token": "space/none",
+    "value": 0,
+    "css": "var(--space-none)"
    },
-   "visible": true,
-   "suggest": "space/xs (4)",
+   "visible": false,
+   "suggest": "space/none (0)",
    "rules": [],
-   "note": "thang chung gần nhất space/xs = 4",
+   "note": "trùng số với upload/meta-offset, command-search/highlight-padding-x nhưng đó là token của component khác; thang chung gần nhất space/none = 0",
    "group": "spacing",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "space/none",
+    "value": 0,
+    "css": "var(--space-none)",
+    "auto": true
    }
   },
   {
@@ -2007,7 +2023,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất width/xs = 320 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -2037,26 +2053,19 @@
     "state": "slim"
    },
    "at": null,
-   "cat": "ok",
-   "tokens": [
-    "width/xs"
-   ],
-   "bind": {
-    "token": "width/xs",
-    "css": "var(--width-xs)"
-   },
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
    "to": null,
-   "visible": false,
+   "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
-   "must": false,
+   "must": true,
    "resolved": {
-    "kind": "token",
-    "token": "width/xs",
-    "css": "var(--width-xs)"
+    "kind": "pending"
    }
   },
   {
@@ -2088,7 +2097,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với avatar/size/md, card/lead-size nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với avatar/size/md nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -2120,7 +2129,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/md",
     "space/md",
     "nav/offset-bottom"
    ],
@@ -2167,7 +2175,6 @@
    "cat": "ok",
    "tokens": [
     "space/md",
-    "space/md",
     "nav/offset-bottom"
    ],
    "bind": {
@@ -2212,12 +2219,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu-item",
-    "radius/badge"
+    "radius/sm"
    ],
    "bind": {
-    "token": "radius/menu-item",
-    "css": "var(--radius-menu-item)"
+    "token": "radius/sm",
+    "css": "var(--radius-sm)"
    },
    "to": null,
    "visible": false,
@@ -2229,8 +2235,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/menu-item",
-    "css": "var(--radius-menu-item)"
+    "token": "radius/sm",
+    "css": "var(--radius-sm)"
    }
   },
   {
@@ -2255,23 +2261,28 @@
     "state": "slim"
    },
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    },
-   "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    }
   },
   {
@@ -2299,11 +2310,12 @@
    "cat": "ok",
    "tokens": [
     "type/heading/line-height",
+    "type/body/line-height",
     "type/label/line-height"
    ],
    "bind": {
-    "token": "type/label/line-height",
-    "css": "var(--type-label-line-height)"
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    },
    "to": null,
    "visible": false,
@@ -2315,8 +2327,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "type/label/line-height",
-    "css": "var(--type-label-line-height)"
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    }
   },
   {
@@ -2343,11 +2355,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/primary",
     "color/text/primary"
    ],
    "bind": {
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    },
    "to": null,
    "visible": false,
@@ -2359,8 +2372,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    }
   },
   {
@@ -2387,13 +2400,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -2405,8 +2419,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -2461,15 +2475,11 @@
    "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": {
-    "token": "width/xs",
-    "value": 320,
-    "css": "var(--width-xs)"
-   },
+   "to": null,
    "visible": true,
-   "suggest": "width/xs (320)",
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất width/xs = 320",
+   "note": "trùng số với header-nav/account-menu-width nhưng đó là token của component khác; thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -2528,8 +2538,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_blur",
     "color/bg/primary",
-    "color/bg/primary"
+    "color/bg/primary_alt"
    ],
    "bind": {
     "token": "color/bg/primary",
@@ -2577,7 +2588,7 @@
    "visible": false,
    "suggest": "space/md (8)",
    "rules": [],
-   "note": "trùng số với space/lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
+   "note": "trùng số với chip/padding-x-sm, chip/padding-x-icon-lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
    "group": "spacing",
    "decided": false,
    "must": false,
@@ -2608,7 +2619,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -2650,7 +2660,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/md",
     "space/md",
     "nav/offset-bottom"
    ],
@@ -2696,7 +2705,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với size/4xl, size/4xl nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/4xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -2728,7 +2737,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với size/4xl, size/4xl nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/4xl nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -2755,11 +2764,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu"
+    "radius/md"
    ],
    "bind": {
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    },
    "to": null,
    "visible": false,
@@ -2771,8 +2780,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    }
   },
   {
@@ -2794,8 +2803,8 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/primary_solid",
-    "color/action/primary-pressed"
+    "color/action/primary-pressed",
+    "color/bg/primary_solid"
    ],
    "bind": {
     "token": "color/bg/primary_solid",
@@ -2834,11 +2843,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/text/inverse"
+    "color/fg/inverse",
+    "color/fg/white",
+    "color/text/inverse",
+    "color/text/white"
    ],
    "bind": {
-    "token": "color/text/inverse",
-    "css": "var(--color-text-inverse)"
+    "token": "color/fg/white",
+    "css": "var(--color-fg-white)"
    },
    "to": null,
    "visible": false,
@@ -2850,8 +2862,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/inverse",
-    "css": "var(--color-text-inverse)"
+    "token": "color/fg/white",
+    "css": "var(--color-fg-white)"
    }
   },
   {
@@ -2871,23 +2883,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
+   "cat": "ok",
+   "tokens": [
+    "type/title-3/size"
+   ],
+   "bind": {
     "token": "type/title-3/size",
-    "value": 17,
     "css": "var(--type-title-3-size)"
    },
-   "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "lệch 1",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/title-3/size",
+    "css": "var(--type-title-3-size)"
    }
   },
   {
@@ -2907,23 +2922,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+   "cat": "ok",
+   "tokens": [
+    "type/body-lg/size"
+   ],
+   "bind": {
+    "token": "type/body-lg/size",
+    "css": "var(--type-body-lg-size)"
    },
-   "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "lệch -1",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/body-lg/size",
+    "css": "var(--type-body-lg-size)"
    }
   },
   {
@@ -2947,12 +2965,12 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "type/label/line-height",
+    "token": "type/body/line-height",
     "value": 20,
-    "css": "var(--type-label-line-height)"
+    "css": "var(--type-body-line-height)"
    },
    "visible": true,
-   "suggest": "type/label/line-height (20)",
+   "suggest": "type/body/line-height (20)",
    "rules": [],
    "note": "lệch 2",
    "group": "typo",
@@ -2979,23 +2997,28 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/label/line-height",
-    "value": 20,
-    "css": "var(--type-label-line-height)"
+   "cat": "ok",
+   "tokens": [
+    "chip/count-line-height",
+    "type/caption/line-height",
+    "type/code/line-height"
+   ],
+   "bind": {
+    "token": "chip/count-line-height",
+    "css": "var(--chip-count-line-height)"
    },
-   "visible": true,
-   "suggest": "type/label/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/label/line-height = 20",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "chip/count-line-height",
+    "css": "var(--chip-count-line-height)"
    }
   },
   {
@@ -3017,6 +3040,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -3056,6 +3082,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -3100,7 +3129,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/height-lg, avatar/edit-size/xl nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với chip/height-lg, avatar/edit-size/xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -3159,12 +3188,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu-item",
-    "radius/badge"
+    "radius/sm"
    ],
    "bind": {
-    "token": "radius/badge",
-    "css": "var(--radius-badge)"
+    "token": "radius/sm",
+    "css": "var(--radius-sm)"
    },
    "to": null,
    "visible": false,
@@ -3176,8 +3204,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/badge",
-    "css": "var(--radius-badge)"
+    "token": "radius/sm",
+    "css": "var(--radius-sm)"
    }
   },
   {
@@ -3199,7 +3227,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -3242,7 +3269,6 @@
    "cat": "ok",
    "tokens": [
     "space/xs",
-    "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
    ],
@@ -3284,7 +3310,6 @@
    "cat": "ok",
    "tokens": [
     "space/xs",
-    "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
    ],
@@ -3323,23 +3348,27 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
+   "cat": "near",
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)"
+    "token": "space/none",
+    "value": 0,
+    "css": "var(--space-none)"
    },
-   "visible": true,
-   "suggest": "space/xs (4)",
+   "visible": false,
+   "suggest": "space/none (0)",
    "rules": [],
-   "note": "thang chung gần nhất space/xs = 4",
+   "note": "trùng số với upload/meta-offset, command-search/highlight-padding-x nhưng đó là token của component khác; thang chung gần nhất space/none = 0",
    "group": "spacing",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "space/none",
+    "value": 0,
+    "css": "var(--space-none)",
+    "auto": true
    }
   },
   {
@@ -3361,7 +3390,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/lg",
     "space/lg"
    ],
    "bind": {
@@ -3410,7 +3438,7 @@
    "visible": false,
    "suggest": "space/md (8)",
    "rules": [],
-   "note": "trùng số với space/lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
+   "note": "trùng số với chip/padding-x-sm, chip/padding-x-icon-lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
    "group": "spacing",
    "decided": false,
    "must": false,
@@ -3441,7 +3469,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -3483,13 +3510,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -3501,8 +3529,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -3524,11 +3552,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/primary",
     "color/text/primary"
    ],
    "bind": {
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    },
    "to": null,
    "visible": false,
@@ -3540,8 +3569,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    }
   },
   {
@@ -3565,14 +3594,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `#fff` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `#fff` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*",
    "group": "effect",
    "decided": false,
    "must": true,
@@ -3599,11 +3628,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/primary",
     "color/text/primary"
    ],
    "bind": {
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    },
    "to": null,
    "visible": false,
@@ -3615,8 +3645,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    }
   },
   {
@@ -3638,11 +3668,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/chip"
+    "radius/full"
    ],
    "bind": {
-    "token": "radius/chip",
-    "css": "var(--radius-chip)"
+    "token": "radius/full",
+    "css": "var(--radius-full)"
    },
    "to": null,
    "visible": false,
@@ -3654,8 +3684,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/chip",
-    "css": "var(--radius-chip)"
+    "token": "radius/full",
+    "css": "var(--radius-full)"
    }
   },
   {
@@ -3677,11 +3707,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/border/disabled",
     "color/border/secondary"
    ],
    "bind": {
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    },
    "to": null,
    "visible": false,
@@ -3693,8 +3724,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    }
   },
   {
@@ -3716,6 +3747,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -3753,23 +3787,27 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
+   "cat": "near",
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)"
+    "token": "space/none",
+    "value": 0,
+    "css": "var(--space-none)"
    },
-   "visible": true,
-   "suggest": "space/xs (4)",
+   "visible": false,
+   "suggest": "space/none (0)",
    "rules": [],
-   "note": "thang chung gần nhất space/xs = 4",
+   "note": "trùng số với upload/meta-offset, command-search/highlight-padding-x nhưng đó là token của component khác; thang chung gần nhất space/none = 0",
    "group": "spacing",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "space/none",
+    "value": 0,
+    "css": "var(--space-none)",
+    "auto": true
    }
   },
   {
@@ -3793,7 +3831,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/md",
     "space/md",
     "nav/offset-bottom"
    ],
@@ -3836,11 +3873,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/border/disabled",
     "color/border/secondary"
    ],
    "bind": {
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    },
    "to": null,
    "visible": false,
@@ -3852,8 +3890,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    }
   },
   {
@@ -3880,7 +3918,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với size/4xl, size/4xl nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/4xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "icon",
    "decided": false,
    "must": true,
@@ -3912,7 +3950,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với size/4xl, size/4xl nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/4xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "icon",
    "decided": false,
    "must": true,
@@ -3939,11 +3977,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu"
+    "radius/md"
    ],
    "bind": {
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    },
    "to": null,
    "visible": false,
@@ -3955,8 +3993,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    }
   },
   {
@@ -3978,13 +4016,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -3996,8 +4035,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -4019,12 +4058,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/text/tertiary_strong",
-    "color/utility/neutral/600"
+    "color/fg/tertiary",
+    "color/text/tertiary_strong"
    ],
    "bind": {
-    "token": "color/utility/neutral/600",
-    "css": "var(--color-utility-neutral-600)"
+    "token": "color/fg/tertiary",
+    "css": "var(--color-fg-tertiary)"
    },
    "to": null,
    "visible": false,
@@ -4036,8 +4075,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/neutral/600",
-    "css": "var(--color-utility-neutral-600)"
+    "token": "color/fg/tertiary",
+    "css": "var(--color-fg-tertiary)"
    }
   },
   {
@@ -4057,18 +4096,18 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
+   "cat": "near",
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+    "token": "type/body/size",
+    "value": 14,
+    "css": "var(--type-body-size)"
    },
    "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "suggest": "type/body/size (14)",
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "lệch -0.5",
    "group": "typo",
    "decided": false,
    "must": true,
@@ -4093,23 +4132,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/label/line-height",
-    "value": 20,
-    "css": "var(--type-label-line-height)"
+   "cat": "ok",
+   "tokens": [
+    "type/hint/line-height"
+   ],
+   "bind": {
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
    },
-   "visible": true,
-   "suggest": "type/label/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/label/line-height = 20",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
    }
   },
   {
@@ -4131,6 +4173,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -4170,7 +4215,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/lg",
     "space/lg"
    ],
    "bind": {
@@ -4210,7 +4254,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/md",
     "space/md",
     "nav/offset-bottom"
    ],
@@ -4256,7 +4299,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -4283,11 +4326,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/border/disabled",
     "color/border/secondary"
    ],
    "bind": {
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    },
    "to": null,
    "visible": false,
@@ -4299,8 +4343,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    }
   },
   {
@@ -4320,27 +4364,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)"
+   "cat": "ok",
+   "tokens": [
+    "space/sm"
+   ],
+   "bind": {
+    "token": "space/sm",
+    "css": "var(--space-sm)"
    },
+   "to": null,
    "visible": false,
-   "suggest": "space/xs (4)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với space/sm nhưng đó là token của component khác; thang chung gần nhất space/xs = 4",
+   "note": "",
    "group": "spacing",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)",
-    "auto": true
+    "token": "space/sm",
+    "css": "var(--space-sm)"
    }
   },
   {
@@ -4371,7 +4414,7 @@
    "visible": true,
    "suggest": "icon/size/chip (14)",
    "rules": [],
-   "note": "trùng số với size/md, size/sm nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "note": "trùng số với size/sm nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -4407,7 +4450,7 @@
    "visible": true,
    "suggest": "icon/size/chip (14)",
    "rules": [],
-   "note": "trùng số với size/sm, size/md nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "note": "trùng số với size/md nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -4439,7 +4482,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với avatar/size/md, card/lead-size nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với avatar/size/md nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -4500,26 +4543,23 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "ok",
-   "tokens": [
-    "color/focus/gap"
-   ],
-   "bind": {
-    "token": "color/focus/gap",
-    "css": "var(--color-focus-gap)"
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/border/tertiary",
+    "value": "#F5F5F5",
+    "css": "var(--color-border-tertiary)"
    },
-   "to": null,
-   "visible": false,
-   "suggest": null,
+   "visible": true,
+   "suggest": "color/border/tertiary (#F5F5F5)",
    "rules": [],
-   "note": "",
+   "note": "trùng màu với color/bg/primary_blur, color/bg/primary nhưng token không dành cho viền; token đúng nghĩa gần nhất color/border/tertiary (#F5F5F5), ΔE 3.5",
    "group": "color",
    "decided": false,
-   "must": false,
+   "must": true,
    "resolved": {
-    "kind": "token",
-    "token": "color/focus/gap",
-    "css": "var(--color-focus-gap)"
+    "kind": "pending"
    }
   },
   {
@@ -4541,13 +4581,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -4559,8 +4600,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -4582,11 +4623,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/primary",
     "color/text/primary"
    ],
    "bind": {
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    },
    "to": null,
    "visible": false,
@@ -4598,8 +4640,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    }
   },
   {
@@ -4623,14 +4665,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `#fff` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `#fff` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*",
    "group": "effect",
    "decided": false,
    "must": true,
@@ -4657,7 +4699,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/lg",
     "space/lg"
    ],
    "bind": {
@@ -4700,23 +4741,26 @@
     "state": "slim"
    },
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/label/line-height",
-    "value": 20,
-    "css": "var(--type-label-line-height)"
+   "cat": "ok",
+   "tokens": [
+    "type/hint/line-height"
+   ],
+   "bind": {
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
    },
-   "visible": true,
-   "suggest": "type/label/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/label/line-height = 20",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
    }
   },
   {
@@ -4741,27 +4785,26 @@
     "state": "slim"
    },
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)"
+   "cat": "ok",
+   "tokens": [
+    "space/sm"
+   ],
+   "bind": {
+    "token": "space/sm",
+    "css": "var(--space-sm)"
    },
+   "to": null,
    "visible": false,
-   "suggest": "space/xs (4)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với space/sm nhưng đó là token của component khác; thang chung gần nhất space/xs = 4",
+   "note": "",
    "group": "spacing",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)",
-    "auto": true
+    "token": "space/sm",
+    "css": "var(--space-sm)"
    }
   },
   {
@@ -4788,7 +4831,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/md",
     "space/md",
     "nav/offset-bottom"
    ],
@@ -4832,27 +4874,26 @@
     "state": "slim"
    },
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)"
+   "cat": "ok",
+   "tokens": [
+    "space/xxs"
+   ],
+   "bind": {
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
    },
+   "to": null,
    "visible": false,
-   "suggest": "space/xs (4)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với size/xxs, list-row/text-gap nhưng đó là token của component khác; thang chung gần nhất space/xs = 4",
+   "note": "",
    "group": "spacing",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)",
-    "auto": true
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
    }
   },
   {
@@ -4879,12 +4920,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/inverse",
+    "color/fg/white",
     "color/text/inverse",
-    "color/text/inverse"
+    "color/text/white"
    ],
    "bind": {
-    "token": "color/text/inverse",
-    "css": "var(--color-text-inverse)"
+    "token": "color/fg/white",
+    "css": "var(--color-fg-white)"
    },
    "to": null,
    "visible": false,
@@ -4896,8 +4939,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/inverse",
-    "css": "var(--color-text-inverse)"
+    "token": "color/fg/white",
+    "css": "var(--color-fg-white)"
    }
   },
   {
@@ -4922,23 +4965,28 @@
     "state": "slim"
    },
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+   "cat": "ok",
+   "tokens": [
+    "type/caption/size",
+    "type/hint/size",
+    "type/code/size"
+   ],
+   "bind": {
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
    },
-   "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/font-size-sm nhưng đó là token của component khác; thang chung gần nhất type/title-3/size = 17",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
    }
   },
   {
@@ -4963,23 +5011,27 @@
     "state": "slim"
    },
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/label/line-height",
-    "value": 20,
-    "css": "var(--type-label-line-height)"
+   "cat": "ok",
+   "tokens": [
+    "type/caption/line-height",
+    "type/code/line-height"
+   ],
+   "bind": {
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
    },
-   "visible": true,
-   "suggest": "type/label/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/label/line-height = 20",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
    }
   },
   {
@@ -5007,13 +5059,12 @@
    "cat": "ok",
    "tokens": [
     "space/xs",
-    "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
    ],
    "bind": {
-    "token": "space/xs",
-    "css": "var(--space-xs)"
+    "token": "nav/padding-x",
+    "css": "var(--nav-padding-x)"
    },
    "to": null,
    "visible": false,
@@ -5025,8 +5076,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/xs",
-    "css": "var(--space-xs)"
+    "token": "nav/padding-x",
+    "css": "var(--nav-padding-x)"
    }
   },
   {
@@ -5054,13 +5105,11 @@
    "cat": "ok",
    "tokens": [
     "space/md",
-    "space/md",
-    "nav/offset-bottom",
-    "space/md"
+    "nav/offset-bottom"
    ],
    "bind": {
-    "token": "space/md",
-    "css": "var(--space-md)"
+    "token": "nav/offset-bottom",
+    "css": "var(--nav-offset-bottom)"
    },
    "to": null,
    "visible": false,
@@ -5072,8 +5121,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/md",
-    "css": "var(--space-md)"
+    "token": "nav/offset-bottom",
+    "css": "var(--nav-offset-bottom)"
    }
   },
   {
@@ -5093,28 +5142,27 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "ok",
-   "tokens": [
-    "color/bg/secondary",
-    "color/bg/primary_hover",
-    "color/utility/neutral/100"
-   ],
-   "bind": {
-    "token": "color/bg/secondary",
-    "css": "var(--color-bg-secondary)"
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/bg/primary",
+    "value": "#191919",
+    "css": "var(--color-bg-primary)"
    },
-   "to": null,
    "visible": false,
-   "suggest": null,
+   "suggest": "color/bg/primary (#191919)",
    "rules": [],
-   "note": "",
+   "note": "ΔE 1.0",
    "group": "color",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/secondary",
-    "css": "var(--color-bg-secondary)"
+    "token": "color/bg/primary",
+    "value": "#191919",
+    "css": "var(--color-bg-primary)",
+    "auto": true
    }
   },
   {
@@ -5141,7 +5189,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với space/xxs nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/xxs nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -5205,27 +5253,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)"
+   "cat": "ok",
+   "tokens": [
+    "space/xxs"
+   ],
+   "bind": {
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
    },
+   "to": null,
    "visible": false,
-   "suggest": "space/xs (4)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với size/xxs, list-row/text-gap nhưng đó là token của component khác; thang chung gần nhất space/xs = 4",
+   "note": "",
    "group": "spacing",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)",
-    "auto": true
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
    }
   },
   {
@@ -5245,18 +5292,18 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
+   "cat": "near",
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+    "token": "type/hint/size",
+    "value": 12,
+    "css": "var(--type-hint-size)"
    },
    "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "suggest": "type/hint/size (12)",
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "lệch -1",
    "group": "typo",
    "decided": false,
    "must": true,
@@ -5292,7 +5339,7 @@
    "visible": false,
    "suggest": "space/lg (12)",
    "rules": [],
-   "note": "lệch 2",
+   "note": "trùng số với chip/padding-x-lg nhưng đó là token của component khác; thang chung gần nhất space/lg = 12",
    "group": "spacing",
    "decided": false,
    "must": false,
@@ -5323,7 +5370,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/md",
     "space/md",
     "nav/offset-bottom"
    ],
@@ -5362,27 +5408,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)"
+   "cat": "ok",
+   "tokens": [
+    "space/xxs"
+   ],
+   "bind": {
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
    },
+   "to": null,
    "visible": false,
-   "suggest": "space/xs (4)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với size/xxs, list-row/text-gap nhưng đó là token của component khác; thang chung gần nhất space/xs = 4",
+   "note": "",
    "group": "spacing",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)",
-    "auto": true
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
    }
   },
   {
@@ -5409,7 +5454,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với avatar/size/md, card/lead-size nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với avatar/size/md nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -5438,7 +5483,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -5485,7 +5529,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với size/sm, size/md nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/md nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -5516,14 +5560,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "width/md",
+    "token": "width/paragraph-max",
     "value": 560,
-    "css": "var(--width-md)"
+    "css": "var(--width-paragraph-max)"
    },
    "visible": true,
-   "suggest": "width/md (560)",
+   "suggest": "width/paragraph-max (560)",
    "rules": [],
-   "note": "lệch 40",
+   "note": "trùng số với command-search/width nhưng đó là token của component khác; thang chung gần nhất width/paragraph-max = 560",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -5552,11 +5596,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/card"
+    "radius/xl"
    ],
    "bind": {
-    "token": "radius/card",
-    "css": "var(--radius-card)"
+    "token": "radius/xl",
+    "css": "var(--radius-xl)"
    },
    "to": null,
    "visible": false,
@@ -5568,8 +5612,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/card",
-    "css": "var(--radius-card)"
+    "token": "radius/xl",
+    "css": "var(--radius-xl)"
    }
   },
   {
@@ -5600,7 +5644,7 @@
    "visible": true,
    "suggest": "control/height/lg (40)",
    "rules": [],
-   "note": "trùng số với size/6xl, card/media-size-sm nhưng đó là token của component khác; thang chung gần nhất control/height/lg = 40",
+   "note": "trùng số với featured-icon/size, size/6xl nhưng đó là token của component khác; thang chung gần nhất control/height/lg = 40",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -5636,7 +5680,7 @@
    "visible": true,
    "suggest": "control/height/lg (40)",
    "rules": [],
-   "note": "trùng số với size/6xl, card/media-size-sm nhưng đó là token của component khác; thang chung gần nhất control/height/lg = 40",
+   "note": "trùng số với featured-icon/size, size/6xl nhưng đó là token của component khác; thang chung gần nhất control/height/lg = 40",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -5663,14 +5707,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/control",
-    "radius/field",
-    "radius/inner",
-    "radius/menu"
+    "radius/md"
    ],
    "bind": {
-    "token": "radius/tab",
-    "css": "var(--radius-tab)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    },
    "to": null,
    "visible": false,
@@ -5682,8 +5723,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/tab",
-    "css": "var(--radius-tab)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    }
   },
   {
@@ -5707,12 +5748,12 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "type/code/size",
+    "token": "type/hint/size",
     "value": 12,
-    "css": "var(--type-code-size)"
+    "css": "var(--type-hint-size)"
    },
    "visible": true,
-   "suggest": "type/code/size (12)",
+   "suggest": "type/hint/size (12)",
    "rules": [],
    "note": "lệch -1",
    "group": "typo",
@@ -5783,13 +5824,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -5801,8 +5843,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -5826,13 +5868,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -5844,8 +5887,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -5869,8 +5912,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_blur",
     "color/bg/primary",
-    "color/bg/primary"
+    "color/bg/primary_alt"
    ],
    "bind": {
     "token": "color/bg/primary",
@@ -5911,11 +5955,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/border/disabled",
     "color/border/secondary"
    ],
    "bind": {
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    },
    "to": null,
    "visible": false,
@@ -5927,8 +5972,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    }
   },
   {
@@ -5954,14 +5999,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `0 12px 16px -4px rgba(10,13,18,.08),0 4px 6px -2px rgba(10,13,18,.03)` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `0 12px 16px -4px rgba(10,13,18,.08),0 4px 6px -2px rgba(10,13,18,.03)` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*",
    "group": "effect",
    "decided": false,
    "must": true,
@@ -5992,14 +6037,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "width/md",
+    "token": "width/paragraph-max",
     "value": 560,
-    "css": "var(--width-md)"
+    "css": "var(--width-paragraph-max)"
    },
    "visible": true,
-   "suggest": "width/md (560)",
+   "suggest": "width/paragraph-max (560)",
    "rules": [],
-   "note": "lệch 40",
+   "note": "trùng số với command-search/width nhưng đó là token của component khác; thang chung gần nhất width/paragraph-max = 560",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -6026,7 +6071,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/md",
     "space/md",
     "nav/offset-bottom"
    ],
@@ -6068,7 +6112,6 @@
    "cat": "ok",
    "tokens": [
     "space/md",
-    "space/md",
     "nav/offset-bottom"
    ],
    "bind": {
@@ -6108,7 +6151,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/lg",
     "space/lg"
    ],
    "bind": {
@@ -6148,7 +6190,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xl",
     "space/xl",
     "layout/card-padding",
     "layout/title-gap"
@@ -6190,11 +6231,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/border/disabled",
     "color/border/secondary"
    ],
    "bind": {
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    },
    "to": null,
    "visible": false,
@@ -6206,8 +6248,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    }
   },
   {
@@ -6227,27 +6269,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)"
+   "cat": "ok",
+   "tokens": [
+    "space/sm"
+   ],
+   "bind": {
+    "token": "space/sm",
+    "css": "var(--space-sm)"
    },
+   "to": null,
    "visible": false,
-   "suggest": "space/xs (4)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với space/sm nhưng đó là token của component khác; thang chung gần nhất space/xs = 4",
+   "note": "",
    "group": "spacing",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)",
-    "auto": true
+    "token": "space/sm",
+    "css": "var(--space-sm)"
    }
   },
   {
@@ -6267,18 +6308,18 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
+   "cat": "near",
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+    "token": "type/hint/size",
+    "value": 12,
+    "css": "var(--type-hint-size)"
    },
    "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "suggest": "type/hint/size (12)",
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "lệch -1",
    "group": "typo",
    "decided": false,
    "must": true,
@@ -6303,23 +6344,27 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/label/line-height",
-    "value": 20,
-    "css": "var(--type-label-line-height)"
+   "cat": "ok",
+   "tokens": [
+    "type/caption/line-height",
+    "type/code/line-height"
+   ],
+   "bind": {
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
    },
-   "visible": true,
-   "suggest": "type/label/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/label/line-height = 20",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
    }
   },
   {
@@ -6341,6 +6386,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -6378,23 +6426,28 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    },
-   "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    }
   },
   {
@@ -6417,11 +6470,12 @@
    "cat": "ok",
    "tokens": [
     "type/heading/line-height",
+    "type/body/line-height",
     "type/label/line-height"
    ],
    "bind": {
-    "token": "type/label/line-height",
-    "css": "var(--type-label-line-height)"
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    },
    "to": null,
    "visible": false,
@@ -6433,8 +6487,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "type/label/line-height",
-    "css": "var(--type-label-line-height)"
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    }
   },
   {
@@ -6456,11 +6510,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/primary",
     "color/text/primary"
    ],
    "bind": {
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    },
    "to": null,
    "visible": false,
@@ -6472,8 +6527,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    }
   },
   {
@@ -6493,18 +6548,18 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
+   "cat": "near",
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+    "token": "type/hint/size",
+    "value": 12,
+    "css": "var(--type-hint-size)"
    },
    "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "suggest": "type/hint/size (12)",
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "lệch 1",
    "group": "typo",
    "decided": false,
    "must": true,
@@ -6531,7 +6586,8 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "chip/line-height-sm"
+    "chip/line-height-sm",
+    "type/hint/line-height"
    ],
    "bind": {
     "token": "chip/line-height-sm",
@@ -6570,11 +6626,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/primary",
     "color/text/primary"
    ],
    "bind": {
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    },
    "to": null,
    "visible": false,
@@ -6586,8 +6643,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    }
   },
   {
@@ -6614,7 +6671,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với space/xxs nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/xxs nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -6641,7 +6698,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -6688,7 +6744,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/height-lg, avatar/edit-size/xl nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với chip/height-lg, avatar/edit-size/xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -6747,12 +6803,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu-item",
-    "radius/badge"
+    "radius/sm"
    ],
    "bind": {
-    "token": "radius/badge",
-    "css": "var(--radius-badge)"
+    "token": "radius/sm",
+    "css": "var(--radius-sm)"
    },
    "to": null,
    "visible": false,
@@ -6764,8 +6819,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/badge",
-    "css": "var(--radius-badge)"
+    "token": "radius/sm",
+    "css": "var(--radius-sm)"
    }
   },
   {
@@ -6787,12 +6842,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/text/tertiary_strong",
-    "color/utility/neutral/600"
+    "color/fg/tertiary",
+    "color/text/tertiary_strong"
    ],
    "bind": {
-    "token": "color/utility/neutral/600",
-    "css": "var(--color-utility-neutral-600)"
+    "token": "color/fg/tertiary",
+    "css": "var(--color-fg-tertiary)"
    },
    "to": null,
    "visible": false,
@@ -6804,8 +6859,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/neutral/600",
-    "css": "var(--color-utility-neutral-600)"
+    "token": "color/fg/tertiary",
+    "css": "var(--color-fg-tertiary)"
    }
   },
   {
@@ -6832,7 +6887,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với width/xs nhưng đó là token của component khác; thang chung gần nhất nav/height = 64 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "thang chung gần nhất nav/height = 64 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -6857,27 +6912,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)"
+   "cat": "ok",
+   "tokens": [
+    "space/xxs"
+   ],
+   "bind": {
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
    },
+   "to": null,
    "visible": false,
-   "suggest": "space/xs (4)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với size/xxs, list-row/text-gap nhưng đó là token của component khác; thang chung gần nhất space/xs = 4",
+   "note": "",
    "group": "spacing",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)",
-    "auto": true
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
    }
   },
   {
@@ -6899,7 +6953,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/md",
     "space/md",
     "nav/offset-bottom"
    ],
@@ -6940,11 +6993,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/border/disabled",
     "color/border/secondary"
    ],
    "bind": {
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    },
    "to": null,
    "visible": false,
@@ -6956,8 +7010,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/border/secondary",
-    "css": "var(--color-border-secondary)"
+    "token": "color/border/disabled",
+    "css": "var(--color-border-disabled)"
    }
   },
   {
@@ -6984,7 +7038,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với size/4xl, size/4xl nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/4xl nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -7011,7 +7065,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -7051,27 +7104,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)"
+   "cat": "ok",
+   "tokens": [
+    "space/xxs"
+   ],
+   "bind": {
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
    },
+   "to": null,
    "visible": false,
-   "suggest": "space/xs (4)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với size/xxs, list-row/text-gap nhưng đó là token của component khác; thang chung gần nhất space/xs = 4",
+   "note": "",
    "group": "spacing",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)",
-    "auto": true
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
    }
   },
   {
@@ -7093,7 +7145,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/md",
     "space/md",
     "nav/offset-bottom"
    ],
@@ -7132,23 +7183,27 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/label/line-height",
-    "value": 20,
-    "css": "var(--type-label-line-height)"
+   "cat": "ok",
+   "tokens": [
+    "type/caption/line-height",
+    "type/code/line-height"
+   ],
+   "bind": {
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
    },
-   "visible": true,
-   "suggest": "type/label/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/label/line-height = 20",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
    }
   },
   {
@@ -7170,6 +7225,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -7209,12 +7267,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu-item",
-    "radius/badge"
+    "radius/sm"
    ],
    "bind": {
-    "token": "radius/badge",
-    "css": "var(--radius-badge)"
+    "token": "radius/sm",
+    "css": "var(--radius-sm)"
    },
    "to": null,
    "visible": false,
@@ -7226,8 +7283,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/badge",
-    "css": "var(--radius-badge)"
+    "token": "radius/sm",
+    "css": "var(--radius-sm)"
    }
   },
   {
@@ -7249,13 +7306,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -7267,8 +7325,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -7290,11 +7348,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/primary",
     "color/text/primary"
    ],
    "bind": {
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    },
    "to": null,
    "visible": false,
@@ -7306,8 +7365,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    }
   },
   {
@@ -7329,7 +7388,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/md",
     "space/md",
     "nav/offset-bottom"
    ],
@@ -7375,7 +7433,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với size/4xl, size/4xl nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/4xl nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -7411,7 +7469,7 @@
    "visible": true,
    "suggest": "color/focus/ring (#262626)",
    "rules": [],
-   "note": "trùng màu với color/bg/primary_solid, color/text/primary nhưng token không dành cho viền; token đúng nghĩa gần nhất color/focus/ring (#262626), ΔE 7.4",
+   "note": "trùng màu với color/action/primary-pressed, color/bg/primary_solid nhưng token không dành cho viền; token đúng nghĩa gần nhất color/focus/ring (#262626), ΔE 7.4",
    "group": "color",
    "decided": false,
    "must": true,
@@ -7440,14 +7498,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `#171717` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `#171717` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*",
    "group": "effect",
    "decided": false,
    "must": true,
@@ -7474,11 +7532,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu"
+    "radius/md"
    ],
    "bind": {
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    },
    "to": null,
    "visible": false,
@@ -7490,8 +7548,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    }
   },
   {
@@ -7513,7 +7571,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -7564,7 +7621,7 @@
    "visible": false,
    "suggest": "space/md (8)",
    "rules": [],
-   "note": "trùng số với space/lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
+   "note": "trùng số với chip/padding-x-sm, chip/padding-x-icon-lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
    "group": "spacing",
    "decided": false,
    "must": false,
@@ -7595,11 +7652,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/primary",
     "color/text/primary"
    ],
    "bind": {
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    },
    "to": null,
    "visible": false,
@@ -7611,8 +7669,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    }
   },
   {
@@ -7632,23 +7690,28 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    },
-   "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    }
   },
   {
@@ -7670,7 +7733,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -7713,11 +7775,15 @@
    "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": null,
+   "to": {
+    "token": "icon/size/ml",
+    "value": 18,
+    "css": "var(--icon-size-ml)"
+   },
    "visible": true,
-   "suggest": null,
+   "suggest": "icon/size/ml (18)",
    "rules": [],
-   "note": "trùng số với size/3xl, size/4xl nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/3xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -7749,7 +7815,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với size/3xl, size/4xl nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/3xl nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -7776,12 +7842,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu-item",
-    "radius/badge"
+    "radius/sm"
    ],
    "bind": {
-    "token": "radius/badge",
-    "css": "var(--radius-badge)"
+    "token": "radius/sm",
+    "css": "var(--radius-sm)"
    },
    "to": null,
    "visible": false,
@@ -7793,8 +7858,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/badge",
-    "css": "var(--radius-badge)"
+    "token": "radius/sm",
+    "css": "var(--radius-sm)"
    }
   },
   {
@@ -7816,6 +7881,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -7864,7 +7932,7 @@
    "visible": false,
    "suggest": "space/md (8)",
    "rules": [],
-   "note": "trùng số với space/lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
+   "note": "trùng số với chip/padding-x-sm, chip/padding-x-icon-lg nhưng đó là token của component khác; thang chung gần nhất space/md = 8",
    "group": "spacing",
    "decided": false,
    "must": false,
@@ -7895,7 +7963,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/md",
     "space/md",
     "nav/offset-bottom"
    ],
@@ -7936,8 +8003,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_hover",
     "color/bg/secondary",
-    "color/bg/primary_hover"
+    "color/bg/secondary_alt"
    ],
    "bind": {
     "token": "color/bg/secondary",
@@ -7981,7 +8049,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/height-lg, avatar/edit-size/xl nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với chip/height-lg, avatar/edit-size/xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "icon",
    "decided": false,
    "must": true,
@@ -8013,7 +8081,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/height-lg, avatar/edit-size/xl nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với chip/height-lg, avatar/edit-size/xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "icon",
    "decided": false,
    "must": true,
@@ -8040,11 +8108,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu"
+    "radius/md"
    ],
    "bind": {
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    },
    "to": null,
    "visible": false,
@@ -8056,8 +8124,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    }
   },
   {
@@ -8079,8 +8147,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_hover",
     "color/bg/secondary",
-    "color/bg/primary_hover"
+    "color/bg/secondary_alt"
    ],
    "bind": {
     "token": "color/bg/secondary",
@@ -8119,6 +8188,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -8158,11 +8230,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu"
+    "radius/md"
    ],
    "bind": {
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    },
    "to": null,
    "visible": false,
@@ -8174,8 +8246,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    }
   },
   {
@@ -8202,7 +8274,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/height-lg, avatar/edit-size/xl nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với chip/height-lg, avatar/edit-size/xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "icon",
    "decided": false,
    "must": true,
@@ -8234,7 +8306,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/height-lg, avatar/edit-size/xl nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với chip/height-lg, avatar/edit-size/xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "icon",
    "decided": false,
    "must": true,
@@ -8261,12 +8333,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/info/primary",
-    "color/utility/blue/50"
+    "color/bg/info/primary"
    ],
    "bind": {
-    "token": "color/utility/blue/50",
-    "css": "var(--color-utility-blue-50)"
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
    },
    "to": null,
    "visible": false,
@@ -8278,8 +8349,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/blue/50",
-    "css": "var(--color-utility-blue-50)"
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
    }
   },
   {
@@ -8301,12 +8372,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/text/info/primary",
-    "color/utility/blue/700"
+    "color/text/info/primary"
    ],
    "bind": {
-    "token": "color/utility/blue/700",
-    "css": "var(--color-utility-blue-700)"
+    "token": "color/text/info/primary",
+    "css": "var(--color-text-info-primary)"
    },
    "to": null,
    "visible": false,
@@ -8318,8 +8388,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/blue/700",
-    "css": "var(--color-utility-blue-700)"
+    "token": "color/text/info/primary",
+    "css": "var(--color-text-info-primary)"
    }
   },
   {
@@ -8341,12 +8411,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/warning/primary",
-    "color/utility/yellow/50"
+    "color/bg/warning/primary"
    ],
    "bind": {
-    "token": "color/utility/yellow/50",
-    "css": "var(--color-utility-yellow-50)"
+    "token": "color/bg/warning/primary",
+    "css": "var(--color-bg-warning-primary)"
    },
    "to": null,
    "visible": false,
@@ -8358,8 +8427,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/yellow/50",
-    "css": "var(--color-utility-yellow-50)"
+    "token": "color/bg/warning/primary",
+    "css": "var(--color-bg-warning-primary)"
    }
   },
   {
@@ -8381,12 +8450,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/text/warning/primary",
-    "color/utility/yellow/700"
+    "color/text/warning/primary"
    ],
    "bind": {
-    "token": "color/utility/yellow/700",
-    "css": "var(--color-utility-yellow-700)"
+    "token": "color/text/warning/primary",
+    "css": "var(--color-text-warning-primary)"
    },
    "to": null,
    "visible": false,
@@ -8398,8 +8466,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/yellow/700",
-    "css": "var(--color-utility-yellow-700)"
+    "token": "color/text/warning/primary",
+    "css": "var(--color-text-warning-primary)"
    }
   },
   {
@@ -8421,12 +8489,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/success/primary",
-    "color/utility/green/50"
+    "color/bg/success/primary"
    ],
    "bind": {
-    "token": "color/utility/green/50",
-    "css": "var(--color-utility-green-50)"
+    "token": "color/bg/success/primary",
+    "css": "var(--color-bg-success-primary)"
    },
    "to": null,
    "visible": false,
@@ -8438,8 +8505,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/green/50",
-    "css": "var(--color-utility-green-50)"
+    "token": "color/bg/success/primary",
+    "css": "var(--color-bg-success-primary)"
    }
   },
   {
@@ -8461,12 +8528,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/text/success/primary",
-    "color/utility/green/700"
+    "color/text/success/primary"
    ],
    "bind": {
-    "token": "color/utility/green/700",
-    "css": "var(--color-utility-green-700)"
+    "token": "color/text/success/primary",
+    "css": "var(--color-text-success-primary)"
    },
    "to": null,
    "visible": false,
@@ -8478,8 +8544,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/green/700",
-    "css": "var(--color-utility-green-700)"
+    "token": "color/text/success/primary",
+    "css": "var(--color-text-success-primary)"
    }
   },
   {
@@ -8499,23 +8565,28 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    },
-   "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    }
   },
   {
@@ -8538,11 +8609,12 @@
    "cat": "ok",
    "tokens": [
     "type/heading/line-height",
+    "type/body/line-height",
     "type/label/line-height"
    ],
    "bind": {
-    "token": "type/label/line-height",
-    "css": "var(--type-label-line-height)"
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    },
    "to": null,
    "visible": false,
@@ -8554,8 +8626,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "type/label/line-height",
-    "css": "var(--type-label-line-height)"
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    }
   },
   {
@@ -8577,11 +8649,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/primary",
     "color/text/primary"
    ],
    "bind": {
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    },
    "to": null,
    "visible": false,
@@ -8593,8 +8666,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    }
   },
   {
@@ -8614,23 +8687,28 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+   "cat": "ok",
+   "tokens": [
+    "type/caption/size",
+    "type/hint/size",
+    "type/code/size"
+   ],
+   "bind": {
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
    },
-   "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/font-size-sm nhưng đó là token của component khác; thang chung gần nhất type/title-3/size = 17",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/hint/size",
+    "css": "var(--type-hint-size)"
    }
   },
   {
@@ -8650,23 +8728,27 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/label/line-height",
-    "value": 20,
-    "css": "var(--type-label-line-height)"
+   "cat": "ok",
+   "tokens": [
+    "type/caption/line-height",
+    "type/code/line-height"
+   ],
+   "bind": {
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
    },
-   "visible": true,
-   "suggest": "type/label/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/label/line-height = 20",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
    }
   },
   {
@@ -8688,6 +8770,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -8727,11 +8812,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/primary",
     "color/text/primary"
    ],
    "bind": {
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    },
    "to": null,
    "visible": false,
@@ -8743,8 +8829,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/primary",
-    "css": "var(--color-text-primary)"
+    "token": "color/fg/primary",
+    "css": "var(--color-fg-primary)"
    }
   },
   {
@@ -8771,7 +8857,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với list-row/divider-height nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với upload/divider-width nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -8798,11 +8884,13 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/action/secondary-hover"
+    "color/action/secondary-hover",
+    "color/bg/pressed",
+    "color/bg/quaternary"
    ],
    "bind": {
-    "token": "color/action/secondary-hover",
-    "css": "var(--color-action-secondary-hover)"
+    "token": "color/bg/pressed",
+    "css": "var(--color-bg-pressed)"
    },
    "to": null,
    "visible": false,
@@ -8814,8 +8902,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/action/secondary-hover",
-    "css": "var(--color-action-secondary-hover)"
+    "token": "color/bg/pressed",
+    "css": "var(--color-bg-pressed)"
    }
   },
   {
@@ -8837,7 +8925,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -8880,7 +8967,6 @@
    "cat": "ok",
    "tokens": [
     "space/md",
-    "space/md",
     "nav/offset-bottom"
    ],
    "bind": {
@@ -8920,13 +9006,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -8938,8 +9025,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -8961,12 +9048,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/text/tertiary_strong",
-    "color/utility/neutral/600"
+    "color/fg/tertiary",
+    "color/text/tertiary_strong"
    ],
    "bind": {
-    "token": "color/utility/neutral/600",
-    "css": "var(--color-utility-neutral-600)"
+    "token": "color/fg/tertiary",
+    "css": "var(--color-fg-tertiary)"
    },
    "to": null,
    "visible": false,
@@ -8978,8 +9065,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/neutral/600",
-    "css": "var(--color-utility-neutral-600)"
+    "token": "color/fg/tertiary",
+    "css": "var(--color-fg-tertiary)"
    }
   },
   {
@@ -9001,7 +9088,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -9043,7 +9129,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/3xl",
     "space/3xl"
    ],
    "bind": {
@@ -9088,7 +9173,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất width/xs = 320 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -9113,23 +9198,28 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    },
-   "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    }
   },
   {
@@ -9152,11 +9242,12 @@
    "cat": "ok",
    "tokens": [
     "type/heading/line-height",
+    "type/body/line-height",
     "type/label/line-height"
    ],
    "bind": {
-    "token": "type/label/line-height",
-    "css": "var(--type-label-line-height)"
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    },
    "to": null,
    "visible": false,
@@ -9168,8 +9259,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "type/label/line-height",
-    "css": "var(--type-label-line-height)"
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    }
   },
   {
@@ -9189,23 +9280,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/label/line-height",
-    "value": 20,
-    "css": "var(--type-label-line-height)"
+   "cat": "ok",
+   "tokens": [
+    "type/hint/line-height"
+   ],
+   "bind": {
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
    },
-   "visible": true,
-   "suggest": "type/label/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/label/line-height = 20",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
    }
   },
   {
@@ -9227,6 +9321,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -9271,7 +9368,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/5xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "icon",
    "decided": false,
    "must": true,
@@ -9303,7 +9400,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/5xl nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "icon",
    "decided": false,
    "must": true,
@@ -9330,13 +9427,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -9348,8 +9446,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -9371,6 +9469,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -9411,7 +9512,6 @@
    "cat": "ok",
    "tokens": [
     "space/md",
-    "space/md",
     "nav/offset-bottom"
    ],
    "bind": {
@@ -9449,27 +9549,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)"
+   "cat": "ok",
+   "tokens": [
+    "space/xxs"
+   ],
+   "bind": {
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
    },
+   "to": null,
    "visible": false,
-   "suggest": "space/xs (4)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với size/xxs, list-row/text-gap nhưng đó là token của component khác; thang chung gần nhất space/xs = 4",
+   "note": "",
    "group": "spacing",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/xs",
-    "value": 4,
-    "css": "var(--space-xs)",
-    "auto": true
+    "token": "space/xxs",
+    "css": "var(--space-xxs)"
    }
   },
   {
@@ -9489,23 +9588,27 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/label/line-height",
-    "value": 20,
-    "css": "var(--type-label-line-height)"
+   "cat": "ok",
+   "tokens": [
+    "type/caption/line-height",
+    "type/code/line-height"
+   ],
+   "bind": {
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
    },
-   "visible": true,
-   "suggest": "type/label/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/label/line-height = 20",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
    }
   },
   {
@@ -9527,6 +9630,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -9567,7 +9673,6 @@
    "cat": "ok",
    "tokens": [
     "space/md",
-    "space/md",
     "nav/offset-bottom"
    ],
    "bind": {
@@ -9607,27 +9712,27 @@
     "state": "scope"
    },
    "at": null,
-   "cat": "ok",
-   "tokens": [
-    "color/bg/selected",
-    "color/action/secondary"
-   ],
-   "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/bg/secondary",
+    "value": "#232323",
+    "css": "var(--color-bg-secondary)"
    },
-   "to": null,
    "visible": false,
-   "suggest": null,
+   "suggest": "color/bg/secondary (#232323)",
    "rules": [],
-   "note": "",
+   "note": "trùng màu với color/utility/neutral/200 nhưng token không dành cho nền; token đúng nghĩa gần nhất color/bg/secondary (#232323), ΔE 1.4",
    "group": "color",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/secondary",
+    "value": "#232323",
+    "css": "var(--color-bg-secondary)",
+    "auto": true
    }
   },
   {
@@ -9647,28 +9752,27 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "ok",
-   "tokens": [
-    "color/bg/secondary",
-    "color/bg/primary_hover",
-    "color/utility/neutral/100"
-   ],
-   "bind": {
-    "token": "color/bg/secondary",
-    "css": "var(--color-bg-secondary)"
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/bg/primary",
+    "value": "#191919",
+    "css": "var(--color-bg-primary)"
    },
-   "to": null,
    "visible": false,
-   "suggest": null,
+   "suggest": "color/bg/primary (#191919)",
    "rules": [],
-   "note": "",
+   "note": "ΔE 1.0",
    "group": "color",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/secondary",
-    "css": "var(--color-bg-secondary)"
+    "token": "color/bg/primary",
+    "value": "#191919",
+    "css": "var(--color-bg-primary)",
+    "auto": true
    }
   },
   {
@@ -9688,27 +9792,27 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "ok",
-   "tokens": [
-    "color/bg/selected",
-    "color/action/secondary"
-   ],
-   "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+   "cat": "near",
+   "tokens": [],
+   "bind": null,
+   "to": {
+    "token": "color/bg/secondary",
+    "value": "#232323",
+    "css": "var(--color-bg-secondary)"
    },
-   "to": null,
    "visible": false,
-   "suggest": null,
+   "suggest": "color/bg/secondary (#232323)",
    "rules": [],
-   "note": "",
+   "note": "trùng màu với color/utility/neutral/200 nhưng token không dành cho nền; token đúng nghĩa gần nhất color/bg/secondary (#232323), ΔE 1.4",
    "group": "color",
    "decided": false,
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/secondary",
+    "value": "#232323",
+    "css": "var(--color-bg-secondary)",
+    "auto": true
    }
   },
   {
@@ -9736,13 +9840,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -9754,8 +9859,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -9783,13 +9888,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -9801,8 +9907,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -9830,13 +9936,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -9848,8 +9955,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -9876,13 +9983,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -9894,8 +10002,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -9922,13 +10030,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -9940,8 +10049,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -9970,13 +10079,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -9988,8 +10098,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10018,13 +10128,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10036,8 +10147,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10066,13 +10177,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10084,8 +10196,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10114,13 +10226,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10132,8 +10245,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10162,13 +10275,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10180,8 +10294,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10210,13 +10324,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10228,8 +10343,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10258,13 +10373,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10276,8 +10392,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10306,13 +10422,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10324,8 +10441,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10354,13 +10471,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10372,8 +10490,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10402,13 +10520,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10420,8 +10539,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10450,13 +10569,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10468,8 +10588,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10498,13 +10618,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10516,8 +10637,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10546,13 +10667,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10564,8 +10686,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10594,13 +10716,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10612,8 +10735,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10642,13 +10765,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10660,8 +10784,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -10683,11 +10807,13 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/disabled",
+    "color/fg/quaternary",
     "color/text/disabled"
    ],
    "bind": {
-    "token": "color/text/disabled",
-    "css": "var(--color-text-disabled)"
+    "token": "color/fg/disabled",
+    "css": "var(--color-fg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -10699,8 +10825,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/text/disabled",
-    "css": "var(--color-text-disabled)"
+    "token": "color/fg/disabled",
+    "css": "var(--color-fg-disabled)"
    }
   },
   {
@@ -10732,7 +10858,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với list-row/divider-height nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với upload/divider-width nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -10769,7 +10895,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "trùng số với size/xl, size/xl nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/xl nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -10801,8 +10927,8 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/primary_solid",
-    "color/action/primary-pressed"
+    "color/action/primary-pressed",
+    "color/bg/primary_solid"
    ],
    "bind": {
     "token": "color/bg/primary_solid",
@@ -10855,7 +10981,7 @@
    "visible": true,
    "suggest": "icon/size/chip (14)",
    "rules": [],
-   "note": "trùng số với size/md, size/sm nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "note": "trùng số với size/sm nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -10880,18 +11006,18 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
+   "cat": "near",
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+    "token": "type/body/size",
+    "value": 14,
+    "css": "var(--type-body-size)"
    },
    "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "suggest": "type/body/size (14)",
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "lệch -1",
    "group": "typo",
    "decided": false,
    "must": true,
@@ -10916,23 +11042,26 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/label/line-height",
-    "value": 20,
-    "css": "var(--type-label-line-height)"
+   "cat": "ok",
+   "tokens": [
+    "type/hint/line-height"
+   ],
+   "bind": {
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
    },
-   "visible": true,
-   "suggest": "type/label/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với chip/line-height-sm nhưng đó là token của component khác; thang chung gần nhất type/label/line-height = 20",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/hint/line-height",
+    "css": "var(--type-hint-line-height)"
    }
   },
   {
@@ -10952,23 +11081,27 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/label/line-height",
-    "value": 20,
-    "css": "var(--type-label-line-height)"
+   "cat": "ok",
+   "tokens": [
+    "type/caption/line-height",
+    "type/code/line-height"
+   ],
+   "bind": {
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
    },
-   "visible": true,
-   "suggest": "type/label/line-height (20)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/label/line-height = 20",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/code/line-height",
+    "css": "var(--type-code-line-height)"
    }
   },
   {
@@ -10990,6 +11123,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -11030,11 +11166,15 @@
    "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": null,
+   "to": {
+    "token": "icon/size/ml",
+    "value": 18,
+    "css": "var(--icon-size-ml)"
+   },
    "visible": true,
-   "suggest": null,
+   "suggest": "icon/size/ml (18)",
    "rules": [],
-   "note": "trùng số với size/3xl, size/4xl nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/3xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18",
    "group": "icon",
    "decided": false,
    "must": true,
@@ -11062,11 +11202,15 @@
    "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": null,
+   "to": {
+    "token": "icon/size/ml",
+    "value": 18,
+    "css": "var(--icon-size-ml)"
+   },
    "visible": true,
-   "suggest": null,
+   "suggest": "icon/size/ml (18)",
    "rules": [],
-   "note": "trùng số với size/3xl, size/4xl nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/3xl nhưng đó là token của component khác; thang chung gần nhất icon/size/ml = 18",
    "group": "icon",
    "decided": false,
    "must": true,
@@ -11093,12 +11237,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/info/primary",
-    "color/utility/blue/50"
+    "color/bg/info/primary"
    ],
    "bind": {
-    "token": "color/utility/blue/50",
-    "css": "var(--color-utility-blue-50)"
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
    },
    "to": null,
    "visible": false,
@@ -11110,8 +11253,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/blue/50",
-    "css": "var(--color-utility-blue-50)"
+    "token": "color/bg/info/primary",
+    "css": "var(--color-bg-info-primary)"
    }
   },
   {
@@ -11133,12 +11276,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/text/info/primary",
-    "color/utility/blue/700"
+    "color/text/info/primary"
    ],
    "bind": {
-    "token": "color/utility/blue/700",
-    "css": "var(--color-utility-blue-700)"
+    "token": "color/text/info/primary",
+    "css": "var(--color-text-info-primary)"
    },
    "to": null,
    "visible": false,
@@ -11150,8 +11292,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/blue/700",
-    "css": "var(--color-utility-blue-700)"
+    "token": "color/text/info/primary",
+    "css": "var(--color-text-info-primary)"
    }
   },
   {
@@ -11173,12 +11315,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/warning/primary",
-    "color/utility/yellow/50"
+    "color/bg/warning/primary"
    ],
    "bind": {
-    "token": "color/utility/yellow/50",
-    "css": "var(--color-utility-yellow-50)"
+    "token": "color/bg/warning/primary",
+    "css": "var(--color-bg-warning-primary)"
    },
    "to": null,
    "visible": false,
@@ -11190,8 +11331,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/yellow/50",
-    "css": "var(--color-utility-yellow-50)"
+    "token": "color/bg/warning/primary",
+    "css": "var(--color-bg-warning-primary)"
    }
   },
   {
@@ -11213,12 +11354,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/text/warning/primary",
-    "color/utility/yellow/700"
+    "color/text/warning/primary"
    ],
    "bind": {
-    "token": "color/utility/yellow/700",
-    "css": "var(--color-utility-yellow-700)"
+    "token": "color/text/warning/primary",
+    "css": "var(--color-text-warning-primary)"
    },
    "to": null,
    "visible": false,
@@ -11230,8 +11370,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/yellow/700",
-    "css": "var(--color-utility-yellow-700)"
+    "token": "color/text/warning/primary",
+    "css": "var(--color-text-warning-primary)"
    }
   },
   {
@@ -11253,12 +11393,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/success/primary",
-    "color/utility/green/50"
+    "color/bg/success/primary"
    ],
    "bind": {
-    "token": "color/utility/green/50",
-    "css": "var(--color-utility-green-50)"
+    "token": "color/bg/success/primary",
+    "css": "var(--color-bg-success-primary)"
    },
    "to": null,
    "visible": false,
@@ -11270,8 +11409,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/green/50",
-    "css": "var(--color-utility-green-50)"
+    "token": "color/bg/success/primary",
+    "css": "var(--color-bg-success-primary)"
    }
   },
   {
@@ -11293,12 +11432,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/text/success/primary",
-    "color/utility/green/700"
+    "color/text/success/primary"
    ],
    "bind": {
-    "token": "color/utility/green/700",
-    "css": "var(--color-utility-green-700)"
+    "token": "color/text/success/primary",
+    "css": "var(--color-text-success-primary)"
    },
    "to": null,
    "visible": false,
@@ -11310,8 +11448,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/utility/green/700",
-    "css": "var(--color-utility-green-700)"
+    "token": "color/text/success/primary",
+    "css": "var(--color-text-success-primary)"
    }
   },
   {
@@ -11334,9 +11472,7 @@
    "cat": "ok",
    "tokens": [
     "space/md",
-    "space/md",
-    "nav/offset-bottom",
-    "chip/padding-x-sm"
+    "nav/offset-bottom"
    ],
    "bind": {
     "token": "nav/offset-bottom",
@@ -11384,7 +11520,7 @@
    "visible": true,
    "suggest": "chip/height-lg (28)",
    "rules": [],
-   "note": "trùng số với size/4xl, size/4xl nhưng đó là token của component khác; thang chung gần nhất chip/height-lg = 28",
+   "note": "trùng số với size/4xl nhưng đó là token của component khác; thang chung gần nhất chip/height-lg = 28",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -11450,11 +11586,11 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "radius/menu"
+    "radius/md"
    ],
    "bind": {
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    },
    "to": null,
    "visible": false,
@@ -11466,8 +11602,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "radius/menu",
-    "css": "var(--radius-menu)"
+    "token": "radius/md",
+    "css": "var(--radius-md)"
    }
   },
   {
@@ -11489,11 +11625,12 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/lg"
+    "chip/padding-x-sm",
+    "chip/padding-x-icon-lg"
    ],
    "bind": {
-    "token": "space/lg",
-    "css": "var(--space-lg)"
+    "token": "chip/padding-x-sm",
+    "css": "var(--chip-padding-x-sm)"
    },
    "to": null,
    "visible": false,
@@ -11505,8 +11642,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "space/lg",
-    "css": "var(--space-lg)"
+    "token": "chip/padding-x-sm",
+    "css": "var(--chip-padding-x-sm)"
    }
   },
   {
@@ -11528,6 +11665,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/fg/quaternary_hover",
+    "color/text/placeholder",
+    "color/text/quaternary",
     "color/text/tertiary"
    ],
    "bind": {
@@ -11565,23 +11705,28 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    },
-   "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    }
   },
   {
@@ -11603,7 +11748,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -11643,23 +11787,28 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "new",
-   "tokens": [],
-   "bind": null,
-   "to": {
-    "token": "type/title-3/size",
-    "value": 17,
-    "css": "var(--type-title-3-size)"
+   "cat": "ok",
+   "tokens": [
+    "type/heading/size",
+    "type/body/size",
+    "type/label/size"
+   ],
+   "bind": {
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    },
-   "visible": true,
-   "suggest": "type/title-3/size (17)",
+   "to": null,
+   "visible": false,
+   "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất type/title-3/size = 17",
+   "note": "",
    "group": "typo",
    "decided": false,
-   "must": true,
+   "must": false,
    "resolved": {
-    "kind": "pending"
+    "kind": "token",
+    "token": "type/body/size",
+    "css": "var(--type-body-size)"
    }
   },
   {
@@ -11682,11 +11831,12 @@
    "cat": "ok",
    "tokens": [
     "type/heading/line-height",
+    "type/body/line-height",
     "type/label/line-height"
    ],
    "bind": {
-    "token": "type/label/line-height",
-    "css": "var(--type-label-line-height)"
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    },
    "to": null,
    "visible": false,
@@ -11698,8 +11848,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "type/label/line-height",
-    "css": "var(--type-label-line-height)"
+    "token": "type/body/line-height",
+    "css": "var(--type-body-line-height)"
    }
   },
   {
@@ -11721,7 +11871,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/xs",
     "space/xs",
     "nav/padding-x",
     "nav/item-padding-y"
@@ -11797,8 +11946,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_blur",
     "color/bg/primary",
-    "color/bg/primary"
+    "color/bg/primary_alt"
    ],
    "bind": {
     "token": "color/bg/primary",
@@ -11846,7 +11996,7 @@
    "visible": true,
    "suggest": "icon/size/chip (14)",
    "rules": [],
-   "note": "trùng số với size/sm, size/md nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
+   "note": "trùng số với size/md nhưng đó là token của component khác; thang chung gần nhất icon/size/chip = 14",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -11873,7 +12023,6 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "space/md",
     "space/md",
     "nav/offset-bottom"
    ],
@@ -11919,7 +12068,7 @@
    "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
+   "note": "trùng số với size/5xl nhưng đó là token của component khác; thang chung gần nhất nav/scan-size = 56 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "spacing",
    "decided": false,
    "must": true,
@@ -11953,14 +12102,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `#fff` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `#fff` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*",
    "group": "effect",
    "decided": false,
    "must": true,
@@ -11992,8 +12141,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_blur",
     "color/bg/primary",
-    "color/bg/primary"
+    "color/bg/primary_alt"
    ],
    "bind": {
     "token": "color/bg/primary",
@@ -12034,8 +12184,9 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_blur",
     "color/bg/primary",
-    "color/bg/primary"
+    "color/bg/primary_alt"
    ],
    "bind": {
     "token": "color/bg/primary",
@@ -12079,13 +12230,14 @@
    "at": null,
    "cat": "ok",
    "tokens": [
-    "color/bg/selected",
     "color/action/secondary",
-    "color/utility/neutral/100"
+    "color/bg/disabled",
+    "color/bg/secondary_hover",
+    "color/bg/selected"
    ],
    "bind": {
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    },
    "to": null,
    "visible": false,
@@ -12097,8 +12249,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "color/bg/selected",
-    "css": "var(--color-bg-selected)"
+    "token": "color/bg/disabled",
+    "css": "var(--color-bg-disabled)"
    }
   },
   {
@@ -12118,18 +12270,14 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
+   "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": {
-    "token": "width/xs",
-    "value": 320,
-    "css": "var(--width-xs)"
-   },
+   "to": null,
    "visible": true,
-   "suggest": "width/xs (320)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với field/label-max-width, vehicle/q-lg-h nhưng đó là token của component khác; thang chung gần nhất width/xs = 320",
+   "note": "trùng số với field/label-max-width, vehicle/q-lg-h nhưng đó là token của component khác; thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -12157,15 +12305,15 @@
    "bind": null,
    "to": null,
    "visible": true,
-   "suggest": "type/title-3 (Mobile)",
+   "suggest": "type/body-lg (Web)",
    "rules": [
     "cỡ 16 / dòng 22 không thuộc thang type/* (foundations mục 4.2)"
    ],
    "note": "cùng cỡ chữ thì sửa cao dòng; khác cỡ thì chọn vai gần nhất",
    "fix": {
-    "token": "type/title-3 (Mobile)",
-    "value": "17/22",
-    "css": "22px"
+    "token": "type/body-lg (Web)",
+    "value": "16/24",
+    "css": "24px"
    },
    "group": "typo",
    "audit": true,
@@ -12274,19 +12422,58 @@
    "bind": null,
    "to": null,
    "visible": true,
-   "suggest": "type/chip-sm (Web)",
+   "suggest": "type/hint (Web)",
    "rules": [
     "cỡ 11 / dòng 18 không thuộc thang type/* (foundations mục 4.2)"
    ],
    "note": "cùng cỡ chữ thì sửa cao dòng; khác cỡ thì chọn vai gần nhất",
    "fix": {
-    "token": "type/chip-sm (Web)",
+    "token": "type/hint (Web)",
     "value": "12/18",
     "css": "18px"
    },
    "group": "typo",
    "audit": true,
    "count": 1,
+   "decided": false,
+   "must": true,
+   "resolved": {
+    "kind": "pending"
+   }
+  },
+  {
+   "id": "audit.typo.combo-13-18",
+   "part": "Tổ hợp chữ",
+   "prop": "line-height",
+   "platform": "",
+   "size": "",
+   "state": "",
+   "theme": "Light",
+   "value": "13/18",
+   "sel": ".fc, .poh .lk, .sde span",
+   "cssProps": [
+    "line-height"
+   ],
+   "tpl": null,
+   "noOverride": null,
+   "cat": "conflict",
+   "tokens": [],
+   "bind": null,
+   "to": null,
+   "visible": true,
+   "suggest": "type/hint (Web)",
+   "rules": [
+    "cỡ 13 / dòng 18 không thuộc thang type/* (foundations mục 4.2)"
+   ],
+   "note": "cùng cỡ chữ thì sửa cao dòng; khác cỡ thì chọn vai gần nhất",
+   "fix": {
+    "token": "type/hint (Web)",
+    "value": "12/18",
+    "css": "18px"
+   },
+   "group": "typo",
+   "audit": true,
+   "count": 3,
    "decided": false,
    "must": true,
    "resolved": {
@@ -12313,15 +12500,15 @@
    "bind": null,
    "to": null,
    "visible": true,
-   "suggest": "type/caption (Mobile)",
+   "suggest": "type/heading (Web)",
    "rules": [
     "cỡ 13.5 / dòng 18 không thuộc thang type/* (foundations mục 4.2)"
    ],
    "note": "cùng cỡ chữ thì sửa cao dòng; khác cỡ thì chọn vai gần nhất",
    "fix": {
-    "token": "type/caption (Mobile)",
-    "value": "13/18",
-    "css": "18px"
+    "token": "type/heading (Web)",
+    "value": "14/20",
+    "css": "20px"
    },
    "group": "typo",
    "audit": true,
@@ -12443,46 +12630,6 @@
    "group": "typo",
    "audit": true,
    "count": 1,
-   "decided": false,
-   "must": true,
-   "resolved": {
-    "kind": "pending"
-   }
-  },
-  {
-   "id": "audit.icon.size-18",
-   "part": "Icon cỡ 18 (230 chỗ)",
-   "prop": "icon-size",
-   "platform": "",
-   "size": "",
-   "state": "",
-   "theme": "Light",
-   "value": 18,
-   "sel": "svg.i[width=\"18\"]",
-   "cssProps": [
-    "width",
-    "height"
-   ],
-   "tpl": null,
-   "noOverride": null,
-   "cat": "conflict",
-   "tokens": [],
-   "bind": null,
-   "to": null,
-   "visible": true,
-   "suggest": "icon 16",
-   "rules": [
-    "cỡ icon ngoài thang 12 · 14 · 16 · 20 · 24 (icons.md mục 3)"
-   ],
-   "note": "",
-   "fix": {
-    "token": "icon 16",
-    "value": 16,
-    "css": "16px"
-   },
-   "group": "icon",
-   "audit": true,
-   "count": 230,
    "decided": false,
    "must": true,
    "resolved": {

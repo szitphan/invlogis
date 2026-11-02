@@ -188,7 +188,7 @@ SCREEN_CSS = """
 .foot{display:flex;gap:8px;justify-content:flex-end;padding:16px 20px;border-top:1px solid var(--color-border-secondary)}
 .bt{height:var(--control-height-md);padding:0 var(--control-padding-x-md);border-radius:var(--radius-control);font:600 14px var(--font-body);border:1px solid var(--color-border-primary);background:var(--color-bg-primary);color:var(--color-text-primary);cursor:pointer}
 .bt.dz{background:var(--color-bg-error-solid);border-color:transparent;color:var(--color-text-inverse)}
-.bt.full{width:100%;height:52px;border-radius:999px}
+.bt.full{width:100%;height:52px;border-radius:var(--radius-control)}
 .bt.pri{background:var(--color-action-primary);color:var(--color-text-inverse);border-color:transparent}
 .lockbar{display:flex;gap:8px;align-items:center;padding:8px 12px;border-radius:var(--radius-md);background:var(--color-bg-secondary);color:var(--color-text-tertiary_strong);font-size:13px;margin-bottom:12px}
 .tbl td:first-child,.tbl th:first-child{width:44px;padding-right:0}
@@ -199,7 +199,7 @@ SCREEN_CSS = """
 CSS = tok_css() + """
 /* ===== Checkbox ===== */
 .cb{position:relative;display:inline-grid;place-items:center;flex:none;width:16px;height:16px;border-radius:4px;border:1px solid var(--color-border-input);
- background:var(--color-bg-primary);color:var(--color-text-inverse);transition:background var(--duration-fast)}
+ background:var(--color-bg-primary);color:var(--color-text-inverse);transition:background var(--duration-fast) var(--easing-standard)}
 .cb.md{width:20px;height:20px;border-radius:6px}
 .cb svg{width:12px;height:12px}.cb.md svg{width:14px;height:14px}
 .cb.on,.cb.ind{background:var(--color-action-primary);border-color:var(--color-action-primary)}
@@ -218,9 +218,9 @@ CSS = tok_css() + """
 .cb.d.on,.cb.d.ind,.rd.d.on{background:var(--color-text-disabled);border-color:var(--color-text-disabled);color:var(--color-text-inverse)}
 .rd.d.on::after{background:var(--color-text-inverse)}
 /* ===== Toggle — D1 rãnh khi tắt ===== */
-.tgl{--tw:36px;--th:20px;--k:16px;position:relative;display:inline-block;flex:none;width:var(--tw);height:var(--th);border-radius:999px;background:var(--tg-off);transition:background var(--duration-fast)}
+.tgl{--tw:36px;--th:20px;--k:16px;position:relative;display:inline-block;flex:none;width:var(--tw);height:var(--th);border-radius:999px;background:var(--tg-off);transition:background var(--duration-fast) var(--easing-standard)}
 .tgl.md{--tw:44px;--th:24px;--k:20px}
-.tgl i{position:absolute;top:2px;left:2px;width:var(--k);height:var(--k);border-radius:50%;background:var(--color-fg-white);box-shadow:0 1px 3px var(--color-shadow-md);transition:transform var(--duration-fast)}
+.tgl i{position:absolute;top:2px;left:2px;width:var(--k);height:var(--k);border-radius:50%;background:var(--color-fg-white);box-shadow:var(--shadow-sm);transition:transform var(--duration-fast) var(--easing-standard)}
 .tgl.on i{transform:translateX(calc(var(--tw) - var(--th)))}
 .tgl.on{background:var(--color-action-primary)}.tgl.on.h{background:var(--color-action-primary-hover)}.tgl.on.p{background:var(--color-action-primary-pressed)}
 .pv,.op{--tg-off:var(--color-border-input);--tg-off-h:var(--color-fg-tertiary)}
@@ -252,7 +252,7 @@ CSS = tok_css() + """
 /* Group item (Radio / Checkbox group item, DEC-278/283) — Web 560 · Mobile 361 */
 .gx{position:relative;display:flex;align-items:flex-start;gap:12px;padding:16px;width:560px;max-width:100%;border:1px solid var(--color-border-secondary);
  border-radius:var(--radius-card);background:var(--color-bg-primary);cursor:pointer;color:var(--color-text-primary)}
-.gx.m{width:361px;gap:8px}
+.gx.m{width:100%;gap:8px}
 .gx.on{border-color:var(--color-action-primary);box-shadow:inset 0 0 0 1px var(--color-action-primary)}
 .gx.h{background:var(--color-bg-primary_hover)}
 .gx.f{outline:var(--focus-width) solid var(--color-focus-ring);outline-offset:var(--focus-offset)}
@@ -307,10 +307,10 @@ CSS = tok_css() + """
 .msg .ei{display:none}[data-D5=a] .msg .ei{display:inline-flex;margin-top:1px}
 .cnt{font:400 12px/16px var(--font-body);color:var(--color-text-tertiary);font-variant-numeric:tabular-nums;white-space:nowrap}
 .cnt.err{color:var(--color-text-error-primary)}
-.flb .hi{display:inline-flex;vertical-align:-2px;margin-left:4px;color:var(--color-fg-quaternary)}
+.flb .hi{display:inline-flex;vertical-align:-2px;margin-left:4px;color:var(--color-fg-tertiary)}
 /* App */
 .pv[data-platform=mobile] .flb{font-size:13px;color:var(--color-text-tertiary)}
-.pv[data-platform=mobile] .ta{background:var(--color-bg-primary);border-color:transparent;border-radius:16px;padding:14px 16px;
+.pv[data-platform=mobile] .ta{background:var(--color-bg-primary);border-color:transparent;border-radius:var(--radius-field);padding:14px 16px;
  min-height:calc(5 * var(--type-body-line-height) + 28px)}
 [data-D6=b] .pv[data-platform=mobile] .ta,.pv[data-platform=mobile][data-D6=b] .ta{min-height:168px}
 .pv[data-platform=mobile] .ta.f,.pv[data-platform=mobile] .ta.e{padding:12px 14px}
@@ -455,8 +455,8 @@ DCSS = """
 .tstat.err{color:var(--color-text-error-primary)}
 .spin{width:12px;height:12px;border:2px solid var(--color-border-secondary);border-top-color:var(--color-text-primary);border-radius:50%}
 .overlay{position:relative;background:var(--color-bg-secondary);min-height:560px;padding:24px 32px}
-.overlay::after{content:"";position:absolute;inset:0;background:var(--color-bg-overlay)}
-.dlg{position:absolute;z-index:2;left:50%;top:120px;transform:translateX(-50%);width:560px;background:var(--color-bg-primary);border-radius:var(--radius-overlay, 16px);padding:24px;box-shadow:0 12px 32px var(--color-shadow-md)}
+.overlay::after{content:"";position:absolute;inset:0;background:var(--color-bg-overlay);backdrop-filter:blur(var(--backdrop-blur-lg))}
+.dlg{position:absolute;z-index:2;left:50%;top:120px;transform:translateX(-50%);width:560px;background:var(--color-bg-primary_alt);border-radius:var(--radius-overlay);padding:24px;border:1px solid var(--shadow-xl-border);box-shadow:var(--shadow-xl)}
 .dlg h3{font:600 18px/28px var(--font-body);margin:0}.dlg .ds{font-size:13px;color:var(--color-text-tertiary);margin:4px 0 16px}
 .dlg .taf{max-width:none}
 .chip{display:inline-flex;height:22px;align-items:center;padding:0 8px;border-radius:999px;font:600 12px/16px var(--font-body)}
@@ -467,7 +467,7 @@ DCSS = """
 .mpad{padding:16px}.mh{font:600 20px/28px var(--font-body);margin:8px 0 4px}.msub{font-size:14px;color:var(--color-text-tertiary);margin-bottom:16px}
 .mstack{display:flex;flex-direction:column;gap:12px}
 .mbtns{display:flex;flex-direction:column;gap:8px;padding:16px}
-.bt.pill{height:48px;border-radius:999px;width:100%;font-size:15px}
+.bt.pill{height:48px;border-radius:var(--radius-control);width:100%;font-size:15px}
 .bt.dis{background:var(--color-bg-disabled);color:var(--color-text-disabled);border-color:transparent}
 .bt.sec{background:var(--color-action-secondary);color:var(--color-text-primary);border-color:transparent}
 .mgrp{background:var(--color-bg-secondary);padding:12px 16px}.mgt{font:600 12px/18px var(--font-body);color:var(--color-text-tertiary);letter-spacing:.3px;margin-bottom:8px}
@@ -536,7 +536,7 @@ def params(mode=""):
         rows += f'<div>{lab(tg(val, st=st), t, h, cls="dis" if st == "d" else "", attrs="data-cmp")}{extra}</div>'
     return (f'<div class="dpg"><div class="bc">Quản trị  /  Khách hàng  /  Delta Logistics</div><h1>Cấu hình tham số khách</h1>'
             f'<div class="sub">Bật/tắt có hiệu lực ngay cho mọi lệnh vận tải tạo sau thời điểm đổi.</div>'
-            f'<div class="dcard" style="max-width:720px"><div class="ct">Vận hành &amp; tài chính</div><div class="ch">6 tham số · thay đổi được ghi vào nhật ký cấu hình</div>'
+            f'<div class="dcard" style="max-width:var(--width-lg)"><div class="ct">Vận hành &amp; tài chính</div><div class="ch">6 tham số · thay đổi được ghi vào nhật ký cấu hình</div>'
             f'<div class="tlist">{rows}</div></div></div>')
 
 
@@ -685,7 +685,7 @@ VALUES = [
  {"part": "Group item", "prop": "padding", "value": 16, "platform": "Web", "sel": ".gx"},
  {"part": "Group item", "prop": "gap", "value": 12, "platform": "Web", "sel": ".gx"},
  {"part": "Group item", "prop": "width", "value": 560, "platform": "Web", "sel": ".gx"},
- {"part": "Group item", "prop": "width", "value": 361, "platform": "Mobile", "sel": ".gx.m"},
+ {"part": "Group item", "prop": "width", "value": 361, "platform": "Mobile", "at": ".gx.m", "noOverride": True, "why": "bề rộng group item mobile = bề rộng màn trừ lề, 361 chỉ là kết quả trên khung 393 (DEC-324)"},
  {"part": "Group item", "prop": "gap", "value": 8, "platform": "Mobile", "sel": ".gx.m"},
  {"part": "Group item · Title", "prop": "font-size", "value": 14, "platform": "Web", "sel": ".gx .tt", "cssProp": "font", "tpl": "500 $/20px var(--font-body)"},
  {"part": "Group item · Title", "prop": "font-size", "value": 15, "platform": "Mobile", "sel": ".gx.m .tt"},

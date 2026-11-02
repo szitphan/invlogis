@@ -1,6 +1,8 @@
 /* ==========================================================================
    Invlogis × innvie — TOKEN THƯƠNG HIỆU (hướng A · Lụa, DEC-072)
    Dùng cho: tài liệu, bài trình bày, web marketing, mạng xã hội, trang quy chuẩn.
+   Bộ `--brand-c-*` cùng giá trị `--invlogis-*` trong design-system/tokens.css (DEC-326); đổi màu thì sửa cả hai,
+   `python3 _scripts/ds-v2-tokens.py --check` báo khi lệch.
    KHÔNG thay `design/design-tokens.css` của SẢN PHẨM (DEC-066): giao diện app
    Invlogis vẫn lấy token từ design.md. Tiền tố `--brand-` để không đụng token sản phẩm.
    Bản nháp trong design/brand/_drafts/system/ — chốt rồi mới đưa lên design/brand/.

@@ -183,9 +183,9 @@ GR-14, GR-16…GR-20 chỉ áp web — app không có bảng nhiều cột (danh
 | | Loại 1 — Inline | Loại 2 — Popup Error | Loại 3 — Toast Error |
 |---|---|---|---|
 | Khi nào | Lỗi của 1 trường (định dạng, bắt buộc, giá trị không hợp lệ); On Blur / On Submit | Lỗi chỉ biết sau khi submit do đối chiếu dữ liệu server (trùng mã, vượt hạn mức, ràng buộc nghiệp vụ); không gắn trường nào | Lỗi kỹ thuật/hệ thống (API lỗi, mất kết nối, timeout, 5xx); người dùng không tự sửa được |
-| Vị trí | Dưới trường | Modal giữa màn, có nền mờ | Toast góc trên phải (CMP-01) |
-| Hiển thị | Viền trường + câu lỗi màu error | Tiêu đề lỗi + mô tả + Đóng; thêm Thử lại nếu retry được | Nền error |
-| Hành vi | Tự ẩn khi giá trị hợp lệ | Không tự đóng; đóng xong giữ nguyên form | Tự ẩn sau 3 giây, không chặn |
+| Vị trí | Dưới trường | Modal giữa màn, có nền mờ | Toast góc dưới phải (CMP-01) |
+| Hiển thị | Viền trường + câu lỗi màu error | Tiêu đề lỗi + mô tả + Đóng; thêm Thử lại nếu retry được | Toast Type Error: icon lỗi + câu lỗi; thêm Thử lại nếu retry được |
+| Hành vi | Tự ẩn khi giá trị hợp lệ | Không tự đóng; đóng xong giữ nguyên form | Không tự ẩn, không chặn; đóng bằng nút đóng hoặc sau khi Thử lại thành công (DEC-286) |
 
 - **UC phải khai báo:** mỗi lỗi nghiệp vụ (`E-{feature}-NNN`) thuộc loại nào; lỗi Loại 2 có Thử lại không.
 - **Mobile:**
@@ -196,7 +196,7 @@ GR-14, GR-16…GR-20 chỉ áp web — app không có bảng nhiều cột (danh
 - **design.md:** Copy động; Nhập liệu và kiểm tra
 
 ### GR-27 — Dữ liệu đã cũ
-- Màn đang mở (danh sách, popup, sheet) mà dữ liệu vừa đổi ở nơi khác: hiện banner tông neutral đầu vùng nội dung "[Đối tượng] vừa có cập nhật." kèm nút **Tải lại**. Không tự tải lại, để người dùng không mất chỗ đang xem.
+- Màn đang mở (danh sách, popup, sheet) mà dữ liệu vừa đổi ở nơi khác: hiện banner (DS v2 `Alert` Tone = Info, DEC-287) đầu vùng nội dung "[Đối tượng] vừa có cập nhật." kèm nút **Tải lại**. Không tự tải lại, để người dùng không mất chỗ đang xem.
 - Bấm Tải lại: tải dữ liệu mới, giữ chỗ đang xem nếu còn (vd bước đang chọn, bộ lọc), rồi ẩn banner.
 - **UC phải khai báo:** màn nào áp dụng; từ thay cho [Đối tượng] (vd "Quy trình", "Danh sách"); giữ lại gì sau khi tải lại.
 - **Mobile:** dùng chung web; banner nằm ngay dưới header màn hoặc header sheet.

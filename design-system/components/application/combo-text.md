@@ -2,9 +2,9 @@
 type: design-component
 status: stale
 status_prev: draft
-updated: 2026-10-27
+updated: 2026-11-02
 links:
-  - design-system/foundations/misc-icon.md
+  - design-system/foundations/vehicle.md
   - design-system/components/application/container-slot.md
   - _workspace/decisions.md
 ---
@@ -12,9 +12,9 @@ links:
 # Combo Text
 
 > Application · phiên bản 0.1.0 · Nháp · người phụ trách @szitphan · Figma `Combo Text` (6801:15783), trang
-> DS · Application components, Section `Combo text` 6802:15841, Demo 6802:15849 · DEC-267, DEC-272
+> DS · Application components, Section `Combo text` 6802:15841, Demo 6802:15849 · DEC-267, DEC-272, DEC-334
 
-Tổ hợp đầu kéo – mooc – container trong **một dòng chữ** (cách C, `design-system/foundations/misc-icon.md` mục 5.4). Một component cho
+Tổ hợp đầu kéo – mooc – container trong **một dòng chữ** (cách C, `design-system/foundations/vehicle.md` mục 5.4). Một component cho
 web và app.
 
 ## Web
@@ -75,11 +75,15 @@ Demo `Danh sách lệnh vận tải / Web` (cột Tổ hợp, dòng mở rộng 
 ### Kiểm máy
 
 27/10: kiểm tên fail 0. Đã sửa: cắt từng phần làm mất container thứ hai → gộp `Boxes`, thêm `Load` luôn hiện, thêm
-Has Types. Dark: chưa điền giá trị Dark.
+Has Types. 02/11: spec theo DEC-334, Figma chưa sync.
+
+### Dark
+
+Chưa có số đo Dark.
 
 ## Mobile
 
-> Mode Platform = Mobile, cùng component. Rộng thẻ app 343 → tắt Has Types.
+> Mode Platform = Mobile, cùng component. Thẻ app trải theo màn (361 ở khung 393), trừ lề còn dưới 360 → tắt Has Types.
 
 ## Phần máy (chung Web và Mobile)
 

@@ -2,7 +2,7 @@
 type: brainstorm
 feature: fund-payments
 status: draft
-updated: 2026-10-20
+updated: 2026-10-21
 links:
   - docs-input/sop/quan-ly-quy-thanh-toan/quan-ly-quy-thanh-toan.md
   - docs/_product/prd.md
@@ -50,10 +50,18 @@ Ranh giới với `service-delivery`: JobID là nơi ghi chi phí, doanh thu; fe
 | SRC-31 | Quy trình quản lý quỹ & Thanh toán | Đính kèm 04 Thanh toán âm | 15 trường hợp + giải pháp đề xuất |
 | SRC-31 | Quy trình quản lý quỹ & Thanh toán | Đính kèm 07 Bảng phân quyền duyệt (xlsx) | bản Excel của 6.4.1, thêm mã nhóm phí 03xx |
 
-## 4. Open Questions
+## 4. Ghi nhận trước phỏng vấn
 
-Chưa có — sinh khi phỏng vấn.
+Từ phỏng vấn SIM 14/10/2026:
 
-## 5. Next Steps
+- S1 [SOP+] [Lõi] [Cấu hình] Dư nợ tạm ứng của từng nhân viên (dư nợ tạm ứng 1, 2, 3) hiện trên phần mềm cho nhân viên và người duyệt. Có Đề nghị tạm ứng mới mà dư nợ cũ vượt `P-han-muc-du-no-tam-ung` (Delta: chưa chốt, OQ-1) hoặc còn khoản quá hạn thì cảnh báo người duyệt. Dư nợ tạm ứng 2 tăng khi `payment-on-behalf` chi, giảm khi `invoice-management` khớp hóa đơn với mã FT (B7) hoặc kế toán duyệt Yêu cầu trả hóa đơn; không sang phần mềm kế toán. Mức: P1 (DEC-253).
+
+## 5. Open Questions
+
+| ID | Câu hỏi | Nguồn khách | Trạng thái |
+|---|---|---|---|
+| OQ-1 | Cảnh báo dư nợ khi tạm ứng mới dùng chính hạn mức tạm ứng theo chức danh (mục 6.2) hay một ngưỡng riêng? Dư nợ tạm ứng 2, 3 không có hạn mức (mục 4.3) thì có cảnh báo không? | Quy trình quản lý quỹ & Thanh toán (06/10/2026), mục 4.3, 6.2 | Còn mở |
+
+## 6. Next Steps
 
 - `/brainstorm fund-payments` — phỏng vấn đầy đủ từ các mục nguồn ở Mục 3

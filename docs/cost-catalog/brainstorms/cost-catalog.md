@@ -2,7 +2,7 @@
 type: brainstorm
 feature: cost-catalog
 status: draft
-updated: 2026-10-20
+updated: 2026-10-21
 links:
   - docs-input/sop/quan-ly-quy-thanh-toan/quan-ly-quy-thanh-toan.md
   - docs-input/srs-cu/lg-srs-export.md
@@ -54,7 +54,9 @@ Ranh giới với `service-delivery`: JobID là nơi ghi chi phí, doanh thu; fe
 
 ## 4. Open Questions
 
-Chưa có — sinh khi phỏng vấn.
+| ID | Câu hỏi | Nguồn khách | Trạng thái |
+|---|---|---|---|
+| OQ-1 | Danh mục chi phí cấp 1–3 nối với nhóm phí 01–05 (APAS phụ lục 5.1) và mã phí 4 chữ số (02xx, 03xx) thế nào? Đề xuất: cấp 1 = nhóm phí, cấp 2 = mã phí 4 chữ số (định danh lớp 2 của hóa đơn dùng mã phí cấp 2), cấp 3 = loại phí gắn cách hạch toán theo địa điểm. User 14/10: "chưa thể hiện rõ cấp 2, 3 mapping thế nào", cần bảng từ Delta | Phân hệ APAS (17/10/2026), mục 3.3, 5.1; Quy trình cung cấp dịch vụ tổng quát, mục 4.3.5 | Còn mở |
 
 ## 5. Next Steps
 

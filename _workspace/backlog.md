@@ -4,7 +4,7 @@
 
 | ID | Việc | Nguồn | Xong khi | Trạng thái | Tạo | Xong | Bằng chứng | Hạn | Ưu tiên |
 |---|---|---|---|---|---|---|---|---|---|
-| BL-387 | User chọn tính năng Fleetio trên trang artifact PaGiyyqCVUkyqs99sjAbvd, rồi Claude chạy thử luồng bằng dữ liệu TEST và viết tài liệu giải pháp cho từng mục đã chọn | user 02/11 | `exists:docs/_research/*-fleetio-solution-*.md` | ⬜ | 2026-11-02 |  |  |  |  |
+| BL-387 | User chọn tính năng Fleetio trên trang artifact PaGiyyqCVUkyqs99sjAbvd, rồi Claude chạy thử luồng bằng dữ liệu TEST và viết tài liệu giải pháp cho từng mục đã chọn | user 02/11 | `exists:docs/_research/fleetio/README.md` | ⬜ | 2026-11-02 |  |  |  |  |
 | BL-386 | Review cùng user tài liệu phân tích ngược Fleetio, rồi quyết có đào tiếp các phần còn thiếu (marker bản đồ, Settings, trình dựng Inspection) không | user 02/11 | `!grep:docs/_research/2026-11-02-fleetio-app-teardown.md:status: draft` | ⬜ | 2026-11-02 |  |  |  |  |
 | BL-376 | Dọn page Figma `DS · Base components` theo khuôn hàng và cột của Foundations (DEC-330), rồi ghi DEC có cụm "Bố cục page DS Base". Chờ user review Base xong mới làm | hội thoại 02/11 | `grep:_workspace/decisions.md:Bố cục page DS Base` | ⬜ | 2026-11-02 |  |  |  | để sau |
 | BL-347 | Duyệt 6 trang review Foundations theo Untitled (Icon, Logo, Effect styles, Khoảng cách, Bo góc, Lưới), rồi Claude áp `tokens.json`, foundations, biến Figma, ghi DEC theo lựa chọn từng trang | hội thoại 01/11 · `_scripts/foundation_review/` | `grep:design-system/foundations/README.md:space.*Khoảng cách.*approved` | ⬜ | 2026-11-01 |  |  |  |  |

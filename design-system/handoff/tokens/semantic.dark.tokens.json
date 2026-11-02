@@ -306,8 +306,30 @@
       },
       "overlay": {
         "$type": "color",
+        "$value": "{alpha.neutral-950-35}",
+        "$description": "Nền lớp phủ sau dialog, sheet: 35% + backdrop-blur/lg (DEC-258, DEC-327)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "overlay_solid": {
+        "$type": "color",
         "$value": "{alpha.neutral-950-50}",
-        "$description": "Nền lớp phủ sau dialog, sheet (DEC-320)",
+        "$description": "Đường lùi của lớp phủ khi máy không chạy được làm mờ: 50%, không blur (DEC-327); lớp tối và rãnh vòng tiến độ đè lên ảnh (DEC-321)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "primary_blur": {
+        "$type": "color",
+        "$value": "{alpha.dark-0-70}",
+        "$description": "Nền đầu màn dính và thanh nổi app, đi cùng backdrop-blur (DEC-327)",
         "$extensions": {
           "com.figma.scopes": [
             "FRAME_FILL",
@@ -788,7 +810,7 @@
       "quaternary": {
         "$type": "color",
         "$value": "{neutral.600}",
-        "$description": "Tương phản thấp: icon trong nút, icon trợ giúp, icon trong ô nhập (DEC-320)",
+        "$description": "Tương phản thấp, chỉ cho icon trang trí và disabled (DEC-320, DEC-329 ic12)",
         "$extensions": {
           "com.figma.scopes": [
             "SHAPE_FILL",
@@ -856,7 +878,7 @@
       "tertiary": {
         "$type": "color",
         "$value": "{neutral.400}",
-        "$description": "Icon tương phản vừa (DEC-320)",
+        "$description": "Icon tương phản vừa (DEC-320) · Icon phụ mang nghĩa: chevron ô chọn, icon ô tìm, Help (DEC-329 ic12)",
         "$extensions": {
           "com.figma.scopes": [
             "SHAPE_FILL",
@@ -912,18 +934,6 @@
       }
     },
     "focus": {
-      "gap": {
-        "$type": "color",
-        "$value": "{dark.0}",
-        "$description": "Khe 2px giữa control và vòng focus, trùng nền trang (DEC-258, thay collection Context). Dùng ở: .focus / Ring, ruột nút Ghost, Outline.",
-        "$extensions": {
-          "com.figma.scopes": [
-            "FRAME_FILL",
-            "SHAPE_FILL",
-            "EFFECT_COLOR"
-          ]
-        }
-      },
       "ring": {
         "$type": "color",
         "$value": "{neutral.200}",
@@ -946,40 +956,150 @@
       }
     },
     "shadow": {
-      "lg": {
+      "xs": {
+        "$type": "color",
+        "$value": "{alpha.black.40}",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/xs lớp 1 (DEC-327).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "sm_01": {
         "$type": "color",
         "$value": "{alpha.black.60}",
-        "$description": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/3 lớp 1.",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/sm lớp 1 (DEC-327).",
         "$extensions": {
           "com.figma.scopes": [
             "EFFECT_COLOR"
           ]
         }
       },
-      "md": {
-        "$type": "color",
-        "$value": "{alpha.black.50}",
-        "$description": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/2 lớp 1, elev/3 lớp 2.",
-        "$extensions": {
-          "com.figma.scopes": [
-            "EFFECT_COLOR"
-          ]
-        }
-      },
-      "md-soft": {
+      "sm_02": {
         "$type": "color",
         "$value": "{alpha.black.40}",
-        "$description": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/2 lớp 2.",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/sm lớp 2 (DEC-327).",
         "$extensions": {
           "com.figma.scopes": [
             "EFFECT_COLOR"
           ]
         }
       },
-      "sm": {
+      "md_01": {
+        "$type": "color",
+        "$value": "{alpha.black.60}",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/md lớp 1 (DEC-327).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "md_02": {
         "$type": "color",
         "$value": "{alpha.black.40}",
-        "$description": "Màu bóng, đổi theo sáng/tối. Dùng trong: elev/1.",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/md lớp 2 (DEC-327).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "lg_01": {
+        "$type": "color",
+        "$value": "{alpha.black.60}",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/lg lớp 1 (DEC-327).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "lg_02": {
+        "$type": "color",
+        "$value": "{alpha.black.40}",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/lg lớp 2 (DEC-327).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "lg_03": {
+        "$type": "color",
+        "$value": "{alpha.black.40}",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/lg lớp 3 (DEC-327).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "xl_01": {
+        "$type": "color",
+        "$value": "{alpha.black.60}",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/xl lớp 1 (DEC-327).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "xl_02": {
+        "$type": "color",
+        "$value": "{alpha.black.40}",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/xl lớp 2 (DEC-327).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "xl_03": {
+        "$type": "color",
+        "$value": "{alpha.black.40}",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/xl lớp 3 (DEC-327).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "2xl_01": {
+        "$type": "color",
+        "$value": "{alpha.black.60}",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/2xl lớp 1 (DEC-327).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "2xl_02": {
+        "$type": "color",
+        "$value": "{alpha.black.40}",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/2xl lớp 2 (DEC-327).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "3xl_01": {
+        "$type": "color",
+        "$value": "{alpha.black.60}",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/3xl lớp 1 (DEC-327).",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      },
+      "3xl_02": {
+        "$type": "color",
+        "$value": "{alpha.black.40}",
+        "$description": "Màu bóng theo Untitled, đổi theo sáng/tối. Dùng trong: shadow/3xl lớp 2 (DEC-327).",
         "$extensions": {
           "com.figma.scopes": [
             "EFFECT_COLOR"
@@ -1952,6 +2072,108 @@
               "STROKE_COLOR"
             ]
           }
+        }
+      }
+    },
+    "vehicle": {
+      "media-bg": {
+        "$type": "color",
+        "$value": "{neutral.700}",
+        "$description": "Nền ô ảnh phương tiện (DEC-334 vh08)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "outline": {
+        "$type": "color",
+        "$value": "{neutral.400}",
+        "$description": "Nét bao 0,6 theo hình ảnh phương tiện (DEC-334 vh08)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "EFFECT_COLOR"
+          ]
+        }
+      }
+    },
+    "file-type": {
+      "pdf": {
+        "$type": "color",
+        "$value": "{file-type.pdf}",
+        "$description": "Nền nhãn PDF của File type icon, màu nhận diện loại tệp, không đảo theo chế độ; chữ nhãn color/fg/white (DEC-335 ms02)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "doc": {
+        "$type": "color",
+        "$value": "{file-type.doc}",
+        "$description": "Nền nhãn DOC của File type icon, màu nhận diện loại tệp, không đảo theo chế độ; chữ nhãn color/fg/white (DEC-335 ms02)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "xls": {
+        "$type": "color",
+        "$value": "{file-type.xls}",
+        "$description": "Nền nhãn XLS của File type icon, màu nhận diện loại tệp, không đảo theo chế độ; chữ nhãn color/fg/white (DEC-335 ms02)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "csv": {
+        "$type": "color",
+        "$value": "{file-type.csv}",
+        "$description": "Nền nhãn CSV của File type icon, màu nhận diện loại tệp, không đảo theo chế độ; chữ nhãn color/fg/white (DEC-335 ms02)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "img": {
+        "$type": "color",
+        "$value": "{file-type.img}",
+        "$description": "Nền nhãn IMG của File type icon, màu nhận diện loại tệp, không đảo theo chế độ; chữ nhãn color/fg/white (DEC-335 ms02)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "zip": {
+        "$type": "color",
+        "$value": "{file-type.zip}",
+        "$description": "Nền nhãn ZIP của File type icon, màu nhận diện loại tệp, không đảo theo chế độ; chữ nhãn color/fg/white (DEC-335 ms02)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      },
+      "vid": {
+        "$type": "color",
+        "$value": "{file-type.vid}",
+        "$description": "Nền nhãn VID của File type icon, màu nhận diện loại tệp, không đảo theo chế độ; chữ nhãn color/fg/white (DEC-335 ms02)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
         }
       }
     }

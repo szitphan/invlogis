@@ -2,7 +2,7 @@
 type: design-component
 status: stale
 status_prev: approved
-updated: 2026-10-29
+updated: 2026-11-02
 links:
   - design-system/architecture.md
   - design-system/foundations/README.md
@@ -46,7 +46,7 @@ Tooltip chỉ có ở web; Help icon có ở cả hai, khác hành vi. Tài li�
 | Phần | Token | Giá trị (Web) |
 |---|---|---|
 | Nền, mũi tên | `color/bg/primary_solid` | #171717 (Dark #F5F5F5) |
-| Bóng | `elev/1` | — |
+| Bóng | `shadow/xs` | — |
 | Chữ (Short) | `type/caption` nét 600, màu `color/text/inverse` | 12/16, trắng |
 | Lề (Short) | `space/xs` × `space/md` | 4 × 8 |
 | Bo | `radius/md` | 8 |
@@ -55,10 +55,10 @@ Tooltip chỉ có ở web; Help icon có ở cả hai, khác hành vi. Tài li�
 | Mô tả (Supporting) | `type/caption` nét 400, `color/text/inverse` mờ 86% | 12/16 |
 | Lề (Supporting) | `space/md` × `space/lg` | 8 × 12 |
 | Tiêu đề → mô tả | `space/xs` | 4 |
-| Rộng (Supporting) | tối đa `width/xs` | 320 |
+| Rộng (Supporting) | tối đa `width/xxs` | 320 |
 | Mũi tên | `size/md` × `size/xs`; Bottom Left / Bottom Right cách góc 12 | 8 × 4 |
 | Cách đối tượng | `space/xs` + `size/xs`; offset do chỗ đặt (instance cha / code) lo, component chỉ gồm thân + mũi tên | 4 + 4 |
-| Help icon | icon `circle-question-mark` cỡ `icon/size/md`, nét 2 trên khung 24 (DEC-300); màu `color/fg/quaternary`, Hover `color/fg/secondary` | 16; vùng rê chuột 24 |
+| Help icon | icon `circle-question-mark` cỡ `icon/size/md`, nét 2.25 trên khung 24 (DEC-329); màu `color/fg/tertiary`, Hover `color/fg/secondary` | 16; vùng rê chuột 24 |
 
 ### Biến thể
 
@@ -123,7 +123,11 @@ Số đo ở bảng Cấu tạo; màu ở Phần máy.
 29/10 trên preview: `ds-foundation-check.py` 0 chưa khai · 0 chưa quyết (`_work/tooltip/check.json`). Figma 29/10 (Section
 Tooltips): layout_audit 0 lỗi · a11y_audit 0 lỗi · kiểm tên DEC-264 0 lỗi · auditDesignSystem Tooltip 0,99, Help sheet 0,93
 (tiêu đề sheet dòng 24 tách khỏi style `type/title-3`, cỡ và dòng vẫn gắn biến; bo 5 của khung set do Figma tự đặt).
-Nét icon theo DEC-300 (2 trên khung 24) đã áp lên bộ icon Figma 29/10.
+Nét icon theo DEC-329 (2.25 trên khung 24 cho cỡ 16 trở xuống); bộ icon Figma cập nhật ở lượt Figma của DEC-329.
+
+### Chuyển động
+
+Hiện sau khi chờ 300, chạy `duration/fast` + `easing/standard`, trượt 4; ra `duration/fast` + `easing/exit`. Help sheet trên app theo luật sheet: vào `duration/medium` + `easing/standard`, ra `duration/exit` + `easing/exit`, kéo thì đi theo ngón tay. Luật chung: `foundations/motion.md` (DEC-333).
 
 ## Mobile
 
@@ -140,11 +144,11 @@ Nét icon theo DEC-300 (2 trên khung 24) đã áp lên bộ icon Figma 29/10.
 
 | Phần | Token | Giá trị (Mobile) |
 |---|---|---|
-| Help icon | icon `circle-question-mark` cỡ `icon/size/md`, nét 2 (DEC-300), màu `color/fg/quaternary` | 20; vùng chạm 44 (`touch/min`) |
+| Help icon | icon `circle-question-mark` cỡ `icon/size/md`, nét 2.25 (DEC-329), màu `color/fg/tertiary` | 16; vùng chạm 44 (`touch/min`) |
 | Lớp phủ | `color/bg/overlay` | — |
-| Sheet · khung | nền `color/bg/primary`; bo trên `radius/overlay` (DEC-259); không bóng — nằm trên lớp phủ (R3) | 24 |
+| Sheet · khung | nền `color/bg/primary`; bo trên `radius/overlay` (DEC-328); không bóng — nằm trên lớp phủ (R3) | 20 |
 | Sheet · lề | trên `space/md` · ngang `space/2xl` · dưới `space/3xl` | 8 · 20 · 24 |
-| Thanh kéo | `color/bg/quaternary` (DEC-321), bo `radius/badge`; cách trên `space/xs`, cách dưới `space/xl` | 36 × 4 |
+| Thanh kéo | `color/bg/quaternary` (DEC-321), bo `radius/xxs`; cách trên `space/xs`, cách dưới `space/xl` | 36 × 4 |
 | Tiêu đề | `type/title-3/size` nét 600, dòng `help-sheet/title-line-height`, `color/text/primary`, tối đa 2 dòng; cách dưới `space/md` | 18/28 |
 | Nội dung | `type/body`, `color/text/tertiary_strong`; cách dưới `space/2xl` | 14/20 |
 | Nút Đã hiểu | `Button` Secondary · Label · MD, rộng hết sheet (DEC-301) | 42 |
@@ -179,7 +183,7 @@ Form app có trường cần giải thích (Thông tin hàng: Tổng trọng lư
 
 ### Kiểm máy
 
-29/10: a11y_audit Section Tooltips 0 lỗi; số tương phản đo tay từ biến Figma (Light, Dark). Help icon đổi cỡ 20 và vùng 44
+29/10: a11y_audit Section Tooltips 0 lỗi; số tương phản đo tay từ biến Figma (Light, Dark). Help icon cỡ 16 (DEC-329) và vùng 44
 theo mode Platform = Mobile của chính set (không cần biến thể riêng). Mẫu chữ dài Help sheet 6927:218493 (cao 350). Trên Figma mỗi sheet nằm trong ô mẫu nền
 `color/bg/overlay` (6927:218508, 6927:218509) để thấy mép sheet. Review 29/10: R1–R4 đã sửa.
 
@@ -187,7 +191,7 @@ theo mode Platform = Mobile của chính set (không cần biến thể riêng).
 
 - Tooltip v2 cũ chỉ có một kiểu chữ Regular, 4 Placement → thêm Type Supporting (tiêu đề + mô tả), Arrow 7 kiểu gồm
   Bottom Left / Bottom Right / None; chữ Short nét 600 như Untitled.
-- Bóng tự do → `elev/1`. Help icon "i" (dễ nhầm icon Alert info) → dấu ?.
+- Bóng tự do → `shadow/xs`. Help icon "i" (dễ nhầm icon Alert info) → dấu ?.
 - App: v2 cũ chỉ ghi "không dùng" → thêm Help sheet có nút Đã hiểu Secondary (DEC-280, DEC-301).
 
 ## Phần máy (chung Web và Mobile)

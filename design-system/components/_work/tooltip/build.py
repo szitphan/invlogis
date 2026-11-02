@@ -28,7 +28,7 @@ def help_icon(label="Giải thích", attrs=""):
 CSS = tok_css() + """
 .tt{position:relative;display:inline-flex;flex-direction:column;gap:2px;max-width:var(--tooltip-max-width);padding:var(--space-xs) var(--space-md);
  border-radius:var(--radius-md);background:var(--color-bg-primary_solid);color:var(--color-text-inverse);font:600 12px/16px var(--font-body);text-align:left;
- box-shadow:0 4px 12px var(--color-shadow-md)}
+ box-shadow:var(--shadow-xs)}
 .tt.sup{padding:8px 12px;max-width:280px}.tt.sup b{font:600 12px/16px var(--font-body)}.tt.sup span{font-weight:400;opacity:.86}
 .tt::after{content:"";position:absolute;width:0;height:0;border:var(--size-xs) solid transparent}
 /* mũi tên — tên theo phía của mũi tên trên tooltip */
@@ -40,12 +40,12 @@ CSS = tok_css() + """
 .tt.a-br::after{top:100%;right:12px;border-top-color:var(--tt-arrow,var(--color-bg-primary_solid))}
 .tt.a-none::after{display:none}
 /* D1 nền: a tối (bg/primary_solid) · b trắng + viền + bóng */
-[data-D1=b] .tt{background:var(--color-bg-primary);color:var(--color-text-primary);box-shadow:0 0 0 1px var(--color-border-secondary),0 8px 20px var(--color-shadow-md);--tt-arrow:var(--color-bg-primary)}
+[data-D1=b] .tt{background:var(--color-bg-primary);color:var(--color-text-primary);box-shadow:0 0 0 1px var(--color-border-secondary),var(--shadow-xs);--tt-arrow:var(--color-bg-primary)}
 [data-D1=b] .tt.sup span{color:var(--color-text-tertiary);opacity:1}
 /* D2 mũi tên: a có · b không */
 [data-D2=b] .tt::after{display:none}
 /* D3 icon trợ giúp: a "?" · b "i" */
-.hi{display:inline-grid;place-items:center;width:16px;height:16px;padding:0;border:0;background:none;color:var(--color-fg-quaternary);cursor:help;position:relative;vertical-align:-3px}
+.hi{display:inline-grid;place-items:center;width:16px;height:16px;padding:0;border:0;background:none;color:var(--color-fg-tertiary);cursor:help;position:relative;vertical-align:-3px}
 .hi::after{content:"";position:absolute;inset:-4px}
 .hi:hover,.hi.on{color:var(--color-fg-secondary)}
 .hi .q{display:grid}.hi .i2{display:none}
@@ -64,12 +64,12 @@ CSS = tok_css() + """
 .anc>.tt.p-tr{bottom:calc(100% + var(--space-xs) + var(--size-xs));right:-6px}
 /* Help sheet (app) */
 .scrim{position:absolute;inset:0;background:var(--color-bg-overlay);z-index:5}
-.sheet{position:absolute;left:0;right:0;bottom:0;z-index:6;background:var(--color-bg-primary);border-radius:28px 28px 0 0;padding:8px 20px 28px}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:6;background:var(--color-bg-primary);border-radius:var(--radius-overlay) var(--radius-overlay) 0 0;padding:8px 20px 28px}
 .sheet .grab{width:36px;height:4px;border-radius:2px;background:var(--color-border-primary);margin:4px auto 16px}
 .sheet b{display:block;font:600 17px/24px var(--font-body);margin-bottom:8px}
 .sheet p{margin:0 0 20px;color:var(--color-text-tertiary_strong);font-size:15px;line-height:22px}
 .sheet .ok{width:100%;height:var(--control-height-md);border:0;border-radius:var(--radius-control);background:var(--color-action-secondary);color:var(--color-text-primary);font:600 15px/20px var(--font-body)}
-.mf .hi{width:24px;height:24px}.mf .hi svg{width:20px;height:20px}.mf .hi::after{inset:-10px}
+.mf .hi{width:24px;height:24px}.mf .hi svg{width:16px;height:16px}.mf .hi::after{inset:-10px}
 """
 
 SCREEN = BASE_CSS + """
@@ -78,7 +78,7 @@ SCREEN = BASE_CSS + """
 .cell.tall{height:168px}
 .dotx{width:24px;height:24px;border-radius:6px;background:var(--color-bg-primary);border:1px solid var(--color-border-primary)}
 /* màn demo */
-.ib{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:var(--radius-control);border:1px solid var(--color-border-secondary);background:var(--color-bg-primary);color:var(--color-fg-quaternary)}
+.ib{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:var(--radius-control);border:1px solid var(--color-border-secondary);background:var(--color-bg-primary);color:var(--color-fg-tertiary)}
 .ib.on{background:var(--color-bg-primary_hover);color:var(--color-fg-secondary)}
 .fld{display:flex;flex-direction:column;gap:6px;max-width:320px}
 .fld .lb{display:flex;align-items:center;gap:4px;font:500 13px/18px var(--font-body);color:var(--color-text-tertiary_strong)}
@@ -95,7 +95,7 @@ SCREEN = BASE_CSS + """
 .trunc.w320{max-width:320px}
 .mf{padding:16px;display:flex;flex-direction:column;gap:16px}
 .mf .lb{display:flex;align-items:center;gap:6px;font:500 13px/18px var(--font-body);color:var(--color-text-tertiary)}
-.mf .in{height:52px;border-radius:16px;background:var(--color-bg-primary);display:flex;align-items:center;padding:0 16px;font-size:16px}
+.mf .in{height:52px;border-radius:var(--radius-field);background:var(--color-bg-primary);display:flex;align-items:center;padding:0 16px;font-size:16px}
 /* nhãn, lưới của bảng biến thể + khung khối preview */
 .vl6{margin-bottom:6px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.r48{gap:48px;align-items:flex-start}.vgt{align-items:flex-start}
 .pvp{padding:16px}.mf0{padding:0}.mb14{margin-bottom:14px}.m0{margin:0}

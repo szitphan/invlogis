@@ -7,9 +7,9 @@
 //   text    — text style của từng lớp chữ (tách theo biến thể nếu mỗi biến thể một style).
 // Bỏ qua lớp đang ẩn (thuộc tính bật/tắt như Status, Edit) và lớp đặt tự do (ABSOLUTE: lớp phủ, huy hiệu).
 // Vòng focus (DEC-213): nay là instance L0 `.focus / Ring` — nhận diện bằng TÊN MAIN COMPONENT (không theo tên lớp), đọc
-//   màu, dày, khe (`focus/gap`, collection Context) ở hình con có bóng/nét; không đi vào instance L1 lồng (vòng của nút trong
+//   màu, dày ở hình con có bóng/nét; không đi vào instance L1 lồng (vòng của nút trong
 //   chân thẻ không phải của thẻ), chỉ đi vào instance đặt tự do (vd "Khung thẻ"). Bản cũ (lớp con "Vòng focus" hoặc bóng
-//   lan 0-blur trên chính biến thể) vẫn đọc được. Bóng nổi (elev/*) ra cột riêng `shadow`, không lẫn vào vòng focus.
+//   lan 0-blur trên chính biến thể) vẫn đọc được. Bóng nổi (shadow/*) ra cột riêng `shadow`, không lẫn vào vòng focus.
 // Thuộc tính Slot không có defaultValue → `default: null`; thuộc tính Slot, Instance swap kèm `preferred` (tên component được nhận).
 const SET_ID = '<componentSetId>';
 
@@ -29,7 +29,7 @@ const isIcon = n => n.type === 'INSTANCE' && !/^(Base \/|\.)/.test(n.name) && n.
 const RING_NAME = '.focus / Ring';
 const isRingEffect = e => e.type === 'DROP_SHADOW' && !e.radius && !(e.offset && (e.offset.x || e.offset.y));
 async function effectList(n, pred) { const out = []; for (const e of n.effects || []) { if (e.visible === false || !pred(e)) continue; const b = e.boundVariables && e.boundVariables.color; out.push((b ? await vn(b.id) : 'raw') + (e.spread ? ' · lan ' + e.spread : '')); } return out.length ? out.join(' + ') : null; }
-// Bóng nổi: tên effect style (elev/1…) nếu có, không thì "raw". Bóng viền focus kiểu cũ (0 blur, 0 lệch) không tính.
+// Bóng nổi: tên effect style (shadow/xs…) nếu có, không thì "raw". Bóng viền focus kiểu cũ (0 blur, 0 lệch) không tính.
 async function shadowOf(n) { if (!(n.effects || []).some(e => e.visible !== false && (e.type === 'DROP_SHADOW' || e.type === 'INNER_SHADOW') && !isRingEffect(e))) return null; const st = typeof n.effectStyleId === 'string' && n.effectStyleId ? await figma.getStyleByIdAsync(n.effectStyleId) : null; return st ? st.name : 'raw'; }
 async function mainName(n) { const m = await n.getMainComponentAsync(); return m ? (m.parent && m.parent.type === 'COMPONENT_SET' ? m.parent.name : m.name) : null; }
 // Instance `.focus / Ring` đang hiện trong biến thể (null nếu không có). Không đi vào instance L1 lồng; đi vào instance đặt tự do.
@@ -42,7 +42,7 @@ async function findRing(root) {
   }
   return null;
 }
-// Đọc vòng: hình con ĐẦU TIÊN có bóng (hoặc nét). Bóng tên biến chứa "gap" = khe (focus/gap); bóng còn lại = vòng, dày = lan − lan của khe
+// Đọc vòng: hình con ĐẦU TIÊN có bóng (hoặc nét). Bóng tên biến chứa "gap" = khe (bản cũ, token đã bỏ DEC-327); bóng còn lại = vòng, dày = lan − lan của khe
 // (hoặc biến gắn vào spread). Không bóng thì lấy nét: màu = biến của nét, dày = strokeWeight.
 async function ringOf(r) {
   const all = [r, ...r.findAll(n => n.visible !== false)];

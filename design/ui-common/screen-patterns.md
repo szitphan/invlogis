@@ -61,7 +61,13 @@ node, chưa có ảnh. CMP-11 Mobile: chốt Bottom Navigation 4 tab + nút Qué
 
 ## CMP-01 — Toast Notification
 
-Thông báo ngắn góc trên phải, tự ẩn sau 3 giây, không chặn thao tác.
+Thông báo ngắn góc **dưới phải** (web), không chặn thao tác, không lấy focus (DEC-286). Thời gian tự ẩn (DEC-287):
+
+- Toast không có nút: tự ẩn sau 3 giây; có thanh giờ chạy (Has Timer).
+- Toast có nút hành động (Xem, Hoàn tác): tối thiểu 10 giây. Hoàn tác phải làm lại được ở chỗ khác.
+- Rê chuột hoặc focus vào toast thì dừng đếm. Trên app, chạm giữ hoặc đang bật TalkBack/VoiceOver cũng dừng đếm.
+- Toast lỗi (Error) và tiến trình (Progress) không tự ẩn. Tiến trình xong chuyển sang Success, lỗi thì chuyển sang Error có Thử lại.
+- Tối đa 3 toast chồng nhau, toast mới nhất nằm dưới cùng.
 
 ![CMP-01](images/cmp-01.png)
 _Ảnh: Toast "Đã lưu thay đổi." — node [5080:2503](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=5080-2503), xuất PNG 2x._
@@ -73,16 +79,17 @@ _Ảnh: Toast "Đã lưu thay đổi." — node [5080:2503](https://www.figma.co
 | 3 | Toast cảnh báo | Toast | ReadOnly | • Cảnh báo không chặn hành động |
 | 4 | Toast thông tin | Toast | ReadOnly | • Hướng dẫn hoặc trạng thái trung gian |
 
-- **Figma:** Astryx `Toast` · node: [172:56853](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=172-56853)
+- **Figma:** DS v2 `Notification` · node: [6862:202736](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=6862-202736) · spec `design-system/components/base/alert-notification.md` (Astryx `Toast` 172:56853 cũ, thay bởi DEC-286)
 - **design.md:** Copy động
 - **UC phải khai báo:** hành động nào có toast thành công + động từ dùng trong câu; hành động có `[Hoàn tác]` không.
 
 ### Mobile
 
-- Cùng 4 loại và câu chữ như web. Toast lỗi nền error cho lỗi không gắn với trường nào (lỗi server,
+- Cùng các loại và câu chữ như web. Toast lỗi (Type Error) dùng cho lỗi không gắn với trường nào (lỗi server,
   lỗi mạng — `E-common-008`, `E-common-009`).
-- Vị trí và thời gian hiện trên màn app: chưa có chuẩn trong design.md.
-- **Figma:** chưa gắn.
+- Vị trí: dưới, ngay trên thanh tab. Màn không có thanh tab thì đặt trên vùng nút chân màn, cách 16. Rộng theo màn trừ lề 16 (DEC-286).
+- Thời gian hiện: như web.
+- **Figma:** DS v2 `Notification` (cùng component, mode Platform = Mobile) · node [6862:203176](https://www.figma.com/design/FifpyOMpZk9OP8qyNzbRVJ/-innvie--invlogis-v0.3?node-id=6862-203176).
 
 ## CMP-02 — In-app Notification
 

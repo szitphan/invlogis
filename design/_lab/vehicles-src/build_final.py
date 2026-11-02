@@ -7,7 +7,7 @@ from PIL import Image
 HERE = pathlib.Path(__file__).resolve().parent
 SIZES = json.loads((HERE / "sizes.json").read_text(encoding="utf-8"))
 LAB = HERE.parent
-A = LAB / "assets" / "vehicles" / "b-ai"
+A = LAB.parent.parent / "design-system" / "assets" / "vehicles"
 SHARE = "--share" in sys.argv
 
 # [mã PT, mã loại, tên SRS, key ảnh, kiểu sơ đồ lốp (số | None)]
@@ -40,7 +40,7 @@ for k in keys:
         b = io.BytesIO(); im.save(b, "WEBP", quality=80, method=6)
         src[k] = "data:image/webp;base64," + base64.b64encode(b.getvalue()).decode()
     else:
-        src[k] = f"assets/vehicles/b-ai/{k}.png"
+        src[k] = f"../../design-system/assets/vehicles/{k}.png"
 data = {"names": NAMES, "tyre": TYRE, "sizes": SIZES, "aspect": info, "src": src}
 tpl = (HERE / "final-template.html").read_text(encoding="utf-8")
 out = LAB / ("vehicles-final-share.html" if SHARE else "vehicles-final.html")

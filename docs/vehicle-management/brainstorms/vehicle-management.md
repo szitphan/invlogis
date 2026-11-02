@@ -1,7 +1,8 @@
 ---
 type: brainstorm
 feature: vehicle-management
-status: draft
+status: stale
+status_prev: draft
 status_changed: 2026-10-20
 status_reason: "đã review upstream, không cần sửa"
 updated: 2026-10-21
@@ -305,7 +306,7 @@ Cột Trả lời theo [[docs/meetings/2026-10-21-oq-vis.md|Delta trả lời de
 | OQ-10 | Đầu kéo 1 cầu sau dùng loại lốp "Lốp lái/đơn", "Lốp tải/kép", các kiểu khác dùng "Lốp lái", "Lốp tải": danh mục loại lốp chuẩn là gì? | File sơ đồ lốp của Delta | Chưa hỏi Delta |
 | OQ-11 | Xe nâng diesel: file ghi cả 2 trục là Lốp lái, thực tế trục trước là trục tải (dẫn động), trục sau là trục lái. Sửa theo thực tế? | File sơ đồ lốp của Delta, kiểu Xe nâng diesel | Chưa hỏi Delta |
 | OQ-12 | Trạm bơm dầu (mã loại 09) chưa có trong file: thêm dòng "Không có lốp"? | File sơ đồ lốp của Delta | Chưa hỏi Delta |
-| OQ-13 | Phần mềm gọi sơ đồ lốp theo cấu hình trục chung (vd đầu kéo 2 cầu sau, xe tải hai trục) thay cho "Kiểu 1–11" của file, và cho đổi sơ đồ riêng từng dòng xe (vd AC990 là xe ba trục 2 dí 1 cầu tải). Delta đồng ý cách gán này? | File sơ đồ lốp của Delta; `design/v2/vehicles.md` mục 3 (DEC-266) | Chưa hỏi Delta |
+| OQ-13 | Phần mềm gọi sơ đồ lốp theo cấu hình trục chung (vd đầu kéo 2 cầu sau, xe tải hai trục) thay cho "Kiểu 1–11" của file, và cho đổi sơ đồ riêng từng dòng xe (vd AC990 là xe ba trục 2 dí 1 cầu tải). Delta đồng ý cách gán này? | File sơ đồ lốp của Delta; `design-system/foundations/vehicle.md` mục 3 (DEC-266) | Chưa hỏi Delta |
 
 ## 12. Next Steps
 

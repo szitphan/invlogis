@@ -107,12 +107,12 @@ CSS_A = """
  border:1px solid transparent;vertical-align:middle;color:var(--c-fg);background:var(--c-bg)}
 .bd .bl{overflow:hidden;text-overflow:ellipsis;min-width:0}
 .bd.sm{height:var(--chip-height-sm);padding:0 var(--chip-padding-x-sm)}.bd.lg{height:var(--chip-height-lg);padding:0 var(--chip-padding-x-lg)}
-.bd.pill{border-radius:var(--radius-chip)}.bd.badge{border-radius:var(--radius-badge)}
-.bd.modern{border-radius:var(--radius-badge);background:var(--color-bg-primary);color:var(--color-text-tertiary_strong);border-color:var(--color-border-primary);box-shadow:0 1px 2px var(--color-shadow-sm)}
+.bd.pill{border-radius:var(--radius-full)}.bd.badge{border-radius:var(--radius-badge)}
+.bd.modern{border-radius:var(--radius-badge);background:var(--color-bg-primary);color:var(--color-text-tertiary_strong);border-color:var(--color-border-primary);box-shadow:var(--shadow-xs)}
 .bd .bdot{width:6px;height:6px;border-radius:50%;background:var(--c-dot);flex:none}
 .bd.modern .bi{color:var(--c-dot)}
 .bd .bi{flex:none}
-.bd .bc{font-weight:600;padding:0 5px;border-radius:3px;background:color-mix(in srgb,var(--c-fg) 12%,transparent);line-height:16px}
+.bd .bc{font-weight:600;padding:0 5px;border-radius:var(--radius-xxs);background:color-mix(in srgb,var(--c-fg) 12%,transparent);line-height:16px}
 .bd.modern .bc{background:var(--color-bg-selected)}
 .bd .bx{border:0;background:none;padding:0;margin-right:-4px;width:16px;height:16px;border-radius:3px;display:grid;place-items:center;color:inherit;opacity:.6;cursor:pointer}
 .c-gray{--c-bg:var(--color-utility-neutral-100);--c-fg:var(--color-utility-neutral-600);--c-dot:var(--color-utility-neutral-500);--c-ring:var(--color-utility-neutral-200)}
@@ -138,7 +138,7 @@ CSS_A = """
 .av .aimg{width:100%;height:100%;border-radius:50%;display:block}
 .av .at{font:600 var(--fs)/1 var(--font-body);letter-spacing:-.01em}
 .av .ai{width:calc(var(--s) * .5);height:calc(var(--s) * .5)}
-.av.icon{background:var(--color-bg-selected);color:var(--color-fg-quaternary)}
+.av.icon{background:var(--color-bg-selected);color:var(--color-fg-tertiary)}
 .av.upload,.av.add{background:transparent;border:1px dashed var(--color-border-input);color:var(--color-text-tertiary);cursor:pointer}
 .av.co{border-radius:calc(var(--s) * .22);background:var(--color-utility-blue-50);color:var(--color-utility-blue-700)}
 .av.more{background:var(--color-bg-secondary);color:var(--color-text-primary)}
@@ -166,8 +166,8 @@ CSS_A = """
 .alg.sm b{font-size:13px;line-height:18px}.alg.sm{gap:8px}
 /* Màn demo */
 .tbar{display:flex;align-items:center;gap:12px;padding:0 24px 12px}
-.sk{display:inline-block;height:12px;border-radius:6px;background:var(--color-bg-selected);animation:pl 1.2s ease-in-out infinite}
-@keyframes pl{50%{opacity:.5}}
+.sk{display:inline-block;height:12px;border-radius:6px;background:var(--color-bg-selected);animation:pl var(--duration-slow) linear 10 alternate}
+@keyframes pl{to{opacity:.45}}
 .empty{padding:48px 24px;text-align:center;color:var(--color-text-tertiary)}
 .mrow{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--color-border-secondary)}
 .mrow .tx2{flex:1;min-width:0}.mrow b{display:block;font:600 15px/20px var(--font-body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -390,12 +390,12 @@ CSS += """
 .fb.pc.sm,.fb.po.sm{padding-right:var(--chip-padding-x-sm)}
 .fb.bc.sm,.fb.bo.sm,.fb.bm.sm{padding-right:var(--chip-padding-x-sm);border-radius:6px}
 .fb.sm .fcnt{height:16px}
-.fb.bc.sm .fcnt,.fb.bo.sm .fcnt,.fb.bm.sm .fcnt{border-radius:3px}
+.fb.bc.sm .fcnt,.fb.bo.sm .fcnt,.fb.bm.sm .fcnt{border-radius:var(--radius-xxs)}
 .fb.md{height:24px;gap:var(--space-xs);padding-left:var(--space-md)}
 .fb.pc.md,.fb.po.md{padding-right:var(--space-lg)}
 .fb.bc.md,.fb.bo.md,.fb.bm.md{padding-right:var(--space-lg);border-radius:6px}
 .fb.md .fcnt{height:16px}
-.fb.bc.md .fcnt,.fb.bo.md .fcnt,.fb.bm.md .fcnt{border-radius:3px}
+.fb.bc.md .fcnt,.fb.bo.md .fcnt,.fb.bm.md .fcnt{border-radius:var(--radius-xxs)}
 .fb.lg{height:28px;gap:var(--space-xs);padding-left:var(--chip-padding-x-icon-lg)}
 .fb.pc.lg,.fb.po.lg{padding-right:var(--chip-padding-x-lg)}
 .fb.bc.lg,.fb.bo.lg,.fb.bm.lg{padding-right:var(--chip-padding-x-lg);border-radius:8px}
@@ -437,11 +437,11 @@ CSS += """
 .fa{position:relative;display:inline-grid;place-items:center;flex:none;border-radius:50%;background:var(--color-accent-bg);color:var(--color-accent-fg);vertical-align:middle}
 .fa .aimg{width:100%;height:100%;border-radius:inherit;display:block}
 .fa .fat{font-weight:500;font-family:var(--font-body)}
-.fa .fai{color:var(--color-fg-quaternary)}
-.fa .fscrim{position:absolute;inset:0;border-radius:50%;background:var(--color-bg-overlay)}
-.fa .fspin{position:absolute;animation:fsp 1s linear infinite}
-@keyframes fsp{to{transform:rotate(360deg)}}
-.fa .fup{position:absolute;right:0;bottom:0;border-radius:50%;background:var(--color-bg-primary);border:1px solid var(--color-border-secondary);display:grid;place-items:center;color:var(--color-fg-quaternary)}
+.fa .fai{color:var(--color-fg-tertiary)}
+.fa .fscrim{position:absolute;inset:0;border-radius:50%;background:var(--color-bg-overlay_solid)}
+.fa .fspin{position:absolute;animation:fsp calc(var(--duration-slow) * 2) linear infinite,spin-wait 0s var(--duration-medium) both}
+@keyframes fsp{to{transform:rotate(360deg)}}@keyframes spin-wait{from{opacity:0}to{opacity:1}}
+.fa .fup{position:absolute;right:0;bottom:0;border-radius:50%;background:var(--color-bg-primary);border:1px solid var(--color-border-secondary);display:grid;place-items:center;color:var(--color-fg-tertiary)}
 .fa .fup.dis{background:var(--color-bg-secondary)}.fa .fup.dis .fupi{opacity:.4}
 /* _Avatar status: chấm + viền trắng 2; Offline = chấm rỗng viền xám 2. Vị trí tương đương mọi cỡ: tâm chấm trên mép tròn ở góc 45° (lệch khỏi góc khung 0,1464 × cỡ) */
 .fa .fst{position:absolute;padding:2px;border-radius:50%;background:var(--color-bg-primary);display:block;line-height:0}
@@ -510,11 +510,11 @@ CSS += """
 .flg b{font:600 14px/20px var(--font-body);color:var(--color-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .flg .ftx span{font:400 var(--avatar-label-subtitle-size)/var(--avatar-label-subtitle-line-height) var(--font-body);color:var(--color-text-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* Avatar add button: State Default · Hover · Focus · Disabled, 36 */
-.fadd{width:48px;height:48px;border-radius:50%;border:1px dashed var(--color-border-primary);background:var(--color-bg-primary);color:var(--color-fg-quaternary);
+.fadd{width:48px;height:48px;border-radius:50%;border:1px dashed var(--color-border-primary);background:var(--color-bg-primary);color:var(--color-fg-tertiary);
  display:inline-grid;place-items:center;padding:0;cursor:pointer}
 .fadd svg{width:24px;height:24px}.fadd.hover,.fadd:hover{background:var(--color-bg-primary_hover)}
-.fadd.loading{cursor:progress}.fadd.loading svg{animation:fsp 1s linear infinite}
-.fadd.focus,.fadd:focus-visible{outline:var(--focus-width) solid var(--focus-color);outline-offset:var(--focus-offset)}
+.fadd.loading{cursor:progress}.fadd.loading svg{animation:fsp calc(var(--duration-slow) * 2) linear infinite,spin-wait 0s var(--duration-medium) both}
+.fadd.focus,.fadd:focus-visible{outline:var(--focus-width) solid var(--color-focus-ring);outline-offset:var(--focus-offset)}
 .fadd:disabled{opacity:.4;cursor:not-allowed}
 .vnote{font:400 12px/16px var(--font-body);color:var(--color-text-disabled);white-space:normal}
 """

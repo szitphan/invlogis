@@ -36,7 +36,7 @@ links:
   Destructive=False`. Thuộc tính không phải biến thể (chữ, bật tắt, đổi icon) tên tiếng Anh viết hoa chữ đầu:
   `Label`, `Icon Leading`, `Has Icon Leading`.
 - **Giữ nền tảng v2**: chỉ gắn biến có sẵn trong file (collections `0. Primitives`, `1. Semantic`, `Platform`,
-  `7. Brand`, `8. Component`), text style `type/*`, effect style `elev/*`. Không dùng hex rời. Màu hành động chính than chì
+  `7. Brand`, `8. Component`), text style `type/*`, effect style `shadow/*`. Không dùng hex rời. Màu hành động chính than chì
   (`color/action/primary`), nút phẳng (không bóng skeuomorphic), focus outline 2px cách 2px (`color/border/focus`,
   `focus/width`, `focus/offset`). Cao control web SM 28 · MD 32 · LG 40; app lấy theo chế độ `Platform` = Mobile.
 - **Icon**: Lucide từ trang `✦ DS · Icons` (instance swap). Không vẽ icon tay.

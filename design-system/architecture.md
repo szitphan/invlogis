@@ -1,7 +1,7 @@
 ---
 type: design-architecture
 status: draft
-updated: 2026-10-30
+updated: 2026-11-02
 links:
   - _workspace/decisions.md
   - design-system/foundations/README.md
@@ -115,9 +115,9 @@ Theo đúng 10 collection trên Figma (`tokens.json` › `figma.collections`; Pl
 |---|---|---|---|---|
 | Primitive | `0. Primitives` | Value | Bảng màu, thang `space/<px>`, `radius/<px>` (tên theo px, DEC-135, DEC-315) | Chỉ tầng Semantic |
 | Semantic | `1. Semantic` | Light, Dark | Màu theo nghĩa: `color/bg/*`, `color/text/*`, `color/action/*`, `color/status/*`… | Component, màn |
-| Semantic | `2. Platform · Radius` · `3. Platform · Spacing & Layout` · `4. Platform · Typography` · `5. Platform · Sizes` | Web, Mobile | Thang Untitled `radius/*`, `space/*`, `size/*` (DEC-314, DEC-315) và token theo vai: `radius/card`, `layout/screen-inset`, `type/body/size`, `control/height/md` | Component, màn |
+| Semantic | `2. Platform · Radius` · `3. Platform · Spacing & Layout` · `4. Platform · Typography` · `5. Platform · Sizes` | Web, Mobile | Thang Untitled `radius/*`, `space/*`, `size/*` (DEC-314, DEC-315) và token theo vai: `radius/card`, `grid/margin`, `type/body/size`, `control/height/md` | Component, màn |
 | Theo khách | `7. Brand` | 8 dải | `color/brand/50…950`, chỉ vào các vai ở `foundations.md` mục 3.5 | Component, màn (theo vai) |
-| Component | `6. Platform · Component sizes` | Web, Mobile | Số đo riêng còn lại của component, **đang gộp về token chung** (DEC-319): còn 59 token chờ đợt 2, sổ `components/_token-ledger.json` | Chính component đó |
+| Component | `6. Platform · Component sizes` | Web, Mobile | Số đo riêng còn lại của component, **đang gộp về token chung** (DEC-319): còn 57 token số đo + `spinner/period` (DEC-333) chờ đợt 2, sổ `components/_token-ledger.json` | Chính component đó |
 | Thương hiệu | `9. Brand · Invlogis` | Value | Màu logo Invlogis, innvie (DEC-261) | Trang giới thiệu, tài liệu; **không** dùng trong component sản phẩm |
 
 - Component và màn **không gắn Primitives, không mã màu trần, không số trần** (foundations mục 12). Primitive màu, khoảng
@@ -125,7 +125,7 @@ Theo đúng 10 collection trên Figma (`tokens.json` › `figma.collections`; Pl
 - **Màu: component gắn thẳng token Semantic** (`color/*`) hoặc accent theo vai, không có tầng màu riêng của component
   (DEC-318). **Số đo:** token `6. Platform · Component sizes` chỉ trỏ Semantic (`2.`–`5.`) (DEC-313). Chưa có token Semantic
   đúng vai thì thêm vào Semantic, không trỏ tắt. Máy kiểm: `python3 _scripts/ds-token-usage.py --check`.
-- Collection Context đã bỏ (DEC-258); khe vòng focus là `color/focus/gap` ở Semantic.
+- Collection Context đã bỏ (DEC-258); vòng focus là outline, khe trong suốt, không có token khe (DEC-327).
 - Tên và giá trị token: `design-system/foundations/README.md` (luật dùng) và `design-system/tokens.json` (nguồn máy; `tokens.css` sinh bằng
   `python3 _scripts/ds-v2-tokens.py`). Rà token ↔ component định kỳ: `python3 _scripts/ds-token-usage.py` (trang review).
 - Tầng Semantic có chế độ Tối ngay từ đầu; giá trị Tối điền và kiểm ở một vòng sau (DEC-116, bản nháp DEC-257).
@@ -185,7 +185,7 @@ Theo đúng 10 collection trên Figma (`tokens.json` › `figma.collections`; Pl
 | Cao control | `control/height/*` web 28 · 32 · 40 | DEC-173, DEC-260 F7 |
 | Màu trạng thái | Gắn thẳng Semantic theo trạng thái (`color/action/*-hover`, `-pressed`, `color/bg/disabled`…); Disabled một kiểu xám, không làm mờ | DEC-174, DEC-318 |
 | Nút | 5 kiểu Primary · Secondary · Ghost · Danger (nền đỏ nhạt, chữ đỏ) · Outline; Outline dùng chung thang trạng thái của Secondary | DEC-176, DEC-313 |
-| Vòng focus | Outline 2px cách 2 như code Untitled; khe là `color/focus/gap` | DEC-260 F9, DEC-258 |
+| Vòng focus | Outline 2px cách 2 như code Untitled; khe trong suốt | DEC-260 F9, DEC-327 |
 | Lồng góc, lề đều | Khung lớn tách xa (bo ≤ lề), khung ôm đồng tâm; máy đo kiểm trước khi trình | DEC-165 |
 | Theo nền tảng | Nhóm A Dùng chung · B Lệch (trục `Platform`) · C Một nền tảng | DEC-279 |
 

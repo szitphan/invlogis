@@ -53,6 +53,9 @@ def tok_css():
     """tokens.css → phạm vi .pv. Bỏ brand phụ, @media, class .type-* (component tự viết font)."""
     css = TOKENS_CSS.read_text()
     css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    # DEC-333 mt13: .pv ghi đè :root nên phải mang theo lớp giảm chuyển động, không thì preview vẫn chạy
+    rm = re.search(r"prefers-reduced-motion: reduce\)\s*\{\s*:root\s*\{([^{}]*)\}", css)
+    reduced = f"@media (prefers-reduced-motion: reduce){{.pv{{{rm.group(1).strip()}}}}}" if rm else ""
     css = re.sub(r"@media[^{]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}", "", css)
     out = []
     for sel, body in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
@@ -69,7 +72,7 @@ def tok_css():
             continue
         body = " ".join(body.split())
         out.append(f"{new}{{{body}}}")
-    return "".join(out)
+    return "".join(out) + reduced
 
 
 def tok_css_nested():
@@ -110,6 +113,8 @@ def hide_css(page):
 
 
 def write(out_path, page):
+    from icon_dec329 import apply as _dec329
+    _dec329(page)  # DEC-329: cỡ, nét, màu icon
     page["css"] = page.get("css", "") + hide_css(page)
     # giữ lịch sử góp ý (bản trước / hoàn lại) do ds-snap.py ghi — dựng lại trang không được xoá
     if Path(out_path).exists():

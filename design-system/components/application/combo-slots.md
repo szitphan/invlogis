@@ -2,9 +2,9 @@
 type: design-component
 status: stale
 status_prev: draft
-updated: 2026-10-27
+updated: 2026-11-02
 links:
-  - design-system/foundations/misc-icon.md
+  - design-system/foundations/vehicle.md
   - design-system/components/application/container-slot.md
   - docs/transport-dispatch/brainstorms/transport-dispatch.md
   - _workspace/decisions.md
@@ -14,9 +14,9 @@ links:
 
 > Application · phiên bản 0.1.0 · Nháp · người phụ trách @szitphan · Figma `Combo Slots` (6804:16465), trang
 > DS · Application components, Section `Combo slots` 6805:16591, Demo 6805:16599 · lồng `Container Slot`
-> (6797:15876) · DEC-267, DEC-273
+> (6797:15876) · DEC-267, DEC-273, DEC-334
 
-Tổ hợp dạng **sơ đồ khe** (cách B, `design-system/foundations/misc-icon.md` mục 5.4): khối mooc (biển số · loại, hàng khe container) nối
+Tổ hợp dạng **sơ đồ khe** (cách B, `design-system/foundations/vehicle.md` mục 5.4): khối mooc (biển số · loại, hàng khe container) nối
 khối đầu kéo, không dùng ảnh. Một component cho web và app.
 
 ## Web
@@ -53,9 +53,9 @@ khối đầu kéo, không dùng ảnh. Một component cho web và app.
 | Density | Khác gì |
 |---|---|
 | Default | xếp ngang; khe Container Slot Default (có chip trạng thái) |
-| Compact | **xếp dọc**: dòng đầu kéo (biển số + loại cùng hàng) trên, mooc dưới; khe Container Slot Compact. Dùng ở bề rộng ≤ 400 (thẻ app 343) và dòng mở rộng |
+| Compact | **xếp dọc**: dòng đầu kéo (biển số + loại cùng hàng) trên, mooc dưới; khe Container Slot Compact. Dùng ở bề rộng ≤ 400 (thẻ app trải theo màn, 361 ở khung 393) và dòng mở rộng |
 
-14 biến thể.
+14 biến thể. Bảng 17 ca: `design-system/foundations/vehicle.md` Mục 5.3.
 
 ### Lỗi
 
@@ -87,7 +87,11 @@ Demo `Chi tiết lệnh / Web` (banner F4 + 1×40), `Lệnh của tôi / Mobile`
 ### Kiểm máy
 
 27/10: kiểm tên fail 0. Đã sửa: Compact xếp ngang cắt số container ở 343 → xếp dọc; chiều cao khối bị khoá sau khi đổi
-hướng. Kiểm mất hình: chưa chạy. Dark: chưa điền giá trị Dark.
+hướng. Kiểm mất hình: chưa chạy. 02/11: spec theo DEC-334, Figma chưa sync.
+
+### Dark
+
+Chưa có số đo Dark.
 
 ## Mobile
 

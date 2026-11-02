@@ -2,7 +2,7 @@
 type: design-component
 status: stale
 status_prev: draft
-updated: 2026-10-28
+updated: 2026-11-02
 links:
   - design-system/architecture.md
   - design-system/foundations/README.md
@@ -42,8 +42,8 @@ là component Application riêng, không thuộc md này. Banner sự cố toàn
 
 | Phần | Token | Giá trị (Web) |
 |---|---|---|
-| Notification · khung | nền `color/bg/primary`, viền `color/border/secondary`, bóng `elev/3`, bo 12 (`radius/xl`), lề `space/lg` | rộng 400, lề 12, khoảng cách 12 |
-| `_Notification icon` | vòng `radius/full`, nền `color/status/*-bg` (Neutral: `color/bg/secondary`), icon `color/status/*-icon` (Neutral: `color/fg/quaternary`) | 32, viền ngoài 4 (nền nhạt 45%), icon 20 |
+| Notification · khung | nền `color/bg/primary_alt`, viền `shadow/xl-border`, bóng `shadow/xl`, bo 12 (`radius/xl`), lề `space/lg` | rộng `width/xs` 384, lề 12, khoảng cách 12 |
+| `_Notification icon` | vòng `radius/full`, nền `color/status/*-bg` (Neutral: `color/bg/secondary`), icon `color/status/*-icon` (Neutral: `color/fg/tertiary`) | 32, viền ngoài 4 (nền nhạt 45%), icon 20 |
 | Avatar (Type Avatar) | `Avatar` Size 32, chấm trạng thái | 32 |
 | Tiêu đề | `color/text/primary`, `type/heading` (14/20 nét 600) | xuống dòng, không cắt — viết ngắn |
 | Mô tả | `color/text/tertiary`, `type/hint` | 12/18, tối đa 2 dòng |
@@ -70,7 +70,7 @@ hiện → (rê chuột / focus; app: chạm giữ, trình đọc màn hình b�
 
 ### Kích thước
 
-Một cỡ. Toast rộng 400 trên web; Alert rộng theo cột nội dung.
+Một cỡ. Toast rộng `width/xs` 384 trên web (DEC-324); Alert rộng theo cột nội dung.
 
 ### Nên và không nên
 
@@ -123,6 +123,10 @@ Số đo theo mode ở bảng Cấu tạo; màu ở Phần máy.
 28/10: layout_audit 0 lỗi (chấm trạng thái avatar tràn khung — cố ý) · kiểm tên DEC-264 0 lỗi · a11y_audit component 0 lỗi; demo:
 `text/tertiary` trên `bg/secondary` 4,35:1 (token chung, đã biết), nút đóng 28 (có vùng bấm vô hình). 3 agent review: 28 điểm — 19 sửa
 thẳng, 9 user quyết Sửa (DEC-287).
+
+### Chuyển động
+
+Toast vào `duration/medium` + `easing/standard`, trượt 8 + mờ dần; ra `duration/fast` + `easing/exit`, chỉ mờ; thanh giờ linear, không qua đường cong. Luật chung: `foundations/motion.md` (DEC-333).
 
 ## Mobile
 

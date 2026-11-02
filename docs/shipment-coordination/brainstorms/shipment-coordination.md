@@ -1,7 +1,8 @@
 ---
 type: brainstorm
 feature: shipment-coordination
-status: draft
+status: stale
+status_prev: draft
 updated: 2026-10-21
 links:
   - docs-input/sop/sop-dieu-phoi.md

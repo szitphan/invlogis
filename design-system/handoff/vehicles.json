@@ -1,6 +1,34 @@
 {
- "_doc": "design-system/foundations/misc-icon.md",
- "_note": "Máy sinh từ lab 27/10/2026 (DEC-266). groups = [Lõi]; tenants.delta = [Riêng Delta]. Ảnh nguồn design/_lab/assets/vehicles/b-ai/{image}-{view}.png. size_m = [dài, cao] mét, ước lượng.",
+ "_doc": "design-system/foundations/vehicle.md",
+ "_note": "Máy sinh từ lab 27/10/2026 (DEC-266). groups = [Lõi]; tenants.delta = [Riêng Delta]. Ảnh design-system/assets/vehicles/{image}-{view}.png, PNG chưa nén (DEC-334 vh09), dev tự nén. Đội sản phẩm gán tenants.* khi đưa khách lên, khách không sửa; Delta là dữ liệu mẫu (vh10). size_m = [dài, cao] mét, ước lượng.",
+ "image_dir": "design-system/assets/vehicles",
+ "scale_px_per_m": {
+  "sm": 8,
+  "md": 16,
+  "lg": 40
+ },
+ "marker_px_per_m": {
+  "default": 4,
+  "selected": 8
+ },
+ "marker_zoom": {
+  "near_min": 17,
+  "mid": [
+   12,
+   16
+  ],
+  "far_max": 11
+ },
+ "top_fallback": {
+  "truck-2ax-s": "t03",
+  "truck-2ax-l": "t03",
+  "truck-3ax": "t03",
+  "truck-4ax": "t03",
+  "forklift-elec": "dot",
+  "genset": "dot",
+  "fuel-station": "dot"
+ },
+ "_top_fallback_note": "Nhóm thiếu ảnh Top: xe tải mượn t03-top, dài theo size_m của nhóm; thiết bị dùng Map Dot ở mọi mức phóng (vh15). Sinh lại theo BL-264 khi duyệt chi phí.",
  "views": {
   "q": "3/4 trước ~35°, đầu xe sang phải",
   "s": "ngang vuông góc, đầu xe sang phải",

@@ -1,7 +1,7 @@
 ---
 type: design-foundations
 status: draft
-updated: 2026-11-01
+updated: 2026-11-02
 links:
   - design-system/foundations/README.md
   - design-system/tokens.json
@@ -24,15 +24,16 @@ links:
 
   Tên cũ → mới: `gap-2xs` → `xxs` · `inset-xs`, `gap-xs` → `xs` · `inset-sm`, `gap-sm` → `md` · `inset-md`, `gap-md` → `lg` ·
   `inset-lg`, `gap-lg` → `xl` · `inset-xl`, `gap-xl` → `3xl` · `gap-2xl` → `4xl`.
+- **Bậc `size/14`, primitive `space/14` (DEC-329 ic05):** lệch thang Untitled do user chọn, chỉ cho cỡ icon (`icon/size/sm`, `icon/size/chip`), không dùng cho khoảng cách. Không thêm 18 vì cỡ 18 đã bỏ.
 - **Thang kích thước `size/…`** (collection `5. Platform · Sizes`, DEC-314): cùng tên, cùng bậc như `space/…`; token component
   dùng cho cao, rộng, cỡ khối. Token component (`6.`) chỉ trỏ `space/…`, `size/…`, `type/…`, `radius/…` Semantic, không trỏ Primitive.
   Số lệch thang chờ chốt ở trang Token ↔ Component (BL-313).
 
 | Token | Web | App | Dùng cho |
 |---|---|---|---|
-| `layout/screen-inset` | 32 | 16 | Lề màn (web 24 → 32 như Untitled, DEC-259) |
+| `grid/margin` | 32 | 16 | Lề màn, trỏ `container/padding-*` (DEC-324) |
 | `layout/empty-padding` | 80 | 64 | Lề trên dưới màn trống, màn kết quả, đăng nhập (`space/80`, `space/96` thêm ở DEC-259) |
-| `layout/content-max-width` | 1280 | — | Rộng nội dung tối đa màn chi tiết, form; màn bảng trải hết (DEC-259) |
+| `container/max-width-desktop` | 1280 | — | Rộng tối đa màn chi tiết, form, gồm lề; màn bảng trải hết (DEC-324) |
 | `layout/card-padding` | 16 | 16 | Lề chứa: lề trong thẻ, nhóm có viền, dòng trong nhóm (app 14 → 16, DEC-164) |
 | `layout/list-gap` | 8 | 12 | Giữa các thẻ, dòng trong danh sách |
 | `layout/section-gap` | 32 | 24 | Giữa các khối lớn |
@@ -58,7 +59,7 @@ links:
 | `chip/padding-x-sm` · `space/lg` · `chip/padding-x-lg` | 10 · 12 · 14 | như web | Badge: lề phía chữ SM · MD · LG (DEC-310) |
 | `space/sm` · `space/md` · `chip/padding-x-icon-lg` · `space/xs` · `space/sm` · `space/xxs` · `size/sm` | 6 · 8 · 10 · 4 · 6 · 2 · 6 | như web | Badge: lề phía chấm/icon; icon → chữ 4; chấm → chữ 6 (= 4 + 2); chấm 6 (DEC-310) |
 | `table/row-min-height` · `table/cell-padding-y` · `table/cell-padding-x` | 52 · 16 · 24 | 52 · 12 · 16 | Bảng theo Untitled (DEC-259). |
-| `size/xl` · `size/xl` · `size/2xl` · `chip/count-radius` · `radius/xs` · `chip/count-inset` · `space/xs` · `space/xs` | 16 · 16 · 20 · 3 · 4 · 3 · 4 · 4 | như web | Badge: ô đếm cao SM · MD · LG; bo ô đếm; khi có ô đếm lề phải thu về 3 (SM) · 4 (MD, LG) để ô cách đều trên, dưới, phải; Count Only đệm trái khung số 4 để số cách đều hai bên (DEC-303, DEC-310) |
+| `size/xl` · `size/xl` · `size/2xl` · `radius/xxs` · `radius/xs` · `chip/count-inset` · `space/xs` · `space/xs` | 16 · 16 · 20 · 2 · 4 · 3 · 4 · 4 | như web | Badge: ô đếm cao SM · MD · LG; bo ô đếm; khi có ô đếm lề phải thu về 3 (SM) · 4 (MD, LG) để ô cách đều trên, dưới, phải; Count Only đệm trái khung số 4 để số cách đều hai bên (DEC-303, DEC-310) |
 | `avatar-label/width` | 240 | 240 | Avatar label: rộng mặc định, tên và dòng phụ cắt "…" (DEC-303) |
 | `chip/count-font-size` · `chip/count-line-height` · `avatar-label/subtitle-size` · `avatar-label/subtitle-line-height` | 12 · 16 · 12 · 16 | 12 · 16 · 12 · 16 | Chữ số đếm Badge và dòng phụ Avatar label cố định 12/16 cả web và app — không theo `type/caption` (app 13/18) để giữ nhóm A cùng số đo (DEC-304) |
 | `avatar/size/xs · sm · md · lg · xl · xxl` | 24 · 32 · 36 · 48 · 64 · 88 | 24 · 32 · 36 · 48 · 64 · 88 | Cỡ avatar thang XS–XXL (DEC-201, DEC-203; thêm SM 32 và đổi tên sm → xs, DEC-303); MD 36 khớp ô đầu dòng 36 (DEC-164); XL, XXL cho ảnh đại diện đổi được |
@@ -89,7 +90,7 @@ links:
   `tab/padding-x-icon`, icon → nhãn `control/icon-gap`, nhãn → số đếm 6 (`space/6`), các tab cách `tab/gap`. Tab gạch web
   cao 40 (`control/height/lg`), chữ canh giữa, gạch 2 phủ hết bề ngang tab.
 - **Ô có icon (DEC-192, DEC-193, DEC-196):** web phía icon 12 → 8 (icon đầu, icon cuối), icon 14 cách chữ 8. App icon đầu:
-  khung icon 16 chạm mép nội dung (cách mép ô 16), chữ cách icon 16 → K3 64 (ô ở K1) hoặc K4 80 (ô đặt trong thẻ). Icon cuối
+  khung icon 16 (icon 14 canh giữa khung từ DEC-329, K không đổi) chạm mép nội dung (cách mép ô 16), chữ cách khung 16 → K3 64 (ô ở K1) hoặc K4 80 (ô đặt trong thẻ). Icon cuối
   ô theo đường K bên phải (mục 7). Nút lọc trong ô tìm giữ ôm sát (DEC-165 luật 3: lề 4, bo đồng tâm).
 - **Thẻ chọn app (DEC-184, DEC-196):** lề 16; radio 20 chạm mép nội dung (cách mép thẻ 16), chữ cách radio 12 → K3 64.
 - **Khối phụ trong thẻ, khối tóm tắt trong sheet (DEC-194):** nền `color/bg/secondary`, bo `radius/inner`, lề

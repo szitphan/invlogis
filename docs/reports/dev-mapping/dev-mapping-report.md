@@ -1,7 +1,7 @@
 ---
 type: report
 status: draft
-updated: 2026-10-25
+updated: 2026-10-26
 links:
   - .claude/rules/test-trace.md
   - .claude/scripts/dev-scan.mjs
@@ -9,6 +9,9 @@ links:
 ---
 
 # Đề nghị cho đội dev — để BA nối yêu cầu → endpoint/màn/DB → test và chạy test tự động
+
+> **Trạng thái: đề xuất, chưa giao dev (26/10/2026).** Framework kiểm thử chạy được mà không cần các việc
+> dưới đây; Mục 8 "Khi dev chưa làm" ghi cách xoay xở. Khi dev nhận việc nào, cập nhật cột Xong khi.
 
 **Vì sao có file này.** BA đang dựng bộ kiểm thử cho DEV: mỗi yêu cầu (FR/AC) có checklist, test case,
 rồi máy sinh test API (Bruno), web (Playwright) và app (Maestro). Máy sinh chỉ chạy được khi repo dev có
@@ -452,3 +455,17 @@ bản 25/10. Việc dev-scan chưa đo được thì BA chạy lệnh ở cột 
 | DM-SEC-* | `git ls-tree` / grep tên khoá (không in giá trị) | còn đủ |
 
 Mỗi lần quét, BA ghi bảng mốc mới vào cuối file này và báo đội dev mục nào đã đạt.
+
+## 8. Khi dev chưa làm
+
+| Việc đề xuất | Framework xoay xở bằng |
+|---|---|
+| DM-BE-01 seed dữ liệu test | Bước setup trong Bruno tự tạo dữ liệu qua API, tiền tố `QA-`. Cây dầu nội bộ, định mức trên UAT phải có sẵn — BA kiểm tay một lần |
+| DM-BE-02 xuất OpenAPI | `.claude/scripts/dev-scan.mjs` đọc thẳng controller trong code |
+| DM-BE-03 gắn mã yêu cầu vào test, OpenAPI | BA tự giữ bảng nối mã FR ↔ AC ↔ CD, lấy từ dữ liệu `dev-scan` (`be-acs.json`, `jira-keys.json`) |
+| DM-BE-05, DM-BE-09 Bruno của dev | `bruno-runner.mjs` tự sinh bộ riêng (`docs/{feature}/test/api/bruno-api/`), đăng nhập kênh Mobile |
+| DM-FE testid, `<label for>` | Playwright tìm theo placeholder, khối `label-item`, chữ hiển thị |
+| DM-APP Semantics, deep link | Maestro tìm theo chữ hiển thị, đi từ màn đăng nhập |
+| DM-SEC bảo mật | Người dùng tự báo hoặc tự xử lý |
+
+Hệ quả: tìm theo chữ dễ vỡ khi dev đổi câu chữ → mỗi bản build mới cần sinh lại test và chạy thử.

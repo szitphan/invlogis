@@ -99,6 +99,7 @@ Ghi nhóm ở dòng meta đầu md.
 ## Bước 1 — đọc trước, hỏi sau
 
 1. `figma_status` → plugin, file, trang đang mở. Rồi `figma_docs` bản cheat + recipes (xem đầu file).
+   DS v2: đọc thêm `design-system/foundations/motion.md` mục 10.3, 10.11, 10.12 để biết component này phải chạy thế nào.
 2. Đọc `design/design.md` theo mục (cách đọc: `.claude/rules/design-system.md` § Nguồn duy nhất):
    * `Grep -n "^## \|^### "` lấy mục lục; Read từng mục bằng offset/limit.
    * **Luôn đọc:** Typography › Principles, Tên trong Figma, Do's and Don'ts, Iteration Guide,
@@ -334,6 +335,8 @@ rộng của từng khối) vẫn áp. Dựng bằng `figma_write`; phần proxy
 
 Kiểm bằng dữ liệu trước, ảnh chụp sau. **Lớp máy** (lỗi chặn sửa hết trước khi sang phần tự rà):
 
+0. DS v2: đổi trạng thái đã gắn chuyển động theo `motion.md` mục 10.12 (`figma_read prototype_audit`, hoặc đọc `reactions`); Smart Animate đúng thời gian và đường cong token, không để `transition` rỗng. Thứ Figma không chạy được thì ghi trong spec cho dev, không vẽ giả.
+
 1. Số liệu trả về: số biến thể, tên thuộc tính (`wired` / `skipped` của từng thuộc tính), kích thước
    từng biến thể, mọi kết quả `stuck`. `getNodes` **không** trả `componentPropertyReferences` —
    kiểm liên kết bằng `wired`, hoặc đặt một instance rồi `setInstanceProperties` thử.
@@ -411,6 +414,8 @@ Sửa **tại chỗ** để giữ liên kết instance:
   Đang review → Ổn định → Ngừng dùng.
 
 ## Bước 9 — báo cáo và cập nhật tài liệu
+
+DS v2: đổi trạng thái dòng của component trong `motion.md` mục 10.12 thành `✅ đã gắn`; component chưa có dòng thì thêm dòng.
 
 ```
 Đã dựng "<Tên>" trong <file>, trang <trang> (node <id khung>):
@@ -571,7 +576,7 @@ User báo đã chọn → `ArtifactData list answers` → ghi `answers.json` →
   phần tử ngoài component (`data-cmp`, `data-show`/`data-any` theo phương án hay trạng thái, bảng biến thể) → `cssScreen`;
   (2) `ds-foundation-check.py … --declare` — gắn `sel` (một ứng viên, hoặc trùng bộ chọn đã gắn cho cùng phần), khai tự
   động giá trị trần còn lại (`"auto": true`, tên phần lấy theo bộ chọn đã học), bỏ dòng auto trùng dòng gốc; (3) dòng còn
-  mơ hồ gắn tay; dòng không có trên CSS preview (vd bóng elev, độ đậm trong shorthand) ghi `noOverride: true` + `why`;
+  mơ hồ gắn tay; dòng không có trên CSS preview (vd shadow, độ đậm trong shorthand) ghi `noOverride: true` + `why`;
   (4) đặt tên phần dễ đọc cho dòng auto còn mang tên bộ chọn; (5) so ảnh tab 2 trước/sau phải giống từng điểm ảnh.
 * **Component khung → A7 trên preview** trước khi dừng chờ duyệt: chụp màn demo Web bằng Playwright/Chrome, hộp vùng lấy
   bằng `getBoundingClientRect` → `attention-audit.py --image --regions`. FAIL thì sửa preview trước — bắt lỗi khung nặng
@@ -706,6 +711,7 @@ một agent (luật không ghi song song).
 ### Luật cứng
 
 * Không dựng khi chưa có spec đã duyệt trong `design.md` (DS v2: md ở `design-system/components/`).
+* DS v2: component vẽ cùng chuyển động của nó, không để làm sau (`motion.md` mục 10.12).
 * Không tạo component trùng cái thư viện đã có; không vẽ lại control; không sửa main component
   của thư viện.
 * Không mã màu/cỡ/khoảng cách cứng khi đã có token.

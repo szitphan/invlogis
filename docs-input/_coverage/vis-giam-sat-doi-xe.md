@@ -18,7 +18,7 @@ Bản 18/10 (2026-10-19): sổ dựng lại theo số mục mới (xem bảng Đ
 | 2.2.6 Giám sát lộ trình và ghi nhận tránh trạm vé | ✅ | `docs/transport-dispatch/brainstorms/transport-dispatch.md` E7, E9, E10, F8, I7, I8; `docs/vehicle-telematics/brainstorms/vehicle-telematics.md` T1 | |
 | 3.1 Quản lý tự động vé cầu đường (Toll fee) | ✅ | `docs/transport-dispatch/brainstorms/transport-dispatch.md` I7, I8, I10, OQ-49, OQ-50, OQ-51 | |
 | 3.1.2 Quản lý chi phí tập trung | ➖ | | tài khoản mẹ VETC và Vietcombank tự nạp cài ở ngân hàng, ngoài phần mềm, Riêng Delta (`vehicle-telematics` Mục 2) |
-| Bước 4 - Đối soát hóa đơn cuối kỳ | ➡ invoice-management | | cuối kỳ chỉ kiểm phát sinh: vé mồ côi, trạm "Chờ VETC", khớp tổng hoá đơn (BL-164) |
+| Bước 4 - Đối soát hóa đơn cuối kỳ | ✅ | `docs/invoice-management/brainstorms/invoice-management.md` B12, OQ-7 | cuối kỳ chỉ kiểm phát sinh: vé mồ côi, trạm "Chờ VETC", khớp tổng hoá đơn (BL-164) |
 | 3.2 Quản lý cấp đổ và đối soát dầu thực tế (Diesel) | ➡ fuel-issuing | | trước là 3.6; luồng, bảng tình huống, đề xuất đã chốt ở sổ phỏng vấn; câu hỏi mở `vehicle-telematics` OQ-11, OQ-13, OQ-14 (BL-152) |
 | 3.3 Cấp bù nhiên liệu do biến cố ngoại lộ trình | ✅ | `docs/transport-dispatch/brainstorms/transport-dispatch.md` I3, I4, I5, I6 | |
 | 3.3.1 Quy trình xác định lượng dầu hao phí do tắc đường (Traffic jam) | ✅ | `docs/transport-dispatch/brainstorms/transport-dispatch.md` I3, I4, OQ-52; `docs/vehicle-telematics/brainstorms/vehicle-telematics.md` S2, S4, OQ-12 | trước là 3.2; định mức l/giờ ở `fuel-allowance` (BL-162) |

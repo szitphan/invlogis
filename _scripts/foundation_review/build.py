@@ -23,7 +23,7 @@ TOK = set(re.findall(r"(--[\w-]+)\s*:", kit.TCSS))
 DECS = set(re.findall(r"^\| (DEC-\d+) ", (ROOT / "_workspace/decisions.md").read_text(), flags=re.M))
 TJ = json.loads((ROOT / "design-system/tokens.json").read_text())
 # tiền tố token viết trong <code>: có dấu / thì phải tồn tại, trừ khi item khai là token đề xuất
-TOKEN_RE = re.compile(r"<code>((?:color|space|radius|layout|elev|icon|size|control|width|type|font-size|line-height|focus|blur|grid|container|invlogis|innvie)/[\w/.\-]+)</code>")
+TOKEN_RE = re.compile(r"<code>((?:color|space|radius|layout|shadow|icon|size|control|width|type|font-size|line-height|focus|backdrop-blur|grid|container|invlogis|innvie)/[\w/.\-]+)</code>")
 UNTITLED_NS = re.compile(r"^(spacing|radius|shadow|focus-ring|backdrop-blur|container|width|font)-")
 
 
@@ -56,8 +56,14 @@ def check_spec(spec, html_):
     if not spec.get("screens"):
         fail.append("thiếu screens (màn thật), trừ khi trang logo khai screens riêng")
     secs = " ".join(s["title"] for s in spec.get("sections", []))
-    if "Untitled" not in secs:
-        fail.append("thiếu section bảng đối chiếu có chữ 'Untitled' trong tiêu đề")
+    if not any(x["title"].startswith("Bảng đối chiếu") and "Untitled ↔ mình" in x["title"] for x in spec.get("sections", [])):
+        fail.append("thiếu section 'Bảng đối chiếu … Untitled ↔ mình'")
+    if not any(x["title"].startswith("Đã chốt, không mở lại") for x in spec.get("sections", [])):
+        fail.append("thiếu section 'Đã chốt, không mở lại' (DEC đang hiệu lực của mục này)")
+    if not any(x["title"].startswith("Bộ chung đề xuất") for x in spec.get("sections", [])):
+        fail.append("thiếu section 'Bộ chung đề xuất'")
+    if not all(k in spec.get("final", "") for k in ("tokens.json", "tokens.css", "Figma", "DEC")):
+        fail.append("câu final phải nêu tokens.json, tokens.css, biến Figma, ghi DEC")
     ids = [i["id"] for i in spec.get("items", [])]
     if len(ids) != len(set(ids)):
         fail.append("trùng id mục")
@@ -83,7 +89,7 @@ def check_spec(spec, html_):
         n = m.group(1).rstrip(".")
         if n in new_tokens:
             continue
-        if "--" + n.replace("/", "-") not in TOK and n.split("/")[0] not in ("type", "elev") and "*" not in n:
+        if "--" + n.replace("/", "-") not in TOK and n.split("/")[0] not in ("type",) and "*" not in n:
             fail.append(f"token không tồn tại (khai vào tokens của mục nếu là đề xuất): {n}")
     # DEC viện dẫn phải có thật
     for d in set(re.findall(r"DEC-\d+", text)):
@@ -139,8 +145,12 @@ def render_check(path, slug):
     for c in d["crFail"]:
         warn.append(f"tương phản dưới ngưỡng (nêu trong câu chữ nếu cố ý): {c}")
     SHOTS.mkdir(exist_ok=True, parents=True)
-    for name, w, h in (("web", 1280, 5000), ("mobile", 390, 5000)):
-        chrome(path.as_uri(), f"--screenshot={SHOTS / f'{slug}-{name}.png'}", f"--window-size={w},{h}")
+    chrome(path.as_uri(), f"--screenshot={SHOTS / f'{slug}-web.png'}", "--window-size=1280,5000")
+    # Chrome không giao diện không hẹp dưới 500px: bản mobile chụp qua iframe rộng 390
+    fr = SHOTS / f"{slug}-frame.html"
+    fr.write_text(f'<!DOCTYPE html><body style="margin:0"><iframe src="{path.as_uri()}" style="width:390px;height:5000px;border:0"></iframe>')
+    chrome(fr.as_uri(), f"--screenshot={SHOTS / f'{slug}-mobile.png'}", "--window-size=500,5000")
+    fr.unlink()
     return fail, warn
 
 

@@ -1,6 +1,6 @@
 # Quy chuẩn ảnh phương tiện — 2 mặt cắt, 1 hướng, 1 góc, 1 khung
 
-Lập 09/10/2026 theo yêu cầu user. Áp cho mọi ảnh trong `assets/vehicles/b-ai/`. Chưa gọi API.
+Lập 09/10/2026 theo yêu cầu user. Áp cho mọi ảnh trong `design-system/assets/vehicles/`. Chưa gọi API.
 
 ## 1. Hai mặt cắt bắt buộc cho mỗi phương tiện
 
@@ -136,7 +136,7 @@ User góp ý: thiếu tổ hợp với mooc khác (vd 40ft 3 giàn); ảnh "Mooc
 ## 14. Bản chốt (09/10/2026)
 
 - Đợt bù chạy xong (20 ảnh; 8 ảnh đầu bị 429 rồi chạy lại thành công). Xoay 3 ảnh từ trên (n05, n06, n08). Mọi ảnh -q/-s/-top cắt SÁT mép (không viền) để ghép đúng kích thước.
-- `vehicles-src/compose.py` ghép 18 tổ hợp với Hino → `assets/vehicles/b-ai/cb-{mooc}-{hàng}-t02-{s|top}.png`; sàn mooc đo theo hàng phủ > 50% chiều dài (bỏ qua vách chắn mooc sàn).
+- `vehicles-src/compose.py` ghép 18 tổ hợp với Hino → `design-system/assets/vehicles/cb-{mooc}-{hàng}-t02-{s|top}.png`; sàn mooc đo theo hàng phủ > 50% chiều dài (bỏ qua vách chắn mooc sàn).
 - Trang bản chốt: `vehicles-final.html` (danh mục 39 tên Q+S + sơ đồ lốp, dàn tỉ lệ thật, ma trận 18 tổ hợp ghép trong trình duyệt với ô chọn 5 đầu kéo, nút lật trái). Bản gửi: `vehicles-final-share.html`. Dựng lại: `python3 design/_lab/vehicles-src/build_final.py [--share]`.
 - Còn sai: **n10 AC990** vẫn ra 4 trục (cần 3: 2 lái + 1 tải) ở cả 2 mặt cắt; **n26-s C240** ra 2 trục (cần 3). Mooc 3 trục ở ảnh từ trên chỉ 2 trục (chấp nhận ở cỡ marker).
 - 09/10 sửa nốt bằng chế độ chỉnh ảnh (`gen_ai.py --edit`, lệnh trong EDITS, bản gốc lưu `raw/{tag}-before-edit.png`): n10-q, n10-s → 3 trục (2 lái + 1 tải); n26-s → 3 trục (1 lái + 2 tải). Đã dựng lại bản chốt + bản gửi. **Bộ ảnh đã đủ và đúng theo duyệt.**
@@ -150,7 +150,7 @@ User góp ý: thiếu tổ hợp với mooc khác (vd 40ft 3 giàn); ảnh "Mooc
 ## 16. Dọn kho (09/10/2026)
 - Tổ hợp kéo **tạm gác** theo user: bỏ mục tổ hợp khỏi trang bản chốt, bỏ compose.py, SUBJECT cb-*, ảnh combo/cb-*.
 - Đã dời ra ngoài dự án (kho tạm phiên): lab-vehicles.html/.js (SVG nháp), vehicle-mapping.html, ảnh không theo quy chuẩn (t0X.png, n*.png, -flash, -pro, -th, -xs, combo*), raw tương ứng, ảnh tổ hợp Flash bị loại.
-- Còn lại: `assets/vehicles/b-ai/` 77 ảnh (-q/-s/-top), `vehicles-src/` (gen_ai, vehlib, build_final, build_share, final-template, sizes.json, raw 77, usage.log). Trang: `vehicles-final(.html|-share.html)`, `tyre-mapping(.html|-share.html)` (đã chuyển sang ảnh -q, gán đúng tên theo duyệt).
+- Còn lại: `design-system/assets/vehicles/` 77 ảnh (-q/-s/-top), `vehicles-src/` (gen_ai, vehlib, build_final, build_share, final-template, sizes.json, raw 77, usage.log). Trang: `vehicles-final(.html|-share.html)`, `tyre-mapping(.html|-share.html)` (đã chuyển sang ảnh -q, gán đúng tên theo duyệt).
 - Việc sau: đưa mục 1 (danh mục 39 tên) + mục 2 (dàn tỉ lệ thật) lên Figma; tổ hợp kéo làm lại sau (Pro, khi có credit).
 
 ## 17. Đưa lên Figma (09/10/2026)

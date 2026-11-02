@@ -1,15 +1,15 @@
 {
- "tokens_version": "0.22.0",
+ "tokens_version": "0.26.0",
  "counts": {
-  "ok": 118,
-  "near": 18,
-  "new": 17,
+  "ok": 117,
+  "near": 12,
+  "new": 24,
   "conflict": 1,
   "undeclared": 0
  },
  "no_sel": 0,
  "off_page": 0,
- "open": 29,
+ "open": 30,
  "ignored": [
   {
    "sel": ".al",
@@ -72,8 +72,8 @@
   "grid": {
    "label": "Lưới & độ rộng",
    "total": 3,
-   "ok": 1,
-   "open": 2,
+   "ok": 0,
+   "open": 3,
    "audit": 0
   }
  },
@@ -86,7 +86,7 @@
    "size": "",
    "state": "",
    "theme": "Light",
-   "value": 400,
+   "value": 384,
    "sel": ".tz",
    "cssProps": [
     "width"
@@ -95,26 +95,19 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "ok",
-   "tokens": [
-    "width/sm"
-   ],
-   "bind": {
-    "token": "width/sm",
-    "css": "var(--width-sm)"
-   },
+   "cat": "new",
+   "tokens": [],
+   "bind": null,
    "to": null,
-   "visible": false,
+   "visible": true,
    "suggest": null,
    "rules": [],
-   "note": "",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
-   "must": false,
+   "must": true,
    "resolved": {
-    "kind": "token",
-    "token": "width/sm",
-    "css": "var(--width-sm)"
+    "kind": "pending"
    }
   },
   {
@@ -780,18 +773,14 @@
    "noOverride": true,
    "soi": null,
    "at": ".ts",
-   "cat": "near",
+   "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": {
-    "token": "layout/content-max-width",
-    "value": 393,
-    "css": "var(--layout-content-max-width)"
-   },
+   "to": null,
    "visible": true,
-   "suggest": "layout/content-max-width (393)",
+   "suggest": null,
    "rules": [],
-   "note": "trùng số với field/width-default, progress/width-default nhưng đó là token của component khác; thang chung gần nhất layout/content-max-width = 393",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "grid",
    "decided": false,
    "must": true,
@@ -1458,7 +1447,7 @@
    "size": "",
    "state": "",
    "theme": "Light",
-   "value": "elev/2",
+   "value": "shadow/xl",
    "sel": null,
    "cssProps": [
     "box-shadow"
@@ -1469,11 +1458,11 @@
    "at": ".ts",
    "cat": "ok",
    "tokens": [
-    "elev/2"
+    "shadow/xl"
    ],
    "bind": {
-    "token": "elev/2",
-    "css": "0px 4px 12px 0px var(--color-shadow-md), 0px 1px 3px 0px var(--color-shadow-md-soft)"
+    "token": "shadow/xl",
+    "css": "0px 20px 24px -4px var(--color-shadow-xl_01), 0px 8px 8px -4px var(--color-shadow-xl_02), 0px 3px 3px -1.5px var(--color-shadow-xl_03)"
    },
    "to": null,
    "visible": false,
@@ -1485,8 +1474,8 @@
    "must": false,
    "resolved": {
     "kind": "token",
-    "token": "elev/2",
-    "css": "0px 4px 12px 0px var(--color-shadow-md), 0px 1px 3px 0px var(--color-shadow-md-soft)"
+    "token": "shadow/xl",
+    "css": "0px 20px 24px -4px var(--color-shadow-xl_01), 0px 8px 8px -4px var(--color-shadow-xl_02), 0px 3px 3px -1.5px var(--color-shadow-xl_03)"
    }
   },
   {
@@ -2287,6 +2276,7 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_blur",
     "color/bg/primary",
     "color/bg/primary_alt"
    ],
@@ -3649,14 +3639,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `0 4px 12px rgba(16,24,40,.10),0 1px 3px rgba(16,24,40,.06)` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `0 4px 12px rgba(16,24,40,.10),0 1px 3px rgba(16,24,40,.06)` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*",
    "group": "effect",
    "decided": false,
    "must": true,
@@ -4176,18 +4166,14 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
+   "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": {
-    "token": "width/xl",
-    "value": 960,
-    "css": "var(--width-xl)"
-   },
+   "to": null,
    "visible": true,
-   "suggest": "width/xl (960)",
+   "suggest": null,
    "rules": [],
-   "note": "lệch 39",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "radius",
    "decided": false,
    "must": true,
@@ -4449,18 +4435,14 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
+   "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": {
-    "token": "width/xl",
-    "value": 960,
-    "css": "var(--width-xl)"
-   },
+   "to": null,
    "visible": true,
-   "suggest": "width/xl (960)",
+   "suggest": null,
    "rules": [],
-   "note": "lệch 39",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "radius",
    "decided": false,
    "must": true,
@@ -4553,18 +4535,14 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
+   "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": {
-    "token": "width/xl",
-    "value": 960,
-    "css": "var(--width-xl)"
-   },
+   "to": null,
    "visible": true,
-   "suggest": "width/xl (960)",
+   "suggest": null,
    "rules": [],
-   "note": "lệch 39",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "radius",
    "decided": false,
    "must": true,
@@ -4589,18 +4567,14 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
+   "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": {
-    "token": "width/xl",
-    "value": 960,
-    "css": "var(--width-xl)"
-   },
+   "to": null,
    "visible": true,
-   "suggest": "width/xl (960)",
+   "suggest": null,
    "rules": [],
-   "note": "lệch 39",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "radius",
    "decided": false,
    "must": true,
@@ -4921,6 +4895,7 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_blur",
     "color/bg/primary",
     "color/bg/primary_alt"
    ],
@@ -5114,6 +5089,7 @@
    "at": null,
    "cat": "ok",
    "tokens": [
+    "color/bg/primary_blur",
     "color/bg/primary",
     "color/bg/primary_alt"
    ],
@@ -5192,18 +5168,14 @@
    "noOverride": null,
    "soi": null,
    "at": null,
-   "cat": "near",
+   "cat": "new",
    "tokens": [],
    "bind": null,
-   "to": {
-    "token": "width/xl",
-    "value": 960,
-    "css": "var(--width-xl)"
-   },
+   "to": null,
    "visible": true,
-   "suggest": "width/xl (960)",
+   "suggest": null,
    "rules": [],
-   "note": "lệch 39",
+   "note": "thang chung gần nhất width/paragraph-max = 560 lệch quá xa, không kéo về được — chọn thêm token mới (giữ hình preview)",
    "group": "radius",
    "decided": false,
    "must": true,
@@ -5310,14 +5282,14 @@
    "tokens": [],
    "bind": null,
    "to": {
-    "token": "elev/1",
-    "value": "elev/1",
-    "css": "0px 1px 2px 0px var(--color-shadow-sm)"
+    "token": "shadow/xs",
+    "value": "shadow/xs",
+    "css": "0px 1px 2px 0px var(--color-shadow-xs)"
    },
    "visible": true,
-   "suggest": "elev/1 (elev/1)",
+   "suggest": "shadow/xs (shadow/xs)",
    "rules": [],
-   "note": "bóng tự do `0 0 0 4px color-mix(in srgb,var(--tbg) 45%,transparent)` — chọn elev/1…3 hoặc thêm effect style",
+   "note": "bóng tự do `0 0 0 4px color-mix(in srgb,var(--tbg) 45%,transparent)` — chọn shadow/xs · lg · xl theo vai hoặc bậc khác trong thang shadow/*",
    "group": "effect",
    "decided": false,
    "must": true,

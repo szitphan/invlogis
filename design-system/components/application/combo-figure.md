@@ -2,9 +2,9 @@
 type: design-component
 status: stale
 status_prev: draft
-updated: 2026-10-27
+updated: 2026-11-02
 links:
-  - design-system/foundations/misc-icon.md
+  - design-system/foundations/vehicle.md
   - design-system/components/application/combo-slots.md
   - design/_lab/lab-combo.html
   - _workspace/decisions.md
@@ -14,9 +14,9 @@ links:
 
 > Application · phiên bản 0.1.0 · Nháp · người phụ trách @szitphan · Figma `Combo Figure` (6806:16351), trang
 > DS · Application components, Section `Combo figure` 6807:110447, Demo 6807:110455 · lồng `Vehicle Image`
-> (6777:1914) View S · DEC-266, DEC-267, DEC-274
+> (6777:1914) View S · DEC-266, DEC-267, DEC-274, DEC-334
 
-Tổ hợp **hình ghép tỉ lệ thật** (cách A, `design-system/foundations/misc-icon.md` mục 5.4) từ ảnh mặt ngang: nhìn là biết dài ngắn,
+Tổ hợp **hình ghép tỉ lệ thật** (cách A, `design-system/foundations/vehicle.md` mục 5.4) từ ảnh mặt ngang: nhìn là biết dài ngắn,
 mấy container, mooc gì. Một component cho web và app.
 
 ## Web
@@ -43,9 +43,9 @@ mấy container, mooc gì. Một component cho web và app.
 | Trục | Giá trị |
 |---|---|
 | Config | No Trailer · Empty · 1×20 · 1×20 Center · 2×20 · 1×40 · 1×45 |
-| Scale | MD 16 px/m (`size/xl`: chi tiết, form) · SM 8 px/m (`size/md`: thẻ app, cột danh sách) |
+| Scale | MD 16 px/m (chi tiết, form) · SM 8 px/m (thẻ app, cột danh sách); hằng số `vehicles.json` → `scale_px_per_m`, không phải token (DEC-334 vh03) |
 
-14 biến thể; tổ hợp dài nhất (1×45) ≈ 297 × 80 ở MD.
+14 biến thể; tổ hợp dài nhất (1×45) ≈ 297 × 80 ở MD, dài 149 ở SM. Bảng 17 ca: `design-system/foundations/vehicle.md` Mục 5.3.
 
 ### Đổi phần
 
@@ -72,7 +72,12 @@ Demo `Chi tiết lệnh / Web` (A + Combo Slots), `Lệnh của tôi / Mobile` (
 ### Kiểm máy
 
 27/10: kiểm tên fail 0. Ảnh Vehicle Image S theo tỉ lệ thật (container 40/45, lạnh đã sửa chiều cao 27/10). Kiểm mất
-hình: chưa chạy. Dark: chưa điền giá trị Dark.
+hình: chưa chạy. 02/11: spec theo DEC-334, Figma chưa sync.
+
+### Dark
+
+Nét bao ảnh theo `design-system/foundations/vehicle.md` Mục 2.5. Nền khung `color/bg/secondary` ở Tối: chưa có số đo riêng cho
+Combo Figure, trang review chỉ đo ô ảnh.
 
 ## Mobile
 

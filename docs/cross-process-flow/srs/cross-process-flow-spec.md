@@ -1,7 +1,8 @@
 ---
 type: srs
 feature: cross-process-flow
-status: approved
+status: stale
+status_prev: approved
 status_changed: 2026-10-14
 status_reason: "chốt feature Liên quy trình"
 updated: 2026-10-12
