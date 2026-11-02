@@ -1527,7 +1527,7 @@ Màn hiện khi app web tải dữ liệu lần đầu (sau đăng nhập, mở 
 
 * **Khi nào hiện:** chỉ khi tải lâu hơn `duration-medium-max` (400ms); tải xong là tắt ngay, không chờ
   hết chuyển động. Chuyển trang trong app không dùng splash (dùng `Skeleton`).
-* **Bố cục:** nền trắng #FFFFFF. Logo khách (`P-logo`) giữa màn, cao 72px, **căn theo tâm phần chữ**:
+* **Bố cục:** nền trắng #FFFFFF. Logo khách (`P-logo`) giữa màn, cao 72px (logo Delta chỉ có ® nhỏ nên đặt cao 40px, giữ cỡ chữ cũ, DEC-325), **căn theo tâm phần chữ**:
   logo có ký hiệu lệch một phía (vd ® của Delta) thì bù vị trí để chữ vào giữa, ký hiệu nhô ra ngoài.
   Chân màn cách đáy 40px: "Được phát triển bởi" 13px `{colors.text-secondary}` + logo innvie cao 26px,
   **thẳng chân chữ** (baseline), không căn giữa theo khối logo.
@@ -1540,10 +1540,10 @@ Màn hiện khi app web tải dữ liệu lần đầu (sau đăng nhập, mở 
      theo mẫu P1), rồi vào màn đầu.
 * **`prefers-reduced-motion: reduce`:** bỏ mọi chuyển động, logo hiện tĩnh, tải xong chuyển thẳng.
 * **Khách chưa có logo:** dùng mặc định của `P-logo` (chữ cái đầu tên khách trên ô `P-mau-logo`), cùng chuyển động.
-* **Logo nền trắng (jpg):** chỉ đặt trên nền trắng để không lộ khung ảnh; xin khách bản PNG/SVG nền trong.
-* **Figma:** Sandbox, luồng prototype "Splash web (Delta)": `5562:103807` → `5562:103813` → `5562:103819`
-  → `5562:103825` → màn Astryx `5521:94959` (~4,3s). Bản HTML chạy lặp 5s: artifact "Splash screen web"
-  (https://claude.ai/artifact/YCTegmuAHnhkw9UY5DgY7J). Logo gốc Delta: `design/brand/delta/delta-logo-goc.jpg`.
+* **Logo theo nền:** nền sáng dùng tệp chính, nền Tối dùng bản nền tối của khách. Delta: `delta-primary.svg`, `delta-reverse.svg` (DEC-325).
+* **Figma:** DS · Application components › "Splash · chuyển động khi tải lần đầu" (`6782:139943`, 4 khung `6782:139944`, `…952`, `…960`, `…968`). Bản HTML chạy lặp 5s:
+  artifact "Splash screen web" (https://claude.ai/artifact/YCTegmuAHnhkw9UY5DgY7J). Bộ logo Delta: `design/brand/delta/logo/`,
+  trên Figma ở DS · Foundations › Logos › Logo khách (component `Delta logo`).
 
 ### Cây quy trình (CMP-09, component thật 12/10/2026)
 

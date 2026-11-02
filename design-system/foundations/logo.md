@@ -32,3 +32,5 @@ Collection `9. Brand · Invlogis` (DEC-261): `invlogis/*`, `innvie/primary`. Ch�
 ## 3. Logo khách hàng (tenant)
 
 Ô logo khách luôn đúng màu logo khách (`P-mau-logo`), không lấy từ dải màu khách ([color.md](color.md) mục 3.5).
+
+Delta có bộ logo đầy đủ ở `design/brand/delta/logo/`, quy định dùng ở `design/brand/delta/logo/logo-spec.md` (DEC-325). Figma: file invlogis, DS · Foundations › Logos › Logo khách, component `Delta logo` (`7118:1885`); `Company logo` và `Logo khách / Delta` dùng instance của nó.
