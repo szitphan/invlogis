@@ -623,3 +623,46 @@ Kết quả thấy được:
 Màn mới: inspection-inventory-adjustment-deduct — images/inspection-inventory-adjustment-deduct.jpg.
 Trả lời câu hỏi mở nào: FR-014 phần trừ kho.
 Dữ liệu TEST đã tạo: Part #9427430 TEST-NHAC-PT, tồn 7 ở TEST-KHO-02 (kho nhóm khác, không đụng phụ tùng của họ).
+
+# Lượt 5 (03/11)
+
+Giá trị cũ trước khi đổi: Settings > Reminders > Service Reminder Settings, ô "Forecasting" = **tắt** (`use_forecasted_dates_for_service_reminders` false). Mô tả: "Fleetio can use a vehicle's average daily usage to predict the date its Service Reminders will be due." Cùng trang có nút đỏ "Recalculate" ("This will recalculate all compliance history for all vehicles"), không bấm.
+
+## Forecast dự báo ngày đến hạn (FR-009) — Một phần (chưa thấy dự báo từ số km tự tính, đồng hồ phụ, thông báo)
+Các bước đã làm: Bấm "Enable Forecasting" trên danh sách: chỉ chuyển sang trang Service Reminder Settings, không bật gì. Tích "Forecasting", "Save Settings" → "Setting was successfully updated", không có hộp xác nhận, điều khoản hay phí. Trên TEST-DAUKEO-2 (đồng hồ 2.500 km) bỏ "Automatically calculate", nhập Average Usage per Day 100, 10, 50, 46; mỗi lần lưu rồi đọc danh sách và chi tiết. Đọc nhắc G trên TEST-XE-01. Thử Group Week, Month. Trả xe về tự tính, tắt Forecasting, đọc lại.
+Kết quả thấy được:
+- "Forecasting is enabled" trên chi tiết nhắc; nút "Enable Forecasting" biến mất khỏi danh sách. Cột Next Due đổi cách sắp mặc định sang theo ngày dự báo (`earliest_next_due_at_sort`, khi tắt là `next_due_with_variance`). Dòng phụ đổi: khi có dự báo hiện "... kilometers remaining" kèm icon lấp lánh; khi không có dự báo, nhắc có hạn thời gian hiện ngày thay cho số km (TEST-XE-01 Brake Pads: "4 weeks from now / 12/02/2026", mất dòng "989 kilometers overdue" dù vẫn Overdue).
+- Chi tiết nhắc có 2 cột: Scheduled Date (04/03/2027, 5 months) và Primary Meter (3,200 km, cờ xanh ở thuộc tính ưu tiên). Câu chữ: "Fleetio forecasts an approximate due date for each service reminder meter attribute. The priority attribute is the one that is due first or the most overdue."
+- Popover "Meter Forecast" bày công thức từng bước: Last Meter Entry 2,500 km, Avg. Daily Usage 10.0 kilometers/day ("How is this calculated?"), Meter Increase "1 day ago × 10.0 kilometers/day" = 0 kilometers, Current Meter 2,500 km, Relative to Due Meter "3,200 km - 2,500 km" = 700 kilometers remaining, Next Due "700 kilometers ÷ 10.0 kilometers/day". Có Meter Status riêng.
+
+### Bảng case đo
+| Case | Điều kiện | Kết quả thật |
+|---|---|---|
+| F1 | Usage 100, nhắc A, B còn 700 km, nhắc E còn 699 km | A, B "6 days from now", E "5 days from now"; cả 3 từ Upcoming sang **Due Soon**; tab Due Soon 8 → 11, Due Soon Vehicles 5 → 6 |
+| F2 | Usage 10 | "2 months from now", về Upcoming; Primary Meter vẫn cờ ưu tiên |
+| F3 | Usage 50 (700 ÷ 50 = 14 ngày, đúng ngưỡng Due soon threshold 2 weeks) | "2 weeks from now", **Due Soon** |
+| F4 | Usage 46 (15,2 ngày) | "2 weeks from now", **Upcoming** |
+| F5 | Nhắc E chỉ có chu kỳ km, không có ngưỡng thời gian | Vẫn đổi trạng thái theo cùng mốc ở F3, F4; không thấy ngưỡng ngày nào hiện trên nhắc này, cơ chế chưa rõ |
+| F6 | Usage 0 tự tính (TEST-DAUKEO-2) | Không có dự báo; nhắc có thời gian về ngày lịch (04/03/2027), nhắc chỉ km giữ "699 km remaining" |
+| F7 | TEST-XE-01 nhắc G: form Vehicle hiện Average Usage 120.8, tự tính | "Forecast not available", tooltip "The daily usage for this meter is zero. Add more meter entries (non-void) to enable forecasting." **Hai màn mâu thuẫn**; không rõ nguyên nhân, chưa lưu lại xe để thử vì xe dùng chung |
+| F8 | Nhắc chỉ km, xe Sample usage 0 | Không ngày, "145,825 miles remaining" |
+| F9 | Group Week / Month | Tiêu đề "This Week", "Next Week", dải ngày hoặc "This Month", "November 2026"; Group Week **ẩn cột Next Due** |
+| F10 | Group Week, nhắc không có dự báo (G, các nhắc Sample chỉ km) | Bị xếp vào **"This Week"** ở cuối danh sách dù còn xa hạn: dễ đọc nhầm |
+| F11 | Tick lại tự tính trên xe | Lúc lưu form vẫn hiện 46.0; sau lưu đọc lại 0.0, dự báo biến mất |
+| F12 | Tắt Forecasting | Về nguyên trạng ngay, nút "Enable Forecasting" hiện lại, Due Soon 8, Due Soon Vehicles 5 |
+
+Bất ngờ, lỗi, điểm khác tài liệu hãng:
+- **Dự báo đổi trạng thái thật**, không chỉ hiển thị ngày: đã kéo nhắc còn 700 km (ngưỡng 500 km) sang Due Soon qua ngưỡng 2 tuần. SRS hiện chỉ nói "ước tính ngày".
+- F1: 700 km ÷ 100 = 7 ngày nhưng hiện 6 ngày; 699 km hiện 5 ngày: chênh theo cách làm tròn hoặc mốc tính, chưa xác định (Last Meter Entry "1 day ago").
+- Meter Increase "1 day ago × 10" lại ra 0 km: câu chữ và số không khớp.
+- Group Week, Month chỉ có khi bật Forecasting; khi tắt menu Group chỉ còn None, Vehicle (đã đọc lại sau khi tắt).
+- Chưa đo: dự báo từ usage tự tính thật, đồng hồ phụ, thông báo Due Soon sinh ra do dự báo (không gửi ra ngoài), "How is this calculated?".
+Màn mới: reminder-forecast-next-due-popover — images/reminder-forecast-next-due-popover.jpg — danh sách có icon dự báo, popover Next Due 2 thuộc tính. reminder-forecast-meter-popover — images/reminder-forecast-meter-popover.jpg — chi tiết nhắc 2 cột, popover Meter Forecast đủ công thức. reminder-forecast-group-week — images/reminder-forecast-group-week.jpg — danh sách nhóm theo tuần, ẩn cột Next Due. reminder-forecast-not-available — images/reminder-forecast-not-available.jpg — "Forecast not available" + tooltip.
+Trả lời câu hỏi mở nào: FR-009 phần "Docs"; C116 trong spec nay chạy được. Không có OQ riêng trong Mục 12 cho dòng này.
+Dữ liệu TEST đã tạo: không tạo bản ghi. Sửa tạm rồi trả về: Forecasting; usage TEST-DAUKEO-2. Xem panel 1 nhắc Sample (không sửa).
+Cài đặt: cũ tắt → đã trả về tắt, đọc lại sau tải trang (`reloaded: false`). TEST-DAUKEO-2: cũ tự tính, 0,0 → đã trả về, đọc lại (`0.0`, tự tính true, ô khoá). Danh sách nhắc khớp số trước khi đổi.
+Giải pháp đáng học:
+- Popover hiện đủ phép tính từng bước: người dùng tự kiểm được vì sao ra ngày đó. Đáng học cho đầu kéo, mooc khi dự báo bảo dưỡng theo km.
+- Bật một công tắc, tắt lại không mất dữ liệu: thử an toàn, khác hẳn đổi phương pháp tính giá.
+- Cho nhập tay số km ngày cho xe mới chưa đủ đồng hồ.
+Điểm yếu: dự báo âm thầm đổi Due Soon, có thể làm đầy hàng việc khi số km ngày nhập sai; nhóm "This Week" chứa nhắc không có ngày; form Vehicle và nhắc nói khác nhau về số km ngày (F7).

@@ -383,3 +383,22 @@ flowchart TD
 ```
 
 Đã lọc Vendor (1 phiếu), Fuel Capacity Alert (2 phiếu), Personal (1 phiếu), theo xe (F16, F19, F20, F22). Nhóm OR thứ 4 chưa thử; Fleetio: tối đa 3 theo câu trên panel. Trường thẻ có ở bộ lọc nhưng không có dữ liệu thẻ để lọc (F24).
+
+## Flow 14: Đổi phương pháp tính giá tồn (`Chạy` tới chọn radio, từ Activate là `Xem` câu chữ)
+
+```mermaid
+flowchart TD
+    A["Settings, Inventory Valuation Method, đang Static Pricing"] --> B["Chọn Average, FIFO hoặc LIFO, chưa lưu gì"]
+    B --> C["Hiện khối cảnh báo, ô tích, Activate xám"]
+    C --> D{"Đi tiếp"}
+    D -->|"Tải lại, không bấm"| E["Vẫn Static Pricing"]
+    D -->|"Dọn dữ liệu, theo câu chữ"| F{"Đủ điều kiện"}
+    F -->|"Thiếu Unit Cost hoặc còn lệnh dở"| G["E-035 Không kích hoạt được, sửa phụ tùng hoặc Parts Import, hoàn thành lệnh"]
+    G --> F
+    F -->|"Đủ"| H["Tích ô nhận thức, Activate, chưa chạy"]
+    H --> I["Tồn nhận giá Unit Cost, tồn Archived về 0, không đảo được theo câu chữ"]
+    E --> KetThuc["Kết thúc"]
+    I --> KetThuc
+```
+
+Đường chạy thật chỉ là A, B, C, E (K30, K37). FIFO, LIFO, Average chưa đo giá xuất kho (OQ-11). Không có bản xem thử.

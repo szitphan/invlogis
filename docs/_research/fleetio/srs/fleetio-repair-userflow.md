@@ -27,6 +27,7 @@ flowchart TD
     dm["2.9 Menu tạo lệnh từ nháp"]
     wd["2.10 Lệnh tạo từ nháp"]
     sh["1.8 Giới thiệu mạng lưới xưởng"]
+    den["1.15 Bật mạng lưới xưởng bị từ chối"]
     cld["1.4 Hộp đóng sự cố"]
     cl["1.5 Sự cố, Đã đóng"]
     rnd["1.6 Hộp xử lý kèm ghi chú"]
@@ -71,7 +72,12 @@ flowchart TD
     ws["6.5 Bảo hành chuẩn, 6.6 Mã phân loại"]
     wl["6.7 Danh sách bảo hành"]
     vw["6.8 Tab bảo hành của xe"]
+    tl["6.9 Danh sách mẫu bảo hành"]
+    tp["6.10 Xem trước mẫu riêng"]
+    to["6.11 Xem trước mẫu hãng"]
+    tc["6.12 Hộp đổi mẫu"]
     ms["7.1 Cài đặt bảo dưỡng"]
+    st["7.2 Danh mục trạng thái lệnh"]
     z["Xong"]
     menu -->|"Sự cố"| a
     menu -->|"Lệnh sửa chữa"| e
@@ -86,7 +92,8 @@ flowchart TD
     e3 -.->|"Điền tiếp"| n
     b -->|"Xử lý"| rm
     b -->|"Sự cố đã gắn lệnh"| lockm
-    lockm -->|"Nháp lệnh sửa chữa, lượt 3 xám trên #45"| dr
+    lockm -->|"Nháp lệnh sửa chữa, lượt 3 và 5 xám trên #45, #46"| dr
+    lockm -->|"Xưởng ngoài"| sh
     lockm -.->|"Đóng menu"| b
     rm -->|"Nháp lệnh sửa chữa"| dr
     dr -->|"AI xong"| dy
@@ -104,6 +111,8 @@ flowchart TD
     rn -.->|"Mở lại"| b
     rm -->|"Xưởng ngoài"| sh
     sh -.->|"Đóng"| b
+    sh -->|"Bật, sang Fleetio Pay"| den
+    den -.->|"Mở lại mục, vẫn chưa bật"| sh
     rm -->|"Thêm vào phiếu dịch vụ"| sen
     sen -->|"Tiếp tục"| sef
     sef -->|"Lưu"| i
@@ -171,6 +180,15 @@ flowchart TD
     wl -->|"Thêm bảo hành"| wv
     wv -->|"Chọn xe"| w
     w -->|"Mẫu bảo hành"| wt
+    wt -->|"Xe km, mẫu riêng"| tp
+    wt -->|"Xe mi, mẫu hãng, chưa lưu"| to
+    tp -->|"Lưu"| wl
+    to -.->|"Huỷ"| wt
+    ms -->|"Cài đặt, Mẫu bảo hành"| tl
+    tl -->|"Sửa mẫu đã dùng"| tc
+    tc -->|"Áp tương lai hoặc cả quá khứ"| tl
+    ms -->|"Cài đặt, Trạng thái lệnh"| st
+    st -->|"Kết thúc"| z
     w -->|"Bảo hành chuẩn"| ws
     w -->|"Form đầy đủ"| wf
     wt -->|"Lưu"| wl
@@ -236,6 +254,12 @@ Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221224`, chỉ 
 | 4.2 | Luật mã lỗi | fault-rules | Có dữ liệu | Có |
 | 6.8 | Tab bảo hành của xe | vehicle-warranties-tab | Ba bảo hành | Có |
 | 2.19 | Bản in lệnh | wo-print-pdf | Trang 1, đã cắt đầu trang | Có |
+| 1.15 | Bật mạng lưới xưởng bị từ chối | shop-network-enable-denied | Access Denied | Có |
+| 6.9 | Danh sách mẫu bảo hành | warranty-template-list | Một mẫu | Có |
+| 6.10 | Xem trước mẫu riêng | warranty-template-preview | Hai coverage | Có |
+| 6.11 | Xem trước mẫu hãng | warranty-oem-template-preview | Xe Sample, chưa lưu | Có |
+| 6.12 | Hộp đổi mẫu | warranty-template-change | Chọn áp cả quá khứ | Có |
+| 7.2 | Danh mục trạng thái lệnh | wo-status-custom-list | Có hai trạng thái tuỳ biến | Có |
 
 Màn chưa có ảnh riêng: form sự cố, hộp thêm vào Service Entry, form Service Entry.
 
@@ -254,6 +278,9 @@ Màn chưa có ảnh riêng: form sự cố, hộp thêm vào Service Entry, for
 | In lệnh | 2.3 → 2.19 | Giờ PDF lệch ngày với web: E-fleetio-repair-028 |
 | Bảo hành | 6.7 → 6.3 → 6.1 → 6.4 hoặc 6.5, 6.6 → 6.7; 2.16 → 2.17 → 2.18 → 2.3; 2.17 → 6.8 | Xe không có Make, Model: "No options". Mã hệ thống không phủ assembly. Expired, Expiring Soon không gợi ý. End Date lệch: E-fleetio-repair-023. Thiếu đơn vị: E-fleetio-repair-024 |
 | Luật mã lỗi | 4.1 → 4.2; 7.1 → 4.2 | Mở hộp Add Fault Rule rồi Cancel, không lưu |
-| Cấu hình | 7.1 | Không đổi cài đặt |
+| Mẫu bảo hành | 7.1 → 6.9; 6.1 → 6.4 → 6.10 → 6.7; 6.9 → 6.12 → 6.9 | Xe mi: 6.11, chưa lưu. Start Meter khi gõ tự động: E-fleetio-repair-032, chưa kết luận |
+| Trạng thái lệnh tuỳ biến | 7.1 → 7.2 | E-fleetio-repair-029, 030, 031 |
+| Bật mạng lưới xưởng | 1.2 → 1.13 → 1.8 → 1.15 | E-fleetio-repair-033, vẫn chưa bật |
+| Cấu hình | 7.1 | Maintenance Settings không đổi |
 
 Soát theo vai trò: thiếu thao tác của Operator trên web vì lái xe dùng Fleetio Go; chưa xem app.

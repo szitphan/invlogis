@@ -64,7 +64,7 @@ stateDiagram-v2
 | Mọi trạng thái | Lưu form kèm nhóm Sample | Không đổi | Lỗi một trường | Cả form bị từ chối | "Vehicle could not be updated" | `Chạy` |
 | Mọi trạng thái | Archive, không có Lệnh chưa xong | Archived, Status giữ nguyên | Quyền `vehicles_archive_delete`; Operator không có | Ngắt liên kết, đóng phân công đang chạy, xoá phân công tương lai, rời lịch phân công | Hộp "Confirm Vehicle Archive" | `Chạy`, quyền `Xem` |
 | Mọi trạng thái | Archive, còn Lệnh mở | Không đổi | Lệnh Open | Bị từ chối nhưng VẪN ngắt liên kết hai phía (2/2 lần); phân công tương lai còn; không có lịch sử | "Vehicle could not be archived." | `Chạy` |
-| Mọi trạng thái | Archive, còn Motor Pool đang đặt | Không đổi theo câu trong hộp | Chưa tạo đặt xe | Chưa kiểm hiệu ứng | "Vehicles with active Motor Pool reservations cannot be archived." | `Xem` |
+| Mọi trạng thái | Archive, còn Motor Pool đang đặt | Không đổi theo câu trong hộp | Lượt 5 có pool, chưa tạo được đặt xe | Chưa kiểm hiệu ứng | "Vehicles with active Motor Pool reservations cannot be archived." | `Xem` |
 | Archived | Restore, gói còn chỗ | Trạng thái cũ | Bấm là chạy, không hỏi | Giữ trạng thái, đồng hồ, cấu hình trục; KHÔNG trả lại liên kết, phân công | "Record successfully restored!" | `Chạy` |
 | Archived | Restore, gói đầy | Không đổi | 5 of 5 | Nút khoá, bấm không có gì | Không có câu giải thích | `Chạy` |
 | Archived | Xem đồng hồ, cấu hình trục | Không đổi | — | Xem được, Edit trục khoá | — | `Chạy` |
@@ -165,6 +165,8 @@ Chỉ thấy Status "Active" và số đếm active, expiring soon, total. Khôn
 | Active | Gần hết hạn | Expiring soon | Ngưỡng chưa rõ | Đếm trên lệnh | "expiring soon" | `Xem` |
 | Active | Lệnh có Service Task cùng mã | Active | — | "Warranty Opportunities (1)" | "View Active Coverage" | `Chạy` |
 | Active | Claim | Chưa thử | — | — | — | Chưa chạy |
+| Active, sinh từ mẫu | Sửa mẫu, chọn áp về quá khứ | Active | Hộp "Template Change", lựa chọn 2 | End Date đổi theo mẫu; phần sửa riêng bị ghi đè theo câu cảnh báo | "1 asset with coverage … applied will be updated." | `Chạy`, ghi đè `Xem` |
+| Chưa có | Áp mẫu | Active, mỗi coverage một bảo hành | Có mẫu đúng điều kiện | Sinh nhiều bảo hành riêng | "Warranties have been successfully created" | `Chạy` |
 
 ## 6. Đối tượng không có trạng thái thật
 
@@ -175,7 +177,7 @@ Chỉ thấy Status "Active" và số đếm active, expiring soon, total. Khôn
 | Replacement Analysis | Máy tính, không lưu bản ghi theo xe | `Chạy` |
 | Liên hệ Operator | Là phân loại tick, không phải trạng thái | `Chạy` |
 | Recall | Có tab All, Needs Action, Open, Resolved, Acknowledged; chưa đổi thử trên Sample nên chưa biết luật chuyển | `Xem` |
-| Đặt xe Motor Pool | Có cột Status; danh sách rỗng, chưa chạy | `Xem` |
+| Đặt xe Motor Pool | Có cột Status; chưa tạo được đặt xe nào (lượt 5: không có Operator hợp lệ) nên chưa biết trạng thái, luật chuyển | `Xem` |
 | Lốp | Vị trí trên xe, không phải đối tượng riêng; xem `fleetio-tires` | `Chạy` |
 | Tài liệu đính vào xe | Có hoặc không, nhãn "Shared" chỉ loại tài liệu; gỡ đính chưa thử | `Chạy` |
 | Bộ lịch bảo dưỡng trên xe | Chỉ thấy trang rỗng khi xe chưa có bộ lịch; chưa gán để xem trạng thái | `Chạy` |

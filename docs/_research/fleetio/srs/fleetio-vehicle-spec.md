@@ -82,10 +82,10 @@ links:
 | FR-fleetio-vehicle-036 | Tự tính hạn bảo hành | End Date = Start Date + Coverage Duration; End Meter = Start Meter + Coverage Distance; Status "Active". Danh sách có số active, expiring soon, total. | P1 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` | Start 1 km, Coverage 50,000 km, End 50,001 km | Lấy |
 | FR-fleetio-vehicle-037 | Gắn mã bảo dưỡng vào bảo hành | Maintenance Categorization nhập mã hệ thống (VMRS), có Bulk Mode, Column Mode. | P1 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` | Nhập 013 hiện "1 - Chassis" › "013 - Brakes" | Lấy nguyên tắc, danh mục mã theo khách |
 | FR-fleetio-vehicle-038 | Cơ hội bảo hành trên lệnh | Khối "Warranty Opportunities" luôn hiện trên lệnh; Service Task trùng mã với coverage thì hiện "View Active Coverage" kèm Complaint, Cause, Correction. Khớp theo mã Service Task, không theo phụ tùng. | P1 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` | Lệnh #100 trước và sau "Brake Inspection"; nút claim chưa thử | Lấy, đáng học nhất nhóm này |
-| FR-fleetio-vehicle-039 | Mẫu bảo hành | Coverage Template "contain a collection of coverages based on manufacturer guidelines"; Settings › Warranty Templates rỗng. Xe không có Make, Model thì ô báo "No options"; quan hệ nhân quả chưa kiểm chứng. | P2 | [Cấu hình] | demo | `Xem` | `TEST-XE-01` | Để sau |
+| FR-fleetio-vehicle-039 | Mẫu bảo hành | Coverage Template "contain a collection of coverages based on manufacturer guidelines". Settings › Warranty Templates: Add, form Name, Meter Unit, Coverage Details đủ trường như bảo hành thường, "Save Warranty Template" xám tới khi có ít nhất 1 coverage; danh sách Name, Manufacturer, # Coverages, menu Edit, Duplicate, Delete. New Warranties có nhóm "CUSTOM TEMPLATES", "OEM TEMPLATES" và "Coverage preview". "No options" là do chưa có mẫu đúng điều kiện, không phải do thiếu Make. OEM: 14 mẫu xe con, không lọc theo Make, không có mẫu đầu kéo. | P2 | [Cấu hình] | demo | `Chạy` một phần lượt 5: Mẫu riêng, OEM đọc được; lựa chọn future chưa chạy | `TEST-XE-01`; lượt 5 chạy trên `TEST-SUA-01`, xem `run-notes/repair.md` | Lấy mẫu riêng theo khách; thư viện OEM không dùng được cho đầu kéo, mooc |
 | FR-fleetio-vehicle-040 | Công thức thay xe | Năm 1 tính khớp: nhiên liệu = giá lít / tiêu hao đổi ra km/lít; bảo dưỡng = chi phí năm / km năm; khấu hao Double Declining = giá mua × 2 / số năm / km năm. Phương pháp khác: Sum of Years. | P2 | [Gói: Bảo dưỡng đội xe] | phân tích | `Chạy`, `Suy` | Đối chiếu dữ liệu biểu đồ; các năm sau chưa kiểm | Để sau |
 | FR-fleetio-vehicle-041 | Recall | Danh sách tab All, Needs Action, Open, Resolved, Acknowledged; cột Issued At, Status, Issue, Manufacturer Campaign Number, NHTSA Campaign Number; khung Learn ghi nhập tự động từ NHTSA theo năm, hãng, đời. | P2 | [Gói: Bảo dưỡng đội xe] | demo | `Xem` | 261 dòng Sample, không đổi trạng thái | Nguồn NHTSA không áp được cho xe Việt Nam (`Suy`) |
-| FR-fleetio-vehicle-042 | Motor Pool | `motor_pool_reservations` rỗng, Add Vehicle Reservation; cột Motor Pool, Number, Operator, Vehicle Types, Vehicle, Pick Up, Drop Off, Status; quyền check_out, return, cancel. Phải tạo Motor Pool trong Settings trước. | P2 | [Gói: Bảo dưỡng đội xe] | demo | `Xem` | Không chạy: cấm đổi Settings, không có xe của nhóm | Để sau |
+| FR-fleetio-vehicle-042 | Motor Pool | `motor_pool_reservations` rỗng, Add Vehicle Reservation; cột Motor Pool, Number, Operator, Vehicle Types, Vehicle, Pick Up, Drop Off, Status; quyền check_out, return, cancel. Phải tạo Motor Pool trong Settings trước (FR-fleetio-vehicle-056); form đặt xe ở FR-fleetio-vehicle-057. Duyệt, gán xe, trạng thái đặt xe chưa chạy. | P2 | [Gói: Bảo dưỡng đội xe] | demo | `Chạy` một phần lượt 5: Cấu hình pool; đặt xe chưa tạo được | Lượt 5 đã tạo pool, chưa tạo được đặt xe; `run-notes/platform.md` | Để sau |
 | FR-fleetio-vehicle-043 | Quyền trên xe | Quyền con: create, edit, view_all, view_details, view_financial_info, view_custom_fields, export_data, update_status, manage_vehicle_assignment, archive_delete, view_documents, manage_documents, manage_photos. Record Set Vehicles: Assigned Vehicles Only, Full Access, No Access, User's Group Only, View Only. | P0 | [Lõi] | kiểm tra | `Chạy` | Chỉ đọc màn Role, xem chi tiết ở nhóm Nền tảng | Lấy cách tách quyền đổi trạng thái, xem tài chính |
 | FR-fleetio-vehicle-044 | Đồng hồ phụ | Add Secondary Meter trong Settings của form xe ("Track an additional meter, such as a concrete mixer, street sweeper, cleaning equipment, etc."), mặc định Hours, có Current Reading; Primary Meter chỉ Miles, Kilometers, Hours, không bỏ được. Bật xong đầu trang hiện 2 số, Overview thêm "Secondary Meter"; Add Meter Entry có 2 ô, mỗi ô có Void, "Last updated" riêng; bỏ trống Primary vẫn lưu được. Bật trên xe đang có số: số phụ bắt đầu "0 hr", đồng hồ chính không đổi; nhập từ phiếu kiểm ở `run-notes/reminders-inspection.md`. | P1 | [Cấu hình] | demo | `Chạy` lượt 3: Thêm đồng hồ phụ, nhập riêng, chuỗi riêng | Form xe, `TEST-XE-LOP`, `images/meter-bulk-void-secondary.jpg` | Hợp máy phát điện, xe nâng; mooc cần chế độ không đồng hồ |
 | FR-fleetio-vehicle-045 | Automation đổi trạng thái xe | Mẫu: In Shop khi sự cố từ kiểm tra; Active khi sự cố Resolved; đổi trạng thái khi tạo lệnh; Active khi lệnh Completed và Vehicle Incomplete Work Orders Count < 1. Đã chạy automation tự tạo trên `TEST-DAUKEO-2`: sửa trường bất kỳ cũng kích hoạt; Status Updates ghi "Fleetio Automation updated status from Active to Inactive"; người đổi ngược lưu được, khoảng 1 giây sau bị đổi lại, màn hình không báo. | P1 | [Cấu hình] | test | `Chạy` lượt 3: Automation tự đổi trạng thái xe, lật thao tác tay | Mẫu là `Xem`; lượt chạy ở `run-notes/platform.md`, chi tiết ở nhóm Nền tảng | Lấy dạng công tắc theo khách; báo khi luật ghi đè thao tác tay |
@@ -98,6 +98,9 @@ links:
 | FR-fleetio-vehicle-052 | Layout form theo tài khoản | Customize Layout đưa vào Settings › Standard Records › Vehicle › Layout: "System Default", 4 Sections, 104 Fields, All (25) loại xe, nút Add Layout. | P2 | [Cấu hình] | demo | `Xem` | Chỉ đọc; Add Layout là cài đặt cấp tài khoản, không thử | Cân nhắc layout theo loại xe |
 | FR-fleetio-vehicle-053 | Bộ lịch bảo dưỡng trên xe | More Actions › Manage Service Programs đi tới `vehicles/{id}/service_programs`. Xe chưa có bộ lịch: trang rỗng dạng quảng bá "Efficiently schedule and manage service needs for multiple vehicles", 4 gạch đầu dòng, nút "Create Service Program". Tab xe KHÔNG có nút gán bộ lịch sẵn có. | P2 | [Gói: Bảo dưỡng đội xe] | demo | `Chạy` phần mở, nút Create chưa bấm | `TEST-DAUKEO-2`, `images/vehicle-service-programs-empty.jpg` | Cho gán bộ lịch có sẵn ngay trên xe |
 | FR-fleetio-vehicle-054 | Đính tài liệu dùng chung | More Actions › Attach Shared Document, ô "Select Document" chỉ liệt kê tài liệu dùng chung (tên, loại, thời điểm sửa), nút khoá tới khi chọn; toast "Successfully attached shared document to vehicle." Panel Documents hiện thẻ tệp nhãn "Shared", ô kéo thả riêng cho tệp của xe. | P2 | [Lõi] | test | `Chạy` | `TEST-DAUKEO-2`, `images/vehicle-attach-shared-document.jpg` | Lấy cho giấy tờ dùng chung nhiều xe |
+| FR-fleetio-vehicle-055 | Áp và sửa mẫu bảo hành | Áp mẫu sinh mỗi coverage một bảo hành riêng; dòng preview có Edit, Edit Maintenance Codes, Delete để sửa riêng lần này; mã bảo dưỡng của mẫu tạo cơ hội trên lệnh. Sửa mẫu đã dùng hiện hộp "Template Change": "Apply to assets this template is added to in the future" (mặc định) hoặc "Apply to all historical and future assets with this template"; lựa chọn 2 báo số xe bị ảnh hưởng, ghi đè cả phần sửa riêng từng xe. | P2 | [Cấu hình] | test | `Chạy` phần áp, áp về quá khứ; lựa chọn "future", ghi đè phần sửa riêng chưa thử | `TEST-SUA-01`, `run-notes/repair.md` | Lấy cách chọn tương lai hay quá khứ, thêm so sánh trước sau |
+| FR-fleetio-vehicle-056 | Cấu hình Motor Pool | Settings › Motor Pools › Add: Name, Groups, Vehicle Types, Vehicle Statuses (mặc định Active) bắt buộc; "Automatically calculate charges"; 'Require "Reason for Trip" field'; "Auto Approvals" có Time zone, Days, Start Time, End Time, Full day, Add Window. Settings còn Reservation Rates, Flat Fees. | P2 | [Gói: Bảo dưỡng đội xe] [Cấu hình] | demo | `Chạy` phần tạo pool; Auto Approvals, Rates, Flat Fees `Xem` | `TEST-NEN-POOL-01`, `run-notes/platform.md` | Lấy nếu làm đặt xe chung; không nên bắt buộc Groups |
+| FR-fleetio-vehicle-057 | Form đặt xe | Operator, Motor Pool, Reason for Trip, Pick Up, Drop Off; chọn pool thì thêm Vehicle Types chỉ gồm loại của pool. Người đặt chọn loại xe, không chọn xe cụ thể. Ô Operator chỉ hiện liên hệ có đăng nhập và phân loại Operator. | P2 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` một phần: kiểm tra form, chưa tạo được đặt xe | `run-notes/platform.md` | Lấy cách đặt theo loại xe; cho điều độ đặt hộ lái xe không có tài khoản |
 
 ## 4. Non-Functional Requirements (NFR)
 
@@ -153,6 +156,10 @@ links:
 | BR-fleetio-vehicle-038 | Đóng Lệnh bắt Started At, và theo cài đặt tài khoản bắt Starting Meter Entry, Odometer; đóng Lệnh tự sinh Service Entry. | [Cấu hình] | Đóng Lệnh | FR-fleetio-vehicle-021 | `Chạy` | "per your account settings"; chi tiết ở nhóm Sửa chữa |
 | BR-fleetio-vehicle-039 | Hộp đính chỉ nhận tài liệu dùng chung có sẵn, một tài liệu đính được vào số xe bất kỳ; tệp riêng của xe đi qua ô kéo thả ở panel Documents. | [Lõi] | Đính tài liệu | FR-fleetio-vehicle-054 | `Chạy` | "You may attach a shared document to any number of vehicles." Số xe nhiều chỉ là câu chữ |
 | BR-fleetio-vehicle-040 | Thêm đồng hồ phụ trên xe đang có số không đổi đồng hồ chính; số phụ bắt đầu từ 0 nếu không nhập Current Reading. | [Cấu hình] | Lưu xe | FR-fleetio-vehicle-044 | `Chạy` | `TEST-DAUKEO-2`, "Secondary Meter 0 hr" |
+| BR-fleetio-vehicle-041 | Ô Coverage Template chỉ hiện mẫu đúng điều kiện: mẫu riêng hiện trên xe cùng đơn vị đồng hồ, OEM không lọc theo Make. Xe km không thấy OEM, xe mi không thấy mẫu km. | [Cấu hình] | Chọn mẫu | FR-fleetio-vehicle-039 | `Chạy` phần thấy gì; lọc theo đơn vị đồng hồ `Suy` | Hai lần quan sát, chưa thử mẫu Miles trên xe mi |
+| BR-fleetio-vehicle-042 | Bảo hành sinh từ mẫu vẫn liên kết với mẫu: sửa mẫu, chọn áp về quá khứ thì bảo hành đã sinh đổi theo, kể cả phần sửa riêng theo câu cảnh báo. | [Cấu hình] | Sửa mẫu | FR-fleetio-vehicle-055 | `Chạy`; ghi đè phần sửa riêng `Xem` | End Date đổi theo khi Coverage 2 năm thành 3 năm |
+| BR-fleetio-vehicle-043 | Người được đặt xe phải vừa có đăng nhập vừa có phân loại Operator; không đặt hộ được người không có tài khoản. | [Gói: Bảo dưỡng đội xe] | Đặt xe | FR-fleetio-vehicle-057 | `Chạy` | Tooltip "...contacts with login access and operator classification are shown." Không liên hệ nào thoả cả 2 |
+| BR-fleetio-vehicle-044 | Motor Pool bắt buộc Groups, nên tài khoản không dùng nhóm xe không tạo được pool. Bật 'Require "Reason for Trip"' thì mọi đặt xe phải có lý do, kể cả khi sửa đặt xe cũ. | [Gói: Bảo dưỡng đội xe] [Cấu hình] | Tạo pool, đặt xe | FR-fleetio-vehicle-056 | `Chạy` | Câu "This field will be required on all reservations…" |
 
 ## 6. Error Matrix
 
@@ -171,9 +178,9 @@ links:
 | E-fleetio-vehicle-011 | Ngày giả điền sẵn | Start Date của chi phí định kỳ, bảo hành hiện chữ xám là placeholder, lưu báo "can't be blank" | minor | FR-fleetio-vehicle-018, FR-fleetio-vehicle-035 | Trông như đã điền | Gõ ngày. Không nên học | `Chạy` |
 | E-fleetio-vehicle-012 | Không phải Operator | "Contact must have operator classification to be assigned to vehicles" | minor | FR-fleetio-vehicle-011 | Câu dẫn ở khối xe trên trang liên hệ | Bật phân loại Operator | `Chạy` |
 | E-fleetio-vehicle-013 | Hộp nhập hiện số cũ | "Last updated: 5,000 km (Today)" khi xe đã 5.500; hộp "Save and Add Another" vẫn "No meter history" sau khi vừa lưu 100 km | minor | FR-fleetio-vehicle-013 | Thông tin gợi ý sai | Không nên học | `Chạy` |
-| E-fleetio-vehicle-014 | Start Meter lệch khi hiển thị | Nhập 1000, danh sách bảo hành ghi 1 km, End Meter 50,001 km | major | FR-fleetio-vehicle-036 | Chưa rõ do ô nhập hay định dạng | OQ-10 | `Chạy` |
+| E-fleetio-vehicle-014 | Start Meter lệch khi hiển thị | Nhập 1000, danh sách bảo hành ghi 1 km, End Meter 50,001 km. Lượt 5: gõ 2365, ô chỉ giữ "2", ra 2 km, End Meter 100.002 km, 2/2 lần | major | FR-fleetio-vehicle-036 | Lúc gõ ký tự đầu, dòng hiện thêm nút sao chép, ô mất tiêu điểm; không cảnh báo lệch với đồng hồ xe | Sửa lại số. Có thể do gõ tự động nhanh, chưa thử tay. OQ-10 | `Chạy` |
 | E-fleetio-vehicle-015 | Unvoid nhầm ghim đồng hồ | Sau khi Unvoid 20.000 các số thật sẽ bị "must be greater than" | major | FR-fleetio-vehicle-031 | Đồng hồ xe 20.000 | Void lại dòng đó (`Suy`) | `Chạy`, `Suy` |
-| E-fleetio-vehicle-016 | Không có mẫu bảo hành | Ô Coverage Template báo "No options" | minor | FR-fleetio-vehicle-039 | Ô chọn rỗng | Nhập tay Standard Warranty | `Chạy` |
+| E-fleetio-vehicle-016 | Không có mẫu bảo hành | Ô Coverage Template báo "No options" khi chưa có mẫu đúng điều kiện, không phải do thiếu Make | minor | FR-fleetio-vehicle-039 | Ô chọn rỗng | Tạo mẫu ở Settings › Warranty Templates, hoặc nhập tay Standard Warranty | `Chạy` |
 | E-fleetio-vehicle-017 | Lệch múi giờ phân công | Ngày gửi đi theo múi giờ thiết bị trong khi tài khoản đặt America/Chicago. Ngày đồng hồ cũng có thể lệch: dòng phiếu Fleetio Go ghi 11/02 so với giờ Việt Nam (`Suy`) | minor | FR-fleetio-vehicle-009 | Không báo trên ô ngày; đầu trang có dải "Your local timezone on your device (Asia/Saigon) does not match your user settings timezone in Fleetio (America/Chicago)." | OQ-13 | `Chạy` |
 | E-fleetio-vehicle-018 | Dòng định kỳ đúng hôm nay ở tab Future | Tab Past trống sau khi lưu dù dòng 03/11 đúng hôm nay, còn Cost of Ownership đã tính dòng đó | minor | FR-fleetio-vehicle-033, FR-fleetio-vehicle-034 | Hai nơi nói khác nhau | Không nên học | `Chạy` |
 | E-fleetio-vehicle-019 | Lý do Out of Sequence | Phiếu Fleetio Go 3.100 km: "Automatically voided because it is out of sequence and ahead of the conflicting meter by 601 kilometers"; nhập tay trên web cùng tình huống chỉ ra E-fleetio-vehicle-004, 005 | major | FR-fleetio-vehicle-014 | Void Status "Auto-Voided", Conflicting Entry 2.499 km, Conflict Status "601 kilometers ahead of"; dòng 2.499 km cờ đỏ; xe vẫn 2.999 km | Menu dòng có Edit, Unvoid, View Record History, Delete (chưa bấm). OQ-8 | `Chạy` |
@@ -189,6 +196,8 @@ links:
 | E-fleetio-vehicle-029 | Đóng Lệnh thiếu thông tin, số lệch | "Started At can't be blank", "Starting Meter Entry can't be blank (per your account settings)", "Odometer can't be blank (per your account settings)"; Start Odometer 4.928: "must be less than 100 or marked as void" | major | FR-fleetio-vehicle-032 | Lỗi ở trường, Lệnh chưa đóng | Nhập đủ, sửa số. Thử 90 thì qua | `Chạy` |
 | E-fleetio-vehicle-030 | Liên hệ không phải Operator trong ô gán | Gõ tên liên hệ chỉ phân loại Technician | minor | FR-fleetio-vehicle-011 | Chỉ có dòng "Create "…"", không báo lý do | Bật phân loại Operator ở liên hệ. Dễ tạo trùng liên hệ, không nên học | `Chạy` |
 | E-fleetio-vehicle-031 | Start Meter trống sau khi lưu | Form phân công đã điền sẵn 4.928, cột Start Meter sau đó trống | minor | FR-fleetio-vehicle-009, FR-fleetio-vehicle-029 | Không báo | Nguyên nhân chưa tách riêng | `Chạy` |
+| E-fleetio-vehicle-033 | Đặt xe thiếu dữ liệu | "must exist", "is required for this motor pool", "can't be blank" 2 lần, toast "Failed to create Reservation" | major | FR-fleetio-vehicle-057 | Lỗi ở trường, không tạo bản ghi | Nhập đủ | `Chạy` |
+| E-fleetio-vehicle-034 | Không có người để đặt xe | Ô Operator: "No results for 'TEST'", xoá tìm kiếm thì "No options" | major | FR-fleetio-vehicle-057 | Chỉ có tooltip nêu điều kiện | Cho liên hệ vừa có đăng nhập vừa là Operator | `Chạy` |
 | E-fleetio-vehicle-032 | Add Multiple khoá theo gói | Gói 5 of 5, tooltip cuối câu "...to add more Vehicles." (ghi chú không chép đủ câu) | minor | FR-fleetio-vehicle-002, FR-fleetio-vehicle-023 | Mục xám có khoá, bấm không mở form, không điều hướng | Nâng gói hoặc giải phóng chỗ | `Chạy` |
 
 ## 7. Success Criteria
@@ -232,11 +241,11 @@ Xem [[docs/_research/fleetio/srs/fleetio-vehicle-flows.md|Flows]], [[docs/_resea
 * [ ] OQ-7: Delta có cho một xe nhiều người lái theo ca không, và có chặn một người giữ nhiều xe cùng lúc không? — Nguồn khách: chưa có trong tài liệu khách gửi
 * [ ] OQ-8: Lý do Out of Sequence có chỉ xảy ra với nguồn không có người sửa (telematics, API) không? Một phần: phiếu Fleetio Go 3.100 km bị Auto-Voided Out of Sequence, lệch 601 km; nhập tay web bị chặn ở trường, app lưu rồi tự Void. Mới một ca, chưa thử telematics, API (`Chạy`). Thứ tự sự kiện chưa rõ: dòng xung đột 2.499 km ghi ngày sau dòng 3.100 km, nên chưa biết phiếu bị Void ngay lúc lưu hay lúc có số 2.499 km — Nguồn khách: không áp dụng
 * [ ] OQ-9: Ngưỡng cảnh báo "giá trị cao" trên app là bao nhiêu? — Nguồn khách: không áp dụng
-* [ ] OQ-10: Start Meter nhập 1000 mà hiện 1 km là do ô nhập hay định dạng? — Nguồn khách: không áp dụng
-* [ ] OQ-11: Đổi trạng thái thật, Archive và Restore xe, bản ghi trùng tên xe, Motor Pool chạy ra sao? Một phần (`Chạy` lượt 3): đổi trạng thái tự do, không ràng buộc; Archive, Restore xem Mục 13.10; trùng tên, VIN báo "has already been taken". Còn mở: Motor Pool đang đặt có chặn Archive thật không, mới có câu trong hộp thoại. — Nguồn khách: không áp dụng
+* [ ] OQ-10: Start Meter nhập 1000 mà hiện 1 km là do ô nhập hay định dạng? Một phần (`Chạy` lượt 5): do ô nhập, chỉ giữ ký tự đầu vì mất tiêu điểm, 2/2 lần; có thể do gõ tự động nhanh, chưa thử tay. — Nguồn khách: không áp dụng
+* [ ] OQ-11: Đổi trạng thái thật, Archive và Restore xe, bản ghi trùng tên xe, Motor Pool chạy ra sao? Một phần (`Chạy` lượt 3): đổi trạng thái tự do, không ràng buộc; Archive, Restore xem Mục 13.10; trùng tên, VIN báo "has already been taken". Motor Pool một phần (`Chạy` lượt 5): tạo được pool, form đặt xe đòi người vừa có đăng nhập vừa là Operator, không liên hệ nào thoả nên chưa tạo được đặt xe. Còn mở: duyệt, gán xe, trạng thái đặt xe, xe trong pool, tính phí, Auto Approvals; Motor Pool đang đặt có chặn Archive thật không, mới có câu trong hộp thoại. Khi chạy lại phải đóng Lệnh đang mở trước, nếu không không tách được nguyên nhân. — Nguồn khách: không áp dụng
 * [ ] OQ-12: Ô Starting Odometer, Ending Odometer có thêm ràng buộc theo ngày không? Bản 02/11 và 03/11 ghi khác nhau. Lượt 3: ô xám khi Start bằng thời điểm hiện tại lúc chưa chọn đủ, mở khi chọn ngày, có lần tự điền số hiện tại; chưa tách được quy luật. — Nguồn khách: không áp dụng
 * [ ] OQ-13: Giờ phân công lưu theo múi giờ nào khi thiết bị và tài khoản khác nhau? Lượt 3: dòng đồng hồ phiếu Fleetio Go cũng ghi lệch ngày so với giờ Việt Nam (`Suy`, chưa tách riêng). — Nguồn khách: không áp dụng
-* [ ] OQ-14: Sửa phân công đã qua, xoá phân công, nút claim bảo hành, Bulk Meter Management, điều kiện có Coverage Template chạy thế nào? Phần Bulk một phần: Void hàng loạt trên danh sách đã chạy, chưa đối chiếu có đúng tính năng hãng gọi tên đó, chưa có số GPS. Các phần khác còn mở. — Nguồn khách: không áp dụng
+* [ ] OQ-14: Sửa phân công đã qua, xoá phân công, nút claim bảo hành, Bulk Meter Management, điều kiện có Coverage Template chạy thế nào? Phần Bulk một phần: Void hàng loạt trên danh sách đã chạy, chưa đối chiếu có đúng tính năng hãng gọi tên đó, chưa có số GPS. Coverage Template một phần (lượt 5): "No options" do chưa có mẫu đúng điều kiện; lọc theo đơn vị đồng hồ là `Suy`. Các phần khác còn mở. — Nguồn khách: không áp dụng
 * [ ] OQ-15: Replacement Analysis có tự lưu khi đổi số không? Công thức các năm sau, Sum of Years, Optimal Replacement tính thế nào? — Nguồn khách: không áp dụng
 * [x] OQ-16: Một mooc gắn được nhiều đầu kéo không? Không chạy do hết chỗ xe. Trả lời: một mooc nối được nhiều xe, không có ngày hiệu lực, không chặn, không kiểm loại xe (`Chạy`) — Nguồn khách: chưa có trong tài liệu khách gửi
 * [ ] OQ-17: Delta có cần chặn gán tài xế, mở lệnh, nhập đồng hồ khi xe Sold, Out of Service không? Fleetio không chặn gì (`Chạy`). — Nguồn khách: chưa có trong tài liệu khách gửi
@@ -368,8 +377,20 @@ Xem [[docs/_research/fleetio/srs/fleetio-vehicle-flows.md|Flows]], [[docs/_resea
 |---|---|---|---|
 | Tạo | `TEST-XE-01`, 01/10/2026, 1 Years, 50000, mã 013 | "Warranties have been successfully created", Status "Active", End Date 10/01/2027 (giao diện ghi tháng trước) | `Chạy`, `images/warranty-list.jpg` |
 | End Meter | Start 1 km + 50,000 km | 50,001 km | `Chạy` |
-| Nhập 1000 hiện 1 km | Start Meter | Chưa rõ nguyên nhân | `Chạy` |
-| Mẫu | Xe không Make, Model | "No options" | `Chạy`, `images/warranty-new-template.jpg` |
+| Nhập 1000 hiện 1 km | Start Meter | Chưa rõ nguyên nhân ở lượt này; lượt 5 thấy ô chỉ giữ ký tự đầu | `Chạy` |
+| Gõ 2365 vào Start Meter | `TEST-SUA-01`, đồng hồ 2.365, 2/2 lần | Ô chỉ giữ "2", ra 2 km, End Meter 100.002 km, KHÔNG cảnh báo lệch với đồng hồ xe; chưa thử gõ tay | `Chạy` |
+| Mẫu, chưa có mẫu đúng điều kiện | Xe không Make, Model | "No options"; nguyên nhân không phải thiếu Make | `Chạy`, `images/warranty-new-template.jpg` |
+| Mẫu riêng trên xe km | `TEST-SUA-01` không có Make, mẫu Kilometers | Nhóm "CUSTOM TEMPLATES" có mẫu | `Chạy` |
+| Lưu mẫu chưa có coverage | Form New Warranty Template | "Save Warranty Template" xám | `Chạy` |
+| Xem trước mẫu | Chọn mẫu | "Coverage preview", mỗi dòng Edit, Edit Maintenance Codes, Delete | `Chạy` |
+| Áp mẫu 2 coverage | Save Warranties | "Warranties have been successfully created", sinh 2 bảo hành riêng | `Chạy` |
+| Mã bảo dưỡng theo mẫu | Coverage có mã 034-004 | Lệnh hiện thêm cơ hội của bảo hành sinh từ mẫu | `Chạy` |
+| Xe Sample có Make, chưa lưu | Freightliner Cascadia, mi | "OEM TEMPLATES" 14 mẫu xe con; KHÔNG lọc theo Make, KHÔNG có mẫu đầu kéo; KHÔNG thấy mẫu km riêng | `Chạy` |
+| Mẫu OEM 2025 Ford F-150 | Xem trước | Fleetio: Bumper to Bumper 3 năm 36.000 mi, Powertrain 5 năm 60.000 mi, còn dòng dưới chưa đọc hết | `Chạy` |
+| Xe km gặp OEM | `TEST-SUA-01` | KHÔNG thấy nhóm OEM; lọc theo đơn vị đồng hồ là suy luận từ 2 lần quan sát | `Chạy`, `Suy` |
+| Sửa mẫu đã dùng | Coverage 2 năm thành 3 năm | Hộp "Template Change" 2 lựa chọn, mặc định chỉ tương lai | `Chạy` |
+| Áp về quá khứ | Lựa chọn 2 | Báo "1 asset … will be updated", End Date đổi theo | `Chạy` |
+| Lựa chọn "future", ghi đè phần sửa riêng, xoá mẫu | | Chưa thử; ghi đè chỉ có câu cảnh báo; Delete không khoá dù mẫu đang dùng, không bấm | Không chạy |
 | Mã hệ thống | Nhập 000, 000-001, 013 | Nhận; 013 ra "013 - Brakes" | `Chạy`, `images/warranty-maintenance-codes.jpg` |
 | Lệnh có phụ tùng phanh, không có task | Lệnh #100 | KHÔNG gợi ý: "No vehicle warranty opportunities to show.", "No part warranty opportunities to show." | `Chạy`, `images/wo-warranty-before.jpg` |
 | Thêm task khớp mã | "Brake Inspection" | "Warranty Opportunities (1)", "View Active Coverage" | `Chạy`, `images/wo-warranty-opportunity.jpg` |
@@ -405,7 +426,16 @@ Xem [[docs/_research/fleetio/srs/fleetio-vehicle-flows.md|Flows]], [[docs/_resea
 | Quyền Archive | Role Operator | Operator không có `vehicles_archive_delete`, có `vehicles_update_status` | `Xem` |
 | Require Group | Settings | Khoá vì "all existing assets and contacts must be assigned a group" | `Xem` |
 | Recall | 261 dòng Sample | Chỉ đọc, không đổi trạng thái | `Xem`, `images/recalls-list.jpg` |
-| Motor Pool | Rỗng | Không chạy | `Xem`, `images/motor-pool-reservations.jpg` |
+| Motor Pool, danh sách đặt xe | Rỗng | Không có đặt xe nào | `Xem`, `images/motor-pool-reservations.jpg` |
+| Tạo pool | Group có sẵn, Semi Truck, Active, bắt buộc Reason | "Motor Pool was successfully created"; danh sách Name, # Groups | `Chạy` |
+| Bắt buộc lý do | Tick ô | "This field will be required on all reservations…" | `Chạy` |
+| Auto Approvals | Bật, không lưu | Time zone, Days, Start Time, End Time, Full day, Add Window; múi giờ chỉ dùng cho cửa sổ duyệt | `Xem` |
+| Chọn pool trong form đặt xe | Pool Semi Truck | Thêm Vehicle Types chỉ gồm loại của pool; Reason có dấu sao; KHÔNG chọn xe cụ thể | `Chạy` |
+| Ô Operator khi đặt xe | Gõ "TEST" | "No results for 'TEST'", xoá tìm kiếm "No options" | `Chạy` |
+| Đối chiếu liên hệ | Liên hệ TEST có Operator nhưng "No Access"; người đăng nhập không có phân loại | KHÔNG ai thoả cả 2 điều kiện | `Chạy` |
+| Submit đặt xe thiếu dữ liệu | Không Operator, Reason, ngày | E-fleetio-vehicle-033, không tạo bản ghi | `Chạy` |
+| Duyệt, gán xe, trạng thái đặt xe, xe trong pool, tính phí | Chưa tạo được đặt xe | Chưa chạy | Không chạy |
+| Reservation Rates, Flat Fees | Chỉ xem | Add Rate Table, Add Flat Fee, đều rỗng | `Xem` |
 
 ### 13.9 Đồng hồ phụ, giải mã VIN
 
@@ -443,7 +473,8 @@ Xem [[docs/_research/fleetio/srs/fleetio-vehicle-flows.md|Flows]], [[docs/_resea
 | Restore | Bấm | Chạy ngay, KHÔNG hỏi, "Record successfully restored!" | `Chạy` |
 | Sau Restore | Xem xe | Trạng thái, đồng hồ, cấu hình trục giữ nguyên; liên kết, phân công đã mất KHÔNG quay lại | `Chạy` |
 | Restore khi đầy gói | 5 of 5 | Nút khoá, bấm không có gì, KHÔNG có câu giải thích | `Chạy` |
-| Motor Pool chặn Archive | Chưa tạo đặt xe | Chỉ có câu trong hộp | `Xem` |
+| Motor Pool chặn Archive | Chưa tạo được đặt xe | Chỉ có câu trong hộp | `Xem` |
+| Archive xe có đặt chỗ, lượt 5 | `TEST-DAUKEO-2`, không có đặt chỗ, Lệnh #111 Open | KHÔNG bấm: không đo được gì, Lệnh Open sẽ làm Archive bị từ chối và ngắt liên kết. Khi chạy lại phải đóng Lệnh trước | Không chạy |
 
 ### 13.11 Overview, More Actions, nhóm xe
 
@@ -466,7 +497,7 @@ Xem [[docs/_research/fleetio/srs/fleetio-vehicle-flows.md|Flows]], [[docs/_resea
 | Import Vehicles, Import Meter Entries khi gói đầy | Menu "..." | Không khoá, chưa bấm | `Xem` |
 | Đồng hồ phụ trên xe đang có số | `TEST-DAUKEO-2` 2.199 km | Mặc định Hours, "Secondary Meter 0 hr", đầu trang 2 số | `Chạy` |
 | Sửa layout tài khoản, tạo Group, Export Data | Lượt 4 | Không làm: Settings, danh mục dùng chung, xuất dữ liệu | Không chạy |
-| Archive khi có đặt Motor Pool, số GPS khi đổi đồng hồ | Lượt 4 | Vẫn chặn: phải tạo Motor Pool trong Settings, cần tích hợp GPS | Không chạy |
+| Archive khi có đặt Motor Pool, số GPS khi đổi đồng hồ | Lượt 4 | Vẫn chặn: chưa có đặt xe (lượt 5 có pool nhưng không tạo được đặt xe), cần tích hợp GPS | Không chạy |
 | Menu Add theo nhiên liệu | Xe Gasoline, xe chưa có Fuel Type | Gasoline ẩn "Add Charging Entry"; chưa có Fuel Type thì có | `Chạy` |
 | Recalculate Fuel Entries, lượt 3 | 2 xe TEST không có Fuel Entry | KHÔNG có trong menu; lượt 4 thấy trên xe khác, xem OQ-20 | `Chạy` |
 | Chọn nhóm Sample | Georgia / Atlanta cho `TEST-DAUKEO-2` | "Selected group is a sample, and cannot be used with non-sample records.", "Vehicle could not be updated"; dấu đỏ ở mục Details dù đang đứng ở Lifecycle | `Chạy` |
@@ -493,3 +524,10 @@ Xem [[docs/_research/fleetio/srs/fleetio-vehicle-flows.md|Flows]], [[docs/_resea
 - Add Multiple khoá ngay từ menu khi gói đầy; dán nhiều dòng vẫn chưa chạy. Motor Pool chặn Archive, số GPS, Group mới, layout tài khoản vẫn bị chặn.
 
 Đã đưa vào: FR-fleetio-vehicle-002, 022, 044, 053, 054; BR-fleetio-vehicle-039, 040; E-fleetio-vehicle-032; OQ-19, 20, 22; Mục 13.11.
+
+## Phát hiện lượt 5 (03/11)
+
+- "No options" ở Coverage Template là do chưa có mẫu đúng điều kiện, không phải do thiếu Make. Mẫu riêng chạy được, sửa mẫu có lựa chọn áp về quá khứ.
+- Motor Pool tạo được, đặt xe chưa tạo được vì không có người vừa đăng nhập vừa là Operator. Ca Archive khi có đặt chỗ vẫn chưa chạy.
+
+Đã đưa vào: FR-fleetio-vehicle-039, 042, 055, 056, 057; BR-fleetio-vehicle-041 đến 044; E-fleetio-vehicle-014, 016, 033, 034; OQ-10, 11, 14; Mục 13.6, 13.8, 13.10.

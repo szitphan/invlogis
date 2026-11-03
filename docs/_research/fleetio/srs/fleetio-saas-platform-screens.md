@@ -226,7 +226,7 @@ updated: 2026-11-03
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
-| 1 | Add Vehicle Reservation | Nút | — | Phải có Motor Pool trong Settings; không chạy |
+| 1 | Add Vehicle Reservation | Nút | — | Phải có Motor Pool trong Settings; lượt 5 đã mở, xem màn 5.13 |
 | 2 | Motor Pool, Number, Operator, Vehicle Types, Vehicle, Pick Up, Drop Off, Status | Cột | Chữ, ngày | Danh sách rỗng |
 
 ## 5.5 Kho tài liệu
@@ -356,3 +356,34 @@ updated: 2026-11-03
 | 9 | Attached To | Cột, liên kết | — | "Select Vehicles": ảnh chụp trước khi gắn; trạng thái "Attached" không có trong ảnh, theo ghi chú chạy |
 | 10 | Labels | Cột | — | — |
 | 11 | Menu dòng | Nút ba chấm | — | Chưa mở trong ảnh; ghi chú chạy ghi View, Rename, Replace, Download, Delete |
+
+## 5.12 Thêm nhóm xe dùng chung
+
+![Add Motor Pool](images/motor-pool-add.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Name * | Ô nhập | Chữ | Tên pool, `TEST-NEN-POOL-01` |
+| 2 | Groups * | Chọn nhiều | Nhãn | Bắt buộc; ảnh chữ nhỏ, ghi chú chạy ghi một nhóm có sẵn tên giống ngày |
+| 3 | Vehicle Types * | Chọn nhiều | Nhãn | Semi Truck; quyết định loại xe chọn được khi đặt (màn 5.13) |
+| 4 | Vehicle Statuses * | Chọn nhiều | Nhãn | Active, mặc định theo ghi chú chạy |
+| 5 | Automatically calculate charges | Tick | — | Không tick; tính phí chưa chạy |
+| 6 | Require "Reason for Trip" field | Tick | — | Đang tick; hiện cảnh báo cam áp cho mọi đặt xe, cả sửa đặt xe cũ (BR-fleetio-saas-platform-059) |
+| 7 | Auto Approvals, How it works | Bật tắt, nhãn | — | Đang tắt trong ảnh; các ô Time zone, Days, Start Time, End Time, Full day, Add Window theo ghi chú chạy, không có trong ảnh |
+| 8 | Cancel, Save | Nút | — | Save báo "Motor Pool was successfully created" (không có trong ảnh) |
+| 9 | Nền trang | Menu | — | Settings mờ, nhóm Motor Pool có Motor Pools, Reservation Rates, Flat Fees. Toast "Complete: Restoring Work Order #106 data" là việc ngoài luồng này, ghi chú chạy không nêu |
+
+## 5.13 Lỗi form đặt xe
+
+![Vehicle Reservation báo lỗi](images/reservation-validation.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Operator * | Chọn, có biểu tượng trợ giúp | Liên hệ | Viền đỏ, "must exist" (E-fleetio-saas-platform-029). Chỉ liệt kê liên hệ có đăng nhập và là Operator; "No options" (E-fleetio-saas-platform-028, không có trong ảnh) |
+| 2 | Motor Pool * | Chọn, có trợ giúp | Pool | `TEST-NEN-POOL-01` |
+| 3 | Vehicle Types * | Chọn nhiều, có trợ giúp | Nhãn | Semi Truck; chỉ hiện sau khi chọn pool. Không có ô chọn xe cụ thể |
+| 4 | Reason for Trip * | Ô nhập | Chữ | Viền đỏ, "is required for this motor pool" vì pool bắt buộc |
+| 5 | Pick Up *, Drop Off * | Ngày, giờ | Ngày giờ | Viền đỏ, "can't be blank" dù ô hiện chữ mờ ngày giờ hiện tại: đó là placeholder |
+| 6 | Cancel, Submit Reservation | Nút | — | Submit không tạo bản ghi |
+| 7 | Toast đỏ | Thông báo | — | "Failed to create Reservation". Toast xanh "Complete: Restoring Work Order #106 data" là việc ngoài luồng này, ghi chú chạy không nêu |
+| 8 | Nền trang Reservations | Bảng | — | Cột Motor Pool, Number, Pick Up, Drop Off, Status; danh sách rỗng; khung Learn "Reservations Overview" bị hộp che một phần |

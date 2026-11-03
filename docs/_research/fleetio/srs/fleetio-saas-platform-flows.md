@@ -512,3 +512,29 @@ flowchart TD
     K --> Z
     L --> Z
 ```
+
+## Flow 25: Tạo Motor Pool và đặt xe (`Chạy` tới chỗ bị chặn; lượt 5)
+
+```mermaid
+flowchart TD
+    A["Settings, Motor Pools, Add"] --> B["Name, Groups, Vehicle Types, Vehicle Statuses"]
+    B --> C{"Tick bắt buộc Reason for Trip?"}
+    C -->|"Có"| D["Cảnh báo áp cho mọi đặt xe, cả sửa đặt xe cũ"]
+    C -->|"Không, chưa thử"| E["Reason không bắt buộc, chưa kiểm"]
+    D --> F["Motor Pool was successfully created"]
+    E --> F
+    F --> G["Add Vehicle Reservation"]
+    G --> H["Chọn pool, hiện Vehicle Types của pool, không có ô chọn xe"]
+    H --> I{"Có liên hệ vừa có đăng nhập vừa là Operator?"}
+    I -->|"Không"| J["E-fleetio-saas-platform-028 No options"]
+    J --> K["Submit"]
+    K --> L["E-fleetio-saas-platform-029 Failed to create Reservation, không tạo bản ghi"]
+    L --> M{"Xử lý"}
+    M -->|"Cancel"| N["Rời form, không có đặt xe"]
+    M -->|"Tick Operator hoặc mời người, chưa làm"| O["Chưa biết: duyệt, gán xe, tính phí"]
+    I -->|"Có, chưa có dữ liệu"| O
+    N --> Z["Kết thúc"]
+    O --> Z
+```
+
+Đảo ngược: pool đã tạo không xoá theo ràng buộc, nên chưa biết Delete hay Archive pool. Đề xuất Invlogis: cho điều độ đặt hộ lái xe không có tài khoản.

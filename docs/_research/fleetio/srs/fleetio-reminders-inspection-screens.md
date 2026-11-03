@@ -24,7 +24,7 @@ updated: 2026-11-03
 | 8 | Watchers, Assignee, Assigned At | Cột | Người, ngày | Giao cho người |
 | 8b | Add Service Reminder | Nút | — | Góc phải trên |
 | 9 | Resolve | Menu dòng | — | Mở các cách xử lý ngay trên dòng |
-| 10 | Enable Forecasting, Group | Nút | — | Bật dự báo, nhóm theo xe |
+| 10 | Enable Forecasting, Group | Nút | — | Enable chỉ chuyển sang trang cài đặt 1.23; Group None, Vehicle, thêm Week, Month khi bật dự báo |
 
 ## 1.4 Form nhắc
 
@@ -513,3 +513,69 @@ Chưa có ảnh, bảng lấy từ ghi chú chạy.
 | 5 | Adjustment Reason, Vendor | Cột | Chữ | Từ phiếu: trống; Initial: "Received" |
 | 6 | Adjustment Qty, Previous Qty, New Qty | Cột | Số | -3.0, 10.0, 7.0; 10.0, 0.0, 10.0 |
 | 7 | Adjusted By, Comment | Cột | Người, chữ | Người làm; trống |
+
+## 1.19 Danh sách có dự báo, popover ngày
+
+![Danh sách có dự báo](images/reminder-forecast-next-due-popover.jpg)
+
+Ảnh lúc usage 100. Popover che phần Status, Next Due của các dòng phía trên. Trên cùng có dải quảng bá sự kiện của Fleetio, không phải dữ liệu tài khoản; toast "Restoring Work Order #106 data" là của nhóm khác.
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Tab All, Due Soon 11, Overdue 8, Snoozed | Tab | Số | Due Soon tăng từ 8 do dự báo |
+| 2 | Thẻ KPI | Thẻ | Số, % | Overdue Vehicles 8, Due Soon Vehicles 6, Snoozed Vehicles 0, Average Compliance 96% |
+| 3 | Next Due | Cột | 2 dòng | Sắp theo ngày dự báo; "6 days from now", "700 kilometers remaining" kèm icon lấp lánh; nhắc không dự báo hiện ngày |
+| 4 | Popover Next Due | Popover | — | "Fleetio forecasts an approximate due date for each service reminder meter attribute. The priority attribute is the one that is due first or the most overdue."; Learn More |
+| 5 | Scheduled Date, Primary Meter | Dòng | Ngày, số | Cùng "6 days from now"; Primary Meter có cờ xanh ưu tiên |
+
+## 1.20 Chi tiết nhắc, popover phép tính
+
+![Popover phép tính](images/reminder-forecast-meter-popover.jpg)
+
+Ảnh lúc usage 10. Popover bị cắt ở đáy: dòng công thức Next Due chỉ đọc được một phần, Meter Status không có trong ảnh, lấy từ ghi chú chạy.
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Next Due | Khối 2 cột | Ngày, số | Scheduled Date 04/03/2027, "5 months from now", Upcoming; Primary Meter cờ xanh, 3,200 km, "2 months from now", "700 kilometers remaining" |
+| 2 | "Forecasting is enabled" | Chữ | — | Góc phải khối, kèm icon |
+| 3 | Last Meter Entry | Dòng | Số | 2,500 km, "1 day ago" |
+| 4 | Avg. Daily Usage | Dòng, liên kết | Số | 10.0 kilometers/day; "How is this calculated?" chưa mở |
+| 5 | Meter Increase | Dòng | Số | 0 kilometers, "1 day ago × 10.0 kilometers/day": không khớp (OQ-29) |
+| 6 | Current Meter, Relative to Due Meter | Dòng | Số | 2,500 km; 700 kilometers remaining, "3,200 km - 2,500 km" |
+| 7 | Next Due, Meter Status | Dòng | Chữ | "2 months from now", "700 kilometers ÷ 10.0 kilometers/day"; Meter Status riêng |
+
+## 1.21 Danh sách nhóm theo tuần
+
+![Nhóm theo tuần](images/reminder-forecast-group-week.jpg)
+
+Ảnh ở đầu danh sách, chỉ có các nhóm tuần đã qua của xe Sample và panel một nhắc Sample; "This Week", "Next Week", "This Month" không có trong ảnh, lấy từ ghi chú chạy.
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Group: Week | Chọn | — | Thêm Month; chỉ có khi bật dự báo |
+| 2 | Tiêu đề nhóm | Chữ | Dải ngày | "September 27 - October 3, 2026", "October 4 - October 10, 2026" |
+| 3 | Cột | Bảng | — | Vehicle, Service Task, Status, Incomplete Work Order, Last Completed, Compliance, Watchers, Assignee, Assigned At; không có Next Due |
+| 4 | Panel phải | Panel | — | "Service Reminder #...", Watch, Resolve, Edit, "..."; Vehicle, Service Task, Status, Next Due, Last Completed, Compliance, Work Order |
+
+## 1.22 Nhắc không có dự báo
+
+![Không có dự báo](images/reminder-forecast-not-available.jpg)
+
+Nhắc G trên TEST-XE-01. Số km ngày 120.8 ở form Vehicle không có trong ảnh (OQ-31).
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Next Due | Khối | Số | Primary Meter; "Forecast not available" gạch chân, "461 kilometers remaining"; "Forecasting is enabled" |
+| 2 | Tooltip | Chữ | — | "The daily usage for this meter is zero. Add more meter entries (non-void) to enable forecasting."; E-fleetio-reminders-inspection-032 |
+| 3 | Details | Khối | — | Status Due Soon, Next Due "461 kilometers remaining", Last Completed 11/03/2026, 2,460 km |
+| 4 | History | Thẻ, bảng | Số, % | Completed 1, Late 1, 0%; "1,460 kilometers behind" |
+
+## 1.23 Cài đặt nhắc bảo dưỡng
+
+Chưa có ảnh, bảng lấy từ ghi chú chạy.
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Forecasting | Tick | — | "Fleetio can use a vehicle's average daily usage to predict the date its Service Reminders will be due."; mặc định tắt |
+| 2 | Save Settings | Nút | — | "Setting was successfully updated"; không hỏi xác nhận |
+| 3 | Recalculate | Nút đỏ | — | "This will recalculate all compliance history for all vehicles"; không bấm |

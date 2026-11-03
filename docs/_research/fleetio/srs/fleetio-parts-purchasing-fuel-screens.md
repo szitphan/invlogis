@@ -317,3 +317,21 @@ Không có ảnh: nhật ký không lưu vì có địa chỉ tài khoản. Bả
 | 3 | Aisle, Row, Bin | Cột | Chữ | Vị trí trong kho |
 | 4 | Current Qty | Cột | Số | Kèm mốc "Yesterday", "Today" |
 | 5 | New Qty | Ô trống | Số | Để kiểm đếm tay (K28) |
+
+## 1.8 Đổi phương pháp tính giá tồn
+
+![Đổi phương pháp tính giá](images/settings-valuation-fifo-permanent-warning.jpg)
+
+Ảnh chọn FIFO, chưa tích, chưa Activate; đã cuộn nên radio Average nằm ngoài ảnh, không đọc được, mô tả theo nhật ký (K31). Cảnh báo trong ảnh là của FIFO; cảnh báo riêng Average theo nhật ký (K33). Mức `Xem` từ khối cảnh báo trở xuống.
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Menu Settings | Menu | — | Nhóm Parts & Inventory: Part Settings, Part Locations, Part Categories, Part Manufacturers, Inventory Adjustment Reasons, Inventory Valuation Method (đang chọn), Measurement Units, Purchase Order Settings, Purchase Order Statuses |
+| 2 | First-In, First-Out (FIFO) | Radio | Chọn một | Đang chọn. "Fleetio will keep a dated inventory record for inventory at each Part Location. The price applied to the work order will be the price from the earliest quantity until depleted." |
+| 3 | Last-In, First-Out (LIFO) | Radio | Chọn một | "... The price applied to the work order will be the price from the latest quantity until depleted." |
+| 4 | Static Pricing | Radio | Chọn một | Đang áp dụng, chưa đổi. "The Unit Cost on each part is set manually and will not automatically change based on inventory adjustments or purchase orders. Part Unit Cost is the default price applied when the part is added to Work Orders." |
+| 5 | Khối cảnh báo | Chữ | — | "IMPORTANT INFORMATION ABOUT CHOOSING A NEW INVENTORY VALUATION METHOD": không đổi được theo dõi tồn của phụ tùng đã dùng trên lệnh; dòng phụ tùng lệnh cũ "permanently uneditable"; "Archived part quantities will be reset to 0" (K32, K34) |
+| 6 | Điều kiện Unit Cost | Chữ, liên kết | — | "REQUIREMENTS TO ACTIVATE...". Unit Cost từ ₫1, không số lẻ; "2 part(s)", "Download the CSV", "Parts Import" (K35, E-035) |
+| 7 | Điều kiện lệnh dở | Chữ, liên kết | — | "3 Work Order(s)", "list of incomplete Work Orders"; còn lệnh dở thì migration thất bại (K36, E-035) |
+| 8 | Ô tích nhận thức | Ô tick | Bật, tắt | "I am aware the change I am about to make is permanent and can not be reversed". Chưa tích |
+| 9 | Activate | Nút | — | Xám. Không bấm (K37). Không có nút Save, không có xem thử |

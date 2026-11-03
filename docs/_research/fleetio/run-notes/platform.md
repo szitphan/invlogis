@@ -627,3 +627,38 @@ Không làm: Share (lượt 3 đã biết Share sinh link công khai ngay), Save
 
 ## Dữ liệu TEST lượt 4 (nhóm nền tảng)
 Automation 96542 AUTO-07, 96543 AUTO-08, 96544 AUTO-09, đều Disabled. Service Entry #57903356 trên TEST-KHO-01. Comment tự động trên #57903356 và PO #5.
+
+# Lượt 5 (03/11)
+
+Giá trị Cài đặt trước khi đổi: Motor Pools rỗng, Reservation Rates rỗng, Flat Fees rỗng. TEST-DAUKEO-2: Active, No Group, Unassigned, 2.500 km, 30 hr, "There are no linked Assets for this Vehicle", Lệnh #111 đang Open.
+
+## Motor Pool: tạo nhóm xe dùng chung — Chạy; đặt xe — Không chạy được (không có Operator hợp lệ)
+Các bước đã làm: Settings › Motor Pools › Add; tạo TEST-NEN-POOL-01; Add Vehicle Reservation; bấm Submit khi thiếu Operator để đọc kiểm tra; huỷ.
+
+Form "Add Motor Pool": Name *, Groups *, Vehicle Types *, Vehicle Statuses * (mặc định Active), "Automatically calculate charges", 'Require "Reason for Trip" field', "Auto Approvals" kèm "How it works". Bật Auto Approvals: Time zone * ("Used only for auto-approval window checks. It does not affect reservation times."), Days *, Start Time *, End Time *, Full day, Add Window. Đã xem, không lưu.
+
+| Case | Điều kiện | Kết quả thật | Ảnh |
+|---|---|---|---|
+| Tạo pool | Group 11/05/2026, Semi Truck, Active, bắt buộc Reason | "Motor Pool was successfully created"; danh sách Name, # Groups | motor-pool-add |
+| Bắt buộc lý do | Tick ô | Cảnh báo "This field will be required on all reservations. Users with access will be unable to create new or save edits to existing reservations until a valid value is entered for this field." | motor-pool-add |
+| Form đặt xe trước khi chọn pool | | Operator *, Motor Pool *, Reason for Trip, Pick Up *, Drop Off * | |
+| Chọn pool | | Hiện thêm Vehicle Types * chỉ gồm loại của pool (Semi Truck); Reason for Trip có dấu *. **Người đặt chọn loại xe, không chọn xe cụ thể** | reservation-validation |
+| Operator | Gõ "TEST" | "No results for 'TEST'"; xoá tìm kiếm: "No options". Tooltip: "...contacts with login access and operator classification are shown." | |
+| Đối chiếu Contacts | | TEST-LAI-XE, TEST-LAI-XE-02, TEST-NHAC-LX có Operator nhưng "No Access"; Bảo Tín có đăng nhập nhưng không có Classification. **Không ai thoả cả 2 điều kiện** | |
+| Submit thiếu dữ liệu | Không Operator, Reason, ngày | "must exist", "is required for this motor pool", "can't be blank" 2 lần, toast "Failed to create Reservation". Không tạo bản ghi | reservation-validation |
+| Reservation Rates | Chỉ xem | "Reservation Rates are configurable pricing tables used to automatically calculate reservation costs."; Add Rate Table; cột Name, Status, Usage, Last Updated | |
+| Flat Fees | Chỉ xem | "Preset fees that can be optionally added to individual reservations."; Add Flat Fee; cột Name, Status, Amount, Vehicle Types | |
+
+Không chạy được, vì sao: muốn có Operator phải (a) tick Operator trên contact Bảo Tín: bản ghi thật, không phải TEST, ngoài phạm vi được phép; hoặc (b) cho contact TEST đăng nhập: mời người, bị cấm. Đã dừng, báo về để user quyết. Hệ quả chưa chạy: duyệt, gán xe cụ thể, trạng thái đặt xe, xe trong pool (chưa đổi Group của TEST-DAUKEO-2), tính phí, Auto Approvals.
+Trả lời câu hỏi mở nào: OQ-12 nhóm Nền tảng, OQ-11 nhóm Xe: một phần, chỉ phần cấu hình pool và điều kiện Operator.
+Màn mới: motor-pool-add, reservation-validation — ảnh cùng tên trong images/.
+Dữ liệu TEST đã tạo: Motor Pool TEST-NEN-POOL-01 (dùng nhóm "11/05/2026" có sẵn, không phải Sample, không thấy xe TEST nào trong nhóm; tên nhóm giống ngày gõ nhầm, chưa rõ ai tạo). Không xoá được theo ràng buộc.
+
+## Archive xe có đặt chỗ đang hiệu lực — Không chạy (FR-vehicle-021)
+Không bấm Archive trên TEST-DAUKEO-2 vì không tạo được đặt chỗ. Bấm lúc này không đo được gì: xe không có đặt chỗ, và Lệnh #111 đang Open sẽ tự làm Archive bị từ chối; lần từ chối đó lại ngắt liên kết (lượt 3). Khi chạy lại phải đóng #111 trước, nếu không không tách được nguyên nhân. Đọc lại cuối lượt: Active, No Group, Unassigned, 2.500 km, 30 hr: không đổi.
+
+Giải pháp đáng học, điểm yếu:
+- Đáng học: đặt theo loại xe, không theo xe cụ thể; hợp với điều xe đầu kéo khi người đặt chỉ cần "1 đầu kéo", điều độ mới gán xe.
+- Đáng học: tự duyệt theo cửa sổ thời gian, có múi giờ riêng cho việc duyệt.
+- Điểm yếu: người lái không đăng nhập không đặt được, cũng không được đặt hộ. Lái xe logistics thường không có tài khoản nên điều độ không đặt thay được.
+- Điểm yếu: form Add Motor Pool bắt buộc Groups, nên tài khoản không dùng nhóm xe không tạo được pool.

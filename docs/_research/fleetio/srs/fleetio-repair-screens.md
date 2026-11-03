@@ -219,7 +219,7 @@ updated: 2026-11-03
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
 | 1 | Add to Service Entry, Add to Work Order, Resolve with Note | Mục khoá | — | Xám có khoá. Tooltip của Add to Work Order: "Issue already added to a Work Order. Remove it from all Work Orders to add it to another." |
-| 2 | Draft Work Order, Get Service at Shop | Mục menu | — | Ảnh của lượt 2: vẫn dùng được. Lượt 3 trên #45 Draft Work Order xám có khoá, chưa rõ lý do; Close cũng xám; chưa có ảnh của lần đó |
+| 2 | Draft Work Order, Get Service at Shop | Mục menu | — | Ảnh của lượt 2: vẫn dùng được. Lượt 3 trên #45, lượt 5 trên #46 Draft Work Order xám có khoá, chưa rõ lý do; Close cũng xám; chưa có ảnh của lần đó |
 
 ## 1.13 Menu xử lý sự cố
 
@@ -533,3 +533,80 @@ Thẻ Headlamp bị cắt ở đáy ảnh. Khối Replaced Parts nếu có nằm
 | 3 | LINE ITEMS | Bảng | Tiền | Item, Labor, Parts, Subtotal. TEST-SUA-DV-A ₫200,000; dòng công "TEST-SUA-KTV (Contact)" 2 hrs ₫100,000; dòng sự cố "#45 · TEST-SUA engine oil leak near oil pan"; Headlamp Bulb Replacement, Brake Inspection ₫0. Tiền dạng US |
 | 4 | Đầu trang PDF | Khối | Chữ | Run-notes ghi tên, địa chỉ tài khoản, Work Order Number, Invoice Number, PO Number; ảnh đã cắt phần này, không đọc được ở đây |
 | 5 | Trang 2: DESCRIPTION, SUMMARY | Khối | Tiền | Run-notes ghi Labor Markup + ₫20,000 (10.0%), Parts Markup + ₫0 (Fixed), Warranty Credits - ₫30,000 (Fixed), Discount - ₫10,000 (5.0%), Tax +₫18,000 (10.0%), Total ₫198,000; ảnh không có trang 2. Complaint, Cause, Correction không in trong phần đọc được |
+
+## 1.15 Bật mạng lưới xưởng bị từ chối
+
+![Bật mạng lưới xưởng bị từ chối](images/shop-network-enable-denied.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Access Denied | Thông báo | Chữ | "You do not have access to the requested URL." Không nêu lý do: E-fleetio-repair-033. Không có nút tiếp hay quay lại trong khung |
+| 2 | Phần còn trống | Trang | — | Không có hộp điều khoản, hợp đồng, phí. Địa chỉ `fleetio_pay/account_setup/new` theo run-notes, ảnh không thấy thanh địa chỉ |
+| 3 | Toast "Complete: Restoring Work Order #106 data" | Toast | Chữ | Toast còn lại từ thao tác trước, không liên quan Shop Network |
+
+## 6.9 Danh sách mẫu bảo hành
+
+![Danh sách mẫu bảo hành](images/warranty-template-list.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Menu Settings › Warranties › Warranty Templates | Menu | — | Nằm giữa nhóm Service và Parts & Inventory |
+| 2 | Add Warranty Template | Nút | — | Mở form Name, Meter Unit (Miles, Kilometers, Hours), Coverage Details; form không có trong ảnh này. Save xám tới khi có coverage |
+| 3 | 1 - 1 of 1, phân trang | Chữ | Đếm | — |
+| 4 | Name, Manufacturer, # Coverages | Cột | Chữ, số | TEST-SUA Mau bao hanh, TEST-HANG, 2 |
+| 5 | Menu dòng | Menu | — | Edit, Duplicate, Delete theo run-notes, ảnh không mở menu. Delete không khoá dù mẫu đang dùng, không bấm |
+| 6 | Toast | Toast | Chữ | "Warranty Template was successfully created"; toast "Restoring Work Order #106 data" còn lại từ thao tác trước |
+
+## 6.10 Xem trước mẫu riêng
+
+![Xem trước mẫu riêng](images/warranty-template-preview.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Vehicles | Khối | Chip | TEST-SUA-01; Edit để đổi xe |
+| 2 | Coverage Type | Chọn một | — | Standard Warranty "Manually add OEM coverages"; Standard templates "Add a template of coverages by OEM" đang chọn; Extended Warranty "Manually add aftermarket coverages" |
+| 3 | Coverage Template | Chọn | Chữ | TEST-SUA Mau bao hanh, nhóm "CUSTOM TEMPLATES" theo run-notes; danh sách không mở trong ảnh |
+| 4 | Coverage preview | Bảng | Chữ, số | Name, Manufacturer, Duration, Distance, Maint. Cat., Type. TEST-SUA BH mau co ban, TEST-HANG, 2 years, 100,000 km, Applied, Standard; TEST-SUA BH mau mo rong, 6 months, Unlimited, Extended |
+| 5 | Menu dòng "…" | Menu | — | Edit, Edit Maintenance Codes, Delete theo run-notes, ảnh không mở; sửa riêng lần này được |
+| 6 | Cancel, Save & Add Another, Save Warranties | Nút | — | Lưu sinh 2 bảo hành riêng. Ảnh trước khi sửa mẫu 2 năm thành 3 năm |
+
+## 6.11 Xem trước mẫu hãng
+
+![Xem trước mẫu hãng](images/warranty-oem-template-preview.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Vehicles | Khối | Chip | BSA100TRNS, xe Sample; Make theo run-notes, ảnh không ghi |
+| 2 | Coverage Template | Chọn | Chữ | 2025 Ford F-150. Danh sách 14 mẫu OEM theo run-notes, ảnh không mở |
+| 3 | Coverage preview | Bảng | Chữ, số | Bumper to Bumper 3 years 36,000 mi; Powertrain 5 years 60,000 mi; Safety Restraint System 5 years 60,000 mi; Corrosion 5 years Unlimited, dòng này bị cắt ở đáy ảnh. Các dòng dưới không đọc được |
+| 4 | Lưu | Nút | — | Save Warranties có trên đầu trang; không lưu, chỉ xem |
+
+## 6.12 Hộp đổi mẫu
+
+![Hộp đổi mẫu](images/warranty-template-change.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Apply to assets this template is added to in the future | Chọn một | — | Mặc định theo run-notes; chưa chạy |
+| 2 | Apply to all historical and future assets with this template | Chọn một | — | Đang chọn trong ảnh. Lưu mẫu thì End Date bảo hành đã sinh đổi thành 11/03/2029 |
+| 3 | Cảnh báo | Thông báo | Chữ | "1 asset with coverage "TEST-SUA BH mau co ban" applied will be updated." "Please note that any coverage edits made to individual assets will be overwritten." Ghi đè chưa kiểm |
+| 4 | Cancel, Ok | Nút | — | Đóng hộp, hoặc áp |
+
+Phía sau hộp là form sửa mẫu, bị mờ: coverage có mã 3 - Electrical, 034 - Lighting System; câu "Applying Maintenance Categorization to this Vehicle's coverage will surface claim opportunities when a Work Order form includes a Service Task with the same code".
+
+## 7.2 Danh mục trạng thái lệnh
+
+![Danh mục trạng thái lệnh](images/wo-status-custom-list.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Add Work Order Status | Nút | — | Mở form Name, Description, ô Completed, ô Default, Color; form không có trong ảnh. E-fleetio-repair-029, E-fleetio-repair-030 |
+| 2 | Search | Ô | Chữ | Tìm trạng thái |
+| 3 | Ô tick hoặc ổ khoá | Ô | — | Ổ khoá khi có lệnh dùng, tooltip "...that are being used cannot be deleted."; ô tick khi chưa dùng. Trong ảnh TEST-SUA Xong cho nghiem thu 0 lệnh có ô tick |
+| 4 | Drag to reorder | Tay kéo | — | Không thử |
+| 5 | Name | Cột | Màu, chữ | Chấm màu, huy hiệu Default ở Open, mô tả dưới tên. TEST-SUA Cho phu tung không màu |
+| 6 | Type | Cột | Chữ | Incomplete, hoặc Completed có dấu tick đen. Đổi loại khi có lệnh: E-fleetio-repair-031 |
+| 7 | # Work Orders | Cột | Liên kết | Open 12, Pending 1, Completed 97 "(2 from 1 archived vehicle)", TEST-SUA Cho phu tung 1, TEST-SUA Xong cho nghiem thu 0. Ảnh chụp giữa lúc thử; cuối lượt Open 13 |
+| 8 | Menu "…" | Menu | — | Edit, Delete; Delete xám có khoá khi đang dùng. Ảnh chỉ thấy nút trên dòng Open |
+
+Dải trên cùng trong ảnh là quảng cáo sự kiện của hãng, không thuộc màn.

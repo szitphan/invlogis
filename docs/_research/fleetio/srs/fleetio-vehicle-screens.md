@@ -245,7 +245,7 @@ Lưu ý: số 900 km xếp cuối, không bị Void vì cùng ngày; hai dòng 1
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
 | 1 | Coverage Type | Chọn một | — | "Standard templates": "Add a template of coverages by OEM" |
-| 2 | Coverage Template | Chọn | — | "Coverage templates contain a collection of coverages based on manufacturer guidelines". Báo "No options" (E-016) |
+| 2 | Coverage Template | Chọn | — | "Coverage templates contain a collection of coverages based on manufacturer guidelines". Báo "No options" (E-016) vì chưa có mẫu đúng điều kiện, không phải do thiếu Make |
 
 ## 7.3 Bảo hành, nhập tay
 

@@ -30,6 +30,7 @@ Luật nghiệp vụ là thứ khách tự bật tắt, không phải code riên
 
 - Lượt 1, 2026-11-02, tài khoản dùng thử: xem trang đầu, báo cáo, trình dựng tự động hoá, khoảng 20 trang Settings, Record Sets.
 - Lượt 2, 2026-11-03, cùng tài khoản, tiền tố dữ liệu `TEST-NEN`: automation 96373 `TEST-NEN-AUTO-01`, 96375 `TEST-NEN-AUTO-02`, 96376 `TEST-NEN-AUTO-03` (đều đang tắt); Issue #40, #42, #43, #44 trên xe dùng chung TEST-XE-01; Work Order #105 sinh từ automation; hai liên hệ `TEST-NEN-LH-01`. Đọc 56 tên trang Settings, mở Edit Role cả 4 vai (bấm Cancel), đọc 18 mẫu tự động hoá, 49 tên báo cáo. Chi tiết từng case ở [[docs/_research/fleetio/srs/fleetio-saas-platform-spec.md|SRS]] Mục 13.
+- Lượt 5, 2026-11-03: tạo Motor Pool `TEST-NEN-POOL-01`, mở form đặt xe tới chỗ bị chặn. Đây là thay đổi Settings duy nhất của nhóm.
 - Lượt 4, 2026-11-03: automation `TEST-NEN-AUTO-07` trên Service Entry, `TEST-NEN-AUTO-08` trên Purchase Order, `TEST-NEN-AUTO-09` trên Fault (đều đã tắt), đo Archive, Restore, hạn mức khi đang bật; đọc nhãn bộ lọc 48 báo cáo, lọc thật `purchase_orders`.
 - Lượt 3, 2026-11-03, cùng tiền tố: automation `TEST-NEN-AUTO-04` đến `06` (đều đã tắt), AUTO-01 lên v.2; Issue #54, #55, Work Order #111, tệp `TEST-NEN-tailieu.txt` trên TEST-DAUKEO-2; báo cáo Private `TEST-NEN-BC-01`, view Private `TEST-NEN-VIEW-01`. Mở từng báo cáo chỉ đọc, đếm menu Settings, đọc thêm các trang chỉ đọc. Đủ 49 tên, cột ở SRS Mục 21.
 - Giới hạn chung: tài khoản một người dùng có toàn quyền nên chưa kiểm hiệu lực quyền thật; hạn mức xe "5 of 5" đã đầy bởi xe TEST của các nhóm khác nên không tạo được xe riêng; không đổi Settings, không bấm nút gửi email, không mở trial. Custom Records, Tools chỉ theo tài liệu hãng.
@@ -113,7 +114,9 @@ Luật nghiệp vụ là thứ khách tự bật tắt, không phải code riên
 - P21 [Mới] [Gói: Khách lớn, chưa có trong danh sách gói] **Sandbox và xuất toàn bộ dữ liệu:** Sample Copy, Production Copy có hạn mức riêng (tài khoản: 0/2 và 0/0); Export Account Data 13 loại dữ liệu, CSV hoặc XLS, gửi qua email, link hết hạn (Fleetio: 7 ngày). Fleetio: `Xem`, không bấm.
 - P22 [Mới] [Cấu hình] **Widget tuỳ chỉnh cho trang đầu.** Fleetio: `Xem` trang rỗng.
 - P33 [Mới] [Gói: Bảo dưỡng đội xe] **Thu hồi của hãng (Recall):** nhập tự động theo năm, hãng, đời xe từ nguồn công khai của Mỹ; tab All, Needs Action, Open, Resolved, Acknowledged; một mẫu tự động hoá nâng sự cố lên Critical khi nguồn là Recall. Fleetio: `Xem` tab Needs Action 261 dòng Sample lúc chụp ảnh, 285 ở lần đọc sau của nhóm Sửa chữa (OQ-21). Ở Việt Nam chưa thấy nguồn tương đương (`Suy`).
-- P34 [Mới] [Gói: Khách lớn, chưa có trong danh sách gói] **Đặt xe dùng chung (Motor Pool):** danh sách đặt xe, bảng giá đặt xe, phí cố định, quyền nhận xe, trả xe, huỷ. Form đặt xe có Operator *, Motor Pool *, Reason for Trip, Pick Up *, Drop Off *. Fleetio: `Xem` danh sách rỗng, form mở được, không chạy vì cần tạo Motor Pool trong Settings.
+- P34 [Mới] [Gói: Khách lớn, chưa có trong danh sách gói] **Đặt xe dùng chung (Motor Pool):** danh sách đặt xe, bảng giá đặt xe, phí cố định, quyền nhận xe, trả xe, huỷ. Pool khai Groups, Vehicle Types, Vehicle Statuses, tính phí, bắt buộc lý do, tự duyệt. Form đặt xe có Operator *, Motor Pool *, Vehicle Types *, Reason for Trip, Pick Up *, Drop Off *. Fleetio: `Chạy` tạo pool, Submit đọc lỗi; chưa tạo được đặt xe vì không có Operator hợp lệ (W25).
+- P45 [Mới] [Gói: Khách lớn, chưa có trong danh sách gói] **Đặt theo loại xe, không theo xe cụ thể:** chọn pool thì chỉ hiện loại xe của pool. Fleetio: `Chạy` đọc form. Hợp với điều xe đầu kéo: người đặt chỉ cần "1 đầu kéo", điều độ mới gán xe (gán xe chưa chạy).
+- P46 [Mới] [Cấu hình] **Tự duyệt theo cửa sổ thời gian:** Days, Start Time, End Time, Full day, Add Window, có múi giờ riêng chỉ dùng kiểm cửa sổ duyệt. Fleetio: `Xem` không lưu.
 - P35 [Mới] [Cấu hình] **Trợ lý AI cho bảo dưỡng:** Issue Prioritization, Issue Resolution, Fault Monitoring, Service Assessments, Service Writer, mỗi cái bật riêng, có câu điều khoản. Sự cố mới có mức ưu tiên "Auto-assign" và tự thành High dù không nhập (Issue #40, #42). Fleetio: `Chạy` phần thấy được; nguyên nhân là AI Issue Prioritization là `Suy`. Có lần AI thất bại im lặng (W15). Đối chiếu NFR-006 của SRS.
 - P36 [Mới] [Lõi] **Chia sẻ báo cáo bằng link có hạn, có danh sách thu hồi:** Reports › Shared liệt kê link, Unshare có hộp xác nhận, thu hồi xong mở lại không còn dữ liệu. Fleetio: `Chạy`. Chỉ học hạn và danh sách thu hồi, KHÔNG học cách sinh link (Điểm yếu W1).
 
@@ -141,6 +144,9 @@ Luật nghiệp vụ là thứ khách tự bật tắt, không phải code riên
 - W22 [Mới] [Cấu hình] **Hành động phục hồi cũng cần rõ hệ quả.** Fleetio: `Chạy` Restore một cú bấm, không hộp xác nhận, về Disabled dù trước đó Enabled; chỉ nói "Record successfully restored!", người dùng dễ tưởng luật đã chạy lại.
 - W23 [Mới] [Lõi] **Một kiểu bộ lọc cho mọi báo cáo.** Fleetio: `Chạy` đọc 3 kiểu: panel ô cố định, filter builder, thanh lọc trên báo cáo; người dùng phải học lại từng báo cáo; tên ô lúc Vehicle lúc Asset, một ô sai chính tả "Subotal amount"; một báo cáo không lọc được.
 - W24 [Mới] [Gói: Bảo dưỡng đội xe] **Số tổng không được gộp bản nháp mà không nói.** Fleetio: `Chạy` báo cáo đơn mua cộng cả Draft vào Total Amount; biểu đồ trục chỉ 20k khi tổng 3,5 triệu ở VND, tức thang biểu đồ lệch với tiền tệ lớn. Đề xuất Invlogis: mặc định loại nháp, nói rõ phạm vi cộng.
+- W25 [Mới] [Lõi] **Lái xe không có tài khoản vẫn phải đặt hộ được.** Fleetio: `Chạy` ô Operator chỉ liệt kê liên hệ có đăng nhập và classification Operator, không liên hệ nào thoả thì "No options", không thấy lối đặt hộ. Lái xe logistics thường không có tài khoản nên điều độ không đặt thay được. Đề xuất Invlogis: điều độ đặt hộ.
+- W26 [Mới] [Cấu hình] **Không bắt buộc nhóm xe để tạo pool.** Fleetio: `Xem` Groups * trên form, tài khoản không dùng nhóm xe không tạo được pool (`Suy`, chưa thử để trống).
+- W27 [Mới] [Cấu hình] **Chữ mờ không được giống giá trị thật.** Fleetio: `Chạy` Pick Up, Drop Off hiện ngày giờ hiện tại bằng chữ mờ nhưng báo "can't be blank"; cùng kiểu với Completion Date ở Service Entry.
 - W19 [Mới] [Cấu hình] **Danh sách phải cập nhật sau khi tải.** Fleetio: `Chạy` vừa báo "Document was successfully added." danh sách vẫn "No results to show"; tệp .txt mở khung xem PDF 0 trang.
 - W20 [Mới] [Lõi] **Lỗi trang phải có lối phục hồi rõ.** Fleetio: `Chạy` `expense_entries` Error 500 cả 3 lần, qua 2 lượt, nên khó còn là sự cố thoáng qua (`Suy`), trang lỗi có Go back, contact us, status page; có thể sự cố tạm của hãng. Điểm đáng học là trang lỗi nói trạng thái dịch vụ "Partially Degraded Service".
 
@@ -233,6 +239,7 @@ Danh sách ─> đổi cột, nhóm ─> Save Changes ─> bản chuẩn có kho
 | D8 | 5.3 | Đang sửa bản đang bật | Save: lên phiên bản mới, hiệu lực ngay | Discard: giữ bản hiện tại |
 | D9 | 5.3 | Automation đang bật và người sửa ngược giá trị | Automation đổi lại sau 1 giây, không báo | Giữ giá trị người sửa |
 | D10 | 5.6 | Đang ở view chuẩn | Chỉ Save as New View | Save Changes vào view đó |
+| D11 | Đặt xe | Có liên hệ vừa đăng nhập vừa là Operator | Chọn được Operator, phần sau chưa chạy | "No options", Submit báo "must exist" |
 
 ### 6.3 State Transitions
 
@@ -280,6 +287,7 @@ Xe có 5 trạng thái danh mục Active (Default), In Shop, Inactive, Out of Se
 | Save automation | Phải có trigger và hành động | Nút Save mờ | `Chạy` |
 | Automation đổi Work Order sang Completed | Qua kiểm tra như form tay, Start Date bắt buộc | "Automation Action failed: Start Date can't be blank" | `Chạy` |
 | New Saved Report | Name bắt buộc | Chưa thử để trống | `Xem` |
+| Đặt xe | Operator, Motor Pool, Vehicle Types, Pick Up, Drop Off bắt buộc; Reason nếu pool yêu cầu | "must exist", "is required for this motor pool", "can't be blank", toast "Failed to create Reservation" | `Chạy` |
 | Automation Service Entry, Update Field Repair Priority Class = Emergency | Từ chối lúc lưu | "Automation could not be created. Please resolve any errors try again." | `Chạy` |
 | Automation đổi đơn mua sang Approved | Phải có điều kiện Status Pending Approval | "Purchase Order Status "Pending Approval" is required" | `Chạy` |
 
@@ -372,7 +380,7 @@ Xe có 5 trạng thái danh mục Active (Default), In Shop, Inactive, Out of Se
 | OQ-9 | Technician có quyền gì với Fuel Entries? | Đã trả lời (`Xem`): chọn None, không có ô con; ghi chú cũ "chỉ có ô xem" sai | Câu hỏi nội bộ |
 | OQ-10 | Settings có bao nhiêu trang? | Đã trả lời (`Xem`): menu 67 link = 59 trang cấp tài khoản + 7 trang cá nhân + Log Out | Câu hỏi nội bộ |
 | OQ-11 | Cột và lọc của 48 báo cáo chưa mở, Saved Reports là gì? | Đã trả lời một phần (`Chạy`): đủ 49 tên, cột 48 báo cáo ở SRS Mục 21; Saved Reports là bộ lọc và cột lưu lại kèm Private hoặc Public, lịch email. Lượt 4: nhãn bộ lọc 48 báo cáo, 3 kiểu, ở SRS Mục 21.3. Còn mở: `expense_entries` lỗi 500 lần 3 | Câu hỏi nội bộ |
-| OQ-12 | Đổi trạng thái xe thật, lưu trữ xe, xe trùng tên, đặt xe dùng chung chạy thế nào? | Một phần (`Chạy`): đổi Status thật Active, Inactive. Còn mở: lưu trữ xe, xe trùng tên vì hạn mức xe đã đầy; đặt xe cần tạo Motor Pool trong Settings | Câu hỏi nội bộ |
+| OQ-12 | Đổi trạng thái xe thật, lưu trữ xe, xe trùng tên, đặt xe dùng chung chạy thế nào? | Một phần (`Chạy`): đổi Status thật Active, Inactive. Lượt 5: tạo được Motor Pool, đặt xe bị chặn vì không có Operator hợp lệ. Còn mở: lưu trữ xe, xe trùng tên vì hạn mức xe đã đầy; duyệt, gán xe, tính phí, cần user quyết cho tick Operator trên liên hệ thật hoặc mời người | Câu hỏi nội bộ |
 | OQ-13 | AI Data Analyst sai vì kho phân tích trễ hay vì cách đếm? | `Suy` nghiêng về kho trễ: 2/7 rồi 10/12 sau khoảng 15 giờ, xe mới "does not exist". Chưa giải thích được #49, #51 | Câu hỏi nội bộ |
 | OQ-14 | Mẫu Send Email When A Work Order Total Exceeds Amount có trigger, điều kiện gì? | Đã trả lời (`Chạy` mở mẫu): Work Order Created or Updated, Total Cost ≥ 100.000 ₫, câu email viết cứng ">$1,000.00" | Câu hỏi nội bộ |
 | OQ-16 | Version History hiện nội dung v.2 khi mở v.1 là lỗi chung không? | Thấy 1 lần, chưa thử sửa điều kiện | Câu hỏi nội bộ |

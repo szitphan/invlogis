@@ -14,6 +14,7 @@ updated: 2026-11-03
 | UC-handle-reminder | Xử lý nhắc đến hạn | Fleet Manager | 004–008, 010, 023, 025, 026, 027, 028, 039, 041, 042 | 1.1, 1.5, 1.6, 1.7, 1.8, 1.9, 1.13, 1.14 | E-011, E-012, E-013, E-014 | OQ-16, OQ-17 |
 | UC-draft-work-order | Soạn nháp lệnh bằng AI | Fleet Manager | 040 | 1.9, 1.12 | E-030 | — |
 | UC-outsource-service | Giao dịch vụ thuê ngoài | Fleet Manager | 050 | 1.9, 1.18 | E-031 | OQ-26 |
+| UC-forecast | Dự báo ngày đến hạn | Administrator, Fleet Manager | 009, 051, 052 | 1.19, 1.20, 1.21, 1.22, 1.23 | E-032 | OQ-28, OQ-29, OQ-30, OQ-31, OQ-32 |
 | UC-import-invoice | Nhập hoá đơn bằng Smart Upload | Fleet Manager | 027, 048, 049 | 1.16 | E-014 | OQ-27 |
 | UC-apply-program | Áp bộ lịch | Administrator | 011, 029, 030, 043, 044, 045 | 1.2, 1.10 | E-024, E-025, E-026, E-029 | OQ-2, OQ-10, OQ-12, OQ-20, OQ-21 |
 | UC-renewal | Nhắc giấy tờ | Fleet Manager | 012, 031, 041 | 1.3, 1.11, 1.13, 1.15 | — | OQ-3 |
@@ -74,6 +75,17 @@ Số FR, lỗi viết tắt, đầy đủ có tiền tố `fleetio-reminders-ins
 | 3 | Assign | Chưa chạy |
 
 **Nhánh:** 2a Liên hệ không có đăng nhập: E-031. 2b Bấm ASAP: Continue khoá (OQ-26). 2c Không hiện cửa hàng ở tài khoản này.
+
+## UC-forecast — Dự báo ngày đến hạn
+
+| Bước | Người dùng | Hệ thống |
+|---|---|---|
+| 1 | Bấm Enable Forecasting | Sang Service Reminder Settings |
+| 2 | Tích Forecasting, lưu | Không hỏi xác nhận; danh sách sắp theo ngày dự báo |
+| 3 | Đọc danh sách, chi tiết, popover | Ngày theo từng thuộc tính, cờ ưu tiên, phép tính từng bước |
+| 4 | Nhóm theo Week, Month | Group Week ẩn cột Next Due |
+
+**Nhánh:** 2a Số km ngày vào ngưỡng: nhắc sang Due Soon. 3a Số km ngày bằng 0: E-032. 3b Nhập tay số km ngày trên xe. 4a Nhắc không dự báo rơi vào "This Week". 5a Tắt: về nguyên trạng.
 
 ## UC-import-invoice — Nhập hoá đơn bằng Smart Upload
 

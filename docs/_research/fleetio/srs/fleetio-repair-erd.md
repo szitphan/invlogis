@@ -43,6 +43,8 @@ erDiagram
     FAULT_RULE ||--o{ FAULT : "ap cho"
     WATCHER }o--|| WORK_ORDER : "theo doi"
     WATCHER }o--|| ISSUE : "theo doi"
+    WARRANTY_TEMPLATE ||--o{ TEMPLATE_COVERAGE : "gom"
+    TEMPLATE_COVERAGE ||--o{ WARRANTY : "sinh ra"
 
     VEHICLE {
         string ten
@@ -167,8 +169,22 @@ erDiagram
     }
     WO_STATUS {
         string ten
+        string mo_ta
+        string mau
         string loai
         boolean mac_dinh
+    }
+    WARRANTY_TEMPLATE {
+        string ten
+        string don_vi_dong_ho
+        string nguon
+    }
+    TEMPLATE_COVERAGE {
+        string ten
+        string loai
+        number thoi_han
+        number khoang_cach
+        string ma_phan_loai
     }
     WARRANTY_CODE {
         string ma_he_thong
@@ -217,7 +233,8 @@ erDiagram
 | Dòng phụ tùng ghi sổ kho | `Chạy` Inventory Activity ghi trước, sau, nguồn số lệnh. Tồn, kho chi tiết ở [[docs/_research/fleetio/srs/fleetio-parts-purchasing-fuel-erd.md|Kho, mua]] |
 | Dòng đồng hồ có nguồn lệnh, entry | `Chạy` nguồn "Work Order #104", "Service Entry #57858956" |
 | Contact có đơn giá công | `Chạy` TEST-SUA-KTV |
-| Trạng thái lệnh thuộc danh mục có loại | `Xem` Work Order Statuses |
+| Trạng thái lệnh thuộc danh mục có loại | `Chạy` thêm 2 trạng thái; loại chỉ Incomplete, Completed, khoá đổi khi đã có lệnh dùng |
+| Mẫu bảo hành gồm coverage, sinh bảo hành riêng và vẫn liên kết | `Chạy` mẫu TEST: áp về quá khứ làm đổi End Date của bảo hành đã sinh. Mẫu OEM cùng cấu trúc là `Suy`; `nguon` phân biệt riêng, OEM theo nhóm trên ô chọn |
 | Một Assessment trên một lệnh hay entry | `Chạy` khối trên lệnh, entry. Lịch sử các lần chạy lại: `Suy` chỉ giữ lần mới nhất |
 | Overdue không có thuộc tính lưu | `Chạy` giá trị tính từ `han`, `han_so_km`, đồng hồ của xe |
 | Đầu kéo, mooc là hai Vehicle, không có bản ghi tổ hợp trên lệnh | `Chạy` nhóm Lốp về Vehicle; `Suy` về lệnh |

@@ -221,3 +221,24 @@ stateDiagram-v2
 ## 6. Nhà cung cấp
 
 Nhà cung cấp không có vòng đời trạng thái đã chạy nên không vẽ sơ đồ. Phân loại Parts, Fuel, Service, Vehicle quyết định nơi được chọn (N2), không phải trạng thái. Tab Archived, cột Archived At có trên danh sách (N9, `Xem`), lưu trữ và khôi phục chưa thử. "Network Status: Invite" thấy, không bấm vì mời người ngoài (N11); giá trị khác của trường này chưa biết (OQ-15). Rating là số, hiện "Rating not available" ở cả 20 nhà cung cấp, không phải trạng thái (N10, N13, N14). Sạc ngoài phạm vi theo yêu cầu user.
+
+## 7. Phương pháp tính giá tồn
+
+Cài đặt cấp tài khoản. Chỉ chạy tới bước chọn radio và tải lại; từ Activate trở đi là câu chữ màn, chưa đổi, chưa đo.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Static: Đang dùng khi chạy
+    Static --> ChoKichHoat: Chọn radio khác
+    ChoKichHoat --> Static: Tải lại trang, không lưu
+    ChoKichHoat --> PhuongPhapMoi: Activate, theo câu chữ màn
+    PhuongPhapMoi --> [*]: Không đảo được, theo câu chữ màn
+```
+
+| Trạng thái | Hành động | Sang | Điều kiện | Hiệu ứng | Câu chữ | Mức |
+|---|---|---|---|---|---|---|
+| Static Pricing | Chọn Average, FIFO hoặc LIFO | Chờ kích hoạt | Không có nút Save (K30) | Hiện khối cảnh báo, ô tích, nút Activate xám; chưa lưu gì | "IMPORTANT INFORMATION ABOUT CHOOSING A NEW INVENTORY VALUATION METHOD" | `Chạy` |
+| Chờ kích hoạt | Tải lại trang | Static Pricing | Không tích, không bấm (K37) | Vẫn Static Pricing, ô tích trống | Không có | `Chạy` |
+| Chờ kích hoạt | Tích ô, Activate, đủ điều kiện | Phương pháp mới | Mọi phụ tùng có Unit Cost; FIFO, LIFO hết lệnh dở (K35, K36) | Tồn nhận giá Unit Cost; tồn Archived về 0; FIFO, LIFO khoá dòng lệnh cũ (K32–K35) | "I am aware the change I am about to make is permanent and can not be reversed" | `Xem` câu chữ, không chạy |
+| Chờ kích hoạt | Activate, còn lệnh dở | Thất bại | FIFO, LIFO (K36, E-035) | Migration thất bại theo câu chữ | "An incomplete Work Order at the time of migration will cause the migration to fail." | `Xem` câu chữ, không chạy |
+| Phương pháp mới | Đổi lại | Không có | Câu chữ ghi không đảo được, chưa kiểm chứng (K37) | Chưa biết | "can not be reversed" | `Xem` câu chữ, không chạy |

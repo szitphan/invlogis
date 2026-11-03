@@ -487,3 +487,27 @@ flowchart TD
 ```
 
 **Nhánh đảo ngược:** phiếu không sửa được; hoàn kho qua Adjust Inventory tay là `Suy`, chưa thử.
+
+## Flow 18: Bật và đọc dự báo (`Chạy`; usage tự tính thật, đồng hồ phụ, thông báo chưa đo)
+
+```mermaid
+flowchart TD
+    A["Bấm Enable Forecasting trên danh sách"] --> B["Chỉ sang Service Reminder Settings"]
+    B --> C["Tích Forecasting, Save Settings, không hỏi"]
+    C --> D{"Số km ngày của xe"}
+    D -->|"Bằng 0, E-032"| E["Forecast not available, nhắc có thời gian về ngày lịch, nhắc chỉ km giữ số"]
+    D -->|"Lớn hơn 0"| F["Số còn lại chia số km ngày ra ngày dự báo"]
+    F --> G{"Ngày dự báo trong ngưỡng thời gian?"}
+    G -->|"Có, 14 ngày"| H["Due Soon, kể cả còn trên ngưỡng km"]
+    G -->|"Không, 15,2 ngày"| I["Upcoming"]
+    H --> J["Popover Next Due, Meter Forecast bày phép tính"]
+    I --> J
+    E --> K["Group Week, Month: nhắc không dự báo vào This Week"]
+    J --> K
+    K --> L{"Tắt Forecasting?"}
+    L -->|"Có"| M["Về nguyên trạng ngay, menu Group còn None, Vehicle"]
+    L -->|"Không"| End["Kết thúc"]
+    M --> End["Kết thúc"]
+```
+
+**Nhánh đảo ngược:** tắt ô Forecasting; xe tick lại tự tính thì đọc lại mới về số tự tính. **Chưa giải thích:** OQ-28 đến OQ-31.

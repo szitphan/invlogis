@@ -33,6 +33,11 @@ flowchart TD
     su2["1.16 Đọc hoá đơn bằng AI"]
     km["1.17 Chi tiết nhắc biên km"]
     fs["1.18 Giao dịch vụ thuê ngoài"]
+    fc1["1.19 Danh sách có dự báo, popover ngày"]
+    fc2["1.20 Chi tiết nhắc, popover phép tính"]
+    fc3["1.21 Danh sách nhóm theo tuần"]
+    fc4["1.22 Nhắc không có dự báo"]
+    fc5["1.23 Cài đặt nhắc bảo dưỡng"]
     su3["2.19 Xem biểu mẫu từ phiếu giấy"]
     wi["2.20 Sự cố từ workflow trên xe"]
     ia["2.21 Lịch sử tồn của phụ tùng"]
@@ -81,6 +86,14 @@ flowchart TD
     a -->|"Resolve trên dòng"| res
     res -->|"Thêm vào lệnh sửa chữa"| wo
     res -->|"Ghi lịch sử dịch vụ"| se
+    a -->|"Enable Forecasting"| fc5
+    fc5 -->|"Tích Forecasting, lưu"| fc1
+    fc1 -->|"Chọn nhắc có dự báo"| fc2
+    fc1 -->|"Chọn nhắc usage 0"| fc4
+    fc1 -->|"Group Week"| fc3
+    fc3 -.->|"Group None"| fc1
+    fc2 -.->|"Quay lại"| fc1
+    fc4 -.->|"Quay lại"| fc1
     res -->|"Find a shop"| fs
     fs -.->|"Đóng"| d
     se -->|"Tải hoá đơn"| su2
@@ -160,7 +173,7 @@ flowchart TD
     ack -->|"Kết thúc"| z
 ```
 
-Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221413`, chưa có các màn thêm ở đợt 03/11/2026 (gồm 1.12 đến 1.18, 2.16 đến 2.21). Đường liền là luồng thường, nét đứt là quay lại.
+Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221413`, chưa có các màn thêm ở đợt 03/11/2026 (gồm 1.12 đến 1.23, 2.16 đến 2.21). Đường liền là luồng thường, nét đứt là quay lại.
 
 ## 2. Màn hình
 
@@ -205,6 +218,11 @@ Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221413`, chưa 
 | 2.19 | Xem biểu mẫu từ phiếu giấy | inspection-form-smart-upload-review | Review | Có |
 | 2.20 | Sự cố từ workflow trên xe | inspection-workflow-fail-issues | 5 sự cố | Có |
 | 2.21 | Lịch sử tồn của phụ tùng | inspection-inventory-adjustment-deduct | Có dòng từ phiếu | Có |
+| 1.19 | Danh sách có dự báo, popover ngày | reminder-forecast-next-due-popover | Forecasting bật | Có |
+| 1.20 | Chi tiết nhắc, popover phép tính | reminder-forecast-meter-popover | Có dự báo | Có |
+| 1.21 | Danh sách nhóm theo tuần | reminder-forecast-group-week | Group Week | Có |
+| 1.22 | Nhắc không có dự báo | reminder-forecast-not-available | Forecast not available | Có |
+| 1.23 | Cài đặt nhắc bảo dưỡng | reminder-settings-forecasting | Ô Forecasting | Không |
 
 Màn ghi "Không" ở cột Ảnh: có mô tả trong ghi chú chạy nhưng không có ảnh lưu lại.
 
@@ -214,6 +232,7 @@ Màn ghi "Không" ở cột Ảnh: có mô tả trong ghi chú chạy nhưng kh�
 |---|---|---|
 | Nhắc | 1.1 → 1.4 → 1.5 → 1.9 → lệnh → 1.6 → 1.1 | E-fleetio-reminders-inspection-008, 009, 010; tạm hoãn 1.8; E-fleetio-reminders-inspection-011 đến 014; lịch sử thay đổi 1.13 |
 | Bản nháp AI | 1.5 → 1.9 → 1.12 → lệnh | Discard về 1.5; Add to chưa bấm; xám trên Upcoming, E-fleetio-reminders-inspection-030 |
+| Dự báo | 1.1 → 1.23 → 1.19 → 1.20 hoặc 1.21 | Usage 0: 1.22, E-fleetio-reminders-inspection-032; tắt về nguyên trạng |
 | Giao ngoài | 1.9 → 1.18 | Assign chưa bấm; E-fleetio-reminders-inspection-031 |
 | Hoá đơn | Service Entry → 1.16 → Service Entry → 1.6 hoặc 1.17 | Nhắc không đóng nếu thiếu đúng đầu việc |
 | Tuân thủ | 1.1 → 1.7; 1.5 → 1.14 | Recalculate xám khi chưa có lịch sử |

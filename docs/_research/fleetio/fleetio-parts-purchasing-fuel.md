@@ -26,7 +26,7 @@ links:
 
 **Tầng:** Gói Bảo dưỡng đội xe, Gói Nhiên liệu, Gói Giám sát nhiên liệu theo `docs/_product/saas-core-vs-tenant.md`.
 
-**Nguồn và bằng chứng:** hai đợt chạy thật trên tài khoản dùng thử. Đợt 02/11/2026: phụ tùng `TEST-BRAKE-PAD-01`, kho `TEST-KHO-01`, nhà cung cấp `TEST-NCC-01`, Purchase Order #1, Work Order #100, hai phiếu dầu. Đợt 03/11/2026: kho `TEST-KHO-01`, `TEST-KHO-02`; phụ tùng `TEST-KHO-PT-A`, `TEST-KHO-PT-B`; ba nhà cung cấp `TEST-KHO-NCC-01`, `-02`, `-DAU`; PO #2 (Closed), PO #3 (Received, Full); WO #102; 14 phiếu dầu `TEST-KHO-F1` đến `F14` trên xe `TEST-KHO-01`. Lượt 3 cùng ngày: thêm PO #4, đọc Pending PO Qty sau từng bước, chạy Make Adjustment từ Closed, Record History, Print, Print Worksheet, bộ lọc phiếu dầu, Find Shops. Lượt 4: lưu thật khi sửa đơn Full (PO #3) và đơn Draft (PO #5), đọc lại Pending PO Qty, rà nguồn Rating. Chi tiết từng case: [[docs/_research/fleetio/run-notes/parts-purchasing-fuel.md|Nhật ký chạy]] và [[docs/_research/fleetio/srs/fleetio-parts-purchasing-fuel-spec.md|SRS]] Mục "Ma trận case".
+**Nguồn và bằng chứng:** hai đợt chạy thật trên tài khoản dùng thử. Đợt 02/11/2026: phụ tùng `TEST-BRAKE-PAD-01`, kho `TEST-KHO-01`, nhà cung cấp `TEST-NCC-01`, Purchase Order #1, Work Order #100, hai phiếu dầu. Đợt 03/11/2026: kho `TEST-KHO-01`, `TEST-KHO-02`; phụ tùng `TEST-KHO-PT-A`, `TEST-KHO-PT-B`; ba nhà cung cấp `TEST-KHO-NCC-01`, `-02`, `-DAU`; PO #2 (Closed), PO #3 (Received, Full); WO #102; 14 phiếu dầu `TEST-KHO-F1` đến `F14` trên xe `TEST-KHO-01`. Lượt 3 cùng ngày: thêm PO #4, đọc Pending PO Qty sau từng bước, chạy Make Adjustment từ Closed, Record History, Print, Print Worksheet, bộ lọc phiếu dầu, Find Shops. Lượt 4: lưu thật khi sửa đơn Full (PO #3) và đơn Draft (PO #5), đọc lại Pending PO Qty, rà nguồn Rating. Lượt 5: đọc màn đổi Inventory Valuation Method, dừng trước Activate, cài đặt vẫn Static Pricing. Chi tiết từng case: [[docs/_research/fleetio/run-notes/parts-purchasing-fuel.md|Nhật ký chạy]] và [[docs/_research/fleetio/srs/fleetio-parts-purchasing-fuel-spec.md|SRS]] Mục "Ma trận case".
 
 **Cài đặt lúc chạy (chỉ đọc, không đổi):** Static Pricing, tắt tự đóng đơn, bật Track Inventory mặc định, bán kính cảnh báo dầu Fleetio: 2 dặm. Tài khoản chỉ có một người dùng, người đó có quyền duyệt.
 
@@ -68,7 +68,7 @@ links:
 
 ### P1 — should have
 
-- K7 [Mới] [Gói: Bảo dưỡng đội xe] [Cấu hình] **Phương pháp tính giá tồn:** Trung bình, FIFO, LIFO, Giá cố định. Fleetio: `Chạy` Giá cố định, ba phương pháp còn lại `Xem`. Cần kế toán Delta quyết.
+- K7 [Mới] [Gói: Bảo dưỡng đội xe] [Cấu hình] **Phương pháp tính giá tồn:** Trung bình, FIFO, LIFO, Giá cố định. Fleetio: `Chạy` Giá cố định; Trung bình, FIFO, LIFO chưa đổi, chưa đo, chỉ `Xem` câu chữ màn đổi: đổi một chiều, có điều kiện chặn trước, không xem thử. Cần kế toán Delta quyết.
 - K8 [Mới] [Gói: Bảo dưỡng đội xe] [Cấu hình] **Tự duyệt đơn dưới ngưỡng tiền.** Fleetio: `Xem` mẫu Automation. Ngưỡng là tham số mới, chưa có mã.
 - K9 [Mới] [Gói: Bảo dưỡng đội xe] [Cấu hình] **Tự đóng đơn khi nhận đủ.** Fleetio: `Xem` cấu hình; khi tắt thì phải Close tay (`Chạy`).
 - K10 [Mới] [Gói: Bảo dưỡng đội xe] **Nguồn phụ tùng trên lệnh:** "None (No Inventory Adjustment)" hoặc lấy từ kho. Fleetio: `Chạy`. Hợp với phụ tùng mua ngoài dùng ngay.
@@ -187,6 +187,7 @@ Phiếu dầu ─┬─> Tổng tiền
 | D9 | 5.1 | Đơn đã mua cần sửa | Sửa số, giá; kho, nhà cung cấp, số dòng khoá | Unmark rồi vào Edit, Pending không giảm |
 | D10 | 5.1 | Đã đóng mà phát hiện sai số nhận | Make Adjustment, vẫn Closed, không lý do | Không có đường mở lại đơn |
 | D11 | 5.4 | Chọn nhà cung cấp trên phiếu | Xe có vị trí tại địa chỉ đó | Vị trí không đổi |
+| D12 | 5.3 | Đổi phương pháp tính giá | Dọn dữ liệu, tích ô, Activate, theo câu chữ không đảo được (`Xem`, chưa chạy) | Giữ Static Pricing |
 
 ### 6.2 Scenario Matrix
 
@@ -260,6 +261,7 @@ Trạng thái đơn mua do hệ thống cố định, trang cấu hình không c
 - **Enter trong ô Country:** vừa chọn vừa lưu form nhà cung cấp, ba lần đều vậy; dễ tạo bản ghi sớm (`Chạy`).
 - **Không có trường thay thế, tương thích xe** trong form, danh sách, menu phụ tùng; chỉ có Replaced Parts trong bảo hành ở lệnh, và cột Linked Service Tasks nối phụ tùng với đầu việc (`Chạy` phần form; trang Linked Service Tasks chưa rà).
 - **Không nên học, số đang về không giảm khi lùi đơn:** lùi Purchased về Approved rồi Draft, Pending vẫn 15 (`Chạy`, chỉ PO #4). Số hàng đang về sai dẫn tới quyết định đặt hàng sai.
+- **Đổi phương pháp giá là một chiều, theo câu chữ màn:** "permanent and can not be reversed"; tồn hiện có nhận giá Unit Cost danh mục, không phải giá đơn mua; tồn phụ tùng Archived về 0; FIFO, LIFO khoá dòng phụ tùng lệnh cũ, buộc hết lệnh dở (`Xem`, chưa đổi, chưa đo giá xuất kho).
 - **Không nên học, đơn nháp vào số đang về:** Draft đã sửa và lưu làm Pending tăng dù chưa duyệt; đọc thẻ tồn sẽ tin có hàng đang về (`Chạy`, PO #5). Kết luận trước đó "chỉ tính từ Purchased" chỉ đúng với đơn chưa sửa.
 - **Không nên học, đơn báo đủ hàng khi đang thiếu:** tăng số đặt ở Full vẫn "Received, Full", không có Receive (`Chạy`, PO #3).
 - **Không nên học, báo cáo đơn cộng cả Draft:** Total Amount của báo cáo đơn mua gồm đơn nháp; biểu đồ theo nhà cung cấp lệch thang ở VND (`Chạy`).
@@ -283,6 +285,7 @@ Trạng thái đơn mua do hệ thống cố định, trang cấu hình không c
 | Worksheet kiểm kê in theo từng kho, có ô New Qty trống | Đếm tay ở bãi không cần màn hình | `inventory-count` |
 | Make a Copy đơn, không chép số đã nhận | Lặp đơn định kỳ nhanh | Phụ tùng đầu kéo, mooc |
 | Đổi kho, nhà cung cấp trên Draft không xoá dòng hàng | Đỡ nhập lại | `purchasing` |
+| Đổi phương pháp giá có điều kiện chặn trước và ô tích nhận thức (`Xem`) | Ép dọn dữ liệu trước khi đổi: đủ giá, hết lệnh dở | `stock-movement` |
 
 ### 6.7 Điểm yếu, Invlogis nên làm khác
 
@@ -297,6 +300,7 @@ Trạng thái đơn mua do hệ thống cố định, trang cấu hình không c
 | Bulk sửa tồn không hỏi lý do | Bắt lý do hoặc gắn đợt kiểm kê |
 | Enter lưu form sớm ở ô chọn | Enter chỉ chọn, nút Lưu mới lưu |
 | Số đang về không giảm khi lùi đơn | Tính lại số đang về theo trạng thái hiện tại |
+| Đổi phương pháp giá không xem thử, không đảo được, chọn sai là kẹt | Chốt phương pháp cùng kế toán trước go-live; có xem thử tác động trước khi đổi |
 | Đơn nháp đã sửa vào số đang về | Tính từ trạng thái, không ghi lúc lưu form; đơn nháp không vào số đang về |
 | Đơn Full tăng số đặt không tính lại trạng thái | Tính trạng thái từ số đặt, số nhận mỗi lần sửa; còn thiếu thì nhận tiếp được |
 | Báo cáo đơn cộng cả Draft vào tổng | Mặc định loại nháp, hoặc tách tổng theo trạng thái |
@@ -334,6 +338,7 @@ Mã bưu chính bắt buộc không hợp với Việt Nam; Invlogis không nên
 | Số xe trên tài khoản dùng thử | Fleetio: "5 of 5" | Tài khoản | Save Vehicle quay mãi, không báo lỗi (`Chạy`, giới hạn `Suy`) |
 | Số lý do điều chỉnh | Fleetio: 11 | — | Broken, Checked Inventory, Expired, Found, Lost, Miscellaneous, Received, Sold, Stolen, Transferred, Used |
 | Nhóm OR trong bộ lọc | Fleetio: 3 | Một bộ lọc | Câu trên panel; vượt chưa thử |
+| Unit Cost tối thiểu để đổi phương pháp giá | Fleetio: ₫1, không số lẻ | Mọi phụ tùng | Chưa đủ thì chưa kích hoạt được (`Xem`) |
 | Khoảng ngày mặc định Fuel History | Fleetio: 30 ngày gần nhất | Một lần mở | Điều kiện có biểu tượng khoá |
 | Loại cảnh báo dầu | Fleetio: 3 | — | Vendor Location Alert, Fuel Capacity Alert, Missing GPS Location Alert |
 
@@ -377,6 +382,8 @@ Mã bưu chính bắt buộc không hợp với Việt Nam; Invlogis không nên
 | Tìm xưởng | "Select service shops and easily save them to your vendors list" |
 | Bộ lọc | "You can create up to 3 "OR" filter types. To add more filters, use "AND" within the filter builder." |
 | Rating | "Rating not available" |
+| Đổi phương pháp giá | "I am aware the change I am about to make is permanent and can not be reversed" |
+| Điều kiện lệnh dở | "An incomplete Work Order at the time of migration will cause the migration to fail." |
 
 #### Error messages
 
@@ -393,7 +400,7 @@ Mã bưu chính bắt buộc không hợp với Việt Nam; Invlogis không nên
 
 - Quy trình mua của Delta có nhiều cấp duyệt hơn Fleetio; cần đối chiếu.
 - Lệnh hút dầu, lệch dầu của Delta giữ nguyên theo `vehicle-telematics`, không thay bằng cảnh báo của Fleetio.
-- Toàn bộ kết quả về giá tính dưới Static Pricing; FIFO, LIFO, Average chưa thử vì không đổi cài đặt.
+- Toàn bộ kết quả về giá tính dưới Static Pricing; FIFO, LIFO, Average chưa đổi, chưa đo, chỉ đọc câu chữ màn đổi vì hộp ghi không đảo được.
 
 ## 9. Risks
 
@@ -424,7 +431,8 @@ Mã bưu chính bắt buộc không hợp với Việt Nam; Invlogis không nên
 | OQ-5 | Có cần cảnh báo vị trí đổ dầu ở cây dầu ngoài không? | Mở | Chưa có trong tài liệu khách gửi |
 | OQ-6 | Fleetio huỷ đơn, đóng thiếu, nhận vượt, trả hàng thế nào? | Đã trả lời: không có nút huỷ sau Approved, chỉ Delete hoặc lùi Draft; đóng được khi nhận thiếu; nhận vượt được; trả hàng qua Make Adjustment ở Full và Closed. Phần Rejected chuyển sang OQ-8 | Không áp dụng |
 | OQ-7 | Xoá dòng phụ tùng có hoàn kho không? | Đã trả lời: có, sổ +20, tồn về 9,5. Phần xoá lệnh chuyển sang OQ-9 | Không áp dụng |
-| OQ-8 đến OQ-12, OQ-14, OQ-16, OQ-18, OQ-20 | Các điểm Fleetio chưa thử được. Lượt 3 thử lại OQ-8, OQ-11, OQ-14, OQ-20: không chạy được vì cần người thứ hai, đổi cài đặt tài khoản, tích hợp | Mở, liệt kê ở SRS Mục 12 | Không áp dụng |
+| OQ-8 đến OQ-10, OQ-12, OQ-14, OQ-16, OQ-18, OQ-20 | Các điểm Fleetio chưa thử được. Lượt 3 thử lại OQ-8, OQ-14, OQ-20: không chạy được vì cần người thứ hai, tích hợp | Mở, liệt kê ở SRS Mục 12 | Không áp dụng |
+| OQ-11 | Dưới FIFO, LIFO, Average: giá trị tồn, sửa giá sau khi nhận, nhận vào lệnh thế nào? | Một phần, từ câu chữ màn, chưa đo: tồn đầu lấy Unit Cost danh mục; FIFO, LIFO khoá sửa dòng phụ tùng lệnh cũ. Phần còn lại vẫn mở | Không áp dụng |
 | OQ-13 | Đơn Draft có tính vào Pending PO Qty không? | Một phần, mở lại: Draft chưa sửa không tính; Draft đã sửa và lưu thì tính. Thao tác nào kích hoạt và Approved đã sửa chưa đo | Không áp dụng |
 | OQ-15 | Find Shops, Network Status: Invite làm gì? | Một phần: Find Shops tìm cửa hàng kèm bản đồ; Invite không bấm vì mời người ngoài, còn mở | Không áp dụng |
 | OQ-17 | Tồn về 0 khi điểm đặt lại bằng 0 thì nhãn gì? | Đã trả lời: Out of Stock, Low Stock không hiện | Không áp dụng |

@@ -230,7 +230,7 @@ Không vẽ sơ đồ vì chưa có bằng chứng về chuyển trạng thái; 
 | Đối tượng | Giá trị đọc được | Vì sao chưa có chuyển | Mức |
 |---|---|---|---|
 | Recall | Tab All, Needs Action, Open, Resolved, Acknowledged; menu dòng Acknowledge, Create Issue, Check VIN | Toàn dòng Sample, không đổi; Needs Action đọc 261 rồi 285 (OQ-21) | `Xem` |
-| Đặt xe Motor Pool | Có cột Status, giá trị chưa thấy; quyền check_out, return, cancel; báo cáo có Reservation Status, Approved At, Completed At | Danh sách rỗng, Motor Pool * lấy từ Settings đang rỗng nên không tạo được (OQ-12) | `Xem` |
+| Đặt xe Motor Pool | Có cột Status, giá trị chưa thấy; quyền check_out, return, cancel; báo cáo có Reservation Status, Approved At, Completed At | Danh sách rỗng; lượt 5 có pool nhưng Submit bị từ chối vì không có Operator hợp lệ (E-029), chưa có đặt xe nào để thấy chuyển (OQ-12) | `Xem` |
 | API key | Status; "Once a key has been revoked it cannot be reactivated." | Không tạo khoá | `Xem` |
 | Thông báo | Inbox, Archived; Archive all | Chưa bấm Archive | `Xem` |
 | Tài liệu | Auto-Delete: xoá cuối ngày đã chọn | Không đặt | `Xem` |

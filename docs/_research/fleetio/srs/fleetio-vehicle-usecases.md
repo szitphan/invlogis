@@ -17,8 +17,8 @@ updated: 2026-11-03
 | UC-tire | Đọc lốp | Technician | 017 | 4.1 | Xem `fleetio-tires` | OQ-3 |
 | UC-expense | Ghi chi phí khác, xem chi phí trên km | Kế toán | 018, 033, 034 | 1.3, 5.1–5.3 | E-011, E-018 | — |
 | UC-replacement | Phân tích thay xe | Lãnh đạo | 019, 040 | 6.1, 6.2 | — | OQ-15 |
-| UC-warranty | Khai bảo hành, thấy cơ hội trên lệnh | Fleet Manager, Kỹ thuật viên | 035–039 | 7.1–7.7 | E-011, E-014, E-016 | OQ-10, OQ-14 |
-| UC-recall-pool | Xem Recall, đặt xe chung | Fleet Manager | 041, 042 | Thuộc nhóm Nền tảng | — | OQ-11 |
+| UC-warranty | Khai bảo hành, thấy cơ hội trên lệnh | Fleet Manager, Kỹ thuật viên | 035–039, 055 | 7.1–7.7 | E-011, E-014, E-016 | OQ-10, OQ-14 |
+| UC-recall-pool | Xem Recall, đặt xe chung | Fleet Manager | 041, 042, 056, 057 | Thuộc nhóm Nền tảng | E-033, E-034 | OQ-11 |
 
 Số FR, lỗi viết tắt, đầy đủ có tiền tố `fleetio-vehicle`. FR-045 (automation đổi trạng thái) xem nhóm Nền tảng. FR-044 đã chuyển sang UC-log-meter vì đồng hồ phụ được nhập, xem ở sổ đồng hồ; khai báo vẫn ở form xe.
 
@@ -100,4 +100,4 @@ Số FR, lỗi viết tắt, đầy đủ có tiền tố `fleetio-vehicle`. FR-
 | 4 | Lưu | Tính End Date, End Meter, Status Active |
 | 5 | Mở lệnh sửa của xe đó, thêm Service Task cùng mã | Warranty Opportunities (1), View Active Coverage |
 
-**Nhánh:** 2a Xe không Make, Model: Coverage Template "No options", E-016 (nhân quả chưa kiểm chứng). 3a Start Date chữ xám: E-011. 5a Phụ tùng cùng loại nhưng không có Service Task: không gợi ý. 5b Claim: chưa thử.
+**Nhánh:** 2a Chưa có mẫu đúng điều kiện: Coverage Template "No options", E-016; không phải do thiếu Make. 2b Có mẫu: Coverage preview, mỗi coverage một bảo hành. 4a Sửa mẫu đã dùng: chọn tương lai hay cả quá khứ. 3a Start Date chữ xám: E-011. 5a Phụ tùng cùng loại nhưng không có Service Task: không gợi ý. 5b Claim: chưa thử.

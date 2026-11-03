@@ -9,7 +9,7 @@ links:
 
 # Fleetio: danh sách chức năng và mức đã đi
 
-Tổng 318 chức năng: Đã chạy 213 · Một phần 58 · Chỉ xem 41 · Tài liệu 2 · Chưa 0 · Không mở 4.
+Tổng 327 chức năng: Đã chạy 216 · Một phần 67 · Chỉ xem 38 · Tài liệu 2 · Chưa 0 · Không mở 4.
 
 `Đã chạy` = tự thao tác, thấy kết quả. `Một phần` = đi được một nhánh. `Chỉ xem` = thấy giao diện, chưa thao tác. `Tài liệu` = chỉ đọc tài liệu hãng.
 
@@ -34,7 +34,7 @@ Tổng 318 chức năng: Đã chạy 213 · Một phần 58 · Chỉ xem 41 · T
 | Giải mã số khung | Nút Decode cạnh VIN/SN điền thông số, gồm dung tích bình. VIN ngắn thì nút khoá, không giải thích (E-fleetio-vehicle-026). VIN 17 ký tự: "De | Đã chạy | VIN ngắn khoá; VIN đúng ra bảng so sánh |
 | Liên kết xe | Linked Vehicles là trường chọn trong form sửa xe; kết quả hiện hai chiều ở khối "Linked Assets" › "Link Asset" › "VEHICLES" trên cả hai xe;  | Đã chạy | Linked Vehicles đầu kéo và mooc |
 | Trạng thái xe | Status bắt buộc, mặc định Active. Danh mục 5 trạng thái có đếm xe, Add Vehicle Status. Đổi tự do qua form hoặc automation, không có luật chu | Đã chạy | Đổi đủ 5 trạng thái, không ràng buộc |
-| Archive xe | Nút Archive trong More Actions, hộp "Confirm Vehicle Archive", nút "Archive Vehicle", đưa xe sang tab Archived; quyền `vehicles_archive_dele | Một phần | Chặn: Motor Pool cần tạo trong Settings |
+| Archive xe | Nút Archive trong More Actions, hộp "Confirm Vehicle Archive", nút "Archive Vehicle", đưa xe sang tab Archived; quyền `vehicles_archive_dele | Một phần | Chặn: Chưa có đặt chỗ, chờ user quyết Operator |
 | More Actions trên xe | Edit Vehicle Settings (mở thẳng phần Settings của form), Manage Inspection Forms (thẻ từng biểu mẫu nhãn "Disabled", menu "…", "View Submiss | Một phần | Mở thêm 2 mục; Integration Links bị chặn |
 | Hạn mức xe theo gói | Danh sách hiện "5 of 5", nút Add Vehicle có khoá; Save bị chặn. Account Usage đếm Vehicles. Xe Sample không tính. Quyền Create cảnh báo "Add | Đã chạy | Chạy |
 | Loại xe | Type bắt buộc, mặc định Car; Settings › Vehicle Types 25 loại. Đổi loại tự do, không hỏi, dòng phụ đầu trang đổi theo, Status giữ nguyên, có | Đã chạy | Đổi Car sang Semi Truck tự do |
@@ -48,6 +48,9 @@ Tổng 318 chức năng: Đã chạy 213 · Một phần 58 · Chỉ xem 41 · T
 | Layout form theo tài khoản | Customize Layout đưa vào Settings › Standard Records › Vehicle › Layout: "System Default", 4 Sections, 104 Fields, All (25) loại xe, nút Add | Chỉ xem | Xem |
 | Bộ lịch bảo dưỡng trên xe | More Actions › Manage Service Programs đi tới `vehicles/{id}/service_programs`. Xe chưa có bộ lịch: trang rỗng dạng quảng bá "Efficiently sc | Một phần | Chạy phần mở, nút Create chưa bấm |
 | Đính tài liệu dùng chung | More Actions › Attach Shared Document, ô "Select Document" chỉ liệt kê tài liệu dùng chung (tên, loại, thời điểm sửa), nút khoá tới khi chọn | Đã chạy | Chạy |
+| Áp và sửa mẫu bảo hành | Áp mẫu sinh mỗi coverage một bảo hành riêng; dòng preview có Edit, Edit Maintenance Codes, Delete để sửa riêng lần này; mã bảo dưỡng của mẫu | Một phần | Chạy phần áp, áp về quá khứ; lựa chọn "future", ghi đè phần sửa riêng chưa thử |
+| Cấu hình Motor Pool | Settings › Motor Pools › Add: Name, Groups, Vehicle Types, Vehicle Statuses (mặc định Active) bắt buộc; "Automatically calculate charges"; ' | Một phần | Chạy phần tạo pool; Auto Approvals, Rates, Flat Fees Xem |
+| Form đặt xe | Operator, Motor Pool, Reason for Trip, Pick Up, Drop Off; chọn pool thì thêm Vehicle Types chỉ gồm loại của pool. Người đặt chọn loại xe, kh | Một phần | Chạy một phần: kiểm tra form, chưa tạo được đặt xe |
 
 ## Vehicles · Gán xe
 
@@ -202,7 +205,7 @@ Tổng 318 chức năng: Đã chạy 213 · Một phần 58 · Chỉ xem 41 · T
 |---|---|---|---|
 | Tạo sự cố | Người dùng tạo sự cố cho một xe với tóm tắt, ngày báo; hệ thống tự điền người báo và thời điểm. Hạn theo ngày, đồng hồ là tuỳ chọn. | Đã chạy | Chạy |
 | Nhiều nguồn sự cố | Sự cố đến từ nhập tay, phiếu kiểm tra hỏng, mã lỗi thiết bị, thu hồi; có trường Source liên kết về nguồn. Sự cố nhập tay có Source "—" (#52) | Một phần | Chặn: Recall là Sample, Fault cần thiết bị |
-| Năm cách xử lý | Menu Resolve trên sự cố mở: Add to Service Entry, Draft Work Order, Add to Work Order, Get Service at Shop, Resolve with Note. Khi sự cố đã  | Một phần | Chặn: Shop Network cần đổi Cài đặt |
+| Năm cách xử lý | Menu Resolve trên sự cố mở: Add to Service Entry, Draft Work Order, Add to Work Order, Get Service at Shop, Resolve with Note. Khi sự cố đã  | Một phần | Chặn: Enable sang Fleetio Pay, Access Denied |
 | Đóng sự cố không sửa | Menu ba chấm › Close mở hộp có ô Note tuỳ chọn; đóng ghi Closed Date, Closed By, Note; ghi chú thành một Comment; mất Edit, Resolve. Không t | Đã chạy | Đóng, mở lại |
 | Sự cố quá hạn | Sự cố có hạn theo ngày và số đồng hồ. Overdue là giá trị tính, không lưu: đọc lại mỗi lần theo ngày và đồng hồ hiện tại; hiện ở Issue Status | Đã chạy | Hạn, Overdue |
 | AI xếp ưu tiên | Với sự cố mới, AI tự gán hoặc gợi ý mức ưu tiên, hiện dấu sao và câu "Auto-assigned priority". Có sự cố vẫn để "No Priority". | Đã chạy | Chạy |
@@ -230,9 +233,9 @@ Tổng 318 chức năng: Đã chạy 213 · Một phần 58 · Chỉ xem 41 · T
 | Tính trạng thái | Upcoming, Due Soon, Overdue đổi ngay khi lưu số đồng hồ từ bất kỳ nguồn nào, không chờ job đêm; lấy trục xấu nhất. Chuyển do thời gian trôi  | Đã chạy | Biên ngưỡng, Void |
 | Reset khi xong | Đầu việc ghi nhận trên Service Entry hoặc lệnh Completed thì nhắc tính kỳ sau từ lần làm. Lệnh Open không đổi trạng thái. | Đã chạy | Đóng bằng lệnh, phiếu dịch vụ, sớm, lùi ngày |
 | Tạm hoãn | Hộp "Snooze Service Reminders" (số nhiều vì dùng chung với thao tác hàng loạt): ô "Snooze Until" ngày và giờ, mặc định +7 ngày, giờ theo thi | Đã chạy | Hoãn và huỷ hoãn trên Upcoming |
-| Xử lý từ nhắc | Resolve chia 2 nhóm: GET SERVICE có Draft Work Order, Add to Work Order, Find a shop; LOG COMPLETED SERVICE có Add to service history. Menu  | Một phần | Assign gửi email, SMS, dừng trước khi bấm |
+| Xử lý từ nhắc | Resolve chia 2 nhóm: GET SERVICE có Draft Work Order, Add to Work Order, Find a shop; LOG COMPLETED SERVICE có Add to service history. Menu  | Một phần | Chặn: Assign gửi email, SMS |
 | Tỷ lệ tuân thủ | Tỷ lệ việc đúng hạn trên việc đã xong; thẻ Completed, Late, On-Time Compliance theo nhắc; trung bình theo danh sách lọc (D 100%, F 100%, Bra | Đã chạy | Biên km: +100 Late, +99 On-Time |
-| Dự báo ngày đến hạn | Ước tính ngày từ số km trung bình ngày; bật ở cấp tài khoản, nhóm theo tuần hoặc tháng. Thấy nút "Enable Forecasting", không bật vì là cài đ | Chỉ xem | Chặn: Bật cấp tài khoản, không đổi Cài đặt |
+| Dự báo ngày đến hạn | Ước tính ngày đến hạn từ số km trung bình ngày cho từng thuộc tính của nhắc; thuộc tính đến trước có cờ ưu tiên. Bật bằng ô "Forecasting" ở  | Một phần | Đo công thức, trạng thái, nhóm; thiếu số km tự tính |
 | Giao nhắc cho người | Tài liệu hãng: giao nhắc quá hạn cho người lái; nhận email hoặc tin nhắn, xác nhận được. Trên web có cột Assignee, Assigned At nhưng chưa th | Chỉ xem | Chặn: Không thấy lối giao; không gửi thông báo |
 | Chi tiết nhắc | Nút Unwatch, "...", Edit, Resolve; khối Details (Vehicle, Operator, Status, Service Task, Service Program, Next Due, Last Completed, Work Or | Đã chạy | Chạy |
 | Đặt tay mốc kỳ tới | Tick "Manually set the due date and/or meter for the next reminder" mở Next Due Date, Next Due Primary Meter, mặc định hôm nay + chu kỳ và đ | Đã chạy | Chạy |
@@ -247,6 +250,8 @@ Tổng 318 chức năng: Đã chạy 213 · Một phần 58 · Chỉ xem 41 · T
 | Smart Upload phiếu dịch vụ | Hộp toàn màn: trái trình xem tài liệu, phải "Review Service Entry", "Review and edit for accuracy before adding the service entry."; các ô h | Đã chạy | Chạy |
 | Đánh giá phiếu dịch vụ bằng AI | Sau lưu, phiếu có khối "Assessment": "Reviewing this service", "Checking service history"; không có giá thì "Add line item costs to run an a | Một phần | Chạy một phần lượt 4: Đọc kết quả; chưa thêm rule |
 | Giao dịch vụ thuê ngoài từ nhắc | Resolve › Find a shop mở hộp "Assign outsourced service", 3 bước Service Details, Suggest Shop, Confirm. Service Details: Assign to, Vehicle | Một phần | Chạy một phần lượt 4: Đến Confirm; không bấm Assign vì gửi email, SMS thật; không thấy danh sách cửa hàng |
+| Giải trình phép tính dự báo | Popover "Next Due" trên danh sách, chi tiết: từng thuộc tính (Scheduled Date, Primary Meter) kèm cờ ưu tiên. Popover "Meter Forecast" bày từ | Đã chạy | Chạy |
+| Nhóm nhắc theo tuần, tháng | Menu Group có thêm Week, Month khi bật Forecasting; khi tắt chỉ còn None, Vehicle. Tiêu đề nhóm theo dải ngày, "This Week", "Next Week", "Th | Đã chạy | Chạy |
 
 ## Service Programs
 
@@ -290,8 +295,8 @@ Tổng 318 chức năng: Đã chạy 213 · Một phần 58 · Chỉ xem 41 · T
 | Tồn kho theo dòng phụ tùng | Hộp Add Part chọn kho, ghi "This will make an inventory adjustment" hoặc "None (No Inventory Adjustment)". Lưu lệnh trừ tồn ngay khi lệnh cò | Đã chạy | Chạy |
 | Giao việc, theo dõi | Sửa so với bản trước: Assigned To không chỉ người có nhãn Technician, danh sách có cả Employee, Operator, Account Owner và "Fleetio Automati | Một phần | Giao cho user tự theo dõi; user thứ hai chặn |
 | Hoàn thành lại | Lệnh đã mở lại đổi Completed lần nữa: tạo entry mới số khác, dùng ngày và đồng hồ cũ của lệnh, không hỏi lại; Timeline sự cố lại có dòng giả | Đã chạy | Chạy |
-| Danh mục trạng thái lệnh | Bảng trạng thái có Name, Type, số lệnh; mặc định Open, Pending loại Incomplete, Completed loại Completed. | Chỉ xem | Chặn: Tạo trạng thái là đổi Settings |
-| Đưa ra xưởng ngoài | Get Service at Shop mở hộp giới thiệu Shop Network, cần Enable Shop Network mới dùng. Mục vẫn sáng cả khi sự cố đang gắn lệnh; bấm tiếp khôn | Chỉ xem | Chặn: Cần bật Shop Network |
+| Danh mục trạng thái lệnh | Bảng trạng thái có Name kèm màu, Default, mô tả; Type; số lệnh; mặc định Open, Pending loại Incomplete, Completed loại Completed. Khách thêm | Một phần | Đủ vòng tuỳ biến; chưa kéo sắp xếp, chưa đo nhắc |
+| Đưa ra xưởng ngoài | Get Service at Shop mở hộp giới thiệu Shop Network, cần Enable Shop Network mới dùng. Mục vẫn sáng cả khi sự cố đang gắn lệnh. Bấm Enable ch | Chỉ xem | Chặn: Enable sang Fleetio Pay, Access Denied |
 | Đơn giá công theo contact | Contact Technician có đơn giá mặc định; danh sách chọn và hộp Edit Labor hiện đơn giá đó. | Đã chạy | Chạy |
 | Sổ thay đổi theo trường | Hộp Record History của lệnh: lọc "Select Date Range", cột Date, Changes By, Changes Made. Ghi từng trường tiền, phần trăm, dòng việc, dòng c | Đã chạy | Chạy |
 | Mốc thời gian của dòng công | Tick "Set Labor Time Entry" hiện Start Date, End Date để tạo Time Entry; End tự bằng Start cộng số giờ, đổi nút giờ thì End đổi theo. | Đã chạy | Chạy |
@@ -313,14 +318,15 @@ Tổng 318 chức năng: Đã chạy 213 · Một phần 58 · Chỉ xem 41 · T
 
 | Chức năng | Mô tả | Mức | Đã đi tới đâu |
 |---|---|---|---|
-| Bảo hành | Khai bảo hành theo ngày và số km, cho nhiều xe một lượt, mỗi xe một Start Date, Start Meter; Standard Warranty, Standard templates, Extended | Một phần | Chặn: Tạo template là đổi Settings |
+| Bảo hành | Khai bảo hành theo ngày và số km, cho nhiều xe một lượt, mỗi xe một Start Date, Start Meter; Standard Warranty, Standard templates, Extended | Đã chạy | Tạo mẫu, áp cho xe, sinh bảo hành |
 | Cơ hội bảo hành trên lệnh | Khối Warranty Opportunities luôn hiện trên lệnh: đếm active, expiring soon, total; Vehicle Coverage khớp đầu việc theo mã phân loại đúng từn | Đã chạy | Khớp theo mã, trạng thái; điền Complaint, Cause, Correction |
 | Tạo bảo hành nhiều xe | Form "New Warranties" 2 bước: Vehicles (nhiều xe, mỗi xe Start Date, Start Meter riêng) rồi Coverage Type: Standard Warranty, Standard templ | Đã chạy | Chạy |
 | Tự tính hạn bảo hành | End Date = Start Date + Coverage Duration; End Meter = Start Meter + Coverage Distance; Status "Active". Danh sách có số active, expiring so | Đã chạy | Chạy |
 | Gắn mã bảo dưỡng vào bảo hành | Maintenance Categorization nhập mã hệ thống (VMRS), có Bulk Mode, Column Mode. | Đã chạy | Chạy |
-| Mẫu bảo hành | Coverage Template "contain a collection of coverages based on manufacturer guidelines"; Settings › Warranty Templates rỗng. Xe không có Make | Chỉ xem | Chặn: Template "No options", tạo mẫu là đổi Settings |
+| Mẫu bảo hành | Coverage Template "contain a collection of coverages based on manufacturer guidelines". Settings › Warranty Templates: Add, form Name, Meter | Một phần | Mẫu riêng, OEM đọc được; lựa chọn future chưa chạy |
 | Mã phân loại, thành phần bảo hành | Hộp Add Maintenance Categorization có Bulk Mode, Column Mode, nhận mã System hoặc System–Assembly, phần thứ ba bị bỏ; menu "…" có Edit, Clea | Một phần | Chạy một phần: mã chạy; Add Component chưa lưu |
 | Bảo hành theo xe, lưu liên tiếp | Tab Warranties của xe: Name, Manufacturer, Coverage Type, Start Date, End Date, Start Meter, Coverage Distance, End Meter, Status. "Save & A | Một phần | Chạy một phần: tab, lưu liên tiếp; template không có |
+| Mẫu bảo hành và áp thay đổi | Settings › Warranty Templates: mẫu có Name, Meter Unit, các coverage đủ trường như bảo hành thường; Save khoá tới khi có coverage. New Warra | Một phần | Chạy một phần: mẫu riêng, áp quá khứ; chưa chạy áp tương lai |
 
 ## Parts & Inventory
 
@@ -333,7 +339,7 @@ Tổng 318 chức năng: Đã chạy 213 · Một phần 58 · Chỉ xem 41 · T
 | Điều chỉnh tồn | Hộp theo một kho: Adjust Quantity và New Quantity liên động, lý do bắt buộc trong 11 giá trị, ghi chú, chấp nhận số lẻ. Không chặn giảm quá  | Đã chạy | Chỉnh âm không chặn |
 | Chuyển kho | Nhập số chuyển, chọn kho đích, danh sách đích chỉ gồm kho còn lại kèm tồn. Nút khoá khi tồn từ 0 trở xuống. Nhập quá tồn thì cắt về tồn hiện | Đã chạy | Tự cắt số lượng |
 | Cảnh báo tồn thấp | Nhãn theo từng kho: Low Stock khi tồn trên 0 và từ điểm đặt lại trở xuống, số màu cam; Out of Stock khi từ 0 trở xuống. Điểm đặt lại 0: tồn  | Một phần | Chặn: Email tồn thấp |
-| Tính giá tồn | Chọn một trong Average Cost, FIFO, LIFO, Static Pricing. Static: Unit Cost phụ tùng giữ theo danh mục dù đơn mua giá khác; Total Inventory V | Một phần | Chặn: Đổi cách tính giá |
+| Tính giá tồn | Chọn một trong Average Cost, FIFO, LIFO, Static Pricing. Static: Unit Cost phụ tùng giữ theo danh mục dù đơn mua giá khác; Total Inventory V | Một phần | Chặn: Đổi một chiều, chờ user quyết; đọc cảnh báo |
 | Xuất phụ tùng cho lệnh | Chọn phụ tùng thấy tồn từng kho; lấy từ kho hoặc None không trừ kho; gắn đầu việc. Trừ ngay khi lưu. Không cảnh báo khi vượt tồn. | Đã chạy | Chạy |
 | Bulk Manage Parts | Tab theo kho; cột Aisle, Row, Bin, Active?, Track Inventory, Current Qty, Last Quantity Update; sửa ô là tự lưu, sổ loại Bulk Update, không  | Đã chạy | Print Worksheet tự tải PDF |
 | Nhiều nhà cung cấp, lịch sử giá | Thêm nhà cung cấp, giá trong Purchase History; đơn mua tự thêm dòng lịch sử; trang phụ tùng vẽ biểu đồ giá. | Đã chạy | Chạy |
@@ -341,6 +347,7 @@ Tổng 318 chức năng: Đã chạy 213 · Một phần 58 · Chỉ xem 41 · T
 | Tác động của hoàn thành, mở lại lệnh | Hoàn thành: sổ không có dòng mới, sinh Service Entry, Edit khoá; cần Started At, Start Odometer theo cài đặt. Mở lại: sổ không đổi, liên kết | Đã chạy | Chạy |
 | Phiếu kiểm kê in | Print Worksheet ở Bulk Manage: một cú bấm, không mở tab, tự tải PDF theo kho đang chọn. PDF một trang: tên, địa chỉ tài khoản; Part, Categor | Đã chạy | Chạy |
 | Menu trang phụ tùng | "Update Quantity", "Archive" (mờ với PT-A), "View Record History". | Chỉ xem | Xem |
+| Đổi phương pháp tính giá tồn | Settings › Parts & Inventory › Inventory Valuation Method: 4 radio có mô tả, không có nút Save. Chọn radio khác mới hiện khối cảnh báo, ô tí | Chỉ xem | Xem câu chữ; chưa bấm Activate, chưa đo giá |
 
 ## Purchase Orders
 
@@ -451,10 +458,12 @@ Tổng 318 chức năng: Đã chạy 213 · Một phần 58 · Chỉ xem 41 · T
 | Lịch sử bản ghi | View Record History; lịch sử từng trường. Có trên xe, automation, Issue. Cột Date, Changes By, Changes Made, lọc theo khoảng ngày. Comment,  | Đã chạy | Đọc lịch sử Issue, xe |
 | Kho tài liệu | Danh sách file, thư mục, biết gắn bản ghi nào; tab All Documents và tab tên tài khoản; cột File Name, File Size, Location, Auto-Delete, Atta | Đã chạy | Tải tệp TEST, gắn xe |
 | Liên hệ một bảng | Một bảng Contact, phân vai bằng tick Operator, Employee, Technician; User Access: Enable Access to Fleetio hoặc No Access (mặc định). Người  | Một phần | Chặn: Enable Access có thể gửi mời |
-| Motor Pool | Đặt xe dùng chung: cột Motor Pool, Number, Operator, Vehicle Types, Vehicle, Pick Up, Drop Off, Status; Settings có Motor Pools, Reservation | Chỉ xem | Chặn: Cần Motor Pool trong Settings |
+| Motor Pool | Đặt xe dùng chung: cột Motor Pool, Number, Operator, Vehicle Types, Vehicle, Pick Up, Drop Off, Status; Settings có Motor Pools, Reservation | Một phần | Tạo pool; đặt xe không có Operator |
 | Cài đặt thông báo cá nhân | Email, Mobile App bật tắt chung; 18 nhóm sự kiện, mỗi sự kiện cột Email, Push; "You are watching 20 vehicles"; tự theo dõi xe mới, bản ghi m | Chỉ xem | Xem, không lưu |
 | Gắn tài liệu vào xe | Select Vehicles mở "Attach Document to Vehicles": tìm, Attached Vehicles, All Vehicles, Vehicle Types, Groups; gắn xong nút thành "Attached" | Một phần | Chạy một phần: Gắn 1 xe |
 | Mở truy cập từ liên hệ | Chọn Enable Access: "This Contact will be enabled as a User...", Login Information gồm Email, Delay email invitation, Message; Role * mặc đị | Chỉ xem | Xem, không lưu |
+| Tạo Motor Pool | Form Add Motor Pool: Name *, Groups *, Vehicle Types *, Vehicle Statuses * (mặc định Active), "Automatically calculate charges", 'Require "R | Một phần | Chạy một phần: Tạo pool; Auto Approvals, Rates, Fees chỉ đọc |
+| Đặt xe theo loại xe | Form Vehicle Reservation: Operator *, Motor Pool *, Reason for Trip, Pick Up *, Drop Off *. Chọn pool thì hiện Vehicle Types * chỉ gồm loại  | Một phần | Chạy một phần: Submit thiếu dữ liệu; chưa tạo được đặt xe |
 
 ## Tích hợp, API
 

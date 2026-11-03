@@ -39,6 +39,9 @@ erDiagram
     ACCOUNT ||--o{ RECALL : "có"
     ACCOUNT ||--o{ MOTOR_POOL : "có"
     MOTOR_POOL ||--o{ RESERVATION : "nhận"
+    MOTOR_POOL ||--o{ AUTO_APPROVAL_WINDOW : "có"
+    ACCOUNT ||--o{ RATE_TABLE : "có"
+    ACCOUNT ||--o{ FLAT_FEE : "có"
     CONTACT ||--o{ RESERVATION : "đặt"
     ACCOUNT ||--o{ DOCUMENT : "lưu"
     DOCUMENT ||--o{ DOCUMENT_ATTACHMENT : "gắn"
@@ -191,6 +194,29 @@ erDiagram
     }
     MOTOR_POOL {
         string ten
+        string nhom
+        string loai_xe
+        string trang_thai_xe
+        boolean tinh_phi_tu_dong
+        boolean bat_buoc_ly_do
+        boolean tu_duyet
+    }
+    AUTO_APPROVAL_WINDOW {
+        string mui_gio
+        string ngay
+        string gio_bat_dau
+        string gio_ket_thuc
+        boolean ca_ngay
+    }
+    RATE_TABLE {
+        string ten
+        string trang_thai
+    }
+    FLAT_FEE {
+        string ten
+        string trang_thai
+        number so_tien
+        string loai_xe
     }
     RESERVATION {
         string so
@@ -259,4 +285,5 @@ erDiagram
 - API Key không vẽ giá trị khoá; không tạo khoá trong lượt chạy (`Xem`).
 - Group gán cho cả xe và liên hệ; xe thuộc nhóm Phương tiện nên không vẽ lại ở đây (`Xem`).
 - Report Share Link không lưu trong sơ đồ giá trị đường dẫn vì tài liệu này không ghi link đã chia sẻ.
-- Quan hệ Reservation với xe và Recall với xe, Issue thuộc nhóm khác, chưa chạy.
+- Quan hệ Reservation với xe và Recall với xe, Issue thuộc nhóm khác, chưa chạy. Reservation ghi loại xe trước, cột Vehicle trên danh sách cho thấy có xe cụ thể về sau (`Suy`); chưa tạo được đặt xe nào.
+- Contact đặt xe phải vừa có User vừa có tick Operator (`Chạy`). Motor Pool cấu hình đọc từ form (`Chạy`); Auto Approval Window, Rate Table, Flat Fee chỉ đọc (`Xem`).

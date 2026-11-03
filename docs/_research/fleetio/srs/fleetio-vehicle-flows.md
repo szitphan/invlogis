@@ -183,7 +183,7 @@ flowchart TD
     C -->|"Standard templates"| T{"Có mẫu"}
     T -->|"Không"| U["E-016 No options, chọn lại"]
     U --> C
-    T -->|"Có, chưa chạy"| D["Coverage theo mẫu"]
+    T -->|"Có, mẫu riêng hoặc OEM"| D["Coverage preview, mỗi coverage một bảo hành"]
     C -->|"Standard, Extended"| D2["Nhập thời hạn, quãng đường"]
     D --> E["Gắn mã bảo dưỡng"]
     D2 --> E
@@ -196,7 +196,7 @@ flowchart TD
     J --> K
 ```
 
-E-014: Start Meter nhập 1000 hiện 1 km.
+E-014: Start Meter chỉ giữ ký tự đầu, 1000 thành 1 km, 2365 thành 2 km. E-016 là do chưa có mẫu đúng điều kiện, không phải do thiếu Make.
 
 ## Flow 9: Đổi trạng thái, Archive (`Chạy`; quyền `Xem`; Motor Pool `Xem` câu chữ)
 
@@ -227,7 +227,7 @@ flowchart TD
     L --> H
 ```
 
-Motor Pool đang đặt cũng chặn Archive theo câu trong hộp, chưa tạo đặt xe để thử. Automation đổi trạng thái: mẫu `Xem`, một automation tự tạo đã `Chạy` (người đổi ngược bị lật lại sau khoảng 1 giây, không báo), xem nhóm Nền tảng.
+Motor Pool đang đặt cũng chặn Archive theo câu trong hộp, chưa tạo được đặt xe để thử (Flow 18); khi chạy lại phải đóng Lệnh đang mở trước. Automation đổi trạng thái: mẫu `Xem`, một automation tự tạo đã `Chạy` (người đổi ngược bị lật lại sau khoảng 1 giây, không báo), xem nhóm Nền tảng.
 
 ## Flow 10: Phân tích thay xe (`Chạy` đọc)
 
@@ -364,3 +364,44 @@ flowchart TD
 ```
 
 Gỡ tài liệu đã đính: chưa thử.
+
+## Flow 17: Tạo, áp, sửa mẫu bảo hành (`Chạy`; lựa chọn tương lai chưa thử)
+
+```mermaid
+flowchart TD
+    A["Settings, Warranty Templates, Add"] --> B["Name, Meter Unit, thêm coverage"]
+    B --> C{"Có ít nhất 1 coverage"}
+    C -->|"Chưa"| D["Save Warranty Template xám"]
+    D --> B
+    C -->|"Rồi"| E["Lưu mẫu"]
+    E --> F["New Warranties, Standard templates, chọn mẫu"]
+    F --> G["Coverage preview, sửa riêng lần này được"]
+    G --> H["Save Warranties, mỗi coverage một bảo hành"]
+    H --> I{"Sửa mẫu sau đó"}
+    I -->|"Không"| Z["Kết thúc"]
+    I -->|"Có"| J{"Hộp Template Change"}
+    J -->|"Chỉ tương lai, chưa thử"| Z
+    J -->|"Cả quá khứ"| K["Báo số xe bị ảnh hưởng, ghi đè phần sửa riêng"]
+    K --> L["Bảo hành đã sinh đổi theo mẫu"]
+    L --> Z
+```
+
+## Flow 18: Motor Pool và đặt xe (`Chạy` tới kiểm tra form; đặt xe chưa tạo được)
+
+```mermaid
+flowchart TD
+    A["Settings, Motor Pools, Add"] --> B["Name, Groups, Vehicle Types, Vehicle Statuses"]
+    B --> C["Motor Pool was successfully created"]
+    C --> D["Add Vehicle Reservation, chọn pool"]
+    D --> E["Hiện Vehicle Types của pool, chọn loại, không chọn xe"]
+    E --> F{"Có Operator vừa đăng nhập vừa phân loại"}
+    F -->|"Không"| G["E-034, No options, dừng"]
+    F -->|"Có, chưa thử"| H{"Đủ dữ liệu"}
+    H -->|"Thiếu"| I["E-033, không tạo bản ghi"]
+    I --> D
+    H -->|"Đủ, chưa chạy"| J["Duyệt, gán xe, chưa ghi nhận"]
+    G --> Z["Kết thúc"]
+    J --> Z
+```
+
+E-033 đã thấy khi Submit thiếu Operator, dù nhánh "Có" chưa đạt được. Archive khi có đặt chỗ: chưa chạy.

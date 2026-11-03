@@ -26,6 +26,8 @@ stateDiagram-v2
     Upcoming --> DueSoon: Sửa bộ lịch
     Upcoming --> Upcoming: Hoàn thành sớm
     Upcoming --> Overdue: Đặt tay hạn đã qua
+    Upcoming --> DueSoon: Dự báo vào ngưỡng thời gian
+    DueSoon --> Upcoming: Dự báo ra ngưỡng hoặc tắt Forecasting
     Overdue --> Upcoming: Hoàn thành, mốc mới xa
     Overdue --> Snoozed: Hoãn đến ngày tương lai
     Upcoming --> Snoozed: Hoãn đến ngày tương lai
@@ -48,6 +50,9 @@ stateDiagram-v2
 | Upcoming | Sửa bộ lịch | Due Soon | Mốc mới gần | Xử lý ngầm rồi đổi; không hỏi | "Service Schedule was successfully updated" | `Chạy` |
 | Upcoming | Snooze | Snoozed | Không có ô lý do | Next Due giữ "3 months from now"; Record History ghi Snooze Until | "2,001 kilometers remaining" | `Chạy` |
 | Upcoming | Đặt tay hạn cũ hơn hôm nay | Overdue | Không chặn | Overdue ngay | | `Chạy` |
+| Upcoming | Forecasting bật, số km ngày đưa ngày dự báo vào ngưỡng | Due Soon | 14 ngày trên ngưỡng 2 tuần; còn 700 km trên ngưỡng 500 km vẫn đổi; nhắc chỉ km cũng đổi, cơ chế chưa rõ (OQ-30) | Tab, thẻ Due Soon tăng; có thể sinh thông báo, chưa đo | "6 days from now", "2 weeks from now" | `Chạy` |
+| Due Soon | Số km ngày giảm, ngày dự báo ra ngoài ngưỡng | Upcoming | 15,2 ngày | | "2 weeks from now" | `Chạy` |
+| Due Soon | Tắt Forecasting, trạng thái do dự báo | Upcoming | Về ngay | Due Soon 11 về 8 | | `Chạy` |
 | Upcoming | Resolve › Draft Work Order | Giữ nguyên | Khoá theo trạng thái, không theo gói; xám, icon khoá | Bấm không phản hồi | "Available when this reminder is due soon or overdue." | `Chạy` |
 | Upcoming | Resolve › Find a shop | Giữ nguyên | Dừng ở Confirm, không bấm Assign | Hộp "Assign outsourced service" | "Ready to assign" | `Chạy` đến Confirm |
 | Due Soon | Đồng hồ đạt mốc | Overdue | Đúng bằng mốc cũng Overdue | Next Due đỏ | "0 kilometers remaining" | `Chạy` |
@@ -195,6 +200,7 @@ stateDiagram-v2
 | Bộ lịch (Service Program) | Không có trạng thái; chỉ có tiến trình ngầm "Processing", "Complete" | `Chạy` |
 | Đầu việc (Service Task) | Danh mục | `Chạy` |
 | Số đồng hồ (Meter Entry) | Chỉ có cờ Void Status "Manually Voided"; tick Void trên phiếu không gỡ yêu cầu ảnh | `Chạy` |
+| Cài đặt Forecasting | Chỉ bật, tắt ở cấp tài khoản, không có vòng đời; tắt về nguyên trạng | `Chạy` |
 | Trạng thái xe qua workflow | Vòng đời xe xem nhóm Phương tiện; ở đây chỉ ghi tác động: "If form is submitted" đổi được sang Active, In Shop, Inactive, Out of Service, Sold | `Chạy` với In Shop |
 
 ## 7. Bản nháp lệnh (Draft Work Order)

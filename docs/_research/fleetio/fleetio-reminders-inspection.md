@@ -93,7 +93,7 @@ Xe được nhắc bảo dưỡng theo thời gian hoặc số km, trục nào �
 - N34 [Mới] [Gói: Bảo dưỡng đội xe] **Đọc hoá đơn thành phiếu dịch vụ bằng AI:** màn đối chiếu cạnh tài liệu, dưới 30 giây đọc đúng đồng hồ, ngày, số hoá đơn, nhà cung cấp, thuế, tổng; gộp dòng thành đầu việc hệ thống. `Chạy`. Điểm yếu: đầu việc gợi ý không gắn với nhắc đang chờ, phải tự thêm mới đóng nhắc.
 - N35 [Mới] [Gói: Bảo dưỡng đội xe] **Giao dịch vụ thuê ngoài từ nhắc:** hộp 3 bước, gom nhắc của xe, chọn người, cách báo. `Chạy` đến Confirm; chưa thấy danh sách cửa hàng.
 - N36 [Mới] [Gói: Bảo dưỡng đội xe] **AI đánh giá phiếu dịch vụ:** sau lưu ra "Acceptable" kèm nhận xét, cần phiếu có giá; có chỗ dạy luật riêng của đội xe. `Chạy` đọc kết quả, chưa thêm luật.
-- N17 [Mới] [Gói: Bảo dưỡng đội xe] **Dự đoán ngày đến hạn** từ số km trung bình ngày. `Xem` nút Enable Forecasting, chưa bật vì là cài đặt cấp tài khoản; kết quả dự báo chỉ `Docs`.
+- N17 [Mới] [Gói: Bảo dưỡng đội xe] **Dự đoán ngày đến hạn** từ số km trung bình ngày, theo từng thuộc tính của nhắc. `Chạy`: bật bằng ô tích ở Settings, không hỏi xác nhận, tắt là về nguyên trạng. Dự báo đổi trạng thái thật: còn 700 km trên ngưỡng 500 km vẫn sang Due Soon khi ngày dự báo vào ngưỡng 2 tuần (Fleetio). Popover bày đủ phép tính; Group Week, Month chỉ có khi bật. Số km tự tính thật, đồng hồ phụ, thông báo chưa đo.
 - N18 [Mới] [Gói: Bảo dưỡng đội xe] **Thời lượng làm phiếu và nguồn nộp** ghi tự động. `Chạy`: "Duration 2m 17s", "Fleetio Web App". Thời lượng quá ngắn là dấu hiệu kiểm khống (`Suy`).
 - N30 [Mới] [Gói: Bảo dưỡng đội xe] **KPI đếm theo xe:** 2 nhắc Overdue trên 1 xe vẫn là "Overdue Vehicles 1". `Chạy`. Hợp câu hỏi "bao nhiêu xe cần vào xưởng".
 
@@ -155,6 +155,7 @@ Dựng biểu mẫu ─> Gán xe, lịch ─> Làm phiếu ─> Nộp ─┬─ 
 | D10 | 5.3 | Có workflow đổi trạng thái (form submitted, mục đạt, mục lỗi) | Xe đổi ngay, không hỏi, kể cả phiếu đạt hết | Xe giữ nguyên |
 | D11 | 5.1 | Trễ so với hạn | Dưới 10% chu kỳ (Fleetio): On-Time, chữ đỏ; từ 10%: Late | On-Time |
 | D12 | 5.3 | Mục kho có chọn phụ tùng | Nộp là trừ kho ngay, không duyệt | "No parts used" |
+| D13 | 5.1 | Forecasting bật, ngày dự báo vào ngưỡng thời gian | Due Soon, kể cả còn trên ngưỡng km | Theo mốc thường |
 
 ### 6.2 Cases đã chạy
 
@@ -305,6 +306,7 @@ Mã đầy đủ có tiền tố `E-fleetio-reminders-inspection-`.
 | Bắt chụp trực tiếp mà thiết bị không có camera, phiếu kẹt lại | Trung | Đường dự phòng có ghi nhận ngoại lệ; lái xe dùng app điện thoại nên ít gặp hơn web (`Suy`) |
 | Workflow đổi trạng thái xe không phân biệt đạt, lỗi | Trung | Chỉ cho đổi trạng thái khi có mục lỗi, hỏi xác nhận |
 | Phiếu trừ kho ngay, không duyệt, không lý do; lái xe gõ sai là lệch tồn | Trung | Đề xuất có bước duyệt hoặc giới hạn số lượng |
+| Số km ngày nhập sai làm dự báo kéo nhiều nhắc sang Due Soon | Trung | Báo rõ nhắc đổi vì dự báo, kiểm số km ngày bất thường |
 | AI đoán sai loại mục, người dùng bấm tạo luôn | Trung | Bắt rà trước khi tạo, không mặc định bắt buộc mọi mục |
 | Quá nhiều thông báo khiến người dùng bỏ qua | Trung | Hồ sơ thông báo theo vai trò |
 | Bắt buộc số km làm dữ liệu rác nếu nhập vội | Trung | Lấy từ GPS, nhập tay chỉ khi thiếu |
@@ -357,6 +359,8 @@ Mã đầy đủ có tiền tố `E-fleetio-reminders-inspection-`.
 - **Vị trí từng mục trên app, hai chỉ báo tách riêng:** mục quá gần nhau và số mục quá xa là hai dấu hiệu kiểm khống khác nhau.
 - **Create Issue một cú bấm từ dòng lỗi:** quản lý không phải nhập lại, tiêu đề tự sinh từ mục.
 - **Rule không nhận thuộc tính đổi liên tục:** cảnh báo ngay Current Operator thay vì lưu một Rule chạy sai.
+- **Popover bày đủ phép tính dự báo từng bước:** người dùng tự kiểm được vì sao ra ngày đó, đáng học cho đầu kéo, mooc khi dự báo theo km.
+- **Bật một công tắc, tắt lại không mất dữ liệu:** thử an toàn. Cho nhập tay số km ngày cho xe mới chưa đủ đồng hồ.
 - **Draft Work Order khoá theo trạng thái nhắc, có câu giải thích:** không cho soạn nháp khi chưa tới ngưỡng, nói rõ khi nào mở.
 - **Màn Smart Upload đặt tài liệu cạnh các ô đọc được:** rà nhanh, sửa ngay trước khi đổ vào form.
 - **Sau khi gán bộ lịch, đầu việc của bộ xám ở form nhắc lẻ:** chặn trùng ngay từ đầu.
@@ -389,6 +393,9 @@ Mã đầy đủ có tiền tố `E-fleetio-reminders-inspection-`.
 - **Ưu tiên sự cố tự gán không có câu giải thích:** cùng phiếu có Critical và No Priority. Đề xuất Invlogis: ghi lý do gán, cho sửa.
 - **Rule bộ lịch bị khoá chỉ vì còn dữ liệu mẫu:** khách dùng thử không thử được tính năng này. Đề xuất Invlogis: dữ liệu mẫu tách khỏi luật thật.
 - **Bấm ASAP làm Continue khoá, không báo gì:** có thể là lỗi, chưa rõ.
+- **Dự báo âm thầm đổi Due Soon:** số km ngày nhập sai có thể làm đầy hàng việc. Đề xuất Invlogis: ghi rõ nhắc đổi vì dự báo.
+- **Nhóm "This Week" chứa nhắc không có ngày, Group Week ẩn cột Next Due:** dễ đọc nhầm. Đề xuất Invlogis: nhóm riêng "không có dự báo".
+- **Form Vehicle và nhắc nói khác nhau về số km ngày; phép tính "1 day ago × 10" ra 0; 700 km ÷ 100 hiện 6 ngày:** chưa giải thích được, xem SRS OQ-28 đến OQ-31.
 - **Chữ lỗi sai ngữ cảnh:** "is required" khi ảnh còn đang tải; "behind" đỏ trên dòng On-Time.
 
 ## 14. Câu hỏi đã có câu trả lời từ chạy thử
@@ -405,5 +412,6 @@ Mã theo [[docs/_research/fleetio/srs/fleetio-reminders-inspection-spec.md|SRS]]
 | OQ-14 | Fleetio Go có vị trí từng mục không? | Có, 21/21 mục; xác nhận lại, ngoại tuyến chưa kiểm | `Chạy (Fleetio Go)` |
 | OQ-15 | Photo, các trigger, đổi trạng thái, trừ kho? | Đã chạy; Send an email, Assign user còn mở | `Chạy` |
 | OQ-16 | Biên 10%, nhiều lần? | Dưới 10% mới On-Time: 99 km On-Time, 100 km Late trên 1.000 km; 9 ngày On-Time, 10 ngày Late trên 92 ngày; nhiều lần tính theo lần | `Chạy` |
+| FR-009 | Forecast chạy thế nào? | Bật bằng ô tích, đổi trạng thái thật, popover phép tính, Group Week, Month; 4 điểm lệch còn mở OQ-28 đến OQ-31 | `Chạy` |
 | OQ-19 | Draft Work Order khoá vì gì? | Theo trạng thái nhắc, không theo gói: "Available when this reminder is due soon or overdue." | `Chạy` |
 | OQ-21 | Rule bộ lịch có tự thêm xe mới không? | Chưa biết; ô Rule khoá khi còn Sample Data, phải tắt ở cấp tài khoản | `Chạy` phần khoá |

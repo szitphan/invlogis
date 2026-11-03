@@ -50,9 +50,9 @@ stateDiagram-v2
 | Overdue | Đổi hạn sang tương lai | Open | Tự tính khi lưu | Không có sự kiện, không có nút | Không có | `Chạy` |
 | Open, đã gắn lệnh | Add to Service Entry, Add to Work Order, Resolve with Note | Không đổi được | Mục xám có khoá, phải gỡ khỏi lệnh trước | Không có | "Issue already added to a Work Order. Remove it from all Work Orders to add it to another." | `Chạy` |
 | Open, đã gắn lệnh | Close | Không đổi được | Mục xám, phải gỡ khỏi lệnh trước | Không có | "...already added to a Work Order. Remove it from all Work Orders to close" | `Chạy` #45 |
-| Open, đã gắn lệnh | Draft Work Order | Không đổi được ở lượt 3 | Xám có khoá trên #45; lượt trước mục này còn dùng được, chưa rõ lý do (OQ-19) | Không có | "Issue already added to a Work Order. Remove it from all Work Orders to add it to another." | `Chạy` #45 |
+| Open, đã gắn lệnh | Draft Work Order | Không đổi được ở lượt 3, lượt 5 | Xám có khoá trên #45, #46; lượt trước mục này còn dùng được, chưa rõ lý do (OQ-19) | Không có | "Issue already added to a Work Order. Remove it from all Work Orders to add it to another." | `Chạy` #45 |
 | Open, đã gắn lệnh | Được AI gợi ý từ nháp của sự cố khác | Giữ nguyên lệnh cũ | Tạo lệnh mới từ nháp | Sự cố không chuyển; đầu việc vào lệnh mới thành dòng trùng (E-022) | "Also recommended for this vehicle" | `Chạy` #45, #110 |
-| Open, đã gắn lệnh | Edit, Get Service at Shop | Giữ Open | Mục vẫn sáng; Get Service at Shop bấm tiếp cần đổi Cài đặt, không chạy | Không có | Không có | `Chạy` một phần |
+| Open, đã gắn lệnh | Edit, Get Service at Shop | Giữ Open | Mục vẫn sáng; Enable Shop Network chuyển sang Fleetio Pay, bị từ chối, vẫn chưa bật | Không có | "Access Denied", "You do not have access to the requested URL." | `Chạy` #46 |
 | Open, đã gắn lệnh | Delete | Không rõ | Vẫn sáng, không bấm | Chưa thử | Không rõ | `Xem` |
 | Open, đã gắn lệnh | Bỏ tick ở form lệnh rồi lưu | Open, tự do | Lệnh chưa Completed | Timeline xoá dòng "added this issue" | "No issues to show." | `Chạy` |
 | Open, đã gắn lệnh | Lệnh Completed | Resolved bằng lệnh | Lệnh đủ điều kiện | Xem đối tượng Lệnh | "Issue Resolved by work order" | `Chạy` |
@@ -69,7 +69,7 @@ stateDiagram-v2
 
 ## Lệnh sửa
 
-Danh mục có 3 trạng thái mặc định; mỗi trạng thái thuộc loại Incomplete hoặc Completed. Khách thêm được là `Docs`, không thử vì là danh mục dùng chung trong Settings. Tình trạng riêng từng dòng: web không thấy ô đánh dấu (`Chạy` #107).
+Danh mục có 3 trạng thái mặc định; mỗi trạng thái thuộc loại Incomplete hoặc Completed. Khách thêm được, loại chỉ có hai, chọn bằng một ô tick (`Chạy` #106). Trạng thái tuỳ biến cùng loại hành xử như nhau; sơ đồ dùng tên chung cho các trạng thái khách thêm. Không ràng buộc thứ tự, không khai vai trò. Tình trạng riêng từng dòng: web không thấy ô đánh dấu (`Chạy` #107).
 
 ```mermaid
 stateDiagram-v2
@@ -80,6 +80,18 @@ stateDiagram-v2
     Pending --> Completed: Đủ điều kiện, không cần qua Open
     Completed --> Open: Xác nhận, xoá Service Entry
     Completed --> Pending: Xác nhận, xoá Service Entry
+    Open --> IncompleteTuyBien: Đổi trạng thái, không hỏi
+    Pending --> IncompleteTuyBien: Đổi trạng thái, không hỏi
+    IncompleteTuyBien --> Open: Đổi trạng thái, không hỏi
+    IncompleteTuyBien --> Completed: Đủ điều kiện
+    IncompleteTuyBien --> CompletedTuyBien: Đủ điều kiện
+    Open --> CompletedTuyBien: Đủ điều kiện
+    Pending --> CompletedTuyBien: Đủ điều kiện
+    Completed --> CompletedTuyBien: Không hỏi, giữ Service Entry
+    CompletedTuyBien --> Completed: Không hỏi, giữ Service Entry
+    CompletedTuyBien --> IncompleteTuyBien: Xác nhận, xoá Service Entry
+    CompletedTuyBien --> Open: Xác nhận, xoá Service Entry
+    Completed --> IncompleteTuyBien: Xác nhận, xoá Service Entry
     Open --> [*]: Delete, chưa thử
 ```
 
@@ -99,6 +111,11 @@ stateDiagram-v2
 | Pending | Như Open | Open, Completed | Như Open, không phải quay qua Open | Như Open | "Work Order was successfully updated" | `Chạy` |
 | Completed | Edit | Không đổi được | Nút khoá | Không có | Không có | `Chạy` |
 | Completed | Đổi Open hoặc Pending | Open hoặc Pending | Hộp "Update Status", Confirm | Xoá entry, sự cố về Open; đồng hồ GIỮ; tồn GIỮ; khôi phục archive chạy nền, vài giây trang vẫn Completed | "Changing this completed Work Order to an incomplete Status will automatically restore any archived parts, part locations, and contacts associated with line items. Are you sure you wish to continue?" | `Chạy` |
+| Incomplete tuỳ biến | Đổi sang Incomplete bất kỳ | Incomplete bất kỳ | Không ràng buộc thứ tự, không hỏi | Chỉ ghi Status Updates | "Work Order was successfully updated" | `Chạy` #106 |
+| Incomplete bất kỳ | Đổi sang Completed tuỳ biến, thiếu dữ liệu | Giữ nguyên | Started At trống | Không có | "Please edit and fix the following errors: Started At can't be blank" | `Chạy` #106 |
+| Incomplete bất kỳ | Đổi sang Completed tuỳ biến, đủ dữ liệu | Completed tuỳ biến | Started At, đồng hồ | Y như Completed gốc: sinh Service Entry, khoá Edit; không có bước chờ nghiệm thu | Không có | `Chạy` #106 |
+| Completed bất kỳ | Đổi sang Completed khác | Completed khác | Không hỏi | Giữ Service Entry cũ, không sinh thêm | Không có | `Chạy` #106 |
+| Completed bất kỳ | Đổi sang Incomplete tuỳ biến, Confirm | Incomplete tuỳ biến | Hộp "Update Status" | Xoá Service Entry, URL 404; hộp không báo xoá; sự cố về tab Open nhưng trên lệnh vẫn ở "Resolved Issues" | "Changing this completed Work Order to an incomplete Status..." | `Chạy` #106, #46 |
 | Completed | Run Assessment, Print, View Record History | Giữ Completed | Không có | Không có | Không có | `Chạy` |
 | Open, đã từng Completed | Đổi Completed lần nữa | Completed | Dữ liệu cũ còn, không hỏi lại | Entry mới số khác; Resolved Date, Time to Resolve như lần đầu; thêm dòng đồng hồ trùng nguồn entry | "Issue Resolved by work order" | `Chạy` |
 
@@ -263,6 +280,8 @@ stateDiagram-v2
 ## Đối tượng không có trạng thái thật
 
 - **Dòng việc:** tình trạng từng dòng và luật bắt buộc xong hết là `Docs`; web không thấy ô đánh dấu dòng (`Chạy` #107), chưa kiểm luật vì không đổi Settings.
+- **Danh mục trạng thái lệnh:** bản ghi cấu hình; có lệnh dùng thì khoá đổi loại, khoá Delete, hết lệnh thì mở lại (`Chạy`).
+- **Mẫu bảo hành:** không có trạng thái; sửa mẫu đã dùng mở hộp Template Change, áp tương lai hoặc cả quá khứ (`Chạy` quá khứ). Bảo hành sinh từ mẫu vẫn liên kết.
 - **Luật mã lỗi:** không có trạng thái; Priority Handling là giá trị cấu hình Off, Ignore Code, Flag as Critical (`Xem`).
 - **Hồ sơ bảo hành trên lệnh:** ba ô chữ, không có trạng thái (`Chạy` #107). Câu hỏi về chuyển trạng thái claim không áp dụng.
 - **Dòng phụ tùng, tồn:** dòng không có trạng thái, chỉ có sửa, xoá. Tồn theo kho có Low Stock, Out of Stock: xem [[docs/_research/fleetio/srs/fleetio-parts-purchasing-fuel-states.md|Kho, mua]].

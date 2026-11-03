@@ -101,7 +101,7 @@ flowchart TD
 ```mermaid
 flowchart TD
     A["Sự cố Open hoặc Overdue"] --> L{"Đã gắn lệnh?"}
-    L -->|"Có"| M["Khoá Add to Service Entry, Add to Work Order, Resolve with Note, Close. Draft Work Order xám trên #45, lượt trước còn mở"]
+    L -->|"Có"| M["Khoá Add to Service Entry, Add to Work Order, Resolve with Note, Close. Draft Work Order xám trên #45, #46, lượt trước còn mở"]
     M --> N["Gỡ khỏi lệnh hoặc hoàn thành lệnh"]
     N -.->|"Gỡ khỏi lệnh"| B
     N --> K["Resolved khi lệnh hoàn thành"]
@@ -112,7 +112,7 @@ flowchart TD
     B -->|"Sửa nội bộ"| F{"Dùng AI?"}
     F -->|"Có"| H["Draft Work Order"]
     F -->|"Không"| G["Add to Work Order, tab mới"]
-    B -->|"Cần tìm xưởng"| I["Get Service at Shop, cần bật Shop Network"]
+    B -->|"Cần tìm xưởng"| I["Get Service at Shop, xem Flow 28"]
     E --> J["Resolved khi lưu entry"]
     G --> K
     H --> K
@@ -512,3 +512,61 @@ flowchart TD
     C --> G["Không in Complaint, Cause, Correction trong phần đọc được"]
     A -.->|"Email PDF, không chạy"| H["Gửi email, chưa kiểm"]
 ```
+
+## Flow 26: Trạng thái lệnh tuỳ biến (`Chạy` #106)
+
+```mermaid
+flowchart TD
+    A["Add Work Order Status"] --> B{"Tên hợp lệ?"}
+    B -->|"Trống"| C["E-029"]
+    B -->|"Trùng"| D["E-030"]
+    C -.->|"Sửa"| A
+    D -.->|"Sửa"| A
+    B -->|"Có"| E["Có ngay ở menu, form, bộ lọc, không thêm tab"]
+    E --> F{"Lệnh đổi sang loại nào?"}
+    F -->|"Incomplete bất kỳ"| G["Cập nhật ngay, ghi Status Updates"]
+    F -->|"Completed bất kỳ, thiếu dữ liệu"| H["E-006, giữ nguyên"]
+    F -->|"Completed bất kỳ, đủ dữ liệu"| I["Sinh Service Entry, khoá Edit"]
+    G --> F
+    H -.->|"Nhập ngày, đồng hồ"| F
+    I -->|"Sang Completed khác, không hỏi"| J["Giữ Service Entry cũ"]
+    I -->|"Sang Incomplete, hộp Update Status"| K["Xoá Service Entry, hộp không báo"]
+    K --> F
+    E -->|"Đổi loại khi có lệnh"| L["E-031"]
+    E -->|"Tick Default"| M["Huy hiệu chuyển hẳn, form lệnh mới chọn sẵn"]
+```
+
+## Flow 27: Mẫu bảo hành (`Chạy` mẫu riêng, áp quá khứ; OEM `Xem`)
+
+```mermaid
+flowchart TD
+    A["Settings, Warranty Templates, Add"] --> B["Name, Meter Unit, ít nhất một coverage"]
+    B --> C["New Warranties, Standard templates"]
+    C --> D{"Xe thấy mẫu nào?"}
+    D -->|"Xe km, có mẫu km"| E["CUSTOM TEMPLATES"]
+    D -->|"Xe mi"| F["OEM TEMPLATES, không lọc hãng, không có đầu kéo"]
+    D -->|"Chưa có mẫu đúng điều kiện"| G["No options"]
+    E --> H["Coverage preview, sửa riêng lần này"]
+    F --> H
+    H --> I["Save Warranties, sinh bảo hành riêng"]
+    I --> J["Sửa mẫu đã dùng"]
+    J --> K{"Template Change"}
+    K -->|"Tương lai, mặc định, chưa chạy"| L["Chỉ áp lần sau"]
+    K -->|"Cả quá khứ"| M["Nêu số xe, cảnh báo ghi đè, End Date đổi"]
+    K -.->|"Cancel"| J
+```
+
+Lọc theo đơn vị đồng hồ là `Suy` từ 2 lần quan sát (OQ-27). Start Meter chỉ giữ ký tự đầu khi gõ tự động: E-032, chưa kết luận lỗi Fleetio hay công cụ (OQ-26).
+
+## Flow 28: Bật mạng lưới xưởng (`Chạy` #46, tới Access Denied)
+
+```mermaid
+flowchart TD
+    A["Resolve, Get Service at Shop"] --> B["Hộp giới thiệu, Learn more, Enable Shop Network"]
+    B -->|"Enable Shop Network"| C["Sang thiết lập Fleetio Pay"]
+    C --> D["E-033, Access Denied"]
+    D -.->|"Mở lại mục"| B
+    B -.->|"Đóng"| E["Sự cố giữ nguyên"]
+```
+
+Không thấy hộp điều khoản, phí. Dừng vì là phần thanh toán; chọn xưởng, gửi yêu cầu, hoá đơn chưa chạy (OQ-25).

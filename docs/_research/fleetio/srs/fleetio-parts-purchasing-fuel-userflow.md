@@ -54,6 +54,7 @@ flowchart TD
     ppdf["2.12 PDF đơn mua"]
     fs["2.13 Tìm xưởng"]
     ws["1.7 PDF phiếu kiểm kê"]
+    val["1.8 Đổi phương pháp tính giá tồn"]
     jf["3.5 Lọc dầu theo loại cảnh báo"]
     z["Xong"]
     menu -->|"Đơn mua"| a
@@ -97,6 +98,8 @@ flowchart TD
     fs -.->|"Huỷ"| v
     bulk -->|"In phiếu kiểm kê"| ws
     ws -->|"Kết thúc"| z
+    menu -->|"Cài đặt, phương pháp tính giá"| val
+    val -->|"Tải lại, không kích hoạt"| z
     j -->|"Lọc theo loại cảnh báo"| jf
     jf -->|"Mở dòng"| l
     pc -->|"Kết thúc"| z
@@ -161,6 +164,7 @@ Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221572`, vẽ t
 | 3.5 | Lọc dầu theo loại cảnh báo | fuel-filter-alert-type | Lọc Fuel Capacity Alert | Có |
 | 2.13 | Tìm xưởng | vendors-find-shops | Có kết quả | Không, không lưu vì có địa chỉ thật |
 | 1.7 | PDF phiếu kiểm kê | parts-worksheet-pdf | Theo kho đang chọn | Không, không lưu vì có địa chỉ tài khoản |
+| 1.8 | Đổi phương pháp tính giá tồn | settings-valuation-fifo-permanent-warning | Chọn FIFO, chưa kích hoạt | Có |
 
 ## 3. Flow theo tác vụ
 
@@ -170,6 +174,7 @@ Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221572`, vẽ t
 | Sửa khi đã mua, lùi | 2.1 → 2.11 → 2.1; Unmark về Approved | E-fleetio-parts-purchasing-fuel-026; sửa Draft: E-fleetio-parts-purchasing-fuel-032; sửa Full: E-fleetio-parts-purchasing-fuel-033 |
 | Sao chép, in, lịch sử | 2.1 → form đơn mới; 2.1 → 2.12; 2.1 → 2.10 | E-fleetio-parts-purchasing-fuel-030 |
 | Tìm xưởng | 2.2 → 2.13 | Add Vendor không bấm |
+| Đổi phương pháp giá | Cài đặt → 1.8 | E-fleetio-parts-purchasing-fuel-035; Activate không bấm |
 | Nhận vào lệnh | 2.1 → 2.5 → form lệnh | Huỷ form: hàng ở lại kho; E-fleetio-parts-purchasing-fuel-013; E-fleetio-parts-purchasing-fuel-014 |
 | Trả, đóng | 2.1 → 2.7 → 2.1 → 2.8; đã đóng → 2.9 | E-fleetio-parts-purchasing-fuel-015; E-fleetio-parts-purchasing-fuel-025; E-fleetio-parts-purchasing-fuel-027 |
 | Sửa sau nhận | 2.1 → 2.6 → 2.1 | Nhà cung cấp, kho khoá; không thêm bớt dòng |

@@ -329,3 +329,25 @@ OQ-13 sửa: Draft chưa Edit: 0; Draft đã Edit và lưu: số vào Pending. O
 - Yếu: đơn Full không tính lại trạng thái khi tăng số đặt: đơn báo đủ hàng dù đang thiếu.
 - Học: đổi kho và NCC trên Draft không xoá dòng hàng, đỡ nhập lại.
 - Dữ liệu cuối: PO #5 Draft số 6, kho TEST-KHO-02, NCC TEST-NCC-01. PO #3 đã trả số cũ. Pending PT-A ở KHO-02 lần đọc cuối là 7, trước khi sửa về 6; chưa đọc lại.
+
+# Lượt 5 (03/11)
+
+User cho phép đổi Inventory Valuation Method trên tài khoản thử. Màn: Settings > Parts & Inventory > Inventory Valuation Method (`account/inventory_valuation_method_settings/edit`). Giá trị cũ trước khi đổi: **Static Pricing**. Bốn lựa chọn radio, không có nút Save trên trang.
+
+## Tính giá tồn FIFO, LIFO, Average (FR-008, OQ-11) — Không chạy: hộp xác nhận ghi đổi vĩnh viễn, dừng trước Activate, chờ user quyết
+Các bước đã làm: Chọn lần lượt radio Average, FIFO, LIFO để đọc cảnh báo (chọn radio không lưu gì). KHÔNG tích ô xác nhận, KHÔNG bấm Activate. Tải lại trang: vẫn `static=true`, tích ô `false`. Không đo được giá xuất kho theo phương pháp nào.
+Kết quả thấy được:
+- Đổi không có Save thường. Chọn radio khác mới hiện khối cảnh báo, ô tích "I am aware the change I am about to make is permanent and can not be reversed" và nút "Activate" (xám tới khi đủ điều kiện).
+- Mô tả phương pháp: Average "When adding a Part to a Work Order, Fleetio will use the current average unit cost for the selected inventory location." FIFO "The price applied to the work order will be the price from the earliest quantity until depleted." LIFO "...from the latest quantity until depleted." Average tính theo từng kho, FIFO, LIFO "dated inventory record ... at each Part Location".
+- Cảnh báo chung cả 3: "Archived part quantities will be reset to 0".
+- Cảnh báo riêng Average: "For Part Line Items with negative or $0.00 unit costs on Work Orders created before this migration: if the Parts are returned to inventory after migration, Fleetio will not recalculate your Average Unit Cost using negative or $0.00 unit costs. Consider updating to a positive value."
+- Cảnh báo riêng FIFO, LIFO: "Any parts with inventory tracking disabled at a location and have ever been used on a Work Order cannot be enabled for tracking after this migration"; "Any parts with inventory tracking enabled at a location and have ever been used on a Work Order cannot be disabled for tracking after this migration"; "Part line items on Work Orders created before this migration will be permanently uneditable after this migration".
+- Điều kiện kích hoạt chung: "All parts must have a unit cost of ₫1 or greater (limited to 0 decimal places). We will use the Unit Cost value stored on the primary Part record as the effective price for each individual unit of current inventory of that Part, across all Part Locations." Hiện "2 part(s)" đang theo dõi tồn mà chưa có Unit Cost.
+- Điều kiện riêng FIFO, LIFO: "For LIFO/FIFO, all incomplete Work Orders with part line items must be completed. An incomplete Work Order at the time of migration will cause the migration to fail. There are currently 3 Work Order(s) in your account in an incomplete state..."
+Vì sao dừng: bước 3 của brief cần trả về Static sau khi đo; hộp nói không đảo được. Đổi một lần thì chỉ đo được 1 trong 3 phương pháp, khoá sửa dòng phụ tùng của mọi lệnh cũ (FIFO, LIFO), đưa tồn phụ tùng Archived về 0, phải sửa thêm 2 phụ tùng và đóng 3 lệnh (có thể của agent khác). Việc này không hoàn tác được nên cần user quyết sau khi biết nguyên văn.
+Bất ngờ, lỗi, điểm khác tài liệu hãng: Không có lịch sử migration hay bản xem thử giá trị tồn trước khi Activate. Toàn bộ tồn hiện có nhận giá = Unit Cost danh mục, không phải giá đơn mua trước đó. Chưa kiểm chứng được "không đảo được" bằng thao tác, chỉ theo câu chữ hộp.
+Màn mới: settings-valuation-fifo-permanent-warning — images/settings-valuation-fifo-permanent-warning.jpg — tiêu đề, 4 radio có mô tả, khối cảnh báo cam (lưu ý + điều kiện, link 2 part(s), Download the CSV, Parts Import, 3 Work Order(s), list of incomplete Work Orders), ô tích, nút Activate.
+Trả lời câu hỏi mở nào: OQ-11 một phần (từ câu chữ màn hình, không phải đo): tồn đầu lấy Unit Cost danh mục; FIFO, LIFO khoá sửa dòng phụ tùng lệnh cũ. Giá trị tồn sau nhận, sửa giá sau khi nhận, nhận vào lệnh: vẫn mở.
+Dữ liệu TEST đã tạo: không. Cài đặt: cũ Static Pricing, không đổi, đã đọc lại sau tải trang.
+Giải pháp đáng học: đổi phương pháp là migration một chiều có điều kiện chặn trước (đủ giá, hết lệnh dở) và ô tích nhận thức; ép người dùng dọn dữ liệu trước khi đổi. Điểm yếu: không xem thử, không đảo được, nên chọn sai là kẹt; với Delta nên chốt phương pháp cùng kế toán trước go-live.
+Việc chờ user quyết: có chấp nhận đổi một chiều trên tài khoản thử không, và chọn 1 trong 3 phương pháp nào. Chỉ đo được phương pháp đã chọn.

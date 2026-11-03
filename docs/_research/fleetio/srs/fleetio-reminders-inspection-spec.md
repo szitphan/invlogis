@@ -25,7 +25,7 @@ links:
 
 **Ngoài phạm vi:** phần còn lại của app Fleetio Go (mới đọc một phiếu #126102722 để kiểm vị trí từng mục); lệnh sửa xem [[docs/_research/fleetio/srs/fleetio-repair-spec.md|Sửa chữa]]; quản lý lốp ngoài phiếu xem nhóm Phương tiện; vị trí và bản đồ xem nhóm Vị trí và điều phối.
 
-**Giới hạn đợt chạy:** gói dùng thử chặn ở 5 xe, nên mooc không đồng hồ, xe giờ máy, đồng hồ phụ trên xe thật, phiếu riêng đầu kéo và mooc chưa chạy (OQ-10). Lịch kiểm đã thấy Upcoming, Due Soon; Overdue, Skipped cần qua hạn thật (OQ-11). Không làm các việc có thể gửi ra ngoài hoặc xoá dữ liệu: Send Notifications, Send an email, Assign user, Delete, gỡ xe khỏi bộ lịch; không đổi Cài đặt cấp tài khoản nên Forecasting chưa bật.
+**Giới hạn đợt chạy:** gói dùng thử chặn ở 5 xe, nên mooc không đồng hồ, xe giờ máy, đồng hồ phụ trên xe thật, phiếu riêng đầu kéo và mooc chưa chạy (OQ-10). Lịch kiểm đã thấy Upcoming, Due Soon; Overdue, Skipped cần qua hạn thật (OQ-11). Không làm các việc có thể gửi ra ngoài hoặc xoá dữ liệu: Send Notifications, Send an email, Assign user, Delete, gỡ xe khỏi bộ lịch; không đổi Cài đặt cấp tài khoản, trừ Forecasting bật tạm rồi trả về tắt ở lượt 5.
 
 ## 2. Actors & Stakeholders
 
@@ -49,7 +49,7 @@ links:
 | FR-fleetio-reminders-inspection-006 | Tạm hoãn | Hộp "Snooze Service Reminders" (số nhiều vì dùng chung với thao tác hàng loạt): ô "Snooze Until" ngày và giờ, mặc định +7 ngày, giờ theo thiết bị, không có mức chọn sẵn, không có ô lý do. Hoãn được nhắc Overdue và Upcoming; Upcoming giữ Next Due "3 months from now", Remove Snooze về Upcoming. Status "Snoozed", Next Due vẫn đổi số nhưng xám. Mỗi lần hoãn, bỏ hoãn ghi vào Record History. Hết hạn tự về trạng thái thường; Remove Snooze về ngay, không hỏi; hoàn thành xoá hoãn. Ẩn thông báo không nghiêm trọng là `Docs`. | P1 | [Gói: Bảo dưỡng đội xe] | test | Nhắc C, G | `Chạy` lượt 3: Hoãn và huỷ hoãn trên Upcoming | Lấy, nên bắt ghi lý do, chặn ngày đã qua |
 | FR-fleetio-reminders-inspection-007 | Xử lý từ nhắc | Resolve chia 2 nhóm: GET SERVICE có Draft Work Order, Add to Work Order, Find a shop; LOG COMPLETED SERVICE có Add to service history. Menu "...": Snooze hoặc Remove Snooze, Send Notifications, View Record History, Recalculate Compliance, Delete. Draft Work Order khoá theo trạng thái nhắc, không theo gói: nhắc Upcoming xám, có icon khoá, tooltip "Available when this reminder is due soon or overdue."; nhắc Overdue chạy được, xem FR-fleetio-reminders-inspection-040. Find a shop xem FR-fleetio-reminders-inspection-050. | P1 | [Gói: Bảo dưỡng đội xe] | demo | Nhắc D, E | `Chạy` một phần lượt 4: Assign gửi email, SMS, dừng trước khi bấm | Lấy |
 | FR-fleetio-reminders-inspection-008 | Tỷ lệ tuân thủ | Tỷ lệ việc đúng hạn trên việc đã xong; thẻ Completed, Late, On-Time Compliance theo nhắc; trung bình theo danh sách lọc (D 100%, F 100%, Brake 100%, E 0%, G 0% ra 60%). Một nhắc nhiều lần: thẻ nhắc H Completed 2, Late 1, 50%. Thêm H 50% thì danh sách ra "57% on-time", khớp 4 đúng hạn trên 7 lần (57,1%), không khớp trung bình theo nhắc (58,3%); mới một điểm đo. Báo cáo là `Docs`. | P1 | [Gói: Bảo dưỡng đội xe] | phân tích | Danh sách lọc TEST-XE-01 | `Chạy` lượt 4: Biên km: +100 Late, +99 On-Time | Lấy |
-| FR-fleetio-reminders-inspection-009 | Dự báo ngày đến hạn | Ước tính ngày từ số km trung bình ngày; bật ở cấp tài khoản, nhóm theo tuần hoặc tháng. Thấy nút "Enable Forecasting", không bật vì là cài đặt tài khoản. | P2 | [Gói: Bảo dưỡng đội xe] [Cấu hình] | phân tích | Nút trên danh sách, form Vehicle | `Xem`, `Docs` | Lấy khi số km tin cậy |
+| FR-fleetio-reminders-inspection-009 | Dự báo ngày đến hạn | Ước tính ngày đến hạn từ số km trung bình ngày cho từng thuộc tính của nhắc; thuộc tính đến trước có cờ ưu tiên. Bật bằng ô "Forecasting" ở Settings > Reminders > Service Reminder Settings, nút "Enable Forecasting" trên danh sách chỉ chuyển sang trang đó; lưu không có hộp xác nhận, điều khoản hay phí. Dự báo đổi trạng thái thật, không chỉ hiển thị ngày (BR-fleetio-reminders-inspection-071). Sắp xếp cột Next Due đổi theo ngày dự báo; dòng phụ kèm icon lấp lánh. Tắt là về nguyên trạng ngay. | P2 | [Gói: Bảo dưỡng đội xe] [Cấu hình] | phân tích | Nút trên danh sách, form Vehicle; TEST-DAUKEO-2 usage 100, 10, 50, 46 | `Chạy` một phần lượt 5: Đo công thức, trạng thái, nhóm; thiếu số km tự tính | Lấy khi số km tin cậy |
 | FR-fleetio-reminders-inspection-010 | Giao nhắc cho người | Tài liệu hãng: giao nhắc quá hạn cho người lái; nhận email hoặc tin nhắn, xác nhận được. Trên web có cột Assignee, Assigned At nhưng chưa thấy nút giao ở các chỗ đã mở; menu Actions không có mục giao. Trang chi tiết lấy Operator từ phân công xe. | P2 | [Gói: Bảo dưỡng đội xe] | demo | Cột Assignee, Assigned At | `Docs`, `Xem` | Cân nhắc |
 | FR-fleetio-reminders-inspection-011 | Bộ lịch | Một bộ gồm nhiều lịch cho nhiều xe, có mẫu, đồng hồ chính (Miles, Kilometers, Hours) và phụ; một dòng lịch chọn được nhiều đầu việc; sửa lịch trên bộ thì nhắc đang chạy đổi theo sau xử lý ngầm. Mẫu hệ thống xem FR-fleetio-reminders-inspection-043; lịch theo đồng hồ phụ xem FR-fleetio-reminders-inspection-044. Gắn xe theo thuộc tính sinh nhắc Upcoming trên xe, cột Service Program; tab Service Programs của xe có thẻ bộ lịch. Sau khi gán, đầu việc của bộ xám kèm khoá ở form New Service Reminder của xe đó. | P1 | [Gói: Bảo dưỡng đội xe] [Cấu hình] | test | #590923, TEST-DAUKEO-2 | `Chạy` lượt 4: Đã gắn xe, sinh 2 nhắc | Lấy |
 | FR-fleetio-reminders-inspection-012 | Gia hạn giấy tờ | Nhắc theo loại có sẵn, cho xe và liên hệ, có ngày đến hạn, ngưỡng báo, người theo dõi. Fleetio: loại xe Emission Test, Inspection, Insurance, Registration; loại liên hệ Certification, License Renewal; ngưỡng mặc định xe 3 tuần, liên hệ 3 tuần. Thêm loại mới chưa thử. | P0 | [Gói: Bảo dưỡng đội xe] [Cấu hình] | test | #3531389, TEST-NHAC-LX | `Chạy` | Lấy; danh sách loại, ngưỡng là tham số mới, chưa có mã |
@@ -91,6 +91,8 @@ links:
 | FR-fleetio-reminders-inspection-048 | Smart Upload phiếu dịch vụ | Hộp toàn màn: trái trình xem tài liệu, phải "Review Service Entry", "Review and edit for accuracy before adding the service entry."; các ô hiện dần, dưới 30 giây đủ. Đọc Primary Meter, Completion Date, Reference, Vendor (khớp bản ghi có sẵn), Tax, Total. Gộp dòng hoá đơn thành một Service Task hệ thống, tách Labor, Parts, ghi mô tả. "Add to Service Entry" khoá khi dòng mới chưa chọn đầu việc, chỉ đổ vào form, phải Save lần nữa. Có Discard, Give Feedback, "Show More" gồm Labor, Parts, Labor Markup, Parts Markup, Warranty Credits, Discount, Tax. | P1 | [Gói: Bảo dưỡng đội xe] | test | #57903305 | `Chạy` | Đáng học màn đối chiếu cạnh tài liệu; đề xuất gợi ý đầu việc theo nhắc đang chờ của xe |
 | FR-fleetio-reminders-inspection-049 | Đánh giá phiếu dịch vụ bằng AI | Sau lưu, phiếu có khối "Assessment": "Reviewing this service", "Checking service history"; không có giá thì "Add line item costs to run an assessment"; có giá thì ra "Acceptable", tiêu đề, đoạn nhận xét, "Auto-assessed ...", số nguồn, "Was this helpful?". Khối "Teach assessments your fleet's policies" có "Add a rule", dòng gợi ý và kết quả xem trước "Needs Review". | P2 | [Gói: Bảo dưỡng đội xe] | demo | #57903305, #57903349 | `Chạy` một phần lượt 4: Đọc kết quả; chưa thêm rule | Cân nhắc sau, cần lịch sử giá đủ dày |
 | FR-fleetio-reminders-inspection-050 | Giao dịch vụ thuê ngoài từ nhắc | Resolve › Find a shop mở hộp "Assign outsourced service", 3 bước Service Details, Suggest Shop, Confirm. Service Details: Assign to, Vehicle, Service Reminders ("Assign all service reminders (3)"), When + ASAP, Continue. Assign to chỉ có người dùng và nhãn Fleetio Automation, không lấy được liên hệ không có đăng nhập. Notification Methods Email, Text Message tick sẵn. Confirm: "Service Assignment", "Ready to assign", Back, Assign. | P2 | [Gói: Bảo dưỡng đội xe] | demo | Nhắc TEST-NHAC-E, đóng ở Confirm | `Chạy` một phần lượt 4: Đến Confirm; không bấm Assign vì gửi email, SMS thật; không thấy danh sách cửa hàng | Cân nhắc khi Delta có xưởng ngoài |
+| FR-fleetio-reminders-inspection-051 | Giải trình phép tính dự báo | Popover "Next Due" trên danh sách, chi tiết: từng thuộc tính (Scheduled Date, Primary Meter) kèm cờ ưu tiên. Popover "Meter Forecast" bày từng bước: Last Meter Entry, Avg. Daily Usage ("How is this calculated?"), Meter Increase, Current Meter, Relative to Due Meter, Next Due, Meter Status. Nhắc không có dự báo hiện "Forecast not available" kèm tooltip (E-fleetio-reminders-inspection-032). | P2 | [Gói: Bảo dưỡng đội xe] | demo | Nhắc B, G | `Chạy` | Đáng học: người dùng tự kiểm được vì sao ra ngày đó |
+| FR-fleetio-reminders-inspection-052 | Nhóm nhắc theo tuần, tháng | Menu Group có thêm Week, Month khi bật Forecasting; khi tắt chỉ còn None, Vehicle. Tiêu đề nhóm theo dải ngày, "This Week", "Next Week", "This Month", "November 2026". Group Week ẩn cột Next Due. Nhắc không có dự báo bị xếp vào "This Week" ở cuối danh sách. | P2 | [Gói: Bảo dưỡng đội xe] | demo | Danh sách nhắc | `Chạy` | Lấy cho kế hoạch xưởng; tách riêng nhóm "không có ngày dự báo" |
 
 ## 4. Non-Functional Requirements (NFR)
 
@@ -177,6 +179,12 @@ links:
 | BR-fleetio-reminders-inspection-068 | Mục đạt khi sự cố của mục còn mở vẫn được nối với sự cố đó, không hỏi xác nhận, không tự đóng. | [Gói: Bảo dưỡng đội xe] | Nộp phiếu | FR-fleetio-reminders-inspection-020, FR-fleetio-reminders-inspection-033 | #126116970 | `Chạy` |
 | BR-fleetio-reminders-inspection-069 | Nộp phiếu trừ kho ngay, không bước duyệt; dòng từ phiếu không có Reason. | [Gói: Bảo dưỡng đội xe] | Nộp phiếu | FR-fleetio-reminders-inspection-046 | #126116970: 10 sang 7 | `Chạy` |
 | BR-fleetio-reminders-inspection-070 | Assign to của Find a shop chỉ nhận người dùng và nhãn Fleetio Automation, không nhận liên hệ không có đăng nhập. | [Gói: Bảo dưỡng đội xe] | Giao ngoài | FR-fleetio-reminders-inspection-050 | Tìm TEST | `Chạy` |
+| BR-fleetio-reminders-inspection-071 | Dự báo đổi trạng thái thật: nhắc còn 700 km, ngưỡng km 500, vẫn sang Due Soon khi ngày dự báo vào ngưỡng thời gian. 14 ngày Due Soon, 15,2 ngày Upcoming (ngưỡng 2 tuần); chữ cùng là "2 weeks from now". | [Gói: Bảo dưỡng đội xe] [Cấu hình] | Lưu số km ngày | FR-fleetio-reminders-inspection-009 | TEST-DAUKEO-2, usage 100, 10, 50, 46 | `Chạy` |
+| BR-fleetio-reminders-inspection-072 | Nhắc chỉ có chu kỳ km, không có ngưỡng thời gian, vẫn đổi trạng thái cùng mốc với nhắc có ngưỡng; cơ chế chưa rõ (OQ-30). | [Gói: Bảo dưỡng đội xe] | Lưu số km ngày | FR-fleetio-reminders-inspection-009 | Nhắc E | `Chạy` |
+| BR-fleetio-reminders-inspection-073 | Số km ngày bằng 0: không có dự báo; nhắc có thời gian về ngày lịch, nhắc chỉ km giữ số còn lại. | [Gói: Bảo dưỡng đội xe] | Tính dự báo | FR-fleetio-reminders-inspection-009 | TEST-DAUKEO-2; xe Sample | `Chạy` |
+| BR-fleetio-reminders-inspection-074 | Khi bật, nhắc không có dự báo mà có hạn thời gian hiện ngày thay cho số km, mất dòng "kilometers overdue" dù vẫn Overdue. | [Gói: Bảo dưỡng đội xe] | Bật Forecasting | FR-fleetio-reminders-inspection-009 | Brake Pads trên TEST-XE-01 | `Chạy` |
+| BR-fleetio-reminders-inspection-075 | Tắt Forecasting về nguyên trạng ngay, không mất dữ liệu; số đếm Due Soon, Due Soon Vehicles trở lại như trước. | [Gói: Bảo dưỡng đội xe] [Cấu hình] | Tắt Forecasting | FR-fleetio-reminders-inspection-009 | Due Soon 11 về 8, xe 6 về 5 | `Chạy` |
+| BR-fleetio-reminders-inspection-076 | Nhập tay số km ngày thay cho "Automatically calculate" được; tick lại tự tính thì lúc lưu form vẫn hiện số cũ, đọc lại mới về số tự tính. | [Gói: Bảo dưỡng đội xe] | Sửa xe | FR-fleetio-reminders-inspection-009 | TEST-DAUKEO-2 | `Chạy` |
 
 ## 6. Error Matrix
 
@@ -213,6 +221,7 @@ links:
 | E-fleetio-reminders-inspection-029 | Rule bị khoá khi còn Sample Data | Tooltip kết thúc bằng "...while sample data is turned on"; bấm không tick | minor | FR-fleetio-reminders-inspection-029, FR-fleetio-reminders-inspection-045 | Ô Save as a Service Program Rule | Disable Sample Data, thao tác cấp tài khoản, chưa làm | `Chạy` |
 | E-fleetio-reminders-inspection-030 | Draft Work Order chưa mở | Tooltip "Available when this reminder is due soon or overdue." | minor | FR-fleetio-reminders-inspection-040 | Mục xám, icon khoá trên nhắc Upcoming | Chờ tới ngưỡng | `Chạy` |
 | E-fleetio-reminders-inspection-031 | Không tìm được người nhận | "No results for 'TEST'" ở ô Assign to | minor | FR-fleetio-reminders-inspection-050 | Hộp Assign outsourced service | Chọn người dùng có đăng nhập | `Chạy` |
+| E-fleetio-reminders-inspection-032 | Không có dự báo | "Forecast not available"; tooltip "The daily usage for this meter is zero. Add more meter entries (non-void) to enable forecasting." | minor | FR-fleetio-reminders-inspection-051 | Khối Next Due; vẫn hiện số km còn lại | Thêm số đồng hồ; có ca form Vehicle hiện số km ngày khác 0 mà nhắc vẫn báo (OQ-31) | `Chạy` |
 
 ## 7. Success Criteria
 
@@ -255,6 +264,7 @@ Xem [[docs/_research/fleetio/srs/fleetio-reminders-inspection-flows.md|Flows]], 
 - Reopen làm mất khối Resolution Details và không để lại dòng Timeline.
 - Mục đạt cũng đổi được trạng thái xe mà không hỏi, không báo trên phiếu.
 - Trừ kho từ phiếu không có bước duyệt, không có lý do.
+- Dự báo âm thầm đổi Due Soon, số km ngày nhập sai có thể làm đầy hàng việc; nhóm "This Week" chứa nhắc không có ngày.
 - Màn Review Smart Upload tick một cờ mà kết quả lưu cờ khác; đoán nhầm mọi loại mục đặc biệt thành Free Text.
 - Bộ lịch từ mẫu cố định Miles, không chọn được km lúc tạo.
 - Chữ lỗi "is required" khi ảnh còn đang tải; chữ "behind" đỏ trên dòng On-Time.
@@ -290,6 +300,11 @@ Bản trước ghi "mục lốp chặn nộp phiếu chỉ vì xe chưa khai tr�
 * [ ] OQ-25: Mức ưu tiên sự cố tự sinh theo luật nào? Brakes "Critical", Number và Dropdown "No Priority" trên cùng phiếu, chưa có câu giải thích — Nguồn khách: không áp dụng
 * [ ] OQ-26: Bấm ASAP ở Find a shop làm Continue khoá, không gọi máy chủ: lỗi hay cần thao tác khác? Danh sách cửa hàng ở bước Suggest Shop không hiện ở tài khoản này — Nguồn khách: không áp dụng
 * [ ] OQ-27: Dòng "Always require a review when ..." trong khối Assessment là gợi ý mẫu hay do người khác tạo? Chưa rõ, không thêm rule — Nguồn khách: không áp dụng
+* [ ] OQ-28: Usage 100: 700 km phải là 7 ngày nhưng hiện 6, 699 km hiện 5 ngày. Do làm tròn hay do mốc tính? Chưa xác định — Nguồn khách: không áp dụng
+* [ ] OQ-29: Popover ghi Meter Increase "1 day ago × 10.0 kilometers/day" nhưng kết quả 0 kilometers: câu chữ và số không khớp. Vì sao? — Nguồn khách: không áp dụng
+* [ ] OQ-30: Nhắc E chỉ có chu kỳ km, không thấy ngưỡng ngày nào, vẫn đổi Due Soon cùng mốc 14 ngày. Ngưỡng lấy từ đâu? — Nguồn khách: không áp dụng
+* [ ] OQ-31: TEST-XE-01 form Vehicle hiện Average Usage 120.8, tự tính, nhưng nhắc G báo daily usage bằng 0. Hai màn mâu thuẫn, chưa rõ nguyên nhân; chưa lưu lại xe vì xe dùng chung — Nguồn khách: không áp dụng
+* [ ] OQ-32: Dự báo từ số km tự tính thật, đồng hồ phụ, thông báo Due Soon do dự báo sinh ra, nội dung "How is this calculated?" chạy thế nào? Chưa đo — Nguồn khách: không áp dụng
 
 ## 13. Ma trận case
 
@@ -412,7 +427,7 @@ Gồm cả điều KHÔNG xảy ra. Mã E trong bảng viết tắt, đầy đ�
 | C113 Ghi lùi ngày | Service Entry ngày quá khứ, đồng hồ quá khứ | Nhận; kỳ sau từ lần làm, 01/19/2027; KHÔNG đổi đồng hồ hiện tại 2.999 | `Chạy` |
 | C114 Đặt tay hạn cũ | Hạn cũ hơn hôm nay | KHÔNG chặn, Overdue ngay; hoàn thành đưa Manually Set Next Due về No | `Chạy` |
 | C115 Biên Late trục đồng hồ | | Đã đo ở lượt 4, xem C189, C190 | `Chạy` |
-| C116 Forecasting | Enable Forecasting | Không bật vì là Cài đặt cấp tài khoản | `Docs` |
+| C116 Forecasting | Enable Forecasting | Lượt 3 không bật; lượt 5 đã chạy, bật bằng ô tích rồi trả về tắt, xem C225 đến C246 | `Chạy` |
 | C117 Smart uploads trên phiếu dịch vụ | Khối Beta trên New Service Entry | Lượt 3 chưa tải; lượt 4 chạy, xem C184 | `Xem` |
 | C118 Danh sách mẫu bộ lịch | New Service Program | 14 mẫu hệ thống; bộ tự tạo cũng hiện làm mẫu | `Chạy` |
 | C119 Chọn mẫu | Heavy Duty Truck Long Haul | Hiện ngay "11 Service Reminders will be created", bảng Intervals, Service Task; ẩn lựa chọn đồng hồ | `Chạy` |
@@ -521,6 +536,28 @@ Gồm cả điều KHÔNG xảy ra. Mã E trong bảng viết tắt, đầy đ�
 | C222 Trừ kho từ phiếu | #126116970, TEST-KHO-02, số lượng 3 | Inventory Activity -3.0, 10.0 sang 7.0, KHÔNG duyệt, Reason trống | `Chạy`, `inspection-inventory-adjustment-deduct.jpg` |
 | C223 Phiếu hiển thị phụ tùng | Số lượng 3 | "TEST-KHO-02 • 1 parts": đếm dòng, KHÔNG đếm số lượng | `Chạy` |
 | C224 Tìm phụ tùng trên phiếu | | Hiện tồn 10 ngay trong ô, số lượng mặc định 1, có đơn vị, nút xoá | `Chạy` |
+| C225 Nút Enable Forecasting | Bấm trên danh sách | Chỉ chuyển sang Service Reminder Settings, KHÔNG bật gì | `Chạy` |
+| C226 Bật Forecasting | Tích ô, Save Settings | "Setting was successfully updated"; KHÔNG hộp xác nhận, điều khoản, phí; nút Enable biến mất, chi tiết ghi "Forecasting is enabled" | `Chạy` |
+| C227 Usage 100 | A, B còn 700 km, E còn 699 km | A, B "6 days from now", E "5 days from now"; cả 3 Upcoming sang Due Soon; tab Due Soon 8 → 11, xe 5 → 6 | `Chạy`, `reminder-forecast-next-due-popover.jpg` |
+| C228 Usage 10 | | "2 months from now", về Upcoming; Primary Meter vẫn cờ ưu tiên | `Chạy`, `reminder-forecast-meter-popover.jpg` |
+| C229 Usage 50 | 14 ngày, đúng ngưỡng 2 tuần | "2 weeks from now", Due Soon | `Chạy` |
+| C230 Usage 46 | 15,2 ngày | "2 weeks from now", Upcoming | `Chạy` |
+| C231 Nhắc chỉ chu kỳ km | E, không có ngưỡng thời gian | Đổi trạng thái cùng mốc C229, C230; KHÔNG thấy ngưỡng ngày nào (OQ-30) | `Chạy` |
+| C232 Usage 0 tự tính | TEST-DAUKEO-2 | KHÔNG có dự báo; nhắc có thời gian về ngày lịch 04/03/2027; nhắc chỉ km giữ "699 km remaining" | `Chạy` |
+| C233 Usage hai màn khác nhau | Nhắc G, form Vehicle 120.8 tự tính | "Forecast not available", tooltip usage bằng 0; hai màn mâu thuẫn (OQ-31) | `Chạy`, `reminder-forecast-not-available.jpg` |
+| C234 Xe Sample usage 0 | Nhắc chỉ km | KHÔNG ngày, "145,825 miles remaining" | `Chạy` |
+| C235 Group Week, Month | Bật Forecasting | Tiêu đề "This Week", "Next Week", dải ngày, "This Month", "November 2026"; Group Week ẩn cột Next Due | `Chạy`, `reminder-forecast-group-week.jpg` |
+| C236 Nhắc không có dự báo khi Group Week | G, nhắc Sample chỉ km | Bị xếp vào "This Week" ở cuối dù còn xa hạn | `Chạy` |
+| C237 Tick lại tự tính | Sửa xe | Lúc lưu form vẫn hiện 46.0; đọc lại 0.0, dự báo biến mất | `Chạy` |
+| C238 Tắt Forecasting | Bỏ tích | Về nguyên trạng ngay, nút Enable hiện lại, Due Soon 8, xe 5 | `Chạy` |
+| C239 Sắp xếp, dòng phụ khi bật | Danh sách | Next Due sắp theo ngày dự báo; có dự báo: "... kilometers remaining" kèm icon; không dự báo, có hạn thời gian: hiện ngày, mất "989 kilometers overdue" dù vẫn Overdue | `Chạy` |
+| C240 Popover Next Due | Rê trên dòng | Scheduled Date, Primary Meter kèm cờ ưu tiên | `Chạy`, `reminder-forecast-next-due-popover.jpg` |
+| C241 Popover Meter Forecast | Usage 10 | 2,500 km, 10.0/ngày, Meter Increase 0, Current 2,500, Relative 700, Next Due "700 kilometers ÷ 10.0 kilometers/day" | `Chạy`, `reminder-forecast-meter-popover.jpg` |
+| C242 Số ngày khi usage 100 | 700 km; 699 km | Phép chia ra 7 ngày, hiện 6; 699 km hiện 5; chưa xác định (OQ-28) | `Chạy` |
+| C243 Meter Increase | "1 day ago × 10.0" | Ra 0 km, KHÔNG khớp câu chữ (OQ-29) | `Chạy` |
+| C244 Menu Group khi tắt | Đọc lại sau tắt | Chỉ None, Vehicle | `Chạy` |
+| C245 Nút Recalculate ở Settings | "This will recalculate all compliance history for all vehicles" | Không bấm | `Xem` |
+| C246 Dự báo từ usage tự tính, đồng hồ phụ, thông báo | | Chưa đo (OQ-32) | Chưa chạy |
 
 ## Phát hiện lượt 3 (03/11)
 
@@ -551,3 +588,13 @@ Nguồn: `run-notes/reminders-inspection.md`, mục Lượt 4.
 - Mục đạt cũng đổi trạng thái xe; mỗi mục lỗi một sự cố; trừ kho từ phiếu không có bước duyệt.
 
 Đã đưa vào FR-fleetio-reminders-inspection-048 đến 050, BR-fleetio-reminders-inspection-058 đến 070, E-fleetio-reminders-inspection-028 đến 031, C178 đến C224.
+
+## Phát hiện lượt 5 (03/11)
+
+Nguồn: `run-notes/reminders-inspection.md`, mục Lượt 5.
+
+- Forecast đã chạy, sửa C116: bật bằng ô tích ở Settings, tắt là về nguyên trạng.
+- Dự báo đổi trạng thái thật, không chỉ hiện ngày. Popover bày đủ phép tính. Group Week, Month chỉ có khi bật.
+- Bốn điểm lệch chưa giải thích: OQ-28 đến OQ-31.
+
+Đã đưa vào FR-fleetio-reminders-inspection-009, 051, 052, BR-fleetio-reminders-inspection-071 đến 076, E-fleetio-reminders-inspection-032, C225 đến C246.

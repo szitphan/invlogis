@@ -29,7 +29,7 @@ Hồ sơ xe là trung tâm: một trang thấy đủ tình trạng, lịch sử 
 
 **Nguồn và bằng chứng:** chạy thật ngày 02/11/2026 trên `TEST-XE-01`; chạy tiếp ngày 03/11/2026 trên `TEST-XE-LOP` (Semi Truck, đồng hồ đầu 5.000 km) và `TEST-MOOC-LOP` (Trailer); lượt 3 cùng ngày thêm `TEST-DAUKEO-2` và đọc kết quả phiếu Fleetio Go có sẵn. Nhãn: `Chạy`, `Xem`, `Docs`, `Suy`, `GĐ`. Lốp sâu tách sang [[docs/_research/fleetio/fleetio-tires.md|Lốp]].
 
-**Giới hạn của lượt chạy:** tài khoản dùng thử chỉ có 5 xe, đang 5 of 5. Lượt 3 đã chạy trạng thái thật, Archive, Restore, trùng tên xe. Chưa chạy: Motor Pool, dán nhiều dòng vượt hạn mức, gán nhóm thật, nguồn GPS.
+**Giới hạn của lượt chạy:** tài khoản dùng thử chỉ có 5 xe, đang 5 of 5. Lượt 3 đã chạy trạng thái thật, Archive, Restore, trùng tên xe. Lượt 5 đã tạo Motor Pool, mẫu bảo hành. Chưa chạy: đặt xe Motor Pool, dán nhiều dòng vượt hạn mức, gán nhóm thật, nguồn GPS.
 
 ## 3. User Types (preliminary)
 
@@ -88,7 +88,8 @@ Hồ sơ xe là trung tâm: một trang thấy đủ tình trạng, lịch sử 
 - V14 [Mới] [Cấu hình] **Tùy biến bố cục trang xe.** Fleetio: `Chạy` ẩn hiện thẻ cá nhân, Restore defaults; layout tài khoản (Customize Layout) `Xem`; kéo đổi thứ tự chưa thử.
 - V15 [Mới] [Cấu hình] **Giải mã số khung** (VIN Decode) để điền thông số. Fleetio: `Chạy`, có bảng so sánh, dòng khác biệt không tick sẵn, chỉ ghi vào xe khi lưu form. Dữ liệu chủ yếu phù hợp thị trường Mỹ, cần kiểm tra với xe tại Việt Nam.
 - V21 [Mới] [Gói: Bảo dưỡng đội xe] **Recall theo hãng:** nhập tự động theo năm, hãng, đời từ nguồn NHTSA. Fleetio: `Xem`. Nguồn không áp được cho xe Việt Nam (`Suy`).
-- V22 [Mới] [Gói: Bảo dưỡng đội xe] **Đặt xe chung (Motor Pool):** Fleetio: `Xem`, chưa chạy.
+- V22 [Mới] [Gói: Bảo dưỡng đội xe] **Đặt xe chung (Motor Pool):** Fleetio: `Chạy` phần tạo pool, kiểm tra form đặt xe; chưa tạo được đặt xe vì người đặt phải vừa có đăng nhập vừa là Operator. Đặt theo loại xe, không theo xe cụ thể.
+- V27 [Mới] [Cấu hình] **Mẫu bảo hành riêng của khách.** Fleetio: `Chạy`, một mẫu nhiều coverage, áp sinh nhiều bảo hành, sửa mẫu chọn áp tương lai hay cả quá khứ. Thư viện OEM 14 mẫu xe con, không có đầu kéo.
 
 ### 4.1 Giải pháp đáng học
 
@@ -102,6 +103,8 @@ Hồ sơ xe là trung tâm: một trang thấy đủ tình trạng, lịch sử 
 | Cơ hội bảo hành hiện cả khi trống, kèm số active, expiring soon | Người mở lệnh luôn thấy, không phải nhớ đi tra | `Chạy` |
 | Một bảng Contact, tick Operator | Lái xe, thợ, kế toán chung hồ sơ | `Chạy` |
 | Require Meter + Excluded Vehicle Types | Mẫu cho loại xe không đồng hồ như mooc | `Xem` |
+| Sửa mẫu có lựa chọn tương lai hay cả quá khứ, báo số xe bị ảnh hưởng | Áp được cho mẫu giá thuê, định mức, chính sách của Invlogis | `Chạy` |
+| Đặt xe theo loại xe, không theo xe cụ thể | Hợp khi người đặt chỉ cần "1 đầu kéo", điều độ mới gán xe (gán xe chưa chạy) | `Chạy` phần form |
 | Void hàng loạt phải gõ VOID, số cũ vẫn còn trong sổ | Thay đồng hồ đầu kéo mà không xoá lịch sử, khó bấm nhầm | `Chạy` |
 | Hộp Archive nói trước sẽ đóng, xoá những gì | Người dùng biết hậu quả trước khi bấm | `Chạy` |
 | Dòng Void đánh dấu lý do, popup nêu số đang xung đột, chênh bao nhiêu | Biết ngay vì sao phiếu từ app không làm số hiện tại | `Chạy` |
@@ -132,6 +135,10 @@ Hồ sơ xe là trung tâm: một trang thấy đủ tình trạng, lịch sử 
 | Một lỗi nhóm mẫu làm cả form không lưu, dấu đỏ ở mục khác mục đang đứng | Tưởng đổi trạng thái không có tác dụng | Nêu lỗi ngay chỗ đang đứng | `Chạy` |
 | Liên hệ không phải Operator chỉ hiện dòng "Create" trong ô gán | Dễ tạo trùng liên hệ | Hiện liên hệ đó kèm lý do không gán được | `Chạy` |
 | Tab bộ lịch của xe chỉ có nút tạo mới, không gán được bộ lịch sẵn có | Phải rời xe để gán | Cho gán bộ lịch có sẵn ngay trên xe | `Chạy` |
+| Áp mẫu về quá khứ ghi đè phần sửa riêng từng xe, chỉ có câu cảnh báo | Mất phần đã sửa tay | So sánh trước sau khi áp | `Chạy`, ghi đè `Xem` |
+| Thư viện mẫu OEM thuần xe con Mỹ, không lọc theo Make | Vô dụng với đầu kéo, mooc Việt Nam | Mẫu riêng theo khách | `Chạy` |
+| Người lái không đăng nhập không đặt được, cũng không được đặt hộ | Lái xe thường không có tài khoản, điều độ không đặt thay được | Cho điều độ đặt hộ | `Chạy` |
+| Motor Pool bắt buộc Groups | Tài khoản không dùng nhóm xe không tạo được pool | Không bắt buộc nhóm | `Chạy` |
 | Automation lật lại thao tác tay sau khoảng 1 giây, không báo | Người sửa tưởng đã đổi được | Báo khi luật ghi đè thao tác tay | `Chạy`, nhóm Nền tảng |
 
 ### 4.3 Đề xuất Invlogis từ lượt 3
@@ -293,7 +300,8 @@ Tick dòng ─> Actions, Void ─> Gõ VOID ─> Xe 0 km ─> Nhập số mới
 - **Ngưỡng tự Void của Fleetio:** Fleetio: 4.828 km một ngày (`Chạy`, nhập 20.000 khi đang 5.500, vượt 9.672 km). Fleetio: 3.000 dặm, 24 giờ (`Docs`). Biên: đúng 4.828 km nhận, 4.829 km tự Void (`Chạy`). Lý do Exceeds Max. Daily Usage đã thấy; Out of Sequence đã thấy thật từ phiếu Fleetio Go (`Chạy`, một ca), nhập tay trên web không ra lý do này; telematics, API chưa thử. Icon lạ ở số 3.100 km chính là dấu đã Void.
 - **Số so sánh trong lỗi lùi ngày:** số trong câu lỗi là dòng đầu của ngày sau, không phải số hiện tại (`Chạy`).
 - **Một số sai lan sang chi phí:** Cost Per Meter chia cho km đã chạy, nên một lần Unvoid nhầm làm sai chi phí/km (`Suy` từ phép tính 3.500.000 / 15.000).
-- **Start Meter bảo hành nhập 1000 hiện 1 km** (`Chạy`), chưa rõ do ô nhập hay định dạng.
+- **Start Meter bảo hành nhập 1000 hiện 1 km** (`Chạy`): lượt 5 thấy ô chỉ giữ ký tự đầu vì mất tiêu điểm, 2365 thành 2 km, không cảnh báo lệch đồng hồ xe; có thể do gõ tự động nhanh, chưa thử tay.
+- **"No options" ở Coverage Template:** do chưa có mẫu đúng điều kiện, không phải do thiếu Make; lọc theo đơn vị đồng hồ là `Suy` (`Chạy`).
 - **Múi giờ phân công:** trường ngày gửi đi theo múi giờ thiết bị trong khi tài khoản đặt múi giờ khác (`Chạy`). Dòng đồng hồ của phiếu app cũng ghi lệch ngày so với giờ Việt Nam (`Suy`).
 - **Đóng lệnh để Archive:** đóng đòi Started At, số đồng hồ; Start Odometer 4.928 bị "must be less than 100 or marked as void", nhập 90 thì qua. Đóng lệnh tự sinh Service Entry, không đổi trạng thái xe (`Chạy`).
 - **Xe Archived:** vẫn xem được đồng hồ, cấu hình trục; Edit trục khoá; Status vẫn hiện Active hoặc Inactive (`Chạy`).
@@ -311,7 +319,7 @@ Tick dòng ─> Actions, Void ─> Gõ VOID ─> Xe 0 km ─> Nhập số mới
 | Xe | Bắt buộc tên, loại, trạng thái, sở hữu, đồng hồ chính, đơn vị nhiên liệu, đơn vị đo; tên, VIN không trùng; xe thật không dùng nhóm mẫu | `Chạy` |
 | Giải mã VIN | Mở khi đủ 17 ký tự; `ABC123` thì khoá | `Chạy` |
 | Void hàng loạt | Chỉ dòng chưa Void; gõ đúng VOID | `Chạy` |
-| Archive | Không còn lệnh chưa xong; Motor Pool theo câu trong hộp | `Chạy`, `Xem` |
+| Archive | Không còn lệnh chưa xong; Motor Pool theo câu trong hộp, ca có đặt chỗ chưa chạy | `Chạy`, `Xem` |
 | Gán xe | Bắt buộc xe, người lái; không trùng thời gian **tính theo xe, không tính theo người** | `Chạy` |
 | Số đồng hồ | Theo thứ tự ngày, trừ khi tick Void; cùng ngày không ràng buộc | `Chạy` |
 | Chi phí | Bắt buộc xe, loại, số tiền, ngày; định kỳ cần Start Date | `Chạy` |
@@ -402,4 +410,4 @@ Tick dòng ─> Actions, Void ─> Gõ VOID ─> Xe 0 km ─> Nhập số mới
 
 - Đối chiếu Mục 4 với `docs/vehicle-management/brainstorms/vehicle-management.md`, chỉ đưa vào ý chưa có.
 - Lịch tài nguyên: nếu ổn, đưa vào phần giao diện Điều vận.
-- Khi có chỗ xe trống: chạy Motor Pool chặn Archive (SRS OQ-11), dán nhiều dòng (SRS OQ-19). Lượt 4 chưa làm được vì gói đầy, Add Multiple khoá từ menu.
+- Khi có liên hệ vừa đăng nhập vừa là Operator: đóng Lệnh đang mở, tạo đặt xe, chạy Motor Pool chặn Archive (SRS OQ-11). Khi có chỗ xe trống: dán nhiều dòng (SRS OQ-19). Lượt 4 chưa làm được vì gói đầy, Add Multiple khoá từ menu.

@@ -30,6 +30,9 @@ erDiagram
     VEHICLE ||--o{ RECORD_HISTORY : "lich su truong"
     CONTACT ||--o{ OVERVIEW_LAYOUT : "the ca nhan"
     VEHICLE }o--o{ SHARED_DOCUMENT : "dinh tai lieu"
+    WARRANTY_TEMPLATE |o--o{ WARRANTY : "sinh ra, van lien ket"
+    MOTOR_POOL ||--o{ MOTOR_POOL_RESERVATION : "nhan dat"
+    VEHICLE_GROUP }o--o{ MOTOR_POOL : "thuoc pool"
     VEHICLE }o--o{ SERVICE_PROGRAM : "theo bo lich"
 
     VEHICLE {
@@ -89,6 +92,19 @@ erDiagram
     }
     SERVICE_PROGRAM {
         string ten
+    }
+    WARRANTY_TEMPLATE {
+        string ten
+        string don_vi_dong_ho
+        string nguon "OEM hoac mau rieng"
+    }
+    MOTOR_POOL {
+        string ten
+        string loai_xe
+        string trang_thai_xe
+        boolean bat_buoc_ly_do
+        boolean tu_tinh_phi
+        boolean tu_duyet
     }
     CONTACT {
         string ten
@@ -182,4 +198,6 @@ erDiagram
 
 **Mẫu số chi phí trên km:** lấy từ `METER_ENTRY`, tức dòng Void không tính, nhưng dòng đã Unvoid có tính (`Chạy`, đồng hồ 5.000 lên 20.000).
 
-**Quan hệ Vehicle với Recall và Motor Pool:** đọc từ cột danh sách (`Xem`), chưa tạo bản ghi nên bản số chỉ là suy luận.
+**Quan hệ Vehicle với Recall và Motor Pool:** đọc từ cột danh sách (`Xem`), chưa tạo bản ghi nên bản số chỉ là suy luận. Lượt 5 đã tạo `MOTOR_POOL` (`Chạy`); chưa tạo được đặt xe. Người đặt chọn loại xe, xe cụ thể gán sau là `Suy`.
+
+**`WARRANTY_TEMPLATE`:** bảo hành sinh từ mẫu đổi theo khi áp về quá khứ, nên có liên kết (`Chạy`); cột là `Suy` từ form.

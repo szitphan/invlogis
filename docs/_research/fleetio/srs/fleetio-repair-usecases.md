@@ -11,7 +11,7 @@ updated: 2026-11-03
 | UC | Tên | Actor | FR | Màn | Lỗi | OQ |
 |---|---|---|---|---|---|---|
 | UC-report-issue | Báo sự cố | Operator, Fleet Manager | 001, 002, 005, 019 | 1.1, 1.2 | E-003 | OQ-1 |
-| UC-resolve-issue | Xử lý sự cố | Fleet Manager | 003, 004, 026, 027, 028, 031, 039 | 1.2, 1.3, 1.4 đến 1.8, 1.11, 1.12, 1.13, 1.14 | E-012, E-020 | OQ-1, OQ-19 |
+| UC-resolve-issue | Xử lý sự cố | Fleet Manager | 003, 004, 026, 027, 028, 031, 039 | 1.2, 1.3, 1.4 đến 1.8, 1.11 đến 1.15 | E-012, E-020, E-033 | OQ-1, OQ-19, OQ-25 |
 | UC-ai-draft | AI soạn lệnh | Fleet Manager | 020 | 1.9, 1.10, 2.8, 2.9, 2.10 | E-017, E-021, E-022 | OQ-19 |
 | UC-run-work-order | Thực hiện lệnh | Technician, Fleet Manager | 006–011, 015, 017, 029, 030, 032, 033, 037, 038, 040, 042, 045 | 2.1–2.7, 2.15 đến 2.18 | E-001, E-005, E-008, E-009, E-010, E-011, E-014, E-015, E-016, E-018, E-019, E-025, E-026, E-027 | OQ-2, OQ-11, OQ-18, OQ-23 |
 | UC-complete-work-order | Hoàn thành lệnh | Fleet Manager | 012, 021 | 2.3, 2.11, 2.14, 3.1, 3.2 | E-002, E-004, E-006, E-007 | OQ-13 |
@@ -19,8 +19,8 @@ updated: 2026-11-03
 | UC-log-service | Ghi lịch sử trực tiếp | Fleet Manager | 014, 022, 028 | 3.1, 3.2, 1.14 | E-012, E-020 | OQ-7, OQ-22 |
 | UC-copy-work-order | Sao chép, in lệnh | Fleet Manager | 018 | 2.13, 2.19 | E-028 | — |
 | UC-manage-service-task | Quản lý đầu việc | Administrator | 016, 041 | 5.1 | E-013 | — |
-| UC-track-warranty | Theo dõi bảo hành | Fleet Manager | 025, 038, 043, 044 | 6.1 đến 6.8, 2.16, 2.17, 2.18 | E-023, E-024 | OQ-9, OQ-20, OQ-21, OQ-24 |
-| UC-configure-maintenance | Cấu hình bảo dưỡng | Administrator | 024, 035, 036 | 4.2, 7.1 | — | OQ-16 |
+| UC-track-warranty | Theo dõi bảo hành | Fleet Manager | 025, 038, 043, 044, 046 | 6.1 đến 6.12, 2.16, 2.17, 2.18 | E-023, E-024, E-032 | OQ-9, OQ-20, OQ-21, OQ-24, OQ-26, OQ-27 |
+| UC-configure-maintenance | Cấu hình bảo dưỡng | Administrator | 024, 035, 036 | 4.2, 7.1, 7.2 | E-029, E-030, E-031 | OQ-16, OQ-28 |
 
 Số FR, lỗi viết tắt, đầy đủ là `FR-fleetio-repair-NNN`, `E-fleetio-repair-NNN`.
 
@@ -56,8 +56,8 @@ Số FR, lỗi viết tắt, đầy đủ là `FR-fleetio-repair-NNN`, `E-fleeti
 - 2c Bulk: chọn nhiều sự cố thêm vào một lệnh (`Xem`). Trên hộp Add to Service Entry cũng chọn được nhiều sự cố (`Chạy`).
 - 2d Add to Service Entry: chuyển sang UC-log-service (`Chạy`).
 - 2e Add to Work Order: mở tab mới, điền sẵn xe, sự cố (`Chạy`).
-- 2f Get Service at Shop: hộp giới thiệu, cần bật Shop Network (`Xem`).
-- 2g Sự cố đang gắn lệnh: Close xám; Add to Service Entry, Add to Work Order, Resolve with Note xám; Draft Work Order xám trên #45, lượt trước còn mở (`Chạy`, OQ-19). Get Service at Shop sáng; Delete sáng, không bấm.
+- 2f Get Service at Shop: hộp giới thiệu; Enable Shop Network sang thiết lập Fleetio Pay, E-fleetio-repair-033, vẫn chưa bật (`Chạy` #46).
+- 2g Sự cố đang gắn lệnh: Close xám; Add to Service Entry, Add to Work Order, Resolve with Note xám; Draft Work Order xám trên #45, #46, lượt trước còn mở (`Chạy`, OQ-19). Get Service at Shop sáng; Delete sáng, không bấm.
 - 4a Reopen: chạy được với sự cố đóng, giải quyết bằng ghi chú, bằng entry; khoá với sự cố giải quyết bằng lệnh (`Chạy`).
 - 4b Bỏ tick trong entry đưa sự cố về Open, không hỏi, không vết (`Chạy` #52).
 
@@ -115,7 +115,7 @@ Số FR, lỗi viết tắt, đầy đủ là `FR-fleetio-repair-NNN`, `E-fleeti
 | 3 | Sửa lệnh | Sửa, xoá dòng phụ tùng ghi bù kho |
 | 4 | Hoàn thành lại | Sinh Service Entry mới số khác; dùng ngày, đồng hồ cũ; thêm dòng đồng hồ trùng |
 
-**Nhánh:** 1a Cancel: giữ Completed (`Suy`, nút có trên hộp). 4a Hai lượt không thấy giới hạn số lần.
+**Nhánh:** 1a Cancel: giữ Completed (`Suy`, nút có trên hộp). 1b Về trạng thái Incomplete tuỳ biến: cùng hộp, cùng hiệu ứng, hộp không báo xoá Service Entry (`Chạy` #106). 1c Sang trạng thái loại Completed khác: không hỏi, giữ entry, không phải mở lại (`Chạy` #106). 4a Hai lượt không thấy giới hạn số lần.
 
 ## UC-log-service — Ghi lịch sử trực tiếp
 
@@ -159,11 +159,13 @@ Số FR, lỗi viết tắt, đầy đủ là `FR-fleetio-repair-NNN`, `E-fleeti
 | 4 | Thêm đầu việc cùng mã vào lệnh, mở form hoặc lưu | "Warranty Opportunities (1)" |
 | 5 | Điền Complaint, Cause, Correction, lưu | Chi tiết lệnh hiện ba nội dung; không có quy trình claim |
 
-**Nhánh:** 2a Xe không có Make, Model: Coverage Template "No options" (`Xem`, lý do chưa kiểm). 2b Save & Add Another: giữ cả mã của bảo hành trước, dễ lưu nhầm (`Chạy`). 2c Mã có ba phần: bỏ Component; Add Component: mở, huỷ (`Xem`). 3a Trang chi tiết: End Date lệch 1 ngày, E-fleetio-repair-023; đơn vị thiếu, E-fleetio-repair-024. 4a Chỉ có phụ tùng cùng hệ thống: không có cơ hội. 4b Nút claim: không có (`Chạy`). 4c Mã hệ thống với dòng có assembly: không khớp (`Chạy`). 4d Bảo hành Expired, Expiring Soon: không gợi ý, Expiring Soon một lần đo (`Chạy`). 4e Lệnh không sửa thì không tính lại khi bảo hành đổi (`Chạy` #106). 5a Warranty Credits nhập tay, không nối hồ sơ (`Chạy`).
+**Nhánh:** 2a Coverage Template "No options" khi chưa có mẫu đúng điều kiện, không phải do thiếu Make (`Chạy`). 2d Tạo mẫu trong Settings, chọn mẫu, xem trước, sửa riêng lần này, lưu thì sinh bảo hành riêng (`Chạy`). 2e Sửa mẫu đã dùng: hộp Template Change, áp tương lai hoặc cả quá khứ, cả quá khứ đã đổi End Date (`Chạy`). 2f Xe mi thấy OEM xe con, không lọc hãng, không có đầu kéo (`Xem`). 2g Start Meter chỉ giữ ký tự đầu khi gõ tự động, chưa kết luận lỗi Fleetio hay công cụ: E-fleetio-repair-032. 2b Save & Add Another: giữ cả mã của bảo hành trước, dễ lưu nhầm (`Chạy`). 2c Mã có ba phần: bỏ Component; Add Component: mở, huỷ (`Xem`). 3a Trang chi tiết: End Date lệch 1 ngày, E-fleetio-repair-023; đơn vị thiếu, E-fleetio-repair-024. 4a Chỉ có phụ tùng cùng hệ thống: không có cơ hội. 4b Nút claim: không có (`Chạy`). 4c Mã hệ thống với dòng có assembly: không khớp (`Chạy`). 4d Bảo hành Expired, Expiring Soon: không gợi ý, Expiring Soon một lần đo (`Chạy`). 4e Lệnh không sửa thì không tính lại khi bảo hành đổi (`Chạy` #106). 5a Warranty Credits nhập tay, không nối hồ sơ (`Chạy`).
 
 ## UC-configure-maintenance — Cấu hình bảo dưỡng
 
-`Xem`, không đổi cài đặt.
+`Xem` Maintenance Settings, không đổi; `Chạy` trạng thái lệnh, mẫu bảo hành ở lượt 5.
+
+**Nhánh:** 2a Thêm trạng thái: Name, Description, ô Completed, ô Default, Color; thiếu tên E-fleetio-repair-029, trùng tên E-fleetio-repair-030. 2b Đổi loại khi có lệnh: E-fleetio-repair-031. 2c Đổi Default: mỗi lúc một, form lệnh mới chọn sẵn. 2d Xoá, kéo sắp xếp: không chạy.
 
 | Bước | Người dùng | Hệ thống |
 |---|---|---|

@@ -24,7 +24,7 @@ links:
 
 **Ngoài phạm vi:** thanh toán gói, Advanced Analytics ngoài AI Data Analyst (user không chọn). Custom Records, Tools chỉ theo tài liệu.
 
-**Giới hạn của lượt chạy:** tài khoản dùng thử đã hết hạn mức xe nên nhóm này không tạo được xe riêng; không mời người, không đổi Settings, không dùng bản ghi Sample để đổi trạng thái, không bấm hành động gửi email. Lượt 3 đo automation trên xe `TEST-DAUKEO-2` rồi trả Status về Active. Chi tiết việc chưa chạy ở Mục 13.9 và Mục 12.
+**Giới hạn của lượt chạy:** tài khoản dùng thử đã hết hạn mức xe nên nhóm này không tạo được xe riêng; không mời người, không đổi Settings (riêng lượt 5 tạo 1 Motor Pool TEST), không dùng bản ghi Sample để đổi trạng thái, không bấm hành động gửi email. Lượt 3 đo automation trên xe `TEST-DAUKEO-2` rồi trả Status về Active. Chi tiết việc chưa chạy ở Mục 13.9 và Mục 12.
 
 ## 2. Actors & Stakeholders
 
@@ -85,7 +85,7 @@ links:
 | FR-fleetio-saas-platform-040 | Nhóm nhiều cấp | Groups & Subgroups dạng cây; Require Group chỉ mở khi mọi tài sản và liên hệ đã có nhóm, màn liệt kê số còn thiếu; Export Data. | P0 | [Lõi] [Cấu hình] | test | `Xem` | `Xem`, không đổi | Lấy làm khung Công ty, Chi nhánh, Cơ sở |
 | FR-fleetio-saas-platform-041 | Trạng thái xe theo danh mục | Active (Default), In Shop, Inactive, Out of Service, Sold có đếm xe, Add Vehicle Status; không thấy luật chuyển; có lịch sử trạng thái, báo cáo Status Changes, Status Summary. | P1 | [Lõi] [Cấu hình] | test | `Xem` | `Xem`, chưa đổi thật | Đối chiếu nhóm Phương tiện |
 | FR-fleetio-saas-platform-042 | Recall | Danh sách từ NHTSA theo năm, hãng, đời; tab All, Needs Action, Open, Resolved, Acknowledged; cột Issued At, Status, Issue, Manufacturer Campaign Number, NHTSA Campaign Number. Một mẫu tự nâng Critical khi nguồn là Recall. Số dòng đổi theo thời điểm: tab Needs Action đọc 261 ở ảnh `recalls-list.jpg`, 285 ở lượt của nhóm Sửa chữa (C-223). Menu dòng theo nhóm Sửa chữa: Acknowledge, Create Issue, Check VIN. | P2 | [Gói: Bảo dưỡng đội xe] | demo | `Xem`, ảnh `recalls-list.jpg` | `Xem` 285 dòng Sample (261 ở lần đo trước), không đổi trạng thái | Nguồn thu hồi của Việt Nam chưa biết; để sau |
-| FR-fleetio-saas-platform-043 | Motor Pool | Đặt xe dùng chung: cột Motor Pool, Number, Operator, Vehicle Types, Vehicle, Pick Up, Drop Off, Status; Settings có Motor Pools, Reservation Rates, Flat Fees; quyền check_out, return, cancel. Form Vehicle Reservation: Operator *, Motor Pool *, Reason for Trip, Pick Up *, Drop Off *, Submit Reservation; Motor Pool * lấy từ Settings, đang rỗng nên không đặt được. | P2 | [Gói: Khách lớn, chưa có trong danh sách gói] | demo | `Xem`, ảnh `motor-pool-reservations.jpg` | `Xem` rỗng; chưa chạy | Để sau |
+| FR-fleetio-saas-platform-043 | Motor Pool | Đặt xe dùng chung: cột Motor Pool, Number, Operator, Vehicle Types, Vehicle, Pick Up, Drop Off, Status; Settings có Motor Pools, Reservation Rates, Flat Fees; quyền check_out, return, cancel. Tạo pool ở FR-066; form và điều kiện đặt xe ở FR-067. Lượt 5 chưa tạo được đặt xe nào vì không có Operator hợp lệ. | P2 | [Gói: Khách lớn, chưa có trong danh sách gói] | demo | `Xem`, ảnh `motor-pool-reservations.jpg` | `Chạy` một phần lượt 5: Tạo pool; đặt xe không có Operator | Để sau |
 | FR-fleetio-saas-platform-044 | Quyền con theo module | Vehicles có create, edit, view_all, view_details, view_financial_info, view_custom_fields, export_data, update_status, manage_vehicle_assignment, archive_delete, view_documents, manage_documents, manage_photos. Work Orders, Purchase Orders, Motor Pool có quyền con ở Mục 15. | P0 | [Lõi] | test | `Xem` | `Xem` | Lấy cách tách xem tài chính, duyệt, nhận hàng |
 | FR-fleetio-saas-platform-045 | Cảnh báo chi phí tại quyền | Ngay tại quyền Create của Vehicles: "Adding new Vehicles will result in additional charges to your account's subscription." | P2 | [Lõi] | demo | `Xem` | `Xem` | Lấy nếu tính tiền theo xe |
 | FR-fleetio-saas-platform-046 | Điều kiện Record Set tự tạo | Vehicles có 8 điều kiện: All vehicles, Vehicles in this contact's group, Vehicles assigned to this contact, Specific vehicles, Vehicles in specific groups, Vehicles with specific status(es), Vehicles with specific custom field values, No vehicles. Manage và View khai riêng. | P0 | [Lõi] [Cấu hình] | test | `Xem`, ảnh `record-set-conditions.jpg` | `Xem`, không lưu | Lấy; thiếu điều kiện theo thời gian |
@@ -108,6 +108,8 @@ links:
 | FR-fleetio-saas-platform-063 | Mở truy cập từ liên hệ | Chọn Enable Access: "This Contact will be enabled as a User...", Login Information gồm Email, Delay email invitation, Message; Role * mặc định Fleet Manager; Notification Profile; Watched Vehicle Groups; Record Sets cho Vehicles, Tools, Contacts, Part Locations, Inspection Forms đều mặc định Full Access. | P0 | [Lõi] [Cấu hình] | test | `Xem` form, không lưu | `Xem`, không lưu | Lấy luồng; đảo mặc định về quyền thấp nhất (NFR-014) |
 | FR-fleetio-saas-platform-064 | Danh mục tích hợp | Trang `integrations/my-integrations`: Data Connectors 6, Fuel Cards 9, Fuel Management 5, Key Management 1, Operations 1, Telematics 43, Tire Management 1, Tolls & Citations 2. | P2 | [Gói: Khách lớn, chưa có trong danh sách gói] | demo | `Xem` | `Xem` | Tham khảo độ phủ telematics |
 | FR-fleetio-saas-platform-065 | Ba kiểu bộ lọc báo cáo | Kiểu A: panel ô cố định, nút Search, đa số báo cáo mới. Kiểu B: filter builder "No filters applied.", Add Filter, Popular Filters như danh sách thường, 9 báo cáo. Kiểu C: thanh lọc ngay trên báo cáo, Add Filter, Apply, 4 báo cáo. `job_assignments_summary_by_job` không lọc được, chỉ có Save. Từng báo cáo ở Mục 21.3. | P1 | [Gói: Bảo dưỡng đội xe] | demo | `Chạy` đọc nhãn, lọc thật `purchase_orders` | `Chạy` một phần: Đọc nhãn, lọc thật 1 báo cáo; `expense_entries` lỗi 500 | Lấy khối ô xe dùng chung; chỉ giữ một kiểu bộ lọc |
+| FR-fleetio-saas-platform-066 | Tạo Motor Pool | Form Add Motor Pool: Name *, Groups *, Vehicle Types *, Vehicle Statuses * (mặc định Active), "Automatically calculate charges", 'Require "Reason for Trip" field', Auto Approvals. Bật Auto Approvals có Time zone *, Days *, Start Time *, End Time *, Full day, Add Window. Danh sách cột Name, # Groups. Reservation Rates: bảng giá tính phí đặt xe, Add Rate Table. Flat Fees: phí cố định thêm vào từng đặt xe, Add Flat Fee. | P2 | [Gói: Khách lớn, chưa có trong danh sách gói] | demo | `Chạy` tạo `TEST-NEN-POOL-01`; `Xem` Auto Approvals, Rates, Fees | `Chạy` một phần: Tạo pool; Auto Approvals, Rates, Fees chỉ đọc | Lấy tự duyệt theo cửa sổ giờ; không bắt buộc Groups |
+| FR-fleetio-saas-platform-067 | Đặt xe theo loại xe | Form Vehicle Reservation: Operator *, Motor Pool *, Reason for Trip, Pick Up *, Drop Off *. Chọn pool thì hiện Vehicle Types * chỉ gồm loại của pool; Reason for Trip có dấu * nếu pool bắt buộc. Người đặt chọn loại xe, không chọn xe cụ thể. Ô Operator chỉ liệt kê liên hệ có đăng nhập và classification Operator. | P2 | [Gói: Khách lớn, chưa có trong danh sách gói] | test | `Chạy` Submit đọc lỗi, ảnh `reservation-validation.jpg` | `Chạy` một phần: Submit thiếu dữ liệu; chưa tạo được đặt xe | Lấy đặt theo loại xe, điều độ gán xe sau; cho đặt hộ lái xe không có tài khoản |
 
 ## 4. Non-Functional Requirements (NFR)
 
@@ -188,6 +190,11 @@ links:
 | BR-fleetio-saas-platform-053 | Bản Archived không chạy khi bản ghi khớp đổi; Restore không tự bật lại dù trước đó Enabled, giữ v.1 và Run History. | [Cấu hình] | Archive, Restore | FR-fleetio-saas-platform-033 | `Chạy` AUTO-08 | `Chạy` |
 | BR-fleetio-saas-platform-054 | Update Field Repair Priority Class của Service Entry chọn và Apply được nhưng bị từ chối lúc lưu; chỉ thử 1 giá trị Emergency, hãng không nêu lý do. | [Cấu hình] | Lưu automation | FR-fleetio-saas-platform-013 | `Chạy` | `Chạy` |
 | BR-fleetio-saas-platform-055 | Automation trên Fault chỉ có sự kiện Created; Fault sinh từ thiết bị telematics, không tạo tay được. | [Cấu hình] | Tạo automation | FR-fleetio-saas-platform-013 | `Chạy` lưu AUTO-09 Disabled; lượt thật bị chặn vì xe TEST không có thiết bị | `Chạy` phần lưu |
+| BR-fleetio-saas-platform-057 | Người được đặt xe phải có đăng nhập và classification Operator; không có thì không đặt được, cũng không có lối đặt hộ đã thấy. | [Gói: Khách lớn, chưa có trong danh sách gói] | Đặt xe | FR-fleetio-saas-platform-067 | `Chạy` Operator "No options"; tooltip "...contacts with login access and operator classification are shown." | `Chạy` |
+| BR-fleetio-saas-platform-058 | Đặt xe chọn loại xe trong phạm vi loại của pool, không chọn xe cụ thể; gán xe cụ thể chưa chạy. | [Gói: Khách lớn, chưa có trong danh sách gói] | Chọn pool | FR-fleetio-saas-platform-067 | `Chạy` đọc form, ảnh `reservation-validation.jpg` | `Chạy` đọc form |
+| BR-fleetio-saas-platform-059 | Tick Require "Reason for Trip" thì mọi đặt xe phải có lý do, kể cả khi sửa đặt xe đã có. | [Cấu hình] | Lưu pool | FR-fleetio-saas-platform-066 | `Chạy` câu cảnh báo khi tick; đặt xe có sẵn chưa thử | `Chạy` phần tick |
+| BR-fleetio-saas-platform-060 | Pool bắt buộc Groups, nên tài khoản không dùng nhóm xe không tạo được pool. | [Gói: Khách lớn, chưa có trong danh sách gói] | Tạo pool | FR-fleetio-saas-platform-066 | `Suy` từ dấu * trên form; chưa thử để trống | `Xem` |
+| BR-fleetio-saas-platform-061 | Auto Approvals có múi giờ riêng, chỉ dùng kiểm cửa sổ duyệt: "Used only for auto-approval window checks. It does not affect reservation times." | [Cấu hình] | Bật tự duyệt | FR-fleetio-saas-platform-066 | `Xem` đã mở, không lưu | `Xem` |
 | BR-fleetio-saas-platform-056 | Báo cáo đơn mua cộng cả đơn Draft vào Total Amount, không phân biệt mặc định. | [Gói: Bảo dưỡng đội xe] | Xem báo cáo | FR-fleetio-saas-platform-065 | `Chạy` lọc Vendor `TEST-NCC-01`, 2 dòng gồm Draft #5 | `Chạy` |
 
 ## 6. Error Matrix
@@ -220,6 +227,8 @@ links:
 | E-fleetio-saas-platform-025 | Automation không lưu được | "Automation could not be created. Please resolve any errors try again.", khối Actions "action is missing" · "is invalid" khi Update Field Repair Priority Class = Emergency trên Service Entry | major | FR-fleetio-saas-platform-013 | Sau bấm Save, nút "Fix Errors"; lúc chọn không báo | Đổi hành động | `Chạy` |
 | E-fleetio-saas-platform-026 | Tự duyệt đơn mua thiếu điều kiện | Cảnh báo cam "This Trigger and Action set requires a specific Condition. To ensure a successful automation, add a Condition on Purchase Order Status for Pending Approval."; lưu vẫn chặn "Purchase Order Status "Pending Approval" is required" | minor | FR-fleetio-saas-platform-013 | Ngay trong panel và lúc Save, nút "Resolve error" | Thêm điều kiện | `Chạy` |
 | E-fleetio-saas-platform-027 | Báo cáo đơn mua sai số gộp, lệch thang | Total Amount gồm cả đơn Draft; biểu đồ "Total by Vendor" trục chỉ 20k trong khi tổng 3,5 triệu ở VND | major | FR-fleetio-saas-platform-065 | Trang `purchase_orders` sau khi lọc, không có cảnh báo | Thêm lọc Status, đọc bảng thay biểu đồ (`Suy`) | `Chạy` |
+| E-fleetio-saas-platform-028 | Không có Operator để đặt xe | Gõ tìm: "No results for 'TEST'"; xoá tìm: "No options" khi không liên hệ nào vừa có đăng nhập vừa có classification Operator | major | FR-fleetio-saas-platform-067 | Danh sách ô Operator, câu giải thích nằm trong tooltip | Tick Operator cho người có đăng nhập, hoặc mời liên hệ Operator; lượt 5 không làm | `Chạy` |
+| E-fleetio-saas-platform-029 | Đặt xe thiếu dữ liệu | Operator "must exist"; Reason for Trip "is required for this motor pool"; Pick Up, Drop Off "can't be blank" dù ô hiện chữ mờ ngày giờ hiện tại; toast "Failed to create Reservation" | minor | FR-fleetio-saas-platform-067 | Dưới từng ô, toast góc phải | Nhập đủ; không tạo bản ghi | `Chạy` |
 | E-fleetio-saas-platform-024 | Tab kẹt khi rời form chưa lưu | Rời mẫu automation hoặc form New Contact bằng Cancel, hộp "Leave site?" làm tab kẹt | minor | FR-fleetio-saas-platform-031 | Hộp của trình duyệt | Đóng tab; lượt 3 còn một tab không đóng được, nguyên nhân có thể do công cụ chạy thử | `Chạy` |
 
 ## 7. Success Criteria
@@ -268,7 +277,7 @@ Xem [[docs/_research/fleetio/srs/fleetio-saas-platform-flows.md|Flows]], [[docs/
 * [x] OQ-9: Technician có quyền gì với Fuel Entries? Ma trận ghi "không", ghi chú cùng lượt ghi "chỉ có ô xem". Cần mở lại Edit Role để chốt. Trả lời lượt 3: Role Technician có Fuel Entries chọn None, không có ô con; ghi chú cũ "chỉ có ô xem" sai (`Xem`, không lưu) — Nguồn khách: câu hỏi nội bộ
 * [x] OQ-10: Settings có bao nhiêu trang? Bản 02/11 ghi khoảng 65, tiêu đề ghi chú chạy ghi khoảng 45, bảng chạy kê 56 tên trang. Mục 14 theo bảng chạy; chưa đếm lại trên menu. Trả lời lượt 3: menu có 67 link = 59 trang cấp tài khoản + 7 trang cá nhân + Log Out (`Xem`) — Nguồn khách: câu hỏi nội bộ
 * [ ] OQ-11: Cột và lọc của 48 báo cáo còn lại, Saved Reports là gì? Một phần lượt 3: đủ 49 tên, cột 48 báo cáo ở Phụ lục báo cáo chuẩn; Saved Reports là bộ lọc và cột của báo cáo chuẩn lưu lại, kèm Private hoặc Public và lịch gửi email (`Chạy`). Lượt 4: nhãn bộ lọc 48 báo cáo ở Mục 21.3, 3 kiểu (`Chạy` đọc, lọc thật `purchase_orders`). Còn mở: `expense_entries` lỗi 500 lần 3 nên chưa có cột, bộ lọc; 3 báo cáo đọc "0 dòng" có thể chưa kịp tải. — Nguồn khách: câu hỏi nội bộ
-* [ ] OQ-12: Đổi trạng thái xe thật, Archive xe, Restore xe, xe trùng tên, Motor Pool chạy thế nào? Một phần lượt 3: đổi Status thật Active, Inactive trên `TEST-DAUKEO-2` (`Chạy`). Còn mở: Archive, Restore, xe trùng tên cần một chỗ xe (đang 5 of 5); Motor Pool cần tạo trong Settings, ngoài phạm vi. — Nguồn khách: câu hỏi nội bộ
+* [ ] OQ-12: Đổi trạng thái xe thật, Archive xe, Restore xe, xe trùng tên, Motor Pool chạy thế nào? Một phần lượt 3: đổi Status thật Active, Inactive trên `TEST-DAUKEO-2` (`Chạy`). Lượt 5: tạo được Motor Pool, đặt xe bị chặn vì không liên hệ nào vừa có đăng nhập vừa là Operator (`Chạy`). Còn mở: Archive, Restore, xe trùng tên cần một chỗ xe (đang 5 of 5); duyệt, gán xe cụ thể, trạng thái đặt xe, tính phí, Auto Approvals, Archive xe có đặt chỗ, cần user quyết cho tick Operator trên liên hệ thật hoặc mời người. — Nguồn khách: câu hỏi nội bộ
 * [ ] OQ-13: AI Data Analyst sai vì kho phân tích trễ hay vì cách đếm? Mới là `Suy`, mạnh hơn sau lượt 3: lượt trước khoảng 15 giờ trước trả 2 (thật 7), lượt này 10 (thật 12); xe tạo trong ngày chưa có trong kho. Chưa giải thích được: #50 có mà #49 không nên không phải cắt theo thời điểm đơn giản; #51 có Priority High nên không do thiếu mức ưu tiên. — Nguồn khách: câu hỏi nội bộ
 * [x] OQ-14: Mẫu Send Email When A Work Order Total Exceeds Amount có trigger, điều kiện gì? Trả lời lượt 3: trigger Work Order Created or Updated; điều kiện Work Order Total Cost ≥ 100.000 ₫; Send Email, Recipient(s) tự điền người đang đăng nhập; mẫu viết cứng ">$1,000.00" (`Chạy` mở mẫu, không lưu) — Nguồn khách: câu hỏi nội bộ
 * [ ] OQ-15: Vì sao Odometer trong Financial của form xe hiện "mi" khi Specifications hiện cm, kg, lít? Chưa rõ. — Nguồn khách: câu hỏi nội bộ
@@ -391,7 +400,7 @@ Xem [[docs/_research/fleetio/srs/fleetio-saas-platform-flows.md|Flows]], [[docs/
 
 ### 13.9 Điều KHÔNG làm trong lượt chạy
 
-Sau lượt 3 còn: Archive, Restore xe, xe trùng tên (cần một chỗ xe); Motor Pool chạy thật (cần tạo trong Settings); vòng lặp chéo; lượt thật automation Fault (cần thiết bị telematics), nhánh tự duyệt đơn Pending (cần người thứ hai); Delete automation; chặn khi hết hạn mức Automations (cần 75 bản bật); hiệu lực quyền thật; Failure Notification Email, Run Summary Email, Send Email, Email Schedule của báo cáo; hồ sơ thông báo; lưu Enable Access; Share lại, Saved Report Public; Record peek; thao tác hàng loạt; `expense_entries` chưa đọc được do lỗi 500. Tools, Tool Management, Custom Records, Advanced Analytics ngoài AI Data Analyst không mở theo ràng buộc.
+Sau lượt 3 còn: Archive, Restore xe, xe trùng tên (cần một chỗ xe); đặt xe thật (cần liên hệ vừa có đăng nhập vừa là Operator), Archive xe có đặt chỗ; vòng lặp chéo; lượt thật automation Fault (cần thiết bị telematics), nhánh tự duyệt đơn Pending (cần người thứ hai); Delete automation; chặn khi hết hạn mức Automations (cần 75 bản bật); hiệu lực quyền thật; Failure Notification Email, Run Summary Email, Send Email, Email Schedule của báo cáo; hồ sơ thông báo; lưu Enable Access; Share lại, Saved Report Public; Record peek; thao tác hàng loạt; `expense_entries` chưa đọc được do lỗi 500. Tools, Tool Management, Custom Records, Advanced Analytics ngoài AI Data Analyst không mở theo ràng buộc.
 
 ### 13.10 Báo cáo: danh mục và cột (lượt 3)
 
@@ -570,7 +579,7 @@ Sau lượt 3 còn: Archive, Restore xe, xe trùng tên (cần một chỗ xe); 
 | C-184 Mặc định quyền | Đọc form | Role * mặc định Fleet Manager; Record Sets Vehicles, Tools, Contacts, Part Locations, Inspection Forms đều Full Access | `Xem` |
 | C-185 Hiệu lực Role, Record Set | Cần người dùng thứ hai | KHÔNG chạy được, không mời người | Không chạy |
 | C-186 Form đặt xe | Mở Vehicle Reservation | Operator *, Motor Pool *, Reason for Trip, Pick Up *, Drop Off *, Submit Reservation; rời trang để huỷ | `Xem` |
-| C-187 Đặt xe thật | Motor Pool * lấy từ Settings, đang rỗng | KHÔNG chạy được, tạo Motor Pool là Settings bị cấm | Không chạy |
+| C-187 Đặt xe thật | Motor Pool * lấy từ Settings, đang rỗng | Lượt 3 KHÔNG chạy được, tạo Motor Pool là Settings bị cấm; lượt 5 đã tạo pool, đặt xe vẫn bị chặn, xem C-232, C-233 | Không chạy |
 | C-188 Rời form liên hệ | New Contact chưa lưu | Tab kẹt hộp "Leave site?", không đóng được; form chưa lưu, không có dữ liệu | `Chạy` |
 
 ### 13.22 Settings (lượt 3)
@@ -618,6 +627,26 @@ Sau lượt 3 còn: Archive, Restore xe, xe trùng tên (cần một chỗ xe); 
 | C-222 Lọc thật | `purchase_orders`, Vendor `TEST-NCC-01` | "1 filter applied", "Clear all", 2 dòng #1, #5; đường dẫn thêm `q[vendor_id_in_s]`; Total Amount gồm cả Draft #5; biểu đồ trục chỉ 20k khi tổng 3,5 triệu. Tên ô nói Vehicle hoặc Asset khác nhau; ô "Subotal amount" sai chính tả | `Chạy` |
 | C-223 Recall đổi số | Tab Needs Action, hai lần đọc | `recalls-list.jpg` hiện 261 dòng, ảnh ghi Premium Plan 14 Days Left; run-notes nhóm Sửa chữa ghi 285 dòng. Cùng tab, khác thời điểm, không phải mâu thuẫn ghi chép; vì sao tăng chưa biết (OQ-21) | `Xem` |
 
+### 13.24 Motor Pool, đặt xe (lượt 5)
+
+| Case | Điều kiện | Kết quả thật | Bằng chứng |
+|---|---|---|---|
+| C-224 Tạo pool | Nhóm có sẵn, Semi Truck, Active, bắt buộc Reason | "Motor Pool was successfully created"; danh sách cột Name, # Groups | `Chạy`, `motor-pool-add.jpg` |
+| C-225 Form pool | Add Motor Pool | Name *, Groups *, Vehicle Types *, Vehicle Statuses * mặc định Active; "Automatically calculate charges" (không tick), 'Require "Reason for Trip" field', Auto Approvals, "How it works" | `Chạy`, `motor-pool-add.jpg` |
+| C-226 Bắt buộc lý do | Tick ô | Cảnh báo "This field will be required on all reservations. Users with access will be unable to create new or save edits to existing reservations until a valid value is entered for this field." | `Chạy`, `motor-pool-add.jpg` |
+| C-227 Bật Auto Approvals | Bật, không lưu | Time zone *, Days *, Start Time *, End Time *, Full day, Add Window | `Xem` |
+| C-228 Form trước khi chọn pool | Add Vehicle Reservation | Operator *, Motor Pool *, Reason for Trip, Pick Up *, Drop Off * | `Chạy` |
+| C-229 Chọn pool | Chọn `TEST-NEN-POOL-01` | Hiện thêm Vehicle Types * chỉ gồm loại của pool; Reason for Trip có dấu *; KHÔNG có ô chọn xe cụ thể | `Chạy`, `reservation-validation.jpg` |
+| C-230 Tìm Operator | Gõ "TEST" | "No results for 'TEST'"; xoá tìm: "No options" | `Chạy` |
+| C-231 Giải thích ô Operator | Rê tooltip | "...contacts with login access and operator classification are shown." | `Xem` |
+| C-232 Đối chiếu Contacts | 3 liên hệ TEST có Operator, 1 người có đăng nhập | Liên hệ TEST đều No Access; người có đăng nhập không có Classification: KHÔNG ai đủ 2 điều kiện | `Chạy` đọc |
+| C-233 Submit thiếu dữ liệu | Không Operator, Reason, ngày | "must exist", "is required for this motor pool", "can't be blank" 2 lần, toast "Failed to create Reservation"; KHÔNG tạo bản ghi | `Chạy`, `reservation-validation.jpg` |
+| C-234 Ô ngày có chữ mờ | Pick Up, Drop Off hiện ngày giờ hiện tại | Vẫn báo "can't be blank": chữ mờ là placeholder (đọc từ ảnh, giống C-201) | `Chạy`, `reservation-validation.jpg` |
+| C-235 Reservation Rates | Chỉ xem | "Reservation Rates are configurable pricing tables used to automatically calculate reservation costs."; Add Rate Table; cột Name, Status, Usage, Last Updated | `Xem` |
+| C-236 Flat Fees | Chỉ xem | "Preset fees that can be optionally added to individual reservations."; Add Flat Fee; cột Name, Status, Amount, Vehicle Types | `Xem` |
+| C-237 Duyệt, gán xe, tính phí, Auto Approvals | Cần đặt xe được tạo trước | KHÔNG chạy được: tick Operator trên liên hệ thật ngoài phạm vi, cho liên hệ TEST đăng nhập là mời người | Không chạy |
+| C-238 Archive xe có đặt chỗ | `TEST-DAUKEO-2`, chưa có đặt chỗ, Lệnh #111 đang Open | KHÔNG bấm: #111 sẽ tự làm Archive bị từ chối nên không tách được nguyên nhân; xe đọc lại cuối lượt không đổi | Không chạy |
+
 ## 14. Bảng Settings từng trang
 
 Mọi dòng là `Xem`: mở trang, đọc, không Save. Giá trị là của tài khoản dùng thử lúc đọc; chỉ dòng ghi "(Default)" hoặc "mặc định" là mặc định sản phẩm đọc được trên màn. "Chưa ghi" nghĩa là ghi chú chạy không nêu. Menu có 59 trang cấp tài khoản và 7 trang cá nhân (OQ-10, C-189); bảng dưới kê các trang đã đọc, chưa đủ hết, kèm Account Usage nằm trong General. Tools (3 trang) không mở.
@@ -657,9 +686,9 @@ Mọi dòng là `Xem`: mở trang, đọc, không Save. Giá trị là của tà
 | Expense Types | 17 loại | Chưa ghi | Chưa ghi | Đủ |
 | Expense Settings | Auto Generate Loan / Lease Expenses | Chưa ghi | Tự sinh chi phí trả góp | Đủ |
 | Tire Management Settings | Automated tire pressure readings; Tire Rotation Patterns theo cấu hình trục, thêm được mẫu | Đo tự động chỉ 4x2, 4x4 có telematics | Chưa ghi | Một phần danh sách mẫu |
-| Motor Pools | Motor Pool; cột # Groups | Rỗng | Chưa ghi | Đủ |
-| Reservation Rates | Bảng giá đặt xe; cột Name, Status, Usage | Rỗng | Bảng giá đặt xe | Đủ |
-| Flat Fees | Phí cố định; cột Amount, Vehicle Types | Rỗng | Phí cố định | Đủ |
+| Motor Pools | Name *, Groups *, Vehicle Types *, Vehicle Statuses *, Automatically calculate charges, Require "Reason for Trip", Auto Approvals; cột Name, # Groups | Trước lượt 5 rỗng; sau đó 1 pool TEST; Vehicle Statuses mặc định Active | Quy định loại xe, trạng thái xe đặt được | Đủ, đã tạo 1 pool |
+| Reservation Rates | Add Rate Table; cột Name, Status, Usage, Last Updated | Rỗng | "Reservation Rates are configurable pricing tables used to automatically calculate reservation costs." | Đủ, không tạo |
+| Flat Fees | Add Flat Fee; cột Name, Status, Amount, Vehicle Types | Rỗng | "Preset fees that can be optionally added to individual reservations." | Đủ, không tạo |
 | Inspection Settings | Proximity Threshold; Distance Threshold | Fleetio: 80%; 100 m | Bật cảnh báo Location Exception khi phiếu nộp từ một chỗ | Đủ |
 | Issue Priorities | No Priority, Low, Medium, High, Critical; cột Alias, Enabled | No Priority (Default); đếm No Priority 8, Low 4, Medium 12, High 27, Critical 4 | Chưa ghi | Đủ |
 | Fault Rules | Mã | 11 mã | Chưa ghi | Một phần |
@@ -826,7 +855,7 @@ Mở Edit Role cả 4 vai, đọc 30 module, đóng bằng Cancel (`Xem`). F đ�
 
 **Trial Tools đã bị bật, không rõ ai bật.** Đầu lượt, Billing ghi Tool Management "Start Free Trial", thanh bên có nhãn "Try". Cuối lượt, Billing ghi "Tools - Monthly 25", "Trialing", "14 days left in trial", "Tools 0 of 25", có "Disable Add-On". Nhóm chạy này không bấm nút đó, không xác định được ai bật, và không tắt vì đây là thay đổi cài đặt tài khoản ngoài phần được giao. Cần chủ tài khoản quyết định.
 
-**Dữ liệu thử còn trên tài khoản:** automation `TEST-NEN-AUTO-01` (đã lên v.2), `TEST-NEN-AUTO-02`, `TEST-NEN-AUTO-03`, `TEST-NEN-AUTO-04`, `TEST-NEN-AUTO-05`, `TEST-NEN-AUTO-06`, `TEST-NEN-AUTO-07`, `TEST-NEN-AUTO-08`, `TEST-NEN-AUTO-09` (đều đang tắt, 09 chưa bật lần nào); Service Entry #57903356 trên `TEST-KHO-01`; comment và số đã sửa trên Purchase Order #5; Issue #40, #42, #43, #44 và Work Order #105 trên xe dùng chung `TEST-XE-01`; Issue #54, #55, 1 comment trên #55, Work Order #111 Open và tệp `TEST-NEN-tailieu.txt` trên `TEST-DAUKEO-2` (Color = TEST, Status đã trả về Active); báo cáo Private `TEST-NEN-BC-01` đang yêu thích; view Private `TEST-NEN-VIEW-01` trên Issues; hai liên hệ `TEST-NEN-LH-01` không email.
+**Dữ liệu thử còn trên tài khoản:** automation `TEST-NEN-AUTO-01` (đã lên v.2), `TEST-NEN-AUTO-02`, `TEST-NEN-AUTO-03`, `TEST-NEN-AUTO-04`, `TEST-NEN-AUTO-05`, `TEST-NEN-AUTO-06`, `TEST-NEN-AUTO-07`, `TEST-NEN-AUTO-08`, `TEST-NEN-AUTO-09` (đều đang tắt, 09 chưa bật lần nào); Service Entry #57903356 trên `TEST-KHO-01`; comment và số đã sửa trên Purchase Order #5; Issue #40, #42, #43, #44 và Work Order #105 trên xe dùng chung `TEST-XE-01`; Issue #54, #55, 1 comment trên #55, Work Order #111 Open và tệp `TEST-NEN-tailieu.txt` trên `TEST-DAUKEO-2` (Color = TEST, Status đã trả về Active); báo cáo Private `TEST-NEN-BC-01` đang yêu thích; view Private `TEST-NEN-VIEW-01` trên Issues; hai liên hệ `TEST-NEN-LH-01` không email; Motor Pool `TEST-NEN-POOL-01` (dùng một nhóm có sẵn tên giống ngày, không thấy xe TEST nào trong nhóm, không xoá theo ràng buộc).
 
 ## 21. Phụ lục báo cáo chuẩn
 
@@ -1009,4 +1038,5 @@ Nguồn: `run-notes/platform.md`, mục Lượt 3.
 - AI Prioritization thất bại im lặng, chỉ thấy trong Record History. Có Inbox dù 0 hồ sơ thông báo.
 - "No records changed" hiện ở cả lượt comment, lượt đổi xe, lượt lỗi; chỉ lượt lỗi là đúng sự thật.
 - Lượt 4: hạn mức Automations chỉ đếm bản bật (1 of 75 khi lưu 10); tự duyệt đơn mua bị buộc Pending Approval; Fault chỉ có Created; báo cáo có 3 kiểu bộ lọc.
-- Hiệu lực Role, Record Set cần người dùng thứ hai; Motor Pool cần tạo trong Settings; vòng lặp chéo automation không chạy vì không rõ giới hạn trên hệ thống thật.
+- Lượt 5: tạo được Motor Pool; đặt xe chọn loại xe, không chọn xe; đặt xe bị chặn vì Operator phải có đăng nhập và classification Operator.
+- Hiệu lực Role, Record Set cần người dùng thứ hai; vòng lặp chéo automation không chạy vì không rõ giới hạn trên hệ thống thật.

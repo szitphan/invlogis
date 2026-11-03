@@ -26,6 +26,7 @@ updated: 2026-11-03
 | UC-share-report | Chia sẻ báo cáo | Quản lý | 052 | 2.2, 2.4, 2.5 | E-010, E-013 | — |
 | UC-ask-data | Hỏi dữ liệu bằng lời | Quản lý | 020 | 2.3, 2.7 | E-012, E-015 | OQ-13 |
 | UC-manage-contact | Quản lý liên hệ | Administrator | 038, 063 | 5.1, 5.10 | E-006, E-024 | OQ-8 |
+| UC-book-vehicle | Đặt xe dùng chung | Administrator, Operator | 043, 066, 067 | 5.4, 5.11, 5.12, 5.13 | E-028, E-029 | OQ-12 |
 | UC-add-vehicle | Thêm xe trong hạn mức | Administrator | 023, 039, 041 | 5.2 | E-003, E-004 | OQ-12, OQ-15 |
 
 Số FR, lỗi viết tắt, đầy đủ có tiền tố `fleetio-saas-platform`.
@@ -198,6 +199,17 @@ Xem Flow 3. Bộ đếm Get Started đổi theo việc đã làm và có khi đ�
 | 4 | Lưu | Có hồ sơ; "This Contact doesn't have user access." |
 
 **Nhánh:** 1a Trùng tên: vẫn lưu, không cảnh báo. 2a Chưa tick Operator mà gán xe: bị chặn (E-006).
+
+## UC-book-vehicle — Đặt xe dùng chung
+
+| Bước | Người dùng | Hệ thống |
+|---|---|---|
+| 1 | Administrator tạo Motor Pool | Name, Groups, Vehicle Types, Vehicle Statuses; tuỳ chọn tính phí, bắt buộc lý do, tự duyệt |
+| 2 | Add Vehicle Reservation, chọn pool | Hiện Vehicle Types của pool, không chọn xe cụ thể |
+| 3 | Chọn Operator, nhập lý do, Pick Up, Drop Off | Chỉ liệt kê liên hệ có đăng nhập và là Operator |
+| 4 | Submit Reservation | Chưa kiểm: chưa tạo được đặt xe nào |
+
+**Nhánh:** 3a Không có Operator hợp lệ: "No options" (E-028). 4a Thiếu dữ liệu: "Failed to create Reservation" (E-029). Duyệt, gán xe, tính phí, tự duyệt chưa chạy.
 
 ## UC-add-vehicle — Thêm xe trong hạn mức
 

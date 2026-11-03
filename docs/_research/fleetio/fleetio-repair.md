@@ -31,6 +31,7 @@ Mọi lỗi của xe, từ lái xe báo, phiếu kiểm tra hay thiết bị, đ
 - Lượt 1, 2026-11-02, tài khoản dùng thử: Issue #30, #31; Work Order #99, #100; Service Entry #57837459.
 - Lượt 2, 2026-11-03, cùng tài khoản: xe TEST-SUA-01 (loại Car); Issue #33 đến #38, #45, #46; Work Order #103, #104, #106, #107; Service Entry 57856983, 57857945 (đã tự bị xoá), 57858956. Kho và đơn mua lấy từ lượt chạy nhóm Kho (WO #102, PO #2, PO #3). Bảo hành lấy từ lượt chạy nhóm Phương tiện (WO #100).
 - Lượt 3, 2026-11-03, cùng xe TEST-SUA-01: Issue #52, #53; Work Order #107 (thêm dòng), #110; Service Entry 57902070; bảo hành 356513, 356515 và "TEST-SUA BH het han". Mã lỗi, Recall chỉ đọc dữ liệu Sample.
+- Lượt 5, 2026-11-03: đổi Cài đặt có chủ đích: hai trạng thái TEST, một mẫu bảo hành TEST, bấm Enable Shop Network một lần. Dữ liệu không xoá được còn lại trong Settings.
 - Giới hạn chung: tài khoản một người dùng có toàn quyền, chạm trần số xe nên chỉ chạy trên xe Car. Xoá lệnh không chạy vì là xoá vĩnh viễn.
 
 | Nhãn | Nghĩa |
@@ -76,8 +77,8 @@ Mọi lỗi của xe, từ lái xe báo, phiếu kiểm tra hay thiết bị, đ
 
 ### P1 — should have
 
-- R8 [Mới] [Gói: Bảo dưỡng đội xe] [Cấu hình] **Trạng thái lệnh do khách thêm**, mỗi trạng thái thuộc nhóm Chưa xong hoặc Hoàn thành. Fleetio: `Xem` bảng 3 trạng thái mặc định, chưa thêm thử.
-- R9 [Mới] [Gói: Bảo dưỡng đội xe] **Năm cách xử lý sự cố:** thêm vào lịch sử, AI soạn lệnh, thêm vào lệnh, đưa ra xưởng ngoài, giải quyết kèm ghi chú. Fleetio: `Chạy` bốn nhánh; đưa ra xưởng ngoài chỉ `Xem` hộp giới thiệu, cần bật Shop Network. Áp vào `incident-report`.
+- R8 [Mới] [Gói: Bảo dưỡng đội xe] [Cấu hình] **Trạng thái lệnh do khách thêm**, mỗi trạng thái thuộc nhóm Chưa xong hoặc Hoàn thành. Tên do khách đặt, nghiệp vụ gắn vào hai loại cố định; đã có lệnh dùng thì khoá đổi loại và xoá. Fleetio: `Chạy` hai trạng thái TEST qua #106. Đúng mô hình lõi cố định, tên theo cấu hình. Điểm yếu ở R42.
+- R9 [Mới] [Gói: Bảo dưỡng đội xe] **Năm cách xử lý sự cố:** thêm vào lịch sử, AI soạn lệnh, thêm vào lệnh, đưa ra xưởng ngoài, giải quyết kèm ghi chú. Fleetio: `Chạy` bốn nhánh; đưa ra xưởng ngoài dừng ở Access Denied khi bật (Mục 5.10). Áp vào `incident-report`.
 - R10 [Mới] [Gói: Bảo dưỡng đội xe] **Xem lệnh theo danh sách, lịch, lịch tài nguyên.** Fleetio: `Chạy` chuyển chế độ.
 - R11 [Mới] [Gói: Bảo dưỡng đội xe] [Cấu hình] **Khung Triệu chứng, Nguyên nhân, Cách khắc phục** cho từng dòng việc, bật được bắt buộc trước khi hoàn thành. Fleetio: `Docs` phần bắt buộc; `Chạy` ba ô Complaint, Cause, Correction lưu được, nhưng chỉ hiện trên đầu việc có cơ hội bảo hành và chỉ là chữ (R34).
 - R12 [Mới] [Gói: Bảo dưỡng đội xe] [Cấu hình] **Tổng hợp chi phí:** markup công, markup phụ tùng, tín dụng bảo hành, giảm giá, thuế; mỗi ô đổi được giữa phần trăm và số tiền. Fleetio: `Chạy` trên #107; thứ tự tính ở Mục 7.1; markup cố định lệch thuế giữa form và chi tiết (Mục 6.5). Hợp với `service-sales-payment` khi sửa cho khách ngoài.
@@ -97,7 +98,7 @@ Mọi lỗi của xe, từ lái xe báo, phiếu kiểm tra hay thiết bị, đ
 - R17 [Mới] [Gói: Bảo dưỡng đội xe] **AI soạn nháp lệnh chạy nền**, báo khi xong, người dùng duyệt từng việc rồi mới tạo; **gom sự cố khác cùng xe và cảnh báo xe đang có lệnh mở**. Fleetio: `Chạy`, mất khoảng 30 đến 40 giây. Gom việc đỡ đưa đầu kéo vào xưởng hai lần.
 - R18 [Mới] [Gói: Bảo dưỡng đội xe] **AI đánh giá lệnh** (kiểm công, giá phụ tùng), kết luận, ghi nguồn, cho chạy lại khi lệnh đổi; phát hiện lệnh khác cùng xe trùng việc. Fleetio: `Chạy`. Giá trị thấp nếu không có dữ liệu giá Việt Nam: lệnh phụ tùng 30 triệu vẫn "Acceptable".
 - R19 [Mới] [Gói: Bảo dưỡng đội xe] **Nhận mã lỗi từ thiết bị**, gom và tạo sự cố; luật theo mã: bỏ qua hoặc đánh dấu nghiêm trọng. Fleetio: `Xem` bảng mẫu, có menu Create Issue, Ignore, View Fault Rule; sự cố mẫu #13 gom ba mã do AI lập; hộp luật mở đọc, không lưu. Áp vào `vehicle-telematics`, phụ thuộc thiết bị.
-- R20 [Mới] [Gói: Bảo dưỡng đội xe] **Theo dõi bảo hành xe và phụ tùng** theo ngày và số km, có mẫu Standard, Extended; khai cho nhiều xe một lượt hoặc từng xe; tab bảo hành trên trang xe. Fleetio: `Chạy`; mẫu Coverage Template không chạy được vì danh mục rỗng.
+- R20 [Mới] [Gói: Bảo dưỡng đội xe] **Theo dõi bảo hành xe và phụ tùng** theo ngày và số km, có mẫu Standard, Extended; khai cho nhiều xe một lượt hoặc từng xe; tab bảo hành trên trang xe. Fleetio: `Chạy`, cả mẫu riêng của khách (Mục 5.9). Đề xuất Invlogis: cơ chế áp tương lai hay quá khứ, kèm số xe bị ảnh hưởng, dùng được cho mẫu giá thuê, định mức, chính sách; không chép thư viện OEM.
 - R21 [Mới] [Gói: Bảo dưỡng đội xe] **Danh mục đầu việc:** giờ công dự kiến, phụ tùng đi kèm, lưu trữ thay vì xoá. Fleetio: `Chạy` tạo và lưu trữ; không thấy gộp đầu việc. Chỉ học cấu trúc, không chép hệ mã VMRS của Mỹ. Áp vào `product-catalog`.
 
 ### Điểm yếu cần làm khác
@@ -112,6 +113,9 @@ Mọi lỗi của xe, từ lái xe báo, phiếu kiểm tra hay thiết bị, đ
 - R37 [Mới] [Gói: Bảo dưỡng đội xe] **Bảo hành sắp hết hạn không gợi ý,** đúng lúc cần đòi nhất. Fleetio: `Chạy` một lần đo, còn 1 ngày. Trang chi tiết cũng giữ kết quả cũ tới khi sửa và lưu chính lệnh đó. Đề xuất Invlogis: gợi ý mọi bảo hành còn hiệu lực, tính lại khi bảo hành đổi.
 - R38 [Mới] [Gói: Bảo dưỡng đội xe] **AI nêu sai thực tế, sinh dòng trùng.** Fleetio: `Chạy` #110, câu "no existing open work orders" trong khi #107 đang mở, bỏ qua Service Entry vừa làm đúng việc đó, không hỏi khi tạo dòng trùng. Đề xuất Invlogis: giữ bước người duyệt như hộp Review, cảnh báo dòng trùng.
 - R39 [Mới] [Gói: Bảo dưỡng đội xe] **Bỏ tick sự cố trong lịch sử không hỏi, không vết.** Fleetio: `Chạy` #52 về Open, Timeline chỉ còn "opened this issue". Cùng họ với R27.
+- R42 [Mới] [Gói: Bảo dưỡng đội xe] **Trạng thái tuỳ biến không có quy trình:** không khai được thứ tự chuyển, vai trò; lệnh nhảy thẳng từ chờ phụ tùng sang Completed; "chờ nghiệm thu" loại Completed đã sinh Service Entry và khoá lệnh. Fleetio: `Chạy` #106. Đề xuất Invlogis: quy trình duyệt cần thứ tự chuyển hoặc phân quyền, chờ OQ-13.
+- R43 [Mới] [Gói: Bảo dưỡng đội xe] **Áp mẫu về quá khứ ghi đè phần sửa riêng,** chỉ có cảnh báo, không so sánh trước sau. Fleetio: `Chạy`, ghi đè là câu cảnh báo, chưa kiểm. Đề xuất Invlogis: hiện trước sau từng xe, cho loại trừ.
+- R44 [Mới] [Gói: Bảo dưỡng đội xe] **Thư viện mẫu hãng thuần xe con Mỹ, không chặn số đồng hồ lệch:** 14 mẫu Ford, Chevrolet, không có đầu kéo, không lọc theo hãng; Start Meter 2 km khi xe 2.365 km vẫn lưu, không cảnh báo. Fleetio: `Chạy`, `Xem`. Đề xuất Invlogis: mẫu riêng của khách, cảnh báo khi lệch.
 - R40 [Mới] [Gói: Bảo dưỡng đội xe] **PDF và web khác múi giờ:** PDF theo múi giờ tài khoản, web theo máy, một lệnh hiện 2 ngày khác nhau; tiền PDF dạng US. Fleetio: `Chạy` #107. Đề xuất Invlogis: một múi giờ cho mọi kênh, in kèm múi giờ.
 
 ## 5. Core Flows (Happy Path)
@@ -217,6 +221,28 @@ Nháp mới ─ Create new ─> Lệnh mới; sự cố chính vào lệnh
 Nháp mới ─ Add to ─────> Chỉ nêu lệnh mở mới nhất, không chọn được lệnh khác
 ```
 
+### 5.9 Mẫu bảo hành và áp thay đổi
+
+`Chạy` với mẫu TEST trên TEST-SUA-01; mẫu hãng `Xem` trên xe Sample, không lưu.
+
+```
+Settings: mẫu + coverage ─> New Warranties, chọn mẫu ─> Xem trước, sửa riêng ─> Sinh bảo hành riêng
+Sửa mẫu đã dùng ─> Template Change ─ tương lai (mặc định, chưa chạy) ─> chỉ áp lần sau
+                                   ─ cả quá khứ ─> nêu số xe, cảnh báo ghi đè ─> End Date đã đổi
+```
+
+Sửa câu cũ: "No options" do chưa có mẫu đúng điều kiện, không phải do thiếu Make. Xe mi thấy mẫu hãng, xe km thấy mẫu km: lọc theo đơn vị là `Suy` từ 2 lần quan sát.
+
+### 5.10 Bật mạng lưới xưởng
+
+`Chạy` với #46, bấm một lần.
+
+```
+Get Service at Shop ─> Hộp giới thiệu ─ Enable ─> Thiết lập Fleetio Pay ─> Access Denied ─> Vẫn chưa bật
+```
+
+Phát hiện: bật mạng lưới đi qua tài khoản thanh toán. Không thấy hộp điều khoản, phí. Vì sao bị từ chối chưa biết; dừng vì là phần thanh toán.
+
 ## 6. System Behavior Deep Dive
 
 ### 6.1 Decision Points
@@ -235,6 +261,8 @@ Nháp mới ─ Add to ─────> Chỉ nêu lệnh mở mới nhất, kh�
 | D10 | 5.7 | Bảo hành Active và mã cùng mức với dòng | Gợi ý cơ hội | Không gợi ý |
 | D11 | 5.8 | Việc gợi ý thuộc sự cố đang ở lệnh khác | Sự cố giữ lệnh cũ, đầu việc thành dòng trùng nếu giữ tick | Không phát sinh |
 | D12 | 5.1 | Tick Set Labor Time Entry | Tạo mốc thời gian, End theo số giờ | Chỉ giờ công |
+| D13 | 5.1 | Trạng thái đích thuộc loại Completed | Như Completed gốc; sang Completed khác giữ entry | Chỉ ghi Status Updates |
+| D14 | 5.9 | Sửa mẫu đã dùng, áp cả quá khứ | Cập nhật bảo hành đã sinh, ghi đè phần sửa riêng theo cảnh báo | Chỉ áp lần sau |
 
 ### 6.3 State Transitions
 
@@ -286,7 +314,9 @@ Ma trận đủ: [[docs/_research/fleetio/srs/fleetio-repair-states.md|States]].
 - **Điểm không nên học, AI:** câu "no existing open work orders" sai, dòng việc trùng, hứa Repair Priority Class lần thứ ba vẫn trống (`Chạy` #99, #106, #110).
 - **Điểm không nên học, lưu liên tiếp bảo hành:** "Save & Add Another" giữ cả mã của bảo hành trước, dễ lưu nhầm (`Chạy`).
 - **Điểm không nên học, ngày và đơn vị bảo hành:** End Date trang chi tiết sớm hơn form 1 ngày ở cả ba bảo hành TEST-SUA, bảo hành của TEST-XE-01 thì đủ năm, chưa rõ nguyên nhân; dòng xe ghi "2,350 undefined" (`Chạy`). Lỗi Start Meter 1 km lượt trước không lặp lại.
-- **Điểm chưa rõ, Draft Work Order trên sự cố đã gắn:** lượt trước còn dùng được, lượt 3 trên #45 xám. Chưa biết do lệnh, do #45 từng Discard, hay do hãng đổi (`Chạy` một sự cố).
+- **Điểm chưa rõ, Draft Work Order trên sự cố đã gắn:** lượt trước còn dùng được, lượt 3 trên #45 và lượt 5 trên #46 xám. Chưa biết do lệnh, do từng Discard, hay do hãng đổi (`Chạy`).
+- **Điểm chưa kết luận, Start Meter chỉ giữ ký tự đầu:** gõ 2365 ở form New Warranties, ô chỉ giữ "2", lưu ra 2 km, lặp 2/2 lần khi gõ tự động, chưa thử tay. Chưa kết luận lỗi Fleetio hay công cụ gõ. Chắc chắn phía Fleetio: không cảnh báo khi lệch xa đồng hồ xe.
+- **Điểm không nên học, hộp mở lại:** với trạng thái tuỳ biến cũng không báo xoá Service Entry; sự cố về tab Open nhưng trên lệnh vẫn ở khối "Resolved Issues" (`Chạy` #106, #46).
 - **Assessment không chạy** khi chưa có đầu việc, chưa có chi phí dòng việc, hoặc entry chưa có dòng (`Chạy`).
 - **Không xảy ra:** tạo sự cố với hạn đã qua không bị chặn; mở lại lệnh không hoàn đồng hồ, không hoàn kho; hoàn thành lệnh không ghi sổ kho; sao chép lệnh không chép sự cố, ngày, đồng hồ; lưu Service Entry khớp nội dung không đóng, không gợi ý đóng sự cố với cấu hình hiện tại (đọc lại sau khoảng 1 đến 2 giờ và 15 phút); web không có nút bấm giờ, không có ô đánh dấu xong từng dòng; người được giao là liên hệ không thành người theo dõi.
 
@@ -409,7 +439,10 @@ Câu "(per your account settings)" đáng học: nói rõ luật đến từ c�
 | OQ-9 | Delta có cần quy trình đòi bảo hành có trạng thái, nối với khoản hãng trả không? | Fleetio chỉ có 3 ô chữ, credit nhập tay (`Chạy`). Quyết định của Delta còn mở | Chưa có trong tài liệu khách gửi |
 | OQ-10 | Một lệnh có cần ghi công theo mốc thời gian từng kỹ thuật viên không? | Fleetio có Time Entry tuỳ chọn, web không bấm giờ (`Chạy`). Quyết định của Delta còn mở | Chưa có trong tài liệu khách gửi |
 | OQ-11 | Bật Issue Resolution thì AI có đóng, gợi ý đóng sự cố khi có Service Entry không? | Với cấu hình hiện tại không, đọc lại sau khoảng 1 đến 2 giờ và 15 phút (`Chạy`); chưa bấm vì có câu điều khoản, chưa biết trạng thái bật thật | Không áp dụng |
-| OQ-12 | Vì sao Draft Work Order xám trên #45, trong khi lượt trước còn dùng được trên sự cố đã gắn? | Chưa rõ | Không áp dụng |
+| OQ-12 | Vì sao Draft Work Order xám trên #45, #46, trong khi lượt trước còn dùng được trên sự cố đã gắn? | Chưa rõ | Không áp dụng |
+| OQ-13 | Delta có cần khống chế thứ tự chuyển trạng thái lệnh, người được chuyển, bước chờ nghiệm thu không? | Fleetio không khai được (`Chạy`). Quyết định của Delta còn mở | Chưa có trong tài liệu khách gửi |
+| OQ-14 | Vì sao bật Shop Network bị Access Denied? | Chưa biết do gói dùng thử, vị trí hay quyền | Không áp dụng |
+| OQ-15 | Start Meter chỉ giữ ký tự đầu là lỗi Fleetio hay do gõ tự động? | Chưa kết luận, chưa thử gõ tay | Không áp dụng |
 
 ## 12. Next Steps
 

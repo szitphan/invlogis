@@ -479,3 +479,95 @@ Dữ liệu TEST đã tạo: Issue #59; Service Entry #57903452 (TEST-KHO-01, 5.
 - Điểm yếu nặng: đơn giá phụ tùng lệch 100 lần giữa form và chi tiết với VND. Invlogis phải lưu tiền theo số lẻ của từng loại tiền, không cứng 2 số lẻ.
 - Điểm yếu: markup cố định và markup % xử lý cơ số thuế khác nhau; xem trước trên form ra 38.500, sau khi lưu ra 37.000.
 - Điểm yếu: PDF theo múi giờ tài khoản, web theo máy: một lệnh hiện 2 ngày khác nhau.
+
+# Lượt 5 (03/11)
+
+Giá trị Cài đặt trước khi đổi: Work Order Statuses: Open (Default, xanh ngọc, Incomplete, 13 lệnh), Pending (cam, Incomplete, 1), Completed (xanh lá, Completed, 97). Warranty Templates: rỗng. Shop Network: chưa bật.
+
+## Trạng thái lệnh tuỳ biến — Chạy (FR-036, OQ-16 phần trạng thái tuỳ biến)
+Các bước đã làm: Add Work Order Status: để trống, trùng tên, tạo 2 trạng thái; đưa #106 qua từng trạng thái; thử đổi loại khi đang dùng; đổi Default rồi trả về.
+
+Form "Add Work Order Status": Name *, Description, ô "Completed", ô "Default", Color (17 màu + không màu). Ghi chú "Custom names are created the same in all languages. Future edits will only affect the current language". Không có ô cấu hình hiệu ứng, thứ tự chuyển, người được chuyển: **loại chỉ có 2, chọn bằng 1 ô tick**.
+
+| Case | Điều kiện | Kết quả thật | Ảnh |
+|---|---|---|---|
+| Thiếu tên | Name trống | "can't be blank", toast "Work Order Status could not be created" | |
+| Trùng tên | Name "Open" | "has already been taken" | |
+| Tạo loại Incomplete | "TEST-SUA Cho phu tung", không màu | "Work Order Status was successfully created"; cuối bảng, ô tick thay cho khoá vì chưa dùng | wo-status-custom-list |
+| Tạo loại Completed | "TEST-SUA Xong cho nghiem thu", tím | Cột Type "Completed" có dấu tick đen | wo-status-custom-list |
+| Lan ra màn khác | | Có ngay trong menu trạng thái trên lệnh, form lệnh, bộ lọc Status; loại Completed có huy hiệu riêng. **KHÔNG tự thêm tab** trên danh sách lệnh (vẫn All, Open, Pending, Completed) | |
+| Sang Incomplete tuỳ biến | #106 Open | Cập nhật ngay, Status Updates ghi "updated status from Open to TEST-SUA Cho phu tu..."; số lệnh Open 13 sang 12 | |
+| Sang Completed tuỳ biến, thiếu dữ liệu | #106 không Started At | Bị chặn như Completed gốc: "Please edit and fix the following errors: Started At can't be blank" | |
+| Sang Completed tuỳ biến, đủ dữ liệu | #106 có ngày, đồng hồ 2.360, 2.365 | Hiệu ứng y Completed gốc: sinh Service Entry #57906551, Edit xám. Không có bước riêng nào cho "chờ nghiệm thu" | |
+| Giữa 2 trạng thái Completed | Tuỳ biến sang Completed gốc | Không hộp thoại, **vẫn Service Entry cũ** #57906551, không sinh thêm | |
+| Completed sang Incomplete tuỳ biến | | Hộp "Update Status": "Changing this completed Work Order to an incomplete Status will automatically restore any archived parts, part locations, and contacts associated with line items. Are you sure you wish to continue?"; Confirm: Service Entry biến mất (URL 404), toast "Complete: Restoring Work Order #106 data". Hộp không nói sẽ xoá Service Entry | |
+| Đổi loại khi đang dùng | Tick Completed trên trạng thái có 1 lệnh | "cannot be changed if work orders are assigned", toast "Work Order Status could not be updated" | |
+| Đổi Default | Tick Default trên TEST-SUA Cho phu tung | Huy hiệu Default chuyển hẳn sang, Open mất Default (mỗi lúc 1). Form New Work Order chọn sẵn trạng thái mới. **Đã trả Open về Default** | |
+| Khoá theo số lệnh | Có lệnh dùng | Ô tick thành ổ khoá, tooltip "...that are being used cannot be deleted."; menu "..." có Edit, Delete xám có khoá | wo-status-custom-list |
+| Trạng thái gốc | Open, Pending, Completed | Sửa được tên, mô tả, màu; đang có lệnh nên khoá Delete | |
+
+Không kiểm: kéo sắp xếp (nút "Drag to reorder" có sẵn); Service Reminder cập nhật khi Completed tuỳ biến (lệnh #106 không gắn nhắc); hành vi Delete (cấm xoá).
+
+| Trạng thái | Hành động làm được | Sang trạng thái | Điều kiện, người làm | Hiệu ứng lên đối tượng khác | Câu chữ nguyên văn | Mức |
+|---|---|---|---|---|---|---|
+| Incomplete bất kỳ (gốc, tuỳ biến) | Đổi trạng thái | Incomplete bất kỳ | Không ràng buộc thứ tự | Chỉ ghi Status Updates | "Work Order was successfully updated" | Chạy |
+| Incomplete bất kỳ | Đổi trạng thái | Completed bất kỳ | Đủ Started At, đồng hồ | Sinh Service Entry, khoá Edit, sự cố gắn lệnh coi là đã xử lý | "Started At can't be blank" | Chạy |
+| Completed bất kỳ | Đổi trạng thái | Completed khác | Không hỏi | Giữ Service Entry | | Chạy |
+| Completed bất kỳ | Đổi trạng thái, Confirm | Incomplete bất kỳ | Có hộp xác nhận | Xoá Service Entry, khôi phục bản ghi lưu trữ | "Changing this completed Work Order..." | Chạy |
+
+Màn mới: wo-status-custom-list — ảnh images/wo-status-custom-list.jpg — Add Work Order Status, ô tìm, Name kèm chấm màu + huy hiệu Default + mô tả, Type, # Work Orders (link theo trạng thái, kèm số lệnh xe đã Archive), ô tick hoặc khoá, Drag to reorder, menu Edit, Delete.
+Trả lời câu hỏi mở nào: OQ-16 phần trạng thái tuỳ biến của nhóm Sửa chữa.
+Dữ liệu TEST đã tạo: trạng thái "TEST-SUA Cho phu tung" (Incomplete, 0 lệnh sau khi trả), "TEST-SUA Xong cho nghiem thu" (Completed, 0 lệnh). KHÔNG xoá được theo ràng buộc, còn lại trong danh sách trạng thái, xuất hiện ở mọi menu trạng thái lệnh. #106 trả về Open, nhưng nay có Actual Start, Actual Completion Date, đồng hồ 2.360, 2.365.
+Trả lại Cài đặt: đọc lại cuối lượt: Open Default, 13 lệnh; Pending 1; Completed 97; 2 trạng thái TEST 0 lệnh, đã về ô tick (hết khoá).
+
+Giải pháp đáng học, điểm yếu:
+- Đáng học: tên trạng thái do khách đặt, nghiệp vụ gắn vào 2 loại cố định; đúng mô hình "Lõi khung + Cấu hình tên". Khớp `docs/_product/saas-core-vs-tenant.md`.
+- Đáng học: khoá đổi loại và xoá khi đã có lệnh dùng, tránh lịch sử sai nghĩa.
+- Điểm yếu: không khai được thứ tự chuyển hay vai trò; lệnh có thể nhảy thẳng từ "Chờ phụ tùng" sang Completed. Logistics cần quy trình duyệt thì phải làm ở phân quyền hay tự động hoá khác.
+- Điểm yếu: nhiều trạng thái loại Completed không khác gì nhau về hiệu ứng, "chờ nghiệm thu" đã sinh Service Entry và khoá lệnh.
+- Điểm yếu: hộp mở lại không báo xoá Service Entry.
+- Sau khi mở lại, sự cố #46 quay về tab Open của Issues, trên lệnh vẫn nằm ở khối "Resolved Issues".
+
+## Mẫu bảo hành (Warranty Templates) — Chạy (FR-025, vehicle-039)
+Các bước đã làm: Settings › Warranty Templates › Add; tạo mẫu 2 coverage; New Warranties chọn Standard templates trên TEST-SUA-01; mở thử trên xe Sample không lưu; sửa mẫu rồi áp lại về bảo hành đã tạo.
+
+Form "New Warranty Template": Name *, Meter Unit * (Miles, Kilometers, Hours). Coverage Details có đủ trường như bảo hành thường: Warranty Name *, Coverage Type (Standard, Extended), Description, Coverage Duration * (Years, Months), Coverage Distance * hoặc Unlimited, Manufacturer, Warranty Vendor, Contract ID, Vendor Link, Maintenance Categorization. Nút "Create & Add Another", "Create Coverage". "Save Warranty Template" xám tới khi có ít nhất 1 coverage. Danh sách: Name, Manufacturer, # Coverages; menu Edit, Duplicate, Delete (Delete không khoá dù mẫu đang dùng; không bấm).
+
+| Case | Điều kiện | Kết quả thật | Ảnh |
+|---|---|---|---|
+| Mẫu riêng trên xe km | TEST-SUA-01, mẫu Kilometers | Trước đây "No options", nay nhóm "CUSTOM TEMPLATES" có mẫu. Không còn phụ thuộc Make vì xe không có Make | warranty-template-list |
+| Xem trước | Chọn mẫu | "Coverage preview" liệt kê coverage; mỗi dòng có Edit, Edit Maintenance Codes, Delete, sửa riêng lần này được | warranty-template-preview |
+| Áp mẫu | Save Warranties | "Warranties have been successfully created"; **sinh 2 bảo hành riêng**: Standard 11/03/2026–11/03/2028, Extended 11/03/2026–05/03/2027, Unlimited km | |
+| Mã bảo dưỡng theo mẫu | Coverage có 034-004 | Form sửa #106 hiện thêm cơ hội "TEST-SUA BH mau co ban" cạnh "TEST-SUA Bao hanh den" | |
+| Xe Sample có Make | BSA100TRNS, Freightliner Cascadia, mi; không lưu | "OEM TEMPLATES" 14 mẫu xe con (Ford F-150, Transit, F-250, F-350, F-550; Chevrolet Silverado 1500, 2500HD). **Không lọc theo Make**, xe Freightliner vẫn thấy Ford. **Không có mẫu đầu kéo**. Không thấy mẫu km riêng của mình | warranty-oem-template-preview |
+| Mẫu OEM | 2025 Ford F-150 | Bumper to Bumper 3 năm 36.000 mi, Powertrain 5 năm 60.000 mi, Safety Restraint System 5 năm 60.000 mi, Corrosion 5 năm Unlimited,... (có thêm dòng dưới, không đọc hết) | warranty-oem-template-preview |
+| Xe km gặp OEM | TEST-SUA-01 | Không thấy nhóm OEM. Suy ra lọc theo đơn vị đồng hồ (xe mi thấy OEM mi, xe km thấy mẫu km); **suy luận từ 2 lần quan sát**, chưa thử mẫu Miles trên xe mi | |
+| Sửa mẫu đã dùng | Coverage 2 năm thành 3 năm | Hộp "Template Change": "Apply to assets this template is added to in the future" (mặc định) · "Apply to all historical and future assets with this template" | warranty-template-change |
+| Áp về quá khứ | Chọn lựa chọn 2 | Cảnh báo "1 asset with coverage "TEST-SUA BH mau co ban" applied will be updated. Please note that any coverage edits made to individual assets will be overwritten."; lưu mẫu: End Date đổi thành 11/03/2029. **Mẫu liên kết với bảo hành đã sinh** | |
+| Lỗi nhập Start Meter | Form New Warranties, gõ 2365 | Ô chỉ giữ "2": lúc gõ ký tự đầu, dòng hiện thêm nút sao chép, ô mất tiêu điểm. Lưu ra Start Meter 2 km, End Meter 100.002 km, Fleetio không cảnh báo lệch với đồng hồ xe 2.365. Có thể do gõ tự động nhanh; chưa thử tay. Lặp 2/2 lần | |
+
+Chưa làm: lựa chọn 1 "future" (không đổi mẫu thêm); ghi đè bảo hành đã sửa riêng ở lựa chọn 2 (chỉ có câu cảnh báo); xoá mẫu (cấm).
+
+Màn mới: warranty-template-list, warranty-template-preview, warranty-oem-template-preview, warranty-template-change — ảnh cùng tên trong images/.
+Trả lời câu hỏi mở nào: Coverage Template "No options" ở lượt 4: do chưa có mẫu đúng điều kiện, không phải do thiếu Make.
+Dữ liệu TEST đã tạo: mẫu "TEST-SUA Mau bao hanh" (id 10246, Kilometers, 2 coverage, Standard hiện 3 năm), bảo hành "TEST-SUA BH mau co ban", "TEST-SUA BH mau mo rong" trên TEST-SUA-01 (Start Meter sai 2 km, giữ nguyên làm bằng chứng). Không xoá được theo ràng buộc; mẫu còn trong Settings.
+Trả lại Cài đặt: không trả về rỗng được vì cấm xoá; đã báo.
+
+Giải pháp đáng học, điểm yếu:
+- Đáng học: mẫu bảo hành có lựa chọn tương lai hay cả quá khứ, kèm số xe bị ảnh hưởng trước khi áp. Áp được cho mẫu giá thuê, định mức, chính sách của Invlogis.
+- Đáng học: áp mẫu cho nhiều xe một lượt, mỗi xe một ngày và đồng hồ bắt đầu.
+- Điểm yếu: áp về quá khứ ghi đè cả phần sửa riêng từng xe; chỉ có cảnh báo, không so sánh trước sau.
+- Điểm yếu: thư viện OEM thuần xe con Mỹ, vô dụng với đầu kéo, mooc Việt Nam; mẫu riêng của khách mới có giá trị.
+- Điểm yếu: không chặn Start Meter lệch xa đồng hồ xe.
+
+## Shop Network: bật — Không chạy được (Access Denied ở bước thiết lập Fleetio Pay)
+Các bước đã làm: Sự cố #46, Resolve, Get Service at Shop, bấm "Enable Shop Network" 1 lần. Không thử URL khác, không thử lại.
+Kết quả thấy được:
+- Hộp giới thiệu: "Shop Network features a suite of automations designed to make outsourced maintenance easy. Choose a shop from the directory and leave approval, data entry, and invoicing to us."; 3 bước "Choose an in-network shop", "Service automatically logged", "Review, approve, and resolve"; "Already included in your plan, there's no additional charge to use it."; "Nearly 100,000 vetted and trusted national and independent shops are in our network."; nút "Learn more", "Enable Shop Network".
+- Bấm Enable: **chuyển sang `fleetio_pay/account_setup/new`**, trang "Access Denied" · "You do not have access to the requested URL.". Không có hộp điều khoản, hợp đồng, phí nào hiện ra.
+- Trạng thái sau: mở lại Get Service at Shop vẫn hộp giới thiệu, nghĩa là **chưa bật**. Không có gì phải trả về.
+- Phát hiện: bật Shop Network đi qua thiết lập tài khoản thanh toán Fleetio Pay. Đây là thanh toán, thuộc phần cấm, nên dừng. Vì sao bị từ chối (gói dùng thử, vị trí, quyền) chưa biết.
+- Khác lượt trước: trên #46 đang gắn lệnh, menu Resolve nay khoá cả "Draft Work Order"; chỉ "Get Service at Shop" sáng.
+Không chạy được: chọn cửa hàng, gửi yêu cầu, ghi service tự động, duyệt báo giá, hoá đơn (FR-003 dòng Get Service, FR-039). Find a shop trên nhắc (reminders-inspection-007): Shop Network chưa bật nên không có gì mới so với lượt 4, không mở lại; bước cuối Assign gửi email, SMS thật.
+Màn mới: shop-network-enable-denied — ảnh images/shop-network-enable-denied.jpg.
+Dữ liệu TEST đã tạo: không.
