@@ -27,7 +27,7 @@ links:
 
 Menu trái của màn web (CMP-11) và cách chọn **phạm vi làm việc**: chi nhánh → module → cơ sở. Nhóm C (DEC-279): web là
 menu trái + hộp thoại; app khác cách thao tác (tab dưới), **chưa dựng** — xem mục Mobile. Bản này bổ sung phần phạm vi
-vào bộ `Sidebar navigation` dựng theo Untitled; các Type khác của bộ (Dual Tier, Slim…) giữ nguyên.
+vào bộ `Sidebar navigation` dựng theo Untitled; các Type khác của bộ (Sections Dividers, Slim) giữ nguyên; Dual Tier và Sections Dividers · 240 đã xoá (DEC-296).
 
 Mô hình tổ chức: Công ty → Chi nhánh → Cơ sở. Cơ sở chỉ có ở module chia theo cơ sở (Bảo dưỡng sửa chữa: Xưởng;
 Quản lý dầu: Cây dầu, thêm "Ngoài cơ sở"). Danh mục, Quản trị hệ thống là cấp công ty. Công ty mẹ chỉ hiện với người
@@ -372,7 +372,7 @@ chỉ có một dòng phạm vi để đọc. Bản nháp: tab 2 của trang duy
 ### `Sidebar navigation`
 
 <!-- auto:begin sidebar -->
-<!-- Máy sinh từ Figma `Sidebar navigation` (6768:194161) · khối `sidebar` ngày 2026-10-28 bằng _scripts/ds-v2-component-doc.py. Không sửa tay: sửa trên Figma rồi xuất lại. -->
+<!-- Máy sinh từ Figma `Sidebar navigation` (6768:194161) · khối `sidebar` ngày 2026-11-03 bằng _scripts/ds-v2-component-doc.py. Không sửa tay: sửa trên Figma rồi xuất lại. -->
 
 ### Thuộc tính
 
@@ -388,32 +388,25 @@ chỉ có một dòng phạm vi để đọc. Bản nháp: tab 2 của trang duy
 | Branch | Chữ | CN Hồ Chí Minh | — |
 | Tenant Name | Chữ | Delta Logistics | — |
 | Has Tenant Name | Bật tắt | bật | — |
-| Type | Biến thể | Sections Subheadings | Sections Subheadings · Sections Dividers · Dual Tier · Slim |
+| Type | Biến thể | Sections Subheadings | Sections Subheadings · Sections Dividers · Slim |
 | Width | Biến thể | 280 | 280 · 240 · 68 · 64 |
 
-8 biến thể · trục Type × Width.
+5 biến thể · trục Type × Width.
 
 ### Màu theo phần (token)
 
-| Width | Nền | Chữ | Icon |
-|---|---|---|---|
-| 280 | `color/bg/primary` | `color/text/primary` | `color/utility/blue/700` |
-| 240 | `color/bg/primary` | `color/text/primary` | `color/utility/blue/700` |
-| 68 | `color/bg/primary` | — | `color/accent/fg` |
-| 64 | `color/bg/primary` | — | `color/accent/fg` |
+| Nền | Chữ | Icon |
+|---|---|---|
+| `color/bg/primary` | `color/text/primary` | raw |
 
 ### Số đo theo phần (token)
 
-| Type | Width | Cao | Rộng | Viền | Cỡ icon |
-|---|---|---|---|---|---|
-| Sections Subheadings | 280 | 900 | 280 | 1 | 32 |
-| Sections Subheadings | 240 | 900 | 240 | 1 | 32 |
-| Sections Subheadings | 64 | 900 | 64 | 1 | 32 |
-| Sections Dividers | 280 | 900 | 280 | 1 | 169 |
-| Sections Dividers | 240 | 900 | 240 | 1 | 169 |
-| Dual Tier | 280 | 900 | 536 | 1 | 169 |
-| Dual Tier | 240 | 900 | 496 | 1 | 169 |
-| Slim | 68 | 900 | ôm nội dung | 1 | 32 |
+| Width | Cao | Rộng | Viền | Cỡ icon |
+|---|---|---|---|---|
+| 280 | 900 | 280 | 1 | 141.5 |
+| 240 | 900 | 240 | 1 | 141.5 |
+| 68 | 900 | ôm nội dung | 1 | 30.8 |
+| 64 | 900 | 64 | 1 | 30.8 |
 
 ### Kiểu chữ
 
@@ -423,29 +416,13 @@ chỉ có một dòng phạm vi để đọc. Bản nháp: tab 2 của trang duy
 | Branch | `type/caption` |
 | Placeholder | `type/body` |
 | Label (Sections Subheadings · 280) | `type/label` |
-| Label (Dual Tier · 280) | `type/label` |
-| Label (Dual Tier · 240) | `type/label` |
 | Label (Sections Dividers · 280) | `type/label` |
-| Label (Sections Dividers · 240) | `type/label` |
 | Label (Sections Subheadings · 240) | `type/label` |
-| Count only | `type/chip-sm-strong` |
-| Initials (Sections Subheadings · 280) | `type/label` |
-| Initials (Dual Tier · 280) | `type/label` |
-| Initials (Slim · 68) | `type/label` |
-| Initials (Sections Subheadings · 64) | `type/label` |
-| Initials (Dual Tier · 240) | `type/label` |
-| Initials (Sections Dividers · 280) | `type/label` |
-| Initials (Sections Dividers · 240) | `type/label` |
-| Initials (Sections Subheadings · 240) | `type/label` |
-| Title (Sections Subheadings · 280) | `type/label` |
-| Title (Dual Tier · 280) | `type/heading` |
-| Title (Dual Tier · 240) | `type/heading` |
-| Title (Sections Dividers · 280) | `type/label` |
-| Title (Sections Dividers · 240) | `type/label` |
-| Title (Sections Subheadings · 240) | `type/label` |
-| Subtitle | `type/body` |
+| Count only | `type/caption` |
+| Initials | `type/label` |
+| Title | `type/label` |
+| Subtitle | `type/caption` |
 | Module | `type/heading` |
 | Scope | `type/caption` |
-| Tên công ty | `type/title-3` |
 
 <!-- auto:end sidebar -->
