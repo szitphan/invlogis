@@ -1,0 +1,140 @@
+[
+{
+"from": "1.1 · web · dashboard",
+"to": "2.1 · web · reports",
+"label": "Báo cáo",
+"return": false
+},
+{
+"from": "2.1 · web · reports",
+"to": "2.2 · web · report-issues",
+"label": "Mở báo cáo",
+"return": false
+},
+{
+"from": "1.1 · web · dashboard",
+"to": "2.3 · web · ai-analyst-issues",
+"label": "Hỏi dữ liệu",
+"return": false
+},
+{
+"from": "4.2 · web · record-sets",
+"to": "4.3 · web · record-set-conditions",
+"label": "Thêm tập bản ghi",
+"return": false
+},
+{
+"from": "4.3 · web · record-set-conditions",
+"to": "4.2 · web · record-sets",
+"label": "Huỷ",
+"return": true
+},
+{
+"from": "3.3 · web · automation-list-data",
+"to": "3.1 · web · automation-builder",
+"label": "Thêm tự động hoá",
+"return": false
+},
+{
+"from": "3.3 · web · automation-list-data",
+"to": "3.2 · web · automation-templates",
+"label": "Duyệt mẫu",
+"return": false
+},
+{
+"from": "3.2 · web · automation-templates",
+"to": "3.1 · web · automation-builder",
+"label": "Áp dụng",
+"return": false
+},
+{
+"from": "3.1 · web · automation-builder",
+"to": "3.4 · web · automation-detail",
+"label": "Lưu",
+"return": true
+},
+{
+"from": "3.3 · web · automation-list-data",
+"to": "3.4 · web · automation-detail",
+"label": "Mở dòng",
+"return": false
+},
+{
+"from": "3.4 · web · automation-detail",
+"to": "3.5 · web · automation-run-history",
+"label": "Lịch sử lượt chạy",
+"return": false
+},
+{
+"from": "3.5 · web · automation-run-history",
+"to": "3.6 · web · automation-run-result",
+"label": "Mở lượt",
+"return": false
+},
+{
+"from": "3.5 · web · automation-run-history",
+"to": "3.7 · web · automation-self-trigger-runs",
+"label": "Lượt do tự động hoá gây ra",
+"return": false
+},
+{
+"from": "3.6 · web · automation-run-result",
+"to": "3.5 · web · automation-run-history",
+"label": "Quay lại",
+"return": true
+},
+{
+"from": "3.7 · web · automation-self-trigger-runs",
+"to": "3.5 · web · automation-run-history",
+"label": "Quay lại",
+"return": true
+},
+{
+"from": "3.6 · web · automation-run-result",
+"to": "3.9 · web · automation-comment-result",
+"label": "Mở bản ghi",
+"return": false
+},
+{
+"from": "3.4 · web · automation-detail",
+"to": "3.8 · web · automation-archived",
+"label": "Lưu trữ",
+"return": false
+},
+{
+"from": "3.8 · web · automation-archived",
+"to": "3.4 · web · automation-detail",
+"label": "Khôi phục",
+"return": true
+},
+{
+"from": "1.1 · web · dashboard",
+"to": "5.1 · web · contact-no-access",
+"label": "Liên hệ",
+"return": false
+},
+{
+"from": "1.1 · web · dashboard",
+"to": "1.2 · web · vehicle-more-actions",
+"label": "Xe",
+"return": false
+},
+{
+"from": "1.1 · web · dashboard",
+"to": "5.3 · web · recalls-list",
+"label": "Thu hồi hãng",
+"return": false
+},
+{
+"from": "1.1 · web · dashboard",
+"to": "5.4 · web · motor-pool-reservations",
+"label": "Đặt xe",
+"return": false
+},
+{
+"from": "1.1 · web · dashboard",
+"to": "5.5 · web · documents-empty",
+"label": "Tài liệu",
+"return": false
+}
+]

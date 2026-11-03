@@ -1,0 +1,380 @@
+[
+{
+"from": "1.1 · web · issues-list",
+"to": "1.2 · web · issue-open",
+"label": "Mở dòng",
+"return": false
+},
+{
+"from": "1.2 · web · issue-open",
+"to": "1.13 · web · issue-resolve-menu",
+"label": "Xử lý",
+"return": false
+},
+{
+"from": "1.2 · web · issue-open",
+"to": "1.12 · web · issue-menu-locked-tooltip",
+"label": "Sự cố đã gắn lệnh",
+"return": false
+},
+{
+"from": "1.12 · web · issue-menu-locked-tooltip",
+"to": "1.9 · web · issue-draft-running",
+"label": "Nháp lệnh sửa chữa",
+"return": false
+},
+{
+"from": "1.12 · web · issue-menu-locked-tooltip",
+"to": "1.2 · web · issue-open",
+"label": "Đóng menu",
+"return": true
+},
+{
+"from": "1.13 · web · issue-resolve-menu",
+"to": "1.9 · web · issue-draft-running",
+"label": "Nháp lệnh sửa chữa",
+"return": false
+},
+{
+"from": "1.9 · web · issue-draft-running",
+"to": "1.10 · web · issue-draft-ready",
+"label": "AI xong",
+"return": false
+},
+{
+"from": "1.10 · web · issue-draft-ready",
+"to": "2.8 · web · wo-draft-review",
+"label": "Xem nháp",
+"return": false
+},
+{
+"from": "1.10 · web · issue-draft-ready",
+"to": "1.2 · web · issue-open",
+"label": "Bỏ nháp, không hỏi",
+"return": true
+},
+{
+"from": "2.8 · web · wo-draft-review",
+"to": "2.9 · web · wo-draft-add-menu",
+"label": "Thêm vào",
+"return": false
+},
+{
+"from": "2.9 · web · wo-draft-add-menu",
+"to": "2.10 · web · wo-from-draft",
+"label": "Tạo lệnh mới",
+"return": false
+},
+{
+"from": "2.9 · web · wo-draft-add-menu",
+"to": "2.3 · web · wo-detail",
+"label": "Thêm vào lệnh đang mở, chưa chạy",
+"return": false
+},
+{
+"from": "2.8 · web · wo-draft-review",
+"to": "1.2 · web · issue-open",
+"label": "Bỏ nháp",
+"return": true
+},
+{
+"from": "2.10 · web · wo-from-draft",
+"to": "2.3 · web · wo-detail",
+"label": "Xem lệnh",
+"return": false
+},
+{
+"from": "1.13 · web · issue-resolve-menu",
+"to": "2.2 · web · wo-edit",
+"label": "Thêm vào lệnh sửa chữa, tab mới",
+"return": false
+},
+{
+"from": "1.13 · web · issue-resolve-menu",
+"to": "1.6 · web · issue-resolve-note-dialog",
+"label": "Xử lý kèm ghi chú",
+"return": false
+},
+{
+"from": "1.6 · web · issue-resolve-note-dialog",
+"to": "1.7 · web · issue-resolved-note",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "1.6 · web · issue-resolve-note-dialog",
+"to": "1.2 · web · issue-open",
+"label": "Huỷ",
+"return": true
+},
+{
+"from": "1.7 · web · issue-resolved-note",
+"to": "1.2 · web · issue-open",
+"label": "Mở lại",
+"return": true
+},
+{
+"from": "1.13 · web · issue-resolve-menu",
+"to": "1.8 · web · issue-shop-network",
+"label": "Xưởng ngoài",
+"return": false
+},
+{
+"from": "1.8 · web · issue-shop-network",
+"to": "1.2 · web · issue-open",
+"label": "Đóng",
+"return": true
+},
+{
+"from": "3.1 · web · service-entry",
+"to": "1.3 · web · issue-resolved",
+"label": "Sự cố tự chuyển Đã xử lý",
+"return": false
+},
+{
+"from": "1.3 · web · issue-resolved",
+"to": "1.2 · web · issue-open",
+"label": "Mở lại, xử lý không bằng lệnh",
+"return": true
+},
+{
+"from": "1.2 · web · issue-open",
+"to": "1.4 · web · issue-close-dialog",
+"label": "Đóng",
+"return": false
+},
+{
+"from": "1.4 · web · issue-close-dialog",
+"to": "1.5 · web · issue-closed",
+"label": "Đóng sự cố",
+"return": false
+},
+{
+"from": "1.4 · web · issue-close-dialog",
+"to": "1.2 · web · issue-open",
+"label": "Huỷ",
+"return": true
+},
+{
+"from": "1.5 · web · issue-closed",
+"to": "1.2 · web · issue-open",
+"label": "Mở lại",
+"return": true
+},
+{
+"from": "1.3 · web · issue-resolved",
+"to": "1.11 · web · issue-reopen-locked",
+"label": "Xử lý bằng lệnh",
+"return": false
+},
+{
+"from": "1.11 · web · issue-reopen-locked",
+"to": "1.3 · web · issue-resolved",
+"label": "Quay lại",
+"return": true
+},
+{
+"from": "2.1 · web · wo-list",
+"to": "2.3 · web · wo-detail",
+"label": "Mở dòng",
+"return": false
+},
+{
+"from": "2.1 · web · wo-list",
+"to": "2.2 · web · wo-edit",
+"label": "Thêm lệnh sửa chữa",
+"return": false
+},
+{
+"from": "2.3 · web · wo-detail",
+"to": "2.2 · web · wo-edit",
+"label": "Sửa",
+"return": false
+},
+{
+"from": "2.2 · web · wo-edit",
+"to": "2.4 · web · wo-form-issues-lines",
+"label": "Mục sự cố và dòng việc",
+"return": false
+},
+{
+"from": "2.4 · web · wo-form-issues-lines",
+"to": "2.5 · web · wo-add-part",
+"label": "Thêm phụ tùng",
+"return": false
+},
+{
+"from": "2.4 · web · wo-form-issues-lines",
+"to": "2.6 · web · wo-add-labor",
+"label": "Thêm công",
+"return": false
+},
+{
+"from": "2.4 · web · wo-form-issues-lines",
+"to": "2.7 · web · wo-link-issues",
+"label": "Liên kết sự cố",
+"return": false
+},
+{
+"from": "2.5 · web · wo-add-part",
+"to": "2.4 · web · wo-form-issues-lines",
+"label": "Lưu dòng",
+"return": true
+},
+{
+"from": "2.6 · web · wo-add-labor",
+"to": "2.4 · web · wo-form-issues-lines",
+"label": "Lưu dòng",
+"return": true
+},
+{
+"from": "2.7 · web · wo-link-issues",
+"to": "2.4 · web · wo-form-issues-lines",
+"label": "Lưu",
+"return": true
+},
+{
+"from": "2.3 · web · wo-detail",
+"to": "2.13 · web · wo-make-copy",
+"label": "Sao chép",
+"return": false
+},
+{
+"from": "2.13 · web · wo-make-copy",
+"to": "2.3 · web · wo-detail",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "2.2 · web · wo-edit",
+"to": "2.3 · web · wo-detail",
+"label": "Lưu lệnh sửa chữa",
+"return": false
+},
+{
+"from": "2.3 · web · wo-detail",
+"to": "2.15 · web · wo-100x-after-save",
+"label": "Xem tiền sau lưu",
+"return": false
+},
+{
+"from": "2.15 · web · wo-100x-after-save",
+"to": "2.3 · web · wo-detail",
+"label": "Không sửa tay được",
+"return": true
+},
+{
+"from": "2.3 · web · wo-detail",
+"to": "2.16 · web · wo-warranty-before",
+"label": "Khối bảo hành",
+"return": false
+},
+{
+"from": "2.16 · web · wo-warranty-before",
+"to": "2.17 · web · wo-warranty-opportunity",
+"label": "Thêm đầu việc cùng mã",
+"return": false
+},
+{
+"from": "2.17 · web · wo-warranty-opportunity",
+"to": "2.3 · web · wo-detail",
+"label": "Quay lại",
+"return": true
+},
+{
+"from": "2.14 · web · wo-complete-errors",
+"to": "2.3 · web · wo-detail",
+"label": "Sửa lại",
+"return": true
+},
+{
+"from": "2.11 · web · wo-completed",
+"to": "3.2 · web · se-from-wo",
+"label": "Phiếu sinh ra",
+"return": false
+},
+{
+"from": "3.2 · web · se-from-wo",
+"to": "1.3 · web · issue-resolved",
+"label": "Sự cố tự chuyển Đã xử lý",
+"return": false
+},
+{
+"from": "2.11 · web · wo-completed",
+"to": "2.12 · web · wo-reopen-confirm",
+"label": "Trạng thái về Đang mở hoặc Đang chờ",
+"return": false
+},
+{
+"from": "2.12 · web · wo-reopen-confirm",
+"to": "2.11 · web · wo-completed",
+"label": "Huỷ",
+"return": true
+},
+{
+"from": "2.12 · web · wo-reopen-confirm",
+"to": "2.3 · web · wo-detail",
+"label": "Xác nhận",
+"return": false
+},
+{
+"from": "2.12 · web · wo-reopen-confirm",
+"to": "3.3 · web · se-deleted-not-found",
+"label": "Mở lại địa chỉ phiếu cũ",
+"return": false
+},
+{
+"from": "4.1 · web · faults",
+"to": "1.2 · web · issue-open",
+"label": "Liên kết sự cố",
+"return": false
+},
+{
+"from": "6.7 · web · warranty-list",
+"to": "6.3 · web · warranty-new-vehicles",
+"label": "Thêm bảo hành",
+"return": false
+},
+{
+"from": "6.3 · web · warranty-new-vehicles",
+"to": "6.1 · web · warranty-new",
+"label": "Chọn xe",
+"return": false
+},
+{
+"from": "6.1 · web · warranty-new",
+"to": "6.4 · web · warranty-new-template",
+"label": "Mẫu bảo hành",
+"return": false
+},
+{
+"from": "6.1 · web · warranty-new",
+"to": "6.5 · web · warranty-new-standard",
+"label": "Bảo hành chuẩn",
+"return": false
+},
+{
+"from": "6.1 · web · warranty-new",
+"to": "6.2 · web · warranty-form",
+"label": "Form đầy đủ",
+"return": false
+},
+{
+"from": "6.4 · web · warranty-new-template",
+"to": "6.7 · web · warranty-list",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "6.5 · web · warranty-new-standard",
+"to": "6.7 · web · warranty-list",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "6.2 · web · warranty-form",
+"to": "6.7 · web · warranty-list",
+"label": "Lưu",
+"return": false
+}
+]

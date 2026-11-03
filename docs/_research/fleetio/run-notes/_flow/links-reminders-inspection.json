@@ -1,0 +1,74 @@
+[
+{
+"from": "1.1 · web · reminders-list",
+"to": "1.4 · web · reminder-new",
+"label": "Thêm nhắc bảo dưỡng",
+"return": false
+},
+{
+"from": "1.4 · web · reminder-new",
+"to": "1.1 · web · reminders-list",
+"label": "Lưu",
+"return": true
+},
+{
+"from": "1.1 · web · reminders-list",
+"to": "1.7 · web · reminder-list-compliance",
+"label": "Lọc theo xe",
+"return": false
+},
+{
+"from": "1.7 · web · reminder-list-compliance",
+"to": "1.1 · web · reminders-list",
+"label": "Bỏ lọc",
+"return": true
+},
+{
+"from": "1.6 · web · reminder-after-work-order",
+"to": "1.1 · web · reminders-list",
+"label": "Kỳ mới",
+"return": true
+},
+{
+"from": "2.1 · web · inspection-form",
+"to": "2.2 · web · inspection-items-edit",
+"label": "Sửa mục",
+"return": false
+},
+{
+"from": "2.2 · web · inspection-items-edit",
+"to": "2.1 · web · inspection-form",
+"label": "Lưu",
+"return": true
+},
+{
+"from": "2.9 · web · inspection-tire-fail-summary",
+"to": "2.10 · web · inspection-tire-fail-detail",
+"label": "Mở rộng",
+"return": false
+},
+{
+"from": "2.10 · web · inspection-tire-fail-detail",
+"to": "2.4 · web · item-failures",
+"label": "Sự cố tự sinh",
+"return": false
+},
+{
+"from": "2.3 · web · inspection-submission",
+"to": "2.4 · web · item-failures",
+"label": "Mục không đạt, workflow bật",
+"return": false
+},
+{
+"from": "2.3 · web · inspection-submission",
+"to": "2.13 · web · item-failure-needs-action",
+"label": "Mục không đạt, workflow tắt",
+"return": false
+},
+{
+"from": "2.13 · web · item-failure-needs-action",
+"to": "2.4 · web · item-failures",
+"label": "Create Issue",
+"return": false
+}
+]

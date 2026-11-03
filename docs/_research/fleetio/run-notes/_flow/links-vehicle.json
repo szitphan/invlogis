@@ -1,0 +1,194 @@
+[
+{
+"from": "1.1 · web · vehicle-detail",
+"to": "1.2 · web · vehicle-more-actions",
+"label": "More Actions",
+"return": false
+},
+{
+"from": "1.2 · web · vehicle-more-actions",
+"to": "1.1 · web · vehicle-detail",
+"label": "Đóng",
+"return": true
+},
+{
+"from": "1.1 · web · vehicle-detail",
+"to": "1.3 · web · vehicle-cost-of-ownership",
+"label": "Overview",
+"return": false
+},
+{
+"from": "1.3 · web · vehicle-cost-of-ownership",
+"to": "1.1 · web · vehicle-detail",
+"label": "Quay lại",
+"return": true
+},
+{
+"from": "1.1 · web · vehicle-detail",
+"to": "3.1 · web · meter-history",
+"label": "Thêm, Lịch sử số đồng hồ",
+"return": false
+},
+{
+"from": "3.1 · web · meter-history",
+"to": "3.2 · web · meter-reject-backdate",
+"label": "Nhập số lùi ngày",
+"return": false
+},
+{
+"from": "3.2 · web · meter-reject-backdate",
+"to": "3.1 · web · meter-history",
+"label": "Sửa hoặc tick Void",
+"return": true
+},
+{
+"from": "3.1 · web · meter-history",
+"to": "3.3 · web · meter-reject-forward",
+"label": "Nhập số thấp hơn ngày trước",
+"return": false
+},
+{
+"from": "3.3 · web · meter-reject-forward",
+"to": "3.1 · web · meter-history",
+"label": "Sửa hoặc tick Void",
+"return": true
+},
+{
+"from": "3.1 · web · meter-history",
+"to": "3.4 · web · meter-history-conflict",
+"label": "Nhập số vượt mức",
+"return": false
+},
+{
+"from": "3.4 · web · meter-history-conflict",
+"to": "3.1 · web · meter-history",
+"label": "Unvoid",
+"return": true
+},
+{
+"from": "2.1 · web · assignments",
+"to": "2.2 · web · assignment-add",
+"label": "Thêm gán xe",
+"return": false
+},
+{
+"from": "2.1 · web · assignments",
+"to": "2.3 · web · assignment-week",
+"label": "Xem tuần",
+"return": false
+},
+{
+"from": "2.3 · web · assignment-week",
+"to": "2.2 · web · assignment-add",
+"label": "Bấm ô trống",
+"return": false
+},
+{
+"from": "2.3 · web · assignment-week",
+"to": "2.5 · web · assignment-edit",
+"label": "Sửa thanh",
+"return": false
+},
+{
+"from": "2.3 · web · assignment-week",
+"to": "2.6 · web · assignment-detail",
+"label": "Xem thanh",
+"return": false
+},
+{
+"from": "2.5 · web · assignment-edit",
+"to": "2.6 · web · assignment-detail",
+"label": "Lưu",
+"return": true
+},
+{
+"from": "2.2 · web · assignment-add",
+"to": "2.1 · web · assignments",
+"label": "Lưu",
+"return": true
+},
+{
+"from": "2.2 · web · assignment-add",
+"to": "2.4 · web · assignment-overlap",
+"label": "Trùng thời gian",
+"return": false
+},
+{
+"from": "2.4 · web · assignment-overlap",
+"to": "2.2 · web · assignment-add",
+"label": "Đổi thời gian",
+"return": true
+},
+{
+"from": "5.1 · web · expense-new",
+"to": "5.2 · web · expense-recurring",
+"label": "Chọn định kỳ",
+"return": false
+},
+{
+"from": "5.2 · web · expense-recurring",
+"to": "5.3 · web · expense-future",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "5.3 · web · expense-future",
+"to": "1.3 · web · vehicle-cost-of-ownership",
+"label": "Xem chi phí trên km",
+"return": false
+},
+{
+"from": "6.1 · web · replacement",
+"to": "6.2 · web · replacement-params",
+"label": "Xem tham số",
+"return": false
+},
+{
+"from": "6.7 · web · warranty-list",
+"to": "6.3 · web · warranty-new-vehicles",
+"label": "Thêm bảo hành",
+"return": false
+},
+{
+"from": "6.3 · web · warranty-new-vehicles",
+"to": "6.4 · web · warranty-new-template",
+"label": "Chọn mẫu",
+"return": false
+},
+{
+"from": "6.3 · web · warranty-new-vehicles",
+"to": "6.5 · web · warranty-new-standard",
+"label": "Nhập tay",
+"return": false
+},
+{
+"from": "6.4 · web · warranty-new-template",
+"to": "6.3 · web · warranty-new-vehicles",
+"label": "Không có mẫu, quay lại",
+"return": true
+},
+{
+"from": "6.5 · web · warranty-new-standard",
+"to": "6.6 · web · warranty-maintenance-codes",
+"label": "Gắn mã",
+"return": false
+},
+{
+"from": "6.6 · web · warranty-maintenance-codes",
+"to": "6.7 · web · warranty-list",
+"label": "Lưu",
+"return": true
+},
+{
+"from": "6.7 · web · warranty-list",
+"to": "2.16 · web · wo-warranty-before",
+"label": "Mở lệnh của xe",
+"return": false
+},
+{
+"from": "2.16 · web · wo-warranty-before",
+"to": "2.17 · web · wo-warranty-opportunity",
+"label": "Thêm Service Task cùng mã",
+"return": false
+}
+]

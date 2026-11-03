@@ -1,0 +1,266 @@
+[
+{
+"from": "1.1 · web · map",
+"to": "1.2 · web · fleet-map-nearby-list-2-vehicles",
+"label": "Khung có xe",
+"return": false
+},
+{
+"from": "1.1 · web · map",
+"to": "1.6 · web · fleet-map-legend",
+"label": "Chú giải",
+"return": false
+},
+{
+"from": "1.6 · web · fleet-map-legend",
+"to": "1.1 · web · map",
+"label": "Đóng",
+"return": true
+},
+{
+"from": "1.1 · web · map",
+"to": "1.7 · web · fleet-map-options",
+"label": "Tuỳ chọn bản đồ",
+"return": false
+},
+{
+"from": "1.7 · web · fleet-map-options",
+"to": "1.8 · web · fleet-map-satellite",
+"label": "Vệ tinh",
+"return": false
+},
+{
+"from": "1.7 · web · fleet-map-options",
+"to": "1.9 · web · fleet-map-grayscale",
+"label": "Xám",
+"return": false
+},
+{
+"from": "1.7 · web · fleet-map-options",
+"to": "1.10 · web · fleet-map-labels-polygon",
+"label": "Nhãn",
+"return": false
+},
+{
+"from": "1.8 · web · fleet-map-satellite",
+"to": "1.1 · web · map",
+"label": "Đổi lại",
+"return": true
+},
+{
+"from": "1.9 · web · fleet-map-grayscale",
+"to": "1.1 · web · map",
+"label": "Đổi lại",
+"return": true
+},
+{
+"from": "1.10 · web · fleet-map-labels-polygon",
+"to": "1.1 · web · map",
+"label": "Tắt nhãn",
+"return": true
+},
+{
+"from": "1.1 · web · map",
+"to": "1.11 · web · fleet-map-zoomed-out-no-cluster",
+"label": "Zoom xa",
+"return": false
+},
+{
+"from": "1.11 · web · fleet-map-zoomed-out-no-cluster",
+"to": "1.1 · web · map",
+"label": "Zoom gần",
+"return": true
+},
+{
+"from": "1.2 · web · fleet-map-nearby-list-2-vehicles",
+"to": "1.3 · web · fleet-map-vehicle-panel",
+"label": "Chọn xe",
+"return": false
+},
+{
+"from": "1.3 · web · fleet-map-vehicle-panel",
+"to": "1.4 · web · fleet-map-vehicle-nearby-places",
+"label": "Tab Nearby",
+"return": false
+},
+{
+"from": "1.4 · web · fleet-map-vehicle-nearby-places",
+"to": "1.5 · web · fleet-map-nearby-hover-dashed",
+"label": "Rê chuột dòng",
+"return": false
+},
+{
+"from": "1.5 · web · fleet-map-nearby-hover-dashed",
+"to": "1.4 · web · fleet-map-vehicle-nearby-places",
+"label": "Rời chuột",
+"return": true
+},
+{
+"from": "1.4 · web · fleet-map-vehicle-nearby-places",
+"to": "1.3 · web · fleet-map-vehicle-panel",
+"label": "Tab Overview",
+"return": true
+},
+{
+"from": "2.4 · web · places-list-data",
+"to": "2.2 · web · place-new-form",
+"label": "Thêm địa điểm",
+"return": false
+},
+{
+"from": "2.2 · web · place-new-form",
+"to": "2.3 · web · place-new-polygon",
+"label": "Vẽ đa giác",
+"return": false
+},
+{
+"from": "2.2 · web · place-new-form",
+"to": "2.5 · web · place-detail-circle",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "2.3 · web · place-new-polygon",
+"to": "2.5 · web · place-detail-circle",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "2.4 · web · places-list-data",
+"to": "2.5 · web · place-detail-circle",
+"label": "Mở dòng",
+"return": false
+},
+{
+"from": "2.5 · web · place-detail-circle",
+"to": "2.6 · web · place-detail-with-entries",
+"label": "Có lần ghi",
+"return": false
+},
+{
+"from": "2.6 · web · place-detail-with-entries",
+"to": "2.7 · web · place-location-entries",
+"label": "Tab lần ghi",
+"return": false
+},
+{
+"from": "2.5 · web · place-detail-circle",
+"to": "2.8 · web · place-geofence-alert-policy",
+"label": "Thêm cảnh báo",
+"return": false
+},
+{
+"from": "2.8 · web · place-geofence-alert-policy",
+"to": "2.5 · web · place-detail-circle",
+"label": "Huỷ",
+"return": true
+},
+{
+"from": "3.1 · web · jobs",
+"to": "3.3 · web · job-add-modal",
+"label": "Thêm việc",
+"return": false
+},
+{
+"from": "3.2 · web · jobs-board",
+"to": "3.3 · web · job-add-modal",
+"label": "Thêm việc",
+"return": false
+},
+{
+"from": "3.3 · web · job-add-modal",
+"to": "3.2 · web · jobs-board",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "3.2 · web · jobs-board",
+"to": "3.4 · web · job-assign-modal",
+"label": "Gán xe",
+"return": false
+},
+{
+"from": "3.4 · web · job-assign-modal",
+"to": "3.5 · web · job-assign-overlap-error",
+"label": "Trùng khoảng",
+"return": false
+},
+{
+"from": "3.5 · web · job-assign-overlap-error",
+"to": "3.4 · web · job-assign-modal",
+"label": "Đổi giờ",
+"return": true
+},
+{
+"from": "3.4 · web · job-assign-modal",
+"to": "3.2 · web · jobs-board",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "3.2 · web · jobs-board",
+"to": "3.6 · web · job-unassign-modal",
+"label": "Kết thúc gán",
+"return": false
+},
+{
+"from": "3.6 · web · job-unassign-modal",
+"to": "3.2 · web · jobs-board",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "3.2 · web · jobs-board",
+"to": "3.7 · web · job-detail",
+"label": "Mở việc",
+"return": false
+},
+{
+"from": "3.2 · web · jobs-board",
+"to": "3.8 · web · job-assignment-history",
+"label": "Lịch sử gán",
+"return": false
+},
+{
+"from": "3.7 · web · job-detail",
+"to": "3.2 · web · jobs-board",
+"label": "Quay lại",
+"return": true
+},
+{
+"from": "3.2 · web · jobs-board",
+"to": "3.10 · web · jobs-board-geofence-chip",
+"label": "Xe vào vùng",
+"return": false
+},
+{
+"from": "3.10 · web · jobs-board-geofence-chip",
+"to": "3.11 · web · job-history-auto-geofence",
+"label": "Xe ra vùng",
+"return": false
+},
+{
+"from": "4.1 · web · automation-geofence-conditions",
+"to": "4.2 · web · automation-geofence-saved",
+"label": "Lưu và bật",
+"return": false
+},
+{
+"from": "4.2 · web · automation-geofence-saved",
+"to": "3.5 · web · automation-run-history",
+"label": "Sự kiện vùng xảy ra",
+"return": false
+},
+{
+"from": "3.5 · web · automation-run-history",
+"to": "4.4 · web · vehicle-automation-comments",
+"label": "Xem xe",
+"return": false
+},
+{
+"from": "5.1 · web · inspection-submission-location",
+"to": "1.1 · web · map",
+"label": "Xem trên bản đồ",
+"return": false
+}
+]

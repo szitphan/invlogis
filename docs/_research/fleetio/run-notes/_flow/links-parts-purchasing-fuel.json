@@ -1,0 +1,98 @@
+[
+{
+"from": "2.3 · web · po-new",
+"to": "2.1 · web · po-detail",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "2.1 · web · po-detail",
+"to": "2.4 · web · po-receive-dialog",
+"label": "Duyệt, đánh dấu đã mua, nhận hàng",
+"return": false
+},
+{
+"from": "2.4 · web · po-receive-dialog",
+"to": "2.5 · web · po-receive-existing-wo",
+"label": "Nhận vào lệnh đang có",
+"return": false
+},
+{
+"from": "2.1 · web · po-detail",
+"to": "2.6 · web · po-edit-received-partial",
+"label": "Sửa khi đã nhận một phần",
+"return": false
+},
+{
+"from": "2.6 · web · po-edit-received-partial",
+"to": "2.1 · web · po-detail",
+"label": "Lưu",
+"return": true
+},
+{
+"from": "2.7 · web · po-make-adjustment",
+"to": "2.1 · web · po-detail",
+"label": "Giảm, về một phần",
+"return": true
+},
+{
+"from": "2.1 · web · po-detail",
+"to": "2.8 · web · po-closed-partial",
+"label": "Đóng khi nhận thiếu",
+"return": false
+},
+{
+"from": "1.6 · web · parts-bulk-manage",
+"to": "1.5 · web · inventory-activity-adjust-transfer",
+"label": "Sửa số, tự lưu",
+"return": false
+},
+{
+"from": "1.1 · web · part-detail",
+"to": "1.2 · web · inventory-activity",
+"label": "Hoạt động",
+"return": false
+},
+{
+"from": "1.1 · web · part-detail",
+"to": "1.3 · web · part-adjust-dialog",
+"label": "Điều chỉnh",
+"return": false
+},
+{
+"from": "1.1 · web · part-detail",
+"to": "1.4 · web · part-transfer-dialog",
+"label": "Chuyển kho",
+"return": false
+},
+{
+"from": "1.3 · web · part-adjust-dialog",
+"to": "1.5 · web · inventory-activity-adjust-transfer",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "1.4 · web · part-transfer-dialog",
+"to": "1.5 · web · inventory-activity-adjust-transfer",
+"label": "Lưu",
+"return": false
+},
+{
+"from": "3.2 · web · fuel-list",
+"to": "3.1 · web · fuel-entry",
+"label": "Mở dòng",
+"return": false
+},
+{
+"from": "3.2 · web · fuel-list",
+"to": "3.3 · web · fuel-history-capacity-alert",
+"label": "Xem cảnh báo",
+"return": false
+},
+{
+"from": "3.3 · web · fuel-history-capacity-alert",
+"to": "3.1 · web · fuel-entry",
+"label": "Mở dòng",
+"return": false
+}
+]

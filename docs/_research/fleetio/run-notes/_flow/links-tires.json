@@ -1,0 +1,170 @@
+[
+{
+"from": "1.1 · web · tire-management-empty",
+"to": "1.2 · web · axle-setup-step1",
+"label": "Set up axle configuration",
+"return": false
+},
+{
+"from": "1.2 · web · axle-setup-step1",
+"to": "1.3 · web · axle-setup-axle-type",
+"label": "Vehicle, chọn số vị trí",
+"return": false
+},
+{
+"from": "1.2 · web · axle-setup-step1",
+"to": "1.4 · web · axle-setup-known",
+"label": "I know my axle configuration",
+"return": false
+},
+{
+"from": "1.4 · web · axle-setup-known",
+"to": "1.5 · web · axle-config-options",
+"label": "Mở ô chọn",
+"return": false
+},
+{
+"from": "1.3 · web · axle-setup-axle-type",
+"to": "1.6 · web · tire-management-6x4",
+"label": "Lưu đầu kéo",
+"return": false
+},
+{
+"from": "1.5 · web · axle-config-options",
+"to": "1.6 · web · tire-management-6x4",
+"label": "Lưu đầu kéo",
+"return": false
+},
+{
+"from": "1.2 · web · axle-setup-step1",
+"to": "1.7 · web · tire-management-trailer",
+"label": "Trailer, lưu",
+"return": false
+},
+{
+"from": "1.5 · web · axle-config-options",
+"to": "1.7 · web · tire-management-trailer",
+"label": "Lưu mooc",
+"return": false
+},
+{
+"from": "1.6 · web · tire-management-6x4",
+"to": "2.1 · web · tire-install",
+"label": "Bấm ô cộng, Add",
+"return": false
+},
+{
+"from": "1.7 · web · tire-management-trailer",
+"to": "2.1 · web · tire-install",
+"label": "Bấm ô cộng, Add",
+"return": false
+},
+{
+"from": "2.1 · web · tire-install",
+"to": "2.2 · web · tire-management-installed",
+"label": "Lưu đầu kéo",
+"return": false
+},
+{
+"from": "2.1 · web · tire-install",
+"to": "2.4 · web · tire-management-trailer-12-spare",
+"label": "Lưu mooc",
+"return": false
+},
+{
+"from": "2.2 · web · tire-management-installed",
+"to": "2.3 · web · tire-edit",
+"label": "Bấm lốp",
+"return": false
+},
+{
+"from": "2.4 · web · tire-management-trailer-12-spare",
+"to": "2.3 · web · tire-edit",
+"label": "Bấm lốp",
+"return": false
+},
+{
+"from": "2.3 · web · tire-edit",
+"to": "2.2 · web · tire-management-installed",
+"label": "Lưu",
+"return": true
+},
+{
+"from": "2.2 · web · tire-management-installed",
+"to": "3.1 · web · tire-rotate",
+"label": "Rotate Tires",
+"return": false
+},
+{
+"from": "2.4 · web · tire-management-trailer-12-spare",
+"to": "3.1 · web · tire-rotate",
+"label": "Rotate Tires",
+"return": false
+},
+{
+"from": "3.1 · web · tire-rotate",
+"to": "3.3 · web · tire-rotate-name-required",
+"label": "Tick lưu mẫu, trống tên",
+"return": false
+},
+{
+"from": "3.3 · web · tire-rotate-name-required",
+"to": "3.1 · web · tire-rotate",
+"label": "Nhập tên",
+"return": true
+},
+{
+"from": "3.1 · web · tire-rotate",
+"to": "3.2 · web · tire-rotate-result-undo",
+"label": "Đảo",
+"return": false
+},
+{
+"from": "3.2 · web · tire-rotate-result-undo",
+"to": "3.1 · web · tire-rotate",
+"label": "Undo Rotation",
+"return": true
+},
+{
+"from": "3.2 · web · tire-rotate-result-undo",
+"to": "2.2 · web · tire-management-installed",
+"label": "Close",
+"return": true
+},
+{
+"from": "2.2 · web · tire-management-installed",
+"to": "4.1 · web · tire-remove",
+"label": "Remove, Remove All",
+"return": false
+},
+{
+"from": "2.3 · web · tire-edit",
+"to": "4.1 · web · tire-remove",
+"label": "Remove",
+"return": false
+},
+{
+"from": "4.1 · web · tire-remove",
+"to": "2.2 · web · tire-management-installed",
+"label": "Xác nhận",
+"return": true
+},
+{
+"from": "2.2 · web · tire-management-installed",
+"to": "5.5 · web · tire-activity",
+"label": "Tab Tire Activity",
+"return": false
+},
+{
+"from": "5.2 · web · tire-readings-data",
+"to": "5.3 · web · tire-readings-filter-warning",
+"label": "Lọc Tread Depth Health",
+"return": false
+},
+{
+"from": "5.2 · web · tire-readings-data",
+"to": "5.4 · web · tire-readings-boundary",
+"label": "Xem theo mức",
+"return": false
+}
+]
