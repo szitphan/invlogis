@@ -12,7 +12,14 @@ Suy ra từ form, màn hình, dữ liệu phiếu quan sát được và tài li
 erDiagram
     VEHICLE ||--o{ LOCATION_ENTRY : "có vị trí"
     INSPECTION_SUBMISSION ||--o| LOCATION_ENTRY : "sinh ra"
+    FUEL_ENTRY ||--o| LOCATION_ENTRY : "sinh ra khi có nhà cung cấp"
+    VENDOR ||--o{ FUEL_ENTRY : "bán dầu"
+    VEHICLE ||--o{ FUEL_ENTRY : "đổ dầu"
+    SERVICE_ENTRY ||--o| LOCATION_ENTRY : "sinh ra khi có nhà cung cấp"
+    VENDOR ||--o{ SERVICE_ENTRY : "làm dịch vụ"
+    VEHICLE ||--o{ SERVICE_ENTRY : "được làm dịch vụ"
     VEHICLE ||--o{ INSPECTION_SUBMISSION : "được kiểm"
+    INSPECTION_SUBMISSION ||--o{ INSPECTION_ITEM : "gồm mục"
     JOB_ASSIGNMENT ||--o{ INSPECTION_SUBMISSION : "gắn lúc nộp"
     PLACE ||--o{ LOCATION_ENTRY : "chứa lần ghi"
     PLACE ||--o{ GEOFENCE_EVENT : "vào ra"
@@ -34,13 +41,40 @@ erDiagram
         string id PK
         string vehicle_id FK
         string submission_id FK
+        string fuel_entry_id FK
+        string service_entry_id FK
         string initial_place FK
         datetime thoi_diem
         number vi_do
         number kinh_do
-        string dia_chi "rỗng khoảng 1 phút đầu"
-        string entry_type
+        string dia_chi "rỗng khoảng 1 phút đầu với phiếu kiểm"
+        string entry_type "Fuel Entry, Service Entry hoặc Inspection"
         string contact
+    }
+    FUEL_ENTRY {
+        string id PK
+        string vehicle_id FK
+        string vendor_id FK "để trống thì không sinh vị trí"
+        datetime ngay
+        number dong_ho
+    }
+    SERVICE_ENTRY {
+        string id PK
+        string vehicle_id FK
+        string vendor_id FK "chỉ nhà cung cấp phân loại Service"
+        datetime ngay_hoan_thanh
+    }
+    VENDOR {
+        string id PK
+        string ten
+        string dia_chi "giữ chuỗi đã nhập, quy ra điểm cho lần ghi, không có độ tin cậy"
+        string phan_loai "Service mới chọn được ở phiếu dịch vụ"
+    }
+    INSPECTION_ITEM {
+        string id PK
+        string submission_id FK
+        number latitude "chỉ có từ Fleetio Go"
+        number longitude "chỉ có từ Fleetio Go"
     }
     INSPECTION_SUBMISSION {
         string id PK
@@ -48,9 +82,12 @@ erDiagram
         string job_assignment FK "việc đang gán lúc nộp"
         number submitted_latitude
         number submitted_longitude
-        number starting_latitude "rỗng trên web"
+        number starting_latitude "rỗng cả trên web và Fleetio Go"
         boolean location_exception "luôn false trên web"
+        boolean are_items_too_close "thấy trên phiếu Fleetio Go"
+        number items_completed_too_far_away_count "thấy trên phiếu Fleetio Go"
         string submission_source
+        string submitted_from
     }
     PLACE {
         string id PK
@@ -116,6 +153,10 @@ erDiagram
 | JOB, JOB_ASSIGNMENT, các cột hiện trên màn | `Chạy` |
 | JOB_ASSIGNMENT.added = Geofence, INSPECTION_SUBMISSION.job_assignment | `Chạy (vị trí giả lập)` |
 | LOCATION_ENTRY, `initial_place`, `location_exception`, `submitted_latitude`, `submitted_longitude` | `Chạy (vị trí giả lập)` |
+| FUEL_ENTRY, VENDOR, LOCATION_ENTRY.entry_type, liên kết phiếu dầu với lần ghi | `Chạy`; quan hệ qua khoá ngoại là `Suy` từ Source trên panel |
+| VENDOR.phan_loai | `Chạy`, chỉ thấy tác dụng ở form Service Entry |
+| SERVICE_ENTRY, Location Entry loại Service Entry | `Chạy`; quan hệ qua khoá ngoại là `Suy` từ dòng cùng giờ phiếu |
+| INSPECTION_ITEM.latitude, longitude, `submitted_from`, `are_items_too_close`, `items_completed_too_far_away_count` | `Chạy (Fleetio Go)` |
 | PLACE, loại vùng | `Chạy` |
 | GEOFENCE_EVENT.loai, trigger Created | `Chạy (vị trí giả lập)` |
 | GEOFENCE_EVENT là bản ghi riêng, liên kết với LOCATION_ENTRY | `Suy`: có Record Type nhưng không có màn xem |

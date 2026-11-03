@@ -25,10 +25,17 @@ erDiagram
     WARRANTY ||--o{ WARRANTY_CODE : "gan ma"
     VEHICLE ||--o{ RECALL : "co recall"
     VEHICLE }o--o{ MOTOR_POOL_RESERVATION : "dat chung"
+    VEHICLE ||--o{ STATUS_UPDATE : "lich su trang thai"
+    VEHICLE_STATUS ||--o{ STATUS_UPDATE : "sang trang thai"
+    VEHICLE ||--o{ RECORD_HISTORY : "lich su truong"
+    CONTACT ||--o{ OVERVIEW_LAYOUT : "the ca nhan"
+    VEHICLE }o--o{ SHARED_DOCUMENT : "dinh tai lieu"
+    VEHICLE }o--o{ SERVICE_PROGRAM : "theo bo lich"
 
     VEHICLE {
-        string ten
-        string so_khung
+        string ten "khong trung, tru xe da Archive"
+        string so_khung "khong trung, xet ca xe Sample"
+        date luu_tru_luc "Archived At, khong doi trang thai"
         string bien_so
         string loai
         string trang_thai
@@ -56,6 +63,32 @@ erDiagram
     VEHICLE_GROUP {
         string ten
         boolean bat_buoc
+        boolean la_sample "xe that khong dung duoc"
+    }
+    STATUS_UPDATE {
+        string nguoi_doi "nguoi hoac Fleetio Automation"
+        string tu_trang_thai
+        datetime luc_doi
+        string thoi_luong
+    }
+    RECORD_HISTORY {
+        string truong
+        string gia_tri_cu
+        string gia_tri_moi
+        datetime luc_doi
+    }
+    OVERVIEW_LAYOUT {
+        string the
+        string cot "trai hoac phai"
+        boolean hien
+    }
+    SHARED_DOCUMENT {
+        string ten
+        string loai
+        datetime sua_luc
+    }
+    SERVICE_PROGRAM {
+        string ten
     }
     CONTACT {
         string ten
@@ -77,10 +110,10 @@ erDiagram
     METER_ENTRY {
         date ngay
         number gia_tri
-        string loai
+        string loai "Primary hoac Secondary, chuoi rieng"
         boolean huy
         string void_status
-        string ly_do_tu_huy
+        string ly_do_tu_huy "giu lai sau Unvoid, Void lai ve Auto-Voided"
         string nguon
     }
     TIRE_READING {
@@ -133,7 +166,17 @@ erDiagram
     }
 ```
 
-**Điều ERD cố ý không có:** tổ hợp đầu kéo và mooc (`Chạy`: không tồn tại), lịch sử ghép mooc, lịch sử đổi người trên phân công (không thấy trên trang), lý do Void, lý do Unvoid. Warranty Opportunity không phải bản ghi riêng theo những gì thấy: nó hiện ra từ việc so mã Service Task trên lệnh với `WARRANTY_CODE` (`Suy`).
+**Điều ERD cố ý không có:** tổ hợp đầu kéo và mooc (`Chạy`: không tồn tại), lịch sử ghép mooc, ngày hiệu lực của liên kết (`Chạy`: một mooc nối nhiều xe, không có ngày), lịch sử đổi người trên phân công (không thấy trên trang), lý do Void, lý do Unvoid, lý do đổi trạng thái, khai báo thay đồng hồ (`Chạy`: không có).
+
+**Archive không phải trạng thái:** `luu_tru_luc` độc lập với `VEHICLE_STATUS`; phân công tương lai bị xoá thật, liên kết bị xoá thật, không có bảng lưu lại để Restore trả về (`Chạy` kết quả, cấu trúc là `Suy`).
+
+**Lịch sử không phủ hết:** `RECORD_HISTORY` không ghi việc ngắt liên kết, đổi đồng hồ; `STATUS_UPDATE` ghi đủ từng lần đổi (`Chạy`).
+
+**Thời lượng trong `STATUS_UPDATE`:** ảnh khớp thời gian ở trạng thái đích, run-notes ghi trạng thái trước, xem OQ-21.
+
+**`SHARED_DOCUMENT`, `SERVICE_PROGRAM`:** tài liệu dùng chung đính vào nhiều xe theo câu chữ hộp đính, đã chạy với 1 xe (`Chạy`). Quan hệ xe với bộ lịch là `Suy` từ câu "for multiple vehicles", chưa tạo bộ lịch.
+
+**`OVERVIEW_LAYOUT`:** gắn theo người dùng là `Suy` từ câu "visible for you"; layout form cấp tài khoản nằm ở Settings, không vẽ vì chỉ đọc. Warranty Opportunity không phải bản ghi riêng theo những gì thấy: nó hiện ra từ việc so mã Service Task trên lệnh với `WARRANTY_CODE` (`Suy`).
 
 **Bảo hành với lệnh:** nối qua mã bảo dưỡng của Service Task, không nối trực tiếp; Service Task thuộc nhóm [[docs/_research/fleetio/srs/fleetio-repair-erd.md|Sửa chữa]].
 

@@ -35,6 +35,14 @@ erDiagram
     SERVICE_ENTRY ||--o| ASSESSMENT : "duoc danh gia"
     ISSUE ||--o| AI_DRAFT : "tao nhap"
     AI_DRAFT ||--o| WORK_ORDER : "tao thanh"
+    WARRANTY ||--o{ WARRANTY_CODE : "khop theo"
+    WARRANTY ||--o{ WARRANTY_COMPONENT : "chia pham vi"
+    WO_LINE }o--o{ WARRANTY : "co hoi"
+    LABOR_LINE ||--o| TIME_ENTRY : "tao"
+    WORK_ORDER ||--o{ RECORD_HISTORY : "ghi thay doi"
+    FAULT_RULE ||--o{ FAULT : "ap cho"
+    WATCHER }o--|| WORK_ORDER : "theo doi"
+    WATCHER }o--|| ISSUE : "theo doi"
 
     VEHICLE {
         string ten
@@ -86,6 +94,11 @@ erDiagram
         boolean dung_so_dau
         string hoa_don
         string so_don_mua
+        number markup_cong
+        number markup_phu_tung
+        money tin_dung_bao_hanh
+        number giam_gia
+        number thue
         money tong
     }
     WO_LINE {
@@ -157,16 +170,50 @@ erDiagram
         string loai
         boolean mac_dinh
     }
+    WARRANTY_CODE {
+        string ma_he_thong
+        string ma_assembly
+    }
+    WARRANTY_COMPONENT {
+        string ten
+        string mo_ta
+    }
+    TIME_ENTRY {
+        datetime bat_dau
+        datetime ket_thuc
+    }
+    RECORD_HISTORY {
+        datetime thoi_diem
+        string nguoi_doi
+        string noi_dung_doi
+    }
+    FAULT_RULE {
+        string ma
+        string ten
+        string mo_ta
+        string xu_ly_uu_tien
+    }
+    WATCHER {
+        string nguoi_dung
+    }
 ```
 
 | Quan hệ | Bằng chứng |
 |---|---|
 | Lệnh sinh một Service Entry | `Chạy` #99 và 57837459; #104 và 57857945. Mở lại thì entry bị xoá, hoàn thành lại sinh entry mới: một lệnh có một entry tại một thời điểm, nhiều entry theo thời gian nhưng entry cũ không còn |
-| Sửa so với bản trước: một sự cố thuộc một lệnh | `Chạy` dòng đã ở lệnh khác có ổ khoá, tooltip yêu cầu gỡ. Bản trước vẽ nhiều nhiều. Tooltip viết "all Work Orders", cột cũng là số nhiều; đường Draft Work Order trên sự cố đã gắn chưa thử: OQ-14 |
-| Một Service Entry giải quyết nhiều sự cố; Reopen tháo liên kết | `Chạy` hộp chọn nhiều, #37 tháo liên kết. `Suy` một sự cố chỉ ở một entry |
-| Dòng việc liên kết sự cố | `Xem` Link Issues, cột Linked Line Items |
+| Sửa so với bản trước: một sự cố thuộc một lệnh | `Chạy` dòng đã ở lệnh khác có ổ khoá, tooltip yêu cầu gỡ. Bản trước vẽ nhiều nhiều. Tooltip viết "all Work Orders", cột cũng là số nhiều, nhưng lượt 3 đã thử: Draft Work Order xám trên #45; nháp của sự cố khác gợi ý #45 thì #45 vẫn chỉ ở #107 (OQ-14 đã trả lời) |
+| Một Service Entry giải quyết nhiều sự cố; Reopen, bỏ tick tháo liên kết | `Chạy` hộp chọn nhiều, #37 tháo liên kết, #52 gắn vào entry có sẵn rồi bỏ tick. `Suy` một sự cố chỉ ở một entry |
+| Dòng việc liên kết sự cố | `Chạy` #45 và dòng TEST-SUA-DV-A, cột Linked Line Items |
 | Nhiều mã lỗi vào một sự cố | `Xem` Issue #13, #14, #15 nhận nhiều mã |
-| Trường Triệu chứng, Nguyên nhân, Khắc phục | `Docs`, chỉ hiện khi bật cấu hình |
+| Trường Triệu chứng, Nguyên nhân, Khắc phục | `Chạy` #107 là ba ô chữ theo từng đầu việc khớp bảo hành, không có bản ghi claim, không nối Warranty Credits. `Docs` phần bắt buộc khi bật cấu hình. `trieu_chung` theo cặp dòng việc và bảo hành hay chỉ theo dòng: `Suy`, chưa thử hai bảo hành cùng khớp một dòng |
+| Tình trạng dòng việc | `Docs`; `Chạy` #107 web không có ô đánh dấu, nên thuộc tính `tinh_trang` chưa kiểm chứng |
+| Bảo hành khớp dòng việc theo mã | `Chạy` #107, #110: khớp đúng từng mức `ma_he_thong`, `ma_assembly`; phần Component của mã bị bỏ. Quan hệ tính khi mở form hoặc lưu lệnh, không phải bản ghi riêng: `Suy` |
+| Thành phần bảo hành | `Xem` hộp Add Component, mở rồi huỷ |
+| Tổng lệnh, markup, credit, giảm giá, thuế | `Chạy` #107. Mỗi ô đổi được giữa phần trăm và số tiền; `number` ở sơ đồ chỉ để gọn |
+| Time Entry từ dòng công | `Chạy` tick Set Labor Time Entry; bản ghi Time Entry ở đâu ngoài dòng: chưa xem |
+| Record History trên lệnh | `Chạy` #107 cột Date, Changes By, Changes Made; `Suy` là một bản ghi cho mỗi dòng đổi |
+| Luật mã lỗi | `Xem` hộp Add Fault Rule, 11 dòng; quan hệ với Fault là khớp chính xác Code |
+| Người theo dõi | `Chạy` #110, sự cố; xe cũng có Watch nhưng không vẽ trên sơ đồ để gọn. Chỉ user, không phải liên hệ: `Chạy` #106 |
 | Dòng phụ tùng ghi sổ kho | `Chạy` Inventory Activity ghi trước, sau, nguồn số lệnh. Tồn, kho chi tiết ở [[docs/_research/fleetio/srs/fleetio-parts-purchasing-fuel-erd.md|Kho, mua]] |
 | Dòng đồng hồ có nguồn lệnh, entry | `Chạy` nguồn "Work Order #104", "Service Entry #57858956" |
 | Contact có đơn giá công | `Chạy` TEST-SUA-KTV |

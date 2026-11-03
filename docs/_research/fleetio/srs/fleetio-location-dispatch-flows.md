@@ -41,7 +41,7 @@ sequenceDiagram
     P->>M: Trả marker xe (Suy)
 ```
 
-Bỏ tích "Update list when map moves": chưa thấy khác biệt rõ, chưa thử kéo tay (OQ-6). Map Options lưu theo người dùng, đổi lại được.
+"Update list when map moves" và bộ lọc: Flow 13, Flow 14. Lớp bản đồ: Flow 16. Map Options lưu theo người dùng, đổi lại được: Flow 17. Marker không gom cụm khi zoom xa: đo tới 15 nhà cung cấp, 4 xe (OQ-1).
 
 ## Flow 2: Khai địa điểm, vùng (`Chạy`)
 
@@ -102,7 +102,7 @@ sequenceDiagram
     end
 ```
 
-Phiếu dầu, phiếu dịch vụ trên web không có ô vị trí nên không có đường này (`Chạy`). API `POST /vehicles/:id/location_entries` và thiết bị là nguồn khác (`Docs`).
+Phiếu dầu, phiếu dịch vụ trên web không có ô vị trí nên không đi đường này (`Chạy`); phiếu dầu, phiếu dịch vụ có nhà cung cấp sinh vị trí theo đường khác: Flow 12. API `POST /vehicles/:id/location_entries` và thiết bị là nguồn khác (`Docs`).
 
 ## Flow 4: Sự kiện vùng và hệ quả (`Chạy (vị trí giả lập)`, bước so sánh là `Suy`)
 
@@ -234,7 +234,7 @@ flowchart TD
     G --> Z
 ```
 
-Hai nhánh lưu lấy từ câu chữ trên form, chưa chạy (OQ-12).
+Hai nhánh lưu lấy từ câu chữ trên form, chưa chạy (OQ-12). Lượt 3 vẫn không lưu vì hành động duy nhất là gửi email.
 
 ## Flow 10: Quick Add từ bản đồ (`Chạy (vị trí giả lập)` với Add Issue, còn lại `Xem`)
 
@@ -250,15 +250,147 @@ flowchart TD
     G --> Z
 ```
 
-## Flow 11: Location Exception trên web (`Chạy (vị trí giả lập)`, nguyên nhân là `Suy`)
+## Flow 11: Location Exception (web `Chạy (vị trí giả lập)`, Fleetio Go `Chạy (Fleetio Go)`, nguyên nhân là `Suy`)
 
 ```mermaid
 flowchart TD
-    A["Biểu mẫu Location Exception Tracking: Enabled"] --> B["Nộp phiếu trên web"]
+    A["Biểu mẫu Location Exception Tracking: Enabled"] --> B["Nộp phiếu"]
     B --> C{"Có toạ độ từng mục"}
-    C -->|"Không, chỉ 1 cặp cấp phiếu"| D["location_exception = false"]
-    C -->|"Có, Fleetio Go, chưa kiểm"| E["Chưa biết"]
+    C -->|"Không, web chỉ 1 cặp cấp phiếu"| D["location_exception = false"]
+    C -->|"Có, Fleetio Go"| E["21/21 mục có toạ độ riêng, cách nhau tối đa 37 m"]
     D --> F["Không so với phiếu trước, kể cả lệch rất xa"]
     F --> Z["Kết thúc"]
-    E --> Z
+    E --> G{"Có vi phạm"}
+    G -->|"Không"| H["location_exception = false, are_items_too_close = false, items_completed_too_far_away_count = 0"]
+    G -->|"Có, chưa có ca nào"| I["Chưa biết cờ bật ra sao, chưa biết ngưỡng"]
+    H --> Z
+    I --> Z
+```
+
+## Flow 12: Vị trí từ phiếu dầu, phiếu dịch vụ có nhà cung cấp (`Chạy`)
+
+```mermaid
+flowchart TD
+    A["Form phiếu dầu hoặc dịch vụ, không có ô vị trí"] --> T{"Loại phiếu"}
+    T -->|"Dầu"| B{"Chọn nhà cung cấp"}
+    T -->|"Dịch vụ"| S{"Nhà cung cấp có phân loại Service"}
+    S -->|"Không"| N["E-013 Chỉ hiện Create"]
+    N --> V["Form New Vendor, tick Service"]
+    V -->|"Enter ở ô Country"| W["E-018 Lưu luôn, bỏ qua Classification"]
+    W --> V
+    V -->|"Lưu đủ"| A
+    S -->|"Có"| D
+    B -->|"Không"| C["Lưu phiếu, không sinh vị trí (Suy)"]
+    B -->|"Có"| D["Lưu phiếu, form không báo gì"]
+    D --> E{"Địa chỉ nhà cung cấp quy ra điểm"}
+    E -->|"Đúng nơi"| F["Location Entry loại Fuel Entry hoặc Service Entry, cùng giờ phiếu"]
+    E -->|"Địa chỉ giả, điểm ở nước khác"| X["E-019 Không báo độ tin cậy"]
+    E -->|"Không quy được, chưa thử"| Y["Chưa biết (OQ-19)"]
+    X --> F
+    F --> G["Last Known Location, Source trỏ về phiếu"]
+    G --> H["Xe lên Fleet Map, hiện như đang ở địa chỉ khai"]
+    H --> I["Location History có thêm dòng theo loại"]
+    I --> Z["Kết thúc"]
+    C --> Z
+    Y --> Z
+```
+
+Nhánh "đúng nơi" là `Suy`: chỉ đo với địa chỉ TEST. Nhánh đảo ngược khi sửa hoặc xoá phiếu, sửa địa chỉ nhà cung cấp: chưa thử (OQ-19).
+
+## Flow 13: Tìm và lọc trên Fleet Map (`Chạy`)
+
+```mermaid
+flowchart TD
+    A["Fleet Map"] --> B{"Cách tìm"}
+    B -->|"Ô Locate"| C["Kết quả gồm nhà cung cấp, xe, Place, nhà cung cấp trước"]
+    C --> D{"Chọn"}
+    D -->|"Enter ngay"| E["E-014 Chọn dòng đầu, có thể nhầm nhà cung cấp"]
+    E --> C
+    D -->|"Đi xuống tới dòng xe"| F["Bản đồ tới xe, panel đổi sang xe"]
+    D -->|"Xe chưa có vị trí"| G["Vẫn có dòng trong kết quả"]
+    B -->|"Filters"| H["8 bộ lọc VEHICLES, Classification của VENDORS"]
+    H --> I{"Nút"}
+    I -->|"Apply"| J["Marker, danh sách lọc theo, huy hiệu số trên Filters"]
+    I -->|"Cancel, chưa ghi kết quả"| A
+    J --> K{"Tải lại trang"}
+    K -->|"Có"| L["E-015 Bộ lọc mất, về toàn bộ kết quả"]
+    L --> A
+    K -->|"Không"| Z["Kết thúc"]
+    F --> Z
+    G --> Z
+```
+
+Bấm dòng xe chưa có vị trí: chưa ghi kết quả.
+
+## Flow 14: "Update list when map moves" (`Chạy`, ở vùng dữ liệu Sample, chỉ đọc)
+
+```mermaid
+flowchart TD
+    A["Danh sách theo khung nhìn"] --> B{"Ô đang tick"}
+    B -->|"Có"| C["Kéo tay"]
+    C --> D["Danh sách cập nhật, có thể 0 results"]
+    D --> A
+    B -->|"Không"| E{"Thao tác"}
+    E -->|"Kéo tay"| F["E-016 Danh sách giữ nguyên, bản đồ thấy marker"]
+    E -->|"Chọn từ ô tìm"| G["Danh sách vẫn đổi theo vùng mới"]
+    E -->|"Tick lại, không kéo"| H["Ra ngay kết quả của khung hiện tại"]
+    F --> E
+    G --> E
+    H --> A
+```
+
+## Flow 15: Xem lịch sử vị trí của xe (`Chạy`)
+
+```mermaid
+flowchart TD
+    A["Trang xe, More, Location History"] --> B{"Xe có lần ghi"}
+    B -->|"Không"| C["E-017 No results found"]
+    B -->|"Có"| D["Danh sách trái, bản đồ phải, Newest First"]
+    D --> E{"Thao tác"}
+    E -->|"Lọc Location Entry Type"| F["Fuel Entry, Service Entry hoặc Inspection"]
+    E -->|"Sang trang"| G["Theo trang, Fleetio: 30 dòng"]
+    F --> D
+    G --> D
+    E -->|"Xong"| Z["Kết thúc"]
+    C --> Z
+```
+
+Bấm một dòng lịch sử: chưa ghi kết quả. Màn này không lưu ảnh vì có địa chỉ.
+
+## Flow 16: Bật tắt lớp bản đồ (`Chạy`, đọc DOM)
+
+```mermaid
+flowchart TD
+    A["Mở bản đồ, Vehicles bật, Places, Vendors tắt"] --> B{"Bấm nút lớp"}
+    B -->|"Tắt Vehicles"| C["Tab Vehicles biến mất, 0 marker xe"]
+    B -->|"Chỉ Vendors"| D["Tab Vendors, chỉ marker nhà cung cấp"]
+    B -->|"Vendors và Places"| E["Tab Places, Vendors"]
+    B -->|"Tắt hết"| F["E-001 No results found in this area"]
+    C --> G{"Tải lại trang"}
+    D --> G
+    E --> G
+    F --> G
+    G -->|"Có"| A
+    G -->|"Không"| Z["Kết thúc"]
+```
+
+Không có nút Shops, chỉ thấy trong chú giải; chức năng Shops giữ `Docs`.
+
+## Flow 17: Đổi nhãn marker và vị trí mở đầu (`Chạy`, đã trả lại)
+
+```mermaid
+flowchart TD
+    A["Map Options"] --> B{"Thao tác"}
+    B -->|"Set Label Options"| C["Vehicle Marker Label, 5 giá trị"]
+    C --> D{"Nút"}
+    D -->|"Save, VIN/SN"| E{"Xe có VIN"}
+    D -->|"Cancel, chưa ghi kết quả"| A
+    E -->|"Có"| F["Marker hiện số VIN"]
+    E -->|"Không"| G["Marker hiện tên xe"]
+    F --> H["Tải lại vẫn giữ, lưu theo người dùng"]
+    G --> H
+    H -->|"Đổi về Name"| A
+    B -->|"Use Current Map Center"| I["Map Preferences Updated, dòng mở đầu ghi tên vùng"]
+    I -->|"Reset to Default"| A
+    B -->|"Xong"| Z["Kết thúc"]
 ```

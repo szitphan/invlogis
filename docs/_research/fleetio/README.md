@@ -99,9 +99,9 @@ Mức từng chức năng ở [danh sách chức năng](fleetio-function-list.md
 
 | Nhóm | Chưa chạy trọn | Vì sao |
 |---|---|---|
-| Sửa chữa | Đưa ra xưởng ngoài, thêm trạng thái lệnh, bấm giờ công | Cần đổi Cài đặt hoặc chỉ có tài liệu hãng; đầu kéo, mooc là `Suy` vì nhóm này chỉ chạy xe Car |
-| Nhắc, kiểm tra | Cờ vị trí từng mục, Smart Upload, phiếu qua ngày | Cần app Fleetio Go, hoặc cần chờ qua ngày |
-| Phương tiện | Đổi trạng thái xe, Archive xe, Motor Pool | Hạn mức 5 xe đã đầy, chưa được phép Archive |
+| Sửa chữa | Đưa ra xưởng ngoài, thêm trạng thái lệnh, mẫu bảo hành | Cần đổi Cài đặt; web không có bấm giờ công; đầu kéo, mooc là `Suy` vì nhóm này chỉ chạy xe Car |
+| Nhắc, kiểm tra | Ca Location Exception bật thật, lịch Overdue, Skipped, chụp webcam, lưu Rule | Chưa có ca dương trên Fleetio Go, cần chờ qua ngày, chưa cấp camera, Rule khoá khi còn Sample Data |
+| Phương tiện | Motor Pool | Cần tạo trong Settings; Archive và trạng thái xe đã chạy ở lượt 3 |
 | Lốp | Lưu mẫu đảo tuỳ biến, đọc áp suất tự động, import lốp | Một phần hoặc chỉ có tài liệu hãng; không có thao tác chuyển lốp giữa xe |
 | Bản đồ, gán việc | Marker và sự kiện vùng chỉ chạy bằng `Chạy (vị trí giả lập)`, lưu Geofence Alert Policy | Không có thiết bị GPS; không lưu vì có gửi email |
 | Kho, mua, nhiên liệu | Pending, Rejected của đơn, FIFO, LIFO, Find Shops | Cần người thứ hai hoặc đổi Cài đặt |
@@ -109,7 +109,8 @@ Mức từng chức năng ở [danh sách chức năng](fleetio-function-list.md
 
 ## Chưa làm
 
-- **App Fleetio Go:** chưa xem.
+- **App Fleetio Go:** user đã nộp 1 phiếu (#126102722), mới kiểm dữ liệu phiếu và số đồng hồ; chưa đi hết app.
+- **Lượt 3, 4 (03/11):** function list 318 dòng: 213 chạy trọn, 58 một phần, 41 chỉ xem, 2 tài liệu, 4 ngoài phạm vi; mẫu số tăng do thêm FR mới nên không so trực tiếp với 275 dòng cũ. Tổng FR 327, BR 325, E 188. Đã rà ảnh lượt 3 và lượt 4: 46 ảnh mới có trong bảng màn, agent mở từng ảnh, không thấy bản đồ vị trí thật, địa chỉ thật, email, token; ảnh còn tên hiển thị tài khoản thử. Các màn mới chưa vẽ lên Figma.
 - **Người dùng thứ hai:** chưa có, nên chưa đi nhánh chờ duyệt, phân quyền bằng tài khoản thật.
 - **Tools, Custom Records, Advanced Analytics:** không mở theo lựa chọn của user.
 - **Figma:** 10 màn không có ảnh gốc chưa vẽ. Nối được 126/218 đường, phần còn lại thiếu control trên màn, hệ thống tự chuyển hoặc là nhánh phụ ([kiểm độc lập](run-notes/_flow/verify-report.md), [báo cáo nối flow](run-notes/_flow/flow-report.md)). Chưa bấm thử Present. Toàn bộ 171 frame đã so với ảnh gốc: 59 khớp ngay, 112 đã sửa, chỗ còn lệch ở [run-notes/_audit/](run-notes/_audit/). Hàng Responsive chưa soát.
@@ -121,11 +122,12 @@ Mọi bản ghi có tiền tố `TEST`; danh sách theo nhóm ở cuối từng 
 
 Cần biết:
 
-- Hạn mức 5 xe của gói thử đã đầy: `TEST-XE-01`, `TEST-XE-LOP`, `TEST-MOOC-LOP`, `TEST-SUA-01`, `TEST-KHO-01`.
+- Hạn mức 5 xe của gói thử đã đầy: `TEST-XE-01`, `TEST-MOOC-LOP`, `TEST-SUA-01`, `TEST-KHO-01`, `TEST-DAUKEO-2`. `TEST-XE-LOP` đã Archive, Restore bị khoá khi gói đầy; 2 phân công tương lai của xe này đã mất theo lần Archive.
 - Một số phiếu kiểm tra mang vị trí thật của máy chạy trình duyệt. Ảnh có bản đồ các phiếu này đã được che.
 - Có thao tác tháo 1 lốp TEST, Archive 1 automation TEST; mở lại lệnh làm mất Service Entry TEST đã sinh.
 - Share báo cáo từng sinh link công khai khoảng 5 phút, đã thu hồi.
-- Trial Tools đang bật, chưa rõ ai bật.
+- Trial Tools đã Disable theo yêu cầu user, chờ huỷ tới 16/11. Chưa rõ ai bật.
+- Biểu mẫu #680174 còn workflow đổi xe sang In Shop: nộp lại sẽ đổi trạng thái TEST-XE-01.
 
 ## Nguồn công khai đã đọc
 

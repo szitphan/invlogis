@@ -40,6 +40,17 @@ erDiagram
     SUBMITTED_ITEM ||--o| ITEM_FAILURE : "khi lỗi"
     ISSUE ||--o{ ITEM_FAILURE : "gộp nhiều lần lỗi"
     SUBMITTED_ITEM ||--o{ TIRE_READING : "đọc lốp"
+    VEHICLE ||--o{ WORK_ORDER_DRAFT : "có nháp"
+    WORK_ORDER_DRAFT ||--o| WORK_ORDER : "thêm vào"
+    SERVICE_REMINDER ||--o{ RECORD_HISTORY_ENTRY : "ghi thay đổi"
+    RENEWAL_REMINDER ||--o{ RECORD_HISTORY_ENTRY : "ghi thay đổi"
+    SERVICE_REMINDER ||--o| SERVICE_OCCURRENCE : "kỳ hiện tại"
+    SERVICE_PROGRAM ||--o{ PROGRAM_RULE : "giữ đồng bộ"
+    SUBMITTED_ITEM }o--o| PART_LOCATION : "lấy phụ tùng từ"
+    SUBMITTED_ITEM ||--o{ INVENTORY_ADJUSTMENT : "trừ kho"
+    PART_LOCATION ||--o{ INVENTORY_ADJUSTMENT : "tại"
+    SERVICE_ENTRY ||--o| SERVICE_ASSESSMENT : "được đánh giá"
+    SERVICE_REMINDER ||--o{ OUTSOURCED_ASSIGNMENT : "giao ngoài"
 
     VEHICLE {
         string ten
@@ -98,6 +109,50 @@ erDiagram
         date hoan_den
         boolean thong_bao
         string nguoi_duoc_giao
+        number moc_sap_den_han_km
+    }
+    SERVICE_OCCURRENCE {
+        number so
+    }
+    WORK_ORDER_DRAFT {
+        string tom_tat_ai
+        number so_viec
+        number tam_tinh
+        string trang_thai
+    }
+    RECORD_HISTORY_ENTRY {
+        datetime thoi_diem
+        string nguoi_doi
+        string truong
+        string gia_tri_truoc
+        string gia_tri_sau
+    }
+    PROGRAM_RULE {
+        string thuoc_tinh
+        string gia_tri
+    }
+    PART_LOCATION {
+        string ten
+    }
+    INVENTORY_ADJUSTMENT {
+        datetime thoi_diem
+        string loai
+        string ly_do
+        number so_luong
+        number ton_truoc
+        number ton_sau
+        string nguoi_lam
+    }
+    SERVICE_ASSESSMENT {
+        string ket_qua
+        string tieu_de
+        string nhan_xet
+        number so_nguon
+    }
+    OUTSOURCED_ASSIGNMENT {
+        string nguoi_nhan
+        string thoi_gian
+        string cach_bao
     }
     COMPLIANCE_RECORD {
         date moc_ngay
@@ -117,8 +172,10 @@ erDiagram
     PROGRAM_SCHEDULE {
         number chu_ky_thoi_gian
         number chu_ky_so_km
+        number chu_ky_dong_ho_phu
         number nguong_thoi_gian
         number nguong_so_km
+        number nguong_dong_ho_phu
         number lan_dau_thoi_gian
         number lan_dau_so_km
     }
@@ -177,10 +234,14 @@ erDiagram
         string nguon
         string vi_do_kinh_do
         boolean ngoai_le_vi_tri
+        boolean muc_qua_gan_nhau
+        number so_muc_qua_xa
     }
     SUBMITTED_ITEM {
         string ket_qua
         string ghi_chu
+        string vi_do_kinh_do_muc
+        string phu_tung_da_dung
     }
     ITEM_FAILURE {
         string trang_thai
@@ -188,4 +249,4 @@ erDiagram
     }
 ```
 
-`FORM_VERSION` đã có bằng chứng hành vi (phiếu cũ mang "Past Version", `Chạy`); cách lưu phiên bản là `Suy`. Bản trước ghi `SUBMITTED_ITEM` có vị trí riêng từng mục: trên web gói tin chỉ có một cặp toạ độ cấp phiếu (`Chạy (vị trí giả lập)`), vị trí từng mục có thể chỉ ở Fleetio Go (`Suy`). `COMPLIANCE_RECORD`, `ITEM_FAILURE`, `PROGRAM_SCHEDULE`, `PROGRAM_VEHICLE` là tên đặt để mô tả, suy từ màn hình (`Suy`). Một `ISSUE` gom nhiều `ITEM_FAILURE` khi lỗi lặp lúc sự cố còn mở (`Chạy`).
+`FORM_VERSION` đã có bằng chứng hành vi (phiếu cũ mang "Past Version", `Chạy`); cách lưu phiên bản là `Suy`. Vị trí từng mục: trên web gói tin chỉ có một cặp toạ độ cấp phiếu (`Chạy (vị trí giả lập)`); phiếu Fleetio Go có cặp `latitude`, `longitude` riêng cho 21/21 mục cùng hai chỉ báo `are_items_too_close`, `items_completed_too_far_away_count` (`Chạy (Fleetio Go)`). `moc_sap_den_han_km`, `SERVICE_OCCURRENCE` lộ từ Record History ("Due Soon Meter Value", "Current Service Occurrence"), `Chạy`. `RECORD_HISTORY_ENTRY` có bản ghi thật; cấu trúc là `Suy`. `WORK_ORDER_DRAFT`, `PROGRAM_RULE`, `PART_LOCATION` đặt tên theo màn; quan hệ của `WORK_ORDER_DRAFT` với `WORK_ORDER` chưa chạy, `PROGRAM_RULE` chưa lưu được vì còn Sample Data (`Suy`). `INVENTORY_ADJUSTMENT` có bản ghi thật ở Inventory Activity (`Chạy`). `SERVICE_ASSESSMENT` thấy trên phiếu (`Chạy`). `OUTSOURCED_ASSIGNMENT` dừng ở Confirm, chưa tạo (`Suy`). `COMPLIANCE_RECORD`, `ITEM_FAILURE`, `PROGRAM_SCHEDULE`, `PROGRAM_VEHICLE` là tên đặt để mô tả, suy từ màn hình (`Suy`). Một `ISSUE` gom nhiều `ITEM_FAILURE` khi lỗi lặp lúc sự cố còn mở (`Chạy`).

@@ -10,11 +10,11 @@ updated: 2026-11-03
 
 | UC | Tên | Actor | FR | Màn | Lỗi | OQ |
 |---|---|---|---|---|---|---|
-| UC-axle-config | Khai cấu hình trục | Quản trị | 001–006 | 1.1–1.7 | E-002, E-016 | OQ-4 |
+| UC-axle-config | Khai cấu hình trục | Quản trị | 001–006 | 1.1–1.7 | E-002, E-016, E-017 | OQ-4 |
 | UC-install-tire | Lắp lốp | Kỹ thuật | 007–011 | 2.1, 2.2, 2.4 | E-006, E-013, E-015 | OQ-1 |
 | UC-copy-details | Chép thông số | Kỹ thuật | 012 | 2.3 | E-008, E-009 | — |
-| UC-read-tire | Đọc lốp, theo dõi mức | Kỹ thuật, Quản trị | 013, 020, 021, 029, 030 | 2.3, 5.1–5.4 | — | OQ-2, OQ-9 |
-| UC-rotate-tire | Đảo lốp | Kỹ thuật | 014–017 | 3.1–3.3 | E-003, E-004, E-010, E-014 | OQ-7 |
+| UC-read-tire | Đọc lốp, theo dõi mức | Kỹ thuật, Quản trị | 013, 020, 021, 029, 030 | 2.3, 5.1–5.4 | — | OQ-2, OQ-9, OQ-13 |
+| UC-rotate-tire | Đảo lốp | Kỹ thuật | 014–017, 031 | 3.1–3.3 | E-003, E-004, E-010, E-014 | OQ-7 |
 | UC-remove-tire | Tháo, thay lốp | Kỹ thuật | 018 | 4.1 | — | OQ-6 |
 | UC-inspect-tire | Đọc lốp qua phiếu kiểm | Lái xe | 022–025 | Màn liên quan ở Mục 2 của user flow | E-001, E-005, E-007, E-011 | OQ-5 |
 | UC-trailer-tire | Quản lý lốp mooc và liên kết đầu kéo | Quản trị, Kỹ thuật | 026, 027 | 1.7, 2.4 | E-012, E-014 | OQ-3, OQ-8, OQ-12 |
@@ -32,7 +32,7 @@ Số FR, lỗi viết tắt, đầy đủ có tiền tố `fleetio-tires`.
 | 4 | Lưu | Vẽ sơ đồ, mỗi ô trống có nút + |
 | 5 | Đổi vai trò từng trục | Ghi nhận, không đổi số cầu kéo |
 
-**Nhánh:** xe có lốp thì Edit khoá (E-002). Tháo hết thì mở lại.
+**Nhánh:** xe có lốp thì Edit khoá (E-002). Tháo hết thì mở lại. Xe Archived: xem được, Edit khoá (E-017); Restore giữ nguyên cấu hình.
 
 ## UC-install-tire — Lắp lốp
 
@@ -103,6 +103,7 @@ Số FR, lỗi viết tắt, đầy đủ có tiền tố `fleetio-tires`.
 | 4 | Sửa Linked Vehicles ở đầu kéo hoặc mooc | Hai bên đều có "Linked Assets" |
 | 5 | Xem tab lốp đầu kéo | Không có lốp mooc |
 | 6 | Gỡ, đổi mooc | Lốp, đồng hồ không đổi, không có lịch sử ghép |
+| 7 | Nối thêm xe thứ hai vào cùng mooc | Lưu được, không kiểm loại xe, không ngày hiệu lực; không biết đang kéo bởi đầu nào |
 
 ## UC-tire-history — Xem lịch sử, báo cáo
 

@@ -10,20 +10,22 @@ updated: 2026-11-03
 
 | UC | Tên | Actor | FR | Màn | Lỗi | OQ |
 |---|---|---|---|---|---|---|
-| UC-view-map | Xem đội xe | Fleet Manager | 001–009, 013, 030, 031 | 1.1–1.11 | E-001, E-002 | OQ-1, OQ-2, OQ-5, OQ-6, OQ-7 |
+| UC-view-map | Xem đội xe | Fleet Manager | 001–009, 013, 030, 031, 035, 036 | 1.1–1.11, 1.13, 1.14 | E-001, E-002, E-014, E-015, E-016 | OQ-1, OQ-2, OQ-5, OQ-6, OQ-7, OQ-16 đã trả lời |
 | UC-quick-add | Tạo bản ghi từ bản đồ | Fleet Manager | 006, 029 | 1.3 | — | — |
 | UC-manage-place | Khai địa điểm, vùng | Administrator | 010, 025, 026 | 2.1–2.7 | E-010 | OQ-10 |
 | UC-alert-policy | Đặt cảnh báo vùng | Administrator | 027 | 2.8 | — | OQ-12 |
 | UC-job | Gán xe vào việc | Fleet Manager | 012, 014–021 | 3.1–3.9 | E-003–E-009 | OQ-13 |
 | UC-job-auto | Tự gán theo vùng | Hệ thống | 011, 022 | 3.10, 3.11 | — | OQ-8, OQ-9 |
 | UC-geofence-automation | Tự động hoá theo sự kiện vùng | Administrator | 011, 028 | 4.1–4.4 | E-011 | OQ-8, OQ-11 |
-| UC-location-inspection | Ghi vị trí qua phiếu kiểm | Người kiểm tra xe | 004, 023, 024, 032, 033 | 5.1, 5.2 | E-012 | OQ-3, OQ-4, OQ-13 |
+| UC-location-inspection | Ghi vị trí qua phiếu kiểm | Người kiểm tra xe | 004, 023, 024, 032, 033, 037 | 5.1, 5.2 | E-012 | OQ-3, OQ-4, OQ-13, OQ-17 |
+| UC-location-fuel | Vị trí từ phiếu dầu, phiếu dịch vụ | Người nhập phiếu | 004, 034, 038 | 1.3, 1.12 | E-013, E-018, E-019 | OQ-3, OQ-19 |
+| UC-location-history | Xem lịch sử vị trí xe | Fleet Manager | 013 | 1.12 | E-017 | OQ-18 |
 
 Số FR, lỗi viết tắt, đầy đủ có tiền tố `fleetio-location-dispatch`.
 
 ## UC-view-map — Xem đội xe
 
-`Chạy (vị trí giả lập)`.
+`Chạy (vị trí giả lập)`; tìm, lọc, "Update list" lượt 3 là `Chạy`.
 
 | Bước | Người dùng | Hệ thống |
 |---|---|---|
@@ -34,7 +36,7 @@ Số FR, lỗi viết tắt, đầy đủ có tiền tố `fleetio-location-disp
 | 5 | Show Places, rê chuột dòng Place | Khoảng cách; đường nét đứt; marker xe đổi tạm thành marker Place |
 | 6 | Map Options, Map Legend | Đổi nền, nhãn, lưu theo người dùng; chú giải độ tươi |
 
-**Nhánh:** 2a Không có kết quả: E-fleetio-location-dispatch-001. 3a Xe chưa có vị trí, trên trang xe: E-fleetio-location-dispatch-002. 3b Xe trùng tâm Place: marker xe bị che, phải chọn từ danh sách. 6a Street View: có Pegman, không vào được.
+**Nhánh:** 2a Không có kết quả: E-fleetio-location-dispatch-001. 3a Xe chưa có vị trí, trên trang xe: E-fleetio-location-dispatch-002. 2b Enter ở ô tìm chọn dòng đầu, có thể nhầm nhà cung cấp: E-fleetio-location-dispatch-014. 2c Tải lại khi đang lọc, bộ lọc mất: E-fleetio-location-dispatch-015. 2d Bỏ tick "Update list when map moves" rồi kéo tay, danh sách đứng yên: E-fleetio-location-dispatch-016; chọn từ ô tìm vẫn cập nhật, tick lại là áp ngay. 2e Zoom xa: không gom cụm, marker đè nhau. 3b Xe trùng tâm Place: marker xe bị che, phải chọn từ danh sách. 6a Street View: có Pegman, không vào được. 6b Set Label Options: chọn 1 trong 5 trường làm nhãn marker xe, trường trống thì về Vehicle Name, giữ sau tải lại. 6c Use Current Map Center: dòng mở đầu đổi sang tên vùng đang xem; Reset to Default trả lại. 2f Bật tắt lớp: tắt Vehicles mất tab và marker, tắt hết ra E-fleetio-location-dispatch-001; tải lại về mặc định.
 
 ## UC-quick-add — Tạo bản ghi từ bản đồ
 
@@ -115,4 +117,28 @@ Số FR, lỗi viết tắt, đầy đủ có tiền tố `fleetio-location-disp
 | 2 | Nộp phiếu kiểm tra | Gửi toạ độ cấp phiếu; máy chủ lưu đúng, không kiểm |
 | 3 | Xem phiếu, bản đồ | Bản đồ nhỏ, xe lên marker, Source trỏ về phiếu; địa chỉ có sau khoảng 1 phút |
 
-**Nhánh:** 1a Trình duyệt chưa cho định vị: phiếu không có vị trí (`Suy`). 2a Đồng hồ sai theo lịch sử: E-012. 2b Biểu mẫu bật Location Exception: vẫn false trên web. 2c Phiếu dầu, dịch vụ trên web: không có ô vị trí.
+**Nhánh:** 1a Trình duyệt chưa cho định vị: phiếu không có vị trí (`Suy`). 2a Đồng hồ sai theo lịch sử: E-012. 2b Biểu mẫu bật Location Exception: vẫn false trên web. 2c Phiếu dầu, dịch vụ trên web: không có ô vị trí; có nhà cung cấp thì xem UC-location-fuel. 2d Nộp trên Fleetio Go: mỗi mục có toạ độ riêng, ca không vi phạm cờ vẫn false (`Chạy (Fleetio Go)`).
+
+## UC-location-fuel — Vị trí từ phiếu dầu, phiếu dịch vụ
+
+`Chạy`.
+
+| Bước | Người dùng | Hệ thống |
+|---|---|---|
+| 1 | Mở form phiếu dầu hoặc phiếu dịch vụ, điền, chọn nhà cung cấp | Form không có ô vị trí, không báo gì |
+| 2 | Lưu | Sinh Location Entry loại Fuel Entry hoặc Service Entry tại vị trí quy từ địa chỉ nhà cung cấp, cùng giờ phiếu |
+| 3 | Mở Fleet Map, panel xe, Location History | Xe lên marker như đang ở địa chỉ khai; Source "Fuel Entry #..."; có dòng theo loại |
+
+**Nhánh:** 1a Phiếu dầu không chọn nhà cung cấp: không sinh vị trí (`Suy`). 1b Phiếu dịch vụ: chỉ chọn được nhà cung cấp phân loại Service, E-fleetio-location-dispatch-013. 1c Tạo nhà cung cấp mới, Enter ở ô Country lưu luôn: E-fleetio-location-dispatch-018. 2a Địa chỉ giả: quy ra điểm ở nước khác, không báo độ tin cậy: E-fleetio-location-dispatch-019. 2b Địa chỉ không quy được: chưa thử (OQ-19).
+
+## UC-location-history — Xem lịch sử vị trí xe
+
+`Chạy`.
+
+| Bước | Người dùng | Hệ thống |
+|---|---|---|
+| 1 | Trang xe, More, Location History | Danh sách trái có icon loại, ngày, địa chỉ; bản đồ phải; Newest First |
+| 2 | Lọc Location Entry Date, Location Entry Type, tìm | Lọc theo Fuel Entry, Service Entry, Inspection |
+| 3 | Sang trang | Fleetio: 30 dòng mỗi trang |
+
+**Nhánh:** 1a Xe chưa có vị trí: E-fleetio-location-dispatch-017.

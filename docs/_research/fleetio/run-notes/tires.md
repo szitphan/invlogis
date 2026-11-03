@@ -245,3 +245,29 @@ Nguồn: `design-system/components/application/tyre-layout.md`, `design-system/f
 
 - Xe thứ 3 trở đi (trần tài khoản): đổi lốp thật giữa 2 xe khác nhau, xe con mới, 1 mooc gắn 2 đầu kéo.
 - Xem hình 6x2, 8x4, 10x, 12x. Fail phiếu lần 2. Thêm phụ tùng lốp vào Work Order. Lưu mẫu đảo tuỳ biến. Quy luật Minimum tự hiện 4/32".
+
+# Lượt 3 (03/11)
+
+## Lưu mẫu đảo tuỳ biến — Không chạy được (mẫu là danh mục dùng chung trong Settings, brief cấm tạo và không được xoá)
+Các bước đã làm: Đọc Settings › Tire Management Settings, không bấm gì.
+Kết quả thấy được: Khối "Tire Rotation Patterns" có "Add Tire Rotation Pattern", cột Name, Type, Created, Axle Configuration. 8 mẫu đọc được đều Type Standard, có icon khoá: Forward Cross, Front To Rear, Rearward Cross, Side-to-Side, X-Pattern (4x2 / 4x4); Classic Dually, Side-to-Side Dually (4x2 / 4x4 Dually); Standard 6x4 (6x2 / 6x4 / 6x6). Xác nhận mẫu thuộc cấp tài khoản.
+Trả lời câu hỏi mở nào: OQ-7 nhóm Lốp: Một phần, nơi lưu đã rõ; việc lưu thật chưa chạy.
+
+## Đọc áp suất tự động — Không chạy được (cài đặt tài khoản, cần telematics, brief cấm cả hai)
+Các bước đã làm: Đọc Settings › Tire Management Settings › General.
+Kết quả thấy được: Công tắc "Automated tire pressure readings" đang tắt, có icon khoá: "When enabled, Fleetio will automatically update tire pressure readings for all 4x2 or 4x4 vehicles with compatible telematics installed. Readings will update daily." Điều kiện 4x2, 4x4 đúng như lượt trước, không dùng được cho đầu kéo 6x4. Tên hãng Geotab vẫn chỉ từ tài liệu.
+
+## Import lốp — Không chạy được (không tìm thấy lối vào)
+Các bước đã làm: Xem trang Tire Readings, menu "…" của Vehicle List, tìm "import" trong Settings. Chỉ đọc, không bấm Import nào.
+Kết quả thấy được: Tire Readings không có menu "…". Menu Vehicle List có Add Multiple Vehicles (khoá khi đầy gói), Import Vehicles, Import Meter Entries, Add GPS / Telematics Integration, Export Data; không có Import lốp. Settings tìm "import": "No results for: 'import'". Vẫn giữ mức Docs. Chưa loại trừ lối vào ở nơi chưa mở.
+
+## Bổ sung từ nhóm xe
+1 mooc nối 2 xe: chạy được (`vehicle.md`, mục Lượt 3). Xác nhận mooc nối với cả xe Car, không kiểm loại xe. Xe Archived vẫn giữ cấu hình trục, Edit trục khoá. Đổi lốp thật giữa 2 xe: lượt này không chạy.
+
+# Lượt 4 (03/11)
+
+## Lưu mẫu đảo tuỳ biến (FR-tires-016) — Không chạy được
+Chặn: mẫu lưu nằm trong Settings, user chưa mở phần đổi Cài đặt. Không thử lại.
+
+## Đọc áp suất tự động (FR-tires-029) — Không chạy được
+Chặn: công tắc Settings khoá, cần telematics, brief cấm tích hợp. Không thử lại.

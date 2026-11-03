@@ -6,7 +6,7 @@ updated: 2026-11-03
 
 # Bản đồ, gán việc — Màn hình thật
 
-Ảnh chụp từ tài khoản dùng thử ngày 02/11/2026 và 03/11/2026, dùng nội bộ để phân tích. Bảng theo [[docs/_research/fleetio/run-notes/location-dispatch.md|ghi chú chạy thử]]; phần ghi chú không mô tả thì ghi "Chưa ghi". Xe, marker, sự kiện vùng trên ảnh dùng vị trí giả lập.
+Ảnh chụp từ tài khoản dùng thử ngày 02/11/2026 và 03/11/2026, dùng nội bộ để phân tích. Bảng theo [[docs/_research/fleetio/run-notes/location-dispatch.md|ghi chú chạy thử]]; phần ghi chú không mô tả thì ghi "Chưa ghi". Xe, marker, sự kiện vùng trên ảnh dùng vị trí giả lập. Lượt 3, lượt 4 không lưu ảnh mới: màn có vị trí hoặc địa chỉ thật được đọc qua DOM, ghi rõ ở từng mục.
 
 ## 1.1 Bản đồ
 
@@ -15,9 +15,9 @@ updated: 2026-11-03
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
 | 1 | Nearby | Cột | — | Tab theo lớp, số kết quả, sắp Distance |
-| 2 | Update list when map moves | Tick | — | Mặc định bật |
-| 3 | Ô Locate | Tìm | Chữ | Vehicles, places, vendors |
-| 4 | Filters, Vehicles, Places, Vendors | Nút | — | Bật lớp |
+| 2 | Update list when map moves | Tick | — | Mặc định bật. Bỏ tick: kéo tay không cập nhật (E-016), chọn từ ô tìm vẫn cập nhật; tick lại là áp ngay (`Chạy`, đọc DOM) |
+| 3 | Ô Locate | Tìm | Chữ | Vehicles, places, vendors. Kết quả "10 results available for search term TEST", nhà cung cấp trước, khớp mờ; Enter chọn dòng đầu (E-014); xe chưa có vị trí vẫn có dòng (`Chạy`, đọc DOM) |
+| 4 | Filters, Vehicles, Places, Vendors | Nút | — | Bật lớp; Filters mở 1.13. Bật Vendors thêm marker và tab Places, Vendors; tắt Vehicles mất tab và marker; tắt hết ra E-001; nút có `aria-pressed`; tải lại về mặc định (`Chạy`, đọc DOM). Không có nút Shops riêng |
 | 5 | Map Options | Nút | — | Kiểu, nhãn, điểm mở |
 | 6 | Street View, Maximize, Legend | Nút | — | Góc phải trên |
 | 7 | Center on Default Location, zoom | Nút | — | Góc phải dưới; "+" có `aria-label` "Zoom Out", "−" có "Zoom In", hành vi đúng theo hình |
@@ -46,7 +46,7 @@ Mức: `Chạy (vị trí giả lập)`.
 | 1 | Nút Add | Nút menu | — | Quick Add 11 mục; Add Issue mở form điền sẵn xe |
 | 2 | Tab Overview, Nearby | Tab | — | Mở ở Overview |
 | 3 | Alerts | Khối | Số | Open Issues, Service Reminders, Incomplete Work Orders |
-| 4 | Last Known Location | Khối | Chữ | Status, Last Updated, Where, Source "Inspection Submission #..." |
+| 4 | Last Known Location | Khối | Chữ | Status, Last Updated, Where, Source "Inspection Submission #..." trên ảnh; xe có vị trí từ phiếu dầu ghi Source "Fuel Entry #...", Status "Stale" (`Chạy`, không có ảnh) |
 | 5 | Details | Khối | Chữ | Chưa ghi chi tiết |
 | 6 | Marker xe | Marker | — | Hình xe đen nhỏ, gắn nhãn tên; không có popup |
 
@@ -96,8 +96,8 @@ Mức: `Chạy (vị trí giả lập)`.
 |---|---|---|---|---|
 | 1 | Default, Satellite, Grayscale | Chọn một | — | Lưu theo người dùng, tải lại vẫn giữ |
 | 2 | Labels | Bật tắt | — | Hiện tên Place |
-| 3 | Set Label Options | Liên kết | — | Chưa ghi chi tiết |
-| 4 | Map Starting Location | Lựa chọn | — | "Use Current Map Center", "Reset to Default"; không bấm vì đổi cài đặt |
+| 3 | Set Label Options | Liên kết | — | Mở hộp 1.14 |
+| 4 | Map Starting Location | Lựa chọn | — | Ghi thành phố theo IP. "Use Current Map Center": toast "Map Preferences Updated", dòng này đổi sang tên vùng đang xem; "Reset to Default" trả lại (`Chạy` lượt 4, ngoài ảnh) |
 
 ## 1.8 Nền vệ tinh
 
@@ -139,7 +139,42 @@ Mức: `Chạy (vị trí giả lập)`.
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
-| 1 | Marker xe, Place | Marker | — | 2 xe, 2 Place không gom, đè nhau; không đủ kết luận |
+| 1 | Marker xe, Place | Marker | — | 2 xe, 2 Place không gom, đè nhau. Lượt 3 đọc DOM: 15 nhà cung cấp, 4 xe vẫn không gom, không có marker dạng số; chưa biết ngưỡng lớn hơn |
+
+## 1.12 Lịch sử vị trí xe
+
+Mức: `Chạy`. Không có ảnh: màn hiện địa chỉ nên không lưu; bảng theo ghi chú chạy thử, chưa đối chiếu ảnh.
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Ô Search | Tìm | Chữ | Chưa ghi kết quả tìm |
+| 2 | Location Entry Date | Lọc nhanh | Ngày | Chưa ghi chi tiết |
+| 3 | Location Entry Type | Lọc nhanh | Chọn | Đúng 3 giá trị "Fuel Entry", "Service Entry", "Inspection"; mở được, không lưu lọc |
+| 4 | Sort | Nhãn | — | "Sort: Date - Newest First" |
+| 5 | Danh sách trái | Dòng | Chữ, ngày | Icon loại, ngày, địa chỉ |
+| 6 | Bản đồ phải | Bản đồ | — | Chưa ghi tương tác với danh sách |
+| 7 | Phân trang | Điều hướng | — | "Page 1 of 1"; Fleetio: 30 dòng mỗi trang |
+| 8 | Trạng thái rỗng | Chữ | — | "No results found." khi xe chưa có vị trí (E-017) |
+
+## 1.13 Bộ lọc bản đồ
+
+Mức: `Chạy`. Không có ảnh: lượt 3 đọc qua DOM; bảng theo ghi chú chạy thử, chưa đối chiếu ảnh.
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | VEHICLES | Nhóm lọc | Chọn | Vehicle Type, Vehicle Group, Vehicle Status, Vehicle Operator, Vehicle Assigned, Vehicle GPS Integration, Vehicle GPS Device Assigned, Vehicle Has Overdue Service Reminders |
+| 2 | VENDORS | Nhóm lọc | Chọn | Classification |
+| 3 | Cancel, Apply | Nút | — | Apply với Vehicle Type = Trailer còn 1 marker; Cancel chưa ghi kết quả |
+| 4 | Huy hiệu trên Filters | Số | Số | Hiện "1" khi có 1 bộ lọc; bộ lọc mất khi tải lại trang (E-015) |
+
+## 1.14 Nhãn marker xe
+
+Mức: `Chạy` lượt 4, đã trả về Name. Không có ảnh: đọc qua DOM; bảng theo ghi chú chạy thử, chưa đối chiếu ảnh.
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Vehicle Marker Label | Chọn một | Trường của xe | Mặc định Name; 5 giá trị Name, VIN/SN, Vehicle Type, License Plate, "Year, Make, Model". "Select field to display for Vehicle map marker labels. Falls back to Vehicle Name if selected field value is empty/blank." |
+| 2 | Cancel, Save | Nút | — | Save VIN/SN: xe có VIN hiện số VIN, xe không có hiện tên; tải lại vẫn giữ. Cancel chưa ghi kết quả |
 
 ## 2.1 Form địa điểm
 

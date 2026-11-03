@@ -2,6 +2,8 @@
 type: research
 keyword: "Fleetio: cấu hình trục, lắp, đảo, tháo, đọc lốp, lốp đầu kéo và lốp mooc"
 status: draft
+status_changed: 2026-11-03
+status_reason: "đã review upstream, không cần sửa"
 updated: 2026-11-03
 links:
   - docs/_research/fleetio/run-notes/tires.md
@@ -51,8 +53,8 @@ Fleetio chỉ có 3 trạng thái thật: **vị trí trống, có lốp, Spare*
 2. Asset Type chọn Trailer thì chỉ còn 7 cấu hình: Single, Tandem, Tri-Axle, Multi-Axle theo 2 hoặc 4 lốp mỗi trục. Tri-Axle 4 lốp mỗi trục là 12 ô + Spare. Vai trò trục: Trailer, Dead, Lifted, Other.
 3. Lắp như đầu kéo, nhưng Rotation Pattern báo "No options": không có mẫu đảo chuẩn cho mooc, phải tự ghép.
 4. Số km lốp mooc tính theo **đồng hồ của mooc**, không theo đầu kéo. Không bỏ được đồng hồ (chỉ có Miles, Kilometers, Hours). Đã chạy: đầu kéo tăng lên 20.500 km, mooc vẫn 3.500 km. Lắp khi mooc chưa có số đồng hồ nào trước ngày lắp thì số km lốp đứng ở "—".
-5. Liên kết mooc qua trường Linked Vehicles: hai chiều, chỉ là đường dẫn. Gỡ hoặc gắn lại không đổi lốp, không đổi đồng hồ, không có lịch sử ghép, không có ngày.
-6. Đổi lốp giữa đầu kéo và mooc, hai đầu kéo, hai mooc: **không có thao tác**. Tháo bên A, lắp mới bên B, gõ lại mã lốp, gai, áp suất, số km; hai lịch sử không nối nhau (cơ chế `Chạy` trên một xe, giữa hai xe là `Suy` vì tài khoản đã chạm trần số xe).
+5. Liên kết mooc qua trường Linked Vehicles: hai chiều, chỉ là đường dẫn. Gỡ hoặc gắn lại không đổi lốp, không đổi đồng hồ, không có lịch sử ghép, không có ngày. Một mooc nối được nhiều xe, kể cả xe Car, không cảnh báo, không biết đang kéo bởi đầu nào (`Chạy`). Archive xe làm mất liên kết, kể cả lần Archive bị từ chối; cấu hình trục vẫn còn, Edit trục khoá khi xe đã Archive (`Chạy`).
+6. Đổi lốp giữa đầu kéo và mooc, hai đầu kéo, hai mooc: **không có thao tác**. Tháo bên A, lắp mới bên B, gõ lại mã lốp, gai, áp suất, số km; hai lịch sử không nối nhau (cơ chế `Chạy` trên một xe, giữa hai xe là `Suy`, lượt 3 cũng chưa chạy).
 
 ## 2. Context
 
@@ -101,9 +103,10 @@ Tần suất là `GĐ`, chưa khảo sát.
 
 ### P2 — nice to have
 
-- L11 [Mới] [Gói: Bảo dưỡng đội xe] **Mẫu đảo chuẩn và mẫu đảo tuỳ biến.** Fleetio: `Chạy` mẫu chuẩn; lưu mẫu tuỳ biến `Không chạy`. Settings có 8 mẫu chuẩn, không mẫu nào cho mooc.
+- L11 [Mới] [Gói: Bảo dưỡng đội xe] **Mẫu đảo chuẩn và mẫu đảo tuỳ biến.** Fleetio: `Chạy` mẫu chuẩn; lưu mẫu tuỳ biến `Không chạy`. Mẫu thuộc cấp tài khoản, nằm ở Settings › Tire Management Settings; 8 mẫu chuẩn có icon khoá, không mẫu nào cho mooc (`Xem`).
 - L12 [Mới] [Gói: Bảo dưỡng đội xe] **Chép thông số sang vị trí khác.** Fleetio: `Chạy`, có lỗi xoá trắng dữ liệu đích, xem Mục 6.5.
-- L13 [Mới] [Gói: Bảo dưỡng đội xe] **Đọc áp suất tự động từ thiết bị.** Fleetio: `Chạy` phần đọc màn hình và `Docs`, bị khoá, chỉ 4x2 hoặc 4x4 có telematics. Không dùng được cho đầu kéo 6x4.
+- L13 [Mới] [Gói: Bảo dưỡng đội xe] **Đọc áp suất tự động từ thiết bị.** Fleetio: `Chạy` phần đọc màn hình và `Docs`, công tắc cấp tài khoản đang tắt, có khoá, chỉ 4x2 hoặc 4x4 có telematics, cập nhật hằng ngày. Không dùng được cho đầu kéo 6x4. Tên hãng thiết bị chỉ có trong tài liệu hãng.
+- L14 [Mới] [Cấu hình] **Import lốp khi khởi tạo khách.** Fleetio: `Docs`. Không thấy lối vào ở Tire Readings, Vehicle List, Settings; chưa loại trừ nơi chưa mở.
 
 ## 5. Core Flows (Happy Path)
 
@@ -192,6 +195,10 @@ Xem Mục 1.1 và [[docs/_research/fleetio/srs/fleetio-tires-states.md|States]].
 - **Đơn vị cố định:** gai /32 in, áp suất PSI dù xe đặt Metric; không thấy chỗ đổi (`Chạy`).
 - **Không có cách đọc nhiều lốp trên màn lốp:** Copy details không chép gai, áp suất; cách duy nhất là phiếu kiểm (`Chạy`).
 - **Không vào chi phí, không trừ kho:** phụ tùng giá 3.000.000 ₫ lắp bằng Tire Model không sinh Inventory Activity, Total Costs của xe không đổi theo giá lốp (`Chạy`).
+- **Mooc nối xe bất kỳ:** một mooc nối cả đầu kéo và xe Car, không kiểm loại xe. Với lốp mooc, không có gì chỉ ra đầu kéo nào đang kéo để tính km (`Chạy`). Điểm yếu, không nên chép.
+- **Mất liên kết khi Archive bị từ chối:** quan hệ đầu kéo, mooc mất mà không có dòng lịch sử (`Chạy`, xem [[docs/_research/fleetio/fleetio-vehicle.md|Phương tiện]]).
+- **Xe Archived vẫn giữ sơ đồ trục,** Edit trục khoá, Restore giữ nguyên (`Chạy`).
+- **Mẫu đảo, đọc tự động đều ở cấp tài khoản:** phép thử không tạo mẫu riêng cho mooc, nên mooc vẫn phải tự ghép khi đảo (`Xem`).
 
 ## 7. Validation, Limits & Wording
 
@@ -212,6 +219,7 @@ Xem Mục 1.1 và [[docs/_research/fleetio/srs/fleetio-tires-states.md|States]].
 |---|---|---|---|
 | Cấu hình trục | 27 dòng, không tự tạo | Cố định | Không có lựa chọn |
 | Wheel Positions của trình hướng dẫn | 4, 6, 8, 10 | Cố định | 12x4, 12x6 chỉ có ở danh sách "I know" |
+| Mẫu đảo chuẩn | Fleetio: 8, có khoá | Cấp tài khoản | Thêm qua "Add Tire Rotation Pattern", chưa chạy |
 | Số xe của gói dùng thử | Fleetio: 5 xe không tính xe mẫu | Theo gói | Không lưu được xe |
 
 ### 7.3 Wording samples (exact strings)
@@ -267,11 +275,13 @@ Xem Mục 1.1 và [[docs/_research/fleetio/srs/fleetio-tires-states.md|States]].
 | OQ-4 | Delta có đo gai định kỳ không, hay chỉ quản lý vị trí và serial? | File sơ đồ lốp của Delta |
 | OQ-5 | Lốp tháo ra có những đích nào: kho, xưởng, rác thải, đi đắp, chuyển xe khác? | Phân hệ FIAM (25/10/2026), mục Chốt chặn Sơ đồ lốp và Bình ắc quy |
 | OQ-6 | Số km lốp mooc tính theo GPS đầu kéo trong thời gian ghép có được Delta chấp nhận không? | Chưa có trong tài liệu khách gửi |
+| OQ-7 | Một mooc có được ghép đồng thời nhiều đầu kéo không, hay mỗi thời điểm chỉ một? Fleetio cho nối nhiều, không ngày hiệu lực; cần làm rõ để tính km lốp mooc. | Chưa có trong tài liệu khách gửi |
 
 ## 12. Next Steps
 
 - Đối chiếu Phụ lục A với `docs/vehicle-management/brainstorms/vehicle-management.md` và `repair-order`, chỉ đưa ý chưa có.
 - Hỏi Delta OQ-4, OQ-5, OQ-6 khi chi tiết hoá sơ đồ lốp.
+- Lưu mẫu đảo, đọc áp suất tự động chỉ chạy được khi có quyền đổi Cài đặt và tích hợp telematics; lượt 4 vẫn bị chặn.
 - Bộ SRS: [[docs/_research/fleetio/srs/fleetio-tires-spec.md|Spec]].
 
 ## Phụ lục A. So với nhu cầu Delta và đề xuất Invlogis

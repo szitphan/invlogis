@@ -70,9 +70,10 @@ erDiagram
         string vai_tro_truc
     }
     ROTATION_PATTERN {
-        string ten PK
+        string ten PK "cap tai khoan, o Settings"
         string config_id FK
-        string nhom "chuan hoac tuy bien"
+        string nhom "Standard co khoa, hoac tuy bien"
+        date ngay_tao
     }
     METER_ENTRY {
         string ma PK
@@ -98,7 +99,7 @@ erDiagram
     }
 ```
 
-Tire Readings là góc nhìn của TIRE ở lần đọc mới nhất, không phải bảng riêng (`Suy`). Lốp đã tháo mất khỏi Tire Readings, còn dòng TIRE_ACTIVITY (`Chạy`). Không thấy quan hệ TIRE với Work Order, kho hay chi phí (`Chạy`, với Work Order là `Chạy một phần`).
+Tire Readings là góc nhìn của TIRE ở lần đọc mới nhất, không phải bảng riêng (`Suy`). Lốp đã tháo mất khỏi Tire Readings, còn dòng TIRE_ACTIVITY (`Chạy`). Không thấy quan hệ TIRE với Work Order, kho hay chi phí (`Chạy`, với Work Order là `Chạy một phần`). `VEHICLE_LINK` là nhiều-nhiều: một mooc nối được nhiều xe, không có ngày hiệu lực (`Chạy`). `ROTATION_PATTERN` thuộc cấp tài khoản; một mẫu áp cho nhiều cấu hình, vd Standard 6x4 cho 6x2 / 6x4 / 6x6 (`Xem`), nên cột `config_id` đang vẽ là giản lược. Xe Archived giữ `AXLE_CONFIG` (`Chạy`).
 
 ## Đề xuất Invlogis: mô hình quả lốp
 

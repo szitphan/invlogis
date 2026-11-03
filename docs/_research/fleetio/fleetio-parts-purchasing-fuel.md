@@ -26,13 +26,13 @@ links:
 
 **Tầng:** Gói Bảo dưỡng đội xe, Gói Nhiên liệu, Gói Giám sát nhiên liệu theo `docs/_product/saas-core-vs-tenant.md`.
 
-**Nguồn và bằng chứng:** hai đợt chạy thật trên tài khoản dùng thử. Đợt 02/11/2026: phụ tùng `TEST-BRAKE-PAD-01`, kho `TEST-KHO-01`, nhà cung cấp `TEST-NCC-01`, Purchase Order #1, Work Order #100, hai phiếu dầu. Đợt 03/11/2026: kho `TEST-KHO-01`, `TEST-KHO-02`; phụ tùng `TEST-KHO-PT-A`, `TEST-KHO-PT-B`; ba nhà cung cấp `TEST-KHO-NCC-01`, `-02`, `-DAU`; PO #2 (Closed), PO #3 (Received, Full); WO #102; 14 phiếu dầu `TEST-KHO-F1` đến `F14` trên xe `TEST-KHO-01`. Chi tiết từng case: [[docs/_research/fleetio/run-notes/parts-purchasing-fuel.md|Nhật ký chạy]] và [[docs/_research/fleetio/srs/fleetio-parts-purchasing-fuel-spec.md|SRS]] Mục "Ma trận case".
+**Nguồn và bằng chứng:** hai đợt chạy thật trên tài khoản dùng thử. Đợt 02/11/2026: phụ tùng `TEST-BRAKE-PAD-01`, kho `TEST-KHO-01`, nhà cung cấp `TEST-NCC-01`, Purchase Order #1, Work Order #100, hai phiếu dầu. Đợt 03/11/2026: kho `TEST-KHO-01`, `TEST-KHO-02`; phụ tùng `TEST-KHO-PT-A`, `TEST-KHO-PT-B`; ba nhà cung cấp `TEST-KHO-NCC-01`, `-02`, `-DAU`; PO #2 (Closed), PO #3 (Received, Full); WO #102; 14 phiếu dầu `TEST-KHO-F1` đến `F14` trên xe `TEST-KHO-01`. Lượt 3 cùng ngày: thêm PO #4, đọc Pending PO Qty sau từng bước, chạy Make Adjustment từ Closed, Record History, Print, Print Worksheet, bộ lọc phiếu dầu, Find Shops. Lượt 4: lưu thật khi sửa đơn Full (PO #3) và đơn Draft (PO #5), đọc lại Pending PO Qty, rà nguồn Rating. Chi tiết từng case: [[docs/_research/fleetio/run-notes/parts-purchasing-fuel.md|Nhật ký chạy]] và [[docs/_research/fleetio/srs/fleetio-parts-purchasing-fuel-spec.md|SRS]] Mục "Ma trận case".
 
 **Cài đặt lúc chạy (chỉ đọc, không đổi):** Static Pricing, tắt tự đóng đơn, bật Track Inventory mặc định, bán kính cảnh báo dầu Fleetio: 2 dặm. Tài khoản chỉ có một người dùng, người đó có quyền duyệt.
 
 **Nhãn bằng chứng:** `Chạy` đã thao tác và thấy kết quả · `Xem` thấy trên giao diện, không thao tác · `Docs` theo tài liệu công khai của hãng · `Suy` suy ra · `GĐ` giả định.
 
-**Ngoài phạm vi:** Charging History (sạc xe điện) không xem theo yêu cầu user; Tools không mở trial theo lựa chọn của user.
+**Ngoài phạm vi:** Charging History (sạc xe điện) ngoài phạm vi theo yêu cầu user; Tools không mở trial theo lựa chọn của user.
 
 ## 3. User Types (preliminary)
 
@@ -61,7 +61,7 @@ links:
 - K1 [Mới] [Gói: Bảo dưỡng đội xe] **Đơn mua theo trạng thái, một nút chính mỗi bước:** Approve, Mark as Purchased, Receive, Close; ghi ai làm ở mỗi bước. Fleetio: `Chạy` hết Draft, Approved, Purchased, Partial, Full, Closed và các đường lùi. Áp vào `purchasing`.
 - K2 [Mới] [Gói: Bảo dưỡng đội xe] **Nhận hàng một phần nhiều lần;** lần sau tự gợi ý số còn lại. Fleetio: `Chạy`, nhận 5 trên 12 thì lần sau gợi ý 7; đợt trước nhận 4 rồi 6 trên 10.
 - K3 [Mới] [Gói: Bảo dưỡng đội xe] **Ba nơi đến khi nhận:** nhập kho, thêm vào lệnh đang có, tạo lệnh mới. Fleetio: `Chạy` nhập kho và lệnh đang có; lệnh mới `Chạy` đến bước huỷ form. Áp vào `purchasing`, `stock-movement`.
-- K4 [Mới] [Gói: Bảo dưỡng đội xe] **Thẻ tồn theo kho:** tồn hiện tại, điểm đặt lại, đang về theo đơn mua, đã xuất cho lệnh; bốn nút chỉnh, chuyển, đặt mua, menu. Fleetio: `Chạy`. Hợp với nhiều bãi đầu kéo, mooc. Áp vào `stock-movement`.
+- K4 [Mới] [Gói: Bảo dưỡng đội xe] **Thẻ tồn theo kho:** tồn hiện tại, điểm đặt lại, đang về theo đơn mua, đã xuất cho lệnh; bốn nút chỉnh, chuyển, đặt mua, menu. Fleetio: `Chạy`; đơn chưa sửa thì số đang về tính từ khi đã mua, nhưng đơn nháp đã sửa và lưu cũng vào số này, và số không giảm khi lùi trạng thái. Lấy bố cục thẻ, không lấy cách tính. Hợp với nhiều bãi đầu kéo, mooc. Áp vào `stock-movement`.
 - K5 [Mới] [Gói: Bảo dưỡng đội xe] **Sổ kho:** ngày, kho, loại biến động, chứng từ, lý do, nhà cung cấp, số biến động, số trước, số sau, người làm. Sáu loại Initial, Manual, Transfer, Purchase Order, Work Order, Bulk Update. Fleetio: `Chạy`.
 - K6 [Mới] [Gói: Bảo dưỡng đội xe] **Tìm phụ tùng hiện tồn từng kho** ngay trong ô chọn; phụ tùng chưa bật ở kho của đơn thì xám, có khoá. Fleetio: `Chạy`.
 - K22 [Mới] [Gói: Bảo dưỡng đội xe] **Sổ kho ghi bù khi sửa hoặc xoá dòng lệnh:** giảm số lượng dòng hoặc xoá dòng thì sổ tự cộng lại, loại Work Order kèm số lệnh. Fleetio: `Chạy`. Dễ đối soát khi kiểm kê.
@@ -78,20 +78,25 @@ links:
 - K14 [Mới] [Gói: Nhiên liệu] [Cấu hình] **Cờ trên phiếu dầu:** Cá nhân, Đổ một phần, Đặt lại mức dùng. Fleetio: `Chạy` cả ba. Đổ một phần được cộng dồn nên tiêu hao đúng; hợp đầu kéo đổ nhiều cây dầu dọc đường.
 - K15 [Mới] [Gói: Giám sát nhiên liệu] [Cấu hình] **Cảnh báo sai vị trí đổ dầu**, theo bán kính khách đặt. Fleetio: `Xem` cấu hình, bán kính 2 dặm; không chạy được vì cần định vị và thẻ. Bán kính là tham số mới, chưa có mã.
 - K16 [Mới] [Gói: Giám sát nhiên liệu] **Cảnh báo đổ vượt dung tích bình.** Fleetio: `Chạy` với phiếu nhập tay, chỉ cần đã khai dung tích, không cần tích hợp. Bản trước ghi sai là không kích hoạt khi nhập tay. Với đầu kéo cần khai đúng tổng bình.
-- K23 [Mới] [Gói: Bảo dưỡng đội xe] **Trả hàng bằng điều chỉnh trên đơn:** nhập số âm tới mức đã nhận, tồn giảm, đơn lùi về nhận một phần. Fleetio: `Chạy` ở trạng thái nhận đủ. Lấy cơ chế, bỏ cách cắt số không báo.
+- K23 [Mới] [Gói: Bảo dưỡng đội xe] **Trả hàng bằng điều chỉnh trên đơn:** nhập số âm tới mức đã nhận, tồn giảm, đơn lùi về nhận một phần. Fleetio: `Chạy` ở trạng thái nhận đủ và cả từ Closed; từ Closed đơn vẫn Closed, không hỏi lý do. Lấy cơ chế, bỏ cách cắt số không báo.
 - K24 [Mới] [Gói: Bảo dưỡng đội xe] **Nhận vào lệnh đi qua kho hai bước:** cộng kho trước, trừ khi lưu lệnh; huỷ form lệnh thì hàng vẫn ở kho. Fleetio: `Chạy`. Hợp phụ tùng đặt riêng cho xe nằm xưởng.
 - K25 [Mới] [Gói: Bảo dưỡng đội xe] **Điều chỉnh tồn hai ô liên động:** gõ số biến động hoặc số mới, ô kia tự tính; bắt buộc lý do từ danh sách, cho phép số lẻ. Fleetio: `Chạy`. Danh sách lý do là tham số mới, chưa có mã.
-- K26 [Mới] [Gói: Nhiên liệu] **Huỷ phiếu dầu bằng cờ Void:** số đồng hồ gạch ngang, không đẩy đồng hồ xe, không tính quãng đường. Fleetio: `Chạy`.
+- K26 [Mới] [Gói: Nhiên liệu] **Cờ Void để bỏ qua số đồng hồ sai:** số đồng hồ gạch ngang, không đẩy đồng hồ xe, không tính quãng đường. Fleetio: `Chạy`. Bản trước gọi là huỷ phiếu là sai: phiếu Void vẫn cộng vào tổng lít, tổng tiền Fuel History và chi phí xe.
+- K29 [Mới] [Gói: Bảo dưỡng đội xe] **Lịch sử bản ghi đơn mua:** từng lần chuyển trạng thái và đổi tiền, kèm người và giờ, không cần log riêng. Fleetio: `Chạy`; phần đọc được trong ảnh không có dòng số nhận.
+- K30 [Mới] [Gói: Nhiên liệu] **Phiếu dầu có nhà cung cấp tạo vị trí xe:** form không có ô vị trí, chọn nhà cung cấp thì xe có vị trí tại địa chỉ đó. Fleetio: `Chạy`, form không báo. Đối chiếu với `vehicle-telematics` trước khi lấy.
 
 ### P2 — nice to have
 
-- K17 [Mới] [Gói: Bảo dưỡng đội xe] **Cập nhật phụ tùng hàng loạt** (Bulk Manage Parts): tab theo kho, sửa ô là tự lưu, có in phiếu kiểm kê. Fleetio: `Chạy` sửa số và tắt kho; Print Worksheet `Xem`. Không hỏi lý do nên chỉ hợp kiểm kê có kiểm soát.
-- K18 [Mới] [Gói: Bảo dưỡng đội xe] **Đánh giá nhà cung cấp** bằng cột Rating. Fleetio: `Xem` cột.
-- K19 [Mới] [Gói: Nhiên liệu] **Nhập giao dịch từ thẻ nhiên liệu.** Fleetio: `Xem` cấu hình WEX chỉ đọc; không có màn gán thẻ thử được. Cần tìm đối tác tương ứng ở Việt Nam.
+- K17 [Mới] [Gói: Bảo dưỡng đội xe] **Cập nhật phụ tùng hàng loạt** (Bulk Manage Parts): tab theo kho, sửa ô là tự lưu, có in phiếu kiểm kê. Fleetio: `Chạy` sửa số, tắt kho, Print Worksheet. Phiếu in theo kho, có ô New Qty trống, hợp kiểm đếm tay ở bãi; một cú bấm tải 3 file. Không hỏi lý do nên chỉ hợp kiểm kê có kiểm soát.
+- K18 [Mới] [Gói: Bảo dưỡng đội xe] **Đánh giá nhà cung cấp** bằng cột Rating. Fleetio: `Chạy` đọc cột và bộ lọc: điểm là số; cả 20 nhà cung cấp hiện "Rating not available"; form sửa, danh sách, Find Shops không thấy nơi nhập hay sinh điểm; nguồn điểm chưa rõ, `Suy` không do người dùng nhập.
+- K19 [Mới] [Gói: Nhiên liệu] **Nhập giao dịch từ thẻ nhiên liệu.** Fleetio: `Xem` cấu hình WEX chỉ đọc; không có màn gán thẻ thử được; bộ lọc có trường số thẻ, mã và tên lái xe, mã xe của giao dịch nên dữ liệu thẻ gắn ở mức phiếu. Cần tìm đối tác tương ứng ở Việt Nam.
 - K20 [Mới] [Cấu hình] **Sạc xe điện:** phiên sạc, điện năng, đơn giá. Ngoài phạm vi theo yêu cầu user. Fleetio: `Xem` cột ở đợt đầu, không xem thêm.
 - K21 [Mới] [Gói: Bảo dưỡng đội xe] **Quản lý công cụ:** nhóm loại nhắc riêng, gán cho người, nhắc không tự lặp. Fleetio: `Docs`, là gói thêm; không mở trial theo lựa chọn của user.
 - K27 [Mới] [Gói: Bảo dưỡng đội xe] **Nhiều nhà cung cấp và lịch sử giá trên một phụ tùng:** thêm tay trong Purchase History, đơn mua tự thêm dòng, trang phụ tùng vẽ biểu đồ giá. Fleetio: `Chạy`.
-- K28 [Mới] [Gói: Bảo dưỡng đội xe] **Sao chép đơn:** mở form mới điền sẵn, giữ giá đơn cũ, số đơn tăng. Fleetio: `Chạy`.
+- K28 [Mới] [Gói: Bảo dưỡng đội xe] **Sao chép đơn:** mở form mới điền sẵn, giữ giá đơn cũ, số đơn tăng, không chép số đã nhận. Fleetio: `Chạy`. Giúp lặp đơn định kỳ phụ tùng đầu kéo, mooc.
+- K31 [Mới] [Gói: Nhiên liệu] **Bộ lọc phiếu dầu theo cảnh báo, cờ, nhà cung cấp:** ba loại cảnh báo, Personal, Void Status, trường xe và nhà cung cấp; thẻ tổng tính lại. Fleetio: `Chạy` với Vendor, Fuel Capacity Alert, Personal, xe.
+- K32 [Mới] [Cấu hình] **Tìm xưởng theo địa điểm rồi thêm thành nhà cung cấp:** Fleetio: `Chạy` đến bước tick, Add Vendor không bấm. Cần nguồn dữ liệu xưởng ở Việt Nam.
+- K33 [Mới] [Gói: Bảo dưỡng đội xe] **In đơn mua thành PDF:** thông tin đơn, người và ngày từng bước, dòng hàng, tổng. Fleetio: `Chạy`; tiền in kiểu US, khác web.
 
 ## 5. Core Flows (Happy Path)
 
@@ -105,18 +110,21 @@ links:
 4. Nhận hàng một hoặc nhiều lần, chọn số lượng và nơi đến. Tồn đổi ngay.
 5. Trả hàng bằng Make Adjustment nếu cần.
 6. Đóng đơn. Đóng được cả khi nhận thiếu, không ghi lý do.
+7. Sau khi đóng vẫn Make Adjustment được: số nhận và tồn đổi, đơn vẫn Closed (`Chạy`).
+
+Với đơn chưa sửa, số đang về bắt đầu tính ở bước 3, khi đánh dấu đã mua; đơn nháp đã sửa và lưu thì tính ngay (`Chạy`, PO #5). Lùi trạng thái không làm số này giảm (`Chạy`, chỉ đo trên PO #4).
 
 ```
-Draft ─> Approved ─> Purchased ─> Received, Partial ─> Received, Full ─> Closed
-  ^          │  ^        │             ^      │              │
-  └──────────┘  └────────┘             │      └── Closed     │
- Save as Draft   Unmark                └── Make Adjustment ──┘
+Draft ─> Approved ─> Purchased ─> Received, Partial ─> Received, Full ─> Closed ─┐
+  ^          │  ^        │             ^      │              │          ^       │
+  └──────────┘  └────────┘             │      └── Closed     │          └───────┘
+ Save as Draft   Unmark                └── Make Adjustment ──┘       Make Adjustment
 
 Draft ─> Pending Approval ─┬─ Approved      (Docs, tài khoản một người không thấy nút)
                            └─ Rejected
 ```
 
-Không có trạng thái hay nút huỷ riêng; thoát đơn chỉ có Close (từ Partial, Full) hoặc Delete. Closed không có nút mở lại.
+Không có trạng thái hay nút huỷ riêng; thoát đơn chỉ có Close (từ Partial, Full) hoặc Delete. Closed không có nút mở lại. Lượt 3 vẫn không chạy được nhánh chờ duyệt vì cần người thứ hai, cấm mời người ngoài.
 
 ### 5.2 Xuất phụ tùng cho lệnh
 
@@ -142,7 +150,7 @@ Lệnh Open ─> Thêm phụ tùng từ kho ─> Lưu ─> Tồn giảm + Sổ k
 2. Bật phụ tùng tại kho, nhập tồn đầu (ghi Initial).
 3. Nhập qua đơn hoặc chỉnh tay có lý do.
 4. Xuất khi lưu dòng lệnh; sửa hoặc xoá dòng thì sổ ghi bù.
-5. Bulk Manage để kiểm kê.
+5. Bulk Manage để kiểm kê: in phiếu theo kho, đếm tay, sửa ô số trên màn. Bước từ phiếu giấy về màn là `Suy`, không thao tác.
 
 ### 5.4 Ghi phiếu dầu
 
@@ -157,7 +165,8 @@ Lệnh Open ─> Thêm phụ tùng từ kho ─> Lưu ─> Tồn giảm + Sổ k
 Phiếu dầu ─┬─> Tổng tiền
            ├─> Quãng đường, tiêu hao, chi phí trên km (cần phiếu trước)
            ├─> Capacity Alert (số lít lớn hơn dung tích đã khai)
-           ├─> Chi phí xe (tính cả Personal, Void)
+           ├─> Chi phí xe, thẻ tổng Fuel History (tính cả Personal, Void)
+           ├─> Vị trí xe (khi chọn nhà cung cấp, form không báo)
            └─> Số km xe ─> Nhắc bảo dưỡng
 ```
 
@@ -175,6 +184,9 @@ Phiếu dầu ─┬─> Tổng tiền
 | D6 | 5.1 | Trả hàng | Make Adjustment số âm (Full, Closed) | Không có đường khác; Receive gõ âm thành nhận dương |
 | D7 | 5.4 | Đã khai dung tích và số lít lớn hơn | Capacity Alert | Không cảnh báo |
 | D8 | 5.4 | Phiếu trước là Partial | Cộng dồn số lít | Tính từ phiếu đó |
+| D9 | 5.1 | Đơn đã mua cần sửa | Sửa số, giá; kho, nhà cung cấp, số dòng khoá | Unmark rồi vào Edit, Pending không giảm |
+| D10 | 5.1 | Đã đóng mà phát hiện sai số nhận | Make Adjustment, vẫn Closed, không lý do | Không có đường mở lại đơn |
+| D11 | 5.4 | Chọn nhà cung cấp trên phiếu | Xe có vị trí tại địa chỉ đó | Vị trí không đổi |
 
 ### 6.2 Scenario Matrix
 
@@ -194,6 +206,13 @@ Bảng đủ từng case ở SRS Mục "Ma trận case". Dưới đây là các 
 | Có đơn tại kho | Tắt kho ở Bulk | Chặn | Gạt Active | Báo không tắt được | `Chạy` |
 | Bình 60 | Phiếu 100 lít | Vượt dung tích | Lưu | Capacity Exception Volume "100 liters" | `Chạy` |
 | Bình 60 | Phiếu 60 lít | Bằng dung tích | Lưu | Không cảnh báo | `Chạy` |
+| Closed, đã nhận 110 | Make Adjustment -1 | Không khoá sau đóng | Lưu | 109, vẫn Closed, tồn giảm, không lý do | `Chạy` |
+| Approved, đặt 12, chưa Edit, chưa qua Purchased | Đọc thẻ tồn | Chưa tính | — | Pending 0 | `Chạy` |
+| Draft, chưa từng duyệt, kho KHO-02 | Edit, lưu số 15, rồi 7 | Vào Pending khi lưu | Lưu | Pending KHO-02 từ 0 thành 15, rồi 7 | `Chạy`, PO #5 |
+| Full, đặt 12, nhận 12 | Edit, số đặt 15 | Không tính lại trạng thái | Lưu | Vẫn "Received, Full", không có Receive, không cộng Pending | `Chạy`, PO #3 |
+| Purchased, Pending 15 | Unmark, rồi về Draft | Không trừ | Bấm | Pending vẫn 15, mua lại không nhân đôi | `Chạy`, chỉ PO #4 |
+| Tồn 0, điểm đặt lại 0 | Bulk sửa | Out of Stock thắng | Lưu | Nhãn Out of Stock, Low Stock 0 | `Chạy` |
+| 14 phiếu có 1 Void 20 lít | Đọc thẻ tổng | Không loại Void | — | Total Volume tính cả 20 lít | `Chạy` |
 
 ### 6.3 State Transitions
 
@@ -208,6 +227,7 @@ Bảng đủ từng case ở SRS Mục "Ma trận case". Dưới đây là các 
 | Đơn mua | Received, Full | Closed | Close | Không có nút mở lại | `Chạy` |
 | Đơn mua | Draft | Pending Approval | Submit for Approval | Chưa biết | `Docs` |
 | Đơn mua | Pending Approval | Approved, Rejected | Người duyệt | Gửi lại Rejected chưa biết | `Docs` |
+| Đơn mua | Closed | Closed | Make Adjustment | Không đổi trạng thái, số nhận và tồn vẫn đổi | `Chạy` |
 | Tồn tại kho | Không nhãn | Low Stock | Tồn từ điểm đặt lại trở xuống, trên 0 | Có, tồn vượt điểm | `Chạy` |
 | Tồn tại kho | Low Stock, không nhãn | Out of Stock | Tồn từ 0 trở xuống | Có | `Chạy` |
 
@@ -223,6 +243,7 @@ Trạng thái đơn mua do hệ thống cố định, trang cấu hình không c
 | Xoá dòng lệnh đã trừ kho | Sổ cộng lại đủ số (`Chạy`) | — | Tự động |
 | Mở lại lệnh đã hoàn thành | Sổ không đổi, Service Entry mất liên kết | Sửa rồi hoàn thành lại | Chưa thử hoàn thành lại |
 | Xoá cả lệnh đã trừ kho | Chưa biết, đã huỷ ở hộp xác nhận | — | OQ-9 |
+| Bỏ đánh dấu đã mua | Đơn về Approved, số đang về thừa, Purchase Date, Purchased By vẫn còn trên PDF | Mua lại, không nhân đôi | Không có cách trừ số đang về đã thấy (`Chạy`, chỉ PO #4) |
 
 ### 6.5 Other Edge Cases
 
@@ -237,7 +258,16 @@ Trạng thái đơn mua do hệ thống cố định, trang cấu hình không c
 - **Số đồng hồ:** lùi cùng ngày không chặn (2.900 khi đã có 4.000), lùi ngày với số cao bị chặn, lùi ngày với số thấp lưu được và không đổi phiếu sau (`Chạy`).
 - **Cảnh báo dầu không tự gỡ:** sửa phiếu từ 100 xuống 50 lít, cảnh báo vẫn còn, cột vẫn 100 (`Chạy`).
 - **Enter trong ô Country:** vừa chọn vừa lưu form nhà cung cấp, ba lần đều vậy; dễ tạo bản ghi sớm (`Chạy`).
-- **Không có trường thay thế, tương thích xe** trên form phụ tùng; chỉ có Replaced Parts trong bảo hành ở lệnh (`Xem`, chưa tìm ở nơi khác).
+- **Không có trường thay thế, tương thích xe** trong form, danh sách, menu phụ tùng; chỉ có Replaced Parts trong bảo hành ở lệnh, và cột Linked Service Tasks nối phụ tùng với đầu việc (`Chạy` phần form; trang Linked Service Tasks chưa rà).
+- **Không nên học, số đang về không giảm khi lùi đơn:** lùi Purchased về Approved rồi Draft, Pending vẫn 15 (`Chạy`, chỉ PO #4). Số hàng đang về sai dẫn tới quyết định đặt hàng sai.
+- **Không nên học, đơn nháp vào số đang về:** Draft đã sửa và lưu làm Pending tăng dù chưa duyệt; đọc thẻ tồn sẽ tin có hàng đang về (`Chạy`, PO #5). Kết luận trước đó "chỉ tính từ Purchased" chỉ đúng với đơn chưa sửa.
+- **Không nên học, đơn báo đủ hàng khi đang thiếu:** tăng số đặt ở Full vẫn "Received, Full", không có Receive (`Chạy`, PO #3).
+- **Không nên học, báo cáo đơn cộng cả Draft:** Total Amount của báo cáo đơn mua gồm đơn nháp; biểu đồ theo nhà cung cấp lệch thang ở VND (`Chạy`).
+- **Không nên học, đơn đã đóng vẫn đổi số nhận và tồn:** Make Adjustment -1 từ Closed, không mở lại, không lý do (`Chạy`).
+- **Không nên học, Void vẫn cộng vào tổng:** Void chỉ bỏ qua số đồng hồ, không phải huỷ phiếu; với đối soát dầu đầu kéo đây là sai số âm thầm (`Chạy`).
+- **Không nên học, Print Worksheet:** một cú bấm tải 3 file giống hệt (`Chạy`). PDF đơn và Record History hiện tiền kiểu US, web kiểu Việt Nam.
+- **Tô đỏ tổng:** danh sách Parts tô đỏ Total Quantity 121 chỉ vì một kho hết, không nói kho nào (`Chạy`).
+- **Bộ lọc khác form:** ô Vendor ở Fuel History liệt kê mọi nhà cung cấp, form phiếu chỉ cho nhà cung cấp có Fuel (`Chạy`).
 - **Giới hạn gói:** thanh "5 of 5" trên Vehicles; Save Vehicle quay mãi, không báo lỗi, xe không được tạo (`Chạy`). Giới hạn 5 xe là `Suy`.
 
 ### 6.6 Giải pháp đáng học
@@ -249,6 +279,10 @@ Trạng thái đơn mua do hệ thống cố định, trang cấu hình không c
 | Nhận thẳng vào lệnh đi qua kho hai bước, hàng không mất khi huỷ form | Không mất dấu nhập xuất | Phụ tùng đặt riêng cho xe nằm xưởng |
 | Gộp phiếu không đầy khi tính tiêu hao, Reset khi thiếu phiếu | Tiêu hao không bị sai vì đổ lẻ | Đầu kéo đổ nhiều cây dầu dọc đường |
 | Capacity Alert chỉ cần dung tích bình, không cần tích hợp | Rẻ, chạy được ngay | Đầu kéo cần khai đúng tổng bình |
+| Record History ghi chuyển trạng thái và đổi tiền từng lần | Không cần log riêng cho đối soát đơn mua | `purchasing` |
+| Worksheet kiểm kê in theo từng kho, có ô New Qty trống | Đếm tay ở bãi không cần màn hình | `inventory-count` |
+| Make a Copy đơn, không chép số đã nhận | Lặp đơn định kỳ nhanh | Phụ tùng đầu kéo, mooc |
+| Đổi kho, nhà cung cấp trên Draft không xoá dòng hàng | Đỡ nhập lại | `purchasing` |
 
 ### 6.7 Điểm yếu, Invlogis nên làm khác
 
@@ -262,6 +296,16 @@ Trạng thái đơn mua do hệ thống cố định, trang cấu hình không c
 | Số đồng hồ lùi cùng ngày không chặn | Cảnh báo khi số thấp hơn phiếu đã có |
 | Bulk sửa tồn không hỏi lý do | Bắt lý do hoặc gắn đợt kiểm kê |
 | Enter lưu form sớm ở ô chọn | Enter chỉ chọn, nút Lưu mới lưu |
+| Số đang về không giảm khi lùi đơn | Tính lại số đang về theo trạng thái hiện tại |
+| Đơn nháp đã sửa vào số đang về | Tính từ trạng thái, không ghi lúc lưu form; đơn nháp không vào số đang về |
+| Đơn Full tăng số đặt không tính lại trạng thái | Tính trạng thái từ số đặt, số nhận mỗi lần sửa; còn thiếu thì nhận tiếp được |
+| Báo cáo đơn cộng cả Draft vào tổng | Mặc định loại nháp, hoặc tách tổng theo trạng thái |
+| Đơn Closed vẫn đổi số nhận, tồn, không lý do | Muốn đổi phải mở lại hoặc lập phiếu điều chỉnh có lý do |
+| Void vẫn cộng vào tổng lít, tổng tiền | Tách rõ bỏ qua đồng hồ và huỷ phiếu; phiếu huỷ không vào thống kê |
+| Sửa đơn đã mua không cảnh báo đã gửi nhà cung cấp | Cảnh báo, ghi lại bản đã gửi |
+| Print Worksheet tải 3 file; PDF, lịch sử khác định dạng tiền với web | Một cú bấm một file; một định dạng tiền ở mọi nơi |
+| Tô đỏ tổng khi một kho hết, không nói kho nào | Ghi rõ kho nào hết |
+| Lịch sử không thấy dòng số nhận | Ghi cả số nhận và số điều chỉnh vào lịch sử đơn |
 
 ## 7. Validation, Limits & Wording
 
@@ -274,7 +318,8 @@ Trạng thái đơn mua do hệ thống cố định, trang cấu hình không c
 | Phụ tùng | Mã phụ tùng bắt buộc và duy nhất | `Xem` |
 | Kho | Tên duy nhất | `Chạy` |
 | Điều chỉnh tồn | Lý do bắt buộc, Save khoá khi trống | `Chạy` |
-| Điểm đặt lại | Tài liệu nói phải lớn hơn 0; thực tế lưu được 0 | `Chạy` |
+| Điểm đặt lại | Tài liệu nói phải lớn hơn 0; thực tế lưu được 0; tồn 0 thì Out of Stock | `Chạy` |
+| Sửa đơn đã mua | Khoá nhà cung cấp, kho; không thêm bớt dòng; không cảnh báo | `Chạy` |
 | Nhà cung cấp | Bắt buộc tên, địa chỉ, thành phố, tỉnh, mã bưu chính, quốc gia; phân loại không bắt buộc | `Chạy` |
 | Phiếu dầu | Bắt buộc xe, ngày, số đồng hồ (kể cả Void), số lít; 0 lít vẫn lưu được | `Chạy` |
 | Hoàn thành lệnh | Cần Started At, Start Odometer theo cài đặt tài khoản | `Chạy` |
@@ -288,6 +333,9 @@ Mã bưu chính bắt buộc không hợp với Việt Nam; Invlogis không nên
 | Bán kính cảnh báo đổ dầu | Fleetio: 2 dặm, có Disabled | Mỗi giao dịch | Gắn cảnh báo (`Docs`, chưa chạy) |
 | Số xe trên tài khoản dùng thử | Fleetio: "5 of 5" | Tài khoản | Save Vehicle quay mãi, không báo lỗi (`Chạy`, giới hạn `Suy`) |
 | Số lý do điều chỉnh | Fleetio: 11 | — | Broken, Checked Inventory, Expired, Found, Lost, Miscellaneous, Received, Sold, Stolen, Transferred, Used |
+| Nhóm OR trong bộ lọc | Fleetio: 3 | Một bộ lọc | Câu trên panel; vượt chưa thử |
+| Khoảng ngày mặc định Fuel History | Fleetio: 30 ngày gần nhất | Một lần mở | Điều kiện có biểu tượng khoá |
+| Loại cảnh báo dầu | Fleetio: 3 | — | Vendor Location Alert, Fuel Capacity Alert, Missing GPS Location Alert |
 
 ### 7.3 Wording samples (exact strings)
 
@@ -302,6 +350,8 @@ Mã bưu chính bắt buộc không hợp với Việt Nam; Invlogis không nên
 | Điều chỉnh đơn | "was successfully adjusted" |
 | Đóng đơn | "was successfully closed" |
 | Sửa đơn | "was successfully updated" |
+| Tạo đơn từ bản sao | "Purchase Order was successfully created" |
+| Worksheet | "Complete: Bulk Manage Parts Worksheet" |
 | Sửa phụ tùng | "Part was successfully updated" |
 | Chuyển kho | "Parts transfer was successful." |
 | Bulk | "All changes saved" |
@@ -321,6 +371,12 @@ Mã bưu chính bắt buộc không hợp với Việt Nam; Invlogis không nên
 | Xoá dòng lệnh | "Are you sure you want to permanently delete this line item?" |
 | Xoá lệnh | "All data will be lost forever." |
 | Phiếu không có nơi đổ | "Location is unknown or not available" |
+| Make Adjustment, câu đầy đủ | "Check the box to make an Adjustment. Negative values are allowed up to the quantity received on this order." |
+| Lịch sử trạng thái | "State changed from Received Partial to Closed" |
+| In đơn | "Preparing your PDF..." |
+| Tìm xưởng | "Select service shops and easily save them to your vendors list" |
+| Bộ lọc | "You can create up to 3 "OR" filter types. To add more filters, use "AND" within the filter builder." |
+| Rating | "Rating not available" |
 
 #### Error messages
 
@@ -348,6 +404,8 @@ Mã bưu chính bắt buộc không hợp với Việt Nam; Invlogis không nên
 | Nhận thẳng vào lệnh làm mất dấu nhập xuất | Trung | Ghi đủ hai bút toán như Fleetio |
 | Phương pháp giá khác kế toán Việt Nam | Cao | Hỏi kế toán trước |
 | Học theo bảng dữ liệu Fleetio với tiền không có phần lẻ | Cao | Kiểm thử VND trên mọi trang tổng hợp |
+| Số đang về thừa làm đặt hàng sai | Trung | Tính lại theo trạng thái hiện tại của đơn |
+| Phiếu Void làm sai số đối soát dầu | Cao | Tách rõ huỷ phiếu khỏi bỏ qua đồng hồ |
 
 ## 10. Success Criteria (preliminary)
 
@@ -366,8 +424,14 @@ Mã bưu chính bắt buộc không hợp với Việt Nam; Invlogis không nên
 | OQ-5 | Có cần cảnh báo vị trí đổ dầu ở cây dầu ngoài không? | Mở | Chưa có trong tài liệu khách gửi |
 | OQ-6 | Fleetio huỷ đơn, đóng thiếu, nhận vượt, trả hàng thế nào? | Đã trả lời: không có nút huỷ sau Approved, chỉ Delete hoặc lùi Draft; đóng được khi nhận thiếu; nhận vượt được; trả hàng qua Make Adjustment ở Full và Closed. Phần Rejected chuyển sang OQ-8 | Không áp dụng |
 | OQ-7 | Xoá dòng phụ tùng có hoàn kho không? | Đã trả lời: có, sổ +20, tồn về 9,5. Phần xoá lệnh chuyển sang OQ-9 | Không áp dụng |
-| OQ-8 đến OQ-20 | Các điểm Fleetio chưa thử được | Mở, liệt kê ở SRS Mục 12 | Không áp dụng |
+| OQ-8 đến OQ-12, OQ-14, OQ-16, OQ-18, OQ-20 | Các điểm Fleetio chưa thử được. Lượt 3 thử lại OQ-8, OQ-11, OQ-14, OQ-20: không chạy được vì cần người thứ hai, đổi cài đặt tài khoản, tích hợp | Mở, liệt kê ở SRS Mục 12 | Không áp dụng |
+| OQ-13 | Đơn Draft có tính vào Pending PO Qty không? | Một phần, mở lại: Draft chưa sửa không tính; Draft đã sửa và lưu thì tính. Thao tác nào kích hoạt và Approved đã sửa chưa đo | Không áp dụng |
+| OQ-15 | Find Shops, Network Status: Invite làm gì? | Một phần: Find Shops tìm cửa hàng kèm bản đồ; Invite không bấm vì mời người ngoài, còn mở | Không áp dụng |
+| OQ-17 | Tồn về 0 khi điểm đặt lại bằng 0 thì nhãn gì? | Đã trả lời: Out of Stock, Low Stock không hiện | Không áp dụng |
+| OQ-19 | Thay thế, tương thích xe có ở nơi khác không? | Một phần: không có trong form, danh sách, menu phụ tùng; trang Linked Service Tasks chưa rà | Không áp dụng |
 | OQ-21 | Khi nhận vượt, trả quá số, đóng thiếu, Delta muốn chặn, cảnh báo hay chỉ ghi nhận? | Mở | Chưa có trong tài liệu khách gửi |
+| OQ-22 đến OQ-26 | Record History có ghi số nhận không; vì sao Archive mờ; nguồn điểm Rating; công thức Pending khi lùi; Missing GPS Location Alert kích hoạt khi nào | Mở, liệt kê ở SRS Mục 12 | Không áp dụng |
+| OQ-27 | Delta có cần sửa số nhận sau khi đóng đơn không, nếu có thì phải mở lại hay lập phiếu điều chỉnh? Fleetio: sửa thẳng, không lý do | Mở | Chưa có trong tài liệu khách gửi |
 
 ## 12. Next Steps
 

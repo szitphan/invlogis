@@ -8,7 +8,7 @@ updated: 2026-11-03
 
 # Bản đồ, gán việc — User flow
 
-`stage` ghi theo lựa chọn của user: tự chốt, xem ở bản cuối (02/11/2026). Mục 1 và Mục 2 cập nhật theo chạy thử 03/11/2026.
+`stage` ghi theo lựa chọn của user: tự chốt, xem ở bản cuối (02/11/2026). Mục 1 và Mục 2 cập nhật theo chạy thử 03/11/2026, gồm lượt 3, lượt 4.
 
 ## 1. Sơ đồ tổng
 
@@ -27,10 +27,23 @@ flowchart TD
     gray["1.9 Nền xám"]
     lab["1.10 Nhãn địa điểm, đa giác"]
     zo["1.11 Zoom xa, không gom cụm"]
+    lh["1.12 Lịch sử vị trí xe"]
+    flt["1.13 Bộ lọc bản đồ"]
+    lbl["1.14 Nhãn marker xe"]
     q["Form thêm nhanh"]
     iss["Trang sự cố"]
     v["Trang xe"]
     e2["E-002 Không có thông tin vị trí hiện tại"]
+    e14["E-014 Chọn nhầm kết quả tìm"]
+    e15["E-015 Mất bộ lọc khi tải lại"]
+    e16["E-016 Danh sách lệch bản đồ"]
+    e17["E-017 Chưa có lịch sử vị trí"]
+    fu["Form phiếu dầu"]
+    sv["Form phiếu dịch vụ"]
+    e13["E-013 Nhà cung cấp không có phân loại"]
+    nv["Form nhà cung cấp"]
+    e18["E-018 Enter lưu luôn nhà cung cấp"]
+    e19["E-019 Vị trí xe nhảy theo địa chỉ khai sai"]
     l["2.4 Danh sách địa điểm"]
     f["2.2 Thêm địa điểm, vùng tròn"]
     f2["2.3 Thêm địa điểm, đa giác"]
@@ -72,6 +85,33 @@ flowchart TD
     s -->|"Việc, đã có"| g
     s -->|"Tự động hoá"| au
     s -->|"Nộp phiếu kiểm"| ins
+    s -->|"Nhập phiếu dầu"| fu
+    s -->|"Nhập phiếu dịch vụ"| sv
+    fu -->|"Lưu, có nhà cung cấp"| lh
+    fu -->|"Lưu, không có nhà cung cấp"| z
+    sv -->|"Nhà cung cấp không phân loại"| e13
+    e13 -->|"Tạo nhà cung cấp phân loại Service"| nv
+    nv -->|"Enter ở ô Country"| e18
+    e18 -.->|"Sửa, tick Service"| nv
+    nv -.->|"Lưu đủ"| sv
+    sv -->|"Lưu, có nhà cung cấp Service"| lh
+    lh -->|"Địa chỉ khai sai"| e19
+    e19 -->|"Kết thúc"| z
+    a -->|"Tắt hết lớp"| e1
+    a -->|"Tìm, Enter ngay"| e14
+    e14 -.->|"Chọn đúng dòng"| a
+    a -->|"Bộ lọc"| flt
+    flt -.->|"Áp dụng hoặc huỷ"| a
+    flt -->|"Tải lại trang"| e15
+    e15 -.->|"Lọc lại"| flt
+    a -->|"Bỏ tick, kéo tay"| e16
+    e16 -.->|"Tick lại"| a
+    opt -->|"Nhãn marker xe"| lbl
+    lbl -.->|"Huỷ"| opt
+    v -->|"Lịch sử vị trí"| lh
+    lh -->|"Xe chưa có lần ghi"| e17
+    e17 -->|"Kết thúc"| z
+    lh -->|"Kết thúc"| z
     a -->|"Không có xe trong khung"| e1
     e1 -.->|"Di chuyển bản đồ, đổi lọc"| a
     a -->|"Khung có xe"| a2
@@ -171,6 +211,9 @@ Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221937`, chỉ 
 | 1.9 | Nền xám | fleet-map-grayscale | Grayscale | Có |
 | 1.10 | Nhãn địa điểm, đa giác | fleet-map-labels-polygon | Labels bật | Có |
 | 1.11 | Zoom xa, không gom cụm | fleet-map-zoomed-out-no-cluster | Marker đè nhau | Có |
+| 1.12 | Lịch sử vị trí xe | vehicle-location-history | Có dữ liệu, No results | Không, có địa chỉ |
+| 1.13 | Bộ lọc bản đồ | fleet-map-filters | Mở, đang lọc | Không, đọc DOM |
+| 1.14 | Nhãn marker xe | fleet-map-label-options | Mở, đã lưu | Không, đọc DOM |
 | 2.1 | Form địa điểm | place-new | Trống | Có |
 | 2.2 | Form địa điểm, vùng tròn | place-new-form | Có toạ độ | Có |
 | 2.3 | Form địa điểm, đa giác | place-new-polygon | Radius khoá | Có |
@@ -197,4 +240,4 @@ Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221937`, chỉ 
 | 5.1 | Phiếu có vị trí | inspection-submission-location | Vị trí giả lập | Có |
 | 5.2 | Phiếu Pre-trip | inspection-pretrip-simulated | Vị trí giả lập | Có |
 
-Hộp hoàn thành việc, form phiếu kiểm, form thêm nhanh: không có ảnh riêng trong nhóm này. Street View: chưa vào được.
+Hộp hoàn thành việc, form phiếu kiểm, form thêm nhanh, form phiếu dầu, form phiếu dịch vụ, form nhà cung cấp: không có ảnh riêng trong nhóm này. Street View: chưa vào được.

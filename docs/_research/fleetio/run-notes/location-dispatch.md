@@ -86,6 +86,14 @@ Kết quả thấy được: Mọi phiếu `location_exception` = false. Gói ti
 Kết luận đúng mức: trên web không có dữ liệu vị trí từng mục nên không tạo được Location Exception. Suy luận: luật này có lẽ cần dữ liệu từng mục từ Fleetio Go (chưa kiểm được). Không so giữa các phiếu với nhau: phiếu lệch xa phiếu trước vẫn không bị gắn cờ.
 Bất ngờ: Không chặn được 1 phiếu có toạ độ giả. Đồng hồ có "must be less than 2,499 or marked as void" kiểm theo lịch sử đồng hồ dù dòng dưới ghi "Last updated: 2,999 km (Today)".
 Màn mới: inspection-submission-location — images/inspection-submission-location.jpg; inspection-pretrip-simulated — images/inspection-pretrip-simulated.jpg.
+
+## Location Exception trên Fleetio Go — Chạy một ca không vi phạm (03/11)
+Các bước đã làm: User nộp `TEST - Pre-trip inspection` cho TEST-XE-01 trên app Fleetio Go (phiếu #126102722, 3m 36s, 21 mục, không mục lỗi). Đọc phản hồi của chính phiếu, chỉ lấy tên trường và khoảng cách tương đối, không chép toạ độ.
+Kết quả thấy được: `submitted_from` = Fleetio Go. 21/21 mục có cặp `latitude`, `longitude` riêng, gồm 7 điểm khác nhau, cách nhau tối đa 37 m. `location_exception` = false, `are_items_too_close` = false, `items_completed_too_far_away_count` = 0. `starting_latitude` vẫn null dù phiếu có giờ bắt đầu.
+Kết luận đúng mức: Fleetio Go ghi vị trí từng mục, đúng phần web không có; suy luận cũ có cơ sở. Phiếu có 2 chỉ báo riêng: mục quá gần nhau và số mục quá xa. Chưa có ca dương nên chưa biết ngưỡng, cũng chưa thấy cờ bật thật.
+Bất ngờ: Số đồng hồ 3.100 km trên phiếu có icon lạ, xe vẫn hiện 2.999 km; chưa kiểm vì sao.
+Không chụp ảnh màn này: bản đồ hiện tên đường thật, ảnh mục Interior Cleanliness chụp màn hình laptop của user. Phải rà trước khi đưa lên Figma hoặc commit.
+Dữ liệu TEST đã tạo: phiếu #126102722 (user nộp).
 Dữ liệu TEST đã tạo: phiếu #126054432; #126054560 cho TEST-XE-LOP (10.764, 106.776). TEST-XE-LOP đã được thêm vào biểu mẫu Quick check (Add Vehicles › Specific Vehicle).
 
 ## Fleet Map có marker — Chạy (vị trí giả lập), gom cụm Một phần
@@ -117,7 +125,108 @@ Dữ liệu TEST đã tạo: Issue #39 "TEST - su co tao tu Quick Add ban do".
 Tài liệu công khai developer.fleetio.com có `POST /vehicles/:id/location_entries` (tạo mới trả 201, 422 nếu không hợp lệ), bản tương tự cho Equipment; khuyên dùng Bulk API khi nhiều. Trang tóm tắt không lộ tên trường toạ độ. Không tạo key, không gọi thử.
 
 ## Việc chưa làm
-- Fleetio Go trên điện thoại: chưa kiểm vị trí từng mục, Location Exception thật.
+- Fleetio Go trên điện thoại: đã kiểm vị trí từng mục (#126102722); còn thiếu ca Location Exception bật thật để biết ngưỡng.
 - Chế độ Street View.
 - Gom cụm với nhiều hơn 2 xe (không dùng dữ liệu Sample, không tạo thêm).
 - Phiếu #126053573 và phiếu của agent khác (vd TEST-MOOC-LOP nhóm Phương tiện) mang vị trí thật của máy tại Hà Nội, không xoá theo quy định.
+
+# Lượt 3 (03/11)
+
+Gói xe 5/5, không tạo xe mới. Không lưu ảnh nào có vị trí hoặc địa chỉ thật; không ghi toạ độ, địa chỉ. Bản đồ mở theo IP cấp thành phố: Map Options ghi "MAP STARTING LOCATION: Hanoi, Hanoi". Các bước bản đồ chạy bằng đọc DOM; ảnh tạm chỉ chụp ở vùng dữ liệu Sample, không lưu.
+
+## Nguồn vị trí: phiếu dầu có nhà cung cấp tạo vị trí xe — Chạy
+Các bước đã làm: tab Location History (More, "Location History") của TEST-KHO-01; tạo 1 phiếu dầu cho TEST-DAUKEO-2 (trước đó chưa có vị trí) chọn TEST-KHO-NCC-02; mở lại tab của xe đó; mở Fleet Map.
+Kết quả thấy được:
+- Bộ lọc "Location Entry Type" có đúng 3 giá trị: "Fuel Entry", "Service Entry", "Inspection".
+- TEST-KHO-01: 14 phiếu dầu nhưng chỉ 1 Location Entry "Fuel Entry", cùng giờ với phiếu chọn TEST-KHO-NCC-DAU (các phiếu nhìn thấy khác không có nhà cung cấp).
+- TEST-DAUKEO-2: sau khi lưu phiếu #229944275, Location History có 1 dòng "Fuel Entry"; xe xuất hiện trên Fleet Map "5m ago".
+- Panel xe TEST-KHO-01: "Last Known Location", Source "Fuel Entry #229915727", Status "Stale".
+- TEST-XE-01: 12 dòng đều "Inspection". TEST-SUA-01: "No results found."
+Bất ngờ: **sửa FR-004**. Form phiếu dầu không có ô vị trí, nhưng chọn nhà cung cấp là tạo vị trí xe tại nhà cung cấp, không cần thiết bị hay tích hợp. Không báo gì trên form. Xe hiện như đang ở cây dầu dù đó chỉ là địa chỉ khai. Địa chỉ nhà cung cấp TEST giả vẫn định vị được ra một điểm (không rõ cách quy đổi).
+Service Entry: Không chạy được phần tạo. Form Service Entry chỉ cho chọn NCC có phân loại Service; NCC TEST đều không có, chọn "TEST" chỉ hiện "Create "TEST"". Không đổi NCC. Chỉ thấy loại ở bộ lọc.
+Màn mới: vehicle-location-history (không lưu ảnh vì có địa chỉ; phần tử: ô Search, "Location Entry Date", "Location Entry Type", "Sort: Date - Newest First", danh sách trái icon loại + ngày + địa chỉ, bản đồ phải, "Page 1 of 1").
+Dữ liệu TEST đã tạo: Fuel Entry #229944275 (TEST-DAUKEO-2), đồng hồ xe thành 100 km. Form Service Entry nháp của xe đó chưa lưu.
+
+## Lịch sử vị trí — Chạy
+Xem mục trên. Lọc theo loại mở được; không lưu lọc. Phân trang theo trang 30 dòng.
+
+## Tìm và lọc Fleet Map — Chạy
+Các bước đã làm: gõ "TEST" ở ô tìm; mở Filters; lọc Vehicle Type = Trailer; tải lại trang.
+Kết quả thấy được:
+- Ô tìm: "10 results available for search term TEST" gồm NCC, xe, Place; xếp NCC trước. Gõ "TEST-KHO-01" rồi Enter chọn nhầm NCC TEST-KHO-NCC-01 vì khớp mờ và NCC đứng đầu; phải đi xuống 4 dòng mới tới xe.
+- Xe chưa có vị trí vẫn nằm trong kết quả (TEST-SUA-01).
+- Filters đủ: VEHICLES: Vehicle Type, Vehicle Group, Vehicle Status, Vehicle Operator, Vehicle Assigned, Vehicle GPS Integration, Vehicle GPS Device Assigned, Vehicle Has Overdue Service Reminders. VENDORS: Classification. Nút Cancel, Apply.
+- Lọc Trailer: còn 1 marker TEST-MOOC-LOP, huy hiệu "1" trên Filters.
+- Tải lại trang: **bộ lọc mất**, quay về 2 kết quả (khác Map Options được giữ).
+
+## Lớp bản đồ — Một phần
+Bật Vendors: thêm marker NCC, danh sách có thêm tab Places, Vendors. Bấm nút Vehicles lần đó marker xe vẫn còn trong DOM: chưa kết luận lại được phần tắt xe (lượt trước đã thử bật tắt). Lớp Shops riêng: không thấy nút; chú giải có "Preferred Shop", "Premier Fleetio Vendor", "In-Network Shop", "Out-of-Network Shop", "Vendor". Giữ Docs phần Shops.
+
+## "Update list when map moves" — Chạy (trả lời OQ-6 nhóm Vị trí)
+Làm ở vùng dữ liệu Sample, chỉ đọc.
+| Ô | Thao tác | Danh sách | Marker |
+|---|---|---|---|
+| Tick | Kéo bản đồ ra vùng không có gì | "0 results", "No results found in this area" | — |
+| Bỏ tick | Kéo về vùng có 2 NCC | Vẫn "0 results", không đổi | Thấy trên bản đồ |
+| Tick lại | Không kéo | Ra ngay 2 kết quả | Thấy |
+| Bỏ tick | Chọn kết quả từ ô tìm | Danh sách vẫn đổi theo vùng mới | — |
+Kết luận: ô chỉ chặn cập nhật khi kéo tay; chọn từ ô tìm vẫn cập nhật. Tick lại là áp ngay.
+
+## Gom cụm marker — Chạy (chỉ đọc, trả lời OQ-1 nhóm Vị trí ở mức thấy được)
+Các bước đã làm: zoom xa dần, đếm marker trong DOM.
+Kết quả thấy được:
+- Lớp Vendors (Sample): 2, 4, 6, 15 kết quả ứng với mỗi mức xa; 15 marker riêng, số marker dạng số = 0. Ở mức nhìn cả đông nam Mỹ, các marker trong một thành phố đè lên nhau, không gom.
+- Lớp Vehicles: 4 xe TEST, zoom xa thêm 10 mức, luôn 4 marker tên riêng, không có marker dạng số.
+Kết luận: tới 15 marker NCC và 4 xe, không gom. Không biết ngưỡng ở số lớn hơn. Không dùng Sample để sửa.
+
+## Street View — Không chạy được
+Kéo Pegman bằng công cụ lần nữa, ở vùng Sample, không vào chế độ phố. Giữ OQ-5.
+
+## Tuỳ chọn bản đồ — Một phần
+Menu đọc được: MAP TYPE (Default, Satellite, Grayscale), MAP DETAILS (Labels, Set Label Options), MAP STARTING LOCATION ("Use Current Map Center", "Reset to Default"). Không bấm 2 nút cuối vì đổi tuỳ chọn người dùng. Set Label Options: hộp có 1 ô "Vehicle Marker Label" (đang Name), chú thích "Select field to display for Vehicle map marker labels. Falls back to Vehicle Name if selected field value is empty/blank.", nút Cancel, Save; không lưu. Street View không chạy được.
+
+## Cảnh báo vùng (Add Alert Policy) — Không chạy được: hành động duy nhất là gửi email, brief cấm tự động hoá gửi email. Giữ OQ-12.
+
+## Việc Jobs
+Function list không còn dòng part, view, docs cho Jobs: không có gì để chạy lượt này.
+
+# Lượt 4 (03/11)
+
+Không lưu ảnh bản đồ có vị trí, không ghi địa chỉ, tên nơi. NCC mới dùng địa chỉ giả TEST. Phiếu web lượt này gửi vị trí trình duyệt nên điểm mới nhất của TEST-DAUKEO-2 là vị trí máy chạy.
+
+## Nguồn vị trí: phiếu dịch vụ có NCC Service tạo vị trí xe — Chạy
+Các bước đã làm: Tạo NCC TEST-DV-NCC-01 (địa chỉ giả, phân loại Service). Lưu Service Entry #57903305 cho TEST-DAUKEO-2 chọn NCC đó. Mở tab Location History của xe.
+Kết quả thấy được: Thêm 1 dòng loại "Service Entry" cùng giờ phiếu, đứng trên dòng "Fuel Entry" cũ. Form Service Entry không có ô vị trí và không báo gì. Cùng cơ chế với phiếu dầu, vậy đủ 3 loại của bộ lọc "Location Entry Type" đều đã thấy thật.
+Bất ngờ:
+- Địa chỉ giả "1 TEST Street, TEST City", nước Viet Nam vẫn được quy đổi ra một điểm, nhưng ở MỘT NƯỚC KHÁC, không báo độ tin cậy. Trang NCC thì vẫn ghi đúng chuỗi đã nhập. Hệ quả: khai sai địa chỉ NCC làm vị trí xe "nhảy" sang nơi không liên quan mà không cảnh báo.
+- Enter trong ô Country của form New Vendor lưu luôn NCC, bỏ qua các phần dưới (Classification). Phải sửa lại để tick Service. Trang NCC có "Network Status", nút "Invite": không bấm.
+Trả lời câu hỏi mở nào: FR-004: phần phiếu dịch vụ, không còn chưa thử.
+Dữ liệu TEST đã tạo: Vendor #15001909 TEST-DV-NCC-01; Service Entry #57903305.
+
+## Lớp bản đồ — Một phần (Shops vẫn Docs)
+Các bước đã làm: Đọc DOM, không lưu ảnh. Bấm lần lượt Vehicles, Vendors, Places; tắt hết; tải lại trang.
+Kết quả thấy được:
+| Trạng thái | Danh sách trái | Marker đọc được |
+|---|---|---|
+| Vehicles bật (mặc định) | Tab "Vehicles", "3 results" | 3 |
+| Vehicles tắt | Tab biến mất | 0 |
+| Chỉ Vendors | Tab "Vendors" | Chỉ NCC |
+| Vendors + Places | Tab "Places", "Vendors" | NCC, Place |
+| Tắt hết | "No results found in this area" | 0 |
+- **Trả lời phần lượt 3 chưa rõ:** tắt Vehicles có tác dụng thật: marker và cả tab danh sách biến mất. Nút có trạng thái aria-pressed.
+- Tải lại trang: lớp về mặc định Vehicles bật, Places, Vendors tắt. Không lưu như Map Options.
+- Xe trên bản đồ đang 3 (TEST-XE-01, TEST-MOOC-LOP, TEST-DAUKEO-2).
+Không chạy được: Shops: không có nút lớp nào tên đó, chỉ thấy trong chú giải. Giữ Docs.
+
+## Tuỳ chọn bản đồ: nhãn marker, vị trí mở đầu — Một phần (Street View còn lại)
+Các bước đã làm: Set Label Options đổi sang VIN/SN, Save, đọc tiêu đề marker, tải lại, đổi về Name. "Use Current Map Center", xem, "Reset to Default".
+Kết quả thấy được:
+- Ô "Vehicle Marker Label" có 5 giá trị: Name, VIN/SN, Vehicle Type, License Plate, "Year, Make, Model".
+- VIN/SN: TEST-DAUKEO-2 hiện số VIN; TEST-XE-01, TEST-MOOC-LOP không có VIN nên hiện tên, đúng câu "Falls back to Vehicle Name". Giữ sau tải lại, tức lưu theo người dùng.
+- "Use Current Map Center": toast "Map Preferences Updated", dòng vị trí mở đầu đổi sang tên vùng đang xem (dạng tên, không phải toạ độ). "Reset to Default" đã bấm để trả lại.
+- Đã trả nhãn về Name, marker hiện lại tên.
+Không chạy được: Street View: công cụ không kéo được Pegman, lượt 3 đã thử 2 lần, không thử nữa. Giữ OQ-5.
+Dữ liệu TEST đã tạo: không; tuỳ chọn người dùng đã trả lại.
+
+## Gom cụm marker — Chặn
+Lượt 3 đã đo: 15 NCC, 4 xe không gom. Muốn biết ngưỡng cần nhiều marker hơn; gói xe 5/5, NCC mới chỉ thêm 1. Không tạo hàng loạt bản ghi để đo. Giữ OQ-1 ở mức đã thấy.

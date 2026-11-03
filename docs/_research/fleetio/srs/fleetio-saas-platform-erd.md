@@ -19,7 +19,7 @@ erDiagram
     ACCOUNT ||--o{ RECORD_SET : "định nghĩa"
     USER ||--o{ SAVED_VIEW : "tạo"
     ACCOUNT ||--o{ AUTOMATION : "có"
-    AUTOMATION ||--o{ AUTOMATION_VERSION : "sinh khi bật"
+    AUTOMATION ||--o{ AUTOMATION_VERSION : "sinh khi bật lần đầu, khi lưu bản sửa"
     AUTOMATION ||--o{ AUTOMATION_RUN : "chạy"
     AUTOMATION_VERSION ||--o{ AUTOMATION_RUN : "được ghi ở"
     AUTOMATION_TEMPLATE ||--o{ AUTOMATION : "điền sẵn"
@@ -41,6 +41,16 @@ erDiagram
     MOTOR_POOL ||--o{ RESERVATION : "nhận"
     CONTACT ||--o{ RESERVATION : "đặt"
     ACCOUNT ||--o{ DOCUMENT : "lưu"
+    DOCUMENT ||--o{ DOCUMENT_ATTACHMENT : "gắn"
+    REPORT_VIEW ||--o{ SAVED_REPORT : "lưu thành"
+    USER ||--o{ SAVED_REPORT : "tạo"
+    USER ||--o{ WATCH : "theo dõi"
+    USER ||--o{ COMMENT : "viết"
+    AUTOMATION ||--o{ COMMENT : "viết"
+    USER ||--o{ NOTIFICATION : "nhận"
+    ACCOUNT ||--o{ NOTIFICATION_PROFILE : "có"
+    NOTIFICATION_PROFILE ||--o{ USER : "gán cho"
+    USER ||--o{ API_KEY : "có"
 
     ACCOUNT {
         string ten
@@ -96,7 +106,7 @@ erDiagram
         string man
         string bo_loc
         string cot
-        boolean dung_chung
+        string pham_vi_chia_se
     }
     AUTOMATION {
         string ten
@@ -114,11 +124,17 @@ erDiagram
     AUTOMATION_VERSION {
         number so
         datetime luc_sinh
+        string nguoi_tao
+        string noi_dung_buoc
     }
     AUTOMATION_RUN {
         datetime luc_chay
+        datetime luc_xu_ly
         string ket_qua
+        string loi_nguyen_van
+        string records
         string ban_ghi_kich_hoat
+        string kieu_su_kien
         string triggered_by
         string log
     }
@@ -190,13 +206,57 @@ erDiagram
         string tu_xoa
         string gan_voi
         string nhan
+        string loai_tep
+        string mo_ta
+    }
+    DOCUMENT_ATTACHMENT {
+        string loai_ban_ghi
+        string ban_ghi
+    }
+    SAVED_REPORT {
+        string ten
+        string mo_ta
+        string pham_vi
+        string lich_email
+        string bo_loc
+        boolean yeu_thich
+    }
+    WATCH {
+        string loai_ban_ghi
+        string ban_ghi
+    }
+    COMMENT {
+        string loai_ban_ghi
+        string noi_dung
+        datetime luc_viet
+    }
+    NOTIFICATION {
+        string loai
+        string ban_ghi
+        string hop
+    }
+    NOTIFICATION_PROFILE {
+        string ten
+        string mo_ta
+        string trang_thai
+    }
+    API_KEY {
+        string nhan
+        string phien_ban_api
+        datetime ngay_them
+        string trang_thai
     }
 ```
 
 **Ghi chú nghiệp vụ:**
 
 - Contact là bảng gốc; User là Contact được bật truy cập (`Chạy` phần No Access). Lái xe, thợ, kế toán chung một hồ sơ, phân vai bằng tick.
-- Automation sinh phiên bản khi bật (`Chạy` v.1); chưa thấy v.2.
+- Automation sinh phiên bản khi bật lần đầu và khi lưu bản sửa lúc đang bật (`Chạy` v.1, v.2); tắt rồi bật lại không sinh. Mở v.1 hiện nội dung v.2 (E-fleetio-saas-platform-018) nên chưa chắc mỗi bản lưu riêng nội dung bước.
+- Lượt thất bại lưu câu lỗi nguyên văn và log từng bước (`Chạy`). "Triggered By" ghi người, không ghi automation; tác giả comment và Status Updates lại ghi "Fleetio Automation", nên nguồn gây ra được ghi không đồng nhất giữa các chỗ.
+- Saved Report giữ bộ lọc, cột của báo cáo chuẩn, phạm vi Public hoặc Private, lịch email (`Chạy` Private). Saved View có phạm vi Private, Admins Only, Specific Roles, Specific Users, Everyone (`Chạy` Private).
+- Tài liệu gắn nhiều bản ghi qua Document Attachment; Fleetio hiện xe, nhóm và loại xe trên hộp gắn, chỉ gắn thử 1 xe (`Chạy`).
+- Comment, Watch không vào Record History; Watch, Notification là bảng suy ra từ giao diện (`Suy`). Notification chạy kể cả khi 0 Notification Profile (`Chạy`).
+- API Key không vẽ giá trị khoá; không tạo khoá trong lượt chạy (`Xem`).
 - Group gán cho cả xe và liên hệ; xe thuộc nhóm Phương tiện nên không vẽ lại ở đây (`Xem`).
 - Report Share Link không lưu trong sơ đồ giá trị đường dẫn vì tài liệu này không ghi link đã chia sẻ.
 - Quan hệ Reservation với xe và Recall với xe, Issue thuộc nhóm khác, chưa chạy.

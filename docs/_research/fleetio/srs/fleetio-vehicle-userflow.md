@@ -23,12 +23,26 @@ flowchart TD
     c["1.1 Xe"]
     c2["1.2 Menu thao tác xe"]
     c3["1.3 Chi phí sở hữu, xe liên kết"]
+    v1["1.4 Giải mã VIN, so sánh thuộc tính"]
+    v2["1.5 Lịch sử trạng thái xe"]
+    v3["1.6 Xác nhận lưu trữ xe"]
+    v4["1.7 Mooc liên kết hai xe"]
+    v5["1.8 Thêm nhiều xe, bước 1"]
+    v6["1.9 Tuỳ biến thẻ trang xe"]
+    v7["E-021, E-022 Lưu trữ bị từ chối, vẫn mất liên kết"]
+    v8["Xe đã lưu trữ, chưa chụp"]
+    v9["E-023 Khôi phục khoá khi đầy gói"]
+    v10["E-025 Lỗi tạo nhiều xe chỉ qua email"]
+    v11["1.10 Bộ lịch bảo dưỡng của xe, trống"]
+    v12["1.11 Đính tài liệu dùng chung"]
     d["Form bản ghi theo loại"]
     e["3.1 Lịch sử số đồng hồ"]
     e2["E-002 Số nhỏ hơn cùng ngày không báo"]
     m2["3.2 Từ chối số lùi ngày, E-004"]
     m3["3.3 Từ chối số thấp hơn ngày trước, E-005"]
     m4["3.4 Sổ có cờ xung đột, E-006, E-007"]
+    m5["3.5 Popup số tự huỷ do lệch thứ tự, E-019"]
+    m6["3.6 Sổ sau khi huỷ hàng loạt, có đồng hồ phụ"]
     f["2.1 Gán xe"]
     f3["2.3 Lịch tuần"]
     g["2.2 Hộp thêm gán xe"]
@@ -70,6 +84,30 @@ flowchart TD
     c2 -.->|"Đóng"| c
     c -->|"Overview"| c3
     c3 -.->|"Quay lại"| c
+    a -->|"Thêm nhiều xe"| v5
+    v5 -->|"Lưu, chạy nền"| a
+    v5 -->|"Dòng lỗi"| v10
+    v10 -.->|"Sửa, dán lại"| v5
+    b -->|"Decode VIN đủ 17 ký tự"| v1
+    v1 -.->|"Điền vào form"| b
+    c -->|"Lịch sử Status"| v2
+    v2 -.->|"Đóng"| c
+    c -->|"Personalize"| v6
+    v6 -.->|"Áp dụng, huỷ"| c
+    c3 -->|"Mở mooc đã nối"| v4
+    v4 -.->|"Mở xe"| c
+    c2 -->|"Manage Service Programs"| v11
+    v11 -.->|"Về tab khác"| c
+    c2 -->|"Attach Shared Document"| v12
+    v12 -.->|"Đính, huỷ"| c
+    c2 -->|"Archive"| v3
+    v3 -.->|"Huỷ"| c
+    v3 -->|"Còn lệnh mở"| v7
+    v7 -.->|"Đóng lệnh, nối lại, làm lại"| c
+    v3 -->|"Xác nhận, không còn lệnh"| v8
+    v8 -.->|"Khôi phục, gói còn chỗ"| c
+    v8 -->|"Gói đầy"| v9
+    v9 -->|"Kết thúc"| z
     c -->|"Thêm, Lịch sử số đồng hồ"| e
     e -->|"Nhập số nhỏ hơn cùng ngày"| e2
     e2 -->|"Kết thúc"| z
@@ -79,6 +117,10 @@ flowchart TD
     m3 -.->|"Sửa hoặc tick Void"| e
     e -->|"Nhập số vượt mức"| m4
     m4 -.->|"Unvoid"| e
+    e -->|"Bấm huy hiệu dòng phiếu app tự huỷ"| m5
+    m5 -.->|"Đóng"| e
+    e -->|"Chọn nhiều dòng, huỷ hàng loạt"| m6
+    m6 -.->|"Nhập số mới"| e
     e -->|"Kết thúc"| z
     f -->|"Thêm gán xe"| g
     f -->|"Xem tuần"| f3
@@ -110,7 +152,7 @@ flowchart TD
     w7 -->|"Kết thúc"| z
 ```
 
-Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221727`, chưa có các màn thêm ngày 03/11/2026. Đường liền là luồng thường, nét đứt là quay lại.
+Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221727`, chưa có các màn thêm ngày 03/11/2026, kể cả 1.4–1.9, 3.5, 3.6 của lượt 3 và 1.10, 1.11 của lượt 4. Đường liền là luồng thường, nét đứt là quay lại.
 
 ## 2. Màn hình
 
@@ -142,3 +184,13 @@ Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221727`, chưa 
 | 7.5 | Danh sách bảo hành | warranty-list | 1 dòng Active | Có |
 | 7.6 | Lệnh, chưa có cơ hội bảo hành | wo-warranty-before | Trống | Có |
 | 7.7 | Lệnh, có cơ hội bảo hành | wo-warranty-opportunity | 1 cơ hội | Có |
+| 1.4 | Giải mã VIN, so sánh thuộc tính | vin-decode-review | Hộp mở, có dòng Different, New | Có |
+| 1.5 | Lịch sử trạng thái xe | vehicle-status-history | 5 dòng thấy trên ảnh | Có |
+| 1.6 | Xác nhận lưu trữ xe | vehicle-archive-confirm | Hộp xác nhận | Có |
+| 1.7 | Mooc liên kết hai xe | trailer-linked-two-vehicles | 2 xe, có toast | Có |
+| 1.8 | Thêm nhiều xe, bước 1 | vehicle-add-multiple-step1 | Bước 1, ô dán còn chữ mẫu | Có |
+| 1.9 | Tuỳ biến thẻ trang xe | vehicle-manage-overview-layout | Hộp mở, đủ 15 thẻ | Có |
+| 1.10 | Bộ lịch bảo dưỡng của xe, trống | vehicle-service-programs-empty | Chưa có bộ lịch | Có |
+| 1.11 | Đính tài liệu dùng chung | vehicle-attach-shared-document | Hộp mở, chưa chọn | Có |
+| 3.5 | Popup số tự huỷ do lệch thứ tự | meter-out-of-sequence-autovoid | Auto-Voided, Out of Sequence | Có |
+| 3.6 | Sổ sau khi huỷ hàng loạt, có đồng hồ phụ | meter-bulk-void-secondary | 17 dòng, đủ 3 mức Void | Có |

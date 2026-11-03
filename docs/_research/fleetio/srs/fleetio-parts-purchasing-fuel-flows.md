@@ -26,7 +26,11 @@ sequenceDiagram
     alt Dòng trùng
         P-->>U: E-011 Part is duplicated, không tạo đơn
     else Lưu được
-        P-->>U: Draft, Pending PO Qty chưa đo riêng
+        P-->>U: Draft, chưa Edit thì chưa tính vào Pending PO Qty
+    end
+    opt Sửa Draft rồi lưu
+        U->>P: Đổi kho, nhà cung cấp, số, xoá dòng
+        P->>K: E-032 Số vào Pending dù chưa duyệt
     end
     alt Có quyền duyệt
         U->>P: Approve hoặc Save and Approve, một cú bấm
@@ -34,15 +38,20 @@ sequenceDiagram
         U->>P: Submit for Approval
         A->>P: Approve hoặc Reject
     end
-    P-->>U: Approved, ghi Approved By
+    P-->>U: Approved, ghi Approved By, đơn chưa Edit thì Pending PO Qty vẫn 0
     opt Sửa lại sau khi duyệt
-        U->>P: Save as Draft
+        U->>P: Save as Draft, chỉ có trong form Edit
         P-->>U: Về Draft, mất dòng Approved By
     end
     U->>P: Mark as Purchased
+    P->>K: Đơn chưa Edit bắt đầu tính Pending PO Qty
     opt Mua nhầm
         U->>P: Unmark as Purchased
-        P-->>U: Về Approved, không hỏi
+        P-->>U: Về Approved, không hỏi, E-026 Pending không giảm
+    end
+    opt Sửa đơn đã mua
+        U->>P: Sửa số, giá, kho và nhà cung cấp đã khoá
+        P->>K: Pending theo số đặt mới, không cảnh báo
     end
     U->>P: Receive số lượng, chọn nơi đến
     alt Gõ số âm
@@ -59,7 +68,7 @@ sequenceDiagram
     end
 ```
 
-Nhánh: D1 đến D11 ở SRS Mục 6A. Tổng đơn tính theo số đặt, thuế tính trên phần sau giảm, không gồm phí (D6). Ô Shipping sai 100 lần: E-012.
+Nhánh: D1 đến D11, D22 đến D33 ở SRS Mục 6A. Nhánh Submit for Approval lượt 3 vẫn không chạy được (D32). Tổng đơn tính theo số đặt, thuế tính trên phần sau giảm, không gồm phí (D6). Ô Shipping sai 100 lần: E-012.
 
 ## Flow 2: Nhận hàng vào lệnh (`Chạy`)
 
@@ -102,14 +111,16 @@ flowchart TD
     L --> B
     F --> M["Closed, không có nút mở lại"]
     H --> M
-    M --> N{"Sửa sau khi đóng"}
-    N -->|"Có"| O["E-025 Edit đổi đơn giá, tổng tính lại"]
+    M --> N{"Thao tác sau khi đóng"}
+    N -->|"Sửa đơn giá"| O["E-025 Edit đổi đơn giá, tổng tính lại"]
+    N -->|"Make Adjustment"| Q["E-027 Tick dòng, nhập số âm: số nhận và tồn giảm, sổ ghi Received, vẫn Closed"]
     N -->|"Không"| P["Kết thúc"]
     O --> P
+    Q --> P
     P --> KetThuc["Kết thúc"]
 ```
 
-Partial không có Make Adjustment. Receive gõ số âm thành nhận dương (E-014), nên đó không phải đường trả hàng. Closed có nút Make Adjustment, nhật ký không ghi lần bấm. Không có huỷ đơn; lùi về Draft trước khi Purchased, hoặc Delete (chưa bấm, OQ-10).
+Partial không có Make Adjustment. Receive gõ số âm thành nhận dương (E-014), nên đó không phải đường trả hàng. Make Adjustment từ Closed: -1 làm Qty Received 110 xuống 109, đơn vẫn Closed, không hỏi lý do (D18). Không có huỷ đơn; lùi về Draft trước khi Purchased, hoặc Delete (chưa bấm, OQ-10).
 
 ## Flow 4: Xuất phụ tùng cho lệnh, sửa, xoá, hoàn thành (`Chạy`)
 
@@ -216,15 +227,18 @@ flowchart TD
     B -->|"Current Qty"| C["Tự lưu, All changes saved, sổ loại Bulk Update, không hỏi lý do"]
     B -->|"Active"| D{"Có đơn tại kho"}
     B -->|"Aisle, Row, Bin, Track Inventory"| E["Thấy cột, nhật ký chỉ ghi sửa số và Active"]
+    B -->|"Không sửa, in phiếu"| H["Print Worksheet: E-029 tự tải PDF, 3 bản giống hệt"]
     D -->|"Có"| F["E-010 Không tắt"]
     D -->|"Không"| G["Chưa thử"]
+    H --> I["Kiểm đếm tay, ghi ô New Qty"]
+    I --> C
     C --> KetThuc["Kết thúc"]
     E --> KetThuc["Kết thúc"]
     F --> KetThuc["Kết thúc"]
     G --> KetThuc["Kết thúc"]
 ```
 
-Print Worksheet: `Xem`.
+Print Worksheet `Chạy`: toast "Complete: Bulk Manage Parts Worksheet", không mở tab, PDF in theo kho đang chọn (K27, K28). Từ phiếu giấy về ô Current Qty là `Suy` theo công dụng ô New Qty, chưa thao tác. Sửa số về 0 với điểm đặt lại 0: Out of Stock (S5).
 
 ## Flow 8: Phiếu dầu và cảnh báo (`Chạy` phần phiếu và Capacity Alert, `Docs` Vendor Location Alert)
 
@@ -255,14 +269,17 @@ flowchart TD
     N -->|"Không"| P{"Có tích hợp định vị và thẻ"}
     O --> P
     P -->|"Có, theo tài liệu"| Q["Vendor Location Alert nếu xa hơn bán kính"]
-    P -->|"Không"| R["Cộng vào chi phí xe, đẩy nhắc bảo dưỡng"]
+    P -->|"Không"| R["Cộng vào chi phí xe và thẻ tổng, kể cả Void, Personal, E-028; đẩy nhắc bảo dưỡng"]
     Q --> R
-    R --> KetThuc["Kết thúc"]
+    R --> S{"Có chọn nhà cung cấp"}
+    S -->|"Có"| T["Tạo vị trí xe tại địa chỉ nhà cung cấp, form không báo"]
+    S -->|"Không"| KetThuc["Kết thúc"]
+    T --> KetThuc
 ```
 
-Đường đảo ngược: sửa phiếu đổi số lít nhưng không gỡ cảnh báo (E-017); hiệu ứng lên tiêu hao của phiếu sau chỉ đo ở F8. Báo cáo dầu lệch tiền: E-020; trang chi tiết xe đúng (T6). Số 0 lít vẫn lưu được (F11). Có áp số lít, dung tích ở phiếu Void không thì chưa thử, sơ đồ vẽ theo đường chung.
+Đường đảo ngược: sửa phiếu đổi số lít nhưng không gỡ cảnh báo (E-017, F19); hiệu ứng lên tiêu hao của phiếu sau chỉ đo ở F8. Void không phải đường huỷ: phiếu vẫn cộng vào thẻ tổng (F22). Báo cáo dầu lệch tiền: E-020, kể cả khi lọc (T9, T10); trang chi tiết xe đúng (T6). Tạo vị trí đo một lần (F25); chi tiết ở nhóm Vị trí. Số 0 lít vẫn lưu được (F11). Có áp số lít, dung tích ở phiếu Void không thì chưa thử, sơ đồ vẽ theo đường chung.
 
-## Flow 9: Khai nhà cung cấp (`Chạy`, Find Shops `Xem`)
+## Flow 9: Khai nhà cung cấp (`Chạy`, Find Shops ở Flow 12)
 
 ```mermaid
 flowchart TD
@@ -285,3 +302,84 @@ flowchart TD
 ```
 
 Nhánh không phân loại là `Suy` từ D1 và F-NCC. Nhánh trùng tên nhà cung cấp không có trong nhật ký.
+
+## Flow 10: Số đang về khi đơn tiến và lùi (`Chạy`, chỉ đo trên PO #4)
+
+```mermaid
+flowchart TD
+    A["Đơn Draft, Pending PO Qty 0"] --> A1{"Sửa rồi lưu"}
+    A1 -->|"Có"| A2["E-032 Pending bằng số đặt dù chưa duyệt, theo số mới mỗi lần lưu"]
+    A2 --> A1
+    A1 -->|"Không"| B["Approve: Approved, Pending vẫn 0"]
+    B --> C["Mark as Purchased: Pending bằng số đặt"]
+    C --> D{"Thao tác tiếp"}
+    D -->|"Sửa số đặt"| E["Pending theo số mới, không cảnh báo"]
+    E --> D
+    D -->|"Unmark as Purchased"| F["Về Approved, E-026 Pending không giảm"]
+    D -->|"Receive"| G["Nhận hàng, xem Flow 1"]
+    F --> H{"Đi tiếp từ Approved"}
+    H -->|"Mark as Purchased lại"| I["Purchased, Pending không nhân đôi"]
+    H -->|"Vào Edit, Save as Draft"| J["Về Draft, mất Approved By, Pending không giảm"]
+    J --> K["Approve, Mark as Purchased lại"]
+    K --> I
+    I --> D
+    G --> KetThuc["Kết thúc"]
+```
+
+Bảng số đo ở States Mục 1. Nhánh sửa Draft đo trên PO #5 (D40, D41); từ đó đi tiếp Approve chưa đo, sơ đồ không vẽ. Sửa tăng số đặt ở Full không cộng Pending, đơn vẫn Full (D36, D37, E-033). Nhánh Mark as Purchased lại ngay từ Approved không đo riêng, chỉ đo đường qua Draft (D29). Công thức khi lùi là `Suy` (OQ-25).
+
+## Flow 11: Sao chép, in, xem lịch sử đơn (`Chạy`)
+
+```mermaid
+flowchart TD
+    A["Menu đơn"] --> B{"Chọn mục"}
+    B -->|"Make a Copy"| C["Form New Purchase Order, số mới, chép nhà cung cấp, kho, dòng, số đặt, giá, chiết khấu, không chép số nhận"]
+    B -->|"Print"| D["Tab mới Preparing your PDF, ra PDF một trang, tiền kiểu US"]
+    B -->|"View Record History"| E["Hộp Record History, lọc theo khoảng ngày"]
+    C --> F{"Lưu form"}
+    F -->|"Save as Draft"| G["Đơn mới Draft, chưa Edit nên Pending vẫn 0"]
+    F -->|"Không lưu"| H["Không tạo đơn, chưa thử"]
+    D --> KetThuc["Kết thúc"]
+    E --> KetThuc
+    G --> KetThuc
+    H --> KetThuc
+```
+
+Save & Approve trên form copy chưa thử. Copy từ đơn đã sửa lấy số đặt, giá đã sửa (D39). Báo cáo đơn mua cộng cả Draft vào Total Amount: E-034. Đơn Approved sau Unmark vẫn in Purchase Date, Purchased By (D35). Record History: phần ảnh đọc được chỉ có trạng thái và tiền (D20, OQ-22).
+
+## Flow 12: Tìm xưởng (`Chạy` tới bước tick, Add Vendor không bấm)
+
+```mermaid
+flowchart TD
+    A["Vendors, Find Shops"] --> B["Gõ địa chỉ, thành phố hoặc mã bưu chính, chọn Shop type, Let's Go"]
+    B --> C["Danh sách cửa hàng và bản đồ, All Results"]
+    C --> D{"Tick cửa hàng"}
+    D -->|"Có"| E["SELECTED, Clear selection, ghim đỏ, khoảng cách, nút Add Vendor"]
+    D -->|"Không"| F["Huỷ, không tạo gì"]
+    E --> G{"Bấm Add Vendor"}
+    G -->|"Có, chưa thử"| H["Tạo nhà cung cấp, kết quả chưa biết"]
+    G -->|"Huỷ"| F
+    H --> KetThuc["Kết thúc"]
+    F --> KetThuc
+```
+
+Không bấm Add Vendor vì sẽ tạo nhà cung cấp trùng tên doanh nghiệp thật (N8). Network Status: Invite không bấm (N11).
+
+## Flow 13: Lọc phiếu dầu (`Chạy`)
+
+```mermaid
+flowchart TD
+    A["Fuel History, Date 30 ngày khoá"] --> B{"Cách lọc"}
+    B -->|"Ô Vendor"| C["Chọn nhiều, mọi nhà cung cấp, áp vào danh sách"]
+    B -->|"Filters, Add Filter"| D["Chọn trường và điều kiện"]
+    D --> E{"Bấm Apply"}
+    E -->|"Có"| F["Danh sách và thẻ tổng tính lại, E-020 tiền lệch 100 lần"]
+    E -->|"Chưa"| D
+    C --> F
+    F --> G{"Xoá một điều kiện"}
+    G -->|"Có"| H["Áp ngay, không cần Apply"]
+    G -->|"Không"| KetThuc["Kết thúc"]
+    H --> KetThuc
+```
+
+Đã lọc Vendor (1 phiếu), Fuel Capacity Alert (2 phiếu), Personal (1 phiếu), theo xe (F16, F19, F20, F22). Nhóm OR thứ 4 chưa thử; Fleetio: tối đa 3 theo câu trên panel. Trường thẻ có ở bộ lọc nhưng không có dữ liệu thẻ để lọc (F24).

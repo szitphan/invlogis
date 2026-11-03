@@ -99,7 +99,7 @@ flowchart TD
     M --> KetThuc["Kết thúc"]
 ```
 
-Spare không tham gia. New Position chỉ có vị trí của xe đó, không đảo được sang xe khác. Lưu mẫu thật: `Không chạy`.
+Spare không tham gia. New Position chỉ có vị trí của xe đó, không đảo được sang xe khác. Lưu mẫu thật: `Không chạy`; mẫu nằm ở Settings › Tire Management Settings, cấp tài khoản (`Xem`, FR-fleetio-tires-031).
 
 ## Flow 5: Tháo, thay lốp (`Chạy`)
 
@@ -212,7 +212,11 @@ flowchart TD
     H --> I
     I -->|"Gỡ hoặc đổi mooc"| J["Lốp, đồng hồ không đổi, không có lịch sử ghép"]
     J --> I
-    I --> KetThuc["Kết thúc"]
+    I -->|"Nối thêm xe thứ hai vào mooc"| N["Lưu được, không kiểm loại xe, không ngày hiệu lực"]
+    N --> I
+    I -->|"Archive xe, kể cả bị từ chối"| R["Mất liên kết, cấu hình trục còn, Edit trục khoá khi đã Archive"]
+    R --> KetThuc["Kết thúc"]
+    I --> KetThuc
 ```
 
 ## Flow 10: Đổi lốp giữa hai xe (cơ chế `Chạy`, giữa hai xe `Suy`)
@@ -224,6 +228,24 @@ flowchart TD
     C --> D["Lắp mới ở xe B, gõ lại mã, gai, áp suất, số km"]
     D --> E["Hai lịch sử không nối, không theo được một lốp"]
     E --> KetThuc["Kết thúc"]
+```
+
+## Flow 11: Mẫu đảo, đọc tự động, Import ở cấp tài khoản (`Xem`, không bấm)
+
+```mermaid
+flowchart TD
+    A["Settings, Tire Management Settings"] --> B{"Việc cần làm"}
+    B -->|"Mẫu đảo"| C["Tire Rotation Patterns, 8 mẫu Standard có khoá"]
+    C --> D["Add Tire Rotation Pattern, không chạy"]
+    B -->|"Áp suất tự động"| E["General, công tắc đang tắt, có khoá"]
+    E --> F{"Xe 4x2, 4x4 có telematics"}
+    F -->|"Có"| G["Theo câu chữ, cập nhật hằng ngày, chưa bật"]
+    F -->|"Không, như 6x4"| H["Không áp dụng"]
+    B -->|"Import lốp"| I["Không thấy lối vào ở Settings, Vehicle List, Tire Readings"]
+    D --> KetThuc["Kết thúc"]
+    G --> KetThuc
+    H --> KetThuc
+    I --> KetThuc
 ```
 
 ## Đề xuất Invlogis: đổi lốp và km theo tổ hợp

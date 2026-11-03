@@ -2,6 +2,8 @@
 type: research
 feature: fleetio-tires
 status: draft
+status_changed: 2026-11-03
+status_reason: "đã review upstream, không cần sửa"
 updated: 2026-11-03
 links:
   - docs/_research/fleetio/fleetio-tires.md
@@ -17,7 +19,7 @@ links:
 
 ## 1. Scope
 
-**Trong phạm vi:** Axle Configuration, Tire Management, Install Tires, Copy details, Rotate Tires, Remove Tires, Tire Activity, Tire Readings, mục Tire Readings của phiếu kiểm tra, số km lốp, Linked Vehicles ở góc nhìn lốp.
+**Trong phạm vi:** Axle Configuration, Tire Management, Install Tires, Copy details, Rotate Tires, Remove Tires, Tire Activity, Tire Readings, mục Tire Readings của phiếu kiểm tra, số km lốp, Linked Vehicles ở góc nhìn lốp, Tire Management Settings ở mức đọc.
 
 **Ngoài phạm vi:** quản lý xe, số đồng hồ nói chung, sự cố nói chung (xem bộ `fleetio-vehicle`, `fleetio-repair`, `fleetio-reminders-inspection`).
 
@@ -25,7 +27,7 @@ links:
 
 - **Mỗi trạng thái:** chỉ có vị trí trống, có lốp, Spare. "Đã tháo" chỉ là dòng lịch sử, không có nút lắp lại. Bảng đủ từng ô: [[docs/_research/fleetio/srs/fleetio-tires-states.md|States]].
 - **Theo đầu kéo:** khai cấu hình ở tab lốp của đầu kéo, lắp theo ô hoặc chip trục, số km lốp theo đồng hồ đầu kéo. Tab đầu kéo không hiện lốp mooc đã liên kết.
-- **Theo mooc:** mooc là một Vehicle riêng, 7 cấu hình riêng, đồng hồ riêng bắt buộc, không có mẫu đảo chuẩn. Liên kết với đầu kéo chỉ là đường dẫn, không truyền số km.
+- **Theo mooc:** mooc là một Vehicle riêng, 7 cấu hình riêng, đồng hồ riêng bắt buộc, không có mẫu đảo chuẩn. Liên kết với đầu kéo chỉ là đường dẫn, không truyền số km; một mooc nối được nhiều xe, kể cả xe Car, không biết đang kéo bởi đầu nào.
 - **Giữa các xe:** không có thao tác chuyển lốp, phải tháo rồi lắp mới, hai lịch sử không nối.
 
 ## 2. Actors & Stakeholders
@@ -58,7 +60,7 @@ Cột Tầng là đề xuất nếu Invlogis lấy chức năng này. Cột cu�
 | FR-fleetio-tires-013 | Đọc trên dòng, hộp Edit | Sửa gai, áp suất trên dòng lưu ngay khi rời ô, không có nút Lưu, tạo dòng đọc Method Manual. Hộp Edit thêm Current Tire Meter, Remove; sửa Model, Factory, Min, Life, mã lốp không có dòng Activity riêng. Không có ô ngày đọc. | P0 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` | Lấy, thêm ngày đọc |
 | FR-fleetio-tires-014 | Đảo theo mẫu chuẩn | Rotation Pattern; "Standard 6x4" điền sẵn 10 dòng: LF↔RF, 2LO→3LI, 2LI→3LO, 2RI→3RO, 2RO→3RI, 3LO→2LI, 3LI→2LO, 3RI→2RO, 3RO→2RI. Sửa tay được. Settings có 8 mẫu chuẩn, không mẫu nào cho mooc. | P1 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` | Lấy, thêm mẫu cho mooc |
 | FR-fleetio-tires-015 | Đảo tự do khép kín | Nút Rotate Tires chỉ bật khi sơ đồ khép kín. Ô trống cũng có dòng New Position và được làm đích. Thông báo đếm cả ô trống. | P0 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` | Lấy |
-| FR-fleetio-tires-016 | Lưu mẫu đảo tuỳ biến | Hiện "Save as a Custom Rotation Pattern" khi đã khép kín. Bỏ trống tên thì không đảo được. Lưu thật không thử vì mẫu nằm trong Settings. | P2 | [Gói: Bảo dưỡng đội xe] | test | `Chạy một phần` | Cân nhắc |
+| FR-fleetio-tires-016 | Lưu mẫu đảo tuỳ biến | Hiện "Save as a Custom Rotation Pattern" khi đã khép kín. Bỏ trống tên thì không đảo được. Mẫu thuộc cấp tài khoản, nằm ở Settings › Tire Management Settings (FR-fleetio-tires-031). Lưu thật không thử vì mẫu là danh mục dùng chung của tài khoản. | P2 | [Gói: Bảo dưỡng đội xe] | test | `Chạy một phần` | Cân nhắc |
 | FR-fleetio-tires-017 | Undo Rotation | Chỉ ở màn kết quả. Lốp về chỗ cũ, quay lại form, mapping còn nguyên, Activity không còn dấu vết. Close thì mất nút. | P1 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` | Lấy, giữ dấu vết |
 | FR-fleetio-tires-018 | Tháo | Remove từng lốp, Select All, Remove All. Không hỏi lý do, không chọn đích. Ô về nút +. Thêm dòng `Removal`. | P0 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` | Lấy thao tác, thêm lý do, đích, DX-06 |
 | FR-fleetio-tires-019 | Tire Activity | 1 dòng mỗi sự kiện từng lốp. Cột Tire Model, Date Recorded, Date Installed, Tire Meter, Activity, User, Method, Tire Pressure, Tread Depth, Position, Axle Type, Tire Identification Number. Đảo 10 lốp sinh 10 dòng dạng "Left Front (LF) > Right Front (RF)", "Steer > Steer". Còn sau khi tháo. | P0 | [Gói: Bảo dưỡng đội xe] | demo | `Chạy` | Lấy |
@@ -69,10 +71,11 @@ Cột Tầng là đề xuất nếu Invlogis lấy chức năng này. Cột cu�
 | FR-fleetio-tires-024 | Phiếu phát hiện thiếu lốp | "Install Missing Tires" kèm danh sách, nút Install Tires tạo lốp trống, không hỏi gì thêm. | P1 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` | Lấy, cần serial |
 | FR-fleetio-tires-025 | Không đạt thành sự cố | Workflow "ANY Failed Inspection Item" → "Create an issue". Một sự cố cho nhiều lốp, Priority High, Source là phiếu. Kết quả từng vị trí có dấu tích hoặc X, dòng tổng một chữ "Fail". Ghi về Tire Readings, Method "Inspection #…". | P1 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` | Lấy, thêm trường vị trí, DX-11 |
 | FR-fleetio-tires-026 | Số km lốp | Tự tính theo đồng hồ của chính xe chứa lốp, tính lại liên tục. Lùi ngày lắp thì tính từ các số đồng hồ sau ngày lắp. Nhập được Tire Meter at Installation. | P1 | [Gói: Bảo dưỡng đội xe] | test | `Chạy`, quy tắc `Suy` | Đổi cho mooc, DX-03 |
-| FR-fleetio-tires-027 | Liên kết xe | Linked Vehicles hai chiều, khối "Linked Assets". Gỡ và gắn từ phía nào cũng được. Không truyền lốp, không truyền số km. | P1 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` | Không đủ, thay bằng tổ hợp, DX-03 |
+| FR-fleetio-tires-027 | Liên kết xe | Linked Vehicles hai chiều, khối "Linked Assets". Gỡ và gắn từ phía nào cũng được. Không truyền lốp, không truyền số km. Một mooc nối được nhiều xe, không kiểm loại xe, không có ngày hiệu lực. Archive xe ngắt liên kết nhưng không đổi cấu hình trục; xe Archived vẫn xem được cấu hình, Edit trục khoá. | P1 | [Gói: Bảo dưỡng đội xe] | test | `Chạy` | Không đủ, thay bằng tổ hợp, DX-03 |
 | FR-fleetio-tires-028 | Báo cáo | Standard Reports chỉ có "Tire Activity Report"; thêm màn Tire Readings. | P2 | [Gói: Bảo dưỡng đội xe] | demo | `Chạy` | Mở rộng |
-| FR-fleetio-tires-029 | Đọc áp suất tự động | "Automated tire pressure readings" khoá, chỉ 4x2 hoặc 4x4 có telematics; tài liệu hãng nói Geotab. | P2 | [Gói: Bảo dưỡng đội xe] | demo | `Chạy` phần đọc màn hình, `Docs` | Để sau |
-| FR-fleetio-tires-030 | Import lốp | Tài liệu hãng có mẫu import lốp, chưa chạy. | P2 | [Cấu hình] | demo | `Docs` | Lấy khi khởi tạo khách |
+| FR-fleetio-tires-029 | Đọc áp suất tự động | Công tắc "Automated tire pressure readings" ở Settings › Tire Management Settings › General, đang tắt, có icon khoá: "When enabled, Fleetio will automatically update tire pressure readings for all 4x2 or 4x4 vehicles with compatible telematics installed. Readings will update daily." Không dùng được cho đầu kéo 6x4; tài liệu hãng nói Geotab. | P2 | [Gói: Bảo dưỡng đội xe] | demo | `Chạy` phần đọc màn hình, `Docs` | Để sau |
+| FR-fleetio-tires-030 | Import lốp | Tài liệu hãng có mẫu import lốp, chưa chạy. Không thấy lối vào: Tire Readings không có menu "…"; menu Vehicle List có Add Multiple Vehicles, Import Vehicles, Import Meter Entries, Add GPS / Telematics Integration, Export Data, không có Import lốp; Settings tìm "import" ra "No results for: 'import'". Chưa loại trừ lối vào ở nơi chưa mở. | P2 | [Cấu hình] | demo | `Docs` | Lấy khi khởi tạo khách |
+| FR-fleetio-tires-031 | Danh mục mẫu đảo ở Settings | Khối "Tire Rotation Patterns" có "Add Tire Rotation Pattern", cột Name, Type, Created, Axle Configuration. 8 mẫu đọc được đều Type Standard, có icon khoá: Forward Cross, Front To Rear, Rearward Cross, Side-to-Side, X-Pattern (4x2 / 4x4); Classic Dually, Side-to-Side Dually (4x2 / 4x4 Dually); Standard 6x4 (6x2 / 6x4 / 6x6). | P2 | [Gói: Bảo dưỡng đội xe] | demo | `Xem` | Lấy, thêm mẫu cho mooc |
 
 ## 4. Non-Functional Requirements (NFR)
 
@@ -107,6 +110,10 @@ Cột Tầng là đề xuất nếu Invlogis lấy chức năng này. Cột cu�
 | BR-fleetio-tires-019 | Vai trò trục là nhãn: dòng phụ vẫn "4 wheel positions, 2 driven (rear)" khi trục sau là Tag. "Wheel position" đếm đầu trục, lốp kép tính 1. | [Gói: Bảo dưỡng đội xe] | Đổi vai trò | FR-fleetio-tires-005 | `Chạy` |
 | BR-fleetio-tires-020 | Lắp bằng Tire Model không sinh Inventory Activity, không trừ kho, không vào chi phí xe. | [Gói: Bảo dưỡng đội xe] | Lắp | FR-fleetio-tires-010 | `Chạy` |
 | BR-fleetio-tires-021 | Lốp đơn hay kép đi theo cấu hình có sẵn, không chỉnh từng trục. | [Gói: Bảo dưỡng đội xe] | Khai trục | FR-fleetio-tires-003 | `Chạy` |
+| BR-fleetio-tires-022 | Mẫu đảo thuộc cấp tài khoản, không theo từng xe; mẫu Standard có icon khoá; mỗi mẫu gắn nhóm cấu hình trục. | [Gói: Bảo dưỡng đội xe] | Đảo, Settings | FR-fleetio-tires-031 | `Xem` |
+| BR-fleetio-tires-023 | Đọc áp suất tự động chỉ áp cho xe 4x2, 4x4 có telematics tương thích, cập nhật hằng ngày; bật tắt ở cấp tài khoản. | [Gói: Bảo dưỡng đội xe] [Cấu hình] | Telematics | FR-fleetio-tires-029 | `Xem` câu chữ, chưa bật |
+| BR-fleetio-tires-024 | Liên kết không kiểm loại xe, một mooc nối được nhiều xe kể cả xe Car, không có ngày hiệu lực; số km, lốp vẫn tách từng xe. | [Gói: Bảo dưỡng đội xe] | Sửa Linked Vehicles | FR-fleetio-tires-027 | `Chạy` |
+| BR-fleetio-tires-025 | Xe Archived giữ cấu hình trục, Edit trục khoá; Restore giữ nguyên cấu hình. | [Gói: Bảo dưỡng đội xe] | Archive, Restore | FR-fleetio-tires-006 | `Chạy` |
 
 ## 6. Error Matrix
 
@@ -128,6 +135,7 @@ Cột Tầng là đề xuất nếu Invlogis lấy chức năng này. Cột cu�
 | E-fleetio-tires-014 | Không có mẫu đảo mooc | Rotation Pattern "No options" trên mooc | minor | FR-fleetio-tires-014 | Ô chọn rỗng | Tự ghép |
 | E-fleetio-tires-015 | Mã lốp trùng không báo | Cùng xe, sang vị trí khác; tháo rồi lắp lại cũng không báo | major | FR-fleetio-tires-009 | Lưu | Không nên học |
 | E-fleetio-tires-016 | Chạm trần số xe | "You've reached the maximum number of records allowed on your account." Save Vehicle khoá; nơi khác "Your plan is limited to 5 vehicles", "Vehicle could not be created" | major | FR-fleetio-tires-001 | Nút khoá | Nâng gói |
+| E-fleetio-tires-017 | Sửa trục khi xe Archived | Edit trục khoá trên xe đã Archive; câu chữ chưa ghi nhận | minor | FR-fleetio-tires-006 | Nút khoá, cấu hình vẫn xem được | Restore xe |
 
 ## 7. Success Criteria
 
@@ -164,12 +172,13 @@ Xem [[docs/_research/fleetio/srs/fleetio-tires-flows.md|Flows]], [[docs/_researc
 * [ ] OQ-4: Hình 6x2, 8x4, 10x, 12x chưa xem; Semi Truck có lưu được cấu hình mooc không (danh sách vẫn liệt kê, chưa lưu thử) — Nguồn khách: không áp dụng
 * [ ] OQ-5: Phiếu Fail lần 2 có gộp vào sự cố cũ không: thấy "Added to Issue #41 (1 time reported)", chưa nộp lần 2 — Nguồn khách: không áp dụng
 * [ ] OQ-6: Lệnh sửa chữa có phụ tùng lốp thì lốp có đổi khi đóng lệnh không: form lệnh không có trường lốp, chưa thêm phụ tùng lốp vào lệnh — Nguồn khách: không áp dụng
-* [ ] OQ-7: Lưu mẫu đảo tuỳ biến, điều kiện có Coverage Template, Spare trên 4x2 RWD (Dually), tháo Spare — Nguồn khách: không áp dụng
-* [ ] OQ-8: Đổi lốp thật giữa hai xe, một mooc gắn hai đầu kéo: cần tài khoản hết trần số xe — Nguồn khách: không áp dụng
+* [ ] OQ-7: Lưu mẫu đảo tuỳ biến, điều kiện có Coverage Template, Spare trên 4x2 RWD (Dually), tháo Spare. Một phần: mẫu đảo nằm ở Settings, cấp tài khoản, có nút Add (`Xem`); việc lưu thật chưa chạy — Nguồn khách: không áp dụng
+* [ ] OQ-8: Đổi lốp thật giữa hai xe, một mooc gắn hai đầu kéo: cần tài khoản hết trần số xe. Một phần: một mooc nối được 2 xe (`Chạy`, `fleetio-vehicle` lượt 3), lốp vẫn tách từng xe; đổi lốp thật giữa 2 xe vẫn chưa chạy — Nguồn khách: không áp dụng
 * [ ] OQ-9: Nhắc theo độ mòn: không thấy ở Tire Management, tài liệu hãng không nói tới; chưa kiểm trong form nhắc lịch — Nguồn khách: không áp dụng
 * [ ] OQ-10: Delta có đo gai định kỳ không, hay chỉ quản lý vị trí và serial? — Nguồn khách: file sơ đồ lốp của Delta
 * [ ] OQ-11: Lốp tháo ra có những đích nào: kho, xưởng, rác thải, đi đắp, chuyển xe khác? — Nguồn khách: Phân hệ FIAM (25/10/2026), mục Chốt chặn Sơ đồ lốp và Bình ắc quy
 * [ ] OQ-12: Số km lốp mooc tính theo GPS đầu kéo trong thời gian ghép có được chấp nhận không? — Nguồn khách: chưa có trong tài liệu khách gửi
+* [ ] OQ-13: Import lốp có lối vào ở đâu? Chưa thấy ở Tire Readings, Vehicle List, Settings; vẫn chỉ có tài liệu hãng — Nguồn khách: không áp dụng
 
 OQ-4 của bộ `fleetio-vehicle` (tab Tire Management) đã trả lời bằng bộ tài liệu này.
 
@@ -200,6 +209,10 @@ OQ-4 của bộ `fleetio-vehicle` (tab Tire Management) đã trả lời bằng 
 | 4x2 kép | 4x2 RWD (Dually) | Trước 2, sau 4 (LO, LI, RI, RO), đúng đầu kéo 4x2 | `Chạy` |
 | 12x, 8x4, 10x | | Chỉ thấy trong danh sách | `Không chạy` |
 | Khai trong phiếu | Xe chưa có trục | Chọn trong phiếu, Done, tự sinh lốp cho mọi vị trí | `Chạy` |
+| Xe Archived | Sau Archive | Cấu hình trục vẫn xem được, Edit trục khoá | `Chạy` |
+| Restore xe | Sau Archive | Cấu hình trục giữ nguyên | `Chạy` |
+| Xe mới | Tạo xe | Record History có sẵn "Axle config created"; chưa mở tab lốp để biết cấu hình gì | `Chạy` |
+| Tire Type từ VIN | Add Multiple, VIN giải mã | Có Front, Rear Tire Type dạng chữ; chưa kiểm có tự khai trục không | `Chạy` phần trường |
 
 ### 13.2 Lắp
 
@@ -242,6 +255,8 @@ OQ-4 của bộ `fleetio-vehicle` (tab Tire Management) đã trả lời bằng 
 | Đảo sang xe khác | | New Position chỉ có vị trí của xe đó | `Chạy` |
 | Đảo Spare | | Không có dòng, không có trong New Position | `Chạy` |
 | Lưu mẫu tuỳ biến | | Không lưu vì mẫu nằm trong Settings, quy định Settings chỉ đọc. Form Settings cho chọn cả nhóm mooc | `Không chạy` |
+| Danh mục mẫu ở Settings | Đọc Tire Management Settings | "Tire Rotation Patterns", "Add Tire Rotation Pattern", cột Name, Type, Created, Axle Configuration | `Xem` |
+| 8 mẫu đọc được | Lượt 3 | Đều Standard, có icon khoá: 5 mẫu 4x2 / 4x4; 2 mẫu 4x2 / 4x4 Dually; Standard 6x4 cho 6x2 / 6x4 / 6x6. KHÔNG mẫu nào cho mooc | `Xem` |
 
 ### 13.4 Tháo
 
@@ -275,7 +290,10 @@ OQ-4 của bộ `fleetio-vehicle` (tab Tire Management) đã trả lời bằng 
 | Lưu khi rời ô | Sửa trên dòng | Lưu ngay, tạo dòng đọc | `Chạy` |
 | Dưới mức trên màn lốp | Gai 3, Min 4 | Chỉ đổi màu; **không** sự cố, **không** thông báo, **không** nhắc | `Chạy` |
 | Import | Tài liệu hãng có mẫu | Chưa chạy | `Docs` |
+| Import, tìm lối vào | Tire Readings, menu "…" của Vehicle List, Settings tìm "import" | KHÔNG có menu "…" ở Tire Readings; Vehicle List KHÔNG có Import lốp; Settings "No results for: 'import'". Chưa loại trừ nơi chưa mở | `Xem`, `Không chạy` |
 | Tự động | Khoá, chỉ 4x2, 4x4 | Không dùng được cho đầu kéo 6x4 | `Chạy` đọc màn hình, `Docs` |
+| Tự động, công tắc | Settings › Tire Management Settings › General | Đang tắt, có icon khoá; "Readings will update daily." Không bật vì là cài đặt tài khoản, cần telematics | `Xem`, `Không chạy` |
+| Tên hãng telematics | Màn hình | KHÔNG nêu tên, Geotab chỉ từ tài liệu hãng | `Xem`, `Docs` |
 
 ### 13.6 Đồng hồ, số km lốp
 
@@ -299,13 +317,14 @@ OQ-4 của bộ `fleetio-vehicle` (tab Tire Management) đã trả lời bằng 
 | Gỡ | Xoá chip ở đầu kéo | "There are no linked Assets for this Vehicle"; lốp 12 + Spare, đồng hồ không đổi | `Chạy` |
 | Gắn lại từ mooc | | Đầu kéo hiện lại mooc | `Chạy` |
 | Đổi mooc | | Là gỡ rồi gắn. Không có lịch sử ghép, không có ngày | `Suy` |
-| Một mooc nhiều đầu kéo | Ô chọn nhiều | Xe còn lại của nhóm khác | `Không chạy` |
+| Một mooc nhiều xe | `TEST-MOOC-LOP` nối `TEST-XE-LOP`, thêm `TEST-XE-01` (Car) | Lưu được cả hai, KHÔNG cảnh báo, KHÔNG kiểm loại xe. Tác động lên lốp chưa soi riêng trong lượt này | `Chạy`, `fleetio-vehicle` lượt 3 |
+| Archive xe đã nối | `TEST-XE-LOP` Archive | Mooc chỉ còn `TEST-XE-01`; Archive bị từ chối cũng làm mất liên kết (E-fleetio-vehicle-022) | `Chạy` |
 
 ### 13.8 Đổi lốp giữa các xe
 
 | Case | Điều kiện | Kết quả thật | Bằng chứng |
 |---|---|---|---|
-| Đầu kéo ↔ mooc, hai đầu kéo, hai mooc | | **Không có thao tác.** Tháo bên A, lắp mới bên B, gõ lại mã, gai, áp suất, km. Hai lịch sử không nối | Cơ chế `Chạy` trên một xe, giữa hai xe `Suy` |
+| Đầu kéo ↔ mooc, hai đầu kéo, hai mooc | | **Không có thao tác.** Tháo bên A, lắp mới bên B, gõ lại mã, gai, áp suất, km. Hai lịch sử không nối. Lượt 3 cũng chưa đổi thật giữa 2 xe | Cơ chế `Chạy` trên một xe, giữa hai xe `Suy` |
 | Cùng xe, không qua đảo | Remove rồi lắp, mã `TEST-TIN-A2` | Không báo gì | `Chạy` |
 
 ### 13.9 Phiếu kiểm
@@ -365,3 +384,16 @@ OQ-4 của bộ `fleetio-vehicle` (tab Tire Management) đã trả lời bằng 
 | DX-16 | Không học: Undo xoá dấu vết, Copy details xoá trắng đích, mã lốp trùng không báo, đồng hồ bắt buộc cho mooc | Không áp dụng | E-fleetio-tires-009, E-fleetio-tires-010, E-fleetio-tires-015 |
 
 Tham số sẵn có liên quan ghép mooc: `P-quy-tac-ghep-mooc`.
+
+## Phát hiện lượt 3 (03/11)
+
+Nguồn: `run-notes/tires.md`, mục Lượt 3.
+
+- Lưu mẫu đảo tuỳ biến và đọc áp suất tự động đều nằm trong Settings, không chạy. Không thấy lối Import lốp ở các màn đã xem.
+- Một mooc nối được 2 xe, kể cả xe Car. Xe Archived giữ cấu hình trục, Edit trục khoá. Đổi lốp thật giữa 2 xe chưa chạy.
+
+Đã đưa vào: FR-fleetio-tires-016, 027, 029, 030, 031; BR-fleetio-tires-022 đến 025; E-fleetio-tires-017; Mục 13.1, 13.3, 13.5, 13.7, 13.8.
+
+## Phát hiện lượt 4 (03/11)
+
+Không có kết quả mới. Lưu mẫu đảo tuỳ biến (FR-fleetio-tires-016) và đọc áp suất tự động (FR-fleetio-tires-029) vẫn bị chặn: cần đổi Cài đặt, cần tích hợp telematics. Mức giữ nguyên, OQ-7 còn mở.

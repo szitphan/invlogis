@@ -116,3 +116,5 @@ Trên Figma: frame `Userflow · Fleetio · Quản lý lốp`. Đường liền l
 ## Màn liên quan
 
 Có ảnh, không đánh số trong nhóm này vì không mang tiền tố `tire-`, `axle-`: `inspection-tire-axle-error`, `inspection-tire-remark-required`, `inspection-tire-fail-summary`, `inspection-tire-fail-detail`, `part-tire-category-fields`. Mô tả ở [[docs/_research/fleetio/srs/fleetio-tires-screens.md|Màn hình]].
+
+Lượt 3 không có ảnh mới của nhóm Lốp, nên Mục 1, 2 không thêm màn. Settings › Tire Management Settings chỉ đọc, chưa chụp. Mooc nối hai xe có ảnh ở màn 1.7 nhóm Phương tiện: `trailer-linked-two-vehicles`.

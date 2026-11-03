@@ -219,7 +219,7 @@ updated: 2026-11-03
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
 | 1 | Add to Service Entry, Add to Work Order, Resolve with Note | Mục khoá | — | Xám có khoá. Tooltip của Add to Work Order: "Issue already added to a Work Order. Remove it from all Work Orders to add it to another." |
-| 2 | Draft Work Order, Get Service at Shop | Mục menu | — | Vẫn dùng được; chạy Draft trên sự cố đã gắn: chưa thử |
+| 2 | Draft Work Order, Get Service at Shop | Mục menu | — | Ảnh của lượt 2: vẫn dùng được. Lượt 3 trên #45 Draft Work Order xám có khoá, chưa rõ lý do; Close cũng xám; chưa có ảnh của lần đó |
 
 ## 1.13 Menu xử lý sự cố
 
@@ -247,8 +247,8 @@ updated: 2026-11-03
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
-| 1 | Part Location | Chọn | — | Kho kèm tồn, hoặc "None (No Inventory Adjustment)"; có kho thì ghi "This will make an inventory adjustment". Không cảnh báo vượt tồn |
-| 2 | Giá, số lượng | Số | Tiền, số | Form đúng; trang chi tiết sau lưu gấp 100 lần với ₫ (E-fleetio-repair-005). Các ô khác: run-notes không liệt kê |
+| 1 | Part Location | Chọn | — | Kho kèm tồn, hoặc "None (No Inventory Adjustment)"; có kho thì ghi "This will make an inventory adjustment". Không cảnh báo vượt tồn. Lượt 4: danh sách có nhóm "PULL FROM INVENTORY" kèm tồn từng kho |
+| 2 | Giá, số lượng | Số | Tiền, số | Unit Cost tự điền từ danh mục. Form đúng; trang chi tiết sau lưu gấp 100 lần với ₫ (E-fleetio-repair-005), gõ đơn giá chia 100 thì chi tiết đúng. Các ô khác: run-notes không liệt kê |
 
 ## 2.6 Hộp thêm công
 
@@ -257,7 +257,11 @@ updated: 2026-11-03
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
 | 1 | Technician | Chọn | Chữ, tiền | Danh sách kèm đơn giá ₫/hr, lệch so với dòng (E-fleetio-repair-014). Contact mẫu gây E-fleetio-repair-010 về sau |
-| 2 | Giờ, đơn giá | Số | Tiền | Hộp sửa ghi "Current default labor rate is ₫100000.00". Các ô khác: run-notes không liệt kê |
+| 2 | Labor Hours, Hourly Rate | Số | Tiền | Mặc định 1 giờ, nút chọn nhanh 15m, 30m, 45m, 1h, 2h, 3h, 4h. Hộp sửa ghi "Current default labor rate is ₫100000.00" |
+| 3 | Set Labor Time Entry | Ô tick | — | "Set a specific date and time when this labor was performed to create a Time Entry". Tick hiện Start Date, End Date, lúc này End bằng Start cộng số giờ; ảnh này chụp lúc chưa tick |
+| 4 | Service Task | Chọn | Chữ | "Recommended for precise maintenance cost reporting." |
+| 5 | Note, Subtotal | Ô, số | Chữ, tiền | Note tuỳ chọn. Subtotal "1.00 hrs x ₫0.00 /hr" |
+| 6 | Cancel, Save and Add Another, Save | Nút | — | Hai nút lưu khoá khi chưa chọn Technician |
 
 ## 2.7 Hộp liên kết sự cố
 
@@ -265,7 +269,9 @@ updated: 2026-11-03
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
-| 1 | Link Issues | Chọn | — | Liên kết sự cố với dòng việc. Run-notes chỉ ghi tên, chi tiết trường chưa mô tả |
+| 1 | Service Task | Chữ | — | Tên dòng việc đang liên kết. Ảnh là Brake Pads Replacement trên form lệnh mới |
+| 2 | Danh sách sự cố | Ô tick | Số, chữ | Sự cố của xe, cột số và tóm tắt. Sự cố đã ở lệnh khác có ổ khoá, tooltip "...to a Work Order. Remove it from ...orders to add it to another." bị che một phần; ảnh này chưa có dòng khoá |
+| 3 | Cancel, Save | Nút | — | Sau Save, sự cố tự tick ở khối Issues, cột Linked Line Items hiện tên dòng. Save ngay sau tick thì hộp đóng mà không tick: E-fleetio-repair-025 |
 
 ## 2.8 Duyệt nháp AI
 
@@ -287,7 +293,7 @@ updated: 2026-11-03
 
 | # | Items | Control type | Data type | Description |
 |---|---|---|---|---|
-| 1 | Add to Work Order #104 | Mục menu | — | Hiện khi xe có lệnh mở; chưa bấm |
+| 1 | Add to Work Order #104 | Mục menu | — | Hiện khi xe có lệnh mở, chỉ nêu lệnh mở mới nhất. Lượt 3 chạy trên #110: thêm dòng, sự cố vào "Resolved Issues", toast "Work Order successfully updated" |
 | 2 | Create new Work Order | Mục menu | — | Tạo lệnh mới, toast "Work Order successfully created" |
 
 ## 2.10 Lệnh tạo từ nháp
@@ -366,7 +372,7 @@ updated: 2026-11-03
 |---|---|---|---|---|
 | 1 | Warranty Opportunities (1) | Khối | Đếm | Hiện sau khi thêm đầu việc cùng mã |
 | 2 | Vehicle Coverage | Dòng | Liên kết | Service Task "Brake Inspection", "View Active Coverage" |
-| 3 | Complaint, Cause, Correction | Ô | Chữ | Trống; nút claim chưa thử |
+| 3 | Complaint, Cause, Correction | Ô | Chữ | Trống; không có nút claim, xem 2.18 |
 
 ## 3.2 Service Entry từ lệnh
 
@@ -453,3 +459,77 @@ updated: 2026-11-03
 | 4 | Require Inspections to be submitted | Bật tắt | — | Đang tắt |
 | 5 | Require a Repair Priority Class, Reason for Repair, Category on Line Items | Bật tắt | — | Đang tắt |
 | 6 | Hai mục chặn sửa mã mặc định | Bật tắt | — | Đang tắt. Xem, không đổi |
+
+## 1.14 Sự cố đã xử lý, thời gian xử lý âm
+
+![Sự cố đã xử lý, thời gian xử lý âm](images/issue-resolved-negative-ttr.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Details, All Fields | Khối | Chữ | Issue # 52, Status Resolved, Summary, Priority High "Major functionality impaired", Vehicle TEST-SUA-01, Reported Date 11/03/2026 4:20pm, Reported By, Odometer "—", Source "—" |
+| 2 | Resolved Date | Chữ | Ngày giờ | 11/03/2026 at 1:04am, lấy theo entry có sẵn, trước lúc báo sự cố |
+| 3 | Note | Chữ | — | "—" vì giải quyết qua entry |
+| 4 | Resolved Meter Entry | Chữ | Số | 2,100 km |
+| 5 | Time to Resolve | Chữ | Thời lượng | "-15 hrs 16 mins". Không cảnh báo, không chặn: E-fleetio-repair-020 |
+| 6 | Kilometers to Resolve | Chữ | Số | "—" |
+| 7 | Timeline | Khối | Sự kiện | "Issue Resolved by service entry", liên kết Service Entry #57856983; "opened this issue". Bỏ tick trong entry sau đó thì mất dòng này |
+| 8 | Unwatch, menu ba chấm, Reopen | Nút | — | Reopen không khoá vì giải quyết bằng entry |
+| 9 | Comments | Khung | Chữ | Trống, ô Add a Comment |
+
+Ảnh chỉ tới phần trên của Details; các trường dưới Source không thấy trong khung.
+
+## 2.18 Hồ sơ bảo hành trên lệnh
+
+![Hồ sơ bảo hành trên lệnh](images/wo-warranty-claim-fields.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Warranty Opportunities (2) | Tiêu đề | Đếm | Form Edit Work Order #107. Số cơ hội đổi ngay trên form |
+| 2 | Total vehicle coverage breakdown | Liên kết, số | Đếm | 1 active, 0 expiring soon, 1 total lúc chụp, trước khi thêm hai bảo hành Extended. Liên kết sang tab bảo hành của xe, không phải quy trình claim |
+| 3 | Vehicle Coverage | Khối | Chữ | "Add complaint, cause, and correction details for claim processing." |
+| 4 | Service Task, View Active Coverage | Chữ, liên kết | — | Brake Inspection, Headlamp Bulb Replacement; mỗi đầu việc khớp một thẻ |
+| 5 | Tên bảo hành | Chữ | — | TEST-SUA Bao hanh den |
+| 6 | Complaint, Cause, Correction | Ô nhiều dòng | Chữ | Tuỳ chọn. Placeholder "Add Complaint", "Add Cause", "Add Correction" ở thẻ Headlamp. Lưu xong chi tiết hiện đúng ba nội dung |
+| 7 | Cancel, Save & Continue Editing, Save Work Order | Nút | — | Không có nút claim, trạng thái claim, gửi hãng; Warranty Credits vẫn nhập tay |
+
+Thẻ Headlamp bị cắt ở đáy ảnh. Khối Replaced Parts nếu có nằm dưới khung, không thấy trong ảnh.
+
+## 4.2 Luật mã lỗi
+
+![Luật mã lỗi](images/fault-rules.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Menu Settings › Issues | Menu | — | Issue Priorities, Fault Rules đang chọn; các nhóm Tools, Inspections, Reminders, Service cùng cột |
+| 2 | Search, 1 - 11 of 11, phân trang | Ô, chữ | — | Tìm trong bảng; đếm 11 dòng. Ảnh hiện 10 dòng, dòng cuối ngoài khung |
+| 3 | Code | Cột | Mã, chữ | Mã và tên dưới mã. Hai hệ OBD (P0401) và SPN/FMI (SPN 520672 FMI 1); nhãn Critical đỏ cạnh mã |
+| 4 | Description | Cột | Chữ | Mô tả, kèm cách kiểm tra. Cột bị cắt bên phải, không đọc hết câu |
+| 5 | Add Fault Rule | Nút | — | Mở hộp, không có trong ảnh này: Code bắt buộc "The Code value of an incoming Fault must precisely match this Code to trigger this Fault Rule."; Name, Description ghi đè giá trị của mã đến; Priority Handling bắt buộc: Off, Ignore Code, Flag as Critical. Mở rồi Cancel, không lưu |
+
+## 6.8 Tab bảo hành của xe
+
+![Tab bảo hành của xe](images/vehicle-warranties-tab.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Đầu trang xe | Khối | Chữ | TEST-SUA-01, Car, 2,350 km, Active, No Group, Unassigned; Watch, Edit, Add. Xe không tự theo dõi |
+| 2 | Tab xe | Tab | — | Overview, Sensor Data Snapshots, Service History, Inspection History, Work Orders, Job Assignment History, Warranties đang chọn, More |
+| 3 | Search, More Actions, 1 - 3 of 3 | Ô, nút | — | Tìm, đếm; biểu tượng cài đặt cột |
+| 4 | Name, Manufacturer | Cột | Chữ | TEST-SUA Bao hanh den, TEST-SUA BH het han, TEST-SUA BH sap het; Manufacturer "—" |
+| 5 | Coverage Type | Cột | Badge | Standard, Extended |
+| 6 | Start Date, End Date | Cột | Ngày | 01/15/2026 đến 01/14/2027; 01/01/2024 đến 12/31/2024; 11/05/2025 đến 11/04/2026. Sớm hơn form 1 ngày: E-fleetio-repair-023 |
+| 7 | Start Meter, Coverage Distance, End Meter | Cột | Số | 1,000 km, 50,000 km, 51,000 km; hai dòng kia 0 km, Unlimited km. Cột End Meter bị cắt ở hai dòng Unlimited |
+| 8 | Status | Cột | Badge | Run-notes có nêu; cột ở ngoài khung ảnh, không đọc được ở đây |
+| 9 | Comments | Khung | Chữ | Trống, che phần bên phải của bảng |
+
+## 2.19 Bản in lệnh
+
+![Bản in lệnh](images/wo-print-pdf.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | WORK ORDER DETAILS | Khối | Chữ, ngày | Issue Date "Mon, Nov 2, 2026 12:32 PM", web 11/03/2026 1:32am: E-fleetio-repair-028. Scheduled Start Date, Actual Start Date, Expected Completion Date, Actual Completion Date, Duration, Vendor, Labels trống; Repair Priority Class N/A; Status Open; Issued By, Assigned to |
+| 2 | Khối xe | Khối | Chữ | TEST-SUA-01, VIN/SN, License Plate trống, Operator N/A, Type Car, Group, Odometer trống |
+| 3 | LINE ITEMS | Bảng | Tiền | Item, Labor, Parts, Subtotal. TEST-SUA-DV-A ₫200,000; dòng công "TEST-SUA-KTV (Contact)" 2 hrs ₫100,000; dòng sự cố "#45 · TEST-SUA engine oil leak near oil pan"; Headlamp Bulb Replacement, Brake Inspection ₫0. Tiền dạng US |
+| 4 | Đầu trang PDF | Khối | Chữ | Run-notes ghi tên, địa chỉ tài khoản, Work Order Number, Invoice Number, PO Number; ảnh đã cắt phần này, không đọc được ở đây |
+| 5 | Trang 2: DESCRIPTION, SUMMARY | Khối | Tiền | Run-notes ghi Labor Markup + ₫20,000 (10.0%), Parts Markup + ₫0 (Fixed), Warranty Credits - ₫30,000 (Fixed), Discount - ₫10,000 (5.0%), Tax +₫18,000 (10.0%), Total ₫198,000; ảnh không có trang 2. Complaint, Cause, Correction không in trong phần đọc được |

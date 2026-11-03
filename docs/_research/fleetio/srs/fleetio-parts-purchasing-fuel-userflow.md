@@ -48,6 +48,13 @@ flowchart TD
     e19["3.4 E-019 Lỗi lùi ngày, số đồng hồ cao"]
     l["3.1 Phiếu dầu"]
     e4["E-004 Xe km, lít nhưng hiện mpg"]
+    pah["2.9 Hộp điều chỉnh từ đơn đã đóng"]
+    prh["2.10 Lịch sử bản ghi đơn"]
+    pep["2.11 Sửa đơn đã mua"]
+    ppdf["2.12 PDF đơn mua"]
+    fs["2.13 Tìm xưởng"]
+    ws["1.7 PDF phiếu kiểm kê"]
+    jf["3.5 Lọc dầu theo loại cảnh báo"]
     z["Xong"]
     menu -->|"Đơn mua"| a
     menu -->|"Nhà cung cấp"| v
@@ -76,6 +83,22 @@ flowchart TD
     cls -->|"Điều chỉnh số nhận"| ma
     ma -.->|"Giảm, về một phần"| d
     d -->|"Đóng khi nhận thiếu"| pc
+    pc -->|"Điều chỉnh từ đơn đã đóng"| pah
+    cls -->|"Điều chỉnh từ đơn đã đóng"| pah
+    pah -.->|"Lưu, vẫn đã đóng"| cls
+    d -->|"Lịch sử bản ghi"| prh
+    prh -.->|"Đóng hộp"| d
+    d -->|"Sửa khi đã mua"| pep
+    pep -.->|"Lưu"| d
+    d -->|"In"| ppdf
+    ppdf -->|"Kết thúc"| z
+    d -->|"Sao chép"| b
+    v -->|"Tìm xưởng"| fs
+    fs -.->|"Huỷ"| v
+    bulk -->|"In phiếu kiểm kê"| ws
+    ws -->|"Kết thúc"| z
+    j -->|"Lọc theo loại cảnh báo"| jf
+    jf -->|"Mở dòng"| l
     pc -->|"Kết thúc"| z
     cls -->|"Đóng"| z
     v -->|"Kết thúc"| z
@@ -131,16 +154,27 @@ Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221572`, vẽ t
 | 2.8 | Đơn đã đóng khi nhận thiếu | po-closed-partial | Closed, thiếu | Có |
 | 3.3 | Lịch sử dầu có cảnh báo dung tích | fuel-history-capacity-alert | Có cảnh báo | Có |
 | 3.4 | Lỗi lùi ngày, số đồng hồ cao | fuel-entry-odometer-backdate-error | Lỗi | Có |
+| 2.9 | Hộp điều chỉnh từ đơn đã đóng | po-adjust-closed | Closed, chưa tick | Có |
+| 2.10 | Lịch sử bản ghi đơn | po-record-history | Có dữ liệu | Có |
+| 2.11 | Sửa đơn đã mua | po-edit-purchased | Purchased, khoá nhà cung cấp, kho | Có |
+| 2.12 | PDF đơn mua | po-print-pdf | Approved sau khi bỏ đã mua | Có, đã che dòng địa chỉ |
+| 3.5 | Lọc dầu theo loại cảnh báo | fuel-filter-alert-type | Lọc Fuel Capacity Alert | Có |
+| 2.13 | Tìm xưởng | vendors-find-shops | Có kết quả | Không, không lưu vì có địa chỉ thật |
+| 1.7 | PDF phiếu kiểm kê | parts-worksheet-pdf | Theo kho đang chọn | Không, không lưu vì có địa chỉ tài khoản |
 
 ## 3. Flow theo tác vụ
 
 | Flow | Happy path | Nhánh lỗi, ngoại lệ |
 |---|---|---|
 | Mua | Danh sách → form → 2.1 → hộp nhận 2.4 → Close | E-fleetio-parts-purchasing-fuel-001; E-fleetio-parts-purchasing-fuel-011; E-fleetio-parts-purchasing-fuel-012; từ chối |
+| Sửa khi đã mua, lùi | 2.1 → 2.11 → 2.1; Unmark về Approved | E-fleetio-parts-purchasing-fuel-026; sửa Draft: E-fleetio-parts-purchasing-fuel-032; sửa Full: E-fleetio-parts-purchasing-fuel-033 |
+| Sao chép, in, lịch sử | 2.1 → form đơn mới; 2.1 → 2.12; 2.1 → 2.10 | E-fleetio-parts-purchasing-fuel-030 |
+| Tìm xưởng | 2.2 → 2.13 | Add Vendor không bấm |
 | Nhận vào lệnh | 2.1 → 2.5 → form lệnh | Huỷ form: hàng ở lại kho; E-fleetio-parts-purchasing-fuel-013; E-fleetio-parts-purchasing-fuel-014 |
-| Trả, đóng | 2.1 → 2.7 → 2.1 → 2.8 | E-fleetio-parts-purchasing-fuel-015; E-fleetio-parts-purchasing-fuel-025 |
+| Trả, đóng | 2.1 → 2.7 → 2.1 → 2.8; đã đóng → 2.9 | E-fleetio-parts-purchasing-fuel-015; E-fleetio-parts-purchasing-fuel-025; E-fleetio-parts-purchasing-fuel-027 |
 | Sửa sau nhận | 2.1 → 2.6 → 2.1 | Nhà cung cấp, kho khoá; không thêm bớt dòng |
 | Tồn | 1.1 → 1.2 | E-fleetio-parts-purchasing-fuel-002 |
 | Chỉnh, chuyển | 1.1 → 1.3 hoặc 1.4 → 1.5 | E-fleetio-parts-purchasing-fuel-007; E-fleetio-parts-purchasing-fuel-008 |
-| Kiểm kê | Danh sách → 1.6 → 1.5 | E-fleetio-parts-purchasing-fuel-010 |
+| Kiểm kê | Danh sách → 1.6 → 1.5; 1.6 → 1.7 | E-fleetio-parts-purchasing-fuel-010; E-fleetio-parts-purchasing-fuel-029 |
 | Dầu | 3.2 → form → 3.1 → 3.3 | E-fleetio-parts-purchasing-fuel-004; E-fleetio-parts-purchasing-fuel-016; E-fleetio-parts-purchasing-fuel-017; E-fleetio-parts-purchasing-fuel-018; E-fleetio-parts-purchasing-fuel-019 tại 3.4; E-fleetio-parts-purchasing-fuel-020 |
+| Đối soát dầu | 3.2 → 3.5 → 3.1 | E-fleetio-parts-purchasing-fuel-020; E-fleetio-parts-purchasing-fuel-028 |

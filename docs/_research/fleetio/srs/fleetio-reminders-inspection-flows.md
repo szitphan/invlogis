@@ -35,7 +35,7 @@ flowchart TD
     N --> End["Kết thúc"]
 ```
 
-**Nhánh đảo ngược:** sửa chu kỳ tính lại ngay, không ghi lịch sử; xoá chưa bấm.
+**Nhánh đảo ngược:** sửa chu kỳ tính lại ngay, không hiện ở tab History nhưng có ở Record History; đặt tay hạn cũ không bị chặn, Overdue ngay; xoá chưa bấm.
 
 ## Flow 2: Số đồng hồ đổi, nhắc đổi trạng thái (`Chạy`)
 
@@ -74,7 +74,7 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    A["Nhắc Overdue, menu chọn Snooze"] --> B["Hộp ngày giờ, mặc định cộng 7 ngày"]
+    A["Nhắc Overdue hoặc Upcoming, menu chọn Snooze"] --> B["Hộp ngày giờ, mặc định cộng 7 ngày"]
     B --> C{"Ngày đã qua?"}
     C -->|"Có"| D["Báo thành công, vẫn Overdue"]
     C -->|"Không"| E["Snoozed, Next Due xám"]
@@ -90,7 +90,7 @@ flowchart TD
     J --> End["Kết thúc"]
 ```
 
-**Không có:** ô lý do, mức chọn sẵn, cảnh báo ngày đã qua. Hoãn từ Upcoming, Due Soon chưa bấm.
+**Không có:** ô lý do, mức chọn sẵn, cảnh báo ngày đã qua. Hoãn từ Due Soon chưa bấm trực tiếp. Mỗi lần hoãn, bỏ hoãn ghi Record History.
 
 ## Flow 4: Đóng nhắc bằng lệnh sửa chữa (`Chạy`)
 
@@ -119,7 +119,7 @@ sequenceDiagram
     end
 ```
 
-**Nhánh đảo ngược:** lệnh đã Completed khoá Edit; mở lại xem nhóm Sửa chữa. Draft Work Order xám, bấm không phản hồi.
+**Nhánh đảo ngược:** lệnh đã Completed khoá Edit; mở lại xem nhóm Sửa chữa. Draft Work Order xem Flow 11.
 
 ## Flow 5: Đóng nhắc bằng phiếu dịch vụ (`Chạy`)
 
@@ -129,7 +129,10 @@ flowchart TD
     A -->|"Resolve, Add to service history"| B["Hộp Log completed service"]
     A -->|"New Service Entry, gõ đầu việc"| C["Form hiện Last Completed, Next Due"]
     B --> D{"Cách nhập"}
-    D -->|"Smart uploads, mặc định"| E["Quét hoá đơn, chưa chạy"]
+    D -->|"Smart uploads, mặc định"| E["Đọc hoá đơn dưới 30 giây, Review, gộp dòng thành đầu việc hệ thống"]
+    E --> E0{"Có đầu việc của nhắc?"}
+    E0 -->|"Có, tự thêm tay"| G
+    E0 -->|"Không"| E00["Lưu phiếu, nhắc KHÔNG đóng"]
     D -->|"Nhập tay"| F["Chọn phiếu mới hoặc có sẵn"]
     F --> G["Form Service Entry"]
     C --> G
@@ -142,18 +145,29 @@ flowchart TD
     I --> J{"Trễ trên trục nào không"}
     J -->|"Có"| K["Late, có thể Due Soon ngay"]
     J -->|"Không"| L["On-Time"]
-    E --> End["Kết thúc"]
+    E00 --> End["Kết thúc"]
     K --> End["Kết thúc"]
     L --> End["Kết thúc"]
 ```
+
+**Nhánh đảo ngược:** Discard bỏ kết quả đọc. "Add to Service Entry" chỉ đổ vào form, phải Save lần nữa. Xem thêm khối Assessment sau lưu: FR-049.
 
 ## Flow 6: Áp và sửa bộ lịch (`Chạy`, phần nhân đôi là `Docs`)
 
 ```mermaid
 flowchart TD
-    A["Tạo bộ, chọn đồng hồ chính"] --> B["Thêm lịch, Set First Service"]
+    A0{"Tạo bộ từ đâu"}
+    A0 -->|"Mẫu hệ thống"| A1["Hiện số nhắc sẽ tạo, đồng hồ Miles cố định"]
+    A0 -->|"Trống"| A["Tạo bộ, chọn đồng hồ chính, có thể bật đồng hồ phụ"]
+    A1 --> B
+    A --> B["Thêm lịch trên Time, Primary, Secondary, Set First Service"]
     B --> C["Add Vehicles, chỉ xe cùng đơn vị"]
-    C --> D["Bảng Conflicting, Duplicate, New Interval"]
+    C --> C1{"Điều kiện theo thuộc tính"}
+    C1 -->|"Current Operator"| E25["E-025, lọc được, không lưu thành Rule"]
+    E25 -.->|"Đổi thuộc tính"| C1
+    C1 -->|"Không khớp xe"| E26["E-026, nút lưu khoá"]
+    E26 -.->|"Đổi điều kiện"| C1
+    C1 -->|"Khớp xe"| D["Bảng Conflicting, Duplicate, New Interval"]
     D --> E["Lưu, xử lý ngầm khoảng 1 phút"]
     E --> F{"Đã có nhắc cùng đầu việc"}
     F -->|"Không"| G["Tạo nhắc mới"]
@@ -173,7 +187,7 @@ flowchart TD
     P --> End["Kết thúc"]
 ```
 
-**Nhánh đảo ngược:** không có hoàn tác khi áp bộ (`Docs`).
+**Nhánh đảo ngược:** không có hoàn tác khi áp bộ (`Docs`). Gỡ xe chỉ có Delete, chưa bấm (OQ-12). Ô Rule khoá khi còn Sample Data (E-029) nên xe mới tự vào chưa chạy (OQ-21); lần gán chỉ là gán một lần theo kết quả lọc. Sau khi gán, đầu việc của bộ xám ở form nhắc lẻ của xe.
 
 ## Flow 7: Gia hạn giấy tờ (`Chạy`)
 
@@ -187,15 +201,15 @@ flowchart TD
     F -->|"Trong ngưỡng"| G["Due Soon"]
     F -->|"Đã qua"| H["Overdue"]
     F -->|"Còn xa"| I["Chưa đến ngưỡng"]
-    G --> J["Sửa tay Due Date sang kỳ mới"]
+    G --> J["Sửa tay Due Date sang kỳ mới, Contact hoặc Vehicle và Type khoá"]
     H --> J
-    J --> K["Kỳ cũ không lưu, không có chứng từ"]
+    J --> K["Status Upcoming, Record History ghi đổi hạn, không có kỳ, không có chứng từ"]
     C --> End["Kết thúc"]
     I --> End["Kết thúc"]
     K --> End["Kết thúc"]
 ```
 
-**Không có:** Resolve, History, tải giấy tờ mới.
+**Không có:** Resolve, tab History, tải giấy tờ mới. **Nhánh đảo ngược:** sửa ngày lại lần nữa; lịch sử đổi xem ở Record History.
 
 ## Flow 8: Dựng và gán biểu mẫu (`Chạy`)
 
@@ -204,16 +218,23 @@ flowchart TD
     A["Tạo biểu mẫu"] --> B{"Nguồn"}
     B -->|"Trống"| C["Thêm mục từ thanh phải"]
     B -->|"Mẫu hệ thống"| D["Sửa mục có sẵn"]
-    B -->|"PDF hoặc ảnh, Beta"| E["AI chuyển thành mục (Xem)"]
-    C --> F["Lưu, có workflow mặc định"]
+    B -->|"PDF hoặc ảnh, Beta"| E["Hộp Processing khoá form"]
+    E --> E1{"Kết quả"}
+    E1 -->|"Khoảng 4 phút chưa xong"| E27["E-027 Taking longer than usual"]
+    E27 -.->|"Restart Processing"| E
+    E27 -->|"Đóng, xác nhận Discard"| A
+    E1 -->|"Dưới 30 giây, Review, số, ô chọn, đồng hồ, ảnh thành Free Text"| D
+    C --> F0{"Nhãn hợp lệ?"}
+    F0 -->|"Mục kho thiếu nhãn"| E23["E-023"]
+    E23 -.->|"Nhập nhãn"| C
+    F0 -->|"Có"| F["Lưu, có workflow mặc định"]
     D --> F
-    E --> F
     F --> G{"Phạm vi xe"}
     G -->|"Mọi xe"| H{"Đặt lịch"}
     G -->|"Theo thuộc tính"| H
     G -->|"Xe cụ thể"| H
-    H -->|"Có"| I["Theo dõi đến hạn, quá hạn (Suy)"]
-    H -->|"Không"| J["Làm khi cần, không quá hạn (Docs)"]
+    H -->|"Có"| I["Upcoming rồi Due Soon (Chạy), quá hạn (Suy)"]
+    H -->|"Không"| J["Schedule Off, không vào Inspection Schedules, làm khi cần"]
     I --> K["Xử lý ngầm hơn 1 phút, E-017 trong lúc chờ"]
     J --> K
     K --> L{"Sửa biểu mẫu sau khi có phiếu?"}
@@ -232,7 +253,9 @@ sequenceDiagram
     participant S as Phiếu
     participant G as Vị trí
     participant W as Workflow
-    L->>F: Chọn biểu mẫu và xe
+    L->>F: Start Inspection, chọn biểu mẫu
+    F-->>L: Chỉ có ô Vehicle, Save Inspection khoá
+    L->>F: Chọn xe
     alt Chưa gán xe
         F-->>L: E-017 danh sách rỗng
     else Có quyền vị trí
@@ -250,7 +273,7 @@ sequenceDiagram
     end
     L->>S: Save Inspection
     alt Thiếu dữ liệu
-        S-->>L: E-001, E-002, E-003, E-005, E-013, E-015, kèm E-006
+        S-->>L: E-001, E-002, E-003, E-005, E-013, E-015, E-020, E-022, kèm E-006
     else Hợp lệ
         S->>G: Lưu một cặp toạ độ, sinh Location Entry
         S->>S: Gắn Job đang gán, ghi đồng hồ, đọc lốp
@@ -259,9 +282,9 @@ sequenceDiagram
     end
 ```
 
-**Nhánh đảo ngược:** phiếu đã nộp không sửa, chỉ Delete (chưa bấm). **Không có:** nháp, phát hiện toạ độ giả, Location Exception trên web.
+**Nhánh đảo ngược:** phiếu đã nộp không sửa, chỉ Delete (chưa bấm). **Không có:** nháp, phát hiện toạ độ giả, Location Exception trên web. Ảnh trên phiếu xem Flow 13, workflow khi nộp xem Flow 14, vị trí xem Flow 15.
 
-## Flow 10: Xử lý mục lỗi (`Chạy`; Create Issue, Reopen là `Xem`)
+## Flow 10: Xử lý mục lỗi (`Chạy`)
 
 ```mermaid
 flowchart TD
@@ -269,7 +292,7 @@ flowchart TD
     B -->|"Không"| C["Needs Action"]
     C --> D{"Chọn"}
     D -->|"Acknowledge, ghi chú tuỳ chọn"| E["Acknowledged, cuối"]
-    D -->|"Create Issue, chưa bấm"| F["Sự cố"]
+    D -->|"Create Issue, một cú bấm"| F["Sự cố"]
     B -->|"Có"| G{"Sự cố của mục còn mở?"}
     G -->|"Có"| H["Gộp, thêm mốc thời gian, thêm dòng"]
     G -->|"Không, đã Resolved"| I["Sự cố MỚI, không mở lại"]
@@ -283,9 +306,184 @@ flowchart TD
     E18 -.->|"Nhập"| L
     L -->|"Có"| M["Resolved in Issue"]
     K --> M
-    M --> N["Reopen, chưa bấm"]
+    M --> N{"Reopen?"}
+    N -->|"Có, không hỏi lý do"| O["Sự cố Open, Resolution Details biến mất, Timeline không thêm dòng"]
+    O -->|"Dòng lỗi về Open Issue"| F
+    N -->|"Không"| End["Kết thúc"]
     E --> End["Kết thúc"]
-    N --> End["Kết thúc"]
 ```
 
-**Không có:** đạt lại tự đóng sự cố; câu hỏi xác nhận lại trên web; đường quay lại từ Acknowledged.
+**Không có:** đạt lại tự đóng sự cố; câu hỏi xác nhận lại trên web; đường quay lại từ Acknowledged; lý do khi Reopen. Reopen có vào Record History của sự cố không: chưa mở (OQ-18).
+
+## Flow 11: Bản nháp lệnh bằng AI (`Chạy` đến Discard; Add to là `Xem`)
+
+```mermaid
+sequenceDiagram
+    actor Q as Quản lý
+    participant R as Nhắc
+    participant A as Xử lý AI
+    participant D as Bản nháp
+    participant W as Lệnh sửa chữa
+    Q->>R: Resolve, Draft Work Order
+    alt Nhắc Upcoming
+        R-->>Q: E-030 xám, icon khoá, khoá theo trạng thái
+    else Nhắc Due Soon hoặc Overdue
+        R->>A: Gom hồ sơ toàn xe
+        A-->>Q: Toast Drafting service, chạy nền
+        A->>D: Xong dưới 2 phút
+        D-->>Q: Dải Work Order drafted trên nhắc của cùng xe
+        Q->>D: Review draft
+        D-->>Q: Nhóm Resolves và Due for maintenance, tick sẵn hết, Est. Subtotal
+        alt Discard
+            Q->>D: Discard, không sinh lệnh
+        else Add to, chưa bấm
+            Q->>W: Lệnh đang mở hoặc lệnh mới
+            W-->>Q: Tự điền Repair Priority Class, Issue Date, WO Status
+        end
+    end
+```
+
+**Nhánh đảo ngược:** Discard là bỏ hết; bỏ tick từng dòng có "Clear all" trên hộp. Thêm việc Upcoming vào lệnh rồi hoàn thành sẽ mất phần còn lại của chu kỳ (`Suy`).
+
+## Flow 12: Ghi tuân thủ từng lần (`Chạy`)
+
+```mermaid
+flowchart TD
+    A["Service Entry hoặc lệnh Completed có đúng đầu việc"] --> B{"Trễ từ 10% chu kỳ trở lên trên trục nào?"}
+    B -->|"Không, sớm hoặc đúng"| C["On-Time, chữ ahead"]
+    B -->|"Trễ dưới 10%, 9 ngày trên 92, 99 km trên 1.000"| D["On-Time, chữ behind vẫn đỏ"]
+    B -->|"Từ 10%, 10 ngày trên 92, 100 km trên 1.000"| E["Late"]
+    C --> F["Thêm dòng Due, Completed, Compliance"]
+    D --> F
+    E --> F
+    F --> G["Thẻ nhắc: số lần đúng hạn trên số lần làm"]
+    G --> H["Trung bình danh sách khớp theo lần, một điểm đo"]
+    H --> I["Kỳ sau tính từ lần làm, kể cả ghi lùi ngày"]
+    I --> End["Kết thúc"]
+```
+
+**Nhánh đảo ngược:** Void số đồng hồ làm trạng thái lùi; xoá Service Entry chưa thử.
+
+## Flow 13: Ảnh trên phiếu (`Chạy`; chụp webcam thật chưa chạy)
+
+```mermaid
+flowchart TD
+    S{"Loại ảnh trên phiếu"}
+    S -->|"Mục Photo"| A["Bấm Pick File"]
+    S -->|"Ảnh xác minh đồng hồ"| M["Dòng Meter Entry Photo Verification"]
+    A --> B{"Prevent Use of Stored Photos"}
+    B -->|"Bật"| C{"Có camera?"}
+    C -->|"Không"| E21["E-021 Webcam Disabled"]
+    E21 --> X["Mục bắt buộc: không nộp được phiếu"]
+    C -->|"Có, chưa chạy"| D["Chụp"]
+    B -->|"Tắt"| F["Pick File, Or drop file here"]
+    F --> G{"Ảnh đã tải xong?"}
+    G -->|"Chưa, bấm nộp"| E22["E-022 is required"]
+    E22 -.->|"Chờ File uploaded, bấm lại"| G
+    G -->|"Rồi"| H["Mục Photo đạt"]
+    D --> H
+    M --> N["Luôn chỉ webcam, không theo cờ trên"]
+    N --> O{"Có ảnh?"}
+    O -->|"Không, kể cả tick Void"| E20["E-020 must attach an odometer image"]
+    E20 -.->|"Admin tắt Require Photo Verification"| P["Dòng ảnh biến mất"]
+    O -->|"Có, chưa chạy"| Q["Mục đồng hồ đạt"]
+    P --> Q
+    H --> End["Kết thúc"]
+    Q --> End["Kết thúc"]
+    X --> End["Kết thúc"]
+```
+
+**Nhánh đảo ngược:** đổi cờ trên biểu mẫu áp ngay cho lần làm phiếu sau; không có đường bỏ qua cho từng phiếu.
+
+## Flow 14: Workflow khi nộp phiếu (`Chạy` cho form submitted, trigger đạt, lỗi, mục lỗi tạo sự cố)
+
+```mermaid
+flowchart TD
+    A["Nộp phiếu"] --> B{"Workflow bật trên biểu mẫu"}
+    B -->|"If an item passes, đổi trạng thái"| P1["Xe sang Inactive ngay chỉ vì mục đạt, không hỏi"]
+    B -->|"If an item fails từng mục, đổi trạng thái"| P2["Xe sang Out of Service"]
+    P1 --> F
+    P2 --> E
+    B -->|"If form is submitted, đổi trạng thái"| C["Xe sang In Shop ngay, không hỏi, kể cả có mục Fail"]
+    B -->|"ANY Failed tạo sự cố"| D{"Có mục lỗi?"}
+    D -->|"Có"| E["Mỗi mục lỗi sinh một sự cố, hoặc gắn lại sự cố đang mở"]
+    D -->|"Không"| F["Lưu phiếu"]
+    B -->|"Không có workflow xử lý lỗi"| G{"Có mục lỗi?"}
+    G -->|"Có"| H["Fail kèm Acknowledge, Create Issue"]
+    G -->|"Không"| F
+    C --> I{"Có mục lỗi?"}
+    I -->|"Có"| H
+    I -->|"Không"| F
+    C --> J["Đổi lại tay bằng Edit Vehicle"]
+    E --> End["Kết thúc"]
+    F --> End["Kết thúc"]
+    H --> End["Kết thúc"]
+    J --> End["Kết thúc"]
+```
+
+**Nhánh đảo ngược:** workflow không tự đổi trạng thái xe về; phải sửa tay, bằng Edit Vehicle hoặc ô trạng thái đầu trang (`Chạy`). Chưa chạy Send an email, Assign user (OQ-15). Không có action tạo lệnh. Trạng thái xe không chặn làm phiếu.
+
+## Flow 15: Vị trí và Location Exception (`Chạy (vị trí giả lập)` trên web; `Chạy (Fleetio Go)` một ca)
+
+```mermaid
+flowchart TD
+    A{"Nộp từ đâu"}
+    A -->|"Web"| B["Một cặp toạ độ cấp phiếu, lấy lúc khởi động app"]
+    A -->|"Fleetio Go"| C["Toạ độ riêng từng mục"]
+    B --> D["Mục không có toạ độ, không so giữa các phiếu"]
+    D --> E["location_exception false, kể cả lệch khoảng 1.100 km giữa các phiếu"]
+    C --> F{"So với ngưỡng (Docs)"}
+    F -->|"Lệch tối đa 37 m, ca đã chạy"| G["are_items_too_close false, số mục quá xa 0, location_exception false"]
+    F -->|"Vượt ngưỡng, chưa có ca dương"| H["Gắn Location Exception (Docs)"]
+    E --> End["Kết thúc"]
+    G --> End["Kết thúc"]
+    H --> End["Kết thúc"]
+```
+
+**Không có:** phát hiện toạ độ giả trên web. Tắt định vị trên app chưa thử (OQ-7).
+
+## Flow 16: Giao dịch vụ thuê ngoài (`Chạy` đến Confirm)
+
+```mermaid
+sequenceDiagram
+    actor Q as Quản lý
+    participant R as Nhắc
+    participant A as Hộp Assign outsourced service
+    participant N as Thông báo
+    Q->>R: Resolve, Find a shop
+    R-->>A: Service Details, có nhắc đang mở, Assign all
+    Q->>A: Chọn Assign to
+    alt Liên hệ không có đăng nhập
+        A-->>Q: E-031 No results
+    else Người dùng
+        A-->>Q: Notification Methods, Email, Text Message tick sẵn
+    end
+    opt Bấm ASAP
+        A-->>Q: Continue khoá, không gọi máy chủ (OQ-26)
+    end
+    Q->>A: Continue
+    A-->>Q: Suggest Shop tích xanh, không hiện cửa hàng, sang Confirm
+    Q->>A: Assign, chưa bấm
+    A->>N: Gửi email, SMS thật (Suy)
+```
+
+**Nhánh đảo ngược:** Back ở Confirm, hoặc đóng hộp, không sinh gì (`Chạy`).
+
+## Flow 17: Trừ kho từ phiếu (`Chạy`)
+
+```mermaid
+flowchart TD
+    A["Mục Inventory Adjustment, chọn Part Location"] --> B["Ô Parts, chỉ phụ tùng ở kho đó kèm tồn"]
+    A --> C{"Bỏ trống?"}
+    C -->|"Có"| D["Phiếu ghi No parts used"]
+    C -->|"Không"| B
+    B --> E["Số lượng, mặc định 1"]
+    E --> F["Nộp phiếu"]
+    F --> G["Trừ ngay, không duyệt, Reason trống"]
+    G --> H["Inventory Activity ghi số phiếu, tồn trước, tồn sau"]
+    H --> I["Phiếu hiện kho và số dòng, không phải số lượng"]
+    D --> End["Kết thúc"]
+    I --> End["Kết thúc"]
+```
+
+**Nhánh đảo ngược:** phiếu không sửa được; hoàn kho qua Adjust Inventory tay là `Suy`, chưa thử.

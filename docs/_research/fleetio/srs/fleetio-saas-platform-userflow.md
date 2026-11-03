@@ -8,7 +8,7 @@ updated: 2026-11-03
 
 # Nền tảng SaaS — User flow
 
-`stage` ghi theo lựa chọn của user: tự chốt, xem ở bản cuối (02/11/2026). Các màn số 2.2 trở đi và 3.2 trở đi thêm sau lượt chạy 03/11/2026, chưa qua duyệt.
+`stage` ghi theo lựa chọn của user: tự chốt, xem ở bản cuối (02/11/2026). Các màn số 2.2 trở đi và 3.2 trở đi thêm sau lượt chạy 03/11/2026, chưa qua duyệt. Các màn 2.6 đến 2.9, 3.10 đến 3.12, 4.4, 5.6 đến 5.11 thêm từ lượt 3; 2.10 từ lượt 4.
 
 ## 1. Sơ đồ tổng
 
@@ -24,6 +24,21 @@ flowchart TD
     d3["2.3 Hỏi dữ liệu"]
     d4["2.4 Hộp chia sẻ báo cáo"]
     d5["2.5 Báo cáo đã chia sẻ"]
+    d6["2.6 Lỗi báo cáo"]
+    d7["2.7 Hỏi dữ liệu: xe không tồn tại"]
+    d8["2.8 Hộp lưu báo cáo"]
+    d9["2.9 Báo cáo đã lưu"]
+    d10["2.10 Bộ lọc báo cáo"]
+    r10["3.10 Lịch sử phiên bản"]
+    r11["3.11 Lượt chạy thất bại"]
+    r12["3.12 Luật đổi trạng thái xe"]
+    f4["4.4 Cài đặt thông báo cá nhân"]
+    l6["5.6 Lịch sử bản ghi sự cố"]
+    l7["5.7 Hộp thông báo"]
+    l8["5.8 Kho tài liệu có tệp"]
+    l9["5.9 Trang tệp"]
+    l10["5.10 Form bật truy cập"]
+    l11["5.11 Form đặt xe"]
     e10["E-010 Lối thu hồi trong hộp không tác dụng"]
     e12["E-012 Số sai không báo lỗi"]
     e13["E-013 Link công khai sinh ngay"]
@@ -108,9 +123,40 @@ flowchart TD
     l4 -->|"Kết thúc"| z
     a -->|"Tài liệu"| l5
     l5 -->|"Kết thúc"| z
+    d -->|"Mở báo cáo lỗi"| d6
+    d6 -.->|"Quay lại"| d
+    d2 -->|"Lưu"| d8
+    d8 -->|"Lưu"| d9
+    d8 -.->|"Huỷ"| d2
+    d2 -->|"Mở bộ lọc"| d10
+    d10 -.->|"Tìm"| d2
+    d -->|"Đã lưu"| d9
+    d9 -.->|"Mở báo cáo đã lưu"| d2
+    d3 -->|"Hỏi xe mới tạo"| d7
+    d7 -->|"Đối chiếu tay"| c
+    k -->|"Lịch sử phiên bản"| r10
+    r10 -.->|"Đóng"| k
+    r -->|"Mở lượt lỗi"| r11
+    r11 -.->|"Quay lại"| r
+    h -->|"Luật trên xe"| r12
+    r12 -->|"Mở lịch sử trạng thái"| l2
+    e -->|"Cài đặt thông báo"| f4
+    f4 -->|"Kết thúc"| z
+    c -->|"Lịch sử bản ghi"| l6
+    l6 -.->|"Đóng"| c
+    a -->|"Chuông"| l7
+    l7 -->|"Mở bản ghi"| c
+    l5 -->|"Tải tệp"| l8
+    l8 -->|"Mở tệp"| l9
+    l9 -.->|"Quay lại"| l8
+    l8 -->|"Kết thúc"| z
+    l1 -->|"Bật truy cập"| l10
+    l10 -.->|"Huỷ"| l1
+    l4 -->|"Thêm đặt xe"| l11
+    l11 -.->|"Huỷ"| l4
 ```
 
-Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221842`, chưa có các màn thêm sau 03/11/2026. Đường liền là luồng thường, nét đứt là quay lại.
+Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221842`, chưa có các màn thêm sau 03/11/2026. Đường liền là luồng thường, nét đứt là quay lại. Màn 2.8, 2.9, 2.10, 4.4, 5.9, 5.10, 5.11 không có ảnh, mô tả ở Mục 13 của spec.
 
 ## 2. Màn hình
 
@@ -139,3 +185,18 @@ Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221842`, chưa 
 | 5.3 | Danh sách thu hồi hãng | recalls-list | Có dữ liệu | Có |
 | 5.4 | Đặt xe dùng chung | motor-pool-reservations | Empty | Có |
 | 5.5 | Kho tài liệu | documents-empty | Empty | Có |
+| 2.6 | Lỗi báo cáo | report-expense-entries-500 | Load error | Có |
+| 2.7 | Hỏi dữ liệu: xe không tồn tại | ai-analyst-vehicle-not-exist | Có dữ liệu | Có |
+| 2.8 | Hộp lưu báo cáo | report-save-dialog | Mới | Không có ảnh |
+| 2.9 | Báo cáo đã lưu | reports-saved | Có dữ liệu | Không có ảnh |
+| 2.10 | Bộ lọc báo cáo | report-filters | Mở panel | Không có ảnh |
+| 3.10 | Lịch sử phiên bản | automation-version-v1-lech | Mở hộp | Có |
+| 3.11 | Lượt chạy thất bại | automation-run-failure | Load error | Có |
+| 3.12 | Luật đổi trạng thái xe | automation-vehicle-status-flip | Mở hộp | Có |
+| 4.4 | Cài đặt thông báo cá nhân | notification-settings | Mặc định | Không có ảnh |
+| 5.6 | Lịch sử bản ghi sự cố | record-history-issue | Mở hộp | Có |
+| 5.7 | Hộp thông báo | notifications-inbox | Có dữ liệu | Có |
+| 5.8 | Kho tài liệu có tệp | documents-list-file | Có dữ liệu | Có |
+| 5.9 | Trang tệp | document-detail | Có dữ liệu | Không có ảnh |
+| 5.10 | Form bật truy cập | contact-enable-access | Mới | Không có ảnh |
+| 5.11 | Form đặt xe | vehicle-reservation-form | Mới | Không có ảnh |

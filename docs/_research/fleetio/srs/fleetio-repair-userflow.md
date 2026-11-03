@@ -32,6 +32,7 @@ flowchart TD
     rnd["1.6 Hộp xử lý kèm ghi chú"]
     rn["1.7 Sự cố, Đã xử lý bằng ghi chú"]
     c["1.3 Sự cố, Đã xử lý"]
+    ttr["1.14 Sự cố đã xử lý, thời gian xử lý âm"]
     rl["1.11 Sự cố, Khoá mở lại"]
     sen["Hộp thêm vào phiếu dịch vụ, chưa có ảnh"]
     sef["Form phiếu dịch vụ, chưa có ảnh"]
@@ -44,6 +45,7 @@ flowchart TD
     al["2.6 Hộp thêm công"]
     li["2.7 Hộp liên kết sự cố"]
     cp["2.13 Bản sao lệnh"]
+    pdf["2.19 Bản in lệnh"]
     e1["E-001 Số đồng hồ đầu không hợp lệ"]
     e89["E-008, E-009 Số đồng hồ cuối sai"]
     e1011["E-010, E-011 Kỹ thuật viên mẫu"]
@@ -51,6 +53,7 @@ flowchart TD
     e4["E-004 Không chạy được đánh giá"]
     wb["2.16 Khối bảo hành, chưa có cơ hội"]
     wo["2.17 Cơ hội bảo hành"]
+    wcl["2.18 Hồ sơ bảo hành trên lệnh"]
     dc{"Đủ điều kiện hoàn thành?"}
     e2["2.14 E-002, E-006, E-007 Thiếu điều kiện hoàn thành"]
     wc["2.11 Lệnh đã hoàn thành"]
@@ -59,6 +62,7 @@ flowchart TD
     ro["2.12 Hộp mở lại lệnh"]
     nf["3.3 Phiếu dịch vụ đã xoá"]
     j["4.1 Mã lỗi"]
+    fr["4.2 Luật mã lỗi"]
     t["5.1 Đầu việc"]
     w["6.1 Thêm bảo hành"]
     wf["6.2 Form bảo hành"]
@@ -66,6 +70,7 @@ flowchart TD
     wt["6.4 Mẫu bảo hành"]
     ws["6.5 Bảo hành chuẩn, 6.6 Mã phân loại"]
     wl["6.7 Danh sách bảo hành"]
+    vw["6.8 Tab bảo hành của xe"]
     ms["7.1 Cài đặt bảo dưỡng"]
     z["Xong"]
     menu -->|"Sự cố"| a
@@ -81,7 +86,7 @@ flowchart TD
     e3 -.->|"Điền tiếp"| n
     b -->|"Xử lý"| rm
     b -->|"Sự cố đã gắn lệnh"| lockm
-    lockm -->|"Nháp lệnh sửa chữa"| dr
+    lockm -->|"Nháp lệnh sửa chữa, lượt 3 xám trên #45"| dr
     lockm -.->|"Đóng menu"| b
     rm -->|"Nháp lệnh sửa chữa"| dr
     dr -->|"AI xong"| dy
@@ -89,7 +94,7 @@ flowchart TD
     dy -.->|"Bỏ nháp, không hỏi"| b
     dv -->|"Thêm vào"| dm
     dm -->|"Tạo lệnh mới"| wd
-    dm -->|"Thêm vào lệnh đang mở, chưa chạy"| f
+    dm -->|"Thêm vào lệnh đang mở mới nhất"| f
     dv -.->|"Bỏ nháp"| b
     wd -->|"Xem lệnh"| f
     rm -->|"Thêm vào lệnh sửa chữa, tab mới"| h
@@ -105,6 +110,9 @@ flowchart TD
     sef -->|"Lưu, không gõ ngày"| e12
     e12 -.->|"Điền ngày"| sef
     i -->|"Sự cố tự chuyển Đã xử lý"| c
+    sen -->|"Chọn phiếu có sẵn, phiếu cũ hơn lúc báo"| ttr
+    ttr -.->|"Sửa phiếu, bỏ tick, không hỏi"| b
+    i -.->|"Sửa phiếu, bỏ tick sự cố"| b
     c -.->|"Mở lại, xử lý không bằng lệnh"| b
     b -->|"Đóng"| cld
     cld -->|"Đóng sự cố"| cl
@@ -126,6 +134,8 @@ flowchart TD
     li -.->|"Lưu"| fi
     f -->|"Sao chép"| cp
     cp -->|"Lưu"| f
+    f -->|"In, tab mới"| pdf
+    pdf -.->|"Quay lại tab lệnh"| f
     f -->|"Chạy đánh giá, thiếu dữ liệu"| e4
     e4 -.->|"Thêm chi phí, đầu việc"| f
     h -->|"Lưu lệnh sửa chữa"| f
@@ -136,10 +146,13 @@ flowchart TD
     h -->|"Lưu, kỹ thuật viên mẫu"| e1011
     e1011 -.->|"Lệnh kẹt"| f
     f -->|"Xem tiền sau lưu"| e5
-    e5 -.->|"Không sửa tay được"| f
+    e5 -.->|"Chỉ né bằng gõ đơn giá chia 100"| f
     f -->|"Khối bảo hành"| wb
-    wb -->|"Thêm đầu việc cùng mã"| wo
+    wb -->|"Thêm đầu việc cùng mã đúng mức"| wo
     wo -.->|"Quay lại"| f
+    wo -->|"Điền ba ô chữ"| wcl
+    wcl -->|"Lưu lệnh"| f
+    wo -->|"View Active Coverage, liên kết"| vw
     f -->|"Trạng thái Hoàn thành"| dc
     dc -->|"Có"| wc
     dc -->|"Không"| e2
@@ -152,6 +165,8 @@ flowchart TD
     ro -->|"Mở lại địa chỉ phiếu cũ"| nf
     nf -->|"Kết thúc"| z
     j -->|"Liên kết sự cố"| b
+    j -->|"View Fault Rule"| fr
+    fr -->|"Kết thúc"| z
     t -->|"Kết thúc"| z
     wl -->|"Thêm bảo hành"| wv
     wv -->|"Chọn xe"| w
@@ -162,6 +177,8 @@ flowchart TD
     ws -->|"Lưu"| wl
     wf -->|"Lưu"| wl
     wl -->|"Kết thúc"| z
+    vw -->|"Kết thúc"| z
+    ms -->|"Cài đặt, Luật mã lỗi"| fr
     ms -->|"Kết thúc"| z
 ```
 
@@ -214,6 +231,11 @@ Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221224`, chỉ 
 | 6.6 | Mã phân loại bảo hành | warranty-maintenance-codes | Có mã | Có |
 | 6.7 | Danh sách bảo hành | warranty-list | Có dữ liệu | Có |
 | 7.1 | Cài đặt bảo dưỡng | maintenance-settings | Chỉ đọc | Có |
+| 1.14 | Sự cố đã xử lý, thời gian xử lý âm | issue-resolved-negative-ttr | Resolved, số âm | Có |
+| 2.18 | Hồ sơ bảo hành trên lệnh | wo-warranty-claim-fields | Đang sửa, hai cơ hội | Có |
+| 4.2 | Luật mã lỗi | fault-rules | Có dữ liệu | Có |
+| 6.8 | Tab bảo hành của xe | vehicle-warranties-tab | Ba bảo hành | Có |
+| 2.19 | Bản in lệnh | wo-print-pdf | Trang 1, đã cắt đầu trang | Có |
 
 Màn chưa có ảnh riêng: form sự cố, hộp thêm vào Service Entry, form Service Entry.
 
@@ -221,15 +243,17 @@ Màn chưa có ảnh riêng: form sự cố, hộp thêm vào Service Entry, for
 
 | Flow | Happy path | Nhánh lỗi, ngoại lệ |
 |---|---|---|
-| Báo và xử lý | 1.1 → form → 1.2 → 1.13 → 1.9 → 1.10 → 2.8 → 2.9 → 2.10 → 2.3 | Form trống: E-fleetio-repair-003. Discard nháp. Phân loại ưu tiên hứa mà trống: E-fleetio-repair-017 |
+| Báo và xử lý | 1.1 → form → 1.2 → 1.13 → 1.9 → 1.10 → 2.8 → 2.9 → 2.10 → 2.3 | Form trống: E-fleetio-repair-003. Discard nháp. Phân loại ưu tiên hứa mà trống: E-fleetio-repair-017. Câu AI sai, dòng trùng: E-fleetio-repair-021, 022. Sự cố đã gắn lệnh: 1.12 |
 | Xử lý bằng ghi chú | 1.2 → 1.13 → 1.6 → 1.7 | Nút khoá khi trống. Mở lại về 1.2 |
 | Đóng | 1.2 → 1.4 → 1.5 | Mở lại về 1.2 |
-| Ghi lịch sử từ sự cố | 1.2 → 1.13 → hộp → form → 3.1 → 1.3 | E-fleetio-repair-012. Mở lại về 1.2, phiếu còn |
-| Thực hiện lệnh | 2.1 → 2.3 → 2.2 → 2.4 → 2.5, 2.6, 2.7 → 2.3 | E-fleetio-repair-001, 005, 008, 009, 010, 011, 014, 015, 016, 018 |
+| Ghi lịch sử từ sự cố | 1.2 → 1.13 → hộp → form → 3.1 → 1.3 | E-fleetio-repair-012. Mở lại về 1.2, phiếu còn. Chọn phiếu có sẵn cũ hơn lúc báo: 1.14, E-fleetio-repair-020. Bỏ tick trong phiếu về 1.2, không hỏi |
+| Thực hiện lệnh | 2.1 → 2.3 → 2.2 → 2.4 → 2.5, 2.6, 2.7 → 2.3 | E-fleetio-repair-001, 005, 008, 009, 010, 011, 014, 015, 016, 018, 019, 025, 026, 027 |
 | Hoàn thành | 2.3 → 2.11 → 3.2 → 1.3 → 1.11 | E-fleetio-repair-002, 006, 007 tại 2.14 |
 | Mở lại | 2.11 → 2.12 → 2.3 → 2.2 → 2.3 → 2.11 → 3.2 mới | Phiếu cũ thành 3.3. Không báo trước hậu quả |
 | Sao chép | 2.3 → 2.13 → 2.3 mới | Không chép sự cố, ngày, đồng hồ |
-| Bảo hành | 6.7 → 6.3 → 6.1 → 6.4 hoặc 6.5, 6.6 → 6.7; 2.16 → 2.17 | Xe không có Make, Model: "No options" |
+| In lệnh | 2.3 → 2.19 | Giờ PDF lệch ngày với web: E-fleetio-repair-028 |
+| Bảo hành | 6.7 → 6.3 → 6.1 → 6.4 hoặc 6.5, 6.6 → 6.7; 2.16 → 2.17 → 2.18 → 2.3; 2.17 → 6.8 | Xe không có Make, Model: "No options". Mã hệ thống không phủ assembly. Expired, Expiring Soon không gợi ý. End Date lệch: E-fleetio-repair-023. Thiếu đơn vị: E-fleetio-repair-024 |
+| Luật mã lỗi | 4.1 → 4.2; 7.1 → 4.2 | Mở hộp Add Fault Rule rồi Cancel, không lưu |
 | Cấu hình | 7.1 | Không đổi cài đặt |
 
 Soát theo vai trò: thiếu thao tác của Operator trên web vì lái xe dùng Fleetio Go; chưa xem app.

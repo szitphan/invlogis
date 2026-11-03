@@ -60,6 +60,10 @@ stateDiagram-v2
     CoTruc --> KhoaCauHinh: Lắp lốp đầu tiên
     KhoaCauHinh --> KhoaCauHinh: Đổi vai trò trục
     KhoaCauHinh --> CoTruc: Tháo hết lốp
+    CoTruc --> XeArchived: Archive xe
+    KhoaCauHinh --> XeArchived: Archive xe, chưa thử có lốp
+    XeArchived --> CoTruc: Restore xe
+    XeArchived --> [*]: Giữ lưu trữ
 ```
 
 | Trạng thái | Hành động | Sang | Điều kiện | Hiệu ứng | Câu chữ | Mức |
@@ -73,6 +77,9 @@ stateDiagram-v2
 | Khoá cấu hình | Sửa cấu hình | Bị chặn | Còn lốp | Tooltip | "Axle Configuration cannot be edited for this Vehicle because it has installed Tires" | `Chạy` |
 | Khoá cấu hình | Đổi vai trò | Khoá cấu hình | Không | Không có dòng Activity, ghi vào Axle Type các dòng sau | Không có câu riêng | `Chạy` |
 | Khoá cấu hình | Remove All | Có trục | Tháo hết | Edit mở lại, Activity giữ nguyên | "1 tire was removed from this asset." | `Chạy` |
+| Có trục hoặc khoá cấu hình | Archive xe | Xe Archived | Không còn Lệnh chưa xong | Cấu hình vẫn xem được, Edit trục khoá; liên kết xe mất, xem [[docs/_research/fleetio/srs/fleetio-vehicle-states.md\|States Phương tiện]] Mục 6.1 | Hộp "Confirm Vehicle Archive" | `Chạy` |
+| Xe Archived | Restore xe | Cấu hình cũ | Gói còn chỗ | Cấu hình giữ nguyên | "Record successfully restored!" | `Chạy` |
+| Xe Archived | Sửa cấu hình | Bị chặn | — | Edit trục khoá | Chưa ghi nhận câu chữ | `Chạy` |
 
 Xe không có lốp như container, máy phát: để ở trạng thái chưa khai, không có loại riêng (`Suy`).
 

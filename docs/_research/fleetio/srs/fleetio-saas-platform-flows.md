@@ -82,6 +82,8 @@ flowchart TD
     K -->|"Gạt, xác nhận"| M["Enabled, sinh v.1"]
     M --> N{"Dừng thế nào?"}
     N -->|"Gạt tắt, xác nhận"| J
+    J -->|"Bật lại, không sửa"| M2["Enabled, vẫn v.1, Enabled At đổi"]
+    M2 --> N
     N -->|"Archive"| O["Archived, tắt ngay, chỉ đọc"]
     O --> P{"Restore?"}
     P -->|"Có"| J
@@ -102,17 +104,19 @@ flowchart TD
     D -->|"Có"| F["Chạy hành động, mọi automation khớp đều chạy"]
     F --> G{"Hành động xong?"}
     G -->|"Có"| H["Lượt SUCCESS"]
-    G -->|"Lỗi, chưa tái hiện"| I["E-fleetio-saas-platform-011 Failed Runs"]
+    G -->|"Lỗi"| I["E-fleetio-saas-platform-011 Lượt FAILURE, xem Flow 15"]
     H --> J{"Bản ghi có đổi và trigger gồm Updated?"}
-    J -->|"Có"| A
+    J -->|"Có, trên Issue"| A
+    J -->|"Có, trên Vehicle"| K2["Không sinh lượt mới, OQ-17"]
     J -->|"Không đổi nữa"| K["Dừng"]
+    K2 --> Z
     C --> Z["Kết thúc"]
     E --> Z
     I --> Z
     K --> Z
 ```
 
-Vòng lặp giữa hai automation lật giá trị chưa chạy (OQ-5). Lượt do automation gây ra vẫn ghi "Triggered By" là người tạo Issue; lượt chỉ thêm comment ghi "Records: No records changed".
+Vòng lặp giữa hai automation lật giá trị chưa chạy (OQ-5). Lượt do automation gây ra vẫn ghi "Triggered By" là người tạo Issue; lượt thêm comment hoặc đổi Status xe đều ghi "Records: No records changed" (E-fleetio-saas-platform-021). Trigger Updated chạy trên mọi thay đổi của bản ghi, không chọn được theo trường.
 
 ## Flow 6: Sự cố sinh lệnh sửa (`Chạy` đến khi WO Open)
 
@@ -168,6 +172,8 @@ flowchart TD
     J --> Z
 ```
 
+Form Enable Access đọc được ở lượt 3 (`Xem`, không lưu): Role mặc định Fleet Manager, Record Sets đều mặc định Full Access, thư mời gửi ngay trừ khi chọn Delay email invitation. Đề xuất Invlogis đảo mặc định (NFR-fleetio-saas-platform-014).
+
 ## Flow 9: Chia sẻ báo cáo (`Chạy`)
 
 ```mermaid
@@ -192,20 +198,25 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A["Mở báo cáo"] --> B["Filters, Columns"]
+    A["Mở báo cáo"] --> A1{"Trang tải được?"}
+    A1 -->|"Lỗi 500"| A2["E-fleetio-saas-platform-014 We're sorry, thử lại sau"]
+    A1 -->|"Được"| B["Filters, Columns"]
     B --> C{"Có dữ liệu?"}
     C -->|"Không"| D["E-fleetio-saas-platform-002 Không có dữ liệu"]
     D --> B
     C -->|"Có"| E{"Chọn thao tác"}
-    E -->|"Export CSV"| F["Export Visible Columns hoặc Export All Columns"]
+    E -->|"Export CSV, chỉ giao diện mới"| F["Export Visible Columns hoặc Export All Columns"]
     E -->|"Print"| G["In"]
-    E -->|"Save"| H["Vào Saved, chưa đọc"]
-    F --> Z["Kết thúc"]
+    E -->|"Save"| H["Xem Flow 17"]
+    A2 --> Z["Kết thúc"]
+    F --> Z
     G --> Z
     H --> Z
 ```
 
-## Flow 11: Hỏi dữ liệu bằng lời (`Chạy` 2 câu)
+Giao diện cũ không thấy nút Share, Export CSV; `vehicles/details`, `work_order_status_changes/summary` không có Export CSV (FR-fleetio-saas-platform-054).
+
+## Flow 11: Hỏi dữ liệu bằng lời (`Chạy` 2 câu lượt 2; lượt 3 xem Flow 20)
 
 ```mermaid
 sequenceDiagram
@@ -255,4 +266,249 @@ flowchart TD
     G -->|"Có"| H["Bỏ tick, bản ghi đã làm giữ nguyên, Suy"]
     G -->|"Không"| Z["Kết thúc"]
     H --> Z
+```
+
+## Flow 14: Sửa automation đang bật, xem phiên bản (`Chạy`)
+
+```mermaid
+flowchart TD
+    A["Automation Enabled, v.1"] --> B["Edit, đổi nội dung"]
+    B --> C["Băng You have unsaved changes on this enabled automation"]
+    C --> D{"Chọn trong menu Save"}
+    D -->|"Discard Unsaved Changes, Xem"| A
+    D -->|"Save Automation"| E["Lên v.2, vẫn Enabled, không hỏi lại, hiệu lực ngay"]
+    E --> F["Lượt sau ghi Version v.2"]
+    F --> G{"Mở Version History?"}
+    G -->|"Có, mở v.1"| H["E-fleetio-saas-platform-018 Step Summary v.1 hiện nội dung v.2"]
+    G -->|"Không"| Z["Kết thúc"]
+    H --> Z
+```
+
+Đảo ngược: không thấy nút khôi phục phiên bản cũ trong lượt chạy; muốn quay lại phải sửa tay rồi lưu thành bản mới (`Suy`).
+
+## Flow 15: Lượt automation thất bại (`Chạy`)
+
+```mermaid
+sequenceDiagram
+    actor U as Người dùng
+    participant W as Work Order
+    participant E as Automation
+    participant H as Run History
+    U->>W: Tạo WO, không có Start Date
+    W->>E: Sự kiện Created, khớp điều kiện
+    E->>W: Update Status to Completed
+    W-->>E: Từ chối, Start Date bắt buộc như form tay
+    E->>H: Lượt FAILURE, Failed 1, log DNF
+    Note over W: WO vẫn Open, trang WO không báo lỗi
+    Note over E: Vẫn Enabled, không thử lại trong khoảng 5 phút
+    opt Người dùng tự tìm
+        U->>H: Mở Run Result
+        H-->>U: Automation Action failed, Start Date can't be blank
+        U->>H: View Full Log
+        H-->>U: caused_by, thrown_by trỏ bước gây lỗi
+    end
+```
+
+E-fleetio-saas-platform-011. Failure Notification Email đang tắt nên không có kênh báo nào khác; nội dung email chưa biết (OQ-6). Đảo ngược: sửa dữ liệu không chạy lại lượt cũ theo những gì đã thấy; tắt automation bằng công tắc.
+
+## Flow 16: Luật ghi đè thao tác tay (`Chạy`)
+
+```mermaid
+sequenceDiagram
+    actor U as Người dùng
+    participant V as Xe
+    participant E as Automation Vehicle Updated
+    participant S as Status Updates
+    U->>V: Sửa Color
+    V->>E: Sự kiện Updated, trường nào cũng kích hoạt
+    E->>V: Update Status to Inactive
+    V->>S: Ghi Fleetio Automation, Active sang Inactive
+    U->>V: Đổi Status về Active, lưu được
+    V->>S: Ghi người dùng, Inactive sang Active
+    V->>E: Sự kiện Updated
+    E->>V: Update Status to Inactive, sau 1 giây
+    V->>S: Ghi Fleetio Automation, Active sang Inactive
+    Note over U,V: E-fleetio-saas-platform-017 Màn người dùng không báo gì
+    Note over E: Total Runs 2, lượt do automation đổi xe không sinh lượt mới
+    Note over E: Run Result ghi No records changed dù đã đổi
+```
+
+Đảo ngược: tắt automation rồi người dùng đổi Status về Active. Đề xuất Invlogis: báo ngay người sửa nêu tên luật, thêm điều kiện "chỉ khi Status đổi" (NFR-fleetio-saas-platform-013).
+
+## Flow 17: Lọc, lưu, yêu thích báo cáo (`Chạy` Private)
+
+```mermaid
+flowchart TD
+    A["Mở Issues Report"] --> B["Filters, chọn trong 26 ô, Search"]
+    B --> C["Biểu đồ, thẻ đếm tính lại, bộ lọc nằm trên đường dẫn"]
+    C --> D["Bấm Save, hộp New Saved Report"]
+    D --> E{"Visibility"}
+    E -->|"Private, mặc định"| F["Lưu, vào Reports, Saved"]
+    E -->|"Public, không chạy"| G["Chưa biết"]
+    F --> H{"Làm gì tiếp?"}
+    H -->|"Bấm sao"| I["Favorites từ 0 lên 1"]
+    H -->|"Mở báo cáo đã lưu"| J["Tab mới, saved_report_id, giữ bộ lọc"]
+    H -->|"Email Schedule, không chạy"| K["Chưa biết"]
+    H -->|"Delete, không chạy"| L["Chưa biết"]
+    G --> Z["Kết thúc"]
+    I --> Z
+    J --> Z
+    K --> Z
+    L --> Z
+```
+
+## Flow 18: Lưu chế độ xem trên danh sách (`Chạy` Private)
+
+```mermaid
+flowchart TD
+    A["Issues, tab All"] --> B["Tìm, Group, View Settings, Manage Columns"]
+    B --> C["Nút thành Save Changes có chấm cam"]
+    C --> D{"Bản đang xem"}
+    D -->|"Fleetio Standard View, có khoá"| E{"Chọn trong menu"}
+    E -->|"Clear Unsaved Changes"| A
+    E -->|"Save as New View"| F["Name, Description, Shared with"]
+    F --> G["Private, Admins Only, Specific Roles, Specific Users, Everyone"]
+    G --> H["Tab mới cạnh All, Open, có saved_view_id"]
+    D -->|"View đã lưu, Xem"| I["Save Changes vào view đó"]
+    H --> Z["Kết thúc"]
+    I --> Z
+```
+
+Đã lưu Private; các mức chia sẻ khác không chạy. Mở lại /issues về đúng tab dùng lần trước.
+
+## Flow 19: Tải và gắn tài liệu (`Chạy` tải, gắn 1 xe)
+
+```mermaid
+flowchart TD
+    A["Upload Document"] --> B["Hộp Filestack, chọn từ máy"]
+    B --> C["Document was successfully added."]
+    C --> D{"Danh sách có tệp ngay?"}
+    D -->|"Chưa"| E["E-fleetio-saas-platform-022 No results to show, tải lại"]
+    E --> F
+    D -->|"Có"| F["Dòng tệp, Attached To là Select Vehicles"]
+    F --> G["Attach Document to Vehicles"]
+    G --> H{"Gắn theo gì?"}
+    H -->|"Xe"| I["Nút thành Attached, trang tệp ghi 1 Vehicle"]
+    H -->|"Loại, nhóm, chưa bấm"| J["Chưa biết"]
+    I --> K{"Mở trang tệp"}
+    K -->|"Tệp txt"| L["E-fleetio-saas-platform-023 Khung xem 0 trang"]
+    K -->|"Download, Replace, Rename, Delete, chưa bấm"| M["Chưa biết"]
+    J --> Z["Kết thúc"]
+    L --> Z
+    M --> Z
+```
+
+## Flow 20: Hỏi dữ liệu với xe mới tạo (`Chạy`, lượt 3)
+
+```mermaid
+sequenceDiagram
+    actor U as Người dùng
+    participant A as AI Data Analyst
+    participant K as Kho phân tích
+    participant X as Trang xe
+    U->>A: Hỏi sự cố mở của TEST-XE-01, kèm ngày dữ liệu
+    A->>K: Truy vấn
+    K-->>A: 10 sự cố, không có trường ngày làm mới
+    A-->>U: has 10 open issues, đẩy câu ngày dữ liệu sang pipeline
+    U->>X: Đối chiếu tay
+    X-->>U: 12 mở, thiếu #49, #51
+    U->>A: Hỏi sự cố mở của TEST-DAUKEO-2
+    A->>K: Hai truy vấn
+    K-->>A: Không có dòng
+    A-->>U: does not exist, no issues recorded
+    Note over U,A: E-fleetio-saas-platform-015 Xe và #54, #55 có thật
+    U->>X: Đối chiếu tay
+    X-->>U: Xe có từ cùng ngày, có sự cố
+```
+
+Khả năng kho trễ là `Suy` (nguồn dữ liệu trong sơ đồ cũng là suy luận). Chưa giải thích #49, #51 (OQ-13). Mở lại chat cũ có banner "This data may have changed since the last time you had a chat."
+
+## Flow 21: AI xếp mức sự cố chạy nền (`Chạy`)
+
+```mermaid
+flowchart TD
+    A["Tạo Issue, không nhập mức"] --> B["Priority Auto-assign, Prioritizing"]
+    B --> C{"AI xếp được?"}
+    C -->|"Có"| D["Issue có mức, ví dụ High"]
+    C -->|"Thất bại"| E["E-fleetio-saas-platform-016 Về No Priority"]
+    E --> F["Chỉ một dòng Record History, ghi Changes By là người tạo"]
+    F --> G{"Người dùng có mở lịch sử?"}
+    G -->|"Không"| H["Không biết AI đã lỗi"]
+    G -->|"Có"| I["Đọc pending to failed"]
+    D --> Z["Kết thúc"]
+    H --> Z
+    I --> Z
+```
+
+Nhánh tự chọn mức tay sau khi lỗi là `Suy`, chưa thao tác. Điều kiện thất bại chưa biết (OQ-20).
+
+## Flow 22: Theo dõi, bình luận, nhận thông báo (`Chạy`)
+
+```mermaid
+flowchart TD
+    A["Trang chi tiết Issue"] --> B{"Thao tác"}
+    B -->|"Gõ @"| C{"Khớp đúng ký tự?"}
+    C -->|"Không dấu hoặc có gạch nối"| D["E-fleetio-saas-platform-020 Không ra người, đăng thành chữ thường"]
+    C -->|"Khớp, chưa nhắc ai thật"| E["Chưa biết"]
+    B -->|"Unwatch"| F["Mất khỏi cụm người theo dõi"]
+    F -->|"Watch"| A
+    B -->|"Sự kiện từ automation"| G["Comment tác giả Fleetio Automation"]
+    G --> H["Người theo dõi nhận in-app, kể cả 0 hồ sơ"]
+    H --> I["Chuông, Inbox, Reply, View All Comments"]
+    I -->|"Archive all, chưa bấm"| J["Chưa biết"]
+    D --> Z["Kết thúc"]
+    E --> Z
+    J --> Z
+```
+
+Comment, Watch không ghi vào Record History.
+
+## Flow 23: Automation tự duyệt đơn mua, có nhánh chặn và đảo ngược (`Chạy` phần chặn, phần comment; lượt 4)
+
+```mermaid
+flowchart TD
+    A["Trigger Purchase Order Updated, Vendor is any of"] --> B["Update Field Status, chỉ Rejected, Approved"]
+    B --> C{"Có điều kiện Status Pending Approval?"}
+    C -->|"Chưa"| D["E-fleetio-saas-platform-026 Cảnh báo cam, Save bị chặn"]
+    D --> E{"Xử lý"}
+    E -->|"Resolve error, thêm điều kiện"| F["Lưu được, tự duyệt chỉ đơn đã nộp"]
+    E -->|"Đổi Add Comment"| G["Lưu được, bật"]
+    F --> H["Chưa chạy, tài khoản duyệt không tạo được đơn Pending"]
+    C -->|"Có"| F
+    G --> I{"Bản ghi đổi?"}
+    I -->|"Lưu lại không đổi gì"| J["0 lượt"]
+    I -->|"Approve đơn"| K["1 lượt, comment Fleetio Automation, không kích lại"]
+    K --> L{"Archive?"}
+    L -->|"Có"| M["Tắt ngay, đổi đơn không sinh lượt"]
+    M -->|"Restore, không hộp xác nhận"| N["Disabled, giữ v.1, Run History"]
+    L -->|"Không"| Z["Kết thúc"]
+    H --> Z
+    J --> Z
+    N --> Z
+```
+
+Nhánh Service Entry: Update Field Repair Priority Class = Emergency chọn và Apply được nhưng Save bị từ chối (E-fleetio-saas-platform-025); đổi Add Comment thì chạy, entry xe khác không tính lượt.
+
+## Flow 24: Lọc báo cáo theo 3 kiểu bộ lọc (`Chạy` đọc, lọc thật 1 báo cáo; lượt 4)
+
+```mermaid
+flowchart TD
+    A["Mở báo cáo"] --> B{"Trang tải được?"}
+    B -->|"Không, expense_entries"| C["E-fleetio-saas-platform-014 Lỗi 500"]
+    B -->|"Được"| D{"Kiểu bộ lọc"}
+    D -->|"A, đa số báo cáo mới"| E["Panel ô cố định, Search"]
+    D -->|"B, 9 báo cáo"| F["No filters applied, Add Filter, Popular Filters"]
+    D -->|"C, 4 báo cáo"| G["Thanh lọc trên báo cáo, Add Filter, Apply"]
+    D -->|"Không có, job_assignments_summary_by_job"| H["Chỉ có Save"]
+    E --> I["1 filter applied, Clear all, đường dẫn giữ điều kiện"]
+    I --> J{"purchase_orders có đơn Draft?"}
+    J -->|"Có"| K["E-fleetio-saas-platform-027 Total Amount gồm Draft"]
+    J -->|"Không, chưa thử"| L["Chưa biết"]
+    I -->|"Clear all, chưa bấm"| E
+    F --> Z["Kết thúc"]
+    G --> Z
+    H --> Z
+    C --> Z
+    K --> Z
+    L --> Z
 ```
