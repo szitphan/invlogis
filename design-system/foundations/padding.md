@@ -47,11 +47,15 @@ Hai bảng so sánh bên dưới ghi số **trước khi áp**, giữ làm hồ 
 - Nhãn → ô → gợi ý 6 (`space/sm`). Dòng trong menu Web cách 2 (`space/xxs`), App 0.
 - Lề và gap của component gắn thang Semantic. Số ngoài thang ghi ở bảng ngoại lệ của [[design-system/foundations/spacing.md|Khoảng cách]].
 
+Trên Figma: section `Auto layout component` trong nhóm `Spacing, radius & grids`, trang `DS · Foundations` (node 7268:1619).
+
 **Chốt thêm (DEC-347):**
 
 - Select item dạng Supporting: nhãn Fill, cắt 1 dòng, chữ phụ nằm cuối dòng.
 - Card header: giữ tiêu đề Hug, tối đa 300, để Badge sát tiêu đề. Thẻ hẹp hơn 300 thì màn phải tự giới hạn chữ tiêu đề.
 - Badge dùng cách của Tag: khung chữ đệm 2, không cần trục `Leading`.
+
+**Ngoài phạm vi (DEC-348):** 57 set Astryx cũ trên 2 trang DS không xoá và không tính khi rà. Trong phạm vi vẫn có `Khung trang/*`, `Device/*`, `Kbd`.
 
 **Còn mở:**
 
