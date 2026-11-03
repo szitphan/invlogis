@@ -154,7 +154,9 @@ abstract final class InvPrimitives {
   static const double space16 = 16.0;
   static const double space20 = 20.0;
   static const double space24 = 24.0;
+  static const double space28 = 28.0;
   static const double space32 = 32.0;
+  static const double space36 = 36.0;
   static const double space40 = 40.0;
   static const double space48 = 48.0;
   static const double space64 = 64.0;
@@ -162,6 +164,21 @@ abstract final class InvPrimitives {
   static const double space96 = 96.0;
   static const double space128 = 128.0;
   static const double space160 = 160.0;
+  static const double space192 = 192.0;
+  static const double space224 = 224.0;
+  static const double space256 = 256.0;
+  static const double space320 = 320.0;
+  static const double space384 = 384.0;
+  static const double space480 = 480.0;
+  static const double space560 = 560.0;
+  static const double space640 = 640.0;
+  static const double space720 = 720.0;
+  static const double space768 = 768.0;
+  static const double space1024 = 1024.0;
+  static const double space1280 = 1280.0;
+  static const double space1440 = 1440.0;
+  static const double space1600 = 1600.0;
+  static const double space1920 = 1920.0;
   static const double radius0 = 0.0;
   static const double radius2 = 2.0;
   static const double radius4 = 4.0;
@@ -388,6 +405,7 @@ class InvColors extends ThemeExtension<InvColors> {
     required this.bgErrorOverlay,
     required this.vehicleMediaBg,
     required this.vehicleOutline,
+    required this.logoBg,
     required this.fileTypePdf,
     required this.fileTypeDoc,
     required this.fileTypeXls,
@@ -747,6 +765,8 @@ class InvColors extends ThemeExtension<InvColors> {
   final Color vehicleMediaBg;
   /// Nét bao 0,6 theo hình ảnh phương tiện (DEC-334 vh08)
   final Color vehicleOutline;
+  /// Ô nền logo đối tác (Bank logo): trắng ở cả Sáng và Tối để logo màu không chìm trên nền Tối (DEC-338)
+  final Color logoBg;
   /// Nền nhãn PDF của File type icon, màu nhận diện loại tệp, không đảo theo chế độ; chữ nhãn color/fg/white (DEC-335 ms02)
   final Color fileTypePdf;
   /// Nền nhãn DOC của File type icon, màu nhận diện loại tệp, không đảo theo chế độ; chữ nhãn color/fg/white (DEC-335 ms02)
@@ -938,6 +958,7 @@ class InvColors extends ThemeExtension<InvColors> {
     bgErrorOverlay: InvPrimitives.alphaRed70055,
     vehicleMediaBg: InvPrimitives.neutral50,
     vehicleOutline: InvPrimitives.neutral400,
+    logoBg: InvPrimitives.white,
     fileTypePdf: InvPrimitives.fileTypePdf,
     fileTypeDoc: InvPrimitives.fileTypeDoc,
     fileTypeXls: InvPrimitives.fileTypeXls,
@@ -1123,6 +1144,7 @@ class InvColors extends ThemeExtension<InvColors> {
     bgErrorOverlay: InvPrimitives.alphaRed70055,
     vehicleMediaBg: InvPrimitives.neutral700,
     vehicleOutline: InvPrimitives.neutral400,
+    logoBg: InvPrimitives.white,
     fileTypePdf: InvPrimitives.fileTypePdf,
     fileTypeDoc: InvPrimitives.fileTypeDoc,
     fileTypeXls: InvPrimitives.fileTypeXls,
@@ -1133,13 +1155,13 @@ class InvColors extends ThemeExtension<InvColors> {
   );
 
   @override
-  InvColors copyWith({Color? actionPrimary, Color? actionPrimaryHover, Color? actionPrimaryPressed, Color? actionSecondary, Color? actionSecondaryHover, Color? actionSecondaryPressed, Color? bgDisabled, Color? bgErrorPrimary, Color? bgErrorPrimaryHover, Color? bgErrorPrimaryPressed, Color? bgErrorSecondary, Color? bgErrorSolid, Color? bgErrorSolidHover, Color? bgInfoPrimary, Color? bgInfoSecondary, Color? bgInfoSolid, Color? bgInfoSolidHover, Color? bgOverlay, Color? bgOverlaySolid, Color? bgPrimaryBlur, Color? bgPressed, Color? bgPrimary, Color? bgPrimaryAlt, Color? bgPrimaryHover, Color? bgPrimarySolid, Color? bgQuaternary, Color? bgQuaternaryHover, Color? bgSecondary, Color? bgSecondaryAlt, Color? bgSecondaryHover, Color? bgSecondarySolid, Color? bgSelected, Color? bgSkeleton, Color? bgSuccessPrimary, Color? bgSuccessSecondary, Color? bgSuccessSolid, Color? bgSuccessSolidHover, Color? bgTertiary, Color? bgWarningPrimary, Color? bgWarningSecondary, Color? bgWarningSolid, Color? bgWarningSolidHover, Color? borderDisabled, Color? borderError, Color? borderErrorSubtle, Color? borderInfo, Color? borderInfoSubtle, Color? borderInput, Color? borderPrimary, Color? borderSecondary, Color? borderSecondaryAlt, Color? borderSuccess, Color? borderSuccessSubtle, Color? borderTertiary, Color? borderWarning, Color? borderWarningSubtle, Color? fgDisabled, Color? fgErrorPrimary, Color? fgErrorSecondary, Color? fgInfoPrimary, Color? fgInverse, Color? fgPrimary, Color? fgQuaternary, Color? fgQuaternaryHover, Color? fgSecondary, Color? fgSecondaryHover, Color? fgSuccessPrimary, Color? fgSuccessSecondary, Color? fgTertiary, Color? fgTertiaryHover, Color? fgWarningPrimary, Color? fgWarningSecondary, Color? fgWhite, Color? focusRing, Color? focusRingError, Color? shadowXs, Color? shadowSm01, Color? shadowSm02, Color? shadowMd01, Color? shadowMd02, Color? shadowLg01, Color? shadowLg02, Color? shadowLg03, Color? shadowXl01, Color? shadowXl02, Color? shadowXl03, Color? shadow2xl01, Color? shadow2xl02, Color? shadow3xl01, Color? shadow3xl02, Color? textDisabled, Color? textErrorPrimary, Color? textErrorPrimaryHover, Color? textInfoPrimary, Color? textInverse, Color? textPlaceholder, Color? textPrimary, Color? textQuaternary, Color? textSecondary, Color? textSecondaryHover, Color? textSuccessPrimary, Color? textTertiary, Color? textTertiaryHover, Color? textTertiaryStrong, Color? textWarningPrimary, Color? textWhite, Color? utilityBlue100, Color? utilityBlue200, Color? utilityBlue300, Color? utilityBlue400, Color? utilityBlue50, Color? utilityBlue500, Color? utilityBlue600, Color? utilityBlue700, Color? utilityGreen100, Color? utilityGreen200, Color? utilityGreen300, Color? utilityGreen400, Color? utilityGreen50, Color? utilityGreen500, Color? utilityGreen600, Color? utilityGreen700, Color? utilityNeutral100, Color? utilityNeutral200, Color? utilityNeutral300, Color? utilityNeutral400, Color? utilityNeutral50, Color? utilityNeutral500, Color? utilityNeutral600, Color? utilityNeutral700, Color? utilityOrange100, Color? utilityOrange200, Color? utilityOrange300, Color? utilityOrange400, Color? utilityOrange50, Color? utilityOrange500, Color? utilityOrange600, Color? utilityOrange700, Color? utilityOrange800, Color? utilityPurple100, Color? utilityPurple200, Color? utilityPurple300, Color? utilityPurple400, Color? utilityPurple50, Color? utilityPurple500, Color? utilityPurple600, Color? utilityPurple700, Color? utilityRed100, Color? utilityRed200, Color? utilityRed300, Color? utilityRed400, Color? utilityRed50, Color? utilityRed500, Color? utilityRed600, Color? utilityRed700, Color? utilityTeal100, Color? utilityTeal200, Color? utilityTeal300, Color? utilityTeal400, Color? utilityTeal50, Color? utilityTeal500, Color? utilityTeal600, Color? utilityTeal700, Color? utilityYellow100, Color? utilityYellow200, Color? utilityYellow300, Color? utilityYellow400, Color? utilityYellow50, Color? utilityYellow500, Color? utilityYellow600, Color? utilityYellow700, Color? borderInputHover, Color? bgErrorOverlay, Color? vehicleMediaBg, Color? vehicleOutline, Color? fileTypePdf, Color? fileTypeDoc, Color? fileTypeXls, Color? fileTypeCsv, Color? fileTypeImg, Color? fileTypeZip, Color? fileTypeVid}) =>
-      InvColors(actionPrimary: actionPrimary ?? this.actionPrimary, actionPrimaryHover: actionPrimaryHover ?? this.actionPrimaryHover, actionPrimaryPressed: actionPrimaryPressed ?? this.actionPrimaryPressed, actionSecondary: actionSecondary ?? this.actionSecondary, actionSecondaryHover: actionSecondaryHover ?? this.actionSecondaryHover, actionSecondaryPressed: actionSecondaryPressed ?? this.actionSecondaryPressed, bgDisabled: bgDisabled ?? this.bgDisabled, bgErrorPrimary: bgErrorPrimary ?? this.bgErrorPrimary, bgErrorPrimaryHover: bgErrorPrimaryHover ?? this.bgErrorPrimaryHover, bgErrorPrimaryPressed: bgErrorPrimaryPressed ?? this.bgErrorPrimaryPressed, bgErrorSecondary: bgErrorSecondary ?? this.bgErrorSecondary, bgErrorSolid: bgErrorSolid ?? this.bgErrorSolid, bgErrorSolidHover: bgErrorSolidHover ?? this.bgErrorSolidHover, bgInfoPrimary: bgInfoPrimary ?? this.bgInfoPrimary, bgInfoSecondary: bgInfoSecondary ?? this.bgInfoSecondary, bgInfoSolid: bgInfoSolid ?? this.bgInfoSolid, bgInfoSolidHover: bgInfoSolidHover ?? this.bgInfoSolidHover, bgOverlay: bgOverlay ?? this.bgOverlay, bgOverlaySolid: bgOverlaySolid ?? this.bgOverlaySolid, bgPrimaryBlur: bgPrimaryBlur ?? this.bgPrimaryBlur, bgPressed: bgPressed ?? this.bgPressed, bgPrimary: bgPrimary ?? this.bgPrimary, bgPrimaryAlt: bgPrimaryAlt ?? this.bgPrimaryAlt, bgPrimaryHover: bgPrimaryHover ?? this.bgPrimaryHover, bgPrimarySolid: bgPrimarySolid ?? this.bgPrimarySolid, bgQuaternary: bgQuaternary ?? this.bgQuaternary, bgQuaternaryHover: bgQuaternaryHover ?? this.bgQuaternaryHover, bgSecondary: bgSecondary ?? this.bgSecondary, bgSecondaryAlt: bgSecondaryAlt ?? this.bgSecondaryAlt, bgSecondaryHover: bgSecondaryHover ?? this.bgSecondaryHover, bgSecondarySolid: bgSecondarySolid ?? this.bgSecondarySolid, bgSelected: bgSelected ?? this.bgSelected, bgSkeleton: bgSkeleton ?? this.bgSkeleton, bgSuccessPrimary: bgSuccessPrimary ?? this.bgSuccessPrimary, bgSuccessSecondary: bgSuccessSecondary ?? this.bgSuccessSecondary, bgSuccessSolid: bgSuccessSolid ?? this.bgSuccessSolid, bgSuccessSolidHover: bgSuccessSolidHover ?? this.bgSuccessSolidHover, bgTertiary: bgTertiary ?? this.bgTertiary, bgWarningPrimary: bgWarningPrimary ?? this.bgWarningPrimary, bgWarningSecondary: bgWarningSecondary ?? this.bgWarningSecondary, bgWarningSolid: bgWarningSolid ?? this.bgWarningSolid, bgWarningSolidHover: bgWarningSolidHover ?? this.bgWarningSolidHover, borderDisabled: borderDisabled ?? this.borderDisabled, borderError: borderError ?? this.borderError, borderErrorSubtle: borderErrorSubtle ?? this.borderErrorSubtle, borderInfo: borderInfo ?? this.borderInfo, borderInfoSubtle: borderInfoSubtle ?? this.borderInfoSubtle, borderInput: borderInput ?? this.borderInput, borderPrimary: borderPrimary ?? this.borderPrimary, borderSecondary: borderSecondary ?? this.borderSecondary, borderSecondaryAlt: borderSecondaryAlt ?? this.borderSecondaryAlt, borderSuccess: borderSuccess ?? this.borderSuccess, borderSuccessSubtle: borderSuccessSubtle ?? this.borderSuccessSubtle, borderTertiary: borderTertiary ?? this.borderTertiary, borderWarning: borderWarning ?? this.borderWarning, borderWarningSubtle: borderWarningSubtle ?? this.borderWarningSubtle, fgDisabled: fgDisabled ?? this.fgDisabled, fgErrorPrimary: fgErrorPrimary ?? this.fgErrorPrimary, fgErrorSecondary: fgErrorSecondary ?? this.fgErrorSecondary, fgInfoPrimary: fgInfoPrimary ?? this.fgInfoPrimary, fgInverse: fgInverse ?? this.fgInverse, fgPrimary: fgPrimary ?? this.fgPrimary, fgQuaternary: fgQuaternary ?? this.fgQuaternary, fgQuaternaryHover: fgQuaternaryHover ?? this.fgQuaternaryHover, fgSecondary: fgSecondary ?? this.fgSecondary, fgSecondaryHover: fgSecondaryHover ?? this.fgSecondaryHover, fgSuccessPrimary: fgSuccessPrimary ?? this.fgSuccessPrimary, fgSuccessSecondary: fgSuccessSecondary ?? this.fgSuccessSecondary, fgTertiary: fgTertiary ?? this.fgTertiary, fgTertiaryHover: fgTertiaryHover ?? this.fgTertiaryHover, fgWarningPrimary: fgWarningPrimary ?? this.fgWarningPrimary, fgWarningSecondary: fgWarningSecondary ?? this.fgWarningSecondary, fgWhite: fgWhite ?? this.fgWhite, focusRing: focusRing ?? this.focusRing, focusRingError: focusRingError ?? this.focusRingError, shadowXs: shadowXs ?? this.shadowXs, shadowSm01: shadowSm01 ?? this.shadowSm01, shadowSm02: shadowSm02 ?? this.shadowSm02, shadowMd01: shadowMd01 ?? this.shadowMd01, shadowMd02: shadowMd02 ?? this.shadowMd02, shadowLg01: shadowLg01 ?? this.shadowLg01, shadowLg02: shadowLg02 ?? this.shadowLg02, shadowLg03: shadowLg03 ?? this.shadowLg03, shadowXl01: shadowXl01 ?? this.shadowXl01, shadowXl02: shadowXl02 ?? this.shadowXl02, shadowXl03: shadowXl03 ?? this.shadowXl03, shadow2xl01: shadow2xl01 ?? this.shadow2xl01, shadow2xl02: shadow2xl02 ?? this.shadow2xl02, shadow3xl01: shadow3xl01 ?? this.shadow3xl01, shadow3xl02: shadow3xl02 ?? this.shadow3xl02, textDisabled: textDisabled ?? this.textDisabled, textErrorPrimary: textErrorPrimary ?? this.textErrorPrimary, textErrorPrimaryHover: textErrorPrimaryHover ?? this.textErrorPrimaryHover, textInfoPrimary: textInfoPrimary ?? this.textInfoPrimary, textInverse: textInverse ?? this.textInverse, textPlaceholder: textPlaceholder ?? this.textPlaceholder, textPrimary: textPrimary ?? this.textPrimary, textQuaternary: textQuaternary ?? this.textQuaternary, textSecondary: textSecondary ?? this.textSecondary, textSecondaryHover: textSecondaryHover ?? this.textSecondaryHover, textSuccessPrimary: textSuccessPrimary ?? this.textSuccessPrimary, textTertiary: textTertiary ?? this.textTertiary, textTertiaryHover: textTertiaryHover ?? this.textTertiaryHover, textTertiaryStrong: textTertiaryStrong ?? this.textTertiaryStrong, textWarningPrimary: textWarningPrimary ?? this.textWarningPrimary, textWhite: textWhite ?? this.textWhite, utilityBlue100: utilityBlue100 ?? this.utilityBlue100, utilityBlue200: utilityBlue200 ?? this.utilityBlue200, utilityBlue300: utilityBlue300 ?? this.utilityBlue300, utilityBlue400: utilityBlue400 ?? this.utilityBlue400, utilityBlue50: utilityBlue50 ?? this.utilityBlue50, utilityBlue500: utilityBlue500 ?? this.utilityBlue500, utilityBlue600: utilityBlue600 ?? this.utilityBlue600, utilityBlue700: utilityBlue700 ?? this.utilityBlue700, utilityGreen100: utilityGreen100 ?? this.utilityGreen100, utilityGreen200: utilityGreen200 ?? this.utilityGreen200, utilityGreen300: utilityGreen300 ?? this.utilityGreen300, utilityGreen400: utilityGreen400 ?? this.utilityGreen400, utilityGreen50: utilityGreen50 ?? this.utilityGreen50, utilityGreen500: utilityGreen500 ?? this.utilityGreen500, utilityGreen600: utilityGreen600 ?? this.utilityGreen600, utilityGreen700: utilityGreen700 ?? this.utilityGreen700, utilityNeutral100: utilityNeutral100 ?? this.utilityNeutral100, utilityNeutral200: utilityNeutral200 ?? this.utilityNeutral200, utilityNeutral300: utilityNeutral300 ?? this.utilityNeutral300, utilityNeutral400: utilityNeutral400 ?? this.utilityNeutral400, utilityNeutral50: utilityNeutral50 ?? this.utilityNeutral50, utilityNeutral500: utilityNeutral500 ?? this.utilityNeutral500, utilityNeutral600: utilityNeutral600 ?? this.utilityNeutral600, utilityNeutral700: utilityNeutral700 ?? this.utilityNeutral700, utilityOrange100: utilityOrange100 ?? this.utilityOrange100, utilityOrange200: utilityOrange200 ?? this.utilityOrange200, utilityOrange300: utilityOrange300 ?? this.utilityOrange300, utilityOrange400: utilityOrange400 ?? this.utilityOrange400, utilityOrange50: utilityOrange50 ?? this.utilityOrange50, utilityOrange500: utilityOrange500 ?? this.utilityOrange500, utilityOrange600: utilityOrange600 ?? this.utilityOrange600, utilityOrange700: utilityOrange700 ?? this.utilityOrange700, utilityOrange800: utilityOrange800 ?? this.utilityOrange800, utilityPurple100: utilityPurple100 ?? this.utilityPurple100, utilityPurple200: utilityPurple200 ?? this.utilityPurple200, utilityPurple300: utilityPurple300 ?? this.utilityPurple300, utilityPurple400: utilityPurple400 ?? this.utilityPurple400, utilityPurple50: utilityPurple50 ?? this.utilityPurple50, utilityPurple500: utilityPurple500 ?? this.utilityPurple500, utilityPurple600: utilityPurple600 ?? this.utilityPurple600, utilityPurple700: utilityPurple700 ?? this.utilityPurple700, utilityRed100: utilityRed100 ?? this.utilityRed100, utilityRed200: utilityRed200 ?? this.utilityRed200, utilityRed300: utilityRed300 ?? this.utilityRed300, utilityRed400: utilityRed400 ?? this.utilityRed400, utilityRed50: utilityRed50 ?? this.utilityRed50, utilityRed500: utilityRed500 ?? this.utilityRed500, utilityRed600: utilityRed600 ?? this.utilityRed600, utilityRed700: utilityRed700 ?? this.utilityRed700, utilityTeal100: utilityTeal100 ?? this.utilityTeal100, utilityTeal200: utilityTeal200 ?? this.utilityTeal200, utilityTeal300: utilityTeal300 ?? this.utilityTeal300, utilityTeal400: utilityTeal400 ?? this.utilityTeal400, utilityTeal50: utilityTeal50 ?? this.utilityTeal50, utilityTeal500: utilityTeal500 ?? this.utilityTeal500, utilityTeal600: utilityTeal600 ?? this.utilityTeal600, utilityTeal700: utilityTeal700 ?? this.utilityTeal700, utilityYellow100: utilityYellow100 ?? this.utilityYellow100, utilityYellow200: utilityYellow200 ?? this.utilityYellow200, utilityYellow300: utilityYellow300 ?? this.utilityYellow300, utilityYellow400: utilityYellow400 ?? this.utilityYellow400, utilityYellow50: utilityYellow50 ?? this.utilityYellow50, utilityYellow500: utilityYellow500 ?? this.utilityYellow500, utilityYellow600: utilityYellow600 ?? this.utilityYellow600, utilityYellow700: utilityYellow700 ?? this.utilityYellow700, borderInputHover: borderInputHover ?? this.borderInputHover, bgErrorOverlay: bgErrorOverlay ?? this.bgErrorOverlay, vehicleMediaBg: vehicleMediaBg ?? this.vehicleMediaBg, vehicleOutline: vehicleOutline ?? this.vehicleOutline, fileTypePdf: fileTypePdf ?? this.fileTypePdf, fileTypeDoc: fileTypeDoc ?? this.fileTypeDoc, fileTypeXls: fileTypeXls ?? this.fileTypeXls, fileTypeCsv: fileTypeCsv ?? this.fileTypeCsv, fileTypeImg: fileTypeImg ?? this.fileTypeImg, fileTypeZip: fileTypeZip ?? this.fileTypeZip, fileTypeVid: fileTypeVid ?? this.fileTypeVid);
+  InvColors copyWith({Color? actionPrimary, Color? actionPrimaryHover, Color? actionPrimaryPressed, Color? actionSecondary, Color? actionSecondaryHover, Color? actionSecondaryPressed, Color? bgDisabled, Color? bgErrorPrimary, Color? bgErrorPrimaryHover, Color? bgErrorPrimaryPressed, Color? bgErrorSecondary, Color? bgErrorSolid, Color? bgErrorSolidHover, Color? bgInfoPrimary, Color? bgInfoSecondary, Color? bgInfoSolid, Color? bgInfoSolidHover, Color? bgOverlay, Color? bgOverlaySolid, Color? bgPrimaryBlur, Color? bgPressed, Color? bgPrimary, Color? bgPrimaryAlt, Color? bgPrimaryHover, Color? bgPrimarySolid, Color? bgQuaternary, Color? bgQuaternaryHover, Color? bgSecondary, Color? bgSecondaryAlt, Color? bgSecondaryHover, Color? bgSecondarySolid, Color? bgSelected, Color? bgSkeleton, Color? bgSuccessPrimary, Color? bgSuccessSecondary, Color? bgSuccessSolid, Color? bgSuccessSolidHover, Color? bgTertiary, Color? bgWarningPrimary, Color? bgWarningSecondary, Color? bgWarningSolid, Color? bgWarningSolidHover, Color? borderDisabled, Color? borderError, Color? borderErrorSubtle, Color? borderInfo, Color? borderInfoSubtle, Color? borderInput, Color? borderPrimary, Color? borderSecondary, Color? borderSecondaryAlt, Color? borderSuccess, Color? borderSuccessSubtle, Color? borderTertiary, Color? borderWarning, Color? borderWarningSubtle, Color? fgDisabled, Color? fgErrorPrimary, Color? fgErrorSecondary, Color? fgInfoPrimary, Color? fgInverse, Color? fgPrimary, Color? fgQuaternary, Color? fgQuaternaryHover, Color? fgSecondary, Color? fgSecondaryHover, Color? fgSuccessPrimary, Color? fgSuccessSecondary, Color? fgTertiary, Color? fgTertiaryHover, Color? fgWarningPrimary, Color? fgWarningSecondary, Color? fgWhite, Color? focusRing, Color? focusRingError, Color? shadowXs, Color? shadowSm01, Color? shadowSm02, Color? shadowMd01, Color? shadowMd02, Color? shadowLg01, Color? shadowLg02, Color? shadowLg03, Color? shadowXl01, Color? shadowXl02, Color? shadowXl03, Color? shadow2xl01, Color? shadow2xl02, Color? shadow3xl01, Color? shadow3xl02, Color? textDisabled, Color? textErrorPrimary, Color? textErrorPrimaryHover, Color? textInfoPrimary, Color? textInverse, Color? textPlaceholder, Color? textPrimary, Color? textQuaternary, Color? textSecondary, Color? textSecondaryHover, Color? textSuccessPrimary, Color? textTertiary, Color? textTertiaryHover, Color? textTertiaryStrong, Color? textWarningPrimary, Color? textWhite, Color? utilityBlue100, Color? utilityBlue200, Color? utilityBlue300, Color? utilityBlue400, Color? utilityBlue50, Color? utilityBlue500, Color? utilityBlue600, Color? utilityBlue700, Color? utilityGreen100, Color? utilityGreen200, Color? utilityGreen300, Color? utilityGreen400, Color? utilityGreen50, Color? utilityGreen500, Color? utilityGreen600, Color? utilityGreen700, Color? utilityNeutral100, Color? utilityNeutral200, Color? utilityNeutral300, Color? utilityNeutral400, Color? utilityNeutral50, Color? utilityNeutral500, Color? utilityNeutral600, Color? utilityNeutral700, Color? utilityOrange100, Color? utilityOrange200, Color? utilityOrange300, Color? utilityOrange400, Color? utilityOrange50, Color? utilityOrange500, Color? utilityOrange600, Color? utilityOrange700, Color? utilityOrange800, Color? utilityPurple100, Color? utilityPurple200, Color? utilityPurple300, Color? utilityPurple400, Color? utilityPurple50, Color? utilityPurple500, Color? utilityPurple600, Color? utilityPurple700, Color? utilityRed100, Color? utilityRed200, Color? utilityRed300, Color? utilityRed400, Color? utilityRed50, Color? utilityRed500, Color? utilityRed600, Color? utilityRed700, Color? utilityTeal100, Color? utilityTeal200, Color? utilityTeal300, Color? utilityTeal400, Color? utilityTeal50, Color? utilityTeal500, Color? utilityTeal600, Color? utilityTeal700, Color? utilityYellow100, Color? utilityYellow200, Color? utilityYellow300, Color? utilityYellow400, Color? utilityYellow50, Color? utilityYellow500, Color? utilityYellow600, Color? utilityYellow700, Color? borderInputHover, Color? bgErrorOverlay, Color? vehicleMediaBg, Color? vehicleOutline, Color? logoBg, Color? fileTypePdf, Color? fileTypeDoc, Color? fileTypeXls, Color? fileTypeCsv, Color? fileTypeImg, Color? fileTypeZip, Color? fileTypeVid}) =>
+      InvColors(actionPrimary: actionPrimary ?? this.actionPrimary, actionPrimaryHover: actionPrimaryHover ?? this.actionPrimaryHover, actionPrimaryPressed: actionPrimaryPressed ?? this.actionPrimaryPressed, actionSecondary: actionSecondary ?? this.actionSecondary, actionSecondaryHover: actionSecondaryHover ?? this.actionSecondaryHover, actionSecondaryPressed: actionSecondaryPressed ?? this.actionSecondaryPressed, bgDisabled: bgDisabled ?? this.bgDisabled, bgErrorPrimary: bgErrorPrimary ?? this.bgErrorPrimary, bgErrorPrimaryHover: bgErrorPrimaryHover ?? this.bgErrorPrimaryHover, bgErrorPrimaryPressed: bgErrorPrimaryPressed ?? this.bgErrorPrimaryPressed, bgErrorSecondary: bgErrorSecondary ?? this.bgErrorSecondary, bgErrorSolid: bgErrorSolid ?? this.bgErrorSolid, bgErrorSolidHover: bgErrorSolidHover ?? this.bgErrorSolidHover, bgInfoPrimary: bgInfoPrimary ?? this.bgInfoPrimary, bgInfoSecondary: bgInfoSecondary ?? this.bgInfoSecondary, bgInfoSolid: bgInfoSolid ?? this.bgInfoSolid, bgInfoSolidHover: bgInfoSolidHover ?? this.bgInfoSolidHover, bgOverlay: bgOverlay ?? this.bgOverlay, bgOverlaySolid: bgOverlaySolid ?? this.bgOverlaySolid, bgPrimaryBlur: bgPrimaryBlur ?? this.bgPrimaryBlur, bgPressed: bgPressed ?? this.bgPressed, bgPrimary: bgPrimary ?? this.bgPrimary, bgPrimaryAlt: bgPrimaryAlt ?? this.bgPrimaryAlt, bgPrimaryHover: bgPrimaryHover ?? this.bgPrimaryHover, bgPrimarySolid: bgPrimarySolid ?? this.bgPrimarySolid, bgQuaternary: bgQuaternary ?? this.bgQuaternary, bgQuaternaryHover: bgQuaternaryHover ?? this.bgQuaternaryHover, bgSecondary: bgSecondary ?? this.bgSecondary, bgSecondaryAlt: bgSecondaryAlt ?? this.bgSecondaryAlt, bgSecondaryHover: bgSecondaryHover ?? this.bgSecondaryHover, bgSecondarySolid: bgSecondarySolid ?? this.bgSecondarySolid, bgSelected: bgSelected ?? this.bgSelected, bgSkeleton: bgSkeleton ?? this.bgSkeleton, bgSuccessPrimary: bgSuccessPrimary ?? this.bgSuccessPrimary, bgSuccessSecondary: bgSuccessSecondary ?? this.bgSuccessSecondary, bgSuccessSolid: bgSuccessSolid ?? this.bgSuccessSolid, bgSuccessSolidHover: bgSuccessSolidHover ?? this.bgSuccessSolidHover, bgTertiary: bgTertiary ?? this.bgTertiary, bgWarningPrimary: bgWarningPrimary ?? this.bgWarningPrimary, bgWarningSecondary: bgWarningSecondary ?? this.bgWarningSecondary, bgWarningSolid: bgWarningSolid ?? this.bgWarningSolid, bgWarningSolidHover: bgWarningSolidHover ?? this.bgWarningSolidHover, borderDisabled: borderDisabled ?? this.borderDisabled, borderError: borderError ?? this.borderError, borderErrorSubtle: borderErrorSubtle ?? this.borderErrorSubtle, borderInfo: borderInfo ?? this.borderInfo, borderInfoSubtle: borderInfoSubtle ?? this.borderInfoSubtle, borderInput: borderInput ?? this.borderInput, borderPrimary: borderPrimary ?? this.borderPrimary, borderSecondary: borderSecondary ?? this.borderSecondary, borderSecondaryAlt: borderSecondaryAlt ?? this.borderSecondaryAlt, borderSuccess: borderSuccess ?? this.borderSuccess, borderSuccessSubtle: borderSuccessSubtle ?? this.borderSuccessSubtle, borderTertiary: borderTertiary ?? this.borderTertiary, borderWarning: borderWarning ?? this.borderWarning, borderWarningSubtle: borderWarningSubtle ?? this.borderWarningSubtle, fgDisabled: fgDisabled ?? this.fgDisabled, fgErrorPrimary: fgErrorPrimary ?? this.fgErrorPrimary, fgErrorSecondary: fgErrorSecondary ?? this.fgErrorSecondary, fgInfoPrimary: fgInfoPrimary ?? this.fgInfoPrimary, fgInverse: fgInverse ?? this.fgInverse, fgPrimary: fgPrimary ?? this.fgPrimary, fgQuaternary: fgQuaternary ?? this.fgQuaternary, fgQuaternaryHover: fgQuaternaryHover ?? this.fgQuaternaryHover, fgSecondary: fgSecondary ?? this.fgSecondary, fgSecondaryHover: fgSecondaryHover ?? this.fgSecondaryHover, fgSuccessPrimary: fgSuccessPrimary ?? this.fgSuccessPrimary, fgSuccessSecondary: fgSuccessSecondary ?? this.fgSuccessSecondary, fgTertiary: fgTertiary ?? this.fgTertiary, fgTertiaryHover: fgTertiaryHover ?? this.fgTertiaryHover, fgWarningPrimary: fgWarningPrimary ?? this.fgWarningPrimary, fgWarningSecondary: fgWarningSecondary ?? this.fgWarningSecondary, fgWhite: fgWhite ?? this.fgWhite, focusRing: focusRing ?? this.focusRing, focusRingError: focusRingError ?? this.focusRingError, shadowXs: shadowXs ?? this.shadowXs, shadowSm01: shadowSm01 ?? this.shadowSm01, shadowSm02: shadowSm02 ?? this.shadowSm02, shadowMd01: shadowMd01 ?? this.shadowMd01, shadowMd02: shadowMd02 ?? this.shadowMd02, shadowLg01: shadowLg01 ?? this.shadowLg01, shadowLg02: shadowLg02 ?? this.shadowLg02, shadowLg03: shadowLg03 ?? this.shadowLg03, shadowXl01: shadowXl01 ?? this.shadowXl01, shadowXl02: shadowXl02 ?? this.shadowXl02, shadowXl03: shadowXl03 ?? this.shadowXl03, shadow2xl01: shadow2xl01 ?? this.shadow2xl01, shadow2xl02: shadow2xl02 ?? this.shadow2xl02, shadow3xl01: shadow3xl01 ?? this.shadow3xl01, shadow3xl02: shadow3xl02 ?? this.shadow3xl02, textDisabled: textDisabled ?? this.textDisabled, textErrorPrimary: textErrorPrimary ?? this.textErrorPrimary, textErrorPrimaryHover: textErrorPrimaryHover ?? this.textErrorPrimaryHover, textInfoPrimary: textInfoPrimary ?? this.textInfoPrimary, textInverse: textInverse ?? this.textInverse, textPlaceholder: textPlaceholder ?? this.textPlaceholder, textPrimary: textPrimary ?? this.textPrimary, textQuaternary: textQuaternary ?? this.textQuaternary, textSecondary: textSecondary ?? this.textSecondary, textSecondaryHover: textSecondaryHover ?? this.textSecondaryHover, textSuccessPrimary: textSuccessPrimary ?? this.textSuccessPrimary, textTertiary: textTertiary ?? this.textTertiary, textTertiaryHover: textTertiaryHover ?? this.textTertiaryHover, textTertiaryStrong: textTertiaryStrong ?? this.textTertiaryStrong, textWarningPrimary: textWarningPrimary ?? this.textWarningPrimary, textWhite: textWhite ?? this.textWhite, utilityBlue100: utilityBlue100 ?? this.utilityBlue100, utilityBlue200: utilityBlue200 ?? this.utilityBlue200, utilityBlue300: utilityBlue300 ?? this.utilityBlue300, utilityBlue400: utilityBlue400 ?? this.utilityBlue400, utilityBlue50: utilityBlue50 ?? this.utilityBlue50, utilityBlue500: utilityBlue500 ?? this.utilityBlue500, utilityBlue600: utilityBlue600 ?? this.utilityBlue600, utilityBlue700: utilityBlue700 ?? this.utilityBlue700, utilityGreen100: utilityGreen100 ?? this.utilityGreen100, utilityGreen200: utilityGreen200 ?? this.utilityGreen200, utilityGreen300: utilityGreen300 ?? this.utilityGreen300, utilityGreen400: utilityGreen400 ?? this.utilityGreen400, utilityGreen50: utilityGreen50 ?? this.utilityGreen50, utilityGreen500: utilityGreen500 ?? this.utilityGreen500, utilityGreen600: utilityGreen600 ?? this.utilityGreen600, utilityGreen700: utilityGreen700 ?? this.utilityGreen700, utilityNeutral100: utilityNeutral100 ?? this.utilityNeutral100, utilityNeutral200: utilityNeutral200 ?? this.utilityNeutral200, utilityNeutral300: utilityNeutral300 ?? this.utilityNeutral300, utilityNeutral400: utilityNeutral400 ?? this.utilityNeutral400, utilityNeutral50: utilityNeutral50 ?? this.utilityNeutral50, utilityNeutral500: utilityNeutral500 ?? this.utilityNeutral500, utilityNeutral600: utilityNeutral600 ?? this.utilityNeutral600, utilityNeutral700: utilityNeutral700 ?? this.utilityNeutral700, utilityOrange100: utilityOrange100 ?? this.utilityOrange100, utilityOrange200: utilityOrange200 ?? this.utilityOrange200, utilityOrange300: utilityOrange300 ?? this.utilityOrange300, utilityOrange400: utilityOrange400 ?? this.utilityOrange400, utilityOrange50: utilityOrange50 ?? this.utilityOrange50, utilityOrange500: utilityOrange500 ?? this.utilityOrange500, utilityOrange600: utilityOrange600 ?? this.utilityOrange600, utilityOrange700: utilityOrange700 ?? this.utilityOrange700, utilityOrange800: utilityOrange800 ?? this.utilityOrange800, utilityPurple100: utilityPurple100 ?? this.utilityPurple100, utilityPurple200: utilityPurple200 ?? this.utilityPurple200, utilityPurple300: utilityPurple300 ?? this.utilityPurple300, utilityPurple400: utilityPurple400 ?? this.utilityPurple400, utilityPurple50: utilityPurple50 ?? this.utilityPurple50, utilityPurple500: utilityPurple500 ?? this.utilityPurple500, utilityPurple600: utilityPurple600 ?? this.utilityPurple600, utilityPurple700: utilityPurple700 ?? this.utilityPurple700, utilityRed100: utilityRed100 ?? this.utilityRed100, utilityRed200: utilityRed200 ?? this.utilityRed200, utilityRed300: utilityRed300 ?? this.utilityRed300, utilityRed400: utilityRed400 ?? this.utilityRed400, utilityRed50: utilityRed50 ?? this.utilityRed50, utilityRed500: utilityRed500 ?? this.utilityRed500, utilityRed600: utilityRed600 ?? this.utilityRed600, utilityRed700: utilityRed700 ?? this.utilityRed700, utilityTeal100: utilityTeal100 ?? this.utilityTeal100, utilityTeal200: utilityTeal200 ?? this.utilityTeal200, utilityTeal300: utilityTeal300 ?? this.utilityTeal300, utilityTeal400: utilityTeal400 ?? this.utilityTeal400, utilityTeal50: utilityTeal50 ?? this.utilityTeal50, utilityTeal500: utilityTeal500 ?? this.utilityTeal500, utilityTeal600: utilityTeal600 ?? this.utilityTeal600, utilityTeal700: utilityTeal700 ?? this.utilityTeal700, utilityYellow100: utilityYellow100 ?? this.utilityYellow100, utilityYellow200: utilityYellow200 ?? this.utilityYellow200, utilityYellow300: utilityYellow300 ?? this.utilityYellow300, utilityYellow400: utilityYellow400 ?? this.utilityYellow400, utilityYellow50: utilityYellow50 ?? this.utilityYellow50, utilityYellow500: utilityYellow500 ?? this.utilityYellow500, utilityYellow600: utilityYellow600 ?? this.utilityYellow600, utilityYellow700: utilityYellow700 ?? this.utilityYellow700, borderInputHover: borderInputHover ?? this.borderInputHover, bgErrorOverlay: bgErrorOverlay ?? this.bgErrorOverlay, vehicleMediaBg: vehicleMediaBg ?? this.vehicleMediaBg, vehicleOutline: vehicleOutline ?? this.vehicleOutline, logoBg: logoBg ?? this.logoBg, fileTypePdf: fileTypePdf ?? this.fileTypePdf, fileTypeDoc: fileTypeDoc ?? this.fileTypeDoc, fileTypeXls: fileTypeXls ?? this.fileTypeXls, fileTypeCsv: fileTypeCsv ?? this.fileTypeCsv, fileTypeImg: fileTypeImg ?? this.fileTypeImg, fileTypeZip: fileTypeZip ?? this.fileTypeZip, fileTypeVid: fileTypeVid ?? this.fileTypeVid);
 
   @override
   InvColors lerp(covariant ThemeExtension<InvColors>? other, double t) {
     if (other is! InvColors) return this;
-    return InvColors(actionPrimary: Color.lerp(actionPrimary, other.actionPrimary, t)!, actionPrimaryHover: Color.lerp(actionPrimaryHover, other.actionPrimaryHover, t)!, actionPrimaryPressed: Color.lerp(actionPrimaryPressed, other.actionPrimaryPressed, t)!, actionSecondary: Color.lerp(actionSecondary, other.actionSecondary, t)!, actionSecondaryHover: Color.lerp(actionSecondaryHover, other.actionSecondaryHover, t)!, actionSecondaryPressed: Color.lerp(actionSecondaryPressed, other.actionSecondaryPressed, t)!, bgDisabled: Color.lerp(bgDisabled, other.bgDisabled, t)!, bgErrorPrimary: Color.lerp(bgErrorPrimary, other.bgErrorPrimary, t)!, bgErrorPrimaryHover: Color.lerp(bgErrorPrimaryHover, other.bgErrorPrimaryHover, t)!, bgErrorPrimaryPressed: Color.lerp(bgErrorPrimaryPressed, other.bgErrorPrimaryPressed, t)!, bgErrorSecondary: Color.lerp(bgErrorSecondary, other.bgErrorSecondary, t)!, bgErrorSolid: Color.lerp(bgErrorSolid, other.bgErrorSolid, t)!, bgErrorSolidHover: Color.lerp(bgErrorSolidHover, other.bgErrorSolidHover, t)!, bgInfoPrimary: Color.lerp(bgInfoPrimary, other.bgInfoPrimary, t)!, bgInfoSecondary: Color.lerp(bgInfoSecondary, other.bgInfoSecondary, t)!, bgInfoSolid: Color.lerp(bgInfoSolid, other.bgInfoSolid, t)!, bgInfoSolidHover: Color.lerp(bgInfoSolidHover, other.bgInfoSolidHover, t)!, bgOverlay: Color.lerp(bgOverlay, other.bgOverlay, t)!, bgOverlaySolid: Color.lerp(bgOverlaySolid, other.bgOverlaySolid, t)!, bgPrimaryBlur: Color.lerp(bgPrimaryBlur, other.bgPrimaryBlur, t)!, bgPressed: Color.lerp(bgPressed, other.bgPressed, t)!, bgPrimary: Color.lerp(bgPrimary, other.bgPrimary, t)!, bgPrimaryAlt: Color.lerp(bgPrimaryAlt, other.bgPrimaryAlt, t)!, bgPrimaryHover: Color.lerp(bgPrimaryHover, other.bgPrimaryHover, t)!, bgPrimarySolid: Color.lerp(bgPrimarySolid, other.bgPrimarySolid, t)!, bgQuaternary: Color.lerp(bgQuaternary, other.bgQuaternary, t)!, bgQuaternaryHover: Color.lerp(bgQuaternaryHover, other.bgQuaternaryHover, t)!, bgSecondary: Color.lerp(bgSecondary, other.bgSecondary, t)!, bgSecondaryAlt: Color.lerp(bgSecondaryAlt, other.bgSecondaryAlt, t)!, bgSecondaryHover: Color.lerp(bgSecondaryHover, other.bgSecondaryHover, t)!, bgSecondarySolid: Color.lerp(bgSecondarySolid, other.bgSecondarySolid, t)!, bgSelected: Color.lerp(bgSelected, other.bgSelected, t)!, bgSkeleton: Color.lerp(bgSkeleton, other.bgSkeleton, t)!, bgSuccessPrimary: Color.lerp(bgSuccessPrimary, other.bgSuccessPrimary, t)!, bgSuccessSecondary: Color.lerp(bgSuccessSecondary, other.bgSuccessSecondary, t)!, bgSuccessSolid: Color.lerp(bgSuccessSolid, other.bgSuccessSolid, t)!, bgSuccessSolidHover: Color.lerp(bgSuccessSolidHover, other.bgSuccessSolidHover, t)!, bgTertiary: Color.lerp(bgTertiary, other.bgTertiary, t)!, bgWarningPrimary: Color.lerp(bgWarningPrimary, other.bgWarningPrimary, t)!, bgWarningSecondary: Color.lerp(bgWarningSecondary, other.bgWarningSecondary, t)!, bgWarningSolid: Color.lerp(bgWarningSolid, other.bgWarningSolid, t)!, bgWarningSolidHover: Color.lerp(bgWarningSolidHover, other.bgWarningSolidHover, t)!, borderDisabled: Color.lerp(borderDisabled, other.borderDisabled, t)!, borderError: Color.lerp(borderError, other.borderError, t)!, borderErrorSubtle: Color.lerp(borderErrorSubtle, other.borderErrorSubtle, t)!, borderInfo: Color.lerp(borderInfo, other.borderInfo, t)!, borderInfoSubtle: Color.lerp(borderInfoSubtle, other.borderInfoSubtle, t)!, borderInput: Color.lerp(borderInput, other.borderInput, t)!, borderPrimary: Color.lerp(borderPrimary, other.borderPrimary, t)!, borderSecondary: Color.lerp(borderSecondary, other.borderSecondary, t)!, borderSecondaryAlt: Color.lerp(borderSecondaryAlt, other.borderSecondaryAlt, t)!, borderSuccess: Color.lerp(borderSuccess, other.borderSuccess, t)!, borderSuccessSubtle: Color.lerp(borderSuccessSubtle, other.borderSuccessSubtle, t)!, borderTertiary: Color.lerp(borderTertiary, other.borderTertiary, t)!, borderWarning: Color.lerp(borderWarning, other.borderWarning, t)!, borderWarningSubtle: Color.lerp(borderWarningSubtle, other.borderWarningSubtle, t)!, fgDisabled: Color.lerp(fgDisabled, other.fgDisabled, t)!, fgErrorPrimary: Color.lerp(fgErrorPrimary, other.fgErrorPrimary, t)!, fgErrorSecondary: Color.lerp(fgErrorSecondary, other.fgErrorSecondary, t)!, fgInfoPrimary: Color.lerp(fgInfoPrimary, other.fgInfoPrimary, t)!, fgInverse: Color.lerp(fgInverse, other.fgInverse, t)!, fgPrimary: Color.lerp(fgPrimary, other.fgPrimary, t)!, fgQuaternary: Color.lerp(fgQuaternary, other.fgQuaternary, t)!, fgQuaternaryHover: Color.lerp(fgQuaternaryHover, other.fgQuaternaryHover, t)!, fgSecondary: Color.lerp(fgSecondary, other.fgSecondary, t)!, fgSecondaryHover: Color.lerp(fgSecondaryHover, other.fgSecondaryHover, t)!, fgSuccessPrimary: Color.lerp(fgSuccessPrimary, other.fgSuccessPrimary, t)!, fgSuccessSecondary: Color.lerp(fgSuccessSecondary, other.fgSuccessSecondary, t)!, fgTertiary: Color.lerp(fgTertiary, other.fgTertiary, t)!, fgTertiaryHover: Color.lerp(fgTertiaryHover, other.fgTertiaryHover, t)!, fgWarningPrimary: Color.lerp(fgWarningPrimary, other.fgWarningPrimary, t)!, fgWarningSecondary: Color.lerp(fgWarningSecondary, other.fgWarningSecondary, t)!, fgWhite: Color.lerp(fgWhite, other.fgWhite, t)!, focusRing: Color.lerp(focusRing, other.focusRing, t)!, focusRingError: Color.lerp(focusRingError, other.focusRingError, t)!, shadowXs: Color.lerp(shadowXs, other.shadowXs, t)!, shadowSm01: Color.lerp(shadowSm01, other.shadowSm01, t)!, shadowSm02: Color.lerp(shadowSm02, other.shadowSm02, t)!, shadowMd01: Color.lerp(shadowMd01, other.shadowMd01, t)!, shadowMd02: Color.lerp(shadowMd02, other.shadowMd02, t)!, shadowLg01: Color.lerp(shadowLg01, other.shadowLg01, t)!, shadowLg02: Color.lerp(shadowLg02, other.shadowLg02, t)!, shadowLg03: Color.lerp(shadowLg03, other.shadowLg03, t)!, shadowXl01: Color.lerp(shadowXl01, other.shadowXl01, t)!, shadowXl02: Color.lerp(shadowXl02, other.shadowXl02, t)!, shadowXl03: Color.lerp(shadowXl03, other.shadowXl03, t)!, shadow2xl01: Color.lerp(shadow2xl01, other.shadow2xl01, t)!, shadow2xl02: Color.lerp(shadow2xl02, other.shadow2xl02, t)!, shadow3xl01: Color.lerp(shadow3xl01, other.shadow3xl01, t)!, shadow3xl02: Color.lerp(shadow3xl02, other.shadow3xl02, t)!, textDisabled: Color.lerp(textDisabled, other.textDisabled, t)!, textErrorPrimary: Color.lerp(textErrorPrimary, other.textErrorPrimary, t)!, textErrorPrimaryHover: Color.lerp(textErrorPrimaryHover, other.textErrorPrimaryHover, t)!, textInfoPrimary: Color.lerp(textInfoPrimary, other.textInfoPrimary, t)!, textInverse: Color.lerp(textInverse, other.textInverse, t)!, textPlaceholder: Color.lerp(textPlaceholder, other.textPlaceholder, t)!, textPrimary: Color.lerp(textPrimary, other.textPrimary, t)!, textQuaternary: Color.lerp(textQuaternary, other.textQuaternary, t)!, textSecondary: Color.lerp(textSecondary, other.textSecondary, t)!, textSecondaryHover: Color.lerp(textSecondaryHover, other.textSecondaryHover, t)!, textSuccessPrimary: Color.lerp(textSuccessPrimary, other.textSuccessPrimary, t)!, textTertiary: Color.lerp(textTertiary, other.textTertiary, t)!, textTertiaryHover: Color.lerp(textTertiaryHover, other.textTertiaryHover, t)!, textTertiaryStrong: Color.lerp(textTertiaryStrong, other.textTertiaryStrong, t)!, textWarningPrimary: Color.lerp(textWarningPrimary, other.textWarningPrimary, t)!, textWhite: Color.lerp(textWhite, other.textWhite, t)!, utilityBlue100: Color.lerp(utilityBlue100, other.utilityBlue100, t)!, utilityBlue200: Color.lerp(utilityBlue200, other.utilityBlue200, t)!, utilityBlue300: Color.lerp(utilityBlue300, other.utilityBlue300, t)!, utilityBlue400: Color.lerp(utilityBlue400, other.utilityBlue400, t)!, utilityBlue50: Color.lerp(utilityBlue50, other.utilityBlue50, t)!, utilityBlue500: Color.lerp(utilityBlue500, other.utilityBlue500, t)!, utilityBlue600: Color.lerp(utilityBlue600, other.utilityBlue600, t)!, utilityBlue700: Color.lerp(utilityBlue700, other.utilityBlue700, t)!, utilityGreen100: Color.lerp(utilityGreen100, other.utilityGreen100, t)!, utilityGreen200: Color.lerp(utilityGreen200, other.utilityGreen200, t)!, utilityGreen300: Color.lerp(utilityGreen300, other.utilityGreen300, t)!, utilityGreen400: Color.lerp(utilityGreen400, other.utilityGreen400, t)!, utilityGreen50: Color.lerp(utilityGreen50, other.utilityGreen50, t)!, utilityGreen500: Color.lerp(utilityGreen500, other.utilityGreen500, t)!, utilityGreen600: Color.lerp(utilityGreen600, other.utilityGreen600, t)!, utilityGreen700: Color.lerp(utilityGreen700, other.utilityGreen700, t)!, utilityNeutral100: Color.lerp(utilityNeutral100, other.utilityNeutral100, t)!, utilityNeutral200: Color.lerp(utilityNeutral200, other.utilityNeutral200, t)!, utilityNeutral300: Color.lerp(utilityNeutral300, other.utilityNeutral300, t)!, utilityNeutral400: Color.lerp(utilityNeutral400, other.utilityNeutral400, t)!, utilityNeutral50: Color.lerp(utilityNeutral50, other.utilityNeutral50, t)!, utilityNeutral500: Color.lerp(utilityNeutral500, other.utilityNeutral500, t)!, utilityNeutral600: Color.lerp(utilityNeutral600, other.utilityNeutral600, t)!, utilityNeutral700: Color.lerp(utilityNeutral700, other.utilityNeutral700, t)!, utilityOrange100: Color.lerp(utilityOrange100, other.utilityOrange100, t)!, utilityOrange200: Color.lerp(utilityOrange200, other.utilityOrange200, t)!, utilityOrange300: Color.lerp(utilityOrange300, other.utilityOrange300, t)!, utilityOrange400: Color.lerp(utilityOrange400, other.utilityOrange400, t)!, utilityOrange50: Color.lerp(utilityOrange50, other.utilityOrange50, t)!, utilityOrange500: Color.lerp(utilityOrange500, other.utilityOrange500, t)!, utilityOrange600: Color.lerp(utilityOrange600, other.utilityOrange600, t)!, utilityOrange700: Color.lerp(utilityOrange700, other.utilityOrange700, t)!, utilityOrange800: Color.lerp(utilityOrange800, other.utilityOrange800, t)!, utilityPurple100: Color.lerp(utilityPurple100, other.utilityPurple100, t)!, utilityPurple200: Color.lerp(utilityPurple200, other.utilityPurple200, t)!, utilityPurple300: Color.lerp(utilityPurple300, other.utilityPurple300, t)!, utilityPurple400: Color.lerp(utilityPurple400, other.utilityPurple400, t)!, utilityPurple50: Color.lerp(utilityPurple50, other.utilityPurple50, t)!, utilityPurple500: Color.lerp(utilityPurple500, other.utilityPurple500, t)!, utilityPurple600: Color.lerp(utilityPurple600, other.utilityPurple600, t)!, utilityPurple700: Color.lerp(utilityPurple700, other.utilityPurple700, t)!, utilityRed100: Color.lerp(utilityRed100, other.utilityRed100, t)!, utilityRed200: Color.lerp(utilityRed200, other.utilityRed200, t)!, utilityRed300: Color.lerp(utilityRed300, other.utilityRed300, t)!, utilityRed400: Color.lerp(utilityRed400, other.utilityRed400, t)!, utilityRed50: Color.lerp(utilityRed50, other.utilityRed50, t)!, utilityRed500: Color.lerp(utilityRed500, other.utilityRed500, t)!, utilityRed600: Color.lerp(utilityRed600, other.utilityRed600, t)!, utilityRed700: Color.lerp(utilityRed700, other.utilityRed700, t)!, utilityTeal100: Color.lerp(utilityTeal100, other.utilityTeal100, t)!, utilityTeal200: Color.lerp(utilityTeal200, other.utilityTeal200, t)!, utilityTeal300: Color.lerp(utilityTeal300, other.utilityTeal300, t)!, utilityTeal400: Color.lerp(utilityTeal400, other.utilityTeal400, t)!, utilityTeal50: Color.lerp(utilityTeal50, other.utilityTeal50, t)!, utilityTeal500: Color.lerp(utilityTeal500, other.utilityTeal500, t)!, utilityTeal600: Color.lerp(utilityTeal600, other.utilityTeal600, t)!, utilityTeal700: Color.lerp(utilityTeal700, other.utilityTeal700, t)!, utilityYellow100: Color.lerp(utilityYellow100, other.utilityYellow100, t)!, utilityYellow200: Color.lerp(utilityYellow200, other.utilityYellow200, t)!, utilityYellow300: Color.lerp(utilityYellow300, other.utilityYellow300, t)!, utilityYellow400: Color.lerp(utilityYellow400, other.utilityYellow400, t)!, utilityYellow50: Color.lerp(utilityYellow50, other.utilityYellow50, t)!, utilityYellow500: Color.lerp(utilityYellow500, other.utilityYellow500, t)!, utilityYellow600: Color.lerp(utilityYellow600, other.utilityYellow600, t)!, utilityYellow700: Color.lerp(utilityYellow700, other.utilityYellow700, t)!, borderInputHover: Color.lerp(borderInputHover, other.borderInputHover, t)!, bgErrorOverlay: Color.lerp(bgErrorOverlay, other.bgErrorOverlay, t)!, vehicleMediaBg: Color.lerp(vehicleMediaBg, other.vehicleMediaBg, t)!, vehicleOutline: Color.lerp(vehicleOutline, other.vehicleOutline, t)!, fileTypePdf: Color.lerp(fileTypePdf, other.fileTypePdf, t)!, fileTypeDoc: Color.lerp(fileTypeDoc, other.fileTypeDoc, t)!, fileTypeXls: Color.lerp(fileTypeXls, other.fileTypeXls, t)!, fileTypeCsv: Color.lerp(fileTypeCsv, other.fileTypeCsv, t)!, fileTypeImg: Color.lerp(fileTypeImg, other.fileTypeImg, t)!, fileTypeZip: Color.lerp(fileTypeZip, other.fileTypeZip, t)!, fileTypeVid: Color.lerp(fileTypeVid, other.fileTypeVid, t)!);
+    return InvColors(actionPrimary: Color.lerp(actionPrimary, other.actionPrimary, t)!, actionPrimaryHover: Color.lerp(actionPrimaryHover, other.actionPrimaryHover, t)!, actionPrimaryPressed: Color.lerp(actionPrimaryPressed, other.actionPrimaryPressed, t)!, actionSecondary: Color.lerp(actionSecondary, other.actionSecondary, t)!, actionSecondaryHover: Color.lerp(actionSecondaryHover, other.actionSecondaryHover, t)!, actionSecondaryPressed: Color.lerp(actionSecondaryPressed, other.actionSecondaryPressed, t)!, bgDisabled: Color.lerp(bgDisabled, other.bgDisabled, t)!, bgErrorPrimary: Color.lerp(bgErrorPrimary, other.bgErrorPrimary, t)!, bgErrorPrimaryHover: Color.lerp(bgErrorPrimaryHover, other.bgErrorPrimaryHover, t)!, bgErrorPrimaryPressed: Color.lerp(bgErrorPrimaryPressed, other.bgErrorPrimaryPressed, t)!, bgErrorSecondary: Color.lerp(bgErrorSecondary, other.bgErrorSecondary, t)!, bgErrorSolid: Color.lerp(bgErrorSolid, other.bgErrorSolid, t)!, bgErrorSolidHover: Color.lerp(bgErrorSolidHover, other.bgErrorSolidHover, t)!, bgInfoPrimary: Color.lerp(bgInfoPrimary, other.bgInfoPrimary, t)!, bgInfoSecondary: Color.lerp(bgInfoSecondary, other.bgInfoSecondary, t)!, bgInfoSolid: Color.lerp(bgInfoSolid, other.bgInfoSolid, t)!, bgInfoSolidHover: Color.lerp(bgInfoSolidHover, other.bgInfoSolidHover, t)!, bgOverlay: Color.lerp(bgOverlay, other.bgOverlay, t)!, bgOverlaySolid: Color.lerp(bgOverlaySolid, other.bgOverlaySolid, t)!, bgPrimaryBlur: Color.lerp(bgPrimaryBlur, other.bgPrimaryBlur, t)!, bgPressed: Color.lerp(bgPressed, other.bgPressed, t)!, bgPrimary: Color.lerp(bgPrimary, other.bgPrimary, t)!, bgPrimaryAlt: Color.lerp(bgPrimaryAlt, other.bgPrimaryAlt, t)!, bgPrimaryHover: Color.lerp(bgPrimaryHover, other.bgPrimaryHover, t)!, bgPrimarySolid: Color.lerp(bgPrimarySolid, other.bgPrimarySolid, t)!, bgQuaternary: Color.lerp(bgQuaternary, other.bgQuaternary, t)!, bgQuaternaryHover: Color.lerp(bgQuaternaryHover, other.bgQuaternaryHover, t)!, bgSecondary: Color.lerp(bgSecondary, other.bgSecondary, t)!, bgSecondaryAlt: Color.lerp(bgSecondaryAlt, other.bgSecondaryAlt, t)!, bgSecondaryHover: Color.lerp(bgSecondaryHover, other.bgSecondaryHover, t)!, bgSecondarySolid: Color.lerp(bgSecondarySolid, other.bgSecondarySolid, t)!, bgSelected: Color.lerp(bgSelected, other.bgSelected, t)!, bgSkeleton: Color.lerp(bgSkeleton, other.bgSkeleton, t)!, bgSuccessPrimary: Color.lerp(bgSuccessPrimary, other.bgSuccessPrimary, t)!, bgSuccessSecondary: Color.lerp(bgSuccessSecondary, other.bgSuccessSecondary, t)!, bgSuccessSolid: Color.lerp(bgSuccessSolid, other.bgSuccessSolid, t)!, bgSuccessSolidHover: Color.lerp(bgSuccessSolidHover, other.bgSuccessSolidHover, t)!, bgTertiary: Color.lerp(bgTertiary, other.bgTertiary, t)!, bgWarningPrimary: Color.lerp(bgWarningPrimary, other.bgWarningPrimary, t)!, bgWarningSecondary: Color.lerp(bgWarningSecondary, other.bgWarningSecondary, t)!, bgWarningSolid: Color.lerp(bgWarningSolid, other.bgWarningSolid, t)!, bgWarningSolidHover: Color.lerp(bgWarningSolidHover, other.bgWarningSolidHover, t)!, borderDisabled: Color.lerp(borderDisabled, other.borderDisabled, t)!, borderError: Color.lerp(borderError, other.borderError, t)!, borderErrorSubtle: Color.lerp(borderErrorSubtle, other.borderErrorSubtle, t)!, borderInfo: Color.lerp(borderInfo, other.borderInfo, t)!, borderInfoSubtle: Color.lerp(borderInfoSubtle, other.borderInfoSubtle, t)!, borderInput: Color.lerp(borderInput, other.borderInput, t)!, borderPrimary: Color.lerp(borderPrimary, other.borderPrimary, t)!, borderSecondary: Color.lerp(borderSecondary, other.borderSecondary, t)!, borderSecondaryAlt: Color.lerp(borderSecondaryAlt, other.borderSecondaryAlt, t)!, borderSuccess: Color.lerp(borderSuccess, other.borderSuccess, t)!, borderSuccessSubtle: Color.lerp(borderSuccessSubtle, other.borderSuccessSubtle, t)!, borderTertiary: Color.lerp(borderTertiary, other.borderTertiary, t)!, borderWarning: Color.lerp(borderWarning, other.borderWarning, t)!, borderWarningSubtle: Color.lerp(borderWarningSubtle, other.borderWarningSubtle, t)!, fgDisabled: Color.lerp(fgDisabled, other.fgDisabled, t)!, fgErrorPrimary: Color.lerp(fgErrorPrimary, other.fgErrorPrimary, t)!, fgErrorSecondary: Color.lerp(fgErrorSecondary, other.fgErrorSecondary, t)!, fgInfoPrimary: Color.lerp(fgInfoPrimary, other.fgInfoPrimary, t)!, fgInverse: Color.lerp(fgInverse, other.fgInverse, t)!, fgPrimary: Color.lerp(fgPrimary, other.fgPrimary, t)!, fgQuaternary: Color.lerp(fgQuaternary, other.fgQuaternary, t)!, fgQuaternaryHover: Color.lerp(fgQuaternaryHover, other.fgQuaternaryHover, t)!, fgSecondary: Color.lerp(fgSecondary, other.fgSecondary, t)!, fgSecondaryHover: Color.lerp(fgSecondaryHover, other.fgSecondaryHover, t)!, fgSuccessPrimary: Color.lerp(fgSuccessPrimary, other.fgSuccessPrimary, t)!, fgSuccessSecondary: Color.lerp(fgSuccessSecondary, other.fgSuccessSecondary, t)!, fgTertiary: Color.lerp(fgTertiary, other.fgTertiary, t)!, fgTertiaryHover: Color.lerp(fgTertiaryHover, other.fgTertiaryHover, t)!, fgWarningPrimary: Color.lerp(fgWarningPrimary, other.fgWarningPrimary, t)!, fgWarningSecondary: Color.lerp(fgWarningSecondary, other.fgWarningSecondary, t)!, fgWhite: Color.lerp(fgWhite, other.fgWhite, t)!, focusRing: Color.lerp(focusRing, other.focusRing, t)!, focusRingError: Color.lerp(focusRingError, other.focusRingError, t)!, shadowXs: Color.lerp(shadowXs, other.shadowXs, t)!, shadowSm01: Color.lerp(shadowSm01, other.shadowSm01, t)!, shadowSm02: Color.lerp(shadowSm02, other.shadowSm02, t)!, shadowMd01: Color.lerp(shadowMd01, other.shadowMd01, t)!, shadowMd02: Color.lerp(shadowMd02, other.shadowMd02, t)!, shadowLg01: Color.lerp(shadowLg01, other.shadowLg01, t)!, shadowLg02: Color.lerp(shadowLg02, other.shadowLg02, t)!, shadowLg03: Color.lerp(shadowLg03, other.shadowLg03, t)!, shadowXl01: Color.lerp(shadowXl01, other.shadowXl01, t)!, shadowXl02: Color.lerp(shadowXl02, other.shadowXl02, t)!, shadowXl03: Color.lerp(shadowXl03, other.shadowXl03, t)!, shadow2xl01: Color.lerp(shadow2xl01, other.shadow2xl01, t)!, shadow2xl02: Color.lerp(shadow2xl02, other.shadow2xl02, t)!, shadow3xl01: Color.lerp(shadow3xl01, other.shadow3xl01, t)!, shadow3xl02: Color.lerp(shadow3xl02, other.shadow3xl02, t)!, textDisabled: Color.lerp(textDisabled, other.textDisabled, t)!, textErrorPrimary: Color.lerp(textErrorPrimary, other.textErrorPrimary, t)!, textErrorPrimaryHover: Color.lerp(textErrorPrimaryHover, other.textErrorPrimaryHover, t)!, textInfoPrimary: Color.lerp(textInfoPrimary, other.textInfoPrimary, t)!, textInverse: Color.lerp(textInverse, other.textInverse, t)!, textPlaceholder: Color.lerp(textPlaceholder, other.textPlaceholder, t)!, textPrimary: Color.lerp(textPrimary, other.textPrimary, t)!, textQuaternary: Color.lerp(textQuaternary, other.textQuaternary, t)!, textSecondary: Color.lerp(textSecondary, other.textSecondary, t)!, textSecondaryHover: Color.lerp(textSecondaryHover, other.textSecondaryHover, t)!, textSuccessPrimary: Color.lerp(textSuccessPrimary, other.textSuccessPrimary, t)!, textTertiary: Color.lerp(textTertiary, other.textTertiary, t)!, textTertiaryHover: Color.lerp(textTertiaryHover, other.textTertiaryHover, t)!, textTertiaryStrong: Color.lerp(textTertiaryStrong, other.textTertiaryStrong, t)!, textWarningPrimary: Color.lerp(textWarningPrimary, other.textWarningPrimary, t)!, textWhite: Color.lerp(textWhite, other.textWhite, t)!, utilityBlue100: Color.lerp(utilityBlue100, other.utilityBlue100, t)!, utilityBlue200: Color.lerp(utilityBlue200, other.utilityBlue200, t)!, utilityBlue300: Color.lerp(utilityBlue300, other.utilityBlue300, t)!, utilityBlue400: Color.lerp(utilityBlue400, other.utilityBlue400, t)!, utilityBlue50: Color.lerp(utilityBlue50, other.utilityBlue50, t)!, utilityBlue500: Color.lerp(utilityBlue500, other.utilityBlue500, t)!, utilityBlue600: Color.lerp(utilityBlue600, other.utilityBlue600, t)!, utilityBlue700: Color.lerp(utilityBlue700, other.utilityBlue700, t)!, utilityGreen100: Color.lerp(utilityGreen100, other.utilityGreen100, t)!, utilityGreen200: Color.lerp(utilityGreen200, other.utilityGreen200, t)!, utilityGreen300: Color.lerp(utilityGreen300, other.utilityGreen300, t)!, utilityGreen400: Color.lerp(utilityGreen400, other.utilityGreen400, t)!, utilityGreen50: Color.lerp(utilityGreen50, other.utilityGreen50, t)!, utilityGreen500: Color.lerp(utilityGreen500, other.utilityGreen500, t)!, utilityGreen600: Color.lerp(utilityGreen600, other.utilityGreen600, t)!, utilityGreen700: Color.lerp(utilityGreen700, other.utilityGreen700, t)!, utilityNeutral100: Color.lerp(utilityNeutral100, other.utilityNeutral100, t)!, utilityNeutral200: Color.lerp(utilityNeutral200, other.utilityNeutral200, t)!, utilityNeutral300: Color.lerp(utilityNeutral300, other.utilityNeutral300, t)!, utilityNeutral400: Color.lerp(utilityNeutral400, other.utilityNeutral400, t)!, utilityNeutral50: Color.lerp(utilityNeutral50, other.utilityNeutral50, t)!, utilityNeutral500: Color.lerp(utilityNeutral500, other.utilityNeutral500, t)!, utilityNeutral600: Color.lerp(utilityNeutral600, other.utilityNeutral600, t)!, utilityNeutral700: Color.lerp(utilityNeutral700, other.utilityNeutral700, t)!, utilityOrange100: Color.lerp(utilityOrange100, other.utilityOrange100, t)!, utilityOrange200: Color.lerp(utilityOrange200, other.utilityOrange200, t)!, utilityOrange300: Color.lerp(utilityOrange300, other.utilityOrange300, t)!, utilityOrange400: Color.lerp(utilityOrange400, other.utilityOrange400, t)!, utilityOrange50: Color.lerp(utilityOrange50, other.utilityOrange50, t)!, utilityOrange500: Color.lerp(utilityOrange500, other.utilityOrange500, t)!, utilityOrange600: Color.lerp(utilityOrange600, other.utilityOrange600, t)!, utilityOrange700: Color.lerp(utilityOrange700, other.utilityOrange700, t)!, utilityOrange800: Color.lerp(utilityOrange800, other.utilityOrange800, t)!, utilityPurple100: Color.lerp(utilityPurple100, other.utilityPurple100, t)!, utilityPurple200: Color.lerp(utilityPurple200, other.utilityPurple200, t)!, utilityPurple300: Color.lerp(utilityPurple300, other.utilityPurple300, t)!, utilityPurple400: Color.lerp(utilityPurple400, other.utilityPurple400, t)!, utilityPurple50: Color.lerp(utilityPurple50, other.utilityPurple50, t)!, utilityPurple500: Color.lerp(utilityPurple500, other.utilityPurple500, t)!, utilityPurple600: Color.lerp(utilityPurple600, other.utilityPurple600, t)!, utilityPurple700: Color.lerp(utilityPurple700, other.utilityPurple700, t)!, utilityRed100: Color.lerp(utilityRed100, other.utilityRed100, t)!, utilityRed200: Color.lerp(utilityRed200, other.utilityRed200, t)!, utilityRed300: Color.lerp(utilityRed300, other.utilityRed300, t)!, utilityRed400: Color.lerp(utilityRed400, other.utilityRed400, t)!, utilityRed50: Color.lerp(utilityRed50, other.utilityRed50, t)!, utilityRed500: Color.lerp(utilityRed500, other.utilityRed500, t)!, utilityRed600: Color.lerp(utilityRed600, other.utilityRed600, t)!, utilityRed700: Color.lerp(utilityRed700, other.utilityRed700, t)!, utilityTeal100: Color.lerp(utilityTeal100, other.utilityTeal100, t)!, utilityTeal200: Color.lerp(utilityTeal200, other.utilityTeal200, t)!, utilityTeal300: Color.lerp(utilityTeal300, other.utilityTeal300, t)!, utilityTeal400: Color.lerp(utilityTeal400, other.utilityTeal400, t)!, utilityTeal50: Color.lerp(utilityTeal50, other.utilityTeal50, t)!, utilityTeal500: Color.lerp(utilityTeal500, other.utilityTeal500, t)!, utilityTeal600: Color.lerp(utilityTeal600, other.utilityTeal600, t)!, utilityTeal700: Color.lerp(utilityTeal700, other.utilityTeal700, t)!, utilityYellow100: Color.lerp(utilityYellow100, other.utilityYellow100, t)!, utilityYellow200: Color.lerp(utilityYellow200, other.utilityYellow200, t)!, utilityYellow300: Color.lerp(utilityYellow300, other.utilityYellow300, t)!, utilityYellow400: Color.lerp(utilityYellow400, other.utilityYellow400, t)!, utilityYellow50: Color.lerp(utilityYellow50, other.utilityYellow50, t)!, utilityYellow500: Color.lerp(utilityYellow500, other.utilityYellow500, t)!, utilityYellow600: Color.lerp(utilityYellow600, other.utilityYellow600, t)!, utilityYellow700: Color.lerp(utilityYellow700, other.utilityYellow700, t)!, borderInputHover: Color.lerp(borderInputHover, other.borderInputHover, t)!, bgErrorOverlay: Color.lerp(bgErrorOverlay, other.bgErrorOverlay, t)!, vehicleMediaBg: Color.lerp(vehicleMediaBg, other.vehicleMediaBg, t)!, vehicleOutline: Color.lerp(vehicleOutline, other.vehicleOutline, t)!, logoBg: Color.lerp(logoBg, other.logoBg, t)!, fileTypePdf: Color.lerp(fileTypePdf, other.fileTypePdf, t)!, fileTypeDoc: Color.lerp(fileTypeDoc, other.fileTypeDoc, t)!, fileTypeXls: Color.lerp(fileTypeXls, other.fileTypeXls, t)!, fileTypeCsv: Color.lerp(fileTypeCsv, other.fileTypeCsv, t)!, fileTypeImg: Color.lerp(fileTypeImg, other.fileTypeImg, t)!, fileTypeZip: Color.lerp(fileTypeZip, other.fileTypeZip, t)!, fileTypeVid: Color.lerp(fileTypeVid, other.fileTypeVid, t)!);
   }
 }
 
@@ -1403,6 +1425,8 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     required this.spaceXs,
     required this.spaceSm,
     required this.spaceMd,
+    required this.spaceMdLg,
+    required this.spaceLgXl,
     required this.spaceLg,
     required this.spaceXl,
     required this.space2xl,
@@ -1439,6 +1463,7 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     required this.controlPaddingXIconMd,
     required this.controlPaddingXIconLg,
     required this.controlIconGap,
+    required this.controlLabelInset,
     required this.tabPaddingX,
     required this.tabPaddingXIcon,
     required this.tabGap,
@@ -1447,6 +1472,7 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     required this.navPaddingX,
     required this.navItemPaddingY,
     required this.navScanSize,
+    required this.navChildIndent,
     required this.chipHeightSm,
     required this.chipHeightLg,
     required this.chipFontSizeSm,
@@ -1458,6 +1484,7 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     required this.avatarLabelSubtitleSize,
     required this.avatarLabelSubtitleLineHeight,
     required this.chipPaddingXSm,
+    required this.chipPaddingXMd,
     required this.chipPaddingXLg,
     required this.chipPaddingXIconLg,
     required this.avatarSizeMd,
@@ -1480,6 +1507,10 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     required this.uploadRequiredGap,
     required this.uploadCompactTextMinWidth,
     required this.uploadMetaOffset,
+    required this.listRowPaddingX,
+    required this.listRowPaddingY,
+    required this.listRowGap,
+    required this.cardActionGap,
     required this.focusWidth,
     required this.focusOffset,
     required this.typeDisplaySize,
@@ -1513,13 +1544,8 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     required this.featuredIconSizeXl,
     required this.fieldBorderWidth,
     required this.fieldWidthDefault,
-    required this.fieldEdgeInset,
-    required this.fieldTextInset,
-    required this.fieldContentGap,
-    required this.fieldHintInset,
     required this.fieldLabelMaxWidth,
     required this.progressWidthDefault,
-    required this.otpCellWidth,
     required this.widthParagraphMax,
     required this.sizeNone,
     required this.sizeXxs,
@@ -1531,7 +1557,9 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     required this.sizeXl,
     required this.size2xl,
     required this.size3xl,
+    required this.size28,
     required this.size4xl,
+    required this.size36,
     required this.size5xl,
     required this.size6xl,
     required this.size7xl,
@@ -1540,13 +1568,10 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     required this.size10xl,
     required this.size11xl,
     required this.tableRowMinHeight,
-    required this.tableCellPaddingY,
-    required this.tableCellPaddingX,
     required this.vehicleQSmH,
     required this.vehicleCardMediaAppW,
     required this.vehicleCardMediaAppH,
     required this.vehicleQLgW,
-    required this.notificationActionGap,
     required this.headerNavHeight,
     required this.headerNavAccountMenuWidth,
     required this.breadcrumbsCurrentMaxWidth,
@@ -1563,6 +1588,7 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     required this.typeDisplayMdLineHeight,
     required this.typeBodyLgSize,
     required this.typeBodyLgLineHeight,
+    required this.otpCellWidth,
   });
 
   /// Thang bo góc Untitled `radius-none` = 0 (DEC-315)
@@ -1613,6 +1639,10 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
   final double spaceSm;
   /// Thang khoảng cách Untitled `spacing-md` = 8: lề trong, khoảng giữa phần tử (DEC-314)
   final double spaceMd;
+  /// Bậc Semantic 10: lề Badge MD (DEC-341), lề nút Web MD phía icon, khoảng Notification (DEC-346); thang Untitled không có bậc này
+  final double spaceMdLg;
+  /// Bậc Semantic 14: lề phía icon nút Web LG (DEC-346 pd01); thang Untitled không có bậc này
+  final double spaceLgXl;
   /// Thang khoảng cách Untitled `spacing-lg` = 12: lề trong, khoảng giữa phần tử (DEC-314)
   final double spaceLg;
   /// Thang khoảng cách Untitled `spacing-xl` = 16: lề trong, khoảng giữa phần tử (DEC-314)
@@ -1651,40 +1681,42 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
   final double gridMargin;
   /// Lề chứa: lề trong thẻ, nhóm có viền, dòng trong nhóm (DEC-164, DEC-165)
   final double layoutCardPadding;
-  /// Giữa các thẻ, dòng trong danh sách
+  /// Giữa các thẻ, dòng trong danh sách; Web = App 12 (DEC-341 sp04)
   final double layoutListGap;
-  /// Giữa các khối lớn
+  /// Giữa các khối lớn; Web = App 24 (DEC-341 sp04)
   final double layoutSectionGap;
   /// Tiêu đề màn → nội dung (DEC-192)
   final double layoutTitleGap;
-  /// Lề trên dưới màn trống, màn kết quả, đăng nhập (DEC-259)
+  /// Lề trên dưới màn trống, màn kết quả, đăng nhập; Web = App 64 (DEC-259, DEC-341 sp04)
   final double layoutEmptyPadding;
-  /// Giữa 2 ô nhập trong một nhóm (DEC-192)
+  /// Giữa 2 ô nhập trong một nhóm; Web = App 16 (DEC-192, DEC-341 sp04)
   final double formFieldGap;
-  /// Vùng chạm tối thiểu (web: WCAG 2.2 AA 24; app: DEC-138)
+  /// Vùng chạm tối thiểu (web: WCAG 2.2 AA 24; app: DEC-138). Con trỏ thô trên web đọc số của app (DEC-339)
   final double touchMin;
   /// Cao control cỡ SM: nút trong hàng bảng (web), tab chip, nút nhỏ (app) (DEC-173)
   final double controlHeightSm;
-  /// Cao control cỡ MD (mặc định): nút, ô nhập web; nút trong thẻ, sheet, nút icon (app) (DEC-173)
+  /// Cao control cỡ MD (mặc định): nút, ô nhập web; nút trong thẻ, sheet, nút icon (app). App 44 bằng touch/min, mở lại DEC-173 (DEC-341 sp10)
   final double controlHeightMd;
-  /// Nút icon / avatar thanh trên (DEC-304); Featured icon không còn mượn (DEC-329 ic11)
+  /// Nút icon / avatar thanh trên (DEC-304); Featured icon không còn mượn (DEC-329 ic11) App còn 42, lệch control/height/md 44 (DEC-341 sp10 giữ, chờ quyết). App không dùng, Mobile bằng MD (user 02/11)
   final double controlHeightMl;
   /// Cao control cỡ LG: màn đăng nhập, nút cần nổi (web); nút chân màn, ô nhập (app) (DEC-173)
   final double controlHeightLg;
-  /// Lề trái phải trong nút cỡ SM (DEC-192)
+  /// Lề trái phải trong nút cỡ SM; Web 10 khớp nút thật (DEC-192, DEC-346 pd00)
   final double controlPaddingXSm;
   /// Lề trái phải trong nút cỡ MD (DEC-192)
   final double controlPaddingXMd;
   /// Lề trái phải trong nút cỡ LG; nút app 52 lề 24 (DEC-163, DEC-192)
   final double controlPaddingXLg;
-  /// Lề phía có icon trong nút cỡ SM: lùi một bậc thang (DEC-192)
+  /// Lề phía có icon trong nút SM: Web lùi 2 như Untitled, App lùi 4 (DEC-192, DEC-346 pd01, pd02)
   final double controlPaddingXIconSm;
-  /// Lề phía có icon trong nút cỡ MD: lùi một bậc thang (DEC-192)
+  /// Lề phía có icon trong nút MD: Web lùi 2 như Untitled, App lùi 4 (DEC-192, DEC-346 pd01, pd02)
   final double controlPaddingXIconMd;
-  /// Lề phía có icon trong nút cỡ LG: lùi một bậc thang (DEC-163, DEC-192)
+  /// Lề phía có icon trong nút LG: Web lùi 2 như Untitled, App lùi 4 (DEC-163, DEC-192, DEC-346 pd01, pd02)
   final double controlPaddingXIconLg;
   /// Icon → chữ trong nút, tab chip (DEC-161, DEC-192)
   final double controlIconGap;
+  /// Bọc chữ của nút: Web 2, App 4; itemSpacing 4 + bọc = icon → chữ Web 6, App 8 (DEC-346 pd01)
+  final double controlLabelInset;
   /// Lề trái phải trong tab: web tab gạch, app tab chip (DEC-164, DEC-192)
   final double tabPaddingX;
   /// Lề phía có icon trong tab: lùi một bậc thang (DEC-192)
@@ -1701,37 +1733,41 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
   final double navItemPaddingY;
   /// Nút Quét mã giữa thanh điều hướng (DEC-160); chỉ app
   final double navScanSize;
-  /// Cao chip Size SM: 16 = một dòng chữ 12/16, dùng ở đầu thẻ bản ghi; web và app cùng 16 (DEC-239); MD là chip/height
+  /// Lề trái dòng con _Nav item 36 = 8 + 20 + 8, thay khung rỗng Indent (DEC-346 al00)
+  final double navChildIndent;
+  /// Cao chip Size SM 22 cả web lẫn app (DEC-259). Ngoại lệ: chữ 18 + 2 × 2 như Untitled Badge SM (DEC-341).
   final double chipHeightSm;
-  /// Cao chip LG (DEC-259)
+  /// Cao chip LG 28 = chữ 20 + 2 × 4 như Untitled (DEC-259, DEC-341)
   final double chipHeightLg;
   /// Chip SM: cỡ chữ 12 cả web lẫn app, bằng type/hint (DEC-239, DEC-322)
   final double chipFontSizeSm;
   /// Chip SM: cao dòng 18 cả web lẫn app, bằng type/hint (DEC-310, DEC-322)
   final double chipLineHeightSm;
-  /// Badge SM có ô đếm: lề phải 3 = (22 − 16) / 2 (DEC-303, DEC-310)
+  /// Badge SM có ô đếm: lề phải 3 = (22 − 16) / 2 (DEC-303, DEC-310) Ngoại lệ: (chip/height-sm 22 − ô đếm 16) / 2 (DEC-341).
   final double chipCountInset;
   /// Badge: chữ số đếm và Count Only 12 cố định web + app (review R11, DEC-304)
   final double chipCountFontSize;
   /// Badge: dòng chữ số đếm 16 cố định web + app (DEC-304)
   final double chipCountLineHeight;
-  /// Avatar label: rộng mặc định 240, tên và dòng phụ cắt "…" một dòng (DEC-303)
+  /// Avatar label: rộng mặc định 240, tên và dòng phụ cắt "…" một dòng (DEC-303) Ngoại lệ: 240, thang không có bậc (DEC-341).
   final double avatarLabelWidth;
   /// Avatar label: chữ dòng phụ 12 cố định web + app (DEC-304)
   final double avatarLabelSubtitleSize;
   /// Avatar label: dòng phụ cao 16 cố định web + app (DEC-304)
   final double avatarLabelSubtitleLineHeight;
-  /// Badge SM: lề phía chữ 10 (DEC-310)
+  /// Badge SM: lề phía chữ 8 theo Untitled, mở lại DEC-310 (DEC-341 sp01)
   final double chipPaddingXSm;
-  /// Badge LG: lề phía chữ 14 (DEC-310)
+  /// Badge MD: lề phía chữ 10 (DEC-341); trỏ primitive vì thang Semantic không có bậc 10
+  final double chipPaddingXMd;
+  /// Badge LG: lề phía chữ 12 theo Untitled, mở lại DEC-310 (DEC-341 sp01)
   final double chipPaddingXLg;
-  /// Badge LG: lề phía chấm/icon 10 (DEC-310)
+  /// Badge LG: lề phía chấm/icon 10; Badge MD: lề phía chữ 10 theo Untitled, mở lại DEC-310 (DEC-341 sp01)
   final double chipPaddingXIconLg;
   /// Cỡ avatar MD (DEC-201)
   final double avatarSizeMd;
-  /// Chấm trạng thái avatar MD, chưa tính viền trắng 2 (DEC-201)
+  /// Chấm trạng thái avatar MD, chưa tính viền trắng 2 (DEC-201) Ngoại lệ: Untitled cũng dùng size-2.5 (DEC-341).
   final double avatarStatusSizeMd;
-  /// Cỡ avatar XXL, đầu trang hồ sơ (DEC-203)
+  /// Cỡ avatar XXL, đầu trang hồ sơ (DEC-203) Ngoại lệ: đầu trang hồ sơ (DEC-203), Untitled dừng ở 64 (DEC-341).
   final double avatarSizeXxl;
   /// Chấm trạng thái avatar XL (DEC-203)
   final double avatarStatusSizeXl;
@@ -1743,13 +1779,13 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
   final double avatarEditIconSizeLg;
   /// Vòng quay Uploading, Avatar XXL: 28 (DEC-242)
   final double avatarSpinnerSizeXxl;
-  /// Avatar Group SM: khoảng giữa các avatar là số ÂM = lùi đè ¼ đường kính (6), gắn vào itemSpacing của Base / Avatar Group (DEC-205, DEC-242)
+  /// Avatar Group SM: khoảng giữa các avatar là số ÂM = lùi đè ¼ đường kính (6), gắn vào itemSpacing của Base / Avatar Group (DEC-205, DEC-242) Ngoại lệ: −¼ đường kính, biến Figma không tính được (DEC-205) (DEC-341).
   final double avatarGroupOverlapSm;
-  /// Avatar Group MD: khoảng giữa các avatar là số ÂM = lùi đè ¼ đường kính (8), gắn vào itemSpacing của Base / Avatar Group (DEC-205, DEC-242)
+  /// Avatar Group MD: khoảng giữa các avatar là số ÂM = lùi đè ¼ đường kính (8), gắn vào itemSpacing của Base / Avatar Group (DEC-205, DEC-242) Ngoại lệ: −¼ đường kính, biến Figma không tính được (DEC-205) (DEC-341).
   final double avatarGroupOverlapMd;
-  /// Avatar Group LG: khoảng giữa các avatar là số ÂM = lùi đè ¼ đường kính (12), gắn vào itemSpacing của Base / Avatar Group (DEC-205, DEC-242)
+  /// Avatar Group LG: khoảng giữa các avatar là số ÂM = lùi đè ¼ đường kính (12), gắn vào itemSpacing của Base / Avatar Group (DEC-205, DEC-242) Ngoại lệ: −¼ đường kính, biến Figma không tính được (DEC-205) (DEC-341).
   final double avatarGroupOverlapLg;
-  /// Rộng tối đa tooltip, quá thì xuống dòng (DEC-206)
+  /// Rộng tối đa tooltip, quá thì xuống dòng (DEC-206) Ngoại lệ: 240, thang không có bậc (DEC-341).
   final double tooltipMaxWidth;
   /// Dòng tiêu đề Help sheet, theo type/title-3 18/28 (DEC-322)
   final double helpSheetTitleLineHeight;
@@ -1759,17 +1795,25 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
   final double uploadDisabledOpacity;
   /// Rộng vạch chia dòng phụ file (DEC-307)
   final double uploadDividerWidth;
-  /// Cao tối thiểu vùng bấm tải lên trên app (DEC-307)
+  /// Cao tối thiểu vùng bấm tải lên trên app (DEC-307) Ngoại lệ: vùng bấm tải lên app (DEC-307) (DEC-341).
   final double uploadAppTapMinHeight;
-  /// Khoảng trước dấu * bắt buộc (DEC-307)
+  /// Khoảng trước dấu * bắt buộc 2, như Untitled label.tsx (DEC-307, DEC-341 sp07)
   final double uploadRequiredGap;
-  /// Rộng tối thiểu chữ vùng kéo thả gọn (DEC-307)
+  /// Rộng tối thiểu chữ vùng kéo thả gọn 160 (DEC-307, DEC-341 sp09)
   final double uploadCompactTextMinWidth;
-  /// Khoảng trên dòng phụ file (DEC-307)
+  /// Khoảng trên dòng phụ file 2 như Untitled mt-0.5 (DEC-307, DEC-346 al08)
   final double uploadMetaOffset;
-  /// Độ dày vòng focus
+  /// Dòng menu, dòng chọn: lề ngang Web 8, App 12 (DEC-346 pd04)
+  final double listRowPaddingX;
+  /// Dòng menu, dòng chọn: lề dọc Web 8, App 12 (DEC-346 pd04)
+  final double listRowPaddingY;
+  /// Giữa các dòng tệp trong Field Upload: Web 8, App 12 (DEC-346 pd04)
+  final double listRowGap;
+  /// Giữa các nút trong đầu thẻ: Web 8, App 12 (DEC-162, DEC-346 pd04)
+  final double cardActionGap;
+  /// Độ dày vòng focus (DEC-339)
   final double focusWidth;
-  /// Khoảng cách vòng focus tới mép control
+  /// Khoảng cách vòng focus tới mép control; vòng vào trong dùng số âm (DEC-339)
   final double focusOffset;
   /// Số lớn, màn giới thiệu
   final double typeDisplaySize;
@@ -1825,7 +1869,7 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
   final double featuredIconSize;
   /// Featured icon 40, icon 20: Upload Full web (DEC-329 ic11)
   final double featuredIconSizeMd;
-  /// Featured icon 36, icon 20: Upload Compact; ngoại lệ số trần vì thang không có 36 (DEC-329 ic04, ic11)
+  /// Featured icon 36, icon 20: Upload Compact, trỏ bậc size/36 (DEC-329 ic11, DEC-341 sp08)
   final double featuredIconSizeCompact;
   /// Featured icon 56, icon 28 theo Untitled; ngoại lệ số trần vì thang không có 56 (DEC-329 ic11)
   final double featuredIconSizeXl;
@@ -1833,20 +1877,10 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
   final double fieldBorderWidth;
   /// Ô nhập: Web 320; app trải theo màn trừ lề, 361 chỉ là kết quả trên khung 393 (DEC-324). Figma: app dùng Fill
   final double fieldWidthDefault;
-  /// Ô nhập: lề từ mép ô tới khối đầu. Mép chữ = edge-inset + text-inset = 12 web, 16 app; icon đầu, cuối cách mép đúng số này (DEC-184, DEC-192, DEC-196) (DEC-207)
-  final double fieldEdgeInset;
-  /// Ô nhập: lề trái phải vùng chữ. Web 4 = 12 − 8, app 0 (DEC-184) (DEC-207)
-  final double fieldTextInset;
-  /// Ô nhập: khoảng icon → vùng chữ; cộng text-inset ra 8 web (DEC-192), 16 app (DEC-196) (DEC-207)
-  final double fieldContentGap;
-  /// Ô nhập: lề trái dòng gợi ý, dòng lỗi. Web 0 canh mép ô, app 16 thẳng chữ trong ô (DEC-192) (DEC-207)
-  final double fieldHintInset;
-  /// Ô nhập: rộng tối đa nhãn, để nhãn dài cắt "…" mà dấu * vẫn ngay sau nhãn. 300 ≈ rộng mặc định trừ lề và chỗ cho *; ô hẹp hơn thì chỉnh (DEC-207)
+  /// Không còn gắn trên Figma: hàng nhãn rộng theo ô (DEC-346 al03). Xoá khi dọn biến. Chữ nhãn Figma tối đa 264 là số trần vì Figma không gắn biến vào max width của chữ
   final double fieldLabelMaxWidth;
   /// Thanh tiến độ: Web 320; app trải theo màn trừ lề (DEC-324). Figma: app dùng Fill
   final double progressWidthDefault;
-  /// Ô mã OTP: rộng một ô. App 48 theo bản vẽ account-access 3.4; web 40 là giá trị đề xuất, chưa dựng khối Web (DEC-244)
-  final double otpCellWidth;
   /// Đoạn văn tối đa với chữ 14; lớp .prose đọc biến này (DEC-324)
   final double widthParagraphMax;
   /// Thang kích thước theo bậc Untitled = 0: cao, rộng, cỡ khối của component (DEC-314)
@@ -1869,8 +1903,12 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
   final double size2xl;
   /// Thang kích thước theo bậc Untitled = 24: cao, rộng, cỡ khối của component (DEC-314)
   final double size3xl;
+  /// Bậc 28 cho cao, cỡ khối, lệch thang Untitled do user chọn, mở lại DEC-314 (DEC-341 sp08)
+  final double size28;
   /// Thang kích thước theo bậc Untitled = 32: cao, rộng, cỡ khối của component (DEC-314)
   final double size4xl;
+  /// Bậc 36 cho cao, cỡ khối, lệch thang Untitled do user chọn, mở lại DEC-314 (DEC-341 sp08)
+  final double size36;
   /// Thang kích thước theo bậc Untitled = 40: cao, rộng, cỡ khối của component (DEC-314)
   final double size5xl;
   /// Thang kích thước theo bậc Untitled = 48: cao, rộng, cỡ khối của component (DEC-314)
@@ -1885,12 +1923,8 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
   final double size10xl;
   /// Thang kích thước theo bậc Untitled = 160: cao, rộng, cỡ khối của component (DEC-314)
   final double size11xl;
-  /// Cao tối thiểu dòng bảng (DEC-259, như Untitled)
+  /// Cao tối thiểu dòng bảng (DEC-259, như Untitled) Ngoại lệ: chữ 20 + 2 × 16 (space/xl, lề ô bảng web) (DEC-341).
   final double tableRowMinHeight;
-  /// Lề trên dưới ô bảng
-  final double tableCellPaddingY;
-  /// Lề trái phải ô bảng
-  final double tableCellPaddingX;
   /// Cao ảnh Vehicle Card web 160 × 100, rộng size/11xl (DEC-269, DEC-334)
   final double vehicleQSmH;
   /// Rộng ảnh Vehicle Card app 140 × 88 (DEC-269, DEC-334)
@@ -1899,19 +1933,17 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
   final double vehicleCardMediaAppH;
   /// Rộng tối đa ảnh đầu trang chi tiết phương tiện, tỉ lệ 16:10; app trải theo màn (DEC-334)
   final double vehicleQLgW;
-  /// Notification: khoảng giữa 2 nút hành động — app 24 để vùng chạm 44 không chồng nhau (DEC-287)
-  final double notificationActionGap;
-  /// Cao thanh trên Header navigation (DEC-305)
+  /// Cao thanh trên Header navigation (DEC-305) Ngoại lệ: thanh trên theo DEC-305 (DEC-341).
   final double headerNavHeight;
-  /// Rộng menu tài khoản mở từ avatar (DEC-305)
+  /// Rộng menu tài khoản mở từ avatar (DEC-305) Ngoại lệ: 256 giữ riêng (DEC-324) (DEC-341).
   final double headerNavAccountMenuWidth;
-  /// Breadcrumbs: trang hiện tại rộng tối đa, quá thì cắt + tooltip (DEC-305)
+  /// Breadcrumbs: trang hiện tại rộng tối đa, quá thì cắt + tooltip (DEC-305) Ngoại lệ: 240, thang không có bậc (DEC-341).
   final double breadcrumbsCurrentMaxWidth;
-  /// Breadcrumbs: rộng tối thiểu menu tầng ẩn “…” (DEC-305)
+  /// Breadcrumbs: rộng tối thiểu menu tầng ẩn “…” (DEC-305) Ngoại lệ: 240, thang không có bậc (DEC-341).
   final double breadcrumbsMenuMinWidth;
-  /// Rộng hộp thoại tìm ⌘K giữa màn (DEC-305)
+  /// Rộng hộp thoại tìm ⌘K giữa màn (DEC-305) Ngoại lệ: 600 giữ riêng (DEC-324) (DEC-341).
   final double commandSearchWidth;
-  /// Lề trái phải nền chữ khớp (DEC-305)
+  /// Lề trái phải nền chữ khớp (DEC-305) Ngoại lệ: nền chữ khớp, lớn hơn làm giãn chữ (DEC-341).
   final double commandSearchHighlightPaddingX;
   /// Số rất lớn, màn giới thiệu, Cal Sans (DEC-322)
   final double typeDisplay2xlSize;
@@ -1933,6 +1965,8 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
   final double typeBodyLgSize;
   /// Chữ 16/24, bậc Text md của Untitled (DEC-322)
   final double typeBodyLgLineHeight;
+  /// Ô mã OTP: rộng một ô. Giữ theo chế độ vì component chỉ có một khối gốc (DEC-341 sp06)
+  final double otpCellWidth;
 
   static const web = InvPlatform(
     radiusNone: InvPrimitives.radius0,
@@ -1959,6 +1993,8 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     spaceXs: InvPrimitives.space4,
     spaceSm: InvPrimitives.space6,
     spaceMd: InvPrimitives.space8,
+    spaceMdLg: InvPrimitives.space10,
+    spaceLgXl: InvPrimitives.space14,
     spaceLg: InvPrimitives.space12,
     spaceXl: InvPrimitives.space16,
     space2xl: InvPrimitives.space20,
@@ -1971,40 +2007,42 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     space9xl: InvPrimitives.space96,
     space10xl: InvPrimitives.space128,
     space11xl: InvPrimitives.space160,
-    containerPaddingMobile: InvPrimitives.space16,
-    containerPaddingDesktop: InvPrimitives.space32,
+    containerPaddingMobile: InvPrimitives.spaceXl,
+    containerPaddingDesktop: InvPrimitives.space4xl,
     containerMaxWidthDesktop: InvPrimitives.width3xl,
     gridColumns: 12.0,
-    gridGutter: InvPrimitives.space32,
+    gridGutter: InvPrimitives.space4xl,
     gridMargin: InvPrimitives.containerPaddingDesktop,
-    layoutCardPadding: InvPrimitives.space16,
-    layoutListGap: InvPrimitives.space8,
-    layoutSectionGap: InvPrimitives.space32,
-    layoutTitleGap: InvPrimitives.space16,
-    layoutEmptyPadding: InvPrimitives.space80,
-    formFieldGap: InvPrimitives.space16,
+    layoutCardPadding: InvPrimitives.spaceXl,
+    layoutListGap: InvPrimitives.spaceLg,
+    layoutSectionGap: InvPrimitives.space3xl,
+    layoutTitleGap: InvPrimitives.spaceXl,
+    layoutEmptyPadding: InvPrimitives.space7xl,
+    formFieldGap: InvPrimitives.spaceXl,
     touchMin: 24.0,
-    controlHeightSm: 28.0,
+    controlHeightSm: InvPrimitives.size28,
     controlHeightMd: 32.0,
-    controlHeightMl: 36.0,
+    controlHeightMl: InvPrimitives.size36,
     controlHeightLg: 40.0,
-    controlPaddingXSm: InvPrimitives.space8,
-    controlPaddingXMd: InvPrimitives.space12,
-    controlPaddingXLg: InvPrimitives.space16,
-    controlPaddingXIconSm: InvPrimitives.space6,
-    controlPaddingXIconMd: InvPrimitives.space8,
-    controlPaddingXIconLg: InvPrimitives.space12,
-    controlIconGap: InvPrimitives.space6,
-    tabPaddingX: InvPrimitives.space8,
-    tabPaddingXIcon: InvPrimitives.space6,
-    tabGap: InvPrimitives.space8,
+    controlPaddingXSm: InvPrimitives.spaceMdLg,
+    controlPaddingXMd: InvPrimitives.spaceLg,
+    controlPaddingXLg: InvPrimitives.spaceXl,
+    controlPaddingXIconSm: InvPrimitives.spaceMd,
+    controlPaddingXIconMd: InvPrimitives.spaceMdLg,
+    controlPaddingXIconLg: InvPrimitives.spaceLgXl,
+    controlIconGap: InvPrimitives.spaceSm,
+    controlLabelInset: InvPrimitives.spaceXxs,
+    tabPaddingX: InvPrimitives.spaceMd,
+    tabPaddingXIcon: InvPrimitives.spaceSm,
+    tabGap: InvPrimitives.spaceMd,
     navHeight: 64.0,
-    navOffsetBottom: InvPrimitives.space8,
-    navPaddingX: InvPrimitives.space4,
-    navItemPaddingY: InvPrimitives.space4,
+    navOffsetBottom: InvPrimitives.spaceMd,
+    navPaddingX: InvPrimitives.spaceXs,
+    navItemPaddingY: InvPrimitives.spaceXs,
     navScanSize: 56.0,
+    navChildIndent: InvPrimitives.space36,
     chipHeightSm: 22.0,
-    chipHeightLg: 28.0,
+    chipHeightLg: InvPrimitives.size28,
     chipFontSizeSm: InvPrimitives.fontSizeXs,
     chipLineHeightSm: InvPrimitives.lineHeightXs,
     chipCountInset: 3.0,
@@ -2013,17 +2051,18 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     avatarLabelWidth: 240.0,
     avatarLabelSubtitleSize: InvPrimitives.fontSizeXs,
     avatarLabelSubtitleLineHeight: InvPrimitives.lineHeightXsTight,
-    chipPaddingXSm: InvPrimitives.space10,
-    chipPaddingXLg: 14.0,
-    chipPaddingXIconLg: InvPrimitives.space10,
-    avatarSizeMd: 36.0,
+    chipPaddingXSm: InvPrimitives.spaceMd,
+    chipPaddingXMd: InvPrimitives.spaceMdLg,
+    chipPaddingXLg: InvPrimitives.spaceLg,
+    chipPaddingXIconLg: InvPrimitives.spaceMdLg,
+    avatarSizeMd: InvPrimitives.size36,
     avatarStatusSizeMd: 10.0,
     avatarSizeXxl: 88.0,
-    avatarStatusSizeXl: 14.0,
-    avatarEditSizeXl: 28.0,
-    avatarIconSizeSm: 14.0,
-    avatarEditIconSizeLg: 14.0,
-    avatarSpinnerSizeXxl: 28.0,
+    avatarStatusSizeXl: InvPrimitives.size14,
+    avatarEditSizeXl: InvPrimitives.size28,
+    avatarIconSizeSm: InvPrimitives.size14,
+    avatarEditIconSizeLg: InvPrimitives.size14,
+    avatarSpinnerSizeXxl: InvPrimitives.size28,
     avatarGroupOverlapSm: -6.0,
     avatarGroupOverlapMd: -8.0,
     avatarGroupOverlapLg: -12.0,
@@ -2033,9 +2072,13 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     uploadDisabledOpacity: 0.6,
     uploadDividerWidth: 1.0,
     uploadAppTapMinHeight: 72.0,
-    uploadRequiredGap: 3.0,
-    uploadCompactTextMinWidth: 150.0,
-    uploadMetaOffset: 1.0,
+    uploadRequiredGap: InvPrimitives.spaceXxs,
+    uploadCompactTextMinWidth: InvPrimitives.size11xl,
+    uploadMetaOffset: InvPrimitives.spaceXxs,
+    listRowPaddingX: InvPrimitives.spaceMd,
+    listRowPaddingY: InvPrimitives.spaceMd,
+    listRowGap: InvPrimitives.spaceMd,
+    cardActionGap: InvPrimitives.spaceMd,
     focusWidth: 2.0,
     focusOffset: 2.0,
     typeDisplaySize: InvPrimitives.fontSizeDisplaySm,
@@ -2065,17 +2108,12 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     iconSizeChip: InvPrimitives.size14,
     featuredIconSize: InvPrimitives.size6xl,
     featuredIconSizeMd: InvPrimitives.size5xl,
-    featuredIconSizeCompact: 36.0,
+    featuredIconSizeCompact: InvPrimitives.size36,
     featuredIconSizeXl: 56.0,
     fieldBorderWidth: 1.0,
     fieldWidthDefault: InvPrimitives.widthXxs,
-    fieldEdgeInset: InvPrimitives.spaceMd,
-    fieldTextInset: InvPrimitives.spaceXs,
-    fieldContentGap: InvPrimitives.spaceXs,
-    fieldHintInset: InvPrimitives.spaceNone,
-    fieldLabelMaxWidth: 300.0,
+    fieldLabelMaxWidth: 320.0,
     progressWidthDefault: InvPrimitives.widthXxs,
-    otpCellWidth: InvPrimitives.size5xl,
     widthParagraphMax: InvPrimitives.widthMd,
     sizeNone: InvPrimitives.space0,
     sizeXxs: InvPrimitives.space2,
@@ -2087,7 +2125,9 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     sizeXl: InvPrimitives.space16,
     size2xl: InvPrimitives.space20,
     size3xl: InvPrimitives.space24,
+    size28: InvPrimitives.space28,
     size4xl: InvPrimitives.space32,
+    size36: InvPrimitives.space36,
     size5xl: InvPrimitives.space40,
     size6xl: InvPrimitives.space48,
     size7xl: InvPrimitives.space64,
@@ -2096,13 +2136,10 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     size10xl: InvPrimitives.space128,
     size11xl: InvPrimitives.space160,
     tableRowMinHeight: 52.0,
-    tableCellPaddingY: InvPrimitives.spaceXl,
-    tableCellPaddingX: InvPrimitives.space3xl,
     vehicleQSmH: 100.0,
     vehicleCardMediaAppW: 140.0,
     vehicleCardMediaAppH: 88.0,
     vehicleQLgW: 480.0,
-    notificationActionGap: InvPrimitives.spaceLg,
     headerNavHeight: 44.0,
     headerNavAccountMenuWidth: 256.0,
     breadcrumbsCurrentMaxWidth: 240.0,
@@ -2119,6 +2156,7 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     typeDisplayMdLineHeight: InvPrimitives.lineHeightDisplayMd,
     typeBodyLgSize: InvPrimitives.fontSizeMd,
     typeBodyLgLineHeight: InvPrimitives.lineHeightMd,
+    otpCellWidth: InvPrimitives.size5xl,
   );
 
   static const mobile = InvPlatform(
@@ -2146,6 +2184,8 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     spaceXs: InvPrimitives.space4,
     spaceSm: InvPrimitives.space6,
     spaceMd: InvPrimitives.space8,
+    spaceMdLg: InvPrimitives.space10,
+    spaceLgXl: InvPrimitives.space14,
     spaceLg: InvPrimitives.space12,
     spaceXl: InvPrimitives.space16,
     space2xl: InvPrimitives.space20,
@@ -2158,40 +2198,42 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     space9xl: InvPrimitives.space96,
     space10xl: InvPrimitives.space128,
     space11xl: InvPrimitives.space160,
-    containerPaddingMobile: InvPrimitives.space16,
-    containerPaddingDesktop: InvPrimitives.space32,
+    containerPaddingMobile: InvPrimitives.spaceXl,
+    containerPaddingDesktop: InvPrimitives.space4xl,
     containerMaxWidthDesktop: InvPrimitives.width3xl,
     gridColumns: 4.0,
-    gridGutter: InvPrimitives.space16,
+    gridGutter: InvPrimitives.spaceXl,
     gridMargin: InvPrimitives.containerPaddingMobile,
-    layoutCardPadding: InvPrimitives.space16,
-    layoutListGap: InvPrimitives.space12,
-    layoutSectionGap: InvPrimitives.space24,
-    layoutTitleGap: InvPrimitives.space16,
-    layoutEmptyPadding: InvPrimitives.space64,
-    formFieldGap: InvPrimitives.space12,
+    layoutCardPadding: InvPrimitives.spaceXl,
+    layoutListGap: InvPrimitives.spaceLg,
+    layoutSectionGap: InvPrimitives.space3xl,
+    layoutTitleGap: InvPrimitives.spaceXl,
+    layoutEmptyPadding: InvPrimitives.space7xl,
+    formFieldGap: InvPrimitives.spaceXl,
     touchMin: 44.0,
-    controlHeightSm: 36.0,
-    controlHeightMd: 42.0,
-    controlHeightMl: 42.0,
+    controlHeightSm: InvPrimitives.size36,
+    controlHeightMd: 44.0,
+    controlHeightMl: 44.0,
     controlHeightLg: 52.0,
-    controlPaddingXSm: InvPrimitives.space12,
-    controlPaddingXMd: InvPrimitives.space16,
-    controlPaddingXLg: InvPrimitives.space24,
-    controlPaddingXIconSm: InvPrimitives.space8,
-    controlPaddingXIconMd: InvPrimitives.space12,
-    controlPaddingXIconLg: InvPrimitives.space20,
-    controlIconGap: InvPrimitives.space8,
-    tabPaddingX: InvPrimitives.space16,
-    tabPaddingXIcon: InvPrimitives.space12,
-    tabGap: InvPrimitives.space8,
+    controlPaddingXSm: InvPrimitives.spaceLg,
+    controlPaddingXMd: InvPrimitives.spaceXl,
+    controlPaddingXLg: InvPrimitives.space3xl,
+    controlPaddingXIconSm: InvPrimitives.spaceMd,
+    controlPaddingXIconMd: InvPrimitives.spaceLg,
+    controlPaddingXIconLg: InvPrimitives.space2xl,
+    controlIconGap: InvPrimitives.spaceMd,
+    controlLabelInset: InvPrimitives.spaceXs,
+    tabPaddingX: InvPrimitives.spaceXl,
+    tabPaddingXIcon: InvPrimitives.spaceLg,
+    tabGap: InvPrimitives.spaceMd,
     navHeight: 64.0,
-    navOffsetBottom: InvPrimitives.space8,
-    navPaddingX: InvPrimitives.space4,
-    navItemPaddingY: InvPrimitives.space4,
+    navOffsetBottom: InvPrimitives.spaceMd,
+    navPaddingX: InvPrimitives.spaceXs,
+    navItemPaddingY: InvPrimitives.spaceXs,
     navScanSize: 56.0,
+    navChildIndent: InvPrimitives.space36,
     chipHeightSm: 22.0,
-    chipHeightLg: 28.0,
+    chipHeightLg: InvPrimitives.size28,
     chipFontSizeSm: InvPrimitives.fontSizeXs,
     chipLineHeightSm: InvPrimitives.lineHeightXs,
     chipCountInset: 3.0,
@@ -2200,17 +2242,18 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     avatarLabelWidth: 240.0,
     avatarLabelSubtitleSize: InvPrimitives.fontSizeXs,
     avatarLabelSubtitleLineHeight: InvPrimitives.lineHeightXsTight,
-    chipPaddingXSm: InvPrimitives.space10,
-    chipPaddingXLg: 14.0,
-    chipPaddingXIconLg: InvPrimitives.space10,
-    avatarSizeMd: 36.0,
+    chipPaddingXSm: InvPrimitives.spaceMd,
+    chipPaddingXMd: InvPrimitives.spaceMdLg,
+    chipPaddingXLg: InvPrimitives.spaceLg,
+    chipPaddingXIconLg: InvPrimitives.spaceMdLg,
+    avatarSizeMd: InvPrimitives.size36,
     avatarStatusSizeMd: 10.0,
     avatarSizeXxl: 88.0,
-    avatarStatusSizeXl: 14.0,
-    avatarEditSizeXl: 28.0,
-    avatarIconSizeSm: 14.0,
-    avatarEditIconSizeLg: 14.0,
-    avatarSpinnerSizeXxl: 28.0,
+    avatarStatusSizeXl: InvPrimitives.size14,
+    avatarEditSizeXl: InvPrimitives.size28,
+    avatarIconSizeSm: InvPrimitives.size14,
+    avatarEditIconSizeLg: InvPrimitives.size14,
+    avatarSpinnerSizeXxl: InvPrimitives.size28,
     avatarGroupOverlapSm: -6.0,
     avatarGroupOverlapMd: -8.0,
     avatarGroupOverlapLg: -12.0,
@@ -2220,9 +2263,13 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     uploadDisabledOpacity: 0.6,
     uploadDividerWidth: 1.0,
     uploadAppTapMinHeight: 72.0,
-    uploadRequiredGap: 3.0,
-    uploadCompactTextMinWidth: 150.0,
-    uploadMetaOffset: 1.0,
+    uploadRequiredGap: InvPrimitives.spaceXxs,
+    uploadCompactTextMinWidth: InvPrimitives.size11xl,
+    uploadMetaOffset: InvPrimitives.spaceXxs,
+    listRowPaddingX: InvPrimitives.spaceLg,
+    listRowPaddingY: InvPrimitives.spaceLg,
+    listRowGap: InvPrimitives.spaceLg,
+    cardActionGap: InvPrimitives.spaceLg,
     focusWidth: 2.0,
     focusOffset: 2.0,
     typeDisplaySize: InvPrimitives.fontSizeDisplaySm,
@@ -2252,17 +2299,12 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     iconSizeChip: InvPrimitives.size14,
     featuredIconSize: InvPrimitives.size6xl,
     featuredIconSizeMd: InvPrimitives.size5xl,
-    featuredIconSizeCompact: 36.0,
+    featuredIconSizeCompact: InvPrimitives.size36,
     featuredIconSizeXl: 56.0,
     fieldBorderWidth: 1.0,
     fieldWidthDefault: InvPrimitives.v100%,
-    fieldEdgeInset: InvPrimitives.spaceXl,
-    fieldTextInset: InvPrimitives.spaceNone,
-    fieldContentGap: InvPrimitives.spaceXl,
-    fieldHintInset: InvPrimitives.spaceXl,
-    fieldLabelMaxWidth: 300.0,
+    fieldLabelMaxWidth: 320.0,
     progressWidthDefault: InvPrimitives.v100%,
-    otpCellWidth: InvPrimitives.size6xl,
     widthParagraphMax: InvPrimitives.widthMd,
     sizeNone: InvPrimitives.space0,
     sizeXxs: InvPrimitives.space2,
@@ -2274,7 +2316,9 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     sizeXl: InvPrimitives.space16,
     size2xl: InvPrimitives.space20,
     size3xl: InvPrimitives.space24,
+    size28: InvPrimitives.space28,
     size4xl: InvPrimitives.space32,
+    size36: InvPrimitives.space36,
     size5xl: InvPrimitives.space40,
     size6xl: InvPrimitives.space48,
     size7xl: InvPrimitives.space64,
@@ -2283,13 +2327,10 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     size10xl: InvPrimitives.space128,
     size11xl: InvPrimitives.space160,
     tableRowMinHeight: 52.0,
-    tableCellPaddingY: InvPrimitives.spaceLg,
-    tableCellPaddingX: InvPrimitives.spaceXl,
     vehicleQSmH: 100.0,
     vehicleCardMediaAppW: 140.0,
     vehicleCardMediaAppH: 88.0,
     vehicleQLgW: 480.0,
-    notificationActionGap: InvPrimitives.space3xl,
     headerNavHeight: 56.0,
     headerNavAccountMenuWidth: 256.0,
     breadcrumbsCurrentMaxWidth: 240.0,
@@ -2306,16 +2347,17 @@ class InvPlatform extends ThemeExtension<InvPlatform> {
     typeDisplayMdLineHeight: InvPrimitives.lineHeightDisplayMd,
     typeBodyLgSize: InvPrimitives.fontSizeMd,
     typeBodyLgLineHeight: InvPrimitives.lineHeightMd,
+    otpCellWidth: InvPrimitives.size6xl,
   );
 
   @override
-  InvPlatform copyWith({double? radiusNone, double? radiusXxs, double? radiusXs, double? radiusSm, double? radiusMd, double? radiusLg, double? radiusXl, double? radius2xl, double? radius3xl, double? radius4xl, double? radiusFull, double? radiusControl, double? radiusField, double? radiusCard, double? radiusInner, double? radiusOverlay, double? radiusMenu, double? radiusMenuItem, double? radiusBadge, double? spaceNone, double? spaceXxs, double? spaceXs, double? spaceSm, double? spaceMd, double? spaceLg, double? spaceXl, double? space2xl, double? space3xl, double? space4xl, double? space5xl, double? space6xl, double? space7xl, double? space8xl, double? space9xl, double? space10xl, double? space11xl, double? containerPaddingMobile, double? containerPaddingDesktop, double? containerMaxWidthDesktop, double? gridColumns, double? gridGutter, double? gridMargin, double? layoutCardPadding, double? layoutListGap, double? layoutSectionGap, double? layoutTitleGap, double? layoutEmptyPadding, double? formFieldGap, double? touchMin, double? controlHeightSm, double? controlHeightMd, double? controlHeightMl, double? controlHeightLg, double? controlPaddingXSm, double? controlPaddingXMd, double? controlPaddingXLg, double? controlPaddingXIconSm, double? controlPaddingXIconMd, double? controlPaddingXIconLg, double? controlIconGap, double? tabPaddingX, double? tabPaddingXIcon, double? tabGap, double? navHeight, double? navOffsetBottom, double? navPaddingX, double? navItemPaddingY, double? navScanSize, double? chipHeightSm, double? chipHeightLg, double? chipFontSizeSm, double? chipLineHeightSm, double? chipCountInset, double? chipCountFontSize, double? chipCountLineHeight, double? avatarLabelWidth, double? avatarLabelSubtitleSize, double? avatarLabelSubtitleLineHeight, double? chipPaddingXSm, double? chipPaddingXLg, double? chipPaddingXIconLg, double? avatarSizeMd, double? avatarStatusSizeMd, double? avatarSizeXxl, double? avatarStatusSizeXl, double? avatarEditSizeXl, double? avatarIconSizeSm, double? avatarEditIconSizeLg, double? avatarSpinnerSizeXxl, double? avatarGroupOverlapSm, double? avatarGroupOverlapMd, double? avatarGroupOverlapLg, double? tooltipMaxWidth, double? helpSheetTitleLineHeight, double? uploadActionFontSize, double? uploadDisabledOpacity, double? uploadDividerWidth, double? uploadAppTapMinHeight, double? uploadRequiredGap, double? uploadCompactTextMinWidth, double? uploadMetaOffset, double? focusWidth, double? focusOffset, double? typeDisplaySize, double? typeDisplayLineHeight, double? typeTitle1Size, double? typeTitle1LineHeight, double? typeTitle2Size, double? typeTitle2LineHeight, double? typeTitle3Size, double? typeTitle3LineHeight, double? typeHeadingSize, double? typeHeadingLineHeight, double? typeBodySize, double? typeBodyLineHeight, double? typeLabelSize, double? typeLabelLineHeight, double? typeCaptionSize, double? typeCaptionLineHeight, double? typeHintSize, double? typeHintLineHeight, double? typeCodeSize, double? typeCodeLineHeight, double? iconSizeXs, double? iconSizeSm, double? iconSizeMd, double? iconSizeLg, double? iconSizeChip, double? featuredIconSize, double? featuredIconSizeMd, double? featuredIconSizeCompact, double? featuredIconSizeXl, double? fieldBorderWidth, double? fieldWidthDefault, double? fieldEdgeInset, double? fieldTextInset, double? fieldContentGap, double? fieldHintInset, double? fieldLabelMaxWidth, double? progressWidthDefault, double? otpCellWidth, double? widthParagraphMax, double? sizeNone, double? sizeXxs, double? sizeXs, double? sizeSm, double? sizeMd, double? sizeLg, double? size14, double? sizeXl, double? size2xl, double? size3xl, double? size4xl, double? size5xl, double? size6xl, double? size7xl, double? size8xl, double? size9xl, double? size10xl, double? size11xl, double? tableRowMinHeight, double? tableCellPaddingY, double? tableCellPaddingX, double? vehicleQSmH, double? vehicleCardMediaAppW, double? vehicleCardMediaAppH, double? vehicleQLgW, double? notificationActionGap, double? headerNavHeight, double? headerNavAccountMenuWidth, double? breadcrumbsCurrentMaxWidth, double? breadcrumbsMenuMinWidth, double? commandSearchWidth, double? commandSearchHighlightPaddingX, double? typeDisplay2xlSize, double? typeDisplay2xlLineHeight, double? typeDisplayXlSize, double? typeDisplayXlLineHeight, double? typeDisplayLgSize, double? typeDisplayLgLineHeight, double? typeDisplayMdSize, double? typeDisplayMdLineHeight, double? typeBodyLgSize, double? typeBodyLgLineHeight}) =>
-      InvPlatform(radiusNone: radiusNone ?? this.radiusNone, radiusXxs: radiusXxs ?? this.radiusXxs, radiusXs: radiusXs ?? this.radiusXs, radiusSm: radiusSm ?? this.radiusSm, radiusMd: radiusMd ?? this.radiusMd, radiusLg: radiusLg ?? this.radiusLg, radiusXl: radiusXl ?? this.radiusXl, radius2xl: radius2xl ?? this.radius2xl, radius3xl: radius3xl ?? this.radius3xl, radius4xl: radius4xl ?? this.radius4xl, radiusFull: radiusFull ?? this.radiusFull, radiusControl: radiusControl ?? this.radiusControl, radiusField: radiusField ?? this.radiusField, radiusCard: radiusCard ?? this.radiusCard, radiusInner: radiusInner ?? this.radiusInner, radiusOverlay: radiusOverlay ?? this.radiusOverlay, radiusMenu: radiusMenu ?? this.radiusMenu, radiusMenuItem: radiusMenuItem ?? this.radiusMenuItem, radiusBadge: radiusBadge ?? this.radiusBadge, spaceNone: spaceNone ?? this.spaceNone, spaceXxs: spaceXxs ?? this.spaceXxs, spaceXs: spaceXs ?? this.spaceXs, spaceSm: spaceSm ?? this.spaceSm, spaceMd: spaceMd ?? this.spaceMd, spaceLg: spaceLg ?? this.spaceLg, spaceXl: spaceXl ?? this.spaceXl, space2xl: space2xl ?? this.space2xl, space3xl: space3xl ?? this.space3xl, space4xl: space4xl ?? this.space4xl, space5xl: space5xl ?? this.space5xl, space6xl: space6xl ?? this.space6xl, space7xl: space7xl ?? this.space7xl, space8xl: space8xl ?? this.space8xl, space9xl: space9xl ?? this.space9xl, space10xl: space10xl ?? this.space10xl, space11xl: space11xl ?? this.space11xl, containerPaddingMobile: containerPaddingMobile ?? this.containerPaddingMobile, containerPaddingDesktop: containerPaddingDesktop ?? this.containerPaddingDesktop, containerMaxWidthDesktop: containerMaxWidthDesktop ?? this.containerMaxWidthDesktop, gridColumns: gridColumns ?? this.gridColumns, gridGutter: gridGutter ?? this.gridGutter, gridMargin: gridMargin ?? this.gridMargin, layoutCardPadding: layoutCardPadding ?? this.layoutCardPadding, layoutListGap: layoutListGap ?? this.layoutListGap, layoutSectionGap: layoutSectionGap ?? this.layoutSectionGap, layoutTitleGap: layoutTitleGap ?? this.layoutTitleGap, layoutEmptyPadding: layoutEmptyPadding ?? this.layoutEmptyPadding, formFieldGap: formFieldGap ?? this.formFieldGap, touchMin: touchMin ?? this.touchMin, controlHeightSm: controlHeightSm ?? this.controlHeightSm, controlHeightMd: controlHeightMd ?? this.controlHeightMd, controlHeightMl: controlHeightMl ?? this.controlHeightMl, controlHeightLg: controlHeightLg ?? this.controlHeightLg, controlPaddingXSm: controlPaddingXSm ?? this.controlPaddingXSm, controlPaddingXMd: controlPaddingXMd ?? this.controlPaddingXMd, controlPaddingXLg: controlPaddingXLg ?? this.controlPaddingXLg, controlPaddingXIconSm: controlPaddingXIconSm ?? this.controlPaddingXIconSm, controlPaddingXIconMd: controlPaddingXIconMd ?? this.controlPaddingXIconMd, controlPaddingXIconLg: controlPaddingXIconLg ?? this.controlPaddingXIconLg, controlIconGap: controlIconGap ?? this.controlIconGap, tabPaddingX: tabPaddingX ?? this.tabPaddingX, tabPaddingXIcon: tabPaddingXIcon ?? this.tabPaddingXIcon, tabGap: tabGap ?? this.tabGap, navHeight: navHeight ?? this.navHeight, navOffsetBottom: navOffsetBottom ?? this.navOffsetBottom, navPaddingX: navPaddingX ?? this.navPaddingX, navItemPaddingY: navItemPaddingY ?? this.navItemPaddingY, navScanSize: navScanSize ?? this.navScanSize, chipHeightSm: chipHeightSm ?? this.chipHeightSm, chipHeightLg: chipHeightLg ?? this.chipHeightLg, chipFontSizeSm: chipFontSizeSm ?? this.chipFontSizeSm, chipLineHeightSm: chipLineHeightSm ?? this.chipLineHeightSm, chipCountInset: chipCountInset ?? this.chipCountInset, chipCountFontSize: chipCountFontSize ?? this.chipCountFontSize, chipCountLineHeight: chipCountLineHeight ?? this.chipCountLineHeight, avatarLabelWidth: avatarLabelWidth ?? this.avatarLabelWidth, avatarLabelSubtitleSize: avatarLabelSubtitleSize ?? this.avatarLabelSubtitleSize, avatarLabelSubtitleLineHeight: avatarLabelSubtitleLineHeight ?? this.avatarLabelSubtitleLineHeight, chipPaddingXSm: chipPaddingXSm ?? this.chipPaddingXSm, chipPaddingXLg: chipPaddingXLg ?? this.chipPaddingXLg, chipPaddingXIconLg: chipPaddingXIconLg ?? this.chipPaddingXIconLg, avatarSizeMd: avatarSizeMd ?? this.avatarSizeMd, avatarStatusSizeMd: avatarStatusSizeMd ?? this.avatarStatusSizeMd, avatarSizeXxl: avatarSizeXxl ?? this.avatarSizeXxl, avatarStatusSizeXl: avatarStatusSizeXl ?? this.avatarStatusSizeXl, avatarEditSizeXl: avatarEditSizeXl ?? this.avatarEditSizeXl, avatarIconSizeSm: avatarIconSizeSm ?? this.avatarIconSizeSm, avatarEditIconSizeLg: avatarEditIconSizeLg ?? this.avatarEditIconSizeLg, avatarSpinnerSizeXxl: avatarSpinnerSizeXxl ?? this.avatarSpinnerSizeXxl, avatarGroupOverlapSm: avatarGroupOverlapSm ?? this.avatarGroupOverlapSm, avatarGroupOverlapMd: avatarGroupOverlapMd ?? this.avatarGroupOverlapMd, avatarGroupOverlapLg: avatarGroupOverlapLg ?? this.avatarGroupOverlapLg, tooltipMaxWidth: tooltipMaxWidth ?? this.tooltipMaxWidth, helpSheetTitleLineHeight: helpSheetTitleLineHeight ?? this.helpSheetTitleLineHeight, uploadActionFontSize: uploadActionFontSize ?? this.uploadActionFontSize, uploadDisabledOpacity: uploadDisabledOpacity ?? this.uploadDisabledOpacity, uploadDividerWidth: uploadDividerWidth ?? this.uploadDividerWidth, uploadAppTapMinHeight: uploadAppTapMinHeight ?? this.uploadAppTapMinHeight, uploadRequiredGap: uploadRequiredGap ?? this.uploadRequiredGap, uploadCompactTextMinWidth: uploadCompactTextMinWidth ?? this.uploadCompactTextMinWidth, uploadMetaOffset: uploadMetaOffset ?? this.uploadMetaOffset, focusWidth: focusWidth ?? this.focusWidth, focusOffset: focusOffset ?? this.focusOffset, typeDisplaySize: typeDisplaySize ?? this.typeDisplaySize, typeDisplayLineHeight: typeDisplayLineHeight ?? this.typeDisplayLineHeight, typeTitle1Size: typeTitle1Size ?? this.typeTitle1Size, typeTitle1LineHeight: typeTitle1LineHeight ?? this.typeTitle1LineHeight, typeTitle2Size: typeTitle2Size ?? this.typeTitle2Size, typeTitle2LineHeight: typeTitle2LineHeight ?? this.typeTitle2LineHeight, typeTitle3Size: typeTitle3Size ?? this.typeTitle3Size, typeTitle3LineHeight: typeTitle3LineHeight ?? this.typeTitle3LineHeight, typeHeadingSize: typeHeadingSize ?? this.typeHeadingSize, typeHeadingLineHeight: typeHeadingLineHeight ?? this.typeHeadingLineHeight, typeBodySize: typeBodySize ?? this.typeBodySize, typeBodyLineHeight: typeBodyLineHeight ?? this.typeBodyLineHeight, typeLabelSize: typeLabelSize ?? this.typeLabelSize, typeLabelLineHeight: typeLabelLineHeight ?? this.typeLabelLineHeight, typeCaptionSize: typeCaptionSize ?? this.typeCaptionSize, typeCaptionLineHeight: typeCaptionLineHeight ?? this.typeCaptionLineHeight, typeHintSize: typeHintSize ?? this.typeHintSize, typeHintLineHeight: typeHintLineHeight ?? this.typeHintLineHeight, typeCodeSize: typeCodeSize ?? this.typeCodeSize, typeCodeLineHeight: typeCodeLineHeight ?? this.typeCodeLineHeight, iconSizeXs: iconSizeXs ?? this.iconSizeXs, iconSizeSm: iconSizeSm ?? this.iconSizeSm, iconSizeMd: iconSizeMd ?? this.iconSizeMd, iconSizeLg: iconSizeLg ?? this.iconSizeLg, iconSizeChip: iconSizeChip ?? this.iconSizeChip, featuredIconSize: featuredIconSize ?? this.featuredIconSize, featuredIconSizeMd: featuredIconSizeMd ?? this.featuredIconSizeMd, featuredIconSizeCompact: featuredIconSizeCompact ?? this.featuredIconSizeCompact, featuredIconSizeXl: featuredIconSizeXl ?? this.featuredIconSizeXl, fieldBorderWidth: fieldBorderWidth ?? this.fieldBorderWidth, fieldWidthDefault: fieldWidthDefault ?? this.fieldWidthDefault, fieldEdgeInset: fieldEdgeInset ?? this.fieldEdgeInset, fieldTextInset: fieldTextInset ?? this.fieldTextInset, fieldContentGap: fieldContentGap ?? this.fieldContentGap, fieldHintInset: fieldHintInset ?? this.fieldHintInset, fieldLabelMaxWidth: fieldLabelMaxWidth ?? this.fieldLabelMaxWidth, progressWidthDefault: progressWidthDefault ?? this.progressWidthDefault, otpCellWidth: otpCellWidth ?? this.otpCellWidth, widthParagraphMax: widthParagraphMax ?? this.widthParagraphMax, sizeNone: sizeNone ?? this.sizeNone, sizeXxs: sizeXxs ?? this.sizeXxs, sizeXs: sizeXs ?? this.sizeXs, sizeSm: sizeSm ?? this.sizeSm, sizeMd: sizeMd ?? this.sizeMd, sizeLg: sizeLg ?? this.sizeLg, size14: size14 ?? this.size14, sizeXl: sizeXl ?? this.sizeXl, size2xl: size2xl ?? this.size2xl, size3xl: size3xl ?? this.size3xl, size4xl: size4xl ?? this.size4xl, size5xl: size5xl ?? this.size5xl, size6xl: size6xl ?? this.size6xl, size7xl: size7xl ?? this.size7xl, size8xl: size8xl ?? this.size8xl, size9xl: size9xl ?? this.size9xl, size10xl: size10xl ?? this.size10xl, size11xl: size11xl ?? this.size11xl, tableRowMinHeight: tableRowMinHeight ?? this.tableRowMinHeight, tableCellPaddingY: tableCellPaddingY ?? this.tableCellPaddingY, tableCellPaddingX: tableCellPaddingX ?? this.tableCellPaddingX, vehicleQSmH: vehicleQSmH ?? this.vehicleQSmH, vehicleCardMediaAppW: vehicleCardMediaAppW ?? this.vehicleCardMediaAppW, vehicleCardMediaAppH: vehicleCardMediaAppH ?? this.vehicleCardMediaAppH, vehicleQLgW: vehicleQLgW ?? this.vehicleQLgW, notificationActionGap: notificationActionGap ?? this.notificationActionGap, headerNavHeight: headerNavHeight ?? this.headerNavHeight, headerNavAccountMenuWidth: headerNavAccountMenuWidth ?? this.headerNavAccountMenuWidth, breadcrumbsCurrentMaxWidth: breadcrumbsCurrentMaxWidth ?? this.breadcrumbsCurrentMaxWidth, breadcrumbsMenuMinWidth: breadcrumbsMenuMinWidth ?? this.breadcrumbsMenuMinWidth, commandSearchWidth: commandSearchWidth ?? this.commandSearchWidth, commandSearchHighlightPaddingX: commandSearchHighlightPaddingX ?? this.commandSearchHighlightPaddingX, typeDisplay2xlSize: typeDisplay2xlSize ?? this.typeDisplay2xlSize, typeDisplay2xlLineHeight: typeDisplay2xlLineHeight ?? this.typeDisplay2xlLineHeight, typeDisplayXlSize: typeDisplayXlSize ?? this.typeDisplayXlSize, typeDisplayXlLineHeight: typeDisplayXlLineHeight ?? this.typeDisplayXlLineHeight, typeDisplayLgSize: typeDisplayLgSize ?? this.typeDisplayLgSize, typeDisplayLgLineHeight: typeDisplayLgLineHeight ?? this.typeDisplayLgLineHeight, typeDisplayMdSize: typeDisplayMdSize ?? this.typeDisplayMdSize, typeDisplayMdLineHeight: typeDisplayMdLineHeight ?? this.typeDisplayMdLineHeight, typeBodyLgSize: typeBodyLgSize ?? this.typeBodyLgSize, typeBodyLgLineHeight: typeBodyLgLineHeight ?? this.typeBodyLgLineHeight);
+  InvPlatform copyWith({double? radiusNone, double? radiusXxs, double? radiusXs, double? radiusSm, double? radiusMd, double? radiusLg, double? radiusXl, double? radius2xl, double? radius3xl, double? radius4xl, double? radiusFull, double? radiusControl, double? radiusField, double? radiusCard, double? radiusInner, double? radiusOverlay, double? radiusMenu, double? radiusMenuItem, double? radiusBadge, double? spaceNone, double? spaceXxs, double? spaceXs, double? spaceSm, double? spaceMd, double? spaceMdLg, double? spaceLgXl, double? spaceLg, double? spaceXl, double? space2xl, double? space3xl, double? space4xl, double? space5xl, double? space6xl, double? space7xl, double? space8xl, double? space9xl, double? space10xl, double? space11xl, double? containerPaddingMobile, double? containerPaddingDesktop, double? containerMaxWidthDesktop, double? gridColumns, double? gridGutter, double? gridMargin, double? layoutCardPadding, double? layoutListGap, double? layoutSectionGap, double? layoutTitleGap, double? layoutEmptyPadding, double? formFieldGap, double? touchMin, double? controlHeightSm, double? controlHeightMd, double? controlHeightMl, double? controlHeightLg, double? controlPaddingXSm, double? controlPaddingXMd, double? controlPaddingXLg, double? controlPaddingXIconSm, double? controlPaddingXIconMd, double? controlPaddingXIconLg, double? controlIconGap, double? controlLabelInset, double? tabPaddingX, double? tabPaddingXIcon, double? tabGap, double? navHeight, double? navOffsetBottom, double? navPaddingX, double? navItemPaddingY, double? navScanSize, double? navChildIndent, double? chipHeightSm, double? chipHeightLg, double? chipFontSizeSm, double? chipLineHeightSm, double? chipCountInset, double? chipCountFontSize, double? chipCountLineHeight, double? avatarLabelWidth, double? avatarLabelSubtitleSize, double? avatarLabelSubtitleLineHeight, double? chipPaddingXSm, double? chipPaddingXMd, double? chipPaddingXLg, double? chipPaddingXIconLg, double? avatarSizeMd, double? avatarStatusSizeMd, double? avatarSizeXxl, double? avatarStatusSizeXl, double? avatarEditSizeXl, double? avatarIconSizeSm, double? avatarEditIconSizeLg, double? avatarSpinnerSizeXxl, double? avatarGroupOverlapSm, double? avatarGroupOverlapMd, double? avatarGroupOverlapLg, double? tooltipMaxWidth, double? helpSheetTitleLineHeight, double? uploadActionFontSize, double? uploadDisabledOpacity, double? uploadDividerWidth, double? uploadAppTapMinHeight, double? uploadRequiredGap, double? uploadCompactTextMinWidth, double? uploadMetaOffset, double? listRowPaddingX, double? listRowPaddingY, double? listRowGap, double? cardActionGap, double? focusWidth, double? focusOffset, double? typeDisplaySize, double? typeDisplayLineHeight, double? typeTitle1Size, double? typeTitle1LineHeight, double? typeTitle2Size, double? typeTitle2LineHeight, double? typeTitle3Size, double? typeTitle3LineHeight, double? typeHeadingSize, double? typeHeadingLineHeight, double? typeBodySize, double? typeBodyLineHeight, double? typeLabelSize, double? typeLabelLineHeight, double? typeCaptionSize, double? typeCaptionLineHeight, double? typeHintSize, double? typeHintLineHeight, double? typeCodeSize, double? typeCodeLineHeight, double? iconSizeXs, double? iconSizeSm, double? iconSizeMd, double? iconSizeLg, double? iconSizeChip, double? featuredIconSize, double? featuredIconSizeMd, double? featuredIconSizeCompact, double? featuredIconSizeXl, double? fieldBorderWidth, double? fieldWidthDefault, double? fieldLabelMaxWidth, double? progressWidthDefault, double? widthParagraphMax, double? sizeNone, double? sizeXxs, double? sizeXs, double? sizeSm, double? sizeMd, double? sizeLg, double? size14, double? sizeXl, double? size2xl, double? size3xl, double? size28, double? size4xl, double? size36, double? size5xl, double? size6xl, double? size7xl, double? size8xl, double? size9xl, double? size10xl, double? size11xl, double? tableRowMinHeight, double? vehicleQSmH, double? vehicleCardMediaAppW, double? vehicleCardMediaAppH, double? vehicleQLgW, double? headerNavHeight, double? headerNavAccountMenuWidth, double? breadcrumbsCurrentMaxWidth, double? breadcrumbsMenuMinWidth, double? commandSearchWidth, double? commandSearchHighlightPaddingX, double? typeDisplay2xlSize, double? typeDisplay2xlLineHeight, double? typeDisplayXlSize, double? typeDisplayXlLineHeight, double? typeDisplayLgSize, double? typeDisplayLgLineHeight, double? typeDisplayMdSize, double? typeDisplayMdLineHeight, double? typeBodyLgSize, double? typeBodyLgLineHeight, double? otpCellWidth}) =>
+      InvPlatform(radiusNone: radiusNone ?? this.radiusNone, radiusXxs: radiusXxs ?? this.radiusXxs, radiusXs: radiusXs ?? this.radiusXs, radiusSm: radiusSm ?? this.radiusSm, radiusMd: radiusMd ?? this.radiusMd, radiusLg: radiusLg ?? this.radiusLg, radiusXl: radiusXl ?? this.radiusXl, radius2xl: radius2xl ?? this.radius2xl, radius3xl: radius3xl ?? this.radius3xl, radius4xl: radius4xl ?? this.radius4xl, radiusFull: radiusFull ?? this.radiusFull, radiusControl: radiusControl ?? this.radiusControl, radiusField: radiusField ?? this.radiusField, radiusCard: radiusCard ?? this.radiusCard, radiusInner: radiusInner ?? this.radiusInner, radiusOverlay: radiusOverlay ?? this.radiusOverlay, radiusMenu: radiusMenu ?? this.radiusMenu, radiusMenuItem: radiusMenuItem ?? this.radiusMenuItem, radiusBadge: radiusBadge ?? this.radiusBadge, spaceNone: spaceNone ?? this.spaceNone, spaceXxs: spaceXxs ?? this.spaceXxs, spaceXs: spaceXs ?? this.spaceXs, spaceSm: spaceSm ?? this.spaceSm, spaceMd: spaceMd ?? this.spaceMd, spaceMdLg: spaceMdLg ?? this.spaceMdLg, spaceLgXl: spaceLgXl ?? this.spaceLgXl, spaceLg: spaceLg ?? this.spaceLg, spaceXl: spaceXl ?? this.spaceXl, space2xl: space2xl ?? this.space2xl, space3xl: space3xl ?? this.space3xl, space4xl: space4xl ?? this.space4xl, space5xl: space5xl ?? this.space5xl, space6xl: space6xl ?? this.space6xl, space7xl: space7xl ?? this.space7xl, space8xl: space8xl ?? this.space8xl, space9xl: space9xl ?? this.space9xl, space10xl: space10xl ?? this.space10xl, space11xl: space11xl ?? this.space11xl, containerPaddingMobile: containerPaddingMobile ?? this.containerPaddingMobile, containerPaddingDesktop: containerPaddingDesktop ?? this.containerPaddingDesktop, containerMaxWidthDesktop: containerMaxWidthDesktop ?? this.containerMaxWidthDesktop, gridColumns: gridColumns ?? this.gridColumns, gridGutter: gridGutter ?? this.gridGutter, gridMargin: gridMargin ?? this.gridMargin, layoutCardPadding: layoutCardPadding ?? this.layoutCardPadding, layoutListGap: layoutListGap ?? this.layoutListGap, layoutSectionGap: layoutSectionGap ?? this.layoutSectionGap, layoutTitleGap: layoutTitleGap ?? this.layoutTitleGap, layoutEmptyPadding: layoutEmptyPadding ?? this.layoutEmptyPadding, formFieldGap: formFieldGap ?? this.formFieldGap, touchMin: touchMin ?? this.touchMin, controlHeightSm: controlHeightSm ?? this.controlHeightSm, controlHeightMd: controlHeightMd ?? this.controlHeightMd, controlHeightMl: controlHeightMl ?? this.controlHeightMl, controlHeightLg: controlHeightLg ?? this.controlHeightLg, controlPaddingXSm: controlPaddingXSm ?? this.controlPaddingXSm, controlPaddingXMd: controlPaddingXMd ?? this.controlPaddingXMd, controlPaddingXLg: controlPaddingXLg ?? this.controlPaddingXLg, controlPaddingXIconSm: controlPaddingXIconSm ?? this.controlPaddingXIconSm, controlPaddingXIconMd: controlPaddingXIconMd ?? this.controlPaddingXIconMd, controlPaddingXIconLg: controlPaddingXIconLg ?? this.controlPaddingXIconLg, controlIconGap: controlIconGap ?? this.controlIconGap, controlLabelInset: controlLabelInset ?? this.controlLabelInset, tabPaddingX: tabPaddingX ?? this.tabPaddingX, tabPaddingXIcon: tabPaddingXIcon ?? this.tabPaddingXIcon, tabGap: tabGap ?? this.tabGap, navHeight: navHeight ?? this.navHeight, navOffsetBottom: navOffsetBottom ?? this.navOffsetBottom, navPaddingX: navPaddingX ?? this.navPaddingX, navItemPaddingY: navItemPaddingY ?? this.navItemPaddingY, navScanSize: navScanSize ?? this.navScanSize, navChildIndent: navChildIndent ?? this.navChildIndent, chipHeightSm: chipHeightSm ?? this.chipHeightSm, chipHeightLg: chipHeightLg ?? this.chipHeightLg, chipFontSizeSm: chipFontSizeSm ?? this.chipFontSizeSm, chipLineHeightSm: chipLineHeightSm ?? this.chipLineHeightSm, chipCountInset: chipCountInset ?? this.chipCountInset, chipCountFontSize: chipCountFontSize ?? this.chipCountFontSize, chipCountLineHeight: chipCountLineHeight ?? this.chipCountLineHeight, avatarLabelWidth: avatarLabelWidth ?? this.avatarLabelWidth, avatarLabelSubtitleSize: avatarLabelSubtitleSize ?? this.avatarLabelSubtitleSize, avatarLabelSubtitleLineHeight: avatarLabelSubtitleLineHeight ?? this.avatarLabelSubtitleLineHeight, chipPaddingXSm: chipPaddingXSm ?? this.chipPaddingXSm, chipPaddingXMd: chipPaddingXMd ?? this.chipPaddingXMd, chipPaddingXLg: chipPaddingXLg ?? this.chipPaddingXLg, chipPaddingXIconLg: chipPaddingXIconLg ?? this.chipPaddingXIconLg, avatarSizeMd: avatarSizeMd ?? this.avatarSizeMd, avatarStatusSizeMd: avatarStatusSizeMd ?? this.avatarStatusSizeMd, avatarSizeXxl: avatarSizeXxl ?? this.avatarSizeXxl, avatarStatusSizeXl: avatarStatusSizeXl ?? this.avatarStatusSizeXl, avatarEditSizeXl: avatarEditSizeXl ?? this.avatarEditSizeXl, avatarIconSizeSm: avatarIconSizeSm ?? this.avatarIconSizeSm, avatarEditIconSizeLg: avatarEditIconSizeLg ?? this.avatarEditIconSizeLg, avatarSpinnerSizeXxl: avatarSpinnerSizeXxl ?? this.avatarSpinnerSizeXxl, avatarGroupOverlapSm: avatarGroupOverlapSm ?? this.avatarGroupOverlapSm, avatarGroupOverlapMd: avatarGroupOverlapMd ?? this.avatarGroupOverlapMd, avatarGroupOverlapLg: avatarGroupOverlapLg ?? this.avatarGroupOverlapLg, tooltipMaxWidth: tooltipMaxWidth ?? this.tooltipMaxWidth, helpSheetTitleLineHeight: helpSheetTitleLineHeight ?? this.helpSheetTitleLineHeight, uploadActionFontSize: uploadActionFontSize ?? this.uploadActionFontSize, uploadDisabledOpacity: uploadDisabledOpacity ?? this.uploadDisabledOpacity, uploadDividerWidth: uploadDividerWidth ?? this.uploadDividerWidth, uploadAppTapMinHeight: uploadAppTapMinHeight ?? this.uploadAppTapMinHeight, uploadRequiredGap: uploadRequiredGap ?? this.uploadRequiredGap, uploadCompactTextMinWidth: uploadCompactTextMinWidth ?? this.uploadCompactTextMinWidth, uploadMetaOffset: uploadMetaOffset ?? this.uploadMetaOffset, listRowPaddingX: listRowPaddingX ?? this.listRowPaddingX, listRowPaddingY: listRowPaddingY ?? this.listRowPaddingY, listRowGap: listRowGap ?? this.listRowGap, cardActionGap: cardActionGap ?? this.cardActionGap, focusWidth: focusWidth ?? this.focusWidth, focusOffset: focusOffset ?? this.focusOffset, typeDisplaySize: typeDisplaySize ?? this.typeDisplaySize, typeDisplayLineHeight: typeDisplayLineHeight ?? this.typeDisplayLineHeight, typeTitle1Size: typeTitle1Size ?? this.typeTitle1Size, typeTitle1LineHeight: typeTitle1LineHeight ?? this.typeTitle1LineHeight, typeTitle2Size: typeTitle2Size ?? this.typeTitle2Size, typeTitle2LineHeight: typeTitle2LineHeight ?? this.typeTitle2LineHeight, typeTitle3Size: typeTitle3Size ?? this.typeTitle3Size, typeTitle3LineHeight: typeTitle3LineHeight ?? this.typeTitle3LineHeight, typeHeadingSize: typeHeadingSize ?? this.typeHeadingSize, typeHeadingLineHeight: typeHeadingLineHeight ?? this.typeHeadingLineHeight, typeBodySize: typeBodySize ?? this.typeBodySize, typeBodyLineHeight: typeBodyLineHeight ?? this.typeBodyLineHeight, typeLabelSize: typeLabelSize ?? this.typeLabelSize, typeLabelLineHeight: typeLabelLineHeight ?? this.typeLabelLineHeight, typeCaptionSize: typeCaptionSize ?? this.typeCaptionSize, typeCaptionLineHeight: typeCaptionLineHeight ?? this.typeCaptionLineHeight, typeHintSize: typeHintSize ?? this.typeHintSize, typeHintLineHeight: typeHintLineHeight ?? this.typeHintLineHeight, typeCodeSize: typeCodeSize ?? this.typeCodeSize, typeCodeLineHeight: typeCodeLineHeight ?? this.typeCodeLineHeight, iconSizeXs: iconSizeXs ?? this.iconSizeXs, iconSizeSm: iconSizeSm ?? this.iconSizeSm, iconSizeMd: iconSizeMd ?? this.iconSizeMd, iconSizeLg: iconSizeLg ?? this.iconSizeLg, iconSizeChip: iconSizeChip ?? this.iconSizeChip, featuredIconSize: featuredIconSize ?? this.featuredIconSize, featuredIconSizeMd: featuredIconSizeMd ?? this.featuredIconSizeMd, featuredIconSizeCompact: featuredIconSizeCompact ?? this.featuredIconSizeCompact, featuredIconSizeXl: featuredIconSizeXl ?? this.featuredIconSizeXl, fieldBorderWidth: fieldBorderWidth ?? this.fieldBorderWidth, fieldWidthDefault: fieldWidthDefault ?? this.fieldWidthDefault, fieldLabelMaxWidth: fieldLabelMaxWidth ?? this.fieldLabelMaxWidth, progressWidthDefault: progressWidthDefault ?? this.progressWidthDefault, widthParagraphMax: widthParagraphMax ?? this.widthParagraphMax, sizeNone: sizeNone ?? this.sizeNone, sizeXxs: sizeXxs ?? this.sizeXxs, sizeXs: sizeXs ?? this.sizeXs, sizeSm: sizeSm ?? this.sizeSm, sizeMd: sizeMd ?? this.sizeMd, sizeLg: sizeLg ?? this.sizeLg, size14: size14 ?? this.size14, sizeXl: sizeXl ?? this.sizeXl, size2xl: size2xl ?? this.size2xl, size3xl: size3xl ?? this.size3xl, size28: size28 ?? this.size28, size4xl: size4xl ?? this.size4xl, size36: size36 ?? this.size36, size5xl: size5xl ?? this.size5xl, size6xl: size6xl ?? this.size6xl, size7xl: size7xl ?? this.size7xl, size8xl: size8xl ?? this.size8xl, size9xl: size9xl ?? this.size9xl, size10xl: size10xl ?? this.size10xl, size11xl: size11xl ?? this.size11xl, tableRowMinHeight: tableRowMinHeight ?? this.tableRowMinHeight, vehicleQSmH: vehicleQSmH ?? this.vehicleQSmH, vehicleCardMediaAppW: vehicleCardMediaAppW ?? this.vehicleCardMediaAppW, vehicleCardMediaAppH: vehicleCardMediaAppH ?? this.vehicleCardMediaAppH, vehicleQLgW: vehicleQLgW ?? this.vehicleQLgW, headerNavHeight: headerNavHeight ?? this.headerNavHeight, headerNavAccountMenuWidth: headerNavAccountMenuWidth ?? this.headerNavAccountMenuWidth, breadcrumbsCurrentMaxWidth: breadcrumbsCurrentMaxWidth ?? this.breadcrumbsCurrentMaxWidth, breadcrumbsMenuMinWidth: breadcrumbsMenuMinWidth ?? this.breadcrumbsMenuMinWidth, commandSearchWidth: commandSearchWidth ?? this.commandSearchWidth, commandSearchHighlightPaddingX: commandSearchHighlightPaddingX ?? this.commandSearchHighlightPaddingX, typeDisplay2xlSize: typeDisplay2xlSize ?? this.typeDisplay2xlSize, typeDisplay2xlLineHeight: typeDisplay2xlLineHeight ?? this.typeDisplay2xlLineHeight, typeDisplayXlSize: typeDisplayXlSize ?? this.typeDisplayXlSize, typeDisplayXlLineHeight: typeDisplayXlLineHeight ?? this.typeDisplayXlLineHeight, typeDisplayLgSize: typeDisplayLgSize ?? this.typeDisplayLgSize, typeDisplayLgLineHeight: typeDisplayLgLineHeight ?? this.typeDisplayLgLineHeight, typeDisplayMdSize: typeDisplayMdSize ?? this.typeDisplayMdSize, typeDisplayMdLineHeight: typeDisplayMdLineHeight ?? this.typeDisplayMdLineHeight, typeBodyLgSize: typeBodyLgSize ?? this.typeBodyLgSize, typeBodyLgLineHeight: typeBodyLgLineHeight ?? this.typeBodyLgLineHeight, otpCellWidth: otpCellWidth ?? this.otpCellWidth);
 
   @override
   InvPlatform lerp(covariant ThemeExtension<InvPlatform>? other, double t) {
     if (other is! InvPlatform) return this;
-    return InvPlatform(radiusNone: lerpDouble(radiusNone, other.radiusNone, t), radiusXxs: lerpDouble(radiusXxs, other.radiusXxs, t), radiusXs: lerpDouble(radiusXs, other.radiusXs, t), radiusSm: lerpDouble(radiusSm, other.radiusSm, t), radiusMd: lerpDouble(radiusMd, other.radiusMd, t), radiusLg: lerpDouble(radiusLg, other.radiusLg, t), radiusXl: lerpDouble(radiusXl, other.radiusXl, t), radius2xl: lerpDouble(radius2xl, other.radius2xl, t), radius3xl: lerpDouble(radius3xl, other.radius3xl, t), radius4xl: lerpDouble(radius4xl, other.radius4xl, t), radiusFull: lerpDouble(radiusFull, other.radiusFull, t), radiusControl: lerpDouble(radiusControl, other.radiusControl, t), radiusField: lerpDouble(radiusField, other.radiusField, t), radiusCard: lerpDouble(radiusCard, other.radiusCard, t), radiusInner: lerpDouble(radiusInner, other.radiusInner, t), radiusOverlay: lerpDouble(radiusOverlay, other.radiusOverlay, t), radiusMenu: lerpDouble(radiusMenu, other.radiusMenu, t), radiusMenuItem: lerpDouble(radiusMenuItem, other.radiusMenuItem, t), radiusBadge: lerpDouble(radiusBadge, other.radiusBadge, t), spaceNone: lerpDouble(spaceNone, other.spaceNone, t), spaceXxs: lerpDouble(spaceXxs, other.spaceXxs, t), spaceXs: lerpDouble(spaceXs, other.spaceXs, t), spaceSm: lerpDouble(spaceSm, other.spaceSm, t), spaceMd: lerpDouble(spaceMd, other.spaceMd, t), spaceLg: lerpDouble(spaceLg, other.spaceLg, t), spaceXl: lerpDouble(spaceXl, other.spaceXl, t), space2xl: lerpDouble(space2xl, other.space2xl, t), space3xl: lerpDouble(space3xl, other.space3xl, t), space4xl: lerpDouble(space4xl, other.space4xl, t), space5xl: lerpDouble(space5xl, other.space5xl, t), space6xl: lerpDouble(space6xl, other.space6xl, t), space7xl: lerpDouble(space7xl, other.space7xl, t), space8xl: lerpDouble(space8xl, other.space8xl, t), space9xl: lerpDouble(space9xl, other.space9xl, t), space10xl: lerpDouble(space10xl, other.space10xl, t), space11xl: lerpDouble(space11xl, other.space11xl, t), containerPaddingMobile: lerpDouble(containerPaddingMobile, other.containerPaddingMobile, t), containerPaddingDesktop: lerpDouble(containerPaddingDesktop, other.containerPaddingDesktop, t), containerMaxWidthDesktop: lerpDouble(containerMaxWidthDesktop, other.containerMaxWidthDesktop, t), gridColumns: lerpDouble(gridColumns, other.gridColumns, t), gridGutter: lerpDouble(gridGutter, other.gridGutter, t), gridMargin: lerpDouble(gridMargin, other.gridMargin, t), layoutCardPadding: lerpDouble(layoutCardPadding, other.layoutCardPadding, t), layoutListGap: lerpDouble(layoutListGap, other.layoutListGap, t), layoutSectionGap: lerpDouble(layoutSectionGap, other.layoutSectionGap, t), layoutTitleGap: lerpDouble(layoutTitleGap, other.layoutTitleGap, t), layoutEmptyPadding: lerpDouble(layoutEmptyPadding, other.layoutEmptyPadding, t), formFieldGap: lerpDouble(formFieldGap, other.formFieldGap, t), touchMin: lerpDouble(touchMin, other.touchMin, t), controlHeightSm: lerpDouble(controlHeightSm, other.controlHeightSm, t), controlHeightMd: lerpDouble(controlHeightMd, other.controlHeightMd, t), controlHeightMl: lerpDouble(controlHeightMl, other.controlHeightMl, t), controlHeightLg: lerpDouble(controlHeightLg, other.controlHeightLg, t), controlPaddingXSm: lerpDouble(controlPaddingXSm, other.controlPaddingXSm, t), controlPaddingXMd: lerpDouble(controlPaddingXMd, other.controlPaddingXMd, t), controlPaddingXLg: lerpDouble(controlPaddingXLg, other.controlPaddingXLg, t), controlPaddingXIconSm: lerpDouble(controlPaddingXIconSm, other.controlPaddingXIconSm, t), controlPaddingXIconMd: lerpDouble(controlPaddingXIconMd, other.controlPaddingXIconMd, t), controlPaddingXIconLg: lerpDouble(controlPaddingXIconLg, other.controlPaddingXIconLg, t), controlIconGap: lerpDouble(controlIconGap, other.controlIconGap, t), tabPaddingX: lerpDouble(tabPaddingX, other.tabPaddingX, t), tabPaddingXIcon: lerpDouble(tabPaddingXIcon, other.tabPaddingXIcon, t), tabGap: lerpDouble(tabGap, other.tabGap, t), navHeight: lerpDouble(navHeight, other.navHeight, t), navOffsetBottom: lerpDouble(navOffsetBottom, other.navOffsetBottom, t), navPaddingX: lerpDouble(navPaddingX, other.navPaddingX, t), navItemPaddingY: lerpDouble(navItemPaddingY, other.navItemPaddingY, t), navScanSize: lerpDouble(navScanSize, other.navScanSize, t), chipHeightSm: lerpDouble(chipHeightSm, other.chipHeightSm, t), chipHeightLg: lerpDouble(chipHeightLg, other.chipHeightLg, t), chipFontSizeSm: lerpDouble(chipFontSizeSm, other.chipFontSizeSm, t), chipLineHeightSm: lerpDouble(chipLineHeightSm, other.chipLineHeightSm, t), chipCountInset: lerpDouble(chipCountInset, other.chipCountInset, t), chipCountFontSize: lerpDouble(chipCountFontSize, other.chipCountFontSize, t), chipCountLineHeight: lerpDouble(chipCountLineHeight, other.chipCountLineHeight, t), avatarLabelWidth: lerpDouble(avatarLabelWidth, other.avatarLabelWidth, t), avatarLabelSubtitleSize: lerpDouble(avatarLabelSubtitleSize, other.avatarLabelSubtitleSize, t), avatarLabelSubtitleLineHeight: lerpDouble(avatarLabelSubtitleLineHeight, other.avatarLabelSubtitleLineHeight, t), chipPaddingXSm: lerpDouble(chipPaddingXSm, other.chipPaddingXSm, t), chipPaddingXLg: lerpDouble(chipPaddingXLg, other.chipPaddingXLg, t), chipPaddingXIconLg: lerpDouble(chipPaddingXIconLg, other.chipPaddingXIconLg, t), avatarSizeMd: lerpDouble(avatarSizeMd, other.avatarSizeMd, t), avatarStatusSizeMd: lerpDouble(avatarStatusSizeMd, other.avatarStatusSizeMd, t), avatarSizeXxl: lerpDouble(avatarSizeXxl, other.avatarSizeXxl, t), avatarStatusSizeXl: lerpDouble(avatarStatusSizeXl, other.avatarStatusSizeXl, t), avatarEditSizeXl: lerpDouble(avatarEditSizeXl, other.avatarEditSizeXl, t), avatarIconSizeSm: lerpDouble(avatarIconSizeSm, other.avatarIconSizeSm, t), avatarEditIconSizeLg: lerpDouble(avatarEditIconSizeLg, other.avatarEditIconSizeLg, t), avatarSpinnerSizeXxl: lerpDouble(avatarSpinnerSizeXxl, other.avatarSpinnerSizeXxl, t), avatarGroupOverlapSm: lerpDouble(avatarGroupOverlapSm, other.avatarGroupOverlapSm, t), avatarGroupOverlapMd: lerpDouble(avatarGroupOverlapMd, other.avatarGroupOverlapMd, t), avatarGroupOverlapLg: lerpDouble(avatarGroupOverlapLg, other.avatarGroupOverlapLg, t), tooltipMaxWidth: lerpDouble(tooltipMaxWidth, other.tooltipMaxWidth, t), helpSheetTitleLineHeight: lerpDouble(helpSheetTitleLineHeight, other.helpSheetTitleLineHeight, t), uploadActionFontSize: lerpDouble(uploadActionFontSize, other.uploadActionFontSize, t), uploadDisabledOpacity: lerpDouble(uploadDisabledOpacity, other.uploadDisabledOpacity, t), uploadDividerWidth: lerpDouble(uploadDividerWidth, other.uploadDividerWidth, t), uploadAppTapMinHeight: lerpDouble(uploadAppTapMinHeight, other.uploadAppTapMinHeight, t), uploadRequiredGap: lerpDouble(uploadRequiredGap, other.uploadRequiredGap, t), uploadCompactTextMinWidth: lerpDouble(uploadCompactTextMinWidth, other.uploadCompactTextMinWidth, t), uploadMetaOffset: lerpDouble(uploadMetaOffset, other.uploadMetaOffset, t), focusWidth: lerpDouble(focusWidth, other.focusWidth, t), focusOffset: lerpDouble(focusOffset, other.focusOffset, t), typeDisplaySize: lerpDouble(typeDisplaySize, other.typeDisplaySize, t), typeDisplayLineHeight: lerpDouble(typeDisplayLineHeight, other.typeDisplayLineHeight, t), typeTitle1Size: lerpDouble(typeTitle1Size, other.typeTitle1Size, t), typeTitle1LineHeight: lerpDouble(typeTitle1LineHeight, other.typeTitle1LineHeight, t), typeTitle2Size: lerpDouble(typeTitle2Size, other.typeTitle2Size, t), typeTitle2LineHeight: lerpDouble(typeTitle2LineHeight, other.typeTitle2LineHeight, t), typeTitle3Size: lerpDouble(typeTitle3Size, other.typeTitle3Size, t), typeTitle3LineHeight: lerpDouble(typeTitle3LineHeight, other.typeTitle3LineHeight, t), typeHeadingSize: lerpDouble(typeHeadingSize, other.typeHeadingSize, t), typeHeadingLineHeight: lerpDouble(typeHeadingLineHeight, other.typeHeadingLineHeight, t), typeBodySize: lerpDouble(typeBodySize, other.typeBodySize, t), typeBodyLineHeight: lerpDouble(typeBodyLineHeight, other.typeBodyLineHeight, t), typeLabelSize: lerpDouble(typeLabelSize, other.typeLabelSize, t), typeLabelLineHeight: lerpDouble(typeLabelLineHeight, other.typeLabelLineHeight, t), typeCaptionSize: lerpDouble(typeCaptionSize, other.typeCaptionSize, t), typeCaptionLineHeight: lerpDouble(typeCaptionLineHeight, other.typeCaptionLineHeight, t), typeHintSize: lerpDouble(typeHintSize, other.typeHintSize, t), typeHintLineHeight: lerpDouble(typeHintLineHeight, other.typeHintLineHeight, t), typeCodeSize: lerpDouble(typeCodeSize, other.typeCodeSize, t), typeCodeLineHeight: lerpDouble(typeCodeLineHeight, other.typeCodeLineHeight, t), iconSizeXs: lerpDouble(iconSizeXs, other.iconSizeXs, t), iconSizeSm: lerpDouble(iconSizeSm, other.iconSizeSm, t), iconSizeMd: lerpDouble(iconSizeMd, other.iconSizeMd, t), iconSizeLg: lerpDouble(iconSizeLg, other.iconSizeLg, t), iconSizeChip: lerpDouble(iconSizeChip, other.iconSizeChip, t), featuredIconSize: lerpDouble(featuredIconSize, other.featuredIconSize, t), featuredIconSizeMd: lerpDouble(featuredIconSizeMd, other.featuredIconSizeMd, t), featuredIconSizeCompact: lerpDouble(featuredIconSizeCompact, other.featuredIconSizeCompact, t), featuredIconSizeXl: lerpDouble(featuredIconSizeXl, other.featuredIconSizeXl, t), fieldBorderWidth: lerpDouble(fieldBorderWidth, other.fieldBorderWidth, t), fieldWidthDefault: lerpDouble(fieldWidthDefault, other.fieldWidthDefault, t), fieldEdgeInset: lerpDouble(fieldEdgeInset, other.fieldEdgeInset, t), fieldTextInset: lerpDouble(fieldTextInset, other.fieldTextInset, t), fieldContentGap: lerpDouble(fieldContentGap, other.fieldContentGap, t), fieldHintInset: lerpDouble(fieldHintInset, other.fieldHintInset, t), fieldLabelMaxWidth: lerpDouble(fieldLabelMaxWidth, other.fieldLabelMaxWidth, t), progressWidthDefault: lerpDouble(progressWidthDefault, other.progressWidthDefault, t), otpCellWidth: lerpDouble(otpCellWidth, other.otpCellWidth, t), widthParagraphMax: lerpDouble(widthParagraphMax, other.widthParagraphMax, t), sizeNone: lerpDouble(sizeNone, other.sizeNone, t), sizeXxs: lerpDouble(sizeXxs, other.sizeXxs, t), sizeXs: lerpDouble(sizeXs, other.sizeXs, t), sizeSm: lerpDouble(sizeSm, other.sizeSm, t), sizeMd: lerpDouble(sizeMd, other.sizeMd, t), sizeLg: lerpDouble(sizeLg, other.sizeLg, t), size14: lerpDouble(size14, other.size14, t), sizeXl: lerpDouble(sizeXl, other.sizeXl, t), size2xl: lerpDouble(size2xl, other.size2xl, t), size3xl: lerpDouble(size3xl, other.size3xl, t), size4xl: lerpDouble(size4xl, other.size4xl, t), size5xl: lerpDouble(size5xl, other.size5xl, t), size6xl: lerpDouble(size6xl, other.size6xl, t), size7xl: lerpDouble(size7xl, other.size7xl, t), size8xl: lerpDouble(size8xl, other.size8xl, t), size9xl: lerpDouble(size9xl, other.size9xl, t), size10xl: lerpDouble(size10xl, other.size10xl, t), size11xl: lerpDouble(size11xl, other.size11xl, t), tableRowMinHeight: lerpDouble(tableRowMinHeight, other.tableRowMinHeight, t), tableCellPaddingY: lerpDouble(tableCellPaddingY, other.tableCellPaddingY, t), tableCellPaddingX: lerpDouble(tableCellPaddingX, other.tableCellPaddingX, t), vehicleQSmH: lerpDouble(vehicleQSmH, other.vehicleQSmH, t), vehicleCardMediaAppW: lerpDouble(vehicleCardMediaAppW, other.vehicleCardMediaAppW, t), vehicleCardMediaAppH: lerpDouble(vehicleCardMediaAppH, other.vehicleCardMediaAppH, t), vehicleQLgW: lerpDouble(vehicleQLgW, other.vehicleQLgW, t), notificationActionGap: lerpDouble(notificationActionGap, other.notificationActionGap, t), headerNavHeight: lerpDouble(headerNavHeight, other.headerNavHeight, t), headerNavAccountMenuWidth: lerpDouble(headerNavAccountMenuWidth, other.headerNavAccountMenuWidth, t), breadcrumbsCurrentMaxWidth: lerpDouble(breadcrumbsCurrentMaxWidth, other.breadcrumbsCurrentMaxWidth, t), breadcrumbsMenuMinWidth: lerpDouble(breadcrumbsMenuMinWidth, other.breadcrumbsMenuMinWidth, t), commandSearchWidth: lerpDouble(commandSearchWidth, other.commandSearchWidth, t), commandSearchHighlightPaddingX: lerpDouble(commandSearchHighlightPaddingX, other.commandSearchHighlightPaddingX, t), typeDisplay2xlSize: lerpDouble(typeDisplay2xlSize, other.typeDisplay2xlSize, t), typeDisplay2xlLineHeight: lerpDouble(typeDisplay2xlLineHeight, other.typeDisplay2xlLineHeight, t), typeDisplayXlSize: lerpDouble(typeDisplayXlSize, other.typeDisplayXlSize, t), typeDisplayXlLineHeight: lerpDouble(typeDisplayXlLineHeight, other.typeDisplayXlLineHeight, t), typeDisplayLgSize: lerpDouble(typeDisplayLgSize, other.typeDisplayLgSize, t), typeDisplayLgLineHeight: lerpDouble(typeDisplayLgLineHeight, other.typeDisplayLgLineHeight, t), typeDisplayMdSize: lerpDouble(typeDisplayMdSize, other.typeDisplayMdSize, t), typeDisplayMdLineHeight: lerpDouble(typeDisplayMdLineHeight, other.typeDisplayMdLineHeight, t), typeBodyLgSize: lerpDouble(typeBodyLgSize, other.typeBodyLgSize, t), typeBodyLgLineHeight: lerpDouble(typeBodyLgLineHeight, other.typeBodyLgLineHeight, t));
+    return InvPlatform(radiusNone: lerpDouble(radiusNone, other.radiusNone, t), radiusXxs: lerpDouble(radiusXxs, other.radiusXxs, t), radiusXs: lerpDouble(radiusXs, other.radiusXs, t), radiusSm: lerpDouble(radiusSm, other.radiusSm, t), radiusMd: lerpDouble(radiusMd, other.radiusMd, t), radiusLg: lerpDouble(radiusLg, other.radiusLg, t), radiusXl: lerpDouble(radiusXl, other.radiusXl, t), radius2xl: lerpDouble(radius2xl, other.radius2xl, t), radius3xl: lerpDouble(radius3xl, other.radius3xl, t), radius4xl: lerpDouble(radius4xl, other.radius4xl, t), radiusFull: lerpDouble(radiusFull, other.radiusFull, t), radiusControl: lerpDouble(radiusControl, other.radiusControl, t), radiusField: lerpDouble(radiusField, other.radiusField, t), radiusCard: lerpDouble(radiusCard, other.radiusCard, t), radiusInner: lerpDouble(radiusInner, other.radiusInner, t), radiusOverlay: lerpDouble(radiusOverlay, other.radiusOverlay, t), radiusMenu: lerpDouble(radiusMenu, other.radiusMenu, t), radiusMenuItem: lerpDouble(radiusMenuItem, other.radiusMenuItem, t), radiusBadge: lerpDouble(radiusBadge, other.radiusBadge, t), spaceNone: lerpDouble(spaceNone, other.spaceNone, t), spaceXxs: lerpDouble(spaceXxs, other.spaceXxs, t), spaceXs: lerpDouble(spaceXs, other.spaceXs, t), spaceSm: lerpDouble(spaceSm, other.spaceSm, t), spaceMd: lerpDouble(spaceMd, other.spaceMd, t), spaceMdLg: lerpDouble(spaceMdLg, other.spaceMdLg, t), spaceLgXl: lerpDouble(spaceLgXl, other.spaceLgXl, t), spaceLg: lerpDouble(spaceLg, other.spaceLg, t), spaceXl: lerpDouble(spaceXl, other.spaceXl, t), space2xl: lerpDouble(space2xl, other.space2xl, t), space3xl: lerpDouble(space3xl, other.space3xl, t), space4xl: lerpDouble(space4xl, other.space4xl, t), space5xl: lerpDouble(space5xl, other.space5xl, t), space6xl: lerpDouble(space6xl, other.space6xl, t), space7xl: lerpDouble(space7xl, other.space7xl, t), space8xl: lerpDouble(space8xl, other.space8xl, t), space9xl: lerpDouble(space9xl, other.space9xl, t), space10xl: lerpDouble(space10xl, other.space10xl, t), space11xl: lerpDouble(space11xl, other.space11xl, t), containerPaddingMobile: lerpDouble(containerPaddingMobile, other.containerPaddingMobile, t), containerPaddingDesktop: lerpDouble(containerPaddingDesktop, other.containerPaddingDesktop, t), containerMaxWidthDesktop: lerpDouble(containerMaxWidthDesktop, other.containerMaxWidthDesktop, t), gridColumns: lerpDouble(gridColumns, other.gridColumns, t), gridGutter: lerpDouble(gridGutter, other.gridGutter, t), gridMargin: lerpDouble(gridMargin, other.gridMargin, t), layoutCardPadding: lerpDouble(layoutCardPadding, other.layoutCardPadding, t), layoutListGap: lerpDouble(layoutListGap, other.layoutListGap, t), layoutSectionGap: lerpDouble(layoutSectionGap, other.layoutSectionGap, t), layoutTitleGap: lerpDouble(layoutTitleGap, other.layoutTitleGap, t), layoutEmptyPadding: lerpDouble(layoutEmptyPadding, other.layoutEmptyPadding, t), formFieldGap: lerpDouble(formFieldGap, other.formFieldGap, t), touchMin: lerpDouble(touchMin, other.touchMin, t), controlHeightSm: lerpDouble(controlHeightSm, other.controlHeightSm, t), controlHeightMd: lerpDouble(controlHeightMd, other.controlHeightMd, t), controlHeightMl: lerpDouble(controlHeightMl, other.controlHeightMl, t), controlHeightLg: lerpDouble(controlHeightLg, other.controlHeightLg, t), controlPaddingXSm: lerpDouble(controlPaddingXSm, other.controlPaddingXSm, t), controlPaddingXMd: lerpDouble(controlPaddingXMd, other.controlPaddingXMd, t), controlPaddingXLg: lerpDouble(controlPaddingXLg, other.controlPaddingXLg, t), controlPaddingXIconSm: lerpDouble(controlPaddingXIconSm, other.controlPaddingXIconSm, t), controlPaddingXIconMd: lerpDouble(controlPaddingXIconMd, other.controlPaddingXIconMd, t), controlPaddingXIconLg: lerpDouble(controlPaddingXIconLg, other.controlPaddingXIconLg, t), controlIconGap: lerpDouble(controlIconGap, other.controlIconGap, t), controlLabelInset: lerpDouble(controlLabelInset, other.controlLabelInset, t), tabPaddingX: lerpDouble(tabPaddingX, other.tabPaddingX, t), tabPaddingXIcon: lerpDouble(tabPaddingXIcon, other.tabPaddingXIcon, t), tabGap: lerpDouble(tabGap, other.tabGap, t), navHeight: lerpDouble(navHeight, other.navHeight, t), navOffsetBottom: lerpDouble(navOffsetBottom, other.navOffsetBottom, t), navPaddingX: lerpDouble(navPaddingX, other.navPaddingX, t), navItemPaddingY: lerpDouble(navItemPaddingY, other.navItemPaddingY, t), navScanSize: lerpDouble(navScanSize, other.navScanSize, t), navChildIndent: lerpDouble(navChildIndent, other.navChildIndent, t), chipHeightSm: lerpDouble(chipHeightSm, other.chipHeightSm, t), chipHeightLg: lerpDouble(chipHeightLg, other.chipHeightLg, t), chipFontSizeSm: lerpDouble(chipFontSizeSm, other.chipFontSizeSm, t), chipLineHeightSm: lerpDouble(chipLineHeightSm, other.chipLineHeightSm, t), chipCountInset: lerpDouble(chipCountInset, other.chipCountInset, t), chipCountFontSize: lerpDouble(chipCountFontSize, other.chipCountFontSize, t), chipCountLineHeight: lerpDouble(chipCountLineHeight, other.chipCountLineHeight, t), avatarLabelWidth: lerpDouble(avatarLabelWidth, other.avatarLabelWidth, t), avatarLabelSubtitleSize: lerpDouble(avatarLabelSubtitleSize, other.avatarLabelSubtitleSize, t), avatarLabelSubtitleLineHeight: lerpDouble(avatarLabelSubtitleLineHeight, other.avatarLabelSubtitleLineHeight, t), chipPaddingXSm: lerpDouble(chipPaddingXSm, other.chipPaddingXSm, t), chipPaddingXMd: lerpDouble(chipPaddingXMd, other.chipPaddingXMd, t), chipPaddingXLg: lerpDouble(chipPaddingXLg, other.chipPaddingXLg, t), chipPaddingXIconLg: lerpDouble(chipPaddingXIconLg, other.chipPaddingXIconLg, t), avatarSizeMd: lerpDouble(avatarSizeMd, other.avatarSizeMd, t), avatarStatusSizeMd: lerpDouble(avatarStatusSizeMd, other.avatarStatusSizeMd, t), avatarSizeXxl: lerpDouble(avatarSizeXxl, other.avatarSizeXxl, t), avatarStatusSizeXl: lerpDouble(avatarStatusSizeXl, other.avatarStatusSizeXl, t), avatarEditSizeXl: lerpDouble(avatarEditSizeXl, other.avatarEditSizeXl, t), avatarIconSizeSm: lerpDouble(avatarIconSizeSm, other.avatarIconSizeSm, t), avatarEditIconSizeLg: lerpDouble(avatarEditIconSizeLg, other.avatarEditIconSizeLg, t), avatarSpinnerSizeXxl: lerpDouble(avatarSpinnerSizeXxl, other.avatarSpinnerSizeXxl, t), avatarGroupOverlapSm: lerpDouble(avatarGroupOverlapSm, other.avatarGroupOverlapSm, t), avatarGroupOverlapMd: lerpDouble(avatarGroupOverlapMd, other.avatarGroupOverlapMd, t), avatarGroupOverlapLg: lerpDouble(avatarGroupOverlapLg, other.avatarGroupOverlapLg, t), tooltipMaxWidth: lerpDouble(tooltipMaxWidth, other.tooltipMaxWidth, t), helpSheetTitleLineHeight: lerpDouble(helpSheetTitleLineHeight, other.helpSheetTitleLineHeight, t), uploadActionFontSize: lerpDouble(uploadActionFontSize, other.uploadActionFontSize, t), uploadDisabledOpacity: lerpDouble(uploadDisabledOpacity, other.uploadDisabledOpacity, t), uploadDividerWidth: lerpDouble(uploadDividerWidth, other.uploadDividerWidth, t), uploadAppTapMinHeight: lerpDouble(uploadAppTapMinHeight, other.uploadAppTapMinHeight, t), uploadRequiredGap: lerpDouble(uploadRequiredGap, other.uploadRequiredGap, t), uploadCompactTextMinWidth: lerpDouble(uploadCompactTextMinWidth, other.uploadCompactTextMinWidth, t), uploadMetaOffset: lerpDouble(uploadMetaOffset, other.uploadMetaOffset, t), listRowPaddingX: lerpDouble(listRowPaddingX, other.listRowPaddingX, t), listRowPaddingY: lerpDouble(listRowPaddingY, other.listRowPaddingY, t), listRowGap: lerpDouble(listRowGap, other.listRowGap, t), cardActionGap: lerpDouble(cardActionGap, other.cardActionGap, t), focusWidth: lerpDouble(focusWidth, other.focusWidth, t), focusOffset: lerpDouble(focusOffset, other.focusOffset, t), typeDisplaySize: lerpDouble(typeDisplaySize, other.typeDisplaySize, t), typeDisplayLineHeight: lerpDouble(typeDisplayLineHeight, other.typeDisplayLineHeight, t), typeTitle1Size: lerpDouble(typeTitle1Size, other.typeTitle1Size, t), typeTitle1LineHeight: lerpDouble(typeTitle1LineHeight, other.typeTitle1LineHeight, t), typeTitle2Size: lerpDouble(typeTitle2Size, other.typeTitle2Size, t), typeTitle2LineHeight: lerpDouble(typeTitle2LineHeight, other.typeTitle2LineHeight, t), typeTitle3Size: lerpDouble(typeTitle3Size, other.typeTitle3Size, t), typeTitle3LineHeight: lerpDouble(typeTitle3LineHeight, other.typeTitle3LineHeight, t), typeHeadingSize: lerpDouble(typeHeadingSize, other.typeHeadingSize, t), typeHeadingLineHeight: lerpDouble(typeHeadingLineHeight, other.typeHeadingLineHeight, t), typeBodySize: lerpDouble(typeBodySize, other.typeBodySize, t), typeBodyLineHeight: lerpDouble(typeBodyLineHeight, other.typeBodyLineHeight, t), typeLabelSize: lerpDouble(typeLabelSize, other.typeLabelSize, t), typeLabelLineHeight: lerpDouble(typeLabelLineHeight, other.typeLabelLineHeight, t), typeCaptionSize: lerpDouble(typeCaptionSize, other.typeCaptionSize, t), typeCaptionLineHeight: lerpDouble(typeCaptionLineHeight, other.typeCaptionLineHeight, t), typeHintSize: lerpDouble(typeHintSize, other.typeHintSize, t), typeHintLineHeight: lerpDouble(typeHintLineHeight, other.typeHintLineHeight, t), typeCodeSize: lerpDouble(typeCodeSize, other.typeCodeSize, t), typeCodeLineHeight: lerpDouble(typeCodeLineHeight, other.typeCodeLineHeight, t), iconSizeXs: lerpDouble(iconSizeXs, other.iconSizeXs, t), iconSizeSm: lerpDouble(iconSizeSm, other.iconSizeSm, t), iconSizeMd: lerpDouble(iconSizeMd, other.iconSizeMd, t), iconSizeLg: lerpDouble(iconSizeLg, other.iconSizeLg, t), iconSizeChip: lerpDouble(iconSizeChip, other.iconSizeChip, t), featuredIconSize: lerpDouble(featuredIconSize, other.featuredIconSize, t), featuredIconSizeMd: lerpDouble(featuredIconSizeMd, other.featuredIconSizeMd, t), featuredIconSizeCompact: lerpDouble(featuredIconSizeCompact, other.featuredIconSizeCompact, t), featuredIconSizeXl: lerpDouble(featuredIconSizeXl, other.featuredIconSizeXl, t), fieldBorderWidth: lerpDouble(fieldBorderWidth, other.fieldBorderWidth, t), fieldWidthDefault: lerpDouble(fieldWidthDefault, other.fieldWidthDefault, t), fieldLabelMaxWidth: lerpDouble(fieldLabelMaxWidth, other.fieldLabelMaxWidth, t), progressWidthDefault: lerpDouble(progressWidthDefault, other.progressWidthDefault, t), widthParagraphMax: lerpDouble(widthParagraphMax, other.widthParagraphMax, t), sizeNone: lerpDouble(sizeNone, other.sizeNone, t), sizeXxs: lerpDouble(sizeXxs, other.sizeXxs, t), sizeXs: lerpDouble(sizeXs, other.sizeXs, t), sizeSm: lerpDouble(sizeSm, other.sizeSm, t), sizeMd: lerpDouble(sizeMd, other.sizeMd, t), sizeLg: lerpDouble(sizeLg, other.sizeLg, t), size14: lerpDouble(size14, other.size14, t), sizeXl: lerpDouble(sizeXl, other.sizeXl, t), size2xl: lerpDouble(size2xl, other.size2xl, t), size3xl: lerpDouble(size3xl, other.size3xl, t), size28: lerpDouble(size28, other.size28, t), size4xl: lerpDouble(size4xl, other.size4xl, t), size36: lerpDouble(size36, other.size36, t), size5xl: lerpDouble(size5xl, other.size5xl, t), size6xl: lerpDouble(size6xl, other.size6xl, t), size7xl: lerpDouble(size7xl, other.size7xl, t), size8xl: lerpDouble(size8xl, other.size8xl, t), size9xl: lerpDouble(size9xl, other.size9xl, t), size10xl: lerpDouble(size10xl, other.size10xl, t), size11xl: lerpDouble(size11xl, other.size11xl, t), tableRowMinHeight: lerpDouble(tableRowMinHeight, other.tableRowMinHeight, t), vehicleQSmH: lerpDouble(vehicleQSmH, other.vehicleQSmH, t), vehicleCardMediaAppW: lerpDouble(vehicleCardMediaAppW, other.vehicleCardMediaAppW, t), vehicleCardMediaAppH: lerpDouble(vehicleCardMediaAppH, other.vehicleCardMediaAppH, t), vehicleQLgW: lerpDouble(vehicleQLgW, other.vehicleQLgW, t), headerNavHeight: lerpDouble(headerNavHeight, other.headerNavHeight, t), headerNavAccountMenuWidth: lerpDouble(headerNavAccountMenuWidth, other.headerNavAccountMenuWidth, t), breadcrumbsCurrentMaxWidth: lerpDouble(breadcrumbsCurrentMaxWidth, other.breadcrumbsCurrentMaxWidth, t), breadcrumbsMenuMinWidth: lerpDouble(breadcrumbsMenuMinWidth, other.breadcrumbsMenuMinWidth, t), commandSearchWidth: lerpDouble(commandSearchWidth, other.commandSearchWidth, t), commandSearchHighlightPaddingX: lerpDouble(commandSearchHighlightPaddingX, other.commandSearchHighlightPaddingX, t), typeDisplay2xlSize: lerpDouble(typeDisplay2xlSize, other.typeDisplay2xlSize, t), typeDisplay2xlLineHeight: lerpDouble(typeDisplay2xlLineHeight, other.typeDisplay2xlLineHeight, t), typeDisplayXlSize: lerpDouble(typeDisplayXlSize, other.typeDisplayXlSize, t), typeDisplayXlLineHeight: lerpDouble(typeDisplayXlLineHeight, other.typeDisplayXlLineHeight, t), typeDisplayLgSize: lerpDouble(typeDisplayLgSize, other.typeDisplayLgSize, t), typeDisplayLgLineHeight: lerpDouble(typeDisplayLgLineHeight, other.typeDisplayLgLineHeight, t), typeDisplayMdSize: lerpDouble(typeDisplayMdSize, other.typeDisplayMdSize, t), typeDisplayMdLineHeight: lerpDouble(typeDisplayMdLineHeight, other.typeDisplayMdLineHeight, t), typeBodyLgSize: lerpDouble(typeBodyLgSize, other.typeBodyLgSize, t), typeBodyLgLineHeight: lerpDouble(typeBodyLgLineHeight, other.typeBodyLgLineHeight, t), otpCellWidth: lerpDouble(otpCellWidth, other.otpCellWidth, t));
   }
 }
 

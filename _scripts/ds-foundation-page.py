@@ -203,7 +203,13 @@ def vehicle():
                      ("Tyres", "vehicle-tyres", "6779:2093"), ("Markers", "vehicle-markers", "6779:2094"))))
 
 
-SECTIONS = {"color": color, "type": typo, "radius": radius, "space": space, "grid": grid, "elevation": elevation,
+def padding():
+    return ('<p class="muted">Padding, flow, resizing, alignment, gap của component, tách khỏi Khoảng cách (DEC-342, DEC-343), Untitled làm base. '
+            'Chưa có khung trên Figma. Duyệt từng mục: <a href="https://claude.ai/artifact/G49c2ML6q3GSBaCWnuJct6">trang Auto layout component</a>. '
+            'Luật: <code>design-system/foundations/padding.md</code>.</p>')
+
+
+SECTIONS = {"padding": padding, "color": color, "type": typo, "radius": radius, "space": space, "grid": grid, "elevation": elevation,
             "touch-focus": touch, "motion": motion, "icon": icon, "misc-icon": misc_icon, "vehicle": vehicle, "logo": logo}
 LBL = dfs.LABEL
 ORDER = list(dfs.STATUSES)

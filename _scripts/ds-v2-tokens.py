@@ -9,6 +9,7 @@ Màu theo khách: collection Brand, mỗi chế độ một dải; đặt data-b
 Bóng: màu mỗi lớp đi qua biến Semantic `color/shadow/*`; `shadow/*`, `shadow/*-border` khai trong khối Semantic Light và Dark để khung
 data-theme lồng trong trang khác chế độ tính lại đúng (DEC-327, BL-348); `blur` trong json sinh --backdrop-blur-*.
 Vòng focus là outline, khe trong suốt: không có token khe (DEC-327).
+Vùng bấm: `.touch-target` và luật `@media (pointer: coarse)` sinh từ touch/min (DEC-339).
 Màu thương hiệu: collection Brand Invlogis sinh --invlogis-*, --innvie-* cho logo, trang giới thiệu (DEC-326); không dùng trong
 component sản phẩm (DEC-261, ds-token-usage.py cờ brandleak). --check so thêm với design/brand/invlogis/brand-tokens.css.
 Quyết định: _workspace/decisions.md DEC-115, DEC-116, DEC-129…139, DEC-167, DEC-168, DEC-241, DEC-333.
@@ -142,6 +143,10 @@ def build(doc) -> str:
             L.append(f"  {css_name(k)}: {ref_or_value(val, unit)};")
         L.append("}")
         L.append("")
+    # DEC-339 tc03: một dòng để các script đọc tokens.css theo khối không lẫn với khối Web
+    L.append("/* Con trỏ thô (DEC-339): vùng bấm vô hình theo sàn app, nút nhìn giữ nguyên. Chưa kiểm trên máy thật */")
+    L.append(f"@media (pointer: coarse) {{ :root, [data-platform=\"web\"] {{ --touch-min: {px(c['Platform']['vars']['touch/min']['Mobile'])}; }} }}")
+    L.append("")
     b = c.get("Brand")
     if b:
         for i, mode in enumerate(b["modes"]):
@@ -229,7 +234,11 @@ def build(doc) -> str:
           ".prose strong { color: var(--color-text-primary); }",
           ".prose hr { border: 0; border-top: 1px solid var(--color-border-secondary); }",
           ".prose blockquote { margin: 0; font: 500 var(--type-title-2-size)/var(--type-title-2-line-height) var(--font-body); color: var(--color-text-primary); }",
-          ".prose code { font: 700 var(--type-body-size)/var(--type-body-line-height) var(--font-code); background: var(--color-bg-secondary); box-shadow: inset 0 0 0 1px var(--color-border-secondary); border-radius: 6px; padding: 0 4px; }"]
+          ".prose code { font: 700 var(--type-body-size)/var(--type-body-line-height) var(--font-code); background: var(--color-bg-secondary); box-shadow: inset 0 0 0 1px var(--color-border-secondary); border-radius: 6px; padding: 0 4px; }",
+          "",
+          "/* Vùng bấm vô hình (DEC-339): tâm trùng phần bấm, cạnh ngắn nhất bằng touch/min; khung overflow:hidden sẽ cắt */",
+          ":where(.touch-target) { position: relative; }",
+          ".touch-target::after { content: \"\"; position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; min-width: var(--touch-min); min-height: var(--touch-min); transform: translate(-50%, -50%); }"]
     return "\n".join(L) + "\n"
 
 

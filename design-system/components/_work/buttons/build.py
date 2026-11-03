@@ -205,7 +205,7 @@ VAR_WEB = f"""<div class="vt">
 
 # ---------- Bảng biến thể App ----------
 VAR_APP = f"""<div class="vt showhit">
-<div><div class="vh">Size <small>app 36 · 42 · 52, bo tròn hẳn</small></div>
+<div><div class="vh">Size <small>app 36 · 44 · 52, bo tròn hẳn</small></div>
  <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
  <span class="no-sm" style="position:relative">{bt("Gọi điều phối", "sec", "sm", lead="send")}</span>{bt("Gọi điều phối", "sec", "md", lead="send")}{bt("Nhận chuyến", "pri", "lg")}</div></div>
 <div><div class="vh">Hierarchy <small>Size=LG</small></div>
@@ -215,7 +215,7 @@ VAR_APP = f"""<div class="vt showhit">
 <div><div class="vh">Nút chỉ icon + vùng chạm</div>
  <div class="vg"><span class="no-sm" style="position:relative">{bt("Thêm", "sec", "sm", icon="plus")}</span>{bt("Thêm", "sec", "md", icon="plus")}{bt("Thêm", "sec", "lg", icon="plus")}{close("md")}<span data-show="V:a">{util("filter", "", "Lọc")}</span><span data-show="V:b">{util("filter", "", "Lọc", "sec")}</span></div>
  <p class="hitnote a">Khung nét đứt = vùng chạm 44 × 44 vô hình. Hình nút giữ nguyên.</p>
- <p class="hitnote b">Không thêm vùng chạm: nút SM (36) không được dùng trên app; MD 42 vẫn dưới 44.</p></div>
+ <p class="hitnote b">Không thêm vùng chạm: nút SM (36) không được dùng trên app; MD 44 đạt, không cần bù (DEC-341).</p></div>
 </div>"""
 VAR_APP = VAR_APP.replace('extra="full"', "")
 
@@ -290,7 +290,7 @@ page = {
             "cross-process-flow · view-process (web) · nút hành động bước",
             "App lái xe · nhận chuyến / từ chối / báo sự cố",
         ],
-        "platform": "Nhóm A — một bộ, cao 28·32·40 web / 36·42·52 app theo mode Platform (DEC-279). Đã chốt biến thể 26/10 (Hierarchy 4 × Destructive × Icon 4 × Size 3 × State 6) và Loading trông như Disabled (DEC-277). Đây là trang brainstorm gọn: chỉ 4 điểm còn mở từ lượt duyệt Figma 1.",
+        "platform": "Nhóm A — một bộ, cao 28·32·40 web / 36·44·52 app theo mode Platform (DEC-279, DEC-341). Đã chốt biến thể 26/10 (Hierarchy 4 × Destructive × Icon 4 × Size 3 × State 6) và Loading trông như Disabled (DEC-277). Đây là trang brainstorm gọn: chỉ 4 điểm còn mở từ lượt duyệt Figma 1.",
     },
     "css": CSS,
     "states": [

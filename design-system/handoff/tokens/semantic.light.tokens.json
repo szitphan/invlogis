@@ -2098,6 +2098,19 @@
         }
       }
     },
+    "logo": {
+      "bg": {
+        "$type": "color",
+        "$value": "{white}",
+        "$description": "Ô nền logo đối tác (Bank logo): trắng ở cả Sáng và Tối để logo màu không chìm trên nền Tối (DEC-338)",
+        "$extensions": {
+          "com.figma.scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ]
+        }
+      }
+    },
     "file-type": {
       "pdf": {
         "$type": "color",

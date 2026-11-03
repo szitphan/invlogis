@@ -102,7 +102,7 @@ CSS_A = """
 [data-sx="sx21"]{width:320px}
 /* ===== Bản A (đã thay bằng Bản B) — chỉ còn cho hình D1–D6 vòng brainstorm ===== */
 /* ===== Badge ===== chữ type/chip-sm-strong mọi cỡ (DEC-277) */
-.bd{display:inline-flex;align-items:center;gap:var(--space-xs);height:var(--size-3xl);padding:0 var(--space-lg);
+.bd{display:inline-flex;align-items:center;gap:var(--space-xs);height:var(--size-3xl);padding:0 var(--chip-padding-x-icon-lg);
  font:600 var(--chip-font-size-sm)/var(--chip-line-height-sm) var(--font-body);white-space:nowrap;max-width:var(--size-11xl);
  border:1px solid transparent;vertical-align:middle;color:var(--c-fg);background:var(--c-bg)}
 .bd .bl{overflow:hidden;text-overflow:ellipsis;min-width:0}
@@ -383,7 +383,7 @@ CSS = tok_css() + """
 CSS += f".fa .fph{{position:absolute;inset:0;border-radius:inherit;background:url(data:image/jpeg;base64,{PHOTO}) center/cover}}"
 CSS += """
 /* ===================== Bản B — theo Figma ===================== */
-/* Badge theo spec Status chip (DEC-310): chữ type/caption-strong (SM type/chip-sm-strong 12/18) · chấm 8 → chữ 6 · icon 14 → chữ 4 · lề phía chấm/icon 6/8/10, phía chữ 10/12/14. Số đo viết theo từng cỡ để trang đối chiếu ghi đè đúng cỡ */
+/* Badge theo spec Status chip (DEC-310): chữ type/caption-strong (SM type/chip-sm-strong 12/18) · chấm 8 → chữ 6 · icon 14 → chữ 4 · lề phía chấm/icon 6/8/10, phía chữ 8/10/12 (DEC-341). Số đo viết theo từng cỡ để trang đối chiếu ghi đè đúng cỡ */
 .fb{display:inline-flex;align-items:center;vertical-align:middle;white-space:nowrap;font:600 var(--type-caption-size)/var(--type-caption-line-height) var(--font-body);outline-offset:-1px}
 .fb.pc,.fb.po{border-radius:var(--radius-full)}
 .fb.sm{height:22px;gap:var(--space-xs);padding-left:var(--space-sm);font-size:var(--chip-font-size-sm);line-height:var(--chip-line-height-sm)}
@@ -392,8 +392,8 @@ CSS += """
 .fb.sm .fcnt{height:16px}
 .fb.bc.sm .fcnt,.fb.bo.sm .fcnt,.fb.bm.sm .fcnt{border-radius:var(--radius-xxs)}
 .fb.md{height:24px;gap:var(--space-xs);padding-left:var(--space-md)}
-.fb.pc.md,.fb.po.md{padding-right:var(--space-lg)}
-.fb.bc.md,.fb.bo.md,.fb.bm.md{padding-right:var(--space-lg);border-radius:6px}
+.fb.pc.md,.fb.po.md{padding-right:var(--chip-padding-x-icon-lg)}
+.fb.bc.md,.fb.bo.md,.fb.bm.md{padding-right:var(--chip-padding-x-icon-lg);border-radius:6px}
 .fb.md .fcnt{height:16px}
 .fb.bc.md .fcnt,.fb.bo.md .fcnt,.fb.bm.md .fcnt{border-radius:var(--radius-xxs)}
 .fb.lg{height:28px;gap:var(--space-xs);padding-left:var(--chip-padding-x-icon-lg)}
@@ -404,8 +404,8 @@ CSS += """
 /* Có ô đếm: lề phải thu về chip/count-inset 3 · 3 · 4 để ô đếm cách đều trên, dưới, phải (DEC-303, DEC-310) */
 .fb.sm:has(.fcnt){padding-right:var(--chip-count-inset)}
 .fb.md:has(.fcnt),.fb.lg:has(.fcnt){padding-right:var(--space-xs)}
-/* Count Only (chỉ có số): khung số đệm trái space/xs 4 → số cách đều hai bên 10 · 12 · 14 (DEC-310) */
-.fb .flw.fco{padding-left:var(--space-xs)}
+/* Count Only (chỉ có số): khung số đệm trái space/xxs 2 → số cách đều hai bên 8 · 10 · 12 (DEC-341) */
+.fb .flw.fco{padding-left:var(--space-xxs)}
 /* Type Dot: không nền, không lề, chữ type/caption 400 màu text/primary (SM 12/18), chấm theo màu */
 .fb.dt[class]{background:transparent;color:var(--color-text-primary);font-weight:400;padding-left:0;padding-right:0;outline:0}
 /* viền (user 29/10): Pill Outline màu theo sắc 200 · Badge Outline + Modern xám. Viết riêng từng màu — không qua biến chung để trang đối chiếu không đè mọi badge */
@@ -705,9 +705,9 @@ VALUES = [
  {"part": "Badge", "prop": "padding-left", "value": 6, "platform": "Web", "size": "SM", "sel": ".fb.sm", "cssProp": "padding-left"},
  {"part": "Badge", "prop": "padding-left", "value": 8, "platform": "Web", "size": "MD", "sel": ".fb.md", "cssProp": "padding-left"},
  {"part": "Badge", "prop": "padding-left", "value": 10, "platform": "Web", "size": "LG", "sel": ".fb.lg", "cssProp": "padding-left"},
- {"part": "Badge", "prop": "padding-right", "value": 10, "platform": "Web", "size": "SM", "sel": ".fb.pc.sm,.fb.po.sm,.fb.bc.sm,.fb.bo.sm,.fb.bm.sm", "cssProp": "padding-right"},
- {"part": "Badge", "prop": "padding-right", "value": 12, "platform": "Web", "size": "MD", "sel": ".fb.pc.md,.fb.po.md,.fb.bc.md,.fb.bo.md,.fb.bm.md", "cssProp": "padding-right"},
- {"part": "Badge", "prop": "padding-right", "value": 14, "platform": "Web", "size": "LG", "sel": ".fb.pc.lg,.fb.po.lg,.fb.bc.lg,.fb.bo.lg,.fb.bm.lg", "cssProp": "padding-right"},
+ {"part": "Badge", "prop": "padding-right", "value": 8, "platform": "Web", "size": "SM", "sel": ".fb.pc.sm,.fb.po.sm,.fb.bc.sm,.fb.bo.sm,.fb.bm.sm", "cssProp": "padding-right"},
+ {"part": "Badge", "prop": "padding-right", "value": 10, "platform": "Web", "size": "MD", "sel": ".fb.pc.md,.fb.po.md,.fb.bc.md,.fb.bo.md,.fb.bm.md", "cssProp": "padding-right"},
+ {"part": "Badge", "prop": "padding-right", "value": 12, "platform": "Web", "size": "LG", "sel": ".fb.pc.lg,.fb.po.lg,.fb.bc.lg,.fb.bo.lg,.fb.bm.lg", "cssProp": "padding-right"},
  {"part": "Badge", "prop": "gap", "value": 4, "platform": "Web", "size": "SM", "sel": ".fb.sm", "cssProp": "gap"},
  {"part": "Badge", "prop": "gap", "value": 4, "platform": "Web", "size": "MD", "sel": ".fb.md", "cssProp": "gap"},
  {"part": "Badge", "prop": "gap", "value": 4, "platform": "Web", "size": "LG", "sel": ".fb.lg", "cssProp": "gap"},
@@ -717,7 +717,7 @@ VALUES = [
  {"part": "Badge · Dot", "prop": "size", "value": 6, "platform": "Web", "sel": ".fb .fdot", "cssProp": ["width", "height"]},
  {"part": "Badge · có Count", "prop": "padding-right", "value": 3, "platform": "Web", "size": "SM", "sel": ".fb.sm:has(.fcnt)", "cssProp": "padding-right"},
  {"part": "Badge · có Count", "prop": "padding-right", "value": 4, "platform": "Web", "size": "LG", "sel": ".fb.md:has(.fcnt),.fb.lg:has(.fcnt)", "cssProp": "padding-right"},
- {"part": "Badge · Count Only", "prop": "padding-left", "value": 4, "platform": "Web", "sel": ".fb .flw.fco", "cssProp": "padding-left"},
+ {"part": "Badge · Count Only", "prop": "padding-left", "value": 2, "platform": "Web", "sel": ".fb .flw.fco", "cssProp": "padding-left"},
  {"part": "Badge · Dot", "prop": "margin-right", "value": 2, "platform": "Web", "sel": ".fb .fdw:not(.iw)", "cssProp": "margin-right"},
  {"part": "Badge · Icon", "prop": "size", "value": 14, "platform": "Web", "sel": ".fb .fi", "cssProp": ["width", "height"]},
  {"part": "Badge · Count", "prop": "padding-x", "value": 6, "platform": "Web", "sel": ".fb .fcnt", "cssProp": "padding", "tpl": "0 $"},

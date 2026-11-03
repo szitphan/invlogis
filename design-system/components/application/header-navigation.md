@@ -75,7 +75,7 @@ dùng `Mobile header`. Bản này sửa tại chỗ bộ `Header navigation` d�
 | Kết quả | nhãn nhóm `type/caption-caps` `color/text/tertiary`; dòng cao `control/height/lg`, lề ngang `space/xl`, khoảng `space/md`, ô icon `control/height/sm` bo `radius/inner`; chữ chính `type/body` nét 500, phụ `type/caption` `color/text/tertiary`; đang chọn `color/bg/selected` + vạch trái 2 `color/focus/ring` (R3); chữ khớp nền `color/bg/warning/secondary`, bo `radius/xxs`, lề `command-search/highlight-padding-x`; chân nền `color/bg/secondary` `type/caption` | — |
 | Không có kết quả | `Featured icon` kiểu `modern-subtle` 48/24 (DEC-335 ms17; icon.md mục 3.1; `Featured icon` chưa có component), cách tiêu đề `space/md`; tiêu đề `type/heading` nét 600, phụ `type/caption` `color/text/tertiary` ("Thử một từ khác. Màn bạn không có quyền sẽ không hiện ở đây.", R11); chân hộp gợi ý phím bằng `Kbd`; lề dọc `space/3xl` | — |
 | Tooltip | `Tooltip` Short (`base/tooltip.md`, DEC-301) | 12/16 |
-| Vòng focus | `focus/width` 2, cách `focus/offset` 2, `color/focus/ring` | mọi phần bấm được |
+| Vòng focus | `focus/width` 2, cách `focus/offset` 2, `color/focus/ring`; mục menu và tab vòng vào trong 2 (DEC-339) | mọi phần bấm được |
 
 ### Biến thể
 
@@ -111,7 +111,7 @@ hiện tại giữ tối thiểu 120 rồi mới cắt (R4). Dưới 768 dùng P
 - 1.4.11: số đếm tách chuông bằng viền 2 màu nền. Nền "…" đang mở 1,09:1 là tín hiệu phụ (menu đã mở + `aria-expanded`),
   ngoại lệ DEC-305.
 - 2.4.7 / 2.4.11: vòng focus 2 cách 2 trên mục đường dẫn, nút, avatar; dòng kết quả đang chọn có vạch trái 2
-  `color/focus/ring` (R6). Thanh dính đầu: `scroll-padding-top` = cao thanh (44, 84 khi có hàng tab).
+  `color/focus/ring` (R6). Thanh dính đầu: `scroll-padding-top` = cao thanh + 4 (48, 88 khi có hàng tab; `foundations/grids.md`, DEC-339).
 - 2.5.8: nút 32, mục đường dẫn ≥ 24 giữa tâm, dòng kết quả 40.
 - 4.1.2: nút icon có tên — "Tìm tính năng (⌘K)", "Trợ giúp", "Thông báo, 3 việc cần xử lý" / "Thông báo, hơn 9 việc",
   "Tài khoản: {họ tên}"; hộp tìm `role="dialog"` có nhãn, ô nhập `role="combobox"` + `aria-activedescendant`, mỗi dòng
@@ -181,7 +181,7 @@ Menu tài khoản, hộp tìm: `duration/fast`, trượt 4; vào `easing/standar
 - Thanh `header-nav/height` 56 (D8 A): Menu (☰, "Mở menu") · tiêu đề trang hiện tại `type/body` nét 600, một dòng cắt
   "…" · Tìm (icon) · Chuông (`_Header bell`) · Avatar `size/4xl` trong nút `control/height/sm` có **vùng bấm vô
   hình 44** (DEC-305, theo DEC-138). Không có đường dẫn, Trợ giúp (Trợ giúp ở sheet tài khoản, R3).
-- **Hàng ←** (`Has Back`, màn con): "← {tên cấp trên}", cao `control/height/md` (42; preview 40 lệch 2, kéo về token ở bước 3), lề ngang `space/lg`,
+- **Hàng ←** (`Has Back`, màn con): "← {tên cấp trên}", cao `control/height/md` (44; preview 40 lệch 4, kéo về token ở bước 3), lề ngang `space/lg`,
   khoảng `space/xs`, chữ `color/text/tertiary_strong`; **vùng bấm vô hình 44**. Màn gốc của module không có hàng này.
 - Tìm: chạm icon mở **màn tìm toàn trang** — ô nhập cao 52 chữ `type/title-3`, nút ← đóng; kết quả như web (Tính năng ·
   Hành động · Bản ghi), không có phím tắt, không có chân phím.
@@ -190,18 +190,19 @@ Menu tài khoản, hộp tìm: `duration/fast`, trượt 4; vào `easing/standar
   chữ `type/body`, lớp phủ `color/bg/overlay`.
 - Chuông: chạm mở màn Thông báo toàn trang của Notification Center (bản Mobile của component đó).
 
+
 ### Trợ năng — chấm theo WCAG 2.2
 
-- 2.5.8: mọi nút (Menu, Tìm, Chuông, Avatar, hàng ←) có vùng chạm 44 (`touch/min`), nút nhìn thấy 42 / avatar 32.
+- 2.5.8: mọi nút (Menu, Tìm, Chuông, Avatar, hàng ←) có vùng chạm 44 (`touch/min`), nút nhìn thấy 44 / avatar 32.
 - 4.1.2: tên nút "Mở menu", "Tìm tính năng", "Thông báo, {n} việc cần xử lý", "Tài khoản: {họ tên}", "Quay lại {cấp trên}".
 - 1.3.1: tiêu đề trang là `h1`, chữ đủ trong DOM (cắt "…" bằng CSS).
-- 2.4.3: sheet tài khoản `role="dialog"` có nhãn, focus vào sheet khi mở, đóng bằng thanh kéo / chạm nền / Esc và trả
+- 2.4.3: sheet tài khoản `role="dialog"` có nhãn, mở thì focus vào mục đầu của sheet, Tab đi vòng trong sheet (DEC-339), đóng bằng thanh kéo / chạm nền / Esc và trả
   focus về avatar; màn tìm toàn trang: nút ← có tên, đóng trả focus về nút Tìm.
 
 ### Kiểm máy
 
 Chung với khối Web (bộ có trục Platform). Khung `Tài liệu` có màn tìm toàn trang (Recent / Results / Empty, ô 52, nút ←) và
-sheet tài khoản (Trợ giúp · Thông tin cá nhân · Đổi mật khẩu · Ngôn ngữ · Đăng xuất) (R2); hàng ← gắn `control/height/md` 42.
+sheet tài khoản (Trợ giúp · Thông tin cá nhân · Đổi mật khẩu · Ngôn ngữ · Đăng xuất) (R2); hàng ← gắn `control/height/md` 44.
 Hàng Ngôn ngữ của sheet giống web: cờ `Flag` + tên ngôn ngữ (DEC-335 ms06).
 
 ## Đối chiếu Astryx

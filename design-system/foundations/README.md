@@ -29,10 +29,11 @@ Component chỉ coi một mục là chuẩn khi mục đó `approved`; mục ch�
 | color | Màu | [color.md](color.md) (mục 3) | approved | 2026-11-01 | DEC-316, DEC-320 · tên theo Untitled · DEC-316 · Dark #191919 · 52 token mới · web = mobile |
 | type | Chữ | [typography.md](typography.md) (mục 4) | approved | 2026-11-01 | DEC-322 · thang Untitled · một bộ web và app |
 | radius | Bo góc | [radius.md](radius.md) (mục 5) | approved | 2026-11-02 | DEC-328 · một bộ web và app · control 8, card 12, overlay 20, menu 10 |
-| space | Khoảng cách | [spacing.md](spacing.md) (mục 6) | draft | 2026-10-28 |  |
+| space | Khoảng cách | [spacing.md](spacing.md) (mục 6) | approved | 2026-11-02 | DEC-341, DEC-342 · thang đủ 32 bậc Untitled · một bộ layout · nút MD app 44 · bỏ đường K · padding tách riêng |
 | grid | Lưới, độ rộng, breakpoint | [grids.md](grids.md) (mục 7) | approved | 2026-11-02 |  |
 | elevation | Lớp nổi, làm mờ nền | [effect-styles.md](effect-styles.md) (mục 8) | approved | 2026-11-02 | DEC-327 · tên và số Untitled · 7 bậc shadow · Tối đen 60/40 |
-| touch-focus | Vùng chạm và focus | [touch-focus.md](touch-focus.md) (mục 9) | draft | 2026-10-28 |  |
+| padding | Auto layout component | [padding.md](padding.md) | approved | 2026-11-03 | DEC-342, DEC-343, DEC-346, DEC-347 · padding, flow, resizing, alignment, gap · đã áp lên token và Figma · đi lại khi component Base hoàn thiện |
+| touch-focus | Vùng chạm và focus | [touch-focus.md](touch-focus.md) (mục 9) | approved | 2026-11-02 | DEC-339 · sàn 24, 44 · vòng 2 cách 2 · cấm control trên nền đặc |
 | motion | Chuyển động | [motion.md](motion.md) (mục 10) | approved | 2026-11-02 | DEC-333 · 125, 200, 300, 500 · hai đường cong |
 | icon | Icon | [icon.md](icon.md) (mục 11) | approved | 2026-11-02 | DEC-329 · Lucide · một bộ 12, 14, 16, 20 · nét 2,25 từ 16 trở xuống |
 | misc-icon | Misc icons | [icon-sets.md](icon-sets.md) | approved | 2026-11-02 | DEC-335 · 7 bộ · màu loại tệp riêng · cờ US · QR vẫn Nháp |
@@ -48,6 +49,7 @@ Component chỉ coi một mục là chuẩn khi mục đó `approved`; mục ch�
 | 4 | [typography.md](typography.md) | type |
 | 5 | [radius.md](radius.md) | radius |
 | 6 | [spacing.md](spacing.md) | space |
+| — | [padding.md](padding.md) | padding (5 phần auto layout của component: padding, flow, resizing, alignment, gap) |
 | 7 | [grids.md](grids.md) | grid |
 | 8 | [effect-styles.md](effect-styles.md) | elevation |
 | 9 | [touch-focus.md](touch-focus.md) | touch-focus |

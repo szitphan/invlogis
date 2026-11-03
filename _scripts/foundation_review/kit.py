@@ -257,7 +257,7 @@ def demo_screens(logo_svg=None):
             f'<div class="tp-h">App <small>· danh sách, chi tiết, biểu mẫu, sheet xác nhận (rộng 393)</small></div><div class="tp-scroll"><div class="tp-row">{app_list}{app_detail}{app_form}{app_sheet}</div></div>')
 
 
-NAV = [("icon", "Icon"), ("logo", "Logo"), ("effect", "Effect styles"), ("spacing", "Khoảng cách"), ("radius", "Bo góc"), ("grids", "Lưới"), ("touch", "Vùng chạm, focus"), ("misc", "Misc icons"), ("vehicle", "Phương tiện"), ("motion", "Chuyển động")]
+NAV = [("icon", "Icon"), ("logo", "Logo"), ("effect", "Effect styles"), ("spacing", "Khoảng cách"), ("radius", "Bo góc"), ("grids", "Lưới"), ("touch", "Vùng chạm, focus"), ("misc", "Misc icons"), ("vehicle", "Phương tiện"), ("motion", "Chuyển động"), ("padding", "Auto layout")]
 
 
 def _item(it):

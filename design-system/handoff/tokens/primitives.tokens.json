@@ -616,9 +616,17 @@
       "$type": "dimension",
       "$value": "24px"
     },
+    "28": {
+      "$type": "dimension",
+      "$value": "28px"
+    },
     "32": {
       "$type": "dimension",
       "$value": "32px"
+    },
+    "36": {
+      "$type": "dimension",
+      "$value": "36px"
     },
     "40": {
       "$type": "dimension",
@@ -647,6 +655,66 @@
     "160": {
       "$type": "dimension",
       "$value": "160px"
+    },
+    "192": {
+      "$type": "dimension",
+      "$value": "192px"
+    },
+    "224": {
+      "$type": "dimension",
+      "$value": "224px"
+    },
+    "256": {
+      "$type": "dimension",
+      "$value": "256px"
+    },
+    "320": {
+      "$type": "dimension",
+      "$value": "320px"
+    },
+    "384": {
+      "$type": "dimension",
+      "$value": "384px"
+    },
+    "480": {
+      "$type": "dimension",
+      "$value": "480px"
+    },
+    "560": {
+      "$type": "dimension",
+      "$value": "560px"
+    },
+    "640": {
+      "$type": "dimension",
+      "$value": "640px"
+    },
+    "720": {
+      "$type": "dimension",
+      "$value": "720px"
+    },
+    "768": {
+      "$type": "dimension",
+      "$value": "768px"
+    },
+    "1024": {
+      "$type": "dimension",
+      "$value": "1024px"
+    },
+    "1280": {
+      "$type": "dimension",
+      "$value": "1280px"
+    },
+    "1440": {
+      "$type": "dimension",
+      "$value": "1440px"
+    },
+    "1600": {
+      "$type": "dimension",
+      "$value": "1600px"
+    },
+    "1920": {
+      "$type": "dimension",
+      "$value": "1920px"
     }
   },
   "radius": {

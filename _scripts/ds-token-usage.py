@@ -31,6 +31,7 @@ Cờ (mỗi cờ = 1 mục trong tab "Cần xử lý", id ổn định để gi�
   dup        2+ token semantic cùng nhóm có giá trị giống hệt ở mọi chế độ (Light/Dark, Web/Mobile)
   stale-name tên màu cũ còn trong md, css, page.json sau DEC-318, DEC-320 (bảng đổi tên: components/_token-ledger.json)
   brandleak  css/md của component gọi --invlogis-*, --innvie-* — trái DEC-261 (gate --check: WARN)
+  outlinenone  control tắt outline mà không có vòng thay thế — trái DEC-339 tc15 (gate --check: WARN)
   rawmotion  transition, animation trong page.json ghi số giây trần, không qua --duration-* — trái DEC-333 mt03, lọt luật giảm chuyển động (gate --check: WARN)
   role       cùng một vai (phần tử × thuộc tính × trạng thái) mà dùng 2+ token, hoặc lệch luật có căn cứ trong color.md, DEC-321
 Trang có phạm vi Màu (mặc định) và Tất cả: mỗi mục mang cờ color; unused, dup màu có thêm sub (keep/suspect, intent/real) + lý do.
@@ -216,6 +217,25 @@ def raw_motion(page):
                 if any(float(t.rstrip("ms")) for t in MOTION_TIME.findall(bare)):
                     hits[m.group(0).strip()] += 1
     return hits
+
+
+OUTLINE_OFF = re.compile(r"([^{}]+)\{([^{}]*\boutline:\s*(?:none|0)\s*[;}]?[^{}]*)\}")
+CONTROL_SEL = re.compile(r":focus|(?<![\w.-])(?:button|input|select|textarea)\b|\.(?:bt|ctl)\b")
+
+
+def outline_off(page):
+    """DEC-339 tc15: selector là control, tắt outline, cùng luật không có viền/bóng và trang không có vòng ở selector đó."""
+    css = page.get("css", "")
+    out = []
+    for sel, body in OUTLINE_OFF.findall(css):
+        sel = " ".join(sel.split())
+        if not CONTROL_SEL.search(sel) or re.search(r"box-shadow|border(?:-color)?:", body):
+            continue
+        last = re.split(r"[\s>,]+", sel.split(",")[0].replace(":focus-visible", "").replace(":focus", "").strip())[-1]
+        if re.search(re.escape(last) + r"[^{}]*:focus[^{}]*\{[^{}]*(?:outline:\s*(?!none|0)|box-shadow)", css):
+            continue
+        out.append(sel[:80])
+    return out
 
 
 def scan_component(slug, toks):
@@ -1213,6 +1233,8 @@ def build():
     for s, pg in pages.items():
         for decl, cnt in raw_motion(pg).items():
             F(f"rawmotion--{s}--{decl}", "rawmotion", f"{s}: {decl} ({cnt} chỗ)", comps=[s], group="motion")
+        for sel in outline_off(pg):
+            F(f"outlinenone--{s}--{sel}", "outlinenone", f"{s}: {sel}", comps=[s], group="touch-focus")
 
     tok_rows = []
     for n, t in toks.items():
@@ -1597,7 +1619,7 @@ const D=JSON.parse(document.getElementById("data").textContent);
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],E=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const GN=Object.fromEntries(D.groups); const gname=g=>GN[g]||(g.startsWith("c:")?"Component · "+g.slice(2):g);
 let SCOPE="color";const inS=f=>SCOPE==="all"||f.color,NOACT=new Set(["keep","intent","switch"]),FX=Object.fromEntries(D.findings.map(f=>[f.id,f]));
-const KN={rawmotion:"Chuyển động số trần",brandleak:"Component dùng màu thương hiệu",role:"Lệch vai","stale-name":"Tên cũ còn sót",compraw:"Component số trần",skip:"Component trỏ Primitive",unused:"Chưa dùng",single:"Lẻ — 1 component",prim:"Gọi thẳng primitive",alias:"Biến tự đặt",unknown:"Token không tồn tại",literal:"Màu viết trần",dup:"Trùng giá trị"};
+const KN={outlinenone:"Tắt outline",rawmotion:"Chuyển động số trần",brandleak:"Component dùng màu thương hiệu",role:"Lệch vai","stale-name":"Tên cũ còn sót",compraw:"Component số trần",skip:"Component trỏ Primitive",unused:"Chưa dùng",single:"Lẻ — 1 component",prim:"Gọi thẳng primitive",alias:"Biến tự đặt",unknown:"Token không tồn tại",literal:"Màu viết trần",dup:"Trùng giá trị"};
 const KWHY={
  role:"Cùng một <b>vai</b> (phần tử × thuộc tính × trạng thái) mà dùng <mark>2 token trở lên</mark>, hoặc lệch luật có căn cứ. Đề xuất ưu tiên luật trong <code>color.md</code>, <code>DEC-321</code>; không có luật thì lấy token nhiều nguồn dùng nhất. Kit dùng chung tính 1 nguồn.",
  "stale-name":"Tên màu đã bỏ ở <b>DEC-318</b> (bỏ tầng Component) và <b>DEC-320</b> (đổi tên theo Untitled) <mark>còn nằm trong tài liệu hoặc CSS</mark>. Tên mới lấy từ <code>components/_token-ledger.json</code>. Dev đọc md sẽ tìm không ra biến.",
@@ -1605,6 +1627,7 @@ const KWHY={
  compraw:"Token tầng <b>Component</b> ghi <b>số trần</b>, gom theo giá trị. Theo DEC-313 cũng phải trỏ Semantic. Gợi ý = Semantic cùng giá trị nếu có; không có → chọn bậc gần nhất hoặc thêm thang Semantic (vd <code>size/*</code> cho cỡ khối).",
  unused:"Token có trong tokens.css nhưng <b>không component nào dùng</b>, kể cả gián tiếp. Mục ở đây là <mark>nghi thừa hoặc nghi thiếu gắn</mark>; token theo chuẩn Untitled mà <code>DEC-320</code> cố ý giữ sẵn nằm ở phần không cần xử lý cuối trang.",
  single:"Token semantic <b>chỉ 1 component dùng</b>. Semantic phải dùng chung; chỉ 1 nơi dùng thường là <mark>token riêng lẻ</mark>: gộp vào token sẵn có, hoặc chuyển thành token component.",
+ outlinenone:"Control <code>outline:none</code> mà không có vòng thay thế: <mark>người dùng bàn phím mất dấu focus</mark> (DEC-339).",
  rawmotion:"<code>transition</code>, <code>animation</code> ghi số giây trần, không qua <code>--duration-*</code>, nên <mark>vẫn chạy khi bật giảm chuyển động</mark> (<b>DEC-333</b>).",
  brandleak:"Component gọi <b>--invlogis-*, --innvie-*</b>. Bộ này chỉ cho logo, trang giới thiệu, tài liệu (<b>DEC-261</b>); màu theo khách đi qua <code>color/accent/*</code>.",
  prim:"CSS hoặc spec của component <b>gọi thẳng primitive màu</b> (neutral-300, red-100…), trái <b>DEC-115</b>. Đổi Light/Dark hay đổi brand sẽ lệch. Nên đi qua token semantic.",
@@ -1613,11 +1636,11 @@ const KWHY={
  literal:"Màu <b>viết trần</b> (hex/rgb) trong css component, không qua token. Cột gợi ý là token có đúng giá trị đó.",
  dup:"Các token semantic <b>cùng nhóm, cùng giá trị ở cả 4 chế độ</b> (Light/Dark × Web/Mobile). Mục ở đây là <mark>nghi trùng thật</mark>; trùng do tên theo vai nằm ở phần không cần xử lý cuối trang."};
 const KACT={compraw:["Trỏ Semantic cùng số","Làm tròn về bậc gần nhất…","Thêm bậc Semantic mới…","Ngoại lệ (giữ số, ghi lý do)…"],skip:["Trỏ Semantic gợi ý","Làm tròn về bậc gần nhất…","Thêm bậc Semantic mới…"],
- rawmotion:["Giữ","Đổi sang biến"],brandleak:["Giữ","Đổi sang token semantic"],unused:["Giữ","Bỏ token"],single:["Giữ","Gộp vào…","Chuyển thành token component"],prim:["Giữ","Đổi sang token semantic"],
+ outlinenone:["Giữ","Thêm vòng focus-visible"],rawmotion:["Giữ","Đổi sang biến"],brandleak:["Giữ","Đổi sang token semantic"],unused:["Giữ","Bỏ token"],single:["Giữ","Gộp vào…","Chuyển thành token component"],prim:["Giữ","Đổi sang token semantic"],
  alias:["Thay bằng token hệ thống","Đưa lên tokens.css","Giữ (khung xem thử)"],unknown:["Sửa tên","Tạo token","Bỏ qua (spec cũ)"],
  literal:["Đổi sang token","Giữ (khung xem thử)"],dup:["Giữ cả hai","Gộp vào…"]};
 KACT.role=["Giữ, có lý do…","Thêm token mới…"];KACT["stale-name"]=["Đổi sang tên mới","Giữ, có lý do…"];
-const ORDER=["rawmotion","brandleak","role","stale-name","skip","compraw","prim","alias","unknown","literal","single","dup","unused"];
+const ORDER=["outlinenone","rawmotion","brandleak","role","stale-name","skip","compraw","prim","alias","unknown","literal","single","dup","unused"];
 const TIERN={primitive:"Primitive",semantic:"Semantic",component:"Component token",brand:"Brand"};
 let db=null,uid=null,curTier="semantic"; const ST={};
 function kpis(){const rows=D.tokens.filter(r=>SCOPE==="all"||r.c),n=x=>rows.filter(r=>r.tier===x&&!r.style).length,st=rows.filter(r=>r.style).length;
@@ -1998,6 +2021,8 @@ def main():
         print(f"WARN {len(bl)} · component gọi màu thương hiệu Invlogis (DEC-261)" + "".join(f"\n  ! {t}" for t in bl[:40]))
         rm = [x["title"] for x in f if x["kind"] == "rawmotion"]
         print(f"WARN {len(rm)} · chuyển động số trần, không qua --duration-* (DEC-333)" + "".join(f"\n  ! {t}" for t in rm[:40]))
+        on = [x["title"] for x in f if x["kind"] == "outlinenone"]
+        print(f"WARN {len(on)} · tắt outline, không có vòng thay thế (DEC-339)" + "".join(f"\n  ! {t}" for t in on[:40]))
         print(f"WARN {len(rl)} · cùng vai lệch token (phần màu)")
         print(f"WARN {len(sn)} · tên màu cũ còn sót (phần màu)")
         sys.exit(1 if skip else 0)

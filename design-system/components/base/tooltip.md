@@ -91,8 +91,8 @@ Một cỡ. Chữ dài xuống dòng: Short tối đa 240, Supporting tối đa 
 | 2.1.1 Bàn phím | ✓ | hiện khi focus bằng Tab; Help icon là nút, Enter / Space mở; ô bảng có chữ bị cắt phải nhận focus (`tabindex=0`) hoặc có lối khác (trang chi tiết) |
 | 4.1.2 Tên, vai trò | ✓ | đối tượng nối tooltip bằng `aria-describedby`; Help icon `aria-label` "Giải thích {tên trường}" + `aria-expanded`; nút Icon Only có `aria-label` trùng chữ tooltip Short |
 | 1.4.11 Tương phản ngoài chữ | ✓ | Help icon 4,74 trên trắng · 4,54 trên #FAFAFA · 4,35 trên #F5F5F5 · Hover 10,37 · Dark 7,85 |
-| 2.4.7 Focus thấy được | ✓ | Help icon Focus: vòng `color/focus/ring` dày 2 trong khung 24, 15,13 trên trắng |
-| 2.5.8 Vùng bấm (≥ 24) | ✓ | Help icon vùng vô hình 24; tooltip không bấm được |
+| 2.4.7 Focus thấy được | ✓ | Help icon Focus: vòng `color/focus/ring` 2 cách 2 quanh phần bấm, 15,13 trên trắng |
+| 2.5.8 Vùng bấm (≥ 24) | ✓ | Help icon cỡ 16, bù vô hình tới 24 bằng `.touch-target` (DEC-339); tooltip không bấm được |
 
 ### Thuộc tính
 
@@ -151,7 +151,7 @@ Hiện sau khi chờ 300, chạy `duration/fast` + `easing/standard`, trượt 4
 | Thanh kéo | `color/bg/quaternary` (DEC-321), bo `radius/xxs`; cách trên `space/xs`, cách dưới `space/xl` | 36 × 4 |
 | Tiêu đề | `type/title-3/size` nét 600, dòng `help-sheet/title-line-height`, `color/text/primary`, tối đa 2 dòng; cách dưới `space/md` | 18/28 |
 | Nội dung | `type/body`, `color/text/tertiary_strong`; cách dưới `space/2xl` | 14/20 |
-| Nút Đã hiểu | `Button` Secondary · Label · MD, rộng hết sheet (DEC-301) | 42 |
+| Nút Đã hiểu | `Button` Secondary · Label · MD, rộng hết sheet (DEC-301) | 44 |
 
 ### Biến thể · Trạng thái · Kích thước
 
@@ -166,9 +166,9 @@ Như Web. Thêm: **Không nên** đặt nút khác ngoài "Đã hiểu" trong He
 
 | Tiêu chí | KQ | Số đo, ghi chú |
 |---|---|---|
-| 2.5.8 Vùng chạm (≥ 44, DEC-138) | ✓ | Help icon vùng 44 (`touch/min` theo mode Mobile); nút Đã hiểu Figma 42, code thêm vùng vô hình tới 44 (trên dưới nút còn trống 20 / 24) |
+| 2.5.8 Vùng chạm (≥ 44, DEC-138) | ✓ | Help icon vùng 44 (`touch/min` theo mode Mobile, `.touch-target`, DEC-339); nút Đã hiểu 44, không cần bù (DEC-341 sp10) |
 | 4.1.2 Tên, vai trò | ✓ | Help icon "Giải thích {tên trường}"; sheet là dialog có tiêu đề |
-| 2.4.3 Thứ tự focus | ✓ | mở sheet: focus vào tiêu đề, chỉ đi vòng trong sheet, lớp phủ không nhận focus; nút Back / Esc đóng và đưa focus về Help icon |
+| 2.4.3 Thứ tự focus | ✓ | mở sheet: focus vào nút Đã hiểu (nút an toàn, DEC-339), Tab đi vòng trong sheet, lớp phủ không nhận focus; nút Back / Esc đóng và trả focus về Help icon |
 | 1.4.3 Tương phản chữ | ✓ | nội dung 7,81 (Dark 7,85) · tiêu đề 17,93 · nhãn nút 16,44 |
 | 1.4.11 Tương phản ngoài chữ | — | thanh kéo 1,48 chỉ là gợi ý; đóng được bằng nút Đã hiểu hoặc chạm lớp phủ (2.5.7 đạt) |
 | 1.4.4 / 1.4.10 Chữ lớn | ✓ | sheet tối đa 90% màn, nội dung tự cuộn, nút Đã hiểu luôn hiện; tiêu đề xuống 2 dòng |

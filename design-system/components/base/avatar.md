@@ -69,7 +69,7 @@ Figma đổi từ "Avatar label group" thành "Avatar label" (29/10).
 ### Avatar add button
 
 State Default · **Loading** (spinner thay dấu +, không bấm, aria-busy) · Hover (nền `color/bg/primary_hover`) · Focus · Disabled. Cỡ **48, icon plus Size=24** theo luật Featured icon (icons.md mục 3.1, DEC-303, DEC-304); viền nét
-đứt, focus ring 2 cách 4.
+đứt, vòng focus 2 cách 2 (`focus/width`, `focus/offset`, DEC-339).
 
 ### Trợ năng
 
@@ -81,7 +81,7 @@ State Default · **Loading** (spinner thay dấu +, không bấm, aria-busy) · 
   announcement). Upload chỉ dùng từ LG trở lên — nút máy ảnh XS–MD quá nhỏ để chạm (BL-281).
 - **Avatar group:** `role="group"` + aria-label "Phụ trách: A, B, C và 3 người khác"; avatar con `aria-hidden`. Nền ô "+n"
   không đậm hơn `color/bg/secondary` (chữ hiện 4,54 : 1, sát ngưỡng).
-- **Nút thêm:** aria-label "Thêm người" (đổi theo ngữ cảnh), tooltip cùng chữ trên web; focus ring 2 cách 4; vùng chạm 48.
+- **Nút thêm:** aria-label "Thêm người" (đổi theo ngữ cảnh), tooltip cùng chữ trên web; vòng focus 2 cách 2; vùng chạm theo `touch/min` (nút 48 đã đủ, không bù).
 
 ### Chuyển động
 

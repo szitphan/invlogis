@@ -28,7 +28,7 @@ def tag(label, lead=None, trail=None, size="md", st="", count=None, on=False, li
     if trail == "count":
         T = f'<span class="ct">{count}</span>'
     elif trail == "x":
-        T = f'<button class="x" aria-label="Bỏ {label}">{ic("x", 12, "i xi")}</button>'
+        T = f'<button class="x touch-target" aria-label="Bỏ {label}">{ic("x", 12, "i xi")}</button>'
     lab = f'<span class="tl nl">{label}</span>'
     if long:
         lab += f'<span class="tl" data-show="state:long">{long}</span>'
@@ -58,7 +58,7 @@ CSS_TAG = r"""
 .pv[data-platform=mobile][data-D5=b] :is(.tg.ck,.tg:has(.x)){--th:32px;padding:0 12px;font-size:14px;gap:6px}
 .pv[data-platform=mobile][data-D5=b] .tg .x{padding:4px;margin-right:-6px}
 .pv[data-platform=mobile][data-D5=a] .tg .x{position:relative}
-.pv[data-platform=mobile][data-D5=a] .tg .x::after{content:"";position:absolute;inset:-14px -10px}
+
 /* D6 nền */
 .pv[data-D6=b] .tg{background:var(--color-bg-tertiary);border-color:transparent}
 .pv[data-D6=b] .tg .ct{background:var(--color-bg-primary)}

@@ -70,13 +70,14 @@ links:
 - Mobile: mẫu thấp hơn `touch/min` thì bọc trong khung `Vùng chạm · touch/min` viền chấm tím 3/3, ngoài nút, bo tròn,
   rộng = max(rộng nút, 44), cao 44.
 - **Vòng focus trên mọi nền:** khe trong suốt (DEC-327), không gắn mode theo nền; khung `.focus / Ring` không tô nền. Ruột nút
-  Outline, Ghost khi Focus giữ nền của chính kiểu nút, không tô màu nền trang.
+  Outline, Ghost khi Focus giữ nền của chính kiểu nút, không tô màu nền trang. Ngoài hay vào trong, cấm control trên nền đặc:
+  `foundations/touch-focus.md` mục 9.5, 9.6 (DEC-339). App không vẽ state Focus cho component mới (mục 9.8).
 
 ## 4. Số liệu — chỉ đọc từ biến
 
 - Mọi con số in ra đọc từ giá trị của biến theo mode của khối đã đặt (đọc biến bằng Plugin API qua `figma_write`/`use_figma`), không gõ tay, không lấy từ trí nhớ.
 - Bảng Token · số đo: cột SM · MD · LG (hoặc trục cỡ của component), dòng: cao, lề, lề phía icon, khoảng, cỡ icon, bo,
-  chữ (cỡ/dòng, nét), vòng focus, vùng chạm (`touch/min`, ghi "+n/phía" khi thiếu).
+  chữ (cỡ/dòng, nét), vòng focus, vùng chạm (`touch/min`, ghi "+n/phía" khi thiếu). Đối chiếu thêm dòng kiểm ở `foundations/touch-focus.md` mục 9.11.
 - Màu lấy từ collection Component, ghi một lần "một bộ màu cho web và app" nếu không có mode màu theo nền tảng.
 - Trợ năng: tương phản tính bằng công thức WCAG trên mã màu token; giữ số đã chấm trong md cũ nếu màu không đổi. Mỗi
   khối chỉ chấm tiêu chí áp cho nền tảng, điểm ghi riêng "Điểm web: n/m", "Điểm app: n/m" (! = đạt có điều kiện, tính

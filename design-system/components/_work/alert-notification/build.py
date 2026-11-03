@@ -50,7 +50,7 @@ def t_prog(icon, title, pct, meta, actions=("Huỷ",), tone="nt", extra=""):
                  lead=f'<span class="ib">{ic(icon if tone == "nt" else tone)}</span>', body=bar)
 
 def alert(tone, title, desc="", actions=(), close=True, extra=""):
-    acts = "".join(f'<button class="bt{" pri" if i == 0 else ""}">{a}</button>' for i, a in enumerate(actions))
+    acts = "".join(f'<button class="bt touch-target{" pri" if i == 0 else ""}">{a}</button>' for i, a in enumerate(actions))
     return (f'<div class="al {tone}{" stack" if len(actions) > 1 else ""}" data-cmp {extra}><span class="ib">{ic(tone)}</span>'
             f'<div class="tx"><div class="tt">{title}</div>{f"<div class=ds>{desc}</div>" if desc else ""}</div>'
             f'{f"<div class=ac>{acts}</div>" if acts else ""}'
@@ -58,7 +58,7 @@ def alert(tone, title, desc="", actions=(), close=True, extra=""):
 
 def banner(show=True):
     return (f'<div class="bn" data-cmp {'data-show="D7:a"' if show else ""}>{ic("wifi", 18)}<span><b>Mất kết nối máy chủ.</b> '
-            f'Dữ liệu trên màn có thể chưa mới nhất.</span><button class="bt">Thử lại</button></div>')
+            f'Dữ liệu trên màn có thể chưa mới nhất.</span><button class="bt touch-target">Thử lại</button></div>')
 
 LONG = ("Đã gửi lệnh LVT-2026-0412 cho tài xế Trần Văn Bình — tuyến Cảng Cát Lái → KCN Sóng Thần, "
         "container 40' HC, giao trước 16:00")
@@ -166,7 +166,7 @@ dl{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin:0;font-size:
 .pv[data-platform=mobile] .cl::after,.pv[data-platform=mobile] .lk::after{width:44px;height:44px}
 .pv[data-platform=mobile] .ts .ac{gap:24px}
 /* nút trong alert trên app: bậc SM 36 + vùng bấm 44 */
-.pv[data-platform=mobile] .al .bt{height:36px;position:relative}.pv[data-platform=mobile] .al .bt::after{content:"";position:absolute;inset:-4px 0}
+.pv[data-platform=mobile] .al .bt{height:36px;position:relative}
 /* Type Icon / Avatar / Progress */
 .nt{--t:var(--color-text-primary);--ti:var(--color-fg-tertiary);--tbg:var(--color-bg-tertiary);--tbd:var(--color-border-secondary)}
 .av{width:32px;height:32px;border-radius:999px;background:var(--color-accent-bg);color:var(--color-accent-fg);font:600 12px/32px Inter;text-align:center;position:relative;flex:none;margin:-6px 0 -6px -2px}

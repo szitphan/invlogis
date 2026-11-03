@@ -1,7 +1,7 @@
 {
   "$description": "Chỉ mục bộ token DTCG của DS v2. Mỗi collection Figma = 1 nhóm file, mỗi mode = 1 file. Ghép: primitives + styles + 1 file mỗi collection theo mode đang dùng.",
   "generator": "GENERATED — không sửa tay. Nguồn: design-system/ · sinh bởi _scripts/ds-v2-handoff.py",
-  "version": "0.31.0",
+  "version": "0.35.0",
   "collections": {
     "Primitives": [
       "primitives.tokens.json"

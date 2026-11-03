@@ -92,4 +92,5 @@ Web: `backdrop-filter: blur(var(--backdrop-blur-md))`. Flutter: `BackdropFilter(
 ### Không lấy từ Untitled
 
 - 7 style `focus-ring*`: vòng focus của mình là lớp riêng, xem `design-system/foundations/touch-focus.md` mục 9.
+  Ô nhập đang gõ giữ viền + `box-shadow: inset 0 0 0 1px` (DEC-321, DEC-339): ngoại lệ của câu "Không dùng `box-shadow` để vẽ vòng" trong DEC-327, vì đây là viền ô, không phải vòng; mục 9.7.
 - `shadow-xs-skeuomorphic`: nút giữ phẳng (DEC-119, DEC-327).

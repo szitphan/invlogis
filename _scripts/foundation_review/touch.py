@@ -529,9 +529,9 @@ ITEMS = [
                ("wrap", "Bọc khung đủ cao: dễ làm, dòng và hàng cao thêm", False)]),
     dict(id="tc06", grp="Vùng chạm", title="Khoảng cách giữa hai vùng chạm",
          why=f"<code>design-system/foundations/touch-focus.md</code> chỉ viết “cách nhau đủ”. Tính ra: app nút {n(H['md'][1])} cần cách <b>≥ {n(need_gap(H['md'][1], T_A))}</b>, nút {n(H['sm'][1])} cần <b>≥ {n(need_gap(H['sm'][1], T_A))}</b>, <mark>hai icon {n(IC['md'])} đứng riêng cần ≥ {n(need_gap(IC['md'], T_A))}</mark>. "
-             f"<code>tab/gap</code> đang {n(px('tab/gap', 'mobile'))} vừa khít tab {n(H['sm'][1])}; <code>notification/action-gap</code> App {n(px('notification/action-gap', 'mobile'))} dư. HIG: “add about 12 points of padding around elements that include a bezel”, không viền “about 24 points”. WCAG 2.5.8 chỉ cần vùng 24 không chạm nhau. Lái xe đeo găng (DEC-097) nên chỉ “không chồng” là mức thấp nhất.",
+             f"<code>tab/gap</code> đang {n(px('tab/gap', 'mobile'))} vừa khít tab {n(H['sm'][1])}; <code>notification/action-gap</code> App {n(24)} dư. HIG: “add about 12 points of padding around elements that include a bezel”, không viền “about 24 points”. WCAG 2.5.8 chỉ cần vùng 24 không chạm nhau. Lái xe đeo găng (DEC-097) nên chỉ “không chồng” là mức thấp nhất.",
          untitled="Không có luật về khoảng cách đích bấm; <code>gap-*</code> ghi theo từng component.",
-         ours=f"<code>tab/gap</code> {n(px('tab/gap', 'mobile'))}, <code>notification/action-gap</code> {n(px('notification/action-gap', 'web'))} · {n(px('notification/action-gap', 'mobile'))}.",
+         ours=f"<code>tab/gap</code> {n(px('tab/gap', 'mobile'))}, <code>notification/action-gap</code> {n(12)} · {n(24)}.",
          astryx="Chưa ghi luật khoảng cách đích bấm.",
          pv=panes(pv_gap, platforms=("web", "mobile"), modes=("light",)),
          opts=[("no-overlap8", "Hai vùng không chồng, và trên app cách nhau tối thiểu 8", True),

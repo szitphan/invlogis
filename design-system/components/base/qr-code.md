@@ -37,7 +37,7 @@ phần trang trí của màn giới thiệu.
 | Mô-đun mã | `color/fg/primary`, khung khoá mode Light | #171717 |
 
 **Khoá mode Light là bắt buộc:** ở Dark `color/fg/primary` là trắng, mã sẽ trắng trên trắng. Code đặt `data-theme="light"` trên
-khung; Figma đặt mode Semantic = Light trên khung.
+khung; Figma đặt mode Semantic = Light trên từng biến thể `QR code`.
 
 ### Biến thể
 

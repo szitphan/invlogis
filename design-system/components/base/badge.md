@@ -53,19 +53,22 @@ web và app. Badge **không có nút X** — chip lọc bỏ được dùng comp
 | Phần | SM | MD | LG | Token |
 |---|---|---|---|---|
 | Cao | 22 | 24 | 28 | `chip/height-sm` · `size/3xl` · `chip/height-lg` |
-| Cấu tạo | hàng phẳng | | | Chấm / icon / chữ / ô đếm là con trực tiếp, căn giữa dọc (DEC-310) |
-| Lề phía chấm / icon | 6 | 8 | 10 | `space/sm` · `space/md` · `chip/padding-x-icon-lg` (Dot: 0) |
-| Lề phía chữ | 10 | 12 | 14 | `chip/padding-x-sm` · `space/lg` · `chip/padding-x-lg` (Dot: 0) |
-| **Count Only** (chỉ có số): đệm trái khung số | 4 | 4 | 4 | `space/xs` (= lề phía chữ − lề phía chấm/icon) → số cách đều hai bên 10 · 12 · 14 |
+| Cấu tạo | hàng phẳng | | | Chấm / icon / chữ / ô đếm là con trực tiếp, căn giữa dọc (DEC-310). Khung chữ đệm 2 hai bên, nên không cần trục `Leading` mà Has Dot vẫn là công tắc (DEC-347) |
+| Khung ngoài, trái và phải khi không có ô đếm | 6 | 8 | 10 | `space/sm` · `space/md` · `chip/padding-x-icon-lg` (Dot: 0) |
+| Đệm khung chữ, khung số, hai bên | 2 | 2 | 2 | `space/xxs` (DEC-347) |
+| Lề phía chấm / icon | 6 | 8 | 10 | = khung ngoài |
+| Lề trái khi không chấm, không icon | 8 | 10 | 12 | Khung ngoài + đệm 2, hai bên cùng số (user 02/11, DEC-347) |
+| Lề phía chữ | 8 | 10 | 12 | Khung ngoài + đệm 2; số tổng là `chip/padding-x-sm` · `chip/padding-x-md` · `chip/padding-x-lg` theo Untitled (DEC-341, DEC-347) |
+| **Count Only** (chỉ có số): đệm trái khung số | 2 | 2 | 2 | `space/xxs` (= lề phía chữ − lề phía chấm/icon) → số cách đều hai bên 8 · 10 · 12 (DEC-341) |
 | Lề phải khi **có ô đếm** | 3 | 4 | 4 | `chip/count-inset` · `space/xs` — ô đếm cách đều trên, dưới, phải; bo ô đếm đồng tâm với badge |
-| Icon → chữ → ô đếm | 4 | 4 | 4 | `space/xs` |
-| Chấm → chữ | 6 | 6 | 6 | `space/sm` = `space/xs` + đệm phải khung chấm `space/xxs` 2 |
+| Icon → chữ → ô đếm | 4 | 4 | 4 | Khoảng `space/xxs` + đệm 2 (DEC-347) |
+| Chấm → chữ | 4 | 4 | 4 | Khoảng `space/xxs` + đệm 2; khung chấm không có đệm phải (user 02/11, DEC-347) |
 | Chữ nhãn | 12/18 · 600 | 12/16 · 600 | như MD | SM `type/chip-sm-strong`; MD, LG `type/caption-strong`; màu `color/chip/{tone}/fg`. Dot: 400, `color/text/primary` (DEC-310, thay phần chữ của DEC-277) |
-| Khung chữ rộng tối đa | 160 | 160 | 160 | `size/11xl`, dài hơn cắt "…" một dòng |
+| Khung chữ rộng tối đa | 160 | 160 | 160 | `size/11xl`, dài hơn cắt "…" một dòng; chữ tối đa 156 vì khung có đệm 2 hai bên |
 | Chấm | 6 × 6 | 6 × 6 | 6 × 6 | phần con `_Dot`, `size/sm`; màu truyền từ cha `color/chip/{tone}/fg`; nhìn không đổi (DEC-335 ms10, [icon-sets.md](../../foundations/icon-sets.md)) |
 | Icon Leading | 14 | 14 | 14 | `icon/size/chip`; màu `color/chip/{tone}/fg`; nét 2.25 trên khung 24 như mọi icon cỡ 14 (DEC-329, bỏ ngoại lệ DEC-309) |
 | Ô đếm — cao | 16 | 16 | 20 | `size/xl` · `size/xl` · `size/2xl` |
-| Ô đếm — đệm ngang | 6 | 6 | 6 | — |
+| Ô đếm — đệm ngang | 4 | 4 | 6 | `space/xs` · `space/xs` · `space/sm` (DEC-346 pd08) |
 | Ô đếm và Count Only — chữ | 12/16 · 400 | 12/16 · 400 | 12/16 · 400 | `chip/count-font-size` / `chip/count-line-height` — **không đậm**, cố định cả web và app (DEC-303, DEC-304) |
 | Ô đếm — bo (Badge Color / Outline / Modern) | 2 | 2 | 4 | `radius/xxs` · `radius/xs` (DEC-328) |
 | Ô đếm — bo (Pill) | tròn | tròn | tròn | `radius/full` |

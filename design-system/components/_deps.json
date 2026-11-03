@@ -41,6 +41,7 @@
     "motion",
     "radius",
     "space",
+    "touch-focus",
     "type"
    ],
    "built": {
@@ -706,6 +707,10 @@
   "elevation": {
    "name": "Lớp nổi, làm mờ nền",
    "file": "design-system/foundations/effect-styles.md"
+  },
+  "padding": {
+   "name": "Auto layout component",
+   "file": "design-system/foundations/README.md"
   },
   "touch-focus": {
    "name": "Vùng chạm và focus",

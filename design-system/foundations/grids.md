@@ -25,7 +25,7 @@ links:
 - **Khối cấp màn canh đúng cột**, cách nhau theo rãnh `grid/gutter`. Thẻ, dòng trong một khối dùng `layout/list-gap`.
 - Màn chi tiết web chia **8 cột nội dung + 4 cột thông tin** như Jira (DEC-127).
 - Viền 1px của thẻ nằm trong khung, không cộng vào lề (Figma stroke Inside; CSS `box-shadow: inset 0 0 0 1px`).
-- Mục 6 còn ghi vị trí chữ dạng "K3 64", "K2b 48": đó là khoảng cách đo từ mép màn, vẫn đúng; tên K không còn là lưới.
+- App bỏ hẳn đường K, không có luật canh chữ theo cột (DEC-341 sp11, `spacing.md` mục 6). Lưới app chỉ canh khối.
 
 ### Khung vẽ và khung kiểm
 
@@ -69,6 +69,10 @@ Một giá trị dùng chung cho web và app, trùng cả tên lẫn số với 
 | `grid/margin` | `container/padding-desktop` | `container/padding-mobile` | Component và màn đọc token này làm lề màn |
 
 Figma: ba token `grid/*` đi kèm layout guide style.
+
+### Khung cuộn có thanh dính
+
+Khung cuộn đặt `scroll-padding` = chiều cao thanh dính + 4, để phần tử nhận focus không nằm dưới thanh (WCAG 2.4.11, DEC-339). Không thêm token, số tính từ token của thanh: web `header-nav/height` 44 + 4 = 48; cộng thêm cao tiêu đề bảng dính nếu có. Chân màn app có nút dính thì đặt `scroll-padding-bottom` theo cùng cách.
 
 ### Breakpoint
 

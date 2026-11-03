@@ -285,7 +285,7 @@ CSS = tok_css() + """
 .taf{display:flex;flex-direction:column;gap:6px;width:100%;max-width:var(--field-width-default)}
 .taf.w{max-width:480px}
 .flb{font:500 13px/18px var(--font-body);color:var(--color-text-tertiary)}.flb .req{color:var(--color-text-error-primary);margin-left:2px}
-.ta{position:relative;min-height:calc(5 * var(--type-body-line-height) + 2 * var(--field-edge-inset) + 2px);padding:var(--field-edge-inset) 10px;
+.ta{position:relative;min-height:calc(5 * var(--type-body-line-height) + 2 * var(--space-md) + 2px);padding:var(--space-md) 10px;
  border:var(--field-border-width) solid var(--color-border-input);border-radius:var(--radius-field);background:var(--color-bg-primary);
  font:400 var(--type-body-size)/var(--type-body-line-height) var(--font-body);color:var(--color-text-primary);white-space:pre-wrap;overflow:hidden}
 [data-D6=b] .ta{min-height:168px}
@@ -294,9 +294,9 @@ CSS = tok_css() + """
 /* D4 hover · read only */
 .ta.h{border-color:var(--color-text-primary)}
 [data-D4=b] .ta.h{border-color:var(--color-border-input);background:var(--color-bg-primary_hover)}
-.ta.f{border-width:var(--size-xxs);border-color:var(--color-focus-ring);padding:calc(var(--field-edge-inset) - 1px) 9px}
-.ta.e{border-width:var(--size-xxs);border-color:var(--color-border-error);padding:calc(var(--field-edge-inset) - 1px) 9px}
-[data-D5=b] .ta.e{border-width:1px;padding:var(--field-edge-inset) 10px}
+.ta.f{border-width:var(--size-xxs);border-color:var(--color-focus-ring);padding:calc(var(--space-md) - 1px) 9px}
+.ta.e{border-width:var(--size-xxs);border-color:var(--color-border-error);padding:calc(var(--space-md) - 1px) 9px}
+[data-D5=b] .ta.e{border-width:1px;padding:var(--space-md) 10px}
 .ta.d{background:var(--color-bg-disabled);border-color:var(--color-border-disabled);color:var(--color-text-disabled)}.ta.d .tph{color:var(--color-text-disabled)}
 .ta.ro{background:var(--color-bg-secondary);border-color:var(--color-border-disabled)}
 .ta .lk{position:absolute;right:10px;top:10px;color:var(--color-fg-quaternary);display:none}
@@ -696,7 +696,7 @@ VALUES = [
  {"part": "Group item · Price", "prop": "font-size", "value": 20, "platform": "Web", "sel": ".gx .pr b", "cssProp": "font", "tpl": "600 $/28px var(--font-body)"},
  {"part": "Group item · Badge", "prop": "height", "value": 22, "platform": "Web", "sel": ".bdg"},
  {"part": "Group", "prop": "gap", "value": 12, "platform": "Web", "sel": ".gset"},
- {"part": "Textarea", "prop": "padding-x", "value": 10, "platform": "Web", "sel": ".ta", "cssProp": "padding", "tpl": "var(--field-edge-inset) $"},
+ {"part": "Textarea", "prop": "padding-x", "value": 10, "platform": "Web", "sel": ".ta", "cssProp": "padding", "tpl": "var(--space-md) $"},
  {"part": "Textarea · Label", "prop": "font-size", "value": 13, "platform": "Web", "sel": ".flb", "cssProp": "font", "tpl": "500 $/18px var(--font-body)"},
  {"part": "Textarea · Counter", "prop": "font-size", "value": 12, "platform": "Web", "sel": ".cnt", "cssProp": "font", "tpl": "400 $/16px var(--font-body)"},
  {"part": "Textarea", "prop": "radius", "value": 16, "platform": "Mobile", "sel": ".pv[data-platform=mobile] .ta", "cssProp": "border-radius"},

@@ -21,7 +21,7 @@ def tip(text, arrow="top", title=None, cls="", attrs=""):
 
 
 def help_icon(label="Giải thích", attrs=""):
-    return (f'<button class="hi" aria-label="{label}" {attrs}><span class="q">{ic("help", 16)}</span>'
+    return (f'<button class="hi touch-target" aria-label="{label}" {attrs}><span class="q">{ic("help", 16)}</span>'
             f'<span class="i2">{ic("info", 16)}</span></button>')
 
 
@@ -46,7 +46,7 @@ CSS = tok_css() + """
 [data-D2=b] .tt::after{display:none}
 /* D3 icon trợ giúp: a "?" · b "i" */
 .hi{display:inline-grid;place-items:center;width:16px;height:16px;padding:0;border:0;background:none;color:var(--color-fg-tertiary);cursor:help;position:relative;vertical-align:-3px}
-.hi::after{content:"";position:absolute;inset:-4px}
+
 .hi:hover,.hi.on{color:var(--color-fg-secondary)}
 .hi .q{display:grid}.hi .i2{display:none}
 [data-D3=b] .hi .i2{display:grid}[data-D3=b] .hi .q{display:none}
@@ -69,7 +69,7 @@ CSS = tok_css() + """
 .sheet b{display:block;font:600 17px/24px var(--font-body);margin-bottom:8px}
 .sheet p{margin:0 0 20px;color:var(--color-text-tertiary_strong);font-size:15px;line-height:22px}
 .sheet .ok{width:100%;height:var(--control-height-md);border:0;border-radius:var(--radius-control);background:var(--color-action-secondary);color:var(--color-text-primary);font:600 15px/20px var(--font-body)}
-.mf .hi{width:24px;height:24px}.mf .hi svg{width:16px;height:16px}.mf .hi::after{inset:-10px}
+.mf .hi{width:24px;height:24px}.mf .hi svg{width:16px;height:16px}
 """
 
 SCREEN = BASE_CSS + """
@@ -120,7 +120,7 @@ VAR_WEB = f"""<div class="vt">
  {cell("bottom", "Bottom", "p-top", "Tổng trọng lượng")}{cell("top", "Top", "p-bottom", "Tổng trọng lượng")}
  <div><div class="vl vl6">Arrow=None</div><div class="cell tall">{tip("Tính cả vỏ container và hàng.", "none", "Tổng trọng lượng")}</div></div></div></div>
 <div class="row r48">
- <div><div class="vh">Help icon <small>16, vùng di chuột 24</small></div><div class="vg">{help_icon()}<span class="hi on">{ic("help", 16)}</span><span class="vl">Default · Hover</span></div></div>
+ <div><div class="vh">Help icon <small>16, vùng di chuột 24</small></div><div class="vg">{help_icon()}<span class="hi touch-target on">{ic("help", 16)}</span><span class="vl">Default · Hover</span></div></div>
  <div><div class="vh">Chữ dài <small>xuống dòng, tối đa 240 / 320</small></div>
   <div class="vg vgt">{tip("Phí nâng hạ tính theo biểu phí của cảng tại ngày hạ container, chưa gồm VAT và phụ phí ngoài giờ.", "none")}
   {tip("Lệnh chỉ chuyển sang Hoàn tất khi đủ biên bản giao container có chữ ký của khách và ảnh chụp seal sau khi hạ bãi.", "none", "Vì sao chưa hoàn tất được?")}</div></div>
@@ -198,7 +198,7 @@ def sheet_frame(long=False):
 PICK = {"D1": "a", "D2": "a", "D3": "a", "D4": "a"}
 _pa = " ".join(f'data-{k}="{v}"' for k, v in PICK.items())
 MOB_ICON = (f'<div class="mf mf0"><div><div class="lb">Tổng trọng lượng (kg) {help_icon()}</div><div class="in">26.480</div></div>'
-            f'<div><div class="lb">Nhiệt độ cài đặt (°C) <span class="hi on">{ic("help", 20)}</span></div><div class="in">-18</div></div></div>')
+            f'<div><div class="lb">Nhiệt độ cài đặt (°C) <span class="hi touch-target on">{ic("help", 20)}</span></div><div class="in">-18</div></div></div>')
 preview = {
     "version": 1, "pick": PICK,
     "changes": "Bản 28/10 theo tổ hợp chốt (cả 4 điểm theo đề xuất): nền tối, có mũi tên, icon trợ giúp dấu ?, tooltip Supporting có tiêu đề đậm + mô tả. "
@@ -207,7 +207,7 @@ preview = {
         {"title": "Web", "platform": "web", "note": "Type Short × Arrow 7 · Type Supporting · Help icon Default/Hover · chữ dài xuống dòng (tối đa 240 / 320)",
          "html": f'<div class="pv pvp" {_pa} data-platform="web" data-state="x">{VAR_WEB}</div>'},
         {"title": "Mobile (app)", "platform": "mobile",
-         "note": "App không có tooltip (DEC-280): icon ? 20, vùng chạm 44, chạm mở Help sheet · tiêu đề, nội dung, nút Secondary MD 42 · chữ dài",
+         "note": "App không có tooltip (DEC-280): icon ? 20, vùng chạm 44, chạm mở Help sheet · tiêu đề, nội dung, nút Secondary MD 44 · chữ dài",
          "frames": [f'<div class="pv pvp" {_pa} data-platform="mobile" data-state="x">{MOB_ICON}</div>',
                     f'<div class="pv" {_pa} data-platform="mobile" data-state="x">{sheet_frame()}</div>',
                     f'<div class="pv" {_pa} data-platform="mobile" data-state="x">{sheet_frame(True)}</div>']},

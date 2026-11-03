@@ -516,7 +516,7 @@ page["css"] += ".pv[data-theme=dark] .pv{" + DARK + "}" + r"""
 .pv[data-platform=mobile] .fr{padding:12px 4px 12px 12px;border-radius:var(--radius-field)}
 .pv[data-platform=mobile] .fr .ib{width:40px;height:40px}
 .pv[data-platform=mobile] .fn{font-size:14px}
-.lb{display:block}.req{margin-left:3px}
+.lb{display:block}.req{margin-left:var(--upload-required-gap)}
 .fe{align-items:flex-start}.fe .i{margin-top:2px}
 .dz-c.hv .bt{background:var(--color-bg-primary_hover)}.dz-c.focus .bt{outline:2px solid var(--color-focus-ring);outline-offset:2px}.dz-c.error .bt{border-color:var(--color-border-error)}
 .mf .fu{position:static}
@@ -700,7 +700,7 @@ v("Choose button hover", "background", "#F5F5F5", sel=".dz-c.hv .bt", state="hov
 v("Choose button focus", "focus-offset", 2, sel=".dz-c.focus .bt", cssProp="outline-offset")
 v("Choose button focus", "color", "#262626", sel=".dz-c.focus .bt", cssProp="outline-color", role="border", on="#FFFFFF")
 v("Choose button error", "border-color", "#F04438", sel=".dz-c.error .bt", role="border", on="#FFFFFF", state="error")
-v("Required mark", "margin-left", 3)
+v("Required mark", "margin-left", 2)
 v("Error text", "line-height", 18); v("Error text", "gap", 6); v("Error icon", "margin-top", 2, sel=".fe .i")
 v("Dropzone compact text", "min-width", 150, sel=".dz-m")
 v("Dropzone link", "underline-offset", 2, sel=".dz-t .lk", cssProp="text-underline-offset")

@@ -49,7 +49,7 @@ góc phải trên, chân thẻ là lái xe và tuyến đang chạy. Hai compone
 
 | Trục | Giá trị | Khác gì |
 |---|---|---|
-| State | Default · Hover · Pressed · Focus | Hover nền `color/bg/primary_hover` · Pressed nền `color/bg/selected` · Focus viền 2 `color/focus/ring` |
+| State | Default · Hover · Pressed · Focus | Hover nền `color/bg/primary_hover` · Pressed nền `color/bg/selected` · Focus vòng ngoài 2 cách 2 `color/focus/ring` (DEC-339) |
 
 ### Trạng thái nội dung
 
@@ -76,7 +76,7 @@ chữ, biển số đọc được, dòng xe cắt "…".
 
 ### Trợ năng — chấm theo WCAG 2.2
 
-- 2.4.7 Focus thấy được: viền 2 `color/focus/ring`. 2.5.8 Vùng chạm: cả thẻ ≥ 140 cao.
+- 2.4.7 Focus thấy được: vòng ngoài 2 cách 2 `color/focus/ring`, cùng một vòng với nút (DEC-339). 2.5.8 Vùng chạm: cả thẻ ≥ 140 cao.
 - 1.1.1: ảnh trang trí (`alt=""`), biển số và dòng xe là chữ. 1.4.1: trạng thái có chữ, không chỉ màu.
 - Tên truy cập của thẻ = "Plate, Model, trạng thái".
 
@@ -120,7 +120,7 @@ Hướng của user 02/11 (DEC-334 vh05), **chưa làm, đợi lượt sync comp
 
 > Component `Vehicle Card / Mobile`, mode Platform = Mobile. Giống Web, khác: trải theo màn (361 ở khung 393, lề 16), sàn
 > 304 chỉ áp web; ô ảnh **140 × 88** (`vehicle/card-media-app-w` × `vehicle/card-media-app-h`, để Badge dài
-> nhất nằm gọn trên vùng ảnh ở bề rộng 320); State chỉ Default · Pressed · Focus (không có Hover).
+> nhất nằm gọn trên vùng ảnh ở bề rộng 320); State chỉ Default · Pressed (không có Hover; app không vẽ Focus, DEC-339).
 
 ## Phần máy (chung Web và Mobile)
 

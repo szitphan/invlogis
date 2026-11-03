@@ -47,13 +47,13 @@ là component Application riêng, không thuộc md này. Banner sự cố toàn
 | Avatar (Type Avatar) | `Avatar` Size 32, chấm trạng thái | 32 |
 | Tiêu đề | `color/text/primary`, `type/heading` (14/20 nét 600) | xuống dòng, không cắt — viết ngắn |
 | Mô tả | `color/text/tertiary`, `type/hint` | 12/18, tối đa 2 dòng |
-| Hành động | `Button` Hierarchy Link Gray, Size SM; nút đầu chữ đậm; khoảng giữa 2 nút `notification/action-gap` | 12; vùng bấm ≥ 24 (`touch/min`) |
+| Hành động | `Button` Hierarchy Link Gray, Size SM; nút đầu chữ đậm; khoảng giữa 2 nút `space/lg` | 12; vùng bấm ≥ 24 (`touch/min`) |
 | Nút đóng | `Close button` Size SM | 28 |
 | Thanh giờ (Has Timer) | màu `color/status/*-icon`, cao 4 | chạy theo thời gian tự ẩn: 3 giây, có nút ≥ 10 giây (CMP-01) |
 | Thanh tiến độ (Progress) | nền `color/bg/secondary`, phần chạy `color/fg/info/primary`, `radius/full` | cao 6, % 12/18 `color/text/tertiary` |
 | Alert · khung | nền `color/status/*-bg`, viền `color/status/*-border-subtle`, bo 10 (`radius/lg`), lề `space/lg` (DEC-287) | khoảng cách 12 |
 | Alert · tiêu đề / mô tả | `color/text/primary` `type/heading` · `color/text/primary` `type/caption` | xuống dòng, không cắt |
-| Alert · nút | nút đầu `Button` Secondary Size MD; nút thứ hai Link Gray, chữ `color/text/primary` (xám mặc định chỉ đạt 4,1–4,3:1 trên nền nhạt) | 32 (app 42) |
+| Alert · nút | nút đầu `Button` Secondary Size MD; nút thứ hai Link Gray, chữ `color/text/primary` (xám mặc định chỉ đạt 4,1–4,3:1 trên nền nhạt) | 32 (app 44) |
 
 ### Biến thể
 
@@ -139,8 +139,8 @@ thanh tab: trên vùng nút chân màn.
 
 ### Cấu tạo
 
-Như Web; khác: Alert có nút luôn dùng `Actions=Stacked` (Inline bóp chữ còn 3–4 từ một dòng ở 361); vùng bấm của nút đóng và link hành động 44 (`touch/min` Mobile), hai link cách nhau 24 (`notification/action-gap`); nút Alert
-Size MD = 42; chữ theo mode Mobile (`type/caption` 13).
+Như Web; khác: Alert có nút luôn dùng `Actions=Stacked` (Inline bóp chữ còn 3–4 từ một dòng ở 361); vùng bấm của nút đóng và link hành động 44 (`touch/min` Mobile), hai link cách nhau 24 (`space/3xl`); nút Alert
+Size MD = 44; chữ theo mode Mobile (`type/caption` 13).
 
 ### Biến thể · Trạng thái · Kích thước · Nên và không nên · Thuộc tính · Thành phần lồng · Token
 

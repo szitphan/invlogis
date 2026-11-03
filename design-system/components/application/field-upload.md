@@ -45,29 +45,29 @@ chọn (web kéo thả, app bấm mở sheet chọn nguồn), dùng chung dòng 
 |---|---|---|
 | Field · khung | khoảng cách nhãn – vùng – gợi ý `control/icon-gap` | 6 |
 | Nhãn | `type/label`, `color/text/tertiary_strong` | 14/20 nét 500 |
-| Dấu bắt buộc `*` | `color/text/error/primary`, cách nhãn `upload/required-gap` | 3 |
+| Dấu bắt buộc `*` | `color/text/error/primary`, cách nhãn `upload/required-gap` | 2 |
 | Gợi ý | `type/hint`, `color/text/tertiary` | 12/18 |
 | Chữ lỗi | `type/hint`, `color/text/error/primary`; icon `icon/size/sm` dịch xuống `space/xxs`, cách chữ `control/icon-gap` | icon 14, lệch 2 |
 | Vùng chọn · khung | nền `color/bg/primary`, viền `field/border-width` `color/border/primary`, bo `radius/card` | 1px, bo 12 |
-| Vùng Full | lề `space/xl` trên dưới · `space/3xl` hai bên, khoảng dòng `field/text-inset` | 16 · 24, 4 |
-| Vùng Compact | lề và khoảng cách `space/lg`; chữ rộng tối thiểu `upload/compact-text-min-width` | 12; 150 |
+| Vùng Full | lề `space/xl` trên dưới · `space/3xl` hai bên, khoảng dòng `space/xs` | 16 · 24, 4 |
+| Vùng Compact | lề và khoảng cách `space/lg`; chữ rộng tối thiểu `upload/compact-text-min-width` | 12; 160 |
 | Featured icon | khung `featured-icon/size-md`, bo `radius/inner`, viền `color/border/disabled`, icon `icon/size/lg` `color/text/tertiary_strong`, khoảng dưới `space/md` | 40, bo 8, icon 20, 8 |
 | Featured icon gọn (Compact) | khung `featured-icon/size-compact`, icon `icon/size/lg` | 36, icon 20 |
 | Chữ vùng chọn | `type/body`, `color/text/tertiary`; link "Bấm để tải lên" `color/text/primary` nét 600, gạch chân cách `space/xxs` | 14/20, 2 |
 | Dòng định dạng, dung lượng | `type/hint`, `color/text/tertiary` | 12/18 |
 | Nút Chọn tệp | cao `control/height/md`, lề `space/lg`, bo `radius/control`, viền `color/border/primary`, chữ `upload/action-font-size` nét 600 dòng `type/body/line-height`, icon `icon/size/md` | 32, 12, bo 8, chữ 13/20, icon 16 |
-| Danh sách tệp | khoảng giữa dòng `layout/list-gap` | 8 (app 12) |
-| Dòng tệp · khung | lề `space/lg` (trên dưới, trái), `field/edge-inset` (phải); khoảng `space/lg`; bo `radius/card`; viền `color/border/disabled`; nền `color/bg/primary` | 12 · 12 · 8, bo 12 |
+| Danh sách tệp | khoảng giữa dòng `layout/list-gap` | 12 |
+| Dòng tệp · khung | lề `space/lg` (trên dưới, trái), `space/md` (phải); khoảng `space/lg`; bo `radius/card`; viền `color/border/disabled`; nền `color/bg/primary` | 12 · 12 · 8, bo 12 |
 | Nền tiến độ | `color/bg/disabled`, rộng theo % | — |
 | Icon loại tệp / ảnh nhỏ | khung `size/5xl`, một số cho web và app (DEC-335 ms04); ảnh nhỏ bo `radius/inner` | 40, bo 8 |
 | File type icon | tờ giấy nền `color/bg/primary`, nét `color/border/primary`; nhãn `color/file-type/{pdf,doc,xls,csv,img,zip,vid}`, không đổi theo chế độ, chữ nhãn `color/fg/white` (DEC-335 ms02, ms03; [icon-sets.md](../../foundations/icon-sets.md)) | 8 loại gồm Other; đo chữ trắng trên nhãn 5,41–7,81:1 |
 | Tên tệp | `type/body` nét 500, `color/text/primary`; cắt giữa, giữ đuôi tệp | 14/20 |
-| Dòng phụ | `type/hint`, `color/text/tertiary`, cách tên `upload/meta-offset`, khoảng `field/edge-inset`; vạch chia `upload/divider-width` × `size/lg` màu `color/border/primary` | 12/18; vạch 1 × 12 |
-| Trạng thái Đang tải | `color/text/tertiary_strong` (DEC-307), icon `icon/size/sm`, khoảng `field/text-inset` | "Đang tải 64%" |
+| Dòng phụ | `type/hint`, `color/text/tertiary`, cách tên `upload/meta-offset`, khoảng `space/md`; vạch chia `upload/divider-width` × `size/lg` màu `color/border/primary` | 12/18; vạch 1 × 12 |
+| Trạng thái Đang tải | `color/text/tertiary_strong` (DEC-307), icon `icon/size/sm`, khoảng `space/xs` | "Đang tải 64%" |
 | Trạng thái Xong / Lỗi | `color/text/success/primary` · `color/text/error/primary` | — |
 | Link Thử lại | chữ `upload/action-font-size` nét 600 dòng `type/hint/line-height`, `color/text/error/primary`, cách tên `space/sm`; vùng bấm vô hình `touch/min` | 14/18, 6; bấm 24 |
 | Nút xoá | `Button` Ghost icon: khung `control/height/md`, bo `radius/control`, icon `icon/size/md` `color/fg/tertiary`; lệch `space/sm` · `space/xxs` | 32, icon 16, lệch 6 · 2 |
-| Vòng focus | `focus/width`, cách `focus/width`, màu `color/focus/ring` | 2, cách 2 |
+| Vòng focus | `focus/width`, cách `focus/offset`, màu `color/focus/ring` | 2, cách 2 |
 
 ### Biến thể
 
@@ -155,11 +155,12 @@ Như Web; khác:
 | Ô bấm tải lên | cao tối thiểu `upload/app-tap-min-height`, bo `radius/card`, lề và khoảng `space/lg`, viền `color/border/primary`, nền `color/bg/primary` | 72, bo 12, 12 |
 | Featured trong ô bấm | khung `featured-icon/size`, tròn `radius/full`, nền `color/bg/disabled`, icon 24 theo Featured (icon.md mục 3.1) | 48 / icon 24 |
 | Dòng tệp | bo `radius/field`, lề phải `space/xs`; tên `type/body` | bo 8, lề 4, tên 15 |
-| Nút xoá | khung `control/height/md` | 42 |
-| Sheet chọn nguồn | bo `radius/overlay` (DEC-328), lề hai bên `field/edge-inset`, lề trên `space/md`, lề dưới `space/3xl`, nền `color/bg/primary`, scrim `color/bg/overlay` | bo 20 |
+| Nút xoá | khung `control/height/md` | 44 |
+| Sheet chọn nguồn | bo `radius/overlay` (DEC-328), lề hai bên `space/xl`, lề trên `space/md`, lề dưới `space/3xl`, nền `color/bg/primary`, scrim `color/bg/overlay` | bo 20 |
 | Thanh kéo | `size/xs`, `radius/xxs`, nền `color/bg/quaternary` (DEC-321), cách dưới `space/lg` | 4, bo 2, rộng 36 |
 | Tiêu đề sheet | `type/title-3` nét 600, cách dưới `space/sm` | 18/28, 6 |
 | Mục sheet | cao `control/height/lg`, khoảng `space/lg`, `type/body`, icon `icon/size/md`, vạch `color/border/disabled` | 52, icon 16 |
+
 
 ### Biến thể · Trạng thái · Kích thước · Nên và không nên · Thuộc tính · Thành phần lồng
 
@@ -167,8 +168,8 @@ Như Web. Không có trạng thái Đang kéo tệp vào và Rê chuột.
 
 ### Trợ năng — chấm theo WCAG 2.2
 
-2.5.8 nâng lên 44 theo DEC-138 (nút xoá 42 thêm vùng bấm vô hình; link Thử lại vùng bấm 44). Sheet giữ focus trong sheet, đóng
-xong focus về ô bấm. Còn lại như Web.
+2.5.8 nâng lên 44 theo DEC-138 (nút xoá 44 không cần bù; link Thử lại vùng bấm 44). Sheet theo luật chung (foundations mục 9.9, DEC-339): mở thì focus vào lựa chọn đầu, Tab đi
+vòng trong sheet, Esc đóng, đóng xong trả focus về ô bấm, lớp phủ không nhận focus. Còn lại như Web.
 
 ### Được dùng trong
 

@@ -122,10 +122,9 @@ Một cỡ: menu 240 / 64, hộp thoại 960. Dưới 1280 menu thu gọn mặc 
   `text/tertiary_strong` 7,49:1 / 7,17:1 (`text/tertiary` ở đó chỉ 4,35:1, DEC-289); số đếm blue/700 trên blue/50 ≥ 4,5:1.
 - 1.4.11: ô tìm viền `border/input` ≥ 3:1 (vòng 3 sửa từ #D4D4D4); thẻ phạm vi tách nền bằng viền + bóng, bấm được nhờ chevron.
 - 2.4.7 / 2.4.11: focus vòng 2px (`focus/width`) cách 2px `color/focus/ring` trên thẻ, mục, dòng chọn (`_Scope option`
-  State=Focus).
+  State=Focus). Mục sidebar giữ vòng ngoài và nổi lên trên mục kế bên bằng `z-index` (DEC-339).
 - 2.5.8: mục 36, thẻ 52 (thu gọn 40), dòng chọn ≥ 44, nút 40, ô tìm 32, nút đóng 28 — đều ≥ 24.
-- 2.1.2 / 2.4.3: focus giữ trong hộp thoại; thứ tự Tab: ô tìm → cột 1 → cột 2 → cột 3 → Huỷ → Chọn → Đóng; mở hộp thoại
-  focus vào dòng đang chọn của cột 1.
+- 2.1.2 / 2.4.3 (popover 2 cột, DEC-299): mở popover focus vào dòng đang chọn; Tab giữa hai cột, mũi tên lên xuống trong cột; Esc đóng, focus về thẻ phạm vi. Mô tả bản hộp thoại trong file này đã cũ, viết lại ở BL-372.
 - 3.3.2 / 1.3.1: ô tìm gắn nhãn bằng tiêu đề cột "1 · Chi nhánh" (aria-labelledby), không dựa vào placeholder.
 - 1.4.10: dưới 768 px CSS (gồm zoom 400%) dùng bản app (màn toàn trang), không ép 3 cột.
 - 1.4.13: tooltip hiện cả khi focus, đóng được bằng Esc, rê chuột vào tooltip không mất.

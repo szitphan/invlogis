@@ -46,7 +46,7 @@ Hai component vì app không có Hover.
 | Trục | Giá trị | Khác gì |
 |---|---|---|
 | Selected | False · True | True: nền `color/bg/selected`, Radio Checked |
-| State | Default · Hover · Pressed · Focus · Disabled | Hover nền `color/bg/primary_hover` · Pressed nền `color/bg/secondary` · Focus viền 2 `color/focus/ring` · Disabled chữ `color/text/disabled`, Radio Disabled; Disabled chỉ đi với Selected = False |
+| State | Default · Hover · Pressed · Focus · Disabled | Hover nền `color/bg/primary_hover` · Pressed nền `color/bg/secondary` · Focus vòng ngoài 2 cách 2 `color/focus/ring` (DEC-339) · Disabled chữ `color/text/disabled`, Radio Disabled; Disabled chỉ đi với Selected = False |
 
 9 biến thể.
 
@@ -75,7 +75,7 @@ Radio 20 − 2 khoảng 12 = 212, nhỏ hơn Badge 132 + 8 + Meta 140 = 280, nê
 ### Trợ năng — chấm theo WCAG 2.2
 
 - Nhóm là radiogroup, mỗi dòng là radio; tên truy cập = "Plate, Status, Meta". 2.5.8 Vùng chạm: dòng ≥ 72 cao.
-- 2.4.7 Focus: viền 2 `color/focus/ring`. 1.4.1: trạng thái có chữ; Disabled có lý do bằng chữ ở Meta.
+- 2.4.7 Focus: vòng ngoài 2 cách 2 `color/focus/ring`, cùng một vòng với nút (DEC-339). 1.4.1: trạng thái có chữ; Disabled có lý do bằng chữ ở Meta.
 
 ### Thuộc tính
 
@@ -100,8 +100,9 @@ Nền ô ảnh và nét bao theo Vehicle Thumb. Dòng phẳng ở cả hai chế
 
 ## Mobile
 
+>
 > Component `Vehicle Option Card / Mobile`, mode Platform = Mobile. Giống Web, khác: trải theo màn; không có Hover
-> (State Default · Pressed · Focus · Disabled, 7 biến thể); dòng phụ thường xuống hàng (Badge trên, Meta dưới) nên dòng
+> (State Default · Pressed · Disabled, 5 biến thể; app không vẽ Focus, DEC-339); dòng phụ thường xuống hàng (Badge trên, Meta dưới) nên dòng
 > cao ≈ 91.
 
 ## Phần máy (chung Web và Mobile)

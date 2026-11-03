@@ -20,6 +20,7 @@
   token   token mong muốn khi nhiều token trùng giá trị (vd "type/caption/size" thay "type/code/size")
   noOverride  lý do không ghi đè được trên preview (vd độ dày vạch vẽ bằng box-shadow) — thay cho sel
   tokenRole   khi role = decorative mà vẫn cần kiểm token đúng nghĩa (đường kẻ → border)
+  clipInset   dòng focus-offset: lề tới khung cha cắt tràn; < 4 mà vòng ngoài là conflict (DEC-339, chỉ kiểm khi khai)
   "cssIgnore" (khoá trang) [{"sel", "props": [...], "why"}] — khai báo không hiện trên hình ở tổ hợp đã chốt mà máy
               không tự thấy (bị rule khác ghi đè ở mọi chỗ dùng). Bắt buộc có why; trang review in ra để user soát.
   role    text (cần 4,5:1; large=true → 3:1; hint=true → chỉ báo) · icon | border | fill (3:1, phần mang nghĩa)
@@ -463,8 +464,10 @@ def rules(row, tk, fams):
                             f"{mode}: {fmt(v)} < {fmt(need)} — thêm vùng bấm vô hình (khai hitArea)", None))
     if prop == "focus-width" and float(row.get("value", 0)) != 2:
         out.append(("Vòng focus 2px (foundations Mục 9)", f"{row['value']}px", {"token": "focus/width", "value": 2, "css": "2px"}))
-    if prop == "focus-offset" and float(row.get("value", 0)) != 2:
-        out.append(("Khe focus 2px (DEC-241)", f"{row['value']}px", {"token": "focus/offset", "value": 2, "css": "2px"}))
+    if prop == "focus-offset" and abs(float(row.get("value", 0))) != 2:  # -2 = vòng vào trong (DEC-339)
+        out.append(("Khe focus 2px (DEC-327, DEC-339)", f"{row['value']}px", {"token": "focus/offset", "value": 2, "css": "2px"}))
+    if prop == "focus-offset" and row.get("clipInset") is not None and float(row["clipInset"]) < 4 and float(row.get("value", 0)) > 0:
+        out.append(("Lề khung < 4 thì vòng vào trong (foundations Mục 9.6, DEC-339)", f"lề khung {row['clipInset']}, vòng ngoài", None))
     if prop == "shadow" and row.get("control") and row.get("value") not in (None, "", "none"):
         out.append(("Nút phẳng, không bóng (DEC-260)", str(row.get("value")), {"token": "không bóng", "value": "none", "css": "none"}))
     return out

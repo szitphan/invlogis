@@ -1,5 +1,5 @@
 /* DS v2 tokens — FILE SINH RA từ design-system/tokens.json bằng _scripts/ds-v2-tokens.py. KHÔNG sửa tay. */
-/* version 0.32.0 · 2026-11-02 */
+/* version 0.35.0 · 2026-11-03 */
 
 :root {
   /* Fonts (DEC-121) */
@@ -154,7 +154,9 @@
   --space-16: 16px;
   --space-20: 20px;
   --space-24: 24px;
+  --space-28: 28px;
   --space-32: 32px;
+  --space-36: 36px;
   --space-40: 40px;
   --space-48: 48px;
   --space-64: 64px;
@@ -162,6 +164,21 @@
   --space-96: 96px;
   --space-128: 128px;
   --space-160: 160px;
+  --space-192: 192px;
+  --space-224: 224px;
+  --space-256: 256px;
+  --space-320: 320px;
+  --space-384: 384px;
+  --space-480: 480px;
+  --space-560: 560px;
+  --space-640: 640px;
+  --space-720: 720px;
+  --space-768: 768px;
+  --space-1024: 1024px;
+  --space-1280: 1280px;
+  --space-1440: 1440px;
+  --space-1600: 1600px;
+  --space-1920: 1920px;
   --radius-0: 0;
   --radius-2: 2px;
   --radius-4: 4px;
@@ -648,6 +665,8 @@
   --space-xs: var(--space-4);
   --space-sm: var(--space-6);
   --space-md: var(--space-8);
+  --space-md-lg: var(--space-10);
+  --space-lg-xl: var(--space-14);
   --space-lg: var(--space-12);
   --space-xl: var(--space-16);
   --space-2xl: var(--space-20);
@@ -660,40 +679,42 @@
   --space-9xl: var(--space-96);
   --space-10xl: var(--space-128);
   --space-11xl: var(--space-160);
-  --container-padding-mobile: var(--space-16);
-  --container-padding-desktop: var(--space-32);
+  --container-padding-mobile: var(--space-xl);
+  --container-padding-desktop: var(--space-4xl);
   --container-max-width-desktop: var(--width-3xl);
   --grid-columns: 12;
-  --grid-gutter: var(--space-32);
+  --grid-gutter: var(--space-4xl);
   --grid-margin: var(--container-padding-desktop);
-  --layout-card-padding: var(--space-16);
-  --layout-list-gap: var(--space-8);
-  --layout-section-gap: var(--space-32);
-  --layout-title-gap: var(--space-16);
-  --layout-empty-padding: var(--space-80);
-  --form-field-gap: var(--space-16);
+  --layout-card-padding: var(--space-xl);
+  --layout-list-gap: var(--space-lg);
+  --layout-section-gap: var(--space-3xl);
+  --layout-title-gap: var(--space-xl);
+  --layout-empty-padding: var(--space-7xl);
+  --form-field-gap: var(--space-xl);
   --touch-min: 24px;
-  --control-height-sm: 28px;
+  --control-height-sm: var(--size-28);
   --control-height-md: 32px;
-  --control-height-ml: 36px;
+  --control-height-ml: var(--size-36);
   --control-height-lg: 40px;
-  --control-padding-x-sm: var(--space-8);
-  --control-padding-x-md: var(--space-12);
-  --control-padding-x-lg: var(--space-16);
-  --control-padding-x-icon-sm: var(--space-6);
-  --control-padding-x-icon-md: var(--space-8);
-  --control-padding-x-icon-lg: var(--space-12);
-  --control-icon-gap: var(--space-6);
-  --tab-padding-x: var(--space-8);
-  --tab-padding-x-icon: var(--space-6);
-  --tab-gap: var(--space-8);
+  --control-padding-x-sm: var(--space-md-lg);
+  --control-padding-x-md: var(--space-lg);
+  --control-padding-x-lg: var(--space-xl);
+  --control-padding-x-icon-sm: var(--space-md);
+  --control-padding-x-icon-md: var(--space-md-lg);
+  --control-padding-x-icon-lg: var(--space-lg-xl);
+  --control-icon-gap: var(--space-sm);
+  --control-label-inset: var(--space-xxs);
+  --tab-padding-x: var(--space-md);
+  --tab-padding-x-icon: var(--space-sm);
+  --tab-gap: var(--space-md);
   --nav-height: 64px;
-  --nav-offset-bottom: var(--space-8);
-  --nav-padding-x: var(--space-4);
-  --nav-item-padding-y: var(--space-4);
+  --nav-offset-bottom: var(--space-md);
+  --nav-padding-x: var(--space-xs);
+  --nav-item-padding-y: var(--space-xs);
   --nav-scan-size: 56px;
+  --nav-child-indent: var(--space-36);
   --chip-height-sm: 22px;
-  --chip-height-lg: 28px;
+  --chip-height-lg: var(--size-28);
   --chip-font-size-sm: var(--font-size-xs);
   --chip-line-height-sm: var(--line-height-xs);
   --chip-count-inset: 3px;
@@ -702,17 +723,18 @@
   --avatar-label-width: 240px;
   --avatar-label-subtitle-size: var(--font-size-xs);
   --avatar-label-subtitle-line-height: var(--line-height-xs-tight);
-  --chip-padding-x-sm: var(--space-10);
-  --chip-padding-x-lg: 14px;
-  --chip-padding-x-icon-lg: var(--space-10);
-  --avatar-size-md: 36px;
+  --chip-padding-x-sm: var(--space-md);
+  --chip-padding-x-md: var(--space-md-lg);
+  --chip-padding-x-lg: var(--space-lg);
+  --chip-padding-x-icon-lg: var(--space-md-lg);
+  --avatar-size-md: var(--size-36);
   --avatar-status-size-md: 10px;
   --avatar-size-xxl: 88px;
-  --avatar-status-size-xl: 14px;
-  --avatar-edit-size-xl: 28px;
-  --avatar-icon-size-sm: 14px;
-  --avatar-edit-icon-size-lg: 14px;
-  --avatar-spinner-size-xxl: 28px;
+  --avatar-status-size-xl: var(--size-14);
+  --avatar-edit-size-xl: var(--size-28);
+  --avatar-icon-size-sm: var(--size-14);
+  --avatar-edit-icon-size-lg: var(--size-14);
+  --avatar-spinner-size-xxl: var(--size-28);
   --avatar-group-overlap-sm: -6px;
   --avatar-group-overlap-md: -8px;
   --avatar-group-overlap-lg: -12px;
@@ -722,9 +744,13 @@
   --upload-disabled-opacity: 0.6;
   --upload-divider-width: 1px;
   --upload-app-tap-min-height: 72px;
-  --upload-required-gap: 3px;
-  --upload-compact-text-min-width: 150px;
-  --upload-meta-offset: 1px;
+  --upload-required-gap: var(--space-xxs);
+  --upload-compact-text-min-width: var(--size-11xl);
+  --upload-meta-offset: var(--space-xxs);
+  --list-row-padding-x: var(--space-md);
+  --list-row-padding-y: var(--space-md);
+  --list-row-gap: var(--space-md);
+  --card-action-gap: var(--space-md);
   --focus-width: 2px;
   --focus-offset: 2px;
   --type-display-size: var(--font-size-display-sm);
@@ -754,17 +780,12 @@
   --icon-size-chip: var(--size-14);
   --featured-icon-size: var(--size-6xl);
   --featured-icon-size-md: var(--size-5xl);
-  --featured-icon-size-compact: 36px;
+  --featured-icon-size-compact: var(--size-36);
   --featured-icon-size-xl: 56px;
   --field-border-width: 1px;
   --field-width-default: var(--width-xxs);
-  --field-edge-inset: var(--space-md);
-  --field-text-inset: var(--space-xs);
-  --field-content-gap: var(--space-xs);
-  --field-hint-inset: var(--space-none);
-  --field-label-max-width: 300px;
+  --field-label-max-width: 320px;
   --progress-width-default: var(--width-xxs);
-  --otp-cell-width: var(--size-5xl);
   --width-paragraph-max: var(--width-md);
   --size-none: var(--space-0);
   --size-xxs: var(--space-2);
@@ -776,7 +797,9 @@
   --size-xl: var(--space-16);
   --size-2xl: var(--space-20);
   --size-3xl: var(--space-24);
+  --size-28: var(--space-28);
   --size-4xl: var(--space-32);
+  --size-36: var(--space-36);
   --size-5xl: var(--space-40);
   --size-6xl: var(--space-48);
   --size-7xl: var(--space-64);
@@ -785,13 +808,10 @@
   --size-10xl: var(--space-128);
   --size-11xl: var(--space-160);
   --table-row-min-height: 52px;
-  --table-cell-padding-y: var(--space-xl);
-  --table-cell-padding-x: var(--space-3xl);
   --vehicle-q-sm-h: 100px;
   --vehicle-card-media-app-w: 140px;
   --vehicle-card-media-app-h: 88px;
   --vehicle-q-lg-w: 480px;
-  --notification-action-gap: var(--space-lg);
   --header-nav-height: 44px;
   --header-nav-account-menu-width: 256px;
   --breadcrumbs-current-max-width: 240px;
@@ -808,6 +828,7 @@
   --type-display-md-line-height: var(--line-height-display-md);
   --type-body-lg-size: var(--font-size-md);
   --type-body-lg-line-height: var(--line-height-md);
+  --otp-cell-width: var(--size-5xl);
 }
 
 /* Platform — Mobile (DEC-114, DEC-132…138) */
@@ -836,6 +857,8 @@
   --space-xs: var(--space-4);
   --space-sm: var(--space-6);
   --space-md: var(--space-8);
+  --space-md-lg: var(--space-10);
+  --space-lg-xl: var(--space-14);
   --space-lg: var(--space-12);
   --space-xl: var(--space-16);
   --space-2xl: var(--space-20);
@@ -848,40 +871,42 @@
   --space-9xl: var(--space-96);
   --space-10xl: var(--space-128);
   --space-11xl: var(--space-160);
-  --container-padding-mobile: var(--space-16);
-  --container-padding-desktop: var(--space-32);
+  --container-padding-mobile: var(--space-xl);
+  --container-padding-desktop: var(--space-4xl);
   --container-max-width-desktop: var(--width-3xl);
   --grid-columns: 4;
-  --grid-gutter: var(--space-16);
+  --grid-gutter: var(--space-xl);
   --grid-margin: var(--container-padding-mobile);
-  --layout-card-padding: var(--space-16);
-  --layout-list-gap: var(--space-12);
-  --layout-section-gap: var(--space-24);
-  --layout-title-gap: var(--space-16);
-  --layout-empty-padding: var(--space-64);
-  --form-field-gap: var(--space-12);
+  --layout-card-padding: var(--space-xl);
+  --layout-list-gap: var(--space-lg);
+  --layout-section-gap: var(--space-3xl);
+  --layout-title-gap: var(--space-xl);
+  --layout-empty-padding: var(--space-7xl);
+  --form-field-gap: var(--space-xl);
   --touch-min: 44px;
-  --control-height-sm: 36px;
-  --control-height-md: 42px;
-  --control-height-ml: 42px;
+  --control-height-sm: var(--size-36);
+  --control-height-md: 44px;
+  --control-height-ml: 44px;
   --control-height-lg: 52px;
-  --control-padding-x-sm: var(--space-12);
-  --control-padding-x-md: var(--space-16);
-  --control-padding-x-lg: var(--space-24);
-  --control-padding-x-icon-sm: var(--space-8);
-  --control-padding-x-icon-md: var(--space-12);
-  --control-padding-x-icon-lg: var(--space-20);
-  --control-icon-gap: var(--space-8);
-  --tab-padding-x: var(--space-16);
-  --tab-padding-x-icon: var(--space-12);
-  --tab-gap: var(--space-8);
+  --control-padding-x-sm: var(--space-lg);
+  --control-padding-x-md: var(--space-xl);
+  --control-padding-x-lg: var(--space-3xl);
+  --control-padding-x-icon-sm: var(--space-md);
+  --control-padding-x-icon-md: var(--space-lg);
+  --control-padding-x-icon-lg: var(--space-2xl);
+  --control-icon-gap: var(--space-md);
+  --control-label-inset: var(--space-xs);
+  --tab-padding-x: var(--space-xl);
+  --tab-padding-x-icon: var(--space-lg);
+  --tab-gap: var(--space-md);
   --nav-height: 64px;
-  --nav-offset-bottom: var(--space-8);
-  --nav-padding-x: var(--space-4);
-  --nav-item-padding-y: var(--space-4);
+  --nav-offset-bottom: var(--space-md);
+  --nav-padding-x: var(--space-xs);
+  --nav-item-padding-y: var(--space-xs);
   --nav-scan-size: 56px;
+  --nav-child-indent: var(--space-36);
   --chip-height-sm: 22px;
-  --chip-height-lg: 28px;
+  --chip-height-lg: var(--size-28);
   --chip-font-size-sm: var(--font-size-xs);
   --chip-line-height-sm: var(--line-height-xs);
   --chip-count-inset: 3px;
@@ -890,17 +915,18 @@
   --avatar-label-width: 240px;
   --avatar-label-subtitle-size: var(--font-size-xs);
   --avatar-label-subtitle-line-height: var(--line-height-xs-tight);
-  --chip-padding-x-sm: var(--space-10);
-  --chip-padding-x-lg: 14px;
-  --chip-padding-x-icon-lg: var(--space-10);
-  --avatar-size-md: 36px;
+  --chip-padding-x-sm: var(--space-md);
+  --chip-padding-x-md: var(--space-md-lg);
+  --chip-padding-x-lg: var(--space-lg);
+  --chip-padding-x-icon-lg: var(--space-md-lg);
+  --avatar-size-md: var(--size-36);
   --avatar-status-size-md: 10px;
   --avatar-size-xxl: 88px;
-  --avatar-status-size-xl: 14px;
-  --avatar-edit-size-xl: 28px;
-  --avatar-icon-size-sm: 14px;
-  --avatar-edit-icon-size-lg: 14px;
-  --avatar-spinner-size-xxl: 28px;
+  --avatar-status-size-xl: var(--size-14);
+  --avatar-edit-size-xl: var(--size-28);
+  --avatar-icon-size-sm: var(--size-14);
+  --avatar-edit-icon-size-lg: var(--size-14);
+  --avatar-spinner-size-xxl: var(--size-28);
   --avatar-group-overlap-sm: -6px;
   --avatar-group-overlap-md: -8px;
   --avatar-group-overlap-lg: -12px;
@@ -910,9 +936,13 @@
   --upload-disabled-opacity: 0.6;
   --upload-divider-width: 1px;
   --upload-app-tap-min-height: 72px;
-  --upload-required-gap: 3px;
-  --upload-compact-text-min-width: 150px;
-  --upload-meta-offset: 1px;
+  --upload-required-gap: var(--space-xxs);
+  --upload-compact-text-min-width: var(--size-11xl);
+  --upload-meta-offset: var(--space-xxs);
+  --list-row-padding-x: var(--space-lg);
+  --list-row-padding-y: var(--space-lg);
+  --list-row-gap: var(--space-lg);
+  --card-action-gap: var(--space-lg);
   --focus-width: 2px;
   --focus-offset: 2px;
   --type-display-size: var(--font-size-display-sm);
@@ -942,17 +972,12 @@
   --icon-size-chip: var(--size-14);
   --featured-icon-size: var(--size-6xl);
   --featured-icon-size-md: var(--size-5xl);
-  --featured-icon-size-compact: 36px;
+  --featured-icon-size-compact: var(--size-36);
   --featured-icon-size-xl: 56px;
   --field-border-width: 1px;
   --field-width-default: 100%;
-  --field-edge-inset: var(--space-xl);
-  --field-text-inset: var(--space-none);
-  --field-content-gap: var(--space-xl);
-  --field-hint-inset: var(--space-xl);
-  --field-label-max-width: 300px;
+  --field-label-max-width: 320px;
   --progress-width-default: 100%;
-  --otp-cell-width: var(--size-6xl);
   --width-paragraph-max: var(--width-md);
   --size-none: var(--space-0);
   --size-xxs: var(--space-2);
@@ -964,7 +989,9 @@
   --size-xl: var(--space-16);
   --size-2xl: var(--space-20);
   --size-3xl: var(--space-24);
+  --size-28: var(--space-28);
   --size-4xl: var(--space-32);
+  --size-36: var(--space-36);
   --size-5xl: var(--space-40);
   --size-6xl: var(--space-48);
   --size-7xl: var(--space-64);
@@ -973,13 +1000,10 @@
   --size-10xl: var(--space-128);
   --size-11xl: var(--space-160);
   --table-row-min-height: 52px;
-  --table-cell-padding-y: var(--space-lg);
-  --table-cell-padding-x: var(--space-xl);
   --vehicle-q-sm-h: 100px;
   --vehicle-card-media-app-w: 140px;
   --vehicle-card-media-app-h: 88px;
   --vehicle-q-lg-w: 480px;
-  --notification-action-gap: var(--space-3xl);
   --header-nav-height: 56px;
   --header-nav-account-menu-width: 256px;
   --breadcrumbs-current-max-width: 240px;
@@ -996,7 +1020,11 @@
   --type-display-md-line-height: var(--line-height-display-md);
   --type-body-lg-size: var(--font-size-md);
   --type-body-lg-line-height: var(--line-height-md);
+  --otp-cell-width: var(--size-6xl);
 }
+
+/* Con trỏ thô (DEC-339): vùng bấm vô hình theo sàn app, nút nhìn giữ nguyên. Chưa kiểm trên máy thật */
+@media (pointer: coarse) { :root, [data-platform="web"] { --touch-min: 44px; } }
 
 /* Brand — Than chì (mặc định) · DEC-167, DEC-168 */
 :root, [data-brand="than-chi"] {
@@ -1214,3 +1242,7 @@
 .prose hr { border: 0; border-top: 1px solid var(--color-border-secondary); }
 .prose blockquote { margin: 0; font: 500 var(--type-title-2-size)/var(--type-title-2-line-height) var(--font-body); color: var(--color-text-primary); }
 .prose code { font: 700 var(--type-body-size)/var(--type-body-line-height) var(--font-code); background: var(--color-bg-secondary); box-shadow: inset 0 0 0 1px var(--color-border-secondary); border-radius: 6px; padding: 0 4px; }
+
+/* Vùng bấm vô hình (DEC-339): tâm trùng phần bấm, cạnh ngắn nhất bằng touch/min; khung overflow:hidden sẽ cắt */
+:where(.touch-target) { position: relative; }
+.touch-target::after { content: ""; position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; min-width: var(--touch-min); min-height: var(--touch-min); transform: translate(-50%, -50%); }
