@@ -26,7 +26,7 @@ updated: 2026-11-03
 | UC-share-report | Chia sẻ báo cáo | Quản lý | 052 | 2.2, 2.4, 2.5 | E-010, E-013 | — |
 | UC-ask-data | Hỏi dữ liệu bằng lời | Quản lý | 020 | 2.3, 2.7 | E-012, E-015 | OQ-13 |
 | UC-manage-contact | Quản lý liên hệ | Administrator | 038, 063 | 5.1, 5.10 | E-006, E-024 | OQ-8 |
-| UC-book-vehicle | Đặt xe dùng chung | Administrator, Operator | 043, 066, 067 | 5.4, 5.11, 5.12, 5.13 | E-028, E-029 | OQ-12 |
+| UC-book-vehicle | Đặt xe dùng chung | Administrator, Operator, người duyệt | 043, 066–071 | 5.4, 5.11–5.20 | E-028–E-033 | OQ-12, OQ-22, OQ-23 |
 | UC-add-vehicle | Thêm xe trong hạn mức | Administrator | 023, 039, 041 | 5.2 | E-003, E-004 | OQ-12, OQ-15 |
 
 Số FR, lỗi viết tắt, đầy đủ có tiền tố `fleetio-saas-platform`.
@@ -207,9 +207,12 @@ Xem Flow 3. Bộ đếm Get Started đổi theo việc đã làm và có khi đ�
 | 1 | Administrator tạo Motor Pool | Name, Groups, Vehicle Types, Vehicle Statuses; tuỳ chọn tính phí, bắt buộc lý do, tự duyệt |
 | 2 | Add Vehicle Reservation, chọn pool | Hiện Vehicle Types của pool, không chọn xe cụ thể |
 | 3 | Chọn Operator, nhập lý do, Pick Up, Drop Off | Chỉ liệt kê liên hệ có đăng nhập và là Operator |
-| 4 | Submit Reservation | Chưa kiểm: chưa tạo được đặt xe nào |
+| 4 | Submit Reservation | Requested, Vehicle trống; đủ điều kiện cửa sổ thì tự Approved, tự gán xe |
+| 5 | Người duyệt Approve, chọn xe | Approved, sinh phân công "Future" |
+| 6 | Check Out, nhập Start Meter | Checked Out, ghi Checked Out At |
+| 7 | Complete, nhập End Meter | Completed, Line Items theo giờ, ngày, km, phí cố định; đồng hồ xe lên End Meter |
 
-**Nhánh:** 3a Không có Operator hợp lệ: "No options" (E-028). 4a Thiếu dữ liệu: "Failed to create Reservation" (E-029). Duyệt, gán xe, tính phí, tự duyệt chưa chạy.
+**Nhánh:** 3a Không có Operator hợp lệ: "No options" (E-028). 4a Thiếu dữ liệu: "Failed to create Reservation" (E-029). 4b Lệch múi giờ, trùng lịch, trả ngoài cửa sổ: Requested, không báo lý do (E-033). 5a Xe trùng lịch: xám, tooltip nêu giờ trùng. 5b Deny, Cancel: bắt buộc lý do; Cancel sau Approved xoá phân công. 6a Check Out sớm: đồng hồ đề ngày tương lai (E-031). 7a Return khi ngày hẹn ở tương lai: lỗi 422 (E-030), nguyên nhân chưa xác nhận.
 
 ## UC-add-vehicle — Thêm xe trong hạn mức
 

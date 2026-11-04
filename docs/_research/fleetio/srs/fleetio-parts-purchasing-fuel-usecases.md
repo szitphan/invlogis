@@ -11,7 +11,7 @@ updated: 2026-11-03
 | UC | Tên | Actor | FR | Màn | Lỗi | OQ |
 |---|---|---|---|---|---|---|
 | UC-manage-part | Khai phụ tùng và kho | Nhân viên kho | 001, 002, 008, 026, 044 | 1.1 | E-002, E-006, E-024 | OQ-2, OQ-11, OQ-16, OQ-19, OQ-23 |
-| UC-change-valuation | Đổi phương pháp tính giá tồn | Quản trị tài khoản | 008, 045 | 1.8 | E-035 | OQ-2, OQ-11 |
+| UC-change-valuation | Đổi phương pháp tính giá tồn | Quản trị tài khoản | 008, 045 | 1.8 | E-035, E-036 | OQ-2, OQ-11, OQ-28 |
 | UC-adjust-stock | Điều chỉnh, chuyển kho | Nhân viên kho | 003–007 | 1.1, 1.2, 1.3, 1.4, 1.5 | E-007, E-008, E-031 | — |
 | UC-bulk-count | Kiểm kê hàng loạt | Nhân viên kho | 025, 041 | 1.6, 1.7 | E-010, E-029 | — |
 | UC-create-po | Lập và duyệt đơn | Người lập, Người duyệt | 009–011, 030–032, 039 | 2.1, 2.3, 2.11 | E-001, E-011, E-012, E-026 | OQ-3, OQ-8, OQ-20, OQ-25 |
@@ -47,7 +47,7 @@ Bước 1, 2 `Chạy`; bước 3 trở đi theo câu chữ màn, chưa chạy.
 | 3 | Dọn dữ liệu, tích ô nhận thức | Activate mở khi đủ điều kiện |
 | 4 | Activate | Tồn nhận giá Unit Cost, tồn Archived về 0 |
 
-**Nhánh:** 2a Tải lại trang: vẫn Static Pricing. 3a Thiếu Unit Cost, còn lệnh dở: E-fleetio-parts-purchasing-fuel-035. 4a FIFO, LIFO: dòng phụ tùng lệnh cũ không sửa được nữa. 4b Đổi lại: câu chữ ghi không đảo được, chưa kiểm chứng.
+**Nhánh:** 2a Tải lại trang: vẫn Static Pricing. 3a Thiếu Unit Cost, còn lệnh dở: E-fleetio-parts-purchasing-fuel-035. 3b Lệnh dở không hoàn thành được vì dòng công: E-fleetio-parts-purchasing-fuel-036, chặn cả việc đổi (K40, K43). 4a FIFO, LIFO: dòng phụ tùng lệnh cũ không sửa được nữa. 4b Đổi lại: câu chữ ghi không đảo được, chưa kiểm chứng.
 
 ## UC-adjust-stock — Điều chỉnh, chuyển kho
 

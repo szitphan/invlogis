@@ -332,6 +332,6 @@ Không có ảnh: nhật ký không lưu vì có địa chỉ tài khoản. Bả
 | 4 | Static Pricing | Radio | Chọn một | Đang áp dụng, chưa đổi. "The Unit Cost on each part is set manually and will not automatically change based on inventory adjustments or purchase orders. Part Unit Cost is the default price applied when the part is added to Work Orders." |
 | 5 | Khối cảnh báo | Chữ | — | "IMPORTANT INFORMATION ABOUT CHOOSING A NEW INVENTORY VALUATION METHOD": không đổi được theo dõi tồn của phụ tùng đã dùng trên lệnh; dòng phụ tùng lệnh cũ "permanently uneditable"; "Archived part quantities will be reset to 0" (K32, K34) |
 | 6 | Điều kiện Unit Cost | Chữ, liên kết | — | "REQUIREMENTS TO ACTIVATE...". Unit Cost từ ₫1, không số lẻ; "2 part(s)", "Download the CSV", "Parts Import" (K35, E-035) |
-| 7 | Điều kiện lệnh dở | Chữ, liên kết | — | "3 Work Order(s)", "list of incomplete Work Orders"; còn lệnh dở thì migration thất bại (K36, E-035) |
+| 7 | Điều kiện lệnh dở | Chữ, liên kết | — | "3 Work Order(s)", "list of incomplete Work Orders"; còn lệnh dở thì migration thất bại (K36, E-035). Link lọc lệnh chưa xong có dòng phụ tùng, mở tab mới (K39) |
 | 8 | Ô tích nhận thức | Ô tick | Bật, tắt | "I am aware the change I am about to make is permanent and can not be reversed". Chưa tích |
 | 9 | Activate | Nút | — | Xám. Không bấm (K37). Không có nút Save, không có xem thử |

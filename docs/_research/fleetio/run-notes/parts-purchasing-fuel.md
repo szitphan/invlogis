@@ -351,3 +351,33 @@ Trả lời câu hỏi mở nào: OQ-11 một phần (từ câu chữ màn hình
 Dữ liệu TEST đã tạo: không. Cài đặt: cũ Static Pricing, không đổi, đã đọc lại sau tải trang.
 Giải pháp đáng học: đổi phương pháp là migration một chiều có điều kiện chặn trước (đủ giá, hết lệnh dở) và ô tích nhận thức; ép người dùng dọn dữ liệu trước khi đổi. Điểm yếu: không xem thử, không đảo được, nên chọn sai là kẹt; với Delta nên chốt phương pháp cùng kế toán trước go-live.
 Việc chờ user quyết: có chấp nhận đổi một chiều trên tài khoản thử không, và chọn 1 trong 3 phương pháp nào. Chỉ đo được phương pháp đã chọn.
+
+# Lượt 6 (03/11)
+
+User duyệt đổi sang FIFO một chiều. Giá trị cũ: Static Pricing.
+
+## Đổi sang FIFO (FR-008) — Không chạy: Lệnh #103 chặn, dừng trước Activate theo brief
+KHÔNG tích ô xác nhận, KHÔNG bấm Activate. Tải lại trang: `static=true`, các phương pháp khác `false`. Không đo được giá xuất, trả về kho, sửa dòng lệnh cũ, bật tắt theo dõi tồn, giá trị tồn sau đổi, báo cáo.
+
+Điều kiện đọc được từ 2 link trên hộp cảnh báo:
+| Điều kiện | Bản ghi thật | TEST hay Sample | Làm được không |
+|---|---|---|---|
+| "2 part(s)" thiếu Unit Cost (lọc: thiếu giá + có theo dõi tồn) | TEST-KHO-PT-B (tồn 8), TEST-NHAC-PT (tồn 7) | TEST | Làm được, chưa điền vì dừng |
+| "3 Work Order(s)" chưa xong và có dòng phụ tùng (lọc `parts_id_not_null`, `completed = false`) | #100 TEST-XE-01 (180.000.000 ₫), #102 TEST-KHO-01 (15.000.000 ₫), #103 TEST-SUA-01 (30.006.550 ₫) | Lệnh TEST | #100, #102 chưa thử, chưa đụng. **#103 kẹt** |
+
+Lệnh #103 vì sao kẹt, đo lần này: dòng công Abraham McGlynn là contact Sample. Đổi sang Completed: "Please edit and fix the following errors: Started At can't be blank", "Work Order Labor Line Items is invalid". Trong form Edit, nút bút chì dòng công xám, không sửa được. Lối còn lại là bấm xoá dòng công (có nút "Remove labor line item" trong form, chưa bấm); brief cấm xoá nên dừng. Đã Cancel form, không lưu gì trên #103.
+
+Chụp giá trước khi đổi (Static, danh sách phụ tùng TEST):
+| Phụ tùng | Tổng tồn | Unit Cost |
+|---|---|---|
+| TEST-BRAKE-PAD-01 | 3 | 300.000 ₫ |
+| TEST-KHO-PT-A | 130,5 | 100.000 ₫ |
+| TEST-KHO-PT-B | 8 | trống |
+| TEST-LOP-MODEL-01 | không theo dõi | 3.000.000 ₫ |
+| TEST-NHAC-PT | 7 | trống |
+
+Kết quả thấy được khác: Lệnh không có dòng phụ tùng không tính vào điều kiện: #111 không có dòng phụ tùng, số trước và sau khi đóng đều 3, đúng câu "incomplete Work Orders with part line items". 2 link mở ở tab mới. Riêng trong lệnh: dòng phụ tùng 2 và 3 của #103 có Part Location "None".
+Bất ngờ: một lần chọn contact Sample vào dòng công của lệnh thật có thể chặn đổi phương pháp giá cho cả tài khoản, chỉ gỡ được bằng xoá dòng.
+Trả lời câu hỏi mở nào: OQ-11 thêm phần điều kiện cụ thể; phần đo giá xuất vẫn mở.
+Dữ liệu TEST đã tạo: không. Không điền Unit Cost, không đóng #100, #102.
+Việc chờ user quyết: cho xoá dòng công Abraham McGlynn trên #103 (lệnh TEST) hay không. Có thì làm tiếp được: điền 2 Unit Cost, đóng 3 lệnh, Activate FIFO.

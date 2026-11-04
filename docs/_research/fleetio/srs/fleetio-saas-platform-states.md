@@ -207,6 +207,47 @@ stateDiagram-v2
 | No Access | Enable Access to Fleetio | Access | Không lưu, không mời người trong lượt chạy | Form hiện Email, Delay email invitation, Message; Role * mặc định Fleet Manager; Record Sets đều mặc định Full Access; thư mời gửi ngay theo câu trên màn | "This Contact will be enabled as a User..." · "An email invitation with instructions to create a password will be sent immediately." | `Xem` |
 | Access | Chọn No Access | No Access | Không có bằng chứng thao tác | Chưa biết | Không có | `Suy` |
 
+## Đặt xe (Reservation)
+
+```mermaid
+stateDiagram-v2
+    [*] --> Requested: Tạo, không đủ điều kiện tự duyệt
+    [*] --> Approved: Tự duyệt, tự gán xe
+    Requested --> Approved: Approve, chọn xe
+    Requested --> Denied: Deny, có lý do
+    Requested --> Canceled: Cancel, có lý do
+    Approved --> CheckedOut: Check Out, ghi Start Meter
+    Approved --> Canceled: Cancel, xoá phân công
+    CheckedOut --> Completed: Complete, khi quá giờ hẹn
+    CheckedOut --> Returned: Return, lỗi 422, chưa đạt
+    Returned --> Completed: Theo câu trên hộp, chưa chạy
+    Completed --> [*]
+    Denied --> [*]
+    Canceled --> [*]
+```
+
+| Trạng thái | Hành động | Sang | Điều kiện | Hiệu ứng | Câu chữ | Mức |
+|---|---|---|---|---|---|---|
+| Chưa có | Submit, đủ dữ liệu | Requested | Operator có đăng nhập và là Operator | Vehicle trống; không phân công; không chặn Archive xe | "Reservation was created successfully" | `Chạy` |
+| Chưa có | Submit, đủ 3 điều kiện tự duyệt | Approved | Giờ lấy, giờ trả trong cửa sổ, không trùng phân công | Tự gán xe, tính phí nếu pool bật | Toast vẫn "Reservation was created successfully" | `Chạy` |
+| Chưa có | Submit thiếu dữ liệu | Không tạo | E-029 | Không tạo bản ghi | "Failed to create Reservation" | `Chạy` |
+| Requested | Approve | Approved | Vehicle bắt buộc; xe trùng lịch xám | Sinh phân công "Future"; xe xám ở đặt khác trùng giờ; chặn Archive xe | "Reservation was approved successfully" | `Chạy` |
+| Requested | Deny | Denied | "Denied Reason *" | Hiện Denied Reason, mất Edit; không hiệu ứng khác | Không có | `Chạy` |
+| Requested | Cancel | Canceled | "Canceled Reason *" | Mất Edit | "Reservation was canceled successfully" | `Chạy` |
+| Requested | Edit | Requested | Status chỉ đọc | Sửa Operator, Pool, Vehicle Types, Reason, ngày | Không có | `Chạy` |
+| Approved | Edit | Approved | Không có | Thêm Vehicle, Start Meter, End Meter, Charges, Add Flat Fee; đổi ngày thì tính lại | "Charges have been recalculated based on updates to the reservation. Saving will replace the previously saved values." | `Chạy` |
+| Approved | Check Out | Checked Out | Được trước ngày hẹn; nhập Start Meter | Ghi Checked Out At; Pick Up giữ nguyên; phân công vẫn "Future"; đồng hồ đề theo ngày hẹn (E-031) | "Reservation was checked out successfully" | `Chạy` |
+| Approved | Cancel | Canceled | Có lý do | Xoá phân công | Không có | `Chạy` |
+| Approved | Email Invoice, Print | Giữ nguyên | Trong menu | Chưa bấm | Không có | Không chạy |
+| Checked Out | Return, ngày hẹn còn ở tương lai | Checked Out | 3 lần, có và không có End Meter | Lỗi 422 không lý do (E-030); nguyên nhân chưa xác nhận (OQ-22) | "Failed to return Reservation" | `Chạy` |
+| Checked Out | Complete | Completed | Quá giờ hẹn: mục đầu menu đổi thành Complete | Drop Off tự đổi, ghi Returned At; phân công thành lịch sử; đồng hồ xe lên End Meter; hết chặn Archive xe; tính phí km | "Reservation was completed successfully" | `Chạy` |
+| Checked Out | Edit, dời Pick Up trước số đồng hồ đã có | Checked Out | Bị chặn (E-032) | Không lưu | "must be less than 100 or marked as void" | `Chạy` |
+| Checked Out | Cancel | Chưa biết | Có trong menu | Chưa thành (OQ-23) | Không có | Không chạy |
+| Returned | Không đạt tới | Completed theo câu trên hộp | Chưa từng đạt | Chưa biết | "From Returned, the reservation can only be moved to Completed." | Không chạy |
+| Completed | Edit, menu "..." | Chưa biết | Vẫn còn Edit; menu chưa đọc | Chưa biết | Không có | `Chạy` thấy nút |
+| Denied | Menu "..." | Chưa biết | Mất Edit; menu chưa đọc | Không hiệu ứng | Không có | `Chạy` |
+| Canceled | View Record History | Giữ nguyên | Chỉ còn mục này | Không có | Không có | `Chạy` |
+
 ## Webhook
 
 ```mermaid
@@ -230,7 +271,6 @@ Không vẽ sơ đồ vì chưa có bằng chứng về chuyển trạng thái; 
 | Đối tượng | Giá trị đọc được | Vì sao chưa có chuyển | Mức |
 |---|---|---|---|
 | Recall | Tab All, Needs Action, Open, Resolved, Acknowledged; menu dòng Acknowledge, Create Issue, Check VIN | Toàn dòng Sample, không đổi; Needs Action đọc 261 rồi 285 (OQ-21) | `Xem` |
-| Đặt xe Motor Pool | Có cột Status, giá trị chưa thấy; quyền check_out, return, cancel; báo cáo có Reservation Status, Approved At, Completed At | Danh sách rỗng; lượt 5 có pool nhưng Submit bị từ chối vì không có Operator hợp lệ (E-029), chưa có đặt xe nào để thấy chuyển (OQ-12) | `Xem` |
 | API key | Status; "Once a key has been revoked it cannot be reactivated." | Không tạo khoá | `Xem` |
 | Thông báo | Inbox, Archived; Archive all | Chưa bấm Archive | `Xem` |
 | Tài liệu | Auto-Delete: xoá cuối ngày đã chọn | Không đặt | `Xem` |

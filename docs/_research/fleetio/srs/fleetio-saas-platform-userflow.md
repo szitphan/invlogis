@@ -8,7 +8,7 @@ updated: 2026-11-03
 
 # Nền tảng SaaS — User flow
 
-`stage` ghi theo lựa chọn của user: tự chốt, xem ở bản cuối (02/11/2026). Các màn số 2.2 trở đi và 3.2 trở đi thêm sau lượt chạy 03/11/2026, chưa qua duyệt. Các màn 2.6 đến 2.9, 3.10 đến 3.12, 4.4, 5.6 đến 5.11 thêm từ lượt 3; 2.10 từ lượt 4; 5.12, 5.13 từ lượt 5.
+`stage` ghi theo lựa chọn của user: tự chốt, xem ở bản cuối (02/11/2026). Các màn số 2.2 trở đi và 3.2 trở đi thêm sau lượt chạy 03/11/2026, chưa qua duyệt. Các màn 2.6 đến 2.9, 3.10 đến 3.12, 4.4, 5.6 đến 5.11 thêm từ lượt 3; 2.10 từ lượt 4; 5.12, 5.13 từ lượt 5; 5.14 đến 5.20 từ lượt 6.
 
 ## 1. Sơ đồ tổng
 
@@ -41,6 +41,13 @@ flowchart TD
     l11["5.11 Form đặt xe"]
     l12["5.12 Thêm nhóm xe dùng chung"]
     l13["5.13 Lỗi form đặt xe"]
+    l14["5.14 Đặt xe chờ duyệt"]
+    l15["5.15 Hộp duyệt đặt xe"]
+    l16["5.16 Đặt xe đã duyệt"]
+    l17["5.17 Đặt xe tự duyệt kèm phí"]
+    l18["5.18 Phí nhiều ngày, phí cố định"]
+    l19["5.19 Xe trùng lịch khi duyệt"]
+    l20["5.20 Đặt xe hoàn tất"]
     e10["E-010 Lối thu hồi trong hộp không tác dụng"]
     e12["E-012 Số sai không báo lỗi"]
     e13["E-013 Link công khai sinh ngay"]
@@ -160,6 +167,17 @@ flowchart TD
     l12 -->|"Lưu"| z
     l11 -->|"Gửi khi thiếu dữ liệu"| l13
     l13 -.->|"Huỷ"| l4
+    l11 -->|"Gửi, cần duyệt"| l14
+    l11 -->|"Gửi, đủ điều kiện tự duyệt"| l17
+    l14 -->|"Duyệt"| l15
+    l15 -->|"Chọn xe, duyệt"| l16
+    l15 -->|"Xe trùng lịch"| l19
+    l19 -.->|"Huỷ"| l14
+    l14 -->|"Từ chối hoặc huỷ"| z
+    l16 -->|"Giao xe, hoàn tất"| l20
+    l17 -->|"Sửa ngày, thêm phí"| l18
+    l18 -->|"Giao xe, hoàn tất"| l20
+    l20 -->|"Kết thúc"| z
 ```
 
 Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221842`, chưa có các màn thêm sau 03/11/2026. Đường liền là luồng thường, nét đứt là quay lại. Màn 2.8, 2.9, 2.10, 4.4, 5.9, 5.10, 5.11 không có ảnh, mô tả ở Mục 13 của spec.
@@ -208,3 +226,10 @@ Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221842`, chưa 
 | 5.11 | Form đặt xe | vehicle-reservation-form | Mới | Không có ảnh |
 | 5.12 | Thêm nhóm xe dùng chung | motor-pool-add | Mới | Có |
 | 5.13 | Lỗi form đặt xe | reservation-validation | Load error | Có |
+| 5.14 | Đặt xe chờ duyệt | reservation-detail-requested | Requested | Có |
+| 5.15 | Hộp duyệt đặt xe | reservation-approve-dialog | Mở hộp | Có |
+| 5.16 | Đặt xe đã duyệt | reservation-detail-approved | Approved | Có |
+| 5.17 | Đặt xe tự duyệt kèm phí | reservation-auto-approved-charges | Approved | Có |
+| 5.18 | Phí nhiều ngày, phí cố định | reservation-charges-flat-fee | Approved | Có |
+| 5.19 | Xe trùng lịch khi duyệt | reservation-vehicle-overlap | Mở hộp | Có |
+| 5.20 | Đặt xe hoàn tất | reservation-completed | Completed | Có |

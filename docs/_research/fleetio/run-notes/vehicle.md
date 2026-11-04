@@ -325,3 +325,23 @@ Dữ liệu TEST đã tạo: TEST-DAUKEO-2 có đồng hồ phụ; hiện 2.500 
 - Archive khi có đặt Motor Pool (FR-021): cần tạo Motor Pool trong Settings; gói đầy nên cũng không có xe riêng để thử. Câu chặn vẫn chỉ đọc.
 - Nhóm mới (FR-025): tạo Group là danh mục dùng chung; Export Data thuộc xuất dữ liệu. Không làm.
 - "Kể cả số GPS" khi đổi đồng hồ (FR-016): cần tích hợp GPS, brief cấm.
+
+# Lượt 6 (03/11)
+
+## Archive xe có đặt chỗ đang hiệu lực — Chạy (FR-021)
+Trước khi thử: TEST-DAUKEO-2 Active, Group 11/05/2026, Operator Unassigned, 2.500 km, 30 hr; không có liên kết (nên phần "liên kết bị ngắt" của lần từ chối KHÔNG đo được ở ca này); Lệnh #111 đã Completed (Service Entry #57909383); đặt xe #1 và #3 Approved trên xe này, #2 Requested chưa gán xe, #4 Denied, #5 Canceled; 2 phân công "Future" của Bảo Tín do duyệt đặt xe tự sinh (11/10 đến 11/12; 11/23 đến 11/25).
+Hộp "Confirm Vehicle Archive": "Vehicles with incomplete Work Orders cannot be archived." và "Vehicles with active Motor Pool reservations cannot be archived. Please complete any active reservations before you proceed."
+
+| Case | Điều kiện | Kết quả thật |
+|---|---|---|
+| Lần 1 | #111 đã đóng; #1, #3 Approved; #2 Requested | Toast "Vehicle could not be archived." không nêu lý do. Xe vẫn Active. Sau đó: 2 phân công "Future" còn nguyên, 5 đặt xe không đổi. **Không ai trong 5 sự cố Open chặn ở lần 2 bên dưới** |
+| Lần 2, đối chứng | #3 Completed, #1 Canceled, chỉ còn #2 Requested (chưa gán xe), xe vẫn 5 sự cố Open | "Successfully archived TEST-DAUKEO-2. Associated records will be updated in the background so allow a few minutes for your account to reflect these changes." Trang xe: "This record is archived.", nút Restore |
+| Requested khi xe đã Archive | #2 vẫn "Requested", không tự huỷ, không báo. Hộp Approve: ô Vehicle "No options", không duyệt được | |
+| Restore | Gói còn chỗ sau khi Archive | Bấm là chạy, "Record successfully restored!". Xe Active, 2.560 km, 30 hr, nhóm 11/05/2026 giữ nguyên; lịch sử phân công đã xong của #3 còn |
+
+Kết luận: đặt xe Approved chặn Archive; Requested không chặn. Chỉ thử Approved và Requested; **Checked Out chưa thử Archive riêng**, vì lúc đó #1 Approved vẫn còn nên không tách được. Hủy Approved xoá phân công Future (2 dòng còn 1 dòng lịch sử của #3).
+Bất ngờ: toast từ chối không nói lý do dù hộp xác nhận liệt kê 2 điều kiện. Câu hộp "active reservations" không nói rõ Requested có tính hay không; thực tế không tính.
+Chưa đo: lần từ chối có ngắt liên kết không. Xe không có liên kết, brief không yêu cầu nối thêm.
+Trả lời câu hỏi mở nào: OQ-11 nhóm Xe phần Archive khi có đặt xe.
+Dữ liệu TEST đã tạo: Lệnh #111 Completed, Service Entry #57909383 (tự sinh). Xe TEST-DAUKEO-2 đồng hồ từ 2.500 lên 2.560 km do đặt xe #3. Cuối lượt: Active, No Group, Unassigned, không Archive; gói vẫn 5/5.
+Giải pháp đáng học: đặt xe sinh phân công thật nên trùng lịch và Archive dùng chung một kiểm tra. Điểm yếu: đặt xe Requested bị bỏ quên khi xe rời nhóm, không ai được báo.

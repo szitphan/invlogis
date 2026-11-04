@@ -101,7 +101,7 @@ Mức từng chức năng ở [danh sách chức năng](fleetio-function-list.md
 |---|---|---|
 | Sửa chữa | Đưa ra xưởng ngoài, Get Service at Shop | Shop Network chuyển sang Fleetio Pay, Access Denied; web không có bấm giờ công; đầu kéo, mooc là `Suy` vì nhóm này chỉ chạy xe Car |
 | Nhắc, kiểm tra | Ca Location Exception bật thật, lịch Overdue, Skipped, chụp webcam, lưu Rule | Chưa có ca dương trên Fleetio Go, cần chờ qua ngày, chưa cấp camera, Rule khoá khi còn Sample Data |
-| Phương tiện | Đặt xe Motor Pool, Archive khi có đặt chỗ | Không có liên hệ vừa đăng nhập vừa là Operator; Archive và trạng thái xe khác đã chạy ở lượt 3 |
+| Phương tiện | Archive khi đặt xe Checked Out, lần từ chối có ngắt liên kết không | Chưa tách ca Checked Out; xe thử không có liên kết mooc |
 | Lốp | Lưu mẫu đảo tuỳ biến, đọc áp suất tự động, import lốp | Một phần hoặc chỉ có tài liệu hãng; không có thao tác chuyển lốp giữa xe |
 | Bản đồ, gán việc | Marker và sự kiện vùng chỉ chạy bằng `Chạy (vị trí giả lập)`, lưu Geofence Alert Policy | Không có thiết bị GPS; không lưu vì có gửi email |
 | Kho, mua, nhiên liệu | Pending, Rejected của đơn, FIFO, LIFO, Average, Invite nhà cung cấp | Cần người thứ hai; đổi cách tính giá là một chiều, chờ quyết; không mời người ngoài |
@@ -110,9 +110,9 @@ Mức từng chức năng ở [danh sách chức năng](fleetio-function-list.md
 ## Chưa làm
 
 - **App Fleetio Go:** user đã nộp 1 phiếu (#126102722), mới kiểm dữ liệu phiếu và số đồng hồ; chưa đi hết app.
-- **Lượt 3, 4, 5 (03/11):** function list 327 dòng: 216 chạy trọn, 67 một phần, 38 chỉ xem, 2 tài liệu, 4 ngoài phạm vi; mẫu số tăng do thêm FR mới nên không so trực tiếp với 275 dòng cũ. Tổng FR 336, BR 350, E 199. Đã rà ảnh lượt 3 và lượt 4: 46 ảnh mới có trong bảng màn, agent mở từng ảnh, không thấy bản đồ vị trí thật, địa chỉ thật, email, token; ảnh còn tên hiển thị tài khoản thử. 13 ảnh lượt 5 cũng đã rà.
-- **Figma lượt 3-4:** 46 màn có ảnh đã vẽ ở 4 section mới (y từ 79900), chưa nối flow, chưa kiểm a11y, chưa soát kiểu 171 frame. 13 màn lượt 5 chưa vẽ.
-- **Cài đặt:** Forecast đã tắt lại, Inventory Valuation vẫn Static (đổi là một chiều, chờ quyết). Shop Network không bật được: chuyển sang Fleetio Pay, Access Denied. Đặt xe Motor Pool chưa tạo được vì không có liên hệ vừa đăng nhập vừa là Operator.
+- **Lượt 3 đến 6 (03/11):** function list 331 dòng: 219 chạy trọn, 68 một phần, 38 chỉ xem, 2 tài liệu, 4 ngoài phạm vi; mẫu số tăng do thêm FR mới nên không so trực tiếp với 275 dòng cũ. Tổng FR 340, BR 365, E 205. Đã rà ảnh lượt 3 và lượt 4: 46 ảnh mới có trong bảng màn, agent mở từng ảnh, không thấy bản đồ vị trí thật, địa chỉ thật, email, token; ảnh còn tên hiển thị tài khoản thử. Ảnh lượt 5, 6 cũng đã rà.
+- **Figma lượt 3 đến 5:** 59 màn đã vẽ ở 5 section mới (y từ 79900). Đã soát so với ảnh: 23 khớp ngay, 36 đã sửa, chỗ còn lệch ở [run-notes/_audit/](run-notes/_audit/) file `r3-*`. a11y nhóm Nhắc, Kiểm tra mới chạy 5/22 màn; lỗi còn lại nằm trong component. Nối thêm 91 đường, 20 màn chưa có đường vào, chưa bấm thử Present ([báo cáo](run-notes/_flow/flow-report-r3.md)). 7 màn đặt xe lượt 6 chưa vẽ.
+- **Cài đặt:** Forecast đã tắt lại. Inventory Valuation vẫn Static: user đã duyệt đổi FIFO, chặn ở Lệnh #103 "Work Order Labor Line Items is invalid", chờ user tự xoá dòng công. Shop Network không bật được: chuyển sang Fleetio Pay, Access Denied. Đặt xe Motor Pool đã chạy bằng cách tick tạm Operator cho chủ tài khoản, đã bỏ tick.
 - **Người dùng thứ hai:** chưa có, nên chưa đi nhánh chờ duyệt, phân quyền bằng tài khoản thật.
 - **Tools, Custom Records, Advanced Analytics:** không mở theo lựa chọn của user.
 - **Figma:** 10 màn không có ảnh gốc chưa vẽ. Nối được 126/218 đường, phần còn lại thiếu control trên màn, hệ thống tự chuyển hoặc là nhánh phụ ([kiểm độc lập](run-notes/_flow/verify-report.md), [báo cáo nối flow](run-notes/_flow/flow-report.md)). Chưa bấm thử Present. Toàn bộ 171 frame đã so với ảnh gốc: 59 khớp ngay, 112 đã sửa, chỗ còn lệch ở [run-notes/_audit/](run-notes/_audit/). Hàng Responsive chưa soát.

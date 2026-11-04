@@ -84,7 +84,7 @@ links:
 | FR-fleetio-parts-purchasing-fuel-042 | Phiếu dầu tạo vị trí xe | Form phiếu dầu không có ô vị trí. Chọn nhà cung cấp trên phiếu thì Location History có một dòng "Fuel Entry" tại địa chỉ nhà cung cấp, xe hiện trên Fleet Map; form không báo. Chi tiết ở FR-fleetio-location-dispatch-004. | P1 | [Gói: Nhiên liệu] | test | F25 | `Chạy` | Cân nhắc, nếu lấy thì báo rõ trên form |
 | FR-fleetio-parts-purchasing-fuel-043 | Loại cảnh báo dầu | Fuel Alert Type có đúng 3 giá trị: "Vendor Location Alert", "Fuel Capacity Alert", "Missing GPS Location Alert". Lọc được theo loại. | P2 | [Gói: Giám sát nhiên liệu] | demo | F18, F19, F23 | `Chạy` lọc Fuel Capacity Alert; hai loại còn lại `Xem` tên | Lấy cách lọc theo loại; Missing GPS cần xác định điều kiện |
 | FR-fleetio-parts-purchasing-fuel-044 | Menu trang phụ tùng | "Update Quantity", "Archive" (mờ với PT-A), "View Record History". | P2 | [Gói: Bảo dưỡng đội xe] | demo | K26 | `Xem` | Lấy, nêu lý do khi Archive bị khoá |
-| FR-fleetio-parts-purchasing-fuel-045 | Đổi phương pháp tính giá tồn | Settings › Parts & Inventory › Inventory Valuation Method: 4 radio có mô tả, không có nút Save. Chọn radio khác mới hiện khối cảnh báo, ô tích "I am aware the change I am about to make is permanent and can not be reversed" và nút "Activate" xám tới khi đủ điều kiện. Không có bản xem thử giá trị tồn. | P1 | [Gói: Bảo dưỡng đội xe] [Cấu hình] | phân tích | K30–K37 | `Xem` câu chữ; chưa bấm Activate, chưa đo giá | Chốt phương pháp cùng kế toán trước go-live; lấy cách chặn trước khi đổi, thêm xem thử tác động |
+| FR-fleetio-parts-purchasing-fuel-045 | Đổi phương pháp tính giá tồn | Settings › Parts & Inventory › Inventory Valuation Method: 4 radio có mô tả, không có nút Save. Chọn radio khác mới hiện khối cảnh báo, ô tích "I am aware the change I am about to make is permanent and can not be reversed" và nút "Activate" xám tới khi đủ điều kiện. Hai link trên hộp mở danh sách bản ghi chặn ở tab mới; chỉ lệnh chưa xong có dòng phụ tùng mới tính (K39, K42). Không có bản xem thử giá trị tồn. | P1 | [Gói: Bảo dưỡng đội xe] [Cấu hình] | phân tích | K30–K44 | `Xem` câu chữ; chưa bấm Activate, chưa đo giá | Chốt phương pháp cùng kế toán trước go-live; lấy cách chặn trước khi đổi, thêm xem thử tác động |
 
 ## 4. Non-Functional Requirements (NFR)
 
@@ -156,6 +156,7 @@ links:
 | BR-fleetio-parts-purchasing-fuel-054 | Theo câu chữ màn: đổi phương pháp tính giá là vĩnh viễn, không đảo được, phải tích ô nhận thức rồi Activate. | [Gói: Bảo dưỡng đội xe] [Cấu hình] | Đổi phương pháp | FR-fleetio-parts-purchasing-fuel-045 | `Xem` (K30, K37); chưa kiểm chứng bằng thao tác |
 | BR-fleetio-parts-purchasing-fuel-055 | Theo câu chữ màn, điều kiện kích hoạt: mọi phụ tùng có Unit Cost từ mức tối thiểu trở lên, không số lẻ (Fleetio: ₫1); riêng FIFO, LIFO phải hoàn thành mọi lệnh dở có dòng phụ tùng, còn lệnh dở thì migration thất bại. | [Gói: Bảo dưỡng đội xe] [Cấu hình] | Activate | FR-fleetio-parts-purchasing-fuel-045 | `Xem` (K35, K36) |
 | BR-fleetio-parts-purchasing-fuel-056 | Theo câu chữ màn, hệ quả khi đổi: tồn hiện có nhận giá bằng Unit Cost danh mục ở mọi kho; tồn phụ tùng Archived về 0. Riêng FIFO, LIFO: dòng phụ tùng trên lệnh cũ không sửa được nữa; phụ tùng đã dùng trên lệnh không đổi được bật, tắt theo dõi tồn. Riêng Average: trả hàng về kho không tính lại giá trung bình theo đơn giá âm hoặc bằng 0 của lệnh cũ. | [Gói: Bảo dưỡng đội xe] [Cấu hình] | Sau migration | FR-fleetio-parts-purchasing-fuel-045 | `Xem` (K32–K35); chưa đo |
+| BR-fleetio-parts-purchasing-fuel-057 | Điều kiện lệnh dở của FIFO, LIFO chỉ tính lệnh chưa xong có dòng phụ tùng; lệnh không có dòng phụ tùng không tính. | [Gói: Bảo dưỡng đội xe] [Cấu hình] | Activate | FR-fleetio-parts-purchasing-fuel-045 | `Chạy` (K39, K42) |
 
 ## 6. Error Matrix
 
@@ -196,6 +197,7 @@ links:
 | E-fleetio-parts-purchasing-fuel-033 | Đơn báo đủ hàng khi đang thiếu | Không báo; đặt 15, nhận 12 vẫn "Received, Full", không có Receive | major | FR-fleetio-parts-purchasing-fuel-030 | Trạng thái đơn, menu | Chưa thử đường nhận 3 còn lại. Không nên học | `Chạy`, PO #3 |
 | E-fleetio-parts-purchasing-fuel-034 | Báo cáo đơn cộng cả Draft | Không báo; Total Amount ₫3,574,040 gồm đơn Draft #5 ₫574,040 | major | FR-fleetio-parts-purchasing-fuel-037 | Báo cáo purchase_orders | Lọc trừ Draft, chưa thử. Không nên học | `Chạy` |
 | E-fleetio-parts-purchasing-fuel-035 | Chưa đủ điều kiện đổi phương pháp giá | Hộp nêu "2 part(s)" chưa có Unit Cost, "3 Work Order(s)" dở; "An incomplete Work Order at the time of migration will cause the migration to fail." | major | FR-fleetio-parts-purchasing-fuel-045 | Activate xám | Sửa phụ tùng hoặc Parts Import; hoàn thành lệnh | `Xem` câu chữ; thất bại chưa gặp |
+| E-fleetio-parts-purchasing-fuel-036 | Lệnh không hoàn thành được vì dòng công | "Please edit and fix the following errors: Started At can't be blank", "Work Order Labor Line Items is invalid" khi đổi #103 sang Completed | major | FR-fleetio-parts-purchasing-fuel-045 | Chặn đổi trạng thái; bút chì dòng công xám | Còn nút "Remove labor line item", chưa bấm. Một dòng công chặn đổi phương pháp giá cả tài khoản. Không nên học | `Chạy`; nguyên nhân do contact Sample `Suy` |
 
 ## 6A. Ma trận case
 
@@ -254,6 +256,13 @@ Tiền ghi nguyên giá trị đã thử trên tài khoản VND. Điều không 
 | K35 Điều kiện Unit Cost | Mọi phương pháp | "All parts must have a unit cost of ₫1 or greater (limited to 0 decimal places). We will use the Unit Cost value stored on the primary Part record as the effective price for each individual unit of current inventory of that Part, across all Part Locations." Tài khoản hiện "2 part(s)" chưa có Unit Cost; có link "Download the CSV", "Parts Import" | `Xem` |
 | K36 Điều kiện lệnh dở | FIFO, LIFO | "For LIFO/FIFO, all incomplete Work Orders with part line items must be completed. An incomplete Work Order at the time of migration will cause the migration to fail." Tài khoản hiện "3 Work Order(s)" dở, có link danh sách | `Xem` |
 | K37 Dừng trước Activate | Chọn lần lượt 3 radio, không tích ô, không bấm | Chọn radio không lưu gì; tải lại trang vẫn Static Pricing, ô tích trống. Không có lịch sử migration hay bản xem thử giá trị tồn. "Không đảo được" chỉ theo câu chữ, chưa kiểm chứng | `Chạy` phần chọn radio và tải lại |
+| K38 Link "2 part(s)" | Lượt 6, lọc thiếu giá và có theo dõi tồn | TEST-KHO-PT-B (tồn 8), TEST-NHAC-PT (tồn 7). Làm được, chưa điền giá | `Chạy` đọc |
+| K39 Link "3 Work Order(s)" | Lọc chưa xong và có dòng phụ tùng | #100, #102, #103, đều lệnh TEST. #100, #102 chưa thử, chưa đụng | `Chạy` đọc |
+| K40 Hoàn thành Lệnh #103 | Đổi sang Completed | "Please edit and fix the following errors: Started At can't be blank", "Work Order Labor Line Items is invalid". Dòng công dùng contact Sample; nguyên nhân do contact này là suy ra | `Chạy`, nguyên nhân `Suy` |
+| K41 Sửa dòng công #103 | Form Edit | Nút bút chì dòng công xám. Còn nút "Remove labor line item", chưa bấm vì brief cấm xoá; đã Cancel, không lưu gì | `Chạy` |
+| K42 Lệnh không có dòng phụ tùng | #111, trước và sau khi đóng | Số trên link vẫn 3: lệnh này không tính vào điều kiện | `Chạy` |
+| K43 Đổi sang FIFO | User duyệt đổi một chiều | Bị chặn ở #103, dừng trước Activate: không tích ô, không bấm. Tải lại vẫn Static Pricing. Chưa đo giá xuất, trả về kho, sửa dòng lệnh cũ, bật tắt theo dõi tồn, giá trị tồn sau đổi, báo cáo | Không chạy |
+| K44 Giá chụp trước khi đổi | Static, danh sách phụ tùng TEST | BRAKE-PAD-01 tồn 3, 300.000 ₫; PT-A 130,5, 100.000 ₫; PT-B 8, trống; LOP-MODEL-01 không theo dõi, 3.000.000 ₫; NHAC-PT 7, trống. Mốc để so nếu đổi sau này | `Chạy` đọc |
 
 ### Đơn mua
 
@@ -415,7 +424,7 @@ Xem [[docs/_research/fleetio/srs/fleetio-parts-purchasing-fuel-flows.md|Flows]],
 * [ ] OQ-8: Pending Approval, Rejected chạy thế nào, đơn Rejected có gửi lại được không? Cần tài khoản có người không có quyền duyệt. Lượt 3 vẫn không chạy được vì cấm mời người ngoài (D32) — Nguồn khách: không áp dụng
 * [ ] OQ-9: Xoá cả lệnh có hoàn kho không? Đã huỷ ở hộp xác nhận (K21) — Nguồn khách: không áp dụng
 * [ ] OQ-10: Delete đơn mua ảnh hưởng gì đến tồn và sổ kho? Chưa bấm — Nguồn khách: không áp dụng
-* [ ] OQ-11: Dưới FIFO, LIFO, Average: giá trị tồn, sửa giá sau khi nhận, nhận vào lệnh chạy thế nào? Một phần lượt 5, từ câu chữ màn, chưa đo (`Xem`, K32–K35): tồn đầu lấy Unit Cost danh mục; FIFO, LIFO khoá sửa dòng phụ tùng lệnh cũ. Giá trị tồn sau khi nhận, sửa giá sau khi nhận, nhận vào lệnh vẫn mở; chưa đổi vì hộp ghi không đảo được (K37) — Nguồn khách: không áp dụng
+* [ ] OQ-11: Dưới FIFO, LIFO, Average: giá trị tồn, sửa giá sau khi nhận, nhận vào lệnh chạy thế nào? Một phần lượt 5, từ câu chữ màn, chưa đo (`Xem`, K32–K35): tồn đầu lấy Unit Cost danh mục; FIFO, LIFO khoá sửa dòng phụ tùng lệnh cũ. Lượt 6 chỉ biết thêm điều kiện cụ thể, FIFO chưa đổi, chưa đo: bị chặn ở Lệnh #103 "Work Order Labor Line Items is invalid" (K38–K43). Giá xuất, giá trị tồn sau khi nhận, sửa giá sau khi nhận, nhận vào lệnh vẫn mở — Nguồn khách: không áp dụng
 * [ ] OQ-12: Đổi vị trí dòng lệnh sang None thì sổ kho ghi gì? Chưa thử — Nguồn khách: không áp dụng
 * [ ] OQ-13: Đơn Draft có tính vào Pending PO Qty không? Một phần lượt 4, mở lại vì lượt 3 kết luận quá rộng: Draft chưa Edit không tính (PO #4); Draft đã Edit và lưu thì tính, theo số mới (PO #5, D40, D41, `Chạy`). Còn chưa rõ: thao tác nào kích hoạt, vì lần lưu của PO #5 gộp đổi kho, nhà cung cấp, xoá dòng; Approved đã Edit chưa đo; Edit ở Full lại không cộng Pending (D37) — Nguồn khách: không áp dụng
 * [ ] OQ-14: Vendor Location Alert kích hoạt thế nào khi có định vị và thẻ? Cần tích hợp, lượt 3 vẫn không chạy được, chỉ thấy tên loại ở bộ lọc (F23) — Nguồn khách: không áp dụng
@@ -432,6 +441,7 @@ Xem [[docs/_research/fleetio/srs/fleetio-parts-purchasing-fuel-flows.md|Flows]],
 * [ ] OQ-25: Pending PO Qty sau khi lùi trạng thái tính theo công thức nào, có đúng với đơn khác PO #4 không? (D27–D29) — Nguồn khách: không áp dụng
 * [ ] OQ-26: "Missing GPS Location Alert" kích hoạt khi nào? Chỉ thấy tên ở bộ lọc (F18) — Nguồn khách: không áp dụng
 * [ ] OQ-27: Delta có cần sửa số nhận sau khi đóng đơn không, nếu có thì phải mở lại hay lập phiếu điều chỉnh? Fleetio: sửa thẳng, không lý do (D18) — Nguồn khách: chưa có trong tài liệu khách gửi
+* [ ] OQ-28: Dòng công dùng contact Sample có đúng là nguyên nhân "Work Order Labor Line Items is invalid" không? Chưa tách riêng (K40) — Nguồn khách: không áp dụng
 
 ## Phát hiện lượt 3 (03/11)
 
@@ -458,3 +468,10 @@ Nguồn: `run-notes/parts-purchasing-fuel.md`, mục Lượt 5. FIFO, LIFO, Aver
 
 - Đổi phương pháp là migration một chiều, có điều kiện chặn trước và ô tích nhận thức, không có xem thử. Xem FR-fleetio-parts-purchasing-fuel-045, BR-fleetio-parts-purchasing-fuel-054, BR-fleetio-parts-purchasing-fuel-055, K30, K35–K37.
 - Hệ quả theo câu chữ: tồn nhận giá Unit Cost danh mục, tồn Archived về 0, FIFO và LIFO khoá dòng phụ tùng lệnh cũ. Xem BR-fleetio-parts-purchasing-fuel-056, K32–K35, OQ-11.
+
+## Phát hiện lượt 6 (03/11)
+
+Nguồn: `run-notes/parts-purchasing-fuel.md`, mục Lượt 6. FIFO chưa đổi, chưa đo; chỉ biết thêm điều kiện.
+
+- Bị chặn ở Lệnh #103: "Work Order Labor Line Items is invalid", dòng công không sửa được, chỉ còn xoá. Xem E-fleetio-parts-purchasing-fuel-036, K40, K41, K43, OQ-28.
+- Điều kiện lệnh dở chỉ tính lệnh có dòng phụ tùng. Xem BR-fleetio-parts-purchasing-fuel-057, K39, K42.

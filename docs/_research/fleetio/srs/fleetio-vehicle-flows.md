@@ -220,14 +220,18 @@ flowchart TD
     E22 --> W["Đóng Lệnh: Started At, số đồng hồ, E-029, tự sinh Service Entry"]
     W --> N["Nối lại liên kết bằng tay nếu cần"]
     N --> F2
-    G -->|"Không"| K["Mất liên kết, đóng phân công đang chạy, xoá phân công tương lai"]
+    G -->|"Không"| G2{"Còn đặt xe Approved"}
+    G2 -->|"Có"| E21B["E-021, xe không Archive, phân công Future còn, liên kết chưa đo"]
+    E21B --> W2["Hoàn tất hoặc huỷ đặt xe"]
+    W2 --> F2
+    G2 -->|"Không, kể cả Requested, sự cố Open"| K["Mất liên kết, đóng phân công đang chạy, xoá phân công tương lai"]
     K --> L["Sang tab Archived, Status giữ nguyên, rời lịch phân công"]
     D --> H
     E --> H
     L --> H
 ```
 
-Motor Pool đang đặt cũng chặn Archive theo câu trong hộp, chưa tạo được đặt xe để thử (Flow 18); khi chạy lại phải đóng Lệnh đang mở trước. Automation đổi trạng thái: mẫu `Xem`, một automation tự tạo đã `Chạy` (người đổi ngược bị lật lại sau khoảng 1 giây, không báo), xem nhóm Nền tảng.
+Đặt xe Checked Out chưa tách riêng. Đặt xe Requested còn lại sau Archive vẫn Requested, không duyệt được (E-035). Automation đổi trạng thái: mẫu `Xem`, một automation tự tạo đã `Chạy` (người đổi ngược bị lật lại sau khoảng 1 giây, không báo), xem nhóm Nền tảng.
 
 ## Flow 10: Phân tích thay xe (`Chạy` đọc)
 
@@ -326,7 +330,7 @@ flowchart TD
     I --> Z["Kết thúc"]
 ```
 
-Bản gói đầy (`Chạy`) chưa giải phóng chỗ để thử lại, nên nhánh quay về là `Suy`.
+Cả hai nhánh đã thấy (`Chạy`): gói đầy thì khoá; lượt 6 Archive xong gói còn chỗ thì Restore chạy, đồng hồ, nhóm giữ nguyên. Giải phóng chỗ rồi thử lại trên cùng một xe là `Suy`.
 
 ## Flow 15: Tuỳ biến trang xe (`Chạy` phần thẻ cá nhân; layout tài khoản `Xem`)
 
@@ -386,7 +390,7 @@ flowchart TD
     L --> Z
 ```
 
-## Flow 18: Motor Pool và đặt xe (`Chạy` tới kiểm tra form; đặt xe chưa tạo được)
+## Flow 18: Motor Pool và đặt xe (`Chạy`; phần sau tạo đặt xe ở nhóm Nền tảng)
 
 ```mermaid
 flowchart TD
@@ -396,12 +400,12 @@ flowchart TD
     D --> E["Hiện Vehicle Types của pool, chọn loại, không chọn xe"]
     E --> F{"Có Operator vừa đăng nhập vừa phân loại"}
     F -->|"Không"| G["E-034, No options, dừng"]
-    F -->|"Có, chưa thử"| H{"Đủ dữ liệu"}
+    F -->|"Có"| H{"Đủ dữ liệu"}
     H -->|"Thiếu"| I["E-033, không tạo bản ghi"]
     I --> D
-    H -->|"Đủ, chưa chạy"| J["Duyệt, gán xe, chưa ghi nhận"]
+    H -->|"Đủ"| J["Requested, duyệt chọn xe, sinh phân công Future"]
     G --> Z["Kết thúc"]
     J --> Z
 ```
 
-E-033 đã thấy khi Submit thiếu Operator, dù nhánh "Có" chưa đạt được. Archive khi có đặt chỗ: chưa chạy.
+E-033 đã thấy khi Submit thiếu Operator. Archive khi có đặt xe: Flow 9.

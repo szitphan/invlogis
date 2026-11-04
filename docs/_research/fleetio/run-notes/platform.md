@@ -662,3 +662,84 @@ Giải pháp đáng học, điểm yếu:
 - Đáng học: tự duyệt theo cửa sổ thời gian, có múi giờ riêng cho việc duyệt.
 - Điểm yếu: người lái không đăng nhập không đặt được, cũng không được đặt hộ. Lái xe logistics thường không có tài khoản nên điều độ không đặt thay được.
 - Điểm yếu: form Add Motor Pool bắt buộc Groups, nên tài khoản không dùng nhóm xe không tạo được pool.
+
+# Lượt 6 (03/11)
+
+User duyệt tick Operator trên Bảo Tín, cho TEST-DAUKEO-2 vào nhóm của pool. Trước khi đổi: Bảo Tín Classifications trống ("Contact must have operator classification to be assigned to vehicles" ở thẻ Current Vehicle Assignments); TEST-DAUKEO-2 Active, No Group, Unassigned, 2.500 km, 30 hr.
+
+## Đặt xe: tạo, duyệt, gán xe — Chạy
+Các bước đã làm: tick Operator (toast "Contact was successfully updated"; thẻ phân công đổi thành "No currently active vehicle assignments", hiện thêm tab Vehicle Assignments, Tool Assignments); xe vào nhóm 11/05/2026 ("Vehicle was successfully updated"); Add Vehicle Reservation; Approve.
+
+| Case | Điều kiện | Kết quả thật | Ảnh |
+|---|---|---|---|
+| Ô Operator sau khi tick | Chủ tài khoản có đăng nhập + Operator | Danh sách có đúng 1 dòng Bảo Tín, nhãn "Account Owner", "Operator". Xác nhận điều kiện kép của tooltip | |
+| Tạo đặt xe | Pool, Semi Truck, Reason, 11/10 đến 11/12 | "Reservation was created successfully"; số #1; "Requested"; Vehicle trống; Line Items trống | reservation-detail-requested |
+| Menu khi Requested | | Approve, Deny, Cancel, View Record History; thêm nút Edit | |
+| Form Edit khi Requested | | Status chỉ đọc; sửa được Operator, Pool, Vehicle Types, Reason, Pick Up, Drop Off | |
+| Hộp Approve | | "Approve Reservation #1": Operator, Pool khoá, Vehicle Types chỉ đọc, **Vehicle * bắt buộc**, sửa được Reason, ngày | reservation-approve-dialog |
+| Ô Vehicle khi duyệt | Nhóm chỉ có 1 xe Semi Truck | Tiêu đề "REQUESTED TYPES", chỉ TEST-DAUKEO-2; không có xe Sample cùng loại khác nhóm. Lọc theo nhóm của pool là thật | |
+| Duyệt | Chọn xe | "Reservation was approved successfully"; "Approved"; Vehicle = TEST-DAUKEO-2; chưa đổi Start Meter, End Meter | reservation-detail-approved |
+| Menu khi Approved | | Check Out, Email Invoice, Print, Cancel, View Record History (không bấm Email Invoice, Print) | |
+Không thấy hộp hay câu nào báo gửi email khi tạo, duyệt. Chuông thông báo của chủ tài khoản vẫn số 5 ngay sau duyệt.
+
+## Bảng giá, phí cố định, tự duyệt — Chạy
+Các bước đã làm: tạo TEST-NEN-RATE-01 (Semi Truck: giờ 10.000, ngày 100.000, tuần 500.000, km 1.000), TEST-FEE-VE-SINH (50.000, mọi loại xe); pool bật tính phí + Auto Approvals, cửa sổ Thứ Hai 8:00am đến 5:00pm.
+
+Câu chữ form: Add Rate Table: Name, Enabled, dòng Rates (Name, Vehicle Types, Hourly, Daily, Weekly, Monthly, Mileage). Bánh răng: "Hourly threshold" 4, 8, 12, 24 ("Max hours to charge each day before rounding up."), "Once reservation exceeds threshold, ignore hourly billing for entire reservation.". Rate duration: "Hourly: 60-minute period, for reservations under the table's hourly threshold", "Daily: 24-hour period", "Weekly: 7-day period", "Monthly: 30-day period". "Reservations are priced from the largest defined duration to the smallest. Undefined durations are skipped. Any remaining time that does not fit evenly into a duration is rounded up to the next defined duration." Form pool khi bật tính phí: chọn bảng giá, "If greater than N days" + bảng giá thứ hai, "Manage Rates". Add Flat Fee: Name, Enabled, Amount ("Leave empty to allow the amount to be entered on the reservation."), Vehicle Types ("Leave empty to allow this fee on any vehicle type.").
+Auto Approvals, How it works: "the reservation pickup time falls within any qualifying window", "the reservation drop-off time falls within any qualifying window", "the request does not overlap with existing assignments on vehicle"; "If multiple vehicles qualify, selection is based on: order of requested vehicle types, lowest current meter reading".
+
+| Case | Điều kiện | Kết quả thật | Ảnh |
+|---|---|---|---|
+| Bật tính phí sau khi đã có đặt xe | #1 đã Approved trước đó | Line Items của #1 vẫn trống; **không tính lại** | |
+| Trong cửa sổ, múi giờ cửa sổ Central | #2, Thứ Hai 16/11 9:00am đến 4:00pm, cửa sổ múi giờ tài khoản | Vẫn **"Requested"**, Vehicle trống, không phí, không báo lý do | |
+| Trong cửa sổ, đổi đúng 1 biến: múi giờ cửa sổ sang Hanoi | #3, Thứ Hai 23/11 9:00am đến 4:00pm | **Tự "Approved"**, tự gán TEST-DAUKEO-2, toast vẫn "Reservation was created successfully" không nói đã tự duyệt | reservation-auto-approved-charges |
+| Tính phí ngắn hơn 1 ngày | #3, 7 giờ | Hours 10.000 ₫ / hour × 7 = 70.000 ₫; Meter 1.000 ₫ / km × 0 = 0; Total 70.000 ₫ | reservation-auto-approved-charges |
+| Sửa đặt xe đã duyệt | Form Edit #3 thêm: Vehicle, Start Meter và End Meter kèm Void, "Last updated: 2,500 km (Today)", khối Charges "Calculated from:", "View Line Items", "Add Flat Fee" (Custom hoặc phí có sẵn) | |
+| Tính phí nhiều ngày | Đổi Drop Off 25/11 12:00pm (2 ngày 3 giờ) | Báo ngay "Charges have been recalculated based on updates to the reservation. Saving will replace the previously saved values."; Days 2 × 100.000 + Hours 3 × 10.000 = 230.000 ₫ | reservation-charges-flat-fee |
+| Phí cố định | Chọn TEST-FEE-VE-SINH | Dòng 50.000 ₫, sửa được số tiền ngay trên đặt xe; Total 280.000 ₫; "Reservation was edited successfully" | reservation-charges-flat-fee |
+| Trùng lịch, trong cửa sổ | #4, 23/11 10:00am đến 3:00pm, trùng #3 trên xe duy nhất | Không tự duyệt, "Requested" | reservation-vehicle-overlap |
+| Duyệt tay khi trùng | Hộp Approve #4 | Xe xám, không chọn được, icon lịch, tooltip "Requested dates overlap an existing assignment from 11/23/2026 9:00am to 11/25/2026 12:00pm" | reservation-vehicle-overlap |
+| Trả xe ngoài cửa sổ | #5, Thứ Hai 30/11 9:00am đến Thứ Ba 1/12 9:00am | Không tự duyệt, "Requested" | |
+| Deny | #4 | Hộp "Denied Reason *" bắt buộc; "Denied"; hiện Denied Reason; mất nút Edit | |
+| Cancel khi Requested | #5 | Hộp "Canceled Reason *" bắt buộc; "Reservation was canceled successfully"; "Canceled"; mất Edit; menu chỉ còn View Record History | |
+| Duyệt sinh phân công | #1, #3 Approved | Trang liên hệ có 2 dòng Vehicle Assignments gắn nhãn "Future". **Đặt xe là phân công thật**, nên lịch trùng được chặn từ đây | |
+| Check Out sớm hơn ngày hẹn | #3 hẹn 23/11, Check Out 3/11 Start Meter 2510 | Hộp nói "Checking out confirms the operator has picked up the vehicle. The reservation moves to Checked Out, from where it can be returned or completed once the trip ends."; "Reservation was checked out successfully"; "Checked Out At 11/03/2026 9:01pm"; Pick Up vẫn 23/11. Phân công vẫn nhãn "Future", có Start Meter 2.510 | |
+| LỖI: số đồng hồ đề ngày tương lai | Sau Check Out đó | "Last updated: 2,510 km (in 19 days)": số đồng hồ lấy ngày Pick Up hẹn, không phải giờ lấy xe thật | |
+| Return khi ngày hẹn còn ở tương lai | #3 Checked Out, có End Meter 2560, rồi bỏ trống End Meter | Cả 3 lần "Failed to return Reservation", PATCH `/motor_pool_reservations/3/status` 422, **không nêu lý do**. Lấy xe sớm mà không trả được | |
+| Sửa ngày về 8:00am cùng ngày | Edit #3 | "must be less than 100 or marked as void" ở Start Meter, "Failed to edit Reservation". Con số 100 trong câu không rõ nghĩa. Đổi Pick Up 8:45pm, sau số đồng hồ của Lệnh #111 lúc 8:30pm thì qua | |
+| Làm tròn giờ | 15 phút | 1 hour, 10.000 ₫: làm tròn lên | |
+| Quá giờ hẹn | Drop Off đã qua, menu Checked Out | Mục đầu đổi thành Complete (hộp "Complete Reservation #3"), bước thẳng không qua Returned ở ca này. Đây là chênh lệch so với hộp Return "From Returned, the reservation can only be moved to Completed." | |
+| Complete, phí km | End Meter 2560 | Charges báo tính lại trước khi lưu; "Reservation was completed successfully"; Hours 1 × 10.000, Meter 50 km × 1.000 = 50.000, phí 50.000, Total 110.000 ₫. Drop Off tự đổi thành 9:04pm, thêm "Returned At 11/03/2026 9:04pm", tiền giờ không tính lại. Completed vẫn còn nút Edit | reservation-completed |
+
+Suy luận, không phải câu chữ hãng: ô giờ trong form đặt xe nhận theo múi giờ trình duyệt (Asia/Saigon, mặc định hiện đúng giờ máy), không theo múi giờ người dùng Fleetio (America/Chicago). 9:00am Saigon rơi ngoài Thứ Hai Central nên #2 không tự duyệt.
+Suy luận, chưa kiểm: Return 422 do ngày Pick Up còn ở tương lai. Sau khi dời Pick Up, Drop Off về quá khứ, mục đầu menu là Complete, nên KHÔNG thử lại Return; lý do 422 chưa xác nhận và trạng thái Returned chưa từng đạt được.
+
+Sửa ý ở bảng trên: "tiền giờ không tính lại" không chứng minh được vì 15 phút và 19 phút đều làm tròn 1 giờ. Chỉ thấy: Drop Off đổi 9:04pm, tiền giờ vẫn 1 giờ.
+
+Không bấm Email Invoice, Print. Không thấy câu nào báo gửi email. Mở chuông cuối lượt: vẫn 5 mục (nhắc dịch vụ, bình luận tự động), không thấy mục nào về đặt xe trong phần hiển thị; hộp thư ngoài không kiểm.
+
+### Ma trận trạng thái đặt xe
+| Trạng thái | Hành động làm được | Sang | Điều kiện | Hiệu ứng lên đối tượng khác | Mức |
+|---|---|---|---|---|---|
+| Requested | Approve, Deny, Cancel, Edit, View Record History | Approved, Denied, Canceled | Approve bắt buộc chọn xe; Deny, Cancel bắt buộc lý do | Không phân công. Không chặn Archive | Chạy |
+| Approved | Check Out, Email Invoice, Print, Cancel, Edit, View Record History | Checked Out, Canceled | | Sinh phân công Future; xe bị xám ở đặt khác trùng giờ; chặn Archive. Cancel xoá phân công | Chạy, trừ Email Invoice, Print |
+| Checked Out | Return, Email Invoice, Print, Cancel, Edit, View Record History; khi quá giờ hẹn mục đầu là Complete | Completed (đã chạy); Returned (lỗi 422) | | Start Meter ghi vào đồng hồ theo ngày Pick Up | Một phần: Return, Cancel chưa thành |
+| Returned | Không đạt tới | | Câu hộp: "From Returned, the reservation can only be moved to Completed." | | Không chạy được |
+| Completed | Edit; menu "..." | | | Phân công thành lịch sử có Start, End Meter; đồng hồ xe lên 2.560; hết chặn Archive | Một phần: chưa đọc menu |
+| Denied | Menu "..." (chưa đọc), mất Edit | | | Không hiệu ứng | Chạy |
+| Canceled | Chỉ View Record History | | | Xoá phân công nếu đã Approved | Chạy |
+
+### Luồng nghiệp vụ
+Người đặt chọn pool, loại xe, lý do, giờ. Nếu đủ 3 điều kiện cửa sổ và không trùng lịch thì hệ thống tự duyệt và chọn xe; nếu không thì chờ quản lý duyệt, chọn xe cụ thể. Giao xe (Check Out) ghi Start Meter. Nhận xe ghi End Meter, tính tiền, đóng.
+
+Giải pháp đáng học, điểm yếu:
+- Đáng học: bảng giá theo loại xe, giờ, ngày, tuần, tháng, km; bảng khác khi thuê trên N ngày; làm tròn từ đơn vị lớn xuống. Hợp tính phí nội bộ đầu kéo theo chuyến và km.
+- Đáng học: đặt xe sinh phân công thật, nên trùng lịch được chặn ngay trong ô chọn xe kèm giờ trùng.
+- Đáng học: báo "Charges have been recalculated" trước khi lưu.
+- Điểm yếu: múi giờ form và múi giờ cửa sổ lệch thì không tự duyệt mà không báo gì. Với Delta nên hiện rõ lý do không tự duyệt.
+- Điểm yếu: lấy xe sớm hơn hẹn thì đồng hồ đề ngày tương lai và Return lỗi không lý do.
+- Điểm yếu: bật tính phí không áp cho đặt xe đang có.
+Trả lời câu hỏi mở nào: OQ-12 nhóm Nền tảng, OQ-11 nhóm Xe phần đặt xe, phí, tự duyệt. Còn mở: Returned, Cancel khi Checked Out, Hourly threshold khác 24, bảng giá thứ hai.
+Màn mới: reservation-detail-requested, reservation-approve-dialog, reservation-detail-approved, reservation-auto-approved-charges, reservation-charges-flat-fee, reservation-vehicle-overlap, reservation-completed.
+Dữ liệu TEST đã tạo: đặt xe #1, #2, #5 Canceled, #3 Completed, #4 Denied; TEST-NEN-RATE-01; TEST-FEE-VE-SINH. Pool TEST-NEN-POOL-01 hiện bật tính phí, tự duyệt Thứ Hai 8:00am đến 5:00pm múi giờ Hanoi; để nguyên vì là bản ghi TEST.
+Trạng thái cuối: Bảo Tín bỏ tick Operator, đọc lại "Operator: No", thẻ phân công về "Contact must have operator classification to be assigned to vehicles"; lịch sử phân công #3 vẫn trong dữ liệu nhưng tab đã ẩn. TEST-DAUKEO-2 No Group, không Archive.

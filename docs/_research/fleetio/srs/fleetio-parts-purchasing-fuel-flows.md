@@ -401,4 +401,4 @@ flowchart TD
     I --> KetThuc
 ```
 
-Đường chạy thật chỉ là A, B, C, E (K30, K37). FIFO, LIFO, Average chưa đo giá xuất kho (OQ-11). Không có bản xem thử.
+Đường chạy thật chỉ là A, B, C, E (K30, K37). Lượt 6 đi tới G: đọc 2 link điều kiện, hoàn thành Lệnh #103 bị E-036 chặn, dòng công chỉ còn đường xoá nên dừng (K38–K43). Lệnh không có dòng phụ tùng không tính (K42). FIFO, LIFO, Average chưa đổi, chưa đo giá xuất kho (OQ-11). Không có bản xem thử.

@@ -9,7 +9,7 @@ links:
 
 # Fleetio: danh sách chức năng và mức đã đi
 
-Tổng 327 chức năng: Đã chạy 216 · Một phần 67 · Chỉ xem 38 · Tài liệu 2 · Chưa 0 · Không mở 4.
+Tổng 331 chức năng: Đã chạy 219 · Một phần 68 · Chỉ xem 38 · Tài liệu 2 · Chưa 0 · Không mở 4.
 
 `Đã chạy` = tự thao tác, thấy kết quả. `Một phần` = đi được một nhánh. `Chỉ xem` = thấy giao diện, chưa thao tác. `Tài liệu` = chỉ đọc tài liệu hãng.
 
@@ -34,7 +34,7 @@ Tổng 327 chức năng: Đã chạy 216 · Một phần 67 · Chỉ xem 38 · T
 | Giải mã số khung | Nút Decode cạnh VIN/SN điền thông số, gồm dung tích bình. VIN ngắn thì nút khoá, không giải thích (E-fleetio-vehicle-026). VIN 17 ký tự: "De | Đã chạy | VIN ngắn khoá; VIN đúng ra bảng so sánh |
 | Liên kết xe | Linked Vehicles là trường chọn trong form sửa xe; kết quả hiện hai chiều ở khối "Linked Assets" › "Link Asset" › "VEHICLES" trên cả hai xe;  | Đã chạy | Linked Vehicles đầu kéo và mooc |
 | Trạng thái xe | Status bắt buộc, mặc định Active. Danh mục 5 trạng thái có đếm xe, Add Vehicle Status. Đổi tự do qua form hoặc automation, không có luật chu | Đã chạy | Đổi đủ 5 trạng thái, không ràng buộc |
-| Archive xe | Nút Archive trong More Actions, hộp "Confirm Vehicle Archive", nút "Archive Vehicle", đưa xe sang tab Archived; quyền `vehicles_archive_dele | Một phần | Chặn: Chưa có đặt chỗ, chờ user quyết Operator |
+| Archive xe | Nút Archive trong More Actions, hộp "Confirm Vehicle Archive", nút "Archive Vehicle", đưa xe sang tab Archived; quyền `vehicles_archive_dele | Một phần | Approved chặn, Requested không chặn; Checked Out chưa tách |
 | More Actions trên xe | Edit Vehicle Settings (mở thẳng phần Settings của form), Manage Inspection Forms (thẻ từng biểu mẫu nhãn "Disabled", menu "…", "View Submiss | Một phần | Mở thêm 2 mục; Integration Links bị chặn |
 | Hạn mức xe theo gói | Danh sách hiện "5 of 5", nút Add Vehicle có khoá; Save bị chặn. Account Usage đếm Vehicles. Xe Sample không tính. Quyền Create cảnh báo "Add | Đã chạy | Chạy |
 | Loại xe | Type bắt buộc, mặc định Car; Settings › Vehicle Types 25 loại. Đổi loại tự do, không hỏi, dòng phụ đầu trang đổi theo, Status giữ nguyên, có | Đã chạy | Đổi Car sang Semi Truck tự do |
@@ -49,8 +49,8 @@ Tổng 327 chức năng: Đã chạy 216 · Một phần 67 · Chỉ xem 38 · T
 | Bộ lịch bảo dưỡng trên xe | More Actions › Manage Service Programs đi tới `vehicles/{id}/service_programs`. Xe chưa có bộ lịch: trang rỗng dạng quảng bá "Efficiently sc | Một phần | Chạy phần mở, nút Create chưa bấm |
 | Đính tài liệu dùng chung | More Actions › Attach Shared Document, ô "Select Document" chỉ liệt kê tài liệu dùng chung (tên, loại, thời điểm sửa), nút khoá tới khi chọn | Đã chạy | Chạy |
 | Áp và sửa mẫu bảo hành | Áp mẫu sinh mỗi coverage một bảo hành riêng; dòng preview có Edit, Edit Maintenance Codes, Delete để sửa riêng lần này; mã bảo dưỡng của mẫu | Một phần | Chạy phần áp, áp về quá khứ; lựa chọn "future", ghi đè phần sửa riêng chưa thử |
-| Cấu hình Motor Pool | Settings › Motor Pools › Add: Name, Groups, Vehicle Types, Vehicle Statuses (mặc định Active) bắt buộc; "Automatically calculate charges"; ' | Một phần | Chạy phần tạo pool; Auto Approvals, Rates, Flat Fees Xem |
-| Form đặt xe | Operator, Motor Pool, Reason for Trip, Pick Up, Drop Off; chọn pool thì thêm Vehicle Types chỉ gồm loại của pool. Người đặt chọn loại xe, kh | Một phần | Chạy một phần: kiểm tra form, chưa tạo được đặt xe |
+| Cấu hình Motor Pool | Settings › Motor Pools › Add: Name, Groups, Vehicle Types, Vehicle Statuses (mặc định Active) bắt buộc; "Automatically calculate charges"; ' | Một phần | Rates, Flat Fees, Auto Approvals chạy; threshold khác 24 chưa |
+| Form đặt xe | Operator, Motor Pool, Reason for Trip, Pick Up, Drop Off; chọn pool thì thêm Vehicle Types chỉ gồm loại của pool. Người đặt chọn loại xe, kh | Đã chạy | Đặt theo loại, chọn xe khi duyệt |
 
 ## Vehicles · Gán xe
 
@@ -458,12 +458,16 @@ Tổng 327 chức năng: Đã chạy 216 · Một phần 67 · Chỉ xem 38 · T
 | Lịch sử bản ghi | View Record History; lịch sử từng trường. Có trên xe, automation, Issue. Cột Date, Changes By, Changes Made, lọc theo khoảng ngày. Comment,  | Đã chạy | Đọc lịch sử Issue, xe |
 | Kho tài liệu | Danh sách file, thư mục, biết gắn bản ghi nào; tab All Documents và tab tên tài khoản; cột File Name, File Size, Location, Auto-Delete, Atta | Đã chạy | Tải tệp TEST, gắn xe |
 | Liên hệ một bảng | Một bảng Contact, phân vai bằng tick Operator, Employee, Technician; User Access: Enable Access to Fleetio hoặc No Access (mặc định). Người  | Một phần | Chặn: Enable Access có thể gửi mời |
-| Motor Pool | Đặt xe dùng chung: cột Motor Pool, Number, Operator, Vehicle Types, Vehicle, Pick Up, Drop Off, Status; Settings có Motor Pools, Reservation | Một phần | Tạo pool; đặt xe không có Operator |
+| Motor Pool | Đặt xe dùng chung: cột Motor Pool, Number, Operator, Vehicle Types, Vehicle, Pick Up, Drop Off, Status; Settings có Motor Pools, Reservation | Một phần | Đặt xe đi hết; Returned, Email Invoice chưa |
 | Cài đặt thông báo cá nhân | Email, Mobile App bật tắt chung; 18 nhóm sự kiện, mỗi sự kiện cột Email, Push; "You are watching 20 vehicles"; tự theo dõi xe mới, bản ghi m | Chỉ xem | Xem, không lưu |
 | Gắn tài liệu vào xe | Select Vehicles mở "Attach Document to Vehicles": tìm, Attached Vehicles, All Vehicles, Vehicle Types, Groups; gắn xong nút thành "Attached" | Một phần | Chạy một phần: Gắn 1 xe |
 | Mở truy cập từ liên hệ | Chọn Enable Access: "This Contact will be enabled as a User...", Login Information gồm Email, Delay email invitation, Message; Role * mặc đị | Chỉ xem | Xem, không lưu |
-| Tạo Motor Pool | Form Add Motor Pool: Name *, Groups *, Vehicle Types *, Vehicle Statuses * (mặc định Active), "Automatically calculate charges", 'Require "R | Một phần | Chạy một phần: Tạo pool; Auto Approvals, Rates, Fees chỉ đọc |
-| Đặt xe theo loại xe | Form Vehicle Reservation: Operator *, Motor Pool *, Reason for Trip, Pick Up *, Drop Off *. Chọn pool thì hiện Vehicle Types * chỉ gồm loại  | Một phần | Chạy một phần: Submit thiếu dữ liệu; chưa tạo được đặt xe |
+| Tạo Motor Pool | Form Add Motor Pool: Name *, Groups *, Vehicle Types *, Vehicle Statuses * (mặc định Active), "Automatically calculate charges", 'Require "R | Một phần | Pool, phí, tự duyệt chạy; bảng giá 2 chưa |
+| Đặt xe theo loại xe | Form Vehicle Reservation: Operator *, Motor Pool *, Reason for Trip, Pick Up *, Drop Off *. Chọn pool thì hiện Vehicle Types * chỉ gồm loại  | Đã chạy | Tạo, duyệt, gán xe, từ chối, huỷ |
+| Duyệt đặt xe sinh phân công | Hộp "Approve Reservation": Operator, Pool khoá, Vehicle Types chỉ đọc, Vehicle * bắt buộc, sửa được Reason, ngày. Ô Vehicle chỉ gồm xe đúng  | Đã chạy | Chạy |
+| Tự duyệt theo cửa sổ | Tự duyệt khi giờ lấy, giờ trả đều trong cửa sổ và xe không trùng phân công; nhiều xe đủ điều kiện thì chọn theo thứ tự loại xe yêu cầu, rồi  | Một phần | Chạy; chưa có ca nhiều xe |
+| Tính phí đặt xe | Bảng giá theo loại xe: Hourly, Daily, Weekly, Monthly, Mileage; tính từ đơn vị lớn xuống nhỏ, phần dư làm tròn lên. Phí cố định chọn thêm tr | Một phần | Chạy một phần: Giờ, ngày, km, phí cố định; Hourly threshold khác 24, Weekly, Monthly, bảng thứ hai chưa thử |
+| Giao nhận xe đặt | Check Out ghi Start Meter; hộp nói "Checking out confirms the operator has picked up the vehicle."; Return ghi End Meter; quá giờ hẹn thì mụ | Một phần | Chạy một phần: Check Out, Complete; Return, Cancel khi Checked Out chưa thành |
 
 ## Tích hợp, API
 

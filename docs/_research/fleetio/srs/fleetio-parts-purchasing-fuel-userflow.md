@@ -174,7 +174,7 @@ Bản vẽ trên Figma: trang `Research · Fleetio`, frame `7214:221572`, vẽ t
 | Sửa khi đã mua, lùi | 2.1 → 2.11 → 2.1; Unmark về Approved | E-fleetio-parts-purchasing-fuel-026; sửa Draft: E-fleetio-parts-purchasing-fuel-032; sửa Full: E-fleetio-parts-purchasing-fuel-033 |
 | Sao chép, in, lịch sử | 2.1 → form đơn mới; 2.1 → 2.12; 2.1 → 2.10 | E-fleetio-parts-purchasing-fuel-030 |
 | Tìm xưởng | 2.2 → 2.13 | Add Vendor không bấm |
-| Đổi phương pháp giá | Cài đặt → 1.8 | E-fleetio-parts-purchasing-fuel-035; Activate không bấm |
+| Đổi phương pháp giá | Cài đặt → 1.8 | E-fleetio-parts-purchasing-fuel-035; E-fleetio-parts-purchasing-fuel-036; Activate không bấm |
 | Nhận vào lệnh | 2.1 → 2.5 → form lệnh | Huỷ form: hàng ở lại kho; E-fleetio-parts-purchasing-fuel-013; E-fleetio-parts-purchasing-fuel-014 |
 | Trả, đóng | 2.1 → 2.7 → 2.1 → 2.8; đã đóng → 2.9 | E-fleetio-parts-purchasing-fuel-015; E-fleetio-parts-purchasing-fuel-025; E-fleetio-parts-purchasing-fuel-027 |
 | Sửa sau nhận | 2.1 → 2.6 → 2.1 | Nhà cung cấp, kho khoá; không thêm bớt dòng |

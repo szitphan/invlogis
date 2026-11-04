@@ -11,7 +11,7 @@ updated: 2026-11-03
 | UC | Tên | Actor | FR | Màn | Lỗi | OQ |
 |---|---|---|---|---|---|---|
 | UC-manage-vehicle | Quản lý hồ sơ xe | Fleet Manager | 001–008, 020, 022–026, 043, 050–054 | 1.1–1.5, 1.7–1.11 | E-009, E-010, E-024–E-028, E-032 | OQ-16, OQ-17, OQ-19, OQ-20, OQ-21, OQ-22 |
-| UC-archive-vehicle | Lưu trữ, khôi phục xe | Fleet Manager | 021, 048, 049 | 1.2, 1.6 | E-021, E-022, E-023, E-029 | OQ-11 |
+| UC-archive-vehicle | Lưu trữ, khôi phục xe | Fleet Manager | 021, 048, 049 | 1.2, 1.6 | E-021, E-022, E-023, E-029, E-035 | OQ-11 |
 | UC-assign-vehicle | Gán, thay người, thu hồi xe | Fleet Manager | 009–012, 027–029 | 2.1–2.6 | E-001, E-003, E-012, E-017, E-030, E-031 | OQ-1, OQ-7, OQ-12, OQ-13, OQ-14 |
 | UC-log-meter | Ghi và sửa số đồng hồ | Fleet Manager, Operator | 013–016, 030–032, 044, 046, 047 | 3.1–3.6 | E-002, E-004–E-008, E-013, E-015, E-019, E-020 | OQ-2, OQ-8, OQ-9, OQ-14, OQ-18 |
 | UC-tire | Đọc lốp | Technician | 017 | 4.1 | Xem `fleetio-tires` | OQ-3 |
@@ -41,11 +41,11 @@ Số FR, lỗi viết tắt, đầy đủ có tiền tố `fleetio-vehicle`. FR-
 | Bước | Người dùng | Hệ thống |
 |---|---|---|
 | 1 | More Actions, Archive | Hộp "Confirm Vehicle Archive" báo trước hiệu ứng, nêu 2 điều kiện chặn |
-| 2 | Bấm Archive Vehicle | Kiểm Lệnh chưa xong, Motor Pool đang đặt (`Xem` phần Motor Pool) |
+| 2 | Bấm Archive Vehicle | Kiểm Lệnh chưa xong, đặt xe Approved (`Chạy`); Requested, sự cố Open không chặn; Checked Out chưa tách |
 | 3 | — | Ngắt liên kết, đóng phân công đang chạy, xoá phân công tương lai, đưa xe sang tab Archived; Status giữ nguyên |
 | 4 | Mở xe Archived, bấm Restore | Chạy ngay, không hỏi; giữ trạng thái, đồng hồ, cấu hình trục |
 
-**Nhánh:** 2a Còn Lệnh mở: E-021, xe không Archive nhưng liên kết vẫn mất (E-022), phân công tương lai còn. Phải đóng Lệnh (E-029) rồi làm lại. 4a Gói đầy: Restore khoá, không giải thích (E-023). **Không đảo ngược được:** liên kết, phân công đã mất không quay lại sau Restore, phải làm lại bằng tay.
+**Nhánh:** 2a Còn Lệnh mở: E-021, xe không Archive nhưng liên kết vẫn mất (E-022), phân công tương lai còn. Phải đóng Lệnh (E-029) rồi làm lại. 2b Còn đặt xe Approved: E-021, phân công Future còn; liên kết chưa đo. 3a Còn đặt xe Requested: vẫn Archive, đặt xe bị bỏ quên (E-035). 4a Gói đầy: Restore khoá, không giải thích (E-023). **Không đảo ngược được:** liên kết, phân công đã mất không quay lại sau Restore, phải làm lại bằng tay.
 
 ## UC-assign-vehicle — Gán, thay người, thu hồi xe
 

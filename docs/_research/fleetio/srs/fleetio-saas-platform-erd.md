@@ -40,6 +40,10 @@ erDiagram
     ACCOUNT ||--o{ MOTOR_POOL : "có"
     MOTOR_POOL ||--o{ RESERVATION : "nhận"
     MOTOR_POOL ||--o{ AUTO_APPROVAL_WINDOW : "có"
+    RATE_TABLE ||--o{ MOTOR_POOL : "tính phí cho"
+    RESERVATION ||--o| VEHICLE_ASSIGNMENT : "sinh khi duyệt"
+    RESERVATION ||--o{ RESERVATION_LINE_ITEM : "có"
+    FLAT_FEE ||--o{ RESERVATION_LINE_ITEM : "thêm vào"
     ACCOUNT ||--o{ RATE_TABLE : "có"
     ACCOUNT ||--o{ FLAT_FEE : "có"
     CONTACT ||--o{ RESERVATION : "đặt"
@@ -211,6 +215,13 @@ erDiagram
     RATE_TABLE {
         string ten
         string trang_thai
+        string loai_xe
+        number gia_gio
+        number gia_ngay
+        number gia_tuan
+        number gia_thang
+        number gia_km
+        number nguong_gio
     }
     FLAT_FEE {
         string ten
@@ -221,9 +232,31 @@ erDiagram
     RESERVATION {
         string so
         string loai_xe
+        string xe
+        string ly_do
         datetime nhan_xe
         datetime tra_xe
+        datetime checked_out_at
+        datetime returned_at
+        number start_meter
+        number end_meter
+        string ly_do_tu_choi
+        string ly_do_huy
         string trang_thai
+    }
+    VEHICLE_ASSIGNMENT {
+        string xe
+        string nguoi_lai
+        datetime bat_dau
+        datetime ket_thuc
+        number start_meter
+        number end_meter
+    }
+    RESERVATION_LINE_ITEM {
+        string loai
+        number don_gia
+        number so_luong
+        number thanh_tien
     }
     DOCUMENT {
         string ten_tep
@@ -285,5 +318,5 @@ erDiagram
 - API Key không vẽ giá trị khoá; không tạo khoá trong lượt chạy (`Xem`).
 - Group gán cho cả xe và liên hệ; xe thuộc nhóm Phương tiện nên không vẽ lại ở đây (`Xem`).
 - Report Share Link không lưu trong sơ đồ giá trị đường dẫn vì tài liệu này không ghi link đã chia sẻ.
-- Quan hệ Reservation với xe và Recall với xe, Issue thuộc nhóm khác, chưa chạy. Reservation ghi loại xe trước, cột Vehicle trên danh sách cho thấy có xe cụ thể về sau (`Suy`); chưa tạo được đặt xe nào.
-- Contact đặt xe phải vừa có User vừa có tick Operator (`Chạy`). Motor Pool cấu hình đọc từ form (`Chạy`); Auto Approval Window, Rate Table, Flat Fee chỉ đọc (`Xem`).
+- Quan hệ Reservation với xe và Recall với xe, Issue thuộc nhóm khác, chưa chạy. Reservation ghi loại xe trước, xe cụ thể gán lúc duyệt hoặc tự duyệt (`Chạy`). Duyệt sinh Vehicle Assignment thật, nên trùng lịch được chặn từ đây (`Chạy`); Vehicle Assignment thuộc nhóm Phương tiện, ở đây chỉ vẽ phần nối.
+- Contact đặt xe phải vừa có User vừa có tick Operator (`Chạy`). Motor Pool cấu hình đọc từ form (`Chạy`); Auto Approval Window, Rate Table, Flat Fee đã tạo thật ở lượt 6 (`Chạy`); bảng giá thứ hai "If greater than N days" chưa thử, nên quan hệ Rate Table với Motor Pool mới vẽ một bảng.

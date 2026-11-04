@@ -64,7 +64,9 @@ stateDiagram-v2
 | Mọi trạng thái | Lưu form kèm nhóm Sample | Không đổi | Lỗi một trường | Cả form bị từ chối | "Vehicle could not be updated" | `Chạy` |
 | Mọi trạng thái | Archive, không có Lệnh chưa xong | Archived, Status giữ nguyên | Quyền `vehicles_archive_delete`; Operator không có | Ngắt liên kết, đóng phân công đang chạy, xoá phân công tương lai, rời lịch phân công | Hộp "Confirm Vehicle Archive" | `Chạy`, quyền `Xem` |
 | Mọi trạng thái | Archive, còn Lệnh mở | Không đổi | Lệnh Open | Bị từ chối nhưng VẪN ngắt liên kết hai phía (2/2 lần); phân công tương lai còn; không có lịch sử | "Vehicle could not be archived." | `Chạy` |
-| Mọi trạng thái | Archive, còn Motor Pool đang đặt | Không đổi theo câu trong hộp | Lượt 5 có pool, chưa tạo được đặt xe | Chưa kiểm hiệu ứng | "Vehicles with active Motor Pool reservations cannot be archived." | `Xem` |
+| Mọi trạng thái | Archive, còn đặt xe Approved | Không đổi | Có đối chứng | Phân công Future, đặt xe không đổi; liên kết chưa đo vì xe không có liên kết | "Vehicle could not be archived." | `Chạy` |
+| Mọi trạng thái | Archive, chỉ còn đặt xe Requested, có sự cố Open | Archived, Status giữ nguyên | Không bị chặn | Đặt xe vẫn Requested, không duyệt được, không báo | "Successfully archived …", "This record is archived." | `Chạy` |
+| Mọi trạng thái | Archive, có đặt xe Checked Out | Chưa tách riêng | Lúc thử còn đặt xe Approved | — | — | Chưa chạy |
 | Archived | Restore, gói còn chỗ | Trạng thái cũ | Bấm là chạy, không hỏi | Giữ trạng thái, đồng hồ, cấu hình trục; KHÔNG trả lại liên kết, phân công | "Record successfully restored!" | `Chạy` |
 | Archived | Restore, gói đầy | Không đổi | 5 of 5 | Nút khoá, bấm không có gì | Không có câu giải thích | `Chạy` |
 | Archived | Xem đồng hồ, cấu hình trục | Không đổi | — | Xem được, Edit trục khoá | — | `Chạy` |
@@ -141,6 +143,8 @@ stateDiagram-v2
 | Future | Archive xe thành công | Bị xoá | Hộp đã báo trước | Không còn dòng nào, kể cả ở lịch sử liên hệ | "remove any future-dated vehicle assignments" | `Chạy` |
 | Future | Archive xe bị từ chối | Không đổi | Còn Lệnh mở | Phân công còn nguyên | "Vehicle could not be archived." | `Chạy` |
 | Đã kết thúc, bị xoá | Restore xe | Không đổi | — | Phân công đã mất KHÔNG quay lại | "Record successfully restored!" | `Chạy` |
+| Chưa có | Duyệt đặt xe | Future | Đặt xe Approved | Phân công thật, nhãn "Future" trên liên hệ | "Reservation was approved successfully" | `Chạy` |
+| Future | Huỷ đặt xe Approved | Bị xoá | Sinh từ đặt xe | Không còn dòng | "Reservation was canceled successfully" | `Chạy` |
 | Chưa có | Lưu trên xe Out of Service, Inactive | Future hoặc đang chạy | Không xét trạng thái xe | KHÔNG cảnh báo | "successfully created" | `Chạy` |
 | Đã kết thúc | Sửa | Chưa thử | — | — | — | Chưa chạy |
 
@@ -177,7 +181,7 @@ Chỉ thấy Status "Active" và số đếm active, expiring soon, total. Khôn
 | Replacement Analysis | Máy tính, không lưu bản ghi theo xe | `Chạy` |
 | Liên hệ Operator | Là phân loại tick, không phải trạng thái | `Chạy` |
 | Recall | Có tab All, Needs Action, Open, Resolved, Acknowledged; chưa đổi thử trên Sample nên chưa biết luật chuyển | `Xem` |
-| Đặt xe Motor Pool | Có cột Status; chưa tạo được đặt xe nào (lượt 5: không có Operator hợp lệ) nên chưa biết trạng thái, luật chuyển | `Xem` |
+| Đặt xe Motor Pool | Có trạng thái thật: Requested, Approved, Checked Out, Returned, Completed, Denied, Canceled; ma trận ở `run-notes/platform.md` và nhóm Nền tảng. Tác động lên xe: Approved chặn Archive và sinh phân công, Requested thì không | `Chạy` |
 | Lốp | Vị trí trên xe, không phải đối tượng riêng; xem `fleetio-tires` | `Chạy` |
 | Tài liệu đính vào xe | Có hoặc không, nhãn "Shared" chỉ loại tài liệu; gỡ đính chưa thử | `Chạy` |
 | Bộ lịch bảo dưỡng trên xe | Chỉ thấy trang rỗng khi xe chưa có bộ lịch; chưa gán để xem trạng thái | `Chạy` |

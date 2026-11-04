@@ -239,6 +239,7 @@ stateDiagram-v2
 |---|---|---|---|---|---|---|
 | Static Pricing | Chọn Average, FIFO hoặc LIFO | Chờ kích hoạt | Không có nút Save (K30) | Hiện khối cảnh báo, ô tích, nút Activate xám; chưa lưu gì | "IMPORTANT INFORMATION ABOUT CHOOSING A NEW INVENTORY VALUATION METHOD" | `Chạy` |
 | Chờ kích hoạt | Tải lại trang | Static Pricing | Không tích, không bấm (K37) | Vẫn Static Pricing, ô tích trống | Không có | `Chạy` |
+| Chờ kích hoạt | Dọn điều kiện, hoàn thành Lệnh #103 | Chờ kích hoạt | User duyệt FIFO; dòng công không sửa được, chưa xoá (K40, K41, K43, E-036) | Dừng, không tích, không Activate; tải lại vẫn Static Pricing | "Work Order Labor Line Items is invalid" | `Chạy` tới chỗ chặn |
 | Chờ kích hoạt | Tích ô, Activate, đủ điều kiện | Phương pháp mới | Mọi phụ tùng có Unit Cost; FIFO, LIFO hết lệnh dở (K35, K36) | Tồn nhận giá Unit Cost; tồn Archived về 0; FIFO, LIFO khoá dòng lệnh cũ (K32–K35) | "I am aware the change I am about to make is permanent and can not be reversed" | `Xem` câu chữ, không chạy |
 | Chờ kích hoạt | Activate, còn lệnh dở | Thất bại | FIFO, LIFO (K36, E-035) | Migration thất bại theo câu chữ | "An incomplete Work Order at the time of migration will cause the migration to fail." | `Xem` câu chữ, không chạy |
 | Phương pháp mới | Đổi lại | Không có | Câu chữ ghi không đảo được, chưa kiểm chứng (K37) | Chưa biết | "can not be reversed" | `Xem` câu chữ, không chạy |

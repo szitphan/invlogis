@@ -198,6 +198,6 @@ erDiagram
 
 **Mẫu số chi phí trên km:** lấy từ `METER_ENTRY`, tức dòng Void không tính, nhưng dòng đã Unvoid có tính (`Chạy`, đồng hồ 5.000 lên 20.000).
 
-**Quan hệ Vehicle với Recall và Motor Pool:** đọc từ cột danh sách (`Xem`), chưa tạo bản ghi nên bản số chỉ là suy luận. Lượt 5 đã tạo `MOTOR_POOL` (`Chạy`); chưa tạo được đặt xe. Người đặt chọn loại xe, xe cụ thể gán sau là `Suy`.
+**Quan hệ Vehicle với Recall và Motor Pool:** đọc từ cột danh sách (`Xem`), chưa tạo bản ghi nên bản số chỉ là suy luận. Lượt 5 đã tạo `MOTOR_POOL`, lượt 6 đã tạo đặt xe (`Chạy`). Người đặt chọn loại xe, người duyệt chọn xe; duyệt sinh `ASSIGNMENT` thật, huỷ thì xoá (`Chạy`); khoá nối hai bản ghi là `Suy`, sơ đồ chưa vẽ quan hệ này.
 
 **`WARRANTY_TEMPLATE`:** bảo hành sinh từ mẫu đổi theo khi áp về quá khứ, nên có liên kết (`Chạy`); cột là `Suy` từ form.

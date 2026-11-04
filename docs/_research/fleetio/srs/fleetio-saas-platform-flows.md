@@ -531,10 +531,63 @@ flowchart TD
     K --> L["E-fleetio-saas-platform-029 Failed to create Reservation, không tạo bản ghi"]
     L --> M{"Xử lý"}
     M -->|"Cancel"| N["Rời form, không có đặt xe"]
-    M -->|"Tick Operator hoặc mời người, chưa làm"| O["Chưa biết: duyệt, gán xe, tính phí"]
-    I -->|"Có, chưa có dữ liệu"| O
+    M -->|"Tick Operator, lượt 6 user duyệt"| O["Tạo được, Requested, xem Flow 26"]
+    I -->|"Có"| O
     N --> Z["Kết thúc"]
     O --> Z
 ```
 
 Đảo ngược: pool đã tạo không xoá theo ràng buộc, nên chưa biết Delete hay Archive pool. Đề xuất Invlogis: cho điều độ đặt hộ lái xe không có tài khoản.
+
+## Flow 26: Tự duyệt hoặc duyệt tay, có nhánh trùng lịch và đảo ngược (`Chạy`, lượt 6)
+
+```mermaid
+flowchart TD
+    A["Submit đặt xe đủ dữ liệu"] --> B{"Pool bật tự duyệt?"}
+    B -->|"Không"| R["Requested, Vehicle trống"]
+    B -->|"Có"| C{"Giờ lấy, giờ trả trong cửa sổ theo múi giờ cửa sổ?"}
+    C -->|"Không, lệch múi giờ hoặc trả ngoài cửa sổ"| E["E-fleetio-saas-platform-033 Không báo lý do"]
+    E --> R
+    C -->|"Có"| D{"Xe không trùng phân công?"}
+    D -->|"Trùng"| E
+    D -->|"Có xe"| F["Tự Approved, tự gán xe, toast không nói đã tự duyệt"]
+    R --> G{"Quản lý xử lý"}
+    G -->|"Deny, có lý do"| H["Denied, mất Edit"]
+    G -->|"Cancel, có lý do"| I["Canceled, chỉ còn lịch sử"]
+    G -->|"Approve"| J{"Ô Vehicle có xe chọn được?"}
+    J -->|"Xe trùng lịch"| K["Xe xám, tooltip nêu giờ trùng"]
+    K --> G
+    J -->|"Có"| L["Approved, sinh phân công Future, chặn Archive xe"]
+    F --> L
+    L -->|"Cancel, xoá phân công"| I
+    L --> M["Xem Flow 27"]
+    H --> Z["Kết thúc"]
+    I --> Z
+    M --> Z
+```
+
+Theo How it works, nhiều xe đủ điều kiện thì chọn theo thứ tự loại xe yêu cầu rồi đồng hồ thấp nhất; chưa có ca nhiều xe. Ô giờ nhận theo múi giờ trình duyệt là `Suy`.
+
+## Flow 27: Giao xe, trả xe, tính phí (`Chạy` tới Completed, Return lỗi; lượt 6)
+
+```mermaid
+flowchart TD
+    A["Approved"] --> B["Check Out, nhập Start Meter"]
+    B --> C{"Lấy xe trước ngày hẹn?"}
+    C -->|"Có"| D["E-fleetio-saas-platform-031 Đồng hồ đề ngày tương lai"]
+    C -->|"Không, chưa thử riêng"| E["Checked Out"]
+    D --> E
+    E --> F{"Đã quá giờ Drop Off hẹn?"}
+    F -->|"Chưa, bấm Return"| G["E-fleetio-saas-platform-030 Lỗi 422, không lý do"]
+    G --> H["Edit dời ngày về quá khứ"]
+    H --> I{"Pick Up sau số đồng hồ đã có?"}
+    I -->|"Không"| J["E-fleetio-saas-platform-032 must be less than 100 or marked as void"]
+    J --> H
+    I -->|"Có"| F
+    F -->|"Rồi"| K["Complete, nhập End Meter"]
+    K --> L["Báo tính lại trước khi lưu"]
+    L --> M["Completed, Line Items, phân công thành lịch sử, đồng hồ xe lên End Meter"]
+    M --> Z["Kết thúc"]
+```
+
+Nguyên nhân 422 là `Suy`, chưa xác nhận (OQ-22): sau khi dời ngày không thử lại Return. Trạng thái Returned chưa từng đạt, nhánh Returned sang Completed chỉ theo câu trên hộp. Đảo ngược sau Completed: còn nút Edit, chưa thử.

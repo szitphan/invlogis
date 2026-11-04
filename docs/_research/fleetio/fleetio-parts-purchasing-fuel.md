@@ -261,7 +261,8 @@ Trạng thái đơn mua do hệ thống cố định, trang cấu hình không c
 - **Enter trong ô Country:** vừa chọn vừa lưu form nhà cung cấp, ba lần đều vậy; dễ tạo bản ghi sớm (`Chạy`).
 - **Không có trường thay thế, tương thích xe** trong form, danh sách, menu phụ tùng; chỉ có Replaced Parts trong bảo hành ở lệnh, và cột Linked Service Tasks nối phụ tùng với đầu việc (`Chạy` phần form; trang Linked Service Tasks chưa rà).
 - **Không nên học, số đang về không giảm khi lùi đơn:** lùi Purchased về Approved rồi Draft, Pending vẫn 15 (`Chạy`, chỉ PO #4). Số hàng đang về sai dẫn tới quyết định đặt hàng sai.
-- **Đổi phương pháp giá là một chiều, theo câu chữ màn:** "permanent and can not be reversed"; tồn hiện có nhận giá Unit Cost danh mục, không phải giá đơn mua; tồn phụ tùng Archived về 0; FIFO, LIFO khoá dòng phụ tùng lệnh cũ, buộc hết lệnh dở (`Xem`, chưa đổi, chưa đo giá xuất kho).
+- **Đổi phương pháp giá là một chiều, theo câu chữ màn:** "permanent and can not be reversed"; tồn hiện có nhận giá Unit Cost danh mục, không phải giá đơn mua; tồn phụ tùng Archived về 0; FIFO, LIFO khoá dòng phụ tùng lệnh cũ, buộc hết lệnh dở có dòng phụ tùng (`Xem`, chưa đổi, chưa đo giá xuất kho).
+- **Không nên học, một dòng công chặn đổi phương pháp giá cả tài khoản:** thử FIFO bị chặn ở Lệnh #103, "Work Order Labor Line Items is invalid"; dòng công không sửa được, chỉ còn xoá, nên dừng trước Activate. FIFO vẫn chưa đổi, chưa đo (`Chạy` tới chỗ chặn; nguyên nhân do contact Sample `Suy`). Invlogis nên chỉ rõ dòng lỗi và cách sửa.
 - **Không nên học, đơn nháp vào số đang về:** Draft đã sửa và lưu làm Pending tăng dù chưa duyệt; đọc thẻ tồn sẽ tin có hàng đang về (`Chạy`, PO #5). Kết luận trước đó "chỉ tính từ Purchased" chỉ đúng với đơn chưa sửa.
 - **Không nên học, đơn báo đủ hàng khi đang thiếu:** tăng số đặt ở Full vẫn "Received, Full", không có Receive (`Chạy`, PO #3).
 - **Không nên học, báo cáo đơn cộng cả Draft:** Total Amount của báo cáo đơn mua gồm đơn nháp; biểu đồ theo nhà cung cấp lệch thang ở VND (`Chạy`).
@@ -432,7 +433,8 @@ Mã bưu chính bắt buộc không hợp với Việt Nam; Invlogis không nên
 | OQ-6 | Fleetio huỷ đơn, đóng thiếu, nhận vượt, trả hàng thế nào? | Đã trả lời: không có nút huỷ sau Approved, chỉ Delete hoặc lùi Draft; đóng được khi nhận thiếu; nhận vượt được; trả hàng qua Make Adjustment ở Full và Closed. Phần Rejected chuyển sang OQ-8 | Không áp dụng |
 | OQ-7 | Xoá dòng phụ tùng có hoàn kho không? | Đã trả lời: có, sổ +20, tồn về 9,5. Phần xoá lệnh chuyển sang OQ-9 | Không áp dụng |
 | OQ-8 đến OQ-10, OQ-12, OQ-14, OQ-16, OQ-18, OQ-20 | Các điểm Fleetio chưa thử được. Lượt 3 thử lại OQ-8, OQ-14, OQ-20: không chạy được vì cần người thứ hai, tích hợp | Mở, liệt kê ở SRS Mục 12 | Không áp dụng |
-| OQ-11 | Dưới FIFO, LIFO, Average: giá trị tồn, sửa giá sau khi nhận, nhận vào lệnh thế nào? | Một phần, từ câu chữ màn, chưa đo: tồn đầu lấy Unit Cost danh mục; FIFO, LIFO khoá sửa dòng phụ tùng lệnh cũ. Phần còn lại vẫn mở | Không áp dụng |
+| OQ-11 | Dưới FIFO, LIFO, Average: giá trị tồn, sửa giá sau khi nhận, nhận vào lệnh thế nào? | Một phần, từ câu chữ màn, chưa đo: tồn đầu lấy Unit Cost danh mục; FIFO, LIFO khoá sửa dòng phụ tùng lệnh cũ. Lượt 6 chỉ biết thêm điều kiện, FIFO bị chặn ở Lệnh #103, chưa đổi, chưa đo. Phần còn lại vẫn mở | Không áp dụng |
+| OQ-28 | Dòng công dùng contact Sample có đúng là nguyên nhân lỗi Labor Line Items không? | Mở, liệt kê ở SRS Mục 12 | Không áp dụng |
 | OQ-13 | Đơn Draft có tính vào Pending PO Qty không? | Một phần, mở lại: Draft chưa sửa không tính; Draft đã sửa và lưu thì tính. Thao tác nào kích hoạt và Approved đã sửa chưa đo | Không áp dụng |
 | OQ-15 | Find Shops, Network Status: Invite làm gì? | Một phần: Find Shops tìm cửa hàng kèm bản đồ; Invite không bấm vì mời người ngoài, còn mở | Không áp dụng |
 | OQ-17 | Tồn về 0 khi điểm đặt lại bằng 0 thì nhãn gì? | Đã trả lời: Out of Stock, Low Stock không hiện | Không áp dụng |

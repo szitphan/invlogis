@@ -387,3 +387,104 @@ updated: 2026-11-03
 | 6 | Cancel, Submit Reservation | Nút | — | Submit không tạo bản ghi |
 | 7 | Toast đỏ | Thông báo | — | "Failed to create Reservation". Toast xanh "Complete: Restoring Work Order #106 data" là việc ngoài luồng này, ghi chú chạy không nêu |
 | 8 | Nền trang Reservations | Bảng | — | Cột Motor Pool, Number, Pick Up, Drop Off, Status; danh sách rỗng; khung Learn "Reservations Overview" bị hộp che một phần |
+
+## 5.14 Đặt xe chờ duyệt
+
+Toast "Restoring Work Order #106 data" có mặt ở cả 7 ảnh 5.14 đến 5.20, ngoài luồng đặt xe, ghi chú chạy không nêu.
+
+![Reservation Requested](images/reservation-detail-requested.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Status | Nhãn | — | Requested, chấm vàng |
+| 2 | Motor Pool, Reason for Trip, Vehicle Types | Chữ | — | Theo form đặt; Vehicle Types Semi Truck |
+| 3 | Vehicle | Chữ | — | "—": chưa gán xe |
+| 4 | Operator | Liên kết | Liên hệ | Người được đặt |
+| 5 | Pick Up, Drop Off | Ngày giờ | — | Giờ hẹn |
+| 6 | Start Meter, End Meter | Số | — | "—" |
+| 7 | Line Items | Bảng | Charges, Rates, Quantity, Subtotal | Trống vì pool chưa bật tính phí |
+| 8 | "...", Edit | Menu, nút | — | Menu có Approve, Deny, Cancel, View Record History (không có trong ảnh, theo ghi chú chạy) |
+
+## 5.15 Hộp duyệt đặt xe
+
+![Approve Reservation](images/reservation-approve-dialog.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Operator | Chữ, liên kết | — | Không sửa được |
+| 2 | Motor Pool | Chọn, khoá | — | Xám |
+| 3 | Vehicle Types | Nhãn | — | Chỉ đọc, Semi Truck |
+| 4 | Vehicle * | Chọn | Xe | Bắt buộc, "Please select"; danh sách chưa mở trong ảnh; chỉ gồm xe đúng loại, đúng nhóm (BR-fleetio-saas-platform-062) |
+| 5 | Reason for Trip * | Ô nhập | Chữ | Sửa được |
+| 6 | Pick Up *, Drop Off * | Ngày, giờ | Ngày giờ | Sửa được, có giá trị thật, không phải chữ mờ |
+| 7 | Cancel, Approve Reservation | Nút | — | Duyệt báo "Reservation was approved successfully" |
+
+## 5.16 Đặt xe đã duyệt
+
+![Reservation Approved](images/reservation-detail-approved.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Status | Nhãn | — | Approved, chấm xanh |
+| 2 | Vehicle | Liên kết | Xe | TEST-DAUKEO-2, đã gán lúc duyệt |
+| 3 | Start Meter, End Meter | Số | — | Vẫn "—" |
+| 4 | Line Items | Bảng | — | Trống; bật tính phí sau đó cũng không tính lại (BR-fleetio-saas-platform-068) |
+| 5 | "...", Edit | Menu, nút | — | Menu Check Out, Email Invoice, Print, Cancel, View Record History (không có trong ảnh, theo ghi chú chạy) |
+| 6 | Toast | Thông báo | — | "Reservation was approved successfully". Ảnh không cho thấy phân công "Future", dòng đó ở trang liên hệ |
+
+## 5.17 Đặt xe tự duyệt kèm phí
+
+![Đặt xe tự duyệt](images/reservation-auto-approved-charges.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Status | Nhãn | — | Approved do tự duyệt; trên trang không có dấu nào phân biệt với duyệt tay (E-fleetio-saas-platform-033 là nhánh ngược) |
+| 2 | Vehicle | Liên kết | Xe | Tự gán TEST-DAUKEO-2 |
+| 3 | Reason for Trip | Chữ | — | "TEST mui gio Hanoi" |
+| 4 | Pick Up, Drop Off | Ngày giờ | — | 9:00am đến 4:00pm cùng ngày |
+| 5 | Hours | Dòng phí | Tiền | 10.000 ₫ / hour × 7 hours = 70.000 ₫ |
+| 6 | Meter | Dòng phí | Tiền | 1.000 ₫ / km × 0 km = 0 ₫ |
+| 7 | Total | Tổng | Tiền | 70.000 ₫ |
+
+## 5.18 Phí nhiều ngày, phí cố định
+
+![Phí nhiều ngày và phí cố định](images/reservation-charges-flat-fee.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Drop Off | Ngày giờ | — | Đã đổi sang 2 ngày 3 giờ sau Pick Up |
+| 2 | Days | Dòng phí | Tiền | 100.000 ₫ / day × 2 days = 200.000 ₫: tính từ đơn vị lớn |
+| 3 | Hours | Dòng phí | Tiền | 10.000 ₫ / hour × 3 hours = 30.000 ₫ |
+| 4 | Meter | Dòng phí | Tiền | 0 km, 0 ₫ |
+| 5 | TEST-FEE-VE-SINH | Dòng phí | Tiền | 50.000 ₫, Quantity "—" |
+| 6 | Total | Tổng | Tiền | 280.000 ₫ |
+| 7 | Toast | Thông báo | — | "Reservation was edited successfully". Câu "Charges have been recalculated..." ở form Edit, không có trong ảnh |
+
+## 5.19 Xe trùng lịch khi duyệt
+
+![Xe trùng lịch](images/reservation-vehicle-overlap.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Approve Reservation #4 | Hộp | — | Nền: Requested, Vehicle "—", Reason "TEST trung lich" |
+| 2 | Vehicle * đang mở | Chọn | Xe | 1 dòng xe xám, không chọn được, có biểu tượng lịch; dòng phụ Active, Semi Truck, nhóm, số VIN/SN; tiêu đề danh sách bị tooltip che |
+| 3 | Tooltip | Chú thích | — | "Requested dates overlap an existing assignment from 11/23/2026 9:00am to 11/25/2026 12:00pm" |
+| 4 | Reason for Trip | Ô nhập | — | Bị danh sách che trong ảnh |
+| 5 | Pick Up *, Drop Off * | Ngày, giờ | — | 10:00am đến 3:00pm, trùng #3 |
+| 6 | Cancel, Approve Reservation | Nút | — | Nút vẫn sáng khi chưa chọn được xe; bấm thử không có trong ghi chú chạy |
+
+## 5.20 Đặt xe hoàn tất
+
+![Reservation Completed](images/reservation-completed.jpg)
+
+| # | Items | Control type | Data type | Description |
+|---|---|---|---|---|
+| 1 | Status | Nhãn | — | Completed |
+| 2 | Pick Up, Drop Off | Ngày giờ | — | Drop Off tự đổi về giờ hoàn tất (BR-fleetio-saas-platform-072) |
+| 3 | Checked Out At, Returned At | Ngày giờ | — | Chỉ xuất hiện sau khi giao, hoàn tất |
+| 4 | Start Meter, End Meter | Số | km | 2,510 km, 2,560 km |
+| 5 | Hours | Dòng phí | Tiền | 10.000 ₫ × 1 hour = 10.000 ₫ |
+| 6 | Meter | Dòng phí | Tiền | 1.000 ₫ × 50 km = 50.000 ₫ |
+| 7 | TEST-FEE-VE-SINH | Dòng phí | Tiền | 50.000 ₫, giữ từ trước |
+| 8 | Total | Tổng | Tiền | 110.000 ₫ |
+| 9 | Edit, "..." | Nút, menu | — | Completed vẫn còn Edit; menu chưa đọc |
