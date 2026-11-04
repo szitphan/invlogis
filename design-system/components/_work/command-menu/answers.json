@@ -1,0 +1,38 @@
+{
+ "brainstorm-D1": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D2": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D3": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D4": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D5": {
+  "choice": 1,
+  "note": ""
+ },
+ "brainstorm-D6": {
+  "choice": 0,
+  "note": "góp ý 04/11: bỏ kiểu dòng tiêu đề có ← (D6 B) → chip ngữ cảnh trong ô"
+ },
+ "brainstorm-D7": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D8": {
+  "choice": 1,
+  "note": ""
+ },
+ "preview-approve": {
+  "choice": 0,
+  "note": "duyệt trong chat 04/11"
+ }
+}
