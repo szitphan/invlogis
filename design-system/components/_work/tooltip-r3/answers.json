@@ -1,0 +1,58 @@
+{
+ "brainstorm-D1": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D2": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D3": {
+  "choice": 0,
+  "note": ""
+ },
+ "brainstorm-D4": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-help-icon.size.mobile": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-tooltip-supporting.max-width.web": {
+  "choice": 0,
+  "note": "user 03/11: 320 qua token tooltip/supporting-max-width trỏ width/xxs (DEC-353)"
+ },
+ "foundation-var.color-action-secondary.dark": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-var.color-bg-primary.dark": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-var.color-bg-primary_solid.dark": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-var.color-text-primary.dark": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-var.color-text-tertiary_strong.dark": {
+  "choice": 0,
+  "note": ""
+ },
+ "foundation-help-icon-·-hình-(app).height.mobile": {
+  "choice": 0,
+  "note": "user 03/11: giữ 16 icon/size/md, 20 là khai báo cũ"
+ },
+ "foundation-help-icon-·-hình-(app).width.mobile": {
+  "choice": 0,
+  "note": "user 03/11: giữ 16 icon/size/md, 20 là khai báo cũ"
+ },
+ "foundation-tooltip.shadow.web": {
+  "choice": 1,
+  "note": "theo lần duyệt trước: shadow/xs, khớp Figma"
+ }
+}

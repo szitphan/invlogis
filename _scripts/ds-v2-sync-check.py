@@ -143,6 +143,8 @@ def expected_vars(d):
         cname = next((k for k, pres in plat.items() if any(n.startswith(p) for p in pres)), "Platform") \
             if isinstance(plat, dict) else plat
         w, m = num(v.get("Web"), "Web"), num(v.get("Mobile"), "Mobile")
+        # Mobile "100%": app dùng Fill, biến Figma chỉ giữ số, 361 = khung 393 trừ hai lề (DEC-324)
+        m = 361 if m == "100%" else m
         if "OPACITY" in v.get("scopes", []):  # Figma đo độ mờ 0–100, tokens.json/CSS 0–1
             w, m = (x * 100 if isinstance(x, (int, float)) else x for x in (w, m))
         out.append((cname, n, {"Web": w, "Mobile": m}))

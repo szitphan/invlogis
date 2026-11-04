@@ -1,7 +1,7 @@
 ---
 type: design-foundations
-status: draft
-updated: 2026-11-02
+status: approved
+updated: 2026-11-03
 links:
   - design-system/foundations/README.md
   - design-system/components/base/logo.md

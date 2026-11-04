@@ -739,6 +739,7 @@
   --avatar-group-overlap-md: -8px;
   --avatar-group-overlap-lg: -12px;
   --tooltip-max-width: 240px;
+  --tooltip-supporting-max-width: var(--width-xxs);
   --help-sheet-title-line-height: var(--line-height-lg);
   --upload-action-font-size: var(--font-size-sm);
   --upload-disabled-opacity: 0.6;
@@ -931,6 +932,7 @@
   --avatar-group-overlap-md: -8px;
   --avatar-group-overlap-lg: -12px;
   --tooltip-max-width: 240px;
+  --tooltip-supporting-max-width: var(--width-xxs);
   --help-sheet-title-line-height: var(--line-height-lg);
   --upload-action-font-size: var(--font-size-sm);
   --upload-disabled-opacity: 0.6;

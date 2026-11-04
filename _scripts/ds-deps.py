@@ -150,7 +150,8 @@ def fversions():
         k = row["key"]
         parts = [secs.get(n, "") for n in re.findall(r"mục (\d+)", row["where"])]
         if k == "icon" and ICONS.exists():
-            parts.append(re.sub(r"^updated:.*$", "", ICONS.read_text(encoding="utf-8"), flags=re.M))
+            # đổi status không phải đổi nội dung: giữ dòng cố định để component không stale nhầm, mã băm cũ vẫn đúng
+            parts.append(re.sub(r"^status:.*$", "status: draft", re.sub(r"^updated:.*$", "", ICONS.read_text(encoding="utf-8"), flags=re.M), flags=re.M))
         if k in FDOC and (FDIR / FDOC[k]).exists():
             parts.append(re.sub(r"^updated:.*$", "", (FDIR / FDOC[k]).read_text(encoding="utf-8"), flags=re.M))
         pre = tuple("--" + x for x in FPREFIX.get(k, FTOKEN.get(k, ())))

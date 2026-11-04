@@ -557,16 +557,17 @@
    "built": {
     "children": {},
     "foundations": {
-     "color": "e56c669820",
-     "elevation": "ea6e83a46b",
-     "grid": "cdff5a29e9",
-     "icon": "1e40db1192",
-     "radius": "466c51ff76",
-     "space": "508f2ac3cc",
-     "touch-focus": "fef36289a7",
+     "color": "6b7e920f44",
+     "elevation": "d43b07eb4c",
+     "grid": "404883c0ce",
+     "icon": "3e8c8581dc",
+     "motion": "b3285a50a8",
+     "radius": "274b678403",
+     "space": "031189189d",
+     "touch-focus": "645e61cd7a",
      "type": "98e5cd2b90"
     },
-    "at": "2026-11-01"
+    "at": "2026-11-03"
    }
   },
   "tyre-layout": {

@@ -7,7 +7,7 @@
    "page": "DS · Foundations",
    "section": "6702:122239",
    "sectionName": "Logos",
-   "status": null
+   "status": "Nháp"
   },
   {
    "id": "6657:165918",
@@ -88,7 +88,7 @@
    "page": "DS · Base components",
    "section": "6657:163199",
    "sectionName": "Buttons",
-   "status": null
+   "status": "Đang review"
   },
   {
    "id": "6657:163467",
@@ -97,7 +97,7 @@
    "page": "DS · Base components",
    "section": "6657:163199",
    "sectionName": "Buttons",
-   "status": null
+   "status": "Đang review"
   },
   {
    "id": "6657:164851",
@@ -106,7 +106,7 @@
    "page": "DS · Base components",
    "section": "6657:163199",
    "sectionName": "Buttons",
-   "status": null
+   "status": "Đang review"
   },
   {
    "id": "6657:164908",
@@ -115,7 +115,7 @@
    "page": "DS · Base components",
    "section": "6657:163199",
    "sectionName": "Buttons",
-   "status": null
+   "status": "Đang review"
   },
   {
    "id": "6657:165642",
@@ -1104,7 +1104,7 @@
    "id": "6702:122239",
    "name": "Logos",
    "page": "DS · Foundations",
-   "badge": null
+   "badge": "Nháp"
   },
   {
    "id": "6732:186018",
@@ -1158,7 +1158,7 @@
    "id": "6657:163199",
    "name": "Buttons",
    "page": "DS · Base components",
-   "badge": null
+   "badge": "Đang review"
   },
   {
    "id": "6657:165303",
@@ -1809,15 +1809,15 @@
    ]
   },
   "0. Primitives": {
-   "n": 195,
-   "h": "1wh77qa",
+   "n": 217,
+   "h": "1i761jc",
    "modes": [
     "Value"
    ]
   },
   "1. Semantic": {
-   "n": 182,
-   "h": "ohd1te",
+   "n": 194,
+   "h": "1sl5asl",
    "modes": [
     "Light",
     "Dark"
@@ -1864,8 +1864,8 @@
    ]
   },
   "3. Platform · Spacing & Layout": {
-   "n": 32,
-   "h": "133f3kw",
+   "n": 34,
+   "h": "12y9re7",
    "modes": [
     "Web",
     "Mobile"
@@ -1879,16 +1879,16 @@
    ]
   },
   "5. Platform · Sizes": {
-   "n": 43,
-   "h": "19wokk0",
+   "n": 51,
+   "h": "c4was7",
    "modes": [
     "Web",
     "Mobile"
    ]
   },
   "6. Platform · Component sizes": {
-   "n": 57,
-   "h": "64o5dw",
+   "n": 56,
+   "h": "5v2tn7",
    "modes": [
     "Web",
     "Mobile"
@@ -1903,7 +1903,7 @@
   }
  },
  "fileKey": "FifpyOMpZk9OP8qyNzbRVJ",
- "taken": "2026-11-02",
+ "taken": "2026-11-03",
  "sync_note": "2026-10-30 BL-315: Figma đồng bộ tokens.json (DEC-312/313/314): +color/action/secondary-pressed, color/action/danger-subtle-hover, color/action/danger-subtle-pressed; space/* Untitled; size/*; xoá card/*, list-row/*; 5 biến zz-old/gap-* chờ xoá (BL-316). DEC-315: radius primitive theo px + thang Semantic radius/* Untitled. | DEC-321 (01/11): +color/border/input_hover, color/bg/error/overlay, alpha/red-700-55; đổi gắn biến ở Base, Application. | DEC-322 (01/11): thang font-size/*, line-height/*, 23 text style, collection 4 một mode. | 02/11: vá tay theo Figma (DEC-324, DEC-326): bỏ Company logo, Logo khách / Delta, Logo sản phẩm / Invlogis; varhash chụp lại sau khi xoá width/lg cũ.",
  "variables": []
 }

@@ -1,0 +1,16 @@
+{
+ "round": "done",
+ "artifact_url": "https://claude.ai/artifact/7WSaeZiGKB6bF3yqYoGtsb",
+ "source": "design-system/components/_work/tooltip",
+ "approved": {
+  "foundation": "2026-11-03"
+ },
+ "figma": {
+  "section": "6657:165303",
+  "sets": [
+   "6657:165642",
+   "6657:166386",
+   "6823:408"
+  ]
+ }
+}

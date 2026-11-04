@@ -586,7 +586,7 @@
     "key": "color",
     "name": "Màu",
     "status": "draft",
-    "stale": true
+    "stale": false
    },
    {
     "key": "type",
@@ -598,31 +598,31 @@
     "key": "radius",
     "name": "Bo góc",
     "status": "draft",
-    "stale": true
+    "stale": false
    },
    {
     "key": "space",
     "name": "Khoảng cách",
     "status": "draft",
-    "stale": true
+    "stale": false
    },
    {
     "key": "grid",
     "name": "Lưới, độ rộng, breakpoint",
     "status": "draft",
-    "stale": true
+    "stale": false
    },
    {
     "key": "elevation",
     "name": "Lớp nổi, làm mờ nền",
     "status": "draft",
-    "stale": true
+    "stale": false
    },
    {
     "key": "touch-focus",
     "name": "Vùng chạm và focus",
     "status": "draft",
-    "stale": true
+    "stale": false
    },
    {
     "key": "motion",
@@ -634,7 +634,7 @@
     "key": "icon",
     "name": "Icon",
     "status": "draft",
-    "stale": true
+    "stale": false
    }
   ],
   "components": [
@@ -694,15 +694,6 @@
    "text": "<b>Hàng Supporting trên bảng biến thể lệch dọc vài px</b> giữa biến thể có mũi tên và Arrow None (mũi tên cộng chiều cao). Chỉ là cách xếp lưới trên Figma, không phải lỗi component.",
    "fix": "Căn các biến thể theo tâm thân tooltip trong set (chỉ đổi vị trí, không đổi component)."
   }
- ],
- "dsStale": [
-  "foundation color (e56c669820 → 434f598013)",
-  "foundation elevation (ea6e83a46b → fa0508a1ee)",
-  "foundation grid (cdff5a29e9 → 746d10d76b)",
-  "foundation icon (1e40db1192 → 3e8c8581dc)",
-  "foundation radius (466c51ff76 → 274b678403)",
-  "foundation space (508f2ac3cc → 88783dd821)",
-  "foundation touch-focus (fef36289a7 → d73bc2be02)"
  ],
  "iconDec329": true
 }

@@ -1,8 +1,7 @@
 ---
 type: design-component
-status: stale
-status_prev: approved
-updated: 2026-11-02
+status: approved
+updated: 2026-11-03
 links:
   - design-system/architecture.md
   - design-system/foundations/README.md
@@ -55,7 +54,7 @@ Tooltip chỉ có ở web; Help icon có ở cả hai, khác hành vi. Tài li�
 | Mô tả (Supporting) | `type/caption` nét 400, `color/text/inverse` mờ 86% | 12/16 |
 | Lề (Supporting) | `space/md` × `space/lg` | 8 × 12 |
 | Tiêu đề → mô tả | `space/xs` | 4 |
-| Rộng (Supporting) | tối đa `width/xxs` | 320 |
+| Rộng (Supporting) | tối đa `tooltip/supporting-max-width` (trỏ `width/xxs`, DEC-353) | 320 |
 | Mũi tên | `size/md` × `size/xs`; Bottom Left / Bottom Right cách góc 12 | 8 × 4 |
 | Cách đối tượng | `space/xs` + `size/xs`; offset do chỗ đặt (instance cha / code) lo, component chỉ gồm thân + mũi tên | 4 + 4 |
 | Help icon | icon `circle-question-mark` cỡ `icon/size/md`, nét 2.25 trên khung 24 (DEC-329); màu `color/fg/tertiary`, Hover `color/fg/secondary` | 16; vùng rê chuột 24 |
