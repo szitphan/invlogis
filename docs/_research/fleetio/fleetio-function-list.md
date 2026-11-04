@@ -1,7 +1,8 @@
 ---
 type: research
 feature: fleetio
-status: draft
+status: stale
+status_prev: draft
 updated: 2026-11-03
 links:
   - docs/_research/fleetio/README.md

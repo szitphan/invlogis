@@ -209,3 +209,59 @@ Không vào, không ra (7): 1.22 reminder-forecast-not-available, 5.12 motor-poo
 ## Frame userflow
 
 Không đụng. Spec của 7 frame userflow chưa có hộp màn mới, còn thêm hộp rồi chạy `linkScreens` là vẽ lại frame và từng khớp nhầm (2.1 wo-list sang Calendar). Không chứng minh được an toàn với liên kết cũ nên bỏ theo brief.
+
+---
+
+# Đợt bổ sung: 7 màn đặt xe (lượt 6)
+
+Ngày 2026-11-04. Section `Đặt xe · lượt 6` (7386:470002). Nguồn: Mục 1, 2 của `srs/fleetio-saas-platform-userflow.md` (file này không có Mục 3), Flow 25-27 của `srs/fleetio-saas-platform-flows.md`, `run-notes/platform.md` Lượt 6. Cách nối như đợt trên.
+
+## Kết quả kiểm bằng máy
+
+| Mục | Trước | Sau |
+|---|---|---|
+| Tổng reaction, 246 frame màn | 8397 | 8408 (+11, đúng số đường đã nối) |
+| Reaction trỏ node không tồn tại | 0 | 0 |
+| Lỗi ghi, lỗi đối chiếu, xung đột click | | 0/11 |
+
+Mốc 8397 đo đầu đợt này, sau khi có 7 frame mới, nên không so trực tiếp với 8301 của đợt trên. Hover, press của 11 node đã đối chiếu từng node. Chưa bấm thử Present.
+
+## Đường đã nối: 11
+
+| Từ | Đến | Nút | Kết quả |
+|---|---|---|---|
+| 5.13 reservation-validation | 5.14 reservation-detail-requested | Gửi yêu cầu đặt xe | Đã nối theo Flow 25, nhánh sửa xong thì tạo được, Requested |
+| 5.14 reservation-detail-requested | 5.15 reservation-approve-dialog | Thêm | Suy luận về nút: màn không có nút Duyệt, menu chưa vẽ, chỉ một đích là frame |
+| 5.15 reservation-approve-dialog | 5.16 reservation-detail-approved | Duyệt đặt xe | Đã nối |
+| 5.15 reservation-approve-dialog | 5.14 reservation-detail-requested | Huỷ; Đóng | Đã nối 2 |
+| 5.15 reservation-approve-dialog | 5.19 reservation-vehicle-overlap | Ô Xe | Đã nối theo Flow 26, ô Vehicle khi xe trùng lịch. Hai màn khác bản ghi (#1, #4) |
+| 5.19 reservation-vehicle-overlap | 5.14 reservation-detail-requested | Huỷ; Đóng | Đã nối 2. Đích là #1, màn nền là #4 |
+| 5.16 reservation-detail-approved | 5.20 reservation-completed | Thêm | Suy luận về nút: Giao xe, hoàn tất nằm trong menu chưa vẽ. Hai màn khác bản ghi (#1, #3) |
+| 5.17 reservation-auto-approved-charges | 5.18 reservation-charges-flat-fee | Sửa | Đã nối |
+| 5.18 reservation-charges-flat-fee | 5.20 reservation-completed | Thêm | Suy luận về nút, như 5.16 |
+
+## Đường không nối được
+
+| Đường | Lý do |
+|---|---|
+| 5.4 motor-pool-reservations → 5.11 vehicle-reservation-form (Thêm đặt xe), chiều Huỷ | 5.11 chưa có frame, tài liệu ghi không có ảnh |
+| 5.11 → 5.13, 5.11 → 5.14, 5.11 → 5.17 | Như trên. Vì vậy 5.13 và 5.17 không có đường vào |
+| 5.13 Gửi → 5.17 (đủ điều kiện tự duyệt) | Tài liệu chỉ ghi nguồn là 5.11, và nút Gửi đã trỏ 5.14 |
+| 5.14 → Kết thúc (từ chối hoặc huỷ); 5.20 → Kết thúc | Không có màn đích |
+| Check Out, Complete, Denied, Canceled | Có trong Flow 26, 27 nhưng chưa có màn |
+
+## Đường vào, ra của 7 màn
+
+Không tính menu bên, Menu bổ sung và đường tự trỏ. Số là số frame khác nhau.
+
+| Màn | Vào | Ra |
+|---|---|---|
+| 5.14 reservation-detail-requested | 3 | 1 |
+| 5.15 reservation-approve-dialog | 1 | 3 |
+| 5.16 reservation-detail-approved | 1 | 1 |
+| 5.17 reservation-auto-approved-charges | 0 | 1 |
+| 5.18 reservation-charges-flat-fee | 1 | 1 |
+| 5.19 reservation-vehicle-overlap | 1 | 1 |
+| 5.20 reservation-completed | 2 | 0 |
+
+Màn 5.13 reservation-validation: vào 0, ra 2. Do đó chuỗi 5.14 trở đi chưa đi tới được từ màn nào đang có đường vào. Muốn đi xuyên từ 5.4 thì cần frame 5.11.
