@@ -1,0 +1,5 @@
+| 2026-11-06 | `docs/account-access/brainstorms/account-access.md` | `docs/_product/tenant-parameters.md` | upstream changed: docs/account-access/brainstorms/account-access.md on 2026-11-06 by manual |
+| 2026-11-06 | `docs/account-access/brainstorms/account-access.md` | `docs/account-access/brainstorms/google-sso.md` | upstream changed: docs/account-access/brainstorms/account-access.md on 2026-11-06 by manual |
+| 2026-11-06 | `docs/account-access/brainstorms/account-access.md` | `docs/account-access/srs/account-access-spec.md` | upstream changed: docs/account-access/brainstorms/account-access.md on 2026-11-06 by manual |
+| 2026-11-06 | `docs/account-access/brainstorms/account-access.md` | `docs/account-access/usecases/account-access-usecase-index.md` | upstream changed: docs/account-access/brainstorms/account-access.md on 2026-11-06 by manual |
+| 2026-11-06 | `docs/account-access/srs/account-access-spec.md` | `docs/account-access/html-wireframe/account-access-wireframe-html-index.md` | upstream changed: docs/account-access/srs/account-access-spec.md on 2026-11-06 by manual |

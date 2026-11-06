@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>account-access — Liên hệ IT | Wireframe</title>
+  <style>
+    /* RESET */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f4f4f4;
+      color: #000;
+      padding: 32px 24px;
+    }
+    .wf-page { max-width: 1400px; margin: 0 auto; }
+
+    /* BREADCRUMB về cửa-vào TOC — chỉ hiện khi mở file flow TRỰC TIẾP, ẩn khi trong iframe của {feature}-wireframe.html */
+    .wf-breadcrumb { max-width: 1400px; margin: 0 auto 16px; }
+    .wf-breadcrumb a { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #000; text-decoration: none; border: 1px solid #000; border-radius: 4px; padding: 6px 12px; background: #fff; }
+    .wf-breadcrumb a:hover { background: #f0f0f0; }
+    html.in-iframe .wf-breadcrumb { display: none; }
+
+    /* HEADER */
+    .wf-header { margin-bottom: 28px; border-bottom: 2px solid #000; padding-bottom: 14px; background: #fff; padding: 16px 20px; }
+    .wf-feature-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; }
+    .wf-flow-title { font-size: 22px; font-weight: 700; margin-top: 4px; }
+    .wf-flow-meta { font-size: 12px; color: #888; margin-top: 6px; }
+    .wf-flow-desc { font-size: 13px; color: #444; margin-top: 8px; line-height: 1.5; }
+
+    /* FLOW ROW — screens xếp ngang, TỰ WRAP theo bề rộng device (KHÔNG ép 3/row) */
+    .wf-rows { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px 16px; }
+    .wf-row-divider { display: none; } /* không còn chia row cứng — wrap tự nhiên */
+
+    /* SCREEN WRAPPER — bề rộng = device thật, KHÔNG phải 33% trừu tượng.
+       data-device trên .wf-page quyết định: mobile 375 / tablet 768 / desktop 1920 (1 màn/hàng).
+       Frame giữ tỉ lệ thật của thiết bị → không còn "size sai / trông giả". */
+    .wf-screen { flex: 0 0 auto; }
+    .wf-page[data-device="mobile"]  .wf-screen { width: 375px; }
+    .wf-page[data-device="tablet"]  .wf-screen { width: 768px; }
+    .wf-page[data-device="desktop"] .wf-screen { width: 1920px; }
+    .wf-page[data-device="desktop"] .wf-rows { flex-direction: column; } /* desktop: 1 màn/hàng */
+    .wf-page:not([data-device]) .wf-screen { width: 375px; } /* fallback mobile-first */
+    .wf-device-tag { display: inline-block; font-size: 10px; color: #555; border: 1px solid #ccc; border-radius: 3px; padding: 1px 6px; margin-bottom: 6px; }
+    .wf-step-badge {
+      font-size: 10px; font-weight: 700; color: #fff;
+      background: #000; border-radius: 50%;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 6px;
+    }
+    .wf-screen-label { text-align: center; font-size: 11px; color: #555; margin-top: 6px; }
+    .wf-shared-badge { font-size: 9px; color: #888; border: 1px solid #ccc; border-radius: 3px; padding: 0 4px; margin-left: 4px; }
+    .wf-arrow { display: flex; align-items: center; padding-top: 48px; font-size: 22px; color: #000; flex-shrink: 0; }
+
+    /* SCREEN FRAME (device chrome) */
+    .wf-screen-frame { border: 2px solid #000; border-radius: 8px; overflow: hidden; background: #fff; }
+    .wf-screen-bar { background: #f0f0f0; border-bottom: 1px solid #000; padding: 6px 10px; display: flex; align-items: center; gap: 5px; }
+    .wf-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid #888; background: #fff; flex-shrink: 0; }
+    .wf-bar-title { font-size: 11px; font-weight: 600; flex: 1; text-align: center; }
+    .wf-screen-content { padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+    /* FORM CONTAINER — form/auth/dialog KHÔNG trải rộng hết khung desktop.
+       Bọc nội dung form trong .wf-form (box căn giữa, hẹp) — input/nút full-width TRONG box này,
+       không phải full khung. Trên mobile 375 thì .wf-form ~= full width tự nhiên. */
+    .wf-form { width: 100%; max-width: 380px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .wf-form.card { border: 1px solid #ccc; border-radius: 8px; padding: 20px; background: #fff; } /* optional: viền box rõ */
+
+    /* APP BRAND */
+    .wf-app-brand { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: #000; padding-bottom: 4px; border-bottom: 1px solid #f0f0f0; margin-bottom: 4px; }
+    .wf-screen-title { font-size: 15px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+
+    /* FORM ELEMENTS */
+    .field { display: flex; flex-direction: column; gap: 3px; }
+    .field label { font-size: 11px; font-weight: 600; }
+    .field input[type=text], .field input[type=email], .field input[type=password] {
+      border: 1px solid #000; border-radius: 3px; padding: 7px 9px;
+      font-size: 12px; width: 100%; background: #fff; color: #000;
+    }
+    .field input::placeholder { color: #aaa; }
+    .input-pw { position: relative; }
+    .input-pw input { padding-right: 28px; width: 100%; border: 1px solid #000; border-radius: 3px; padding: 7px 9px; font-size: 12px; }
+    .input-pw .eye { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 13px; cursor: pointer; color: #555; }
+
+    /* CHECKBOX */
+    label.checkbox { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; }
+    label.checkbox input { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #000; color: #fff;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-secondary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-google {
+      display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .g-icon { font-size: 14px; font-weight: 900; font-style: italic; }
+
+    /* LINK */
+    .wf-link { font-size: 12px; color: #000; text-decoration: underline; cursor: pointer; }
+    .links-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; }
+
+    /* BANNERS / INFO */
+    .banner { font-size: 11px; padding: 8px 10px; border: 1px solid #000; border-radius: 4px; display: flex; gap: 6px; align-items: flex-start; line-height: 1.4; }
+    .banner-info { background: #f0f0f0; }
+    .banner-warn { background: #f0f0f0; }
+
+    /* LABELS / HINTS */
+    .info-label { font-size: 12px; color: #333; line-height: 1.5; text-align: center; }
+    .hint-text { font-size: 11px; color: #888; font-style: italic; }
+    .state-hint { font-size: 10px; color: #888; font-style: italic; margin-top: 2px; }
+
+    /* PASSWORD CHECKLIST */
+    .pw-check { display: flex; gap: 8px; flex-wrap: wrap; font-size: 10px; }
+    .pw-check .ok { color: #000; }
+    .pw-check .ok::before { content: "✓ "; }
+    .pw-check .fail { color: #888; }
+    .pw-check .fail::before { content: "✗ "; }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #888; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #ccc; }
+
+    /* MODAL BOX */
+    .modal-box { border: 2px solid #000; border-radius: 6px; padding: 12px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+    .modal-title { font-size: 12px; font-weight: 700; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+    .modal-desc { font-size: 11px; color: #444; line-height: 1.5; }
+    .modal-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .modal-actions .btn-secondary, .modal-actions .btn-primary { flex: 1; font-size: 11px; padding: 7px 8px; }
+
+    /* ICON PLACEHOLDER */
+    .icon-lg { text-align: center; font-size: 28px; margin-bottom: 4px; }
+
+    /* BACK NAV */
+    .back-nav { font-size: 12px; color: #000; display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 4px; }
+
+    /* CARD */
+    .wf-card { border: 1px solid #ccc; border-radius: 4px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; }
+    .wf-card-body { flex: 1; }
+    .wf-card-title { font-size: 12px; font-weight: 700; }
+    .wf-card-sub { font-size: 11px; color: #555; }
+    .wf-card-action { flex-shrink: 0; }
+
+    /* CAPTCHA placeholder */
+    .captcha-box { border: 1px dashed #888; border-radius: 4px; padding: 8px; text-align: center; font-size: 10px; color: #888; background: #f8f8f8; }
+
+    /* FOOTER */
+    .wf-footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #ccc; font-size: 10px; color: #aaa; display: flex; justify-content: space-between; }
+
+    /* SCREEN DESCRIPTION TABLE (Phase F.5) */
+    .wf-desc-section { margin-top: 32px; }
+    .wf-desc-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #000; }
+    .wf-desc-table { width: 100%; border-collapse: collapse; background: #fff; font-size: 12px; }
+    .wf-desc-table th, .wf-desc-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; }
+    .wf-desc-table th { background: #f0f0f0; font-weight: 700; font-size: 11px; text-transform: uppercase; }
+    .wf-desc-table td:first-child, .wf-desc-table th:first-child { width: 36px; text-align: center; }
+    .wf-desc-table td:nth-child(2) { width: 150px; }  /* Items */
+    .wf-desc-table td:nth-child(3) { width: 110px; }  /* Control type */
+    .wf-desc-table td:nth-child(4) { width: 90px; }   /* Data type */
+    /* col 5 (Description) = phần còn lại */
+    .wf-desc-screen-header td { background: #000; color: #fff; font-weight: 700; font-size: 12px; }
+    /* ── MÀN DỮ LIỆU + MOBILE (bổ sung 2026-10-07, chỉ #000 #fff #f0f0f0 #888 #ccc) ── */
+    .wf-screen-content.flush { padding: 0; gap: 0; }
+    /* SHELL desktop: menu trái (CMP-11) + vùng nội dung */
+    .wf-shell { display: flex; min-height: 760px; }
+    .wf-sidenav { width: 260px; flex-shrink: 0; background: #f0f0f0; border-right: 1px solid #ccc; padding: 12px 0; font-size: 12px; }
+    .wf-sidenav .nav-group { padding: 12px 16px 4px; font-size: 10px; color: #888; }
+    .wf-sidenav a { display: block; padding: 7px 16px; color: #000; text-decoration: none; border-left: 3px solid transparent; }
+    .wf-sidenav a.active { border-left-color: #000; background: #fff; font-weight: 700; }
+    .wf-main { flex: 1; min-width: 0; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .wf-page-head { display: flex; align-items: center; gap: 8px; min-height: 40px; }
+    .wf-page-head h1 { font-size: 20px; font-weight: 700; flex: 1; }
+    .wf-meta-row { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 12px; color: #888; }
+    /* NÚT nhỏ (toolbar, hàng bảng) — .primary = nút chính duy nhất của nhóm */
+    .btn-sm { display: inline-block; width: auto; padding: 5px 10px; font-size: 12px; font-weight: 600; border: 1px solid #000; border-radius: 4px; background: #fff; color: #000; white-space: nowrap; }
+    .btn-sm.primary { background: #000; color: #fff; }
+    .btn-sm.ghost { border-color: #fff; text-decoration: underline; }
+    .btn-sm.danger { border-style: dashed; }
+    /* TOOLBAR: tìm + lọc + công cụ; CHIP điều kiện lọc */
+    .wf-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .wf-toolbar .spacer { flex: 1; }
+    .wf-search { border: 1px solid #000; border-radius: 3px; padding: 6px 9px; font-size: 12px; width: 300px; background: #fff; }
+    .wf-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; border: 1px solid #888; border-radius: 12px; padding: 2px 8px; background: #fff; white-space: nowrap; }
+    /* TABS */
+    .wf-tabs { display: flex; border-bottom: 1px solid #ccc; font-size: 12px; overflow-x: auto; }
+    .wf-tabs span { padding: 7px 12px; border-bottom: 2px solid #fff; white-space: nowrap; color: #888; }
+    .wf-tabs span.active { border-bottom-color: #000; color: #000; font-weight: 700; }
+    /* BẢNG dữ liệu (GR-14: số phải, ngày giữa, chữ trái) */
+    .wf-table { width: 100%; border-collapse: collapse; font-size: 12px; background: #fff; }
+    .wf-table th { text-align: left; background: #f0f0f0; border-bottom: 1px solid #000; padding: 6px 8px; font-size: 11px; white-space: nowrap; }
+    .wf-table td { border-bottom: 1px solid #ccc; padding: 6px 8px; vertical-align: top; }
+    .wf-table .num { text-align: right; } .wf-table .ctr { text-align: center; }
+    .wf-table tr.group td { background: #f0f0f0; font-weight: 700; }
+    .wf-table tr.selected td { background: #f0f0f0; }
+    /* BADGE trạng thái — chỉ nhãn chữ, không màu (design.md › Ánh xạ trạng thái nghiệp vụ) */
+    .wf-badge { display: inline-block; font-size: 10px; border: 1px solid #000; border-radius: 10px; padding: 1px 7px; background: #fff; white-space: nowrap; }
+    .wf-badge.solid { background: #000; color: #fff; }
+    .wf-badge.muted { border-color: #888; color: #888; }
+    /* CHI TIẾT + RAIL PHẢI (P7) · KHỐI · CẶP NHÃN–GIÁ TRỊ */
+    .wf-split { display: flex; gap: 16px; align-items: flex-start; }
+    .wf-split .col-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+    .wf-split .col-rail { width: 320px; flex-shrink: 0; border-left: 1px solid #ccc; padding-left: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .wf-section { border: 1px solid #ccc; border-radius: 6px; padding: 12px; background: #fff; display: flex; flex-direction: column; gap: 8px; }
+    .wf-section-title { font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .wf-kv { display: grid; grid-template-columns: 150px 1fr; gap: 4px 12px; font-size: 12px; }
+    .wf-kv dt { color: #888; }
+    /* FORM rộng (P2: khối 800px) + 2 cột field ngắn; control chọn/nhập khác */
+    .wf-form.wide { max-width: 800px; }
+    .wf-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+    .field select, .field textarea, .field .wf-input { border: 1px solid #000; border-radius: 3px; padding: 7px 9px; font-size: 12px; width: 100%; background: #fff; color: #000; font-family: inherit; }
+    .field textarea { min-height: 60px; }
+    .field .wf-input.readonly { background: #f0f0f0; border-color: #ccc; }
+    .field .err { font-size: 11px; font-weight: 600; }
+    .field .err::before { content: "(!) "; }
+    label.radio { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+    /* ẢNH / CAMERA / VÙNG UPLOAD (CMP-10) */
+    .wf-photo { border: 1px dashed #888; border-radius: 4px; background: #f0f0f0; min-height: 110px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px; font-size: 11px; color: #888; }
+    .wf-photo.camera { min-height: 430px; background: #ccc; color: #000; }
+    .wf-dropzone { border: 1px dashed #000; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-size: 12px; }
+    /* MOBILE: header màn con, thân, thanh hành động đáy (thumb zone), Bottom Navigation (CMP-11 Mobile) */
+    .wf-m-header { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 1px solid #ccc; font-size: 15px; font-weight: 700; }
+    .wf-m-header .spacer { flex: 1; }
+    .wf-m-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; min-height: 600px; }
+    .wf-bottom-bar { border-top: 1px solid #000; padding: 10px 14px; display: flex; gap: 8px; background: #fff; }
+    .wf-bottom-bar > * { flex: 1; }
+    .wf-bottom-nav { border-top: 1px solid #ccc; display: flex; justify-content: space-around; align-items: center; padding: 8px 4px 12px; font-size: 10px; color: #888; }
+    .wf-bottom-nav .on { color: #000; font-weight: 700; }
+    .wf-bottom-nav .scan { width: 44px; height: 44px; border-radius: 50%; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; margin-top: -22px; font-size: 9px; }
+    /* LỚP NỔI: toast (CMP-01), drawer phải, nền mờ dialog (CMP-03/Popup Error) */
+    .wf-toast { align-self: flex-end; border: 1px solid #000; border-radius: 4px; padding: 6px 10px; font-size: 11px; background: #fff; }
+    .wf-backdrop { background: #ccc; padding: 40px 16px; display: flex; justify-content: center; }
+    .wf-backdrop .modal-box { width: 100%; max-width: 440px; }
+    /* CHÚ THÍCH trên khung (nhánh, trạng thái, OQ) — không phải UI */
+    .wf-note { font-size: 10px; color: #888; border-left: 2px solid #ccc; padding-left: 6px; font-style: italic; }
+    /* CMP-09 Stepper */
+    .wf-steps { display: flex; gap: 6px; font-size: 11px; flex-wrap: wrap; }
+    .wf-steps span { border: 1px solid #ccc; border-radius: 12px; padding: 2px 8px; color: #888; }
+    .wf-steps span.done { border-color: #000; color: #000; }
+    .wf-steps span.done::before { content: "✓ "; }
+    .wf-steps span.now { background: #000; color: #fff; border-color: #000; font-weight: 700; }
+  </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.documentElement.classList.add('in-iframe');</script>
+<div class="wf-breadcrumb"><a href="account-access-wireframe.html">&larr; Mục lục wireframe (tất cả flow)</a></div>
+<div class="wf-page" data-device="desktop">
+  <div class="wf-header">
+    <div class="wf-feature-label">Feature: account-access / Wireframe</div>
+    <div class="wf-flow-title">Liên hệ IT</div>
+    <div class="wf-flow-meta">9 khung · Device: desktop 1920 + mobile 375 · Tạo: 2026-10-15 · Nguồn: srs/account-access-userflow.md + srs/account-access-spec.md + usecases/</div>
+    <div class="wf-flow-desc">Người không có email (hoặc không nhận được email) gửi yêu cầu cho bộ phận hỗ trợ của khách để được đặt lại mật khẩu; luôn thấy cùng màn "Đã gửi yêu cầu".</div>
+  </div>
+</div>
+<div class="wf-page" data-device="desktop"><div class="wf-desc-title" style="margin:8px 0 16px">Web — desktop 1920px</div><div class="wf-rows">
+<div class="wf-screen" id="s1">
+  <div class="wf-step-badge">1</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[3.1] Chọn cách lấy lại mật khẩu</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="back-nav">&larr; Quay lại</div><div class="wf-screen-title">Quên mật khẩu</div><div class="wf-card"><div class="wf-card-body"><div class="wf-card-title">Đặt lại qua email</div><div class="wf-card-sub">Nhận link đặt lại qua email đăng ký</div></div><div class="wf-card-action">&rsaquo;</div></div><div class="wf-card"><div class="wf-card-body"><div class="wf-card-title">Liên hệ IT</div><div class="wf-card-sub">Dùng khi không có email hoặc không nhận được email</div></div><div class="wf-card-action">&rsaquo;</div></div></div></div>
+  </div>
+  <div class="wf-screen-label">3.1 · web · forgot-options<span class="wf-shared-badge">chung</span></div>
+</div>
+<div class="wf-screen" id="s2">
+  <div class="wf-step-badge">2</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[4.1] Liên hệ IT</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="back-nav">&larr; Quay lại</div><div class="wf-screen-title">Liên hệ IT</div><p class="hint-text">Dùng khi không có email hoặc không nhận được email.</p><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản"></div><button class="btn-primary">Xác nhận</button></div></div>
+  </div>
+  <div class="wf-screen-label">4.1 · web · contact-it</div>
+</div>
+<div class="wf-screen" id="s3">
+  <div class="wf-step-badge">3</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[4.1] Liên hệ IT · Send failed</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="wf-toast">Chưa gửi được yêu cầu. Thử lại sau.</div><div class="back-nav">&larr; Quay lại</div><div class="wf-screen-title">Liên hệ IT</div><p class="hint-text">Dùng khi không có email hoặc không nhận được email.</p><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản" value="an.nguyen"></div><button class="btn-primary">Xác nhận</button></div></div>
+  </div>
+  <div class="wf-screen-label">4.1 · web · contact-it · Send failed</div>
+</div>
+<div class="wf-screen" id="s4">
+  <div class="wf-step-badge">4</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[4.1] Liên hệ IT · Rate limited</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="back-nav">&larr; Quay lại</div><div class="wf-screen-title">Liên hệ IT</div><p class="hint-text">Dùng khi không có email hoặc không nhận được email.</p><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản" value="an.nguyen"><div class="err">Bạn đã gửi quá nhiều yêu cầu. Thử lại sau 11:20.</div></div><button class="btn-primary">Xác nhận</button></div></div>
+  </div>
+  <div class="wf-screen-label">4.1 · web · contact-it · Rate limited</div>
+</div>
+<div class="wf-screen" id="s5">
+  <div class="wf-step-badge">5</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[4.2] Đã gửi yêu cầu</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="icon-lg">(✓)</div><div class="wf-screen-title">Đã gửi yêu cầu</div><p class="info-label">Bộ phận hỗ trợ sẽ đặt lại mật khẩu và gửi mật khẩu tạm cho bạn.</p><button class="btn-primary">Quay về đăng nhập</button></div></div>
+  </div>
+  <div class="wf-screen-label">4.2 · web · contact-it-sent</div>
+</div>
+</div></div>
+<div class="wf-page" data-device="mobile" style="margin-top:40px"><div class="wf-desc-title" style="margin:8px 0 16px">App — mobile 375px</div><div class="wf-rows">
+<div class="wf-screen" id="s6">
+  <div class="wf-step-badge">6</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[4.1] Liên hệ IT</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-header">&larr; Liên hệ IT<span class="spacer"></span></div><div class="wf-m-body"><p class="hint-text">Dùng khi không có email hoặc không nhận được email.</p><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản"></div></div><div class="wf-bottom-bar"><button class="btn-primary">Xác nhận</button></div></div>
+  </div>
+  <div class="wf-screen-label">4.1 · mob · contact-it</div>
+</div>
+<div class="wf-screen" id="s7">
+  <div class="wf-step-badge">7</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[4.1] Liên hệ IT · Send failed</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-header">&larr; Liên hệ IT<span class="spacer"></span></div><div class="wf-m-body"><div class="wf-toast">Chưa gửi được yêu cầu. Thử lại sau.</div><p class="hint-text">Dùng khi không có email hoặc không nhận được email.</p><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản" value="an.nguyen"></div></div><div class="wf-bottom-bar"><button class="btn-primary">Xác nhận</button></div></div>
+  </div>
+  <div class="wf-screen-label">4.1 · mob · contact-it · Send failed</div>
+</div>
+<div class="wf-screen" id="s8">
+  <div class="wf-step-badge">8</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[4.1] Liên hệ IT · Rate limited</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-header">&larr; Liên hệ IT<span class="spacer"></span></div><div class="wf-m-body"><p class="hint-text">Dùng khi không có email hoặc không nhận được email.</p><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản" value="an.nguyen"><div class="err">Bạn đã gửi quá nhiều yêu cầu. Thử lại sau 11:20.</div></div></div><div class="wf-bottom-bar"><button class="btn-primary">Xác nhận</button></div></div>
+  </div>
+  <div class="wf-screen-label">4.1 · mob · contact-it · Rate limited</div>
+</div>
+<div class="wf-screen" id="s9">
+  <div class="wf-step-badge">9</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[4.2] Đã gửi yêu cầu</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-body"><div class="icon-lg">(✓)</div><div class="wf-screen-title">Đã gửi yêu cầu</div><p class="info-label">Bộ phận hỗ trợ sẽ đặt lại mật khẩu và gửi mật khẩu tạm cho bạn.</p></div><div class="wf-bottom-bar"><button class="btn-primary">Quay về đăng nhập</button></div></div>
+  </div>
+  <div class="wf-screen-label">4.2 · mob · contact-it-sent</div>
+</div>
+</div></div>
+<div class="wf-page" data-device="desktop">
+  <div class="wf-desc-section">
+    <div class="wf-desc-title">Mô tả màn hình</div>
+    <table class="wf-desc-table">
+      <thead>
+        <tr><th>#</th><th>Items</th><th>Control type</th><th>Data type</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 3.1: Chọn cách lấy lại mật khẩu [chung] (web, mob)</td></tr>
+        <tr><td>1</td><td>Tiêu đề "Quên mật khẩu"</td><td>Label</td><td>ReadOnly</td><td>&bull; Mở từ link Quên mật khẩu, hoặc link trong lỗi E-002 / E-006 ở màn đăng nhập (FR-account-access-017).</td></tr>
+        <tr><td>2</td><td>Đặt lại qua email</td><td>Button</td><td>Click</td><td>&bull; Thẻ lựa chọn: "Nhận link (web) hoặc mã 6 số (app) qua email đăng ký". → Nhập tên tài khoản [3.2].</td></tr>
+        <tr><td>3</td><td>Liên hệ IT</td><td>Button</td><td>Click</td><td>&bull; Thẻ lựa chọn: "Dùng khi không có email hoặc không nhận được email". → Liên hệ IT [4.1].</td></tr>
+        <tr><td>4</td><td>Quay lại</td><td>Link</td><td>Click</td><td>&bull; → Đăng nhập [1.3].</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 4.1: Liên hệ IT (web, mob)</td></tr>
+        <tr><td>1</td><td>Tiêu đề "Liên hệ IT" + câu hướng dẫn</td><td>Label</td><td>ReadOnly</td><td>&bull; Dùng khi không có email hoặc không nhận được email.</td></tr>
+        <tr><td>2</td><td>Ô Tên tài khoản</td><td>Textbox</td><td>Text</td><td>&bull; Bắt buộc (Theo GR-01); trống → E-common-001 "Nhập Tên tài khoản.". Không báo tài khoản có tồn tại hay không.</td></tr>
+        <tr><td>3</td><td>Nút Xác nhận</td><td>Button</td><td>Click</td><td>&bull; Nút chính. Đang gửi: khoá + vòng chờ. Tài khoản tồn tại → gửi email tới P-email-ho-tro-mat-khau (Delta: it@delta.com.vn), tiêu đề "Yêu cầu đặt lại mật khẩu: {tên tài khoản}", gồm tên tài khoản, họ tên, chi nhánh, thời gian, kênh gửi (FR-account-access-021). Mọi trường hợp → Đã gửi yêu cầu [4.2].<br>&bull; Dịch vụ email lỗi → toast lỗi Xem CMP-01: E-account-access-015 "Chưa gửi được yêu cầu. Thử lại sau.", giữ màn nhập, không tự gửi lại (BR-account-access-021).<br>&bull; Giới hạn gửi (FR-account-access-020): giữa 2 lần gửi chờ P-cho-gui-lai-ma (Delta: 60 giây), nút hiện "Gửi lại sau {s} giây"; tối đa P-so-lan-gui-ma-moi-gio (Delta: 5) lần trong cửa sổ 1 giờ trượt, đếm chung link, mã và Liên hệ IT theo tên đã nhập, không phân biệt hoa thường, kể cả tên không tồn tại (BR-account-access-010, 025).<br>&bull; Vượt → E-account-access-014 inline: "Bạn đã gửi quá nhiều yêu cầu. Thử lại sau {hh:mm}." — {hh:mm} là lúc lần gửi cũ nhất trong cửa sổ hết tính.<br>&bull; Mất mạng / lỗi hệ thống → toast E-common-009 / E-common-008.</td></tr>
+        <tr><td>4</td><td>Quay lại</td><td>Link</td><td>Click</td><td>&bull; → Chọn cách lấy lại mật khẩu [3.1].</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 4.2: Đã gửi yêu cầu (web, mob)</td></tr>
+        <tr><td>1</td><td>Icon + tiêu đề "Đã gửi yêu cầu" + câu báo</td><td>Label</td><td>ReadOnly</td><td>&bull; "Bộ phận hỗ trợ sẽ đặt lại mật khẩu và gửi mật khẩu tạm cho bạn." — giống nhau dù tài khoản có tồn tại hay không.</td></tr>
+        <tr><td>2</td><td>Nút Quay về đăng nhập</td><td>Button</td><td>Click</td><td>&bull; → Đăng nhập [1.3]. Người dùng nhận mật khẩu tạm rồi đi tiếp flow Kích hoạt bằng mật khẩu tạm.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="wf-footer">
+    <span>account-access / contact-it</span>
+    <span>Tạo bởi /wireframe-html · 2026-10-15</span>
+  </div>
+</div>
+</body>
+</html>

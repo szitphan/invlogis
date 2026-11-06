@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>account-access — Đăng nhập và chọn chi nhánh | Wireframe</title>
+  <style>
+    /* RESET */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f4f4f4;
+      color: #000;
+      padding: 32px 24px;
+    }
+    .wf-page { max-width: 1400px; margin: 0 auto; }
+
+    /* BREADCRUMB về cửa-vào TOC — chỉ hiện khi mở file flow TRỰC TIẾP, ẩn khi trong iframe của {feature}-wireframe.html */
+    .wf-breadcrumb { max-width: 1400px; margin: 0 auto 16px; }
+    .wf-breadcrumb a { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #000; text-decoration: none; border: 1px solid #000; border-radius: 4px; padding: 6px 12px; background: #fff; }
+    .wf-breadcrumb a:hover { background: #f0f0f0; }
+    html.in-iframe .wf-breadcrumb { display: none; }
+
+    /* HEADER */
+    .wf-header { margin-bottom: 28px; border-bottom: 2px solid #000; padding-bottom: 14px; background: #fff; padding: 16px 20px; }
+    .wf-feature-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; }
+    .wf-flow-title { font-size: 22px; font-weight: 700; margin-top: 4px; }
+    .wf-flow-meta { font-size: 12px; color: #888; margin-top: 6px; }
+    .wf-flow-desc { font-size: 13px; color: #444; margin-top: 8px; line-height: 1.5; }
+
+    /* FLOW ROW — screens xếp ngang, TỰ WRAP theo bề rộng device (KHÔNG ép 3/row) */
+    .wf-rows { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px 16px; }
+    .wf-row-divider { display: none; } /* không còn chia row cứng — wrap tự nhiên */
+
+    /* SCREEN WRAPPER — bề rộng = device thật, KHÔNG phải 33% trừu tượng.
+       data-device trên .wf-page quyết định: mobile 375 / tablet 768 / desktop 1920 (1 màn/hàng).
+       Frame giữ tỉ lệ thật của thiết bị → không còn "size sai / trông giả". */
+    .wf-screen { flex: 0 0 auto; }
+    .wf-page[data-device="mobile"]  .wf-screen { width: 375px; }
+    .wf-page[data-device="tablet"]  .wf-screen { width: 768px; }
+    .wf-page[data-device="desktop"] .wf-screen { width: 1920px; }
+    .wf-page[data-device="desktop"] .wf-rows { flex-direction: column; } /* desktop: 1 màn/hàng */
+    .wf-page:not([data-device]) .wf-screen { width: 375px; } /* fallback mobile-first */
+    .wf-device-tag { display: inline-block; font-size: 10px; color: #555; border: 1px solid #ccc; border-radius: 3px; padding: 1px 6px; margin-bottom: 6px; }
+    .wf-step-badge {
+      font-size: 10px; font-weight: 700; color: #fff;
+      background: #000; border-radius: 50%;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 6px;
+    }
+    .wf-screen-label { text-align: center; font-size: 11px; color: #555; margin-top: 6px; }
+    .wf-shared-badge { font-size: 9px; color: #888; border: 1px solid #ccc; border-radius: 3px; padding: 0 4px; margin-left: 4px; }
+    .wf-arrow { display: flex; align-items: center; padding-top: 48px; font-size: 22px; color: #000; flex-shrink: 0; }
+
+    /* SCREEN FRAME (device chrome) */
+    .wf-screen-frame { border: 2px solid #000; border-radius: 8px; overflow: hidden; background: #fff; }
+    .wf-screen-bar { background: #f0f0f0; border-bottom: 1px solid #000; padding: 6px 10px; display: flex; align-items: center; gap: 5px; }
+    .wf-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid #888; background: #fff; flex-shrink: 0; }
+    .wf-bar-title { font-size: 11px; font-weight: 600; flex: 1; text-align: center; }
+    .wf-screen-content { padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+    /* FORM CONTAINER — form/auth/dialog KHÔNG trải rộng hết khung desktop.
+       Bọc nội dung form trong .wf-form (box căn giữa, hẹp) — input/nút full-width TRONG box này,
+       không phải full khung. Trên mobile 375 thì .wf-form ~= full width tự nhiên. */
+    .wf-form { width: 100%; max-width: 380px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .wf-form.card { border: 1px solid #ccc; border-radius: 8px; padding: 20px; background: #fff; } /* optional: viền box rõ */
+
+    /* APP BRAND */
+    .wf-app-brand { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: #000; padding-bottom: 4px; border-bottom: 1px solid #f0f0f0; margin-bottom: 4px; }
+    .wf-screen-title { font-size: 15px; font-weight: 700; text-align: center; margin-bottom: 4px; }
+
+    /* FORM ELEMENTS */
+    .field { display: flex; flex-direction: column; gap: 3px; }
+    .field label { font-size: 11px; font-weight: 600; }
+    .field input[type=text], .field input[type=email], .field input[type=password] {
+      border: 1px solid #000; border-radius: 3px; padding: 7px 9px;
+      font-size: 12px; width: 100%; background: #fff; color: #000;
+    }
+    .field input::placeholder { color: #aaa; }
+    .input-pw { position: relative; }
+    .input-pw input { padding-right: 28px; width: 100%; border: 1px solid #000; border-radius: 3px; padding: 7px 9px; font-size: 12px; }
+    .input-pw .eye { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 13px; cursor: pointer; color: #555; }
+
+    /* CHECKBOX */
+    label.checkbox { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; }
+    label.checkbox input { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #000; color: #fff;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-secondary {
+      display: block; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer; text-align: center;
+    }
+    .btn-google {
+      display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+      padding: 9px 12px; background: #fff; color: #000;
+      border: 2px solid #000; border-radius: 4px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .g-icon { font-size: 14px; font-weight: 900; font-style: italic; }
+
+    /* LINK */
+    .wf-link { font-size: 12px; color: #000; text-decoration: underline; cursor: pointer; }
+    .links-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; }
+
+    /* BANNERS / INFO */
+    .banner { font-size: 11px; padding: 8px 10px; border: 1px solid #000; border-radius: 4px; display: flex; gap: 6px; align-items: flex-start; line-height: 1.4; }
+    .banner-info { background: #f0f0f0; }
+    .banner-warn { background: #f0f0f0; }
+
+    /* LABELS / HINTS */
+    .info-label { font-size: 12px; color: #333; line-height: 1.5; text-align: center; }
+    .hint-text { font-size: 11px; color: #888; font-style: italic; }
+    .state-hint { font-size: 10px; color: #888; font-style: italic; margin-top: 2px; }
+
+    /* PASSWORD CHECKLIST */
+    .pw-check { display: flex; gap: 8px; flex-wrap: wrap; font-size: 10px; }
+    .pw-check .ok { color: #000; }
+    .pw-check .ok::before { content: "✓ "; }
+    .pw-check .fail { color: #888; }
+    .pw-check .fail::before { content: "✗ "; }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #888; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #ccc; }
+
+    /* MODAL BOX */
+    .modal-box { border: 2px solid #000; border-radius: 6px; padding: 12px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+    .modal-title { font-size: 12px; font-weight: 700; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+    .modal-desc { font-size: 11px; color: #444; line-height: 1.5; }
+    .modal-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .modal-actions .btn-secondary, .modal-actions .btn-primary { flex: 1; font-size: 11px; padding: 7px 8px; }
+
+    /* ICON PLACEHOLDER */
+    .icon-lg { text-align: center; font-size: 28px; margin-bottom: 4px; }
+
+    /* BACK NAV */
+    .back-nav { font-size: 12px; color: #000; display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; margin-bottom: 4px; }
+
+    /* CARD */
+    .wf-card { border: 1px solid #ccc; border-radius: 4px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; }
+    .wf-card-body { flex: 1; }
+    .wf-card-title { font-size: 12px; font-weight: 700; }
+    .wf-card-sub { font-size: 11px; color: #555; }
+    .wf-card-action { flex-shrink: 0; }
+
+    /* CAPTCHA placeholder */
+    .captcha-box { border: 1px dashed #888; border-radius: 4px; padding: 8px; text-align: center; font-size: 10px; color: #888; background: #f8f8f8; }
+
+    /* FOOTER */
+    .wf-footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid #ccc; font-size: 10px; color: #aaa; display: flex; justify-content: space-between; }
+
+    /* SCREEN DESCRIPTION TABLE (Phase F.5) */
+    .wf-desc-section { margin-top: 32px; }
+    .wf-desc-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #000; }
+    .wf-desc-table { width: 100%; border-collapse: collapse; background: #fff; font-size: 12px; }
+    .wf-desc-table th, .wf-desc-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; }
+    .wf-desc-table th { background: #f0f0f0; font-weight: 700; font-size: 11px; text-transform: uppercase; }
+    .wf-desc-table td:first-child, .wf-desc-table th:first-child { width: 36px; text-align: center; }
+    .wf-desc-table td:nth-child(2) { width: 150px; }  /* Items */
+    .wf-desc-table td:nth-child(3) { width: 110px; }  /* Control type */
+    .wf-desc-table td:nth-child(4) { width: 90px; }   /* Data type */
+    /* col 5 (Description) = phần còn lại */
+    .wf-desc-screen-header td { background: #000; color: #fff; font-weight: 700; font-size: 12px; }
+    /* ── MÀN DỮ LIỆU + MOBILE (bổ sung 2026-10-07, chỉ #000 #fff #f0f0f0 #888 #ccc) ── */
+    .wf-screen-content.flush { padding: 0; gap: 0; }
+    /* SHELL desktop: menu trái (CMP-11) + vùng nội dung */
+    .wf-shell { display: flex; min-height: 760px; }
+    .wf-sidenav { width: 260px; flex-shrink: 0; background: #f0f0f0; border-right: 1px solid #ccc; padding: 12px 0; font-size: 12px; }
+    .wf-sidenav .nav-group { padding: 12px 16px 4px; font-size: 10px; color: #888; }
+    .wf-sidenav a { display: block; padding: 7px 16px; color: #000; text-decoration: none; border-left: 3px solid transparent; }
+    .wf-sidenav a.active { border-left-color: #000; background: #fff; font-weight: 700; }
+    .wf-main { flex: 1; min-width: 0; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .wf-page-head { display: flex; align-items: center; gap: 8px; min-height: 40px; }
+    .wf-page-head h1 { font-size: 20px; font-weight: 700; flex: 1; }
+    .wf-meta-row { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 12px; color: #888; }
+    /* NÚT nhỏ (toolbar, hàng bảng) — .primary = nút chính duy nhất của nhóm */
+    .btn-sm { display: inline-block; width: auto; padding: 5px 10px; font-size: 12px; font-weight: 600; border: 1px solid #000; border-radius: 4px; background: #fff; color: #000; white-space: nowrap; }
+    .btn-sm.primary { background: #000; color: #fff; }
+    .btn-sm.ghost { border-color: #fff; text-decoration: underline; }
+    .btn-sm.danger { border-style: dashed; }
+    /* TOOLBAR: tìm + lọc + công cụ; CHIP điều kiện lọc */
+    .wf-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .wf-toolbar .spacer { flex: 1; }
+    .wf-search { border: 1px solid #000; border-radius: 3px; padding: 6px 9px; font-size: 12px; width: 300px; background: #fff; }
+    .wf-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; border: 1px solid #888; border-radius: 12px; padding: 2px 8px; background: #fff; white-space: nowrap; }
+    /* TABS */
+    .wf-tabs { display: flex; border-bottom: 1px solid #ccc; font-size: 12px; overflow-x: auto; }
+    .wf-tabs span { padding: 7px 12px; border-bottom: 2px solid #fff; white-space: nowrap; color: #888; }
+    .wf-tabs span.active { border-bottom-color: #000; color: #000; font-weight: 700; }
+    /* BẢNG dữ liệu (GR-14: số phải, ngày giữa, chữ trái) */
+    .wf-table { width: 100%; border-collapse: collapse; font-size: 12px; background: #fff; }
+    .wf-table th { text-align: left; background: #f0f0f0; border-bottom: 1px solid #000; padding: 6px 8px; font-size: 11px; white-space: nowrap; }
+    .wf-table td { border-bottom: 1px solid #ccc; padding: 6px 8px; vertical-align: top; }
+    .wf-table .num { text-align: right; } .wf-table .ctr { text-align: center; }
+    .wf-table tr.group td { background: #f0f0f0; font-weight: 700; }
+    .wf-table tr.selected td { background: #f0f0f0; }
+    /* BADGE trạng thái — chỉ nhãn chữ, không màu (design.md › Ánh xạ trạng thái nghiệp vụ) */
+    .wf-badge { display: inline-block; font-size: 10px; border: 1px solid #000; border-radius: 10px; padding: 1px 7px; background: #fff; white-space: nowrap; }
+    .wf-badge.solid { background: #000; color: #fff; }
+    .wf-badge.muted { border-color: #888; color: #888; }
+    /* CHI TIẾT + RAIL PHẢI (P7) · KHỐI · CẶP NHÃN–GIÁ TRỊ */
+    .wf-split { display: flex; gap: 16px; align-items: flex-start; }
+    .wf-split .col-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+    .wf-split .col-rail { width: 320px; flex-shrink: 0; border-left: 1px solid #ccc; padding-left: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .wf-section { border: 1px solid #ccc; border-radius: 6px; padding: 12px; background: #fff; display: flex; flex-direction: column; gap: 8px; }
+    .wf-section-title { font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .wf-kv { display: grid; grid-template-columns: 150px 1fr; gap: 4px 12px; font-size: 12px; }
+    .wf-kv dt { color: #888; }
+    /* FORM rộng (P2: khối 800px) + 2 cột field ngắn; control chọn/nhập khác */
+    .wf-form.wide { max-width: 800px; }
+    .wf-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+    .field select, .field textarea, .field .wf-input { border: 1px solid #000; border-radius: 3px; padding: 7px 9px; font-size: 12px; width: 100%; background: #fff; color: #000; font-family: inherit; }
+    .field textarea { min-height: 60px; }
+    .field .wf-input.readonly { background: #f0f0f0; border-color: #ccc; }
+    .field .err { font-size: 11px; font-weight: 600; }
+    .field .err::before { content: "(!) "; }
+    label.radio { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+    /* ẢNH / CAMERA / VÙNG UPLOAD (CMP-10) */
+    .wf-photo { border: 1px dashed #888; border-radius: 4px; background: #f0f0f0; min-height: 110px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px; font-size: 11px; color: #888; }
+    .wf-photo.camera { min-height: 430px; background: #ccc; color: #000; }
+    .wf-dropzone { border: 1px dashed #000; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-size: 12px; }
+    /* MOBILE: header màn con, thân, thanh hành động đáy (thumb zone), Bottom Navigation (CMP-11 Mobile) */
+    .wf-m-header { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 1px solid #ccc; font-size: 15px; font-weight: 700; }
+    .wf-m-header .spacer { flex: 1; }
+    .wf-m-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; min-height: 600px; }
+    .wf-bottom-bar { border-top: 1px solid #000; padding: 10px 14px; display: flex; gap: 8px; background: #fff; }
+    .wf-bottom-bar > * { flex: 1; }
+    .wf-bottom-nav { border-top: 1px solid #ccc; display: flex; justify-content: space-around; align-items: center; padding: 8px 4px 12px; font-size: 10px; color: #888; }
+    .wf-bottom-nav .on { color: #000; font-weight: 700; }
+    .wf-bottom-nav .scan { width: 44px; height: 44px; border-radius: 50%; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; margin-top: -22px; font-size: 9px; }
+    /* LỚP NỔI: toast (CMP-01), drawer phải, nền mờ dialog (CMP-03/Popup Error) */
+    .wf-toast { align-self: flex-end; border: 1px solid #000; border-radius: 4px; padding: 6px 10px; font-size: 11px; background: #fff; }
+    .wf-backdrop { background: #ccc; padding: 40px 16px; display: flex; justify-content: center; }
+    .wf-backdrop .modal-box { width: 100%; max-width: 440px; }
+    /* CHÚ THÍCH trên khung (nhánh, trạng thái, OQ) — không phải UI */
+    .wf-note { font-size: 10px; color: #888; border-left: 2px solid #ccc; padding-left: 6px; font-style: italic; }
+    /* CMP-09 Stepper */
+    .wf-steps { display: flex; gap: 6px; font-size: 11px; flex-wrap: wrap; }
+    .wf-steps span { border: 1px solid #ccc; border-radius: 12px; padding: 2px 8px; color: #888; }
+    .wf-steps span.done { border-color: #000; color: #000; }
+    .wf-steps span.done::before { content: "✓ "; }
+    .wf-steps span.now { background: #000; color: #fff; border-color: #000; font-weight: 700; }
+  </style>
+</head>
+<body>
+<script>if (window.self !== window.top) document.documentElement.classList.add('in-iframe');</script>
+<div class="wf-breadcrumb"><a href="account-access-wireframe.html">&larr; Mục lục wireframe (tất cả flow)</a></div>
+<div class="wf-page" data-device="desktop">
+  <div class="wf-header">
+    <div class="wf-feature-label">Feature: account-access / Wireframe</div>
+    <div class="wf-flow-title">Đăng nhập và chọn chi nhánh</div>
+    <div class="wf-flow-meta">23 khung · Device: desktop 1920 + mobile 375 · Tạo: 2026-10-15 · Nguồn: srs/account-access-userflow.md + srs/account-access-spec.md + usecases/</div>
+    <div class="wf-flow-desc">Người dùng mở đường dẫn của khách (web) hoặc mở app, đăng nhập bằng tên tài khoản hoặc email; tài khoản từ 2 chi nhánh chọn chi nhánh trước khi vào Home. Phủ lỗi sai, tạm khoá, vô hiệu hoá, chưa có chi nhánh, không có quyền kênh, mất mạng.</div>
+  </div>
+</div>
+<div class="wf-page" data-device="desktop"><div class="wf-desc-title" style="margin:8px 0 16px">Web — desktop 1920px</div><div class="wf-rows">
+<div class="wf-screen" id="s1">
+  <div class="wf-step-badge">1</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.3] Đăng nhập</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="wf-app-brand">[Logo] Delta</div><div class="wf-screen-title">Đăng nhập</div><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản hoặc email"></div><div class="field"><label>Mật khẩu *</label><div class="input-pw"><input type="password" placeholder="Mật khẩu"><span class="eye">(eye)</span></div></div><div class="links-row"><label class="checkbox"><input type="checkbox"> Ghi nhớ đăng nhập</label><a class="wf-link">Quên mật khẩu</a></div><button class="btn-primary">Đăng nhập</button><p class="hint-text">Chưa có tài khoản? Liên hệ quản trị viên.</p></div></div>
+  </div>
+  <div class="wf-screen-label">1.3 · web · sign-in</div>
+</div>
+<div class="wf-screen" id="s2">
+  <div class="wf-step-badge">2</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.3] Đăng nhập · Field error</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="wf-app-brand">[Logo] Delta</div><div class="wf-screen-title">Đăng nhập</div><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản hoặc email" value="an.nguyen"></div><div class="field"><label>Mật khẩu *</label><div class="input-pw"><input type="password" placeholder="Mật khẩu" value="••••••••"><span class="eye">(eye)</span></div><div class="err">Tên tài khoản hoặc mật khẩu không đúng. Còn 2 lần thử.</div></div><div class="links-row"><label class="checkbox"><input type="checkbox"> Ghi nhớ đăng nhập</label><a class="wf-link">Quên mật khẩu</a></div><button class="btn-primary">Đăng nhập</button><p class="hint-text">Chưa có tài khoản? Liên hệ quản trị viên.</p></div></div>
+  </div>
+  <div class="wf-screen-label">1.3 · web · sign-in · Field error</div>
+</div>
+<div class="wf-screen" id="s3">
+  <div class="wf-step-badge">3</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.3] Đăng nhập · Field error · tạm khoá</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="wf-app-brand">[Logo] Delta</div><div class="wf-screen-title">Đăng nhập</div><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản hoặc email" value="an.nguyen"></div><div class="field"><label>Mật khẩu *</label><div class="input-pw"><input type="password" placeholder="Mật khẩu" value="••••••••"><span class="eye">(eye)</span></div><div class="err">Tài khoản tạm khoá. Thử lại sau 10:45 hoặc đặt lại mật khẩu.</div></div><div><a class="wf-link">Đặt lại mật khẩu</a></div><div class="links-row"><label class="checkbox"><input type="checkbox"> Ghi nhớ đăng nhập</label><a class="wf-link">Quên mật khẩu</a></div><button class="btn-primary">Đăng nhập</button><p class="hint-text">Chưa có tài khoản? Liên hệ quản trị viên.</p></div></div>
+  </div>
+  <div class="wf-screen-label">1.3 · web · sign-in · Field error · tạm khoá</div>
+</div>
+<div class="wf-screen" id="s4">
+  <div class="wf-step-badge">4</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.3] Đăng nhập · Session expired</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="wf-toast">Phiên làm việc đã hết hạn. Đăng nhập lại.</div><div class="wf-app-brand">[Logo] Delta</div><div class="wf-screen-title">Đăng nhập</div><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản hoặc email"></div><div class="field"><label>Mật khẩu *</label><div class="input-pw"><input type="password" placeholder="Mật khẩu"><span class="eye">(eye)</span></div></div><div class="links-row"><label class="checkbox"><input type="checkbox"> Ghi nhớ đăng nhập</label><a class="wf-link">Quên mật khẩu</a></div><button class="btn-primary">Đăng nhập</button><p class="hint-text">Chưa có tài khoản? Liên hệ quản trị viên.</p></div></div>
+  </div>
+  <div class="wf-screen-label">1.3 · web · sign-in · Session expired</div>
+</div>
+<div class="wf-screen" id="s5">
+  <div class="wf-step-badge">5</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.3] Đăng nhập · Tenant not found</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="icon-lg">(!)</div><p class="info-label">Không tìm thấy doanh nghiệp. Kiểm tra lại mã hoặc đường dẫn.</p></div></div>
+  </div>
+  <div class="wf-screen-label">1.3 · web · sign-in · Tenant not found</div>
+</div>
+<div class="wf-screen" id="s6">
+  <div class="wf-step-badge">6</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.3] Đăng nhập · Submitting</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="wf-app-brand">[Logo] Delta</div><div class="wf-screen-title">Đăng nhập</div><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản hoặc email" value="an.nguyen"></div><div class="field"><label>Mật khẩu *</label><div class="input-pw"><input type="password" placeholder="Mật khẩu" value="••••••••"><span class="eye">(eye)</span></div></div><div class="links-row"><label class="checkbox"><input type="checkbox"> Ghi nhớ đăng nhập</label><a class="wf-link">Quên mật khẩu</a></div><button class="btn-primary">(…) Đang đăng nhập</button><p class="hint-text">Chưa có tài khoản? Liên hệ quản trị viên.</p></div></div>
+  </div>
+  <div class="wf-screen-label">1.3 · web · sign-in · Submitting</div>
+</div>
+<div class="wf-screen" id="s7">
+  <div class="wf-step-badge">7</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.3] Đăng nhập · Network error</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="wf-toast">Mất kết nối. Kiểm tra mạng và thử lại.</div><div class="wf-app-brand">[Logo] Delta</div><div class="wf-screen-title">Đăng nhập</div><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản hoặc email" value="an.nguyen"></div><div class="field"><label>Mật khẩu *</label><div class="input-pw"><input type="password" placeholder="Mật khẩu" value="••••••••"><span class="eye">(eye)</span></div></div><div class="links-row"><label class="checkbox"><input type="checkbox"> Ghi nhớ đăng nhập</label><a class="wf-link">Quên mật khẩu</a></div><button class="btn-primary">Đăng nhập</button><p class="hint-text">Chưa có tài khoản? Liên hệ quản trị viên.</p></div></div>
+  </div>
+  <div class="wf-screen-label">1.3 · web · sign-in · Network error</div>
+</div>
+<div class="wf-screen" id="s8">
+  <div class="wf-step-badge">8</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.4] Không được dùng kênh này</span></div>
+    <div class="wf-screen-content" style="min-height:680px;justify-content:center;background:#f0f0f0"><div class="wf-form card"><div class="wf-app-brand">[Logo] Delta</div><div class="icon-lg">(!)</div><p class="info-label">Tài khoản này không được dùng Web. Liên hệ quản trị viên.</p><button class="btn-primary">Quay về đăng nhập</button></div></div>
+  </div>
+  <div class="wf-screen-label">1.4 · web · channel-denied</div>
+</div>
+<div class="wf-screen" id="s9">
+  <div class="wf-step-badge">9</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.5] Chọn chi nhánh</span></div>
+    <div class="wf-screen-content flush"><div class="wf-backdrop" style="min-height:680px;align-items:center"><div class="wf-note">Phía sau: Đăng nhập (mờ)</div><div class="modal-box" style="width:100%;max-width:480px"><div class="modal-title">Chọn chi nhánh</div><div class="field"><input type="text" placeholder="Tìm theo tên chi nhánh hoặc tỉnh thành" value=""></div><label class="radio"><input type="radio"> Công ty mẹ — Delta Quốc tế</label><div class="divider"><span>Hoặc chọn chi nhánh cụ thể</span></div><label class="radio"><input type="radio"> Delta Hải Phòng <span class="wf-card-sub">&middot; Hải Phòng</span></label><label class="radio"><input type="radio"> Delta Hà Nội <span class="wf-card-sub">&middot; Hà Nội</span></label><label class="radio"><input type="radio"> Delta TP. Hồ Chí Minh <span class="wf-card-sub">&middot; TP. Hồ Chí Minh</span></label><div class="modal-actions"><button class="btn-secondary">Huỷ</button><button class="btn-primary">Chọn</button></div></div></div></div>
+  </div>
+  <div class="wf-screen-label">1.5 · web · branch-picker</div>
+</div>
+<div class="wf-screen" id="s10">
+  <div class="wf-step-badge">10</div>
+  <div class="wf-device-tag">desktop · 1920px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.5] Chọn chi nhánh · Empty</span></div>
+    <div class="wf-screen-content flush"><div class="wf-backdrop" style="min-height:680px;align-items:center"><div class="wf-note">Phía sau: Đăng nhập (mờ)</div><div class="modal-box" style="width:100%;max-width:480px"><div class="modal-title">Chọn chi nhánh</div><div class="field"><input type="text" placeholder="Tìm theo tên chi nhánh hoặc tỉnh thành" value="Đà"></div><div class="wf-photo" style="min-height:80px">Không có chi nhánh phù hợp.</div><div class="modal-actions"><button class="btn-secondary">Huỷ</button><button class="btn-primary">Chọn</button></div></div></div></div>
+  </div>
+  <div class="wf-screen-label">1.5 · web · branch-picker · Empty</div>
+</div>
+</div></div>
+<div class="wf-page" data-device="mobile" style="margin-top:40px"><div class="wf-desc-title" style="margin:8px 0 16px">App — mobile 375px</div><div class="wf-rows">
+<div class="wf-screen" id="s11">
+  <div class="wf-step-badge">11</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.1] Splash</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-body"><div class="wf-photo" style="min-height:560px;background:#fff;border:none">[Logo sản phẩm]</div></div></div>
+  </div>
+  <div class="wf-screen-label">1.1 · mob · splash</div>
+</div>
+<div class="wf-screen" id="s12">
+  <div class="wf-step-badge">12</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.1] Splash · Offline → Home mất mạng</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-header">Delta Hải Phòng ▾<span class="spacer"></span></div><div class="wf-m-body"><div class="banner banner-info"><span>(i)</span> Không có kết nối internet</div><div class="wf-photo" style="min-height:480px">[Home chi nhánh — chế độ mất mạng]</div></div><div class="wf-bottom-nav"><span class="on">(Trang chủ)</span><span class="">(Lịch nhắc)</span><span class="scan">(Quét)</span><span class="">(Thông báo)</span><span class="">(Tài khoản)</span></div></div>
+  </div>
+  <div class="wf-screen-label">1.1 · mob · splash · Offline → Home mất mạng</div>
+</div>
+<div class="wf-screen" id="s13">
+  <div class="wf-step-badge">13</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.2] Giới thiệu lần đầu</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-body"><div style="text-align:right"><a class="wf-link">Bỏ qua</a></div><div class="wf-photo" style="min-height:300px">[Ảnh minh hoạ trang 1]</div><div class="wf-screen-title">Nhận lệnh vận chuyển</div><p class="hint-text">[Mô tả trang 1 — chưa chốt nội dung]</p><p class="info-label">● ○ ○</p></div><div class="wf-bottom-bar"><button class="btn-primary">Đăng nhập</button></div></div>
+  </div>
+  <div class="wf-screen-label">1.2 · mob · onboarding</div>
+</div>
+<div class="wf-screen" id="s14">
+  <div class="wf-step-badge">14</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.6] Nhập mã doanh nghiệp</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-body"><div class="wf-screen-title">Nhập mã doanh nghiệp</div><p class="hint-text">[Câu hướng dẫn — chưa có nguồn]</p><div class="field"><label>Mã doanh nghiệp *</label><input type="text" placeholder="Ví dụ: DELTA"></div></div><div class="wf-bottom-bar"><button class="btn-primary">Tiếp tục</button></div></div>
+  </div>
+  <div class="wf-screen-label">1.6 · mob · company-code</div>
+</div>
+<div class="wf-screen" id="s15">
+  <div class="wf-step-badge">15</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.6] Nhập mã doanh nghiệp · Field error</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-body"><div class="wf-screen-title">Nhập mã doanh nghiệp</div><div class="field"><label>Mã doanh nghiệp *</label><input type="text" placeholder="" value="DELTAX"><div class="err">Không tìm thấy doanh nghiệp. Kiểm tra lại mã hoặc đường dẫn.</div></div></div><div class="wf-bottom-bar"><button class="btn-primary">Tiếp tục</button></div></div>
+  </div>
+  <div class="wf-screen-label">1.6 · mob · company-code · Field error</div>
+</div>
+<div class="wf-screen" id="s16">
+  <div class="wf-step-badge">16</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.3] Đăng nhập</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-body"><div class="wf-app-brand">[Logo] Delta</div><div class="wf-screen-title">Đăng nhập</div><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản hoặc email"></div><div class="field"><label>Mật khẩu *</label><div class="input-pw"><input type="password" placeholder="Mật khẩu"><span class="eye">(eye)</span></div></div><div style="text-align:right"><a class="wf-link">Quên mật khẩu</a></div><p class="hint-text">Chưa có tài khoản? Liên hệ quản trị viên.</p><div class="links-row"><span class="hint-text">Doanh nghiệp: DELTA</span><a class="wf-link">Đổi doanh nghiệp</a></div></div><div class="wf-bottom-bar"><button class="btn-primary">Đăng nhập</button></div></div>
+  </div>
+  <div class="wf-screen-label">1.3 · mob · sign-in</div>
+</div>
+<div class="wf-screen" id="s17">
+  <div class="wf-step-badge">17</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.3] Đăng nhập · Field error</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-body"><div class="wf-app-brand">[Logo] Delta</div><div class="wf-screen-title">Đăng nhập</div><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản hoặc email" value="an.nguyen"></div><div class="field"><label>Mật khẩu *</label><div class="input-pw"><input type="password" placeholder="Mật khẩu" value="••••••••"><span class="eye">(eye)</span></div><div class="err">Tên tài khoản hoặc mật khẩu không đúng. Còn 2 lần thử.</div></div><div style="text-align:right"><a class="wf-link">Quên mật khẩu</a></div><p class="hint-text">Chưa có tài khoản? Liên hệ quản trị viên.</p><div class="links-row"><span class="hint-text">Doanh nghiệp: DELTA</span><a class="wf-link">Đổi doanh nghiệp</a></div></div><div class="wf-bottom-bar"><button class="btn-primary">Đăng nhập</button></div></div>
+  </div>
+  <div class="wf-screen-label">1.3 · mob · sign-in · Field error</div>
+</div>
+<div class="wf-screen" id="s18">
+  <div class="wf-step-badge">18</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.3] Đăng nhập · Session expired</span></div>
+    <div class="wf-screen-content flush"><div class="wf-backdrop" style="min-height:640px;flex-direction:column;justify-content:center"><div class="wf-note">Phía sau: màn đang dùng (mờ)</div><div class="modal-box"><p class="info-label">Phiên làm việc đã hết hạn. Đăng nhập lại.</p><button class="btn-primary">Đăng nhập lại</button></div></div></div>
+  </div>
+  <div class="wf-screen-label">1.3 · mob · sign-in · Session expired</div>
+</div>
+<div class="wf-screen" id="s19">
+  <div class="wf-step-badge">19</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.3] Đăng nhập · Submitting</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-body"><div class="wf-app-brand">[Logo] Delta</div><div class="wf-screen-title">Đăng nhập</div><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản hoặc email" value="an.nguyen"></div><div class="field"><label>Mật khẩu *</label><div class="input-pw"><input type="password" placeholder="Mật khẩu" value="••••••••"><span class="eye">(eye)</span></div></div><div style="text-align:right"><a class="wf-link">Quên mật khẩu</a></div><p class="hint-text">Chưa có tài khoản? Liên hệ quản trị viên.</p><div class="links-row"><span class="hint-text">Doanh nghiệp: DELTA</span><a class="wf-link">Đổi doanh nghiệp</a></div></div><div class="wf-bottom-bar"><button class="btn-primary">(…) Đang đăng nhập</button></div></div>
+  </div>
+  <div class="wf-screen-label">1.3 · mob · sign-in · Submitting</div>
+</div>
+<div class="wf-screen" id="s20">
+  <div class="wf-step-badge">20</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.3] Đăng nhập · Network error</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-body"><div class="wf-toast">Mất kết nối. Kiểm tra mạng và thử lại.</div><div class="wf-app-brand">[Logo] Delta</div><div class="wf-screen-title">Đăng nhập</div><div class="field"><label>Tên tài khoản *</label><input type="text" placeholder="Tên tài khoản hoặc email" value="an.nguyen"></div><div class="field"><label>Mật khẩu *</label><div class="input-pw"><input type="password" placeholder="Mật khẩu" value="••••••••"><span class="eye">(eye)</span></div></div><div style="text-align:right"><a class="wf-link">Quên mật khẩu</a></div><p class="hint-text">Chưa có tài khoản? Liên hệ quản trị viên.</p><div class="links-row"><span class="hint-text">Doanh nghiệp: DELTA</span><a class="wf-link">Đổi doanh nghiệp</a></div></div><div class="wf-bottom-bar"><button class="btn-primary">Đăng nhập</button></div></div>
+  </div>
+  <div class="wf-screen-label">1.3 · mob · sign-in · Network error</div>
+</div>
+<div class="wf-screen" id="s21">
+  <div class="wf-step-badge">21</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.4] Không được dùng kênh này</span></div>
+    <div class="wf-screen-content flush"><div class="wf-m-body"><div class="icon-lg">(!)</div><p class="info-label">Tài khoản này không được dùng ứng dụng. Liên hệ quản trị viên.</p></div><div class="wf-bottom-bar"><button class="btn-primary">Quay về đăng nhập</button></div></div>
+  </div>
+  <div class="wf-screen-label">1.4 · mob · channel-denied</div>
+</div>
+<div class="wf-screen" id="s22">
+  <div class="wf-step-badge">22</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.5] Chọn chi nhánh</span></div>
+    <div class="wf-screen-content flush"><div class="wf-backdrop" style="min-height:640px;flex-direction:column;justify-content:flex-end;padding:0"><div style="padding:8px 14px"><div class="wf-note">Phía sau: Đăng nhập (mờ)</div></div><div class="modal-box" style="width:100%;max-width:none;border-radius:12px 12px 0 0;padding:16px"><div style="width:40px;height:4px;background:#ccc;border-radius:2px;margin:0 auto"></div><div class="modal-title">Chọn chi nhánh</div><div class="field"><input type="text" placeholder="Tìm theo tên chi nhánh hoặc tỉnh thành" value=""></div><label class="radio"><input type="radio"> Công ty mẹ — Delta Quốc tế</label><div class="divider"><span>Hoặc chọn chi nhánh cụ thể</span></div><label class="radio"><input type="radio"> Delta Hải Phòng <span class="wf-card-sub">&middot; Hải Phòng</span></label><label class="radio"><input type="radio"> Delta Hà Nội <span class="wf-card-sub">&middot; Hà Nội</span></label><label class="radio"><input type="radio"> Delta TP. Hồ Chí Minh <span class="wf-card-sub">&middot; TP. Hồ Chí Minh</span></label><button class="btn-primary">Chọn</button><button class="btn-secondary">Huỷ</button></div></div></div>
+  </div>
+  <div class="wf-screen-label">1.5 · mob · branch-picker</div>
+</div>
+<div class="wf-screen" id="s23">
+  <div class="wf-step-badge">23</div>
+  <div class="wf-device-tag">mobile · 375px</div>
+  <div class="wf-screen-frame">
+    <div class="wf-screen-bar"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="wf-bar-title">[1.5] Chọn chi nhánh · Empty</span></div>
+    <div class="wf-screen-content flush"><div class="wf-backdrop" style="min-height:640px;flex-direction:column;justify-content:flex-end;padding:0"><div style="padding:8px 14px"><div class="wf-note">Phía sau: Đăng nhập (mờ)</div></div><div class="modal-box" style="width:100%;max-width:none;border-radius:12px 12px 0 0;padding:16px"><div style="width:40px;height:4px;background:#ccc;border-radius:2px;margin:0 auto"></div><div class="modal-title">Chọn chi nhánh</div><div class="field"><input type="text" placeholder="Tìm theo tên chi nhánh hoặc tỉnh thành" value="Đà"></div><div class="wf-photo" style="min-height:80px">Không có chi nhánh phù hợp.</div><button class="btn-primary">Chọn</button><button class="btn-secondary">Huỷ</button></div></div></div>
+  </div>
+  <div class="wf-screen-label">1.5 · mob · branch-picker · Empty</div>
+</div>
+</div></div>
+<div class="wf-page" data-device="desktop">
+  <div class="wf-desc-section">
+    <div class="wf-desc-title">Mô tả màn hình</div>
+    <table class="wf-desc-table">
+      <thead>
+        <tr><th>#</th><th>Items</th><th>Control type</th><th>Data type</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 1.1: Splash (mob)</td></tr>
+        <tr><td>1</td><td>Logo sản phẩm</td><td>Label</td><td>ReadOnly</td><td>&bull; Hiện khi mở app, trong lúc kiểm tra phiên và mã doanh nghiệp đã lưu trên máy (FR-account-access-030).</td></tr>
+        <tr><td>2</td><td>Kiểm tra phiên (tự động)</td><td>—</td><td>—</td><td>&bull; Không có thao tác của người dùng.<br>&bull; Còn phiên → Home chi nhánh hoặc Home đối tác theo loại tài khoản (FR-account-access-010, 014); dưới 3 giây ở 95% lần (NFR-account-access-002).<br>&bull; Lần đầu cài, chưa có phiên → Giới thiệu lần đầu [1.2]. Chưa có mã doanh nghiệp, đã qua giới thiệu → Nhập mã doanh nghiệp [1.6]. Chưa có phiên → Đăng nhập [1.3].</td></tr>
+        <tr><td>3</td><td>Trạng thái Offline</td><td>Label</td><td>ReadOnly</td><td>&bull; Có phiên mà mất mạng → vào Home ở chế độ mất mạng, banner "Không có kết nối internet" đầu màn (Theo GR-25).</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 1.2: Giới thiệu lần đầu (mob)</td></tr>
+        <tr><td>1</td><td>Bỏ qua</td><td>Link</td><td>Click</td><td>&bull; Góc trên phải. Đi như nút Đăng nhập (chốt khi vẽ wireframe 15/10, chưa có trong SRS).</td></tr>
+        <tr><td>2</td><td>Ảnh minh hoạ</td><td>Label</td><td>ReadOnly</td><td>&bull; Mỗi trang 1 ảnh. Hình minh hoạ chưa có chuẩn trong design.md.</td></tr>
+        <tr><td>3</td><td>Tiêu đề + mô tả trang</td><td>Label</td><td>ReadOnly</td><td>&bull; 3 trang giới thiệu (chốt khi vẽ wireframe 15/10): (1) Nhận lệnh vận chuyển · (2) Cập nhật hành trình · (3) Báo cáo chi phí.<br>&bull; Câu chữ từng trang chưa có nguồn — chờ chốt nội dung.</td></tr>
+        <tr><td>4</td><td>Chấm trang</td><td>Label</td><td>ReadOnly</td><td>&bull; 3 chấm, chấm đậm = trang đang xem; vuốt ngang để chuyển trang.</td></tr>
+        <tr><td>5</td><td>Nút Đăng nhập</td><td>Button</td><td>Click</td><td>&bull; Nút chính, cố định đáy (thumb zone). Chưa có mã doanh nghiệp trên máy → Nhập mã doanh nghiệp [1.6].<br>&bull; Màn chỉ hiện lần đầu cài hoặc sau khi xoá dữ liệu app (FR-account-access-030).</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 1.6: Nhập mã doanh nghiệp (mob)</td></tr>
+        <tr><td>1</td><td>Tiêu đề "Nhập mã doanh nghiệp"</td><td>Label</td><td>ReadOnly</td><td>&bull; App lần đầu hoặc sau khi chọn Đổi doanh nghiệp ở màn đăng nhập (FR-account-access-002).</td></tr>
+        <tr><td>2</td><td>Ô Mã doanh nghiệp</td><td>Textbox</td><td>Text</td><td>&bull; Mã để app biết đang đăng nhập vào khách nào. Bắt buộc (Theo GR-01): trống → E-common-001 "Nhập Mã doanh nghiệp.".<br>&bull; Chữ cái không dấu và số, không phân biệt hoa thường, tối đa 20 ký tự (chốt khi vẽ wireframe 15/10, chưa có trong SRS); bàn phím chữ. Ký tự khác không nhập được; đủ 20 ký tự không gõ thêm, dán vượt tự cắt (Theo GR-01) — không có câu lỗi riêng.<br>&bull; Mã không tồn tại hoặc khách đã ngừng dùng → E-account-access-017 inline dưới ô: "Không tìm thấy doanh nghiệp. Kiểm tra lại mã hoặc đường dẫn."</td></tr>
+        <tr><td>3</td><td>Nút Tiếp tục</td><td>Button</td><td>Click</td><td>&bull; Nút chính, cố định đáy. Đang gửi: khoá nút + vòng chờ (FR-account-access-003).<br>&bull; Mã đúng → app nhớ mã trên máy (BR-account-access-026) → Đăng nhập [1.3].<br>&bull; Mất mạng / lỗi hệ thống → toast E-common-009 / E-common-008, giữ mã đã nhập.</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 1.3: Đăng nhập (web, mob)</td></tr>
+        <tr><td>1</td><td>Logo + tên khách</td><td>Label</td><td>ReadOnly</td><td>&bull; Web: lấy theo đường dẫn đăng nhập riêng của khách (FR-account-access-002); ô logo màu theo P-mau-logo (Delta: #1B7B46). App: theo mã doanh nghiệp đã lưu.<br>&bull; Web: đường dẫn không tồn tại hoặc khách ngừng dùng → trạng thái Tenant not found: chỉ câu E-account-access-017 "Không tìm thấy doanh nghiệp. Kiểm tra lại mã hoặc đường dẫn." thay cho form, không có nút (không biết khách nào nên không có đường về).</td></tr>
+        <tr><td>2</td><td>Ô Tên tài khoản</td><td>Textbox</td><td>Text</td><td>&bull; Bắt buộc (Theo GR-01). Nhận tên tài khoản hoặc email; số điện thoại chỉ khi bật P-dang-nhap-bang-sdt (Delta: tắt) (FR-account-access-001).<br>&bull; Trống khi bấm Đăng nhập → E-common-001 "Nhập Tên tài khoản.".</td></tr>
+        <tr><td>3</td><td>Ô Mật khẩu</td><td>Textbox</td><td>Text</td><td>&bull; Bắt buộc, ẩn ký tự, biểu tượng (eye) hiện/ẩn (FR-account-access-004). Chỉ so khớp, không kiểm chính sách mật khẩu. Trống → "Nhập Mật khẩu.".<br>&bull; Lỗi hiện inline dưới ô (GR-15 Loại 1), kiểm theo thứ tự BR-account-access-022:<br>&bull; (1) Đang Tạm khoá → E-account-access-002 "Tài khoản tạm khoá. Thử lại sau {hh:mm} hoặc đặt lại mật khẩu." (dù mật khẩu đúng hay sai), có link Đặt lại mật khẩu → [3.1].<br>&bull; (2) Sai → E-account-access-001 "Tên tài khoản hoặc mật khẩu không đúng. Còn {n} lần thử.", xoá mật khẩu đã nhập, đếm +1 (chung web và app); sai đủ P-so-lan-sai-mat-khau (Delta: 5) lần → Tạm khoá P-thoi-gian-tam-khoa (Delta: 30 phút) và báo E-002.<br>&bull; (3) Chỉ khi mật khẩu khớp: Vô hiệu hoá → E-account-access-003 "Tài khoản đã bị vô hiệu hoá. Liên hệ quản trị viên." · chưa có chi nhánh → E-account-access-004 "Tài khoản chưa được cấp chi nhánh nào. Liên hệ quản trị viên." · mật khẩu tạm hết hạn → E-account-access-006 "Mật khẩu tạm đã hết hạn. Đặt lại mật khẩu hoặc liên hệ IT." (có link → [3.1]); E-003, E-004 không có link đặt lại.<br>&bull; Chống dò tài khoản: tên không tồn tại đi đúng các bước (1)–(2) như tên có thật — cùng câu, cùng số lần thử, cùng khoá (NFR-account-access-006).</td></tr>
+        <tr><td>4</td><td>Ghi nhớ đăng nhập</td><td>Checkbox</td><td>Check</td><td>&bull; Chỉ web; mặc định không chọn. Chọn: giữ phiên P-thoi-han-ghi-nho (Delta: 30 ngày) từ lần thao tác cuối. Không chọn: hết phiên khi đóng trình duyệt hoặc sau P-het-phien-khong-thao-tac (Delta: 8 giờ) không thao tác (FR-account-access-013).<br>&bull; App không có ô này; phiên giữ tới khi đăng xuất hoặc không mở app quá P-thoi-han-ghi-nho (FR-account-access-014).</td></tr>
+        <tr><td>5</td><td>Quên mật khẩu</td><td>Link</td><td>Click</td><td>&bull; → Chọn cách lấy lại mật khẩu [3.1] (FR-account-access-017).</td></tr>
+        <tr><td>6</td><td>Nút Đăng nhập</td><td>Button</td><td>Click</td><td>&bull; Nút chính, full-width. Đang gửi (khung Submitting — đại diện cho mọi form của feature): khoá nút + vòng chờ, bấm lặp chỉ gửi 1 lần (FR-account-access-003).<br>&bull; Hợp lệ → phân luồng (FR-account-access-010): đối tác → Home đối tác; 1 chi nhánh hoặc chi nhánh lần trước còn quyền → Home chi nhánh đó; từ 2 chi nhánh chưa chọn → Chọn chi nhánh [1.5]; mật khẩu tạm còn hạn → Tạo mật khẩu mới [2.1]; không có quyền kênh → [1.4]. ≤ 3 giây ở 95% lần (NFR-account-access-001).<br>&bull; Mất mạng / lỗi hệ thống (khung Network error — đại diện cho mọi form) → toast E-common-009 "Mất kết nối. Kiểm tra mạng và thử lại." / E-common-008 "Đã xảy ra lỗi. Thử lại sau.", giữ dữ liệu đã nhập, nút về thường.</td></tr>
+        <tr><td>7</td><td>Dòng hướng dẫn người chưa có tài khoản</td><td>Label</td><td>ReadOnly</td><td>&bull; Nội dung theo P-huong-dan-cap-tai-khoan (Delta: "Chưa có tài khoản? Liên hệ quản trị viên.") (FR-account-access-031).</td></tr>
+        <tr><td>8</td><td>Doanh nghiệp: {mã} · Đổi doanh nghiệp</td><td>Link</td><td>Click</td><td>&bull; Chỉ app. → Nhập mã doanh nghiệp [1.6]; đổi doanh nghiệp chỉ làm được khi chưa đăng nhập (BR-account-access-026).</td></tr>
+        <tr><td>9</td><td>Thông báo phiên hết hạn</td><td>Label</td><td>ReadOnly</td><td>&bull; Khi bị đưa về vì phiên hết hạn, bị kết thúc do đổi/đặt lại mật khẩu ở nơi khác, hoặc bị vô hiệu hoá (FR-account-access-015, 016): E-common-010 "Phiên làm việc đã hết hạn. Đăng nhập lại." — web: toast; app: popup chặn (Theo GR-26), nút Đăng nhập lại duy nhất, không đóng bằng chạm nền.</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 1.4: Không được dùng kênh này (web, mob)</td></tr>
+        <tr><td>1</td><td>Icon cảnh báo + câu báo</td><td>Label</td><td>ReadOnly</td><td>&bull; Màn kết quả toàn trang (Error Matrix SRS Mục 6 "Màn lỗi Loại 2"; chưa có CMP/GR cho mẫu này — gợi ý /update-overview patterns). E-account-access-005 "Tài khoản này không được dùng {Web/ứng dụng}. Liên hệ quản trị viên." — web ghi "Web", app ghi "ứng dụng".<br>&bull; Chỉ hiện khi mật khẩu đã khớp (BR-account-access-022); không tạo phiên.</td></tr>
+        <tr><td>2</td><td>Nút Quay về đăng nhập</td><td>Button</td><td>Click</td><td>&bull; → Đăng nhập [1.3].</td></tr>
+        <tr class="wf-desc-screen-header"><td colspan="5">Screen 1.5: Chọn chi nhánh (web, mob)</td></tr>
+        <tr><td>1</td><td>Tiêu đề "Chọn chi nhánh"</td><td>Label</td><td>ReadOnly</td><td>&bull; Web: cửa sổ (modal); app: bottom sheet. Mở sau đăng nhập khi có từ 2 chi nhánh và chưa có chi nhánh lần trước (FR-account-access-010).</td></tr>
+        <tr><td>2</td><td>Ô tìm</td><td>Textbox</td><td>Text</td><td>&bull; Theo GR-09: tìm gần đúng theo tên chi nhánh hoặc tỉnh thành; app tìm ngay khi gõ (debounce 300ms).<br>&bull; Không ra kết quả → Theo GR-12: "Không có chi nhánh phù hợp.", không có nút Tạo mới; xoá từ khoá → danh sách trở lại.</td></tr>
+        <tr><td>3</td><td>Công ty mẹ</td><td>Radio button</td><td>Check</td><td>&bull; Chỉ hiện khi tài khoản có quyền toàn tổ chức (BR-account-access-013).</td></tr>
+        <tr><td>4</td><td>Ngăn cách "Hoặc chọn chi nhánh cụ thể"</td><td>Label</td><td>ReadOnly</td><td>&bull; Ẩn khi không hiện dòng Công ty mẹ.</td></tr>
+        <tr><td>5</td><td>Danh sách chi nhánh</td><td>Radio button</td><td>Check</td><td>&bull; Mỗi dòng: tên chi nhánh · tỉnh thành. Sắp theo lần dùng gần nhất (FR-account-access-011). Chọn đúng một (Công ty mẹ hoặc 1 chi nhánh).</td></tr>
+        <tr><td>6</td><td>Nút Chọn</td><td>Button</td><td>Click</td><td>&bull; Nút chính; khoá tới khi đã chọn 1 mục. → lưu chi nhánh dùng lần trước theo tài khoản, áp cho web và app (BR-account-access-015) → Home của chi nhánh đã chọn.<br>&bull; Mất quyền chi nhánh vừa chọn trong lúc chọn → E-common-012 "Quyền của tài khoản vừa thay đổi. Tải lại để áp dụng.", tải lại danh sách.</td></tr>
+        <tr><td>7</td><td>Nút Huỷ</td><td>Button</td><td>Click</td><td>&bull; Vừa đăng nhập: đăng xuất, xoá phiên ghi nhớ, về Đăng nhập [1.3] (BR-account-access-014).</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="wf-footer">
+    <span>account-access / sign-in</span>
+    <span>Tạo bởi /wireframe-html · 2026-10-15</span>
+  </div>
+</div>
+</body>
+</html>
