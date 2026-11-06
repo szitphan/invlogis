@@ -90,11 +90,11 @@ Mẫu ghép = Button + component khác. Trên Figma đặt ở khối "Mẫu gh�
 | web-21 | Star + số | button + số mờ 60% | |
 | web-22 | Like + số (vạch ngăn) | button + ô số | |
 | web-24 | Đăng nhập MXH — viền, icon màu hãng | outline + logo | Màn đăng nhập (Google) |
+| web-25 | Đăng nhập MXH — nền màu hãng | Default + fill màu hãng, chữ/logo trắng | Màn đăng nhập (user giữ 06/11 tối; màu hãng không phải token) |
 | web-26 | Icon + tooltip | button chỉ icon + `nz-tooltip` | Bắt buộc với mọi nút chỉ icon |
 | web-27 | Left \| Middle \| Right | `nz-button-group` secondary + vạch ngăn | Chuyển Ngày / Tuần / Tháng |
 
-**Không dùng:** web-10 icon tròn (đã có icon vuông) · web-23 đăng nhập chỉ icon · web-25 nút nền màu hãng
-(màu ngoài token) · web-15 ô nhập + nút tìm rời → **chuyển sang Input**: icon tìm nằm trong ô (`nzSuffix`),
+**Không dùng:** web-10 icon tròn (đã có icon vuông) · web-23 đăng nhập chỉ icon · web-15 ô nhập + nút tìm rời → **chuyển sang Input**: icon tìm nằm trong ô (`nzSuffix`),
 không còn nút rời (user chốt 06/11: ô pill đứng cạnh nút bo 8 lệch góc).
 
 ## 6. Nút trượt xác nhận — component riêng `slide-confirm`
@@ -109,7 +109,7 @@ giao hàng, nhận lệnh — tránh bấm nhầm.
 | Nút kéo | 48 × 48, **bo 14 = 18 − 4** (đồng tâm với rãnh) | `slide/grip-size` 48 · `slide/grip-radius` = `radius/xl` 14 |
 | Màu | rãnh `color/bg-base` · nút `color/primary` · mũi tên `color/primary-foreground` · chữ gợi ý `color/text-secondary` | Light #f5f5f5 / #171717 · Dark #262626 / #e5e5e5 — cùng biến, đổi theo mode |
 
-Giữ 2 biến thể: **Sáng** và **Tối** (mode Light/Dark). **Không dùng:** nền sáng có viền (user bỏ 06/11).
+Giữ 3 biến thể nền: **Sáng**, **Sáng có viền** (rãnh nền trắng `color/body-bg` + viền 1px `color/border-base`, user giữ 06/11 tối) và **Tối** (mode Dark).
 
 Hành vi (khớp bencho.dev/?c=slide-confirm, user chốt 06/11): kéo tới đâu, **khối cùng màu nút kéo phủ từ đầu rãnh tới đó**;
 chữ gợi ý mờ dần (hết ở 55% quãng), mũi tên mờ ở 40% cuối. Chỉ xác nhận khi kéo tới cuối; thả giữa chừng thì lò xo về
@@ -139,7 +139,7 @@ Focus: lớp `Focus ring` viền 3px ngoài nút, bo 11 (= `btn/radius` 8 + `foc
 nút không nền (Ghost, Link) không hiện bóng. Text style: `button/base` (14/20), `button/xs` (12/16), Geist Medium −0.25px.
 Bộ 288 biến thể tạo bằng Figma MCP vì reqwise giới hạn 50 tổ hợp/set; bảng, nhãn, playground dựng bằng reqwise.
 
-Section Slide confirm `13:4056`: set `Slide confirm` `13:4117` — Nền (Sáng · Tối, mode Dark gắn trên biến thể) × Trạng thái (Nghỉ · Đang kéo · Đã xác nhận) = 6; gắn `slide/height` · `slide/grip-size` · `slide/radius` · `slide/grip-radius`; thuộc tính `Chữ gợi ý` (text). Prototype: Nghỉ —On drag→ Đã xác nhận (Smart animate, Gentle 0,45 s) —After delay 1,5 s→ Nghỉ; các lớp đổi bằng opacity/vị trí (không ẩn/hiện) để Smart animate chạy; khối phủ cùng màu nút, trạng thái Đã xác nhận nút kéo phủ kín rãnh, cụm `Xong` (✓ + chữ) đặt sát phải mờ 0 ở Nghỉ/Đang kéo → giữa rõ 100% ở Đã xác nhận nên trượt từ phải vào. **Figma Motion (keyframe)** gắn trên biến thể Nghỉ (Sáng, Tối) — instance tự chạy, số liệu lấy từ code bencho (SlideConfirm, speed 50):
+Section Slide confirm `13:4056`: set `Slide confirm` `13:4117` — Nền (Sáng · Sáng có viền · Tối, mode Dark gắn trên biến thể) × Trạng thái (Nghỉ · Đang kéo · Đã xác nhận) = 9; gắn `slide/height` · `slide/grip-size` · `slide/radius` · `slide/grip-radius`; thuộc tính `Chữ gợi ý` (text). Prototype: Nghỉ —On drag→ Đã xác nhận (Smart animate, Gentle 0,45 s) —After delay 1,5 s→ Nghỉ; các lớp đổi bằng opacity/vị trí (không ẩn/hiện) để Smart animate chạy; khối phủ cùng màu nút, trạng thái Đã xác nhận nút kéo phủ kín rãnh, cụm `Xong` (✓ + chữ) đặt sát phải mờ 0 ở Nghỉ/Đang kéo → giữa rõ 100% ở Đã xác nhận nên trượt từ phải vào. **Figma Motion (keyframe)** gắn trên biến thể Nghỉ (Sáng, Sáng có viền, Tối) — instance tự chạy, số liệu lấy từ code bencho (SlideConfirm, speed 50):
 0,1–0,9 s kéo (nút 0 → 224, khối phủ 48 → 272, chữ gợi ý mờ hết ở 55%, mũi tên mờ 40% cuối) ·
 0,9–1,2 s xác nhận: nút giãn trái + cụm `Xong` trượt từ phải (−85,5 px) theo **lò xo giảm chấn tới hạn**
 (stiffness 580, mass 0,9, damping 45,7 → `CUSTOM_SPRING` bounce 0: ra nhanh, chậm dần, 95% sau ≈ 0,19 s) ·
