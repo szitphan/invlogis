@@ -4,7 +4,7 @@ status: stale
 status_prev: draft
 status_changed: 2026-10-14
 status_reason: "đã review upstream, không cần sửa"
-updated: 2026-11-02
+updated: 2026-11-04
 tenant_terms: [Delta, DK05, dGas, Nam Khánh, Phú Lợi, Pan Hải An]
 links:
   - docs/_product/saas-core-vs-tenant.md
@@ -70,6 +70,10 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 | P-huong-dan-cap-tai-khoan | Dòng hướng dẫn người chưa có tài khoản trên màn đăng nhập | Danh sách (nội dung) | Cấu hình | "Chưa có tài khoản? Liên hệ quản trị viên." | như mặc định | Admin khách | Tài khoản D5 | SRS Mobile tr.46 |
 | P-han-link-dat-lai | Hiệu lực link đặt lại mật khẩu trên web | Số (phút) | Cấu hình | chưa chốt | 30 phút | Admin khách | Tài khoản B1 | SRS Web tr.264 |
 | P-han-tao-mat-khau | Thời gian để lưu mật khẩu mới sau khi mở link hoặc nhập đúng mã đặt lại | Số (phút) | Cấu hình | 15 phút | 15 phút | Admin khách | Tài khoản BR-023 | Review SRS account-access 15/10 |
+| P-dang-nhap-google | Bật đăng nhập bằng tài khoản Google công ty, song song mật khẩu | Bật/tắt | Cấu hình | tắt | bật | Admin khách | Tài khoản G1 | Phỏng vấn account-access 06/11 |
+| P-ten-mien-dang-nhap-google | Tên miền tài khoản Google công ty được nhận khi đăng nhập Google | Danh sách (tên miền) | Cấu hình | trống | delta.com.vn | Admin khách | Tài khoản G2 | Phỏng vấn account-access 06/11 |
+| P-tu-khoa-google-khi-nghi-viec | Tự tạm ngưng tài khoản Google công ty khi nhân viên nghỉ việc | Bật/tắt | Cấu hình | tắt | bật | Admin khách | Tài khoản G10, G11 | Phỏng vấn account-access 06/11 |
+| P-email-it-khoa-tai-khoan | Địa chỉ IT nhận email khoá tài khoản Google khi nhân viên nghỉ việc | Danh sách (email) | Cấu hình | theo `P-email-ho-tro-mat-khau` | it@delta.com.vn | Admin khách | Tài khoản G10 | Phỏng vấn account-access 06/11 |
 | P-van-toc-ket-xe | Vận tốc tối đa để xét kẹt xe khi máy nổ, xe vẫn nhích | Số (km/h) | Cấu hình | chưa chốt | 5 km/h (chờ xác nhận, transport-dispatch OQ-57) | Admin khách | Điều vận I3; Dữ liệu xe S2 | VIS mục 2.2.3 |
 | P-thoi-gian-ket-xe | Kẹt liên tục bao lâu thì ghi kẹt xe | Số (phút) | Cấu hình | chưa chốt | 10 phút (chờ xác nhận, OQ-57) | Admin khách | Điều vận I3; Dữ liệu xe S2 | VIS mục 2.2.3 |
 | P-thoi-gian-no-may-ngu | Máy nổ, xe đứng yên bao lâu thì ghi nổ máy ngủ | Số (phút) | Cấu hình | chưa chốt | 10 phút (chờ xác nhận, vehicle-telematics OQ-4) | Admin khách | Dữ liệu xe S3 | VIS mục 2.2.4 |
@@ -134,7 +138,7 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 | P-han-muc-dong-chu-tai-khoan | Hạn mức duyệt OTP của đồng chủ tài khoản trên ngân hàng theo cấp, mỗi lệnh và mỗi ngày; phần mềm định tuyến trước theo hạn mức còn lại | Danh sách (cấp × ₫/lệnh × ₫/ngày) | Cấu hình | chưa chốt | Quản lý nghiệp vụ 15 triệu/lệnh, 50 triệu/ngày · quản lý hiện trường 10 triệu/lệnh, 30 triệu/ngày | Admin khách | Trả hộ A8 | Phân hệ APAS (17/10/2026) mục 3.1 |
 | P-han-tra-hoa-don | Thời hạn người tạo phải trả hóa đơn (hoặc trả tiền) cho Yêu cầu nợ hóa đơn đã duyệt | Số (ngày làm việc) | Cấu hình | chưa chốt | 3 ngày làm việc từ ngày duyệt | Admin khách | Trả hộ B1, B4 | Quy trình quản lý quỹ & Thanh toán (06/10/2026) mục 4.5 |
 | P-khoa-cuoi-thang | Số ngày cuối tháng mà Yêu cầu nợ hóa đơn được duyệt thì tạm dừng quyền tạo từ ngày làm việc đầu tháng sau nếu chưa trả hóa đơn | Số (ngày) | Cấu hình | chưa chốt | 2 ngày cuối tháng | Admin khách | Trả hộ B4 | Quy trình quản lý quỹ & Thanh toán (06/10/2026) mục 4.5 |
-| P-thoi-gian-cho-otp | Thời gian chờ chủ tài khoản duyệt OTP trước khi nhắc qua SMS | Số (phút) | Cấu hình | chưa chốt | chưa chốt (đề xuất 30 phút) | Admin khách | Trả hộ A14 | Phỏng vấn 14/10 |
+| P-thoi-gian-cho-otp | Thời gian chờ chủ tài khoản duyệt OTP trước khi nhắc qua thông báo đẩy kèm email | Số (phút) | Cấu hình | chưa chốt | chưa chốt (đề xuất 30 phút) | Admin khách | Trả hộ A14 | Phỏng vấn 14/10 |
 | P-thoi-gian-cho-ngan-hang | Thời gian ngân hàng ngừng kết nối trước khi xuất tệp lệnh chi và cho chuyển cách trả | Số (giờ) | Cấu hình | chưa chốt | chưa chốt (đề xuất 2 giờ) | Admin khách | Trả hộ A15 | Phỏng vấn 14/10; Phần mềm Delta 3.0 (16/10/2026) mục 7.1 |
 | P-lech-ngay-khop-hoa-don | Số ngày tối đa giữa ngày lập hóa đơn và ngày giao dịch để tự khớp 1-1 | Số (ngày) | Cấu hình | 3 | 3 ngày | Admin khách | Hóa đơn B5 | Phân hệ APAS (17/10/2026) mục 3.3.2 Bước 3 |
 | P-han-tra-soat-giao-dich | Thời gian giao dịch lệch tiền nằm trong Hàng chờ tra soát trước khi cảnh báo kế toán | Số (giờ) | Cấu hình | 24 | 24 giờ | Admin khách | Hóa đơn B6 | Phân hệ APAS (17/10/2026) mục 3.3.2 |
@@ -152,3 +156,12 @@ Kiểu: **Số** (con số, khoảng thời gian, tỷ lệ) · **Danh sách** (
 | P-ty-le-khau-tru-tncn | Tỷ lệ khấu trừ thuế TNCN khi chi cho cá nhân không ký hợp đồng lao động | Số (%) | Lõi, Cấu hình | chưa chốt | 10% | Admin khách | Hóa đơn E5 | Phân hệ APAS (17/10/2026) mục 3.4.2.2 |
 | P-han-muc-du-no-tam-ung | Dư nợ tạm ứng tối đa của nhân viên trước khi cảnh báo người duyệt khi có tạm ứng mới | Số (₫/người) | Cấu hình | chưa chốt | chưa chốt (theo chức danh, Quy trình quản lý quỹ mục 6.2; OQ-1 Quỹ) | Admin khách | Quỹ S1 | Phỏng vấn 14/10 |
 | P-quy-tac-ghep-mooc | Mức ghép (Được, Cảnh báo, Chặn, Cần hỏi) cho từng loại mooc × cấu hình container (rỗng, 1×20, 2×20, 1×40, 1×45) khi xếp tổ hợp | Bảng | Lõi, Cấu hình | theo `design-system/foundations/vehicle.md` mục 5.1 | chưa chốt (OQ-66, OQ-67 Điều phối) | Admin khách | Điều phối F10 | lab-combo (11/10/2026), DEC-267 |
+| P-bat-binh-luan | Bình luận trên bản ghi nghiệp vụ | Bật/tắt | Lõi, Cấu hình | chưa chốt | bật | Admin khách | Bình luận A1 | Phỏng vấn 04/11 |
+| P-bat-thong-bao-email | Cho phép người dùng nhận thông báo qua email | Bật/tắt | Lõi, Cấu hình | chưa chốt | bật | Admin khách | Thông báo A5 | Phỏng vấn 04/11 |
+| P-gioi-han-tep | Dung lượng tối đa mỗi tệp tải lên (trừ hóa đơn) | Số (MB) | Lõi, Cấu hình | chưa chốt | 100 MB | Admin khách | Ảnh/tài liệu A5 | Phỏng vấn 04/11 |
+| P-so-ngay-luu-thong-bao | Số ngày giữ thông báo trong danh sách chuông | Số (ngày) | Lõi, Cấu hình | chưa chốt | 90 ngày | Admin khách | Thông báo A9 | Phỏng vấn 04/11 |
+| P-han-canh-bao-anh-cho-tai | Ảnh chờ tải lên quá bao lâu thì báo lỗi để tải lại | Số (phút) | Lõi, Cấu hình | chưa chốt | 60 phút (đề xuất, chờ xác nhận) | Admin khách | Ảnh/tài liệu A10 | Phỏng vấn 04/11 |
+| P-nut-goi-nguoi-giu-viec | Nút Gọi người đang giữ việc trên thẻ Việc tiếp theo và ở lý do "Chờ {tên}" | Bật/tắt | Cấu hình | chưa chốt | bật | Admin khách | Hướng dẫn tại chỗ A6; Giao việc FR-task-assignment-018 | Phỏng vấn 21/10 |
+| P-so-nguoi-chi-dinh-toi-da | Số người tối đa được chọn ở bước chỉ định | Số (người) | Lõi, Cấu hình | chưa chốt | 5 | Admin khách | Giao việc S5 | Phỏng vấn 05/11 |
+| P-bat-chi-dinh-nguoi | Bật bước chỉ định người theo từng feature | Bật/tắt | Lõi, Cấu hình | chưa chốt | bật theo từng feature khi đợt đó lên | innvie khi triển khai | Giao việc S1 | Phỏng vấn 05/11 |
+| P-cho-phep-tu-duyet | Cho người chuyển bước, người tạo phiếu được chọn chính mình ở bước duyệt | Bật/tắt | Lõi, Cấu hình | tắt | tắt | Admin khách | Giao việc S7 | Phỏng vấn 05/11 |

@@ -75,7 +75,7 @@ __Mục tiêu (in-scope):__
 * Lõi sản phẩm không chứa quy tắc riêng Delta: mọi con số, danh sách, bật/tắt đi qua tham số theo khách.
 
 __Ngoài phạm vi (non-goals / out-of-scope):__
-* Không làm phần mềm kế toán đầy đủ: có ghi nhận chi phí, doanh thu, công nợ theo chứng từ và xuất dữ liệu; không làm sổ cái, bút toán, báo cáo thuế. Cách chuyển dữ liệu sang phần mềm kế toán của khách chưa chốt (OQ-6).
+* Không làm phần mềm kế toán đầy đủ: có ghi nhận chi phí, doanh thu, công nợ theo chứng từ và xuất dữ liệu; sinh bút toán và đẩy một chiều sang phần mềm kế toán của khách qua lớp kết nối thay được (`accounting-integration`, DEC-344); không làm sổ cái, báo cáo thuế.
 * Không kết nối máy với ePort cảng; phần mềm hỗ trợ danh sách việc ePort và lưu kết quả.
 * Không làm sàn ghép hàng, ghép xe cho bên ngoài; không làm app cho chủ hàng tự đặt dịch vụ. Việc khách của doanh nghiệp tự theo dõi lô hàng chưa chốt (OQ-14).
 * Không sửa lõi riêng cho một khách; yêu cầu riêng đi qua cấu hình, gói hoặc kết nối riêng.
@@ -84,7 +84,7 @@ __Ngoài phạm vi (non-goals / out-of-scope):__
 
 | Theme | Mô tả | Features thuộc theme |
 |---|---|---|
-| Nền tảng (Lõi) | Đăng nhập, thao tác chung, liên quy trình, trợ giúp | `account-access`, `common-workspace`, `cross-process-flow`, `help-center` |
+| Nền tảng (Lõi) | Đăng nhập, thao tác chung, liên quy trình, trợ giúp, thư viện nội dung, kho tài liệu | `account-access`, `common-workspace`, `cross-process-flow`, `help-center`, `content-management`, `document` |
 | Quản trị và cấu hình (Lõi) | Tài khoản, nhóm quyền, phân quyền theo chi nhánh, cơ sở | `access-control` |
 | Danh mục cấp doanh nghiệp (Lõi; Hàng hoá bật theo Gói Bảo dưỡng đội xe) | Danh mục dùng chung đặt trên các chi nhánh, có trang quản lý và cấu hình riêng, chia miền Tổ chức (kho thuộc xưởng) · Hàng hoá · Phương tiện · Đối tác · Nhân sự · Tài chính. Miền Phương tiện, Nhân sự chưa có feature riêng | `organization`, `product-catalog`, `business-partners`, `cost-catalog` |
 | Điều phối vận tải (Lõi) | Từ chứng từ khách tới Lệnh vận tải hoàn tất, chi phí về đúng JobID. Công nợ, hoá đơn tạm đặt ở module này (OQ-6) | `service-delivery`, `shipment-coordination`, `transport-dispatch` |
@@ -126,7 +126,7 @@ Ngoài 2 hành trình chính (back-office, quản trị): `common-workspace`, `h
 | 1 | Đăng nhập và quản lý tài khoản cá nhân | `account-access` | Nền tảng | Mọi người dùng | Must | — | ⬜ chưa (có bộ reverse) |
 | 2 | Dùng màn Home và thao tác chung trên danh sách | `common-workspace` | Nền tảng | Mọi người dùng | Must | `access-control` | ⬜ chưa |
 | 3 | Xem quy trình liên nghiệp vụ dạng cây | `cross-process-flow` | Nền tảng | Mọi người dùng | Must | `access-control`; mềm: mỗi module đăng ký quy trình của mình | ✅ đã chi tiết (1 brainstorm, đang stale) |
-| 4 | Tra cứu câu hỏi thường gặp và hướng dẫn sử dụng | `help-center` | Nền tảng | Mọi người dùng | Could | `account-access` | ⬜ chưa |
+| 4 | Tra cứu câu hỏi thường gặp và hướng dẫn sử dụng | `help-center` | Nền tảng | Mọi người dùng | Must (làm ở P1, sau phần P0 của `task-assignment`, `in-app-guidance`) | `account-access` | ✅ đã brainstorm |
 | 5 | Quản lý tài khoản, nhóm quyền và phân quyền | `access-control` | Quản trị và cấu hình | Admin | Must | `account-access`, `organization` | ⬜ chưa |
 | 6 | Quản lý xưởng, cơ cấu tổ chức và phân vùng dữ liệu theo chi nhánh | `organization` | Danh mục › Tổ chức | Admin | Must | `account-access` | ⬜ chưa |
 | 7 | Quản lý danh mục hàng hoá và dịch vụ kỹ thuật | `product-catalog` | Danh mục › Hàng hoá | Nhân viên xưởng | Should | `access-control` | ✅ đã chi tiết (1 brainstorm) |
@@ -152,6 +152,8 @@ Ngoài 2 hành trình chính (back-office, quản trị): `common-workspace`, `h
 | 27 | Cấp dầu cho phương tiện | `fuel-issuing` | Quản lý dầu | Nhân viên cây dầu, Nhân viên đối tác cây dầu | Should | `fuel-allowance`, `fuel-stations`, `cost-catalog` | ⬜ chưa |
 | 28 | Thanh toán trả sau cây dầu | `fuel-payment` | Quản lý dầu | Kế toán | Should | `fuel-issuing`, `business-partners`, `cost-catalog` | ⬜ chưa |
 | 29 | Cấp mới và cho nghỉ nhân viên | `employee-records` | Nhân sự | Nhân sự | Should | `access-control` | ⬜ chưa |
+| 30 | Soạn, chia sẻ tài liệu nội bộ của công ty theo cây, đẩy sang Help Center | `content-management` | Nền tảng | Admin khách, mọi người dùng | Should | `access-control`, `help-center` | ⬜ chưa |
+| 31 | Gom và lưu tài liệu, ảnh của mọi nghiệp vụ | `document` | Nền tảng | Mọi người dùng | Should | `access-control`, `file-attachments` | ⬜ chưa |
 
 Thứ tự dựng nền: `account-access` → `organization` → `access-control` → các danh mục → các module nghiệp vụ (khác thứ tự module trong bảng).
 
@@ -166,7 +168,8 @@ Người dùng đăng nhập vào web và app, khôi phục hoặc đổi mật 
 __Phục vụ job:__ Feature nền — hỗ trợ mọi nhóm người dùng ở Mục 3.
 
 __Phạm vi v1:__ Đăng nhập, quên mật khẩu, đăng xuất, đổi mật khẩu, tạo mật khẩu mới, xem thông tin cá nhân (UC01.01–01.06).
-__Chưa làm:__ TBD [NEEDS CLARIFICATION: có cần đăng nhập một lần (SSO) với hệ thống của khách SaaS không — đề xuất ở sổ vấn đề ISS-13, chốt ở brainstorm]
+__Phạm vi thêm:__ đăng nhập bằng Google song song mật khẩu, bật theo khách; tự khoá tài khoản Google khi nhân viên nghỉ việc (DEC-405).
+__Chưa làm:__ đăng nhập Microsoft.
 
 __Luồng chính:__
 1) Người dùng nhập tài khoản, mật khẩu.
@@ -216,16 +219,15 @@ Người dùng tự tra câu hỏi thường gặp và hướng dẫn sử dụn
 
 __Phục vụ job:__ Feature nền — hỗ trợ mọi người dùng tự học cách dùng.
 
-__Phạm vi v1:__ FAQs và hướng dẫn sử dụng (UC09.01–09.02).
-__Chưa làm:__ TBD [NEEDS CLARIFICATION: nội dung hướng dẫn dùng chung mọi khách hay mỗi khách tự soạn]
+__Phạm vi v1:__ trang web tài liệu công khai và cần đăng nhập, bài gắn cứng với từng chức năng; FAQ, PDF riêng của khách trong phần mềm (UC09.01–09.02), giữ như chức năng cũ; bài của công ty đẩy từ `content-management` (DEC-405, DEC-406). Chi tiết: [[docs/help-center/brainstorms/help-center.md|Brainstorm Help Center]].
+__Chưa làm:__ màn soạn bài trong sản phẩm; khách tự sửa bài dùng chung. Bài dùng chung mọi khách do innvie soạn; khách tự tải FAQ, PDF riêng.
 
 __Luồng chính:__
 1) Người dùng mở trợ giúp.
 2) Tìm câu hỏi hoặc hướng dẫn.
 3) Đọc và làm theo.
 
-__Rủi ro chính:__ TBD [NEEDS CLARIFICATION: rủi ro nghiệp vụ chính] · __Đo thành công:__ TBD [NEEDS CLARIFICATION: chọn chỉ số, vd số yêu cầu hỗ trợ trên mỗi khách]
-__OQ riêng:__ OQ-9
+__Rủi ro chính:__ bài viết cũ hơn giao diện; tự làm trang kéo dài · __Đo thành công:__ số câu hỏi đội innvie nhận theo từng module, đếm từ 4 tuần trước khi bật đợt 1; chưa đặt chỉ tiêu
 
 ### 7.5 Quản lý tài khoản, nhóm quyền và phân quyền — `access-control`
 
@@ -234,7 +236,7 @@ Admin của khách tạo tài khoản, lập nhóm quyền và gán quyền ch�
 __Phục vụ job:__ Feature nền — hỗ trợ Admin của khách; mọi job ở Mục 3 dựa vào phân quyền đúng.
 
 __Phạm vi v1:__ Quản lý tài khoản, nhóm quyền, thay đổi phân quyền chức năng (UC13.01–13.02, UC02.02.01); phạm vi Công ty → Chi nhánh → Cơ sở lấy từ cơ cấu khai ở `organization`. Cơ chế quyền có thời hạn gắn bản ghi hoặc ca trực là lõi, thuộc feature này; `shipment-coordination` chỉ dùng cơ chế. Tài khoản chỉ được tạo ở đây; `employee-records` gọi sang.
-__Chưa làm:__ Đăng nhập một lần (SSO) — xem 7.1 `account-access` (ISS-13).
+__Phạm vi thêm:__ gỡ tài khoản Google đã gắn; vô hiệu hoá tay kèm tạm ngưng Google; quyền cài đặt đăng nhập Google, Thử khoá lại, IT đã khoá tay (xem 7.1, DEC-405).
 
 __Luồng chính:__
 1) Admin tạo nhóm quyền, chọn quyền chức năng theo nền tảng.
@@ -688,7 +690,7 @@ __Mục tiêu 3 / 6 / 12 tháng:__ 3 tháng — Delta chạy thật phân hệ �
 * __Bảo mật nhiều tầng:__ dữ liệu được kiểm ngay khi vào hệ thống; AI chỉ làm được những gì người dùng thật đứng sau nó được phép; phân quyền tới từng dòng dữ liệu (theo chi nhánh, đội xe, luồng AI).
 * __AI nằm trong quy trình:__ AI chạy như một bước của quy trình, kích hoạt theo thao tác trên phần mềm; không chép dữ liệu ra công cụ AI bên ngoài. Sẵn sàng cho khách kiểm toán bảo mật dữ liệu.
 * __Đo chi phí AI:__ đo được số lượt gọi và token AI theo từng quy trình nghiệp vụ và theo từng khách.
-* __Phân loại dữ liệu 4 cấp:__ pháp lý (mã hoá, lưu biệt lập); quản trị, tài chính (P/L Jobsheet, công nợ, hợp đồng, bảng lương — chỉ người được phân quyền); vận hành; công cộng.
+* __Phân loại dữ liệu 4 cấp:__ pháp lý (mã hoá, lưu biệt lập); quản trị, tài chính (P/L Jobsheet, công nợ, hợp đồng, bảng lương — chỉ người được phân quyền); vận hành; công cộng. Ngoại lệ: tệp, bình luận và lịch sử hiện cho mọi người xem được bản ghi, gồm giấy tờ nhân viên (04/11, chờ Delta xác nhận).
 * __Lưu trữ:__ lưu tập trung trên hệ thống, không lưu ra ngoài. Chứng từ kế toán, thuế, hải quan giữ theo `P-thoi-gian-luu-chung-tu` (Delta: 10 năm); log hệ thống và log gọi AI giữ theo `P-thoi-gian-luu-log` (Delta: 6 tháng).
 * __Chặn AI chạy vòng lặp:__ một tác vụ AI vượt `P-gioi-han-luot-goi-ai` (Delta: 10 lượt gọi) hoặc `P-gioi-han-thoi-gian-tac-vu-ai` (Delta: 3 phút) thì ngắt, báo email hoặc Telegram, khoá luồng AI đó và chuyển thành việc "Task lỗi cần xử lý bằng tay" cho nhân viên.
 
@@ -712,7 +714,7 @@ __Mục tiêu 3 / 6 / 12 tháng:__ 3 tháng — Delta chạy thật phân hệ �
 * [ ] OQ-3: Xem lãi lỗ và rủi ro theo lô hàng cho lãnh đạo — job chính của người đau nhất nhưng chưa có trong SRS. Thành feature riêng khi nào?
 * [ ] OQ-4: Ngân sách, mốc go-live Điều phối vận tải với Delta, quy mô đội làm?
 * [ ] OQ-5: Delta chưa gửi Quy trình điều vận — trạng thái Lệnh, luồng CBT, đường sắt đang là đề xuất.
-* [ ] OQ-6: Bảng kê, shipment list, công nợ phải thu/phải trả, kết nối MISA, thanh toán trả hộ (QR, uỷ nhiệm chi, ngân hàng), xuất dữ liệu sang phần mềm kế toán của khách: tách thành feature nào, thuộc theme nào, chạy mốc nào? Dùng chung với thanh toán Xưởng không?
+* [ ] OQ-6: Bảng kê, shipment list, công nợ phải thu/phải trả, kết nối MISA, thanh toán trả hộ (QR, uỷ nhiệm chi, ngân hàng), xuất dữ liệu sang phần mềm kế toán của khách: tách thành feature nào, thuộc theme nào, chạy mốc nào? Dùng chung với thanh toán Xưởng không? Kết nối MISA đã có hướng: `accounting-integration` (DEC-344); phần còn lại vẫn mở.
 * [ ] OQ-7: Cấu hình theo khách (tham số, thuật ngữ, bật/tắt gói) và khởi tạo khách mới — điều kiện để bán SaaS nhưng chưa có trong SRS. Thành feature khi nào?
 * [ ] OQ-8: Quyền khai thác thương mại riêng của mỗi bên với sản phẩm đồng sở hữu; SOP và dữ liệu Delta có phải bảo mật không (BL-056).
 * [ ] OQ-9: Rủi ro chính, chỉ số đo thành công và phần "chưa làm" của các feature chưa có brainstorm (nền, phương tiện, Xưởng, Cây dầu, Nhân sự) — bổ sung khi chạy `/brainstorm` từng feature.
@@ -725,3 +727,10 @@ __Mục tiêu 3 / 6 / 12 tháng:__ 3 tháng — Delta chạy thật phân hệ �
 * [ ] OQ-16: Chưa có module Sales (DEC-086), JobID v1 lấy giá bán, doanh thu từ đâu (nhập tay, bảng giá theo khách)? Phần mềm Delta 3.0 (16/10/2026) mục 3.1.5 xếp phân hệ Sales (hợp đồng, báo giá, hoa hồng sales và sales fund, hoa hồng khách, thu hồi công nợ) vào giai đoạn 2.
 * [ ] OQ-17: Danh mục cảng, bãi, điểm chụp ảnh và loại phí, định mức theo địa điểm mà brainstorm `shipment-coordination`, `transport-dispatch` dùng thuộc feature nào? Loại phí có trùng khoản mục chi phí của `cost-catalog` không? Đã chốt một phần: danh mục địa điểm và định mức theo địa điểm thuộc `location-catalog` (DEC-249). Điểm chụp ảnh, loại phí còn mở.
 * [ ] OQ-18: Thông báo trong app (nhắc, cảnh báo quá mốc, chờ duyệt) do feature nào sở hữu — `common-workspace` hay feature riêng?
+* [ ] OQ-19: Tiền thuê xe nội bộ tính theo "Tổng Kms thực chạy chéo × Định mức cấu hình theo dòng xe" hay theo khấu hao và số ngày chạy chéo? — Nguồn khách: Phân hệ APAS (25/10/2026), mục 3.6.3 Quy trình đối lưu chi phí và quyết toán nội bộ cuối kỳ, mục 3.4.1 Luồng xử lý chi phí cho thuê phương tiện định kỳ hàng tháng, mục 3.6.4 Lõi hạch toán thuê phương tiện tự động đối lưu khấu hao; Phân hệ FIAM (25/10/2026), mục 4.7.1 Luồng xử lý chi phí cho thuê phương tiện định kỳ hàng tháng — Nguồn nội bộ: `docs-input/sop/apas-thanh-toan-doi-soat/apas-thanh-toan-doi-soat.md:940`, `:727`, `:970`; `docs-input/sop/fiam-ke-toan-quan-tri/fiam-ke-toan-quan-tri.md:803`
+* [ ] OQ-20: Công thức ghi "Mức trích khấu hao tháng × Tổng số ngày lịch của tháng hiện hành ÷ Tổng số ngày chạy chéo thực tế" khiến xe chạy chéo càng ít ngày thì tiền thuê càng cao. Có phải ý là khấu hao tháng ÷ ngày lịch × ngày chạy chéo không? — Nguồn khách: Phân hệ APAS (25/10/2026), mục 3.4.1 Luồng xử lý chi phí cho thuê phương tiện định kỳ hàng tháng; Phân hệ FIAM (25/10/2026), mục 4.7.1 Luồng xử lý chi phí cho thuê phương tiện định kỳ hàng tháng — Nguồn nội bộ: `docs-input/sop/apas-thanh-toan-doi-soat/apas-thanh-toan-doi-soat.md:727`; `docs-input/sop/fiam-ke-toan-quan-tri/fiam-ke-toan-quan-tri.md:803`
+* [ ] OQ-21: Phí thuê xe nội bộ ở chi nhánh sử dụng xe ghi vào TK 632 hay TK 6274? — Nguồn khách: Phân hệ APAS (25/10/2026), mục 3.4.1 Luồng xử lý chi phí cho thuê phương tiện định kỳ hàng tháng, mục 3.6.4 Lõi hạch toán thuê phương tiện tự động đối lưu khấu hao — Nguồn nội bộ: `docs-input/sop/apas-thanh-toan-doi-soat/apas-thanh-toan-doi-soat.md:735`, `:980`
+* [ ] OQ-22: Lốp, ắc quy, đại tu lớn khi xe chạy chéo treo TK 242 ở chi nhánh sở hữu hay chi nhánh sử dụng xe? Mục 2.1.1 e (Tình huống 2) và dòng 15 (đại tu) ghi chi nhánh sở hữu; mục 2.1.5 và dòng 10 ghi chi nhánh sử dụng. — Nguồn khách: Phân hệ FIAM (25/10/2026), mục 2.1.1 e Quy trình kết chuyển chi phí khi chốt Lệnh sửa chữa, mục 2.1.5 Quy chế quản trị tài chính đối với phương tiện điều động chéo chi nhánh, mục 4.4 Ma trận định tuyến hạch toán tự động dòng 10 và 15 — Nguồn nội bộ: `docs-input/sop/fiam-ke-toan-quan-tri/fiam-ke-toan-quan-tri.md:271`, `:404`, `:714`, `:720`
+* [ ] OQ-23: Bảo hiểm xe chạy chéo, tại chi nhánh sở hữu ghi Có TK 331 hay Có TK 242? — Nguồn khách: Phân hệ FIAM (25/10/2026), mục 4.4 Ma trận định tuyến hạch toán tự động dòng 20, mục 4.8 Cơ chế ủy quyền chi hộ, Chặng 2 — Nguồn nội bộ: `docs-input/sop/fiam-ke-toan-quan-tri/fiam-ke-toan-quan-tri.md:725`, `:872`
+* [ ] OQ-24: Delta có 3 bồn dầu nội bộ (Hải Phòng, Bắc Ninh, Hải Dương) hay bồn tại 4 văn phòng chi nhánh (HP, BN, HD, BD)? — Nguồn khách: Phân hệ FIAM (25/10/2026), mục 1.2 Danh mục hệ thống tài khoản kế toán, tiểu khoản 1522; mục 2.2.1 Các nguyên tắc quản lý và hạch toán — Nguồn nội bộ: `docs-input/sop/fiam-ke-toan-quan-tri/fiam-ke-toan-quan-tri.md:102`, `:442`
+* [ ] OQ-25: FIAM, APAS, VIS khớp với 6 phân hệ của Delta 3.0 thế nào? Delta 3.0 không có 3 tên này, nhưng Kiến trúc đa pháp nhân lại dùng chúng. — Nguồn khách: Phần mềm Delta 3.0 (16/10/2026), mục 3.1 Phân hệ và chức năng; Kiến trúc tầng dữ liệu đa pháp nhân (26/10/2026), đoạn Tầng Quản trị Nội bộ — Nguồn nội bộ: `docs-input/sop/delta-3-0-master-plan/delta-3-0-master-plan.md:153`; `docs-input/sop/kien-truc-du-lieu-da-phap-nhan/kien-truc-du-lieu-da-phap-nhan.md:9`
