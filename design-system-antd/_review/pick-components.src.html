@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chọn component dựng tiếp — bộ thử Ant Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F1F1F1;--surface:#fff;--line:#E3E5E8;--fg:#171717;--fg-2:#525252;--fg-3:#737373;--brand:#0036B5;--ink-soft:#E5ECFA;
+--ok:#007004;--ok-soft:#E3F2E0;--bad:#A50C25;--bad-soft:#FCE4E2;--warn:#8A5A00;--warn-soft:#FFF4D6;--new:#5B2BB5;--new-soft:#EEE6FB;
+--f-head:'Cal Sans','Inter',system-ui,sans-serif;--f-body:'Inter',system-ui,sans-serif;--f-mono:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--f-body)}
+.band{background:var(--brand);color:#fff}.band-in{max-width:1240px;margin:0 auto;padding:20px 24px 22px}
+.band img{height:26px;display:block;margin-bottom:14px;filter:brightness(0) invert(1)}
+.band h1{font:400 30px/1.15 var(--f-head);margin:0 0 8px}.band p{margin:0;max-width:880px;opacity:.95}
+.band mark{background:rgba(255,255,255,.22);color:#fff;border-radius:4px;padding:0 4px}
+.wrap{max-width:1240px;margin:0 auto;padding:20px 24px 80px}
+.status{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.status #store{color:var(--fg-3);font-size:13px}.status .big{font:400 22px var(--f-head);color:var(--brand)}
+.status .sp{flex:1}.btnx{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 12px;font:500 13px var(--f-body);cursor:pointer}.btnx:hover{background:#f6f7f9}
+.flt{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}.flt button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 12px;font:500 13px var(--f-body);cursor:pointer;color:var(--fg-2)}
+.flt button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.lead{color:var(--fg-2);max-width:900px}.lead b{color:var(--fg)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--fg-2);margin:8px 0 18px}
+h2{font:400 22px var(--f-head);margin:28px 0 10px}h2 small{font:500 13px var(--f-body);color:var(--fg-3);margin-left:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.c{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:6px;transition:border-color .12s,box-shadow .12s}
+.c.on{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}.c.done{background:#FAFAFA}
+.c .top{display:flex;align-items:flex-start;gap:10px}.c .top a{font:600 15px var(--f-body);color:var(--fg);text-decoration:none}.c .top a:hover{text-decoration:underline}
+.c .ng{font:500 12px var(--f-mono);color:var(--brand);background:var(--ink-soft);border-radius:4px;padding:1px 6px;align-self:flex-start}
+.c .use{color:var(--fg-2);font-size:13px}.c .use b{color:var(--fg);font-weight:600}
+.pill{display:inline-block;font-size:11px;font-weight:700;border-radius:4px;padding:1px 6px;white-space:nowrap}
+.p-done{color:var(--ok);background:var(--ok-soft)}.p-in{color:var(--warn);background:var(--warn-soft)}.p-split{color:var(--new);background:var(--new-soft)}.p-rec{color:var(--brand);background:var(--ink-soft)}.p-later{color:var(--fg-3);background:#EFEFEF}.p-no{color:var(--bad);background:var(--bad-soft)}
+.tick{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:8px;padding:4px 10px;background:#fff;cursor:pointer;font:600 13px var(--f-body);color:var(--fg-2)}
+.tick i{width:16px;height:16px;border-radius:4px;border:1.5px solid #B8BCC4;display:grid;place-items:center}
+.tick[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}.tick[aria-pressed="true"] i{border-color:#fff;background:#fff}
+.tick[aria-pressed="true"] i::after{content:"";width:8px;height:4px;border-left:2px solid var(--brand);border-bottom:2px solid var(--brand);rotate:-45deg;margin-top:-2px}
+.tick[disabled]{opacity:.55;cursor:default}
+.c textarea{display:none;width:100%;min-height:52px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:13px var(--f-body);resize:vertical}
+.c.on textarea,.c textarea.has{display:block}
+.c .save{font-size:11px;color:var(--fg-3);min-height:14px}
+.chosen{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:28px}
+.chosen h3{margin:0 0 8px;font:400 18px var(--f-head)}.chosen ol{margin:0;padding-left:20px;columns:3;column-gap:28px}.chosen li{break-inside:avoid;margin-bottom:2px}
+.chosen textarea{width:100%;min-height:70px;border:1px solid var(--line);border-radius:8px;padding:8px;font:14px var(--f-body);margin-top:10px}
+pre.out{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px;font:12px/1.5 var(--f-mono)}
+@media (max-width:640px){.chosen ol{columns:1}.band h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header class="band"><div class="band-in">
+  <img src="__LOGO__" alt="innvie">
+  <h1>Chọn component dựng tiếp</h1>
+  <p>Danh sách lấy từ <mark>ui.shadcn.com/docs/components</mark> (<b>67 component</b>, đọc 07/11). Mỗi ô ghi <b>tên ng-zorro tương ứng</b>, trạng thái trong bộ thử và chỗ dùng ở Invlogis. Bấm <b>Chọn</b> những component muốn dựng <b>song song</b> ở đợt tới — mặc định đang tick theo <b>đề xuất</b> của em.</p>
+</div></header>
+<main class="wrap">
+  <div class="status"><span id="store">Đang kết nối nơi lưu…</span><span class="sp"></span>
+    <span>Đợt tới: <span class="big" id="cnt">0</span> component</span>
+    <button class="btnx" id="btn-reset">Về đề xuất</button><button class="btnx" id="btn-export">Xuất danh sách dạng chữ</button></div>
+  <pre class="out" id="out" hidden></pre>
+  <p class="lead">Quy tắc mới (07/11): <b>mẫu ghép không còn là component riêng</b>. Phần bật/tắt (icon, số đếm, phím tắt) thành <b>thuộc tính</b> của component gốc; khối có hình riêng (Button group, Split button, OTP…) thành <b>component riêng có biến thể</b>. Vì vậy vài mục dưới đây ghi <span class="pill p-split">tách từ mẫu ghép</span> — đang nằm trong trang Button/Input, sẽ thành component riêng.</p>
+  <div class="legend"><span><span class="pill p-done">Đã dựng</span> có trang trên Figma</span><span><span class="pill p-in">Đã gộp</span> nằm trong component khác, không cần trang riêng</span><span><span class="pill p-split">Tách từ mẫu ghép</span> đang là mẫu ghép, cần thành component</span><span><span class="pill p-rec">Đề xuất làm</span></span><span><span class="pill p-later">Để sau</span></span><span><span class="pill p-no">Không cần</span></span></div>
+  <div class="flt" id="flt"></div>
+  <div id="list"></div>
+  <section class="chosen"><h3>Danh sách đợt tới</h3><ol id="chosen"></ol>
+    <textarea id="gnote" placeholder="Ghi chú chung (thứ tự ưu tiên, component nào làm trước…) — không bắt buộc"></textarea><div class="save" id="sv-gnote"></div></section>
+</main>
+<script>
+const $=s=>document.querySelector(s);const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+/* [slug, Tên, ng-zorro, trạng thái(done|in|split|new), đề xuất(rec|later|no), dùng ở Invlogis] */
+const G=[
+["Nút và nhập liệu",[
+["button","Button","nz-button","done","","Đã dựng (đang chuyển mẫu ghép thành thuộc tính)."],
+["button-group","Button Group","nz-button-group","split","rec","Lật bản ghi ‹ ›, chọn Ngày/Tuần/Tháng, +/− bản đồ (Button web-14/19/20/27)."],
+["input","Input","nz-input","done","",""],
+["input-group","Input Group","nz-input-group","in","","Gộp vào thuộc tính của Input (icon đầu, đơn vị, nút xoá)."],
+["textarea","Textarea","nz-input (textarea)","in","","Đã có set Textarea trong trang Input."],
+["input-otp","Input OTP","nz-input-otp (ng-zorro 19+) / tự ghép","split","rec","Đăng nhập tài xế bằng OTP 6 số (Input web-17)."],
+["field","Field","nz-form-item","in","","Đã có set Trường form trong trang Label."],
+["label","Label","nz-form-label","done","",""],
+["select","Select","nz-select","done","",""],
+["native-select","Native Select","<select> gốc","new","later","Chỉ cần nếu app tài xế muốn bảng chọn hệ điều hành."],
+["combobox","Combobox","nz-select nzShowSearch","in","","Đã gộp trong trang Select (cbx-*)."],
+["checkbox","Checkbox","nz-checkbox","done","",""],
+["radio-group","Radio Group","nz-radio-group","done","",""],
+["switch","Switch","nz-switch","done","",""],
+["slider","Slider","nz-slider","done","",""],
+["toggle","Toggle","nz-button + trạng thái bật","new","later","Nút bật/tắt bộ lọc trên thanh công cụ bảng (có thể dùng Tag chọn)."],
+["toggle-group","Toggle Group","nz-segmented / nz-radio-group (button)","new","rec","Chuyển chế độ xem Bảng · Bản đồ · Lịch ở màn điều phối."],
+["date-picker","Date Picker","nz-date-picker · nz-range-picker","new","rec","Lọc lệnh theo ngày, chọn khoảng kỳ chốt cước, giờ hẹn lấy hàng."],
+["calendar","Calendar","nz-calendar","new","rec","Lõi của Date Picker; lịch xe/tài xế theo ngày."],
+["attachment","Attachment","nz-upload (danh sách tệp)","new","rec","Ảnh chứng từ, POD, hồ sơ xe — feature file-attachments."],
+]],
+["Hiển thị dữ liệu",[
+["table","Table","nz-table","new","rec","Danh sách lệnh vận tải, xe, tài xế, bảng cước — màn chính của web điều phối."],
+["data-table","Data Table","nz-table (sắp xếp, lọc, chọn dòng, phân trang)","new","rec","Bảng lệnh có chọn nhiều dòng, lọc cột, ẩn cột — đi cùng Table."],
+["badge","Badge","nz-tag","done","","Đã dựng thành trang Tag."],
+["avatar","Avatar","nz-avatar","new","rec","Tài xế, người phụ trách; dãy avatar trên thẻ lệnh."],
+["card","Card","nz-card","done","",""],
+["item","Item","nz-list-item","new","rec","Dòng danh sách trên app tài xế (lệnh, điểm giao), danh sách trong card."],
+["kbd","Kbd","<kbd>","done","",""],
+["empty","Empty","nz-empty","new","rec","Bảng/danh sách chưa có dữ liệu, kết quả tìm rỗng."],
+["skeleton","Skeleton","nz-skeleton","new","rec","Đang tải bảng, thẻ, chi tiết lệnh."],
+["spinner","Spinner","nz-spin","new","rec","Đang tải trong nút, vùng nhỏ."],
+["progress","Progress","nz-progress","new","rec","Tiến độ chuyến (điểm đã giao/tổng), tải tệp lên."],
+["separator","Separator","nz-divider","new","rec","Vạch chia khối trong form, menu, card."],
+["accordion","Accordion","nz-collapse (nzAccordion)","new","later","Câu hỏi thường gặp ở help-center; nhóm thông tin dài trên mobile."],
+["collapsible","Collapsible","nz-collapse-panel","new","later","Thu/mở khối chi tiết (vd danh sách điểm dừng)."],
+["chart","Chart","— (ngx-echarts)","new","later","Bảng điều khiển sản lượng, doanh thu — làm khi vẽ màn báo cáo."],
+["carousel","Carousel","nz-carousel","new","no","Không có nghiệp vụ trượt ảnh/banner."],
+["aspect-ratio","Aspect Ratio","— (CSS)","new","no","Chỉ là khung tỉ lệ ảnh; dev dùng CSS."],
+["typography","Typography","nz-typography","new","later","Đã có text style ở Foundations; trang này chỉ cần nếu muốn mẫu đoạn văn, danh sách."],
+["scroll-area","Scroll Area","— (cdk-scrollable)","new","no","Thanh cuộn mặc định đủ dùng."],
+["resizable","Resizable","nz-resizable","new","later","Kéo đổi rộng panel bảng ↔ bản đồ ở màn điều phối."],
+]],
+["Điều hướng",[
+["sidebar","Sidebar","nz-sider + nz-menu","done","",""],
+["breadcrumb","Breadcrumb","nz-breadcrumb","done","",""],
+["tabs","Tabs","nz-tabs","new","rec","Chi tiết lệnh: Thông tin · Hành trình · Chứng từ · Lịch sử."],
+["pagination","Pagination","nz-pagination","new","rec","Phân trang bảng lệnh, bảng xe."],
+["dropdown-menu","Dropdown Menu","nz-dropdown + nz-menu","new","rec","Menu “…” trên dòng bảng, thẻ lệnh; menu tài khoản."],
+["context-menu","Context Menu","nz-dropdown (contextmenu)","new","later","Chuột phải trên dòng bảng — người dùng ít dùng."],
+["command","Command","— (nz-autocomplete + danh sách tự dựng)","new","rec","Ô tìm chung Ctrl K: tìm lệnh, xe, khách hàng (nhu cầu từ document, content-management)."],
+["navigation-menu","Navigation Menu","nz-menu (horizontal)","new","no","Web điều phối dùng Sidebar, không có menu ngang kiểu website."],
+["menubar","Menubar","nz-menu (horizontal)","new","no","Kiểu ứng dụng desktop (File · Edit), không hợp nghiệp vụ."],
+]],
+["Lớp phủ và phản hồi",[
+["popover","Popover","nz-popover","done","",""],
+["tooltip","Tooltip","nz-tooltip","done","",""],
+["dialog","Dialog","nz-modal","new","rec","Tạo/sửa nhanh, xem ảnh chứng từ, xác nhận nhiều bước."],
+["alert-dialog","Alert Dialog","nz-modal (confirm)","new","rec","Xác nhận huỷ lệnh, xoá xe — thao tác không hoàn tác."],
+["sheet","Sheet","nz-drawer (phải)","new","rec","Panel chi tiết lệnh/tài xế trượt từ phải ở web điều phối."],
+["drawer","Drawer","nz-drawer (đáy)","new","rec","Bottom sheet trên app tài xế: chọn lý do, xác nhận giao hàng."],
+["hover-card","Hover Card","nz-popover (hover)","in","","Đã có trong Popover (mở khi rê, thẻ hồ sơ web-06)."],
+["alert","Alert","nz-alert","new","rec","Thông báo trong trang: giấy tờ xe sắp hết hạn, lệnh bị trễ."],
+["toast","Toast","nz-message · nz-notification","new","rec","Báo đã lưu, đã giao lệnh, lỗi mạng."],
+["sonner","Sonner","nz-notification","in","","Cùng nhu cầu với Toast — gộp vào Toast."],
+]],
+["Chat / AI (mới trên shadcn)",[
+["message","Message","—","new","no","Chưa có tính năng chat trong phạm vi hiện tại."],
+["bubble","Bubble","—","new","no","Như Message."],
+["message-scroller","Message Scroller","—","new","no","Như Message."],
+["marker","Marker","—","new","no","Đánh dấu trong luồng chat AI."],
+["questionnaire","Questionnaire","—","new","no","Hỏi đáp nhiều bước của AI."],
+["trace","Trace","—","new","no","Hiển thị các bước AI chạy."],
+["code-block","Code Block","—","new","no","Không hiển thị mã nguồn cho người dùng."],
+]],
+["Khác",[
+["direction","Direction","— (nzDirection)","new","no","Chỉ dùng cho ngôn ngữ phải-sang-trái."],
+]]];
+const ALL=[];G.forEach(([g,items])=>items.forEach(it=>{ALL.push({g,it})}));
+const LS="dsantd-pick-r1";let state={};try{state=JSON.parse(localStorage.getItem(LS)||"{}")}catch(e){}
+let db=null,uid=null,canWrite=true,flt="all";
+const picked=it=>{const s=state[it[0]];if(s&&s.choice!=null)return s.choice===1;return it[4]==="rec"};
+const selectable=it=>it[3]==="new"||it[3]==="split";
+const PL={done:'<span class="pill p-done">Đã dựng</span>',in:'<span class="pill p-in">Đã gộp</span>',split:'<span class="pill p-split">Tách từ mẫu ghép</span>'};
+const RL={rec:'<span class="pill p-rec">Đề xuất làm</span>',later:'<span class="pill p-later">Để sau</span>',no:'<span class="pill p-no">Không cần</span>'};
+function card(it){const [k,name,ng,st,rec,use]=it;const sel=selectable(it);const on=sel&&picked(it);const note=state[k]?.note||"";
+  return `<div class="c ${on?"on":""} ${sel?"":"done"}" data-k="${k}"><div class="top"><div><a href="https://ui.shadcn.com/docs/components/${k}" target="_blank" rel="noopener">${esc(name)}</a><div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">${PL[st]||""}${sel?RL[rec]:""}</div></div>
+  ${sel?`<button class="tick" data-t="${k}" aria-pressed="${on}"><i></i>${on?"Đã chọn":"Chọn"}</button>`:`<button class="tick" disabled><i></i>—</button>`}</div>
+  <code class="ng">${esc(ng)}</code>${use?`<div class="use">${use}</div>`:""}
+  ${sel?`<textarea data-n="${k}" class="${note?"has":""}" placeholder="Ghi chú cho ${esc(name)} (biến thể cần có, màn dùng…)">${esc(note)}</textarea><div class="save" id="sv-${k}"></div>`:""}</div>`}
+const FL=[["all","Tất cả"],["pick","Đang chọn"],["rec","Đề xuất làm"],["later","Để sau"],["no","Không cần"],["done","Đã dựng / đã gộp"]];
+function pass(it){if(flt==="all")return true;if(flt==="pick")return selectable(it)&&picked(it);if(flt==="done")return !selectable(it);return selectable(it)&&it[4]===flt}
+function render(){
+  $("#flt").innerHTML=FL.map(([k,l])=>`<button data-f="${k}" aria-pressed="${k===flt}">${l}</button>`).join("");
+  $("#list").innerHTML=G.map(([g,items])=>{const its=items.filter(pass);if(!its.length)return "";const n=its.filter(it=>selectable(it)&&picked(it)).length;
+    return `<h2>${g}<small>${its.length} mục${n?` · chọn ${n}`:""}</small></h2><div class="grid">${its.map(card).join("")}</div>`}).join("");
+  counts();$("#gnote").value=state.gnote?.note||""}
+function counts(){const ch=ALL.filter(x=>selectable(x.it)&&picked(x.it));$("#cnt").textContent=ch.length;
+  $("#chosen").innerHTML=ch.length?ch.map(x=>`<li><b>${esc(x.it[1])}</b> <span style="color:var(--fg-3);font:12px var(--f-mono)">${esc(x.it[2])}</span></li>`).join(""):"<li>Chưa chọn component nào</li>"}
+function lsSave(){try{localStorage.setItem(LS,JSON.stringify(state))}catch(e){}}
+async function persist(k){lsSave();counts();const st=document.getElementById("sv-"+k);
+  if(!db){if(st)st.textContent="Đã lưu trong trình duyệt này";return}
+  if(!canWrite){if(st)st.textContent="Bạn chỉ có quyền xem";return}
+  try{await db.doc("picks/"+k).set({choice:state[k].choice??null,note:state[k].note||"",at:state[k].at,by:uid||null});if(st)st.textContent="Đã lưu "+new Date(state[k].at).toLocaleTimeString("vi-VN")}
+  catch(e){if(st)st.textContent="Chưa lưu được lên trang — đã giữ trong trình duyệt"}}
+document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-f]");if(f){flt=f.dataset.f;render();return}
+  const t=e.target.closest("[data-t]");if(t){const k=t.dataset.t;const it=ALL.find(x=>x.it[0]===k).it;const now=picked(it);state[k]={...(state[k]||{}),choice:now?0:1,at:Date.now()};
+    const c=t.closest(".c");c.classList.toggle("on",!now);t.setAttribute("aria-pressed",String(!now));t.innerHTML=`<i></i>${!now?"Đã chọn":"Chọn"}`;persist(k);return}
+});
+let tmr={};document.addEventListener("input",e=>{const n=e.target.dataset.n||(e.target.id==="gnote"?"gnote":null);if(!n)return;
+  state[n]={...(state[n]||{}),note:e.target.value,at:Date.now()};e.target.classList.toggle("has",!!e.target.value);clearTimeout(tmr[n]);tmr[n]=setTimeout(()=>persist(n),600)});
+$("#btn-reset").onclick=async()=>{for(const x of ALL){const k=x.it[0];if(state[k]?.choice!=null){state[k]={...state[k],choice:null,at:Date.now()};await persist(k)}}render()};
+$("#btn-export").onclick=()=>{const ch=ALL.filter(x=>selectable(x.it)&&picked(x.it));const o=$("#out");
+  o.textContent="Đợt tới ("+ch.length+"):\n"+ch.map(x=>"- "+x.it[1]+" ("+x.it[2]+")"+(state[x.it[0]]?.note?" — "+state[x.it[0]].note:"")).join("\n")+(state.gnote?.note?"\n\nGhi chú: "+state.gnote.note:"");o.hidden=false};
+render();
+(async()=>{if(!window.claude?.use){$("#store").textContent="Lưu trong trình duyệt này";return}
+  const [d,u]=await Promise.all([claude.use("db"),claude.use("user")]);if(!d){$("#store").textContent="Lưu trong trình duyệt này";return}
+  db=d;try{uid=u?await u.id():null}catch(e){}try{const w=u?await u.can("data.write"):null;if(w===false)canWrite=false}catch(e){}
+  $("#store").textContent=canWrite?"Lựa chọn lưu trên trang, Claude đọc được":"Bạn chỉ có quyền xem trang này";
+  db.collection("picks").onSnapshot(snap=>{let ch=false;snap.docs.forEach(doc=>{const x=doc.data();if(!x)return;const c=state[doc.id];if(!c||(x.at||0)>(c.at||0)){state[doc.id]={choice:x.choice??null,note:x.note||"",at:x.at};ch=true}});
+    if(ch){lsSave();const a=document.activeElement;if(!(a&&a.tagName==="TEXTAREA"))render();else counts()}},()=>{$("#store").textContent="Mất kết nối nơi lưu — lựa chọn vẫn giữ trong trình duyệt này"})})();
+</script>
+</body>
+</html>

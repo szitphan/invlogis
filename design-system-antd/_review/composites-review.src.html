@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Duyệt mẫu ghép 14 component theo quy tắc 4 nhóm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F1F1F1;--surface:#fff;--line:#E3E5E8;--fg:#171717;--fg-2:#525252;--fg-3:#737373;--brand:#0036B5;--ink-soft:#E5ECFA;
+--ok:#007004;--ok-soft:#E3F2E0;--bad:#A50C25;--bad-soft:#FCE4E2;--warn:#8A5A00;--warn-soft:#FFF4D6;--new:#5B2BB5;--new-soft:#EEE6FB;
+--f-head:'Cal Sans','Inter',system-ui,sans-serif;--f-body:'Inter',system-ui,sans-serif;--f-mono:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--f-body)}
+.band{background:var(--brand);color:#fff}.band-in{max-width:1240px;margin:0 auto;padding:20px 24px 22px}
+.band img{height:26px;display:block;margin-bottom:14px;filter:brightness(0) invert(1)}
+.band h1{font:400 30px/1.15 var(--f-head);margin:0 0 8px}.band p{margin:0;max-width:920px;opacity:.95}
+.band mark{background:rgba(255,255,255,.22);color:#fff;border-radius:4px;padding:0 4px}
+.wrap{max-width:1240px;margin:0 auto;padding:20px 24px 80px}
+.status{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.status #store{color:var(--fg-3);font-size:13px}.status .big{font:400 22px var(--f-head);color:var(--brand)}.sp{flex:1}
+.btnx{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 12px;font:500 13px var(--f-body);cursor:pointer}.btnx:hover{background:#f6f7f9}
+.flt{display:flex;flex-wrap:wrap;gap:6px;width:100%}.flt button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px 11px;font:500 12px var(--f-body);cursor:pointer;color:var(--fg-2)}
+.flt button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}.flt .lbl{font:600 12px var(--f-body);color:var(--fg-3);align-self:center;margin-right:2px}
+h2{font:400 22px var(--f-head);margin:30px 0 6px}h2 small{font:500 13px var(--f-body);color:var(--fg-3);margin-left:6px}
+.lead{color:var(--fg-2);max-width:940px;margin:0 0 12px}.lead b{color:var(--fg)}mark{background:#FFF1B8;border-radius:3px;padding:0 3px}
+.groups{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0}
+.g{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}.g b{display:block;margin-bottom:2px}.g span{color:var(--fg-2);font-size:13px}.g .n{font:400 26px var(--f-head);float:right;color:var(--fg-3)}
+.pill{display:inline-block;border-radius:999px;padding:1px 9px;font:600 12px var(--f-body);white-space:nowrap}
+.p1{background:var(--ink-soft);color:var(--brand)}.p2{background:var(--new-soft);color:var(--new)}.p3{background:var(--warn-soft);color:var(--warn)}.p4{background:#EDEDED;color:var(--fg-2)}
+.newprops{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:10px}
+.np{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:10px 14px;font-size:13px}.np.n2{border-left-color:var(--new)}.np b{font-size:14px}
+.row{display:grid;grid-template-columns:150px 340px 1fr;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+.row.ok{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}.row.fix{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
+.row .id{font:600 13px var(--f-mono)}.row .id small{display:block;font:500 12px var(--f-body);color:var(--fg-2);margin:2px 0 6px}
+.row .id a{font:12px var(--f-body);color:var(--brand)}
+.shot{background:#fff;border:1px dashed var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;padding:4px;min-height:48px}
+.shot img{max-width:100%;max-height:300px;height:auto;display:block}
+.info{display:flex;flex-direction:column;gap:7px}.info .to{font-size:13px}.info code{font:12px var(--f-mono);background:#F4F4F5;border-radius:4px;padding:0 4px}
+.act{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.act button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:3px 11px;font:500 13px var(--f-body);cursor:pointer}
+.act button[aria-pressed="true"].y{background:var(--ok);border-color:var(--ok);color:#fff}.act button[aria-pressed="true"].n{background:var(--bad);border-color:var(--bad);color:#fff}
+.act .gsel{margin-left:6px;color:var(--fg-3);font-size:12px}.act .gb{padding:2px 8px;font-size:12px}
+.act .gb[aria-pressed="true"]{background:var(--fg);border-color:var(--fg);color:#fff}
+textarea{width:100%;min-height:32px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:13px var(--f-body);resize:vertical}textarea.has{border-color:var(--brand)}
+.save{font-size:11px;color:var(--fg-3);min-height:14px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.q h3{margin:0 0 4px;font:600 15px var(--f-body)}.q p{margin:0 0 10px;color:var(--fg-2);font-size:13px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;margin-bottom:8px}
+.opt{border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;background:#fff;text-align:left;font:13px var(--f-body);color:var(--fg)}
+.opt b{display:block;font-size:14px;margin-bottom:2px}.opt span{color:var(--fg-2)}.opt .rec{color:var(--brand);font-weight:600}
+.opt[aria-pressed="true"]{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand);background:#F5F8FF}
+#out{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px;font:12px var(--f-mono)}
+@media (max-width:900px){.groups{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="band"><div class="band-in">
+<img src="__LOGO__" alt="innvie">
+<h1>Duyệt mẫu ghép 14 component theo quy tắc 4 nhóm</h1>
+<p>Bộ thử Ant Design · tiếp theo trang duyệt Button. <b>138 mẫu ghép</b> trên 14 trang Figma (Input → Sidebar) đã được em xếp nhóm. Bạn duyệt từng dòng; dòng nào sai nhóm thì bấm nhóm đúng. Duyệt xong em mới sửa Figma và spec, nên ảnh trên trang này là <mark>hình hiện tại</mark>; cột bên phải ghi mẫu sẽ đi đâu.</p>
+</div></div>
+<div class="wrap">
+<div class="status"><span class="big" id="cnt">0/0</span><span>đã duyệt</span><span id="store">Đang kết nối nơi lưu…</span><span class="sp"></span>
+<button class="btnx" id="btn-allok">Đồng ý mọi dòng đang hiện chưa chọn</button><button class="btnx" id="btn-export">Xuất tóm tắt</button>
+<div class="flt" id="fc"></div><div class="flt" id="fg"></div></div>
+<pre id="out" hidden></pre>
+
+<h2>Kết quả xếp nhóm</h2>
+<p class="lead">Phần lớn mẫu ghép <b>đã trùng biến thể hoặc thuộc tính có sẵn</b> (nhóm 4), hoặc là cách ghép nhiều component (nhóm 3). Chỉ 6 mẫu cần <mark>thuộc tính mới</mark>, 3 mẫu chuyển sang component đợt tới.</p>
+<div class="groups" id="groups"></div>
+
+<h2>Thay đổi trên component gốc</h2>
+<p class="lead">Nhóm 1 thêm thuộc tính bật tắt vào set có sẵn, <b>không thêm trục biến thể</b>. Nhóm 2 chuyển sang component trong danh sách 28 đợt tới.</p>
+<div class="newprops">
+<div class="np"><b>Input · <code>Phần đầu</code></b> (bật tắt + chọn nội dung): chữ tiền tố "https://" hoặc Select nhỏ (mã quốc gia). ng-zorro <code>nzAddOnBefore</code>. Từ web-07, web-18.</div>
+<div class="np"><b>Input · <code>Phím tắt</code></b> (bật tắt, instance Kbd): ô tìm có "Ctrl K", giống Button. Từ kbd-03.</div>
+<div class="np"><b>Input · <code>Nhãn trong ô</code></b> (bật tắt): nhãn nhỏ nằm trong ô, ô cao hơn. Từ web-25 — xem câu hỏi 1.</div>
+<div class="np"><b>Select · <code>Dòng phụ</code></b> (bật tắt + chữ): ô hiện 2 dòng (tên + SĐT), đi cùng Đầu=Ảnh. Từ web-13.</div>
+<div class="np"><b>Breadcrumb · <code>Rút gọn</code></b> (bật tắt): thay các mục giữa bằng "…" có menu. Từ web-02.</div>
+<div class="np n2"><b>→ Input OTP</b> (đợt tới): web-17 mã OTP 4 ô.</div>
+<div class="np n2"><b>→ Toggle Group</b> (đợt tới, <code>nz-radio-group</code> kiểu nút): radio btn-o, btn-s; bỏ set <code>Radio nút</code> — xem câu hỏi 2.</div>
+</div>
+
+<h2>4 câu hỏi cần bạn chốt</h2>
+<div id="qs"></div>
+
+<h2>Từng mẫu <small id="shown"></small></h2>
+<p class="lead">Mã Figma bấm được để mở đúng mẫu. Bấm <b>Đồng ý</b> nếu nhóm và nơi đến đúng; sai nhóm thì bấm số nhóm đúng (tự thành "Sửa") và ghi chú.</p>
+<div id="rows"></div>
+
+<h2>Ghi chú chung</h2>
+<textarea id="gnote" data-n="gnote" placeholder="Điều cần sửa thêm…" style="min-height:80px"></textarea><div class="save" id="sv-gnote"></div>
+</div>
+<script>
+const ROWS=__ROWS__;
+const $=s=>document.querySelector(s);const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const md=s=>esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/`(.+?)`/g,"<code>$1</code>");
+const GR={1:["Thuộc tính","Thêm thuộc tính bật tắt vào set gốc","p1"],2:["Component riêng","Chuyển sang component có biến thể","p2"],3:["Cách dùng","Chỉ là ví dụ trong khung tài liệu","p3"],4:["Đã có sẵn","Trùng biến thể/thuộc tính, bỏ mẫu","p4"]};
+const CN={input:"Input",select:"Select",switch:"Switch",tag:"Tag",tooltip:"Tooltip",radio:"Radio",checkbox:"Checkbox",label:"Label",card:"Card",slider:"Slider",breadcrumb:"Breadcrumb",kbd:"Kbd",popover:"Popover",sidebar:"Sidebar"};
+const Q=[["q-floating","1. Input web-25 \"Nhãn nằm trong ô\" làm thế nào?","Ô có nhãn nhỏ phía trên chữ, cao hơn ô thường (54 so với 36). ng-zorro không có sẵn, dev làm class riêng.",
+ [["Thuộc tính bật tắt","Bật thì ô cao 54, nhãn hiện. Set Input không thêm biến thể.",1],["Bỏ, dùng nhãn trên ô","Dùng Trường form như mọi ô khác; ít kiểu hơn cho dev.",0]]],
+["q-radionut","2. Set Radio nút (36 biến thể) chuyển sang Toggle Group?","Nhóm nút chọn 1 (Ngày / Tuần / Tháng) là nz-radio-group kiểu nút. Toggle Group trong đợt tới làm đúng việc này, Button group (Phân đoạn) cũng gần giống.",
+ [["Chuyển sang Toggle Group","Bỏ set Radio nút khi Toggle Group dựng xong",1],["Giữ Radio nút ở trang Radio","Toggle Group chỉ cho bật tắt nhiều nút",0]]],
+["q-cardkhe","3. Xoá 9 component \"Card khe\" trên trang Card?","Đây là nội dung riêng của 7 mẫu thẻ (form thêm xe, thông tin tài xế…), chỉ để swap vào Card. Khi mẫu thẻ thành ví dụ (nhóm 3) thì khe không còn cần; Card vẫn giữ khe Nội dung và Chân 2 nút.",
+ [["Xoá, ví dụ detach","Ví dụ trong tài liệu vẫn giữ hình",1],["Giữ làm khe mẫu","Người vẽ màn swap nhanh",0]]],
+["q-del","4. Sau khi duyệt, xoá section \"Mẫu ghép\" trên 14 trang?","Như Button: thẻ trong khung Ví dụ đã chốt đổi sang instance set gốc (nhóm 1, 4) hoặc detach (nhóm 3), rồi xoá 138 component mẫu ghép.",
+ [["Xoá luôn","Trong cùng lượt sửa",1],["Đổi tên \"chờ xoá\", xoá sau","Bạn so lần cuối trên Figma",0]]]];
+const LS="composites-review";let state={};try{state=JSON.parse(localStorage.getItem(LS)||"{}")}catch(e){}
+let db=null,uid=null,canWrite=true,fc="all",fg="all";
+const key=r=>r.comp+"-"+r.code;
+function groupsBox(){$("#groups").innerHTML=[1,2,3,4].map(g=>`<div class="g"><span class="n">${ROWS.filter(r=>r.g===g).length}</span><b><span class="pill ${GR[g][2]}">Nhóm ${g}</span> ${GR[g][0]}</b><span>${GR[g][1]}</span></div>`).join("")}
+function filters(){const comps=["all",...Object.keys(CN)];
+ $("#fc").innerHTML=`<span class="lbl">Component</span>`+comps.map(c=>`<button data-fc="${c}" aria-pressed="${c===fc}">${c==="all"?"Tất cả":CN[c]} <small>${c==="all"?ROWS.length:ROWS.filter(r=>r.comp===c).length}</small></button>`).join("");
+ $("#fg").innerHTML=`<span class="lbl">Nhóm</span>`+["all","1","2","3","4","todo"].map(g=>`<button data-fg="${g}" aria-pressed="${g===fg}">${g==="all"?"Tất cả":g==="todo"?"Chưa duyệt":"Nhóm "+g}</button>`).join("")}
+function vis(r){const s=state[key(r)];if(fc!=="all"&&r.comp!==fc)return false;if(fg==="todo")return s?.choice==null;if(fg!=="all"&&String(r.g)!==fg)return false;return true}
+function cls(k){const c=state[k]?.choice;return c===0?"ok":c===1?"fix":""}
+function row(r){const k=key(r),s=state[k]||{},c=s.choice,gg=s.grp;
+ return `<div class="row ${cls(k)}" data-k="${k}"><div class="id">${esc(r.code)}<small>${esc(CN[r.comp])} · ${esc(r.title)}</small><span class="pill ${GR[r.g][2]}">Nhóm ${r.g}</span><br><a href="https://www.figma.com/design/ElvhTYV3unixPkXky2oKIY/?node-id=${r.id.replace(":","-")}" target="_blank" rel="noopener">${r.id} ↗</a></div>
+ <div class="shot"><img src="${r.img}" alt="${esc(r.title)}" loading="lazy"></div>
+ <div class="info"><div class="to"><b>${GR[r.g][0]}:</b> ${md(r.dest)}</div>
+ <div class="act"><button class="y" data-c="${k}" data-v="0" aria-pressed="${c===0}">Đồng ý</button><button class="n" data-c="${k}" data-v="1" aria-pressed="${c===1}">Sửa</button>
+ <span class="gsel">Nhóm đúng:</span>${[1,2,3,4].map(g=>`<button class="gb" data-gk="${k}" data-g="${g}" aria-pressed="${gg===g}">${g}</button>`).join("")}</div>
+ <textarea data-n="${k}" class="${s.note?"has":""}" placeholder="Cần sửa gì ở ${esc(r.code)}…">${esc(s.note||"")}</textarea><div class="save" id="sv-${k}"></div></div></div>`}
+function render(){filters();const rs=ROWS.filter(vis);$("#shown").textContent=rs.length+" mẫu đang hiện";
+ let html="",last="";for(const r of rs){if(r.comp!==last){html+=`<h2 style="margin-top:18px">${CN[r.comp]}<small>${ROWS.filter(x=>x.comp===r.comp).length} mẫu</small></h2>`;last=r.comp}html+=row(r)}
+ $("#rows").innerHTML=html||"<p class='lead'>Không còn mẫu nào trong bộ lọc này.</p>";
+ $("#qs").innerHTML=Q.map(([k,t,d,os])=>{const c=state[k]?.choice;return `<div class="q"><h3>${t}</h3><p>${d}</p><div class="opts">${os.map(([l,s,rec],i)=>`<button class="opt" data-q="${k}" data-v="${i}" aria-pressed="${c===i}"><b>${l}${rec?' <span class="rec">· đề xuất</span>':""}</b><span>${s}</span></button>`).join("")}</div><textarea data-n="${k}" class="${state[k]?.note?"has":""}" placeholder="Ý khác…">${esc(state[k]?.note||"")}</textarea><div class="save" id="sv-${k}"></div></div>`}).join("");
+ $("#gnote").value=state.gnote?.note||"";counts()}
+const KEYS=()=>[...ROWS.map(key),...Q.map(q=>q[0])];
+function counts(){const ks=KEYS();$("#cnt").textContent=ks.filter(k=>state[k]?.choice!=null).length+"/"+ks.length}
+function lsSave(){try{localStorage.setItem(LS,JSON.stringify(state))}catch(e){}}
+async function persist(k){lsSave();counts();const st=document.getElementById("sv-"+k);
+ if(!db){if(st)st.textContent="Đã lưu trong trình duyệt này";return}
+ if(!canWrite){if(st)st.textContent="Bạn chỉ có quyền xem";return}
+ const s=state[k];try{await db.doc("answers/"+k).set({choice:s.choice??null,grp:s.grp??null,note:s.note||"",at:s.at,by:uid||null});if(st)st.textContent="Đã lưu "+new Date(s.at).toLocaleTimeString("vi-VN")}
+ catch(e){if(st)st.textContent="Chưa lưu được lên trang — đã giữ trong trình duyệt"}}
+function paintRow(k){const el=document.querySelector(`.row[data-k="${k}"]`);if(!el)return;const s=state[k]||{};el.classList.remove("ok","fix");if(s.choice!=null)el.classList.add(s.choice===0?"ok":"fix");
+ el.querySelectorAll("[data-c]").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.v===s.choice)));el.querySelectorAll("[data-gk]").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.g===s.grp)))}
+document.addEventListener("click",e=>{
+ const f1=e.target.closest("[data-fc]");if(f1){fc=f1.dataset.fc;render();return}
+ const f2=e.target.closest("[data-fg]");if(f2){fg=f2.dataset.fg;render();return}
+ const c=e.target.closest("[data-c]");if(c){const k=c.dataset.c,v=+c.dataset.v;const s=state[k]||{};const nv=s.choice===v?null:v;state[k]={...s,choice:nv,grp:nv===0?null:s.grp??null,at:Date.now()};paintRow(k);persist(k);return}
+ const g=e.target.closest("[data-gk]");if(g){const k=g.dataset.gk,v=+g.dataset.g;const s=state[k]||{};const ng=s.grp===v?null:v;state[k]={...s,grp:ng,choice:ng?1:s.choice===1?null:s.choice,at:Date.now()};paintRow(k);persist(k);return}
+ const q=e.target.closest("[data-q]");if(q){const k=q.dataset.q,v=+q.dataset.v;state[k]={...(state[k]||{}),choice:v,at:Date.now()};q.parentElement.querySelectorAll(".opt").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.v===v)));persist(k);return}});
+let tmr={};document.addEventListener("input",e=>{const n=e.target.dataset.n;if(!n)return;state[n]={...(state[n]||{}),note:e.target.value,at:Date.now()};e.target.classList.toggle("has",!!e.target.value);clearTimeout(tmr[n]);tmr[n]=setTimeout(()=>persist(n),600)});
+$("#btn-allok").onclick=async()=>{for(const r of ROWS.filter(vis)){const k=key(r);if(state[k]?.choice==null){state[k]={...(state[k]||{}),choice:0,at:Date.now()};await persist(k)}}render()};
+$("#btn-export").onclick=()=>{const o=$("#out");const L=KEYS().map(k=>{const s=state[k]||{};return `${k}: ${s.choice==null?"chưa chọn":k.startsWith("q-")?"phương án "+(s.choice+1):s.choice===0?"Đồng ý":"Sửa"}${s.grp?" → nhóm "+s.grp:""}${s.note?" — "+s.note:""}`});o.textContent=L.join("\n")+(state.gnote?.note?"\n\nGhi chú chung: "+state.gnote.note:"");o.hidden=false};
+groupsBox();render();
+(async()=>{if(!window.claude?.use){$("#store").textContent="Lưu trong trình duyệt này";return}
+ const [d,u]=await Promise.all([claude.use("db"),claude.use("user")]);if(!d){$("#store").textContent="Lưu trong trình duyệt này";return}
+ db=d;try{uid=u?await u.id():null}catch(e){}try{const w=u?await u.can("data.write"):null;if(w===false)canWrite=false}catch(e){}
+ $("#store").textContent=canWrite?"Lựa chọn lưu trên trang, Claude đọc được":"Bạn chỉ có quyền xem trang này";
+ db.collection("answers").onSnapshot(snap=>{let ch=false;snap.docs.forEach(doc=>{const x=doc.data();if(!x)return;const c=state[doc.id];if(!c||(x.at||0)>(c.at||0)){state[doc.id]={choice:x.choice??null,grp:x.grp??null,note:x.note||"",at:x.at};ch=true}});
+  if(ch){lsSave();const a=document.activeElement;if(!(a&&a.tagName==="TEXTAREA"))render();else counts()}},()=>{$("#store").textContent="Mất kết nối nơi lưu — lựa chọn vẫn giữ trong trình duyệt này"})})();
+</script>
+</body>
+</html>

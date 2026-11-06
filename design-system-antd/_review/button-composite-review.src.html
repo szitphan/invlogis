@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Duyệt Button: mẫu ghép thành biến thể và thuộc tính</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F1F1F1;--surface:#fff;--line:#E3E5E8;--fg:#171717;--fg-2:#525252;--fg-3:#737373;--brand:#0036B5;--ink-soft:#E5ECFA;
+--ok:#007004;--ok-soft:#E3F2E0;--bad:#A50C25;--bad-soft:#FCE4E2;--warn:#8A5A00;--warn-soft:#FFF4D6;--new:#5B2BB5;--new-soft:#EEE6FB;
+--f-head:'Cal Sans','Inter',system-ui,sans-serif;--f-body:'Inter',system-ui,sans-serif;--f-mono:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--f-body)}
+.band{background:var(--brand);color:#fff}.band-in{max-width:1240px;margin:0 auto;padding:20px 24px 22px}
+.band img{height:26px;display:block;margin-bottom:14px;filter:brightness(0) invert(1)}
+.band h1{font:400 30px/1.15 var(--f-head);margin:0 0 8px}.band p{margin:0;max-width:900px;opacity:.95}
+.band mark{background:rgba(255,255,255,.22);color:#fff;border-radius:4px;padding:0 4px}
+.wrap{max-width:1240px;margin:0 auto;padding:20px 24px 80px}
+.status{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.status #store{color:var(--fg-3);font-size:13px}.status .big{font:400 22px var(--f-head);color:var(--brand)}.sp{flex:1}
+.btnx{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 12px;font:500 13px var(--f-body);cursor:pointer}.btnx:hover{background:#f6f7f9}
+h2{font:400 22px var(--f-head);margin:32px 0 6px}h2 small{font:500 13px var(--f-body);color:var(--fg-3);margin-left:6px}
+.lead{color:var(--fg-2);max-width:920px;margin:0 0 14px}.lead b,.lead mark{color:var(--fg)}
+mark{background:#FFF1B8;border-radius:3px;padding:0 3px}
+.groups{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:8px 0 6px}
+.g{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.g b{display:block;font-size:14px;margin-bottom:2px}.g span{color:var(--fg-2);font-size:13px}.g .n{font:400 26px var(--f-head);float:right;color:var(--fg-3)}
+.pill{display:inline-block;border-radius:999px;padding:1px 9px;font:600 12px var(--f-body);white-space:nowrap}
+.p1{background:var(--ink-soft);color:var(--brand)}.p2{background:var(--new-soft);color:var(--new)}.p3{background:var(--warn-soft);color:var(--warn)}.p4{background:#EDEDED;color:var(--fg-2)}
+.diff{background:var(--bad-soft);color:var(--bad)}
+.row{display:grid;grid-template-columns:96px 200px 24px 280px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+.row.ok{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}.row.fix{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
+.row .id{font:600 13px var(--f-mono)}.row .id small{display:block;font:500 12px var(--f-body);color:var(--fg-2);margin-top:2px}
+.shot{background:#fff;border:1px dashed var(--line);border-radius:8px;min-height:72px;display:flex;align-items:center;justify-content:center;padding:6px}
+.shot img{max-width:100%;height:auto;display:block}.shot.a img{max-height:128px}
+.cap{font-size:11px;color:var(--fg-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.arrow{color:var(--fg-3);font-size:20px;text-align:center}
+.info{display:flex;flex-direction:column;gap:6px}.info .to{font-size:13px}.info .to code{font:12px var(--f-mono);background:#F4F4F5;border-radius:4px;padding:0 4px}
+.info .chg{font-size:13px;color:var(--bad)}
+.act{display:flex;gap:6px;flex-wrap:wrap}.act button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:4px 12px;font:500 13px var(--f-body);cursor:pointer}
+.act button[aria-pressed="true"].y{background:var(--ok);border-color:var(--ok);color:#fff}.act button[aria-pressed="true"].n{background:var(--bad);border-color:var(--bad);color:#fff}
+textarea{width:100%;min-height:34px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:13px var(--f-body);resize:vertical}textarea.has{border-color:var(--brand)}
+.save{font-size:11px;color:var(--fg-3);min-height:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.card h3{margin:0;font:600 15px var(--f-body)}.card p{margin:0;color:var(--fg-2);font-size:13px}.card code{font:12px var(--f-mono)}
+.card .shot img{max-height:240px}
+.card.ok{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}.card.fix{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad)}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.q h3{margin:0 0 4px;font:600 15px var(--f-body)}.q p{margin:0 0 10px;color:var(--fg-2);font-size:13px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;margin-bottom:8px}
+.opt{border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;background:#fff;text-align:left;font:13px var(--f-body);color:var(--fg)}
+.opt b{display:block;font-size:14px;margin-bottom:2px}.opt span{color:var(--fg-2)}.opt .rec{color:var(--brand);font-weight:600}
+.opt[aria-pressed="true"]{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand);background:#F5F8FF}
+.demo{display:flex;align-items:center;justify-content:center;gap:10px;background:#FAFAFA;border-radius:8px;padding:12px;margin:6px 0}
+.b{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border:1px solid #e5e5e5;background:#fff;border-radius:8px;font:500 14px 'Inter';letter-spacing:-.25px;color:#171717}
+.b .num{color:rgba(23,23,23,.6)}.b .box{border:1px solid #e5e5e5;border-radius:6px;padding:0 6px;font-size:12px;line-height:20px}
+.b .av{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#d4d4d4,#a3a3a3);margin-left:-6px}
+.b.pill{border-radius:999px}
+#out{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px;font:12px var(--f-mono)}
+@media (max-width:900px){.groups{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}}
+</style>
+</head>
+<body>
+<div class="band"><div class="band-in">
+<img src="__LOGO__" alt="innvie">
+<h1>Duyệt Button: mẫu ghép thành biến thể và thuộc tính</h1>
+<p>Bộ thử Ant Design · file Figma <b>Invlogis DS · AntD pilot</b>, trang Button. 22 mẫu ghép <mark>không còn là component riêng</mark>: mỗi mẫu được xếp vào 1 trong 4 nhóm. Bạn duyệt từng dòng, trả lời 5 câu hỏi cuối trang. Duyệt xong em sửa <code>components/button.md</code>, xoá section mẫu ghép cũ, rồi áp quy tắc cho 14 component còn lại và 28 component đợt tới.</p>
+</div></div>
+<div class="wrap">
+<div class="status"><span class="big" id="cnt">0/0</span><span>dòng đã duyệt</span><span id="store">Đang kết nối nơi lưu…</span><span class="sp"></span>
+<button class="btnx" id="btn-allok">Đồng ý mọi dòng chưa chọn</button><button class="btnx" id="btn-export">Xuất tóm tắt</button></div>
+<pre id="out" hidden></pre>
+
+<h2>Quy tắc 4 nhóm</h2>
+<p class="lead">Mẫu ghép cũ là các <b>component riêng</b> dựng từ instance Button. Cách đó làm thư viện phình ra và dev không biết mẫu ứng với API nào của ng-zorro. Quy tắc mới: mẫu nào <mark>chỉ thêm một phần nhỏ</mark> vào nút thì thành <b>thuộc tính bật tắt</b> của set Button (không thêm trục biến thể, set vẫn 288 tổ hợp); mẫu nào có <b>cấu trúc riêng</b> thì thành component riêng có biến thể.</p>
+<div class="groups" id="groups"></div>
+
+<h2>Từng mẫu: trước và sau <small>ảnh chụp từ Figma</small></h2>
+<p class="lead">Ảnh <b>Trước</b> = component mẫu ghép cũ. Ảnh <b>Sau</b> = thẻ trong khung "Ví dụ đã chốt" sau khi đổi sang instance của set mới. Dòng có nhãn đỏ <span class="pill diff">Khác hình</span> là chỗ hình đã đổi so với bản bạn duyệt trước, cần xem kỹ.</p>
+<div id="rows"></div>
+
+<h2>3 thuộc tính mới trên set Button</h2>
+<p class="lead">Gắn vào <b>144 biến thể có chữ</b>. 144 biến thể chỉ icon không có các thuộc tính này. Trên Figma: chọn instance Button, bật ở bảng Properties bên phải.</p>
+<div class="cards" id="props"></div>
+
+<h2>4 component mới tách từ mẫu ghép</h2>
+<p class="lead">Nằm ở section <b>Component tách từ mẫu ghép</b> trên trang Button.</p>
+<div class="cards" id="sets"></div>
+
+<h2>5 câu hỏi cần bạn chốt</h2>
+<div id="qs"></div>
+
+<h2>Section mẫu ghép cũ</h2>
+<p class="lead">Section <b>Mẫu ghép cũ — chờ xoá</b> còn 23 component, không còn instance nào dùng. Ảnh dưới để bạn so lần cuối.</p>
+<div class="shot" style="max-width:640px"><img src="__IMG_old__" alt="Section mẫu ghép cũ"></div>
+
+<h2>Ghi chú chung</h2>
+<textarea id="gnote" data-n="gnote" placeholder="Điều cần sửa thêm, hoặc cách áp quy tắc cho các component khác…" style="min-height:80px"></textarea><div class="save" id="sv-gnote"></div>
+</div>
+<script>
+const IMG=__IMGS__;
+const $=s=>document.querySelector(s);const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const GR={1:["Thuộc tính của Button","Bật tắt hoặc đổi chữ trên set gốc, không thêm biến thể","p1"],2:["Component riêng","Có cấu trúc riêng, set có biến thể","p2"],3:["Cách dùng","Chỉ là ví dụ trong tài liệu, không phải component","p3"],4:["Đã có sẵn","Trùng biến thể hoặc thuộc tính có sẵn, bỏ mẫu","p4"]};
+// [mã, tên, nhóm, đi đâu (html), khác hình (html hoặc ""), ảnh trước, ảnh sau]
+const R=[
+["web-01","Nút chính",4,"Biến thể <code>Kiểu=Default</code> của set Button","","web-01","web-01"],
+["web-02","Đang tải",4,"Biến thể <code>Trạng thái=Loading</code>","","web-02","web-02"],
+["web-03","Xoá",4,"Biến thể <code>Kiểu=Destructive</code> + bật icon trái","","web-03","web-03"],
+["web-04","Spinner đè, giữ độ rộng",4,"Biến thể <code>Trạng thái=Loading</code> (spinner đè, nút không đổi rộng)","","web-04","web-04"],
+["web-05","Huỷ / Lưu",3,"Ví dụ cách dùng: 2 instance Button (Secondary + Default) đặt cạnh nhau","","web-05","web-05"],
+["web-06","Số đếm",1,"Thuộc tính <code>Số đếm</code> + chữ <code>Số đếm · chữ</code>","Số trong ô viền nhỏ → <b>chữ mờ 60%</b> sau nhãn (xem câu hỏi 2)","web-06","web-06"],
+["web-07","Phím tắt ⌘P",1,"Thuộc tính <code>Phím tắt</code> (instance Kbd)","","web-07","web-07"],
+["web-08","Có avatar",1,"Thuộc tính <code>Avatar</code> (component <code>button/avatar</code>)","Nút bo pill → <b>bo 8 như mọi nút</b> (xem câu hỏi 1)","web-08","web-08"],
+["web-09","Icon trái",4,"Thuộc tính icon trái có sẵn của set Button","","web-09","web-09"],
+["web-11","Chuông + badge",3,"Ví dụ cách dùng: Button chỉ icon bọc <code>nz-badge</code>; chờ dựng Badge","","web-11","web-11"],
+["web-12","Đổi sáng / tối",2,"<code>Nút đổi icon</code>, Loại=Sáng tối","Trước là 2 nút đặt cạnh nhau → <b>1 nút</b>, bấm thì đổi icon","web-12","web-12"],
+["web-13","Chép → dấu tích",2,"<code>Nút đổi icon</code>, Loại=Chép (tự về sau 1,5 giây)","Trước là 2 nút đặt cạnh nhau → <b>1 nút</b> có tương tác","web-13","web-13"],
+["web-14","+ / − dọc",2,"<code>Button group</code>, Hướng=Dọc","","web-14","web-14"],
+["web-16","Split viền",2,"<code>Split button</code>, Kiểu=Viền","","web-16","web-16"],
+["web-17","Bước tăng giảm",3,"Ví dụ cách dùng; thuộc về Input number (<code>nz-input-number</code>), chưa dựng","","web-17","web-17"],
+["web-18","Split nền đậm",2,"<code>Split button</code>, Kiểu=Nền đậm","","web-18","web-18"],
+["web-19","Trước / Sau (gộp web-20)",2,"<code>Button group</code>, Kiểu=Viền, 2 nút có icon","Hai nhóm Previous · Next → <b>1 Button group 2 nút</b>","web-19","web-19"],
+["web-21","Sao + số",1,"Thuộc tính <code>Số đếm</code> + icon trái","","web-21","web-21"],
+["web-22","Thích + số",1,"Thuộc tính <code>Số đếm</code> + icon trái","<b>Bỏ vạch ngăn</b> trước số, số không còn trong ô","web-22","web-22"],
+["web-24","Đăng nhập MXH (gộp web-25)",2,"<code>Nút đăng nhập MXH</code>, Hãng 4 × Kiểu Viền · Nền màu hãng","Hai mẫu rời → <b>1 set 8 biến thể, rộng 280</b> (xem câu hỏi 3)","web-24","web-24"],
+["web-26","Icon + tooltip",3,"Ví dụ cách dùng: Button chỉ icon + <code>nz-tooltip</code>","","web-26","web-26"],
+["web-27","Trái | Giữa | Phải",2,"<code>Button group</code>, Kiểu=Phân đoạn, 3 nút","","web-27","web-27"]];
+const P=[["Số đếm","<code>Số đếm</code> (bật tắt) + <code>Số đếm · chữ</code> (ô nhập số). Số hiện chữ mờ 60% sau nhãn.","Mẫu web-06, web-21, web-22","web-06"],
+["Phím tắt","<code>Phím tắt</code> (bật tắt). Instance Kbd: nền sáng cho nút Default, nền tối cho các kiểu còn lại.","Mẫu web-07","web-07"],
+["Avatar","<code>Avatar</code> (bật tắt). Component <code>button/avatar</code> 22 px, nằm đầu nút.","Mẫu web-08","web-08"]];
+const S=[["set-split","Split button","Kiểu Viền · Nền đậm × Trạng thái Default · Disabled = 4 biến thể. Dev: <code>nz-button-group</code> + <code>nz-dropdown</code>.","web-16, web-18"],
+["set-group","Button group","Kiểu Viền · Phân đoạn × Hướng Ngang · Dọc × Số nút 2 · 3 = 8 biến thể. Nút con sửa được ngay trên instance. Dev: <code>nz-button-group</code>.","web-14, web-19/20, web-27"],
+["set-toggle","Nút đổi icon","Loại Sáng tối · Chép × Trạng thái Trước · Sau = 4. Có tương tác bấm để đổi; Chép tự về sau 1,5 giây.","web-12, web-13"],
+["set-mxh","Nút đăng nhập MXH","Hãng 4 × Kiểu Viền · Nền màu hãng = 8, rộng 280. Màu hãng không phải token.","web-24, web-25"]];
+const Q=[["q-avatar","1. Nút có avatar: bo góc thế nào?","Mẫu cũ web-08 bo pill (tròn hẳn), là ngoại lệ duy nhất trong bộ nút. Sau khi gộp vào set Button, nút dùng bo 8 như mọi nút khác.",
+ [["Bo 8 như mọi nút","Không có ngoại lệ, set Button giữ 1 bo góc",1,'<span class="b"><span class="av" style="margin-left:0"></span>Nguyễn Văn A</span>'],["Giữ pill","Cần thêm 1 trục biến thể hoặc tách component riêng",0,'<span class="b pill"><span class="av" style="margin-left:0"></span>Nguyễn Văn A</span>']]],
+["q-count","2. Số đếm hiển thị kiểu nào?","Mẫu cũ web-06 để số trong ô viền nhỏ; web-21 để chữ mờ. Thuộc tính mới đang dùng chữ mờ cho cả hai.",
+ [["Chữ mờ 60%","Gọn, giống web-21. Đang dựng.",1,'<span class="b">Chờ duyệt <span class="num">12</span></span>'],["Số trong ô viền","Giống web-06 cũ, nổi hơn",0,'<span class="b">Chờ duyệt <span class="box">12</span></span>']]],
+["q-mxh","3. Nút đăng nhập MXH rộng bao nhiêu?","Set mới đặt rộng cố định 280. Màn đăng nhập trên mobile có thể cần nút giãn hết khung.",
+ [["Cố định 280","Như hiện tại; trên mobile đặt lại thành giãn khi vẽ màn",1,""],["Giãn hết khung","Set đặt Fill; ví dụ trong tài liệu đặt khung 280",0,""]]],
+["q-old","4. Xoá section mẫu ghép cũ?","23 component trong section <b>Mẫu ghép cũ — chờ xoá</b> không còn instance nào dùng. Xoá thì không hoàn tác được trên Figma ngoài lịch sử phiên bản.",
+ [["Xoá","Sau khi bạn duyệt trang này",1,""],["Giữ thêm một thời gian","Đổi tên, chuyển ra cuối trang",0,""]]],
+["q-apply","5. Áp quy tắc 4 nhóm cho các component khác thế nào?","14 component còn lại (Input 21 mẫu ghép, Select 22…) và 28 component đợt tới.",
+ [["Em tự xếp nhóm, trình 1 trang duyệt chung","Mỗi component 1 khối trước/sau như trang này",1,""],["Duyệt từng component một","Chậm hơn, mỗi component 1 trang",0,""]]]];
+const LS="btn-composite-review";let state={};try{state=JSON.parse(localStorage.getItem(LS)||"{}")}catch(e){}
+let db=null,uid=null,canWrite=true;
+function groups(){$("#groups").innerHTML=[1,2,3,4].map(g=>`<div class="g"><span class="n">${R.filter(r=>r[2]===g).length}</span><b><span class="pill ${GR[g][2]}">Nhóm ${g}</span> ${GR[g][0]}</b><span>${GR[g][1]}</span></div>`).join("")}
+function act(k){const c=state[k]?.choice;return `<div class="act"><button class="y" data-c="${k}" data-v="0" aria-pressed="${c===0}">Đồng ý</button><button class="n" data-c="${k}" data-v="1" aria-pressed="${c===1}">Sửa</button></div>`}
+function note(k,ph){const n=state[k]?.note||"";return `<textarea data-n="${k}" class="${n?"has":""}" placeholder="${esc(ph)}">${esc(n)}</textarea><div class="save" id="sv-${k}"></div>`}
+function cls(k){const c=state[k]?.choice;return c===0?"ok":c===1?"fix":""}
+function render(){
+  $("#rows").innerHTML=R.map(([id,name,g,to,chg,b,a])=>{const k="row-"+id;return `<div class="row ${cls(k)}" id="r-${k}">
+   <div class="id">${id}<small>${esc(name)}</small><div style="margin-top:6px"><span class="pill ${GR[g][2]}">Nhóm ${g}</span></div></div>
+   <div><div class="cap">Trước</div><div class="shot">${IMG["before-"+b]?`<img src="${IMG["before-"+b]}" alt="">`:"—"}</div></div>
+   <div class="arrow">→</div>
+   <div><div class="cap">Sau</div><div class="shot a">${IMG["after-"+a]?`<img src="${IMG["after-"+a]}" alt="">`:"—"}</div></div>
+   <div class="info"><div class="to">${to}</div>${chg?`<div class="chg"><span class="pill diff">Khác hình</span> ${chg}</div>`:""}${act(k)}${note(k,"Cần sửa gì ở "+id+"…")}</div></div>`}).join("");
+  $("#props").innerHTML=P.map(([n,d,src,img])=>{const k="prop-"+n;return `<div class="card ${cls(k)}"><h3>${n}</h3><p>${d}</p><p>${src}</p><div class="shot">${IMG["after-"+img]?`<img src="${IMG["after-"+img]}">`:""}</div>${act(k)}${note(k,"Ghi chú thuộc tính "+n)}</div>`}).join("");
+  $("#sets").innerHTML=S.map(([img,n,d,src])=>{const k="set-"+img.slice(4);return `<div class="card ${cls(k)}"><h3>${n}</h3><p>${d}</p><p>Từ mẫu: ${src}</p><div class="shot"><img src="${IMG[img]}" alt="${n}"></div>${act(k)}${note(k,"Ghi chú "+n)}</div>`}).join("");
+  $("#qs").innerHTML=Q.map(([k,t,d,os])=>{const c=state[k]?.choice;return `<div class="q"><h3>${t}</h3><p>${d}</p><div class="opts">${os.map(([l,s,rec,demo],i)=>`<button class="opt" data-q="${k}" data-v="${i}" aria-pressed="${c===i}"><b>${l}${rec?' <span class="rec">· đề xuất</span>':""}</b><span>${s}</span>${demo?`<div class="demo">${demo}</div>`:""}</button>`).join("")}</div>${note(k,"Ý khác…")}</div>`}).join("");
+  $("#gnote").value=state.gnote?.note||"";counts()}
+const KEYS=()=>[...R.map(r=>"row-"+r[0]),...P.map(p=>"prop-"+p[0]),...S.map(s=>"set-"+s[0].slice(4)),...Q.map(q=>q[0])];
+function counts(){const ks=KEYS();$("#cnt").textContent=ks.filter(k=>state[k]?.choice!=null).length+"/"+ks.length}
+function lsSave(){try{localStorage.setItem(LS,JSON.stringify(state))}catch(e){}}
+async function persist(k){lsSave();counts();const st=document.getElementById("sv-"+k);
+  if(!db){if(st)st.textContent="Đã lưu trong trình duyệt này";return}
+  if(!canWrite){if(st)st.textContent="Bạn chỉ có quyền xem";return}
+  try{await db.doc("answers/"+k).set({choice:state[k].choice??null,note:state[k].note||"",at:state[k].at,by:uid||null});if(st)st.textContent="Đã lưu "+new Date(state[k].at).toLocaleTimeString("vi-VN")}
+  catch(e){if(st)st.textContent="Chưa lưu được lên trang — đã giữ trong trình duyệt"}}
+function setChoice(k,v){state[k]={...(state[k]||{}),choice:v,at:Date.now()};persist(k)}
+document.addEventListener("click",e=>{
+  const c=e.target.closest("[data-c]");if(c){const k=c.dataset.c,v=+c.dataset.v;const nv=state[k]?.choice===v?null:v;setChoice(k,nv);
+    c.parentElement.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.v===nv)));
+    const box=c.closest(".row,.card");box.classList.remove("ok","fix");if(nv!=null)box.classList.add(nv===0?"ok":"fix");return}
+  const q=e.target.closest("[data-q]");if(q){const k=q.dataset.q,v=+q.dataset.v;setChoice(k,v);q.parentElement.querySelectorAll(".opt").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.v===v)));return}});
+let tmr={};document.addEventListener("input",e=>{const n=e.target.dataset.n;if(!n)return;state[n]={...(state[n]||{}),note:e.target.value,at:Date.now()};e.target.classList.toggle("has",!!e.target.value);clearTimeout(tmr[n]);tmr[n]=setTimeout(()=>persist(n),600)});
+$("#btn-allok").onclick=async()=>{for(const k of KEYS()){if(k.startsWith("q-"))continue;if(state[k]?.choice==null){state[k]={...(state[k]||{}),choice:0,at:Date.now()};await persist(k)}}render()};
+$("#btn-export").onclick=()=>{const o=$("#out");const L=KEYS().map(k=>{const s=state[k]||{};return `${k}: ${s.choice==null?"chưa chọn":k.startsWith("q-")?"phương án "+(s.choice+1):s.choice===0?"Đồng ý":"Sửa"}${s.note?" — "+s.note:""}`});
+  o.textContent=L.join("\n")+(state.gnote?.note?"\n\nGhi chú chung: "+state.gnote.note:"");o.hidden=false};
+groups();render();
+(async()=>{if(!window.claude?.use){$("#store").textContent="Lưu trong trình duyệt này";return}
+  const [d,u]=await Promise.all([claude.use("db"),claude.use("user")]);if(!d){$("#store").textContent="Lưu trong trình duyệt này";return}
+  db=d;try{uid=u?await u.id():null}catch(e){}try{const w=u?await u.can("data.write"):null;if(w===false)canWrite=false}catch(e){}
+  $("#store").textContent=canWrite?"Lựa chọn lưu trên trang, Claude đọc được":"Bạn chỉ có quyền xem trang này";
+  db.collection("answers").onSnapshot(snap=>{let ch=false;snap.docs.forEach(doc=>{const x=doc.data();if(!x)return;const c=state[doc.id];if(!c||(x.at||0)>(c.at||0)){state[doc.id]={choice:x.choice??null,note:x.note||"",at:x.at};ch=true}});
+    if(ch){lsSave();const a=document.activeElement;if(!(a&&a.tagName==="TEXTAREA"))render();else counts()}},()=>{$("#store").textContent="Mất kết nối nơi lưu — lựa chọn vẫn giữ trong trình duyệt này"})})();
+</script>
+</body>
+</html>

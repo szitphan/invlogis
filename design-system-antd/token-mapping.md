@@ -132,9 +132,9 @@ shadcn: `--radius` 10px; các cấp suy ra (`sm` = ×0.6, `md` = ×0.8, `xl` = �
 | `rounded-[4px]` (checkbox) | `radius/checkbox` | 4 | biến bo góc checkbox — tên cần kiểm trong `default.less` | = border-radius-base | Ghi đè |
 | `rounded-xl` · `2xl` · `3xl` · `4xl` | `radius/xl` · `2xl` · `3xl` · `4xl` | 14 · 18 · 22 · 26 | — | — | Thêm mới |
 | `rounded-full` | `radius/full` | 9999 | — | — | Thêm mới |
-| Ô nhập pill (shadcnuikit web) | `input/radius` | `radius/full` | `@input-border-radius` — tên cần kiểm (mặc định theo `@border-radius-base`) | 2 | Thêm mới |
+| Ô nhập bo kit (chốt 07/11, bỏ pill) | `input/radius` | `radius/lg` 10 | `@input-border-radius` — tên cần kiểm (mặc định theo `@border-radius-base`) | 2 | Thêm mới |
 | Card `border-radius/rounded-xl` (đo kit) | `card/radius` | `radius/xl` 14 | `@card-radius` | 2 | Ghi đè |
-| Badge `border-radius/rounded-full` (đo kit) | `tag/radius` | `radius/full` | `@tag-border-radius` — tên cần kiểm | 2 | Ghi đè |
+| Tag bo nhỏ (user chốt 07/11, bỏ pill) | `tag/radius` | `radius/sm` 6 | `@tag-border-radius` — tên cần kiểm | 2 | Ghi đè |
 
 ## 4. Khoảng cách
 
@@ -233,16 +233,20 @@ Lưới 4px của shadcn (Tailwind `1` = 4px) trùng thang padding/margin của 
 | Không bóng | — | — | — | — | 1:1 (AntD ô nhập không bóng) |
 | Không viền | `color/input-border` | trong suốt | `@input-border-color` | — | Ghi đè |
 | Nền xám (shadcnuikit web) | `color/input-bg` | Light #f2f2f2 · Dark trắng 4.5% | `@input-bg` | = component-bg | Ghi đè |
-| Bo pill | `input/radius` | `radius/full` | Mục 3 | 2 | Thêm mới |
+| Bo kit | `input/radius` | `radius/lg` 10 | Mục 3 | 2 | Thêm mới |
+| `rounded-lg` (ô nhiều dòng, kit) | `textarea/radius` | `radius/lg` 10 | `@textarea-border-radius` — tên cần kiểm | 2 | Thêm mới (chốt 06/11 tối) |
+| Ô hợp lệ web-05: nền trắng, viền xanh | `color/input-success-border` | = `color/success` (Light/Dark) · nền `color/body-bg` | `@success-color` qua class `success` | — | Thêm mới — ng-zorro không có `nzStatus="success"` |
 
 ### 7.3 Select — `nz-select`
 
 | shadcn | Figma variable | Giá trị | Biến ng-zorro | TH |
 |---|---|---|---|---|
 | Trigger: `h-9` · sm `h-8`, `px-3`, `gap-2`, `rounded-md`, `shadow-xs` | theo Input | 36 / 32, 12, 8, 8 | `@select-*` + `@input-*` — tên cần kiểm | Theo Input |
-| Mũi tên `size-4 opacity-50` | `select/arrow-size` | 16, mờ 50% | — | Thêm mới (độ mờ) |
+| Mũi tên `size-4 opacity-50` | `select/arrow-size` · `select/arrow-opacity` | 16 · 50% | — | Thêm mới (độ mờ) |
 | Menu: `rounded-md border shadow-md`, `p-1`, rộng tối thiểu 128 | `select/dropdown-padding` | 4 | `@select-dropdown-*` — tên cần kiểm | Ghi đè / Thêm mới |
+| Menu bo `rounded-md` · rộng tối thiểu `min-w-[8rem]` | `select/dropdown-radius` · `select/dropdown-min-width` | `radius/base` 8 · 128 | — | Thêm mới (chốt 07/11) |
 | Mục: `py-1.5 pl-2 pr-8 rounded-sm text-sm` | `select/item-padding-y·x` | 6 · 8 (phải 32 chừa dấu ✓) | `@select-dropdown-vertical-padding` … — tên cần kiểm | Ghi đè |
+| Mục `pr-8` · `rounded-sm` | `select/item-padding-right` · `select/item-radius` | 32 · `radius/sm` 6 | — | Thêm mới (chốt 07/11) |
 | Mục chọn: `focus:bg-accent`, dấu ✓ bên phải | `color/item-hover-bg` | #f5f5f5 | `@select-item-selected-bg` | Ghi đè (AntD nền xanh nhạt, không có ✓) |
 
 ### 7.4 Checkbox — `nz-checkbox`
@@ -250,10 +254,210 @@ Lưới 4px của shadcn (Tailwind `1` = 4px) trùng thang padding/margin của 
 | shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
 |---|---|---|---|---|---|
 | `size-4` | `checkbox/size` | 16 | `@checkbox-size` | 16 | 1:1 |
-| `rounded-[4px]` | `radius/checkbox` | 4 | Mục 3 | 2 | Ghi đè |
+| `rounded-[4px]` | `radius/checkbox` | 4 | `@checkbox-border-radius` | = `@border-radius-sm` 2 | Ghi đè |
 | `checked: bg-primary border-primary` | `color/primary` | #171717 | `@checkbox-check-bg` / theo primary | — | 1:1 (theo primary) |
 | Dấu ✓ `size-3.5` | `checkbox/check-size` | 14 | — | — | Thêm mới |
 | `shadow-xs` | `shadow/xs` | Mục 6 | — | — | Thêm mới |
+| `text-primary-foreground` (dấu ✓) | `color/primary-foreground` | #fafafa | `@checkbox-check-color` | #fff | 1:1 |
+| `border-input` (ô chưa chọn) | `color/border-base` · `color/body-bg` | #e5e5e5 · #fff | `@border-color-base` | #d9d9d9 | Ghi đè — không dùng `color/input-border` vì biến đó trong suốt (ô nhập không viền) |
+| gạch "một phần" (Radix `MinusIcon` / CSS 8×2) | `checkbox/indeterminate-width` · `checkbox/indeterminate-height` | 8 × 2 | — (AntD ô vuông 8×8) | 8 × 8 | Ghi đè |
+| `gap-2` ô ↔ nhãn | `checkbox/gap` → `spacing/xs` | 8 | `@checkbox-group-item-margin-right` | 8 | 1:1 (nhóm ngang dùng 16) |
+| `pl-6` mục con / ô mở thêm | `checkbox/indent` → `spacing/lg` | 24 | — | — | Thêm mới |
+| thẻ chọn `p-3` `rounded-lg` | `checkbox/card-padding` → `spacing/sm` · `radius/lg` | 12 · 10 | — | — | Thêm mới — đã chọn viền 2px `color/primary` |
+| `focus-visible:ring-[3px]` · `aria-invalid:ring-destructive/20` | `focus/width` · `color/focus-ring` · `color/focus-error-ring` | 3 · #a1a1a1 50% · đỏ 20% | `@outline-width` · `@outline-color` | 2 · primary | Ghi đè (theo Mục 6) |
+| `disabled:opacity-50` | `opacity/disabled` | 50% | — | — | Theo 8.1 #1 |
+| web-04 ô tròn `bg-emerald-500` | `color/success` · `color/error-foreground` | #52c41a · #fff | `@success-color` | #52c41a | Chỉ Checkbox tròn |
+
+### 7.5 Radio — `nz-radio`
+
+| shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
+|---|---|---|---|---|---|
+| `size-4` | `radio/size` | 16 | `@radio-size` | 16 | 1:1 |
+| `size-2` chấm | `radio/dot-size` | 8 | `@radio-dot-size` | 16 − 8 = 8 | 1:1 |
+| `border-input` (#e5e5e5) | `color/border-base` | #e5e5e5 · Dark trắng 10% | `@border-color-base` | #d9d9d9 | Theo màu (không dùng `color/input-border` vì biến này trong suốt) |
+| `fill-primary` chấm, viền chọn | `color/primary` | #171717 · Dark #e5e5e5 | `@radio-dot-color` · `@radio-solid-checked-color` — tên cần kiểm | theo primary | 1:1 (theo primary) |
+| `shadow-xs` | `shadow/xs` | Mục 6 | — | — | Thêm mới |
+| `gap-2` nhãn · mô tả cách 2 | `radio/gap` · `radio/desc-gap` | 8 · 2 | `@radio-wrapper-margin-right` — tên cần kiểm | 8 | 1:1 · Thêm mới |
+| Nhóm nút (ng-zorro) | `radio/button-padding-x` | 15 (+ viền 1 = 16) | `@radio-button-padding-horizontal` | 15 | 1:1 |
+| Nhóm nút cao · bo | `height/base` · `radius/base` | 36 · 8 | `@btn-height-base` · `@border-radius-base` | 32 · 2 | Theo Button |
+| Nền nút | `color/body-bg` | #fff · Dark #0a0a0a | `@radio-button-bg` | = btn-default-bg | 1:1 |
+| Thẻ chọn `p-3 rounded-lg` | `radio/card-padding` · `radius/lg` | 12 · 10 | — | — | Thêm mới |
+| Ô màu `size-6` | `radio/swatch-size` | 24 | — | — | Thêm mới |
+| Thẻ/ô đã chọn `border-primary` + `ring-1` | `color/primary` (viền 1 + bóng tràn 1) | 2px tổng | — | — | Thêm mới (CSS) |
+| Focus · lỗi | `focus/width` · `color/focus-ring` · `color/focus-error-ring` | 3 · xám 50% · đỏ 20% | — (AntD dùng bóng xanh) | — | Ghi đè (CSS) |
+| Vòng cảnh báo (Input, Textarea) | `color/focus-warning-ring` | cam 20% (Dark 40%) | `@warning-color-outline` — tên cần kiểm | 2 | Thêm mới 07/11 (trước gắn `color/warning` + độ mờ 20% → instance mất độ mờ, vòng đặc) |
+| Tắt | `opacity/disabled` | 50% | — | — | Ghi đè (CSS riêng, quy tắc 4) |
+
+### 7.6 Switch — `nz-switch`
+
+| shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
+|---|---|---|---|---|---|
+| Rãnh (hình trang duyệt; web dùng `h-5 w-11`) | `switch/width` · `switch/height` | 32 · 18 | `@switch-min-width` · `@switch-height` | 44 · 22 | Ghi đè (chốt 07/11) |
+| Rãnh nhỏ | `switch/width-sm` · `switch/height-sm` | 24 · 14 | `@switch-sm-min-width` · `@switch-sm-height` | 28 · 16 | Ghi đè (chốt 07/11) |
+| Nút tròn `size-4` (theo hình: 14 / 10) | `switch/handle-size` · `switch/handle-size-sm` | 14 · 10 | `@switch-pin-size` · `@switch-sm-pin-size` | = cao − 4 | 1:1 (theo công thức) |
+| Khe nút ↔ rãnh | `switch/padding` → `spacing/2` | 2 | `@switch-padding` | 2 | 1:1 |
+| `rounded-full` | `switch/radius` → `radius/full` | 9999 | — | bo tròn | 1:1 |
+| `data-[state=checked]:bg-primary` | `switch/track-checked-bg` → `color/primary` | #171717 | `@switch-color` | `@primary-color` | 1:1 (theo primary) |
+| `data-[state=unchecked]:bg-input` | `switch/track-bg` → `color/border-base` | #e5e5e5 (Dark trắng 10%) | — (`@disabled-color`) | đen 25% | Ghi đè bằng CSS |
+| Nút `bg-background` (Dark: tắt `bg-foreground`, bật `bg-primary-foreground`) | `switch/handle-bg` · `switch/handle-checked-bg` | trắng (Dark: `color/text` · `color/primary-foreground`) | `@switch-bg` | trắng | Ghi đè (Dark) |
+| `shadow-xs` rãnh · bóng nút | `shadow/xs` · (nút: 0 1 2 đen 20%, chưa có token) | Mục 6 | `@switch-shadow-color` | xanh đậm 20% | Thêm mới |
+| `disabled:opacity-50` | `opacity/disabled` | 50% | `@switch-disabled-opacity` | 0.4 | Ghi đè |
+| Đang lưu (`nzLoading`) | `switch/loading-opacity` · `switch/spinner-size` · `switch/spinner-size-sm` | 60% · 10 · 8 | — | — | Thêm mới |
+| `focus-visible:ring-[3px]` | `focus/width` · `color/focus-ring` | 3 · xám 50% | — | — | Theo Input |
+
+### 7.7 Tag — `nz-tag`
+
+| shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
+|---|---|---|---|---|---|
+| Badge `px-2` · `gap-1` | `tag/padding-x` · `tag/gap` | 8 (→ `spacing/xs`) · 4 (→ `spacing/xss`) | `@tag-padding-horizontal` — tên cần kiểm | 7 + viền 1 | Ghi đè (Tô nhạt không viền → 8; Viền 8 − 1) |
+| `text-xs font-medium` | `text/sm/medium` | 12/16 Medium | `@tag-font-size` | 12, 400 | Ghi đè độ đậm |
+| `secondary` | `color/bg-base` · `color/text` | #f5f5f5 · #0a0a0a | `@tag-default-bg` · `@tag-default-color` | #fafafa, có viền | Ghi đè |
+| `outline` | `color/component-bg` · `color/border-base` | #fff · #e5e5e5 | `nzBordered` | — | 1:1 |
+| — (Tô nhạt success) | `tag/success-bg` · `tag/success-fg` | #389e0d 10% · #389e0d / Dark #49aa19 20% · #6abe39 | `@success-color-deprecated-bg` — tên cần kiểm | #f6ffed + viền | Thêm mới (CSS riêng `.ant-tag-success`, bỏ viền) |
+| — (processing) | `tag/info-bg` · `color/info` | #155dfc 10% / Dark #2b7fff 20% | `@info-color-deprecated-bg` — tên cần kiểm | #e6f7ff | Thêm mới |
+| — (warning) | `tag/warning-bg` · `tag/warning-fg` | #d48806 10% · #d48806 / Dark #d89614 20% · #e8b339 | `@warning-color-deprecated-bg` — tên cần kiểm | #fffbe6 | Thêm mới |
+| `destructive` (bg-destructive/10) | `color/error-bg` · `color/error` | Mục 2 | `@error-color-deprecated-bg` — tên cần kiểm | #fff2f0 | Ghi đè (dùng chung nút xoá nhạt) |
+| chấm `size-1.5` | `tag/dot-size` · màu `color/success\|info\|warning\|error\|text-secondary` | 6 | `@badge-status-size` | 6 | 1:1 |
+| icon `size-3` · `opacity-60` | `tag/icon-size` · `tag/icon-opacity` | 12 · 60% | — | — | Thêm mới |
+| số đếm `min-w-5 rounded-full` | `tag/count-min-width` · `tag/count-sm-size` · `color/primary` | 20 · 18 · #171717 | `@badge-height` · `@badge-height-sm` · `@badge-color` | 20 · 14 · đỏ | Ghi đè (sm, màu) |
+| checkable | `color/primary` · `color/primary-foreground` · `color/item-hover-bg` | #171717 · #fafafa · #f5f5f5 | `@tag-checkable…` — tên cần kiểm (theo primary) | primary | 1:1 (theo primary) |
+
+### 7.8 Tooltip — `nz-tooltip`
+
+| shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
+|---|---|---|---|---|---|
+| `bg-primary text-primary-foreground` | `color/primary` · `color/primary-foreground` | #171717 · #fafafa (Dark #e5e5e5 · #171717) | `@tooltip-bg` · `@tooltip-color` | rgba(0,0,0,.75) · #fff | Ghi đè (+ theme tối) |
+| `rounded-md` (hình kit) | `tooltip/radius` | `radius/base` 8 | `@tooltip-border-radius` | = border-radius-base (2) | Ghi đè |
+| `px-3 py-1.5` | `tooltip/padding-x` · `tooltip/padding-y` | 12 · 6 | — (CSS `.ant-tooltip-inner`) | 8 · 6, min-height 32 | Ghi đè CSS |
+| `text-xs` | `text/sm/regular` | 12 / 16 | — (CSS `.ant-tooltip-inner`) | 14 / 22 | Ghi đè CSS |
+| `sideOffset` 8 | `tooltip/offset` | `spacing/xs` 8 | `@tooltip-distance` — tên cần kiểm | ≈ 14 (mũi tên − 1 + 4) | Ghi đè |
+| Mũi tên: vuông `size-2` xoay 45° | — (vector 10 × 5 trên Figma) | nhô ≈ 5 | `@tooltip-arrow-width` | 8√2 | Ghi đè |
+| Mẫu danh sách chỉ số (web-03) | `tooltip/rich-width` · `tooltip/rich-padding` · `tooltip/rich-gap` | 180 · 12 · 8 | — | — | Thêm mới |
+| Rộng tối đa | — | 250 | `@tooltip-max-width` | 250 | 1:1 |
+
+### 7.9 Breadcrumb — `nz-breadcrumb`
+
+| shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
+|---|---|---|---|---|---|
+| `text-muted-foreground` (mục link) | `color/text-secondary` | #737373 · Dark #a1a1a1 | `@breadcrumb-link-color` · `@breadcrumb-separator-color` | 45% đen | Ghi đè |
+| `text-foreground` (trang hiện tại) · `hover:text-foreground` | `color/text` | #171717 | `@breadcrumb-last-item-color` · `@breadcrumb-link-color-hover` | 85% đen · primary (tên cần kiểm) | Ghi đè |
+| `text-sm` | `text/base/regular` | 14 / 20 | `@breadcrumb-font-size` | 14 | 1:1 |
+| `sm:gap-2.5` · `gap-1.5` (< 640px) | `breadcrumb/gap` | 10 (mobile 6) | `@breadcrumb-separator-margin` | 0 8px | Ghi đè |
+| Mục `gap-1.5` (icon + chữ) | `breadcrumb/item-gap` | `spacing/6` 6 | — | — | Thêm mới |
+| Separator `[&>svg]:size-3.5` (ChevronRight) | `breadcrumb/separator-size` | 14 | `nzSeparator` = TemplateRef icon `right` | "/" | Ghi đè |
+| Icon mục `size={16}` | `breadcrumb/icon-size` | 16 | `@breadcrumb-icon-font-size` | 14 | Ghi đè |
+| Ellipsis `size-5`, icon `size-4` | `breadcrumb/ellipsis-size` | 20 | — | — | Thêm mới |
+| `focus-visible:ring` quanh link | `breadcrumb/link-radius` · `focus/width` · `color/focus-ring` | `radius/xs` 2 · 3 | — | — | Thêm mới |
+| DropdownMenu của "…" | `breadcrumb/menu-min-width` + `select/dropdown-*` | 128 · padding 4 · bo 8 · `shadow/base` | `@dropdown-*` — tên cần kiểm | — | Theo Select |
+
+### 7.10 Card — `nz-card`
+
+| shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
+|---|---|---|---|---|---|
+| `rounded-xl` (đo kit) | `card/radius` | `radius/xl` 14 | `@card-radius` | 2 | Ghi đè (đã có Mục 3) |
+| `py-6 px-6` | `card/padding` | 24 | `@card-padding-base` | 24 | 1:1 (đã có Mục 5) |
+| `data-[size=sm]:py-4 px-4` | `card/padding-sm` | `spacing/md` 16 | `@card-padding-base-sm` — tên cần kiểm | 12 | Ghi đè |
+| `gap-6` · sm `gap-4` | `card/gap` · `card/gap-sm` | 24 · 16 | — | — | Thêm mới |
+| `CardHeader gap-1.5` | `card/header-gap` | `spacing/6` 6 | — | — | Thêm mới |
+| `CardFooter` nút `gap-2` | `card/footer-gap` | `spacing/xs` 8 | — | — | Thêm mới (thay `nzActions`) |
+| `bg-card` | `color/component-bg` | #ffffff · Dark #171717 | `@card-background` | #fff | 1:1 (Light) |
+| `border` | `color/border-base` | #e5e5e5 · Dark trắng 10% | viền `.ant-card-bordered` — tên cần kiểm | #f0f0f0 | Ghi đè |
+| card không bóng; hover đổi viền | `color/input-hover-border` | #a1a1a1 · Dark trắng 30% | `@card-shadow` | bóng 3 lớp | Ghi đè: bỏ bóng, hover đổi viền |
+| `CardTitle font-semibold` | `text/lg/semibold` · sm `text/base/semibold` | 16 · 14, đậm 600 | `@card-head-font-size` · `-sm` | 16 · 14 | Ghi đè độ đậm |
+| đầu card không vạch kẻ | — | không `border-bottom`, không chiều cao đầu riêng | `@card-head-height` · `@card-head-padding` | 48 · 16 | Ghi đè |
+
+### 7.11 Kbd — `<kbd>` (ng-zorro không có)
+
+| shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
+|---|---|---|---|---|---|
+| `h-5` | `kbd/height` | 20 | — (ng-zorro không có Kbd) | — | Thêm mới |
+| `min-w-5` | `kbd/min-width` | 20 | — | — | Thêm mới |
+| `px-1` | `kbd/padding-x` | 4 | — | — | Thêm mới |
+| `gap-1` (KbdGroup) | `kbd/gap` | 4 | — | — | Thêm mới |
+| `rounded-sm` | `kbd/radius` | = `radius/sm` 6 | — | — | Thêm mới |
+| `bg-muted` | `kbd/bg` | = `color/input-bg` (#f2f2f2; Dark trắng 4,5%) | — | — | Thêm mới (không dùng `item-hover-bg` vì trùng nền dòng menu hover) |
+| `text-muted-foreground` | `kbd/fg` | = `color/text-secondary` | — | — | Thêm mới |
+| `bg-background/20` trong tooltip | `kbd/on-dark-bg` | `color/primary-foreground` alpha 20% | — | — | Thêm mới |
+| `text-background` trong tooltip | `kbd/on-dark-fg` | = `color/primary-foreground` | — | — | Thêm mới |
+| `text-xs font-medium` | text style `text/sm/medium` | Geist Medium 12/16 | — | — | Dùng lại |
+
+### 7.12 Label — `nz-form-label`
+
+| shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
+|---|---|---|---|---|---|
+| `text-sm leading-none font-medium` (theo mẫu ghép Input/Select: base 14/20) | `color/text` · `text/base/medium` | #171717 · 14/20 Medium | `@label-color` (= `@heading-color`) — tên cần kiểm | #000 85% | Ghi đè (theo token) |
+| `*` bắt buộc (`text-destructive`) | `color/error` | đỏ báo lỗi | `@form-required-mark-color` — tên cần kiểm | `@highlight-color` | 1:1, nhưng đặt `*` sau chữ (AntD đặt trước) |
+| chữ "(không bắt buộc)", `FieldDescription`, icon ⓘ | `color/text-secondary` · `text/sm/regular` | xám phụ, 12/16 | `@form-help-color` — tên cần kiểm | — | Thêm mới (chữ phụ không có trong ng-zorro) |
+| `gap` giữa chữ, `*`, chữ phụ, icon | `label/gap` → `spacing/xss` | 4 | — | — | Thêm mới |
+| nhãn ↔ ô `gap-2` | `label/field-gap` → `spacing/6` | 6 | `@form-vertical-label-padding` | 0 0 8px | Ghi đè (6, khớp Input/Select) |
+| Nhãn trái: nhãn ↔ cột ô | `label/column-gap` → `spacing/md` | 16 | `nz-col` gutter | — | Thêm mới |
+| Nhãn trái: cột nhãn cố định | `label/column-width` | 120 | `nz-col nzSpan` | — | Thêm mới |
+| icon ⓘ | `icon/info` 16 + `color/text-secondary` | 16 | `nzTooltipIcon` | — | Dùng lại |
+| `peer-disabled:opacity-50` | `opacity/disabled` | 50% | — | — | Theo 8.1 #1 |
+| lỗi `FieldError` | `color/error` · `text/sm/regular` | 12/16 | `@form-error-color` — tên cần kiểm | `@error-color` | 1:1 |
+
+### 7.13 Popover — `nz-popover` · `nz-popconfirm`
+
+| shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
+|---|---|---|---|---|---|
+| `w-72` | `popover/width` | 288 | `@popover-min-width` — tên cần kiểm (rộng đặt qua `nzPopoverOverlayClassName`) | 177 (tối thiểu) | Thêm mới |
+| `p-4` | `popover/padding` | `spacing/md` 16 | `@popover-padding-horizontal` + CSS `.ant-popover-inner-content` | 16 · dọc 12 | Ghi đè |
+| `space-y-2` (tiêu đề ↔ nội dung) | `popover/gap` | `spacing/xs` 8 | — (AntD có vạch dưới tiêu đề, bỏ) | — | Thêm mới |
+| `rounded-md` | `popover/radius` | `radius/base` 8 | `@border-radius-base` (Mục 3) | 2 | Ghi đè |
+| `bg-popover border shadow-md` | `color/popover-bg` · `color/border-base` · `shadow/base` | Mục 1.3 · 1.4 · 6 | `@popover-bg` · CSS border 1px · `@box-shadow-base` | = component-bg · không viền | 1:1 / Thêm mới (viền) |
+| `sideOffset` | `popover/offset` | `tooltip/offset` 8 | `@popover-distance` — tên cần kiểm | arrow-width + 4 | Ghi đè |
+| Mũi tên (shadcn không có) | — (vector) | 10 × 5, nền popover-bg, 2 cạnh viền border-base | `@popover-arrow-width` — tên cần kiểm | 6 | Ghi đè |
+
+### 7.14 Slider — `nz-slider`
+
+| shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
+|---|---|---|---|---|---|
+| Track `h-1.5` | `slider/rail-height` | 6 | — (CSS `.ant-slider-rail` / `-track` `height: 4px`) | 4 | Thêm mới (ghi đè CSS) |
+| Track `bg-muted` | `slider/rail-bg` | `switch/track-bg` → `color/border-base` | `@slider-rail-background-color` (+ `-hover` #e1e1e1) | `@background-color-base` | Ghi đè |
+| Range `bg-primary` | `slider/track-bg` | `color/primary` | `@slider-track-background-color` (+ `-hover`) | `@primary-3` / `@primary-4` | Ghi đè |
+| Thumb `size-4` | `slider/handle-size` | 16 | `@slider-handle-size` · `@slider-handle-margin-top` | 14 · −5 | Ghi đè (margin −5 giữ 1:1) |
+| Thumb `bg-white` | `slider/handle-bg` | `color/body-bg` | `@slider-handle-background-color` | `@component-background` | 1:1 |
+| Thumb `border border-primary` | `slider/handle-border` · `slider/handle-border-width` | `color/primary` · 1 | `@slider-handle-color` · `@slider-handle-border-width` | `@primary-3` · 2px | Ghi đè |
+| `rounded-full` | `slider/radius` | `radius/full` | — | — | Thêm mới |
+| Thumb `shadow-sm` | `shadow/xs` | Mục 6 | `@slider-handle-shadow` | 0 | Ghi đè |
+| `hover:ring-4 ring-ring/50` | `slider/handle-ring-width` · `color/focus-ring` | 4 · xám 50% | `@slider-handle-color-focus-shadow` | `0 0 0 5px fade(primary, 12%)` | Ghi đè |
+| `focus-visible:ring-4` | `focus/width` · `color/focus-ring` | 3 · xám 50% | `@slider-handle-color-focus` | `tint(primary, 20%)` | Ghi đè (theo Input) |
+| Tooltip giá trị | `slider/tooltip-offset` | 4 | — | — | Thêm mới |
+| Ticks `bg-muted-foreground/70`, `mt-3`, `text-xs` | `slider/mark-color` · `slider/mark-gap` | `color/text-secondary` · `spacing/sm` 12 | `@slider-dot-border-color` | `@border-color-split` | Ghi đè (AntD dùng chấm trên rãnh) |
+| `disabled:opacity-50` | `opacity/disabled` | 50% | `@slider-disabled-color` · `@slider-disabled-background-color` | đổi màu xám | Ghi đè |
+
+### 7.15 Sidebar — `nz-sider` + `nz-menu` inline
+
+| shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
+|---|---|---|---|---|---|
+| `--sidebar` | `color/sider-bg` (có sẵn) | #fafafa / Dark #171717 | `@layout-sider-background` · `@menu-bg` | #001529 · #fff | Ghi đè |
+| `--sidebar-foreground` | `color/sider-text` → `color/text` | #0a0a0a / #fafafa | `@menu-item-color` | text 85% | Ghi đè |
+| `hover:bg-sidebar-accent` | `color/sider-item-hover-bg` → `color/item-hover-bg` | #f5f5f5 / #262626 | — (AntD hover chỉ đổi màu chữ) | — | Thêm mới (CSS) |
+| `data-[active]:bg-sidebar-accent` | `color/sider-item-active-bg` → `color/item-active-bg` | #f5f5f5 / #262626 | `@menu-item-active-bg` | primary-1 | Ghi đè |
+| `--sidebar-accent-foreground` | `color/sider-item-active-text` → `color/accent-foreground` | #171717 / #fafafa | `@menu-highlight-color` | primary | Ghi đè |
+| `text-sidebar-foreground/70` (tiêu đề nhóm) | `color/sider-group-title` → `color/text-secondary` | #737373 / #a1a1a1 | `@menu-item-group-title-color` | text-color-secondary | 1:1 |
+| `--sidebar-border` | `color/sider-border` → `color/border-split` | #e5e5e5 / trắng 10% | `@border-color-split` | — | Theo màu |
+| `--sidebar-primary` · `-foreground` (logo) | `color/sider-primary` · `-foreground` → `color/primary` · `-foreground` | #171717 / Dark #e5e5e5 | — | — | Thêm mới — Dark theo Spartan, không theo shadcn #1447e6 |
+| `--sidebar-width` 16rem | `sidebar/width` | 256 | `nzWidth` | 200 | Ghi đè |
+| `--sidebar-width-icon` 3rem | `sidebar/collapsed-width` | 48 | `nzCollapsedWidth` · `@menu-collapsed-width` | 80 | Ghi đè |
+| `h-8` | `sidebar/item-height` → `height/sm` | 32 | `@menu-item-height` · `@menu-inline-toplevel-item-height` | 40 | Ghi đè |
+| `size="lg"` `h-12` (đầu, chân) | `sidebar/item-height-lg` | 48 | — | — | Thêm mới |
+| `h-7` (menu-sub-button) | `sidebar/sub-item-height` | 28 | — (CSS cấp con) | 40 | Thêm mới (CSS) |
+| `p-2` | `sidebar/item-padding` → `spacing/xs` | 8 | `@menu-item-padding-horizontal` | 20 | Ghi đè |
+| `gap-2` | `sidebar/item-gap` → `spacing/xs` | 8 | `@menu-icon-margin-right` | 10 | Ghi đè |
+| `rounded-md` | `sidebar/item-radius` → `radius/base` | 8 | — (CSS `.ant-menu-item`) | 0 | Thêm mới |
+| `gap-1` (menu) | `sidebar/menu-gap` → `spacing/xss` | 4 | `@menu-item-vertical-margin` | 4 | 1:1 |
+| `p-2` (group / header / footer) | `sidebar/group-padding` → `spacing/xs` | 8 | `@menu-item-boundary-margin` | 8 | 1:1 |
+| `mx-3.5` | `sidebar/sub-indent` | 14 | `nzInlineIndent` | 24 | Ghi đè |
+| `px-2.5 border-l` (menu-sub) | `sidebar/sub-padding-x` | 10 | — | — | Thêm mới (CSS viền trái) |
+| `[&>svg]:size-4` | `sidebar/icon-size` | 16 | `@menu-icon-size` | 14 | Ghi đè |
+| `size-8 rounded-lg` (logo, ảnh) | `sidebar/logo-size` → `height/sm` · `sidebar/logo-radius` → `radius/lg` | 32 · 10 | — | — | Thêm mới |
+| `text-xs font-medium` (tiêu đề nhóm) | `text/sm/medium` | 12/16 | `@menu-item-group-title-font-size` | 14 | Ghi đè |
+| `data-[active]:font-medium` | `text/base/medium` | 14/20 | — | — | Thêm mới (CSS) |
+
+> Mục 7.9 – 7.15 ghi 07/11 cho bản **dựng tạm theo đề xuất** (chưa qua trang chọn biến thể) — có thể đổi sau khi user duyệt.
+
+> Mục 7.4 (bổ sung) – 7.8 ghi 07/11 theo đề xuất của agent dựng từng component; tên biến Less "tên cần kiểm" chưa đối chiếu `default.less`.
 
 ## 8. Đã chốt
 

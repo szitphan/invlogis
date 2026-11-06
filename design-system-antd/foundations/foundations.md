@@ -122,7 +122,7 @@ Mỗi text style Geist có biến thể độ đậm Regular / Medium / SemiBold
 | Dùng ở | Bo |
 |---|---|
 | Nút (mọi cỡ) | `radius/base` 8 |
-| Ô nhập (`input/radius`) | `radius/full` — pill |
+| Ô nhập (`input/radius`) | `radius/lg` 10 — bo theo kit (chốt 07/11, bỏ pill) |
 | Card (`card/radius`) | `radius/xl` 14 |
 | Tag, badge (`tag/radius`) | `radius/full` — pill |
 | Mục trong menu | `radius/sm` 6 |

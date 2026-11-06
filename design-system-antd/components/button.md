@@ -1,7 +1,7 @@
 ---
 type: design-system-component
 status: draft
-updated: 2026-11-06
+updated: 2026-11-07
 links:
   - design-system-antd/foundations/foundations.md
   - design-system-antd/token-mapping.md
@@ -26,7 +26,9 @@ links:
 | `nzBlock` | — | true | Rộng hết khung; Figma kéo giãn, không cần biến thể |
 | — | `Icon trái` · `Icon phải` (boolean + instance swap) | | Theo kit `Show Left Icon` · `Show Right Icon` |
 | — | `Chữ` (text) | | Theo kit `Button Text` |
-| — | — | | Phím tắt (`Show KbdGroup` của kit) để ở Mẫu ghép web-07 |
+| — | `Số đếm` (boolean) + `Số đếm · chữ` (text) | | Số trong ô viền nhỏ sau nhãn (user chốt 07/11) |
+| — | `Phím tắt` (boolean) | | Instance Kbd, như `Show KbdGroup` của kit |
+| — | `Avatar` (boolean) | | Component `button/avatar` 22px đầu nút; nút vẫn bo 8 (bỏ pill, user chốt 07/11) |
 
 **Không dùng** (không vẽ Figma, dev không làm): `nzType="dashed"`, `nzGhost`, `nzShape="circle"` / `round`.
 
@@ -64,38 +66,54 @@ Web dùng default 36; mobile dùng lg 40 cho nút chính; sm trong bảng, bộ 
 | Loading | Spinner thay icon trái, nút tắt bấm. Biến thể "giữ độ rộng": chữ ẩn, spinner đè giữa | `nzLoading` |
 | Disabled | Cả nút mờ 50% | `opacity/disabled` 0.5 |
 
-## 5. Mẫu ghép (giữ)
+## 5. Ví dụ đã chốt — mẫu ghép xếp theo 4 nhóm
 
-Mẫu ghép = Button + component khác. Trên Figma đặt ở khối "Mẫu ghép" cạnh set Button, dùng instance của Button.
+Từ 07/11 mẫu ghép **không còn là component riêng** (duyệt trên trang claude.ai/artifact/EW8eQ5m7gzVLTRPysdmo1X, db `answers`).
+Mỗi mẫu vào 1 trong 4 nhóm:
 
-| # | Mẫu | Ghép từ | Dùng khi |
-|---|---|---|---|
-| web-01 | Button | primary | Nút chính |
-| web-02 | Loading | `nzLoading` + disabled | Đang gửi lệnh |
-| web-03 | Delete | danger + icon thùng rác (mờ 60%) | Xoá |
-| web-04 | Spinner đè, giữ độ rộng | `nzLoading` + CSS riêng | Nút trong hàng không được nhảy độ rộng |
-| web-05 | Cancel / Save | secondary + primary | Footer form, hộp thoại |
-| web-06 | Messages + số đếm | button + ô số | Số mục chờ xử lý |
-| web-07 | Print + phím tắt ⌘P | button + Kbd | Web, người dùng văn phòng |
-| web-08 | Pill có avatar | button + Avatar | Đổi người đang chọn (ngoại lệ bo pill duy nhất) |
-| web-09 | Add new — icon trái | button + icon | Thêm lệnh; mobile chỉ còn icon |
-| web-11 | Chuông + badge | `nz-badge` bọc button chỉ icon | Thông báo trên header |
-| web-12 | Đổi sáng/tối | button chỉ icon, 2 trạng thái | Header |
-| web-13 | Copy → check | button chỉ icon, đổi icon 1,5 giây | Chép mã lệnh, biển số |
-| web-14 | + / − dọc | `nz-button-group` dọc | Phóng to/thu nhỏ bản đồ |
-| web-16 | Split viền — Follow ▾ | `nz-button-group` + `nz-dropdown` | Hành động chính + lựa chọn phụ |
-| web-17 | Stepper − số + | `nz-input-number` | Số kiện, số chuyến |
-| web-18 | Split nền đen — Merge ▾ | `nz-button-group` + `nz-dropdown` | Như web-16, khi là hành động chính |
-| web-19 · web-20 | ‹ Previous · Next › | `nz-button-group` | Lật bản ghi trước/sau ở màn chi tiết |
-| web-21 | Star + số | button + số mờ 60% | |
-| web-22 | Like + số (vạch ngăn) | button + ô số | |
-| web-24 | Đăng nhập MXH — viền, icon màu hãng | outline + logo | Màn đăng nhập (Google) |
-| web-25 | Đăng nhập MXH — nền màu hãng | Default + fill màu hãng, chữ/logo trắng | Màn đăng nhập (user giữ 06/11 tối; màu hãng không phải token) |
-| web-26 | Icon + tooltip | button chỉ icon + `nz-tooltip` | Bắt buộc với mọi nút chỉ icon |
-| web-27 | Left \| Middle \| Right | `nz-button-group` secondary + vạch ngăn | Chuyển Ngày / Tuần / Tháng |
+| Nhóm | Nghĩa | Trên Figma |
+|---|---|---|
+| 1 · Thuộc tính | Chỉ thêm một phần nhỏ vào nút | Thuộc tính bật tắt / chữ trên set Button, **không thêm trục biến thể** |
+| 2 · Component riêng | Có cấu trúc riêng | Set riêng có biến thể (Mục 5.1) |
+| 3 · Cách dùng | Ghép nhiều component | Chỉ là ví dụ trong khung tài liệu (instance thường hoặc detach) |
+| 4 · Đã có sẵn | Trùng biến thể/thuộc tính có sẵn | Bỏ mẫu, thẻ ví dụ dùng instance set Button |
+
+| # | Mẫu | Nhóm | Đi đâu | Dùng khi |
+|---|---|---|---|---|
+| web-01 | Nút chính | 4 | `Kiểu=Default` | Nút chính |
+| web-02 | Đang tải | 4 | `Trạng thái=Loading` | Đang gửi lệnh |
+| web-03 | Xoá | 4 | `Kiểu=Destructive` + icon trái | Xoá |
+| web-04 | Spinner đè, giữ độ rộng | 4 | `Trạng thái=Loading` (dev: `nzLoading` + CSS giữ độ rộng) | Nút trong hàng không được nhảy độ rộng |
+| web-05 | Huỷ / Lưu | 3 | 2 instance Secondary + Default | Footer form, hộp thoại |
+| web-06 | Số đếm | 1 | `Số đếm` (ô viền) | Số mục chờ xử lý |
+| web-07 | Phím tắt ⌘P | 1 | `Phím tắt` | Web, người dùng văn phòng |
+| web-08 | Có avatar | 1 | `Avatar`, bo 8 | Đổi người đang chọn |
+| web-09 | Icon trái | 4 | `Icon trái` | Thêm lệnh; mobile chỉ còn icon |
+| web-11 | Chuông + badge | 3 | Button chỉ icon bọc `nz-badge` (chờ Badge) | Thông báo trên header |
+| web-12 | Đổi sáng/tối | 2 | `Nút đổi icon`, Loại=Sáng tối | Header |
+| web-13 | Chép → dấu tích | 2 | `Nút đổi icon`, Loại=Chép (tự về sau 1,5 s) | Chép mã lệnh, biển số |
+| web-14 | + / − dọc | 2 | `Button group`, Hướng=Dọc | Phóng to/thu nhỏ bản đồ |
+| web-16 | Split viền | 2 | `Split button`, Kiểu=Viền | Hành động chính + lựa chọn phụ |
+| web-17 | Bước tăng giảm | 3 | Thuộc về Input number (`nz-input-number`, chưa dựng) | Số kiện, số chuyến |
+| web-18 | Split nền đậm | 2 | `Split button`, Kiểu=Nền đậm | Như web-16, khi là hành động chính |
+| web-19 · web-20 | Trước / Sau | 2 | `Button group`, Kiểu=Viền, 2 nút có icon | Lật bản ghi ở màn chi tiết |
+| web-21 | Sao + số | 1 | `Số đếm` + icon trái | |
+| web-22 | Thích + số | 1 | `Số đếm` + icon trái (bỏ vạch ngăn) | |
+| web-24 · web-25 | Đăng nhập MXH | 2 | `Nút đăng nhập MXH` | Màn đăng nhập (màu hãng không phải token) |
+| web-26 | Icon + tooltip | 3 | Button chỉ icon + `nz-tooltip` | Bắt buộc với mọi nút chỉ icon |
+| web-27 | Trái \| Giữa \| Phải | 2 | `Button group`, Kiểu=Phân đoạn, 3 nút | Chuyển Ngày / Tuần / Tháng |
 
 **Không dùng:** web-10 icon tròn (đã có icon vuông) · web-23 đăng nhập chỉ icon · web-15 ô nhập + nút tìm rời → **chuyển sang Input**: icon tìm nằm trong ô (`nzSuffix`),
 không còn nút rời (user chốt 06/11: ô pill đứng cạnh nút bo 8 lệch góc).
+
+### 5.1 Component tách từ mẫu ghép
+
+| Component | ng-zorro | Biến thể | Ghi chú |
+|---|---|---|---|
+| `Split button` | `nz-button-group` + `nz-dropdown` | Kiểu Viền · Nền đậm × Trạng thái Default · Disabled = 4 | |
+| `Button group` | `nz-button-group` | Kiểu Viền · Phân đoạn × Hướng Ngang · Dọc × Số nút 2 · 3 = 8 | Nút con là instance Button, sửa chữ/icon ngay trên instance |
+| `Nút đổi icon` | Button chỉ icon + đổi icon theo trạng thái | Loại Sáng tối · Chép × Trạng thái Trước · Sau = 4 | Prototype bấm để đổi; Chép tự về sau 1,5 s |
+| `Nút đăng nhập MXH` | Button outline/fill màu hãng + logo | Hãng (Google · X · Facebook · GitHub) × Kiểu Viền · Nền màu hãng = 8 | Rộng cố định 280 (user chốt 07/11); màn mobile đặt giãn khi vẽ màn |
 
 ## 6. Nút trượt xác nhận — component riêng `slide-confirm`
 
@@ -125,13 +143,13 @@ File `ElvhTYV3unixPkXky2oKIY`, trang **Button** (`14:9`) — bố cục theo sha
 |---|---|---|
 | Frame `Button` (tài liệu) | `13:1714` | Rộng 1536: đầu trang · Playground **Light** (trên) và **Dark** (dưới), nút xếp dọc giữa theo nhóm cỡ default → sm → lg → xs, rồi 4 hàng chỉ icon |
 | Section Components | `13:432` | Set `Button` `15:2459` = **1 set 288 tổ hợp** như kit: Kiểu (6) × Cỡ (8: xs · sm · default · lg · icon-xs · icon-sm · icon · icon-lg) × Trạng thái (6: Default · Hover · Focus · Loading · Disabled · Pressed). Ma trận: cột = trạng thái, hàng 2 cấp Kiểu → Cỡ, lưới nét đứt tím |
-| Section Mẫu ghép | `13:3312` | **22 component** `Button mẫu ghép/web-NN …` (Mục 5), ghép từ instance Button (exposed instance → sửa chữ/icon ngay trên instance) + slot |
-| Khối `Ví dụ đã chốt` (trong `13:1714`) | `13:2703` | Lưới 3 cột, mỗi thẻ là instance của component mẫu ghép |
+| Section Component tách từ mẫu ghép | `80:1641` | `Split button` `80:1800` · `Button group` `80:2079` · `Nút đổi icon` `80:2121` · `Nút đăng nhập MXH` `80:2288` (Mục 5.1). Section mẫu ghép cũ `13:3312` đã xoá 07/11 |
+| Khối `Ví dụ đã chốt` (trong `13:1714`) | `13:2703` | Lưới 3 cột, mỗi thẻ là instance set Button / set Mục 5.1; web-05, 11, 17, 26 là ví dụ cách dùng (detach) |
 | Khối `Mapping` (trong `13:1714`) | `13:3152` | Bảng thuộc tính ng-zorro ↔ Figma + bảng token Figma variable ↔ biến Less |
-| Section Slot (mẫu ghép) | `13:2692` | `slot/count` · `slot/kbd` · `slot/avatar` · `slot/count-muted` · `slot/like-count` — gắn vào nút qua `Icon trái/phải · chọn` |
 | Section Icons (lucide) | `14:10` | 21 icon lucide + 4 logo hãng (`brand/google` · `x` · `facebook` · `github`), 16px, nét theo màu chữ nút |
 
-Thuộc tính: `Chữ` (text) · `Icon trái` · `Icon phải` (boolean) · `Icon trái · chọn` · `Icon phải · chọn` (instance swap).
+Thuộc tính: `Chữ` (text) · `Icon trái` · `Icon phải` (boolean) · `Icon trái · chọn` · `Icon phải · chọn` (instance swap) · `Số đếm` (boolean) + `Số đếm · chữ` (text) · `Phím tắt` (boolean) · `Avatar` (boolean, component `button/avatar` `78:1275` trong Icons). 3 thuộc tính sau chỉ có ở 144 biến thể có chữ.
+Số đếm: khung `Số đếm` cao `kbd/height` 20, bo `kbd/radius`, đệm ngang 6, viền 1px cùng màu chữ nút 25%; chữ `font-size/sm` 12, mờ 60%.
 Cỡ `icon-*` chỉ có icon (instance swap qua `Icon trái · chọn`), luôn kèm tooltip khi dùng.
 Loading là một **trạng thái** (như kit): spinner hiện, nút mờ `opacity/disabled`.
 Focus: lớp `Focus ring` viền 3px ngoài nút, bo 11 (= `btn/radius` 8 + `focus/width` 3), màu `color/focus-ring`
