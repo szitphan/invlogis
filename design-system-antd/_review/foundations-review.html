@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Duyệt foundations — bộ thử shadcn → Ant Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F1F1F1;--surface:#FFFFFF;--sunk:#F6F7F9;--line:#E3E5E8;--line-strong:#D4D4D4;
+  --fg:#171717;--fg-2:#525252;--fg-3:#737373;
+  --brand:#0036B5;--ink:#0036B5;--ink-soft:#E5ECFA;--accent:#00A2FF;
+  --ok:#007004;--ok-soft:#E3F2E0;--near:#745B00;--near-soft:#FBEFD2;--new:#5B2BB5;--new-soft:#EEE6FB;--bad:#A50C25;--bad-soft:#FCE4E2;
+  --f-head:'Cal Sans','Inter',system-ui,sans-serif;--f-body:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;--f-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--f-body)}
+.band{background:var(--brand);color:#fff}
+.band-in{max-width:1240px;margin:0 auto;padding:20px 24px 0}
+.band img{height:28px;display:block;margin-bottom:12px}
+.band h1{font:400 30px/1.2 var(--f-head);margin:0 0 6px}
+.band p{margin:0 0 14px;opacity:.9;max-width:900px}
+.band mark{background:rgba(255,255,255,.22);color:#fff;border-radius:4px;padding:0 4px}
+.tabs{display:flex;gap:2px;flex-wrap:wrap}
+.tabs button{border:0;background:transparent;color:#fff;opacity:.75;font:500 14px var(--f-body);padding:10px 14px;border-radius:8px 8px 0 0;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--bg);color:var(--brand);opacity:1}
+.tabs .n{display:inline-block;min-width:18px;margin-left:6px;border-radius:9px;background:rgba(255,255,255,.25);font-size:11px;padding:0 5px}
+.tabs button[aria-selected="true"] .n{background:var(--ink-soft)}
+.wrap{max-width:1240px;margin:0 auto;padding:20px 24px 80px}
+.status{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px;font-size:13px;color:var(--fg-3)}
+.status .bar{flex:1;min-width:120px;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.status .bar i{display:block;height:100%;background:var(--brand);width:0}
+h2{font:400 22px/1.3 var(--f-head);margin:6px 0 10px}
+h3{font:600 16px var(--f-body);margin:18px 0 8px}
+p.lead{color:var(--fg-2);max-width:920px;margin:0 0 14px}
+mark{background:color-mix(in srgb,#00A2FF 22%,transparent);color:inherit;border-radius:3px;padding:0 2px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.cap{font-size:12px;color:var(--fg-3);margin:6px 2px 0}
+.lbl{font:600 12px var(--f-body);color:var(--fg-3);text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table.t{border-collapse:collapse;width:100%;font-size:13px}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:middle;font-variant-numeric:tabular-nums}
+table.t th{color:var(--fg-3);font-weight:600;background:var(--sunk);position:sticky;top:0}
+table.t tr:last-child td{border-bottom:0}
+code,.code{font:500 12px var(--f-mono);color:var(--ink);background:var(--ink-soft);border-radius:5px;padding:1px 5px;white-space:nowrap}
+.pill{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:600;white-space:nowrap}
+.th-1{background:var(--ok-soft);color:var(--ok)}.th-g{background:var(--near-soft);color:var(--near)}.th-m{background:var(--new-soft);color:var(--new)}.th-c{background:var(--bad-soft);color:var(--bad)}
+.sw{display:inline-block;width:22px;height:22px;border-radius:6px;border:1px solid rgba(0,0,0,.12);vertical-align:middle;margin-right:8px}
+.swd{background-image:linear-gradient(45deg,#0a0a0a 25%,transparent 25%)}
+.cr{font:600 11px var(--f-mono);padding:1px 6px;border-radius:5px}
+.cr.ok{background:var(--ok-soft);color:var(--ok)}.cr.bad{background:var(--bad-soft);color:var(--bad)}.cr.mid{background:var(--near-soft);color:var(--near)}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 14px;font-size:13px;color:var(--fg-2)}
+.decide{border-top:1px dashed var(--line-strong);margin-top:14px;padding-top:12px}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.opts label{display:flex;gap:6px;align-items:center;border:1px solid var(--line-strong);border-radius:8px;padding:6px 12px;cursor:pointer;background:var(--surface);font-weight:500}
+.opts label.on{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand);background:var(--ink-soft)}
+.opts input{margin:0}
+textarea{width:100%;min-height:44px;resize:vertical;border:1px solid var(--line-strong);border-radius:8px;padding:8px 10px;font:14px/1.5 var(--f-body)}
+.save{font-size:12px;color:var(--fg-3);min-height:16px}
+.btnx{border:1px solid var(--line-strong);background:var(--surface);border-radius:8px;padding:7px 14px;font:500 14px var(--f-body);cursor:pointer}
+.btnx.pri{background:var(--brand);color:#fff;border-color:var(--brand)}
+pre.out{white-space:pre-wrap;background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:12px;font:12px/1.5 var(--f-mono)}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:18px}
+.q h3{margin:0 0 6px;font-size:17px}
+.q .ctx{color:var(--fg-2);margin:0 0 6px}
+.qopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:12px 0}
+.qo{border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;background:var(--surface)}
+.qo.on{border-color:var(--brand);box-shadow:0 0 0 2px var(--brand)}
+.qo .qcap{padding:10px 12px;border-top:1px solid var(--line);font-size:13px}
+.qo .qcap b{display:block;font-size:14px;margin-bottom:2px}
+.rec{font-size:11px;font-weight:700;color:var(--brand);background:var(--ink-soft);border-radius:4px;padding:0 5px;margin-left:6px}
+.sizes{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap}
+.rbox{width:72px;height:48px;background:#171717}
+.bar{height:14px;background:#171717;border-radius:2px}
+.spc{display:flex;align-items:center;gap:10px;margin:4px 0;font-size:13px}
+.spc .bar{display:inline-block}
+
+/* ===== Preview: mọi giá trị đọc từ biến CSS của theme (đặt bằng style trên .pv) ===== */
+.pv{font-family:var(--font);font-size:14px;line-height:var(--lh);color:var(--text);background:var(--bg-body);padding:20px;border-radius:12px;border:1px solid var(--line)}
+.pv *{box-sizing:border-box;font-family:inherit}
+.pv .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.pv .tag{font:600 11px var(--font);color:var(--text-2);text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px}
+.pv .b{display:inline-flex;align-items:center;justify-content:center;gap:var(--gap);height:var(--h);padding:0 var(--px);border-radius:var(--r);font-size:var(--fs-btn);font-weight:var(--fw-btn);line-height:1;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:background .12s,box-shadow .12s;box-shadow:var(--sh-btn)}
+.pv .b.sm{height:var(--h-sm);padding:0 var(--px-sm)}
+.pv .b.lg{height:var(--h-lg);padding:0 var(--px-lg);font-size:var(--fs-btn-lg)}
+.pv .b.p{background:var(--primary);color:var(--primary-fg);box-shadow:var(--sh-btn-p)}
+.pv .b.p:hover{background:var(--primary-hover)}
+.pv .b.p:active{background:var(--primary-active)}
+.pv .b.o{background:var(--bg-body);border-color:var(--border);color:var(--text);box-shadow:var(--sh-xs)}
+.pv .b.o:hover{background:var(--hover-bg);border-color:var(--o-hover-border);color:var(--o-hover-fg)}
+.pv .b.t{background:transparent;color:var(--text);box-shadow:none}
+.pv .b.t:hover{background:var(--hover-bg)}
+.pv .b.l{background:none;color:var(--link);box-shadow:none}
+.pv .b.l:hover{text-decoration:underline;text-underline-offset:4px}
+.pv .b.d{background:var(--error);color:#fff;box-shadow:var(--sh-btn-p)}
+.pv .b.f{box-shadow:0 0 0 var(--ring-w) var(--ring);border-color:var(--ring-border)}
+.pv .b svg{width:16px;height:16px}
+.pv .dis-op{opacity:.5;pointer-events:none}
+.pv .b.dis-ad{background:var(--dis-bg)!important;color:var(--dis-fg)!important;border-color:var(--dis-border)!important;box-shadow:none!important;pointer-events:none}
+.pv .b.t.dis-ad,.pv .b.l.dis-ad{background:transparent!important;border-color:transparent!important}
+.pv .in{display:flex;align-items:center;gap:8px;height:var(--h);padding:0 var(--ipx);border:1px solid var(--input-border);border-radius:var(--r);background:var(--input-bg);color:var(--text);box-shadow:var(--sh-input);width:230px;font-size:14px}
+.pv .in.ph{color:var(--ph)}
+.pv .in:hover{border-color:var(--input-hover-border)}
+.pv .in.f{border-color:var(--ring-border);box-shadow:0 0 0 var(--ring-w) var(--ring)}
+.pv .in.e{border-color:var(--error);box-shadow:0 0 0 var(--ring-w) var(--error-ring)}
+.pv .in.dis-ad{background:var(--dis-bg);color:var(--dis-fg);border-color:var(--dis-border);box-shadow:none}
+.pv .in .chev{margin-left:auto;opacity:var(--chev-op);width:16px;height:16px}
+.pv .help{font-size:12px;color:var(--error);margin-top:4px}
+.pv .menu{background:var(--popover);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh-md);padding:var(--menu-p);width:230px;margin-top:6px}
+.pv .mi{display:flex;align-items:center;padding:var(--mi-py) 32px var(--mi-py) var(--mi-px);border-radius:var(--r-sm);position:relative;font-size:14px}
+.pv .mi.h{background:var(--hover-bg)}
+.pv .mi.s{background:var(--sel-bg);font-weight:var(--sel-fw)}
+.pv .mi .ck{position:absolute;right:8px;width:16px;height:16px;display:var(--sel-check)}
+.pv .cb{display:inline-flex;align-items:center;gap:8px;font-size:14px}
+.pv .cb i{width:16px;height:16px;border:1px solid var(--input-border);border-radius:var(--r-cb);display:inline-flex;align-items:center;justify-content:center;box-shadow:var(--sh-xs);background:var(--input-bg)}
+.pv .cb i.on{background:var(--primary);border-color:var(--primary);color:var(--primary-fg)}
+.pv .cb i svg{width:var(--ck-size);height:var(--ck-size)}
+.pv .crd{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px;max-width:420px}
+.pv .crd h4{margin:0 0 4px;font-size:16px;font-weight:600;color:var(--heading);line-height:24px}
+.pv .crd p{margin:0 0 16px;color:var(--text-2)}
+.pv .al{border:1px solid var(--al-border);background:var(--al-bg);color:var(--al-fg);border-radius:var(--r-lg);padding:12px 16px;display:flex;gap:10px;align-items:flex-start;max-width:420px}
+.pv .al svg{width:16px;height:16px;flex:none;margin-top:2px}
+.pv .tg{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:var(--r-sm);font-size:12px;font-weight:500;border:1px solid}
+.pv .sep{height:1px;background:var(--border-split);margin:16px 0}
+.pv .t2{color:var(--text-2)}
+</style>
+</head>
+<body>
+<header class="band"><div class="band-in">
+  <img src="data:image/png;base64,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" alt="innvie">
+  <h1>Duyệt foundations — bộ thử shadcn → Ant Design</h1>
+  <p>Giá trị lấy từ <mark>shadcn/Spartan</mark> (theme neutral, màu chính <mark>đen #171717</mark>), đặt tên theo <mark>biến Less của ng-zorro</mark> để dev ráp thẳng. Mỗi tab có preview dựng từ token thật, đặt cạnh <b>Ant Design mặc định</b>. Chọn Đồng ý / Cần sửa từng nhóm và chốt <b>5 câu</b> ở tab cuối — lựa chọn lưu trên trang, Claude đọc được. Nguồn: <code style="background:rgba(255,255,255,.2);color:#fff">design-system-antd/token-mapping.md</code></p>
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+</div></header>
+<main class="wrap">
+  <div class="status"><span id="store">Đang kết nối nơi lưu…</span><div class="bar"><i id="prog"></i></div><span id="cnt"></span>
+    <button class="btnx" id="btn-export">Xuất lựa chọn dạng chữ</button></div>
+  <pre class="out" id="out" hidden></pre>
+  <div id="panels"></div>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ICON={
+  plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  chev:'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>',
+  check:'<svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+  info:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>',
+};
+
+/* ===== Theme: bộ thử (Light/Dark) và Ant Design mặc định — mọi số từ token-mapping.md ===== */
+const BASE={
+  font:"'Geist',system-ui,sans-serif",lh:"20px",
+  h:"36px","h-sm":"32px","h-lg":"40px",
+  px:"15px","px-sm":"11px","px-lg":"23px",ipx:"11px",gap:"8px",
+  "fs-btn":"14px","fs-btn-lg":"14px","fw-btn":"500",
+  r:"8px","r-sm":"6px","r-lg":"10px","r-cb":"4px",
+  "ring-w":"3px","chev-op":".5","menu-p":"4px","mi-py":"6px","mi-px":"8px","ck-size":"14px",
+  "sel-check":"block","sel-fw":"400",
+  "sh-btn":"none","sh-btn-p":"none","sh-xs":"0 1px 2px 0 rgb(0 0 0 / .05)","sh-input":"0 1px 2px 0 rgb(0 0 0 / .05)",
+  "sh-md":"0 4px 6px -1px rgb(0 0 0 / .1),0 2px 4px -2px rgb(0 0 0 / .1)",
+};
+const TEST_LIGHT={...BASE,
+  "bg-body":"#ffffff",card:"#ffffff",popover:"#ffffff",
+  primary:"#171717","primary-fg":"#fafafa","primary-hover":"#2e2e2e","primary-active":"#2e2e2e",
+  text:"#0a0a0a",heading:"#0a0a0a","text-2":"#737373",ph:"#737373",link:"#171717",
+  border:"#e5e5e5","border-split":"#e5e5e5","input-border":"#e5e5e5","input-hover-border":"#e5e5e5","input-bg":"transparent",
+  "hover-bg":"#f5f5f5","sel-bg":"#f5f5f5","o-hover-border":"#e5e5e5","o-hover-fg":"#171717",
+  ring:"rgb(161 161 161 / .5)","ring-border":"#a1a1a1",error:"#e7000b","error-ring":"rgb(231 0 11 / .2)",
+  info:"#1890ff",success:"#52c41a",warning:"#faad14",
+  "dis-bg":"#f5f5f5","dis-fg":"#a1a1a1","dis-border":"#e5e5e5",
+};
+const TEST_DARK={...BASE,
+  "bg-body":"#0a0a0a",card:"#171717",popover:"#171717",
+  primary:"#e5e5e5","primary-fg":"#171717","primary-hover":"#cfcfcf","primary-active":"#cfcfcf",
+  text:"#fafafa",heading:"#fafafa","text-2":"#a1a1a1",ph:"#a1a1a1",link:"#e5e5e5",
+  border:"rgb(255 255 255 / .1)","border-split":"rgb(255 255 255 / .1)","input-border":"rgb(255 255 255 / .15)","input-hover-border":"rgb(255 255 255 / .15)","input-bg":"rgb(255 255 255 / .045)",
+  "hover-bg":"#262626","sel-bg":"#262626","o-hover-border":"rgb(255 255 255 / .15)","o-hover-fg":"#fafafa",
+  ring:"rgb(115 115 115 / .5)","ring-border":"#737373",error:"#ff6467","error-ring":"rgb(255 100 103 / .4)",
+  info:"#177ddc",success:"#49aa19",warning:"#d89614",
+  "dis-bg":"#262626","dis-fg":"#737373","dis-border":"rgb(255 255 255 / .1)",
+  "sh-xs":"0 1px 2px 0 rgb(0 0 0 / .05)",
+};
+const ANTD={
+  font:"-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif",lh:"22px",
+  h:"32px","h-sm":"24px","h-lg":"40px",px:"15px","px-sm":"7px","px-lg":"15px",ipx:"11px",gap:"8px",
+  "fs-btn":"14px","fs-btn-lg":"16px","fw-btn":"400",r:"2px","r-sm":"2px","r-lg":"2px","r-cb":"2px",
+  "ring-w":"2px","chev-op":".25","menu-p":"4px 0","mi-py":"5px","mi-px":"12px","ck-size":"12px","sel-check":"none","sel-fw":"600",
+  "sh-btn":"0 2px 0 rgba(0,0,0,.015)","sh-btn-p":"0 2px 0 rgba(0,0,0,.045)","sh-xs":"0 2px 0 rgba(0,0,0,.015)","sh-input":"none",
+  "sh-md":"0 3px 6px -4px rgba(0,0,0,.12),0 6px 16px 0 rgba(0,0,0,.08),0 9px 28px 8px rgba(0,0,0,.05)",
+  "bg-body":"#ffffff",card:"#ffffff",popover:"#ffffff",
+  primary:"#1890ff","primary-fg":"#ffffff","primary-hover":"#40a9ff","primary-active":"#096dd9",
+  text:"rgba(0,0,0,.85)",heading:"rgba(0,0,0,.85)","text-2":"rgba(0,0,0,.45)",ph:"#bfbfbf",link:"#1890ff",
+  border:"#d9d9d9","border-split":"#f0f0f0","input-border":"#d9d9d9","input-hover-border":"#40a9ff","input-bg":"#ffffff",
+  "hover-bg":"#f5f5f5","sel-bg":"#e6f7ff","o-hover-border":"#40a9ff","o-hover-fg":"#40a9ff",
+  ring:"rgba(24,144,255,.2)","ring-border":"#40a9ff",error:"#ff4d4f","error-ring":"rgba(255,77,79,.2)",
+  info:"#1890ff",success:"#52c41a",warning:"#faad14",
+  "dis-bg":"#f5f5f5","dis-fg":"rgba(0,0,0,.25)","dis-border":"#d9d9d9",
+};
+const styleOf=t=>Object.entries(t).map(([k,v])=>`--${k}:${v}`).join(";");
+
+/* Áp lựa chọn của 5 câu vào theme bộ thử */
+function applyQ(t,dark){
+  t={...t};
+  const q2=ans("q2"),q3=ans("q3");
+  if(q2===0){t.info=t.primary}
+  if(q2===2){t.info=dark?"#3080ff":"#155dfc"}
+  if(q3===1){ if(dark){t["primary-active"]="#b8b8b8";t["input-hover-border"]="rgb(255 255 255 / .3)"} else {t["primary-active"]="#454545";t["input-hover-border"]="#a1a1a1"} }
+  if(dark && ans("q5")===1){t.success="#52c41a";t.warning="#faad14"}
+  return t;
+}
+function disMode(isAntd){ if(isAntd) return "ad"; const a=ans("q1"); return a===0?"op":"ad"; }
+function disTheme(t,isAntd){ if(isAntd) return t; const a=ans("q1"); if(a===1){return {...t,"dis-bg":t["bg-body"]==="#0a0a0a"?"rgb(255 255 255 / .08)":"#f5f5f5","dis-fg":t["bg-body"]==="#0a0a0a"?"rgb(255 255 255 / .3)":"rgba(0,0,0,.25)","dis-border":t["bg-body"]==="#0a0a0a"?"#434343":"#d9d9d9"}} return t; }
+
+function alertCols(t,dark){
+  const c=t.info;
+  return `--al-border:color-mix(in srgb,${c} ${dark?45:35}%,transparent);--al-bg:color-mix(in srgb,${c} ${dark?14:8}%,${t["bg-body"]});--al-fg:${t.text}`;
+}
+function preview(t,{dark=false,antd=false,title=""}={}){
+  const dm=disMode(antd); t=disTheme(t,antd);
+  const dis=dm==="op"?"dis-op":"dis-ad";
+  const tgs=[["success",t.success],["warning",t.warning],["error",t.error],["info",t.info]].map(([n,c])=>`<span class="tg" style="color:${c};border-color:color-mix(in srgb,${c} 45%,transparent);background:color-mix(in srgb,${c} ${dark?16:8}%,${t["bg-body"]})">${n}</span>`).join("");
+  return `<div class="pv" style="${styleOf(t)};${alertCols(t,dark)}">
+  ${title?`<p class="tag">${title}</p>`:""}
+  <div class="row"><button class="b p">Lưu lệnh</button><button class="b o">Huỷ</button><button class="b t">Bỏ qua</button><button class="b l">Xem chi tiết</button><button class="b d">Xoá</button></div>
+  <div class="row"><button class="b p sm">Nhỏ</button><button class="b p">Mặc định</button><button class="b p lg">Lớn</button><button class="b o">${ICON.plus}Thêm xe</button><button class="b p f">Focus</button><button class="b p ${dis}">Đã tắt</button><button class="b o ${dis}">Đã tắt</button></div>
+  <div class="row" style="align-items:flex-start">
+    <div><div class="in ph">Biển số xe</div><p class="cap" style="color:var(--text-2);margin:4px 0 0">Ô trống</p></div>
+    <div><div class="in f">51C-123.45</div><p class="cap" style="color:var(--text-2);margin:4px 0 0">Đang nhập (focus)</p></div>
+    <div><div class="in e">51C-12</div><div class="help">Biển số chưa đủ ký tự</div></div>
+    <div><div class="in ${dm==="op"?"dis-op":"dis-ad"}">Không sửa được</div><p class="cap" style="color:var(--text-2);margin:4px 0 0">Đã tắt</p></div>
+  </div>
+  <div class="row" style="align-items:flex-start">
+    <div><div class="in">Container 40' ${ICON.chev}</div>
+      <div class="menu"><div class="mi">Container 20'</div><div class="mi s">Container 40' ${ICON.check}</div><div class="mi h">Container 45'</div><div class="mi">Mooc sàn</div></div></div>
+    <div style="display:flex;flex-direction:column;gap:10px;padding-top:8px">
+      <span class="cb"><i class="on">${ICON.check.replace('class="ck"','')}</i>Hàng nguy hiểm</span>
+      <span class="cb"><i></i>Hàng lạnh</span>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${tgs}</div>
+    </div>
+  </div>
+  <div class="sep"></div>
+  <div class="row" style="align-items:flex-start">
+    <div class="crd"><h4>Lệnh vận tải LVT-0012</h4><p>Cảng Cát Lái → KCN Sóng Thần · 2 container 40'</p><div class="row" style="margin:0"><button class="b p">Giao lệnh</button><button class="b o">Sửa</button></div></div>
+    <div class="al">${ICON.info}<div><b style="font-weight:600">Có 3 lệnh chờ điều xe</b><div class="t2">Thông báo kiểu info — màu theo câu 2.</div></div></div>
+  </div>
+</div>`;
+}
+
+/* ===== Dữ liệu bảng ===== */
+const TH={"1:1":"th-1","Ghi đè":"th-g","Thêm mới":"th-m","Chưa chốt":"th-c"};
+const pill=s=>`<span class="pill ${TH[s]||"th-g"}">${s}</span>`;
+const COLORS=[
+ ["Màu chính","--primary","color/primary","#171717","#e5e5e5","@primary-color","#1890ff","Ghi đè"],
+ ["Chữ trên màu chính","--primary-foreground","color/primary-foreground","#fafafa","#171717","@btn-primary-color","#ffffff","Ghi đè"],
+ ["Màu chính khi hover","primary/90","color/primary-hover","#2e2e2e","#cfcfcf","@primary-color-hover","#40a9ff","Ghi đè"],
+ ["Chữ","--foreground","color/text","#0a0a0a","#fafafa","@text-color","rgba(0,0,0,.85)","Ghi đè"],
+ ["Tiêu đề","--foreground","color/heading","#0a0a0a","#fafafa","@heading-color","rgba(0,0,0,.85)","Ghi đè"],
+ ["Chữ phụ","--muted-foreground","color/text-secondary","#737373","#a1a1a1","@text-color-secondary","rgba(0,0,0,.45)","Ghi đè"],
+ ["Chữ gợi ý ô nhập","placeholder","color/input-placeholder","#737373","#a1a1a1","@input-placeholder-color","#bfbfbf","Ghi đè"],
+ ["Liên kết","text-primary","color/link","#171717","#e5e5e5","@link-color","= primary","1:1"],
+ ["Nền trang","--background","color/body-bg","#ffffff","#0a0a0a","@body-background","#ffffff","1:1"],
+ ["Nền khối, card","--card","color/component-bg","#ffffff","#171717","@component-background","#ffffff","1:1"],
+ ["Nền popover","--popover","color/popover-bg","#ffffff","#171717","@popover-background","#ffffff","1:1"],
+ ["Nền phụ","--secondary · --muted","color/bg-base","#f5f5f5","#262626","@background-color-base","#f5f5f5","1:1"],
+ ["Nền hover","--accent","color/item-hover-bg","#f5f5f5","#262626","@item-hover-bg","#f5f5f5","1:1"],
+ ["Nền mục đang chọn","--accent","color/item-active-bg","#f5f5f5","#262626","@item-active-bg","#e6f7ff","Ghi đè"],
+ ["Chữ trên nền hover","--accent-foreground","color/accent-foreground","#171717","#fafafa","—","—","Thêm mới"],
+ ["Nền sidebar","--sidebar","color/sider-bg","#fafafa","#171717","@layout-sider-background-light","#ffffff","Ghi đè"],
+ ["Viền","--border","color/border-base","#e5e5e5","rgb(255 255 255 / .1)","@border-color-base","#d9d9d9","Ghi đè"],
+ ["Viền chia","--border","color/border-split","#e5e5e5","rgb(255 255 255 / .1)","@border-color-split","#f0f0f0","Ghi đè"],
+ ["Viền ô nhập","--input","color/input-border","#e5e5e5","rgb(255 255 255 / .15)","@input-border-color","#d9d9d9","Ghi đè"],
+ ["Vòng focus","--ring","color/ring","#a1a1a1","#737373","@primary-color-outline","fade(primary,20%)","Thêm mới"],
+ ["Lỗi","--destructive","color/error","#e7000b","#ff6467","@error-color","#ff4d4f","Ghi đè"],
+ ["Thành công","—","color/success","#52c41a","#49aa19","@success-color","#52c41a","1:1"],
+ ["Cảnh báo","--warning (ví dụ)","color/warning","#faad14","#d89614","@warning-color","#faad14","1:1"],
+ ["Thông tin","—","color/info","câu 2","câu 2","@info-color","= primary","Chưa chốt"],
+ ["Nền layout, header","—","color/layout-body-bg · layout-header-bg","câu 4","câu 4","@layout-body-background · @layout-header-background","#f0f2f5 · #001529","Chưa chốt"],
+];
+const CHARTS=[["chart-1","#f54900","#1447e6"],["chart-2","#009689","#00bc7d"],["chart-3","#104e64","#fe9a00"],["chart-4","#ffb900","#ad46ff"],["chart-5","#fe9a00","#ff2056"]];
+const TYPE=[
+ ["text-xs","font-size/sm",12,16,"@font-size-sm",12,"1:1"],
+ ["text-sm","font-size/base",14,20,"@font-size-base",14,"1:1"],
+ ["text-base","font-size/lg · heading/5",16,24,"@font-size-lg · @heading-5-size",16,"1:1"],
+ ["text-lg","font-size/xl",18,28,"—","—","Thêm mới"],
+ ["text-xl","heading/4",20,28,"@heading-4-size",20,"1:1"],
+ ["text-2xl","heading/3",24,32,"@heading-3-size",24,"1:1"],
+ ["text-3xl","heading/2",30,36,"@heading-2-size",30,"1:1"],
+ ["text-4xl","heading/1",36,40,"@heading-1-size",38,"Ghi đè"],
+];
+const RADII=[["rounded-xs","radius/xs",2,"—","—","Thêm mới"],["rounded-[4px]","radius/checkbox",4,"bo góc checkbox","2","Ghi đè"],["rounded-sm","radius/sm",6,"@border-radius-sm","2","Ghi đè"],["rounded-md","radius/base",8,"@border-radius-base","2","Ghi đè"],["rounded-lg","radius/lg",10,"@border-radius-lg","4","Ghi đè"],["rounded-xl","radius/xl",14,"—","—","Thêm mới"],["rounded-2xl","radius/2xl",18,"—","—","Thêm mới"],["rounded-full","radius/full",9999,"—","—","Thêm mới"]];
+const SPACE=[[2,"spacing/2","—","Thêm mới"],[4,"spacing/xss","@padding-xss · @margin-xss","1:1"],[6,"spacing/6","—","Thêm mới"],[8,"spacing/xs","@padding-xs · @margin-xs","1:1"],[12,"spacing/sm","@padding-sm · @margin-sm","1:1"],[16,"spacing/md","@padding-md · @margin-md","1:1"],[20,"spacing/20","—","Thêm mới"],[24,"spacing/lg","@padding-lg · @margin-lg","1:1"],[32,"spacing/32","—","Thêm mới"],[40,"spacing/40","—","Thêm mới"],[48,"spacing/48","—","Thêm mới"]];
+const HEIGHTS=[["h-6 (xs)","height/xs",24,"—","—","Thêm mới"],["h-8 (sm)","height/sm",32,"@height-sm",24,"Ghi đè"],["h-9 (mặc định)","height/base",36,"@height-base",32,"Ghi đè"],["h-10 (lg)","height/lg",40,"@height-lg",40,"1:1"]];
+const PADS=[["Nút mặc định","px-4","btn/padding-x/base",16,"@btn-padding-horizontal-base",15,15,"1:1"],["Nút nhỏ","px-3","btn/padding-x/sm",12,"@btn-padding-horizontal-sm",7,11,"Ghi đè"],["Nút lớn","px-6","btn/padding-x/lg",24,"@btn-padding-horizontal-lg",15,23,"Ghi đè"],["Ô nhập","px-3","input/padding-x",12,"@input-padding-horizontal-base",11,11,"1:1"]];
+const SHADOWS=[["shadow-xs","shadow/xs","0 1px 2px 0 rgb(0 0 0 / .05)","@btn-shadow","0 2px 0 rgba(0,0,0,.015)","Ghi đè"],["shadow-md","shadow/base","0 4px 6px -1px rgb(0 0 0 / .1), 0 2px 4px -2px rgb(0 0 0 / .1)","@box-shadow-base","0 3px 6px -4px rgba(0,0,0,.12), 0 6px 16px 0 rgba(0,0,0,.08), 0 9px 28px 8px rgba(0,0,0,.05)","Ghi đè"],["ring-[3px] ring/50","focus/width · focus/color","0 0 0 3px #a1a1a1 50%","@outline-width · @outline-fade","2px · 20% màu chính","Ghi đè"]];
+
+/* ===== Tương phản WCAG ===== */
+function rgba(c){c=c.trim(); if(c[0]==="#"){const h=c.slice(1);return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16),1]}
+  const m=c.match(/[\d.]+/g).map(Number); let a=m.length>3?m[3]:1; if(/\//.test(c)&&a>1) a=a/100; return [m[0],m[1],m[2],a];}
+function over(fg,bg){const f=rgba(fg),b=rgba(bg);return [0,1,2].map(i=>f[i]*f[3]+b[i]*(1-f[3]))}
+function lum(c){return c.map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0)}
+function ratio(fg,bg){const b=rgba(bg).slice(0,3),f=over(fg,bg);const L1=lum(f),L2=lum(b);return (Math.max(L1,L2)+.05)/(Math.min(L1,L2)+.05)}
+function cr(fg,bg,big){const r=ratio(fg,bg);const need=big?3:4.5;return `<span class="cr ${r>=need?"ok":r>=3?"mid":"bad"}">${r.toFixed(2)}:1</span>`}
+const PAIRS=[["Chữ / nền trang","text","bg-body",0],["Chữ phụ / nền trang","text-2","bg-body",0],["Chữ phụ / nền phụ","text-2","hover-bg",0],["Chữ gợi ý / nền ô nhập","ph","bg-body",0],["Chữ nút chính / màu chính","primary-fg","primary",0],["Lỗi / nền trang","error","bg-body",0],["Chữ trắng / nút xoá","#ffffff","error",0],["Viền ô nhập / nền (≥3:1 cho viền control)","input-border","bg-body",1]];
+function contrastTable(){
+  const v=(t,k)=>k[0]==="#"?k:t[k];
+  return `<div class="tbl"><table class="t"><tr><th>Cặp màu</th><th>Bộ thử · Light</th><th>Bộ thử · Dark</th><th>Ant Design mặc định</th></tr>${PAIRS.map(([n,f,b,big])=>`<tr><td>${n}</td><td>${cr(v(TEST_LIGHT,f),v(TEST_LIGHT,b),big)}</td><td>${cr(v(TEST_DARK,f),v(TEST_DARK,b),big)}</td><td>${cr(v(ANTD,f),v(ANTD,b),big)}</td></tr>`).join("")}</table></div>
+  <p class="cap">Xanh = đạt AA (chữ ≥ 4.5:1). Vàng = chỉ đạt 3:1 (đủ cho chữ lớn / viền). Đỏ = dưới 3:1. Viền ô nhập #e5e5e5 của shadcn <b>dưới 3:1</b> — giống mọi bộ theo shadcn, Ant Design mặc định cũng thấp; ghi nhận, không tự sửa.</p>`;
+}
+
+/* ===== Trạng thái + lưu ===== */
+const LS="dsantd-foundations-v1";
+let state={}; try{state=JSON.parse(localStorage.getItem(LS)||"{}")}catch(e){}
+let db=null,uid=null,canWrite=true;
+const ans=k=>state[k]?.choice;
+function lsSave(){try{localStorage.setItem(LS,JSON.stringify(state))}catch(e){}}
+async function persist(k){lsSave(); counts(); const st=document.getElementById("sv-"+k);
+  if(!db){ if(st) st.textContent="Đã lưu trong trình duyệt này"; return;}
+  if(!canWrite){ if(st) st.textContent="Bạn chỉ có quyền xem"; return;}
+  try{ if(st) st.textContent="Đang lưu…"; await db.doc("answers/"+k).set({choice:state[k].choice??null,note:state[k].note||"",at:state[k].at,by:uid||null}); if(st) st.textContent="Đã lưu "+new Date(state[k].at).toLocaleString("vi-VN");}
+  catch(e){ if(st) st.textContent="Chưa lưu được lên trang — đã giữ trong trình duyệt"; }}
+
+const GROUPS={"g-color":"Màu","g-type":"Chữ","g-size":"Bo góc · khoảng cách · chiều cao","g-shadow":"Đổ bóng · focus"};
+function decide(k,opts=["Đồng ý","Cần sửa"]){
+  const s=state[k]||{};
+  return `<div class="decide" data-k="${k}"><p class="lbl">Bạn chốt nhóm này</p><div class="opts">${opts.map((o,i)=>`<label class="${s.choice===i?"on":""}"><input type="radio" name="${k}" value="${i}" ${s.choice===i?"checked":""}>${o}</label>`).join("")}</div>
+  <textarea placeholder="Ghi chú — cần sửa gì (vd đổi chiều cao mặc định về 32)…" data-note="${k}">${esc(s.note||"")}</textarea><div class="save" id="sv-${k}"></div></div>`;
+}
+
+/* ===== Các tab ===== */
+const TABS=[["overview","Tổng quan"],["preview","Xem trước"],["color","Màu"],["type","Chữ"],["size","Kích thước"],["shadow","Đổ bóng · focus"],["questions","5 câu cần chốt"]];
+function count(arr){const c={};arr.forEach(r=>{c[r]=(c[r]||0)+1});return c}
+function P_overview(){
+  const all=[...COLORS.map(r=>r[7]),...TYPE.map(r=>r[6]),...RADII.map(r=>r[5]),...SPACE.map(r=>r[3]),...HEIGHTS.map(r=>r[5]),...SHADOWS.map(r=>r[5])];
+  const c=count(all);
+  return `<h2>Bộ thử làm gì</h2>
+  <p class="lead">Figma variable là <mark>nguồn chuẩn</mark>. Tên đặt theo <b>biến Less của ng-zorro</b> (vd <code>@height-base</code> → <code>height/base</code>), giá trị lấy từ <b>shadcn</b>. Dev đọc tên biến trên Figma là biết sửa biến nào trong theme.</p>
+  <div class="grid3">
+   <div class="card"><p class="lbl">Ba trường hợp mỗi token</p><p>${pill("1:1")} trùng cả tên lẫn giá trị — <b>dev không làm gì</b></p><p>${pill("Ghi đè")} Ant Design có biến, giá trị khác — <b>dev đổi giá trị</b></p><p>${pill("Thêm mới")} Ant Design không có — <b>dev thêm biến vào theme</b></p><p style="margin:0">${pill("Chưa chốt")} chờ bạn chọn ở tab cuối</p></div>
+   <div class="card"><p class="lbl">Đếm trong trang này</p><p style="font:400 34px var(--f-head);margin:0">${all.length} token</p><p>${pill("1:1")} ${c["1:1"]||0} · ${pill("Ghi đè")} ${c["Ghi đè"]||0} · ${pill("Thêm mới")} ${c["Thêm mới"]||0} · ${pill("Chưa chốt")} ${c["Chưa chốt"]||0}</p><p class="cap">Chưa tính token riêng component (Button, Input, Select, Checkbox) — duyệt ở bước base components.</p></div>
+   <div class="card"><p class="lbl">Ba quy tắc dev cần nhớ</p><p><b>1. Padding trừ viền.</b> Ant Design không tính viền 1px vào padding: Figma <b>16</b> → dev nhập <b>15</b>.</p><p><b>2. Nền tối là file riêng.</b> ng-zorro không có biến cho nền tối — ghi đè 2 lần (theme mặc định + <code>dark.less</code>).</p><p style="margin:0"><b>3. Màu quy đổi.</b> shadcn dùng <code>oklch</code>, Less cần hex — hex trong bảng là quy đổi.</p></div>
+  </div>
+  <h3>Cách duyệt</h3>
+  <p class="lead">Mỗi tab Màu / Chữ / Kích thước / Đổ bóng có ô <b>Đồng ý / Cần sửa</b> cuối trang. Tab <b>5 câu cần chốt</b> có hình minh hoạ từng phương án — chọn xong, tab <b>Xem trước</b> tự vẽ lại theo lựa chọn. Đủ 9 mục thì Claude đọc kết quả và dựng file Figma mới.</p>`;
+}
+function P_preview(){
+  return `<h2>Xem trước — cùng một màn, Light và Dark</h2>
+  <p class="lead">Mọi số trong hình đọc từ token: chiều cao, padding, bo góc, màu, bóng. Rê chuột lên nút để thấy <b>hover</b>. Hình bộ thử đã áp lựa chọn hiện tại của 5 câu (chưa chọn = theo đề xuất).</p>
+  <div class="grid2"><div>${preview(applyQ(TEST_LIGHT,false),{title:"Bộ thử · Light"})}</div><div>${preview(applyQ(TEST_DARK,true),{dark:true,title:"Bộ thử · Dark"})}</div></div>
+  <h3>Đặt cạnh Ant Design mặc định (chưa ghi đè gì)</h3>
+  <div class="grid2"><div>${preview(applyQ(TEST_LIGHT,false),{title:"Bộ thử · Light"})}</div><div>${preview(ANTD,{antd:true,title:"Ant Design mặc định"})}</div></div>
+  <p class="cap">Khác biệt dễ thấy: bộ thử <b>cao hơn</b> (36 so với 32), <b>bo tròn hơn</b> (8 so với 2), chữ nút <b>đậm 500</b>, focus là <b>vòng xám 3px</b> thay vì vòng xanh 2px, mục đang chọn trong menu có <b>dấu ✓</b> thay vì nền xanh.</p>`;
+}
+function P_color(){
+  return `<h2>Màu</h2>
+  <p class="lead">Màu chính <mark>đen #171717</mark> (chốt 06/11). Nền tối đảo lại: màu chính thành <b>xám sáng #e5e5e5</b>. Hover nút chính là <b>#171717 ở 90%</b> — Ant Design tự sinh màu hover từ dải 10 màu, với màu đen sẽ ra xám nhạt sai, nên <b>phải ghi tay</b>.</p>
+  <div class="tbl"><table class="t"><tr><th>Vai trò</th><th>shadcn</th><th>Figma variable</th><th>Light</th><th>Dark</th><th>Biến ng-zorro</th><th>Mặc định AntD</th><th>TH</th></tr>
+  ${COLORS.map(r=>`<tr><td><b>${r[0]}</b></td><td><code>${esc(r[1])}</code></td><td><code>${esc(r[2])}</code></td><td>${/^#|rgb/.test(r[3])?`<span class="sw" style="background:${r[3]}"></span>`:""}${r[3]}</td><td>${/^#|rgb/.test(r[4])?`<span class="sw" style="background:linear-gradient(${r[4]},${r[4]}),#0a0a0a"></span>`:""}${r[4]}</td><td><code>${esc(r[5])}</code></td><td>${/^#|rgb/.test(r[6])?`<span class="sw" style="background:${r[6]}"></span>`:""}${r[6]}</td><td>${pill(r[7])}</td></tr>`).join("")}
+  </table></div>
+  <h3>Màu biểu đồ — Ant Design không có, thêm mới</h3>
+  <div class="tbl"><table class="t"><tr><th>Figma variable</th><th>Light</th><th>Dark</th></tr>${CHARTS.map(c=>`<tr><td><code>color/${c[0]}</code></td><td><span class="sw" style="background:${c[1]}"></span>${c[1]}</td><td><span class="sw" style="background:${c[2]}"></span>${c[2]}</td></tr>`).join("")}</table></div>
+  <h3>Độ tương phản</h3>${contrastTable()}
+  ${decide("g-color")}`;
+}
+function P_type(){
+  return `<h2>Chữ</h2>
+  <p class="lead">Font <mark>Geist</mark> (chữ) và <mark>Geist Mono</mark> (số, mã). Cỡ chữ của shadcn <b>trùng gần hết</b> thang Ant Design. Khác chính là <b>khoảng cách dòng</b>: shadcn 14/20, Ant Design 14/22 — dev ghi đè <code>@line-height-base</code> = 1.4286. Chữ nút đậm <b>500</b> (Ant Design 400).</p>
+  <div class="tbl"><table class="t"><tr><th>shadcn</th><th>Figma variable</th><th>Cỡ / dòng</th><th>Mẫu (Geist)</th><th>Biến ng-zorro</th><th>AntD</th><th>TH</th></tr>
+  ${TYPE.map(r=>`<tr><td><code>${r[0]}</code></td><td><code>${r[1]}</code></td><td>${r[2]} / ${r[3]}</td><td style="font-family:Geist;font-size:${r[2]}px;line-height:${r[3]}px;white-space:nowrap">Lệnh vận tải 0123</td><td><code>${r[4]}</code></td><td>${r[5]}</td><td>${pill(r[6])}</td></tr>`).join("")}
+  <tr><td><code>font-sans</code></td><td><code>font/family</code></td><td>—</td><td style="font-family:Geist">Geist — Ăn ơn ướt ưỡn ỷ</td><td><code>@font-family</code></td><td>system</td><td>${pill("Ghi đè")}</td></tr>
+  <tr><td><code>font-mono</code></td><td><code>font/code-family</code></td><td>—</td><td style="font-family:'Geist Mono'">LVT-0012 · 51C-123.45</td><td><code>@code-family</code></td><td>SFMono</td><td>${pill("Ghi đè")}</td></tr>
+  <tr><td><code>font-medium</code></td><td><code>font-weight/button</code></td><td>500</td><td style="font-family:Geist;font-weight:500">Lưu lệnh</td><td><code>@btn-font-weight</code></td><td>400</td><td>${pill("Ghi đè")}</td></tr>
+  <tr><td><code>font-semibold</code></td><td><code>font-weight/title</code></td><td>600</td><td style="font-family:Geist;font-weight:600">Tiêu đề khối</td><td><code>@typography-title-font-weight</code></td><td>600</td><td>${pill("1:1")}</td></tr>
+  </table></div>
+  <h3>Đoạn văn: 14/20 Geist so với 14/22 Ant Design</h3>
+  <div class="grid2"><div class="card" style="font:14px/20px Geist"><p class="lbl">Bộ thử</p>Lệnh vận tải được tạo từ đơn hàng. Điều phối chọn xe, tài xế và mooc phù hợp, rồi giao lệnh. Tài xế nhận lệnh trên app và cập nhật từng chặng.</div>
+  <div class="card" style="font:14px/22px -apple-system,'Segoe UI',Roboto,sans-serif;color:rgba(0,0,0,.85)"><p class="lbl">Ant Design mặc định</p>Lệnh vận tải được tạo từ đơn hàng. Điều phối chọn xe, tài xế và mooc phù hợp, rồi giao lệnh. Tài xế nhận lệnh trên app và cập nhật từng chặng.</div></div>
+  ${decide("g-type")}`;
+}
+function P_size(){
+  return `<h2>Bo góc · khoảng cách · chiều cao</h2>
+  <p class="lead">Đây là nhóm làm lệch số lâu nay. Bộ thử gắn <mark>mọi con số vào một thang</mark>: lưới <b>4px</b> trùng thang padding của Ant Design (4/8/12/16/24 là 1:1), chỉ thêm các bậc lẻ shadcn có dùng. Bo góc và chiều cao là chỗ <b>khác Ant Design nhiều nhất</b>.</p>
+  <h3>Bo góc</h3>
+  <div class="sizes" style="margin-bottom:12px">${RADII.filter(r=>r[2]<100).map(r=>`<div style="text-align:center"><div class="rbox" style="border-radius:${r[2]}px"></div><p class="cap">${r[1]}<br><b>${r[2]}</b></p></div>`).join("")}<div style="text-align:center;margin-left:20px"><div class="rbox" style="border-radius:2px;background:#1890ff"></div><p class="cap">AntD mặc định<br><b>2</b></p></div></div>
+  <div class="tbl"><table class="t"><tr><th>shadcn</th><th>Figma variable</th><th>Giá trị</th><th>Biến ng-zorro</th><th>AntD</th><th>TH</th></tr>${RADII.map(r=>`<tr><td><code>${r[0]}</code></td><td><code>${r[1]}</code></td><td>${r[2]}</td><td>${r[3]==="—"?"—":`<code>${r[3]}</code>`}</td><td>${r[4]}</td><td>${pill(r[5])}</td></tr>`).join("")}</table></div>
+  <h3>Khoảng cách</h3>
+  <div class="card">${SPACE.map(r=>`<div class="spc"><span style="width:110px"><code>${r[1]}</code></span><span class="bar" style="width:${r[0]*4}px;background:${r[3]==="1:1"?"#007004":"#5B2BB5"}"></span><b>${r[0]}</b><span style="color:var(--fg-3)">${r[2]}</span>${pill(r[3])}</div>`).join("")}<p class="cap">Thanh dài gấp 4 lần giá trị thật để dễ so.</p></div>
+  <h3>Chiều cao control</h3>
+  <div class="card"><div class="sizes" style="font-family:Geist">${HEIGHTS.map(r=>`<div style="text-align:center"><button style="height:${r[2]}px;padding:0 ${r[2]>=40?23:r[2]>=36?15:r[2]>=32?11:7}px;border-radius:8px;background:#171717;color:#fafafa;border:1px solid transparent;font:500 ${r[2]<=24?12:14}px Geist">Nút ${r[2]}</button><p class="cap">${r[1]}</p></div>`).join("")}
+  <div style="text-align:center;margin-left:24px">${[24,32,40].map(h=>`<button style="height:${h}px;padding:0 ${h===24?7:15}px;border-radius:2px;background:#1890ff;color:#fff;border:0;font:${h===40?16:14}px -apple-system,sans-serif;margin-right:6px">${h}</button>`).join("")}<p class="cap">Ant Design: small 24 · default 32 · large 40</p></div></div></div>
+  <div class="tbl"><table class="t"><tr><th>shadcn</th><th>Figma variable</th><th>Giá trị</th><th>Biến ng-zorro</th><th>AntD</th><th>TH</th></tr>${HEIGHTS.map(r=>`<tr><td><code>${r[0]}</code></td><td><code>${r[1]}</code></td><td>${r[2]}</td><td>${r[3]==="—"?"— (ng-zorro chỉ có 3 cỡ)":`<code>${r[3]}</code>`}</td><td>${r[4]}</td><td>${pill(r[5])}</td></tr>`).join("")}</table></div>
+  <h3>Padding ngang — quy tắc trừ viền</h3>
+  <p class="lead">Ant Design không tính viền 1px vào padding. Cột <b>Dev nhập</b> = Figma − 1. Nút mặc định và ô nhập vì thế <b>trùng 1:1</b> với mặc định Ant Design.</p>
+  <div class="tbl"><table class="t"><tr><th>Chỗ dùng</th><th>shadcn</th><th>Figma variable</th><th>Figma</th><th>Biến ng-zorro</th><th>AntD mặc định</th><th>Dev nhập</th><th>TH</th></tr>${PADS.map(r=>`<tr><td>${r[0]}</td><td><code>${r[1]}</code></td><td><code>${r[2]}</code></td><td><b>${r[3]}</b></td><td><code>${r[4]}</code></td><td>${r[5]}</td><td><b>${r[6]}</b></td><td>${pill(r[7])}</td></tr>`).join("")}</table></div>
+  ${decide("g-size")}`;
+}
+function P_shadow(){
+  return `<h2>Đổ bóng · focus</h2>
+  <p class="lead">shadcn dùng bóng <b>rất nhẹ</b> (<code>shadow-xs</code>) cho nút viền và ô nhập, bóng <code>shadow-md</code> cho menu xổ. Focus là <mark>vòng xám 3px</mark> ở 50% — không theo màu chính. Ant Design dùng vòng xanh 2px theo màu chính, nút có bóng gạch dưới 2px.</p>
+  <div class="grid3">${[["shadow/xs",TEST_LIGHT["sh-xs"]],["shadow/base",TEST_LIGHT["sh-md"]],["AntD @box-shadow-base",ANTD["sh-md"]]].map(([n,s])=>`<div class="card" style="display:flex;align-items:center;justify-content:center;background:#fafafa"><div style="width:180px;height:90px;background:#fff;border-radius:10px;box-shadow:${s};display:flex;align-items:center;justify-content:center;font:500 13px Geist">${n}</div></div>`).join("")}</div>
+  <div class="grid2">
+   <div class="pv" style="${styleOf(TEST_LIGHT)}"><p class="tag">Focus bộ thử</p><div class="row"><button class="b p f">Lưu lệnh</button><button class="b o f">Huỷ</button><div class="in f">51C-123.45</div></div></div>
+   <div class="pv" style="${styleOf(ANTD)}"><p class="tag">Focus Ant Design</p><div class="row"><button class="b p f">Lưu lệnh</button><button class="b o f">Huỷ</button><div class="in f">51C-123.45</div></div></div>
+  </div>
+  <div class="tbl" style="margin-top:14px"><table class="t"><tr><th>shadcn</th><th>Figma variable</th><th>Giá trị</th><th>Biến ng-zorro</th><th>AntD</th><th>TH</th></tr>${SHADOWS.map(r=>`<tr><td><code>${r[0]}</code></td><td><code>${r[1]}</code></td><td style="font:12px var(--f-mono)">${r[2]}</td><td><code>${r[3]}</code></td><td style="font:12px var(--f-mono)">${r[4]}</td><td>${pill(r[5])}</td></tr>`).join("")}
+  <tr><td>—</td><td><code>shadow/btn-primary</code></td><td>none</td><td><code>@btn-primary-shadow</code></td><td style="font:12px var(--f-mono)">0 2px 0 rgba(0,0,0,.045)</td><td>${pill("Ghi đè")}</td></tr></table></div>
+  ${decide("g-shadow")}`;
+}
+
+/* 5 câu: mỗi phương án có hình */
+function mini(t,inner){return `<div class="pv" style="${styleOf(t)};padding:16px;border:0;border-radius:0">${inner}</div>`}
+const Q=[
+ {k:"q1",t:"Câu 1 — Trạng thái tắt (disabled) trông thế nào?",
+  ctx:"shadcn làm <b>mờ cả control 50%</b> (<code>opacity-50</code>). Ant Design <b>đổi màu riêng</b>: chữ <code>@disabled-color</code> đen 25%, nền <code>@disabled-bg</code> #f5f5f5. Theo cách shadcn thì dev phải <b>viết CSS riêng</b> cho từng component ng-zorro; theo cách Ant Design thì chỉ <b>ghi đè 2 biến màu</b>.",
+  rec:2,opts:[
+   ["A. Mờ 50% như shadcn","Giống nguồn nhất. Dev viết thêm CSS cho mọi component có trạng thái tắt.",()=>mini(TEST_LIGHT,`<div class="row" style="margin:0"><button class="b p dis-op">Lưu lệnh</button><button class="b o dis-op">Huỷ</button><div class="in dis-op" style="width:150px">Không sửa</div></div>`)],
+   ["B. Màu Ant Design mặc định","Dev không làm gì. Chữ đen 25%, nền #f5f5f5, viền #d9d9d9 — viền lệch tông với viền #e5e5e5 của bộ thử.",()=>mini({...TEST_LIGHT,"dis-bg":"#f5f5f5","dis-fg":"rgba(0,0,0,.25)","dis-border":"#d9d9d9"},`<div class="row" style="margin:0"><button class="b p dis-ad">Lưu lệnh</button><button class="b o dis-ad">Huỷ</button><div class="in dis-ad" style="width:150px">Không sửa</div></div>`)],
+   ["C. Cách Ant Design, màu bộ thử","Dev chỉ ghi đè 3 biến: chữ #a1a1a1, nền #f5f5f5, viền #e5e5e5. Đồng tông với bộ thử.",()=>mini(TEST_LIGHT,`<div class="row" style="margin:0"><button class="b p dis-ad">Lưu lệnh</button><button class="b o dis-ad">Huỷ</button><div class="in dis-ad" style="width:150px">Không sửa</div></div>`)],
+  ]},
+ {k:"q2",t:"Câu 2 — Màu thông tin (info) khi màu chính là đen?",
+  ctx:"Ant Design lấy <code>@info-color</code> = <b>màu chính</b>. Màu chính đen thì thông báo info, tag info, trạng thái \"đang xử lý\" (<code>@processing-color</code>) cũng <b>đen</b> — khó phân biệt với chữ thường.",
+  rec:1,opts:[
+   ["A. Giữ theo màu chính (đen)","Dev không làm gì. Info trông như chữ thường.",()=>mini({...TEST_LIGHT,info:"#171717"},`<div class="al" style="${alertCols({...TEST_LIGHT,info:"#171717"},false)}">${ICON.info}<div><b>Có 3 lệnh chờ điều xe</b></div></div>`)],
+   ["B. Xanh Ant Design #1890ff","Dev ghi đè <code>@info-color</code> (và <code>@processing-color</code>) về xanh gốc Ant Design.",()=>mini({...TEST_LIGHT,info:"#1890ff"},`<div class="al" style="${alertCols({...TEST_LIGHT,info:"#1890ff"},false)}">${ICON.info}<div><b>Có 3 lệnh chờ điều xe</b></div></div>`)],
+   ["C. Xanh Tailwind blue-600 #155dfc","Cùng hệ màu với shadcn (Tailwind). Dev ghi đè như B.",()=>mini({...TEST_LIGHT,info:"#155dfc"},`<div class="al" style="${alertCols({...TEST_LIGHT,info:"#155dfc"},false)}">${ICON.info}<div><b>Có 3 lệnh chờ điều xe</b></div></div>`)],
+  ]},
+ {k:"q3",t:"Câu 3 — Khi nhấn nút và khi rê chuột lên ô nhập có đổi màu không?",
+  ctx:"shadcn chỉ có <b>hover</b> (nút chính đậm 90%), <b>không có trạng thái nhấn</b>, ô nhập <b>không đổi viền khi hover</b>. Ant Design có cả hai (<code>@primary-color-active</code>, <code>@input-hover-border-color</code>). Rê chuột / nhấn thử vào hình.",
+  rec:0,opts:[
+   ["A. Như shadcn — không đổi","Dev đặt <code>@primary-color-active</code> = màu hover, <code>@input-hover-border-color</code> = màu viền.",()=>mini(TEST_LIGHT,`<div class="row" style="margin:0"><button class="b p">Nhấn thử</button><div class="in ph" style="width:150px">Rê chuột</div></div>`)],
+   ["B. Có phản hồi","Nhấn: nút đậm hơn (#454545). Hover ô nhập: viền #a1a1a1.",()=>mini({...TEST_LIGHT,"primary-active":"#454545","input-hover-border":"#a1a1a1"},`<div class="row" style="margin:0"><button class="b p">Nhấn thử</button><div class="in ph" style="width:150px">Rê chuột</div></div>`)],
+  ]},
+ {k:"q4",t:"Câu 4 — Nền trang và thanh trên (header) của layout?",
+  ctx:"Ant Design mặc định nền trang <code>@layout-body-background</code> <b>#f0f2f5</b> (xám xanh) và header <code>@layout-header-background</code> <b>#001529</b> (xanh đen). shadcn dùng <b>nền trắng toàn trang</b>, sidebar #fafafa, header trắng có viền dưới.",
+  rec:0,opts:[
+   ["A. Trắng như shadcn","Nền trắng, sidebar #fafafa, header trắng. Khối nội dung tách bằng viền.",()=>layoutMini("#ffffff","#ffffff","#0a0a0a","#fafafa")],
+   ["B. Ant Design mặc định","Nền #f0f2f5, header #001529 chữ trắng. Khối nội dung là card trắng trên nền xám.",()=>layoutMini("#f0f2f5","#001529","#ffffff","#ffffff")],
+   ["C. Nền xám rất nhạt","Nền #fafafa, header trắng, card trắng — khối nổi nhẹ mà vẫn cùng tông shadcn.",()=>layoutMini("#fafafa","#ffffff","#0a0a0a","#ffffff")],
+  ]},
+ {k:"q5",t:"Câu 5 — Màu thành công / cảnh báo ở nền tối",
+  ctx:"shadcn không có 2 màu này, bảng đang giữ màu Ant Design. Ở nền tối, Ant Design dùng <b>bản dịu</b> (#49aa19, #d89614) cho đỡ chói.",
+  rec:0,opts:[
+   ["A. Bản dịu của Ant Design dark","Dev dùng sẵn trong <code>dark.less</code>, không làm gì thêm.",()=>mini({...TEST_DARK},`<div style="display:flex;gap:6px">${["#49aa19","#d89614"].map((c,i)=>`<span class="tg" style="color:${c};border-color:color-mix(in srgb,${c} 45%,transparent);background:color-mix(in srgb,${c} 16%,#0a0a0a)">${i?"Sắp hết hạn":"Đã giao"}</span>`).join("")}</div>`)],
+   ["B. Giữ như Light","#52c41a, #faad14 — sáng hơn, nổi hơn trên nền tối.",()=>mini({...TEST_DARK},`<div style="display:flex;gap:6px">${["#52c41a","#faad14"].map((c,i)=>`<span class="tg" style="color:${c};border-color:color-mix(in srgb,${c} 45%,transparent);background:color-mix(in srgb,${c} 16%,#0a0a0a)">${i?"Sắp hết hạn":"Đã giao"}</span>`).join("")}</div>`)],
+  ]},
+];
+function layoutMini(body,head,headFg,side){
+  return `<div style="font:12px Geist;border-bottom:1px solid #e5e5e5"><div style="height:30px;background:${head};color:${headFg};display:flex;align-items:center;padding:0 10px;font-weight:600;border-bottom:1px solid ${head==="#001529"?head:"#e5e5e5"}">invlogis</div>
+  <div style="display:flex;height:120px"><div style="width:70px;background:${side};border-right:1px solid #e5e5e5;padding:8px;color:#737373">Lệnh<br>Xe<br>Tài xế</div>
+  <div style="flex:1;background:${body};padding:10px"><div style="background:#fff;border:1px solid #e5e5e5;border-radius:10px;height:100%;padding:8px;color:#0a0a0a">Danh sách lệnh</div></div></div></div>`;
+}
+function P_questions(){
+  return `<h2>5 câu cần chốt</h2><p class="lead">Mỗi câu có hình minh hoạ cho từng phương án. Chọn xong, tab <b>Xem trước</b> vẽ lại theo lựa chọn. Nhãn <span class="rec">Đề xuất</span> là phương án Claude nghiêng về — kèm lý do trong mô tả.</p>
+  ${Q.map(q=>{const s=state[q.k]||{};return `<div class="q" data-k="${q.k}"><h3>${q.t}</h3><p class="ctx">${q.ctx}</p>
+   <div class="qopts">${q.opts.map((o,i)=>`<div class="qo ${s.choice===i?"on":""}" data-qk="${q.k}" data-i="${i}" role="radio" aria-checked="${s.choice===i}" tabindex="0">${o[2]()}<div class="qcap"><b>${o[0]}${q.rec===i?'<span class="rec">Đề xuất</span>':""}</b>${o[1]}</div></div>`).join("")}</div>
+   <textarea placeholder="Ghi chú thêm (không bắt buộc)…" data-note="${q.k}">${esc(s.note||"")}</textarea><div class="save" id="sv-${q.k}"></div></div>`}).join("")}`;
+}
+
+const KEYS=[...Object.keys(GROUPS),...Q.map(q=>q.k)];
+let current="overview";
+function render(){
+  const R={overview:P_overview,preview:P_preview,color:P_color,type:P_type,size:P_size,shadow:P_shadow,questions:P_questions};
+  $("#panels").innerHTML=`<section>${R[current]()}</section>`;
+  $("#tabs").innerHTML=TABS.map(([k,l])=>{let n="";if(k==="questions"){const d=Q.filter(q=>ans(q.k)!=null).length;n=`<span class="n">${d}/5</span>`} const g={color:"g-color",type:"g-type",size:"g-size",shadow:"g-shadow"}[k]; if(g&&ans(g)!=null) n=`<span class="n">${ans(g)===0?"✓":"sửa"}</span>`; return `<button role="tab" aria-selected="${k===current}" data-tab="${k}">${l}${n}</button>`}).join("");
+  counts();
+}
+function counts(){const d=KEYS.filter(k=>ans(k)!=null).length; $("#cnt").textContent=`Đã chốt ${d}/${KEYS.length}`; $("#prog").style.width=(d/KEYS.length*100)+"%";}
+document.addEventListener("click",e=>{
+  const tb=e.target.closest("[data-tab]"); if(tb){current=tb.dataset.tab; try{history.replaceState(null,"","#"+current)}catch(_){}; render(); window.scrollTo(0,0); return;}
+  const qo=e.target.closest(".qo"); if(qo){const k=qo.dataset.qk; state[k]={...(state[k]||{}),choice:+qo.dataset.i,at:Date.now()}; persist(k); render(); return;}
+});
+document.addEventListener("change",e=>{const r=e.target; if(r.type==="radio"&&r.name){state[r.name]={...(state[r.name]||{}),choice:+r.value,at:Date.now()}; persist(r.name); render();}});
+let nt={}; document.addEventListener("input",e=>{const k=e.target.dataset?.note; if(!k) return; state[k]={...(state[k]||{}),note:e.target.value,at:Date.now()}; clearTimeout(nt[k]); nt[k]=setTimeout(()=>persist(k),700);});
+$("#btn-export").onclick=()=>{const L=["Duyệt foundations — bộ thử shadcn → Ant Design",""];
+  Object.entries(GROUPS).forEach(([k,n])=>{const s=state[k]||{}; L.push(`- ${n}: ${s.choice==null?"(chưa chọn)":["Đồng ý","Cần sửa"][s.choice]}${s.note?" — "+s.note.replace(/\n/g," "):""}`)});
+  Q.forEach(q=>{const s=state[q.k]||{}; L.push(`- ${q.t}: ${s.choice==null?"(chưa chọn)":q.opts[s.choice][0]}${s.note?" — "+s.note.replace(/\n/g," "):""}`)});
+  const o=$("#out"); o.textContent=L.join("\n"); o.hidden=false;};
+{const h=location.hash.slice(1); if(TABS.some(t=>t[0]===h)) current=h;}
+window.addEventListener("hashchange",()=>{const h=location.hash.slice(1); if(TABS.some(t=>t[0]===h)&&h!==current){current=h;render()}});
+render();
+(async()=>{
+  if(!window.claude?.use){$("#store").textContent="Lưu trong trình duyệt này";return;}
+  const [d,u]=await Promise.all([claude.use("db"),claude.use("user")]);
+  if(!d){$("#store").textContent="Lưu trong trình duyệt này";return;}
+  db=d; try{uid=u?await u.id():null}catch(e){}
+  try{const w=u?await u.can("data.write"):null; if(w===false) canWrite=false;}catch(e){}
+  $("#store").textContent=canWrite?"Lựa chọn lưu trên trang, Claude đọc được":"Bạn chỉ có quyền xem trang này";
+  db.collection("answers").onSnapshot(snap=>{let ch=false;
+    snap.docs.forEach(doc=>{const x=doc.data(); if(!x) return; const cur=state[doc.id];
+      if(!cur||(x.at||0)>(cur.at||0)){state[doc.id]={choice:x.choice??undefined,note:x.note||"",at:x.at}; ch=true;}});
+    if(ch){lsSave(); const a=document.activeElement; if(!(a&&a.tagName==="TEXTAREA")) render(); else counts();}
+  },()=>{$("#store").textContent="Mất kết nối nơi lưu — lựa chọn vẫn giữ trong trình duyệt này";});
+})();
+</script>
+</body>
+</html>

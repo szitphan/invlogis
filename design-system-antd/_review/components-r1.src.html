@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chọn biến thể base components — bộ thử Ant Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F1F1F1;--surface:#fff;--sunk:#F6F7F9;--line:#E3E5E8;--line-strong:#D4D4D4;--fg:#171717;--fg-2:#525252;--fg-3:#737373;--brand:#0036B5;--ink:#0036B5;--ink-soft:#E5ECFA;
+--ok:#007004;--ok-soft:#E3F2E0;--bad:#A50C25;--bad-soft:#FCE4E2;--new:#5B2BB5;--new-soft:#EEE6FB;
+--f-head:'Cal Sans','Inter',system-ui,sans-serif;--f-body:'Inter',system-ui,sans-serif;--f-mono:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--f-body)}
+.band{background:var(--brand);color:#fff}.band-in{max-width:1240px;margin:0 auto;padding:20px 24px 0}
+.band img{height:28px;display:block;margin-bottom:12px}.band h1{font:400 30px/1.2 var(--f-head);margin:0 0 6px}
+.band p{margin:0 0 14px;opacity:.92;max-width:940px}.band mark{background:rgba(255,255,255,.22);color:#fff;border-radius:4px;padding:0 4px}
+.tabs{display:flex;gap:2px;flex-wrap:wrap}.tabs button{border:0;background:transparent;color:#fff;opacity:.78;font:500 14px var(--f-body);padding:10px 14px;border-radius:8px 8px 0 0;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--bg);color:var(--brand);opacity:1}.tabs .n{display:inline-block;margin-left:6px;border-radius:9px;background:rgba(255,255,255,.25);font-size:11px;padding:0 6px}
+.tabs button[aria-selected="true"] .n{background:var(--ink-soft)}
+.wrap{max-width:1240px;margin:0 auto;padding:20px 24px 80px}
+.status{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px;font-size:13px;color:var(--fg-3)}
+.status .bar{flex:1;min-width:120px;height:6px;background:var(--line);border-radius:3px;overflow:hidden}.status .bar i{display:block;height:100%;background:var(--brand);width:0}
+h2{font:400 24px/1.3 var(--f-head);margin:4px 0 6px}h3{font:600 15px var(--f-body);margin:22px 0 10px;color:var(--fg-2)}
+p.lead{color:var(--fg-2);max-width:940px;margin:0 0 12px}mark{background:color-mix(in srgb,#00A2FF 22%,transparent);color:inherit;border-radius:3px;padding:0 2px}
+code{font:500 12px var(--f-mono);color:var(--ink);background:var(--ink-soft);border-radius:5px;padding:1px 5px;white-space:nowrap}
+.btnx{border:1px solid var(--line-strong);background:var(--surface);border-radius:8px;padding:7px 14px;font:500 14px var(--f-body);cursor:pointer}
+pre.out{white-space:pre-wrap;background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:12px;font:12px/1.5 var(--f-mono)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.v{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.v.drop{opacity:.62}.v.drop .stage{filter:grayscale(.6)}
+.v .stage{padding:18px;min-height:96px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);background:#fff}
+.v .body{padding:10px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.v .t{font-weight:600}.v .meta{font-size:12px;color:var(--fg-3);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.v .why{font-size:13px;color:var(--fg-2)}
+.src{font:600 10px var(--f-body);text-transform:uppercase;letter-spacing:.04em;border-radius:4px;padding:1px 5px}
+.src.ng{background:var(--ok-soft);color:var(--ok)}.src.sh{background:var(--new-soft);color:var(--new)}.src.both{background:var(--ink-soft);color:var(--ink)}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;margin-top:auto;align-self:flex-start}
+.seg button{border:0;background:#fff;font:500 13px var(--f-body);padding:5px 12px;cursor:pointer;color:var(--fg)}
+.seg button.k[aria-pressed="true"]{background:var(--ok);color:#fff}.seg button.d[aria-pressed="true"]{background:var(--bad);color:#fff}
+.rec{font-size:11px;font-weight:700;color:var(--brand);background:var(--ink-soft);border-radius:4px;padding:0 5px}
+.note{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:18px}
+textarea{width:100%;min-height:44px;resize:vertical;border:1px solid var(--line-strong);border-radius:8px;padding:8px 10px;font:14px/1.5 var(--f-body)}
+.save{font-size:12px;color:var(--fg-3);min-height:16px}
+.sum{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.sum .c{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer}
+.sum .c b{font:400 18px var(--f-head)}
+
+/* ===== preview — token đã chốt (foundations.md) ===== */
+.pv{--font:'Geist',system-ui,sans-serif;-webkit-font-smoothing:antialiased;--text:#0a0a0a;--text-2:#737373;--bg-body:#fff;--primary:#171717;--primary-fg:#fafafa;--primary-hover:#2e2e2e;--primary-active:#454545;
+ --border:#e5e5e5;--input-border:#e5e5e5;--input-hover:#a1a1a1;--hover-bg:#f5f5f5;--ring:rgb(161 161 161/.5);--ring-b:#a1a1a1;--error:#e7000b;--success:#52c41a;--warning:#faad14;--info:#155dfc;
+ --h:36px;--h-sm:32px;--h-lg:40px;--h-xs:24px;--r:8px;--r-sm:6px;--r-lg:10px;--sh-xs:0 1px 2px 0 rgb(0 0 0/.05);--sh-md:0 4px 6px -1px rgb(0 0 0/.1),0 2px 4px -2px rgb(0 0 0/.1);
+ font:14px/20px var(--font);color:var(--text);display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
+.pv *{box-sizing:border-box;font-family:inherit}
+.pv .b{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:var(--h);padding:0 11px;border-radius:var(--r);font-size:14px;font-weight:500;letter-spacing:-.25px;line-height:1;border:1px solid transparent;background:none;color:var(--text);cursor:pointer;white-space:nowrap;transition:background .12s,opacity .12s}
+.pv .b.sm{height:var(--h-sm);padding:0 9px}.pv .b.lg{height:var(--h-lg);padding:0 15px}.pv .b.xs{height:var(--h-xs);padding:0 7px;font-size:12px;gap:4px}
+.pv .b:active,.pv .b.is-p{opacity:.6}
+.pv .b.p{background:var(--primary);color:var(--primary-fg)}.pv .b.p:hover,.pv .b.p.is-h{background:var(--primary-hover)}
+.pv .b.o{background:#fff;border-color:var(--border)}.pv .b.o:hover,.pv .b.t:hover,.pv .b.o.is-h,.pv .b.t.is-h{background:var(--hover-bg)}
+.pv .b.is-f{box-shadow:0 0 0 3px var(--ring);border-color:var(--ring-b)}
+.pv .b.dash{background:#fff;border:1px dashed var(--border)}.pv .b.sec{background:#f5f5f5;color:#171717}.pv .b.sec:hover,.pv .b.sec.is-h{background:#ebebeb}
+.pv .b.l{color:var(--primary);text-underline-offset:4px}.pv .b.l:hover,.pv .b.l.is-h{text-decoration:underline}
+.pv .b.d{background:rgb(231 0 11/.1);color:var(--error)}.pv .b.d:hover,.pv .b.d.is-h{background:rgb(231 0 11/.2)}.pv .b.d.is-f{box-shadow:0 0 0 3px rgb(231 0 11/.2);border-color:transparent}
+.pv .b.do{background:#fff;border-color:var(--error);color:var(--error)}
+.pv .b.gh{background:transparent;border-color:#fff;color:#fff}
+.pv .b.ic{width:var(--h);padding:0}.pv .b.ic.xs{width:var(--h-xs)}.pv .b.ic.sm{width:var(--h-sm)}.pv .b.ic.lg{width:var(--h-lg)}.pv .b.xs svg{width:14px;height:14px}
+.pv .b.circle{width:var(--h);padding:0;border-radius:999px}.pv .b.round{border-radius:999px}
+.pv .b.block{width:220px}.pv .dis{opacity:.5;pointer-events:none}
+.pv svg{width:16px;height:16px;flex:none}
+.pv .spin{width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sp 0.8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.pv .dark{background:#0a0a0a;padding:12px;border-radius:10px}
+.pv .in{display:flex;align-items:center;gap:8px;height:var(--h);padding:0 11px;border:1px solid transparent;border-radius:999px;background:#f2f2f2;box-shadow:none;width:220px;color:var(--text)}
+.pv .in.sm{height:var(--h-sm)}.pv .in.lg{height:var(--h-lg)}
+.pv .in.ph{color:var(--text-2)}.pv .in:hover{border-color:transparent}
+.pv .in.err{border-color:var(--error);box-shadow:0 0 0 3px rgb(231 0 11/.2)}.pv .in.warn{border-color:var(--warning);box-shadow:0 0 0 3px rgb(250 173 20/.2)}
+.pv .in.bl{border-color:transparent;box-shadow:none;background:transparent}
+.pv .in .end{margin-left:auto;color:var(--text-2);display:flex}
+.pv .grp{display:flex;width:240px}.pv .grp .add{display:flex;align-items:center;padding:0 11px;border:1px solid var(--input-border);background:#fafafa;color:var(--text-2);height:var(--h)}
+.pv .grp .add.l{border-radius:var(--r) 0 0 var(--r);border-right:0}.pv .grp .add.r{border-radius:0 var(--r) var(--r) 0;border-left:0}
+.pv .grp .in{border-radius:0;flex:1;width:auto}.pv .grp .in.rl{border-radius:0 var(--r) var(--r) 0}.pv .grp .in.rr{border-radius:var(--r) 0 0 var(--r)}
+.pv .ta{width:220px;min-height:72px;border:1px solid var(--input-border);border-radius:var(--r);padding:8px 11px;box-shadow:var(--sh-xs);position:relative;color:var(--text-2)}
+.pv .ta .cnt{position:absolute;right:8px;bottom:4px;font-size:12px}
+.pv .help{font-size:12px;color:var(--error);margin-top:4px}
+.pv .chip{display:inline-flex;align-items:center;gap:4px;height:22px;padding:0 4px 0 8px;background:#f5f5f5;border-radius:var(--r-sm);font-size:12px;color:var(--text)}
+.pv .menu{background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh-md);padding:4px;width:220px;margin-top:6px;text-align:left}
+.pv .mi{display:flex;align-items:center;padding:6px 32px 6px 8px;border-radius:var(--r-sm);position:relative}
+.pv .mi.h{background:var(--hover-bg)}.pv .mi.g{font-size:12px;color:var(--text-2);padding:6px 8px}.pv .mi.x{opacity:.5}
+.pv .mi .ck{position:absolute;right:8px}
+.pv .col{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.pv .cb{display:inline-flex;align-items:flex-start;gap:8px}
+.pv .cb i{width:16px;height:16px;border:1px solid var(--input-border);border-radius:4px;display:inline-flex;align-items:center;justify-content:center;box-shadow:var(--sh-xs);background:#fff;flex:none;margin-top:2px}
+.pv .cb i.on{background:var(--primary);border-color:var(--primary);color:var(--primary-fg)}.pv .cb i svg{width:14px;height:14px}
+.pv .cb i.ind::after{content:"";width:8px;height:2px;background:var(--primary-fg)}
+.pv .cb small{display:block;color:var(--text-2);font-size:13px}
+.pv .card{border:1px solid var(--border);border-radius:var(--r-lg);padding:12px;width:220px}.pv .card.on{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary)}
+.pv .rd{width:16px;height:16px;border:1px solid var(--input-border);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;box-shadow:var(--sh-xs);flex:none;margin-top:2px}
+.pv .rd.on{border-color:var(--primary)}.pv .rd.on::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--primary)}
+.pv .rbg{display:inline-flex}.pv .rbg span{height:var(--h);padding:0 15px;display:flex;align-items:center;border:1px solid var(--input-border);margin-left:-1px;background:#fff;font-weight:500}
+.pv .rbg span:first-child{border-radius:var(--r) 0 0 var(--r);margin:0}.pv .rbg span:last-child{border-radius:0 var(--r) var(--r) 0}
+.pv .rbg span.on{border-color:var(--primary);position:relative;z-index:1}.pv .rbg.solid span.on{background:var(--primary);color:var(--primary-fg)}
+.pv .seg2{display:inline-flex;background:#f5f5f5;border-radius:var(--r);padding:3px}.pv .seg2 span{padding:0 12px;height:30px;display:flex;align-items:center;border-radius:6px;font-weight:500;color:var(--text-2)}.pv .seg2 span.on{background:#fff;color:var(--text);box-shadow:var(--sh-xs)}
+.pv .sw{width:32px;height:18px;border-radius:999px;background:#e5e5e5;position:relative;flex:none;box-shadow:var(--sh-xs)}
+.pv .sw::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgb(0 0 0/.2)}
+.pv .sw.on{background:var(--primary)}.pv .sw.on::after{left:16px}
+.pv .sw.sm{width:24px;height:14px}.pv .sw.sm::after{width:10px;height:10px}.pv .sw.sm.on::after{left:12px}
+.pv .sw.txt{width:52px}.pv .sw.txt.on::after{left:36px}.pv .sw.txt span{position:absolute;left:8px;top:1px;font-size:11px;color:#fff}
+.pv .sw.ld::after{display:flex}
+.pv .tag{display:inline-flex;align-items:center;gap:4px;height:22px;padding:0 8px;border-radius:var(--r-sm);font-size:12px;font-weight:500;border:1px solid var(--border);background:#fafafa;color:var(--text)}
+.pv .tag.c{color:var(--c);border-color:color-mix(in srgb,var(--c) 40%,transparent);background:color-mix(in srgb,var(--c) 8%,#fff)}
+.pv .tag.solid{background:var(--primary);color:var(--primary-fg);border-color:transparent}
+.pv .tag.sec{background:#f5f5f5;border-color:transparent}
+.pv .tag.chk{border-color:transparent;background:transparent}.pv .tag.chk.on{background:var(--primary);color:var(--primary-fg)}
+.pv .tt{position:relative;display:inline-flex}.pv .tip{position:absolute;background:var(--primary);color:var(--primary-fg);font-size:12px;line-height:16px;padding:6px 12px;border-radius:var(--r);white-space:nowrap}
+.pv .tip::after{content:"";position:absolute;width:8px;height:8px;background:inherit;transform:rotate(45deg)}
+.pv .tip.top{bottom:calc(100% + 8px);left:50%;translate:-50% 0}.pv .tip.top::after{bottom:-3px;left:calc(50% - 4px)}
+.pv .tip.bottom{top:calc(100% + 8px);left:50%;translate:-50% 0}.pv .tip.bottom::after{top:-3px;left:calc(50% - 4px)}
+.pv .tip.right{left:calc(100% + 8px);top:50%;translate:0 -50%}.pv .tip.right::after{left:-3px;top:calc(50% - 4px)}
+.pv .tip.tl{bottom:calc(100% + 8px);left:0}.pv .tip.tl::after{bottom:-3px;left:12px}
+.pv .tip.na::after{display:none}
+.pv .tip.light{background:#fff;color:var(--text);border:1px solid var(--border);box-shadow:var(--sh-md)}
+.pv .tip.blue{background:#155dfc;color:#fff}
+.tstage{padding-top:48px!important}
+
+/* ===== Button r2: lưới kit, mẫu ghép, nút trượt ===== */
+.kit{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin:8px 0 18px;overflow-x:auto}
+.kit table{border-collapse:collapse;font-size:12px}.kit th{font:500 12px var(--f-body);color:var(--fg-3);text-align:left;padding:6px 10px;white-space:nowrap}
+.kit td{padding:8px 10px;border-top:1px solid var(--line)}.kit td.n{font:500 12px var(--f-mono);color:var(--fg-2);white-space:nowrap}
+.kit .pv{justify-content:flex-start;flex-wrap:nowrap}
+.pv .hg{display:inline-flex}.pv .hg>*{border-radius:0}.pv .hg>*:first-child{border-radius:var(--r) 0 0 var(--r)}.pv .hg>*:last-child{border-radius:0 var(--r) var(--r) 0}.pv .hg>*+*{margin-left:-1px}
+.pv .hg>.in:first-child{border-radius:999px 0 0 999px}.pv .hg .sep{border-left:1px solid rgb(255 255 255/.2)}
+.pv .vg{display:inline-flex;flex-direction:column}.pv .vg>*:first-child{border-radius:var(--r-sm) var(--r-sm) 0 0}.pv .vg>*:last-child{border-radius:0 0 var(--r-sm) var(--r-sm);margin-top:-1px}
+.pv .num{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:var(--h);border:1px solid var(--border);margin-left:-1px;font-variant-numeric:tabular-nums}
+.pv .cnt-in{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#f5f5f5;font-size:12px}
+.pv .kbd{font:500 11px var(--f-mono);color:var(--text-2);border:1px solid var(--border);border-radius:4px;padding:1px 4px;letter-spacing:0}
+.pv .av{width:28px;height:28px;border-radius:50%;background:#e5e5e5;display:inline-grid;place-items:center;font-size:11px;font-weight:600}
+.pv .bwrap{position:relative;display:inline-flex}.pv .dot{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--error);color:#fff;font-size:11px;font-weight:600;display:grid;place-items:center;border:2px solid #fff}
+.pv.tdark{background:#0a0a0a;border-radius:10px;padding:16px}
+.pv:has(.sl){width:100%}
+.pv .sl{width:100%;max-width:280px;height:56px;touch-action:none;user-select:none;-webkit-user-select:none}
+.pv .sl-track{position:relative;height:100%;border-radius:18px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;cursor:grab;transform-origin:center}
+.pv .sl.bd .sl-track{background:#fff;box-shadow:inset 0 0 0 1px var(--border)}
+.pv .sl-wash{position:absolute;left:4px;top:4px;bottom:4px;width:48px;border-radius:14px;background:rgb(23 23 23/.08)}
+.pv .sl-say{position:relative;font-size:14px;font-weight:500;letter-spacing:-.25px;color:var(--text-2);pointer-events:none;padding-left:40px}
+.pv .sl-grip{position:absolute;left:4px;top:4px;height:48px;width:48px;border-radius:14px;border:0;padding:0;background:var(--primary);color:var(--primary-fg);display:flex;align-items:center;justify-content:center;transform-origin:left center;overflow:hidden;cursor:grab;font:inherit}
+.pv .sl-grip:focus-visible{outline:none;box-shadow:0 0 0 3px var(--ring)}
+.pv .sl[data-held] .sl-grip,.pv .sl[data-held] .sl-track{cursor:grabbing}
+.pv .sl-arrow,.pv .sl-done{position:absolute;display:flex;align-items:center;justify-content:center;gap:6px;pointer-events:none}
+.pv .sl-arrow svg,.pv .sl-done svg{width:20px;height:20px}
+.pv .sl-done{font-size:14px;font-weight:500;letter-spacing:-.25px;white-space:nowrap;opacity:0;transform:scale(.7);transition:opacity .16s cubic-bezier(.33,.55,.2,1),transform .16s cubic-bezier(.33,.55,.2,1)}
+.pv .sl[data-done] .sl-done{opacity:1;transform:scale(1)}
+.pv .sl-ok{position:absolute;top:0;bottom:0;left:0;right:52px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;letter-spacing:-.25px;color:var(--fg);pointer-events:none;opacity:0;transform:translateX(-16px);transition:opacity .2s cubic-bezier(.33,.55,.2,1),transform .28s cubic-bezier(.33,.55,.2,1)}
+.pv .sl[data-done] .sl-ok{opacity:1;transform:none;transition-delay:.06s}
+.pv .sl.dk .sl-ok{color:#fafafa}
+.pv .sl.dk .sl-track{background:#262626}.pv .sl.dk .sl-wash{background:rgb(255 255 255/.1)}.pv .sl.dk .sl-grip{background:#e5e5e5;color:#171717}.pv .sl.dk .sl-say{color:#a1a1a1}
+
+/* ===== web shadcnuikit ===== */
+.refs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin:8px 0 14px}
+.refs a{display:block;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--fg);text-decoration:none}.refs a b{font:400 16px var(--f-head)}.refs a span{display:block;color:var(--fg-3);font-size:13px;margin-top:2px}
+.cmp{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px;margin-bottom:14px}
+.cmp th,.cmp td{padding:8px 12px;border-top:1px solid var(--line);text-align:left;vertical-align:top}.cmp th{background:var(--sunk);font-weight:600;border-top:0}.cmp td:first-child{font-weight:600;white-space:nowrap}
+.cmp .now{color:var(--brand);font-weight:600}
+.vt{display:inline-flex;border:1px solid var(--line-strong);border-radius:999px;padding:3px;background:var(--surface);margin:4px 0 10px}.vt button{border:0;background:none;padding:6px 14px;border-radius:999px;font:500 13px var(--f-body);cursor:pointer;color:var(--fg-2)}.vt button[aria-pressed=true]{background:var(--fg);color:#fff}
+.pv .tip{border-radius:10px}
+.pv .ims{display:inline-flex;margin-left:-4px;opacity:.6}
+.pv .cw{display:inline-flex;align-items:center;height:20px;padding:0 4px;border:1px solid var(--border);border-radius:4px;font:500 10px/1 var(--font);color:var(--text-2);background:#fff;letter-spacing:0}
+.pv .avw{display:flex;aspect-ratio:1;height:100%;padding:6px;margin-right:2px}.pv .avi{flex:1;border-radius:50%;background:linear-gradient(135deg,#f5a524,#e7000b);color:#fff;font-size:9px;display:grid;place-items:center}
+.pv .bdg{position:absolute;top:-8px;left:100%;translate:-50% 0;min-width:20px;height:20px;padding:0 4px;border-radius:999px;background:var(--primary);color:var(--primary-fg);font-size:12px;font-weight:500;display:grid;place-items:center}.pv .bell.clr .bdg{display:none}
+.pv .b.tg{width:36px;padding:0;position:relative}.pv .b.tg:hover{background:var(--hover-bg)}.pv .b.tg svg{transition:transform .25s,opacity .25s}.pv .b.tg .moon{position:absolute;transform:scale(0);opacity:0}.pv .b.tg.on .moon{transform:scale(1);opacity:1}.pv .b.tg.on .sun{transform:scale(0);opacity:0}
+.pv .cpw.ok svg{color:#10b981}
+.pv .ldbtn{position:relative}.pv .ldbtn .ov{position:absolute;display:none}.pv .ldbtn.on .lb{color:transparent}.pv .ldbtn.on .ov{display:block}.pv .ldbtn.on{pointer-events:none}
+.pv .gw{display:inline-flex}.pv .gw>*{border-radius:0}.pv .gw>*+*{border-left-width:0}.pv .gw>*:first-child{border-top-left-radius:var(--r);border-bottom-left-radius:var(--r)}.pv .gw>*:last-child{border-top-right-radius:var(--r);border-bottom-right-radius:var(--r)}
+.pv .gw .inw:first-child{border-top-left-radius:var(--r);border-bottom-left-radius:var(--r)}
+.pv .gw.sg .sep{width:1px;align-self:stretch;background:#e5e5e5;flex:none}
+.pv .inw{height:36px;width:180px;min-width:0;border:1px solid transparent;background:rgb(229 229 229/.5);padding:0 12px;font:14px var(--font);color:var(--text);outline:none}
+.pv .vgw{display:inline-flex;flex-direction:column}.pv .vgw>*{border-radius:0}.pv .vgw>*+*{border-top-width:0}.pv .vgw>*:first-child{border-top-left-radius:var(--r);border-top-right-radius:var(--r)}.pv .vgw>*:last-child{border-bottom-left-radius:var(--r);border-bottom-right-radius:var(--r)}
+.pv .mw{display:inline-flex}.pv .mw>*{border-radius:0}.pv .mw>*:first-child{border-radius:var(--r) 0 0 var(--r)}.pv .mw>*:last-child{border-radius:0 var(--r) var(--r) 0;border-left:1px solid rgb(250 250 250/.3)}
+.pv .lkc{position:relative;margin-left:4px;height:100%;display:inline-flex;align-items:center;padding:0 12px;border-radius:999px;font-size:12px;color:var(--text-2)}.pv .lkc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:#e5e5e5}
+.pv .colw{display:inline-flex;flex-direction:column;gap:8px}
+.pv .b.brand{color:#fff}.pv .b.brand::after{content:"";flex:1}.pv .b.brand .bi{flex:1;display:flex;margin-right:8px;opacity:.6}.pv .b.brand:hover{filter:brightness(.92)}
+.pv .tt.hov .tip{opacity:0;transition:opacity .15s;pointer-events:none}.pv .tt.hov:hover .tip{opacity:1}
+</style>
+</head>
+<body>
+<header class="band"><div class="band-in">
+  <img src="__LOGO__" alt="innvie">
+  <h1>Chọn biến thể — base components đợt 1</h1>
+  <p>8 component: <mark>Button, Input, Select, Checkbox, Radio, Switch, Tag, Tooltip</mark>. Mỗi biến thể có hình dựng từ <b>token đã chốt</b>, tên thuộc tính <b>ng-zorro</b> và đối chiếu shadcn. Bấm <b>Giữ</b> / <b>Bỏ</b> từng ô — mặc định đang theo đề xuất. Biến thể bị bỏ <b>không vẽ trên Figma</b> và ghi là "không dùng" trong spec để dev không làm.</p>
+  <nav class="tabs" id="tabs"></nav>
+</div></header>
+<main class="wrap">
+  <div class="status"><span id="store">Đang kết nối nơi lưu…</span><div class="bar"><i id="prog"></i></div><span id="cnt"></span>
+    <button class="btnx" id="btn-export">Xuất lựa chọn dạng chữ</button></div>
+  <pre class="out" id="out" hidden></pre>
+  <div id="panel"></div>
+</main>
+<script>
+const $=s=>document.querySelector(s);const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const I={plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="opacity:.5"><path d="m6 9 6 6 6-6"/></svg>',
+x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px;opacity:.6"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+xc:'<svg viewBox="0 0 24 24" fill="currentColor" style="opacity:.35"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6" stroke="#fff" stroke-width="2"/></svg>',
+check:'<svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+eye:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+truck:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>',
+dl:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>'};
+const pv=(h,cls="")=>`<div class="pv ${cls}">${h}</div>`;
+const S=(d,w=2)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const J={trash:S('<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>'),edit:S('<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>'),more:S('<circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>'),
+ bell:S('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/>'),sun:S('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'),
+ moon:S('<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>'),copy:S('<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>'),ok:S('<path d="M20 6 9 17l-5-5"/>',2.5),
+ minus:S('<path d="M5 12h14"/>'),down:S('<path d="m6 9 6 6 6-6"/>'),left:S('<path d="m15 18-6-6 6-6"/>'),right:S('<path d="m9 18 6-6-6-6"/>'),arrow:S('<path d="M5 12h14M12 5l7 7-7 7"/>'),
+ star:S('<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1Z"/>'),heart:S('<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/>')};
+const slide=(cls,label)=>`<div class="sl ${cls}" data-slide><div class="sl-track"><i class="sl-wash"></i><span class="sl-say">${label}</span><span class="sl-ok">Đã xác nhận</span><button type="button" class="sl-grip" aria-label="${label}"><span class="sl-arrow">${J.arrow}</span><span class="sl-done">${J.ok}</span></button></div></div>`;
+
+const W=(h,cls="")=>`<div class="pv web ${cls}">${h}</div>`;
+const ims=svg=>`<span class="ims">${svg}</span>`;
+const F=d=>`<svg viewBox="0 0 24 24" fill="currentColor">${d}</svg>`;
+J.printer=S('<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/>');
+J.thumb=S('<path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/>');
+const B={google:F('<path d="M12 11v2.8h4.6c-.2 1.2-1.5 3.6-4.6 3.6-2.8 0-5-2.3-5-5.2S9.2 7 12 7c1.6 0 2.6.7 3.2 1.2l2.2-2.1C16 4.8 14.2 4 12 4 7.6 4 4 7.6 4 12s3.6 8 8 8c4.6 0 7.7-3.2 7.7-7.8 0-.5 0-.9-.1-1.2H12z"/>'),
+ fb:F('<path d="M14 13.5h2.5l1-4H14v-2c0-1 0-2 2-2h1.5V2.1c-.3 0-1.6-.1-2.9-.1C11.9 2 10 3.7 10 6.7v2.8H7v4h3V22h4v-8.5z"/>'),
+ x:F('<path d="M17.7 3.1 12.7 8.8 8.4 3.1H2.1l7.5 9.8-7.1 8.1h3l5.5-6.3 4.8 6.3h6.1l-7.8-10.3 6.6-7.6h-3zm-1.1 16-11-14.3h1.8l10.9 14.3h-1.7z"/>'),
+ gh:S('<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.1-1.3-.3-2.5-1-3.5.3-1.2.3-2.4 0-3.5 0 0-1 0-3 1.5-2.6-.5-5.4-.5-8 0C6 2 5 2 5 2c-.3 1.2-.3 2.4 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.4.5-.7 1.1-.9 1.7-.2.6-.2 1.2-.1 1.8v4"/><path d="M9 18c-4.5 2-5-2-7-2"/>')};
+function webCmp(){return `<h3>Hai nguồn tham chiếu</h3><div class="refs"><a href="https://shadcnuikit.com/components/button"><b>Web — shadcnuikit.com</b><span>27 ví dụ ghép từ Button. Đo bằng class Tailwind + style tính sẵn trên trang (06/11).</span></a><a href="https://www.figma.com/design/uSGI07mEcItaHEVre2RwFq"><b>Figma kit — Shadcn UI Kit (Embed)</b><span>Trang Button: set 6 kiểu × 8 cỡ × 6 trạng thái. Đo bằng Properties (06/11).</span></a></div>
+ <table class="cmp"><tr><th>Điểm</th><th>Web shadcnuikit</th><th>Figma kit</th><th>Áp vào 27 ví dụ (token bộ thử)</th></tr>
+ <tr><td>Bo góc nút</td><td>rounded-4xl = 23.2 (gần như tròn hai đầu); riêng split Merge 5.2</td><td>rounded-md = 8</td><td class="now">8 (kit)</td></tr>
+ <tr><td>Cao · padding (default)</td><td>h-9 = 36 · px-3 = 12 · gap 6</td><td>h-8 = 32 · px 10 · gap 6</td><td class="now">36 · 12 · 6 (web)</td></tr>
+ <tr><td>Hover nút chính</td><td>nền chính 80% (primary/80)</td><td>nền chính + trắng 10%</td><td class="now">+ trắng 10% (#2e2e2e, kit)</td></tr>
+ <tr><td>Nhấn</td><td>lún xuống 1px (translate-y-px), không đổi màu</td><td>mờ 60%</td><td class="now">mờ 60% (kit)</td></tr>
+ <tr><td>Focus</td><td>vòng 3px ring 30%</td><td>vòng 3px #a3a3a3 50%</td><td class="now">50% (kit)</td></tr>
+ <tr><td>Hover secondary</td><td>trộn 5% màu chữ (≈ #e9e9e9)</td><td>secondary 80%</td><td>#ebebeb</td></tr>
+ <tr><td>Icon trong nút</td><td>mờ 60%, lùi trái 4px (-ms-1 opacity-60)</td><td>không mờ, padding trái 10</td><td>chưa chốt</td></tr>
+ <tr><td>Ô nhập trong nhóm</td><td>nền xám input/50, bo rounded-3xl 19.2, không viền</td><td>viền, bo 10</td><td class="now">nền xám, pill (web)</td></tr>
+ <tr><td>Nút xoá</td><td colspan="2">đỏ nhạt 10% · hover 20% (giống nhau)</td><td class="now">đỏ nhạt</td></tr></table>`}
+function kitGrid(){const K=[["Default","b p"],["Secondary","b sec"],["Outline","b o"],["Ghost","b t"],["Link","b l"],["Destructive","b d"]];
+ const St=[["Default",""],["Hover"," is-h"],["Focus"," is-f"],["Loading","L"],["Disabled"," dis"],["Pressed"," is-p"]];
+ const Z=[["xs","xs",0],["sm","sm",0],["default","",0],["lg","lg",0],["icon-xs","xs",1],["icon-sm","sm",1],["icon","",1],["icon-lg","lg",1]];
+ const cell=(c,st)=>st==="L"?`<button class="${c}"><span class="spin"></span>Button</button>`:`<button class="${c}${st}">Button</button>`;
+ return `<h3>Lưới biến thể của Figma kit (trang Button · section Components)</h3><p class="lead" style="margin:0 0 6px">Kit dựng <b>6 kiểu × 8 cỡ × 6 trạng thái</b> (288 tổ hợp) trong 1 set, prop <code>Show Left Icon</code> · <code>Show Right Icon</code> · <code>Button Text</code> · <code>Show KbdGroup</code>. Đây là bảng xem, không cần chọn — phần chọn ở các nhóm bên dưới. Khi dựng Figma sẽ tách nhỏ (mỗi set ≤ 30 tổ hợp).</p>
+ <div class="kit"><table><tr><th>Kiểu \\ Trạng thái</th>${St.map(x=>`<th>${x[0]}</th>`).join("")}</tr>${K.map(([n,c])=>`<tr><td class="n">${n}</td>${St.map(([,st])=>`<td><div class="pv">${cell(c,st)}</div></td>`).join("")}</tr>`).join("")}</table></div>
+ <div class="kit"><table><tr><th>Cỡ</th>${K.map(k=>`<th>${k[0]}</th>`).join("")}</tr>${Z.map(([n,z,ic])=>`<tr><td class="n">${n}</td>${K.map(([,c])=>`<td><div class="pv"><button class="${c} ${z}${ic?" ic":""}">${ic?I.plus:I.plus+"Button"}</button></div></td>`).join("")}</tr>`).join("")}</table></div>`}
+
+const menu=items=>`<div class="menu">${items}</div>`;
+/* ng = có trong ng-zorro, sh = chỉ shadcn có, both = cả hai */
+const C=[
+{k:"button",name:"Button",ng:"nz-button",intro:"Hai nguồn tham chiếu: <b>shadcnuikit Figma kit</b> (lưới biến thể) và <b>shadcnuikit.com/components/button</b> (27 ví dụ trên web — hai nguồn khác nhau, xem bảng dưới). Token đã chốt 06/11: chữ <b>Geist</b> −0.25px, bo 8, padding 12, gap 6, hover = nền chính + trắng 10%, <b>nhấn = mờ 60%</b>, nút viền không bóng, nút xoá <b>đỏ nhạt</b>. Thuộc tính ng-zorro: <code>nzType</code> · <code>nzDanger</code> · <code>nzSize</code> · <code>nzLoading</code> · <code>nzBlock</code> · <code>nz-button-group</code>. Đã chốt giữ <b>secondary</b> và cỡ <b>xs</b>.",
+ pre:()=>webCmp()+kitGrid(),
+ axes:[["Kiểu (6 kiểu của kit + 2 kiểu ng-zorro)",[
+  ["primary","Default — nền đen","nzType=\"primary\"","both",1,"Nút hành động chính mỗi màn (Lưu, Giao lệnh).",pv('<button class="b p">Giao lệnh</button>')],
+  ["secondary","Secondary — nền xám","— (chỉ shadcn) · class riêng","sh",1,"Đã chốt giữ 06/11. Nút phụ quan trọng hơn nút viền (Lưu nháp).",pv('<button class="b sec">Lưu nháp</button>')],
+  ["default","Outline — viền, không bóng","nzType=\"default\"","both",1,"Nút phụ cạnh nút chính.",pv('<button class="b o">Huỷ</button>')],
+  ["text","Ghost — không viền","nzType=\"text\"","both",1,"Nút trong bảng, thanh công cụ.",pv('<button class="b t">Bỏ qua</button>')],
+  ["link","Link","nzType=\"link\"","both",1,"Đi tới trang khác trong câu, trong ô bảng.",pv('<button class="b l">Xem chi tiết</button>')],
+  ["danger","Destructive — đỏ nhạt","nzDanger","both",1,"Đã chốt 06/11: nền đỏ 10%, chữ đỏ, hover 20%. Xoá, huỷ lệnh.",pv(`<button class="b d">${J.trash}Xoá lệnh</button>`)],
+  ["dashed","Viền nét đứt","nzType=\"dashed\"","ng",0,"Kit không có. Nút viền + icon thay được.",pv(`<button class="b dash">${I.plus}Thêm dòng</button>`)],
+  ["ghost","Trong suốt trên nền tối","nzGhost","ng",0,"Kit không có; ứng dụng quản lý hiếm khi đặt nút trên ảnh.",pv('<div class="dark"><button class="b gh">Xem video</button></div>')],
+ ]],["Cỡ (8 cỡ của kit)",[
+  ["xs","xs 24","— (thêm cỡ riêng)","sh",1,"Đã chốt giữ 06/11. Chữ 12, padding 8, gap 4.",pv('<button class="b o xs">Sửa</button><button class="b p xs">Lưu</button>')],
+  ["sm","sm 32","nzSize=\"small\"","both",1,"Trong bảng, bộ lọc.",pv('<button class="b o sm">Lọc</button><button class="b p sm">Áp dụng</button>')],
+  ["md","default 36","nzSize=\"default\"","both",1,"Cỡ chuẩn trên web.",pv('<button class="b p">Lưu lệnh</button>')],
+  ["lg","lg 40","nzSize=\"large\"","both",1,"Nút chính trên mobile, màn đăng nhập.",pv('<button class="b p lg">Đăng nhập</button>')],
+  ["icon-xs","icon-xs 24","chỉ icon + cỡ xs","sh",1,"Thao tác nhỏ trong ô bảng dày.",pv(`<button class="b o ic xs">${J.edit}</button>`)],
+  ["icon-sm","icon-sm 32","chỉ icon + nzSize small","both",1,"Thao tác trong dòng bảng.",pv(`<button class="b o ic sm">${J.edit}</button><button class="b t ic sm">${J.more}</button>`)],
+  ["icon","icon 36","chỉ icon","both",1,"Thanh công cụ. Luôn kèm tooltip.",pv(`<button class="b o ic">${I.dl}</button><button class="b t ic">${I.plus}</button>`)],
+  ["icon-lg","icon-lg 40","chỉ icon + nzSize large","both",1,"Thanh công cụ mobile.",pv(`<button class="b o ic lg">${J.bell}</button>`)],
+ ]],["Trạng thái (6 trạng thái của kit)",[
+  ["st-default","Default","—","both",1,"",pv('<button class="b p">Lưu</button><button class="b o">Huỷ</button>')],
+  ["st-hover","Hover","CSS :hover","both",1,"Nền chính + trắng 10% (#2e2e2e); viền/ghost nền #f5f5f5.",pv('<button class="b p is-h">Lưu</button><button class="b o is-h">Huỷ</button>')],
+  ["st-focus","Focus","CSS :focus-visible","both",1,"Vòng 3px #a1a1a1 50%.",pv('<button class="b p is-f">Lưu</button><button class="b o is-f">Huỷ</button>')],
+  ["loading","Loading","nzLoading","both",1,"Chặn bấm hai lần khi gửi lệnh.",pv('<button class="b p"><span class="spin"></span>Đang lưu</button>')],
+  ["disabled","Disabled","disabled","both",1,"Mờ 50% (đã chốt).",pv('<button class="b p dis">Giao lệnh</button><button class="b o dis">Huỷ</button>')],
+  ["st-pressed","Pressed","CSS :active","both",1,"Theo kit: cả nút mờ 60% (chốt 06/11, thay #454545). Bấm thử nút bên cạnh.",pv('<button class="b p is-p">Lưu</button><button class="b p">Bấm thử</button>')],
+ ]],["27 ví dụ trên web shadcnuikit.com/components/button (bố cục theo web, dựng bằng token bộ thử)",[
+  ["web-01","Button","nz-button nzType=\"primary\"","both",1,"Nút chính.",W('<button class="b p">Button</button>')],
+  ["web-02","Loading","nzLoading + disabled","both",1,"Đang gửi lệnh: tắt nút + spinner cạnh chữ.",W(`<button class="b p dis" style="gap:8px"><span class="spin"></span>Loading</button>`)],
+  ["web-03","Delete","nzDanger","both",1,"Đỏ nhạt, icon thùng rác mờ 60% lùi trái 4px.",W(`<button class="b d">${ims(J.trash)}Delete</button>`)],
+  ["web-04","Click me — spinner đè giữ độ rộng","nzLoading (CSS riêng)","sh",1,"Bấm thử: chữ ẩn, spinner đè giữa, nút không đổi rộng.",W('<button class="b p ldbtn"><span class="lb">Click me</span><span class="spin ov"></span></button>')],
+  ["web-05","Cancel / Save","secondary + primary","sh",1,"Footer form, hộp thoại. Huỷ dùng nền xám (secondary).",W('<span style="display:inline-flex;gap:8px"><button class="b sec">Cancel</button><button class="b p">Save</button></span>')],
+  ["web-06","Messages + số đếm","nz-button + span đếm","sh",1,"\"Chờ duyệt 18\". Ô số bo 4, viền, chữ 10.",W('<button class="b o" style="gap:12px">Messages<span class="cw" style="margin-right:-4px">18</span></button>')],
+  ["web-07","Print + phím tắt ⌘P","nz-button + kbd","sh",1,"Anh/chị đã giữ 06/11. Người dùng vận tải ít dùng phím tắt — để sau.",W(`<button class="b o">${ims(J.printer)}Print<kbd class="cw" style="margin-left:4px;margin-right:-4px;color:rgb(115 115 115/.7)">⌘P</kbd></button>`)],
+  ["web-08","Pill có avatar","nzShape=\"round\" + nz-avatar","sh",1,"Anh/chị đã giữ 06/11. Chọn người dùng nên dùng Select có avatar.",W('<button class="b p" style="gap:0;border-radius:999px;padding:0 12px 0 0"><span class="avw"><span class="avi">TB</span></span>@tobybelhome</button>')],
+  ["web-09","Add new — icon trái","nz-button + nz-icon","both",1,"Phổ biến nhất (Thêm lệnh). Mobile chỉ còn icon.",W(`<button class="b o">${ims(I.plus)}Add new</button>`)],
+  ["web-10","Icon tròn","nzShape=\"circle\"","ng",0,"Đã có nút icon vuông; giữ một kiểu.",W(`<button class="b o ic" style="border-radius:999px">${I.plus}</button>`)],
+  ["web-11","Chuông + badge","nz-badge bọc nz-button","sh",1,"Thông báo trên header. Bấm thử: badge biến mất.",W(`<button class="b o ic bell" style="position:relative">${J.bell}<span class="bdg">3</span></button>`)],
+  ["web-12","Đổi sáng/tối","toggle (nút trạng thái)","sh",1,"Anh/chị đã giữ 06/11. Bộ thử chưa làm theme tối cho app vận hành. Bấm thử.",W(`<button class="b tg">${J.sun.replace('<svg','<svg class="sun"')}${J.moon.replace('<svg','<svg class="moon"')}</button>`)],
+  ["web-13","Copy → check","nz-button + nzCopyable","sh",1,"Chép mã lệnh, biển số. Bấm thử.",W(`<button class="b o ic cpw">${J.copy}</button>`)],
+  ["web-14","+ / − dọc","nz-button-group dọc","ng",1,"Anh/chị đã giữ 06/11. Trùng stepper ngang (web-17); giữ một kiểu.",W(`<span class="vgw"><button class="b o ic">${I.plus}</button><button class="b o ic">${J.minus}</button></span>`)],
+  ["web-15","Ô nhập + nút tìm","nz-input-group nzAddOnAfter","ng",1,"Chuyển sang Input (chốt 06/11): icon tìm nằm trong ô (<code>nzSuffix</code>), không còn nút rời.",W(`<span class="gw"><input class="inw" placeholder="Search..."><button class="b o">${I.search}</button></span>`)],
+  ["web-16","Split viền — Follow ▾","nz-button-group + nz-dropdown","ng",1,"Anh/chị đã giữ 06/11. Giữ 1 kiểu split (web-18 nền đen).",W(`<span class="gw"><button class="b o">Follow</button><button class="b o" style="padding-left:8px">${J.down}</button></span>`)],
+  ["web-17","Stepper − số +","nz-input-number","ng",1,"Số kiện, số chuyến.",W(`<span class="gw"><button class="b o ic">${J.minus}</button><input class="inw" value="1" style="width:56px;text-align:center;border-radius:0"><button class="b o ic">${I.plus}</button></span>`)],
+  ["web-18","Split nền đen — Merge pull request ▾","nz-button-group + nz-dropdown","ng",1,"\"Lưu\" + menu (Lưu và tạo mới, Lưu nháp). Web dùng bo nhỏ 5px riêng cho mẫu này.",W(`<span class="mw"><button class="b p">Merge pull request</button><button class="b p ic">${J.down}</button></span>`)],
+  ["web-19","‹ Previous","nz-button-group","ng",1,"Lật sang lệnh trước trong màn chi tiết.",W(`<span class="gw"><button class="b o ic">${J.left}</button><button class="b o">Previous</button></span>`)],
+  ["web-20","Next ›","nz-button-group","ng",1,"Đi cùng web-19.",W(`<span class="gw"><button class="b o">Next</button><button class="b o ic">${J.right}</button></span>`)],
+  ["web-21","Star + số","nút + số mờ 60%","sh",1,"Anh/chị đã giữ 06/11. Không có nghiệp vụ đánh dấu sao.",W(`<button class="b p">${ims(J.star)}<span style="display:flex;align-items:baseline;gap:8px">Star<span style="font-size:12px;color:rgb(250 250 250/.6)">729</span></span></button>`)],
+  ["web-22","Like + số (có vạch ngăn)","nút + ô số","sh",1,"Anh/chị đã giữ 06/11. Không có nghiệp vụ thích.",W(`<button class="b o" style="padding-right:0">${J.thumb.replace('<svg','<svg style="opacity:.6"')}Like<span class="lkc">86</span></button>`)],
+  ["web-23","Đăng nhập MXH — chỉ icon","nút icon viền","sh",0,"Màn đăng nhập dùng nút có chữ (web-24).",W(`<span style="display:inline-flex;gap:8px"><button class="b o ic">${B.google}</button><button class="b o ic">${B.fb}</button><button class="b o ic">${B.x}</button><button class="b o ic">${B.gh}</button></span>`)],
+  ["web-24","Đăng nhập MXH — viền, icon màu hãng","nz-button + logo","sh",1,"\"Tiếp tục với Google\" ở màn đăng nhập (account-access DEC-405).",W(`<span class="colw"><button class="b o">${B.google.replace('<svg','<svg style="color:#DB4437;margin-right:4px"')}Login with Google</button><button class="b o">${B.x.replace('<svg','<svg style="color:#14171a;margin-right:4px"')}Login with X</button><button class="b o">${B.fb.replace('<svg','<svg style="color:#1877f2;margin-right:4px"')}Login with Facebook</button><button class="b o">${B.gh.replace('<svg','<svg style="color:#333;margin-right:4px"')}Login with GitHub</button></span>`)],
+  ["web-25","Đăng nhập MXH — nền màu hãng","nút nền màu hãng","sh",0,"Nhiều màu ngoài bộ token.",W(`<span class="colw">${[["#DB4437","google","Google"],["#14171a","x","X"],["#1877f2","fb","Facebook"],["#333333","gh","GitHub"]].map(([c,k,n])=>`<button class="b brand" style="background:${c}"><span class="bi">${B[k]}</span>Login with ${n}</button>`).join("")}</span>`)],
+  ["web-26","Icon + tooltip","nz-button + nz-tooltip","both",1,"Bắt buộc với mọi nút chỉ icon. Rê chuột thử.",W(`<span class="tt hov"><button class="b o ic">${I.plus}</button><span class="tip top">Add new item</span></span>`,"tstage")],
+  ["web-27","Left | Middle | Right","nz-button-group (secondary + vạch ngăn)","ng",1,"Chuyển Ngày / Tuần / Tháng.",W('<span class="gw sg"><button class="b sec">Left</button><i class="sep"></i><button class="b sec">Middle</button><i class="sep"></i><button class="b sec">Right</button></span>')],
+ ]],["Nút trượt để xác nhận (mới — bencho.dev)",[
+  ["slide-light","Nền sáng, không viền","component mới (Angular CDK drag)","sh",1,"Tài xế xác nhận giao hàng, nhận lệnh trên mobile — tránh bấm nhầm. Rãnh cao 56, đệm 4, nút kéo 48; bo rãnh <code>radius/2xl</code> 18, nút kéo <code>radius/xl</code> 14 (= 18 − 4). Chỉ xác nhận khi kéo tới cuối; thả giữa chừng thì lò xo về (đập tường nén 8%); xong thì nút đứng ở cuối rãnh, mũi tên thành ✓, chữ “Đã xác nhận” trượt ra trong rãnh, giữ 1,5 giây rồi nút lò xo về đầu. Kéo thử.",pv(slide("","Trượt để giao hàng"))],
+  ["slide-light-b","Nền sáng, có viền","component mới","sh",0,"Anh/chị đã bỏ 06/11.",pv(slide("bd","Trượt để giao hàng"))],
+  ["slide-dark","Nền tối","component mới","sh",1,"Anh/chị đã giữ 06/11. Rãnh #262626, nút #e5e5e5 (màu Dark của token).",pv(slide("dk","Trượt để nhận lệnh"),"tdark")],
+ ]]]},
+{k:"input",name:"Input",ng:"nz-input",intro:"Thuộc tính ng-zorro: <code>nzSize</code> · <code>nzStatus</code> error/warning · <code>nzBorderless</code> · nhóm <code>nz-input-group</code> với <code>nzPrefix</code>/<code>nzSuffix</code>/<code>nzAddOnBefore</code>/<code>nzAddOnAfter</code> · <code>textarea nz-input</code> + <code>nzAutosize</code> · đếm ký tự <code>nz-textarea-count</code>. shadcn chỉ có 1 cỡ, ô thường + ô tệp.",
+ axes:[["Cỡ",[
+  ["lg","Lớn 40","nzSize=\"large\"","ng",1,"Form mobile, đăng nhập.",pv('<div class="in lg ph">Số điện thoại</div>')],
+  ["md","Mặc định 36","nzSize=\"default\"","both",1,"Cỡ chuẩn.",pv('<div class="in ph">Biển số xe</div>')],
+  ["sm","Nhỏ 32","nzSize=\"small\"","ng",1,"Ô lọc trong bảng, đi cùng nút nhỏ.",pv('<div class="in sm ph">Tìm trong bảng</div>')],
+ ]],["Trạng thái",[
+  ["err","Lỗi","nzStatus=\"error\"","both",1,"Kèm dòng báo lỗi dưới ô.",pv('<div><div class="in err">51C-12</div><div class="help">Biển số chưa đủ ký tự</div></div>')],
+  ["warn","Cảnh báo","nzStatus=\"warning\"","ng",0,"Ít dùng; cảnh báo nên đặt ở dòng chữ dưới ô, giữ ô viền thường.",pv('<div class="in warn">120 km</div>')],
+  ["disabled","Đã tắt","disabled","both",1,"Mờ 50%.",pv('<div class="in dis">Không sửa được</div>')],
+  ["borderless","Không viền","nzBorderless","ng",0,"Chỉ hợp sửa trực tiếp trong ô bảng — để sau khi làm bảng.",pv('<div class="in bl">Sửa tại chỗ</div>')],
+ ]],["Ghép thêm",[
+  ["prefix","Icon đầu / cuối","nzPrefix · nzSuffix","ng",1,"Ô tìm kiếm, ô có đơn vị dạng icon.",pv(`<div class="in ph">${I.search}Tìm lệnh, biển số…</div>`)],
+  ["addon","Nhãn đầu / cuối","nzAddOnBefore · nzAddOnAfter","ng",1,"Đơn vị: VNĐ, km, tấn — logistics dùng nhiều.",pv('<div class="grp"><div class="in rr">1.250.000</div><span class="add r">VNĐ</span></div>')],
+  ["clear","Nút xoá nhanh","nzSuffix + nút xoá","ng",1,"Ô tìm kiếm, ô lọc.",pv(`<div class="in">51C-123<span class="end">${I.xc}</span></div>`)],
+  ["password","Mật khẩu (ẩn/hiện)","type=password + nzSuffix","ng",1,"Đăng nhập, đổi mật khẩu.",pv(`<div class="in">••••••••<span class="end">${I.eye}</span></div>`)],
+  ["textarea","Nhiều dòng","textarea nz-input · nzAutosize","both",1,"Ghi chú lệnh, lý do huỷ.",pv('<div class="ta">Ghi chú cho tài xế…</div>')],
+  ["count","Nhiều dòng có đếm ký tự","nz-textarea-count","ng",1,"Ô có giới hạn ký tự (lý do, ghi chú).",pv('<div class="ta">Hàng dễ vỡ<span class="cnt">10/200</span></div>')],
+ ]]]},
+{k:"select",name:"Select",ng:"nz-select",intro:"Thuộc tính ng-zorro: <code>nzMode</code> default/multiple/tags · <code>nzSize</code> · <code>nzStatus</code> · <code>nzAllowClear</code> · <code>nzShowSearch</code> · <code>nzLoading</code> · <code>nzBorderless</code> · nhóm <code>nz-option-group</code> · <code>nzDisabled</code> từng mục. Mục đang chọn theo shadcn: <b>nền xám + dấu ✓</b>.",
+ axes:[["Chế độ",[
+  ["single","Chọn một","nzMode=\"default\"","both",1,"Mặc định.",pv(`<div class="col"><div class="in">Container 40'<span class="end">${I.chev}</span></div>${menu(`<div class="mi">Container 20'</div><div class="mi h">Container 40'${I.check}</div><div class="mi">Mooc sàn</div>`)}</div>`)],
+  ["multiple","Chọn nhiều","nzMode=\"multiple\"","ng",1,"Lọc nhiều trạng thái, nhiều tuyến.",pv(`<div class="in" style="width:240px"><span class="chip">Đang chạy${I.x}</span><span class="chip">Chờ xe${I.x}</span><span class="end">${I.chev}</span></div>`)],
+  ["tags","Gõ để tạo giá trị mới","nzMode=\"tags\"","ng",0,"Cho người dùng tự tạo giá trị → dữ liệu bẩn. Danh mục nên quản lý riêng.",pv(`<div class="in" style="width:240px"><span class="chip">hàng lạnh${I.x}</span><span class="ph" style="color:var(--text-2)">Gõ rồi Enter…</span></div>`)],
+ ]],["Cỡ",[
+  ["lg","Lớn 40","nzSize=\"large\"","ng",1,"Đồng bộ với Input lớn trên mobile.",pv(`<div class="in lg">Tuyến HCM – BD<span class="end">${I.chev}</span></div>`)],
+  ["md","Mặc định 36","nzSize=\"default\"","both",1,"",pv(`<div class="in">Tuyến HCM – BD<span class="end">${I.chev}</span></div>`)],
+  ["sm","Nhỏ 32","nzSize=\"small\"","both",1,"Bộ lọc trong bảng.",pv(`<div class="in sm">Tất cả<span class="end">${I.chev}</span></div>`)],
+ ]],["Tính năng",[
+  ["search","Tìm trong danh sách","nzShowSearch","ng",1,"Danh sách dài: xe, tài xế, khách hàng.",pv(`<div class="col"><div class="in">${I.search}<span>51C</span></div>${menu('<div class="mi h">51C-123.45</div><div class="mi">51C-678.90</div>')}</div>`)],
+  ["clear","Xoá lựa chọn","nzAllowClear","ng",1,"Bộ lọc không bắt buộc.",pv(`<div class="in">Đang chạy<span class="end">${I.xc}</span></div>`)],
+  ["loading","Đang tải danh sách","nzLoading","ng",1,"Danh sách lấy từ máy chủ.",pv('<div class="in ph">Đang tải…<span class="end"><span class="spin" style="width:14px;height:14px"></span></span></div>')],
+  ["group","Nhóm mục","nz-option-group","both",1,"Nhóm xe theo đội, địa điểm theo tỉnh.",pv(menu(`<div class="mi g">Đội Bình Dương</div><div class="mi">51C-123.45</div><div class="mi g">Đội Đồng Nai</div><div class="mi">60C-111.22</div>`))],
+  ["optdis","Mục bị khoá","nzDisabled (option)","both",1,"Xe đang bảo dưỡng không chọn được.",pv(menu(`<div class="mi">51C-123.45</div><div class="mi x">51C-678.90 · bảo dưỡng</div>`))],
+  ["err","Lỗi","nzStatus=\"error\"","ng",1,"Đồng bộ với Input.",pv(`<div class="in err">Chưa chọn xe<span class="end">${I.chev}</span></div>`)],
+  ["borderless","Không viền","nzBorderless","ng",0,"Chỉ hợp trong ô bảng — để sau.",pv(`<div class="in bl">Đang chạy<span class="end">${I.chev}</span></div>`)],
+ ]]]},
+{k:"checkbox",name:"Checkbox",ng:"nz-checkbox",intro:"Thuộc tính ng-zorro: <code>ngModel</code> · <code>nzIndeterminate</code> · <code>nzDisabled</code> · nhóm <code>nz-checkbox-group</code>. shadcn có thêm kiểu <b>kèm mô tả</b> và <b>thẻ chọn</b>.",
+ axes:[["Biến thể",[
+  ["state","Chọn / không chọn","ngModel","both",1,"",pv(`<div class="col"><span class="cb"><i class="on">${I.check}</i>Hàng nguy hiểm</span><span class="cb"><i></i>Hàng lạnh</span></div>`)],
+  ["ind","Chọn một phần","nzIndeterminate","both",1,"Ô \"chọn tất cả\" đầu bảng.",pv('<span class="cb"><i class="on ind"></i>Chọn tất cả (3/10)</span>')],
+  ["disabled","Đã tắt","nzDisabled","both",1,"Mờ 50%.",pv(`<span class="cb dis"><i class="on">${I.check}</i>Đã khoá</span>`)],
+  ["desc","Kèm mô tả","nhãn + mô tả (tự ghép)","sh",1,"Cài đặt, điều khoản — cần giải thích.",pv(`<span class="cb"><i class="on">${I.check}</i><span>Gửi SMS cho khách<small>Khi xe rời kho và khi giao xong</small></span></span>`)],
+  ["group","Nhóm dọc / ngang","nz-checkbox-group","ng",1,"Lọc nhiều lựa chọn.",pv(`<div class="col"><span class="cb"><i class="on">${I.check}</i>Container</span><span class="cb"><i></i>Hàng rời</span><span class="cb"><i class="on">${I.check}</i>Hàng lạnh</span></div>`)],
+  ["card","Thẻ chọn","— (chỉ shadcn)","sh",0,"Đẹp nhưng dev phải tự dựng; dùng ít.",pv(`<div class="card on"><span class="cb"><i class="on">${I.check}</i><span>Bảo hiểm hàng<small>0,1% giá trị hàng</small></span></span></div>`)],
+ ]]]},
+{k:"radio",name:"Radio",ng:"nz-radio",intro:"Thuộc tính ng-zorro: <code>nz-radio</code> · <code>nz-radio-button</code> + <code>nzButtonStyle</code> outline/solid · <code>nzSize</code> (kiểu nút) · <code>nzDisabled</code>. ng-zorro còn có <code>nz-segmented</code> (component riêng) — shadcn gọi là Tabs/Toggle group.",
+ axes:[["Biến thể",[
+  ["basic","Tròn","nz-radio","both",1,"",pv('<div class="col"><span class="cb"><span class="rd on"></span>Giao tận nơi</span><span class="cb"><span class="rd"></span>Khách tự lấy</span></div>')],
+  ["desc","Kèm mô tả","nhãn + mô tả (tự ghép)","sh",1,"Chọn phương án cần giải thích.",pv('<span class="cb"><span class="rd on"></span><span>Ghép chuyến<small>Rẻ hơn, giao chậm 1 ngày</small></span></span>')],
+  ["disabled","Đã tắt","nzDisabled","both",1,"Mờ 50%.",pv('<span class="cb dis"><span class="rd on"></span>Không đổi được</span>')],
+  ["btn-o","Nhóm nút — viền","nz-radio-button outline","ng",1,"Chuyển nhanh: Hôm nay / Tuần / Tháng.",pv('<div class="rbg"><span class="on">Hôm nay</span><span>Tuần</span><span>Tháng</span></div>')],
+  ["btn-s","Nhóm nút — đặc","nzButtonStyle=\"solid\"","ng",0,"Nổi quá — tranh chỗ nút chính. Giữ một kiểu nhóm nút là đủ.",pv('<div class="rbg solid"><span class="on">Hôm nay</span><span>Tuần</span><span>Tháng</span></div>')],
+  ["segmented","Thanh chuyển (nền xám)","nz-segmented","both",0,"Giống Tabs của shadcn; là component khác — để đợt Tabs.",pv('<div class="seg2"><span class="on">Danh sách</span><span>Bản đồ</span></div>')],
+  ["card","Thẻ chọn","— (chỉ shadcn)","sh",0,"Dev phải tự dựng.",pv('<div class="card on"><span class="cb"><span class="rd on"></span><span>Xe 5 tấn<small>Tối đa 12 khối</small></span></span></div>')],
+ ]]]},
+{k:"switch",name:"Switch",ng:"nz-switch",intro:"Thuộc tính ng-zorro: <code>nzSize</code> default/small · <code>nzLoading</code> · <code>nzDisabled</code> · <code>nzCheckedChildren</code>/<code>nzUnCheckedChildren</code> (chữ trong nút). shadcn: một cỡ, ghép nhãn + mô tả.",
+ axes:[["Biến thể",[
+  ["md","Mặc định","nzSize=\"default\"","both",1,"",pv('<span class="sw on"></span><span class="sw"></span>')],
+  ["sm","Nhỏ","nzSize=\"small\"","ng",1,"Trong bảng (bật/tắt từng dòng).",pv('<span class="sw sm on"></span><span class="sw sm"></span>')],
+  ["loading","Đang lưu","nzLoading","ng",1,"Bật/tắt có gọi máy chủ.",pv('<span class="sw on" style="opacity:.6"></span><span class="spin" style="width:12px;height:12px"></span>')],
+  ["disabled","Đã tắt","nzDisabled","both",1,"Mờ 50%.",pv('<span class="sw on dis"></span>')],
+  ["label","Kèm nhãn + mô tả","nhãn + mô tả (tự ghép)","sh",1,"Trang cài đặt.",pv('<span class="cb" style="gap:12px"><span><b style="font-weight:500">Tự giao lệnh</b><small style="display:block;color:var(--text-2);font-size:13px">Gán xe gần nhất khi có đơn</small></span><span class="sw on" style="margin-top:2px"></span></span>')],
+  ["text","Chữ trong nút","nzCheckedChildren","ng",0,"Chữ nhỏ khó đọc, khó dịch; dùng nhãn bên cạnh.",pv('<span class="sw txt on"><span>Bật</span></span>')],
+ ]]]},
+{k:"tag",name:"Tag",ng:"nz-tag",intro:"Thuộc tính ng-zorro: <code>nzColor</code> (trạng thái success/processing/warning/error/default, 11 màu đặt sẵn, hoặc mã màu) · <code>nzMode</code> default/closeable/checkable · <code>nzBordered</code>. shadcn gọi là <b>Badge</b>: default/secondary/outline/destructive. Info dùng xanh <b>#155dfc</b> (đã chốt).",
+ axes:[["Màu",[
+  ["status","Màu trạng thái","nzColor=\"success|processing|warning|error|default\"","both",1,"Trạng thái lệnh, xe, thanh toán.",pv('<span class="tag c" style="--c:#52c41a">Đã giao</span><span class="tag c" style="--c:#155dfc">Đang chạy</span><span class="tag c" style="--c:#d48806">Trễ hẹn</span><span class="tag c" style="--c:#e7000b">Huỷ</span><span class="tag">Nháp</span>')],
+  ["solid","Đặc màu chính","— (shadcn Badge default)","sh",0,"Đen đặc quá nổi cho nhãn; dành cho nút.",pv('<span class="tag solid">Mới</span>')],
+  ["secondary","Nền xám không viền","— (shadcn Badge secondary)","sh",1,"Nhãn trung tính: loại hàng, đội xe. Dev chỉnh màu tag default.",pv('<span class="tag sec">Container 40\'</span><span class="tag sec">Đội BD</span>')],
+  ["preset","11 màu đặt sẵn","nzColor=\"magenta|red|…|purple\"","ng",0,"Nhiều màu dễ lẫn với màu trạng thái. Cần nhãn phân loại thì dùng 5 màu biểu đồ.",pv(['#eb2f96','#fa541c','#13c2c2','#2f54eb','#722ed1'].map(c=>`<span class="tag c" style="--c:${c}">${c}</span>`).join(""))],
+ ]],["Chế độ",[
+  ["closable","Có nút xoá","nzMode=\"closeable\"","ng",1,"Bộ lọc đang áp, email nhận thông báo.",pv(`<span class="tag sec">Tuyến HCM – BD${I.x}</span><span class="tag sec">Đang chạy${I.x}</span>`)],
+  ["checkable","Bấm để chọn","nzMode=\"checkable\"","ng",1,"Lọc nhanh bằng thẻ.",pv('<span class="tag chk on">Tất cả</span><span class="tag chk">Container</span><span class="tag chk">Hàng lạnh</span>')],
+  ["borderless","Không viền","nzBordered=\"false\"","ng",0,"Đã có kiểu nền xám không viền ở trên.",pv('<span class="tag" style="border-color:transparent">Nháp</span>')],
+ ]]]},
+{k:"tooltip",name:"Tooltip",ng:"nz-tooltip",intro:"Thuộc tính ng-zorro: <code>nzTooltipPlacement</code> (12 hướng) · <code>nzTooltipColor</code> · <code>nzTooltipArrowPointAtCenter</code> · <code>nzTooltipTrigger</code>. shadcn: nền <b>màu chính (đen)</b>, chữ 12, bo 8, có mũi tên, 4 hướng.",
+ axes:[["Hướng",[
+  ["top","Trên","nzTooltipPlacement=\"top\"","both",1,"Mặc định.",pv(`<span class="tt"><button class="b o ic">${I.dl}</button><span class="tip top">Tải phiếu giao</span></span>`,"tstage")],
+  ["side","Phải / trái / dưới","right · left · bottom","both",1,"Khi sát mép. Component tự lật hướng.",pv(`<span class="tt"><button class="b o ic">${I.truck}</button><span class="tip right">Đổi xe</span></span>`)],
+  ["corner","8 hướng lệch góc","topLeft · topRight · …","ng",0,"Vẽ trên Figma chỉ cần 4 hướng; dev vẫn dùng được 12 hướng.",pv(`<span class="tt"><button class="b o sm">Cột</button><span class="tip tl">Ẩn/hiện cột</span></span>`,"tstage")],
+ ]],["Kiểu",[
+  ["dark","Nền tối (màu chính)","mặc định, nzTooltipColor","both",1,"Theo shadcn.",pv(`<span class="tt"><button class="b o ic">${I.plus}</button><span class="tip top">Thêm lệnh</span></span>`,"tstage")],
+  ["noarrow","Không mũi tên","nzTooltipArrowPointAtCenter / ẩn mũi tên","ng",0,"Giữ một kiểu có mũi tên cho thống nhất.",pv(`<span class="tt"><button class="b o ic">${I.plus}</button><span class="tip top na">Thêm lệnh</span></span>`,"tstage")],
+  ["color","Màu tuỳ chỉnh","nzTooltipColor=\"#…\"","ng",0,"Màu tooltip đổi theo ngữ cảnh làm loạn; thông tin quan trọng dùng Popover/Alert.",pv(`<span class="tt"><button class="b o ic">${I.plus}</button><span class="tip top blue">Mới</span></span>`,"tstage")],
+ ]]]},
+];
+/* ===== trạng thái ===== */
+const LS="dsantd-comp-r1";let state={};try{state=JSON.parse(localStorage.getItem(LS)||"{}")}catch(e){}
+let db=null,uid=null,canWrite=true;
+const ITEMS=[];C.forEach(c=>c.axes.forEach(([a,items])=>items.forEach(it=>ITEMS.push({c:c.k,ax:a,key:c.k+"-"+it[0],it}))));
+const choice=(k,rec)=>state[k]?.choice!=null?state[k].choice:(rec?0:1); /* 0 = giữ, 1 = bỏ */
+function lsSave(){try{localStorage.setItem(LS,JSON.stringify(state))}catch(e){}}
+async function persist(k){lsSave();counts();const st=document.getElementById("sv-"+k);
+  if(!db){if(st)st.textContent="Đã lưu trong trình duyệt này";return}
+  if(!canWrite){if(st)st.textContent="Bạn chỉ có quyền xem";return}
+  try{await db.doc("answers/"+k).set({choice:state[k].choice??null,note:state[k].note||"",at:state[k].at,by:uid||null});if(st)st.textContent="Đã lưu "+new Date(state[k].at).toLocaleTimeString("vi-VN")}
+  catch(e){if(st)st.textContent="Chưa lưu được lên trang — đã giữ trong trình duyệt"}}
+let cur=location.hash.slice(1)||"overview";
+function card(c,it){const [k,label,ng,src,rec,why,html]=it;const key=c.k+"-"+k;const ch=choice(key,rec);const touched=state[key]?.choice!=null;
+  return `<div class="v ${ch===1?"drop":""}"><div class="stage">${html}</div><div class="body">
+  <div class="t">${label} ${rec?'<span class="rec">Đề xuất giữ</span>':'<span class="rec" style="color:var(--bad);background:var(--bad-soft)">Đề xuất bỏ</span>'}</div>
+  <div class="meta"><span class="src ${src}">${src==="ng"?"ng-zorro":src==="sh"?"chỉ shadcn":"cả hai"}</span><code>${esc(ng)}</code></div>
+  ${why?`<div class="why">${why}</div>`:""}
+  <div class="seg" data-k="${key}"><button class="k" aria-pressed="${ch===0}">Giữ</button><button class="d" aria-pressed="${ch===1}">Bỏ</button></div>
+  <div class="save" id="sv-${key}">${touched?"":"Đang theo đề xuất"}</div></div></div>`}
+function P_overview(){
+  return `<h2>Cách chọn</h2><p class="lead">Mỗi ô là một biến thể. Mặc định đã bật theo <b>đề xuất</b>; bạn chỉ cần bấm ô muốn đổi. <b>Giữ</b> = vẽ trên Figma, ghi vào spec cho dev. <b>Bỏ</b> = không vẽ, spec ghi "không dùng" — dev không làm dù ng-zorro có sẵn. Nhãn <span class="src ng">ng-zorro</span> có sẵn trong thư viện dev · <span class="src sh">chỉ shadcn</span> dev phải tự làm · <span class="src both">cả hai</span>.</p>
+  <div class="sum">${C.map(c=>{const its=ITEMS.filter(i=>i.c===c.k);const keep=its.filter(i=>choice(i.key,i.it[4])===0).length;return `<div class="c" data-tab="${c.k}"><b>${c.name}</b><div style="color:var(--fg-3);font-size:13px;margin:4px 0"><code>${c.ng}</code></div><div>Giữ <b style="font:600 15px var(--f-body);color:var(--ok)">${keep}</b> · Bỏ <b style="font:600 15px var(--f-body);color:var(--bad)">${its.length-keep}</b> / ${its.length} biến thể</div></div>`}).join("")}</div>`}
+function P_comp(c){const n="note-"+c.k;
+  return `<h2>${c.name} <span style="font:500 14px var(--f-mono);color:var(--fg-3)">${c.ng}</span></h2><p class="lead">${c.intro}</p>
+  ${c.pre?c.pre():""}${c.axes.map(([a,items])=>`<h3>${a}</h3><div class="grid">${items.map(it=>card(c,it)).join("")}</div>`).join("")}
+  <div class="note"><b>Ghi chú cho ${c.name}</b> (biến thể còn thiếu, đổi tên, cần sửa hình…)<textarea data-note="${n}" placeholder="Không bắt buộc">${esc(state[n]?.note||"")}</textarea><div class="save" id="sv-${n}"></div></div>`}
+function render(){$("#tabs").innerHTML=[["overview","Tổng quan"],...C.map(c=>[c.k,c.name])].map(([k,l])=>{let n="";if(k!=="overview"){const its=ITEMS.filter(i=>i.c===k);const t=its.filter(i=>state[i.key]?.choice!=null).length;n=`<span class="n">${t?"đã chỉnh "+t:"đề xuất"}</span>`}return `<button data-tab="${k}" aria-selected="${k===cur}">${l}${n}</button>`}).join("");
+  $("#panel").innerHTML=cur==="overview"?P_overview():P_comp(C.find(c=>c.k===cur));counts()}
+function counts(){const keep=ITEMS.filter(i=>choice(i.key,i.it[4])===0).length;const t=ITEMS.filter(i=>state[i.key]?.choice!=null).length;$("#cnt").textContent=`Giữ ${keep}/${ITEMS.length} · đã chỉnh ${t}`;$("#prog").style.width=(keep/ITEMS.length*100)+"%"}
+document.addEventListener("click",e=>{const tb=e.target.closest("[data-tab]");if(tb){cur=tb.dataset.tab;try{history.replaceState(null,"","#"+cur)}catch(_){}render();scrollTo(0,0);return}
+  const b=e.target.closest(".seg button");if(b){const k=b.parentElement.dataset.k;state[k]={...(state[k]||{}),choice:b.classList.contains("k")?0:1,at:Date.now()};render();persist(k)}});
+let nt={};document.addEventListener("input",e=>{const k=e.target.dataset?.note;if(!k)return;state[k]={...(state[k]||{}),note:e.target.value,at:Date.now()};clearTimeout(nt[k]);nt[k]=setTimeout(()=>persist(k),700)});
+window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(h&&h!==cur){cur=h;render()}});
+$("#btn-export").onclick=()=>{const L=["Chọn biến thể — base components đợt 1",""];C.forEach(c=>{L.push(c.name+":");c.axes.forEach(([a,items])=>items.forEach(it=>{const key=c.k+"-"+it[0];L.push(`  - ${a} · ${it[1]} (${it[2]}): ${choice(key,it[4])===0?"GIỮ":"BỎ"}${state[key]?.choice!=null?"":" (đề xuất)"}`)}));const n=state["note-"+c.k]?.note;if(n)L.push("  Ghi chú: "+n.replace(/\n/g," "))});const o=$("#out");o.textContent=L.join("\n");o.hidden=false};
+
+/* nút trượt + nút sao chép */
+/* nút trượt — theo bản tham chiếu (bencho.dev): lò xo tới hạn khi xác nhận, lò xo 0.62 khi trả về,
+   vượt tường thì nén thay vì văng; xong thì nút đứng cuối rãnh, chữ "Đã xác nhận" trượt ra (user chốt 06/11: không giãn khối đen) */
+const SL={H:56,PAD:4,GRIP:48,HOLD:1500,SWELL:1.03};
+const SLK=260+(50/100)*640, SLM=.9, SLC=2*Math.sqrt(SLK*SLM);
+const SPR={k:SLK,c:SLC,m:SLM}, HOME={k:SLK,c:SLC*.62,m:SLM}, BACK={k:380,c:34,m:.9};
+const clampN=(v,lo,hi)=>Math.min(hi,Math.max(lo,v));
+const slS=new WeakMap();
+function slState(el){let st=slS.get(el);if(!st){st={x:0,anchor:0,shown:1,pulse:1,held:false,done:false,hot:false,an:{},grip:null,timer:0};slS.set(el,st)}return st}
+function slTravel(el){return el.querySelector(".sl-track").offsetWidth-SL.PAD*2-SL.GRIP}
+function slDraw(el){const st=slState(el),T=slTravel(el),seen=clampN(st.x,0,T),wide=SL.GRIP;
+ const over=Math.max(0,-st.x),q=1-Math.min(.08,over/110),sw=st.hot&&!st.held&&!st.done?SL.SWELL:1;
+ const g=el.querySelector(".sl-grip");g.style.width=wide+"px";g.style.transform=`translateX(${seen}px) scale(${q*sw},${(1/q)*sw})`;
+ el.querySelector(".sl-wash").style.width=(seen+SL.GRIP)+"px";
+ el.querySelector(".sl-say").style.opacity=clampN(1-seen/(T*.55),0,1);
+ el.querySelector(".sl-arrow").style.opacity=st.shown*clampN(1-(seen-T*.55)/(T*.4),0,1);
+ el.querySelector(".sl-track").style.transform=`scale(${st.pulse})`;
+ if(st.held)el.setAttribute("data-held","");else el.removeAttribute("data-held");
+ if(st.done)el.setAttribute("data-done","");else el.removeAttribute("data-done")}
+function slSpring(el,key,to,p,cb){const st=slState(el);const id=(st.an[key]||0)+1;st.an[key]=id;let v=0,last=performance.now();
+ const step=now=>{if(st.an[key]!==id)return;let dt=Math.min(.05,(now-last)/1000);last=now;
+  while(dt>0){const h=Math.min(dt,1/240);const a=(-p.k*(st[key]-to)-p.c*v)/p.m;v+=a*h;st[key]+=v*h;dt-=h}
+  if(Math.abs(st[key]-to)<.02&&Math.abs(v)<.02){st[key]=to;slDraw(el);cb&&cb();return}slDraw(el);requestAnimationFrame(step)};requestAnimationFrame(step)}
+function slTween(el,key,keys,times,dur,delay=0){const st=slState(el);const id=(st.an[key]||0)+1;st.an[key]=id;const t0=performance.now()+delay*1000;
+ const ease=t=>1-Math.pow(1-t,3);
+ const step=now=>{if(st.an[key]!==id)return;const t=clampN((now-t0)/(dur*1000),0,1);if(now>=t0){let i=1;while(i<times.length-1&&t>times[i])i++;
+  const a=times[i-1],b=times[i],u=b>a?clampN((t-a)/(b-a),0,1):1;st[key]=keys[i-1]+(keys[i]-keys[i-1])*ease(u);slDraw(el)}if(t<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
+function slFinish(el){const st=slState(el);st.done=true;st.x=slTravel(el);
+ slTween(el,"shown",[st.shown,0],[0,1],.16);slTween(el,"pulse",[1,.974,1],[0,.62,1],.42,.05);
+ clearTimeout(st.timer);st.timer=setTimeout(()=>{st.done=false;slDraw(el);slTween(el,"shown",[0,1],[0,1],.22,.18);slSpring(el,"x",0,HOME)},SL.HOLD);slDraw(el)}
+function slLocal(el,cx){const tr=el.querySelector(".sl-track"),b=tr.getBoundingClientRect(),k=b.width/(tr.offsetWidth||1);return (cx-b.left)/(k||1)}
+document.addEventListener("pointerdown",e=>{const el=e.target.closest(".pv .sl");if(!el)return;const st=slState(el);if(st.done)return;e.preventDefault();
+ st.an.x=(st.an.x||0)+1;st.grip={id:e.pointerId,grab:null};st.held=true;slDraw(el);
+ try{el.querySelector(".sl-track").setPointerCapture(e.pointerId)}catch(_){}
+ const T=slTravel(el);
+ const mv=ev=>{const g=st.grip;if(!g||g.id!==ev.pointerId)return;const at=slLocal(el,ev.clientX);if(g.grab===null){g.grab=at-st.x;return}st.x=clampN(at-g.grab,0,T);slDraw(el)};
+ const up=ev=>{const g=st.grip;if(!g)return;st.grip=null;try{el.querySelector(".sl-track").releasePointerCapture(ev.pointerId)}catch(_){}st.held=false;
+  removeEventListener("pointermove",mv);removeEventListener("pointerup",up);removeEventListener("pointercancel",up);
+  if(st.x>=T-.5)slFinish(el);else slSpring(el,"x",0,HOME)};
+ addEventListener("pointermove",mv);addEventListener("pointerup",up);addEventListener("pointercancel",up)});
+document.addEventListener("pointerover",e=>{const g=e.target.closest(".pv .sl-grip");if(!g)return;const el=g.closest(".sl"),st=slState(el);if(!st.hot){st.hot=true;slDraw(el)}});
+document.addEventListener("pointerout",e=>{const g=e.target.closest(".pv .sl-grip");if(!g||g.contains(e.relatedTarget))return;const el=g.closest(".sl"),st=slState(el);st.hot=false;slDraw(el)});
+document.addEventListener("keydown",e=>{const g=e.target.closest&&e.target.closest(".pv .sl-grip");if(!g||!(e.key==="Enter"||e.key===" "))return;e.preventDefault();const el=g.closest(".sl"),st=slState(el);if(st.done)return;
+ st.x=slTravel(el);slDraw(el);slFinish(el)});
+document.addEventListener("click",e=>{const cp=e.target.closest(".pv .cp");if(!cp)return;const sv=cp.querySelector("svg");sv.outerHTML=J.ok;setTimeout(()=>{const s2=cp.querySelector("svg");if(s2)s2.outerHTML=J.copy},1500)});
+
+document.addEventListener("click",e=>{
+ const ld=e.target.closest(".pv .ldbtn");if(ld){ld.classList.add("on");setTimeout(()=>ld.classList.remove("on"),1500);return}
+ const bl=e.target.closest(".pv .bell");if(bl){bl.classList.toggle("clr");return}
+ const tg=e.target.closest(".pv .b.tg");if(tg){tg.classList.toggle("on");return}
+ const cw=e.target.closest(".pv .cpw");if(cw&&!cw.classList.contains("ok")){cw.classList.add("ok");cw.innerHTML=J.ok;setTimeout(()=>{cw.classList.remove("ok");cw.innerHTML=J.copy},1500)}});
+render();
+(async()=>{if(!window.claude?.use){$("#store").textContent="Lưu trong trình duyệt này";return}
+  const [d,u]=await Promise.all([claude.use("db"),claude.use("user")]);if(!d){$("#store").textContent="Lưu trong trình duyệt này";return}
+  db=d;try{uid=u?await u.id():null}catch(e){}try{const w=u?await u.can("data.write"):null;if(w===false)canWrite=false}catch(e){}
+  $("#store").textContent=canWrite?"Lựa chọn lưu trên trang, Claude đọc được":"Bạn chỉ có quyền xem trang này";
+  db.collection("answers").onSnapshot(snap=>{let ch=false;snap.docs.forEach(doc=>{const x=doc.data();if(!x)return;const c=state[doc.id];if(!c||(x.at||0)>(c.at||0)){state[doc.id]={choice:x.choice??undefined,note:x.note||"",at:x.at};ch=true}});
+    if(ch){lsSave();const a=document.activeElement;if(!(a&&a.tagName==="TEXTAREA"))render();else counts()}},()=>{$("#store").textContent="Mất kết nối nơi lưu — lựa chọn vẫn giữ trong trình duyệt này"})})();
+</script>
+</body>
+</html>

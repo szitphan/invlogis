@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>So sánh foundation — shadcnuikit web · Figma kit · bộ thử hiện tại</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F1F1F1;--surface:#fff;--sunk:#F6F7F9;--line:#E3E5E8;--line-strong:#D4D4D4;--fg:#171717;--fg-2:#525252;--fg-3:#737373;--brand:#0036B5;--ink:#0036B5;--ink-soft:#E5ECFA;
+--f-head:'Cal Sans','Inter',system-ui,sans-serif;--f-body:'Inter',system-ui,sans-serif;--f-mono:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.55 var(--f-body)}
+.band{background:var(--brand);color:#fff}.band-in{max-width:1320px;margin:0 auto;padding:20px 24px 0}
+.band img{height:28px;display:block;margin-bottom:12px}.band h1{font:400 30px/1.2 var(--f-head);margin:0 0 6px}
+.band p{margin:0 0 14px;opacity:.92;max-width:980px}.band mark{background:rgba(255,255,255,.22);color:#fff;border-radius:4px;padding:0 4px}
+.tabs{display:flex;gap:2px;flex-wrap:wrap}.tabs button{border:0;background:transparent;color:#fff;opacity:.78;font:500 14px var(--f-body);padding:10px 14px;border-radius:8px 8px 0 0;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--bg);color:var(--brand);opacity:1}
+.wrap{max-width:1320px;margin:0 auto;padding:20px 24px 80px}
+.status{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px;font-size:13px;color:var(--fg-3)}
+h2{font:400 24px/1.3 var(--f-head);margin:4px 0 6px}h3{font:600 15px var(--f-body);margin:22px 0 10px}
+p.lead{color:var(--fg-2);max-width:980px;margin:0 0 12px}mark{background:color-mix(in srgb,#00A2FF 22%,transparent);color:inherit;border-radius:3px;padding:0 2px}
+code{font:500 12px var(--f-mono);color:var(--ink);background:var(--ink-soft);border-radius:5px;padding:1px 5px;white-space:nowrap}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:#fff}
+table.t{border-collapse:collapse;width:100%;font-size:13px}table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.t th{background:var(--sunk);color:var(--fg-3);font-weight:600}table.t tr:last-child td{border-bottom:0}
+.diff{background:#FBEFD2}
+.cmp{display:grid;grid-template-columns:150px repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.cmp>div{border-bottom:1px solid var(--line);border-left:1px solid var(--line);padding:16px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.cmp>div.h{background:var(--sunk);font-weight:600;font-size:13px;padding:10px 16px}.cmp>div.rl{border-left:0;font-weight:600;font-size:13px;color:var(--fg-2);align-items:flex-start}
+.fbadge{display:inline-flex;align-items:center;gap:6px}.fbadge i{width:22px;height:22px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font:700 12px var(--f-body);font-style:normal}
+.A i{background:#0f766e}.B i{background:#7c3aed}.C i{background:#c2410c}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:#fff;font:500 13px var(--f-body);padding:6px 12px;cursor:pointer}.seg button[aria-pressed="true"]{background:var(--brand);color:#fff}
+.scr{margin:14px 0 26px}.scr .lab{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-weight:600}
+.decide{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.opts label{display:flex;gap:6px;align-items:center;border:1px solid var(--line-strong);border-radius:8px;padding:6px 12px;cursor:pointer;background:#fff;font-weight:500}
+.opts label.on{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand);background:var(--ink-soft)}
+textarea{width:100%;min-height:44px;resize:vertical;border:1px solid var(--line-strong);border-radius:8px;padding:8px 10px;font:14px/1.5 var(--f-body)}
+.save{font-size:12px;color:var(--fg-3);min-height:16px}.btnx{border:1px solid var(--line-strong);background:#fff;border-radius:8px;padding:7px 14px;font:500 14px var(--f-body);cursor:pointer}
+pre.out{white-space:pre-wrap;background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:12px;font:12px/1.5 var(--f-mono)}
+
+/* ================= THEMES ================= */
+.th{--font:'Inter',system-ui,sans-serif;--hfont:'Inter',system-ui,sans-serif;--hw:600;--text:#0a0a0a;--text-2:#737373;--bg:#fff;--page:#fff;--primary:#171717;--pfg:#fafafa;--muted:#f5f5f5;--border:#e5e5e5;--err:#e7000b;--ok:#16a34a;--warn:#d97706;--info:#155dfc;
+ font:14px/20px var(--font);color:var(--text)}
+.th.A{--h:36px;--h-sm:32px;--h-lg:40px;--bpx:12px;--bpx-sm:10px;--br:999px;--gap:6px;--ir:999px;--ibg:#f2f2f2;--ib:transparent;--ish:none;--ipx:12px;--cr:23px;--cpad:24px;--csh:none;--phover:#454545;--ring:rgb(161 161 161/.3);--osh:none;--obg:#fff;
+ --tr:999px;--mr:16px;--mir:12px;--tw:500;--chk-r:6px;--hfont:'Inter',system-ui,sans-serif;--hw:600;--tablehead:#fafafa}
+.th.B{--font:'Geist',system-ui,sans-serif;--hfont:'Geist',system-ui,sans-serif;--h:32px;--h-sm:28px;--h-lg:36px;--bpx:10px;--bpx-sm:8px;--br:8px;--gap:6px;--ir:10px;--ibg:#fff;--ib:#e5e5e5;--ish:none;--ipx:10px;--cr:14px;--cpad:24px;--csh:none;--phover:#2e2e2e;--ring:rgb(163 163 163/.5);--osh:none;--obg:#fff;
+ --tr:8px;--mr:10px;--mir:6px;--tw:500;--chk-r:4px;--hw:600;--tablehead:#fafafa}
+.th.C{--hfont:'Cal Sans','Inter',sans-serif;--hw:400;--h:36px;--h-sm:32px;--h-lg:40px;--bpx:16px;--bpx-sm:12px;--br:8px;--gap:8px;--ir:8px;--ibg:#fff;--ib:#e5e5e5;--ish:0 1px 2px 0 rgb(0 0 0/.05);--ipx:12px;--cr:10px;--cpad:24px;--csh:none;--phover:#2e2e2e;--ring:rgb(161 161 161/.5);--osh:0 1px 2px 0 rgb(0 0 0/.05);--obg:#fff;
+ --tr:6px;--mr:8px;--mir:6px;--tw:600;--chk-r:4px;--tablehead:#fafafa}
+.th *{box-sizing:border-box;font-family:inherit}
+.th svg{width:16px;height:16px;flex:none}
+.th .b{display:inline-flex;align-items:center;justify-content:center;gap:var(--gap);height:var(--h);padding:0 var(--bpx);border-radius:var(--br);font-size:14px;font-weight:500;border:1px solid transparent;background:none;color:var(--text);cursor:pointer;white-space:nowrap;line-height:1}
+.th .b.sm{height:var(--h-sm);padding:0 var(--bpx-sm);font-size:13px}.th .b.lg{height:var(--h-lg)}
+.th .b.p{background:var(--primary);color:var(--pfg)}.th .b.p:hover{background:var(--phover)}
+.th .b.o{background:var(--obg);border-color:var(--border);box-shadow:var(--osh)}.th .b.o:hover,.th .b.g:hover{background:var(--muted)}
+.th .b.s{background:var(--muted)}.th .b.l{color:var(--primary);text-underline-offset:4px}.th .b.l:hover{text-decoration:underline}
+.th .b.d{background:color-mix(in srgb,var(--err) 10%,#fff);color:var(--err)}.th .b.d:hover{background:color-mix(in srgb,var(--err) 20%,#fff)}
+.th.C .b.d{background:var(--err);color:#fff}
+.th .b.ic{width:var(--h);padding:0}.th .b.ic.sm{width:var(--h-sm)}
+.th .b.f{box-shadow:0 0 0 3px var(--ring);border-color:#a1a1a1}
+.th .in{display:flex;align-items:center;gap:8px;height:var(--h);padding:0 var(--ipx);border:1px solid var(--ib);border-radius:var(--ir);background:var(--ibg);box-shadow:var(--ish);color:var(--text);width:100%;min-width:0}
+.th .in.phd{color:var(--text-2)}.th .in.f{border-color:#a1a1a1;box-shadow:0 0 0 3px var(--ring)}.th .in.e{border-color:var(--err);box-shadow:0 0 0 3px color-mix(in srgb,var(--err) 20%,transparent)}
+.th .in.dis{opacity:.5}.th .in .end{margin-left:auto;color:var(--text-2);display:flex}.th .in.sm{height:var(--h-sm)}
+.th .ta{border:1px solid var(--ib);border-radius:calc(min(var(--ir),16px));background:var(--ibg);box-shadow:var(--ish);padding:8px var(--ipx);min-height:76px;color:var(--text-2);width:100%}
+.th .fld{display:flex;flex-direction:column;gap:6px;min-width:0}.th .fld>label{font-weight:500;font-size:14px}.th .fld .hint{font-size:12px;color:var(--text-2)}.th .fld .err{font-size:12px;color:var(--err)}
+.th .menu{background:#fff;border:1px solid var(--border);border-radius:var(--mr);box-shadow:0 4px 6px -1px rgb(0 0 0/.1),0 2px 4px -2px rgb(0 0 0/.1);padding:4px;width:220px}
+.th .mi{display:flex;align-items:center;padding:6px 8px;border-radius:var(--mir)}.th .mi.h{background:var(--muted)}.th .mi .ck{margin-left:auto}
+.th .cb{display:inline-flex;align-items:center;gap:8px}.th .cb i{width:16px;height:16px;border:1px solid var(--border);border-radius:var(--chk-r);display:inline-flex;align-items:center;justify-content:center;background:#fff;flex:none}
+.th .cb i.on{background:var(--primary);border-color:var(--primary);color:var(--pfg)}.th .cb i svg{width:12px;height:12px}
+.th .rd{width:16px;height:16px;border:1px solid var(--border);border-radius:50%;display:inline-flex;align-items:center;justify-content:center}.th .rd.on{border-color:var(--primary)}.th .rd.on::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--primary)}
+.th .sw{width:32px;height:18px;border-radius:999px;background:#e5e5e5;position:relative;flex:none}.th .sw::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgb(0 0 0/.2)}.th .sw.on{background:var(--primary)}.th .sw.on::after{left:16px}
+.th .tag{display:inline-flex;align-items:center;gap:4px;height:22px;padding:0 8px;border-radius:var(--tr);font-size:12px;font-weight:500;background:var(--muted);color:var(--text);white-space:nowrap}
+.th .tag.c{color:var(--c);background:color-mix(in srgb,var(--c) 10%,#fff)}
+.th.C .tag.c{border:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
+.th .card{background:var(--bg);border:1px solid var(--border);border-radius:var(--cr);box-shadow:var(--csh);padding:var(--cpad);display:flex;flex-direction:column;gap:18px;min-width:0}
+.th .card h4{margin:0;font:var(--tw) 16px/24px var(--hfont)}.th.C .card h4{font-weight:400}.th .card .desc{color:var(--text-2);margin-top:2px}
+.th .segc{display:inline-flex;background:var(--muted);border-radius:var(--br);padding:3px}.th .segc span{padding:0 12px;height:calc(var(--h) - 6px);display:flex;align-items:center;border-radius:calc(var(--br) - 2px);font-weight:500;color:var(--text-2)}
+.th.A .segc span{border-radius:999px}.th .segc span.on{background:#fff;color:var(--text);box-shadow:0 1px 2px rgb(0 0 0/.06)}
+.th .tip{background:var(--primary);color:var(--pfg);font-size:12px;padding:6px 12px;border-radius:var(--mir)}
+/* screen */
+.th.page{background:var(--page);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:220px 1fr;min-height:560px}
+.th .side{border-right:1px solid var(--border);background:#fafafa;padding:16px 12px;display:flex;flex-direction:column;gap:2px}
+.th .side .logo{font:600 16px var(--hfont);padding:4px 8px 14px}.th.C .side .logo{font-weight:400}
+.th .side a{display:flex;align-items:center;gap:8px;padding:0 8px;height:var(--h-sm);border-radius:var(--mir);color:var(--text-2);text-decoration:none;font-weight:500}.th .side a.on{background:var(--muted);color:var(--text)}
+.th.A .side a{border-radius:999px;padding:0 12px}
+.th .main{padding:24px 28px;display:flex;flex-direction:column;gap:20px;min-width:0}
+.th .crumb{font-size:13px;color:var(--text-2)}
+.th .ph{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.th .ph h1{margin:4px 0 0;font:var(--hw) 24px/32px var(--hfont)}
+.th .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.th .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.th .kv{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 24px}.th .kv div span{display:block;font-size:13px;color:var(--text-2)}.th .kv div b{font-weight:500}
+.th .tl{display:flex;flex-direction:column;gap:14px}.th .tl div{display:flex;gap:12px}.th .tl i{width:10px;height:10px;border-radius:50%;background:var(--border);margin-top:5px;flex:none}.th .tl i.on{background:var(--primary)}
+.th .tl small{display:block;color:var(--text-2);font-size:12px}
+.th .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.th table.dt{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
+.th .dtw{border:1px solid var(--border);border-radius:var(--cr);overflow:hidden;background:#fff}
+.th.A .dtw{border-radius:16px}
+.th table.dt th{background:var(--tablehead);color:var(--text-2);font-weight:500;text-align:left;padding:0 12px;height:40px;border-bottom:1px solid var(--border);font-size:13px}
+.th table.dt td{padding:0 12px;height:52px;border-bottom:1px solid var(--border)}.th table.dt tr:last-child td{border-bottom:0}.th table.dt tr:hover td{background:#fafafa}
+.th .mono{font-family:'Geist Mono',ui-monospace,monospace;font-size:13px}
+.th .pg{display:flex;justify-content:space-between;align-items:center;color:var(--text-2);font-size:13px}
+.th .actions{display:flex;gap:8px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header class="band"><div class="band-in">
+  <img src="__LOGO__" alt="innvie">
+  <h1>So sánh foundation trước khi chốt</h1>
+  <p>Ba bộ, cùng màu đen #171717, khác <b>hình dáng</b>: <mark>A · shadcnuikit bản web</mark> (đo trên shadcnuikit.com) · <mark>B · shadcnuikit Figma kit</mark> (đo trong file kit) · <mark>C · bộ thử hiện tại</mark> (shadcn gốc new-york-v4, đã dựng trên Figma). Xem component cạnh nhau, rồi 3 màn <b>Form · View · List</b>. Chọn ở tab cuối — lưu trên trang.</p>
+  <nav class="tabs" id="tabs"></nav>
+</div></header>
+<main class="wrap">
+  <div class="status"><span id="store">Đang kết nối nơi lưu…</span><span style="flex:1"></span><button class="btnx" id="btn-export">Xuất lựa chọn dạng chữ</button></div>
+  <pre class="out" id="out" hidden></pre>
+  <div id="panel"></div>
+</main>
+<script>
+const $=s=>document.querySelector(s);const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const I={plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="opacity:.5"><path d="m6 9 6 6 6-6"/></svg>',
+check:'<svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>',
+dots:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>',
+edit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>',
+truck:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>',
+box:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg>',
+users:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>',
+home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11 12 4l9 7v9H3z"/></svg>',
+cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>'};
+const F=[["A","shadcnuikit · web"],["B","shadcnuikit · Figma kit"],["C","Bộ thử hiện tại"]];
+const fb=k=>`<span class="fbadge ${k}"><i>${k}</i>${F.find(f=>f[0]===k)[1]}</span>`;
+/* ---------- component snippets ---------- */
+const CB=(on,l)=>`<span class="cb"><i class="${on?"on":""}">${on?I.check:""}</i>${l}</span>`;
+const ROWS=[
+ ["Nút — kiểu",()=>`<button class="b p">Giao lệnh</button><button class="b o">Huỷ</button><button class="b s">Lưu nháp</button><button class="b g">Bỏ qua</button><button class="b d">${I.trash}Xoá</button><button class="b l">Chi tiết</button>`],
+ ["Nút — cỡ, icon, focus",()=>`<button class="b p sm">Nhỏ</button><button class="b p">Mặc định</button><button class="b p lg">Lớn</button><button class="b o ic">${I.plus}</button><button class="b o">${I.plus}Thêm xe</button><button class="b p f">Focus</button>`],
+ ["Ô nhập — trạng thái",()=>`<div style="display:grid;gap:10px;width:100%"><div class="in phd">Biển số xe</div><div class="in f">51C-123.45</div><div class="in e">51C-12</div><div class="in dis">Không sửa được</div></div>`],
+ ["Ô nhập có nhãn",()=>`<div class="fld" style="width:100%"><label>Email nhận thông báo</label><div class="in phd">ten@congty.vn</div><span class="hint">Gửi khi xe rời kho và khi giao xong</span></div>`],
+ ["Select + menu",()=>`<div style="display:grid;gap:6px"><div class="in" style="width:220px">Container 40'<span class="end">${I.chev}</span></div><div class="menu"><div class="mi">Container 20'</div><div class="mi h">Container 40'${I.check}</div><div class="mi">Mooc sàn</div></div></div>`],
+ ["Checkbox · Radio · Switch",()=>`<div style="display:grid;gap:10px">${CB(1,"Hàng nguy hiểm")}${CB(0,"Hàng lạnh")}<span class="cb"><span class="rd on"></span>Giao tận nơi</span><span class="cb"><span class="sw on"></span>Tự giao lệnh</span></div>`],
+ ["Tag trạng thái",()=>`<span class="tag c" style="--c:#16a34a">Đã giao</span><span class="tag c" style="--c:#155dfc">Đang chạy</span><span class="tag c" style="--c:#d97706">Trễ hẹn</span><span class="tag c" style="--c:#e7000b">Huỷ</span><span class="tag">Nháp</span>`],
+ ["Thanh chuyển · tooltip",()=>`<div class="segc"><span class="on">Hôm nay</span><span>Tuần</span><span>Tháng</span></div><span class="tip">Tải phiếu giao</span>`],
+ ["Card",()=>`<div class="card" style="width:100%"><div><h4>Lệnh LVT-0012</h4><div class="desc">Cát Lái → KCN Sóng Thần</div></div><div class="actions"><button class="b p">Giao lệnh</button><button class="b o">Sửa</button></div></div>`],
+];
+function P_components(){
+  return `<h2>Component cạnh nhau</h2><p class="lead">Cùng một nội dung, ba bộ số. Ô vàng ở bảng dưới là chỗ ba bộ <b>khác nhau</b>. Rê chuột lên nút để xem hover.</p>
+  <div class="cmp"><div class="h rl">Component</div>${F.map(([k])=>`<div class="h">${fb(k)}</div>`).join("")}
+  ${ROWS.map(([n,f])=>`<div class="rl">${n}</div>${F.map(([k])=>`<div class="th ${k}">${f()}</div>`).join("")}`).join("")}</div>
+  <h3>Bảng số đo</h3>
+  <div class="tbl"><table class="t"><tr><th>Thuộc tính</th><th>${fb("A")}</th><th>${fb("B")}</th><th>${fb("C")}</th><th>Nguồn đo</th></tr>
+  ${[["Font chữ · tiêu đề","Inter · Inter 600","Geist · Geist 600","Inter · Cal Sans 400",1],["Cao nút/ô nhập mặc định · nhỏ · lớn","36 · 32 · 40","32 · 28 · 36","36 · 32 · 40",1],["Bo góc nút","tròn hẳn (pill)","8","8",1],["Padding ngang nút","12","10","16",1],["Khoảng icon–chữ","6","6","8",1],
+     ["Ô nhập","nền xám #f2f2f2, không viền, pill","nền trắng, viền #e5e5e5, bo 10","nền trắng, viền, bo 8, bóng nhẹ",1],["Nút viền","không bóng","không bóng","bóng xs",1],["Nút xoá","đỏ nhạt (nền 10%, chữ đỏ)","đỏ nhạt","đỏ đặc, chữ trắng",1],
+     ["Hover nút chính","màu chính 80%","màu chính + trắng 10%","màu chính 90%",1],["Vòng focus","3px, xám 30%","3px, #a3a3a3 50%","3px, xám 50%",1],["Bo card","23 (rất tròn)","14 (ước lượng)","10",1],["Bo tag","pill","8 (ước lượng)","6",1],["Màu","#171717 · #e5e5e5 · #737373 · đỏ","giống","giống",0]]
+   .map(r=>`<tr><td>${r[0]}</td><td class="${r[4]?"diff":""}">${r[1]}</td><td class="${r[4]?"diff":""}">${r[2]}</td><td class="${r[4]?"diff":""}">${r[3]}</td><td style="color:var(--fg-3);font-size:12px">${r[0].startsWith("Bo card")||r[0].startsWith("Bo tag")?"A đo web; B chưa đo được, ước lượng":"A: shadcnuikit.com (computed style) · B: Figma kit (Properties)"}</td></tr>`).join("")}</table></div>`;
+}
+/* ---------- screens ---------- */
+const SIDE=on=>`<div class="side"><div class="logo">invlogis</div>${[["home","Tổng quan"],["truck","Lệnh vận tải"],["box","Đơn hàng"],["users","Tài xế"],["cal","Lịch xe"]].map(([i,l])=>`<a class="${l===on?"on":""}">${I[i]}${l}</a>`).join("")}</div>`;
+const S_FORM=()=>`${SIDE("Lệnh vận tải")}<div class="main">
+ <div class="ph"><div><div class="crumb">Lệnh vận tải / Tạo mới</div><h1>Tạo lệnh vận tải</h1></div><div class="actions"><button class="b o">Huỷ</button><button class="b s">Lưu nháp</button><button class="b p">Tạo lệnh</button></div></div>
+ <div class="card"><div><h4>Thông tin chung</h4><div class="desc">Khách hàng và thời gian lấy hàng</div></div>
+  <div class="grid3"><div class="fld"><label>Khách hàng</label><div class="in">Công ty May Sài Gòn<span class="end">${I.chev}</span></div></div>
+  <div class="fld"><label>Ngày lấy hàng</label><div class="in">07/11/2026 · 08:00<span class="end">${I.cal}</span></div></div>
+  <div class="fld"><label>Loại hàng</label><div class="in phd">Chọn loại hàng<span class="end">${I.chev}</span></div></div></div></div>
+ <div class="card"><div><h4>Tuyến và hàng hoá</h4></div>
+  <div class="grid2"><div class="fld"><label>Điểm lấy</label><div class="in">Cảng Cát Lái, TP. Thủ Đức</div></div>
+  <div class="fld"><label>Điểm giao</label><div class="in e">KCN Sóng</div><span class="err">Chọn địa chỉ trong danh sách gợi ý</span></div>
+  <div class="fld"><label>Số container</label><div class="in">2<span class="end">container 40'</span></div></div>
+  <div class="fld"><label>Ghi chú cho tài xế</label><div class="ta">Liên hệ bảo vệ cổng số 3 trước khi vào…</div></div></div>
+  <div style="display:flex;gap:24px;flex-wrap:wrap">${CB(1,"Hàng nguy hiểm")}${CB(0,"Hàng lạnh")}<span class="cb"><span class="sw on"></span>Tự giao lệnh cho xe gần nhất</span></div></div>
+</div>`;
+const S_VIEW=()=>`${SIDE("Lệnh vận tải")}<div class="main">
+ <div class="ph"><div><div class="crumb">Lệnh vận tải / LVT-0012</div><h1 style="display:flex;gap:10px;align-items:center">LVT-0012 <span class="tag c" style="--c:#155dfc">Đang chạy</span></h1></div><div class="actions"><button class="b o">${I.edit}Sửa</button><button class="b p">Cập nhật chặng</button><button class="b o ic">${I.dots}</button></div></div>
+ <div class="grid2" style="grid-template-columns:2fr 1fr">
+  <div class="card"><div><h4>Thông tin lệnh</h4></div><div class="kv">${[["Khách hàng","Công ty May Sài Gòn"],["Tuyến","Cát Lái → Sóng Thần"],["Lấy hàng","07/11 · 08:00"],["Hàng hoá","2 × container 40'"],["Cước","4.800.000 ₫"],["Người tạo","Nguyễn Hà · 06/11"]].map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join("")}</div></div>
+  <div class="card"><div><h4>Xe và tài xế</h4></div><div class="kv" style="grid-template-columns:1fr"><div><span>Xe</span><b class="mono">51C-123.45</b></div><div><span>Tài xế</span><b>Trần Văn Bình · 0909 123 456</b></div></div><button class="b o">Đổi xe</button></div>
+ </div>
+ <div class="card"><div><h4>Hành trình</h4></div><div class="tl">${[[1,"Nhận lệnh","07:12"],[1,"Đến cảng Cát Lái","07:55"],[1,"Đã lấy hàng","08:40"],[0,"Đến KCN Sóng Thần","dự kiến 10:30"]].map(([on,t,s])=>`<div><i class="${on?"on":""}"></i><div>${t}<small>${s}</small></div></div>`).join("")}</div></div>
+</div>`;
+const ROWSD=[["LVT-0012","Cát Lái → Sóng Thần","51C-123.45","Đang chạy","#155dfc"],["LVT-0011","ICD Phước Long → VSIP 1","51D-456.78","Đã giao","#16a34a"],["LVT-0010","Cát Lái → Long Hậu","60C-111.22","Trễ hẹn","#d97706"],["LVT-0009","Hiệp Phước → Tân Tạo","51C-777.01","Chờ xe",""],["LVT-0008","Cát Lái → Mỹ Phước 3","51D-090.90","Huỷ","#e7000b"]];
+const S_LIST=()=>`${SIDE("Lệnh vận tải")}<div class="main">
+ <div class="ph"><div><div class="crumb">Vận hành</div><h1>Lệnh vận tải</h1></div><div class="actions"><button class="b o">Xuất Excel</button><button class="b p">${I.plus}Tạo lệnh</button></div></div>
+ <div class="filters"><div class="in phd" style="width:260px">${I.search}Tìm mã lệnh, biển số…</div><div class="in" style="width:170px">Trạng thái: Tất cả<span class="end">${I.chev}</span></div><div class="in" style="width:150px">Tuyến<span class="end">${I.chev}</span></div><span style="flex:1"></span><div class="segc"><span class="on">Hôm nay</span><span>Tuần</span><span>Tháng</span></div></div>
+ <div class="dtw"><table class="dt"><tr><th style="width:36px">${CB(0,"")}</th><th>Mã lệnh</th><th>Tuyến</th><th>Xe</th><th>Trạng thái</th><th style="width:90px"></th></tr>
+ ${ROWSD.map((r,i)=>`<tr><td>${CB(i===1,"")}</td><td class="mono">${r[0]}</td><td>${r[1]}</td><td class="mono">${r[2]}</td><td>${r[4]?`<span class="tag c" style="--c:${r[4]}">${r[3]}</span>`:`<span class="tag">${r[3]}</span>`}</td><td><button class="b g ic sm">${I.edit}</button><button class="b g ic sm">${I.dots}</button></td></tr>`).join("")}</table></div>
+ <div class="pg"><span>1 / 12 trang · 58 lệnh</span><div class="actions"><button class="b o sm">Trước</button><button class="b o sm">Sau</button></div></div>
+</div>`;
+const SCR={form:["Form — tạo lệnh vận tải",S_FORM],view:["View — chi tiết lệnh",S_VIEW],list:["List — danh sách lệnh",S_LIST]};
+let show="all";
+function P_screen(k){const [t,f]=SCR[k];
+  return `<h2>${t}</h2><p class="lead">Cùng một màn, ba foundation xếp dọc. Chọn một bộ để xem riêng.</p>
+  <div class="seg" id="showseg">${[["all","Cả 3"],["A","A"],["B","B"],["C","C"]].map(([v,l])=>`<button data-show="${v}" aria-pressed="${show===v}">${l}</button>`).join("")}</div>
+  ${F.filter(([x])=>show==="all"||show===x).map(([x])=>`<div class="scr"><div class="lab">${fb(x)}</div><div class="th page ${x}">${f()}</div></div>`).join("")}`;
+}
+/* ---------- decide ---------- */
+const LS="dsantd-compare";let state={};try{state=JSON.parse(localStorage.getItem(LS)||"{}")}catch(e){}
+let db=null,uid=null,canWrite=true;
+const Q=[["base","Chọn foundation làm chuẩn",["A · shadcnuikit web","B · shadcnuikit Figma kit","C · giữ bộ thử hiện tại","Trộn — ghi rõ bên dưới"]],
+ ["btn","Bo góc nút",["Tròn hẳn (pill) — A","8 — B, C"]],["input","Kiểu ô nhập",["Nền xám không viền, pill — A","Nền trắng có viền — B, C"]],
+ ["size","Chiều cao mặc định nút/ô nhập",["36 (nhỏ 32, lớn 40) — A, C","32 (nhỏ 28, lớn 36) — B"]],["head","Font tiêu đề",["Inter — A","Geist — B","Cal Sans — C (đang chốt)"]],["danger","Nút xoá",["Đỏ nhạt — A, B","Đỏ đặc — C"]]];
+function P_decide(){return `<h2>Chọn</h2><p class="lead">Chọn bộ làm chuẩn ở câu đầu. Nếu <b>trộn</b>, trả lời thêm 5 câu chi tiết — mỗi câu ghi bộ nào đang dùng phương án đó. Lựa chọn lưu trên trang, Claude đọc rồi sửa foundations + Figma.</p>
+ ${Q.map(([k,t,o])=>{const s=state[k]||{};return `<div class="decide"><b>${t}</b><div class="opts">${o.map((x,i)=>`<label class="${s.choice===i?"on":""}"><input type="radio" name="${k}" value="${i}" ${s.choice===i?"checked":""}>${x}</label>`).join("")}</div>
+ <textarea data-note="${k}" placeholder="Ghi chú (không bắt buộc)">${esc(s.note||"")}</textarea><div class="save" id="sv-${k}"></div></div>`}).join("")}`}
+function lsSave(){try{localStorage.setItem(LS,JSON.stringify(state))}catch(e){}}
+async function persist(k){lsSave();const st=document.getElementById("sv-"+k);if(!db){if(st)st.textContent="Đã lưu trong trình duyệt này";return}
+ if(!canWrite){if(st)st.textContent="Bạn chỉ có quyền xem";return}
+ try{await db.doc("answers/"+k).set({choice:state[k].choice??null,note:state[k].note||"",at:state[k].at,by:uid||null});if(st)st.textContent="Đã lưu "+new Date(state[k].at).toLocaleTimeString("vi-VN")}catch(e){if(st)st.textContent="Chưa lưu được lên trang — đã giữ trong trình duyệt"}}
+const TABS=[["components","Component"],["form","Màn Form"],["view","Màn View"],["list","Màn List"],["decide","Chọn"]];
+let cur=location.hash.slice(1);if(!TABS.some(t=>t[0]===cur))cur="components";
+function render(){$("#tabs").innerHTML=TABS.map(([k,l])=>`<button data-tab="${k}" aria-selected="${k===cur}">${l}</button>`).join("");
+ $("#panel").innerHTML=cur==="components"?P_components():cur==="decide"?P_decide():P_screen(cur)}
+document.addEventListener("click",e=>{const tb=e.target.closest("[data-tab]");if(tb){cur=tb.dataset.tab;try{history.replaceState(null,"","#"+cur)}catch(_){}render();scrollTo(0,0);return}
+ const sb=e.target.closest("[data-show]");if(sb){show=sb.dataset.show;render()}});
+document.addEventListener("change",e=>{const r=e.target;if(r.type==="radio"&&r.name){state[r.name]={...(state[r.name]||{}),choice:+r.value,at:Date.now()};render();persist(r.name)}});
+let nt={};document.addEventListener("input",e=>{const k=e.target.dataset?.note;if(!k)return;state[k]={...(state[k]||{}),note:e.target.value,at:Date.now()};clearTimeout(nt[k]);nt[k]=setTimeout(()=>persist(k),700)});
+$("#btn-export").onclick=()=>{const L=["So sánh foundation — lựa chọn",""];Q.forEach(([k,t,o])=>{const s=state[k]||{};L.push(`- ${t}: ${s.choice==null?"(chưa chọn)":o[s.choice]}${s.note?" — "+s.note.replace(/\n/g," "):""}`)});const o=$("#out");o.textContent=L.join("\n");o.hidden=false};
+render();
+(async()=>{if(!window.claude?.use){$("#store").textContent="Lưu trong trình duyệt này";return}
+ const [d,u]=await Promise.all([claude.use("db"),claude.use("user")]);if(!d){$("#store").textContent="Lưu trong trình duyệt này";return}
+ db=d;try{uid=u?await u.id():null}catch(e){}try{const w=u?await u.can("data.write"):null;if(w===false)canWrite=false}catch(e){}
+ $("#store").textContent=canWrite?"Lựa chọn lưu trên trang, Claude đọc được":"Bạn chỉ có quyền xem trang này";
+ db.collection("answers").onSnapshot(snap=>{let ch=false;snap.docs.forEach(doc=>{const x=doc.data();if(!x)return;const c=state[doc.id];if(!c||(x.at||0)>(c.at||0)){state[doc.id]={choice:x.choice??undefined,note:x.note||"",at:x.at};ch=true}});
+  if(ch){lsSave();const a=document.activeElement;if(!(a&&a.tagName==="TEXTAREA")&&cur==="decide")render()}},()=>{})})();
+</script>
+</body>
+</html>

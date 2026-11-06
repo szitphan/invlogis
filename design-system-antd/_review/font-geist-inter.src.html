@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>So sánh font Geist và Inter — tiếng Việt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:wght@400;500;600&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{--brand:#0036B5;--ink-soft:#E5ECFA;--line:#E3E5E8;--fg-2:#525252;--fg-3:#737373}
+*{box-sizing:border-box}body{margin:0;background:#F1F1F1;color:#0a0a0a;font:14px/1.55 Inter,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.band{background:var(--brand);color:#fff}.band-in{max-width:1240px;margin:0 auto;padding:20px 24px 18px}
+.band img{height:28px;display:block;margin-bottom:12px}.band h1{font:400 30px/1.2 'Cal Sans',Inter,sans-serif;margin:0 0 6px}.band p{margin:0;opacity:.92;max-width:900px}
+.wrap{max-width:1240px;margin:0 auto;padding:20px 24px 80px}
+.status{display:flex;gap:10px;align-items:center;margin-bottom:14px;font-size:13px;color:var(--fg-3)}
+.row{display:grid;grid-template-columns:160px 1fr 1fr;background:#fff;border:1px solid var(--line);border-top:0}
+.row:first-child{border-top:1px solid var(--line);border-radius:12px 12px 0 0}.row:last-child{border-radius:0 0 12px 12px}
+.row>div{padding:16px 20px;border-left:1px solid var(--line);min-width:0}.row>div:first-child{border-left:0;font-weight:600;color:var(--fg-2);font-size:13px}
+.row.h>div{background:#F6F7F9;font:600 15px Inter}
+.G{font-family:'Geist',sans-serif}.I{font-family:'Inter',sans-serif}
+.cap{font:500 11px 'JetBrains Mono',monospace;color:var(--fg-3);display:block;margin-bottom:2px}
+.ui{display:flex;flex-direction:column;gap:12px}
+.b{display:inline-flex;align-items:center;height:36px;padding:0 12px;border-radius:8px;font-size:14px;font-weight:500;letter-spacing:-.25px;border:1px solid transparent;background:#171717;color:#fafafa;font-family:inherit}
+.b.o{background:#fff;border-color:#e5e5e5;color:#0a0a0a}.b.d{background:#fde6e7;color:#e7000b}
+.in{height:36px;border-radius:999px;background:#f2f2f2;padding:0 12px;display:flex;align-items:center;color:#0a0a0a;font-size:14px}
+.in.ph{color:#737373}.lb{font-size:14px;font-weight:500;margin-bottom:6px}
+table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:9px 8px;border-bottom:1px solid #e5e5e5;text-align:left}th{font-weight:500;color:#737373;font-size:13px}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+.decide{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:18px}
+.opts{display:flex;gap:8px;margin:8px 0}.opts label{display:flex;gap:6px;align-items:center;border:1px solid #D4D4D4;border-radius:8px;padding:6px 14px;cursor:pointer;font-weight:500}
+.opts label.on{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand);background:var(--ink-soft)}
+textarea{width:100%;min-height:44px;border:1px solid #D4D4D4;border-radius:8px;padding:8px 10px;font:14px Inter}
+.save{font-size:12px;color:var(--fg-3);min-height:16px}
+mark{background:color-mix(in srgb,#00A2FF 22%,transparent);border-radius:3px;padding:0 2px}
+</style>
+</head>
+<body>
+<header class="band"><div class="band-in">
+  <img src="__LOGO__" alt="innvie">
+  <h1>Geist và Inter — chữ thường cho giao diện</h1>
+  <p>Cùng nội dung, cùng cỡ, đã bật làm mịn chữ (<b>antialiased</b>) như shadcnuikit.com. Đếm 75 ký tự tiếng Việt: <b>Inter 75/75</b>, <b>Geist 74/75 — thiếu ₫</b> (dòng "Tiền" bên dưới: ₫ của Geist là font dự phòng).</p>
+</div></header>
+<main class="wrap">
+<div class="status"><span id="store">Đang kết nối nơi lưu…</span></div>
+<div id="grid"></div>
+<div class="decide"><b>Chọn font chữ thường</b> (tiêu đề vẫn Cal Sans, mã/số kỹ thuật vẫn Geist Mono)
+ <div class="opts" id="opts"></div><textarea id="note" placeholder="Ghi chú (không bắt buộc)"></textarea><div class="save" id="sv"></div></div>
+</main>
+<script>
+const para="Lệnh vận tải được tạo từ đơn hàng. Điều phối chọn xe, tài xế và rơ-moóc phù hợp, rồi giao lệnh. Tài xế nhận lệnh trên ứng dụng, cập nhật từng chặng: đến cảng, đã lấy hàng, đang giao, giao xong.";
+const R=[
+ ["Đoạn văn 14/20",f=>`<p style="margin:0;font-size:14px;line-height:20px">${para}</p>`],
+ ["Đủ dấu",f=>`<div style="font-size:16px;line-height:26px">ă â đ ê ô ơ ư · Ă Â Đ Ê Ô Ơ Ư<br>ằ ẳ ẵ ắ ặ · ầ ẩ ẫ ấ ậ · ề ể ễ ế ệ<br>ồ ổ ỗ ố ộ · ờ ở ỡ ớ ợ · ừ ử ữ ứ ự · ỳ ỷ ỹ ý ỵ</div>`],
+ ["Cỡ chữ",f=>[12,14,16,18,20,24].map(s=>`<div><span class="cap">${s}px</span><span style="font-size:${s}px;line-height:1.35">Quản lý đội xe Đồng Nai</span></div>`).join("")],
+ ["Độ đậm 400 · 500 · 600",f=>[400,500,600].map(w=>`<div style="font-size:16px;font-weight:${w};line-height:28px"><span class="cap">${w}</span>Hướng dẫn giao hàng nguy hiểm</div>`).join("")],
+ ["Số liệu (cột thẳng hàng)",f=>`<table><tr><th>Mã lệnh</th><th class="num">Quãng đường</th><th class="num">Cước</th></tr>${[["LVT-0012","48,5 km","4.800.000"],["LVT-0011","112,0 km","11.250.000"],["LVT-0010","7,1 km","1.180.000"]].map(r=>`<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num">${r[2]}</td></tr>`).join("")}</table>`],
+ ["Tiền",f=>`<div style="font-size:20px;line-height:30px">4.800.000 ₫<br>4.800.000 đ<br>4.800.000 VNĐ</div>`],
+ ["Giao diện",f=>`<div class="ui"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="b">Giao lệnh</button><button class="b o">Huỷ</button><button class="b d">Xoá lệnh</button></div>
+  <div><div class="lb">Điểm giao hàng</div><div class="in">KCN Sóng Thần, Dĩ An, Bình Dương</div></div><div class="in ph">Tìm mã lệnh, biển số xe…</div>
+  <div style="font-size:12px;color:#737373">Cập nhật lúc 08:40 · Nguyễn Thị Hằng</div></div>`],
+ ["Chữ nhỏ 12",f=>`<div style="font-size:12px;line-height:16px;color:#525252">Xe đang bảo dưỡng không chọn được. Hạn đăng kiểm: 15/12/2026. Liên hệ đội trưởng để đổi xe.</div>`],
+];
+document.getElementById("grid").innerHTML=`<div class="row h"><div></div><div class="G">Geist</div><div class="I">Inter</div></div>`+R.map(([n,f])=>`<div class="row"><div>${n}</div><div class="G">${f("G")}</div><div class="I">${f("I")}</div></div>`).join("");
+const O=["Inter","Geist"];let st={};try{st=JSON.parse(localStorage.getItem("dsantd-font")||"{}")}catch(e){}
+let db=null,uid=null;
+function draw(){document.getElementById("opts").innerHTML=O.map((o,i)=>`<label class="${st.choice===i?"on":""}"><input type="radio" name="f" value="${i}" ${st.choice===i?"checked":""}>${o}</label>`).join("");document.getElementById("note").value=st.note||""}
+async function save(){try{localStorage.setItem("dsantd-font",JSON.stringify(st))}catch(e){}const s=document.getElementById("sv");if(!db){s.textContent="Đã lưu trong trình duyệt này";return}
+ try{await db.doc("answers/font").set({choice:st.choice??null,note:st.note||"",at:st.at,by:uid||null});s.textContent="Đã lưu "+new Date(st.at).toLocaleTimeString("vi-VN")}catch(e){s.textContent="Chưa lưu được lên trang"}}
+document.addEventListener("change",e=>{if(e.target.name==="f"){st={...st,choice:+e.target.value,at:Date.now()};draw();save()}});
+let t;document.getElementById("note").addEventListener("input",e=>{st={...st,note:e.target.value,at:Date.now()};clearTimeout(t);t=setTimeout(save,700)});
+draw();
+(async()=>{if(!window.claude?.use){document.getElementById("store").textContent="Lưu trong trình duyệt này";return}
+ const [d,u]=await Promise.all([claude.use("db"),claude.use("user")]);if(!d){document.getElementById("store").textContent="Lưu trong trình duyệt này";return}
+ db=d;try{uid=u?await u.id():null}catch(e){}document.getElementById("store").textContent="Lựa chọn lưu trên trang, Claude đọc được";
+ db.collection("answers").onSnapshot(s=>{s.docs.forEach(x=>{const v=x.data();if(x.id==="font"&&v&&(v.at||0)>(st.at||0)){st={choice:v.choice??undefined,note:v.note||"",at:v.at};draw()}})},()=>{})})();
+</script>
+</body>
+</html>
