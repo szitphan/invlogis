@@ -111,9 +111,11 @@ giao hàng, nhận lệnh — tránh bấm nhầm.
 
 Giữ 2 biến thể: **Sáng** và **Tối** (mode Light/Dark). **Không dùng:** nền sáng có viền (user bỏ 06/11).
 
-Hành vi: chỉ xác nhận khi kéo tới cuối rãnh; thả giữa chừng thì nút lò xo về chỗ cũ (chạm mép nén 8%);
-xong thì nút kéo **đứng ở cuối rãnh**, mũi tên thành ✓, chữ "Đã xác nhận" **trượt ra** trong phần rãnh bên trái (mờ → rõ, lệch trái 16 → 0) — không giãn nút kéo lấp rãnh; giữ 1,5 giây rồi chữ ẩn, nút lò xo về đầu, chữ gợi ý hiện lại. Phím Enter/Space
-trên nút kéo = xác nhận (người dùng bàn phím, trình đọc màn hình).
+Hành vi (khớp bencho.dev/?c=slide-confirm, user chốt 06/11): kéo tới đâu, **khối cùng màu nút kéo phủ từ đầu rãnh tới đó**;
+chữ gợi ý mờ dần (hết ở 55% quãng), mũi tên mờ ở 40% cuối. Chỉ xác nhận khi kéo tới cuối; thả giữa chừng thì lò xo về
+(chạm mép nén 8%). Xác nhận: nút kéo **giãn sang trái lấp kín rãnh, mép phải đứng yên** → cụm **✓ + "Đã xác nhận"** (nằm giữa
+nút) **trượt từ phải vào giữa**, rõ dần, phóng 70% → 100%; giữ 1,5 giây rồi nút thu về cỡ 48 ở đầu rãnh. Phím Enter/Space
+trên nút kéo = xác nhận.
 
 ## 7. Figma
 
@@ -137,4 +139,4 @@ Focus: lớp `Focus ring` viền 3px ngoài nút, bo 11 (= `btn/radius` 8 + `foc
 nút không nền (Ghost, Link) không hiện bóng. Text style: `button/base` (14/20), `button/xs` (12/16), Geist Medium −0.25px.
 Bộ 288 biến thể tạo bằng Figma MCP vì reqwise giới hạn 50 tổ hợp/set; bảng, nhãn, playground dựng bằng reqwise.
 
-Section Slide confirm `13:4056`: set `Slide confirm` `13:4117` — Nền (Sáng · Tối, mode Dark gắn trên biến thể) × Trạng thái (Nghỉ · Đang kéo · Đã xác nhận) = 6; gắn `slide/height` · `slide/grip-size` · `slide/radius` · `slide/grip-radius`; thuộc tính `Chữ gợi ý` (text).
+Section Slide confirm `13:4056`: set `Slide confirm` `13:4117` — Nền (Sáng · Tối, mode Dark gắn trên biến thể) × Trạng thái (Nghỉ · Đang kéo · Đã xác nhận) = 6; gắn `slide/height` · `slide/grip-size` · `slide/radius` · `slide/grip-radius`; thuộc tính `Chữ gợi ý` (text). Prototype: Nghỉ —On drag→ Đã xác nhận (Smart animate, Gentle 0,45 s) —After delay 1,5 s→ Nghỉ; các lớp đổi bằng opacity/vị trí (không ẩn/hiện) để Smart animate chạy; khối phủ cùng màu nút, trạng thái Đã xác nhận nút kéo phủ kín rãnh, cụm `Xong` (✓ + chữ) đặt sát phải mờ 0 ở Nghỉ/Đang kéo → giữa rõ 100% ở Đã xác nhận nên trượt từ phải vào. Khung thử `Thử · Slide confirm` `25:1247` (flow "Thử nút trượt"). Giới hạn Figma: kéo bất kỳ đoạn nào cũng hoàn tất, không có ngưỡng cuối rãnh và lò xo trả về — hành vi đúng xem trên trang artifact.

@@ -138,7 +138,7 @@ textarea{width:100%;min-height:44px;resize:vertical;border:1px solid var(--line-
 .pv .sl{width:100%;max-width:280px;height:56px;touch-action:none;user-select:none;-webkit-user-select:none}
 .pv .sl-track{position:relative;height:100%;border-radius:18px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;cursor:grab;transform-origin:center}
 .pv .sl.bd .sl-track{background:#fff;box-shadow:inset 0 0 0 1px var(--border)}
-.pv .sl-wash{position:absolute;left:4px;top:4px;bottom:4px;width:48px;border-radius:14px;background:rgb(23 23 23/.08)}
+.pv .sl-wash{position:absolute;left:4px;top:4px;bottom:4px;width:48px;border-radius:14px;background:var(--primary)}
 .pv .sl-say{position:relative;font-size:14px;font-weight:500;letter-spacing:-.25px;color:var(--text-2);pointer-events:none;padding-left:40px}
 .pv .sl-grip{position:absolute;left:4px;top:4px;height:48px;width:48px;border-radius:14px;border:0;padding:0;background:var(--primary);color:var(--primary-fg);display:flex;align-items:center;justify-content:center;transform-origin:left center;overflow:hidden;cursor:grab;font:inherit}
 .pv .sl-grip:focus-visible{outline:none;box-shadow:0 0 0 3px var(--ring)}
@@ -147,10 +147,7 @@ textarea{width:100%;min-height:44px;resize:vertical;border:1px solid var(--line-
 .pv .sl-arrow svg,.pv .sl-done svg{width:20px;height:20px}
 .pv .sl-done{font-size:14px;font-weight:500;letter-spacing:-.25px;white-space:nowrap;opacity:0;transform:scale(.7);transition:opacity .16s cubic-bezier(.33,.55,.2,1),transform .16s cubic-bezier(.33,.55,.2,1)}
 .pv .sl[data-done] .sl-done{opacity:1;transform:scale(1)}
-.pv .sl-ok{position:absolute;top:0;bottom:0;left:0;right:52px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;letter-spacing:-.25px;color:var(--fg);pointer-events:none;opacity:0;transform:translateX(-16px);transition:opacity .2s cubic-bezier(.33,.55,.2,1),transform .28s cubic-bezier(.33,.55,.2,1)}
-.pv .sl[data-done] .sl-ok{opacity:1;transform:none;transition-delay:.06s}
-.pv .sl.dk .sl-ok{color:#fafafa}
-.pv .sl.dk .sl-track{background:#262626}.pv .sl.dk .sl-wash{background:rgb(255 255 255/.1)}.pv .sl.dk .sl-grip{background:#e5e5e5;color:#171717}.pv .sl.dk .sl-say{color:#a1a1a1}
+.pv .sl.dk .sl-track{background:#262626}.pv .sl.dk .sl-wash{background:#e5e5e5}.pv .sl.dk .sl-grip{background:#e5e5e5;color:#171717}.pv .sl.dk .sl-say{color:#a1a1a1}
 
 /* ===== web shadcnuikit ===== */
 .refs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin:8px 0 14px}
@@ -360,7 +357,7 @@ const J={trash:S('<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>'),edit:S('<path
  moon:S('<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>'),copy:S('<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>'),ok:S('<path d="M20 6 9 17l-5-5"/>',2.5),
  minus:S('<path d="M5 12h14"/>'),down:S('<path d="m6 9 6 6 6-6"/>'),left:S('<path d="m15 18-6-6 6-6"/>'),right:S('<path d="m9 18 6-6-6-6"/>'),arrow:S('<path d="M5 12h14M12 5l7 7-7 7"/>'),
  star:S('<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1Z"/>'),heart:S('<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/>')};
-const slide=(cls,label)=>`<div class="sl ${cls}" data-slide><div class="sl-track"><i class="sl-wash"></i><span class="sl-say">${label}</span><span class="sl-ok">Đã xác nhận</span><button type="button" class="sl-grip" aria-label="${label}"><span class="sl-arrow">${J.arrow}</span><span class="sl-done">${J.ok}</span></button></div></div>`;
+const slide=(cls,label)=>`<div class="sl ${cls}" data-slide><div class="sl-track"><i class="sl-wash"></i><span class="sl-say">${label}</span><button type="button" class="sl-grip" aria-label="${label}"><span class="sl-arrow">${J.arrow}</span><span class="sl-done">${J.ok}Đã xác nhận</span></button></div></div>`;
 
 const W=(h,cls="")=>`<div class="pv web ${cls}">${h}</div>`;
 const ims=svg=>`<span class="ims">${svg}</span>`;
@@ -477,7 +474,7 @@ const C=[
   ["web-26","Icon + tooltip","nz-button + nz-tooltip","both",1,"Bắt buộc với mọi nút chỉ icon. Rê chuột thử.",W(`<span class="tt hov"><button class="b o ic">${I.plus}</button><span class="tip top">Add new item</span></span>`,"tstage")],
   ["web-27","Left | Middle | Right","nz-button-group (secondary + vạch ngăn)","ng",1,"Chuyển Ngày / Tuần / Tháng.",W('<span class="gw sg"><button class="b sec">Left</button><i class="sep"></i><button class="b sec">Middle</button><i class="sep"></i><button class="b sec">Right</button></span>')],
  ]],["Nút trượt để xác nhận (mới — bencho.dev)",[
-  ["slide-light","Nền sáng, không viền","component mới (Angular CDK drag)","sh",1,"Tài xế xác nhận giao hàng, nhận lệnh trên mobile — tránh bấm nhầm. Rãnh cao 56, đệm 4, nút kéo 48; bo rãnh <code>radius/2xl</code> 18, nút kéo <code>radius/xl</code> 14 (= 18 − 4). Chỉ xác nhận khi kéo tới cuối; thả giữa chừng thì lò xo về (đập tường nén 8%); xong thì nút đứng ở cuối rãnh, mũi tên thành ✓, chữ “Đã xác nhận” trượt ra trong rãnh, giữ 1,5 giây rồi nút lò xo về đầu. Kéo thử.",pv(slide("","Trượt để giao hàng"))],
+  ["slide-light","Nền sáng, không viền","component mới (Angular CDK drag)","sh",1,"Tài xế xác nhận giao hàng, nhận lệnh trên mobile — tránh bấm nhầm. Rãnh cao 56, đệm 4, nút kéo 48; bo rãnh <code>radius/2xl</code> 18, nút kéo <code>radius/xl</code> 14 (= 18 − 4). Chỉ xác nhận khi kéo tới cuối; thả giữa chừng thì lò xo về (đập tường nén 8%); kéo tới đâu khối màu nút phủ tới đó; xong thì nút giãn sang trái lấp rãnh (mép phải đứng yên) nên cụm ✓ “Đã xác nhận” trượt từ phải vào giữa, rõ dần, phóng 70% → 100%; giữ 1,5 giây rồi thu về đầu rãnh (theo bencho.dev). Kéo thử.",pv(slide("","Trượt để giao hàng"))],
   ["slide-light-b","Nền sáng, có viền","component mới","sh",0,"Anh/chị đã bỏ 06/11.",pv(slide("bd","Trượt để giao hàng"))],
   ["slide-dark","Nền tối","component mới","sh",1,"Anh/chị đã giữ 06/11. Rãnh #262626, nút #e5e5e5 (màu Dark của token).",pv(slide("dk","Trượt để nhận lệnh"),"tdark")],
  ]]]},
@@ -736,7 +733,7 @@ $("#btn-export").onclick=()=>{const L=["Chọn biến thể — base components 
 
 /* nút trượt + nút sao chép */
 /* nút trượt — theo bản tham chiếu (bencho.dev): lò xo tới hạn khi xác nhận, lò xo 0.62 khi trả về,
-   vượt tường thì nén thay vì văng; xong thì nút đứng cuối rãnh, chữ "Đã xác nhận" trượt ra (user chốt 06/11: không giãn khối đen) */
+   vượt tường thì nén thay vì văng; khối phủ cùng màu nút; xong thì nút giãn sang trái, cụm ✓ + chữ trượt từ phải vào (khớp bencho.dev, user chốt 06/11) */
 const SL={H:56,PAD:4,GRIP:48,HOLD:1500,SWELL:1.03};
 const SLK=260+(50/100)*640, SLM=.9, SLC=2*Math.sqrt(SLK*SLM);
 const SPR={k:SLK,c:SLC,m:SLM}, HOME={k:SLK,c:SLC*.62,m:SLM}, BACK={k:380,c:34,m:.9};
@@ -744,11 +741,11 @@ const clampN=(v,lo,hi)=>Math.min(hi,Math.max(lo,v));
 const slS=new WeakMap();
 function slState(el){let st=slS.get(el);if(!st){st={x:0,anchor:0,shown:1,pulse:1,held:false,done:false,hot:false,an:{},grip:null,timer:0};slS.set(el,st)}return st}
 function slTravel(el){return el.querySelector(".sl-track").offsetWidth-SL.PAD*2-SL.GRIP}
-function slDraw(el){const st=slState(el),T=slTravel(el),seen=clampN(st.x,0,T),wide=SL.GRIP;
+function slDraw(el){const st=slState(el),T=slTravel(el),seen=clampN(st.x,0,T),wide=SL.GRIP+clampN(st.anchor-seen,0,T);
  const over=Math.max(0,-st.x),q=1-Math.min(.08,over/110),sw=st.hot&&!st.held&&!st.done?SL.SWELL:1;
  const g=el.querySelector(".sl-grip");g.style.width=wide+"px";g.style.transform=`translateX(${seen}px) scale(${q*sw},${(1/q)*sw})`;
  el.querySelector(".sl-wash").style.width=(seen+SL.GRIP)+"px";
- el.querySelector(".sl-say").style.opacity=clampN(1-seen/(T*.55),0,1);
+ el.querySelector(".sl-say").style.opacity=st.done?0:clampN(1-seen/(T*.55),0,1);
  el.querySelector(".sl-arrow").style.opacity=st.shown*clampN(1-(seen-T*.55)/(T*.4),0,1);
  el.querySelector(".sl-track").style.transform=`scale(${st.pulse})`;
  if(st.held)el.setAttribute("data-held","");else el.removeAttribute("data-held");
@@ -761,9 +758,9 @@ function slTween(el,key,keys,times,dur,delay=0){const st=slState(el);const id=(s
  const ease=t=>1-Math.pow(1-t,3);
  const step=now=>{if(st.an[key]!==id)return;const t=clampN((now-t0)/(dur*1000),0,1);if(now>=t0){let i=1;while(i<times.length-1&&t>times[i])i++;
   const a=times[i-1],b=times[i],u=b>a?clampN((t-a)/(b-a),0,1):1;st[key]=keys[i-1]+(keys[i]-keys[i-1])*ease(u);slDraw(el)}if(t<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
-function slFinish(el){const st=slState(el);st.done=true;st.x=slTravel(el);
- slTween(el,"shown",[st.shown,0],[0,1],.16);slTween(el,"pulse",[1,.974,1],[0,.62,1],.42,.05);
- clearTimeout(st.timer);st.timer=setTimeout(()=>{st.done=false;slDraw(el);slTween(el,"shown",[0,1],[0,1],.22,.18);slSpring(el,"x",0,HOME)},SL.HOLD);slDraw(el)}
+function slFinish(el){const st=slState(el);st.done=true;st.anchor=st.x;
+ slTween(el,"shown",[st.shown,0],[0,1],.16);slSpring(el,"x",0,SPR);slTween(el,"pulse",[1,.974,1],[0,.62,1],.42,.1);
+ clearTimeout(st.timer);st.timer=setTimeout(()=>{st.done=false;slTween(el,"shown",[0,1],[0,1],.22,.12);slSpring(el,"anchor",0,BACK)},SL.HOLD);slDraw(el)}
 function slLocal(el,cx){const tr=el.querySelector(".sl-track"),b=tr.getBoundingClientRect(),k=b.width/(tr.offsetWidth||1);return (cx-b.left)/(k||1)}
 document.addEventListener("pointerdown",e=>{const el=e.target.closest(".pv .sl");if(!el)return;const st=slState(el);if(st.done)return;e.preventDefault();
  st.an.x=(st.an.x||0)+1;st.grip={id:e.pointerId,grab:null};st.held=true;slDraw(el);

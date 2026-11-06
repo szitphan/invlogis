@@ -82,6 +82,12 @@ Nhấn nút không dùng màu riêng: cả nút mờ `opacity/pressed` (Mục 5,
 Chữ hiển thị **antialiased** (`-webkit-font-smoothing: antialiased`) — thiếu dòng này chữ nút trông đậm hơn thiết kế.
 Geist, Geist Mono, Cal Sans đủ 74/75 ký tự tiếng Việt, chỉ thiếu **₫** (trình duyệt lấy font dự phòng). Trên Figma ghi tiền bằng "đ" hoặc "VNĐ".
 
+> ⚠ **Lỗi dấu tiếng Việt trên Figma (06/11):** Geist do Figma cung cấp là bản cũ: mất dấu sắc / huyền / ngã khi
+> chồng lên mũ hoặc trăng (ấ ầ ẫ · ắ ằ ẵ · ế ề ễ · ố ồ ỗ — "Tiếp" thành "Tiêp"). Bản web (Google Fonts) và bản
+> **Geist v1.9.2** (github.com/vercel/geist-font) đúng hết, có cả ₫. Cách dùng: **cài Geist + Geist Mono v1.9.2 vào máy**
+> (`~/Library/Fonts`) rồi mở lại Figma desktop. Máy chưa cài (dev, khách, Figma trên trình duyệt) vẫn thấy lỗi —
+> khi gửi file Figma cho người khác phải nhắc cài font. Code dev không bị ảnh hưởng (dùng Google Fonts hoặc gói `geist`).
+
 **Text style** (cỡ / dòng):
 
 | Text style | Font | Cỡ / dòng | Biến ng-zorro |
