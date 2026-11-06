@@ -137,4 +137,4 @@ Focus: lớp `Focus ring` viền 3px ngoài nút, bo 11 (= `btn/radius` 8 + `foc
 nút không nền (Ghost, Link) không hiện bóng. Text style: `button/base` (14/20), `button/xs` (12/16), Geist Medium −0.25px.
 Bộ 288 biến thể tạo bằng Figma MCP vì reqwise giới hạn 50 tổ hợp/set; bảng, nhãn, playground dựng bằng reqwise.
 
-Còn dựng: `slide-confirm` (Nền Sáng · Tối × Nghỉ · Đang kéo · Đã xác nhận).
+Section Slide confirm `13:4056`: set `Slide confirm` `13:4117` — Nền (Sáng · Tối, mode Dark gắn trên biến thể) × Trạng thái (Nghỉ · Đang kéo · Đã xác nhận) = 6; gắn `slide/height` · `slide/grip-size` · `slide/radius` · `slide/grip-radius`; thuộc tính `Chữ gợi ý` (text).

@@ -177,6 +177,156 @@ textarea{width:100%;min-height:44px;resize:vertical;border:1px solid var(--line-
 .pv .colw{display:inline-flex;flex-direction:column;gap:8px}
 .pv .b.brand{color:#fff}.pv .b.brand::after{content:"";flex:1}.pv .b.brand .bi{flex:1;display:flex;margin-right:8px;opacity:.6}.pv .b.brand:hover{filter:brightness(.92)}
 .pv .tt.hov .tip{opacity:0;transition:opacity .15s;pointer-events:none}.pv .tt.hov:hover .tip{opacity:1}
+/* ===== r2: 7 tab theo shadcnuikit.com/components/* — dán vào cuối khối style (sau khối "web shadcnuikit") ===== */
+/* --- chung: trường có nhãn, ô nhập thật (gõ được) --- */
+.pv .fld{display:flex;flex-direction:column;gap:6px;width:240px;text-align:left}
+.pv .fld>.in,.pv .fld>.ta2,.pv .fld>.jn,.pv .fld>.rel{width:100%}
+.pv .lbl{font-size:14px;font-weight:500;line-height:1;color:var(--text)}
+.pv .lbl small,.pv .sub{font-size:12px;font-weight:400;color:var(--text-2)}
+.pv .hint{font-size:12px;color:var(--text-2);line-height:16px}
+.pv .help.ok{color:var(--success);display:flex;align-items:center;gap:6px;font-size:14px}
+.pv .phx{color:var(--text-2)}
+.pv .ii{border:0;background:transparent;outline:0;font:inherit;color:inherit;flex:1;width:0;min-width:0;padding:0;height:100%}
+.pv .ii::placeholder{color:var(--text-2)}
+.pv .in:focus-within{border-color:var(--ring-b);box-shadow:0 0 0 3px var(--ring)}
+.pv .in.err:focus-within{border-color:var(--error);box-shadow:0 0 0 3px rgb(231 0 11/.2)}
+.pv .in.ok{background:#fff;border-color:var(--success)}
+.pv .in .ad{color:var(--text-2);white-space:nowrap;flex:none}
+.pv .in .end{gap:4px;align-items:center}
+.pv .in .ib{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:999px;color:var(--text-2);margin-right:-6px}
+.pv .in .ib:hover{background:var(--hover-bg)}
+.pv .in .ib svg{width:14px;height:14px}
+.pv .in .sel{display:inline-flex;align-items:center;gap:4px;height:28px;padding:0 6px 0 10px;margin-right:-8px;border-radius:999px;background:#fff;font-size:13px;color:var(--text)}
+.pv .in .sel svg{width:14px;height:14px}
+.pv .in.multi{height:auto;min-height:var(--h);flex-wrap:wrap;gap:4px;padding:4px 6px;border-radius:18px}
+/* nhiều dòng — shadcnuikit: nền xám, không viền, bo rounded-2xl (≈ radius/xl 14) */
+.pv .ta2{width:220px;min-height:72px;background:#f2f2f2;border:1px solid transparent;border-radius:14px;padding:10px 12px;color:var(--text-2);position:relative;text-align:left}
+.pv .ta2 .cnt{position:absolute;right:12px;bottom:8px;font-size:12px}
+/* ghép nhiều ô (khoảng Từ–Đến, thẻ ngân hàng): vạch trắng 1px thay viền */
+.pv .jn{display:inline-flex;gap:1px;width:240px}
+.pv .jn>.in{width:auto;flex:1;min-width:0;border-radius:0}
+.pv .jn>.in:first-child{border-radius:999px 0 0 999px}.pv .jn>.in:last-child{border-radius:0 999px 999px 0}
+.pv .jnv{display:flex;flex-direction:column;gap:1px;width:240px}
+.pv .jnv>.in{width:100%;border-radius:14px 14px 0 0}
+.pv .jnv>.jn{width:100%}.pv .jnv>.jn>.in:first-child{border-radius:0 0 0 14px}.pv .jnv>.jn>.in:last-child{border-radius:0 0 14px 0}
+/* OTP */
+.pv .otp{display:inline-flex;gap:8px}.pv .otp span{width:36px;height:36px;border-radius:10px;background:#f2f2f2;display:grid;place-items:center;font-weight:500;font-variant-numeric:tabular-nums}
+.pv .otp span.f{box-shadow:0 0 0 3px var(--ring);border:1px solid var(--ring-b)}
+/* nhãn nổi (floating label) */
+.pv .flt{position:relative;width:240px;text-align:left}
+.pv .flt .fl{position:absolute;left:12px;top:-8px;font-size:12px;font-weight:500;padding:0 4px;background:#fff;border-radius:4px;color:var(--text)}
+/* độ mạnh mật khẩu */
+.pv .pbar{height:4px;border-radius:999px;background:#e5e5e5;overflow:hidden;width:100%}.pv .pbar i{display:block;height:100%;width:50%;background:var(--warning)}
+.pv .req{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-2)}
+.pv .req li{display:flex;align-items:center;gap:6px}.pv .req li svg{width:14px;height:14px}.pv .req li.ok{color:var(--success)}
+/* --- tag / badge pill 20 (tag/height, tag/radius = full) --- */
+.pv .pill{display:inline-flex;align-items:center;gap:4px;height:20px;padding:0 8px;border-radius:999px;font-size:12px;font-weight:500;line-height:1;border:1px solid transparent;white-space:nowrap;color:var(--text);background:#f5f5f5}
+.pv .pill svg{width:12px;height:12px}
+.pv .pill.p{background:var(--primary);color:var(--primary-fg)}
+.pv .pill.s{background:#f5f5f5}
+.pv .pill.o{background:#fff;border-color:var(--border)}
+.pv .pill.w{background:#fff}
+.pv .pill.d{background:rgb(231 0 11/.1);color:var(--error)}
+.pv .pill.c{background:color-mix(in srgb,var(--c) 10%,#fff);color:var(--c)}
+.pv .pill.cs{background:var(--c);color:#fff}
+.pv .pill.n{min-width:20px;padding:0 4px;justify-content:center;font-variant-numeric:tabular-nums}
+.pv .pill.lg{height:28px;padding:0 4px 0 10px}
+.pv .pill.a{text-decoration:none;cursor:pointer}.pv .pill.a:hover{background:var(--primary-hover)}
+.pv .pill .dt{width:6px;height:6px;border-radius:50%;background:var(--c);flex:none}
+.pv .pill .px{display:inline-grid;place-items:center;width:16px;height:16px;margin-right:-4px;border-radius:999px;opacity:.6;cursor:pointer}
+.pv .pill .px:hover{opacity:1}.pv .pill .px svg{width:12px;height:12px;opacity:1}
+.pv .pill .a16{width:16px;height:16px;border-radius:50%;margin-left:-6px;background:linear-gradient(135deg,#a1a1a1,#525252);color:#fff;font-size:8px;display:grid;place-items:center}
+.pv .pill .ct{font-size:10px;opacity:.6}
+.pv .ims2{display:inline-flex;opacity:.6}
+.pv .bwrap .dot.k{background:var(--primary)}
+/* thông báo dạng pill cao 36 (badge 14–17) */
+.pv .ann{display:inline-flex;align-items:center;gap:10px;height:36px;padding:4px 16px 4px 4px;border:1px solid var(--border);border-radius:999px;background:#fff;font-size:12px;font-weight:500;white-space:nowrap}
+.pv .ann.r{padding:4px 4px 4px 16px}.pv .ann .ci{width:28px;height:28px;border-radius:50%;background:#f5f5f5;display:grid;place-items:center;flex:none}
+.pv .ann.sp{gap:0;padding:0}.pv .ann.sp>span{height:100%;display:flex;align-items:center;gap:6px;padding:0 14px}.pv .ann.sp>span+span{border-left:1px solid var(--border);color:var(--text-2)}
+.pv .ann .b.sm{height:28px;border-radius:999px}
+/* --- menu: lệnh tìm (combobox), mô tả, chấm màu, avatar --- */
+.pv .menu.cmd{padding:0;overflow:hidden}.pv .menu.cmd .grpw{padding:4px}
+.pv .cmdin{display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-bottom:1px solid var(--border);color:var(--text-2)}
+.pv .cmdin svg{opacity:.5}
+.pv .msep{height:1px;background:var(--border);margin:0}
+.pv .mi small{display:block;color:var(--text-2);font-size:12px;margin-top:2px}
+.pv .mi[style*="block"] .ck{top:50%;transform:translateY(-50%)}
+.pv .mi.c{justify-content:center;color:var(--text-2);padding:16px 8px}
+.pv .mi.c .spin{width:14px;height:14px}
+.pv .mi .lead{display:inline-flex;margin-right:8px;color:var(--text-2)}
+.pv .mi .lead svg{width:16px;height:16px}
+.pv .sdot{width:8px;height:8px;border-radius:50%;background:var(--c);margin-right:8px;flex:none;display:inline-block}
+.pv .av20{width:20px;height:20px;border-radius:6px;background:#e5e5e5;display:inline-grid;place-items:center;font-size:9px;font-weight:600;margin-right:8px;flex:none}
+.pv .av24{width:24px;height:24px;border-radius:50%;background:#e5e5e5;display:inline-grid;place-items:center;font-size:10px;font-weight:600;margin-right:8px;flex:none}
+.pv .in .lead{display:inline-flex;color:var(--text-2)}
+.pv .b.o.cbt{width:220px;justify-content:space-between;font-weight:400}
+.pv .b.o.cbt.multi{height:auto;min-height:var(--h);padding:4px 8px 4px 6px;flex-wrap:wrap;justify-content:flex-start}
+.pv .b.o.cbt .r{margin-left:auto;display:inline-flex;align-items:center;gap:4px;color:var(--text-2)}
+/* --- checkbox --- */
+.pv .cb i.rnd{border-radius:50%}
+.pv .cb i.on.blue{background:var(--info);border-color:var(--info)}
+.pv .cb.done>span{text-decoration:line-through;color:var(--text-2)}
+.pv .cb>span{text-align:left}
+.pv .row{display:flex;gap:16px;align-items:center}
+.pv .indt{padding-left:24px;display:flex;flex-direction:column;gap:8px}
+.pv .lst{border:1px solid var(--border);border-radius:var(--r-lg);width:240px;overflow:hidden;text-align:left}
+.pv .lst>div{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 16px}
+.pv .lst>div+div{border-top:1px solid var(--border)}
+.pv .lst>div>span{display:flex;align-items:center;gap:8px}
+.pv .card{text-align:left}.pv .card.r{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.pv .card.hl.on{border-color:var(--info);background:color-mix(in srgb,var(--info) 6%,#fff);box-shadow:none}
+.pv .cards{display:flex;flex-direction:column;gap:8px}
+/* --- radio --- */
+.pv .swc{width:24px;height:24px;border-radius:50%;background:var(--c);flex:none}
+.pv .swc.on{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--c)}
+.pv .tiles{display:grid;grid-template-columns:repeat(3,72px);gap:8px}
+.pv .tile{border:1px solid var(--border);border-radius:var(--r);padding:12px 4px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;font-weight:500;line-height:1}
+.pv .tile svg{width:20px;height:20px;opacity:.6}
+.pv .tile.on{border-color:var(--primary);box-shadow:0 0 0 1px var(--primary)}
+.pv .tile.x{opacity:.5}
+.pv .tiles.t{grid-template-columns:repeat(3,64px)}.pv .tiles.t .tile{padding:10px 4px;font-size:13px}
+.pv .chips{display:flex;flex-wrap:wrap;gap:8px}.pv .chips .card{width:auto;padding:8px 12px}
+.pv .stk{display:flex;flex-direction:column;width:240px;text-align:left}
+.pv .stk>div{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid var(--border);padding:10px 12px;margin-top:-1px}
+.pv .stk>div:first-child{border-radius:var(--r-lg) var(--r-lg) 0 0;margin-top:0}.pv .stk>div:last-child{border-radius:0 0 var(--r-lg) var(--r-lg)}
+.pv .stk>div.on{background:#f5f5f5;border-color:var(--primary);position:relative;z-index:1}
+.pv .stk>div>span{display:flex;align-items:center;gap:8px}
+.pv .stars{display:inline-flex;gap:2px}.pv .stars svg{width:24px;height:24px;color:#e5e5e5;fill:currentColor}.pv .stars svg.on{color:#f59e0b}
+.pv .stars.sm svg{width:14px;height:14px}
+.pv .plan{display:flex;flex-direction:column;gap:6px;width:100%}
+.pv .plan ul{margin:0;padding:0 0 0 14px;font-size:12px;color:var(--text-2)}
+.pv .vcards{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:250px}
+.pv .vcards .card{width:auto;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+/* --- switch --- */
+.pv .sw.sq{border-radius:4px}.pv .sw.sq::after{border-radius:3px}
+.pv .sw.m2{width:36px;height:12px;background:#e5e5e5;box-shadow:none;overflow:visible}
+.pv .sw.m2::after{top:-2px;left:0;width:16px;height:16px;border:1px solid var(--border);box-shadow:var(--sh-xs)}
+.pv .sw.m2.on{background:rgb(23 23 23/.4)}.pv .sw.m2.on::after{left:20px;background:var(--primary);border-color:var(--primary)}
+.pv .sw.blue.on{background:var(--info)}
+.pv .swi{display:inline-flex;align-items:center;gap:8px;color:var(--text-2)}.pv .swi .act{color:var(--text)}
+.pv .swg{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;height:36px;background:rgb(229 229 229/.5);border-radius:999px;padding:2px;font-size:13px;font-weight:500}
+.pv .swg>span{position:relative;z-index:1;min-width:36px;padding:0 8px;display:flex;align-items:center;justify-content:center;color:var(--text-2)}
+.pv .swg>span.on{color:var(--text)}
+.pv .swg>i{position:absolute;top:2px;bottom:2px;left:2px;width:calc(50% - 2px);border-radius:999px;background:#fff;box-shadow:var(--sh-xs)}
+.pv .swg.r>i{left:50%}
+.pv .swg.dk>i{background:var(--primary)}.pv .swg.dk>span.on{color:var(--primary-fg)}
+.pv .swg.sqr{border-radius:var(--r)}.pv .swg.sqr>i{border-radius:6px}
+.pv .swg .tx{font-size:10px;text-transform:uppercase;letter-spacing:.02em}
+/* --- tooltip --- */
+.pv .tip.left{right:calc(100% + 8px);top:50%;translate:0 -50%}.pv .tip.left::after{right:-3px;top:calc(50% - 4px)}
+.pv .tip.right::after{left:-3px}
+.pv .tip.rich{white-space:normal;width:240px;padding:12px;text-align:left}
+.pv .tip.rich b{display:block;font-size:14px;font-weight:500;margin-bottom:4px}
+.pv .tip.rich span{display:block;color:rgb(250 250 250/.7)}
+.pv .tip.rich dl{margin:0;display:grid;gap:8px}.pv .tip.rich dt{color:rgb(250 250 250/.6)}.pv .tip.rich dd{margin:0;font-weight:500}
+.pv .tip.rich .img{height:84px;border-radius:6px;background:linear-gradient(135deg,#525252,#a1a1a1);margin-bottom:8px;display:grid;place-items:center;color:#fafafa}
+.pv .tip.rich .img svg{width:28px;height:28px}
+.pv .tip.n200{background:#e5e5e5;color:#0a0a0a}
+.pv .b.ic.rd{border-radius:999px}
+.pv.tst2{padding-top:170px!important}
+.pv.tst3{padding-top:240px!important}
+.pv.tcp{padding:44px 72px!important}
+
 </style>
 </head>
 <body>
@@ -221,6 +371,34 @@ const B={google:F('<path d="M12 11v2.8h4.6c-.2 1.2-1.5 3.6-4.6 3.6-2.8 0-5-2.3-5
  fb:F('<path d="M14 13.5h2.5l1-4H14v-2c0-1 0-2 2-2h1.5V2.1c-.3 0-1.6-.1-2.9-.1C11.9 2 10 3.7 10 6.7v2.8H7v4h3V22h4v-8.5z"/>'),
  x:F('<path d="M17.7 3.1 12.7 8.8 8.4 3.1H2.1l7.5 9.8-7.1 8.1h3l5.5-6.3 4.8 6.3h6.1l-7.8-10.3 6.6-7.6h-3zm-1.1 16-11-14.3h1.8l10.9 14.3h-1.7z"/>'),
  gh:S('<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.1-1.3-.3-2.5-1-3.5.3-1.2.3-2.4 0-3.5 0 0-1 0-3 1.5-2.6-.5-5.4-.5-8 0C6 2 5 2 5 2c-.3 1.2-.3 2.4 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.4.5-.7 1.1-.9 1.7-.2.6-.2 1.2-.1 1.8v4"/><path d="M9 18c-4.5 2-5-2-7-2"/>')};
+/* r2: icon thêm cho 7 tab — dán ngay sau dòng định nghĩa B (sau "const B={…}") và trước "function webCmp" */
+Object.assign(J,{
+ info:S('<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>'),
+ okc:S('<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>'),
+ clock:S('<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>'),
+ lock:S('<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'),
+ user:S('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),
+ phone:S('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>'),
+ card:S('<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>'),
+ cash:S('<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/>'),
+ bank:S('<path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/>'),
+ updown:S('<path d="m7 15 5 5 5-5M7 9l5-5 5 5"/>'),
+ pin:S('<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>'),
+ cal:S('<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>'),
+ box:S('<path d="M21 8 12 3 3 8v8l9 5 9-5Z"/><path d="m3 8 9 5 9-5M12 13v8"/>'),
+ x2:S('<path d="M18 6 6 18M6 6l12 12"/>'),
+ arrowup:S('<path d="M12 19V5M5 12l7-7 7 7"/>'),
+ arrowdn:S('<path d="M12 5v14M19 12l-7 7-7-7"/>'),
+ upright:S('<path d="M7 17 17 7M7 7h10v10"/>'),
+ zap:S('<path d="M13 2 3 14h9l-1 8 10-12h-9z"/>'),
+ phoneapp:S('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/>'),
+ monitor:S('<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>'),
+ cloud:S('<path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4 12a4 4 0 0 0 1 7.9Z"/>'),
+ crown:S('<path d="m2 7 5 5 5-8 5 8 5-5-2 12H4Z"/>'),
+ starf:F('<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1Z"/>'),
+ img:S('<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>')
+});
+
 function webCmp(){return `<h3>Hai nguồn tham chiếu</h3><div class="refs"><a href="https://shadcnuikit.com/components/button"><b>Web — shadcnuikit.com</b><span>27 ví dụ ghép từ Button. Đo bằng class Tailwind + style tính sẵn trên trang (06/11).</span></a><a href="https://www.figma.com/design/uSGI07mEcItaHEVre2RwFq"><b>Figma kit — Shadcn UI Kit (Embed)</b><span>Trang Button: set 6 kiểu × 8 cỡ × 6 trạng thái. Đo bằng Properties (06/11).</span></a></div>
  <table class="cmp"><tr><th>Điểm</th><th>Web shadcnuikit</th><th>Figma kit</th><th>Áp vào 27 ví dụ (token bộ thử)</th></tr>
  <tr><td>Bo góc nút</td><td>rounded-4xl = 23.2 (gần như tròn hai đầu); riêng split Merge 5.2</td><td>rounded-md = 8</td><td class="now">8 (kit)</td></tr>
@@ -303,90 +481,222 @@ const C=[
   ["slide-light-b","Nền sáng, có viền","component mới","sh",0,"Anh/chị đã bỏ 06/11.",pv(slide("bd","Trượt để giao hàng"))],
   ["slide-dark","Nền tối","component mới","sh",1,"Anh/chị đã giữ 06/11. Rãnh #262626, nút #e5e5e5 (màu Dark của token).",pv(slide("dk","Trượt để nhận lệnh"),"tdark")],
  ]]]},
-{k:"input",name:"Input",ng:"nz-input",intro:"Thuộc tính ng-zorro: <code>nzSize</code> · <code>nzStatus</code> error/warning · <code>nzBorderless</code> · nhóm <code>nz-input-group</code> với <code>nzPrefix</code>/<code>nzSuffix</code>/<code>nzAddOnBefore</code>/<code>nzAddOnAfter</code> · <code>textarea nz-input</code> + <code>nzAutosize</code> · đếm ký tự <code>nz-textarea-count</code>. shadcn chỉ có 1 cỡ, ô thường + ô tệp.",
+{k:"input",name:"Input",ng:"nz-input",intro:"Nguồn: <b>shadcnuikit.com/components/input</b> (25 ví dụ, đọc mã từng ví dụ 06/11). Token đã chốt: ô nhập <b>nền #f2f2f2, không viền, bo pill</b>, cao 36 · 32 · 40, padding ngang 12, không bóng; focus vòng 3px #a1a1a1 50%; lỗi viền đỏ + vòng đỏ 20%; tắt mờ 50%. Ô nhiều dòng theo web: nền xám, bo 14 (rounded-2xl). Ô trong hình <b>gõ được</b>. Thuộc tính ng-zorro: <code>nzSize</code> · <code>nzStatus</code> · <code>nzBorderless</code> · <code>nz-input-group</code> + <code>nzPrefix</code>/<code>nzSuffix</code>/<code>nzAddOnBefore</code>/<code>nzAddOnAfter</code> · <code>textarea nz-input</code> + <code>nzAutosize</code> · <code>nz-textarea-count</code>. Chốt 06/11: mẫu “ô nhập + nút tìm” bỏ nút rời, <b>icon tìm nằm trong ô (nzSuffix)</b>.",
+ pre:()=>`<h3>Nguồn tham chiếu</h3><div class="refs"><a href="https://shadcnuikit.com/components/input"><b>Web — shadcnuikit.com/components/input</b><span>25 ví dụ. Class đo trên trang + mã nguồn registry /r/input1…25.json (06/11).</span></a></div>`,
  axes:[["Cỡ",[
-  ["lg","Lớn 40","nzSize=\"large\"","ng",1,"Form mobile, đăng nhập.",pv('<div class="in lg ph">Số điện thoại</div>')],
-  ["md","Mặc định 36","nzSize=\"default\"","both",1,"Cỡ chuẩn.",pv('<div class="in ph">Biển số xe</div>')],
-  ["sm","Nhỏ 32","nzSize=\"small\"","ng",1,"Ô lọc trong bảng, đi cùng nút nhỏ.",pv('<div class="in sm ph">Tìm trong bảng</div>')],
+  ["lg","Lớn 40","nzSize=\"large\"","ng",1,"Form mobile cho tài xế, màn đăng nhập.",pv('<div class="in lg"><input class="ii" placeholder="Số điện thoại"></div>')],
+  ["md","Mặc định 36","nzSize=\"default\"","both",1,"Cỡ chuẩn trên web điều phối.",pv('<div class="in"><input class="ii" placeholder="Biển số xe"></div>')],
+  ["sm","Nhỏ 32","nzSize=\"small\"","ng",1,"Ô lọc trong bảng, đi cùng nút nhỏ.",pv('<div class="in sm"><input class="ii" placeholder="Tìm trong bảng"></div>')],
  ]],["Trạng thái",[
-  ["err","Lỗi","nzStatus=\"error\"","both",1,"Kèm dòng báo lỗi dưới ô.",pv('<div><div class="in err">51C-12</div><div class="help">Biển số chưa đủ ký tự</div></div>')],
-  ["warn","Cảnh báo","nzStatus=\"warning\"","ng",0,"Ít dùng; cảnh báo nên đặt ở dòng chữ dưới ô, giữ ô viền thường.",pv('<div class="in warn">120 km</div>')],
-  ["disabled","Đã tắt","disabled","both",1,"Mờ 50%.",pv('<div class="in dis">Không sửa được</div>')],
-  ["borderless","Không viền","nzBorderless","ng",0,"Chỉ hợp sửa trực tiếp trong ô bảng — để sau khi làm bảng.",pv('<div class="in bl">Sửa tại chỗ</div>')],
+  ["err","Lỗi","nzStatus=\"error\"","both",1,"Viền đỏ + vòng đỏ 20%, dòng báo lỗi dưới ô (web-04).",pv('<div class="fld"><div class="in err"><input class="ii" value="51C-12"></div><div class="help">Biển số chưa đủ ký tự</div></div>')],
+  ["warn","Cảnh báo","nzStatus=\"warning\"","ng",1,"Anh/chị đã giữ 06/11. Vượt định mức nhưng vẫn lưu được (quãng đường lớn hơn kế hoạch).",pv('<div class="in warn"><input class="ii" value="120 km"></div>')],
+  ["disabled","Đã tắt","disabled","both",1,"Mờ 50% cả ô.",pv('<div class="in dis">Không sửa được</div>')],
+  ["borderless","Không nền (sửa tại chỗ)","nzBorderless","ng",1,"Anh/chị đã giữ 06/11. Nền trong suốt — sửa trực tiếp trong ô bảng (số kiện, ghi chú).",pv('<div class="in bl"><input class="ii" value="Sửa tại chỗ"></div>')],
  ]],["Ghép thêm",[
-  ["prefix","Icon đầu / cuối","nzPrefix · nzSuffix","ng",1,"Ô tìm kiếm, ô có đơn vị dạng icon.",pv(`<div class="in ph">${I.search}Tìm lệnh, biển số…</div>`)],
-  ["addon","Nhãn đầu / cuối","nzAddOnBefore · nzAddOnAfter","ng",1,"Đơn vị: VNĐ, km, tấn — logistics dùng nhiều.",pv('<div class="grp"><div class="in rr">1.250.000</div><span class="add r">VNĐ</span></div>')],
-  ["clear","Nút xoá nhanh","nzSuffix + nút xoá","ng",1,"Ô tìm kiếm, ô lọc.",pv(`<div class="in">51C-123<span class="end">${I.xc}</span></div>`)],
-  ["password","Mật khẩu (ẩn/hiện)","type=password + nzSuffix","ng",1,"Đăng nhập, đổi mật khẩu.",pv(`<div class="in">••••••••<span class="end">${I.eye}</span></div>`)],
-  ["textarea","Nhiều dòng","textarea nz-input · nzAutosize","both",1,"Ghi chú lệnh, lý do huỷ.",pv('<div class="ta">Ghi chú cho tài xế…</div>')],
-  ["count","Nhiều dòng có đếm ký tự","nz-textarea-count","ng",1,"Ô có giới hạn ký tự (lý do, ghi chú).",pv('<div class="ta">Hàng dễ vỡ<span class="cnt">10/200</span></div>')],
+  ["prefix","Icon trong ô","nzSuffix · nzPrefix","ng",1,"Chốt 06/11: ô tìm có <b>icon tìm nằm trong ô</b> (<code>nzSuffix</code>), không còn nút rời (thay Button web-15). Icon đầu (<code>nzPrefix</code>) cho ô có loại dữ liệu: điện thoại, địa điểm.",pv(`<div class="col"><div class="in"><input class="ii" placeholder="Tìm lệnh, biển số…"><span class="end">${I.search}</span></div><div class="in"><span class="lead">${J.pin}</span><input class="ii" placeholder="Điểm lấy hàng"></div></div>`)],
+  ["addon","Chữ đơn vị trong ô","nzAddOnAfter → hiển thị như nzSuffix chữ","ng",1,"Đơn vị: VNĐ, km, tấn — logistics dùng nhiều. Trên nền xám không viền, khối addon rời trông như ô thứ hai; web-08/10 đặt chữ mờ <b>trong ô</b>. Dev dùng <code>nzSuffix</code>/<code>nzPrefix</code> dạng chữ.",pv('<div class="in"><input class="ii" value="1.250.000"><span class="ad">VNĐ</span></div>')],
+  ["clear","Nút xoá nhanh","nzSuffix + icon xoá","ng",1,"Ô tìm kiếm, ô lọc (web-16).",pv(`<div class="in"><input class="ii" value="51C-123"><span class="end">${I.xc}</span></div>`)],
+  ["password","Mật khẩu (ẩn/hiện)","type=password + nzSuffix","ng",1,"Đăng nhập, đổi mật khẩu (web-13).",pv(`<div class="in"><input class="ii" type="password" value="matkhau1"><span class="end">${I.eye}</span></div>`)],
+  ["textarea","Nhiều dòng","textarea nz-input · nzAutosize","both",1,"Ghi chú lệnh, lý do huỷ. Theo web: nền xám, không viền, bo 14, padding 12.",pv('<div class="ta2">Ghi chú cho tài xế…</div>')],
+  ["count","Nhiều dòng có đếm ký tự","nz-textarea-count","ng",1,"Ô có giới hạn ký tự (lý do, ghi chú).",pv('<div class="ta2" style="color:var(--text)">Hàng dễ vỡ<span class="cnt" style="color:var(--text-2)">10/200</span></div>')],
+ ]],["25 ví dụ trên web shadcnuikit.com/components/input (bố cục theo web, dựng bằng token bộ thử)",[
+  ["web-01","Ô cơ bản","input nz-input","both",1,"Nền xám, không viền, bo pill, cao 36. Gõ thử.",W('<div class="in" style="width:240px"><input class="ii" type="email" placeholder="Email"></div>')],
+  ["web-02","Có nhãn","nz-form-label + nz-input","both",1,"Mọi form: nhãn trên ô, cách 6.",W('<div class="fld"><span class="lbl">Email</span><div class="in"><input class="ii" placeholder="Email"></div></div>')],
+  ["web-03","Có dòng gợi ý","nz-form-control nzExtra","ng",1,"Giải thích ngắn dưới ô (“Theo đăng ký xe”).",W('<div class="fld"><span class="lbl">Input with helper text</span><div class="in"><input class="ii" placeholder="Email"></div><span class="hint">We won’t share your email with anyone</span></div>')],
+  ["web-04","Báo lỗi","nzStatus=\"error\" + nzErrorTip","both",1,"Viền đỏ + vòng đỏ, chữ lỗi đỏ 12.",W('<div class="fld"><span class="lbl">Input with error</span><div class="in err"><input class="ii" value="invalid@email.com"></div><span class="help" style="margin:0">Email is invalid</span></div>')],
+  ["web-05","Hợp lệ — viền xanh + dòng xanh","nzValidateStatus=\"success\" + nzHasFeedback","ng",1,"Kiểm trùng khi tạo mới: biển số, mã khách chưa có. Web đổi ô sang <b>nền trắng viền xanh</b> — khác ô thường (xem ghi chú cần quyết).",W(`<div class="fld"><span class="lbl">Username</span><div class="in ok"><input class="ii" value="haydenbleasel"></div><span class="help ok" style="margin:0">${J.okc}Username is available</span></div>`)],
+  ["web-06","Icon tìm + số kết quả","nz-input-group nzPrefix + nzSuffix (chữ)","ng",1,"Ô tìm danh sách lệnh kèm “12 kết quả”. Web đặt icon tìm <b>đầu</b> ô; chốt 06/11 ghi icon tìm ở <b>cuối</b> (nzSuffix) — cần thống nhất một phía.",W(`<div class="in" style="width:240px"><span class="lead">${I.search}</span><input class="ii" placeholder="Search..."><span class="ad" style="font-size:13px">12 results</span></div>`)],
+  ["web-07","Chữ đầu https:// + nút ⓘ","nzAddOnBefore (chữ) + nzSuffix nút tooltip","ng",0,"Không có nghiệp vụ nhập URL. Icon ⓘ giải thích ô nên đặt cạnh nhãn (Form).",W(`<div class="in" style="width:240px"><span class="ad">https://</span><input class="ii" placeholder="example.com" style="margin-left:-4px"><span class="ib">${J.info}</span></div>`)],
+  ["web-08","Chữ đuôi .com","nzSuffix (chữ)","ng",1,"Đơn vị sau số: km, tấn, khối, chuyến.",W('<div class="in" style="width:240px"><input class="ii" placeholder="google.com"><span class="ad">.com</span></div>')],
+  ["web-09","Ô tìm + chọn trường tìm","nz-input-group + nz-select trong nzAddOnAfter","ng",1,"Tìm theo Mã lệnh / Biển số / Tài xế trong một ô.",W(`<div class="in" style="width:260px"><input class="ii" placeholder="Enter search query"><span class="sel">All${J.down}</span></div>`)],
+  ["web-10","Tiền: $ … USD","nzPrefix + nzSuffix (chữ)","ng",1,"Cước, phí phát sinh. Tiền Việt: số trước, “₫/VNĐ” cuối (dòng Chữ đơn vị ở trên).",W('<div class="in" style="width:240px"><span class="ad">$</span><input class="ii" placeholder="0.00"><span class="ad">USD</span></div>')],
+  ["web-11","Nút chép trong ô","nzSuffix + nút icon (tự ghép)","ng",1,"Chép link theo dõi đơn gửi khách, mã lệnh.",W(`<div class="in" style="width:240px"><input class="ii" placeholder="https://x.com/shadcn"><span class="ib">${J.copy}</span></div>`)],
+  ["web-12","Đếm ký tự còn lại — dưới ô","maxlength + dòng đếm (tự ghép)","sh",0,"Trùng web-15 (đếm trong ô, đỡ tốn chỗ). Giữ một kiểu.",W('<div class="fld"><span class="lbl">Input with characters left</span><div class="in"><input class="ii" placeholder="Username"></div><span class="hint"><span style="font-variant-numeric:tabular-nums">12</span> characters left</span></div>')],
+  ["web-13","Mật khẩu ẩn/hiện","type=password + nzSuffix","ng",1,"Đăng nhập, đổi mật khẩu (giống dòng Mật khẩu ở trên).",W(`<div class="fld"><span class="lbl">Show/hide password input</span><div class="in"><input class="ii" type="password" placeholder="Password"><span class="end">${I.eye}</span></div></div>`)],
+  ["web-14","Nhãn nổi (label animation)","— (tự dựng CSS)","sh",0,"Nhãn chạy lên mép ô khi gõ — trên ô nền xám không viền không có mép để đặt nhãn. Form dùng nhãn trên (web-02).",W('<div class="flt"><span class="fl">Input with label animation</span><div class="in" style="width:100%"><input class="ii" value="ten@congty.vn"></div></div>')],
+  ["web-15","Giới hạn ký tự — số đếm trong ô","nzSuffix đếm (tự ghép)","sh",1,"Mã tham chiếu khách, ghi chú ngắn có giới hạn ký tự.",W('<div class="fld"><span class="lbl">Input with character limit</span><div class="in"><input class="ii" maxlength="50"><span class="ad" style="font-size:12px;font-variant-numeric:tabular-nums">0/50</span></div></div>')],
+  ["web-16","Nút xoá trong ô","nzSuffix + icon xoá","ng",1,"Ô tìm, ô lọc (giống dòng Nút xoá nhanh ở trên).",W(`<div class="fld"><span class="lbl">Input with clear button</span><div class="in"><input class="ii" value="Click to clear"><span class="end">${J.x2}</span></div></div>`)],
+  ["web-17","Mã OTP 4 ô","nz-input-otp (dev kiểm có trong 22.x)","ng",1,"Tài xế đăng nhập bằng mã SMS trên mobile. Nếu ng-zorro 22.x không có <code>nz-input-otp</code> thì dev tự ghép.",W('<div class="fld" style="width:auto"><span class="lbl">OTP input single</span><div class="otp"><span>4</span><span>7</span><span class="f"></span><span></span></div></div>')],
+  ["web-18","Số điện thoại + chọn quốc gia","nzAddOnBefore nz-select","ng",0,"Khách và tài xế đều số Việt Nam; ô số điện thoại thường + icon là đủ.",W(`<div class="fld"><span class="lbl">Phone number input</span><div class="in"><span class="sel" style="margin:0 4px 0 -8px;padding:0 4px 0 8px">${J.phone}${J.down}</span><input class="ii" placeholder="Enter phone number"></div></div>`)],
+  ["web-19","Thẻ ngân hàng — 3 ô ghép","— (ghép tay)","sh",0,"Không thanh toán thẻ trong app; ô ghép dọc phá kiểu bo pill.",W(`<div class="fld"><span class="lbl">Card Details</span><div class="jnv"><div class="in"><input class="ii" placeholder="Card number"><span class="end">${J.card}</span></div><div class="jn"><div class="in"><input class="ii" placeholder="MM/YY"></div><div class="in"><input class="ii" placeholder="CVC"></div></div></div></div>`)],
+  ["web-20","Mật khẩu + độ mạnh","type=password + nz-progress + danh sách điều kiện","sh",1,"Màn đặt/đổi mật khẩu (account-access): hiện điều kiện mật khẩu khi gõ.",W(`<div class="fld"><span class="lbl">Input with password strength indicator</span><div class="in"><input class="ii" type="password" value="abc12"><span class="end">${I.eye}</span></div><div class="pbar"><i></i></div><ul class="req"><li class="ok">${J.ok}At least 1 number</li><li class="ok">${J.ok}At least 1 lowercase letter</li><li>${J.x2}At least 8 characters</li><li>${J.x2}At least 1 uppercase letter</li></ul></div>`)],
+  ["web-21","Ô có mặt nạ (mask)","— (ng-zorro không có; thư viện mask)","sh",1,"Biển số 51C-123.45, số container ABCU 123456-7: gõ tự chèn dấu, chặn sai định dạng.",W('<div class="fld"><span class="lbl">Input with mask</span><div class="in"><input class="ii" placeholder="AB12 CDE"></div></div>')],
+  ["web-22","Mặt nạ giờ 00:00:00","— (mask)","sh",0,"Giờ dùng <code>nz-time-picker</code> (chọn được, không gõ sai).",W('<div class="fld"><span class="lbl">Timestamp</span><div class="in"><input class="ii" placeholder="00:00:00"></div></div>')],
+  ["web-23","Khoảng Từ – Đến","nz-input-group ghép 2 nz-input-number","ng",1,"Lọc khoảng cước, khoảng tải trọng. Hai nửa pill, ngăn bằng vạch trắng 1px.",W('<div class="fld"><span class="lbl">Range</span><div class="jn"><div class="in"><input class="ii" type="number" placeholder="From"></div><div class="in"><input class="ii" type="number" placeholder="To"></div></div></div>')],
+  ["web-24","Ô + danh sách nhãn bên dưới","nz-input + nz-tag nzMode=\"closeable\"","ng",0,"Nhãn gõ tự do làm bẩn dữ liệu (cùng lý do bỏ Select tags). Chọn nhiều từ danh mục → Select nhiều.",W(`<div class="fld"><span class="lbl">Input with tags</span><div class="in"><input class="ii" placeholder="Add a tag"></div><div style="display:flex;gap:4px;flex-wrap:wrap"><span class="pill o">Sport<span class="px">${I.x}</span></span><span class="pill o">Coding<span class="px">${I.x}</span></span><span class="pill o">Travel<span class="px">${I.x}</span></span></div></div>`)],
+  ["web-25","Nhãn nằm trong ô","nz-select nzMode=\"tags\"","ng",0,"Thực chất là Select chọn nhiều/tags — xem tab Select (đã đề xuất bỏ tags).",W(`<div class="fld"><span class="lbl">Input with inner tags</span><div class="in multi"><span class="pill w">Red<span class="px">${I.x}</span></span><input class="ii" placeholder="Add a tag" style="min-width:80px;height:28px"></div></div>`)],
  ]]]},
-{k:"select",name:"Select",ng:"nz-select",intro:"Thuộc tính ng-zorro: <code>nzMode</code> default/multiple/tags · <code>nzSize</code> · <code>nzStatus</code> · <code>nzAllowClear</code> · <code>nzShowSearch</code> · <code>nzLoading</code> · <code>nzBorderless</code> · nhóm <code>nz-option-group</code> · <code>nzDisabled</code> từng mục. Mục đang chọn theo shadcn: <b>nền xám + dấu ✓</b>.",
+{k:"select",name:"Select",ng:"nz-select",intro:"Nguồn: <b>shadcnuikit.com/components/select</b> (15 ví dụ) + <b>/components/combobox</b> (12 ví dụ) — đọc mã từng ví dụ 06/11. Ở ng-zorro cả hai đều là <code>nz-select</code> (combobox = <code>nzShowSearch</code>), nên trong hình mọi ô chọn dùng <b>một kiểu ô</b>: nền xám #f2f2f2, không viền, bo pill như Input (web select làm vậy; web combobox dùng nút viền — xem ghi chú). Menu xổ: nền trắng, viền, bo 8, bóng <code>shadow/base</code>, mục bo 6, <b>mục đang chọn nền xám + dấu ✓</b>. Thuộc tính ng-zorro: <code>nzMode</code> · <code>nzSize</code> · <code>nzStatus</code> · <code>nzAllowClear</code> · <code>nzShowSearch</code> · <code>nzServerSearch</code> · <code>nzLoading</code> · <code>nzBorderless</code> · <code>nz-option-group</code> · <code>nzCustomContent</code> · <code>nzDropdownRender</code> · <code>nzDisabled</code> từng mục.",
+ pre:()=>`<h3>Nguồn tham chiếu</h3><div class="refs"><a href="https://shadcnuikit.com/components/select"><b>Web — shadcnuikit.com/components/select</b><span>15 ví dụ. Mã nguồn registry /r/select1…15.json (06/11).</span></a><a href="https://shadcnuikit.com/components/combobox"><b>Web — shadcnuikit.com/components/combobox</b><span>12 ví dụ (Popover + Command). Mã nguồn /r/combobox1…12.json (06/11).</span></a></div>`,
  axes:[["Chế độ",[
-  ["single","Chọn một","nzMode=\"default\"","both",1,"Mặc định.",pv(`<div class="col"><div class="in">Container 40'<span class="end">${I.chev}</span></div>${menu(`<div class="mi">Container 20'</div><div class="mi h">Container 40'${I.check}</div><div class="mi">Mooc sàn</div>`)}</div>`)],
-  ["multiple","Chọn nhiều","nzMode=\"multiple\"","ng",1,"Lọc nhiều trạng thái, nhiều tuyến.",pv(`<div class="in" style="width:240px"><span class="chip">Đang chạy${I.x}</span><span class="chip">Chờ xe${I.x}</span><span class="end">${I.chev}</span></div>`)],
-  ["tags","Gõ để tạo giá trị mới","nzMode=\"tags\"","ng",0,"Cho người dùng tự tạo giá trị → dữ liệu bẩn. Danh mục nên quản lý riêng.",pv(`<div class="in" style="width:240px"><span class="chip">hàng lạnh${I.x}</span><span class="ph" style="color:var(--text-2)">Gõ rồi Enter…</span></div>`)],
+  ["single","Chọn một","nzMode=\"default\"","both",1,"Mặc định.",pv(`<div class="col"><div class="in">Container 40ft<span class="end">${I.chev}</span></div>${menu(`<div class="mi">Container 20ft</div><div class="mi h">Container 40ft${I.check}</div><div class="mi">Mooc sàn</div>`)}</div>`)],
+  ["multiple","Chọn nhiều","nzMode=\"multiple\"","ng",1,"Lọc nhiều trạng thái, nhiều tuyến. Thẻ đã chọn: tag pill 20 nền trắng trên ô xám (cbx-03).",pv(`<div class="in multi" style="width:240px"><span class="pill w">Đang chạy<span class="px">${I.x}</span></span><span class="pill w">Chờ xe<span class="px">${I.x}</span></span><span class="end" style="margin-left:auto">${I.chev}</span></div>`)],
+  ["tags","Gõ để tạo giá trị mới","nzMode=\"tags\"","ng",0,"Cho người dùng tự tạo giá trị → dữ liệu bẩn. Danh mục nên quản lý riêng.",pv(`<div class="in multi" style="width:240px"><span class="pill w">hàng lạnh<span class="px">${I.x}</span></span><span class="phx">Gõ rồi Enter…</span></div>`)],
  ]],["Cỡ",[
   ["lg","Lớn 40","nzSize=\"large\"","ng",1,"Đồng bộ với Input lớn trên mobile.",pv(`<div class="in lg">Tuyến HCM – BD<span class="end">${I.chev}</span></div>`)],
   ["md","Mặc định 36","nzSize=\"default\"","both",1,"",pv(`<div class="in">Tuyến HCM – BD<span class="end">${I.chev}</span></div>`)],
   ["sm","Nhỏ 32","nzSize=\"small\"","both",1,"Bộ lọc trong bảng.",pv(`<div class="in sm">Tất cả<span class="end">${I.chev}</span></div>`)],
  ]],["Tính năng",[
-  ["search","Tìm trong danh sách","nzShowSearch","ng",1,"Danh sách dài: xe, tài xế, khách hàng.",pv(`<div class="col"><div class="in">${I.search}<span>51C</span></div>${menu('<div class="mi h">51C-123.45</div><div class="mi">51C-678.90</div>')}</div>`)],
-  ["clear","Xoá lựa chọn","nzAllowClear","ng",1,"Bộ lọc không bắt buộc.",pv(`<div class="in">Đang chạy<span class="end">${I.xc}</span></div>`)],
-  ["loading","Đang tải danh sách","nzLoading","ng",1,"Danh sách lấy từ máy chủ.",pv('<div class="in ph">Đang tải…<span class="end"><span class="spin" style="width:14px;height:14px"></span></span></div>')],
-  ["group","Nhóm mục","nz-option-group","both",1,"Nhóm xe theo đội, địa điểm theo tỉnh.",pv(menu(`<div class="mi g">Đội Bình Dương</div><div class="mi">51C-123.45</div><div class="mi g">Đội Đồng Nai</div><div class="mi">60C-111.22</div>`))],
-  ["optdis","Mục bị khoá","nzDisabled (option)","both",1,"Xe đang bảo dưỡng không chọn được.",pv(menu(`<div class="mi">51C-123.45</div><div class="mi x">51C-678.90 · bảo dưỡng</div>`))],
-  ["err","Lỗi","nzStatus=\"error\"","ng",1,"Đồng bộ với Input.",pv(`<div class="in err">Chưa chọn xe<span class="end">${I.chev}</span></div>`)],
-  ["borderless","Không viền","nzBorderless","ng",0,"Chỉ hợp trong ô bảng — để sau.",pv(`<div class="in bl">Đang chạy<span class="end">${I.chev}</span></div>`)],
+  ["search","Tìm trong danh sách","nzShowSearch","ng",1,"Danh sách dài: xe, tài xế, khách hàng (web-14, cbx-01).",pv(`<div class="col"><div class="in">${I.search}<span>51C</span></div>${menu('<div class="mi h">51C-123.45</div><div class="mi">51C-678.90</div>')}</div>`)],
+  ["clear","Xoá lựa chọn","nzAllowClear","ng",1,"Bộ lọc không bắt buộc (cbx-10).",pv(`<div class="in">Đang chạy<span class="end">${I.xc}</span></div>`)],
+  ["loading","Đang tải danh sách","nzLoading","ng",1,"Danh sách lấy từ máy chủ (cbx-09).",pv('<div class="in ph">Đang tải…<span class="end"><span class="spin" style="width:14px;height:14px"></span></span></div>')],
+  ["group","Nhóm mục","nz-option-group","both",1,"Nhóm xe theo đội, địa điểm theo tỉnh (web-07).",pv(menu(`<div class="mi g">Đội Bình Dương</div><div class="mi">51C-123.45</div><div class="mi g">Đội Đồng Nai</div><div class="mi">60C-111.22</div>`))],
+  ["optdis","Mục bị khoá","nzDisabled (option)","both",1,"Xe đang bảo dưỡng không chọn được (cbx-07 thêm icon ổ khoá).",pv(menu(`<div class="mi">51C-123.45</div><div class="mi x">51C-678.90 · bảo dưỡng</div>`))],
+  ["err","Lỗi","nzStatus=\"error\"","ng",1,"Đồng bộ với Input (web-06).",pv(`<div class="in err">Chưa chọn xe<span class="end">${I.chev}</span></div>`)],
+  ["borderless","Không nền","nzBorderless","ng",0,"Chỉ hợp trong ô bảng — để sau.",pv(`<div class="in bl">Đang chạy<span class="end">${I.chev}</span></div>`)],
+ ]],["15 ví dụ trên web shadcnuikit.com/components/select (dựng bằng token bộ thử)",[
+  ["web-01","Có chữ gợi ý, rộng hết ô","nz-select nzPlaceHolder","both",1,"Ô chọn chuẩn trong form.",W(`<div class="col"><div class="in" style="width:240px"><span class="phx">Select a theme</span><span class="end">${I.chev}</span></div>${menu(`<div class="mi">Light</div><div class="mi h">Dark${I.check}</div><div class="mi">System</div>`)}</div>`)],
+  ["web-02","Rộng theo nội dung","nz-select (độ rộng theo chữ)","both",1,"Bộ lọc nhỏ trên thanh công cụ: “Trạng thái: Tất cả ▾”.",W(`<div class="in" style="width:auto;gap:6px">React<span class="end">${I.chev}</span></div>`)],
+  ["web-03","Chữ gợi ý (bản 2)","nz-select nzPlaceHolder","both",0,"Trùng web-01 (chỉ khác danh sách mục).",W(`<div class="in" style="width:240px"><span class="phx">Select framework</span><span class="end">${I.chev}</span></div>`)],
+  ["web-04","Icon đầu ô","nzPrefix (dev kiểm bản 22) / ng-template","ng",1,"Chọn khung giờ giao, ca làm — icon đồng hồ cho biết loại dữ liệu.",W(`<div class="in" style="width:240px"><span class="lead">${J.clock}</span>00:00 AM - 11:59 PM<span class="end">${I.chev}</span></div>`)],
+  ["web-05","Có dòng gợi ý dưới ô","nz-form-control nzExtra","ng",1,"Giải thích ngắn (“Xe được gán theo đội của tài xế”).",W(`<div class="fld"><div class="in">Astro<span class="end">${I.chev}</span></div><span class="hint">Tell us what’s your favorite Select framework</span></div>`)],
+  ["web-06","Báo lỗi","nzStatus=\"error\" + nzErrorTip","both",1,"Giống Input lỗi.",W(`<div class="fld"><div class="in err">React<span class="end">${I.chev}</span></div><span class="help" style="margin:0">Selected option is invalid</span></div>`)],
+  ["web-07","Nhóm có tiêu đề","nz-option-group nzLabel","both",1,"Xe theo đội, điểm giao theo tỉnh.",W(menu(`<div class="mi g">Frontend</div><div class="mi h">React${I.check}</div><div class="mi">Vue</div><div class="mi">Angular</div><div class="mi g">Backend</div><div class="mi">Node.js</div><div class="mi">Python</div>`))],
+  ["web-08","Nhãn nổi trên mép ô","— (tự dựng CSS)","sh",0,"Ô nền xám không viền không có mép để đặt nhãn; dùng nhãn trên ô.",W(`<div class="flt"><span class="fl">Frameworks</span><div class="in" style="width:100%"><span class="phx">Select framework</span><span class="end">${I.chev}</span></div></div>`)],
+  ["web-09","Mục có chấm màu trạng thái","nzCustomContent (ng-template)","ng",1,"Chọn/lọc trạng thái lệnh: chấm màu theo màu trạng thái của Tag.",W(`<div class="col"><div class="in"><span class="sdot" style="--c:#52c41a"></span>Completed<span class="end">${I.chev}</span></div>${menu(`<div class="mi h"><span class="sdot" style="--c:#52c41a"></span>Completed${I.check}</div><div class="mi"><span class="sdot" style="--c:#155dfc"></span>In Progress</div><div class="mi"><span class="sdot" style="--c:#faad14"></span>Pending</div><div class="mi"><span class="sdot" style="--c:#a1a1a1"></span>Cancelled</div><div class="mi"><span class="sdot" style="--c:#e7000b"></span>Failed</div>`)}</div>`)],
+  ["web-10","Mục có icon","nzCustomContent","ng",1,"Loại phương tiện: đầu kéo, xe tải, mooc — icon giúp quét nhanh.",W(`<div class="col"><div class="in"><span class="lead">${I.truck}</span>Next.js<span class="end">${I.chev}</span></div>${menu(`<div class="mi"><span class="lead">${J.box}</span>React</div><div class="mi h"><span class="lead">${I.truck}</span>Next.js${I.check}</div><div class="mi"><span class="lead">${J.pin}</span>Gatsby</div>`)}</div>`)],
+  ["web-11","Mục có mô tả (ô chỉ hiện tên)","nzCustomContent + nzLabel","ng",1,"Chọn loại dịch vụ, loại hàng cần giải thích; ô chỉ hiện tên cho gọn.",W(`<div class="col"><div class="in">Pro Plan<span class="end">${I.chev}</span></div>${menu(`<div class="mi" style="display:block">Standard Plan<small>Ideal for individuals</small></div><div class="mi h" style="display:block">Pro Plan<small>For professional users</small>${I.check}</div><div class="mi" style="display:block">Enterprise Plan<small>Built for large teams</small></div>`)}</div>`)],
+  ["web-12","Mục có ảnh đại diện + tiêu đề nhóm","nz-option-group + nzCustomContent","ng",1,"Chọn tài xế, người phụ trách — ảnh 20 bo 6, một dòng.",W(`<div class="col"><div class="in" style="padding-left:8px"><span class="av20">JH</span>Jenny Hamilton<span class="end">${I.chev}</span></div>${menu(`<div class="mi g">Impersonate user</div><div class="mi h"><span class="av20">JH</span>Jenny Hamilton${I.check}</div><div class="mi"><span class="av20">PS</span>Paul Smith</div><div class="mi"><span class="av20">LW</span>Luna Wyen</div>`)}</div>`)],
+  ["web-13","Ảnh tròn + tên + tên đăng nhập (ô 2 dòng)","nzCustomContent","ng",0,"Ô cao hơn 36, lệch hàng với ô khác trong form. Dùng web-12 (một dòng); thông tin phụ để trong menu.",W(`<div class="in" style="height:auto;padding:6px 12px 6px 8px;width:240px"><span class="av24">JH</span><span style="line-height:16px"><span style="display:block;font-weight:500">Jenny Hamilton</span><span style="font-size:12px;color:var(--text-2)">@jennycodes</span></span><span class="end">${I.chev}</span></div>`)],
+  ["web-14","Có ô tìm trong menu","nzShowSearch","ng",1,"Danh sách dài: xe, tài xế, khách hàng. Ô tìm đặt đầu menu.",W(`<div class="col"><div class="in"><span class="phx">Select framework</span><span class="end">${J.down}</span></div><div class="menu cmd"><div class="cmdin">${I.search}Search framework...</div><div class="grpw"><div class="mi">Next.js</div><div class="mi">SvelteKit</div><div class="mi">Nuxt.js</div><div class="mi">Remix</div></div></div></div>`)],
+  ["web-15","Tìm + nút “Thêm mới” cuối menu","nzShowSearch + nzDropdownRender","ng",1,"Chọn khách hàng, điểm giao — chưa có thì “Thêm khách mới” ngay trong menu.",W(`<div class="col"><div class="in">Shadcn UI Kit<span class="end">${J.down}</span></div><div class="menu cmd"><div class="cmdin">${I.search}Find organization</div><div class="grpw"><div class="mi h">Shadcn UI Kit${I.check}</div><div class="mi">Bundui</div><div class="mi">Lens Themes</div></div><div class="msep"></div><div class="grpw"><div class="mi"><span class="lead">${I.plus}</span>New organization</div></div></div></div>`)],
+ ]],["12 ví dụ trên web shadcnuikit.com/components/combobox (ng-zorro: nz-select + nzShowSearch)",[
+  ["cbx-01","Combobox cơ bản","nzShowSearch","ng",1,"Ô chọn có tìm. Web dùng nút viền làm ô; ở đây theo kiểu ô xám chung.",W(`<div class="col"><div class="in"><span class="phx">Select framework...</span><span class="end">${J.updown}</span></div><div class="menu cmd"><div class="cmdin">${I.search}Search framework...</div><div class="grpw"><div class="mi">Next.js</div><div class="mi h">SvelteKit${I.check}</div><div class="mi">Nuxt.js</div></div></div></div>`)],
+  ["cbx-02","Menu rộng bằng ô","nzDropdownMatchSelectWidth (mặc định true)","ng",0,"ng-zorro mặc định đã cho menu rộng bằng ô — không cần biến thể riêng.",W(`<div class="col"><div class="in" style="width:240px"><span class="phx">Select framework...</span><span class="end">${J.updown}</span></div><div class="menu cmd" style="width:240px"><div class="cmdin">${I.search}Search framework...</div><div class="grpw"><div class="mi">Next.js</div><div class="mi">SvelteKit</div></div></div></div>`)],
+  ["cbx-03","Chọn nhiều, thẻ trong ô","nzMode=\"multiple\" + nzShowSearch","ng",1,"Lọc nhiều tuyến, nhiều khách. Ô cao dần khi thêm thẻ.",W(`<div class="in multi" style="width:240px"><span class="pill w">Next.js<span class="px">${I.x}</span></span><span class="pill w">Remix<span class="px">${I.x}</span></span><span class="end" style="margin-left:auto">${J.updown}</span></div>`)],
+  ["cbx-04","Nhóm + tìm","nz-option-group + nzShowSearch","ng",0,"Trùng ghép Nhóm mục + Tìm ở trên — ng-zorro ghép được sẵn, không cần vẽ riêng.",W(`<div class="menu cmd"><div class="cmdin">${I.search}Search framework...</div><div class="grpw"><div class="mi g">Frontend</div><div class="mi">React</div><div class="mi g">Backend</div><div class="mi">Node.js</div></div></div>`)],
+  ["cbx-05","Icon trong ô và mục","nzCustomContent","ng",0,"Trùng web-10.",W(`<div class="in"><span class="lead">${I.truck}</span>Next.js<span class="end">${J.updown}</span></div>`)],
+  ["cbx-06","Mục 2 dòng (tên + mô tả)","nzCustomContent","ng",0,"Trùng web-11.",W(menu(`<div class="mi" style="display:block">Next.js<small>The React Framework</small></div><div class="mi h" style="display:block">Remix<small>Full stack web framework</small>${I.check}</div>`))],
+  ["cbx-07","Mục khoá có icon ổ khoá","nzDisabled (option) + nzCustomContent","ng",1,"Bổ sung cho dòng Mục bị khoá: icon ổ khoá cho biết vì sao không chọn được (xe bảo dưỡng, tài xế nghỉ).",W(menu(`<div class="mi">Next.js</div><div class="mi x"><span class="lead">${J.lock}</span>Nuxt.js</div><div class="mi">Remix</div>`))],
+  ["cbx-08","Danh sách dài (quốc gia)","nzVirtualScroll","ng",0,"Không khác hình cbx-01. Dev bật cuộn ảo khi danh sách > 100 mục (xe, khách hàng).",W(`<div class="in"><span class="phx">Select country...</span><span class="end">${J.updown}</span></div>`)],
+  ["cbx-09","Tìm trên máy chủ (đang tải)","nzServerSearch + nzLoading","ng",1,"Gõ tên khách/biển số → gọi máy chủ; menu hiện vòng xoay giữa.",W(`<div class="col"><div class="in"><span class="phx">Select framework...</span><span class="end">${J.updown}</span></div><div class="menu cmd"><div class="cmdin">${I.search}rea</div><div class="mi c"><span class="spin"></span></div></div></div>`)],
+  ["cbx-10","Nút xoá trong ô","nzAllowClear","ng",1,"Giống dòng Xoá lựa chọn: ✕ cạnh mũi tên.",W(`<div class="in">Next.js<span class="end">${J.x2}${J.updown}</span></div>`)],
+  ["cbx-11","Nhóm “Gần đây” lên đầu","nz-option-group + nzCustomContent","ng",1,"Điều phối lặp lại tuyến/khách hằng ngày — mục dùng gần đây lên đầu, icon đồng hồ.",W(`<div class="menu cmd"><div class="cmdin">${I.search}Search framework...</div><div class="grpw"><div class="mi g">Recent</div><div class="mi"><span class="lead">${J.clock}</span>Next.js</div><div class="mi"><span class="lead">${J.clock}</span>Remix</div><div class="mi g">All frameworks</div><div class="mi">Astro</div></div></div>`)],
+  ["cbx-12","Tìm + nút thêm mới","nzDropdownRender","ng",0,"Trùng web-15.",W(`<div class="menu cmd"><div class="cmdin">${I.search}Find framework</div><div class="grpw"><div class="mi">Next.js</div></div><div class="msep"></div><div class="grpw"><div class="mi"><span class="lead">${I.plus}</span>New framework</div></div></div>`)],
  ]]]},
-{k:"checkbox",name:"Checkbox",ng:"nz-checkbox",intro:"Thuộc tính ng-zorro: <code>ngModel</code> · <code>nzIndeterminate</code> · <code>nzDisabled</code> · nhóm <code>nz-checkbox-group</code>. shadcn có thêm kiểu <b>kèm mô tả</b> và <b>thẻ chọn</b>.",
- axes:[["Biến thể",[
+{k:"checkbox",name:"Checkbox",ng:"nz-checkbox",intro:"Nguồn: <b>shadcnuikit.com/components/checkbox</b> (13 ví dụ, đọc mã 06/11). Token đã chốt: ô 16, <b>bo 4</b> (<code>radius/checkbox</code>), viền #e5e5e5, bóng <code>shadow/xs</code>; đã chọn nền màu chính + ✓ trắng; tắt mờ 50%. Web shadcnuikit vẽ ô chưa chọn <b>nền xám, không viền</b>, bo 5 — khác token (xem ghi chú cần quyết). Thuộc tính ng-zorro: <code>ngModel</code> · <code>nzIndeterminate</code> · <code>nzDisabled</code> · nhóm <code>nz-checkbox-group</code> · <code>nz-checkbox-wrapper</code>.",
+ pre:()=>`<h3>Nguồn tham chiếu</h3><div class="refs"><a href="https://shadcnuikit.com/components/checkbox"><b>Web — shadcnuikit.com/components/checkbox</b><span>13 ví dụ. Mã nguồn registry /r/checkbox1…13.json (06/11).</span></a></div>`,
+ axes:[["Biến thể cơ bản",[
   ["state","Chọn / không chọn","ngModel","both",1,"",pv(`<div class="col"><span class="cb"><i class="on">${I.check}</i>Hàng nguy hiểm</span><span class="cb"><i></i>Hàng lạnh</span></div>`)],
-  ["ind","Chọn một phần","nzIndeterminate","both",1,"Ô \"chọn tất cả\" đầu bảng.",pv('<span class="cb"><i class="on ind"></i>Chọn tất cả (3/10)</span>')],
+  ["ind","Chọn một phần","nzIndeterminate","both",1,"Ô “chọn tất cả” đầu bảng (web-12).",pv('<span class="cb"><i class="on ind"></i>Chọn tất cả (3/10)</span>')],
   ["disabled","Đã tắt","nzDisabled","both",1,"Mờ 50%.",pv(`<span class="cb dis"><i class="on">${I.check}</i>Đã khoá</span>`)],
-  ["desc","Kèm mô tả","nhãn + mô tả (tự ghép)","sh",1,"Cài đặt, điều khoản — cần giải thích.",pv(`<span class="cb"><i class="on">${I.check}</i><span>Gửi SMS cho khách<small>Khi xe rời kho và khi giao xong</small></span></span>`)],
-  ["group","Nhóm dọc / ngang","nz-checkbox-group","ng",1,"Lọc nhiều lựa chọn.",pv(`<div class="col"><span class="cb"><i class="on">${I.check}</i>Container</span><span class="cb"><i></i>Hàng rời</span><span class="cb"><i class="on">${I.check}</i>Hàng lạnh</span></div>`)],
-  ["card","Thẻ chọn","— (chỉ shadcn)","sh",0,"Đẹp nhưng dev phải tự dựng; dùng ít.",pv(`<div class="card on"><span class="cb"><i class="on">${I.check}</i><span>Bảo hiểm hàng<small>0,1% giá trị hàng</small></span></span></div>`)],
+  ["desc","Kèm mô tả","nhãn + mô tả (tự ghép)","sh",1,"Cài đặt, điều khoản — cần giải thích (web-07).",pv(`<span class="cb"><i class="on">${I.check}</i><span>Gửi SMS cho khách<small>Khi xe rời kho và khi giao xong</small></span></span>`)],
+  ["group","Nhóm dọc / ngang","nz-checkbox-group","ng",1,"Lọc nhiều lựa chọn (web-05, web-06).",pv(`<div class="col"><span class="cb"><i class="on">${I.check}</i>Container</span><span class="cb"><i></i>Hàng rời</span><span class="cb"><i class="on">${I.check}</i>Hàng lạnh</span></div>`)],
+  ["card","Thẻ chọn","— (chỉ shadcn)","sh",1,"Anh/chị đã giữ 06/11. Chọn dịch vụ cộng thêm (bảo hiểm, bốc xếp) — cả thẻ bấm được (web-09).",pv(`<div class="card on"><span class="cb"><i class="on">${I.check}</i><span>Bảo hiểm hàng<small>0,1% giá trị hàng</small></span></span></div>`)],
+ ]],["13 ví dụ trên web shadcnuikit.com/components/checkbox (dựng bằng token bộ thử)",[
+  ["web-01","Đồng ý điều khoản (có link)","nz-checkbox + a","both",1,"Đăng ký tài khoản khách/đối tác: “Tôi đồng ý điều khoản dịch vụ”.",W('<span class="cb"><i></i><span>I agree to the <a href="#" style="color:inherit;text-decoration:underline">terms of service</a></span></span>')],
+  ["web-02","Đổi màu (indigo)","— (đổi biến màu)","sh",0,"Bộ thử chỉ một màu chính; không đổi màu ô chọn theo chỗ.",W(`<span class="cb"><i class="on blue">${I.check}</i>Colored checkbox</span>`)],
+  ["web-03","Việc cần làm — gạch ngang khi xong","nz-checkbox + CSS","sh",0,"Danh sách kiểm tra xe (lốp, phanh, giấy tờ) cần đọc lại được mục đã tick — không gạch chữ.",W(`<span class="cb done"><i class="on">${I.check}</i><span>Simple todo item</span></span>`)],
+  ["web-04","Ô tròn + gạch động","— (tự dựng)","sh",0,"Ô tròn dễ lẫn với Radio.",W(`<span class="cb done"><i class="on rnd" style="background:#10b981;border-color:#10b981">${I.check}</i><span>Fancy todo item</span></span>`)],
+  ["web-05","Nhóm ngang","nz-checkbox-group (ngang)","ng",1,"Lọc nhanh trên thanh công cụ: Container · Hàng rời · Hàng lạnh.",W('<div class="row"><span class="cb"><i></i>React</span><span class="cb"><i></i>Next.js</span><span class="cb"><i></i>Astro</span></div>')],
+  ["web-06","Nhóm dọc","nz-checkbox-group (dọc)","ng",1,"Bộ lọc bên trái danh sách, form nhiều lựa chọn.",W('<div class="col" style="gap:12px"><span class="cb"><i></i>React</span><span class="cb"><i></i>Next.js</span><span class="cb"><i></i>Astro</span></div>')],
+  ["web-07","Nhãn + nhãn phụ + mô tả","nhãn + mô tả (tự ghép)","sh",1,"Giống dòng Kèm mô tả; thêm nhãn phụ mờ trong ngoặc.",W('<span class="cb" style="width:240px"><i></i><span>Label <small style="display:inline">(Sublabel)</small><small>You can use this checkbox with a label and a description.</small></span></span>')],
+  ["web-08","Tick để mở ô nhập","nz-checkbox + nz-input hiện khi chọn","sh",1,"Tick “Có phụ phí” → hiện ô số tiền; tick “Giao giờ hành chính” → hiện khung giờ.",W(`<span class="cb" style="width:240px"><i class="on">${I.check}</i><span style="flex:1">Checkbox with expansion<small>You can use this checkbox with a label and a description.</small><span class="in" style="width:100%;margin-top:12px"><input class="ii" placeholder="Enter details"></span></span></span>`)],
+  ["web-09","Thẻ — ô chọn bên phải","nz-checkbox-wrapper + thẻ (tự ghép)","sh",1,"Cùng ý Thẻ chọn ở trên, ô chọn đặt phải. Viền đậm khi chọn.",W(`<div class="card r on" style="width:240px"><span>Label <small style="color:var(--text-2);font-size:12px">(Sublabel)</small><small style="display:block;color:var(--text-2);font-size:12px;margin-top:6px">A short description goes here.</small></span><span class="cb"><i class="on">${I.check}</i></span></div>`)],
+  ["web-10","Thẻ có ảnh đại diện","thẻ + nz-avatar (tự ghép)","sh",0,"Chọn nhiều tài xế nên dùng danh sách có ô chọn (web-13) hoặc Select nhiều.",W(`<div class="card r" style="width:250px"><span style="display:flex;gap:10px;align-items:center"><span class="av">CN</span><span>Label <small style="color:var(--text-2);font-size:12px">(Sublabel)</small><small style="display:block;color:var(--text-2);font-size:12px;margin-top:4px">A short description goes here.</small></span></span><span class="cb"><i></i></span></div>`)],
+  ["web-11","Thẻ tô xanh khi chọn","— (đổi màu)","sh",0,"Xanh nằm ngoài màu chính; giữ thẻ web-09 (viền màu chính).",W(`<div class="cards" style="width:240px"><div class="card hl on"><span class="cb"><i class="on blue">${I.check}</i><span><b style="font-weight:500">Email Notifications</b><small>Receive updates via email.</small></span></span></div><div class="card hl"><span class="cb"><i></i><span><b style="font-weight:500">Push Notifications</b><small>Get real-time alerts on your device</small></span></span></div></div>`)],
+  ["web-12","Cha – con, chọn một phần","nzIndeterminate + nz-checkbox-group","ng",1,"Phân quyền vai trò (Xem / Sửa / Xoá lệnh); chọn nhiều xe theo đội.",W(`<div class="col"><span class="cb"><i class="on ind"></i><b style="font-weight:600">Select all permissions</b></span><div class="indt"><span class="cb"><i class="on">${I.check}</i>Read</span><span class="cb"><i class="on">${I.check}</i>Write</span><span class="cb"><i></i>Delete</span></div></div>`)],
+  ["web-13","Danh sách có icon, ô chọn bên phải","nz-list + nz-checkbox","sh",1,"Chọn kênh nhận thông báo (App · SMS · Email), chọn loại xe nhận lệnh. Vạch ngăn giữa các dòng.",W(`<div class="lst"><div><span>${J.phoneapp}Mobile App</span><span class="cb"><i class="on">${I.check}</i></span></div><div><span>${J.monitor}Desktop App</span><span class="cb"><i></i></span></div><div><span>${J.cloud}Cloud Service</span><span class="cb"><i></i></span></div></div>`)],
  ]]]},
-{k:"radio",name:"Radio",ng:"nz-radio",intro:"Thuộc tính ng-zorro: <code>nz-radio</code> · <code>nz-radio-button</code> + <code>nzButtonStyle</code> outline/solid · <code>nzSize</code> (kiểu nút) · <code>nzDisabled</code>. ng-zorro còn có <code>nz-segmented</code> (component riêng) — shadcn gọi là Tabs/Toggle group.",
- axes:[["Biến thể",[
+{k:"radio",name:"Radio",ng:"nz-radio",intro:"Nguồn: <b>shadcnuikit.com/components/radio-group</b> (15 ví dụ, đọc mã 06/11). Token: nút tròn 16, viền #e5e5e5, bóng <code>shadow/xs</code>; đã chọn viền màu chính + chấm 8; tắt mờ 50%. Web shadcnuikit vẽ nút chưa chọn <b>nền xám không viền</b>, đã chọn <b>tô đặc màu chính</b> — khác token (xem ghi chú). Web không có nhóm nút (radio button) và thanh chuyển — hai nhóm đó lấy từ ng-zorro. Thuộc tính ng-zorro: <code>nz-radio-group</code> · <code>nz-radio</code> · <code>nz-radio-button</code> + <code>nzButtonStyle</code> outline/solid · <code>nzSize</code> · <code>nzDisabled</code>; <code>nz-segmented</code> là component riêng.",
+ pre:()=>`<h3>Nguồn tham chiếu</h3><div class="refs"><a href="https://shadcnuikit.com/components/radio-group"><b>Web — shadcnuikit.com/components/radio-group</b><span>15 ví dụ. Mã nguồn registry /r/radio-group1…15.json (06/11).</span></a></div>`,
+ axes:[["Biến thể cơ bản (ng-zorro)",[
   ["basic","Tròn","nz-radio","both",1,"",pv('<div class="col"><span class="cb"><span class="rd on"></span>Giao tận nơi</span><span class="cb"><span class="rd"></span>Khách tự lấy</span></div>')],
-  ["desc","Kèm mô tả","nhãn + mô tả (tự ghép)","sh",1,"Chọn phương án cần giải thích.",pv('<span class="cb"><span class="rd on"></span><span>Ghép chuyến<small>Rẻ hơn, giao chậm 1 ngày</small></span></span>')],
+  ["desc","Kèm mô tả","nhãn + mô tả (tự ghép)","sh",1,"Chọn phương án cần giải thích (web-04).",pv('<span class="cb"><span class="rd on"></span><span>Ghép chuyến<small>Rẻ hơn, giao chậm 1 ngày</small></span></span>')],
   ["disabled","Đã tắt","nzDisabled","both",1,"Mờ 50%.",pv('<span class="cb dis"><span class="rd on"></span>Không đổi được</span>')],
   ["btn-o","Nhóm nút — viền","nz-radio-button outline","ng",1,"Chuyển nhanh: Hôm nay / Tuần / Tháng.",pv('<div class="rbg"><span class="on">Hôm nay</span><span>Tuần</span><span>Tháng</span></div>')],
-  ["btn-s","Nhóm nút — đặc","nzButtonStyle=\"solid\"","ng",0,"Nổi quá — tranh chỗ nút chính. Giữ một kiểu nhóm nút là đủ.",pv('<div class="rbg solid"><span class="on">Hôm nay</span><span>Tuần</span><span>Tháng</span></div>')],
-  ["segmented","Thanh chuyển (nền xám)","nz-segmented","both",0,"Giống Tabs của shadcn; là component khác — để đợt Tabs.",pv('<div class="seg2"><span class="on">Danh sách</span><span>Bản đồ</span></div>')],
-  ["card","Thẻ chọn","— (chỉ shadcn)","sh",0,"Dev phải tự dựng.",pv('<div class="card on"><span class="cb"><span class="rd on"></span><span>Xe 5 tấn<small>Tối đa 12 khối</small></span></span></div>')],
+  ["btn-s","Nhóm nút — đặc","nzButtonStyle=\"solid\"","ng",1,"Anh/chị đã giữ 06/11. Mục đang chọn nền màu chính.",pv('<div class="rbg solid"><span class="on">Hôm nay</span><span>Tuần</span><span>Tháng</span></div>')],
+  ["segmented","Thanh chuyển (nền xám)","nz-segmented","both",0,"Anh/chị đã bỏ 06/11 — để đợt Tabs.",pv('<div class="seg2"><span class="on">Danh sách</span><span>Bản đồ</span></div>')],
+  ["card","Thẻ chọn","— (chỉ shadcn)","sh",1,"Anh/chị đã giữ 06/11. Chọn loại xe, phương án giao — cả thẻ bấm được (web-08).",pv('<div class="card on"><span class="cb"><span class="rd on"></span><span>Xe 5 tấn<small>Tối đa 12 khối</small></span></span></div>')],
+ ]],["15 ví dụ trên web shadcnuikit.com/components/radio-group (dựng bằng token bộ thử)",[
+  ["web-01","Nhóm dọc","nz-radio-group (dọc)","both",1,"Mặc định trong form.",W('<div class="col" style="gap:10px"><span class="cb"><span class="rd on"></span>Monthly</span><span class="cb"><span class="rd"></span>Quarterly</span><span class="cb"><span class="rd"></span>Yearly</span></div>')],
+  ["web-02","Nhóm ngang","nz-radio-group (ngang)","ng",1,"Ít lựa chọn, nhãn ngắn: “Giao tận nơi · Khách tự lấy” trên một hàng.",W('<div class="row"><span class="cb"><span class="rd on"></span>Email</span><span class="cb"><span class="rd"></span>SMS</span><span class="cb"><span class="rd"></span>Push</span></div>')],
+  ["web-03","Đổi màu (indigo)","— (đổi biến màu)","sh",0,"Một màu chính cho mọi control chọn.",W('<div class="col"><span class="cb"><span class="rd on" style="border-color:#6366f1;--primary:#6366f1"></span>Credit Card</span><span class="cb"><span class="rd"></span>PayPal</span><span class="cb"><span class="rd"></span>Apple Pay</span></div>')],
+  ["web-04","Nhãn + nhãn phụ + mô tả","nhãn + mô tả (tự ghép)","sh",1,"Giống dòng Kèm mô tả.",W('<div class="col" style="gap:16px;width:250px"><span class="cb"><span class="rd on"></span><span>Credit or Debit Card <small style="display:inline">(Visa, Mastercard, Amex)</small><small>Processed securely with 256-bit SSL encryption.</small></span></span><span class="cb"><span class="rd"></span><span>PayPal <small style="display:inline">(Digital Wallet)</small><small>Check out faster using your saved PayPal balance or card.</small></span></span></div>')],
+  ["web-05","Chọn để mở ô nhập","nz-radio + nz-input hiện khi chọn","sh",1,"Đúng nghiệp vụ: “Giao tận nơi” → hiện ô địa chỉ giao; “Khách tự lấy” → ẩn.",W('<div class="col" style="gap:16px;width:250px"><span class="cb"><span class="rd on"></span><span style="flex:1">Home delivery<small>Delivered to your doorstep within 2-3 business days.</small><span class="in" style="width:100%;margin-top:12px"><input class="ii" placeholder="Enter your address"></span></span></span><span class="cb"><span class="rd"></span><span>Pick up at store<small>Collect your order from our nearest store location.</small></span></span></div>')],
+  ["web-06","Lọc theo số sao + số lượng","nz-radio + nz-rate (chỉ xem)","sh",0,"Chưa có nghiệp vụ lọc theo đánh giá.",W(`<div class="col">${[5,4,3].map(n=>`<span class="cb" style="align-items:center"><span class="rd${n===5?" on":""}" style="margin:0"></span><span class="stars sm">${[1,2,3,4,5].map(i=>J.starf.replace('<svg',`<svg class="${i<=n?"on":""}"`)).join("")}</span><small style="display:inline">(${n===5?"4,823":n===4?"2,156":"987"})</small></span>`).join("")}</div>`)],
+  ["web-07","Ô màu","— (tự dựng)","sh",0,"Không có nghiệp vụ chọn màu.",W(`<div class="row" style="gap:8px">${["#3b82f6","#6366f1","#ec4899","#ef4444","#f97316","#f59e0b","#10b981"].map((c,i)=>`<span class="swc${i===0?" on":""}" style="--c:${c}"></span>`).join("")}</div>`)],
+  ["web-08","Thẻ — nhãn + giá bên phải","thẻ + nz-radio (tự ghép)","sh",1,"Chọn loại xe kèm giá (“Xe 5 tấn · 2.400.000 ₫”). Viền đậm khi chọn.",W('<div class="cards" style="width:260px"><div class="card on" style="width:auto"><span class="cb"><span class="rd on"></span><span style="flex:1"><span style="display:flex;justify-content:space-between">Starter<small style="display:inline">Free</small></span><small>Perfect for individuals and small teams getting started.</small></span></span></div><div class="card" style="width:auto"><span class="cb"><span class="rd"></span><span style="flex:1"><span style="display:flex;justify-content:space-between">Professional<small style="display:inline">$19/mo</small></span><small>Best for growing businesses and professional teams.</small></span></span></div></div>')],
+  ["web-09","Ô vuông có icon (ẩn nút tròn)","nz-radio-button tự trang trí","sh",1,"Hình thức thanh toán: Tiền mặt / Chuyển khoản / Công nợ — bấm cả ô, hợp màn mobile tài xế.",W(`<div class="tiles"><div class="tile on">${J.card}Card</div><div class="tile">${J.cash}PayPal</div><div class="tile">${J.bank}Apple Pay</div></div>`)],
+  ["web-10","Lưới ô chữ, có ô khoá","nz-radio-button tự trang trí","sh",1,"Chọn tải trọng 1,5 · 2,5 · 5 · 10 tấn; loại đang hết xe bị khoá.",W('<div class="fld" style="width:auto"><span class="lbl">Compute resources</span><div class="tiles t"><div class="tile on">2 CPU</div><div class="tile">4 CPU</div><div class="tile">6 CPU</div><div class="tile">8 CPU</div><div class="tile">12 CPU</div><div class="tile x">16 CPU</div></div></div>')],
+  ["web-11","Thẻ nhỏ xếp hàng","thẻ + nz-radio (tự ghép)","sh",0,"Trùng web-08 và Nhóm nút viền — giữ một kiểu.",W('<div class="fld" style="width:260px"><span class="lbl">Data center region</span><div class="chips"><div class="card on"><span class="cb" style="align-items:center"><span class="rd on" style="margin:0"></span>North America</span></div><div class="card"><span class="cb" style="align-items:center"><span class="rd" style="margin:0"></span>Europe</span></div><div class="card"><span class="cb" style="align-items:center"><span class="rd" style="margin:0"></span>Asia Pacific</span></div></div></div>')],
+  ["web-12","Danh sách liền khối + giá + nhãn","nz-radio-group + nz-tag","sh",1,"Chọn phương án giao: Nhanh / Tiêu chuẩn / Tiết kiệm, giá bên phải, nhãn “Đề xuất”.",W('<div class="fld" style="width:260px"><span class="lbl">Select subscription plan</span><div class="stk" style="width:100%"><div><span><span class="rd"></span>Basic</span><small style="font-size:12px;color:var(--text-2)">$9/mo</small></div><div class="on"><span><span class="rd on"></span>Pro<span class="pill p">Popular</span></span><small style="font-size:12px;color:var(--text-2)">$29/mo</small></div><div><span><span class="rd"></span>Business</span><small style="font-size:12px;color:var(--text-2)">$79/mo</small></div><div><span><span class="rd"></span>Enterprise</span><small style="font-size:12px;color:var(--text-2)">Custom</small></div></div></div>')],
+  ["web-13","Chấm sao","nz-rate (component khác)","ng",0,"Là <code>nz-rate</code>, không phải Radio — làm khi có nghiệp vụ khách đánh giá tài xế.",W(`<div class="fld" style="width:auto"><span class="lbl">How would you rate this product?</span><span class="stars">${[1,2,3,4,5].map(i=>J.starf.replace('<svg',`<svg class="${i<=3?"on":""}"`)).join("")}</span></div>`)],
+  ["web-14","Thẻ dọc có icon","thẻ + nz-radio (tự ghép)","sh",0,"Trùng web-08; thẻ dọc tốn chỗ trên web điều phối.",W(`<div class="vcards"><div class="card on">${J.user}<b style="font-weight:500">Personal</b><small style="font-size:12px;color:var(--text-2)">Perfect for solo projects and personal use.</small><span class="rd on"></span></div><div class="card">${J.crown}<b style="font-weight:500">Business</b><small style="font-size:12px;color:var(--text-2)">Advanced features for teams and businesses.</small><span class="rd"></span></div></div>`)],
+  ["web-15","Thẻ gói + giá + danh sách tính năng","thẻ + nz-radio + nz-tag","sh",0,"Kiểu trang bán gói — app vận hành không có.",W('<div class="cards" style="width:260px"><div class="card" style="width:auto"><span class="cb"><span class="rd"></span><span class="plan"><span style="display:flex;justify-content:space-between;font-weight:500">Starter<span class="pill s">$0/mo</span></span><small>Essential tools to get you started.</small><ul><li>Up to 5 projects</li><li>10GB storage</li></ul></span></span></div><div class="card on" style="width:auto"><span class="cb"><span class="rd on"></span><span class="plan"><span style="display:flex;justify-content:space-between;font-weight:500">Professional<span class="pill p">$29/mo</span></span><small>Everything you need to scale your business.</small><ul><li>Unlimited projects</li><li>500GB storage</li></ul></span></span></div></div>')],
  ]]]},
-{k:"switch",name:"Switch",ng:"nz-switch",intro:"Thuộc tính ng-zorro: <code>nzSize</code> default/small · <code>nzLoading</code> · <code>nzDisabled</code> · <code>nzCheckedChildren</code>/<code>nzUnCheckedChildren</code> (chữ trong nút). shadcn: một cỡ, ghép nhãn + mô tả.",
- axes:[["Biến thể",[
+{k:"switch",name:"Switch",ng:"nz-switch",intro:"Nguồn: <b>shadcnuikit.com/components/switch</b> (10 ví dụ, đọc mã 06/11). Hình dùng cỡ đang có của bộ thử: rãnh 32×18 (nhỏ 24×14), nút tròn trắng; bật = màu chính; tắt mờ 50%. Web shadcnuikit dùng rãnh <b>44×20</b> với nút kéo <b>dài 24×16</b> (nhỏ 28×16) — cỡ chưa chốt trong foundations (xem ghi chú). Thuộc tính ng-zorro: <code>nzSize</code> default/small · <code>nzLoading</code> · <code>nzDisabled</code> · <code>nzCheckedChildren</code>/<code>nzUnCheckedChildren</code> · <code>nzControl</code>.",
+ pre:()=>`<h3>Nguồn tham chiếu</h3><div class="refs"><a href="https://shadcnuikit.com/components/switch"><b>Web — shadcnuikit.com/components/switch</b><span>10 ví dụ. Mã nguồn registry /r/switch1…10.json (06/11).</span></a></div>`,
+ axes:[["Biến thể cơ bản (ng-zorro)",[
   ["md","Mặc định","nzSize=\"default\"","both",1,"",pv('<span class="sw on"></span><span class="sw"></span>')],
-  ["sm","Nhỏ","nzSize=\"small\"","ng",1,"Trong bảng (bật/tắt từng dòng).",pv('<span class="sw sm on"></span><span class="sw sm"></span>')],
+  ["sm","Nhỏ","nzSize=\"small\"","ng",1,"Trong bảng (bật/tắt từng dòng), thẻ cài đặt (web-10).",pv('<span class="sw sm on"></span><span class="sw sm"></span>')],
   ["loading","Đang lưu","nzLoading","ng",1,"Bật/tắt có gọi máy chủ.",pv('<span class="sw on" style="opacity:.6"></span><span class="spin" style="width:12px;height:12px"></span>')],
   ["disabled","Đã tắt","nzDisabled","both",1,"Mờ 50%.",pv('<span class="sw on dis"></span>')],
   ["label","Kèm nhãn + mô tả","nhãn + mô tả (tự ghép)","sh",1,"Trang cài đặt.",pv('<span class="cb" style="gap:12px"><span><b style="font-weight:500">Tự giao lệnh</b><small style="display:block;color:var(--text-2);font-size:13px">Gán xe gần nhất khi có đơn</small></span><span class="sw on" style="margin-top:2px"></span></span>')],
-  ["text","Chữ trong nút","nzCheckedChildren","ng",0,"Chữ nhỏ khó đọc, khó dịch; dùng nhãn bên cạnh.",pv('<span class="sw txt on"><span>Bật</span></span>')],
+  ["text","Chữ trong nút","nzCheckedChildren","ng",0,"Chữ nhỏ khó đọc, khó dịch; dùng nhãn bên cạnh (web-05).",pv('<span class="sw txt on"><span>Bật</span></span>')],
+ ]],["10 ví dụ trên web shadcnuikit.com/components/switch (dựng bằng token bộ thử)",[
+  ["web-01","Công tắc + nhãn bên phải","nz-switch + label","both",1,"Mặc định: “Nhận thông báo đơn mới”.",W('<span class="row" style="gap:8px"><span class="sw"></span>Airplane Mode</span>')],
+  ["web-02","Đổi màu (indigo)","— (đổi biến màu)","sh",0,"Một màu chính cho mọi control.",W('<span class="sw on blue"></span>')],
+  ["web-03","Vuông","— (CSS riêng)","sh",0,"Vuông dễ lẫn với Checkbox.",W('<span class="sw sq"></span><span class="sw sq on"></span>')],
+  ["web-04","Rãnh mảnh kiểu Material","— (CSS riêng)","sh",0,"Kiểu Material 2, khác ngôn ngữ của bộ.",W('<span class="sw m2"></span><span class="sw m2 on"></span>')],
+  ["web-05","Nhãn đổi theo trạng thái (Bật/Tắt)","nz-switch + nhãn động","sh",1,"Tài xế bật “Sẵn sàng nhận lệnh” / “Đang nghỉ” trên app — chữ cạnh công tắc cho biết đang ở trạng thái nào.",W('<span class="row" style="gap:8px"><span class="sw on"></span><b style="font-weight:500">On</b></span>')],
+  ["web-06","Icon hai bên (tối/sáng)","nz-switch + 2 icon","sh",0,"Chưa làm theme tối cho app vận hành.",W(`<span class="swi">${J.moon}<span class="sw"></span><span class="act">${J.sun}</span></span>`)],
+  ["web-07","Công tắc lớn chứa 2 icon — nút trắng","— (tự dựng)","sh",0,"Thực chất là thanh chuyển 2 lựa chọn — Thanh chuyển đã bỏ 06/11.",W(`<span class="swg r"><i></i><span>${J.moon}</span><span class="on">${J.sun}</span></span>`)],
+  ["web-08","Công tắc lớn chứa 2 icon — nút đậm","— (tự dựng)","sh",0,"Như web-07.",W(`<span class="swg r dk"><i></i><span>${J.moon}</span><span class="on">${J.sun}</span></span>`)],
+  ["web-09","Công tắc lớn chữ OFF / ON","— (tự dựng)","sh",0,"Chữ trong nút đã đề xuất bỏ (dòng Chữ trong nút).",W('<span class="swg r dk sqr"><i></i><span class="tx">Off</span><span class="on tx">On</span></span>')],
+  ["web-10","Thẻ cài đặt — công tắc nhỏ bên phải","nz-switch nzSize=\"small\" + thẻ","sh",1,"Trang cài đặt: mỗi tuỳ chọn một thẻ có mô tả (“Tự gửi SMS khi giao xong”).",W('<div class="card r" style="width:250px"><span>Label <small style="color:var(--text-2);font-size:12px">(Sublabel)</small><small style="display:block;color:var(--text-2);font-size:12px;margin-top:6px">A short description goes here.</small></span><span class="sw sm" style="margin-top:2px"></span></div>')],
  ]]]},
-{k:"tag",name:"Tag",ng:"nz-tag",intro:"Thuộc tính ng-zorro: <code>nzColor</code> (trạng thái success/processing/warning/error/default, 11 màu đặt sẵn, hoặc mã màu) · <code>nzMode</code> default/closeable/checkable · <code>nzBordered</code>. shadcn gọi là <b>Badge</b>: default/secondary/outline/destructive. Info dùng xanh <b>#155dfc</b> (đã chốt).",
+{k:"tag",name:"Tag",ng:"nz-tag",intro:"Nguồn: <b>shadcnuikit.com/components/badge</b> (17 ví dụ, đọc mã 06/11) — shadcn gọi là <b>Badge</b>, ng-zorro là <code>nz-tag</code> (số đếm là <code>nz-badge</code>). Token đã chốt: <b>pill cao 20</b>, padding 8, chữ 12 Medium; kiểu default/secondary/outline/destructive như web; destructive đỏ nhạt 10%. Info dùng xanh <b>#155dfc</b>. Thuộc tính ng-zorro: <code>nzColor</code> (success/processing/warning/error/default, 11 màu đặt sẵn, mã màu) · <code>nzMode</code> default/closeable/checkable · <code>nzBordered</code> · <code>nz-badge</code> <code>nzCount</code>/<code>nzDot</code>.",
+ pre:()=>`<h3>Nguồn tham chiếu</h3><div class="refs"><a href="https://shadcnuikit.com/components/badge"><b>Web — shadcnuikit.com/components/badge</b><span>17 ví dụ. Mã nguồn registry /r/badge1…17.json (06/11).</span></a></div>`,
  axes:[["Màu",[
-  ["status","Màu trạng thái","nzColor=\"success|processing|warning|error|default\"","both",1,"Trạng thái lệnh, xe, thanh toán.",pv('<span class="tag c" style="--c:#52c41a">Đã giao</span><span class="tag c" style="--c:#155dfc">Đang chạy</span><span class="tag c" style="--c:#d48806">Trễ hẹn</span><span class="tag c" style="--c:#e7000b">Huỷ</span><span class="tag">Nháp</span>')],
-  ["solid","Đặc màu chính","— (shadcn Badge default)","sh",0,"Đen đặc quá nổi cho nhãn; dành cho nút.",pv('<span class="tag solid">Mới</span>')],
-  ["secondary","Nền xám không viền","— (shadcn Badge secondary)","sh",1,"Nhãn trung tính: loại hàng, đội xe. Dev chỉnh màu tag default.",pv('<span class="tag sec">Container 40\'</span><span class="tag sec">Đội BD</span>')],
-  ["preset","11 màu đặt sẵn","nzColor=\"magenta|red|…|purple\"","ng",0,"Nhiều màu dễ lẫn với màu trạng thái. Cần nhãn phân loại thì dùng 5 màu biểu đồ.",pv(['#eb2f96','#fa541c','#13c2c2','#2f54eb','#722ed1'].map(c=>`<span class="tag c" style="--c:${c}">${c}</span>`).join(""))],
+  ["status","Màu trạng thái — tô nhạt","nzColor=\"success|processing|warning|error|default\"","both",1,"Trạng thái lệnh, xe, thanh toán: nền màu 10%, chữ màu.",pv('<span class="pill c" style="--c:#389e0d">Đã giao</span><span class="pill c" style="--c:#155dfc">Đang chạy</span><span class="pill c" style="--c:#d48806">Trễ hẹn</span><span class="pill c" style="--c:#e7000b">Huỷ</span><span class="pill s">Nháp</span>')],
+  ["solid","Đặc màu chính","— (shadcn Badge default)","sh",0,"Đen đặc quá nổi cho nhãn; dành cho nút và số đếm (web-03).",pv('<span class="pill p">Mới</span>')],
+  ["secondary","Nền xám không viền","— (shadcn Badge secondary)","sh",1,"Nhãn trung tính: loại hàng, đội xe. Dev chỉnh màu tag default.",pv('<span class="pill s">Container 40ft</span><span class="pill s">Đội BD</span>')],
+  ["outline","Viền, nền trắng","nzBordered (tag default)","both",1,"Nhãn phụ trên nền xám, kết hợp chấm màu (web-07).",pv('<span class="pill o">Hàng lạnh</span><span class="pill o">Ghép chuyến</span>')],
+  ["destructive","Đỏ nhạt","nzColor=\"error\"","both",1,"Giống màu Huỷ ở trên — nền đỏ 10%, chữ đỏ (như nút xoá).",pv('<span class="pill d">Quá hạn</span>')],
+  ["preset","11 màu đặt sẵn","nzColor=\"magenta|red|…|purple\"","ng",0,"Nhiều màu dễ lẫn với màu trạng thái. Cần nhãn phân loại thì dùng 5 màu biểu đồ.",pv(['#eb2f96','#fa541c','#13c2c2','#2f54eb','#722ed1'].map(c=>`<span class="pill c" style="--c:${c}">${c}</span>`).join(""))],
  ]],["Chế độ",[
-  ["closable","Có nút xoá","nzMode=\"closeable\"","ng",1,"Bộ lọc đang áp, email nhận thông báo.",pv(`<span class="tag sec">Tuyến HCM – BD${I.x}</span><span class="tag sec">Đang chạy${I.x}</span>`)],
-  ["checkable","Bấm để chọn","nzMode=\"checkable\"","ng",1,"Lọc nhanh bằng thẻ.",pv('<span class="tag chk on">Tất cả</span><span class="tag chk">Container</span><span class="tag chk">Hàng lạnh</span>')],
-  ["borderless","Không viền","nzBordered=\"false\"","ng",0,"Đã có kiểu nền xám không viền ở trên.",pv('<span class="tag" style="border-color:transparent">Nháp</span>')],
+  ["closable","Có nút xoá","nzMode=\"closeable\"","ng",1,"Bộ lọc đang áp, email nhận thông báo.",pv(`<span class="pill s">Tuyến HCM – BD<span class="px">${I.x}</span></span><span class="pill s">Đang chạy<span class="px">${I.x}</span></span>`)],
+  ["checkable","Bấm để chọn","nzMode=\"checkable\"","ng",1,"Lọc nhanh bằng thẻ.",pv('<span class="pill p">Tất cả</span><span class="pill w">Container</span><span class="pill w">Hàng lạnh</span>')],
+  ["borderless","Không viền","nzBordered=\"false\"","ng",0,"Đã có kiểu nền xám không viền ở trên.",pv('<span class="pill" style="background:transparent">Nháp</span>')],
+ ]],["17 ví dụ trên web shadcnuikit.com/components/badge (dựng bằng token bộ thử)",[
+  ["web-01","Badge mặc định (đặc)","— (shadcn Badge default)","sh",0,"Như dòng Đặc màu chính.",W('<span class="pill p">Badge</span>')],
+  ["web-02","Icon + chữ","nz-tag + nz-icon","ng",1,"Nhãn có icon: ⚡ Hoả tốc, ❄ Hàng lạnh. Icon mờ 60% như web. Áp được cho nền xám và màu trạng thái.",W(`<span class="pill p"><span class="ims2">${J.zap}</span>Badge</span><span class="pill s"><span class="ims2">${J.zap}</span>Hoả tốc</span>`)],
+  ["web-03","Số đếm tròn 20","nz-badge nzCount (đứng riêng)","ng",1,"Số việc chờ trên tab, menu: “Chờ duyệt 6”.",W('<span class="pill p n">6</span>')],
+  ["web-04","Badge là link","nz-tag bọc a","sh",0,"Nhãn không dẫn sang trang khác; dùng nút Link.",W('<a class="pill p a" href="#">Go to Website</a>')],
+  ["web-05","Chữ + số mờ","nz-tag + span","sh",0,"Trùng nút có số đếm (Button web-06).",W('<span class="pill p" style="gap:6px">Chat<span class="ct">73</span></span>')],
+  ["web-06","Viền + icon ✓ xanh","nz-tag + nz-icon màu","ng",0,"Chọn một kiểu trạng thái phụ: chấm màu (web-07) gọn hơn icon.",W(`<span class="pill o"><span style="color:#059669;display:inline-flex">${J.ok}</span>Completed</span>`)],
+  ["web-07","Viền + chấm màu — chờ","nz-badge nzStatus + nzText / nz-tag","ng",1,"Trạng thái trong bảng dày: chấm màu + chữ đen, đỡ loè hơn tô nền. Là phương án thứ hai cho Màu trạng thái — xem ghi chú.",W('<span class="pill o" style="gap:6px"><span class="dt" style="--c:#f59e0b"></span>Pending</span>')],
+  ["web-08","Viền + chấm màu — lỗi","nz-badge nzStatus=\"error\"","ng",1,"Đi cùng web-07: “Trễ hẹn”, “Lỗi đồng bộ”.",W('<span class="pill o" style="gap:6px"><span class="dt" style="--c:#e7000b"></span>Build Error</span>')],
+  ["web-09","Đặc + nút đóng","nzMode=\"closeable\"","ng",0,"Thẻ đóng dùng nền xám (dòng Có nút xoá).",W(`<span class="pill p">Close<span class="px">${I.x.replace('opacity:.6','opacity:1')}</span></span>`)],
+  ["web-10","Viền bo 6 + nút đóng","nzMode=\"closeable\" nzBordered","ng",0,"Trùng Có nút xoá; web bo 6 khác token pill.",W(`<span style="display:inline-flex;gap:8px"><span class="pill o" style="border-radius:6px;height:24px">React<span class="px">${I.x}</span></span><span class="pill o" style="border-radius:6px;height:24px">Tailwind<span class="px">${I.x}</span></span></span>`)],
+  ["web-11","Ảnh đại diện + tên + đóng","nz-tag + nz-avatar 16","sh",0,"Dùng khi Select chọn nhiều người (người nhận thông báo) — để đến lúc làm Select người dùng.",W(`<span style="display:inline-flex;gap:8px"><span class="pill o"><span class="a16">A</span>Alessandro<span class="px">${I.x}</span></span><span class="pill o"><span class="a16">JS</span>Jane Smith<span class="px">${I.x}</span></span></span>`)],
+  ["web-12","Tăng / giảm (%)","nz-tag nzColor + mũi tên","sh",1,"Thẻ KPI dashboard: tỉ lệ giao đúng giờ ↑ 9,3%, chi phí nhiên liệu ↓ 1,9%. Giữ 2 kiểu tô nhạt; bỏ 2 kiểu đặc.",W(`<span class="pill c" style="--c:#15803d">${J.arrowup}9.3%</span><span class="pill c" style="--c:#b91c1c">${J.arrowdn}1.9%</span><span class="pill cs" style="--c:#16a34a">${J.arrowup}12.4%</span><span class="pill d">${J.arrowdn}-2.3%</span>`)],
+  ["web-13","Số đếm trên ảnh đại diện","nz-badge nzCount bọc nz-avatar","ng",1,"Ảnh tài xế + số tin chưa đọc trong danh sách chat điều phối.",W('<span class="bwrap"><span class="av" style="width:40px;height:40px;font-size:13px">TB</span><span class="dot k">3</span></span>')],
+  ["web-14","Pill thông báo + icon chuông","— (tự dựng)","sh",0,"Kiểu landing page, không có trong app vận hành.",W(`<span class="ann"><span class="ci">${J.bell}</span>12+ New Updates</span>`)],
+  ["web-15","Pill thông báo + mũi tên đi","— (tự dựng)","sh",0,"Như web-14.",W(`<span class="ann r">${J.bell}12+ New Updates<span class="ci">${J.upright}</span></span>`)],
+  ["web-16","Pill chia đôi: tên | Xem thêm →","— (tự dựng)","sh",0,"Như web-14.",W(`<span class="ann sp"><span>AI Assistant</span><span>Discover More${J.arrow}</span></span>`)],
+  ["web-17","Pill chấm + chữ + nút","— (tự dựng)","sh",0,"Như web-14. Báo cập nhật trong app dùng Alert/Notification.",W('<span class="ann r" style="height:40px"><span class="dt" style="width:8px;height:8px;border-radius:50%;background:var(--primary)"></span>50+ Blocks Added<button class="b sec sm">View Changes</button></span>')],
  ]]]},
-{k:"tooltip",name:"Tooltip",ng:"nz-tooltip",intro:"Thuộc tính ng-zorro: <code>nzTooltipPlacement</code> (12 hướng) · <code>nzTooltipColor</code> · <code>nzTooltipArrowPointAtCenter</code> · <code>nzTooltipTrigger</code>. shadcn: nền <b>màu chính (đen)</b>, chữ 12, bo 8, có mũi tên, 4 hướng.",
+{k:"tooltip",name:"Tooltip",ng:"nz-tooltip",intro:"Nguồn: <b>shadcnuikit.com/components/tooltip</b> (8 ví dụ, đọc mã 06/11). Token: nền <b>màu chính (đen)</b>, chữ trắng 12/16, padding 6 · 12, bo 10, có mũi tên, cách nút 8. Thuộc tính ng-zorro: <code>nz-tooltip</code> + <code>nzTooltipTitle</code> (chuỗi hoặc <code>TemplateRef</code>) · <code>nzTooltipPlacement</code> (12 hướng) · <code>nzTooltipColor</code> · <code>nzTooltipArrowPointAtCenter</code> · <code>nzTooltipTrigger</code> · <code>nzTooltipMouseEnterDelay</code>. Nội dung dài, có ảnh hoặc có nút → <code>nz-popover</code> (component khác).",
+ pre:()=>`<h3>Nguồn tham chiếu</h3><div class="refs"><a href="https://shadcnuikit.com/components/tooltip"><b>Web — shadcnuikit.com/components/tooltip</b><span>8 ví dụ. Mã nguồn registry /r/tooltip1…8.json (06/11).</span></a></div>`,
  axes:[["Hướng",[
   ["top","Trên","nzTooltipPlacement=\"top\"","both",1,"Mặc định.",pv(`<span class="tt"><button class="b o ic">${I.dl}</button><span class="tip top">Tải phiếu giao</span></span>`,"tstage")],
-  ["side","Phải / trái / dưới","right · left · bottom","both",1,"Khi sát mép. Component tự lật hướng.",pv(`<span class="tt"><button class="b o ic">${I.truck}</button><span class="tip right">Đổi xe</span></span>`)],
+  ["side","Phải / trái / dưới","right · left · bottom","both",1,"Khi sát mép. Component tự lật hướng (web-04).",pv(`<span class="tt"><button class="b o ic">${I.truck}</button><span class="tip right">Đổi xe</span></span>`)],
   ["corner","8 hướng lệch góc","topLeft · topRight · …","ng",0,"Vẽ trên Figma chỉ cần 4 hướng; dev vẫn dùng được 12 hướng.",pv(`<span class="tt"><button class="b o sm">Cột</button><span class="tip tl">Ẩn/hiện cột</span></span>`,"tstage")],
  ]],["Kiểu",[
-  ["dark","Nền tối (màu chính)","mặc định, nzTooltipColor","both",1,"Theo shadcn.",pv(`<span class="tt"><button class="b o ic">${I.plus}</button><span class="tip top">Thêm lệnh</span></span>`,"tstage")],
-  ["noarrow","Không mũi tên","nzTooltipArrowPointAtCenter / ẩn mũi tên","ng",0,"Giữ một kiểu có mũi tên cho thống nhất.",pv(`<span class="tt"><button class="b o ic">${I.plus}</button><span class="tip top na">Thêm lệnh</span></span>`,"tstage")],
-  ["color","Màu tuỳ chỉnh","nzTooltipColor=\"#…\"","ng",0,"Màu tooltip đổi theo ngữ cảnh làm loạn; thông tin quan trọng dùng Popover/Alert.",pv(`<span class="tt"><button class="b o ic">${I.plus}</button><span class="tip top blue">Mới</span></span>`,"tstage")],
+  ["dark","Nền tối (màu chính)","mặc định","both",1,"Theo shadcn.",pv(`<span class="tt"><button class="b o ic">${I.plus}</button><span class="tip top">Thêm lệnh</span></span>`,"tstage")],
+  ["noarrow","Không mũi tên","ẩn mũi tên (CSS)","ng",0,"Giữ một kiểu có mũi tên cho thống nhất (web-07).",pv(`<span class="tt"><button class="b o ic">${I.plus}</button><span class="tip top na">Thêm lệnh</span></span>`,"tstage")],
+  ["color","Màu tuỳ chỉnh","nzTooltipColor=\"#…\"","ng",0,"Màu tooltip đổi theo ngữ cảnh làm loạn; thông tin quan trọng dùng Popover/Alert (web-08).",pv(`<span class="tt"><button class="b o ic">${I.plus}</button><span class="tip top blue">Mới</span></span>`,"tstage")],
+ ]],["8 ví dụ trên web shadcnuikit.com/components/tooltip (dựng bằng token bộ thử)",[
+  ["web-01","Tooltip cơ bản","nz-tooltip nzTooltipTitle","both",1,"Giải thích nút, nhất là nút chỉ icon. Rê chuột vào nút bên phải để thử.",W(`<span class="tt"><button class="b o">Hover</button><span class="tip top">Add to library</span></span><span class="tt hov"><button class="b o ic">${I.plus}</button><span class="tip top">Add to library</span></span>`,"tstage")],
+  ["web-02","Có tiêu đề + đoạn mô tả","nzTooltipTitle = TemplateRef","ng",0,"Nội dung dài nên dùng <code>nz-popover</code> (có tiêu đề sẵn, đóng/mở rõ ràng).",W('<span class="tt"><button class="b o">With title</button><span class="tip top rich"><b>Tooltip with title</b><span>Tooltips are made to be highly customizable, with dynamic placement and rich content.</span></span></span>',"tst2")],
+  ["web-03","Danh sách chỉ số","nzTooltipTitle = TemplateRef","ng",1,"Rê vào xe trên bản đồ / dòng lệnh: Trạng thái · Tài xế · Giờ đến dự kiến — xem nhanh không cần mở chi tiết.",W('<span class="tt"><button class="b o sm">Stats</button><span class="tip top rich" style="width:180px"><dl><div><dt>Status</dt><dd>Completed</dd></div><div><dt>Code Coverage</dt><dd>94.3%</dd></div><div><dt>Last Deploy</dt><dd>Today at 15:42</dd></div><div><dt>Performance Score</dt><dd>98/100</dd></div></dl></span></span>',"tst3")],
+  ["web-04","4 hướng","nzTooltipPlacement top · bottom · left · right","both",1,"Như dòng Hướng ở trên; ng-zorro tự lật khi sát mép.",W('<span class="tt"><button class="b o">Hover</button><span class="tip top">Top</span><span class="tip bottom">Bottom</span><span class="tip left">Left</span><span class="tip right">Right</span></span>',"tcp")],
+  ["web-05","Icon ⓘ làm điểm rê","nz-tooltip trên nz-icon","both",1,"Đặt cạnh nhãn ô để giải thích (“Cước tính theo km thực chạy”) — thay nút ⓘ trong ô (Input web-07).",W(`<span class="tt"><button class="b t ic sm rd" style="color:var(--text-2)">${J.info}</button><span class="tip top">More information</span></span>`,"tstage")],
+  ["web-06","Có ảnh xem trước","nzTooltipTitle = TemplateRef (ảnh)","ng",0,"Ảnh chứng từ, ảnh giao hàng (POD) nên mở bằng Popover hoặc Modal xem ảnh.",W(`<span class="tt"><button class="b o">Product Preview</button><span class="tip top rich" style="width:220px"><span class="img">${J.img}</span><b>Product Preview</b><span>View the full product details and specifications</span></span></span>`,"tst3")],
+  ["web-07","Không mũi tên","ẩn mũi tên (CSS)","ng",0,"Như dòng Không mũi tên ở trên.",W('<span class="tt"><button class="b o">No arrow</button><span class="tip top na">This tooltip don’t have arrow</span></span>',"tstage")],
+  ["web-08","Nền sáng","nzTooltipColor","sh",0,"Giữ một kiểu nền tối cho thống nhất.",W('<span class="tt"><button class="b o">Light</button><span class="tip top n200">This tooltip will be always light</span></span>',"tstage")],
  ]]]},
 ];
 /* ===== trạng thái ===== */
