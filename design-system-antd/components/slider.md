@@ -1,7 +1,7 @@
 ---
 type: design-system-component
 status: draft
-updated: 2026-11-07
+updated: 2026-11-09
 links:
   - design-system-antd/foundations/foundations.md
   - design-system-antd/token-mapping.md
@@ -12,109 +12,102 @@ links:
 
 # Slider — `nz-slider`
 
-> **Dựng tạm theo đề xuất 07/11 — chưa qua trang chọn biến thể, user duyệt sau.**
->
-> Bộ thử AntD. Giao diện theo **shadcnuikit.com/components/slider** (13 ví dụ, registry `slider1…13`, đọc mã 07/11)
-> và primitive shadcn v4 (`ui.shadcn.com/r/styles/new-york-v4/slider.json`): rãnh `h-1.5` (6) bo tròn nền `bg-muted`,
-> đoạn chọn `bg-primary`, núm `size-4` (16) nền trắng viền 1px màu chính `shadow-sm`, rê/focus `ring-4 ring-ring/50`.
-> Thuộc tính theo **API ng-zorro 22.x**; biến Less đọc từ `ng-zorro-antd/style/themes/default.less` + `slider/style/index.less`.
-> Đồng bộ với component đã dựng: rãnh nền **giống rãnh Switch tắt** (`switch/track-bg`), tooltip giá trị dùng
-> **instance Tooltip** (`67:3374`, Trên · Một dòng), ô số dùng **instance Input** (`47:442`, Nền xám · default · Đã nhập + Đơn vị ₫).
+> Bộ thử AntD. Giao diện theo **shadcnuikit.com/components/slider** (13 ví dụ, đo computed style 08/11): rãnh 8 bo tròn,
+> đoạn chọn màu chính, núm viên thuốc 24 × 16 nền sáng, vòng 1px đen 10%, bóng `shadow-md`. Thuộc tính theo
+> **API ng-zorro 22.x**. Lựa chọn giữ/bỏ: trang claude.ai/artifact/WaFyJqqdCqEHArsgVHBqKQ (DEC-420).
+> Figma kit shadcn chỉ xem được, chưa đối chiếu.
 > Slider dùng khi người dùng **ước lượng** trong một dải (bán kính, tải trọng, khoảng giá) và thấy được vị trí trong dải.
-> Cần con số chính xác → luôn kèm ô số (web-10) hoặc dùng Input số thay Slider.
-
-## 0. Đề xuất Dùng / Không dùng (chờ user duyệt)
-
-| Mã | Ví dụ (shadcnuikit) | ng-zorro | Đề xuất | Lý do / dùng ở Invlogis |
-|---|---|---|---|---|
-| web-01 | Thanh trượt cơ bản, 1 giá trị | `nz-slider` | **Dùng** (= set chính) | Kiểu Một giá trị của set `Slider`; không cần mẫu ghép riêng |
-| web-02 | Nhãn tham chiếu dưới rãnh (5 GB · 20 GB · 35 GB) | `nz-slider` + chữ tự ghép | **Dùng** (gộp vào web-04) | Mốc 0 km · 25 km · 50 km dưới thanh bán kính; không dựng riêng |
-| web-03 | Vạch mốc + nhãn cách quãng | `nzMarks` | **Dùng** | Tải trọng hàng 0–40 tấn, mốc chính mỗi 10 tấn — set phụ `Slider mốc` |
-| web-04 | Thanh trượt + số giá trị bên cạnh | `nz-slider` + output | **Dùng** | Bán kính tìm xe quanh điểm nhận: số "30 km" ở đầu dòng |
-| web-05 | Icon loa nhỏ/lớn hai đầu | `nz-slider` + icon | Không dùng | Trang trí kiểu trình phát nhạc; không có nghiệp vụ |
-| web-06 | Nhãn Low/High + bước 10 | `nzStep` | Không dùng | Trùng web-02/03; nhãn chữ Thấp/Cao không nói được giá trị |
-| web-07 | Đánh giá trải nghiệm bằng emoji hai đầu | — | Không dùng | Trang trí; đánh giá tài xế/khách nếu có dùng `nz-rate` |
-| web-08 | Nút − / + hai bên thanh | `nz-slider` + nút | Không dùng | Ô số `nz-input-number` (web-10) đã cho chỉnh từng bước, khỏi thêm 2 nút |
-| web-09 | Emoji đổi theo giá trị | — | Không dùng | Trang trí, trùng web-07 |
-| web-10 | Khoảng giá 2 núm + nhãn "Từ … đến …" | `nzRange` | **Dùng** | Lọc lệnh/bảng giá theo khoảng cước; thêm 2 ô số để gõ chính xác (mẫu AntD "Slider + InputNumber") |
-| web-11 | Thanh đứng 1 giá trị | `nzVertical` | Không dùng | Web điều phối và app tài xế không có chỗ cần thanh đứng |
-| web-12 | Thanh đứng khoảng | `nzVertical nzRange` | Không dùng | Như web-11 |
-| web-13 | Bộ chỉnh âm (equalizer) nhiều thanh đứng | `nzVertical` | Không dùng | Trang trí, không có nghiệp vụ |
+> Cần con số chính xác → luôn kèm ô số (Loại `Khoảng có ô số`) hoặc dùng Input số thay Slider.
 
 ## 1. Thuộc tính
 
 | ng-zorro | Figma property | Giá trị dùng | Ghi chú |
 |---|---|---|---|
-| `nzRange` | `Kiểu` (variant) | Một giá trị · Khoảng | Khoảng: 2 núm, đoạn chọn (màu chính) nằm giữa |
-| `ngModel` | — | | Vị trí núm cố định theo biến thể: Một giá trị 60 %, Khoảng 25–75 %. Mẫu ghép chọn số khớp vị trí đó (30/50 km, 24/40 tấn, 2,5–7,5 triệu/10 triệu) |
-| `nzMin` · `nzMax` · `nzStep` | — | | Theo nghiệp vụ. Vd bán kính 0–50 km bước 1; cước bước 100.000 ₫ |
-| `nzTooltipVisible` · `nzTipFormatter` | `Trạng thái` = Rê/Kéo · lớp `Tooltip giá trị` (instance Tooltip lồng, đã expose → sửa `Nhãn`) | `default` | Tooltip chỉ hiện khi rê/kéo núm, không hiện thường trực. `nzTipFormatter` định dạng số: "60", "7.500.000 ₫" |
+| `nzRange` | `Kiểu` (variant) | Một giá trị · Khoảng | Khoảng: 2 núm, đoạn chọn nằm giữa |
+| `ngModel` | — | | Vị trí núm cố định theo biến thể: Một giá trị 60 %, Khoảng 25–75 % |
+| `nzMin` · `nzMax` · `nzStep` | — | | Theo nghiệp vụ |
+| `nzTooltipVisible` · `nzTipFormatter` | `Trạng thái` = Rê/Kéo · lớp `Tooltip giá trị` (instance `Tooltip/Base`, đã expose → sửa `Nhãn · chữ`) | `default` | Tooltip chỉ hiện khi rê/kéo. `nzTipFormatter` định dạng số: "60", "7.500.000 ₫" |
+| `nzTooltipPlacement` | — | `top` | Giữ mặc định, tooltip phía trên núm |
 | `nzDisabled` | `Trạng thái` = Đã tắt | | Cả thanh mờ 50 % |
 | (focus bàn phím) | `Trạng thái` = Focus | | Vòng 3px quanh núm như Input; ←/→ đổi một bước |
-| `nzMarks` · `nzDots` | Set `Slider mốc`: `Mức` (variant) · `Nhãn` (text) | Chính · Phụ | Vạch dưới rãnh (web-03). Chính: vạch 4 + nhãn; Phụ: vạch 2, nhãn ẩn |
-| `nzVertical` | — | | Không dựng (web-11…13 Không dùng) |
-| `nzReverse` · `nzIncluded` | — | | Giữ mặc định (tô từ đầu rãnh) |
+| `nzMarks` | Khe `Mốc` (boolean) + instance `_Slider/Element/Hàng mốc` | Vạch · Nhãn | Vạch: vạch + nhãn cách quãng (web-03). Nhãn: 3 chữ, không vạch (web-02) |
+| (nhãn tự ghép) | Khe `Đầu dòng` (boolean) + instance `_Slider/Element/Đầu dòng` | Một nhãn · Hai nhãn | Phía trên rãnh. Một nhãn (web-10) · Hai nhãn hai đầu (web-06) |
+| (output tự ghép) | Khe `Giá trị` (boolean) + `Giá trị · chữ` | | Bên phải thanh, cùng hàng (web-04) |
+| (icon tự ghép) | Khe `Icon đầu` · `Icon cuối` (boolean) + instance swap | | Hai bên rãnh (web-05) |
+| `nzDots` · `nzVertical` · `nzReverse` · `nzIncluded` | — | | Giữ mặc định, không dựng thanh đứng |
+
+**Không dùng:** web-07 (emoji hai đầu), web-09 (emoji theo giá trị) — trang trí, đánh giá dùng `nz-rate` ·
+web-08 (nút − / + hai bên) — ô số đã chỉnh từng bước · web-11, web-12 (thanh đứng), web-13 (bộ chỉnh âm) — chưa có màn cần.
 
 ## 2. Thanh trượt
 
 | Phần | Giá trị | Token |
 |---|---|---|
-| Rãnh | Cao 6, bo tròn, rộng theo cha (set vẽ 240, mẫu ghép 320) | `slider/rail-height` · `slider/radius` = `radius/full` |
-| Nền rãnh | Xám nhạt như rãnh Switch tắt (Dark: trắng 10 %) | `slider/rail-bg` → `switch/track-bg` (→ `color/border-base`) |
+| Rãnh | Cao 8, bo tròn, rộng theo cha (set vẽ 240) | `slider/rail-height` · `slider/radius` = `radius/full` |
+| Nền rãnh | Xám nhạt như rãnh Switch tắt (Dark: trắng 10 %) | `slider/rail-bg` → `switch/track-bg` |
 | Đoạn chọn | Màu chính, từ đầu rãnh tới núm (Khoảng: giữa 2 núm) | `slider/track-bg` → `color/primary` |
-| Núm | Tròn 16, nền trắng (Dark: nền tối), viền 1px màu chính, bóng `shadow/xs` | `slider/handle-size` · `slider/handle-bg` → `color/body-bg` · `slider/handle-border` → `color/primary` · `slider/handle-border-width` |
+| Núm | Viên thuốc 24 × 16, nền sáng cả 2 mode, vòng 1px đen 10 %, bóng `shadow/base` | `slider/handle-width` · `slider/handle-size` · `slider/handle-bg` · `slider/handle-border` · `slider/handle-border-width` |
 
 | Trạng thái | Cách thể hiện | Token |
 |---|---|---|
 | Thường | như trên | |
-| Rê/Kéo | Quầng 4px quanh núm đang kéo + tooltip giá trị phía trên núm (Tooltip Trên · Một dòng, mũi tên cách mép núm 4) | `slider/handle-ring-width` · `color/focus-ring` · `slider/tooltip-offset` = 4 |
-| Focus | Vòng 3px quanh núm (lệch −3, rộng +6) | `focus/width` · `color/focus-ring` |
+| Rê/Kéo | Quầng 4px quanh núm đang kéo + tooltip giá trị phía trên núm (Tooltip Trên · Một dòng, mũi tên cách mép núm 4) | `slider/handle-ring-width` · `color/focus-ring` · `slider/tooltip-offset` |
+| Focus | Vòng 3px quanh núm | `focus/width` · `color/focus-ring` |
 | Đã tắt | Mờ 50 % | `opacity/disabled` |
 
-Kiểu Khoảng: quầng/focus/tooltip đặt ở **núm cuối** (núm đang thao tác). Không đổi màu rãnh khi hover (AntD đổi
-sang `primary-4`) — một màu chính cho mọi trạng thái, giống Switch.
+Kiểu Khoảng: quầng/focus/tooltip đặt ở **núm cuối** (núm đang thao tác).
 
-Figma: núm nằm trong khung `Nút` co giãn theo tỉ lệ (constraint Scale), núm và tooltip neo giữa khung → kéo
-rộng instance thì núm vẫn đúng vị trí phần trăm và giữ cỡ 16.
+Bố cục: khung thanh **cao bằng rãnh (8)**, núm nằm tràn ra ngoài, không cắt clip. Mọi khoảng cách phần trên và dưới đều
+tính **từ mép rãnh**, không tính từ núm.
 
-## 3. Vạch mốc (`Slider mốc`)
+## 3. Phần đi kèm
 
 | Phần | Giá trị | Token |
 |---|---|---|
-| Ô mốc | Rộng 16 (= cỡ núm) để tâm vạch đầu/cuối thẳng tâm núm ở 0 % / 100 % | `slider/handle-size` |
-| Vạch | 1 × 4 (Phụ 1 × 2), màu chữ phụ 70 % | `slider/mark-color` → `color/text-secondary` |
-| Nhãn | `text/sm/medium` 12, màu chữ phụ, cách vạch 8; Phụ giữ chỗ (ẩn) | `slider/mark-color` |
-| Khoảng rãnh → hàng mốc | 12 | `slider/mark-gap` → `spacing/sm` |
+| Vạch mốc (`Hàng mốc` Vạch) | Ô mốc rộng 20, vạch 1 × 4 (Phụ 1 × 2), màu chữ phụ 70 % | `slider/mark-cell` · `slider/mark-color` · `slider/mark-opacity` |
+| Rãnh → vạch | 12, tính từ mép dưới rãnh | `slider/mark-gap` → `spacing/sm` |
+| Vạch → nhãn | 8; nhãn 12, màu chữ phụ | `spacing/xs` · `slider/mark-color` |
+| Hàng nhãn dưới rãnh (`Hàng mốc` Nhãn) | Cách rãnh 16, 3 chữ dàn đều | `slider/label-gap` → `spacing/md` |
+| Nhãn trên rãnh (`Đầu dòng`) | Một nhãn: 14 Medium · Hai nhãn: 12 Medium màu phụ, dàn 2 đầu. Cách rãnh 12 | `slider/mark-gap` |
+| Số giá trị (`Giá trị`) | 14 Medium, bên phải thanh, cách 8 | `spacing/xs` |
+| Icon hai đầu | Cỡ 20, màu chữ phụ, cách rãnh 16 | `slider/icon-size` · `slider/icon-gap` |
 
-Ghép: hàng ngang rộng bằng thanh, `space-between`, mốc đầu/cuối = min/max. AntD vẽ mốc bằng chấm tròn trên rãnh
-(`@slider-dot-border-color`) + nhãn dưới — bộ thử theo shadcn (vạch dưới rãnh), dev ẩn chấm (`nzDots` = false) và
-style lại `.ant-slider-mark`.
+AntD vẽ mốc bằng chấm tròn trên rãnh — bộ thử theo shadcn (vạch dưới rãnh), dev ẩn chấm (`nzDots` = false) và style
+lại `.ant-slider-mark`.
 
-## 4. Mẫu ghép
+## 4. Mẫu dùng (L2)
 
-| Mã | Ví dụ | ng-zorro | Dùng ở Invlogis |
-|---|---|---|---|
-| web-10 | Lọc khoảng cước kèm 2 ô số | `nz-slider nzRange` + 2 `nz-input-number` (đơn vị ₫) | Bộ lọc lệnh vận tải / bảng giá: "Khoảng cước 2,5 – 7,5 triệu ₫"; gõ ô số thì thanh nhảy theo và ngược lại |
-| web-04 | Bán kính tìm xe quanh điểm | `nz-slider` + số đầu dòng + mốc tham chiếu | Điều phối tìm xe trống: "Bán kính tìm xe quanh điểm nhận — 30 km", mốc 0 · 25 · 50 km |
-| web-03 | Tải trọng với vạch mốc | `nz-slider nzMarks` | Lọc xe theo tải trọng: "Tải trọng hàng — 24 tấn", mốc 0…40 tấn mỗi 5 (nhãn mỗi 10) |
-
-Bố cục chung: dòng đầu (nhãn `text/base/medium` trái, giá trị `text/base/medium` phải), thanh, rồi phần dưới
-(ô số / mốc), các khối cách 12 (`spacing/sm`). Hai ô số cách nhau 8 (`spacing/xs`) với gạch nối "–" ở giữa.
-
-Giới hạn dải (min/max/bước) của từng mẫu là **ví dụ minh hoạ**, không phải tham số sản phẩm — khi đưa vào SRS
-thì min/max/bước bán kính và tải trọng đi qua mã `P-…` theo `.claude/rules/saas-layer.md`.
-
-## 5. Figma
-
-File `ElvhTYV3unixPkXky2oKIY`, trang **Slider** (`71:6016`) — dựng 07/11, chờ duyệt:
-
-| Khối | Node | Nội dung |
+| Loại | Ghép từ | Dùng ở Invlogis |
 |---|---|---|
-| Frame `Slider` (tài liệu) | `71:15785` | Đầu trang · Playground **Light** / **Dark** (Kiểu, 4 trạng thái × 2 kiểu, vạch mốc) · `Ví dụ` (3 thẻ) · `Mapping` (9 thuộc tính + 13 token) |
-| Section Components | `71:6878` | Set `Slider` `71:6791` = Kiểu (2) × Trạng thái (4) = **8**, ma trận cột Trạng thái, hàng Kiểu · Set phụ `Slider mốc` `71:6892` (Mức Chính · Phụ, text `Nhãn`) |
-| Section Mẫu ghép | `71:7675` | `Slider mẫu ghép/web-10 …` `71:7676` · `web-04 …` `71:7711` · `web-03 …` `71:7724` |
-| Biến mới — color | `slider/rail-bg` · `track-bg` · `handle-bg` · `handle-border` · `mark-color` | `VariableID:71:6017…71:6021` (alias, Light/Dark) |
-| Biến mới — size | `slider/rail-height` · `handle-size` · `handle-border-width` · `radius` · `handle-ring-width` · `mark-gap` · `tooltip-offset` | `VariableID:71:6022…71:6028` |
+| `Khoảng có ô số` | `Slider/Base` Khoảng + khe `Đầu dòng` + 2 instance Input đơn vị ₫ | Lọc lệnh, bảng giá theo khoảng cước; gõ ô số thì thanh nhảy theo và ngược lại |
+| `Có số giá trị` | `Slider/Base` Một giá trị + khe `Đầu dòng` + khe `Giá trị` | Bán kính tìm xe quanh điểm nhận |
+| `Có vạch mốc` | `Slider/Base` Một giá trị + khe `Đầu dòng` + khe `Mốc` Vạch | Lọc xe theo tải trọng hàng |
 
-Chữ "tấn" hiển thị thiếu dấu trên Figma — lỗi dấu tiếng Việt của Geist trên Figma đã ghi nhận ở trang Button,
-không phải lỗi nội dung.
+Trạng thái L2: Thường · Rê/Kéo · Đã tắt. Giới hạn dải (min/max/bước) của từng mẫu là **ví dụ minh hoạ**, không phải tham số
+sản phẩm — khi đưa vào SRS thì min/max/bước đi qua mã `P-…` theo `.claude/rules/saas-layer.md`.
+
+## 5. Cấu trúc 3 tầng (dựng lại 09/11 — /ds-antd-component; DEC-420, DEC-421; duyệt claude.ai/artifact/UBxrfatCB6apcTFZXLLKLS)
+
+File `ElvhTYV3unixPkXky2oKIY`, trang **Slider** `71:6016`.
+
+| Tầng | Set | Node | Biến thể |
+|---|---|---|---|
+| L0 (section `352:273`, khoá) | `_Slider/Element/Núm` | `352:279` | Trạng thái Thường · Rê/Kéo · Focus = 3 |
+| L0 | `_Slider/Element/Mốc` | `352:288` | Mức Chính · Phụ = 2; `Nhãn · chữ` |
+| L0 | `_Slider/Element/Hàng mốc` | `352:330` | Loại Vạch (9 mốc) · Nhãn (3 chữ) = 2 |
+| L0 | `_Slider/Element/Đầu dòng` | `352:336` | Loại Một nhãn · Hai nhãn = 2; `Nhãn · chữ` · `Nhãn phải · chữ` |
+| L1 (section `353:2621`) | `Slider/Base` | `353:2622` | Kiểu Một giá trị · Khoảng × Trạng thái Thường · Rê/Kéo · Focus · Đã tắt = 8; khe `Đầu dòng` · `Mốc` · `Icon đầu` · `Icon cuối` · `Giá trị` (mặc định tắt) |
+| L2 (section `354:1830`) | `Slider` | `354:1831` | Loại `Khoảng có ô số` · `Có số giá trị` · `Có vạch mốc` × Thường · Rê/Kéo · Đã tắt = 9 |
+| Tài liệu | Documentation | `354:2147` | Mô tả · Playground 7 case (Light \| Dark) · Thuộc tính 9 dòng + token 10 dòng |
+
+Tooltip giá trị là instance `Tooltip/Base` `322:240` (Trên · Một dòng), đã expose. Ô số là instance `Input/Base` Nền xám · default.
+Kiểm gắn token 09/11: 94/94 giá trị có biến, 19/19 chữ có text style.
+
+## 6. Biến
+
+| Nhóm | Biến | Node |
+|---|---|---|
+| color | `slider/rail-bg` · `track-bg` · `handle-bg` · `handle-border` · `mark-color` | `VariableID:71:6017…71:6021` |
+| size | `slider/rail-height` · `handle-size` · `handle-border-width` · `radius` · `handle-ring-width` · `mark-gap` · `tooltip-offset` | `VariableID:71:6022…71:6028` |
+| size (thêm 09/11) | `slider/handle-width` · `mark-cell` · `label-gap` · `icon-size` · `icon-gap` | `VariableID:350:1145…350:1149` |
+| size (thêm 09/11) | `slider/mark-opacity` 70 % | `VariableID:365:7778` |

@@ -412,18 +412,22 @@ Lưới 4px của shadcn (Tailwind `1` = 4px) trùng thang padding/margin của 
 
 | shadcn | Figma variable | Giá trị | Biến ng-zorro | Mặc định AntD | TH |
 |---|---|---|---|---|---|
-| Track `h-1.5` | `slider/rail-height` | 6 | — (CSS `.ant-slider-rail` / `-track` `height: 4px`) | 4 | Thêm mới (ghi đè CSS) |
+| Track `h-2` | `slider/rail-height` | 8 | — (CSS `.ant-slider-rail` / `-track` `height: 4px`) | 4 | Thêm mới (ghi đè CSS) |
 | Track `bg-muted` | `slider/rail-bg` | `switch/track-bg` → `color/border-base` | `@slider-rail-background-color` (+ `-hover` #e1e1e1) | `@background-color-base` | Ghi đè |
 | Range `bg-primary` | `slider/track-bg` | `color/primary` | `@slider-track-background-color` (+ `-hover`) | `@primary-3` / `@primary-4` | Ghi đè |
-| Thumb `size-4` | `slider/handle-size` | 16 | `@slider-handle-size` · `@slider-handle-margin-top` | 14 · −5 | Ghi đè (margin −5 giữ 1:1) |
-| Thumb `bg-white` | `slider/handle-bg` | `color/body-bg` | `@slider-handle-background-color` | `@component-background` | 1:1 |
-| Thumb `border border-primary` | `slider/handle-border` · `slider/handle-border-width` | `color/primary` · 1 | `@slider-handle-color` · `@slider-handle-border-width` | `@primary-3` · 2px | Ghi đè |
+| Thumb `h-4 w-6` | `slider/handle-size` (cao) · `slider/handle-width` | 16 · 24 | `@slider-handle-size` · `@slider-handle-margin-top` | 14 · −5 | Ghi đè (viên thuốc, dev style lại `.ant-slider-handle`) |
+| Thumb `bg-white` | `slider/handle-bg` | Light `color/body-bg` · Dark `color/text` | `@slider-handle-background-color` | `@component-background` | Ghi đè |
+| Thumb `ring-1 ring-black/10` | `slider/handle-border` · `slider/handle-border-width` | đen 10% (cả 2 mode) · 1 | `@slider-handle-color` · `@slider-handle-border-width` | `@primary-3` · 2px | Ghi đè |
 | `rounded-full` | `slider/radius` | `radius/full` | — | — | Thêm mới |
-| Thumb `shadow-sm` | `shadow/xs` | Mục 6 | `@slider-handle-shadow` | 0 | Ghi đè |
+| Thumb `shadow-md` | `shadow/base` | Mục 6 | `@slider-handle-shadow` | 0 | Ghi đè |
 | `hover:ring-4 ring-ring/50` | `slider/handle-ring-width` · `color/focus-ring` | 4 · xám 50% | `@slider-handle-color-focus-shadow` | `0 0 0 5px fade(primary, 12%)` | Ghi đè |
 | `focus-visible:ring-4` | `focus/width` · `color/focus-ring` | 3 · xám 50% | `@slider-handle-color-focus` | `tint(primary, 20%)` | Ghi đè (theo Input) |
 | Tooltip giá trị | `slider/tooltip-offset` | 4 | — | — | Thêm mới |
-| Ticks `bg-muted-foreground/70`, `mt-3`, `text-xs` | `slider/mark-color` · `slider/mark-gap` | `color/text-secondary` · `spacing/sm` 12 | `@slider-dot-border-color` | `@border-color-split` | Ghi đè (AntD dùng chấm trên rãnh) |
+| Ticks `bg-muted-foreground/70`, `mt-3`, `text-xs` | `slider/mark-color` · `slider/mark-opacity` · `slider/mark-gap` | `color/text-secondary` · 70% · `spacing/sm` 12 (tính từ mép rãnh; dùng chung cho nhãn trên rãnh) | `@slider-dot-border-color` | `@border-color-split` | Ghi đè (AntD dùng chấm trên rãnh) |
+| Ô mốc rộng 20 | `slider/mark-cell` | `spacing/20` | — | — | Thêm mới |
+| Nhãn dưới rãnh `mt-4` | `slider/label-gap` | `spacing/md` 16 | — | — | Thêm mới |
+| Icon hai đầu `size-5` · `gap-4` | `slider/icon-size` · `slider/icon-gap` | 20 · `spacing/md` 16 | — | — | Thêm mới |
+| Số giá trị `gap-2` | `spacing/xs` | 8 | — | — | 1:1 |
 | `disabled:opacity-50` | `opacity/disabled` | 50% | `@slider-disabled-color` · `@slider-disabled-background-color` | đổi màu xám | Ghi đè |
 
 ### 7.15 Sidebar — `nz-sider` + `nz-menu` inline
